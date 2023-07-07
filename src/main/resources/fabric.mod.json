@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "hybrid-aquatic",
+  "version": "${version}",
+  "name": "Hybrid Aquatic",
+  "description": "A mod that rewrites the aquatic biomes.",
+  "authors": [
+    "dragoncommands",
+    "MysticKoko",
+    "Andante"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "ARR (Assets), MIT (Code)",
+  "icon": "assets/hybrid-aquatic/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "value": "dev.hybridlabs.aquatic.HybridAquatic",
+        "adapter": "kotlin"
+      }
+    ],
+    "client": [
+      {
+        "value": "dev.hybridlabs.aquatic.HybridAquaticClient",
+        "adapter": "kotlin"
+      }
+    ],
+    "fabric-datagen": [
+      {
+        "value": "dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "mixins": [
+    "hybrid-aquatic.mixins.json",
+    {
+      "config": "hybrid-aquatic.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "accessWidener": "hybrid-aquatic.accesswidener",
+  "depends": {
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": "*",
+    "fabric-language-kotlin": "*",
+    "geckolib": "*",
+    "midnightlib": "*"
+  }
+}

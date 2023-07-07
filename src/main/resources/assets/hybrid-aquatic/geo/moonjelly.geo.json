@@ -1,0 +1,65 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unknown",
+        "texture_width": 32,
+        "texture_height": 32,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 1.5,
+        "visible_bounds_offset": [0, 0.25, 0]
+      },
+      "bones": [
+        {
+          "name": "bone",
+          "pivot": [1.04493, 0, 3.79271]
+        },
+        {
+          "name": "Jelly4",
+          "parent": "bone",
+          "pivot": [1.04493, -2.41667, -4.20729],
+          "rotation": [0, 22.5, 0],
+          "cubes": [
+            {"origin": [-1.45507, -3, -6.70729], "size": [5, 2, 5], "uv": [0, 0]},
+            {"origin": [-0.95507, -4, -6.20729], "size": [4, 1, 4], "uv": [0, 12]},
+            {"origin": [-0.95507, -2.25, -6.20729], "size": [4, 1, 4], "uv": [0, 7]}
+          ]
+        },
+        {
+          "name": "Jelly3",
+          "parent": "bone",
+          "pivot": [-5.95507, -0.41667, -0.20729],
+          "rotation": [-22.5, 0, 22.5],
+          "cubes": [
+            {"origin": [-8.45507, -1, -2.70729], "size": [5, 2, 5], "uv": [0, 0]},
+            {"origin": [-7.95507, -2, -2.20729], "size": [4, 1, 4], "uv": [0, 12]},
+            {"origin": [-7.95507, -0.25, -2.20729], "size": [4, 1, 4], "uv": [0, 7]}
+          ]
+        },
+        {
+          "name": "Jelly2",
+          "parent": "bone",
+          "pivot": [6.04493, 3.58333, -2.20729],
+          "rotation": [-20.94102, 40.78947, -30.36119],
+          "cubes": [
+            {"origin": [3.54493, 3, -4.70729], "size": [5, 2, 5], "uv": [0, 0]},
+            {"origin": [4.04493, 2, -4.20729], "size": [4, 1, 4], "uv": [0, 12]},
+            {"origin": [4.04493, 3.75, -4.20729], "size": [4, 1, 4], "uv": [0, 7]}
+          ]
+        },
+        {
+          "name": "Jelly",
+          "parent": "bone",
+          "pivot": [1.04493, 0.58333, 3.79271],
+          "rotation": [22.5, 0, 0],
+          "cubes": [
+            {"origin": [-1.45507, 0, 1.29271], "size": [5, 2, 5], "uv": [0, 0]},
+            {"origin": [-0.95507, -1, 1.79271], "size": [4, 1, 4], "uv": [0, 12]},
+            {"origin": [-0.95507, 0.75, 1.79271], "size": [4, 1, 4], "uv": [0, 7]}
+          ]
+        }
+      ]
+    }
+  ]
+}

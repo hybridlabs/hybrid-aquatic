@@ -1,0 +1,59 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unknown",
+        "texture_width": 32,
+        "texture_height": 32,
+        "visible_bounds_width": 2,
+        "visible_bounds_height": 1.5,
+        "visible_bounds_offset": [0, 0.25, 0]
+      },
+      "bones": [
+        {
+          "name": "bb_main",
+          "pivot": [0, 0, 0],
+          "cubes": [
+            {"origin": [-1, 0.5, -1], "size": [2, 2, 1], "pivot": [0, 1.5, -1.19717], "rotation": [-180, 0, 180], "uv": [13, 12]},
+            {"origin": [-1.5, 0, -5], "size": [3, 3, 4], "pivot": [0, 1.5, -1.19717], "rotation": [-180, 0, 180], "uv": [0, 0]},
+            {"origin": [-1, 1, -7], "size": [2, 2, 2], "pivot": [0, 1.5, -1.19717], "rotation": [-180, 0, 180], "uv": [5, 12]},
+            {"origin": [-1.5, 0.5, 0], "size": [3, 2, 2], "pivot": [0, 1.5, -1.19717], "rotation": [-180, 0, 180], "uv": [7, 8]},
+            {"origin": [-0.25828, 1, 1.83438], "size": [1, 1, 1], "pivot": [0, 1.5, -1.19717], "rotation": [-180, 25, 180], "uv": [0, 2]},
+            {"origin": [-0.74172, 1, 1.83438], "size": [1, 1, 1], "pivot": [0, 1.5, -1.19717], "rotation": [-180, -25, 180], "uv": [0, 0]}
+          ]
+        },
+        {
+          "name": "left_wing_1",
+          "pivot": [0.5, 2.5, -1.89435],
+          "cubes": [
+            {"origin": [-2.5, 2.5, -3], "size": [2, 0, 3], "pivot": [0, 1.5, -1.19717], "rotation": [-180, 0, 180], "uv": [0, 10]}
+          ]
+        },
+        {
+          "name": "left_wing_2",
+          "parent": "left_wing_1",
+          "pivot": [2.5, 2.5, -2.39435],
+          "cubes": [
+            {"origin": [-1.5, 2.5, -3], "size": [3, 0, 3], "pivot": [2, 1.5, -1.19717], "rotation": [-180, 0, 180], "uv": [0, 7]}
+          ]
+        },
+        {
+          "name": "right_wing_1",
+          "pivot": [-0.5, 2.5, -1.89435],
+          "cubes": [
+            {"origin": [0.5, 2.5, -3], "size": [2, 0, 3], "pivot": [0, 1.5, -1.19717], "rotation": [-180, 0, -180], "uv": [0, 10], "mirror": true}
+          ]
+        },
+        {
+          "name": "right_wing_2",
+          "parent": "right_wing_1",
+          "pivot": [-2.5, 2.5, -2.39435],
+          "cubes": [
+            {"origin": [-1.5, 2.5, -3], "size": [3, 0, 3], "pivot": [-2, 1.5, -1.19717], "rotation": [-180, 0, -180], "uv": [0, 7], "mirror": true}
+          ]
+        }
+      ]
+    }
+  ]
+}

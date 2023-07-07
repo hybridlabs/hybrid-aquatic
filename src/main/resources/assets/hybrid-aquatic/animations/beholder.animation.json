@@ -1,0 +1,54 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "Off": {
+      "loop": true
+    },
+    "Low": {
+      "loop": true,
+      "bones": {
+        "big_jaw": {
+          "rotation": {
+            "vector": [0, 0, -22.5]
+          }
+        },
+        "small_jaw": {
+          "rotation": {
+            "vector": [0, 0, 22.5]
+          }
+        }
+      }
+    },
+    "Medium": {
+      "loop": true,
+      "bones": {
+        "big_jaw": {
+          "rotation": {
+            "vector": [0, 0, -45]
+          }
+        },
+        "small_jaw": {
+          "rotation": {
+            "vector": [0, 0, 45]
+          }
+        }
+      }
+    },
+    "High": {
+      "loop": true,
+      "bones": {
+        "big_jaw": {
+          "rotation": {
+            "vector": [0, 0, -67.5]
+          }
+        },
+        "small_jaw": {
+          "rotation": {
+            "vector": [0, 0, 67.5]
+          }
+        }
+      }
+    }
+  },
+  "geckolib_format_version": 2
+}
