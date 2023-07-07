@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks.ANEMONE
-import dev.hybridlabs.aquatic.config.NewConfig
+import dev.hybridlabs.aquatic.config.HybridAquaticConfig
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -94,8 +94,8 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
     companion object {
         fun createClownfishAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, NewConfig.CLOWNFISH_HEALTH.toDouble())
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, NewConfig.CLOWNFISH_SPEED)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, HybridAquaticConfig.CLOWNFISH_HEALTH.toDouble())
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, HybridAquaticConfig.CLOWNFISH_SPEED)
         }
     }
 }
