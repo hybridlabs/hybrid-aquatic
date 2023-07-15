@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.api.ModInitializer
@@ -16,6 +17,8 @@ object HybridAquatic : ModInitializer {
 
         HybridAquaticBlocks
         HybridAquaticBlockEntityTypes
+
+        HybridAquaticEntityTypes
 
         HybridAquaticItems
         HybridAquaticItemGroups

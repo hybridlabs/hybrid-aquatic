@@ -4,10 +4,14 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.BullSharkEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.ClownfishEntityRenderer
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
@@ -21,6 +25,7 @@ object HybridAquaticClient : ClientModInitializer {
         registerBlockRenderLayers()
         registerBlockEntityRenderers()
         registerBuiltinItemRenderers()
+        registerEntityRenders()
     }
 
     private fun registerBlockRenderLayers(registry: BlockRenderLayerMap = BlockRenderLayerMap.INSTANCE) {
@@ -33,6 +38,14 @@ object HybridAquaticClient : ClientModInitializer {
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.ANEMONE, ::AnemoneBlockEntityRenderer)
     }
 
+    private fun registerEntityRenders() {
+        EntityRendererRegistry.register(HybridAquaticEntityTypes.CLOWNFISH, ::ClownfishEntityRenderer)
+        EntityRendererRegistry.register(HybridAquaticEntityTypes.BULL_SHARK, ::BullSharkEntityRenderer)
+    }
+
+    // TODO: Break this out for cleanliness, registration being set here is fine but
+    //  this function is gonna get ridiculous pretty quickly.
+    //  Maybe put this as a static function in another file?
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
         val anemoneBlockEntity = AnemoneBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.ANEMONE.defaultState)
         val client = MinecraftClient.getInstance()
