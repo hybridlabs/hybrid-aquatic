@@ -32,14 +32,12 @@ object HybridAquaticEntityTypes {
     )
 
     private fun <T : Entity> register(id: String, entity: EntityType<T>): EntityType<T> {
-        val TYPE = Registry.register(Registries.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
-        return TYPE
+        return Registry.register(Registries.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
     }
 
     private inline fun <reified T : LivingEntity> registerLiving(id: String, entity: EntityType<T>, attributes: DefaultAttributeContainer): EntityType<T> {
-        val TYPE = Registry.register(Registries.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
-
-        FabricDefaultAttributeRegistry.register(TYPE, attributes)
-        return TYPE;
+        val type = Registry.register(Registries.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
+        FabricDefaultAttributeRegistry.register(type, attributes)
+        return type
     }
 }

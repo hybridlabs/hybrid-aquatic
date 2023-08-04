@@ -14,9 +14,9 @@ import software.bernie.geckolib.core.animation.Animation
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
-import java.util.*
+import java.util.EnumSet
 
-class BullSharkEntity(entityType: EntityType<out BullSharkEntity>, world: World) : HybridAquaticFish(entityType, world) {
+class BullSharkEntity(entityType: EntityType<out BullSharkEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
     private val isAttacked = false
 
     override fun initGoals() {

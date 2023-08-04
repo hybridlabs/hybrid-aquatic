@@ -1,11 +1,19 @@
 package dev.hybridlabs.aquatic.entity
 
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityPose
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.EscapeDangerGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.LookAtEntityGoal
+import net.minecraft.entity.ai.goal.MoveIntoWaterGoal
+import net.minecraft.entity.ai.goal.SwimAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.attribute.EntityAttributes
@@ -30,15 +38,17 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import kotlin.math.sqrt
 
 @Suppress("LeakingThis")
-open class HybridAquaticFish(entityType: EntityType<out HybridAquaticFish>, world: World)
-    : WaterCreatureEntity(entityType, world), GeoEntity {
+open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: World) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun initGoals() {
@@ -230,7 +240,7 @@ open class HybridAquaticFish(entityType: EntityType<out HybridAquaticFish>, worl
         super.tickMovement()
     }
 
-    internal class FishMoveControl(private val fish: HybridAquaticFish) : MoveControl(fish) {
+    internal class FishMoveControl(private val fish: HybridAquaticFishEntity) : MoveControl(fish) {
         override fun tick() {
             if (fish.isSubmergedIn(FluidTags.WATER)) {
                 fish.velocity = fish.velocity.add(0.0, 0.005, 0.0)
@@ -256,7 +266,7 @@ open class HybridAquaticFish(entityType: EntityType<out HybridAquaticFish>, worl
         }
     }
 
-    internal class SwimToRandomPlaceGoal(private val fish: HybridAquaticFish, d: Double, i: Int) :
+    internal class SwimToRandomPlaceGoal(private val fish: HybridAquaticFishEntity, d: Double, i: Int) :
         SwimAroundGoal(fish, 1.0, 40) {
         override fun canStart(): Boolean {
             return fish.hasSelfControl() && super.canStart()
@@ -264,7 +274,7 @@ open class HybridAquaticFish(entityType: EntityType<out HybridAquaticFish>, worl
     }
 
     companion object {
-        val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticFish::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 
         fun canSpawnDeep(

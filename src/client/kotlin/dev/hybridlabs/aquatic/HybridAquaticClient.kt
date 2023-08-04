@@ -46,11 +46,14 @@ object HybridAquaticClient : ClientModInitializer {
     // TODO: Break this out for cleanliness, registration being set here is fine but
     //  this function is gonna get ridiculous pretty quickly.
     //  Maybe put this as a static function in another file?
+    //
+    //  Andante: this is very true, the DynamicItemRenderer should be its own class,
+    //           and anemoneBlockEntity/renderer should be static within that class
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
         val anemoneBlockEntity = AnemoneBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.ANEMONE.defaultState)
         val client = MinecraftClient.getInstance()
         val renderer = AnemoneBlockEntityRenderer(BlockEntityRendererFactory.Context(client.blockEntityRenderDispatcher, client.blockRenderManager, client.itemRenderer, client.entityRenderDispatcher, client.entityModelLoader, client.textRenderer))
-        registry.register(HybridAquaticItems.ANEMONE) { stack, mode, matrices, vertices, light, overlay ->
+        registry.register(HybridAquaticItems.ANEMONE) { _, mode, matrices, vertices, light, overlay ->
             matrices.push()
 
             if (mode == ModelTransformationMode.GUI) {
