@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.BullSharkEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.ClownfishEntityRenderer
@@ -19,6 +20,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 
 object HybridAquaticClient : ClientModInitializer {
     override fun onInitializeClient() {
+        HybridAquaticEntityModelLayers
+
         registerBlockRenderLayers()
         registerBlockEntityRenderers()
         registerBuiltinItemRenderers()
