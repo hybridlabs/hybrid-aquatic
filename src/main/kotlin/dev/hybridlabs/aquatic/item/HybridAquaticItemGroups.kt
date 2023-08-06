@@ -14,9 +14,10 @@ object HybridAquaticItemGroups {
         .displayName(Text.translatable("itemGroup.${HybridAquatic.MOD_ID}"))
         .icon { ItemStack(HybridAquaticItems.ANEMONE) }
         .entries { _, entries ->
-            entries.add(
-                HybridAquaticItems.ANEMONE
-            )
+            Registries.ITEM.filter { item ->
+                val id = Registries.ITEM.getId(item)
+                id.namespace == HybridAquatic.MOD_ID
+            }.forEach(entries::add)
         }
         .build()
     )

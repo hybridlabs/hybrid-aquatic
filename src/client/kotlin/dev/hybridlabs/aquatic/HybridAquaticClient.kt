@@ -1,11 +1,12 @@
 package dev.hybridlabs.aquatic
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.BullSharkEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.ClownfishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.api.ClientModInitializer
@@ -16,12 +17,11 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
-import net.minecraft.client.render.model.json.ModelTransformationMode
-import net.minecraft.util.math.BlockPos
-import org.joml.Matrix4f
 
 object HybridAquaticClient : ClientModInitializer {
     override fun onInitializeClient() {
+        HybridAquaticEntityModelLayers
+
         registerBlockRenderLayers()
         registerBlockEntityRenderers()
         registerBuiltinItemRenderers()
@@ -43,24 +43,19 @@ object HybridAquaticClient : ClientModInitializer {
         EntityRendererRegistry.register(HybridAquaticEntityTypes.BULL_SHARK, ::BullSharkEntityRenderer)
     }
 
-    // TODO: Break this out for cleanliness, registration being set here is fine but
-    //  this function is gonna get ridiculous pretty quickly.
-    //  Maybe put this as a static function in another file?
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
-        val anemoneBlockEntity = AnemoneBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.ANEMONE.defaultState)
+        registry.register(HybridAquaticItems.ANEMONE, AnemoneBlockItemRenderer())
+    }
+
+    fun createBlockEntityRendererFactoryContext(): BlockEntityRendererFactory.Context {
         val client = MinecraftClient.getInstance()
-        val renderer = AnemoneBlockEntityRenderer(BlockEntityRendererFactory.Context(client.blockEntityRenderDispatcher, client.blockRenderManager, client.itemRenderer, client.entityRenderDispatcher, client.entityModelLoader, client.textRenderer))
-        registry.register(HybridAquaticItems.ANEMONE) { stack, mode, matrices, vertices, light, overlay ->
-            matrices.push()
-
-            if (mode == ModelTransformationMode.GUI) {
-                matrices.translate(8.0f, 8.0f, 150.0f)
-                matrices.multiplyPositionMatrix(Matrix4f().scaling(1.0f, 1.0f, 1.0f))
-                matrices.scale(16.0f, 16.0f, 16.0f)
-                renderer.render(anemoneBlockEntity, 1.0f, matrices, vertices, light, overlay)
-            }
-
-            matrices.pop()
-        }
+        return BlockEntityRendererFactory.Context(
+            client.blockEntityRenderDispatcher,
+            client.blockRenderManager,
+            client.itemRenderer,
+            client.entityRenderDispatcher,
+            client.entityModelLoader,
+            client.textRenderer
+        )
     }
 }
