@@ -5,6 +5,7 @@ import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.block.entity.SkullBlockEntityModel
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
+import kotlin.math.sin
 
 /**
  * Represents the model of a Blahaj Plushie.
@@ -16,13 +17,15 @@ abstract class BlahajPlushieModel : SkullBlockEntityModel() {
     abstract val root: ModelPart
 
     /**
-     * The head model part.
+     * The jaw model part.
      */
-    abstract val head: ModelPart
+    open val jaw: ModelPart? = null
 
     override fun setHeadRotation(animationProgress: Float, yaw: Float, pitch: Float) {
-        head.yaw = yaw * MathHelper.RADIANS_PER_DEGREE
-        head.pitch = pitch * MathHelper.RADIANS_PER_DEGREE
+        root.yaw = yaw * MathHelper.RADIANS_PER_DEGREE
+        root.pitch = pitch * MathHelper.RADIANS_PER_DEGREE
+
+        jaw?.pitch = (sin((animationProgress * 3.1415927f * 0.2f).toDouble()) + 1.0).toFloat() * 0.2f
     }
 
     override fun render(

@@ -6,7 +6,7 @@ import net.minecraft.client.model.ModelPart
 import net.minecraft.client.model.ModelPartBuilder
 import net.minecraft.client.model.ModelTransform
 import net.minecraft.client.model.TexturedModelData
-import net.minecraft.client.render.entity.model.EntityModelPartNames.HEAD
+import net.minecraft.client.render.entity.model.EntityModelPartNames.BODY
 import net.minecraft.client.render.entity.model.EntityModelPartNames.TAIL_FIN
 
 /**
@@ -14,15 +14,13 @@ import net.minecraft.client.render.entity.model.EntityModelPartNames.TAIL_FIN
  * @see BlahajPlushieBlock.Variant.THRESHER_SHARK
  */
 class ThresherSharkBlahajPlushieModel(override val root: ModelPart) : BlahajPlushieModel() {
-    override val head: ModelPart = root.getChild(HEAD)
-
     companion object {
         fun createModelData(): TexturedModelData {
             val modelData = ModelData()
             val rootPart = modelData.root
 
-            val headPart = rootPart.addChild(
-                HEAD,
+            val bodyPart = rootPart.addChild(
+                BODY,
                 ModelPartBuilder.create()
                     .uv(11, 4).cuboid(-1.0f, -3.0f, 1.0627f, 2.0f, 2.0f, 3.0f)
                     .uv(0, 0).cuboid(-1.5f, -3.0f, -2.9373f, 3.0f, 3.0f, 4.0f)
@@ -35,7 +33,7 @@ class ThresherSharkBlahajPlushieModel(override val root: ModelPart) : BlahajPlus
                 ModelTransform.NONE
             )
 
-            headPart.addChild(
+            bodyPart.addChild(
                 TAIL_FIN,
                 ModelPartBuilder.create()
                     .uv(10, 10).cuboid(-0.5f, -4.5f, -1.55f, 1.0f, 7.0f, 2.0f),
