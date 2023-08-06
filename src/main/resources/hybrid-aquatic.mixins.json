@@ -3,7 +3,7 @@
   "package": "dev.hybridlabs.aquatic.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ExampleMixin"
+      "AbstractFireBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

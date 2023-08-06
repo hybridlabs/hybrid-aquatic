@@ -1,12 +1,11 @@
 package dev.hybridlabs.aquatic.goal
 
-import net.minecraft.entity.ai.NoPenaltyTargeting
 import net.minecraft.entity.ai.brain.task.LookTargetUtil
 import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.ai.pathing.Path
 import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.util.math.Vec3d
-import java.util.*
+import java.util.EnumSet
 
 public class SharkSwimGoal (
     protected val mob: PathAwareEntity,
