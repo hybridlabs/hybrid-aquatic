@@ -80,18 +80,18 @@ open class HybridAquaticShark(
     companion object {
         const val MOISTNESS_KEY = "Moistness"
         val MOISTNESS: TrackedData<Int> =
-            DataTracker.registerData(HybridAquaticFish::class.java, TrackedDataHandlerRegistry.INTEGER)
+            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
         const val MAX_HUNGER = 9600
         const val HUNGER_KEY = "Hunger"
         val HUNGER: TrackedData<Int> =
-            DataTracker.registerData(HybridAquaticFish::class.java, TrackedDataHandlerRegistry.INTEGER)
+            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
         val RUSHING: TrackedData<Boolean> =
-            DataTracker.registerData(HybridAquaticFish::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
         val ATTEMPT_ATTACK: TrackedData<Boolean> =
-            DataTracker.registerData(HybridAquaticFish::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
 
         val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(19, 40)

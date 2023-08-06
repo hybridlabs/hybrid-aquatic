@@ -10,6 +10,7 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
 object HybridAquaticEntityTypes {
+    //region Fish
     val CLOWNFISH = registerLiving(
         "clownfish",
         FabricEntityTypeBuilder.create(
@@ -18,6 +19,27 @@ object HybridAquaticEntityTypes {
         ).build(),
         ClownfishEntity.createClownfishAttributes().build()
     )
+
+    val ANGLERFISH = registerLiving(
+        "anglerfish",
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.WATER_AMBIENT,
+            ::HybridAquaticFishEntity
+        )
+            .dimensions(EntityDimensions.fixed(1.0f, 1.0f))
+            .build(),
+        ClownfishEntity.createClownfishAttributes().build()
+    )
+
+    val BARRELEYE = registerLiving(
+        "barreleye",
+        FabricEntityTypeBuilder.create(
+            SpawnGroup.WATER_AMBIENT,
+            ::HybridAquaticFishEntity
+        ).build(),
+        ClownfishEntity.createClownfishAttributes().build()
+    )
+    //endregion
 
     val BULL_SHARK = registerLiving(
         "bull_shark",

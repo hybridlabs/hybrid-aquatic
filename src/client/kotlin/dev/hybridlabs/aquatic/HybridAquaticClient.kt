@@ -4,6 +4,8 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.AnglerfishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.BarreleyeEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.BullSharkEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.ClownfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
@@ -39,7 +41,11 @@ object HybridAquaticClient : ClientModInitializer {
     }
 
     private fun registerEntityRenders() {
+        //region Fish
         EntityRendererRegistry.register(HybridAquaticEntityTypes.CLOWNFISH, ::ClownfishEntityRenderer)
+        EntityRendererRegistry.register(HybridAquaticEntityTypes.ANGLERFISH, ::AnglerfishEntityRenderer)
+        EntityRendererRegistry.register(HybridAquaticEntityTypes.BARRELEYE, ::BarreleyeEntityRenderer)
+        //endregion
         EntityRendererRegistry.register(HybridAquaticEntityTypes.BULL_SHARK, ::BullSharkEntityRenderer)
     }
 
