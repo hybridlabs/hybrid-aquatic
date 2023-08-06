@@ -3,9 +3,9 @@ package dev.hybridlabs.aquatic.data.client
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.BlahajPlushieBlock
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
+import net.minecraft.block.Blocks
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.data.client.TextureMap
@@ -22,16 +22,25 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             .forEach { block ->
                 // blahaj plushies
                 if (block is BlahajPlushieBlock) {
-                    registerBuiltinWithParticle(block, TextureMap.getId(block.particleBlock))
                     excludeFromSimpleItemModelGeneration(block)
+
+                    registerBuiltinWithParticle(block, TextureMap.getId(block.particleBlock))
                     registerParentedItemModel(block, TEMPLATE_BLAHAJ_PLUSHIE)
                 }
             }
 
         // anemone
-        registerBuiltinWithParticle(HybridAquaticBlocks.ANEMONE, TextureMap.getId(HybridAquaticBlocks.ANEMONE))
-        excludeFromSimpleItemModelGeneration(HybridAquaticBlocks.ANEMONE)
-        registerParentedItemModel(HybridAquaticItems.ANEMONE, BUILTIN_ENTITY)
+
+        // builtin
+        mapOf(
+            HybridAquaticBlocks.ANEMONE to HybridAquaticBlocks.ANEMONE,
+            HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE to Blocks.GLASS,
+        ).forEach { (block, particleBlock) ->
+            excludeFromSimpleItemModelGeneration(block)
+
+            registerBuiltinWithParticle(block, TextureMap.getId(particleBlock))
+            registerParentedItemModel(block, BUILTIN_ENTITY)
+        }
     } }
 
     override fun generateItemModels(generator: ItemModelGenerator) {

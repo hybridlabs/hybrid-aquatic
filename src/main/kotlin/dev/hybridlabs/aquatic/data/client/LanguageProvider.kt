@@ -11,6 +11,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         builder.add(Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.ALL).orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic")
 
         builder.add(HybridAquaticBlocks.ANEMONE, "Anemone")
+        builder.add(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE, "Message in a Bottle")
 
         builder.add(HybridAquaticBlocks.BASKING_SHARK_BLAHAJ_PLUSHIE, "Basking Shark Blahaj Plushie")
         builder.add(HybridAquaticBlocks.BULL_SHARK_BLAHAJ_PLUSHIE, "Bull Shark Blahaj Plushie")
