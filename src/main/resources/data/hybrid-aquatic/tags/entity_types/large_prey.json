@@ -1,0 +1,40 @@
+{
+  "values": [
+    {
+      "id": "hybrid-aquatic:sunfish",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:oarfish",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:great_white_shark",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:tiger_shark",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:hammerhead_shark",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:frilled_shark",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:basking_shark",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:whale_shark",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:bull_shark",
+      "required": false
+    }
+  ]
+}

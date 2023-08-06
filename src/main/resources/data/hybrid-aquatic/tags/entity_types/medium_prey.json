@@ -1,0 +1,22 @@
+{
+  "values": [
+    {
+      "id": "hybrid-aquatic:opah",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:yellowfin_tuna",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:thresher_shark",
+      "required": false
+    },
+    "minecraft:squid",
+    "minecraft:glow_squid",
+    "minecraft:turtle",
+    "minecraft:cow",
+    "minecraft:pig",
+    "minecraft:sheep"
+  ]
+}
