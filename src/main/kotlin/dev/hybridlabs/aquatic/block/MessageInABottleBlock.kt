@@ -13,7 +13,9 @@ import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
+import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.ItemStack
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.StringIdentifiable
@@ -32,6 +34,15 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
     init {
         // add waterlogged to default state
         defaultState = defaultState.with(WATERLOGGED, false)
+    }
+
+    override fun getPickStack(world: BlockView, pos: BlockPos, state: BlockState): ItemStack {
+        val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity ?: return super.getPickStack(world, pos, state)
+
+        // append variant to stack
+        val stack = ItemStack(this)
+        stack.getOrCreateSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.putString(MessageInABottleBlockEntity.VARIANT_KEY, blockEntity.variant.id)
+        return stack
     }
 
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
