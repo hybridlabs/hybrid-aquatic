@@ -1,0 +1,53 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"water_bob": {
+			"loop": true,
+			"animation_length": 15,
+			"bones": {
+				"root": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"2.0": {
+							"vector": [0, -0.5, 0],
+							"easing": "easeOutBack",
+							"easingArgs": [1.2]
+						},
+						"3.5": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutElastic",
+							"easingArgs": [1.2]
+						},
+						"5.25": {
+							"vector": [0, 0.4, 0],
+							"easing": "easeOutBack",
+							"easingArgs": [1.5]
+						},
+						"7.5": {
+							"vector": [0, -0.1, 0],
+							"easing": "easeOutCirc"
+						},
+						"8.75": {
+							"vector": [0, 0.25, 0],
+							"easing": "easeOutSine"
+						},
+						"10.625": {
+							"vector": [0, -0.1, 0],
+							"easing": "easeOutCubic"
+						},
+						"12.5": {
+							"vector": [0, 0.25, 0],
+							"easing": "easeOutSine"
+						},
+						"15.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutSine"
+						}
+					}
+				}
+			}
+		}
+	}
+}

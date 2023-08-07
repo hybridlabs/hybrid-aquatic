@@ -32,7 +32,6 @@ object HybridAquaticBlocks {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleBlock(
         FabricBlockSettings.copyOf(Blocks.GLASS)
             .breakInstantly()
-            .noCollision()
             .pistonBehavior(PistonBehavior.DESTROY)
     ))
 
