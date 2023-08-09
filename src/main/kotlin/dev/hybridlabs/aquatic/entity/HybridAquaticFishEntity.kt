@@ -103,8 +103,8 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             }
             if (world.isClient && isTouchingWater && isAttacking) {
                 val rotationVec = getRotationVec(0.0f)
-                val cosYaw = MathHelper.cos(yaw * 0.017453292f) * 0.6f
-                val sinYaw = MathHelper.sin(yaw * 0.017453292f) * 0.6f
+                val cosYaw = MathHelper.cos(yaw * MathHelper.RADIANS_PER_DEGREE) * 0.6f
+                val sinYaw = MathHelper.sin(yaw * MathHelper.RADIANS_PER_DEGREE) * 0.6f
                 val offsetY = 0.0f - random.nextFloat() * 0.7f
                 for (i in 0..1) {
                     world.addParticle(
