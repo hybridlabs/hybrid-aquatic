@@ -1,7 +1,9 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-  id 'fabric-loom' version '1.2-SNAPSHOT'
+  id 'fabric-loom' version '1.3-SNAPSHOT'
   id 'maven-publish'
-  id "org.jetbrains.kotlin.jvm" version "1.8.22"
+  id "org.jetbrains.kotlin.jvm" version "1.9.+"
 }
 
 version = mod_version
@@ -31,6 +33,8 @@ repositories {
     name = 'Modrinth'
     url  = 'https://api.modrinth.com/maven/'
   }
+
+  mavenCentral()
 }
 
 dependencies {
@@ -46,6 +50,7 @@ dependencies {
   implementation "com.github.LlamaLad7:MixinExtras:$mixin_extras_version"
 
   modImplementation "com.terraformersmc:modmenu:$mod_menu_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 loom {
@@ -96,16 +101,13 @@ tasks.withType(JavaCompile).configureEach {
   it.options.release = 17
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+tasks.withType(KotlinCompile).all {
   kotlinOptions {
     jvmTarget = 17
   }
 }
 
 java {
-  // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-  // if it is present.
-  // If you remove this line, sources will not be generated.
   withSourcesJar()
 
   sourceCompatibility = JavaVersion.VERSION_17
