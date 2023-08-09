@@ -4,8 +4,10 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.BaskingSharkEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.BullSharkEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.ClownfishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
@@ -39,8 +41,7 @@ object HybridAquaticClient : ClientModInitializer {
     }
 
     private fun registerEntityRenders() {
-        EntityRendererRegistry.register(HybridAquaticEntityTypes.CLOWNFISH, ::ClownfishEntityRenderer)
-        EntityRendererRegistry.register(HybridAquaticEntityTypes.BULL_SHARK, ::BullSharkEntityRenderer)
+        HybridAquaticEntityRenderers
     }
 
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {

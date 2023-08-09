@@ -38,8 +38,8 @@ import java.util.*
 
 
 @Suppress("LeakingThis")
-open class HybridAquaticShark(
-    entityType: EntityType<out HybridAquaticShark>,
+open class HybridAquaticSharkEntity(
+    entityType: EntityType<out HybridAquaticSharkEntity>,
     world: World,
     private val prey: TagKey<EntityType<*>>,
     private val isCannibalistic: Boolean
@@ -80,18 +80,18 @@ open class HybridAquaticShark(
     companion object {
         const val MOISTNESS_KEY = "Moistness"
         val MOISTNESS: TrackedData<Int> =
-            DataTracker.registerData(HybridAquaticFish::class.java, TrackedDataHandlerRegistry.INTEGER)
+            DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
         const val MAX_HUNGER = 9600
         const val HUNGER_KEY = "Hunger"
         val HUNGER: TrackedData<Int> =
-            DataTracker.registerData(HybridAquaticFish::class.java, TrackedDataHandlerRegistry.INTEGER)
+            DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
         val RUSHING: TrackedData<Boolean> =
-            DataTracker.registerData(HybridAquaticFish::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+            DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
         val ATTEMPT_ATTACK: TrackedData<Boolean> =
-            DataTracker.registerData(HybridAquaticFish::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+            DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
 
         val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(19, 40)
@@ -346,7 +346,7 @@ open class HybridAquaticShark(
         hunger += getHungerValue(entityType)
     }
 
-    internal class AttackGoal(private val shark: HybridAquaticShark) : MeleeAttackGoal(shark, ORIGINAL_SPEED, true) {
+    internal class AttackGoal(private val shark: HybridAquaticSharkEntity) : MeleeAttackGoal(shark, ORIGINAL_SPEED, true) {
         override fun attack(target: LivingEntity, squaredDistance: Double) {
             val d = getSquaredMaxAttackDistance(target)
             if (squaredDistance <= d && this.isCooledDown) {

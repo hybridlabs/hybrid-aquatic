@@ -11,10 +11,10 @@ import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
-class BullSharkEntity(entityType: EntityType<out BullSharkEntity>, world: World) :
+class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, world: World) :
     HybridAquaticSharkEntity(entityType, world, PREY_TAG, false) {
     companion object {
-        val PREY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "prey/bull_shark"))!!
+        val PREY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "prey/hammerhead_shark"))!!
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, HybridAquaticConfig.CLOWNFISH_HEALTH.toDouble())
