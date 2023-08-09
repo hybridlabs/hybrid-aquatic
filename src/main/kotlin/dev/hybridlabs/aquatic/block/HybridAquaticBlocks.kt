@@ -21,12 +21,12 @@ import net.minecraft.util.Identifier
 object HybridAquaticBlocks {
     val ANEMONE = register("anemone", AnemoneBlock(
         FabricBlockSettings.create()
-            .mapColor(MapColor.PALE_GREEN)
+            .mapColor(MapColor.DARK_DULL_PINK)
             .ticksRandomly()
-            .strength(4.0F)
+            .strength(0.4f)
             .nonOpaque()
-            .requiresTool()
-            .sounds(BlockSoundGroup.GRASS)
+            .pistonBehavior(PistonBehavior.DESTROY)
+            .sounds(BlockSoundGroup.SLIME)
     ))
 
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleBlock(

@@ -50,7 +50,7 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
             }
         } else {
             if (entity is LivingEntity) {
-                entity.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 10, 0))
+                entity.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 60, 1))
             }
         }
     }
@@ -84,6 +84,15 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         return BlockWithEntity.checkType(type, HybridAquaticBlockEntityTypes.ANEMONE, AnemoneBlockEntity::tick)
     }
 
+    override fun getCollisionShape(
+        state: BlockState,
+        world: BlockView,
+        pos: BlockPos,
+        context: ShapeContext
+    ): VoxelShape {
+        return COLLISION_SHAPE
+    }
+
     override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape {
         return SHAPE
     }
@@ -109,6 +118,7 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
     }
 
     companion object {
-        private val SHAPE = createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
+        private val SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
+        private val COLLISION_SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0)
     }
 }
