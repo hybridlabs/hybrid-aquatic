@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.client.render.entity
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
-import javax.swing.text.html.parser.Entity
 
 object HybridAquaticEntityRenderers {
     val ClOWNFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.CLOWNFISH, ::ClownfishEntityRenderer)

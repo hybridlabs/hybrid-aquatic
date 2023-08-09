@@ -2,11 +2,9 @@ package dev.hybridlabs.aquatic.client.model.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.HybridAquaticSharkEntity
-import dev.hybridlabs.aquatic.entity.ClownfishEntity
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
-import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 

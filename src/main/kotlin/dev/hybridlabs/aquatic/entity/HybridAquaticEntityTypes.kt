@@ -3,14 +3,16 @@ package dev.hybridlabs.aquatic.entity
 import dev.hybridlabs.aquatic.HybridAquatic
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
-import net.minecraft.entity.*
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityType
 import net.minecraft.entity.EntityType.EntityFactory
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnGroup
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
-import net.minecraft.world.World
-import kotlin.reflect.KFunction2
 
 object HybridAquaticEntityTypes {
     val CLOWNFISH = registerLiving(
@@ -79,8 +81,7 @@ object HybridAquaticEntityTypes {
     )
 
     private fun <T : Entity> register(id: String, entity: EntityType<T>): EntityType<T> {
-        val TYPE = Registry.register(Registries.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
-        return TYPE
+        return Registry.register(Registries.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
     }
 
     private inline fun <reified T : HybridAquaticSharkEntity> registerShark(
@@ -89,19 +90,7 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-
-        return registerLiving(
-            id,
-            FabricEntityTypeBuilder.create(
-                SpawnGroup.WATER_CREATURE,
-                entityFactory
-            )
-                .dimensions(
-                    dimensions
-                )
-                .build(),
-            attributeContainer
-        )
+        return registerLiving(id, FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
     private inline fun <reified T : LivingEntity> registerLiving(
@@ -109,9 +98,8 @@ object HybridAquaticEntityTypes {
         entity: EntityType<T>,
         attributes: DefaultAttributeContainer
     ): EntityType<T> {
-        val TYPE = Registry.register(Registries.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
-
-        FabricDefaultAttributeRegistry.register(TYPE, attributes)
-        return TYPE;
+        val type = Registry.register(Registries.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
+        FabricDefaultAttributeRegistry.register(type, attributes)
+        return type
     }
 }

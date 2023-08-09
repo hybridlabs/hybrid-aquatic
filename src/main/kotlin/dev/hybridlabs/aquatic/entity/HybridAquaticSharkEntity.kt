@@ -1,10 +1,21 @@
 package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic.MOD_ID
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityPose
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.LookAtEntityGoal
+import net.minecraft.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.entity.ai.goal.RevengeGoal
+import net.minecraft.entity.ai.goal.SwimAroundGoal
+import net.minecraft.entity.ai.goal.UniversalAngerGoal
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.damage.DamageSource
@@ -30,11 +41,14 @@ import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.*
+import java.util.UUID
 
 
 @Suppress("LeakingThis")
@@ -72,7 +86,7 @@ open class HybridAquaticSharkEntity(
 
     init {
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
-        moveControl = AquaticMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        moveControl = AquaticMoveControl(this, 85, 10, 0.02F, 0.1F, true)
         lookControl = YawAdjustingLookControl(this, 10)
         navigation = SwimNavigation(this, world)
     }

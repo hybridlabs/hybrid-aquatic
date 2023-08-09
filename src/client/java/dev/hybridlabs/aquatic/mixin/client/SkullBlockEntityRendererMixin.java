@@ -44,7 +44,8 @@ public class SkullBlockEntityRendererMixin {
             at = @At(
                     value = "INVOKE",
                     target = "Lcom/google/common/collect/ImmutableMap$Builder;build()Lcom/google/common/collect/ImmutableMap;",
-                    shift = At.Shift.BEFORE
+                    shift = At.Shift.BEFORE,
+                    remap = false
             ),
             locals = LocalCapture.CAPTURE_FAILEXCEPTION
     )
