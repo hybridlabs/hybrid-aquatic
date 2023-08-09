@@ -3,7 +3,9 @@ package dev.hybridlabs.aquatic.client.model.entity
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.HybridAquaticSharkEntity
 import dev.hybridlabs.aquatic.entity.ClownfishEntity
+import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.MathHelper
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
@@ -24,14 +26,13 @@ abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity> (
     }
 
     override fun setCustomAnimations(
-        animatable: T?,
+        animatable: T,
         instanceId: Long,
-        animationState: AnimationState<T>?
+        animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
 
-        val body = animationProcessor.getBone("body")
-
-        body.rotX = (animatable!!.pitch) * -0.01745329252f;
+        val body = animationProcessor.getBone(EntityModelPartNames.BODY)
+        body.rotX = animatable.pitch * -MathHelper.RADIANS_PER_DEGREE
     }
 }
