@@ -9,6 +9,7 @@ import dev.hybridlabs.aquatic.client.render.entity.BullSharkEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.ClownfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.api.ClientModInitializer
@@ -32,12 +33,14 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerBlockRenderLayers(registry: BlockRenderLayerMap = BlockRenderLayerMap.INSTANCE) {
         registry.putBlocks(RenderLayer.getTranslucent(),
-            HybridAquaticBlocks.ANEMONE
+            HybridAquaticBlocks.ANEMONE,
+            HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE
         )
     }
 
     private fun registerBlockEntityRenderers() {
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.ANEMONE, ::AnemoneBlockEntityRenderer)
+        BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE, ::MessageInABottleBlockEntityRenderer)
     }
 
     private fun registerEntityRenders() {
@@ -46,6 +49,7 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
         registry.register(HybridAquaticItems.ANEMONE, AnemoneBlockItemRenderer())
+        registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE, MessageInABottleBlockItemRenderer())
     }
 
     fun createBlockEntityRendererFactoryContext(): BlockEntityRendererFactory.Context {

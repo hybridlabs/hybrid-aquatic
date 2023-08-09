@@ -7,10 +7,16 @@ import net.minecraft.registry.Registries
 
 class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTableProvider(output) {
     override fun generate() {
+        // message in a bottle
+        // <--
+
+        // generate remaining drops
         Registries.BLOCK
             .filter { block ->
-                val id = Registries.BLOCK.getId(block)
-                id.namespace == HybridAquatic.MOD_ID
+                block.lootTableId !in lootTables && let {
+                    val id = Registries.BLOCK.getId(block)
+                    id.namespace == HybridAquatic.MOD_ID
+                }
             }
             .forEach(::addDrop)
     }

@@ -12,6 +12,12 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         builder.add(HybridAquaticBlocks.ANEMONE, "Anemone")
 
+        HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.translationKey.let { key ->
+            builder.add(key, "Message in a Bottle")
+            builder.add("$key.jar", "Message in a Jar")
+            builder.add("$key.longneck", "Message in a Longneck Bottle")
+        }
+
         builder.add(HybridAquaticBlocks.BASKING_SHARK_BLAHAJ_PLUSHIE, "Basking Shark Blahaj Plushie")
         builder.add(HybridAquaticBlocks.BULL_SHARK_BLAHAJ_PLUSHIE, "Bull Shark Blahaj Plushie")
         builder.add(HybridAquaticBlocks.FRILLED_SHARK_BLAHAJ_PLUSHIE, "Frilled Shark Blahaj Plushie")

@@ -17,6 +17,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
                 id.namespace == HybridAquatic.MOD_ID
             }
             .forEach { block ->
+                // blahaj plushies
                 if (block is BlahajPlushieBlock) {
                     getOrCreateTagBuilder(HybridAquaticBlockTags.BLAHAJ_PLUSHIES).add(block)
                 }

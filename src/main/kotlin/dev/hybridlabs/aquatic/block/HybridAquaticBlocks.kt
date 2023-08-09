@@ -20,12 +20,19 @@ import net.minecraft.util.Identifier
  */
 object HybridAquaticBlocks {
     val ANEMONE = register("anemone", AnemoneBlock(
-        FabricBlockSettings.create().mapColor(MapColor.PALE_GREEN)
+        FabricBlockSettings.create()
+            .mapColor(MapColor.PALE_GREEN)
             .ticksRandomly()
             .strength(4.0F)
             .nonOpaque()
             .requiresTool()
             .sounds(BlockSoundGroup.GRASS)
+    ))
+
+    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleBlock(
+        FabricBlockSettings.copyOf(Blocks.GLASS)
+            .breakInstantly()
+            .pistonBehavior(PistonBehavior.DESTROY)
     ))
 
     val BASKING_SHARK_BLAHAJ_PLUSHIE = register("basking_shark_blahaj_plushie", createBlahajPlushieBlock(BlahajPlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL))
