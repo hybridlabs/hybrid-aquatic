@@ -45,6 +45,8 @@ class MessageInABottleBlockEntityRenderer(context: Context) : GeoBlockRenderer<M
         // translate in water
         if (blockEntity.cachedState.get(Properties.WATERLOGGED)) {
             matrices.translate(0.0, 0.8, 0.0)
+        } else {
+            matrices.translate(0.0, 0.001, 0.0)
         }
 
         // super
