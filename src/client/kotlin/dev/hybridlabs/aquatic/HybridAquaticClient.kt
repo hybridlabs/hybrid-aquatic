@@ -6,6 +6,7 @@ import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
+import dev.hybridlabs.aquatic.client.render.entity.*
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
 import dev.hybridlabs.aquatic.item.HybridAquaticItems

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity
 
+import dev.hybridlabs.aquatic.config.HybridAquaticConfig
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityDimensions
@@ -16,6 +17,7 @@ import net.minecraft.entity.ai.goal.MoveIntoWaterGoal
 import net.minecraft.entity.ai.goal.SwimAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.SwimNavigation
+import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
@@ -291,6 +293,12 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
                 pos,
                 random
             )
+        }
+
+        fun createGenericAttributes(): DefaultAttributeContainer.Builder {
+            return createMobAttributes()
+                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 5.0)
+                    .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.8)
         }
 
         const val MOISTNESS_KEY = "Moistness"

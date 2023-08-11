@@ -5,16 +5,4 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticFishEntity
 import net.minecraft.util.Identifier
 import software.bernie.geckolib.model.GeoModel
 
-class BarreleyeEntityModel : GeoModel<HybridAquaticFishEntity>() {
-    override fun getModelResource(animatable: HybridAquaticFishEntity): Identifier {
-        return Identifier(HybridAquatic.MOD_ID, "geo/barreleye.geo.json")
-    }
-
-    override fun getTextureResource(animatable: HybridAquaticFishEntity): Identifier {
-        return Identifier(HybridAquatic.MOD_ID, "textures/entity/barreleye.png")
-    }
-
-    override fun getAnimationResource(animatable: HybridAquaticFishEntity): Identifier {
-        return Identifier(HybridAquatic.MOD_ID, "animations/barreleye.animation.json")
-    }
-}
+class BarreleyeEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("barreleye")
