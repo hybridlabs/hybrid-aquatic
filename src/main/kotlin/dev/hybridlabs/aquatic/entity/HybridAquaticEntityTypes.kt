@@ -37,7 +37,7 @@ object HybridAquaticEntityTypes {
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
-    val BLUEFIN_TUNA = registerFish(
+    val YELLOWFIN_TUNA = registerFish(
             "yellowfin_tuna",
             ::HybridAquaticFishEntity,
             EntityDimensions.fixed(1.0f, 1.0f),
