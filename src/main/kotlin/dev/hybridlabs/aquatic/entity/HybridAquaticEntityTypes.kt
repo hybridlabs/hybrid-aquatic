@@ -15,14 +15,35 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
 object HybridAquaticEntityTypes {
-    val CLOWNFISH = registerLiving(
+    //region Fish
+    val CLOWNFISH = registerFish(
         "clownfish",
-        FabricEntityTypeBuilder.create(
-            SpawnGroup.WATER_AMBIENT,
-            ::ClownfishEntity
-        ).build(),
+        ::ClownfishEntity,
+        EntityDimensions.fixed(1.0f, 1.0f),
         ClownfishEntity.createClownfishAttributes().build()
     )
+
+    val ANGLERFISH = registerFish(
+        "anglerfish",
+        ::HybridAquaticFishEntity,
+        EntityDimensions.fixed(1.0f, 1.0f),
+        HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val BARRELEYE = registerFish(
+            "barreleye",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val YELLOWFIN_TUNA = registerFish(
+            "yellowfin_tuna",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+    //endregion
 
     val BULL_SHARK = registerShark(
         "bull_shark",
@@ -91,6 +112,15 @@ object HybridAquaticEntityTypes {
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
         return registerLiving(id, FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, entityFactory).dimensions(dimensions).build(), attributeContainer)
+    }
+
+    private inline fun <reified T : HybridAquaticFishEntity> registerFish(
+            id: String,
+            entityFactory: EntityFactory<T>,
+            dimensions: EntityDimensions,
+            attributeContainer: DefaultAttributeContainer
+    ): EntityType<T> {
+        return registerLiving(id, FabricEntityTypeBuilder.create(SpawnGroup.WATER_AMBIENT, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
     private inline fun <reified T : LivingEntity> registerLiving(
