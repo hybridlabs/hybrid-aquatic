@@ -17,7 +17,7 @@ class ThresherSharkEntity(entityType: EntityType<out ThresherSharkEntity>, world
         val PREY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "prey/thresher_shark"))!!
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 30)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 30.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.3)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
