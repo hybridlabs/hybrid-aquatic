@@ -17,8 +17,8 @@ class BaskingSharkEntity(entityType: EntityType<out BaskingSharkEntity>, world: 
         val PREY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "prey/basking_shark"))!!
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, HybridAquaticConfig.CLOWNFISH_HEALTH.toDouble())
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.2)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 60.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.3)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 40.0)
 
