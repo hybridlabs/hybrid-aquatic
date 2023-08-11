@@ -61,7 +61,7 @@ object HybridAquaticEntityTypes {
     val LIONFISH = registerFish(
             "lionfish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.8f, 1.0f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
