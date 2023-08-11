@@ -43,8 +43,58 @@ object HybridAquaticEntityTypes {
             EntityDimensions.fixed(1.0f, 1.0f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
+
+    val CUTTLEFISH = registerFish(
+            "cuttlefish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val FLASHLIGHT_FISH = registerFish(
+            "flashlight_fish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val LIONFISH = registerFish(
+            "lionfish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val OARFISH = registerFish(
+            "oarfish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val OPAH = registerFish(
+            "opah",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val PIRANHA = registerFish(
+            "piranha",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val SEA_ANGEL = registerFish(
+            "sea_angel",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
     //endregion
 
+    //region sharks
     val BULL_SHARK = registerShark(
         "bull_shark",
         ::BullSharkEntity,
@@ -100,6 +150,7 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(2f, 1f),
         WhaleSharkEntity.createMobAttributes().build()
     )
+    //endregion sharks
 
     private fun <T : Entity> register(id: String, entity: EntityType<T>): EntityType<T> {
         return Registry.register(Registries.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
