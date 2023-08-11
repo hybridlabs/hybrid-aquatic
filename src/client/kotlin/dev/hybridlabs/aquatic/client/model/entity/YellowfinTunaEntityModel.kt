@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticFishEntity
 import net.minecraft.util.Identifier
 import software.bernie.geckolib.model.GeoModel
 
-class YellowfinTunaEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("yellowfintuna")
+class YellowfinTunaEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("yellowfin_tuna")
