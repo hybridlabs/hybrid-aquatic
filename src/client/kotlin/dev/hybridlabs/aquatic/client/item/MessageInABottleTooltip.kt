@@ -9,7 +9,6 @@ import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.text.TextContent
 import net.minecraft.util.Formatting
-import java.lang.StringBuilder
 
 class MessageInABottleTooltip : ItemTooltipCallback {
     override fun getTooltip(stack: ItemStack, context: TooltipContext, lines: MutableList<Text>) {

@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity
 
-import dev.hybridlabs.aquatic.config.HybridAquaticConfig
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityDimensions

@@ -3,11 +3,10 @@ package dev.hybridlabs.aquatic.block.entity
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.state.property.Properties
-import net.minecraft.text.Text
-import net.minecraft.text.TextContent
 import net.minecraft.util.math.BlockPos
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -33,23 +32,23 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
     var variant: MessageInABottleBlock.Variant = MessageInABottleBlock.Variant.BOTTLE
 
     /**
-     * The message inside this bottle.
+     * The message item inside this bottle.
      */
-    var message: Text = Text.empty()
+    var messageItemStack: ItemStack = ItemStack.EMPTY
 
     override fun writeNbt(nbt: NbtCompound) {
         super.writeNbt(nbt)
         nbt.putString(VARIANT_KEY, variant.id)
 
-        if (message.content != TextContent.EMPTY) {
-            nbt.putString(MESSAGE_KEY, Text.Serializer.toJson(message))
+        if (!messageItemStack.isEmpty) {
+            nbt.put(MESSAGE_KEY, messageItemStack.writeNbt(NbtCompound()))
         }
     }
 
     override fun readNbt(nbt: NbtCompound) {
         super.readNbt(nbt)
         variant = MessageInABottleBlock.Variant.byId(nbt.getString(VARIANT_KEY))
-        message = Text.Serializer.fromJson(nbt.getString(MESSAGE_KEY)) ?: Text.empty()
+        messageItemStack = ItemStack.fromNbt(nbt.getCompound(MESSAGE_KEY))
     }
 
     private fun <E> animate(event: AnimationState<E>): PlayState where E : BlockEntity, E : GeoAnimatable {

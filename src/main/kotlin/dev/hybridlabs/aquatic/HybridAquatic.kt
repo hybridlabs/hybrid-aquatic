@@ -2,17 +2,17 @@ package dev.hybridlabs.aquatic
 
 import dev.hybridlabs.aquatic.block.BlahajPlushieBlock
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.resource.data.SeaMessageLoader
+import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.minecraft.item.BlockItem
 import net.minecraft.registry.Registries
-import net.minecraft.resource.ResourceType
 import net.minecraft.village.TradeOffers.SellItemFactory
 import org.slf4j.LoggerFactory
 
@@ -31,8 +31,12 @@ object HybridAquatic : ModInitializer {
         HybridAquaticItems
         HybridAquaticItemGroups
 
+        registerDynamicRegistries()
         registerWanderingTraderTrades()
-        registerResourceManagers(ResourceManagerHelper.get(ResourceType.SERVER_DATA))
+    }
+
+    private fun registerDynamicRegistries() {
+        DynamicRegistries.registerSynced(HybridAquaticRegistryKeys.SEA_MESSAGE, SeaMessage.CODEC)
     }
 
     private fun registerWanderingTraderTrades() {
@@ -44,9 +48,5 @@ object HybridAquatic : ModInitializer {
                     list.add(SellItemFactory(block, 8, 1, 2, 2))
                 }
             }
-    }
-
-    private fun registerResourceManagers(dataResourceManager: ResourceManagerHelper) {
-        dataResourceManager.registerReloadListener(SeaMessageLoader())
     }
 }
