@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.data.SeaMessage
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
@@ -17,6 +18,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add("$key.jar", "Message in a Jar")
             builder.add("$key.longneck", "Message in a Longneck Bottle")
         }
+
+        SeaMessage.entries.forEach { message -> builder.add(message.translationKey, message.englishTranslation) }
 
         builder.add(HybridAquaticBlocks.BASKING_SHARK_BLAHAJ_PLUSHIE, "Basking Shark Blahaj Plushie")
         builder.add(HybridAquaticBlocks.BULL_SHARK_BLAHAJ_PLUSHIE, "Bull Shark Blahaj Plushie")

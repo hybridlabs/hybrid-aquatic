@@ -3,14 +3,27 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "message",
+                  "target": "BlockEntityTag.message"
+                },
+                {
+                  "op": "replace",
+                  "source": "variant",
+                  "target": "BlockEntityTag.variant"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "hybrid-aquatic:message_in_a_bottle"
         }
       ],

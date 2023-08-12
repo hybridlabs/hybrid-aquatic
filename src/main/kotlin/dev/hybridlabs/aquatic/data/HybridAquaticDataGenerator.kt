@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.data.client.LanguageProvider
 import dev.hybridlabs.aquatic.data.client.ModelProvider
 import dev.hybridlabs.aquatic.data.server.BlockLootTableProvider
 import dev.hybridlabs.aquatic.data.server.BlockTagProvider
+import dev.hybridlabs.aquatic.data.server.SeaMessageProvider
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 
@@ -14,5 +15,6 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::ModelProvider)
         pack.addProvider(::BlockLootTableProvider)
         pack.addProvider(::BlockTagProvider)
+        pack.addProvider(::SeaMessageProvider)
     }
 }

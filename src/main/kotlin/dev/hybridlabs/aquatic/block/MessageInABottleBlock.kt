@@ -3,6 +3,7 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
+import dev.hybridlabs.aquatic.data.SeaMessage
 import net.minecraft.block.Block
 import net.minecraft.block.BlockRenderType
 import net.minecraft.block.BlockState
@@ -11,6 +12,7 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.BlockItem
@@ -23,6 +25,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
+import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
@@ -37,12 +40,9 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
     }
 
     override fun getPickStack(world: BlockView, pos: BlockPos, state: BlockState): ItemStack {
-        val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity ?: return super.getPickStack(world, pos, state)
-
-        // append variant to stack
-        val stack = ItemStack(this)
-        stack.getOrCreateSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.putString(MessageInABottleBlockEntity.VARIANT_KEY, blockEntity.variant.id)
-        return stack
+        val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity
+            ?: return super.getPickStack(world, pos, state)
+        return createItemStack(blockEntity)
     }
 
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
@@ -61,6 +61,23 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
         // check valid placement
         val fluidState = world.getFluidState(pos)
         return fluidState.fluid == Fluids.WATER || sideCoversSmallSquare(world, pos.down(), Direction.UP)
+    }
+
+    override fun onPlaced(
+        world: World,
+        pos: BlockPos,
+        state: BlockState,
+        placer: LivingEntity?,
+        stack: ItemStack
+    ) {
+        stack.getSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.let { nbt ->
+            // if not present, generate random message
+            if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
+                val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity ?: return
+                val message = SeaMessage.entries.random()
+                blockEntity.message = message.text
+            }
+        }
     }
 
     override fun getPlacementState(context: ItemPlacementContext): BlockState? {
@@ -144,7 +161,7 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
         }
 
         companion object {
-            private val BY_ID = values().associateBy(Variant::id)
+            private val BY_ID = entries.associateBy(Variant::id)
 
             /**
              * Retrieves a variant based on [id].
@@ -165,5 +182,15 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
          * The shape of a Message in a Bottle block in water.
          */
         val WATER_SHAPE: VoxelShape = Block.createCuboidShape(1.0, 13.0, 1.0, 15.0, 16.0, 15.0)
+
+        /**
+         * Creates a Message in a Bottle item stack from [blockEntity].
+         * @return an item stack
+         */
+        fun createItemStack(blockEntity: MessageInABottleBlockEntity): ItemStack {
+            val stack = ItemStack(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE)
+            stack.orCreateNbt.put(BlockItem.BLOCK_ENTITY_TAG_KEY, blockEntity.createNbt())
+            return stack
+        }
     }
 }

@@ -7,13 +7,13 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
-import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
 
 object HybridAquaticItemGroups {
     val ALL = register("all", FabricItemGroup.builder()
@@ -24,10 +24,10 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticBlocks.ANEMONE)
 
             // message in a bottle variants
-            MessageInABottleBlock.Variant.values().forEach { variant ->
-                val stack = ItemStack(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE)
-                val nbt = stack.getOrCreateSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)
-                nbt.putString(MessageInABottleBlockEntity.VARIANT_KEY, variant.id)
+            MessageInABottleBlock.Variant.entries.forEach { variant ->
+                val blockEntity = MessageInABottleBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.defaultState)
+                    .also { blockEntity -> blockEntity.variant = variant }
+                val stack = MessageInABottleBlock.createItemStack(blockEntity)
                 entries.add(stack)
             }
 

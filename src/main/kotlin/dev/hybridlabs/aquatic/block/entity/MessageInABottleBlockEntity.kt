@@ -6,6 +6,8 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.state.property.Properties
+import net.minecraft.text.Text
+import net.minecraft.text.TextContent
 import net.minecraft.util.math.BlockPos
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -26,18 +28,28 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
     private val instanceCache = GeckoLibUtil.createInstanceCache(this)
 
     /**
-     * The variant of this Message in a Bottle.
+     * The variant of this bottle.
      */
     var variant: MessageInABottleBlock.Variant = MessageInABottleBlock.Variant.BOTTLE
+
+    /**
+     * The message inside this bottle.
+     */
+    var message: Text = Text.empty()
 
     override fun writeNbt(nbt: NbtCompound) {
         super.writeNbt(nbt)
         nbt.putString(VARIANT_KEY, variant.id)
+
+        if (message.content != TextContent.EMPTY) {
+            nbt.putString(MESSAGE_KEY, Text.Serializer.toJson(message))
+        }
     }
 
     override fun readNbt(nbt: NbtCompound) {
         super.readNbt(nbt)
         variant = MessageInABottleBlock.Variant.byId(nbt.getString(VARIANT_KEY))
+        message = Text.Serializer.fromJson(nbt.getString(MESSAGE_KEY)) ?: Text.empty()
     }
 
     private fun <E> animate(event: AnimationState<E>): PlayState where E : BlockEntity, E : GeoAnimatable {
@@ -71,8 +83,13 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
 
     companion object {
         /**
-         * The nbt for the variant id.
+         * The nbt key for the variant id.
          */
         const val VARIANT_KEY = "variant"
+
+        /**
+         * The nbt key for the message text.
+         */
+        const val MESSAGE_KEY = "message"
     }
 }

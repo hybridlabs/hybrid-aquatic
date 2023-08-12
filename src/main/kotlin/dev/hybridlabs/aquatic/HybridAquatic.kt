@@ -6,10 +6,13 @@ import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.resource.data.SeaMessageLoader
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.minecraft.item.BlockItem
 import net.minecraft.registry.Registries
+import net.minecraft.resource.ResourceType
 import net.minecraft.village.TradeOffers.SellItemFactory
 import org.slf4j.LoggerFactory
 
@@ -29,6 +32,7 @@ object HybridAquatic : ModInitializer {
         HybridAquaticItemGroups
 
         registerWanderingTraderTrades()
+        registerResourceManagers(ResourceManagerHelper.get(ResourceType.SERVER_DATA))
     }
 
     private fun registerWanderingTraderTrades() {
@@ -40,5 +44,9 @@ object HybridAquatic : ModInitializer {
                     list.add(SellItemFactory(block, 8, 1, 2, 2))
                 }
             }
+    }
+
+    private fun registerResourceManagers(dataResourceManager: ResourceManagerHelper) {
+        dataResourceManager.registerReloadListener(SeaMessageLoader())
     }
 }
