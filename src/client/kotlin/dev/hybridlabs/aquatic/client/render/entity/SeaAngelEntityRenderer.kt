@@ -6,7 +6,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory.Context
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
-class OarfishEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquaticFishEntity>(context, SeaAngelEntityModel()) {
+class SeaAngelEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquaticFishEntity>(context, SeaAngelEntityModel()) {
     init {
         addRenderLayer(AutoGlowingGeoLayer(this))
     }
