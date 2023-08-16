@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.entity.HybridAquaticFishEntity
+import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import net.minecraft.util.Identifier
 import software.bernie.geckolib.model.GeoModel
 

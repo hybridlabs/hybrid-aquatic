@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.entity
+package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.HybridAquatic.MOD_ID
 import net.minecraft.entity.EntityType

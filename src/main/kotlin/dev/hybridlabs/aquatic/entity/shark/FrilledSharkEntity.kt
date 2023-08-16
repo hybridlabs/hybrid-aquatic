@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.entity
+package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.HybridAquatic.MOD_ID
 import net.minecraft.entity.EntityType
@@ -10,16 +10,16 @@ import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
-class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, world: World) :
+class FrilledSharkEntity(entityType: EntityType<out FrilledSharkEntity>, world: World) :
     HybridAquaticSharkEntity(entityType, world, PREY_TAG, false) {
     companion object {
-        val PREY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "prey/great_white_shark"))!!
+        val PREY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "prey/frilled_shark"))!!
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 50.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.4)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.2)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
 
         }
     }

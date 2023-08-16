@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block.entity
 
-import dev.hybridlabs.aquatic.entity.ClownfishEntity
+import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.nbt.NbtCompound

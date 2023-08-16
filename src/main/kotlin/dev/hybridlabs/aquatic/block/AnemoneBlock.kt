@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.entity.ClownfishEntity
+import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockRenderType

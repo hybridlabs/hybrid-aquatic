@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.entity
+package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.HybridAquatic.MOD_ID
 import net.minecraft.entity.EntityData
@@ -53,10 +53,10 @@ import java.util.UUID
 
 @Suppress("LeakingThis")
 open class HybridAquaticSharkEntity(
-    entityType: EntityType<out HybridAquaticSharkEntity>,
-    world: World,
-    private val prey: TagKey<EntityType<*>>,
-    private val isCannibalistic: Boolean
+        entityType: EntityType<out HybridAquaticSharkEntity>,
+        world: World,
+        private val prey: TagKey<EntityType<*>>,
+        private val isCannibalistic: Boolean
 ) :
     WaterCreatureEntity(entityType, world), Angerable, GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)

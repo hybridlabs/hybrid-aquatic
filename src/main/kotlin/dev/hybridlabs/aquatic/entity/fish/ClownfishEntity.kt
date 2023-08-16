@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.entity
+package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks.ANEMONE
 import dev.hybridlabs.aquatic.config.HybridAquaticConfig

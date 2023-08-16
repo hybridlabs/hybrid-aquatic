@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.entity
+package dev.hybridlabs.aquatic.entity.fish
 
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityData
