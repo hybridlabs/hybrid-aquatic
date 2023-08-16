@@ -19,7 +19,7 @@ class ThresherSharkEntity(entityType: EntityType<out ThresherSharkEntity>, world
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 30.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.3)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
 
         }
     }

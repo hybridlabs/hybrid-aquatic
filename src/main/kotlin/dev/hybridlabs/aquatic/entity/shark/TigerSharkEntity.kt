@@ -16,10 +16,10 @@ class TigerSharkEntity(entityType: EntityType<out TigerSharkEntity>, world: Worl
         val PREY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "prey/tiger_shark"))!!
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 50.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.4)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 80.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.5)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0)
 
         }
     }

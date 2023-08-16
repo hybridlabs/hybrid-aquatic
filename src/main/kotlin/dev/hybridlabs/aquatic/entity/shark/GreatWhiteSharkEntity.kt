@@ -16,10 +16,10 @@ class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, w
         val PREY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "prey/great_white_shark"))!!
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 50.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.4)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 100.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.6)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0)
 
         }
     }
