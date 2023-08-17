@@ -54,8 +54,8 @@ object HybridAquaticEntityTypes {
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
-    val VAMPIRE_SQUID = registerFish(
-            "vampire_squid",
+    val VAMPIRESQUID = registerFish(
+            "vampiresquid",
             ::HybridAquaticFishEntity,
             EntityDimensions.fixed(1.0f, 1.0f),
             HybridAquaticFishEntity.createGenericAttributes().build()
