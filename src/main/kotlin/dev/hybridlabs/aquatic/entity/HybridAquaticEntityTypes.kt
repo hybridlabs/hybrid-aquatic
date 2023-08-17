@@ -3,7 +3,15 @@ package dev.hybridlabs.aquatic.entity
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
-import dev.hybridlabs.aquatic.entity.shark.*
+import dev.hybridlabs.aquatic.entity.shark.BaskingSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.BullSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.FrilledSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.GreatWhiteSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.HammerheadSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.ThresherSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.TigerSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.WhaleSharkEntity
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.Entity
@@ -278,12 +286,6 @@ object HybridAquaticEntityTypes {
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
-    val PIRANHA = registerFish(
-            "piranha",
-            ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
-            HybridAquaticFishEntity.createGenericAttributes().build()
-    )
     //endregion
 
     //region sharks
