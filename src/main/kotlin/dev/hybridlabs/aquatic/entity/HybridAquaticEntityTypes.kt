@@ -95,6 +95,13 @@ object HybridAquaticEntityTypes {
             EntityDimensions.fixed(1.0f, 1.0f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
+
+    val SUNFISH = registerFish(
+            "sunfish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
     //endregion
 
     //region sharks
