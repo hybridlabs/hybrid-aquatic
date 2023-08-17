@@ -165,6 +165,111 @@ object HybridAquaticEntityTypes {
             EntityDimensions.fixed(1.0f, 1.0f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
+
+    val OSCAR = registerFish(
+            "oscar",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val UNICORN_FISH = registerFish(
+            "unicorn_fish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val ZEBRA_DANIO = registerFish(
+            "zebra_danio",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val TOADFISH = registerFish(
+            "toadfish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val TETRA = registerFish(
+            "tetra",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val STONEFISH = registerFish(
+            "stonefish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val BETTA = registerFish(
+            "betta",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val SEAHORSE = registerFish(
+            "seahorse",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val MOON_JELLY = registerFish(
+            "moon_jelly",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val GOURAMI = registerFish(
+            "gourami",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val COWFISH = registerFish(
+            "cowfish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val GLOWING_SUCKER_OCTOPUS = registerFish(
+            "glowing_sucker_octopus",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val DISCUS = registerFish(
+            "discus",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val FIREFLY_SQUID = registerFish(
+            "firefly_squid",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val BLUE_SPOTTED_STINGRAY = registerFish(
+            "blue_spotted_stingray",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
     //endregion
 
     //region sharks
