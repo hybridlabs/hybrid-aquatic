@@ -102,6 +102,27 @@ object HybridAquaticEntityTypes {
             EntityDimensions.fixed(1.0f, 1.0f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
+
+    val VAMPIRE_SQUID = registerFish(
+            "vampire_squid",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val MAHIMAHI = registerFish(
+            "mahimahi",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val MORAY_EEL = registerFish(
+            "moray_eel",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
     //endregion
 
     //region sharks
