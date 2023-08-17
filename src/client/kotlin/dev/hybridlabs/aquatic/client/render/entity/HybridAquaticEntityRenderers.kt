@@ -26,7 +26,7 @@ object HybridAquaticEntityRenderers {
     val NAUTILUS = EntityRendererRegistry.register(HybridAquaticEntityTypes.NAUTILUS, ::NautilusEntityRenderer)
     val TRIGGERFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.TRIGGERFISH, ::TriggerfishEntityRenderer)
     val OSCAR = EntityRendererRegistry.register(HybridAquaticEntityTypes.OSCAR, ::OscarEntityRenderer)
-    val UNICORN_FISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.UNICORN_FISH, ::UnicornfishEntityRenderer)
+    val UNICORN_FISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.UNICORN_FISH, ::UnicornFishEntityRenderer)
     val ZEBRA_DANIO = EntityRendererRegistry.register(HybridAquaticEntityTypes.ZEBRA_DANIO, ::ZebraDanioEntityRenderer)
     val TOADFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.TOADFISH, ::ToadfishEntityRenderer)
     val TETRA = EntityRendererRegistry.register(HybridAquaticEntityTypes.TETRA, ::TetraEntityRenderer)
