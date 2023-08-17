@@ -8,7 +8,9 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.block.Blocks
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
+import net.minecraft.data.client.ModelIds
 import net.minecraft.data.client.TextureMap
+import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
 
@@ -23,6 +25,18 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 registerBuiltinWithParticle(block, TextureMap.getId(block.particleBlock))
                 registerParentedItemModel(block, TEMPLATE_BLAHAJ_PLUSHIE)
             }
+
+        // spawn eggs
+        Registries.ITEM.forEach { item ->
+            val id = Registries.ITEM.getId(item)
+            if (id.namespace != HybridAquatic.MOD_ID) {
+                return@forEach
+            }
+
+            if (item is SpawnEggItem) {
+                registerParentedItemModel(item, ModelIds.getMinecraftNamespacedItem("template_spawn_egg"))
+            }
+        }
 
         // builtin
         mapOf(

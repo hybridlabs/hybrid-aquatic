@@ -9,6 +9,7 @@ import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
+import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.text.Text
@@ -40,6 +41,16 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticBlocks.THRESHER_SHARK_BLAHAJ_PLUSHIE)
             entries.add(HybridAquaticBlocks.TIGER_SHARK_BLAHAJ_PLUSHIE)
             entries.add(HybridAquaticBlocks.WHALE_SHARK_BLAHAJ_PLUSHIE)
+
+            // spawn eggs
+            SpawnEggItem.getAll().forEach { item ->
+                val id = Registries.ITEM.getId(item)
+                if (id.namespace != HybridAquatic.MOD_ID) {
+                    return@forEach
+                }
+
+                entries.add(item)
+            }
         }
         .build()
     )

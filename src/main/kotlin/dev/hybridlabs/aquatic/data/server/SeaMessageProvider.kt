@@ -16,7 +16,7 @@ class SeaMessageProvider(output: FabricDataOutput, registriesFuture: Completable
     override fun configure(registries: RegistryWrapper.WrapperLookup, entries: Entries) {
         SeaMessage.BUILT_IN.forEach { id ->
             val key = RegistryKey.of(HybridAquaticRegistryKeys.SEA_MESSAGE, Identifier(HybridAquatic.MOD_ID, id))
-            entries.add(key, SeaMessage("${HybridAquatic.MOD_ID}.sea_message.$id"))
+            entries.add(key, SeaMessage(id))
         }
     }
 

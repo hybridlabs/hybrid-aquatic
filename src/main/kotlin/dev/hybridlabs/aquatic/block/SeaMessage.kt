@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import dev.hybridlabs.aquatic.HybridAquatic
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.item.WrittenBookItem
@@ -15,14 +16,19 @@ import net.minecraft.text.Text
  */
 data class SeaMessage(
     /**
-     * The translation key for this sea message.
+     * The id of this sea message.
      */
-    val translationKey: String
+    val id: String
 ) {
+    /**
+     * The translation key of this message.
+     */
+    val translationKey: String = "${HybridAquatic.MOD_ID}.sea_message.$id"
+
     /**
      * The text component for this message.
      */
-    private val text: MutableText get() = Text.translatable(translationKey)
+    val text: MutableText = Text.translatable(translationKey)
 
     fun createBookItemStack(): ItemStack {
         val stack = ItemStack(Items.WRITTEN_BOOK)
@@ -40,8 +46,8 @@ data class SeaMessage(
          */
         val CODEC: Codec<SeaMessage> = RecordCodecBuilder.create { instance ->
             instance.group(
-                Codec.STRING.fieldOf("translation_key")
-                    .forGetter(SeaMessage::translationKey)
+                Codec.STRING.fieldOf("id")
+                    .forGetter(SeaMessage::id)
             ).apply(instance, ::SeaMessage)
         }
 
