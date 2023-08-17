@@ -13,7 +13,7 @@
       "required":  false
     },
     {
-      "id": "hybrid-aquatic:glowing_octopus",
+      "id": "hybrid-aquatic:cowfish",
       "required":  false
     },
     {
@@ -35,6 +35,46 @@
     {
       "id": "hybrid-aquatic:piranha",
       "required":  false
+    },
+    {
+      "id": "hybrid-aquatic:rockfish",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:unicorn_fish",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:zebra_danio",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:seahorse",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:tiger_barb",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:ratfish",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:blue_tang",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:nautilus",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:discus",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:gourami",
+      "required": false
     },
     {
       "id": "hybrid-aquatic:cuttlefish",

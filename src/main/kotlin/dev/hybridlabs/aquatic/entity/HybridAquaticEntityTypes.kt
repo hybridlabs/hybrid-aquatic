@@ -270,6 +270,13 @@ object HybridAquaticEntityTypes {
             EntityDimensions.fixed(1.0f, 1.0f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
+
+    val BLUE_TANG = registerFish(
+            "blue_tang",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
     //endregion
 
     //region sharks

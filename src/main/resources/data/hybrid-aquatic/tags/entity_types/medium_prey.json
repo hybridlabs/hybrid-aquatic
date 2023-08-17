@@ -9,7 +9,23 @@
       "required": false
     },
     {
-      "id": "hybrid-aquatic:thresher_shark",
+      "id": "hybrid-aquatic:moray_eel",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:mahimahi",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:triggerfish",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:needlefish",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:glowing_sucker_octopus",
       "required": false
     },
     "minecraft:squid",
