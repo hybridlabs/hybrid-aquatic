@@ -123,6 +123,48 @@ object HybridAquaticEntityTypes {
             EntityDimensions.fixed(1.0f, 1.0f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
+
+    val ROCKFISH = registerFish(
+            "rockfish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val TIGER_BARB = registerFish(
+            "tiger_barb",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val NEEDLEFISH = registerFish(
+            "needlefish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val RATFISH = registerFish(
+            "ratfish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val NAUTILUS = registerFish(
+            "nautilus",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+    val TRIGGERFISH = registerFish(
+            "triggerfish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
     //endregion
 
     //region sharks
