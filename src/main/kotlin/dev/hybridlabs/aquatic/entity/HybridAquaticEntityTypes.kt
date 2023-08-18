@@ -272,6 +272,14 @@ object HybridAquaticEntityTypes {
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
+    val DRAGONFISH = registerFish(
+            "dragonfish",
+            ::HybridAquaticFishEntity,
+            EntityDimensions.fixed(1.0f, 1.0f),
+            HybridAquaticFishEntity.createGenericAttributes().build()
+    )
+
+
     val BLUE_SPOTTED_STINGRAY = registerFish(
             "blue_spotted_stingray",
             ::HybridAquaticFishEntity,
