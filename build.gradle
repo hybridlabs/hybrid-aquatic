@@ -34,7 +34,11 @@ repositories {
     name = 'Modrinth'
     url  = 'https://api.modrinth.com/maven/'
   }
-
+  // DebugUtils
+  maven {
+    url "https://gitlab.com/api/v4/projects/21830712/packages/maven"
+  }
+  
   mavenCentral()
 }
 
@@ -51,7 +55,9 @@ dependencies {
   implementation "com.github.LlamaLad7:MixinExtras:$mixin_extras_version"
 
   modImplementation "com.terraformersmc:modmenu:$mod_menu_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+  //DebugUtils
+  modImplementation "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
 }
 
 loom {
