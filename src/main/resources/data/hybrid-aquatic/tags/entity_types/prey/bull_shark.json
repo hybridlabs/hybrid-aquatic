@@ -2,7 +2,6 @@
   "values": [
     "#hybrid-aquatic:small_prey",
     "#hybrid-aquatic:medium_prey",
-    "#hybrid-aquatic:large_prey",
-    "minecraft:player"
+    "#hybrid-aquatic:large_prey"
   ]
 }
