@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.HybridAquatic.MOD_ID
+import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityPose
@@ -26,12 +26,10 @@ import net.minecraft.entity.mob.Angerable
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.util.Identifier
 import net.minecraft.util.TimeHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.intprovider.UniformIntProvider
@@ -110,10 +108,6 @@ open class HybridAquaticSharkEntity(
 
         val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(19, 40)
 
-        val SMALL_PREY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "small_prey"))
-        val MEDIUM_PRAY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "medium_prey"))
-        val LARGE_PREY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "large_prey"))
-
 //        fun canSpawnDeep(
 //                type: EntityType<out WaterCreatureEntity?>?,
 //                world: WorldAccess,
@@ -142,11 +136,9 @@ open class HybridAquaticSharkEntity(
         targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)).setGroupRevenge(*arrayOfNulls(0)))
 
 
-        targetSelector.add(
-            2,
-            ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { entity: LivingEntity? ->
-                shouldAngerAt(entity) || shouldProximityAttack(entity!! as PlayerEntity)
-            })
+        targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) {
+            entity: LivingEntity? -> shouldAngerAt(entity) || shouldProximityAttack(entity!! as PlayerEntity)
+        })
         targetSelector.add(3, UniversalAngerGoal(this, false))
         targetSelector.add(4, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) {
             hunger <= 1200 && it.type.isIn(prey) && (!isCannibalistic && !it.type.equals(this.type))
@@ -346,11 +338,11 @@ open class HybridAquaticSharkEntity(
     //#endregion
 
     private fun getHungerValue(entityType: EntityType<*>): Int {
-        if (entityType.isIn(SMALL_PREY_TAG))
+        if (entityType.isIn(HybridAquaticEntityTags.SMALL_PREY))
             return 600
-        else if (entityType.isIn(MEDIUM_PRAY_TAG))
+        else if (entityType.isIn(HybridAquaticEntityTags.MEDIUM_PREY))
             return 1200
-        else if (entityType.isIn(LARGE_PREY_TAG))
+        else if (entityType.isIn(HybridAquaticEntityTags.LARGE_PREY))
             return 1800
 
         return 0

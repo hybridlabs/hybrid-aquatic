@@ -1,19 +1,15 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.HybridAquatic.MOD_ID
+import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.TagKey
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
 class BullSharkEntity(entityType: EntityType<out BullSharkEntity>, world: World) :
-    HybridAquaticSharkEntity(entityType, world, PREY_TAG, false) {
+    HybridAquaticSharkEntity(entityType, world, HybridAquaticEntityTags.BULL_SHARK_PREY, false) {
     companion object {
-        val PREY_TAG = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(MOD_ID, "prey/bull_shark"))!!
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 60.0)

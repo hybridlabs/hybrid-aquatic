@@ -14,11 +14,12 @@ import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.minecraft.item.BlockItem
 import net.minecraft.registry.Registries
 import net.minecraft.village.TradeOffers.SellItemFactory
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 object HybridAquatic : ModInitializer {
     const val MOD_ID: String = "hybrid-aquatic"
-    private val LOGGER = LoggerFactory.getLogger(MOD_ID)
+    val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
 
     override fun onInitialize() {
         LOGGER.info("Initializing $MOD_ID")
