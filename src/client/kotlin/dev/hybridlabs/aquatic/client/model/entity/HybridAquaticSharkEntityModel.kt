@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.client.model.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
@@ -29,8 +30,9 @@ abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity> (
         animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
+        val deltaTime: Float = MinecraftClient.getInstance().tickDelta
 
         val body = animationProcessor.getBone(EntityModelPartNames.BODY)
-        body.rotX = animatable.pitch * -MathHelper.RADIANS_PER_DEGREE
+        body.rotX = MathHelper.lerp(deltaTime, animatable.prevPitch, animatable.pitch) * -MathHelper.RADIANS_PER_DEGREE
     }
 }
