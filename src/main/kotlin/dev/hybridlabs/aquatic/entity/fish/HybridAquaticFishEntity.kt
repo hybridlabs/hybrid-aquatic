@@ -95,7 +95,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
                     val randomFloat = random.nextFloat()
                     velocity = velocity.add(
                         ((randomFloat * 2.0f - 1.0f) * 0.2f).toDouble(),
-                        0.5,
+                        0.2,
                         ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
                     )
                     yaw = randomFloat * 360.0f

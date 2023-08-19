@@ -42,6 +42,12 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticBlocks.TIGER_SHARK_BLAHAJ_PLUSHIE)
             entries.add(HybridAquaticBlocks.WHALE_SHARK_BLAHAJ_PLUSHIE)
 
+            //food items
+            entries.add(HybridAquaticItems.RAW_FISH_MEAT)
+            entries.add(HybridAquaticItems.COOKED_FISH_MEAT)
+            entries.add(HybridAquaticItems.RAW_TENTACLE)
+            entries.add(HybridAquaticItems.COOKED_TENTACLE)
+
             // spawn eggs
             SpawnEggItem.getAll().forEach { item ->
                 val id = Registries.ITEM.getId(item)

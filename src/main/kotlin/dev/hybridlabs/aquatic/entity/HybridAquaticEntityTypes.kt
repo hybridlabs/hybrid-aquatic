@@ -30,252 +30,252 @@ object HybridAquaticEntityTypes {
     val CLOWNFISH = registerFish(
         "clownfish",
         ::ClownfishEntity,
-        EntityDimensions.fixed(1.0f, 1.0f),
+        EntityDimensions.fixed(0.75f, 0.5f),
         ClownfishEntity.createClownfishAttributes().build()
     )
 
     val ANGLERFISH = registerFish(
         "anglerfish",
         ::HybridAquaticFishEntity,
-        EntityDimensions.fixed(1.0f, 1.0f),
+        EntityDimensions.fixed(0.75f, 0.75f),
         HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val BARRELEYE = registerFish(
             "barreleye",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.8f, 0.8f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val YELLOWFIN_TUNA = registerFish(
             "yellowfin_tuna",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(1.25f, 0.8f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val CUTTLEFISH = registerFish(
             "cuttlefish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(1.0f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val FLASHLIGHT_FISH = registerFish(
             "flashlight_fish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.75f, 0.75f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val LIONFISH = registerFish(
             "lionfish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(0.8f, 1.0f),
+            EntityDimensions.fixed(0.8f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val OARFISH = registerFish(
             "oarfish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(2.0f, 1.0f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val OPAH = registerFish(
             "opah",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.8f, 1.0f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val PIRANHA = registerFish(
             "piranha",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.75f, 0.75f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val SEA_ANGEL = registerFish(
             "sea_angel",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.6f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val SUNFISH = registerFish(
             "sunfish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(1.25f, 2f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val VAMPIRE_SQUID = registerFish(
             "vampire_squid",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.8f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val MAHIMAHI = registerFish(
             "mahimahi",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(1.25f, 0.8f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val MORAY_EEL = registerFish(
             "moray_eel",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.8f, 0.5f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val ROCKFISH = registerFish(
             "rockfish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.8f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val TIGER_BARB = registerFish(
             "tiger_barb",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.75f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val NEEDLEFISH = registerFish(
             "needlefish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.75f, 0.5f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val RATFISH = registerFish(
             "ratfish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.75f, 0.8f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val NAUTILUS = registerFish(
             "nautilus",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.6f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val TRIGGERFISH = registerFish(
             "triggerfish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.75f, 0.75f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val OSCAR = registerFish(
             "oscar",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.75f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val UNICORN_FISH = registerFish(
             "unicorn_fish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.6f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val ZEBRA_DANIO = registerFish(
             "zebra_danio",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.6f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val TOADFISH = registerFish(
             "toadfish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.6f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val TETRA = registerFish(
             "tetra",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.5f, 0.5f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val STONEFISH = registerFish(
             "stonefish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.6f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val BETTA = registerFish(
             "betta",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.5f, 0.5f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val SEAHORSE = registerFish(
             "seahorse",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.5f, 0.7f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val MOON_JELLY = registerFish(
             "moon_jelly",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.5f, 0.5f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val GOURAMI = registerFish(
             "gourami",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.5f, 0.5f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val COWFISH = registerFish(
             "cowfish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.5f, 0.5f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val GLOWING_SUCKER_OCTOPUS = registerFish(
             "glowing_sucker_octopus",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(1.0f, 0.8f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val DISCUS = registerFish(
             "discus",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.6f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val FIREFLY_SQUID = registerFish(
             "firefly_squid",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(1.0f, 0.6f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val DRAGONFISH = registerFish(
             "dragonfish",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(1.0f, 0.5f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
@@ -283,14 +283,14 @@ object HybridAquaticEntityTypes {
     val BLUE_SPOTTED_STINGRAY = registerFish(
             "blue_spotted_stingray",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(1.0f, 0.4f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 
     val BLUE_TANG = registerFish(
             "blue_tang",
             ::HybridAquaticFishEntity,
-            EntityDimensions.fixed(1.0f, 1.0f),
+            EntityDimensions.fixed(0.75f, 0.5f),
             HybridAquaticFishEntity.createGenericAttributes().build()
     )
 

@@ -3,9 +3,11 @@ package dev.hybridlabs.aquatic.data.client
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.BlahajPlushieBlock
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.block.Blocks
+import net.minecraft.data.client.Models
 import net.minecraft.data.client.BlockStateModelGenerator
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.data.client.ModelIds
@@ -53,6 +55,10 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     } }
 
     override fun generateItemModels(generator: ItemModelGenerator) {
+        generator.register(HybridAquaticItems.RAW_FISH_MEAT, Models.GENERATED)
+        generator.register(HybridAquaticItems.COOKED_FISH_MEAT, Models.GENERATED)
+        generator.register(HybridAquaticItems.RAW_TENTACLE, Models.GENERATED)
+        generator.register(HybridAquaticItems.COOKED_TENTACLE, Models.GENERATED)
     }
 
     companion object {

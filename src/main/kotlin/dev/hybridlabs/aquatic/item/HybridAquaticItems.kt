@@ -10,6 +10,7 @@ import net.minecraft.block.Block
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.item.BlockItem
+import net.minecraft.item.FoodComponent
 import net.minecraft.item.Item
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
@@ -19,6 +20,55 @@ import net.minecraft.util.Identifier
 object HybridAquaticItems {
     val ANEMONE = registerBlockItem("anemone", HybridAquaticBlocks.ANEMONE)
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleItem(FabricItemSettings()))
+
+    val COOKED_FISH_MEAT = register("cooked_fish_meat",
+        Item(
+            FabricItemSettings()
+                .food(
+                    FoodComponent.Builder()
+                        .hunger(8)
+                        .saturationModifier(0.8F)
+                        .meat()
+                        .build()
+                )
+        )
+    )
+    val RAW_FISH_MEAT = register("raw_fish_meat",
+        Item(
+            FabricItemSettings()
+                .food(
+                    FoodComponent.Builder()
+                        .hunger(4)
+                        .saturationModifier(0.4F)
+                        .meat()
+                        .build()
+                )
+        )
+    )
+    val COOKED_TENTACLE = register("cooked_tentacle",
+        Item(
+            FabricItemSettings()
+                .food(
+                    FoodComponent.Builder()
+                        .hunger(8)
+                        .saturationModifier(0.8F)
+                        .meat()
+                        .build()
+                )
+        )
+    )
+    val RAW_TENTACLE = register("raw_tentacle",
+        Item(
+            FabricItemSettings()
+                .food(
+                    FoodComponent.Builder()
+                        .hunger(4)
+                        .saturationModifier(0.4F)
+                        .meat()
+                        .build()
+                )
+        )
+    )
 
     val BASKING_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("basking_shark_blahaj_plushie", HybridAquaticBlocks.BASKING_SHARK_BLAHAJ_PLUSHIE)
     val BULL_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("bull_shark_blahaj_plushie", HybridAquaticBlocks.BULL_SHARK_BLAHAJ_PLUSHIE)
