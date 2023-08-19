@@ -8,7 +8,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
 class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, world: World) :
-    HybridAquaticSharkEntity(entityType, world, HybridAquaticEntityTags.GREAT_WHITE_SHARK_PREY, false) {
+    HybridAquaticSharkEntity(entityType, world, HybridAquaticEntityTags.GREAT_WHITE_SHARK_PREY, false, false, true, true, true) {
         companion object {
             fun createMobAttributes(): DefaultAttributeContainer.Builder {
                 return WaterCreatureEntity.createMobAttributes()
