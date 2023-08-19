@@ -55,11 +55,11 @@ open class HybridAquaticSharkEntity(
         entityType: EntityType<out HybridAquaticSharkEntity>,
         world: World,
         private val prey: TagKey<EntityType<*>>,
-        private val isPassive: Boolean,
-        private val isCannibalistic: Boolean,
-        private val attackIfPlayerClose: Boolean,
-        private val attackIfPlayerTookDamage: Boolean,
-        private val attackIfPlayerAttacked: Boolean
+        private val isPassive: Boolean = true,
+        private val isCannibalistic: Boolean = false,
+        private val attackIfPlayerClose: Boolean = false,
+        private val attackIfPlayerTookDamage: Boolean = false,
+        private val attackIfPlayerAttacked: Boolean = false
 ) : WaterCreatureEntity(entityType, world), Angerable, GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var angerTime = 0
