@@ -209,6 +209,8 @@ open class HybridAquaticSharkEntity(
 
     }
 
+    override fun tickWaterBreathingAir(air: Int) {}
+
     override fun travel(movementInput: Vec3d?) {
         super.travel(movementInput)
     }
@@ -228,7 +230,6 @@ open class HybridAquaticSharkEntity(
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-
 
         if (!this.isWet) {
             event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
@@ -320,8 +321,7 @@ open class HybridAquaticSharkEntity(
     }
 
     private fun isPlayerBleeding(player: PlayerEntity): Boolean {
-        val customPlayerEntityData: CustomPlayerEntityData = player as CustomPlayerEntityData
-        return attackIfPlayerTookDamage && player.isTouchingWater && customPlayerEntityData.`hybrid_aquatic$getHurtTime`() > 0
+        return attackIfPlayerTookDamage && (player as CustomPlayerEntityData).`hybrid_aquatic$getHurtTime`() > 0
     }
 
     //#region Angerable Implementation Details
