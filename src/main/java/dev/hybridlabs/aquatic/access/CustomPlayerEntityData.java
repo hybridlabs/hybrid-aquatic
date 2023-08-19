@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.access;
 
 public interface CustomPlayerEntityData {
-  void hybrid_aquatic$setHurtTime(int value);
-  int hybrid_aquatic$getHurtTime();
+  default void hybrid_aquatic$setHurtTime(int value) { }
+  default int hybrid_aquatic$getHurtTime() { return 0; }
 }
