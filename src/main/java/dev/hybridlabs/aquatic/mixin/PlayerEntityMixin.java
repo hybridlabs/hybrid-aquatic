@@ -1,18 +1,29 @@
 package dev.hybridlabs.aquatic.mixin;
 
+import dev.hybridlabs.aquatic.HybridAquatic;
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
+import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.util.TypeFilter;
+import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.List;
 
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin implements CustomPlayerEntityData {
@@ -52,7 +63,12 @@ public class PlayerEntityMixin implements CustomPlayerEntityData {
     ordinal = 0,
     shift = At.Shift.BEFORE))
   private void setCustomHurtTimeOnDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-    hybrid_aquatic$setHurtTime(200);
+    PlayerEntity object = ((PlayerEntity) (Object) this);
+    
+    if(object.isTouchingWater()) {
+      LivingEntity foundEntity = object.getWorld().getClosestEntity(HybridAquaticSharkEntity.class, TargetPredicate.createNonAttackable().setBaseMaxDistance(16).setPredicate(Entity::isSubmergedInWater), object, object.getX(), object.getEyeY(), object.getZ(), object.getBoundingBox().expand(16));
+      if(foundEntity != null) hybrid_aquatic$setHurtTime(200);
+    }
   }
   
   @Inject(method = "tick", at = @At("TAIL"))
