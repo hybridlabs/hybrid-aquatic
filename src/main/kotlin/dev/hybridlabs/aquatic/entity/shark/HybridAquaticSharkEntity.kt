@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData
+import dev.hybridlabs.aquatic.entity.shark.behaviour.SharkBehaviour
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityDimensions
@@ -55,11 +56,7 @@ open class HybridAquaticSharkEntity(
         entityType: EntityType<out HybridAquaticSharkEntity>,
         world: World,
         private val prey: TagKey<EntityType<*>>,
-        private val isPassive: Boolean = true,
-        private val isCannibalistic: Boolean = false,
-        private val attackIfPlayerClose: Boolean = false,
-        private val attackIfPlayerTookDamage: Boolean = false,
-        private val attackIfPlayerAttacked: Boolean = false
+        private val sharkBehaviour: SharkBehaviour
 ) : WaterCreatureEntity(entityType, world), Angerable, GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var angerTime = 0
@@ -137,14 +134,14 @@ open class HybridAquaticSharkEntity(
 //        goalSelector.add(4, WanderAroundGoal(this, 1.0))
         goalSelector.add(4, LookAroundGoal(this))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
-        if(!isPassive) {
-            if (attackIfPlayerAttacked) targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)).setGroupRevenge(*arrayOfNulls(0)))
+        if(!sharkBehaviour.isPassive) {
+            if (sharkBehaviour.attackIfPlayerAttacked) targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)).setGroupRevenge(*arrayOfNulls(0)))
             targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { entity: LivingEntity ->
                 shouldAngerAt(entity) || shouldProximityAttack(entity as PlayerEntity) || isPlayerBleeding(entity)
             })
             targetSelector.add(3, UniversalAngerGoal(this, false))
             targetSelector.add(4, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) {
-                hunger <= 1200 && it.type.isIn(prey) && (!isCannibalistic && !it.type.equals(this.type))
+                hunger <= 1200 && it.type.isIn(prey) && (!sharkBehaviour.isCannibalistic && !it.type.equals(this.type))
             })
         }
 //        targetSelector.add(
@@ -317,11 +314,11 @@ open class HybridAquaticSharkEntity(
         if (this.hasCustomName() && this.customName!!.string.equals("friend"))
             return false
 
-        return attackIfPlayerClose && player.squaredDistanceTo(this) <= 5 && !player.isCreative
+        return sharkBehaviour.attackIfPlayerClose && player.squaredDistanceTo(this) <= 5 && !player.isCreative
     }
 
     private fun isPlayerBleeding(player: PlayerEntity): Boolean {
-        return attackIfPlayerTookDamage && (player as CustomPlayerEntityData).`hybrid_aquatic$getHurtTime`() > 0
+        return sharkBehaviour.attackIfPlayerTookDamage && (player as CustomPlayerEntityData).`hybrid_aquatic$getHurtTime`() > 0
     }
 
     //#region Angerable Implementation Details
