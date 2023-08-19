@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.mixin;
 
-import dev.hybridlabs.aquatic.HybridAquatic;
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity;
 import net.minecraft.entity.Entity;
@@ -12,18 +11,13 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.util.TypeFilter;
-import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.List;
 
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin implements CustomPlayerEntityData {
