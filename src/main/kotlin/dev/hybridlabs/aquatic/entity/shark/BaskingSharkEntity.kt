@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.entity.shark.behaviour.PassiveSharkBehaviour
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -9,7 +8,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
 class BaskingSharkEntity(entityType: EntityType<out BaskingSharkEntity>, world: World) :
-    HybridAquaticSharkEntity(entityType, world, HybridAquaticEntityTags.BASKING_SHARK_PREY, PassiveSharkBehaviour()) {
+    HybridAquaticSharkEntity(entityType, world, HybridAquaticEntityTags.BASKING_SHARK_PREY, true, false, false, false, false) {
         companion object {
             fun createMobAttributes(): DefaultAttributeContainer.Builder {
                 return WaterCreatureEntity.createMobAttributes()
