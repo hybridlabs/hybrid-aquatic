@@ -136,7 +136,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             return PlayState.CONTINUE
         }
 
-        if (event.isMoving && !isSubmergedInWater) {
+        if (!isSubmergedInWater) {
             event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
