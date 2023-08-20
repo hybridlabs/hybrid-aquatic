@@ -123,13 +123,7 @@ open class HybridAquaticSharkEntity(
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            return pos.y <= world.seaLevel - 25 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(
-                type,
-                world,
-                reason,
-                pos,
-                random
-            )
+            return pos.y <= world.seaLevel - 10 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random)
         }
 
     }
