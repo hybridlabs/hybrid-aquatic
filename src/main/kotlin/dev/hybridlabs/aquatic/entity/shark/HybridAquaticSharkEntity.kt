@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityPose
@@ -32,11 +33,14 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.TimeHelper
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.intprovider.UniformIntProvider
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
+import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -112,21 +116,21 @@ open class HybridAquaticSharkEntity(
 
         val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(19, 40)
 
-//        fun canSpawnDeep(
-//                type: EntityType<out WaterCreatureEntity?>?,
-//                world: WorldAccess,
-//                reason: SpawnReason?,
-//                pos: BlockPos,
-//                random: Random?
-//        ): Boolean {
-//            return pos.y <= world.seaLevel - 25 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(
-//                    type,
-//                    world,
-//                    reason,
-//                    pos,
-//                    random
-//            )
-//        }
+        fun canSpawnPredicate(
+            type: EntityType<out WaterCreatureEntity?>?,
+            world: WorldAccess,
+            reason: SpawnReason?,
+            pos: BlockPos,
+            random: Random?
+        ): Boolean {
+            return pos.y <= world.seaLevel - 25 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(
+                type,
+                world,
+                reason,
+                pos,
+                random
+            )
+        }
 
     }
 

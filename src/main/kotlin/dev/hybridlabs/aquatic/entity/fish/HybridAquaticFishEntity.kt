@@ -289,13 +289,6 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
                 random
             )
         }
-
-        fun createGenericAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes()
-                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 5.0)
-                    .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.8)
-        }
-
         const val MOISTNESS_KEY = "Moistness"
     }
 }
