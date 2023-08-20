@@ -120,6 +120,8 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         }
     }
 
+    override fun tickWaterBreathingAir(air: Int) {}
+
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         nbt.putInt(MOISTNESS_KEY, moistness)
