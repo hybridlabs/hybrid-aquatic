@@ -5,20 +5,8 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
 class DiscusEntity(entityType: EntityType<out DiscusEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        return if (event.isMoving && !this.isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-            PlayState.CONTINUE
-        } else PlayState.STOP
-
-    }
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
