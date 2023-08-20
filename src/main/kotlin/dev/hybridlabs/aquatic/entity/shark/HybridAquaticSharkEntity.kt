@@ -183,8 +183,8 @@ open class HybridAquaticSharkEntity(
         if (!world.isClient) {
             this.tickAngerLogic(world as ServerWorld, false)
 
-            if(rushTargetPosition != null) {
-                val velocityMod = rushTargetPosition!!.subtract(pos).normalize().multiply(3.0)
+            rushTargetPosition?.let { targetPos ->
+                val velocityMod = targetPos.subtract(pos).normalize().multiply(3.0)
                 println(velocityMod)
                 this.pos.add(velocityMod)
             }
@@ -314,7 +314,7 @@ open class HybridAquaticSharkEntity(
     }
 
     private fun shouldProximityAttack(player: PlayerEntity): Boolean {
-        if (this.hasCustomName() && this.customName!!.string.equals("friend"))
+        if (customName?.string == "friend")
             return false
 
         return closePlayerAttack && player.squaredDistanceTo(this) <= 5 && !player.isCreative

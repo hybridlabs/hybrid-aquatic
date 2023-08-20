@@ -7,12 +7,11 @@ import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.util.math.Vec3d
 import java.util.EnumSet
 
-public class SharkSwimGoal (
+open class SharkSwimGoal (
     protected val mob: PathAwareEntity,
     protected val speed: Double,
     private val canDespawn: Boolean
-) :
-    Goal() {
+) : Goal() {
     protected var targetX = 0.0
     protected var targetY = 0.0
     protected var targetZ = 0.0
@@ -36,7 +35,7 @@ public class SharkSwimGoal (
     }
 
     protected open val wanderTarget: Vec3d?
-        protected get() = LookTargetUtil.find(this.mob, 10, 10)
+        get() = LookTargetUtil.find(this.mob, 10, 10)
 
     override fun shouldContinue(): Boolean {
         return !mob.navigation.isFollowingPath && !mob.hasPassengers()
@@ -51,29 +50,30 @@ public class SharkSwimGoal (
     }
 
     override fun tick() {
-//        println(mob.navigation.currentPath!!.isFinished)
+//        println(mob.navigation.currentPath?.isFinished == true)
         if(currentTarget == null) {
 
 
             var foundPath = false
             var path: Path? = null
-            var retries: Int = 0
+            var retries = 0
             while(!foundPath && retries < 10) {
                 currentTarget = wanderTarget
-                if(currentTarget == null)
-                    continue
-                path = mob.navigation.findPathTo(currentTarget!!.x, currentTarget!!.y, currentTarget!!.z, 3)
-                if(path != null) {
-                    foundPath = true
-                    println(path!!.length)
-                    println(path!!.isFinished)
+                currentTarget?.let { targetPos ->
+                    path = mob.navigation.findPathTo(targetPos.x, targetPos.y, targetPos.z, 3)
+                    path?.let { path ->
+                        foundPath = true
+                        println(path.length)
+                        println(path.isFinished)
+                    }
+                    retries++
                 }
-                retries++
             }
             println(mob.navigation.startMovingAlong(path, 1.0))
-            if(path != null)
-                println(path!!.target)
-//            System.out.printf("Current Pos: %s%nCurrent Target: %s%nPathing Result: %s%n", mob.pos, currentTarget, result)
+            path?.let { finalPath ->
+                println(finalPath.target)
+                // System.out.printf("Current Pos: %s%nCurrent Target: %s%nPathing Result: %s%n", mob.pos, currentTarget, result)
+            }
         }
     }
 
