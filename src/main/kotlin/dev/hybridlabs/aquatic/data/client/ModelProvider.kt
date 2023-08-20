@@ -7,11 +7,7 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.block.Blocks
-import net.minecraft.data.client.Models
-import net.minecraft.data.client.BlockStateModelGenerator
-import net.minecraft.data.client.ItemModelGenerator
-import net.minecraft.data.client.ModelIds
-import net.minecraft.data.client.TextureMap
+import net.minecraft.data.client.*
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
@@ -55,6 +51,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     } }
 
     override fun generateItemModels(generator: ItemModelGenerator) {
+        generator.register(HybridAquaticItems.CRAB_CLAW, Models.GENERATED)
+        generator.register(HybridAquaticItems.RAW_CRAB_MEAT, Models.GENERATED)
+        generator.register(HybridAquaticItems.COOKED_CRAB_MEAT, Models.GENERATED)
         generator.register(HybridAquaticItems.RAW_FISH_MEAT, Models.GENERATED)
         generator.register(HybridAquaticItems.COOKED_FISH_MEAT, Models.GENERATED)
         generator.register(HybridAquaticItems.RAW_TENTACLE, Models.GENERATED)

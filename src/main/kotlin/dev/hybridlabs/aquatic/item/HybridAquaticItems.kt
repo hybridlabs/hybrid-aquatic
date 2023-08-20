@@ -23,8 +23,12 @@ object HybridAquaticItems {
 
     val GLOW_SLIME = register("glow_slime", Item(FabricItemSettings()))
     val SHARK_TOOTH = register("shark_tooth", Item(FabricItemSettings()))
+
+    // pearls
     val PEARL = register("pearl", Item(FabricItemSettings()))
     val BLACK_PEARL = register("black_pearl", Item(FabricItemSettings()))
+
+    // starfish
     val RED_STARFISH = register("red_starfish", Item(FabricItemSettings()))
     val YELLOW_STARFISH = register("yellow_starfish", Item(FabricItemSettings()))
     val PURPLE_STARFISH = register("purple_starfish", Item(FabricItemSettings()))
@@ -32,7 +36,33 @@ object HybridAquaticItems {
     val GREEN_STARFISH = register("green_starfish", Item(FabricItemSettings()))
     val WHITE_STARFISH = register("white_starfish", Item(FabricItemSettings()))
     val BLACK_STARFISH = register("black_starfish", Item(FabricItemSettings()))
+    val CRAB_CLAW = register("crab_claw", Item(FabricItemSettings()))
 
+    // food items
+    val COOKED_CRAB_MEAT = register("cooked_crab_meat",
+        Item(
+            FabricItemSettings()
+                .food(
+                    FoodComponent.Builder()
+                        .hunger(6)
+                        .saturationModifier(0.8F)
+                        .meat()
+                        .build()
+                )
+        )
+    )
+    val RAW_CRAB_MEAT = register("raw_crab_meat",
+        Item(
+            FabricItemSettings()
+                .food(
+                    FoodComponent.Builder()
+                        .hunger(2)
+                        .saturationModifier(0.8F)
+                        .meat()
+                        .build()
+                )
+        )
+    )
     val COOKED_FISH_MEAT = register("cooked_fish_meat",
         Item(
             FabricItemSettings()
@@ -62,7 +92,7 @@ object HybridAquaticItems {
             FabricItemSettings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(8)
+                        .hunger(4)
                         .saturationModifier(0.8F)
                         .meat()
                         .build()
@@ -74,7 +104,7 @@ object HybridAquaticItems {
             FabricItemSettings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(4)
+                        .hunger(2)
                         .saturationModifier(0.4F)
                         .meat()
                         .build()
@@ -82,6 +112,7 @@ object HybridAquaticItems {
         )
     )
 
+    // plushies
     val BASKING_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("basking_shark_blahaj_plushie", HybridAquaticBlocks.BASKING_SHARK_BLAHAJ_PLUSHIE)
     val BULL_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("bull_shark_blahaj_plushie", HybridAquaticBlocks.BULL_SHARK_BLAHAJ_PLUSHIE)
     val FRILLED_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("frilled_shark_blahaj_plushie", HybridAquaticBlocks.FRILLED_SHARK_BLAHAJ_PLUSHIE)
@@ -91,6 +122,7 @@ object HybridAquaticItems {
     val TIGER_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("tiger_shark_blahaj_plushie", HybridAquaticBlocks.TIGER_SHARK_BLAHAJ_PLUSHIE)
     val WHALE_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("whale_shark_blahaj_plushie", HybridAquaticBlocks.WHALE_SHARK_BLAHAJ_PLUSHIE)
 
+    // fish spawn eggs
     val CLOWNFISH_SPAWN_EGG = registerSpawnEgg("clownfish_spawn_egg", HybridAquaticEntityTypes.CLOWNFISH, 0xff5000, 0xffffff)
     val ANGLERFISH_SPAWN_EGG = registerSpawnEgg("anglerfish_spawn_egg", HybridAquaticEntityTypes.ANGLERFISH, 0x4d4848, 0xc4faff)
     val BARRELEYE_SPAWN_EGG = registerSpawnEgg("barreleye_spawn_egg", HybridAquaticEntityTypes.BARRELEYE, 0x543d34, 0x95f649)
@@ -128,6 +160,11 @@ object HybridAquaticItems {
     val FIREFLY_SQUID_SPAWN_EGG = registerSpawnEgg("firefly_squid_spawn_egg", HybridAquaticEntityTypes.FIREFLY_SQUID, 0x9793b3, 0xa7cfec)
     val BLUE_SPOTTED_STINGRAY_SPAWN_EGG = registerSpawnEgg("blue_spotted_stingray_spawn_egg", HybridAquaticEntityTypes.BLUE_SPOTTED_STINGRAY, 0xffc825, 0x0098dc)
     val BLUE_TANG_SPAWN_EGG = registerSpawnEgg("blue_tang_spawn_egg", HybridAquaticEntityTypes.BLUE_TANG, 0x00cdf9, 0xffa214)
+
+    // critter spawn eggs
+    val CRAB_SPAWN_EGG = registerSpawnEgg("crab_spawn_egg", HybridAquaticEntityTypes.CRAB, 0x00cdf9, 0xffa214)
+
+    // shark spawn eggs
     val BULL_SHARK_SPAWN_EGG = registerSpawnEgg("bull_shark_spawn_egg", HybridAquaticEntityTypes.BULL_SHARK, 0, 0)
     val BASKING_SHARK_SPAWN_EGG = registerSpawnEgg("basking_shark_spawn_egg", HybridAquaticEntityTypes.BASKING_SHARK, 0, 0)
     val THRESHER_SHARK_SPAWN_EGG = registerSpawnEgg("thresher_shark_spawn_egg", HybridAquaticEntityTypes.THRESHER_SHARK, 0, 0)

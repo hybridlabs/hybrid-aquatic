@@ -1,24 +1,13 @@
 package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.entity.critter.*
 import dev.hybridlabs.aquatic.entity.fish.*
-import dev.hybridlabs.aquatic.entity.shark.BaskingSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.BullSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.FrilledSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.GreatWhiteSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.HammerheadSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.ThresherSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.TigerSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.WhaleSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.*
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityType
+import net.minecraft.entity.*
 import net.minecraft.entity.EntityType.EntityFactory
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.SpawnGroup
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -295,6 +284,33 @@ object HybridAquaticEntityTypes {
 
     //endregion
 
+    //region critters
+    val CRAB = registerCritter(
+        "crab",
+        ::CrabEntity,
+        EntityDimensions.fixed(0.5f, 0.75f),
+        CrabEntity.createMobAttributes().build()
+    )
+    val FIDDLER_CRAB = registerCritter(
+        "fiddler_crab",
+        ::FiddlerCrabEntity,
+        EntityDimensions.fixed(0.5f, 0.75f),
+        FiddlerCrabEntity.createMobAttributes().build()
+    )
+    val HERMIT_CRAB = registerCritter(
+        "hermit_crab",
+        ::HermitCrabEntity,
+        EntityDimensions.fixed(0.5f, 0.75f),
+        HermitCrabEntity.createMobAttributes().build()
+    )
+    val STARFISH = registerCritter(
+        "starfish",
+        ::StarfishEntity,
+        EntityDimensions.fixed(0.5f, 0.75f),
+        StarfishEntity.createMobAttributes().build()
+    )
+    //endregion
+
     //region sharks
     val BULL_SHARK = registerShark(
         "bull_shark",
@@ -364,6 +380,15 @@ object HybridAquaticEntityTypes {
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
         return registerLiving(id, FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, entityFactory).dimensions(dimensions).build(), attributeContainer)
+    }
+
+    private inline fun <reified T : HybridAquaticCritterEntity> registerCritter(
+        id: String,
+        entityFactory: EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: DefaultAttributeContainer
+    ): EntityType<T> {
+        return registerLiving(id, FabricEntityTypeBuilder.create(SpawnGroup.WATER_AMBIENT, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
     private inline fun <reified T : HybridAquaticFishEntity> registerFish(

@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.tag
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.entity.fish.LionfishEntity
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
@@ -24,6 +23,7 @@ object HybridAquaticBiomeTags {
     val TOADFISH_SPAWN_BIOMES = create("toadfish_spawn_biomes")
     val STONEFISH_SPAWN_BIOMES = create("stonefish_spawn_biomes")
     val SEA_ANGEL_SPAWN_BIOMES = create("sea_angel_spawn_biomes")
+    val DRAGONFISH_SPAWN_BIOMES = create("dragonfish_spawn_biomes")
     val UNICORN_FISH_SPAWN_BIOMES = create("unicorn_fish_spawn_biomes")
     val ROCKFISH_SPAWN_BIOMES = create("rockfish_spawn_biomes")
     val MORAY_EEL_SPAWN_BIOMES = create("moray_eel_spawn_biomes")
@@ -40,6 +40,9 @@ object HybridAquaticBiomeTags {
     val GOURAMI_SPAWN_BIOMES = create("gourami_spawn_biomes")
     val PIRANHA_SPAWN_BIOMES = create("piranha_spawn_biomes")
     val DISCUS_SPAWN_BIOMES = create("discus_spawn_biomes")
+    val TETRA_SPAWN_BIOMES = create("tetra_spawn_biomes")
+    val NAUTILUS_SPAWN_BIOMES = create("nautilus_spawn_biomes")
+    val NEEDLEFISH_SPAWN_BIOMES = create("needlefish_spawn_biomes")
     val GREAT_WHITE_SHARK_SPAWN_BIOMES = create("great_white_shark_spawn_biomes")
     val TIGER_SHARK_SPAWN_BIOMES = create("tiger_shark_spawn_biomes")
     val HAMMERHEAD_SHARK_SPAWN_BIOMES = create("hammerhead_shark_spawn_biomes")
@@ -48,6 +51,10 @@ object HybridAquaticBiomeTags {
     val BULL_SHARK_SPAWN_BIOMES = create("bull_shark_spawn_biomes")
     val WHALE_SHARK_SPAWN_BIOMES = create("whale_shark_spawn_biomes")
     val BASKING_SHARK_SPAWN_BIOMES = create("basking_shark_spawn_biomes")
+    val CRAB_SPAWN_BIOMES = create("crab_spawn_biomes")
+    val FIDDLER_CRAB_SPAWN_BIOMES = create("fiddler_crab_spawn_biomes")
+    val HERMIT_CRAB_SPAWN_BIOMES = create("hermit_crab_spawn_biomes")
+    val STARFISH_SPAWN_BIOMES = create("starfish_spawn_biomes")
 
     private fun create(id: String): TagKey<Biome> {
         return TagKey.of(RegistryKeys.BIOME, Identifier(HybridAquatic.MOD_ID, id))

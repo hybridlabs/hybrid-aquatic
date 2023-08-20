@@ -47,8 +47,11 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.COOKED_FISH_MEAT)
             entries.add(HybridAquaticItems.RAW_TENTACLE)
             entries.add(HybridAquaticItems.COOKED_TENTACLE)
+            entries.add(HybridAquaticItems.RAW_CRAB_MEAT)
+            entries.add(HybridAquaticItems.COOKED_CRAB_MEAT)
 
             // miscellaneous items
+            entries.add(HybridAquaticItems.CRAB_CLAW)
             entries.add(HybridAquaticItems.GLOW_SLIME)
             entries.add(HybridAquaticItems.SHARK_TOOTH)
             entries.add(HybridAquaticItems.PEARL)

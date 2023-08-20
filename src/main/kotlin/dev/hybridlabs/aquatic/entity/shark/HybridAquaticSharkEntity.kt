@@ -3,21 +3,10 @@ package dev.hybridlabs.aquatic.entity.shark
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.block.Blocks
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityPose
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.ActiveTargetGoal
-import net.minecraft.entity.ai.goal.LookAroundGoal
-import net.minecraft.entity.ai.goal.LookAtEntityGoal
-import net.minecraft.entity.ai.goal.MeleeAttackGoal
-import net.minecraft.entity.ai.goal.RevengeGoal
-import net.minecraft.entity.ai.goal.SwimAroundGoal
-import net.minecraft.entity.ai.goal.UniversalAngerGoal
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.damage.DamageSource
@@ -44,14 +33,11 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.*
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.UUID
+import java.util.*
 
 
 @Suppress("LeakingThis")
@@ -236,7 +222,7 @@ open class HybridAquaticSharkEntity(
             event.controller.setAnimation(RawAnimation.begin().then("attack", Animation.LoopType.LOOP))
 //            this.attemptAttack = false
         }
-        else if (event.isMoving) {
+        else if (isSubmergedInWater) {
             if (!isRushing)
                 event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
             else
@@ -257,8 +243,6 @@ open class HybridAquaticSharkEntity(
         return 8
     }
 
-    open val flopSound: SoundEvent = SoundEvents.ENTITY_PUFFER_FISH_FLOP
-
     //#region SFX
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_COD_HURT
@@ -269,7 +253,7 @@ open class HybridAquaticSharkEntity(
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_SALMON_AMBIENT
+        return SoundEvents.ENTITY_COD_AMBIENT
     }
 
     override fun getSplashSound(): SoundEvent {
