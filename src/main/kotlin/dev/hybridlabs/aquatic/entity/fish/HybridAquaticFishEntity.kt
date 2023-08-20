@@ -142,8 +142,13 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (event.isMoving) {
+        if (isSubmergedInWater) {
             event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
+            return PlayState.CONTINUE
+        }
+
+        if (!isSubmergedInWater) {
+            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
         return PlayState.STOP

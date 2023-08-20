@@ -64,6 +64,80 @@
 				}
 			}
 		},
+		"flop": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"head": {
+					"rotation": {
+						"0.0": {
+							"vector": [-2.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [2.5, 0, 0]
+						},
+						"1.0": {
+							"vector": [-2.5, 0, 0]
+						}
+					}
+				},
+				"tentacles": {
+					"rotation": {
+						"vector": [-22.5, 0, 0]
+					}
+				},
+				"tentacles2": {
+					"rotation": {
+						"0.0": {
+							"vector": [-5, 0, 0]
+						},
+						"0.5": {
+							"vector": [5, 0, 0]
+						},
+						"1.0": {
+							"vector": [-5, 0, 0]
+						}
+					}
+				},
+				"body": {
+					"rotation": {
+						"0.0": {
+							"vector": [-180, 177.5, 90]
+						},
+						"0.5": {
+							"vector": [-180, 177.5, 90]
+						},
+						"1.0": {
+							"vector": [-180, 177.5, 90]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, -2, 0]
+						},
+						"0.5": {
+							"vector": [0, -2, 0]
+						},
+						"1.0": {
+							"vector": [0, -2, 0]
+						}
+					}
+				},
+				"siphon": {
+					"scale": {
+						"0.0": {
+							"vector": [1.2, 1.2, 1.1]
+						},
+						"0.5": {
+							"vector": [1, 1, 1]
+						},
+						"1.0": {
+							"vector": [1.2, 1.2, 1.1]
+						}
+					}
+				}
+			}
+		},
 		"idle": {
 			"loop": true,
 			"animation_length": 2,

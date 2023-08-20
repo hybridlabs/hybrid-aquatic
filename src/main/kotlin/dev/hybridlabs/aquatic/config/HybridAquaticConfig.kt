@@ -71,7 +71,7 @@ object HybridAquaticConfig : MidnightConfig() {
     var MOONJELLY_SPAWN_WEIGHT = 50
 
     @Entry
-    var YELLOWFIN_HEALTH = 15
+    var YELLOWFIN_HEALTH = 24
 
     @Entry
     var YELLOWFIN_SPEED = 1.8

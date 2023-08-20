@@ -21,6 +21,16 @@ object HybridAquaticEntityTags {
     val MEDIUM_PREY = create("medium_prey")!!
     val SMALL_PREY = create("small_prey")!!
 
+    val DEEP_SEA_FISH = create("deep_sea_fish")!!
+    val REEF_FISH = create("reef_fish")!!
+    val RIVER_FISH = create("river_fish")!!
+    val SWAMP_FISH = create("swamp_fish")!!
+    val SALTWATER_FISH = create("saltwater_fish")!!
+    val FRESHWATER_FISH = create("freshwater_fish")!!
+    val SHALLOWS_FISH = create("shallows_fish")!!
+    val OPEN_OCEAN_FISH = create("open_ocean_fish")!!
+    val CRITTER = create("critter")!!
+
     private fun create(id: String): TagKey<EntityType<*>>? {
         return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id))
     }
