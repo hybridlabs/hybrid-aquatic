@@ -8,6 +8,8 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.registry.HybridAquaticSpawningRegistry
+import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
@@ -27,7 +29,11 @@ object HybridAquatic : ModInitializer {
         HybridAquaticBlocks
         HybridAquaticBlockEntityTypes
 
+        HybridAquaticBiomeTags
+
         HybridAquaticEntityTypes
+
+        HybridAquaticSpawningRegistry.register()
 
         HybridAquaticItems
         HybridAquaticItemGroups

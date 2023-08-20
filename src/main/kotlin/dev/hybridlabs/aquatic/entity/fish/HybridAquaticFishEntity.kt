@@ -283,14 +283,14 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 
-        fun canSpawnDeep(
+        fun canSpawnPredicate(
             type: EntityType<out WaterCreatureEntity?>?,
             world: WorldAccess,
             reason: SpawnReason?,
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            return pos.y <= world.seaLevel - 25 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(
+            return pos.y <= world.seaLevel - 10 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(
                 type,
                 world,
                 reason,

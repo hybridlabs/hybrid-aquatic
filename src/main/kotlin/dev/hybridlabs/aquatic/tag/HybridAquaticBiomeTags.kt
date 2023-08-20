@@ -6,7 +6,9 @@ import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
 import net.minecraft.world.biome.Biome
 
-class HybridAquaticBiomeTags {
+object HybridAquaticBiomeTags {
+
+    val CLOWNFISH_SPAWN_BIOMES = create("clownfish_spawn_biomes")
 
     private fun create(id: String): TagKey<Biome> {
         return TagKey.of(RegistryKeys.BIOME, Identifier(HybridAquatic.MOD_ID, id))
