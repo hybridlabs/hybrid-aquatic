@@ -13,7 +13,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.3)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
 

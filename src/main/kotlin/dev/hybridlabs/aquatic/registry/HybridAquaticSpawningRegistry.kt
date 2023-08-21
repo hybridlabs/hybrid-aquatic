@@ -90,10 +90,10 @@ object HybridAquaticSpawningRegistry {
     private inline fun <reified T : HybridAquaticCritterEntity> createCritterSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int, ) {
         BiomeModifications.addSpawn({
                 ctx: BiomeSelectionContext -> ctx.hasTag(spawnTag)
-        }, SpawnGroup.WATER_CREATURE, entityType, weight, minGroup, maxGroup)
+        }, SpawnGroup.WATER_AMBIENT, entityType, weight, minGroup, maxGroup)
 
         SpawnRestriction.register(
-            entityType, SpawnRestriction.Location.IN_WATER,
+            entityType, SpawnRestriction.Location.NO_RESTRICTIONS,
             Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HybridAquaticSharkEntity::canSpawnPredicate
         )
     }

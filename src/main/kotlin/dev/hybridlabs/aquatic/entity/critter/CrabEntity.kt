@@ -13,13 +13,11 @@ class CrabEntity(entityType: EntityType<out CrabEntity>, world: World) :
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.3)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.8)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
-
         }
     }
-
     override fun getGroup(): EntityGroup? {
         return EntityGroup.ARTHROPOD
     }

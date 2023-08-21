@@ -3,7 +3,11 @@ package dev.hybridlabs.aquatic.entity.fish
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.world.World
 
 class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
@@ -16,5 +20,13 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
 
         }
+    }
+    override fun onPlayerCollision(player: PlayerEntity) {
+        val i = 1
+        if (player is ServerPlayerEntity && player.damage(this.damageSources.mobAttack(this),
+                (1 + i).toFloat()
+            )
+        )
+            player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 20, 1), this)
     }
 }

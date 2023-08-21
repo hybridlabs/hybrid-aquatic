@@ -2,8 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:jungle",
-    "minecraft:sparse_jungle",
-    "terralith:tropical_jungle",
-    "terralith:warm_river"
+    "minecraft:sparse_jungle"
   ]
 }

@@ -8,7 +8,6 @@ import net.minecraft.entity.ai.control.YawAdjustingLookControl
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.SwimNavigation
-import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
@@ -52,7 +51,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, 2400)
+        dataTracker.startTracking(MOISTNESS, 600)
     }
 
     override fun initialize(

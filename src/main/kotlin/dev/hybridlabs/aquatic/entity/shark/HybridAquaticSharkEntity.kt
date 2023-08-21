@@ -14,6 +14,7 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.Angerable
+import net.minecraft.entity.mob.GuardianEntity
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
@@ -130,6 +131,7 @@ open class HybridAquaticSharkEntity(
             targetSelector.add(4, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) {
                 hunger <= 1200 && it.type.isIn(prey) && (!isCannibalistic && !it.type.equals(this.type))
             })
+            goalSelector.add(9, FleeEntityGoal(this, GuardianEntity::class.java, 10.0f, 1.0, 1.3))
         }
 //        targetSelector.add(
 //            4,
@@ -141,7 +143,7 @@ open class HybridAquaticSharkEntity(
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, 2400)
+        dataTracker.startTracking(MOISTNESS, 1200)
         dataTracker.startTracking(HUNGER, MAX_HUNGER)
         dataTracker.startTracking(RUSHING, false)
         dataTracker.startTracking(ATTEMPT_ATTACK, false)
