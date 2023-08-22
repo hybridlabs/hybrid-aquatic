@@ -37,7 +37,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import kotlin.math.sqrt
 
 @Suppress("LeakingThis")
-open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: World) : WaterCreatureEntity(type, world), GeoEntity {
+open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: World, private val variantCount: Int = 1) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun initGoals() {
@@ -52,6 +52,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     override fun initDataTracker() {
         super.initDataTracker()
         dataTracker.startTracking(MOISTNESS, 600)
+        dataTracker.startTracking(VARIANT, 0)
     }
 
     override fun initialize(
@@ -62,7 +63,8 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         entityNbt: NbtCompound?
     ): EntityData? {
         this.air = this.maxAir
-        pitch = 0.0f
+        this.variant = this.random.nextInt(variantCount)
+        this.pitch = 0.0f
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
@@ -124,11 +126,13 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         nbt.putInt(MOISTNESS_KEY, moistness)
+        nbt.putInt(VARIANT_KEY, variant)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
+        variant = nbt.getInt(VARIANT_KEY)
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
@@ -182,6 +186,12 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         get() = dataTracker.get(MOISTNESS)
         set(moistness) {
             dataTracker.set(MOISTNESS, moistness)
+        }
+
+    var variant: Int
+        get() = dataTracker.get(VARIANT)
+        set(int) {
+            dataTracker.set(VARIANT, int)
         }
 
     override fun getMaxAir(): Int {
@@ -267,6 +277,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
 
     companion object {
         val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 
         fun canSpawnPredicate(
@@ -280,5 +291,6 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             )
         }
         const val MOISTNESS_KEY = "Moistness"
+        const val VARIANT_KEY = "Variant"
     }
 }
