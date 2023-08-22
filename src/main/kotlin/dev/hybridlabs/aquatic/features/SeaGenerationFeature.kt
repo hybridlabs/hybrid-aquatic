@@ -14,9 +14,7 @@ import net.minecraft.world.StructureWorldAccess
 import net.minecraft.world.gen.feature.Feature
 import net.minecraft.world.gen.feature.util.FeatureContext
 
-class SeaGenerationFeature(configCodec: Codec<SeaGenerationFeatureConfig>?) : Feature<SeaGenerationFeatureConfig>(
-    configCodec
-) {
+class SeaGenerationFeature(configCodec: Codec<SeaGenerationFeatureConfig>?) : Feature<SeaGenerationFeatureConfig>(configCodec) {
     override fun generate(context: FeatureContext<SeaGenerationFeatureConfig>?): Boolean {
         if(context == null) return false
 
@@ -25,11 +23,11 @@ class SeaGenerationFeature(configCodec: Codec<SeaGenerationFeatureConfig>?) : Fe
         val random: Random = context.random
         val config: SeaGenerationFeatureConfig = context.config
 
-        val number: Int = config.getNumber()
-        val blockId: Identifier = config.getBlockId()
+        val number: Int = config.number
+        val blockId: Identifier = config.blockId
         val blockState: BlockState? = Registries.BLOCK.get(blockId).defaultState
 
-        val generateOn: TagKey<Block> = config.getGenerateOn()
+        val generateOn: TagKey<Block> = config.generateOn
 
         if(blockState == null) {
             val e: IllegalStateException = IllegalStateException(String.format("%s could not be parsed to a valid block identifier!", blockId))
