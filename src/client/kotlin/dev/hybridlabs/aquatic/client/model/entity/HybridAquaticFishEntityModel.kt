@@ -14,6 +14,10 @@ abstract class HybridAquaticFishEntityModel<T: HybridAquaticFishEntity> (private
         return Identifier(HybridAquatic.MOD_ID, "textures/entity/$id.png")
     }
 
+    fun getVariantTexture(variant: String): Identifier {
+        return Identifier(HybridAquatic.MOD_ID, "textures/entity/${id}_$variant.png")
+    }
+
     override fun getAnimationResource(animatable: T?): Identifier {
         return Identifier(HybridAquatic.MOD_ID, "animations/$id.animation.json")
     }
