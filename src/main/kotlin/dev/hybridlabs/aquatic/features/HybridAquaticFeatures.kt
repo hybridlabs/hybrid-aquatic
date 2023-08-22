@@ -15,7 +15,7 @@ import net.minecraft.world.gen.feature.FeatureConfig
 
 @Suppress("SameParameterValue")
 object HybridAquaticFeatures {
-    val SEA_GENERATION = registerFeatureType("sea_feature", SeaGenerationFeature(SeaGenerationFeatureConfig.CODEC))
+    //val SEA_GENERATION = registerFeatureType("sea_feature", SeaGenerationFeature(SeaGenerationFeatureConfig.CODEC))
 
     private fun <C: FeatureConfig, F: Feature<C>> registerFeatureType(name: String, feature: F): F {
         return Registry.register(Registries.FEATURE, Identifier(HybridAquatic.MOD_ID, name), feature)
