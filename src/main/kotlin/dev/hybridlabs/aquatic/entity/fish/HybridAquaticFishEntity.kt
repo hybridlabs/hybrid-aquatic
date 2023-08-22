@@ -280,7 +280,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            return pos.y <= world.seaLevel - 10 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random
+            return pos.y <= world.seaLevel && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random
             )
         }
         const val MOISTNESS_KEY = "Moistness"
