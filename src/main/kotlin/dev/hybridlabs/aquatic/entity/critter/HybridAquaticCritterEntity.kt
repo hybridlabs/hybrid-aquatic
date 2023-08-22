@@ -62,7 +62,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
     override fun tickWaterBreathingAir(air: Int) {}
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
+        if (event.isMoving) {
             event.controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }

@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.features.HybridAquaticFeatures
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
@@ -37,6 +38,8 @@ object HybridAquatic : ModInitializer {
 
         HybridAquaticItems
         HybridAquaticItemGroups
+
+        //HybridAquaticFeatures
 
         registerDynamicRegistries()
         registerWanderingTraderTrades()
