@@ -321,6 +321,13 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(0.5f, 0.75f),
         StarfishEntity.createMobAttributes().build()
     )
+
+    val SEA_URCHIN = registerCritter(
+        "sea_urchin",
+        ::SeaUrchinEntity,
+        EntityDimensions.fixed(0.5f, 0.75f),
+        StarfishEntity.createMobAttributes().build()
+    )
     //endregion
 
     //region sharks

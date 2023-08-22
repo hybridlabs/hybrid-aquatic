@@ -42,6 +42,7 @@ object HybridAquaticBiomeTags {
     val DISCUS_SPAWN_BIOMES = create("discus_spawn_biomes")
     val TETRA_SPAWN_BIOMES = create("tetra_spawn_biomes")
     val NAUTILUS_SPAWN_BIOMES = create("nautilus_spawn_biomes")
+    val BETTA_SPAWN_BIOMES = create("betta_spawn_biomes")
     val NEEDLEFISH_SPAWN_BIOMES = create("needlefish_spawn_biomes")
     val GREAT_WHITE_SHARK_SPAWN_BIOMES = create("great_white_shark_spawn_biomes")
     val TIGER_SHARK_SPAWN_BIOMES = create("tiger_shark_spawn_biomes")
@@ -57,6 +58,8 @@ object HybridAquaticBiomeTags {
     val STARFISH_SPAWN_BIOMES = create("starfish_spawn_biomes")
     val SEA_CUCUMBER_SPAWN_BIOMES = create("sea_cucumber_spawn_biomes")
     val NUDIBRANCH_SPAWN_BIOMES = create("nudibranch_spawn_biomes")
+    val SEA_URCHIN_SPAWN_BIOMES = create("sea_urchin_spawn_biomes")
+
 
     private fun create(id: String): TagKey<Biome> {
         return TagKey.of(RegistryKeys.BIOME, Identifier(HybridAquatic.MOD_ID, id))

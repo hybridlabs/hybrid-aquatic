@@ -10,7 +10,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
 class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
-    HybridAquaticCritterEntity(entityType, world) {
+    HybridAquaticCritterEntity(entityType, world, 7) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()

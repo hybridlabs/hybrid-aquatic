@@ -1,10 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "pattern": [
-    " G ",
-    " S ",
-    "   "
-  ],
+
   "key": {
     "S": {
       "tag": "minecraft:stick"

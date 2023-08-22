@@ -9,7 +9,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: World) : HybridAquaticCritterEntity(entityType, world) {
+class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: World) : HybridAquaticCritterEntity(entityType, world, 4) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()

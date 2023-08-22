@@ -10,7 +10,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
 class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: World) :
-    HybridAquaticCritterEntity(entityType, world) {
+    HybridAquaticCritterEntity(entityType, world, 9) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()

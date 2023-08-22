@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import net.minecraft.block.Blocks
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.control.AquaticMoveControl
@@ -8,6 +9,9 @@ import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
@@ -28,10 +32,15 @@ import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis")
-open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterEntity>, world: World) : WaterCreatureEntity(type, world), GeoEntity {
+open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterEntity>, world: World, private val variantCount: Int = 1) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private val buoyant = false
 
+    override fun initDataTracker() {
+        super.initDataTracker()
+        dataTracker.startTracking(VARIANT, 0)
+
+    }
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(8, EscapeDangerGoal(this, 1.0))
@@ -49,6 +58,8 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
     ): EntityData? {
         this.air = this.maxAir
         pitch = 0.0f
+        this.variant = this.random.nextInt(variantCount)
+        this.pitch = 0.0f
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
@@ -59,6 +70,15 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         }
     }
 
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        super.writeCustomDataToNbt(nbt)
+        nbt.putInt(HybridAquaticFishEntity.VARIANT_KEY, variant)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        super.readCustomDataFromNbt(nbt)
+        variant = nbt.getInt(HybridAquaticFishEntity.VARIANT_KEY)
+    }
     override fun tickWaterBreathingAir(air: Int) {}
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
@@ -140,7 +160,14 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
     override fun canBreatheInWater(): Boolean {
         return true
     }
+    var variant: Int
+        get() = dataTracker.get(HybridAquaticCritterEntity.VARIANT)
+        set(int) {
+            dataTracker.set(HybridAquaticCritterEntity.VARIANT, int)
+        }
+
     companion object {
+        val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         fun canSpawnPredicate(
             type: EntityType<out WaterCreatureEntity?>?,
             world: WorldAccess,
@@ -150,5 +177,6 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         ): Boolean {
             return pos.y <= world.seaLevel - 10 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random)
         }
+        const val VARIANT_KEY = "Variant"
     }
 }

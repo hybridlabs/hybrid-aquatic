@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.block.Blocks
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.TargetPredicate
@@ -47,6 +48,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         goalSelector.add(2, SwimToRandomPlaceGoal(this, 0.50, 6))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 12.0f))
         goalSelector.add(4, LookAroundGoal(this))
+        goalSelector.add(1, FleeEntityGoal(this, HybridAquaticSharkEntity::class.java, 10.0f, 1.3, 1.5))
     }
 
     override fun initDataTracker() {
@@ -141,7 +143,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             return PlayState.CONTINUE
         }
 
-        if (!isSubmergedInWater) {
+        if (isOnGround) {
             event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
