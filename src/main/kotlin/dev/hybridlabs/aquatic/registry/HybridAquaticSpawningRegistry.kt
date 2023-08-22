@@ -64,6 +64,8 @@ object HybridAquaticSpawningRegistry {
         createCritterSpawn(HybridAquaticEntityTypes.FIDDLER_CRAB, HybridAquaticBiomeTags.FIDDLER_CRAB_SPAWN_BIOMES, 15, 1, 3)
         createCritterSpawn(HybridAquaticEntityTypes.HERMIT_CRAB, HybridAquaticBiomeTags.HERMIT_CRAB_SPAWN_BIOMES, 15, 1, 3)
         createCritterSpawn(HybridAquaticEntityTypes.STARFISH, HybridAquaticBiomeTags.STARFISH_SPAWN_BIOMES, 15, 1, 3)
+        createCritterSpawn(HybridAquaticEntityTypes.NUDIBRANCH, HybridAquaticBiomeTags.NUDIBRANCH_SPAWN_BIOMES, 15, 1, 3)
+        createCritterSpawn(HybridAquaticEntityTypes.SEA_CUCUMBER, HybridAquaticBiomeTags.SEA_CUCUMBER_SPAWN_BIOMES, 15, 1, 3)
 
     }
 

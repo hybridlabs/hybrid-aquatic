@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -17,8 +16,5 @@ class CrabEntity(entityType: EntityType<out CrabEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
-    }
-    override fun getGroup(): EntityGroup? {
-        return EntityGroup.ARTHROPOD
     }
 }

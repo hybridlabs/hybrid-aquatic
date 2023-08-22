@@ -161,7 +161,6 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_COD_HURT
     }
-
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.ENTITY_COD_DEATH
     }
@@ -169,15 +168,12 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.ENTITY_SALMON_AMBIENT
     }
-
     override fun getSplashSound(): SoundEvent {
         return SoundEvents.ENTITY_DOLPHIN_SPLASH
     }
-
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_DOLPHIN_SWIM
     }
-
     override fun createNavigation(world: World): EntityNavigation {
         return SwimNavigation(this, world)
     }
