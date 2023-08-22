@@ -122,6 +122,30 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
+        export(exporter, HybridAquaticEntityTypes.SEA_CUCUMBER) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
+                    )
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.NUDIBRANCH) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
+                    )
+            )
+        }
+
+        // end region
+
         export(exporter, HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS) {
             pool(
                 LootPool.builder()

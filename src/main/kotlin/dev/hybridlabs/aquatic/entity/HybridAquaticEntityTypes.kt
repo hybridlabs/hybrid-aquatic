@@ -313,20 +313,27 @@ object HybridAquaticEntityTypes {
         "sea_cucumber",
         ::SeaCucumberEntity,
         EntityDimensions.fixed(0.5f, 0.75f),
-        StarfishEntity.createMobAttributes().build()
+        SeaCucumberEntity.createMobAttributes().build()
     )
     val NUDIBRANCH = registerCritter(
         "nudibranch",
         ::NudibranchEntity,
         EntityDimensions.fixed(0.5f, 0.75f),
-        StarfishEntity.createMobAttributes().build()
+        NudibranchEntity.createMobAttributes().build()
     )
 
     val SEA_URCHIN = registerCritter(
         "sea_urchin",
         ::SeaUrchinEntity,
         EntityDimensions.fixed(0.5f, 0.75f),
-        StarfishEntity.createMobAttributes().build()
+        SeaUrchinEntity.createMobAttributes().build()
+    )
+
+    val GIANT_CLAM = registerCritter(
+        "giant_clam",
+        ::GiantClamEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        GiantClamEntity.createMobAttributes().build()
     )
     //endregion
 

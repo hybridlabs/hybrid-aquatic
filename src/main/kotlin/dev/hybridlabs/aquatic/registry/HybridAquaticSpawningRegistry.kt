@@ -58,20 +58,20 @@ object HybridAquaticSpawningRegistry {
         createSharkSpawn(HybridAquaticEntityTypes.HAMMERHEAD_SHARK, HybridAquaticBiomeTags.HAMMERHEAD_SHARK_SPAWN_BIOMES, 7, 1, 1)
         createSharkSpawn(HybridAquaticEntityTypes.FRILLED_SHARK, HybridAquaticBiomeTags.FRILLED_SHARK_SPAWN_BIOMES, 7, 1, 1)
         createSharkSpawn(HybridAquaticEntityTypes.THRESHER_SHARK, HybridAquaticBiomeTags.THRESHER_SHARK_SPAWN_BIOMES, 7, 1, 1)
-        createSharkSpawn(HybridAquaticEntityTypes.BULL_SHARK, HybridAquaticBiomeTags.BULL_SHARK_SPAWN_BIOMES, 5, 1, 1)
+        createSharkSpawn(HybridAquaticEntityTypes.BULL_SHARK, HybridAquaticBiomeTags.BULL_SHARK_SPAWN_BIOMES, 7, 1, 1)
         createSharkSpawn(HybridAquaticEntityTypes.WHALE_SHARK, HybridAquaticBiomeTags.WHALE_SHARK_SPAWN_BIOMES, 10, 1, 2)
         createSharkSpawn(HybridAquaticEntityTypes.BASKING_SHARK, HybridAquaticBiomeTags.BASKING_SHARK_SPAWN_BIOMES, 10, 1, 2)
-        createCritterSpawn(HybridAquaticEntityTypes.CRAB, HybridAquaticBiomeTags.CRAB_SPAWN_BIOMES, 15, 1, 3)
-        createCritterSpawn(HybridAquaticEntityTypes.FIDDLER_CRAB, HybridAquaticBiomeTags.FIDDLER_CRAB_SPAWN_BIOMES, 15, 1, 3)
-        createCritterSpawn(HybridAquaticEntityTypes.HERMIT_CRAB, HybridAquaticBiomeTags.HERMIT_CRAB_SPAWN_BIOMES, 15, 1, 3)
-        createCritterSpawn(HybridAquaticEntityTypes.STARFISH, HybridAquaticBiomeTags.STARFISH_SPAWN_BIOMES, 15, 1, 3)
+        createCritterSpawn(HybridAquaticEntityTypes.CRAB, HybridAquaticBiomeTags.CRAB_SPAWN_BIOMES, 15, 2, 3)
+        createCritterSpawn(HybridAquaticEntityTypes.FIDDLER_CRAB, HybridAquaticBiomeTags.FIDDLER_CRAB_SPAWN_BIOMES, 15, 2, 3)
+        createCritterSpawn(HybridAquaticEntityTypes.HERMIT_CRAB, HybridAquaticBiomeTags.HERMIT_CRAB_SPAWN_BIOMES, 15, 2, 3)
+        createCritterSpawn(HybridAquaticEntityTypes.STARFISH, HybridAquaticBiomeTags.STARFISH_SPAWN_BIOMES, 15, 2, 4)
         createCritterSpawn(HybridAquaticEntityTypes.NUDIBRANCH, HybridAquaticBiomeTags.NUDIBRANCH_SPAWN_BIOMES, 15, 1, 3)
         createCritterSpawn(HybridAquaticEntityTypes.SEA_CUCUMBER, HybridAquaticBiomeTags.SEA_CUCUMBER_SPAWN_BIOMES, 15, 1, 3)
-        createCritterSpawn(HybridAquaticEntityTypes.SEA_URCHIN, HybridAquaticBiomeTags.SEA_URCHIN_SPAWN_BIOMES, 15, 1, 3)
-
+        createCritterSpawn(HybridAquaticEntityTypes.SEA_URCHIN, HybridAquaticBiomeTags.SEA_URCHIN_SPAWN_BIOMES, 15, 2, 4)
+        createCritterSpawn(HybridAquaticEntityTypes.GIANT_CLAM, HybridAquaticBiomeTags.GIANT_CLAM_SPAWN_BIOMES, 20, 2, 3)
     }
 
-    private inline fun <reified T : HybridAquaticFishEntity> createFishSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int, ) {
+    private inline fun <reified T : HybridAquaticFishEntity> createFishSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int) {
         BiomeModifications.addSpawn({
             ctx: BiomeSelectionContext -> ctx.hasTag(spawnTag)
         }, SpawnGroup.WATER_AMBIENT, entityType, weight, minGroup, maxGroup)
@@ -81,7 +81,7 @@ object HybridAquaticSpawningRegistry {
             Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HybridAquaticFishEntity::canSpawnPredicate
         )
     }
-    private inline fun <reified T : HybridAquaticSharkEntity> createSharkSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int, ) {
+    private inline fun <reified T : HybridAquaticSharkEntity> createSharkSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int) {
         BiomeModifications.addSpawn({
                 ctx: BiomeSelectionContext -> ctx.hasTag(spawnTag)
         }, SpawnGroup.WATER_CREATURE, entityType, weight, minGroup, maxGroup)
@@ -91,13 +91,13 @@ object HybridAquaticSpawningRegistry {
             Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HybridAquaticSharkEntity::canSpawnPredicate
         )
     }
-    private inline fun <reified T : HybridAquaticCritterEntity> createCritterSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int, ) {
+    private inline fun <reified T : HybridAquaticCritterEntity> createCritterSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int) {
         BiomeModifications.addSpawn({
                 ctx: BiomeSelectionContext -> ctx.hasTag(spawnTag)
-        }, SpawnGroup.WATER_AMBIENT, entityType, weight, minGroup, maxGroup)
+        }, SpawnGroup.WATER_CREATURE, entityType, weight, minGroup, maxGroup)
 
         SpawnRestriction.register(
-            entityType, SpawnRestriction.Location.NO_RESTRICTIONS,
+            entityType, SpawnRestriction.Location.IN_WATER,
             Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HybridAquaticSharkEntity::canSpawnPredicate
         )
     }

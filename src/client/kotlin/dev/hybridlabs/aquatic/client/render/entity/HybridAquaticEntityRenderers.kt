@@ -54,6 +54,7 @@ object HybridAquaticEntityRenderers {
     val NUDIBRANCH = EntityRendererRegistry.register(HybridAquaticEntityTypes.NUDIBRANCH, ::NudibranchEntityRenderer)
     val SEA_CUCUMBER = EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_CUCUMBER, ::SeaCucumberEntityRenderer)
     val SEA_URCHIN = EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_URCHIN, ::SeaUrchinEntityRenderer)
+    val GIANT_CLAM = EntityRendererRegistry.register(HybridAquaticEntityTypes.GIANT_CLAM, ::GiantClamEntityRenderer)
 
     //endregion
 
