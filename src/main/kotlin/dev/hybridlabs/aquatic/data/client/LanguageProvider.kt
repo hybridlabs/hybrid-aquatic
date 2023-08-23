@@ -81,7 +81,17 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.TIGER_SHARK to "Tiger Shark",
             HybridAquaticEntityTypes.HAMMERHEAD_SHARK to "Hammerhead Shark",
             HybridAquaticEntityTypes.WHALE_SHARK to "Whale Shark",
-        ).forEach { (entityType, translation) ->
+            HybridAquaticEntityTypes.CRAB to "Crab",
+            HybridAquaticEntityTypes.FIDDLER_CRAB to "Fiddler Crab",
+            HybridAquaticEntityTypes.HERMIT_CRAB to "Hermit Crab",
+            HybridAquaticEntityTypes.NUDIBRANCH to "Nudibranch",
+            HybridAquaticEntityTypes.SEA_CUCUMBER to "Sea Cucumber",
+            HybridAquaticEntityTypes.SEA_URCHIN to "Sea Urchin",
+            HybridAquaticEntityTypes.GIANT_CLAM to "Giant Clam",
+            HybridAquaticEntityTypes.STARFISH to "Starfish"
+
+
+            ).forEach { (entityType, translation) ->
             val id = Registries.ENTITY_TYPE.getId(entityType)
             val translationKey = entityType.translationKey
             val namespace = id.namespace

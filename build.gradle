@@ -39,6 +39,19 @@ repositories {
     url "https://gitlab.com/api/v4/projects/21830712/packages/maven"
   }
   
+  //Modrinth maven
+  exclusiveContent {
+    forRepository {
+      maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+      }
+    }
+    filter {
+      includeGroup "maven.modrinth"
+    }
+  }
+  
   mavenCentral()
 }
 
@@ -58,6 +71,8 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
   //DebugUtils
   modImplementation "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
+  //CarpetMod
+  modImplementation "maven.modrinth:carpet:1.4.112"
 }
 
 loom {

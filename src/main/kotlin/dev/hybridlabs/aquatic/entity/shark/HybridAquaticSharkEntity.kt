@@ -2,21 +2,11 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityPose
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.SpawnReason
+import net.minecraft.block.Blocks
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.ActiveTargetGoal
-import net.minecraft.entity.ai.goal.LookAroundGoal
-import net.minecraft.entity.ai.goal.LookAtEntityGoal
-import net.minecraft.entity.ai.goal.MeleeAttackGoal
-import net.minecraft.entity.ai.goal.RevengeGoal
-import net.minecraft.entity.ai.goal.SwimAroundGoal
-import net.minecraft.entity.ai.goal.UniversalAngerGoal
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.damage.DamageSource
@@ -32,22 +22,22 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.TimeHelper
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.intprovider.UniformIntProvider
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
+import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.*
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.UUID
+import java.util.*
 
 
 @Suppress("LeakingThis")
@@ -98,7 +88,7 @@ open class HybridAquaticSharkEntity(
         val MOISTNESS: TrackedData<Int> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
-        const val MAX_HUNGER = 9600
+        const val MAX_HUNGER = 4800
         const val HUNGER_KEY = "Hunger"
         val HUNGER: TrackedData<Int> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
@@ -112,21 +102,15 @@ open class HybridAquaticSharkEntity(
 
         val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(19, 40)
 
-//        fun canSpawnDeep(
-//                type: EntityType<out WaterCreatureEntity?>?,
-//                world: WorldAccess,
-//                reason: SpawnReason?,
-//                pos: BlockPos,
-//                random: Random?
-//        ): Boolean {
-//            return pos.y <= world.seaLevel - 25 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(
-//                    type,
-//                    world,
-//                    reason,
-//                    pos,
-//                    random
-//            )
-//        }
+        fun canSpawnPredicate(
+            type: EntityType<out WaterCreatureEntity?>?,
+            world: WorldAccess,
+            reason: SpawnReason?,
+            pos: BlockPos,
+            random: Random?
+        ): Boolean {
+            return pos.y <= world.seaLevel - 10 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random)
+        }
 
     }
 
@@ -137,7 +121,7 @@ open class HybridAquaticSharkEntity(
 //        goalSelector.add(4, WanderAroundGoal(this, 1.0))
         goalSelector.add(4, LookAroundGoal(this))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
-        if(isPassive) {
+        if (!isPassive) {
             if (revengeAttack) targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)).setGroupRevenge(*arrayOfNulls(0)))
             targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { entity: LivingEntity ->
                 shouldAngerAt(entity) || shouldProximityAttack(entity as PlayerEntity) || isPlayerBleeding(entity)
@@ -146,6 +130,7 @@ open class HybridAquaticSharkEntity(
             targetSelector.add(4, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) {
                 hunger <= 1200 && it.type.isIn(prey) && (!isCannibalistic && !it.type.equals(this.type))
             })
+            goalSelector.add(1, ChaseBoatGoal(this))
         }
 //        targetSelector.add(
 //            4,
@@ -157,7 +142,7 @@ open class HybridAquaticSharkEntity(
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, 2400)
+        dataTracker.startTracking(MOISTNESS, 1200)
         dataTracker.startTracking(HUNGER, MAX_HUNGER)
         dataTracker.startTracking(RUSHING, false)
         dataTracker.startTracking(ATTEMPT_ATTACK, false)
@@ -238,7 +223,7 @@ open class HybridAquaticSharkEntity(
             event.controller.setAnimation(RawAnimation.begin().then("attack", Animation.LoopType.LOOP))
 //            this.attemptAttack = false
         }
-        else if (event.isMoving) {
+        else if (isSubmergedInWater) {
             if (!isRushing)
                 event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
             else
@@ -259,8 +244,6 @@ open class HybridAquaticSharkEntity(
         return 8
     }
 
-    open val flopSound: SoundEvent = SoundEvents.ENTITY_PUFFER_FISH_FLOP
-
     //#region SFX
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_COD_HURT
@@ -271,7 +254,7 @@ open class HybridAquaticSharkEntity(
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_SALMON_AMBIENT
+        return SoundEvents.ENTITY_COD_AMBIENT
     }
 
     override fun getSplashSound(): SoundEvent {

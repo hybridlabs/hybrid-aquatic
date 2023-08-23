@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "cooking",
+  "group": "foodstuffs",
+  "ingredients": [
+    {
+      "item": "hybrid-aquatic:crab_claw"
+    }
+  ],
+  "result": {
+    "item": "hybrid-aquatic:raw_crab_meat"
+  }
+}

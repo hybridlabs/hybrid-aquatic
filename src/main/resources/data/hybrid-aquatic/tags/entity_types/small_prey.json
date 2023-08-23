@@ -80,6 +80,22 @@
       "id": "hybrid-aquatic:cuttlefish",
       "required":  false
     },
+    {
+      "id": "hybrid-aquatic:crab",
+      "required":  false
+    },
+    {
+      "id": "hybrid-aquatic:fiddler_crab",
+      "required":  false
+    },
+    {
+      "id": "hybrid-aquatic:hermit_crab",
+      "required":  false
+    },
+    {
+      "id": "hybrid-aquatic:blue_spotted_stingray",
+      "required":  false
+    },
     "minecraft:salmon",
     "minecraft:cod",
     "minecraft:tropical_fish",

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.block.Blocks
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.TargetPredicate
@@ -8,7 +9,6 @@ import net.minecraft.entity.ai.control.YawAdjustingLookControl
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.SwimNavigation
-import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
@@ -38,21 +38,23 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import kotlin.math.sqrt
 
 @Suppress("LeakingThis")
-open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: World) : WaterCreatureEntity(type, world), GeoEntity {
+open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: World, private val variantCount: Int = 1) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(8, EscapeDangerGoal(this, 2.1))
         goalSelector.add(0, MoveIntoWaterGoal(this))
-        goalSelector.add(2, SwimToRandomPlaceGoal(this, 0.50, 6))
+        goalSelector.add(2, SwimAroundGoal(this, 0.50, 6))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 12.0f))
         goalSelector.add(4, LookAroundGoal(this))
+        goalSelector.add(1, FleeEntityGoal(this, HybridAquaticSharkEntity::class.java, 10.0f, 1.3, 1.5))
     }
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, 2400)
+        dataTracker.startTracking(MOISTNESS, 600)
+        dataTracker.startTracking(VARIANT, 0)
     }
 
     override fun initialize(
@@ -63,7 +65,8 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         entityNbt: NbtCompound?
     ): EntityData? {
         this.air = this.maxAir
-        pitch = 0.0f
+        this.variant = this.random.nextInt(variantCount)
+        this.pitch = 0.0f
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
@@ -125,11 +128,13 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         nbt.putInt(MOISTNESS_KEY, moistness)
+        nbt.putInt(VARIANT_KEY, variant)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
+        variant = nbt.getInt(VARIANT_KEY)
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
@@ -138,7 +143,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             return PlayState.CONTINUE
         }
 
-        if (!isSubmergedInWater) {
+        if (isOnGround) {
             event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
@@ -162,7 +167,6 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_COD_HURT
     }
-
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.ENTITY_COD_DEATH
     }
@@ -170,15 +174,12 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.ENTITY_SALMON_AMBIENT
     }
-
     override fun getSplashSound(): SoundEvent {
         return SoundEvents.ENTITY_DOLPHIN_SPLASH
     }
-
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_DOLPHIN_SWIM
     }
-
     override fun createNavigation(world: World): EntityNavigation {
         return SwimNavigation(this, world)
     }
@@ -187,6 +188,12 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         get() = dataTracker.get(MOISTNESS)
         set(moistness) {
             dataTracker.set(MOISTNESS, moistness)
+        }
+
+    var variant: Int
+        get() = dataTracker.get(VARIANT)
+        set(int) {
+            dataTracker.set(VARIANT, int)
         }
 
     override fun getMaxAir(): Int {
@@ -272,6 +279,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
 
     companion object {
         val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 
         fun canSpawnPredicate(
@@ -281,21 +289,10 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            return pos.y <= world.seaLevel - 10 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(
-                type,
-                world,
-                reason,
-                pos,
-                random
+            return pos.y <= world.seaLevel && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random
             )
         }
-
-        fun createGenericAttributes(): DefaultAttributeContainer.Builder {
-            return createMobAttributes()
-                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 5.0)
-                    .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.8)
-        }
-
         const val MOISTNESS_KEY = "Moistness"
+        const val VARIANT_KEY = "Variant"
     }
 }

@@ -12,7 +12,7 @@ class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, w
         companion object {
             fun createMobAttributes(): DefaultAttributeContainer.Builder {
                 return WaterCreatureEntity.createMobAttributes()
-                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 100.0)
+                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 36.0)
                     .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.6)
                     .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0)
                     .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0)

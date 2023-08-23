@@ -42,11 +42,30 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticBlocks.TIGER_SHARK_BLAHAJ_PLUSHIE)
             entries.add(HybridAquaticBlocks.WHALE_SHARK_BLAHAJ_PLUSHIE)
 
-            //food items
+            // food items
             entries.add(HybridAquaticItems.RAW_FISH_MEAT)
             entries.add(HybridAquaticItems.COOKED_FISH_MEAT)
             entries.add(HybridAquaticItems.RAW_TENTACLE)
             entries.add(HybridAquaticItems.COOKED_TENTACLE)
+            entries.add(HybridAquaticItems.RAW_CRAB_MEAT)
+            entries.add(HybridAquaticItems.COOKED_CRAB_MEAT)
+
+            // miscellaneous items
+            entries.add(HybridAquaticItems.CRAB_CLAW)
+            entries.add(HybridAquaticItems.GLOW_SLIME)
+            entries.add(HybridAquaticItems.SHARK_TOOTH)
+            entries.add(HybridAquaticItems.PEARL)
+            entries.add(HybridAquaticItems.BLACK_PEARL)
+
+            // starfish items
+            entries.add(HybridAquaticItems.RED_STARFISH)
+            entries.add(HybridAquaticItems.YELLOW_STARFISH)
+            entries.add(HybridAquaticItems.PURPLE_STARFISH)
+            entries.add(HybridAquaticItems.BLUE_STARFISH)
+            entries.add(HybridAquaticItems.GREEN_STARFISH)
+            entries.add(HybridAquaticItems.WHITE_STARFISH)
+            entries.add(HybridAquaticItems.BLACK_STARFISH)
+
 
             // spawn eggs
             SpawnEggItem.getAll().forEach { item ->

@@ -7,6 +7,8 @@
     {
       "id": "hybrid-aquatic:oarfish",
       "required": false
-    }
+    },
+    "minecraft:turtle",
+    "minecraft:polar_bear"
   ]
 }

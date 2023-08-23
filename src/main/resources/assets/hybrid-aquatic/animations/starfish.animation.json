@@ -58,6 +58,9 @@
 					}
 				}
 			}
+		},
+		"sit": {
+			"loop": true
 		}
 	},
 	"geckolib_format_version": 2
