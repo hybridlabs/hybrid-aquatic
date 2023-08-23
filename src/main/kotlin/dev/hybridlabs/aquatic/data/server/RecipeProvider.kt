@@ -7,7 +7,6 @@ import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.data.server.recipe.RecipeJsonProvider
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder
 import net.minecraft.item.Item
-import net.minecraft.item.Items
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.book.RecipeCategory
 import java.util.function.Consumer
@@ -15,11 +14,11 @@ import java.util.function.Consumer
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun generate(exporter: Consumer<RecipeJsonProvider>) {
         // glowstick recipe
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.TOOLS, Items.STICK, 4) // TODO stick -> glowstick
+        /*ShapelessRecipeJsonBuilder.create(RecipeCategory.TOOLS, Items.STICK, 4) // TODO stick -> glowstick
             .input(Items.STICK)
             .input(HybridAquaticItems.GLOW_SLIME)
             .criterion("has_glow_slime", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.GLOW_SLIME))
-            .offerTo(exporter)
+            .offerTo(exporter)*/
 
         // raw crab meat
         ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, HybridAquaticItems.RAW_CRAB_MEAT)
