@@ -68,13 +68,15 @@ object HybridAquaticItemGroups {
 
 
             // spawn eggs
-            SpawnEggItem.getAll().forEach { item ->
+            Registries.ITEM.forEach { item ->
                 val id = Registries.ITEM.getId(item)
                 if (id.namespace != HybridAquatic.MOD_ID) {
                     return@forEach
                 }
 
-                entries.add(item)
+                if (item is SpawnEggItem) {
+                    entries.add(item)
+                }
             }
         }
         .build()
