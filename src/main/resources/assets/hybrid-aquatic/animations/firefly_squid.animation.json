@@ -30,12 +30,12 @@
 						}
 					}
 				},
-				"head": {
+				"face": {
 					"rotation": {
 						"vector": [-7.5, 0, 0]
 					}
 				},
-				"body": {
+				"head": {
 					"rotation": {
 						"0.0": {
 							"vector": [-10, 0, 0]
@@ -65,7 +65,7 @@
 		"hit": {
 			"animation_length": 1,
 			"bones": {
-				"body": {
+				"head": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -124,7 +124,7 @@
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
-				"body": {
+				"head": {
 					"position": {
 						"vector": [0, -1.5, 0]
 					},
@@ -132,7 +132,7 @@
 						"vector": [1, 0.7, 1]
 					}
 				},
-				"head": {
+				"face": {
 					"scale": {
 						"0.0": {
 							"vector": [1, 1, 1]

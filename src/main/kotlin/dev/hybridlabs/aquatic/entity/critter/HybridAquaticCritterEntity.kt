@@ -161,9 +161,9 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         return true
     }
     var variant: Int
-        get() = dataTracker.get(HybridAquaticCritterEntity.VARIANT)
+        get() = dataTracker.get(VARIANT)
         set(int) {
-            dataTracker.set(HybridAquaticCritterEntity.VARIANT, int)
+            dataTracker.set(VARIANT, int)
         }
 
     companion object {
