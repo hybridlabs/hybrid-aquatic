@@ -10,7 +10,7 @@ import net.minecraft.util.math.Box
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
-class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
+class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, world: World) : HybridAquaticSchoolingFishEntity(entityType, world) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()

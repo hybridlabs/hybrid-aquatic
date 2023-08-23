@@ -6,7 +6,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
-class RockfishEntity(entityType: EntityType<out RockfishEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
+class RockfishEntity(entityType: EntityType<out RockfishEntity>, world: World) : HybridAquaticSchoolingFishEntity(entityType, world) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()

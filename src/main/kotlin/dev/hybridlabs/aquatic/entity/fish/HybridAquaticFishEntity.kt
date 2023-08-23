@@ -15,6 +15,7 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.passive.SchoolingFishEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleTypes
@@ -207,7 +208,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     open val lookPitchSpeed: Int = 1
     open val bodyYawSpeed: Int = 1
 
-    protected fun hasSelfControl(): Boolean {
+    protected open fun hasSelfControl(): Boolean {
         return true
     }
 
