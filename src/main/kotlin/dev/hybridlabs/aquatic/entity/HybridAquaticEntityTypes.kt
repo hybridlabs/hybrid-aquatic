@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.HybridAquaticSpawnGroups
 import dev.hybridlabs.aquatic.entity.critter.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.shark.*
@@ -405,7 +406,7 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerLiving(id, FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, entityFactory).dimensions(dimensions).build(), attributeContainer)
+        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.HA_SHARK, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
     private inline fun <reified T : HybridAquaticCritterEntity> registerCritter(
@@ -414,7 +415,7 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerLiving(id, FabricEntityTypeBuilder.create(SpawnGroup.WATER_AMBIENT, entityFactory).dimensions(dimensions).build(), attributeContainer)
+        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.HA_CRITTER, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
     private inline fun <reified T : HybridAquaticFishEntity> registerFish(
@@ -423,7 +424,7 @@ object HybridAquaticEntityTypes {
             dimensions: EntityDimensions,
             attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerLiving(id, FabricEntityTypeBuilder.create(SpawnGroup.WATER_AMBIENT, entityFactory).dimensions(dimensions).build(), attributeContainer)
+        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.HA_FISH, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
     private inline fun <reified T : LivingEntity> registerLiving(
