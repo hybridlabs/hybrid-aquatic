@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:stick"
+    },
+    {
+      "item": "hybrid-aquatic:glow_slime"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "minecraft:stick"
+  }
+}

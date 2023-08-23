@@ -40,6 +40,7 @@ object HybridAquaticBiomeTags {
     val GOURAMI_SPAWN_BIOMES = create("gourami_spawn_biomes")
     val BARRELEYE_SPAWN_BIOMES = create("barreleye_spawn_biomes")
     val PIRANHA_SPAWN_BIOMES = create("piranha_spawn_biomes")
+    val RATFISH_SPAWN_BIOMES = create("piranha_spawn_biomes")
     val DISCUS_SPAWN_BIOMES = create("discus_spawn_biomes")
     val TETRA_SPAWN_BIOMES = create("tetra_spawn_biomes")
     val NAUTILUS_SPAWN_BIOMES = create("nautilus_spawn_biomes")

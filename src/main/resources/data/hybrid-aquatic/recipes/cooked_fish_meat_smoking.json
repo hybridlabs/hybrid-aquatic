@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "hybrid-aquatic:raw_fish_meat"
-  },
-  "result": "hybrid-aquatic:cooked_fish_meat",
-  "experience": 0.15,
-  "cookingtime": 100
-}

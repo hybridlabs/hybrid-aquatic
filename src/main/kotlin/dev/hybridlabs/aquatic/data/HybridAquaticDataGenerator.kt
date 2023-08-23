@@ -2,9 +2,12 @@ package dev.hybridlabs.aquatic.data
 
 import dev.hybridlabs.aquatic.data.client.LanguageProvider
 import dev.hybridlabs.aquatic.data.client.ModelProvider
+import dev.hybridlabs.aquatic.data.server.BiomeTagProvider
 import dev.hybridlabs.aquatic.data.server.BlockLootTableProvider
 import dev.hybridlabs.aquatic.data.server.BlockTagProvider
 import dev.hybridlabs.aquatic.data.server.EntityTypeLootTableProvider
+import dev.hybridlabs.aquatic.data.server.EntityTypeTagProvider
+import dev.hybridlabs.aquatic.data.server.RecipeProvider
 import dev.hybridlabs.aquatic.data.server.SeaMessageProvider
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
@@ -17,8 +20,11 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::LanguageProvider)
         pack.addProvider(::ModelProvider)
         pack.addProvider(::BlockLootTableProvider)
+        pack.addProvider(::BiomeTagProvider)
         pack.addProvider(::BlockTagProvider)
+        pack.addProvider(::EntityTypeTagProvider)
         pack.addProvider(::EntityTypeLootTableProvider)
+        pack.addProvider(::RecipeProvider)
         pack.addProvider(::SeaMessageProvider)
     }
 

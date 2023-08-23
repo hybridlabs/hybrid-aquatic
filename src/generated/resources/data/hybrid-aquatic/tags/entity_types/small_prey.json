@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:clownfish",
+    "hybrid-aquatic:lionfish",
+    "hybrid-aquatic:firefly_squid",
+    "hybrid-aquatic:cowfish",
+    "hybrid-aquatic:flashlight_fish",
+    "hybrid-aquatic:barreleye",
+    "hybrid-aquatic:betta",
+    "hybrid-aquatic:tetra",
+    "hybrid-aquatic:piranha",
+    "hybrid-aquatic:rockfish",
+    "hybrid-aquatic:unicorn_fish",
+    "hybrid-aquatic:zebra_danio",
+    "hybrid-aquatic:seahorse",
+    "hybrid-aquatic:tiger_barb",
+    "hybrid-aquatic:ratfish",
+    "hybrid-aquatic:blue_tang",
+    "hybrid-aquatic:nautilus",
+    "hybrid-aquatic:discus",
+    "hybrid-aquatic:gourami",
+    "hybrid-aquatic:cuttlefish",
+    "hybrid-aquatic:crab",
+    "hybrid-aquatic:fiddler_crab",
+    "hybrid-aquatic:hermit_crab",
+    "hybrid-aquatic:blue_spotted_stingray",
+    "minecraft:salmon",
+    "minecraft:cod",
+    "minecraft:tropical_fish",
+    "minecraft:chicken"
+  ]
+}

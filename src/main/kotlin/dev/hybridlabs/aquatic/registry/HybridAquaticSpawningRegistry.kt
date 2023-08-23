@@ -9,7 +9,6 @@ import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnGroup
 import net.minecraft.entity.SpawnRestriction
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.world.Heightmap
@@ -45,6 +44,7 @@ object HybridAquaticSpawningRegistry {
         createFishSpawn(HybridAquaticEntityTypes.TRIGGERFISH, HybridAquaticBiomeTags.TRIGGERFISH_SPAWN_BIOMES, 15, 1, 2)
         createFishSpawn(HybridAquaticEntityTypes.TIGER_BARB, HybridAquaticBiomeTags.TIGER_BARB_SPAWN_BIOMES, 15, 2, 3)
         createFishSpawn(HybridAquaticEntityTypes.PIRANHA, HybridAquaticBiomeTags.PIRANHA_SPAWN_BIOMES, 10, 2, 3)
+        createFishSpawn(HybridAquaticEntityTypes.RATFISH, HybridAquaticBiomeTags.RATFISH_SPAWN_BIOMES, 15, 2, 3)
         createFishSpawn(HybridAquaticEntityTypes.OSCAR, HybridAquaticBiomeTags.OSCAR_SPAWN_BIOMES, 15, 1, 2)
         createFishSpawn(HybridAquaticEntityTypes.GOURAMI, HybridAquaticBiomeTags.GOURAMI_SPAWN_BIOMES, 15, 1, 2)
         createFishSpawn(HybridAquaticEntityTypes.BARRELEYE, HybridAquaticBiomeTags.BARRELEYE_SPAWN_BIOMES, 15, 2, 3)

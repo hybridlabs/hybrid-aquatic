@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:opah",
+    "hybrid-aquatic:yellowfin_tuna",
+    "hybrid-aquatic:moray_eel",
+    "hybrid-aquatic:mahimahi",
+    "hybrid-aquatic:triggerfish",
+    "hybrid-aquatic:needlefish",
+    "hybrid-aquatic:glowing_sucker_octopus",
+    "minecraft:squid",
+    "minecraft:glow_squid",
+    "minecraft:cow",
+    "minecraft:pig",
+    "minecraft:sheep"
+  ]
+}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:campfire_cooking",
-  "ingredient": {
-    "item": "hybrid-aquatic:raw_crab_meat"
-  },
-  "result": "hybrid-aquatic:cooked_crab_meat",
-  "experience": 0.15,
-  "cookingtime": 200
-}
