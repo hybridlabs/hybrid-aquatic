@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.HybridAquaticSpawnGroups
+import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups
 import dev.hybridlabs.aquatic.entity.critter.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.shark.*

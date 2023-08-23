@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic;
+package dev.hybridlabs.aquatic.utils;
 
 import net.minecraft.entity.SpawnGroup;
 

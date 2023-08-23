@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Arrays;
 
-import static dev.hybridlabs.aquatic.HybridAquaticSpawnGroups.*;
+import static dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups.*;
 
 @Mixin(SpawnGroup.class)
 public class SpawnGroupMixin {
