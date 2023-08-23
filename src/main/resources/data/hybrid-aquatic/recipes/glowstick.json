@@ -1,14 +1,13 @@
 {
   "type": "minecraft:crafting_shapeless",
-
-  "key": {
-    "S": {
+  "ingredients": [
+    {
       "tag": "minecraft:stick"
     },
-    "G": {
+    {
       "item": "hybrid-aquatic:glow_slime"
     }
-  },
+  ],
   "result": {
     "item": "hybrid-aquatic:glowstick",
     "count": 4
