@@ -1,27 +1,27 @@
 package dev.hybridlabs.aquatic.data.client
 
-import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
-import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 
 class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
     override fun generateTranslations(builder: TranslationBuilder) {
+        // item group
         builder.add(Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.ALL).orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic")
 
-        builder.add(HybridAquaticBlocks.ANEMONE, "Anemone")
-
+        // message in a bottle
         HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.translationKey.let { key ->
             builder.add(key, "Message in a Bottle")
             builder.add("$key.jar", "Message in a Jar")
             builder.add("$key.longneck", "Message in a Longneck Bottle")
         }
 
+        // sea messages
         mapOf(
             "the_creepers_code" to "\"The creepers have a code...\"",
             "parrot_poison" to "\"Flint tried feeding parrots cookies earlier! They did not take. He coulda sworn they used to bite!\"\n*Steele",
@@ -34,6 +34,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "pumpkin_carving" to "\"Carve out a pumpkin and rely on your destiny!\"\n~Dean \"Ween\"",
         ).forEach { (id, translation) -> builder.add(SeaMessage(id).translationKey, translation) }
 
+        // entities and spawn eggs
         mapOf(
             HybridAquaticEntityTypes.CLOWNFISH to "Clownfish",
             HybridAquaticEntityTypes.ANGLERFISH to "Anglerfish",
@@ -99,17 +100,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add("item.$namespace.${path}_spawn_egg", "$translation Spawn Egg")
         }
 
-        SpawnEggItem.getAll().forEach { item ->
-            val id = Registries.ITEM.getId(item)
-            if (id.namespace != HybridAquatic.MOD_ID) {
-                return@forEach
-            }
-
-            // add translation
-            val type = item.getEntityType(null)
-
-        }
-
+        // blahaj plushies
         builder.add(HybridAquaticBlocks.BASKING_SHARK_BLAHAJ_PLUSHIE, "Basking Shark Blahaj Plushie")
         builder.add(HybridAquaticBlocks.BULL_SHARK_BLAHAJ_PLUSHIE, "Bull Shark Blahaj Plushie")
         builder.add(HybridAquaticBlocks.FRILLED_SHARK_BLAHAJ_PLUSHIE, "Frilled Shark Blahaj Plushie")
@@ -118,5 +109,12 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         builder.add(HybridAquaticBlocks.THRESHER_SHARK_BLAHAJ_PLUSHIE, "Thresher Shark Blahaj Plushie")
         builder.add(HybridAquaticBlocks.TIGER_SHARK_BLAHAJ_PLUSHIE, "Tiger Shark Blahaj Plushie")
         builder.add(HybridAquaticBlocks.WHALE_SHARK_BLAHAJ_PLUSHIE, "Whale Shark Blahaj Plushie")
+
+        // misc
+        builder.add(HybridAquaticBlocks.ANEMONE, "Anemone")
+        builder.add(HybridAquaticItems.RAW_FISH_MEAT, "Raw Fish Meat")
+        builder.add(HybridAquaticItems.COOKED_FISH_MEAT, "Cooked Fish Meat")
+        builder.add(HybridAquaticItems.RAW_TENTACLE, "Raw Tentacle")
+        builder.add(HybridAquaticItems.COOKED_TENTACLE, "Cooked Tentacle")
     }
 }
