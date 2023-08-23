@@ -4,7 +4,6 @@ import dev.hybridlabs.aquatic.goal.FishFollowGroupLeaderGoal
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.ai.goal.FollowGroupLeaderGoal
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
