@@ -18,7 +18,6 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: World) : HybridA
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.3)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
-
         }
     }
 

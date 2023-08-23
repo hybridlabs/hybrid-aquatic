@@ -3,11 +3,12 @@ package dev.hybridlabs.aquatic.entity.critter
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import net.minecraft.block.Blocks
 import net.minecraft.entity.*
-import net.minecraft.entity.ai.control.AquaticMoveControl
-import net.minecraft.entity.ai.control.YawAdjustingLookControl
+import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.MobNavigation
+import net.minecraft.entity.ai.pathing.PathNodeType
+import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
@@ -35,6 +36,16 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterEntity>, world: World, private val variantCount: Int = 1) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private val buoyant = false
+    private var waterNavigation: SwimNavigation? = null
+    private var landNavigation: MobNavigation? = null
+    init {
+        stepHeight = 1.0F
+        moveControl = MoveControl(this)
+        setPathfindingPenalty(PathNodeType.WATER, 0.0F)
+        waterNavigation = SwimNavigation(this, world)
+        landNavigation = MobNavigation(this, world)
+    }
+
 
     override fun initDataTracker() {
         super.initDataTracker()
@@ -43,11 +54,11 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
     }
     override fun initGoals() {
         super.initGoals()
-        goalSelector.add(8, EscapeDangerGoal(this, 1.0))
-        goalSelector.add(2, WalkToRandomPlaceGoal(this, 5.0, 6))
+        goalSelector.add(3, EscapeDangerGoal(this, 0.3))
+        goalSelector.add(5, WanderAroundGoal(this, 0.3, 10))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 12.0f))
-        goalSelector.add(4, LookAroundGoal(this))
-        goalSelector.add(8, MoveIntoWaterGoal(this))
+        goalSelector.add(5, LookAroundGoal(this))
+        goalSelector.add(2, MoveIntoWaterGoal(this))
     }
     override fun initialize(
         world: ServerWorldAccess,
@@ -62,10 +73,20 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         this.pitch = 0.0f
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
-
+    override fun updateSwimming() {
+        if (!world.isClient) {
+            if (canMoveVoluntarily() && this.isTouchingWater) {
+                navigation = this.waterNavigation
+                this.isSwimming = true
+            } else {
+                navigation = this.landNavigation
+                this.isSwimming = false
+            }
+        }
+    }
     override fun tick() {
         super.tick()
-        if (!buoyant && this.isTouchingWater) {
+        if (!buoyant && this.isTouchingWater && !isOnGround) {
             this.velocity = this.velocity.add(0.0, -0.05, 0.0)
         }
     }
@@ -145,17 +166,6 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
-    }
-
-    init {
-        moveControl = AquaticMoveControl(this, 85, 10, 0.01F, 0.02F, false)
-        lookControl = YawAdjustingLookControl(this, 10)
-    }
-    internal class WalkToRandomPlaceGoal(private val critter: HybridAquaticCritterEntity, d: Double, i: Int) :
-        WanderAroundGoal(critter, 0.5, 60) {
-        override fun canStart(): Boolean {
-            return critter.hasSelfControl() && super.canStart()
-        }
     }
     override fun canBreatheInWater(): Boolean {
         return true

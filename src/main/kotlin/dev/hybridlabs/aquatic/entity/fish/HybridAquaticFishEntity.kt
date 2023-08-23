@@ -45,7 +45,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         super.initGoals()
         goalSelector.add(8, EscapeDangerGoal(this, 2.1))
         goalSelector.add(0, MoveIntoWaterGoal(this))
-        goalSelector.add(2, SwimToRandomPlaceGoal(this, 0.50, 6))
+        goalSelector.add(2, SwimAroundGoal(this, 0.50, 6))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 12.0f))
         goalSelector.add(4, LookAroundGoal(this))
         goalSelector.add(1, FleeEntityGoal(this, HybridAquaticSharkEntity::class.java, 10.0f, 1.3, 1.5))

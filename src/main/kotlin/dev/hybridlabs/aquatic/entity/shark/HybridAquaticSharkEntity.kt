@@ -88,7 +88,7 @@ open class HybridAquaticSharkEntity(
         val MOISTNESS: TrackedData<Int> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
-        const val MAX_HUNGER = 9600
+        const val MAX_HUNGER = 4800
         const val HUNGER_KEY = "Hunger"
         val HUNGER: TrackedData<Int> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
