@@ -12,7 +12,6 @@ import static dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups.*;
 
 @Mixin(SpawnGroup.class)
 public class SpawnGroupMixin {
-  //private <init>(Ljava/lang/String;ILjava/lang/String;IZZI)V
   SpawnGroupMixin(String enumname, int ordinal, String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
     throw new UnsupportedOperationException("Replaced by Mixin");
   }
@@ -20,6 +19,7 @@ public class SpawnGroupMixin {
   @Shadow @Mutable @Final
   private static SpawnGroup[] field_6301;
   
+  @Unique
   @SuppressWarnings("SameParameterValue")
   private static SpawnGroup createHybridAquaticSpawnGroups(String enumname, int ordinal, String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
     return ((SpawnGroup)(Object) new SpawnGroupMixin(enumname, ordinal, name, spawnCap, peaceful, rare, immediateDespawnRange));
