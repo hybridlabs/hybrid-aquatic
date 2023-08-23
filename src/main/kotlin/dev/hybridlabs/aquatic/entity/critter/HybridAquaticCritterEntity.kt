@@ -185,7 +185,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            return pos.y <= world.seaLevel - 10 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random)
+            return pos.y <= world.seaLevel && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random)
         }
         const val VARIANT_KEY = "Variant"
     }
