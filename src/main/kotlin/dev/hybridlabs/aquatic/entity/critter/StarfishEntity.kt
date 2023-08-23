@@ -40,4 +40,10 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SLIME_SQUISH_SMALL
     }
+    override fun tick() {
+        super.tick()
+        if (!isWet) {
+            this.speed = 0.01F
+        }
+    }
 }

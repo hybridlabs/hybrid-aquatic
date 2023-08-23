@@ -37,7 +37,7 @@ public class SpawnGroupMixin {
     field_6301 = Arrays.copyOf(field_6301, ordinal + 3);
     
     HA_FISH = field_6301[ordinal] = createHybridAquaticSpawnGroups("HA_FISH", ordinal, "ha_fish", 24, true, false, 64);
-    HA_SHARK = field_6301[ordinal+1] = createHybridAquaticSpawnGroups("HA_SHARK", ordinal+1, "ha_shark", 4, false, false, 64);
+    HA_SHARK = field_6301[ordinal+1] = createHybridAquaticSpawnGroups("HA_SHARK", ordinal+1, "ha_shark", 6, false, false, 64);
     HA_CRITTER = field_6301[ordinal+2] = createHybridAquaticSpawnGroups("HA_CRITTER", ordinal+2, "ha_critter", 8, true, false, 64);
   }
 }
