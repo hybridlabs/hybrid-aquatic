@@ -12,17 +12,17 @@ import static dev.hybridlabs.aquatic.HybridAquaticSpawnGroups.*;
 
 @Mixin(SpawnGroup.class)
 public class SpawnGroupMixin {
-  SpawnGroupMixin(String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
+  //private <init>(Ljava/lang/String;ILjava/lang/String;IZZI)V
+  SpawnGroupMixin(String enumname, int ordinal, String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
     throw new UnsupportedOperationException("Replaced by Mixin");
   }
   
   @Shadow @Mutable @Final
   private static SpawnGroup[] field_6301;
   
-  @Unique
   @SuppressWarnings("SameParameterValue")
-  private static SpawnGroup createHybridAquaticSpawnGroups(String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
-    return ((SpawnGroup)(Object) new SpawnGroupMixin(name, spawnCap, peaceful, rare, immediateDespawnRange));
+  private static SpawnGroup createHybridAquaticSpawnGroups(String enumname, int ordinal, String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
+    return ((SpawnGroup)(Object) new SpawnGroupMixin(enumname, ordinal, name, spawnCap, peaceful, rare, immediateDespawnRange));
   }
   
   @Inject(method = "<clinit>",
@@ -36,8 +36,8 @@ public class SpawnGroupMixin {
     int ordinal = field_6301.length;
     field_6301 = Arrays.copyOf(field_6301, ordinal + 3);
     
-    HA_FISH = field_6301[ordinal] = createHybridAquaticSpawnGroups("ha_fish", 24, true, false, 64);
-    HA_SHARK = field_6301[ordinal+1] = createHybridAquaticSpawnGroups("ha_shark", 8, false, false, 64);
-    HA_CRITTER = field_6301[ordinal+2] = createHybridAquaticSpawnGroups("ha_critter", 12, true, false, 64);
+    HA_FISH = field_6301[ordinal] = createHybridAquaticSpawnGroups("HA_FISH", ordinal, "ha_fish", 24, true, false, 64);
+    HA_SHARK = field_6301[ordinal+1] = createHybridAquaticSpawnGroups("HA_SHARK", ordinal+1, "ha_shark", 8, false, false, 64);
+    HA_CRITTER = field_6301[ordinal+2] = createHybridAquaticSpawnGroups("HA_CRITTER", ordinal+2, "ha_critter", 12, true, false, 64);
   }
 }
