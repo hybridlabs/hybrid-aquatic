@@ -43,6 +43,7 @@ object HybridAquaticEntityRenderers {
     val BLUE_TANG = EntityRendererRegistry.register(HybridAquaticEntityTypes.BLUE_TANG, ::BlueTangEntityRenderer)
     val BLUE_SPOTTED_STINGRAY = EntityRendererRegistry.register(HybridAquaticEntityTypes.BLUE_SPOTTED_STINGRAY, ::BlueSpottedStingrayEntityRenderer)
     val GLOWING_SUCKER_OCTOPUS = EntityRendererRegistry.register(HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS, ::GlowingSuckerOctopusEntityRenderer)
+    val SEA_NETTLE = EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_NETTLE, ::SeaNettleEntityRenderer)
 
     //endregion
 
@@ -55,7 +56,6 @@ object HybridAquaticEntityRenderers {
     val SEA_CUCUMBER = EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_CUCUMBER, ::SeaCucumberEntityRenderer)
     val SEA_URCHIN = EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_URCHIN, ::SeaUrchinEntityRenderer)
     val GIANT_CLAM = EntityRendererRegistry.register(HybridAquaticEntityTypes.GIANT_CLAM, ::GiantClamEntityRenderer)
-
     //endregion
 
     //region sharks

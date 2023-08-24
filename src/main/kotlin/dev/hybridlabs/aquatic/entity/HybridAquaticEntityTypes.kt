@@ -1,10 +1,12 @@
 package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups
 import dev.hybridlabs.aquatic.entity.critter.*
 import dev.hybridlabs.aquatic.entity.fish.*
+import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
+import dev.hybridlabs.aquatic.entity.jellyfish.SeaNettleEntity
 import dev.hybridlabs.aquatic.entity.shark.*
+import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.*
@@ -339,6 +341,14 @@ object HybridAquaticEntityTypes {
     )
     //endregion
 
+    //region jellyfish
+    val SEA_NETTLE = registerJelly(
+        "sea_nettle",
+        ::SeaNettleEntity,
+        EntityDimensions.fixed(0.75f, 3.0f),
+        SeaNettleEntity.createMobAttributes().build()
+    )
+    //endregion jellyfish
     //region sharks
     val BULL_SHARK = registerShark(
         "bull_shark",
@@ -429,14 +439,24 @@ object HybridAquaticEntityTypes {
     }
 
     private inline fun <reified T : HybridAquaticFishEntity> registerFish(
-            id: String,
-            spawnGroup: SpawnGroup,
-            entityFactory: EntityFactory<T>,
-            dimensions: EntityDimensions,
-            attributeContainer: DefaultAttributeContainer
+        id: String,
+        spawnGroup: SpawnGroup,
+        entityFactory: EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
         return registerLiving(id, FabricEntityTypeBuilder.create(spawnGroup, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
+
+    private inline fun <reified T : HybridAquaticJellyfishEntity> registerJelly(
+        id: String,
+        entityFactory: EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: DefaultAttributeContainer
+    ): EntityType<T> {
+        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.HA_JELLY, entityFactory).dimensions(dimensions).build(), attributeContainer)
+    }
+
 
     private inline fun <reified T : LivingEntity> registerLiving(
         id: String,

@@ -5,6 +5,8 @@ import net.minecraft.entity.SpawnGroup;
 public class HybridAquaticSpawnGroups {
   public static SpawnGroup HA_FISH;
   public static SpawnGroup HA_FISH_UNDERGROUND;
+  public static SpawnGroup HA_JELLY;
   public static SpawnGroup HA_SHARK;
   public static SpawnGroup HA_CRITTER;
+  
 }

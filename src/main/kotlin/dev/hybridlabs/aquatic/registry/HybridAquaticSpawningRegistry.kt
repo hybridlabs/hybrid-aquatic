@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.fish.AnglerfishEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
+import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups
@@ -77,6 +78,8 @@ object HybridAquaticSpawningRegistry {
         createCritterSpawn(HybridAquaticEntityTypes.SEA_CUCUMBER, HybridAquaticBiomeTags.SEA_CUCUMBER_SPAWN_BIOMES, 10, 1, 3)
         createCritterSpawn(HybridAquaticEntityTypes.SEA_URCHIN, HybridAquaticBiomeTags.SEA_URCHIN_SPAWN_BIOMES, 10, 2, 4)
         createCritterSpawn(HybridAquaticEntityTypes.GIANT_CLAM, HybridAquaticBiomeTags.GIANT_CLAM_SPAWN_BIOMES, 10, 2, 3)
+
+        createJellySpawn(HybridAquaticEntityTypes.SEA_NETTLE, HybridAquaticBiomeTags.SEA_NETTLE_SPAWN_BIOMES, 10, 2, 3)
     }
 
     private inline fun <reified T : HybridAquaticFishEntity> createFishSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int) {
@@ -106,6 +109,17 @@ object HybridAquaticSpawningRegistry {
         SpawnRestriction.register(
             entityType, SpawnRestriction.Location.IN_WATER,
             Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate
+        )
+    }
+
+    private inline fun <reified T : HybridAquaticJellyfishEntity> createJellySpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int) {
+        BiomeModifications.addSpawn({
+                ctx: BiomeSelectionContext -> ctx.hasTag(spawnTag)
+        }, HybridAquaticSpawnGroups.HA_JELLY, entityType, weight, minGroup, maxGroup)
+
+        SpawnRestriction.register(
+            entityType, SpawnRestriction.Location.IN_WATER,
+            Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HybridAquaticJellyfishEntity::canSpawnPredicate
         )
     }
 

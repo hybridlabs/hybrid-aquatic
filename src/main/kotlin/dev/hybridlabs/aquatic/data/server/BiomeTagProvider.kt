@@ -123,6 +123,13 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.OCEAN,
         )
 
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.SEA_NETTLE_SPAWN_BIOMES).add(
+            BiomeKeys.LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_OCEAN,
+            BiomeKeys.OCEAN,
+        )
+
         getOrCreateTagBuilder(HybridAquaticBiomeTags.GLOWING_SUCKER_OCTOPUS_SPAWN_BIOMES).add(
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
