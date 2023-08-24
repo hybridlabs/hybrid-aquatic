@@ -58,4 +58,10 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
             super.damage(source, amount)
         }
     }
+    override fun tick() {
+        super.tick()
+        if (!isWet) {
+            this.speed = 0.01F
+        }
+    }
 }

@@ -91,14 +91,14 @@ class GiantClamEntity(entityType: EntityType<out GiantClamEntity>, world: World)
     override fun interactMob(player: PlayerEntity, hand: Hand?): ActionResult? {
         val currentTime = world.timeOfDay
         val itemStack = player.getStackInHand(hand)
-        return if (hand == Hand.MAIN_HAND && itemStack.isEmpty && isSubmergedInWater && currentTime > lastInteractionTime + 24000) {
+        return if (hand == Hand.MAIN_HAND && itemStack.isEmpty && isSubmergedInWater && currentTime > lastInteractionTime + 6000) {
             player.playSound(SoundEvents.ENTITY_SHULKER_CLOSE, 1.0f, 1.0f)
             val itemStack2 = ItemUsage.exchangeStack(itemStack, player, ItemStack(HybridAquaticItems.PEARL))
             player.setStackInHand(hand, itemStack2)
             lastInteractionTime = currentTime
             ActionResult.SUCCESS
         } else {
-            return if (hand == Hand.MAIN_HAND && itemStack.isOf(HybridAquaticItems.PEARL) && isSubmergedInWater && currentTime > lastInteractionTime + 24000) {
+            return if (hand == Hand.MAIN_HAND && itemStack.isOf(HybridAquaticItems.PEARL) && isSubmergedInWater && currentTime > lastInteractionTime + 6000) {
                 player.playSound(SoundEvents.ENTITY_SHULKER_CLOSE   , 1.0f, 1.0f)
                 val itemStack2 = ItemUsage.exchangeStack(itemStack, player, ItemStack(HybridAquaticItems.BLACK_PEARL))
                 player.setStackInHand(hand, itemStack2)
