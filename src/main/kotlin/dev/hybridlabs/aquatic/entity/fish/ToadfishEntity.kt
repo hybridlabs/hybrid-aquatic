@@ -6,6 +6,8 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.damage.DamageTypes
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.world.World
@@ -25,13 +27,10 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
         return if (world.isClient) {
             false
         } else {
-            if (!source.isIn(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) && !source.isOf(
-                    DamageTypes.THORNS
-                )
-            ) {
-                val var4 = source.source
-                if (var4 is LivingEntity) {
-                    var4.damage(this.damageSources.thorns(this), 2.0f)
+            if (!source.isIn(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) && !source.isOf(DamageTypes.THORNS)) {
+                val attacker = source.source
+                if (attacker is LivingEntity) {
+                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 400, 1), this)
                 }
             }
             super.damage(source, amount)
