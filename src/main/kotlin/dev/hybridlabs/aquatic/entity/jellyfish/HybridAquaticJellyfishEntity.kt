@@ -54,15 +54,17 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         this.air = this.maxAir
         this.variant = this.random.nextInt(variantCount)
         this.pitch = 0.0f
+        this.bobTicks = this.random.nextDouble() * Math.PI
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
-    private var bobTicks = 0
 
+    private var bobTicks = 0.0
     override fun tick() {
         super.tick()
-
-        bobTicks++
-        val bobOffset = MathHelper.sin(bobTicks.toFloat() * 0.1f) * 0.1f
+        setNoGravity(submergedInWater)
+        bobTicks += 0.09817477042468103
+        if(bobTicks > TAU) bobTicks -= TAU
+        val bobOffset = MathHelper.sin(bobTicks.toFloat()) * 0.1f
         this.setPos(this.x, this.y + bobOffset.toDouble(), this.z)
     }
 
@@ -166,9 +168,10 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            return pos.y <= world.seaLevel && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random)
+            return pos.y <= world.seaLevel && pos.y >= world.seaLevel - 9 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random)
         }
         const val MOISTNESS_KEY = "Moistness"
         const val VARIANT_KEY = "Variant"
+        const val TAU = Math.PI * 2
     }
 }
