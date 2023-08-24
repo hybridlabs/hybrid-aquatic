@@ -27,7 +27,7 @@ object HybridAquaticEntityTypes {
 
     val ANGLERFISH = registerFish(
         "anglerfish",
-        HybridAquaticSpawnGroups.HA_FISH_UNDERGROUND,
+        HybridAquaticSpawnGroups.FISH_UNDERGROUND.spawnGroup,
         ::AnglerfishEntity,
         EntityDimensions.fixed(0.75f, 0.75f),
         AnglerfishEntity.createMobAttributes().build()
@@ -417,7 +417,7 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.HA_SHARK, entityFactory).dimensions(dimensions).build(), attributeContainer)
+        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.SHARK.spawnGroup, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
     private inline fun <reified T : HybridAquaticCritterEntity> registerCritter(
@@ -426,7 +426,7 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.HA_CRITTER, entityFactory).dimensions(dimensions).build(), attributeContainer)
+        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.CRITTER.spawnGroup, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
     private inline fun <reified T : HybridAquaticFishEntity> registerFish(
@@ -435,7 +435,7 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerFish(id, HybridAquaticSpawnGroups.HA_FISH, entityFactory, dimensions, attributeContainer)
+        return registerFish(id, HybridAquaticSpawnGroups.FISH.spawnGroup, entityFactory, dimensions, attributeContainer)
     }
 
     private inline fun <reified T : HybridAquaticFishEntity> registerFish(
@@ -454,7 +454,7 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.HA_JELLY, entityFactory).dimensions(dimensions).build(), attributeContainer)
+        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.JELLY.spawnGroup, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
 

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.mixin;
 
+import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups;
 import net.minecraft.entity.SpawnGroup;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -7,8 +8,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Arrays;
-
-import static dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups.*;
 
 @Mixin(SpawnGroup.class)
 public class SpawnGroupMixin {
@@ -33,13 +32,15 @@ public class SpawnGroupMixin {
     )
   )
   private static void injectEnum(CallbackInfo ci) {
-    int ordinal = field_6301.length;
-    field_6301 = Arrays.copyOf(field_6301, ordinal + 5);
+    int vanillaSGLength = field_6301.length;
+    HybridAquaticSpawnGroups[] haGroups = HybridAquaticSpawnGroups.values();
+    int haSGLength = haGroups.length;
+    field_6301 = Arrays.copyOf(field_6301, vanillaSGLength + haSGLength);
     
-    HA_FISH = field_6301[ordinal] = createHybridAquaticSpawnGroups("HA_FISH", ordinal, "ha_fish", 18, true, false, 64);
-    HA_SHARK = field_6301[ordinal+1] = createHybridAquaticSpawnGroups("HA_SHARK", ordinal+1, "ha_shark", 3, false, false, 64);
-    HA_FISH_UNDERGROUND = field_6301[ordinal+2] = createHybridAquaticSpawnGroups("HA_FISH_UNDERGROUND", ordinal+2, "ha_fish_underground", 6, true, false, 64);
-    HA_JELLY = field_6301[ordinal+3] = createHybridAquaticSpawnGroups("HA_JELLY", ordinal+3, "ha_jelly", 3, false, false, 64);
-    HA_CRITTER = field_6301[ordinal+4] = createHybridAquaticSpawnGroups("HA_CRITTER", ordinal+4, "ha_critter", 6, true, false, 64);
+    for (int i = 0; i < haSGLength; i++) {
+      int pos = vanillaSGLength + i;
+      HybridAquaticSpawnGroups haSpawnGroup = haGroups[i];
+      haSpawnGroup.spawnGroup = field_6301[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos, haSpawnGroup.name, haSpawnGroup.spawnCap, haSpawnGroup.peaceful, haSpawnGroup.rare, haSpawnGroup.immediateDespawnRange);
+    }
   }
 }

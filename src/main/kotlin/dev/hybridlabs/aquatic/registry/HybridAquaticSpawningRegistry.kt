@@ -31,7 +31,7 @@ object HybridAquaticSpawningRegistry {
         createFishSpawn(HybridAquaticEntityTypes.BLUE_SPOTTED_STINGRAY, HybridAquaticBiomeTags.BLUE_SPOTTED_STINGRAY_SPAWN_BIOMES, 5, 1, 2)
         createFishSpawn(HybridAquaticEntityTypes.LIONFISH, HybridAquaticBiomeTags.LIONFISH_SPAWN_BIOMES, 10, 1, 3)
         createFishSpawn(HybridAquaticEntityTypes.ANGLERFISH, HybridAquaticBiomeTags.ANGLERFISH_SPAWN_BIOMES,
-            HybridAquaticSpawnGroups.HA_FISH_UNDERGROUND, 15, 1, 2, AnglerfishEntity::canSpawnPredicate)
+            HybridAquaticSpawnGroups.FISH_UNDERGROUND.spawnGroup, 15, 1, 2, AnglerfishEntity::canSpawnPredicate)
         createFishSpawn(HybridAquaticEntityTypes.MOON_JELLY, HybridAquaticBiomeTags.MOON_JELLY_SPAWN_BIOMES, 15, 2, 4)
         createFishSpawn(HybridAquaticEntityTypes.TOADFISH, HybridAquaticBiomeTags.TOADFISH_SPAWN_BIOMES, 5, 1, 2)
         createFishSpawn(HybridAquaticEntityTypes.OARFISH, HybridAquaticBiomeTags.OARFISH_SPAWN_BIOMES, 10, 1, 2)
@@ -83,7 +83,7 @@ object HybridAquaticSpawningRegistry {
     }
 
     private inline fun <reified T : HybridAquaticFishEntity> createFishSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int) {
-        createFishSpawn(entityType, spawnTag, HybridAquaticSpawnGroups.HA_FISH, weight, minGroup, maxGroup, HybridAquaticFishEntity::canSpawnPredicate)
+        createFishSpawn(entityType, spawnTag, HybridAquaticSpawnGroups.FISH.spawnGroup, weight, minGroup, maxGroup, HybridAquaticFishEntity::canSpawnPredicate)
     }
 
     private inline fun <reified T : HybridAquaticFishEntity> createFishSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, spawnGroup: SpawnGroup, weight: Int, minGroup: Int, maxGroup: Int, predicate: SpawnPredicate<T>) {
@@ -98,7 +98,7 @@ object HybridAquaticSpawningRegistry {
     }
 
     private inline fun <reified T : HybridAquaticSharkEntity> createSharkSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int) {
-        createSharkSpawn(entityType, spawnTag, HybridAquaticSpawnGroups.HA_SHARK, weight, minGroup, maxGroup, HybridAquaticSharkEntity::canSpawnPredicate);
+        createSharkSpawn(entityType, spawnTag, HybridAquaticSpawnGroups.SHARK.spawnGroup, weight, minGroup, maxGroup, HybridAquaticSharkEntity::canSpawnPredicate);
     }
 
     private inline fun <reified T : HybridAquaticSharkEntity> createSharkSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, spawnGroup: SpawnGroup, weight: Int, minGroup: Int, maxGroup: Int, predicate: SpawnPredicate<T>) {
@@ -115,7 +115,7 @@ object HybridAquaticSpawningRegistry {
     private inline fun <reified T : HybridAquaticJellyfishEntity> createJellySpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int) {
         BiomeModifications.addSpawn({
                 ctx: BiomeSelectionContext -> ctx.hasTag(spawnTag)
-        }, HybridAquaticSpawnGroups.HA_JELLY, entityType, weight, minGroup, maxGroup)
+        }, HybridAquaticSpawnGroups.JELLY.spawnGroup, entityType, weight, minGroup, maxGroup)
 
         SpawnRestriction.register(
             entityType, SpawnRestriction.Location.IN_WATER,
@@ -124,7 +124,7 @@ object HybridAquaticSpawningRegistry {
     }
 
     private inline fun <reified T : HybridAquaticCritterEntity> createCritterSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, weight: Int, minGroup: Int, maxGroup: Int) {
-        createCritterSpawn(entityType, spawnTag, HybridAquaticSpawnGroups.HA_CRITTER, weight, minGroup, maxGroup, HybridAquaticCritterEntity::canSpawnPredicate)
+        createCritterSpawn(entityType, spawnTag, HybridAquaticSpawnGroups.CRITTER.spawnGroup, weight, minGroup, maxGroup, HybridAquaticCritterEntity::canSpawnPredicate)
     }
 
     private inline fun <reified T : HybridAquaticCritterEntity> createCritterSpawn(entityType: EntityType<T>, spawnTag: TagKey<Biome>, spawnGroup: SpawnGroup, weight: Int, minGroup: Int, maxGroup: Int, predicate: SpawnPredicate<T>) {
