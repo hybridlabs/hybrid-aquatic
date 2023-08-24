@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:ocean",
     "minecraft:warm_ocean",
     "minecraft:lukewarm_ocean",
     "minecraft:beach"

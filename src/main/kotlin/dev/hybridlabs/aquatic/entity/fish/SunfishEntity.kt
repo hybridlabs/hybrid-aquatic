@@ -41,7 +41,7 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) : H
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.25)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
-
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 100.0)
         }
     }
 }

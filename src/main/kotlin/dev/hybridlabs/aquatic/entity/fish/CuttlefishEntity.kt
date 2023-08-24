@@ -47,15 +47,15 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.ENTITY_GLOW_SQUID_HURT
+        return SoundEvents.ENTITY_SQUID_HURT
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.ENTITY_GLOW_SQUID_DEATH
+        return SoundEvents.ENTITY_SQUID_DEATH
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_GLOW_SQUID_AMBIENT
+        return SoundEvents.ENTITY_SQUID_AMBIENT
     }
 
     override fun getSplashSound(): SoundEvent {

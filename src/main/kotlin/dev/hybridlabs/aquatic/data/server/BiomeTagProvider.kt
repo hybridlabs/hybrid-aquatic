@@ -16,16 +16,17 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_COLD_OCEAN,
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.BARRELEYE_SPAWN_BIOMES).add(
             BiomeKeys.DEEP_COLD_OCEAN,
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.BASKING_SHARK_SPAWN_BIOMES).add(
-            BiomeKeys.OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
             BiomeKeys.DEEP_OCEAN,
         )
@@ -47,11 +48,8 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.BULL_SHARK_SPAWN_BIOMES).add(
-            BiomeKeys.OCEAN,
-            BiomeKeys.WARM_OCEAN,
-            BiomeKeys.LUKEWARM_OCEAN,
-            BiomeKeys.MANGROVE_SWAMP,
-            BiomeKeys.RIVER,
+            BiomeKeys.DEEP_OCEAN,
+            BiomeKeys.DEEP_LUKEWARM_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.CLOWNFISH_SPAWN_BIOMES).add(
@@ -72,12 +70,13 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
             BiomeKeys.BEACH,
             BiomeKeys.STONY_SHORE,
+            BiomeKeys.DEEP_COLD_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.CUTTLEFISH_SPAWN_BIOMES).add(
             BiomeKeys.WARM_OCEAN,
             BiomeKeys.LUKEWARM_OCEAN,
-            BiomeKeys.DEEP_LUKEWARM_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DISCUS_SPAWN_BIOMES).add(
@@ -89,12 +88,14 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_COLD_OCEAN,
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.FIDDLER_CRAB_SPAWN_BIOMES).add(
             BiomeKeys.MANGROVE_SWAMP,
             BiomeKeys.BEACH,
             BiomeKeys.STONY_SHORE,
+            BiomeKeys.WARM_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.FIREFLY_SQUID_SPAWN_BIOMES).add(
@@ -113,6 +114,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBiomeTags.FRILLED_SHARK_SPAWN_BIOMES).add(
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_COLD_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.GIANT_CLAM_SPAWN_BIOMES).add(
@@ -133,24 +135,20 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.GREAT_WHITE_SHARK_SPAWN_BIOMES).add(
-            BiomeKeys.OCEAN,
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_COLD_OCEAN,
-            BiomeKeys.COLD_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.HAMMERHEAD_SHARK_SPAWN_BIOMES).add(
-            BiomeKeys.OCEAN,
-            BiomeKeys.WARM_OCEAN,
-            BiomeKeys.LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_OCEAN,
+            BiomeKeys.DEEP_LUKEWARM_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.HERMIT_CRAB_SPAWN_BIOMES).add(
             BiomeKeys.OCEAN,
-            BiomeKeys.DEEP_OCEAN,
             BiomeKeys.WARM_OCEAN,
             BiomeKeys.LUKEWARM_OCEAN,
-            BiomeKeys.DEEP_LUKEWARM_OCEAN,
             BiomeKeys.BEACH,
             BiomeKeys.STONY_SHORE,
         )
@@ -162,14 +160,12 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.MAHIMAHI_SPAWN_BIOMES).add(
             BiomeKeys.OCEAN,
-            BiomeKeys.WARM_OCEAN,
             BiomeKeys.LUKEWARM_OCEAN,
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.MOON_JELLY_SPAWN_BIOMES).add(
-            BiomeKeys.OCEAN,
             BiomeKeys.WARM_OCEAN,
             BiomeKeys.LUKEWARM_OCEAN,
             BiomeKeys.BEACH,
@@ -178,7 +174,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBiomeTags.MORAY_EEL_SPAWN_BIOMES).add(
             BiomeKeys.WARM_OCEAN,
             BiomeKeys.LUKEWARM_OCEAN,
-            BiomeKeys.DEEP_LUKEWARM_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.NAUTILUS_SPAWN_BIOMES).add(
@@ -199,7 +194,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.OARFISH_SPAWN_BIOMES).add(
-            BiomeKeys.OCEAN,
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
         )
@@ -224,6 +218,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_COLD_OCEAN,
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.ROCKFISH_SPAWN_BIOMES).add(
@@ -247,7 +242,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.COLD_OCEAN,
             BiomeKeys.DEEP_COLD_OCEAN,
-        )
+            BiomeKeys.DEEP_FROZEN_OCEAN,
+
+            )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SEA_URCHIN_SPAWN_BIOMES).add(
             BiomeKeys.WARM_OCEAN,
@@ -257,7 +254,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.COLD_OCEAN,
             BiomeKeys.DEEP_COLD_OCEAN,
-        )
+            BiomeKeys.DEEP_FROZEN_OCEAN,
+
+            )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SEAHORSE_SPAWN_BIOMES).add(
             BiomeKeys.WARM_OCEAN,
@@ -272,7 +271,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.COLD_OCEAN,
             BiomeKeys.DEEP_COLD_OCEAN,
-        )
+            BiomeKeys.DEEP_FROZEN_OCEAN,
+
+            )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.STONEFISH_SPAWN_BIOMES).add(
             BiomeKeys.WARM_OCEAN,
@@ -283,13 +284,10 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SUNFISH_SPAWN_BIOMES).add(
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
             BiomeKeys.DEEP_OCEAN,
-            BiomeKeys.OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.THRESHER_SHARK_SPAWN_BIOMES).add(
             BiomeKeys.DEEP_OCEAN,
-            BiomeKeys.WARM_OCEAN,
-            BiomeKeys.LUKEWARM_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
         )
 
@@ -299,9 +297,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TIGER_SHARK_SPAWN_BIOMES).add(
-            BiomeKeys.OCEAN,
-            BiomeKeys.WARM_OCEAN,
-            BiomeKeys.LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
         )
 
@@ -326,17 +322,16 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_COLD_OCEAN,
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.WHALE_SHARK_SPAWN_BIOMES).add(
-            BiomeKeys.OCEAN,
+            BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.YELLOWFIN_SPAWN_BIOMES).add(
             BiomeKeys.OCEAN,
-            BiomeKeys.WARM_OCEAN,
-            BiomeKeys.LUKEWARM_OCEAN,
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
         )

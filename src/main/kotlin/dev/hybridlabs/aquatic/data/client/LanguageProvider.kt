@@ -38,6 +38,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         mapOf(
             HybridAquaticEntityTypes.CLOWNFISH to "Clownfish",
             HybridAquaticEntityTypes.ANGLERFISH to "Anglerfish",
+            HybridAquaticEntityTypes.DRAGONFISH to "Dragonfish",
             HybridAquaticEntityTypes.BARRELEYE to "Barreleye",
             HybridAquaticEntityTypes.YELLOWFIN_TUNA to "Yellowfin Tuna",
             HybridAquaticEntityTypes.CUTTLEFISH to "Cuttlefish",

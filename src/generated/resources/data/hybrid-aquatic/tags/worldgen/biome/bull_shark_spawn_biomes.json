@@ -1,10 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:ocean",
-    "minecraft:warm_ocean",
-    "minecraft:lukewarm_ocean",
-    "minecraft:mangrove_swamp",
-    "minecraft:river"
+    "minecraft:deep_ocean",
+    "minecraft:deep_lukewarm_ocean"
   ]
 }

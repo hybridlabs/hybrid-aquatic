@@ -82,7 +82,7 @@ class GiantClamEntity(entityType: EntityType<out GiantClamEntity>, world: World)
             event.controller.setAnimation(RawAnimation.begin().then("closed", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
-        if (!isSubmergedInWater) {
+        if (!isWet) {
             event.controller.setAnimation(RawAnimation.begin().then("closed", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
@@ -109,4 +109,8 @@ class GiantClamEntity(entityType: EntityType<out GiantClamEntity>, world: World)
             }
         }
     }
+    override fun isPushable(): Boolean {
+        return !this.isAlive && !this.isSpectator && !this.isClimbing
+    }
+
 }

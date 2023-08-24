@@ -112,7 +112,7 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
     }
 
     private fun findNearestDeepWater(): BlockPos? {
-        val searchRadius = 16
+        val searchRadius = 32
         val searchBox = boundingBox.expand(searchRadius.toDouble(), searchRadius.toDouble(), searchRadius.toDouble())
         return world.getEntitiesByClass(Entity::class.java, searchBox) { entity -> entity.isSubmergedInWater }
             .filterIsInstance<Entity>()
@@ -122,7 +122,7 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
     }
 
     private fun findNearestSurface(): BlockPos? {
-        val searchRadius = 16
+        val searchRadius = 48
         val searchBox = boundingBox.expand(searchRadius.toDouble(), searchRadius.toDouble(), searchRadius.toDouble())
         return world.getEntitiesByClass(Entity::class.java, searchBox) { entity -> entity.isSubmergedInWater }
             .filterIsInstance<Entity>()
@@ -135,7 +135,7 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
         val waterSurfaceY = world.getTopY(Heightmap.Type.WORLD_SURFACE, blockPos.x, blockPos.z)
         val waterTopY = world.getTopY(Heightmap.Type.OCEAN_FLOOR, blockPos.x, blockPos.z)
         val waterDepth = waterSurfaceY - waterTopY
-        return waterDepth >= 16
+        return waterDepth >= 22
     }
 
     private fun isBlockAboveWaterSurface(blockPos: BlockPos): Boolean {

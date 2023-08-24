@@ -127,17 +127,11 @@ open class HybridAquaticSharkEntity(
                 shouldAngerAt(entity) || shouldProximityAttack(entity as PlayerEntity) || isPlayerBleeding(entity)
             })
             targetSelector.add(3, UniversalAngerGoal(this, false))
-            targetSelector.add(4, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) {
+            targetSelector.add(3, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) {
                 hunger <= 1200 && it.type.isIn(prey) && (!isCannibalistic && !it.type.equals(this.type))
             })
             goalSelector.add(1, ChaseBoatGoal(this))
         }
-//        targetSelector.add(
-//            4,
-//            ActiveTargetGoal(this, BoatEntity::class.java, 10, true, false, { livingEntity: LivingEntity? ->
-//                livingEntity.squaredDistanceTo(this) < 20
-//            })
-//        )
     }
 
     override fun initDataTracker() {
@@ -191,7 +185,6 @@ open class HybridAquaticSharkEntity(
             if (hunger > 0)
                 hunger -= 1
         }
-
     }
 
     override fun tickWaterBreathingAir(air: Int) {}
@@ -344,13 +337,13 @@ open class HybridAquaticSharkEntity(
         hunger += getHungerValue(entityType)
     }
 
-    internal class AttackGoal(private val shark: HybridAquaticSharkEntity) : MeleeAttackGoal(shark, ORIGINAL_SPEED, true) {
+    internal class AttackGoal(private val shark: HybridAquaticSharkEntity) : MeleeAttackGoal(shark,
+        ORIGINAL_SPEED.toDouble(), true) {
         override fun attack(target: LivingEntity, squaredDistance: Double) {
             val d = getSquaredMaxAttackDistance(target)
             if (squaredDistance <= d && this.isCooledDown) {
                 resetCooldown()
                 mob.tryAttack(target)
-
 
                 shark.isSprinting = false
                 shark.isRushing = false
@@ -360,7 +353,7 @@ open class HybridAquaticSharkEntity(
                     shark.eatFish(target.type)
 //                shark.setRushing(false)
             } else if (squaredDistance > d * 5 && !shark.isRushing) {
-//                shark.rushTargetPosition = Vec3d(target.pos.x, target.pos.y, target.pos.z)
+                shark.rushTargetPosition = Vec3d(target.pos.x, target.pos.y, target.pos.z)
                 shark.isSprinting = true
                 shark.isRushing = true
             }
@@ -381,7 +374,7 @@ open class HybridAquaticSharkEntity(
         }
 
         companion object {
-            private const val ORIGINAL_SPEED = 2.5
+            private const val ORIGINAL_SPEED = 3
             private const val SPEED_MULTIPLIER = 2.0
         }
     }
