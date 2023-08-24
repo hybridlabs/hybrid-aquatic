@@ -38,8 +38,8 @@ public class SpawnGroupMixin {
     
     HA_FISH = field_6301[ordinal] = createHybridAquaticSpawnGroups("HA_FISH", ordinal, "ha_fish", 18, true, false, 64);
     HA_SHARK = field_6301[ordinal+1] = createHybridAquaticSpawnGroups("HA_SHARK", ordinal+1, "ha_shark", 3, false, false, 64);
-    HA_FISH_UNDERGROUND = field_6301[ordinal+2] = createHybridAquaticSpawnGroups("HA_FISH_UNDERGROUND", ordinal+1, "ha_fish_underground", 6, true, false, 64);
-    HA_JELLY = field_6301[ordinal+3] = createHybridAquaticSpawnGroups("HA_JELLY", ordinal+1, "ha_jelly", 3, false, false, 64);
-    HA_CRITTER = field_6301[ordinal+4] = createHybridAquaticSpawnGroups("HA_CRITTER", ordinal+2, "ha_critter", 6, true, false, 64);
+    HA_FISH_UNDERGROUND = field_6301[ordinal+2] = createHybridAquaticSpawnGroups("HA_FISH_UNDERGROUND", ordinal+2, "ha_fish_underground", 6, true, false, 64);
+    HA_JELLY = field_6301[ordinal+3] = createHybridAquaticSpawnGroups("HA_JELLY", ordinal+3, "ha_jelly", 3, false, false, 64);
+    HA_CRITTER = field_6301[ordinal+4] = createHybridAquaticSpawnGroups("HA_CRITTER", ordinal+4, "ha_critter", 6, true, false, 64);
   }
 }
