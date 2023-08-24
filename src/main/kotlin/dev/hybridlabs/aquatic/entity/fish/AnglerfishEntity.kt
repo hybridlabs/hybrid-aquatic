@@ -1,14 +1,19 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import net.minecraft.block.Blocks
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.registry.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
+import net.minecraft.util.math.random.Random
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
+import net.minecraft.world.WorldAccess
 
 class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
     companion object {
@@ -19,6 +24,16 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Worl
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
 
+        }
+
+        fun canSpawnPredicate(
+            type: EntityType<out WaterCreatureEntity?>?,
+            world: WorldAccess,
+            reason: SpawnReason?,
+            pos: BlockPos,
+            random: Random?
+        ): Boolean {
+            return pos.y <= world.seaLevel - 32 && world.getBaseLightLevel(pos, 0) == 0 && world.getBlockState(pos).isOf(Blocks.WATER)
         }
     }
 
