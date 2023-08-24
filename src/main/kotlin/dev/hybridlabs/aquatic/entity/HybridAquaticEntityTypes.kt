@@ -25,6 +25,7 @@ object HybridAquaticEntityTypes {
 
     val ANGLERFISH = registerFish(
         "anglerfish",
+        HybridAquaticSpawnGroups.HA_FISH_UNDERGROUND,
         ::AnglerfishEntity,
         EntityDimensions.fixed(0.75f, 0.75f),
         AnglerfishEntity.createMobAttributes().build()
@@ -419,12 +420,22 @@ object HybridAquaticEntityTypes {
     }
 
     private inline fun <reified T : HybridAquaticFishEntity> registerFish(
+        id: String,
+        entityFactory: EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: DefaultAttributeContainer
+    ): EntityType<T> {
+        return registerFish(id, HybridAquaticSpawnGroups.HA_FISH, entityFactory, dimensions, attributeContainer)
+    }
+
+    private inline fun <reified T : HybridAquaticFishEntity> registerFish(
             id: String,
+            spawnGroup: SpawnGroup,
             entityFactory: EntityFactory<T>,
             dimensions: EntityDimensions,
             attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.HA_FISH, entityFactory).dimensions(dimensions).build(), attributeContainer)
+        return registerLiving(id, FabricEntityTypeBuilder.create(spawnGroup, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
     private inline fun <reified T : LivingEntity> registerLiving(
