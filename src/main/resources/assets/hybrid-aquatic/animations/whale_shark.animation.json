@@ -3,162 +3,193 @@
 	"animations": {
 		"swim": {
 			"loop": true,
-			"animation_length": 3,
+			"animation_length": 5,
 			"bones": {
-				"Head": {
+				"head": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, -2.5, 0]
 						},
-						"1.5": {
+						"2.5": {
 							"vector": [0, 2.5, 0]
 						},
-						"3.0": {
+						"5.0": {
 							"vector": [0, -2.5, 0]
 						}
 					}
 				},
-				"Neck": {
+				"body_2": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 2.5, 0]
 						},
-						"1.5": {
+						"2.5": {
 							"vector": [0, -5, 0]
 						},
-						"3.0": {
+						"5.0": {
 							"vector": [0, 2.5, 0]
 						}
 					}
 				},
-				"LFin": {
+				"left_fin": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 15, 0]
 						},
-						"1.5": {
+						"2.5": {
 							"vector": [0, -15, 0]
 						},
-						"3.0": {
+						"5.0": {
 							"vector": [0, 15, 0]
 						}
 					}
 				},
-				"Middle": {
+				"body_3": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 5, 0]
+							"vector": [0, 10, 0]
 						},
-						"1.5": {
-							"vector": [0, -5, 0]
+						"2.5": {
+							"vector": [0, -10, 0]
 						},
-						"3.0": {
-							"vector": [0, 5, 0]
-						}
-					}
-				},
-				"Back": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 5, 0]
-						},
-						"1.5": {
-							"vector": [0, -5, 0]
-						},
-						"3.0": {
-							"vector": [0, 5, 0]
-						}
-					}
-				},
-				"Anal2": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, -10]
-						},
-						"1.5": {
-							"vector": [0, 0, 10]
-						},
-						"3.0": {
-							"vector": [0, 0, -10]
-						}
-					}
-				},
-				"Dorsal2": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 10]
-						},
-						"1.5": {
-							"vector": [0, 0, -10]
-						},
-						"3.0": {
-							"vector": [0, 0, 10]
+						"5.0": {
+							"vector": [0, 10, 0]
 						}
 					}
 				},
 				"tail": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 5, 0]
-						},
-						"1.5": {
-							"vector": [0, -5, 0]
-						},
-						"3.0": {
-							"vector": [0, 5, 0]
-						}
-					}
-				},
-				"Dorsal1": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 5]
-						},
-						"1.5": {
-							"vector": [0, 0, -5]
-						},
-						"3.0": {
-							"vector": [0, 0, 5]
-						}
-					}
-				},
-				"LAnal1": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 10, 0]
-						},
-						"1.5": {
-							"vector": [0, 0, 0]
-						},
-						"3.0": {
-							"vector": [0, 10, 0]
-						}
-					}
-				},
-				"RAnal1": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 10, 0]
-						},
-						"1.5": {
-							"vector": [0, -10, 0]
-						},
-						"3.0": {
-							"vector": [0, 10, 0]
-						}
-					}
-				},
-				"RFin": {
-					"rotation": {
-						"0.0": {
 							"vector": [0, 15, 0]
 						},
-						"1.5": {
+						"2.5": {
 							"vector": [0, -15, 0]
 						},
-						"3.0": {
+						"5.0": {
 							"vector": [0, 15, 0]
 						}
+					}
+				},
+				"lower_anal_fin": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, -10]
+						},
+						"2.5": {
+							"vector": [0, 0, 10]
+						},
+						"5.0": {
+							"vector": [0, 0, -10]
+						}
+					}
+				},
+				"back_dorsal_fin": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 10]
+						},
+						"2.5": {
+							"vector": [0, 0, -10]
+						},
+						"5.0": {
+							"vector": [0, 0, 10]
+						}
+					}
+				},
+				"tail_fin": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 5, 0]
+						},
+						"2.5": {
+							"vector": [0, -5, 0]
+						},
+						"5.0": {
+							"vector": [0, 5, 0]
+						}
+					}
+				},
+				"dorsal_fin": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 5]
+						},
+						"2.5": {
+							"vector": [0, 0, -5]
+						},
+						"5.0": {
+							"vector": [0, 0, 5]
+						}
+					}
+				},
+				"left_pelvic_fin": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 10, 0]
+						},
+						"2.5": {
+							"vector": [0, 0, 0]
+						},
+						"5.0": {
+							"vector": [0, 10, 0]
+						}
+					}
+				},
+				"right_pelvic_fin": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 10, 0]
+						},
+						"2.5": {
+							"vector": [0, -10, 0]
+						},
+						"5.0": {
+							"vector": [0, 10, 0]
+						}
+					}
+				},
+				"right_fin": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 15, 0]
+						},
+						"2.5": {
+							"vector": [0, -15, 0]
+						},
+						"5.0": {
+							"vector": [0, 15, 0]
+						}
+					}
+				}
+			}
+		},
+		"flop": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"mouth": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"body": {
+					"position": {
+						"vector": [0, -2, 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"body_2": {
+					"rotation": {
+						"vector": [-7.5, 0, 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": [-7.5, 0, 0]
 					}
 				}
 			}

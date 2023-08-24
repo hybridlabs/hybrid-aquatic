@@ -1,5 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity
 
-import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
+import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 
-class MoonJellyEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("moon_jelly")
+class MoonJellyEntityModel : HybridAquaticJellyfishEntityModel<HybridAquaticJellyfishEntity>("moon_jelly")

@@ -115,7 +115,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         return SoundEvents.ENTITY_DOLPHIN_SPLASH
     }
     override fun getSwimSound(): SoundEvent {
-        return SoundEvents.ENTITY_DOLPHIN_SWIM
+        return SoundEvents.ENTITY_SQUID_AMBIENT
     }
     override fun createNavigation(world: World): EntityNavigation {
         return SwimNavigation(this, world)

@@ -1,5 +1,6 @@
-package dev.hybridlabs.aquatic.entity.fish
+package dev.hybridlabs.aquatic.entity.jellyfish
 
+import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -9,7 +10,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class MoonJellyEntity(entityType: EntityType<out MoonJellyEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
+class MoonJellyEntity(entityType: EntityType<out MoonJellyEntity>, world: World) : HybridAquaticJellyfishEntity(entityType, world) {
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {

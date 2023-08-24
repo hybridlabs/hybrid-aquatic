@@ -89,10 +89,10 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.SEA_CUCUMBER to "Sea Cucumber",
             HybridAquaticEntityTypes.SEA_URCHIN to "Sea Urchin",
             HybridAquaticEntityTypes.GIANT_CLAM to "Giant Clam",
-            HybridAquaticEntityTypes.STARFISH to "Starfish"
+            HybridAquaticEntityTypes.STARFISH to "Starfish",
+            HybridAquaticEntityTypes.SEA_NETTLE to "Sea Nettle"
 
-
-            ).forEach { (entityType, translation) ->
+        ).forEach { (entityType, translation) ->
             val id = Registries.ENTITY_TYPE.getId(entityType)
             val translationKey = entityType.translationKey
             val namespace = id.namespace
