@@ -54,11 +54,11 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         this.air = this.maxAir
         this.variant = this.random.nextInt(variantCount)
         this.pitch = 0.0f
-        this.bobTicks = this.random.nextDouble() * Math.PI
+        this.bobTicks = this.random.nextDouble() * TAU
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    private var bobTicks = 0.0
+    private var bobTicks = this.random.nextDouble() * TAU
     override fun tick() {
         super.tick()
         setNoGravity(submergedInWater)

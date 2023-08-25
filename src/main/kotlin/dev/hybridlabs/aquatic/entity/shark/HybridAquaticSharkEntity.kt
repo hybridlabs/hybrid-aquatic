@@ -99,7 +99,6 @@ open class HybridAquaticSharkEntity(
         val ATTEMPT_ATTACK: TrackedData<Boolean> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
-
         val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(19, 40)
 
         fun canSpawnPredicate(
@@ -338,13 +337,12 @@ open class HybridAquaticSharkEntity(
     }
 
     internal class AttackGoal(private val shark: HybridAquaticSharkEntity) : MeleeAttackGoal(shark,
-        ORIGINAL_SPEED.toDouble(), true) {
+        ORIGINAL_SPEED, true) {
         override fun attack(target: LivingEntity, squaredDistance: Double) {
             val d = getSquaredMaxAttackDistance(target)
             if (squaredDistance <= d && this.isCooledDown) {
                 resetCooldown()
                 mob.tryAttack(target)
-
                 shark.isSprinting = false
                 shark.isRushing = false
                 shark.attemptAttack = true
@@ -374,7 +372,10 @@ open class HybridAquaticSharkEntity(
         }
 
         companion object {
-            private const val ORIGINAL_SPEED = 3
+            //TODO: need to make our own AttackGoal for sharks so we can change the speed of the Shark when it rushes towards their prey
+            //      changed ORIGINAL_SPEED to 6.0 for now
+            //      Oh, and we also need to make sharks move vertically faster, because right now they are pretty slow at that.
+            private const val ORIGINAL_SPEED = 6.0
             private const val SPEED_MULTIPLIER = 2.0
         }
     }
