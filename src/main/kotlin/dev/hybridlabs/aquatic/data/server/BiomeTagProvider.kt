@@ -17,6 +17,11 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
             BiomeKeys.DEEP_FROZEN_OCEAN,
+            BiomeKeys.OCEAN,
+            BiomeKeys.COLD_OCEAN,
+            BiomeKeys.FROZEN_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
+            BiomeKeys.WARM_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.BARRELEYE_SPAWN_BIOMES).add(
@@ -347,5 +352,10 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.JUNGLE,
             BiomeKeys.SPARSE_JUNGLE,
         )
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.SEA_NETTLE_SPAWN_BIOMES).add(
+            BiomeKeys.DEEP_OCEAN,
+            BiomeKeys.OCEAN,
+            BiomeKeys.DEEP_LUKEWARM_OCEAN,
+            )
     }
 }

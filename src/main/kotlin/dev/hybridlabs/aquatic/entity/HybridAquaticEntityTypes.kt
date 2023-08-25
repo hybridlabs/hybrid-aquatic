@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.critter.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
+import dev.hybridlabs.aquatic.entity.jellyfish.MoonJellyEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.SeaNettleEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups
@@ -222,13 +223,6 @@ object HybridAquaticEntityTypes {
         SeahorseEntity.createMobAttributes().build()
     )
 
-    val MOON_JELLY = registerFish(
-        "moon_jelly",
-        ::MoonJellyEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        MoonJellyEntity.createMobAttributes().build()
-    )
-
     val GOURAMI = registerFish(
         "gourami",
         ::GouramiEntity,
@@ -347,6 +341,13 @@ object HybridAquaticEntityTypes {
         ::SeaNettleEntity,
         EntityDimensions.fixed(0.75f, 3.0f),
         SeaNettleEntity.createMobAttributes().build()
+    )
+
+    val MOON_JELLY = registerJelly(
+        "moon_jelly",
+        ::MoonJellyEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        MoonJellyEntity.createMobAttributes().build()
     )
     //endregion jellyfish
     //region sharks

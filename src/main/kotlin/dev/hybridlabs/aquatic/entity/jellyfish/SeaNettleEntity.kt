@@ -9,6 +9,7 @@ import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -25,6 +26,7 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: World)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_SLIME_HURT_SMALL
     }
@@ -44,6 +46,7 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: World)
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SQUID_AMBIENT
     }
+
     override fun damage(source: DamageSource, amount: Float): Boolean {
         return if (world.isClient) {
             false
@@ -56,5 +59,9 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: World)
             }
             super.damage(source, amount)
         }
+    }
+    override fun onPlayerCollision(player: PlayerEntity) {
+        super.onPlayerCollision(player)
+        player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 0), this)
     }
 }
