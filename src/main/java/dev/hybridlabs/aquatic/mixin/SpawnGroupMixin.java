@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.mixin;
 
-import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups;
+import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup;
 import net.minecraft.entity.SpawnGroup;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,13 +33,13 @@ public class SpawnGroupMixin {
   )
   private static void injectEnum(CallbackInfo ci) {
     int vanillaSGLength = field_6301.length;
-    HybridAquaticSpawnGroups[] haGroups = HybridAquaticSpawnGroups.values();
+    HybridAquaticSpawnGroup[] haGroups = HybridAquaticSpawnGroup.values();
     int haSGLength = haGroups.length;
     field_6301 = Arrays.copyOf(field_6301, vanillaSGLength + haSGLength);
     
     for (int i = 0; i < haSGLength; i++) {
       int pos = vanillaSGLength + i;
-      HybridAquaticSpawnGroups haSpawnGroup = haGroups[i];
+      HybridAquaticSpawnGroup haSpawnGroup = haGroups[i];
       haSpawnGroup.spawnGroup = field_6301[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos, haSpawnGroup.name, haSpawnGroup.spawnCap, haSpawnGroup.peaceful, haSpawnGroup.rare, haSpawnGroup.immediateDespawnRange);
     }
   }

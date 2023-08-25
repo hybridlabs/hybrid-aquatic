@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.utils;
 
 import net.minecraft.entity.SpawnGroup;
 
-public enum HybridAquaticSpawnGroups {
+public enum HybridAquaticSpawnGroup {
   FISH("ha_fish", 18, true, false, 64),
   FISH_UNDERGROUND("ha_fish_underground", 6, true, false, 64),
   JELLY("ha_jelly", 3, false, false, 64),
@@ -16,7 +16,7 @@ public enum HybridAquaticSpawnGroups {
   public final boolean rare;
   public final int immediateDespawnRange;
   
-  HybridAquaticSpawnGroups(String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
+  HybridAquaticSpawnGroup(String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
     this.name = name;
     this.spawnCap = spawnCap;
     this.peaceful = peaceful;
