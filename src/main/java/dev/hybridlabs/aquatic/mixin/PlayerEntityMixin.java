@@ -19,25 +19,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
-public class PlayerEntityMixin implements CustomPlayerEntityData {
-  
+public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
   @Unique
-  private static final TrackedData<Integer> haHurtTime = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
-  
-  @Inject(method = "initDataTracker",
-    at = @At("TAIL"))
-  private void initDataTracker(CallbackInfo ci) {
-    ((PlayerEntity) (Object) this).getDataTracker().startTracking(haHurtTime, 0);
-  }
+  private int haHurtTime = 0;
   
   @Override
   public void hybrid_aquatic$setHurtTime(int value) {
-    ((PlayerEntity) (Object) this).getDataTracker().set(haHurtTime, value);
+    haHurtTime = value;
   }
   
   @Override
   public int hybrid_aquatic$getHurtTime() {
-    return ((PlayerEntity) (Object) this).getDataTracker().get(haHurtTime);
+    return haHurtTime;
   }
   
   @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))

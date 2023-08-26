@@ -1,17 +1,74 @@
 package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.entity.critter.*
-import dev.hybridlabs.aquatic.entity.fish.*
+import dev.hybridlabs.aquatic.entity.critter.CrabEntity
+import dev.hybridlabs.aquatic.entity.critter.FiddlerCrabEntity
+import dev.hybridlabs.aquatic.entity.critter.GiantClamEntity
+import dev.hybridlabs.aquatic.entity.critter.HermitCrabEntity
+import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
+import dev.hybridlabs.aquatic.entity.critter.NudibranchEntity
+import dev.hybridlabs.aquatic.entity.critter.SeaCucumberEntity
+import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
+import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
+import dev.hybridlabs.aquatic.entity.fish.AnglerfishEntity
+import dev.hybridlabs.aquatic.entity.fish.BarreleyeEntity
+import dev.hybridlabs.aquatic.entity.fish.BettaEntity
+import dev.hybridlabs.aquatic.entity.fish.BlueSpottedStingrayEntity
+import dev.hybridlabs.aquatic.entity.fish.BlueTangEntity
+import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
+import dev.hybridlabs.aquatic.entity.fish.CowfishEntity
+import dev.hybridlabs.aquatic.entity.fish.CuttlefishEntity
+import dev.hybridlabs.aquatic.entity.fish.DiscusEntity
+import dev.hybridlabs.aquatic.entity.fish.DragonfishEntity
+import dev.hybridlabs.aquatic.entity.fish.FireflySquidEntity
+import dev.hybridlabs.aquatic.entity.fish.FlashlightFishEntity
+import dev.hybridlabs.aquatic.entity.fish.GlowingSuckerOctopusEntity
+import dev.hybridlabs.aquatic.entity.fish.GouramiEntity
+import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
+import dev.hybridlabs.aquatic.entity.fish.LionfishEntity
+import dev.hybridlabs.aquatic.entity.fish.MahiMahiEntity
+import dev.hybridlabs.aquatic.entity.fish.MorayEelEntity
+import dev.hybridlabs.aquatic.entity.fish.NautilusEntity
+import dev.hybridlabs.aquatic.entity.fish.NeedlefishEntity
+import dev.hybridlabs.aquatic.entity.fish.OarfishEntity
+import dev.hybridlabs.aquatic.entity.fish.OpahEntity
+import dev.hybridlabs.aquatic.entity.fish.OscarEntity
+import dev.hybridlabs.aquatic.entity.fish.PiranhaEntity
+import dev.hybridlabs.aquatic.entity.fish.RatfishEntity
+import dev.hybridlabs.aquatic.entity.fish.RockfishEntity
+import dev.hybridlabs.aquatic.entity.fish.SeaAngelEntity
+import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
+import dev.hybridlabs.aquatic.entity.fish.StonefishEntity
+import dev.hybridlabs.aquatic.entity.fish.SunfishEntity
+import dev.hybridlabs.aquatic.entity.fish.TetraEntity
+import dev.hybridlabs.aquatic.entity.fish.TigerBarbEntity
+import dev.hybridlabs.aquatic.entity.fish.ToadfishEntity
+import dev.hybridlabs.aquatic.entity.fish.TriggerfishEntity
+import dev.hybridlabs.aquatic.entity.fish.UnicornFishEntity
+import dev.hybridlabs.aquatic.entity.fish.VampireSquidEntity
+import dev.hybridlabs.aquatic.entity.fish.YellowfinTunaEntity
+import dev.hybridlabs.aquatic.entity.fish.ZebraDanioEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.MoonJellyEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.SeaNettleEntity
-import dev.hybridlabs.aquatic.entity.shark.*
-import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroups
+import dev.hybridlabs.aquatic.entity.shark.BaskingSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.BullSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.FrilledSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.GreatWhiteSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.HammerheadSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.ThresherSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.TigerSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.WhaleSharkEntity
+import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
-import net.minecraft.entity.*
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityType
 import net.minecraft.entity.EntityType.EntityFactory
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnGroup
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -28,7 +85,7 @@ object HybridAquaticEntityTypes {
 
     val ANGLERFISH = registerFish(
         "anglerfish",
-        HybridAquaticSpawnGroups.FISH_UNDERGROUND.spawnGroup,
+        HybridAquaticSpawnGroup.FISH_UNDERGROUND.spawnGroup,
         ::AnglerfishEntity,
         EntityDimensions.fixed(0.75f, 0.75f),
         AnglerfishEntity.createMobAttributes().build()
@@ -418,7 +475,7 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.SHARK.spawnGroup, entityFactory).dimensions(dimensions).build(), attributeContainer)
+        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroup.SHARK.spawnGroup, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
     private inline fun <reified T : HybridAquaticCritterEntity> registerCritter(
@@ -427,7 +484,7 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.CRITTER.spawnGroup, entityFactory).dimensions(dimensions).build(), attributeContainer)
+        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroup.CRITTER.spawnGroup, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
     private inline fun <reified T : HybridAquaticFishEntity> registerFish(
@@ -436,7 +493,7 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerFish(id, HybridAquaticSpawnGroups.FISH.spawnGroup, entityFactory, dimensions, attributeContainer)
+        return registerFish(id, HybridAquaticSpawnGroup.FISH.spawnGroup, entityFactory, dimensions, attributeContainer)
     }
 
     private inline fun <reified T : HybridAquaticFishEntity> registerFish(
@@ -455,7 +512,7 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: DefaultAttributeContainer
     ): EntityType<T> {
-        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroups.JELLY.spawnGroup, entityFactory).dimensions(dimensions).build(), attributeContainer)
+        return registerLiving(id, FabricEntityTypeBuilder.create(HybridAquaticSpawnGroup.JELLY.spawnGroup, entityFactory).dimensions(dimensions).build(), attributeContainer)
     }
 
 

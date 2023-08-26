@@ -7,7 +7,6 @@ import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.random.Random
@@ -26,7 +25,7 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Worl
 
         }
 
-        fun canSpawnPredicate(
+        fun canSpawn(
             type: EntityType<out WaterCreatureEntity?>?,
             world: WorldAccess,
             reason: SpawnReason?,

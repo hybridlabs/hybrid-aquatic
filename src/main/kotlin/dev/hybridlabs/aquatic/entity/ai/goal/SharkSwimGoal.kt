@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.goal
+package dev.hybridlabs.aquatic.entity.ai.goal
 
 import net.minecraft.entity.ai.brain.task.LookTargetUtil
 import net.minecraft.entity.ai.goal.Goal

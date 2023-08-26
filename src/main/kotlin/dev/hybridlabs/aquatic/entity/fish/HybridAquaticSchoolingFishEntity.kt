@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.goal.FishFollowGroupLeaderGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.FishFollowGroupLeaderGoal
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason

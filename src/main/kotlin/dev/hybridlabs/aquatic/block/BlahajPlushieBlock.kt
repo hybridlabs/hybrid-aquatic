@@ -1,9 +1,11 @@
 package dev.hybridlabs.aquatic.block
 
+import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks.addBlocks
 import net.minecraft.block.Block
 import net.minecraft.block.SkullBlock
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
 
 /**
@@ -23,6 +25,8 @@ class BlahajPlushieBlock(variant: Variant, val particleBlock: Block, settings: S
         THRESHER_SHARK("thresher_shark"),
         TIGER_SHARK("tiger_shark"),
         WHALE_SHARK("whale_shark");
+
+        val textureLocation: Identifier by lazy { Identifier(HybridAquatic.MOD_ID, "textures/entity/block/blahaj_plushie/${id}_blahaj_plushie.png") }
 
         override fun asString(): String {
             return id
