@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.goal
+package dev.hybridlabs.aquatic.entity.ai.goal
 
 import net.minecraft.entity.ai.goal.TrackTargetGoal
 import net.minecraft.entity.mob.MobEntity

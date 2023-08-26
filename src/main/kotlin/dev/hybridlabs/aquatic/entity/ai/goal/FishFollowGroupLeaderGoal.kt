@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.goal
+package dev.hybridlabs.aquatic.entity.ai.goal
 
 import com.mojang.datafixers.DataFixUtils
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticSchoolingFishEntity

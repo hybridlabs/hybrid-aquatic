@@ -1,9 +1,9 @@
 @file:Suppress("DEPRECATION")
 
-package dev.hybridlabs.aquatic.features
+package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.features.config.SeaGenerationFeatureConfig
+import dev.hybridlabs.aquatic.world.gen.feature.config.SeaGenerationFeatureConfig
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.registry.tag.TagKey

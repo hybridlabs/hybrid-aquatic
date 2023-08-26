@@ -2,11 +2,20 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityPose
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.EscapeDangerGoal
+import net.minecraft.entity.ai.goal.FleeEntityGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.LookAtEntityGoal
+import net.minecraft.entity.ai.goal.MoveIntoWaterGoal
+import net.minecraft.entity.ai.goal.SwimAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.attribute.EntityAttributes
@@ -31,8 +40,11 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import kotlin.math.sqrt
@@ -282,15 +294,14 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 
-        fun canSpawnPredicate(
-            type: EntityType<out WaterCreatureEntity?>?,
+        fun canSpawn(
+            type: EntityType<out WaterCreatureEntity>,
             world: WorldAccess,
             reason: SpawnReason?,
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            return pos.y <= world.seaLevel && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random
-            )
+            return pos.y <= world.seaLevel && world.getBlockState(pos).isOf(Blocks.WATER) && WaterCreatureEntity.canSpawn(type, world, reason, pos, random)
         }
         const val MOISTNESS_KEY = "Moistness"
         const val VARIANT_KEY = "Variant"

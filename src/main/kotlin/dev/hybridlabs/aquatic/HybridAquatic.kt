@@ -4,12 +4,11 @@ import dev.hybridlabs.aquatic.block.BlahajPlushieBlock
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntitySpawning
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.features.HybridAquaticFeatures
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import dev.hybridlabs.aquatic.registry.HybridAquaticSpawningRegistry
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
@@ -34,7 +33,7 @@ object HybridAquatic : ModInitializer {
 
         HybridAquaticEntityTypes
 
-        HybridAquaticSpawningRegistry.register()
+        HybridAquaticEntitySpawning
 
         HybridAquaticItems
         HybridAquaticItemGroups

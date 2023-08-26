@@ -3,10 +3,22 @@ package dev.hybridlabs.aquatic.entity.shark
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityPose
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.ChaseBoatGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.LookAtEntityGoal
+import net.minecraft.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.entity.ai.goal.RevengeGoal
+import net.minecraft.entity.ai.goal.SwimAroundGoal
+import net.minecraft.entity.ai.goal.UniversalAngerGoal
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.damage.DamageSource
@@ -33,11 +45,14 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.*
+import java.util.UUID
 
 
 @Suppress("LeakingThis")
@@ -101,14 +116,14 @@ open class HybridAquaticSharkEntity(
 
         val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(19, 40)
 
-        fun canSpawnPredicate(
-            type: EntityType<out WaterCreatureEntity?>?,
+        fun canSpawn(
+            type: EntityType<out WaterCreatureEntity>,
             world: WorldAccess,
             reason: SpawnReason?,
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            return pos.y <= world.seaLevel - 10 && world.getBlockState(pos).isOf(Blocks.WATER) && canSpawn(type, world, reason, pos, random)
+            return pos.y <= world.seaLevel - 10 && world.getBlockState(pos).isOf(Blocks.WATER) && WaterCreatureEntity.canSpawn(type, world, reason, pos, random)
         }
 
     }

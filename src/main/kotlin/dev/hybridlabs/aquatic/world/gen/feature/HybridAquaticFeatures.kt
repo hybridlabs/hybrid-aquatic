@@ -1,7 +1,7 @@
-package dev.hybridlabs.aquatic.features
+package dev.hybridlabs.aquatic.world.gen.feature
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.features.config.SeaGenerationFeatureConfig
+import dev.hybridlabs.aquatic.world.gen.feature.config.SeaGenerationFeatureConfig
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.minecraft.registry.Registries

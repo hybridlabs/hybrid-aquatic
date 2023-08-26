@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.features.config
+package dev.hybridlabs.aquatic.world.gen.feature.config
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
