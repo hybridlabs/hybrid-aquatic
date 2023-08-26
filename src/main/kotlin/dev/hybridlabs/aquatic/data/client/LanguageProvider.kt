@@ -124,12 +124,5 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         builder.add(HybridAquaticItems.SHARK_TOOTH, "Shark Tooth")
         builder.add(HybridAquaticItems.PEARL, "Pearl")
         builder.add(HybridAquaticItems.BLACK_PEARL, "Black Pearl")
-        builder.add(HybridAquaticItems.RED_STARFISH, "Red Starfish")
-        builder.add(HybridAquaticItems.YELLOW_STARFISH, "Yellow Starfish")
-        builder.add(HybridAquaticItems.PURPLE_STARFISH, "Purple Starfish")
-        builder.add(HybridAquaticItems.BLUE_STARFISH, "Blue Starfish")
-        builder.add(HybridAquaticItems.GREEN_STARFISH, "Green Starfish")
-        builder.add(HybridAquaticItems.WHITE_STARFISH, "White Starfish")
-        builder.add(HybridAquaticItems.BLACK_STARFISH, "Black Starfish")
     }
 }

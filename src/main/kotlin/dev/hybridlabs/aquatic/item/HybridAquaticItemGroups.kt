@@ -57,15 +57,6 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.PEARL)
             entries.add(HybridAquaticItems.BLACK_PEARL)
 
-            // starfish items
-            entries.add(HybridAquaticItems.RED_STARFISH)
-            entries.add(HybridAquaticItems.YELLOW_STARFISH)
-            entries.add(HybridAquaticItems.PURPLE_STARFISH)
-            entries.add(HybridAquaticItems.BLUE_STARFISH)
-            entries.add(HybridAquaticItems.GREEN_STARFISH)
-            entries.add(HybridAquaticItems.WHITE_STARFISH)
-            entries.add(HybridAquaticItems.BLACK_STARFISH)
-
 
             // spawn eggs
             Registries.ITEM.forEach { item ->
