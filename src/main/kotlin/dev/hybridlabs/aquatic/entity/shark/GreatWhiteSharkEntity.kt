@@ -16,6 +16,7 @@ class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, w
                     .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.6)
                     .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0)
                     .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0)
+                    .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 100.0)
             }
         }
     }

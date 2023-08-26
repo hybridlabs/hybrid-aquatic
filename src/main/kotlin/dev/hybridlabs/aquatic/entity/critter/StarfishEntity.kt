@@ -14,10 +14,11 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 100.0)
 
         }
     }
