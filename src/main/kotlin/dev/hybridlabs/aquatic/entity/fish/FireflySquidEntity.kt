@@ -32,23 +32,6 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
     private var attackCooldown: Int = 0
     private var escapeDirection: Vec3d = Vec3d.ZERO
 
-    override fun tick() {
-        super.tick()
-
-        if (attackCooldown > 0) {
-            if (attackCooldown > 20) {
-                val speed = 0.5
-                val motionX = escapeDirection.x * speed
-                val motionY = escapeDirection.y * speed
-                val motionZ = escapeDirection.z * speed
-                setVelocity(motionX, motionY, motionZ)
-            }
-            attackCooldown--
-        }
-
-        updateEscapeDirection()
-    }
-
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_GLOW_SQUID_HURT
     }
@@ -92,16 +75,6 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
         }
 
         return super.damage(source, amount)
-    }
-
-    private fun updateEscapeDirection() {
-        val attacker = attacker
-        if (attacker != null) {
-            val escapeVector = Vec3d(x - attacker.x, y - attacker.y, z - attacker.z)
-            if (escapeVector.lengthSquared() > 0.0) {
-                escapeDirection = escapeVector.normalize()
-            }
-        }
     }
 
     override fun getAttacker(): LivingEntity? {

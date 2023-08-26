@@ -28,14 +28,6 @@ object HybridAquaticItems {
     val PEARL = register("pearl", Item(FabricItemSettings()))
     val BLACK_PEARL = register("black_pearl", Item(FabricItemSettings()))
 
-    // starfish
-    val RED_STARFISH = register("red_starfish", Item(FabricItemSettings()))
-    val YELLOW_STARFISH = register("yellow_starfish", Item(FabricItemSettings()))
-    val PURPLE_STARFISH = register("purple_starfish", Item(FabricItemSettings()))
-    val BLUE_STARFISH = register("blue_starfish", Item(FabricItemSettings()))
-    val GREEN_STARFISH = register("green_starfish", Item(FabricItemSettings()))
-    val WHITE_STARFISH = register("white_starfish", Item(FabricItemSettings()))
-    val BLACK_STARFISH = register("black_starfish", Item(FabricItemSettings()))
     val CRAB_CLAW = register("crab_claw", Item(FabricItemSettings()))
 
     // food items

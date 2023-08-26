@@ -4,12 +4,14 @@ import dev.hybridlabs.aquatic.block.BlahajPlushieBlock
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntitySpawning
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.world.EntityBiomeModifications
+import dev.hybridlabs.aquatic.world.gen.feature.FeatureBiomeModifications
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
@@ -21,10 +23,10 @@ import org.slf4j.LoggerFactory
 
 object HybridAquatic : ModInitializer {
     const val MOD_ID: String = "hybrid-aquatic"
-    val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
+    private val logger: Logger = LoggerFactory.getLogger(MOD_ID)
 
     override fun onInitialize() {
-        LOGGER.info("Initializing $MOD_ID")
+        logger.info("Initializing $MOD_ID")
 
         HybridAquaticBlocks
         HybridAquaticBlockEntityTypes
@@ -33,12 +35,13 @@ object HybridAquatic : ModInitializer {
 
         HybridAquaticEntityTypes
 
-        HybridAquaticEntitySpawning
-
         HybridAquaticItems
         HybridAquaticItemGroups
 
-        //HybridAquaticFeatures
+        HybridAquaticConfiguredFeatures
+
+        FeatureBiomeModifications
+        EntityBiomeModifications
 
         registerDynamicRegistries()
         registerWanderingTraderTrades()

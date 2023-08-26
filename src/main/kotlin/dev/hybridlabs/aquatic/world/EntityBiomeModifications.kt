@@ -1,5 +1,6 @@
-package dev.hybridlabs.aquatic.entity
+package dev.hybridlabs.aquatic.world
 
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.fish.AnglerfishEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
@@ -17,7 +18,10 @@ import net.minecraft.registry.tag.TagKey
 import net.minecraft.world.Heightmap
 import net.minecraft.world.biome.Biome
 
-object HybridAquaticEntitySpawning {
+/**
+ * Applies biome modifications for entities when initialised.
+ */
+object EntityBiomeModifications {
     init {
         createFishSpawn(HybridAquaticEntityTypes.CLOWNFISH, HybridAquaticBiomeTags.CLOWNFISH_SPAWN_BIOMES, 10, 1, 2)
         createFishSpawn(HybridAquaticEntityTypes.YELLOWFIN_TUNA, HybridAquaticBiomeTags.YELLOWFIN_SPAWN_BIOMES, 15, 2, 4)
