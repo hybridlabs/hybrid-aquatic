@@ -7,7 +7,6 @@ import net.minecraft.util.Identifier
 import net.minecraft.world.biome.Biome
 
 object HybridAquaticBiomeTags {
-
     val CLOWNFISH_SPAWN_BIOMES = create("clownfish_spawn_biomes")
     val YELLOWFIN_SPAWN_BIOMES = create("yellowfin_spawn_biomes")
     val MAHIMAHI_SPAWN_BIOMES = create("mahimahi_spawn_biomes")
@@ -64,6 +63,7 @@ object HybridAquaticBiomeTags {
     val GIANT_CLAM_SPAWN_BIOMES = create("giant_clam_spawn_biomes")
     val SEA_NETTLE_SPAWN_BIOMES = create("sea_nettle_spawn_biomes")
 
+    val ANEMONE_SPAWN_BIOMES = create("anemone_spawn_biomes")
 
     private fun create(id: String): TagKey<Biome> {
         return TagKey.of(RegistryKeys.BIOME, Identifier(HybridAquatic.MOD_ID, id))

@@ -1,8 +1,0 @@
-{
-  "type": "hybrid-aquatic:sea_feature",
-  "config": {
-    "number": 4,
-    "blockId": "hybrid-aquatic:anemone",
-    "generateOn": "#hybrid-aquatic:anemones_generate_on"
-  }
-}

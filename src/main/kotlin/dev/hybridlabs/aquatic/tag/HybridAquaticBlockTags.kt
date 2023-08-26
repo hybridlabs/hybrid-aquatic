@@ -12,6 +12,9 @@ object HybridAquaticBlockTags {
      */
     val BLAHAJ_PLUSHIES = create("blahaj_plushies")
 
+    /**
+     * A list of blocks that anemones can generate on.
+     */
     val ANEMONES_GENERATE_ON = create("anemones_generate_on")
 
     private fun create(id: String): TagKey<Block> {
