@@ -3,15 +3,7 @@ package dev.hybridlabs.aquatic.block
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import net.minecraft.block.Block
-import net.minecraft.block.BlockEntityProvider
-import net.minecraft.block.BlockRenderType
-import net.minecraft.block.BlockState
-import net.minecraft.block.BlockWithEntity
-import net.minecraft.block.Blocks
-import net.minecraft.block.PlantBlock
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.Waterloggable
+import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
@@ -22,6 +14,7 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.registry.tag.FluidTags
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.math.BlockPos
@@ -98,7 +91,8 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
-        return defaultState.with(WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).isOf(Fluids.WATER))
+        val fluidState = ctx.world.getFluidState(ctx.blockPos)
+        return if (fluidState.isIn(FluidTags.WATER)) defaultState.with(WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).isOf(Fluids.WATER)) else null;
     }
 
     override fun getFluidState(state: BlockState): FluidState {
