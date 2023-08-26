@@ -67,8 +67,12 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridA
     }
 
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
-        event.controller.setAnimation(RawAnimation.begin().then("sway", Animation.LoopType.LOOP))
-        return PlayState.CONTINUE
+        return if (world != null) {
+            event.controller.setAnimation(RawAnimation.begin().then("sway", Animation.LoopType.LOOP))
+            PlayState.CONTINUE
+        } else {
+            PlayState.STOP
+        }
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
