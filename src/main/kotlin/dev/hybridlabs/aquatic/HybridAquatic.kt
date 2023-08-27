@@ -5,13 +5,13 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.world.EntityBiomeModifications
 import dev.hybridlabs.aquatic.world.gen.feature.FeatureBiomeModifications
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
@@ -38,10 +38,10 @@ object HybridAquatic : ModInitializer {
         HybridAquaticItems
         HybridAquaticItemGroups
 
-        HybridAquaticConfiguredFeatures
-
         FeatureBiomeModifications
         EntityBiomeModifications
+
+        SpawnRestrictionRegistry
 
         registerDynamicRegistries()
         registerWanderingTraderTrades()
