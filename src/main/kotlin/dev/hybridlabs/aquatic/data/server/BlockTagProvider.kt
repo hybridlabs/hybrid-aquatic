@@ -15,12 +15,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         // misc
         getOrCreateTagBuilder(HybridAquaticBlockTags.ANEMONES_GENERATE_ON)
             .add(
-                Blocks.SAND,
-                Blocks.STONE,
-                Blocks.GRAVEL,
-                Blocks.GRANITE,
-                Blocks.ANDESITE,
-                Blocks.DIORITE,
+                Blocks.WATER,
                 Blocks.TUBE_CORAL_BLOCK,
                 Blocks.BRAIN_CORAL_BLOCK,
                 Blocks.BUBBLE_CORAL_BLOCK,

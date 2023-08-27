@@ -12,7 +12,7 @@ object FeatureBiomeModifications {
     init {
         BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.ANEMONE_SPAWN_BIOMES),
-            GenerationStep.Feature.UNDERGROUND_DECORATION,
+            GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.ANEMONE_PATCH
         )
     }
