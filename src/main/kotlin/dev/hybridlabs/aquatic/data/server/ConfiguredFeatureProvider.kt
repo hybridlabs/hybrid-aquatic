@@ -36,6 +36,16 @@ class ConfiguredFeatureProvider(output: FabricDataOutput, registriesFuture: Comp
                 )
             )
         )
+
+        // message in a bottle
+        entries.add(
+            HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE,
+            ConfiguredFeature(
+                Feature.SIMPLE_BLOCK, SimpleBlockFeatureConfig(
+                    BlockStateProvider.of(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.defaultState.with(Properties.WATERLOGGED, true))
+                )
+            )
+        )
     }
 
     override fun getName(): String {

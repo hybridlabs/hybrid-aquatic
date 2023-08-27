@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.PlacedFeature
 import net.minecraft.world.gen.feature.PlacedFeatures
 import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier
 import net.minecraft.world.gen.placementmodifier.CountPlacementModifier
-import net.minecraft.world.gen.placementmodifier.PlacementModifier
+import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier
 import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier
 import java.util.concurrent.CompletableFuture
 
@@ -20,16 +20,27 @@ class PlacedFeatureProvider(output: FabricDataOutput, registriesFuture: Completa
         // anemone patch
         entries.add(
             HybridAquaticPlacedFeatures.ANEMONE_PATCH,
-            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.ANEMONE_PATCH), oceanModifiers(1))
+            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.ANEMONE_PATCH),
+                listOf(
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
+                    CountPlacementModifier.of(1),
+                    BiomePlacementModifier.of()
+                )
+            )
         )
-    }
 
-    private fun oceanModifiers(count: Int): List<PlacementModifier> {
-        return listOf(
-            SquarePlacementModifier.of(),
-            PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-            CountPlacementModifier.of(count),
-            BiomePlacementModifier.of()
+        // message in a botle
+        entries.add(
+            HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE,
+            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE),
+                listOf(
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
+                    RarityFilterPlacementModifier.of(10),
+                    BiomePlacementModifier.of()
+                )
+            )
         )
     }
 

@@ -16,6 +16,9 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBlockTags.ANEMONES_GENERATE_IN)
             .add(Blocks.WATER)
 
+        getOrCreateTagBuilder(HybridAquaticBlockTags.MESSAGE_IN_A_BOTTLE_SPAWNS_IN)
+            .add(Blocks.WATER)
+
         // blahaj plushies
         Registries.BLOCK
             .filter { block ->

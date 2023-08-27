@@ -15,5 +15,11 @@ object FeatureBiomeModifications {
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.ANEMONE_PATCH
         )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.MESSAGE_IN_A_BOTTLE_SPAWN_BIOMES),
+            GenerationStep.Feature.TOP_LAYER_MODIFICATION,
+            HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE
+        )
     }
 }

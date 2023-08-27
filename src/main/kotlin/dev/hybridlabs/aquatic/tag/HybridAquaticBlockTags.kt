@@ -17,6 +17,11 @@ object HybridAquaticBlockTags {
      */
     val ANEMONES_GENERATE_IN = create("anemones_generate_in")
 
+    /**
+     * A list of blocks that message in a bottles can generate inside of.
+     */
+    val MESSAGE_IN_A_BOTTLE_SPAWNS_IN = create("message_in_a_bottle_spawns_in")
+
     private fun create(id: String): TagKey<Block> {
         return TagKey.of(RegistryKeys.BLOCK, Identifier(HybridAquatic.MOD_ID, id))
     }

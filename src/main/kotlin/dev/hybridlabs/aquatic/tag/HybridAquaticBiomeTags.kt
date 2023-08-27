@@ -64,6 +64,7 @@ object HybridAquaticBiomeTags {
     val SEA_NETTLE_SPAWN_BIOMES = create("sea_nettle_spawn_biomes")
 
     val ANEMONE_SPAWN_BIOMES = create("anemone_spawn_biomes")
+    val MESSAGE_IN_A_BOTTLE_SPAWN_BIOMES = create("message_in_a_bottle_spawn_biomes")
 
     private fun create(id: String): TagKey<Biome> {
         return TagKey.of(RegistryKeys.BIOME, Identifier(HybridAquatic.MOD_ID, id))
