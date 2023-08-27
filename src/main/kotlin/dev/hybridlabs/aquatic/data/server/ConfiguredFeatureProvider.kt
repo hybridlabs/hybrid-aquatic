@@ -31,7 +31,7 @@ class ConfiguredFeatureProvider(output: FabricDataOutput, registriesFuture: Comp
                         SimpleBlockFeatureConfig(
                             BlockStateProvider.of(HybridAquaticBlocks.ANEMONE.defaultState.with(Properties.WATERLOGGED, true))
                         ),
-                        BlockPredicate.matchingBlockTag(HybridAquaticBlockTags.ANEMONES_GENERATE_ON)
+                        BlockPredicate.matchingBlockTag(HybridAquaticBlockTags.ANEMONES_GENERATE_IN)
                     )
                 )
             )

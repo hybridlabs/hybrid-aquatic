@@ -13,15 +13,8 @@ import java.util.concurrent.CompletableFuture
 class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.BlockTagProvider(output, registriesFuture) {
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
         // misc
-        getOrCreateTagBuilder(HybridAquaticBlockTags.ANEMONES_GENERATE_ON)
-            .add(
-                Blocks.WATER,
-                Blocks.TUBE_CORAL_BLOCK,
-                Blocks.BRAIN_CORAL_BLOCK,
-                Blocks.BUBBLE_CORAL_BLOCK,
-                Blocks.FIRE_CORAL_BLOCK,
-                Blocks.HORN_CORAL_BLOCK
-            )
+        getOrCreateTagBuilder(HybridAquaticBlockTags.ANEMONES_GENERATE_IN)
+            .add(Blocks.WATER)
 
         // blahaj plushies
         Registries.BLOCK

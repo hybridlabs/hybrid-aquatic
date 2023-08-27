@@ -21,7 +21,7 @@
           "type": "minecraft:block_predicate_filter",
           "predicate": {
             "type": "minecraft:matching_block_tag",
-            "tag": "hybrid-aquatic:anemones_generate_on"
+            "tag": "hybrid-aquatic:anemones_generate_in"
           }
         }
       ]
