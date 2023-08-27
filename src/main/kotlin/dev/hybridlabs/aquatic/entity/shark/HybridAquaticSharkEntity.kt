@@ -177,9 +177,9 @@ open class HybridAquaticSharkEntity(
             this.tickAngerLogic(world as ServerWorld, false)
 
             rushTargetPosition?.let { targetPos ->
-                val velocityMod = targetPos.subtract(pos).normalize().multiply(3.0)
-                println(velocityMod)
-                this.pos.add(velocityMod)
+                val velocityMod = targetPos.subtract(pos).normalize().multiply(1.15)
+                this.velocity = velocityMod
+                rushTargetPosition = null
             }
         }
 
@@ -364,9 +364,9 @@ open class HybridAquaticSharkEntity(
 
                 if (target.health <= 0)
                     shark.eatFish(target.type)
-//                shark.setRushing(false)
+//                  shark.setRushing(false)
             } else if (squaredDistance > d * 5 && !shark.isRushing) {
-                shark.rushTargetPosition = Vec3d(target.pos.x, target.pos.y, target.pos.z)
+                shark.rushTargetPosition = target.pos
                 shark.isSprinting = true
                 shark.isRushing = true
             }
@@ -387,10 +387,7 @@ open class HybridAquaticSharkEntity(
         }
 
         companion object {
-            //TODO: need to make our own AttackGoal for sharks so we can change the speed of the Shark when it rushes towards their prey
-            //      changed ORIGINAL_SPEED to 6.0 for now
-            //      Oh, and we also need to make sharks move vertically faster, because right now they are pretty slow at that.
-            private const val ORIGINAL_SPEED = 6.0
+            private const val ORIGINAL_SPEED = 3.0
             private const val SPEED_MULTIPLIER = 2.0
         }
     }

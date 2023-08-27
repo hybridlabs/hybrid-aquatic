@@ -52,7 +52,7 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
     PlayerEntity object = ((PlayerEntity) (Object) this);
     
     if(object.isTouchingWater()) {
-      LivingEntity foundEntity = object.getWorld().getClosestEntity(HybridAquaticSharkEntity.class, TargetPredicate.createNonAttackable().setBaseMaxDistance(16).setPredicate(Entity::isSubmergedInWater), object, object.getX(), object.getEyeY(), object.getZ(), object.getBoundingBox().expand(16));
+      LivingEntity foundEntity = object.getWorld().getClosestEntity(HybridAquaticSharkEntity.class, TargetPredicate.createNonAttackable().setBaseMaxDistance(32).setPredicate(Entity::isSubmergedInWater), object, object.getX(), object.getEyeY(), object.getZ(), object.getBoundingBox().expand(16));
       if(foundEntity != null) hybrid_aquatic$setHurtTime(200);
     }
   }
