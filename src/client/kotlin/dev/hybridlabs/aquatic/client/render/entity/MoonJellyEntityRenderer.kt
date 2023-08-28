@@ -7,7 +7,9 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
 class MoonJellyEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquaticJellyfishEntity>(context, MoonJellyEntityModel()) {
-    init {
-        addRenderLayer(AutoGlowingGeoLayer(this))
-    }
+// TODO somehow fix translucent emissive renderer so it isn't fucked up
+//
+//    init {
+//        addRenderLayer(AutoGlowingGeoLayer(this))
+//    }
 }
