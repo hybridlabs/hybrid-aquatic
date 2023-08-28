@@ -141,5 +141,5 @@
     "item.hybrid-aquatic.whale_shark_spawn_egg": "Яйцо призыва Китовой Акулы",
     "item.hybrid-aquatic.yellowfin_tuna_spawn_egg": "Яйцо призыва Желтопёрого Тунца",
     "item.hybrid-aquatic.zebra_danio_spawn_egg": "Яйцо призыва Данио-рерио",
-    "itemGroup.hybrid-aquatic.all": "Hybrid Aquatic"
+    "itemGroup.hybrid-aquatic": "Hybrid Aquatic"
 }
