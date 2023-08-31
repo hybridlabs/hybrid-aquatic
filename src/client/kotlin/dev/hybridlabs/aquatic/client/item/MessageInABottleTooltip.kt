@@ -12,7 +12,7 @@ import net.minecraft.util.Formatting
 
 class MessageInABottleTooltip : ItemTooltipCallback {
     override fun getTooltip(stack: ItemStack, context: TooltipContext, lines: MutableList<Text>) {
-        stack.getOrCreateSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.let { nbt ->
+        stack.getSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.let { nbt ->
             val messageString = nbt.getString(MessageInABottleBlockEntity.MESSAGE_KEY)
             var lastText = Text.empty()
             val lastString = StringBuilder()
@@ -24,7 +24,7 @@ class MessageInABottleTooltip : ItemTooltipCallback {
                 return
             }
 
-            text.asOrderedText().accept { index, style, codePoint ->
+            text.asOrderedText().accept { _, style, codePoint ->
                 val char = codePoint.toChar()
                 if (char == '\n') {
                     // append last text if newline
