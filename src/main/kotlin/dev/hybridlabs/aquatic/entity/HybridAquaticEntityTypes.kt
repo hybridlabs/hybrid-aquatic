@@ -5,7 +5,6 @@ import dev.hybridlabs.aquatic.entity.critter.CrabEntity
 import dev.hybridlabs.aquatic.entity.critter.FiddlerCrabEntity
 import dev.hybridlabs.aquatic.entity.critter.GiantClamEntity
 import dev.hybridlabs.aquatic.entity.critter.HermitCrabEntity
-import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.critter.NudibranchEntity
 import dev.hybridlabs.aquatic.entity.critter.SeaCucumberEntity
 import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
@@ -24,7 +23,6 @@ import dev.hybridlabs.aquatic.entity.fish.FireflySquidEntity
 import dev.hybridlabs.aquatic.entity.fish.FlashlightFishEntity
 import dev.hybridlabs.aquatic.entity.fish.GlowingSuckerOctopusEntity
 import dev.hybridlabs.aquatic.entity.fish.GouramiEntity
-import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.fish.LionfishEntity
 import dev.hybridlabs.aquatic.entity.fish.MahiMahiEntity
 import dev.hybridlabs.aquatic.entity.fish.MorayEelEntity
@@ -54,7 +52,6 @@ import dev.hybridlabs.aquatic.entity.jellyfish.BlueJellyfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.CauliflowerJellyfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.CompassJellyfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.FriedEggJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.LionsManeJellyfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.MauveStingerEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.MoonJellyfishEntity
@@ -65,7 +62,6 @@ import dev.hybridlabs.aquatic.entity.shark.BullSharkEntity
 import dev.hybridlabs.aquatic.entity.shark.FrilledSharkEntity
 import dev.hybridlabs.aquatic.entity.shark.GreatWhiteSharkEntity
 import dev.hybridlabs.aquatic.entity.shark.HammerheadSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import dev.hybridlabs.aquatic.entity.shark.ThresherSharkEntity
 import dev.hybridlabs.aquatic.entity.shark.TigerSharkEntity
 import dev.hybridlabs.aquatic.entity.shark.WhaleSharkEntity
@@ -98,7 +94,7 @@ object HybridAquaticEntityTypes {
         AnglerfishEntity.createMobAttributes()
     )
 
-    val BARRELEYE = registerFish(
+    val BARRELEYE = registerFishUnderground(
         "barreleye",
         ::BarreleyeEntity,
         EntityDimensions.fixed(0.8f, 0.8f),
@@ -154,7 +150,7 @@ object HybridAquaticEntityTypes {
         PiranhaEntity.createMobAttributes()
     )
 
-    val SEA_ANGEL = registerFish(
+    val SEA_ANGEL = registerFishUnderground(
         "sea_angel",
         ::SeaAngelEntity,
         EntityDimensions.fixed(0.6f, 0.6f),
@@ -168,7 +164,7 @@ object HybridAquaticEntityTypes {
         SunfishEntity.createMobAttributes()
     )
 
-    val VAMPIRE_SQUID = registerFish(
+    val VAMPIRE_SQUID = registerFishUnderground(
         "vampire_squid",
         ::VampireSquidEntity,
         EntityDimensions.fixed(0.8f, 0.6f),
@@ -322,13 +318,12 @@ object HybridAquaticEntityTypes {
         FireflySquidEntity.createMobAttributes()
     )
 
-    val DRAGONFISH = registerFish(
+    val DRAGONFISH = registerFishUnderground(
         "dragonfish",
         ::DragonfishEntity,
         EntityDimensions.fixed(1.0f, 0.5f),
         DragonfishEntity.createMobAttributes()
     )
-
 
     val BLUE_SPOTTED_STINGRAY = registerFish(
         "blue_spotted_stingray",
@@ -493,7 +488,7 @@ object HybridAquaticEntityTypes {
         ThresherSharkEntity.createMobAttributes()
     )
 
-    val FRILLED_SHARK = registerShark(
+    val FRILLED_SHARK = registerFishUnderground(
         "frilled_shark",
         ::FrilledSharkEntity,
         EntityDimensions.fixed(1.5f, 1.0f),
@@ -528,7 +523,7 @@ object HybridAquaticEntityTypes {
         WhaleSharkEntity.createMobAttributes()
     )
 
-    private fun <T : HybridAquaticSharkEntity> registerShark(
+    private fun <T : LivingEntity> registerShark(
         id: String,
         entityFactory: EntityFactory<T>,
         dimensions: EntityDimensions,
@@ -537,7 +532,7 @@ object HybridAquaticEntityTypes {
         return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.SHARK)
     }
 
-    private fun <T : HybridAquaticCritterEntity> registerCritter(
+    private fun <T : LivingEntity> registerCritter(
         id: String,
         entityFactory: EntityFactory<T>,
         dimensions: EntityDimensions,
@@ -546,7 +541,7 @@ object HybridAquaticEntityTypes {
         return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.CRITTER)
     }
 
-    private fun <T : HybridAquaticFishEntity> registerFish(
+    private fun <T : LivingEntity> registerFish(
         id: String,
         entityFactory: EntityFactory<T>,
         dimensions: EntityDimensions,
@@ -555,7 +550,7 @@ object HybridAquaticEntityTypes {
         return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.FISH)
     }
 
-    private fun <T : HybridAquaticFishEntity> registerFishUnderground(
+    private fun <T : LivingEntity> registerFishUnderground(
         id: String,
         entityFactory: EntityFactory<T>,
         dimensions: EntityDimensions,
@@ -564,7 +559,7 @@ object HybridAquaticEntityTypes {
         return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.FISH_UNDERGROUND)
     }
 
-    private fun <T : HybridAquaticJellyfishEntity> registerJelly(
+    private fun <T : LivingEntity> registerJelly(
         id: String,
         entityFactory: EntityFactory<T>,
         dimensions: EntityDimensions,
