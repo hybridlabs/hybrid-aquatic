@@ -178,10 +178,65 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
         )
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.MOON_JELLY_SPAWN_BIOMES).add(
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.MOON_JELLYFISH_SPAWN_BIOMES).add(
             BiomeKeys.WARM_OCEAN,
             BiomeKeys.LUKEWARM_OCEAN,
             BiomeKeys.BEACH,
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.FRIED_EGG_JELLYFISH_SPAWN_BIOMES).add(
+            BiomeKeys.WARM_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.CAULIFLOWER_JELLYFISH_SPAWN_BIOMES).add(
+            BiomeKeys.WARM_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.NOMURA_JELLYFISH_SPAWN_BIOMES).add(
+            BiomeKeys.COLD_OCEAN,
+            BiomeKeys.FROZEN_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN,
+            BiomeKeys.DEEP_COLD_OCEAN
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.ATOLLA_JELLYFISH_SPAWN_BIOMES).add(
+            BiomeKeys.COLD_OCEAN,
+            BiomeKeys.FROZEN_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN,
+            BiomeKeys.DEEP_COLD_OCEAN
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.LIONS_MANE_JELLYFISH_SPAWN_BIOMES).add(
+            BiomeKeys.FROZEN_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.BARREL_JELLYFISH_SPAWN_BIOMES).add(
+            BiomeKeys.COLD_OCEAN,
+            BiomeKeys.DEEP_COLD_OCEAN,
+            BiomeKeys.OCEAN,
+            BiomeKeys.DEEP_OCEAN
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.COMPASS_JELLYFISH_SPAWN_BIOMES).add(
+            BiomeKeys.COLD_OCEAN,
+            BiomeKeys.DEEP_COLD_OCEAN,
+            BiomeKeys.OCEAN,
+            BiomeKeys.DEEP_OCEAN
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.BLUE_JELLYFISH_SPAWN_BIOMES).add(
+            BiomeKeys.COLD_OCEAN,
+            BiomeKeys.DEEP_COLD_OCEAN,
+            BiomeKeys.OCEAN,
+            BiomeKeys.DEEP_OCEAN
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.MAUVE_STINGER_SPAWN_BIOMES).add(
+            BiomeKeys.WARM_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.MORAY_EEL_SPAWN_BIOMES).add(

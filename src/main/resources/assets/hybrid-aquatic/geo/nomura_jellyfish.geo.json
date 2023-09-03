@@ -1,0 +1,56 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 256,
+				"texture_height": 256,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "nomura_jelly",
+					"pivot": [0, 14, 0]
+				},
+				{
+					"name": "head",
+					"parent": "nomura_jelly",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-13, 16, -13], "size": [26, 16, 26], "uv": [0, 0]},
+						{"origin": [-11, 12, -11], "size": [22, 4, 22], "uv": [0, 77]},
+						{"origin": [-9, 32, -9], "size": [18, 4, 18], "uv": [78, 0]}
+					]
+				},
+				{
+					"name": "inner_tentacles",
+					"parent": "nomura_jelly",
+					"pivot": [0, -3.5, 0],
+					"cubes": [
+						{"origin": [-8.5, -7, -8.5], "size": [17, 7, 17], "uv": [87, 25]}
+					]
+				},
+				{
+					"name": "outer_tentacles",
+					"parent": "nomura_jelly",
+					"pivot": [0, -2.5, 0],
+					"cubes": [
+						{"origin": [-11.5, -5, -11.5], "size": [23, 5, 23], "uv": [73, 54]}
+					]
+				},
+				{
+					"name": "core_tentacles",
+					"parent": "nomura_jelly",
+					"pivot": [0, 14.25, 0],
+					"cubes": [
+						{"origin": [-7, 11, -7], "size": [14, 24, 14], "uv": [88, 82]},
+						{"origin": [-12, 0, -12], "size": [24, 11, 24], "uv": [0, 42]}
+					]
+				}
+			]
+		}
+	]
+}

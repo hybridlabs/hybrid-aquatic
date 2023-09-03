@@ -1,0 +1,46 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "mauve_stinger",
+					"pivot": [0, 5, 0]
+				},
+				{
+					"name": "head",
+					"parent": "mauve_stinger",
+					"pivot": [-0.5, 6.125, 0.5],
+					"cubes": [
+						{"origin": [-3, 5, -3], "size": [6, 3, 6], "uv": [0, 0]},
+						{"origin": [-2, 5.5, -2], "size": [4, 2, 4], "uv": [16, 16]}
+					]
+				},
+				{
+					"name": "core_tentacles",
+					"parent": "mauve_stinger",
+					"pivot": [0, 2.75, 0],
+					"cubes": [
+						{"origin": [-1.5, 0.75, -1.5], "size": [3, 5, 3], "uv": [0, 20]}
+					]
+				},
+				{
+					"name": "inner_tentacles",
+					"parent": "mauve_stinger",
+					"pivot": [-0.5, 5, 0],
+					"cubes": [
+						{"origin": [-2.5, 0, -2.5], "size": [5, 6, 5], "uv": [0, 9]}
+					]
+				}
+			]
+		}
+	]
+}

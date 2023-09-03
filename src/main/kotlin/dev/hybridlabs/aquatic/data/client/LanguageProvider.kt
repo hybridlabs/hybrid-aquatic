@@ -66,7 +66,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.STONEFISH to "Stonefish",
             HybridAquaticEntityTypes.BETTA to "Betta",
             HybridAquaticEntityTypes.SEAHORSE to "Seahorse",
-            HybridAquaticEntityTypes.MOON_JELLY to "Moon Jelly",
+            HybridAquaticEntityTypes.MOON_JELLYFISH to "Moon Jellyfish",
             HybridAquaticEntityTypes.GOURAMI to "Gourami",
             HybridAquaticEntityTypes.COWFISH to "Cowfish",
             HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS to "Glowing Sucker Octopus",
@@ -90,9 +90,17 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.SEA_URCHIN to "Sea Urchin",
             HybridAquaticEntityTypes.GIANT_CLAM to "Giant Clam",
             HybridAquaticEntityTypes.STARFISH to "Starfish",
-            HybridAquaticEntityTypes.SEA_NETTLE to "Sea Nettle"
+            HybridAquaticEntityTypes.SEA_NETTLE to "Sea Nettle",
+            HybridAquaticEntityTypes.FRIED_EGG_JELLY to "Fried Egg Jellyfish",
+            HybridAquaticEntityTypes.CAULIFLOWER_JELLY to "Cauliflower Jellyfish",
+            HybridAquaticEntityTypes.NOMURA_JELLY to "Nomura Jellyfish",
+            HybridAquaticEntityTypes.BARREL_JELLY to "Barrel Jellyfish",
+            HybridAquaticEntityTypes.COMPASS_JELLY to "Compass Jellyfish",
+            HybridAquaticEntityTypes.MAUVE_STINGER to "Mauve Stinger",
+            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH to "Lions Mane Jellyfish"
 
-        ).forEach { (entityType, translation) ->
+
+            ).forEach { (entityType, translation) ->
             val id = Registries.ENTITY_TYPE.getId(entityType)
             val translationKey = entityType.translationKey
             val namespace = id.namespace
@@ -119,6 +127,20 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         builder.add(HybridAquaticItems.COOKED_TENTACLE, "Cooked Tentacle")
         builder.add(HybridAquaticItems.RAW_CRAB_MEAT, "Raw Crab Meat")
         builder.add(HybridAquaticItems.COOKED_CRAB_MEAT, "Cooked Crab Meat")
+        builder.add(HybridAquaticItems.LIONFISH, "Lionfish")
+        builder.add(HybridAquaticItems.MAHI_MAHI, "Mahi Mahi")
+        builder.add(HybridAquaticItems.YELLOWFIN_TUNA, "Yellowfin Tuna")
+        builder.add(HybridAquaticItems.OPAH, "Opah")
+        builder.add(HybridAquaticItems.ROCKFISH, "Rockfish")
+        builder.add(HybridAquaticItems.BLUE_SPOTTED_STINGRAY, "Blue Spotted Stingray")
+        builder.add(HybridAquaticItems.MORAY_EEL, "Moray Eel")
+        builder.add(HybridAquaticItems.NEEDLEFISH, "Needlefish")
+        builder.add(HybridAquaticItems.PIRANHA, "Piranha")
+        builder.add(HybridAquaticItems.ANGLERFISH, "Anglerfish")
+        builder.add(HybridAquaticItems.BARRELEYE, "Barreleye")
+        builder.add(HybridAquaticItems.BLUE_TANG, "Blue Tang")
+        builder.add(HybridAquaticItems.CLOWNFISH, "Clownfish")
+        builder.add(HybridAquaticItems.UNICORN_FISH, "Unicorn Fish")
         builder.add(HybridAquaticItems.CRAB_CLAW, "Crab Claw")
         builder.add(HybridAquaticItems.GLOW_SLIME, "Glow Slime")
         builder.add(HybridAquaticItems.SHARK_TOOTH, "Shark Tooth")

@@ -44,12 +44,12 @@
               "count": {
                 "type": "minecraft:uniform",
                 "max": 1.0,
-                "min": 0.0
+                "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "hybrid-aquatic:raw_fish_meat"
+          "name": "hybrid-aquatic:anglerfish"
         }
       ],
       "rolls": 1.0

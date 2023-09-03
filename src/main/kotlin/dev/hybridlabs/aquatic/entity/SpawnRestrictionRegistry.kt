@@ -60,8 +60,12 @@ object SpawnRestrictionRegistry {
         registerWaterCreature(HybridAquaticEntityTypes.ANGLERFISH, AnglerfishEntity::canSpawn)
 
         // jellies
-        registerJelly(HybridAquaticEntityTypes.MOON_JELLY)
+        registerJelly(HybridAquaticEntityTypes.MOON_JELLYFISH)
         registerJelly(HybridAquaticEntityTypes.SEA_NETTLE)
+        registerJelly(HybridAquaticEntityTypes.FRIED_EGG_JELLY)
+        registerJelly(HybridAquaticEntityTypes.CAULIFLOWER_JELLY)
+        registerJelly(HybridAquaticEntityTypes.NOMURA_JELLY)
+
 
         // sharks
         setOf(

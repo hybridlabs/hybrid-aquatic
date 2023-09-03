@@ -1,0 +1,48 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "barrel_jelly",
+					"pivot": [0, 12.5, 0]
+				},
+				{
+					"name": "head",
+					"parent": "barrel_jelly",
+					"pivot": [0, 19.5, 0],
+					"cubes": [
+						{"origin": [-6, 14, -6], "size": [12, 6, 12], "uv": [0, 0]},
+						{"origin": [-5, 20, -5], "size": [10, 4, 10], "uv": [36, 18]},
+						{"origin": [-4, 20, -4], "size": [8, 3, 8], "uv": [36, 0]},
+						{"origin": [-5, 16, -5], "size": [10, 4, 10], "uv": [26, 33]}
+					]
+				},
+				{
+					"name": "core_tentacles",
+					"parent": "barrel_jelly",
+					"pivot": [0, 14, 0],
+					"cubes": [
+						{"origin": [-4.5, 0, -4.5], "size": [9, 16, 9], "uv": [0, 18]},
+						{"origin": [-5.25, 5, -5.25], "size": [2, 7, 2], "uv": [28, 47]},
+						{"origin": [3.25, 5, -5.25], "size": [2, 7, 2], "uv": [20, 45]},
+						{"origin": [-5.5, 5, -1.5], "size": [2, 7, 3], "uv": [36, 18]},
+						{"origin": [3.5, 5, -1.5], "size": [2, 7, 3], "uv": [0, 0]},
+						{"origin": [3.25, 5, 3.25], "size": [2, 7, 2], "uv": [0, 18]},
+						{"origin": [-1.5, 5, 3.5], "size": [3, 7, 2], "uv": [10, 43]},
+						{"origin": [-1.5, 5, -5.5], "size": [3, 7, 2], "uv": [0, 43]},
+						{"origin": [-5.25, 5, 3.25], "size": [2, 7, 2], "uv": [27, 18]}
+					]
+				}
+			]
+		}
+	]
+}

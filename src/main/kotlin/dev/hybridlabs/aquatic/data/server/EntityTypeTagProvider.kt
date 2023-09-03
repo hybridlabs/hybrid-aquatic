@@ -126,7 +126,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.STONEFISH,
                 HybridAquaticEntityTypes.BETTA,
                 HybridAquaticEntityTypes.SEAHORSE,
-                HybridAquaticEntityTypes.MOON_JELLY,
+                HybridAquaticEntityTypes.MOON_JELLYFISH,
                 HybridAquaticEntityTypes.GOURAMI,
                 HybridAquaticEntityTypes.COWFISH,
                 HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS,
