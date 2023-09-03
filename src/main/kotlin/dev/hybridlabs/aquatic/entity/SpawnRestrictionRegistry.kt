@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
-import dev.hybridlabs.aquatic.entity.fish.AnglerfishEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
@@ -30,7 +29,6 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.TOADFISH,
             HybridAquaticEntityTypes.OARFISH,
             HybridAquaticEntityTypes.UNICORN_FISH,
-            HybridAquaticEntityTypes.SEA_ANGEL,
             HybridAquaticEntityTypes.STONEFISH,
             HybridAquaticEntityTypes.ROCKFISH,
             HybridAquaticEntityTypes.MORAY_EEL,
@@ -38,41 +36,46 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.FIREFLY_SQUID,
             HybridAquaticEntityTypes.OPAH,
             HybridAquaticEntityTypes.CUTTLEFISH,
-            HybridAquaticEntityTypes.VAMPIRE_SQUID,
-            HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS,
             HybridAquaticEntityTypes.TRIGGERFISH,
             HybridAquaticEntityTypes.TIGER_BARB,
             HybridAquaticEntityTypes.PIRANHA,
             HybridAquaticEntityTypes.RATFISH,
             HybridAquaticEntityTypes.OSCAR,
             HybridAquaticEntityTypes.GOURAMI,
-            HybridAquaticEntityTypes.BARRELEYE,
             HybridAquaticEntityTypes.ZEBRA_DANIO,
             HybridAquaticEntityTypes.DISCUS,
             HybridAquaticEntityTypes.BETTA,
-            HybridAquaticEntityTypes.NAUTILUS,
             HybridAquaticEntityTypes.TETRA,
             HybridAquaticEntityTypes.NEEDLEFISH,
-            HybridAquaticEntityTypes.DRAGONFISH,
         ).forEach { registerFish(it) }
 
-        // anglerfish
-        registerWaterCreature(HybridAquaticEntityTypes.ANGLERFISH, AnglerfishEntity::canSpawn)
+        // underground fish
+        setOf(
+            HybridAquaticEntityTypes.ANGLERFISH,
+            HybridAquaticEntityTypes.DRAGONFISH,
+            HybridAquaticEntityTypes.BARRELEYE,
+            HybridAquaticEntityTypes.NAUTILUS,
+            HybridAquaticEntityTypes.SEA_ANGEL,
+            HybridAquaticEntityTypes.ATOLLA_JELLYFISH,
+            HybridAquaticEntityTypes.FRILLED_SHARK,
+            HybridAquaticEntityTypes.VAMPIRE_SQUID,
+            HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS,
+        ).forEach { registerFishUnderground(it) }
 
         // jellies
-        registerJelly(HybridAquaticEntityTypes.MOON_JELLYFISH)
-        registerJelly(HybridAquaticEntityTypes.SEA_NETTLE)
-        registerJelly(HybridAquaticEntityTypes.FRIED_EGG_JELLY)
-        registerJelly(HybridAquaticEntityTypes.CAULIFLOWER_JELLY)
-        registerJelly(HybridAquaticEntityTypes.NOMURA_JELLY)
-
+        setOf(
+            HybridAquaticEntityTypes.MOON_JELLYFISH,
+            HybridAquaticEntityTypes.SEA_NETTLE,
+            HybridAquaticEntityTypes.FRIED_EGG_JELLY,
+            HybridAquaticEntityTypes.CAULIFLOWER_JELLY,
+            HybridAquaticEntityTypes.NOMURA_JELLY,
+        ).forEach { registerJelly(it) }
 
         // sharks
         setOf(
             HybridAquaticEntityTypes.GREAT_WHITE_SHARK,
             HybridAquaticEntityTypes.TIGER_SHARK,
             HybridAquaticEntityTypes.HAMMERHEAD_SHARK,
-            HybridAquaticEntityTypes.FRILLED_SHARK,
             HybridAquaticEntityTypes.THRESHER_SHARK,
             HybridAquaticEntityTypes.BULL_SHARK,
             HybridAquaticEntityTypes.WHALE_SHARK,
@@ -94,6 +97,10 @@ object SpawnRestrictionRegistry {
 
     private fun <T : WaterCreatureEntity> registerFish(entityType: EntityType<T>) {
         registerWaterCreature(entityType, HybridAquaticFishEntity::canSpawn)
+    }
+
+    private fun <T : WaterCreatureEntity> registerFishUnderground(entityType: EntityType<T>) {
+        registerWaterCreature(entityType, HybridAquaticFishEntity::canUndergroundSpawn)
     }
 
     private fun <T : WaterCreatureEntity> registerShark(entityType: EntityType<T>) {

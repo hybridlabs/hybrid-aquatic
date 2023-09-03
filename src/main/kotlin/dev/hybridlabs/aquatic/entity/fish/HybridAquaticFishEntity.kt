@@ -303,6 +303,16 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         ): Boolean {
             return pos.y <= world.seaLevel && world.getBlockState(pos).isOf(Blocks.WATER) && WaterCreatureEntity.canSpawn(type, world, reason, pos, random)
         }
+
+        fun canUndergroundSpawn(
+            type: EntityType<out WaterCreatureEntity?>?,
+            world: WorldAccess,
+            reason: SpawnReason?,
+            pos: BlockPos,
+            random: Random?
+        ): Boolean {
+            return pos.y <= world.seaLevel - 32 && world.getBaseLightLevel(pos, 0) == 0 && world.getBlockState(pos).isOf(Blocks.WATER)
+        }
         const val MOISTNESS_KEY = "Moistness"
         const val VARIANT_KEY = "Variant"
     }

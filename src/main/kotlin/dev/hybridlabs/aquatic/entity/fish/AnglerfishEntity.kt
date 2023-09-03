@@ -24,16 +24,6 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Worl
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
 
         }
-
-        fun canSpawn(
-            type: EntityType<out WaterCreatureEntity?>?,
-            world: WorldAccess,
-            reason: SpawnReason?,
-            pos: BlockPos,
-            random: Random?
-        ): Boolean {
-            return pos.y <= world.seaLevel - 32 && world.getBaseLightLevel(pos, 0) == 0 && world.getBlockState(pos).isOf(Blocks.WATER)
-        }
     }
 
     private fun isInDeepWater(): Boolean {
