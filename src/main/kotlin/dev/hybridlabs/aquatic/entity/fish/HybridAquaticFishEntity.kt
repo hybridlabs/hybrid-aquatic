@@ -67,6 +67,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         super.initDataTracker()
         dataTracker.startTracking(MOISTNESS, 600)
         dataTracker.startTracking(VARIANT, 0)
+        dataTracker.startTracking(FISH_SIZE, this.random.nextFloat())
     }
 
     override fun initialize(
@@ -208,6 +209,12 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             dataTracker.set(VARIANT, int)
         }
 
+    var size: Float
+        get() = dataTracker.get(FISH_SIZE)
+        set(float) {
+            dataTracker.set(FISH_SIZE, float)
+        }
+
     override fun getMaxAir(): Int {
         return 4800
     }
@@ -292,6 +299,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     companion object {
         val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val FISH_SIZE: TrackedData<Float> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.FLOAT)
         val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 
         fun canSpawn(
@@ -315,5 +323,6 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         }
         const val MOISTNESS_KEY = "Moistness"
         const val VARIANT_KEY = "Variant"
+        const val FISH_SIZE_KEY = "Fish_Size"
     }
 }

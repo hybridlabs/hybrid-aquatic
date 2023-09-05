@@ -1,13 +1,21 @@
 package dev.hybridlabs.aquatic.client.render.entity
 
 import dev.hybridlabs.aquatic.client.model.entity.BarreleyeEntityModel
+import dev.hybridlabs.aquatic.client.render.RenderUtils
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
+import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
+import net.minecraft.client.util.math.MatrixStack
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
 class BarreleyeEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquaticFishEntity>(context, BarreleyeEntityModel()) {
     init {
         addRenderLayer(AutoGlowingGeoLayer(this))
+    }
+
+    override fun render(entity: HybridAquaticFishEntity?, entityYaw: Float, partialTick: Float, poseStack: MatrixStack?, bufferSource: VertexConsumerProvider?, packedLight: Int) {
+        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
+        RenderUtils.renderSizedEntity(entity, poseStack);
     }
 }
