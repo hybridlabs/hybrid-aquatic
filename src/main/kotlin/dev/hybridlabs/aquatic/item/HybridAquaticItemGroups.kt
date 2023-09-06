@@ -63,6 +63,11 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.BLUE_TANG)
             entries.add(HybridAquaticItems.CLOWNFISH)
             entries.add(HybridAquaticItems.UNICORN_FISH)
+            entries.add(HybridAquaticItems.COWFISH)
+            entries.add(HybridAquaticItems.TRIGGERFISH)
+            entries.add(HybridAquaticItems.TIGER_BARB)
+            entries.add(HybridAquaticItems.OSCAR)
+
 
             // miscellaneous items
             entries.add(HybridAquaticItems.CRAB_CLAW)
