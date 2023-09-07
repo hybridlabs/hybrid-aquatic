@@ -42,6 +42,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         super.initDataTracker()
         dataTracker.startTracking(MOISTNESS, 600)
         dataTracker.startTracking(VARIANT, 0)
+        dataTracker.startTracking(SPAWNED_ON_Y, 0)
     }
 
     override fun initialize(
@@ -53,15 +54,20 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
     ): EntityData? {
         this.air = this.maxAir
         this.variant = this.random.nextInt(variantCount)
+        this.spawnedY = this.y.toInt()
         this.pitch = 0.0f
-        this.originY = this.y
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    private var originY = this.y
     override fun tick() {
         super.tick()
 
+        if(this.submergedInWater) {
+            if (this.y < spawnedY) {
+                val randomOffset = this.random.nextDouble() * 0.25
+                this.setVelocity(0.0, 0.6 + randomOffset, 0.0)
+            }
+        }
     }
 
     override fun tickWaterBreathingAir(air: Int) {}
@@ -70,12 +76,16 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         super.writeCustomDataToNbt(nbt)
         nbt.putInt(MOISTNESS_KEY, moistness)
         nbt.putInt(VARIANT_KEY, variant)
+        nbt.putInt(SPAWNED_ON_Y_KEY, spawnedY)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
         variant = nbt.getInt(VARIANT_KEY)
+
+        spawnedY = if(!nbt.contains(SPAWNED_ON_Y_KEY)) (this.y - 1).toInt()
+        else nbt.getInt(SPAWNED_ON_Y_KEY)
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
@@ -129,6 +139,12 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
             dataTracker.set(VARIANT, int)
         }
 
+    private var spawnedY: Int
+        get() = dataTracker.get(SPAWNED_ON_Y)
+        set(int) {
+            dataTracker.set(SPAWNED_ON_Y, int)
+        }
+
     override fun getMaxAir(): Int {
         return 1200
     }
@@ -155,6 +171,8 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
     companion object {
         val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val SPAWNED_ON_Y: TrackedData<Int> = DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
         val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 
         fun canSpawn(
@@ -164,7 +182,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            val topY = world.seaLevel - 4
+            val topY = world.seaLevel - 6
             val bottomY = topY - 24
 
             return pos.y in bottomY..topY &&
@@ -172,6 +190,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
                     world.getBlockState(pos.up()).isOf(Blocks.WATER)
         }
         const val MOISTNESS_KEY = "Moistness"
+        const val SPAWNED_ON_Y_KEY = "Spawned_on_Y"
         const val VARIANT_KEY = "Variant"
     }
 }
