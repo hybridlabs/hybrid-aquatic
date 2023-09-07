@@ -24,6 +24,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.tag.FluidTags
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
@@ -196,7 +197,12 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            return pos.y <= world.seaLevel && world.getBlockState(pos).isOf(Blocks.WATER) && WaterCreatureEntity.canSpawn(type, world, reason, pos, random)
+            val topY = world.seaLevel - 6
+            val bottomY = world.seaLevel - 32
+
+            return pos.y in bottomY..topY &&
+                    world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&
+                    world.getBlockState(pos.up()).isOf(Blocks.WATER)
         }
         const val VARIANT_KEY = "Variant"
     }
