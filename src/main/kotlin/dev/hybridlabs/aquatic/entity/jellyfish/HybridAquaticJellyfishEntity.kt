@@ -1,11 +1,7 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
 import net.minecraft.block.Blocks
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityPose
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.LookAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
@@ -16,10 +12,10 @@ import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.tag.FluidTags
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
@@ -28,11 +24,8 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.*
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
@@ -61,18 +54,14 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         this.air = this.maxAir
         this.variant = this.random.nextInt(variantCount)
         this.pitch = 0.0f
-        this.bobTicks = this.random.nextDouble() * TAU
+        this.originY = this.y
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    private var bobTicks = this.random.nextDouble() * TAU
+    private var originY = this.y
     override fun tick() {
         super.tick()
-        setNoGravity(submergedInWater)
-        bobTicks += 0.09817477042468103
-        if(bobTicks > TAU) bobTicks -= TAU
-        val bobOffset = MathHelper.sin(bobTicks.toFloat()) * 0.1f
-        this.setPos(this.x, this.y + bobOffset.toDouble(), this.z)
+
     }
 
     override fun tickWaterBreathingAir(air: Int) {}
@@ -175,10 +164,14 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            return pos.y <= world.seaLevel && pos.y >= world.seaLevel - 9 && world.getBlockState(pos).isOf(Blocks.WATER) && WaterCreatureEntity.canSpawn(type, world, reason, pos, random)
+            val topY = world.seaLevel - 4
+            val bottomY = topY - 24
+
+            return pos.y in bottomY..topY &&
+                    world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&
+                    world.getBlockState(pos.up()).isOf(Blocks.WATER)
         }
         const val MOISTNESS_KEY = "Moistness"
         const val VARIANT_KEY = "Variant"
-        const val TAU = Math.PI * 2
     }
 }
