@@ -67,7 +67,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         super.initDataTracker()
         dataTracker.startTracking(MOISTNESS, 600)
         dataTracker.startTracking(VARIANT, 0)
-        dataTracker.startTracking(FISH_SIZE, this.random.nextFloat())
+        dataTracker.startTracking(FISH_SIZE, 0)
     }
 
     override fun initialize(
@@ -79,6 +79,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     ): EntityData? {
         this.air = this.maxAir
         this.variant = this.random.nextInt(variantCount)
+        this.size = this.random.nextBetween(getMinSize(),getMaxSize())
         this.pitch = 0.0f
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -142,12 +143,14 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         super.writeCustomDataToNbt(nbt)
         nbt.putInt(MOISTNESS_KEY, moistness)
         nbt.putInt(VARIANT_KEY, variant)
+        nbt.putInt(FISH_SIZE_KEY, size)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
         variant = nbt.getInt(VARIANT_KEY)
+        size = nbt.getInt(FISH_SIZE_KEY)
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
@@ -209,11 +212,12 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             dataTracker.set(VARIANT, int)
         }
 
-    var size: Float
+    var size: Int
         get() = dataTracker.get(FISH_SIZE)
-        set(float) {
-            dataTracker.set(FISH_SIZE, float)
+        set(Int) {
+            dataTracker.set(FISH_SIZE, Int)
         }
+
 
     override fun getMaxAir(): Int {
         return 4800
@@ -228,6 +232,14 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
 
     protected open fun hasSelfControl(): Boolean {
         return true
+    }
+
+    protected open fun getMinSize() : Int {
+        return 0;
+    }
+
+    protected open fun getMaxSize() : Int {
+        return 0;
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
@@ -299,7 +311,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     companion object {
         val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val FISH_SIZE: TrackedData<Float> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.FLOAT)
+        val FISH_SIZE: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 
         fun canSpawn(
@@ -328,8 +340,12 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
                     world.getBaseLightLevel(pos, 0) == 0 &&
                     world.getBlockState(pos).isOf(Blocks.WATER)
         }
+
+        fun getScaleAdjustment(fish : HybridAquaticFishEntity, adjustment : Float): Float {
+            return 1.0f + (fish.size * adjustment);
+        }
         const val MOISTNESS_KEY = "Moistness"
         const val VARIANT_KEY = "Variant"
-        const val FISH_SIZE_KEY = "Fish_Size"
+        const val FISH_SIZE_KEY = "FishSize"
     }
 }
