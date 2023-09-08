@@ -28,6 +28,8 @@ import software.bernie.geckolib.core.animation.*
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
+import kotlin.math.abs
+import kotlin.math.ceil
 
 @Suppress("LeakingThis")
 open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyfishEntity>, world: World, private val variantCount: Int = 1) : WaterCreatureEntity(type, world), GeoEntity {
@@ -62,11 +64,20 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
     override fun tick() {
         super.tick()
 
-        if(this.submergedInWater) {
-            if (this.y < spawnedY) {
+        if (this.submergedInWater) {
+            if (this.y <= spawnedY) {
+                if (!world.getFluidState(this.blockPos.up(2)).isIn(FluidTags.WATER) &&
+                    !world.getFluidState(this.blockPos.up(4)).isIn(FluidTags.WATER) &&
+                    !world.getFluidState(this.blockPos.up(6)).isIn(FluidTags.WATER)) {
+                    spawnedY = this.y.toInt() - 6
+                    return
+                }
+
                 val randomOffset = this.random.nextDouble() * 0.25
                 this.setVelocity(0.0, 0.6 + randomOffset, 0.0)
             }
+
+            if (abs(this.velocity.length()) <= 0.01 && !world.getFluidState(this.blockPos.down()).isIn(FluidTags.WATER)) spawnedY = this.y.toInt()
         }
     }
 
