@@ -17,7 +17,6 @@ class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopus
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.5)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
-
         }
     }
     override fun getHurtSound(source: DamageSource): SoundEvent {
@@ -38,5 +37,12 @@ class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopus
 
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SQUID_AMBIENT
+    }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
     }
 }

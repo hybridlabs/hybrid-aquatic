@@ -20,7 +20,6 @@ class BlueSpottedStingrayEntity(entityType: EntityType<out BlueSpottedStingrayEn
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.25)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
-
         }
     }
     override fun damage(source: DamageSource, amount: Float): Boolean {
@@ -35,5 +34,12 @@ class BlueSpottedStingrayEntity(entityType: EntityType<out BlueSpottedStingrayEn
             }
             super.damage(source, amount)
         }
+    }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
     }
 }

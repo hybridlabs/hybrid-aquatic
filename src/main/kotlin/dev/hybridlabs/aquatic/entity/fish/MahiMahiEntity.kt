@@ -44,4 +44,11 @@ class MahiMahiEntity(entityType: EntityType<out MahiMahiEntity>, world: World) :
 
         }
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

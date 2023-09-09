@@ -85,4 +85,11 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, HybridAquaticConfig.CLOWNFISH_SPEED)
         }
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

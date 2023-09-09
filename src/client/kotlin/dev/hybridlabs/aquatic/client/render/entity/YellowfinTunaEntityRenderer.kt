@@ -1,13 +1,13 @@
 package dev.hybridlabs.aquatic.client.render.entity
 
-import dev.hybridlabs.aquatic.client.model.entity.NeedlefishEntityModel
+import dev.hybridlabs.aquatic.client.model.entity.YellowfinTunaEntityModel
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
 import net.minecraft.client.util.math.MatrixStack
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 
-class NeedlefishEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquaticFishEntity>(context, NeedlefishEntityModel()) {
+class YellowfinTunaEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquaticFishEntity>(context, YellowfinTunaEntityModel()) {
     override fun render(
         entity: HybridAquaticFishEntity?,
         entityYaw: Float,
@@ -21,4 +21,3 @@ class NeedlefishEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquat
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
     }
 }
-

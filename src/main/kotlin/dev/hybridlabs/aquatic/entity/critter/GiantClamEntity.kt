@@ -112,5 +112,11 @@ class GiantClamEntity(entityType: EntityType<out GiantClamEntity>, world: World)
     override fun isPushable(): Boolean {
         return !this.isAlive && !this.isSpectator && !this.isClimbing
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
 
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

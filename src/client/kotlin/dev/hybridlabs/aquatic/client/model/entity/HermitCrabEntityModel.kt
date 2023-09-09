@@ -1,5 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity
 
-import dev.hybridlabs.aquatic.entity.critter.HermitCrabEntity
+import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 
-class HermitCrabEntityModel : HybridAquaticCritterEntityModel<HermitCrabEntity>("hermit_crab")
+class HermitCrabEntityModel : HybridAquaticCritterEntityModel<HybridAquaticCritterEntity>("hermit_crab")

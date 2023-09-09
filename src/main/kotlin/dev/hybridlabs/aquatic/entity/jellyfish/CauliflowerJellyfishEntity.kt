@@ -40,4 +40,11 @@ class CauliflowerJellyfishEntity(entityType: EntityType<out CauliflowerJellyfish
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SQUID_AMBIENT
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

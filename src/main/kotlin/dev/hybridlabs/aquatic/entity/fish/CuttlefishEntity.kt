@@ -79,4 +79,11 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
         }
         return null
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

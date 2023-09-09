@@ -44,4 +44,11 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) : H
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 100.0)
         }
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

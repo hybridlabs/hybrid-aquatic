@@ -20,11 +20,9 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: World) : HybridA
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
-
     private fun isInDeepWater(): Boolean {
         return world.isDay && isSubmergedInWater && isBlockInDeepWater(blockPos)
     }
-
     private fun isInShallowWater(): Boolean {
         return world.isNight && isSubmergedInWater && !isBlockInDeepWater(blockPos)
     }
@@ -67,5 +65,12 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: World) : HybridA
         val minY = collisionBox.minY + yOffset
         val maxY = collisionBox.maxY
         return Box(collisionBox.minX, minY, collisionBox.minZ, collisionBox.maxX, maxY, collisionBox.maxZ)
+    }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
     }
 }

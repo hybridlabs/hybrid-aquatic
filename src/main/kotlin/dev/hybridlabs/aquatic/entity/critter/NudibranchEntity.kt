@@ -39,4 +39,11 @@ class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: Worl
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SLIME_SQUISH_SMALL
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

@@ -3,22 +3,10 @@ package dev.hybridlabs.aquatic.entity.shark
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.block.Blocks
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityPose
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.ActiveTargetGoal
-import net.minecraft.entity.ai.goal.ChaseBoatGoal
-import net.minecraft.entity.ai.goal.LookAroundGoal
-import net.minecraft.entity.ai.goal.LookAtEntityGoal
-import net.minecraft.entity.ai.goal.MeleeAttackGoal
-import net.minecraft.entity.ai.goal.RevengeGoal
-import net.minecraft.entity.ai.goal.SwimAroundGoal
-import net.minecraft.entity.ai.goal.UniversalAngerGoal
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.damage.DamageSource
@@ -46,14 +34,11 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.*
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.UUID
+import java.util.*
 
 
 @Suppress("LeakingThis")
@@ -92,6 +77,7 @@ open class HybridAquaticSharkEntity(
             dataTracker.set(ATTEMPT_ATTACK, attemptAttack)
         }
 
+
     init {
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
         moveControl = AquaticMoveControl(this, 85, 10, 0.02F, 0.1F, true)
@@ -101,6 +87,8 @@ open class HybridAquaticSharkEntity(
 
     companion object {
         const val MOISTNESS_KEY = "Moistness"
+        const val SHARK_SIZE_KEY = "SharkSize"
+        val SHARK_SIZE: TrackedData<Int> = DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val MOISTNESS: TrackedData<Int> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
@@ -131,9 +119,10 @@ open class HybridAquaticSharkEntity(
                     world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&
                     world.getBlockState(pos.up()).isOf(Blocks.WATER)
         }
-
+        fun getScaleAdjustment(shark : HybridAquaticSharkEntity, adjustment : Float): Float {
+            return 1.0f + (shark.size * adjustment)
+        }
     }
-
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(1, AttackGoal(this))
@@ -160,7 +149,7 @@ open class HybridAquaticSharkEntity(
         dataTracker.startTracking(HUNGER, MAX_HUNGER)
         dataTracker.startTracking(RUSHING, false)
         dataTracker.startTracking(ATTEMPT_ATTACK, false)
-
+        dataTracker.startTracking(HybridAquaticSharkEntity.SHARK_SIZE, 0)
     }
 
     override fun initialize(
@@ -172,6 +161,7 @@ open class HybridAquaticSharkEntity(
     ): EntityData? {
         this.air = this.maxAir
         pitch = 0.0f
+        this.size = this.random.nextBetween(getMinSize(),getMaxSize())
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
@@ -218,6 +208,7 @@ open class HybridAquaticSharkEntity(
         this.writeAngerToNbt(nbt)
         nbt.putInt(MOISTNESS_KEY, moistness)
         nbt.putInt(HUNGER_KEY, hunger)
+        nbt.putInt(HybridAquaticSharkEntity.SHARK_SIZE_KEY, size)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
@@ -225,6 +216,7 @@ open class HybridAquaticSharkEntity(
         this.readAngerFromNbt(this.world, nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
         hunger = nbt.getInt(HUNGER_KEY)
+        size = nbt.getInt(HybridAquaticSharkEntity.SHARK_SIZE_KEY)
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
@@ -243,6 +235,13 @@ open class HybridAquaticSharkEntity(
                 event.controller.setAnimation(RawAnimation.begin().then("rush", Animation.LoopType.LOOP))
         }
         return PlayState.CONTINUE
+    }
+    protected open fun getMinSize() : Int {
+        return 0
+    }
+
+    protected open fun getMaxSize() : Int {
+        return 0
     }
 
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
@@ -340,6 +339,11 @@ open class HybridAquaticSharkEntity(
     override fun chooseRandomAngerTime() {
         setAngerTime(ANGER_TIME_RANGE.get(random))
     }
+    var size: Int
+        get() = dataTracker.get(HybridAquaticSharkEntity.SHARK_SIZE)
+        set(Int) {
+            dataTracker.set(HybridAquaticSharkEntity.SHARK_SIZE, Int)
+        }
     //#endregion
 
     private fun getHungerValue(entityType: EntityType<*>): Int {

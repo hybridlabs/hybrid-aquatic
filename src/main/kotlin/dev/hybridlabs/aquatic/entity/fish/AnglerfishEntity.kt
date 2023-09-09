@@ -1,18 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import net.minecraft.block.Blocks
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
-import net.minecraft.util.math.random.Random
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
 
 class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
     companion object {
@@ -72,5 +68,12 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Worl
         val minY = collisionBox.minY + yOffset
         val maxY = collisionBox.maxY
         return Box(collisionBox.minX, minY, collisionBox.minZ, collisionBox.maxX, maxY, collisionBox.maxZ)
+    }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
     }
 }

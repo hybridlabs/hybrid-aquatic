@@ -21,4 +21,11 @@ class FiddlerCrabEntity(entityType: EntityType<out FiddlerCrabEntity>, world: Wo
     override fun getGroup(): EntityGroup? {
         return EntityGroup.ARTHROPOD
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

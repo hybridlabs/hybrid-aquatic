@@ -44,4 +44,11 @@ class YellowfinTunaEntity(entityType: EntityType<out YellowfinTunaEntity>, world
 
         }
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

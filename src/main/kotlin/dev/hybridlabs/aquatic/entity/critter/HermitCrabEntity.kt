@@ -21,4 +21,11 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Worl
     override fun getGroup(): EntityGroup? {
         return EntityGroup.ARTHROPOD
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

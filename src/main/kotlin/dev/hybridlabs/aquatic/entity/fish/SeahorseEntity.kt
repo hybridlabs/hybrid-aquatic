@@ -17,4 +17,11 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
 
         }
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

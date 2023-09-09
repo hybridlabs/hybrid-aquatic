@@ -1,12 +1,26 @@
 package dev.hybridlabs.aquatic.client.render.entity
 
 import dev.hybridlabs.aquatic.client.model.entity.WhaleSharkEntityModel
-import dev.hybridlabs.aquatic.entity.shark.WhaleSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
+import net.minecraft.client.util.math.MatrixStack
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
-class WhaleSharkEntityRenderer(context: Context) : GeoEntityRenderer<WhaleSharkEntity>(context, WhaleSharkEntityModel()) {
+class WhaleSharkEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquaticSharkEntity>(context, WhaleSharkEntityModel()) {
     init {
         addRenderLayer(AutoGlowingGeoLayer(this))
+    }
+    override fun render(
+        entity: HybridAquaticSharkEntity?,
+        entityYaw: Float,
+        partialTick: Float,
+        poseStack: MatrixStack?,
+        bufferSource: VertexConsumerProvider?,
+        packedLight: Int
+    ) {
+        val size = HybridAquaticSharkEntity.getScaleAdjustment(entity!!, 0.05f)
+        poseStack!!.scale(size, size, size)
+        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
     }
 }

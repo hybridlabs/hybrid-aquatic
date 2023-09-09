@@ -4,10 +4,7 @@ import dev.hybridlabs.aquatic.client.model.entity.BarreleyeEntityModel
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
-import net.minecraft.client.render.entity.SlimeEntityRenderer
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.entity.mob.SlimeEntity
-import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
@@ -15,7 +12,6 @@ class BarreleyeEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquati
     init {
         addRenderLayer(AutoGlowingGeoLayer(this))
     }
-
     override fun render(
         entity: HybridAquaticFishEntity?,
         entityYaw: Float,

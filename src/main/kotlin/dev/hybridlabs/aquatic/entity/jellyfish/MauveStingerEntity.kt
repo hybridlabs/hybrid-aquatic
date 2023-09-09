@@ -64,4 +64,11 @@ class MauveStingerEntity(entityType: EntityType<out MauveStingerEntity>, world: 
         super.onPlayerCollision(player)
         player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 0), this)
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

@@ -65,4 +65,11 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
             this.speed = 0.01F
         }
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

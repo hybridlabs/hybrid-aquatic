@@ -1,9 +1,23 @@
 package dev.hybridlabs.aquatic.client.render.entity
 
 import dev.hybridlabs.aquatic.client.model.entity.HammerheadSharkEntityModel
-import dev.hybridlabs.aquatic.entity.shark.HammerheadSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
+import net.minecraft.client.util.math.MatrixStack
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 
-class HammerheadSharkEntityRenderer(context: Context) : GeoEntityRenderer<HammerheadSharkEntity>(context, HammerheadSharkEntityModel()) {
+class HammerheadSharkEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquaticSharkEntity>(context, HammerheadSharkEntityModel()) {
+    override fun render(
+        entity: HybridAquaticSharkEntity?,
+        entityYaw: Float,
+        partialTick: Float,
+        poseStack: MatrixStack?,
+        bufferSource: VertexConsumerProvider?,
+        packedLight: Int
+    ) {
+        val size = HybridAquaticSharkEntity.getScaleAdjustment(entity!!, 0.05f)
+        poseStack!!.scale(size, size, size)
+        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
+    }
 }

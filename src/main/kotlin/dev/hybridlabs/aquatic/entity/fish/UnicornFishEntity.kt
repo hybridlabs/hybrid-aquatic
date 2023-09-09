@@ -17,4 +17,11 @@ class UnicornFishEntity(entityType: EntityType<out UnicornFishEntity>, world: Wo
 
         }
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

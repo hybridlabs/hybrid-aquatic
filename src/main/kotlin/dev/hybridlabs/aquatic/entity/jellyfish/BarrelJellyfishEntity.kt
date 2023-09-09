@@ -40,4 +40,11 @@ class BarrelJellyfishEntity(entityType: EntityType<out BarrelJellyfishEntity>, w
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SQUID_AMBIENT
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

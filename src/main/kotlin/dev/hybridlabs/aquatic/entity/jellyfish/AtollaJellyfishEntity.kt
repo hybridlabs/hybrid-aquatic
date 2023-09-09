@@ -64,4 +64,11 @@ class AtollaJellyfishEntity(entityType: EntityType<out AtollaJellyfishEntity>, w
         super.onPlayerCollision(player)
         player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 2), this)
     }
+    override fun getMaxSize() : Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
 }

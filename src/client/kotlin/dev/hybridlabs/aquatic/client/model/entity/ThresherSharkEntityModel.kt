@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity
 
-import dev.hybridlabs.aquatic.entity.shark.ThresherSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 
-class ThresherSharkEntityModel : HybridAquaticSharkEntityModel<ThresherSharkEntity>("thresher_shark") {
+class ThresherSharkEntityModel : HybridAquaticSharkEntityModel<HybridAquaticSharkEntity>("thresher_shark") {
 }

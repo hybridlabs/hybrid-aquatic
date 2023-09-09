@@ -2,17 +2,9 @@ package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import net.minecraft.block.Blocks
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityPose
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.EscapeDangerGoal
-import net.minecraft.entity.ai.goal.LookAroundGoal
-import net.minecraft.entity.ai.goal.LookAtEntityGoal
-import net.minecraft.entity.ai.goal.MoveIntoWaterGoal
-import net.minecraft.entity.ai.goal.WanderAroundGoal
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.ai.pathing.PathNodeType
@@ -36,11 +28,8 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.*
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
@@ -57,12 +46,10 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         waterNavigation = SwimNavigation(this, world)
         landNavigation = MobNavigation(this, world)
     }
-
-
     override fun initDataTracker() {
         super.initDataTracker()
         dataTracker.startTracking(VARIANT, 0)
-
+        dataTracker.startTracking(CRITTER_SIZE, 0)
     }
     override fun initGoals() {
         super.initGoals()
@@ -82,6 +69,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         this.air = this.maxAir
         pitch = 0.0f
         this.variant = this.random.nextInt(variantCount)
+        this.size = this.random.nextBetween(getMinSize(),getMaxSize())
         this.pitch = 0.0f
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -106,11 +94,13 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         nbt.putInt(HybridAquaticFishEntity.VARIANT_KEY, variant)
+        nbt.putInt(CRITTER_SIZE_KEY, size)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         variant = nbt.getInt(HybridAquaticFishEntity.VARIANT_KEY)
+        size = nbt.getInt(CRITTER_SIZE_KEY)
     }
     override fun tickWaterBreathingAir(air: Int) {}
 
@@ -125,6 +115,13 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
             return PlayState.CONTINUE
         }
         return PlayState.STOP
+    }
+    protected open fun getMinSize() : Int {
+        return 0;
+    }
+
+    protected open fun getMaxSize() : Int {
+        return 0;
     }
 
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
@@ -187,9 +184,16 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         set(int) {
             dataTracker.set(VARIANT, int)
         }
+    var size: Int
+        get() = dataTracker.get(CRITTER_SIZE)
+        set(Int) {
+            dataTracker.set(CRITTER_SIZE, Int)
+        }
 
     companion object {
         val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val CRITTER_SIZE: TrackedData<Int> = DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity?>?,
             world: WorldAccess,
@@ -204,6 +208,10 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
                     world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&
                     world.getBlockState(pos.up()).isOf(Blocks.WATER)
         }
+        fun getScaleAdjustment(critter : HybridAquaticCritterEntity, adjustment : Float): Float {
+            return 1.0f + (critter.size * adjustment);
+        }
         const val VARIANT_KEY = "Variant"
+        const val CRITTER_SIZE_KEY = "CritterSize"
     }
 }

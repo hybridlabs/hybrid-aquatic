@@ -29,7 +29,6 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import kotlin.math.abs
-import kotlin.math.ceil
 
 @Suppress("LeakingThis")
 open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyfishEntity>, world: World, private val variantCount: Int = 1) : WaterCreatureEntity(type, world), GeoEntity {
@@ -45,6 +44,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         dataTracker.startTracking(MOISTNESS, 600)
         dataTracker.startTracking(VARIANT, 0)
         dataTracker.startTracking(SPAWNED_ON_Y, 0)
+        dataTracker.startTracking(HybridAquaticJellyfishEntity.JELLYFISH_SIZE, 0)
     }
 
     override fun initialize(
@@ -56,6 +56,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
     ): EntityData? {
         this.air = this.maxAir
         this.variant = this.random.nextInt(variantCount)
+        this.size = this.random.nextBetween(getMinSize(),getMaxSize())
         this.spawnedY = this.y.toInt()
         this.pitch = 0.0f
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
@@ -88,13 +89,14 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         nbt.putInt(MOISTNESS_KEY, moistness)
         nbt.putInt(VARIANT_KEY, variant)
         nbt.putInt(SPAWNED_ON_Y_KEY, spawnedY)
+        nbt.putInt(HybridAquaticJellyfishEntity.JELLYFISH_SIZE_KEY, size)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
         variant = nbt.getInt(VARIANT_KEY)
-
+        size = nbt.getInt(HybridAquaticJellyfishEntity.JELLYFISH_SIZE_KEY)
         spawnedY = if(!nbt.contains(SPAWNED_ON_Y_KEY)) (this.y - 1).toInt()
         else nbt.getInt(SPAWNED_ON_Y_KEY)
     }
@@ -105,6 +107,13 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
             return PlayState.CONTINUE
         }
         return PlayState.STOP
+    }
+    protected open fun getMinSize() : Int {
+        return 0;
+    }
+
+    protected open fun getMaxSize() : Int {
+        return 0;
     }
 
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
@@ -150,6 +159,12 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
             dataTracker.set(VARIANT, int)
         }
 
+    var size: Int
+        get() = dataTracker.get(HybridAquaticJellyfishEntity.JELLYFISH_SIZE)
+        set(Int) {
+            dataTracker.set(HybridAquaticJellyfishEntity.JELLYFISH_SIZE, Int)
+        }
+
     private var spawnedY: Int
         get() = dataTracker.get(SPAWNED_ON_Y)
         set(int) {
@@ -183,6 +198,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val SPAWNED_ON_Y: TrackedData<Int> = DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val JELLYFISH_SIZE: TrackedData<Int> = DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
         val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 
@@ -200,8 +216,13 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
                     world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&
                     world.getBlockState(pos.up()).isOf(Blocks.WATER)
         }
+        fun getScaleAdjustment(jellyfish : HybridAquaticJellyfishEntity, adjustment : Float): Float {
+            return 1.0f + (jellyfish.size * adjustment);
+        }
         const val MOISTNESS_KEY = "Moistness"
         const val SPAWNED_ON_Y_KEY = "Spawned_on_Y"
         const val VARIANT_KEY = "Variant"
+        const val JELLYFISH_SIZE_KEY = "JellyfishSize"
+
     }
 }
