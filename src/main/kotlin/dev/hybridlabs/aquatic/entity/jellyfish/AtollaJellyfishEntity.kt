@@ -62,7 +62,7 @@ class AtollaJellyfishEntity(entityType: EntityType<out AtollaJellyfishEntity>, w
     }
     override fun onPlayerCollision(player: PlayerEntity) {
         super.onPlayerCollision(player)
-        player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 2), this)
+        player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 2), this)
     }
     override fun getMaxSize() : Int {
         return 5

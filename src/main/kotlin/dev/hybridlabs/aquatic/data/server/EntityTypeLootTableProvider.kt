@@ -128,7 +128,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
                             .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
-                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
                     )
             )
         }
@@ -139,18 +139,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
                             .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
-                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
-                    )
-            )
-        }
-
-        export(exporter, HybridAquaticEntityTypes.SEA_NETTLE) {
-            pool(
-                LootPool.builder()
-                    .with(
-                        ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
-                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0F, 3.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
                     )
             )
         }
@@ -177,7 +166,125 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                         ItemEntry.builder(Items.SLIME_BALL)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
                             .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
-                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                    )
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.SEA_NETTLE) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
+                    )
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.NOMURA_JELLY) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0F, 3.0F)))
+                    )
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0F, 3.0F)))
+                    )
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.BLUE_JELLY) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
+                    )
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.COMPASS_JELLY) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
+                    )
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.BARREL_JELLY) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
+                    )
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.MAUVE_STINGER) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                    )
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.FRIED_EGG_JELLY) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                    )
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.CAULIFLOWER_JELLY) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                    )
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.ATOLLA_JELLYFISH) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(Items.SLIME_BALL)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                    )
+            )
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(HybridAquaticItems.GLOW_SLIME)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
                     )
             )
         }

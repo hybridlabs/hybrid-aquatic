@@ -62,7 +62,7 @@ class CompassJellyfishEntity(entityType: EntityType<out CompassJellyfishEntity>,
     }
     override fun onPlayerCollision(player: PlayerEntity) {
         super.onPlayerCollision(player)
-        player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 0), this)
+        player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 0), this)
     }
     override fun getMaxSize() : Int {
         return 5
