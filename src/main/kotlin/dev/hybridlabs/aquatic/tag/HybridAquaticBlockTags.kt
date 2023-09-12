@@ -8,9 +8,9 @@ import net.minecraft.util.Identifier
 
 object HybridAquaticBlockTags {
     /**
-     * A list of all Blahaj Plushies.
+     * A list of all Plushies.
      */
-    val BLAHAJ_PLUSHIES = create("blahaj_plushies")
+    val PLUSHIES = create("_plushies")
 
     /**
      * A list of blocks that anemones can generate inside of.

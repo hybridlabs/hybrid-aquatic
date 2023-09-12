@@ -35,17 +35,17 @@ object HybridAquaticBlocks {
             .pistonBehavior(PistonBehavior.DESTROY)
     ))
 
-    val BASKING_SHARK_BLAHAJ_PLUSHIE = register("basking_shark_blahaj_plushie", createBlahajPlushieBlock(BlahajPlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL))
-    val BULL_SHARK_BLAHAJ_PLUSHIE = register("bull_shark_blahaj_plushie", createBlahajPlushieBlock(BlahajPlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL))
-    val FRILLED_SHARK_BLAHAJ_PLUSHIE = register("frilled_shark_blahaj_plushie", createBlahajPlushieBlock(BlahajPlushieBlock.Variant.FRILLED_SHARK, Blocks.GRAY_WOOL))
-    val GREAT_WHITE_SHARK_BLAHAJ_PLUSHIE = register("great_white_shark_blahaj_plushie", createBlahajPlushieBlock(BlahajPlushieBlock.Variant.GREAT_WHITE_SHARK, Blocks.WHITE_WOOL))
-    val HAMMERHEAD_SHARK_BLAHAJ_PLUSHIE = register("hammerhead_shark_blahaj_plushie", createBlahajPlushieBlock(BlahajPlushieBlock.Variant.HAMMERHEAD_SHARK, Blocks.WHITE_WOOL))
-    val THRESHER_SHARK_BLAHAJ_PLUSHIE = register("thresher_shark_blahaj_plushie", createBlahajPlushieBlock(BlahajPlushieBlock.Variant.THRESHER_SHARK, Blocks.WHITE_WOOL))
-    val TIGER_SHARK_BLAHAJ_PLUSHIE = register("tiger_shark_blahaj_plushie", createBlahajPlushieBlock(BlahajPlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL))
-    val WHALE_SHARK_BLAHAJ_PLUSHIE = register("whale_shark_blahaj_plushie", createBlahajPlushieBlock(BlahajPlushieBlock.Variant.WHALE_SHARK, Blocks.WHITE_WOOL))
+    val BASKING_SHARK_PLUSHIE = register("basking_shark_blahaj_plushie", createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL))
+    val BULL_SHARK_PLUSHIE = register("bull_shark_blahaj_plushie", createPlushieBlock(PlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL))
+    val FRILLED_SHARK_PLUSHIE = register("frilled_shark_blahaj_plushie", createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK, Blocks.GRAY_WOOL))
+    val GREAT_WHITE_SHARK_PLUSHIE = register("great_white_shark_blahaj_plushie", createPlushieBlock(PlushieBlock.Variant.GREAT_WHITE_SHARK, Blocks.WHITE_WOOL))
+    val HAMMERHEAD_SHARK_PLUSHIE = register("hammerhead_shark_blahaj_plushie", createPlushieBlock(PlushieBlock.Variant.HAMMERHEAD_SHARK, Blocks.WHITE_WOOL))
+    val THRESHER_SHARK_PLUSHIE = register("thresher_shark_blahaj_plushie", createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK, Blocks.WHITE_WOOL))
+    val TIGER_SHARK_PLUSHIE = register("tiger_shark_blahaj_plushie", createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL))
+    val WHALE_SHARK_PLUSHIE = register("whale_shark_blahaj_plushie", createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.WHITE_WOOL))
 
-    private fun createBlahajPlushieBlock(variant: BlahajPlushieBlock.Variant, particleBlock: Block): BlahajPlushieBlock {
-        return BlahajPlushieBlock(variant, particleBlock,
+    private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block): PlushieBlock {
+        return PlushieBlock(variant, particleBlock,
             FabricBlockSettings.create()
                 .breakInstantly()
                 .pistonBehavior(PistonBehavior.DESTROY)

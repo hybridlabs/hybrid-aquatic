@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.block.BlahajPlushieBlock
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
@@ -14,14 +14,14 @@ import net.minecraft.util.Identifier
 
 class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     override fun generateBlockStateModels(generator: BlockStateModelGenerator) { generator.run {
-        // blahaj plushies
+        // plushies
         Registries.BLOCK
-            .filterIsInstance<BlahajPlushieBlock>()
+            .filterIsInstance<PlushieBlock>()
             .forEach { block ->
                 excludeFromSimpleItemModelGeneration(block)
 
                 registerBuiltinWithParticle(block, TextureMap.getId(block.particleBlock))
-                registerParentedItemModel(block, TEMPLATE_BLAHAJ_PLUSHIE)
+                registerParentedItemModel(block, TEMPLATE_PLUSHIE)
             }
 
         // spawn eggs
@@ -86,6 +86,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     companion object {
         private val TEMPLATE_ANEMONE = Identifier(HybridAquatic.MOD_ID, "item/template_anemone")
         private val TEMPLATE_MESSAGE_IN_A_BOTTLE = Identifier(HybridAquatic.MOD_ID, "item/template_message_in_a_bottle")
-        private val TEMPLATE_BLAHAJ_PLUSHIE = Identifier(HybridAquatic.MOD_ID, "item/template_blahaj_plushie")
+        private val TEMPLATE_PLUSHIE = Identifier(HybridAquatic.MOD_ID, "item/template_plushie")
     }
 }

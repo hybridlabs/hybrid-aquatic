@@ -321,14 +321,14 @@ object HybridAquaticItems {
     )
 
     // plushies
-    val BASKING_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("basking_shark_blahaj_plushie", HybridAquaticBlocks.BASKING_SHARK_BLAHAJ_PLUSHIE)
-    val BULL_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("bull_shark_blahaj_plushie", HybridAquaticBlocks.BULL_SHARK_BLAHAJ_PLUSHIE)
-    val FRILLED_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("frilled_shark_blahaj_plushie", HybridAquaticBlocks.FRILLED_SHARK_BLAHAJ_PLUSHIE)
-    val GREAT_WHITE_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("great_white_shark_blahaj_plushie", HybridAquaticBlocks.GREAT_WHITE_SHARK_BLAHAJ_PLUSHIE)
-    val HAMMERHEAD_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("hammerhead_shark_blahaj_plushie", HybridAquaticBlocks.HAMMERHEAD_SHARK_BLAHAJ_PLUSHIE)
-    val THRESHER_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("thresher_shark_blahaj_plushie", HybridAquaticBlocks.THRESHER_SHARK_BLAHAJ_PLUSHIE)
-    val TIGER_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("tiger_shark_blahaj_plushie", HybridAquaticBlocks.TIGER_SHARK_BLAHAJ_PLUSHIE)
-    val WHALE_SHARK_BLAHAJ_PLUSHIE = registerBlockItem("whale_shark_blahaj_plushie", HybridAquaticBlocks.WHALE_SHARK_BLAHAJ_PLUSHIE)
+    val BASKING_SHARK_PLUSHIE = registerBlockItem("basking_shark_plushie", HybridAquaticBlocks.BASKING_SHARK_PLUSHIE)
+    val BULL_SHARK_PLUSHIE = registerBlockItem("bull_shark_plushie", HybridAquaticBlocks.BULL_SHARK_PLUSHIE)
+    val FRILLED_SHARK_PLUSHIE = registerBlockItem("frilled_shark_plushie", HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE)
+    val GREAT_WHITE_SHARK_PLUSHIE = registerBlockItem("great_white_shark_plushie", HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE)
+    val HAMMERHEAD_SHARK_PLUSHIE = registerBlockItem("hammerhead_shark_plushie", HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE)
+    val THRESHER_SHARK_PLUSHIE = registerBlockItem("thresher_shark_plushie", HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE)
+    val TIGER_SHARK_PLUSHIE = registerBlockItem("tiger_shark_plushie", HybridAquaticBlocks.TIGER_SHARK_PLUSHIE)
+    val WHALE_SHARK_PLUSHIE = registerBlockItem("whale_shark_plushie", HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
 
     // fish spawn eggs
     val CLOWNFISH_SPAWN_EGG = registerSpawnEgg("clownfish_spawn_egg", HybridAquaticEntityTypes.CLOWNFISH, 0xff5000, 0xffffff)

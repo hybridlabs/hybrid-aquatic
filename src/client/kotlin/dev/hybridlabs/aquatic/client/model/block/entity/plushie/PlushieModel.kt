@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.model.block.entity.blahaj_plushie
+package dev.hybridlabs.aquatic.client.model.block.entity.plushie
 
 import net.minecraft.client.model.ModelPart
 import net.minecraft.client.render.VertexConsumer
@@ -10,7 +10,7 @@ import kotlin.math.sin
 /**
  * Represents the model of a Blahaj Plushie.
  */
-abstract class BlahajPlushieModel : SkullBlockEntityModel() {
+abstract class PlushieModel : SkullBlockEntityModel() {
     /**
      * The root model part.
      */

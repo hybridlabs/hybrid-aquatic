@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
 import com.google.common.collect.ImmutableMap;
-import dev.hybridlabs.aquatic.block.BlahajPlushieBlock;
+import dev.hybridlabs.aquatic.block.PlushieBlock;
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers;
 import kotlin.enums.EnumEntries;
 import net.minecraft.block.SkullBlock;
@@ -27,9 +27,9 @@ public class SkullBlockEntityRendererMixin {
      */
     @Inject(method = "method_3580", at = @At("TAIL"))
     private static void injectTextures(HashMap<SkullBlock.SkullType, Identifier> map, CallbackInfo info) {
-        // inject blahaj plushie variants
-        EnumEntries<BlahajPlushieBlock.Variant> variants = BlahajPlushieBlock.Variant.getEntries();
-        for (BlahajPlushieBlock.Variant variant : variants) {
+        // inject plushie variants
+        EnumEntries<PlushieBlock.Variant> variants = PlushieBlock.Variant.getEntries();
+        for (PlushieBlock.Variant variant : variants) {
             map.put(variant, variant.getTextureLocation());
         }
     }
@@ -48,7 +48,7 @@ public class SkullBlockEntityRendererMixin {
             locals = LocalCapture.CAPTURE_FAILEXCEPTION
     )
     private static void injectModels(EntityModelLoader modelLoader, CallbackInfoReturnable<Map<SkullBlock.SkullType, SkullBlockEntityModel>> cir, ImmutableMap.Builder<SkullBlock.SkullType, SkullBlockEntityModel> builder) {
-        // inject blahaj plushie variants
+        // inject plushie variants
         HybridAquaticEntityModelLayers.INSTANCE.injectModels(modelLoader, builder);
     }
 }

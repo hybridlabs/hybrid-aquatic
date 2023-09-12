@@ -110,14 +110,14 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         // blahaj plushies
-        builder.add(HybridAquaticBlocks.BASKING_SHARK_BLAHAJ_PLUSHIE, "Basking Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.BULL_SHARK_BLAHAJ_PLUSHIE, "Bull Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.FRILLED_SHARK_BLAHAJ_PLUSHIE, "Frilled Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.GREAT_WHITE_SHARK_BLAHAJ_PLUSHIE, "Great White Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.HAMMERHEAD_SHARK_BLAHAJ_PLUSHIE, "Hammerhead Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.THRESHER_SHARK_BLAHAJ_PLUSHIE, "Thresher Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.TIGER_SHARK_BLAHAJ_PLUSHIE, "Tiger Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.WHALE_SHARK_BLAHAJ_PLUSHIE, "Whale Shark Blahaj Plushie")
+        builder.add(HybridAquaticBlocks.BASKING_SHARK_PLUSHIE, "Basking Shark Plushie")
+        builder.add(HybridAquaticBlocks.BULL_SHARK_PLUSHIE, "Bull Shark Plushie")
+        builder.add(HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE, "Frilled Shark Plushie")
+        builder.add(HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE, "Great White Shark Plushie")
+        builder.add(HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE, "Hammerhead Shark Plushie")
+        builder.add(HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE, "Thresher Shark Plushie")
+        builder.add(HybridAquaticBlocks.TIGER_SHARK_PLUSHIE, "Tiger Shark Plushie")
+        builder.add(HybridAquaticBlocks.WHALE_SHARK_PLUSHIE, "Whale Shark Plushie")
 
         // misc
         builder.add(HybridAquaticBlocks.ANEMONE, "Anemone")

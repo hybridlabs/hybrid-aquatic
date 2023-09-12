@@ -1,20 +1,15 @@
-package dev.hybridlabs.aquatic.client.model.block.entity.blahaj_plushie
+package dev.hybridlabs.aquatic.client.model.block.entity.plushie
 
-import dev.hybridlabs.aquatic.block.BlahajPlushieBlock
-import net.minecraft.client.model.Dilation
-import net.minecraft.client.model.ModelData
-import net.minecraft.client.model.ModelPart
-import net.minecraft.client.model.ModelPartBuilder
-import net.minecraft.client.model.ModelTransform
-import net.minecraft.client.model.TexturedModelData
+import dev.hybridlabs.aquatic.block.PlushieBlock
+import net.minecraft.client.model.*
 import net.minecraft.client.render.entity.model.EntityModelPartNames.BODY
 import net.minecraft.client.render.entity.model.EntityModelPartNames.JAW
 
 /**
  * The model for the Bull Shark Blahaj Plushie.
- * @see BlahajPlushieBlock.Variant.BULL_SHARK
+ * @see PlushieBlock.Variant.BULL_SHARK
  */
-class BullSharkBlahajPlushieModel(override val root: ModelPart) : BlahajPlushieModel() {
+class BullSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
     override val jaw: ModelPart = root.getChild(JAW)
 
     companion object {

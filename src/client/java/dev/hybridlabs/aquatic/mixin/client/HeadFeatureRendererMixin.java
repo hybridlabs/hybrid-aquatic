@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
-import dev.hybridlabs.aquatic.block.BlahajPlushieBlock;
+import dev.hybridlabs.aquatic.block.PlushieBlock;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HeadFeatureRenderer.class)
 public class HeadFeatureRendererMixin<T extends LivingEntity> {
     /**
-     * Translates the Blahaj Plushie models up when on the player's head.
+     * Translates the Plushie models up when on the player's head.
      * @implNote The wonderful underlying Mojank code makes it so that
      *           we can't use the display feature in the item model
      */
@@ -29,9 +29,9 @@ public class HeadFeatureRendererMixin<T extends LivingEntity> {
                     shift = At.Shift.BEFORE
             )
     )
-    private void translateBlahajPlushieUp(MatrixStack matrices, VertexConsumerProvider vertices, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch, CallbackInfo ci) {
+    private void translatePlushieUp(MatrixStack matrices, VertexConsumerProvider vertices, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch, CallbackInfo ci) {
         ItemStack stack = entity.getEquippedStack(EquipmentSlot.HEAD);
-        if (stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof BlahajPlushieBlock) {
+        if (stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof PlushieBlock) {
             matrices.translate(0.0, 6.75 / 16.0, 0.0);
         }
     }

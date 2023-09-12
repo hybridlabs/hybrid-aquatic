@@ -32,15 +32,15 @@ object HybridAquaticItemGroups {
                 entries.add(stack)
             }
 
-            // blahaj plushies
-            entries.add(HybridAquaticBlocks.BASKING_SHARK_BLAHAJ_PLUSHIE)
-            entries.add(HybridAquaticBlocks.BULL_SHARK_BLAHAJ_PLUSHIE)
-            entries.add(HybridAquaticBlocks.FRILLED_SHARK_BLAHAJ_PLUSHIE)
-            entries.add(HybridAquaticBlocks.GREAT_WHITE_SHARK_BLAHAJ_PLUSHIE)
-            entries.add(HybridAquaticBlocks.HAMMERHEAD_SHARK_BLAHAJ_PLUSHIE)
-            entries.add(HybridAquaticBlocks.THRESHER_SHARK_BLAHAJ_PLUSHIE)
-            entries.add(HybridAquaticBlocks.TIGER_SHARK_BLAHAJ_PLUSHIE)
-            entries.add(HybridAquaticBlocks.WHALE_SHARK_BLAHAJ_PLUSHIE)
+            // plushies
+            entries.add(HybridAquaticBlocks.BASKING_SHARK_PLUSHIE)
+            entries.add(HybridAquaticBlocks.BULL_SHARK_PLUSHIE)
+            entries.add(HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE)
+            entries.add(HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE)
+            entries.add(HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE)
+            entries.add(HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE)
+            entries.add(HybridAquaticBlocks.TIGER_SHARK_PLUSHIE)
+            entries.add(HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
 
             // food items
             entries.add(HybridAquaticItems.RAW_FISH_MEAT)

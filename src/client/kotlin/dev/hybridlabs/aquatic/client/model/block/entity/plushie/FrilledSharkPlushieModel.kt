@@ -1,21 +1,14 @@
-package dev.hybridlabs.aquatic.client.model.block.entity.blahaj_plushie
+package dev.hybridlabs.aquatic.client.model.block.entity.plushie
 
-import dev.hybridlabs.aquatic.block.BlahajPlushieBlock
-import net.minecraft.client.model.ModelData
-import net.minecraft.client.model.ModelPart
-import net.minecraft.client.model.ModelPartBuilder
-import net.minecraft.client.model.ModelTransform
-import net.minecraft.client.model.TexturedModelData
-import net.minecraft.client.render.entity.model.EntityModelPartNames.BODY
-import net.minecraft.client.render.entity.model.EntityModelPartNames.LEFT_FIN
-import net.minecraft.client.render.entity.model.EntityModelPartNames.RIGHT_FIN
-import net.minecraft.client.render.entity.model.EntityModelPartNames.TAIL_FIN
+import dev.hybridlabs.aquatic.block.PlushieBlock
+import net.minecraft.client.model.*
+import net.minecraft.client.render.entity.model.EntityModelPartNames.*
 
 /**
  * The model for the Frilled Shark Blahaj Plushie.
- * @see BlahajPlushieBlock.Variant.FRILLED_SHARK
+ * @see PlushieBlock.Variant.FRILLED_SHARK
  */
-class FrilledSharkBlahajPlushieModel(override val root: ModelPart) : BlahajPlushieModel() {
+class FrilledSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
     companion object {
         fun createModelData(): TexturedModelData {
             val modelData = ModelData()

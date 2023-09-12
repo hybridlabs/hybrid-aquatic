@@ -9,9 +9,9 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
 
 /**
- * Represents any Blahaj Plushie block.
+ * Represents any Plushie block.
  */
-class BlahajPlushieBlock(variant: Variant, val particleBlock: Block, settings: Settings) : SkullBlock(variant, settings) {
+class PlushieBlock(variant: Variant, val particleBlock: Block, settings: Settings) : SkullBlock(variant, settings) {
     init {
         BlockEntityType.SKULL.addBlocks(this)
     }
@@ -26,7 +26,7 @@ class BlahajPlushieBlock(variant: Variant, val particleBlock: Block, settings: S
         TIGER_SHARK("tiger_shark"),
         WHALE_SHARK("whale_shark");
 
-        val textureLocation: Identifier by lazy { Identifier(HybridAquatic.MOD_ID, "textures/entity/block/blahaj_plushie/${id}_blahaj_plushie.png") }
+        val textureLocation: Identifier by lazy { Identifier(HybridAquatic.MOD_ID, "textures/entity/block/plushie/${id}_plushie.png") }
 
         override fun asString(): String {
             return id

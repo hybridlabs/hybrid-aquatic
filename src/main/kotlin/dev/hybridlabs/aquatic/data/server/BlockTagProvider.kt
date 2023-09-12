@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.data.server
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.block.BlahajPlushieBlock
+import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
@@ -19,16 +19,16 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBlockTags.MESSAGE_IN_A_BOTTLE_SPAWNS_IN)
             .add(Blocks.WATER)
 
-        // blahaj plushies
+        // plushies
         Registries.BLOCK
             .filter { block ->
                 val id = Registries.BLOCK.getId(block)
                 id.namespace == HybridAquatic.MOD_ID
             }
             .forEach { block ->
-                // blahaj plushies
-                if (block is BlahajPlushieBlock) {
-                    getOrCreateTagBuilder(HybridAquaticBlockTags.BLAHAJ_PLUSHIES).add(block)
+                // plushies
+                if (block is PlushieBlock) {
+                    getOrCreateTagBuilder(HybridAquaticBlockTags.PLUSHIES).add(block)
                 }
             }
     }
