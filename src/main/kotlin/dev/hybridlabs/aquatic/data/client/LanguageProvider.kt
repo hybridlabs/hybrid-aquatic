@@ -109,7 +109,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add("item.$namespace.${path}_spawn_egg", "$translation Spawn Egg")
         }
 
-        // blahaj plushies
+        // plushies
         builder.add(HybridAquaticBlocks.BASKING_SHARK_PLUSHIE, "Basking Shark Plushie")
         builder.add(HybridAquaticBlocks.BULL_SHARK_PLUSHIE, "Bull Shark Plushie")
         builder.add(HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE, "Frilled Shark Plushie")
