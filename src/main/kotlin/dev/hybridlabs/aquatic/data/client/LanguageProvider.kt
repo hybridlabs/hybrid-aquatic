@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
+import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
@@ -97,7 +98,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.BARREL_JELLY to "Barrel Jellyfish",
             HybridAquaticEntityTypes.COMPASS_JELLY to "Compass Jellyfish",
             HybridAquaticEntityTypes.MAUVE_STINGER to "Mauve Stinger",
-            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH to "Lions Mane Jellyfish"
+            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH to "Lions Mane Jellyfish",
 
 
             ).forEach { (entityType, translation) ->
@@ -109,42 +110,58 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add("item.$namespace.${path}_spawn_egg", "$translation Spawn Egg")
         }
 
-        // blahaj plushies
-        builder.add(HybridAquaticBlocks.BASKING_SHARK_BLAHAJ_PLUSHIE, "Basking Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.BULL_SHARK_BLAHAJ_PLUSHIE, "Bull Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.FRILLED_SHARK_BLAHAJ_PLUSHIE, "Frilled Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.GREAT_WHITE_SHARK_BLAHAJ_PLUSHIE, "Great White Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.HAMMERHEAD_SHARK_BLAHAJ_PLUSHIE, "Hammerhead Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.THRESHER_SHARK_BLAHAJ_PLUSHIE, "Thresher Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.TIGER_SHARK_BLAHAJ_PLUSHIE, "Tiger Shark Blahaj Plushie")
-        builder.add(HybridAquaticBlocks.WHALE_SHARK_BLAHAJ_PLUSHIE, "Whale Shark Blahaj Plushie")
+        // blocks translations
+        mapOf(
+            HybridAquaticBlocks.BASKING_SHARK_BLAHAJ_PLUSHIE to "Basking Shark Blahaj Plushie",
+            HybridAquaticBlocks.BULL_SHARK_BLAHAJ_PLUSHIE to "Bull Shark Blahaj Plushie",
+            HybridAquaticBlocks.FRILLED_SHARK_BLAHAJ_PLUSHIE to "Frilled Shark Blahaj Plushie",
+            HybridAquaticBlocks.GREAT_WHITE_SHARK_BLAHAJ_PLUSHIE to "Great White Shark Blahaj Plushie",
+            HybridAquaticBlocks.HAMMERHEAD_SHARK_BLAHAJ_PLUSHIE to "Hammerhead Shark Blahaj Plushie",
+            HybridAquaticBlocks.THRESHER_SHARK_BLAHAJ_PLUSHIE to "Thresher Shark Blahaj Plushie",
+            HybridAquaticBlocks.TIGER_SHARK_BLAHAJ_PLUSHIE to "Tiger Shark Blahaj Plushie",
+            HybridAquaticBlocks.WHALE_SHARK_BLAHAJ_PLUSHIE to "Whale Shark Blahaj Plushie",
+            HybridAquaticBlocks.ANEMONE to "Anemone",
+        ).forEach { (plushie, translation) ->
+            builder.add(plushie, translation)
+        }
 
-        // misc
-        builder.add(HybridAquaticBlocks.ANEMONE, "Anemone")
-        builder.add(HybridAquaticItems.RAW_FISH_MEAT, "Raw Fish Meat")
-        builder.add(HybridAquaticItems.COOKED_FISH_MEAT, "Cooked Fish Meat")
-        builder.add(HybridAquaticItems.RAW_TENTACLE, "Raw Tentacle")
-        builder.add(HybridAquaticItems.COOKED_TENTACLE, "Cooked Tentacle")
-        builder.add(HybridAquaticItems.RAW_CRAB_MEAT, "Raw Crab Meat")
-        builder.add(HybridAquaticItems.COOKED_CRAB_MEAT, "Cooked Crab Meat")
-        builder.add(HybridAquaticItems.LIONFISH, "Lionfish")
-        builder.add(HybridAquaticItems.MAHI_MAHI, "Mahi Mahi")
-        builder.add(HybridAquaticItems.YELLOWFIN_TUNA, "Yellowfin Tuna")
-        builder.add(HybridAquaticItems.OPAH, "Opah")
-        builder.add(HybridAquaticItems.ROCKFISH, "Rockfish")
-        builder.add(HybridAquaticItems.BLUE_SPOTTED_STINGRAY, "Blue Spotted Stingray")
-        builder.add(HybridAquaticItems.MORAY_EEL, "Moray Eel")
-        builder.add(HybridAquaticItems.NEEDLEFISH, "Needlefish")
-        builder.add(HybridAquaticItems.PIRANHA, "Piranha")
-        builder.add(HybridAquaticItems.ANGLERFISH, "Anglerfish")
-        builder.add(HybridAquaticItems.BARRELEYE, "Barreleye")
-        builder.add(HybridAquaticItems.BLUE_TANG, "Blue Tang")
-        builder.add(HybridAquaticItems.CLOWNFISH, "Clownfish")
-        builder.add(HybridAquaticItems.UNICORN_FISH, "Unicorn Fish")
-        builder.add(HybridAquaticItems.CRAB_CLAW, "Crab Claw")
-        builder.add(HybridAquaticItems.GLOW_SLIME, "Glow Slime")
-        builder.add(HybridAquaticItems.SHARK_TOOTH, "Shark Tooth")
-        builder.add(HybridAquaticItems.PEARL, "Pearl")
-        builder.add(HybridAquaticItems.BLACK_PEARL, "Black Pearl")
+
+        // items translations
+        mapOf(
+            HybridAquaticItems.RAW_FISH_MEAT to "Raw Fish Meat",
+            HybridAquaticItems.COOKED_FISH_MEAT to "Cooked Fish Meat",
+            HybridAquaticItems.RAW_TENTACLE to "Raw Tentacle",
+            HybridAquaticItems.COOKED_TENTACLE to "Cooked Tentacle",
+            HybridAquaticItems.RAW_CRAB_MEAT to "Raw Crab Meat",
+            HybridAquaticItems.COOKED_CRAB_MEAT to "Cooked Crab Meat",
+            HybridAquaticItems.LIONFISH to "Lionfish",
+            HybridAquaticItems.MAHI_MAHI to "Mahi Mahi",
+            HybridAquaticItems.YELLOWFIN_TUNA to "Yellowfin Tuna",
+            HybridAquaticItems.OPAH to "Opah",
+            HybridAquaticItems.ROCKFISH to "Rockfish",
+            HybridAquaticItems.BLUE_SPOTTED_STINGRAY to "Blue Spotted Stingray",
+            HybridAquaticItems.MORAY_EEL to "Moray Eel",
+            HybridAquaticItems.NEEDLEFISH to "Needlefish",
+            HybridAquaticItems.PIRANHA to "Piranha",
+            HybridAquaticItems.ANGLERFISH to "Anglerfish",
+            HybridAquaticItems.BARRELEYE to "Barreleye",
+            HybridAquaticItems.BLUE_TANG to "Blue Tang",
+            HybridAquaticItems.CLOWNFISH to "Clownfish",
+            HybridAquaticItems.UNICORN_FISH to "Unicorn Fish",
+            HybridAquaticItems.CRAB_CLAW to "Crab Claw",
+            HybridAquaticItems.GLOW_SLIME to "Glow Slime",
+            HybridAquaticItems.SHARK_TOOTH to "Shark Tooth",
+            HybridAquaticItems.PEARL to "Pearl",
+            HybridAquaticItems.BLACK_PEARL to "Black Pearl",
+        ).forEach { (item, translation) ->
+            builder.add(item, translation)
+        }
+
+        // enchantments
+        mapOf(
+            HybridAquaticEnchantments.LIVECATCH to "Live Catch",
+        ).forEach { (enchantment, translation) ->
+            builder.add(enchantment, translation)
+        }
     }
 }
