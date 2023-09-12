@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.block.BlahajPlushieBlock
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
@@ -37,6 +38,8 @@ object HybridAquatic : ModInitializer {
 
         HybridAquaticItems
         HybridAquaticItemGroups
+
+        HybridAquaticEnchantments
 
         FeatureBiomeModifications
         EntityBiomeModifications
