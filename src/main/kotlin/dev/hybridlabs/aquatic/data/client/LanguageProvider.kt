@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
+import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
@@ -122,6 +123,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add(block, translation)
         }
 
+        // items
         mapOf(
             HybridAquaticItems.RAW_FISH_MEAT to "Raw Fish Meat",
             HybridAquaticItems.COOKED_FISH_MEAT to "Cooked Fish Meat",
@@ -150,6 +152,13 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.BLACK_PEARL to "Black Pearl",
         ).forEach { (item, translation) ->
             builder.add(item, translation)
+        }
+
+        // enchantments
+        mapOf(
+            HybridAquaticEnchantments.LIVECATCH to "Live Catch",
+        ).forEach { (enchantment, translation) ->
+            builder.add(enchantment, translation)
         }
     }
 }
