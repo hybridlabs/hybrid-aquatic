@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -39,8 +40,9 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
   private void injectEnchantment(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, PlayerEntity playerEntity, int i, LootContextParameterSet lootContextParameterSet, LootTable lootTable, List list, Iterator var7, ItemStack itemStack) {
     HashMap<Item, EntityType<? extends WaterCreatureEntity>> ITEM_TO_ENTITY = LiveCatchEnchantment.Companion.getITEM_TO_ENTITYTYPE();
     
-    if(EnchantmentHelper.getLevel(HybridAquaticEnchantments.INSTANCE.getLIVECATCH(), usedItem) > 0 && ITEM_TO_ENTITY.containsKey(itemStack.getItem())) {
-      WaterCreatureEntity entity = ITEM_TO_ENTITY.get(itemStack.getItem()).create(this.getWorld());
+    if(EnchantmentHelper.getLevel(HybridAquaticEnchantments.INSTANCE.getLIVECATCH(), usedItem) > 0 && ITEM_TO_ENTITY.containsKey(itemStack.getItem()) && this.getWorld() instanceof ServerWorld serverWorld) {
+      var entityType = ITEM_TO_ENTITY.get(itemStack.getItem());
+      var entity = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.SPAWN_EGG);
       entity.setPosition(this.getPos());
       
       double modifier = 0.1;
