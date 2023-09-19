@@ -81,7 +81,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
   
   // Replaces item that spawns when you fish a fish with a fish entity
   @Redirect(method = "use", at = @At(
-    value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"
+    value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z", ordinal = 0
   ))
   private boolean changeSpawnEntity(World instance, Entity entity) {
     HashMap<Item, EntityType<? extends WaterCreatureEntity>> ITEM_TO_ENTITY = LiveCatchEnchantment.Companion.getITEM_TO_ENTITYTYPE();
