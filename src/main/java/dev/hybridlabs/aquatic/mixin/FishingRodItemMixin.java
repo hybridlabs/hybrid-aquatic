@@ -21,27 +21,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FishingRodItem.class)
 public abstract class FishingRodItemMixin {
   @Unique
-  private World usedWorld;
-  @Unique
   private PlayerEntity usedPlayer;
   @Unique
   private Hand usedHand;
   
+  // Gets all the required objects
   @Inject(
     method = "use",
     at = @At(value = "HEAD")
   )
   private void playerGetter(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-    this.usedWorld = world;
     this.usedPlayer = user;
     this.usedHand = hand;
   }
   
+  // If item in the opposite hand has lure item it gets consumed and goes in the fishing rod bobber nbt
   @Redirect(
     method = "use",
     at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z")
   )
-  private boolean spawnEntityRedirect(World instance, Entity entity) {
+  private boolean spawnEntityRedirect(World world, Entity entity) {
     FishingBobberEntity bobber = (FishingBobberEntity) entity;
     Hand opposingHand = HandUtils.getOpposingHand(usedHand);
     ItemStack opposingHandItemStack = usedPlayer.getStackInHand(opposingHand);
@@ -50,6 +49,6 @@ public abstract class FishingRodItemMixin {
       ((CustomFishingBobberEntityData) bobber).hybrid_aquatic$setLureItem(opposingHandItemStack.getItem());
       opposingHandItemStack.decrement(1);
     }
-    return instance.spawnEntity(bobber);
+    return world.spawnEntity(bobber);
   }
 }
