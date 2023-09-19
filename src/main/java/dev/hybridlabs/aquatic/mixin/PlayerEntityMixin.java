@@ -6,9 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import org.spongepowered.asm.mixin.Mixin;
@@ -43,6 +40,7 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
     nbt.putInt("haHurtTime", hybrid_aquatic$getHurtTime());
   }
   
+  // Sets haHurtTime to 200 if player got hurt near shark
   @Inject(method = "damage", at = @At(
     value = "INVOKE",
     target = "Lnet/minecraft/entity/player/PlayerEntity;getWorld()Lnet/minecraft/world/World;",

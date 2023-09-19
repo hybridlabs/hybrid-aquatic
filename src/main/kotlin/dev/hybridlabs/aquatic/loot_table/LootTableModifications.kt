@@ -9,8 +9,11 @@ object LootTableModifications {
     init {
         LootTableEvents.MODIFY.register { resourceManager, lootManager, id, tableBuilder, source ->
             if (source.isBuiltin && id.equals(LootTables.FISHING_FISH_GAMEPLAY)) {
-                tableBuilder.modifyPools {
-                    it.with(ItemEntry.builder(HybridAquaticItems.LIONFISH).weight(5))
+                // TODO: Replace everything with `.with(LootTableEntry.builder())` and
+                //       make datagen with our fishes(should be in gameplay/fishing/fish or something) for this loot table
+                tableBuilder.modifyPools { defaultPools ->
+                    defaultPools
+                        .with(ItemEntry.builder(HybridAquaticItems.LIONFISH).weight(5))
                         .with(ItemEntry.builder(HybridAquaticItems.MAHI_MAHI).weight(3))
                         .with(ItemEntry.builder(HybridAquaticItems.YELLOWFIN_TUNA).weight(3))
                         .with(ItemEntry.builder(HybridAquaticItems.OPAH).weight(3))
