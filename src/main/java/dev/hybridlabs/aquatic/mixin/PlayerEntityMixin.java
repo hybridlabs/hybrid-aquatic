@@ -43,6 +43,7 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
     nbt.putInt("haHurtTime", hybrid_aquatic$getHurtTime());
   }
   
+  // Sets haHurtTime to 200 if player got hurt near shark
   @Inject(method = "damage", at = @At(
     value = "INVOKE",
     target = "Lnet/minecraft/entity/player/PlayerEntity;getWorld()Lnet/minecraft/world/World;",
