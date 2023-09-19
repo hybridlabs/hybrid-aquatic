@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.mixin;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments;
 import dev.hybridlabs.aquatic.enchantment.LiveCatchEnchantment;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -23,7 +24,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,8 +38,6 @@ import java.util.List;
 
 @Mixin(FishingBobberEntity.class)
 public abstract class FishingBobberEntityMixin extends ProjectileEntity implements CustomFishingBobberEntityData {
-  @Shadow public abstract int use(ItemStack usedItem);
-  
   public FishingBobberEntityMixin(EntityType<? extends ProjectileEntity> entityType, World world) {
     super(entityType, world);
   }
@@ -71,14 +69,14 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
   @Unique
   PlayerEntity playerEntity;
   @Unique
-  ItemStack itemStack;
-  @Inject(method = "use", cancellable = true, locals = LocalCapture.CAPTURE_FAILSOFT, at = @At(
+  ItemStack generatedItem;
+  @Inject(method = "use", locals = LocalCapture.CAPTURE_FAILHARD, at = @At(
     value = "INVOKE", target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;", ordinal = 4
   ))
-  private void localsGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, PlayerEntity playerEntity, int i, LootContextParameterSet lootContextParameterSet, LootTable lootTable, List list, Iterator var7, ItemStack itemStack) {
+  private void localsGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, PlayerEntity playerEntity, int returnValue, LootContextParameterSet lootContextParameterSet, LootTable lootTable, List<ItemStack> generatedLootList, Iterator<ItemStack> forLoopIterator, ItemStack itemInIterator) {
     this.usedItem = usedItem;
     this.playerEntity = playerEntity;
-    this.itemStack = itemStack;
+    this.generatedItem = itemInIterator;
   }
   
   // Replaces item that spawns when you fish a fish with a fish entity
@@ -87,15 +85,17 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
   ))
   private boolean changeSpawnEntity(World instance, Entity entity) {
     HashMap<Item, EntityType<? extends WaterCreatureEntity>> ITEM_TO_ENTITY = LiveCatchEnchantment.Companion.getITEM_TO_ENTITYTYPE();
+    Enchantment liveCatch = HybridAquaticEnchantments.INSTANCE.getLIVECATCH();
     
-    if (EnchantmentHelper.getLevel(HybridAquaticEnchantments.INSTANCE.getLIVECATCH(), usedItem) > 0 &&
-        ITEM_TO_ENTITY.containsKey(itemStack.getItem()) &&
-        this.getWorld() instanceof ServerWorld serverWorld) {
-      var entityType = ITEM_TO_ENTITY.get(itemStack.getItem());
+    if (EnchantmentHelper.getLevel(liveCatch, usedItem) > 0 && // Checks level of the enchantment
+        ITEM_TO_ENTITY.containsKey(generatedItem.getItem()) && // Checks if item has conversion entity
+        this.getWorld() instanceof ServerWorld serverWorld) {  // Casts World to ServerWorld
+      var entityType = ITEM_TO_ENTITY.get(generatedItem.getItem());
       var entityToSpawn = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.SPAWN_EGG);
       entityToSpawn.setPosition(this.getPos());
       
-      double modifier = 0.1;
+      // makes spawned fish whoosh towards you
+      double modifier = 0.15;
       Vec3d vecBetween = playerEntity.getPos().subtract(this.getPos());
       Vec3d vecBetweenMod = vecBetween.multiply(modifier);
       entityToSpawn.setVelocity(
@@ -103,6 +103,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
         vecBetweenMod.y + Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08,
         vecBetweenMod.z
       );
+      
       return instance.spawnEntity(entityToSpawn);
     }
     
