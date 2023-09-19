@@ -1,13 +1,9 @@
 package dev.hybridlabs.aquatic.loot_table
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.fabricmc.fabric.api.loot.v2.FabricLootTableBuilder
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents
-import net.minecraft.item.Items
-import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTables
 import net.minecraft.loot.entry.ItemEntry
-import net.minecraft.loot.entry.LootTableEntry
 
 object LootTableModifications {
     init {
