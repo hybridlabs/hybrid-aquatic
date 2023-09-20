@@ -10,7 +10,7 @@ class BettaEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("
     }
 
     companion object {
-        val allVariants: Array<String> = arrayOf("black", "black_yellow", "blue", "green", "pink", "red", "red_blue", "white")
+        val allVariants: Array<String> = arrayOf("black", "blue_yellow", "blue", "green", "pink", "red", "red_blue", "white")
     }
 }
 
