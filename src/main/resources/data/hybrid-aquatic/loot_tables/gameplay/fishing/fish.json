@@ -1,0 +1,102 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:lionfish",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:mahi_mahi",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:yellowfin_tuna",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:opah",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:rockfish",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:blue_spotted_stingray",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:moray_eel",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:needlefish",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:piranha",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:anglerfish",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:barreleye",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:blue_tang",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:clownfish",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:unicorn_fish",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:cowfish",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:triggerfish",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:tiger_barb",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:oscar",
+          "weight": 2
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "hybrid-aquatic:gameplay/fishing/fish"
+}
