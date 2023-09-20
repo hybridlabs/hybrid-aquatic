@@ -87,18 +87,18 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     HashMap<Item, EntityType<? extends WaterCreatureEntity>> ITEM_TO_ENTITY = LiveCatchEnchantment.Companion.getITEM_TO_ENTITYTYPE();
     Enchantment liveCatch = HybridAquaticEnchantments.INSTANCE.getLIVECATCH();
     
-    if (EnchantmentHelper.getLevel(liveCatch, usedItem) > 0 && // Checks level of the enchantment
-        ITEM_TO_ENTITY.containsKey(generatedItem.getItem()) && // Checks if item has conversion entity
-        this.getWorld() instanceof ServerWorld serverWorld) {  // Casts World to ServerWorld
+    if (EnchantmentHelper.getLevel(liveCatch, usedItem) > 0 &&
+        ITEM_TO_ENTITY.containsKey(generatedItem.getItem()) &&
+        this.getWorld() instanceof ServerWorld serverWorld) {
       var entityType = ITEM_TO_ENTITY.get(generatedItem.getItem());
-      var entityToSpawn = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.SPAWN_EGG);
-      entityToSpawn.setPosition(this.getPos());
+      var liveFish = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.SPAWN_EGG);
+      liveFish.setPosition(this.getPos());
       
       // makes spawned fish whoosh towards you
       double modifier = 0.15;
       Vec3d vecBetween = playerEntity.getPos().subtract(this.getPos());
       Vec3d vecBetweenMod = vecBetween.multiply(modifier);
-      entityToSpawn.setVelocity(
+      liveFish.setVelocity(
         vecBetweenMod.x,
         vecBetweenMod.y + Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08,
         vecBetweenMod.z
