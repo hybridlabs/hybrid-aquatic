@@ -104,7 +104,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
         vecBetweenMod.z
       );
       
-      return instance.spawnEntity(entityToSpawn);
+      return true;
     }
     
     return instance.spawnEntity(entity);
