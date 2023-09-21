@@ -147,15 +147,23 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
   }
   
   // TODO: Lures can disappear if you reload the world while fishing (or maybe even when you rejoin the server, haven't checked that yet)
+  //       Really not sure how to fix that
   @Unique
   private void retrieveLure(PlayerEntity player) {
     ItemStack lure = hybrid_aquatic$getLureItem();
     if(!lure.isEmpty()) {
-      if(!player.getInventory().insertStack(lure)) {
-        ItemEntity itemEntity = new ItemEntity(this.getWorld(), player.getX(), player.getY(), player.getZ(), lure);
-        itemEntity.setVelocity(Vec3d.ZERO);
-        this.getWorld().spawnEntity(itemEntity);
+      Vec3d pos;
+      if(player == null || player.isRemoved() || !player.isAlive()) {
+        pos = this.getPos();
+      } else {
+        if(player.getInventory().insertStack(lure)) return;
+        
+        pos = player.getPos();
       }
+      
+      ItemEntity itemEntity = new ItemEntity(this.getWorld(), pos.x, pos.y, pos.z, lure);
+      itemEntity.setVelocity(Vec3d.ZERO);
+      this.getWorld().spawnEntity(itemEntity);
     }
   }
 }
