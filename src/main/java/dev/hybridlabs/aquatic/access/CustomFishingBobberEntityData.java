@@ -1,13 +1,14 @@
 package dev.hybridlabs.aquatic.access;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public interface CustomFishingBobberEntityData {
-  default void hybrid_aquatic$setLureItem(Item value) {
+  default void hybrid_aquatic$setLureItem(ItemStack value) {
     throw new AssertionError();
   }
   
-  default Item hybrid_aquatic$getLureItem() {
+  default ItemStack hybrid_aquatic$getLureItem() {
     throw new AssertionError();
   }
 }

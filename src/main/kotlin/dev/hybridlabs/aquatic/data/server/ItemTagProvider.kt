@@ -11,8 +11,10 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
         // Items that will be consumed by a fishing rod
         listOf(
-            Items.WHEAT_SEEDS,
-            Items.MELON_SEEDS
+            Items.WOODEN_HOE,
+            Items.STONE_HOE,
+            Items.GOLDEN_HOE,
+            Items.IRON_HOE
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.LURE_ITEMS).add(item)
         }
