@@ -89,15 +89,15 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         nbt.putInt(MOISTNESS_KEY, moistness)
         nbt.putInt(VARIANT_KEY, variant)
         nbt.putInt(SPAWNED_ON_Y_KEY, spawnedY)
-        nbt.putInt(HybridAquaticJellyfishEntity.JELLYFISH_SIZE_KEY, size)
+        nbt.putInt(JELLYFISH_SIZE_KEY, size)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
         variant = nbt.getInt(VARIANT_KEY)
-        size = nbt.getInt(HybridAquaticJellyfishEntity.JELLYFISH_SIZE_KEY)
-        spawnedY = if(!nbt.contains(SPAWNED_ON_Y_KEY)) (this.y - 1).toInt()
+        size = nbt.getInt(JELLYFISH_SIZE_KEY)
+        spawnedY = if (!nbt.contains(SPAWNED_ON_Y_KEY)) (this.y - 1).toInt()
         else nbt.getInt(SPAWNED_ON_Y_KEY)
     }
 

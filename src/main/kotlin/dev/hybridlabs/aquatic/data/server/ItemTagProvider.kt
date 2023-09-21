@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.data.server
 
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
@@ -11,10 +12,9 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
         // Items that will be consumed by a fishing rod
         listOf(
-            Items.WOODEN_HOE,
-            Items.STONE_HOE,
-            Items.GOLDEN_HOE,
-            Items.IRON_HOE
+            HybridAquaticItems.BARBED_HOOK,
+            HybridAquaticItems.GLOWING_HOOK,
+            HybridAquaticItems.MAGNETIC_HOOK
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.LURE_ITEMS).add(item)
         }

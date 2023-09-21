@@ -5,7 +5,7 @@ import net.minecraft.util.Identifier
 
 class DiscusEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("discus") {
     override fun getTextureResource(animatable: HybridAquaticFishEntity?): Identifier {
-        if(animatable != null) return getVariantTexture(allVariants[animatable.variant])
+        if (animatable != null) return getVariantTexture(allVariants[animatable.variant])
         return super.getTextureResource(animatable)
     }
 

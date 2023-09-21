@@ -5,7 +5,7 @@ import net.minecraft.util.Identifier
 
 class GouramiEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("gourami") {
     override fun getTextureResource(animatable: HybridAquaticFishEntity?): Identifier {
-        if(animatable != null) return getVariantTexture(allVariants[animatable.variant])
+        if (animatable != null) return getVariantTexture(allVariants[animatable.variant])
         return super.getTextureResource(animatable)
     }
 

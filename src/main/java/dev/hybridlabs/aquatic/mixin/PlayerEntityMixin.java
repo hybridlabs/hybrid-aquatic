@@ -49,9 +49,9 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
   private void setCustomHurtTimeOnDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
     PlayerEntity object = ((PlayerEntity) (Object) this);
     
-    if(object.isTouchingWater()) {
+    if (object.isTouchingWater()) {
       LivingEntity foundEntity = object.getWorld().getClosestEntity(HybridAquaticSharkEntity.class, TargetPredicate.createNonAttackable().setBaseMaxDistance(32).setPredicate(Entity::isSubmergedInWater), object, object.getX(), object.getEyeY(), object.getZ(), object.getBoundingBox().expand(16));
-      if(foundEntity != null) hybrid_aquatic$setHurtTime(200);
+      if (foundEntity != null) hybrid_aquatic$setHurtTime(200);
     }
   }
   

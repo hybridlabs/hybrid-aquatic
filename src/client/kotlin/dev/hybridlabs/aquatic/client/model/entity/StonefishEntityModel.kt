@@ -5,7 +5,7 @@ import net.minecraft.util.Identifier
 
 class StonefishEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("stonefish") {
     override fun getTextureResource(animatable: HybridAquaticFishEntity?): Identifier {
-        if(animatable != null) return getVariantTexture(allVariants[animatable.variant])
+        if (animatable != null) return getVariantTexture(allVariants[animatable.variant])
         return super.getTextureResource(animatable)
     }
 

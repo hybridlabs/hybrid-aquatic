@@ -5,7 +5,7 @@ import net.minecraft.util.Identifier
 
 class SeaUrchinEntityModel : HybridAquaticCritterEntityModel<HybridAquaticCritterEntity>("sea_urchin") {
     override fun getTextureResource(animatable: HybridAquaticCritterEntity?): Identifier {
-        if(animatable != null) return getVariantTexture(allVariants[animatable.variant])
+        if (animatable != null) return getVariantTexture(allVariants[animatable.variant])
         return super.getTextureResource(animatable)
     }
     companion object {
