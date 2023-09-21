@@ -1,7 +1,9 @@
 {
   "replace": false,
   "values": [
-    "minecraft:wheat_seeds",
-    "minecraft:melon_seeds"
+    "minecraft:wooden_hoe",
+    "minecraft:stone_hoe",
+    "minecraft:golden_hoe",
+    "minecraft:iron_hoe"
   ]
 }

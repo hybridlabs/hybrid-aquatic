@@ -169,5 +169,6 @@
     "item.hybrid-aquatic.yellowfin_tuna": "Желтопёрый тунец",
     "item.hybrid-aquatic.yellowfin_tuna_spawn_egg": "Яйцо призыва желтопёрого тунца",
     "item.hybrid-aquatic.zebra_danio_spawn_egg": "Яйцо призыва данио-рерио",
-    "itemGroup.hybrid-aquatic": "Hybrid Aquatic"
+    "itemGroup.hybrid-aquatic": "Hybrid Aquatic",
+    "enchantment.hybrid-aquatic.live_catch": "Живой улов"
 }
