@@ -6,12 +6,8 @@ import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
 import net.minecraft.client.util.math.MatrixStack
 import software.bernie.geckolib.renderer.GeoEntityRenderer
-import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
 class SeaNettleEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquaticJellyfishEntity>(context, SeaNettleEntityModel()) {
-    init {
-        addRenderLayer(AutoGlowingGeoLayer(this))
-    }
     override fun render(
         entity: HybridAquaticJellyfishEntity?,
         entityYaw: Float,
