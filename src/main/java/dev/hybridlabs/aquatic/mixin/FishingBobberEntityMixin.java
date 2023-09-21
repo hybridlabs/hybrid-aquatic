@@ -146,6 +146,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     retrieveLure(player);
   }
   
+  // TODO: Lures can disappear if you reload the world while fishing (or maybe even when you rejoin the server, haven't checked that yet)
   @Unique
   private void retrieveLure(PlayerEntity player) {
     ItemStack lure = hybrid_aquatic$getLureItem();
