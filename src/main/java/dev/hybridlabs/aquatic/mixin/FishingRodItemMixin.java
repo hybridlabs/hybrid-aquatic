@@ -35,11 +35,10 @@ public abstract class FishingRodItemMixin {
     this.usedHand = hand;
   }
   
-  // If item in the opposite hand has lure item it gets consumed and goes in the fishing rod bobber nbt
-  @Redirect(
-    method = "use",
-    at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z")
-  )
+  // If item in the opposite hand has lure item it gets put in the fishing rod
+  @Redirect(method = "use", at = @At(
+    value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"
+  ))
   private boolean spawnEntityRedirect(World world, Entity entity) {
     FishingBobberEntity bobber = (FishingBobberEntity) entity;
     Hand opposingHand = HandUtils.getOpposingHand(usedHand);
@@ -48,6 +47,18 @@ public abstract class FishingRodItemMixin {
     if (opposingHandItemStack.isIn(HybridAquaticItemTags.INSTANCE.getLURE_ITEMS())) {
       ((CustomFishingBobberEntityData) bobber).hybrid_aquatic$setLureItem(opposingHandItemStack.copyAndEmpty());
     }
-    return world.spawnEntity(bobber);
+    
+    boolean spawned = world.spawnEntity(bobber);
+    
+//    bobber.getEntityWorld().getPlayers().forEach(player -> {
+//      PacketByteBuf buf = PacketByteBufs.create();
+//      buf.writeInt(bobber.getId());
+//      buf.writeItemStack(((CustomFishingBobberEntityData) bobber).hybrid_aquatic$getLureItem());
+//
+//      System.out.printf("send: %s, %s. UUID: %s", bobber.getId(), ((CustomFishingBobberEntityData) bobber).hybrid_aquatic$getLureItem(), bobber.getUuid());
+//      ServerPlayNetworking.send((ServerPlayerEntity) player, HybridAquaticNetworking.INSTANCE.getFISHING_BOBBER_LURE(), buf);
+//    });
+    
+    return spawned;
   }
 }

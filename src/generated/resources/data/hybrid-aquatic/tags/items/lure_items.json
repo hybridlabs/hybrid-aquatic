@@ -1,9 +1,8 @@
 {
   "replace": false,
   "values": [
-    "minecraft:wooden_hoe",
-    "minecraft:stone_hoe",
-    "minecraft:golden_hoe",
-    "minecraft:iron_hoe"
+    "hybrid-aquatic:barbed_hook",
+    "hybrid-aquatic:glowing_hook",
+    "hybrid-aquatic:magnetic_hook"
   ]
 }

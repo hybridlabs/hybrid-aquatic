@@ -51,9 +51,7 @@ open class SharkSwimGoal (
 
     override fun tick() {
 //        println(mob.navigation.currentPath?.isFinished == true)
-        if(currentTarget == null) {
-
-
+        if (currentTarget == null) {
             var foundPath = false
             var path: Path? = null
             var retries = 0

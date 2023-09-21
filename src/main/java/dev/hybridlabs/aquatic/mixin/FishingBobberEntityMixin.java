@@ -22,9 +22,11 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -39,6 +41,8 @@ import java.util.List;
 
 @Mixin(FishingBobberEntity.class)
 public abstract class FishingBobberEntityMixin extends ProjectileEntity implements CustomFishingBobberEntityData {
+  @Shadow private int waitCountdown;
+  
   public FishingBobberEntityMixin(EntityType<? extends ProjectileEntity> entityType, World world) {
     super(entityType, world);
   }
@@ -56,14 +60,28 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
   }
   
   @Unique
-  private ItemStack lureItem = Items.AIR.getDefaultStack();
+  private ItemStack lureItemStack = Items.AIR.getDefaultStack();
 
   public ItemStack hybrid_aquatic$getLureItem() {
-    return lureItem;
+    return lureItemStack;
   }
   
   public void hybrid_aquatic$setLureItem(ItemStack item) {
-    lureItem = (item == null ? Items.AIR.getDefaultStack() : item);
+    lureItemStack = (item == null ? Items.AIR.getDefaultStack() : item);
+  }
+  
+  // Reduces wait time faster if you have hooks on the fishing rod
+  @Inject(method = "tickFishingLogic", at = @At(
+    value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;nextInt(Lnet/minecraft/util/math/random/Random;II)I", ordinal = 2, shift = At.Shift.AFTER
+  ))
+  private void reduceCooldownTime(BlockPos pos, CallbackInfo ci) {
+    Item lureItem = this.lureItemStack.getItem();
+    if (lureItem.equals(Items.WOODEN_HOE) && this.getWorld().isDay()) {
+      waitCountdown -= 75;
+    }
+    else if (lureItem.equals(Items.GOLDEN_HOE) && this.getWorld().isNight()) {
+      waitCountdown -= 75;
+    }
   }
   
   // Gets objects for functions below
@@ -84,7 +102,16 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     value = "INVOKE", target = "Lnet/minecraft/loot/context/LootContextParameterSet$Builder;build(Lnet/minecraft/loot/context/LootContextType;)Lnet/minecraft/loot/context/LootContextParameterSet;"
   ))
   private void lureDamage(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
-    lureItem.damage(1, usedPlayer, (test) -> this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f));
+    lureItemStack.damage(1, usedPlayer, (test) -> this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f));
+  }
+  
+  // Increases chance of getting treasure item with magnetic hook
+  @Redirect(method = "use", at = @At(
+    value = "INVOKE", target = "Lnet/minecraft/loot/context/LootContextParameterSet$Builder;luck(F)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;"
+  ))
+  private LootContextParameterSet.Builder increaseLuck(LootContextParameterSet.Builder instance, float luck) {
+    if (lureItemStack.getItem().equals(Items.IRON_HOE)) luck += 3; //Equals to 2 levels in luck of the sea
+    return instance.luck(luck);
   }
   
   // Gets objects for changeSpawnEntity function
@@ -150,18 +177,17 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
   //       Really not sure how to fix that
   @Unique
   private void retrieveLure(PlayerEntity player) {
-    ItemStack lure = hybrid_aquatic$getLureItem();
-    if(!lure.isEmpty()) {
+    if (!lureItemStack.isEmpty()) {
       Vec3d pos;
-      if(player == null || player.isRemoved() || !player.isAlive()) {
+      if (player == null || player.isRemoved() || !player.isAlive()) {
         pos = this.getPos();
       } else {
-        if(player.getInventory().insertStack(lure)) return;
+        if (player.getInventory().insertStack(lureItemStack)) return;
         
         pos = player.getPos();
       }
       
-      ItemEntity itemEntity = new ItemEntity(this.getWorld(), pos.x, pos.y, pos.z, lure);
+      ItemEntity itemEntity = new ItemEntity(this.getWorld(), pos.x, pos.y, pos.z, lureItemStack);
       itemEntity.setVelocity(Vec3d.ZERO);
       this.getWorld().spawnEntity(itemEntity);
     }

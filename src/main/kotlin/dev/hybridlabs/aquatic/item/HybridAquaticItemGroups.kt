@@ -68,7 +68,6 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.TIGER_BARB)
             entries.add(HybridAquaticItems.OSCAR)
 
-
             // miscellaneous items
             entries.add(HybridAquaticItems.CRAB_CLAW)
             entries.add(HybridAquaticItems.GLOW_SLIME)
@@ -76,6 +75,10 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.PEARL)
             entries.add(HybridAquaticItems.BLACK_PEARL)
 
+            // lures
+            entries.add(HybridAquaticItems.BARBED_HOOK)
+            entries.add(HybridAquaticItems.GLOWING_HOOK)
+            entries.add(HybridAquaticItems.MAGNETIC_HOOK)
 
             // spawn eggs
             Registries.ITEM.forEach { item ->

@@ -5,7 +5,7 @@ import net.minecraft.util.Identifier
 
 class NudibranchEntityModel : HybridAquaticCritterEntityModel<HybridAquaticCritterEntity>("nudibranch") {
     override fun getTextureResource(animatable: HybridAquaticCritterEntity?): Identifier {
-        if(animatable != null) return getVariantTexture(allVariants[animatable.variant])
+        if (animatable != null) return getVariantTexture(allVariants[animatable.variant])
         return super.getTextureResource(animatable)
     }
     companion object {
