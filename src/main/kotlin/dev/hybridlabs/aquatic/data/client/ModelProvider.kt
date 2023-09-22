@@ -81,6 +81,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         generator.register(HybridAquaticItems.TIGER_BARB, Models.GENERATED)
         generator.register(HybridAquaticItems.OSCAR, Models.GENERATED)
 
+        generator.register(HybridAquaticItems.BARBED_HOOK, Models.GENERATED)
+        generator.register(HybridAquaticItems.GLOWING_HOOK, Models.GENERATED)
+        generator.register(HybridAquaticItems.MAGNETIC_HOOK, Models.GENERATED)
     }
 
     companion object {

@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.mixin;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments;
 import dev.hybridlabs.aquatic.enchantment.LiveCatchEnchantment;
+import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -47,12 +48,16 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     super(entityType, world);
   }
   
-  @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
+  @Inject(method = "readCustomDataFromNbt", at = @At(
+    value = "TAIL"
+  ))
   private void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
     hybrid_aquatic$setLureItem(ItemStack.fromNbt(nbt.getCompound("lureItem")));
   }
   
-  @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
+  @Inject(method = "writeCustomDataToNbt", at = @At(
+    value = "TAIL"
+  ))
   private void writeCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
     NbtCompound itemStack = new NbtCompound();
     hybrid_aquatic$getLureItem().writeNbt(itemStack);
@@ -76,10 +81,10 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
   ))
   private void reduceCooldownTime(BlockPos pos, CallbackInfo ci) {
     Item lureItem = this.lureItemStack.getItem();
-    if (lureItem.equals(Items.WOODEN_HOE) && this.getWorld().isDay()) {
+    if (lureItem.equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK()) && this.getWorld().isDay()) {
       waitCountdown -= 75;
     }
-    else if (lureItem.equals(Items.GOLDEN_HOE) && this.getWorld().isNight()) {
+    else if (lureItem.equals(HybridAquaticItems.INSTANCE.getGLOWING_HOOK()) && this.getWorld().isNight()) {
       waitCountdown -= 75;
     }
   }
@@ -110,7 +115,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     value = "INVOKE", target = "Lnet/minecraft/loot/context/LootContextParameterSet$Builder;luck(F)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;"
   ))
   private LootContextParameterSet.Builder increaseLuck(LootContextParameterSet.Builder instance, float luck) {
-    if (lureItemStack.getItem().equals(Items.IRON_HOE)) luck += 3; //Equals to 2 levels in luck of the sea
+    if (lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK())) luck += 27;
     return instance.luck(luck);
   }
   
@@ -120,7 +125,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
   @Inject(method = "use", locals = LocalCapture.CAPTURE_FAILHARD, at = @At(
     value = "INVOKE", target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;", ordinal = 4
   ))
-  private void localsGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, PlayerEntity playerEntity, int returnValue, LootContextParameterSet lootContextParameterSet, LootTable lootTable, List<ItemStack> generatedLootList, Iterator<ItemStack> forLoopIterator, ItemStack itemInIterator) {
+  private void objectGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, PlayerEntity playerEntity, int returnValue, LootContextParameterSet lootContextParameterSet, LootTable lootTable, List<ItemStack> generatedLootList, Iterator<ItemStack> forLoopIterator, ItemStack itemInIterator) {
     this.generatedItem = itemInIterator;
   }
   
@@ -156,8 +161,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
   }
   
   // Returns lure back on successful fishing attempt
-  @Inject(
-    method = "use", at = @At(
+  @Inject(method = "use", at = @At(
       value = "INVOKE", target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;discard()V"
   ))
   private void retrieveLureOnSuccess(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
@@ -165,8 +169,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
   }
   
   // Returns lure back if player removes fishing rod
-  @Inject(
-    method = "removeIfInvalid", at = @At(
+  @Inject(method = "removeIfInvalid", at = @At(
       value = "INVOKE", target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;discard()V"
   ))
   private void retrieveLureIfInvalid(PlayerEntity player, CallbackInfoReturnable<Boolean> cir) {

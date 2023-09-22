@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.mixin.client;
 
 import dev.hybridlabs.aquatic.HybridAquatic;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
+import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -47,9 +48,9 @@ public abstract class FishingBobberEntityRendererMixin {
     RenderLayer currentRenderLayer = renderLayer;
 
     ItemStack currentStack = ((CustomFishingBobberEntityData) entity).hybrid_aquatic$getLureItem();
-    if (currentStack.getItem().equals(Items.WOODEN_HOE)) currentRenderLayer = BARBED_HOOK_LAYER;
-    else if (currentStack.getItem().equals(Items.GOLDEN_HOE)) currentRenderLayer = GLOWING_HOOK_LAYER;
-    else if (currentStack.getItem().equals(Items.IRON_HOE)) currentRenderLayer = MAGNETIC_HOOK_LAYER;
+    if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK())) currentRenderLayer = BARBED_HOOK_LAYER;
+    else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getGLOWING_HOOK())) currentRenderLayer = GLOWING_HOOK_LAYER;
+    else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK())) currentRenderLayer = MAGNETIC_HOOK_LAYER;
     
     return instance.getBuffer(currentRenderLayer);
   }

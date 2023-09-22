@@ -400,9 +400,9 @@ object HybridAquaticItems {
     val HAMMERHEAD_SHARK_SPAWN_EGG = registerSpawnEgg("hammerhead_shark_spawn_egg", HybridAquaticEntityTypes.HAMMERHEAD_SHARK, 0x889bac, 0xf1edf6)
     val WHALE_SHARK_SPAWN_EGG = registerSpawnEgg("whale_shark_spawn_egg", HybridAquaticEntityTypes.WHALE_SHARK, 0x1a1932, 0xffffff)
 
-    val BARBED_HOOK = register("barbed_hook", Item(Item.Settings().maxDamage(32)))
-    val GLOWING_HOOK = register("glowing_hook", Item(Item.Settings().maxDamage(32)))
-    val MAGNETIC_HOOK = register("magnetic_hook", Item(Item.Settings().maxDamage(32)))
+    val BARBED_HOOK = register("barbed_hook", HookItem(Item.Settings().maxDamage(32)))
+    val GLOWING_HOOK = register("glowing_hook", HookItem(Item.Settings().maxDamage(32)))
+    val MAGNETIC_HOOK = register("magnetic_hook", HookItem(Item.Settings().maxDamage(8)))
 
     private fun register(id: String, item: Item): Item {
         return Registry.register(Registries.ITEM, Identifier(HybridAquatic.MOD_ID, id), item)

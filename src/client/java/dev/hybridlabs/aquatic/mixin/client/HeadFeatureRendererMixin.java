@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HeadFeatureRenderer.class)
-public class HeadFeatureRendererMixin<T extends LivingEntity> {
+public abstract class HeadFeatureRendererMixin<T extends LivingEntity> {
     /**
      * Translates the Plushie models up when on the player's head.
      * @implNote The wonderful underlying Mojank code makes it so that

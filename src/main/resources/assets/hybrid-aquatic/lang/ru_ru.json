@@ -170,5 +170,12 @@
     "item.hybrid-aquatic.yellowfin_tuna_spawn_egg": "Яйцо призыва желтопёрого тунца",
     "item.hybrid-aquatic.zebra_danio_spawn_egg": "Яйцо призыва данио-рерио",
     "itemGroup.hybrid-aquatic": "Hybrid Aquatic",
-    "enchantment.hybrid-aquatic.live_catch": "Живой улов"
+    "enchantment.hybrid-aquatic.live_catch": "Живой улов",
+    "item.hybrid-aquatic.barbed_hook": "Крючок с зазубриной",
+    "item.hybrid-aquatic.barbed_hook.description": "Увеличивает скорость ловли рыбы днём",
+    "item.hybrid-aquatic.glowing_hook": "Светящийся крючок",
+    "item.hybrid-aquatic.glowing_hook.description": "Увеличивает скорость ловли рыбы ночью",
+    "item.hybrid-aquatic.hook.description": "Для использования нужно поместить крючок во вторую руку",
+    "item.hybrid-aquatic.magnetic_hook": "Магнит на крючке",
+    "item.hybrid-aquatic.magnetic_hook.description": "Увеличивает шанс получения сокровища"
 }

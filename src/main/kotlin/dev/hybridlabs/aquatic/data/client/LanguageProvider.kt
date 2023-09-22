@@ -150,8 +150,21 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.SHARK_TOOTH to "Shark Tooth",
             HybridAquaticItems.PEARL to "Pearl",
             HybridAquaticItems.BLACK_PEARL to "Black Pearl",
+            HybridAquaticItems.BARBED_HOOK to "Barbed Hook",
+            HybridAquaticItems.GLOWING_HOOK to "Glowing Hook",
+            HybridAquaticItems.MAGNETIC_HOOK to "Magnetic Hook",
         ).forEach { (item, translation) ->
             builder.add(item, translation)
+        }
+
+        // Item descriptions
+        mapOf(
+            "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
+            HybridAquaticItems.BARBED_HOOK.translationKey to "Increases speed of catching fish during the day",
+            HybridAquaticItems.GLOWING_HOOK.translationKey to "Increases speed of catching fish during the night",
+            HybridAquaticItems.MAGNETIC_HOOK.translationKey to "Highly increases chance of getting treasure",
+        ).forEach { (itemTranslationKey, translation) ->
+            builder.add(itemTranslationKey.plus(".description"), translation)
         }
 
         // enchantments
