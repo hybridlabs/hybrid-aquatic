@@ -1,20 +1,14 @@
 package dev.hybridlabs.aquatic.mixin;
 
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
-import dev.hybridlabs.aquatic.network.HybridAquaticNetworking;
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags;
 import dev.hybridlabs.aquatic.utils.HandUtils;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.item.FishingRodItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,7 +35,7 @@ public abstract class FishingRodItemMixin {
     this.usedHand = hand;
   }
   
-  // If item in the opposite hand has lure item it gets put in the fishing rod
+  // If item in the opposite hand has lure item, it gets put in the fishing rod
   @Redirect(method = "use", at = @At(
     value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"
   ))

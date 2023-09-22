@@ -92,9 +92,9 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
         stack: ItemStack
     ) {
         stack.getSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.let { nbt ->
-            // if not present, generate random message
+            // if not present, generate a random message
             if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
-                // get random message
+                // get a random message
                 val registry = world.registryManager.get(HybridAquaticRegistryKeys.SEA_MESSAGE)
                 val messageKey = registry.getRandom(world.random).getOrNull()?.registryKey() ?: return
                 val message = registry.get(messageKey) ?: return

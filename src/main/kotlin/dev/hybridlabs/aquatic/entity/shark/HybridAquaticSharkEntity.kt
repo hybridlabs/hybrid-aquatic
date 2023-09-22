@@ -149,7 +149,7 @@ open class HybridAquaticSharkEntity(
         dataTracker.startTracking(HUNGER, MAX_HUNGER)
         dataTracker.startTracking(RUSHING, false)
         dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(HybridAquaticSharkEntity.SHARK_SIZE, 0)
+        dataTracker.startTracking(SHARK_SIZE, 0)
     }
 
     override fun initialize(
@@ -208,7 +208,7 @@ open class HybridAquaticSharkEntity(
         this.writeAngerToNbt(nbt)
         nbt.putInt(MOISTNESS_KEY, moistness)
         nbt.putInt(HUNGER_KEY, hunger)
-        nbt.putInt(HybridAquaticSharkEntity.SHARK_SIZE_KEY, size)
+        nbt.putInt(SHARK_SIZE_KEY, size)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
@@ -216,7 +216,7 @@ open class HybridAquaticSharkEntity(
         this.readAngerFromNbt(this.world, nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
         hunger = nbt.getInt(HUNGER_KEY)
-        size = nbt.getInt(HybridAquaticSharkEntity.SHARK_SIZE_KEY)
+        size = nbt.getInt(SHARK_SIZE_KEY)
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
@@ -340,9 +340,9 @@ open class HybridAquaticSharkEntity(
         setAngerTime(ANGER_TIME_RANGE.get(random))
     }
     var size: Int
-        get() = dataTracker.get(HybridAquaticSharkEntity.SHARK_SIZE)
-        set(Int) {
-            dataTracker.set(HybridAquaticSharkEntity.SHARK_SIZE, Int)
+        get() = dataTracker.get(SHARK_SIZE)
+        set(size) {
+            dataTracker.set(SHARK_SIZE, size)
         }
     //#endregion
 

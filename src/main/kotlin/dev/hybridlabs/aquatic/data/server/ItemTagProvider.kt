@@ -4,7 +4,6 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
-import net.minecraft.item.Items
 import net.minecraft.registry.RegistryWrapper
 import java.util.concurrent.CompletableFuture
 

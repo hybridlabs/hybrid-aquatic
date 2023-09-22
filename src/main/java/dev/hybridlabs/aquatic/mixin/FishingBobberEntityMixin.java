@@ -89,7 +89,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     }
   }
   
-  // Gets objects for functions below
+  // Gets objects for the functions below
   @Unique
   ItemStack usedItem;
   @Unique
@@ -160,7 +160,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     return instance.spawnEntity(entity);
   }
   
-  // Returns lure back on successful fishing attempt
+  // Returns lure back on a successful fishing attempt
   @Inject(method = "use", at = @At(
       value = "INVOKE", target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;discard()V"
   ))

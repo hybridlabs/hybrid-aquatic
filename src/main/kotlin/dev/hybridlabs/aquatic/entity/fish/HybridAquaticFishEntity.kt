@@ -214,8 +214,8 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
 
     var size: Int
         get() = dataTracker.get(FISH_SIZE)
-        set(Int) {
-            dataTracker.set(FISH_SIZE, Int)
+        set(size) {
+            dataTracker.set(FISH_SIZE, size)
         }
 
 
@@ -235,11 +235,11 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     }
 
     protected open fun getMinSize() : Int {
-        return 0;
+        return 0
     }
 
     protected open fun getMaxSize() : Int {
-        return 0;
+        return 0
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
@@ -342,7 +342,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         }
 
         fun getScaleAdjustment(fish : HybridAquaticFishEntity, adjustment : Float): Float {
-            return 1.0f + (fish.size * adjustment);
+            return 1.0f + (fish.size * adjustment)
         }
         const val MOISTNESS_KEY = "Moistness"
         const val VARIANT_KEY = "Variant"

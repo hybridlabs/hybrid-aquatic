@@ -117,11 +117,11 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         return PlayState.STOP
     }
     protected open fun getMinSize() : Int {
-        return 0;
+        return 0
     }
 
     protected open fun getMaxSize() : Int {
-        return 0;
+        return 0
     }
 
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
@@ -186,8 +186,8 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         }
     var size: Int
         get() = dataTracker.get(CRITTER_SIZE)
-        set(Int) {
-            dataTracker.set(CRITTER_SIZE, Int)
+        set(size) {
+            dataTracker.set(CRITTER_SIZE, size)
         }
 
     companion object {
@@ -209,7 +209,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
                     world.getBlockState(pos.up()).isOf(Blocks.WATER)
         }
         fun getScaleAdjustment(critter : HybridAquaticCritterEntity, adjustment : Float): Float {
-            return 1.0f + (critter.size * adjustment);
+            return 1.0f + (critter.size * adjustment)
         }
         const val VARIANT_KEY = "Variant"
         const val CRITTER_SIZE_KEY = "CritterSize"

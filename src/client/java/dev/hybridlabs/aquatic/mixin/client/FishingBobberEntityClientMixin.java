@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(FishingBobberEntity.class)
 public abstract class FishingBobberEntityClientMixin {
   
-  // Sends packet that asks server to send custom lure item of fishing bobber after spawning packet
+  // Sends a packet that asks server to send custom lure item of fishing bobber after a spawning packet
   @Inject(method = "onSpawnPacket", at = @At(
     value = "INVOKE", target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getPlayerOwner()Lnet/minecraft/entity/player/PlayerEntity;"
   ))

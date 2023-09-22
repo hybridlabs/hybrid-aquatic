@@ -44,7 +44,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         dataTracker.startTracking(MOISTNESS, 600)
         dataTracker.startTracking(VARIANT, 0)
         dataTracker.startTracking(SPAWNED_ON_Y, 0)
-        dataTracker.startTracking(HybridAquaticJellyfishEntity.JELLYFISH_SIZE, 0)
+        dataTracker.startTracking(JELLYFISH_SIZE, 0)
     }
 
     override fun initialize(
@@ -109,11 +109,11 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         return PlayState.STOP
     }
     protected open fun getMinSize() : Int {
-        return 0;
+        return 0
     }
 
     protected open fun getMaxSize() : Int {
-        return 0;
+        return 0
     }
 
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
@@ -160,9 +160,9 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         }
 
     var size: Int
-        get() = dataTracker.get(HybridAquaticJellyfishEntity.JELLYFISH_SIZE)
-        set(Int) {
-            dataTracker.set(HybridAquaticJellyfishEntity.JELLYFISH_SIZE, Int)
+        get() = dataTracker.get(JELLYFISH_SIZE)
+        set(size) {
+            dataTracker.set(JELLYFISH_SIZE, size)
         }
 
     private var spawnedY: Int
@@ -217,7 +217,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
                     world.getBlockState(pos.up()).isOf(Blocks.WATER)
         }
         fun getScaleAdjustment(jellyfish : HybridAquaticJellyfishEntity, adjustment : Float): Float {
-            return 1.0f + (jellyfish.size * adjustment);
+            return 1.0f + (jellyfish.size * adjustment)
         }
         const val MOISTNESS_KEY = "Moistness"
         const val SPAWNED_ON_Y_KEY = "Spawned_on_Y"

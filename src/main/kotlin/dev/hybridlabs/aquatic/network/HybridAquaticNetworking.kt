@@ -15,7 +15,7 @@ object HybridAquaticNetworking {
         ServerPlayNetworking.registerGlobalReceiver(FISHING_BOBBER_LURE) { server, client, handler, buf, packetSender ->
             val entityID = buf.readInt()
 
-            val foundEntity = client.serverWorld.getEntityById(entityID);
+            val foundEntity = client.serverWorld.getEntityById(entityID)
             if (foundEntity != null && foundEntity is FishingBobberEntity) {
                 val additionalBobberData = foundEntity as CustomFishingBobberEntityData
 
