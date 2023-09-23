@@ -16,15 +16,6 @@
 					"pivot": [0, 8.5, 0]
 				},
 				{
-					"name": "core_tentacles",
-					"parent": "atolla_jellyfish",
-					"pivot": [0, 10.5, 0],
-					"cubes": [
-						{"origin": [-5, 5.5, -5], "size": [10, 2, 10], "uv": [36, 37]},
-						{"origin": [-3.5, 2.5, -3.5], "size": [7, 3, 7], "uv": [39, 21]}
-					]
-				},
-				{
 					"name": "head",
 					"parent": "atolla_jellyfish",
 					"pivot": [0, 8.5, 0],
@@ -36,7 +27,16 @@
 					]
 				},
 				{
-					"name": "outer_tentacles",
+					"name": "core_tentacles",
+					"parent": "head",
+					"pivot": [0, 10.5, 0],
+					"cubes": [
+						{"origin": [-5, 5.5, -5], "size": [10, 2, 10], "uv": [36, 37]},
+						{"origin": [-3.5, 2.5, -3.5], "size": [7, 3, 7], "uv": [39, 21]}
+					]
+				},
+				{
+					"name": "tentacles",
 					"parent": "atolla_jellyfish",
 					"pivot": [-0.5, 8.5, 0.5],
 					"cubes": [

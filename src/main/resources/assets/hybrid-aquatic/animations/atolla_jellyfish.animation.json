@@ -5,29 +5,53 @@
 			"loop": true,
 			"animation_length": 3,
 			"bones": {
-				"inner_tentacles": {
+				"bottom_tentacles": {
 					"position": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
 						"1.875": {
-							"vector": [0, 1.5, 0]
-						},
-						"2.375": {
-							"vector": [0, 0.5, 0]
+							"vector": [0, 2, 0]
 						},
 						"3.0": {
 							"vector": [0, 0, 0]
 						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"2.3333": {
+							"vector": [1.2, 1, 1.2]
+						},
+						"3.0": {
+							"vector": [1, 1, 1]
+						}
 					}
 				},
 				"head": {
+					"scale": {
+						"0.0": {
+							"vector": [1, 1.1, 1]
+						},
+						"1.875": {
+							"vector": [1.3, 1, 1.3]
+						},
+						"3.0": {
+							"vector": [1, 1.1, 1]
+						}
+					}
+				},
+				"tentacles": {
 					"position": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
+						"0.375": {
+							"vector": [0, 0, 0]
+						},
 						"1.875": {
-							"vector": [0, 1, 0]
+							"vector": [0, 2, 0]
 						},
 						"3.0": {
 							"vector": [0, 0, 0]
@@ -38,39 +62,10 @@
 							"vector": [1, 1, 1]
 						},
 						"1.875": {
-							"vector": [1.1, 1, 1.1]
+							"vector": [1.2, 1, 1.2]
 						},
 						"3.0": {
 							"vector": [1, 1, 1]
-						}
-					}
-				},
-				"outer_tentacles": {
-					"position": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"1.875": {
-							"vector": [0, 1.5, 0]
-						},
-						"2.375": {
-							"vector": [0, 0.5, 0]
-						},
-						"3.0": {
-							"vector": [0, 0, 0]
-						}
-					}
-				},
-				"core_tentacles": {
-					"position": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"1.875": {
-							"vector": [0, 1.5, 0]
-						},
-						"3.0": {
-							"vector": [0, 0, 0]
 						}
 					}
 				}

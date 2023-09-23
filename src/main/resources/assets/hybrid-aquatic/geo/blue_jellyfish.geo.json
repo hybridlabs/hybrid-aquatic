@@ -25,19 +25,19 @@
 					]
 				},
 				{
+					"name": "core_tentacles",
+					"parent": "head",
+					"pivot": [0, 6, 0],
+					"cubes": [
+						{"origin": [-2.5, 1, -2.5], "size": [5, 12, 5], "uv": [31, 31]}
+					]
+				},
+				{
 					"name": "outer_tentacles",
 					"parent": "compass_jellyfish",
 					"pivot": [0, 7.5, 0],
 					"cubes": [
 						{"origin": [-4, 0, -4], "size": [8, 13, 8], "uv": [0, 0]}
-					]
-				},
-				{
-					"name": "core_tentacles",
-					"parent": "compass_jellyfish",
-					"pivot": [0, 6, 0],
-					"cubes": [
-						{"origin": [-2.5, 1, -2.5], "size": [5, 12, 5], "uv": [31, 31]}
 					]
 				}
 			]

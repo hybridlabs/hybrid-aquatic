@@ -26,7 +26,7 @@
 				},
 				{
 					"name": "core_tentacles",
-					"parent": "mauve_stinger",
+					"parent": "head",
 					"pivot": [0, 2.75, 0],
 					"cubes": [
 						{"origin": [-1.5, 0.75, -1.5], "size": [3, 5, 3], "uv": [0, 20]}
