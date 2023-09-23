@@ -108,7 +108,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
     override fun tickWaterBreathingAir(air: Int) {}
 
     fun getMaxMoistness(): Int {
-        return 600;
+        return 600
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {

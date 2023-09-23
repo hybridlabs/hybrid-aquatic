@@ -183,7 +183,6 @@ open class HybridAquaticSharkEntity(
 
         }
 
-
         if (!world.isClient) {
             this.tickAngerLogic(world as ServerWorld, false)
 
@@ -200,7 +199,7 @@ open class HybridAquaticSharkEntity(
     override fun tickWaterBreathingAir(air: Int) {}
 
     fun getMaxMoistness(): Int {
-        return 1200;
+        return 1200
     }
 
     override fun travel(movementInput: Vec3d?) {
