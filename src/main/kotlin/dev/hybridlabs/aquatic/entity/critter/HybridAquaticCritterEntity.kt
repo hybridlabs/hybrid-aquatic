@@ -205,7 +205,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
             val bottomY = world.seaLevel - 40
 
             return pos.y in bottomY..topY &&
-                    !world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
+                    world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
                     world.getBlockState(pos.up()).isOf(Blocks.WATER)
         }
         fun getScaleAdjustment(critter : HybridAquaticCritterEntity, adjustment : Float): Float {
