@@ -8,27 +8,42 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import software.bernie.geckolib.core.animatable.GeoAnimatable
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
 
 class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
     private val isAttacked = false
-
     override fun initGoals() {
         goalSelector.add(2, GoalHideInAnemone(this))
         super.initGoals()
     }
-
+    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
+        if (isSubmergedInWater) {
+            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
+            return PlayState.CONTINUE
+        }
+        if (!isSubmergedInWater) {
+            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
+            return PlayState.CONTINUE
+        }
+        if (isWet && isFallFlying) {
+            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
+            return PlayState.CONTINUE
+        }
+        return PlayState.STOP
+    }
     class GoalHideInAnemone(private val clownfish: ClownfishEntity) : Goal() {
         private var targetAnemonePos: BlockPos? = null
-
         init {
             controls = EnumSet.of(Control.MOVE)
         }
-
         override fun canStart(): Boolean {
             return clownfish.attacker != null
         }
-
         override fun start() {
             findNearestAnemone()?.let { nearestAnemonePos ->
                 targetAnemonePos = nearestAnemonePos
@@ -40,11 +55,9 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
                 )
             }
         }
-
         override fun shouldContinue(): Boolean {
             return targetAnemonePos != null && clownfish.isAlive && clownfish.isAttacked
         }
-
         override fun tick() {
             targetAnemonePos?.let { pos ->
                 clownfish.getNavigation().startMovingTo(
@@ -55,12 +68,10 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
                 )
             }
         }
-
         override fun stop() {
             targetAnemonePos = null
             clownfish.getNavigation().stop()
         }
-
         private fun findNearestAnemone(): BlockPos? {
             val currentPos = clownfish.blockPos
             for (i in -8..8) {
@@ -77,7 +88,6 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
             return null
         }
     }
-
     companion object {
         fun createClownfishAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes()
@@ -88,7 +98,6 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
     override fun getMaxSize() : Int {
         return 5
     }
-
     override fun getMinSize(): Int {
         return -5
     }

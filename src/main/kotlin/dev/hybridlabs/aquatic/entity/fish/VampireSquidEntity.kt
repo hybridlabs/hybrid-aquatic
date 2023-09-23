@@ -15,9 +15,13 @@ import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
+import software.bernie.geckolib.core.animatable.GeoAnimatable
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 
 class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
-
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -27,29 +31,38 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
+    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
+        if (isSubmergedInWater) {
+            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
+            return PlayState.CONTINUE
+        }
+        if (!isSubmergedInWater) {
+            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
+            return PlayState.CONTINUE
+        }
+        if (isWet && isFallFlying) {
+            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
+            return PlayState.CONTINUE
+        }
+        return PlayState.STOP
+    }
     private var attackCooldown: Int = 0
     private var escapeDirection: Vec3d = Vec3d.ZERO
-
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_GLOW_SQUID_HURT
     }
-
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.ENTITY_GLOW_SQUID_DEATH
     }
-
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.ENTITY_GLOW_SQUID_AMBIENT
     }
-
     override fun getSplashSound(): SoundEvent {
         return SoundEvents.ENTITY_DOLPHIN_SPLASH
     }
-
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SQUID_AMBIENT
     }
-
     override fun damage(source: DamageSource, amount: Float): Boolean {
         if (world is ServerWorld) {
             val particleCount = 8
@@ -71,17 +84,14 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
             )
             attackCooldown = 40
         }
-
         return super.damage(source, amount)
     }
     private fun isInDeepWater(): Boolean {
         return isSubmergedInWater && isBlockInDeepWater(blockPos)
     }
-
     private fun isInShallowWater(): Boolean {
         return isSubmergedInWater && !isBlockInDeepWater(blockPos)
     }
-
     private fun findNearestDeepWater(): BlockPos? {
         val searchRadius = 32
         val searchBox = boundingBox.expand(searchRadius.toDouble(), searchRadius.toDouble(), searchRadius.toDouble())
@@ -91,7 +101,6 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
             .filter { blockPos -> isBlockInDeepWater(blockPos) }
             .minByOrNull { blockPos -> blockPos.getSquaredDistance(x, y, z) }
     }
-
     private fun findNearestSurface(): BlockPos? {
         val searchRadius = 48
         val searchBox = boundingBox.expand(searchRadius.toDouble(), searchRadius.toDouble(), searchRadius.toDouble())
@@ -101,19 +110,16 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
             .filter { blockPos -> isBlockAboveWaterSurface(blockPos) }
             .minByOrNull { blockPos -> blockPos.getSquaredDistance(x, y, z) }
     }
-
     private fun isBlockInDeepWater(blockPos: BlockPos): Boolean {
         val waterSurfaceY = world.getTopY(Heightmap.Type.WORLD_SURFACE, blockPos.x, blockPos.z)
         val waterTopY = world.getTopY(Heightmap.Type.OCEAN_FLOOR, blockPos.x, blockPos.z)
         val waterDepth = waterSurfaceY - waterTopY
         return waterDepth >= 22
     }
-
     private fun isBlockAboveWaterSurface(blockPos: BlockPos): Boolean {
         val waterSurfaceY = world.getTopY(Heightmap.Type.WORLD_SURFACE, blockPos.x, blockPos.z)
         return blockPos.y >= waterSurfaceY
     }
-
     private fun getBoundingBoxForWaterCheck(): Box {
         val collisionBox = boundingBox.contract(0.1)
         val yOffset = 0.2

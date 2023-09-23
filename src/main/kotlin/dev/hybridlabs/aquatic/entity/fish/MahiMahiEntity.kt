@@ -21,12 +21,10 @@ class MahiMahiEntity(entityType: EntityType<out MahiMahiEntity>, world: World) :
             event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
-
         if (!isSubmergedInWater) {
             event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
-
         if (isWet && isFallFlying) {
             event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
             return PlayState.CONTINUE

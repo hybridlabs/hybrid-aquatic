@@ -2,20 +2,11 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.block.Blocks
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityPose
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.EscapeDangerGoal
-import net.minecraft.entity.ai.goal.FleeEntityGoal
-import net.minecraft.entity.ai.goal.LookAroundGoal
-import net.minecraft.entity.ai.goal.LookAtEntityGoal
-import net.minecraft.entity.ai.goal.MoveIntoWaterGoal
-import net.minecraft.entity.ai.goal.SwimAroundGoal
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.attribute.EntityAttributes
@@ -40,11 +31,8 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.*
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import kotlin.math.sqrt
@@ -79,7 +67,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     ): EntityData? {
         this.air = getMaxMoistness()
         this.variant = this.random.nextInt(variantCount)
-        this.size = this.random.nextBetween(getMinSize(),getMaxSize())
+        this.size = this.random.nextBetween(getMinSize(), getMaxSize())
         this.pitch = 0.0f
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -101,9 +89,9 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             if (isOnGround) {
                 val randomFloat = random.nextFloat()
                 velocity = velocity.add(
-                        ((randomFloat * 2.0f - 1.0f) * 0.2f).toDouble(),
-                        0.2,
-                        ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
+                    ((randomFloat * 2.0f - 1.0f) * 0.2f).toDouble(),
+                    0.2,
+                    ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
                 )
                 yaw = randomFloat * 360.0f
                 velocityDirty = true
@@ -117,22 +105,22 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             val offsetY = 0.0f - random.nextFloat() * 0.7f
             for (i in 0..1) {
                 world.addParticle(
-                        ParticleTypes.BUBBLE,
-                        x - rotationVec.x * offsetY + cosYaw,
-                        y - rotationVec.y,
-                        z - rotationVec.z * offsetY + sinYaw,
-                        0.0,
-                        0.0,
-                        0.0
+                    ParticleTypes.BUBBLE,
+                    x - rotationVec.x * offsetY + cosYaw,
+                    y - rotationVec.y,
+                    z - rotationVec.z * offsetY + sinYaw,
+                    0.0,
+                    0.0,
+                    0.0
                 )
                 world.addParticle(
-                        ParticleTypes.BUBBLE,
-                        x - rotationVec.x * offsetY - cosYaw,
-                        y - rotationVec.y,
-                        z - rotationVec.z * offsetY - sinYaw,
-                        0.0,
-                        0.0,
-                        0.0
+                    ParticleTypes.BUBBLE,
+                    x - rotationVec.x * offsetY - cosYaw,
+                    y - rotationVec.y,
+                    z - rotationVec.z * offsetY - sinYaw,
+                    0.0,
+                    0.0,
+                    0.0
                 )
             }
         }
@@ -163,14 +151,16 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
-
-        if (isOnGround) {
+        if (!isSubmergedInWater) {
             event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
+            return PlayState.CONTINUE
+        }
+        if (isWet && isFallFlying) {
+            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
         return PlayState.STOP
     }
-
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.65f
     }

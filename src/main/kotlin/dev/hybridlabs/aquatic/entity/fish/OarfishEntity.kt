@@ -9,6 +9,11 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
+import software.bernie.geckolib.core.animatable.GeoAnimatable
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 
 class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
     companion object {
@@ -21,7 +26,21 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: World) : H
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 100.0)
         }
     }
-
+    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
+        if (isSubmergedInWater) {
+            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
+            return PlayState.CONTINUE
+        }
+        if (!isSubmergedInWater) {
+            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
+            return PlayState.CONTINUE
+        }
+        if (isWet && isFallFlying) {
+            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
+            return PlayState.CONTINUE
+        }
+        return PlayState.STOP
+    }
     private fun isInDeepWater(): Boolean {
         return world.isDay && isSubmergedInWater && isBlockInDeepWater(blockPos)
     }
