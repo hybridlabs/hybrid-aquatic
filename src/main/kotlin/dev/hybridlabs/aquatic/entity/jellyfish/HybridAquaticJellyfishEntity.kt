@@ -41,7 +41,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, 600)
+        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
         dataTracker.startTracking(VARIANT, 0)
         dataTracker.startTracking(SPAWNED_ON_Y, 0)
         dataTracker.startTracking(JELLYFISH_SIZE, 0)
@@ -54,7 +54,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        this.air = this.maxAir
+        this.air = getMaxMoistness()
         this.variant = this.random.nextInt(variantCount)
         this.size = this.random.nextBetween(getMinSize(),getMaxSize())
         this.spawnedY = this.y.toInt()
@@ -64,6 +64,29 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
 
     override fun tick() {
         super.tick()
+        if (isAiDisabled) {
+            return
+        }
+
+        if (isWet) {
+            moistness = getMaxMoistness()
+        } else {
+            moistness -= 1
+            if (moistness <= -20) {
+                moistness = 0
+                damage(this.damageSources.dryOut(), 1.0f)
+            }
+            if (isOnGround) {
+                val randomFloat = random.nextFloat()
+                velocity = velocity.add(
+                        ((randomFloat * 2.0f - 1.0f) * 0.2f).toDouble(),
+                        0.2,
+                        ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
+                )
+                yaw = randomFloat * 360.0f
+                velocityDirty = true
+            }
+        }
 
         if (this.submergedInWater) {
             if (this.y <= spawnedY) {
@@ -83,6 +106,10 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
     }
 
     override fun tickWaterBreathingAir(air: Int) {}
+
+    fun getMaxMoistness(): Int {
+        return 600
+    }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
