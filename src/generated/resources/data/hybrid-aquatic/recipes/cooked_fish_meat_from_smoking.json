@@ -4,7 +4,7 @@
   "cookingtime": 100,
   "experience": 0.15,
   "ingredient": {
-    "item": "hybrid-aquatic:raw_fish_meat"
+    "item": "hybrid-aquatic:fish_meat"
   },
   "result": "hybrid-aquatic:cooked_fish_meat"
 }

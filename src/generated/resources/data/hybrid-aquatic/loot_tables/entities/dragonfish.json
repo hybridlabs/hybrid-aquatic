@@ -49,7 +49,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "hybrid-aquatic:raw_fish_meat"
+          "name": "hybrid-aquatic:small_fish_meat"
         }
       ],
       "rolls": 1.0

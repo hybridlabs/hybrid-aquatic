@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_tentacle": {
+    "has_tentacle": {
       "conditions": {
         "items": [
           {
             "items": [
-              "hybrid-aquatic:raw_tentacle"
+              "hybrid-aquatic:tentacle"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_raw_tentacle",
+      "has_tentacle",
       "has_the_recipe"
     ]
   ],

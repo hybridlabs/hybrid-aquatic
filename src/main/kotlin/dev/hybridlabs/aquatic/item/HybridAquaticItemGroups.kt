@@ -43,11 +43,13 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
 
             // food items
-            entries.add(HybridAquaticItems.RAW_FISH_MEAT)
+            entries.add(HybridAquaticItems.FISH_MEAT)
             entries.add(HybridAquaticItems.COOKED_FISH_MEAT)
-            entries.add(HybridAquaticItems.RAW_TENTACLE)
+            entries.add(HybridAquaticItems.SMALL_FISH_MEAT)
+            entries.add(HybridAquaticItems.COOKED_SMALL_FISH_MEAT)
+            entries.add(HybridAquaticItems.TENTACLE)
             entries.add(HybridAquaticItems.COOKED_TENTACLE)
-            entries.add(HybridAquaticItems.RAW_CRAB_MEAT)
+            entries.add(HybridAquaticItems.CRAB_MEAT)
             entries.add(HybridAquaticItems.COOKED_CRAB_MEAT)
             entries.add(HybridAquaticItems.LIONFISH)
             entries.add(HybridAquaticItems.MAHI_MAHI)

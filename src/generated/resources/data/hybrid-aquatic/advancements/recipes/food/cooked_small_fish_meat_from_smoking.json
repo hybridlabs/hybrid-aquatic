@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_small_fish_meat": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybrid-aquatic:small_fish_meat"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooked_small_fish_meat_from_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_small_fish_meat",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooked_small_fish_meat_from_smoking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

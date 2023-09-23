@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:lionfish",
+    "hybrid-aquatic:rockfish",
+    "hybrid-aquatic:blue_spotted_stingray",
+    "hybrid-aquatic:needlefish",
+    "hybrid-aquatic:piranha",
+    "hybrid-aquatic:anglerfish",
+    "hybrid-aquatic:barreleye",
+    "hybrid-aquatic:blue_tang",
+    "hybrid-aquatic:clownfish",
+    "hybrid-aquatic:unicorn_fish",
+    "hybrid-aquatic:cowfish",
+    "hybrid-aquatic:triggerfish",
+    "hybrid-aquatic:tiger_barb",
+    "hybrid-aquatic:oscar"
+  ]
+}

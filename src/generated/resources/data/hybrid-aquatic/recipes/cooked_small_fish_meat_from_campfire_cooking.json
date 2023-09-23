@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.15,
+  "ingredient": {
+    "item": "hybrid-aquatic:small_fish_meat"
+  },
+  "result": "hybrid-aquatic:cooked_small_fish_meat"
+}

@@ -52,11 +52,13 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
     override fun generateItemModels(generator: ItemModelGenerator) {
         generator.register(HybridAquaticItems.CRAB_CLAW, Models.GENERATED)
-        generator.register(HybridAquaticItems.RAW_CRAB_MEAT, Models.GENERATED)
+        generator.register(HybridAquaticItems.CRAB_MEAT, Models.GENERATED)
         generator.register(HybridAquaticItems.COOKED_CRAB_MEAT, Models.GENERATED)
-        generator.register(HybridAquaticItems.RAW_FISH_MEAT, Models.GENERATED)
+        generator.register(HybridAquaticItems.FISH_MEAT, Models.GENERATED)
         generator.register(HybridAquaticItems.COOKED_FISH_MEAT, Models.GENERATED)
-        generator.register(HybridAquaticItems.RAW_TENTACLE, Models.GENERATED)
+        generator.register(HybridAquaticItems.SMALL_FISH_MEAT, Models.GENERATED)
+        generator.register(HybridAquaticItems.COOKED_SMALL_FISH_MEAT, Models.GENERATED)
+        generator.register(HybridAquaticItems.TENTACLE, Models.GENERATED)
         generator.register(HybridAquaticItems.COOKED_TENTACLE, Models.GENERATED)
         generator.register(HybridAquaticItems.GLOW_SLIME, Models.GENERATED)
         generator.register(HybridAquaticItems.SHARK_TOOTH, Models.GENERATED)

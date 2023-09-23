@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hybrid-aquatic:item/cooked_small_fish_meat"
+  }
+}

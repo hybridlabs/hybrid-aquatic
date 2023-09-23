@@ -3,10 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "hybrid-aquatic:crab_claw"
+      "tag": "hybrid-aquatic:medium_fish"
     }
   ],
   "result": {
-    "item": "hybrid-aquatic:raw_crab_meat"
+    "count": 2,
+    "item": "hybrid-aquatic:fish_meat"
   }
 }

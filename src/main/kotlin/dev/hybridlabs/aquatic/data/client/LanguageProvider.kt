@@ -125,11 +125,13 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         // items
         mapOf(
-            HybridAquaticItems.RAW_FISH_MEAT to "Raw Fish Meat",
+            HybridAquaticItems.FISH_MEAT to "Fish Meat",
             HybridAquaticItems.COOKED_FISH_MEAT to "Cooked Fish Meat",
-            HybridAquaticItems.RAW_TENTACLE to "Raw Tentacle",
+            HybridAquaticItems.SMALL_FISH_MEAT to "Small Fish Meat",
+            HybridAquaticItems.COOKED_SMALL_FISH_MEAT to "Cooked Small Fish Meat",
+            HybridAquaticItems.TENTACLE to "Raw Tentacle",
             HybridAquaticItems.COOKED_TENTACLE to "Cooked Tentacle",
-            HybridAquaticItems.RAW_CRAB_MEAT to "Raw Crab Meat",
+            HybridAquaticItems.CRAB_MEAT to "Raw Crab Meat",
             HybridAquaticItems.COOKED_CRAB_MEAT to "Cooked Crab Meat",
             HybridAquaticItems.LIONFISH to "Lionfish",
             HybridAquaticItems.MAHI_MAHI to "Mahi Mahi",
@@ -160,9 +162,9 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         // Item descriptions
         mapOf(
             "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
-            HybridAquaticItems.BARBED_HOOK.translationKey to "Increases speed of catching fish during the day",
-            HybridAquaticItems.GLOWING_HOOK.translationKey to "Increases speed of catching fish during the night",
-            HybridAquaticItems.MAGNETIC_HOOK.translationKey to "Highly increases chance of getting treasure",
+            HybridAquaticItems.BARBED_HOOK.translationKey to "Increases fishing speed during the day",
+            HybridAquaticItems.GLOWING_HOOK.translationKey to "Increases fishing speed at night",
+            HybridAquaticItems.MAGNETIC_HOOK.translationKey to "Increases treasure chance",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".description"), translation)
         }

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_fish_meat": {
+    "has_fish_meat": {
       "conditions": {
         "items": [
           {
             "items": [
-              "hybrid-aquatic:raw_fish_meat"
+              "hybrid-aquatic:fish_meat"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_raw_fish_meat",
+      "has_fish_meat",
       "has_the_recipe"
     ]
   ],

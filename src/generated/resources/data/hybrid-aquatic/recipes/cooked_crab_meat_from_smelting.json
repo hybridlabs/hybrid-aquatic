@@ -4,7 +4,7 @@
   "cookingtime": 200,
   "experience": 0.15,
   "ingredient": {
-    "item": "hybrid-aquatic:raw_crab_meat"
+    "item": "hybrid-aquatic:crab_meat"
   },
   "result": "hybrid-aquatic:cooked_crab_meat"
 }

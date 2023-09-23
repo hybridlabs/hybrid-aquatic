@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hybrid-aquatic:item/raw_crab_meat"
+    "layer0": "hybrid-aquatic:item/tentacle"
   }
 }
