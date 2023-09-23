@@ -65,7 +65,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, 600)
+        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
         dataTracker.startTracking(VARIANT, 0)
         dataTracker.startTracking(FISH_SIZE, 0)
     }
@@ -77,7 +77,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        this.air = this.maxAir
+        this.air = getMaxMoistness()
         this.variant = this.random.nextInt(variantCount)
         this.size = this.random.nextBetween(getMinSize(),getMaxSize())
         this.pitch = 0.0f
@@ -87,34 +87,36 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     override fun tick() {
         super.tick()
         if (isAiDisabled) {
-            air = maxAir
+            return
+        }
+
+        if (isWet) {
+            moistness = getMaxMoistness()
         } else {
-            if (isWet) {
-                moistness = 2400
-                air = 4800
-            } else {
-                moistness -= 1
-                if (moistness <= 0) {
-                    damage(this.damageSources.dryOut(), 1.0f)
-                }
-                if (isOnGround) {
-                    val randomFloat = random.nextFloat()
-                    velocity = velocity.add(
+            moistness -= 1
+            if (moistness <= -20) {
+                moistness = 0
+                damage(this.damageSources.dryOut(), 1.0f)
+            }
+            if (isOnGround) {
+                val randomFloat = random.nextFloat()
+                velocity = velocity.add(
                         ((randomFloat * 2.0f - 1.0f) * 0.2f).toDouble(),
                         0.2,
                         ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
-                    )
-                    yaw = randomFloat * 360.0f
-                    velocityDirty = true
-                }
+                )
+                yaw = randomFloat * 360.0f
+                velocityDirty = true
             }
-            if (world.isClient && isTouchingWater && isAttacking) {
-                val rotationVec = getRotationVec(0.0f)
-                val cosYaw = MathHelper.cos(yaw * MathHelper.RADIANS_PER_DEGREE) * 0.6f
-                val sinYaw = MathHelper.sin(yaw * MathHelper.RADIANS_PER_DEGREE) * 0.6f
-                val offsetY = 0.0f - random.nextFloat() * 0.7f
-                for (i in 0..1) {
-                    world.addParticle(
+        }
+
+        if (world.isClient && isTouchingWater && isAttacking) {
+            val rotationVec = getRotationVec(0.0f)
+            val cosYaw = MathHelper.cos(yaw * MathHelper.RADIANS_PER_DEGREE) * 0.6f
+            val sinYaw = MathHelper.sin(yaw * MathHelper.RADIANS_PER_DEGREE) * 0.6f
+            val offsetY = 0.0f - random.nextFloat() * 0.7f
+            for (i in 0..1) {
+                world.addParticle(
                         ParticleTypes.BUBBLE,
                         x - rotationVec.x * offsetY + cosYaw,
                         y - rotationVec.y,
@@ -122,8 +124,8 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
                         0.0,
                         0.0,
                         0.0
-                    )
-                    world.addParticle(
+                )
+                world.addParticle(
                         ParticleTypes.BUBBLE,
                         x - rotationVec.x * offsetY - cosYaw,
                         y - rotationVec.y,
@@ -131,13 +133,16 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
                         0.0,
                         0.0,
                         0.0
-                    )
-                }
+                )
             }
         }
     }
 
     override fun tickWaterBreathingAir(air: Int) {}
+
+    fun getMaxMoistness(): Int {
+        return 600;
+    }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
@@ -217,11 +222,6 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         set(size) {
             dataTracker.set(FISH_SIZE, size)
         }
-
-
-    override fun getMaxAir(): Int {
-        return 4800
-    }
 
     public override fun getNextAirOnLand(air: Int): Int {
         return this.maxAir

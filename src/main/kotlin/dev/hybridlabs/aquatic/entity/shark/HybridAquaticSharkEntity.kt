@@ -145,7 +145,7 @@ open class HybridAquaticSharkEntity(
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, 1200)
+        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
         dataTracker.startTracking(HUNGER, MAX_HUNGER)
         dataTracker.startTracking(RUSHING, false)
         dataTracker.startTracking(ATTEMPT_ATTACK, false)
@@ -159,7 +159,7 @@ open class HybridAquaticSharkEntity(
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        this.air = this.maxAir
+        this.air = getMaxMoistness()
         pitch = 0.0f
         this.size = this.random.nextBetween(getMinSize(),getMaxSize())
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
@@ -168,6 +168,21 @@ open class HybridAquaticSharkEntity(
     //
     override fun tick() {
         super.tick()
+        if (isAiDisabled) {
+            return
+        }
+
+        if (this.isWet) {
+            moistness = getMaxMoistness()
+        } else {
+            moistness -= 1
+            if (moistness <= -20) {
+                moistness = 0
+                damage(this.damageSources.dryOut(), 1.0f)
+            }
+
+        }
+
 
         if (!world.isClient) {
             this.tickAngerLogic(world as ServerWorld, false)
@@ -179,25 +194,14 @@ open class HybridAquaticSharkEntity(
             }
         }
 
-        if (this.isAiDisabled) {
-            this.air = this.maxAir
-        } else {
-            if (this.isWet) {
-                moistness = 2400
-            } else {
-                moistness -= 1
-                if (moistness <= 0) {
-                    damage(this.damageSources.dryOut(), 1.0f)
-                }
-
-            }
-
-            if (hunger > 0)
-                hunger -= 1
-        }
+        if (hunger > 0) hunger -= 1
     }
 
     override fun tickWaterBreathingAir(air: Int) {}
+
+    fun getMaxMoistness(): Int {
+        return 1200;
+    }
 
     override fun travel(movementInput: Vec3d?) {
         super.travel(movementInput)
