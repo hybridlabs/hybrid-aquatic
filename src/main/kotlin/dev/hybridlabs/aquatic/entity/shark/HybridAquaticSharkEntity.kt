@@ -180,7 +180,6 @@ open class HybridAquaticSharkEntity(
                 moistness = 0
                 damage(this.damageSources.dryOut(), 1.0f)
             }
-
         }
 
         if (!world.isClient) {
