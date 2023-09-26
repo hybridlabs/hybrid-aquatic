@@ -51,41 +51,45 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     } }
 
     override fun generateItemModels(generator: ItemModelGenerator) {
-        generator.register(HybridAquaticItems.CRAB_CLAW, Models.GENERATED)
-        generator.register(HybridAquaticItems.CRAB_MEAT, Models.GENERATED)
-        generator.register(HybridAquaticItems.COOKED_CRAB_MEAT, Models.GENERATED)
-        generator.register(HybridAquaticItems.FISH_MEAT, Models.GENERATED)
-        generator.register(HybridAquaticItems.COOKED_FISH_MEAT, Models.GENERATED)
-        generator.register(HybridAquaticItems.SMALL_FISH_MEAT, Models.GENERATED)
-        generator.register(HybridAquaticItems.COOKED_SMALL_FISH_MEAT, Models.GENERATED)
-        generator.register(HybridAquaticItems.TENTACLE, Models.GENERATED)
-        generator.register(HybridAquaticItems.COOKED_TENTACLE, Models.GENERATED)
-        generator.register(HybridAquaticItems.GLOW_SLIME, Models.GENERATED)
-        generator.register(HybridAquaticItems.SHARK_TOOTH, Models.GENERATED)
-        generator.register(HybridAquaticItems.PEARL, Models.GENERATED)
-        generator.register(HybridAquaticItems.BLACK_PEARL, Models.GENERATED)
-        generator.register(HybridAquaticItems.LIONFISH, Models.GENERATED)
-        generator.register(HybridAquaticItems.MAHI_MAHI, Models.GENERATED)
-        generator.register(HybridAquaticItems.YELLOWFIN_TUNA, Models.GENERATED)
-        generator.register(HybridAquaticItems.OPAH, Models.GENERATED)
-        generator.register(HybridAquaticItems.ROCKFISH, Models.GENERATED)
-        generator.register(HybridAquaticItems.BLUE_SPOTTED_STINGRAY, Models.GENERATED)
-        generator.register(HybridAquaticItems.MORAY_EEL, Models.GENERATED)
-        generator.register(HybridAquaticItems.NEEDLEFISH, Models.GENERATED)
-        generator.register(HybridAquaticItems.PIRANHA, Models.GENERATED)
-        generator.register(HybridAquaticItems.ANGLERFISH, Models.GENERATED)
-        generator.register(HybridAquaticItems.BARRELEYE, Models.GENERATED)
-        generator.register(HybridAquaticItems.BLUE_TANG, Models.GENERATED)
-        generator.register(HybridAquaticItems.CLOWNFISH, Models.GENERATED)
-        generator.register(HybridAquaticItems.UNICORN_FISH, Models.GENERATED)
-        generator.register(HybridAquaticItems.COWFISH, Models.GENERATED)
-        generator.register(HybridAquaticItems.TRIGGERFISH, Models.GENERATED)
-        generator.register(HybridAquaticItems.TIGER_BARB, Models.GENERATED)
-        generator.register(HybridAquaticItems.OSCAR, Models.GENERATED)
+        listOf(
+            HybridAquaticItems.CRAB_CLAW,
+            HybridAquaticItems.CRAB_MEAT,
+            HybridAquaticItems.COOKED_CRAB_MEAT,
+            HybridAquaticItems.FISH_MEAT,
+            HybridAquaticItems.COOKED_FISH_MEAT,
+            HybridAquaticItems.SMALL_FISH_MEAT,
+            HybridAquaticItems.COOKED_SMALL_FISH_MEAT,
+            HybridAquaticItems.TENTACLE,
+            HybridAquaticItems.COOKED_TENTACLE,
+            HybridAquaticItems.GLOW_SLIME,
+            HybridAquaticItems.SHARK_TOOTH,
+            HybridAquaticItems.PEARL,
+            HybridAquaticItems.BLACK_PEARL,
+            HybridAquaticItems.LIONFISH,
+            HybridAquaticItems.MAHI_MAHI,
+            HybridAquaticItems.YELLOWFIN_TUNA,
+            HybridAquaticItems.OPAH,
+            HybridAquaticItems.ROCKFISH,
+            HybridAquaticItems.BLUE_SPOTTED_STINGRAY,
+            HybridAquaticItems.MORAY_EEL,
+            HybridAquaticItems.NEEDLEFISH,
+            HybridAquaticItems.PIRANHA,
+            HybridAquaticItems.ANGLERFISH,
+            HybridAquaticItems.BARRELEYE,
+            HybridAquaticItems.BLUE_TANG,
+            HybridAquaticItems.CLOWNFISH,
+            HybridAquaticItems.UNICORN_FISH,
+            HybridAquaticItems.COWFISH,
+            HybridAquaticItems.TRIGGERFISH,
+            HybridAquaticItems.TIGER_BARB,
+            HybridAquaticItems.OSCAR,
 
-        generator.register(HybridAquaticItems.BARBED_HOOK, Models.GENERATED)
-        generator.register(HybridAquaticItems.GLOWING_HOOK, Models.GENERATED)
-        generator.register(HybridAquaticItems.MAGNETIC_HOOK, Models.GENERATED)
+            HybridAquaticItems.BARBED_HOOK,
+            HybridAquaticItems.GLOWING_HOOK,
+            HybridAquaticItems.MAGNETIC_HOOK,
+        ).forEach { item ->
+            generator.register(item, Models.GENERATED)
+        }
     }
 
     companion object {
