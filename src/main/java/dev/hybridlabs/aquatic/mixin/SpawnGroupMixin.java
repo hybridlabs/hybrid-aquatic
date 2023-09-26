@@ -16,12 +16,13 @@ public class SpawnGroupMixin {
         throw new AssertionError();
     }
 
+    // Vanilla Spawn Groups array
     @Shadow @Mutable @Final
     private static SpawnGroup[] field_6301;
 
     @Unique
-    private static SpawnGroup createHybridAquaticSpawnGroups(String enumname, int ordinal, String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
-        return ((SpawnGroup)(Object) new SpawnGroupMixin(enumname, ordinal, name, spawnCap, peaceful, rare, immediateDespawnRange));
+    private static SpawnGroup createHybridAquaticSpawnGroups(String enumname, int ordinal, HybridAquaticSpawnGroup spawnGroup) {
+        return ((SpawnGroup)(Object) new SpawnGroupMixin(spawnGroup.name, ordinal, spawnGroup.name, spawnGroup.spawnCap, spawnGroup.peaceful, spawnGroup.rare, spawnGroup.immediateDespawnRange));
     }
 
     @Inject(method = "<clinit>",
@@ -32,15 +33,14 @@ public class SpawnGroupMixin {
             )
     )
     private static void injectEnum(CallbackInfo ci) {
-        int vanillaSGLength = field_6301.length;
-        HybridAquaticSpawnGroup[] haGroups = HybridAquaticSpawnGroup.values();
-        int haSGLength = haGroups.length;
-        field_6301 = Arrays.copyOf(field_6301, vanillaSGLength + haSGLength);
+        int vanillaSpawnGroupsLength = field_6301.length;
+        HybridAquaticSpawnGroup[] haSpawnGroups = HybridAquaticSpawnGroup.values();
+        field_6301 = Arrays.copyOf(field_6301, vanillaSpawnGroupsLength + haSpawnGroups.length);
 
-        for (int i = 0; i < haSGLength; i++) {
-            int pos = vanillaSGLength + i;
-            HybridAquaticSpawnGroup haSpawnGroup = haGroups[i];
-            haSpawnGroup.spawnGroup = field_6301[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos, haSpawnGroup.name, haSpawnGroup.spawnCap, haSpawnGroup.peaceful, haSpawnGroup.rare, haSpawnGroup.immediateDespawnRange);
+        for (int i = 0; i < haSpawnGroups.length; i++) {
+            int pos = vanillaSpawnGroupsLength + i;
+            HybridAquaticSpawnGroup haSpawnGroup = haSpawnGroups[i];
+            haSpawnGroup.spawnGroup = field_6301[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos, haSpawnGroup);
         }
     }
 }
