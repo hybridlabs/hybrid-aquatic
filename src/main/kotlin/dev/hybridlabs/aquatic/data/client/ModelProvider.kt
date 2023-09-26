@@ -48,10 +48,15 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             registerBuiltinWithParticle(block, TextureMap.getId(particleBlock))
             registerParentedItemModel(block, template)
         }
+
+        // simple cubes
+        setOf(
+            HybridAquaticBlocks.CRATE,
+        ).forEach(generator::registerSimpleCubeAll)
     } }
 
     override fun generateItemModels(generator: ItemModelGenerator) {
-        listOf(
+        setOf(
             HybridAquaticItems.CRAB_CLAW,
             HybridAquaticItems.CRAB_MEAT,
             HybridAquaticItems.COOKED_CRAB_MEAT,

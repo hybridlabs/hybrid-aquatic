@@ -42,6 +42,9 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticBlocks.TIGER_SHARK_PLUSHIE)
             entries.add(HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
 
+            // crates
+            entries.add(HybridAquaticBlocks.CRATE)
+
             // food items
             entries.add(HybridAquaticItems.FISH_MEAT)
             entries.add(HybridAquaticItems.COOKED_FISH_MEAT)

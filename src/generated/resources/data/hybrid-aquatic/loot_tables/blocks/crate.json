@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "tag": "minecraft:axes"
+                  }
+                }
+              ],
+              "name": "hybrid-aquatic:gameplay/crate_treasure"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "hybrid-aquatic:crate"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

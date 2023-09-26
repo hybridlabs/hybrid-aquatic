@@ -354,6 +354,8 @@ object HybridAquaticItems {
     val TIGER_SHARK_PLUSHIE = registerBlockItem("tiger_shark_plushie", HybridAquaticBlocks.TIGER_SHARK_PLUSHIE)
     val WHALE_SHARK_PLUSHIE = registerBlockItem("whale_shark_plushie", HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
 
+    val CRATE = registerBlockItem("crate", HybridAquaticBlocks.CRATE)
+
     // fish spawn eggs
     val CLOWNFISH_SPAWN_EGG = registerSpawnEgg("clownfish_spawn_egg", HybridAquaticEntityTypes.CLOWNFISH, 0xff5000, 0xffffff)
     val ANGLERFISH_SPAWN_EGG = registerSpawnEgg("anglerfish_spawn_egg", HybridAquaticEntityTypes.ANGLERFISH, 0x4d4848, 0xc4faff)
