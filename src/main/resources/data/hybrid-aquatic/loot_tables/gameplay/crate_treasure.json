@@ -99,5 +99,6 @@
         }
       ]
     }
-  ]
+  ],
+  "random_sequence": "hybrid-aquatic:gameplay/crate_treasure"
 }
