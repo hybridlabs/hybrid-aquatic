@@ -36,6 +36,11 @@
           "expand": true
         },
         {
+          "type": "minecraft:tag",
+          "name": "hybrid-aquatic:lure_items",
+          "expand": true
+        },
+        {
           "type": "minecraft:item",
           "name": "minecraft:book",
           "functions": [
