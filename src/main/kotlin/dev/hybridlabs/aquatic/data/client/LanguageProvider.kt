@@ -166,6 +166,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.BARBED_HOOK.translationKey to "Increases fishing speed during the day",
             HybridAquaticItems.GLOWING_HOOK.translationKey to "Increases fishing speed at night",
             HybridAquaticItems.MAGNETIC_HOOK.translationKey to "Increases treasure chance",
+            HybridAquaticBlocks.CRATE.translationKey to "Break with an axe to open",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".description"), translation)
         }
