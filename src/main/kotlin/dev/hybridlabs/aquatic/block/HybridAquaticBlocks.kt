@@ -26,7 +26,7 @@ object HybridAquaticBlocks {
             .strength(0.4f)
             .nonOpaque()
             .pistonBehavior(PistonBehavior.DESTROY)
-            .sounds(BlockSoundGroup.SLIME)
+            .sounds(BlockSoundGroup.SLIME).drops(Identifier(HybridAquatic.MOD_ID, "blocks/anemone"))
     ))
 
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleBlock(
@@ -53,6 +53,19 @@ object HybridAquaticBlocks {
                 .instrument(Instrument.CUSTOM_HEAD)
         )
     }
+
+
+    val FISHING_PLAQUE = register("fishing_plaque", FishingPlaque(FabricBlockSettings.create()))
+
+
+//    val FISH_TANK = register("fish_tank", FishTankBlock(
+//        FabricBlockSettings.create()
+//            .ticksRandomly()
+//            .strength(1.0f)
+//            .nonOpaque()
+//            .requiresTool()
+//            .sounds(BlockSoundGroup.GLASS)
+//    ))
 
     private fun register(id: String, block: Block): Block {
         return Registry.register(Registries.BLOCK, Identifier(HybridAquatic.MOD_ID, id), block)
