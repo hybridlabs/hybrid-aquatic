@@ -10,7 +10,7 @@ object HybridAquaticBlockTags {
     /**
      * A list of all Plushies.
      */
-    val PLUSHIES = create("_plushies")
+    val PLUSHIES = create("plushies")
 
     /**
      * A list of blocks that anemones can generate inside of.

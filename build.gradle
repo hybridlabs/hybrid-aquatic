@@ -65,8 +65,11 @@ dependencies {
 
   modImplementation "maven.modrinth:midnightlib:$midnightlib_version"
   modImplementation "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
-  implementation "com.github.LlamaLad7:MixinExtras:$mixin_extras_version"
-
+  
+  //Mixin Extras
+  include(implementation("com.github.LlamaLad7:MixinExtras:$mixin_extras_version"))
+  annotationProcessor "com.github.LlamaLad7:MixinExtras:$mixin_extras_version"
+  
   modImplementation "com.terraformersmc:modmenu:$mod_menu_version"
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
   //DebugUtils
