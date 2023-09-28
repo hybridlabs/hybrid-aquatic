@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.loot.LootTableModifications
+import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.loot.LootPool
@@ -15,9 +15,9 @@ class FishingLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
     override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
         // fishing fish loot table extension
         exporter.accept(
-            LootTableModifications.FISHING_FISH_LOOT_TABLE,
+            HybridAquaticLootTables.FISHING_FISH_ID,
             LootTable.builder()
-                .randomSequenceId(LootTableModifications.FISHING_FISH_LOOT_TABLE)
+                .randomSequenceId(HybridAquaticLootTables.FISHING_FISH_ID)
                 .pool(
                     LootPool.builder()
                         .with(
@@ -97,9 +97,9 @@ class FishingLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
 
         // fishing treasure loot table extension
         exporter.accept(
-            LootTableModifications.FISHING_TREASURE_LOOT_TABLE,
+            HybridAquaticLootTables.FISHING_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(LootTableModifications.FISHING_TREASURE_LOOT_TABLE)
+                .randomSequenceId(HybridAquaticLootTables.FISHING_TREASURE_ID)
                 .pool(
                     LootPool.builder()
                         .with(ItemEntry.builder(HybridAquaticItems.CRATE))

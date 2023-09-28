@@ -1,0 +1,67 @@
+package dev.hybridlabs.aquatic.data.server.loot
+
+import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
+import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
+import net.minecraft.item.Items
+import net.minecraft.loot.LootPool
+import net.minecraft.loot.LootTable
+import net.minecraft.loot.context.LootContextTypes
+import net.minecraft.loot.entry.ItemEntry
+import net.minecraft.loot.entry.TagEntry
+import net.minecraft.loot.function.EnchantWithLevelsLootFunction
+import net.minecraft.loot.function.SetCountLootFunction
+import net.minecraft.loot.function.SetPotionLootFunction
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider
+import net.minecraft.loot.provider.number.UniformLootNumberProvider
+import net.minecraft.potion.Potions
+import net.minecraft.util.Identifier
+import java.util.function.BiConsumer
+
+class GenericLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTableProvider(output, LootContextTypes.GENERIC) {
+    override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
+        exporter.accept(
+            HybridAquaticLootTables.CRATE_TREASURE_ID,
+            LootTable.builder()
+                .randomSequenceId(HybridAquaticLootTables.CRATE_TREASURE_ID)
+                .pool(
+                    LootPool.builder()
+                        .with(
+                            ItemEntry.builder(Items.COCOA_BEANS)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(4.0f, 8.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.NAUTILUS_SHELL)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(TagEntry.expandBuilder(HybridAquaticItemTags.PLUSHIES))
+                        .with(TagEntry.expandBuilder(HybridAquaticItemTags.LURE_ITEMS))
+                        .with(
+                            ItemEntry.builder(Items.BOOK)
+                                .apply(
+                                    EnchantWithLevelsLootFunction.builder(ConstantLootNumberProvider.create(30.0f))
+                                        .allowTreasureEnchantments()
+                                )
+                        )
+                        .with(
+                            ItemEntry.builder(Items.CACTUS)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 8.0f)))
+                        )
+                        .with(TagEntry.expandBuilder(HybridAquaticItemTags.IRON_TOOLS))
+                        .with(
+                            ItemEntry.builder(Items.GOLD_INGOT)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 4.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.POTION)
+                                .apply(SetPotionLootFunction.builder(Potions.WATER_BREATHING))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.POTION)
+                                .apply(SetPotionLootFunction.builder(Potions.LUCK))
+                        )
+                )
+        )
+    }
+}

@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.loot
 
-import dev.hybridlabs.aquatic.HybridAquatic
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents
 import net.minecraft.loot.LootTables
 import net.minecraft.loot.condition.EntityPropertiesLootCondition
@@ -8,12 +7,8 @@ import net.minecraft.loot.context.LootContext
 import net.minecraft.loot.entry.LootTableEntry
 import net.minecraft.predicate.entity.EntityPredicate
 import net.minecraft.predicate.entity.FishingHookPredicate
-import net.minecraft.util.Identifier
 
 object LootTableModifications {
-    val FISHING_FISH_LOOT_TABLE = Identifier(HybridAquatic.MOD_ID, "gameplay/fishing/fish")
-    val FISHING_TREASURE_LOOT_TABLE = Identifier(HybridAquatic.MOD_ID, "gameplay/fishing/treasure")
-
     init {
         LootTableEvents.MODIFY.register { _, _, id, tableBuilder, source ->
             if (source.isBuiltin) {
@@ -24,13 +19,13 @@ object LootTableModifications {
                             defaultPools
                                 // add fishing fish loot table
                                 .with(
-                                    LootTableEntry.builder(FISHING_FISH_LOOT_TABLE)
+                                    LootTableEntry.builder(HybridAquaticLootTables.FISHING_FISH_ID)
                                         .weight(85)
                                         .quality(-1)
                                 )
                                 // add fishing treasure loot table
                                 .with(
-                                    LootTableEntry.builder(FISHING_TREASURE_LOOT_TABLE)
+                                    LootTableEntry.builder(HybridAquaticLootTables.FISHING_TREASURE_ID)
                                         .weight(5)
                                         .quality(2)
                                         .conditionally(

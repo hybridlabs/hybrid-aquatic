@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.loot.LootPool
@@ -13,7 +14,6 @@ import net.minecraft.loot.entry.LootTableEntry
 import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.registry.Registries
 import net.minecraft.registry.tag.ItemTags
-import net.minecraft.util.Identifier
 
 class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTableProvider(output) {
     override fun generate() {
@@ -35,10 +35,14 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(Identifier(HybridAquatic.MOD_ID, "gameplay/crate_treasure")).conditionally(
-                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
-                        ),
-                        ItemEntry.builder(block)
+                        LootTableEntry.builder(HybridAquaticLootTables.CRATE_TREASURE_ID)
+                            .conditionally(
+                                MatchToolLootCondition.builder(
+                                    ItemPredicate.Builder.create()
+                                        .tag(ItemTags.AXES)
+                                )
+                            ),
+                        ItemEntry.builder(block),
                     )
                 ))
         }
