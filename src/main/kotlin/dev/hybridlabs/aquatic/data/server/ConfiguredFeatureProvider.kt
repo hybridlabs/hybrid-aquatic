@@ -5,6 +5,8 @@ package dev.hybridlabs.aquatic.data.server
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.MessageInABottleFeatureConfig
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.registry.RegistryWrapper
@@ -16,6 +18,7 @@ import net.minecraft.world.gen.feature.PlacedFeatures
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig
 import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig
 import net.minecraft.world.gen.stateprovider.BlockStateProvider
+import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider
 import java.util.concurrent.CompletableFuture
 
 class ConfiguredFeatureProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricDynamicRegistryProvider(output, registriesFuture) {
@@ -41,8 +44,8 @@ class ConfiguredFeatureProvider(output: FabricDataOutput, registriesFuture: Comp
         entries.add(
             HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE,
             ConfiguredFeature(
-                Feature.SIMPLE_BLOCK, SimpleBlockFeatureConfig(
-                    BlockStateProvider.of(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.defaultState.with(Properties.WATERLOGGED, true))
+                HybridAquaticFeatures.MESSAGE_IN_A_BOTTLE, MessageInABottleFeatureConfig(
+                    SimpleBlockStateProvider.of(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE)
                 )
             )
         )

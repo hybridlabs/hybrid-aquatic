@@ -32,11 +32,14 @@ data class SeaMessage(
 
     fun createBookItemStack(): ItemStack {
         val stack = ItemStack(Items.WRITTEN_BOOK)
+
         stack.setSubNbt(WrittenBookItem.PAGES_KEY, NbtList().apply {
             add(NbtString.of(Text.Serializer.toJson(text)))
         })
+
         stack.setSubNbt(WrittenBookItem.TITLE_KEY, NbtString.of("Sea Message"))
         stack.setSubNbt(WrittenBookItem.AUTHOR_KEY, NbtString.of("?????"))
+
         return stack
     }
 
