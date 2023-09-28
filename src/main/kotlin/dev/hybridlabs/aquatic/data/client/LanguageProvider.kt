@@ -2,12 +2,15 @@ package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
+import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.mob.MobEntity
 import net.minecraft.registry.Registries
 
 class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
@@ -35,78 +38,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "pumpkin_carving" to "\"Carve out a pumpkin and rely on your destiny!\"\n~Dean \"Ween\"",
         ).forEach { (id, translation) -> builder.add(SeaMessage(id).translationKey, translation) }
 
-        // entities and spawn eggs
-        mapOf(
-            HybridAquaticEntityTypes.CLOWNFISH to "Clownfish",
-            HybridAquaticEntityTypes.ANGLERFISH to "Anglerfish",
-            HybridAquaticEntityTypes.DRAGONFISH to "Dragonfish",
-            HybridAquaticEntityTypes.BARRELEYE to "Barreleye",
-            HybridAquaticEntityTypes.YELLOWFIN_TUNA to "Yellowfin Tuna",
-            HybridAquaticEntityTypes.CUTTLEFISH to "Cuttlefish",
-            HybridAquaticEntityTypes.FLASHLIGHT_FISH to "Flashlight Fish",
-            HybridAquaticEntityTypes.LIONFISH to "Lionfish",
-            HybridAquaticEntityTypes.OARFISH to "Oarfish",
-            HybridAquaticEntityTypes.OPAH to "Opah",
-            HybridAquaticEntityTypes.PIRANHA to "Piranha",
-            HybridAquaticEntityTypes.SEA_ANGEL to "Sea Angel",
-            HybridAquaticEntityTypes.SUNFISH to "Sunfish",
-            HybridAquaticEntityTypes.VAMPIRE_SQUID to "Vampire Squid",
-            HybridAquaticEntityTypes.MAHIMAHI to "Mahimahi",
-            HybridAquaticEntityTypes.MORAY_EEL to "Moray Eel",
-            HybridAquaticEntityTypes.ROCKFISH to "Rockfish",
-            HybridAquaticEntityTypes.TIGER_BARB to "Tiger Barb",
-            HybridAquaticEntityTypes.NEEDLEFISH to "Needlefish",
-            HybridAquaticEntityTypes.RATFISH to "Ratfish",
-            HybridAquaticEntityTypes.NAUTILUS to "Nautilus",
-            HybridAquaticEntityTypes.TRIGGERFISH to "Triggerfish",
-            HybridAquaticEntityTypes.OSCAR to "Oscar",
-            HybridAquaticEntityTypes.UNICORN_FISH to "Unicorn Fish",
-            HybridAquaticEntityTypes.ZEBRA_DANIO to "Zebra Danio",
-            HybridAquaticEntityTypes.TOADFISH to "Toadfish",
-            HybridAquaticEntityTypes.TETRA to "Tetra",
-            HybridAquaticEntityTypes.STONEFISH to "Stonefish",
-            HybridAquaticEntityTypes.BETTA to "Betta",
-            HybridAquaticEntityTypes.SEAHORSE to "Seahorse",
-            HybridAquaticEntityTypes.MOON_JELLYFISH to "Moon Jellyfish",
-            HybridAquaticEntityTypes.GOURAMI to "Gourami",
-            HybridAquaticEntityTypes.COWFISH to "Cowfish",
-            HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS to "Glowing Sucker Octopus",
-            HybridAquaticEntityTypes.DISCUS to "Discus",
-            HybridAquaticEntityTypes.FIREFLY_SQUID to "Firefly Squid",
-            HybridAquaticEntityTypes.BLUE_SPOTTED_STINGRAY to "Blue Spotted Stingray",
-            HybridAquaticEntityTypes.BLUE_TANG to "Blue Tang",
-            HybridAquaticEntityTypes.BULL_SHARK to "Bull Shark",
-            HybridAquaticEntityTypes.BASKING_SHARK to "Basking Shark",
-            HybridAquaticEntityTypes.THRESHER_SHARK to "Thresher Shark",
-            HybridAquaticEntityTypes.FRILLED_SHARK to "Frilled Shark",
-            HybridAquaticEntityTypes.GREAT_WHITE_SHARK to "Great White Shark",
-            HybridAquaticEntityTypes.TIGER_SHARK to "Tiger Shark",
-            HybridAquaticEntityTypes.HAMMERHEAD_SHARK to "Hammerhead Shark",
-            HybridAquaticEntityTypes.WHALE_SHARK to "Whale Shark",
-            HybridAquaticEntityTypes.CRAB to "Crab",
-            HybridAquaticEntityTypes.FIDDLER_CRAB to "Fiddler Crab",
-            HybridAquaticEntityTypes.HERMIT_CRAB to "Hermit Crab",
-            HybridAquaticEntityTypes.NUDIBRANCH to "Nudibranch",
-            HybridAquaticEntityTypes.SEA_CUCUMBER to "Sea Cucumber",
-            HybridAquaticEntityTypes.SEA_URCHIN to "Sea Urchin",
-            HybridAquaticEntityTypes.GIANT_CLAM to "Giant Clam",
-            HybridAquaticEntityTypes.STARFISH to "Starfish",
-            HybridAquaticEntityTypes.SEA_NETTLE to "Sea Nettle",
-            HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH to "Fried Egg Jellyfish",
-            HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH to "Cauliflower Jellyfish",
-            HybridAquaticEntityTypes.NOMURA_JELLYFISH to "Nomura Jellyfish",
-            HybridAquaticEntityTypes.BARREL_JELLYFISH to "Barrel Jellyfish",
-            HybridAquaticEntityTypes.COMPASS_JELLYFISH to "Compass Jellyfish",
-            HybridAquaticEntityTypes.MAUVE_STINGER to "Mauve Stinger",
-            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH to "Lions Mane Jellyfish",
-        ).forEach { (entityType, translation) ->
-            val id = Registries.ENTITY_TYPE.getId(entityType)
-            val translationKey = entityType.translationKey
-            val namespace = id.namespace
-            val path = id.path
-            builder.add(translationKey, translation)
-            builder.add("item.$namespace.${path}_spawn_egg", "$translation Spawn Egg")
-        }
+        // entities
+        generateEntities(builder)
 
         // blocks
         mapOf(
@@ -180,6 +113,103 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEnchantments.LIVECATCH to "Live Catch",
         ).forEach { (enchantment, translation) ->
             builder.add(enchantment, translation)
+        }
+    }
+
+    private fun generateEntities(builder: TranslationBuilder) {
+        // create map of entities to their display names
+        val entityNameMap = mapOf(
+            HybridAquaticEntityTypes.CLOWNFISH to "Clownfish",
+            HybridAquaticEntityTypes.ANGLERFISH to "Anglerfish",
+            HybridAquaticEntityTypes.DRAGONFISH to "Dragonfish",
+            HybridAquaticEntityTypes.BARRELEYE to "Barreleye",
+            HybridAquaticEntityTypes.YELLOWFIN_TUNA to "Yellowfin Tuna",
+            HybridAquaticEntityTypes.CUTTLEFISH to "Cuttlefish",
+            HybridAquaticEntityTypes.FLASHLIGHT_FISH to "Flashlight Fish",
+            HybridAquaticEntityTypes.LIONFISH to "Lionfish",
+            HybridAquaticEntityTypes.OARFISH to "Oarfish",
+            HybridAquaticEntityTypes.OPAH to "Opah",
+            HybridAquaticEntityTypes.PIRANHA to "Piranha",
+            HybridAquaticEntityTypes.SEA_ANGEL to "Sea Angel",
+            HybridAquaticEntityTypes.SUNFISH to "Sunfish",
+            HybridAquaticEntityTypes.VAMPIRE_SQUID to "Vampire Squid",
+            HybridAquaticEntityTypes.MAHIMAHI to "Mahimahi",
+            HybridAquaticEntityTypes.MORAY_EEL to "Moray Eel",
+            HybridAquaticEntityTypes.ROCKFISH to "Rockfish",
+            HybridAquaticEntityTypes.TIGER_BARB to "Tiger Barb",
+            HybridAquaticEntityTypes.NEEDLEFISH to "Needlefish",
+            HybridAquaticEntityTypes.RATFISH to "Ratfish",
+            HybridAquaticEntityTypes.NAUTILUS to "Nautilus",
+            HybridAquaticEntityTypes.TRIGGERFISH to "Triggerfish",
+            HybridAquaticEntityTypes.OSCAR to "Oscar",
+            HybridAquaticEntityTypes.UNICORN_FISH to "Unicorn Fish",
+            HybridAquaticEntityTypes.ZEBRA_DANIO to "Zebra Danio",
+            HybridAquaticEntityTypes.TOADFISH to "Toadfish",
+            HybridAquaticEntityTypes.TETRA to "Tetra",
+            HybridAquaticEntityTypes.STONEFISH to "Stonefish",
+            HybridAquaticEntityTypes.BETTA to "Betta",
+            HybridAquaticEntityTypes.SEAHORSE to "Seahorse",
+            HybridAquaticEntityTypes.MOON_JELLYFISH to "Moon Jellyfish",
+            HybridAquaticEntityTypes.GOURAMI to "Gourami",
+            HybridAquaticEntityTypes.COWFISH to "Cowfish",
+            HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS to "Glowing Sucker Octopus",
+            HybridAquaticEntityTypes.DISCUS to "Discus",
+            HybridAquaticEntityTypes.FIREFLY_SQUID to "Firefly Squid",
+            HybridAquaticEntityTypes.BLUE_SPOTTED_STINGRAY to "Blue Spotted Stingray",
+            HybridAquaticEntityTypes.BLUE_TANG to "Blue Tang",
+            HybridAquaticEntityTypes.BULL_SHARK to "Bull Shark",
+            HybridAquaticEntityTypes.BASKING_SHARK to "Basking Shark",
+            HybridAquaticEntityTypes.THRESHER_SHARK to "Thresher Shark",
+            HybridAquaticEntityTypes.FRILLED_SHARK to "Frilled Shark",
+            HybridAquaticEntityTypes.GREAT_WHITE_SHARK to "Great White Shark",
+            HybridAquaticEntityTypes.TIGER_SHARK to "Tiger Shark",
+            HybridAquaticEntityTypes.HAMMERHEAD_SHARK to "Hammerhead Shark",
+            HybridAquaticEntityTypes.WHALE_SHARK to "Whale Shark",
+            HybridAquaticEntityTypes.CRAB to "Crab",
+            HybridAquaticEntityTypes.FIDDLER_CRAB to "Fiddler Crab",
+            HybridAquaticEntityTypes.HERMIT_CRAB to "Hermit Crab",
+            HybridAquaticEntityTypes.NUDIBRANCH to "Nudibranch",
+            HybridAquaticEntityTypes.SEA_CUCUMBER to "Sea Cucumber",
+            HybridAquaticEntityTypes.SEA_URCHIN to "Sea Urchin",
+            HybridAquaticEntityTypes.GIANT_CLAM to "Giant Clam",
+            HybridAquaticEntityTypes.STARFISH to "Starfish",
+            HybridAquaticEntityTypes.SEA_NETTLE to "Sea Nettle",
+            HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH to "Fried Egg Jellyfish",
+            HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH to "Cauliflower Jellyfish",
+            HybridAquaticEntityTypes.NOMURA_JELLYFISH to "Nomura Jellyfish",
+            HybridAquaticEntityTypes.BARREL_JELLYFISH to "Barrel Jellyfish",
+            HybridAquaticEntityTypes.COMPASS_JELLYFISH to "Compass Jellyfish",
+            HybridAquaticEntityTypes.MAUVE_STINGER to "Mauve Stinger",
+            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH to "Lion's Mane Jellyfish",
+            HybridAquaticEntityTypes.ATOLLA_JELLYFISH to "Atolla Jellyfish",
+            HybridAquaticEntityTypes.BLUE_JELLYFISH to "Blue Jellyfish",
+        )
+
+        // verify display name list is valid
+        val nonPresentEntityNames = mutableListOf<EntityType<*>>()
+
+        Registries.ENTITY_TYPE
+            .filter(filterHybridAquatic(Registries.ENTITY_TYPE))
+            .forEach { type ->
+                if (type.baseClass.isAssignableFrom(MobEntity::class.java)) {
+                    if (!entityNameMap.containsKey(type)) {
+                        nonPresentEntityNames.add(type)
+                    }
+                }
+            }
+
+        if (nonPresentEntityNames.isNotEmpty()) {
+            throw throw IllegalStateException("Entity to display name map does not contain ${nonPresentEntityNames.joinToString()}. Please modify ${javaClass.simpleName} accordingly.")
+        }
+
+        // generate entity and entity spawn egg translations
+        entityNameMap.forEach { (entityType, translation) ->
+            val id = Registries.ENTITY_TYPE.getId(entityType)
+            val translationKey = entityType.translationKey
+            val namespace = id.namespace
+            val path = id.path
+            builder.add(translationKey, translation)
+            builder.add("item.$namespace.${path}_spawn_egg", "$translation Spawn Egg")
         }
     }
 }

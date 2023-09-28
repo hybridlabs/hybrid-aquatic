@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
-import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
@@ -49,12 +49,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
 
         // generate remaining drops
         Registries.BLOCK
-            .filter { block ->
-                block.lootTableId !in lootTables && let {
-                    val id = Registries.BLOCK.getId(block)
-                    id.namespace == HybridAquatic.MOD_ID
-                }
-            }
+            .filter(filterHybridAquatic(Registries.BLOCK))
+            .filter { block -> block.lootTableId !in lootTables }
             .forEach(::addDrop)
     }
 }

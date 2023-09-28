@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
-import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -47,9 +47,10 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         // plushies
         Registries.ITEM
+            .filter(filterHybridAquatic(Registries.ITEM))
             .filter { item ->
                 val id = Registries.ITEM.getId(item)
-                id.namespace == HybridAquatic.MOD_ID && id.path.endsWith("plushie")
+                id.path.endsWith("plushie")
             }
             .forEach { item ->
                 getOrCreateTagBuilder(HybridAquaticItemTags.PLUSHIES).add(item)

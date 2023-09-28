@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.data
 
+import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.data.client.LanguageProvider
 import dev.hybridlabs.aquatic.data.client.ModelProvider
 import dev.hybridlabs.aquatic.data.server.ConfiguredFeatureProvider
@@ -17,6 +18,7 @@ import dev.hybridlabs.aquatic.data.server.tag.ItemTagProvider
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
+import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryBuilder
 
 object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
@@ -40,5 +42,12 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
 
     override fun buildRegistry(registryBuilder: RegistryBuilder) {
         registryBuilder.addRegistry(HybridAquaticRegistryKeys.SEA_MESSAGE) {}
+    }
+
+    fun <T> filterHybridAquatic(registry: Registry<T>): (T) -> Boolean {
+        return { o ->
+            val id = registry.getId(o)
+            id?.namespace == HybridAquatic.MOD_ID
+        }
     }
 }
