@@ -76,15 +76,12 @@ open class HybridAquaticSharkEntity(
         set(attemptAttack) {
             dataTracker.set(ATTEMPT_ATTACK, attemptAttack)
         }
-
-
     init {
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
         moveControl = AquaticMoveControl(this, 85, 10, 0.02F, 0.1F, true)
         lookControl = YawAdjustingLookControl(this, 10)
         navigation = SwimNavigation(this, world)
     }
-
     companion object {
         const val MOISTNESS_KEY = "Moistness"
         const val SHARK_SIZE_KEY = "SharkSize"
@@ -103,7 +100,7 @@ open class HybridAquaticSharkEntity(
         val ATTEMPT_ATTACK: TrackedData<Boolean> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
-        val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(19, 40)
+        val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(5, 10)
 
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,
@@ -165,13 +162,11 @@ open class HybridAquaticSharkEntity(
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    //
     override fun tick() {
         super.tick()
         if (isAiDisabled) {
             return
         }
-
         if (this.isWet) {
             moistness = getMaxMoistness()
         } else {
@@ -181,17 +176,15 @@ open class HybridAquaticSharkEntity(
                 damage(this.damageSources.dryOut(), 1.0f)
             }
         }
-
         if (!world.isClient) {
             this.tickAngerLogic(world as ServerWorld, false)
 
             rushTargetPosition?.let { targetPos ->
-                val velocityMod = targetPos.subtract(pos).normalize().multiply(1.15)
+                val velocityMod = targetPos.subtract(pos).normalize().multiply(1.0)
                 this.velocity = velocityMod
                 rushTargetPosition = null
             }
         }
-
         if (hunger > 0) hunger -= 1
     }
 

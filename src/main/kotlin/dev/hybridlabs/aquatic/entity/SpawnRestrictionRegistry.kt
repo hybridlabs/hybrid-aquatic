@@ -66,9 +66,9 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.MOON_JELLYFISH,
             HybridAquaticEntityTypes.SEA_NETTLE,
-            HybridAquaticEntityTypes.FRIED_EGG_JELLY,
-            HybridAquaticEntityTypes.CAULIFLOWER_JELLY,
-            HybridAquaticEntityTypes.NOMURA_JELLY,
+            HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH,
+            HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH,
+            HybridAquaticEntityTypes.NOMURA_JELLYFISH,
         ).forEach { registerJelly(it) }
 
         // sharks

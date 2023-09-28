@@ -62,12 +62,12 @@ object EntityBiomeModifications {
         // jellies
         addJelly(HybridAquaticEntityTypes.MOON_JELLYFISH, HybridAquaticBiomeTags.MOON_JELLYFISH_SPAWN_BIOMES, 10, 1, 4)
         addJelly(HybridAquaticEntityTypes.SEA_NETTLE, HybridAquaticBiomeTags.SEA_NETTLE_SPAWN_BIOMES, 7, 1, 3)
-        addJelly(HybridAquaticEntityTypes.FRIED_EGG_JELLY, HybridAquaticBiomeTags.FRIED_EGG_JELLYFISH_SPAWN_BIOMES, 1, 1, 2)
-        addJelly(HybridAquaticEntityTypes.CAULIFLOWER_JELLY, HybridAquaticBiomeTags.CAULIFLOWER_JELLYFISH_SPAWN_BIOMES, 1, 1, 2)
-        addJelly(HybridAquaticEntityTypes.NOMURA_JELLY, HybridAquaticBiomeTags.NOMURA_JELLYFISH_SPAWN_BIOMES, 5, 1, 1)
-        addJelly(HybridAquaticEntityTypes.BARREL_JELLY, HybridAquaticBiomeTags.BARREL_JELLYFISH_SPAWN_BIOMES, 7, 1, 2)
-        addJelly(HybridAquaticEntityTypes.COMPASS_JELLY, HybridAquaticBiomeTags.COMPASS_JELLYFISH_SPAWN_BIOMES, 7, 1, 2)
-        addJelly(HybridAquaticEntityTypes.BLUE_JELLY, HybridAquaticBiomeTags.BLUE_JELLYFISH_SPAWN_BIOMES, 7, 1, 2)
+        addJelly(HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH, HybridAquaticBiomeTags.FRIED_EGG_JELLYFISH_SPAWN_BIOMES, 1, 1, 2)
+        addJelly(HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH, HybridAquaticBiomeTags.CAULIFLOWER_JELLYFISH_SPAWN_BIOMES, 1, 1, 2)
+        addJelly(HybridAquaticEntityTypes.NOMURA_JELLYFISH, HybridAquaticBiomeTags.NOMURA_JELLYFISH_SPAWN_BIOMES, 5, 1, 1)
+        addJelly(HybridAquaticEntityTypes.BARREL_JELLYFISH, HybridAquaticBiomeTags.BARREL_JELLYFISH_SPAWN_BIOMES, 7, 1, 2)
+        addJelly(HybridAquaticEntityTypes.COMPASS_JELLYFISH, HybridAquaticBiomeTags.COMPASS_JELLYFISH_SPAWN_BIOMES, 7, 1, 2)
+        addJelly(HybridAquaticEntityTypes.BLUE_JELLYFISH, HybridAquaticBiomeTags.BLUE_JELLYFISH_SPAWN_BIOMES, 7, 1, 2)
         addJelly(HybridAquaticEntityTypes.MAUVE_STINGER, HybridAquaticBiomeTags.MAUVE_STINGER_SPAWN_BIOMES, 7, 1, 3)
         addJelly(HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH, HybridAquaticBiomeTags.LIONS_MANE_JELLYFISH_SPAWN_BIOMES, 3, 1, 1)
 
