@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.data.server
+package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks

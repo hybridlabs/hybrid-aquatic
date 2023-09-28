@@ -2,7 +2,17 @@ package dev.hybridlabs.aquatic.data
 
 import dev.hybridlabs.aquatic.data.client.LanguageProvider
 import dev.hybridlabs.aquatic.data.client.ModelProvider
-import dev.hybridlabs.aquatic.data.server.*
+import dev.hybridlabs.aquatic.data.server.ConfiguredFeatureProvider
+import dev.hybridlabs.aquatic.data.server.PlacedFeatureProvider
+import dev.hybridlabs.aquatic.data.server.RecipeProvider
+import dev.hybridlabs.aquatic.data.server.SeaMessageProvider
+import dev.hybridlabs.aquatic.data.server.loot.BlockLootTableProvider
+import dev.hybridlabs.aquatic.data.server.loot.EntityTypeLootTableProvider
+import dev.hybridlabs.aquatic.data.server.loot.FishingLootTableProvider
+import dev.hybridlabs.aquatic.data.server.tag.BiomeTagProvider
+import dev.hybridlabs.aquatic.data.server.tag.BlockTagProvider
+import dev.hybridlabs.aquatic.data.server.tag.EntityTypeTagProvider
+import dev.hybridlabs.aquatic.data.server.tag.ItemTagProvider
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator

@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.loot_table
+package dev.hybridlabs.aquatic.loot
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents

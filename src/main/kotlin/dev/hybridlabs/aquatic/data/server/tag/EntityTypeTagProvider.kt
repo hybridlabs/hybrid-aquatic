@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.data.server
+package dev.hybridlabs.aquatic.data.server.tag
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags

@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.data.server
+package dev.hybridlabs.aquatic.data.server.tag
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput

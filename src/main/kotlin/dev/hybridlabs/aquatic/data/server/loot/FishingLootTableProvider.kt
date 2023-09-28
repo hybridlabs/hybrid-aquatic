@@ -1,7 +1,7 @@
-package dev.hybridlabs.aquatic.data.server
+package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.loot_table.LootTableModifications
+import dev.hybridlabs.aquatic.loot.LootTableModifications
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.loot.LootPool
