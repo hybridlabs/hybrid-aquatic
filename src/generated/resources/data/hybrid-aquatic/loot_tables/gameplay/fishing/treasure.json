@@ -7,6 +7,9 @@
         {
           "type": "minecraft:item",
           "name": "hybrid-aquatic:crate"
+        },
+        {
+          "type": "hybrid-aquatic:message_in_a_bottle"
         }
       ],
       "rolls": 1.0

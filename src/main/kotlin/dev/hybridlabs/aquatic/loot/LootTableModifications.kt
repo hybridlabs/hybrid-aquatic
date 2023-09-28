@@ -26,7 +26,7 @@ object LootTableModifications {
                                 // add fishing treasure loot table
                                 .with(
                                     LootTableEntry.builder(HybridAquaticLootTables.FISHING_TREASURE_ID)
-                                        .weight(5)
+                                        .weight(8)
                                         .quality(2)
                                         .conditionally(
                                             EntityPropertiesLootCondition.builder(
