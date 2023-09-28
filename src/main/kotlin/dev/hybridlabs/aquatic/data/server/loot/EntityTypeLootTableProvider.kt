@@ -182,7 +182,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.NOMURA_JELLY) {
+        export(exporter, HybridAquaticEntityTypes.NOMURA_JELLYFISH) {
             pool(
                 LootPool.builder()
                     .with(
@@ -204,7 +204,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BLUE_JELLY) {
+        export(exporter, HybridAquaticEntityTypes.BLUE_JELLYFISH) {
             pool(
                 LootPool.builder()
                     .with(
@@ -215,7 +215,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.COMPASS_JELLY) {
+        export(exporter, HybridAquaticEntityTypes.COMPASS_JELLYFISH) {
             pool(
                 LootPool.builder()
                     .with(
@@ -226,7 +226,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BARREL_JELLY) {
+        export(exporter, HybridAquaticEntityTypes.BARREL_JELLYFISH) {
             pool(
                 LootPool.builder()
                     .with(
@@ -248,7 +248,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FRIED_EGG_JELLY) {
+        export(exporter, HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH) {
             pool(
                 LootPool.builder()
                     .with(
@@ -259,7 +259,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.CAULIFLOWER_JELLY) {
+        export(exporter, HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH) {
             pool(
                 LootPool.builder()
                     .with(
