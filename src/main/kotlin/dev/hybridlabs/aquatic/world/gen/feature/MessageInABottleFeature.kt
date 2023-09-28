@@ -29,6 +29,8 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) : Fea
         val pos = context.origin.mutableCopy()
 
         if (!state.canPlaceAt(world, pos)) {
+            // if can spawn below, move down
+            // most likely called when a bottle spawns on water
             if (state.canPlaceAt(world, pos.down())) {
                 pos.move(Direction.DOWN)
             } else {
