@@ -11,20 +11,36 @@ import net.minecraft.predicate.entity.FishingHookPredicate
 import net.minecraft.util.Identifier
 
 object LootTableModifications {
-    private val fishLootTable = Identifier(HybridAquatic.MOD_ID, "gameplay/fishing/fish")
-    private val treasureLootTable = Identifier(HybridAquatic.MOD_ID, "gameplay/fishing/treasure")
+    val FISHING_FISH_LOOT_TABLE = Identifier(HybridAquatic.MOD_ID, "gameplay/fishing/fish")
+    val FISHING_TREASURE_LOOT_TABLE = Identifier(HybridAquatic.MOD_ID, "gameplay/fishing/treasure")
 
     init {
-        LootTableEvents.MODIFY.register { resourceManager, lootManager, id, tableBuilder, source ->
+        LootTableEvents.MODIFY.register { _, _, id, tableBuilder, source ->
             if (source.isBuiltin) {
-                when(id) {
+                when (id) {
+                    // modify fishing loot table
                     LootTables.FISHING_FISH_GAMEPLAY -> {
                         tableBuilder.modifyPools { defaultPools ->
                             defaultPools
-                                .with(LootTableEntry.builder(fishLootTable).weight(85).quality(-1))
-                                .with(LootTableEntry.builder(treasureLootTable).weight(5).quality(2).conditionally(EntityPropertiesLootCondition.builder(
-                                    LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().typeSpecific(FishingHookPredicate.of(true))
-                                )))
+                                // add fishing fish loot table
+                                .with(
+                                    LootTableEntry.builder(FISHING_FISH_LOOT_TABLE)
+                                        .weight(85)
+                                        .quality(-1)
+                                )
+                                // add fishing treasure loot table
+                                .with(
+                                    LootTableEntry.builder(FISHING_TREASURE_LOOT_TABLE)
+                                        .weight(5)
+                                        .quality(2)
+                                        .conditionally(
+                                            EntityPropertiesLootCondition.builder(
+                                                LootContext.EntityTarget.THIS,
+                                                EntityPredicate.Builder.create()
+                                                    .typeSpecific(FishingHookPredicate.of(true))
+                                            )
+                                        )
+                                )
                         }
                     }
                 }

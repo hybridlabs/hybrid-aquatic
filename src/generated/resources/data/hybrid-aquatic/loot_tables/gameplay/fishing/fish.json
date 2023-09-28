@@ -56,8 +56,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:barreleye",
-          "weight": 1
+          "name": "hybrid-aquatic:barreleye"
         },
         {
           "type": "minecraft:item",
