@@ -23,6 +23,10 @@ class YellowfinTunaEntity(entityType: EntityType<out YellowfinTunaEntity>, world
         }
     }
 
+    override fun speedModifier(): Double {
+        return 0.0125
+    }
+
     override fun getMaxSize(): Int {
         return 5
     }

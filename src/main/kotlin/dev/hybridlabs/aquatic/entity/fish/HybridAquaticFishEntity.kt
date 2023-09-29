@@ -23,6 +23,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
@@ -271,25 +272,29 @@ open class HybridAquaticFishEntity(
         super.tickMovement()
     }
 
+    open fun speedModifier(): Double {
+        return 0.0
+    }
+
     internal class FishMoveControl(private val fish: HybridAquaticFishEntity) : MoveControl(fish) {
         override fun tick() {
             if (fish.isSubmergedIn(FluidTags.WATER)) {
                 fish.velocity = fish.velocity.add(0.0, 0.005, 0.0)
             }
             if (state == State.MOVE_TO && !fish.getNavigation().isIdle) {
-                val f = (speed * fish.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED)).toFloat()
-                fish.movementSpeed = MathHelper.lerp(0.125f, fish.movementSpeed, f)
-                val d = targetX - fish.x
-                val e = targetY - fish.y
-                val g = targetZ - fish.z
-                if (e != 0.0) {
-                    val h = sqrt(d * d + e * e + g * g)
-                    fish.velocity = fish.velocity.add(0.0, fish.movementSpeed.toDouble() * (e / h) * 0.1, 0.0)
+                val speed = (speed * fish.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED)).toFloat()
+                fish.movementSpeed = MathHelper.lerp(0.125f, fish.movementSpeed, speed)
+                val velocity = Vec3d(targetX, targetY, targetZ).subtract(fish.pos)
+
+                if (velocity.y != 0.0) {
+                    val h = sqrt(velocity.x * velocity.x + velocity.y * velocity.y + velocity.z * velocity.z)
+                    fish.addVelocity(0.0, fish.movementSpeed.toDouble() * (velocity.y / h) * 0.1, 0.0)
                 }
-                if (d != 0.0 || g != 0.0) {
-                    val i = (MathHelper.atan2(g, d) * 57.2957763671875).toFloat() - 90.0f
+                if (velocity.x != 0.0 || velocity.z != 0.0) {
+                    val i = (MathHelper.atan2(velocity.z, velocity.x) * 57.2957763671875).toFloat() - 90.0f
                     fish.yaw = wrapDegrees(fish.yaw, i, 90.0f)
                     fish.bodyYaw = fish.yaw
+                    fish.addVelocity(velocity.x * fish.speedModifier(), 0.0, velocity.z * fish.speedModifier())
                 }
             } else {
                 fish.movementSpeed = 0.0f
