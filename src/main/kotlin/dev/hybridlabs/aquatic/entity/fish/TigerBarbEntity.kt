@@ -5,13 +5,9 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
-class TigerBarbEntity(entityType: EntityType<out TigerBarbEntity>, world: World) : HybridAquaticSchoolingFishEntity(entityType, world) {
+class TigerBarbEntity(entityType: EntityType<out TigerBarbEntity>, world: World) :
+    HybridAquaticSchoolingFishEntity(entityType, world) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -23,7 +19,7 @@ class TigerBarbEntity(entityType: EntityType<out TigerBarbEntity>, world: World)
         }
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 

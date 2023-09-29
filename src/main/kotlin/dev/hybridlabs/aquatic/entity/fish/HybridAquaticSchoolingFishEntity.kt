@@ -10,8 +10,9 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import java.util.stream.Stream
 
-open class HybridAquaticSchoolingFishEntity(type: EntityType<out HybridAquaticFishEntity>,
-                                            world: World
+open class HybridAquaticSchoolingFishEntity(
+    type: EntityType<out HybridAquaticFishEntity>,
+    world: World
 ) : HybridAquaticFishEntity(type, world) {
     private var leader: HybridAquaticSchoolingFishEntity? = null
     private var groupSize = 1
@@ -86,7 +87,8 @@ open class HybridAquaticSchoolingFishEntity(type: EntityType<out HybridAquaticFi
     }
 
     fun pullInOtherFish(fish: Stream<out HybridAquaticSchoolingFishEntity>) {
-        fish.limit((getMaxGroupSize() - groupSize).toLong()).filter { fishx: HybridAquaticSchoolingFishEntity -> fishx !== this }
+        fish.limit((getMaxGroupSize() - groupSize).toLong())
+            .filter { fishx: HybridAquaticSchoolingFishEntity -> fishx !== this }
             .forEach { fishx: HybridAquaticSchoolingFishEntity -> fishx.joinGroupOf(this) }
     }
 

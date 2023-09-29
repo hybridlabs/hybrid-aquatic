@@ -17,7 +17,8 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
-class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
+class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world) {
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
@@ -137,7 +138,7 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
         return Box(collisionBox.minX, minY, collisionBox.minZ, collisionBox.maxX, maxY, collisionBox.maxZ)
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 

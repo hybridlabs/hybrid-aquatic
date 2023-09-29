@@ -38,7 +38,11 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import kotlin.math.sqrt
 
 @Suppress("LeakingThis")
-open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: World, private val variantCount: Int = 1) : WaterCreatureEntity(type, world), GeoEntity {
+open class HybridAquaticFishEntity(
+    type: EntityType<out HybridAquaticFishEntity>,
+    world: World,
+    private val variantCount: Int = 1
+) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun initGoals() {
@@ -173,6 +177,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_COD_HURT
     }
+
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.ENTITY_COD_DEATH
     }
@@ -180,12 +185,15 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.ENTITY_SALMON_AMBIENT
     }
+
     override fun getSplashSound(): SoundEvent {
         return SoundEvents.ENTITY_DOLPHIN_SPLASH
     }
+
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_DOLPHIN_SWIM
     }
+
     override fun createNavigation(world: World): EntityNavigation {
         return SwimNavigation(this, world)
     }
@@ -219,11 +227,11 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         return true
     }
 
-    protected open fun getMinSize() : Int {
+    protected open fun getMinSize(): Int {
         return 0
     }
 
-    protected open fun getMaxSize() : Int {
+    protected open fun getMaxSize(): Int {
         return 0
     }
 
@@ -297,10 +305,14 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     }
 
     companion object {
-        val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val FISH_SIZE: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
+        val MOISTNESS: TrackedData<Int> =
+            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val VARIANT: TrackedData<Int> =
+            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val FISH_SIZE: TrackedData<Int> =
+            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val CLOSE_PLAYER_PREDICATE: TargetPredicate =
+            TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,
@@ -329,9 +341,10 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
                     world.getBlockState(pos).isOf(Blocks.WATER)
         }
 
-        fun getScaleAdjustment(fish : HybridAquaticFishEntity, adjustment : Float): Float {
+        fun getScaleAdjustment(fish: HybridAquaticFishEntity, adjustment: Float): Float {
             return 1.0f + (fish.size * adjustment)
         }
+
         const val MOISTNESS_KEY = "Moistness"
         const val VARIANT_KEY = "Variant"
         const val FISH_SIZE_KEY = "FishSize"

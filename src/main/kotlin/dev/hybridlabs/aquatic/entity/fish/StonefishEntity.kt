@@ -11,13 +11,9 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
-class StonefishEntity(entityType: EntityType<out StonefishEntity>, world: World) : HybridAquaticFishEntity(entityType, world, 3) {
+class StonefishEntity(entityType: EntityType<out StonefishEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world, 3) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -42,7 +38,7 @@ class StonefishEntity(entityType: EntityType<out StonefishEntity>, world: World)
         }
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 

@@ -11,7 +11,8 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 
-class GouramiEntity(entityType: EntityType<out GouramiEntity>, world: World) : HybridAquaticFishEntity(entityType, world, 4) {
+class GouramiEntity(entityType: EntityType<out GouramiEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world, 4) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -38,7 +39,7 @@ class GouramiEntity(entityType: EntityType<out GouramiEntity>, world: World) : H
         return PlayState.STOP
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 

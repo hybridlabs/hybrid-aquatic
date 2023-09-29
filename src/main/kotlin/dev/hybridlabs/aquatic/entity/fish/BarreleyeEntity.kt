@@ -9,13 +9,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
-class BarreleyeEntity(entityType: EntityType<out BarreleyeEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
+class BarreleyeEntity(entityType: EntityType<out BarreleyeEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -75,7 +71,7 @@ class BarreleyeEntity(entityType: EntityType<out BarreleyeEntity>, world: World)
         return Box(collisionBox.minX, minY, collisionBox.minZ, collisionBox.maxX, maxY, collisionBox.maxZ)
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 

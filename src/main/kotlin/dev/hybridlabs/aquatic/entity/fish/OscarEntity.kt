@@ -5,11 +5,6 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
 class OscarEntity(entityType: EntityType<out OscarEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
     companion object {
@@ -22,9 +17,10 @@ class OscarEntity(entityType: EntityType<out OscarEntity>, world: World) : Hybri
         }
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
+
     override fun getMinSize(): Int {
         return -5
     }

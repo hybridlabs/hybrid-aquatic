@@ -5,13 +5,9 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
-class MahiMahiEntity(entityType: EntityType<out MahiMahiEntity>, world: World) : HybridAquaticSchoolingFishEntity(entityType, world) {
+class MahiMahiEntity(entityType: EntityType<out MahiMahiEntity>, world: World) :
+    HybridAquaticSchoolingFishEntity(entityType, world) {
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(5, FishJumpGoal(this, 10))
@@ -27,7 +23,7 @@ class MahiMahiEntity(entityType: EntityType<out MahiMahiEntity>, world: World) :
         }
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 

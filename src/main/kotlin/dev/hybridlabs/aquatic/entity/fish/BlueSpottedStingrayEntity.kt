@@ -12,7 +12,8 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.world.World
 
-class BlueSpottedStingrayEntity(entityType: EntityType<out BlueSpottedStingrayEntity>, world: World) : HybridAquaticFishEntity(entityType, world, 8) {
+class BlueSpottedStingrayEntity(entityType: EntityType<out BlueSpottedStingrayEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world, 8) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -37,7 +38,7 @@ class BlueSpottedStingrayEntity(entityType: EntityType<out BlueSpottedStingrayEn
         }
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 

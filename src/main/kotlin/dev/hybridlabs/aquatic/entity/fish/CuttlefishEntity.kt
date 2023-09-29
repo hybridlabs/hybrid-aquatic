@@ -77,6 +77,7 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
 
         return super.damage(source, amount)
     }
+
     override fun getAttacker(): LivingEntity? {
         val target = attackingPlayer
         if (target != null) {
@@ -84,7 +85,8 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
         }
         return null
     }
-    override fun getMaxSize() : Int {
+
+    override fun getMaxSize(): Int {
         return 5
     }
 
