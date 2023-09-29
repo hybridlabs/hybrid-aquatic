@@ -19,6 +19,11 @@ class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopus
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_GLOW_SQUID_HURT
     }

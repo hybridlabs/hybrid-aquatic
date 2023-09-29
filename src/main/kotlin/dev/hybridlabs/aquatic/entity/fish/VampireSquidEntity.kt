@@ -31,21 +31,7 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (!isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        return PlayState.STOP
-    }
+
     private var attackCooldown: Int = 0
     private var escapeDirection: Vec3d = Vec3d.ZERO
     override fun getHurtSound(source: DamageSource): SoundEvent {

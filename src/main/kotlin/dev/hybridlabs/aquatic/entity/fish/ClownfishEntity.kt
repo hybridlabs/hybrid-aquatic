@@ -21,21 +21,7 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
         goalSelector.add(2, GoalHideInAnemone(this))
         super.initGoals()
     }
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (!isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        return PlayState.STOP
-    }
+
     class GoalHideInAnemone(private val clownfish: ClownfishEntity) : Goal() {
         private var targetAnemonePos: BlockPos? = null
         init {

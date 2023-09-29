@@ -26,21 +26,7 @@ class BarreleyeEntity(entityType: EntityType<out BarreleyeEntity>, world: World)
 
         }
     }
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (!isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        return PlayState.STOP
-    }
+
     private fun isInDeepWater(): Boolean {
         return isSubmergedInWater && isBlockInDeepWater(blockPos)
     }

@@ -25,6 +25,11 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
+
     private var attackCooldown: Int = 0
     private var escapeDirection: Vec3d = Vec3d.ZERO
 

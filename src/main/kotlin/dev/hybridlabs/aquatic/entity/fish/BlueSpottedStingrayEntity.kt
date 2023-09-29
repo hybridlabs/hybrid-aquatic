@@ -22,6 +22,7 @@ class BlueSpottedStingrayEntity(entityType: EntityType<out BlueSpottedStingrayEn
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
+
     override fun damage(source: DamageSource, amount: Float): Boolean {
         return if (world.isClient) {
             false
@@ -35,6 +36,7 @@ class BlueSpottedStingrayEntity(entityType: EntityType<out BlueSpottedStingrayEn
             super.damage(source, amount)
         }
     }
+
     override fun getMaxSize() : Int {
         return 5
     }

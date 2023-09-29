@@ -86,16 +86,6 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
                 moistness = 0
                 damage(this.damageSources.dryOut(), 1.0f)
             }
-            if (isOnGround) {
-                val randomFloat = random.nextFloat()
-                velocity = velocity.add(
-                    ((randomFloat * 2.0f - 1.0f) * 0.2f).toDouble(),
-                    0.2,
-                    ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
-                )
-                yaw = randomFloat * 360.0f
-                velocityDirty = true
-            }
         }
 
         if (world.isClient && isTouchingWater && isAttacking) {
@@ -139,6 +129,10 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         nbt.putInt(FISH_SIZE_KEY, size)
     }
 
+    open fun shouldFlopOnLand(): Boolean {
+        return true
+    }
+
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
@@ -151,7 +145,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
-        if (!isSubmergedInWater) {
+        if (!isSubmergedInWater && shouldFlopOnLand()) {
             event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
@@ -161,6 +155,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         }
         return PlayState.STOP
     }
+
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.65f
     }
@@ -253,12 +248,15 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     }
 
     override fun tickMovement() {
-        if (!this.isTouchingWater && this.isOnGround && verticalCollision) {
-            velocity = velocity.add(
-                ((random.nextFloat() * 2.0f - 1.0f) * 0.05f).toDouble(),
-                0.4000000059604645,
-                ((random.nextFloat() * 2.0f - 1.0f) * 0.05f).toDouble()
+        // Proper flop on land
+        if (!this.isTouchingWater && this.isOnGround && verticalCollision && shouldFlopOnLand()) {
+            val randomFloat = random.nextFloat()
+            addVelocity(
+                ((randomFloat * 2.0f - 1.0f) * 0.2f).toDouble(),
+                0.4,
+                ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
             )
+            yaw = randomFloat * 360.0f
             velocityDirty = true
             playSound(flopSound, this.soundVolume, this.soundPitch)
         }

@@ -21,6 +21,7 @@ class GouramiEntity(entityType: EntityType<out GouramiEntity>, world: World) : H
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
+
     override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
         if (isSubmergedInWater) {
             event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
@@ -36,6 +37,7 @@ class GouramiEntity(entityType: EntityType<out GouramiEntity>, world: World) : H
         }
         return PlayState.STOP
     }
+
     override fun getMaxSize() : Int {
         return 5
     }

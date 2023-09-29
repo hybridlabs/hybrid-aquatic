@@ -16,23 +16,6 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) : H
         super.initGoals()
         goalSelector.add(5, FishJumpGoal(this, 10))
     }
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-
-        if (!isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-
-        if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        return PlayState.STOP
-    }
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {

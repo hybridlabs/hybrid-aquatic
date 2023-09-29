@@ -16,21 +16,6 @@ class MahiMahiEntity(entityType: EntityType<out MahiMahiEntity>, world: World) :
         super.initGoals()
         goalSelector.add(5, FishJumpGoal(this, 10))
     }
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (!isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        return PlayState.STOP
-    }
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
@@ -39,9 +24,9 @@ class MahiMahiEntity(entityType: EntityType<out MahiMahiEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 2.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
-
         }
     }
+
     override fun getMaxSize() : Int {
         return 5
     }

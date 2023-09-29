@@ -21,26 +21,11 @@ class RockfishEntity(entityType: EntityType<out RockfishEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
 
-        if (!isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-
-        if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        return PlayState.STOP
-    }
     override fun getMaxSize() : Int {
         return 5
     }
+
     override fun getMinSize(): Int {
         return -5
     }

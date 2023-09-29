@@ -29,6 +29,10 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
         }
     }
 
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
+
     private var attackCooldown: Int = 0
     private var escapeDirection: Vec3d = Vec3d.ZERO
 
@@ -132,6 +136,7 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
         val maxY = collisionBox.maxY
         return Box(collisionBox.minX, minY, collisionBox.minZ, collisionBox.maxX, maxY, collisionBox.maxZ)
     }
+
     override fun getMaxSize() : Int {
         return 5
     }

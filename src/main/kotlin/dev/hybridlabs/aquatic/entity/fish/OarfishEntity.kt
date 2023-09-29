@@ -26,21 +26,7 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: World) : H
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 100.0)
         }
     }
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (!isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        return PlayState.STOP
-    }
+
     private fun isInDeepWater(): Boolean {
         return world.isDay && isSubmergedInWater && isBlockInDeepWater(blockPos)
     }
@@ -88,6 +74,7 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: World) : H
         val maxY = collisionBox.maxY
         return Box(collisionBox.minX, minY, collisionBox.minZ, collisionBox.maxX, maxY, collisionBox.maxZ)
     }
+
     override fun getMaxSize() : Int {
         return 5
     }

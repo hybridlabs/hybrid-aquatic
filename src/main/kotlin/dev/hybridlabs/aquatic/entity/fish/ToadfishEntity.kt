@@ -27,23 +27,7 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
 
-        if (!isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-
-        if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        return PlayState.STOP
-    }
     override fun damage(source: DamageSource, amount: Float): Boolean {
         return if (world.isClient) {
             false
