@@ -9,13 +9,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
-class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, world: World) : HybridAquaticSchoolingFishEntity(entityType, world) {
+class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, world: World) :
+    HybridAquaticSchoolingFishEntity(entityType, world) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -26,27 +22,15 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
 
         }
     }
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (!isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        return PlayState.STOP
-    }
+
     private fun isInDeepWater(): Boolean {
         return world.isDay && isSubmergedInWater && isBlockInDeepWater(blockPos)
     }
+
     private fun isInShallowWater(): Boolean {
         return world.isNight && isSubmergedInWater && !isBlockInDeepWater(blockPos)
     }
+
     private fun findNearestDeepWater(): BlockPos? {
         val searchRadius = 32
         val searchBox = boundingBox.expand(searchRadius.toDouble(), searchRadius.toDouble(), searchRadius.toDouble())
@@ -56,6 +40,7 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
             .filter { blockPos -> isBlockInDeepWater(blockPos) }
             .minByOrNull { blockPos -> blockPos.getSquaredDistance(x, y, z) }
     }
+
     private fun findNearestSurface(): BlockPos? {
         val searchRadius = 48
         val searchBox = boundingBox.expand(searchRadius.toDouble(), searchRadius.toDouble(), searchRadius.toDouble())
@@ -85,7 +70,8 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
         val maxY = collisionBox.maxY
         return Box(collisionBox.minX, minY, collisionBox.minZ, collisionBox.maxX, maxY, collisionBox.maxZ)
     }
-    override fun getMaxSize() : Int {
+
+    override fun getMaxSize(): Int {
         return 5
     }
 

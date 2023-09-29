@@ -9,13 +9,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
-class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
+class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -25,18 +21,11 @@ class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
 
-        if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        return PlayState.STOP
+    override fun shouldFlopOnLand(): Boolean {
+        return false
     }
+
     private fun isInDeepWater(): Boolean {
         return isSubmergedInWater && isBlockInDeepWater(blockPos)
     }
@@ -44,6 +33,7 @@ class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: World) :
     private fun isInShallowWater(): Boolean {
         return isSubmergedInWater && !isBlockInDeepWater(blockPos)
     }
+
     private fun findNearestDeepWater(): BlockPos? {
         val searchRadius = 32
         val searchBox = boundingBox.expand(searchRadius.toDouble(), searchRadius.toDouble(), searchRadius.toDouble())
@@ -53,6 +43,7 @@ class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: World) :
             .filter { blockPos -> isBlockInDeepWater(blockPos) }
             .minByOrNull { blockPos -> blockPos.getSquaredDistance(x, y, z) }
     }
+
     private fun findNearestSurface(): BlockPos? {
         val searchRadius = 48
         val searchBox = boundingBox.expand(searchRadius.toDouble(), searchRadius.toDouble(), searchRadius.toDouble())
@@ -62,16 +53,19 @@ class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: World) :
             .filter { blockPos -> isBlockAboveWaterSurface(blockPos) }
             .minByOrNull { blockPos -> blockPos.getSquaredDistance(x, y, z) }
     }
+
     private fun isBlockInDeepWater(blockPos: BlockPos): Boolean {
         val waterSurfaceY = world.getTopY(Heightmap.Type.WORLD_SURFACE, blockPos.x, blockPos.z)
         val waterTopY = world.getTopY(Heightmap.Type.OCEAN_FLOOR, blockPos.x, blockPos.z)
         val waterDepth = waterSurfaceY - waterTopY
         return waterDepth >= 22
     }
+
     private fun isBlockAboveWaterSurface(blockPos: BlockPos): Boolean {
         val waterSurfaceY = world.getTopY(Heightmap.Type.WORLD_SURFACE, blockPos.x, blockPos.z)
         return blockPos.y >= waterSurfaceY
     }
+
     private fun getBoundingBoxForWaterCheck(): Box {
         val collisionBox = boundingBox.contract(0.1)
         val yOffset = 0.2
@@ -79,9 +73,11 @@ class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: World) :
         val maxY = collisionBox.maxY
         return Box(collisionBox.minX, minY, collisionBox.minZ, collisionBox.maxX, maxY, collisionBox.maxZ)
     }
-    override fun getMaxSize() : Int {
+
+    override fun getMaxSize(): Int {
         return 5
     }
+
     override fun getMinSize(): Int {
         return -5
     }

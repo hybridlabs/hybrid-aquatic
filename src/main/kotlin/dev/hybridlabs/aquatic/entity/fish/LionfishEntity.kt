@@ -11,13 +11,9 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
-class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
+class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -27,21 +23,11 @@ class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (!isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
-            return PlayState.CONTINUE
-        }
-        return PlayState.STOP
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
     }
+
     override fun damage(source: DamageSource, amount: Float): Boolean {
         return if (world.isClient) {
             false
@@ -55,9 +41,11 @@ class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) :
             super.damage(source, amount)
         }
     }
-    override fun getMaxSize() : Int {
+
+    override fun getMaxSize(): Int {
         return 5
     }
+
     override fun getMinSize(): Int {
         return -5
     }

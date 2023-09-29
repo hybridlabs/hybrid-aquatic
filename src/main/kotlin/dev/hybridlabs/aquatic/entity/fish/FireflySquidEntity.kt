@@ -17,7 +17,8 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
-class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
+class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world) {
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
@@ -27,6 +28,10 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
+    }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
     }
 
     private var attackCooldown: Int = 0
@@ -132,7 +137,8 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
         val maxY = collisionBox.maxY
         return Box(collisionBox.minX, minY, collisionBox.minZ, collisionBox.maxX, maxY, collisionBox.maxZ)
     }
-    override fun getMaxSize() : Int {
+
+    override fun getMaxSize(): Int {
         return 5
     }
 

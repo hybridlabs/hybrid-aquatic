@@ -35,10 +35,12 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis")
 open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterEntity>, world: World, private val variantCount: Int = 1) : WaterCreatureEntity(type, world), GeoEntity {
+
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private val buoyant = false
     private var waterNavigation: SwimNavigation? = null
     private var landNavigation: MobNavigation? = null
+
     init {
         stepHeight = 1.0F
         moveControl = MoveControl(this)
@@ -46,11 +48,13 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         waterNavigation = SwimNavigation(this, world)
         landNavigation = MobNavigation(this, world)
     }
+
     override fun initDataTracker() {
         super.initDataTracker()
         dataTracker.startTracking(VARIANT, 0)
         dataTracker.startTracking(CRITTER_SIZE, 0)
     }
+
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(3, EscapeDangerGoal(this, 0.3))
@@ -59,6 +63,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         goalSelector.add(5, LookAroundGoal(this))
         goalSelector.add(2, MoveIntoWaterGoal(this))
     }
+
     override fun initialize(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
@@ -73,6 +78,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         this.pitch = 0.0f
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
+
     override fun updateSwimming() {
         if (!world.isClient) {
             if (canMoveVoluntarily() && this.isTouchingWater) {
@@ -84,6 +90,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
             }
         }
     }
+
     override fun tick() {
         super.tick()
         if (!buoyant && this.isTouchingWater && !isOnGround) {
@@ -102,6 +109,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         variant = nbt.getInt(HybridAquaticFishEntity.VARIANT_KEY)
         size = nbt.getInt(CRITTER_SIZE_KEY)
     }
+
     override fun tickWaterBreathingAir(air: Int) {}
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
@@ -116,6 +124,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         }
         return PlayState.STOP
     }
+
     protected open fun getMinSize() : Int {
         return 0
     }
@@ -135,6 +144,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
     override fun getLimitPerChunk(): Int {
         return 8
     }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_TURTLE_EGG_CRACK
     }
@@ -158,6 +168,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
     override fun createNavigation(world: World): EntityNavigation {
         return MobNavigation(this, world)
     }
+
     protected fun hasSelfControl(): Boolean {
         return true
     }
@@ -176,14 +187,17 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
     }
+
     override fun canBreatheInWater(): Boolean {
         return true
     }
+
     var variant: Int
         get() = dataTracker.get(VARIANT)
         set(int) {
             dataTracker.set(VARIANT, int)
         }
+
     var size: Int
         get() = dataTracker.get(CRITTER_SIZE)
         set(size) {

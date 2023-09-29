@@ -215,15 +215,12 @@ open class HybridAquaticSharkEntity(
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-
         if (!this.isWet) {
             event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
-        }
-        else if (this.handSwinging) {
+        } else if (this.handSwinging) {
             event.controller.setAnimation(RawAnimation.begin().then("attack", Animation.LoopType.LOOP))
 //            this.attemptAttack = false
-        }
-        else if (isSubmergedInWater) {
+        } else if (isSubmergedInWater) {
             if (!isRushing)
                 event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
             else

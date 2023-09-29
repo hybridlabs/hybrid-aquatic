@@ -9,7 +9,8 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopusEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
+class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopusEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -19,6 +20,11 @@ class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopus
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_GLOW_SQUID_HURT
     }
@@ -38,7 +44,8 @@ class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopus
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SQUID_AMBIENT
     }
-    override fun getMaxSize() : Int {
+
+    override fun getMaxSize(): Int {
         return 5
     }
 

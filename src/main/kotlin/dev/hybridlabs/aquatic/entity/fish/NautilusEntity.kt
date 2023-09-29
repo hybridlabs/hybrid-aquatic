@@ -13,7 +13,8 @@ import net.minecraft.util.math.Box
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
-class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: World) : HybridAquaticFishEntity(entityType, world) {
+class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -23,18 +24,27 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_SHULKER_HURT_CLOSED
     }
+
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.ENTITY_SQUID_DEATH
     }
+
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.ENTITY_SQUID_AMBIENT
     }
+
     override fun getSplashSound(): SoundEvent {
         return SoundEvents.ENTITY_DOLPHIN_SPLASH
     }
+
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SQUID_AMBIENT
     }
@@ -86,7 +96,8 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: World) :
         val maxY = collisionBox.maxY
         return Box(collisionBox.minX, minY, collisionBox.minZ, collisionBox.maxX, maxY, collisionBox.maxZ)
     }
-    override fun getMaxSize() : Int {
+
+    override fun getMaxSize(): Int {
         return 5
     }
 

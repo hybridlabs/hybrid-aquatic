@@ -76,16 +76,6 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
                 moistness = 0
                 damage(this.damageSources.dryOut(), 1.0f)
             }
-            if (isOnGround) {
-                val randomFloat = random.nextFloat()
-                velocity = velocity.add(
-                        ((randomFloat * 2.0f - 1.0f) * 0.2f).toDouble(),
-                        0.2,
-                        ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
-                )
-                yaw = randomFloat * 360.0f
-                velocityDirty = true
-            }
         }
 
         if (this.submergedInWater) {
