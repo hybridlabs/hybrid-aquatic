@@ -28,6 +28,10 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
         }
     }
 
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
+
     private var attackCooldown: Int = 0
     private var escapeDirection: Vec3d = Vec3d.ZERO
     override fun getHurtSound(source: DamageSource): SoundEvent {

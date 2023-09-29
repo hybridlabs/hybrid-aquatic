@@ -23,6 +23,10 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: World) :
         }
     }
 
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
+
     private fun isInDeepWater(): Boolean {
         return world.isDay && isSubmergedInWater && isBlockInDeepWater(blockPos)
     }

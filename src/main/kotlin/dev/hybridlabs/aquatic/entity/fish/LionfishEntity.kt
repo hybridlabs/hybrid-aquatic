@@ -24,6 +24,10 @@ class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) :
         }
     }
 
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
+
     override fun damage(source: DamageSource, amount: Float): Boolean {
         return if (world.isClient) {
             false
