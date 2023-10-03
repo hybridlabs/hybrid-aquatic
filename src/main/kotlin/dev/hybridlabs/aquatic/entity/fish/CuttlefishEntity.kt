@@ -20,11 +20,16 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.25)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
+
     private var attackCooldown: Int = 0
     private var escapeDirection: Vec3d = Vec3d.ZERO
 
@@ -72,6 +77,7 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
 
         return super.damage(source, amount)
     }
+
     override fun getAttacker(): LivingEntity? {
         val target = attackingPlayer
         if (target != null) {
@@ -79,7 +85,8 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
         }
         return null
     }
-    override fun getMaxSize() : Int {
+
+    override fun getMaxSize(): Int {
         return 5
     }
 

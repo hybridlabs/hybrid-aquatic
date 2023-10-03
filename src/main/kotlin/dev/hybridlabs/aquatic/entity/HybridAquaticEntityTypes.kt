@@ -340,43 +340,43 @@ object HybridAquaticEntityTypes {
         MoonJellyfishEntity.createMobAttributes()
     )
 
-    val FRIED_EGG_JELLY = registerJelly(
-        "fried_egg_jelly",
+    val FRIED_EGG_JELLYFISH = registerJelly(
+        "fried_egg_jellyfish",
         ::FriedEggJellyfishEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
         FriedEggJellyfishEntity.createMobAttributes()
     )
 
-    val CAULIFLOWER_JELLY = registerJelly(
-        "cauliflower_jelly",
+    val CAULIFLOWER_JELLYFISH = registerJelly(
+        "cauliflower_jellyfish",
         ::CauliflowerJellyfishEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
         CauliflowerJellyfishEntity.createMobAttributes()
     )
 
-    val NOMURA_JELLY = registerJelly(
-        "nomura_jelly",
+    val NOMURA_JELLYFISH = registerJelly(
+        "nomura_jellyfish",
         ::NomuraJellyfishEntity,
         EntityDimensions.fixed(1.25f, 2.0f),
         NomuraJellyfishEntity.createMobAttributes()
     )
 
-    val BARREL_JELLY = registerJelly(
-        "barrel_jelly",
+    val BARREL_JELLYFISH = registerJelly(
+        "barrel_jellyfish",
         ::BarrelJellyfishEntity,
         EntityDimensions.fixed(0.75f, 1.25f),
         BarrelJellyfishEntity.createMobAttributes()
     )
 
-    val COMPASS_JELLY = registerJelly(
-        "compass_jelly",
+    val COMPASS_JELLYFISH = registerJelly(
+        "compass_jellyfish",
         ::CompassJellyfishEntity,
         EntityDimensions.fixed(0.5f, 1.0f),
         CompassJellyfishEntity.createMobAttributes()
     )
 
-    val BLUE_JELLY = registerJelly(
-        "blue_jelly",
+    val BLUE_JELLYFISH = registerJelly(
+        "blue_jellyfish",
         ::BlueJellyfishEntity,
         EntityDimensions.fixed(0.5f, 1.0f),
         BlueJellyfishEntity.createMobAttributes()
@@ -390,14 +390,14 @@ object HybridAquaticEntityTypes {
     )
 
     val LIONS_MANE_JELLYFISH = registerJelly(
-        "lions_mane",
+        "lions_mane_jellyfish",
         ::LionsManeJellyfishEntity,
         EntityDimensions.fixed(2.0f, 2.5f),
         LionsManeJellyfishEntity.createMobAttributes()
     )
 
     val ATOLLA_JELLYFISH = registerJelly(
-        "atolla_jelly",
+        "atolla_jellyfish",
         ::AtollaJellyfishEntity,
         EntityDimensions.fixed(0.75f, 0.75f),
         AtollaJellyfishEntity.createMobAttributes()

@@ -12,16 +12,18 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.registry.tag.DamageTypeTags
 import net.minecraft.world.World
 
-class BlueSpottedStingrayEntity(entityType: EntityType<out BlueSpottedStingrayEntity>, world: World) : HybridAquaticFishEntity(entityType, world, 8) {
+class BlueSpottedStingrayEntity(entityType: EntityType<out BlueSpottedStingrayEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world, 8) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.25)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
+
     override fun damage(source: DamageSource, amount: Float): Boolean {
         return if (world.isClient) {
             false
@@ -35,7 +37,8 @@ class BlueSpottedStingrayEntity(entityType: EntityType<out BlueSpottedStingrayEn
             super.damage(source, amount)
         }
     }
-    override fun getMaxSize() : Int {
+
+    override fun getMaxSize(): Int {
         return 5
     }
 

@@ -23,6 +23,7 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
@@ -38,12 +39,16 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import kotlin.math.sqrt
 
 @Suppress("LeakingThis")
-open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: World, private val variantCount: Int = 1) : WaterCreatureEntity(type, world), GeoEntity {
+open class HybridAquaticFishEntity(
+    type: EntityType<out HybridAquaticFishEntity>,
+    world: World,
+    private val variantCount: Int = 1
+) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun initGoals() {
         super.initGoals()
-        goalSelector.add(8, EscapeDangerGoal(this, 2.1))
+        goalSelector.add(1, EscapeDangerGoal(this, 1.1))
         goalSelector.add(0, MoveIntoWaterGoal(this))
         goalSelector.add(2, SwimAroundGoal(this, 0.50, 6))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 12.0f))
@@ -85,16 +90,6 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             if (moistness <= -20) {
                 moistness = 0
                 damage(this.damageSources.dryOut(), 1.0f)
-            }
-            if (isOnGround) {
-                val randomFloat = random.nextFloat()
-                velocity = velocity.add(
-                    ((randomFloat * 2.0f - 1.0f) * 0.2f).toDouble(),
-                    0.2,
-                    ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
-                )
-                yaw = randomFloat * 360.0f
-                velocityDirty = true
             }
         }
 
@@ -139,6 +134,10 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         nbt.putInt(FISH_SIZE_KEY, size)
     }
 
+    open fun shouldFlopOnLand(): Boolean {
+        return true
+    }
+
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
@@ -151,7 +150,7 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
             event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
-        if (!isSubmergedInWater) {
+        if (!isSubmergedInWater && shouldFlopOnLand()) {
             event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
             return PlayState.CONTINUE
         }
@@ -161,23 +160,21 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         }
         return PlayState.STOP
     }
+
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.65f
     }
-
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
         return !hasCustomName()
     }
-
     override fun getLimitPerChunk(): Int {
-        return 8
+        return 6
     }
-
     open val flopSound: SoundEvent = SoundEvents.ENTITY_PUFFER_FISH_FLOP
-
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_COD_HURT
     }
+
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.ENTITY_COD_DEATH
     }
@@ -185,12 +182,15 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.ENTITY_SALMON_AMBIENT
     }
+
     override fun getSplashSound(): SoundEvent {
         return SoundEvents.ENTITY_DOLPHIN_SPLASH
     }
+
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_DOLPHIN_SWIM
     }
+
     override fun createNavigation(world: World): EntityNavigation {
         return SwimNavigation(this, world)
     }
@@ -224,11 +224,11 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
         return true
     }
 
-    protected open fun getMinSize() : Int {
+    protected open fun getMinSize(): Int {
         return 0
     }
 
-    protected open fun getMaxSize() : Int {
+    protected open fun getMaxSize(): Int {
         return 0
     }
 
@@ -253,16 +253,23 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     }
 
     override fun tickMovement() {
-        if (!this.isTouchingWater && this.isOnGround && verticalCollision) {
-            velocity = velocity.add(
-                ((random.nextFloat() * 2.0f - 1.0f) * 0.05f).toDouble(),
-                0.4000000059604645,
-                ((random.nextFloat() * 2.0f - 1.0f) * 0.05f).toDouble()
+        // Proper flop on land
+        if (!this.isTouchingWater && this.isOnGround && verticalCollision && shouldFlopOnLand()) {
+            val randomFloat = random.nextFloat()
+            addVelocity(
+                ((randomFloat * 2.0f - 1.0f) * 0.2f).toDouble(),
+                0.4,
+                ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
             )
+            yaw = randomFloat * 360.0f
             velocityDirty = true
             playSound(flopSound, this.soundVolume, this.soundPitch)
         }
         super.tickMovement()
+    }
+
+    open fun speedModifier(): Double {
+        return 0.0
     }
 
     internal class FishMoveControl(private val fish: HybridAquaticFishEntity) : MoveControl(fish) {
@@ -271,19 +278,19 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
                 fish.velocity = fish.velocity.add(0.0, 0.005, 0.0)
             }
             if (state == State.MOVE_TO && !fish.getNavigation().isIdle) {
-                val f = (speed * fish.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED)).toFloat()
-                fish.movementSpeed = MathHelper.lerp(0.125f, fish.movementSpeed, f)
-                val d = targetX - fish.x
-                val e = targetY - fish.y
-                val g = targetZ - fish.z
-                if (e != 0.0) {
-                    val h = sqrt(d * d + e * e + g * g)
-                    fish.velocity = fish.velocity.add(0.0, fish.movementSpeed.toDouble() * (e / h) * 0.1, 0.0)
+                val speed = (speed * fish.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED)).toFloat()
+                fish.movementSpeed = MathHelper.lerp(0.125f, fish.movementSpeed, speed)
+                val velocity = Vec3d(targetX, targetY, targetZ).subtract(fish.pos)
+
+                if (velocity.y != 0.0) {
+                    val h = sqrt(velocity.x * velocity.x + velocity.y * velocity.y + velocity.z * velocity.z)
+                    fish.addVelocity(0.0, fish.movementSpeed.toDouble() * (velocity.y / h) * 0.1, 0.0)
                 }
-                if (d != 0.0 || g != 0.0) {
-                    val i = (MathHelper.atan2(g, d) * 57.2957763671875).toFloat() - 90.0f
+                if (velocity.x != 0.0 || velocity.z != 0.0) {
+                    val i = (MathHelper.atan2(velocity.z, velocity.x) * 57.2957763671875).toFloat() - 90.0f
                     fish.yaw = wrapDegrees(fish.yaw, i, 90.0f)
                     fish.bodyYaw = fish.yaw
+                    fish.addVelocity(velocity.x * fish.speedModifier(), 0.0, velocity.z * fish.speedModifier())
                 }
             } else {
                 fish.movementSpeed = 0.0f
@@ -299,10 +306,14 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
     }
 
     companion object {
-        val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val FISH_SIZE: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
+        val MOISTNESS: TrackedData<Int> =
+            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val VARIANT: TrackedData<Int> =
+            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val FISH_SIZE: TrackedData<Int> =
+            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val CLOSE_PLAYER_PREDICATE: TargetPredicate =
+            TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,
@@ -331,9 +342,10 @@ open class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>
                     world.getBlockState(pos).isOf(Blocks.WATER)
         }
 
-        fun getScaleAdjustment(fish : HybridAquaticFishEntity, adjustment : Float): Float {
+        fun getScaleAdjustment(fish: HybridAquaticFishEntity, adjustment: Float): Float {
             return 1.0f + (fish.size * adjustment)
         }
+
         const val MOISTNESS_KEY = "Moistness"
         const val VARIANT_KEY = "Variant"
         const val FISH_SIZE_KEY = "FishSize"

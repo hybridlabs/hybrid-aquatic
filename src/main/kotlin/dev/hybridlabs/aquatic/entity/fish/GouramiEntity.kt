@@ -11,16 +11,18 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 
-class GouramiEntity(entityType: EntityType<out GouramiEntity>, world: World) : HybridAquaticFishEntity(entityType, world, 4) {
+class GouramiEntity(entityType: EntityType<out GouramiEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world, 4) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.2)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }
     }
+
     override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
         if (isSubmergedInWater) {
             event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
@@ -36,7 +38,8 @@ class GouramiEntity(entityType: EntityType<out GouramiEntity>, world: World) : H
         }
         return PlayState.STOP
     }
-    override fun getMaxSize() : Int {
+
+    override fun getMaxSize(): Int {
         return 5
     }
 

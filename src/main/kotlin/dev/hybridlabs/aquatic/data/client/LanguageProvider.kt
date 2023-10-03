@@ -2,12 +2,15 @@ package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
+import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.mob.MobEntity
 import net.minecraft.registry.Registries
 
 class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
@@ -25,18 +28,107 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         // sea messages
         mapOf(
             "the_creepers_code" to "\"The creepers have a code...\"",
-            "parrot_poison" to "\"Flint tried feeding parrots cookies earlier! They did not take. He coulda sworn they used to bite!\"\n*Steele",
-            "lava_bathing" to "\"Steele went off and bathed in lava with my beautiful diamonds! That fiend! Least I've the time to myself to WRITE THIS COMPLAINT. STEELE.... STEALER! THIEF!\"\n@Flint",
-            "fish_school" to "\"My underwater house flooded! Now it's just a school for fishies!\"\n~Oak",
-            "loser" to "\"You opened the bottle!\nYou lose!\nVictim list - You!\"\n~Oak",
-            "fart_bottle" to "\"Fart in a bottle! Gotcha!\nYou lose!\"\n@Flint",
-            "tricked" to "\"I win! you fell for the classic ol' Message in a Bottle trick! I 'steele' the throne!\"\n*Steele",
-            "marooned" to "\"marooned! beneath the night of a full moon (too)!\n(through the waves) which sound suggestions of lulling lays a gurgling\nit beckons me to take the plunge and swim (with him)\n(I) lay back down. tomorrow always comes.\n#Fischer #GlubGlub\"",
-            "pumpkin_carving" to "\"Carve out a pumpkin and rely on your destiny!\"\n~Dean \"Ween\"",
-        ).forEach { (id, translation) -> builder.add(SeaMessage(id).translationKey, translation) }
+            "poyo" to "\"I hate litterbugs.\"\n~Poyo",
+            "rick_roll" to "\"Never gonna give you up!\nNever gonna let you down!\nNever gonna run around and desert you!\n-Rick Astley",
+            "bold_muddy" to "\"AW MAN I DROWNED!\"\n~Bold Muddy",
+            "adventure" to "\"To the brave explorer who discovers this bottle, know that adventure awaits around every corner!\"",
+            "dream" to "\"Dear reader,\nyour presence is proof that hope can survive the waves.\nKeep dreaming.\"",
+            "fortune" to "\"In this bottle lies a wish for fortune and prosperity to find its way to you.\"",
+            "sunshine" to "\"In this bottle, I send you rays of sunshine and a gentle breeze to brighten your day.\"",
+            "distant" to "\"Greetings from a distant land!\nI hope this message finds you well.\"",
+            "depths" to "\"Within the depths of this world, secrets lie buried.\nUnearth them, and unlock the secrets of a forgotten civilization\"",
+            "clownfish" to "\"Clownfish and sea anemones share a unique bond.\nThe clownfish finds protection within the anemone's tentacles, while providing it with food.\nWitness this symbiotic relationship up close.\"",
+            "vampire_squid" to "\"The elusive vampire squid, despite its name, does not suck blood.\nIt actually uses bioluminescent displays and webbed arms to navigate and catch prey in the deep sea.\nMarvel at this mysterious creature as you explore the depths.\"",
+            "turtle" to "\"Explore the depths and encounter the mesmerizing sea turtles!\nThese gentle creatures can navigate thousands of miles to return to their birthplace.\nWitness the miracle of their journey and marvel at their determination.\"",
+            "anglerfish" to "\"The anglerfish lures its prey with a bioluminescent appendage, dangling in the dark depths.\nVenture into the unknown and learn about the fascinating adaptations of deep-sea creatures.\"",
+            "corals" to "\"The vibrant colors of coral reefs are due to a symbiotic relationship between coral polyps and algae.\nDive into this underwater paradise and discover the intricate web of life thriving within.\"",
+            "polar_bear" to "\"Journey to the Arctic and witness the resilience of polar bears!\nThese magnificent creatures are perfectly adapted to survive in one of the harshest environments on Earth.\nLearn about their unique adaptations and the challenges they face in a changing climate\"",
+            "sea_cucumber" to "\"Sea cucumbers play a vital role in maintaining the health of the reef ecosystem.\nThese fascinating creatures help recycle nutrients and keep the reef clean by consuming decaying matter.\"",
+            "seahorse" to "\"Did you know that seahorses are one of the few species where the males give birth to their young?\nWitness this unique phenomenon as they release their tiny offspring into the sea.\"",
 
-        // entities and spawn eggs
+            ).forEach { (id, translation) -> builder.add(SeaMessage(id).translationKey, translation) }
+
+        // entities
+        generateEntities(builder)
+
+        // blocks
         mapOf(
+            HybridAquaticBlocks.BASKING_SHARK_PLUSHIE to "Basking Shark Plushie",
+            HybridAquaticBlocks.BULL_SHARK_PLUSHIE to "Bull Shark Plushie",
+            HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE to "Frilled Shark Plushie",
+            HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE to "Great White Shark Plushie",
+            HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE to "Hammerhead Shark Plushie",
+            HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE to "Thresher Shark Plushie",
+            HybridAquaticBlocks.TIGER_SHARK_PLUSHIE to "Tiger Shark Plushie",
+            HybridAquaticBlocks.WHALE_SHARK_PLUSHIE to "Whale Shark Plushie",
+            HybridAquaticBlocks.ANEMONE to "Anemone",
+            HybridAquaticBlocks.CRATE to "Crate",
+        ).forEach { (block, translation) ->
+            builder.add(block, translation)
+        }
+
+        // items
+        mapOf(
+            HybridAquaticItems.FISH_MEAT to "Fish Meat",
+            HybridAquaticItems.COOKED_FISH_MEAT to "Cooked Fish Meat",
+            HybridAquaticItems.SMALL_FISH_MEAT to "Small Fish Meat",
+            HybridAquaticItems.COOKED_SMALL_FISH_MEAT to "Cooked Small Fish Meat",
+            HybridAquaticItems.TENTACLE to "Raw Tentacle",
+            HybridAquaticItems.COOKED_TENTACLE to "Cooked Tentacle",
+            HybridAquaticItems.CRAB_MEAT to "Raw Crab Meat",
+            HybridAquaticItems.COOKED_CRAB_MEAT to "Cooked Crab Meat",
+            HybridAquaticItems.LIONFISH to "Lionfish",
+            HybridAquaticItems.MAHI_MAHI to "Mahi Mahi",
+            HybridAquaticItems.YELLOWFIN_TUNA to "Yellowfin Tuna",
+            HybridAquaticItems.OPAH to "Opah",
+            HybridAquaticItems.ROCKFISH to "Rockfish",
+            HybridAquaticItems.BLUE_SPOTTED_STINGRAY to "Blue Spotted Stingray",
+            HybridAquaticItems.MORAY_EEL to "Moray Eel",
+            HybridAquaticItems.NEEDLEFISH to "Needlefish",
+            HybridAquaticItems.PIRANHA to "Piranha",
+            HybridAquaticItems.ANGLERFISH to "Anglerfish",
+            HybridAquaticItems.BARRELEYE to "Barreleye",
+            HybridAquaticItems.BLUE_TANG to "Blue Tang",
+            HybridAquaticItems.CLOWNFISH to "Clownfish",
+            HybridAquaticItems.UNICORN_FISH to "Unicorn Fish",
+            HybridAquaticItems.TIGER_BARB to "Tiger Barb",
+            HybridAquaticItems.OSCAR to "Oscar",
+            HybridAquaticItems.TRIGGERFISH to "Triggerfish",
+            HybridAquaticItems.COWFISH to "Cowfish",
+            HybridAquaticItems.CRAB_CLAW to "Crab Claw",
+            HybridAquaticItems.GLOW_SLIME to "Glow Slime",
+            HybridAquaticItems.SHARK_TOOTH to "Shark Tooth",
+            HybridAquaticItems.PEARL to "Pearl",
+            HybridAquaticItems.BLACK_PEARL to "Black Pearl",
+            HybridAquaticItems.BARBED_HOOK to "Barbed Hook",
+            HybridAquaticItems.GLOWING_HOOK to "Glowing Hook",
+            HybridAquaticItems.MAGNETIC_HOOK to "Magnetic Hook",
+        ).forEach { (item, translation) ->
+            builder.add(item, translation)
+        }
+
+        // Item descriptions
+        mapOf(
+            "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
+            HybridAquaticItems.BARBED_HOOK.translationKey to "Increases fishing speed during the day",
+            HybridAquaticItems.GLOWING_HOOK.translationKey to "Increases fishing speed at night",
+            HybridAquaticItems.MAGNETIC_HOOK.translationKey to "Increases treasure chance",
+            HybridAquaticBlocks.CRATE.translationKey to "Break with an axe to open",
+        ).forEach { (itemTranslationKey, translation) ->
+            builder.add(itemTranslationKey.plus(".description"), translation)
+        }
+
+        // enchantments
+        mapOf(
+            HybridAquaticEnchantments.LIVECATCH to "Live Catch",
+        ).forEach { (enchantment, translation) ->
+            builder.add(enchantment, translation)
+        }
+    }
+
+    private fun generateEntities(builder: TranslationBuilder) {
+        // create map of entities to their display names
+        val entityNameMap = mapOf(
             HybridAquaticEntityTypes.CLOWNFISH to "Clownfish",
             HybridAquaticEntityTypes.ANGLERFISH to "Anglerfish",
             HybridAquaticEntityTypes.DRAGONFISH to "Dragonfish",
@@ -92,90 +184,42 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.GIANT_CLAM to "Giant Clam",
             HybridAquaticEntityTypes.STARFISH to "Starfish",
             HybridAquaticEntityTypes.SEA_NETTLE to "Sea Nettle",
-            HybridAquaticEntityTypes.FRIED_EGG_JELLY to "Fried Egg Jellyfish",
-            HybridAquaticEntityTypes.CAULIFLOWER_JELLY to "Cauliflower Jellyfish",
-            HybridAquaticEntityTypes.NOMURA_JELLY to "Nomura Jellyfish",
-            HybridAquaticEntityTypes.BARREL_JELLY to "Barrel Jellyfish",
-            HybridAquaticEntityTypes.COMPASS_JELLY to "Compass Jellyfish",
+            HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH to "Fried Egg Jellyfish",
+            HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH to "Cauliflower Jellyfish",
+            HybridAquaticEntityTypes.NOMURA_JELLYFISH to "Nomura Jellyfish",
+            HybridAquaticEntityTypes.BARREL_JELLYFISH to "Barrel Jellyfish",
+            HybridAquaticEntityTypes.COMPASS_JELLYFISH to "Compass Jellyfish",
             HybridAquaticEntityTypes.MAUVE_STINGER to "Mauve Stinger",
-            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH to "Lions Mane Jellyfish",
-        ).forEach { (entityType, translation) ->
+            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH to "Lion's Mane Jellyfish",
+            HybridAquaticEntityTypes.ATOLLA_JELLYFISH to "Atolla Jellyfish",
+            HybridAquaticEntityTypes.BLUE_JELLYFISH to "Blue Jellyfish",
+        )
+
+        // verify display name list is valid
+        val nonPresentEntityNames = mutableListOf<EntityType<*>>()
+
+        Registries.ENTITY_TYPE
+            .filter(filterHybridAquatic(Registries.ENTITY_TYPE))
+            .forEach { type ->
+                if (type.baseClass.isAssignableFrom(MobEntity::class.java)) {
+                    if (!entityNameMap.containsKey(type)) {
+                        nonPresentEntityNames.add(type)
+                    }
+                }
+            }
+
+        if (nonPresentEntityNames.isNotEmpty()) {
+            throw throw IllegalStateException("Entity to display name map does not contain ${nonPresentEntityNames.joinToString()}. Please modify ${javaClass.simpleName} accordingly.")
+        }
+
+        // generate entity and entity spawn egg translations
+        entityNameMap.forEach { (entityType, translation) ->
             val id = Registries.ENTITY_TYPE.getId(entityType)
             val translationKey = entityType.translationKey
             val namespace = id.namespace
             val path = id.path
             builder.add(translationKey, translation)
             builder.add("item.$namespace.${path}_spawn_egg", "$translation Spawn Egg")
-        }
-
-        // blocks
-        mapOf(
-            HybridAquaticBlocks.BASKING_SHARK_PLUSHIE to "Basking Shark Plushie",
-            HybridAquaticBlocks.BULL_SHARK_PLUSHIE to "Bull Shark Plushie",
-            HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE to "Frilled Shark Plushie",
-            HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE to "Great White Shark Plushie",
-            HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE to "Hammerhead Shark Plushie",
-            HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE to "Thresher Shark Plushie",
-            HybridAquaticBlocks.TIGER_SHARK_PLUSHIE to "Tiger Shark Plushie",
-            HybridAquaticBlocks.WHALE_SHARK_PLUSHIE to "Whale Shark Plushie",
-            HybridAquaticBlocks.ANEMONE to "Anemone",
-            HybridAquaticBlocks.CRATE to "Crate",
-        ).forEach { (block, translation) ->
-            builder.add(block, translation)
-        }
-
-        // items
-        mapOf(
-            HybridAquaticItems.FISH_MEAT to "Fish Meat",
-            HybridAquaticItems.COOKED_FISH_MEAT to "Cooked Fish Meat",
-            HybridAquaticItems.SMALL_FISH_MEAT to "Small Fish Meat",
-            HybridAquaticItems.COOKED_SMALL_FISH_MEAT to "Cooked Small Fish Meat",
-            HybridAquaticItems.TENTACLE to "Raw Tentacle",
-            HybridAquaticItems.COOKED_TENTACLE to "Cooked Tentacle",
-            HybridAquaticItems.CRAB_MEAT to "Raw Crab Meat",
-            HybridAquaticItems.COOKED_CRAB_MEAT to "Cooked Crab Meat",
-            HybridAquaticItems.LIONFISH to "Lionfish",
-            HybridAquaticItems.MAHI_MAHI to "Mahi Mahi",
-            HybridAquaticItems.YELLOWFIN_TUNA to "Yellowfin Tuna",
-            HybridAquaticItems.OPAH to "Opah",
-            HybridAquaticItems.ROCKFISH to "Rockfish",
-            HybridAquaticItems.BLUE_SPOTTED_STINGRAY to "Blue Spotted Stingray",
-            HybridAquaticItems.MORAY_EEL to "Moray Eel",
-            HybridAquaticItems.NEEDLEFISH to "Needlefish",
-            HybridAquaticItems.PIRANHA to "Piranha",
-            HybridAquaticItems.ANGLERFISH to "Anglerfish",
-            HybridAquaticItems.BARRELEYE to "Barreleye",
-            HybridAquaticItems.BLUE_TANG to "Blue Tang",
-            HybridAquaticItems.CLOWNFISH to "Clownfish",
-            HybridAquaticItems.UNICORN_FISH to "Unicorn Fish",
-            HybridAquaticItems.CRAB_CLAW to "Crab Claw",
-            HybridAquaticItems.GLOW_SLIME to "Glow Slime",
-            HybridAquaticItems.SHARK_TOOTH to "Shark Tooth",
-            HybridAquaticItems.PEARL to "Pearl",
-            HybridAquaticItems.BLACK_PEARL to "Black Pearl",
-            HybridAquaticItems.BARBED_HOOK to "Barbed Hook",
-            HybridAquaticItems.GLOWING_HOOK to "Glowing Hook",
-            HybridAquaticItems.MAGNETIC_HOOK to "Magnetic Hook",
-        ).forEach { (item, translation) ->
-            builder.add(item, translation)
-        }
-
-        // Item descriptions
-        mapOf(
-            "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
-            HybridAquaticItems.BARBED_HOOK.translationKey to "Increases fishing speed during the day",
-            HybridAquaticItems.GLOWING_HOOK.translationKey to "Increases fishing speed at night",
-            HybridAquaticItems.MAGNETIC_HOOK.translationKey to "Increases treasure chance",
-            HybridAquaticBlocks.CRATE.translationKey to "Break with an axe to open",
-        ).forEach { (itemTranslationKey, translation) ->
-            builder.add(itemTranslationKey.plus(".description"), translation)
-        }
-
-        // enchantments
-        mapOf(
-            HybridAquaticEnchantments.LIVECATCH to "Live Catch",
-        ).forEach { (enchantment, translation) ->
-            builder.add(enchantment, translation)
         }
     }
 }

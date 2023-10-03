@@ -37,7 +37,7 @@ class PlacedFeatureProvider(output: FabricDataOutput, registriesFuture: Completa
                 listOf(
                     SquarePlacementModifier.of(),
                     PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
-                    RarityFilterPlacementModifier.of(10),
+                    RarityFilterPlacementModifier.of(150),
                     BiomePlacementModifier.of()
                 )
             )

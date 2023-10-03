@@ -9,12 +9,14 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.loot_table.LootTableModifications
+import dev.hybridlabs.aquatic.loot.LootTableModifications
+import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.world.EntityBiomeModifications
 import dev.hybridlabs.aquatic.world.gen.feature.FeatureBiomeModifications
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
@@ -43,8 +45,11 @@ object HybridAquatic : ModInitializer {
 
         HybridAquaticEnchantments
 
+        HybridAquaticFeatures
+
         HybridAquaticNetworking
 
+        HybridAquaticLootPoolEntryTypes
         LootTableModifications
 
         FeatureBiomeModifications

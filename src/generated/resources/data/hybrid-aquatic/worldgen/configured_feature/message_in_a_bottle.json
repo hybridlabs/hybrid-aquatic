@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:simple_block",
+  "type": "hybrid-aquatic:message_in_a_bottle",
   "config": {
     "to_place": {
       "type": "minecraft:simple_state_provider",
       "state": {
         "Name": "hybrid-aquatic:message_in_a_bottle",
         "Properties": {
-          "waterlogged": "true"
+          "waterlogged": "false"
         }
       }
     }

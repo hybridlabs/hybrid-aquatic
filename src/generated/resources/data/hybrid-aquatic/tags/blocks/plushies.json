@@ -1,13 +1,14 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:basking_shark_blahaj_plushie",
-    "hybrid-aquatic:bull_shark_blahaj_plushie",
-    "hybrid-aquatic:frilled_shark_blahaj_plushie",
-    "hybrid-aquatic:great_white_shark_blahaj_plushie",
-    "hybrid-aquatic:hammerhead_shark_blahaj_plushie",
-    "hybrid-aquatic:thresher_shark_blahaj_plushie",
-    "hybrid-aquatic:tiger_shark_blahaj_plushie",
-    "hybrid-aquatic:whale_shark_blahaj_plushie"
+    "hybrid-aquatic:basking_shark_plushie",
+    "hybrid-aquatic:bull_shark_plushie",
+    "hybrid-aquatic:frilled_shark_plushie",
+    "hybrid-aquatic:great_white_shark_plushie",
+    "hybrid-aquatic:hammerhead_shark_plushie",
+    "hybrid-aquatic:thresher_shark_plushie",
+    "hybrid-aquatic:tiger_shark_plushie",
+    "hybrid-aquatic:whale_shark_plushie",
+    "hybrid-aquatic:crab_plushie"
   ]
 }
