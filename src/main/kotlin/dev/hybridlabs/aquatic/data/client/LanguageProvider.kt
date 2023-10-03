@@ -28,15 +28,25 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         // sea messages
         mapOf(
             "the_creepers_code" to "\"The creepers have a code...\"",
-            "parrot_poison" to "\"Flint tried feeding parrots cookies earlier! They did not take. He coulda sworn they used to bite!\"\n*Steele",
-            "lava_bathing" to "\"Steele went off and bathed in lava with my beautiful diamonds! That fiend! Least I've the time to myself to WRITE THIS COMPLAINT. STEELE.... STEALER! THIEF!\"\n@Flint",
-            "fish_school" to "\"My underwater house flooded! Now it's just a school for fishies!\"\n~Oak",
-            "loser" to "\"You opened the bottle!\nYou lose!\nVictim list - You!\"\n~Oak",
-            "fart_bottle" to "\"Fart in a bottle! Gotcha!\nYou lose!\"\n@Flint",
-            "tricked" to "\"I win! you fell for the classic ol' Message in a Bottle trick! I 'steele' the throne!\"\n*Steele",
-            "marooned" to "\"marooned! beneath the night of a full moon (too)!\n(through the waves) which sound suggestions of lulling lays a gurgling\nit beckons me to take the plunge and swim (with him)\n(I) lay back down. tomorrow always comes.\n#Fischer #GlubGlub\"",
-            "pumpkin_carving" to "\"Carve out a pumpkin and rely on your destiny!\"\n~Dean \"Ween\"",
-        ).forEach { (id, translation) -> builder.add(SeaMessage(id).translationKey, translation) }
+            "poyo" to "\"I hate litterbugs.\"\n~Poyo",
+            "rick_roll" to "\"Never gonna give you up!\nNever gonna let you down!\nNever gonna run around and desert you!\n-Rick Astley",
+            "bold_muddy" to "\"AW MAN I DROWNED!\"\n~Bold Muddy",
+            "adventure" to "\"To the brave explorer who discovers this bottle, know that adventure awaits around every corner!\"",
+            "dream" to "\"Dear reader,\nyour presence is proof that hope can survive the waves.\nKeep dreaming.\"",
+            "fortune" to "\"In this bottle lies a wish for fortune and prosperity to find its way to you.\"",
+            "sunshine" to "\"In this bottle, I send you rays of sunshine and a gentle breeze to brighten your day.\"",
+            "distant" to "\"Greetings from a distant land!\nI hope this message finds you well.\"",
+            "depths" to "\"Within the depths of this world, secrets lie buried.\nUnearth them, and unlock the secrets of a forgotten civilization\"",
+            "clownfish" to "\"Clownfish and sea anemones share a unique bond.\nThe clownfish finds protection within the anemone's tentacles, while providing it with food.\nWitness this symbiotic relationship up close.\"",
+            "vampire_squid" to "\"The elusive vampire squid, despite its name, does not suck blood.\nIt actually uses bioluminescent displays and webbed arms to navigate and catch prey in the deep sea.\nMarvel at this mysterious creature as you explore the depths.\"",
+            "turtle" to "\"Explore the depths and encounter the mesmerizing sea turtles!\nThese gentle creatures can navigate thousands of miles to return to their birthplace.\nWitness the miracle of their journey and marvel at their determination.\"",
+            "anglerfish" to "\"The anglerfish lures its prey with a bioluminescent appendage, dangling in the dark depths.\nVenture into the unknown and learn about the fascinating adaptations of deep-sea creatures.\"",
+            "corals" to "\"The vibrant colors of coral reefs are due to a symbiotic relationship between coral polyps and algae.\nDive into this underwater paradise and discover the intricate web of life thriving within.\"",
+            "polar_bear" to "\"Journey to the Arctic and witness the resilience of polar bears!\nThese magnificent creatures are perfectly adapted to survive in one of the harshest environments on Earth.\nLearn about their unique adaptations and the challenges they face in a changing climate\"",
+            "sea_cucumber" to "\"Sea cucumbers play a vital role in maintaining the health of the reef ecosystem.\nThese fascinating creatures help recycle nutrients and keep the reef clean by consuming decaying matter.\"",
+            "seahorse" to "\"Did you know that seahorses are one of the few species where the males give birth to their young?\nWitness this unique phenomenon as they release their tiny offspring into the sea.\"",
+
+            ).forEach { (id, translation) -> builder.add(SeaMessage(id).translationKey, translation) }
 
         // entities
         generateEntities(builder)

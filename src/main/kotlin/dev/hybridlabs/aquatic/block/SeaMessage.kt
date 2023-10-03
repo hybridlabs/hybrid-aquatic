@@ -59,14 +59,23 @@ data class SeaMessage(
          */
         val BUILT_IN = listOf(
             "the_creepers_code",
-            "parrot_poison",
-            "lava_bathing",
-            "fish_school",
-            "loser",
-            "fart_bottle",
-            "tricked",
-            "marooned",
-            "pumpkin_carving",
+            "poyo",
+            "rick_roll",
+            "bold_muddy",
+            "distant",
+            "dream",
+            "adventure",
+            "fortune",
+            "sunshine",
+            "anglerfish",
+            "corals",
+            "vampire_squid",
+            "clownfish",
+            "turtle",
+            "depths",
+            "sea_cucumber",
+            "polar_bear",
+            "seahorse",
         )
     }
 }

@@ -16,7 +16,7 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: World) :
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 18.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.5)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 100.0)
@@ -61,12 +61,10 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: World) :
         val waterDepth = waterSurfaceY - waterTopY
         return waterDepth >= 22
     }
-
     private fun isBlockAboveWaterSurface(blockPos: BlockPos): Boolean {
         val waterSurfaceY = world.getTopY(Heightmap.Type.WORLD_SURFACE, blockPos.x, blockPos.z)
         return blockPos.y >= waterSurfaceY
     }
-
     private fun getBoundingBoxForWaterCheck(): Box {
         val collisionBox = boundingBox.contract(0.1)
         val yOffset = 0.2
@@ -74,11 +72,9 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: World) :
         val maxY = collisionBox.maxY
         return Box(collisionBox.minX, minY, collisionBox.minZ, collisionBox.maxX, maxY, collisionBox.maxZ)
     }
-
     override fun getMaxSize(): Int {
         return 5
     }
-
     override fun getMinSize(): Int {
         return -5
     }

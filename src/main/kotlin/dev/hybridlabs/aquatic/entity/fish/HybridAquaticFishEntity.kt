@@ -48,7 +48,7 @@ open class HybridAquaticFishEntity(
 
     override fun initGoals() {
         super.initGoals()
-        goalSelector.add(8, EscapeDangerGoal(this, 2.1))
+        goalSelector.add(1, EscapeDangerGoal(this, 1.1))
         goalSelector.add(0, MoveIntoWaterGoal(this))
         goalSelector.add(2, SwimAroundGoal(this, 0.50, 6))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 12.0f))
@@ -164,17 +164,13 @@ open class HybridAquaticFishEntity(
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.65f
     }
-
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
         return !hasCustomName()
     }
-
     override fun getLimitPerChunk(): Int {
-        return 8
+        return 6
     }
-
     open val flopSound: SoundEvent = SoundEvents.ENTITY_PUFFER_FISH_FLOP
-
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_COD_HURT
     }
