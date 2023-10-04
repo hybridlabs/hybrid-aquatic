@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.client.item.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.item.MessageInABottleTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
@@ -35,6 +36,7 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerTooltips() {
         ItemTooltipCallback.EVENT.register(MessageInABottleTooltip())
+        ItemTooltipCallback.EVENT.register(FishingNetTooltip())
     }
 
     private fun registerBlockRenderLayers(registry: BlockRenderLayerMap = BlockRenderLayerMap.INSTANCE) {

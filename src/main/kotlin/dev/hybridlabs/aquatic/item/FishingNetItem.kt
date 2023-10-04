@@ -6,6 +6,7 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.fabricmc.fabric.impl.event.interaction.InteractionEventsRouter
 import net.minecraft.block.Block
 import net.minecraft.client.item.TooltipContext
+import net.minecraft.client.item.TooltipData
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -17,6 +18,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.world.World
+import java.util.*
 import kotlin.jvm.optionals.getOrDefault
 import kotlin.jvm.optionals.getOrNull
 
@@ -74,6 +76,10 @@ class FishingNetItem(settings: Settings?) : Item(settings) {
             tooltip?.add(Text.literal("Stored Entity: ${getEntityFromNet(stack, world)?.displayName}"))
         }
         super.appendTooltip(stack, world, tooltip, context)
+    }
+
+    override fun getTooltipData(stack: ItemStack?): Optional<TooltipData> {
+        return super.getTooltipData(stack)
     }
 
     companion object {
