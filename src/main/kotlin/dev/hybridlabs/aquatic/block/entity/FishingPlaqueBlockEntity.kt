@@ -13,30 +13,29 @@ import kotlin.jvm.optionals.getOrNull
 class FishingPlaqueBlockEntity(pos: BlockPos?, state: BlockState?) :
     BlockEntity(HybridAquaticBlockEntityTypes.FISHING_PLAQUE, pos, state) {
 
-    private var storedEntity : Entity? = null
+    private var storedEntity: Entity? = null
 
-    override fun readNbt(nbt: NbtCompound?) {
-        val storedNBT : NbtCompound? = nbt?.getCompound("storedEntity")
+    override fun readNbt(nbt: NbtCompound) {
+        val storedNBT : NbtCompound? = nbt.getCompound("storedEntity")
         storedEntity = EntityType.getEntityFromNbt(storedNBT, this.world).getOrNull()
         super.readNbt(nbt)
     }
 
-    override fun writeNbt(nbt: NbtCompound?) {
+    override fun writeNbt(nbt: NbtCompound) {
         var compound = NbtCompound()
-        if(storedEntity != null) {
+        if (storedEntity != null) {
             compound = storedEntity!!.writeNbt(compound)
-            nbt?.put("storedEntity", compound)
+            nbt.put("storedEntity", compound)
         }
         super.writeNbt(nbt)
     }
 
-    fun getStoredEntity() : Entity? {
+    fun getStoredEntity(): Entity? {
         return storedEntity
     }
 
     fun setStoredEntity(entity: Entity?) {
         this.storedEntity = entity
     }
-
 
 }
