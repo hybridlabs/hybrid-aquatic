@@ -149,5 +149,32 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.HAMMERHEAD_SHARK,
                 HybridAquaticEntityTypes.WHALE_SHARK,
             )
+
+        // critters
+        getOrCreateTagBuilder(HybridAquaticEntityTags.CRITTER)
+            .add(
+                HybridAquaticEntityTypes.CRAB,
+                HybridAquaticEntityTypes.FIDDLER_CRAB,
+                HybridAquaticEntityTypes.HERMIT_CRAB,
+                HybridAquaticEntityTypes.NUDIBRANCH,
+                HybridAquaticEntityTypes.SEA_URCHIN,
+                HybridAquaticEntityTypes.SEA_CUCUMBER,
+                HybridAquaticEntityTypes.STARFISH,
+                HybridAquaticEntityTypes.GIANT_CLAM,
+            )
+
+        // jellyfish
+        getOrCreateTagBuilder(HybridAquaticEntityTags.JELLYFISH)
+            .add(
+                HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH,
+                HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH,
+                HybridAquaticEntityTypes.MOON_JELLYFISH,
+                HybridAquaticEntityTypes.MAUVE_STINGER,
+                HybridAquaticEntityTypes.BARRELEYE,
+                HybridAquaticEntityTypes.ATOLLA_JELLYFISH,
+                HybridAquaticEntityTypes.STARFISH,
+                HybridAquaticEntityTypes.COMPASS_JELLYFISH,
+                HybridAquaticEntityTypes.BLUE_JELLYFISH,
+            )
     }
 }

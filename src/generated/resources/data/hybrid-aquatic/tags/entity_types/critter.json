@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:crab",
+    "hybrid-aquatic:fiddler_crab",
+    "hybrid-aquatic:hermit_crab",
+    "hybrid-aquatic:nudibranch",
+    "hybrid-aquatic:sea_urchin",
+    "hybrid-aquatic:sea_cucumber",
+    "hybrid-aquatic:starfish",
+    "hybrid-aquatic:giant_clam"
+  ]
+}

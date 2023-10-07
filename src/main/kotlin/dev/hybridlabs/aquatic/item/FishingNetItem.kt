@@ -8,7 +8,9 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.*
+import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
+import net.minecraft.item.ItemUsageContext
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
@@ -21,7 +23,7 @@ class FishingNetItem(settings: Settings?): Item(settings) {
     override fun useOnEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, hand: Hand): ActionResult {
         val world: World = user.world
 
-        if ((entity.type.isIn(HybridAquaticEntityTags.SMALL_PREY) || entity.type.isIn(HybridAquaticEntityTags.MEDIUM_PREY))) {
+        if ((entity.type.isIn(HybridAquaticEntityTags.JELLYFISH) ||entity.type.isIn(HybridAquaticEntityTags.CRITTER) ||entity.type.isIn(HybridAquaticEntityTags.SMALL_PREY) || entity.type.isIn(HybridAquaticEntityTags.MEDIUM_PREY))) {
             writeEntityToNet(entity, user, hand)
             entity.remove(Entity.RemovalReason.DISCARDED)
             return ActionResult.SUCCESS
