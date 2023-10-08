@@ -34,6 +34,15 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_iron_nugget", InventoryChangedCriterion.Conditions.items(Items.IRON_NUGGET))
             .offerTo(exporter)
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.FISHING_NET)
+            .pattern("  S")
+            .pattern(" IS")
+            .pattern("I  ")
+            .input('I', Items.STICK)
+            .input('S', Items.STRING)
+            .criterion("string", InventoryChangedCriterion.Conditions.items(Items.STRING))
+            .offerTo(exporter)
+
         ShapelessRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.GLOWING_HOOK)
             .input(HybridAquaticItems.BARBED_HOOK)
             .input(HybridAquaticItems.GLOW_SLIME)
