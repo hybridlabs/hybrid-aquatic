@@ -85,6 +85,9 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.GLOWING_HOOK)
             entries.add(HybridAquaticItems.MAGNETIC_HOOK)
 
+            // fishing net
+            entries.add(HybridAquaticItems.FISHING_NET)
+
             // spawn eggs
             Registries.ITEM.forEach { item ->
                 val id = Registries.ITEM.getId(item)

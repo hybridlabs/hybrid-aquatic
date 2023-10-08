@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.data.client
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
+import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
@@ -25,12 +26,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             }
 
         // spawn eggs
-        Registries.ITEM.forEach { item ->
-            val id = Registries.ITEM.getId(item)
-            if (id.namespace != HybridAquatic.MOD_ID) {
-                return@forEach
-            }
-
+        Registries.ITEM
+            .filter(filterHybridAquatic(Registries.ITEM))
+            .forEach { item ->
             if (item is SpawnEggItem) {
                 registerParentedItemModel(item, ModelIds.getMinecraftNamespacedItem("template_spawn_egg"))
             }
@@ -92,6 +90,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.BARBED_HOOK,
             HybridAquaticItems.GLOWING_HOOK,
             HybridAquaticItems.MAGNETIC_HOOK,
+            HybridAquaticItems.FISHING_NET,
         ).forEach { item ->
             generator.register(item, Models.GENERATED)
         }
