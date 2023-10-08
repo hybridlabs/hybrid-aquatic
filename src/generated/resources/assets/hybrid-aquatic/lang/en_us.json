@@ -132,6 +132,8 @@
   "item.hybrid-aquatic.fiddler_crab_spawn_egg": "Fiddler Crab Spawn Egg",
   "item.hybrid-aquatic.firefly_squid_spawn_egg": "Firefly Squid Spawn Egg",
   "item.hybrid-aquatic.fish_meat": "Fish Meat",
+  "item.hybrid-aquatic.fishing_net": "Fishing Net",
+  "item.hybrid-aquatic.fishing_net.description": "Stored Entity: %s",
   "item.hybrid-aquatic.flashlight_fish_spawn_egg": "Flashlight Fish Spawn Egg",
   "item.hybrid-aquatic.fried_egg_jellyfish_spawn_egg": "Fried Egg Jellyfish Spawn Egg",
   "item.hybrid-aquatic.frilled_shark_spawn_egg": "Frilled Shark Spawn Egg",

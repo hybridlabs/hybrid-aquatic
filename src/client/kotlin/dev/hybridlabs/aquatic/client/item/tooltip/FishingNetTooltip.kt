@@ -13,7 +13,7 @@ class FishingNetTooltip : PredicateItemTooltipCallback(HybridAquaticItems.FISHIN
             val optionalEntity = FishingNetItem.getEntityFromNBT(nbtCopy)
             if (optionalEntity.isPresent) {
                 val entityName = optionalEntity.get().name
-                lines.add(Text.literal("Stored Entity: ").append(entityName))
+                lines.add(Text.translatable("item.hybrid-aquatic.fishing_net.description", entityName))
             }
         }
     }
