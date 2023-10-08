@@ -12,7 +12,6 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemUsageContext
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.world.World
@@ -21,9 +20,9 @@ import java.util.*
 class FishingNetItem(settings: Settings?): Item(settings) {
 
     override fun useOnEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, hand: Hand): ActionResult {
-        val world: World = user.world
+        val validFishForNet = entity.type.isIn(HybridAquaticEntityTags.JELLYFISH) || entity.type.isIn(HybridAquaticEntityTags.CRITTER) || entity.type.isIn(HybridAquaticEntityTags.SMALL_PREY) || entity.type.isIn(HybridAquaticEntityTags.MEDIUM_PREY)
 
-        if ((entity.type.isIn(HybridAquaticEntityTags.JELLYFISH) ||entity.type.isIn(HybridAquaticEntityTags.CRITTER) ||entity.type.isIn(HybridAquaticEntityTags.SMALL_PREY) || entity.type.isIn(HybridAquaticEntityTags.MEDIUM_PREY))) {
+        if (!alreadyHasFish(stack) && validFishForNet) {
             writeEntityToNet(entity, user, hand)
             entity.remove(Entity.RemovalReason.DISCARDED)
             return ActionResult.SUCCESS
@@ -39,28 +38,21 @@ class FishingNetItem(settings: Settings?): Item(settings) {
             val blockEntity = context.world.getBlockEntity(context.blockPos)
 
             if (optionalEntity.isPresent) {
-                val entity = optionalEntity.get().create(context.world)
+                val entity = optionalEntity.get().create(context.world) ?: return ActionResult.FAIL
+                entity.readNbt(context.stack.nbt?.getCompound(ENTITY_KEY))
+
                 context.stack.nbt?.remove(ENTITY_KEY)
 
                 if (blockEntity != null && blockEntity is FishingPlaqueBlockEntity) {
                     blockEntity.setStoredEntity(entity)
                 } else {
-                    entity?.setPosition(context.hitPos)
+                    entity.setPosition(context.hitPos)
                     world.spawnEntity(entity)
                 }
                 return ActionResult.SUCCESS
             }
         }
         return super.useOnBlock(context)
-    }
-
-    override fun appendTooltip(
-        stack: ItemStack,
-        world: World?,
-        tooltip: MutableList<Text>,
-        context: TooltipContext
-    ) {
-        super.appendTooltip(stack, world, tooltip, context)
     }
 
     override fun getTooltipData(stack: ItemStack): Optional<TooltipData> {
@@ -77,12 +69,19 @@ class FishingNetItem(settings: Settings?): Item(settings) {
             itemStack.orCreateNbt.put(ENTITY_KEY, entityCompound)
         }
 
-        fun getEntityFromNet(stack: ItemStack) : Optional<EntityType<*>> {
+        fun getEntityFromNet(stack: ItemStack): Optional<EntityType<*>> {
             val storedNBT = stack.nbt?.getCompound(ENTITY_KEY)
             if (storedNBT != null) {
                 return EntityType.fromNbt(storedNBT)
             }
             return Optional.empty()
+        }
+
+        fun alreadyHasFish(stack: ItemStack): Boolean {
+            val nbtCopy = stack.nbt?.copy() ?: return false
+            val entityNBT = nbtCopy.getCompound(ENTITY_KEY) ?: return false
+
+            return !entityNBT.isEmpty
         }
     }
 }
