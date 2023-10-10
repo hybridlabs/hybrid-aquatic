@@ -42,10 +42,7 @@
             }
         ],
         "preLaunch": [
-            {
-                "value": "dev.hybridlabs.aquatic.HybridAquaticPreLaunch",
-                "adapter": "kotlin"
-            }
+            "com.llamalad7.mixinextras.MixinExtrasBootstrap::init"
         ]
     },
 
