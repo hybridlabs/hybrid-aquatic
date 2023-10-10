@@ -20,34 +20,36 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FishingRodItem.class)
 public abstract class FishingRodItemMixin {
-  @Unique
-  private PlayerEntity usedPlayer;
-  @Unique
-  private Hand usedHand;
+    @Unique
+    private PlayerEntity usedPlayer;
 
-  // Gets all the required objects
-  @Inject(
-    method = "use",
-    at = @At(value = "HEAD")
-  )
-  private void playerGetter(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-    this.usedPlayer = user;
-    this.usedHand = hand;
-  }
-  
-  // If item in the opposite hand has lure item, it gets put in the fishing rod
-  @Redirect(method = "use", at = @At(
-    value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"
-  ))
-  private boolean spawnEntityRedirect(World world, Entity entity) {
-    FishingBobberEntity bobber = (FishingBobberEntity) entity;
-    Hand opposingHand = HandUtils.getOpposingHand(usedHand);
-    ItemStack opposingHandItemStack = usedPlayer.getStackInHand(opposingHand);
-    
-    if (opposingHandItemStack.isIn(HybridAquaticItemTags.INSTANCE.getLURE_ITEMS())) {
-      ((CustomFishingBobberEntityData) bobber).hybrid_aquatic$setLureItem(opposingHandItemStack.copyAndEmpty());
+    @Unique
+    private Hand usedHand;
+
+    // Gets all the required objects
+    @Inject(method = "use", at = @At("HEAD"))
+    private void playerGetter(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
+        this.usedPlayer = user;
+        this.usedHand = hand;
     }
-    
-    return world.spawnEntity(bobber);
-  }
+
+    // If item in the opposite hand has lure item, it gets put in the fishing rod
+    @Redirect(
+            method = "use",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"
+            )
+    )
+    private boolean spawnEntityRedirect(World world, Entity entity) {
+        FishingBobberEntity bobber = (FishingBobberEntity) entity;
+        Hand opposingHand = HandUtils.getOpposingHand(usedHand);
+        ItemStack opposingHandItemStack = usedPlayer.getStackInHand(opposingHand);
+
+        if (opposingHandItemStack.isIn(HybridAquaticItemTags.INSTANCE.getLURE_ITEMS())) {
+            ((CustomFishingBobberEntityData) bobber).hybrid_aquatic$setLureItem(opposingHandItemStack.copyAndEmpty());
+        }
+
+        return world.spawnEntity(bobber);
+    }
 }
