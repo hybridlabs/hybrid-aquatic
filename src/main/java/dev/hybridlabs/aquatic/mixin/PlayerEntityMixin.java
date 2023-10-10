@@ -17,49 +17,53 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
-  @Unique
-  private int haHurtTime = 0;
-  
-  @Override
-  public void hybrid_aquatic$setHurtTime(int value) {
-    haHurtTime = value;
-  }
-  
-  @Override
-  public int hybrid_aquatic$getHurtTime() {
-    return haHurtTime;
-  }
-  
-  @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-  private void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
-    hybrid_aquatic$setHurtTime(nbt.getInt("haHurtTime"));
-  }
-  
-  @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-  private void writeCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
-    nbt.putInt("haHurtTime", hybrid_aquatic$getHurtTime());
-  }
-  
-  // Sets haHurtTime to 200 if player got hurt near shark
-  @Inject(method = "damage", at = @At(
-    value = "INVOKE",
-    target = "Lnet/minecraft/entity/player/PlayerEntity;getWorld()Lnet/minecraft/world/World;",
-    ordinal = 0,
-    shift = At.Shift.BEFORE))
-  private void setCustomHurtTimeOnDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-    PlayerEntity object = ((PlayerEntity) (Object) this);
-    
-    if (object.isTouchingWater()) {
-      LivingEntity foundEntity = object.getWorld().getClosestEntity(HybridAquaticSharkEntity.class, TargetPredicate.createNonAttackable().setBaseMaxDistance(32).setPredicate(Entity::isSubmergedInWater), object, object.getX(), object.getEyeY(), object.getZ(), object.getBoundingBox().expand(16));
-      if (foundEntity != null) hybrid_aquatic$setHurtTime(200);
+    @Unique
+    private int haHurtTime = 0;
+
+    @Override
+    public void hybrid_aquatic$setHurtTime(int value) {
+        haHurtTime = value;
     }
-  }
-  
-  @Inject(method = "tick", at = @At("TAIL"))
-  private void tickDownCustomHurtTime(CallbackInfo ci) {
-    int cHurtTime = hybrid_aquatic$getHurtTime();
-    if (cHurtTime > 0) {
-      hybrid_aquatic$setHurtTime(cHurtTime - 1);
+
+    @Override
+    public int hybrid_aquatic$getHurtTime() {
+        return haHurtTime;
     }
-  }
+
+    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
+    private void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
+        hybrid_aquatic$setHurtTime(nbt.getInt("haHurtTime"));
+    }
+
+    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
+    private void writeCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
+        nbt.putInt("haHurtTime", hybrid_aquatic$getHurtTime());
+    }
+
+    // Sets haHurtTime to 200 if player got hurt near shark
+    @Inject(
+            method = "damage",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/player/PlayerEntity;getWorld()Lnet/minecraft/world/World;",
+                    ordinal = 0,
+                    shift = At.Shift.BEFORE
+            )
+    )
+    private void setCustomHurtTimeOnDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        PlayerEntity object = ((PlayerEntity) (Object) this);
+
+        if (object.isTouchingWater()) {
+            LivingEntity foundEntity = object.getWorld().getClosestEntity(HybridAquaticSharkEntity.class, TargetPredicate.createNonAttackable().setBaseMaxDistance(32).setPredicate(Entity::isSubmergedInWater), object, object.getX(), object.getEyeY(), object.getZ(), object.getBoundingBox().expand(16));
+            if (foundEntity != null) hybrid_aquatic$setHurtTime(200);
+        }
+    }
+
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void tickDownCustomHurtTime(CallbackInfo ci) {
+        int cHurtTime = hybrid_aquatic$getHurtTime();
+        if (cHurtTime > 0) {
+            hybrid_aquatic$setHurtTime(cHurtTime - 1);
+        }
+    }
 }
