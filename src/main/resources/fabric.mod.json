@@ -55,8 +55,7 @@
     "java": ">=17",
     "fabric-api": "*",
     "fabric-language-kotlin": "*",
-    "geckolib": "*",
-    "midnightlib": "*"
+    "geckolib": "*"
   },
   "custom": {
     "loom:injected_interfaces": {
