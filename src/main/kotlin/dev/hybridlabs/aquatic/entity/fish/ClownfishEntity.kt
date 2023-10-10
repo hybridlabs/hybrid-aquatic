@@ -80,8 +80,8 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
     companion object {
         fun createClownfishAttributes(): DefaultAttributeContainer.Builder {
             return createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 15.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.8)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
         }
     }
 

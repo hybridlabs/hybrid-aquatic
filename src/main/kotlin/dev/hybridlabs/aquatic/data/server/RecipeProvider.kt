@@ -61,7 +61,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_fish_meat", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.SMALL_FISH_MEAT))
             .offerTo(exporter)
 
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, HybridAquaticItems.FISH_MEAT, 2)
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, HybridAquaticItems.FISH_MEAT, 1)
             .input(HybridAquaticItemTags.MEDIUM_FISH)
             .criterion("has_fish_meat", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.FISH_MEAT))
             .offerTo(exporter)
