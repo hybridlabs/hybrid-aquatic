@@ -35,6 +35,62 @@ class GenericLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
                             ItemEntry.builder(Items.NAUTILUS_SHELL)
                                 .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
                         )
+                        .with(
+                            ItemEntry.builder(Items.GOLDEN_APPLE)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.GOLDEN_CARROT)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 3.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.SKELETON_SKULL)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.CREEPER_HEAD)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.ZOMBIE_HEAD)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.PIGLIN_HEAD)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.ACACIA_SAPLING)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.OAK_SAPLING)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.BIRCH_SAPLING)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.DARK_OAK_SAPLING)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.JUNGLE_SAPLING)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.SPRUCE_SAPLING)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.CHERRY_SAPLING)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.BAMBOO)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
                         .with(TagEntry.expandBuilder(HybridAquaticItemTags.PLUSHIES))
                         .with(TagEntry.expandBuilder(HybridAquaticItemTags.LURE_ITEMS))
                         .with(

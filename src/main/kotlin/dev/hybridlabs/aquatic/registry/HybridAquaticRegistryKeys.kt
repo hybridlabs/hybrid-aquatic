@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier
  */
 object HybridAquaticRegistryKeys {
     /**
-     * The registry key for the sea messages registry.
+     * The registry key for the sea messages' registry.
      */
     val SEA_MESSAGE: RegistryKey<Registry<SeaMessage>> = RegistryKey.ofRegistry(Identifier(HybridAquatic.MOD_ID, "sea_message"))
 }
