@@ -1,4 +1,4 @@
-//file:noinspection GroovyAssignabilityCheck, GrUnresolvedAccess
+//file:noinspection GroovyAssignabilityCheck, GrUnresolvedAccess, GrDeprecatedAPIUsage
 
 plugins {
     id "fabric-loom" version "1.4-SNAPSHOT"
@@ -109,6 +109,12 @@ processResources {
 java {
     withSourcesJar()
     sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = '17'
+    }
 }
 
 jar {
