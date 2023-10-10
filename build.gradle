@@ -53,14 +53,13 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:$fabric_version"
     modImplementation "net.fabricmc:fabric-language-kotlin:$fabric_kotlin_version"
 
+    annotationProcessor include (implementation("com.github.LlamaLad7:MixinExtras:$mixin_extras_version"))
+
     modImplementation "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
-
-    include(implementation("com.github.LlamaLad7:MixinExtras:$mixin_extras_version"))
-    annotationProcessor "com.github.LlamaLad7:MixinExtras:$mixin_extras_version"
-
     modImplementation "com.terraformersmc:modmenu:$mod_menu_version"
-    modImplementation "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
-    modImplementation "maven.modrinth:carpet:$carpet_version"
+
+    modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
+    modRuntimeOnly "maven.modrinth:carpet:$carpet_version"
 }
 
 loom {
