@@ -1,6 +1,11 @@
 accessWidener v2 named
 
-accessible method net/minecraft/block/BlockWithEntity checkType (Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityTicker;)Lnet/minecraft/block/entity/BlockEntityTicker;
+accessible method net/minecraft/block/BlockWithEntity validateTicker (Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityTicker;)Lnet/minecraft/block/entity/BlockEntityTicker;
+accessible method net/minecraft/entity/LivingEntity getHitbox ()Lnet/minecraft/util/math/Box;
+
+accessible method net/minecraft/loot/entry/LeafEntry method_53290 (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/Products$P4;
 
 accessible field net/minecraft/block/entity/BlockEntityType blocks Ljava/util/Set;
 mutable field net/minecraft/block/entity/BlockEntityType blocks Ljava/util/Set;
+
+accessible class net/minecraft/village/TradeOffers$SellItemFactory

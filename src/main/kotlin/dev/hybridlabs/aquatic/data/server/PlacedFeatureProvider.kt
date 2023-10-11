@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 package dev.hybridlabs.aquatic.data.server
 
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures

@@ -3,10 +3,22 @@ package dev.hybridlabs.aquatic.entity.shark
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityPose
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.ChaseBoatGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.LookAtEntityGoal
+import net.minecraft.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.entity.ai.goal.RevengeGoal
+import net.minecraft.entity.ai.goal.SwimAroundGoal
+import net.minecraft.entity.ai.goal.UniversalAngerGoal
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.damage.DamageSource
@@ -34,11 +46,14 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.*
+import java.util.UUID
 
 
 @Suppress("LeakingThis")
@@ -214,6 +229,10 @@ open class HybridAquaticSharkEntity(
         size = nbt.getInt(SHARK_SIZE_KEY)
     }
 
+    fun isInRushAttackRange(entity: LivingEntity): Boolean {
+        return this.attackBox.expand(10.0, 0.0, 10.0).intersects(entity.hitbox)
+    }
+
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
         if (!this.isWet) {
             event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
@@ -355,9 +374,8 @@ open class HybridAquaticSharkEntity(
 
     internal class AttackGoal(private val shark: HybridAquaticSharkEntity) : MeleeAttackGoal(shark,
         ORIGINAL_SPEED, true) {
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
+        override fun attack(target: LivingEntity) {
+            if (this.mob.isInAttackRange(target) && this.isCooledDown) {
                 resetCooldown()
                 mob.tryAttack(target)
                 shark.isSprinting = false
@@ -367,15 +385,11 @@ open class HybridAquaticSharkEntity(
                 if (target.health <= 0)
                     shark.eatFish(target.type)
 //                  shark.setRushing(false)
-            } else if (squaredDistance > d * 5 && !shark.isRushing) {
+            } else if (this.shark.isInRushAttackRange(target) && !shark.isRushing) {
                 shark.rushTargetPosition = target.pos
                 shark.isSprinting = true
                 shark.isRushing = true
             }
-        }
-
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (7.0f + entity.width).toDouble()
         }
 
         override fun start() {

@@ -5,17 +5,16 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
-import net.minecraft.data.server.recipe.RecipeJsonProvider
+import net.minecraft.data.server.recipe.RecipeExporter
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder
 import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.book.RecipeCategory
-import java.util.function.Consumer
 
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
-    override fun generate(exporter: Consumer<RecipeJsonProvider>) {
+    override fun generate(exporter: RecipeExporter) {
         // hook recipes
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.BARBED_HOOK)
             .pattern("N  ")
@@ -73,7 +72,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         offerCookingRecipes(exporter, HybridAquaticItems.TENTACLE, HybridAquaticItems.COOKED_TENTACLE, 0.15f)
     }
     private fun offerCookingRecipes(
-        exporter: Consumer<RecipeJsonProvider>,
+        exporter: RecipeExporter,
         input: Item,
         output: Item,
         experience: Float

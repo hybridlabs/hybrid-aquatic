@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.HybridAquatic

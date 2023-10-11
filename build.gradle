@@ -58,7 +58,7 @@ dependencies {
     modImplementation "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
     modImplementation "com.terraformersmc:modmenu:$mod_menu_version"
 
-    modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
+    // modRuntimeOnly "io.github.flemmli97:debugutils:$debug_utils_version-fabric"
     modRuntimeOnly "maven.modrinth:carpet:$carpet_version"
 }
 

@@ -733,6 +733,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
     }
 
     companion object {
-        private val NEEDS_ENTITY_ON_FIRE: EntityPredicate.Builder = EntityPredicate.Builder.create().flags(EntityFlagsPredicate.Builder.create().onFire(true).build())
+        private val NEEDS_ENTITY_ON_FIRE: EntityPredicate.Builder = EntityPredicate.Builder.create().flags(EntityFlagsPredicate.Builder.create().onFire(true))
     }
 }

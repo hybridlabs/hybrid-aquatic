@@ -22,7 +22,7 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.minecraft.item.BlockItem
 import net.minecraft.registry.Registries
-import net.minecraft.village.TradeOffers.SellItemFactory
+import net.minecraft.village.TradeOffers
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -71,7 +71,7 @@ object HybridAquatic : ModInitializer {
             .filter { it is BlockItem && it.block is PlushieBlock }
             .forEach { block ->
                 TradeOfferHelper.registerWanderingTraderOffers(2) { list ->
-                    list.add(SellItemFactory(block, 8, 1, 2, 2))
+                    list.add(TradeOffers.SellItemFactory(block, 8, 1, 2, 2))
                 }
             }
     }
