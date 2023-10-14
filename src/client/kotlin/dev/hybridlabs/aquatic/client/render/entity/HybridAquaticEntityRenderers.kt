@@ -62,6 +62,7 @@ object HybridAquaticEntityRenderers {
     val GHOST_CRAB = EntityRendererRegistry.register(HybridAquaticEntityTypes.GHOST_CRAB, ::GhostCrabEntityRenderer)
     val FLOWER_CRAB = EntityRendererRegistry.register(HybridAquaticEntityTypes.FLOWER_CRAB, ::FlowerCrabEntityRenderer)
     val LIGHTFOOT_CRAB = EntityRendererRegistry.register(HybridAquaticEntityTypes.LIGHTFOOT_CRAB, ::LightfootCrabEntityRenderer)
+    val VAMPIRE_CRAB = EntityRendererRegistry.register(HybridAquaticEntityTypes.VAMPIRE_CRAB, ::VampireCrabEntityRenderer)
     val HORSESHOE_CRAB = EntityRendererRegistry.register(HybridAquaticEntityTypes.HORSESHOE_CRAB, ::HorseshoeCrabEntityRenderer)
     val SPIDER_CRAB = EntityRendererRegistry.register(HybridAquaticEntityTypes.SPIDER_CRAB, ::SpiderCrabEntityRenderer)
     val GIANT_ISOPOD = EntityRendererRegistry.register(HybridAquaticEntityTypes.GIANT_ISOPOD, ::GiantIsopodEntityRenderer)

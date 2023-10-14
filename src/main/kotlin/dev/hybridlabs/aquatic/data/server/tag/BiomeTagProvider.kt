@@ -106,6 +106,12 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.BEACH
         )
 
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.VAMPIRE_CRAB_SPAWN_BIOMES).add(
+            BiomeKeys.JUNGLE,
+            BiomeKeys.BAMBOO_JUNGLE,
+            BiomeKeys.MANGROVE_SWAMP
+        )
+
         getOrCreateTagBuilder(HybridAquaticBiomeTags.HORSESHOE_CRAB_SPAWN_BIOMES).add(
             BiomeKeys.OCEAN,
             BiomeKeys.DEEP_OCEAN,

@@ -183,6 +183,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.GHOST_CRAB to "Ghost Crab",
             HybridAquaticEntityTypes.LIGHTFOOT_CRAB to "Lightfoot Crab",
             HybridAquaticEntityTypes.FLOWER_CRAB to "Flower Crab",
+            HybridAquaticEntityTypes.VAMPIRE_CRAB to "Vampire Crab",
             HybridAquaticEntityTypes.SPIDER_CRAB to "Spider Crab",
             HybridAquaticEntityTypes.HORSESHOE_CRAB to "Horseshoe Crab",
             HybridAquaticEntityTypes.GIANT_ISOPOD to "Giant Isopod",
