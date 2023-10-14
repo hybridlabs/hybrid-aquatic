@@ -85,6 +85,65 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_FROZEN_OCEAN,
         )
 
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.GHOST_CRAB_SPAWN_BIOMES).add(
+            BiomeKeys.WARM_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
+            BiomeKeys.BEACH
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.LIGHTFOOT_CRAB_SPAWN_BIOMES).add(
+            BiomeKeys.OCEAN,
+            BiomeKeys.WARM_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
+            BiomeKeys.BEACH,
+            BiomeKeys.STONY_SHORE,
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.FLOWER_CRAB_SPAWN_BIOMES).add(
+            BiomeKeys.OCEAN,
+            BiomeKeys.WARM_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
+            BiomeKeys.BEACH
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.HORSESHOE_CRAB_SPAWN_BIOMES).add(
+            BiomeKeys.OCEAN,
+            BiomeKeys.DEEP_OCEAN,
+            BiomeKeys.WARM_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_LUKEWARM_OCEAN,
+            BiomeKeys.BEACH
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.SPIDER_CRAB_SPAWN_BIOMES).add(
+            BiomeKeys.DEEP_OCEAN,
+            BiomeKeys.DEEP_LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_COLD_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN,
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.GIANT_ISOPOD_SPAWN_BIOMES).add(
+            BiomeKeys.DEEP_OCEAN,
+            BiomeKeys.DEEP_LUKEWARM_OCEAN,
+            BiomeKeys.DEEP_COLD_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN,
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.SHRIMP_SPAWN_BIOMES).add(
+            BiomeKeys.WARM_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.MANTIS_SHRIMP_SPAWN_BIOMES).add(
+            BiomeKeys.WARM_OCEAN,
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.CRAYFISH_SPAWN_BIOMES).add(
+            BiomeKeys.SWAMP,
+            BiomeKeys.MANGROVE_SWAMP,
+            BiomeKeys.RIVER,
+        )
+
         getOrCreateTagBuilder(HybridAquaticBiomeTags.CUTTLEFISH_SPAWN_BIOMES).add(
             BiomeKeys.WARM_OCEAN,
             BiomeKeys.LUKEWARM_OCEAN,

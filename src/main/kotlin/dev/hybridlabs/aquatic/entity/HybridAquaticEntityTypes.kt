@@ -293,6 +293,60 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(0.5f, 0.5f),
         HermitCrabEntity.createMobAttributes()
     )
+    val SPIDER_CRAB = registerCritter(
+        "spider_crab",
+        ::SpiderCrabEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        SpiderCrabEntity.createMobAttributes()
+    )
+    val GHOST_CRAB = registerCritter(
+        "ghost_crab",
+        ::GhostCrabEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        GhostCrabEntity.createMobAttributes()
+    )
+    val FLOWER_CRAB = registerCritter(
+        "flower_crab",
+        ::FlowerCrabEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        FlowerCrabEntity.createMobAttributes()
+    )
+    val LIGHTFOOT_CRAB = registerCritter(
+        "lightfoot_crab",
+        ::LightfootCrabEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        LightfootCrabEntity.createMobAttributes()
+    )
+    val HORSESHOE_CRAB = registerCritter(
+        "horseshoe_crab",
+        ::HorseshoeCrabEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        HorseshoeCrabEntity.createMobAttributes()
+    )
+    val GIANT_ISOPOD = registerCritter(
+        "giant_isopod",
+        ::GiantIsopodEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        GiantIsopodEntity.createMobAttributes()
+    )
+    val SHRIMP = registerCritter(
+        "shrimp",
+        ::ShrimpEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        ShrimpEntity.createMobAttributes()
+    )
+    val MANTIS_SHRIMP = registerCritter(
+        "mantis_shrimp",
+        ::MantisShrimpEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        MantisShrimpEntity.createMobAttributes()
+    )
+    val CRAYFISH = registerCritter(
+        "crayfish",
+        ::CrayfishEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        CrayfishEntity.createMobAttributes()
+    )
     val STARFISH = registerCritter(
         "starfish",
         ::StarfishEntity,
