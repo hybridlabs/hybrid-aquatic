@@ -1,4 +1,5 @@
 //file:noinspection GroovyAssignabilityCheck, GrUnresolvedAccess, GrDeprecatedAPIUsage
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id "fabric-loom" version "1.4-SNAPSHOT"
@@ -108,12 +109,13 @@ processResources {
 
 java {
     withSourcesJar()
-    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
-compileKotlin {
+tasks.withType(KotlinCompile).all {
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = 17
     }
 }
 
