@@ -39,7 +39,7 @@ class FishJumpGoal(private val fish: HybridAquaticFishEntity, chance: Int) : Div
     private fun isWater(pos: BlockPos, offsetX: Int, offsetZ: Int, multiplier: Int): Boolean {
         val blockPos = pos.add(offsetX * multiplier, 0, offsetZ * multiplier)
         return fish.world.getFluidState(blockPos).isIn(FluidTags.WATER) && !fish.world.getBlockState(blockPos)
-            .blocksMovement()
+            .material.blocksMovement()
     }
 
     private fun isAirAbove(pos: BlockPos, offsetX: Int, offsetZ: Int, multiplier: Int): Boolean {
@@ -95,4 +95,3 @@ class FishJumpGoal(private val fish: HybridAquaticFishEntity, chance: Int) : Div
         private val OFFSET_MULTIPLIERS = intArrayOf(0, 1, 4, 5, 6, 7)
     }
 }
-

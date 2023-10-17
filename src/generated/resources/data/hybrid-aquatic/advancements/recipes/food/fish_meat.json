@@ -30,6 +30,5 @@
     "recipes": [
       "hybrid-aquatic:fish_meat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

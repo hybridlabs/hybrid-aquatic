@@ -6,10 +6,9 @@ import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.MapColor
+import net.minecraft.block.Material
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.block.enums.Instrument
-import net.minecraft.block.piston.PistonBehavior
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.sound.BlockSoundGroup
@@ -20,19 +19,17 @@ import net.minecraft.util.Identifier
  */
 object HybridAquaticBlocks {
     val ANEMONE = register("anemone", AnemoneBlock(
-        FabricBlockSettings.create()
+        FabricBlockSettings.of(Material.GOURD)
             .mapColor(MapColor.DARK_DULL_PINK)
             .ticksRandomly()
             .strength(0.4f)
             .nonOpaque()
-            .pistonBehavior(PistonBehavior.DESTROY)
-            .sounds(BlockSoundGroup.SLIME).drops(Identifier(HybridAquatic.MOD_ID, "blocks/anemone"))
+            .sounds(BlockSoundGroup.SLIME)
     ))
 
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleBlock(
         FabricBlockSettings.copyOf(Blocks.GLASS)
             .breakInstantly()
-            .pistonBehavior(PistonBehavior.DESTROY)
     ))
 
     val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie", createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL))
@@ -49,16 +46,15 @@ object HybridAquaticBlocks {
 
     private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block): PlushieBlock {
         return PlushieBlock(variant, particleBlock,
-            FabricBlockSettings.create()
+            FabricBlockSettings.of(Material.GOURD)
+                .mapColor(MapColor.CLEAR)
                 .breakInstantly()
-                .pistonBehavior(PistonBehavior.DESTROY)
                 .sounds(BlockSoundGroup.WOOL)
-                .instrument(Instrument.CUSTOM_HEAD)
         )
     }
 
 
-    val FISHING_PLAQUE = register("fishing_plaque", FishingPlaque(FabricBlockSettings.create()))
+    val FISHING_PLAQUE = register("fishing_plaque", FishingPlaque(FabricBlockSettings.of(Material.WOOD)))
 
 
 //    val FISH_TANK = register("fish_tank", FishTankBlock(

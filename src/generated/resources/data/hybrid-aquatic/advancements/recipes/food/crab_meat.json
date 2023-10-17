@@ -30,6 +30,5 @@
     "recipes": [
       "hybrid-aquatic:crab_meat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

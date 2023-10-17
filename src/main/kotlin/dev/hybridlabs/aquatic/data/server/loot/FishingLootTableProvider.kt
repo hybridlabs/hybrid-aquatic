@@ -18,7 +18,6 @@ class FishingLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
         exporter.accept(
             HybridAquaticLootTables.FISHING_FISH_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.FISHING_FISH_ID)
                 .pool(
                     LootPool.builder()
                         .with(
@@ -100,7 +99,6 @@ class FishingLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
         exporter.accept(
             HybridAquaticLootTables.FISHING_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.FISHING_TREASURE_ID)
                 .pool(
                     LootPool.builder()
                         .with(ItemEntry.builder(HybridAquaticItems.CRATE))

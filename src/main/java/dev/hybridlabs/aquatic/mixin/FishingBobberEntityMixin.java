@@ -18,7 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootTable;
-import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -101,8 +101,8 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
             method = "use",
             locals = LocalCapture.CAPTURE_FAILHARD,
             at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
+                    value = "FIELD",
+                    target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;world:Lnet/minecraft/world/World;",
                     ordinal = 0
             )
     )
@@ -116,7 +116,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
             method = "use",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/loot/context/LootContextParameterSet$Builder;build(Lnet/minecraft/loot/context/LootContextType;)Lnet/minecraft/loot/context/LootContextParameterSet;"
+                    target = "Lnet/minecraft/loot/context/LootContext$Builder;build(Lnet/minecraft/loot/context/LootContextType;)Lnet/minecraft/loot/context/LootContext;"
             )
     )
     private void lureDamage(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
@@ -128,10 +128,10 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
             method = "use",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/loot/context/LootContextParameterSet$Builder;luck(F)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;"
+                    target = "Lnet/minecraft/loot/context/LootContext$Builder;luck(F)Lnet/minecraft/loot/context/LootContext$Builder;"
             )
     )
-    private LootContextParameterSet.Builder increaseLuck(LootContextParameterSet.Builder instance, float luck) {
+    private LootContext.Builder increaseLuck(LootContext.Builder instance, float luck) {
         if (lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK())) luck += 27;
         return instance.luck(luck);
     }
@@ -144,12 +144,12 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
             method = "use",
             locals = LocalCapture.CAPTURE_FAILHARD,
             at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
+                    value = "FIELD",
+                    target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;world:Lnet/minecraft/world/World;",
                     ordinal = 4
             )
     )
-    private void objectGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, PlayerEntity playerEntity, int returnValue, LootContextParameterSet lootContextParameterSet, LootTable lootTable, List<ItemStack> generatedLootList, Iterator<ItemStack> forLoopIterator, ItemStack itemInIterator) {
+    private void objectGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, PlayerEntity playerEntity, int returnValue, LootContext.Builder lootContextParameterSet, LootTable lootTable, List<ItemStack> generatedLootList, Iterator<ItemStack> forLoopIterator, ItemStack itemInIterator) {
         this.generatedItem = itemInIterator;
     }
 

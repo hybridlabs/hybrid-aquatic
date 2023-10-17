@@ -30,6 +30,5 @@
     "recipes": [
       "hybrid-aquatic:fishing_net"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

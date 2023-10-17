@@ -30,6 +30,5 @@
     "recipes": [
       "minecraft:cooked_small_fish_meat_from_smelting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

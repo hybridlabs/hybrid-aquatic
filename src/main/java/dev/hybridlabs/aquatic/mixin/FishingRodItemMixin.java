@@ -47,7 +47,8 @@ public abstract class FishingRodItemMixin {
         ItemStack opposingHandItemStack = usedPlayer.getStackInHand(opposingHand);
 
         if (opposingHandItemStack.isIn(HybridAquaticItemTags.INSTANCE.getLURE_ITEMS())) {
-            ((CustomFishingBobberEntityData) bobber).hybrid_aquatic$setLureItem(opposingHandItemStack.copyAndEmpty());
+            ((CustomFishingBobberEntityData) bobber).hybrid_aquatic$setLureItem(opposingHandItemStack.copy());
+            opposingHandItemStack.setCount(0);
         }
 
         return world.spawnEntity(bobber);

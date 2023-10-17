@@ -24,7 +24,6 @@ class GenericLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
         exporter.accept(
             HybridAquaticLootTables.CRATE_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.CRATE_TREASURE_ID)
                 .pool(
                     LootPool.builder()
                         .with(

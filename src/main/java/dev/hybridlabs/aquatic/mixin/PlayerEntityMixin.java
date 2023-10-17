@@ -44,8 +44,8 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
     @Inject(
             method = "damage",
             at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/player/PlayerEntity;getWorld()Lnet/minecraft/world/World;",
+                    value = "FIELD",
+                    target = "Lnet/minecraft/entity/player/PlayerEntity;world:Lnet/minecraft/world/World;",
                     ordinal = 0,
                     shift = At.Shift.BEFORE
             )

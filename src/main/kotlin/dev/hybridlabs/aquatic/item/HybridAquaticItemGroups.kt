@@ -11,13 +11,12 @@ import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 
 object HybridAquaticItemGroups {
-    val ALL = register("all", FabricItemGroup.builder()
+    val ALL: ItemGroup = FabricItemGroup.builder(Identifier(HybridAquatic.MOD_ID, "all"))
         .displayName(Text.translatable("itemGroup.${HybridAquatic.MOD_ID}"))
         .icon { ItemStack(HybridAquaticItems.ANEMONE) }
         .entries { _, entries ->
@@ -101,9 +100,4 @@ object HybridAquaticItemGroups {
             }
         }
         .build()
-    )
-
-    private fun register(id: String, itemGroup: ItemGroup): ItemGroup {
-        return Registry.register(Registries.ITEM_GROUP, Identifier(HybridAquatic.MOD_ID, id), itemGroup)
-    }
 }

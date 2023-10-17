@@ -30,6 +30,5 @@
     "recipes": [
       "hybrid-aquatic:small_fish_meat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -16,7 +16,7 @@ import net.minecraft.registry.Registries
 class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
     override fun generateTranslations(builder: TranslationBuilder) {
         // item group
-        builder.add(Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.ALL).orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic")
+        builder.add(HybridAquaticItemGroups.ALL, "Hybrid Aquatic")
 
         // message in a bottle
         HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.translationKey.let { key ->
