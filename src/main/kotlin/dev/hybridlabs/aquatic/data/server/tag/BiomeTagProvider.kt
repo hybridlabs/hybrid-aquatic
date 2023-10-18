@@ -128,6 +128,12 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_FROZEN_OCEAN,
         )
 
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.YETI_CRAB_SPAWN_BIOMES).add(
+            BiomeKeys.DEEP_COLD_OCEAN,
+            BiomeKeys.FROZEN_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN,
+        )
+
         getOrCreateTagBuilder(HybridAquaticBiomeTags.GIANT_ISOPOD_SPAWN_BIOMES).add(
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,

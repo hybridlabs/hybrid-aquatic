@@ -87,6 +87,7 @@
   "entity.hybrid-aquatic.vampire_squid": "Vampire Squid",
   "entity.hybrid-aquatic.whale_shark": "Whale Shark",
   "entity.hybrid-aquatic.yellowfin_tuna": "Yellowfin Tuna",
+  "entity.hybrid-aquatic.yeti_crab": "Yeti Crab",
   "entity.hybrid-aquatic.zebra_danio": "Zebra Danio",
   "hybrid-aquatic.sea_message.adventure": "\"To the brave explorer who discovers this bottle, know that adventure awaits around every corner!\"",
   "hybrid-aquatic.sea_message.anglerfish": "\"The anglerfish lures its prey with a bioluminescent appendage, dangling in the dark depths.\nVenture into the unknown and learn about the fascinating adaptations of deep-sea creatures.\"",
@@ -219,6 +220,7 @@
   "item.hybrid-aquatic.whale_shark_spawn_egg": "Whale Shark Spawn Egg",
   "item.hybrid-aquatic.yellowfin_tuna": "Yellowfin Tuna",
   "item.hybrid-aquatic.yellowfin_tuna_spawn_egg": "Yellowfin Tuna Spawn Egg",
+  "item.hybrid-aquatic.yeti_crab_spawn_egg": "Yeti Crab Spawn Egg",
   "item.hybrid-aquatic.zebra_danio_spawn_egg": "Zebra Danio Spawn Egg",
   "itemGroup.hybrid-aquatic": "Hybrid Aquatic"
 }

@@ -1,22 +1,10 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:crab",
-    "hybrid-aquatic:fiddler_crab",
-    "hybrid-aquatic:hermit_crab",
     "hybrid-aquatic:nudibranch",
     "hybrid-aquatic:sea_urchin",
     "hybrid-aquatic:sea_cucumber",
     "hybrid-aquatic:starfish",
-    "hybrid-aquatic:giant_clam",
-    "hybrid-aquatic:ghost_crab",
-    "hybrid-aquatic:lightfoot_crab",
-    "hybrid-aquatic:flower_crab",
-    "hybrid-aquatic:spider_crab",
-    "hybrid-aquatic:horseshoe_crab",
-    "hybrid-aquatic:giant_isopod",
-    "hybrid-aquatic:shrimp",
-    "hybrid-aquatic:mantis_shrimp",
-    "hybrid-aquatic:crayfish"
+    "hybrid-aquatic:giant_clam"
   ]
 }

@@ -71,6 +71,7 @@ object HybridAquaticBiomeTags {
     val VAMPIRE_CRAB_SPAWN_BIOMES = create("vampire_crab_spawn_biomes")
     val HORSESHOE_CRAB_SPAWN_BIOMES = create("horseshoe_crab_spawn_biomes")
     val SPIDER_CRAB_SPAWN_BIOMES = create("spider_crab_spawn_biomes")
+    val YETI_CRAB_SPAWN_BIOMES = create("yeti_crab_spawn_biomes")
     val GIANT_ISOPOD_SPAWN_BIOMES = create("giant_isopod_spawn_biomes")
     val SHRIMP_SPAWN_BIOMES = create("shrimp_spawn_biomes")
     val MANTIS_SHRIMP_SPAWN_BIOMES = create("mantis_shrimp_spawn_biomes")

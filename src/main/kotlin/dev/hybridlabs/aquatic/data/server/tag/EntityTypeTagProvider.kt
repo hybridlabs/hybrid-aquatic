@@ -180,6 +180,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.SPIDER_CRAB,
                 HybridAquaticEntityTypes.HORSESHOE_CRAB,
                 HybridAquaticEntityTypes.GIANT_ISOPOD,
+                HybridAquaticEntityTypes.YETI_CRAB,
             )
         getOrCreateTagBuilder(HybridAquaticEntityTags.SHRIMP)
             .add(

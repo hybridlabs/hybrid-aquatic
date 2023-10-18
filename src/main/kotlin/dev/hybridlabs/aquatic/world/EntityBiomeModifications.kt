@@ -90,6 +90,7 @@ object EntityBiomeModifications {
         addCritter(HybridAquaticEntityTypes.FLOWER_CRAB, HybridAquaticBiomeTags.FLOWER_CRAB_SPAWN_BIOMES, 7, 1, 2)
         addCritter(HybridAquaticEntityTypes.VAMPIRE_CRAB, HybridAquaticBiomeTags.VAMPIRE_CRAB_SPAWN_BIOMES, 7, 1, 2)
         addCritter(HybridAquaticEntityTypes.SPIDER_CRAB, HybridAquaticBiomeTags.SPIDER_CRAB_SPAWN_BIOMES, 7, 1, 2)
+        addCritter(HybridAquaticEntityTypes.YETI_CRAB, HybridAquaticBiomeTags.YETI_CRAB_SPAWN_BIOMES, 7, 1, 2)
         addCritter(HybridAquaticEntityTypes.GIANT_ISOPOD, HybridAquaticBiomeTags.GIANT_ISOPOD_SPAWN_BIOMES, 7, 1, 2)
         addCritter(HybridAquaticEntityTypes.SHRIMP, HybridAquaticBiomeTags.SHRIMP_SPAWN_BIOMES, 7, 1, 2)
         addCritter(HybridAquaticEntityTypes.MANTIS_SHRIMP, HybridAquaticBiomeTags.MANTIS_SHRIMP_SPAWN_BIOMES, 7, 1, 2)
