@@ -9,6 +9,7 @@ import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRende
 import dev.hybridlabs.aquatic.client.render.block.entity.FishingPlaqueBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
+import dev.hybridlabs.aquatic.client.render.hud.FishingNetHUDRenderer
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
@@ -16,10 +17,14 @@ import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
+import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry.WeatherRenderer
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.RenderLayer
+import net.minecraft.client.render.WorldRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
+import net.minecraft.world.World
 
 object HybridAquaticClient : ClientModInitializer {
     override fun onInitializeClient() {
@@ -30,7 +35,17 @@ object HybridAquaticClient : ClientModInitializer {
         registerBlockEntityRenderers()
         registerBuiltinItemRenderers()
         registerEntityRenderers()
+        registerWeatherRenderers()
         registerTooltips()
+        registerHudAddons();
+    }
+
+    private fun registerWeatherRenderers() {
+        // TODO: hook up renderer to make this thing easier
+    }
+
+    private fun registerHudAddons() {
+        HudRenderCallback.EVENT.register(FishingNetHUDRenderer())
     }
 
     private fun registerTooltips() {
