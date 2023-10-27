@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.mixin.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
-import net.minecraft.entity.decoration.DisplayEntity;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.resource.SynchronousResourceReloader;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -12,6 +12,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,12 +38,14 @@ public abstract class WeatherDisplayMixin implements SynchronousResourceReloader
     @Final @Shadow private float[] NORMAL_LINE_DZ;
     @Final @Shadow private MinecraftClient client;
 
+    @Shadow @Nullable private ClientWorld world;
+
     @Inject(method = "renderWeather", at=@At("HEAD"))
     void hybrid$renderWeatherInject(LightmapTextureManager manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
         float f = this.client.world.getRainGradient(tickDelta);
-        if(f > 0.0f && client.player.getPos().y <= client.player.clientWorld.getSeaLevel() ) {
+        World world = this.client.world;
+        if(f > 0.0f && cameraY < world.getSeaLevel()-0.15) {
             manager.enable();
-            World world = this.client.world;
             int xFloored = MathHelper.floor(cameraX);
             int yFloored = MathHelper.floor(cameraY);
             int zFloored = MathHelper.floor(cameraZ);
@@ -70,21 +73,20 @@ public abstract class WeatherDisplayMixin implements SynchronousResourceReloader
                     mutable.set(o, cameraY, (double)n);
                     Biome biome = world.getBiome(mutable).value();
                     if (biome.hasPrecipitation()) {
-                        int q = world.getTopY(Heightmap.Type.OCEAN_FLOOR, o, n);
+                        int height = world.getTopY(Heightmap.Type.OCEAN_FLOOR, o, n);
                         int r = yFloored - layers;
                         int s = yFloored + layers;
-                        if (r < q) {
-                            r = q;
+                        if (r < height) {
+                            r = height;
                         }
 
-                        if (s < q) {
-                            s = q;
+                        if (s < height) {
+                            s = height;
                         }
 
-                        int t = Math.max(q, yFloored);
+                        int t = Math.max(height, yFloored);
 
                         if (r != s) {
-                            DisplayEntity.TextDisplayEntity display;
                             Random random = Random.create(((long) o * o * 3121 + o * 45238971L ^ (long) n * n * 418711 + n * 13761L));
                             mutable.set(o, r, n);
                             Biome.Precipitation precipitation = biome.getPrecipitation(mutable);
@@ -109,10 +111,15 @@ public abstract class WeatherDisplayMixin implements SynchronousResourceReloader
                                 y = ((1.0F - x * x) * 0.5F + 0.5F) * f;
                                 mutable.set(o, t, n);
                                 int z = getLightmapCoordinates(world, mutable);
-                                bufferBuilder.vertex((double)o - cameraX - d + 0.5, (double)s - cameraY, (double)n - cameraZ - e + 0.5).texture(0.0F, (float)r * 0.25F + h).color(1.0F, 1.0F, 1.0F, y).light(z).next();
-                                bufferBuilder.vertex((double)o - cameraX + d + 0.5, (double)s - cameraY, (double)n - cameraZ + e + 0.5).texture(1.0F, (float)r * 0.25F + h).color(1.0F, 1.0F, 1.0F, y).light(z).next();
-                                bufferBuilder.vertex((double)o - cameraX + d + 0.5, (double)r - cameraY, (double)n - cameraZ + e + 0.5).texture(1.0F, (float)s * 0.25F + h).color(1.0F, 1.0F, 1.0F, y).light(z).next();
-                                bufferBuilder.vertex((double)o - cameraX - d + 0.5, (double)r - cameraY, (double)n - cameraZ - e + 0.5).texture(0.0F, (float)s * 0.25F + h).color(1.0F, 1.0F, 1.0F, y).light(z).next();
+
+                                float seaLevelDist = (float) (world.getSeaLevel() - cameraY) / 10.0f;
+                                float lerpedAlpha = MathHelper.lerp(seaLevelDist, 0.0f, 1.0f);
+                                float clampedAlpha = MathHelper.clamp(y - lerpedAlpha, 0.0f, 1.0f);
+
+                                bufferBuilder.vertex((double)o - cameraX - d + 0.5, (double)s - cameraY, (double)n - cameraZ - e + 0.5).texture(0.0F, (float)r * 0.25F + h).color(1.0F, 1.0F, 1.0F, clampedAlpha).light(z).next();
+                                bufferBuilder.vertex((double)o - cameraX + d + 0.5, (double)s - cameraY, (double)n - cameraZ + e + 0.5).texture(1.0F, (float)r * 0.25F + h).color(1.0F, 1.0F, 1.0F, clampedAlpha).light(z).next();
+                                bufferBuilder.vertex((double)o - cameraX + d + 0.5, (double)r - cameraY, (double)n - cameraZ + e + 0.5).texture(1.0F, (float)s * 0.25F + h).color(1.0F, 1.0F, 1.0F, clampedAlpha).light(z).next();
+                                bufferBuilder.vertex((double)o - cameraX - d + 0.5, (double)r - cameraY, (double)n - cameraZ - e + 0.5).texture(0.0F, (float)s * 0.25F + h).color(1.0F, 1.0F, 1.0F, clampedAlpha).light(z).next();
                             }
                         }
                     }
