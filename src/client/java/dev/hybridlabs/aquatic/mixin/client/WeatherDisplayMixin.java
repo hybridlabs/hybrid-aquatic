@@ -1,9 +1,11 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.resource.SynchronousResourceReloader;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -12,6 +14,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -44,7 +47,7 @@ public abstract class WeatherDisplayMixin implements SynchronousResourceReloader
     void hybrid$renderWeatherInject(LightmapTextureManager manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
         float f = this.client.world.getRainGradient(tickDelta);
         World world = this.client.world;
-        if(f > 0.0f && cameraY < world.getSeaLevel()-0.15) {
+        if(f > 0.0f && cameraY < world.getSeaLevel()-0.15 && world.getBiome(client.player.getBlockPos()).isIn(BiomeTags.IS_OCEAN)) {
             manager.enable();
             int xFloored = MathHelper.floor(cameraX);
             int yFloored = MathHelper.floor(cameraY);
@@ -112,7 +115,7 @@ public abstract class WeatherDisplayMixin implements SynchronousResourceReloader
                                 mutable.set(o, t, n);
                                 int z = getLightmapCoordinates(world, mutable);
 
-                                float seaLevelDist = (float) (world.getSeaLevel() - cameraY) / 10.0f;
+                                float seaLevelDist = (float) (world.getSeaLevel() - cameraY) / 5.0f; // the end float is how deep it goes
                                 float lerpedAlpha = MathHelper.lerp(seaLevelDist, 0.0f, 1.0f);
                                 float clampedAlpha = MathHelper.clamp(y - lerpedAlpha, 0.0f, 1.0f);
 
