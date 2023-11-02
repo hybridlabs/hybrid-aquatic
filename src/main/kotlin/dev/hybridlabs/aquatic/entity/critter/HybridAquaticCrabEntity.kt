@@ -23,7 +23,7 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
 
     override fun mobTick() {
         val songSourceCopy = songSource
-        if (songSourceCopy == null || !songSourceCopy.isWithinDistance(this.pos, 8.0) || !this.world.getBlockState(songSourceCopy).isOf(Blocks.JUKEBOX)) {
+        if (songSourceCopy == null || !songSourceCopy.isWithinDistance(this.pos, 6.0) || !this.world.getBlockState(songSourceCopy).isOf(Blocks.JUKEBOX)) {
             songPlaying = false
             songSource = null
         }
