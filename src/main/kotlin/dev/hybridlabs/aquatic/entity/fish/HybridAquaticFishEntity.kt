@@ -147,15 +147,15 @@ open class HybridAquaticFishEntity(
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
         if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
+            event.controller.setAnimation(SWIM_ANIMATION)
             return PlayState.CONTINUE
         }
         if (!isSubmergedInWater && shouldFlopOnLand()) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
+            event.controller.setAnimation(FLOP_ANIMATION)
             return PlayState.CONTINUE
         }
         if (isWet && isFallFlying) {
-            event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
+            event.controller.setAnimation(SWIM_ANIMATION)
             return PlayState.CONTINUE
         }
         return PlayState.STOP
@@ -314,6 +314,9 @@ open class HybridAquaticFishEntity(
             DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CLOSE_PLAYER_PREDICATE: TargetPredicate =
             TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
+
+        val SWIM_ANIMATION: RawAnimation  = RawAnimation.begin().then("swim", Animation.LoopType.LOOP)
+        val FLOP_ANIMATION: RawAnimation  = RawAnimation.begin().then("flop", Animation.LoopType.LOOP)
 
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,

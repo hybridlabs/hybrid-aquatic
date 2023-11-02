@@ -8,7 +8,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
 class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: World) :
-    HybridAquaticCritterEntity(entityType, world) {
+    HybridAquaticCrabEntity(entityType, world) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -18,9 +18,11 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Worl
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
     }
+
     override fun getGroup(): EntityGroup? {
         return EntityGroup.ARTHROPOD
     }
+
     override fun getMaxSize() : Int {
         return 5
     }

@@ -102,6 +102,11 @@ open class HybridAquaticSharkEntity(
 
         val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(5, 10)
 
+        val FLOP_ANIMATION: RawAnimation  = RawAnimation.begin().then("flop", Animation.LoopType.LOOP)
+        val ATTACK_ANIMATION: RawAnimation  = RawAnimation.begin().then("attack", Animation.LoopType.LOOP)
+        val SWIM_ANIMATION: RawAnimation  = RawAnimation.begin().then("swim", Animation.LoopType.LOOP)
+        val RUSH_ANIMATION: RawAnimation  = RawAnimation.begin().then("rush", Animation.LoopType.LOOP)
+
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: WorldAccess,
@@ -216,15 +221,15 @@ open class HybridAquaticSharkEntity(
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
         if (!this.isWet) {
-            event.controller.setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP))
+            event.controller.setAnimation(FLOP_ANIMATION)
         } else if (this.handSwinging) {
-            event.controller.setAnimation(RawAnimation.begin().then("attack", Animation.LoopType.LOOP))
+            event.controller.setAnimation(ATTACK_ANIMATION)
 //            this.attemptAttack = false
         } else if (isSubmergedInWater) {
             if (!isRushing)
-                event.controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP))
+                event.controller.setAnimation(SWIM_ANIMATION)
             else
-                event.controller.setAnimation(RawAnimation.begin().then("rush", Animation.LoopType.LOOP))
+                event.controller.setAnimation(RUSH_ANIMATION)
         }
         return PlayState.CONTINUE
     }

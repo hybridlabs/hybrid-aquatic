@@ -7,7 +7,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
 class SpiderCrabEntity(entityType: EntityType<out SpiderCrabEntity>, world: World) :
-    HybridAquaticCritterEntity(entityType, world) {
+    HybridAquaticCrabEntity(entityType, world) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -17,6 +17,7 @@ class SpiderCrabEntity(entityType: EntityType<out SpiderCrabEntity>, world: Worl
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
     }
+
     override fun getMaxSize() : Int {
         return 5
     }

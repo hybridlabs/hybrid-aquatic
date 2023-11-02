@@ -115,12 +115,12 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
         if (event.isMoving) {
-            event.controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP))
+            event.controller.setAnimation(WALK_ANIMATION)
             return PlayState.CONTINUE
         }
 
         if (isOnGround) {
-            event.controller.setAnimation(RawAnimation.begin().then("sit", Animation.LoopType.LOOP))
+            event.controller.setAnimation(SIT_ANIMATION)
             return PlayState.CONTINUE
         }
         return PlayState.STOP
@@ -228,5 +228,8 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         }
         const val VARIANT_KEY = "Variant"
         const val CRITTER_SIZE_KEY = "CritterSize"
+
+        val WALK_ANIMATION: RawAnimation  = RawAnimation.begin().then("walk", Animation.LoopType.LOOP)
+        val SIT_ANIMATION: RawAnimation  = RawAnimation.begin().then("sit", Animation.LoopType.LOOP)
     }
 }

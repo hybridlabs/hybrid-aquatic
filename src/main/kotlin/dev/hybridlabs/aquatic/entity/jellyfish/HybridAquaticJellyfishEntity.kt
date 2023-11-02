@@ -120,7 +120,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
         if (isSubmergedInWater) {
-            event.controller.setAnimation(RawAnimation.begin().then("bob", Animation.LoopType.LOOP))
+            event.controller.setAnimation(BOB_ANIMATION)
             return PlayState.CONTINUE
         }
         return PlayState.STOP
@@ -216,6 +216,8 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val SPAWNED_ON_Y: TrackedData<Int> = DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val JELLYFISH_SIZE: TrackedData<Int> = DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val BOB_ANIMATION: RawAnimation = RawAnimation.begin().then("bob", Animation.LoopType.LOOP)
 
         val CLOSE_PLAYER_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
 

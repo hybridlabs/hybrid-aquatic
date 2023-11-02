@@ -8,7 +8,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
 class FiddlerCrabEntity(entityType: EntityType<out FiddlerCrabEntity>, world: World) :
-    HybridAquaticCritterEntity(entityType, world, 3) {
+    HybridAquaticCrabEntity(entityType, world, 3) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -18,9 +18,11 @@ class FiddlerCrabEntity(entityType: EntityType<out FiddlerCrabEntity>, world: Wo
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
     }
+
     override fun getGroup(): EntityGroup? {
         return EntityGroup.ARTHROPOD
     }
+
     override fun getMaxSize() : Int {
         return 5
     }
