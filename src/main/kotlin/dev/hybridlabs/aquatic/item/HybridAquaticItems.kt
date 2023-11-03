@@ -20,8 +20,10 @@ import net.minecraft.util.Identifier
 
 object HybridAquaticItems {
     val ANEMONE = registerBlockItem("anemone", HybridAquaticBlocks.ANEMONE)
-    val FISHING_PLAQUE = registerBlockItem("fishing_plaque", HybridAquaticBlocks.FISHING_PLAQUE);
+    val FISHING_PLAQUE = registerBlockItem("fishing_plaque", HybridAquaticBlocks.FISHING_PLAQUE)
+    val BUOY = registerBlockItem("buoy", HybridAquaticBlocks.BUOY)
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleItem(FabricItemSettings()))
+
     val FISHING_NET = register("fishing_net", FishingNetItem(FabricItemSettings().maxCount(1)))
 
     val GLOW_SLIME = register("glow_slime", Item(FabricItemSettings()))

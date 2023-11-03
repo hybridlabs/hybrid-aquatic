@@ -5,12 +5,11 @@ import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
-import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.FishingPlaqueBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.hud.FishingNetHUDRenderer
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.BuoyBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.api.ClientModInitializer
@@ -63,6 +62,7 @@ object HybridAquaticClient : ClientModInitializer {
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.ANEMONE, ::AnemoneBlockEntityRenderer)
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE, ::MessageInABottleBlockEntityRenderer)
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.FISHING_PLAQUE, ::FishingPlaqueBlockEntityRenderer)
+        BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.BUOY, ::BuoyBlockEntityRenderer)
     }
 
     private fun registerEntityRenderers() {
@@ -71,6 +71,7 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
         registry.register(HybridAquaticItems.ANEMONE, AnemoneBlockItemRenderer())
+        registry.register(HybridAquaticItems.BUOY, BuoyBlockItemRenderer())
         registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE, MessageInABottleBlockItemRenderer())
     }
 

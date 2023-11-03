@@ -47,6 +47,8 @@ object HybridAquaticBlocks {
 
     val CRATE = register("crate", CrateBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)))
 
+    val BUOY = register("buoy", BuoyBlock(FabricBlockSettings.copyOf(Blocks.RED_WOOL)))
+
     private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block): PlushieBlock {
         return PlushieBlock(variant, particleBlock,
             FabricBlockSettings.create()

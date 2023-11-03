@@ -15,6 +15,7 @@ object HybridAquaticBlockEntityTypes {
     val ANEMONE: BlockEntityType<AnemoneBlockEntity> = register("anemone", FabricBlockEntityTypeBuilder.create(::AnemoneBlockEntity, HybridAquaticBlocks.ANEMONE))
     val MESSAGE_IN_A_BOTTLE: BlockEntityType<MessageInABottleBlockEntity> = register("message_in_a_bottle", FabricBlockEntityTypeBuilder.create(::MessageInABottleBlockEntity, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE))
     val FISHING_PLAQUE: BlockEntityType<FishingPlaqueBlockEntity> = register("fishing_plaque", FabricBlockEntityTypeBuilder.create(::FishingPlaqueBlockEntity, HybridAquaticBlocks.FISHING_PLAQUE))
+    val BUOY: BlockEntityType<BuoyBlockEntity> = register("buoy", FabricBlockEntityTypeBuilder.create(::BuoyBlockEntity, HybridAquaticBlocks.BUOY))
 
     private fun <T : BlockEntity> register(id: String, builder: FabricBlockEntityTypeBuilder<T>): BlockEntityType<T> {
         val identifier = Identifier(HybridAquatic.MOD_ID, id)
