@@ -21,14 +21,14 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
         super.setNearbySongPlaying(songPosition, playing)
     }
 
-    override fun mobTick() {
+    override fun tickMovement() {
         val songSourceCopy = songSource
-        if (songSourceCopy == null || !songSourceCopy.isWithinDistance(this.pos, 6.0) || !this.world.getBlockState(songSourceCopy).isOf(Blocks.JUKEBOX)) {
+        if (songSourceCopy == null || !songSourceCopy.isWithinDistance(pos, 3.46) || !world.getBlockState(songSourceCopy).isOf(Blocks.JUKEBOX)) {
             songPlaying = false
             songSource = null
         }
 
-        super.mobTick()
+        super.tickMovement()
     }
 
     override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
