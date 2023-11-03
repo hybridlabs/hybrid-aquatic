@@ -2,11 +2,15 @@ package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.EscapeDangerGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.MoveIntoWaterGoal
+import net.minecraft.entity.ai.goal.WanderAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
-import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
@@ -26,7 +30,6 @@ import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
@@ -34,13 +37,11 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterEntity>, world: World, private val variantCount: Int = 1) : WaterCreatureEntity(type, world), GeoEntity {
 
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private val buoyant = false
     private var landNavigation: EntityNavigation = createNavigation(world)
 
     init {
         stepHeight = 1.0F
         moveControl = MoveControl(this)
-        setPathfindingPenalty(PathNodeType.WATER, 0.0F)
         navigation = this.landNavigation
     }
 
@@ -55,7 +56,6 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         goalSelector.add(2, MoveIntoWaterGoal(this))
         goalSelector.add(3, EscapeDangerGoal(this, 0.35))
         goalSelector.add(5, WanderAroundGoal(this, 0.35, 10))
-        //goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 12.0f))
         goalSelector.add(5, LookAroundGoal(this))
     }
 
@@ -67,26 +67,10 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         entityNbt: NbtCompound?
     ): EntityData? {
         this.air = this.maxAir
-        pitch = 0.0f
         this.variant = this.random.nextInt(variantCount)
         this.size = this.random.nextBetween(getMinSize(),getMaxSize())
-        this.pitch = 0.0f
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
-
-    override fun updateSwimming() {
-        if (!world.isClient) {
-            this.isSwimming = canMoveVoluntarily() && this.isTouchingWater
-        }
-    }
-
-    override fun tick() {
-        super.tick()
-        if (!buoyant && this.isTouchingWater && !isOnGround) {
-            this.velocity = this.velocity.add(0.0, -0.05, 0.0)
-        }
-    }
-
     override fun hasNoDrag(): Boolean {
         return false
     }
@@ -117,13 +101,10 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         if (event.isMoving) {
             event.controller.setAnimation(WALK_ANIMATION)
             return PlayState.CONTINUE
-        }
-
-        if (isOnGround) {
-            event.controller.setAnimation(SIT_ANIMATION)
+        } else {
+            event.controller.setAnimation(IDLE_ANIMATION)
             return PlayState.CONTINUE
         }
-        return PlayState.STOP
     }
 
     protected open fun getMinSize() : Int {
@@ -132,10 +113,6 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
 
     protected open fun getMaxSize() : Int {
         return 0
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.65f
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
@@ -155,25 +132,12 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_COD_AMBIENT
-    }
-
-    override fun getSplashSound(): SoundEvent {
-        return SoundEvents.ENTITY_DOLPHIN_SPLASH
+        return SoundEvents.ENTITY_SALMON_AMBIENT
     }
 
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SPIDER_STEP
     }
-
-    override fun createNavigation(world: World): EntityNavigation {
-        return MobNavigation(this, world)
-    }
-
-    protected fun hasSelfControl(): Boolean {
-        return true
-    }
-
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             AnimationController(
@@ -230,6 +194,6 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
         const val CRITTER_SIZE_KEY = "CritterSize"
 
         val WALK_ANIMATION: RawAnimation  = RawAnimation.begin().then("walk", Animation.LoopType.LOOP)
-        val SIT_ANIMATION: RawAnimation  = RawAnimation.begin().then("sit", Animation.LoopType.LOOP)
+        val IDLE_ANIMATION: RawAnimation  = RawAnimation.begin().then("idle", Animation.LoopType.LOOP)
     }
 }

@@ -94,7 +94,7 @@
 				}
 			}
 		},
-		"sit": {
+		"idle": {
 			"loop": true,
 			"animation_length": 2.5,
 			"bones": {

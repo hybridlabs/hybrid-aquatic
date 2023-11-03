@@ -1,14 +1,13 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
-class FiddlerCrabEntity(entityType: EntityType<out HybridAquaticCritterEntity>, world: World) :
-    HybridAquaticCrabEntity(entityType, world, 3) {
+class CoconutCrabEntity(entityType: EntityType<out HybridAquaticCritterEntity>, world: World) :
+    HybridAquaticCrabEntity(entityType, world, 4) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
@@ -17,10 +16,6 @@ class FiddlerCrabEntity(entityType: EntityType<out HybridAquaticCritterEntity>, 
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
-    }
-
-    override fun getGroup(): EntityGroup? {
-        return EntityGroup.ARTHROPOD
     }
 
     override fun getMaxSize() : Int {

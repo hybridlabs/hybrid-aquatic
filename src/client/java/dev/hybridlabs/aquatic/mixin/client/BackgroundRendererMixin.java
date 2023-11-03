@@ -29,16 +29,16 @@ public class BackgroundRendererMixin {
             fogData.fogStart = -8.0F;
 
             int topY = entity.getWorld().getSeaLevel();
-            float fogStep = (float) (topY - camera.getPos().y) / 10.0f; // as usual modify this end variable for when water fog should reach maximum darkness
+            float fogStep = (float) (topY - camera.getPos().y) / 32.0f; // as usual modify this end variable for when water fog should reach maximum darkness
             // arg after start is the default fog starting point
             // arg after that one is where the fog ends distance wise
-            fogData.fogEnd = MathHelper.lerp(fogStep, 96.0f, 5.0f);
+            fogData.fogEnd = MathHelper.lerp(fogStep, 80.0f, 12.0f);
             if (entity instanceof ClientPlayerEntity) {
                 ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) entity;
                 fogData.fogEnd *= Math.max(0.25F, clientPlayerEntity.getUnderwaterVisibility());
                 RegistryEntry<Biome> registryEntry = clientPlayerEntity.getWorld().getBiome(clientPlayerEntity.getBlockPos());
                 if (registryEntry.isIn(BiomeTags.HAS_CLOSER_WATER_FOG)) {
-                    fogData.fogEnd *= 0.85F;
+                    fogData.fogEnd *= 1.0F;
                 }
             }
 
@@ -46,7 +46,7 @@ public class BackgroundRendererMixin {
                 fogData.fogEnd = viewDistance;
                 fogData.fogShape = FogShape.CYLINDER;
             }
+            fogData.fogEnd = Math.max(fogData.fogEnd, 12.0f);
         }
     }
-
 }

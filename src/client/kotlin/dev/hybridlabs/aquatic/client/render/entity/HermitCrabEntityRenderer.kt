@@ -20,4 +20,7 @@ class HermitCrabEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquat
         poseStack!!.scale(size, size, size)
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
     }
+    override fun getMotionAnimThreshold(animatable: HybridAquaticCritterEntity?): Float {
+        return 0.0025f
+    }
 }

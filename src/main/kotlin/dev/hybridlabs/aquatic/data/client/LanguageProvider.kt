@@ -186,6 +186,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.VAMPIRE_CRAB to "Vampire Crab",
             HybridAquaticEntityTypes.SPIDER_CRAB to "Spider Crab",
             HybridAquaticEntityTypes.YETI_CRAB to "Yeti Crab",
+            HybridAquaticEntityTypes.COCONUT_CRAB to "Coconut Crab",
             HybridAquaticEntityTypes.HORSESHOE_CRAB to "Horseshoe Crab",
             HybridAquaticEntityTypes.GIANT_ISOPOD to "Giant Isopod",
             HybridAquaticEntityTypes.SHRIMP to "Shrimp",

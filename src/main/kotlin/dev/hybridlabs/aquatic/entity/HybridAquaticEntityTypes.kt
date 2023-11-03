@@ -359,6 +359,12 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(0.5f, 0.5f),
         CrayfishEntity.createMobAttributes()
     )
+    val COCONUT_CRAB = registerCritter(
+        "coconut_crab",
+        ::CoconutCrabEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        CoconutCrabEntity.createMobAttributes()
+    )
     val STARFISH = registerCritter(
         "starfish",
         ::StarfishEntity,

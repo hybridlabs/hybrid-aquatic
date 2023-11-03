@@ -1,15 +1,13 @@
 package dev.hybridlabs.aquatic.client.render.entity
 
-import dev.hybridlabs.aquatic.client.model.entity.CrabEntityModel
-import dev.hybridlabs.aquatic.client.model.entity.FlowerCrabEntityModel
-import dev.hybridlabs.aquatic.client.model.entity.SpiderCrabEntityModel
+import dev.hybridlabs.aquatic.client.model.entity.*
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
 import net.minecraft.client.util.math.MatrixStack
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 
-class FlowerCrabEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquaticCritterEntity>(context, FlowerCrabEntityModel()) {
+class CoconutCrabEntityRenderer(context: Context) : GeoEntityRenderer<HybridAquaticCritterEntity>(context, CoconutCrabEntityModel()) {
     override fun render(
         entity: HybridAquaticCritterEntity?,
         entityYaw: Float,
