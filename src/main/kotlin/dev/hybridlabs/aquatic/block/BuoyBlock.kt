@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
+import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockRenderType
@@ -15,7 +15,6 @@ class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider {
     }
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return AnemoneBlockEntity(pos, state)
+        return BuoyBlockEntity(pos, state)
     }
-
 }
