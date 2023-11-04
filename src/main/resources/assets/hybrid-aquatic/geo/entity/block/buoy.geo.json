@@ -7,24 +7,30 @@
 				"texture_width": 64,
 				"texture_height": 64,
 				"visible_bounds_width": 2,
-				"visible_bounds_height": 4,
-				"visible_bounds_offset": [0, 1, 0]
+				"visible_bounds_height": 4.5,
+				"visible_bounds_offset": [0, 1.75, 0]
 			},
 			"bones": [
 				{
 					"name": "buoy",
-					"pivot": [0, -6.5, 0],
+					"pivot": [0, 8, 0],
 					"cubes": [
-						{"origin": [-7, -12.5, -7], "size": [14, 13, 14], "uv": [0, 0]},
-						{"origin": [-1, 0.5, -1], "size": [2, 32, 2], "uv": [0, 27]}
+						{"origin": [-7, 2, -7], "size": [14, 13, 14], "uv": [0, 0]},
+						{"origin": [-1, 15, -1], "size": [2, 12, 2], "uv": [0, 0]},
+						{"origin": [-6, 27, -1], "size": [12, 2, 2], "uv": [24, 31]},
+						{"origin": [-6, 39, -1], "size": [12, 2, 2], "uv": [18, 27]},
+						{"origin": [4, 29, -1], "size": [2, 10, 2], "uv": [24, 35]},
+						{"origin": [-6, 29, -1], "size": [2, 10, 2], "uv": [32, 35]}
 					]
 				},
 				{
-					"name": "flag",
+					"name": "lantern",
 					"parent": "buoy",
-					"pivot": [1, 26.5, 0],
+					"pivot": [0, 39.16667, 0.16667],
 					"cubes": [
-						{"origin": [1, 21.5, 0], "size": [12, 10, 0], "uv": [8, 27]}
+						{"origin": [0, 36, -1.5], "size": [0, 3, 3], "uv": [8, 0]},
+						{"origin": [-1.5, 36, 0.5], "size": [3, 3, 0], "uv": [8, 0]},
+						{"origin": [-3, 30, -3], "size": [6, 7, 6], "uv": [0, 27]}
 					]
 				}
 			]

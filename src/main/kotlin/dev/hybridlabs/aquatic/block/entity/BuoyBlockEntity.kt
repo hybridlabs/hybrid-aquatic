@@ -5,10 +5,7 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.util.math.BlockPos
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.animation.*
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import software.bernie.geckolib.util.RenderUtils
@@ -17,11 +14,14 @@ import software.bernie.geckolib.util.RenderUtils
 class BuoyBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.BUOY, pos, state), GeoAnimatable {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
 
-    fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        event.controller.setAnimation(BOB_ANIMATION)
-        return PlayState.CONTINUE
+    private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
+        return if (world != null) {
+            event.controller.setAnimation(RawAnimation.begin().then("float", Animation.LoopType.LOOP))
+            PlayState.CONTINUE
+        } else {
+            PlayState.STOP
+        }
     }
-
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             AnimationController(
