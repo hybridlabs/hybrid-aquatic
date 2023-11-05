@@ -3,7 +3,6 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.block.FishingPlaque
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -13,7 +12,6 @@ import net.minecraft.entity.mob.MobEntity
 import net.minecraft.item.BlockItem
 import net.minecraft.item.FoodComponent
 import net.minecraft.item.Item
-import net.minecraft.item.PlaceableOnWaterItem
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
