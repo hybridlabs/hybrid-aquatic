@@ -13,6 +13,7 @@ import net.minecraft.entity.mob.MobEntity
 import net.minecraft.item.BlockItem
 import net.minecraft.item.FoodComponent
 import net.minecraft.item.Item
+import net.minecraft.item.PlaceableOnWaterItem
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -21,7 +22,7 @@ import net.minecraft.util.Identifier
 object HybridAquaticItems {
     val ANEMONE = registerBlockItem("anemone", HybridAquaticBlocks.ANEMONE)
     val FISHING_PLAQUE = registerBlockItem("fishing_plaque", HybridAquaticBlocks.FISHING_PLAQUE)
-    val BUOY = registerBlockItem("buoy", HybridAquaticBlocks.BUOY)
+    val BUOY = registerPlaceableInWaterBlockItem("buoy", HybridAquaticBlocks.BUOY)
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleItem(FabricItemSettings()))
 
     val FISHING_NET = register("fishing_net", FishingNetItem(FabricItemSettings().maxCount(1)))
@@ -457,5 +458,9 @@ object HybridAquaticItems {
 
     private fun registerBlockItem(id: String, block: Block): Item {
         return register(id, BlockItem(block, FabricItemSettings()))
+    }
+
+    private fun registerPlaceableInWaterBlockItem(id: String, block: Block): Item {
+        return register(id, PlaceableInWaterItem(block, FabricItemSettings()))
     }
 }

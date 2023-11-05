@@ -6,7 +6,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory.Conte
 import software.bernie.geckolib.renderer.GeoBlockRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
-class BuoyBlockEntityRenderer(context: Context) : GeoBlockRenderer<BuoyBlockEntity>(BuoyBlockEntityModel()) {init {
-    addRenderLayer(AutoGlowingGeoLayer(this))
+class BuoyBlockEntityRenderer(context: Context) : GeoBlockRenderer<BuoyBlockEntity>(BuoyBlockEntityModel()) {
+    init {
+        addRenderLayer(AutoGlowingGeoLayer(this))
     }
 }
