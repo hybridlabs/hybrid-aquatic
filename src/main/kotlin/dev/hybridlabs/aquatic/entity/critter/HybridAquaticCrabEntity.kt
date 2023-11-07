@@ -11,7 +11,6 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 
-
 open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEntity>, world: World, variantCount: Int = 1): HybridAquaticCritterEntity(type, world, variantCount) {
     private var songSource: BlockPos? = null
     private var songPlaying: Boolean = false
@@ -22,7 +21,7 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
     override fun initDataTracker() {
         super.initDataTracker()
 
-        goalSelector.add(3, CrabDiggingItemGoal(this, 0.05, 6))
+        goalSelector.add(3, CrabDiggingItemGoal(this, 0.05, 6, 0.5))
     }
 
     override fun setNearbySongPlaying(songPosition: BlockPos?, playing: Boolean) {

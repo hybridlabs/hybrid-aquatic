@@ -8,29 +8,27 @@ import net.minecraft.util.math.random.Random
 class CrabDiggingItemGoal(
     private val crab: HybridAquaticCrabEntity,
     private val chance: Double,
-    private val radius: Int
+    private val radius: Int,
+    private val speed: Double
 ) : Goal() {
     val random: Random = crab.random
 
-    private var diggableBlock: BlockPos? = null
+    private var diggableBlock: BlockPos = BlockPos.ORIGIN
     private var diggingTimer: Int = 0
 
     override fun canStart(): Boolean {
-        if (crab.diggingCooldown == 0 && random.nextDouble() <= chance) {
-
-            diggableBlock
-        }
-
-        return diggableBlock != null
+        return crab.diggingCooldown == 0 && random.nextDouble() <= chance && findNearestDiggableBlock()
     }
 
     override fun start() {
         diggingTimer = 0
+        crab.navigation.startMovingTo(diggableBlock.x + 0.5, diggableBlock.y + 0.5, diggableBlock.z + 0.5, speed)
 
         super.start()
     }
 
     override fun tick() {
+
         super.tick()
     }
 
@@ -40,5 +38,10 @@ class CrabDiggingItemGoal(
 
     override fun stop() {
         super.stop()
+    }
+
+    private fun findNearestDiggableBlock(): Boolean {
+
+        return false
     }
 }
