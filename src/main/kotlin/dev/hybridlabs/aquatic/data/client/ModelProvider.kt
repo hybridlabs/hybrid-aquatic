@@ -8,7 +8,11 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.block.Blocks
-import net.minecraft.data.client.*
+import net.minecraft.data.client.BlockStateModelGenerator
+import net.minecraft.data.client.ItemModelGenerator
+import net.minecraft.data.client.ModelIds
+import net.minecraft.data.client.Models
+import net.minecraft.data.client.TextureMap
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
@@ -38,7 +42,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         mapOf(
             HybridAquaticBlocks.ANEMONE to (HybridAquaticBlocks.ANEMONE to TEMPLATE_ANEMONE),
             HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE to (Blocks.GLASS to TEMPLATE_MESSAGE_IN_A_BOTTLE),
-            HybridAquaticBlocks.BUOY to (HybridAquaticBlocks.BUOY to TEMPLATE_BUOY)
+            HybridAquaticBlocks.BUOY to (Blocks.LANTERN to TEMPLATE_BUOY)
         ).forEach { (block, info) ->
             val (particleBlock, template) = info
 

@@ -63,6 +63,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.WHALE_SHARK_PLUSHIE to "Whale Shark Plushie",
             HybridAquaticBlocks.ANEMONE to "Anemone",
             HybridAquaticBlocks.CRATE to "Crate",
+            HybridAquaticBlocks.BUOY to "Buoy",
         ).forEach { (block, translation) ->
             builder.add(block, translation)
         }
