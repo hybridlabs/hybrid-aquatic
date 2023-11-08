@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import dev.hybridlabs.aquatic.entity.ai.goal.CrabDiggingItemGoal
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityType
 import net.minecraft.util.math.BlockPos
@@ -10,18 +11,29 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 
-
 open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEntity>, world: World, variantCount: Int = 1): HybridAquaticCritterEntity(type, world, variantCount) {
     private var songSource: BlockPos? = null
     private var songPlaying: Boolean = false
-    private var diggingTimer: Int = 0
-    private var isDigging: Boolean = false
-    private val blockBelow = world.getBlockState(blockPos.down()).block
+
+    var isDigging: Boolean = false
+    var diggingCooldown: Int = 0
+
+    override fun initDataTracker() {
+        super.initDataTracker()
+
+        goalSelector.add(3, CrabDiggingItemGoal(this, 0.05, 6, 0.5))
+    }
 
     override fun setNearbySongPlaying(songPosition: BlockPos?, playing: Boolean) {
         songSource = songPosition
         songPlaying = playing
         super.setNearbySongPlaying(songPosition, playing)
+    }
+
+    override fun mobTick() {
+        if (diggingCooldown > 0) diggingCooldown--
+
+        super.mobTick()
     }
 
     override fun tickMovement() {
@@ -39,8 +51,12 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
             event.controller.setAnimation(DANCE_ANIMATION)
             return PlayState.CONTINUE
         }
-        if (isDigging && blockBelow == Blocks.SAND)
+
+        if (isDigging) {
             event.controller.setAnimation(DIGGING_ANIMATION)
+            return PlayState.CONTINUE
+        }
+
         return super.predicate(event)
     }
 

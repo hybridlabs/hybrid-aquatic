@@ -19,6 +19,12 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBlockTags.MESSAGE_IN_A_BOTTLE_SPAWNS_IN)
             .add(Blocks.WATER)
 
+        getOrCreateTagBuilder(HybridAquaticBlockTags.CRAB_DIGGABLE_BLOCKS)
+            .add(Blocks.SAND)
+            .add(Blocks.SUSPICIOUS_SAND)
+            .add(Blocks.GRAVEL)
+            .add(Blocks.SUSPICIOUS_GRAVEL)
+
         // plushies
         Registries.BLOCK
             .filter(filterHybridAquatic(Registries.BLOCK))
