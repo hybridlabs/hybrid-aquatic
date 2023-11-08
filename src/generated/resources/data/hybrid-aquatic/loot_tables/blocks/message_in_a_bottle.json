@@ -1,3 +1,80 @@
 {
-  "type": "minecraft:block"
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "function": "minecraft:copy_nbt",
+                  "ops": [
+                    {
+                      "op": "replace",
+                      "source": "variant",
+                      "target": "BlockEntityTag.variant"
+                    },
+                    {
+                      "op": "replace",
+                      "source": "message",
+                      "target": "BlockEntityTag.message"
+                    }
+                  ],
+                  "source": "block_entity"
+                }
+              ],
+              "name": "hybrid-aquatic:message_in_a_bottle"
+            },
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "minecraft:copy_nbt",
+                  "ops": [
+                    {
+                      "op": "replace",
+                      "source": "message.tag.pages",
+                      "target": "pages"
+                    },
+                    {
+                      "op": "replace",
+                      "source": "message.tag.title",
+                      "target": "title"
+                    },
+                    {
+                      "op": "replace",
+                      "source": "message.tag.author",
+                      "target": "author"
+                    }
+                  ],
+                  "source": "block_entity"
+                }
+              ],
+              "name": "minecraft:written_book"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
 }
