@@ -1,8 +1,12 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.ai.goal.CrabDiggingItemGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.CrabDigGoal
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import software.bernie.geckolib.core.animatable.GeoAnimatable
@@ -15,13 +19,22 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
     private var songSource: BlockPos? = null
     private var songPlaying: Boolean = false
 
-    var isDigging: Boolean = false
     var diggingCooldown: Int = 0
+    var isDigging: Boolean
+        get() = dataTracker.get(IS_DIGGING)
+        set(bool) {
+            dataTracker.set(IS_DIGGING, bool)
+        }
+
+    //TODO: Mystic, you can remove initGoals here and then put it in required crab classes
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(3, CrabDigGoal(this, 0.05))
+    }
 
     override fun initDataTracker() {
+        dataTracker.startTracking(IS_DIGGING, false)
         super.initDataTracker()
-
-        goalSelector.add(3, CrabDiggingItemGoal(this, 0.05, 6, 0.5))
     }
 
     override fun setNearbySongPlaying(songPosition: BlockPos?, playing: Boolean) {
@@ -46,6 +59,16 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
         super.tickMovement()
     }
 
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        super.writeCustomDataToNbt(nbt)
+        nbt.putInt(DIGGING_COOLDOWN_KEY, diggingCooldown)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        super.readCustomDataFromNbt(nbt)
+        diggingCooldown = nbt.getInt(DIGGING_COOLDOWN_KEY)
+    }
+
     override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
         if (songPlaying) {
             event.controller.setAnimation(DANCE_ANIMATION)
@@ -63,5 +86,8 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
     companion object {
         val DANCE_ANIMATION: RawAnimation  = RawAnimation.begin().then("dance", Animation.LoopType.LOOP)
         val DIGGING_ANIMATION: RawAnimation = RawAnimation.begin().then("dig", Animation.LoopType.LOOP)
+
+        val IS_DIGGING: TrackedData<Boolean> = DataTracker.registerData(HybridAquaticCrabEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+        const val DIGGING_COOLDOWN_KEY = "DiggingCooldown"
     }
 }

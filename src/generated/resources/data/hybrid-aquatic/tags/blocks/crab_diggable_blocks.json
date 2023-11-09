@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "minecraft:sand",
-    "minecraft:suspicious_sand",
-    "minecraft:gravel",
-    "minecraft:suspicious_gravel"
+    "#hybrid-aquatic:crab_diggable_treasure_blocks",
+    "minecraft:dirt",
+    "minecraft:coarse_dirt",
+    "minecraft:grass_block"
   ]
 }

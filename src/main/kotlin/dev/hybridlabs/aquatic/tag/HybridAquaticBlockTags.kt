@@ -23,9 +23,15 @@ object HybridAquaticBlockTags {
     val MESSAGE_IN_A_BOTTLE_SPAWNS_IN = create("message_in_a_bottle_spawns_in")
 
     /**
-     * A list of blocks that Crab can dig up items from.
+     * A list of blocks that Crab can dig up.
      */
     val CRAB_DIGGABLE_BLOCKS = create("crab_diggable_blocks")
+
+    /**
+     * A list of blocks that will drop items when crabs try to dig them.
+     */
+    val CRAB_DIGGABLE_TREASURE_BLOCKS = create("crab_diggable_treasure_blocks")
+
 
     private fun create(id: String): TagKey<Block> {
         return TagKey.of(RegistryKeys.BLOCK, Identifier(HybridAquatic.MOD_ID, id))
