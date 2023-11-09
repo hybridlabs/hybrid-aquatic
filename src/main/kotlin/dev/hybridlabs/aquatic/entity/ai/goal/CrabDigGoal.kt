@@ -21,7 +21,12 @@ class CrabDigGoal(
 
     override fun canStart(): Boolean {
         diggableBlock = world.getBlockState(crab.blockPos.down())
-        return crab.diggingCooldown == 0 && random.nextDouble() <= chance && diggableBlock.isIn(HybridAquaticBlockTags.CRAB_DIGGABLE_BLOCKS)
+        if(crab.diggingCooldown == 0 && random.nextDouble() <= chance && diggableBlock.isIn(HybridAquaticBlockTags.CRAB_DIGGABLE_BLOCKS)) {
+            return true
+        }
+
+        crab.diggingCooldown = 300
+        return false
     }
 
     override fun start() {
