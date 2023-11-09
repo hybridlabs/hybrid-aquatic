@@ -12,7 +12,6 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.entity.ItemEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -24,7 +23,6 @@ import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.util.math.Vec3d
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
@@ -43,27 +41,11 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
     }
 
     override fun getPickStack(world: BlockView, pos: BlockPos, state: BlockState): ItemStack {
-        val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity
-            ?: return super.getPickStack(world, pos, state)
-        return createItemStack(blockEntity)
-    }
-
-    override fun onStateReplaced(
-        state: BlockState,
-        world: World,
-        pos: BlockPos,
-        newState: BlockState,
-        moved: Boolean
-    ) {
-        if (!state.isOf(newState.block)) {
-            (world.getBlockEntity(pos) as? MessageInABottleBlockEntity)?.let { blockEntity ->
-                val position = Vec3d.ofCenter(pos)
-                val itemEntity = ItemEntity(world, position.x, position.y, position.z, blockEntity.messageItemStack)
-                world.spawnEntity(itemEntity)
-            }
+        val blockEntity = world.getBlockEntity(pos)
+        if (blockEntity !is MessageInABottleBlockEntity) {
+            return super.getPickStack(world, pos, state)
         }
-
-        super.onStateReplaced(state, world, pos, newState, moved)
+        return createItemStack(blockEntity)
     }
 
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
