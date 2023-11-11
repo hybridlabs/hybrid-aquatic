@@ -112,7 +112,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
-        variant = nbt.getInt(VARIANT_KEY)
+        variant = nbt.getInt(VARIANT_KEY).coerceAtLeast(0).coerceAtMost(variantCount-1)
         size = nbt.getInt(JELLYFISH_SIZE_KEY)
         spawnedY = if (!nbt.contains(SPAWNED_ON_Y_KEY)) (this.y - 1).toInt()
         else nbt.getInt(SPAWNED_ON_Y_KEY)
@@ -171,7 +171,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         }
 
     var variant: Int
-        get() = dataTracker.get(VARIANT)
+        get() = dataTracker.get(VARIANT).coerceAtLeast(0).coerceAtMost(variantCount-1)
         set(int) {
             dataTracker.set(VARIANT, int)
         }

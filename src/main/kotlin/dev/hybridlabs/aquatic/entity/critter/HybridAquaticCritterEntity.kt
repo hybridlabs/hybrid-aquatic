@@ -91,7 +91,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        variant = nbt.getInt(HybridAquaticFishEntity.VARIANT_KEY)
+        variant = nbt.getInt(HybridAquaticFishEntity.VARIANT_KEY).coerceAtLeast(0).coerceAtMost(variantCount-1)
         size = nbt.getInt(CRITTER_SIZE_KEY)
     }
 
@@ -158,7 +158,7 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
     }
 
     var variant: Int
-        get() = dataTracker.get(VARIANT)
+        get() = dataTracker.get(VARIANT).coerceAtLeast(0).coerceAtMost(variantCount-1)
         set(int) {
             dataTracker.set(VARIANT, int)
         }

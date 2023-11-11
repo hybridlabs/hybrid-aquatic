@@ -141,7 +141,7 @@ open class HybridAquaticFishEntity(
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
-        variant = nbt.getInt(VARIANT_KEY)
+        variant = nbt.getInt(VARIANT_KEY).coerceAtLeast(0).coerceAtMost(variantCount-1)
         size = nbt.getInt(FISH_SIZE_KEY)
     }
 
@@ -202,7 +202,7 @@ open class HybridAquaticFishEntity(
         }
 
     var variant: Int
-        get() = dataTracker.get(VARIANT)
+        get() = dataTracker.get(VARIANT).coerceAtLeast(0).coerceAtMost(variantCount-1)
         set(int) {
             dataTracker.set(VARIANT, int)
         }
