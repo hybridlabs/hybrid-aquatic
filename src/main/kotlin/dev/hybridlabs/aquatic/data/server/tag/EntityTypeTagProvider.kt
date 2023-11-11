@@ -187,6 +187,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.SHRIMP,
                 HybridAquaticEntityTypes.MANTIS_SHRIMP,
                 HybridAquaticEntityTypes.CRAYFISH,
+                HybridAquaticEntityTypes.LOBSTER
         )
 
         getOrCreateTagBuilder(HybridAquaticEntityTags.CRITTER)

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import dev.hybridlabs.aquatic.entity.ai.goal.CrabDigGoal
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -17,6 +18,11 @@ class CrabEntity(entityType: EntityType<out HybridAquaticCritterEntity>, world: 
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
     }
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(3, CrabDigGoal(this, 0.05))
+    }
+
     override fun getMaxSize() : Int {
         return 5
     }

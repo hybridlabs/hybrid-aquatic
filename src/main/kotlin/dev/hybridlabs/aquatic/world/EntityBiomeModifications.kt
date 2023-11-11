@@ -95,6 +95,8 @@ object EntityBiomeModifications {
         addCritter(HybridAquaticEntityTypes.SHRIMP, HybridAquaticBiomeTags.SHRIMP_SPAWN_BIOMES, 7, 1, 2)
         addCritter(HybridAquaticEntityTypes.MANTIS_SHRIMP, HybridAquaticBiomeTags.MANTIS_SHRIMP_SPAWN_BIOMES, 7, 1, 2)
         addCritter(HybridAquaticEntityTypes.CRAYFISH, HybridAquaticBiomeTags.CRAYFISH_SPAWN_BIOMES, 7, 1, 2)
+        addCritter(HybridAquaticEntityTypes.LOBSTER, HybridAquaticBiomeTags.LOBSTER_SPAWN_BIOMES, 7, 1, 2)
+        addCritter(HybridAquaticEntityTypes.COCONUT_CRAB, HybridAquaticBiomeTags.COCONUT_CRAB_SPAWN_BIOMES, 7, 1, 2)
         addCritter(HybridAquaticEntityTypes.STARFISH, HybridAquaticBiomeTags.STARFISH_SPAWN_BIOMES, 7, 1, 3)
         addCritter(HybridAquaticEntityTypes.NUDIBRANCH, HybridAquaticBiomeTags.NUDIBRANCH_SPAWN_BIOMES, 5, 1, 2)
         addCritter(HybridAquaticEntityTypes.SEA_CUCUMBER, HybridAquaticBiomeTags.SEA_CUCUMBER_SPAWN_BIOMES, 7, 1, 3)

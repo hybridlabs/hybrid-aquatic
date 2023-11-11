@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import dev.hybridlabs.aquatic.entity.ai.goal.CrabDigGoal
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -17,6 +18,10 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCritterEntity>, w
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
+    }
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(3, CrabDigGoal(this, 0.05))
     }
 
     override fun getGroup(): EntityGroup? {

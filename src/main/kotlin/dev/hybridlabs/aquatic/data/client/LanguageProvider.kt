@@ -193,6 +193,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.SHRIMP to "Shrimp",
             HybridAquaticEntityTypes.MANTIS_SHRIMP to "Mantis Shrimp",
             HybridAquaticEntityTypes.CRAYFISH to "Crayfish",
+            HybridAquaticEntityTypes.LOBSTER to "Lobster",
             HybridAquaticEntityTypes.NUDIBRANCH to "Nudibranch",
             HybridAquaticEntityTypes.SEA_CUCUMBER to "Sea Cucumber",
             HybridAquaticEntityTypes.SEA_URCHIN to "Sea Urchin",

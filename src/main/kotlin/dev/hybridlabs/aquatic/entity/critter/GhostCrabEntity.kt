@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import dev.hybridlabs.aquatic.entity.ai.goal.CrabDigGoal
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -16,6 +17,10 @@ class GhostCrabEntity(entityType: EntityType<out HybridAquaticCritterEntity>, wo
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
+    }
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(3, CrabDigGoal(this, 0.05))
     }
 
     override fun getMaxSize() : Int {

@@ -156,6 +156,17 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.RIVER,
         )
 
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.LOBSTER_SPAWN_BIOMES).add(
+            BiomeKeys.WARM_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
+            BiomeKeys.OCEAN
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.COCONUT_CRAB_SPAWN_BIOMES).add(
+            BiomeKeys.BEACH,
+            BiomeKeys.WARM_OCEAN
+        )
+
         getOrCreateTagBuilder(HybridAquaticBiomeTags.CUTTLEFISH_SPAWN_BIOMES).add(
             BiomeKeys.WARM_OCEAN,
             BiomeKeys.LUKEWARM_OCEAN,

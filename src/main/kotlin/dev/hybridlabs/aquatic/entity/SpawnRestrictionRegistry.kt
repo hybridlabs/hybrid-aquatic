@@ -97,6 +97,8 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.SHRIMP,
             HybridAquaticEntityTypes.MANTIS_SHRIMP,
             HybridAquaticEntityTypes.CRAYFISH,
+            HybridAquaticEntityTypes.LOBSTER,
+            HybridAquaticEntityTypes.COCONUT_CRAB,
             HybridAquaticEntityTypes.STARFISH,
             HybridAquaticEntityTypes.NUDIBRANCH,
             HybridAquaticEntityTypes.SEA_CUCUMBER,
