@@ -10,6 +10,6 @@ class LobsterEntityModel : HybridAquaticCritterEntityModel<HybridAquaticCritterE
     }
 
     companion object {
-        val allVariants: Array<String> = arrayOf("blue", "black", "red", "yellow", "green")
+        val allVariants: Array<String> = arrayOf("blue", "black", "red", "yellow", "green", "white")
     }
 }
