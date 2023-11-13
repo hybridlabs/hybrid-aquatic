@@ -104,7 +104,7 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
 
             return pos.y in bottomY..topY &&
                     world.getBlockState(pos.down()).isIn(HybridAquaticBlockTags.CRABS_SPAWN_ON) &&
-                    (world.getBlockState(pos).isOf(Blocks.WATER) || world.getBlockState(pos).isOf(Blocks.AIR))
+                    (world.isWater(pos) || world.isAir(pos))
         }
 
         val IS_DIGGING: TrackedData<Boolean> = DataTracker.registerData(HybridAquaticCrabEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)

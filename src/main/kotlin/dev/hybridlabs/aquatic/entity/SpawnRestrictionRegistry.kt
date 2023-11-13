@@ -8,6 +8,7 @@ import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnRestriction
 import net.minecraft.entity.SpawnRestriction.SpawnPredicate
+import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.Heightmap
 
@@ -130,19 +131,30 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : WaterCreatureEntity> registerCrab(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticCrabEntity::canSpawn)
+        registerLandWaterCreature(entityType, HybridAquaticCrabEntity::canSpawn)
     }
 
     private fun <T : WaterCreatureEntity> registerCritter(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticCritterEntity::canSpawn)
+        registerLandWaterCreature(entityType, HybridAquaticCritterEntity::canSpawn)
     }
 
     private fun <T : WaterCreatureEntity> registerWaterCreature(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
-        SpawnRestriction.register(
+        register(
             entityType,
             SpawnRestriction.Location.IN_WATER,
-            Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
             predicate
         )
+    }
+
+    private fun <T : WaterCreatureEntity> registerLandWaterCreature(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
+        register(
+            entityType,
+            SpawnRestriction.Location.NO_RESTRICTIONS,
+            predicate
+        )
+    }
+
+    private fun <T : MobEntity> register(entityType: EntityType<T>, location: SpawnRestriction.Location, predicate: SpawnPredicate<T>) {
+        SpawnRestriction.register(entityType, location, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate)
     }
 }
