@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
-import net.minecraft.block.Blocks
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.LookAroundGoal
@@ -233,11 +232,13 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
 
             return pos.y in bottomY..topY &&
                     world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&
-                    world.getBlockState(pos.up()).isOf(Blocks.WATER)
+                    world.getFluidState(pos.up()).isIn(FluidTags.WATER)
         }
+
         fun getScaleAdjustment(jellyfish : HybridAquaticJellyfishEntity, adjustment : Float): Float {
             return 1.0f + (jellyfish.size * adjustment)
         }
+
         const val MOISTNESS_KEY = "Moistness"
         const val SPAWNED_ON_Y_KEY = "Spawned_on_Y"
         const val VARIANT_KEY = "Variant"

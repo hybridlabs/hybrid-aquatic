@@ -31,6 +31,15 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.GRAVEL)
             .add(Blocks.SUSPICIOUS_GRAVEL)
 
+        getOrCreateTagBuilder(HybridAquaticBlockTags.CRABS_SPAWN_ON)
+            .add(Blocks.SAND)
+            .add(Blocks.MUD)
+            .add(Blocks.DIRT)
+            .add(Blocks.GRASS_BLOCK)
+            .add(Blocks.MUDDY_MANGROVE_ROOTS)
+            .add(Blocks.MANGROVE_ROOTS)
+            .add(Blocks.GRAVEL)
+
         // plushies
         Registries.BLOCK
             .filter(filterHybridAquatic(Registries.BLOCK))

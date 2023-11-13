@@ -11,7 +11,6 @@ import net.minecraft.entity.ai.goal.LookAroundGoal
 import net.minecraft.entity.ai.goal.MoveIntoWaterGoal
 import net.minecraft.entity.ai.goal.WanderAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
-import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
@@ -100,11 +99,11 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
         if (event.isMoving) {
             event.controller.setAnimation(WALK_ANIMATION)
-            return PlayState.CONTINUE
         } else {
             event.controller.setAnimation(IDLE_ANIMATION)
-            return PlayState.CONTINUE
         }
+
+        return PlayState.CONTINUE
     }
 
     protected open fun getMinSize() : Int {
@@ -187,9 +186,11 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
                     world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
                     world.getBlockState(pos.up()).isOf(Blocks.WATER)
         }
+
         fun getScaleAdjustment(critter : HybridAquaticCritterEntity, adjustment : Float): Float {
             return 1.0f + (critter.size * adjustment)
         }
+
         const val VARIANT_KEY = "Variant"
         const val CRITTER_SIZE_KEY = "CritterSize"
 

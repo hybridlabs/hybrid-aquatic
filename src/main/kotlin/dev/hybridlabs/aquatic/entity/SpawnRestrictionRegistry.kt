@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity
 
+import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCrabEntity
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
@@ -84,6 +85,21 @@ object SpawnRestrictionRegistry {
 
         // critters
         setOf(
+
+            HybridAquaticEntityTypes.GIANT_ISOPOD,
+            HybridAquaticEntityTypes.SHRIMP,
+            HybridAquaticEntityTypes.MANTIS_SHRIMP,
+            HybridAquaticEntityTypes.CRAYFISH,
+            HybridAquaticEntityTypes.LOBSTER,
+            HybridAquaticEntityTypes.STARFISH,
+            HybridAquaticEntityTypes.NUDIBRANCH,
+            HybridAquaticEntityTypes.SEA_CUCUMBER,
+            HybridAquaticEntityTypes.SEA_URCHIN,
+            HybridAquaticEntityTypes.GIANT_CLAM,
+        ).forEach { registerCritter(it) }
+
+        // crabs
+        setOf(
             HybridAquaticEntityTypes.CRAB,
             HybridAquaticEntityTypes.FIDDLER_CRAB,
             HybridAquaticEntityTypes.HERMIT_CRAB,
@@ -93,18 +109,8 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.SPIDER_CRAB,
             HybridAquaticEntityTypes.LIGHTFOOT_CRAB,
             HybridAquaticEntityTypes.HORSESHOE_CRAB,
-            HybridAquaticEntityTypes.GIANT_ISOPOD,
-            HybridAquaticEntityTypes.SHRIMP,
-            HybridAquaticEntityTypes.MANTIS_SHRIMP,
-            HybridAquaticEntityTypes.CRAYFISH,
-            HybridAquaticEntityTypes.LOBSTER,
             HybridAquaticEntityTypes.COCONUT_CRAB,
-            HybridAquaticEntityTypes.STARFISH,
-            HybridAquaticEntityTypes.NUDIBRANCH,
-            HybridAquaticEntityTypes.SEA_CUCUMBER,
-            HybridAquaticEntityTypes.SEA_URCHIN,
-            HybridAquaticEntityTypes.GIANT_CLAM,
-        ).forEach { registerCritter(it) }
+        ).forEach { registerCrab(it) }
     }
 
     private fun <T : WaterCreatureEntity> registerFish(entityType: EntityType<T>) {
@@ -121,6 +127,10 @@ object SpawnRestrictionRegistry {
 
     private fun <T : WaterCreatureEntity> registerJelly(entityType: EntityType<T>) {
         registerWaterCreature(entityType, HybridAquaticJellyfishEntity::canSpawn)
+    }
+
+    private fun <T : WaterCreatureEntity> registerCrab(entityType: EntityType<T>) {
+        registerWaterCreature(entityType, HybridAquaticCrabEntity::canSpawn)
     }
 
     private fun <T : WaterCreatureEntity> registerCritter(entityType: EntityType<T>) {
