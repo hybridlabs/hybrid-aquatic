@@ -20,7 +20,7 @@ class CrabEntity(entityType: EntityType<out HybridAquaticCritterEntity>, world: 
     }
     override fun initGoals() {
         super.initGoals()
-        goalSelector.add(3, CrabDigGoal(this, 0.05))
+        goalSelector.add(3, CrabDigGoal(this, 1.00))
     }
 
     override fun getMaxSize() : Int {

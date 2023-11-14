@@ -24,17 +24,20 @@ class CrabDigGoal(
 
     private lateinit var diggableBlock: BlockState
     private var diggingTimer: Int = 0
+    private var isStarted: Boolean = false
 
     override fun canStart(): Boolean {
         diggableBlock = world.getBlockState(crab.blockPos.down())
+
         if (crab.diggingCooldown == 0) {
             if (random.nextDouble() <= chance && diggableBlock.isIn(HybridAquaticBlockTags.CRAB_DIGGABLE_BLOCKS)) {
-                return true
+                isStarted = true
             }
 
             crab.diggingCooldown = 300
         }
-        return false
+
+        return isStarted
     }
 
     override fun start() {
@@ -78,7 +81,7 @@ class CrabDigGoal(
 
     override fun shouldContinue(): Boolean {
         val blockUnderCrab = world.getBlockState(crab.blockPos.down())
-        return blockUnderCrab.isIn(HybridAquaticBlockTags.CRAB_DIGGABLE_BLOCKS) && crab.diggingCooldown == 0 && diggingTimer < 100
+        return blockUnderCrab.isIn(HybridAquaticBlockTags.CRAB_DIGGABLE_BLOCKS) && diggingTimer < 100
     }
 
     override fun stop() {
