@@ -119,5 +119,16 @@ class GenericLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
                         )
                 )
         )
+
+        exporter.accept(
+            HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID,
+            LootTable.builder()
+                .randomSequenceId(HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID)
+                .pool(
+                    LootPool.builder()
+                        .with(ItemEntry.builder(Items.STICK).weight(10))
+                        .with(ItemEntry.builder(Items.FLINT).weight(5))
+                )
+        )
     }
 }
