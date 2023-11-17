@@ -180,10 +180,10 @@
 			"bones": {
 				"shell": {
 					"rotation": {
-						"vector": [-22.5, 0, 0]
+						"vector": [-45, 0, 0]
 					},
 					"position": {
-						"vector": [0, -0.25, 0]
+						"vector": [0, 0.75, 0]
 					}
 				},
 				"left_leg_1": {
