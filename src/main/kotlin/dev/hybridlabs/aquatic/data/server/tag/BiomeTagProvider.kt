@@ -191,9 +191,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.FIDDLER_CRAB_SPAWN_BIOMES).add(
             BiomeKeys.MANGROVE_SWAMP,
-            BiomeKeys.BEACH,
-            BiomeKeys.STONY_SHORE,
-            BiomeKeys.WARM_OCEAN,
+            BiomeKeys.BEACH
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.FIREFLY_SQUID_SPAWN_BIOMES).add(

@@ -107,9 +107,9 @@ public abstract class WeatherDisplayMixin implements SynchronousResourceReloader
                                 }
 
                                 int u = this.ticks + o * o * 3121 + o * 45238971 + n * n * 418711 + n * 13761 & 31;
-                                h = -((float)u + tickDelta) / 32.0F * (3.0F + random.nextFloat());
-                                double v = (double)o + 0.5 - cameraX;
-                                double w = (double)n + 0.5 - cameraZ;
+                                h = -((float)u + tickDelta) / 512.0F * (3.0F + random.nextFloat());
+                                double v = (double)o + 1.0 - cameraX;
+                                double w = (double)n + 1.0 - cameraZ;
                                 float x = (float)Math.sqrt(v * v + w * w) / (float) layers;
                                 y = ((1.0F - x * x) * 0.5F + 0.5F) * f;
                                 mutable.set(o, t, n);
