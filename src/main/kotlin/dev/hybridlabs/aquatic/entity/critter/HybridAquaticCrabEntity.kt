@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.critter
 import dev.hybridlabs.aquatic.entity.ai.goal.CrabDigGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import net.minecraft.block.Blocks
+import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.data.DataTracker
@@ -31,7 +32,6 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
             dataTracker.set(IS_DIGGING, bool)
         }
 
-    //TODO: Mystic, you can remove initGoals here and then put it in required crab classes
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(3, CrabDigGoal(this, 0.05))
@@ -54,6 +54,9 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
         super.mobTick()
     }
 
+    override fun getGroup(): EntityGroup? {
+        return EntityGroup.ARTHROPOD
+    }
     override fun tickMovement() {
         val songSourceCopy = songSource
         if (songSourceCopy == null || !songSourceCopy.isWithinDistance(pos, 3.46) || !world.getBlockState(songSourceCopy).isOf(Blocks.JUKEBOX)) {
@@ -91,6 +94,7 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
     companion object {
         val DANCE_ANIMATION: RawAnimation  = RawAnimation.begin().then("dance", Animation.LoopType.LOOP)
         val DIGGING_ANIMATION: RawAnimation = RawAnimation.begin().then("dig", Animation.LoopType.LOOP)
+        val HIDING_ANIMATION: RawAnimation = RawAnimation.begin().then("hide", Animation.LoopType.LOOP)
 
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity?>?,
