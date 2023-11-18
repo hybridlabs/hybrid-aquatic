@@ -1,16 +1,12 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.particle.ParticleTypes
-import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
 class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: World) :
@@ -30,9 +26,6 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
         return false
     }
 
-    private var attackCooldown: Int = 0
-    private var escapeDirection: Vec3d = Vec3d.ZERO
-
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_SQUID_HURT
     }
@@ -51,39 +44,6 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
 
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SQUID_AMBIENT
-    }
-
-    override fun damage(source: DamageSource, amount: Float): Boolean {
-        if (world is ServerWorld) {
-            val particleCount = 8
-            val particleOffset = 0.5
-            val particleVelocityX = -escapeDirection.x * 0.05
-            val particleVelocityY = -escapeDirection.y * 0.05
-            val particleVelocityZ = -escapeDirection.z * 0.05
-            val particleData = ParticleTypes.SQUID_INK
-            (world as ServerWorld).spawnParticles(
-                particleData,
-                x + particleOffset,
-                eyeY,
-                z + particleOffset,
-                particleCount,
-                particleVelocityX,
-                particleVelocityY,
-                particleVelocityZ,
-                0.0
-            )
-            attackCooldown = 40
-        }
-
-        return super.damage(source, amount)
-    }
-
-    override fun getAttacker(): LivingEntity? {
-        val target = attackingPlayer
-        if (target != null) {
-            return target
-        }
-        return null
     }
 
     override fun getMaxSize(): Int {

@@ -34,7 +34,7 @@ class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopus
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_GLOW_SQUID_AMBIENT
+        return SoundEvents.ENTITY_SQUID_AMBIENT
     }
 
     override fun getSplashSound(): SoundEvent {
