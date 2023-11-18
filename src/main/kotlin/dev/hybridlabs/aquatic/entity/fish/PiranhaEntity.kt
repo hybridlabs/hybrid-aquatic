@@ -15,7 +15,6 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.9)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
-
         }
     }
 

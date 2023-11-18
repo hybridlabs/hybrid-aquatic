@@ -13,7 +13,6 @@ class ZebraDanioEntity(entityType: EntityType<out ZebraDanioEntity>, world: Worl
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.8)
-
         }
     }
 }

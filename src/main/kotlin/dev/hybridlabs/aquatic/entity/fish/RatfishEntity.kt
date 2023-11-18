@@ -13,7 +13,6 @@ class RatfishEntity(entityType: EntityType<out RatfishEntity>, world: World) :
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-
         }
     }
 

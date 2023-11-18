@@ -13,7 +13,6 @@ class TigerBarbEntity(entityType: EntityType<out TigerBarbEntity>, world: World)
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.8)
-
         }
     }
 
