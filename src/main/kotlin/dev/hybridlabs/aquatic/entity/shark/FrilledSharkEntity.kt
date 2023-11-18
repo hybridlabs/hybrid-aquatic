@@ -12,7 +12,7 @@ import net.minecraft.world.Heightmap
 import net.minecraft.world.World
 
 class FrilledSharkEntity(entityType: EntityType<out FrilledSharkEntity>, world: World) :
-    HybridAquaticSharkEntity(entityType, world, HybridAquaticEntityTags.FRILLED_SHARK_PREY, false, false, false, true, true) {
+    HybridAquaticSharkEntity(entityType, world, HybridAquaticEntityTags.FRILLED_SHARK_PREY, false, false, false, true) {
         companion object {
             fun createMobAttributes(): DefaultAttributeContainer.Builder {
                 return WaterCreatureEntity.createMobAttributes()

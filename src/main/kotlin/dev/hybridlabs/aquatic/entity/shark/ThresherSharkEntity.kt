@@ -8,7 +8,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
 class ThresherSharkEntity(entityType: EntityType<out ThresherSharkEntity>, world: World) :
-    HybridAquaticSharkEntity(entityType, world, HybridAquaticEntityTags.THRESHER_SHARK_PREY, false, false, false, true, true) {
+    HybridAquaticSharkEntity(entityType, world, HybridAquaticEntityTags.THRESHER_SHARK_PREY, false, false, false, true) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()

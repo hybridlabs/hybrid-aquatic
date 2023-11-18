@@ -8,7 +8,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
 class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, world: World) :
-    HybridAquaticSharkEntity(entityType, world, HybridAquaticEntityTags.HAMMERHEAD_SHARK_PREY, false, false, false, true, true) {
+    HybridAquaticSharkEntity(entityType, world, HybridAquaticEntityTags.HAMMERHEAD_SHARK_PREY, false, false, false, true) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()

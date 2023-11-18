@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.access.CustomPlayerEntityData
+import dev.hybridlabs.aquatic.effects.HybridAquaticStatusEffects
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.block.Blocks
 import net.minecraft.entity.*
@@ -13,6 +14,8 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.Angerable
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -49,7 +52,6 @@ open class HybridAquaticSharkEntity(
     private val isPassive: Boolean,
     private val isCannibalistic: Boolean,
     private val closePlayerAttack: Boolean,
-    private val bleedingPlayerAttack: Boolean,
     private val revengeAttack: Boolean
 ) : WaterCreatureEntity(entityType, world), Angerable, GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
@@ -135,7 +137,7 @@ open class HybridAquaticSharkEntity(
         if (!isPassive) {
             if (revengeAttack) targetSelector.add(1, RevengeGoal(this, *arrayOfNulls(0)).setGroupRevenge(*arrayOfNulls(0)))
             targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { entity: LivingEntity ->
-                shouldAngerAt(entity) || shouldProximityAttack(entity as PlayerEntity) || isPlayerBleeding(entity)
+                shouldAngerAt(entity) || shouldProximityAttack(entity as PlayerEntity)
             })
             targetSelector.add(3, UniversalAngerGoal(this, false))
             targetSelector.add(3, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) {
@@ -312,10 +314,6 @@ open class HybridAquaticSharkEntity(
         return closePlayerAttack && player.squaredDistanceTo(this) <= 5 && !player.isCreative
     }
 
-    private fun isPlayerBleeding(player: PlayerEntity): Boolean {
-        return bleedingPlayerAttack && (player as CustomPlayerEntityData).`hybrid_aquatic$getHurtTime`() > 0
-    }
-
     //#region Angerable Implementation Details
     override fun getAngerTime(): Int {
         return angerTime
@@ -373,7 +371,17 @@ open class HybridAquaticSharkEntity(
 
                 if (target.health <= 0)
                     shark.eatFish(target.type)
-//                  shark.setRushing(false)
+            }
+
+            else if (shark.random.nextFloat() < 0.25f) {
+                target.addStatusEffect(StatusEffectInstance(HybridAquaticStatusEffects.BLEEDING, 100, 0))
+
+                if (target.isBlocking && shark.random.nextFloat() < 0.5f) {
+                    val dropCount = shark.random.nextInt(2) + 1
+                    for (i in 0 until dropCount) {
+                        target.dropItem(HybridAquaticItems.SHARK_TOOTH, 1)
+                    }
+                }
             } else if (squaredDistance > d * 5 && !shark.isRushing) {
                 shark.rushTargetPosition = target.pos
                 shark.isSprinting = true

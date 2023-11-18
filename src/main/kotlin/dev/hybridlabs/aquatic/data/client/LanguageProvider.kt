@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.data.client
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
+import dev.hybridlabs.aquatic.effects.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
@@ -107,6 +108,14 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.FISHING_NET to "Fishing Net",
         ).forEach { (item, translation) ->
             builder.add(item, translation)
+        }
+
+        // effects
+        mapOf(
+            HybridAquaticStatusEffects.BLEEDING to "Bleeding"
+        ).forEach { (effect, translation) ->
+            val identifier = Registries.STATUS_EFFECT.getId(effect)
+            builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
         }
 
         // Item descriptions

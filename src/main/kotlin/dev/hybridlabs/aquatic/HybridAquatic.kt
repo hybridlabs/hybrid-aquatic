@@ -4,6 +4,8 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.effects.HybridAquaticStatusEffects
+import dev.hybridlabs.aquatic.effects.HybridAquaticStatusEffects.BLEEDING
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
@@ -22,6 +24,7 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.minecraft.item.BlockItem
 import net.minecraft.registry.Registries
+import net.minecraft.util.Identifier
 import net.minecraft.village.TradeOffers.SellItemFactory
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -33,12 +36,17 @@ object HybridAquatic : ModInitializer {
     override fun onInitialize() {
         logger.info("Initializing $MOD_ID")
 
+        net.minecraft.registry.Registry.register(Registries.STATUS_EFFECT, Identifier("hybrid_aquatic", "bleeding"), BLEEDING)
+
+
         HybridAquaticBlocks
         HybridAquaticBlockEntityTypes
 
         HybridAquaticBiomeTags
 
         HybridAquaticEntityTypes
+
+        HybridAquaticStatusEffects
 
         HybridAquaticItems
         HybridAquaticItemGroups
