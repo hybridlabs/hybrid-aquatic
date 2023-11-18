@@ -1,13 +1,25 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.effects.HybridAquaticStatusEffects
+import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityPose
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.ChaseBoatGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.LookAtEntityGoal
+import net.minecraft.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.entity.ai.goal.RevengeGoal
+import net.minecraft.entity.ai.goal.SwimAroundGoal
+import net.minecraft.entity.ai.goal.UniversalAngerGoal
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.damage.DamageSource
@@ -15,7 +27,6 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.Angerable
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -37,11 +48,14 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.*
+import java.util.UUID
 
 
 @Suppress("LeakingThis")

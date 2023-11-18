@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.effects
+package dev.hybridlabs.aquatic.effect
 
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffect

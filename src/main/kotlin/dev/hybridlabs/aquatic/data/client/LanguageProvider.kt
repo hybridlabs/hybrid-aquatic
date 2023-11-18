@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.data.client
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
-import dev.hybridlabs.aquatic.effects.HybridAquaticStatusEffects
+import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
