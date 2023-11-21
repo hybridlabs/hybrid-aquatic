@@ -10,6 +10,6 @@ class GhostCrabEntityModel : HybridAquaticCritterEntityModel<HybridAquaticCritte
     }
 
     companion object {
-        val allVariants: Array<String> = arrayOf("white", "yellow", "red", "brown")
+        val allVariants: Array<String> = arrayOf("white", "yellow", "red", "brown", "palestine")
     }
 }

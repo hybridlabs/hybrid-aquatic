@@ -389,6 +389,13 @@ object HybridAquaticEntityTypes {
         YetiCrabEntity.createMobAttributes()
     )
 
+    val KARKINOS = registerCritter(
+        "karkinos",
+        ::KarkinosEntity,
+        EntityDimensions.fixed(2.25f, 1.25f),
+        KarkinosEntity.createMobAttributes()
+    )
+
 
     //critters
 

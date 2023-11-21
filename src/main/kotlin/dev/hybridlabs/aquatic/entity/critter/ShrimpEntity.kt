@@ -7,7 +7,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
 class ShrimpEntity(entityType: EntityType<out HybridAquaticCritterEntity>, world: World) :
-    HybridAquaticCritterEntity(entityType, world, 19) {
+    HybridAquaticCritterEntity(entityType, world, 20) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()

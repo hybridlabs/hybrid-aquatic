@@ -73,6 +73,7 @@ object HybridAquaticEntityRenderers {
     val LOBSTER = EntityRendererRegistry.register(HybridAquaticEntityTypes.LOBSTER, ::LobsterEntityRenderer)
     val COCONUT_CRAB = EntityRendererRegistry.register(HybridAquaticEntityTypes.COCONUT_CRAB, ::CoconutCrabEntityRenderer)
     val HERMIT_CRAB = EntityRendererRegistry.register(HybridAquaticEntityTypes.HERMIT_CRAB, ::HermitCrabEntityRenderer)
+    val KARKINOS = EntityRendererRegistry.register(HybridAquaticEntityTypes.KARKINOS, ::KarkinosEntityRenderer)
     val STARFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.STARFISH, ::StarfishEntityRenderer)
     val NUDIBRANCH = EntityRendererRegistry.register(HybridAquaticEntityTypes.NUDIBRANCH, ::NudibranchEntityRenderer)
     val SEA_CUCUMBER = EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_CUCUMBER, ::SeaCucumberEntityRenderer)

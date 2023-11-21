@@ -8,9 +8,6 @@
     "hybrid-aquatic:triggerfish",
     "hybrid-aquatic:needlefish",
     "minecraft:squid",
-    "minecraft:glow_squid",
-    "minecraft:cow",
-    "minecraft:pig",
-    "minecraft:sheep"
+    "minecraft:glow_squid"
   ]
 }

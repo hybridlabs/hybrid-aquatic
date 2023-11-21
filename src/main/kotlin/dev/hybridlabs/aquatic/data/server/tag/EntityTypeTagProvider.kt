@@ -48,8 +48,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.SEA_ANGEL,
                 EntityType.SALMON,
                 EntityType.COD,
-                EntityType.TROPICAL_FISH,
-                EntityType.CHICKEN,
+                EntityType.TROPICAL_FISH
             )
 
         getOrCreateTagBuilder(HybridAquaticEntityTags.MEDIUM_PREY)
@@ -61,10 +60,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.TRIGGERFISH,
                 HybridAquaticEntityTypes.NEEDLEFISH,
                 EntityType.SQUID,
-                EntityType.GLOW_SQUID,
-                EntityType.COW,
-                EntityType.PIG,
-                EntityType.SHEEP,
+                EntityType.GLOW_SQUID
             )
 
         getOrCreateTagBuilder(HybridAquaticEntityTags.LARGE_PREY)
@@ -73,6 +69,11 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.OARFISH,
                 EntityType.TURTLE,
                 EntityType.POLAR_BEAR,
+                EntityType.COW,
+                EntityType.PIG,
+                EntityType.SHEEP,
+                EntityType.LLAMA,
+                EntityType.VILLAGER
             )
 
         // prey

@@ -10,6 +10,6 @@ class FiddlerCrabEntityModel : HybridAquaticCritterEntityModel<HybridAquaticCrit
     }
 
     companion object {
-        val allVariants: Array<String> = arrayOf("blue", "red", "purple")
+        val allVariants: Array<String> = arrayOf("blue", "red", "purple", "palestine")
     }
 }

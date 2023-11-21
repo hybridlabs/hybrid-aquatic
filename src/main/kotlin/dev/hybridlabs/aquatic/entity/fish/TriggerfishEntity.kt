@@ -7,7 +7,7 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
 class TriggerfishEntity(entityType: EntityType<out TriggerfishEntity>, world: World) :
-    HybridAquaticFishEntity(entityType, world) {
+    HybridAquaticFishEntity(entityType, world, 2) {
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()

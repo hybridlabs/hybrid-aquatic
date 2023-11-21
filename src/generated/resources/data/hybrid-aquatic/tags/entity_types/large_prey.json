@@ -4,6 +4,11 @@
     "hybrid-aquatic:sunfish",
     "hybrid-aquatic:oarfish",
     "minecraft:turtle",
-    "minecraft:polar_bear"
+    "minecraft:polar_bear",
+    "minecraft:cow",
+    "minecraft:pig",
+    "minecraft:sheep",
+    "minecraft:llama",
+    "minecraft:villager"
   ]
 }

@@ -95,6 +95,7 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
         val DANCE_ANIMATION: RawAnimation  = RawAnimation.begin().then("dance", Animation.LoopType.LOOP)
         val DIGGING_ANIMATION: RawAnimation = RawAnimation.begin().then("dig", Animation.LoopType.LOOP)
         val HIDING_ANIMATION: RawAnimation = RawAnimation.begin().then("hide", Animation.LoopType.LOOP)
+        val FLIPPED_ANIMATION: RawAnimation = RawAnimation.begin().then("flipped", Animation.LoopType.LOOP)
 
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity?>?,

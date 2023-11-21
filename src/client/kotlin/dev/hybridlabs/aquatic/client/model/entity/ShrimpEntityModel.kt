@@ -10,6 +10,6 @@ class ShrimpEntityModel : HybridAquaticCritterEntityModel<HybridAquaticCritterEn
     }
 
     companion object {
-        val allVariants: Array<String> = arrayOf("blue", "blue_white", "black", "black_white", "red", "red_white", "green", "green_white", "brown", "brown_white", "lime", "lime_white", "yellow", "yellow_white", "pink", "pink_white", "white", "orange", "orange_white")
+        val allVariants: Array<String> = arrayOf("blue", "blue_white", "black", "black_white", "red", "red_white", "green", "green_white", "brown", "brown_white", "lime", "lime_white", "yellow", "yellow_white", "pink", "pink_white", "white", "orange", "orange_white", "palestine")
     }
 }
