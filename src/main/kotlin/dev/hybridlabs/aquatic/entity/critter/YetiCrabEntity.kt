@@ -24,5 +24,8 @@ class YetiCrabEntity(entityType: EntityType<out HybridAquaticCritterEntity>, wor
 
     override fun getMinSize(): Int {
         return -5
+
+    }override fun isSneaking(): Boolean {
+        return true
     }
 }

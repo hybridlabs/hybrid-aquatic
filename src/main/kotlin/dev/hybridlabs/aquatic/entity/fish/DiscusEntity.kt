@@ -12,7 +12,7 @@ class DiscusEntity(entityType: EntityType<out DiscusEntity>, world: World) :
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.8)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
         }

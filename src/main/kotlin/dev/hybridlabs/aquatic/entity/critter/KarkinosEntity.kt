@@ -7,6 +7,7 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.world.Difficulty
 import net.minecraft.world.World
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animation.AnimationState
@@ -47,6 +48,14 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticCritterEntity>, wor
         }
 
         return damaged
+    }
+
+    override fun checkDespawn() {
+        if (world.difficulty == Difficulty.PEACEFUL && this.isDisallowedInPeaceful) {
+            discard()
+        } else {
+            despawnCounter = 0
+        }
     }
 
     override fun tick() {

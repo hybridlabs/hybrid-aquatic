@@ -78,7 +78,9 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
             }
             return null
         }
-    }class GoalStayNearAnemone(private val clownfish: ClownfishEntity) : Goal() {
+    }
+
+    class GoalStayNearAnemone(private val clownfish: ClownfishEntity) : Goal() {
         private var targetAnemonePos: BlockPos? = null
 
         init {

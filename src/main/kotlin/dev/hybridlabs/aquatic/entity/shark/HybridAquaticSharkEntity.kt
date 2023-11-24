@@ -105,7 +105,7 @@ open class HybridAquaticSharkEntity(
         val MOISTNESS: TrackedData<Int> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
-        const val MAX_HUNGER = 4800
+        const val MAX_HUNGER = 3000
         const val HUNGER_KEY = "Hunger"
         val HUNGER: TrackedData<Int> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
@@ -145,7 +145,6 @@ open class HybridAquaticSharkEntity(
         super.initGoals()
         goalSelector.add(1, AttackGoal(this))
         goalSelector.add(4, SwimAroundGoal(this, 1.0, 2))
-//        goalSelector.add(4, WanderAroundGoal(this, 1.0))
         goalSelector.add(4, LookAroundGoal(this))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         if (!isPassive) {
@@ -238,9 +237,10 @@ open class HybridAquaticSharkEntity(
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
         if (!this.isWet) {
             event.controller.setAnimation(FLOP_ANIMATION)
+
         } else if (this.handSwinging) {
             event.controller.setAnimation(ATTACK_ANIMATION)
-//            this.attemptAttack = false
+
         } else if (isSubmergedInWater) {
             if (!isRushing)
                 event.controller.setAnimation(SWIM_ANIMATION)
@@ -299,9 +299,6 @@ open class HybridAquaticSharkEntity(
         return this.maxAir
     }
 
-    //    open val lookPitchSpeed: Int = 1
-//    open val bodyYawSpeed: Int = 1
-//
     protected fun hasSelfControl(): Boolean {
         return true
     }
@@ -357,13 +354,13 @@ open class HybridAquaticSharkEntity(
 
     private fun getHungerValue(entityType: EntityType<*>): Int {
         if (entityType.isIn(HybridAquaticEntityTags.CRAB))
-            return 300
+            return 400
         if (entityType.isIn(HybridAquaticEntityTags.SMALL_PREY))
-            return 600
+            return 400
         else if (entityType.isIn(HybridAquaticEntityTags.MEDIUM_PREY))
-            return 1200
+            return 800
         else if (entityType.isIn(HybridAquaticEntityTags.LARGE_PREY))
-            return 1800
+            return 1500
 
         return 0
     }
