@@ -14,6 +14,11 @@ object HybridAquaticConfiguredFeatures {
      * A patch of anemones.
      */
     val ANEMONE_PATCH = register("anemone_patch")
+    /**
+     *
+     * A patch of vents.
+     */
+    val HYDROTHERMAL_VENTS= register("hydrothermal_vents")
 
     /**
      * A message in a bottle.

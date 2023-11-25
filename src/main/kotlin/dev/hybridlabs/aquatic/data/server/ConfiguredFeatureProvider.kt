@@ -40,6 +40,23 @@ class ConfiguredFeatureProvider(output: FabricDataOutput, registriesFuture: Comp
             )
         )
 
+        // hydrothermal vents
+        entries.add(
+            HybridAquaticConfiguredFeatures.HYDROTHERMAL_VENTS,
+            ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchFeatureConfig(
+                    6, 2, 2,
+                    PlacedFeatures.createEntry(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockFeatureConfig(
+                            BlockStateProvider.of(HybridAquaticBlocks.HYDROTHERMAL_VENT.defaultState.with(Properties.WATERLOGGED, true))
+                        ),
+                        BlockPredicate.matchingBlockTag(HybridAquaticBlockTags.HYDROTHERMAL_VENT_GENERATE_IN)
+                    )
+                )
+            )
+        )
+
         // message in a bottle
         entries.add(
             HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE,

@@ -65,6 +65,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.ANEMONE to "Anemone",
             HybridAquaticBlocks.CRATE to "Crate",
             HybridAquaticBlocks.BUOY to "Buoy",
+            HybridAquaticBlocks.CRAB_POT to "Crab Pot",
+            HybridAquaticBlocks.HYDROTHERMAL_VENT to "Hydrothermal Vent",
         ).forEach { (block, translation) ->
             builder.add(block, translation)
         }
@@ -218,6 +220,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH to "Lion's Mane Jellyfish",
             HybridAquaticEntityTypes.ATOLLA_JELLYFISH to "Atolla Jellyfish",
             HybridAquaticEntityTypes.BLUE_JELLYFISH to "Blue Jellyfish",
+            HybridAquaticEntityTypes.KARKINOS to "Karkinos",
         )
 
         // verify display name list is valid

@@ -47,9 +47,15 @@ object HybridAquaticBlocks {
 
     val CRATE = register("crate", CrateBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)))
 
+    val CRAB_POT = register("crab_pot", CrabPotBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)))
+
     val BUOY = register("buoy", BuoyBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
         .nonOpaque()
         .luminance(15)
+    ))
+
+    val HYDROTHERMAL_VENT = register("hydrothermal_vent", HydrothermalVentBlock(FabricBlockSettings.copyOf(Blocks.MAGMA_BLOCK)
+        .nonOpaque()
     ))
 
     private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block): PlushieBlock {
@@ -61,7 +67,6 @@ object HybridAquaticBlocks {
                 .instrument(Instrument.CUSTOM_HEAD)
         )
     }
-
 
     val FISHING_PLAQUE = register("fishing_plaque", FishingPlaque(FabricBlockSettings.create()))
 

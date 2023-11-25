@@ -520,6 +520,13 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.WARM_OCEAN
         )
 
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.HYDROTHERMAL_VENT_SPAWN_BIOMES).add(
+            BiomeKeys.DEEP_OCEAN,
+            BiomeKeys.DEEP_FROZEN_OCEAN,
+            BiomeKeys.DEEP_COLD_OCEAN,
+            BiomeKeys.DEEP_LUKEWARM_OCEAN
+        )
+
         getOrCreateTagBuilder(HybridAquaticBiomeTags.MESSAGE_IN_A_BOTTLE_SPAWN_BIOMES)
             .forceAddTag(BiomeTags.IS_OCEAN)
             .forceAddTag(BiomeTags.IS_BEACH)

@@ -8,22 +8,17 @@ import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.hud.FishingNetHUDRenderer
-import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.BuoyBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.*
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
-import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry.WeatherRenderer
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.RenderLayer
-import net.minecraft.client.render.WorldRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
-import net.minecraft.world.World
 
 object HybridAquaticClient : ClientModInitializer {
     override fun onInitializeClient() {
@@ -36,7 +31,7 @@ object HybridAquaticClient : ClientModInitializer {
         registerEntityRenderers()
         registerWeatherRenderers()
         registerTooltips()
-        registerHudAddons();
+        registerHudAddons()
     }
 
     private fun registerWeatherRenderers() {
@@ -63,6 +58,8 @@ object HybridAquaticClient : ClientModInitializer {
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE, ::MessageInABottleBlockEntityRenderer)
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.FISHING_PLAQUE, ::FishingPlaqueBlockEntityRenderer)
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.BUOY, ::BuoyBlockEntityRenderer)
+        BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.HYDROTHERMAL_VENT, ::HydrothermalVentBlockEntityRenderer)
+        BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.CRAB_POT, ::CrabPotBlockEntityRenderer)
     }
 
     private fun registerEntityRenderers() {
@@ -72,7 +69,9 @@ object HybridAquaticClient : ClientModInitializer {
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
         registry.register(HybridAquaticItems.ANEMONE, AnemoneBlockItemRenderer())
         registry.register(HybridAquaticItems.BUOY, BuoyBlockItemRenderer())
+        registry.register(HybridAquaticItems.CRAB_POT, CrabPotBlockItemRenderer())
         registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE, MessageInABottleBlockItemRenderer())
+        registry.register(HybridAquaticItems.HYDROTHERMAL_VENT, HydrothermalVentBlockItemRenderer())
     }
 
     fun createBlockEntityRendererFactoryContext(): BlockEntityRendererFactory.Context {

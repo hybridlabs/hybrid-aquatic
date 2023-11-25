@@ -16,6 +16,11 @@ object HybridAquaticPlacedFeatures {
     val ANEMONE_PATCH = register("anemone_patch")
 
     /**
+     * A patch of anemones.
+     */
+    val HYDROTHERMAL_VENTS = register("hydrothermal_vents")
+
+    /**
      * A message in a bottle.
      */
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")

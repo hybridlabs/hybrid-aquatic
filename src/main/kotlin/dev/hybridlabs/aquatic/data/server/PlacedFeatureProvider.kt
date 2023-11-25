@@ -30,6 +30,19 @@ class PlacedFeatureProvider(output: FabricDataOutput, registriesFuture: Completa
             )
         )
 
+        // hydrothermal vents
+        entries.add(
+            HybridAquaticPlacedFeatures.HYDROTHERMAL_VENTS,
+            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.HYDROTHERMAL_VENTS),
+                listOf(
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
+                    CountPlacementModifier.of(1),
+                    BiomePlacementModifier.of()
+                )
+            )
+        )
+
         // message in a botle
         entries.add(
             HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE,
