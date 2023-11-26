@@ -9,9 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.item.BlockItem.BLOCK_ENTITY_TAG_KEY
 import net.minecraft.item.Items
-import net.minecraft.item.WrittenBookItem.AUTHOR_KEY
-import net.minecraft.item.WrittenBookItem.PAGES_KEY
-import net.minecraft.item.WrittenBookItem.TITLE_KEY
+import net.minecraft.item.WrittenBookItem.*
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.condition.MatchToolLootCondition
@@ -34,6 +32,23 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                         .with(ItemEntry.builder(block))
                         .conditionally(WITH_SILK_TOUCH_OR_SHEARS)
                 )
+        }
+
+        // hydrothermal vent
+        addDrop(HybridAquaticBlocks.HYDROTHERMAL_VENT) { block ->
+            LootTable.builder().pool(
+                LootPool.builder().with(
+                    AlternativeEntry.builder(
+                        LootTableEntry.builder(HybridAquaticLootTables.HYDROTHERMAL_VENT_LOOT_ID)
+                            .conditionally(
+                                MatchToolLootCondition.builder(
+                                    ItemPredicate.Builder.create()
+                                        .tag(ItemTags.AXES)
+                                )
+                            ),
+                        ItemEntry.builder(block),
+                    )
+                ))
         }
 
         // message in a bottle

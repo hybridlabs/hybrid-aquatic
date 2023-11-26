@@ -3,15 +3,27 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:hydrothermal_vent"
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "tag": "minecraft:axes"
+                  }
+                }
+              ],
+              "name": "hybrid-aquatic:gameplay/hydrothermal_vent_treasure"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "hybrid-aquatic:hydrothermal_vent"
+            }
+          ]
         }
       ],
       "rolls": 1.0

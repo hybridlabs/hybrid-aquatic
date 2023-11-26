@@ -31,8 +31,8 @@ class HydrothermalVentBlock(settings: Settings) : PlantBlock(settings), BlockEnt
 
     override fun onEntityCollision(state: BlockState, world: World, pos: BlockPos, entity: Entity) {
         if (!world.isClient && entity is LivingEntity && entity !is YetiCrabEntity) {
-            entity.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, 100, 1))
-            entity.addStatusEffect(StatusEffectInstance(StatusEffects.DARKNESS, 100, 2))
+            entity.addStatusEffect(StatusEffectInstance(StatusEffects.WITHER, 20, 1))
+            entity.addStatusEffect(StatusEffectInstance(StatusEffects.DARKNESS, 20, 1))
         }
     }
 

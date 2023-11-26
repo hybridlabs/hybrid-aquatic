@@ -121,6 +121,27 @@ class GenericLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
         )
 
         exporter.accept(
+            HybridAquaticLootTables.HYDROTHERMAL_VENT_LOOT_ID,
+            LootTable.builder()
+                .randomSequenceId(HybridAquaticLootTables.HYDROTHERMAL_VENT_LOOT_ID)
+                .pool(
+                    LootPool.builder()
+                        .with(
+                            ItemEntry.builder(Items.RAW_COPPER)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 4.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(Items.RAW_IRON)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
+                            )
+                        .with(
+                            ItemEntry.builder(Items.RAW_GOLD)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                            )
+                        )
+                    )
+
+        exporter.accept(
             HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID,
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID)

@@ -47,7 +47,7 @@ public abstract class WeatherDisplayMixin implements SynchronousResourceReloader
     void hybrid$renderWeatherInject(LightmapTextureManager manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
         float f = this.client.world.getRainGradient(tickDelta);
         World world = this.client.world;
-        if(f > 0.0f && cameraY < world.getSeaLevel()-0.100 && world.getBiome(client.player.getBlockPos()).isIn(BiomeTags.IS_OCEAN)) {
+        if(f > 0.0f && cameraY < world.getSeaLevel()-16.0 && world.getBiome(client.player.getBlockPos()).isIn(BiomeTags.IS_DEEP_OCEAN)) {
             manager.enable();
             int xFloored = MathHelper.floor(cameraX);
             int yFloored = MathHelper.floor(cameraY);
@@ -115,7 +115,7 @@ public abstract class WeatherDisplayMixin implements SynchronousResourceReloader
                                 mutable.set(o, t, n);
                                 int z = getLightmapCoordinates(world, mutable);
 
-                                float seaLevelDist = (float) (world.getSeaLevel() - cameraY) / 48.0f; // the end float is how deep it goes
+                                float seaLevelDist = Math.max(0.0f, (float) (world.getSeaLevel() - cameraY) / 128.0f);
                                 float lerpedAlpha = MathHelper.lerp(seaLevelDist, 0.0f, 1.0f);
                                 float clampedAlpha = MathHelper.clamp(y - lerpedAlpha, 0.0f, 1.0f);
 
