@@ -15,7 +15,6 @@ import net.minecraft.util.Util
 object HybridAquaticBlockEntityTypes {
     val ANEMONE: BlockEntityType<AnemoneBlockEntity> = register("anemone", FabricBlockEntityTypeBuilder.create(::AnemoneBlockEntity, HybridAquaticBlocks.ANEMONE))
     val MESSAGE_IN_A_BOTTLE: BlockEntityType<MessageInABottleBlockEntity> = register("message_in_a_bottle", FabricBlockEntityTypeBuilder.create(::MessageInABottleBlockEntity, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE))
-    val FISHING_PLAQUE: BlockEntityType<FishingPlaqueBlockEntity> = register("fishing_plaque", FabricBlockEntityTypeBuilder.create(::FishingPlaqueBlockEntity, HybridAquaticBlocks.FISHING_PLAQUE))
     val BUOY: BlockEntityType<BuoyBlockEntity> = register("buoy", FabricBlockEntityTypeBuilder.create(::BuoyBlockEntity, HybridAquaticBlocks.BUOY))
     val CRAB_POT: BlockEntityType<CrabPotBlockEntity> = register("crab_pot", FabricBlockEntityTypeBuilder.create(::CrabPotBlockEntity, HybridAquaticBlocks.CRAB_POT))
     val HYDROTHERMAL_VENT: BlockEntityType<HydrothermalVentBlockEntity> = register("hydrothermal_vent", FabricBlockEntityTypeBuilder.create(::HydrothermalVentBlockEntity, HybridAquaticBlocks.HYDROTHERMAL_VENT))

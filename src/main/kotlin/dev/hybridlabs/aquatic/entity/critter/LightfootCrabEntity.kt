@@ -19,11 +19,6 @@ class LightfootCrabEntity(entityType: EntityType<out HybridAquaticCritterEntity>
         }
     }
 
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(3, CrabDigGoal(this, 0.05))
-    }
-
     override fun getMaxSize() : Int {
         return 5
     }

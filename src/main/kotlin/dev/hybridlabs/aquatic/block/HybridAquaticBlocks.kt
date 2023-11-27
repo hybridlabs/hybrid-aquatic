@@ -73,19 +73,6 @@ object HybridAquaticBlocks {
                 .instrument(Instrument.CUSTOM_HEAD)
         )
     }
-
-    val FISHING_PLAQUE = register("fishing_plaque", FishingPlaque(FabricBlockSettings.create()))
-
-
-//    val FISH_TANK = register("fish_tank", FishTankBlock(
-//        FabricBlockSettings.create()
-//            .ticksRandomly()
-//            .strength(1.0f)
-//            .nonOpaque()
-//            .requiresTool()
-//            .sounds(BlockSoundGroup.GLASS)
-//    ))
-
     private fun register(id: String, block: Block): Block {
         return Registry.register(Registries.BLOCK, Identifier(HybridAquatic.MOD_ID, id), block)
     }

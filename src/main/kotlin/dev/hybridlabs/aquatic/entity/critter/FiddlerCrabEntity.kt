@@ -19,10 +19,6 @@ class FiddlerCrabEntity(entityType: EntityType<out HybridAquaticCritterEntity>, 
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
     }
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(3, CrabDigGoal(this, 0.05))
-    }
 
     override fun getGroup(): EntityGroup? {
         return EntityGroup.ARTHROPOD

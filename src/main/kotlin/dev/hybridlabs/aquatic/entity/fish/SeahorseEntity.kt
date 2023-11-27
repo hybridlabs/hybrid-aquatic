@@ -48,13 +48,13 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
     }
 
     private fun navigateToCoral(coralBlockPos: BlockPos) {
-        this.navigation.startMovingTo(coralBlockPos.x.toDouble(), coralBlockPos.y.toDouble(), coralBlockPos.z.toDouble(), 1.0)
+        this.navigation.startMovingTo(coralBlockPos.x.toDouble(), coralBlockPos.y.toDouble(), coralBlockPos.z.toDouble(), this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED))
     }
 
     private fun findNearbyCoralBlock(): BlockPos? {
-        for (i in -5..5) {
-            for (j in -5..5) {
-                for (k in -5..5) {
+        for (i in -16..16) {
+            for (j in -16..16) {
+                for (k in -16..16) {
                     val blockPos = BlockPos((x + i).toInt(), (y + j).toInt(), (z + k).toInt())
                     val blockState = world.getBlockState(blockPos)
 

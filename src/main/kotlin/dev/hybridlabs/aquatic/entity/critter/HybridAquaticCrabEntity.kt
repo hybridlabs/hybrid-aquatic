@@ -18,10 +18,12 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animation.Animation
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.core.animation.RawAnimation
 
-open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEntity>, world: World, variantCount: Int = 1): HybridAquaticCritterEntity(type, world, variantCount) {
+@Suppress("DEPRECATION")
+open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEntity>, world: World, variantCount: Int = 1) :
+    HybridAquaticCritterEntity(type, world, variantCount) {
     private var songSource: BlockPos? = null
     private var songPlaying: Boolean = false
 
@@ -31,11 +33,6 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
         set(bool) {
             dataTracker.set(IS_DIGGING, bool)
         }
-
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(3, CrabDigGoal(this, 0.05))
-    }
 
     override fun initDataTracker() {
         dataTracker.startTracking(IS_DIGGING, false)
@@ -49,7 +46,14 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
     }
 
     override fun mobTick() {
-        if (diggingCooldown > 0) diggingCooldown--
+        if (diggingCooldown > 0) {
+            diggingCooldown--
+            if (isDigging) {
+                this.movementSpeed = 0.0F
+            }
+        } else {
+            this.movementSpeed = movementSpeed.toDouble().toFloat()
+        }
 
         super.mobTick()
     }
@@ -57,6 +61,7 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
     override fun getGroup(): EntityGroup? {
         return EntityGroup.ARTHROPOD
     }
+
     override fun tickMovement() {
         val songSourceCopy = songSource
         if (songSourceCopy == null || !songSourceCopy.isWithinDistance(pos, 3.46) || !world.getBlockState(songSourceCopy).isOf(Blocks.JUKEBOX)) {
@@ -92,7 +97,7 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
     }
 
     companion object {
-        val DANCE_ANIMATION: RawAnimation  = RawAnimation.begin().then("dance", Animation.LoopType.LOOP)
+        val DANCE_ANIMATION: RawAnimation = RawAnimation.begin().then("dance", Animation.LoopType.LOOP)
         val DIGGING_ANIMATION: RawAnimation = RawAnimation.begin().then("dig", Animation.LoopType.LOOP)
         val HIDING_ANIMATION: RawAnimation = RawAnimation.begin().then("hide", Animation.LoopType.LOOP)
         val FLIPPED_ANIMATION: RawAnimation = RawAnimation.begin().then("flipped", Animation.LoopType.LOOP)
@@ -112,7 +117,8 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
                     (world.isWater(pos) || world.isAir(pos))
         }
 
-        val IS_DIGGING: TrackedData<Boolean> = DataTracker.registerData(HybridAquaticCrabEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+        val IS_DIGGING: TrackedData<Boolean> =
+            DataTracker.registerData(HybridAquaticCrabEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
         const val DIGGING_COOLDOWN_KEY = "DiggingCooldown"
     }
 }

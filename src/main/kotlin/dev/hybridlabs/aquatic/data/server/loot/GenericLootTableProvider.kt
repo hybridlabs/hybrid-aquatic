@@ -147,8 +147,10 @@ class GenericLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
                 .randomSequenceId(HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID)
                 .pool(
                     LootPool.builder()
-                        .with(ItemEntry.builder(Items.STICK).weight(10))
-                        .with(ItemEntry.builder(Items.FLINT).weight(5))
+                        .with(ItemEntry.builder(Items.AIR).weight(10))
+                        .with(ItemEntry.builder(Items.NAUTILUS_SHELL).weight(2))
+                        .with(ItemEntry.builder(Items.GOLD_NUGGET).weight(3))
+                        .with(ItemEntry.builder(Items.IRON_NUGGET).weight(5))
                 )
         )
     }

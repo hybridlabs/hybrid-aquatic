@@ -18,10 +18,6 @@ class CrabEntity(entityType: EntityType<out HybridAquaticCritterEntity>, world: 
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
     }
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(3, CrabDigGoal(this, 1.00))
-    }
 
     override fun getMaxSize() : Int {
         return 5
