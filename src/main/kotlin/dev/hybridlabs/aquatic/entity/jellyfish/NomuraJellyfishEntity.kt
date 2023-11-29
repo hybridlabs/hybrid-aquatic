@@ -20,7 +20,7 @@ class NomuraJellyfishEntity(entityType: EntityType<out NomuraJellyfishEntity>, w
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.2)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
@@ -54,7 +54,7 @@ class NomuraJellyfishEntity(entityType: EntityType<out NomuraJellyfishEntity>, w
             if (!source.isIn(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) && !source.isOf(DamageTypes.THORNS)) {
                 val attacker = source.source
                 if (attacker is LivingEntity) {
-                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 0), this)
+                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 1), this)
                 }
             }
             super.damage(source, amount)

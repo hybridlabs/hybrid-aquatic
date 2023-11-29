@@ -54,7 +54,7 @@ class AtollaJellyfishEntity(entityType: EntityType<out AtollaJellyfishEntity>, w
             if (!source.isIn(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) && !source.isOf(DamageTypes.THORNS)) {
                 val attacker = source.source
                 if (attacker is LivingEntity) {
-                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 2), this)
+                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 1), this)
                 }
             }
             super.damage(source, amount)
@@ -62,7 +62,7 @@ class AtollaJellyfishEntity(entityType: EntityType<out AtollaJellyfishEntity>, w
     }
     override fun onPlayerCollision(player: PlayerEntity) {
         super.onPlayerCollision(player)
-        player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 2), this)
+        player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 1), this)
     }
     override fun getMaxSize() : Int {
         return 5

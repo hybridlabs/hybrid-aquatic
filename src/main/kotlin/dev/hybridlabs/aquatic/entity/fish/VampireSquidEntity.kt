@@ -26,11 +26,11 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.ENTITY_GLOW_SQUID_HURT
+        return SoundEvents.ENTITY_SQUID_HURT
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.ENTITY_GLOW_SQUID_DEATH
+        return SoundEvents.ENTITY_SQUID_DEATH
     }
 
     override fun getAmbientSound(): SoundEvent {

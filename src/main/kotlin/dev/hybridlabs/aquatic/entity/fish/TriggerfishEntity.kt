@@ -11,7 +11,7 @@ class TriggerfishEntity(entityType: EntityType<out TriggerfishEntity>, world: Wo
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.8)
         }
     }

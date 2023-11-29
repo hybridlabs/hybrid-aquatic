@@ -38,7 +38,7 @@ class GiantClamEntity(entityType: EntityType<out GiantClamEntity>, world: World)
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder =
             WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 18.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)

@@ -20,7 +20,7 @@ class LionsManeJellyfishEntity(entityType: EntityType<out LionsManeJellyfishEnti
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.2)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
@@ -54,7 +54,7 @@ class LionsManeJellyfishEntity(entityType: EntityType<out LionsManeJellyfishEnti
             if (!source.isIn(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) && !source.isOf(DamageTypes.THORNS)) {
                 val attacker = source.source
                 if (attacker is LivingEntity) {
-                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 0), this)
+                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 1), this)
                 }
             }
             super.damage(source, amount)
@@ -62,7 +62,7 @@ class LionsManeJellyfishEntity(entityType: EntityType<out LionsManeJellyfishEnti
     }
     override fun onPlayerCollision(player: PlayerEntity) {
         super.onPlayerCollision(player)
-        player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 2), this)
+        player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 1), this)
     }
     override fun getMaxSize() : Int {
         return 5

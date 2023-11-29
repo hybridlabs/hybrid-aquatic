@@ -54,7 +54,7 @@ class CompassJellyfishEntity(entityType: EntityType<out CompassJellyfishEntity>,
             if (!source.isIn(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) && !source.isOf(DamageTypes.THORNS)) {
                 val attacker = source.source
                 if (attacker is LivingEntity) {
-                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 0), this)
+                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 0), this)
                 }
             }
             super.damage(source, amount)
