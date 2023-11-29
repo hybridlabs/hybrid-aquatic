@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": {
+      "item": "minecraft:lantern"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    " L ",
+    " S ",
+    " W "
+  ],
+  "result": {
+    "item": "hybrid-aquatic:buoy"
+  },
+  "show_notification": true
+}

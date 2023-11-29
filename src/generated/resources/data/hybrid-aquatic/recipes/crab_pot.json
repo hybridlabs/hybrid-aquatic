@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "III",
+    "WWW"
+  ],
+  "result": {
+    "item": "hybrid-aquatic:crab_pot"
+  },
+  "show_notification": true
+}

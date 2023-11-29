@@ -13,6 +13,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.book.RecipeCategory
+import net.minecraft.registry.tag.ItemTags
 import java.util.function.Consumer
 
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
@@ -24,6 +25,25 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .pattern("SSS")
             .input('S', HybridAquaticItems.SPONGE_CHUNK)
             .criterion("has_sponge_chunk", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.SPONGE_CHUNK))
+            .offerTo(exporter)
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.BUOY)
+            .pattern(" L ")
+            .pattern(" S ")
+            .pattern(" W ")
+            .input('S', Items.STICK)
+            .input('L', Items.LANTERN)
+            .input('W', ItemTags.PLANKS)
+            .criterion("has_lantern", InventoryChangedCriterion.Conditions.items(Items.LANTERN))
+            .offerTo(exporter)
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.CRAB_POT)
+            .pattern("WWW")
+            .pattern("III")
+            .pattern("WWW")
+            .input('I', Items.IRON_BARS)
+            .input('W', ItemTags.PLANKS)
+            .criterion("has_crab_claw", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.CRAB_CLAW))
             .offerTo(exporter)
 
         // hook recipes
