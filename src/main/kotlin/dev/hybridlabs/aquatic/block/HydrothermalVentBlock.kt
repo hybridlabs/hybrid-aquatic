@@ -84,16 +84,18 @@ class HydrothermalVentBlock(settings: Settings) : PlantBlock(settings), BlockEnt
         pos: BlockPos,
         context: ShapeContext
     ): VoxelShape {
-        return COLLISION_SHAPE
+        return HydrothermalVentBlock.COLLISION_SHAPE
     }
 
     override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape {
-        return SHAPE
+        return HydrothermalVentBlock.SHAPE
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
         val fluidState = ctx.world.getFluidState(ctx.blockPos)
-        return if (fluidState.isIn(FluidTags.WATER)) defaultState.with(WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).isOf(Fluids.WATER)) else null
+        return if (fluidState.isIn(FluidTags.WATER)) defaultState.with(
+            WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).isOf(
+                Fluids.WATER)) else null
     }
 
     override fun getFluidState(state: BlockState): FluidState {

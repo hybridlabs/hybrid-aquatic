@@ -68,6 +68,7 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
         registry.register(HybridAquaticItems.ANEMONE, AnemoneBlockItemRenderer())
+        registry.register(HybridAquaticItems.TUBE_SPONGE, TubeSpongeBlockItemRenderer())
         registry.register(HybridAquaticItems.BUOY, BuoyBlockItemRenderer())
         registry.register(HybridAquaticItems.CRAB_POT, CrabPotBlockItemRenderer())
         registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE, MessageInABottleBlockItemRenderer())

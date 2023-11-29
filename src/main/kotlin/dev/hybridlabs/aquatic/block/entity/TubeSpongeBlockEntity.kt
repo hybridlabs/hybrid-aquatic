@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.block.entity
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.util.math.BlockPos
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -37,9 +36,5 @@ class TubeSpongeBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hybr
 
     override fun toInitialChunkDataNbt(): NbtCompound {
         return createNbt()
-    }
-
-    override fun toUpdatePacket(): BlockEntityUpdateS2CPacket {
-        return BlockEntityUpdateS2CPacket.create(this)
     }
 }
