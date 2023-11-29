@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
+import net.minecraft.block.Blocks
 import net.minecraft.data.server.recipe.RecipeJsonProvider
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder
@@ -16,6 +17,15 @@ import java.util.function.Consumer
 
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun generate(exporter: Consumer<RecipeJsonProvider>) {
+        // misc recipes
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, Blocks.SPONGE)
+            .pattern("SSS")
+            .pattern("SSS")
+            .pattern("SSS")
+            .input('S', HybridAquaticItems.SPONGE_CHUNK)
+            .criterion("has_sponge_chunk", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.SPONGE_CHUNK))
+            .offerTo(exporter)
+
         // hook recipes
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.BARBED_HOOK)
             .pattern("N  ")

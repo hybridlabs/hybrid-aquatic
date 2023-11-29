@@ -16,6 +16,9 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBlockTags.ANEMONES_GENERATE_IN)
             .add(Blocks.WATER)
 
+        getOrCreateTagBuilder(HybridAquaticBlockTags.TUBE_SPONGE_GENERATE_IN)
+            .add(Blocks.WATER)
+
         getOrCreateTagBuilder(HybridAquaticBlockTags.HYDROTHERMAL_VENT_GENERATE_IN)
             .add(Blocks.WATER)
 

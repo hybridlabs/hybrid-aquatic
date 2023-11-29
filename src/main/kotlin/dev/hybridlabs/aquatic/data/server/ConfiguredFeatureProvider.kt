@@ -12,11 +12,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.state.property.Properties
 import net.minecraft.world.gen.blockpredicate.BlockPredicate
-import net.minecraft.world.gen.feature.ConfiguredFeature
-import net.minecraft.world.gen.feature.Feature
-import net.minecraft.world.gen.feature.PlacedFeatures
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig
-import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig
+import net.minecraft.world.gen.feature.*
 import net.minecraft.world.gen.stateprovider.BlockStateProvider
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider
 import java.util.concurrent.CompletableFuture
@@ -35,6 +31,23 @@ class ConfiguredFeatureProvider(output: FabricDataOutput, registriesFuture: Comp
                             BlockStateProvider.of(HybridAquaticBlocks.ANEMONE.defaultState.with(Properties.WATERLOGGED, true))
                         ),
                         BlockPredicate.matchingBlockTag(HybridAquaticBlockTags.ANEMONES_GENERATE_IN)
+                    )
+                )
+            )
+        )
+
+        // sponge patch
+        entries.add(
+            HybridAquaticConfiguredFeatures.TUBE_SPONGE_PATCH,
+            ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchFeatureConfig(
+                    6, 2, 2,
+                    PlacedFeatures.createEntry(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockFeatureConfig(
+                            BlockStateProvider.of(HybridAquaticBlocks.TUBE_SPONGE.defaultState.with(Properties.WATERLOGGED, true))
+                        ),
+                        BlockPredicate.matchingBlockTag(HybridAquaticBlockTags.TUBE_SPONGE_GENERATE_IN)
                     )
                 )
             )

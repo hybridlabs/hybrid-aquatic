@@ -24,7 +24,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
+@Suppress("DEPRECATION")
 class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(WATERLOGGED, false)

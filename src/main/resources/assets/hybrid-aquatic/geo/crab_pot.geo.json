@@ -12,7 +12,7 @@
 			},
 			"bones": [
 				{
-					"name": "bb_main",
+					"name": "crab_pot",
 					"pivot": [0, 0, 0],
 					"cubes": [
 						{"origin": [-7.5, 2, -7.5], "size": [15, 12, 15], "uv": [0, 0]},

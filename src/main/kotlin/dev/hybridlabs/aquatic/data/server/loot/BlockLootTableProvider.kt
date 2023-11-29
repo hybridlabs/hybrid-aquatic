@@ -34,6 +34,21 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 )
         }
 
+        // living sponge
+        addDrop(HybridAquaticBlocks.TUBE_SPONGE) { block ->
+            LootTable.builder().pool(
+                LootPool.builder().with(
+                    AlternativeEntry.builder(
+                        LootTableEntry.builder(HybridAquaticLootTables.TUBE_SPONGE_LOOT_ID)
+                            .conditionally(
+                                WITHOUT_SILK_TOUCH_NOR_SHEARS)
+                            ,
+                        ItemEntry.builder(block)
+                            .conditionally(WITH_SILK_TOUCH),
+                    )
+                ))
+        }
+
         // hydrothermal vent
         addDrop(HybridAquaticBlocks.HYDROTHERMAL_VENT) { block ->
             LootTable.builder().pool(
@@ -43,10 +58,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                             .conditionally(
                                 MatchToolLootCondition.builder(
                                     ItemPredicate.Builder.create()
-                                        .tag(ItemTags.AXES)
+                                        .tag(ItemTags.PICKAXES)
                                 )
                             ),
-                        ItemEntry.builder(block),
+                        ItemEntry.builder(block)
+                            .conditionally(WITH_SILK_TOUCH),
                     )
                 ))
         }

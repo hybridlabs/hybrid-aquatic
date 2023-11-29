@@ -15,10 +15,17 @@ object FeatureBiomeModifications {
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.ANEMONE_PATCH
         )
+
         BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.HYDROTHERMAL_VENT_SPAWN_BIOMES),
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.HYDROTHERMAL_VENTS
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.TUBE_SPONGE_SPAWN_BIOMES),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH
         )
 
         BiomeModifications.addFeature(

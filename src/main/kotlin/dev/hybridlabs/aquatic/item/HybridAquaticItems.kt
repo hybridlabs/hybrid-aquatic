@@ -28,6 +28,7 @@ object HybridAquaticItems {
 
     val GLOW_SLIME = register("glow_slime", Item(FabricItemSettings()))
     val SHARK_TOOTH = register("shark_tooth", Item(FabricItemSettings()))
+    val SPONGE_CHUNK = register("sponge_chunk", Item(FabricItemSettings()))
 
     // pearls
     val PEARL = register("pearl", Item(FabricItemSettings()))
@@ -360,6 +361,7 @@ object HybridAquaticItems {
     val WHALE_SHARK_PLUSHIE = registerBlockItem("whale_shark_plushie", HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
 
     val CRATE = registerBlockItem("crate", HybridAquaticBlocks.CRATE)
+    val TUBE_SPONGE = registerBlockItem("tube_sponge", HybridAquaticBlocks.TUBE_SPONGE)
 
     // fish spawn eggs
     val ANGLERFISH_SPAWN_EGG = registerSpawnEgg("anglerfish_spawn_egg", HybridAquaticEntityTypes.ANGLERFISH, 0x4d4848, 0xc4faff)

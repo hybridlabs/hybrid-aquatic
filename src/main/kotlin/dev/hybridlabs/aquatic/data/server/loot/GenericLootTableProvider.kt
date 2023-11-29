@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -140,6 +141,19 @@ class GenericLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
                             )
                         )
                     )
+
+        exporter.accept(
+            HybridAquaticLootTables.TUBE_SPONGE_LOOT_ID,
+            LootTable.builder()
+                .randomSequenceId(HybridAquaticLootTables.TUBE_SPONGE_LOOT_ID)
+                .pool(
+                    LootPool.builder()
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.SPONGE_CHUNK)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                )
+        )
 
         exporter.accept(
             HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID,

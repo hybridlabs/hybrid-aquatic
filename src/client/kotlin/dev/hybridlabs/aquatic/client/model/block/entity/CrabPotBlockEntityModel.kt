@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.block.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
 import dev.hybridlabs.aquatic.block.entity.CrabPotBlockEntity
 import net.minecraft.util.Identifier
 import software.bernie.geckolib.model.GeoModel
@@ -21,7 +20,7 @@ class CrabPotBlockEntityModel: GeoModel<CrabPotBlockEntity>() {
 
     companion object {
         val ANIMATION_LOCATION = Identifier(HybridAquatic.MOD_ID, "animations/crab_pot.animation.json")
-        val MODEL_LOCATION = Identifier(HybridAquatic.MOD_ID, "geo/entity/block/crab_pot.geo.json")
+        val MODEL_LOCATION = Identifier(HybridAquatic.MOD_ID, "geo/crab_pot.geo.json")
         val TEXTURE_LOCATION = Identifier(HybridAquatic.MOD_ID, "textures/block/crab_pot.png")
     }
 }

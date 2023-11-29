@@ -12,11 +12,11 @@ import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import software.bernie.geckolib.util.RenderUtils
 
-class HydrothermalVentBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.HYDROTHERMAL_VENT, pos, state), GeoAnimatable {
+class TubeSpongeBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.TUBE_SPONGE, pos, state), GeoAnimatable {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
         return if (world != null) {
-            event.controller.setAnimation(RawAnimation.begin().then("float", Animation.LoopType.LOOP))
+            event.controller.setAnimation(RawAnimation.begin().then("sway", Animation.LoopType.LOOP))
             PlayState.CONTINUE
         } else {
             PlayState.STOP

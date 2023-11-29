@@ -8,11 +8,7 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.block.Blocks
-import net.minecraft.data.client.BlockStateModelGenerator
-import net.minecraft.data.client.ItemModelGenerator
-import net.minecraft.data.client.ModelIds
-import net.minecraft.data.client.Models
-import net.minecraft.data.client.TextureMap
+import net.minecraft.data.client.*
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
@@ -41,8 +37,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         // builtin
         mapOf(
             HybridAquaticBlocks.ANEMONE to (HybridAquaticBlocks.ANEMONE to TEMPLATE_ANEMONE),
+            HybridAquaticBlocks.TUBE_SPONGE to (HybridAquaticBlocks.TUBE_SPONGE to TEMPLATE_TUBE_SPONGE),
             HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE to (Blocks.GLASS to TEMPLATE_MESSAGE_IN_A_BOTTLE),
-            HybridAquaticBlocks.BUOY to (Blocks.LANTERN to TEMPLATE_BUOY)
+            HybridAquaticBlocks.BUOY to (Blocks.LANTERN to TEMPLATE_BUOY),
+            HybridAquaticBlocks.HYDROTHERMAL_VENT to (Blocks.DEEPSLATE to TEMPLATE_HYDROTHERMAL_VENT),
+            HybridAquaticBlocks.CRAB_POT to (Blocks.OAK_PLANKS to TEMPLATE_CRAB_POT)
         ).forEach { (block, info) ->
             val (particleBlock, template) = info
 
@@ -56,7 +55,8 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         setOf(
             HybridAquaticBlocks.CRATE,
         ).forEach(generator::registerSimpleCubeAll)
-    } }
+    }
+    }
 
     override fun generateItemModels(generator: ItemModelGenerator) {
         setOf(
@@ -71,6 +71,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.COOKED_TENTACLE,
             HybridAquaticItems.GLOW_SLIME,
             HybridAquaticItems.SHARK_TOOTH,
+            HybridAquaticItems.SPONGE_CHUNK,
             HybridAquaticItems.PEARL,
             HybridAquaticItems.BLACK_PEARL,
             HybridAquaticItems.LIONFISH,
@@ -95,7 +96,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.BARBED_HOOK,
             HybridAquaticItems.GLOWING_HOOK,
             HybridAquaticItems.MAGNETIC_HOOK,
-            HybridAquaticItems.FISHING_NET,
+            HybridAquaticItems.FISHING_NET
         ).forEach { item ->
             generator.register(item, Models.GENERATED)
         }
@@ -103,8 +104,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
     companion object {
         private val TEMPLATE_ANEMONE = Identifier(HybridAquatic.MOD_ID, "item/template_anemone")
+        private val TEMPLATE_TUBE_SPONGE = Identifier(HybridAquatic.MOD_ID, "item/template_tube_sponge")
         private val TEMPLATE_BUOY = Identifier(HybridAquatic.MOD_ID, "item/template_buoy")
+        private val TEMPLATE_HYDROTHERMAL_VENT = Identifier(HybridAquatic.MOD_ID, "item/template_hydrothermal_vent")
         private val TEMPLATE_MESSAGE_IN_A_BOTTLE = Identifier(HybridAquatic.MOD_ID, "item/template_message_in_a_bottle")
         private val TEMPLATE_PLUSHIE = Identifier(HybridAquatic.MOD_ID, "item/template_plushie")
+        private val TEMPLATE_CRAB_POT = Identifier(HybridAquatic.MOD_ID, "item/template_crab_pot")
     }
 }

@@ -26,7 +26,8 @@ object HybridAquaticBlocks {
             .strength(0.4f)
             .nonOpaque()
             .pistonBehavior(PistonBehavior.DESTROY)
-            .sounds(BlockSoundGroup.SLIME).drops(Identifier(HybridAquatic.MOD_ID, "blocks/anemone"))
+            .sounds(BlockSoundGroup.SLIME)
+            .drops(Identifier(HybridAquatic.MOD_ID, "blocks/anemone"))
     ))
 
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleBlock(
@@ -43,10 +44,12 @@ object HybridAquaticBlocks {
     val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie", createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK, Blocks.LIGHT_BLUE_WOOL))
     val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie", createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL))
     val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie", createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.LIGHT_GRAY_WOOL))
-    val CRAB_PLUSHIE = register("crab_plushie", createPlushieBlock(PlushieBlock.Variant.CRAB, Blocks.ORANGE_WOOL))
 
     val CRATE = register("crate", CrateBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
         .hardness(0.75F)
+    ))
+
+    val TUBE_SPONGE = register("tube_sponge", TubeSpongeBlock(FabricBlockSettings.copyOf(Blocks.WET_SPONGE)
     ))
 
     val CRAB_POT = register("crab_pot", CrabPotBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
@@ -59,9 +62,11 @@ object HybridAquaticBlocks {
         .hardness(0.75F)
     ))
 
-    val HYDROTHERMAL_VENT = register("hydrothermal_vent", HydrothermalVentBlock(FabricBlockSettings.copyOf(Blocks.DEEPSLATE)
+    val HYDROTHERMAL_VENT = register("hydrothermal_vent", HydrothermalVentBlock(FabricBlockSettings.create()
         .nonOpaque()
         .hardness(1.0F)
+        .pistonBehavior(PistonBehavior.DESTROY)
+        .drops(Identifier(HybridAquatic.MOD_ID, "blocks/hydrothermal_vent"))
     ))
 
     private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block): PlushieBlock {

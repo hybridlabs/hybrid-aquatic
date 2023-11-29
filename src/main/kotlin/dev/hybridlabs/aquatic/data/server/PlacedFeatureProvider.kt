@@ -30,6 +30,19 @@ class PlacedFeatureProvider(output: FabricDataOutput, registriesFuture: Completa
             )
         )
 
+        // sponge patch
+        entries.add(
+            HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH,
+            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.TUBE_SPONGE_PATCH),
+                listOf(
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
+                    CountPlacementModifier.of(1),
+                    BiomePlacementModifier.of()
+                )
+            )
+        )
+
         // hydrothermal vents
         entries.add(
             HybridAquaticPlacedFeatures.HYDROTHERMAL_VENTS,

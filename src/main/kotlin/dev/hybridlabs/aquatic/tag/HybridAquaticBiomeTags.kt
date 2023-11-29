@@ -86,6 +86,7 @@ object HybridAquaticBiomeTags {
     val SEA_NETTLE_SPAWN_BIOMES = create("sea_nettle_spawn_biomes")
 
     val ANEMONE_SPAWN_BIOMES = create("anemone_spawn_biomes")
+    val TUBE_SPONGE_SPAWN_BIOMES = create("tube_sponge_spawn_biomes")
     val MESSAGE_IN_A_BOTTLE_SPAWN_BIOMES = create("message_in_a_bottle_spawn_biomes")
     val HYDROTHERMAL_VENT_SPAWN_BIOMES = create("hydrothermal_vent_spawn_biomes")
 
