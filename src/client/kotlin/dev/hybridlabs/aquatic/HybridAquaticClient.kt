@@ -55,6 +55,7 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerBlockEntityRenderers() {
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.ANEMONE, ::AnemoneBlockEntityRenderer)
+        BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.GIANT_CLAM, ::GiantClamBlockEntityRenderer)
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE, ::MessageInABottleBlockEntityRenderer)
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.BUOY, ::BuoyBlockEntityRenderer)
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.HYDROTHERMAL_VENT, ::HydrothermalVentBlockEntityRenderer)
@@ -68,6 +69,7 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
         registry.register(HybridAquaticItems.ANEMONE, AnemoneBlockItemRenderer())
+        registry.register(HybridAquaticItems.GIANT_CLAM, GiantClamBlockItemRenderer())
         registry.register(HybridAquaticItems.TUBE_SPONGE, TubeSpongeBlockItemRenderer())
         registry.register(HybridAquaticItems.BUOY, BuoyBlockItemRenderer())
         registry.register(HybridAquaticItems.CRAB_POT, CrabPotBlockItemRenderer())

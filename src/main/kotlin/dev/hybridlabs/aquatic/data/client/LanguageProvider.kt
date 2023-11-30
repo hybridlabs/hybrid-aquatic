@@ -68,6 +68,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BUOY to "Buoy",
             HybridAquaticBlocks.CRAB_POT to "Crab Pot",
             HybridAquaticBlocks.HYDROTHERMAL_VENT to "Hydrothermal Vent",
+            HybridAquaticBlocks.GIANT_CLAM to "Giant Clam",
         ).forEach { (block, translation) ->
             builder.add(block, translation)
         }
@@ -210,7 +211,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.NUDIBRANCH to "Nudibranch",
             HybridAquaticEntityTypes.SEA_CUCUMBER to "Sea Cucumber",
             HybridAquaticEntityTypes.SEA_URCHIN to "Sea Urchin",
-            HybridAquaticEntityTypes.GIANT_CLAM to "Giant Clam",
             HybridAquaticEntityTypes.STARFISH to "Starfish",
             HybridAquaticEntityTypes.SEA_NETTLE to "Sea Nettle",
             HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH to "Fried Egg Jellyfish",

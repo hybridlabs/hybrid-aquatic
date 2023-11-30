@@ -20,6 +20,11 @@ object HybridAquaticBlockTags {
     /**
      * A list of blocks that living sponges can generate inside.
      */
+    val GIANT_CLAM_GENERATE_IN = create("giant_clam_generate_in")
+
+    /**
+     * A list of blocks that living sponges can generate inside.
+     */
     val TUBE_SPONGE_GENERATE_IN = create("tube_sponge_generate_in")
 
 

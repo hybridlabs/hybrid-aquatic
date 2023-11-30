@@ -30,6 +30,19 @@ class PlacedFeatureProvider(output: FabricDataOutput, registriesFuture: Completa
             )
         )
 
+        // giant clam patch
+        entries.add(
+            HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH,
+            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.GIANT_CLAM_PATCH),
+                listOf(
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
+                    CountPlacementModifier.of(1),
+                    BiomePlacementModifier.of()
+                )
+            )
+        )
+
         // sponge patch
         entries.add(
             HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH,

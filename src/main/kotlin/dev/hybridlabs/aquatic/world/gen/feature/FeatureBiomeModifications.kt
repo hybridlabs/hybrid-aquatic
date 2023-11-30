@@ -17,6 +17,12 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.GIANT_CLAM_SPAWN_BIOMES),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+        )
+
+        BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.HYDROTHERMAL_VENT_SPAWN_BIOMES),
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.HYDROTHERMAL_VENTS

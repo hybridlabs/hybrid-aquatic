@@ -20,8 +20,8 @@ import net.minecraft.util.Identifier
 object HybridAquaticItems {
     val ANEMONE = registerBlockItem("anemone", HybridAquaticBlocks.ANEMONE)
     val BUOY = registerPlaceableInWaterBlockItem("buoy", HybridAquaticBlocks.BUOY)
-    val CRAB_POT = registerPlaceableInWaterBlockItem("crab_pot", HybridAquaticBlocks.CRAB_POT)
-    val HYDROTHERMAL_VENT = registerPlaceableInWaterBlockItem("hydrothermal_vent", HybridAquaticBlocks.HYDROTHERMAL_VENT)
+    val CRAB_POT = registerBlockItem("crab_pot", HybridAquaticBlocks.CRAB_POT)
+    val HYDROTHERMAL_VENT = registerBlockItem("hydrothermal_vent", HybridAquaticBlocks.HYDROTHERMAL_VENT)
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleItem(FabricItemSettings()))
 
     val FISHING_NET = register("fishing_net", FishingNetItem(FabricItemSettings().maxCount(1)))
@@ -362,6 +362,7 @@ object HybridAquaticItems {
 
     val CRATE = registerBlockItem("crate", HybridAquaticBlocks.CRATE)
     val TUBE_SPONGE = registerBlockItem("tube_sponge", HybridAquaticBlocks.TUBE_SPONGE)
+    val GIANT_CLAM = registerBlockItem("giant_clam", HybridAquaticBlocks.GIANT_CLAM)
 
     // fish spawn eggs
     val ANGLERFISH_SPAWN_EGG = registerSpawnEgg("anglerfish_spawn_egg", HybridAquaticEntityTypes.ANGLERFISH, 0x4d4848, 0xc4faff)
@@ -435,7 +436,6 @@ object HybridAquaticItems {
     val YETI_CRAB_SPAWN_EGG = registerSpawnEgg("yeti_crab_spawn_egg", HybridAquaticEntityTypes.YETI_CRAB, 0xedab50, 0x8a4836)
 
     //critter spawn eggs
-    val GIANT_CLAM_SPAWN_EGG = registerSpawnEgg("giant_clam_spawn_egg", HybridAquaticEntityTypes.GIANT_CLAM, 0xd4d4c8, 0x1b4377)
     val NUDIBRANCH_SPAWN_EGG = registerSpawnEgg("nudibranch_spawn_egg", HybridAquaticEntityTypes.NUDIBRANCH, 0xf7be47, 0xb853a3)
     val SEA_CUCUMBER_SPAWN_EGG = registerSpawnEgg("sea_cucumber_spawn_egg", HybridAquaticEntityTypes.SEA_CUCUMBER, 0x225b6d, 0x0c2627)
     val SEA_URCHIN_SPAWN_EGG = registerSpawnEgg("sea_urchin_spawn_egg", HybridAquaticEntityTypes.SEA_URCHIN, 0x994066, 0x41142c)

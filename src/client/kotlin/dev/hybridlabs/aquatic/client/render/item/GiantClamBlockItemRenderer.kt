@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.client.render.item
 
 import dev.hybridlabs.aquatic.HybridAquaticClient
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.entity.CrabPotBlockEntity
-import dev.hybridlabs.aquatic.client.render.block.entity.CrabPotBlockEntityRenderer
+import dev.hybridlabs.aquatic.block.entity.GiantClamBlockEntity
+import dev.hybridlabs.aquatic.client.render.block.entity.GiantClamBlockEntityRenderer
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry.DynamicItemRenderer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.model.json.ModelTransformationMode
@@ -11,9 +11,9 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
-class CrabPotBlockItemRenderer: DynamicItemRenderer {
-    private val crabPotBlockEntity = CrabPotBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.CRAB_POT.defaultState)
-    private val renderer = CrabPotBlockEntityRenderer(HybridAquaticClient.createBlockEntityRendererFactoryContext())
+class GiantClamBlockItemRenderer: DynamicItemRenderer {
+    private val giantClamBlockEntity = GiantClamBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.GIANT_CLAM.defaultState)
+    private val renderer = GiantClamBlockEntityRenderer(HybridAquaticClient.createBlockEntityRendererFactoryContext())
 
     override fun render(
         stack: ItemStack,
@@ -23,6 +23,6 @@ class CrabPotBlockItemRenderer: DynamicItemRenderer {
         light: Int,
         overlay: Int
     ) {
-        renderer.render(crabPotBlockEntity, 1.0f, matrices, vertexConsumers, light, overlay)
+        renderer.render(giantClamBlockEntity, 1.0f, matrices, vertexConsumers, light, overlay)
     }
 }

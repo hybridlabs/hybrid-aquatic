@@ -41,7 +41,6 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.TRIGGERFISH,
             HybridAquaticEntityTypes.TIGER_BARB,
             HybridAquaticEntityTypes.PIRANHA,
-            HybridAquaticEntityTypes.RATFISH,
             HybridAquaticEntityTypes.OSCAR,
             HybridAquaticEntityTypes.GOURAMI,
             HybridAquaticEntityTypes.ZEBRA_DANIO,
@@ -62,7 +61,8 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.FRILLED_SHARK,
             HybridAquaticEntityTypes.VAMPIRE_SQUID,
             HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS,
-        ).forEach { registerFishUnderground(it) }
+            HybridAquaticEntityTypes.RATFISH,
+            ).forEach { registerFishUnderground(it) }
 
         // jellies
         setOf(
@@ -86,7 +86,6 @@ object SpawnRestrictionRegistry {
 
         // critters
         setOf(
-
             HybridAquaticEntityTypes.GIANT_ISOPOD,
             HybridAquaticEntityTypes.SHRIMP,
             HybridAquaticEntityTypes.MANTIS_SHRIMP,
@@ -96,7 +95,6 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.NUDIBRANCH,
             HybridAquaticEntityTypes.SEA_CUCUMBER,
             HybridAquaticEntityTypes.SEA_URCHIN,
-            HybridAquaticEntityTypes.GIANT_CLAM,
         ).forEach { registerCritter(it) }
 
         // crabs

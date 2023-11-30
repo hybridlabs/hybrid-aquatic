@@ -93,6 +93,7 @@ object HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.CRAB_POT)
             entries.add(HybridAquaticItems.HYDROTHERMAL_VENT)
             entries.add(HybridAquaticItems.TUBE_SPONGE)
+            entries.add(HybridAquaticItems.GIANT_CLAM)
 
             // spawn eggs
             Registries.ITEM.forEach { item ->

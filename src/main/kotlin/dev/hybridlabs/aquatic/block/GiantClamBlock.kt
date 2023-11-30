@@ -1,57 +1,24 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.block.entity.HydrothermalVentBlockEntity
+import dev.hybridlabs.aquatic.block.entity.GiantClamBlockEntity
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.entity.Entity
-import net.minecraft.entity.LivingEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.util.math.random.Random
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
-import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
 @Suppress("DEPRECATION")
-class HydrothermalVentBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
+class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(WATERLOGGED, false)
-    }
-
-    override fun onSteppedOn(world: World, pos: BlockPos?, state: BlockState?, entity: Entity) {
-        if (!entity.bypassesSteppingEffects() && entity is LivingEntity) {
-            entity.damage(world.damageSources.hotFloor(), 1.0f)
-        }
-        super.onSteppedOn(world, pos, state, entity)
-    }
-
-    override fun randomDisplayTick(state: BlockState?, world: World?, pos: BlockPos?, random: Random?) {
-        super.randomDisplayTick(state, world, pos, random)
-        if (world != null && pos != null) {
-            spawnSmokeParticle(world, pos)
-        }
-    }
-    private fun spawnSmokeParticle(world: World, pos: BlockPos) {
-        val random = world.random
-        val defaultParticleType = ParticleTypes.CAMPFIRE_COSY_SMOKE
-
-        world.addParticle(
-            defaultParticleType,
-            pos.x.toDouble() + 0.5 + random.nextDouble() / 3.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
-            pos.y.toDouble() + random.nextDouble() + random.nextDouble(),
-            pos.z.toDouble() + 0.5 + random.nextDouble() / 3.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
-            0.0,
-            0.07,
-            0.0
-        )
     }
 
     override fun canPlantOnTop(floor: BlockState, world: BlockView, pos: BlockPos): Boolean {
@@ -81,18 +48,16 @@ class HydrothermalVentBlock(settings: Settings) : PlantBlock(settings), BlockEnt
         pos: BlockPos,
         context: ShapeContext
     ): VoxelShape {
-        return HydrothermalVentBlock.COLLISION_SHAPE
+        return COLLISION_SHAPE
     }
 
     override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape {
-        return HydrothermalVentBlock.SHAPE
+        return SHAPE
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
         val fluidState = ctx.world.getFluidState(ctx.blockPos)
-        return if (fluidState.isIn(FluidTags.WATER)) defaultState.with(
-            WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).isOf(
-                Fluids.WATER)) else null
+        return if (fluidState.isIn(FluidTags.WATER)) defaultState.with(WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).isOf(Fluids.WATER)) else null
     }
 
     override fun getFluidState(state: BlockState): FluidState {
@@ -104,7 +69,7 @@ class HydrothermalVentBlock(settings: Settings) : PlantBlock(settings), BlockEnt
     }
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return HydrothermalVentBlockEntity(pos, state)
+        return GiantClamBlockEntity(pos, state)
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
@@ -112,7 +77,7 @@ class HydrothermalVentBlock(settings: Settings) : PlantBlock(settings), BlockEnt
     }
 
     companion object {
-        private val SHAPE = createCuboidShape(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
-        private val COLLISION_SHAPE = createCuboidShape(2.0, 1.0, 2.0, 14.0, 12.0, 14.0)
+        private val SHAPE = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
+        private val COLLISION_SHAPE = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
     }
 }

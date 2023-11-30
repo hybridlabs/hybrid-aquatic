@@ -177,7 +177,7 @@ object HybridAquaticEntityTypes {
         PiranhaEntity.createMobAttributes()
     )
 
-    val RATFISH = registerFish(
+    val RATFISH = registerFishUnderground(
         "ratfish",
         ::RatfishEntity,
         EntityDimensions.fixed(0.5f, 0.3f),
@@ -398,13 +398,6 @@ object HybridAquaticEntityTypes {
 
 
     //critters
-
-    val GIANT_CLAM = registerCritter(
-        "giant_clam",
-        ::GiantClamEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        GiantClamEntity.createMobAttributes()
-    )
 
     val NUDIBRANCH = registerCritter(
         "nudibranch",

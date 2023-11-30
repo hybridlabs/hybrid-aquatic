@@ -197,7 +197,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.SEA_URCHIN,
                 HybridAquaticEntityTypes.SEA_CUCUMBER,
                 HybridAquaticEntityTypes.STARFISH,
-                HybridAquaticEntityTypes.GIANT_CLAM
             )
 
         // jellyfish

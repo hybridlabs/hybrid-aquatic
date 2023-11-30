@@ -16,9 +16,6 @@ object HybridAquaticEntityTags {
     val TIGER_SHARK_PREY = create("prey/tiger_shark")
     val WHALE_SHARK_PREY = create("prey/whale_shark")
     val STINGRAY_PREY = create("prey/stingray")
-    val TUNA_PREY = create("prey/tuna")
-    val MAHI_MAHI_PREY = create("prey/mahi_mahi")
-    val EEL_PREY = create("prey/eel")
     val SQUID_PREY = create("prey/squid")
     val MANTIS_SHRIMP_PREY = create("prey/mantis_shrimp")
 

@@ -50,6 +50,14 @@ object HybridAquaticBlocks {
     ))
 
     val TUBE_SPONGE = register("tube_sponge", TubeSpongeBlock(FabricBlockSettings.copyOf(Blocks.WET_SPONGE)
+        .nonOpaque()
+    ))
+
+    val GIANT_CLAM = register("giant_clam", GiantClamBlock(FabricBlockSettings.copyOf(Blocks.TUFF)
+        .nonOpaque()
+        .hardness(1.0F)
+        .pistonBehavior(PistonBehavior.DESTROY)
+        .drops(Identifier(HybridAquatic.MOD_ID, "blocks/giant_clam"))
     ))
 
     val CRAB_POT = register("crab_pot", CrabPotBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)
@@ -66,7 +74,6 @@ object HybridAquaticBlocks {
         .nonOpaque()
         .hardness(1.0F)
         .pistonBehavior(PistonBehavior.DESTROY)
-        .drops(Identifier(HybridAquatic.MOD_ID, "blocks/hydrothermal_vent"))
     ))
 
     private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block): PlushieBlock {

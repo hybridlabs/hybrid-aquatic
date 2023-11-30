@@ -16,6 +16,11 @@ object HybridAquaticConfiguredFeatures {
     val ANEMONE_PATCH = register("anemone_patch")
 
     /**
+     * A patch of giant clams.
+     */
+    val GIANT_CLAM_PATCH = register("giant_clam_patch")
+
+    /**
      * A patch of living sponges.
      */
     val TUBE_SPONGE_PATCH = register("tube_sponge_patch")

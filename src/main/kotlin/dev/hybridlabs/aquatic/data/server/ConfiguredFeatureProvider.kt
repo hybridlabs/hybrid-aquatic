@@ -23,8 +23,8 @@ class ConfiguredFeatureProvider(output: FabricDataOutput, registriesFuture: Comp
         entries.add(
             HybridAquaticConfiguredFeatures.ANEMONE_PATCH,
             ConfiguredFeature(
-                Feature.RANDOM_PATCH, RandomPatchFeatureConfig(
-                    6, 2, 2,
+                Feature.NO_BONEMEAL_FLOWER, RandomPatchFeatureConfig(
+                    2, 2, 2,
                     PlacedFeatures.createEntry(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockFeatureConfig(
@@ -36,12 +36,12 @@ class ConfiguredFeatureProvider(output: FabricDataOutput, registriesFuture: Comp
             )
         )
 
-        // sponge patch
+        // tube sponge patch
         entries.add(
             HybridAquaticConfiguredFeatures.TUBE_SPONGE_PATCH,
             ConfiguredFeature(
-                Feature.RANDOM_PATCH, RandomPatchFeatureConfig(
-                    6, 2, 2,
+                Feature.FLOWER, RandomPatchFeatureConfig(
+                    4, 2, 2,
                     PlacedFeatures.createEntry(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockFeatureConfig(
@@ -53,12 +53,29 @@ class ConfiguredFeatureProvider(output: FabricDataOutput, registriesFuture: Comp
             )
         )
 
+        // giant clam patch
+        entries.add(
+            HybridAquaticConfiguredFeatures.GIANT_CLAM_PATCH,
+            ConfiguredFeature(
+                Feature.NO_BONEMEAL_FLOWER, RandomPatchFeatureConfig(
+                    2, 2, 2,
+                    PlacedFeatures.createEntry(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockFeatureConfig(
+                            BlockStateProvider.of(HybridAquaticBlocks.GIANT_CLAM.defaultState.with(Properties.WATERLOGGED, true))
+                        ),
+                        BlockPredicate.matchingBlockTag(HybridAquaticBlockTags.GIANT_CLAM_GENERATE_IN)
+                    )
+                )
+            )
+        )
+
         // hydrothermal vents
         entries.add(
             HybridAquaticConfiguredFeatures.HYDROTHERMAL_VENTS,
             ConfiguredFeature(
-                Feature.RANDOM_PATCH, RandomPatchFeatureConfig(
-                    6, 2, 2,
+                Feature.FLOWER, RandomPatchFeatureConfig(
+                    4, 2, 2,
                     PlacedFeatures.createEntry(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockFeatureConfig(
