@@ -103,7 +103,7 @@ public class BackgroundRendererMixin {
 
                 RegistryEntry<Biome> biomeEntry = world.getBiome(entity.getBlockPos());
 
-                if(entity instanceof ClientPlayerEntity player && biomeEntry.isIn(BiomeTags.IS_OCEAN) && world.) {
+                if(entity instanceof ClientPlayerEntity player && biomeEntry.isIn(BiomeTags.IS_OCEAN)) {
 
                 }
             }
