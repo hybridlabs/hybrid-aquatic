@@ -1,18 +1,27 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.GiantClamBlockEntity
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.ItemStack
 import net.minecraft.registry.tag.FluidTags
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties.WATERLOGGED
+import net.minecraft.util.ActionResult
+import net.minecraft.util.Hand
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
+import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
 @Suppress("DEPRECATION")
@@ -74,6 +83,29 @@ class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProv
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         builder.add(WATERLOGGED)
+    }
+
+    override fun onUse(
+        state: BlockState,
+        world: World,
+        pos: BlockPos?,
+        player: PlayerEntity,
+        hand: Hand?,
+        hit: BlockHitResult?
+    ): ActionResult? {
+        if (hand == Hand.MAIN_HAND) {
+            1 + world.random.nextInt(5)
+            dropStack(world, pos, ItemStack(HybridAquaticItems.PEARL, 1))
+            world.playSound(
+                null,
+                pos,
+                SoundEvents.ENTITY_SHULKER_CLOSE,
+                SoundCategory.BLOCKS,
+                1.0f,
+                0.8f + world.random.nextFloat() * 0.4f
+            )
+        }
+        return super.onUse(state, world, pos, player, hand, hit)
     }
 
     companion object {
