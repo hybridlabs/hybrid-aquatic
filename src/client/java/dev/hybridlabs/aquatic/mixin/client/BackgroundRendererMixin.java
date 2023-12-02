@@ -95,7 +95,7 @@ public class BackgroundRendererMixin {
 
                     if (fogData.fogEnd > viewDistance) {
                         fogData.fogEnd = viewDistance;
-                        fogData.fogShape = FogShape.CYLINDER;
+                        fogData.fogShape = FogShape.SPHERE;
                     }
                     fogData.fogEnd = Math.max(fogData.fogEnd, 12.0f);
                 }

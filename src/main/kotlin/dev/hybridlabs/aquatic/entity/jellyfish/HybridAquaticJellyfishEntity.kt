@@ -113,7 +113,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
         moistness = nbt.getInt(MOISTNESS_KEY)
         variant = nbt.getInt(VARIANT_KEY).coerceAtLeast(0).coerceAtMost(variantCount-1)
         size = nbt.getInt(JELLYFISH_SIZE_KEY)
-        spawnedY = if (!nbt.contains(SPAWNED_ON_Y_KEY)) (this.y - 1).toInt()
+        spawnedY = if (!nbt.contains(SPAWNED_ON_Y_KEY)) (this.y - 4).toInt()
         else nbt.getInt(SPAWNED_ON_Y_KEY)
     }
 
@@ -228,7 +228,7 @@ open class HybridAquaticJellyfishEntity(type: EntityType<out HybridAquaticJellyf
             random: Random?
         ): Boolean {
             val topY = world.seaLevel - 6
-            val bottomY = world.seaLevel - 24
+            val bottomY = world.seaLevel - 48
 
             return pos.y in bottomY..topY &&
                     world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&

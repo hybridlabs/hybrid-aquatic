@@ -9,10 +9,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.Block
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
-import net.minecraft.item.BlockItem
-import net.minecraft.item.FoodComponent
-import net.minecraft.item.Item
-import net.minecraft.item.SpawnEggItem
+import net.minecraft.item.*
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
@@ -461,6 +458,10 @@ object HybridAquaticItems {
 
     private fun <T : MobEntity> registerSpawnEgg(id: String, type: EntityType<T>, primaryColor: Int, secondaryColor: Int): Item {
         return register(id, SpawnEggItem(type, primaryColor, secondaryColor, FabricItemSettings()))
+    }
+
+    private fun registerPotionItem(id: String, item: PotionItem): Item {
+        return register(id, item)
     }
 
     private fun registerBlockItem(id: String, block: Block): Item {

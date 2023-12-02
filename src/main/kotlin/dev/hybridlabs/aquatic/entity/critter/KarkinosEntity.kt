@@ -17,8 +17,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticCritterEntity>, wor
     HybridAquaticCrabEntity(entityType, world) {
 
     private var isFlipped: Boolean = false
-    private var flipCooldown: Int = 0
-    private var flipResetCooldown: Int = 0
+    private var flipTimer: Int = 0
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
@@ -31,19 +30,22 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticCritterEntity>, wor
         }
     }
 
+    private fun beFlipped() {
+        isFlipped = true
+        flipTimer = 100
+    }
+
     override fun damage(source: net.minecraft.entity.damage.DamageSource?, amount: Float): Boolean {
         val damaged = super.damage(source, amount)
 
-        if (damaged && source?.source is PlayerEntity) {
+        if (damaged && source?.source is PlayerEntity && !isFlipped) {
             val player = source.source as PlayerEntity
             val heldItem = player.mainHandStack
 
-            if (EnchantmentHelper.getLevel(Enchantments.BANE_OF_ARTHROPODS, heldItem) > 0 ||
-                (heldItem.item is net.minecraft.item.TridentItem && EnchantmentHelper.getLevel(Enchantments.RIPTIDE, heldItem) > 0)
+            if (EnchantmentHelper.getLevel(Enchantments.BANE_OF_ARTHROPODS, heldItem) > 2 ||
+                (EnchantmentHelper.getLevel(Enchantments.RIPTIDE, heldItem) > 0)
             ) {
-                isFlipped = true
-                flipCooldown = 100
-                flipResetCooldown = 300
+                beFlipped()
             }
         }
 
@@ -58,25 +60,9 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticCritterEntity>, wor
         }
     }
 
-    override fun tick() {
-        super.tick()
+    override fun isPushable(): Boolean =
+        this.isFlipped
 
-        if (isFlipped) {
-            flipCooldown--
-
-            if (flipCooldown <= 0) {
-                isFlipped = false
-            }
-        }
-
-        if (flipResetCooldown > 0) {
-            flipResetCooldown--
-        }
-
-        if (flipResetCooldown == 0) {
-            flipCooldown = 0
-        }
-    }
 
 
     override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
