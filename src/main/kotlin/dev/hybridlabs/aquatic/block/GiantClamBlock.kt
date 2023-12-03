@@ -1,9 +1,12 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.GiantClamBlockEntity
+import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.block.entity.BlockEntityTicker
+import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -13,6 +16,7 @@ import net.minecraft.registry.tag.FluidTags
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.state.StateManager
+import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
@@ -24,10 +28,12 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-@Suppress("DEPRECATION")
+@Suppress("OVERRIDE_DEPRECATION")
 class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
     init {
-        defaultState = stateManager.defaultState.with(WATERLOGGED, false)
+        defaultState = stateManager.defaultState
+            .with(WATERLOGGED, false)
+            .with(CLAM_HAS_PEARL, true)
     }
 
     override fun canPlantOnTop(floor: BlockState, world: BlockView, pos: BlockPos): Boolean {
@@ -82,7 +88,9 @@ class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProv
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        builder.add(WATERLOGGED)
+        builder
+            .add(WATERLOGGED)
+            .add(CLAM_HAS_PEARL)
     }
 
     override fun onUse(
@@ -94,21 +102,38 @@ class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProv
         hit: BlockHitResult?
     ): ActionResult? {
         if (hand == Hand.MAIN_HAND) {
-            1 + world.random.nextInt(5)
-            dropStack(world, pos, ItemStack(HybridAquaticItems.PEARL, 1))
-            world.playSound(
-                null,
-                pos,
-                SoundEvents.ENTITY_SHULKER_CLOSE,
-                SoundCategory.BLOCKS,
-                1.0f,
-                0.8f + world.random.nextFloat() * 0.4f
-            )
+            val blockEntity = world.getBlockEntity(pos)
+            if (blockEntity is GiantClamBlockEntity && blockEntity.pearlCooldown == 0) {
+                blockEntity.pearlCooldown = world.random.nextBetween(1200, 6000)
+
+                dropStack(world, pos, ItemStack(HybridAquaticItems.PEARL, 1))
+                world.playSound(
+                    null,
+                    pos,
+                    SoundEvents.ENTITY_SHULKER_CLOSE,
+                    SoundCategory.BLOCKS,
+                    1.0f,
+                    0.8f + world.random.nextFloat() * 0.4f
+                )
+            }
         }
         return super.onUse(state, world, pos, player, hand, hit)
     }
 
+    override fun <T : BlockEntity> getTicker(
+        world: World,
+        state: BlockState,
+        type: BlockEntityType<T>
+    ): BlockEntityTicker<T>? {
+        return if(world.isClient) {
+            null
+        } else {
+            BlockWithEntity.checkType(type, HybridAquaticBlockEntityTypes.GIANT_CLAM, GiantClamBlockEntity::tick)
+        }
+    }
+
     companion object {
+        val CLAM_HAS_PEARL: BooleanProperty = BooleanProperty.of("clam_has_pearl")
         private val SHAPE = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
         private val COLLISION_SHAPE = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
     }
