@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
+import dev.hybridlabs.aquatic.utils.MeasurementUtils;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
@@ -103,7 +104,10 @@ public class BackgroundRendererMixin {
 
                     RegistryEntry<Biome> biomeEntry = world.getBiome(entity.getBlockPos());
 
-                    if (biomeEntry.isIn(BiomeTags.IS_OCEAN)) {
+                    if (biomeEntry.isIn(BiomeTags.IS_OCEAN) && (world.isRaining() || world.isNight())) {
+                        fogData.fogStart = -0.8f;
+
+                        fogData.fogEnd = MeasurementUtils.Block(16);
 
                     }
                 }
