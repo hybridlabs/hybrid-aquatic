@@ -460,10 +460,6 @@ object HybridAquaticItems {
         return register(id, SpawnEggItem(type, primaryColor, secondaryColor, FabricItemSettings()))
     }
 
-    private fun registerPotionItem(id: String, item: PotionItem): Item {
-        return register(id, item)
-    }
-
     private fun registerBlockItem(id: String, block: Block): Item {
         return register(id, BlockItem(block, FabricItemSettings()))
     }

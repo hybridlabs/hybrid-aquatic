@@ -141,6 +141,15 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         ).forEach { (enchantment, translation) ->
             builder.add(enchantment, translation)
         }
+
+        mapOf(
+            "glowing" to "Glowing"
+        ).forEach { (potion, translation) ->
+            builder.add("item.minecraft.potion.effect.$potion", "Potion of $translation")
+            builder.add("item.minecraft.splash_potion.effect.$potion", "Splash Potion of $translation")
+            builder.add("item.minecraft.lingering_potion.effect.$potion", "Lingering Potion of $translation")
+            builder.add("item.minecraft.tipped_arrow.effect.$potion", "Arrow of $translation")
+        }
     }
 
     private fun generateEntities(builder: TranslationBuilder) {

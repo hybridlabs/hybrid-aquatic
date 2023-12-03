@@ -14,8 +14,6 @@ import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
 import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
-import dev.hybridlabs.aquatic.potions.HybridAquaticPotions.registerPotions
-import dev.hybridlabs.aquatic.potions.HybridAquaticPotions.registerPotionsRecipes
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.world.EntityBiomeModifications
@@ -66,8 +64,6 @@ object HybridAquatic : ModInitializer {
 
         registerDynamicRegistries()
         registerWanderingTraderTrades()
-        registerPotionsRecipes()
-        registerPotions()
     }
 
     private fun registerDynamicRegistries() {
