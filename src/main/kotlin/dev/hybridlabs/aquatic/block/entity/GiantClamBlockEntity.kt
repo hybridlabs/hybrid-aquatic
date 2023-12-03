@@ -20,7 +20,7 @@ class GiantClamBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hybri
 
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
         return if (world != null) {
-            if(world!!.getBlockState(pos).get(GiantClamBlock.CLAM_HAS_PEARL)) event.controller.setAnimation(OPEN_ANIMATION)
+            if(cachedState.get(GiantClamBlock.CLAM_HAS_PEARL)) event.controller.setAnimation(OPEN_ANIMATION)
             else event.controller.setAnimation(CLOSED_ANIMATION)
 
             PlayState.CONTINUE
