@@ -65,7 +65,10 @@ class GiantClamBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hybri
         val CLOSED_ANIMATION: RawAnimation = RawAnimation.begin().then("closed", Animation.LoopType.LOOP)
 
         fun tick(world: World, pos: BlockPos, state: BlockState, blockEntity: GiantClamBlockEntity) {
-            if(blockEntity.pearlCooldown > 0) blockEntity.pearlCooldown--
+            if(blockEntity.pearlCooldown > 0) {
+                blockEntity.pearlCooldown--
+                blockEntity.markDirty()
+            }
             world.setBlockState(pos, state.with(GiantClamBlock.CLAM_HAS_PEARL, blockEntity.pearlCooldown == 0))
         }
     }
