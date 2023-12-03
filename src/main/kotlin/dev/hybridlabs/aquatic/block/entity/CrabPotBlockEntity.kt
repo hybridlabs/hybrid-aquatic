@@ -16,7 +16,7 @@ class CrabPotBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridA
 
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
         return if (world != null) {
-            event.controller.setAnimation(RawAnimation.begin().then("float", Animation.LoopType.LOOP))
+            event.controller.setAnimation(FLOAT_ANIMATION)
             PlayState.CONTINUE
         } else {
             PlayState.STOP
@@ -42,6 +42,6 @@ class CrabPotBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridA
     }
 
     companion object {
-        val BOB_ANIMATION: RawAnimation = RawAnimation.begin().thenLoop("water_bob")
+        val FLOAT_ANIMATION: RawAnimation = RawAnimation.begin().then("float", Animation.LoopType.LOOP)
     }
 }

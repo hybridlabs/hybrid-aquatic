@@ -16,7 +16,7 @@ class HydrothermalVentBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
         return if (world != null) {
-            event.controller.setAnimation(RawAnimation.begin().then("float", Animation.LoopType.LOOP))
+            event.controller.setAnimation(FLOAT_ANIMATION)
             PlayState.CONTINUE
         } else {
             PlayState.STOP
@@ -41,5 +41,9 @@ class HydrothermalVentBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
 
     override fun toUpdatePacket(): BlockEntityUpdateS2CPacket {
         return BlockEntityUpdateS2CPacket.create(this)
+    }
+
+    companion object {
+        val FLOAT_ANIMATION: RawAnimation = RawAnimation.begin().then("float", Animation.LoopType.LOOP)
     }
 }

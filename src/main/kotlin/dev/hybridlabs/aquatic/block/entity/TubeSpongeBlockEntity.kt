@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block.entity
 
+import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity.Companion.SWAY_ANIMATION
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.nbt.NbtCompound
@@ -15,7 +16,7 @@ class TubeSpongeBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hybr
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
         return if (world != null) {
-            event.controller.setAnimation(RawAnimation.begin().then("sway", Animation.LoopType.LOOP))
+            event.controller.setAnimation(SWAY_ANIMATION)
             PlayState.CONTINUE
         } else {
             PlayState.STOP
@@ -36,5 +37,9 @@ class TubeSpongeBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hybr
 
     override fun toInitialChunkDataNbt(): NbtCompound {
         return createNbt()
+    }
+
+    companion object {
+        val SWAY_ANIMATION: RawAnimation = RawAnimation.begin().then("sway", Animation.LoopType.LOOP)
     }
 }

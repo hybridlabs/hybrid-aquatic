@@ -68,7 +68,7 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridA
 
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
         return if (world != null) {
-            event.controller.setAnimation(RawAnimation.begin().then("sway", Animation.LoopType.LOOP))
+            event.controller.setAnimation(SWAY_ANIMATION)
             PlayState.CONTINUE
         } else {
             PlayState.STOP
@@ -98,6 +98,7 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridA
     companion object {
         private const val HIDE_DURATION = 200
         private const val COOLDOWN_DURATION = 40
+        val SWAY_ANIMATION: RawAnimation = RawAnimation.begin().then("sway", Animation.LoopType.LOOP)
 
         @Suppress("UNUSED_PARAMETER")
         fun tick(world: World, pos: BlockPos, state: BlockState, blockEntity: AnemoneBlockEntity) {
