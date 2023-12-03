@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.ai.goal.CrabDigGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityGroup
@@ -18,8 +17,8 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animation.Animation
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 
 @Suppress("DEPRECATION")
 open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEntity>, world: World, variantCount: Int = 1) :
@@ -109,8 +108,8 @@ open class HybridAquaticCrabEntity(type: EntityType<out HybridAquaticCritterEnti
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            val topY = world.seaLevel + 12
-            val bottomY = world.seaLevel - 40
+            val topY = world.seaLevel + 6
+            val bottomY = world.seaLevel - 48
 
             return pos.y in bottomY..topY &&
                     world.getBlockState(pos.down()).isIn(HybridAquaticBlockTags.CRABS_SPAWN_ON) &&

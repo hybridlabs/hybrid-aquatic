@@ -35,7 +35,8 @@ class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) :
             if (!source.isIn(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) && !source.isOf(DamageTypes.THORNS)) {
                 val attacker = source.source
                 if (attacker is LivingEntity) {
-                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 400, 0), this)
+                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.NAUSEA, 200, 0), this)
+                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 0), this)
                 }
             }
             super.damage(source, amount)
