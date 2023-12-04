@@ -26,12 +26,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
     override fun generate() {
         // anemone
         addDrop(HybridAquaticBlocks.ANEMONE) { block ->
-            LootTable.builder()
-                .pool(
-                    LootPool.builder()
-                        .with(ItemEntry.builder(block))
-                        .conditionally(WITH_SILK_TOUCH_OR_SHEARS)
-                )
+            LootTable.builder().pool(
+                LootPool.builder()
+                    .with(ItemEntry.builder(block))
+                    .conditionally(WITH_SILK_TOUCH_OR_SHEARS)
+            )
         }
 
         // living sponge
@@ -39,14 +38,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
+                        ItemEntry.builder(block).conditionally(WITH_SILK_TOUCH),
                         LootTableEntry.builder(HybridAquaticLootTables.TUBE_SPONGE_LOOT_ID)
-                            .conditionally(
-                                WITHOUT_SILK_TOUCH_NOR_SHEARS)
-                            ,
-                        ItemEntry.builder(block)
-                            .conditionally(WITH_SILK_TOUCH),
                     )
-                ))
+                )
+            )
         }
 
         // hydrothermal vent
@@ -54,39 +50,29 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
+                        ItemEntry.builder(block).conditionally(WITH_SILK_TOUCH),
                         LootTableEntry.builder(HybridAquaticLootTables.HYDROTHERMAL_VENT_LOOT_ID)
-                            .conditionally(
-                                MatchToolLootCondition.builder(
-                                    ItemPredicate.Builder.create()
-                                        .tag(ItemTags.PICKAXES)
-                                )
-                            ),
-                        ItemEntry.builder(block)
-                            .conditionally(WITH_SILK_TOUCH),
                     )
-                ))
+                )
+            )
         }
 
         // message in a bottle
         addDrop(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE) { block ->
-            LootTable.builder()
-                .pool(
-                    LootPool.builder()
-                        .with(
+            LootTable.builder().pool(
+                    LootPool.builder().with(
                             AlternativeEntry.builder(
-                                ItemEntry.builder(block).conditionally(WITH_SILK_TOUCH)
-                                    .apply(
-                                        CopyNbtLootFunction.builder(ContextLootNbtProvider.BLOCK_ENTITY)
-                                            .withOperation(VARIANT_KEY, "$BLOCK_ENTITY_TAG_KEY.$VARIANT_KEY")
-                                            .withOperation(MESSAGE_KEY, "$BLOCK_ENTITY_TAG_KEY.$MESSAGE_KEY")
-                                    ),
-                                ItemEntry.builder(Items.WRITTEN_BOOK)
-                                    .apply(
-                                        CopyNbtLootFunction.builder(ContextLootNbtProvider.BLOCK_ENTITY)
-                                            .withOperation("$MESSAGE_KEY.tag.$PAGES_KEY", PAGES_KEY)
-                                            .withOperation("$MESSAGE_KEY.tag.$TITLE_KEY", TITLE_KEY)
-                                            .withOperation("$MESSAGE_KEY.tag.$AUTHOR_KEY", AUTHOR_KEY)
-                                    )
+                                ItemEntry.builder(block).conditionally(WITH_SILK_TOUCH).apply(
+                                    CopyNbtLootFunction.builder(ContextLootNbtProvider.BLOCK_ENTITY)
+                                        .withOperation(VARIANT_KEY, "$BLOCK_ENTITY_TAG_KEY.$VARIANT_KEY")
+                                        .withOperation(MESSAGE_KEY, "$BLOCK_ENTITY_TAG_KEY.$MESSAGE_KEY")
+                                ),
+                                ItemEntry.builder(Items.WRITTEN_BOOK).apply(
+                                    CopyNbtLootFunction.builder(ContextLootNbtProvider.BLOCK_ENTITY)
+                                        .withOperation("$MESSAGE_KEY.tag.$PAGES_KEY", PAGES_KEY)
+                                        .withOperation("$MESSAGE_KEY.tag.$TITLE_KEY", TITLE_KEY)
+                                        .withOperation("$MESSAGE_KEY.tag.$AUTHOR_KEY", AUTHOR_KEY)
+                                )
                             )
                         )
                 )
@@ -97,16 +83,13 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(HybridAquaticLootTables.CRATE_TREASURE_ID)
-                            .conditionally(
-                                MatchToolLootCondition.builder(
-                                    ItemPredicate.Builder.create()
-                                        .tag(ItemTags.AXES)
-                                )
-                            ),
+                        LootTableEntry.builder(HybridAquaticLootTables.CRATE_TREASURE_ID).conditionally(
+                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                        ),
                         ItemEntry.builder(block),
                     )
-                ))
+                )
+            )
         }
 
         // generate remaining drops
