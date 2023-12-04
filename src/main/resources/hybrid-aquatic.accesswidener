@@ -5,3 +5,6 @@ accessible method net/minecraft/block/BlockWithEntity checkType (Lnet/minecraft/
 accessible field net/minecraft/block/entity/BlockEntityType blocks Ljava/util/Set;
 mutable field net/minecraft/block/entity/BlockEntityType blocks Ljava/util/Set;
 accessible class net/minecraft/client/render/BackgroundRenderer$FogData
+accessible class net/minecraft/client/render/BackgroundRenderer$StatusEffectFogModifier
+accessible class net/minecraft/client/render/BackgroundRenderer$BlindnessFogModifier
+accessible class net/minecraft/client/render/BackgroundRenderer$DarknessFogModifier
