@@ -117,7 +117,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         // effects
         mapOf(
-            HybridAquaticStatusEffects.BLEEDING to "Bleeding"
+            HybridAquaticStatusEffects.BLEEDING to "Bleeding",
+            HybridAquaticStatusEffects.THALASSOPHOBIA to "Thalassophobia"
         ).forEach { (effect, translation) ->
             val identifier = Registries.STATUS_EFFECT.getId(effect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
