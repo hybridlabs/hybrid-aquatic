@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hybrid-aquatic:item/fishing_net"
+    "layer0": "hybrid-aquatic:item/fishing_net_in_inventory"
   }
 }

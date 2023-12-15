@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
+import dev.hybridlabs.aquatic.client.model.item.FishingNetItemModel
 import dev.hybridlabs.aquatic.mixin.client.SkullBlockEntityRendererMixin
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.TexturedModelDataProvider
@@ -25,6 +26,8 @@ object HybridAquaticEntityModelLayers {
     val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie", ThresherSharkPlushieModel::createModelData)
     val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie", TigerSharkPlushieModel::createModelData)
     val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie", WhaleSharkPlushieModel::createModelData)
+
+    val FISHING_NET = register("fishing_net", FishingNetItemModel::createModelData)
 
     private fun register(id: String, modelProvider: TexturedModelDataProvider): EntityModelLayer {
         val layer = EntityModelLayer(Identifier(HybridAquatic.MOD_ID, id), "main")
