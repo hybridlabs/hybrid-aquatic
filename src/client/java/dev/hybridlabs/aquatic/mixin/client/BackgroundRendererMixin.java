@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import dev.hybridlabs.aquatic.fog.ThalassophobiaFogModifier;
 import dev.hybridlabs.aquatic.utils.MeasurementUtils;
