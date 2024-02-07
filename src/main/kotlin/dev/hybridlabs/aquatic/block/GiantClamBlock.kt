@@ -128,7 +128,7 @@ class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProv
         return if(world.isClient) {
             null
         } else {
-            BlockWithEntity.checkType(type, HybridAquaticBlockEntityTypes.GIANT_CLAM, GiantClamBlockEntity::tick)
+            BlockWithEntity.validateTicker(type, HybridAquaticBlockEntityTypes.GIANT_CLAM, GiantClamBlockEntity::tick)
         }
     }
 

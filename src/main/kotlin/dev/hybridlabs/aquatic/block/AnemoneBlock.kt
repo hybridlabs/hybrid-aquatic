@@ -74,7 +74,7 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         state: BlockState,
         type: BlockEntityType<T>
     ): BlockEntityTicker<T>? {
-        return BlockWithEntity.checkType(type, HybridAquaticBlockEntityTypes.ANEMONE, AnemoneBlockEntity::tick)
+        return BlockWithEntity.validateTicker(type, HybridAquaticBlockEntityTypes.ANEMONE, AnemoneBlockEntity::tick)
     }
 
     override fun getCollisionShape(
