@@ -372,9 +372,11 @@ open class HybridAquaticSharkEntity(
 
     internal class AttackGoal(private val shark: HybridAquaticSharkEntity) : MeleeAttackGoal(shark,
         ORIGINAL_SPEED, true) {
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
+        override fun attack(target: LivingEntity) {
+            val maxSquaredDistance = getSquaredMaxAttackDistance(target)
+            val squaredDistance = shark.pos.squaredDistanceTo(target.pos)
+
+            if (squaredDistance <= maxSquaredDistance && this.isCooledDown) {
                 resetCooldown()
                 mob.tryAttack(target)
                 shark.isSprinting = false
@@ -394,14 +396,14 @@ open class HybridAquaticSharkEntity(
                         target.dropItem(HybridAquaticItems.SHARK_TOOTH, 1)
                     }
                 }
-            } else if (squaredDistance > d * 5 && !shark.isRushing) {
+            } else if (squaredDistance > maxSquaredDistance * 5 && !shark.isRushing) {
                 shark.rushTargetPosition = target.pos
                 shark.isSprinting = true
                 shark.isRushing = true
             }
         }
 
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
+        private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
             return (7.0f + entity.width).toDouble()
         }
 

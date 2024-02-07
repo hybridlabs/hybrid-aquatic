@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.loot.entry
 
+import com.google.gson.JsonSerializer
 import dev.hybridlabs.aquatic.HybridAquatic
 import net.minecraft.loot.entry.LootPoolEntry
 import net.minecraft.loot.entry.LootPoolEntryType
@@ -8,6 +9,7 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 import net.minecraft.util.JsonSerializer
 
+// TODO: Fix JsonSerializer
 object HybridAquaticLootPoolEntryTypes {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleItemEntry.Serializer())
 

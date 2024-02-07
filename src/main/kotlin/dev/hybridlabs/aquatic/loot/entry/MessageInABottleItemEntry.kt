@@ -19,8 +19,8 @@ import java.util.function.Consumer
 class MessageInABottleItemEntry(
     weight: Int,
     quality: Int,
-    conditions: Array<LootCondition>,
-    functions: Array<LootFunction>
+    conditions: List<LootCondition>,
+    functions: List<LootFunction>
 ) : LeafEntry(weight, quality, conditions, functions) {
     override fun getType(): LootPoolEntryType {
         return HybridAquaticLootPoolEntryTypes.MESSAGE_IN_A_BOTTLE
