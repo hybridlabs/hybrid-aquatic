@@ -70,12 +70,12 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_yellowfin_tuna",
       "has_mahi_mahi",
       "has_opah",
       "has_moray_eel",
-      "has_triggerfish",
-      "has_the_recipe"
+      "has_triggerfish"
     ]
   ],
   "rewards": {

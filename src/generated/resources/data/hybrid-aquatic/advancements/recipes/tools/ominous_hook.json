@@ -130,6 +130,7 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_barbed_hook",
       "has_dungeness_crab_claw",
       "has_coconut_crab_claw",
@@ -139,8 +140,7 @@
       "has_ghost_crab_claw",
       "has_lightfoot_crab_claw",
       "has_flower_crab_claw",
-      "has_fiddler_crab_claw",
-      "has_the_recipe"
+      "has_fiddler_crab_claw"
     ]
   ],
   "rewards": {
