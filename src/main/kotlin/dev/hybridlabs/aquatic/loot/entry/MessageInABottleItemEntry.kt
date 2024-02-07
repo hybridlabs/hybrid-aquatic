@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.loot.entry
 
-import com.google.gson.JsonDeserializationContext
-import com.google.gson.JsonObject
+import com.mojang.serialization.Codec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
@@ -46,20 +46,20 @@ class MessageInABottleItemEntry(
         }
     }
 
-    class Serializer : LeafEntry.Serializer<MessageInABottleItemEntry>() {
-        override fun fromJson(
-            json: JsonObject,
-            context: JsonDeserializationContext,
-            weight: Int,
-            quality: Int,
-            conditions: Array<LootCondition>,
-            functions: Array<LootFunction>
-        ): MessageInABottleItemEntry {
-            return MessageInABottleItemEntry(weight, quality, conditions, functions)
-        }
-    }
-
     companion object {
+        /**
+         * The codec for this class.
+         */
+        val CODEC: Codec<MessageInABottleItemEntry> = RecordCodecBuilder.create { instance ->
+            val default = method_53290(instance)
+            instance.group(
+                    default.t1(),
+                    default.t2(),
+                    default.t3(),
+                    default.t4(),
+            ).apply(instance, ::MessageInABottleItemEntry)
+        }
+
         fun builder(): Builder<*> {
             return builder(::MessageInABottleItemEntry)
         }
