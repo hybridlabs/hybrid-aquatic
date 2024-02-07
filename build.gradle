@@ -2,7 +2,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id "fabric-loom" version "1.4-SNAPSHOT"
+    id "fabric-loom" version "1.5-SNAPSHOT"
     id "org.jetbrains.kotlin.jvm" version "1.9.+"
     id "maven-publish"
 }
@@ -56,12 +56,9 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:$fabric_version"
     modImplementation "net.fabricmc:fabric-language-kotlin:$fabric_kotlin_version"
 
-    include(implementation(annotationProcessor("com.github.LlamaLad7:MixinExtras:$mixin_extras_version")))
-
     modImplementation "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
     modImplementation "com.terraformersmc:modmenu:$mod_menu_version"
 
-    modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
     modRuntimeOnly "maven.modrinth:carpet:$carpet_version"
     
     include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")
