@@ -11,7 +11,7 @@ version = mod_version
 group = maven_group
 
 base {
-    archivesName = archives_base_name
+    archivesName =  "$archives_base_name-$minecraft_version"
 }
 
 repositories {
