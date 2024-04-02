@@ -6,10 +6,36 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.entity.EntityType
 import net.minecraft.registry.RegistryWrapper
+import net.minecraft.registry.tag.EntityTypeTags
 import java.util.concurrent.CompletableFuture
 
 class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.EntityTypeTagProvider(output, registriesFuture) {
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
+        // can breathe
+        getOrCreateTagBuilder(EntityTypeTags.CAN_BREATHE_UNDER_WATER)
+            .add(
+                HybridAquaticEntityTypes.COCONUT_CRAB,
+                HybridAquaticEntityTypes.DUNGENESS_CRAB,
+                HybridAquaticEntityTypes.CRAYFISH,
+                HybridAquaticEntityTypes.FIDDLER_CRAB,
+                HybridAquaticEntityTypes.FLOWER_CRAB,
+                HybridAquaticEntityTypes.GHOST_CRAB,
+                HybridAquaticEntityTypes.GIANT_ISOPOD,
+                HybridAquaticEntityTypes.HERMIT_CRAB,
+                HybridAquaticEntityTypes.HORSESHOE_CRAB,
+                HybridAquaticEntityTypes.LIGHTFOOT_CRAB,
+                HybridAquaticEntityTypes.LOBSTER,
+                HybridAquaticEntityTypes.SHRIMP,
+                HybridAquaticEntityTypes.SPIDER_CRAB,
+                HybridAquaticEntityTypes.VAMPIRE_CRAB,
+                HybridAquaticEntityTypes.YETI_CRAB,
+                HybridAquaticEntityTypes.KARKINOS,
+                HybridAquaticEntityTypes.NUDIBRANCH,
+                HybridAquaticEntityTypes.SEA_CUCUMBER,
+                HybridAquaticEntityTypes.SEA_URCHIN,
+                HybridAquaticEntityTypes.STARFISH,
+            )
+
         // prey source
         getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_PREY)
             .add(

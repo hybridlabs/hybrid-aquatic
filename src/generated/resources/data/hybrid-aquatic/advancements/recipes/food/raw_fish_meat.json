@@ -166,6 +166,7 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_lionfish",
       "has_rockfish",
       "has_blue_spotted_stingray",
@@ -178,14 +179,12 @@
       "has_unicorn_fish",
       "has_cowfish",
       "has_tiger_barb",
-      "has_oscar",
-      "has_the_recipe"
+      "has_oscar"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:raw_fish_meat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

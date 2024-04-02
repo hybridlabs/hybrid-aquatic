@@ -372,7 +372,8 @@ open class HybridAquaticSharkEntity(
 
     internal class AttackGoal(private val shark: HybridAquaticSharkEntity) : MeleeAttackGoal(shark,
         ORIGINAL_SPEED, true) {
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
+        override fun attack(target: LivingEntity) {
+            val squaredDistance = target.squaredDistanceTo(mob)
             val d = getSquaredMaxAttackDistance(target)
             if (squaredDistance <= d && this.isCooledDown) {
                 resetCooldown()
@@ -401,7 +402,7 @@ open class HybridAquaticSharkEntity(
             }
         }
 
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
+        private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
             return (7.0f + entity.width).toDouble()
         }
 

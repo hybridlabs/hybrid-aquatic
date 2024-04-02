@@ -27,7 +27,11 @@ import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
@@ -149,10 +153,6 @@ open class HybridAquaticCritterEntity(type: EntityType<out HybridAquaticCritterE
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
-    }
-
-    override fun canBreatheInWater(): Boolean {
-        return true
     }
 
     var variant: Int

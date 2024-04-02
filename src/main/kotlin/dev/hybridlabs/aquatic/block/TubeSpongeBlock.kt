@@ -1,7 +1,15 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.TubeSpongeBlockEntity
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockEntityProvider
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -74,6 +82,10 @@ class TubeSpongeBlock(settings: Settings) : PlantBlock(settings), BlockEntityPro
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         builder.add(Properties.WATERLOGGED)
+    }
+
+    override fun getCodec(): MapCodec<out PlantBlock> {
+        return createCodec(::TubeSpongeBlock)
     }
 
     companion object {

@@ -6,18 +6,20 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.block.Blocks
-import net.minecraft.data.server.recipe.RecipeJsonProvider
+import net.minecraft.data.server.recipe.RecipeExporter
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder
 import net.minecraft.item.Item
 import net.minecraft.item.Items
+import net.minecraft.recipe.CampfireCookingRecipe
 import net.minecraft.recipe.RecipeSerializer
+import net.minecraft.recipe.SmeltingRecipe
+import net.minecraft.recipe.SmokingRecipe
 import net.minecraft.recipe.book.RecipeCategory
 import net.minecraft.registry.tag.ItemTags
-import java.util.function.Consumer
 
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
-    override fun generate(exporter: Consumer<RecipeJsonProvider>) {
+    override fun generate(exporter: RecipeExporter) {
         // misc recipes
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, Blocks.SPONGE)
             .pattern("SSS")
@@ -207,17 +209,18 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         offerCookingRecipes(exporter, HybridAquaticItems.RAW_TENTACLE, HybridAquaticItems.COOKED_TENTACLE, 0.15f)
     }
     private fun offerCookingRecipes(
-        exporter: Consumer<RecipeJsonProvider>,
+        exporter: RecipeExporter,
         input: Item,
         output: Item,
         experience: Float
     ) {
-        offerFoodCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, 200, input, output, experience)
-        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, input, output, experience)
+        offerFoodCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, ::SmeltingRecipe, 200, input, output, experience)
+        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, ::SmokingRecipe, 100, input, output, experience)
         offerFoodCookingRecipe(
             exporter,
             "campfire_cooking",
             RecipeSerializer.CAMPFIRE_COOKING,
+            ::CampfireCookingRecipe,
             600,
             input,
             output,

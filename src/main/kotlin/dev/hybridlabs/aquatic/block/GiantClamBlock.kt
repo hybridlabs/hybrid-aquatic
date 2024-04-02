@@ -1,9 +1,18 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.GiantClamBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockEntityProvider
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity.validateTicker
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
@@ -132,8 +141,12 @@ class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProv
         return if(world.isClient) {
             null
         } else {
-            BlockWithEntity.checkType(type, HybridAquaticBlockEntityTypes.GIANT_CLAM, GiantClamBlockEntity::tick)
+            validateTicker(type, HybridAquaticBlockEntityTypes.GIANT_CLAM, GiantClamBlockEntity::tick)
         }
+    }
+
+    override fun getCodec(): MapCodec<out PlantBlock> {
+        return createCodec(::GiantClamBlock)
     }
 
     companion object {

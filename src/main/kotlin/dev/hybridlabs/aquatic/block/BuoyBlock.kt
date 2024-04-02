@@ -3,9 +3,15 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
-import dev.hybridlabs.aquatic.block.entity.GiantClamBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockEntityProvider
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity.validateTicker
+import net.minecraft.block.Blocks
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
@@ -36,7 +42,7 @@ open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, 
         return if(world.isClient) {
             null
         } else {
-            BlockWithEntity.checkType(type, HybridAquaticBlockEntityTypes.BUOY, BuoyBlockEntity::tick)
+            validateTicker(type, HybridAquaticBlockEntityTypes.BUOY, BuoyBlockEntity::tick)
         }
     }
 

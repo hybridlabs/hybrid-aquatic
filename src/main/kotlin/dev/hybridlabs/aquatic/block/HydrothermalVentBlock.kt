@@ -1,7 +1,15 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.HydrothermalVentBlockEntity
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockEntityProvider
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -109,6 +117,10 @@ class HydrothermalVentBlock(settings: Settings) : PlantBlock(settings), BlockEnt
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         builder.add(WATERLOGGED)
+    }
+
+    override fun getCodec(): MapCodec<out PlantBlock> {
+        return createCodec(::HydrothermalVentBlock)
     }
 
     companion object {
