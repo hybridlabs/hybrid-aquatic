@@ -93,7 +93,7 @@
 				},
 				"mouth": {
 					"rotation": {
-						"vector": [22.5, 0, 0]
+						"vector": [45, 0, 0]
 					}
 				},
 				"right_fin": {

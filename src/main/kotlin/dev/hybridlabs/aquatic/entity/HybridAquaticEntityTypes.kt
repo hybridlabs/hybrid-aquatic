@@ -518,21 +518,21 @@ object HybridAquaticEntityTypes {
     val BULL_SHARK = registerShark(
         "bull_shark",
         ::BullSharkEntity,
-        EntityDimensions.fixed(2.0f, 1.0f),
+        EntityDimensions.fixed(1.5f, 0.6f),
         BullSharkEntity.createMobAttributes()
     )
 
     val FRILLED_SHARK = registerFishUnderground(
         "frilled_shark",
         ::FrilledSharkEntity,
-        EntityDimensions.fixed(1.5f, 0.5f),
+        EntityDimensions.fixed(1.0f, 0.5f),
         FrilledSharkEntity.createMobAttributes()
     )
 
     val GREAT_WHITE_SHARK = registerShark(
         "great_white_shark",
         ::GreatWhiteSharkEntity,
-        EntityDimensions.fixed(2.0f, 1.5f),
+        EntityDimensions.fixed(2.0f, 0.75f),
         GreatWhiteSharkEntity.createMobAttributes()
     )
 
