@@ -241,16 +241,16 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     internal open class AttackGoal(private val crab: HybridAquaticCrustaceanEntity) : MeleeAttackGoal(crab, 0.4,true) {
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
+        override fun attack(target: LivingEntity) {
             val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
+            if (target.squaredDistanceTo(mob) <= d && this.isCooledDown) {
                 resetCooldown()
                 mob.tryAttack(target)
                 crab.attemptAttack = true
             }
         }
 
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
+        private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
             return (0.25f + entity.width).toDouble()
         }
 

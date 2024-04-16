@@ -66,7 +66,7 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         }
     }
 
-    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
+    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity): BlockState? {
         if (!world.isClient && player.isCreative && world.gameRules.getBoolean(GameRules.DO_TILE_DROPS)) {
             val blockEntity = world.getBlockEntity(pos)
             if (blockEntity is AnemoneBlockEntity) {
@@ -74,7 +74,7 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
             }
         }
 
-        super.onBreak(world, pos, state, player)
+        return super.onBreak(world, pos, state, player)
     }
 
     override fun canPlantOnTop(floor: BlockState, world: BlockView, pos: BlockPos): Boolean {

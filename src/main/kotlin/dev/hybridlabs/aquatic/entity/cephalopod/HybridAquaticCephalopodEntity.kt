@@ -465,9 +465,9 @@ open class HybridAquaticCephalopodEntity(
             return !cephalopod.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
+        override fun attack(target: LivingEntity) {
             val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
+            if (target.squaredDistanceTo(mob) <= d && this.isCooledDown) {
                 resetCooldown()
                 mob.tryAttack(target)
                 cephalopod.isSprinting = false
@@ -478,7 +478,7 @@ open class HybridAquaticCephalopodEntity(
             }
         }
 
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
+        private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
             return (1.0f + entity.width).toDouble()
         }
 

@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticBlockSetTypes
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodTypes
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.*
@@ -92,12 +93,12 @@ object HybridAquaticBlocks {
     val DRIFTWOOD_PLANKS = register("driftwood_planks", Block(FabricBlockSettings.copyOf((Blocks.OAK_PLANKS))))
     val DRIFTWOOD_STAIRS = register("driftwood_stairs", StairsBlock(DRIFTWOOD_PLANKS.defaultState, FabricBlockSettings.copyOf(Blocks.OAK_STAIRS)))
     val DRIFTWOOD_SLAB = register("driftwood_slab", SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_STAIRS)))
-    val DRIFTWOOD_BUTTON = register("driftwood_button", ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.OAK, 25, true))
-    val DRIFTWOOD_PRESSURE_PLATE = register("driftwood_pressure_plate", PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE), BlockSetType.OAK))
+    val DRIFTWOOD_BUTTON = register("driftwood_button", ButtonBlock(HybridAquaticBlockSetTypes.DRIFTWOOD, 25, FabricBlockSettings.copyOf(Blocks.OAK_BUTTON)))
+    val DRIFTWOOD_PRESSURE_PLATE = register("driftwood_pressure_plate", PressurePlateBlock(HybridAquaticBlockSetTypes.DRIFTWOOD, FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE)))
     val DRIFTWOOD_FENCE = register("driftwood_fence", FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE)))
-    val DRIFTWOOD_FENCE_GATE = register("driftwood_fence_gate", FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE), HybridAquaticWoodTypes.DRIFTWOOD))
-    val DRIFTWOOD_DOOR = register("driftwood_door", DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR), BlockSetType.OAK))
-    val DRIFTWOOD_TRAPDOOR = register("driftwood_trapdoor", TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR), BlockSetType.OAK))
+    val DRIFTWOOD_FENCE_GATE = register("driftwood_fence_gate", FenceGateBlock(HybridAquaticWoodTypes.DRIFTWOOD, FabricBlockSettings.copyOf(Blocks.OAK_FENCE)))
+    val DRIFTWOOD_DOOR = register("driftwood_door", DoorBlock(HybridAquaticBlockSetTypes.DRIFTWOOD, FabricBlockSettings.copyOf(Blocks.OAK_DOOR)))
+    val DRIFTWOOD_TRAPDOOR = register("driftwood_trapdoor", TrapdoorBlock(HybridAquaticBlockSetTypes.DRIFTWOOD, FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)))
 
     val DEAD_LOPHELIA_CORAL_BLOCK = register("dead_lophelia_coral_block", DeadCoralBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_BLOCK)))
     val LOPHELIA_CORAL_BLOCK = register("lophelia_coral_block", CoralBlockBlock(DEAD_LOPHELIA_CORAL_BLOCK, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_BLOCK)))
@@ -117,7 +118,7 @@ object HybridAquaticBlocks {
     val THORN_CORAL = register("thorn_coral", CoralBlock(DEAD_THORN_CORAL, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL)))
 
     val GLOWSTICK = register("glowstick", GlowstickBlock(FabricBlockSettings.copyOf(Blocks.TORCH).noCollision().luminance(14).nonOpaque()))
-    val WALL_GLOWSTICK = register("wall_glowstick", WallTorchBlock(FabricBlockSettings.copyOf(Blocks.WALL_TORCH).noCollision().luminance(14).nonOpaque(), GLOW))
+    val WALL_GLOWSTICK = register("wall_glowstick", WallTorchBlock(GLOW, FabricBlockSettings.copyOf(Blocks.WALL_TORCH).noCollision().luminance(14).nonOpaque()))
 
     val TUBE_SPONGE = register("tube_sponge", TubeSpongeBlock(FabricBlockSettings.copyOf(Blocks.WET_SPONGE)
         .nonOpaque()

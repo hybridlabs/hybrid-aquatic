@@ -15,7 +15,7 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
-class GlowstickBlock(settings: Settings) : TorchBlock(settings, GLOW), Waterloggable {
+class GlowstickBlock(settings: Settings) : TorchBlock(GLOW, settings), Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(Properties.WATERLOGGED, false)
     }
@@ -50,7 +50,7 @@ class GlowstickBlock(settings: Settings) : TorchBlock(settings, GLOW), Waterlogg
         pos: BlockPos?,
         context: ShapeContext?
     ): VoxelShape {
-        return BOUNDING_SHAPE
+        return SHAPE
     }
 
     override fun getFluidState(state: BlockState): FluidState {

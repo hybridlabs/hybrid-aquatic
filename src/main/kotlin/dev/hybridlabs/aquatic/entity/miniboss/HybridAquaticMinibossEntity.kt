@@ -108,9 +108,9 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HybridAquaticMinibos
             return !miniboss.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
+        override fun attack(target: LivingEntity) {
             val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
+            if (target.squaredDistanceTo(mob) <= d && this.isCooledDown) {
                 resetCooldown()
                 mob.tryAttack(target)
                 miniboss.isSprinting = false
@@ -118,7 +118,7 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HybridAquaticMinibos
             }
         }
 
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
+        private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
             return (1.0f + entity.width).toDouble()
         }
 
@@ -145,4 +145,3 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HybridAquaticMinibos
         const val MOISTNESS_KEY = "Moistness"
     }
 }
-

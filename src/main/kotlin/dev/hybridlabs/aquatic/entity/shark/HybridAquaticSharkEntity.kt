@@ -22,6 +22,7 @@ import net.minecraft.entity.ai.goal.SwimAroundGoal
 import net.minecraft.entity.ai.goal.UniversalAngerGoal
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
+import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
@@ -369,9 +370,6 @@ open class HybridAquaticSharkEntity(
             return !shark.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-    internal class AttackGoal(private val shark: HybridAquaticSharkEntity) : MeleeAttackGoal(shark,
-        ORIGINAL_SPEED, true) {
         override fun attack(target: LivingEntity) {
             val squaredDistance = target.squaredDistanceTo(mob)
             val d = getSquaredMaxAttackDistance(target)
