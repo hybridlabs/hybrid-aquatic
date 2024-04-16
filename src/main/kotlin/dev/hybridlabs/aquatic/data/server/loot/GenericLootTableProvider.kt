@@ -144,6 +144,32 @@ class GenericLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
                         )
                 )
         )
+
+        exporter.accept(
+            HybridAquaticLootTables.DRIFTWOOD_CRATE_TREASURE_ID,
+            LootTable.builder()
+                .randomSequenceId(HybridAquaticLootTables.DRIFTWOOD_CRATE_TREASURE_ID)
+                .pool(
+                    LootPool.builder()
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.DRIFTWOOD_LOG)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(8.0f, 16.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.DRIFTWOOD_PLANKS)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(16.0f, 32.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.DRIFTWOOD_DOOR)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.DRIFTWOOD_TRAPDOOR)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 2.0f)))
+                        )
+                )
+        )
+
         exporter.accept(
             HybridAquaticLootTables.OAK_CRATE_TREASURE_ID,
             LootTable.builder()

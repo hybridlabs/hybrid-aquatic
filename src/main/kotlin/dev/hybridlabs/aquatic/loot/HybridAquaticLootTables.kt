@@ -7,6 +7,7 @@ object HybridAquaticLootTables {
     val FISHING_FISH_ID = Identifier(HybridAquatic.MOD_ID, "gameplay/fishing/fish")
     val FISHING_TREASURE_ID = Identifier(HybridAquatic.MOD_ID, "gameplay/fishing/treasure")
     val HYBRID_CRATE_TREASURE_ID = Identifier(HybridAquatic.MOD_ID, "gameplay/hybrid_crate_treasure")
+    val DRIFTWOOD_CRATE_TREASURE_ID = Identifier(HybridAquatic.MOD_ID, "gameplay/driftwood_crate_treasure")
     val OAK_CRATE_TREASURE_ID = Identifier(HybridAquatic.MOD_ID, "gameplay/oak_crate_treasure")
     val SPRUCE_CRATE_TREASURE_ID = Identifier(HybridAquatic.MOD_ID, "gameplay/spruce_crate_treasure")
     val BIRCH_CRATE_TREASURE_ID = Identifier(HybridAquatic.MOD_ID, "gameplay/birch_crate_treasure")

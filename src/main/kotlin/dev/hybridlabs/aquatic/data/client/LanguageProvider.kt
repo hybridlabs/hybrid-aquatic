@@ -28,14 +28,18 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         // sea messages
         mapOf(
-            "the_creepers_code" to "\"The creepers have a code...\"",
+            "the_creepers_code" to "\"The creepers have a code...",
             "poyo" to "\"I hate litterbugs.\"\n~Poyo",
             "rick_roll" to "\"Never gonna give you up!\nNever gonna let you down!\nNever gonna run around and desert you!\n-Rick Astley",
-            "bold_muddy" to "\"AW MAN I DROWNED!\"\n~Bold Muddy",
-            "adventure" to "\"To the brave explorer who discovers this bottle, know that adventure awaits around every corner!\"",
-            "dream" to "\"Dear reader,\nyour presence is proof that hope can survive the waves.\nKeep dreaming.\"",
-            "fortune" to "\"In this bottle lies a wish for fortune and prosperity to find its way to you.\"",
-            "sunshine" to "\"In this bottle, I send you rays of sunshine and a gentle breeze to brighten your day.\"",
+            "bold_muddy" to "\"AW MAN I DROWNED!\n~Bold Muddy",
+            "kaupenjoe" to "\"It is better to sail the seven sea, than to get STDs\n-Kaupenjoe",
+            "catpenjoe" to "\"If you wanna get a catgirl, you first have to become a catboy.\n-Catpenjoe",
+            "fishenjoe" to "\"Give a man a fish and you'll feed him for a day,\nkill a man and you'll have one less homeless person begging you for fish.\n-Fishenjoe",
+            "loss" to "\"| ||\n|| |_",
+            "willowshine" to "\"Beware the fish girl\n-Willowshine",
+            "warranty" to "\"We've been trying to reach you about your car's extended warranty",
+            "poke" to "\"I like cheese\n-Poke",
+            "one_piece" to "\"THE ONE PIECE IS REAL\n-Poke",
 
         ).forEach { (id, translation) -> builder.add(SeaMessage(id).translationKey, translation) }
 
@@ -55,6 +59,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.ANEMONE to "Anemone",
             HybridAquaticBlocks.TUBE_SPONGE to "Tube Sponge",
             HybridAquaticBlocks.HYBRID_CRATE to "Hybrid Crate",
+            HybridAquaticBlocks.DRIFTWOOD_CRATE to "Driftwood Crate",
             HybridAquaticBlocks.OAK_CRATE to "Oak Crate",
             HybridAquaticBlocks.SPRUCE_CRATE to "Spruce Crate",
             HybridAquaticBlocks.BIRCH_CRATE to "Birch Crate",
@@ -66,6 +71,33 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BUOY to "Buoy",
             HybridAquaticBlocks.HYDROTHERMAL_VENT to "Hydrothermal Vent",
             HybridAquaticBlocks.GIANT_CLAM to "Giant Clam",
+            HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK to "Lophelia Coral Block",
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK to "Dead Lophelia Coral Block",
+            HybridAquaticBlocks.LOPHELIA_CORAL to "Lophelia Coral",
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL to "Dead Lophelia Coral",
+            HybridAquaticBlocks.LOPHELIA_CORAL_FAN to "Lophelia Coral Fan",
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN to "Dead Lophelia Coral Fan",
+            HybridAquaticBlocks.THORN_CORAL_BLOCK to "Thorn Coral Block",
+            HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK to "Dead Thorn Coral Block",
+            HybridAquaticBlocks.THORN_CORAL to "Thorn Coral",
+            HybridAquaticBlocks.DEAD_THORN_CORAL to "Dead Thorn Coral",
+            HybridAquaticBlocks.THORN_CORAL_FAN to "Thorn Coral Fan",
+            HybridAquaticBlocks.DEAD_THORN_CORAL_FAN to "Dead Thorn Coral Fan",
+            HybridAquaticBlocks.GLOWSTICK to "Glowstick",
+            HybridAquaticBlocks.WALL_GLOWSTICK to "Wall Glowstick",
+            HybridAquaticBlocks.DRIFTWOOD_LOG to "Driftwood Log",
+            HybridAquaticBlocks.DRIFTWOOD_WOOD to "Driftwood Wood",
+            HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG to "Stripped Driftwood Log",
+            HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD to "Stripped Driftwood Wood",
+            HybridAquaticBlocks.DRIFTWOOD_PLANKS to "Driftwood Planks",
+            HybridAquaticBlocks.DRIFTWOOD_STAIRS to "Driftwood Stairs",
+            HybridAquaticBlocks.DRIFTWOOD_SLAB to "Driftwood Slab",
+            HybridAquaticBlocks.DRIFTWOOD_FENCE to "Driftwood Fence",
+            HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE to "Driftwood Fence Gate",
+            HybridAquaticBlocks.DRIFTWOOD_DOOR to "Driftwood Door",
+            HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR to "Driftwood Trapdoor",
+            HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE to "Driftwood Pressure Plate",
+            HybridAquaticBlocks.DRIFTWOOD_BUTTON to "Driftwood Button",
         ).forEach { (block, translation) ->
             builder.add(block, translation)
         }
@@ -115,13 +147,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.VAMPIRE_CRAB_CLAW to "Vampire Crab Claw",
             HybridAquaticItems.SPIDER_CRAB_CLAW to "Spider Crab Claw",
             HybridAquaticItems.GLOW_SLIME to "Glow Slime",
-            HybridAquaticItems.PURPLE_JELLY to "Purple Jelly",
-            HybridAquaticItems.RED_JELLY to "Red Jelly",
-            HybridAquaticItems.BLUE_JELLY to "Blue Jelly",
-            HybridAquaticItems.WHITE_JELLY to "White Jelly",
-            HybridAquaticItems.YELLOW_JELLY to "Yellow Jelly",
-            HybridAquaticItems.ORANGE_JELLY to "Orange Jelly",
-            HybridAquaticItems.PINK_JELLY to "Pink Jelly",
             HybridAquaticItems.SHARK_TOOTH to "Shark Tooth",
             HybridAquaticItems.SPONGE_CHUNK to "Sponge Chunk",
             HybridAquaticItems.PEARL to "Pearl",
@@ -163,6 +188,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.MAGNETIC_HOOK.translationKey to "Increases treasure chance",
             HybridAquaticItems.OMINOUS_HOOK.translationKey to "Summons Karkinos",
             HybridAquaticBlocks.HYBRID_CRATE.translationKey to "Break with an axe to open",
+            HybridAquaticBlocks.DRIFTWOOD_CRATE.translationKey to "Break with an axe to open",
             HybridAquaticBlocks.OAK_CRATE.translationKey to "Break with an axe to open",
             HybridAquaticBlocks.SPRUCE_CRATE.translationKey to "Break with an axe to open",
             HybridAquaticBlocks.BIRCH_CRATE.translationKey to "Break with an axe to open",
@@ -171,7 +197,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.MANGROVE_CRATE.translationKey to "Break with an axe to open",
             HybridAquaticBlocks.ACACIA_CRATE.translationKey to "Break with an axe to open",
             HybridAquaticBlocks.CHERRY_CRATE.translationKey to "Break with an axe to open",
-            HybridAquaticItems.FISHING_NET.translationKey to "Stored Entity: %s"
+            HybridAquaticItems.FISHING_NET.translationKey to "Stored Entity: %s",
+            HybridAquaticItems.MOON_JELLYFISH_HAT.translationKey to "Made by Jakotens",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".description"), translation)
         }
@@ -186,7 +213,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         mapOf(
             "glowing" to "Glowing",
             "clarity" to "Clarity",
-            "thalassophobia" to "Thalassophobia"
+            "thalassophobia" to "Thalassophobia",
+            "bleeding" to "Bleeding"
         ).forEach { (potion, translation) ->
             builder.add("item.minecraft.potion.effect.$potion", "Potion of $translation")
             builder.add("item.minecraft.splash_potion.effect.$potion", "Splash Potion of $translation")

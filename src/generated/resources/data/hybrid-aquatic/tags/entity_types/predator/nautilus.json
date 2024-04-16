@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "#hybrid-aquatic:jellyfish",
+    "#hybrid-aquatic:sharks",
+    "hybrid-aquatic:moray_eel",
+    "#hybrid-aquatic:jellyfish",
+    "#hybrid-aquatic:sharks",
+    "hybrid-aquatic:triggerfish",
+    "#hybrid-aquatic:jellyfish",
+    "#hybrid-aquatic:sharks",
+    "#hybrid-aquatic:sharks",
+    "#hybrid-aquatic:jellyfish",
+    "hybrid-aquatic:moray_eel",
+    "#hybrid-aquatic:jellyfish",
+    "#hybrid-aquatic:sharks"
+  ]
+}

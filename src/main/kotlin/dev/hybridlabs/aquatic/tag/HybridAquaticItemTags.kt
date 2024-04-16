@@ -18,6 +18,8 @@ object HybridAquaticItemTags {
 
     val IRON_TOOLS = createConventional("iron_tools")
 
+    val DRIFTWOOD_LOG_WOOD = create("driftwood_log_wood")
+
     private fun create(id: String): TagKey<Item> {
         return TagKey.of(RegistryKeys.ITEM, Identifier(HybridAquatic.MOD_ID, id))
     }

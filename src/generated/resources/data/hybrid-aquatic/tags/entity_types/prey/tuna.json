@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:firefly_squid",
+    "hybrid-aquatic:flashlight_fish",
+    "minecraft:salmon",
+    "minecraft:cod",
+    "minecraft:tropical_fish",
+    "minecraft:squid"
+  ]
+}

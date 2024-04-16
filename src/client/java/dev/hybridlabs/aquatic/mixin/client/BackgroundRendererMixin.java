@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.mixin.client;
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects;
 import dev.hybridlabs.aquatic.fog.ClarityFogModifier;
+import dev.hybridlabs.aquatic.fog.ConduitPowerFogModifier;
 import dev.hybridlabs.aquatic.fog.ThalassophobiaFogModifier;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.BackgroundRenderer;
@@ -10,6 +11,7 @@ import net.minecraft.client.render.CameraSubmersionType;
 import net.minecraft.client.render.FogShape;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.util.math.MathHelper;
@@ -42,10 +44,13 @@ public class BackgroundRendererMixin {
         if (entity instanceof ClientPlayerEntity clientPlayerEntity && cameraSubmersionType == CameraSubmersionType.WATER) {
             World world = clientPlayerEntity.getWorld();
             StatusEffectInstance clarityEffect = clientPlayerEntity.getStatusEffect(HybridAquaticStatusEffects.INSTANCE.getCLARITY());
+            StatusEffectInstance conduitEffect = clientPlayerEntity.getStatusEffect(StatusEffects.CONDUIT_POWER);
             StatusEffectInstance thalassophobiaEffect = clientPlayerEntity.getStatusEffect(HybridAquaticStatusEffects.INSTANCE.getTHALASSOPHOBIA());
 
             if (clarityEffect != null) {
                 new ClarityFogModifier().applyStartEndModifier(fogData, clientPlayerEntity, clarityEffect, viewDistance, tickDelta);
+            } else if (conduitEffect != null) {
+                new ConduitPowerFogModifier().applyStartEndModifier(fogData, clientPlayerEntity, conduitEffect, viewDistance, tickDelta);
             } else if (thalassophobiaEffect != null) {
                 new ThalassophobiaFogModifier().applyStartEndModifier(fogData, clientPlayerEntity, thalassophobiaEffect, viewDistance, tickDelta);
             } else {

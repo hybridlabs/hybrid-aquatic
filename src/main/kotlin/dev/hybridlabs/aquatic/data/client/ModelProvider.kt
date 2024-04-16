@@ -29,10 +29,10 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         Registries.ITEM
             .filter(filterHybridAquatic(Registries.ITEM))
             .forEach { item ->
-            if (item is SpawnEggItem) {
-                registerParentedItemModel(item, ModelIds.getMinecraftNamespacedItem("template_spawn_egg"))
+                if (item is SpawnEggItem) {
+                    registerParentedItemModel(item, ModelIds.getMinecraftNamespacedItem("template_spawn_egg"))
+                }
             }
-        }
 
         // builtin
         mapOf(
@@ -54,6 +54,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         // simple cubes
         setOf(
             HybridAquaticBlocks.HYBRID_CRATE,
+            HybridAquaticBlocks.DRIFTWOOD_CRATE,
             HybridAquaticBlocks.OAK_CRATE,
             HybridAquaticBlocks.SPRUCE_CRATE,
             HybridAquaticBlocks.BIRCH_CRATE,
@@ -63,7 +64,30 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticBlocks.MANGROVE_CRATE,
             HybridAquaticBlocks.CHERRY_CRATE,
         ).forEach(generator::registerSimpleCubeAll)
-    }
+
+        // wood
+        val driftwoodPool = registerCubeAllModelTexturePool(HybridAquaticBlocks.DRIFTWOOD_PLANKS)
+
+        registerLog(HybridAquaticBlocks.DRIFTWOOD_LOG).log(HybridAquaticBlocks.DRIFTWOOD_LOG)
+            .wood(HybridAquaticBlocks.DRIFTWOOD_WOOD)
+        registerLog(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG).log(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG)
+            .wood(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD)
+
+        registerDoor(HybridAquaticBlocks.DRIFTWOOD_DOOR)
+        registerTrapdoor(HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR)
+
+        driftwoodPool.stairs(HybridAquaticBlocks.DRIFTWOOD_STAIRS)
+        driftwoodPool.slab(HybridAquaticBlocks.DRIFTWOOD_SLAB)
+        driftwoodPool.button(HybridAquaticBlocks.DRIFTWOOD_BUTTON)
+        driftwoodPool.pressurePlate(HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE)
+        driftwoodPool.fence(HybridAquaticBlocks.DRIFTWOOD_FENCE)
+        driftwoodPool.fenceGate(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE)
+
+        registerTorch(HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
+
+        registerCoral(HybridAquaticBlocks.LOPHELIA_CORAL, HybridAquaticBlocks.DEAD_LOPHELIA_CORAL, HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK, HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK, HybridAquaticBlocks.LOPHELIA_CORAL_FAN, HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN, HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN, HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN)
+        registerCoral(HybridAquaticBlocks.THORN_CORAL, HybridAquaticBlocks.DEAD_THORN_CORAL, HybridAquaticBlocks.THORN_CORAL_BLOCK, HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK, HybridAquaticBlocks.THORN_CORAL_FAN, HybridAquaticBlocks.DEAD_THORN_CORAL_FAN, HybridAquaticBlocks.THORN_CORAL_WALL_FAN, HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN)
+        }
     }
 
     override fun generateItemModels(generator: ItemModelGenerator) {
@@ -93,13 +117,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.RAW_TENTACLE,
             HybridAquaticItems.COOKED_TENTACLE,
             HybridAquaticItems.GLOW_SLIME,
-            HybridAquaticItems.BLUE_JELLY,
-            HybridAquaticItems.WHITE_JELLY,
-            HybridAquaticItems.RED_JELLY,
-            HybridAquaticItems.PURPLE_JELLY,
-            HybridAquaticItems.YELLOW_JELLY,
-            HybridAquaticItems.ORANGE_JELLY,
-            HybridAquaticItems.PINK_JELLY,
             HybridAquaticItems.SHARK_TOOTH,
             HybridAquaticItems.SPONGE_CHUNK,
             HybridAquaticItems.PEARL,
@@ -127,7 +144,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.GLOWING_HOOK,
             HybridAquaticItems.MAGNETIC_HOOK,
             HybridAquaticItems.OMINOUS_HOOK,
-            HybridAquaticItems.FISHING_NET,
             HybridAquaticItems.DIVING_HELMET,
             HybridAquaticItems.DIVING_SUIT,
             HybridAquaticItems.DIVING_LEGGINGS,
@@ -135,7 +151,8 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.MANGLERFISH_LURE,
             HybridAquaticItems.MANGLERFISH_FIN,
             HybridAquaticItems.TURTLE_CHESTPLATE,
-            HybridAquaticItems.EEL_SCARF
+            HybridAquaticItems.EEL_SCARF,
+            HybridAquaticItems.MOON_JELLYFISH_HAT
 
         ).forEach { item ->
             generator.register(item, Models.GENERATED)

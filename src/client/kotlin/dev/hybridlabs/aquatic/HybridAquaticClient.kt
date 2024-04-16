@@ -7,26 +7,14 @@ import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
 import dev.hybridlabs.aquatic.client.render.armor.*
-import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.BuoyBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.GiantClamBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.HydrothermalVentBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.TubeSpongeBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
-import dev.hybridlabs.aquatic.client.render.hud.FishingNetHUDRenderer
-import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.BuoyBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.GiantClamBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.HydrothermalVentBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.TubeSpongeBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.*
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
@@ -49,7 +37,6 @@ object HybridAquaticClient : ClientModInitializer {
         registerEntityRenderers()
         registerWeatherRenderers()
         registerTooltips()
-        registerHudAddons()
         registerGeoRenderers()
     }
 
@@ -83,18 +70,34 @@ object HybridAquaticClient : ClientModInitializer {
         // TODO: hook up renderer to make this thing easier
     }
 
-    private fun registerHudAddons() {
-        HudRenderCallback.EVENT.register(FishingNetHUDRenderer())
-    }
-
     private fun registerTooltips() {
         ItemTooltipCallback.EVENT.register(FishingNetTooltip())
     }
 
     private fun registerBlockRenderLayers(registry: BlockRenderLayerMap = BlockRenderLayerMap.INSTANCE) {
-        registry.putBlocks(RenderLayer.getTranslucent(),
+        registry.putBlocks(
+            RenderLayer.getTranslucent(),
             HybridAquaticBlocks.ANEMONE,
-            HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE
+            HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE,
+        )
+        registry.putBlocks(
+            RenderLayer.getCutout(),
+            HybridAquaticBlocks.LOPHELIA_CORAL,
+            HybridAquaticBlocks.LOPHELIA_CORAL_FAN,
+            HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN,
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL,
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN,
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN,
+            HybridAquaticBlocks.THORN_CORAL,
+            HybridAquaticBlocks.THORN_CORAL_FAN,
+            HybridAquaticBlocks.THORN_CORAL_WALL_FAN,
+            HybridAquaticBlocks.DEAD_THORN_CORAL,
+            HybridAquaticBlocks.DEAD_THORN_CORAL_FAN,
+            HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN,
+            HybridAquaticBlocks.DRIFTWOOD_DOOR,
+            HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR,
+            HybridAquaticBlocks.GLOWSTICK,
+            HybridAquaticBlocks.WALL_GLOWSTICK,
         )
     }
 

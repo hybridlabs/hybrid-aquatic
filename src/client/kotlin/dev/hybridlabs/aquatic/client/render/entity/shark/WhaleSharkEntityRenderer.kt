@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.render.entity.shark
 
-import dev.hybridlabs.aquatic.client.model.entity.WhaleSharkEntityModel
+import dev.hybridlabs.aquatic.client.model.entity.shark.WhaleSharkEntityModel
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
 

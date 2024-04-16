@@ -1,6 +1,15 @@
 {
   "replace": false,
   "values": [
-    "#hybrid-aquatic:small_prey"
+    "hybrid-aquatic:lionfish",
+    "hybrid-aquatic:firefly_squid",
+    "hybrid-aquatic:flashlight_fish",
+    "hybrid-aquatic:ratfish",
+    "hybrid-aquatic:rockfish",
+    "hybrid-aquatic:needlefish",
+    "hybrid-aquatic:triggerfish",
+    "minecraft:tropical_fish",
+    "minecraft:cod",
+    "minecraft:salmon"
   ]
 }

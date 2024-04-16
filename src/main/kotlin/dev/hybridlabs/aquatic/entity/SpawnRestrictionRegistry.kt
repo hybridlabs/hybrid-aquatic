@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity
 
-import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCrabEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
+import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
@@ -35,9 +36,7 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.ROCKFISH,
             HybridAquaticEntityTypes.MORAY_EEL,
             HybridAquaticEntityTypes.FLASHLIGHT_FISH,
-            HybridAquaticEntityTypes.FIREFLY_SQUID,
             HybridAquaticEntityTypes.OPAH,
-            HybridAquaticEntityTypes.CUTTLEFISH,
             HybridAquaticEntityTypes.TRIGGERFISH,
             HybridAquaticEntityTypes.TIGER_BARB,
             HybridAquaticEntityTypes.PIRANHA,
@@ -54,25 +53,42 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.ANGLERFISH,
             HybridAquaticEntityTypes.DRAGONFISH,
-            HybridAquaticEntityTypes.UMBRELLA_OCTOPUS,
             HybridAquaticEntityTypes.BARRELEYE,
-            HybridAquaticEntityTypes.NAUTILUS,
             HybridAquaticEntityTypes.SEA_ANGEL,
-            HybridAquaticEntityTypes.ATOLLA_JELLYFISH,
             HybridAquaticEntityTypes.FRILLED_SHARK,
-            HybridAquaticEntityTypes.VAMPIRE_SQUID,
-            HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS,
             HybridAquaticEntityTypes.RATFISH,
             ).forEach { registerFishUnderground(it) }
+
+        // squids
+        setOf(
+            HybridAquaticEntityTypes.FIREFLY_SQUID,
+            HybridAquaticEntityTypes.CUTTLEFISH,
+        ).forEach { registerCephalopod(it) }
+
+        // underground squids
+        setOf(
+            HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS,
+            HybridAquaticEntityTypes.NAUTILUS,
+            HybridAquaticEntityTypes.VAMPIRE_SQUID,
+            HybridAquaticEntityTypes.UMBRELLA_OCTOPUS,
+        ).forEach { registerCephalopodUnderground(it) }
 
         // jellies
         setOf(
             HybridAquaticEntityTypes.MOON_JELLYFISH,
+            HybridAquaticEntityTypes.MAUVE_STINGER,
             HybridAquaticEntityTypes.SEA_NETTLE,
             HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH,
             HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH,
+            HybridAquaticEntityTypes.BLUE_JELLYFISH,
+            HybridAquaticEntityTypes.COMPASS_JELLYFISH,
+            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH,
             HybridAquaticEntityTypes.NOMURA_JELLYFISH,
         ).forEach { registerJelly(it) }
+
+        setOf(
+            HybridAquaticEntityTypes.ATOLLA_JELLYFISH,
+        ).forEach { registerJellyUnderground(it) }
 
         // sharks
         setOf(
@@ -87,17 +103,13 @@ object SpawnRestrictionRegistry {
 
         // critters
         setOf(
-            HybridAquaticEntityTypes.GIANT_ISOPOD,
-            HybridAquaticEntityTypes.SHRIMP,
-            HybridAquaticEntityTypes.CRAYFISH,
-            HybridAquaticEntityTypes.LOBSTER,
             HybridAquaticEntityTypes.STARFISH,
             HybridAquaticEntityTypes.NUDIBRANCH,
             HybridAquaticEntityTypes.SEA_CUCUMBER,
             HybridAquaticEntityTypes.SEA_URCHIN,
         ).forEach { registerCritter(it) }
 
-        // crabs
+        // crustaceans
         setOf(
             HybridAquaticEntityTypes.DUNGENESS_CRAB,
             HybridAquaticEntityTypes.FIDDLER_CRAB,
@@ -105,11 +117,19 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.GHOST_CRAB,
             HybridAquaticEntityTypes.FLOWER_CRAB,
             HybridAquaticEntityTypes.VAMPIRE_CRAB,
-            HybridAquaticEntityTypes.SPIDER_CRAB,
             HybridAquaticEntityTypes.LIGHTFOOT_CRAB,
             HybridAquaticEntityTypes.HORSESHOE_CRAB,
             HybridAquaticEntityTypes.COCONUT_CRAB,
-        ).forEach { registerCrab(it) }
+            HybridAquaticEntityTypes.SHRIMP,
+            HybridAquaticEntityTypes.CRAYFISH,
+            HybridAquaticEntityTypes.LOBSTER,
+        ).forEach { registerCrustacean(it) }
+
+        setOf(
+            HybridAquaticEntityTypes.YETI_CRAB,
+            HybridAquaticEntityTypes.SPIDER_CRAB,
+            HybridAquaticEntityTypes.GIANT_ISOPOD
+        ).forEach { registerCrustaceanUnderground(it) }
     }
 
     private fun <T : WaterCreatureEntity> registerFish(entityType: EntityType<T>) {
@@ -120,6 +140,14 @@ object SpawnRestrictionRegistry {
         registerWaterCreature(entityType, HybridAquaticFishEntity::canUndergroundSpawn)
     }
 
+    private fun <T : WaterCreatureEntity> registerCephalopod(entityType: EntityType<T>) {
+        registerWaterCreature(entityType, HybridAquaticCephalopodEntity::canSpawn)
+    }
+
+    private fun <T : WaterCreatureEntity> registerCephalopodUnderground(entityType: EntityType<T>) {
+        registerWaterCreature(entityType, HybridAquaticCephalopodEntity::canUndergroundSpawn)
+    }
+
     private fun <T : WaterCreatureEntity> registerShark(entityType: EntityType<T>) {
         registerWaterCreature(entityType, HybridAquaticSharkEntity::canSpawn)
     }
@@ -128,8 +156,16 @@ object SpawnRestrictionRegistry {
         registerWaterCreature(entityType, HybridAquaticJellyfishEntity::canSpawn)
     }
 
-    private fun <T : WaterCreatureEntity> registerCrab(entityType: EntityType<T>) {
-        registerLandWaterCreature(entityType, HybridAquaticCrabEntity::canSpawn)
+    private fun <T : WaterCreatureEntity> registerJellyUnderground(entityType: EntityType<T>) {
+        registerWaterCreature(entityType, HybridAquaticJellyfishEntity::canUndergroundSpawn)
+    }
+
+    private fun <T : WaterCreatureEntity> registerCrustacean(entityType: EntityType<T>) {
+        registerLandWaterCreature(entityType, HybridAquaticCrustaceanEntity::canSpawn)
+    }
+
+    private fun <T : WaterCreatureEntity> registerCrustaceanUnderground(entityType: EntityType<T>) {
+        registerLandWaterCreature(entityType, HybridAquaticCrustaceanEntity::canUndergroundSpawn)
     }
 
     private fun <T : WaterCreatureEntity> registerCritter(entityType: EntityType<T>) {

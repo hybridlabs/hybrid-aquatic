@@ -1,13 +1,16 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.item.Items
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryWrapper
+import net.minecraft.registry.tag.ItemTags
 import java.util.concurrent.CompletableFuture
 
 class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.ItemTagProvider(output, registriesFuture) {
@@ -21,6 +24,25 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.LURE_ITEMS).add(item)
         }
+
+        //region wood
+
+        getOrCreateTagBuilder(ItemTags.PLANKS)
+            .add(HybridAquaticBlocks.DRIFTWOOD_PLANKS.asItem())
+
+        getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
+            .add(HybridAquaticBlocks.DRIFTWOOD_LOG.asItem())
+            .add(HybridAquaticBlocks.DRIFTWOOD_WOOD.asItem())
+            .add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG.asItem())
+            .add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD.asItem())
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.DRIFTWOOD_LOG_WOOD)
+            .add(HybridAquaticItems.DRIFTWOOD_LOG)
+            .add(HybridAquaticItems.STRIPPED_DRIFTWOOD_LOG)
+            .add(HybridAquaticItems.DRIFTWOOD_WOOD)
+            .add(HybridAquaticItems.STRIPPED_DRIFTWOOD_WOOD)
+
+        //endregion
 
         listOf(
             HybridAquaticItems.LIONFISH,

@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.state.property.Properties
+import net.minecraft.world.gen.CountConfig
 import net.minecraft.world.gen.blockpredicate.BlockPredicate
 import net.minecraft.world.gen.feature.*
 import net.minecraft.world.gen.stateprovider.BlockStateProvider
@@ -32,6 +33,14 @@ class ConfiguredFeatureProvider(output: FabricDataOutput, registriesFuture: Comp
                         ),
                         BlockPredicate.matchingBlockTag(HybridAquaticBlockTags.ANEMONES_GENERATE_IN)
                     )
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.LOPHELIA_CORAL,
+            ConfiguredFeature(
+                CoralFeature.CORAL_TREE, DefaultFeatureConfig(
                 )
             )
         )
@@ -74,15 +83,7 @@ class ConfiguredFeatureProvider(output: FabricDataOutput, registriesFuture: Comp
         entries.add(
             HybridAquaticConfiguredFeatures.HYDROTHERMAL_VENTS,
             ConfiguredFeature(
-                Feature.FLOWER, RandomPatchFeatureConfig(
-                    4, 2, 2,
-                    PlacedFeatures.createEntry(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockFeatureConfig(
-                            BlockStateProvider.of(HybridAquaticBlocks.HYDROTHERMAL_VENT.defaultState.with(Properties.WATERLOGGED, true))
-                        ),
-                        BlockPredicate.matchingBlockTag(HybridAquaticBlockTags.HYDROTHERMAL_VENT_GENERATE_IN)
-                    )
+                Feature.SEA_PICKLE, CountConfig(9
                 )
             )
         )

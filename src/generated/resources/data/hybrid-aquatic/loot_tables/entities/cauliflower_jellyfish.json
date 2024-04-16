@@ -25,7 +25,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "hybrid-aquatic:purple_jelly"
+          "name": "minecraft:slime_ball"
         }
       ],
       "rolls": 1.0

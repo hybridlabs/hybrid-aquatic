@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.render.entity.critter
 
-import dev.hybridlabs.aquatic.client.model.entity.NudibranchEntityModel
+import dev.hybridlabs.aquatic.client.model.entity.critter.NudibranchEntityModel
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory.Context

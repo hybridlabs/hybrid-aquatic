@@ -28,7 +28,7 @@ data class SeaMessage(
     /**
      * The text component for this message.
      */
-    val text: MutableText = Text.translatable(translationKey)
+    private val text: MutableText = Text.translatable(translationKey)
 
     fun createBookItemStack(): ItemStack {
         val stack = ItemStack(Items.WRITTEN_BOOK)
@@ -62,20 +62,9 @@ data class SeaMessage(
             "poyo",
             "rick_roll",
             "bold_muddy",
-            "distant",
-            "dream",
-            "adventure",
-            "fortune",
-            "sunshine",
-            "anglerfish",
-            "corals",
-            "vampire_squid",
-            "clownfish",
-            "turtle",
-            "depths",
-            "sea_cucumber",
-            "polar_bear",
-            "seahorse",
+            "kaupenjoe",
+            "catpenjoe",
+            "fishenjoe",
         )
     }
 }
