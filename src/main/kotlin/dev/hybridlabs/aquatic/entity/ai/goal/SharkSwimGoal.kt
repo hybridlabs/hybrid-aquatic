@@ -50,7 +50,6 @@ open class SharkSwimGoal (
     }
 
     override fun tick() {
-//        println(mob.navigation.currentPath?.isFinished == true)
         if (currentTarget == null) {
             var foundPath = false
             var path: Path? = null
@@ -70,7 +69,6 @@ open class SharkSwimGoal (
             println(mob.navigation.startMovingAlong(path, 1.0))
             path?.let { finalPath ->
                 println(finalPath.target)
-                // System.out.printf("Current Pos: %s%nCurrent Target: %s%nPathing Result: %s%n", mob.pos, currentTarget, result)
             }
         }
     }

@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.render.entity.jellyfish
 
-import dev.hybridlabs.aquatic.client.model.entity.MoonJellyfishEntityModel
+import dev.hybridlabs.aquatic.client.model.entity.jellyfish.MoonJellyfishEntityModel
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
 

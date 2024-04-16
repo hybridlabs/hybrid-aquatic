@@ -1,9 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.block.Blocks
 import net.minecraft.entity.*
-import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
 import net.minecraft.entity.ai.goal.*
@@ -15,21 +14,18 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.entity.passive.FishEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.tag.FluidTags
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.random.Random
-import net.minecraft.world.LocalDifficulty
-import net.minecraft.world.ServerWorldAccess
-import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
+import net.minecraft.world.*
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -43,18 +39,32 @@ import kotlin.math.sqrt
 open class HybridAquaticFishEntity(
     type: EntityType<out HybridAquaticFishEntity>,
     world: World,
-    private val variantCount: Int = 1
+    private val variantCount: Int = 1,
+    open val prey: TagKey<EntityType<*>>,
+    open val predator: TagKey<EntityType<*>>,
 ) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
+    private var hunger: Int
+        get() = dataTracker.get(HUNGER)
+        set(hunger) {
+            dataTracker.set(HUNGER, hunger)
+        }
+    private var attemptAttack: Boolean
+        get() = dataTracker.get(ATTEMPT_ATTACK)
+        set(attemptAttack) {
+            dataTracker.set(ATTEMPT_ATTACK, attemptAttack)
+        }
 
     override fun initGoals() {
         super.initGoals()
-        goalSelector.add(1, SwimToRandomPlaceGoal(this, 1.0, 40,))
+        goalSelector.add(1, SwimToRandomPlaceGoal(this, 1.0, 40))
         goalSelector.add(1, EscapeDangerGoal(this, 1.25))
         goalSelector.add(2, MoveIntoWaterGoal(this))
         goalSelector.add(2, SwimAroundGoal(this, 0.50, 6))
-        goalSelector.add(1, FleeEntityGoal(this, HybridAquaticSharkEntity::class.java, 8.0f, 1.2, 1.0))
-        goalSelector.add(1, FleeEntityGoal(this, PlayerEntity::class.java, 5.0f, 1.2, 1.0))
+        goalSelector.add(1, AttackGoal(this))
+        goalSelector.add(1, FleeEntityGoal(this, LivingEntity::class.java, 8.0f, 1.2, 1.0) { !fromFishingNet && it.type.isIn(predator) })
+        goalSelector.add(2, FleeEntityGoal(this, PlayerEntity::class.java, 5.0f, 1.0, 1.0) { !fromFishingNet })
+        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { hunger <= 1200 && it.type.isIn(prey) })
     }
 
     override fun initDataTracker() {
@@ -62,6 +72,8 @@ open class HybridAquaticFishEntity(
         dataTracker.startTracking(MOISTNESS, getMaxMoistness())
         dataTracker.startTracking(VARIANT, 0)
         dataTracker.startTracking(FISH_SIZE, 0)
+        dataTracker.startTracking(ATTEMPT_ATTACK, false)
+        dataTracker.startTracking(HUNGER, MAX_HUNGER)
     }
 
     override fun initialize(
@@ -93,27 +105,20 @@ open class HybridAquaticFishEntity(
                 damage(this.damageSources.dryOut(), 1.0f)
             }
         }
-
         if (world.isClient && isTouchingWater && isAttacking) {
             val rotationVec = getRotationVec(0.0f)
-            val cosYaw = MathHelper.cos(yaw * MathHelper.RADIANS_PER_DEGREE) * 0.6f
-            val sinYaw = MathHelper.sin(yaw * MathHelper.RADIANS_PER_DEGREE) * 0.6f
-            val offsetY = 0.0f - random.nextFloat() * 0.7f
+            val offsetY = 0.0f - random.nextFloat()
+
             for (i in 0..1) {
+                val particleX = x - rotationVec.x * 0.1
+                val particleY = y - rotationVec.y * -0.1
+                val particleZ = z - rotationVec.z * offsetY
+
                 world.addParticle(
-                    ParticleTypes.BUBBLE,
-                    x - rotationVec.x * offsetY + cosYaw,
-                    y - rotationVec.y,
-                    z - rotationVec.z * offsetY + sinYaw,
-                    0.0,
-                    0.0,
-                    0.0
-                )
-                world.addParticle(
-                    ParticleTypes.BUBBLE,
-                    x - rotationVec.x * offsetY - cosYaw,
-                    y - rotationVec.y,
-                    z - rotationVec.z * offsetY - sinYaw,
+                    ParticleTypes.DOLPHIN,
+                    particleX,
+                    particleY,
+                    particleZ,
                     0.0,
                     0.0,
                     0.0
@@ -122,9 +127,28 @@ open class HybridAquaticFishEntity(
         }
     }
 
+    private fun getHungerValue(entityType: EntityType<*>): Int {
+        if (entityType.isIn(HybridAquaticEntityTags.CRAB))
+            return 150
+        if (entityType.isIn(HybridAquaticEntityTags.JELLYFISH))
+            return 150
+        if (entityType.isIn(HybridAquaticEntityTags.SMALL_PREY))
+            return 300
+        else if (entityType.isIn(HybridAquaticEntityTags.MEDIUM_PREY))
+            return 600
+        else if (entityType.isIn(HybridAquaticEntityTags.LARGE_PREY))
+            return 1200
+
+        return 0
+    }
+
+    open fun eatFish(entityType: EntityType<*>) {
+        hunger += getHungerValue(entityType)
+    }
+
     override fun tickWaterBreathingAir(air: Int) {}
 
-    fun getMaxMoistness(): Int {
+    private fun getMaxMoistness(): Int {
         return 600
     }
 
@@ -133,17 +157,22 @@ open class HybridAquaticFishEntity(
         nbt.putInt(MOISTNESS_KEY, moistness)
         nbt.putInt(VARIANT_KEY, variant)
         nbt.putInt(FISH_SIZE_KEY, size)
+        nbt.putInt(HUNGER_KEY, hunger)
+        nbt.putBoolean("FromFishingNet", fromFishingNet)
     }
 
     open fun shouldFlopOnLand(): Boolean {
         return true
     }
 
+    private var fromFishingNet = false
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
         variant = nbt.getInt(VARIANT_KEY).coerceAtLeast(0).coerceAtMost(variantCount-1)
         size = nbt.getInt(FISH_SIZE_KEY)
+        hunger = nbt.getInt(HUNGER_KEY)
+        fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
     open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
@@ -197,7 +226,7 @@ open class HybridAquaticFishEntity(
         return SwimNavigation(this, world)
     }
 
-    var moistness: Int
+    private var moistness: Int
         get() = dataTracker.get(MOISTNESS)
         set(moistness) {
             dataTracker.set(MOISTNESS, moistness)
@@ -251,7 +280,7 @@ open class HybridAquaticFishEntity(
 
     init {
         moveControl = FishMoveControl(this)
-        lookControl = YawAdjustingLookControl(this, 5)
+        lookControl = YawAdjustingLookControl(this, 20)
     }
 
     override fun tickMovement() {
@@ -307,16 +336,60 @@ open class HybridAquaticFishEntity(
         }
     }
 
-    companion object {
-        val MOISTNESS: TrackedData<Int> =
-            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val VARIANT: TrackedData<Int> =
-            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val FISH_SIZE: TrackedData<Int> =
-            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val CLOSE_PLAYER_PREDICATE: TargetPredicate =
-            TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0).ignoreVisibility()
+    internal class AttackGoal(private val fish: HybridAquaticFishEntity) : MeleeAttackGoal(fish, 1.0,true) {
+        override fun canStart(): Boolean {
+            return !fish.fromFishingNet && super.canStart()
+        }
 
+        override fun attack(target: LivingEntity) {
+            val d = getSquaredMaxAttackDistance(target)
+            if (target.squaredDistanceTo(mob) <= d && this.isCooledDown) {
+                resetCooldown()
+                mob.tryAttack(target)
+                fish.isSprinting = true
+                fish.attemptAttack = true
+
+                if (target.health <= 0)
+                    fish.eatFish(target.type)
+            }
+        }
+
+        private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
+            return (1.25f + entity.width).toDouble()
+        }
+
+        override fun start() {
+            super.start()
+            fish.attemptAttack = false
+        }
+
+        override fun stop() {
+            super.stop()
+            fish.attemptAttack = false
+        }
+    }
+
+    override fun tryAttack(target: Entity?): Boolean {
+        if (super.tryAttack(target)) {
+
+            playSound(SoundEvents.ENTITY_FOX_EAT,1.0F,0.0F)
+
+            return true
+        } else {
+            return false
+        }
+    }
+
+    companion object {
+        val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val FISH_SIZE: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val HUNGER: TrackedData<Int> = DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        const val MAX_HUNGER = 1200
+        const val HUNGER_KEY = "Hunger"
+
+        val ATTACK_ANIMATION: RawAnimation  = RawAnimation.begin().then("attack", Animation.LoopType.LOOP)
         val SWIM_ANIMATION: RawAnimation  = RawAnimation.begin().then("swim", Animation.LoopType.LOOP)
         val FLOP_ANIMATION: RawAnimation  = RawAnimation.begin().then("flop", Animation.LoopType.LOOP)
 
@@ -354,5 +427,7 @@ open class HybridAquaticFishEntity(
         const val MOISTNESS_KEY = "Moistness"
         const val VARIANT_KEY = "Variant"
         const val FISH_SIZE_KEY = "FishSize"
+        val ATTEMPT_ATTACK: TrackedData<Boolean> =
+            DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
     }
 }

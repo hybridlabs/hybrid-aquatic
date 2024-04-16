@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "hybrid-aquatic:block/driftwood_planks"
+  }
+}

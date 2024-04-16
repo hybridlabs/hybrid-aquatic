@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.render.entity.critter
 
-import dev.hybridlabs.aquatic.client.model.entity.SeaUrchinEntityModel
+import dev.hybridlabs.aquatic.client.model.entity.critter.SeaUrchinEntityModel
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory.Context

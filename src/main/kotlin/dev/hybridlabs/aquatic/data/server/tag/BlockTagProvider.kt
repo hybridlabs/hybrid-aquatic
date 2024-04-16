@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
@@ -8,6 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.block.Blocks
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryWrapper
+import net.minecraft.registry.tag.BlockTags
 import java.util.concurrent.CompletableFuture
 
 class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.BlockTagProvider(output, registriesFuture) {
@@ -50,6 +52,34 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.MUDDY_MANGROVE_ROOTS)
             .add(Blocks.MANGROVE_ROOTS)
             .add(Blocks.GRAVEL)
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
+            .add(HybridAquaticBlocks.DRIFTWOOD_FENCE)
+
+        getOrCreateTagBuilder(BlockTags.FENCE_GATES)
+            .add(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE)
+
+        getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
+            .add(HybridAquaticBlocks.DRIFTWOOD_LOG)
+            .add(HybridAquaticBlocks.DRIFTWOOD_WOOD)
+            .add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG)
+            .add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD)
+
+        getOrCreateTagBuilder(BlockTags.CORAL_BLOCKS)
+            .add(HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK)
+            .add(HybridAquaticBlocks.THORN_CORAL_BLOCK)
+
+        getOrCreateTagBuilder(BlockTags.CORALS)
+            .add(HybridAquaticBlocks.LOPHELIA_CORAL)
+            .add(HybridAquaticBlocks.THORN_CORAL)
+
+        getOrCreateTagBuilder(BlockTags.CORAL_PLANTS)
+            .add(HybridAquaticBlocks.LOPHELIA_CORAL_FAN)
+            .add(HybridAquaticBlocks.THORN_CORAL_FAN)
+
+        getOrCreateTagBuilder(BlockTags.WALL_CORALS)
+            .add(HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN)
+            .add(HybridAquaticBlocks.THORN_CORAL_WALL_FAN)
 
         // plushies
         Registries.BLOCK

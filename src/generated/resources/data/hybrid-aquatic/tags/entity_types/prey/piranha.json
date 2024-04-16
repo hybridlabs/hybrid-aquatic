@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:frog",
+    "minecraft:chicken",
+    "minecraft:rabbit",
+    "minecraft:salmon",
+    "minecraft:cod",
+    "minecraft:tropical_fish",
+    "hybrid-aquatic:tetra",
+    "hybrid-aquatic:zebra_danio",
+    "hybrid-aquatic:tiger_barb"
+  ]
+}

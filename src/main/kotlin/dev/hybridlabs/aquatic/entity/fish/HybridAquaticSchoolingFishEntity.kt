@@ -1,10 +1,12 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FishFollowGroupLeaderGoal
+import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
@@ -12,8 +14,10 @@ import java.util.stream.Stream
 
 open class HybridAquaticSchoolingFishEntity(
     type: EntityType<out HybridAquaticFishEntity>,
-    world: World
-) : HybridAquaticFishEntity(type, world) {
+    world: World,
+    override val prey: TagKey<EntityType<*>>,
+    override val predator: TagKey<EntityType<*>>,
+) : HybridAquaticFishEntity(type, world, 1, HybridAquaticEntityTags.NONE, HybridAquaticEntityTags.NONE) {
     private var leader: HybridAquaticSchoolingFishEntity? = null
     private var groupSize = 1
 
@@ -26,7 +30,7 @@ open class HybridAquaticSchoolingFishEntity(
         return getMaxGroupSize()
     }
 
-    fun getMaxGroupSize(): Int {
+    private fun getMaxGroupSize(): Int {
         return super.getLimitPerChunk()
     }
 
@@ -38,7 +42,7 @@ open class HybridAquaticSchoolingFishEntity(
         return leader != null && leader!!.isAlive
     }
 
-    fun joinGroupOf(groupLeader: HybridAquaticSchoolingFishEntity): HybridAquaticSchoolingFishEntity {
+    private fun joinGroupOf(groupLeader: HybridAquaticSchoolingFishEntity): HybridAquaticSchoolingFishEntity {
         leader = groupLeader
         groupLeader.increaseGroupSize()
         return groupLeader

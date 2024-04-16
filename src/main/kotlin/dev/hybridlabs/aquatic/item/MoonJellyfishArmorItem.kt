@@ -1,8 +1,13 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.client.GeoRenderProviderStorage
+import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterial
+import net.minecraft.item.ItemStack
+import net.minecraft.text.Text
+import net.minecraft.util.Formatting
+import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
@@ -27,5 +32,12 @@ class MoonJellyfishArmorItem(material: ArmorMaterial, type: Type, settings: Sett
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return cache
+    }
+
+    override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
+        val jellyfishHatText = Text.translatable("item.hybrid-aquatic.moon_jellyfish_hat.description").formatted(Formatting.GRAY)
+
+        tooltip.add(jellyfishHatText)
+        super.appendTooltip(stack, world, tooltip, context)
     }
 }

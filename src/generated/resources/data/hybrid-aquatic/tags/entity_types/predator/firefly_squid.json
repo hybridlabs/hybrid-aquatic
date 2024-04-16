@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#hybrid-aquatic:jellyfish",
+    "#hybrid-aquatic:sharks",
+    "hybrid-aquatic:oarfish",
+    "hybrid-aquatic:opah",
+    "hybrid-aquatic:yellowfin_tuna",
+    "hybrid-aquatic:mahimahi",
+    "hybrid-aquatic:needlefish"
+  ]
+}

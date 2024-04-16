@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.data.server
 
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -37,6 +39,16 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .input('L', Items.LANTERN)
             .input('W', ItemTags.PLANKS)
             .criterion("has_lantern", InventoryChangedCriterion.Conditions.items(Items.LANTERN))
+            .offerTo(exporter)
+
+        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, HybridAquaticBlocks.DRIFTWOOD_SLAB, HybridAquaticBlocks.DRIFTWOOD_PLANKS)
+        offerBarkBlockRecipe(exporter, HybridAquaticBlocks.DRIFTWOOD_WOOD, HybridAquaticBlocks.DRIFTWOOD_LOG)
+        offerPlanksRecipe(exporter, HybridAquaticBlocks.DRIFTWOOD_PLANKS, HybridAquaticItemTags.DRIFTWOOD_LOG_WOOD, 4)
+        offerPressurePlateRecipe(exporter, HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE, HybridAquaticBlocks.DRIFTWOOD_PLANKS)
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, HybridAquaticBlocks.DRIFTWOOD_BUTTON, 1)
+            .input(HybridAquaticBlocks.DRIFTWOOD_PLANKS)
+            .criterion("has_driftwood_planks", InventoryChangedCriterion.Conditions.items(HybridAquaticBlocks.DRIFTWOOD_PLANKS))
             .offerTo(exporter)
 
         // armor recipes
@@ -113,6 +125,20 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .input('I', Items.STICK)
             .input('S', Items.STRING)
             .criterion("string", InventoryChangedCriterion.Conditions.items(Items.STRING))
+            .offerTo(exporter)
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, HybridAquaticItems.GLOW_SLIME)
+            .input(Items.SLIME_BALL)
+            .input(Items.GLOW_INK_SAC)
+            .criterion("has_slime_ball", InventoryChangedCriterion.Conditions.items(Items.SLIME_BALL))
+            .criterion("has_glow_ink_sac", InventoryChangedCriterion.Conditions.items(Items.GLOW_INK_SAC))
+            .offerTo(exporter)
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.GLOWSTICK)
+            .input(Items.STICK)
+            .input(HybridAquaticItems.GLOW_SLIME)
+            .criterion("has_stick", InventoryChangedCriterion.Conditions.items(Items.STICK))
+            .criterion("has_glow_slime", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.GLOW_SLIME))
             .offerTo(exporter)
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.GLOWING_HOOK)

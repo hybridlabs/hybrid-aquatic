@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "hybrid-aquatic:driftwood_planks"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "hybrid-aquatic:driftwood_pressure_plate"
+  },
+  "show_notification": true
+}

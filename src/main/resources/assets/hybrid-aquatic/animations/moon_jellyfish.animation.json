@@ -30,7 +30,7 @@
 				"tentacle_4": {
 					"rotation": ["Math.cos(query.anim_time * 90)*-10", 0, "Math.cos(query.anim_time * 90)*-10"]
 				},
-				"moon_jelly": {
+				"body": {
 					"position": [0, "Math.sin(query.anim_time * 90)*0.5", 0]
 				}
 			}
@@ -38,9 +38,6 @@
 		"flop": {
 			"loop": true,
 			"bones": {
-				"moon_jelly": {
-					"position": [0, -1.75, 0]
-				},
 				"head": {
 					"position": [0, -0.5, 0],
 					"scale": [1.2, 0.8, 1.2]
@@ -63,6 +60,9 @@
 				"tentacle_4": {
 					"rotation": [54.7356, -30, 54.7356],
 					"position": [-0.5, 0.25, 0.5]
+				},
+				"body": {
+					"position": [0, -1.75, 0]
 				}
 			}
 		}

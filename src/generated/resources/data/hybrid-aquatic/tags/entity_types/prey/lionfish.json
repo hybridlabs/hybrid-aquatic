@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#hybrid-aquatic:crab",
+    "#hybrid-aquatic:shrimp",
+    "hybrid-aquatic:clownfish",
+    "hybrid-aquatic:blue_tang",
+    "hybrid-aquatic:flashlight_fish",
+    "hybrid-aquatic:unicorn_fish"
+  ]
+}

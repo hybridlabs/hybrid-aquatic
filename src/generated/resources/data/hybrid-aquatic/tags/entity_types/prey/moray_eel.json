@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:lionfish",
+    "hybrid-aquatic:rockfish",
+    "hybrid-aquatic:cuttlefish",
+    "hybrid-aquatic:clownfish",
+    "hybrid-aquatic:blue_tang",
+    "hybrid-aquatic:unicorn_fish",
+    "hybrid-aquatic:triggerfish",
+    "hybrid-aquatic:glowing_sucker_octopus"
+  ]
+}

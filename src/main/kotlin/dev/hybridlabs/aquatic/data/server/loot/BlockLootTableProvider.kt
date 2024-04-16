@@ -33,6 +33,25 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
+        //region wood
+
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_LOG)
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_WOOD)
+        addDrop(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG)
+        addDrop(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD)
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_PLANKS)
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_STAIRS)
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR)
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE)
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_BUTTON)
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_FENCE)
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE)
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_SLAB, slabDrops(HybridAquaticBlocks.DRIFTWOOD_SLAB))
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_DOOR, doorDrops(HybridAquaticBlocks.DRIFTWOOD_DOOR))
+
+        //endregion
+
+
         // living sponge
         addDrop(HybridAquaticBlocks.TUBE_SPONGE) { block ->
             LootTable.builder().pool(
@@ -84,6 +103,19 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.builder().with(
                     AlternativeEntry.builder(
                         LootTableEntry.builder(HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID).conditionally(
+                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                        ),
+                        ItemEntry.builder(block),
+                    )
+                )
+            )
+        }
+
+        addDrop(HybridAquaticBlocks.DRIFTWOOD_CRATE) { block ->
+            LootTable.builder().pool(
+                LootPool.builder().with(
+                    AlternativeEntry.builder(
+                        LootTableEntry.builder(HybridAquaticLootTables.DRIFTWOOD_CRATE_TREASURE_ID).conditionally(
                             MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
                         ),
                         ItemEntry.builder(block),

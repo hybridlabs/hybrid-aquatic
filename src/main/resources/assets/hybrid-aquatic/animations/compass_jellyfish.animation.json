@@ -65,7 +65,7 @@
 				"tentacle_f2": {
 					"rotation": ["Math.sin(query.anim_time * 90)*-12.5", 0, 0]
 				},
-				"compass_jellyfish": {
+				"body": {
 					"position": [0, "Math.sin(query.anim_time * 90)*1", 0]
 				}
 			}
@@ -73,7 +73,7 @@
 		"flop": {
 			"loop": true,
 			"bones": {
-				"compass_jellyfish": {
+				"body": {
 					"position": [0, -11.9, 0]
 				},
 				"head": {

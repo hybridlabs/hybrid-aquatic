@@ -1,33 +1,6 @@
 {
-  "type": "minecraft:flower",
+  "type": "minecraft:sea_pickle",
   "config": {
-    "feature": {
-      "feature": {
-        "type": "minecraft:simple_block",
-        "config": {
-          "to_place": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "hybrid-aquatic:hydrothermal_vent",
-              "Properties": {
-                "waterlogged": "true"
-              }
-            }
-          }
-        }
-      },
-      "placement": [
-        {
-          "type": "minecraft:block_predicate_filter",
-          "predicate": {
-            "type": "minecraft:matching_block_tag",
-            "tag": "hybrid-aquatic:hydrothermal_vent_generate_in"
-          }
-        }
-      ]
-    },
-    "tries": 4,
-    "xz_spread": 2,
-    "y_spread": 2
+    "count": 9
   }
 }

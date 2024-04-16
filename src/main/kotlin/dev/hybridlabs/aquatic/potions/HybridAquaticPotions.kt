@@ -35,6 +35,13 @@ object HybridAquaticPotions {
         HybridAquaticItems.BLACK_PEARL
     )
 
+    val BLEEDING_POTION = registerPotionWithRecipe(
+        "bleeding",
+        Potion(StatusEffectInstance(HybridAquaticStatusEffects.BLEEDING, 3600, 0)),
+        Potions.AWKWARD,
+        HybridAquaticItems.SHARK_TOOTH
+    )
+
     private fun registerPotionWithRecipe(id: String, potion: Potion, inputPotion: Potion, ingredient: Item): Potion {
         BrewingRecipeRegistry.registerPotionRecipe(inputPotion, ingredient, potion)
         return register(id, potion)

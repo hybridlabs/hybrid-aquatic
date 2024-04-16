@@ -77,16 +77,20 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.LUKEWARM_OCEAN,
         )
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.CRAB_SPAWN_BIOMES).add(
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.DUNGENESS_CRAB_SPAWN_BIOMES).add(
             BiomeKeys.OCEAN,
-            BiomeKeys.DEEP_OCEAN,
             BiomeKeys.WARM_OCEAN,
             BiomeKeys.LUKEWARM_OCEAN,
-            BiomeKeys.DEEP_LUKEWARM_OCEAN,
             BiomeKeys.BEACH,
             BiomeKeys.STONY_SHORE,
-            BiomeKeys.DEEP_COLD_OCEAN,
-            BiomeKeys.DEEP_FROZEN_OCEAN,
+        )
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.HERMIT_CRAB_SPAWN_BIOMES).add(
+            BiomeKeys.OCEAN,
+            BiomeKeys.WARM_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
+            BiomeKeys.BEACH,
+            BiomeKeys.STONY_SHORE,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.GHOST_CRAB_SPAWN_BIOMES).add(
@@ -122,10 +126,8 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.HORSESHOE_CRAB_SPAWN_BIOMES).add(
             BiomeKeys.OCEAN,
-            BiomeKeys.DEEP_OCEAN,
             BiomeKeys.WARM_OCEAN,
             BiomeKeys.LUKEWARM_OCEAN,
-            BiomeKeys.DEEP_LUKEWARM_OCEAN,
             BiomeKeys.BEACH
         )
 
@@ -218,6 +220,8 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_COLD_OCEAN,
             BiomeKeys.DEEP_OCEAN,
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
+            BiomeKeys.LUKEWARM_OCEAN,
+            BiomeKeys.WARM_OCEAN,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.FLASHLIGHT_FISH_SPAWN_BIOMES).add(
@@ -272,14 +276,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.DEEP_LUKEWARM_OCEAN,
             BiomeKeys.OCEAN,
             BiomeKeys.LUKEWARM_OCEAN,
-        )
-
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.HERMIT_CRAB_SPAWN_BIOMES).add(
-            BiomeKeys.OCEAN,
-            BiomeKeys.WARM_OCEAN,
-            BiomeKeys.LUKEWARM_OCEAN,
-            BiomeKeys.BEACH,
-            BiomeKeys.STONY_SHORE,
         )
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.LIONFISH_SPAWN_BIOMES).add(

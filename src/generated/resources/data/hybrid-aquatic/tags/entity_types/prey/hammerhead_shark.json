@@ -1,7 +1,13 @@
 {
   "replace": false,
   "values": [
-    "#hybrid-aquatic:small_prey",
-    "#hybrid-aquatic:crab"
+    "#hybrid-aquatic:crab",
+    "#hybrid-aquatic:shrimp",
+    "hybrid-aquatic:blue_spotted_stingray",
+    "hybrid-aquatic:firefly_squid",
+    "hybrid-aquatic:cuttlefish",
+    "minecraft:tropical_fish",
+    "minecraft:cod",
+    "minecraft:salmon"
   ]
 }
