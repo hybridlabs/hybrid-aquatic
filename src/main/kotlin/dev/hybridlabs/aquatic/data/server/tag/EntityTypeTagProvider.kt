@@ -13,28 +13,13 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
         // can breathe
         getOrCreateTagBuilder(EntityTypeTags.CAN_BREATHE_UNDER_WATER)
-            .add(
-                HybridAquaticEntityTypes.COCONUT_CRAB,
-                HybridAquaticEntityTypes.DUNGENESS_CRAB,
-                HybridAquaticEntityTypes.CRAYFISH,
-                HybridAquaticEntityTypes.FIDDLER_CRAB,
-                HybridAquaticEntityTypes.FLOWER_CRAB,
-                HybridAquaticEntityTypes.GHOST_CRAB,
-                HybridAquaticEntityTypes.GIANT_ISOPOD,
-                HybridAquaticEntityTypes.HERMIT_CRAB,
-                HybridAquaticEntityTypes.HORSESHOE_CRAB,
-                HybridAquaticEntityTypes.LIGHTFOOT_CRAB,
-                HybridAquaticEntityTypes.LOBSTER,
-                HybridAquaticEntityTypes.SHRIMP,
-                HybridAquaticEntityTypes.SPIDER_CRAB,
-                HybridAquaticEntityTypes.VAMPIRE_CRAB,
-                HybridAquaticEntityTypes.YETI_CRAB,
-                HybridAquaticEntityTypes.KARKINOS,
-                HybridAquaticEntityTypes.NUDIBRANCH,
-                HybridAquaticEntityTypes.SEA_CUCUMBER,
-                HybridAquaticEntityTypes.SEA_URCHIN,
-                HybridAquaticEntityTypes.STARFISH,
-            )
+            .addTag(HybridAquaticEntityTags.JELLYFISH)
+            .addTag(HybridAquaticEntityTags.FISHES)
+            .addTag(HybridAquaticEntityTags.SHARKS)
+            .addTag(HybridAquaticEntityTags.CRITTER)
+            .addTag(HybridAquaticEntityTags.CRAB)
+            .addTag(HybridAquaticEntityTags.SHRIMP)
+            .add(HybridAquaticEntityTypes.KARKINOS)
 
         // prey source
         getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_PREY)
@@ -446,45 +431,44 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         // fishes
         getOrCreateTagBuilder(HybridAquaticEntityTags.FISHES)
             .add(
-                HybridAquaticEntityTypes.CLOWNFISH,
                 HybridAquaticEntityTypes.ANGLERFISH,
                 HybridAquaticEntityTypes.BARRELEYE,
-                HybridAquaticEntityTypes.YELLOWFIN_TUNA,
+                HybridAquaticEntityTypes.BETTA,
+                HybridAquaticEntityTypes.BLUE_SPOTTED_STINGRAY,
+                HybridAquaticEntityTypes.BLUE_TANG,
+                HybridAquaticEntityTypes.CLOWNFISH,
+                HybridAquaticEntityTypes.COWFISH,
                 HybridAquaticEntityTypes.CUTTLEFISH,
+                HybridAquaticEntityTypes.DISCUS,
+                HybridAquaticEntityTypes.DRAGONFISH,
+                HybridAquaticEntityTypes.FIREFLY_SQUID,
                 HybridAquaticEntityTypes.FLASHLIGHT_FISH,
+                HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS,
+                HybridAquaticEntityTypes.GOURAMI,
                 HybridAquaticEntityTypes.LIONFISH,
-                HybridAquaticEntityTypes.OARFISH,
-                HybridAquaticEntityTypes.OPAH,
-                HybridAquaticEntityTypes.PIRANHA,
-                HybridAquaticEntityTypes.SEA_ANGEL,
-                HybridAquaticEntityTypes.SUNFISH,
-                HybridAquaticEntityTypes.VAMPIRE_SQUID,
                 HybridAquaticEntityTypes.MAHIMAHI,
                 HybridAquaticEntityTypes.MORAY_EEL,
-                HybridAquaticEntityTypes.ROCKFISH,
-                HybridAquaticEntityTypes.TIGER_BARB,
-                HybridAquaticEntityTypes.NEEDLEFISH,
-                HybridAquaticEntityTypes.RATFISH,
                 HybridAquaticEntityTypes.NAUTILUS,
-                HybridAquaticEntityTypes.TRIGGERFISH,
+                HybridAquaticEntityTypes.NEEDLEFISH,
+                HybridAquaticEntityTypes.OARFISH,
+                HybridAquaticEntityTypes.OPAH,
                 HybridAquaticEntityTypes.OSCAR,
-                HybridAquaticEntityTypes.UNICORN_FISH,
-                HybridAquaticEntityTypes.ZEBRA_DANIO,
-                HybridAquaticEntityTypes.TOADFISH,
-                HybridAquaticEntityTypes.TETRA,
-                HybridAquaticEntityTypes.STONEFISH,
-                HybridAquaticEntityTypes.BETTA,
+                HybridAquaticEntityTypes.PIRANHA,
+                HybridAquaticEntityTypes.RATFISH,
+                HybridAquaticEntityTypes.ROCKFISH,
+                HybridAquaticEntityTypes.SEA_ANGEL,
                 HybridAquaticEntityTypes.SEAHORSE,
-                HybridAquaticEntityTypes.MOON_JELLYFISH,
-                HybridAquaticEntityTypes.GOURAMI,
-                HybridAquaticEntityTypes.COWFISH,
-                HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS,
+                HybridAquaticEntityTypes.STONEFISH,
+                HybridAquaticEntityTypes.SUNFISH,
+                HybridAquaticEntityTypes.TETRA,
+                HybridAquaticEntityTypes.TIGER_BARB,
+                HybridAquaticEntityTypes.TOADFISH,
+                HybridAquaticEntityTypes.TRIGGERFISH,
                 HybridAquaticEntityTypes.UMBRELLA_OCTOPUS,
-                HybridAquaticEntityTypes.DISCUS,
-                HybridAquaticEntityTypes.FIREFLY_SQUID,
-                HybridAquaticEntityTypes.DRAGONFISH,
-                HybridAquaticEntityTypes.BLUE_SPOTTED_STINGRAY,
-                HybridAquaticEntityTypes.BLUE_TANG
+                HybridAquaticEntityTypes.UNICORN_FISH,
+                HybridAquaticEntityTypes.VAMPIRE_SQUID,
+                HybridAquaticEntityTypes.YELLOWFIN_TUNA,
+                HybridAquaticEntityTypes.ZEBRA_DANIO,
             )
 
         // sharks
@@ -533,6 +517,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HybridAquaticEntityTags.JELLYFISH)
             .add(
                 HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH,
+                HybridAquaticEntityTypes.NOMURA_JELLYFISH,
+                HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH,
                 HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH,
                 HybridAquaticEntityTypes.MOON_JELLYFISH,
                 HybridAquaticEntityTypes.MAUVE_STINGER,
