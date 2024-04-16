@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stick",
-      "has_glow_slime",
-      "has_the_recipe"
+      "has_glow_slime"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:glowstick"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
