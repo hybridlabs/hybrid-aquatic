@@ -54,12 +54,6 @@ open class HybridAquaticCrustaceanEntity(
             dataTracker.set(IS_DIGGING, bool)
         }
 
-    private var moistness: Int
-        get() = dataTracker.get(MOISTNESS)
-        set(moistness) {
-            dataTracker.set(MOISTNESS, moistness)
-        }
-
     var variant: Int
         get() = dataTracker.get(VARIANT).coerceAtLeast(0).coerceAtMost(variantCount-1)
         set(int) {
@@ -79,7 +73,6 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     override fun initDataTracker() {
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
         dataTracker.startTracking(IS_DIGGING, false)
         dataTracker.startTracking(ATTEMPT_ATTACK, false)
         dataTracker.startTracking(VARIANT, 0)
@@ -149,16 +142,6 @@ open class HybridAquaticCrustaceanEntity(
         if (isAiDisabled) {
             return
         }
-
-        if (isWet) {
-            moistness = getMaxMoistness()
-        } else {
-            moistness -= 1
-            if (moistness <= -20) {
-                moistness = 0
-                damage(this.damageSources.dryOut(), 1.0f)
-            }
-        }
     }
 
     override fun tickMovement() {
@@ -174,19 +157,9 @@ open class HybridAquaticCrustaceanEntity(
         return true
     }
 
-    override fun tickWaterBreathingAir(air: Int) {}
-
-    private fun getMaxMoistness(): Int {
-        return if (canWalkOnLand)
-            -1
-        else
-            1200
-    }
-
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         nbt.putInt(DIGGING_COOLDOWN_KEY, diggingCooldown)
-        nbt.putInt(MOISTNESS_KEY, moistness)
         nbt.putInt(VARIANT_KEY, variant)
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
     }
@@ -194,7 +167,6 @@ open class HybridAquaticCrustaceanEntity(
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         diggingCooldown = nbt.getInt(DIGGING_COOLDOWN_KEY)
-        moistness = nbt.getInt(MOISTNESS_KEY)
         variant = nbt.getInt(VARIANT_KEY).coerceAtLeast(0).coerceAtMost(variantCount-1)
         size = nbt.getInt(CRUSTACEAN_SIZE_KEY)
     }
@@ -241,17 +213,19 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     internal open class AttackGoal(private val crab: HybridAquaticCrustaceanEntity) : MeleeAttackGoal(crab, 0.4,true) {
-        override fun attack(target: LivingEntity) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (target.squaredDistanceTo(mob) <= d && this.isCooledDown) {
-                resetCooldown()
-                mob.tryAttack(target)
-                crab.attemptAttack = true
+        internal open class AttackGoal(private val crab: HybridAquaticCrustaceanEntity) : MeleeAttackGoal(crab, 0.4,true) {
+            override fun attack(target: LivingEntity) {
+                val d = getSquaredMaxAttackDistance(target)
+                if (target.squaredDistanceTo(mob) <= d && this.isCooledDown) {
+                    resetCooldown()
+                    mob.tryAttack(target)
+                    crab.attemptAttack = true
+                }
             }
-        }
 
-        private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (0.25f + entity.width).toDouble()
+            private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
+                return (0.25f + entity.width).toDouble()
+            }
         }
 
         override fun start() {
@@ -266,7 +240,6 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     companion object {
-        val MOISTNESS: TrackedData<Int> = DataTracker.registerData(HybridAquaticCrustaceanEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val VARIANT: TrackedData<Int> = DataTracker.registerData(HybridAquaticCrustaceanEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CRUSTACEAN_SIZE: TrackedData<Int> = DataTracker.registerData(HybridAquaticCrustaceanEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val ATTEMPT_ATTACK: TrackedData<Boolean> = DataTracker.registerData(HybridAquaticCrustaceanEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
@@ -312,7 +285,6 @@ open class HybridAquaticCrustaceanEntity(
             return 1.0f + (critter.size * adjustment)
         }
 
-        const val MOISTNESS_KEY = "Moistness"
         const val VARIANT_KEY = "Variant"
         const val CRUSTACEAN_SIZE_KEY = "FishSize"
 
