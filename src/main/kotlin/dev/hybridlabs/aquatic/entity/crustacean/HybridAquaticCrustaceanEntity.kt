@@ -183,6 +183,17 @@ open class HybridAquaticCrustaceanEntity(
         return SoundEvents.ENTITY_COD_AMBIENT
     }
 
+    override fun tickWaterBreathingAir(air: Int) {}
+
+    override fun getLimitPerChunk(): Int {
+        return 8
+    }
+
+    override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
+        return !hasCustomName()
+    }
+
+
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             AnimationController(
@@ -213,19 +224,17 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     internal open class AttackGoal(private val crab: HybridAquaticCrustaceanEntity) : MeleeAttackGoal(crab, 0.4,true) {
-        internal open class AttackGoal(private val crab: HybridAquaticCrustaceanEntity) : MeleeAttackGoal(crab, 0.4,true) {
-            override fun attack(target: LivingEntity) {
-                val d = getSquaredMaxAttackDistance(target)
-                if (target.squaredDistanceTo(mob) <= d && this.isCooledDown) {
-                    resetCooldown()
-                    mob.tryAttack(target)
-                    crab.attemptAttack = true
-                }
+        override fun attack(target: LivingEntity) {
+            val d = getSquaredMaxAttackDistance(target)
+            if (target.squaredDistanceTo(mob) <= d && this.isCooledDown) {
+                resetCooldown()
+                mob.tryAttack(target)
+                crab.attemptAttack = true
             }
+        }
 
-            private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-                return (0.25f + entity.width).toDouble()
-            }
+        private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
+            return (0.25f + entity.width).toDouble()
         }
 
         override fun start() {

@@ -84,7 +84,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.THORN_CORAL_FAN to "Thorn Coral Fan",
             HybridAquaticBlocks.DEAD_THORN_CORAL_FAN to "Dead Thorn Coral Fan",
             HybridAquaticBlocks.GLOWSTICK to "Glowstick",
-            HybridAquaticBlocks.WALL_GLOWSTICK to "Wall Glowstick",
             HybridAquaticBlocks.DRIFTWOOD_LOG to "Driftwood Log",
             HybridAquaticBlocks.DRIFTWOOD_WOOD to "Driftwood Wood",
             HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG to "Stripped Driftwood Log",

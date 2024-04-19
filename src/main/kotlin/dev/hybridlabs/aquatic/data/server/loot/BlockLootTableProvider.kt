@@ -4,9 +4,14 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.MESSAGE_KEY
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.VARIANT_KEY
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
+import net.minecraft.block.Blocks
+import net.minecraft.block.CoralWallFanBlock
+import net.minecraft.block.DeadCoralWallFanBlock
+import net.minecraft.block.WallTorchBlock
 import net.minecraft.item.BlockItem.BLOCK_ENTITY_TAG_KEY
 import net.minecraft.item.Items
 import net.minecraft.item.WrittenBookItem.*
@@ -34,7 +39,6 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         }
 
         //region wood
-
         addDrop(HybridAquaticBlocks.DRIFTWOOD_LOG)
         addDrop(HybridAquaticBlocks.DRIFTWOOD_WOOD)
         addDrop(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG)
@@ -48,6 +52,25 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         addDrop(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE)
         addDrop(HybridAquaticBlocks.DRIFTWOOD_SLAB, slabDrops(HybridAquaticBlocks.DRIFTWOOD_SLAB))
         addDrop(HybridAquaticBlocks.DRIFTWOOD_DOOR, doorDrops(HybridAquaticBlocks.DRIFTWOOD_DOOR))
+
+        addDrop(HybridAquaticBlocks.GLOWSTICK)
+
+        //endregion
+
+        //region corals
+        addDropWithSilkTouch(HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK)
+        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK)
+        addDropWithSilkTouch(HybridAquaticBlocks.LOPHELIA_CORAL)
+        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL)
+        addDropWithSilkTouch(HybridAquaticBlocks.LOPHELIA_CORAL_FAN)
+        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN)
+
+        addDropWithSilkTouch(HybridAquaticBlocks.THORN_CORAL_BLOCK)
+        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK)
+        addDropWithSilkTouch(HybridAquaticBlocks.THORN_CORAL)
+        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_THORN_CORAL)
+        addDropWithSilkTouch(HybridAquaticBlocks.THORN_CORAL_FAN)
+        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_THORN_CORAL_FAN)
 
         //endregion
 
@@ -231,7 +254,10 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         // generate remaining drops
         Registries.BLOCK
             .filter(filterHybridAquatic(Registries.BLOCK))
-            .filter { block -> block.lootTableId !in lootTables }
+            .filter { block ->
+                block !is WallTorchBlock && block !is DeadCoralWallFanBlock
+                        && block.lootTableId !in lootTables
+            }
             .forEach(::addDrop)
     }
 }

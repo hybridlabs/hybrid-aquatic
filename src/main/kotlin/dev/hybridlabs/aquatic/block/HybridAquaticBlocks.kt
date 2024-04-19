@@ -10,7 +10,6 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.block.enums.Instrument
 import net.minecraft.block.piston.PistonBehavior
-import net.minecraft.particle.ParticleTypes.GLOW
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.sound.BlockSoundGroup
@@ -100,25 +99,25 @@ object HybridAquaticBlocks {
     val DRIFTWOOD_DOOR = register("driftwood_door", DoorBlock(HybridAquaticBlockSetTypes.DRIFTWOOD, FabricBlockSettings.copyOf(Blocks.OAK_DOOR)))
     val DRIFTWOOD_TRAPDOOR = register("driftwood_trapdoor", TrapdoorBlock(HybridAquaticBlockSetTypes.DRIFTWOOD, FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)))
 
-    val DEAD_LOPHELIA_CORAL_BLOCK = register("dead_lophelia_coral_block", DeadCoralBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_BLOCK)))
-    val LOPHELIA_CORAL_BLOCK = register("lophelia_coral_block", CoralBlockBlock(DEAD_LOPHELIA_CORAL_BLOCK, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_BLOCK)))
+    val DEAD_LOPHELIA_CORAL_BLOCK = register("dead_lophelia_coral_block", DeadCoralBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.OFF_WHITE).instrument(Instrument.BASEDRUM).requiresTool().hardness(1.0F).sounds(BlockSoundGroup.CORAL)))
+    val LOPHELIA_CORAL_BLOCK = register("lophelia_coral_block", CoralBlockBlock(DEAD_LOPHELIA_CORAL_BLOCK, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_BLOCK).mapColor(MapColor.OFF_WHITE).instrument(Instrument.BASEDRUM).requiresTool().hardness(1.0F).sounds(BlockSoundGroup.CORAL)))
     val DEAD_LOPHELIA_CORAL_FAN = register("dead_lophelia_coral_fan", DeadCoralFanBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_FAN)))
     val LOPHELIA_CORAL_FAN = register("lophelia_coral_fan", CoralFanBlock(DEAD_LOPHELIA_CORAL_FAN, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_FAN)))
-    val DEAD_LOPHELIA_CORAL_WALL_FAN = register("dead_lophelia_coral_wall_fan", DeadCoralWallFanBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_WALL_FAN)))
-    val LOPHELIA_CORAL_WALL_FAN = register("lophelia_coral_wall_fan", CoralWallFanBlock(DEAD_LOPHELIA_CORAL_WALL_FAN, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_WALL_FAN)))
     val DEAD_LOPHELIA_CORAL = register("dead_lophelia_coral", DeadCoralBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL)))
+    val DEAD_LOPHELIA_CORAL_WALL_FAN = register("dead_lophelia_coral_wall_fan", DeadCoralWallFanBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_WALL_FAN).dropsLike(DEAD_LOPHELIA_CORAL)))
     val LOPHELIA_CORAL = register("lophelia_coral", CoralBlock(DEAD_LOPHELIA_CORAL, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL)))
-    val DEAD_THORN_CORAL_BLOCK = register("dead_thorn_coral_block", DeadCoralBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_BLOCK)))
-    val THORN_CORAL_BLOCK = register("thorn_coral_block", CoralBlockBlock(DEAD_THORN_CORAL_BLOCK, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_BLOCK)))
+    val LOPHELIA_CORAL_WALL_FAN = register("lophelia_coral_wall_fan", CoralWallFanBlock(DEAD_LOPHELIA_CORAL_WALL_FAN, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(LOPHELIA_CORAL)))
+    val DEAD_THORN_CORAL_BLOCK = register("dead_thorn_coral_block", DeadCoralBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.OFF_WHITE).instrument(Instrument.BASEDRUM).requiresTool().hardness(1.0F).sounds(BlockSoundGroup.CORAL)))
+    val THORN_CORAL_BLOCK = register("thorn_coral_block", CoralBlockBlock(DEAD_THORN_CORAL_BLOCK, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_BLOCK).mapColor(MapColor.OFF_WHITE).instrument(Instrument.BASEDRUM).requiresTool().hardness(1.0F).sounds(BlockSoundGroup.CORAL)))
     val DEAD_THORN_CORAL_FAN = register("dead_thorn_coral_fan", DeadCoralFanBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_FAN)))
     val THORN_CORAL_FAN = register("thorn_coral_fan", CoralFanBlock(DEAD_THORN_CORAL_FAN, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_FAN)))
-    val DEAD_THORN_CORAL_WALL_FAN = register("dead_thorn_coral_wall_fan", DeadCoralWallFanBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_WALL_FAN)))
-    val THORN_CORAL_WALL_FAN = register("thorn_coral_wall_fan", CoralWallFanBlock(DEAD_THORN_CORAL_WALL_FAN, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_WALL_FAN)))
     val DEAD_THORN_CORAL = register("dead_thorn_coral", DeadCoralBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL)))
+    val DEAD_THORN_CORAL_WALL_FAN = register("dead_thorn_coral_wall_fan", DeadCoralWallFanBlock(FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_WALL_FAN).dropsLike(DEAD_THORN_CORAL)))
     val THORN_CORAL = register("thorn_coral", CoralBlock(DEAD_THORN_CORAL, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL)))
+    val THORN_CORAL_WALL_FAN = register("thorn_coral_wall_fan", CoralWallFanBlock(DEAD_THORN_CORAL_WALL_FAN, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(THORN_CORAL)))
 
-    val GLOWSTICK = register("glowstick", GlowstickBlock(FabricBlockSettings.copyOf(Blocks.TORCH).noCollision().luminance(14).nonOpaque()))
-    val WALL_GLOWSTICK = register("wall_glowstick", WallTorchBlock(GLOW, FabricBlockSettings.copyOf(Blocks.WALL_TORCH).noCollision().luminance(14).nonOpaque()))
+    val GLOWSTICK = register("glowstick", GlowstickBlock(FabricBlockSettings.copyOf(Blocks.TORCH).noCollision().luminance(GlowstickBlock::luminance).nonOpaque()))
+    val WALL_GLOWSTICK = register("wall_glowstick", WallGlowstickBlock(FabricBlockSettings.copyOf(Blocks.WALL_TORCH).dropsLike(GLOWSTICK).noCollision().luminance(GlowstickBlock::luminance).nonOpaque()))
 
     val TUBE_SPONGE = register("tube_sponge", TubeSpongeBlock(FabricBlockSettings.copyOf(Blocks.WET_SPONGE)
         .nonOpaque()

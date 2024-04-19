@@ -1,20 +1,20 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.TorchBlock
-import net.minecraft.block.Waterloggable
+import net.minecraft.block.*
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.particle.ParticleTypes.BUBBLE_COLUMN_UP
 import net.minecraft.particle.ParticleTypes.GLOW
+import net.minecraft.registry.tag.FluidTags
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.WorldAccess
+import net.minecraft.world.WorldView
 
-class GlowstickBlock(settings: Settings) : TorchBlock(GLOW, settings), Waterloggable {
+class WallGlowstickBlock(settings: Settings) : WallTorchBlock(GLOW, settings), Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(Properties.WATERLOGGED, false)
     }
@@ -44,12 +44,6 @@ class GlowstickBlock(settings: Settings) : TorchBlock(GLOW, settings), Waterlogg
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        builder.add(Properties.WATERLOGGED)
-    }
-
-    companion object {
-        fun luminance(state: BlockState): Int {
-            return if (state.get(Properties.WATERLOGGED)) 14 else 0
-        }
+        super.appendProperties(builder.add(Properties.WATERLOGGED))
     }
 }

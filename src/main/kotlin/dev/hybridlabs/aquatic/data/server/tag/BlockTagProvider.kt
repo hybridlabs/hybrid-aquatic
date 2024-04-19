@@ -81,6 +81,13 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN)
             .add(HybridAquaticBlocks.THORN_CORAL_WALL_FAN)
 
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
+            .add(HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK)
+            .add(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK)
+            .add(HybridAquaticBlocks.THORN_CORAL_BLOCK)
+            .add(HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK)
+
+
         // plushies
         Registries.BLOCK
             .filter(filterHybridAquatic(Registries.BLOCK))

@@ -13,6 +13,7 @@ import net.minecraft.item.*
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.Direction
 
 object HybridAquaticItems {
 
@@ -424,7 +425,8 @@ object HybridAquaticItems {
     val TIGER_SHARK_PLUSHIE = registerBlockItem("tiger_shark_plushie", HybridAquaticBlocks.TIGER_SHARK_PLUSHIE)
     val WHALE_SHARK_PLUSHIE = registerBlockItem("whale_shark_plushie", HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
 
-    val GLOWSTICK = registerBlockItem("glowstick", HybridAquaticBlocks.GLOWSTICK)
+    val GLOWSTICK = registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
+
     val HYBRID_CRATE = registerBlockItem("hybrid_crate", HybridAquaticBlocks.HYBRID_CRATE)
     val DRIFTWOOD_CRATE = registerBlockItem("driftwood_crate", HybridAquaticBlocks.DRIFTWOOD_CRATE)
     val OAK_CRATE = registerBlockItem("oak_crate", HybridAquaticBlocks.OAK_CRATE)
@@ -454,14 +456,14 @@ object HybridAquaticItems {
     val DEAD_LOPHELIA_CORAL_BLOCK = registerBlockItem("dead_lophelia_coral_block", HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK)
     val LOPHELIA_CORAL = registerBlockItem("lophelia_coral", HybridAquaticBlocks.LOPHELIA_CORAL)
     val DEAD_LOPHELIA_CORAL = registerBlockItem("dead_lophelia_coral", HybridAquaticBlocks.DEAD_LOPHELIA_CORAL)
-    val LOPHELIA_CORAL_FAN = registerBlockItem("lophelia_coral_fan", HybridAquaticBlocks.LOPHELIA_CORAL_FAN)
-    val DEAD_LOPHELIA_CORAL_FAN = registerBlockItem("dead_lophelia_coral_fan", HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN)
+    val LOPHELIA_CORAL_FAN = registerVerticallyAttachable("lophelia_coral_fan", HybridAquaticBlocks.LOPHELIA_CORAL_FAN, HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN)
+    val DEAD_LOPHELIA_CORAL_FAN = registerVerticallyAttachable("dead_lophelia_coral_fan", HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN, HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN)
     val THORN_CORAL_BLOCK = registerBlockItem("thorn_coral_block", HybridAquaticBlocks.THORN_CORAL_BLOCK)
     val DEAD_THORN_CORAL_BLOCK = registerBlockItem("dead_thorn_coral_block", HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK)
     val THORN_CORAL = registerBlockItem("thorn_coral", HybridAquaticBlocks.THORN_CORAL)
     val DEAD_THORN_CORAL = registerBlockItem("dead_thorn_coral", HybridAquaticBlocks.DEAD_THORN_CORAL)
-    val THORN_CORAL_FAN = registerBlockItem("thorn_coral_fan", HybridAquaticBlocks.THORN_CORAL_FAN)
-    val DEAD_THORN_CORAL_FAN = registerBlockItem("dead_thorn_coral_fan", HybridAquaticBlocks.DEAD_THORN_CORAL_FAN)
+    val THORN_CORAL_FAN = registerVerticallyAttachable("thorn_coral_fan", HybridAquaticBlocks.THORN_CORAL_FAN, HybridAquaticBlocks.THORN_CORAL_WALL_FAN)
+    val DEAD_THORN_CORAL_FAN = registerVerticallyAttachable("dead_thorn_coral_fan", HybridAquaticBlocks.DEAD_THORN_CORAL_FAN, HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN)
 
     // fish spawn eggs
     val ANGLERFISH_SPAWN_EGG = registerSpawnEgg("anglerfish_spawn_egg", HybridAquaticEntityTypes.ANGLERFISH, 0x4d4848, 0xc4faff)
@@ -569,5 +571,9 @@ object HybridAquaticItems {
 
     private fun registerPlaceableInWaterBlockItem(id: String, block: Block): Item {
         return register(id, PlaceableInWaterItem(block, FabricItemSettings()))
+    }
+
+    private fun registerVerticallyAttachable(id: String, standingBlock: Block, wallBlock: Block, direction: Direction = Direction.DOWN): Item {
+        return register(id, VerticallyAttachableBlockItem(standingBlock, wallBlock, FabricItemSettings(), direction))
     }
 }
