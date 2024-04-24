@@ -26,6 +26,30 @@ class FishingLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
                                 .weight(5)
                         )
                         .with(
+                            ItemEntry.builder(HybridAquaticItems.GOURAMI)
+                                .weight(5)
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.FLASHLIGHT_FISH)
+                                .weight(5)
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.DISCUS)
+                                .weight(5)
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.BETTA)
+                                .weight(5)
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.DANIO)
+                                .weight(5)
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.TETRA)
+                                .weight(5)
+                        )
+                        .with(
                             ItemEntry.builder(HybridAquaticItems.MAHI_MAHI)
                                 .weight(3)
                         )
