@@ -479,7 +479,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.THRESHER_SHARK,
                 HybridAquaticEntityTypes.FRILLED_SHARK,
                 HybridAquaticEntityTypes.GREAT_WHITE_SHARK,
-                HybridAquaticEntityTypes.TIGER_BARB,
+                HybridAquaticEntityTypes.TIGER_SHARK,
                 HybridAquaticEntityTypes.HAMMERHEAD_SHARK,
                 HybridAquaticEntityTypes.WHALE_SHARK,
             )
