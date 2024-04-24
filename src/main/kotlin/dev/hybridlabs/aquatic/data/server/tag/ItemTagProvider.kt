@@ -85,6 +85,53 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             getOrCreateTagBuilder(HybridAquaticItemTags.CRAB_CLAW).add(item)
         }
 
+        listOf(
+            HybridAquaticItems.ANGLERFISH,
+            HybridAquaticItems.BARRELEYE,
+            HybridAquaticItems.CLOWNFISH,
+            HybridAquaticItems.ROCKFISH,
+            HybridAquaticItems.YELLOWFIN_TUNA,
+            HybridAquaticItems.BLUE_TANG,
+            HybridAquaticItems.UNICORN_FISH,
+            HybridAquaticItems.TRIGGERFISH,
+            HybridAquaticItems.OSCAR,
+            HybridAquaticItems.OPAH,
+            HybridAquaticItems.MAHI_MAHI,
+            HybridAquaticItems.NEEDLEFISH,
+            HybridAquaticItems.BLUE_SPOTTED_STINGRAY,
+            HybridAquaticItems.LIONFISH,
+            HybridAquaticItems.MORAY_EEL,
+            HybridAquaticItems.PIRANHA,
+            HybridAquaticItems.TETRA,
+            HybridAquaticItems.DANIO,
+            HybridAquaticItems.GOURAMI,
+            HybridAquaticItems.BETTA,
+            HybridAquaticItems.DISCUS,
+            HybridAquaticItems.RATFISH,
+            HybridAquaticItems.TIGER_BARB,
+            HybridAquaticItems.RAW_FISH_MEAT,
+            HybridAquaticItems.RAW_FISH_STEAK,
+            HybridAquaticItems.RAW_TENTACLE,
+            HybridAquaticItems.RAW_CRAB,
+            HybridAquaticItems.RAW_SHRIMP,
+            HybridAquaticItems.RAW_LOBSTER,
+            HybridAquaticItems.RAW_CRAYFISH,
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridAquaticItemTags.RAW_FISHES).add(item)
+        }
+
+        listOf(
+            HybridAquaticItems.COOKED_FISH_MEAT,
+            HybridAquaticItems.COOKED_FISH_STEAK,
+            HybridAquaticItems.COOKED_TENTACLE,
+            HybridAquaticItems.COOKED_CRAB,
+            HybridAquaticItems.COOKED_SHRIMP,
+            HybridAquaticItems.COOKED_LOBSTER,
+            HybridAquaticItems.COOKED_CRAYFISH,
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridAquaticItemTags.COOKED_FISHES).add(item)
+        }
+
         // plushies
         Registries.ITEM
             .filter(filterHybridAquatic(Registries.ITEM))

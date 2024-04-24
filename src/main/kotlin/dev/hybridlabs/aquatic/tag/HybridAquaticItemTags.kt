@@ -20,6 +20,9 @@ object HybridAquaticItemTags {
 
     val DRIFTWOOD_LOG_WOOD = create("driftwood_log_wood")
 
+    val RAW_FISHES = createConventional("foods/raw_fishes")
+    val COOKED_FISHES = createConventional("foods/cooked_fishes")
+
     private fun create(id: String): TagKey<Item> {
         return TagKey.of(RegistryKeys.ITEM, Identifier(HybridAquatic.MOD_ID, id))
     }
