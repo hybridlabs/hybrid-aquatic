@@ -88,10 +88,6 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, worl
         return false
     }
 
-    override fun canBreatheInWater(): Boolean {
-        return true
-    }
-
     override fun registerControllers(controllerRegistrar: ControllerRegistrar) {
         controllerRegistrar.add(AnimationController(this, "controller", ::predicate))
         controllerRegistrar.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_STRIKE))
@@ -111,7 +107,8 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, worl
     }
 
     internal open class AttackGoal(private val miniboss: HybridAquaticMinibossEntity) : MeleeAttackGoal(miniboss, 0.6, false) {
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
+        override fun attack(target: LivingEntity) {
+            val squaredDistance = target.squaredDistanceTo(mob)
             val d = getSquaredMaxAttackDistance(target)
             if (squaredDistance <= d && this.isCooledDown) {
                 resetCooldown()
@@ -120,7 +117,7 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, worl
             }
         }
 
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
+        private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
             return (4.0f + entity.width).toDouble()
         }
 

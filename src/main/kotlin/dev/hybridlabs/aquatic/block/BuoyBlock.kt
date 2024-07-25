@@ -3,11 +3,8 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
-import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.block.entity.BlockEntityTicker
-import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
@@ -18,25 +15,13 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
-import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
+@Suppress("DEPRECATION")
 open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(Properties.WATERLOGGED, false)
-    }
-
-    override fun <T : BlockEntity> getTicker(
-        world: World,
-        state: BlockState,
-        type: BlockEntityType<T>
-    ): BlockEntityTicker<T>? {
-        return if(world.isClient) {
-            null
-        } else {
-            BlockWithEntity.validateTicker(type, HybridAquaticBlockEntityTypes.BUOY, BuoyBlockEntity::tick)
-        }
     }
 
     override fun getRenderType(state: BlockState): BlockRenderType {

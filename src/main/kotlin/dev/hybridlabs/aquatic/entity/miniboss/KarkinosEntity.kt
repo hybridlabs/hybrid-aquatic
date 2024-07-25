@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.entity.miniboss
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.enchantment.Enchantments
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
@@ -46,11 +45,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     private var flipTimer: Int = 0
     private val flipDuration: Int = 60
     private var bossBar: ServerBossBar = ServerBossBar(displayName, BossBar.Color.RED, BossBar.Style.NOTCHED_20)
-    private var attemptAttack: Boolean
-        get() = dataTracker.get(ATTEMPT_ATTACK)
-        set(attemptAttack) {
-            dataTracker.set(ATTEMPT_ATTACK, attemptAttack)
-        }
     var isFlipped: Boolean
         get() = dataTracker.get(FLIPPED)
         set(bool) = dataTracker.set(FLIPPED, bool)
@@ -61,7 +55,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     }
 
     override fun initGoals() {
-        goalSelector.add(1, AttackGoal(this))
+        goalSelector.add(1, KarkinosAttackGoal(this))
         goalSelector.add(1, LookAtEntityGoal(this, PlayerEntity::class.java, 12.0f))
         goalSelector.add(4, KarkinosWanderAroundGoal(this, 0.3))
         goalSelector.add(4, LookAroundGoal(this))
@@ -187,32 +181,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         val FLIPPED: TrackedData<Boolean> = DataTracker.registerData(KarkinosEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
     }
 
-    internal open class AttackGoal(private val karkinos: KarkinosEntity) : MeleeAttackGoal(karkinos, 0.7, false) {
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
-                resetCooldown()
-                mob.tryAttack(target)
-                karkinos.attemptAttack = true
-            }
-            if (!this.isCooledDown)
-                karkinos.handSwinging
-        }
-
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (4.0f + entity.width).toDouble()
-        }
-
-        override fun start() {
-            super.start()
-            karkinos.attemptAttack = false
-        }
-
-        override fun stop() {
-            super.stop()
-            karkinos.attemptAttack = false
-        }
-
+    private class KarkinosAttackGoal(private val karkinos: KarkinosEntity) : AttackGoal(karkinos) {
         override fun shouldContinue(): Boolean {
             return !karkinos.isFlipped && super.shouldContinue()
         }

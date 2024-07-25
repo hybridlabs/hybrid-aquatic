@@ -6,17 +6,15 @@ import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.particle.ParticleTypes.GLOW
-import net.minecraft.particle.ParticleTypes.SMOKE
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
-class GlowstickBlock(settings: Settings) : TorchBlock(settings, GLOW), Waterloggable {
+class GlowstickBlock(settings: Settings) : TorchBlock(GLOW, settings), Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(Properties.WATERLOGGED, false)
     }
@@ -43,15 +41,6 @@ class GlowstickBlock(settings: Settings) : TorchBlock(settings, GLOW), Waterlogg
         return if (fluidState.isIn(FluidTags.WATER)) defaultState.with(
             Properties.WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).isOf(
                 Fluids.WATER)) else null
-    }
-
-    override fun getOutlineShape(
-        state: BlockState?,
-        world: BlockView?,
-        pos: BlockPos?,
-        context: ShapeContext?
-    ): VoxelShape {
-        return BOUNDING_SHAPE
     }
 
     override fun getFluidState(state: BlockState): FluidState {

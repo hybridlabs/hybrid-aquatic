@@ -245,10 +245,6 @@ open class HybridAquaticCritterEntity(
         return factory
     }
 
-    override fun canBreatheInWater(): Boolean {
-        return true
-    }
-
     private var variantData: NbtCompound
         get() = dataTracker.get(VARIANT_DATA)
         set(value) {

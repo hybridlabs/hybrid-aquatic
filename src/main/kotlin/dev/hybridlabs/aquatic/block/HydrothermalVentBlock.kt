@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.block.*
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -26,7 +28,7 @@ class HydrothermalVentBlock(settings: Settings?) :
     override fun getPlant(): Block {
         return HybridAquaticBlocks.HYDROTHERMAL_VENT_SHAFT
     }
-    override fun isFertilizable(world: WorldView?, pos: BlockPos?, state: BlockState?, isClient: Boolean): Boolean {
+    override fun isFertilizable(world: WorldView?, pos: BlockPos?, state: BlockState?): Boolean {
         return false
     }
 
@@ -40,7 +42,13 @@ class HydrothermalVentBlock(settings: Settings?) :
         return COLLISION_SHAPE
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(
+        player: PlayerEntity?,
+        world: BlockView?,
+        pos: BlockPos?,
+        state: BlockState?,
+        fluid: Fluid?
+    ): Boolean {
         return false
     }
 
@@ -81,6 +89,10 @@ class HydrothermalVentBlock(settings: Settings?) :
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
         val fluidState = ctx.world.getFluidState(ctx.blockPos)
         return if (fluidState.isIn(FluidTags.WATER) && fluidState.level == 8) super.getPlacementState(ctx) else null
+    }
+
+    override fun getCodec(): MapCodec<out AbstractPlantStemBlock> {
+        TODO("Not yet implemented")
     }
 
     @Deprecated("Deprecated in Java", ReplaceWith("Fluids.WATER.getStill(false)", "net.minecraft.fluid.Fluids"))

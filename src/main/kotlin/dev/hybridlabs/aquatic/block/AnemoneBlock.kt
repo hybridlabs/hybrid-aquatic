@@ -4,20 +4,13 @@ import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import net.minecraft.block.Block
-import net.minecraft.block.BlockEntityProvider
-import net.minecraft.block.BlockRenderType
-import net.minecraft.block.BlockState
-import net.minecraft.block.BlockWithEntity.validateTicker
-import net.minecraft.block.Blocks
-import net.minecraft.block.PlantBlock
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.Waterloggable
+import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
@@ -35,7 +28,7 @@ import net.minecraft.world.GameRules
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
 class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(WATERLOGGED, false)
@@ -103,7 +96,7 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         state: BlockState,
         type: BlockEntityType<T>
     ): BlockEntityTicker<T>? {
-        return validateTicker(type, HybridAquaticBlockEntityTypes.ANEMONE, AnemoneBlockEntity::tick)
+        return BlockWithEntity.validateTicker(type, HybridAquaticBlockEntityTypes.ANEMONE, AnemoneBlockEntity::tick)
     }
 
     override fun getCollisionShape(
@@ -141,13 +134,20 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
     }
 
     override fun getCodec(): MapCodec<out PlantBlock> {
-        return CODEC
+        return createCodec(::AnemoneBlock)
+    }
+
+    override fun canPathfindThrough(
+        state: BlockState?,
+        world: BlockView?,
+        pos: BlockPos?,
+        type: NavigationType?
+    ): Boolean {
+        return false
     }
 
     companion object {
         private val SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
         private val COLLISION_SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0)
-
-        val CODEC: MapCodec<AnemoneBlock> = createCodec(::AnemoneBlock)
     }
 }

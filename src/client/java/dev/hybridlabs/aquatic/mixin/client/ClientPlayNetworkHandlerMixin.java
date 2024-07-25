@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public abstract class ClientPlayNetworkHandlerMixin {
     @Shadow @Final private MinecraftClient client;
 
-    @Shadow public abstract DynamicRegistryManager getRegistryManager();
+    @Shadow public abstract DynamicRegistryManager.Immutable getRegistryManager();
 
     /**
      * Allows usage of Sea Message books to open a book screen.

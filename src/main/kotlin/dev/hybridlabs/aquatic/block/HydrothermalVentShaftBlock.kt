@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.block.*
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -17,6 +19,10 @@ class HydrothermalVentShaftBlock(settings: Settings?) :
         return HybridAquaticBlocks.HYDROTHERMAL_VENT as AbstractPlantStemBlock
     }
 
+    override fun getCodec(): MapCodec<out AbstractPlantBlock> {
+        TODO("Not yet implemented")
+    }
+
     override fun getFluidState(state: BlockState): FluidState {
         return Fluids.WATER.getStill(false)
     }
@@ -25,11 +31,17 @@ class HydrothermalVentShaftBlock(settings: Settings?) :
         return state.isOf(Blocks.STONE) || state.isOf(Blocks.TUFF) || state.isOf(Blocks.MAGMA_BLOCK) || state.isOf(stem)|| super.canAttachTo(state)
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(
+        player: PlayerEntity?,
+        world: BlockView?,
+        pos: BlockPos?,
+        state: BlockState?,
+        fluid: Fluid?
+    ): Boolean {
         return false
     }
 
-    override fun isFertilizable(world: WorldView?, pos: BlockPos?, state: BlockState?, isClient: Boolean): Boolean {
+    override fun isFertilizable(world: WorldView?, pos: BlockPos?, state: BlockState?): Boolean {
         return false
     }
 

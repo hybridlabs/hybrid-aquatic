@@ -7,9 +7,15 @@ import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityGroup
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.TemptGoal
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal
+import net.minecraft.entity.ai.goal.WanderAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
@@ -29,7 +35,6 @@ import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
@@ -231,9 +236,6 @@ private var attemptAttack: Boolean
     // endregion
 
     // region water breathing
-    override fun canBreatheInWater(): Boolean {
-        return true
-    }
 
     override fun tickWaterBreathingAir(air: Int) {}
 
@@ -279,33 +281,6 @@ private var attemptAttack: Boolean
         if (canDance && songPlaying)
             event.controller.setAnimation(DANCE_ANIMATION)
         return PlayState.CONTINUE
-    }
-
-
-    internal class AttackGoal(private val crustacean: HybridAquaticCrustaceanEntity) : MeleeAttackGoal(crustacean, 1.0,true) {
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
-                resetCooldown()
-                mob.tryAttack(target)
-                crustacean.isSprinting = true
-                crustacean.attemptAttack = true
-            }
-        }
-
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (1.25f + entity.width).toDouble()
-        }
-
-        override fun start() {
-            super.start()
-            crustacean.attemptAttack = false
-        }
-
-        override fun stop() {
-            super.stop()
-            crustacean.attemptAttack = false
-        }
     }
 
     companion object {
