@@ -288,6 +288,8 @@ open class HybridAquaticSharkEntity(
     }
 
     //#endregion
+
+
     override fun getMaxAir(): Int {
         return 4800
     }
@@ -369,7 +371,8 @@ open class HybridAquaticSharkEntity(
             return !shark.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
+        override fun attack(target: LivingEntity) {
+            val squaredDistance = target.squaredDistanceTo(mob)
             val d = getSquaredMaxAttackDistance(target)
             if (squaredDistance <= d && this.isCooledDown) {
                 resetCooldown()
@@ -383,7 +386,7 @@ open class HybridAquaticSharkEntity(
             }
         }
 
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
+        private fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
             return (7.0f + entity.width).toDouble()
         }
 

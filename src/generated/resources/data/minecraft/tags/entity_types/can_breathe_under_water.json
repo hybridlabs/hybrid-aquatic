@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#hybrid-aquatic:jellyfish",
+    "#hybrid-aquatic:fishes",
+    "#hybrid-aquatic:sharks",
+    "#hybrid-aquatic:critter",
+    "#hybrid-aquatic:crab",
+    "#hybrid-aquatic:shrimp",
+    "hybrid-aquatic:karkinos"
+  ]
+}

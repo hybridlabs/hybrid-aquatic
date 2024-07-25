@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_raw_crayfish",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_raw_crayfish"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:cooked_crayfish_from_smelting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

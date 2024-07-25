@@ -2,6 +2,7 @@
 
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
@@ -41,7 +42,7 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
         defaultState = defaultState.with(WATERLOGGED, false)
     }
 
-    override fun getPickStack(world: BlockView, pos: BlockPos, state: BlockState): ItemStack {
+    override fun getPickStack(world: WorldView, pos: BlockPos, state: BlockState): ItemStack {
         val blockEntity = world.getBlockEntity(pos)
         if (blockEntity !is MessageInABottleBlockEntity) {
             return super.getPickStack(world, pos, state)
@@ -145,6 +146,10 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return MessageInABottleBlockEntity(pos, state)
+    }
+
+    override fun getCodec(): MapCodec<out BlockWithEntity> {
+        return createCodec(::MessageInABottleBlock)
     }
 
     /**

@@ -50,25 +50,6 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         addDrop(HybridAquaticBlocks.DRIFTWOOD_SLAB, slabDrops(HybridAquaticBlocks.DRIFTWOOD_SLAB))
         addDrop(HybridAquaticBlocks.DRIFTWOOD_DOOR, doorDrops(HybridAquaticBlocks.DRIFTWOOD_DOOR))
 
-        addDrop(HybridAquaticBlocks.GLOWSTICK)
-
-        //endregion
-
-        //region corals
-        addDropWithSilkTouch(HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK)
-        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK)
-        addDropWithSilkTouch(HybridAquaticBlocks.LOPHELIA_CORAL)
-        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL)
-        addDropWithSilkTouch(HybridAquaticBlocks.LOPHELIA_CORAL_FAN)
-        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN)
-
-        addDropWithSilkTouch(HybridAquaticBlocks.THORN_CORAL_BLOCK)
-        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK)
-        addDropWithSilkTouch(HybridAquaticBlocks.THORN_CORAL)
-        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_THORN_CORAL)
-        addDropWithSilkTouch(HybridAquaticBlocks.THORN_CORAL_FAN)
-        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_THORN_CORAL_FAN)
-
         //endregion
 
 
@@ -84,8 +65,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
-
-        // thermal vents
+        // hydrothermal vent
         addDrop(HybridAquaticBlocks.HYDROTHERMAL_VENT) { block ->
             LootTable.builder().pool(
                 LootPool.builder().with(
@@ -107,9 +87,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                                         .withOperation(VARIANT_KEY, "$BLOCK_ENTITY_TAG_KEY.$VARIANT_KEY")
                                         .withOperation(MESSAGE_KEY, "$BLOCK_ENTITY_TAG_KEY.$MESSAGE_KEY")
                                 ),
-                                ItemEntry.builder(HybridAquaticItems.SEA_MESSAGE_BOOK).apply(
+                                ItemEntry.builder(Items.WRITTEN_BOOK).apply(
                                     CopyNbtLootFunction.builder(ContextLootNbtProvider.BLOCK_ENTITY)
-                                        .withOperation("$MESSAGE_KEY.tag.$SEA_MESSAGE_KEY", SEA_MESSAGE_KEY)
+                                        .withOperation("$MESSAGE_KEY.tag.$PAGES_KEY", PAGES_KEY)
+                                        .withOperation("$MESSAGE_KEY.tag.$TITLE_KEY", TITLE_KEY)
+                                        .withOperation("$MESSAGE_KEY.tag.$AUTHOR_KEY", AUTHOR_KEY)
                                 )
                             )
                         )
@@ -250,10 +232,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         // generate remaining drops
         Registries.BLOCK
             .filter(filterHybridAquatic(Registries.BLOCK))
-            .filter { block ->
-                block !is WallTorchBlock && block !is DeadCoralWallFanBlock
-                        && block.lootTableId !in lootTables
-            }
+            .filter { block -> block.lootTableId !in lootTables }
             .forEach(::addDrop)
     }
 }
