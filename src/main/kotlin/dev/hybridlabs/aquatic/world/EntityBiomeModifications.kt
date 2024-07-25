@@ -48,11 +48,11 @@ object EntityBiomeModifications {
 
 
         // underground fishes
-        addUndergroundFish(HybridAquaticEntityTypes.ANGLERFISH, HybridAquaticBiomeTags.ALL_DEEP_OCEANS, 5, 1, 2)
-        addUndergroundFish(HybridAquaticEntityTypes.BARRELEYE, HybridAquaticBiomeTags.ALL_DEEP_OCEANS, 3, 1, 1)
-        addUndergroundFish(HybridAquaticEntityTypes.DRAGONFISH, HybridAquaticBiomeTags.ALL_DEEP_OCEANS, 5, 1, 1)
+        addUndergroundFish(HybridAquaticEntityTypes.ANGLERFISH, HybridAquaticBiomeTags.ALL_OCEANS, 5, 1, 2)
+        addUndergroundFish(HybridAquaticEntityTypes.BARRELEYE, HybridAquaticBiomeTags.ALL_OCEANS, 3, 1, 1)
+        addUndergroundFish(HybridAquaticEntityTypes.DRAGONFISH, HybridAquaticBiomeTags.ALL_OCEANS, 5, 1, 1)
         addUndergroundFish(HybridAquaticEntityTypes.FRILLED_SHARK, HybridAquaticBiomeTags.DEEP_WARM_OCEANS, 3, 1, 1)
-        addUndergroundFish(HybridAquaticEntityTypes.RATFISH, HybridAquaticBiomeTags.ALL_DEEP_OCEANS, 5, 1, 2)
+        addUndergroundFish(HybridAquaticEntityTypes.RATFISH, HybridAquaticBiomeTags.ALL_OCEANS, 5, 1, 2)
         addUndergroundFish(HybridAquaticEntityTypes.SEA_ANGEL, HybridAquaticBiomeTags.DEEP_COLD_OCEANS, 3, 1, 1)
 
 
@@ -62,8 +62,8 @@ object EntityBiomeModifications {
 
         // underground cephalopods
         addUndergroundCephalopod(HybridAquaticEntityTypes.VAMPIRE_SQUID, HybridAquaticBiomeTags.DEEP_WARM_OCEANS, 3, 1, 1)
-        addUndergroundCephalopod(HybridAquaticEntityTypes.NAUTILUS, HybridAquaticBiomeTags.ALL_DEEP_OCEANS, 3, 1, 1)
-        addUndergroundCephalopod(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS, HybridAquaticBiomeTags.ALL_DEEP_OCEANS, 1, 1, 1)
+        addUndergroundCephalopod(HybridAquaticEntityTypes.NAUTILUS, HybridAquaticBiomeTags.ALL_OCEANS, 3, 1, 1)
+        addUndergroundCephalopod(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS, HybridAquaticBiomeTags.ALL_OCEANS, 1, 1, 1)
         addUndergroundCephalopod(HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS, HybridAquaticBiomeTags.DEEP_WARM_OCEANS, 3, 1, 1)
 
         // jellies
