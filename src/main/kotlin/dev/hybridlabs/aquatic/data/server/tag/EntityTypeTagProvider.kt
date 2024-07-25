@@ -437,7 +437,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.STONEFISH,
                 HybridAquaticEntityTypes.BETTA,
                 HybridAquaticEntityTypes.SEAHORSE,
-                HybridAquaticEntityTypes.MOON_JELLYFISH,
                 HybridAquaticEntityTypes.GOURAMI,
                 HybridAquaticEntityTypes.COWFISH,
                 HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS,
@@ -446,7 +445,11 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.FIREFLY_SQUID,
                 HybridAquaticEntityTypes.DRAGONFISH,
                 HybridAquaticEntityTypes.STINGRAY,
-                HybridAquaticEntityTypes.SURGEONFISH
+                HybridAquaticEntityTypes.MANTA_RAY,
+                HybridAquaticEntityTypes.SURGEONFISH,
+                HybridAquaticEntityTypes.GOLDFISH,
+                HybridAquaticEntityTypes.CARP,
+                HybridAquaticEntityTypes.PARROTFISH,
             )
 
         // sharks

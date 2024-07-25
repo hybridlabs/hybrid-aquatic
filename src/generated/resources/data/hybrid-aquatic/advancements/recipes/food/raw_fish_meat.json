@@ -286,6 +286,7 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_lionfish",
       "has_rockfish",
       "has_blue_spotted_stingray",
@@ -308,14 +309,12 @@
       "has_discus",
       "has_neon_tetra",
       "has_danio",
-      "has_dragonfish",
-      "has_the_recipe"
+      "has_dragonfish"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:raw_fish_meat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

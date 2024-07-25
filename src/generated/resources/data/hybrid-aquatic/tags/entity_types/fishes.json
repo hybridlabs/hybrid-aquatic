@@ -29,7 +29,6 @@
     "hybrid-aquatic:stonefish",
     "hybrid-aquatic:betta",
     "hybrid-aquatic:seahorse",
-    "hybrid-aquatic:moon_jellyfish",
     "hybrid-aquatic:gourami",
     "hybrid-aquatic:cowfish",
     "hybrid-aquatic:glowing_sucker_octopus",
@@ -38,6 +37,10 @@
     "hybrid-aquatic:firefly_squid",
     "hybrid-aquatic:dragonfish",
     "hybrid-aquatic:stingray",
-    "hybrid-aquatic:surgeonfish"
+    "hybrid-aquatic:manta_ray",
+    "hybrid-aquatic:surgeonfish",
+    "hybrid-aquatic:goldfish",
+    "hybrid-aquatic:carp",
+    "hybrid-aquatic:parrotfish"
   ]
 }
