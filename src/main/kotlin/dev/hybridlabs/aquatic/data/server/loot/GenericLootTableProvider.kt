@@ -23,6 +23,51 @@ class GenericLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
                 .pool(
                     LootPool.builder()
                         .with(
+                            ItemEntry.builder(HybridAquaticItems.COCONUT_CRAB_CLAW)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.GHOST_CRAB_CLAW)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.YETI_CRAB_CLAW)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.SPIDER_CRAB_CLAW)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.VAMPIRE_CRAB_CLAW)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.DUNGENESS_CRAB_CLAW)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.FIDDLER_CRAB_CLAW)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
+                        )
+                        .with(
+                            ItemEntry.builder(HybridAquaticItems.FLOWER_CRAB_CLAW)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
+                        )
+                )
+        )
+
+        exporter.accept(
+            HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID,
+            LootTable.builder()
+                .randomSequenceId(HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID)
+                .pool(
+                    LootPool.builder()
+                        .with(
                             ItemEntry.builder(HybridAquaticItems.EEL_SCARF)
                                 .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 1.0f)))
                         )

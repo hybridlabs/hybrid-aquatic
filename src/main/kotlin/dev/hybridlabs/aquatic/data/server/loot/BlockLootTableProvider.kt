@@ -97,6 +97,19 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         }
 
         // crate
+        addDrop(HybridAquaticBlocks.CRAB_POT) { block ->
+            LootTable.builder().pool(
+                LootPool.builder().with(
+                    AlternativeEntry.builder(
+                        LootTableEntry.builder(HybridAquaticLootTables.CRAB_POT_TREASURE_ID).conditionally(
+                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                        ),
+                        ItemEntry.builder(block),
+                    )
+                )
+            )
+        }
+
         addDrop(HybridAquaticBlocks.HYBRID_CRATE) { block ->
             LootTable.builder().pool(
                 LootPool.builder().with(

@@ -130,6 +130,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.RAW_SHRIMP,
             HybridAquaticItems.RAW_LOBSTER,
             HybridAquaticItems.RAW_CRAYFISH,
+            HybridAquaticItems.RAW_LOBSTER_TAIL,
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.RAW_FISHES).add(item)
         }
@@ -142,6 +143,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.COOKED_SHRIMP,
             HybridAquaticItems.COOKED_LOBSTER,
             HybridAquaticItems.COOKED_CRAYFISH,
+            HybridAquaticItems.COOKED_LOBSTER_TAIL,
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.COOKED_FISHES).add(item)
         }

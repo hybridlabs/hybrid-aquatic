@@ -666,6 +666,7 @@ object HybridAquaticItems {
     val WHALE_SHARK_PLUSHIE = registerBlockItem("whale_shark_plushie", HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
     val GLOWSTICK = registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
     val HYDROTHERMAL_VENT = registerBlockItem("hydrothermal_vent", HybridAquaticBlocks.HYDROTHERMAL_VENT)
+    val CRAB_POT = registerBlockItem("hybrid_crate", HybridAquaticBlocks.CRAB_POT)
     val HYBRID_CRATE = registerBlockItem("hybrid_crate", HybridAquaticBlocks.HYBRID_CRATE)
     val DRIFTWOOD_CRATE = registerBlockItem("driftwood_crate", HybridAquaticBlocks.DRIFTWOOD_CRATE)
     val OAK_CRATE = registerBlockItem("oak_crate", HybridAquaticBlocks.OAK_CRATE)
