@@ -223,6 +223,6 @@ object  HybridAquaticItemGroups {
     )
 
     private fun register(id: String, itemGroup: ItemGroup): ItemGroup {
-        return Registry.register(Registries.ITEM_GROUP, Identifier(HybridAquatic.MOD_ID, id), itemGroup)
+        return Registry.register(Registries.ITEM_GROUP, Identifier.of(HybridAquatic.MOD_ID, id), itemGroup)
     }
 }

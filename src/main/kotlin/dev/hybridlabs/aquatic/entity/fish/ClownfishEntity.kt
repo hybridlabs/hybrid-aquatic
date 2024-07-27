@@ -38,14 +38,14 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
 
     public override fun getLootTableId(): Identifier {
         return when (this.variant?.variantName) {
-            "ocellaris" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "percula" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "whiteband" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "tomato" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "cinnamon" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "clarkii" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "pink_skunk" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "orange_skunk" -> Identifier("hybrid-aquatic", "entities/clownfish")
+            "ocellaris" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "percula" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "whiteband" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "tomato" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "cinnamon" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "clarkii" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "pink_skunk" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "orange_skunk" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
             else -> super.getLootTableId()
         }
     }

@@ -8,7 +8,7 @@ import net.minecraft.entity.projectile.FishingBobberEntity
 import net.minecraft.util.Identifier
 
 object HybridAquaticNetworking {
-    var FISHING_BOBBER_LURE: Identifier = Identifier(HybridAquatic.MOD_ID, "fishing_bobber_lure")
+    var FISHING_BOBBER_LURE: Identifier = Identifier.of(HybridAquatic.MOD_ID, "fishing_bobber_lure")
 
     init {
         // Sends lure item to the client back

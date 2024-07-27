@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
     @Unique
-    private static final Identifier DIVING_HELMET_OVERLAY = new Identifier("hybrid-aquatic","textures/misc/diving_helmet_overlay.png");
+    private static final Identifier DIVING_HELMET_OVERLAY = new Identifier.of("hybrid-aquatic","textures/misc/diving_helmet_overlay.png");
 
     @Inject(method = "render", at = @At("HEAD"))
     private void onRender(DrawContext context, float tickDelta, CallbackInfo ci) {

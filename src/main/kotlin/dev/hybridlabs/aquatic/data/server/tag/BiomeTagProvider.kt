@@ -22,7 +22,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.BEACH,
             BiomeKeys.STONY_SHORE,
         )
-            .addOptional(Identifier("regions_unexplored", "rocky_reef"))
+            .addOptional(Identifier.of("regions_unexplored", "rocky_reef"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.GHOST_CRAB_SPAWN_BIOMES).add(
             BiomeKeys.OCEAN,
@@ -31,7 +31,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.BEACH,
             BiomeKeys.STONY_SHORE,
         )
-            .addOptional(Identifier("wythers", "tropical_beach"))
+            .addOptional(Identifier.of("wythers", "tropical_beach"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.LIGHTFOOT_CRAB_SPAWN_BIOMES).add(
             BiomeKeys.OCEAN,
@@ -40,8 +40,8 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.BEACH,
             BiomeKeys.STONY_SHORE,
         )
-            .addOptional(Identifier("wythers", "tropical_beach"))
-            .addOptional(Identifier("regions_unexplored", "rocky_reef"))
+            .addOptional(Identifier.of("wythers", "tropical_beach"))
+            .addOptional(Identifier.of("regions_unexplored", "rocky_reef"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.FLOWER_CRAB_SPAWN_BIOMES).add(
             BiomeKeys.OCEAN,
@@ -49,13 +49,13 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             BiomeKeys.LUKEWARM_OCEAN,
             BiomeKeys.BEACH
         )
-            .addOptional(Identifier("wythers", "tropical_beach"))
+            .addOptional(Identifier.of("wythers", "tropical_beach"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TROPICAL_BEACHES).add(
             BiomeKeys.BEACH,
         )
-            .addOptional(Identifier("wythers", "tropical_beach"))
-            .addOptional(Identifier("regions_unexplored", "rocky_reef"))
+            .addOptional(Identifier.of("wythers", "tropical_beach"))
+            .addOptional(Identifier.of("regions_unexplored", "rocky_reef"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.BOTTLE_SPAWN_BIOMES)
             .forceAddTag(BiomeTags.IS_OCEAN)
@@ -92,7 +92,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBiomeTags.WARM_OCEANS)
             .add(BiomeKeys.WARM_OCEAN,
                 BiomeKeys.LUKEWARM_OCEAN)
-            .addOptional(Identifier("regions_unexplored", "rocky_reef"))
+            .addOptional(Identifier.of("regions_unexplored", "rocky_reef"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_WARM_OCEANS)
             .add(BiomeKeys.DEEP_LUKEWARM_OCEAN)
@@ -101,47 +101,47 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(BiomeKeys.WARM_OCEAN,
                 BiomeKeys.LUKEWARM_OCEAN,
                 BiomeKeys.DEEP_LUKEWARM_OCEAN)
-            .addOptional(Identifier("regions_unexplored", "rocky_reef"))
+            .addOptional(Identifier.of("regions_unexplored", "rocky_reef"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.REEF)
             .add(BiomeKeys.WARM_OCEAN)
-            .addOptional(Identifier("regions_unexplored", "rocky_reef"))
+            .addOptional(Identifier.of("regions_unexplored", "rocky_reef"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TROPICAL_FRESHWATER)
             .forceAddTag(BiomeTags.IS_JUNGLE)
             .add(BiomeKeys.JUNGLE,
                 BiomeKeys.BAMBOO_JUNGLE,
                 BiomeKeys.SPARSE_JUNGLE)
-            .addOptional(Identifier("wythers", "jungle_river"))
-            .addOptional(Identifier("wythers", "tropical_forest_river"))
-            .addOptional(Identifier("wythers", "flooded_jungle"))
-            .addOptional(Identifier("terralith", "warm_river"))
-            .addOptional(Identifier("regions_unexplored", "tropical_river"))
-            .addOptional(Identifier("regions_unexplored", "muddy_river"))
+            .addOptional(Identifier.of("wythers", "jungle_river"))
+            .addOptional(Identifier.of("wythers", "tropical_forest_river"))
+            .addOptional(Identifier.of("wythers", "flooded_jungle"))
+            .addOptional(Identifier.of("terralith", "warm_river"))
+            .addOptional(Identifier.of("regions_unexplored", "tropical_river"))
+            .addOptional(Identifier.of("regions_unexplored", "muddy_river"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SWAMPLAND)
             .forceAddTag(BiomeTags.SWAMP_HUT_HAS_STRUCTURE)
             .add(BiomeKeys.SWAMP,
                 BiomeKeys.MANGROVE_SWAMP)
-            .addOptional(Identifier("wythers", "waterlily_swamp"))
-            .addOptional(Identifier("terralith", "orchid_swamp"))
-            .addOptional(Identifier("regions_unexplored", "marsh"))
-            .addOptional(Identifier("regions_unexplored", "muddy_river"))
+            .addOptional(Identifier.of("wythers", "waterlily_swamp"))
+            .addOptional(Identifier.of("terralith", "orchid_swamp"))
+            .addOptional(Identifier.of("regions_unexplored", "marsh"))
+            .addOptional(Identifier.of("regions_unexplored", "muddy_river"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.RIVERS)
             .forceAddTag(BiomeTags.IS_RIVER)
             .add(BiomeKeys.RIVER)
-            .addOptional(Identifier("wythers", "jungle_river"))
-            .addOptional(Identifier("wythers", "tropical_forest_river"))
-            .addOptional(Identifier("terralith", "warm_river"))
-            .addOptional(Identifier("regions_unexplored", "tropical_river"))
-            .addOptional(Identifier("regions_unexplored", "muddy_river"))
+            .addOptional(Identifier.of("wythers", "jungle_river"))
+            .addOptional(Identifier.of("wythers", "tropical_forest_river"))
+            .addOptional(Identifier.of("terralith", "warm_river"))
+            .addOptional(Identifier.of("regions_unexplored", "tropical_river"))
+            .addOptional(Identifier.of("regions_unexplored", "muddy_river"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.CHERRY)
             .add(
                 BiomeKeys.CHERRY_GROVE,
             )
-            .addOptional(Identifier("regions_unexplored", "mauve_hills"))
-            .addOptional(Identifier("regions_unexplored", "magnolia_woodland"))
+            .addOptional(Identifier.of("regions_unexplored", "mauve_hills"))
+            .addOptional(Identifier.of("regions_unexplored", "magnolia_woodland"))
     }
 }

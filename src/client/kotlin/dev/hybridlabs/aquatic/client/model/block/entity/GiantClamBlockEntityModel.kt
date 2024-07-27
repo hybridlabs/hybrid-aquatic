@@ -19,8 +19,8 @@ class GiantClamBlockEntityModel: GeoModel<GiantClamBlockEntity>() {
     }
 
     companion object {
-        val ANIMATION_LOCATION = Identifier(HybridAquatic.MOD_ID, "animations/giant_clam.animation.json")
-        val MODEL_LOCATION = Identifier(HybridAquatic.MOD_ID, "geo/giant_clam.geo.json")
-        val TEXTURE_LOCATION = Identifier(HybridAquatic.MOD_ID, "textures/block/giant_clam.png")
+        val ANIMATION_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "animations/giant_clam.animation.json")
+        val MODEL_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "geo/giant_clam.geo.json")
+        val TEXTURE_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "textures/block/giant_clam.png")
     }
 }

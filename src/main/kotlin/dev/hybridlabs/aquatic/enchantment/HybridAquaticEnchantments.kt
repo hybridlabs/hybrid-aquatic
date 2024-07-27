@@ -10,6 +10,6 @@ object HybridAquaticEnchantments {
     val LIVECATCH = register("live_catch", LiveCatchEnchantment())
 
     private fun register(id: String, enchantment: Enchantment): Enchantment {
-        return Registry.register(Registries.ENCHANTMENT, Identifier(HybridAquatic.MOD_ID, id), enchantment)
+        return Registry.register(Registries.ENCHANTMENT, Identifier.of(HybridAquatic.MOD_ID, id), enchantment)
     }
 }

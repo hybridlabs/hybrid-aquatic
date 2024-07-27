@@ -12,6 +12,6 @@ object HybridAquaticLootPoolEntryTypes {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleItemEntry.CODEC)
 
     private fun <T : LootPoolEntry> register(id: String, codec: Codec<T>): LootPoolEntryType {
-        return Registry.register(Registries.LOOT_POOL_ENTRY_TYPE, Identifier(HybridAquatic.MOD_ID, id), LootPoolEntryType(codec))
+        return Registry.register(Registries.LOOT_POOL_ENTRY_TYPE, Identifier.of(HybridAquatic.MOD_ID, id), LootPoolEntryType(codec))
     }
 }

@@ -23,10 +23,10 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
 
     public override fun getLootTableId(): Identifier {
         return when (this.variant?.variantName) {
-            "american" -> Identifier("hybrid-aquatic", "gameplay/clawed_lobster")
-            "california_spiny" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
-            "ornate_spiny" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
-            "regal_slipper" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
+            "american" -> Identifier.of("hybrid-aquatic", "gameplay/clawed_lobster")
+            "california_spiny" -> Identifier.of("hybrid-aquatic", "gameplay/clawless_lobster")
+            "ornate_spiny" -> Identifier.of("hybrid-aquatic", "gameplay/clawless_lobster")
+            "regal_slipper" -> Identifier.of("hybrid-aquatic", "gameplay/clawless_lobster")
             else -> super.getLootTableId()
         }
     }

@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.Block
+import net.minecraft.component.type.FoodComponent
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.item.*
@@ -802,7 +803,7 @@ object HybridAquaticItems {
     val OMINOUS_HOOK = register("ominous_hook", HookItem(Item.Settings().maxDamage(1)))
 
     private fun register(id: String, item: Item): Item {
-        return Registry.register(Registries.ITEM, Identifier(HybridAquatic.MOD_ID, id), item)
+        return Registry.register(Registries.ITEM, Identifier.of(HybridAquatic.MOD_ID, id), item)
     }
 
     private fun <T : MobEntity> registerSpawnEgg(id: String, type: EntityType<T>, primaryColor: Int, secondaryColor: Int): Item {

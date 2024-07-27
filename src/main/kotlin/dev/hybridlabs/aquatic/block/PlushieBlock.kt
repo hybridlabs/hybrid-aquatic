@@ -26,7 +26,7 @@ class PlushieBlock(variant: Variant, val particleBlock: Block, settings: Setting
         TIGER_SHARK("tiger_shark"),
         WHALE_SHARK("whale_shark");
 
-        val textureLocation: Identifier by lazy { Identifier(HybridAquatic.MOD_ID, "textures/entity/block/plushie/${id}_plushie.png") }
+        val textureLocation: Identifier by lazy { Identifier.of(HybridAquatic.MOD_ID, "textures/entity/block/plushie/${id}_plushie.png") }
 
         override fun asString(): String {
             return id

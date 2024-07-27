@@ -15,6 +15,6 @@ object HybridAquaticFeatures {
     val HYDROTHERMAL_VENT = register("hydrothermal_vent", HydrothermalVentFeature(HydrothermalVentFeatureConfig.CODEC))
 
     private fun <FC : FeatureConfig, F : Feature<FC>> register(id: String, feature: F): Feature<FC> {
-        return Registry.register(Registries.FEATURE, Identifier(HybridAquatic.MOD_ID, id), feature)
+        return Registry.register(Registries.FEATURE, Identifier.of(HybridAquatic.MOD_ID, id), feature)
     }
 }

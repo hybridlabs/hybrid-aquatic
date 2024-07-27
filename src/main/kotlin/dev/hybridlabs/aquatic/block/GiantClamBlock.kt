@@ -28,7 +28,6 @@ import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
@@ -105,32 +104,29 @@ class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProv
     override fun onUse(
         state: BlockState,
         world: World,
-        pos: BlockPos?,
+        pos: BlockPos,
         player: PlayerEntity,
-        hand: Hand?,
-        hit: BlockHitResult?
+        hit: BlockHitResult
     ): ActionResult? {
-        if (hand == Hand.MAIN_HAND) {
-            val blockEntity = world.getBlockEntity(pos)
-            if (blockEntity is GiantClamBlockEntity && blockEntity.pearlCooldown == 0) {
-                blockEntity.pearlCooldown = world.random.nextBetween(1200, 6000)
+        val blockEntity = world.getBlockEntity(pos)
+        if (blockEntity is GiantClamBlockEntity && blockEntity.pearlCooldown == 0) {
+            blockEntity.pearlCooldown = world.random.nextBetween(1200, 6000)
 
-                if (world.random.nextInt(4) == 0) {
-                    dropStack(world, pos, ItemStack(HybridAquaticItems.BLACK_PEARL, 1))
-                } else {
-                    dropStack(world, pos, ItemStack(HybridAquaticItems.PEARL, 1))
-                }
-                world.playSound(
-                    null,
-                    pos,
-                    SoundEvents.ENTITY_SHULKER_CLOSE,
-                    SoundCategory.BLOCKS,
-                    1.0f,
-                    0.8f + world.random.nextFloat() * 0.4f
-                )
+            if (world.random.nextInt(4) == 0) {
+                dropStack(world, pos, ItemStack(HybridAquaticItems.BLACK_PEARL, 1))
+            } else {
+                dropStack(world, pos, ItemStack(HybridAquaticItems.PEARL, 1))
             }
+            world.playSound(
+                null,
+                pos,
+                SoundEvents.ENTITY_SHULKER_CLOSE,
+                SoundCategory.BLOCKS,
+                1.0f,
+                0.8f + world.random.nextFloat() * 0.4f
+            )
         }
-        return super.onUse(state, world, pos, player, hand, hit)
+        return super.onUse(state, world, pos, player, hit)
     }
 
     override fun <T : BlockEntity> getTicker(

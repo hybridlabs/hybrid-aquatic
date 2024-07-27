@@ -19,8 +19,8 @@ class TubeSpongeBlockEntityModel : GeoModel<TubeSpongeBlockEntity>() {
     }
 
     companion object {
-        val ANIMATION_LOCATION = Identifier(HybridAquatic.MOD_ID, "animations/tube_sponge.animation.json")
-        val MODEL_LOCATION = Identifier(HybridAquatic.MOD_ID, "geo/tube_sponge.geo.json")
-        val TEXTURE_LOCATION = Identifier(HybridAquatic.MOD_ID, "textures/block/tube_sponge.png")
+        val ANIMATION_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "animations/tube_sponge.animation.json")
+        val MODEL_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "geo/tube_sponge.geo.json")
+        val TEXTURE_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "textures/block/tube_sponge.png")
     }
 }

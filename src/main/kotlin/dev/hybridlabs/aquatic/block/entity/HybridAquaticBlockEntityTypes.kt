@@ -19,7 +19,7 @@ object HybridAquaticBlockEntityTypes {
     val TUBE_SPONGE: BlockEntityType<TubeSpongeBlockEntity> = register("tube_sponge", FabricBlockEntityTypeBuilder.create(::TubeSpongeBlockEntity, HybridAquaticBlocks.TUBE_SPONGE))
 
     private fun <T : BlockEntity> register(id: String, builder: FabricBlockEntityTypeBuilder<T>): BlockEntityType<T> {
-        val identifier = Identifier(HybridAquatic.MOD_ID, id)
+        val identifier = Identifier.of(HybridAquatic.MOD_ID, id)
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, identifier, builder.build(
             Util.getChoiceType(
                 TypeReferences.BLOCK_ENTITY,

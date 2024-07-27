@@ -33,6 +33,6 @@ object HybridAquaticBiomeTags {
     val TROPICAL_BEACHES = create("tropical_beaches")
 
     private fun create(id: String): TagKey<Biome> {
-        return TagKey.of(RegistryKeys.BIOME, Identifier(HybridAquatic.MOD_ID, id))
+        return TagKey.of(RegistryKeys.BIOME, Identifier.of(HybridAquatic.MOD_ID, id))
     }
 }
