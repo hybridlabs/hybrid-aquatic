@@ -20,42 +20,80 @@ class FishingLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
         val needsJungle = LocationCheckLootCondition.builder(
             LocationPredicate.Builder.create()
                 .biome(BiomeKeys.JUNGLE)
+        )
+
+        val needsSparseJungle = LocationCheckLootCondition.builder(
+            LocationPredicate.Builder.create()
                 .biome(BiomeKeys.SPARSE_JUNGLE)
+        )
+
+        val needsBambooJungle = LocationCheckLootCondition.builder(
+            LocationPredicate.Builder.create()
                 .biome(BiomeKeys.BAMBOO_JUNGLE)
         )
+
         val needsSwamp = LocationCheckLootCondition.builder(
             LocationPredicate.Builder.create()
                 .biome(BiomeKeys.SWAMP)
+        )
+
+        val needsMangroveSwamp = LocationCheckLootCondition.builder(
+            LocationPredicate.Builder.create()
                 .biome(BiomeKeys.MANGROVE_SWAMP)
         )
+
+        val needsBeach = LocationCheckLootCondition.builder(
+            LocationPredicate.Builder.create()
+                .biome(BiomeKeys.BEACH)
+        )
+
         val needsOcean = LocationCheckLootCondition.builder(
             LocationPredicate.Builder.create()
                 .biome(BiomeKeys.OCEAN)
-                .biome(BiomeKeys.DEEP_OCEAN)
-                .biome(BiomeKeys.COLD_OCEAN)
-                .biome(BiomeKeys.DEEP_COLD_OCEAN)
-                .biome(BiomeKeys.LUKEWARM_OCEAN)
-                .biome(BiomeKeys.DEEP_LUKEWARM_OCEAN)
         )
-        val needsWarmOcean = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.OCEAN)
-                .biome(BiomeKeys.LUKEWARM_OCEAN)
-                .biome(BiomeKeys.DEEP_LUKEWARM_OCEAN)
-        )
+
         val needsDeepOcean = LocationCheckLootCondition.builder(
             LocationPredicate.Builder.create()
                 .biome(BiomeKeys.DEEP_OCEAN)
+        )
+
+        val needsColdOcean = LocationCheckLootCondition.builder(
+            LocationPredicate.Builder.create()
+                .biome(BiomeKeys.COLD_OCEAN)
+        )
+
+        val needsDeepColdOcean = LocationCheckLootCondition.builder(
+            LocationPredicate.Builder.create()
                 .biome(BiomeKeys.DEEP_COLD_OCEAN)
-                .biome(BiomeKeys.DEEP_LUKEWARM_OCEAN)
+        )
+
+        val needsFrozenOcean = LocationCheckLootCondition.builder(
+            LocationPredicate.Builder.create()
+                .biome(BiomeKeys.FROZEN_OCEAN)
+        )
+
+        val needsDeepFrozenOcean = LocationCheckLootCondition.builder(
+            LocationPredicate.Builder.create()
                 .biome(BiomeKeys.DEEP_FROZEN_OCEAN)
         )
-        val needsRiver = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create().biome(BiomeKeys.RIVER)
+
+        val needsLukewarmOcean = LocationCheckLootCondition.builder(
+            LocationPredicate.Builder.create()
+                .biome(BiomeKeys.LUKEWARM_OCEAN)
         )
-        val needsReef = LocationCheckLootCondition.builder(
+
+        val needsDeepLukewarmOcean = LocationCheckLootCondition.builder(
+            LocationPredicate.Builder.create()
+                .biome(BiomeKeys.DEEP_LUKEWARM_OCEAN)
+        )
+
+        val needsWarmOcean = LocationCheckLootCondition.builder(
             LocationPredicate.Builder.create()
                 .biome(BiomeKeys.WARM_OCEAN)
+        )
+
+        val needsRiver = LocationCheckLootCondition.builder(
+            LocationPredicate.Builder.create().biome(BiomeKeys.RIVER)
         )
 
         // fishing fish loot table extension
@@ -68,141 +106,191 @@ class FishingLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
                         .with(
                             ItemEntry.builder(HybridAquaticItems.LIONFISH)
                                 .weight(2)
-                                .conditionally(needsReef)
+                                .conditionally(needsBeach)
+                                .conditionally(needsWarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.GOURAMI)
                                 .weight(1)
                                 .conditionally(needsJungle)
+                                .conditionally(needsSparseJungle)
+                                .conditionally(needsBambooJungle)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.FLASHLIGHT_FISH)
-                                .weight(5)
+                                .weight(3)
+                                .conditionally(needsBeach)
                                 .conditionally(needsOcean)
+                                .conditionally(needsDeepOcean)
+                                .conditionally(needsLukewarmOcean)
+                                .conditionally(needsDeepLukewarmOcean)
+                                .conditionally(needsColdOcean)
+                                .conditionally(needsDeepColdOcean)
+                                .conditionally(needsFrozenOcean)
+                                .conditionally(needsDeepFrozenOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.DISCUS)
                                 .weight(1)
                                 .conditionally(needsJungle)
-                                .conditionally(needsRiver)
+                                .conditionally(needsSparseJungle)
+                                .conditionally(needsBambooJungle)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.BETTA)
                                 .weight(1)
                                 .conditionally(needsSwamp)
+                                .conditionally(needsMangroveSwamp)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.DANIO)
                                 .weight(1)
                                 .conditionally(needsJungle)
+                                .conditionally(needsSparseJungle)
+                                .conditionally(needsBambooJungle)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.NEON_TETRA)
                                 .weight(5)
                                 .conditionally(needsJungle)
+                                .conditionally(needsSparseJungle)
+                                .conditionally(needsBambooJungle)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.MAHI)
                                 .weight(2)
-                                .conditionally(needsWarmOcean)
+                                .conditionally(needsLukewarmOcean)
+                                .conditionally(needsDeepLukewarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.TUNA)
                                 .weight(2)
-                                .conditionally(needsOcean)
+                                .conditionally(needsDeepOcean)
+                                .conditionally(needsDeepColdOcean)
+                                .conditionally(needsDeepFrozenOcean)
+                                .conditionally(needsDeepLukewarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.OPAH)
                                 .weight(1)
-                                .conditionally(needsWarmOcean)
+                                .conditionally(needsLukewarmOcean)
+                                .conditionally(needsDeepLukewarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.ROCKFISH)
                                 .weight(3)
+                                .conditionally(needsBeach)
                                 .conditionally(needsOcean)
+                                .conditionally(needsDeepOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.BLUE_SPOTTED_STINGRAY)
                                 .weight(1)
-                                .conditionally(needsReef)
+                                .conditionally(needsBeach)
+                                .conditionally(needsWarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.MORAY_EEL)
                                 .weight(1)
-                                .conditionally(needsReef)
+                                .conditionally(needsBeach)
+                                .conditionally(needsWarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.NEEDLEFISH)
                                 .weight(3)
+                                .conditionally(needsBeach)
                                 .conditionally(needsWarmOcean)
+                                .conditionally(needsLukewarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.PIRANHA)
                                 .weight(2)
                                 .conditionally(needsJungle)
+                                .conditionally(needsSparseJungle)
+                                .conditionally(needsBambooJungle)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.ANGLERFISH)
                                 .weight(1)
                                 .conditionally(needsDeepOcean)
+                                .conditionally(needsDeepLukewarmOcean)
+                                .conditionally(needsDeepColdOcean)
+                                .conditionally(needsDeepFrozenOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.BARRELEYE)
                                 .weight(1)
                                 .conditionally(needsDeepOcean)
+                                .conditionally(needsDeepLukewarmOcean)
+                                .conditionally(needsDeepColdOcean)
+                                .conditionally(needsDeepFrozenOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.DRAGONFISH)
                                 .weight(1)
                                 .conditionally(needsDeepOcean)
+                                .conditionally(needsDeepLukewarmOcean)
+                                .conditionally(needsDeepColdOcean)
+                                .conditionally(needsDeepFrozenOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.BLUE_TANG)
                                 .weight(3)
-                                .conditionally(needsReef)
+                                .conditionally(needsBeach)
                                 .conditionally(needsWarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.SURGEONFISH_SOHAL)
                                 .weight(3)
+                                .conditionally(needsBeach)
                                 .conditionally(needsWarmOcean)
+                                .conditionally(needsLukewarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.SURGEONFISH_ORANGESHOULDER)
                                 .weight(3)
                                 .conditionally(needsWarmOcean)
+                                .conditionally(needsLukewarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.CLOWNFISH)
                                 .weight(3)
-                                .conditionally(needsReef)
+                                .conditionally(needsBeach)
+                                .conditionally(needsWarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.UNICORNFISH)
                                 .weight(3)
-                                .conditionally(needsReef)
+                                .conditionally(needsBeach)
                                 .conditionally(needsWarmOcean)
+                                .conditionally(needsLukewarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.COWFISH)
                                 .weight(1)
-                                .conditionally(needsReef)
+                                .conditionally(needsBeach)
+                                .conditionally(needsWarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.TRIGGERFISH)
                                 .weight(3)
-                                .conditionally(needsReef)
+                                .conditionally(needsBeach)
                                 .conditionally(needsWarmOcean)
+                                .conditionally(needsLukewarmOcean)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.TIGER_BARB)
                                 .weight(2)
                                 .conditionally(needsJungle)
+                                .conditionally(needsSparseJungle)
+                                .conditionally(needsBambooJungle)
                         )
                         .with(
                             ItemEntry.builder(HybridAquaticItems.OSCAR)
                                 .weight(2)
                                 .conditionally(needsJungle)
+                                .conditionally(needsSparseJungle)
+                                .conditionally(needsBambooJungle)
                         )
                 )
         )
@@ -216,10 +304,28 @@ class FishingLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
                     LootPool.builder()
                         .with(ItemEntry.builder(HybridAquaticItems.CRAB_POT)
                             .weight(3)
-                            .conditionally(needsOcean))
+                            .conditionally(needsOcean)
+                            .conditionally(needsDeepOcean)
+                            .conditionally(needsLukewarmOcean)
+                            .conditionally(needsDeepLukewarmOcean)
+                            .conditionally(needsWarmOcean)
+                            .conditionally(needsColdOcean)
+                            .conditionally(needsDeepColdOcean)
+                            .conditionally(needsFrozenOcean)
+                            .conditionally(needsDeepFrozenOcean)
+                        )
                         .with(ItemEntry.builder(HybridAquaticItems.HYBRID_CRATE)
                             .weight(3)
-                            .conditionally(needsOcean))
+                            .conditionally(needsOcean)
+                            .conditionally(needsDeepOcean)
+                            .conditionally(needsLukewarmOcean)
+                            .conditionally(needsDeepLukewarmOcean)
+                            .conditionally(needsWarmOcean)
+                            .conditionally(needsColdOcean)
+                            .conditionally(needsDeepColdOcean)
+                            .conditionally(needsFrozenOcean)
+                            .conditionally(needsDeepFrozenOcean)
+                        )
                         .with(ItemEntry.builder(HybridAquaticItems.OAK_CRATE))
                         .with(ItemEntry.builder(HybridAquaticItems.SPRUCE_CRATE))
                         .with(ItemEntry.builder(HybridAquaticItems.BIRCH_CRATE))

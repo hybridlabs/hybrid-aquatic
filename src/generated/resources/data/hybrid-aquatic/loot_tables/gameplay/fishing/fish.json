@@ -10,6 +10,12 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
+                "biome": "minecraft:beach"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
                 "biome": "minecraft:warm_ocean"
               }
             }
@@ -20,6 +26,18 @@
         {
           "type": "minecraft:item",
           "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:jungle"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:sparse_jungle"
+              }
+            },
             {
               "condition": "minecraft:location_check",
               "predicate": {
@@ -35,12 +53,60 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
+                "biome": "minecraft:beach"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:lukewarm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
                 "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:cold_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_cold_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:frozen_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_frozen_ocean"
               }
             }
           ],
           "name": "hybrid-aquatic:flashlight_fish",
-          "weight": 5
+          "weight": 3
         },
         {
           "type": "minecraft:item",
@@ -48,13 +114,19 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
-                "biome": "minecraft:bamboo_jungle"
+                "biome": "minecraft:jungle"
               }
             },
             {
               "condition": "minecraft:location_check",
               "predicate": {
-                "biome": "minecraft:river"
+                "biome": "minecraft:sparse_jungle"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:bamboo_jungle"
               }
             }
           ],
@@ -63,6 +135,12 @@
         {
           "type": "minecraft:item",
           "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:swamp"
+              }
+            },
             {
               "condition": "minecraft:location_check",
               "predicate": {
@@ -78,6 +156,18 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
+                "biome": "minecraft:jungle"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:sparse_jungle"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
                 "biome": "minecraft:bamboo_jungle"
               }
             }
@@ -87,6 +177,18 @@
         {
           "type": "minecraft:item",
           "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:jungle"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:sparse_jungle"
+              }
+            },
             {
               "condition": "minecraft:location_check",
               "predicate": {
@@ -103,6 +205,12 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
+                "biome": "minecraft:lukewarm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
                 "biome": "minecraft:deep_lukewarm_ocean"
               }
             }
@@ -113,6 +221,24 @@
         {
           "type": "minecraft:item",
           "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_cold_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_frozen_ocean"
+              }
+            },
             {
               "condition": "minecraft:location_check",
               "predicate": {
@@ -129,6 +255,12 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
+                "biome": "minecraft:lukewarm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
                 "biome": "minecraft:deep_lukewarm_ocean"
               }
             }
@@ -141,7 +273,19 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
-                "biome": "minecraft:deep_lukewarm_ocean"
+                "biome": "minecraft:beach"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_ocean"
               }
             }
           ],
@@ -151,6 +295,12 @@
         {
           "type": "minecraft:item",
           "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:beach"
+              }
+            },
             {
               "condition": "minecraft:location_check",
               "predicate": {
@@ -166,6 +316,12 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
+                "biome": "minecraft:beach"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
                 "biome": "minecraft:warm_ocean"
               }
             }
@@ -178,7 +334,19 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
-                "biome": "minecraft:deep_lukewarm_ocean"
+                "biome": "minecraft:beach"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:warm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:lukewarm_ocean"
               }
             }
           ],
@@ -188,6 +356,18 @@
         {
           "type": "minecraft:item",
           "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:jungle"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:sparse_jungle"
+              }
+            },
             {
               "condition": "minecraft:location_check",
               "predicate": {
@@ -204,6 +384,24 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
+                "biome": "minecraft:deep_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_cold_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
                 "biome": "minecraft:deep_frozen_ocean"
               }
             }
@@ -213,6 +411,24 @@
         {
           "type": "minecraft:item",
           "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_cold_ocean"
+              }
+            },
             {
               "condition": "minecraft:location_check",
               "predicate": {
@@ -228,11 +444,73 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
+                "biome": "minecraft:deep_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_cold_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
                 "biome": "minecraft:deep_frozen_ocean"
               }
             }
           ],
           "name": "hybrid-aquatic:dragonfish"
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:beach"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:warm_ocean"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:blue_tang",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:beach"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:warm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:lukewarm_ocean"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:surgeonfish_sohal",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
@@ -246,33 +524,7 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
-                "biome": "minecraft:deep_lukewarm_ocean"
-              }
-            }
-          ],
-          "name": "hybrid-aquatic:blue_tang",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:location_check",
-              "predicate": {
-                "biome": "minecraft:deep_lukewarm_ocean"
-              }
-            }
-          ],
-          "name": "hybrid-aquatic:surgeonfish_sohal",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:location_check",
-              "predicate": {
-                "biome": "minecraft:deep_lukewarm_ocean"
+                "biome": "minecraft:lukewarm_ocean"
               }
             }
           ],
@@ -282,6 +534,12 @@
         {
           "type": "minecraft:item",
           "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:beach"
+              }
+            },
             {
               "condition": "minecraft:location_check",
               "predicate": {
@@ -298,13 +556,19 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
+                "biome": "minecraft:beach"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
                 "biome": "minecraft:warm_ocean"
               }
             },
             {
               "condition": "minecraft:location_check",
               "predicate": {
-                "biome": "minecraft:deep_lukewarm_ocean"
+                "biome": "minecraft:lukewarm_ocean"
               }
             }
           ],
@@ -314,6 +578,12 @@
         {
           "type": "minecraft:item",
           "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:beach"
+              }
+            },
             {
               "condition": "minecraft:location_check",
               "predicate": {
@@ -329,13 +599,19 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
+                "biome": "minecraft:beach"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
                 "biome": "minecraft:warm_ocean"
               }
             },
             {
               "condition": "minecraft:location_check",
               "predicate": {
-                "biome": "minecraft:deep_lukewarm_ocean"
+                "biome": "minecraft:lukewarm_ocean"
               }
             }
           ],
@@ -345,6 +621,18 @@
         {
           "type": "minecraft:item",
           "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:jungle"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:sparse_jungle"
+              }
+            },
             {
               "condition": "minecraft:location_check",
               "predicate": {
@@ -358,6 +646,18 @@
         {
           "type": "minecraft:item",
           "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:jungle"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:sparse_jungle"
+              }
+            },
             {
               "condition": "minecraft:location_check",
               "predicate": {
