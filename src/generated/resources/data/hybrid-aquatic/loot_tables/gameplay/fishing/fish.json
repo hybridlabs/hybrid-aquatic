@@ -6,124 +6,365 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:warm_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:lionfish",
-          "weight": 5
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:gourami",
-          "weight": 5
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:bamboo_jungle"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:gourami"
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:flashlight_fish",
           "weight": 5
         },
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:discus",
-          "weight": 5
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:bamboo_jungle"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:river"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:discus"
         },
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:betta",
-          "weight": 5
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:mangrove_swamp"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:betta"
         },
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:danio",
-          "weight": 5
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:bamboo_jungle"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:danio"
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:bamboo_jungle"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:neon_tetra",
           "weight": 5
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:mahi",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:tuna",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:opah",
-          "weight": 3
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:opah"
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:rockfish",
-          "weight": 5
+          "weight": 3
         },
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:blue_spotted_stingray",
-          "weight": 2
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:warm_ocean"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:blue_spotted_stingray"
         },
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:moray_eel",
-          "weight": 2
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:warm_ocean"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:moray_eel"
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:needlefish",
-          "weight": 4
+          "weight": 3
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:bamboo_jungle"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:piranha",
           "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:anglerfish",
-          "weight": 2
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_frozen_ocean"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:anglerfish"
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_frozen_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:barreleye"
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_frozen_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:dragonfish"
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:warm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:blue_tang",
-          "weight": 4
+          "weight": 3
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:surgeonfish_sohal",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:surgeonfish_orangeshoulder",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:warm_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:clownfish",
-          "weight": 4
+          "weight": 3
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:warm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:unicorn_fish",
-          "weight": 4
+          "weight": 3
         },
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:cowfish",
-          "weight": 2
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:warm_ocean"
+              }
+            }
+          ],
+          "name": "hybrid-aquatic:cowfish"
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:warm_ocean"
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_lukewarm_ocean"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:triggerfish",
           "weight": 3
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:bamboo_jungle"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:tiger_barb",
           "weight": 2
         },
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:bamboo_jungle"
+              }
+            }
+          ],
           "name": "hybrid-aquatic:oscar",
           "weight": 2
         }

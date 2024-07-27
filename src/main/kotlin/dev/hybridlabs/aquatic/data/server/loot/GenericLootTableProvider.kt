@@ -17,9 +17,9 @@ import java.util.function.BiConsumer
 class GenericLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTableProvider(output, LootContextTypes.GENERIC) {
     override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
         exporter.accept(
-            HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID,
+            HybridAquaticLootTables.CRAB_POT_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID)
+                .randomSequenceId(HybridAquaticLootTables.CRAB_POT_TREASURE_ID)
                 .pool(
                     LootPool.builder()
                         .with(
