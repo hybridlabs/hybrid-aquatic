@@ -32,12 +32,11 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis")
@@ -45,8 +44,6 @@ open class HybridAquaticRayEntity(
     type: EntityType<out HybridAquaticRayEntity>,
     world: World,
     private val variants: Map<String, RayVariant> = hashMapOf(),
-    open val prey: TagKey<EntityType<*>>,
-    open val predator: TagKey<EntityType<*>>,
     open val assumeDefault: Boolean = false,
     open val collisionRules: List<VariantCollisionRules> = listOf()
 ) : WaterCreatureEntity(type, world), GeoEntity {
@@ -69,20 +66,19 @@ open class HybridAquaticRayEntity(
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(RAY_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(HUNGER, MAX_HUNGER)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
+        dataTracker.set(MOISTNESS, getMaxMoistness())
+        dataTracker.set(RAY_SIZE, 0)
+        dataTracker.set(ATTEMPT_ATTACK, false)
+        dataTracker.set(HUNGER, MAX_HUNGER)
+        dataTracker.set(VARIANT, "")
+        dataTracker.set(VARIANT_DATA, NbtCompound())
     }
 
     override fun initialize(
         world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
+        difficulty: LocalDifficulty?,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = getMaxMoistness()
         pitch = 0.0f
@@ -123,7 +119,7 @@ open class HybridAquaticRayEntity(
         }
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
     override fun tick() {
         super.tick()
@@ -222,10 +218,6 @@ open class HybridAquaticRayEntity(
             return PlayState.CONTINUE
         }
         return PlayState.CONTINUE
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.65f
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {

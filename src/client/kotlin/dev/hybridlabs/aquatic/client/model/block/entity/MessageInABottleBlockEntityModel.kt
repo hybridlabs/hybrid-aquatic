@@ -37,6 +37,6 @@ class MessageInABottleBlockEntityModel : GeoModel<MessageInABottleBlockEntity>()
             Variant.LONGNECK to Identifier.of(HybridAquatic.MOD_ID, "textures/entity/block/message_in_a_bottle/message_in_a_bottle_longneck.png"),
         )
 
-        val WATER_BOB_ANIMATION_ID = Identifier.of(HybridAquatic.MOD_ID, "animations/water_bob.animation.json")
+        val WATER_BOB_ANIMATION_ID: Identifier = Identifier.of(HybridAquatic.MOD_ID, "animations/water_bob.animation.json")
     }
 }

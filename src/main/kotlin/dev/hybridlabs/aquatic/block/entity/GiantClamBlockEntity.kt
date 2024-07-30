@@ -5,16 +5,17 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
+import software.bernie.geckolib.util.RenderUtil
 
-class GiantClamBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.GIANT_CLAM, pos, state), GeoAnimatable {
+class GiantClamBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.GIANT_CLAM, pos, state),
+    GeoAnimatable {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     var pearlCooldown: Int = 0
 
@@ -30,11 +31,13 @@ class GiantClamBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hybri
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(
+        controllerRegistrar.add(
+            AnimationController(
             this,
             "controller",
             5,
-            ::predicate))
+            ::predicate)
+        )
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
@@ -42,20 +45,22 @@ class GiantClamBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hybri
     }
 
     override fun getTick(o: Any): Double {
-        return RenderUtils.getCurrentTick()
+        return RenderUtil.getCurrentTick()
     }
 
-    override fun readNbt(nbt: NbtCompound) {
-        pearlCooldown = nbt.getInt(PEARL_COOLDOWN_NBT_KEY)
-        super.readNbt(nbt)
+    override fun readNbt(nbt: NbtCompound?, registryLookup: RegistryWrapper.WrapperLookup?) {
+        if (nbt != null) {
+            pearlCooldown = nbt.getInt(PEARL_COOLDOWN_NBT_KEY)
+        }
     }
 
-    override fun writeNbt(nbt: NbtCompound) {
-        nbt.putInt(PEARL_COOLDOWN_NBT_KEY, pearlCooldown)
-        super.writeNbt(nbt)
+    override fun writeNbt(nbt: NbtCompound?, registryLookup: RegistryWrapper.WrapperLookup?) {
+        if (nbt != null) {
+            nbt.putInt(PEARL_COOLDOWN_NBT_KEY, pearlCooldown)
+        }
     }
 
-    override fun toInitialChunkDataNbt(): NbtCompound {
+    override fun toInitialChunkDataNbt(registryLookup: RegistryWrapper.WrapperLookup?): NbtCompound? {
         return createNbt()
     }
 

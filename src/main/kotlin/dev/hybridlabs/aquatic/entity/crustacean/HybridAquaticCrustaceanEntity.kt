@@ -8,7 +8,6 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
@@ -31,11 +30,10 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.*
 import net.minecraft.world.biome.Biome
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("DEPRECATION", "LeakingThis", "UNUSED_PARAMETER")
@@ -58,12 +56,6 @@ open class HybridAquaticCrustaceanEntity(
         set(size) {
             dataTracker.set(CRUSTACEAN_SIZE, size)
         }
-
-private var attemptAttack: Boolean
-    get() = dataTracker.get(ATTEMPT_ATTACK)
-    set(attemptAttack) {
-        dataTracker.set(ATTEMPT_ATTACK, attemptAttack)
-    }
 
     private var variantData: NbtCompound
         get() = dataTracker.get(VARIANT_DATA)
@@ -89,10 +81,10 @@ private var attemptAttack: Boolean
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(CRUSTACEAN_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
+        dataTracker.set(CRUSTACEAN_SIZE, 0)
+        dataTracker.set(ATTEMPT_ATTACK, false)
+        dataTracker.set(VARIANT, "")
+        dataTracker.set(VARIANT_DATA, NbtCompound())
     }
 
     override fun initGoals() {
@@ -105,10 +97,9 @@ private var attemptAttack: Boolean
 
     override fun initialize(
         world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
+        difficulty: LocalDifficulty?,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.size = this.random.nextBetween(getMinSize(),getMaxSize())
 
@@ -149,14 +140,13 @@ private var attemptAttack: Boolean
         }
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world as ServerWorldAccess?, difficulty, spawnReason, entityData)
     }
 
     // region movement
    init {
         moveControl = MoveControl(this)
         navigation = this.landNavigation
-        stepHeight = 1.0F
     }
 
     override fun getPathfindingFavor(pos: BlockPos?, world: WorldView?): Float {
@@ -176,11 +166,6 @@ private var attemptAttack: Boolean
         songSource = songPosition
         songPlaying = playing
         super.setNearbySongPlaying(songPosition, playing)
-    }
-
-
-    override fun getGroup(): EntityGroup? {
-        return EntityGroup.ARTHROPOD
     }
 
     protected open fun getMinSize(): Int {

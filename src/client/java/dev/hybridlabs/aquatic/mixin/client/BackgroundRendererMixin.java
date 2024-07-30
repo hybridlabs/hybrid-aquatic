@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects;
 import dev.hybridlabs.aquatic.fog.ClarityFogModifier;
 import dev.hybridlabs.aquatic.fog.ConduitPowerFogModifier;
 import dev.hybridlabs.aquatic.fog.ThalassophobiaFogModifier;
+import net.minecraft.block.enums.CameraSubmersionType;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
@@ -39,7 +40,7 @@ public class BackgroundRendererMixin {
     private static List<BackgroundRenderer.StatusEffectFogModifier> FOG_MODIFIERS;
 
     @Inject(method = "applyFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V"), locals = LocalCapture.CAPTURE_FAILHARD)
-    private static void hybrid$renderFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, float tickDelta, CallbackInfo ci, CameraSubmersionType cameraSubmersionType, Entity entity, BackgroundRenderer.FogData fogData) {
+    private static void hybrid$renderFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, float tickDelta, CallbackInfo ci, CameraSubmersionType cameraSubmersionType, Entity entity, BackgroundRenderer.FogData fogData, CameraSubmersionType cameraSubmersionType, Entity entity, BackgroundRenderer.FogData fogData, CameraSubmersionType cameraSubmersionType, Entity entity, BackgroundRenderer.FogData fogData, CameraSubmersionType cameraSubmersionType, Entity entity, BackgroundRenderer.FogData fogData) {
 
         if (entity instanceof ClientPlayerEntity clientPlayerEntity && cameraSubmersionType == CameraSubmersionType.WATER) {
             World world = clientPlayerEntity.getWorld();

@@ -39,12 +39,11 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
@@ -84,20 +83,19 @@ open class HybridAquaticCephalopodEntity(
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(CEPHALOPOD_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(HUNGER, MAX_HUNGER)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
+        dataTracker.set(MOISTNESS, getMaxMoistness())
+        dataTracker.set(CEPHALOPOD_SIZE, 0)
+        dataTracker.set(ATTEMPT_ATTACK, false)
+        dataTracker.set(HUNGER, MAX_HUNGER)
+        dataTracker.set(VARIANT, "")
+        dataTracker.set(VARIANT_DATA, NbtCompound())
     }
 
     override fun initialize(
         world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
+        difficulty: LocalDifficulty?,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = getMaxMoistness()
 
@@ -107,7 +105,7 @@ open class HybridAquaticCephalopodEntity(
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
         this.pitch = 0.0f
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun tick() {
@@ -204,10 +202,6 @@ open class HybridAquaticCephalopodEntity(
             return PlayState.CONTINUE
         }
         return PlayState.STOP
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose?, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
@@ -682,9 +676,6 @@ open class HybridAquaticCephalopodEntity(
         var ignore: List<Ignore> = emptyList()
     ) {
         companion object {
-            /**
-             * Creates a biome variant of a cephalopod
-             */
             fun biomeVariant(variantName: String, biomes : TagKey<Biome>, ignore : List<Ignore> = emptyList()): CephalopodVariant {
                 return CephalopodVariant(variantName, { world, _, pos, _ ->
                     world.getBiome(pos).isIn(biomes)

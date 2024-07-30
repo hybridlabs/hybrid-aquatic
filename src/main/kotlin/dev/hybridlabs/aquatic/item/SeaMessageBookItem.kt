@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack

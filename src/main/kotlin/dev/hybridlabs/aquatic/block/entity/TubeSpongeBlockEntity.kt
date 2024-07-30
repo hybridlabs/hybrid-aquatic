@@ -1,18 +1,18 @@
 package dev.hybridlabs.aquatic.block.entity
 
-import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity.Companion.SWAY_ANIMATION
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.util.math.BlockPos
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
+import software.bernie.geckolib.util.RenderUtil
 
-class TubeSpongeBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.TUBE_SPONGE, pos, state), GeoAnimatable {
+class TubeSpongeBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.TUBE_SPONGE, pos, state),
+    GeoAnimatable {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
         return if (world != null) {
@@ -32,10 +32,10 @@ class TubeSpongeBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hybr
     }
 
     override fun getTick(o: Any): Double {
-        return RenderUtils.getCurrentTick()
+        return RenderUtil.getCurrentTick()
     }
 
-    override fun toInitialChunkDataNbt(): NbtCompound {
+    override fun toInitialChunkDataNbt(registryLookup: RegistryWrapper.WrapperLookup?): NbtCompound? {
         return createNbt()
     }
 

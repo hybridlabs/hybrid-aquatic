@@ -7,14 +7,10 @@ import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.util.math.Vec3d
 import java.util.EnumSet
 
-open class SharkSwimGoal (
+open class SharkSwimGoal(
     protected val mob: PathAwareEntity,
-    protected val speed: Double,
-    private val canDespawn: Boolean
+    protected val speed: Double
 ) : Goal() {
-    protected var targetX = 0.0
-    protected var targetY = 0.0
-    protected var targetZ = 0.0
 
     var currentTarget: Vec3d? = null
 

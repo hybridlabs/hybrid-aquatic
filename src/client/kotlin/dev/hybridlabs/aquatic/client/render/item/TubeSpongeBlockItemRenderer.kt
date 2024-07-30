@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
 class TubeSpongeBlockItemRenderer: DynamicItemRenderer {
-    private val TubeSpongeBlockEntity = TubeSpongeBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.TUBE_SPONGE.defaultState)
+    private val tubeSpongeBlockEntity = TubeSpongeBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.TUBE_SPONGE.defaultState)
     private val renderer = TubeSpongeBlockEntityRenderer(HybridAquaticClient.createBlockEntityRendererFactoryContext())
 
     override fun render(
@@ -23,6 +23,6 @@ class TubeSpongeBlockItemRenderer: DynamicItemRenderer {
         light: Int,
         overlay: Int
     ) {
-        renderer.render(TubeSpongeBlockEntity, 1.0f, matrices, vertexConsumers, light, overlay)
+        renderer.render(tubeSpongeBlockEntity, 1.0f, matrices, vertexConsumers, light, overlay)
     }
 }

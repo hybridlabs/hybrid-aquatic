@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish.ray
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -10,10 +9,11 @@ import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
 class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: World) :
-    HybridAquaticRayEntity(entityType, world, variants = hashMapOf(
-        "spotted_eagle" to RayVariant.biomeVariant("spotted_eagle", HybridAquaticBiomeTags.WARM_OCEANS),
-        "blue_spotted" to RayVariant.biomeVariant("blue_spotted", HybridAquaticBiomeTags.REEF),),
-        HybridAquaticEntityTags.STINGRAY_PREY, HybridAquaticEntityTags.STINGRAY_PREDATOR) {
+    HybridAquaticRayEntity(
+        entityType, world, variants = hashMapOf(
+            "spotted_eagle" to RayVariant.biomeVariant("spotted_eagle", HybridAquaticBiomeTags.WARM_OCEANS),
+            "blue_spotted" to RayVariant.biomeVariant("blue_spotted", HybridAquaticBiomeTags.REEF),)
+    ) {
 
     public override fun getLootTableId(): Identifier {
         return when (this.variant?.variantName) {

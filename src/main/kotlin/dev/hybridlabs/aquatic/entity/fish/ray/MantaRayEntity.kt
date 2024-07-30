@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish.ray
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -8,8 +7,9 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
 
 class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: World) :
-    HybridAquaticRayEntity(entityType, world, emptyMap(),
-        HybridAquaticEntityTags.STINGRAY_PREY, HybridAquaticEntityTags.STINGRAY_PREDATOR) {
+    HybridAquaticRayEntity(
+        entityType, world, emptyMap()
+    ) {
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {

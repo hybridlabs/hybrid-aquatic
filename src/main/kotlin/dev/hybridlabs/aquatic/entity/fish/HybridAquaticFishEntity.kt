@@ -19,8 +19,10 @@ import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.loot.LootTable
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvent
@@ -35,12 +37,11 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 import kotlin.math.sqrt
 
@@ -71,20 +72,19 @@ open class HybridAquaticFishEntity(
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(FISH_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(HUNGER, MAX_HUNGER)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
+        dataTracker.set(MOISTNESS, getMaxMoistness())
+        dataTracker.set(FISH_SIZE, 0)
+        dataTracker.set(ATTEMPT_ATTACK, false)
+        dataTracker.set(HUNGER, MAX_HUNGER)
+        dataTracker.set(VARIANT, "")
+        dataTracker.set(VARIANT_DATA, NbtCompound())
     }
 
     override fun initialize(
         world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
+        difficulty: LocalDifficulty?,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = getMaxMoistness()
         this.size = this.random.nextBetween(getMinSize(),getMaxSize())
@@ -126,7 +126,7 @@ open class HybridAquaticFishEntity(
         }
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun tick() {
@@ -173,7 +173,7 @@ open class HybridAquaticFishEntity(
         }
     }
 
-    override fun getLootTableId(): Identifier {
+    override fun getLootTableId(): RegistryKey<LootTable>? {
         return if (variant != null) {
             super.getLootTableId().withPath { path -> "${path}_${variant!!.variantName}" }
         } else {
@@ -249,10 +249,6 @@ open class HybridAquaticFishEntity(
             return PlayState.CONTINUE
         }
         return PlayState.CONTINUE
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.65f
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {

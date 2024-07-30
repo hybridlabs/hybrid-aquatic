@@ -26,10 +26,6 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: World) :
         }
     }
 
-    fun getHurtSound(): SoundEvent {
-        return SoundEvents.ENTITY_SHULKER_HURT_CLOSED
-    }
-
     override fun getMaxSize(): Int {
         return 5
     }
