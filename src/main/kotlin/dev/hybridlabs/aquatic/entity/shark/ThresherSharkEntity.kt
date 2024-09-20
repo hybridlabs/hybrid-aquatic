@@ -25,10 +25,11 @@ class ThresherSharkEntity(entityType: EntityType<out ThresherSharkEntity>, world
         companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 24.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.8)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 36.0)
+		.add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 9.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.8)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 26.0)
         }
     }
 
