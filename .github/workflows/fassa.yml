@@ -1,12 +1,12 @@
-name: Java CI with Gradle
+name: Build and Package Java Project with Gradle
 
 on:
   push:
     branches:
-      - main
+      - '**'  # Executa em qualquer branch
   pull_request:
     branches:
-      - main
+      - '**'  # Também executa para todos os pull requests
 
 jobs:
   build:
