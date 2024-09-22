@@ -25,7 +25,6 @@ class BullSharkEntity(entityType: EntityType<out BullSharkEntity>, world: World)
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 54.0)
-		.add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 9.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.6)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 26.0)
