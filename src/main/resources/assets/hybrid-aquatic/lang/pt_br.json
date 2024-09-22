@@ -330,7 +330,5 @@
   "item.minecraft.tipped_arrow.effect.clarity": "Flecha de Clareza",
   "item.minecraft.tipped_arrow.effect.glowing": "Flecha de Brilho",
   "item.minecraft.tipped_arrow.effect.thalassophobia": "Flecha de Talassofobia",
-  "itemGroup.hybrid-aquatic.blocks": "Blocos Híbridos Aquáticos",
-  "itemGroup.hybrid-aquatic.items": "Itens Híbridos Aquáticos",
-  "itemGroup.hybrid-aquatic.spawn_eggs": "Ovos de Desova Híbridos Aquáticos"
+  "itemGroup.hybrid-aquatic.blocks": "Hybrid Aquatic"
 }
