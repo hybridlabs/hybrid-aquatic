@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "hybrid-aquatic:block/thermal_vent",
-		"particle": "hybrid-aquatic:block/thermal_vent"
+		"2": "minecraft:block/kelp",
+		"particle": "minecraft:block/kelp"
 	},
 	"elements": [
 		{
