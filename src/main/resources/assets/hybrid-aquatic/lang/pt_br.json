@@ -332,5 +332,6 @@
   "item.minecraft.tipped_arrow.effect.clarity": "Flecha de Clareza",
   "item.minecraft.tipped_arrow.effect.glowing": "Flecha de Brilho",
   "item.minecraft.tipped_arrow.effect.thalassophobia": "Flecha de Talassofobia",
-  "itemGroup.hybrid-aquatic": "Hybrid Aquatic"
+  "itemGroup.hybrid-aquatic": "Hybrid Aquatic",
+  "itemGroup.hybrid-aquatic.blocks": "Hybrid Aquatic Blocks"
 }
