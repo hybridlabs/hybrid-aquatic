@@ -3,9 +3,13 @@ package dev.hybridlabs.aquatic.block
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import net.minecraft.network.RegistryByteBuf
+import net.minecraft.network.codec.PacketCodec
+import net.minecraft.network.codec.PacketCodecs
 import net.minecraft.registry.DynamicRegistryManager
 import net.minecraft.util.Identifier
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 /**
  * Represents a message inside a Message in a Bottle.
@@ -45,5 +49,15 @@ data class SeaMessage(
                 Codec.STRING.optionalFieldOf("author").forGetter(SeaMessage::author)
             ).apply(instance, ::SeaMessage)
         }
+
+        val PACKET_CODEC: PacketCodec<RegistryByteBuf, SeaMessage> = PacketCodec.tuple(
+            PacketCodecs.STRING,
+            SeaMessage::translationKey,
+            PacketCodecs.BOOL,
+            SeaMessage::hasTitle,
+            PacketCodecs.STRING.xmap({ Optional.ofNullable(it) }, { it.getOrNull() }),
+            SeaMessage::author,
+            ::SeaMessage
+        )
     }
 }

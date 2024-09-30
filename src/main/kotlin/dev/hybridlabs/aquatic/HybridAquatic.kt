@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.component.HybridAquaticDataComponentTypes
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
@@ -56,6 +57,8 @@ object HybridAquatic : ModInitializer {
         FlammableBlockRegistry.getDefaultInstance().add(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE, 5, 20)
 
         FlammableBlockRegistry.getDefaultInstance().add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD, 5, 5)
+
+        HybridAquaticDataComponentTypes
 
         HybridAquaticBiomeTags
 

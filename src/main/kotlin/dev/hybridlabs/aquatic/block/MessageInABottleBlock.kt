@@ -2,8 +2,10 @@
 
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
+import dev.hybridlabs.aquatic.component.HybridAquaticDataComponentTypes
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.block.Block
@@ -75,6 +77,11 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
         placer: LivingEntity?,
         stack: ItemStack
     ) {
+        stack.get(HybridAquaticDataComponentTypes.BOTTLE)?.let { bottleComponent ->
+            if (bottleComponent.messageStack.isEmpty) {
+                // TODO below
+            }
+        }
         stack.getSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.let { nbt ->
             // if not present, generate a random message
             if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
@@ -155,11 +162,14 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
     /**
      * Represents the variants of a Message in a Bottle.
      */
-    enum class Variant(val id: String) : StringIdentifiable {
+    enum class Variant(
+        val id: String,
+        val translationSuffix: String? = id,
+    ) : StringIdentifiable {
         /**
          * The default bottle variant.
          */
-        BOTTLE("bottle"),
+        BOTTLE("bottle", null),
 
         /**
          * The jar variant.
@@ -171,19 +181,20 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
          */
         LONGNECK("longneck");
 
+        fun appendTranslationSuffix(key: String): String {
+            if (translationSuffix == null) {
+                return key
+            }
+
+            return "$key.$translationSuffix"
+        }
+
         override fun asString(): String {
             return id
         }
 
         companion object {
-            private val BY_ID = entries.associateBy(Variant::id)
-
-            /**
-             * Retrieves a variant based on [id].
-             */
-            fun byId(id: String): Variant {
-                return BY_ID[id] ?: BOTTLE
-            }
+            val CODEC: Codec<Variant> = StringIdentifiable.createCodec(::values)
         }
     }
 
