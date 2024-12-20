@@ -97,7 +97,7 @@ open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, 
     companion object {
         val FACING: DirectionProperty = HorizontalFacingBlock.FACING
 
-        private val CUBE_SHAPE: VoxelShape = createCuboidShape(0.5, 0.0, 0.5, 15.5, 15.5, 15.5)
+        private val CUBE_SHAPE: VoxelShape = createCuboidShape(0.5, 3.0, 0.5, 15.5, 16.0, 15.5)
         private val POLE_SHAPE: VoxelShape = createCuboidShape(4.0, 0.0, 3.0, 12.0, 2.0, 13.0)
 
         private val SHAPE: VoxelShape = VoxelShapes.union(CUBE_SHAPE, POLE_SHAPE)
