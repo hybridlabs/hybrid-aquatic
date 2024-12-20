@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import dev.hybridlabs.aquatic.entity.ai.WallClimbingNavigation
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity.VariantCollisionRules.ExclusionStatus.EXCLUSIVE
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity.VariantCollisionRules.ExclusionStatus.INCLUSIVE
 import net.minecraft.entity.EntityData
@@ -10,8 +11,6 @@ import net.minecraft.entity.ai.goal.EscapeDangerGoal
 import net.minecraft.entity.ai.goal.LookAroundGoal
 import net.minecraft.entity.ai.goal.MoveIntoWaterGoal
 import net.minecraft.entity.ai.goal.WanderAroundGoal
-import net.minecraft.entity.ai.pathing.EntityNavigation
-import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
@@ -37,6 +36,7 @@ import software.bernie.geckolib.core.animation.*
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
+
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticCritterEntity(
     type: EntityType<out HybridAquaticCritterEntity>,
@@ -46,23 +46,18 @@ open class HybridAquaticCritterEntity(
     open val collisionRules: List<VariantCollisionRules> = listOf()
 ) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private var landNavigation: EntityNavigation = createNavigation(world)
     private var fromFishingNet = false
+    private var climbingTicks = 0
 
     init {
-        stepHeight = 1.0F
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
         setPathfindingPenalty(PathNodeType.WALKABLE, 10.0f)
         moveControl = MoveControl(this)
-        navigation = this.landNavigation
-    }
-
-    override fun createNavigation(world: World): EntityNavigation {
-        return MobNavigation(this, world)
+        navigation = WallClimbingNavigation(this, world)
     }
 
     override fun hasNoDrag(): Boolean {
-        return false
+        return this.isClimbing
     }
 
     override fun tick() {
@@ -71,6 +66,42 @@ open class HybridAquaticCritterEntity(
         if (!isWet) {
             this.speed = 0.01F
         }
+
+        if (!this.world.isClient) {
+            this.setClimbingWall(this.horizontalCollision)
+        }
+
+        if (this.isClimbingWall()) {
+            this.climbingTicks++
+
+            val blockStateAtPos = this.blockStateAtPos
+            if (this.isMoving() && !blockStateAtPos.isLiquid && this.climbingTicks % 6 == 0) {
+                this.playStepSound(this.blockPos, blockStateAtPos)
+            }
+        } else {
+            this.climbingTicks = 0
+        }
+
+        if (this.isClimbing) {
+            val velocity = this.velocity
+            this.setVelocity(velocity.x, velocity.y * 0.33F, velocity.z)
+        }
+    }
+
+    private fun isMoving(): Boolean {
+        return (this.isOnGround || this.isClimbing) && velocity.lengthSquared() >= 0.0001
+    }
+
+    override fun isClimbing(): Boolean {
+        return this.climbingTicks > 8 && this.isClimbingWall()
+    }
+
+    private fun isClimbingWall(): Boolean {
+        return dataTracker.get(IS_CLIMBING_WALL)
+    }
+
+    private fun setClimbingWall(isClimbingWall: Boolean) {
+        dataTracker.set(IS_CLIMBING_WALL, isClimbingWall)
     }
 
     override fun initDataTracker() {
@@ -79,6 +110,7 @@ open class HybridAquaticCritterEntity(
         dataTracker.startTracking(VARIANT_DATA, NbtCompound())
         dataTracker.startTracking(CRITTER_SIZE, 0)
         dataTracker.startTracking(CRITTER_FLAGS, 0.toByte())
+        dataTracker.startTracking(IS_CLIMBING_WALL, false)
     }
 
     override fun initGoals() {
@@ -142,9 +174,8 @@ open class HybridAquaticCritterEntity(
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-
     override fun shouldSwimInFluids(): Boolean {
-        return !isOnGround
+        return !isOnGround || !isClimbing
     }
 
     override fun isPushedByFluids(): Boolean {
@@ -277,6 +308,8 @@ open class HybridAquaticCritterEntity(
             DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CRITTER_FLAGS: TrackedData<Byte> =
             DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.BYTE)
+        val IS_CLIMBING_WALL: TrackedData<Boolean> =
+            DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,

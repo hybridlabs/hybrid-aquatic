@@ -12,7 +12,7 @@
 			},
 			"bones": [
 				{
-					"name": "body_1",
+					"name": "body",
 					"pivot": [0, 1.86223, -1.19728],
 					"cubes": [
 						{"origin": [-1, 0.5, -2.09728], "size": [2, 2, 3], "uv": [0, 0]},
@@ -25,7 +25,7 @@
 				},
 				{
 					"name": "left_antenna",
-					"parent": "body_1",
+					"parent": "body",
 					"pivot": [0.5, 2.25, -2.09728],
 					"rotation": [45, -22.5, 0],
 					"cubes": [
@@ -34,7 +34,7 @@
 				},
 				{
 					"name": "right_antenna",
-					"parent": "body_1",
+					"parent": "body",
 					"pivot": [-0.5, 2.25, -2.09728],
 					"rotation": [45, 22.5, 0],
 					"cubes": [
@@ -42,8 +42,8 @@
 					]
 				},
 				{
-					"name": "body_2",
-					"parent": "body_1",
+					"name": "body_1",
+					"parent": "body",
 					"pivot": [0, 2.5, 0.90272],
 					"rotation": [-22.5, 0, 0],
 					"cubes": [
@@ -56,7 +56,7 @@
 				},
 				{
 					"name": "tail",
-					"parent": "body_2",
+					"parent": "body_1",
 					"pivot": [0, 2.5, 2.90272],
 					"rotation": [22.5, 0, 0],
 					"cubes": [
@@ -65,7 +65,7 @@
 				},
 				{
 					"name": "left_leg_1",
-					"parent": "body_1",
+					"parent": "body",
 					"pivot": [1, 1.5, -1.09728],
 					"rotation": [0, 22.5, 57.5],
 					"cubes": [
@@ -74,7 +74,7 @@
 				},
 				{
 					"name": "right_leg_1",
-					"parent": "body_1",
+					"parent": "body",
 					"pivot": [-1, 1.5, -1.09728],
 					"rotation": [0, -22.5, -57.5],
 					"cubes": [
@@ -83,7 +83,7 @@
 				},
 				{
 					"name": "left_leg_2",
-					"parent": "body_1",
+					"parent": "body",
 					"pivot": [1, 1.5, -0.49728],
 					"rotation": [0, 15, 57.5],
 					"cubes": [
@@ -92,7 +92,7 @@
 				},
 				{
 					"name": "right_leg_2",
-					"parent": "body_1",
+					"parent": "body",
 					"pivot": [-1, 1.5, -0.49728],
 					"rotation": [0, -15, -57.5],
 					"cubes": [
@@ -101,7 +101,7 @@
 				},
 				{
 					"name": "left_leg_3",
-					"parent": "body_1",
+					"parent": "body",
 					"pivot": [1, 1.5, -0.19728],
 					"rotation": [0, -15, 57.5],
 					"cubes": [
@@ -110,7 +110,7 @@
 				},
 				{
 					"name": "right_leg_3",
-					"parent": "body_1",
+					"parent": "body",
 					"pivot": [-1, 1.5, -0.19728],
 					"rotation": [0, 15, -57.5],
 					"cubes": [
@@ -119,7 +119,7 @@
 				},
 				{
 					"name": "left_leg_4",
-					"parent": "body_1",
+					"parent": "body",
 					"pivot": [1, 1.5, 0.40272],
 					"rotation": [0, -22.5, 57.5],
 					"cubes": [
@@ -128,7 +128,7 @@
 				},
 				{
 					"name": "right_leg_4",
-					"parent": "body_1",
+					"parent": "body",
 					"pivot": [-1, 1.5, 0.40272],
 					"rotation": [0, 22.5, -57.5],
 					"cubes": [
