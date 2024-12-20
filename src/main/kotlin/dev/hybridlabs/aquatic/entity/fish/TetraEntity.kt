@@ -23,6 +23,7 @@ class TetraEntity(entityType: EntityType<out TetraEntity>, world: World) :
                 "neon",
                 listOf(
                     HybridAquaticBiomeTags.JUNGLE,
+                    HybridAquaticBiomeTags.MANGROVES,
                     HybridAquaticBiomeTags.MARSHES,
                     HybridAquaticBiomeTags.TROPICAL_RIVERS
                 ),
