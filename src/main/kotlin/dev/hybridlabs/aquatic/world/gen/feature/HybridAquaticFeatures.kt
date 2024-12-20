@@ -17,7 +17,7 @@ object HybridAquaticFeatures {
 //    val DEEP_CORAL_TREE = register("deep_coral_tree", DeepCoralTreeFeature(DefaultFeatureConfig.CODEC))
 //    val DEEP_CORAL_CLAW = register("deep_coral_claw", DeepCoralClawFeature(DefaultFeatureConfig.CODEC))
 //    val DEEP_CORAL_MUSHROOM = register("deep_coral_mushroom", DeepCoralMushroomFeature(DefaultFeatureConfig.CODEC))
-    val BRINE_LAKE_FEATURE = register("brine_lake", BrineLakeFeature(BrineLakeFeatureConfig.CODEC))
+//    val BRINE_LAKE_FEATURE = register("brine_lake", BrineLakeFeature(BrineLakeFeatureConfig.CODEC))
 
     private fun <FC : FeatureConfig, F : Feature<FC>> register(id: String, feature: F): Feature<FC> {
         return Registry.register(Registries.FEATURE, Identifier(HybridAquatic.MOD_ID, id), feature)

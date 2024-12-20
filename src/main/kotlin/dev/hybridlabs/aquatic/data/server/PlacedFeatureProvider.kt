@@ -145,17 +145,17 @@ class PlacedFeatureProvider(output: FabricDataOutput, registriesFuture: Completa
             )
         )
 
-        // brine lake
-        entries.add(
-            HybridAquaticPlacedFeatures.BRINE_LAKE,
-            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.BRINE_LAKE),
-                listOf(
-                    SquarePlacementModifier.of(),
-                    SurfaceThresholdFilterPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG, Int.MIN_VALUE, -32),
-                    NoiseBasedCountPlacementModifier.of(10, 100.0, 0.0),
-                )
-            )
-        )
+//        // brine lake
+//        entries.add(
+//            HybridAquaticPlacedFeatures.BRINE_LAKE,
+//            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.BRINE_LAKE),
+//                listOf(
+//                    SquarePlacementModifier.of(),
+//                    SurfaceThresholdFilterPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG, Int.MIN_VALUE, -32),
+//                    NoiseBasedCountPlacementModifier.of(10, 100.0, 0.0),
+//                )
+//            )
+//        )
 
 //        entries.add(
 //            HybridAquaticPlacedFeatures.DEEP_CORAL_MUSHROOM,

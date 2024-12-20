@@ -77,11 +77,11 @@ object FeatureBiomeModifications {
             HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH
         )
 
-        BiomeModifications.addFeature(
-            BiomeSelectors.tag(BiomeTags.IS_DEEP_OCEAN),
-            GenerationStep.Feature.LAKES,
-            HybridAquaticPlacedFeatures.BRINE_LAKE
-        )
+//        BiomeModifications.addFeature(
+//            BiomeSelectors.tag(BiomeTags.IS_DEEP_OCEAN),
+//            GenerationStep.Feature.LAKES,
+//            HybridAquaticPlacedFeatures.BRINE_LAKE
+//        )
 
 //        BiomeModifications.addFeature(
 //            BiomeSelectors.tag(BiomeTags.IS_DEEP_OCEAN),

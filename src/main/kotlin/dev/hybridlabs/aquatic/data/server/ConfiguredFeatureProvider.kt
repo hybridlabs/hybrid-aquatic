@@ -240,16 +240,16 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        // brine lake
-        entries.add(
-            HybridAquaticConfiguredFeatures.BRINE_LAKE,
-            ConfiguredFeature(
-                HybridAquaticFeatures.BRINE_LAKE_FEATURE, BrineLakeFeatureConfig(
-                    SimpleBlockStateProvider.of(Blocks.TUFF),
-                    SimpleBlockStateProvider.of(HybridAquaticBlocks.BRINE),
-                )
-            )
-        )
+//        // brine lake
+//        entries.add(
+//            HybridAquaticConfiguredFeatures.BRINE_LAKE,
+//            ConfiguredFeature(
+//                HybridAquaticFeatures.BRINE_LAKE_FEATURE, BrineLakeFeatureConfig(
+//                    SimpleBlockStateProvider.of(Blocks.TUFF),
+//                    SimpleBlockStateProvider.of(HybridAquaticBlocks.BRINE),
+//                )
+//            )
+//        )
 
 //        // deep coral
 //        entries.add(
