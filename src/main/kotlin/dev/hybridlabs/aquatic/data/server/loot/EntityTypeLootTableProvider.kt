@@ -62,21 +62,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.MANGLERFISH) {
-            pool(
-                LootPool.builder()
-                    .with(
-                        ItemEntry.builder(HybridAquaticItems.MANGLERFISH_LURE)
-                    )
-            )
-            pool(
-                LootPool.builder()
-                    .with(
-                        ItemEntry.builder(HybridAquaticItems.MANGLERFISH_FIN)
-                    )
-            )
-        }
-
         export(exporter, HybridAquaticEntityTypes.DECORATOR_CRAB) {
             pool(
                 LootPool.builder()

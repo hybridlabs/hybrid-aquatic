@@ -84,6 +84,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1.0f))
                         .bonusRolls(UniformLootNumberProvider.create(0.0f, 1.0f))
+                        .with(ItemEntry.builder(HybridAquaticItems.MANGLERFISH_FIN))
+                        .with(ItemEntry.builder(HybridAquaticItems.MANGLERFISH_LURE))
                         .with(ItemEntry.builder(HybridAquaticItems.EEL_SCARF))
                         .with(ItemEntry.builder(HybridAquaticItems.MOON_JELLYFISH_HAT))
                         .with(ItemEntry.builder(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE))
@@ -722,7 +724,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                 )
                 .pool(
                     LootPool.builder()
-                        .rolls(UniformLootNumberProvider.create(0.1f, 0.1f))
+                        .conditionally(RandomChanceLootCondition.builder(0.5f))
                         .with(ItemEntry.builder(Items.RAW_GOLD).weight(1))
                         .with(ItemEntry.builder(Items.RAW_IRON).weight(3))
                         .with(ItemEntry.builder(Items.RAW_COPPER).weight(5))

@@ -9,6 +9,14 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "hybrid-aquatic:manglerfish_fin"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:manglerfish_lure"
+        },
+        {
+          "type": "minecraft:item",
           "name": "hybrid-aquatic:eel_scarf"
         },
         {

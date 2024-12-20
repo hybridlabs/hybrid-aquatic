@@ -424,7 +424,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.HAMMERHEAD_SHARK to "Hammerhead Shark",
             HybridAquaticEntityTypes.WHALE_SHARK to "Whale Shark",
             HybridAquaticEntityTypes.KARKINOS to "Karkinos",
-            HybridAquaticEntityTypes.MANGLERFISH to "Manglerfish",
             HybridAquaticEntityTypes.DUNGENESS_CRAB to "Crab",
             HybridAquaticEntityTypes.FIDDLER_CRAB to "Fiddler Crab",
             HybridAquaticEntityTypes.HERMIT_CRAB to "Hermit Crab",

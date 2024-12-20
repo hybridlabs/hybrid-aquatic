@@ -8,11 +8,8 @@ import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
 import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
-import dev.hybridlabs.aquatic.entity.fish.MantaRayEntity
-import dev.hybridlabs.aquatic.entity.fish.StingrayEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
-import dev.hybridlabs.aquatic.entity.miniboss.ManglerfishEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
@@ -508,13 +505,6 @@ object HybridAquaticEntityTypes {
         ::KarkinosEntity,
         EntityDimensions.fixed(2.0f, 1.0f),
         KarkinosEntity.createMobAttributes()
-    )
-
-    val MANGLERFISH = registerMiniboss(
-        "manglerfish",
-        ::ManglerfishEntity,
-        EntityDimensions.fixed(2.25f, 1.25f),
-        ManglerfishEntity.createMobAttributes()
     )
 
     //critters

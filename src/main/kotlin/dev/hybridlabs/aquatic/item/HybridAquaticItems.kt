@@ -1415,7 +1415,6 @@ object HybridAquaticItems {
         //#region Miniboss
 
     val KARKINOS_SPAWN_EGG = registerSpawnEgg("karkinos_spawn_egg", HybridAquaticEntityTypes.KARKINOS, 0x852c2a, 0x3d1031)
-    val MANGLERFISH_SPAWN_EGG = registerSpawnEgg("manglerfish_spawn_egg", HybridAquaticEntityTypes.MANGLERFISH, 0x44404d, 0x74e5d5)
 
         //#endregion
 
