@@ -10,6 +10,7 @@
             "state": {
               "Name": "hybrid-aquatic:glowing_plankton",
               "Properties": {
+                "light_level": "0",
                 "lit": "false",
                 "waterlogged": "true"
               }

@@ -23,6 +23,12 @@
     },
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.5,
+          "condition": "minecraft:random_chance"
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
@@ -39,11 +45,7 @@
           "weight": 5
         }
       ],
-      "rolls": {
-        "type": "minecraft:uniform",
-        "max": 0.1,
-        "min": 0.1
-      }
+      "rolls": 1.0
     }
   ],
   "random_sequence": "hybrid-aquatic:gameplay/vent_drops"
