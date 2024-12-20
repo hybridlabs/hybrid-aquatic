@@ -40,10 +40,7 @@ abstract class HybridAquaticCritterEntityModel<T: HybridAquaticCritterEntity> (p
 
         if (animatable.isClimbing) {
             body.rotY = 0.0f
-            body.rotZ = 1.5708f
-        } else {
-            body.rotY = 0.0f
-            body.rotZ = 0.0f
+            body.rotZ = 1.5f
         }
     }
 }
