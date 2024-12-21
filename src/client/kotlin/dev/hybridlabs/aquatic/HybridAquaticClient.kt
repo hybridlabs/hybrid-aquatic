@@ -124,8 +124,8 @@ object HybridAquaticClient : ClientModInitializer {
 
             HybridAquaticBlocks.GLOWING_PLANKTON,
 
-            HybridAquaticBlocks.GREEN_SEAWEED,
-            HybridAquaticBlocks.TALL_GREEN_SEAWEED,
+            HybridAquaticBlocks.SEA_LETTUCE,
+            HybridAquaticBlocks.TALL_SEA_LETTUCE,
 
             HybridAquaticBlocks.CRAB_POT,
             HybridAquaticBlocks.GIANT_CLAM,

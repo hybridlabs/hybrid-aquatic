@@ -16,7 +16,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-class TallGreenSeaweedBlock(settings: Settings?) : TallPlantBlock(settings), FluidFillable {
+class TallSeaLettuceBlock(settings: Settings?) : TallPlantBlock(settings), FluidFillable {
     override fun getOutlineShape(
         state: BlockState,
         world: BlockView,
@@ -31,7 +31,7 @@ class TallGreenSeaweedBlock(settings: Settings?) : TallPlantBlock(settings), Flu
     }
 
     override fun getPickStack(world: BlockView, pos: BlockPos, state: BlockState): ItemStack {
-        return ItemStack(HybridAquaticBlocks.GREEN_SEAWEED)
+        return ItemStack(HybridAquaticBlocks.SEA_LETTUCE)
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {

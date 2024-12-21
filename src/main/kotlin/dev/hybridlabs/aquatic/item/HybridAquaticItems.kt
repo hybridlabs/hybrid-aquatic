@@ -209,7 +209,7 @@ object HybridAquaticItems {
     val SARGASSUM = registerBlockItem("sargassum", HybridAquaticBlocks.SARGASSUM)
     val FLOATING_SARGASSUM = registerBlockItem("floating_sargassum", HybridAquaticBlocks.FLOATING_SARGASSUM)
     val RED_SEAWEED = registerBlockItem("red_seaweed", HybridAquaticBlocks.RED_SEAWEED)
-    val GREEN_SEAWEED = registerBlockItem("green_seaweed", HybridAquaticBlocks.GREEN_SEAWEED)
+    val GREEN_SEAWEED = registerBlockItem("green_seaweed", HybridAquaticBlocks.SEA_LETTUCE)
     val HYDROTHERMAL_VENT = registerBlockItem("hydrothermal_vent", HybridAquaticBlocks.THERMAL_VENT)
     val TUBE_WORM = registerBlockItem("tube_worm", HybridAquaticBlocks.TUBE_WORM)
     val TUBE_SPONGE = registerBlockItem("tube_sponge", HybridAquaticBlocks.TUBE_SPONGE)

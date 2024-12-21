@@ -87,8 +87,8 @@ class PlacedFeatureProvider(output: FabricDataOutput, registriesFuture: Completa
         )
 
         entries.add(
-            HybridAquaticPlacedFeatures.GREEN_SEAWEED_PATCH,
-            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.GREEN_SEAWEED_PATCH),
+            HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH,
+            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH),
                 listOf(
                     SquarePlacementModifier.of(),
                     PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,

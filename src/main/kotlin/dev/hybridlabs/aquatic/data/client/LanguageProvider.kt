@@ -124,8 +124,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
             HybridAquaticBlocks.GLOWING_PLANKTON to "Glowing Plankton",
 
-            HybridAquaticBlocks.GREEN_SEAWEED to "Green Seaweed",
-            HybridAquaticBlocks.TALL_GREEN_SEAWEED to "Tall Green Seaweed",
+            HybridAquaticBlocks.SEA_LETTUCE to "Sea Lettuce",
+            HybridAquaticBlocks.TALL_SEA_LETTUCE to "Tall Sea Lettuce",
 
             HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK to "Lophelia Coral Block",
             HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK to "Dead Lophelia Coral Block",

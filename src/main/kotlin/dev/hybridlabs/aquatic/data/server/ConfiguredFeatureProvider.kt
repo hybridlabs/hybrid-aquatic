@@ -17,6 +17,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.intprovider.ConstantIntProvider
 import net.minecraft.util.math.intprovider.UniformIntProvider
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler
+import net.minecraft.world.gen.ProbabilityConfig
 import net.minecraft.world.gen.blockpredicate.BlockPredicate
 import net.minecraft.world.gen.feature.*
 import net.minecraft.world.gen.stateprovider.BlockStateProvider
@@ -147,17 +148,10 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticConfiguredFeatures.GREEN_SEAWEED_PATCH,
+            HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH,
             ConfiguredFeature(
-                Feature.FLOWER, RandomPatchFeatureConfig(
-                    10, 5, 2,
-                    PlacedFeatures.createEntry(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockFeatureConfig(
-                            BlockStateProvider.of(HybridAquaticBlocks.GREEN_SEAWEED.defaultState)
-                        ),
-                        BlockPredicate.matchingBlocks(Blocks.WATER)
-                    )
+                HybridAquaticFeatures.SEA_LETTUCE_PATCH, ProbabilityConfig(
+                    0.5f
                 )
             )
         )

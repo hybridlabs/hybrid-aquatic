@@ -50,7 +50,7 @@ object FeatureBiomeModifications {
         BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.TROPICAL_OCEANS),
             GenerationStep.Feature.VEGETAL_DECORATION,
-            HybridAquaticPlacedFeatures.GREEN_SEAWEED_PATCH
+            HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH
         )
 
         BiomeModifications.addFeature(

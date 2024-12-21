@@ -16,6 +16,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
+@Suppress("OVERRIDE_DEPRECATION")
 class TallRedSeaweedBlock(settings: Settings?) : TallPlantBlock(settings), FluidFillable {
     override fun getOutlineShape(
         state: BlockState,

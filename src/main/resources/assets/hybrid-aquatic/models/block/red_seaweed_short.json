@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "hybrid-aquatic:block/green_seaweed"
+    "cross": "hybrid-aquatic:block/red_seaweed_short"
   }
 }

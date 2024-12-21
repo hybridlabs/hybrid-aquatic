@@ -18,7 +18,7 @@ import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
 @Suppress("OVERRIDE_DEPRECATION")
-class GreenSeaweedBlock(settings: Settings?) : PlantBlock(settings), Fertilizable, FluidFillable {
+class SeaLettuceBlock(settings: Settings?) : PlantBlock(settings), Fertilizable, FluidFillable {
     override fun getOutlineShape(
         state: BlockState,
         world: BlockView,
@@ -66,7 +66,7 @@ class GreenSeaweedBlock(settings: Settings?) : PlantBlock(settings), Fertilizabl
     }
 
     override fun grow(world: ServerWorld, random: Random, pos: BlockPos, state: BlockState) {
-        val blockState = HybridAquaticBlocks.TALL_GREEN_SEAWEED.defaultState
+        val blockState = HybridAquaticBlocks.TALL_SEA_LETTUCE.defaultState
         val blockState2 = blockState.with(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER) as BlockState
         val blockPos = pos.up()
         if (world.getBlockState(blockPos).isOf(Blocks.WATER)) {
