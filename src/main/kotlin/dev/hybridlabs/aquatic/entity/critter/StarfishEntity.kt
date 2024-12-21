@@ -20,7 +20,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             "blue" to CritterVariant.biomeVariant(
                 "blue",
                 listOf(
-                    HybridAquaticBiomeTags.TROPICAL_OCEANS,
+                    HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                     HybridAquaticBiomeTags.REEF,
                     HybridAquaticBiomeTags.SANDY_BEACHES
                 ),
@@ -29,7 +29,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             "orange" to CritterVariant.biomeVariant(
                 "orange",
                 listOf(
-                    HybridAquaticBiomeTags.TROPICAL_OCEANS,
+                    HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                     HybridAquaticBiomeTags.REEF,
                     HybridAquaticBiomeTags.SANDY_BEACHES
                 ),
@@ -38,7 +38,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             "green" to CritterVariant.biomeVariant(
                 "green",
                 listOf(
-                    HybridAquaticBiomeTags.TROPICAL_OCEANS,
+                    HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                     HybridAquaticBiomeTags.REEF,
                     HybridAquaticBiomeTags.SANDY_BEACHES
                 ),
@@ -47,7 +47,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             "purple" to CritterVariant.biomeVariant(
                 "purple",
                 listOf(
-                    HybridAquaticBiomeTags.TROPICAL_OCEANS,
+                    HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                     HybridAquaticBiomeTags.REEF,
                     HybridAquaticBiomeTags.SANDY_BEACHES
                 ),
@@ -56,7 +56,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             "red" to CritterVariant.biomeVariant(
                 "red",
                 listOf(
-                    HybridAquaticBiomeTags.TROPICAL_OCEANS,
+                    HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                     HybridAquaticBiomeTags.REEF,
                     HybridAquaticBiomeTags.SANDY_BEACHES
                 ),
@@ -65,58 +65,58 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             "yellow" to CritterVariant.biomeVariant(
                 "yellow",
                 listOf(
-                    HybridAquaticBiomeTags.TROPICAL_OCEANS,
+                    HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                     HybridAquaticBiomeTags.REEF,
                     HybridAquaticBiomeTags.SANDY_BEACHES
                 ),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_blue" to CritterVariant.biomeVariant(
-                "medium_blue", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_blue", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_green" to CritterVariant.biomeVariant(
-                "medium_green", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_green", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_orange" to CritterVariant.biomeVariant(
-                "medium_orange", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_orange", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_purple" to CritterVariant.biomeVariant(
-                "medium_purple", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_purple", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_red" to CritterVariant.biomeVariant(
-                "medium_red", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_red", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_yellow" to CritterVariant.biomeVariant(
-                "medium_yellow", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_yellow", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_knobbed_blue" to CritterVariant.biomeVariant(
-                "medium_knobbed_blue", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_knobbed_blue", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_knobbed_green" to CritterVariant.biomeVariant(
-                "medium_knobbed_green", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_knobbed_green", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_knobbed_orange" to CritterVariant.biomeVariant(
-                "medium_knobbed_orange", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_knobbed_orange", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_knobbed_purple" to CritterVariant.biomeVariant(
-                "medium_knobbed_purple", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_knobbed_purple", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_knobbed_red" to CritterVariant.biomeVariant(
-                "medium_knobbed_red", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_knobbed_red", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "medium_knobbed_yellow" to CritterVariant.biomeVariant(
-                "medium_knobbed_yellow", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
+                "medium_knobbed_yellow", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
                 ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
             ),
             "crown_of_thorns" to CritterVariant.biomeVariant("crown_of_thorns", listOf(HybridAquaticBiomeTags.REEF)),
