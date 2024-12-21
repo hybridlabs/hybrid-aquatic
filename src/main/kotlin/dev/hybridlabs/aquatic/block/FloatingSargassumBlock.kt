@@ -91,6 +91,7 @@ class FloatingSargassumBlock(settings: Settings) : PlantBlock(settings), Waterlo
         super.onEntityCollision(state, world, pos, entity)
         if (world is ServerWorld && entity is BoatEntity) {
             entity.slowMovement(state, Vec3d(0.66, 0.66, 0.66))
+            world.breakBlock(BlockPos(pos), false, entity)
         }
     }
 
