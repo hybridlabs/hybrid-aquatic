@@ -95,6 +95,6 @@ class WaterLettuceBlock(settings: Settings) : PlantBlock(settings), Waterloggabl
     }
 
     companion object {
-        private val SHAPE: VoxelShape = createCuboidShape(5.0, 14.0, 5.0, 11.0, 16.0, 11.0)
+        private val SHAPE: VoxelShape = createCuboidShape(3.0, 14.0, 3.0, 13.0, 16.0, 13.0)
     }
 }
