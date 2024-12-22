@@ -184,9 +184,9 @@ object HybridAquaticBlocks {
         )
     )
 
-    val RED_SEAWEED = register("red_seaweed", RedSeaweedBlock(FabricBlockSettings.copyOf((Blocks.SEAGRASS))))
-    val TALL_RED_SEAWEED =
-        register("tall_red_seaweed", TallRedSeaweedBlock(FabricBlockSettings.copyOf((Blocks.TALL_SEAGRASS))))
+    val RED_ALGAE = register("red_algae", RedAlgaeBlock(FabricBlockSettings.copyOf((Blocks.SEAGRASS))))
+    val TALL_RED_ALGAE =
+        register("tall_red_algae", TallRedAlgaeBlock(FabricBlockSettings.copyOf((Blocks.TALL_SEAGRASS))))
 
     val SEA_LETTUCE = register("sea_lettuce", SeaLettuceBlock(FabricBlockSettings.copyOf((Blocks.SEAGRASS))))
     val TALL_SEA_LETTUCE =

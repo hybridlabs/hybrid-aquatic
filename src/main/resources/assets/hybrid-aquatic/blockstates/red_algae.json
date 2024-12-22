@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hybrid-aquatic:block/red_algae"
+      },
+      {
+        "model": "hybrid-aquatic:block/red_algae_short"
+      }
+    ]
+  }
+}

@@ -59,40 +59,10 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticConfiguredFeatures.RED_SEAWEED_PATCH,
+            HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH,
             ConfiguredFeature(
-                Feature.FLOWER, RandomPatchFeatureConfig(
-                    10, 5, 2,
-                    PlacedFeatures.createEntry(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockFeatureConfig(
-                            BlockStateProvider.of(HybridAquaticBlocks.RED_SEAWEED.defaultState)
-                        ),
-                        BlockPredicate.matchingBlocks(Blocks.WATER)
-                    )
-                )
-            )
-        )
-
-        entries.add(
-            HybridAquaticConfiguredFeatures.RED_SEAWEED_MEADOW,
-            ConfiguredFeature(
-                Feature.RANDOM_PATCH, RandomPatchFeatureConfig(
-                    50, 10, 10,
-                    PlacedFeatures.createEntry(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockFeatureConfig(
-                            NoiseBlockStateProvider(
-                                237L,
-                                DoublePerlinNoiseSampler.NoiseParameters(-5, -5.0, *DoubleArray(0)),
-                                1.0f,
-                                listOf<BlockState>(
-                                    HybridAquaticBlocks.RED_SEAWEED.defaultState
-                                )
-                            )
-                        ),
-                        BlockPredicate.matchingBlocks(Blocks.WATER)
-                    )
+                HybridAquaticFeatures.RED_ALGAE_PATCH, ProbabilityConfig(
+                    0.33f
                 )
             )
         )
@@ -151,7 +121,7 @@ class ConfiguredFeatureProvider(
             HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH,
             ConfiguredFeature(
                 HybridAquaticFeatures.SEA_LETTUCE_PATCH, ProbabilityConfig(
-                    0.5f
+                    0.33f
                 )
             )
         )
@@ -226,9 +196,9 @@ class ConfiguredFeatureProvider(
                     SimpleBlockStateProvider.of(HybridAquaticBlocks.THERMAL_VENT),
                     SimpleBlockStateProvider.of(HybridAquaticBlocks.TUBE_WORM),
                     UniformIntProvider.create(2, 3),
-                    ConstantIntProvider.create(2),
+                    ConstantIntProvider.create(3),
                     UniformIntProvider.create(1, 3),
-                    ConstantIntProvider.create(8),
+                    ConstantIntProvider.create(4),
                     UniformIntProvider.create(TubeWormBlock.WORMS.min, TubeWormBlock.WORMS.max),
                 )
             )

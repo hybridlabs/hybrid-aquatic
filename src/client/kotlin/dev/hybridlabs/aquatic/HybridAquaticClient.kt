@@ -115,8 +115,8 @@ object HybridAquaticClient : ClientModInitializer {
         )
         registry.putBlocks(
             RenderLayer.getCutout(),
-            HybridAquaticBlocks.RED_SEAWEED,
-            HybridAquaticBlocks.TALL_RED_SEAWEED,
+            HybridAquaticBlocks.RED_ALGAE,
+            HybridAquaticBlocks.TALL_RED_ALGAE,
 
             HybridAquaticBlocks.SARGASSUM,
             HybridAquaticBlocks.SARGASSUM_PLANT,

@@ -17,7 +17,7 @@ import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
 @Suppress("OVERRIDE_DEPRECATION")
-class TallRedSeaweedBlock(settings: Settings?) : TallPlantBlock(settings), FluidFillable {
+class TallRedAlgaeBlock(settings: Settings?) : TallPlantBlock(settings), FluidFillable {
     override fun getOutlineShape(
         state: BlockState,
         world: BlockView,
@@ -32,7 +32,7 @@ class TallRedSeaweedBlock(settings: Settings?) : TallPlantBlock(settings), Fluid
     }
 
     override fun getPickStack(world: BlockView, pos: BlockPos, state: BlockState): ItemStack {
-        return ItemStack(HybridAquaticBlocks.RED_SEAWEED)
+        return ItemStack(HybridAquaticBlocks.RED_ALGAE)
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {

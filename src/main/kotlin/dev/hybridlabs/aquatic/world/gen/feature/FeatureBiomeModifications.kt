@@ -18,9 +18,15 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.TROPICAL_OCEANS),
+            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.SARGASSUM
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.SARGASSUM_FOREST
         )
 
         BiomeModifications.addFeature(
@@ -38,17 +44,17 @@ object FeatureBiomeModifications {
         BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.TROPICAL_OCEANS),
             GenerationStep.Feature.VEGETAL_DECORATION,
-            HybridAquaticPlacedFeatures.RED_SEAWEED_PATCH
+            HybridAquaticPlacedFeatures.RED_ALGAE_PATCH
         )
 
         BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
             GenerationStep.Feature.VEGETAL_DECORATION,
-            HybridAquaticPlacedFeatures.RED_SEAWEED_MEADOW
+            HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW
         )
 
         BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.TROPICAL_OCEANS),
+            BiomeSelectors.tag(HybridAquaticBiomeTags.REEF),
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH
         )

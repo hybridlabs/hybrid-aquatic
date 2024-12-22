@@ -57,8 +57,8 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticBlocks.MANGROVE_CRATE)
             entries.add(HybridAquaticBlocks.CHERRY_CRATE)
 
-            entries.add(HybridAquaticItems.GREEN_SEAWEED)
-            entries.add(HybridAquaticItems.RED_SEAWEED)
+            entries.add(HybridAquaticItems.SEA_LETTUCE)
+            entries.add(HybridAquaticItems.RED_ALGAE)
             entries.add(HybridAquaticItems.SARGASSUM)
             entries.add(HybridAquaticItems.FLOATING_SARGASSUM)
 

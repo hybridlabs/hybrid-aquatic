@@ -8,7 +8,6 @@ import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
-import net.minecraft.state.property.Properties
 import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
@@ -45,7 +44,7 @@ class FloatingSargassumBlock(settings: Settings) : PlantBlock(settings), Waterlo
         val pos = context.blockPos
         val fluidState = world.getFluidState(pos)
         return if (fluidState.fluid == Fluids.WATER) {
-            super.getPlacementState(context)?.with(Properties.WATERLOGGED, true)
+            super.getPlacementState(context)?.with(WATERLOGGED, true)
         } else {
             null
         }
@@ -59,7 +58,7 @@ class FloatingSargassumBlock(settings: Settings) : PlantBlock(settings), Waterlo
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        if (state.get(Properties.WATERLOGGED)) {
+        if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
@@ -80,11 +79,11 @@ class FloatingSargassumBlock(settings: Settings) : PlantBlock(settings), Waterlo
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(Properties.WATERLOGGED)) Fluids.WATER.getStill(false) else super.getFluidState(state)
+        return if (state.get(WATERLOGGED)) Fluids.WATER.getStill(false) else super.getFluidState(state)
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        builder.add(Properties.WATERLOGGED)
+        builder.add(WATERLOGGED)
     }
 
     override fun onEntityCollision(state: BlockState, world: World, pos: BlockPos, entity: Entity) {
