@@ -102,6 +102,24 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticConfiguredFeatures.WATER_LETTUCE,
+            ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchFeatureConfig(
+                    5, 3, 3,
+                    PlacedFeatures.createEntry(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockFeatureConfig(
+                            SimpleBlockStateProvider.of(HybridAquaticBlocks.WATER_LETTUCE)
+                        ),
+                        BlockPredicate.matchingBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+
+
+        entries.add(
             HybridAquaticConfiguredFeatures.GLOWING_PLANKTON,
             ConfiguredFeature(
                 Feature.RANDOM_PATCH, RandomPatchFeatureConfig(

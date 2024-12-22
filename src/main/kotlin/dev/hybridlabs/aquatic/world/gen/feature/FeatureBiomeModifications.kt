@@ -24,6 +24,12 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.SARGASSUM
+        )
+
+        BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.SARGASSUM_FOREST
@@ -57,6 +63,24 @@ object FeatureBiomeModifications {
             BiomeSelectors.tag(HybridAquaticBiomeTags.REEF),
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.RIVERS),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.WATER_LETTUCE
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.SWAMP),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.WATER_LETTUCE
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.MARSHES),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.WATER_LETTUCE
         )
 
         BiomeModifications.addFeature(

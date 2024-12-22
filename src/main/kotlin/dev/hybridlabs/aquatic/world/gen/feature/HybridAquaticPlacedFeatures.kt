@@ -16,6 +16,8 @@ object HybridAquaticPlacedFeatures {
     val SARGASSUM_FOREST = register("sargassum_forest")
     val FLOATING_SARGASSUM = register("floating_sargassum")
 
+    val WATER_LETTUCE = register("water_lettuce")
+
     val GLOWING_PLANKTON = register("glowing_plankton")
 
     val RED_ALGAE_PATCH = register("red_algae_patch")

@@ -121,6 +121,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.SARGASSUM to "Sargassum",
             HybridAquaticBlocks.SARGASSUM_PLANT to "Sargassum Plant",
             HybridAquaticBlocks.FLOATING_SARGASSUM to "Floating Sargassum",
+            HybridAquaticBlocks.WATER_LETTUCE to "Water Lettuce",
 
             HybridAquaticBlocks.GLOWING_PLANKTON to "Glowing Plankton",
 

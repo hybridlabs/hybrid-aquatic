@@ -173,6 +173,16 @@ object HybridAquaticBlocks {
         )
     )
 
+    val WATER_LETTUCE = register(
+        "water_lettuce", WaterLettuceBlock(
+            FabricBlockSettings
+                .copyOf(Blocks.LILY_PAD)
+                .noCollision()
+                .breakInstantly()
+                .mapColor(MapColor.LICHEN_GREEN)
+        )
+    )
+
     val GLOWING_PLANKTON = register(
         "glowing_plankton", GlowingPlanktonBlock(
             FabricBlockSettings

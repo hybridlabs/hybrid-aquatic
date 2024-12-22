@@ -83,6 +83,19 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticPlacedFeatures.WATER_LETTUCE,
+            PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.WATER_LETTUCE),
+                listOf(
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
+                    CountPlacementModifier.of(5),
+                    BiomePlacementModifier.of(),
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticPlacedFeatures.GLOWING_PLANKTON,
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.GLOWING_PLANKTON),
