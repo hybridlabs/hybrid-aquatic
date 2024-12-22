@@ -4,8 +4,10 @@ import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.MathHelper
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
+import kotlin.math.sin
 
 abstract class HybridAquaticCrustaceanEntityModel<T : HybridAquaticCrustaceanEntity>(private val id: String) :
     GeoModel<T>() {
@@ -47,10 +49,25 @@ abstract class HybridAquaticCrustaceanEntityModel<T : HybridAquaticCrustaceanEnt
         super.setCustomAnimations(animatable, instanceId, animationState)
 
         val body = animationProcessor.getBone(EntityModelPartNames.BODY)
+        val entityYaw = animatable.yaw;
 
         if (animatable.isClimbing) {
-            body.rotY = 0.0f
-            body.rotZ = 1.5f
+            body.rotX = Math.toRadians(90.0).toFloat()
+
+            when (entityYaw) {
+                in 135.01f..225.0f -> {
+                    body.rotY = Math.toRadians(180.0).toFloat()
+                }
+                in 225.01f..315.0f -> {
+                    body.rotY = Math.toRadians(270.0).toFloat()
+                }
+                in 315.01f..360.0f, in 0.0f..45.0f -> {
+                    body.rotY = Math.toRadians(0.0).toFloat()
+                }
+                in 45.01f..135.0f -> {
+                    body.rotY = Math.toRadians(90.0).toFloat()
+                }
+            }
         }
     }
 }

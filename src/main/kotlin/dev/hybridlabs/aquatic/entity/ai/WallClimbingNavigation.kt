@@ -64,4 +64,6 @@ class WallClimbingNavigation(mobEntity: MobEntity?, world: World?) : MobNavigati
             }
         }
     }
+
+
 }
