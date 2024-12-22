@@ -145,10 +145,10 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
         return PlayState.CONTINUE
     }
 
-    override fun damage(source: DamageSource?, amount: Float): Boolean {
+    override fun damage(source: DamageSource, amount: Float): Boolean {
         if (super.damage(source, amount)) {
 
-            val attacker = source?.attacker
+            val attacker = source.attacker
             if (this.variant?.variantName == "crown_of_thorns" && attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
                 attacker.damage(this.damageSources.thorns(this), 2.0f)
                 attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 1))
