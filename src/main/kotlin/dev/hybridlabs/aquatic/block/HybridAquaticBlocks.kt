@@ -179,7 +179,14 @@ object HybridAquaticBlocks {
                 .copyOf(Blocks.LILY_PAD)
                 .noCollision()
                 .breakInstantly()
-                .mapColor(MapColor.LICHEN_GREEN)
+        )
+    )
+
+    val JUNGLE_LILY_PAD = register(
+        "jungle_lily_pad", JungleLilyPadBlock(
+            FabricBlockSettings
+                .copyOf(Blocks.LILY_PAD)
+                .breakInstantly()
         )
     )
 

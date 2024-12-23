@@ -84,6 +84,18 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.TROPICAL_RIVERS),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.JUNGLE_LILY_PAD
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.JUNGLE),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.JUNGLE_LILY_PAD
+        )
+
+        BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.REEF),
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH

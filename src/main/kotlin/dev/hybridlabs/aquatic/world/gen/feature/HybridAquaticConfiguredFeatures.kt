@@ -17,6 +17,8 @@ object HybridAquaticConfiguredFeatures {
 
     val WATER_LETTUCE = register("water_lettuce")
 
+    val JUNGLE_LILY_PAD = register("jungle_lily_pad")
+
     val RED_ALGAE_PATCH = register("red_algae_patch")
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch")
 

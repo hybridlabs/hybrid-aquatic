@@ -18,6 +18,8 @@ object HybridAquaticPlacedFeatures {
 
     val WATER_LETTUCE = register("water_lettuce")
 
+    val JUNGLE_LILY_PAD = register("jungle_lily_pad")
+
     val GLOWING_PLANKTON = register("glowing_plankton")
 
     val RED_ALGAE_PATCH = register("red_algae_patch")

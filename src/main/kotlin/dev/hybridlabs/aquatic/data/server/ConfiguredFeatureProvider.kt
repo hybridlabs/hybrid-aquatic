@@ -117,7 +117,21 @@ class ConfiguredFeatureProvider(
             )
         )
 
-
+        entries.add(
+            HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD,
+            ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchFeatureConfig(
+                    5, 3, 3,
+                    PlacedFeatures.createEntry(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockFeatureConfig(
+                            SimpleBlockStateProvider.of(HybridAquaticBlocks.JUNGLE_LILY_PAD)
+                        ),
+                        BlockPredicate.matchingBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
 
         entries.add(
             HybridAquaticConfiguredFeatures.GLOWING_PLANKTON,
