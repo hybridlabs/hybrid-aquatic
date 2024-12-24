@@ -12,7 +12,10 @@
       "type": "minecraft:noise_based_count",
       "noise_factor": 100.0,
       "noise_offset": 0.0,
-      "noise_to_count_ratio": 40
+      "noise_to_count_ratio": 80
+    },
+    {
+      "type": "minecraft:biome"
     }
   ]
 }

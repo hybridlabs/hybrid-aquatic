@@ -41,7 +41,7 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
         }
 
         if (isFeeding) {
-            hunger += 10
+            hunger += 1
 
             if (hunger >= MAX_HUNGER) {
                 hunger = MAX_HUNGER

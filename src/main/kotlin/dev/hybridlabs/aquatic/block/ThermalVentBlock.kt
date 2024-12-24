@@ -85,16 +85,6 @@ class ThermalVentBlock(
         if (state.get(THICKNESS) == Thickness.TIP && state.get(WATERLOGGED)) {
             spawnSmokeParticle(world, pos, random)
         }
-
-        if (state.get(THICKNESS) == Thickness.TIP && state.get(WATERLOGGED) && this.emitsParticles && random.nextInt(5) == 0) {
-            for (i in 0 until random.nextInt(1) + 1) {
-                world.addParticle(
-                    ParticleTypes.LAVA, pos.x.toDouble() + 0.5, pos.y.toDouble() + 0.5, pos.z.toDouble() + 0.5,
-                    (random.nextFloat() / 2.0f).toDouble(), 5.0E-5,
-                    (random.nextFloat() / 2.0f).toDouble()
-                )
-            }
-        }
     }
 
     private fun getThickness(world: WorldView, currentPos: BlockPos): Thickness {

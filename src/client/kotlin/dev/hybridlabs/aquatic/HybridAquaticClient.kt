@@ -115,17 +115,19 @@ object HybridAquaticClient : ClientModInitializer {
         )
         registry.putBlocks(
             RenderLayer.getCutout(),
-            HybridAquaticBlocks.RED_SEAWEED,
-            HybridAquaticBlocks.TALL_RED_SEAWEED,
+            HybridAquaticBlocks.RED_ALGAE,
+            HybridAquaticBlocks.TALL_RED_ALGAE,
 
             HybridAquaticBlocks.SARGASSUM,
             HybridAquaticBlocks.SARGASSUM_PLANT,
             HybridAquaticBlocks.FLOATING_SARGASSUM,
 
+            HybridAquaticBlocks.WATER_LETTUCE,
+
             HybridAquaticBlocks.GLOWING_PLANKTON,
 
-            HybridAquaticBlocks.GREEN_SEAWEED,
-            HybridAquaticBlocks.TALL_GREEN_SEAWEED,
+            HybridAquaticBlocks.SEA_LETTUCE,
+            HybridAquaticBlocks.TALL_SEA_LETTUCE,
 
             HybridAquaticBlocks.CRAB_POT,
             HybridAquaticBlocks.GIANT_CLAM,

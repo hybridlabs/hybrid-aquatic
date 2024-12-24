@@ -6,20 +6,13 @@
         "type": "minecraft:simple_block",
         "config": {
           "to_place": {
-            "type": "minecraft:noise_provider",
-            "noise": {
-              "amplitudes": [
-                -5.0
-              ],
-              "firstOctave": -5
-            },
-            "scale": 1.0,
-            "seed": 237,
-            "states": [
-              {
-                "Name": "hybrid-aquatic:red_seaweed"
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "hybrid-aquatic:water_lettuce",
+              "Properties": {
+                "waterlogged": "true"
               }
-            ]
+            }
           }
         }
       },
@@ -33,8 +26,8 @@
         }
       ]
     },
-    "tries": 50,
-    "xz_spread": 10,
-    "y_spread": 10
+    "tries": 5,
+    "xz_spread": 3,
+    "y_spread": 3
   }
 }

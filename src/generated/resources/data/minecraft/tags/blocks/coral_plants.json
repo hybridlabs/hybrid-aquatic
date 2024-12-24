@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:button_coral_fan",
-    "hybrid-aquatic:sun_coral_fan",
-    "hybrid-aquatic:red_seaweed",
-    "hybrid-aquatic:green_seaweed"
+    "hybrid-aquatic:button_coral",
+    "hybrid-aquatic:sun_coral",
+    "hybrid-aquatic:red_algae",
+    "hybrid-aquatic:sea_lettuce"
   ]
 }

@@ -17,6 +17,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.intprovider.ConstantIntProvider
 import net.minecraft.util.math.intprovider.UniformIntProvider
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler
+import net.minecraft.world.gen.ProbabilityConfig
 import net.minecraft.world.gen.blockpredicate.BlockPredicate
 import net.minecraft.world.gen.feature.*
 import net.minecraft.world.gen.stateprovider.BlockStateProvider
@@ -58,40 +59,10 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticConfiguredFeatures.RED_SEAWEED_PATCH,
+            HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH,
             ConfiguredFeature(
-                Feature.FLOWER, RandomPatchFeatureConfig(
-                    10, 5, 2,
-                    PlacedFeatures.createEntry(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockFeatureConfig(
-                            BlockStateProvider.of(HybridAquaticBlocks.RED_SEAWEED.defaultState)
-                        ),
-                        BlockPredicate.matchingBlocks(Blocks.WATER)
-                    )
-                )
-            )
-        )
-
-        entries.add(
-            HybridAquaticConfiguredFeatures.RED_SEAWEED_MEADOW,
-            ConfiguredFeature(
-                Feature.RANDOM_PATCH, RandomPatchFeatureConfig(
-                    50, 10, 10,
-                    PlacedFeatures.createEntry(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockFeatureConfig(
-                            NoiseBlockStateProvider(
-                                237L,
-                                DoublePerlinNoiseSampler.NoiseParameters(-5, -5.0, *DoubleArray(0)),
-                                1.0f,
-                                listOf<BlockState>(
-                                    HybridAquaticBlocks.RED_SEAWEED.defaultState
-                                )
-                            )
-                        ),
-                        BlockPredicate.matchingBlocks(Blocks.WATER)
-                    )
+                HybridAquaticFeatures.RED_ALGAE_PATCH, ProbabilityConfig(
+                    0.33f
                 )
             )
         )
@@ -131,6 +102,24 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticConfiguredFeatures.WATER_LETTUCE,
+            ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchFeatureConfig(
+                    5, 3, 3,
+                    PlacedFeatures.createEntry(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockFeatureConfig(
+                            SimpleBlockStateProvider.of(HybridAquaticBlocks.WATER_LETTUCE)
+                        ),
+                        BlockPredicate.matchingBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+
+
+        entries.add(
             HybridAquaticConfiguredFeatures.GLOWING_PLANKTON,
             ConfiguredFeature(
                 Feature.RANDOM_PATCH, RandomPatchFeatureConfig(
@@ -147,17 +136,10 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticConfiguredFeatures.GREEN_SEAWEED_PATCH,
+            HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH,
             ConfiguredFeature(
-                Feature.FLOWER, RandomPatchFeatureConfig(
-                    10, 5, 2,
-                    PlacedFeatures.createEntry(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockFeatureConfig(
-                            BlockStateProvider.of(HybridAquaticBlocks.GREEN_SEAWEED.defaultState)
-                        ),
-                        BlockPredicate.matchingBlocks(Blocks.WATER)
-                    )
+                HybridAquaticFeatures.SEA_LETTUCE_PATCH, ProbabilityConfig(
+                    0.33f
                 )
             )
         )
@@ -232,9 +214,9 @@ class ConfiguredFeatureProvider(
                     SimpleBlockStateProvider.of(HybridAquaticBlocks.THERMAL_VENT),
                     SimpleBlockStateProvider.of(HybridAquaticBlocks.TUBE_WORM),
                     UniformIntProvider.create(2, 3),
-                    ConstantIntProvider.create(2),
+                    ConstantIntProvider.create(3),
                     UniformIntProvider.create(1, 3),
-                    ConstantIntProvider.create(8),
+                    ConstantIntProvider.create(4),
                     UniformIntProvider.create(TubeWormBlock.WORMS.min, TubeWormBlock.WORMS.max),
                 )
             )

@@ -19,7 +19,7 @@ import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class FloatingSargassumBlock(settings: Settings) : PlantBlock(settings), Waterloggable {
+class WaterLettuceBlock(settings: Settings) : PlantBlock(settings), Waterloggable {
     init {
         defaultState = defaultState.with(WATERLOGGED, true)
     }
@@ -90,11 +90,11 @@ class FloatingSargassumBlock(settings: Settings) : PlantBlock(settings), Waterlo
         super.onEntityCollision(state, world, pos, entity)
         if (world is ServerWorld && entity is BoatEntity) {
             entity.slowMovement(state, Vec3d(0.66, 0.66, 0.66))
-            world.breakBlock(BlockPos(pos), false, entity)
+            world.breakBlock(BlockPos(pos), true, entity)
         }
     }
 
     companion object {
-        private val SHAPE: VoxelShape = createCuboidShape(0.0, 14.0, 0.0, 16.0, 15.0, 16.0)
+        private val SHAPE: VoxelShape = createCuboidShape(3.0, 14.0, 3.0, 13.0, 16.0, 13.0)
     }
 }

@@ -14,6 +14,7 @@ import net.minecraft.entity.ai.goal.EscapeDangerGoal
 import net.minecraft.entity.ai.goal.WanderAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.MobNavigation
+import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
@@ -180,6 +181,8 @@ open class HybridAquaticCrustaceanEntity(
     // region movement
 
     init {
+        setPathfindingPenalty(PathNodeType.WATER, 0.0f)
+        setPathfindingPenalty(PathNodeType.WALKABLE, 0.0f)
         moveControl = MoveControl(this)
         navigation = WallClimbingNavigation(this, world)
     }

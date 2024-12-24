@@ -56,7 +56,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     }
 
     init {
-        setPathfindingPenalty(PathNodeType.WATER, 5.0f)
+        setPathfindingPenalty(PathNodeType.WATER, 0.0f)
         moveControl = MoveControl(this)
         navigation = this.landNavigation
         stepHeight = 1.5F

@@ -1,16 +1,16 @@
 {
-  "feature": "hybrid-aquatic:anemone_patch",
+  "feature": "hybrid-aquatic:water_lettuce",
   "placement": [
     {
       "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:heightmap",
-      "heightmap": "OCEAN_FLOOR_WG"
+      "heightmap": "WORLD_SURFACE_WG"
     },
     {
       "type": "minecraft:count",
-      "count": 2
+      "count": 5
     },
     {
       "type": "minecraft:biome"

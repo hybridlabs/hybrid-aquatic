@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.registry.tag.BlockTags
-import net.minecraft.world.Heightmap
 import net.minecraft.world.gen.feature.Feature
 import net.minecraft.world.gen.feature.util.FeatureContext
 
@@ -14,8 +13,6 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
         val random = context.random
         val structureWorldAccess = context.world
         val blockPos = context.origin
-        val oceanFloorY = structureWorldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR, blockPos.x, blockPos.z)
-        val basePos = blockPos.withY(oceanFloorY)
         val config = context.config
 
         val bls = BooleanArray(2048)
@@ -44,7 +41,7 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
             }
         }
 
-        val blockState = config.fluidProvider[random, basePos]
+        val blockState = config.fluidProvider[random, blockPos]
 
         var t: Int
         var v: Boolean
@@ -58,13 +55,13 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
                     v =
                         !bls[(s * 16 + t) * 8 + u] && ((s < 15 && bls[((s + 1) * 16 + t) * 8 + u] || s > 0 && bls[((s - 1) * 16 + t) * 8 + u] || t < 15 && bls[(s * 16 + t + 1) * 8 + u]) || (t > 0) && bls[(s * 16 + (t - 1)) * 8 + u] || (u < 7) && bls[(s * 16 + t) * 8 + u + 1] || (u > 0) && bls[(s * 16 + t) * 8 + (u - 1)])
                     if (v) {
-                        val blockState2 = structureWorldAccess.getBlockState(basePos.add(s, u, t))
+                        val blockState2 = structureWorldAccess.getBlockState(blockPos.add(s, u, t))
                         if (u >= 4 && blockState2.isLiquid) {
                             return false
                         }
 
                         if (u < 4 && !blockState2.isSolid && structureWorldAccess.getBlockState(
-                                basePos.add(
+                                blockPos.add(
                                     s,
                                     u,
                                     t
@@ -89,7 +86,7 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
                 u = 0
                 while (u < 8) {
                     if (bls[(s * 16 + t) * 8 + u]) {
-                        val blockPos2 = basePos.add(s, u, t)
+                        val blockPos2 = blockPos.add(s, u, t)
                         if (this.canReplace(structureWorldAccess.getBlockState(blockPos2))) {
                             bl2 = u >= 4
                             structureWorldAccess.setBlockState(
@@ -110,7 +107,7 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
             ++s
         }
 
-        val blockState3 = config.barrierProvider[random, basePos]
+        val blockState3 = config.barrierProvider[random, blockPos]
         if (!blockState3.isAir) {
             t = 0
             while (t < 16) {
@@ -120,9 +117,9 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
                         bl2 =
                             !bls[(t * 16 + u) * 8 + v] && ((t < 15 && bls[((t + 1) * 16 + u) * 8 + v] || t > 0 && bls[((t - 1) * 16 + u) * 8 + v] || u < 15 && bls[(t * 16 + u + 1) * 8 + v] || u > 0 && bls[(t * 16 + (u - 1)) * 8 + v]) || v < 7 && bls[(t * 16 + u) * 8 + v + 1] || v > 0 && bls[(t * 16 + u) * 8 + (v - 1)])
                         if (bl2 && (v < 4 || random.nextInt(2) != 0)) {
-                            val blockState4 = structureWorldAccess.getBlockState(basePos.add(t, v, u))
+                            val blockState4 = structureWorldAccess.getBlockState(blockPos.add(t, v, u))
                             if (blockState4.isSolid && !blockState4.isIn(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE)) {
-                                val blockPos3 = basePos.add(t, v, u)
+                                val blockPos3 = blockPos.add(t, v, u)
                                 structureWorldAccess.setBlockState(blockPos3, blockState3, 2)
                                 this.markBlocksAboveForPostProcessing(structureWorldAccess, blockPos3)
                             }
