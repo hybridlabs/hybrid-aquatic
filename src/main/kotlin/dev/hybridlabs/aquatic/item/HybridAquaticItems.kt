@@ -253,6 +253,7 @@ object HybridAquaticItems {
         //#region Artificial Blocks
 
     val BUOY = registerPlaceableInWaterBlockItem("buoy", HybridAquaticBlocks.BUOY)
+    val RAFT = registerPlaceableInWaterBlockItem("raft", HybridAquaticBlocks.RAFT)
     val GLOWSTICK = registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleItem(FabricItemSettings()))
 

@@ -190,6 +190,13 @@ object HybridAquaticBlocks {
         )
     )
 
+    val RAFT = register(
+        "raft", RaftBlock(
+            FabricBlockSettings
+                .copyOf(Blocks.OAK_WOOD)
+        )
+    )
+
     val GLOWING_PLANKTON = register(
         "glowing_plankton", GlowingPlanktonBlock(
             FabricBlockSettings

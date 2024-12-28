@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hybrid-aquatic:models/block/raft.json",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "hybrid-aquatic:models/block/raft.json",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hybrid-aquatic:models/block/raft.json"
+    },
+    "facing=south": {
+      "model": "hybrid-aquatic:models/block/raft.json"
+    }
+  }
+}

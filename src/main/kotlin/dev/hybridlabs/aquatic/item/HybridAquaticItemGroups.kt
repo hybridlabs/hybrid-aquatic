@@ -62,6 +62,7 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.SARGASSUM)
             entries.add(HybridAquaticItems.FLOATING_SARGASSUM)
             entries.add(HybridAquaticItems.WATER_LETTUCE)
+            entries.add(HybridAquaticItems.JUNGLE_LILY_PAD)
 
             entries.add(HybridAquaticItems.BUTTON_CORAL_BLOCK)
             entries.add(HybridAquaticItems.SUN_CORAL_BLOCK)
@@ -94,6 +95,7 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.DEAD_THORN_CORAL_FAN)
 
             entries.add(HybridAquaticItems.BUOY)
+            entries.add(HybridAquaticItems.RAFT)
             entries.add(HybridAquaticBlocks.ANEMONE)
             entries.add(HybridAquaticBlocks.STRAWBERRY_ANEMONE)
             entries.add(HybridAquaticItems.GIANT_CLAM)
