@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnGroup
 import net.minecraft.registry.tag.BiomeTags
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.world.biome.Biome
@@ -216,50 +217,50 @@ class EntitySpawnConfigGenerator {
 
     private fun addUndergroundJelly(
         entityType: EntityType<*>,
-        spawnTags: List<net.minecraft.registry.tag.TagKey<net.minecraft.world.biome.Biome>>,
+        spawnTags: List<TagKey<Biome>>,
         weight: Int,
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup.JELLY_UNDERGROUND.spawnGroup, weight, minGroup, maxGroup)
+        add(entityType, spawnTags, HybridAquaticSpawnGroup.JELLY_UNDERGROUND.spawnGroup, weight, minGroup, maxGroup)
     }
 
     private fun addCrustacean(
-        entityType: net.minecraft.entity.EntityType<*>,
-        spawnTags: List<net.minecraft.registry.tag.TagKey<net.minecraft.world.biome.Biome>>,
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
         weight: Int,
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup.CRUSTACEAN.spawnGroup, weight, minGroup, maxGroup)
+        add(entityType, spawnTags, HybridAquaticSpawnGroup.CRUSTACEAN.spawnGroup, weight, minGroup, maxGroup)
     }
 
     private fun addUndergroundCrustacean(
-        entityType: net.minecraft.entity.EntityType<*>,
-        spawnTags: List<net.minecraft.registry.tag.TagKey<net.minecraft.world.biome.Biome>>,
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
         weight: Int,
         minGroup: Int,
         maxGroup: Int
     ) {
         add(
-            entityType, spawnTags, dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup.CRUSTACEAN_UNDERGROUND.spawnGroup, weight, minGroup, maxGroup
+            entityType, spawnTags, HybridAquaticSpawnGroup.CRUSTACEAN_UNDERGROUND.spawnGroup, weight, minGroup, maxGroup
         )
     }
 
     private fun addCritter(
-        entityType: net.minecraft.entity.EntityType<*>,
-        spawnTags: List<net.minecraft.registry.tag.TagKey<net.minecraft.world.biome.Biome>>,
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
         weight: Int,
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup.CRITTER.spawnGroup, weight, minGroup, maxGroup)
+        add(entityType, spawnTags, HybridAquaticSpawnGroup.CRITTER.spawnGroup, weight, minGroup, maxGroup)
     }
 
     private fun add(
-        entityType: net.minecraft.entity.EntityType<*>,
-        spawnTags: List<net.minecraft.registry.tag.TagKey<net.minecraft.world.biome.Biome>>,
-        spawnGroup: net.minecraft.entity.SpawnGroup,
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
+        spawnGroup: SpawnGroup,
         weight: Int,
         minGroup: Int,
         maxGroup: Int
