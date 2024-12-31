@@ -46,6 +46,9 @@ class SeaMessageProvider(output: FabricDataOutput, registriesFuture: Completable
             GeneratedSeaMessageData("cryptic_gun_message", "< You/We wield the Gun/You >", "The Board", englishTitle = "Hotline"),
             GeneratedSeaMessageData("boo", "Boo"),
             GeneratedSeaMessageData("yashaa", "Why are you crying on a nice day like today? I mean, it's even snowing...", "Yashaa", englishTitle = "Cepriestess"),
+            GeneratedSeaMessageData("river_to_sea", "From the river to the sea, Palestine will be free!", englishTitle = "River To Sea"),
+            GeneratedSeaMessageData("free_palestine", "#FreePalestine", englishTitle = "Freedom"),
+            GeneratedSeaMessageData("free_gaza", "#FreeGaza", englishTitle = "Freedom"),
             GeneratedSeaMessageData("control_oop", "Objects of Power shape reality around us. Handle with care.", author = "FBC", englishTitle = "Object of Power: Sea Message"),
             GeneratedSeaMessageData("dylan", """
                 You are a worm through time.
