@@ -1,13 +1,9 @@
-@file:Suppress("SameParameterValue")
-
-package dev.hybridlabs.aquatic.world
+package dev.hybridlabs.aquatic.config
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnGroup
 import net.minecraft.registry.tag.BiomeTags
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.world.biome.Biome
@@ -15,8 +11,10 @@ import net.minecraft.world.biome.Biome
 /**
  * Applies biome modifications for entities when initialised.
  */
-object EntityBiomeModifications {
-    init {
+class EntitySpawnConfigGenerator {
+    private val list: MutableList<EntitySpawnConfig> = mutableListOf()
+
+    fun initialize() {
         //#region Fish
         addFish(HybridAquaticEntityTypes.AFRICAN_BUTTERFLY, listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.MARSHES, HybridAquaticBiomeTags.MANGROVES), 2, 1, 1)
         addFish(HybridAquaticEntityTypes.GOLDEN_DORADO, listOf(HybridAquaticBiomeTags.TROPICAL_RIVERS, HybridAquaticBiomeTags.RIVERS, HybridAquaticBiomeTags.JUNGLE), 1, 1, 1)
@@ -218,56 +216,64 @@ object EntityBiomeModifications {
 
     private fun addUndergroundJelly(
         entityType: EntityType<*>,
-        spawnTags: List<TagKey<Biome>>,
+        spawnTags: List<net.minecraft.registry.tag.TagKey<net.minecraft.world.biome.Biome>>,
         weight: Int,
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, HybridAquaticSpawnGroup.JELLY_UNDERGROUND.spawnGroup, weight, minGroup, maxGroup)
+        add(entityType, spawnTags, dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup.JELLY_UNDERGROUND.spawnGroup, weight, minGroup, maxGroup)
     }
 
     private fun addCrustacean(
-        entityType: EntityType<*>,
-        spawnTags: List<TagKey<Biome>>,
+        entityType: net.minecraft.entity.EntityType<*>,
+        spawnTags: List<net.minecraft.registry.tag.TagKey<net.minecraft.world.biome.Biome>>,
         weight: Int,
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, HybridAquaticSpawnGroup.CRUSTACEAN.spawnGroup, weight, minGroup, maxGroup)
+        add(entityType, spawnTags, dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup.CRUSTACEAN.spawnGroup, weight, minGroup, maxGroup)
     }
 
     private fun addUndergroundCrustacean(
-        entityType: EntityType<*>,
-        spawnTags: List<TagKey<Biome>>,
+        entityType: net.minecraft.entity.EntityType<*>,
+        spawnTags: List<net.minecraft.registry.tag.TagKey<net.minecraft.world.biome.Biome>>,
         weight: Int,
         minGroup: Int,
         maxGroup: Int
     ) {
         add(
-            entityType, spawnTags, HybridAquaticSpawnGroup.CRUSTACEAN_UNDERGROUND.spawnGroup, weight, minGroup, maxGroup
+            entityType, spawnTags, dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup.CRUSTACEAN_UNDERGROUND.spawnGroup, weight, minGroup, maxGroup
         )
     }
 
     private fun addCritter(
-        entityType: EntityType<*>,
-        spawnTags: List<TagKey<Biome>>,
+        entityType: net.minecraft.entity.EntityType<*>,
+        spawnTags: List<net.minecraft.registry.tag.TagKey<net.minecraft.world.biome.Biome>>,
         weight: Int,
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, HybridAquaticSpawnGroup.CRITTER.spawnGroup, weight, minGroup, maxGroup)
+        add(entityType, spawnTags, dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup.CRITTER.spawnGroup, weight, minGroup, maxGroup)
     }
 
     private fun add(
-        entityType: EntityType<*>,
-        spawnTags: List<TagKey<Biome>>,
-        spawnGroup: SpawnGroup,
+        entityType: net.minecraft.entity.EntityType<*>,
+        spawnTags: List<net.minecraft.registry.tag.TagKey<net.minecraft.world.biome.Biome>>,
+        spawnGroup: net.minecraft.entity.SpawnGroup,
         weight: Int,
         minGroup: Int,
         maxGroup: Int
     ) {
         spawnTags.forEach { spawnTag ->
-            BiomeModifications.addSpawn({ it.hasTag(spawnTag) }, spawnGroup, entityType, weight, minGroup, maxGroup)
+            list.add(EntitySpawnConfig(entityType, spawnTag, spawnGroup, weight, minGroup, maxGroup))
+        }
+    }
+
+    companion object {
+        fun generate(): List<EntitySpawnConfig> {
+            val generator = EntitySpawnConfigGenerator()
+            generator.initialize()
+            return generator.list
         }
     }
 }
