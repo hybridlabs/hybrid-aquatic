@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.config.HybridAquaticConfig
 import dev.hybridlabs.aquatic.config.HybridAquaticConfigHandler
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
@@ -56,20 +57,6 @@ object HybridAquatic : ModInitializer {
         HybridAquaticBlocks
         HybridAquaticBlockEntityTypes
 
-        StrippableBlockRegistry.register(HybridAquaticBlocks.DRIFTWOOD_LOG, HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG)
-        StrippableBlockRegistry.register(HybridAquaticBlocks.DRIFTWOOD_WOOD, HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD)
-
-        FlammableBlockRegistry.getDefaultInstance().add(HybridAquaticBlocks.DRIFTWOOD_LOG, 5, 5)
-        FlammableBlockRegistry.getDefaultInstance().add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG, 5, 5)
-        FlammableBlockRegistry.getDefaultInstance().add(HybridAquaticBlocks.DRIFTWOOD_WOOD, 5, 5)
-        FlammableBlockRegistry.getDefaultInstance().add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD, 5, 5)
-        FlammableBlockRegistry.getDefaultInstance().add(HybridAquaticBlocks.DRIFTWOOD_PLANKS, 5, 20)
-        FlammableBlockRegistry.getDefaultInstance().add(HybridAquaticBlocks.DRIFTWOOD_SLAB, 5, 20)
-        FlammableBlockRegistry.getDefaultInstance().add(HybridAquaticBlocks.DRIFTWOOD_FENCE, 5, 20)
-        FlammableBlockRegistry.getDefaultInstance().add(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE, 5, 20)
-
-        FlammableBlockRegistry.getDefaultInstance().add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD, 5, 5)
-
         HybridAquaticBiomeTags
 
         HybridAquaticEntityTypes
@@ -95,16 +82,14 @@ object HybridAquatic : ModInitializer {
 
         SpawnRestrictionRegistry
 
+        initializeConfig()
+
         registerDynamicRegistries()
         registerWanderingTraderTrades()
         registerCustomTrades()
-        initializeConfig()
-
-        // entity spawn modifications
-        val config = configHandler.config
-        config.entitySpawnConfig.forEach { config ->
-            BiomeModifications.addSpawn(BiomeSelectors.tag(config.biomes), config.group, config.type, config.weight, config.minGroupSize, config.maxGroupSize)
-        }
+        registerFlammables(FlammableBlockRegistry.getDefaultInstance())
+        registerStrippables()
+        registerBiomeModifications(configHandler.config)
     }
 
     private fun initializeConfig() {
@@ -144,5 +129,29 @@ object HybridAquatic : ModInitializer {
                     list.add(SellItemFactory(block, 8, 1, 2, 2))
                 }
             }
+    }
+
+    private fun registerFlammables(registry: FlammableBlockRegistry) {
+        registry.add(HybridAquaticBlocks.DRIFTWOOD_LOG, 5, 5)
+        registry.add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG, 5, 5)
+        registry.add(HybridAquaticBlocks.DRIFTWOOD_WOOD, 5, 5)
+        registry.add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD, 5, 5)
+        registry.add(HybridAquaticBlocks.DRIFTWOOD_PLANKS, 5, 20)
+        registry.add(HybridAquaticBlocks.DRIFTWOOD_SLAB, 5, 20)
+        registry.add(HybridAquaticBlocks.DRIFTWOOD_FENCE, 5, 20)
+        registry.add(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE, 5, 20)
+
+        registry.add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD, 5, 5)
+    }
+
+    private fun registerStrippables() {
+        StrippableBlockRegistry.register(HybridAquaticBlocks.DRIFTWOOD_LOG, HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG)
+        StrippableBlockRegistry.register(HybridAquaticBlocks.DRIFTWOOD_WOOD, HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD)
+    }
+
+    private fun registerBiomeModifications(config: HybridAquaticConfig) {
+        config.entitySpawnConfig.forEach { config ->
+            BiomeModifications.addSpawn(BiomeSelectors.tag(config.biomes), config.group, config.type, config.weight, config.minGroupSize, config.maxGroupSize)
+        }
     }
 }
