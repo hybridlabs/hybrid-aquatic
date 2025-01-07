@@ -9,7 +9,7 @@ import net.minecraft.predicate.entity.EntityPredicate
 import net.minecraft.predicate.entity.FishingHookPredicate
 
 object LootTableModifications {
-    init {
+    fun registerLootModifications() {
         LootTableEvents.MODIFY.register { _, _, id, tableBuilder, source ->
             if (source.isBuiltin) {
                 when (id) {

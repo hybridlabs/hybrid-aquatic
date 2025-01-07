@@ -10,7 +10,7 @@ import net.minecraft.world.gen.GenerationStep
  * Applies biome modifications to features when initialised.
  */
 object FeatureBiomeModifications {
-    init {
+    fun registerBiomeModifications() {
         BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.REEF),
             GenerationStep.Feature.VEGETAL_DECORATION,

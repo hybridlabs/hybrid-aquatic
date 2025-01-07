@@ -73,14 +73,13 @@ object HybridAquatic : ModInitializer {
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
 
-        HybridAquaticNetworking
+        HybridAquaticNetworking.registerNetworking()
 
         HybridAquaticLootPoolEntryTypes
-        LootTableModifications
+        LootTableModifications.registerLootModifications()
 
-        FeatureBiomeModifications
-
-        SpawnRestrictionRegistry
+        FeatureBiomeModifications.registerBiomeModifications()
+        SpawnRestrictionRegistry.registerSpawnRestrictions()
 
         initializeConfig()
 
