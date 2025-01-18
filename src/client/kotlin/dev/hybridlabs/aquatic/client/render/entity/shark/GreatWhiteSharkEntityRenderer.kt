@@ -4,4 +4,4 @@ import dev.hybridlabs.aquatic.client.model.entity.shark.GreatWhiteSharkEntityMod
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
 
-class GreatWhiteSharkEntityRenderer(context: Context) : HybridAquaticSharkEntityRenderer<HybridAquaticSharkEntity>(context, GreatWhiteSharkEntityModel(), true, true)
+class GreatWhiteSharkEntityRenderer(context: Context) : HybridAquaticSharkEntityRenderer<HybridAquaticSharkEntity>(context, GreatWhiteSharkEntityModel(), true, false)
