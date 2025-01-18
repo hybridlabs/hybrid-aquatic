@@ -1,13 +1,12 @@
 package dev.hybridlabs.aquatic.block
 
 import net.minecraft.block.*
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
-import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.Properties
-import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
@@ -16,16 +15,20 @@ import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class RaftBlock(settings: Settings) : Block(settings) {
+class RaftBlock(settings: Settings) : Block(settings), Waterloggable {
     init {
-        defaultState = defaultState.with(Properties.WATERLOGGED, true)
+        defaultState = defaultState.with(Properties.WATERLOGGED, false)
     }
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
-        val waterlogged = ctx.world.getFluidState(ctx.blockPos).fluid == Fluids.WATER
-        return defaultState
-            .with(Properties.WATERLOGGED, waterlogged)
-            .with(FACING, ctx.horizontalPlayerFacing.rotateYClockwise())
+    override fun getPlacementState(context: ItemPlacementContext): BlockState? {
+        val world = context.world
+        val pos = context.blockPos
+        val fluidState = world.getFluidState(pos)
+        return super.getPlacementState(context)?.with(Properties.WATERLOGGED, fluidState.fluid == Fluids.WATER)
+    }
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+        return false
     }
 
     override fun getFluidState(state: BlockState): FluidState {
@@ -40,19 +43,21 @@ class RaftBlock(settings: Settings) : Block(settings) {
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        return if (canPlaceAt(state, world, pos)) super.getStateForNeighborUpdate(
-            state,
-            direction,
-            neighborState,
-            world,
-            pos,
-            neighborPos
-        )
-        else Blocks.AIR.defaultState
+        if (state.get(Properties.WATERLOGGED)) {
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+        }
+
+        if (!canPlaceAt(state, world, pos)) {
+            return Blocks.AIR.defaultState
+        }
+
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        builder.add(Properties.WATERLOGGED, FACING)
+        super.appendProperties(
+            builder.add(Properties.WATERLOGGED)
+        )
     }
 
     override fun getOutlineShape(
@@ -65,18 +70,21 @@ class RaftBlock(settings: Settings) : Block(settings) {
     }
 
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
-        val placedOn = world.getBlockState(pos)
-        val isAirAbove = world.getBlockState(pos.up()).isAir && world.getBlockState(pos.up(2)).isAir
+        val fluidStateAbove = world.getFluidState(pos.up())
+        if (fluidStateAbove.fluid != Fluids.EMPTY) {
+            return false
+        }
 
-        return placedOn.fluidState.isOf(Fluids.WATER) && isAirAbove
-    }
+        val stateBelow = world.getBlockState(pos.down())
+        if (stateBelow.block == this) {
+            return false
+        }
 
-    override fun rotate(state: BlockState, rotation: BlockRotation): BlockState {
-        return state.with(FACING, rotation.rotate(state.get(FACING) as Direction)) as BlockState
+        val fluidState = world.getFluidState(pos)
+        return fluidState.fluid == Fluids.WATER || sideCoversSmallSquare(world, pos.down(), Direction.UP)
     }
 
     companion object {
-        val FACING: DirectionProperty = HorizontalFacingBlock.FACING
-        private val SHAPE: VoxelShape = createCuboidShape(0.0, 12.0, 0.0, 16.0, 16.0, 16.0)
+        private val SHAPE: VoxelShape = createCuboidShape(1.0, 12.0, 1.0, 15.0, 16.0, 15.0)
     }
 }
