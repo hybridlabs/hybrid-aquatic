@@ -1,11 +1,8 @@
-@file:Suppress("SameParameterValue")
-
-package dev.hybridlabs.aquatic.world
+package dev.hybridlabs.aquatic.config
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
 import net.minecraft.registry.tag.BiomeTags
@@ -15,8 +12,10 @@ import net.minecraft.world.biome.Biome
 /**
  * Applies biome modifications for entities when initialised.
  */
-object EntityBiomeModifications {
-    init {
+class EntitySpawnConfigGenerator {
+    private val list: MutableList<EntitySpawnConfig> = mutableListOf()
+
+    fun initialize() {
         //#region Fish
         addFish(HybridAquaticEntityTypes.AFRICAN_BUTTERFLY, listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.MARSHES, HybridAquaticBiomeTags.MANGROVES), 2, 1, 1)
         addFish(HybridAquaticEntityTypes.GOLDEN_DORADO, listOf(HybridAquaticBiomeTags.TROPICAL_RIVERS, HybridAquaticBiomeTags.RIVERS, HybridAquaticBiomeTags.JUNGLE), 1, 1, 1)
@@ -267,7 +266,15 @@ object EntityBiomeModifications {
         maxGroup: Int
     ) {
         spawnTags.forEach { spawnTag ->
-            BiomeModifications.addSpawn({ it.hasTag(spawnTag) }, spawnGroup, entityType, weight, minGroup, maxGroup)
+            list.add(EntitySpawnConfig(entityType, spawnTag, spawnGroup, weight, minGroup, maxGroup))
+        }
+    }
+
+    companion object {
+        fun generate(): List<EntitySpawnConfig> {
+            val generator = EntitySpawnConfigGenerator()
+            generator.initialize()
+            return generator.list
         }
     }
 }

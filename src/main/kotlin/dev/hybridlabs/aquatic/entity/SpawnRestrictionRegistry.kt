@@ -19,7 +19,7 @@ import net.minecraft.world.Heightmap
  * Registers spawn restrictions for all entities when initialised.
  */
 object SpawnRestrictionRegistry {
-    init {
+    fun registerSpawnRestrictions() {
         // fish
         setOf(
             HybridAquaticEntityTypes.AFRICAN_BUTTERFLY,
