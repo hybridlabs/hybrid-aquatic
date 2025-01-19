@@ -162,10 +162,6 @@ class FishingLootTableProvider(output: FabricDataOutput) :
                             ItemEntry.builder(HybridAquaticItems.SQUIRRELFISH)
                                 .weight(4)
                         )
-                        .with(
-                            ItemEntry.builder(HybridAquaticItems.CORAL_GROUPER)
-                                .weight(2)
-                        )
                 )
         )
 

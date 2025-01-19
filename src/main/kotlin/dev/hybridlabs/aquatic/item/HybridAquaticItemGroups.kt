@@ -186,7 +186,6 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.TRIGGERFISH)
             entries.add(HybridAquaticItems.ROCKFISH)
             entries.add(HybridAquaticItems.SEA_BASS)
-            entries.add(HybridAquaticItems.CORAL_GROUPER)
             entries.add(HybridAquaticItems.COELACANTH)
             entries.add(HybridAquaticItems.NEEDLEFISH)
             entries.add(HybridAquaticItems.PARROTFISH)

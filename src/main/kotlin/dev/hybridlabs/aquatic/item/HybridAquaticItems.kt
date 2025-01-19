@@ -1163,20 +1163,6 @@ object HybridAquaticItems {
         )
     )
 
-    val CORAL_GROUPER = register(
-        "coral_grouper",
-        Item(
-            FabricItemSettings()
-                .food(
-                    FoodComponent.Builder()
-                        .hunger(2)
-                        .saturationModifier(0.4F)
-                        .meat()
-                        .build()
-                )
-        )
-    )
-
     val COELACANTH = register(
         "coelacanth",
         Item(

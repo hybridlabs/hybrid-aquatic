@@ -119,11 +119,6 @@
           "type": "minecraft:item",
           "name": "hybrid-aquatic:squirrelfish",
           "weight": 4
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:coral_grouper",
-          "weight": 2
         }
       ],
       "rolls": 1.0
