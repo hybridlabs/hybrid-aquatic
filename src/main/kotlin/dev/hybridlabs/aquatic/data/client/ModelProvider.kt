@@ -104,11 +104,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
             registerTorch(HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
 
-            registerParentedItemModel(
-                HybridAquaticBlocks.CRAB_POT,
-                ModelIds.getBlockModelId(HybridAquaticBlocks.CRAB_POT)
-            )
-
             registerCoral(
                 HybridAquaticBlocks.LOPHELIA_CORAL,
                 HybridAquaticBlocks.DEAD_LOPHELIA_CORAL,
