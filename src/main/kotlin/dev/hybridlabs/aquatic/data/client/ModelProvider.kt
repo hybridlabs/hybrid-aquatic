@@ -298,7 +298,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
     companion object {
         private val TEMPLATE_ANEMONE = Identifier(HybridAquatic.MOD_ID, "item/template_anemone")
-        private val TEMPLATE_STRAWBERRY_ANEMONE = Identifier(HybridAquatic.MOD_ID, "item/template_strawberry_anemone")
         private val TEMPLATE_MESSAGE_IN_A_BOTTLE = Identifier(HybridAquatic.MOD_ID, "item/template_message_in_a_bottle")
         private val TEMPLATE_PLUSHIE = Identifier(HybridAquatic.MOD_ID, "item/template_plushie")
     }
