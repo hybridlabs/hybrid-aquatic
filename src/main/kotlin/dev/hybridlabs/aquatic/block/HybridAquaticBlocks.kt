@@ -158,6 +158,7 @@ object HybridAquaticBlocks {
     )
 
     val SARGASSUM = register("sargassum", SargassumBlock(FabricBlockSettings.copyOf(Blocks.KELP).nonOpaque()))
+
     val SARGASSUM_PLANT = register(
         "sargassum_plant",
         SargassumPlantBlock(FabricBlockSettings.copyOf(Blocks.KELP_PLANT).nonOpaque().dropsLike(SARGASSUM))
