@@ -10,6 +10,7 @@ import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
+import dev.hybridlabs.aquatic.entity.miscellaneous.ThrowingStarEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
@@ -17,6 +18,7 @@ import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilde
 import net.minecraft.entity.*
 import net.minecraft.entity.EntityType.EntityFactory
 import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.projectile.ProjectileEntity
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
@@ -706,6 +708,11 @@ object HybridAquaticEntityTypes {
         WhaleSharkEntity.createMobAttributes()
     )
 
+    val THROWING_STAR = registerProjectile("throwing_star",
+            ::ThrowingStarEntity,
+            EntityDimensions.fixed(0.25f,0.25f)
+    )
+
     private fun <T : LivingEntity> registerShark(
         id: String,
         entityFactory: EntityFactory<T>,
@@ -847,6 +854,15 @@ object HybridAquaticEntityTypes {
     ): EntityType<T> {
         val entityType = FabricEntityTypeBuilder.create(spawnGroup, entityFactory).dimensions(dimensions).build()
         FabricDefaultAttributeRegistry.register(entityType, attributeContainer)
+        return register(id, entityType)
+    }
+
+    private fun <T: ProjectileEntity> registerProjectile(
+        id: String,
+        entityFactory: EntityFactory<T>,
+        dimensions: EntityDimensions
+    ) : EntityType<T> {
+        val entityType = FabricEntityTypeBuilder.create(SpawnGroup.MISC, entityFactory).dimensions(dimensions).build();
         return register(id, entityType)
     }
 
