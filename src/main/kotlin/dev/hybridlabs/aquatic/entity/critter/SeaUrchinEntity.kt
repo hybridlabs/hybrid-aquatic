@@ -5,17 +5,19 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.registry.tag.DamageTypeTags
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
 
 class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World) :
     HybridAquaticCritterEntity(entityType, world, variants = hashMapOf(
@@ -42,9 +44,9 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return PathAwareEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 100.0)
+                .add(EntityAttributes.MAX_HEALTH, 2.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.1)
+                .add(EntityAttributes.KNOCKBACK_RESISTANCE, 100.0)
         }
     }
 
@@ -55,17 +57,17 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
         return PlayState.CONTINUE
     }
 
-    override fun damage(source: DamageSource, amount: Float): Boolean {
+    override fun damage(world: ServerWorld, source: DamageSource, amount: Float): Boolean {
         return if (world.isClient) {
             false
         } else {
             if (!source.isIn(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) && !source.isOf(DamageTypes.THORNS)) {
                 val attacker = source.source
                 if (attacker is LivingEntity) {
-                    attacker.damage(this.damageSources.thorns(this), 2.0f)
+                    attacker.damage(world, this.damageSources.thorns(this), 2.0f)
                 }
             }
-            super.damage(source, amount)
+            super.damage(world, source, amount)
         }
     }
 
@@ -92,7 +94,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
         if (world.getBlockState(posUnderneath).isOf(Blocks.KELP_PLANT)) {
             world.setBlockState(posUnderneath, Blocks.AIR.defaultState)
             if (spawnUrchinOnNextBreak) {
-                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.create(world)
+                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.create(world, SpawnReason.TRIGGERED)
                 newUrchin?.refreshPositionAndAngles(this.x, this.y, this.z, this.yaw, 0.0f)
                 world.spawnEntity(newUrchin)
                 spawnUrchinOnNextBreak = false

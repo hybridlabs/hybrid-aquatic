@@ -3,7 +3,14 @@ package dev.hybridlabs.aquatic.client.model
 import com.google.common.collect.ImmutableMap
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.BaskingSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.BullSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.FrilledSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.GreatWhiteSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.HammerheadSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.ThresherSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.TigerSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.WhaleSharkPlushieModel
 import dev.hybridlabs.aquatic.mixin.client.SkullBlockEntityRendererMixin
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.TexturedModelDataProvider
@@ -27,7 +34,7 @@ object HybridAquaticEntityModelLayers {
     private val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie", WhaleSharkPlushieModel::createModelData)
 
     private fun register(id: String, modelProvider: TexturedModelDataProvider): EntityModelLayer {
-        val layer = EntityModelLayer(Identifier(HybridAquatic.MOD_ID, id), "main")
+        val layer = EntityModelLayer(Identifier.of(HybridAquatic.MOD_ID, id), "main")
         EntityModelLayerRegistry.registerModelLayer(layer, modelProvider)
         return layer
     }

@@ -1,6 +1,13 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import com.mojang.serialization.MapCodec
+import net.minecraft.block.AbstractPlantBlock
+import net.minecraft.block.AbstractPlantStemBlock
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.FluidFillable
+import net.minecraft.block.ShapeContext
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -25,11 +32,17 @@ class HydrothermalVentShaftBlock(settings: Settings?) :
         return state.isOf(Blocks.STONE) || state.isOf(Blocks.TUFF) || state.isOf(Blocks.MAGMA_BLOCK) || state.isOf(stem)|| super.canAttachTo(state)
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(
+        player: PlayerEntity?,
+        world: BlockView,
+        pos: BlockPos,
+        state: BlockState,
+        fluid: Fluid
+    ): Boolean {
         return false
     }
 
-    override fun isFertilizable(world: WorldView?, pos: BlockPos?, state: BlockState?, isClient: Boolean): Boolean {
+    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState): Boolean {
         return false
     }
 
@@ -51,7 +64,12 @@ class HydrothermalVentShaftBlock(settings: Settings?) :
         return false
     }
 
+    override fun getCodec(): MapCodec<out AbstractPlantBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<HydrothermalVentShaftBlock> = createCodec(::HydrothermalVentShaftBlock)
         private val SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
         private val COLLISION_SHAPE = createCuboidShape(4.0, 1.0, 4.0, 12.0, 12.0, 12.0)
     }

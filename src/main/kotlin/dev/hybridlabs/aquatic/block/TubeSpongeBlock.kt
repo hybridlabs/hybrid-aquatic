@@ -1,7 +1,15 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.TubeSpongeBlockEntity
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockEntityProvider
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -11,9 +19,11 @@ import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.math.random.Random
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
-import net.minecraft.world.WorldAccess
+import net.minecraft.world.WorldView
+import net.minecraft.world.tick.ScheduledTickView
 
 class TubeSpongeBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
     init {
@@ -25,19 +35,21 @@ class TubeSpongeBlock(settings: Settings) : PlantBlock(settings), BlockEntityPro
 
     override fun getStateForNeighborUpdate(
         state: BlockState,
-        direction: Direction,
-        neighborState: BlockState,
-        world: WorldAccess,
+        world: WorldView,
+        tickView: ScheduledTickView,
         pos: BlockPos,
-        neighborPos: BlockPos
+        direction: Direction,
+        neighborPos: BlockPos,
+        neighborState: BlockState,
+        random: Random
     ): BlockState {
         if (state.get(Properties.WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         return if (!canPlaceAt(state, world, pos)) {
             Blocks.AIR.defaultState
-        } else super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
+        } else super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random)
     }
 
     override fun getCollisionShape(
@@ -76,7 +88,12 @@ class TubeSpongeBlock(settings: Settings) : PlantBlock(settings), BlockEntityPro
         builder.add(Properties.WATERLOGGED)
     }
 
+    override fun getCodec(): MapCodec<out PlantBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<TubeSpongeBlock> = createCodec(::TubeSpongeBlock)
         private val SHAPE = createCuboidShape(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
         private val COLLISION_SHAPE = createCuboidShape(2.0, 1.0, 2.0, 14.0, 12.0, 14.0)
     }

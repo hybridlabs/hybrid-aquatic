@@ -1,9 +1,18 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.GiantClamBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockEntityProvider
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
@@ -23,12 +32,13 @@ import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.math.random.Random
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
+import net.minecraft.world.WorldView
+import net.minecraft.world.tick.ScheduledTickView
 
-@Suppress("OVERRIDE_DEPRECATION")
 class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
     init {
         defaultState = stateManager.defaultState
@@ -42,19 +52,21 @@ class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProv
 
     override fun getStateForNeighborUpdate(
         state: BlockState,
-        direction: Direction,
-        neighborState: BlockState,
-        world: WorldAccess,
+        world: WorldView,
+        tickView: ScheduledTickView,
         pos: BlockPos,
-        neighborPos: BlockPos
+        direction: Direction,
+        neighborPos: BlockPos,
+        neighborState: BlockState,
+        random: Random
     ): BlockState {
         if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         return if (!canPlaceAt(state, world, pos)) {
             Blocks.AIR.defaultState
-        } else super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
+        } else super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random)
     }
 
     override fun getCollisionShape(
@@ -93,13 +105,14 @@ class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProv
             .add(CLAM_HAS_PEARL)
     }
 
-    override fun onUse(
+    override fun onUseWithItem(
+        stack: ItemStack,
         state: BlockState,
         world: World,
-        pos: BlockPos?,
+        pos: BlockPos,
         player: PlayerEntity,
-        hand: Hand?,
-        hit: BlockHitResult?
+        hand: Hand,
+        hit: BlockHitResult
     ): ActionResult? {
         if (hand == Hand.MAIN_HAND) {
             val blockEntity = world.getBlockEntity(pos)
@@ -121,7 +134,7 @@ class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProv
                 )
             }
         }
-        return super.onUse(state, world, pos, player, hand, hit)
+        return super.onUse(state, world, pos, player, hit)
     }
 
     override fun <T : BlockEntity> getTicker(
@@ -132,11 +145,16 @@ class GiantClamBlock(settings: Settings) : PlantBlock(settings), BlockEntityProv
         return if(world.isClient) {
             null
         } else {
-            BlockWithEntity.checkType(type, HybridAquaticBlockEntityTypes.GIANT_CLAM, GiantClamBlockEntity::tick)
+            BlockWithEntity.validateTicker(type, HybridAquaticBlockEntityTypes.GIANT_CLAM, GiantClamBlockEntity::tick)
         }
     }
 
+    override fun getCodec(): MapCodec<out PlantBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<GiantClamBlock> = createCodec(::GiantClamBlock)
         val CLAM_HAS_PEARL: BooleanProperty = BooleanProperty.of("clam_has_pearl")
         private val SHAPE = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
         private val COLLISION_SHAPE = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)

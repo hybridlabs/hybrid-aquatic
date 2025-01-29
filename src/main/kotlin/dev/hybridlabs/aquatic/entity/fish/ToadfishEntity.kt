@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
@@ -18,9 +17,10 @@ import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.tag.EntityTypeTags
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
-import java.util.function.Predicate
 
 class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
     HybridAquaticFishEntity(entityType, world, emptyMap(), HybridAquaticEntityTags.NONE, HybridAquaticEntityTags.NONE) {
@@ -37,9 +37,9 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
     var inflateTicks = 0
     var deflateTicks = 0
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(PUFF_STATE, NOT_PUFFED)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(PUFF_STATE, NOT_PUFFED)
     }
 
     fun getPuffState(): Int {
@@ -94,36 +94,50 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
 
     override fun tickMovement() {
         super.tickMovement()
-        if (isAlive && getPuffState() > 0) {
-            val nearbyEntities = world.getEntitiesByClass(MobEntity::class.java, boundingBox.expand(0.3)) {
-                BLOW_UP_TARGET_PREDICATE.test(this, it)
+        val world = world
+        if (world is ServerWorld) {
+            if (isAlive && getPuffState() > 0) {
+                val nearbyEntities = world.getEntitiesByClass(MobEntity::class.java, boundingBox.expand(0.3)) {
+                    BLOW_UP_TARGET_PREDICATE.test(world, this, it)
+                }
+                nearbyEntities.forEach { sting(it) }
             }
-            nearbyEntities.forEach { sting(it) }
         }
     }
 
     private fun sting(mob: MobEntity) {
-        val puffLevel = getPuffState()
-        val damageSource = this.damageSources.mobAttack(this)
-        if (mob.damage(damageSource, (1 + puffLevel).toFloat())) {
-            mob.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 60 * puffLevel, 0), this)
-            playSound(SoundEvents.ENTITY_PUFFER_FISH_STING, 1.0f, 1.0f)
+        val world = world
+        if (world is ServerWorld) {
+            val puffLevel = getPuffState()
+            val damageSource = this.damageSources.mobAttack(this)
+            if (mob.damage(world, damageSource, (1 + puffLevel).toFloat())) {
+                mob.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 60 * puffLevel, 0), this)
+                playSound(SoundEvents.ENTITY_PUFFER_FISH_STING, 1.0f, 1.0f)
+            }
         }
     }
 
     override fun onPlayerCollision(player: PlayerEntity) {
-        val puffLevel = getPuffState()
-        if (puffLevel > 0 && player.damage(this.damageSources.mobAttack(this), (1 + puffLevel).toFloat())) {
-            player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 60 * puffLevel, 0), this)
+        val world = world
+        if (world is ServerWorld) {
+            val puffLevel = getPuffState()
+            if (puffLevel > 0 && player.damage(world, this.damageSources.mobAttack(this), (1 + puffLevel).toFloat())) {
+                player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 60 * puffLevel, 0), this)
+            }
         }
     }
 
     private inner class InflateGoal : Goal() {
         override fun canStart(): Boolean {
-            val nearbyEntities = world.getEntitiesByClass(LivingEntity::class.java, boundingBox.expand(2.0)) {
-                BLOW_UP_TARGET_PREDICATE.test(this@ToadfishEntity, it)
+            val world = world
+            if (world is ServerWorld) {
+                val nearbyEntities = world.getEntitiesByClass(LivingEntity::class.java, boundingBox.expand(2.0)) {
+                    BLOW_UP_TARGET_PREDICATE.test(world, this@ToadfishEntity, it)
+                }
+                return nearbyEntities.isNotEmpty()
             }
-            return nearbyEntities.isNotEmpty()
+
+            return false
         }
 
         override fun start() {
@@ -139,15 +153,16 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.7)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.MAX_HEALTH, 3.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.7)
+                .add(EntityAttributes.ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.STEP_HEIGHT, 1.0)
         }
 
         private val PUFF_STATE: TrackedData<Int> = DataTracker.registerData(ToadfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        private val BLOW_UP_FILTER: Predicate<LivingEntity> = Predicate { entity ->
-            if (entity is PlayerEntity && entity.isCreative) false else entity.group != EntityGroup.AQUATIC
+        private val BLOW_UP_FILTER: TargetPredicate.EntityPredicate = TargetPredicate.EntityPredicate { entity, _ ->
+            if (entity is PlayerEntity && entity.isCreative) false else !entity.type.isIn(EntityTypeTags.AQUATIC)
         }
         private val BLOW_UP_TARGET_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility().setPredicate(BLOW_UP_FILTER)
 

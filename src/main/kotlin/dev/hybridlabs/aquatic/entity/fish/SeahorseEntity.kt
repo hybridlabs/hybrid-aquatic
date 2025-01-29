@@ -24,10 +24,10 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
 
     public override fun getLootTableId(): Identifier {
         return when (this.variant?.variantName) {
-            "common" -> Identifier("hybrid-aquatic", "gameplay/seahorse")
-            "big_belly" -> Identifier("hybrid-aquatic", "gameplay/seahorse")
-            "thorny" -> Identifier("hybrid-aquatic", "gameplay/seahorse")
-            "pygmy" -> Identifier("hybrid-aquatic", "gameplay/seahorse")
+            "common" -> Identifier.of("hybrid-aquatic", "gameplay/seahorse")
+            "big_belly" -> Identifier.of("hybrid-aquatic", "gameplay/seahorse")
+            "thorny" -> Identifier.of("hybrid-aquatic", "gameplay/seahorse")
+            "pygmy" -> Identifier.of("hybrid-aquatic", "gameplay/seahorse")
             else -> super.getLootTableId()
         }
     }
@@ -39,10 +39,11 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.MAX_HEALTH, 2.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.5)
+                .add(EntityAttributes.ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.STEP_HEIGHT, 1.0)
         }
     }
 }

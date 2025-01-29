@@ -17,10 +17,11 @@ class TriggerfishEntity(entityType: EntityType<out TriggerfishEntity>, world: Wo
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 8.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.7)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.MAX_HEALTH, 8.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.7)
+                .add(EntityAttributes.ATTACK_DAMAGE, 2.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.STEP_HEIGHT, 1.0)
         }
     }
 }

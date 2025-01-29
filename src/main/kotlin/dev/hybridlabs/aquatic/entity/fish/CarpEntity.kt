@@ -1,12 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.util.Identifier
+import net.minecraft.loot.LootTable
+import net.minecraft.registry.RegistryKey
 import net.minecraft.world.World
 
 class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
@@ -22,14 +24,12 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
         ),
         HybridAquaticEntityTags.NONE, HybridAquaticEntityTags.NONE) {
 
-    public override fun getLootTableId(): Identifier {
-        return when (this.variant?.variantName) {
-            "koi_ai_goromo" -> Identifier("hybrid-aquatic", "gameplay/koi")
-            "koi_hajiro" -> Identifier("hybrid-aquatic", "gameplay/koi")
-            "koi_platinum" -> Identifier("hybrid-aquatic", "gameplay/koi")
-            "koi_tancho" -> Identifier("hybrid-aquatic", "gameplay/koi")
-            else -> super.getLootTableId()
+    override fun getLootTableKeyOverride(): RegistryKey<LootTable>? {
+        if (variant.variantName.startsWith("koi_")) {
+            return HybridAquaticLootTables.KOI
         }
+
+        return super.getLootTableKeyOverride()
     }
 
     override fun getLimitPerChunk(): Int {
@@ -39,10 +39,11 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.MAX_HEALTH, 4.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.6)
+                .add(EntityAttributes.ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.STEP_HEIGHT, 1.0)
         }
     }
 }

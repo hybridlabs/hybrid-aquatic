@@ -5,7 +5,12 @@ import net.minecraft.enchantment.Enchantments
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.LookAtEntityGoal
+import net.minecraft.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.entity.ai.goal.RevengeGoal
+import net.minecraft.entity.ai.goal.WanderAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -13,7 +18,6 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.boss.BossBar
 import net.minecraft.entity.boss.ServerBossBar
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.damage.DamageType
 import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
@@ -21,15 +25,17 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.world.Difficulty
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animation.Animation
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 
 class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, world: World) :
     HybridAquaticMinibossEntity(entityType, world) {
@@ -40,7 +46,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
         moveControl = MoveControl(this)
         navigation = this.landNavigation
-        stepHeight = 2.0F
     }
 
     private var flipTimer: Int = 0
@@ -55,9 +60,9 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         get() = dataTracker.get(FLIPPED)
         set(bool) = dataTracker.set(FLIPPED, bool)
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(FLIPPED, false)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(FLIPPED, false)
     }
 
     override fun initGoals() {
@@ -74,26 +79,26 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         flipTimer = flipDuration
     }
 
-    override fun mobTick() {
+    override fun mobTick(world: ServerWorld) {
 
         if (isFlipped) {
             flipTimer--
 
             if (flipTimer <= 0) {
                 isFlipped = false
-                attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 0.75
-                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)?.baseValue = 5.0
-                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR)?.baseValue = 8.0
+                attributes.getCustomInstance(EntityAttributes.MOVEMENT_SPEED)?.baseValue = 0.75
+                attributes.getCustomInstance(EntityAttributes.ARMOR_TOUGHNESS)?.baseValue = 5.0
+                attributes.getCustomInstance(EntityAttributes.ARMOR)?.baseValue = 8.0
             } else {
-                attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 0.0
-                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)?.baseValue = 0.0
-                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR)?.baseValue = 0.0
+                attributes.getCustomInstance(EntityAttributes.MOVEMENT_SPEED)?.baseValue = 0.0
+                attributes.getCustomInstance(EntityAttributes.ARMOR_TOUGHNESS)?.baseValue = 0.0
+                attributes.getCustomInstance(EntityAttributes.ARMOR)?.baseValue = 0.0
             }
         }
 
         bossBar.percent = health / maxHealth
 
-        super.mobTick()
+        super.mobTick(world)
     }
 
     override fun onStartedTrackingBy(player: ServerPlayerEntity) {
@@ -134,20 +139,22 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         return if (isFlipped) 0.0f else super.getMovementSpeed()
     }
 
-    override fun damage(source: DamageSource, amount: Float): Boolean {
+    override fun damage(world: ServerWorld, source: DamageSource, amount: Float): Boolean {
+        val registryManager = world.registryManager
         val dmgSourcesRegistry = damageSources.registry
 
-        if (source.type == dmgSourcesRegistry.entryOf(DamageTypes.ARROW).value() as DamageType) return false
-        else if (source.type == dmgSourcesRegistry.entryOf(DamageTypes.IN_WALL).value() as DamageType) return false
+        if (source.type == dmgSourcesRegistry[DamageTypes.ARROW]) return false
+        else if (source.type == dmgSourcesRegistry[DamageTypes.IN_WALL]) return false
 
-        val damaged = super.damage(source, amount)
+        val damaged = super.damage(world, source, amount)
 
         if (damaged && source.source is PlayerEntity && !isFlipped) {
             val player = source.source as PlayerEntity
             val heldItem = player.mainHandStack
 
-            if (EnchantmentHelper.getLevel(Enchantments.BANE_OF_ARTHROPODS, heldItem) > 2 ||
-                (EnchantmentHelper.getLevel(Enchantments.RIPTIDE, heldItem) > 0)
+            val enchantmentsRegistry = registryManager.getOrThrow(RegistryKeys.ENCHANTMENT)
+            if (EnchantmentHelper.getLevel(enchantmentsRegistry.getOrThrow(Enchantments.BANE_OF_ARTHROPODS), heldItem) > 2 ||
+                (EnchantmentHelper.getLevel(enchantmentsRegistry.getOrThrow(Enchantments.RIPTIDE), heldItem) > 0)
             ) {
                 beFlipped()
             }
@@ -171,14 +178,15 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 300.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10.0)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 8.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 50.0)
-                .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 5.0)
-                .add(EntityAttributes.GENERIC_ARMOR, 8.0)
+                .add(EntityAttributes.MAX_HEALTH, 300.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.6)
+                .add(EntityAttributes.ATTACK_DAMAGE, 10.0)
+                .add(EntityAttributes.ATTACK_SPEED, 8.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 32.0)
+                .add(EntityAttributes.KNOCKBACK_RESISTANCE, 50.0)
+                .add(EntityAttributes.ARMOR_TOUGHNESS, 5.0)
+                .add(EntityAttributes.ARMOR, 8.0)
+                .add(EntityAttributes.STEP_HEIGHT, 2.0)
         }
 
         val FLIPPED_ANIMATION: RawAnimation = RawAnimation.begin().then("flipped", Animation.LoopType.LOOP)

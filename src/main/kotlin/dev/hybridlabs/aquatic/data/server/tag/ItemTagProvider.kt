@@ -276,6 +276,79 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             getOrCreateTagBuilder(ItemTags.FISHES).add(item)
         }
 
+        setOf(
+            HybridAquaticItems.RAW_SHRIMP,
+            HybridAquaticItems.COOKED_SHRIMP,
+            HybridAquaticItems.RAW_CRAYFISH,
+            HybridAquaticItems.COOKED_CRAYFISH,
+            HybridAquaticItems.RAW_CRAB,
+            HybridAquaticItems.COOKED_CRAB,
+            HybridAquaticItems.RAW_LOBSTER,
+            HybridAquaticItems.COOKED_LOBSTER,
+            HybridAquaticItems.RAW_LOBSTER_TAIL,
+            HybridAquaticItems.COOKED_LOBSTER_TAIL,
+            HybridAquaticItems.COOKED_FISH_STEAK,
+            HybridAquaticItems.RAW_FISH_STEAK,
+            HybridAquaticItems.COOKED_FISH_MEAT,
+            HybridAquaticItems.RAW_FISH_MEAT,
+            HybridAquaticItems.RAW_TENTACLE,
+            HybridAquaticItems.COOKED_TENTACLE,
+            // HybridAquaticItems.MACKEREL, TODO implement new items when they merge
+            HybridAquaticItems.PIRANHA,
+            HybridAquaticItems.ANGLERFISH,
+            HybridAquaticItems.BARRELEYE,
+            HybridAquaticItems.DRAGONFISH,
+            HybridAquaticItems.BLUE_TANG,
+            HybridAquaticItems.SURGEONFISH_SOHAL,
+            HybridAquaticItems.SURGEONFISH_LINED,
+            HybridAquaticItems.SURGEONFISH_ORANGESHOULDER,
+            HybridAquaticItems.YELLOW_TANG,
+            HybridAquaticItems.POWDER_BLUE_TANG,
+            HybridAquaticItems.CLOWNFISH,
+            // HybridAquaticItems.UNICORN_FISH,
+            HybridAquaticItems.FLASHLIGHT_FISH,
+            HybridAquaticItems.GOURAMI,
+            HybridAquaticItems.BETTA,
+            HybridAquaticItems.DISCUS,
+            HybridAquaticItems.DANIO,
+            HybridAquaticItems.NEON_TETRA,
+            HybridAquaticItems.TIGER_BARB,
+            HybridAquaticItems.OSCAR,
+            HybridAquaticItems.COWFISH,
+            HybridAquaticItems.KOI,
+            // HybridAquaticItems.CARP,
+            HybridAquaticItems.GOLDFISH,
+            HybridAquaticItems.SEAHORSE,
+            HybridAquaticItems.TOADFISH,
+            HybridAquaticItems.STONEFISH,
+            HybridAquaticItems.LIONFISH,
+            HybridAquaticItems.ROCKFISH,
+            // HybridAquaticItems.SEA_BASS,
+            HybridAquaticItems.BLUE_SPOTTED_STINGRAY,
+            HybridAquaticItems.SPOTTED_EAGLE_RAY,
+            HybridAquaticItems.MORAY_EEL,
+            HybridAquaticItems.NEEDLEFISH,
+            HybridAquaticItems.RATFISH,
+            HybridAquaticItems.TRIGGERFISH,
+            HybridAquaticItems.PARROTFISH,
+            HybridAquaticItems.MAHI,
+            HybridAquaticItems.TUNA,
+            HybridAquaticItems.OPAH,
+            HybridAquaticItems.OARFISH,
+            HybridAquaticItems.SUNFISH,
+        ).forEach { item ->
+            getOrCreateTagBuilder(ItemTags.MEAT).add(item)
+        }
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.REPAIRS_DIVING_HELMET).add(Items.COPPER_INGOT)
+        getOrCreateTagBuilder(HybridAquaticItemTags.REPAIRS_NAUTILUS_ARMOR).add(Items.NAUTILUS_SHELL)
+        getOrCreateTagBuilder(HybridAquaticItemTags.REPAIRS_MANGLERFISH_ARMOR).add(HybridAquaticItems.GLOW_SLIME)
+        getOrCreateTagBuilder(HybridAquaticItemTags.REPAIRS_EEL_SCARF).add(HybridAquaticItems.MORAY_EEL)
+        getOrCreateTagBuilder(HybridAquaticItemTags.REPAIRS_MOON_JELLYFISH_HAT).add(Items.SLIME_BALL)
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.SEASHELL_TOOL_MATERIALS).add(Items.NAUTILUS_SHELL)
+        getOrCreateTagBuilder(HybridAquaticItemTags.CORAL_TOOL_MATERIALS).add(HybridAquaticItems.CORAL_CHUNK)
+
         // plushies
         Registries.ITEM
             .filter(filterHybridAquatic(Registries.ITEM))

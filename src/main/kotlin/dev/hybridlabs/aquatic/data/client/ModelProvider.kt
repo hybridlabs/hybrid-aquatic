@@ -8,7 +8,11 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.block.Blocks
-import net.minecraft.data.client.*
+import net.minecraft.data.client.BlockStateModelGenerator
+import net.minecraft.data.client.ItemModelGenerator
+import net.minecraft.data.client.ModelIds
+import net.minecraft.data.client.Models
+import net.minecraft.data.client.TextureMap
 import net.minecraft.item.Items
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
@@ -207,11 +211,15 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     }
 
     companion object {
-        private val TEMPLATE_ANEMONE = Identifier(HybridAquatic.MOD_ID, "item/template_anemone")
-        private val TEMPLATE_TUBE_SPONGE = Identifier(HybridAquatic.MOD_ID, "item/template_tube_sponge")
-        private val TEMPLATE_BUOY = Identifier(HybridAquatic.MOD_ID, "item/template_buoy")
-        private val TEMPLATE_MESSAGE_IN_A_BOTTLE = Identifier(HybridAquatic.MOD_ID, "item/template_message_in_a_bottle")
-        private val TEMPLATE_PLUSHIE = Identifier(HybridAquatic.MOD_ID, "item/template_plushie")
-        private val TEMPLATE_GIANT_CLAM = Identifier(HybridAquatic.MOD_ID, "item/template_giant_clam")
+        private val TEMPLATE_ANEMONE = create("template_anemone")
+        private val TEMPLATE_TUBE_SPONGE = create("template_tube_sponge")
+        private val TEMPLATE_BUOY = create("template_buoy")
+        private val TEMPLATE_MESSAGE_IN_A_BOTTLE = create("template_message_in_a_bottle")
+        private val TEMPLATE_PLUSHIE = create("template_plushie")
+        private val TEMPLATE_GIANT_CLAM = create("template_giant_clam")
+
+        private fun create(id: String): Identifier {
+            return Identifier.of(HybridAquatic.MOD_ID, "item/$id")
+        }
     }
 }

@@ -38,14 +38,14 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
 
     public override fun getLootTableId(): Identifier {
         return when (this.variant?.variantName) {
-            "ocellaris" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "percula" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "whiteband" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "tomato" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "cinnamon" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "clarkii" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "pink_skunk" -> Identifier("hybrid-aquatic", "entities/clownfish")
-            "orange_skunk" -> Identifier("hybrid-aquatic", "entities/clownfish")
+            "ocellaris" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "percula" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "whiteband" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "tomato" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "cinnamon" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "clarkii" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "pink_skunk" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
+            "orange_skunk" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
             else -> super.getLootTableId()
         }
     }
@@ -55,10 +55,11 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.7)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.MAX_HEALTH, 2.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.7)
+                .add(EntityAttributes.ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.STEP_HEIGHT, 1.0)
         }
     }
 
@@ -79,7 +80,7 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
     }
 
     private fun navigateToAnemone(ventBlockPos: BlockPos) {
-        this.navigation.startMovingTo(ventBlockPos.x.toDouble(), ventBlockPos.y.toDouble(), ventBlockPos.z.toDouble(), this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED))
+        this.navigation.startMovingTo(ventBlockPos.x.toDouble(), ventBlockPos.y.toDouble(), ventBlockPos.z.toDouble(), this.getAttributeValue(EntityAttributes.MOVEMENT_SPEED))
     }
 
     private fun findNearbyAnemone(): BlockPos? {

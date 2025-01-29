@@ -6,9 +6,9 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
 
 class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: World) :
     HybridAquaticCritterEntity(entityType, world, variants = hashMapOf(
@@ -23,8 +23,8 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1)
+                .add(EntityAttributes.MAX_HEALTH, 2.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.1)
         }
     }
 

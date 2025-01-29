@@ -26,7 +26,7 @@ public class TurtleEntityMixin extends MobEntity {
     private static void injectTurtleAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
         DefaultAttributeContainer.Builder builder = cir.getReturnValue();
         if (builder != null) {
-            builder.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
+            builder.add(EntityAttributes.ATTACK_DAMAGE, 3.0);
         }
         cir.setReturnValue(builder);
     }

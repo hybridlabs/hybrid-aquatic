@@ -5,14 +5,19 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.Animation
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
+import software.bernie.geckolib.util.RenderUtil
 
 class GiantClamBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.GIANT_CLAM, pos, state), GeoAnimatable {
     private val factory = GeckoLibUtil.createInstanceCache(this)
@@ -42,21 +47,21 @@ class GiantClamBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(Hybri
     }
 
     override fun getTick(o: Any): Double {
-        return RenderUtils.getCurrentTick()
+        return RenderUtil.getCurrentTick()
     }
 
-    override fun readNbt(nbt: NbtCompound) {
+    override fun readNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
         pearlCooldown = nbt.getInt(PEARL_COOLDOWN_NBT_KEY)
-        super.readNbt(nbt)
+        super.readNbt(nbt, registries)
     }
 
-    override fun writeNbt(nbt: NbtCompound) {
+    override fun writeNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
         nbt.putInt(PEARL_COOLDOWN_NBT_KEY, pearlCooldown)
-        super.writeNbt(nbt)
+        super.writeNbt(nbt, registries)
     }
 
-    override fun toInitialChunkDataNbt(): NbtCompound {
-        return createNbt()
+    override fun toInitialChunkDataNbt(registries: RegistryWrapper.WrapperLookup): NbtCompound {
+        return createNbt(registries)
     }
 
     override fun toUpdatePacket(): BlockEntityUpdateS2CPacket {

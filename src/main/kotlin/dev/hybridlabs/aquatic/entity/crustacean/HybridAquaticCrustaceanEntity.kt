@@ -8,7 +8,6 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
@@ -22,21 +21,33 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.loot.LootTable
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.recipe.Ingredient
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
-import net.minecraft.world.*
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
+import net.minecraft.world.World
+import net.minecraft.world.WorldAccess
+import net.minecraft.world.WorldView
 import net.minecraft.world.biome.Biome
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.Animation
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
+import java.util.Optional
 
 @Suppress("DEPRECATION", "LeakingThis", "UNUSED_PARAMETER")
 open class HybridAquaticCrustaceanEntity(
@@ -73,23 +84,20 @@ open class HybridAquaticCrustaceanEntity(
             dataTracker.set(VARIANT, value)
         }
 
-    @Suppress("UNUSED_PARAMETER")
-    var variant: CrustaceanVariant?
-        get() = variants[variantKey]
-        private set(value) {}
+    val variant: CrustaceanVariant get() = variants[variantKey] ?: throw IllegalArgumentException("Invalid variant key: $variantKey")
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(CRUSTACEAN_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(CRUSTACEAN_SIZE, 0)
+        builder.add(ATTEMPT_ATTACK, false)
+        builder.add(VARIANT, "")
+        builder.add(VARIANT_DATA, NbtCompound())
     }
 
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(0, EscapeDangerGoal(this, 1.0))
-        goalSelector.add(1, TemptGoal(this, 0.5, Ingredient.fromTag(HybridAquaticItemTags.CRUSTACEAN_TEMPT_ITEMS), true))
+        goalSelector.add(1, TemptGoal(this, 0.5, { stack -> stack.isIn(HybridAquaticItemTags.CRUSTACEAN_TEMPT_ITEMS) }, true))
         goalSelector.add(3, WanderAroundGoal(this, 0.4))
         goalSelector.add(5, LookAroundGoal(this))
     }
@@ -98,13 +106,12 @@ open class HybridAquaticCrustaceanEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.size = this.random.nextBetween(getMinSize(),getMaxSize())
 
         if (variants.isNotEmpty()) {
-            if (spawnReason == SpawnReason.SPAWN_EGG) {
+            if (spawnReason == SpawnReason.SPAWN_ITEM_USE) {
                 variantKey = variants.keys.elementAt(random.nextBetween(0, variants.size - 1))
             } else {
                 // Handle collisions
@@ -140,14 +147,13 @@ open class HybridAquaticCrustaceanEntity(
         }
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     // region movement
-   init {
+    init {
         moveControl = MoveControl(this)
         navigation = this.landNavigation
-        stepHeight = 1.0F
     }
 
     override fun getPathfindingFavor(pos: BlockPos?, world: WorldView?): Float {
@@ -163,10 +169,6 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     // end region
-
-    override fun getGroup(): EntityGroup? {
-        return EntityGroup.ARTHROPOD
-    }
 
     protected open fun getMinSize(): Int {
         return 0
@@ -196,6 +198,14 @@ open class HybridAquaticCrustaceanEntity(
         return false
     }
 
+    override fun getLootTableKey(): Optional<RegistryKey<LootTable>> {
+        return if (lootTable.isPresent) super.getLootTableKey() else Optional.ofNullable(getLootTableKeyOverride())
+    }
+
+    open fun getLootTableKeyOverride(): RegistryKey<LootTable>? {
+        return variant.createLootTableKey(type)
+    }
+
     // region sounds
 
     override fun calculateNextStepSoundDistance(): Float {
@@ -218,21 +228,10 @@ open class HybridAquaticCrustaceanEntity(
         return SoundEvents.ENTITY_COD_AMBIENT
     }
 
-    // endregion
-
-    // region water breathing
-    override fun canBreatheInWater(): Boolean {
-        return true
-    }
-
-    override fun tickWaterBreathingAir(air: Int) {}
-
-    // endregion
-
-    override fun dropLoot(source: DamageSource, causedByPlayer: Boolean) {
+    override fun dropLoot(world: ServerWorld, source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.attacker
         if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticRayEntity && attacker !is HybridAquaticCephalopodEntity) {
-            super.dropLoot(source, causedByPlayer)
+            super.dropLoot(world, source, causedByPlayer)
         }
     }
 
@@ -332,6 +331,13 @@ open class HybridAquaticCrustaceanEntity(
 
         fun getProvidedVariant(crustacean: HybridAquaticCrustaceanEntity) : String {
             return providedVariant(crustacean.world, crustacean.blockPos, crustacean.random, crustacean)
+        }
+
+        fun createLootTableKey(type: EntityType<*>): RegistryKey<LootTable>? {
+            return type.lootTableKey.map { lootTable ->
+                val lootTableId = lootTable.value
+                RegistryKey.of(RegistryKeys.LOOT_TABLE, lootTableId.withSuffixedPath("_$variantName"))
+            }.orElse(null)
         }
 
         companion object {

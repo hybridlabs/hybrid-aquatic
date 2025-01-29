@@ -11,96 +11,89 @@ import net.minecraft.loot.condition.LocationCheckLootCondition
 import net.minecraft.loot.context.LootContextTypes
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.predicate.entity.LocationPredicate
-import net.minecraft.util.Identifier
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.RegistryWrapper
+import net.minecraft.registry.entry.RegistryEntryList
+import net.minecraft.world.biome.Biome
 import net.minecraft.world.biome.BiomeKeys
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class FishingLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTableProvider(output, LootContextTypes.FISHING) {
-    override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
+class FishingLootTableProvider(output: FabricDataOutput, lookup: CompletableFuture<RegistryWrapper.WrapperLookup>) : SimpleFabricLootTableProvider(output, lookup, LootContextTypes.FISHING) {
+    private val registries: RegistryWrapper.WrapperLookup = lookup.join()
+
+    override fun accept(exporter: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) {
+        val biomeLookup = registries.getOrThrow(RegistryKeys.BIOME)
+
         val needsJungle = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.JUNGLE)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.JUNGLE)
         )
 
         val needsSparseJungle = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.SPARSE_JUNGLE)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.SPARSE_JUNGLE)
         )
 
         val needsBambooJungle = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.BAMBOO_JUNGLE)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.BAMBOO_JUNGLE)
         )
 
         val needsSwamp = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.SWAMP)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.SWAMP)
         )
 
         val needsMangroveSwamp = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.MANGROVE_SWAMP)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.MANGROVE_SWAMP)
         )
 
         val needsBeach = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.BEACH)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.BEACH)
         )
 
         val needsOcean = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.OCEAN)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.OCEAN)
         )
 
         val needsDeepOcean = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.DEEP_OCEAN)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.DEEP_OCEAN)
         )
 
         val needsColdOcean = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.COLD_OCEAN)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.COLD_OCEAN)
         )
 
         val needsDeepColdOcean = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.DEEP_COLD_OCEAN)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.DEEP_COLD_OCEAN)
         )
 
         val needsFrozenOcean = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.FROZEN_OCEAN)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.FROZEN_OCEAN)
         )
 
         val needsDeepFrozenOcean = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.DEEP_FROZEN_OCEAN)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.DEEP_FROZEN_OCEAN)
         )
 
         val needsLukewarmOcean = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.LUKEWARM_OCEAN)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.LUKEWARM_OCEAN)
         )
 
         val needsDeepLukewarmOcean = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.DEEP_LUKEWARM_OCEAN)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.DEEP_LUKEWARM_OCEAN)
         )
 
         val needsWarmOcean = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create()
-                .biome(BiomeKeys.WARM_OCEAN)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.WARM_OCEAN)
         )
 
         val needsRiver = LocationCheckLootCondition.builder(
-            LocationPredicate.Builder.create().biome(BiomeKeys.RIVER)
+            LocationPredicate.Builder.create().biome(biomeLookup, BiomeKeys.RIVER)
         )
 
         // fishing fish loot table extension
         exporter.accept(
             HybridAquaticLootTables.FISHING_FISH_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.FISHING_FISH_ID)
                 .pool(
                     LootPool.builder()
                         .with(
@@ -293,7 +286,6 @@ class FishingLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
         exporter.accept(
             HybridAquaticLootTables.FISHING_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.FISHING_TREASURE_ID)
                 .pool(
                     LootPool.builder()
                         .with(ItemEntry.builder(HybridAquaticItems.CRAB_POT)
@@ -333,5 +325,9 @@ class FishingLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTable
                         .with(MessageInABottleItemEntry.builder())
                 )
         )
+    }
+
+    fun LocationPredicate.Builder.biome(biomeLookup: RegistryWrapper.Impl<Biome>, vararg biomes: RegistryKey<Biome>): LocationPredicate.Builder {
+        return biome(RegistryEntryList.of(biomes.map(biomeLookup::getOrThrow)))
     }
 }

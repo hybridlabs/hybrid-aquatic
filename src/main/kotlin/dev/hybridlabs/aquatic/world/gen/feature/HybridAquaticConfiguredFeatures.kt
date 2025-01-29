@@ -22,6 +22,6 @@ object HybridAquaticConfiguredFeatures {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
 
     private fun register(id: String): RegistryKey<ConfiguredFeature<*, *>> {
-        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, Identifier(HybridAquatic.MOD_ID, id))
+        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, Identifier.of(HybridAquatic.MOD_ID, id))
     }
 }

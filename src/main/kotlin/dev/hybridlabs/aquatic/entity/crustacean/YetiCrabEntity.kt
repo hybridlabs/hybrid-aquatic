@@ -16,10 +16,10 @@ class YetiCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
+                .add(EntityAttributes.MAX_HEALTH, 4.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.3)
+                .add(EntityAttributes.ATTACK_DAMAGE, 4.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 16.0)
         }
     }
 
@@ -49,7 +49,7 @@ class YetiCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, 
     }
 
     private fun navigateToVent(ventBlockPos: BlockPos) {
-        this.navigation.startMovingTo(ventBlockPos.x.toDouble(), ventBlockPos.y.toDouble(), ventBlockPos.z.toDouble(), this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED))
+        this.navigation.startMovingTo(ventBlockPos.x.toDouble(), ventBlockPos.y.toDouble(), ventBlockPos.z.toDouble(), this.getAttributeValue(EntityAttributes.MOVEMENT_SPEED))
     }
 
     private fun findNearbyVentBlock(): BlockPos? {

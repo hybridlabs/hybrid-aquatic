@@ -66,6 +66,6 @@ object HybridAquaticEntityTags {
     val SHARKS = create("sharks")
 
     private fun create(id: String): TagKey<EntityType<*>> {
-        return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id))
+        return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(HybridAquatic.MOD_ID, id))
     }
 }

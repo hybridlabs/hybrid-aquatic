@@ -1,94 +1,26 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.HybridAquatic
-import net.minecraft.item.ArmorItem
-import net.minecraft.item.ArmorMaterial
-import net.minecraft.item.Items
-import net.minecraft.recipe.Ingredient
-import net.minecraft.sound.SoundEvent
+import dev.hybridlabs.aquatic.item.equipment.HybridAquaticEquipmentModels
+import dev.hybridlabs.aquatic.sound.HybridAquaticSoundEvents
+import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
+import net.minecraft.item.equipment.ArmorMaterial
+import net.minecraft.item.equipment.EquipmentType
 import net.minecraft.sound.SoundEvents
-import java.util.function.Supplier
 
-enum class HybridAquaticArmorMaterials(
-    private val id: String,
-    private val durabilityMultiplier: Int,
-    private val protectionAmounts: IntArray,
-    private val enchantability: Int,
-    private val equipSound: SoundEvent,
-    private val toughness: Float,
-    private val knockbackResistance: Float,
-    private val repairIngredient: Supplier<Ingredient>
-) : ArmorMaterial {
-    DIVING("diving", 15, intArrayOf(2, 5, 4, 2), 9,
-        SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.0f, 0.0f, Supplier<Ingredient> {
-            Ingredient.ofItems(
-                Items.COPPER_INGOT
-            )
-        }),
-    SEASHELL("seashell", 15, intArrayOf(2, 4, 3, 2), 22,
-        SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, 0.0f, 0.0f, Supplier<Ingredient> {
-            Ingredient.ofItems(
-                Items.NAUTILUS_SHELL
-            )
-        }),
-    MANGLERFISH("manglerfish", 15, intArrayOf(1, 1, 1, 1), 15,
-        SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, Supplier<Ingredient> {
-            Ingredient.ofItems(
-                HybridAquaticItems.GLOW_SLIME
-            )
-        }),
-    EEL("eel", 15, intArrayOf(1, 1, 1, 1), 15,
-        SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, Supplier<Ingredient> {
-            Ingredient.ofItems(
-                HybridAquaticItems.MORAY_EEL
-            )
-        }),
-    MOONJELLYFISH("moon_jelly", 15, intArrayOf(1, 1, 1, 1), 15,
-        SoundEvents.BLOCK_SLIME_BLOCK_PLACE, 0.0f, 0.0f, Supplier<Ingredient> {
-            Ingredient.ofItems(
-                Items.SLIME_BALL
-            )
-        }),
-    TURTLE("turtle", 25, intArrayOf(2, 6, 5, 2), 9,
-        SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, 1.0f, 0.3f, Supplier<Ingredient> {
-            Ingredient.ofItems(
-                Items.SCUTE
-            )
-        });
+object HybridAquaticArmorMaterials {
+    val DIVING = ArmorMaterial(15, buildEquipmentDefenseMap(2, 5, 4, 2), 9, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.0f, 0.0f, HybridAquaticItemTags.REPAIRS_DIVING_HELMET, HybridAquaticEquipmentModels.DIVING)
+    val SEASHELL = ArmorMaterial(15, buildEquipmentDefenseMap(2, 4, 3, 2), 22, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, 0.0f, 0.0f, HybridAquaticItemTags.REPAIRS_NAUTILUS_ARMOR, HybridAquaticEquipmentModels.NAUTILUS)
+    val MANGLERFISH = ArmorMaterial(15, buildEquipmentDefenseMap(1, 1, 1, 1), 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, HybridAquaticItemTags.REPAIRS_MANGLERFISH_ARMOR, HybridAquaticEquipmentModels.MANGLERFISH)
+    val EEL = ArmorMaterial(15, buildEquipmentDefenseMap(1, 1, 1, 1), 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, HybridAquaticItemTags.REPAIRS_EEL_SCARF, HybridAquaticEquipmentModels.EEL)
+    val MOONJELLYFISH = ArmorMaterial(15, buildEquipmentDefenseMap(1, 1, 1, 1), 15, HybridAquaticSoundEvents.ITEM_ARMOR_MOON_JELLYFISH_EQUIP, 0.0f, 0.0f, HybridAquaticItemTags.REPAIRS_MOON_JELLYFISH_HAT, HybridAquaticEquipmentModels.MOON_JELLYFISH)
 
-    override fun getDurability(type: ArmorItem.Type): Int {
-        return BASE_DURABILITY[type.ordinal] * this.durabilityMultiplier
-    }
-
-    override fun getProtection(type: ArmorItem.Type): Int {
-        return protectionAmounts[type.ordinal]
-    }
-
-    override fun getEnchantability(): Int {
-        return this.enchantability
-    }
-
-    override fun getEquipSound(): SoundEvent {
-        return this.equipSound
-    }
-
-    override fun getRepairIngredient(): Ingredient {
-        return repairIngredient.get()
-    }
-
-    override fun getName(): String {
-        return HybridAquatic.MOD_ID + ":" + this.id
-    }
-
-    override fun getToughness(): Float {
-        return this.toughness
-    }
-
-    override fun getKnockbackResistance(): Float {
-        return this.knockbackResistance
-    }
-
-    companion object {
-        private val BASE_DURABILITY = intArrayOf(11, 16, 15, 13)
+    fun buildEquipmentDefenseMap(helmet: Int, chestplate: Int, leggings: Int, boots: Int, body: Int = chestplate): Map<EquipmentType, Int> {
+        return buildMap {
+            this[EquipmentType.BOOTS] = boots
+            this[EquipmentType.LEGGINGS] = leggings
+            this[EquipmentType.CHESTPLATE] = chestplate
+            this[EquipmentType.HELMET] = helmet
+            this[EquipmentType.BODY] = body
+        }
     }
 }

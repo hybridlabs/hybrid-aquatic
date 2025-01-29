@@ -13,9 +13,11 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.registry.Registries
+import net.minecraft.registry.RegistryWrapper
+import java.util.concurrent.CompletableFuture
 
-class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
-    override fun generateTranslations(builder: TranslationBuilder) {
+class LanguageProvider(output: FabricDataOutput, lookup: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricLanguageProvider(output, lookup) {
+    override fun generateTranslations(lookup: RegistryWrapper.WrapperLookup, builder: TranslationBuilder) {
         // item group
         builder.add(Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.BLOCKS).orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Blocks")
         builder.add(Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.ITEMS).orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Items")
@@ -205,9 +207,11 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticStatusEffects.THALASSOPHOBIA to "Thalassophobia",
             HybridAquaticStatusEffects.BUOYANCY to "Buoyancy",
             HybridAquaticStatusEffects.SPININESS to "Spininess",
-        ).forEach { (effect, translation) ->
-            val identifier = Registries.STATUS_EFFECT.getId(effect)
-            builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
+        ).forEach { (effectEntry, translation) ->
+            effectEntry.key.ifPresent { key ->
+                val identifier = key.value
+                builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
+            }
         }
 
         // Item descriptions
@@ -239,7 +243,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         mapOf(
             HybridAquaticEnchantments.LIVECATCH to "Live Catch",
         ).forEach { (enchantment, translation) ->
-            builder.add(enchantment, translation)
+            builder.addEnchantment(enchantment, translation)
         }
 
         mapOf(

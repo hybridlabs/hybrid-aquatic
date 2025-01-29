@@ -4,22 +4,24 @@ import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.Animation
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
+import software.bernie.geckolib.util.RenderUtil
 import java.util.function.Function
 
 class AnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.ANEMONE, pos, state), GeoAnimatable {
@@ -88,7 +90,7 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridA
         val nbt = hiddenNbt.copy()
         removeIrrelevantNbtKeys(nbt)
 
-        val clownfish = EntityType.loadEntityWithPassengers(nbt, world, Function.identity())
+        val clownfish = EntityType.loadEntityWithPassengers(nbt, world, SpawnReason.MOB_SUMMONED, Function.identity())
         if (clownfish !is ClownfishEntity) {
             return false
         }
@@ -127,21 +129,21 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridA
     }
 
     override fun getTick(o: Any): Double {
-        return RenderUtils.getCurrentTick()
+        return RenderUtil.getCurrentTick()
     }
 
-    override fun toInitialChunkDataNbt(): NbtCompound {
-        return createNbt()
+    override fun toInitialChunkDataNbt(registries: RegistryWrapper.WrapperLookup): NbtCompound {
+        return createNbt(registries)
     }
 
-    override fun writeNbt(nbt: NbtCompound) {
+    override fun writeNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
         hiddenClownfish?.let { clownfishNbt -> nbt.put("clownfish", clownfishNbt) }
 
         nbt.putInt("hide_timer", hideTimer)
         nbt.putInt("cooldown_timer", cooldownTimer)
     }
 
-    override fun readNbt(nbt: NbtCompound) {
+    override fun readNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
         if (nbt.contains("clownfish", NbtElement.COMPOUND_TYPE.toInt())) {
             val clownfishNbt = nbt.getCompound("clownfish")
             hiddenClownfish = clownfishNbt

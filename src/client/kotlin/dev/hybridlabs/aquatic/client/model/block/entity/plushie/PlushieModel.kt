@@ -1,21 +1,19 @@
 package dev.hybridlabs.aquatic.client.model.block.entity.plushie
 
 import net.minecraft.client.model.ModelPart
-import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.block.entity.SkullBlockEntityModel
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
 import kotlin.math.sin
 
 /**
  * Represents the model of a Blahaj Plushie.
  */
-abstract class PlushieModel : SkullBlockEntityModel() {
+abstract class PlushieModel(
     /**
      * The root model part.
      */
-    abstract val root: ModelPart
-
+    val root: ModelPart
+) : SkullBlockEntityModel(root) {
     /**
      * The jaw model part.
      */
@@ -26,18 +24,5 @@ abstract class PlushieModel : SkullBlockEntityModel() {
         root.pitch = pitch * MathHelper.RADIANS_PER_DEGREE
 
         jaw?.pitch = (sin((animationProgress * 3.1415927f * 0.2f).toDouble()) + 1.0).toFloat() * 0.2f
-    }
-
-    override fun render(
-        matrices: MatrixStack,
-        vertices: VertexConsumer,
-        light: Int,
-        overlay: Int,
-        red: Float,
-        green: Float,
-        blue: Float,
-        alpha: Float
-    ) {
-        root.render(matrices, vertices, light, overlay, red, green, blue, alpha)
     }
 }

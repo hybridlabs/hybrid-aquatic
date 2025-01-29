@@ -15,6 +15,6 @@ class ToadfishEntityModel : HybridAquaticFishEntityModel<ToadfishEntity>("toadfi
             else -> "textures/entity/fish/toadfish/toadfish_large.png"
         }
 
-        return Identifier(HybridAquatic.MOD_ID, texturePath)
+        return Identifier.of(HybridAquatic.MOD_ID, texturePath)
     }
 }

@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.loot
 
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents
 import net.minecraft.loot.LootTables
 import net.minecraft.loot.condition.EntityPropertiesLootCondition
 import net.minecraft.loot.context.LootContext
@@ -10,12 +10,12 @@ import net.minecraft.predicate.entity.FishingHookPredicate
 
 object LootTableModifications {
     init {
-        LootTableEvents.MODIFY.register { _, _, id, tableBuilder, source ->
+        LootTableEvents.MODIFY.register { key, builder, source, lookup ->
             if (source.isBuiltin) {
-                when (id) {
+                when (key) {
                     // modify fishing loot table
                     LootTables.FISHING_FISH_GAMEPLAY -> {
-                        tableBuilder.modifyPools { defaultPools ->
+                        builder.modifyPools { defaultPools ->
                             defaultPools
                                 // add fishing fish loot table
                                 .with(

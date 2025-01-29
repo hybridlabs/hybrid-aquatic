@@ -22,13 +22,13 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Wo
 
     public override fun getLootTableId(): Identifier {
         return when (this.variant?.variantName) {
-            "blue_tang" -> Identifier("hybrid-aquatic", "gameplay/blue_tang")
-            "yellow_tang" -> Identifier("hybrid-aquatic", "gameplay/yellow_tang")
-            "powder_blue_tang" -> Identifier("hybrid-aquatic", "gameplay/powder_blue_tang")
-            "sohal" -> Identifier("hybrid-aquatic", "gameplay/sohal")
-            "orangeshoulder" -> Identifier("hybrid-aquatic", "gameplay/orangeshoulder")
-            "lined" -> Identifier("hybrid-aquatic", "gameplay/lined")
-            "unicornfish" -> Identifier("hybrid-aquatic", "gameplay/unicornfish")
+            "blue_tang" -> Identifier.of("hybrid-aquatic", "gameplay/blue_tang")
+            "yellow_tang" -> Identifier.of("hybrid-aquatic", "gameplay/yellow_tang")
+            "powder_blue_tang" -> Identifier.of("hybrid-aquatic", "gameplay/powder_blue_tang")
+            "sohal" -> Identifier.of("hybrid-aquatic", "gameplay/sohal")
+            "orangeshoulder" -> Identifier.of("hybrid-aquatic", "gameplay/orangeshoulder")
+            "lined" -> Identifier.of("hybrid-aquatic", "gameplay/lined")
+            "unicornfish" -> Identifier.of("hybrid-aquatic", "gameplay/unicornfish")
             else -> super.getLootTableId()
         }
     }
@@ -37,10 +37,10 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Wo
         super.tick()
 
         return when (this.variant?.variantName) {
-            "powder_blue_tang" -> attributes.getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH)?.baseValue = 1.5
-            "yellow_tang" -> attributes.getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH)?.baseValue = 1.5
+            "powder_blue_tang" -> attributes.getCustomInstance(EntityAttributes.MAX_HEALTH)?.baseValue = 1.5
+            "yellow_tang" -> attributes.getCustomInstance(EntityAttributes.MAX_HEALTH)?.baseValue = 1.5
 
-            else -> attributes.getCustomInstance(EntityAttributes.GENERIC_MAX_HEALTH)?.baseValue = 4.0
+            else -> attributes.getCustomInstance(EntityAttributes.MAX_HEALTH)?.baseValue = 4.0
         }
     }
 
@@ -51,10 +51,11 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Wo
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.MAX_HEALTH, 4.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.6)
+                .add(EntityAttributes.ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.STEP_HEIGHT, 1.0)
         }
     }
 }

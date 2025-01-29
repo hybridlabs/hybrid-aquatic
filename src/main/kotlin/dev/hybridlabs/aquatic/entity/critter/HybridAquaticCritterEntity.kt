@@ -28,11 +28,15 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.Animation
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
@@ -48,7 +52,6 @@ open class HybridAquaticCritterEntity(
     private var fromFishingNet = false
 
     init {
-        stepHeight = 1.0F
         moveControl = MoveControl(this)
         navigation = this.landNavigation
     }
@@ -87,12 +90,11 @@ open class HybridAquaticCritterEntity(
         dataTracker.set(CRITTER_FLAGS, b)
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
-        dataTracker.startTracking(CRITTER_SIZE, 0)
-        dataTracker.startTracking(CRITTER_FLAGS, 0.toByte())
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(VARIANT, "")
+        builder.add(VARIANT_DATA, NbtCompound())
+        builder.add(CRITTER_SIZE, 0)
+        builder.add(CRITTER_FLAGS, 0.toByte())
     }
 
     override fun initGoals() {
@@ -107,13 +109,12 @@ open class HybridAquaticCritterEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = this.maxAir
 
         if (variants.isNotEmpty()) {
-            if (spawnReason == SpawnReason.SPAWN_EGG) {
+            if (spawnReason == SpawnReason.SPAWN_ITEM_USE) {
                 variantKey = variants.keys.elementAt(random.nextBetween(0, variants.size - 1))
             } else {
                 // Handle collisions
@@ -149,7 +150,7 @@ open class HybridAquaticCritterEntity(
         }
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun shouldSwimInFluids(): Boolean {
@@ -243,10 +244,6 @@ open class HybridAquaticCritterEntity(
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
-    }
-
-    override fun canBreatheInWater(): Boolean {
-        return true
     }
 
     private var variantData: NbtCompound

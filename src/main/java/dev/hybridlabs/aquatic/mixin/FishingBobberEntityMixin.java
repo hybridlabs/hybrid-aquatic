@@ -120,7 +120,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
             )
     )
     private void lureDamage(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
-        lureItemStack.damage(1, usedPlayer, (test) -> this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f));
+        lureItemStack.damage(world, 1, usedPlayer, (test) -> this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f));
     }
 
     // Increases chance of getting treasure item with magnetic hook
@@ -168,7 +168,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
             var entityType = ITEM_TO_ENTITY.get(generatedItem.getItem());
             Enchantment liveCatch = HybridAquaticEnchantments.INSTANCE.getLIVECATCH();
             if (entityType != null && EnchantmentHelper.getLevel(liveCatch, usedItem) > 0) {
-                var liveFish = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.SPAWN_EGG);
+                var liveFish = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.SPAWN_ITEM_USE);
                 if (liveFish == null) {
                     return false;
                 }

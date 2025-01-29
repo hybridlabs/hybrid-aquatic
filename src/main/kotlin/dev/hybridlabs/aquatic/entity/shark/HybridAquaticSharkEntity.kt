@@ -33,12 +33,11 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.*
 
@@ -143,25 +142,24 @@ open class HybridAquaticSharkEntity(
         targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasStatusEffect(HybridAquaticStatusEffects.BLEEDING) && it !is HybridAquaticSharkEntity && !isPassive})
         }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(HUNGER, MAX_HUNGER)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(SHARK_SIZE, 0)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(MOISTNESS, getMaxMoistness())
+        builder.add(HUNGER, MAX_HUNGER)
+        builder.add(ATTEMPT_ATTACK, false)
+        builder.add(SHARK_SIZE, 0)
     }
 
     override fun initialize(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = getMaxMoistness()
         pitch = 0.0f
         this.size = this.random.nextBetween(getMinSize(),getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun tick() {
@@ -175,14 +173,14 @@ open class HybridAquaticSharkEntity(
             moistness -= 1
             if (moistness <= -20) {
                 moistness = 0
-                damage(this.damageSources.dryOut(), 1.0f)
+                damage(world, this.damageSources.dryOut(), 1.0f)
             }
         }
 
         if (isAttacking) {
-            attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 3.0
+            attributes.getCustomInstance(EntityAttributes.MOVEMENT_SPEED)?.baseValue = 3.0
         } else {
-            attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 1.0
+            attributes.getCustomInstance(EntityAttributes.MOVEMENT_SPEED)?.baseValue = 1.0
         }
 
         if (world.isClient && isTouchingWater && isAttacking) {
@@ -256,10 +254,6 @@ open class HybridAquaticSharkEntity(
 
     protected open fun getMaxSize() : Int {
         return 0
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.65f
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
@@ -353,10 +347,10 @@ open class HybridAquaticSharkEntity(
         return 0
     }
 
-    override fun dropLoot(source: DamageSource, causedByPlayer: Boolean) {
+    override fun dropLoot(world: ServerWorld, source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.attacker
         if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity) {
-            super.dropLoot(source, causedByPlayer)
+            super.dropLoot(world, source, causedByPlayer)
         }
     }
 

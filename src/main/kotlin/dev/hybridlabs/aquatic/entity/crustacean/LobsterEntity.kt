@@ -22,10 +22,10 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
 
     public override fun getLootTableId(): Identifier {
         return when (this.variant?.variantName) {
-            "american" -> Identifier("hybrid-aquatic", "gameplay/clawed_lobster")
-            "california_spiny" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
-            "ornate_spiny" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
-            "regal_slipper" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
+            "american" -> Identifier.of("hybrid-aquatic", "gameplay/clawed_lobster")
+            "california_spiny" -> Identifier.of("hybrid-aquatic", "gameplay/clawless_lobster")
+            "ornate_spiny" -> Identifier.of("hybrid-aquatic", "gameplay/clawless_lobster")
+            "regal_slipper" -> Identifier.of("hybrid-aquatic", "gameplay/clawless_lobster")
             else -> super.getLootTableId()
         }
     }
@@ -33,10 +33,10 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
+                .add(EntityAttributes.MAX_HEALTH, 6.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.3)
+                .add(EntityAttributes.ATTACK_DAMAGE, 4.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 16.0)
         }
     }
     override fun getMaxSize() : Int {

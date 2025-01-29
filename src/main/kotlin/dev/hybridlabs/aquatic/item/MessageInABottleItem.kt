@@ -3,23 +3,28 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock.Variant
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes
 import net.minecraft.item.ItemStack
+import net.minecraft.text.Text
 
 /**
  * Represents the Message in a Bottle block item.
  * @see MessageInABottleBlock
  */
 class MessageInABottleItem(settings: Settings) : PlaceableInWaterItem(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE, settings) {
-    override fun getTranslationKey(stack: ItemStack): String {
-        // custom variant translation keys
-        val id = stack.getSubNbt(BLOCK_ENTITY_TAG_KEY)?.getString(MessageInABottleBlockEntity.VARIANT_KEY) ?: ""
-        val variant = Variant.byId(id)
-        val key = translationKey
-        return when (variant) {
-            Variant.JAR -> "$key.jar"
-            Variant.LONGNECK -> "$key.longneck"
-            else -> key
+
+    override fun getName(stack: ItemStack): Text {
+        stack[HybridAquaticComponentTypes.BOTTLE_VARIANT]?.also { variant ->
+            val key = translationKey
+            val fullKey = when (variant) {
+                Variant.JAR -> "$key.jar"
+                Variant.LONGNECK -> "$key.longneck"
+                else -> key
+            }
+
+            return Text.translatable(fullKey)
         }
+
+        return super.getName(stack)
     }
 }

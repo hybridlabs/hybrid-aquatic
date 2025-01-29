@@ -1,6 +1,13 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import com.mojang.serialization.MapCodec
+import net.minecraft.block.AbstractPlantStemBlock
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.FluidFillable
+import net.minecraft.block.ShapeContext
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -16,7 +23,7 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-class HydrothermalVentBlock(settings: Settings?) :
+class HydrothermalVentBlock(settings: Settings) :
     AbstractPlantStemBlock(settings, Direction.UP, SHAPE, true, 0.0),
     FluidFillable {
     override fun chooseStemState(state: BlockState): Boolean {
@@ -26,7 +33,8 @@ class HydrothermalVentBlock(settings: Settings?) :
     override fun getPlant(): Block {
         return HybridAquaticBlocks.HYDROTHERMAL_VENT_SHAFT
     }
-    override fun isFertilizable(world: WorldView?, pos: BlockPos?, state: BlockState?, isClient: Boolean): Boolean {
+
+    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState): Boolean {
         return false
     }
 
@@ -40,7 +48,13 @@ class HydrothermalVentBlock(settings: Settings?) :
         return COLLISION_SHAPE
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(
+        player: PlayerEntity?,
+        world: BlockView,
+        pos: BlockPos,
+        state: BlockState,
+        fluid: Fluid
+    ): Boolean {
         return false
     }
 
@@ -88,7 +102,12 @@ class HydrothermalVentBlock(settings: Settings?) :
         return Fluids.WATER.getStill(false)
     }
 
+    override fun getCodec(): MapCodec<out AbstractPlantStemBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<HydrothermalVentBlock> = createCodec(::HydrothermalVentBlock)
         private val SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 6.0, 12.0)
         private val COLLISION_SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)
     }

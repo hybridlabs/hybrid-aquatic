@@ -11,6 +11,7 @@ import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.registry.tag.DamageTypeTags
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.world.World
 
 class StonefishEntity(entityType: EntityType<out StonefishEntity>, world: World) :
@@ -23,24 +24,22 @@ class StonefishEntity(entityType: EntityType<out StonefishEntity>, world: World)
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.MAX_HEALTH, 4.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.6)
+                .add(EntityAttributes.ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.STEP_HEIGHT, 1.0)
         }
     }
 
-    override fun damage(source: DamageSource, amount: Float): Boolean {
-        return if (world.isClient) {
-            false
-        } else {
-            if (!source.isIn(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) && !source.isOf(DamageTypes.THORNS)) {
-                val attacker = source.source
-                if (attacker is LivingEntity) {
-                    attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 400, 2), this)
-                }
+    override fun damage(world: ServerWorld, source: DamageSource, amount: Float): Boolean {
+        if (!source.isIn(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) && !source.isOf(DamageTypes.THORNS)) {
+            val attacker = source.source
+            if (attacker is LivingEntity) {
+                attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 400, 2), this)
             }
-            super.damage(source, amount)
         }
+
+        return super.damage(world, source, amount)
     }
 }

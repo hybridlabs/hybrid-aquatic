@@ -9,21 +9,21 @@ abstract class HybridAquaticCephalopodEntityModel<T: HybridAquaticCephalopodEnti
     override fun getModelResource(animatable: T?): Identifier {
         val variant = animatable?.variant
         if (variant != null && !variant.ignore.contains(HybridAquaticCephalopodEntity.CephalopodVariant.Ignore.MODEL))
-            return Identifier(HybridAquatic.MOD_ID, "geo/cephalopod/${id}/${id}_${variant.variantName}.geo.json")
-        return Identifier(HybridAquatic.MOD_ID, "geo/cephalopod/${id}/$id.geo.json")
+            return Identifier.of(HybridAquatic.MOD_ID, "geo/cephalopod/${id}/${id}_${variant.variantName}.geo.json")
+        return Identifier.of(HybridAquatic.MOD_ID, "geo/cephalopod/${id}/$id.geo.json")
     }
 
     override fun getTextureResource(animatable: T?): Identifier {
         val variant = animatable?.variant
         if (variant != null && !variant.ignore.contains(HybridAquaticCephalopodEntity.CephalopodVariant.Ignore.TEXTURE))
-            return Identifier(HybridAquatic.MOD_ID, "textures/entity/cephalopod/$id/${id}_${variant.variantName}.png")
-        return Identifier(HybridAquatic.MOD_ID, "textures/entity/cephalopod/$id/$id.png")
+            return Identifier.of(HybridAquatic.MOD_ID, "textures/entity/cephalopod/$id/${id}_${variant.variantName}.png")
+        return Identifier.of(HybridAquatic.MOD_ID, "textures/entity/cephalopod/$id/$id.png")
     }
 
     override fun getAnimationResource(animatable: T?): Identifier {
         val variant = animatable?.variant
         if (variant != null && !variant.ignore.contains(HybridAquaticCephalopodEntity.CephalopodVariant.Ignore.ANIMATION))
-            return Identifier(HybridAquatic.MOD_ID, "animations/${id}_${variant.variantName}.animation.json")
-        return Identifier(HybridAquatic.MOD_ID, "animations/$id.animation.json")
+            return Identifier.of(HybridAquatic.MOD_ID, "animations/${id}_${variant.variantName}.animation.json")
+        return Identifier.of(HybridAquatic.MOD_ID, "animations/$id.animation.json")
     }
 }

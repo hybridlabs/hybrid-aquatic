@@ -11,8 +11,8 @@ class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, wo
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
+                .add(EntityAttributes.MAX_HEALTH, 2.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.3)
         }
     }
 

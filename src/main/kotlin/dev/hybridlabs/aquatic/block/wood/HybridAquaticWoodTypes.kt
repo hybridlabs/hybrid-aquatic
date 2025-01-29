@@ -6,5 +6,5 @@ import net.minecraft.block.WoodType
 import net.minecraft.util.Identifier
 
 object HybridAquaticWoodTypes {
-    val DRIFTWOOD: WoodType = WoodTypeBuilder.copyOf(WoodType.OAK).build(Identifier(HybridAquatic.MOD_ID, "driftwood"), HybridAquaticBlockSetTypes.DRIFTWOOD)
+    val DRIFTWOOD: WoodType = WoodTypeBuilder.copyOf(WoodType.OAK).build(Identifier.of(HybridAquatic.MOD_ID, "driftwood"), HybridAquaticBlockSetTypes.DRIFTWOOD)
 }

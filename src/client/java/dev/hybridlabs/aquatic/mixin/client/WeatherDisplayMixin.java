@@ -2,7 +2,13 @@ package dev.hybridlabs.aquatic.mixin.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.LightmapTextureManager;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.resource.SynchronousResourceReloader;
 import net.minecraft.util.Identifier;
@@ -26,7 +32,7 @@ import static net.minecraft.client.render.WorldRenderer.getLightmapCoordinates;
 public abstract class WeatherDisplayMixin implements SynchronousResourceReloader, AutoCloseable {
 
     @Unique
-    private static final Identifier MARINE_SNOW = new Identifier("hybrid-aquatic","textures/environment/marine_snow.png");
+    private static final Identifier MARINE_SNOW = new Identifier.of("hybrid-aquatic","textures/environment/marine_snow.png");
 
 //    @Inject(method = "renderWeather", at=@At(value = "INVOKE", target = "Lnet/minecraft/client/render/BufferBuilder;begin(Lnet/minecraft/client/render/VertexFormat$DrawMode;Lnet/minecraft/client/render/VertexFormat;)V"))
 //    void hybrid$renderWeather(LightmapTextureManager manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {

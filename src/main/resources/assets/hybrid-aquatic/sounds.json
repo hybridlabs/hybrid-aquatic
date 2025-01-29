@@ -1,0 +1,11 @@
+{
+    "item.armor.equip_moon_jellyfish": {
+        "sounds": [
+            "mob/slime/big1",
+            "mob/slime/big2",
+            "mob/slime/big3",
+            "mob/slime/big4"
+        ],
+        "subtitle": "subtitles.item.hybrid-aquatic.armor.equip_moon_jellyfish"
+    }
+}

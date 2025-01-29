@@ -7,9 +7,8 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animation.AnimationState
 
 class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
     HybridAquaticCrustaceanEntity(entityType, world, variants = hashMapOf(
@@ -24,9 +23,9 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     )) {
 
     public override fun getLootTableId(): Identifier {
-        return when (this.variant?.variantName) {
-            "skull" -> Identifier("hybrid-aquatic", "gameplay/hermit_crab_skull")
-            "shell" -> Identifier("hybrid-aquatic", "gameplay/hermit_crab_shell")
+        return when (this.variant.variantName) {
+            "skull" -> Identifier.of("hybrid-aquatic", "gameplay/hermit_crab_skull")
+            "shell" -> Identifier.of("hybrid-aquatic", "gameplay/hermit_crab_shell")
             else -> super.getLootTableId()
         }
     }
@@ -38,11 +37,11 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
-                .add(EntityAttributes.GENERIC_ARMOR, 5.0)
-                .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 5.0)
+                .add(EntityAttributes.MAX_HEALTH, 6.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.3)
+                .add(EntityAttributes.ATTACK_DAMAGE, 4.0)
+                .add(EntityAttributes.ARMOR, 5.0)
+                .add(EntityAttributes.ARMOR_TOUGHNESS, 5.0)
         }
     }
 
@@ -67,15 +66,15 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
 
             if (hidingTimer <= 0 && (world.time - lastDamageTime) >= 200) {
                 isHiding = false
-                attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 0.3
-                attributes.getCustomInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE)?.baseValue = 0.0
-                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)?.baseValue = 5.0
-                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR)?.baseValue = 5.0
+                attributes.getCustomInstance(EntityAttributes.MOVEMENT_SPEED)?.baseValue = 0.3
+                attributes.getCustomInstance(EntityAttributes.KNOCKBACK_RESISTANCE)?.baseValue = 0.0
+                attributes.getCustomInstance(EntityAttributes.ARMOR_TOUGHNESS)?.baseValue = 5.0
+                attributes.getCustomInstance(EntityAttributes.ARMOR)?.baseValue = 5.0
             } else {
-                attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 0.0
-                attributes.getCustomInstance(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE)?.baseValue = 100.0
-                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)?.baseValue = 50.0
-                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR)?.baseValue = 50.0
+                attributes.getCustomInstance(EntityAttributes.MOVEMENT_SPEED)?.baseValue = 0.0
+                attributes.getCustomInstance(EntityAttributes.KNOCKBACK_RESISTANCE)?.baseValue = 100.0
+                attributes.getCustomInstance(EntityAttributes.ARMOR_TOUGHNESS)?.baseValue = 50.0
+                attributes.getCustomInstance(EntityAttributes.ARMOR)?.baseValue = 50.0
             }
         }
     }
@@ -88,13 +87,13 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         return super.predicate(event)
     }
 
-    override fun damage(source: net.minecraft.entity.damage.DamageSource?, amount: Float): Boolean {
+    override fun damage(world: ServerWorld, source: net.minecraft.entity.damage.DamageSource?, amount: Float): Boolean {
         if (!isHiding) {
             startHiding()
         }
 
         lastDamageTime = world.time
 
-        return super.damage(source, amount)
+        return super.damage(world, source, amount)
     }
 }

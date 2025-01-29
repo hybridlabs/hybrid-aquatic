@@ -20,16 +20,16 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar
+import software.bernie.geckolib.animation.Animation
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -44,9 +44,9 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, worl
             dataTracker.set(ATTEMPT_ATTACK, attemptAttack)
         }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(ATTEMPT_ATTACK, false)
     }
 
     override fun initGoals() {
@@ -86,10 +86,6 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, worl
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
         return false
-    }
-
-    override fun canBreatheInWater(): Boolean {
-        return true
     }
 
     override fun registerControllers(controllerRegistrar: ControllerRegistrar) {
@@ -163,4 +159,3 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, worl
         }
     }
 }
-

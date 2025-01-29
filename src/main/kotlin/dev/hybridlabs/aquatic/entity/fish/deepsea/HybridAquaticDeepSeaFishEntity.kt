@@ -44,7 +44,7 @@ open class HybridAquaticDeepSeaFishEntity(
             }
 
             if (this.state == State.MOVE_TO && !deepSeaFish.navigation.isIdle) {
-                val f = (this.speed * deepSeaFish.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED)).toFloat()
+                val f = (this.speed * deepSeaFish.getAttributeValue(EntityAttributes.MOVEMENT_SPEED)).toFloat()
                 deepSeaFish.movementSpeed = MathHelper.lerp(0.125f, deepSeaFish.movementSpeed, f)
                 val d = this.targetX - deepSeaFish.x
                 val e = this.targetY - deepSeaFish.y

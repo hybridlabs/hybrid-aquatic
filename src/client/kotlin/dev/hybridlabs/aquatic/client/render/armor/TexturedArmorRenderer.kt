@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier
  * Renders an armor layer over an entity with the given texture.
  *
  * To implement, call in a client initializer:
- * `ArmorRenderer.register(TexturedArmorRenderer(Identifier("path/to/texture")), MY_HELMET, MY_CHESTPLATE, ...)`
+ * `ArmorRenderer.register(TexturedArmorRenderer(Identifier.of("path/to/texture")), MY_HELMET, MY_CHESTPLATE, ...)`
  */
 class TexturedArmorRenderer(
     /**

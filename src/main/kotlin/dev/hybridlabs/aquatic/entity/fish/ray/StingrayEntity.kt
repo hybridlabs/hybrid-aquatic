@@ -17,8 +17,8 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: World) :
 
     public override fun getLootTableId(): Identifier {
         return when (this.variant?.variantName) {
-            "blue_spotted" -> Identifier("hybrid-aquatic", "gameplay/blue_spotted_stingray")
-            "spotted_eagle" -> Identifier("hybrid-aquatic", "gameplay/spotted_eagle_ray")
+            "blue_spotted" -> Identifier.of("hybrid-aquatic", "gameplay/blue_spotted_stingray")
+            "spotted_eagle" -> Identifier.of("hybrid-aquatic", "gameplay/spotted_eagle_ray")
             else -> super.getLootTableId()
         }
     }
@@ -26,10 +26,11 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: World) :
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.MAX_HEALTH, 6.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.6)
+                .add(EntityAttributes.ATTACK_DAMAGE, 2.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.STEP_HEIGHT, 1.0)
         }
     }
 }

@@ -7,10 +7,19 @@ import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.MovementType
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.FleeEntityGoal
+import net.minecraft.entity.ai.goal.Goal
+import net.minecraft.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.entity.ai.goal.SwimAroundGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
@@ -39,12 +48,15 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.Animation
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
@@ -79,17 +91,17 @@ open class HybridAquaticCephalopodEntity(
         goalSelector.add(1, EscapeAttackerGoal(this))
         goalSelector.add(1, FleeEntityGoal(this, LivingEntity::class.java, 8.0f, 1.2, 1.0) { !fromFishingNet && it.type.isIn(predator) })
         goalSelector.add(1, FleeEntityGoal(this, PlayerEntity::class.java, 5.0f, 1.0, 1.0) { !fromFishingNet })
-        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { hunger <= 1200 && it.type.isIn(prey) })
+        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity, _ -> hunger <= 1200 && entity.type.isIn(prey) })
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(CEPHALOPOD_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(HUNGER, MAX_HUNGER)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(MOISTNESS, getMaxMoistness())
+        builder.add(CEPHALOPOD_SIZE, 0)
+        builder.add(ATTEMPT_ATTACK, false)
+        builder.add(HUNGER, MAX_HUNGER)
+        builder.add(VARIANT, "")
+        builder.add(VARIANT_DATA, NbtCompound())
     }
 
     override fun initialize(
@@ -97,7 +109,6 @@ open class HybridAquaticCephalopodEntity(
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
         entityData: EntityData?,
-        entityNbt: NbtCompound?
     ): EntityData? {
         this.air = getMaxMoistness()
 
@@ -107,7 +118,8 @@ open class HybridAquaticCephalopodEntity(
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
         this.pitch = 0.0f
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun tick() {
@@ -122,7 +134,11 @@ open class HybridAquaticCephalopodEntity(
             moistness -= 1
             if (moistness <= -20) {
                 moistness = 0
-                damage(this.damageSources.dryOut(), 1.0f)
+
+                val world = world
+                if (world is ServerWorld) {
+                    damage(world, this.damageSources.dryOut(), 1.0f)
+                }
             }
 
             if (world.isClient && isTouchingWater && isAttacking) {
@@ -206,10 +222,6 @@ open class HybridAquaticCephalopodEntity(
         return PlayState.STOP
     }
 
-    override fun getActiveEyeHeight(pose: EntityPose?, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
-    }
-
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
         return !fromFishingNet && !hasCustomName()
     }
@@ -223,10 +235,10 @@ open class HybridAquaticCephalopodEntity(
         navigation = SwimNavigation(this, world)
     }
 
-    override fun dropLoot(source: DamageSource, causedByPlayer: Boolean) {
+    override fun dropLoot(world: ServerWorld, source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.attacker
         if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticRayEntity && attacker !is HybridAquaticCephalopodEntity) {
-            super.dropLoot(source, causedByPlayer)
+            super.dropLoot(world, source, causedByPlayer)
         }
     }
 
@@ -329,8 +341,8 @@ open class HybridAquaticCephalopodEntity(
         }
     }
 
-    override fun damage(source: DamageSource?, amount: Float): Boolean {
-        if (super.damage(source, amount) && this.attacker != null) {
+    override fun damage(world: ServerWorld, source: DamageSource, amount: Float): Boolean {
+        if (super.damage(world, source, amount) && this.attacker != null) {
             if (!world.isClient) {
                 this.squirt()
             }
@@ -611,8 +623,8 @@ open class HybridAquaticCephalopodEntity(
         }
     }
 
-    override fun tryAttack(target: Entity?): Boolean {
-        if (super.tryAttack(target)) {
+    override fun tryAttack(world: ServerWorld, target: Entity): Boolean {
+        if (super.tryAttack(world, target)) {
 
             playSound(SoundEvents.ENTITY_FOX_EAT,1.0F,0.0F)
 
@@ -640,7 +652,6 @@ open class HybridAquaticCephalopodEntity(
         val SWIM_ANIMATION: RawAnimation = RawAnimation.begin().then("swim", Animation.LoopType.LOOP)
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().then("flop", Animation.LoopType.LOOP)
 
-        @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: WorldAccess,
@@ -656,7 +667,6 @@ open class HybridAquaticCephalopodEntity(
                     world.getBlockState(pos.up()).isOf(Blocks.WATER)
         }
 
-        @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canUndergroundSpawn(
             type: EntityType<out WaterCreatureEntity?>?,
             world: WorldAccess,

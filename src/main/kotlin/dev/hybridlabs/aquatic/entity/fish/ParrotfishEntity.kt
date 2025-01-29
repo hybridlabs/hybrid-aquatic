@@ -16,7 +16,7 @@ class ParrotfishEntity(entityType: EntityType<out ParrotfishEntity>, world: Worl
 
     public override fun getLootTableId(): Identifier {
         return when (this.variant?.variantName) {
-            "humphead" -> Identifier("hybrid-aquatic", "gameplay/parrotfish")
+            "humphead" -> Identifier.of("hybrid-aquatic", "gameplay/parrotfish")
             else -> super.getLootTableId()
         }
     }
@@ -28,10 +28,11 @@ class ParrotfishEntity(entityType: EntityType<out ParrotfishEntity>, world: Worl
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.MAX_HEALTH, 4.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.6)
+                .add(EntityAttributes.ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.STEP_HEIGHT, 1.0)
         }
     }
 }

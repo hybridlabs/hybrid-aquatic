@@ -23,6 +23,6 @@ object HybridAquaticBlockTags {
     val CRABS_SPAWN_ON = create("crabs_spawn_on")
 
     private fun create(id: String): TagKey<Block> {
-        return TagKey.of(RegistryKeys.BLOCK, Identifier(HybridAquatic.MOD_ID, id))
+        return TagKey.of(RegistryKeys.BLOCK, Identifier.of(HybridAquatic.MOD_ID, id))
     }
 }

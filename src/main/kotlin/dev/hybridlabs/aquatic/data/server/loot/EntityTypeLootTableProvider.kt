@@ -12,20 +12,24 @@ import net.minecraft.loot.condition.EntityPropertiesLootCondition
 import net.minecraft.loot.context.LootContext
 import net.minecraft.loot.context.LootContextTypes
 import net.minecraft.loot.entry.ItemEntry
+import net.minecraft.loot.function.EnchantedCountIncreaseLootFunction
 import net.minecraft.loot.function.FurnaceSmeltLootFunction
-import net.minecraft.loot.function.LootingEnchantLootFunction
 import net.minecraft.loot.function.SetCountLootFunction
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.predicate.entity.EntityFlagsPredicate
 import net.minecraft.predicate.entity.EntityPredicate
-import net.minecraft.util.Identifier
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryWrapper
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
 /**
  * Generates entity loot tables.
  */
-class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTableProvider(output, LootContextTypes.ENTITY) {
-    override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
+class EntityTypeLootTableProvider(output: FabricDataOutput, lookup: CompletableFuture<RegistryWrapper.WrapperLookup>) : SimpleFabricLootTableProvider(output, lookup, LootContextTypes.ENTITY) {
+    private val registries: RegistryWrapper.WrapperLookup = lookup.join()
+
+    override fun accept(exporter: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) {
         // nautilus
         export(exporter, HybridAquaticEntityTypes.NAUTILUS) {
             pool(
@@ -39,7 +43,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_TENTACLE)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                     )
             )
         }
@@ -62,7 +66,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.DUNGENESS_CRAB_CLAW)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -74,7 +78,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.FIDDLER_CRAB_CLAW)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -86,7 +90,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.SPIDER_CRAB_CLAW)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -98,7 +102,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.GHOST_CRAB_CLAW)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -110,7 +114,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.VAMPIRE_CRAB_CLAW)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -122,7 +126,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.FLOWER_CRAB_CLAW)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -134,7 +138,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.COCONUT_CRAB_CLAW)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -146,7 +150,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.YETI_CRAB_CLAW)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -158,7 +162,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -170,7 +174,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.LOBSTER_CLAW)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -179,7 +183,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_LOBSTER_TAIL)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                     )
             )
         }
@@ -190,7 +194,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_CRAYFISH)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -202,7 +206,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_SHRIMP)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -215,7 +219,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_TENTACLE)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 3.0F)))
                     )
             )
@@ -232,7 +236,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_TENTACLE)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 3.0F)))
                     )
             )
@@ -250,7 +254,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_TENTACLE)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 3.0F)))
                     )
             )
@@ -261,7 +265,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
                     )
             )
@@ -272,7 +276,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
                     )
             )
@@ -283,7 +287,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.SEA_URCHIN_SPINE)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 2.0F)))
                     )
             )
@@ -297,7 +301,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_TENTACLE)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 3.0F)))
                     )
             )
@@ -310,7 +314,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
                             .apply(FurnaceSmeltLootFunction.builder().conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, NEEDS_ENTITY_ON_FIRE)))
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
                     )
             )
@@ -321,7 +325,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -332,7 +336,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0F, 3.0F)))
                     )
             )
@@ -343,7 +347,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0F, 3.0F)))
                     )
             )
@@ -354,7 +358,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -365,7 +369,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -376,7 +380,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -387,7 +391,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
                     )
             )
@@ -398,7 +402,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -409,7 +413,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -420,7 +424,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -428,7 +432,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.GLOW_SLIME)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -446,7 +450,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.ANGLERFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -463,7 +467,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.DRAGONFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -474,7 +478,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.ROCKFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -485,7 +489,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.CLOWNFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -496,7 +500,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.BLUE_TANG)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -507,7 +511,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.COWFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -518,7 +522,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.LIONFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -529,7 +533,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.GLOW_SLIME)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -537,7 +541,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.BARRELEYE)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -548,7 +552,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.BLUE_SPOTTED_STINGRAY)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -559,7 +563,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.GOURAMI)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -570,7 +574,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.BETTA)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -581,7 +585,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.DANIO)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -592,7 +596,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.DISCUS)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -603,7 +607,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.TOADFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -614,7 +618,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.STONEFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -625,7 +629,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.KOI)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -636,7 +640,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.GOLDFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -647,7 +651,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.PARROTFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -658,7 +662,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.FLASHLIGHT_FISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -669,7 +673,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RATFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -680,7 +684,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.PIRANHA)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -692,7 +696,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.TUNA)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -703,7 +707,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.MAHI)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -714,7 +718,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.OPAH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -725,7 +729,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.NEEDLEFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -736,7 +740,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.TRIGGERFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -747,7 +751,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.SEAHORSE)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -759,7 +763,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.SUNFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -770,7 +774,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.OARFISH)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -781,7 +785,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.OSCAR)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -792,7 +796,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.TIGER_BARB)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -803,7 +807,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.MORAY_EEL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 1.0F)))
                     )
             )
@@ -874,11 +878,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
     /**
      * Exports a loot table for [entityType] to [exporter] using its loot table id.
      */
-    private fun export(exporter: BiConsumer<Identifier, LootTable.Builder>, entityType: EntityType<*>, builder: LootTable.Builder.() -> Unit) {
-        exporter.accept(entityType.lootTableId, LootTable.builder().apply(builder))
+    private fun export(exporter: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>, entityType: EntityType<*>, builder: LootTable.Builder.() -> Unit) {
+        entityType.lootTableKey.ifPresent { key ->
+            exporter.accept(key, LootTable.builder().apply(builder))
+        }
     }
 
     companion object {
-        private val NEEDS_ENTITY_ON_FIRE: EntityPredicate.Builder = EntityPredicate.Builder.create().flags(EntityFlagsPredicate.Builder.create().onFire(true).build())
+        private val NEEDS_ENTITY_ON_FIRE: EntityPredicate.Builder = EntityPredicate.Builder.create().flags(EntityFlagsPredicate.Builder.create().onFire(true))
     }
 }

@@ -7,7 +7,12 @@ import dev.hybridlabs.aquatic.entity.fish.ray.HybridAquaticRayEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.MovementType
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
 import net.minecraft.entity.ai.goal.ActiveTargetGoal
@@ -21,13 +26,16 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.loot.LootTable
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.registry.tag.TagKey
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.random.Random
@@ -36,13 +44,17 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.Animation
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
+import java.util.Optional
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
 open class HybridAquaticFishEntity(
@@ -62,32 +74,31 @@ open class HybridAquaticFishEntity(
         goalSelector.add(0, EscapeDangerGoal(this, 1.25))
         goalSelector.add(4, SwimAroundGoal(this, 1.0, 10))
         goalSelector.add(1, AttackGoal(this))
-        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { hunger <= 1200 && it.type.isIn(prey) })
+        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity, _ -> hunger <= 1200 && entity.type.isIn(prey) })
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(FISH_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(HUNGER, MAX_HUNGER)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(MOISTNESS, getMaxMoistness())
+        builder.add(FISH_SIZE, 0)
+        builder.add(ATTEMPT_ATTACK, false)
+        builder.add(HUNGER, MAX_HUNGER)
+        builder.add(VARIANT, "")
+        builder.add(VARIANT_DATA, NbtCompound())
     }
 
     override fun initialize(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = getMaxMoistness()
         pitch = 0.0f
         this.size = this.random.nextBetween(getMinSize(),getMaxSize())
 
         if (variants.isNotEmpty()) {
-            if (spawnReason == SpawnReason.SPAWN_EGG) {
+            if (spawnReason == SpawnReason.SPAWN_ITEM_USE) {
                 variantKey = variants.keys.elementAt(random.nextBetween(0, variants.size - 1))
             } else {
                 // Handle collisions
@@ -123,7 +134,7 @@ open class HybridAquaticFishEntity(
         }
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun tick() {
@@ -138,7 +149,7 @@ open class HybridAquaticFishEntity(
             moistness -= 1
             if (moistness <= -20) {
                 moistness = 0
-                damage(this.damageSources.dryOut(), 1.0f)
+                damage(world, this.damageSources.dryOut(), 1.0f)
             }
         }
         if (world.isClient && isTouchingWater && isAttacking) {
@@ -163,19 +174,19 @@ open class HybridAquaticFishEntity(
         }
     }
 
-    override fun dropLoot(source: DamageSource, causedByPlayer: Boolean) {
+    override fun dropLoot(world: ServerWorld, source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.attacker
         if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticRayEntity && attacker !is HybridAquaticCephalopodEntity) {
-            super.dropLoot(source, causedByPlayer)
+            super.dropLoot(world, source, causedByPlayer)
         }
     }
 
-    override fun getLootTableId(): Identifier {
-        return if (variant != null) {
-            super.getLootTableId().withPath { path -> "${path}_${variant!!.variantName}" }
-        } else {
-            super.getLootTableId()
-        }
+    override fun getLootTableKey(): Optional<RegistryKey<LootTable>> {
+        return if (lootTable.isPresent) super.getLootTableKey() else Optional.ofNullable(getLootTableKeyOverride())
+    }
+
+    open fun getLootTableKeyOverride(): RegistryKey<LootTable>? {
+        return variant.createLootTableKey(type)
     }
 
     private fun getHungerValue(entityType: EntityType<*>): Int {
@@ -246,10 +257,6 @@ open class HybridAquaticFishEntity(
             return PlayState.CONTINUE
         }
         return PlayState.CONTINUE
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.65f
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
@@ -329,10 +336,7 @@ open class HybridAquaticFishEntity(
             dataTracker.set(VARIANT, value)
         }
 
-    @Suppress("UNUSED_PARAMETER")
-    var variant: FishVariant?
-        get() = variants[variantKey]
-        private set(value) {}
+    val variant: FishVariant get() = variants[variantKey] ?: throw IllegalArgumentException("Invalid variant key: $variantKey")
 
     // endregion
 
@@ -520,15 +524,21 @@ open class HybridAquaticFishEntity(
     data class FishVariant(
         val variantName : String,
         val spawnCondition: (WorldAccess, SpawnReason, BlockPos, Random ) -> Boolean,
-        val ignore: List<Ignore> = emptyList(),
+        val ignore: List<Ignore>,
         val priority: Int = 0,
         var providedVariant: (World, BlockPos, Random, HybridAquaticFishEntity) -> String = {_,_,_,_ ->
             variantName
-        }
+        },
     ) {
-
         fun getProvidedVariant(fish: HybridAquaticFishEntity) : String {
             return providedVariant(fish.world, fish.blockPos, fish.random, fish)
+        }
+
+        fun createLootTableKey(type: EntityType<*>): RegistryKey<LootTable>? {
+            return type.lootTableKey.map { lootTable ->
+                val lootTableId = lootTable.value
+                RegistryKey.of(RegistryKeys.LOOT_TABLE, lootTableId.withSuffixedPath("_$variantName"))
+            }.orElse(null)
         }
 
         companion object {

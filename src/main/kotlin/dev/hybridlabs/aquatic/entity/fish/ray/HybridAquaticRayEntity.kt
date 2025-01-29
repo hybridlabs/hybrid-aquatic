@@ -23,6 +23,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.registry.tag.TagKey
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
@@ -32,12 +33,11 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis")
@@ -67,29 +67,28 @@ open class HybridAquaticRayEntity(
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(RAY_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(HUNGER, MAX_HUNGER)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(MOISTNESS, getMaxMoistness())
+        builder.add(RAY_SIZE, 0)
+        builder.add(ATTEMPT_ATTACK, false)
+        builder.add(HUNGER, MAX_HUNGER)
+        builder.add(VARIANT, "")
+        builder.add(VARIANT_DATA, NbtCompound())
     }
 
     override fun initialize(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = getMaxMoistness()
         pitch = 0.0f
         this.size = this.random.nextBetween(getMinSize(),getMaxSize())
 
         if (variants.isNotEmpty()) {
-            if (spawnReason == SpawnReason.SPAWN_EGG) {
+            if (spawnReason == SpawnReason.SPAWN_ITEM_USE) {
                 variantKey = variants.keys.elementAt(random.nextBetween(0, variants.size - 1))
             } else {
                 val validKeys = variants.filter { it.value.spawnCondition(world, spawnReason, blockPos, random) }.map { it.key }
@@ -123,7 +122,7 @@ open class HybridAquaticRayEntity(
         }
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
     override fun tick() {
         super.tick()
@@ -137,7 +136,11 @@ open class HybridAquaticRayEntity(
             moistness -= 1
             if (moistness <= -20) {
                 moistness = 0
-                damage(this.damageSources.dryOut(), 1.0f)
+
+                val world = world
+                if (world is ServerWorld) {
+                    damage(world, this.damageSources.dryOut(), 1.0f)
+                }
             }
         }
         if (world.isClient && isTouchingWater && isAttacking) {
@@ -162,10 +165,10 @@ open class HybridAquaticRayEntity(
         }
     }
 
-    override fun dropLoot(source: DamageSource, causedByPlayer: Boolean) {
+    override fun dropLoot(world: ServerWorld, source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.attacker
         if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticRayEntity && attacker !is HybridAquaticCephalopodEntity) {
-            super.dropLoot(source, causedByPlayer)
+            super.dropLoot(world, source, causedByPlayer)
         }
     }
 
@@ -222,10 +225,6 @@ open class HybridAquaticRayEntity(
             return PlayState.CONTINUE
         }
         return PlayState.CONTINUE
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.65f
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
