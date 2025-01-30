@@ -111,7 +111,6 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticBlocks.TIGER_SHARK_PLUSHIE)
             entries.add(HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
 
-            // spawn eggs
             Registries.ITEM.forEach { item ->
                 val id = Registries.ITEM.getId(item)
                 if (id.namespace != HybridAquatic.MOD_ID) {
