@@ -357,7 +357,7 @@ object HybridAquaticEntityTypes {
     val CUTTLEFISH = registerCephalopod(
         "cuttlefish",
         ::CuttlefishEntity,
-        EntityDimensions.fixed(0.5f, 0.35f),
+        EntityDimensions.fixed(0.5f, 0.3f),
         CuttlefishEntity.createMobAttributes()
     )
 
@@ -862,7 +862,7 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityFactory<T>,
         dimensions: EntityDimensions
     ) : EntityType<T> {
-        val entityType = FabricEntityTypeBuilder.create(SpawnGroup.MISC, entityFactory).dimensions(dimensions).build();
+        val entityType = FabricEntityTypeBuilder.create(SpawnGroup.MISC, entityFactory).dimensions(dimensions).build()
         return register(id, entityType)
     }
 
