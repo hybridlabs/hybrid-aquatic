@@ -1,81 +1,65 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.client.item.TooltipData
+import net.minecraft.component.DataComponentTypes
+import net.minecraft.component.type.NbtComponent
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemUsageContext
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
-import net.minecraft.world.World
-import java.util.Optional
 
 class FishingNetItem(settings: Settings): Item(settings) {
-
     override fun useOnEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, hand: Hand): ActionResult {
-        val validFishForNet = entity.type.isIn(HybridAquaticEntityTags.CAN_USE_FISHING_NET_ON)
-
-        /*if (!alreadyHasFish(stack) && validFishForNet) {
+        if (!alreadyHasFish(stack) && entity.type.isIn(HybridAquaticEntityTags.CAN_USE_FISHING_NET_ON)) {
             writeEntityToNet(entity, user, hand)
             entity.remove(Entity.RemovalReason.DISCARDED)
             return ActionResult.SUCCESS
-        }*/
+        }
+
         return super.useOnEntity(stack, user, entity, hand)
     }
 
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
-        val world: World = context.world
+        val world = context.world
 
-        /*if (!world.isClient) {
-            val nbtCopy = context.stack.nbt?.copy() ?: return super.useOnBlock(context)
+        if (!world.isClient) {
+            val stack = context.stack
+            stack.get(DataComponentTypes.ENTITY_DATA)?.also { entityComponent ->
+                val type = EntityType.fromNbt(entityComponent.copyNbt()).orElse(null)
+                if (type == null) {
+                    return@also
+                }
 
-            val optionalEntity = getEntityFromNbt(nbtCopy)
-
-            if (optionalEntity.isPresent) {
-                val entity = optionalEntity.get().create(context.world) ?: return ActionResult.FAIL
-                entity.readNbt(context.stack.nbt?.getCompound(ENTITY_KEY))
-                context.stack.nbt?.remove(ENTITY_KEY)
-
+                val entity = type.create(world) ?: return ActionResult.PASS
+                entityComponent.applyToEntity(entity)
+                stack.remove(DataComponentTypes.ENTITY_DATA)
                 entity.setPosition(context.hitPos)
                 world.spawnEntity(entity)
                 return ActionResult.SUCCESS
             }
-        } TODO entity component??*/
+        }
 
         return super.useOnBlock(context)
     }
 
-    override fun getTooltipData(stack: ItemStack): Optional<TooltipData> {
-        return super.getTooltipData(stack)
-    }
-
     companion object {
-        private const val ENTITY_KEY: String = "storedEntity"
-
-        /*fun writeEntityToNet(entity: Entity, user: PlayerEntity, hand: Hand) {
+        fun writeEntityToNet(entity: Entity, user: PlayerEntity, hand: Hand) {
             val entityCompound = NbtCompound()
             entity.saveNbt(entityCompound)
             entityCompound.putBoolean("PersistenceRequired", true)
             entityCompound.putBoolean("FromFishingNet", true)
-            val itemStack = user.getStackInHand(hand)
-            itemStack.orCreateNbt.put(ENTITY_KEY, entityCompound)
-        }
-
-        fun getEntityFromNbt(nbt: NbtCompound, lookup: RegistryWrapper.WrapperLookup): Optional<EntityType<*>> {
-            val storedNBT = nbt.getCompound(ENTITY_KEY)
-            if (storedNBT != null) {
-                return EntityType.fromNbt(storedNBT)
-            }
-            return Optional.empty()
+            val stack = user.getStackInHand(hand)
+            stack.set(DataComponentTypes.ENTITY_DATA, NbtComponent.of(entityCompound))
         }
 
         fun alreadyHasFish(stack: ItemStack): Boolean {
-            val nbtCopy = stack.nbt?.copy() ?: return false
-            val entityNBT = nbtCopy.getCompound(ENTITY_KEY) ?: return false
-
-            return !entityNBT.isEmpty
-        }*/
+            return stack.contains(DataComponentTypes.ENTITY_DATA)
+        }
     }
 }
