@@ -10,9 +10,9 @@ import net.minecraft.predicate.entity.FishingHookPredicate
 
 object LootTableModifications {
     fun registerLootModifications() {
-        LootTableEvents.MODIFY.register { _, _, id, tableBuilder, source ->
+        LootTableEvents.MODIFY.register { key, tableBuilder, source ->
             if (source.isBuiltin) {
-                when (id) {
+                when (key) {
                     // modify fishing loot table
                     LootTables.FISHING_FISH_GAMEPLAY -> {
                         tableBuilder.modifyPools { defaultPools ->

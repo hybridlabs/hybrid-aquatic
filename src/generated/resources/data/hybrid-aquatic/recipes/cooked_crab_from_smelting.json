@@ -6,5 +6,7 @@
   "ingredient": {
     "item": "hybrid-aquatic:raw_crab"
   },
-  "result": "hybrid-aquatic:cooked_crab"
+  "result": {
+    "id": "hybrid-aquatic:cooked_crab"
+  }
 }

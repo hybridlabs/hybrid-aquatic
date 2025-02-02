@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:buoy"
-            ]
+            "items": "hybrid-aquatic:buoy"
           }
         ]
       },
@@ -15,17 +13,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.buoy.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "hybrid-aquatic:buoy"
+      "count": 1,
+      "id": "hybrid-aquatic:buoy"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.hybrid-aquatic.buoy.title"
     }

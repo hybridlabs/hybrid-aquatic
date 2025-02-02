@@ -1,8 +1,10 @@
 package dev.hybridlabs.aquatic.data.client
 
+import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.seamessage.SeaMessage
+import dev.hybridlabs.aquatic.block.seamessage.SeaMessages
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
-import dev.hybridlabs.aquatic.data.server.seamessage.SeaMessageProvider
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
@@ -13,9 +15,12 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.registry.Registries
+import net.minecraft.registry.RegistryWrapper
+import net.minecraft.registry.entry.RegistryEntry
+import java.util.concurrent.CompletableFuture
 
-class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
-    override fun generateTranslations(builder: TranslationBuilder) {
+class LanguageProvider(output: FabricDataOutput, lookup: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricLanguageProvider(output, lookup) {
+    override fun generateTranslations(lookup: RegistryWrapper.WrapperLookup, builder: TranslationBuilder) {
         // item group
         builder.add(
             Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.BLOCKS)
@@ -40,10 +45,77 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         // sea messages
-        SeaMessageProvider.BUILT_IN.forEach { message ->
-            builder.add(message.translationKey, message.englishText)
-            message.englishTitle?.let { title -> builder.add(message.titleTranslationKey, title) }
-        }
+        builder.add(SeaMessages.THE_CREEPERS_CODE, "The creepers have a code...", "The Creeper's Code")
+        builder.add(SeaMessages.POYO, "I hate litterbugs.", "Poyo")
+        builder.add(SeaMessages.RICK_ROLL, "Never gonna give you up!\nNever gonna let you down!\nNever gonna run around and desert you!")
+        builder.add(SeaMessages.BOLD_MUDDY, "AW MAN I DROWNED!", "Bold Muddy")
+        builder.add(SeaMessages.CATPENJOE, "If you wanna get a catgirl, you first have to become a catboy.", "Kaupenjoe")
+        builder.add(SeaMessages.WILLOWSHINE, "Beware the fish girl", "Willowshine")
+        builder.add(SeaMessages.LOSS, "| ||\n|| |_")
+        builder.add(SeaMessages.THREATS, "Try to counter unanticipated threats by anticipating them", "Seamoth")
+        builder.add(SeaMessages.WARRANTY, "We've been trying to reach you about your car's extended warranty.", "IMPORTANT: PLEASE READ")
+        builder.add(SeaMessages.POKE, "I like cheese", "Cheese")
+        builder.add(SeaMessages.ONE_PIECE, "THE ONE PIECE IS REAL", "One Piece")
+        builder.add(SeaMessages.MYLO, "Mylo, you are the best friend I could have ever hoped to have. \nRest in peace, my sweet prince. I hope you have sweet dreams and find the peace you deserve.", "The Best Boy")
+        builder.add(SeaMessages.WOMP_WOMP, "womp womp", "Catchphrase")
+        builder.add(SeaMessages.CROCODILE, "It's always the crocodile you don't see you have to worry about.", "The Unseen Crocodile")
+        builder.add(SeaMessages.BAD_LUCK, "According to the Luck and Probability department it’s statistically bad luck to wish people good luck during a crisis.", "Important Notice: FBC")
+        builder.add(SeaMessages.CRYPTIC_GUN_MESSAGE, "< You/We wield the Gun/You >", "Hotline")
+        builder.add(SeaMessages.BOO, "Boo")
+        builder.add(SeaMessages.YASHAA, "Why are you crying on a nice day like today? I mean, it's even snowing...", "Cepriestess")
+        builder.add(SeaMessages.RIVER_TO_SEA, "From the river to the sea, Palestine will be free!", "River To Sea")
+        builder.add(SeaMessages.FREE_PALESTINE, "#FreePalestine", "Freedom")
+        builder.add(SeaMessages.FREE_GAZA, "#FreeGaza", "Freedom")
+        builder.add(SeaMessages.CONTROL_OOP, "Objects of Power shape reality around us. Handle with care.", "Object of Power: Sea Message")
+        builder.add(SeaMessages.DYLAN, """
+                You are a worm through time.
+                The thunder song distorts you.
+                Happiness comes.
+                White pearls, but yellow and red in the eye.
+                Through a mirror, inverted is made right.
+                Leave your insides by the door.
+                Push the fingers through the surface into the wet.
+                You’ve always been the new you.
+                You want this to be true.
+                We stand around you while you dream.
+                You can almost hear our words but you forget.
+                This happens more and more now.
+                You gave us the permission in your regulations.
+                We wait in the stains.
+                The word that describes this is redacted.
+                Repeat the word.
+                The name of the sound.
+                It resonates in your house.
+                After the song, time for applause.
+                We build you till nothing remains.
+                The egg cracks and the truth will emerge out of you.
+                You are home.
+                You remind us of home.
+                You’ve taken your boss with your boss with you.
+                All hair must be eaten.
+                Under the conceptual reality behind this reality you must want these waves to drag you away.
+                After the song, time for applause.
+                This cliché is death out of time, breaking the first the second the third the fourth wall, the fifth wall, floor; no floor: you fall!
+                How do you say “insane”?
+                Hurts to be happy.
+                An earworm is a tune you can’t stop humming in a dream: "Baby baby baby, yeah."
+                Just plastic.
+                So safe and nothing to worry about.
+                Ha ha, funny.
+                The last egg breaks now.
+                The hole in your room is a hole in you.
+                You came and we let you in through the hole in you.
+                You have always been here, the only child.
+                A copy of a copy of a copy.
+                Orange peel.
+                The picture is you holding the picture.
+                When you hear this you will know you’re in new you.
+                You want to listen.
+                You want to dream.
+                You want to smile.
+                You want to hurt.
+                You don’t want to be.
+            """.trimIndent(), "Prime Candidate 6")
 
         builder.add(HybridAquaticItems.SEA_MESSAGE_BOOK, "Sea Message")
 
@@ -286,7 +358,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.SURGEONFISH_ORANGESHOULDER to "Orangeshoulder Surgeonfish",
             HybridAquaticItems.SURGEONFISH_LINED to "Lined Surgeonfish",
             HybridAquaticItems.CLOWNFISH to "Clownfish",
-            HybridAquaticItems.UNICORNFISH to "Unicornfish",
+            HybridAquaticItems.UNICORN_FISH to "Unicornfish",
             HybridAquaticItems.TIGER_BARB to "Tiger Barb",
             HybridAquaticItems.OSCAR to "Oscar",
             HybridAquaticItems.TRIGGERFISH to "Triggerfish",
@@ -359,7 +431,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticStatusEffects.SPININESS to "Spininess",
             HybridAquaticStatusEffects.INKED to "Inked",
         ).forEach { (effect, translation) ->
-            val identifier = Registries.STATUS_EFFECT.getId(effect)
+            val identifier = effect.key.orElseThrow().value
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
         }
 
@@ -411,6 +483,22 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add("item.minecraft.splash_potion.effect.$potion", "Splash Potion of $translation")
             builder.add("item.minecraft.lingering_potion.effect.$potion", "Lingering Potion of $translation")
             builder.add("item.minecraft.tipped_arrow.effect.$potion", "Arrow of $translation")
+        }
+    }
+
+    fun TranslationBuilder.add(entry: RegistryEntry<SeaMessage>, message: String, title: String? = null) {
+        entry.key.ifPresent { key ->
+            val identifier = key.value
+            val namespace = identifier.namespace
+            val path = identifier.path
+
+            val modId = HybridAquatic.MOD_ID
+            val languageKey = "$modId.sea_message.$namespace.$path"
+            add(languageKey, message)
+
+            title?.also { title ->
+                add("$languageKey.title", title)
+            }
         }
     }
 
@@ -514,6 +602,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.COSMIC_JELLYFISH to "Cosmic Jellyfish",
             HybridAquaticEntityTypes.FIREWORK_JELLYFISH to "Firework Jellyfish",
             HybridAquaticEntityTypes.BLUE_JELLYFISH to "Blue Jellyfish",
+            HybridAquaticEntityTypes.THROWING_STAR to "Throwing Star",
         )
 
         // verify display name list is valid

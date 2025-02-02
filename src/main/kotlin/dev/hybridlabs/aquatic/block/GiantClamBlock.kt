@@ -1,7 +1,11 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.HorizontalFacingBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
@@ -20,7 +24,6 @@ import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
 import net.minecraft.util.BlockRotation
-import net.minecraft.util.Hand
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
@@ -31,7 +34,6 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldView
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class GiantClamBlock(
     private val emitsParticles: Boolean,
     settings: Settings
@@ -45,7 +47,7 @@ class GiantClamBlock(
             .with(WATERLOGGED, true)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
         return false
     }
 
@@ -108,14 +110,7 @@ class GiantClamBlock(
         builder.add(STATE, WATERLOGGED, FACING)
     }
 
-    override fun onUse(
-        state: BlockState,
-        world: World,
-        pos: BlockPos,
-        player: PlayerEntity,
-        hand: Hand,
-        hit: BlockHitResult
-    ): ActionResult {
+    override fun onUse(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hit: BlockHitResult): ActionResult {
         if (!world.isClient) {
             val currentState = state.get(STATE)
             if (currentState == GiantClamState.OPEN) {

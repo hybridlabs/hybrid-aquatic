@@ -5,11 +5,11 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry.DynamicItemRenderer
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.model.json.ModelTransformationMode
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
@@ -28,7 +28,7 @@ class MessageInABottleBlockItemRenderer : DynamicItemRenderer {
         light: Int,
         overlay: Int
     ) {
-        messageInABottleBlockEntity.variant = MessageInABottleBlock.Variant.byId(stack.getSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.getString(MessageInABottleBlockEntity.VARIANT_KEY) ?: "")
+        messageInABottleBlockEntity.variant = stack.get(HybridAquaticComponentTypes.BOTTLE_VARIANT) ?: MessageInABottleBlock.Variant.BOTTLE
         renderer.render(messageInABottleBlockEntity, 1.0f, matrices, vertexConsumers, light, overlay)
     }
 }

@@ -29,15 +29,18 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
+import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.Animation
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
-@Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticCritterEntity(
     type: EntityType<out HybridAquaticCritterEntity>,
     world: World,
@@ -104,13 +107,13 @@ open class HybridAquaticCritterEntity(
         dataTracker.set(IS_CLIMBING_WALL, isClimbingWall)
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
-        dataTracker.startTracking(CRITTER_SIZE, 0)
-        dataTracker.startTracking(CRITTER_FLAGS, 0.toByte())
-        dataTracker.startTracking(IS_CLIMBING_WALL, false)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(VARIANT, "")
+        builder.add(VARIANT_DATA, NbtCompound())
+        builder.add(CRITTER_SIZE, 0)
+        builder.add(CRITTER_FLAGS, 0.toByte())
+        builder.add(IS_CLIMBING_WALL, false)
     }
 
     override fun initGoals() {
@@ -125,8 +128,7 @@ open class HybridAquaticCritterEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = this.maxAir
 
@@ -143,8 +145,8 @@ open class HybridAquaticCritterEntity(
                 } else if (collisionRules.isNotEmpty()) {
                     for (rule in collisionRules) {
                         val variantSet = rule.variants.toSet()
-                        if ((rule.exclusionStatus == VariantCollisionRules.ExclusionStatus.EXCLUSIVE && validKeys.toSet() == variantSet) ||
-                            (rule.exclusionStatus == VariantCollisionRules.ExclusionStatus.INCLUSIVE && validKeys.containsAll(
+                        if ((rule.exclusionStatus == EXCLUSIVE && validKeys.toSet() == variantSet) ||
+                            (rule.exclusionStatus == INCLUSIVE && validKeys.containsAll(
                                 variantSet
                             ))
                         ) {
@@ -171,7 +173,7 @@ open class HybridAquaticCritterEntity(
         }
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun shouldSwimInFluids(): Boolean {
@@ -267,10 +269,6 @@ open class HybridAquaticCritterEntity(
         return factory
     }
 
-    override fun canBreatheInWater(): Boolean {
-        return true
-    }
-
     private var variantData: NbtCompound
         get() = dataTracker.get(VARIANT_DATA)
         set(value) {
@@ -284,12 +282,11 @@ open class HybridAquaticCritterEntity(
             }
             dataTracker.get(VARIANT)
         }
-        private set(value) {
+        set(value) {
             dataTracker.set(VARIANT, value)
         }
 
-    @Suppress("UNUSED_PARAMETER")
-    var variant: CritterVariant?
+        var variant: CritterVariant?
         get() = variants[variantKey]
         private set(value) {}
 
@@ -339,8 +336,7 @@ open class HybridAquaticCritterEntity(
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().then("flop", Animation.LoopType.LOOP)
     }
 
-    @Suppress("UNUSED")
-    data class CritterVariant(
+        data class CritterVariant(
         val variantName: String,
         val spawnCondition: (WorldAccess, SpawnReason, BlockPos, Random) -> Boolean,
         val ignore: List<Ignore> = emptyList(),
@@ -349,13 +345,11 @@ open class HybridAquaticCritterEntity(
             variantName
         }
     ) {
-
         fun getProvidedVariant(critter: HybridAquaticCritterEntity): String {
             return providedVariant(critter.world, critter.blockPos, critter.random, critter)
         }
 
         companion object {
-
             fun biomeVariant(
                 variantName: String,
                 biomes: List<TagKey<Biome>>,
@@ -375,8 +369,7 @@ open class HybridAquaticCritterEntity(
         }
     }
 
-    @Suppress("UNUSED")
-    data class VariantCollisionRules(
+        data class VariantCollisionRules(
         val variants: Set<String>,
         val collisionHandler: (Set<String>, Random, ServerWorldAccess) -> String,
         val exclusionStatus: ExclusionStatus = INCLUSIVE

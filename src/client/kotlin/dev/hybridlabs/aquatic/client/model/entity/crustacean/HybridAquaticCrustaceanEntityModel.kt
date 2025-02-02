@@ -3,13 +3,10 @@ package dev.hybridlabs.aquatic.client.model.entity.crustacean
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
 import net.minecraft.client.render.entity.model.EntityModelPartNames
-import net.minecraft.text.Text
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.MathHelper
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 import kotlin.math.round
-import kotlin.math.sin
 
 abstract class HybridAquaticCrustaceanEntityModel<T : HybridAquaticCrustaceanEntity>(private val id: String) :
     GeoModel<T>() {

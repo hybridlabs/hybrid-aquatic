@@ -3,20 +3,10 @@ package dev.hybridlabs.aquatic.enchantment
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.enchantment.Enchantment
-import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.Items
 
-class LiveCatchEnchantment : Enchantment(Rarity.RARE, EnchantmentTarget.FISHING_ROD, arrayOf(EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND)) {
-    override fun getMinPower(level: Int): Int {
-        return 25
-    }
-
-    override fun getMaxLevel(): Int {
-        return 1
-    }
-
+class LiveCatchEnchantment(properties: Properties) : Enchantment(properties) {
     companion object {
         //TODO: Probably need to move all of this into data so other people can modify this list. Not very important
         val ITEM_TO_ENTITYTYPE = hashMapOf(

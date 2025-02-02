@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:glow_ink_sac"
-            ]
+            "items": "minecraft:glow_ink_sac"
           }
         ]
       },
@@ -17,9 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:slime_ball"
-            ]
+            "items": "minecraft:slime_ball"
           }
         ]
       },
@@ -34,15 +30,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_slime_ball",
-      "has_glow_ink_sac",
-      "has_the_recipe"
+      "has_glow_ink_sac"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:glow_slime"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

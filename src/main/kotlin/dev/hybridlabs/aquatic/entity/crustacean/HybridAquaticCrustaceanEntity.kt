@@ -6,7 +6,6 @@ import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
@@ -34,16 +33,15 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
-@Suppress("DEPRECATION", "LeakingThis", "UNUSED_PARAMETER")
 open class HybridAquaticCrustaceanEntity(
     type: EntityType<out HybridAquaticCrustaceanEntity>,
     world: World,
@@ -85,8 +83,7 @@ open class HybridAquaticCrustaceanEntity(
             dataTracker.set(VARIANT, value)
         }
 
-    @Suppress("UNUSED_PARAMETER")
-    var variant: CrustaceanVariant?
+        var variant: CrustaceanVariant?
         get() = variants[variantKey]
         private set(value) {}
 
@@ -110,13 +107,13 @@ open class HybridAquaticCrustaceanEntity(
         dataTracker.set(IS_CLIMBING_WALL, isClimbingWall)
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(CRUSTACEAN_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
-        dataTracker.startTracking(IS_CLIMBING_WALL, false)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(CRUSTACEAN_SIZE, 0)
+        builder.add(ATTEMPT_ATTACK, false)
+        builder.add(VARIANT, "")
+        builder.add(VARIANT_DATA, NbtCompound())
+        builder.add(IS_CLIMBING_WALL, false)
     }
 
     override fun initGoals() {
@@ -129,8 +126,7 @@ open class HybridAquaticCrustaceanEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
 
@@ -175,10 +171,8 @@ open class HybridAquaticCrustaceanEntity(
         }
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
-
-    // region movement
 
     init {
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
@@ -269,12 +263,6 @@ open class HybridAquaticCrustaceanEntity(
         return super.damage(source, amount)
     }
 
-    // end region
-
-    override fun getGroup(): EntityGroup {
-        return EntityGroup.AQUATIC
-    }
-
     protected open fun getMinSize(): Int {
         return 0
     }
@@ -299,8 +287,6 @@ open class HybridAquaticCrustaceanEntity(
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
-    //#region SFX
-
     override fun calculateNextStepSoundDistance(): Float {
         return this.distanceTraveled + 0.25f
     }
@@ -313,22 +299,12 @@ open class HybridAquaticCrustaceanEntity(
         return SoundEvents.ENTITY_TURTLE_EGG_BREAK
     }
 
-    //#endregion
-
     override fun createNavigation(world: World): EntityNavigation {
         return MobNavigation(this, world)
     }
 
-    // region water breathing
-
-    override fun canBreatheInWater(): Boolean {
-        return true
-    }
-
     override fun tickWaterBreathingAir(air: Int) {
     }
-
-    // endregion
 
     override fun dropLoot(source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.attacker
@@ -344,8 +320,6 @@ open class HybridAquaticCrustaceanEntity(
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
         return !fromFishingNet && !hasCustomName()
     }
-
-    //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             DefaultAnimations.genericWalkIdleController(this)
@@ -377,8 +351,6 @@ open class HybridAquaticCrustaceanEntity(
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
     }
-
-    //#endregion
 
     companion object {
         val CRUSTACEAN_SIZE: TrackedData<Int> =
@@ -436,8 +408,7 @@ open class HybridAquaticCrustaceanEntity(
         const val CRUSTACEAN_SIZE_KEY = "CrustaceanSize"
     }
 
-    @Suppress("UNUSED")
-    data class CrustaceanVariant(
+        data class CrustaceanVariant(
         val variantName: String,
         val spawnCondition: (WorldAccess, SpawnReason, BlockPos, Random) -> Boolean,
         val ignore: List<Ignore> = emptyList(),
@@ -446,7 +417,6 @@ open class HybridAquaticCrustaceanEntity(
             variantName
         }
     ) {
-
         fun getProvidedVariant(crustacean: HybridAquaticCrustaceanEntity): String {
             return providedVariant(crustacean.world, crustacean.blockPos, crustacean.random, crustacean)
         }
@@ -470,13 +440,11 @@ open class HybridAquaticCrustaceanEntity(
         }
     }
 
-    @Suppress("UNUSED")
-    data class VariantCollisionRules(
+        data class VariantCollisionRules(
         val variants: Set<String>,
         val collisionHandler: (Set<String>, Random, ServerWorldAccess) -> String,
         val exclusionStatus: ExclusionStatus = ExclusionStatus.INCLUSIVE
     ) {
-
         enum class ExclusionStatus {
             INCLUSIVE,
             EXCLUSIVE

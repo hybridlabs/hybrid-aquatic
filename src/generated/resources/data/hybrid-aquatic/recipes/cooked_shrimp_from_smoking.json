@@ -6,5 +6,7 @@
   "ingredient": {
     "item": "hybrid-aquatic:raw_shrimp"
   },
-  "result": "hybrid-aquatic:cooked_shrimp"
+  "result": {
+    "id": "hybrid-aquatic:cooked_shrimp"
+  }
 }

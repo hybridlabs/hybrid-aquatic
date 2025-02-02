@@ -1,10 +1,6 @@
 package dev.hybridlabs.aquatic.network
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
-import net.minecraft.entity.projectile.FishingBobberEntity
 import net.minecraft.util.Identifier
 
 object HybridAquaticNetworking {
@@ -12,7 +8,7 @@ object HybridAquaticNetworking {
 
     fun registerNetworking() {
         // Sends lure item to the client back
-        ServerPlayNetworking.registerGlobalReceiver(FISHING_BOBBER_LURE) { server, client, handler, buf, packetSender ->
+        /*ServerPlayNetworking.registerGlobalReceiver(FISHING_BOBBER_LURE) { server, client, handler, buf, packetSender ->
             val entityID = buf.readInt()
 
             val foundEntity = client.serverWorld.getEntityById(entityID)
@@ -26,6 +22,6 @@ object HybridAquaticNetworking {
                 val packetId = FISHING_BOBBER_LURE
                 if (ServerPlayNetworking.canSend(client, packetId)) ServerPlayNetworking.send(client, packetId, packetData)
             }
-        }
+        } TODO IMPORTANT*/
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.item.FishingRodItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
@@ -19,7 +20,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FishingRodItem.class)
-public abstract class FishingRodItemMixin {
+public abstract class FishingRodItemMixin extends Item {
+    private FishingRodItemMixin(Settings settings) {
+        super(settings);
+    }
+
     @Inject(
             method = "use",
             at = @At(
@@ -40,7 +45,7 @@ public abstract class FishingRodItemMixin {
             ((CustomFishingBobberEntityData) customBobber).hybrid_aquatic$setLureItem(opposingHandItemStack.copyAndEmpty());
             world.spawnEntity(customBobber);
 
-            user.incrementStat(Stats.USED.getOrCreateStat(((FishingRodItem) (Object) this)));
+            user.incrementStat(Stats.USED.getOrCreateStat(this));
             user.emitGameEvent(GameEvent.ITEM_INTERACT_START);
             cir.setReturnValue(TypedActionResult.success(mainHandItemStack, world.isClient()));
         }

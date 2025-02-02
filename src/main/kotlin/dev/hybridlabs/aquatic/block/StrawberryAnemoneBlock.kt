@@ -1,8 +1,16 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockEntityProvider
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -22,7 +30,6 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-@Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
 class StrawberryAnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
     init {
         defaultState = stateManager.defaultState
@@ -102,11 +109,16 @@ class StrawberryAnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEn
         builder.add(WATERLOGGED)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
         return false
     }
 
+    override fun getCodec(): MapCodec<StrawberryAnemoneBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<StrawberryAnemoneBlock> = createCodec(::StrawberryAnemoneBlock)
         private val SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 9.0, 12.0)
         private val COLLISION_SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)
     }

@@ -1,10 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.loot.LootTable
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
@@ -28,13 +32,13 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK)) {
 
-    public override fun getLootTableId(): Identifier {
+    public override fun getLootTableId(): RegistryKey<LootTable> {
         return when (this.variant?.variantName) {
-            "koi_ai_goromo" -> Identifier("hybrid-aquatic", "gameplay/koi")
-            "koi_hajiro" -> Identifier("hybrid-aquatic", "gameplay/koi")
-            "koi_platinum" -> Identifier("hybrid-aquatic", "gameplay/koi")
-            "koi_tancho" -> Identifier("hybrid-aquatic", "gameplay/koi")
-            "common" -> Identifier("hybrid-aquatic", "entity/carp")
+            "koi_ai_goromo" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/koi"))
+            "koi_hajiro" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/koi"))
+            "koi_platinum" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/koi"))
+            "koi_tancho" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/koi"))
+            "common" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "entity/carp"))
             else -> super.getLootTableId()
         }
     }

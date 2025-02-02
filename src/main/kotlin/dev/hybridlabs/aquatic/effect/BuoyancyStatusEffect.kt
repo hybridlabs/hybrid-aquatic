@@ -11,7 +11,7 @@ class BuoyancyStatusEffect : StatusEffect(StatusEffectCategory.BENEFICIAL, 0xffe
         return true
     }
 
-    override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
+    override fun onApplied(entity: LivingEntity, amplifier: Int) {
         if (entity.isSubmergedInWater) {
             val upwardForce = 0.25 + (0.03 * amplifier)
             entity.velocity = Vec3d(entity.velocity.x, upwardForce, entity.velocity.z)

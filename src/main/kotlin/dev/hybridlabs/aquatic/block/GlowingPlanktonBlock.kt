@@ -1,8 +1,11 @@
-@file:Suppress("DEPRECATION")
-
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
@@ -21,7 +24,6 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("OVERRIDE_DEPRECATION")
 class GlowingPlanktonBlock(settings: Settings) : Block(
     settings.luminance { state -> state.get(LIGHT_LEVEL) }
 ), Waterloggable {
@@ -146,7 +148,7 @@ class GlowingPlanktonBlock(settings: Settings) : Block(
         builder.add(WATERLOGGED, LIT, LIGHT_LEVEL)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
         return true
     }
 

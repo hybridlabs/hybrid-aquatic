@@ -15,7 +15,7 @@
     "CCC"
   ],
   "result": {
-    "item": "hybrid-aquatic:diving_helmet"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "hybrid-aquatic:diving_helmet"
+  }
 }

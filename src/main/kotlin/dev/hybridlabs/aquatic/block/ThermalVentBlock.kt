@@ -2,7 +2,11 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.entity.crustacean.YetiCrabEntity
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.enums.Thickness
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
@@ -27,7 +31,6 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION")
 class ThermalVentBlock(
     private val emitsParticles: Boolean,
     private val fireDamage: Int,
@@ -40,7 +43,7 @@ class ThermalVentBlock(
             .with(WATERLOGGED, true)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
         return false
     }
 

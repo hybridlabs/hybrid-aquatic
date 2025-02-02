@@ -1,11 +1,15 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.ai.goal.FishJumpGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.loot.LootTable
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
@@ -31,10 +35,10 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: World) :
         )
     ) {
 
-    public override fun getLootTableId(): Identifier {
+    public override fun getLootTableId(): RegistryKey<LootTable> {
         return when (this.variant?.variantName) {
-            "yellowfin" -> Identifier("hybrid-aquatic", "gameplay/yellowfin")
-            "bluefin" -> Identifier("hybrid-aquatic", "gameplay/bluefin")
+            "yellowfin" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/yellowfin"))
+            "bluefin" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/bluefin"))
             else -> super.getLootTableId()
         }
     }

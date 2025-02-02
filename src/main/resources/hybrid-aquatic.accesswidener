@@ -1,6 +1,6 @@
 accessWidener v2 named
 
-accessible method net/minecraft/block/BlockWithEntity checkType (Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityTicker;)Lnet/minecraft/block/entity/BlockEntityTicker;
+accessible method net/minecraft/block/BlockWithEntity validateTicker (Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityTicker;)Lnet/minecraft/block/entity/BlockEntityTicker;
 
 accessible field net/minecraft/block/entity/BlockEntityType blocks Ljava/util/Set;
 mutable field net/minecraft/block/entity/BlockEntityType blocks Ljava/util/Set;
@@ -11,3 +11,6 @@ accessible class net/minecraft/client/render/BackgroundRenderer$DarknessFogModif
 accessible method net/minecraft/block/PointedDripstoneBlock getThickness (Lnet/minecraft/world/WorldView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;Z)Lnet/minecraft/block/enums/Thickness;
 accessible field net/minecraft/state/property/IntProperty min I
 accessible field net/minecraft/state/property/IntProperty max I
+
+accessible method net/minecraft/registry/Registries create (Lnet/minecraft/registry/RegistryKey;Lnet/minecraft/registry/Registries$Initializer;)Lnet/minecraft/registry/Registry;
+accessible    field    net/minecraft/entity/data/DataTracker$Builder    entries    [Lnet/minecraft/entity/data/DataTracker$Entry;

@@ -10,7 +10,7 @@ class BleedingStatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xee4049
         return duration % 40 == 0
     }
 
-    override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
+    override fun onApplied(entity: LivingEntity, amplifier: Int) {
         if (entity.health > entity.maxHealth / 1.3) {
             entity.health = maxOf(entity.maxHealth / 1.3F)
         }

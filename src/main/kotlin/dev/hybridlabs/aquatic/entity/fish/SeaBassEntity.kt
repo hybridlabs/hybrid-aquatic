@@ -5,7 +5,6 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
 class SeaBassEntity(entityType: EntityType<out SeaBassEntity>, world: World) :
@@ -24,11 +23,6 @@ class SeaBassEntity(entityType: EntityType<out SeaBassEntity>, world: World) :
             HybridAquaticEntityTags.SHARK
         )
     ) {
-
-    public override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entity/sea_bass")
-    }
-
     override fun getLimitPerChunk(): Int {
         return 2
     }

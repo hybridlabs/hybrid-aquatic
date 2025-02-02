@@ -7,7 +7,7 @@ import net.minecraft.entity.effect.StatusEffectCategory
 
 class CorrosionStatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0x9d9136) {
 
-    override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
+    override fun onApplied(entity: LivingEntity, amplifier: Int) {
         if (entity.world.isClient) return
         corrodeTool(entity)
         corrodeArmor(entity)
@@ -20,12 +20,12 @@ class CorrosionStatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0x9d913
     private fun corrodeTool(entity: LivingEntity) {
         val mainHandStack = entity.mainHandStack
         if (mainHandStack.isDamageable) {
-            mainHandStack.damage(1, entity) { it.sendToolBreakStatus(entity.activeHand) }
+            mainHandStack.damage(1, entity, EquipmentSlot.MAINHAND)
         }
 
         val offHandStack = entity.offHandStack
         if (offHandStack.isDamageable) {
-            offHandStack.damage(1, entity) { it.sendToolBreakStatus(entity.activeHand) }
+            offHandStack.damage(1, entity, EquipmentSlot.OFFHAND)
         }
     }
 
@@ -33,7 +33,7 @@ class CorrosionStatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0x9d913
         for (slot in EquipmentSlot.entries) {
             val armorStack = entity.getEquippedStack(slot)
             if (armorStack.isDamageable) {
-                armorStack.damage(1, entity) { it.sendEquipmentBreakStatus(slot) }
+                armorStack.damage(1, entity, slot)
             }
         }
     }

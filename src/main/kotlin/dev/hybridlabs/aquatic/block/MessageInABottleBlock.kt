@@ -1,10 +1,12 @@
-@file:Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import io.netty.buffer.ByteBuf
 import net.minecraft.block.Block
 import net.minecraft.block.BlockRenderType
 import net.minecraft.block.BlockState
@@ -17,12 +19,14 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
+import net.minecraft.network.codec.PacketCodec
+import net.minecraft.network.codec.PacketCodecs
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.function.ValueLists
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
@@ -30,6 +34,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
+import java.util.function.IntFunction
 import kotlin.jvm.optionals.getOrNull
 
 /**
@@ -40,14 +45,6 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
     init {
         // add waterlogged to default state
         defaultState = defaultState.with(WATERLOGGED, false)
-    }
-
-    override fun getPickStack(world: BlockView, pos: BlockPos, state: BlockState): ItemStack {
-        val blockEntity = world.getBlockEntity(pos)
-        if (blockEntity !is MessageInABottleBlockEntity) {
-            return super.getPickStack(world, pos, state)
-        }
-        return createItemStack(blockEntity)
     }
 
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
@@ -75,19 +72,17 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
         placer: LivingEntity?,
         stack: ItemStack
     ) {
-        stack.getSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.let { nbt ->
-            // if not present, generate a random message
-            if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
-                // get a random message
-                val registryManager = world.registryManager
-                val registry = registryManager.get(HybridAquaticRegistryKeys.SEA_MESSAGE)
-                val messageKey = registry.getRandom(world.random).getOrNull()?.registryKey() ?: return
-                val message = registry.get(messageKey) ?: return
+        if (!stack.contains(HybridAquaticComponentTypes.STORED_BOTTLE_MESSAGE)) {
+            // get a random message
+            val registryManager = world.registryManager
+            val registry = registryManager.get(HybridAquaticRegistryKeys.SEA_MESSAGE)
+            val messageEntry = registry.getRandom(world.random).getOrNull() ?: return
 
-                // get block entity
-                val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity ?: return
-                blockEntity.messageItemStack = SeaMessageBookItem.createItemStack(message, registryManager)
-            }
+            // get block entity
+            val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity ?: return
+            val stack = ItemStack(HybridAquaticItems.SEA_MESSAGE_BOOK)
+            stack.set(HybridAquaticComponentTypes.SEA_MESSAGE, messageEntry)
+            blockEntity.messageItemStack = stack
         }
     }
 
@@ -99,7 +94,7 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
         return super.getPlacementState(context)?.with(WATERLOGGED, fluidState.fluid == Fluids.WATER)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
         return false
     }
 
@@ -155,57 +150,49 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
     /**
      * Represents the variants of a Message in a Bottle.
      */
-    enum class Variant(val id: String) : StringIdentifiable {
+    enum class Variant(val index: Int, val id: String) : StringIdentifiable {
         /**
          * The default bottle variant.
          */
-        BOTTLE("bottle"),
+        BOTTLE(0, "bottle"),
 
         /**
          * The jar variant.
          */
-        JAR("jar"),
+        JAR(1, "jar"),
 
         /**
          * The longneck variant.
          */
-        LONGNECK("longneck");
+        LONGNECK(2, "longneck");
 
         override fun asString(): String {
             return id
         }
 
         companion object {
-            private val BY_ID = entries.associateBy(Variant::id)
+            private val FROM_INDEX: IntFunction<Variant> = ValueLists.createIdToValueFunction(Variant::index, entries.toTypedArray(), ValueLists.OutOfBoundsHandling.ZERO)
 
-            /**
-             * Retrieves a variant based on [id].
-             */
-            fun byId(id: String): Variant {
-                return BY_ID[id] ?: BOTTLE
-            }
+            val CODEC: Codec<Variant> = StringIdentifiable.createCodec(::values)
+            val PACKET_CODEC: PacketCodec<ByteBuf, Variant> = PacketCodecs.indexed(FROM_INDEX, Variant::index)
         }
     }
 
+    override fun getCodec(): MapCodec<MessageInABottleBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<MessageInABottleBlock> = createCodec(::MessageInABottleBlock)
+
         /**
          * The default shape of a Message in a Bottle block.
          */
-        val SHAPE: VoxelShape = Block.createCuboidShape(2.0, 0.0, 2.0, 13.0, 6.0, 14.0)
+        val SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 13.0, 6.0, 14.0)
 
         /**
          * The shape of a Message in a Bottle block in water.
          */
-        val WATER_SHAPE: VoxelShape = Block.createCuboidShape(1.0, 13.0, 1.0, 15.0, 16.0, 15.0)
-
-        /**
-         * Creates a Message in a Bottle item stack from [blockEntity].
-         * @return an item stack
-         */
-        fun createItemStack(blockEntity: MessageInABottleBlockEntity): ItemStack {
-            val stack = ItemStack(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE)
-            stack.orCreateNbt.put(BlockItem.BLOCK_ENTITY_TAG_KEY, blockEntity.createNbt())
-            return stack
-        }
+        val WATER_SHAPE: VoxelShape = createCuboidShape(1.0, 13.0, 1.0, 15.0, 16.0, 15.0)
     }
 }

@@ -15,7 +15,7 @@
     "I I"
   ],
   "result": {
-    "item": "hybrid-aquatic:magnetic_hook"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "hybrid-aquatic:magnetic_hook"
+  }
 }

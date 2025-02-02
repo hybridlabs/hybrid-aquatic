@@ -10,6 +10,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,9 +22,8 @@ import net.minecraft.item.Items;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -52,14 +52,13 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
 
     @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
     private void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
-        hybrid_aquatic$setLureItem(ItemStack.fromNbt(nbt.getCompound("lureItem")));
+        ItemStack.fromNbt(this.getWorld().getRegistryManager(), nbt.getCompound("lureItem")).ifPresent(this::hybrid_aquatic$setLureItem);
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
     private void writeCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
-        NbtCompound itemStack = new NbtCompound();
-        hybrid_aquatic$getLureItem().writeNbt(itemStack);
-        nbt.put("lureItem", itemStack);
+        NbtElement itemNbt = hybrid_aquatic$getLureItem().encode(this.getWorld().getRegistryManager());
+        nbt.put("lureItem", itemNbt); // TODO codecify
     }
 
     @Unique
@@ -120,7 +119,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
             )
     )
     private void lureDamage(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
-        lureItemStack.damage(1, usedPlayer, (test) -> this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f));
+        lureItemStack.damage(1, usedPlayer, LivingEntity.getSlotForHand(usedPlayer.getActiveHand()));
     }
 
     // Increases chance of getting treasure item with magnetic hook

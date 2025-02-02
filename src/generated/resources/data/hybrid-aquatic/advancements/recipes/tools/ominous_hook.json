@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "hybrid-aquatic:claw"
+            "items": "#hybrid-aquatic:claw"
           }
         ]
       },
@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_crab_claw",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_crab_claw"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:ominous_hook"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

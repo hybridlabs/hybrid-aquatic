@@ -1,7 +1,15 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import com.mojang.serialization.MapCodec
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.Fertilizable
+import net.minecraft.block.FluidFillable
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.TallSeagrassBlock
 import net.minecraft.block.enums.DoubleBlockHalf
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -17,8 +25,7 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("OVERRIDE_DEPRECATION")
-class SeaLettuceBlock(settings: Settings?) : PlantBlock(settings), Fertilizable, FluidFillable {
+class SeaLettuceBlock(settings: Settings) : PlantBlock(settings), Fertilizable, FluidFillable {
     override fun getOutlineShape(
         state: BlockState,
         world: BlockView,
@@ -53,7 +60,7 @@ class SeaLettuceBlock(settings: Settings?) : PlantBlock(settings), Fertilizable,
         return blockState
     }
 
-    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState): Boolean {
         return true
     }
 
@@ -75,7 +82,7 @@ class SeaLettuceBlock(settings: Settings?) : PlantBlock(settings), Fertilizable,
         }
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(player: PlayerEntity?, world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
         return false
     }
 
@@ -88,7 +95,12 @@ class SeaLettuceBlock(settings: Settings?) : PlantBlock(settings), Fertilizable,
         return false
     }
 
+    override fun getCodec(): MapCodec<SeaLettuceBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<SeaLettuceBlock> = createCodec(::SeaLettuceBlock)
         private val SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
     }
 }

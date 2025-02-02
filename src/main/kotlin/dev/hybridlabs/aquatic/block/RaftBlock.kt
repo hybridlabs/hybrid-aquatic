@@ -1,6 +1,10 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -14,7 +18,6 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class RaftBlock(settings: Settings) : Block(settings), Waterloggable {
     init {
         defaultState = defaultState.with(Properties.WATERLOGGED, false)
@@ -27,7 +30,7 @@ class RaftBlock(settings: Settings) : Block(settings), Waterloggable {
         return super.getPlacementState(context)?.with(Properties.WATERLOGGED, fluidState.fluid == Fluids.WATER)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
         return false
     }
 

@@ -13,16 +13,16 @@ import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.function.SetCountLootFunction
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
-import net.minecraft.util.Identifier
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryWrapper
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class GenericLootTableProvider(output: FabricDataOutput) :
-    SimpleFabricLootTableProvider(output, LootContextTypes.GENERIC) {
-    override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
+class GenericLootTableProvider(output: FabricDataOutput, lookup: CompletableFuture<RegistryWrapper.WrapperLookup>) : SimpleFabricLootTableProvider(output, lookup, LootContextTypes.GENERIC) {
+    override fun accept(lookup: RegistryWrapper.WrapperLookup, exporter: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) {
         exporter.accept(
             HybridAquaticLootTables.CRAB_POT_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.CRAB_POT_TREASURE_ID)
                 .pool(
                     LootPool.builder()
                         .with(
@@ -79,7 +79,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID)
                 .pool(
                     LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1.0f))
@@ -101,7 +100,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridAquaticLootTables.OAK_CRATE_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
                 .pool(
                     LootPool.builder()
@@ -177,7 +175,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
                 .pool(
                     LootPool.builder()
@@ -253,7 +250,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
                 .pool(
                     LootPool.builder()
@@ -329,7 +325,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
                 .pool(
                     LootPool.builder()
@@ -405,7 +400,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
                 .pool(
                     LootPool.builder()
@@ -481,7 +475,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
                 .pool(
                     LootPool.builder()
@@ -557,7 +550,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
                 .pool(
                     LootPool.builder()
@@ -633,7 +625,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
                 .pool(
                     LootPool.builder()
@@ -713,7 +704,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridAquaticLootTables.VENT_LOOT_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.VENT_LOOT_ID)
                 .pool(
                     LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1F))
@@ -754,7 +744,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
             LootTable.builder()
                 .pool(
                     LootPool.builder()
-                        .with(ItemEntry.builder(HybridAquaticItems.UNICORNFISH))
+                        .with(ItemEntry.builder(HybridAquaticItems.UNICORN_FISH))
                 )
         )
 
@@ -954,7 +944,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         exporter.accept(
             HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID,
             LootTable.builder()
-                .randomSequenceId(HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID)
                 .pool(
                     LootPool.builder()
                         .with(ItemEntry.builder(Items.AIR).weight(10))

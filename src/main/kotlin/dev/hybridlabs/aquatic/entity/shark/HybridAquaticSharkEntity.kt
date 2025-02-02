@@ -4,10 +4,18 @@ import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.LookAtEntityGoal
+import net.minecraft.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.entity.ai.goal.SwimAroundGoal
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.damage.DamageSource
@@ -37,15 +45,14 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.*
+import java.util.UUID
 
 
-@Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticSharkEntity(
     entityType: EntityType<out HybridAquaticSharkEntity>,
     world: World,
@@ -62,8 +69,6 @@ open class HybridAquaticSharkEntity(
         set(hunger) {
             dataTracker.set(HUNGER, hunger)
         }
-
-    //#region Initialization
     init {
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
         setPathfindingPenalty(PathNodeType.WALKABLE, 10.0f)
@@ -93,14 +98,13 @@ open class HybridAquaticSharkEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = getMaxMoistness()
         pitch = 0.0f
         yaw = 0.0f
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun tick() {
@@ -136,8 +140,6 @@ open class HybridAquaticSharkEntity(
         if (hunger > 0) hunger -= 1
     }
 
-    //#endregion
-
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
         return !this.fromFishingNet && !this.hasCustomName()
     }
@@ -145,8 +147,6 @@ open class HybridAquaticSharkEntity(
     override fun getLimitPerChunk(): Int {
         return 4
     }
-
-    //#region NBT & Data
     private var fromFishingNet = false
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
@@ -167,18 +167,14 @@ open class HybridAquaticSharkEntity(
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(SHARK_SIZE, 0)
-        dataTracker.startTracking(HUNGER, MAX_HUNGER)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(MOISTNESS, getMaxMoistness())
+        builder.add(SHARK_SIZE, 0)
+        builder.add(HUNGER, MAX_HUNGER)
+        builder.add(ATTEMPT_ATTACK, false)
     }
 
-    //#endregion
-
-
-    //#region Movement
     override fun tickMovement() {
         this.tickHandSwing()
         super.tickMovement()
@@ -195,10 +191,6 @@ open class HybridAquaticSharkEntity(
     override fun getMaxLookPitchChange(): Int {
         return 1
     }
-
-    //#endregion
-
-    //#region Size & Dimensions
     var size: Int
         get() = dataTracker.get(SHARK_SIZE)
         set(size) {
@@ -212,14 +204,6 @@ open class HybridAquaticSharkEntity(
     protected open fun getMaxSize(): Int {
         return 0
     }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.65f
-    }
-
-    //#endregion
-
-    //#region Water Breathing
     private var moistness: Int
         get() = dataTracker.get(MOISTNESS)
         set(moistness) {
@@ -239,10 +223,6 @@ open class HybridAquaticSharkEntity(
     public override fun getNextAirOnLand(air: Int): Int {
         return this.maxAir
     }
-
-    //#endregion
-
-    //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(AnimationController(this, "Swim/Charge/Idle", 4) { state ->
             val animation = when {
@@ -260,10 +240,6 @@ open class HybridAquaticSharkEntity(
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
     }
-
-    //#endregion
-
-    //#region SFX
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_COD_HURT
     }
@@ -276,15 +252,11 @@ open class HybridAquaticSharkEntity(
         return SoundEvents.ENTITY_TROPICAL_FISH_AMBIENT
     }
 
-    //#endregion
-
     private fun shouldProximityAttack(player: PlayerEntity): Boolean {
         if (customName?.string == "friend") return false
 
         return closePlayerAttack && player.squaredDistanceTo(this) <= 5 && !player.isCreative
     }
-
-    //#region Angerable Implementation Details
     override fun getAngerTime(): Int {
         return angerTime
     }
@@ -304,7 +276,6 @@ open class HybridAquaticSharkEntity(
     override fun chooseRandomAngerTime() {
         setAngerTime(ANGER_TIME_RANGE.get(random))
     }
-    //#endregion
 
     override fun dropLoot(source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.attacker
@@ -346,9 +317,8 @@ open class HybridAquaticSharkEntity(
             return !shark.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.cooldown <= 0 && !target.isBlocking) {
+        override fun attack(target: LivingEntity) {
+            if (canAttack(target) && !target.isBlocking) {
                 resetCooldown()
                 shark.swingHand(Hand.MAIN_HAND)
                 shark.tryAttack(target)
@@ -362,10 +332,6 @@ open class HybridAquaticSharkEntity(
                     shark.dropStack(ItemStack(HybridAquaticItems.SHARK_TOOTH))
                 }
             }
-        }
-
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (shark.width * 2.5 + entity.width)
         }
 
         override fun start() {
@@ -434,8 +400,7 @@ open class HybridAquaticSharkEntity(
             ).isOf(Blocks.WATER) && world.isSkyVisibleAllowingSea(pos) && !isSpawnDark(world, pos, random)
         }
 
-        @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-        fun canUndergroundSpawn(
+                fun canUndergroundSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
             reason: SpawnReason,

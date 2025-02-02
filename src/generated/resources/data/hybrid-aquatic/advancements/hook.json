@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "hybrid-aquatic:lure_items"
+            "items": "#hybrid-aquatic:lure_items"
           }
         ]
       },
@@ -13,18 +13,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.hook.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "hybrid-aquatic:barbed_hook",
-      "nbt": "{Damage:0}"
+      "count": 1,
+      "id": "hybrid-aquatic:barbed_hook"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.hybrid-aquatic.hook.title"
     }

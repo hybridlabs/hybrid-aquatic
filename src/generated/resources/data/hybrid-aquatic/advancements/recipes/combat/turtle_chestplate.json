@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:scute"
-            ]
+            "items": "minecraft:turtle_scute"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_scute",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_scute"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:turtle_chestplate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "S": {
-      "item": "minecraft:scute"
+      "item": "minecraft:turtle_scute"
     }
   },
   "pattern": [
@@ -12,7 +12,7 @@
     "SSS"
   ],
   "result": {
-    "item": "hybrid-aquatic:turtle_chestplate"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "hybrid-aquatic:turtle_chestplate"
+  }
 }

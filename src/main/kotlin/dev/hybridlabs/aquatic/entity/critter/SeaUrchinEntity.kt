@@ -8,12 +8,11 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.registry.tag.BiomeTags
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
 
 class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World) :
     HybridAquaticCritterEntity(entityType, world, variants = hashMapOf(
@@ -32,11 +31,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
         "long_purple" to CritterVariant.biomeVariant("long_purple", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
             ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)),
         "long_red" to CritterVariant.biomeVariant("long_red", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-            ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)),)) {
-
-    public override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/sea_urchin")
-    }
+            ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)))) {
 
     private var timeUntilNextBreak = 0
     private var spawnUrchinOnNextBreak = false
@@ -62,7 +57,6 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
 
     override fun damage(source: DamageSource?, amount: Float): Boolean {
         if (super.damage(source, amount)) {
-
             val attacker = source?.attacker
             if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
                 attacker.damage(this.damageSources.thorns(this), 2.0f)

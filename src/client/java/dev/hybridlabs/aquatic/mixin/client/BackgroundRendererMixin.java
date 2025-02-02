@@ -40,7 +40,6 @@ public class BackgroundRendererMixin {
 
     @Inject(method = "applyFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V"), locals = LocalCapture.CAPTURE_FAILHARD)
     private static void hybrid$renderFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, float tickDelta, CallbackInfo ci, CameraSubmersionType cameraSubmersionType, Entity entity, BackgroundRenderer.FogData fogData) {
-
         if (entity instanceof ClientPlayerEntity clientPlayerEntity && cameraSubmersionType == CameraSubmersionType.WATER) {
             World world = clientPlayerEntity.getWorld();
             StatusEffectInstance clarityEffect = clientPlayerEntity.getStatusEffect(HybridAquaticStatusEffects.INSTANCE.getCLARITY());

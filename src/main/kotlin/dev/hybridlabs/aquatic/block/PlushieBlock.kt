@@ -23,7 +23,6 @@ import net.minecraft.world.WorldView
 /**
  * Represents any Plushie block.
  */
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class PlushieBlock(variant: Variant, val particleBlock: Block, settings: Settings) : SkullBlock(variant, settings), Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(WATERLOGGED, false)

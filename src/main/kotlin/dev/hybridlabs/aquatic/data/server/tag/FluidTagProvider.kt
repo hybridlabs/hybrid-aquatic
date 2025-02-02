@@ -10,7 +10,6 @@ import java.util.concurrent.CompletableFuture
 
 class FluidTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.FluidTagProvider(output, registriesFuture) {
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
-
         setOf(
             HybridAquaticFluids.BRINE,
             HybridAquaticFluids.FLOWING_BRINE,

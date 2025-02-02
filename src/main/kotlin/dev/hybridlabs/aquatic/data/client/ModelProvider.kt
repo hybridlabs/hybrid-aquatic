@@ -9,7 +9,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.block.Blocks
 import net.minecraft.block.FluidBlock
-import net.minecraft.data.client.*
+import net.minecraft.data.client.BlockStateModelGenerator
+import net.minecraft.data.client.ItemModelGenerator
+import net.minecraft.data.client.ModelIds
+import net.minecraft.data.client.Models
+import net.minecraft.data.client.TextureMap
 import net.minecraft.item.Items
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
@@ -245,7 +249,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.TRIGGERFISH,
             HybridAquaticItems.YELLOWFIN_TUNA,
             HybridAquaticItems.BLUEFIN_TUNA,
-            HybridAquaticItems.UNICORNFISH,
+            HybridAquaticItems.UNICORN_FISH,
             HybridAquaticItems.STONEFISH,
             HybridAquaticItems.TOADFISH,
             HybridAquaticItems.PARROTFISH,

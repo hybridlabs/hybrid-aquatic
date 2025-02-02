@@ -19,14 +19,16 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.predicate.entity.EntityFlagsPredicate
 import net.minecraft.predicate.entity.EntityPredicate
-import net.minecraft.util.Identifier
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryWrapper
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
 /**
  * Generates entity loot tables.
  */
-class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTableProvider(output, LootContextTypes.ENTITY) {
-    override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
+class EntityTypeLootTableProvider(output: FabricDataOutput, lookup: CompletableFuture<RegistryWrapper.WrapperLookup>) : SimpleFabricLootTableProvider(output, lookup, LootContextTypes.ENTITY) {
+    override fun accept(lookup: RegistryWrapper.WrapperLookup, exporter: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) {
         // nautilus
         export(exporter, HybridAquaticEntityTypes.NAUTILUS) {
             pool(
@@ -928,11 +930,11 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
     /**
      * Exports a loot table for [entityType] to [exporter] using its loot table id.
      */
-    private fun export(exporter: BiConsumer<Identifier, LootTable.Builder>, entityType: EntityType<*>, builder: LootTable.Builder.() -> Unit) {
+    private fun export(exporter: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>, entityType: EntityType<*>, builder: LootTable.Builder.() -> Unit) {
         exporter.accept(entityType.lootTableId, LootTable.builder().apply(builder))
     }
 
     companion object {
-        private val NEEDS_ENTITY_ON_FIRE: EntityPredicate.Builder = EntityPredicate.Builder.create().flags(EntityFlagsPredicate.Builder.create().onFire(true).build())
+        private val NEEDS_ENTITY_ON_FIRE: EntityPredicate.Builder = EntityPredicate.Builder.create().flags(EntityFlagsPredicate.Builder.create().onFire(true))
     }
 }

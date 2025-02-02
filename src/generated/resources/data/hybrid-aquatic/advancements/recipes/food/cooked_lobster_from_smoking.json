@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:raw_lobster"
-            ]
+            "items": "hybrid-aquatic:raw_lobster"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_raw_lobster",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_raw_lobster"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:cooked_lobster_from_smoking"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

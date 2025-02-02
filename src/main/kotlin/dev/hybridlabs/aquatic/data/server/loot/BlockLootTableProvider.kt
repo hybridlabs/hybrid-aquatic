@@ -1,30 +1,28 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.MESSAGE_KEY
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.VARIANT_KEY
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem.Companion.SEA_MESSAGE_KEY
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.block.DeadCoralWallFanBlock
 import net.minecraft.block.WallTorchBlock
-import net.minecraft.item.BlockItem.BLOCK_ENTITY_TAG_KEY
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.condition.MatchToolLootCondition
 import net.minecraft.loot.entry.AlternativeEntry
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.entry.LootTableEntry
-import net.minecraft.loot.function.CopyNbtLootFunction
-import net.minecraft.loot.provider.nbt.ContextLootNbtProvider
+import net.minecraft.loot.function.CopyComponentsLootFunction
 import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.registry.Registries
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.ItemTags
+import java.util.concurrent.CompletableFuture
 
-class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTableProvider(output) {
+class BlockLootTableProvider(output: FabricDataOutput, lookup: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricBlockLootTableProvider(output, lookup) {
     override fun generate() {
         // anemone
         addDrop(HybridAquaticBlocks.ANEMONE) { block ->
@@ -43,7 +41,6 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
-        //region wood
         addDrop(HybridAquaticBlocks.DRIFTWOOD_LOG)
         addDrop(HybridAquaticBlocks.DRIFTWOOD_WOOD)
         addDrop(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG)
@@ -60,9 +57,6 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
 
         addDrop(HybridAquaticBlocks.GLOWSTICK)
 
-        //endregion
-
-        //region corals
         addDropWithSilkTouch(HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK)
         addDropWithSilkTouch(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK)
         addDropWithSilkTouch(HybridAquaticBlocks.LOPHELIA_CORAL)
@@ -76,8 +70,6 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         addDropWithSilkTouch(HybridAquaticBlocks.DEAD_THORN_CORAL)
         addDropWithSilkTouch(HybridAquaticBlocks.THORN_CORAL_FAN)
         addDropWithSilkTouch(HybridAquaticBlocks.DEAD_THORN_CORAL_FAN)
-
-        //endregion
 
         // thermal vents
         addDrop(HybridAquaticBlocks.THERMAL_VENT) { block ->
@@ -97,13 +89,13 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.builder().with(
                     AlternativeEntry.builder(
                         ItemEntry.builder(block).conditionally(WITH_SILK_TOUCH).apply(
-                            CopyNbtLootFunction.builder(ContextLootNbtProvider.BLOCK_ENTITY)
-                                .withOperation(VARIANT_KEY, "$BLOCK_ENTITY_TAG_KEY.$VARIANT_KEY")
-                                .withOperation(MESSAGE_KEY, "$BLOCK_ENTITY_TAG_KEY.$MESSAGE_KEY")
+                            CopyComponentsLootFunction.builder(CopyComponentsLootFunction.Source.BLOCK_ENTITY)
+                                .include(HybridAquaticComponentTypes.STORED_BOTTLE_MESSAGE)
+                                .include(HybridAquaticComponentTypes.BOTTLE_VARIANT)
                         ),
                         ItemEntry.builder(HybridAquaticItems.SEA_MESSAGE_BOOK).apply(
-                            CopyNbtLootFunction.builder(ContextLootNbtProvider.BLOCK_ENTITY)
-                                .withOperation("$MESSAGE_KEY.tag.$SEA_MESSAGE_KEY", SEA_MESSAGE_KEY)
+                            CopyComponentsLootFunction.builder(CopyComponentsLootFunction.Source.BLOCK_ENTITY)
+                                .include(HybridAquaticComponentTypes.SEA_MESSAGE)
                         )
                     )
                 )
@@ -246,7 +238,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             .filter(filterHybridAquatic(Registries.BLOCK))
             .filter { block ->
                 block !is WallTorchBlock && block !is DeadCoralWallFanBlock
-                        && block.lootTableId !in lootTables
+                        && block.lootTableKey !in lootTables
             }
             .forEach(::addDrop)
     }

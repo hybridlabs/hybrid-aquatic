@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:string"
-            ]
+            "items": "minecraft:string"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "string",
-      "has_the_recipe"
+      "has_the_recipe",
+      "string"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:fishing_net"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -40,7 +40,6 @@ class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) :
 
     override fun damage(source: DamageSource?, amount: Float): Boolean {
         if (super.damage(source, amount)) {
-
             val attacker = source?.attacker
             if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
                 attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 0))

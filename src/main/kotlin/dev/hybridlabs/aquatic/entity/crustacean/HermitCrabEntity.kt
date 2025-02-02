@@ -1,9 +1,13 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.loot.LootTable
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
@@ -21,10 +25,10 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         )
     ) {
 
-    public override fun getLootTableId(): Identifier {
+    public override fun getLootTableId(): RegistryKey<LootTable> {
         return when (this.variant?.variantName) {
-            "skull" -> Identifier("hybrid-aquatic", "gameplay/hermit_crab_skull")
-            "shell" -> Identifier("hybrid-aquatic", "gameplay/hermit_crab_shell")
+            "skull" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/hermit_crab_skull"))
+            "shell" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/hermit_crab_shell"))
             else -> super.getLootTableId()
         }
     }

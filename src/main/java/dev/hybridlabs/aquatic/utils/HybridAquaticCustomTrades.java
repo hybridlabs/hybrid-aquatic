@@ -1,15 +1,8 @@
 package dev.hybridlabs.aquatic.utils;
 
-import dev.hybridlabs.aquatic.item.HybridAquaticItems;
-import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.village.TradeOffer;
-import net.minecraft.village.VillagerProfession;
-
 public class HybridAquaticCustomTrades {
     public static void registerCustomTrades() {
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FISHERMAN, 1,
+        /*TradeOfferHelper.registerVillagerOffers(VillagerProfession.FISHERMAN, 1,
                 factories -> {
                     factories.add((entity, random) -> new TradeOffer(
                             new ItemStack(Items.EMERALD, 1),
@@ -85,6 +78,6 @@ public class HybridAquaticCustomTrades {
                             new ItemStack(HybridAquaticItems.INSTANCE.getBLACK_PEARL(), 1),
                             new ItemStack(Items.EMERALD, 5),
                             3, 15, 0.05f));
-                });
+                });*/
     }
 }

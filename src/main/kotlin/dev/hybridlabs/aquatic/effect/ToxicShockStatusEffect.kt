@@ -10,7 +10,7 @@ class ToxicShockStatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xee40
         return duration % 20 == 0
     }
 
-    override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
+    override fun onApplied(entity: LivingEntity, amplifier: Int) {
         entity.damage(entity.damageSources.wither(), 2.0f * (amplifier + 1).toFloat())
     }
 }

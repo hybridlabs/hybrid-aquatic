@@ -15,7 +15,7 @@
     "LLL"
   ],
   "result": {
-    "item": "hybrid-aquatic:diving_suit"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "hybrid-aquatic:diving_suit"
+  }
 }

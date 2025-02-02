@@ -16,7 +16,6 @@ class EntitySpawnConfigGenerator {
     private val list: MutableList<EntitySpawnConfig> = mutableListOf()
 
     fun initialize() {
-        //#region Fish
         addFish(HybridAquaticEntityTypes.AFRICAN_BUTTERFLY, listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.MARSHES, HybridAquaticBiomeTags.MANGROVES), 2, 1, 1)
         addFish(HybridAquaticEntityTypes.GOLDEN_DORADO, listOf(HybridAquaticBiomeTags.TROPICAL_RIVERS, HybridAquaticBiomeTags.RIVERS, HybridAquaticBiomeTags.JUNGLE), 1, 1, 1)
         addFish(HybridAquaticEntityTypes.TETRA, listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.MARSHES, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.TROPICAL_RIVERS, HybridAquaticBiomeTags.CAVES), 3, 2, 3)
@@ -52,10 +51,6 @@ class EntitySpawnConfigGenerator {
         addFish(HybridAquaticEntityTypes.MORAY_EEL, listOf(HybridAquaticBiomeTags.REEF), 1, 1, 1)
         addFish(HybridAquaticEntityTypes.SUNFISH, listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 1, 1, 1)
         addFish(HybridAquaticEntityTypes.TUNA, listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 3, 1, 3)
-
-        //#endregion
-
-        //#region Deep Fish
         addUndergroundFish(HybridAquaticEntityTypes.OARFISH, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 1, 1, 1)
         addUndergroundFish(HybridAquaticEntityTypes.ANGLERFISH, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 1, 1, 2)
         addUndergroundFish(HybridAquaticEntityTypes.JOHN_DORY, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 2, 1, 3)
@@ -65,22 +60,13 @@ class EntitySpawnConfigGenerator {
         addUndergroundFish(HybridAquaticEntityTypes.SEA_ANGEL, listOf(HybridAquaticBiomeTags.ARCTIC_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS), 1, 1, 1)
         addUndergroundFish(HybridAquaticEntityTypes.COELACANTH, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 1, 1, 2)
         addUndergroundFish(HybridAquaticEntityTypes.SNAILFISH, listOf(BiomeTags.IS_OCEAN), 3, 1, 5)
-        //#endregion
-
-        //#region Cephalopods
         addCephalopod(HybridAquaticEntityTypes.ARROW_SQUID, listOf(HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 5, 1, 3)
         addCephalopod(HybridAquaticEntityTypes.FIREFLY_SQUID, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 5, 3, 5)
         addCephalopod(HybridAquaticEntityTypes.CUTTLEFISH, listOf(HybridAquaticBiomeTags.REEF), 1, 1, 2)
-        //#endregion
-
-        //#region Deep Cephalopods
         addUndergroundCephalopod(HybridAquaticEntityTypes.VAMPIRE_SQUID, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 2, 1, 1)
         addUndergroundCephalopod(HybridAquaticEntityTypes.NAUTILUS, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 2)
         addUndergroundCephalopod(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 1, 1, 1)
         addUndergroundCephalopod(HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 2, 1, 1)
-        //#endregion
-
-        //#region Jellyfish
         addJelly(HybridAquaticEntityTypes.BARREL_JELLYFISH, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 5, 1, 2)
         addJelly(HybridAquaticEntityTypes.MOON_JELLYFISH, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.SANDY_BEACHES), 5, 3, 5)
         addJelly(HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS), 5, 1, 3)
@@ -97,9 +83,6 @@ class EntitySpawnConfigGenerator {
         addUndergroundJelly(HybridAquaticEntityTypes.COSMIC_JELLYFISH, listOf(BiomeTags.IS_DEEP_OCEAN), 2, 1, 1)
         addUndergroundJelly(HybridAquaticEntityTypes.FIREWORK_JELLYFISH, listOf(BiomeTags.IS_DEEP_OCEAN), 2, 1, 1)
         addJelly(HybridAquaticEntityTypes.MAUVE_STINGER, listOf(BiomeTags.IS_DEEP_OCEAN), 3, 1, 1)
-        //#endregion
-
-        //#region Sharks
         addShark(HybridAquaticEntityTypes.GREAT_WHITE_SHARK, listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 1, 1, 1)
         addShark(HybridAquaticEntityTypes.TIGER_SHARK, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS), 2, 1, 2)
         addShark(HybridAquaticEntityTypes.HAMMERHEAD_SHARK, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS), 3, 1, 3)
@@ -107,14 +90,8 @@ class EntitySpawnConfigGenerator {
         addShark(HybridAquaticEntityTypes.BULL_SHARK, listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 2, 1, 1)
         addShark(HybridAquaticEntityTypes.WHALE_SHARK, listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 1, 1, 1)
         addShark(HybridAquaticEntityTypes.BASKING_SHARK, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 1, 1, 1)
-        //#endregion
-
-        //#region Deep Sharks
         addUndergroundShark(HybridAquaticEntityTypes.FRILLED_SHARK, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 1)
         addUndergroundShark(HybridAquaticEntityTypes.LANTERN_SHARK, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 2)
-        //#endregion
-
-        //#region Crustaceans
         addCrustacean(HybridAquaticEntityTypes.DUNGENESS_CRAB, listOf(HybridAquaticBiomeTags.SANDY_BEACHES), 5, 2, 3)
         addCrustacean(HybridAquaticEntityTypes.FIDDLER_CRAB, listOf(HybridAquaticBiomeTags.SWAMP, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.MARSHES), 5, 2, 3)
         addCrustacean(HybridAquaticEntityTypes.GHOST_CRAB, listOf(HybridAquaticBiomeTags.SANDY_BEACHES), 5, 1, 3)
@@ -128,20 +105,13 @@ class EntitySpawnConfigGenerator {
         addCrustacean(HybridAquaticEntityTypes.CRAYFISH, listOf(HybridAquaticBiomeTags.RIVERS), 5, 2, 3)
         addCrustacean(HybridAquaticEntityTypes.COCONUT_CRAB, listOf(HybridAquaticBiomeTags.SANDY_BEACHES), 3, 1, 2)
         addCrustacean(HybridAquaticEntityTypes.HERMIT_CRAB, listOf(HybridAquaticBiomeTags.SANDY_BEACHES, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS), 3, 1, 2)
-        //#endregion
-
-        //#region Deep Crustaceans
         addUndergroundCrustacean(HybridAquaticEntityTypes.YETI_CRAB, listOf(HybridAquaticBiomeTags.DEEP_COLD_OCEANS, HybridAquaticBiomeTags.DEEP_ARCTIC_OCEANS), 3, 2, 2)
         addUndergroundCrustacean(HybridAquaticEntityTypes.GIANT_ISOPOD, listOf(HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 3, 1, 3)
         addUndergroundCrustacean(HybridAquaticEntityTypes.SPIDER_CRAB, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS), 3, 1, 2)
-        //#endregion
-
-        //#region Critters
         addCritter(HybridAquaticEntityTypes.NUDIBRANCH, listOf(HybridAquaticBiomeTags.ARCTIC_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 3, 1, 2)
         addCritter(HybridAquaticEntityTypes.STARFISH, listOf(HybridAquaticBiomeTags.ARCTIC_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.SANDY_BEACHES), 5, 1, 3)
         addCritter(HybridAquaticEntityTypes.SEA_CUCUMBER, listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN), 3, 1, 3)
         addCritter(HybridAquaticEntityTypes.SEA_URCHIN, listOf(HybridAquaticBiomeTags.ARCTIC_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 5, 1, 3)
-        //#endregion
     }
 
     private fun addFish(

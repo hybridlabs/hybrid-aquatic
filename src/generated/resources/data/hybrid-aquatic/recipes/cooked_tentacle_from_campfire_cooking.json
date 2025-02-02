@@ -6,5 +6,7 @@
   "ingredient": {
     "item": "hybrid-aquatic:raw_tentacle"
   },
-  "result": "hybrid-aquatic:cooked_tentacle"
+  "result": {
+    "id": "hybrid-aquatic:cooked_tentacle"
+  }
 }

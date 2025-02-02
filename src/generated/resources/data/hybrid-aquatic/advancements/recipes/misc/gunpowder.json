@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:sulfur"
-            ]
+            "items": "hybrid-aquatic:sulfur"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_sulfur",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_sulfur"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:gunpowder"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

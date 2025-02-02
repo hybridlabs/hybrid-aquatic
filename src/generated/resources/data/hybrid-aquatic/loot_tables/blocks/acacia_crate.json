@@ -13,11 +13,11 @@
                 {
                   "condition": "minecraft:match_tool",
                   "predicate": {
-                    "tag": "minecraft:axes"
+                    "items": "#minecraft:axes"
                   }
                 }
               ],
-              "name": "hybrid-aquatic:gameplay/acacia_crate_treasure"
+              "value": "hybrid-aquatic:gameplay/acacia_crate_treasure"
             },
             {
               "type": "minecraft:item",

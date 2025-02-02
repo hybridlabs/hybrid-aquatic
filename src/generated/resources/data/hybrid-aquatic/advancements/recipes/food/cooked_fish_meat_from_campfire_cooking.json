@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:raw_fish_meat"
-            ]
+            "items": "hybrid-aquatic:raw_fish_meat"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_raw_fish_meat",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_raw_fish_meat"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:cooked_fish_meat_from_campfire_cooking"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

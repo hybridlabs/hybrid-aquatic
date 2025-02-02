@@ -4,11 +4,10 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
 
 class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: World) :
     HybridAquaticCritterEntity(entityType, world, variants = hashMapOf(
@@ -31,10 +30,6 @@ class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: Worl
         "baba" to CritterVariant.biomeVariant("baba", listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF),
             ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)),
         )) {
-
-    public override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/nudibranch")
-    }
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {

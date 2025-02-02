@@ -1,9 +1,13 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.loot.LootTable
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
@@ -21,12 +25,12 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
             )
     ) {
 
-    public override fun getLootTableId(): Identifier {
+    public override fun getLootTableId(): RegistryKey<LootTable> {
         return when (this.variant?.variantName) {
-            "american" -> Identifier("hybrid-aquatic", "gameplay/clawed_lobster")
-            "california_spiny" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
-            "ornate_spiny" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
-            "regal_slipper" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
+            "american" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/clawed_lobster"))
+            "california_spiny" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/clawless_lobster"))
+            "ornate_spiny" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/clawless_lobster"))
+            "regal_slipper" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/clawless_lobster"))
             else -> super.getLootTableId()
         }
     }

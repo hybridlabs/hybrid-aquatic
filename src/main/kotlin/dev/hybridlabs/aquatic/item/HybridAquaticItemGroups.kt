@@ -1,11 +1,9 @@
-@file:Suppress("UnstableApiUsage")
-
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
@@ -15,7 +13,6 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.BlockPos
 
 object  HybridAquaticItemGroups {
     val BLOCKS = register("blocks", FabricItemGroup.builder()
@@ -24,9 +21,8 @@ object  HybridAquaticItemGroups {
         .entries { _, entries ->
             // message in a bottle variants
             MessageInABottleBlock.Variant.entries.forEach { variant ->
-                val blockEntity = MessageInABottleBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.defaultState)
-                    .also { blockEntity -> blockEntity.variant = variant }
-                val stack = MessageInABottleBlock.createItemStack(blockEntity)
+                val stack = ItemStack(HybridAquaticItems.MESSAGE_IN_A_BOTTLE)
+                stack.set(HybridAquaticComponentTypes.BOTTLE_VARIANT, variant)
                 entries.add(stack)
             }
 
@@ -167,7 +163,7 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.BLUE_TANG)
             entries.add(HybridAquaticItems.YELLOW_TANG)
             entries.add(HybridAquaticItems.POWDER_BLUE_TANG)
-            entries.add(HybridAquaticItems.UNICORNFISH)
+            entries.add(HybridAquaticItems.UNICORN_FISH)
             entries.add(HybridAquaticItems.SURGEONFISH_SOHAL)
             entries.add(HybridAquaticItems.SURGEONFISH_ORANGESHOULDER)
             entries.add(HybridAquaticItems.SURGEONFISH_LINED)

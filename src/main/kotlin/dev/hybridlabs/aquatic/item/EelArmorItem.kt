@@ -3,26 +3,22 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.client.GeoRenderProviderStorage
 import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterial
+import net.minecraft.registry.entry.RegistryEntry
 import software.bernie.geckolib.animatable.GeoItem
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.animatable.client.GeoRenderProvider
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
-import java.util.function.Supplier
 
-class EelArmorItem(material: ArmorMaterial, type: Type, settings: Settings) : ArmorItem(material, type, settings), GeoItem {
+class EelArmorItem(material: RegistryEntry<ArmorMaterial>, type: Type, settings: Settings) : ArmorItem(material, type, settings), GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
-    private val renderProvider: Supplier<Any> = GeoItem.makeRenderer(this)
 
-    override fun createRenderer(consumer: Consumer<Any>) {
+    override fun createGeoRenderer(consumer: Consumer<GeoRenderProvider>) {
         consumer.accept(GeoRenderProviderStorage.eelArmorRenderProvider.invoke())
     }
 
     override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {
-    }
-
-    override fun getRenderProvider(): Supplier<Any> {
-        return renderProvider
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {

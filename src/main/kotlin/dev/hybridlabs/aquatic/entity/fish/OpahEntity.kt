@@ -47,7 +47,6 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: World) :
         private val minDistance: Float,
         private val maxDistance: Float
     ) : Goal() {
-
         private lateinit var target: TunaEntity
 
         override fun canStart(): Boolean {

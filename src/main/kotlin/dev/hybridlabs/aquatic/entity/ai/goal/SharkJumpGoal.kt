@@ -9,7 +9,6 @@ import net.minecraft.util.math.MathHelper
 import kotlin.math.abs
 import kotlin.math.atan2
 
-@Suppress("DEPRECATION")
 class SharkJumpGoal(private val shark: HybridAquaticSharkEntity, chance: Int) : DiveJumpingGoal() {
     private val chance: Int = toGoalTicks(chance)
     private var inWater = false
@@ -93,4 +92,3 @@ class SharkJumpGoal(private val shark: HybridAquaticSharkEntity, chance: Int) : 
         private val OFFSET_MULTIPLIERS = intArrayOf(0, 1, 4, 5, 6, 7)
     }
 }
-

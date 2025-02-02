@@ -24,7 +24,6 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider
 import kotlin.math.max
 import kotlin.math.sqrt
 
-@Suppress("NAME_SHADOWING", "SameParameterValue")
 class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatchFeatureConfig>(codec) {
     override fun generate(context: FeatureContext<VentPatchFeatureConfig>): Boolean {
         var generated = false
@@ -118,7 +117,6 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
                     world.getLocalDifficulty(candidatePos),
                     SpawnReason.STRUCTURE,
                     null,
-                    null
                 )
                 world.spawnEntity(yetiCrabEntity)
             }

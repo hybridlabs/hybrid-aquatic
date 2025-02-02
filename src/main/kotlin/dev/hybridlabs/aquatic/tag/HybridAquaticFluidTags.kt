@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 package dev.hybridlabs.aquatic.tag
 
 import dev.hybridlabs.aquatic.HybridAquatic
@@ -17,6 +15,7 @@ object HybridAquaticFluidTags {
     }
 
     private fun createConventional(id: String): TagKey<Fluid> {
-        return TagRegistration.FLUID_TAG_REGISTRATION.registerCommon(id)
+        @Suppress("UnstableApiUsage")
+        return TagRegistration.FLUID_TAG_REGISTRATION.registerC(id)
     }
 }

@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:lobster_claw"
-            ]
+            "items": "hybrid-aquatic:lobster_claw"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_lobster_claw",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_lobster_claw"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:raw_lobster"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

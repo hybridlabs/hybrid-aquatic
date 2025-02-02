@@ -9,10 +9,8 @@
     },
     "count": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 3,
-        "min_inclusive": 2
-      }
+      "max_inclusive": 3,
+      "min_inclusive": 2
     },
     "spread_radius": 3,
     "vent_block": {
@@ -37,17 +35,13 @@
     },
     "worm_count": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 3,
-        "min_inclusive": 1
-      }
+      "max_inclusive": 3,
+      "min_inclusive": 1
     },
     "worm_count_per_block": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 4,
-        "min_inclusive": 1
-      }
+      "max_inclusive": 4,
+      "min_inclusive": 1
     },
     "worm_spread_radius": 4
   }

@@ -1,10 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.loot.LootTable
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
@@ -29,15 +33,15 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Wo
         )
     ) {
 
-    public override fun getLootTableId(): Identifier {
+    public override fun getLootTableId(): RegistryKey<LootTable> {
         return when (this.variant?.variantName) {
-            "blue_tang" -> Identifier("hybrid-aquatic", "gameplay/surgeonfish_blue_tang")
-            "yellow_tang" -> Identifier("hybrid-aquatic", "gameplay/surgeonfish_yellow_tang")
-            "powder_blue_tang" -> Identifier("hybrid-aquatic", "gameplay/surgeonfish_powder_blue_tang")
-            "sohal" -> Identifier("hybrid-aquatic", "gameplay/surgeonfish_sohal")
-            "orangeshoulder" -> Identifier("hybrid-aquatic", "gameplay/surgeonfish_orangeshoulder")
-            "lined" -> Identifier("hybrid-aquatic", "gameplay/surgeonfish_lined")
-            "unicornfish" -> Identifier("hybrid-aquatic", "gameplay/surgeonfish_unicornfish")
+            "blue_tang" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/surgeonfish_blue_tang"))
+            "yellow_tang" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/surgeonfish_yellow_tang"))
+            "powder_blue_tang" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/surgeonfish_powder_blue_tang"))
+            "sohal" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/surgeonfish_sohal"))
+            "orangeshoulder" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/surgeonfish_orangeshoulder"))
+            "lined" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/surgeonfish_lined"))
+            "unicornfish" -> RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier(HybridAquatic.MOD_ID, "gameplay/surgeonfish_unicornfish"))
             else -> super.getLootTableId()
         }
     }

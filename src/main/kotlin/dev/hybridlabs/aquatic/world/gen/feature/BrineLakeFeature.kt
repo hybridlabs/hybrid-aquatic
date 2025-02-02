@@ -7,7 +7,6 @@ import net.minecraft.registry.tag.BlockTags
 import net.minecraft.world.gen.feature.Feature
 import net.minecraft.world.gen.feature.util.FeatureContext
 
-@Suppress("DEPRECATION", "NAME_SHADOWING")
 class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLakeFeatureConfig>(codec) {
     override fun generate(context: FeatureContext<BrineLakeFeatureConfig>): Boolean {
         val random = context.random

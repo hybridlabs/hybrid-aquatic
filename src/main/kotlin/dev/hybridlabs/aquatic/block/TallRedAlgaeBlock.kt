@@ -1,7 +1,12 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.FluidFillable
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.TallPlantBlock
 import net.minecraft.block.enums.DoubleBlockHalf
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -16,8 +21,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("OVERRIDE_DEPRECATION")
-class TallRedAlgaeBlock(settings: Settings?) : TallPlantBlock(settings), FluidFillable {
+class TallRedAlgaeBlock(settings: Settings) : TallPlantBlock(settings), FluidFillable {
     override fun getOutlineShape(
         state: BlockState,
         world: BlockView,
@@ -31,7 +35,7 @@ class TallRedAlgaeBlock(settings: Settings?) : TallPlantBlock(settings), FluidFi
         return floor.isSideSolidFullSquare(world, pos, Direction.UP) && !floor.isOf(Blocks.MAGMA_BLOCK)
     }
 
-    override fun getPickStack(world: BlockView, pos: BlockPos, state: BlockState): ItemStack {
+    override fun getPickStack(world: WorldView, pos: BlockPos, state: BlockState): ItemStack {
         return ItemStack(HybridAquaticBlocks.RED_ALGAE)
     }
 
@@ -61,7 +65,7 @@ class TallRedAlgaeBlock(settings: Settings?) : TallPlantBlock(settings), FluidFi
         return Fluids.WATER.getStill(false)
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(player: PlayerEntity?, world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
         return false
     }
 

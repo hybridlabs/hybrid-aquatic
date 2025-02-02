@@ -1,9 +1,7 @@
-@file:Suppress("UnstableApiUsage")
-
 package dev.hybridlabs.aquatic.tag
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import net.fabricmc.fabric.impl.tag.convention.TagRegistration
+import net.fabricmc.fabric.impl.tag.convention.v2.TagRegistration
 import net.minecraft.item.Item
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
@@ -29,11 +27,21 @@ object HybridAquaticItemTags {
     val FOOD_POISONING = createConventional("foods/food_poisoning")
     val ARMORS = createConventional("armors")
 
+    val REPAIRS_DIVING_HELMET = create("repairs_diving_helmet")
+    val REPAIRS_NAUTILUS_ARMOR = create("repairs_nautilus_armor")
+    val REPAIRS_MANGLERFISH_ARMOR = create("repairs_manglerfish_armor")
+    val REPAIRS_EEL_SCARF = create("repairs_eel_scarf")
+    val REPAIRS_MOON_JELLYFISH_HAT = create("repairs_moon_jellyfish_hat")
+
+    val SEASHELL_TOOL_MATERIALS = create("seashell_tool_materials")
+    val CORAL_TOOL_MATERIALS = create("coral_tool_materials")
+
     private fun create(id: String): TagKey<Item> {
         return TagKey.of(RegistryKeys.ITEM, Identifier(HybridAquatic.MOD_ID, id))
     }
 
+    @Suppress("UnstableApiUsage")
     private fun createConventional(id: String): TagKey<Item> {
-        return TagRegistration.ITEM_TAG_REGISTRATION.registerCommon(id)
+        return TagRegistration.ITEM_TAG.registerC(id)
     }
 }

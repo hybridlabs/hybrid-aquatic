@@ -4,7 +4,10 @@ import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
 import net.minecraft.entity.ai.goal.ActiveTargetGoal
@@ -40,15 +43,14 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.EasingType
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.EasingType
 import software.bernie.geckolib.util.GeckoLibUtil
 
-@Suppress("LeakingThis", "UNUSED_PARAMETER")
 open class HybridAquaticCephalopodEntity(
     type: EntityType<out HybridAquaticCephalopodEntity>,
     world: World,
@@ -69,22 +71,21 @@ open class HybridAquaticCephalopodEntity(
             ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { hunger <= 1200 && it.type.isIn(prey) })
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(CEPHALOPOD_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(HUNGER, MAX_HUNGER)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(MOISTNESS, getMaxMoistness())
+        builder.add(CEPHALOPOD_SIZE, 0)
+        builder.add(ATTEMPT_ATTACK, false)
+        builder.add(HUNGER, MAX_HUNGER)
+        builder.add(VARIANT, "")
+        builder.add(VARIANT_DATA, NbtCompound())
     }
 
     override fun initialize(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = getMaxMoistness()
 
@@ -94,7 +95,7 @@ open class HybridAquaticCephalopodEntity(
 
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
         this.pitch = 0.0f
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun tick() {
@@ -219,10 +220,6 @@ open class HybridAquaticCephalopodEntity(
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
-    override fun getActiveEyeHeight(pose: EntityPose?, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
-    }
-
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
         return !fromFishingNet && !hasCustomName()
     }
@@ -266,7 +263,6 @@ open class HybridAquaticCephalopodEntity(
         return SwimNavigation(this, world)
     }
 
-    //region properties
 
     private var moistness: Int
         get() = dataTracker.get(MOISTNESS)
@@ -311,8 +307,6 @@ open class HybridAquaticCephalopodEntity(
             variants
         }
 
-    // endregion
-
     override fun getMaxAir(): Int {
         return 600
     }
@@ -355,15 +349,13 @@ open class HybridAquaticCephalopodEntity(
 
     private var fromFishingNet = false
 
-    internal class CephalopodAttackGoal(private val cephalopod: HybridAquaticCephalopodEntity) :
-        MeleeAttackGoal(cephalopod, 1.0, true) {
+    internal class CephalopodAttackGoal(private val cephalopod: HybridAquaticCephalopodEntity) : MeleeAttackGoal(cephalopod, 1.0, true) {
         override fun canStart(): Boolean {
             return !cephalopod.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
+        override fun attack(target: LivingEntity) {
+            if (canAttack(target)) {
                 resetCooldown()
                 mob.tryAttack(target)
                 cephalopod.isSprinting = true
@@ -373,10 +365,6 @@ open class HybridAquaticCephalopodEntity(
                     cephalopod.hunger = HybridAquaticSharkEntity.MAX_HUNGER
                 cephalopod.health = cephalopod.maxHealth
             }
-        }
-
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (1.25f + entity.width).toDouble()
         }
 
         override fun start() {
@@ -411,8 +399,7 @@ open class HybridAquaticCephalopodEntity(
         const val VARIANT_DATA_KEY = "VariantData"
         const val CEPHALOPOD_SIZE_KEY = "CephalopodSize"
 
-        @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-        fun canSpawn(
+                fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
             reason: SpawnReason,
@@ -430,8 +417,7 @@ open class HybridAquaticCephalopodEntity(
                     !isSpawnDark(world, pos, random)
         }
 
-        @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-        fun canUndergroundSpawn(
+                fun canUndergroundSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
             reason: SpawnReason,
@@ -453,8 +439,7 @@ open class HybridAquaticCephalopodEntity(
         }
     }
 
-    @Suppress("UNUSED")
-    data class CephalopodVariant(
+        data class CephalopodVariant(
         var variantName: String,
         val spawnCondition: (WorldAccess, SpawnReason, BlockPos, Random) -> Boolean,
         var ignore: List<Ignore> = emptyList()

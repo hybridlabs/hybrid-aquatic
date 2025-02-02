@@ -1,7 +1,7 @@
 //file:noinspection ALL
 
 plugins {
-    id "fabric-loom" version "1.6-SNAPSHOT"
+    id "fabric-loom" version "1.9-SNAPSHOT"
     id "maven-publish"
     id "org.jetbrains.kotlin.jvm"
 }
@@ -27,11 +27,6 @@ repositories {
     maven {
         name = "Geckolib"
         url  = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
-    }
-    
-    maven {
-        name = "JamiesWhiteShirt"
-        url  = "https://maven.jamieswhiteshirt.com/libs-release/"
     }
     
     maven {
@@ -69,8 +64,6 @@ dependencies {
 
     modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
     modRuntimeOnly "maven.modrinth:carpet:$carpet_version"
-
-    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")
 }
 
 loom {
@@ -96,12 +89,12 @@ processResources {
 
 java {
     withSourcesJar()
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 jar {

@@ -6,7 +6,6 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
 class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) :
@@ -27,11 +26,6 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) :
             HybridAquaticEntityTags.SHARK
         )
     ) {
-
-    public override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/sunfish")
-    }
-
     override fun getLimitPerChunk(): Int {
         return 2
     }

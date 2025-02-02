@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:copper_ingot"
-            ]
+            "items": "minecraft:copper_ingot"
           }
         ]
       },
@@ -17,9 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:glass"
-            ]
+            "items": "minecraft:glass"
           }
         ]
       },
@@ -29,9 +25,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:glass_pane"
-            ]
+            "items": "minecraft:glass_pane"
           }
         ]
       },
@@ -46,16 +40,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_copper",
       "has_glass_pane",
-      "has_glass",
-      "has_the_recipe"
+      "has_glass"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:diving_helmet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

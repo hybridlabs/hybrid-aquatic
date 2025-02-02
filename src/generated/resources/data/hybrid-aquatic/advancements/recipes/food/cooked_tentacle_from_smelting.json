@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:raw_tentacle"
-            ]
+            "items": "hybrid-aquatic:raw_tentacle"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_raw_tentacle",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_raw_tentacle"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:cooked_tentacle_from_smelting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

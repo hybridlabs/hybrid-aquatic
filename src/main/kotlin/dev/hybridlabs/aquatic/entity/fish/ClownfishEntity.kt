@@ -5,7 +5,6 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
 class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World) :
@@ -36,10 +35,6 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
 
     override fun getLimitPerChunk(): Int {
         return 2
-    }
-
-    public override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/clownfish")
     }
 
     companion object {

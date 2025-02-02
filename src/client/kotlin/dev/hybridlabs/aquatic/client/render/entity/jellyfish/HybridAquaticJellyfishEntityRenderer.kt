@@ -10,7 +10,6 @@ import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
-@Suppress("LeakingThis")
 open class HybridAquaticJellyfishEntityRenderer<T: HybridAquaticJellyfishEntity>(context: EntityRendererFactory.Context, model: GeoModel<T>, private var variableSize: Boolean = false, canGlow: Boolean = false): GeoEntityRenderer<T>(context, model) {
 
     init {

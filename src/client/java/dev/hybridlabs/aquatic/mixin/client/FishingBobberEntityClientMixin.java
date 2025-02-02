@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.network.PacketByteBuf;
@@ -25,6 +24,6 @@ public abstract class FishingBobberEntityClientMixin {
     
     Identifier packetId = HybridAquaticNetworking.INSTANCE.getFISHING_BOBBER_LURE();
     
-    if(ClientPlayNetworking.canSend(packetId)) ClientPlayNetworking.send(packetId, packetData);
+    // if(ClientPlayNetworking.canSend(packetId)) ClientPlayNetworking.send(packetId, packetData); TODO
   }
 }

@@ -97,8 +97,6 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
         }
         // Gives Water Breathing/Clarity if player has Diving Helmet equipped
         updateDivingHelmet();
-        // Allows player to walk in the water without jumping
-        updateDivingBoots();
         // Gives Resistance and Slowness if player has Turtle chestplate equipped
         updateTurtleChestplate();
         // Repairs coral tools in the water
@@ -116,18 +114,6 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
             } else {
                 player.addStatusEffect(new StatusEffectInstance(HybridAquaticStatusEffects.INSTANCE.getCLARITY(), 600, 0, false, false, false));
             }
-        }
-    }
-
-    @Unique
-    private void updateDivingBoots() {
-        var player = (PlayerEntity)(Object)this;
-        ItemStack itemStack = player.getEquippedStack(EquipmentSlot.FEET);
-        isWearingDivingBoots = itemStack.isOf(HybridAquaticItems.INSTANCE.getDIVING_BOOTS());
-        if (isWearingDivingBoots && player.isSubmergedIn(FluidTags.WATER)) {
-            player.setStepHeight(1.0f);
-        } else {
-            player.setStepHeight(0.6f);
         }
     }
 

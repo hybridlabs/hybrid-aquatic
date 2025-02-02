@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:driftwood_log"
-            ]
+            "items": "hybrid-aquatic:driftwood_log"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_log",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:driftwood_wood"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

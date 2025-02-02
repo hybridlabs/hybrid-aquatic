@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
@@ -47,9 +46,9 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
     var inflateTicks = 0
     var deflateTicks = 0
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(PUFF_STATE, NOT_PUFFED)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(PUFF_STATE, NOT_PUFFED)
     }
 
     fun getPuffState(): Int {
@@ -114,7 +113,6 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
 
     override fun damage(source: DamageSource?, amount: Float): Boolean {
         if (super.damage(source, amount)) {
-
             val attacker = source?.attacker
             if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
                 attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 1))
@@ -170,10 +168,9 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
 
-        private val PUFF_STATE: TrackedData<Int> =
-            DataTracker.registerData(ToadfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        private val PUFF_STATE: TrackedData<Int> = DataTracker.registerData(ToadfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         private val BLOW_UP_FILTER: Predicate<LivingEntity> = Predicate { entity ->
-            if (entity is PlayerEntity && entity.isCreative) false else entity.group != EntityGroup.AQUATIC
+            if (entity is PlayerEntity && entity.isCreative) false else !entity.canBreatheInWater()
         }
         private val BLOW_UP_TARGET_PREDICATE: TargetPredicate =
             TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility()

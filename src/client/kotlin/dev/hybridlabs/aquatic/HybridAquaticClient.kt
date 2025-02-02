@@ -1,5 +1,3 @@
-@file:Suppress("UNUSED_PARAMETER")
-
 package dev.hybridlabs.aquatic
 
 import com.mojang.brigadier.CommandDispatcher
@@ -10,7 +8,12 @@ import dev.hybridlabs.aquatic.client.command.RandomFishCommand
 import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
-import dev.hybridlabs.aquatic.client.render.armor.*
+import dev.hybridlabs.aquatic.client.render.armor.DivingArmorRenderer
+import dev.hybridlabs.aquatic.client.render.armor.EelArmorRenderer
+import dev.hybridlabs.aquatic.client.render.armor.ManglerfishArmorRenderer
+import dev.hybridlabs.aquatic.client.render.armor.MoonJellyfishArmorRenderer
+import dev.hybridlabs.aquatic.client.render.armor.SeashellArmorRenderer
+import dev.hybridlabs.aquatic.client.render.armor.TurtleArmorRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.BuoyBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
@@ -40,7 +43,7 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
-import software.bernie.geckolib.animatable.client.RenderProvider
+import software.bernie.geckolib.animatable.client.GeoRenderProvider
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 
 object HybridAquaticClient : ClientModInitializer {
@@ -80,17 +83,17 @@ object HybridAquaticClient : ClientModInitializer {
         GeoRenderProviderStorage.moonjellyfishArmorRenderProvider = createBasicRenderProvider(::MoonJellyfishArmorRenderer)
     }
 
-    private fun createBasicRenderProvider(rendererProvider: () -> GeoArmorRenderer<*>): () -> RenderProvider {
+    private fun createBasicRenderProvider(rendererProvider: () -> GeoArmorRenderer<*>): () -> GeoRenderProvider {
         return {
-            object : RenderProvider {
+            object : GeoRenderProvider {
                 private val renderer: GeoArmorRenderer<*> by lazy(rendererProvider)
 
-                override fun getHumanoidArmorModel(
-                    livingEntity: LivingEntity,
+                override fun <T : LivingEntity> getGeoArmorRenderer(
+                    livingEntity: T?,
                     itemStack: ItemStack,
-                    equipmentSlot: EquipmentSlot,
-                    original: BipedEntityModel<LivingEntity>
-                ): BipedEntityModel<LivingEntity> {
+                    equipmentSlot: EquipmentSlot?,
+                    original: BipedEntityModel<T>?
+                ): BipedEntityModel<*> {
                     renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original)
                     return renderer
                 }

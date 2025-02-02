@@ -8,7 +8,6 @@ import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
-@Suppress("LeakingThis")
 open class HybridAquaticCephalopodEntityRenderer<T : HybridAquaticCephalopodEntity>(
     context: EntityRendererFactory.Context,
     model: GeoModel<T>,

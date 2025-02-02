@@ -13,31 +13,25 @@
                 {
                   "condition": "minecraft:match_tool",
                   "predicate": {
-                    "enchantments": [
-                      {
-                        "enchantment": "minecraft:silk_touch",
-                        "levels": {
-                          "min": 1
+                    "predicates": {
+                      "minecraft:enchantments": [
+                        {
+                          "enchantment": "minecraft:silk_touch",
+                          "levels": {
+                            "min": 1
+                          }
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 }
               ],
               "functions": [
                 {
-                  "function": "minecraft:copy_nbt",
-                  "ops": [
-                    {
-                      "op": "replace",
-                      "source": "variant",
-                      "target": "BlockEntityTag.variant"
-                    },
-                    {
-                      "op": "replace",
-                      "source": "message",
-                      "target": "BlockEntityTag.message"
-                    }
+                  "function": "minecraft:copy_components",
+                  "include": [
+                    "hybrid-aquatic:stored_bottle_message",
+                    "hybrid-aquatic:bottle_variant"
                   ],
                   "source": "block_entity"
                 }
@@ -48,13 +42,9 @@
               "type": "minecraft:item",
               "functions": [
                 {
-                  "function": "minecraft:copy_nbt",
-                  "ops": [
-                    {
-                      "op": "replace",
-                      "source": "message.tag.sea_message",
-                      "target": "sea_message"
-                    }
+                  "function": "minecraft:copy_components",
+                  "include": [
+                    "hybrid-aquatic:sea_message"
                   ],
                   "source": "block_entity"
                 }

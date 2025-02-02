@@ -1,49 +1,68 @@
-@file:Suppress("unused", "SameParameterValue")
-
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.fluid.HybridAquaticFluids
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.Block
+import net.minecraft.component.type.AttributeModifierSlot
+import net.minecraft.component.type.AttributeModifiersComponent
+import net.minecraft.component.type.FoodComponent
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.attribute.EntityAttributeModifier
+import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.MobEntity
-import net.minecraft.item.*
+import net.minecraft.item.ArmorItem
+import net.minecraft.item.ArmorMaterials
+import net.minecraft.item.AxeItem
+import net.minecraft.item.BlockItem
+import net.minecraft.item.BucketItem
+import net.minecraft.item.HoeItem
+import net.minecraft.item.Item
+import net.minecraft.item.PickaxeItem
+import net.minecraft.item.ShovelItem
+import net.minecraft.item.SpawnEggItem
+import net.minecraft.item.SwordItem
+import net.minecraft.item.VerticallyAttachableBlockItem
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
+import java.util.UUID
 
 object HybridAquaticItems {
-
-    //#region Armor
     val DIVING_HELMET: Item = register(
         "diving_helmet",
-        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.HELMET, FabricItemSettings().maxCount(1))
+        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.HELMET, Item.Settings().maxCount(1))
     )
 
     val DIVING_SUIT: Item = register(
         "diving_suit",
-        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.CHESTPLATE, FabricItemSettings().maxCount(1))
+        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.CHESTPLATE, Item.Settings().maxCount(1))
     )
 
     val DIVING_LEGGINGS: Item = register(
         "diving_leggings",
-        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.LEGGINGS, FabricItemSettings().maxCount(1))
+        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.LEGGINGS, Item.Settings().maxCount(1))
     )
 
     val DIVING_BOOTS: Item = register(
         "diving_boots",
-        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.BOOTS, FabricItemSettings().maxCount(1))
+        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.BOOTS, Item.Settings().maxCount(1).attributeModifiers(
+            AttributeModifiersComponent(
+                listOf(
+                    AttributeModifiersComponent.Entry(EntityAttributes.GENERIC_STEP_HEIGHT, EntityAttributeModifier(UUID.fromString("f235bb3e-2578-4b0a-8dfa-08cf6682da27"), "Step height modifier", 0.4, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE), AttributeModifierSlot.MAINHAND),
+                ),
+                true
+            )
+        ))
     )
 
     val NAUTILUS_HELMET: Item = register(
         "nautilus_helmet",
-        SeashellArmorItem(HybridAquaticArmorMaterials.SEASHELL, ArmorItem.Type.HELMET, FabricItemSettings().maxCount(1))
+        SeashellArmorItem(HybridAquaticArmorMaterials.SEASHELL, ArmorItem.Type.HELMET, Item.Settings().maxCount(1))
     )
 
     val NAUTILUS_PAULDRONS: Item = register(
@@ -51,13 +70,13 @@ object HybridAquaticItems {
         SeashellArmorItem(
             HybridAquaticArmorMaterials.SEASHELL,
             ArmorItem.Type.CHESTPLATE,
-            FabricItemSettings().maxCount(1)
+            Item.Settings().maxCount(1)
         )
     )
 
     val TURTLE_CHESTPLATE: Item = register(
         "turtle_chestplate",
-        TurtleArmorItem(HybridAquaticArmorMaterials.TURTLE, ArmorItem.Type.CHESTPLATE, FabricItemSettings().maxCount(1))
+        TurtleArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.CHESTPLATE, Item.Settings().maxCount(1))
     )
 
     val MANGLERFISH_LURE: Item = register(
@@ -65,7 +84,7 @@ object HybridAquaticItems {
         ManglerfishArmorItem(
             HybridAquaticArmorMaterials.MANGLERFISH,
             ArmorItem.Type.HELMET,
-            FabricItemSettings().maxCount(1)
+            Item.Settings().maxCount(1)
         )
     )
 
@@ -74,13 +93,13 @@ object HybridAquaticItems {
         ManglerfishArmorItem(
             HybridAquaticArmorMaterials.MANGLERFISH,
             ArmorItem.Type.CHESTPLATE,
-            FabricItemSettings().maxCount(1)
+            Item.Settings().maxCount(1)
         )
     )
 
     val EEL_SCARF: Item = register(
         "eel_scarf",
-        EelArmorItem(HybridAquaticArmorMaterials.EEL, ArmorItem.Type.CHESTPLATE, FabricItemSettings().maxCount(1))
+        EelArmorItem(HybridAquaticArmorMaterials.EEL, ArmorItem.Type.CHESTPLATE, Item.Settings().maxCount(1))
     )
 
     val MOON_JELLYFISH_HAT: Item = register(
@@ -88,18 +107,22 @@ object HybridAquaticItems {
         MoonJellyfishArmorItem(
             HybridAquaticArmorMaterials.MOONJELLYFISH,
             ArmorItem.Type.HELMET,
-            FabricItemSettings().maxCount(1)
+            Item.Settings().maxCount(1)
         )
     )
 
-    //#endregion
-
-    //#region Tools - Weapons - Hooks
-
-    val SEA_MESSAGE_BOOK = register("sea_message_book", SeaMessageBookItem(FabricItemSettings()))
-    val FISHING_NET = register("fishing_net", FishingNetItem(FabricItemSettings().maxCount(1)))
-    val BRINE_BUCKET = register("brine_bucket", BucketItem(HybridAquaticFluids.BRINE, FabricItemSettings().maxCount(1)))
-    val KARKINOS_CLAW = register("karkinos_claw", KarkinosClawItem(FabricItemSettings().maxCount(1)))
+    val SEA_MESSAGE_BOOK = register("sea_message_book", SeaMessageBookItem(Item.Settings()))
+    val FISHING_NET = register("fishing_net", FishingNetItem(Item.Settings().maxCount(1)))
+    val BRINE_BUCKET = register("brine_bucket", BucketItem(HybridAquaticFluids.BRINE, Item.Settings().maxCount(1)))
+    val KARKINOS_CLAW = register("karkinos_claw", Item(Item.Settings().maxCount(1).attributeModifiers(
+        AttributeModifiersComponent(
+            listOf(
+                AttributeModifiersComponent.Entry(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE, EntityAttributeModifier(UUID.fromString("592e9225-a554-42c9-9366-0fe5c53d9305"), "Reach modifier", 3.0, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE), AttributeModifierSlot.MAINHAND),
+                AttributeModifiersComponent.Entry(EntityAttributes.PLAYER_ENTITY_INTERACTION_RANGE, EntityAttributeModifier(UUID.fromString("592e9225-a554-42c9-9366-0fe5c53d9306"), "Reach modifier", 3.0, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE), AttributeModifierSlot.MAINHAND),
+            ),
+            true
+        )
+    )))
 
     val BARBED_HOOK = register("barbed_hook", HookItem(Item.Settings().maxDamage(16)))
     val GLOWING_HOOK = register("glowing_hook", HookItem(Item.Settings().maxDamage(16)))
@@ -110,98 +133,72 @@ object HybridAquaticItems {
     val SEASHELL_SPEAR = register(
         "seashell_spear", SwordItem(
             HybridAquaticToolMaterials.SEASHELL,
-            3,
-            -2.4f,
-            FabricItemSettings()
+            Item.Settings()
         )
     )
 
     val SEASHELL_PICKAXE = register(
         "seashell_pickaxe", PickaxeItem(
             HybridAquaticToolMaterials.SEASHELL,
-            1,
-            -2.8f,
-            FabricItemSettings()
+            Item.Settings()
         )
     )
 
     val SEASHELL_AXE = register(
         "seashell_axe", AxeItem(
             HybridAquaticToolMaterials.SEASHELL,
-            7F,
-            -3.2f,
-            FabricItemSettings()
+            Item.Settings()
         )
     )
 
     val SEASHELL_SHOVEL = register(
         "seashell_shovel", ShovelItem(
             HybridAquaticToolMaterials.SEASHELL,
-            1.5F,
-            -3.0f,
-            FabricItemSettings()
+            Item.Settings()
         )
     )
 
     val SEASHELL_HOE = register(
         "seashell_hoe", HoeItem(
             HybridAquaticToolMaterials.SEASHELL,
-            -1,
-            -2.0f,
-            FabricItemSettings()
+            Item.Settings()
         )
     )
 
     val CORAL_BLADE = register(
         "coral_blade", SwordItem(
             HybridAquaticToolMaterials.CORAL,
-            1,
-            3f,
-            FabricItemSettings()
+            Item.Settings()
         )
     )
 
     val CORAL_PICKAXE = register(
         "coral_pickaxe", PickaxeItem(
             HybridAquaticToolMaterials.CORAL,
-            1,
-            3f,
-            FabricItemSettings()
+            Item.Settings()
         )
     )
 
     val CORAL_AXE = register(
         "coral_axe", AxeItem(
             HybridAquaticToolMaterials.CORAL,
-            1F,
-            3f,
-            FabricItemSettings()
+            Item.Settings()
         )
     )
 
     val CORAL_SHOVEL = register(
         "coral_shovel", ShovelItem(
             HybridAquaticToolMaterials.CORAL,
-            1F,
-            3f,
-            FabricItemSettings()
+            Item.Settings()
         )
     )
 
     val CORAL_HOE = register(
         "coral_hoe", HoeItem(
             HybridAquaticToolMaterials.CORAL,
-            1,
-            3f,
-            FabricItemSettings()
+            Item.Settings()
         )
     )
-
-    //#endregion
-
-    //#region Blocks
-
-        //#region Nature Blocks
 
     val ANEMONE = registerBlockItem("anemone", HybridAquaticBlocks.ANEMONE)
     val STRAWBERRY_ANEMONE = registerBlockItem("strawberry_anemone", HybridAquaticBlocks.STRAWBERRY_ANEMONE)
@@ -215,8 +212,6 @@ object HybridAquaticItems {
     val HYDROTHERMAL_VENT = registerBlockItem("hydrothermal_vent", HybridAquaticBlocks.THERMAL_VENT)
     val TUBE_WORM = registerBlockItem("tube_worm", HybridAquaticBlocks.TUBE_WORM)
     val TUBE_SPONGE = registerBlockItem("tube_sponge", HybridAquaticBlocks.TUBE_SPONGE)
-
-            //#region Coral Blocks
 
     val BUTTON_CORAL_BLOCK = registerBlockItem("button_coral_block", HybridAquaticBlocks.BUTTON_CORAL_BLOCK)
     val DEAD_BUTTON_CORAL_BLOCK = registerBlockItem("dead_button_coral_block", HybridAquaticBlocks.DEAD_BUTTON_CORAL_BLOCK)
@@ -246,18 +241,10 @@ object HybridAquaticItems {
     val THORN_CORAL_FAN = registerVerticallyAttachable("thorn_coral_fan", HybridAquaticBlocks.THORN_CORAL_FAN, HybridAquaticBlocks.THORN_CORAL_WALL_FAN)
     val DEAD_THORN_CORAL_FAN = registerVerticallyAttachable("dead_thorn_coral_fan", HybridAquaticBlocks.DEAD_THORN_CORAL_FAN, HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN)
 
-            //#endregion
-
-        //#endregion
-
-        //#region Artificial Blocks
-
     val BUOY = registerPlaceableInWaterBlockItem("buoy", HybridAquaticBlocks.BUOY)
     val RAFT = registerPlaceableInWaterBlockItem("raft", HybridAquaticBlocks.RAFT)
     val GLOWSTICK = registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
-    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleItem(FabricItemSettings()))
-
-            //#region Plushies
+    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleItem(Item.Settings()))
 
     val BASKING_SHARK_PLUSHIE = registerBlockItem("basking_shark_plushie", HybridAquaticBlocks.BASKING_SHARK_PLUSHIE)
     val BULL_SHARK_PLUSHIE = registerBlockItem("bull_shark_plushie", HybridAquaticBlocks.BULL_SHARK_PLUSHIE)
@@ -267,10 +254,6 @@ object HybridAquaticItems {
     val THRESHER_SHARK_PLUSHIE = registerBlockItem("thresher_shark_plushie", HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE)
     val TIGER_SHARK_PLUSHIE = registerBlockItem("tiger_shark_plushie", HybridAquaticBlocks.TIGER_SHARK_PLUSHIE)
     val WHALE_SHARK_PLUSHIE = registerBlockItem("whale_shark_plushie", HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
-
-            //#endregion
-
-            //#region Crates
 
     val CRAB_POT = registerBlockItem("crab_pot", HybridAquaticBlocks.CRAB_POT)
     val HYBRID_CRATE = registerBlockItem("hybrid_crate", HybridAquaticBlocks.HYBRID_CRATE)
@@ -282,10 +265,6 @@ object HybridAquaticItems {
     val ACACIA_CRATE = registerBlockItem("acacia_crate", HybridAquaticBlocks.ACACIA_CRATE)
     val MANGROVE_CRATE = registerBlockItem("mangrove_crate", HybridAquaticBlocks.MANGROVE_CRATE)
     val CHERRY_CRATE = registerBlockItem("cherry_crate", HybridAquaticBlocks.CHERRY_CRATE)
-
-            //#endregion
-
-            //#region Wood Blocks
 
     val DRIFTWOOD_PLANKS = registerBlockItem("driftwood_planks", HybridAquaticBlocks.DRIFTWOOD_PLANKS)
     val DRIFTWOOD_LOG = registerBlockItem("driftwood_log", HybridAquaticBlocks.DRIFTWOOD_LOG)
@@ -301,45 +280,32 @@ object HybridAquaticItems {
     val DRIFTWOOD_PRESSURE_PLATE = registerBlockItem("driftwood_pressure_plate", HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE)
     val DRIFTWOOD_BUTTON = registerBlockItem("driftwood_button", HybridAquaticBlocks.DRIFTWOOD_BUTTON)
 
-            //#endregion
-
-        //#endregion
-
-    //#endregion
-
-    //#region Crafting Ingredients
-
-    val GLOW_SLIME = register("glow_slime", Item(FabricItemSettings()))
-    val SEA_URCHIN_SPINE = register("sea_urchin_spine", Item(FabricItemSettings()))
-    val SHARK_TOOTH = register("shark_tooth", Item(FabricItemSettings()))
-    val SULFUR = register("sulfur", Item(FabricItemSettings()))
-    val CORAL_CHUNK = register("coral_chunk", Item(FabricItemSettings()))
-    val PEARL = register("pearl", Item(FabricItemSettings()))
-    val BLACK_PEARL = register("black_pearl", Item(FabricItemSettings()))
-    val CUTTLEBONE = register("cuttlebone", Item(FabricItemSettings()))
-    val LOBSTER_CLAW = register("lobster_claw", Item(FabricItemSettings()))
-    val DUNGENESS_CRAB_CLAW = register("dungeness_crab_claw", Item(FabricItemSettings()))
-    val FIDDLER_CRAB_CLAW = register("fiddler_crab_claw", Item(FabricItemSettings()))
-    val VAMPIRE_CRAB_CLAW = register("vampire_crab_claw", Item(FabricItemSettings()))
-    val FLOWER_CRAB_CLAW = register("flower_crab_claw", Item(FabricItemSettings()))
-    val GHOST_CRAB_CLAW = register("ghost_crab_claw", Item(FabricItemSettings()))
-    val SPIDER_CRAB_CLAW = register("spider_crab_claw", Item(FabricItemSettings()))
-    val COCONUT_CRAB_CLAW = register("coconut_crab_claw", Item(FabricItemSettings()))
-    val YETI_CRAB_CLAW = register("yeti_crab_claw", Item(FabricItemSettings()))
-    val LIGHTFOOT_CRAB_CLAW = register("lightfoot_crab_claw", Item(FabricItemSettings()))
-
-    //#endregion
-
-    //# region Food
+    val GLOW_SLIME = register("glow_slime", Item(Item.Settings()))
+    val SEA_URCHIN_SPINE = register("sea_urchin_spine", Item(Item.Settings()))
+    val SHARK_TOOTH = register("shark_tooth", Item(Item.Settings()))
+    val SULFUR = register("sulfur", Item(Item.Settings()))
+    val CORAL_CHUNK = register("coral_chunk", Item(Item.Settings()))
+    val PEARL = register("pearl", Item(Item.Settings()))
+    val BLACK_PEARL = register("black_pearl", Item(Item.Settings()))
+    val CUTTLEBONE = register("cuttlebone", Item(Item.Settings()))
+    val LOBSTER_CLAW = register("lobster_claw", Item(Item.Settings()))
+    val DUNGENESS_CRAB_CLAW = register("dungeness_crab_claw", Item(Item.Settings()))
+    val FIDDLER_CRAB_CLAW = register("fiddler_crab_claw", Item(Item.Settings()))
+    val VAMPIRE_CRAB_CLAW = register("vampire_crab_claw", Item(Item.Settings()))
+    val FLOWER_CRAB_CLAW = register("flower_crab_claw", Item(Item.Settings()))
+    val GHOST_CRAB_CLAW = register("ghost_crab_claw", Item(Item.Settings()))
+    val SPIDER_CRAB_CLAW = register("spider_crab_claw", Item(Item.Settings()))
+    val COCONUT_CRAB_CLAW = register("coconut_crab_claw", Item(Item.Settings()))
+    val YETI_CRAB_CLAW = register("yeti_crab_claw", Item(Item.Settings()))
+    val LIGHTFOOT_CRAB_CLAW = register("lightfoot_crab_claw", Item(Item.Settings()))
 
     val UNI = register("uni",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -348,12 +314,11 @@ object HybridAquaticItems {
     val RAW_SHRIMP = register(
         "raw_shrimp",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -362,12 +327,11 @@ object HybridAquaticItems {
     val COOKED_SHRIMP = register(
         "cooked_shrimp",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(4)
+                        .nutrition(4)
                         .saturationModifier(4.0F)
-                        .meat()
                         .build()
                 )
         )
@@ -376,12 +340,11 @@ object HybridAquaticItems {
     val RAW_CRAYFISH = register(
         "raw_crayfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -390,12 +353,11 @@ object HybridAquaticItems {
     val COOKED_CRAYFISH = register(
         "cooked_crayfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(4)
+                        .nutrition(4)
                         .saturationModifier(4.0F)
-                        .meat()
                         .build()
                 )
         )
@@ -404,12 +366,11 @@ object HybridAquaticItems {
     val RAW_CRAB = register(
         "raw_crab",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -418,12 +379,11 @@ object HybridAquaticItems {
     val COOKED_CRAB = register(
         "cooked_crab",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(4)
+                        .nutrition(4)
                         .saturationModifier(5.0F)
-                        .meat()
                         .build()
                 )
         )
@@ -432,12 +392,11 @@ object HybridAquaticItems {
     val RAW_LOBSTER = register(
         "raw_lobster",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -446,12 +405,11 @@ object HybridAquaticItems {
     val COOKED_LOBSTER = register(
         "cooked_lobster",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(5)
+                        .nutrition(5)
                         .saturationModifier(6.0F)
-                        .meat()
                         .build()
                 )
         )
@@ -460,12 +418,11 @@ object HybridAquaticItems {
     val RAW_LOBSTER_TAIL = register(
         "raw_lobster_tail",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -474,12 +431,11 @@ object HybridAquaticItems {
     val COOKED_LOBSTER_TAIL = register(
         "cooked_lobster_tail",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(5)
+                        .nutrition(5)
                         .saturationModifier(6.0F)
-                        .meat()
                         .build()
                 )
         )
@@ -488,12 +444,11 @@ object HybridAquaticItems {
     val COOKED_FISH_STEAK = register(
         "cooked_fish_steak",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(8)
+                        .nutrition(8)
                         .saturationModifier(1.8F)
-                        .meat()
                         .build()
                 )
         )
@@ -502,12 +457,11 @@ object HybridAquaticItems {
     val RAW_FISH_STEAK = register(
         "raw_fish_steak",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(3)
+                        .nutrition(3)
                         .saturationModifier(0.9F)
-                        .meat()
                         .build()
                 )
         )
@@ -516,12 +470,11 @@ object HybridAquaticItems {
     val COOKED_FISH_MEAT = register(
         "cooked_fish_meat",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(4)
+                        .nutrition(4)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -530,12 +483,11 @@ object HybridAquaticItems {
     val RAW_FISH_MEAT = register(
         "raw_fish_meat",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -544,12 +496,11 @@ object HybridAquaticItems {
     val RAW_TENTACLE = register(
         "raw_tentacle",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -558,12 +509,11 @@ object HybridAquaticItems {
     val COOKED_TENTACLE = register(
         "cooked_tentacle",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(4)
+                        .nutrition(4)
                         .saturationModifier(0.8F)
-                        .meat()
                         .build()
                 )
         )
@@ -572,12 +522,11 @@ object HybridAquaticItems {
     val MACKEREL = register(
         "mackerel",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -586,12 +535,11 @@ object HybridAquaticItems {
     val FLYING_FISH = register(
         "flying_fish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -600,12 +548,11 @@ object HybridAquaticItems {
     val PIRANHA = register(
         "piranha",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -614,12 +561,11 @@ object HybridAquaticItems {
     val ANGLERFISH = register(
         "anglerfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -628,12 +574,11 @@ object HybridAquaticItems {
     val BARRELEYE = register(
         "barreleye",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -642,12 +587,11 @@ object HybridAquaticItems {
     val DRAGONFISH = register(
         "dragonfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -656,12 +600,11 @@ object HybridAquaticItems {
     val BLUE_TANG = register(
         "blue_tang",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -670,12 +613,11 @@ object HybridAquaticItems {
     val SURGEONFISH_SOHAL = register(
         "surgeonfish_sohal",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -684,12 +626,11 @@ object HybridAquaticItems {
     val SURGEONFISH_LINED = register(
         "surgeonfish_lined",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -698,12 +639,11 @@ object HybridAquaticItems {
     val SURGEONFISH_ORANGESHOULDER = register(
         "surgeonfish_orangeshoulder",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -712,12 +652,11 @@ object HybridAquaticItems {
     val YELLOW_TANG = register(
         "yellow_tang",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -726,12 +665,11 @@ object HybridAquaticItems {
     val POWDER_BLUE_TANG = register(
         "powder_blue_tang",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -740,26 +678,24 @@ object HybridAquaticItems {
     val CLOWNFISH = register(
         "clownfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
     )
 
-    val UNICORNFISH = register(
+    val UNICORN_FISH = register(
         "unicorn_fish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -768,12 +704,11 @@ object HybridAquaticItems {
     val FLASHLIGHT_FISH = register(
         "flashlight_fish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -782,12 +717,11 @@ object HybridAquaticItems {
     val SQUIRRELFISH = register(
         "squirrelfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -796,12 +730,11 @@ object HybridAquaticItems {
     val GOURAMI = register(
         "gourami",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -810,12 +743,11 @@ object HybridAquaticItems {
     val BETTA = register(
         "betta",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -824,12 +756,11 @@ object HybridAquaticItems {
     val PEARLFISH = register(
         "pearlfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -838,12 +769,11 @@ object HybridAquaticItems {
     val SNAILFISH = register(
         "snailfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -852,12 +782,11 @@ object HybridAquaticItems {
     val DISCUS = register(
         "discus",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -866,12 +795,11 @@ object HybridAquaticItems {
     val DANIO = register(
         "danio",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -880,12 +808,11 @@ object HybridAquaticItems {
     val NEON_TETRA = register(
         "neon_tetra",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -894,12 +821,11 @@ object HybridAquaticItems {
     val TIGER_BARB = register(
         "tiger_barb",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -908,12 +834,11 @@ object HybridAquaticItems {
     val OSCAR = register(
         "oscar",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -922,13 +847,12 @@ object HybridAquaticItems {
     val BOXFISH = register(
         "boxfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
                         .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 2), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -937,12 +861,11 @@ object HybridAquaticItems {
     val KOI = register(
         "koi",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -951,12 +874,11 @@ object HybridAquaticItems {
     val CARP = register(
         "carp",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -965,12 +887,11 @@ object HybridAquaticItems {
     val GOLDFISH = register(
         "goldfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -979,12 +900,11 @@ object HybridAquaticItems {
     val SEAHORSE = register(
         "seahorse",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.2F)
-                        .meat()
                         .build()
                 )
         )
@@ -993,13 +913,12 @@ object HybridAquaticItems {
     val TOADFISH = register(
         "toadfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.4F)
                         .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 1), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1008,13 +927,12 @@ object HybridAquaticItems {
     val STONEFISH = register(
         "stonefish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(1)
+                        .nutrition(1)
                         .saturationModifier(0.4F)
                         .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 1), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1023,13 +941,12 @@ object HybridAquaticItems {
     val LIONFISH = register(
         "lionfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
                         .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 0), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1038,12 +955,11 @@ object HybridAquaticItems {
     val ROCKFISH = register(
         "rockfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -1052,12 +968,11 @@ object HybridAquaticItems {
     val SEA_BASS = register(
         "sea_bass",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -1066,13 +981,12 @@ object HybridAquaticItems {
     val BLUE_SPOTTED_STINGRAY = register(
         "blue_spotted_stingray",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
                         .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 0), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1081,13 +995,12 @@ object HybridAquaticItems {
     val SPOTTED_EAGLE_RAY = register(
         "spotted_eagle_ray",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
                         .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 0), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1096,12 +1009,11 @@ object HybridAquaticItems {
     val MORAY_EEL = register(
         "moray_eel",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -1110,12 +1022,11 @@ object HybridAquaticItems {
     val NEEDLEFISH = register(
         "needlefish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -1124,12 +1035,11 @@ object HybridAquaticItems {
     val RATFISH = register(
         "ratfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -1138,12 +1048,11 @@ object HybridAquaticItems {
     val TRIGGERFISH = register(
         "triggerfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -1152,12 +1061,11 @@ object HybridAquaticItems {
     val PARROTFISH = register(
         "parrotfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -1166,12 +1074,11 @@ object HybridAquaticItems {
     val COELACANTH = register(
         "coelacanth",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -1180,12 +1087,11 @@ object HybridAquaticItems {
     val GOLDEN_DORADO = register(
         "golden_dorado",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(2)
+                        .nutrition(2)
                         .saturationModifier(0.4F)
-                        .meat()
                         .build()
                 )
         )
@@ -1194,12 +1100,11 @@ object HybridAquaticItems {
     val MAHI = register(
         "mahi",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(3)
+                        .nutrition(3)
                         .saturationModifier(1.8F)
-                        .meat()
                         .build()
                 )
         )
@@ -1208,12 +1113,11 @@ object HybridAquaticItems {
     val YELLOWFIN_TUNA = register(
         "yellowfin_tuna",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(3)
+                        .nutrition(3)
                         .saturationModifier(1.8F)
-                        .meat()
                         .build()
                 )
         )
@@ -1222,12 +1126,11 @@ object HybridAquaticItems {
     val BLUEFIN_TUNA = register(
         "bluefin_tuna",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(3)
+                        .nutrition(3)
                         .saturationModifier(1.8F)
-                        .meat()
                         .build()
                 )
         )
@@ -1236,12 +1139,11 @@ object HybridAquaticItems {
     val OPAH = register(
         "opah",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(3)
+                        .nutrition(3)
                         .saturationModifier(1.8F)
-                        .meat()
                         .build()
                 )
         )
@@ -1250,12 +1152,11 @@ object HybridAquaticItems {
     val OARFISH = register(
         "oarfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(3)
+                        .nutrition(3)
                         .saturationModifier(1.8F)
-                        .meat()
                         .build()
                 )
         )
@@ -1264,22 +1165,15 @@ object HybridAquaticItems {
     val SUNFISH = register(
         "sunfish",
         Item(
-            FabricItemSettings()
+            Item.Settings()
                 .food(
                     FoodComponent.Builder()
-                        .hunger(3)
+                        .nutrition(3)
                         .saturationModifier(1.8F)
-                        .meat()
                         .build()
                 )
         )
     )
-
-    //#endregion
-
-    //#region Spawn Eggs
-
-        //#region Fish
 
     val AFRICAN_BUTTERFLY_SPAWN_EGG = registerSpawnEgg("african_butterfly_spawn_egg", HybridAquaticEntityTypes.AFRICAN_BUTTERFLY, 0xb57955, 0x1e3555)
     val BARRELEYE_SPAWN_EGG = registerSpawnEgg("barreleye_spawn_egg", HybridAquaticEntityTypes.BARRELEYE, 0x4b4343, 0x6bc96c)
@@ -1319,10 +1213,6 @@ object HybridAquaticItems {
     val TUNA_SPAWN_EGG = registerSpawnEgg("tuna_spawn_egg", HybridAquaticEntityTypes.TUNA, 0x36668d, 0xf5d58d)
     val GOLDEN_DORADO_SPAWN_EGG = registerSpawnEgg("golden_dorado_spawn_egg", HybridAquaticEntityTypes.GOLDEN_DORADO, 0x36668d, 0xf5d58d)
 
-        //#endregion
-
-        //#region Deep Sea Fish
-
     val ANGLERFISH_SPAWN_EGG = registerSpawnEgg("anglerfish_spawn_egg", HybridAquaticEntityTypes.ANGLERFISH, 0x4b4257, 0xa7f1eb)
     val COELACANTH_SPAWN_EGG = registerSpawnEgg("coelacanth_spawn_egg", HybridAquaticEntityTypes.COELACANTH, 0x2f517a, 0xbac4d3)
     val DRAGONFISH_SPAWN_EGG = registerSpawnEgg("dragonfish_spawn_egg", HybridAquaticEntityTypes.DRAGONFISH, 0x2e2e33, 0xfffaa9)
@@ -1331,26 +1221,14 @@ object HybridAquaticItems {
     val OARFISH_SPAWN_EGG = registerSpawnEgg("oarfish_spawn_egg", HybridAquaticEntityTypes.OARFISH, 0x8892ab, 0xb04743)
     val RATFISH_SPAWN_EGG = registerSpawnEgg("ratfish_spawn_egg", HybridAquaticEntityTypes.RATFISH, 0xa16470, 0x673146)
 
-        //#endregion
-
-        //#region Cephalopod
-
     val CUTTLEFISH_SPAWN_EGG = registerSpawnEgg("cuttlefish_spawn_egg", HybridAquaticEntityTypes.CUTTLEFISH, 0x8a4836, 0xf6deae)
     val ARROW_SQUID_SPAWN_EGG = registerSpawnEgg("arrow_squid_spawn_egg", HybridAquaticEntityTypes.ARROW_SQUID, 0x761f31, 0xd56360)
     val FIREFLY_SQUID_SPAWN_EGG = registerSpawnEgg("firefly_squid_spawn_egg", HybridAquaticEntityTypes.FIREFLY_SQUID, 0xc93a61, 0x4ec0e8)
-
-        //#endregion
-
-        //#region Deep Sea Cephalopod
 
     val GLOWING_SUCKER_OCTOPUS_SPAWN_EGG = registerSpawnEgg("glowing_sucker_octopus_spawn_egg", HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS, 0x892f4f, 0x84d5fe)
     val NAUTILUS_SPAWN_EGG = registerSpawnEgg("nautilus_spawn_egg", HybridAquaticEntityTypes.NAUTILUS, 0xd4ccc3, 0xae4635)
     val UMBRELLA_OCTOPUS_SPAWN_EGG = registerSpawnEgg("umbrella_octopus_spawn_egg", HybridAquaticEntityTypes.UMBRELLA_OCTOPUS, 0xffaf25, 0xfeff92)
     val VAMPIRE_SQUID_SPAWN_EGG = registerSpawnEgg("vampire_squid_spawn_egg", HybridAquaticEntityTypes.VAMPIRE_SQUID, 0x73363c, 0xc3e9e2)
-
-        //#endregion
-
-        //#region Jellyfish
 
     val BARREL_JELLYFISH_SPAWN_EGG = registerSpawnEgg("barrel_jellyfish_spawn_egg", HybridAquaticEntityTypes.BARREL_JELLYFISH, 0xd6f3ea, 0x413c83)
     val BLUE_JELLYFISH_SPAWN_EGG = registerSpawnEgg("blue_jellyfish_spawn_egg", HybridAquaticEntityTypes.BLUE_JELLYFISH, 0x4dc0e8, 0xff6b97)
@@ -1363,19 +1241,11 @@ object HybridAquaticItems {
     val SEA_NETTLE_SPAWN_EGG = registerSpawnEgg("sea_nettle_spawn_egg", HybridAquaticEntityTypes.SEA_NETTLE, 0xf7bc78, 0x76435f)
     val BOX_JELLYFISH_SPAWN_EGG = registerSpawnEgg("box_jellyfish_spawn_egg", HybridAquaticEntityTypes.BOX_JELLYFISH, 0x9ba6de, 0xebeff8)
 
-        //#endregion
-
-        //#region Deep Sea Jellyfish
-
     val MAUVE_STINGER_SPAWN_EGG = registerSpawnEgg("mauve_stinger_spawn_egg", HybridAquaticEntityTypes.MAUVE_STINGER, 0x633063, 0xbc787a)
     val ATOLLA_JELLYFISH_SPAWN_EGG = registerSpawnEgg("atolla_jellyfish_spawn_egg", HybridAquaticEntityTypes.ATOLLA_JELLYFISH, 0xa32858, 0x4dc0e8)
     val BIG_RED_JELLYFISH_SPAWN_EGG = registerSpawnEgg("big_red_jellyfish_spawn_egg", HybridAquaticEntityTypes.BIG_RED_JELLYFISH, 0xf4e5e5, 0xe72e46)
     val COSMIC_JELLYFISH_SPAWN_EGG = registerSpawnEgg("cosmic_jellyfish_spawn_egg", HybridAquaticEntityTypes.COSMIC_JELLYFISH, 0xe7debb, 0xffd375)
     val FIREWORK_JELLYFISH_SPAWN_EGG = registerSpawnEgg("firework_jellyfish_spawn_egg", HybridAquaticEntityTypes.FIREWORK_JELLYFISH, 0x6975e8, 0xfc7fb7)
-
-        //#endregion
-
-        //#region Crustaceans
 
     val COCONUT_CRAB_SPAWN_EGG = registerSpawnEgg("coconut_crab_spawn_egg", HybridAquaticEntityTypes.COCONUT_CRAB, 0x3e2d25, 0x3c546d)
     val DUNGENESS_CRAB_SPAWN_EGG = registerSpawnEgg("dungeness_crab_spawn_egg", HybridAquaticEntityTypes.DUNGENESS_CRAB, 0x81353f, 0xeecfce)
@@ -1391,33 +1261,17 @@ object HybridAquaticItems {
     val SHRIMP_SPAWN_EGG = registerSpawnEgg("shrimp_spawn_egg", HybridAquaticEntityTypes.SHRIMP, 0xeb564b, 0xff9166)
     val VAMPIRE_CRAB_SPAWN_EGG = registerSpawnEgg("vampire_crab_spawn_egg", HybridAquaticEntityTypes.VAMPIRE_CRAB, 0x322947, 0x752053)
 
-        //#endregion
-
-        //#region Deep Sea Crustaceans
-
     val GIANT_ISOPOD_SPAWN_EGG = registerSpawnEgg("giant_isopod_spawn_egg", HybridAquaticEntityTypes.GIANT_ISOPOD, 0xe6d3d6, 0x3c2236)
     val SPIDER_CRAB_SPAWN_EGG = registerSpawnEgg("spider_crab_spawn_egg", HybridAquaticEntityTypes.SPIDER_CRAB, 0x9d3e41, 0xc6836f)
     val YETI_CRAB_SPAWN_EGG = registerSpawnEgg("yeti_crab_spawn_egg", HybridAquaticEntityTypes.YETI_CRAB, 0xfff4dd, 0xffd16b)
 
-         //#endregion
-
-        //#region Miniboss
-
     val KARKINOS_SPAWN_EGG = registerSpawnEgg("karkinos_spawn_egg", HybridAquaticEntityTypes.KARKINOS, 0x852c2a, 0x3d1031)
-
-        //#endregion
-
-        //#region Critters
 
     val NUDIBRANCH_SPAWN_EGG = registerSpawnEgg("nudibranch_spawn_egg", HybridAquaticEntityTypes.NUDIBRANCH, 0xf7be47, 0xb853a3)
     val SEA_CUCUMBER_SPAWN_EGG = registerSpawnEgg("sea_cucumber_spawn_egg", HybridAquaticEntityTypes.SEA_CUCUMBER, 0x225b6d, 0x0c2627)
     val SEA_URCHIN_SPAWN_EGG = registerSpawnEgg("sea_urchin_spawn_egg", HybridAquaticEntityTypes.SEA_URCHIN, 0x994066, 0x41142c)
     val STARFISH_SPAWN_EGG = registerSpawnEgg("starfish_spawn_egg", HybridAquaticEntityTypes.STARFISH, 0x994066, 0x592645)
     val SEA_ANGEL_SPAWN_EGG = registerSpawnEgg("sea_angel_spawn_egg", HybridAquaticEntityTypes.SEA_ANGEL, 0xc6d5f9, 0xf38135)
-
-        //#endregion
-
-      //#region Sharks
 
     val BASKING_SHARK_SPAWN_EGG = registerSpawnEgg("basking_shark_spawn_egg", HybridAquaticEntityTypes.BASKING_SHARK, 0x725e6b, 0x201b1b)
     val BULL_SHARK_SPAWN_EGG = registerSpawnEgg("bull_shark_spawn_egg", HybridAquaticEntityTypes.BULL_SHARK, 0x676b8d, 0xd0ccda)
@@ -1429,10 +1283,6 @@ object HybridAquaticItems {
     val TIGER_SHARK_SPAWN_EGG = registerSpawnEgg("tiger_shark_spawn_egg", HybridAquaticEntityTypes.TIGER_SHARK, 0x3e3943, 0xf4f2f3)
     val WHALE_SHARK_SPAWN_EGG = registerSpawnEgg("whale_shark_spawn_egg", HybridAquaticEntityTypes.WHALE_SHARK, 0x1a1932, 0xffffff)
 
-        //#endregion
-
-    //#endregion
-
     private fun register(id: String, item: Item): Item {
         return Registry.register(Registries.ITEM, Identifier(HybridAquatic.MOD_ID, id), item)
     }
@@ -1443,15 +1293,15 @@ object HybridAquaticItems {
         primaryColor: Int,
         secondaryColor: Int
     ): Item {
-        return register(id, SpawnEggItem(type, primaryColor, secondaryColor, FabricItemSettings()))
+        return register(id, SpawnEggItem(type, primaryColor, secondaryColor, Item.Settings()))
     }
 
     private fun registerBlockItem(id: String, block: Block): Item {
-        return register(id, BlockItem(block, FabricItemSettings()))
+        return register(id, BlockItem(block, Item.Settings()))
     }
 
     private fun registerPlaceableInWaterBlockItem(id: String, block: Block): Item {
-        return register(id, PlaceableInWaterItem(block, FabricItemSettings()))
+        return register(id, PlaceableInWaterItem(block, Item.Settings()))
     }
 
     private fun registerVerticallyAttachable(
@@ -1460,6 +1310,6 @@ object HybridAquaticItems {
         wallBlock: Block,
         direction: Direction = Direction.DOWN
     ): Item {
-        return register(id, VerticallyAttachableBlockItem(standingBlock, wallBlock, FabricItemSettings(), direction))
+        return register(id, VerticallyAttachableBlockItem(standingBlock, wallBlock, Item.Settings(), direction))
     }
 }

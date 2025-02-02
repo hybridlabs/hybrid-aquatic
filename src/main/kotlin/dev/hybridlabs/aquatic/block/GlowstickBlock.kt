@@ -8,15 +8,14 @@ import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.particle.ParticleTypes.GLOW
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
-class GlowstickBlock(settings: Settings) : TorchBlock(settings, GLOW), Waterloggable {
+class GlowstickBlock(settings: Settings) : TorchBlock(ParticleTypes.GLOW, settings), Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(Properties.WATERLOGGED, false)
     }
@@ -55,12 +54,7 @@ class GlowstickBlock(settings: Settings) : TorchBlock(settings, GLOW), Waterlogg
         }
     }
 
-    override fun canPathfindThrough(
-        state: BlockState?,
-        world: BlockView?,
-        pos: BlockPos?,
-        type: NavigationType?
-    ): Boolean {
+    override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
         return true
     }
 }

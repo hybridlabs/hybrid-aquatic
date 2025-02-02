@@ -15,7 +15,7 @@
     "I  "
   ],
   "result": {
-    "item": "hybrid-aquatic:fishing_net"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "hybrid-aquatic:fishing_net"
+  }
 }

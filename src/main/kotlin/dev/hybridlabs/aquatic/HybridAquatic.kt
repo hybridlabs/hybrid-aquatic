@@ -2,8 +2,9 @@ package dev.hybridlabs.aquatic
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.block.seamessage.SeaMessages
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes
 import dev.hybridlabs.aquatic.config.HybridAquaticConfig
 import dev.hybridlabs.aquatic.config.HybridAquaticConfigHandler
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
@@ -17,7 +18,7 @@ import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
 import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.registry.HybridAquaticRegistries
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades.registerCustomTrades
 import dev.hybridlabs.aquatic.world.gen.feature.FeatureBiomeModifications
@@ -27,7 +28,6 @@ import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
-import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
@@ -38,7 +38,6 @@ import net.minecraft.village.TradeOffers.SellItemFactory
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
-import kotlin.collections.forEach
 import kotlin.io.path.notExists
 
 object HybridAquatic : ModInitializer {
@@ -52,6 +51,11 @@ object HybridAquatic : ModInitializer {
 
     override fun onInitialize() {
         logger.info("Initializing $MOD_NAME")
+
+        HybridAquaticRegistries
+        HybridAquaticComponentTypes
+
+        SeaMessages
 
         HybridAquaticFluids
         HybridAquaticBlocks
@@ -83,7 +87,6 @@ object HybridAquatic : ModInitializer {
 
         initializeConfig()
 
-        registerDynamicRegistries()
         registerWanderingTraderTrades()
         registerCustomTrades()
         registerFlammables(FlammableBlockRegistry.getDefaultInstance())
@@ -113,10 +116,6 @@ object HybridAquatic : ModInitializer {
                 logger.info("$MOD_NAME config reset, the old config has been backed up to \"${configHandler.backupFile}\"")
             }
         }
-    }
-
-    private fun registerDynamicRegistries() {
-        DynamicRegistries.registerSynced(HybridAquaticRegistryKeys.SEA_MESSAGE, SeaMessage.CODEC)
     }
 
     private fun registerWanderingTraderTrades() {
@@ -149,8 +148,8 @@ object HybridAquatic : ModInitializer {
     }
 
     private fun registerBiomeModifications(config: HybridAquaticConfig) {
-        config.entitySpawnConfig.forEach { config ->
-            BiomeModifications.addSpawn(BiomeSelectors.tag(config.biomes), config.group, config.type, config.weight, config.minGroupSize, config.maxGroupSize)
+        config.entitySpawnConfig.forEach { spawnConfig ->
+            BiomeModifications.addSpawn(BiomeSelectors.tag(spawnConfig.biomes), spawnConfig.group, spawnConfig.type, spawnConfig.weight, spawnConfig.minGroupSize, spawnConfig.maxGroupSize)
         }
     }
 }

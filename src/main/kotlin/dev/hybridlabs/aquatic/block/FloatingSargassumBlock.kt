@@ -1,6 +1,12 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import com.mojang.serialization.MapCodec
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.vehicle.BoatEntity
 import net.minecraft.fluid.FluidState
@@ -18,7 +24,6 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class FloatingSargassumBlock(settings: Settings) : PlantBlock(settings), Waterloggable {
     init {
         defaultState = defaultState.with(WATERLOGGED, true)
@@ -94,7 +99,12 @@ class FloatingSargassumBlock(settings: Settings) : PlantBlock(settings), Waterlo
         }
     }
 
+    override fun getCodec(): MapCodec<FloatingSargassumBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<FloatingSargassumBlock> = createCodec(::FloatingSargassumBlock)
         private val SHAPE: VoxelShape = createCuboidShape(0.0, 14.0, 0.0, 16.0, 15.0, 16.0)
     }
 }

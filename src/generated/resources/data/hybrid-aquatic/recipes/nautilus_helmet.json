@@ -12,7 +12,7 @@
     "   "
   ],
   "result": {
-    "item": "hybrid-aquatic:nautilus_helmet"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "hybrid-aquatic:nautilus_helmet"
+  }
 }

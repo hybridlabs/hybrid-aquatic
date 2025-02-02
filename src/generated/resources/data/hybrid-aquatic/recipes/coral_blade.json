@@ -15,7 +15,7 @@
     " S "
   ],
   "result": {
-    "item": "hybrid-aquatic:coral_blade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "hybrid-aquatic:coral_blade"
+  }
 }

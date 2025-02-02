@@ -7,20 +7,24 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.block.Blocks
-import net.minecraft.data.server.recipe.RecipeJsonProvider
+import net.minecraft.data.server.recipe.RecipeExporter
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder
 import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.predicate.item.ItemPredicate
+import net.minecraft.recipe.CampfireCookingRecipe
 import net.minecraft.recipe.RecipeSerializer
+import net.minecraft.recipe.SmeltingRecipe
+import net.minecraft.recipe.SmokingRecipe
 import net.minecraft.recipe.book.RecipeCategory
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.util.Identifier
-import java.util.function.Consumer
+import java.util.concurrent.CompletableFuture
 
-class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
-    override fun generate(exporter: Consumer<RecipeJsonProvider>) {
+class RecipeProvider(output: FabricDataOutput, lookup: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricRecipeProvider(output, lookup) {
+    override fun generate(exporter: RecipeExporter) {
         // misc recipes
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, Blocks.SPONGE)
             .pattern("SS ")
@@ -161,8 +165,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .pattern("S S")
             .pattern("SSS")
             .pattern("SSS")
-            .input('S', Items.SCUTE)
-            .criterion("has_scute", InventoryChangedCriterion.Conditions.items(Items.SCUTE))
+            .input('S', Items.TURTLE_SCUTE)
+            .criterion("has_scute", InventoryChangedCriterion.Conditions.items(Items.TURTLE_SCUTE))
             .offerTo(exporter)
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, HybridAquaticItems.DIVING_HELMET)
@@ -204,8 +208,6 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_leather", InventoryChangedCriterion.Conditions.items(Items.LEATHER))
             .criterion("has_copper", InventoryChangedCriterion.Conditions.items(Items.COPPER_INGOT))
             .offerTo(exporter)
-
-        //#region hooks
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.BARBED_HOOK)
             .pattern("N  ")
             .pattern("N N")
@@ -249,8 +251,6 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_crab_claw", InventoryChangedCriterion.Conditions.items(
                 ItemPredicate.Builder.create().tag(HybridAquaticItemTags.CRAB_CLAW).build()))
             .offerTo(exporter)
-
-        //#endregion
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.FISHING_NET)
             .pattern("  S")
@@ -330,13 +330,13 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     }
 
     private fun offerCookingRecipes(
-        exporter: Consumer<RecipeJsonProvider>,
+        exporter: RecipeExporter,
         input: Item,
         output: Item,
         experience: Float
     ) {
-        offerFoodCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, 200, input, output, experience)
-        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, input, output, experience)
-        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, input, output, experience)
+        offerFoodCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, ::SmeltingRecipe, 200, input, output, experience)
+        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, ::SmokingRecipe, 100, input, output, experience)
+        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, ::CampfireCookingRecipe, 600, input, output, experience)
     }
 }

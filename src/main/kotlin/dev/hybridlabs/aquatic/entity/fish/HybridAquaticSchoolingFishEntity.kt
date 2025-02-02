@@ -5,14 +5,12 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
-import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import java.util.stream.Stream
 
-@Suppress("NAME_SHADOWING")
 open class HybridAquaticSchoolingFishEntity(
     type: EntityType<out HybridAquaticFishEntity>,
     world: World,
@@ -106,12 +104,11 @@ open class HybridAquaticSchoolingFishEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         var entityData = entityData
         pitch = 0.0f
-        super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        super.initialize(world, difficulty, spawnReason, entityData)
         if (entityData == null) {
             entityData = FishData(this)
         } else {

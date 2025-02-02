@@ -6,5 +6,7 @@
   "ingredient": {
     "item": "hybrid-aquatic:raw_crayfish"
   },
-  "result": "hybrid-aquatic:cooked_crayfish"
+  "result": {
+    "id": "hybrid-aquatic:cooked_crayfish"
+  }
 }

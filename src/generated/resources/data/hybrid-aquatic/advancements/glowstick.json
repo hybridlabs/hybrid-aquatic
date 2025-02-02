@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:glowstick"
-            ]
+            "items": "hybrid-aquatic:glowstick"
           }
         ]
       },
@@ -15,17 +13,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.glowstick.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "hybrid-aquatic:glowstick"
+      "count": 1,
+      "id": "hybrid-aquatic:glowstick"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.hybrid-aquatic.glowstick.title"
     }

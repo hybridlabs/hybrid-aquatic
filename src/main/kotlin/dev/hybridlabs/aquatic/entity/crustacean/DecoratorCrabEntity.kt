@@ -12,12 +12,11 @@ import net.minecraft.registry.tag.BiomeTags
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.RawAnimation
 
 class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
     HybridAquaticCrustaceanEntity(
@@ -61,10 +60,6 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         )
     ) {
 
-    override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/decorator_crab")
-    }
-
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(AnimationController(this, "With/Without", 0) { state ->
             val animation = when {
@@ -85,7 +80,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
                 this.coralTimer = 3600
                 this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0f, 1.0f)
                 this.emitGameEvent(GameEvent.SHEAR, player)
-                itemStack.damage(1, player) { it.sendToolBreakStatus(hand) }
+                itemStack.damage(1, player, getSlotForHand(hand))
                 dropStack(ItemStack(HybridAquaticItems.CORAL_CHUNK))
                 return ActionResult.SUCCESS
             }

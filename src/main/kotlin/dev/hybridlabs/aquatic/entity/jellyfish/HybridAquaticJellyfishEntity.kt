@@ -2,7 +2,9 @@ package dev.hybridlabs.aquatic.entity.jellyfish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.StayInWaterGoal
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.MovementType
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
 import net.minecraft.entity.ai.goal.Goal
@@ -29,15 +31,14 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.EasingType
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.EasingType
 import software.bernie.geckolib.util.GeckoLibUtil
 
-@Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticJellyfishEntity(
     type: EntityType<out HybridAquaticJellyfishEntity>,
     world: World,
@@ -76,18 +77,14 @@ open class HybridAquaticJellyfishEntity(
         goalSelector.add(0, StayInWaterGoal(this))
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(JELLYFISH_SIZE, 0)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(MOISTNESS, getMaxMoistness())
+        builder.add(JELLYFISH_SIZE, 0)
     }
 
     override fun getLimitPerChunk(): Int {
         return 4
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose?, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
     }
 
     override fun getAmbientSound(): SoundEvent {
@@ -205,7 +202,6 @@ open class HybridAquaticJellyfishEntity(
 
     override fun damage(source: DamageSource?, amount: Float): Boolean {
         if (super.damage(source, amount)) {
-
             val attacker = source?.attacker
             if (attacker is PlayerEntity && isVenomous && attacker.mainHandStack.isEmpty) {
                 attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, venomLevel))

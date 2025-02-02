@@ -10,7 +10,7 @@
     "##"
   ],
   "result": {
-    "item": "hybrid-aquatic:driftwood_pressure_plate"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "hybrid-aquatic:driftwood_pressure_plate"
+  }
 }

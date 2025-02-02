@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client
 
 import software.bernie.geckolib.animatable.GeoItem
-import software.bernie.geckolib.animatable.client.RenderProvider
+import software.bernie.geckolib.animatable.client.GeoRenderProvider
 
 /**
  * Stores Geckolib render providers for use on the common side.
@@ -12,10 +12,10 @@ import software.bernie.geckolib.animatable.client.RenderProvider
  * crashes.
  */
 object GeoRenderProviderStorage {
-    lateinit var divingArmorRenderProvider: () -> RenderProvider
-    lateinit var seashellArmorRenderProvider: () -> RenderProvider
-    lateinit var manglerfishArmorRenderProvider: () -> RenderProvider
-    lateinit var turtleArmorRenderProvider: () -> RenderProvider
-    lateinit var eelArmorRenderProvider: () -> RenderProvider
-    lateinit var moonjellyfishArmorRenderProvider: () -> RenderProvider
+    lateinit var divingArmorRenderProvider: () -> GeoRenderProvider
+    lateinit var seashellArmorRenderProvider: () -> GeoRenderProvider
+    lateinit var manglerfishArmorRenderProvider: () -> GeoRenderProvider
+    lateinit var turtleArmorRenderProvider: () -> GeoRenderProvider
+    lateinit var eelArmorRenderProvider: () -> GeoRenderProvider
+    lateinit var moonjellyfishArmorRenderProvider: () -> GeoRenderProvider
 }

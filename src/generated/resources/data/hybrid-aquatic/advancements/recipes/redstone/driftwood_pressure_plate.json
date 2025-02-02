@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:driftwood_planks"
-            ]
+            "items": "hybrid-aquatic:driftwood_planks"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_driftwood_planks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_driftwood_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:driftwood_pressure_plate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

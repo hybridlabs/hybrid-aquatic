@@ -19,7 +19,6 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig
 import net.minecraft.world.gen.feature.Feature
 import net.minecraft.world.gen.feature.util.FeatureContext
 
-@Suppress("NAME_SHADOWING")
 abstract class DeepCoralFeature(codec: Codec<DefaultFeatureConfig>) : Feature<DefaultFeatureConfig>(codec) {
     override fun generate(context: FeatureContext<DefaultFeatureConfig?>): Boolean {
         val random = context.random

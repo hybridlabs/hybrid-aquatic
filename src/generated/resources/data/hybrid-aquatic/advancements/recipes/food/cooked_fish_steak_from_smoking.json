@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:raw_fish_steak"
-            ]
+            "items": "hybrid-aquatic:raw_fish_steak"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_raw_fish_steak",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_raw_fish_steak"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:cooked_fish_steak_from_smoking"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

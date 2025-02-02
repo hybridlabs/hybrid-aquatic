@@ -2,11 +2,16 @@ package dev.hybridlabs.aquatic.entity.miniboss
 
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.enchantment.Enchantments
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.LookAtEntityGoal
+import net.minecraft.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.entity.ai.goal.PounceAtTargetGoal
+import net.minecraft.entity.ai.goal.RevengeGoal
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.ai.pathing.PathNodeType
@@ -31,16 +36,14 @@ import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.world.Difficulty
 import net.minecraft.world.World
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
 
-class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, world: World) :
-    HybridAquaticMinibossEntity(entityType, world) {
-
+class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, world: World) : HybridAquaticMinibossEntity(entityType, world) {
     private var landNavigation: EntityNavigation = createNavigation(world)
 
     override fun createNavigation(world: World): EntityNavigation {
@@ -59,7 +62,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
         moveControl = MoveControl(this)
         navigation = this.landNavigation
-        stepHeight = 1.5F
     }
 
     private var flipTimer: Int = 0
@@ -70,9 +72,9 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         get() = dataTracker.get(FLIPPED)
         set(bool) = dataTracker.set(FLIPPED, bool)
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(FLIPPED, false)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(FLIPPED, false)
     }
 
     override fun initGoals() {
@@ -124,7 +126,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     }
 
     override fun mobTick() {
-
         if (isFlipped) {
             flipTimer--
 
@@ -193,10 +194,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         return damaged
     }
 
-    override fun getGroup(): EntityGroup {
-        return EntityGroup.ARTHROPOD
-    }
-
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         if (hasCustomName()) {
             bossBar.name = this.displayName
@@ -232,7 +229,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     }
 
     companion object {
-
         val FLIP: RawAnimation = RawAnimation.begin().thenPlay("misc.flip")
 
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
@@ -243,25 +239,19 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
+                .add(EntityAttributes.GENERIC_STEP_HEIGHT, 1.5)
         }
 
-        val FLIPPED: TrackedData<Boolean> =
-            DataTracker.registerData(KarkinosEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+        val FLIPPED: TrackedData<Boolean> = DataTracker.registerData(KarkinosEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
     }
 
-    internal open class KarkinosAttackGoal(private val karkinos: KarkinosEntity) :
-        MeleeAttackGoal(karkinos, 0.6, false) {
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.cooldown <= 0) {
+    internal open class KarkinosAttackGoal(private val karkinos: KarkinosEntity) : MeleeAttackGoal(karkinos, 0.6, false) {
+        override fun attack(target: LivingEntity) {
+            if (canAttack(target)) {
                 resetCooldown()
                 karkinos.swingHand(Hand.MAIN_HAND)
                 karkinos.tryAttack(target)
             }
-        }
-
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (karkinos.width * 2.0 + entity.width)
         }
 
         override fun start() {

@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock.Variant
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes
 import net.minecraft.item.ItemStack
 
 /**
@@ -12,9 +12,7 @@ import net.minecraft.item.ItemStack
  */
 class MessageInABottleItem(settings: Settings) : PlaceableInWaterItem(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE, settings) {
     override fun getTranslationKey(stack: ItemStack): String {
-        // custom variant translation keys
-        val id = stack.getSubNbt(BLOCK_ENTITY_TAG_KEY)?.getString(MessageInABottleBlockEntity.VARIANT_KEY) ?: ""
-        val variant = Variant.byId(id)
+        val variant = stack.get(HybridAquaticComponentTypes.BOTTLE_VARIANT)
         val key = translationKey
         return when (variant) {
             Variant.JAR -> "$key.jar"

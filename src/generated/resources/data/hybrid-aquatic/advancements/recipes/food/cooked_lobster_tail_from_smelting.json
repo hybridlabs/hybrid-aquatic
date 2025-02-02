@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:raw_lobster_tail"
-            ]
+            "items": "hybrid-aquatic:raw_lobster_tail"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_raw_lobster_tail",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_raw_lobster_tail"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:cooked_lobster_tail_from_smelting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

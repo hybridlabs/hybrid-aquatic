@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:ominous_hook"
-            ]
+            "items": "hybrid-aquatic:ominous_hook"
           }
         ]
       },
@@ -15,7 +13,6 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.ominous_hook.description"
@@ -23,10 +20,9 @@
     "frame": "goal",
     "hidden": true,
     "icon": {
-      "item": "hybrid-aquatic:ominous_hook",
-      "nbt": "{Damage:0}"
+      "count": 1,
+      "id": "hybrid-aquatic:ominous_hook"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.hybrid-aquatic.ominous_hook.title"
     }

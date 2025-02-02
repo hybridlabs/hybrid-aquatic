@@ -1,7 +1,15 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import com.mojang.serialization.MapCodec
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.Fertilizable
+import net.minecraft.block.FluidFillable
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.TallSeagrassBlock
 import net.minecraft.block.enums.DoubleBlockHalf
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -17,8 +25,7 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("OVERRIDE_DEPRECATION")
-class RedAlgaeBlock(settings: Settings?) : PlantBlock(settings), Fertilizable, FluidFillable {
+class RedAlgaeBlock(settings: Settings) : PlantBlock(settings), Fertilizable, FluidFillable {
     override fun getOutlineShape(
         state: BlockState,
         world: BlockView,
@@ -53,7 +60,7 @@ class RedAlgaeBlock(settings: Settings?) : PlantBlock(settings), Fertilizable, F
         return blockState
     }
 
-    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState): Boolean {
         return true
     }
 
@@ -75,20 +82,20 @@ class RedAlgaeBlock(settings: Settings?) : PlantBlock(settings), Fertilizable, F
         }
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(player: PlayerEntity?, world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
         return false
     }
 
-    override fun tryFillWithFluid(
-        world: WorldAccess,
-        pos: BlockPos,
-        state: BlockState,
-        fluidState: FluidState
-    ): Boolean {
+    override fun tryFillWithFluid(world: WorldAccess, pos: BlockPos, state: BlockState, fluidState: FluidState): Boolean {
         return false
+    }
+
+    override fun getCodec(): MapCodec<RedAlgaeBlock> {
+        return CODEC
     }
 
     companion object {
+        val CODEC: MapCodec<RedAlgaeBlock> = createCodec(::RedAlgaeBlock)
         private val SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
     }
 }

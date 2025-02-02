@@ -12,7 +12,7 @@
     "   "
   ],
   "result": {
-    "item": "minecraft:sponge"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "minecraft:sponge"
+  }
 }

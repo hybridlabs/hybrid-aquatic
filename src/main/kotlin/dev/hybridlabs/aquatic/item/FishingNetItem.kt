@@ -2,39 +2,36 @@ package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.client.item.TooltipData
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemUsageContext
-import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.world.World
-import java.util.*
+import java.util.Optional
 
-class FishingNetItem(settings: Settings?): Item(settings) {
+class FishingNetItem(settings: Settings): Item(settings) {
 
     override fun useOnEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, hand: Hand): ActionResult {
         val validFishForNet = entity.type.isIn(HybridAquaticEntityTags.CAN_USE_FISHING_NET_ON)
 
-        if (!alreadyHasFish(stack) && validFishForNet) {
+        /*if (!alreadyHasFish(stack) && validFishForNet) {
             writeEntityToNet(entity, user, hand)
             entity.remove(Entity.RemovalReason.DISCARDED)
             return ActionResult.SUCCESS
-        }
+        }*/
         return super.useOnEntity(stack, user, entity, hand)
     }
 
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
         val world: World = context.world
 
-        if (!world.isClient) {
+        /*if (!world.isClient) {
             val nbtCopy = context.stack.nbt?.copy() ?: return super.useOnBlock(context)
 
-            val optionalEntity = getEntityFromNBT(nbtCopy)
+            val optionalEntity = getEntityFromNbt(nbtCopy)
 
             if (optionalEntity.isPresent) {
                 val entity = optionalEntity.get().create(context.world) ?: return ActionResult.FAIL
@@ -45,7 +42,8 @@ class FishingNetItem(settings: Settings?): Item(settings) {
                 world.spawnEntity(entity)
                 return ActionResult.SUCCESS
             }
-        }
+        } TODO entity component??*/
+
         return super.useOnBlock(context)
     }
 
@@ -56,7 +54,7 @@ class FishingNetItem(settings: Settings?): Item(settings) {
     companion object {
         private const val ENTITY_KEY: String = "storedEntity"
 
-        fun writeEntityToNet(entity: Entity, user: PlayerEntity, hand: Hand) {
+        /*fun writeEntityToNet(entity: Entity, user: PlayerEntity, hand: Hand) {
             val entityCompound = NbtCompound()
             entity.saveNbt(entityCompound)
             entityCompound.putBoolean("PersistenceRequired", true)
@@ -65,7 +63,7 @@ class FishingNetItem(settings: Settings?): Item(settings) {
             itemStack.orCreateNbt.put(ENTITY_KEY, entityCompound)
         }
 
-        fun getEntityFromNBT(nbt: NbtCompound): Optional<EntityType<*>> {
+        fun getEntityFromNbt(nbt: NbtCompound, lookup: RegistryWrapper.WrapperLookup): Optional<EntityType<*>> {
             val storedNBT = nbt.getCompound(ENTITY_KEY)
             if (storedNBT != null) {
                 return EntityType.fromNbt(storedNBT)
@@ -78,6 +76,6 @@ class FishingNetItem(settings: Settings?): Item(settings) {
             val entityNBT = nbtCopy.getCompound(ENTITY_KEY) ?: return false
 
             return !entityNBT.isEmpty
-        }
+        }*/
     }
 }

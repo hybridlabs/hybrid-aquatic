@@ -15,7 +15,7 @@
     " S "
   ],
   "result": {
-    "item": "hybrid-aquatic:seashell_axe"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "hybrid-aquatic:seashell_axe"
+  }
 }

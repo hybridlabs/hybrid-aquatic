@@ -6,5 +6,7 @@
   "ingredient": {
     "item": "hybrid-aquatic:raw_fish_steak"
   },
-  "result": "hybrid-aquatic:cooked_fish_steak"
+  "result": {
+    "id": "hybrid-aquatic:cooked_fish_steak"
+  }
 }

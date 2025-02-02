@@ -1,23 +1,28 @@
 package dev.hybridlabs.aquatic.block.entity
 
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes.getEncoded
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes.putEncoded
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.component.ComponentMap
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.Animation
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
+import software.bernie.geckolib.util.RenderUtil
 
 /**
  * Represents the block entity for Message in a Bottle blocks.
@@ -36,19 +41,35 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
      */
     var messageItemStack: ItemStack = ItemStack.EMPTY
 
-    override fun writeNbt(nbt: NbtCompound) {
-        super.writeNbt(nbt)
-        nbt.putString(VARIANT_KEY, variant.id)
+    override fun writeNbt(nbt: NbtCompound, lookup: RegistryWrapper.WrapperLookup) {
+        super.writeNbt(nbt, lookup)
+
+        nbt.putEncoded(VARIANT_KEY, MessageInABottleBlock.Variant.CODEC, variant)
 
         if (!messageItemStack.isEmpty) {
-            nbt.put(MESSAGE_KEY, messageItemStack.writeNbt(NbtCompound()))
+            nbt.putEncoded(MESSAGE_KEY, ItemStack.CODEC, messageItemStack)
         }
     }
 
-    override fun readNbt(nbt: NbtCompound) {
-        super.readNbt(nbt)
-        variant = MessageInABottleBlock.Variant.byId(nbt.getString(VARIANT_KEY))
-        messageItemStack = ItemStack.fromNbt(nbt.getCompound(MESSAGE_KEY))
+    override fun readNbt(nbt: NbtCompound, lookup: RegistryWrapper.WrapperLookup) {
+        super.readNbt(nbt, lookup)
+
+        nbt.getEncoded(VARIANT_KEY, MessageInABottleBlock.Variant.CODEC)?.also { variant = it }
+        nbt.getEncoded(MESSAGE_KEY, ItemStack.CODEC)?.also { messageItemStack = it }
+    }
+
+    override fun readComponents(components: ComponentsAccess) {
+        components.get(HybridAquaticComponentTypes.BOTTLE_VARIANT)?.also { variant = it }
+        components.get(HybridAquaticComponentTypes.STORED_BOTTLE_MESSAGE)?.also { messageItemStack = it }
+    }
+
+    override fun addComponents(builder: ComponentMap.Builder) {
+        builder.add(HybridAquaticComponentTypes.BOTTLE_VARIANT, variant)
+        builder.add(HybridAquaticComponentTypes.STORED_BOTTLE_MESSAGE, messageItemStack)
+
+        messageItemStack.get(HybridAquaticComponentTypes.SEA_MESSAGE)?.also {
+            builder.add(HybridAquaticComponentTypes.SEA_MESSAGE, it)
+        }
     }
 
     private fun <E> animate(event: AnimationState<E>): PlayState where E : BlockEntity, E : GeoAnimatable {
@@ -69,11 +90,11 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
     }
 
     override fun getTick(animatable: Any): Double {
-        return RenderUtils.getCurrentTick()
+        return RenderUtil.getCurrentTick()
     }
 
-    override fun toInitialChunkDataNbt(): NbtCompound {
-        return createNbt()
+    override fun toInitialChunkDataNbt(lookup: RegistryWrapper.WrapperLookup): NbtCompound {
+        return createNbt(lookup)
     }
 
     override fun toUpdatePacket(): BlockEntityUpdateS2CPacket {

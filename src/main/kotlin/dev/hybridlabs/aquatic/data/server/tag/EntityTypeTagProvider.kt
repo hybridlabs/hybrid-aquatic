@@ -5,12 +5,16 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.entity.EntityType
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.EntityTypeTags
 import java.util.concurrent.CompletableFuture
 
 class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.EntityTypeTagProvider(output, registriesFuture) {
-    override fun configure(arg: RegistryWrapper.WrapperLookup) {
+    override fun configure(lookup: RegistryWrapper.WrapperLookup) {
+        lookup.getWrapperOrThrow(RegistryKeys.ENTITY_TYPE).streamEntries().forEach { entry ->
+        }
+
         // small prey
         getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_PREY)
             .add(
