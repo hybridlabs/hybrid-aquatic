@@ -357,7 +357,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticStatusEffects.THALASSOPHOBIA to "Thalassophobia",
             HybridAquaticStatusEffects.BUOYANCY to "Buoyancy",
             HybridAquaticStatusEffects.SPININESS to "Spininess",
-            HybridAquaticStatusEffects.INKED to "Inked",
         ).forEach { (effect, translation) ->
             val identifier = Registries.STATUS_EFFECT.getId(effect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
@@ -514,6 +513,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.COSMIC_JELLYFISH to "Cosmic Jellyfish",
             HybridAquaticEntityTypes.FIREWORK_JELLYFISH to "Firework Jellyfish",
             HybridAquaticEntityTypes.BLUE_JELLYFISH to "Blue Jellyfish",
+            HybridAquaticEntityTypes.THROWING_STAR to "Throwing Star",
         )
 
         // verify display name list is valid
