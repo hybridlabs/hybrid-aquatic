@@ -15,7 +15,6 @@ object HybridAquaticStatusEffects {
     val SPININESS = register("spininess", SpininessStatusEffect())
     val CORROSION = register("corrosion", CorrosionStatusEffect())
     val TOXIC_SHOCK = register("toxic_shock", ToxicShockStatusEffect())
-    val INKED = register("inked", InkedStatusEffect())
 
     private fun register(id: String, effect: StatusEffect): RegistryEntry<StatusEffect> {
         return Registry.registerReference(Registries.STATUS_EFFECT, Identifier(HybridAquatic.MOD_ID, id), effect)

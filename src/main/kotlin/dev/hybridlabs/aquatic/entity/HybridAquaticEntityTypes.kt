@@ -452,7 +452,7 @@ object HybridAquaticEntityTypes {
     val CUTTLEFISH = registerCephalopod(
         "cuttlefish",
         ::CuttlefishEntity,
-        EntityDimensions.fixed(0.5f, 0.35f),
+        EntityDimensions.fixed(0.5f, 0.3f),
         CuttlefishEntity.createMobAttributes()
     )
 
@@ -805,7 +805,7 @@ object HybridAquaticEntityTypes {
 
     val THROWING_STAR = registerProjectile("throwing_star",
         ::ThrowingStarEntity,
-        EntityDimensions.fixed(0.25f,0.25f)
+        EntityDimensions.fixed(0.25f, 0.25f)
     )
 
     private fun <T : LivingEntity> registerShark(

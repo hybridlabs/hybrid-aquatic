@@ -429,7 +429,6 @@ class LanguageProvider(output: FabricDataOutput, lookup: CompletableFuture<Regis
             HybridAquaticStatusEffects.THALASSOPHOBIA to "Thalassophobia",
             HybridAquaticStatusEffects.BUOYANCY to "Buoyancy",
             HybridAquaticStatusEffects.SPININESS to "Spininess",
-            HybridAquaticStatusEffects.INKED to "Inked",
         ).forEach { (effect, translation) ->
             val identifier = effect.key.orElseThrow().value
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
