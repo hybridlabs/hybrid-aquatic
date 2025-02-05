@@ -165,7 +165,7 @@ open class HybridAquaticCephalopodEntity(
         ) { it != this && it.isAlive }
 
         for (entity in affectedEntities) {
-            entity.addStatusEffect(StatusEffectInstance(HybridAquaticStatusEffects.INKED, 100, 0))
+            entity.addStatusEffect(StatusEffectInstance(StatusEffects.BLINDNESS, 100, 0))
             entity.addStatusEffect(StatusEffectInstance(StatusEffects.DARKNESS, 100, 0))
         }
 
