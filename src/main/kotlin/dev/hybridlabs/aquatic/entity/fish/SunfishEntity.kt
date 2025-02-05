@@ -14,11 +14,14 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) :
         entityType, world, variants = hashMapOf(
             "ocean" to FishVariant.biomeVariant(
                 "ocean",
-                listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS)),
+                listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS),
+                ignore = listOf(FishVariant.Ignore.ANIMATION)),
             "hoodwinker" to FishVariant.biomeVariant("hoodwinker",
-                listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS)),
+                listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS),
+                ignore = listOf(FishVariant.Ignore.ANIMATION)),
             "sharptail" to FishVariant.biomeVariant("sharptail",
-                listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS)),
+                listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS),
+                ignore = listOf(FishVariant.Ignore.ANIMATION)),
         ),
         listOf(
             HybridAquaticEntityTags.JELLYFISH
