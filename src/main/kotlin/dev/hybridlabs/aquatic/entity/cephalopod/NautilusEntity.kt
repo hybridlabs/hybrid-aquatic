@@ -4,6 +4,9 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.damage.DamageSource
+import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
 class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: World) :
@@ -26,6 +29,14 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
         }
+    }
+
+    override fun getHurtSound(source: DamageSource?): SoundEvent {
+        return SoundEvents.ENTITY_SHULKER_CLOSE
+    }
+
+    override fun getDeathSound(): SoundEvent {
+        return SoundEvents.ENTITY_SHULKER_HURT_CLOSED
     }
 
     override fun getMaxSize(): Int {
