@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.miscellaneous
 
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.projectile.thrown.SnowballEntity
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -15,8 +16,6 @@ class ThrowingStarEntity(entityType: EntityType<out ThrownItemEntity>?, world: W
         ThrownItemEntity(entityType, world) {
 
     var DisplayItem : ItemStack = Items.COOKED_COD.defaultStack;
-
-    override fun initDataTracker() {}
 
     override fun tick() {
         super.tick()
