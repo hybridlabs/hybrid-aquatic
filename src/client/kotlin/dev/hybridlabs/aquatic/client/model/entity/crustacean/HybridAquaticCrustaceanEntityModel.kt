@@ -56,12 +56,8 @@ abstract class HybridAquaticCrustaceanEntityModel<T : HybridAquaticCrustaceanEnt
         if (animatable.isClimbing) {
             body.rotX = Math.toRadians(90.0).toFloat()
 
-            //
             val snappedAngle = snapAngle(entityYaw, 4);
-
-//            animatable.isCustomNameVisible = true;
-//            animatable.customName = Text.literal("Snapped angle: $snappedAngle");
-            body.rotY = snappedAngle;
+            body.rotY = Math.toRadians(snappedAngle.toDouble()).toFloat();
         }
     }
 
