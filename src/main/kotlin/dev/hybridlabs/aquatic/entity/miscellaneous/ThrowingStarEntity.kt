@@ -21,7 +21,6 @@ class ThrowingStarEntity(entityType: EntityType<out LodgedProjectileEntity>?, wo
         LodgedProjectileEntity(entityType, world), FlyingItemEntity {
 
     var displayItem : ItemStack = Items.COOKED_COD.defaultStack;
-    var pitch : Float = 0.0f;
 
     // Create a basic expiration date for the projectile. This will be renewed upon landing.
     private var expirationDate : Long = world!!.time + INITIAL_LIFETIME;
@@ -44,13 +43,11 @@ class ThrowingStarEntity(entityType: EntityType<out LodgedProjectileEntity>?, wo
     override fun writeCustomDataToNbt(nbt: NbtCompound?) {
         super.writeCustomDataToNbt(nbt!!)
         nbt.putLong("expirationDate", expirationDate);
-        nbt.putFloat("pitch", pitch)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound?) {
         super.readCustomDataFromNbt(nbt!!)
         nbt.getLong("expirationDate")
-        nbt.getFloat("pitch")
     }
 
     override fun movementTick() {
