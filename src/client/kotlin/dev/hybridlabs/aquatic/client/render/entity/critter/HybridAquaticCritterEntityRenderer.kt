@@ -12,4 +12,8 @@ open class HybridAquaticCritterEntityRenderer<T : HybridAquaticCritterEntity>(
     override fun getMotionAnimThreshold(animatable: T): Float {
         return 0.0025f
     }
+
+    override fun getDeathMaxRotation(animatable: T): Float {
+        return 0f
+    }
 }

@@ -8,6 +8,7 @@ import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
 import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
+import dev.hybridlabs.aquatic.entity.fish.carp.CarpEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.miscellaneous.ThrowingStarEntity

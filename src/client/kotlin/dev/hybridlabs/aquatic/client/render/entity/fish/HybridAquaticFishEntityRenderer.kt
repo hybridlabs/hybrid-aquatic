@@ -15,6 +15,10 @@ open class HybridAquaticFishEntityRenderer<T: HybridAquaticFishEntity>(context: 
         if(canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
     }
 
+    override fun getDeathMaxRotation(animatable: T): Float {
+        return 180f
+    }
+
     override fun render(
         entity: T,
         entityYaw: Float,
