@@ -9,10 +9,19 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
 @Suppress("LeakingThis")
-open class HybridAquaticSharkEntityRenderer<T: HybridAquaticSharkEntity>(context: EntityRendererFactory.Context, model: GeoModel<T>, private var variableSize: Boolean = false, canGlow: Boolean = false): GeoEntityRenderer<T>(context, model) {
+open class HybridAquaticSharkEntityRenderer<T : HybridAquaticSharkEntity>(
+    context: EntityRendererFactory.Context,
+    model: GeoModel<T>,
+    private var variableSize: Boolean = false,
+    canGlow: Boolean = false
+) : GeoEntityRenderer<T>(context, model) {
 
     init {
-        if(canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
+        if (canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
+    }
+
+    override fun getDeathMaxRotation(animatable: T): Float {
+        return 180f
     }
 
     override fun render(
@@ -23,7 +32,7 @@ open class HybridAquaticSharkEntityRenderer<T: HybridAquaticSharkEntity>(context
         bufferSource: VertexConsumerProvider,
         packedLight: Int
     ) {
-        if(variableSize) {
+        if (variableSize) {
             val size = HybridAquaticSharkEntity.getScaleAdjustment(entity, 0.05f)
             poseStack.scale(size, size, size)
         }
