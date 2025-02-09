@@ -51,7 +51,7 @@ class ThrowingStarEntity(entityType: EntityType<out LodgedProjectileEntity>?, wo
     }
 
     override fun movementTick() {
-        TODO("Not yet implemented")
+
     }
 
     override fun isCollidable(): Boolean {
