@@ -6,7 +6,9 @@ import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
+import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.Properties
+import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
@@ -17,14 +19,14 @@ import net.minecraft.world.WorldView
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class RaftBlock(settings: Settings) : Block(settings), Waterloggable {
     init {
-        defaultState = defaultState.with(Properties.WATERLOGGED, false)
+        defaultState = defaultState
+            .with(Properties.WATERLOGGED, false)
     }
-
-    override fun getPlacementState(context: ItemPlacementContext): BlockState? {
-        val world = context.world
-        val pos = context.blockPos
-        val fluidState = world.getFluidState(pos)
-        return super.getPlacementState(context)?.with(Properties.WATERLOGGED, fluidState.fluid == Fluids.WATER)
+    override fun getPlacementState(ctx: ItemPlacementContext): BlockState {
+        val waterlogged = ctx.world.getFluidState(ctx.blockPos).fluid == Fluids.WATER
+        return defaultState
+            .with(Properties.WATERLOGGED, waterlogged)
+            .with(BuoyBlock.FACING, ctx.horizontalPlayerFacing.rotateYClockwise())
     }
 
     override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
@@ -43,21 +45,12 @@ class RaftBlock(settings: Settings) : Block(settings), Waterloggable {
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        if (state.get(Properties.WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
-        }
-
-        if (!canPlaceAt(state, world, pos)) {
-            return Blocks.AIR.defaultState
-        }
-
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
+        return if (canPlaceAt(state, world, pos)) super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
+        else Blocks.AIR.defaultState
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        super.appendProperties(
-            builder.add(Properties.WATERLOGGED)
-        )
+        builder.add(Properties.WATERLOGGED, FACING)
     }
 
     override fun getOutlineShape(
@@ -74,17 +67,20 @@ class RaftBlock(settings: Settings) : Block(settings), Waterloggable {
         if (fluidStateAbove.fluid != Fluids.EMPTY) {
             return false
         }
-
         val stateBelow = world.getBlockState(pos.down())
         if (stateBelow.block == this) {
             return false
         }
-
         val fluidState = world.getFluidState(pos)
         return fluidState.fluid == Fluids.WATER || sideCoversSmallSquare(world, pos.down(), Direction.UP)
     }
 
+    override fun rotate(state: BlockState, rotation: BlockRotation): BlockState {
+        return state.with(FACING, rotation.rotate(state.get(FACING) as Direction)) as BlockState
+    }
+
     companion object {
+        val FACING: DirectionProperty = HorizontalFacingBlock.FACING
         private val SHAPE: VoxelShape = createCuboidShape(1.0, 12.0, 1.0, 15.0, 16.0, 15.0)
     }
 }
