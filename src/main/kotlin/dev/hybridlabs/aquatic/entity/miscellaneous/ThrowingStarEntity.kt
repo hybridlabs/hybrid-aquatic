@@ -17,10 +17,11 @@ import net.minecraft.world.World
 /**
  *
  */
-class ThrowingStarEntity(entityType: EntityType<out PersistentProjectileEntity>?, world: World?) :
-        PersistentProjectileEntity(entityType, world), FlyingItemEntity {
+class ThrowingStarEntity(entityType: EntityType<out LodgedProjectileEntity>?, world: World?) :
+        LodgedProjectileEntity(entityType, world), FlyingItemEntity {
 
     var displayItem : ItemStack = Items.COOKED_COD.defaultStack;
+    var pitch : Float = 0.0f;
 
     // Create a basic expiration date for the projectile. This will be renewed upon landing.
     private var expirationDate : Long = world!!.time + INITIAL_LIFETIME;
@@ -35,7 +36,7 @@ class ThrowingStarEntity(entityType: EntityType<out PersistentProjectileEntity>?
     override fun tick() {
         super.tick()
 
-        if (world.time > expirationDate) {
+        if (world.time > expirationDate && !world.isClient) {
             this.remove(RemovalReason.DISCARDED)
         }
     }
@@ -43,19 +44,21 @@ class ThrowingStarEntity(entityType: EntityType<out PersistentProjectileEntity>?
     override fun writeCustomDataToNbt(nbt: NbtCompound?) {
         super.writeCustomDataToNbt(nbt!!)
         nbt.putLong("expirationDate", expirationDate);
+        nbt.putFloat("pitch", pitch)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound?) {
         super.readCustomDataFromNbt(nbt!!)
         nbt.getLong("expirationDate")
+        nbt.getFloat("pitch")
+    }
+
+    override fun movementTick() {
+        TODO("Not yet implemented")
     }
 
     override fun isCollidable(): Boolean {
         return super.isCollidable()
-    }
-
-    override fun asItemStack(): ItemStack {
-        TODO("Not yet implemented")
     }
 
     companion object {
@@ -66,7 +69,7 @@ class ThrowingStarEntity(entityType: EntityType<out PersistentProjectileEntity>?
                 DataTracker.registerData(ThrowingStarEntity::class.java, TrackedDataHandlerRegistry.LONG)
 
         const val INITIAL_LIFETIME = (20 * 10)  // Lives for 10 seconds in the air
-        const val EMBEDDED_LIFETIME = (20 * 20)  // Lives for 20 seconds upon landing
+        const val EMBEDDED_LIFETIME = (20 * 30)  // Lives for 20 seconds upon landing
 
     }
 
