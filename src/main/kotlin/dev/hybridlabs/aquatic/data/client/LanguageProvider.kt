@@ -64,9 +64,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.diving_suit.title" to "Diving In",
             "advancements.hybrid-aquatic.diving_suit.description" to "Obtain a full set of diving gear",
 
-            "advancements.hybrid-aquatic.brine.title" to "You Were Supposed To Be A Hero",
-            "advancements.hybrid-aquatic.brine.description" to "Dive into a pool of Brine",
-
             "advancements.hybrid-aquatic.hook.title" to "Hooked!",
             "advancements.hybrid-aquatic.hook.description" to "Craft a hook to help you catch fish faster",
 
@@ -230,7 +227,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         // items
         mapOf(
-            HybridAquaticItems.BRINE_BUCKET to "Brine Bucket",
             HybridAquaticItems.UNI to "Uni",
             HybridAquaticItems.RAW_FISH_STEAK to "Fish Steak",
             HybridAquaticItems.COOKED_FISH_STEAK to "Cooked Fish Steak",
@@ -353,7 +349,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticStatusEffects.BLEEDING to "Bleeding",
             HybridAquaticStatusEffects.CLARITY to "Clarity",
             HybridAquaticStatusEffects.CORROSION to "Corrosion",
-            HybridAquaticStatusEffects.TOXIC_SHOCK to "Toxic Shock",
             HybridAquaticStatusEffects.THALASSOPHOBIA to "Thalassophobia",
             HybridAquaticStatusEffects.BUOYANCY to "Buoyancy",
             HybridAquaticStatusEffects.SPININESS to "Spininess",

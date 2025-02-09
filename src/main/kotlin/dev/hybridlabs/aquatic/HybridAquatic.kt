@@ -10,7 +10,6 @@ import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
-import dev.hybridlabs.aquatic.fluid.HybridAquaticFluids
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.loot.LootTableModifications
@@ -38,7 +37,6 @@ import net.minecraft.village.TradeOffers.SellItemFactory
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
-import kotlin.collections.forEach
 import kotlin.io.path.notExists
 
 object HybridAquatic : ModInitializer {
@@ -53,7 +51,6 @@ object HybridAquatic : ModInitializer {
     override fun onInitialize() {
         logger.info("Initializing $MOD_NAME")
 
-        HybridAquaticFluids
         HybridAquaticBlocks
         HybridAquaticBlockEntityTypes
 

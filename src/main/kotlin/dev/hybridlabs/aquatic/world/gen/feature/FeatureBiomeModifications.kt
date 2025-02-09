@@ -121,12 +121,6 @@ object FeatureBiomeModifications {
 
 //        BiomeModifications.addFeature(
 //            BiomeSelectors.tag(BiomeTags.IS_DEEP_OCEAN),
-//            GenerationStep.Feature.LAKES,
-//            HybridAquaticPlacedFeatures.BRINE_LAKE
-//        )
-
-//        BiomeModifications.addFeature(
-//            BiomeSelectors.tag(BiomeTags.IS_DEEP_OCEAN),
 //            GenerationStep.Feature.VEGETAL_DECORATION,
 //            HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION
 //        )
