@@ -21,9 +21,10 @@ class ThrowingStarItem(settings: Settings?) : Item(settings) {
         // It's crazy how optimal the snowball throwing code is for literally everything
         if (!world.isClient) {
             val throwingStar = ThrowingStarEntity(THROWING_STAR, world);
-            throwingStar.DisplayItem = thrownStack.copy();
+            throwingStar.displayItem = thrownStack.copy();
             throwingStar.setVelocity(user, user.pitch, user.yaw, 0.0f, 1.5f, 1.0f)
             world.spawnEntity(throwingStar)
+            println("foo!")
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this))

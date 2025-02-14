@@ -8,7 +8,12 @@ import net.minecraft.client.render.RenderLayers
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
+import net.minecraft.client.render.entity.ItemEntityRenderer
 import net.minecraft.client.render.entity.LivingEntityRenderer
+import net.minecraft.client.render.entity.ZombieEntityRenderer
+import net.minecraft.client.render.entity.feature.HeadFeatureRenderer
+import net.minecraft.client.render.entity.model.EntityModel
+import net.minecraft.client.render.entity.model.ZombieEntityModel
 import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.render.model.json.ModelTransformationMode
 import net.minecraft.client.util.math.MatrixStack
@@ -37,14 +42,16 @@ class ThrowingStarEntityRenderer(renderManager: EntityRendererFactory.Context?) 
         if(!entity.inGround) {
             matrices.multiply(RotationAxis.NEGATIVE_Z.rotationDegrees((worldTime * tickDelta) * 5))
         } else {
-
         }
 
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 0.5f)
 
 
         val bakedModel = itemRenderer.getModel(stack, entity.world, null, 0)
         itemRenderer.renderItem(stack, ModelTransformationMode.FIXED, false, matrices, vertexConsumers, light, OverlayTexture.DEFAULT_UV, bakedModel);
         matrices.pop()
+
+        RenderSystem.setShaderColor(1.0f,1.0f,1.0f,1.0f)
     }
 
     override fun getTexture(entity: ThrowingStarEntity?): Identifier? {
