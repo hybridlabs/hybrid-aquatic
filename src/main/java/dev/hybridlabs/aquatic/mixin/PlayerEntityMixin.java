@@ -102,7 +102,7 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
         // Gives Resistance and Slowness if player has Turtle chestplate equipped
         updateTurtleChestplate();
         // Repairs coral tools in the water
-        repairCoralTools(5);
+        repairCoralTools();
     }
 
     @Unique
@@ -144,12 +144,12 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
     @Unique
     int coralRepairTick = 0;
     @Unique
-    private void repairCoralTools(int tickDelay) {
+    private void repairCoralTools() {
         var player = (PlayerEntity)(Object)this;
         var inventory = player.getInventory();
         
         if (player.isSubmergedIn(FluidTags.WATER)) {
-            if (coralRepairTick > tickDelay) {
+            if (coralRepairTick > 5) {
                 List<DefaultedList<ItemStack>> combinedInventory = ImmutableList.of(inventory.main, inventory.offHand);
                 List<ItemStack> coralItems = new ArrayList<>();
                 for(List<ItemStack> list: combinedInventory) {

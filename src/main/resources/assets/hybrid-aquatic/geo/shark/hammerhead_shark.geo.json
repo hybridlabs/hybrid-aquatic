@@ -35,7 +35,8 @@
 				{
 					"name": "right_back_fin",
 					"parent": "body_2",
-					"pivot": [-3.5, 2.4, 8],
+					"pivot": [-3.5, 2.9, 7],
+					"rotation": [0, 22.5, -45],
 					"cubes": [
 						{"origin": [-6.5, 1.9, 7], "size": [3, 1, 4], "uv": [38, 63]},
 						{"origin": [-10.5, 2.9, 7], "size": [7, 0, 6], "uv": [56, 32]}
@@ -44,7 +45,8 @@
 				{
 					"name": "left_back_fin",
 					"parent": "body_2",
-					"pivot": [3.5, 2.4, 8],
+					"pivot": [3.5, 2.9, 7],
+					"rotation": [0, -22.5, 45],
 					"cubes": [
 						{"origin": [3.5, 1.9, 7], "size": [3, 1, 4], "uv": [38, 63], "mirror": true},
 						{"origin": [3.5, 2.9, 7], "size": [7, 0, 6], "uv": [56, 32], "mirror": true}
@@ -88,7 +90,8 @@
 				{
 					"name": "left_fin",
 					"parent": "body",
-					"pivot": [4.5, 1.5, -5.5],
+					"pivot": [4.5, 2, -5.5],
+					"rotation": [0, -22.5, 22.5],
 					"cubes": [
 						{"origin": [4.5, 1, -5.5], "size": [5, 1, 4], "uv": [38, 58], "mirror": true},
 						{"origin": [4.5, 2, -5.5], "size": [10, 0, 7], "uv": [44, 0], "mirror": true}
@@ -97,7 +100,8 @@
 				{
 					"name": "right_fin",
 					"parent": "body",
-					"pivot": [-4.5, 1.5, -5.5],
+					"pivot": [-4.5, 2, -5.5],
+					"rotation": [0, 22.5, -22.5],
 					"cubes": [
 						{"origin": [-9.5, 1, -5.5], "size": [5, 1, 4], "uv": [38, 58]},
 						{"origin": [-14.5, 2, -5.5], "size": [10, 0, 7], "uv": [44, 0]}

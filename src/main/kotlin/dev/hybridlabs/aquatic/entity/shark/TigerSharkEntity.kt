@@ -60,6 +60,7 @@ class TigerSharkEntity(entityType: EntityType<out TigerSharkEntity>, world: Worl
                 ItemStack(Items.SPYGLASS),
                 ItemStack(Items.SADDLE),
                 ItemStack(HybridAquaticItems.SHARK_TOOTH),
+                ItemStack(HybridAquaticItems.CUTTLEBONE),
                 ItemStack(HybridAquaticItems.GLOWING_HOOK),
                 ItemStack(HybridAquaticItems.BARBED_HOOK),
             )
@@ -94,7 +95,7 @@ class TigerSharkEntity(entityType: EntityType<out TigerSharkEntity>, world: Worl
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 54.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)

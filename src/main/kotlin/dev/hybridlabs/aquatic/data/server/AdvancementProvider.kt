@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.data.server
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks.BRINE
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -142,25 +141,6 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             )
             .build(Identifier("hybrid-aquatic", "diving_suit"))
         consumer?.accept(divingSuitAdvancement)
-
-        val brineAdvancement = Advancement.Builder.create()
-            .parent(divingSuitAdvancement)
-            .display(
-                HybridAquaticItems.BRINE_BUCKET,
-                Text.translatable("advancements.hybrid-aquatic.brine.title"),
-                Text.translatable("advancements.hybrid-aquatic.brine.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
-                AdvancementFrame.TASK,
-                true,
-                true,
-                false
-            )
-            .criterion(
-                "enter_brine",
-                EnterBlockCriterion.Conditions.block(BRINE)
-            )
-            .build(Identifier("hybrid-aquatic", "brine"))
-        consumer?.accept(brineAdvancement)
 
         val obtainPearlAdvancement = Advancement.Builder.create()
             .parent(divingSuitAdvancement)

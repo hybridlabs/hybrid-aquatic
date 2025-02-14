@@ -226,7 +226,6 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.OMINOUS_HOOK)
 
             // tools
-            entries.add(HybridAquaticItems.BRINE_BUCKET)
             entries.add(HybridAquaticItems.SEASHELL_SPEAR)
             entries.add(HybridAquaticItems.SEASHELL_PICKAXE)
             entries.add(HybridAquaticItems.SEASHELL_AXE)

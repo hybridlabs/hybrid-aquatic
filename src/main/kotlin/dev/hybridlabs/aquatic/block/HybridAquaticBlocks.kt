@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.block
 import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodTypes
-import dev.hybridlabs.aquatic.fluid.HybridAquaticFluids
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
@@ -50,16 +49,6 @@ object HybridAquaticBlocks {
             FabricBlockSettings.copyOf(Blocks.GLASS)
                 .breakInstantly()
                 .pistonBehavior(PistonBehavior.DESTROY)
-        )
-    )
-
-    val BRINE = register(
-        "brine",
-        FluidBlock(
-            HybridAquaticFluids.BRINE,
-            AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).replaceable().noCollision().strength(100.0f)
-                .pistonBehavior(PistonBehavior.DESTROY).dropsNothing().liquid()
-                .sounds(BlockSoundGroup.INTENTIONALLY_EMPTY)
         )
     )
 

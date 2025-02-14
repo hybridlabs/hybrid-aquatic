@@ -40,7 +40,7 @@ open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, 
         return BuoyBlockEntity(pos, state)
     }
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
+    override fun getPlacementState(ctx: ItemPlacementContext): BlockState {
         val waterlogged = ctx.world.getFluidState(ctx.blockPos).fluid == Fluids.WATER
         return defaultState
             .with(Properties.WATERLOGGED, waterlogged)
@@ -98,7 +98,7 @@ open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, 
         val FACING: DirectionProperty = HorizontalFacingBlock.FACING
 
         private val CUBE_SHAPE: VoxelShape = createCuboidShape(0.5, 3.0, 0.5, 15.5, 16.0, 15.5)
-        private val POLE_SHAPE: VoxelShape = createCuboidShape(4.0, 16.0, 6.0, 12.0, 48.0, 10.0)
+        private val POLE_SHAPE: VoxelShape = createCuboidShape(6.0, 16.0, 6.0, 10.0, 42.0, 10.0)
 
         private val SHAPE: VoxelShape = VoxelShapes.union(CUBE_SHAPE, POLE_SHAPE)
         private val COLLISION_SHAPE: VoxelShape = VoxelShapes.union(CUBE_SHAPE, POLE_SHAPE)
