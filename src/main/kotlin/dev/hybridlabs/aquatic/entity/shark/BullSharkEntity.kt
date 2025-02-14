@@ -29,7 +29,7 @@ class BullSharkEntity(entityType: EntityType<out BullSharkEntity>, world: World)
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 54.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0)

@@ -50,6 +50,7 @@
 					"name": "left_fin",
 					"parent": "body",
 					"pivot": [8, 3.5, -6.25],
+					"rotation": [0, -10, 22.5],
 					"cubes": [
 						{"origin": [8, 3, -6.25], "size": [10, 1, 9], "uv": [82, 92]},
 						{"origin": [8, 4, -7.25], "size": [20, 0, 16], "uv": [0, 38]}
@@ -59,6 +60,7 @@
 					"name": "right_fin",
 					"parent": "body",
 					"pivot": [-8, 3.5, -6.25],
+					"rotation": [0, 10, -22.5],
 					"cubes": [
 						{"origin": [-18, 3, -6.25], "size": [10, 1, 9], "uv": [82, 92], "mirror": true},
 						{"origin": [-28, 4, -7.25], "size": [20, 0, 16], "uv": [0, 38], "mirror": true}

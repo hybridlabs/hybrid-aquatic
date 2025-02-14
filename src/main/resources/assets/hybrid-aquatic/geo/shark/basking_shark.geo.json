@@ -77,6 +77,7 @@
 					"name": "left_fin",
 					"parent": "body",
 					"pivot": [6.5, 3.5, -6],
+					"rotation": [0, -15, 45],
 					"cubes": [
 						{"origin": [6.5, 3, -6], "size": [10, 1, 9], "uv": [0, 98]},
 						{"origin": [6.5, 4, -7], "size": [20, 0, 16], "uv": [44, 36]}
@@ -86,6 +87,7 @@
 					"name": "right_fin",
 					"parent": "body",
 					"pivot": [-6.5, 3.5, -6],
+					"rotation": [0, 15, -45],
 					"cubes": [
 						{"origin": [-16.5, 3, -6], "size": [10, 1, 9], "uv": [0, 98], "mirror": true},
 						{"origin": [-26.5, 4, -7], "size": [20, 0, 16], "uv": [44, 36], "mirror": true}
