@@ -15,13 +15,13 @@ import net.minecraft.world.World
 class ThrowingStarItem(settings: Settings?) : Item(settings) {
 
     override fun use(world: World?, user: PlayerEntity?, hand: Hand?): TypedActionResult<ItemStack> {
-        val thrownStack = user!!.getStackInHand(hand); // This will literally never be null??
-        world!!.playSound(null as PlayerEntity?, user.x, user.y, user.z, SoundEvents.BLOCK_DISPENSER_LAUNCH, SoundCategory.NEUTRAL, 0.5f, 0.4f / (world!!.getRandom().nextFloat() * 0.4f + 0.8f))
+        val thrownStack = user!!.getStackInHand(hand) // This will literally never be null??
+        world!!.playSound(null as PlayerEntity?, user.x, user.y, user.z, SoundEvents.BLOCK_DISPENSER_LAUNCH, SoundCategory.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f))
 
         // It's crazy how optimal the snowball throwing code is for literally everything
         if (!world.isClient) {
-            val throwingStar = ThrowingStarEntity(THROWING_STAR, world);
-            throwingStar.displayItem = thrownStack.copy();
+            val throwingStar = ThrowingStarEntity(THROWING_STAR, world)
+            throwingStar.displayItem = thrownStack.copy()
             throwingStar.setVelocity(user, user.pitch, user.yaw, 0.0f, 1.5f, 1.0f)
             world.spawnEntity(throwingStar)
             println("foo!")
