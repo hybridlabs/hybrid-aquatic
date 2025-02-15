@@ -12,6 +12,9 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.world.World
 
 /**
@@ -40,6 +43,16 @@ class ThrowingStarEntity(entityType: EntityType<out LodgedProjectileEntity>?, wo
         }
     }
 
+    override fun movementTick() {
+
+    }
+
+    override fun onBlockHit(blockHitResult: BlockHitResult?) {
+        super.onBlockHit(blockHitResult)
+
+        world.playSound(this, blockPos, SoundEvents.ITEM_TRIDENT_HIT, SoundCategory.PLAYERS, 1.0f, random.nextFloat())
+    }
+
     override fun writeCustomDataToNbt(nbt: NbtCompound?) {
         super.writeCustomDataToNbt(nbt!!)
         nbt.putLong("expirationDate", expirationDate);
@@ -48,10 +61,6 @@ class ThrowingStarEntity(entityType: EntityType<out LodgedProjectileEntity>?, wo
     override fun readCustomDataFromNbt(nbt: NbtCompound?) {
         super.readCustomDataFromNbt(nbt!!)
         nbt.getLong("expirationDate")
-    }
-
-    override fun movementTick() {
-
     }
 
     override fun isCollidable(): Boolean {
