@@ -147,4 +147,6 @@ object HybridAquaticEntityRenderers {
     //region misc
     val THROWING_STAR = EntityRendererRegistry.register(HybridAquaticEntityTypes.THROWING_STAR, ::ThrowingStarEntityRenderer)
     //endregion
+
+
 }
