@@ -19,6 +19,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 object HybridAquaticEntityRenderers {
     //region fish
     val AFRICAN_BUTTERFLY = EntityRendererRegistry.register(HybridAquaticEntityTypes.AFRICAN_BUTTERFLY, ::AfricanButterflyEntityRenderer)
+    val GAY_FISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.GAY_FISH, ::GayFishEntityRenderer)
     val ANGLERFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.ANGLERFISH, ::AnglerfishEntityRenderer)
     val DRAGONFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.DRAGONFISH, ::DragonfishEntityRenderer)
     val JOHN_DORY = EntityRendererRegistry.register(HybridAquaticEntityTypes.JOHN_DORY, ::JohnDoryEntityRenderer)
@@ -147,4 +148,6 @@ object HybridAquaticEntityRenderers {
     //region misc
     val THROWING_STAR = EntityRendererRegistry.register(HybridAquaticEntityTypes.THROWING_STAR, ::ThrowingStarEntityRenderer)
     //endregion
+
+
 }
