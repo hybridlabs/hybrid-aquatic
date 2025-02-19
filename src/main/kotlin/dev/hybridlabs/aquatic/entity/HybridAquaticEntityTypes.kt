@@ -34,6 +34,13 @@ object HybridAquaticEntityTypes {
         AfricanButterflyEntity.createMobAttributes()
     )
 
+    val DAMSELFISH = registerFish(
+        "damselfish",
+        ::DamselfishEntity,
+        EntityDimensions.fixed(0.25f, 0.2f),
+        DamselfishEntity.createMobAttributes()
+    )
+
     val FLYING_FISH = registerFish(
         "flying_fish",
         ::FlyingFishEntity,

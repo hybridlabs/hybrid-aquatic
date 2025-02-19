@@ -763,6 +763,21 @@ object HybridAquaticItems {
                         .build()
                 )
         )
+
+    )
+
+    val DAMSELFISH = register(
+        "damselfish",
+        Item(
+             FabricItemSettings()
+                .food(
+                     FoodComponent.Builder()
+                            .hunger(1)
+                            .saturationModifier(0.2F)
+                            .meat()
+                            .build()
+                )
+        )
     )
 
     val FLASHLIGHT_FISH = register(
@@ -1284,6 +1299,7 @@ object HybridAquaticItems {
     val AFRICAN_BUTTERFLY_SPAWN_EGG = registerSpawnEgg("african_butterfly_spawn_egg", HybridAquaticEntityTypes.AFRICAN_BUTTERFLY, 0xb57955, 0x1e3555)
     val BARRELEYE_SPAWN_EGG = registerSpawnEgg("barreleye_spawn_egg", HybridAquaticEntityTypes.BARRELEYE, 0x4b4343, 0x6bc96c)
     val BETTA_SPAWN_EGG = registerSpawnEgg("betta_spawn_egg", HybridAquaticEntityTypes.BETTA, 0xcc425e, 0x504198)
+    val DAMSELFISH_SPAWN_EGG = registerSpawnEgg("damselfish_spawn_egg", HybridAquaticEntityTypes.DAMSELFISH,0xff1493, 0xfdf5e6)
     val CARP_SPAWN_EGG = registerSpawnEgg("carp_spawn_egg", HybridAquaticEntityTypes.CARP, 0x725234, 0xd3ad8c)
     val CLOWNFISH_SPAWN_EGG = registerSpawnEgg("clownfish_spawn_egg", HybridAquaticEntityTypes.CLOWNFISH, 0xdf4917, 0xf8e7ed)
     val BOXFISH_SPAWN_EGG = registerSpawnEgg("boxfish_spawn_egg", HybridAquaticEntityTypes.BOXFISH, 0xfffeac, 0xffc056)

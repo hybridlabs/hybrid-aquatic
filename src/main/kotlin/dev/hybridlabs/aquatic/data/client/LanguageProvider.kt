@@ -246,6 +246,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.COOKED_CRAYFISH to "Cooked Crayfish",
             HybridAquaticItems.LIONFISH to "Lionfish",
             HybridAquaticItems.NEON_TETRA to "Neon Tetra",
+            HybridAquaticItems.DAMSELFISH to "Sergeant Major",
             HybridAquaticItems.DRAGONFISH to "Dragonfish",
             HybridAquaticItems.FLASHLIGHT_FISH to "Flashlight Fish",
             HybridAquaticItems.SQUIRRELFISH to "Squirrel Fish",
@@ -412,6 +413,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         // create map of entities to their display names
         val entityNameMap = mapOf(
             HybridAquaticEntityTypes.CLOWNFISH to "Clownfish",
+            HybridAquaticEntityTypes.DAMSELFISH to "Damselfish",
             HybridAquaticEntityTypes.AFRICAN_BUTTERFLY to "African Butterfly Fish",
             HybridAquaticEntityTypes.ANGLERFISH to "Anglerfish",
             HybridAquaticEntityTypes.JOHN_DORY to "John Dory",
