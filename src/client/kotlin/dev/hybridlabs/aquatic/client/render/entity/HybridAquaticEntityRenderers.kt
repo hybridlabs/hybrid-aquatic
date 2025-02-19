@@ -19,7 +19,11 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 object HybridAquaticEntityRenderers {
     //region fish
     val AFRICAN_BUTTERFLY = EntityRendererRegistry.register(HybridAquaticEntityTypes.AFRICAN_BUTTERFLY, ::AfricanButterflyEntityRenderer)
+<<<<<<< HEAD
     val GAY_FISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.GAY_FISH, ::GayFishEntityRenderer)
+    val DAMSELFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.DAMSELFISH, ::DamselfishEntityRenderer)
+=======
+>>>>>>> 875f6d644a3fbbc54297fda81992bb5cea49026f
     val ANGLERFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.ANGLERFISH, ::AnglerfishEntityRenderer)
     val DRAGONFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.DRAGONFISH, ::DragonfishEntityRenderer)
     val JOHN_DORY = EntityRendererRegistry.register(HybridAquaticEntityTypes.JOHN_DORY, ::JohnDoryEntityRenderer)
