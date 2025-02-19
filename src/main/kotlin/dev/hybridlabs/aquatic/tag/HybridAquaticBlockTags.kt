@@ -18,13 +18,6 @@ object HybridAquaticBlockTags {
 
     val MESSAGE_IN_A_BOTTLE_SPAWNS_IN = create("message_in_a_bottle_spawns_in")
 
-    val CRAB_DIGGABLE_BLOCKS = create("crab_diggable_blocks")
-
-    val DEEP_CORAL_PLANTS = create("deep_coral_plants")
-    val DEEP_CORAL_BLOCKS = create("deep_coral_blocks")
-    val DEEP_CORALS = create("deep_corals")
-    val DEEP_WALL_CORALS = create("deep_corals")
-
     private fun create(id: String): TagKey<Block> {
         return TagKey.of(RegistryKeys.BLOCK, Identifier(HybridAquatic.MOD_ID, id))
     }

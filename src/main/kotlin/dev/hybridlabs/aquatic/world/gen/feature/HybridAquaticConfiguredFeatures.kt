@@ -27,11 +27,6 @@ object HybridAquaticConfiguredFeatures {
     val THERMAL_VENT_PATCH = register("thermal_vent_patch")
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
 
-//    val DEEP_CORAL_TREE = register("deep_coral_tree")
-//    val DEEP_CORAL_CLAW = register("deep_coral_claw")
-//    val DEEP_CORAL_MUSHROOM = register("deep_coral_mushroom")
-//    val DEEP_OCEAN_VEGETATION = register("deep_ocean_vegetation")
-
     private fun register(id: String): RegistryKey<ConfiguredFeature<*, *>> {
         return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, Identifier(HybridAquatic.MOD_ID, id))
     }

@@ -118,11 +118,5 @@ object FeatureBiomeModifications {
             GenerationStep.Feature.SURFACE_STRUCTURES,
             HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH
         )
-
-//        BiomeModifications.addFeature(
-//            BiomeSelectors.tag(BiomeTags.IS_DEEP_OCEAN),
-//            GenerationStep.Feature.VEGETAL_DECORATION,
-//            HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION
-//        )
     }
 }
