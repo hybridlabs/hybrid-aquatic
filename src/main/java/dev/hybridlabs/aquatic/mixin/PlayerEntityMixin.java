@@ -33,9 +33,11 @@ import java.util.List;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
 
-    @Shadow protected boolean isSubmergedInWater;
+    @Shadow
+    protected boolean isSubmergedInWater;
 
-    @Shadow public abstract boolean isSwimming();
+    @Shadow
+    public abstract boolean isSwimming();
 
     @Unique
     private int haHurtTime = 0;
@@ -88,7 +90,7 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
             if (foundEntity != null) hybrid_aquatic$setHurtTime(200);
         }
     }
-    
+
     @Inject(method = "tick", at = @At("TAIL"))
     private void tickDownCustomHurtTime(CallbackInfo ci) {
         int cHurtTime = hybrid_aquatic$getHurtTime();
@@ -107,7 +109,7 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
 
     @Unique
     private void updateDivingHelmet() {
-        var player = (PlayerEntity)(Object)this;
+        var player = (PlayerEntity) (Object) this;
         ItemStack itemStack = player.getEquippedStack(EquipmentSlot.HEAD);
 
         if (itemStack.isOf(HybridAquaticItems.INSTANCE.getDIVING_HELMET())) {
@@ -121,55 +123,55 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
 
     @Unique
     private void updateDivingBoots() {
-        var player = (PlayerEntity)(Object)this;
+        var player = (PlayerEntity) (Object) this;
         ItemStack itemStack = player.getEquippedStack(EquipmentSlot.FEET);
         isWearingDivingBoots = itemStack.isOf(HybridAquaticItems.INSTANCE.getDIVING_BOOTS());
+
         if (isWearingDivingBoots && player.isSubmergedIn(FluidTags.WATER)) {
             player.setStepHeight(1.0f);
-        } else {
-            player.setStepHeight(0.6f);
         }
     }
 
     @Unique
     private void updateTurtleChestplate() {
-        var player = (PlayerEntity)(Object)this;
+        var player = (PlayerEntity) (Object) this;
         var itemStack = player.getEquippedStack(EquipmentSlot.CHEST);
         if (itemStack.isOf(HybridAquaticItems.INSTANCE.getTURTLE_CHESTPLATE())) {
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 200, 0, false, false, true));
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 200, 0, false, false, true));
         }
     }
-    
+
     @Unique
     int coralRepairTick = 0;
+
     @Unique
     private void repairCoralTools() {
-        var player = (PlayerEntity)(Object)this;
+        var player = (PlayerEntity) (Object) this;
         var inventory = player.getInventory();
-        
+
         if (player.isSubmergedIn(FluidTags.WATER)) {
             if (coralRepairTick > 5) {
                 List<DefaultedList<ItemStack>> combinedInventory = ImmutableList.of(inventory.main, inventory.offHand);
                 List<ItemStack> coralItems = new ArrayList<>();
-                for(List<ItemStack> list: combinedInventory) {
-	                for (ItemStack itemStack: list) {
-		                if (itemStack.getItem() instanceof ToolItem tool &&
-				                    tool.getMaterial() == HybridAquaticToolMaterials.CORAL &&
-				                    itemStack.isDamaged()) {
-                        coralItems.add(itemStack);
-		                }
-	                }
+                for (List<ItemStack> list : combinedInventory) {
+                    for (ItemStack itemStack : list) {
+                        if (itemStack.getItem() instanceof ToolItem tool &&
+                                tool.getMaterial() == HybridAquaticToolMaterials.CORAL &&
+                                itemStack.isDamaged()) {
+                            coralItems.add(itemStack);
+                        }
+                    }
                 }
-                
-                if(!coralItems.isEmpty()) {
+
+                if (!coralItems.isEmpty()) {
                     ItemStack item = coralItems.get(player.getRandom().nextInt(coralItems.size()));
                     item.setDamage(item.getDamage() - 1);
                     inventory.markDirty();
                 }
                 coralRepairTick = 0;
             }
-            
+
             coralRepairTick++;
         }
     }
