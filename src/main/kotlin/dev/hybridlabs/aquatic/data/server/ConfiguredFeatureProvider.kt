@@ -235,42 +235,6 @@ class ConfiguredFeatureProvider(
                 )
             )
         )
-
-//        // deep coral
-//        entries.add(
-//            HybridAquaticConfiguredFeatures.DEEP_CORAL_TREE,
-//            ConfiguredFeature(
-//                HybridAquaticFeatures.DEEP_CORAL_TREE, DefaultFeatureConfig()
-//            )
-//        )
-//
-//        entries.add(
-//            HybridAquaticConfiguredFeatures.DEEP_CORAL_CLAW,
-//            ConfiguredFeature(
-//                HybridAquaticFeatures.DEEP_CORAL_CLAW, DefaultFeatureConfig()
-//            )
-//        )
-//
-//        entries.add(
-//            HybridAquaticConfiguredFeatures.DEEP_CORAL_MUSHROOM,
-//            ConfiguredFeature(
-//                HybridAquaticFeatures.DEEP_CORAL_MUSHROOM, DefaultFeatureConfig()
-//            )
-//        )
-//
-//        entries.add(
-//            HybridAquaticConfiguredFeatures.DEEP_OCEAN_VEGETATION,
-//            ConfiguredFeature(
-//                Feature.SIMPLE_RANDOM_SELECTOR,
-//                SimpleRandomFeatureConfig(
-//                    RegistryEntryList.of(
-//                        entries.ref(HybridAquaticPlacedFeatures.DEEP_CORAL_TREE),
-//                        entries.ref(HybridAquaticPlacedFeatures.DEEP_CORAL_CLAW),
-//                        entries.ref(HybridAquaticPlacedFeatures.DEEP_CORAL_MUSHROOM)
-//                    )
-//                )
-//            )
-//        )
     }
 
     override fun getName(): String {

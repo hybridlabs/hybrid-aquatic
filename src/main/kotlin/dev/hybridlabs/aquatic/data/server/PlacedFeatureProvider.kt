@@ -209,48 +209,6 @@ class PlacedFeatureProvider(
                 )
             )
         )
-
-//        entries.add(
-//            HybridAquaticPlacedFeatures.DEEP_CORAL_MUSHROOM,
-//            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.DEEP_CORAL_MUSHROOM),
-//                listOf(
-//                    SquarePlacementModifier.of(),
-//                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-//                )
-//            )
-//        )
-//
-//        entries.add(
-//            HybridAquaticPlacedFeatures.DEEP_CORAL_TREE,
-//            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.DEEP_CORAL_TREE),
-//                listOf(
-//                    SquarePlacementModifier.of(),
-//                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-//                )
-//            )
-//        )
-//
-//        entries.add(
-//            HybridAquaticPlacedFeatures.DEEP_CORAL_CLAW,
-//            PlacedFeature(entries.ref(HybridAquaticConfiguredFeatures.DEEP_CORAL_CLAW),
-//                listOf(
-//                    SquarePlacementModifier.of(),
-//                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-//                )
-//            )
-//        )
-//
-//        entries.add(
-//            HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION,
-//            PlacedFeature(
-//                entries.ref(HybridAquaticConfiguredFeatures.DEEP_OCEAN_VEGETATION),
-//                listOf(
-//                    SquarePlacementModifier.of(),
-//                    NoiseBasedCountPlacementModifier.of(20, 200.0, 0.0),
-//                    SurfaceThresholdFilterPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG, Int.MIN_VALUE, -32),
-//                )
-//            )
-//        )
     }
 
     override fun getName(): String {

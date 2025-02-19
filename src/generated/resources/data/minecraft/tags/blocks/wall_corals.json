@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "hybrid-aquatic:button_coral_wall_fan",
-    "hybrid-aquatic:sun_coral_wall_fan"
+    "hybrid-aquatic:sun_coral_wall_fan",
+    "hybrid-aquatic:lophelia_coral_wall_fan",
+    "hybrid-aquatic:thorn_coral_wall_fan"
   ]
 }
