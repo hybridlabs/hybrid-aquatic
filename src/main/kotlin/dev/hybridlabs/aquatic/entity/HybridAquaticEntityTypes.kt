@@ -8,7 +8,7 @@ import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
 import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
-import dev.hybridlabs.aquatic.entity.fish.carp.CarpEntity
+import dev.hybridlabs.aquatic.entity.fish.CarpEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.miscellaneous.ThrowingStarEntity
@@ -37,7 +37,7 @@ object HybridAquaticEntityTypes {
     val DAMSELFISH = registerFish(
         "damselfish",
         ::DamselfishEntity,
-        EntityDimensions.fixed(0.25f, 0.2f),
+        EntityDimensions.fixed(0.25f, 0.25f),
         DamselfishEntity.createMobAttributes()
     )
 

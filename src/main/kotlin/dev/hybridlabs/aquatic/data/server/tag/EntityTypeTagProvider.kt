@@ -28,6 +28,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.TIGER_BARB,
                 HybridAquaticEntityTypes.SURGEONFISH,
                 HybridAquaticEntityTypes.DISCUS,
+                HybridAquaticEntityTypes.DAMSELFISH,
                 HybridAquaticEntityTypes.GOURAMI,
                 HybridAquaticEntityTypes.CUTTLEFISH,
                 HybridAquaticEntityTypes.AFRICAN_BUTTERFLY,
@@ -165,6 +166,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .add(
                 HybridAquaticEntityTypes.AFRICAN_BUTTERFLY,
                 HybridAquaticEntityTypes.STONEFISH,
+                HybridAquaticEntityTypes.DAMSELFISH,
                 HybridAquaticEntityTypes.PEARLFISH,
                 HybridAquaticEntityTypes.BETTA,
                 HybridAquaticEntityTypes.JOHN_DORY,
@@ -218,5 +220,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addTag(HybridAquaticEntityTags.CRITTER)
             .addTag(HybridAquaticEntityTags.CRUSTACEAN)
             .addTag(HybridAquaticEntityTags.FISH)
+            .addTag(HybridAquaticEntityTags.SHARK)
     }
 }
