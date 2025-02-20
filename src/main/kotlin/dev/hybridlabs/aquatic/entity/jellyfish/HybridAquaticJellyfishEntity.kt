@@ -218,7 +218,7 @@ open class HybridAquaticJellyfishEntity(
         return false
     }
 
-    override fun onPlayerCollision(player: PlayerEntity?) {
+    override fun onPlayerCollision(player: PlayerEntity) {
         super.onPlayerCollision(player)
 
         if (player is ServerPlayerEntity && isVenomous && !player.hasVehicle()) {
