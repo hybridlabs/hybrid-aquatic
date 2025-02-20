@@ -27,6 +27,10 @@ open class HybridAquaticJellyfishEntityRenderer<T: HybridAquaticJellyfishEntity>
         matrixStack.translate(0.0f, 0.0f, 0.0f)
     }
 
+    override fun getDeathMaxRotation(animatable: T): Float {
+        return 0f
+    }
+
     override fun render(
         entity: T,
         entityYaw: Float,

@@ -2,11 +2,8 @@ package dev.hybridlabs.aquatic.client.render.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
 import net.minecraft.client.render.VertexConsumerProvider
-import net.minecraft.client.render.block.entity.EnchantingTableBlockEntityRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.util.math.Direction
-import net.minecraft.util.math.RotationAxis
 import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer

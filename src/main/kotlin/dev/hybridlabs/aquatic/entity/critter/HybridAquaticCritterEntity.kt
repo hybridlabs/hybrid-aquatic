@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.ai.WallClimbingNavigation
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity.VariantCollisionRules.ExclusionStatus.EXCLUSIVE
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity.VariantCollisionRules.ExclusionStatus.INCLUSIVE
 import net.minecraft.entity.EntityData
@@ -11,6 +10,7 @@ import net.minecraft.entity.ai.goal.EscapeDangerGoal
 import net.minecraft.entity.ai.goal.LookAroundGoal
 import net.minecraft.entity.ai.goal.MoveIntoWaterGoal
 import net.minecraft.entity.ai.goal.WanderAroundGoal
+import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
@@ -53,7 +53,7 @@ open class HybridAquaticCritterEntity(
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
         setPathfindingPenalty(PathNodeType.WALKABLE, 10.0f)
         moveControl = MoveControl(this)
-        navigation = WallClimbingNavigation(this, world)
+        navigation = MobNavigation(this, world)
     }
 
     override fun hasNoDrag(): Boolean {

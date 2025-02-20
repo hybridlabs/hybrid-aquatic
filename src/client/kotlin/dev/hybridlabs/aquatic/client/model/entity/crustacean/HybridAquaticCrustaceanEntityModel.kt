@@ -2,14 +2,8 @@ package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
-import net.minecraft.client.render.entity.model.EntityModelPartNames
-import net.minecraft.text.Text
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.MathHelper
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
-import kotlin.math.round
-import kotlin.math.sin
 
 abstract class HybridAquaticCrustaceanEntityModel<T : HybridAquaticCrustaceanEntity>(private val id: String) :
     GeoModel<T>() {
@@ -41,31 +35,5 @@ abstract class HybridAquaticCrustaceanEntityModel<T : HybridAquaticCrustaceanEnt
                 "animations/${id}_${variant.getProvidedVariant(animatable)}.animation.json"
             )
         return Identifier(HybridAquatic.MOD_ID, "animations/$id.animation.json")
-    }
-
-    override fun setCustomAnimations(
-        animatable: T,
-        instanceId: Long,
-        animationState: AnimationState<T>
-    ) {
-        super.setCustomAnimations(animatable, instanceId, animationState)
-
-        val body = animationProcessor.getBone(EntityModelPartNames.BODY)
-        val entityYaw = animatable.yaw;
-
-        if (animatable.isClimbing) {
-            body.rotX = Math.toRadians(90.0).toFloat()
-
-            val snappedAngle = snapAngle(entityYaw, 4);
-            body.rotY = Math.toRadians(snappedAngle.toDouble()).toFloat();
-        }
-    }
-
-    private fun snapAngle(angle : Float, slices : Int) : Float {
-        val normalized = angle % 360;
-        val sliceSize = 360 / slices;
-
-        val sliceCenter = round(normalized / sliceSize) * sliceSize;
-        return sliceCenter;
     }
 }

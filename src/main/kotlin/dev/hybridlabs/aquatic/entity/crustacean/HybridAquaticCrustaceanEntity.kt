@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.ai.WallClimbingNavigation
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
@@ -43,6 +42,7 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
+
 @Suppress("DEPRECATION", "LeakingThis", "UNUSED_PARAMETER")
 open class HybridAquaticCrustaceanEntity(
     type: EntityType<out HybridAquaticCrustaceanEntity>,
@@ -58,9 +58,9 @@ open class HybridAquaticCrustaceanEntity(
     private var songSource: BlockPos? = null
 
     private var isHiding: Boolean = false
+
     private var hidingTimer: Int = 0
     private var lastDamageTime: Long = 0
-    private var climbingTicks = 0
 
     var size: Int
         get() = dataTracker.get(CRUSTACEAN_SIZE)
@@ -90,33 +90,12 @@ open class HybridAquaticCrustaceanEntity(
         get() = variants[variantKey]
         private set(value) {}
 
-    private fun isMoving(): Boolean {
-        return (this.isOnGround || this.isClimbing) && velocity.lengthSquared() >= 0.0001
-    }
-
-    override fun isClimbing(): Boolean {
-        return this.climbingTicks > 8 && this.isClimbingWall()
-    }
-
-    override fun hasNoDrag(): Boolean {
-        return this.isClimbing
-    }
-
-    private fun isClimbingWall(): Boolean {
-        return dataTracker.get(IS_CLIMBING_WALL)
-    }
-
-    private fun setClimbingWall(isClimbingWall: Boolean) {
-        dataTracker.set(IS_CLIMBING_WALL, isClimbingWall)
-    }
-
     override fun initDataTracker() {
         super.initDataTracker()
         dataTracker.startTracking(CRUSTACEAN_SIZE, 0)
         dataTracker.startTracking(ATTEMPT_ATTACK, false)
         dataTracker.startTracking(VARIANT, "")
         dataTracker.startTracking(VARIANT_DATA, NbtCompound())
-        dataTracker.startTracking(IS_CLIMBING_WALL, false)
     }
 
     override fun initGoals() {
@@ -184,7 +163,7 @@ open class HybridAquaticCrustaceanEntity(
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
         setPathfindingPenalty(PathNodeType.WALKABLE, 0.0f)
         moveControl = MoveControl(this)
-        navigation = WallClimbingNavigation(this, world)
+        navigation = MobNavigation(this, world)
     }
 
     override fun tickMovement() {
@@ -210,7 +189,7 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     override fun shouldSwimInFluids(): Boolean {
-        return !isOnGround || !isClimbing
+        return !isOnGround
     }
 
     override fun isPushedByFluids(): Boolean {
@@ -236,26 +215,6 @@ open class HybridAquaticCrustaceanEntity(
                 attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 0.0
                 attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR)?.baseValue = 50.0
             }
-        }
-
-        if (!this.world.isClient) {
-            this.setClimbingWall(this.horizontalCollision)
-        }
-
-        if (this.isClimbingWall()) {
-            this.climbingTicks++
-
-            val blockStateAtPos = this.blockStateAtPos
-            if (this.isMoving() && !blockStateAtPos.isLiquid && this.climbingTicks % 6 == 0) {
-                this.playStepSound(this.blockPos, blockStateAtPos)
-            }
-        } else {
-            this.climbingTicks = 0
-        }
-
-        if (this.isClimbing) {
-            val velocity = this.velocity
-            this.setVelocity(velocity.x, velocity.y * 0.33F, velocity.z)
         }
     }
 
@@ -389,8 +348,6 @@ open class HybridAquaticCrustaceanEntity(
             DataTracker.registerData(HybridAquaticCrustaceanEntity::class.java, TrackedDataHandlerRegistry.STRING)
         var VARIANT_DATA: TrackedData<NbtCompound> =
             DataTracker.registerData(HybridAquaticCrustaceanEntity::class.java, TrackedDataHandlerRegistry.NBT_COMPOUND)
-        val IS_CLIMBING_WALL: TrackedData<Boolean> =
-            DataTracker.registerData(HybridAquaticCrustaceanEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
         val DANCE: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
         val HIDE: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
