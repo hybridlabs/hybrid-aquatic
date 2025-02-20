@@ -1,18 +1,32 @@
 {
   "variants": {
-    "facing=east": {
+    "waterlogged=true,facing=east": {
       "model": "hybrid-aquatic:block/raft",
       "y": 90
     },
-    "facing=west": {
+    "waterlogged=true,facing=west": {
       "model": "hybrid-aquatic:block/raft",
       "y": 90
     },
-    "facing=north": {
+    "waterlogged=true,facing=north": {
       "model": "hybrid-aquatic:block/raft"
     },
-    "facing=south": {
+    "waterlogged=true,facing=south": {
       "model": "hybrid-aquatic:block/raft"
+    },
+    "waterlogged=false,facing=east": {
+      "model": "hybrid-aquatic:block/raft_land",
+      "y": 90
+    },
+    "waterlogged=false,facing=west": {
+      "model": "hybrid-aquatic:block/raft_land",
+      "y": 90
+    },
+    "waterlogged=false,facing=north": {
+      "model": "hybrid-aquatic:block/raft_land"
+    },
+    "waterlogged=false,facing=south": {
+      "model": "hybrid-aquatic:block/raft_land"
     }
   }
 }

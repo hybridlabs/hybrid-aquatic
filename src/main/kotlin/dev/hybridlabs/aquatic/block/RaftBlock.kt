@@ -59,7 +59,7 @@ class RaftBlock(settings: Settings) : Block(settings), Waterloggable {
         pos: BlockPos,
         context: ShapeContext
     ): VoxelShape {
-        return SHAPE
+        return if (state.get(Properties.WATERLOGGED)) SHAPE else LAND_SHAPE
     }
 
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
@@ -82,5 +82,6 @@ class RaftBlock(settings: Settings) : Block(settings), Waterloggable {
     companion object {
         val FACING: DirectionProperty = HorizontalFacingBlock.FACING
         private val SHAPE: VoxelShape = createCuboidShape(1.0, 12.0, 1.0, 15.0, 16.0, 15.0)
+        private val LAND_SHAPE: VoxelShape = createCuboidShape(1.0, 0.0, 1.0, 15.0, 2.5, 15.0)
     }
 }
