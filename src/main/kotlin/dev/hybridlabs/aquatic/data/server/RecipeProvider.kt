@@ -30,6 +30,14 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_tube_sponge", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.TUBE_SPONGE))
             .offerTo(exporter)
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.RAFT, 2)
+            .pattern("SS ")
+            .pattern("SS ")
+            .pattern("   ")
+            .input('S', Items.STICK)
+            .criterion("has_stick", InventoryChangedCriterion.Conditions.items(Items.STICK))
+            .offerTo(exporter)
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.BUOY,2)
             .pattern(" L ")
             .pattern(" S ")
