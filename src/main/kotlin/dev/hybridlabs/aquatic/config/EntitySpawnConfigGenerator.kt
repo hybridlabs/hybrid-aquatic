@@ -12,6 +12,7 @@ import net.minecraft.world.biome.Biome
 /**
  * Applies biome modifications for entities when initialised.
  */
+@Suppress("SameParameterValue")
 class EntitySpawnConfigGenerator {
     private val list: MutableList<EntitySpawnConfig> = mutableListOf()
 
