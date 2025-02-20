@@ -8,7 +8,7 @@ data class HybridAquaticConfig(
      * The version of the data stored.
      * Increase when the config needs to be reset, i.e. when new entity spawn configs are added.
      */
-    val dataVersion: Int = 2,
+    val dataVersion: Int = 3,
 
     val entitySpawnConfig: List<EntitySpawnConfig> = EntitySpawnConfigGenerator.generate(),
 ) {
