@@ -328,8 +328,6 @@ object HybridAquaticItems {
 
     //#endregion
 
-    val THROWING_STAR = register("throwing_star", ThrowingStarItem(FabricItemSettings()))
-
     //# region Food
 
     val UNI = register("uni",

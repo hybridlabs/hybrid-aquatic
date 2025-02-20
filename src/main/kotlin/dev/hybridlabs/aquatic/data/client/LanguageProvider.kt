@@ -510,7 +510,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.COSMIC_JELLYFISH to "Cosmic Jellyfish",
             HybridAquaticEntityTypes.FIREWORK_JELLYFISH to "Firework Jellyfish",
             HybridAquaticEntityTypes.BLUE_JELLYFISH to "Blue Jellyfish",
-            HybridAquaticEntityTypes.THROWING_STAR to "Throwing Star",
         )
 
         // verify display name list is valid

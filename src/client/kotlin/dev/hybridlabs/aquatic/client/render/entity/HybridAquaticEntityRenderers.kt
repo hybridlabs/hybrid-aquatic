@@ -11,7 +11,6 @@ import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
 import dev.hybridlabs.aquatic.client.render.entity.fish.*
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.misc.ThrowingStarEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
@@ -143,11 +142,6 @@ object HybridAquaticEntityRenderers {
 
     //region minibosses
     val KARKINOS = EntityRendererRegistry.register(HybridAquaticEntityTypes.KARKINOS, ::KarkinosEntityRenderer)
+
     //endregion
-
-    //region misc
-    val THROWING_STAR = EntityRendererRegistry.register(HybridAquaticEntityTypes.THROWING_STAR, ::ThrowingStarEntityRenderer)
-    //endregion
-
-
 }
