@@ -119,6 +119,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.DANIO,
             HybridAquaticItems.NEON_TETRA,
             HybridAquaticItems.MACKEREL,
+            HybridAquaticItems.JOHN_DORY,
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.SMALL_FISH).add(item)
         }
@@ -216,6 +217,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.NEON_TETRA,
             HybridAquaticItems.TIGER_BARB,
             HybridAquaticItems.TRIGGERFISH,
+            HybridAquaticItems.JOHN_DORY,
             HybridAquaticItems.UNICORNFISH,
             HybridAquaticItems.RAW_FISH_MEAT,
             HybridAquaticItems.RAW_FISH_STEAK,
@@ -301,6 +303,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.RATFISH,
             HybridAquaticItems.FLYING_FISH,
             HybridAquaticItems.TIGER_BARB,
+            HybridAquaticItems.JOHN_DORY,
             HybridAquaticItems.COELACANTH,
             HybridAquaticItems.SQUIRRELFISH,
             HybridAquaticItems.GOLDEN_DORADO,

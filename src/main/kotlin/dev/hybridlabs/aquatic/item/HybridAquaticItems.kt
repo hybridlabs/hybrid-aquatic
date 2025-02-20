@@ -751,6 +751,20 @@ object HybridAquaticItems {
         )
     )
 
+    val JOHN_DORY = register(
+        "john_dory",
+        Item(
+            FabricItemSettings()
+                .food(
+                    FoodComponent.Builder()
+                        .hunger(1)
+                        .saturationModifier(0.2F)
+                        .meat()
+                        .build()
+                )
+        )
+    )
+
     val UNICORNFISH = register(
         "unicorn_fish",
         Item(

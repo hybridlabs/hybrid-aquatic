@@ -542,6 +542,17 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
+        export(exporter, HybridAquaticEntityTypes.JOHN_DORY) {
+            pool(
+                LootPool.builder()
+                    .with(
+                        ItemEntry.builder(HybridAquaticItems.JOHN_DORY)
+                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
+                            .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0F)))
+                    )
+            )
+        }
+
         export(exporter, HybridAquaticEntityTypes.SURGEONFISH) {
             pool(
                 LootPool.builder()
