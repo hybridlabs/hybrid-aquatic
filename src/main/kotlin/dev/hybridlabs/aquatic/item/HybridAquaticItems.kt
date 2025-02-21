@@ -778,8 +778,8 @@ object HybridAquaticItems {
 
     )
 
-    val DAMSELFISH = register(
-        "damselfish",
+    val SERGEANT_MAJOR = register(
+        "sergeant_major",
         Item(
              FabricItemSettings()
                 .food(

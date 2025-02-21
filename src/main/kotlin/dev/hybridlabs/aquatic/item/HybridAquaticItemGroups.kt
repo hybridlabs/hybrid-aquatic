@@ -170,6 +170,7 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.SURGEONFISH_SOHAL)
             entries.add(HybridAquaticItems.SURGEONFISH_ORANGESHOULDER)
             entries.add(HybridAquaticItems.SURGEONFISH_LINED)
+            entries.add(HybridAquaticItems.SERGEANT_MAJOR)
             entries.add(HybridAquaticItems.SEAHORSE)
             entries.add(HybridAquaticItems.MACKEREL)
             entries.add(HybridAquaticItems.FLYING_FISH)
