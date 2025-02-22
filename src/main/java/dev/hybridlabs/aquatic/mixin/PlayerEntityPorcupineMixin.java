@@ -10,6 +10,10 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +22,9 @@ import java.util.List;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityPorcupineMixin extends LivingEntity implements Porcupine {
 
+    @Unique
     List<ItemStack> impaledStacks = new ArrayList<>();
+    @Unique
     private static final String IMPALED_ITEM_KEY = "impaled_items";
 
     protected PlayerEntityPorcupineMixin(EntityType<? extends LivingEntity> entityType, World world) {
@@ -29,14 +35,12 @@ public abstract class PlayerEntityPorcupineMixin extends LivingEntity implements
      * Get stacks currently impaled in player
      * @return immutable list of stacks within player
      */
-    @Override
+    @Unique
     public List<ItemStack> hybrid_aquatic$getImpaledStacks() {
         return Collections.unmodifiableList(impaledStacks);
     }
-
-    @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
+    @Inject( method="readCustomDataFromNbt", at=@At("TAIL") )
+    public void inject$readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
         impaledStacks.clear();
 
         // Check if list exists, otherwise we're going to have issues.
@@ -50,9 +54,8 @@ public abstract class PlayerEntityPorcupineMixin extends LivingEntity implements
         }
     }
 
-    @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
+    @Inject( method="writeCustomDataToNbt", at=@At("TAIL") )
+    public void writeCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
 
         if (!impaledStacks.isEmpty()) {
             var list = new NbtList();
