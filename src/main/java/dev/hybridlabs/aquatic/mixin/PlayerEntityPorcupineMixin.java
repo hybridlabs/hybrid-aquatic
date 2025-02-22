@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.mixin;
 
+import dev.hybridlabs.aquatic.HybridAquatic;
 import dev.hybridlabs.aquatic.interfaces.Porcupine;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -10,6 +11,10 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,49 +22,43 @@ import java.util.List;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityPorcupineMixin extends LivingEntity implements Porcupine {
+    @Unique private final List<ItemStack> impaledStacks = new ArrayList<>();
+    @Unique private static final String IMPALED_ITEM_KEY = HybridAquatic.MOD_ID + ":impaled_items";
 
-    List<ItemStack> impaledStacks = new ArrayList<>();
-    private static final String IMPALED_ITEM_KEY = "impaled_items";
-
-    protected PlayerEntityPorcupineMixin(EntityType<? extends LivingEntity> entityType, World world) {
-        super(entityType, world);
+    private PlayerEntityPorcupineMixin(EntityType<? extends LivingEntity> type, World world) {
+        super(type, world);
     }
 
     /**
      * Get stacks currently impaled in player
      * @return immutable list of stacks within player
      */
-    @Override
-    public List<ItemStack> hybrid_aquatic$getImpaledStacks() {
+    public @Unique List<ItemStack> hybrid_aquatic$getImpaledStacks() {
         return Collections.unmodifiableList(impaledStacks);
     }
 
-    @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
+    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
+    public void onReadCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
         impaledStacks.clear();
 
         // Check if list exists, otherwise we're going to have issues.
         if (nbt.contains(IMPALED_ITEM_KEY, NbtElement.LIST_TYPE)) {
-            var list = nbt.getList(IMPALED_ITEM_KEY, NbtElement.COMPOUND_TYPE);
-
-            for (var item : list) if (item instanceof NbtCompound itemNBT) {
-                var stack = ItemStack.fromNbt(itemNBT);
+            NbtList list = nbt.getList(IMPALED_ITEM_KEY, NbtElement.COMPOUND_TYPE);
+            list.stream().map(NbtCompound.class::cast).forEach(stackNbt -> {
+                ItemStack stack = ItemStack.fromNbt(stackNbt);
                 impaledStacks.add(stack);
-            }
+            });
         }
     }
 
-    @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
-
+    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
+    public void onWriteCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
         if (!impaledStacks.isEmpty()) {
-            var list = new NbtList();
-            for (var stack : impaledStacks) {
-                var writtenNBT = stack.writeNbt(new NbtCompound());
-                list.add(writtenNBT);
-            }
+            NbtList list = new NbtList();
+            impaledStacks.forEach(stack -> {
+                NbtCompound stackNbt = stack.writeNbt(new NbtCompound());
+                list.add(stackNbt);
+            });
             nbt.put(IMPALED_ITEM_KEY, list);
         }
     }
