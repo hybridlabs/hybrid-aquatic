@@ -420,7 +420,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(4)
-                        .saturationModifier(5.0F)
+                        .saturationModifier(0.5F)
                         .meat()
                         .build()
                 )
