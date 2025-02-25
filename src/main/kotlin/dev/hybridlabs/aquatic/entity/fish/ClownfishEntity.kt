@@ -38,10 +38,6 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
         return 2
     }
 
-    public override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/clownfish")
-    }
-
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
