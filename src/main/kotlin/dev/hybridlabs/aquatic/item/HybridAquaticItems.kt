@@ -364,7 +364,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(4)
-                        .saturationModifier(4.0F)
+                        .saturationModifier(0.5F)
                         .meat()
                         .build()
                 )
@@ -392,7 +392,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(4)
-                        .saturationModifier(4.0F)
+                        .saturationModifier(0.5F)
                         .meat()
                         .build()
                 )
@@ -448,7 +448,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(5)
-                        .saturationModifier(6.0F)
+                        .saturationModifier(0.6F)
                         .meat()
                         .build()
                 )
@@ -476,7 +476,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(5)
-                        .saturationModifier(6.0F)
+                        .saturationModifier(0.6F)
                         .meat()
                         .build()
                 )
@@ -490,7 +490,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(8)
-                        .saturationModifier(1.8F)
+                        .saturationModifier(0.8F)
                         .meat()
                         .build()
                 )
@@ -504,7 +504,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(3)
-                        .saturationModifier(0.9F)
+                        .saturationModifier(0.6F)
                         .meat()
                         .build()
                 )
@@ -518,7 +518,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(4)
-                        .saturationModifier(0.4F)
+                        .saturationModifier(0.6F)
                         .meat()
                         .build()
                 )
@@ -560,7 +560,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(4)
-                        .saturationModifier(0.8F)
+                        .saturationModifier(0.6F)
                         .meat()
                         .build()
                 )
