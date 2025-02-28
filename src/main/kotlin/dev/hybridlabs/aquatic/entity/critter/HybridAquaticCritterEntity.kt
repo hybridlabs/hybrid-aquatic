@@ -7,7 +7,6 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
 import net.minecraft.entity.ai.goal.EscapeDangerGoal
-import net.minecraft.entity.ai.goal.LookAroundGoal
 import net.minecraft.entity.ai.goal.MoveIntoWaterGoal
 import net.minecraft.entity.ai.goal.WanderAroundGoal
 import net.minecraft.entity.ai.pathing.MobNavigation
@@ -47,7 +46,6 @@ open class HybridAquaticCritterEntity(
 ) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false
-    private var climbingTicks = 0
 
     init {
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
@@ -66,42 +64,10 @@ open class HybridAquaticCritterEntity(
         if (!isWet) {
             this.speed = 0.01F
         }
-
-        if (!this.world.isClient) {
-            this.setClimbingWall(this.horizontalCollision)
-        }
-
-        if (this.isClimbingWall()) {
-            this.climbingTicks++
-
-            val blockStateAtPos = this.blockStateAtPos
-            if (this.isMoving() && !blockStateAtPos.isLiquid && this.climbingTicks % 6 == 0) {
-                this.playStepSound(this.blockPos, blockStateAtPos)
-            }
-        } else {
-            this.climbingTicks = 0
-        }
-
-        if (this.isClimbing) {
-            val velocity = this.velocity
-            this.setVelocity(velocity.x, velocity.y * 0.33F, velocity.z)
-        }
     }
 
-    private fun isMoving(): Boolean {
-        return (this.isOnGround || this.isClimbing) && velocity.lengthSquared() >= 0.0001
-    }
-
-    override fun isClimbing(): Boolean {
-        return this.climbingTicks > 8 && this.isClimbingWall()
-    }
-
-    private fun isClimbingWall(): Boolean {
-        return dataTracker.get(IS_CLIMBING_WALL)
-    }
-
-    private fun setClimbingWall(isClimbingWall: Boolean) {
-        dataTracker.set(IS_CLIMBING_WALL, isClimbingWall)
+    override fun getStepHeight(): Float {
+        return 1.0F
     }
 
     override fun initDataTracker() {
@@ -118,7 +84,6 @@ open class HybridAquaticCritterEntity(
         goalSelector.add(2, MoveIntoWaterGoal(this))
         goalSelector.add(3, EscapeDangerGoal(this, 0.35))
         goalSelector.add(5, WanderAroundGoal(this, 0.35, 10))
-        goalSelector.add(5, LookAroundGoal(this))
     }
 
     override fun initialize(

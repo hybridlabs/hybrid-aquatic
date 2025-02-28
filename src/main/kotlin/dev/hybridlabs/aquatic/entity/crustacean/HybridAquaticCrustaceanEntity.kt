@@ -188,6 +188,10 @@ open class HybridAquaticCrustaceanEntity(
         return this.songPlaying
     }
 
+    override fun getStepHeight(): Float {
+        return 1.0F
+    }
+
     override fun shouldSwimInFluids(): Boolean {
         return !isOnGround
     }
