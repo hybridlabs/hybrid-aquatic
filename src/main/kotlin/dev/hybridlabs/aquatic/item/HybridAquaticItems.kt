@@ -1225,7 +1225,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(3)
-                        .saturationModifier(1.8F)
+                        .saturationModifier(0.8F)
                         .meat()
                         .build()
                 )
@@ -1239,7 +1239,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(3)
-                        .saturationModifier(1.8F)
+                        .saturationModifier(0.8F)
                         .meat()
                         .build()
                 )
@@ -1253,7 +1253,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(3)
-                        .saturationModifier(1.8F)
+                        .saturationModifier(0.8F)
                         .meat()
                         .build()
                 )
@@ -1267,7 +1267,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(3)
-                        .saturationModifier(1.8F)
+                        .saturationModifier(0.8F)
                         .meat()
                         .build()
                 )
@@ -1281,7 +1281,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(3)
-                        .saturationModifier(1.8F)
+                        .saturationModifier(0.8F)
                         .meat()
                         .build()
                 )
@@ -1295,7 +1295,7 @@ object HybridAquaticItems {
                 .food(
                     FoodComponent.Builder()
                         .hunger(3)
-                        .saturationModifier(1.8F)
+                        .saturationModifier(0.8F)
                         .meat()
                         .build()
                 )
