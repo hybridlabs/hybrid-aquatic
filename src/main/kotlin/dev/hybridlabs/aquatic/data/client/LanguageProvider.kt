@@ -102,6 +102,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "profile.item.hybrid-aquatic.carp" to "The Carp, a hardy, freshwater fish widely distributed and valued for its adaptability, playing a significant role in aquaculture and recreational fishing.",
             "profile.item.hybrid-aquatic.koi" to "The Koi, a domesticated variety of common carp, is highly prized for its beautiful, vibrant patterns and colors, often kept in ornamental ponds.",
             "profile.item.hybrid-aquatic.danio" to "The Danio, a small, colorful freshwater fish known for its active swimming behavior and popularity in home aquariums.",
+            "profile.item.hybrid-aquatic.damselfish" to "The Damselfish, a small, territorial reef fish known for its vibrant colors and aggressive nature, often playing a crucial role in maintaining coral reef ecosystems.",
             "profile.item.hybrid-aquatic.discus" to "The Discus, a vibrant, round-shaped freshwater fish admired for its striking patterns and colors, often kept in aquariums for its beauty.",
             "profile.item.hybrid-aquatic.dragonfish" to "The Dragonfish, a deep-sea predator with sharp teeth and bioluminescent photophores, known for its ability to produce light to attract prey and communicate in the dark ocean depths.",
             "profile.item.hybrid-aquatic.golden_dorado" to "The Golden Dorado, a large, powerful freshwater fish native to South America, prized by anglers for its strength and golden scales.",
