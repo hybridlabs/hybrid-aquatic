@@ -20,6 +20,8 @@ object HybridAquaticItemTags {
     val LARGE_FISH = create("large_fish")
     val CRAB_CLAW = create("claw")
 
+    val COOLING = create("foods/cooling")
+
     val DRIFTWOOD_LOG_WOOD = create("driftwood_log_wood")
 
     val RAW_FISH = createConventional("foods/raw_fish")

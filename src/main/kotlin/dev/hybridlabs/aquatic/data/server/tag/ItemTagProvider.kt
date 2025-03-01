@@ -260,6 +260,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         listOf(
             HybridAquaticItems.ANGLERFISH,
             HybridAquaticItems.BARRELEYE,
+            HybridAquaticItems.SERGEANT_MAJOR,
             HybridAquaticItems.CLOWNFISH,
             HybridAquaticItems.DRAGONFISH,
             HybridAquaticItems.FLASHLIGHT_FISH,
@@ -309,6 +310,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.GOLDEN_DORADO,
         ).forEach { item ->
             getOrCreateTagBuilder(ItemTags.FISHES).add(item)
+            getOrCreateTagBuilder(HybridAquaticItemTags.COOLING).add(item)
         }
 
         // plushies
