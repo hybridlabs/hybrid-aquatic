@@ -41,6 +41,9 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.*
 
@@ -251,6 +254,17 @@ open class HybridAquaticSharkEntity(
             state.setAndContinue(animation)
         })
         controllerRegistrar.add(
+            AnimationController(this, "Beached", 4,
+                AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
+                    if (this.isOnGround && !isSubmergedInWater) {
+                        return@AnimationStateHandler state.setAndContinue(BEACHED)
+                    } else {
+                        PlayState.STOP
+                    }
+                }
+            )
+        )
+        controllerRegistrar.add(
             DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE)
         )
     }
@@ -416,6 +430,8 @@ open class HybridAquaticSharkEntity(
         val ATTEMPT_ATTACK: TrackedData<Boolean> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
         val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(10, 30)
+
+        val BEACHED: RawAnimation = RawAnimation.begin().thenPlay("misc.beached")
 
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,

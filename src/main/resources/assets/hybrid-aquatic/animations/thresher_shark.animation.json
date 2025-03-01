@@ -156,6 +156,23 @@
 					}
 				}
 			}
+		},
+		"misc.beached": {
+			"loop": true,
+			"bones": {
+				"body_2": {
+					"rotation": [-7.5, 0, 0]
+				},
+				"tail": {
+					"rotation": [-5, 0, 0]
+				},
+				"tail_fin": {
+					"rotation": [12.5, 0, 0]
+				},
+				"head": {
+					"rotation": [10, 0, 0]
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2
