@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "minecraft:ocean",
-    "minecraft:deep_ocean"
+    "minecraft:deep_ocean",
+    {
+      "id": "alexscaves:abyssal_chasm",
+      "required": false
+    }
   ]
 }
