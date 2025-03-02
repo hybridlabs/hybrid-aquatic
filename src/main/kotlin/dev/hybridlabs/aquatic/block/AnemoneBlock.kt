@@ -1,9 +1,18 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockEntityProvider
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
@@ -12,11 +21,12 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.ItemStack
 import net.minecraft.registry.tag.FluidTags
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.math.BlockPos
@@ -59,15 +69,15 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         }
     }
 
-    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
-        if (!world.isClient && player.isCreative && world.gameRules.getBoolean(GameRules.DO_TILE_DROPS)) {
+    override fun onStacksDropped(state: BlockState, world: ServerWorld, pos: BlockPos, stack: ItemStack, dropExperience: Boolean) {
+        if (!world.isClient && world.gameRules.getBoolean(GameRules.DO_TILE_DROPS)) {
             val blockEntity = world.getBlockEntity(pos)
             if (blockEntity is AnemoneBlockEntity) {
                 blockEntity.emergencyReleaseHiddenClownfish()
             }
         }
 
-        super.onBreak(world, pos, state, player)
+        super.onStacksDropped(state, world, pos, stack, dropExperience)
     }
 
     override fun canPlantOnTop(floor: BlockState, world: BlockView, pos: BlockPos): Boolean {
@@ -100,7 +110,7 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         state: BlockState,
         type: BlockEntityType<T>
     ): BlockEntityTicker<T>? {
-        return BlockWithEntity.checkType(type, HybridAquaticBlockEntityTypes.ANEMONE, AnemoneBlockEntity::tick)
+        return BlockWithEntity.validateTicker(type, HybridAquaticBlockEntityTypes.ANEMONE, AnemoneBlockEntity::tick)
     }
 
     override fun getCollisionShape(
@@ -149,7 +159,13 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         return false
     }
 
+    override fun getCodec(): MapCodec<AnemoneBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<AnemoneBlock> = createCodec(::AnemoneBlock)
+
         private val SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
         private val COLLISION_SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0)
     }

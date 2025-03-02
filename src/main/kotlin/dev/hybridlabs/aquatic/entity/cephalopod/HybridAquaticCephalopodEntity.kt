@@ -1,10 +1,14 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityPose
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
 import net.minecraft.entity.ai.goal.ActiveTargetGoal
@@ -361,9 +365,8 @@ open class HybridAquaticCephalopodEntity(
             return !cephalopod.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
+        override fun attack(target: LivingEntity) {
+            if (canAttack(target)) {
                 resetCooldown()
                 mob.tryAttack(target)
                 cephalopod.isSprinting = true
@@ -373,10 +376,6 @@ open class HybridAquaticCephalopodEntity(
                     cephalopod.hunger = HybridAquaticSharkEntity.MAX_HUNGER
                 cephalopod.health = cephalopod.maxHealth
             }
-        }
-
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (1.25f + entity.width).toDouble()
         }
 
         override fun start() {

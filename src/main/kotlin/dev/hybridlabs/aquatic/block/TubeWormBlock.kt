@@ -1,7 +1,14 @@
 package dev.hybridlabs.aquatic.block
 
 import com.mojang.serialization.Codec
-import net.minecraft.block.*
+import com.mojang.serialization.MapCodec
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.Fertilizable
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -24,18 +31,6 @@ import org.jetbrains.annotations.Nullable
 
 @Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION")
 class TubeWormBlock(settings: Settings) : PlantBlock(settings), Fertilizable, Waterloggable {
-    companion object {
-        val WORMS: IntProperty = IntProperty.of("worms", 1, 4)
-        val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
-
-        val WORM_COUNT_CODEC: Codec<IntProvider> = IntProvider.createValidatingCodec(WORMS.min, WORMS.max)
-
-        private val ONE_WORM_SHAPE: VoxelShape = createCuboidShape(6.0, 0.0, 6.0, 10.0, 8.0, 10.0)
-        private val TWO_WORMS_SHAPE: VoxelShape = createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)
-        private val THREE_WORMS_SHAPE: VoxelShape = createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)
-        private val FOUR_WORMS_SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
-    }
-
     init {
         defaultState = stateManager.defaultState.with(WORMS, WORMS.min).with(WATERLOGGED, true)
     }
@@ -104,7 +99,7 @@ class TubeWormBlock(settings: Settings) : PlantBlock(settings), Fertilizable, Wa
         builder.add(WORMS, WATERLOGGED)
     }
 
-    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState): Boolean {
         return false
     }
 
@@ -122,5 +117,23 @@ class TubeWormBlock(settings: Settings) : PlantBlock(settings), Fertilizable, Wa
     override fun canPlantOnTop(floor: BlockState, world: BlockView, pos: BlockPos): Boolean {
         return !floor.getCollisionShape(world, pos).getFace(Direction.UP).isEmpty ||
                 floor.isSideSolidFullSquare(world, pos, Direction.UP)
+    }
+
+    override fun getCodec(): MapCodec<TubeWormBlock> {
+        return CODEC
+    }
+
+    companion object {
+        val CODEC: MapCodec<TubeWormBlock> = createCodec(::TubeWormBlock)
+
+        val WORMS: IntProperty = IntProperty.of("worms", 1, 4)
+        val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
+
+        val WORM_COUNT_CODEC: Codec<IntProvider> = IntProvider.createValidatingCodec(WORMS.min, WORMS.max)
+
+        private val ONE_WORM_SHAPE: VoxelShape = createCuboidShape(6.0, 0.0, 6.0, 10.0, 8.0, 10.0)
+        private val TWO_WORMS_SHAPE: VoxelShape = createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)
+        private val THREE_WORMS_SHAPE: VoxelShape = createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)
+        private val FOUR_WORMS_SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
     }
 }

@@ -61,10 +61,6 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, 
         return false
     }
 
-    override fun canBreatheInWater(): Boolean {
-        return true
-    }
-
     override fun isAngryAt(player: PlayerEntity?): Boolean {
         return true
     }

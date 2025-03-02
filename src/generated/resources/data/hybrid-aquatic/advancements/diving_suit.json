@@ -30,18 +30,15 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.diving_suit.description"
     },
     "frame": "goal",
-    "hidden": false,
     "icon": {
       "item": "hybrid-aquatic:diving_helmet",
       "nbt": "{Damage:0}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.hybrid-aquatic.diving_suit.title"
     }

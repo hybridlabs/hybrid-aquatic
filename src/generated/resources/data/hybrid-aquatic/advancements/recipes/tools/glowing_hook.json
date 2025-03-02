@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_barbed_hook",
-      "has_glow_slime",
-      "has_the_recipe"
+      "has_glow_slime"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:glowing_hook"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

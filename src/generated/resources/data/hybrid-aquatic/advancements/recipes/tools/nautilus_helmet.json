@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_shell",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_shell"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:nautilus_helmet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

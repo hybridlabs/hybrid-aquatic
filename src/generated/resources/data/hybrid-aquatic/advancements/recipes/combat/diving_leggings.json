@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_leather",
-      "has_copper",
-      "has_the_recipe"
+      "has_copper"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:diving_leggings"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

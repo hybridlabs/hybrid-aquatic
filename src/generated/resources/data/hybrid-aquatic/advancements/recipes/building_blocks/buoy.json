@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_lantern",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_lantern"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:buoy"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

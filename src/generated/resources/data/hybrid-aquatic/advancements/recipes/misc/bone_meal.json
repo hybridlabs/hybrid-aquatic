@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cuttlebone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cuttlebone"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:bone_meal"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -1,6 +1,12 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import com.mojang.serialization.MapCodec
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -19,11 +25,8 @@ import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class TubeSpongeBlock(
-    private val emitsParticles: Boolean,
-    settings: Settings
-) : PlantBlock(settings), Waterloggable {
-
+class TubeSpongeBlock(settings: Settings) : PlantBlock(settings), Waterloggable {
+    val emitsParticles = true
     private var bubbleTimer = 0
 
     init {
@@ -103,7 +106,12 @@ class TubeSpongeBlock(
         bubbleTimer++
     }
 
+    override fun getCodec(): MapCodec<TubeSpongeBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<TubeSpongeBlock> = createCodec(::TubeSpongeBlock)
         private val SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
         private val COLLISION_SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
     }

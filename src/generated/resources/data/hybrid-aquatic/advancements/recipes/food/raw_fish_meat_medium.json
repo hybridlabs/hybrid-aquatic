@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_medium_fish",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_medium_fish"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:raw_fish_meat_medium"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

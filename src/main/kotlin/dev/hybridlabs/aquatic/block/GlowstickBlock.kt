@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.TorchBlock
@@ -16,7 +17,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
-class GlowstickBlock(settings: Settings) : TorchBlock(settings, GLOW), Waterloggable {
+class GlowstickBlock(settings: Settings) : TorchBlock(GLOW, settings), Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(Properties.WATERLOGGED, false)
     }
@@ -49,18 +50,19 @@ class GlowstickBlock(settings: Settings) : TorchBlock(settings, GLOW), Waterlogg
         builder.add(Properties.WATERLOGGED)
     }
 
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+        return true
+    }
+
+    override fun getCodec(): MapCodec<GlowstickBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<GlowstickBlock> = createCodec(::GlowstickBlock)
+
         fun luminance(state: BlockState): Int {
             return if (state.get(Properties.WATERLOGGED)) 14 else 0
         }
-    }
-
-    override fun canPathfindThrough(
-        state: BlockState?,
-        world: BlockView?,
-        pos: BlockPos?,
-        type: NavigationType?
-    ): Boolean {
-        return true
     }
 }

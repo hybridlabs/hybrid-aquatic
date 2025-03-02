@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_raw_lobster",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_raw_lobster"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:cooked_lobster_from_smelting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
