@@ -34,6 +34,11 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK)) {
 
+
+    public override fun getLootTableId(): Identifier {
+        return Identifier("hybrid-aquatic", "entities/clownfish")
+    }
+
     override fun getLimitPerChunk(): Int {
         return 2
     }
