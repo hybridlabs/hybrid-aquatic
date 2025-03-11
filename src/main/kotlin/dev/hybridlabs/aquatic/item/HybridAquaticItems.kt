@@ -108,7 +108,7 @@ object HybridAquaticItems {
     val SEASHELL_SPEAR = register(
         "seashell_spear", SwordItem(
             HybridAquaticToolMaterials.SEASHELL,
-            3,
+            2,
             -2.4f,
             FabricItemSettings()
         )
@@ -144,7 +144,7 @@ object HybridAquaticItems {
     val SEASHELL_HOE = register(
         "seashell_hoe", HoeItem(
             HybridAquaticToolMaterials.SEASHELL,
-            -1,
+            1,
             -2.0f,
             FabricItemSettings()
         )
@@ -153,8 +153,8 @@ object HybridAquaticItems {
     val CORAL_BLADE = register(
         "coral_blade", SwordItem(
             HybridAquaticToolMaterials.CORAL,
-            1,
-            3f,
+            3,
+            -2.4f,
             FabricItemSettings()
         )
     )
@@ -163,7 +163,7 @@ object HybridAquaticItems {
         "coral_pickaxe", PickaxeItem(
             HybridAquaticToolMaterials.CORAL,
             1,
-            3f,
+            -2.8f,
             FabricItemSettings()
         )
     )
@@ -172,7 +172,7 @@ object HybridAquaticItems {
         "coral_axe", AxeItem(
             HybridAquaticToolMaterials.CORAL,
             1F,
-            3f,
+            -3.2f,
             FabricItemSettings()
         )
     )
@@ -181,7 +181,7 @@ object HybridAquaticItems {
         "coral_shovel", ShovelItem(
             HybridAquaticToolMaterials.CORAL,
             1F,
-            3f,
+            -3.0f,
             FabricItemSettings()
         )
     )
@@ -190,7 +190,7 @@ object HybridAquaticItems {
         "coral_hoe", HoeItem(
             HybridAquaticToolMaterials.CORAL,
             1,
-            3f,
+            -2.0f,
             FabricItemSettings()
         )
     )
