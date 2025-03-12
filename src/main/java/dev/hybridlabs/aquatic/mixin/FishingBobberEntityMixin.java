@@ -148,7 +148,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
                     target = "Lnet/minecraft/advancement/criterion/FishingRodHookedCriterion;trigger(Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/projectile/FishingBobberEntity;Ljava/util/Collection;)V"
             )
     )
-    private void onHookReelEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local(name = "list") List<ItemStack> lootList) {
+    private void onHookReelEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local List<ItemStack> list) {
         if (this.getWorld() instanceof ServerWorld serverWorld) {
             if (!lureItemStack.isEmpty()) {
                 if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK())) {
@@ -166,7 +166,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
                         vecBetweenMod.z
                     );
                     
-                    lootList.clear();
+                    list.clear();
                 } else if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK())) {
                     var creeperType = EntityType.CREEPER;
                     var creeper = creeperType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
@@ -182,7 +182,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
                         vecBetweenMod.z
                     );
                     
-                    lootList.clear();
+                    list.clear();
                 }
             }
         }
