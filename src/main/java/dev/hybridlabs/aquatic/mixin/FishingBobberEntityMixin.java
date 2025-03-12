@@ -18,7 +18,6 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
@@ -39,7 +38,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 @Mixin(FishingBobberEntity.class)
@@ -138,28 +136,24 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     }
     
     // Whenever we may want to replace entities we use this. This will make sure not to spawn any unwanted entities when we reel in the hook.
+    // TODO: Make it prettier
     @Inject(
-        method = "use",
-        cancellable = true,
-        slice = @Slice(
-            from = @At(
-                value = "NEW",
-                target = "(Lnet/minecraft/server/world/ServerWorld;)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;"
-            ),
-            to = @At(
-                value = "INVOKE",
-                target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getPos()Lnet/minecraft/util/math/Vec3d;")
-        ),
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
-            ordinal = 0
-        )
+            method = "use",
+            slice = @Slice(
+                    from = @At(
+                            value = "NEW",
+                            target = "(Lnet/minecraft/server/world/ServerWorld;)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;"
+                    )
+            ), //Aqua: I couldn't figure out the injection point before "lootTable"s .generateLoot() that would allow me to set "lootTable" to LootTable.EMPTY. That's why I'm just clearing generated list
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/advancement/criterion/FishingRodHookedCriterion;trigger(Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/projectile/FishingBobberEntity;Ljava/util/Collection;)V"
+            )
     )
-    private void onHookReelEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
+    private void onHookReelEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local(name = "list") List<ItemStack> lootList) {
         if (this.getWorld() instanceof ServerWorld serverWorld) {
-            if (!lureItemStack.isEmpty() && lureItemStack.isOf(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK())) {
-                try {
+            if (!lureItemStack.isEmpty()) {
+                if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK())) {
                     var karkinosType = HybridAquaticEntityTypes.INSTANCE.getKARKINOS();
                     var karkinos = karkinosType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
                     if (karkinos == null) return;
@@ -174,13 +168,8 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
                         vecBetweenMod.z
                     );
                     
-                } finally {
-                    this.discard();
-                    cir.setReturnValue(1);
-                }
-            }
-            if (!lureItemStack.isEmpty() && lureItemStack.isOf(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK())) {
-                try {
+                    lootList.clear();
+                } else if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK())) {
                     var creeperType = EntityType.CREEPER;
                     var creeper = creeperType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
                     if (creeper == null) return;
@@ -195,9 +184,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
                         vecBetweenMod.z
                     );
                     
-                } finally {
-                    this.discard();
-                    cir.setReturnValue(1);
+                    lootList.clear();
                 }
             }
         }
@@ -219,7 +206,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
                 var entityType = ITEM_TO_ENTITY.get(itemInIterator.get().getItem());
                 
                 if (entityType != null) {
-                    var liveFish = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.SPAWN_EGG);
+                    var liveFish = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.MOB_SUMMONED);
                     if (liveFish == null) {
                         return;
                     }
