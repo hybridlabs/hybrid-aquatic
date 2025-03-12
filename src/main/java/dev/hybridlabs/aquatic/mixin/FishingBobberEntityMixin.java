@@ -136,7 +136,73 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
         if (lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK())) luck += 27;
         return instance.luck(luck);
     }
-
+    
+    // Whenever we may want to replace entities we use this. This will make sure not to spawn any unwanted entities when we reel in the hook.
+    @Inject(
+        method = "use",
+        cancellable = true,
+        slice = @Slice(
+            from = @At(
+                value = "NEW",
+                target = "(Lnet/minecraft/server/world/ServerWorld;)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;"
+            ),
+            to = @At(
+                value = "INVOKE",
+                target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getPos()Lnet/minecraft/util/math/Vec3d;")
+        ),
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
+            ordinal = 0
+        )
+    )
+    private void onHookReelEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            if (!lureItemStack.isEmpty() && lureItemStack.isOf(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK())) {
+                try {
+                    var karkinosType = HybridAquaticEntityTypes.INSTANCE.getKARKINOS();
+                    var karkinos = karkinosType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
+                    if (karkinos == null) return;
+                    
+                    double modifier = 0.15;
+                    Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
+                    Vec3d vecBetweenMod = vecBetween.multiply(modifier);
+                    var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
+                    karkinos.setVelocity(
+                        vecBetweenMod.x,
+                        vecBetweenMod.y + yOffset,
+                        vecBetweenMod.z
+                    );
+                    
+                } finally {
+                    this.discard();
+                    cir.setReturnValue(1);
+                }
+            }
+            if (!lureItemStack.isEmpty() && lureItemStack.isOf(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK())) {
+                try {
+                    var creeperType = EntityType.CREEPER;
+                    var creeper = creeperType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
+                    if (creeper == null) return;
+                    
+                    double modifier = 0.15;
+                    Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
+                    Vec3d vecBetweenMod = vecBetween.multiply(modifier);
+                    var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
+                    creeper.setVelocity(
+                        vecBetweenMod.x,
+                        vecBetweenMod.y + yOffset,
+                        vecBetweenMod.z
+                    );
+                    
+                } finally {
+                    this.discard();
+                    cir.setReturnValue(1);
+                }
+            }
+        }
+    }
+    
     // Replaces item that spawns when you fish a fish with a fish entity
     @Inject(
             method = "use",
@@ -172,72 +238,6 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
                     );
                     
                     itemInIterator.set(ItemStack.EMPTY);
-                }
-            }
-        }
-    }
-
-    // Whenever we may want to replace entities we use this. This will make sure not to spawn any unwanted entities when we reel in the hook.
-    @Inject(
-            method = "use",
-            cancellable = true,
-            slice = @Slice(
-                    from = @At(
-                            value = "NEW",
-                            target = "(Lnet/minecraft/server/world/ServerWorld;)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;"
-                    ),
-                    to = @At(
-                            value = "INVOKE",
-                            target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getPos()Lnet/minecraft/util/math/Vec3d;")
-            ),
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
-                    ordinal = 0
-            )
-    )
-    private void onHookReelEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
-        if (this.getWorld() instanceof ServerWorld serverWorld) {
-            if (!lureItemStack.isEmpty() && lureItemStack.isOf(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK())) {
-                try {
-                    var karkinosType = HybridAquaticEntityTypes.INSTANCE.getKARKINOS();
-                    var karkinos = karkinosType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
-                    if (karkinos == null) return;
-
-                    double modifier = 0.15;
-                    Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
-                    Vec3d vecBetweenMod = vecBetween.multiply(modifier);
-                    var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
-                    karkinos.setVelocity(
-                            vecBetweenMod.x,
-                            vecBetweenMod.y + yOffset,
-                            vecBetweenMod.z
-                    );
-
-                } finally {
-                    this.discard();
-                    cir.setReturnValue(1);
-                }
-            }
-            if (!lureItemStack.isEmpty() && lureItemStack.isOf(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK())) {
-                try {
-                    var creeperType = EntityType.CREEPER;
-                    var creeper = creeperType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
-                    if (creeper == null) return;
-
-                    double modifier = 0.15;
-                    Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
-                    Vec3d vecBetweenMod = vecBetween.multiply(modifier);
-                    var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
-                    creeper.setVelocity(
-                            vecBetweenMod.x,
-                            vecBetweenMod.y + yOffset,
-                            vecBetweenMod.z
-                    );
-
-                } finally {
-                    this.discard();
-                    cir.setReturnValue(1);
                 }
             }
         }
