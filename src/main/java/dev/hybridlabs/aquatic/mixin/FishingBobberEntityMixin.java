@@ -35,7 +35,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.HashMap;
 import java.util.List;
@@ -90,22 +89,21 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
         }
     }
 
-    // Gets objects for the functions below
+    // Gets fishing rod item and player that used it for Injects in "use()" function below
     @Unique
     ItemStack usedItem;
     @Unique
     PlayerEntity usedPlayer;
 
     @Inject(
-            method = "use",
-            locals = LocalCapture.CAPTURE_FAILHARD,
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
-                    ordinal = 0
-            )
+        method = "use",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
+            ordinal = 0
+        )
     )
-    private void objectGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, PlayerEntity playerEntity) {
+    private void objectGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local PlayerEntity playerEntity) {
         this.usedItem = usedItem;
         this.usedPlayer = playerEntity;
     }
