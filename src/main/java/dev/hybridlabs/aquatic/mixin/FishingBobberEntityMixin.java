@@ -33,6 +33,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
@@ -192,15 +193,24 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
 
         return instance.spawnEntity(entity);
     }
-
+    
     // Whenever we may want to replace entities we use this. This will make sure not to spawn any unwanted entities when we reel in the hook.
     @Inject(
             method = "use",
             cancellable = true,
+            slice = @Slice(
+                    from = @At(
+                            value = "NEW",
+                            target = "(Lnet/minecraft/server/world/ServerWorld;)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;"
+                    ),
+                    to = @At(
+                            value = "INVOKE",
+                            target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getPos()Lnet/minecraft/util/math/Vec3d;")
+            ),
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
-                    ordinal = 2
+                    ordinal = 0
             )
     )
     private void onHookReelEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
