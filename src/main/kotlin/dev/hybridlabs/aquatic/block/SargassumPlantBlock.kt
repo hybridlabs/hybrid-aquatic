@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
 import net.minecraft.block.*
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -24,7 +25,13 @@ class SargassumPlantBlock(settings: Settings) :
         return state.isOf(Blocks.SAND) || state.isOf(Blocks.GRAVEL) || state.isOf(stem) || super.canAttachTo(state)
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(
+        player: PlayerEntity?,
+        world: BlockView?,
+        pos: BlockPos?,
+        state: BlockState?,
+        fluid: Fluid?
+    ): Boolean {
         return false
     }
 

@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
 import net.minecraft.block.*
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -14,7 +15,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
 @Suppress("OVERRIDE_DEPRECATION")
-class SargassumBlock(settings: Settings?) :
+open class SargassumBlock(settings: Settings?) :
     AbstractPlantStemBlock(settings, Direction.UP, SHAPE, true, 0.14),
     FluidFillable {
     override fun chooseStemState(state: BlockState): Boolean {
@@ -29,7 +30,13 @@ class SargassumBlock(settings: Settings?) :
         return !state.isOf(Blocks.MAGMA_BLOCK)
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(
+        player: PlayerEntity?,
+        world: BlockView?,
+        pos: BlockPos?,
+        state: BlockState?,
+        fluid: Fluid?
+    ): Boolean {
         return false
     }
 

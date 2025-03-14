@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import net.minecraft.block.*
 import net.minecraft.block.enums.DoubleBlockHalf
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -53,7 +54,7 @@ class SeaLettuceBlock(settings: Settings?) : PlantBlock(settings), Fertilizable,
         return blockState
     }
 
-    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isFertilizable(world: WorldView?, pos: BlockPos?, state: BlockState?): Boolean {
         return true
     }
 
@@ -75,7 +76,13 @@ class SeaLettuceBlock(settings: Settings?) : PlantBlock(settings), Fertilizable,
         }
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(
+        player: PlayerEntity?,
+        world: BlockView?,
+        pos: BlockPos?,
+        state: BlockState?,
+        fluid: Fluid?
+    ): Boolean {
         return false
     }
 

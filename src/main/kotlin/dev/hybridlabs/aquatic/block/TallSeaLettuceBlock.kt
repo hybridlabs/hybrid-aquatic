@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import net.minecraft.block.*
 import net.minecraft.block.enums.DoubleBlockHalf
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -16,6 +17,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
+@Suppress("OVERRIDE_DEPRECATION")
 class TallSeaLettuceBlock(settings: Settings?) : TallPlantBlock(settings), FluidFillable {
     override fun getOutlineShape(
         state: BlockState,
@@ -60,7 +62,13 @@ class TallSeaLettuceBlock(settings: Settings?) : TallPlantBlock(settings), Fluid
         return Fluids.WATER.getStill(false)
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(
+        player: PlayerEntity?,
+        world: BlockView?,
+        pos: BlockPos?,
+        state: BlockState?,
+        fluid: Fluid?
+    ): Boolean {
         return false
     }
 

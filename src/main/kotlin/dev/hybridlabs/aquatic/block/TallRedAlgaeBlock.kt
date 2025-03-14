@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import net.minecraft.block.*
 import net.minecraft.block.enums.DoubleBlockHalf
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -61,7 +62,13 @@ class TallRedAlgaeBlock(settings: Settings?) : TallPlantBlock(settings), FluidFi
         return Fluids.WATER.getStill(false)
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(
+        player: PlayerEntity?,
+        world: BlockView?,
+        pos: BlockPos?,
+        state: BlockState?,
+        fluid: Fluid?
+    ): Boolean {
         return false
     }
 

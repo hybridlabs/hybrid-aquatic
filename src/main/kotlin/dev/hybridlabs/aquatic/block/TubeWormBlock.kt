@@ -104,7 +104,7 @@ class TubeWormBlock(settings: Settings) : PlantBlock(settings), Fertilizable, Wa
         builder.add(WORMS, WATERLOGGED)
     }
 
-    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isFertilizable(world: WorldView?, pos: BlockPos?, state: BlockState?): Boolean {
         return false
     }
 
