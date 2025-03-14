@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier
 object HybridAquaticNetworking {
     var FISHING_BOBBER_LURE: Identifier = Identifier(HybridAquatic.MOD_ID, "fishing_bobber_lure")
 
-    init {
+    fun registerNetworking() {
         // Sends lure item to the client back
         ServerPlayNetworking.registerGlobalReceiver(FISHING_BOBBER_LURE) { server, client, handler, buf, packetSender ->
             val entityID = buf.readInt()

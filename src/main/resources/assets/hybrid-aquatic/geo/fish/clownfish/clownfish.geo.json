@@ -1,0 +1,73 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "body",
+					"pivot": [0, 2, -3.25],
+					"cubes": [
+						{"origin": [-1, 0.5, -6.5], "size": [2, 3, 2], "uv": [10, 0]},
+						{"origin": [-1, 0, -4.5], "size": [2, 4, 6], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "pelvic_fin",
+					"parent": "body",
+					"pivot": [0, 0, -1.5],
+					"cubes": [
+						{"origin": [0, -2, -4.5], "size": [0, 2, 6], "uv": [0, 6]}
+					]
+				},
+				{
+					"name": "dorsal_fin",
+					"parent": "body",
+					"pivot": [0, 4, -1.5],
+					"cubes": [
+						{"origin": [0, 4, -4.5], "size": [0, 2, 6], "uv": [0, 4]}
+					]
+				},
+				{
+					"name": "left_fin",
+					"parent": "body",
+					"pivot": [1, 1.5, -3.5],
+					"cubes": [
+						{"origin": [0, 0, -3.5], "size": [2, 2, 0], "pivot": [1, 2, -3.5], "rotation": [32.89913, -12.67956, -71.25773], "uv": [0, 3]}
+					]
+				},
+				{
+					"name": "right_fin",
+					"parent": "body",
+					"pivot": [-1, 2, -3.5],
+					"cubes": [
+						{"origin": [-2, 0, -3.5], "size": [2, 2, 0], "pivot": [-1, 2, -3.5], "rotation": [32.89913, 12.67956, 71.25773], "uv": [0, 3], "mirror": true}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "body",
+					"pivot": [0, 2, 1.5],
+					"cubes": [
+						{"origin": [-1, 1, 1.5], "size": [2, 2, 1], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "tail_fin",
+					"parent": "tail",
+					"pivot": [0, 2, 2.5],
+					"cubes": [
+						{"origin": [0, 0, 2.5], "size": [0, 4, 3], "uv": [0, 11]}
+					]
+				}
+			]
+		}
+	]
+}

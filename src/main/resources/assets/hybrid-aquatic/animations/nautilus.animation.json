@@ -1,66 +1,43 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"swim": {
+		"misc.idle": {
 			"loop": true,
-			"animation_length": 1,
 			"bones": {
 				"head": {
-					"rotation": {
-						"0.0": {
-							"vector": [-2.5, 0, 0]
-						},
-						"0.5": {
-							"vector": [2.5, 0, 0]
-						},
-						"1.0": {
-							"vector": [-2.5, 0, 0]
-						}
-					}
-				},
-				"tentacles": {
-					"rotation": {
-						"vector": [-22.5, 0, 0]
-					}
-				},
-				"tentacles2": {
-					"rotation": {
-						"0.0": {
-							"vector": [-5, 0, 0]
-						},
-						"0.5": {
-							"vector": [5, 0, 0]
-						},
-						"1.0": {
-							"vector": [-5, 0, 0]
-						}
-					}
+					"rotation": ["Math.cos(query.anim_time * 90)*2.5", 0, 0]
 				},
 				"body": {
-					"rotation": {
-						"0.0": {
-							"vector": [-2.5, 0, 0]
-						},
-						"0.5": {
-							"vector": [2.5, 0, 0]
-						},
-						"1.0": {
-							"vector": [-2.5, 0, 0]
-						}
-					}
+					"rotation": ["Math.sin(query.anim_time * 90)*1", 0, 0]
+				},
+				"tentacles_1": {
+					"rotation": ["-10+Math.cos(query.anim_time * 90)*2.5", 0, 0]
+				},
+				"tentacles_2": {
+					"rotation": ["-10+Math.sin(query.anim_time * 90)*2.5", 0, 0]
 				},
 				"siphon": {
-					"scale": {
-						"0.0": {
-							"vector": [1.2, 1.2, 1.1]
-						},
-						"0.5": {
-							"vector": [1, 1, 1]
-						},
-						"1.0": {
-							"vector": [1.2, 1.2, 1.1]
-						}
-					}
+					"rotation": ["Math.cos(query.anim_time * 90)*-2.5", 0, 0]
+				}
+			}
+		},
+		"move.swim": {
+			"loop": true,
+			"bones": {
+				"head": {
+					"rotation": ["Math.cos(query.anim_time * 180)*2.5", 0, 0]
+				},
+				"body": {
+					"rotation": ["Math.sin(query.anim_time * 180)*4", 0, 0]
+				},
+				"tentacles_1": {
+					"rotation": ["Math.cos(query.anim_time * 180)*5", 0, 0]
+				},
+				"tentacles_2": {
+					"rotation": ["Math.sin(query.anim_time * 180)*5", 0, 0]
+				},
+				"siphon": {
+					"rotation": ["Math.cos(query.anim_time * 180)*-5", 0, 0]
 				}
 			}
 		},
@@ -68,175 +45,15 @@
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
-				"head": {
-					"rotation": {
-						"0.0": {
-							"vector": [-2.5, 0, 0]
-						},
-						"0.5": {
-							"vector": [2.5, 0, 0]
-						},
-						"1.0": {
-							"vector": [-2.5, 0, 0]
-						}
-					}
-				},
-				"tentacles": {
-					"rotation": {
-						"vector": [-22.5, 0, 0]
-					}
-				},
-				"tentacles2": {
-					"rotation": {
-						"0.0": {
-							"vector": [-5, 0, 0]
-						},
-						"0.5": {
-							"vector": [5, 0, 0]
-						},
-						"1.0": {
-							"vector": [-5, 0, 0]
-						}
-					}
-				},
 				"body": {
-					"rotation": {
-						"0.0": {
-							"vector": [-180, 177.5, 90]
-						},
-						"0.5": {
-							"vector": [-180, 177.5, 90]
-						},
-						"1.0": {
-							"vector": [-180, 177.5, 90]
-						}
-					},
-					"position": {
-						"0.0": {
-							"vector": [0, -2, 0]
-						},
-						"0.5": {
-							"vector": [0, -2, 0]
-						},
-						"1.0": {
-							"vector": [0, -2, 0]
-						}
-					}
+					"rotation": [0, 0, -90],
+					"position": [0, -1.25, 0]
 				},
-				"siphon": {
-					"scale": {
-						"0.0": {
-							"vector": [1.2, 1.2, 1.1]
-						},
-						"0.5": {
-							"vector": [1, 1, 1]
-						},
-						"1.0": {
-							"vector": [1.2, 1.2, 1.1]
-						}
-					}
-				}
-			}
-		},
-		"idle": {
-			"loop": true,
-			"animation_length": 2,
-			"bones": {
-				"body": {
-					"rotation": {
-						"0.0": {
-							"vector": [7.5, 0, 0]
-						},
-						"0.75": {
-							"vector": [2.5, 0, 0]
-						},
-						"1.9583": {
-							"vector": [7.5, 0, 0]
-						}
-					}
+				"tentacles_1": {
+					"rotation": [-22.5, 0, 0]
 				},
-				"tentacles": {
-					"rotation": {
-						"0.0": {
-							"vector": [12.5, 0, 0]
-						},
-						"0.75": {
-							"vector": [5, 0, 0]
-						},
-						"1.9583": {
-							"vector": [12.5, 0, 0]
-						}
-					}
-				},
-				"tentacles2": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.75": {
-							"vector": [5, 0, 0]
-						},
-						"1.9583": {
-							"vector": [0, 0, 0]
-						}
-					}
-				},
-				"siphon": {
-					"scale": {
-						"0.0": {
-							"vector": [1.2, 1.2, 1.2]
-						},
-						"0.75": {
-							"vector": [1, 1, 1]
-						},
-						"2.0": {
-							"vector": [1.2, 1.2, 1.2]
-						}
-					}
-				}
-			}
-		},
-		"hit": {
-			"animation_length": 1,
-			"bones": {
-				"body": {
-					"rotation": {
-						"0.0": {
-							"vector": [2.5, 0, 0]
-						},
-						"0.25": {
-							"vector": [-20, 0, 0]
-						},
-						"1.0": {
-							"vector": [2.5, 0, 0]
-						}
-					}
-				},
-				"head": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.25": {
-							"vector": [10, 0, 0]
-						},
-						"1.0": {
-							"vector": [0, 0, 0]
-						}
-					}
-				},
-				"face": {
-					"scale": {
-						"0.0": {
-							"vector": [1, 1, 1]
-						},
-						"0.25": {
-							"vector": [0.8, 0.8, 0.8]
-						},
-						"1.0": {
-							"vector": [1, 1, 1]
-						}
-					}
+				"tentacles_2": {
+					"rotation": [-22.5, 0, 0]
 				}
 			}
 		}

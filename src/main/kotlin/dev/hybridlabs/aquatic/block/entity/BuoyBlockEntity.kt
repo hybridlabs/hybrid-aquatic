@@ -22,27 +22,20 @@ class BuoyBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAqua
             PlayState.STOP
         }
     }
+
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
-            AnimationController(
-                this,
-                "controller",
-                0,
-                ::predicate
-            )
-        )
+        controllerRegistrar.add(AnimationController(this, "controller", 0, ::predicate))
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return animCache
     }
 
-    override fun getTick(p0: Any?): Double {
+    override fun getTick(p0: Any): Double {
         return RenderUtils.getCurrentTick()
     }
 
     companion object {
-        val BOB_ANIMATION: RawAnimation = RawAnimation.begin().thenLoop("water_bob")
         val FLOAT_ANIMATION: RawAnimation = RawAnimation.begin().then("float", Animation.LoopType.LOOP)
     }
 }

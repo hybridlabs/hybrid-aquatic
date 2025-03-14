@@ -26,15 +26,33 @@ class MessageInABottleBlockEntityModel : GeoModel<MessageInABottleBlockEntity>()
 
     companion object {
         val VARIANT_MODELS = mapOf(
-            Variant.BOTTLE to Identifier(HybridAquatic.MOD_ID, "geo/entity/block/message_in_a_bottle/message_in_a_bottle.geo.json"),
-            Variant.JAR to Identifier(HybridAquatic.MOD_ID, "geo/entity/block/message_in_a_bottle/message_in_a_bottle_jar.geo.json"),
-            Variant.LONGNECK to Identifier(HybridAquatic.MOD_ID, "geo/entity/block/message_in_a_bottle/message_in_a_bottle_longneck.geo.json"),
+            Variant.BOTTLE to Identifier(
+                HybridAquatic.MOD_ID,
+                "geo/entity/block/message_in_a_bottle/message_in_a_bottle.geo.json"
+            ),
+            Variant.JAR to Identifier(
+                HybridAquatic.MOD_ID,
+                "geo/entity/block/message_in_a_bottle/message_in_a_bottle_jar.geo.json"
+            ),
+            Variant.LONGNECK to Identifier(
+                HybridAquatic.MOD_ID,
+                "geo/entity/block/message_in_a_bottle/message_in_a_bottle_longneck.geo.json"
+            ),
         )
 
         val VARIANT_TEXTURES = mapOf(
-            Variant.BOTTLE to Identifier(HybridAquatic.MOD_ID, "textures/entity/block/message_in_a_bottle/message_in_a_bottle.png"),
-            Variant.JAR to Identifier(HybridAquatic.MOD_ID, "textures/entity/block/message_in_a_bottle/message_in_a_bottle_jar.png"),
-            Variant.LONGNECK to Identifier(HybridAquatic.MOD_ID, "textures/entity/block/message_in_a_bottle/message_in_a_bottle_longneck.png"),
+            Variant.BOTTLE to Identifier(
+                HybridAquatic.MOD_ID,
+                "textures/entity/block/message_in_a_bottle/message_in_a_bottle.png"
+            ),
+            Variant.JAR to Identifier(
+                HybridAquatic.MOD_ID,
+                "textures/entity/block/message_in_a_bottle/message_in_a_bottle_jar.png"
+            ),
+            Variant.LONGNECK to Identifier(
+                HybridAquatic.MOD_ID,
+                "textures/entity/block/message_in_a_bottle/message_in_a_bottle_longneck.png"
+            ),
         )
 
         val WATER_BOB_ANIMATION_ID = Identifier(HybridAquatic.MOD_ID, "animations/water_bob.animation.json")

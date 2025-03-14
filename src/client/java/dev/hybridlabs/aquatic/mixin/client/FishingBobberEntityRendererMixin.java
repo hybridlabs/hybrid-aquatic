@@ -21,13 +21,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(FishingBobberEntityRenderer.class)
 public abstract class FishingBobberEntityRendererMixin {
   @Unique
-  private static final RenderLayer BARBED_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/barbed_bobber.png"));
+  private static final RenderLayer BARBED_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/bobber/barbed_bobber.png"));
   @Unique
-  private static final RenderLayer GLOWING_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/glowing_bobber.png"));
+  private static final RenderLayer GLOWING_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/bobber/glowing_bobber.png"));
   @Unique
-  private static final RenderLayer MAGNETIC_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/magnetic_bobber.png"));
+  private static final RenderLayer MAGNETIC_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/bobber/magnetic_bobber.png"));
   @Unique
-  private static final RenderLayer OMINOUS_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/ominous_bobber.png"));
+  private static final RenderLayer CREEPERMAGNET_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/bobber/creepermagnet_bobber.png"));
+  @Unique
+  private static final RenderLayer OMINOUS_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/bobber/ominous_bobber.png"));
   
   @Unique
   FishingBobberEntity entity;
@@ -49,6 +51,7 @@ public abstract class FishingBobberEntityRendererMixin {
     if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK())) currentRenderLayer = BARBED_HOOK_LAYER;
     else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getGLOWING_HOOK())) currentRenderLayer = GLOWING_HOOK_LAYER;
     else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK())) currentRenderLayer = MAGNETIC_HOOK_LAYER;
+    else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK())) currentRenderLayer = CREEPERMAGNET_HOOK_LAYER;
     else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK())) currentRenderLayer = OMINOUS_HOOK_LAYER;
     
     return instance.getBuffer(currentRenderLayer);

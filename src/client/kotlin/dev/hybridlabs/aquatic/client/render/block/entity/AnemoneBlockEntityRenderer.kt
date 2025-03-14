@@ -5,6 +5,4 @@ import dev.hybridlabs.aquatic.client.model.block.entity.AnemoneBlockEntityModel
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory.Context
 import software.bernie.geckolib.renderer.GeoBlockRenderer
 
-class AnemoneBlockEntityRenderer(context: Context) : GeoBlockRenderer<AnemoneBlockEntity>(AnemoneBlockEntityModel()) {
-
-}
+class AnemoneBlockEntityRenderer(context: Context) : GeoBlockRenderer<AnemoneBlockEntity>(AnemoneBlockEntityModel())

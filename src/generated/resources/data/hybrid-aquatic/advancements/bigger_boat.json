@@ -1,0 +1,41 @@
+{
+  "parent": "hybrid-aquatic:boat",
+  "criteria": {
+    "kill_shark": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "#hybrid-aquatic:sharks"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancements.hybrid-aquatic.bigger_boat.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "hybrid-aquatic:shark_tooth"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid-aquatic.bigger_boat.title"
+    }
+  },
+  "requirements": [
+    [
+      "kill_shark"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

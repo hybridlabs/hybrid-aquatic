@@ -1,0 +1,90 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3,
+				"visible_bounds_offset": [0, 0.5, 0]
+			},
+			"bones": [
+				{
+					"name": "body",
+					"pivot": [0, 6, 0],
+					"rotation": [-90, 0, 0],
+					"cubes": [
+						{"origin": [-7, -1, -6.25], "size": [14, 14, 12], "uv": [0, 0]},
+						{"origin": [-5.5, 0.5, -4.25], "size": [11, 11, 9], "uv": [0, 26]}
+					]
+				},
+				{
+					"name": "tentacle_4_1",
+					"parent": "body",
+					"pivot": [-2.5, 6, 4.75],
+					"cubes": [
+						{"origin": [-3.5, 5, 4.75], "size": [2, 2, 5], "uv": [42, 47]}
+					]
+				},
+				{
+					"name": "tentacle_4_2",
+					"parent": "tentacle_4_1",
+					"pivot": [-2.5, 6, 9.75],
+					"cubes": [
+						{"origin": [-3.5, 5, 9.75], "size": [2, 2, 5], "uv": [52, 0]}
+					]
+				},
+				{
+					"name": "tentacle_3_1",
+					"parent": "body",
+					"pivot": [2.5, 6, 4.75],
+					"cubes": [
+						{"origin": [1.5, 5, 4.75], "size": [2, 2, 5], "uv": [40, 40]}
+					]
+				},
+				{
+					"name": "tentacle_3_2",
+					"parent": "tentacle_3_1",
+					"pivot": [2.5, 6, 9.75],
+					"cubes": [
+						{"origin": [1.5, 5, 9.75], "size": [2, 2, 5], "uv": [0, 46]}
+					]
+				},
+				{
+					"name": "tentacle_2_1",
+					"parent": "body",
+					"pivot": [0, 8.5, 4.75],
+					"cubes": [
+						{"origin": [-1, 7.5, 4.75], "size": [2, 2, 5], "uv": [14, 46]}
+					]
+				},
+				{
+					"name": "tentacle_2_2",
+					"parent": "tentacle_2_1",
+					"pivot": [0, 8.5, 9.75],
+					"cubes": [
+						{"origin": [-1, 7.5, 9.75], "size": [2, 2, 5], "uv": [28, 47]}
+					]
+				},
+				{
+					"name": "tentacle_1_1",
+					"parent": "body",
+					"pivot": [0, 3.5, 4.75],
+					"cubes": [
+						{"origin": [-1, 2.5, 4.75], "size": [2, 2, 5], "uv": [40, 26]}
+					]
+				},
+				{
+					"name": "tentacle_1_2",
+					"parent": "tentacle_1_1",
+					"pivot": [0, 3.5, 9.75],
+					"cubes": [
+						{"origin": [-1, 2.5, 9.75], "size": [2, 2, 5], "uv": [40, 33]}
+					]
+				}
+			]
+		}
+	]
+}

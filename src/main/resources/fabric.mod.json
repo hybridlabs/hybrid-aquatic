@@ -7,9 +7,14 @@
     "description": "A mod that enhances your underwater Minecraft experience! Explore improved rivers, swamps, oceans, and undersea caves with new creatures, blocks, and (coming soon) biomes.",
 
     "authors": [
-        "dragoncommands",
         "MysticKoko",
-        "Andante"
+        "Aqua",
+        "Andante",
+        "Eggo",
+        "SupervillainMadi",
+        "Ragno",
+        "TheNuclearNexus",
+        "dragoncommands"
     ],
 
     "contact": {
@@ -18,7 +23,7 @@
         "issues": "https://github.com/hybridlabs/hybrid-aquatic/issues"
     },
 
-    "license": "ARR (Assets), MIT (Code)",
+    "license": "ARR",
     "icon": "assets/hybrid-aquatic/icon.png",
 
     "environment": "*",
@@ -60,8 +65,8 @@
         "minecraft": "~1.20.1",
         "java": ">=17",
         "fabric-language-kotlin": "*",
-        "fabric-api": ">=0.90",
-        "geckolib": ">=4.2"
+        "fabric-api": ">=0.92",
+        "geckolib": ">=4.4"
     },
 
     "custom": {

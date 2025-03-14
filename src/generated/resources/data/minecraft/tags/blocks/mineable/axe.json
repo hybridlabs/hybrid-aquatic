@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:raft",
+    "hybrid-aquatic:buoy",
+    "hybrid-aquatic:hybrid_crate",
+    "hybrid-aquatic:cherry_crate",
+    "hybrid-aquatic:oak_crate",
+    "hybrid-aquatic:birch_crate",
+    "hybrid-aquatic:jungle_crate",
+    "hybrid-aquatic:spruce_crate",
+    "hybrid-aquatic:acacia_crate",
+    "hybrid-aquatic:dark_oak_crate",
+    "hybrid-aquatic:mangrove_crate",
+    "hybrid-aquatic:crab_pot"
+  ]
+}

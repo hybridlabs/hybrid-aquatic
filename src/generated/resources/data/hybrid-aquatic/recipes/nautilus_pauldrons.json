@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "N": {
+      "item": "minecraft:nautilus_shell"
+    }
+  },
+  "pattern": [
+    "N N",
+    "N N",
+    "   "
+  ],
+  "result": {
+    "item": "hybrid-aquatic:nautilus_pauldrons"
+  },
+  "show_notification": true
+}

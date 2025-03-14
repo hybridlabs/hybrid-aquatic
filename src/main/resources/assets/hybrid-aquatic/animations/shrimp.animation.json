@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"walk": {
+		"move.walk": {
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
@@ -211,7 +211,7 @@
 				}
 			}
 		},
-		"idle": {
+		"misc.idle": {
 			"loop": true,
 			"animation_length": 2,
 			"bones": {

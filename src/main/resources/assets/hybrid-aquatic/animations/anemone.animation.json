@@ -1,45 +1,16 @@
 {
-  "format_version": "1.8.0",
-  "animations": {
-    "sway": {
-      "loop": true,
-      "animation_length": 2,
-      "bones": {
-        "tentacles": {
-          "rotation": {
-            "0.0": {
-              "vector": [0, 0, 2.5]
-            },
-            "1.0": {
-              "vector": [0, 0, -2.5],
-              "easing": "linear"
-            },
-            "2.0": {
-              "vector": [0, 0, 2.5]
-            }
-          }
-        }
-      }
-    },
-    "hide": {
-      "loop": "hold_on_last_frame",
-      "animation_length": 1,
-      "bones": {
-        "tentacles": {
-          "scale": {
-            "0.0": {
-              "vector": [1, 1, 1]
-            },
-            "0.5": {
-              "vector": [1.1, 1, 1.1]
-            },
-            "1.0": {
-              "vector": [0.9, 0.5, 0.9]
-            }
-          }
-        }
-      }
-    }
-  },
-  "geckolib_format_version": 2
+	"format_version": "1.8.0",
+	"animations": {
+		"sway": {
+			"loop": true,
+			"bones": {
+				"tentacles": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90)*2.5", 0, "Math.cos(query.anim_time * 90)*2.5"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
 }

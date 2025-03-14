@@ -5,22 +5,31 @@ package dev.hybridlabs.aquatic.block
 import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.state.StateManager
+import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.Properties
+import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
+import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
+@Suppress("DEPRECATION")
 open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, Waterloggable {
     init {
-        defaultState = stateManager.defaultState.with(Properties.WATERLOGGED, false)
+        defaultState = stateManager.defaultState
+            .with(Properties.WATERLOGGED, false)
+    }
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+        return false
     }
 
     override fun getRenderType(state: BlockState): BlockRenderType {
@@ -31,11 +40,11 @@ open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, 
         return BuoyBlockEntity(pos, state)
     }
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
-        val fluidState = ctx.world.getFluidState(ctx.blockPos)
-        return if (fluidState.isIn(FluidTags.WATER)) defaultState.with(
-            Properties.WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).isOf(
-                Fluids.WATER)) else null
+    override fun getPlacementState(ctx: ItemPlacementContext): BlockState {
+        val waterlogged = ctx.world.getFluidState(ctx.blockPos).fluid == Fluids.WATER
+        return defaultState
+            .with(Properties.WATERLOGGED, waterlogged)
+            .with(FACING, ctx.horizontalPlayerFacing.rotateYClockwise())
     }
 
     override fun getFluidState(state: BlockState): FluidState {
@@ -55,7 +64,7 @@ open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, 
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        builder.add(Properties.WATERLOGGED)
+        builder.add(Properties.WATERLOGGED, FACING)
     }
 
     override fun getOutlineShape(
@@ -67,6 +76,13 @@ open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, 
         return SHAPE
     }
 
+    override fun getCollisionShape(
+        state: BlockState,
+        world: BlockView,
+        pos: BlockPos,
+        context: ShapeContext
+    ): VoxelShape = COLLISION_SHAPE
+
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
         val placedOn = world.getBlockState(pos)
         val isAirAbove = world.getBlockState(pos.up()).isAir && world.getBlockState(pos.up(2)).isAir
@@ -74,7 +90,17 @@ open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, 
         return placedOn.fluidState.isOf(Fluids.WATER) && isAirAbove
     }
 
+    override fun rotate(state: BlockState, rotation: BlockRotation): BlockState {
+        return state.with(FACING, rotation.rotate(state.get(FACING) as Direction)) as BlockState
+    }
+
     companion object {
-        val SHAPE: VoxelShape = createCuboidShape(1.0, 3.0, 1.0, 15.0, 16.0, 15.0)
+        val FACING: DirectionProperty = HorizontalFacingBlock.FACING
+
+        private val CUBE_SHAPE: VoxelShape = createCuboidShape(0.5, 3.0, 0.5, 15.5, 16.0, 15.5)
+        private val POLE_SHAPE: VoxelShape = createCuboidShape(6.0, 16.0, 6.0, 10.0, 42.0, 10.0)
+
+        private val SHAPE: VoxelShape = VoxelShapes.union(CUBE_SHAPE, POLE_SHAPE)
+        private val COLLISION_SHAPE: VoxelShape = VoxelShapes.union(CUBE_SHAPE, POLE_SHAPE)
     }
 }

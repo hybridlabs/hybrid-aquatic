@@ -8,29 +8,25 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "conditions": [
-                {
-                  "condition": "minecraft:entity_properties",
-                  "entity": "this",
-                  "predicate": {
-                    "flags": {
-                      "is_on_fire": true
-                    }
-                  }
-                }
-              ],
-              "function": "minecraft:furnace_smelt"
-            },
-            {
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 8.0
               },
               "function": "minecraft:set_count"
             }
           ],
+          "name": "hybrid-aquatic:raw_crab"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "name": "hybrid-aquatic:karkinos_claw"
         }
       ],

@@ -6,14 +6,31 @@
         "type": "minecraft:simple_block",
         "config": {
           "to_place": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "hybrid-aquatic:giant_clam",
-              "Properties": {
-                "clam_has_pearl": "true",
-                "waterlogged": "true"
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "hybrid-aquatic:giant_clam",
+                  "Properties": {
+                    "facing": "east",
+                    "state": "open",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid-aquatic:giant_clam",
+                  "Properties": {
+                    "facing": "north",
+                    "state": "open",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
               }
-            }
+            ]
           }
         }
       },
@@ -21,8 +38,8 @@
         {
           "type": "minecraft:block_predicate_filter",
           "predicate": {
-            "type": "minecraft:matching_block_tag",
-            "tag": "hybrid-aquatic:giant_clam_generate_in"
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:water"
           }
         }
       ]

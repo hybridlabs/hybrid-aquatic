@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "hybrid-aquatic:block/driftwood_planks"
+  }
+}

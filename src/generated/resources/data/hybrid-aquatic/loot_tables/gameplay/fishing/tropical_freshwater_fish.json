@@ -1,0 +1,69 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:neon_tetra",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:oscar",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:piranha",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:tiger_barb",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:danio",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:betta",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:discus",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:gourami",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:goldfish"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:carp",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:koi"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:golden_dorado"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "hybrid-aquatic:gameplay/fishing/tropical_freshwater_fish"
+}

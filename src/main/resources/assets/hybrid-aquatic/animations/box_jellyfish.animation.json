@@ -1,0 +1,82 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"move.swim": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"body": {
+					"position": {
+						"vector": [0, "Math.sin(query.anim_time * 90)*0.5", 0]
+					}
+				},
+				"tentacle_1_1": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*5", 0, "Math.cos(query.anim_time * 90)*5"]
+					}
+				},
+				"tentacle_1_2": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90)*10", 0, 0]
+					}
+				},
+				"tentacle_1_3": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*-10", 0, 0]
+					}
+				},
+				"tentacle_2_1": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*5", 0, "Math.cos(query.anim_time * 90)*-5"]
+					}
+				},
+				"tentacle_2_2": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90)*10", 0, 0]
+					}
+				},
+				"tentacle_2_3": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*-10", 0, 0]
+					}
+				},
+				"tentacle_3_1": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*-5", 0, "Math.cos(query.anim_time * 90)*-5"]
+					}
+				},
+				"tentacle_3_2": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90)*-10", 0, 0]
+					}
+				},
+				"tentacle_3_3": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*10", 0, 0]
+					}
+				},
+				"tentacle_4_1": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*-5", 0, "Math.cos(query.anim_time * 90)*5"]
+					}
+				},
+				"tentacle_4_2": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90)*-10", 0, 0]
+					}
+				},
+				"tentacle_4_3": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*10", 0, 0]
+					}
+				},
+				"bell": {
+					"scale": {
+						"vector": ["1+Math.sin(query.anim_time * 90)*-0.05", "1+Math.sin(query.anim_time * 90)*-0.05", "1+Math.sin(query.anim_time * 90)*-0.05"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

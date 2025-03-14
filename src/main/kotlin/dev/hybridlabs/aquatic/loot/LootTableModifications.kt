@@ -9,7 +9,7 @@ import net.minecraft.predicate.entity.EntityPredicate
 import net.minecraft.predicate.entity.FishingHookPredicate
 
 object LootTableModifications {
-    init {
+    fun registerLootModifications() {
         LootTableEvents.MODIFY.register { _, _, id, tableBuilder, source ->
             if (source.isBuiltin) {
                 when (id) {
@@ -17,11 +17,23 @@ object LootTableModifications {
                     LootTables.FISHING_FISH_GAMEPLAY -> {
                         tableBuilder.modifyPools { defaultPools ->
                             defaultPools
-                                // add fishing fish loot table
+                                // add fishing loot tables
                                 .with(
-                                    LootTableEntry.builder(HybridAquaticLootTables.FISHING_FISH_ID)
-                                        .weight(85)
+                                    LootTableEntry.builder(HybridAquaticLootTables.FISHING_DEEP_SEA_FISH_ID)
+                                        .weight(30)
+                                        .quality(1)
+                                ).with(
+                                    LootTableEntry.builder(HybridAquaticLootTables.FISHING_OPEN_OCEAN_FISH_ID)
+                                        .weight(40)
+                                        .quality(1)
+                                ).with(
+                                    LootTableEntry.builder(HybridAquaticLootTables.FISHING_REEF_FISH_ID)
+                                        .weight(50)
                                         .quality(-1)
+                                ).with(
+                                    LootTableEntry.builder(HybridAquaticLootTables.FISHING_TROPICAL_FRESHWATER_FISH_ID)
+                                        .weight(30)
+                                        .quality(1)
                                 )
                                 // add fishing treasure loot table
                                 .with(

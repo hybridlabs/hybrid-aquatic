@@ -1,0 +1,140 @@
+{
+  "variants": {
+    "worms=1,waterlogged=false": [
+      {
+        "model": "hybrid-aquatic:block/dead_tube_worm"
+      },
+      {
+        "model": "hybrid-aquatic:block/dead_tube_worm",
+        "y": 90
+      },
+      {
+        "model": "hybrid-aquatic:block/dead_tube_worm",
+        "y": 180
+      },
+      {
+        "model": "hybrid-aquatic:block/dead_tube_worm",
+        "y": 270
+      }
+    ],
+    "worms=1,waterlogged=true": [
+      {
+        "model": "hybrid-aquatic:block/tube_worm"
+      },
+      {
+        "model": "hybrid-aquatic:block/tube_worm",
+        "y": 90
+      },
+      {
+        "model": "hybrid-aquatic:block/tube_worm",
+        "y": 180
+      },
+      {
+        "model": "hybrid-aquatic:block/tube_worm",
+        "y": 270
+      }
+    ],
+    "worms=2,waterlogged=false": [
+      {
+        "model": "hybrid-aquatic:block/two_dead_tube_worms"
+      },
+      {
+        "model": "hybrid-aquatic:block/two_dead_tube_worms",
+        "y": 90
+      },
+      {
+        "model": "hybrid-aquatic:block/two_dead_tube_worms",
+        "y": 180
+      },
+      {
+        "model": "hybrid-aquatic:block/two_dead_tube_worms",
+        "y": 270
+      }
+    ],
+    "worms=2,waterlogged=true": [
+      {
+        "model": "hybrid-aquatic:block/two_tube_worms"
+      },
+      {
+        "model": "hybrid-aquatic:block/two_tube_worms",
+        "y": 90
+      },
+      {
+        "model": "hybrid-aquatic:block/two_tube_worms",
+        "y": 180
+      },
+      {
+        "model": "hybrid-aquatic:block/two_tube_worms",
+        "y": 270
+      }
+    ],
+    "worms=3,waterlogged=false": [
+      {
+        "model": "hybrid-aquatic:block/three_dead_tube_worms"
+      },
+      {
+        "model": "hybrid-aquatic:block/three_dead_tube_worms",
+        "y": 90
+      },
+      {
+        "model": "hybrid-aquatic:block/three_dead_tube_worms",
+        "y": 180
+      },
+      {
+        "model": "hybrid-aquatic:block/three_dead_tube_worms",
+        "y": 270
+      }
+    ],
+    "worms=3,waterlogged=true": [
+      {
+        "model": "hybrid-aquatic:block/three_tube_worms"
+      },
+      {
+        "model": "hybrid-aquatic:block/three_tube_worms",
+        "y": 90
+      },
+      {
+        "model": "hybrid-aquatic:block/three_tube_worms",
+        "y": 180
+      },
+      {
+        "model": "hybrid-aquatic:block/three_tube_worms",
+        "y": 270
+      }
+    ],
+    "worms=4,waterlogged=false": [
+      {
+        "model": "hybrid-aquatic:block/four_dead_tube_worms"
+      },
+      {
+        "model": "hybrid-aquatic:block/four_dead_tube_worms",
+        "y": 90
+      },
+      {
+        "model": "hybrid-aquatic:block/four_dead_tube_worms",
+        "y": 180
+      },
+      {
+        "model": "hybrid-aquatic:block/four_dead_tube_worms",
+        "y": 270
+      }
+    ],
+    "worms=4,waterlogged=true": [
+      {
+        "model": "hybrid-aquatic:block/four_tube_worms"
+      },
+      {
+        "model": "hybrid-aquatic:block/four_tube_worms",
+        "y": 90
+      },
+      {
+        "model": "hybrid-aquatic:block/four_tube_worms",
+        "y": 180
+      },
+      {
+        "model": "hybrid-aquatic:block/four_tube_worms",
+        "y": 270
+      }
+    ]
+  }
+}

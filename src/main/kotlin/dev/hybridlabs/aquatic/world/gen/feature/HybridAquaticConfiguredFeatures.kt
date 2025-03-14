@@ -10,29 +10,21 @@ import net.minecraft.world.gen.feature.ConfiguredFeature
  * A registry of configured features for Hybrid Aquatic.
  */
 object HybridAquaticConfiguredFeatures {
-    /**
-     * A patch of anemones.
-     */
     val ANEMONE_PATCH = register("anemone_patch")
+    val SARGASSUM = register("sargassum")
+    val FLOATING_SARGASSUM = register("floating_sargassum")
+    val GLOWING_PLANKTON = register("glowing_plankton")
 
-    /**
-     * A patch of giant clams.
-     */
+    val WATER_LETTUCE = register("water_lettuce")
+
+    val JUNGLE_LILY_PAD = register("jungle_lily_pad")
+
+    val RED_ALGAE_PATCH = register("red_algae_patch")
+    val SEA_LETTUCE_PATCH = register("sea_lettuce_patch")
+
     val GIANT_CLAM_PATCH = register("giant_clam_patch")
-
-    /**
-     * A patch of living sponges.
-     */
     val TUBE_SPONGE_PATCH = register("tube_sponge_patch")
-
-    /**
-     * A patch of vents.
-     */
-    val HYDROTHERMAL_VENTS= register("hydrothermal_vents")
-
-    /**
-     * A message in a bottle.
-     */
+    val THERMAL_VENT_PATCH = register("thermal_vent_patch")
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
 
     private fun register(id: String): RegistryKey<ConfiguredFeature<*, *>> {

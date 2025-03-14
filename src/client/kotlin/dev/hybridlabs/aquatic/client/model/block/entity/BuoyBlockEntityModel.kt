@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
 import net.minecraft.util.Identifier
 import software.bernie.geckolib.model.GeoModel
 
-class BuoyBlockEntityModel: GeoModel<BuoyBlockEntity>() {
+class BuoyBlockEntityModel : GeoModel<BuoyBlockEntity>() {
     override fun getAnimationResource(entity: BuoyBlockEntity): Identifier {
         return ANIMATION_LOCATION
     }

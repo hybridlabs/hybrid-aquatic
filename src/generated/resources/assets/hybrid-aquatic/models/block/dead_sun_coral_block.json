@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "hybrid-aquatic:block/dead_sun_coral_block"
+  }
+}

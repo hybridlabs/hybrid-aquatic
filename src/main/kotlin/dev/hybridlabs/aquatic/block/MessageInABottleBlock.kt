@@ -3,6 +3,7 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
+import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.block.Block
 import net.minecraft.block.BlockRenderType
@@ -13,6 +14,7 @@ import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.BlockItem
@@ -77,13 +79,14 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
             // if not present, generate a random message
             if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
                 // get a random message
-                val registry = world.registryManager.get(HybridAquaticRegistryKeys.SEA_MESSAGE)
+                val registryManager = world.registryManager
+                val registry = registryManager.get(HybridAquaticRegistryKeys.SEA_MESSAGE)
                 val messageKey = registry.getRandom(world.random).getOrNull()?.registryKey() ?: return
                 val message = registry.get(messageKey) ?: return
 
                 // get block entity
                 val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity ?: return
-                blockEntity.messageItemStack = message.createBookItemStack()
+                blockEntity.messageItemStack = SeaMessageBookItem.createItemStack(message, registryManager)
             }
         }
     }
@@ -94,6 +97,10 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
         val pos = context.blockPos
         val fluidState = world.getFluidState(pos)
         return super.getPlacementState(context)?.with(WATERLOGGED, fluidState.fluid == Fluids.WATER)
+    }
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+        return false
     }
 
     override fun getStateForNeighborUpdate(

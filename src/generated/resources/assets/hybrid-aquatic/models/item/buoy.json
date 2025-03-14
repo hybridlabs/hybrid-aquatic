@@ -1,3 +1,6 @@
 {
-  "parent": "hybrid-aquatic:item/template_buoy"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hybrid-aquatic:item/buoy"
+  }
 }

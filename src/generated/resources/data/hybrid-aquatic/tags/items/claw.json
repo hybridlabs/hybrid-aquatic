@@ -1,14 +1,14 @@
 {
   "replace": false,
   "values": [
+    "hybrid-aquatic:coconut_crab_claw",
     "hybrid-aquatic:dungeness_crab_claw",
-    "hybrid-aquatic:ghost_crab_claw",
+    "hybrid-aquatic:fiddler_crab_claw",
     "hybrid-aquatic:flower_crab_claw",
+    "hybrid-aquatic:ghost_crab_claw",
+    "hybrid-aquatic:lightfoot_crab_claw",
     "hybrid-aquatic:spider_crab_claw",
     "hybrid-aquatic:vampire_crab_claw",
-    "hybrid-aquatic:fiddler_crab_claw",
-    "hybrid-aquatic:coconut_crab_claw",
-    "hybrid-aquatic:yeti_crab_claw",
-    "hybrid-aquatic:lightfoot_crab_claw"
+    "hybrid-aquatic:yeti_crab_claw"
   ]
 }

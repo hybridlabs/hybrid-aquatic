@@ -1,37 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_mahi_mahi": {
+    "has_large_fish": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:mahi_mahi"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_moray_eel": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "hybrid-aquatic:moray_eel"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_opah": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "hybrid-aquatic:opah"
-            ]
+            "tag": "hybrid-aquatic:large_fish"
           }
         ]
       },
@@ -42,40 +16,12 @@
         "recipe": "hybrid-aquatic:raw_fish_steak"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_triggerfish": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "hybrid-aquatic:triggerfish"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_yellowfin_tuna": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "hybrid-aquatic:yellowfin_tuna"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_yellowfin_tuna",
-      "has_mahi_mahi",
-      "has_opah",
-      "has_moray_eel",
-      "has_triggerfish"
+      "has_large_fish",
+      "has_the_recipe"
     ]
   ],
   "rewards": {

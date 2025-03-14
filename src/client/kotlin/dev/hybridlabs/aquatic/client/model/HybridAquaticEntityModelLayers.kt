@@ -17,14 +17,14 @@ import net.minecraft.util.Identifier
  * The registry of all entity model layers in Hybrid Aquatic.
  */
 object HybridAquaticEntityModelLayers {
-    val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie", BaskingSharkPlushieModel::createModelData)
-    val BULL_SHARK_PLUSHIE = register("bull_shark_plushie", BullSharkPlushieModel::createModelData)
-    val FRILLED_SHARK_PLUSHIE = register("frilled_shark_plushie", FrilledSharkPlushieModel::createModelData)
-    val GREAT_WHITE_SHARK_PLUSHIE = register("great_white_shark_plushie", GreatWhiteSharkPlushieModel::createModelData)
-    val HAMMERHEAD_SHARK_PLUSHIE = register("hammerhead_shark_plushie", HammerheadSharkPlushieModel::createModelData)
-    val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie", ThresherSharkPlushieModel::createModelData)
-    val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie", TigerSharkPlushieModel::createModelData)
-    val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie", WhaleSharkPlushieModel::createModelData)
+    private val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie", BaskingSharkPlushieModel::createModelData)
+    private val BULL_SHARK_PLUSHIE = register("bull_shark_plushie", BullSharkPlushieModel::createModelData)
+    private val FRILLED_SHARK_PLUSHIE = register("frilled_shark_plushie", FrilledSharkPlushieModel::createModelData)
+    private val GREAT_WHITE_SHARK_PLUSHIE = register("great_white_shark_plushie", GreatWhiteSharkPlushieModel::createModelData)
+    private val HAMMERHEAD_SHARK_PLUSHIE = register("hammerhead_shark_plushie", HammerheadSharkPlushieModel::createModelData)
+    private val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie", ThresherSharkPlushieModel::createModelData)
+    private val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie", TigerSharkPlushieModel::createModelData)
+    private val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie", WhaleSharkPlushieModel::createModelData)
 
     private fun register(id: String, modelProvider: TexturedModelDataProvider): EntityModelLayer {
         val layer = EntityModelLayer(Identifier(HybridAquatic.MOD_ID, id), "main")
@@ -33,7 +33,7 @@ object HybridAquaticEntityModelLayers {
     }
 
     /**
-     * Injects Blahaj Plushie models into the given [builder].
+     * Injects Plushie models into the given [builder].
      * @see SkullBlockEntityRendererMixin
      */
     fun injectModels(

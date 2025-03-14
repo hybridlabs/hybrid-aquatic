@@ -3,13 +3,13 @@
   "category": "building",
   "key": {
     "S": {
-      "item": "hybrid-aquatic:sponge_chunk"
+      "item": "hybrid-aquatic:tube_sponge"
     }
   },
   "pattern": [
-    "SSS",
-    "SSS",
-    "SSS"
+    "SS ",
+    "SS ",
+    "   "
   ],
   "result": {
     "item": "minecraft:sponge"
