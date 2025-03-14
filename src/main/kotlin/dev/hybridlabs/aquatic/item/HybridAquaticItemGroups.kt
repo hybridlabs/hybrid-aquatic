@@ -218,6 +218,7 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.TUBE_SPONGE)
             entries.add(HybridAquaticItems.BUOY)
             entries.add(HybridAquaticItems.CUTTLEBONE)
+            entries.add(HybridAquaticItems.CORAL_CHUNK)
             entries.add(HybridAquaticItems.SEA_URCHIN_SPINE)
 
             // lures

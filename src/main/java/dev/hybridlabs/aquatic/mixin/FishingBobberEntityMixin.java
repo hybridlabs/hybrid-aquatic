@@ -1,13 +1,13 @@
 package dev.hybridlabs.aquatic.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments;
 import dev.hybridlabs.aquatic.enchantment.LiveCatchEnchantment;
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.SpawnReason;
@@ -18,7 +18,6 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
@@ -33,12 +32,11 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 @Mixin(FishingBobberEntity.class)
@@ -91,22 +89,21 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
         }
     }
 
-    // Gets objects for the functions below
+    // Gets fishing rod item and player that used it for Injects in "use()" function below
     @Unique
     ItemStack usedItem;
     @Unique
     PlayerEntity usedPlayer;
 
     @Inject(
-            method = "use",
-            locals = LocalCapture.CAPTURE_FAILHARD,
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
-                    ordinal = 0
-            )
+        method = "use",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
+            ordinal = 0
+        )
     )
-    private void objectGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, PlayerEntity playerEntity) {
+    private void objectGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local PlayerEntity playerEntity) {
         this.usedItem = usedItem;
         this.usedPlayer = playerEntity;
     }
@@ -135,116 +132,97 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
         if (lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK())) luck += 27;
         return instance.luck(luck);
     }
-
-    // Gets objects for changeSpawnEntity function
-    @Unique
-    ItemStack generatedItem;
-
-    @Inject(
-            method = "use",
-            locals = LocalCapture.CAPTURE_FAILHARD,
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
-                    ordinal = 4
-            )
-    )
-    private void objectGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, PlayerEntity playerEntity, int returnValue, LootContextParameterSet lootContextParameterSet, LootTable lootTable, List<ItemStack> generatedLootList, Iterator<ItemStack> forLoopIterator, ItemStack itemInIterator) {
-        this.generatedItem = itemInIterator;
-    }
-
-    // Replaces item that spawns when you fish a fish with a fish entity
-    @Redirect(
-            method = "use",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z",
-                    ordinal = 0
-            )
-    )
-    private boolean changeSpawnEntity(World instance, Entity entity) {
-        if (this.getWorld() instanceof ServerWorld serverWorld) {
-            HashMap<Item, EntityType<? extends WaterCreatureEntity>> ITEM_TO_ENTITY = LiveCatchEnchantment.Companion.getITEM_TO_ENTITYTYPE();
-            var entityType = ITEM_TO_ENTITY.get(generatedItem.getItem());
-            Enchantment liveCatch = HybridAquaticEnchantments.INSTANCE.getLIVECATCH();
-            if (entityType != null && EnchantmentHelper.getLevel(liveCatch, usedItem) > 0) {
-                var liveFish = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.SPAWN_EGG);
-                if (liveFish == null) {
-                    return false;
-                }
-
-                liveFish.setPosition(this.getPos());
-
-                // makes spawned fish whoosh towards you
-                double modifier = 0.15;
-                Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
-                Vec3d vecBetweenMod = vecBetween.multiply(modifier);
-                var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
-                liveFish.setVelocity(
-                        vecBetweenMod.x,
-                        vecBetweenMod.y + yOffset,
-                        vecBetweenMod.z
-                );
-
-                return true;
-            }
-        }
-
-        return instance.spawnEntity(entity);
-    }
-
+    
     // Whenever we may want to replace entities we use this. This will make sure not to spawn any unwanted entities when we reel in the hook.
+    // TODO: Make it prettier
     @Inject(
             method = "use",
-            cancellable = true,
+            slice = @Slice(
+                    from = @At(
+                            value = "NEW",
+                            target = "(Lnet/minecraft/server/world/ServerWorld;)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;"
+                    )
+            ), //Aqua: I couldn't figure out the injection point before "lootTable"s .generateLoot() that would allow me to set "lootTable" to LootTable.EMPTY. That's why I'm just clearing generated list
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
-                    ordinal = 2
+                    target = "Lnet/minecraft/advancement/criterion/FishingRodHookedCriterion;trigger(Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/projectile/FishingBobberEntity;Ljava/util/Collection;)V"
             )
     )
-    private void onHookReelEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
+    private void onHookReelEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local List<ItemStack> list) {
         if (this.getWorld() instanceof ServerWorld serverWorld) {
-            if (!lureItemStack.isEmpty() && lureItemStack.isOf(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK())) {
-                try {
+            if (!lureItemStack.isEmpty()) {
+                if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK())) {
                     var karkinosType = HybridAquaticEntityTypes.INSTANCE.getKARKINOS();
                     var karkinos = karkinosType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
                     if (karkinos == null) return;
-
+                    
                     double modifier = 0.15;
                     Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
                     Vec3d vecBetweenMod = vecBetween.multiply(modifier);
                     var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
                     karkinos.setVelocity(
-                            vecBetweenMod.x,
-                            vecBetweenMod.y + yOffset,
-                            vecBetweenMod.z
+                        vecBetweenMod.x,
+                        vecBetweenMod.y + yOffset,
+                        vecBetweenMod.z
                     );
-
-                } finally {
-                    this.discard();
-                    cir.setReturnValue(1);
-                }
-            }
-            if (!lureItemStack.isEmpty() && lureItemStack.isOf(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK())) {
-                try {
+                    
+                    list.clear();
+                } else if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK())) {
                     var creeperType = EntityType.CREEPER;
                     var creeper = creeperType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
                     if (creeper == null) return;
-
+                    
                     double modifier = 0.15;
                     Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
                     Vec3d vecBetweenMod = vecBetween.multiply(modifier);
                     var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
                     creeper.setVelocity(
-                            vecBetweenMod.x,
-                            vecBetweenMod.y + yOffset,
-                            vecBetweenMod.z
+                        vecBetweenMod.x,
+                        vecBetweenMod.y + yOffset,
+                        vecBetweenMod.z
                     );
-
-                } finally {
-                    this.discard();
-                    cir.setReturnValue(1);
+                    
+                    list.clear();
+                }
+            }
+        }
+    }
+    
+    // Replaces item that spawns when you fish a fish with a fish entity
+    @Inject(
+            method = "use",
+            at = @At(
+                    value = "NEW",
+                    target = "Lnet/minecraft/entity/ItemEntity;",
+                    ordinal = 0
+            )
+    )
+    private void spawnFishEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local(ordinal = 1) LocalRef<ItemStack> itemInIterator) {
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            if (EnchantmentHelper.getLevel(HybridAquaticEnchantments.INSTANCE.getLIVECATCH(), usedItem) > 0) {
+                HashMap<Item, EntityType<? extends WaterCreatureEntity>> ITEM_TO_ENTITY = LiveCatchEnchantment.Companion.getITEM_TO_ENTITYTYPE();
+                var entityType = ITEM_TO_ENTITY.get(itemInIterator.get().getItem());
+                
+                if (entityType != null) {
+                    var liveFish = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.MOB_SUMMONED);
+                    if (liveFish == null) {
+                        return;
+                    }
+                    
+                    liveFish.setPosition(this.getPos());
+                    
+                    // makes spawned fish whoosh towards you
+                    double modifier = 0.15;
+                    Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
+                    Vec3d vecBetweenMod = vecBetween.multiply(modifier);
+                    var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
+                    liveFish.setVelocity(
+                        vecBetweenMod.x,
+                        vecBetweenMod.y + yOffset,
+                        vecBetweenMod.z
+                    );
+                    
+                    itemInIterator.set(ItemStack.EMPTY);
                 }
             }
         }

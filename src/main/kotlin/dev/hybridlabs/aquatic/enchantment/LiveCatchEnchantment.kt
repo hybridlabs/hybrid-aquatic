@@ -18,7 +18,7 @@ class LiveCatchEnchantment : Enchantment(Rarity.RARE, EnchantmentTarget.FISHING_
     }
 
     companion object {
-        //TODO: Probably need to move all of this into data so other people can modify this list. Not very important
+        //TODO: Probably need to move all of this into datapacks so other people can modify this list.
         val ITEM_TO_ENTITYTYPE = hashMapOf(
             Items.COD to EntityType.COD,
             Items.SALMON to EntityType.SALMON,
