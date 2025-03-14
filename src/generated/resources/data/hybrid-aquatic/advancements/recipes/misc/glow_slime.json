@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_slime_ball",
-      "has_glow_ink_sac",
-      "has_the_recipe"
+      "has_glow_ink_sac"
     ]
   ],
   "rewards": {
     "recipes": [
       "hybrid-aquatic:glow_slime"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

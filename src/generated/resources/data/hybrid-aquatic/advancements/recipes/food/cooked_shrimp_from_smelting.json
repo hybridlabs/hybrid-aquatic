@@ -30,6 +30,5 @@
     "recipes": [
       "minecraft:cooked_shrimp_from_smelting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

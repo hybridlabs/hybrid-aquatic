@@ -1,6 +1,11 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import com.mojang.serialization.MapCodec
+import net.minecraft.block.AbstractPlantBlock
+import net.minecraft.block.AbstractPlantStemBlock
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.FluidFillable
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
@@ -25,13 +30,7 @@ class SargassumPlantBlock(settings: Settings) :
         return state.isOf(Blocks.SAND) || state.isOf(Blocks.GRAVEL) || state.isOf(stem) || super.canAttachTo(state)
     }
 
-    override fun canFillWithFluid(
-        player: PlayerEntity?,
-        world: BlockView?,
-        pos: BlockPos?,
-        state: BlockState?,
-        fluid: Fluid?
-    ): Boolean {
+    override fun canFillWithFluid(player: PlayerEntity?, world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
         return false
     }
 
@@ -42,5 +41,13 @@ class SargassumPlantBlock(settings: Settings) :
         fluidState: FluidState
     ): Boolean {
         return false
+    }
+
+    override fun getCodec(): MapCodec<SargassumPlantBlock> {
+        return CODEC
+    }
+
+    companion object {
+        val CODEC: MapCodec<SargassumPlantBlock> = createCodec(::SargassumPlantBlock)
     }
 }

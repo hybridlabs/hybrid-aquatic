@@ -15,7 +15,6 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.ominous_hook.description"
@@ -26,7 +25,6 @@
       "item": "hybrid-aquatic:ominous_hook",
       "nbt": "{Damage:0}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.hybrid-aquatic.ominous_hook.title"
     }

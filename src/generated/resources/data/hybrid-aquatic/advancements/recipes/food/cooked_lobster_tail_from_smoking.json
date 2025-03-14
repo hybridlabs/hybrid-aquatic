@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_raw_lobster_tail",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_raw_lobster_tail"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:cooked_lobster_tail_from_smoking"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

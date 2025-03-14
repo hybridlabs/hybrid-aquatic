@@ -4,10 +4,20 @@ import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.block.Blocks
-import net.minecraft.entity.*
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityPose
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.LookAroundGoal
+import net.minecraft.entity.ai.goal.LookAtEntityGoal
+import net.minecraft.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.entity.ai.goal.SwimAroundGoal
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.damage.DamageSource
@@ -45,7 +55,7 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.*
+import java.util.UUID
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticSharkEntity(
@@ -359,9 +369,8 @@ open class HybridAquaticSharkEntity(
             return !shark.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.cooldown <= 0 && !target.isBlocking) {
+        override fun attack(target: LivingEntity) {
+            if (canAttack(target) && !target.isBlocking) {
                 resetCooldown()
                 shark.swingHand(Hand.MAIN_HAND)
                 shark.tryAttack(target)
@@ -375,10 +384,6 @@ open class HybridAquaticSharkEntity(
                     shark.dropStack(ItemStack(HybridAquaticItems.SHARK_TOOTH))
                 }
             }
-        }
-
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (shark.width * 2.5 + entity.width)
         }
 
         override fun start() {

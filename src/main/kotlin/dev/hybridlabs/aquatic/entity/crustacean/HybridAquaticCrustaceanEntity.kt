@@ -284,10 +284,6 @@ open class HybridAquaticCrustaceanEntity(
 
     // region water breathing
 
-    override fun canBreatheInWater(): Boolean {
-        return true
-    }
-
     override fun tickWaterBreathingAir(air: Int) {
     }
 

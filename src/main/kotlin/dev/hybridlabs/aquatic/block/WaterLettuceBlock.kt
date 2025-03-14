@@ -1,6 +1,12 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import com.mojang.serialization.MapCodec
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.vehicle.BoatEntity
 import net.minecraft.fluid.FluidState
@@ -94,7 +100,12 @@ class WaterLettuceBlock(settings: Settings) : PlantBlock(settings), Waterloggabl
         }
     }
 
+    override fun getCodec(): MapCodec<WaterLettuceBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<WaterLettuceBlock> = createCodec(::WaterLettuceBlock)
         private val SHAPE: VoxelShape = createCuboidShape(3.0, 14.0, 3.0, 13.0, 16.0, 13.0)
     }
 }

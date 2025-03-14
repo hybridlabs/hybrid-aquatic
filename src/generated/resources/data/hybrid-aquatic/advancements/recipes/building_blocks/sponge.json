@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_tube_sponge",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_tube_sponge"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:sponge"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

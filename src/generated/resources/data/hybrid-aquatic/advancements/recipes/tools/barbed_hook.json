@@ -30,6 +30,5 @@
     "recipes": [
       "hybrid-aquatic:barbed_hook"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

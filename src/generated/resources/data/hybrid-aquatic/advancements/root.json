@@ -8,17 +8,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.enter_water.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "hybrid-aquatic:yellowfin_tuna"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.hybrid-aquatic.enter_water.title"
     }
