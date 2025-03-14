@@ -461,7 +461,7 @@ object HybridAquaticBlocks {
 
     val TUBE_SPONGE = register(
         "tube_sponge", TubeSpongeBlock(
-            true, FabricBlockSettings.copyOf(
+            FabricBlockSettings.copyOf(
                 AbstractBlock.Settings.create()
                     .mapColor(MapColor.YELLOW)
                     .sounds(BlockSoundGroup.SLIME)

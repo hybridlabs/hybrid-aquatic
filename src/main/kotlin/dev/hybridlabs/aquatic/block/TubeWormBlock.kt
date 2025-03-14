@@ -119,12 +119,7 @@ class TubeWormBlock(settings: Settings) : PlantBlock(settings), Fertilizable, Wa
                 floor.isSideSolidFullSquare(world, pos, Direction.UP)
     }
 
-    override fun getCodec(): MapCodec<TubeWormBlock> {
-        return CODEC
-    }
-
     companion object {
-        val CODEC: MapCodec<TubeWormBlock> = createCodec(::TubeWormBlock)
 
         val WORMS: IntProperty = IntProperty.of("worms", 1, 4)
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED

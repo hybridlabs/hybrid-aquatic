@@ -1,11 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import com.mojang.serialization.MapCodec
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.FluidFillable
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.TallPlantBlock
+import net.minecraft.block.*
 import net.minecraft.block.enums.DoubleBlockHalf
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
@@ -36,7 +31,7 @@ class TallSeaLettuceBlock(settings: Settings?) : TallPlantBlock(settings), Fluid
         return floor.isSideSolidFullSquare(world, pos, Direction.UP) && !floor.isOf(Blocks.MAGMA_BLOCK)
     }
 
-    override fun getPickStack(world: WorldView, pos: BlockPos, state: BlockState): ItemStack {
+    override fun getPickStack(world: BlockView?, pos: BlockPos?, state: BlockState?): ItemStack? {
         return ItemStack(HybridAquaticBlocks.SEA_LETTUCE)
     }
 
@@ -79,12 +74,7 @@ class TallSeaLettuceBlock(settings: Settings?) : TallPlantBlock(settings), Fluid
         return false
     }
 
-    override fun getCodec(): MapCodec<TallSeaLettuceBlock> {
-        return CODEC
-    }
-
     companion object {
-        val CODEC: MapCodec<TallSeaLettuceBlock> = createCodec(::TallSeaLettuceBlock)
         val HALF: EnumProperty<DoubleBlockHalf> = TallPlantBlock.HALF
         private val SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 14.0, 16.0, 14.0)
     }

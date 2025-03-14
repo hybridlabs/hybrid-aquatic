@@ -1,13 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import com.mojang.serialization.MapCodec
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.Fertilizable
-import net.minecraft.block.FluidFillable
-import net.minecraft.block.PlantBlock
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.TallSeagrassBlock
+import net.minecraft.block.*
 import net.minecraft.block.enums.DoubleBlockHalf
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
@@ -96,12 +89,7 @@ class RedAlgaeBlock(settings: Settings) : PlantBlock(settings), Fertilizable, Fl
         return false
     }
 
-    override fun getCodec(): MapCodec<RedAlgaeBlock> {
-        return CODEC
-    }
-
     companion object {
-        val CODEC: MapCodec<RedAlgaeBlock> = createCodec(::RedAlgaeBlock)
         private val SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
     }
 }

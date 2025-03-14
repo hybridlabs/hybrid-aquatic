@@ -50,7 +50,13 @@ class MessageInABottleItemEntry(
 
     companion object {
         val CODEC: Codec<MessageInABottleItemEntry> = RecordCodecBuilder.create { instance ->
-            addLeafFields(instance).apply(instance, ::MessageInABottleItemEntry)
+            val default = method_53290(instance)
+            instance.group(
+                default.t1(),
+                default.t2(),
+                default.t3(),
+                default.t4(),
+            ).apply(instance, ::MessageInABottleItemEntry)
         }
 
         fun builder(): Builder<*> {

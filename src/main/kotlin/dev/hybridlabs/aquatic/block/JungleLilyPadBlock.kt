@@ -99,12 +99,7 @@ class JungleLilyPadBlock(settings: Settings) : PlantBlock(settings) {
         }
     }
 
-    override fun getCodec(): MapCodec<JungleLilyPadBlock> {
-        return CODEC
-    }
-
     companion object {
-        val CODEC: MapCodec<JungleLilyPadBlock> = createCodec(::JungleLilyPadBlock)
         private val SHAPE: VoxelShape = createCuboidShape(1.0, 15.0, 1.0, 15.0, 16.0, 15.0)
     }
 }

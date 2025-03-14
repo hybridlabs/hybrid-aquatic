@@ -42,12 +42,4 @@ class SargassumPlantBlock(settings: Settings) :
     ): Boolean {
         return false
     }
-
-    override fun getCodec(): MapCodec<SargassumPlantBlock> {
-        return CODEC
-    }
-
-    companion object {
-        val CODEC: MapCodec<SargassumPlantBlock> = createCodec(::SargassumPlantBlock)
-    }
 }

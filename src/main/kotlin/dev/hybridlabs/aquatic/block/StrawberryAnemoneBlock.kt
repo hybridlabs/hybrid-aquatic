@@ -114,12 +114,7 @@ class StrawberryAnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEn
         return false
     }
 
-    override fun getCodec(): MapCodec<StrawberryAnemoneBlock> {
-        return CODEC
-    }
-
     companion object {
-        val CODEC: MapCodec<StrawberryAnemoneBlock> = createCodec(::StrawberryAnemoneBlock)
         private val SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 9.0, 12.0)
         private val COLLISION_SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)
     }

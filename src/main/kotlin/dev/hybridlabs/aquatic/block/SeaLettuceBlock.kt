@@ -96,12 +96,7 @@ class SeaLettuceBlock(settings: Settings?) : PlantBlock(settings), Fertilizable,
         return false
     }
 
-    override fun getCodec(): MapCodec<SeaLettuceBlock> {
-        return CODEC
-    }
-
     companion object {
-        val CODEC: MapCodec<SeaLettuceBlock> = createCodec(::SeaLettuceBlock)
         private val SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
     }
 }

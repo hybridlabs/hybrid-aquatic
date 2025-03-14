@@ -16,7 +16,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
-class WallGlowstickBlock(settings: Settings) : WallTorchBlock(GLOW, settings), Waterloggable {
+class WallGlowstickBlock(settings: Settings) : WallTorchBlock(settings, GLOW), Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(Properties.WATERLOGGED, false)
     }

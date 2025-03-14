@@ -1,11 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import com.mojang.serialization.MapCodec
-import net.minecraft.block.AbstractPlantStemBlock
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.FluidFillable
+import net.minecraft.block.*
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
@@ -60,12 +55,7 @@ class SargassumBlock(settings: Settings) : AbstractPlantStemBlock(settings, Dire
         return Fluids.WATER.getStill(false)
     }
 
-    override fun getCodec(): MapCodec<SargassumBlock> {
-        return CODEC
-    }
-
     companion object {
-        val CODEC: MapCodec<SargassumBlock> = createCodec(::SargassumBlock)
         val SHAPE: VoxelShape = createCuboidShape(0.0, 0.0, 0.0, 16.0, 9.0, 16.0)
     }
 }
