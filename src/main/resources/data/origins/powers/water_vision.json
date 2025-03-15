@@ -1,0 +1,29 @@
+{
+  "loading_priority": 1,
+  "type": "origins:multiple",
+  "powers": [
+    {
+      "type": "origins:toggle_night_vision",
+      "strength": 1.0,
+      "condition": {
+        "type": "origins:submerged_in",
+        "fluid": "minecraft:water"
+      },
+      "active_by_default": true,
+      "key": {
+        "key": "key.origins.primary_active",
+        "continuous": false
+      }
+    },
+    {
+      "type": "origins:effect",
+      "effect": "hybrid-aquatic:clarity",
+      "duration": -1,
+      "amplifier": 0,
+      "condition": {
+        "type": "origins:submerged_in",
+        "fluid": "minecraft:water"
+      }
+    }
+  ]
+}
