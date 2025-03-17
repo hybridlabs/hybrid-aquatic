@@ -16,7 +16,6 @@ import dev.hybridlabs.aquatic.client.render.block.entity.BuoyBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
-import dev.hybridlabs.aquatic.client.render.features.PlayerItemPorcupineFeature
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.BuoyBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
@@ -57,19 +56,8 @@ object HybridAquaticClient : ClientModInitializer {
         registerWeatherRenderers()
         registerTooltips()
         registerGeoRenderers()
-        registerEntityFeatures()
 
         ClientCommandRegistrationCallback.EVENT.register(::registerCommands)
-    }
-
-    private fun registerEntityFeatures() {
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register { type, entityRenderer, registrationHelper, context ->
-            if (entityRenderer is PlayerEntityRenderer) {
-
-                @Suppress("UNCHECKED_CAST")
-                registrationHelper.register(PlayerItemPorcupineFeature(entityRenderer as LivingEntityRenderer<PlayerEntity, PlayerEntityModel<PlayerEntity>>?))
-            }
-        }
     }
 
     private fun registerGeoRenderers() {
