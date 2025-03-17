@@ -18,7 +18,6 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -29,10 +28,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.Slice;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -121,16 +117,17 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     }
 
     // Increases chance of getting treasure item with magnetic hook
-    @Redirect(
+    @ModifyArg(
             method = "use",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/loot/context/LootContextParameterSet$Builder;luck(F)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;"
-            )
+            ),
+            index = 0
     )
-    private LootContextParameterSet.Builder increaseLuck(LootContextParameterSet.Builder instance, float luck) {
+    private float increaseLuck(float luck) {
         if (lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK())) luck += 27;
-        return instance.luck(luck);
+        return luck;
     }
     
     // Whenever we may want to replace entities we use this. This will make sure not to spawn any unwanted entities when we reel in the hook.
