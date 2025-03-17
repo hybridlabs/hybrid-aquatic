@@ -69,12 +69,13 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
 
     // Reduces wait time faster if you have hooks on the fishing rod
     @Inject(
-            method = "tickFishingLogic", at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/util/math/MathHelper;nextInt(Lnet/minecraft/util/math/random/Random;II)I",
-            ordinal = 2,
-            shift = At.Shift.AFTER
-    )
+            method = "tickFishingLogic",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/util/math/MathHelper;nextInt(Lnet/minecraft/util/math/random/Random;II)I",
+                    ordinal = 2,
+                    shift = At.Shift.AFTER
+            )
     )
     private void reduceCooldownTime(BlockPos pos, CallbackInfo ci) {
         Item lureItem = this.lureItemStack.getItem();
@@ -92,12 +93,12 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     PlayerEntity usedPlayer;
 
     @Inject(
-        method = "use",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
-            ordinal = 0
-        )
+            method = "use",
+                    at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;getWorld()Lnet/minecraft/world/World;",
+                    ordinal = 0
+            )
     )
     private void objectGetter(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local PlayerEntity playerEntity) {
         this.usedItem = usedItem;
