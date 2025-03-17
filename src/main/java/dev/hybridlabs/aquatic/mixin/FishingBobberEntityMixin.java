@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
@@ -18,6 +19,8 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -132,26 +135,26 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     
     // Whenever we may want to replace entities we use this. This will make sure not to spawn any unwanted entities when we reel in the hook.
     // TODO: Make it prettier
-    @Inject(
+    @ModifyReceiver(
             method = "use",
             slice = @Slice(
                     from = @At(
                             value = "NEW",
                             target = "(Lnet/minecraft/server/world/ServerWorld;)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;"
                     )
-            ), //Aqua: I couldn't figure out the injection point before "lootTable"s .generateLoot() that would allow me to set "lootTable" to LootTable.EMPTY. That's why I'm just clearing generated list
+            ),
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/advancement/criterion/FishingRodHookedCriterion;trigger(Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/projectile/FishingBobberEntity;Ljava/util/Collection;)V"
+                    target = "Lnet/minecraft/loot/LootTable;generateLoot(Lnet/minecraft/loot/context/LootContextParameterSet;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"
             )
     )
-    private void onHookReelEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local List<ItemStack> list) {
+    private LootTable onHookReelEntity(LootTable instance, LootContextParameterSet parameters) {
         if (this.getWorld() instanceof ServerWorld serverWorld) {
             if (!lureItemStack.isEmpty()) {
                 if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK())) {
                     var karkinosType = HybridAquaticEntityTypes.INSTANCE.getKARKINOS();
                     var karkinos = karkinosType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
-                    if (karkinos == null) return;
+                    if (karkinos == null) return instance;
                     
                     double modifier = 0.15;
                     Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
@@ -163,11 +166,11 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
                         vecBetweenMod.z
                     );
                     
-                    list.clear();
+                    instance = LootTable.EMPTY;
                 } else if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK())) {
                     var creeperType = EntityType.CREEPER;
                     var creeper = creeperType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
-                    if (creeper == null) return;
+                    if (creeper == null) return instance;
                     
                     double modifier = 0.15;
                     Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
@@ -179,10 +182,11 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
                         vecBetweenMod.z
                     );
                     
-                    list.clear();
+                    instance = LootTable.EMPTY;
                 }
             }
         }
+        return instance;
     }
     
     // Replaces item that spawns when you fish a fish with a fish entity
