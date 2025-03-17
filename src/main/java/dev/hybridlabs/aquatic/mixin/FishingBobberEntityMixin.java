@@ -9,9 +9,7 @@ import dev.hybridlabs.aquatic.enchantment.LiveCatchEnchantment;
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
@@ -36,7 +34,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashMap;
-import java.util.List;
 
 @Mixin(FishingBobberEntity.class)
 public abstract class FishingBobberEntityMixin extends ProjectileEntity implements CustomFishingBobberEntityData {
@@ -134,7 +131,6 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
     }
     
     // Whenever we may want to replace entities we use this. This will make sure not to spawn any unwanted entities when we reel in the hook.
-    // TODO: Make it prettier
     @ModifyReceiver(
             method = "use",
             slice = @Slice(
@@ -149,43 +145,20 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
             )
     )
     private LootTable onHookReelEntity(LootTable instance, LootContextParameterSet parameters) {
-        if (this.getWorld() instanceof ServerWorld serverWorld) {
-            if (!lureItemStack.isEmpty()) {
-                if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK())) {
-                    var karkinosType = HybridAquaticEntityTypes.INSTANCE.getKARKINOS();
-                    var karkinos = karkinosType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
-                    if (karkinos == null) return instance;
-                    
-                    double modifier = 0.15;
-                    Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
-                    Vec3d vecBetweenMod = vecBetween.multiply(modifier);
-                    var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
-                    karkinos.setVelocity(
-                        vecBetweenMod.x,
-                        vecBetweenMod.y + yOffset,
-                        vecBetweenMod.z
-                    );
-                    
-                    instance = LootTable.EMPTY;
-                } else if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK())) {
-                    var creeperType = EntityType.CREEPER;
-                    var creeper = creeperType.spawn(serverWorld, getBlockPos().add(0, -1, 0), SpawnReason.MOB_SUMMONED);
-                    if (creeper == null) return instance;
-                    
-                    double modifier = 0.15;
-                    Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
-                    Vec3d vecBetweenMod = vecBetween.multiply(modifier);
-                    var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
-                    creeper.setVelocity(
-                        vecBetweenMod.x,
-                        vecBetweenMod.y + yOffset,
-                        vecBetweenMod.z
-                    );
-                    
-                    instance = LootTable.EMPTY;
-                }
+        if (!lureItemStack.isEmpty()) {
+            if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK())) {
+                var karkinosType = HybridAquaticEntityTypes.INSTANCE.getKARKINOS();
+                createAndLaunchEntityAtPlayer(karkinosType);
+                
+                instance = LootTable.EMPTY;
+            } else if (lureItemStack.isOf(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK())) {
+                var creeperType = EntityType.CREEPER;
+                createAndLaunchEntityAtPlayer(creeperType);
+                
+                instance = LootTable.EMPTY;
             }
         }
+        
         return instance;
     }
     
@@ -199,36 +172,38 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
             )
     )
     private void spawnFishEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local(ordinal = 1) LocalRef<ItemStack> itemInIterator) {
-        if (this.getWorld() instanceof ServerWorld serverWorld) {
-            if (EnchantmentHelper.getLevel(HybridAquaticEnchantments.INSTANCE.getLIVECATCH(), usedItem) > 0) {
-                HashMap<Item, EntityType<? extends WaterCreatureEntity>> ITEM_TO_ENTITY = LiveCatchEnchantment.Companion.getITEM_TO_ENTITYTYPE();
-                var entityType = ITEM_TO_ENTITY.get(itemInIterator.get().getItem());
+        if (EnchantmentHelper.getLevel(HybridAquaticEnchantments.INSTANCE.getLIVECATCH(), usedItem) > 0) {
+            HashMap<Item, EntityType<? extends WaterCreatureEntity>> ITEM_TO_ENTITY = LiveCatchEnchantment.Companion.getITEM_TO_ENTITYTYPE();
+            var entityType = ITEM_TO_ENTITY.get(itemInIterator.get().getItem());
+            
+            if (entityType != null) {
+                createAndLaunchEntityAtPlayer(entityType);
                 
-                if (entityType != null) {
-                    var liveFish = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.MOB_SUMMONED);
-                    if (liveFish == null) {
-                        return;
-                    }
-                    
-                    liveFish.setPosition(this.getPos());
-                    
-                    // makes spawned fish whoosh towards you
-                    double modifier = 0.15;
-                    Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
-                    Vec3d vecBetweenMod = vecBetween.multiply(modifier);
-                    var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
-                    liveFish.setVelocity(
-                        vecBetweenMod.x,
-                        vecBetweenMod.y + yOffset,
-                        vecBetweenMod.z
-                    );
-                    
-                    itemInIterator.set(ItemStack.EMPTY);
-                }
+                itemInIterator.set(ItemStack.EMPTY);
             }
         }
     }
-
+    
+    @Unique
+    private void createAndLaunchEntityAtPlayer(EntityType<?> entityType) {
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            Entity entity = entityType.spawn(serverWorld, this.getBlockPos(), SpawnReason.MOB_SUMMONED);
+            if (entity == null) return;
+            
+            double modifier = 0.15;
+            Vec3d vecBetween = usedPlayer.getPos().subtract(this.getPos());
+            Vec3d vecBetweenMod = vecBetween.multiply(modifier);
+            var yOffset = Math.sqrt(Math.sqrt(Math.pow(vecBetween.x, 2) + Math.pow(vecBetween.y, 2) + Math.pow(vecBetween.z, 2))) * 0.08;
+            entity.setVelocity(
+                vecBetweenMod.x,
+                vecBetweenMod.y + yOffset,
+                vecBetweenMod.z
+            );
+            
+        }
+        
+    }
+    
     // Returns lure back on a successful fishing attempt
     @Inject(
             method = "use",
