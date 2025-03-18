@@ -5,21 +5,20 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.block.Blocks
 import net.minecraft.block.FluidBlock
 import net.minecraft.data.client.*
 import net.minecraft.item.Items
 import net.minecraft.item.SpawnEggItem
-import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     override fun generateBlockStateModels(generator: BlockStateModelGenerator) {
         generator.run {
             // plushies
-            Registries.BLOCK
+            Registry.BLOCK
                 .filterIsInstance<PlushieBlock>()
                 .forEach { block ->
                     excludeFromSimpleItemModelGeneration(block)
@@ -29,18 +28,18 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 }
 
             // fluids
-            Registries.BLOCK
+            Registry.BLOCK
                 .filterIsInstance<FluidBlock>()
                 .forEach { block ->
-                    val id = Registries.BLOCK.getId(block)
+                    val id = Registry.BLOCK.getId(block)
                     if (id.namespace == HybridAquatic.MOD_ID) {
                         registerSimpleState(block)
                     }
                 }
 
             // spawn eggs
-            Registries.ITEM
-                .filter(filterHybridAquatic(Registries.ITEM))
+            Registry.ITEM
+                .filter(filterHybridAquatic(Registry.ITEM))
                 .forEach { item ->
                     if (item is SpawnEggItem) {
                         registerParentedItemModel(item, ModelIds.getMinecraftNamespacedItem("template_spawn_egg"))
@@ -81,7 +80,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.JUNGLE_CRATE,
                 HybridAquaticBlocks.ACACIA_CRATE,
                 HybridAquaticBlocks.MANGROVE_CRATE,
-                HybridAquaticBlocks.CHERRY_CRATE,
             ).forEach(generator::registerSimpleCubeAll)
 
             // wood

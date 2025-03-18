@@ -5,12 +5,9 @@ package dev.hybridlabs.aquatic.data.server
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.world.gen.feature.*
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.HorizontalFacingBlock
-import net.minecraft.registry.RegistryWrapper
 import net.minecraft.state.property.Properties
 import net.minecraft.util.collection.DataPool
 import net.minecraft.util.math.Direction

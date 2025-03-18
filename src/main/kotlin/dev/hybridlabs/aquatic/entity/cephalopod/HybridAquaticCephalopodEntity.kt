@@ -25,11 +25,11 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
-import net.minecraft.registry.tag.FluidTags
-import net.minecraft.registry.tag.TagKey
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.tag.FluidTags
+import net.minecraft.tag.TagKey
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
@@ -39,14 +39,7 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
-import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.EasingType
-import software.bernie.geckolib.util.GeckoLibUtil
+import software.bernie.geckolib3.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
 open class HybridAquaticCephalopodEntity(

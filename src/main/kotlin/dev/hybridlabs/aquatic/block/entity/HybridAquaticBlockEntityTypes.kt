@@ -6,10 +6,9 @@ import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntit
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.datafixer.TypeReferences
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 import net.minecraft.util.Util
+import net.minecraft.util.registry.Registry
 
 object HybridAquaticBlockEntityTypes {
     val ANEMONE: BlockEntityType<AnemoneBlockEntity> = register("anemone", FabricBlockEntityTypeBuilder.create(::AnemoneBlockEntity, HybridAquaticBlocks.ANEMONE))
@@ -19,7 +18,7 @@ object HybridAquaticBlockEntityTypes {
 
     private fun <T : BlockEntity> register(id: String, builder: FabricBlockEntityTypeBuilder<T>): BlockEntityType<T> {
         val identifier = Identifier(HybridAquatic.MOD_ID, id)
-        return Registry.register(Registries.BLOCK_ENTITY_TYPE, identifier, builder.build(
+        return Registry.register(Registry.BLOCK_ENTITY_TYPE, identifier, builder.build(
             Util.getChoiceType(
                 TypeReferences.BLOCK_ENTITY,
                 identifier.toString()

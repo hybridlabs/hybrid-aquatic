@@ -59,7 +59,7 @@ class WaterLettuceBlock(settings: Settings) : PlantBlock(settings), Waterloggabl
         neighborPos: BlockPos
     ): BlockState {
         if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         if (!canPlaceAt(state, world, pos)) {

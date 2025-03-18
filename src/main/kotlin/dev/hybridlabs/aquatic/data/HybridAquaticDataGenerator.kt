@@ -19,8 +19,7 @@ import dev.hybridlabs.aquatic.data.server.tag.ItemTagProvider
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
-import net.minecraft.registry.Registry
-import net.minecraft.registry.RegistryBuilder
+import net.minecraft.util.registry.Registry
 
 object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(generator: FabricDataGenerator) {

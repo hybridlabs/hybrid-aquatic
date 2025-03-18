@@ -69,7 +69,7 @@ class TubeWormBlock(settings: Settings) : PlantBlock(settings), Fertilizable, Wa
             Blocks.AIR.defaultState
         } else {
             if (state[WATERLOGGED]) {
-                world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+                world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
             }
             super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
         }
@@ -104,7 +104,7 @@ class TubeWormBlock(settings: Settings) : PlantBlock(settings), Fertilizable, Wa
         builder.add(WORMS, WATERLOGGED)
     }
 
-    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isFertilizable(world: BlockView?, pos: BlockPos?, state: BlockState?, isClient: Boolean): Boolean {
         return false
     }
 

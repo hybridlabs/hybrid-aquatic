@@ -1,10 +1,9 @@
 package dev.hybridlabs.aquatic.effect
 
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageTypes
+import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
-import net.minecraft.registry.tag.DamageTypeTags
 
 class SpininessStatusEffect : StatusEffect(StatusEffectCategory.BENEFICIAL, 0x695672) {
 
@@ -17,7 +16,7 @@ class SpininessStatusEffect : StatusEffect(StatusEffectCategory.BENEFICIAL, 0x69
             val attacker = damageSource.source
             if (attacker is LivingEntity && !attacker.isDead) {
                 if (!damageSource.isIn(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) && !damageSource.isOf(DamageTypes.THORNS)) {
-                    attacker.damage(entity.damageSources.thorns(entity), 2.0f)
+                    attacker.damage(DamageSource.thorns(entity), 2.0f)
                 }
             }
         }

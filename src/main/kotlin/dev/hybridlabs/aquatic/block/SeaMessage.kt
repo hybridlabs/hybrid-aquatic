@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.block
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import net.minecraft.registry.DynamicRegistryManager
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.DynamicRegistryManager
 import java.util.Optional
 
 /**

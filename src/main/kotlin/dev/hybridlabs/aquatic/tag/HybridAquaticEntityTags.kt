@@ -2,9 +2,9 @@ package dev.hybridlabs.aquatic.tag
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import net.minecraft.entity.EntityType
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.TagKey
+import net.minecraft.tag.TagKey
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 object HybridAquaticEntityTags {
     val NONE = create("prey/none")
@@ -23,6 +23,6 @@ object HybridAquaticEntityTags {
     val CAN_USE_FISHING_NET_ON = create("can_use_fishing_net_on")
 
     private fun create(id: String): TagKey<EntityType<*>> {
-        return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id))
+        return TagKey.of(Registry.ENTITY_TYPE_KEY, Identifier(HybridAquatic.MOD_ID, id))
     }
 }

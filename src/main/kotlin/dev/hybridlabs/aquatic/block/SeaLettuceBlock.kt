@@ -6,8 +6,8 @@ import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.random.Random
@@ -15,7 +15,6 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
-import net.minecraft.world.WorldView
 
 @Suppress("OVERRIDE_DEPRECATION")
 class SeaLettuceBlock(settings: Settings?) : PlantBlock(settings), Fertilizable, FluidFillable {
@@ -47,13 +46,13 @@ class SeaLettuceBlock(settings: Settings?) : PlantBlock(settings), Fertilizable,
     ): BlockState {
         val blockState = super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
         if (!blockState.isAir) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         return blockState
     }
 
-    override fun isFertilizable(world: WorldView, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isFertilizable(world: BlockView?, pos: BlockPos?, state: BlockState?, isClient: Boolean): Boolean {
         return true
     }
 

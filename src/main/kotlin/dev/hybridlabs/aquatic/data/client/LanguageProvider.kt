@@ -8,29 +8,18 @@ import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
-import net.minecraft.registry.Registries
+import net.minecraft.util.registry.Registry
 
 class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
     override fun generateTranslations(builder: TranslationBuilder) {
         // item group
-        builder.add(
-            Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.BLOCKS)
-                .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Blocks"
-        )
 
-        builder.add(
-            Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.ITEMS)
-                .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Items"
-        )
-
-        builder.add(
-            Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.SPAWN_EGGS)
-                .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Spawn Eggs"
-        )
+        builder.add(HybridAquaticItemGroups.ITEMS, "Hybrid Aquatic Items")
+        builder.add(HybridAquaticItemGroups.BLOCKS, "Hybrid Aquatic Blocks")
+        builder.add(HybridAquaticItemGroups.SPAWN_EGGS, "Hybrid Aquatic Spawn Eggs")
 
         // message in a bottle
         HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.translationKey.let { key ->
@@ -356,7 +345,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticStatusEffects.BUOYANCY to "Buoyancy",
             HybridAquaticStatusEffects.SPININESS to "Spininess",
         ).forEach { (effect, translation) ->
-            val identifier = Registries.STATUS_EFFECT.getId(effect)
+            val identifier = Registry.STATUS_EFFECT.getId(effect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
         }
 
@@ -517,8 +506,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         // verify display name list is valid
         val nonPresentEntityNames = mutableListOf<EntityType<*>>()
 
-        Registries.ENTITY_TYPE
-            .filter(filterHybridAquatic(Registries.ENTITY_TYPE))
+        Registry.ENTITY_TYPE
+            .filter(filterHybridAquatic(Registry.ENTITY_TYPE))
             .forEach { type ->
                 if (type.baseClass.isAssignableFrom(MobEntity::class.java)) {
                     if (!entityNameMap.containsKey(type)) {
@@ -533,7 +522,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         // generate entity and entity spawn egg translations
         entityNameMap.forEach { (entityType, translation) ->
-            val id = Registries.ENTITY_TYPE.getId(entityType)
+            val id = Registry.ENTITY_TYPE.getId(entityType)
             val translationKey = entityType.translationKey
             val namespace = id.namespace
             val path = id.path

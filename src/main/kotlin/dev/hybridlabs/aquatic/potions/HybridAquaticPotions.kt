@@ -10,9 +10,8 @@ import net.minecraft.item.Items
 import net.minecraft.potion.Potion
 import net.minecraft.potion.Potions
 import net.minecraft.recipe.BrewingRecipeRegistry
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 object HybridAquaticPotions {
     val GLOWING_POTION = registerPotionWithRecipe(
@@ -99,6 +98,6 @@ object HybridAquaticPotions {
     }
 
     private fun register(id: String, potion: Potion): Potion {
-        return Registry.register(Registries.POTION, Identifier(HybridAquatic.MOD_ID, id), potion)
+        return Registry.register(Registry.POTION, Identifier(HybridAquatic.MOD_ID, id), potion)
     }
 }

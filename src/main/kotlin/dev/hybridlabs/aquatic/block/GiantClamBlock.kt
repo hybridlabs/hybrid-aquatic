@@ -5,6 +5,7 @@ import net.minecraft.block.*
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
+import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -73,7 +74,7 @@ class GiantClamBlock(
             }
 
             if (pearlTimer > 0) {
-                world.scheduleBlockTick(pos, this, 20)
+                world.createAndScheduleBlockTick(pos, this, 20)
             }
         }
     }
@@ -146,7 +147,7 @@ class GiantClamBlock(
             pearlTimer = 6000
 
             if (!entity.bypassesSteppingEffects() && entity is LivingEntity) {
-                entity.damage(world.damageSources.inWall(), 4.0f)
+                entity.damage(DamageSource.IN_WALL, 4.0f)
             }
         }
 

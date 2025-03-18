@@ -6,7 +6,7 @@ import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.tag.TagKey
+import net.minecraft.tag.TagKey
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World

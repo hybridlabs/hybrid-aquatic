@@ -279,7 +279,6 @@ object HybridAquaticItems {
     val JUNGLE_CRATE = registerBlockItem("jungle_crate", HybridAquaticBlocks.JUNGLE_CRATE)
     val ACACIA_CRATE = registerBlockItem("acacia_crate", HybridAquaticBlocks.ACACIA_CRATE)
     val MANGROVE_CRATE = registerBlockItem("mangrove_crate", HybridAquaticBlocks.MANGROVE_CRATE)
-    val CHERRY_CRATE = registerBlockItem("cherry_crate", HybridAquaticBlocks.CHERRY_CRATE)
 
             //#endregion
 

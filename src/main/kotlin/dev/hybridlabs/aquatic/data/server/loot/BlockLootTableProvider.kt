@@ -23,6 +23,8 @@ import net.minecraft.loot.provider.nbt.ContextLootNbtProvider
 import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.registry.Registries
 import net.minecraft.registry.tag.ItemTags
+import net.minecraft.tag.ItemTags
+import net.minecraft.util.registry.Registry
 
 class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTableProvider(output) {
     override fun generate() {
@@ -242,8 +244,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         }
 
         // generate remaining drops
-        Registries.BLOCK
-            .filter(filterHybridAquatic(Registries.BLOCK))
+        Registry.BLOCK
+            .filter(filterHybridAquatic(Registry.BLOCK))
             .filter { block ->
                 block !is WallTorchBlock && block !is DeadCoralWallFanBlock
                         && block.lootTableId !in lootTables

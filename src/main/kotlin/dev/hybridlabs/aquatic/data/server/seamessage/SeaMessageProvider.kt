@@ -3,11 +3,8 @@ package dev.hybridlabs.aquatic.data.server.seamessage
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
-import net.minecraft.registry.RegistryKey
-import net.minecraft.registry.RegistryWrapper
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.RegistryKey
 import java.util.*
 import java.util.concurrent.CompletableFuture
 

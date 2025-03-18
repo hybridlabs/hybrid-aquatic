@@ -30,7 +30,7 @@ class WallGlowstickBlock(settings: Settings) : WallTorchBlock(settings, GLOW), W
         neighborPos: BlockPos
     ): BlockState {
         if (state.get(Properties.WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)

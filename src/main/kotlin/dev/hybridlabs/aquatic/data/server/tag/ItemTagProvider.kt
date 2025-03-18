@@ -4,11 +4,9 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
-import net.minecraft.registry.Registries
-import net.minecraft.registry.RegistryWrapper
-import net.minecraft.registry.tag.ItemTags
+import net.minecraft.tag.ItemTags
+import net.minecraft.util.registry.Registry
 import java.util.concurrent.CompletableFuture
 
 class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.ItemTagProvider(output, registriesFuture) {
@@ -43,9 +41,6 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         getOrCreateTagBuilder(ItemTags.WOODEN_FENCES)
             .add(HybridAquaticBlocks.DRIFTWOOD_FENCE.asItem())
 
-        getOrCreateTagBuilder(ItemTags.FENCE_GATES)
-            .add(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE.asItem())
-
         getOrCreateTagBuilder(ItemTags.WOODEN_DOORS)
             .add(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE.asItem())
 
@@ -63,26 +58,6 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS)
             .add(HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR.asItem())
-
-        getOrCreateTagBuilder(ItemTags.SWORDS)
-            .add(HybridAquaticItems.SEASHELL_SPEAR)
-            .add(HybridAquaticItems.CORAL_BLADE)
-
-        getOrCreateTagBuilder(ItemTags.SHOVELS)
-            .add(HybridAquaticItems.SEASHELL_SHOVEL)
-            .add(HybridAquaticItems.CORAL_SHOVEL)
-
-        getOrCreateTagBuilder(ItemTags.AXES)
-            .add(HybridAquaticItems.SEASHELL_AXE)
-            .add(HybridAquaticItems.CORAL_AXE)
-
-        getOrCreateTagBuilder(ItemTags.PICKAXES)
-            .add(HybridAquaticItems.SEASHELL_PICKAXE)
-            .add(HybridAquaticItems.CORAL_PICKAXE)
-
-        getOrCreateTagBuilder(ItemTags.HOES)
-            .add(HybridAquaticItems.SEASHELL_HOE)
-            .add(HybridAquaticItems.CORAL_HOE)
 
         //#endregion
 
@@ -314,10 +289,10 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         }
 
         // plushies
-        Registries.ITEM
-            .filter(filterHybridAquatic(Registries.ITEM))
+        Registry.ITEM
+            .filter(filterHybridAquatic(Registry.ITEM))
             .filter { item ->
-                val id = Registries.ITEM.getId(item)
+                val id = Registry.ITEM.getId(item)
                 id.path.endsWith("plushie")
             }
             .forEach { item ->

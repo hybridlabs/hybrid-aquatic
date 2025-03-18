@@ -17,9 +17,8 @@ import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilde
 import net.minecraft.entity.*
 import net.minecraft.entity.EntityType.EntityFactory
 import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 object HybridAquaticEntityTypes {
 
@@ -863,6 +862,6 @@ object HybridAquaticEntityTypes {
      * Registers an entity type to the entity type registry.
      */
     private fun <T : Entity> register(id: String, entity: EntityType<T>): EntityType<T> {
-        return Registry.register(Registries.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
+        return Registry.register(Registry.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
     }
 }

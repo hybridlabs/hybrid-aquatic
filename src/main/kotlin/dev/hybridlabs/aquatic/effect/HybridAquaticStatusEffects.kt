@@ -2,9 +2,8 @@ package dev.hybridlabs.aquatic.effect
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import net.minecraft.entity.effect.StatusEffect
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 object HybridAquaticStatusEffects {
     val BLEEDING = register("bleeding", BleedingStatusEffect())
@@ -15,6 +14,6 @@ object HybridAquaticStatusEffects {
     val CORROSION = register("corrosion", CorrosionStatusEffect())
 
     private fun register(id: String, effect: StatusEffect): StatusEffect {
-        return Registry.register(Registries.STATUS_EFFECT, Identifier(HybridAquatic.MOD_ID, id), effect)
+        return Registry.register(Registry.STATUS_EFFECT, Identifier(HybridAquatic.MOD_ID, id), effect)
     }
 }

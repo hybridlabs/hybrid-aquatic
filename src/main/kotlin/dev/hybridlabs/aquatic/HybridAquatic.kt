@@ -26,13 +26,12 @@ import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
-import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.item.BlockItem
-import net.minecraft.registry.Registries
+import net.minecraft.util.registry.Registry
 import net.minecraft.village.TradeOffers.SellItemFactory
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -118,7 +117,7 @@ object HybridAquatic : ModInitializer {
 
     private fun registerWanderingTraderTrades() {
         // plushies
-        Registries.ITEM
+        Registry.ITEM
             .filter { it is BlockItem && it.block is PlushieBlock }
             .forEach { block ->
                 TradeOfferHelper.registerWanderingTraderOffers(2) { list ->

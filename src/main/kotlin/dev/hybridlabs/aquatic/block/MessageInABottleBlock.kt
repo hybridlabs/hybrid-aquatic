@@ -113,7 +113,7 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
     ): BlockState {
         // tick fluid when waterlogged
         if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         // update placement validity

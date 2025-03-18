@@ -6,16 +6,14 @@ import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.item.SpawnEggItem
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.registry.Registry
 
 object  HybridAquaticItemGroups {
     val BLOCKS = register("blocks", FabricItemGroup.builder()
@@ -111,8 +109,8 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticBlocks.TIGER_SHARK_PLUSHIE)
             entries.add(HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
 
-            Registries.ITEM.forEach { item ->
-                val id = Registries.ITEM.getId(item)
+            Registry.ITEM.forEach { item ->
+                val id = Registry.ITEM.getId(item)
                 if (id.namespace != HybridAquatic.MOD_ID) {
                     return@forEach
                 }
@@ -270,8 +268,8 @@ object  HybridAquaticItemGroups {
         .displayName(Text.translatable("itemGroup.${HybridAquatic.MOD_ID}.spawn_eggs"))
         .icon { ItemStack(HybridAquaticItems.YELLOWFIN_TUNA) }
         .entries { _, entries ->
-            Registries.ITEM.forEach { item ->
-                val id = Registries.ITEM.getId(item)
+            Registry.ITEM.forEach { item ->
+                val id = Registry.ITEM.getId(item)
                 if (id.namespace != HybridAquatic.MOD_ID) {
                     return@forEach
                 }
@@ -284,6 +282,6 @@ object  HybridAquaticItemGroups {
     )
 
     private fun register(id: String, itemGroup: ItemGroup): ItemGroup {
-        return Registry.register(Registries.ITEM_GROUP, Identifier(HybridAquatic.MOD_ID, id), itemGroup)
+        return Registry.register(Registry.ITEM_GROUP, Identifier(HybridAquatic.MOD_ID, id), itemGroup)
     }
 }

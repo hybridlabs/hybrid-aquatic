@@ -5,9 +5,9 @@ package dev.hybridlabs.aquatic.tag
 import dev.hybridlabs.aquatic.HybridAquatic
 import net.fabricmc.fabric.impl.tag.convention.TagRegistration
 import net.minecraft.item.Item
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.TagKey
+import net.minecraft.tag.TagKey
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 object HybridAquaticItemTags {
     val LURE_ITEMS = create("lure_items")
@@ -32,7 +32,7 @@ object HybridAquaticItemTags {
     val ARMORS = createConventional("armors")
 
     private fun create(id: String): TagKey<Item> {
-        return TagKey.of(RegistryKeys.ITEM, Identifier(HybridAquatic.MOD_ID, id))
+        return TagKey.of(Registry.ITEM_KEY, Identifier(HybridAquatic.MOD_ID, id))
     }
 
     private fun createConventional(id: String): TagKey<Item> {

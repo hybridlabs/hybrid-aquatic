@@ -59,7 +59,7 @@ class JungleLilyPadBlock(settings: Settings?) : PlantBlock(settings) {
         neighborPos: BlockPos
     ): BlockState {
         if (state.get(Properties.WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         if (!canPlaceAt(state, world, pos)) {

@@ -4,9 +4,6 @@ package dev.hybridlabs.aquatic.data.server
 
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
-import net.minecraft.registry.RegistryWrapper
 import net.minecraft.world.Heightmap
 import net.minecraft.world.gen.feature.PlacedFeature
 import net.minecraft.world.gen.feature.PlacedFeatures

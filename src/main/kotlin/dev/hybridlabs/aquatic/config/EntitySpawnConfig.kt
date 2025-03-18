@@ -4,9 +4,8 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
-import net.minecraft.registry.Registries
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.TagKey
+import net.minecraft.tag.TagKey
+import net.minecraft.util.registry.Registry
 import net.minecraft.world.biome.Biome
 
 data class EntitySpawnConfig(
@@ -20,8 +19,8 @@ data class EntitySpawnConfig(
     companion object {
         val CODEC: Codec<EntitySpawnConfig> = RecordCodecBuilder.create { instance ->
             instance.group(
-                Registries.ENTITY_TYPE.codec.fieldOf("type").forGetter(EntitySpawnConfig::type),
-                TagKey.codec(RegistryKeys.BIOME).fieldOf("biomes").forGetter(EntitySpawnConfig::biomes),
+                Registry.ENTITY_TYPE.codec.fieldOf("type").forGetter(EntitySpawnConfig::type),
+                TagKey.codec(Registry.BIOME_KEY).fieldOf("biomes").forGetter(EntitySpawnConfig::biomes),
                 SpawnGroup.CODEC.fieldOf("group").forGetter(EntitySpawnConfig::group),
                 Codec.INT.fieldOf("weight").forGetter(EntitySpawnConfig::weight),
                 Codec.INT.fieldOf("min_group_size").forGetter(EntitySpawnConfig::minGroupSize),

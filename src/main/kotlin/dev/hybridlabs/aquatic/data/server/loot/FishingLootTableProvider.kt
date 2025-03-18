@@ -299,7 +299,6 @@ class FishingLootTableProvider(output: FabricDataOutput) :
                         .with(ItemEntry.builder(HybridAquaticItems.ACACIA_CRATE))
                         .with(ItemEntry.builder(HybridAquaticItems.JUNGLE_CRATE))
                         .with(ItemEntry.builder(HybridAquaticItems.MANGROVE_CRATE))
-                        .with(ItemEntry.builder(HybridAquaticItems.CHERRY_CRATE))
                         .with(MessageInABottleItemEntry.builder())
                 )
         )

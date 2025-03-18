@@ -8,16 +8,13 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
-import net.minecraft.registry.tag.BiomeTags
 import net.minecraft.sound.SoundEvents
+import net.minecraft.tag.BiomeTags
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
 
 class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
     HybridAquaticCrustaceanEntity(

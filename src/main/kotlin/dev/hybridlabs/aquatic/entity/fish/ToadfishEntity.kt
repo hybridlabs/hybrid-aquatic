@@ -128,7 +128,7 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
 
     private fun sting(mob: MobEntity) {
         val puffLevel = getPuffState()
-        val damageSource = this.damageSources.mobAttack(this)
+        val damageSource = DamageSource.mob(this)
         if (mob.damage(damageSource, (1 + puffLevel).toFloat())) {
             mob.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 60 * puffLevel, 0), this)
             playSound(SoundEvents.ENTITY_PUFFER_FISH_STING, 1.0f, 1.0f)
@@ -137,7 +137,7 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
 
     override fun onPlayerCollision(player: PlayerEntity) {
         val puffLevel = getPuffState()
-        if (puffLevel > 0 && player.damage(this.damageSources.mobAttack(this), (1 + puffLevel).toFloat())) {
+        if (puffLevel > 0 && player.damage(DamageSource.mob(this), (1 + puffLevel).toFloat())) {
             player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 60 * puffLevel, 0), this)
         }
     }

@@ -53,7 +53,6 @@ class TigerSharkEntity(entityType: EntityType<out TigerSharkEntity>, world: Worl
                 ItemStack(Items.BONE),
                 ItemStack(Items.PRISMARINE_CRYSTALS),
                 ItemStack(Items.PRISMARINE_SHARD),
-                ItemStack(Items.BRUSH),
                 ItemStack(Items.NAME_TAG),
                 ItemStack(Items.COMPASS),
                 ItemStack(Items.CLOCK),

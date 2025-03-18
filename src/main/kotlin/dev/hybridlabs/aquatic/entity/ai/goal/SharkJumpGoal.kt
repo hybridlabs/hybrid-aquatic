@@ -2,14 +2,13 @@ package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.entity.ai.goal.DiveJumpingGoal
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.sound.SoundEvents
+import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import kotlin.math.abs
 import kotlin.math.atan2
 
-@Suppress("DEPRECATION")
 class SharkJumpGoal(private val shark: HybridAquaticSharkEntity, chance: Int) : DiveJumpingGoal() {
     private val chance: Int = toGoalTicks(chance)
     private var inWater = false
@@ -37,7 +36,7 @@ class SharkJumpGoal(private val shark: HybridAquaticSharkEntity, chance: Int) : 
     private fun isWater(pos: BlockPos, offsetX: Int, offsetZ: Int, multiplier: Int): Boolean {
         val blockPos = pos.add(offsetX * multiplier, 0, offsetZ * multiplier)
         return shark.world.getFluidState(blockPos).isIn(FluidTags.WATER) && !shark.world.getBlockState(blockPos)
-            .blocksMovement()
+            .material.blocksMovement()
     }
 
     private fun isAirAbove(pos: BlockPos, offsetX: Int, offsetZ: Int, multiplier: Int): Boolean {

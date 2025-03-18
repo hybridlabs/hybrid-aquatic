@@ -17,10 +17,10 @@ import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.tag.FluidTags
-import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.tag.FluidTags
+import net.minecraft.tag.TagKey
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
@@ -28,12 +28,7 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
-import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
-import software.bernie.geckolib.util.GeckoLibUtil
+import software.bernie.geckolib3.util.GeckoLibUtil
 
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
@@ -64,10 +59,6 @@ open class HybridAquaticCritterEntity(
         if (!isWet) {
             this.speed = 0.01F
         }
-    }
-
-    override fun getStepHeight(): Float {
-        return 1.0F
     }
 
     override fun initDataTracker() {

@@ -8,14 +8,11 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.registry.tag.BiomeTags
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.tag.BiomeTags
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 
 class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World) :
     HybridAquaticCritterEntity(
@@ -78,7 +75,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
         super.onPlayerCollision(player)
 
         if (player is ServerPlayerEntity) {
-            player.damage(this.damageSources.mobAttack(this), 0.5f)
+            player.damage(DamageSource.thorns(this), 0.5f)
         }
     }
 

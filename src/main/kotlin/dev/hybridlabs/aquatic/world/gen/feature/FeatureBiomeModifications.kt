@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.world.gen.feature
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
-import net.minecraft.registry.tag.BiomeTags
+import net.minecraft.tag.BiomeTags
 import net.minecraft.world.gen.GenerationStep
 
 /**

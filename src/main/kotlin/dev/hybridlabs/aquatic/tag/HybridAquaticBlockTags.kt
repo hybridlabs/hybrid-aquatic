@@ -2,9 +2,9 @@ package dev.hybridlabs.aquatic.tag
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import net.minecraft.block.Block
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.TagKey
+import net.minecraft.tag.TagKey
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 object HybridAquaticBlockTags {
 
@@ -19,6 +19,6 @@ object HybridAquaticBlockTags {
     val MESSAGE_IN_A_BOTTLE_SPAWNS_IN = create("message_in_a_bottle_spawns_in")
 
     private fun create(id: String): TagKey<Block> {
-        return TagKey.of(RegistryKeys.BLOCK, Identifier(HybridAquatic.MOD_ID, id))
+        return TagKey.of(Registry.BLOCK_KEY, Identifier(HybridAquatic.MOD_ID, id))
     }
 }

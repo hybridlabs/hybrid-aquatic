@@ -5,8 +5,8 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
-import net.minecraft.registry.tag.BiomeTags
-import net.minecraft.registry.tag.TagKey
+import net.minecraft.tag.BiomeTags
+import net.minecraft.tag.TagKey
 import net.minecraft.world.biome.Biome
 
 /**

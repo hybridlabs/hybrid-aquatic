@@ -8,6 +8,7 @@ import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
+import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -67,7 +68,7 @@ class ThermalVentBlock(
         neighborPos: BlockPos
     ): BlockState {
         if (state.get(Properties.WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         if (!canPlaceAt(state, world, pos)) {
@@ -119,7 +120,7 @@ class ThermalVentBlock(
 
         if (state.get(THICKNESS) == Thickness.TIP && state.get(WATERLOGGED) && entity !is YetiCrabEntity) {
             if (!entity.bypassesSteppingEffects() && entity is LivingEntity && !EnchantmentHelper.hasFrostWalker(entity)) {
-                entity.damage(world.damageSources.hotFloor(), fireDamage.toFloat())
+                entity.damage(DamageSource.HOT_FLOOR, fireDamage.toFloat())
                 entity.addStatusEffect(StatusEffectInstance(HybridAquaticStatusEffects.CORROSION, 200, 0))
             }
         }

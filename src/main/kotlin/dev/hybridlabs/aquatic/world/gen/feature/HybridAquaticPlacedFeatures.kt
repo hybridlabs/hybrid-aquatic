@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import net.minecraft.registry.RegistryKey
-import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
+import net.minecraft.util.registry.RegistryKey
 import net.minecraft.world.gen.feature.PlacedFeature
 
 /**
@@ -35,6 +35,6 @@ object HybridAquaticPlacedFeatures {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
 
     private fun register(id: String): RegistryKey<PlacedFeature> {
-        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier(HybridAquatic.MOD_ID, id))
+        return RegistryKey.of(Registry.PLACED_FEATURE_KEY, Identifier(HybridAquatic.MOD_ID, id))
     }
 }

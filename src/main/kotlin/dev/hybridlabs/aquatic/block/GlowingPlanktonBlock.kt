@@ -69,10 +69,6 @@ class GlowingPlanktonBlock(settings: Settings) : Block(
         return if (state.get(WATERLOGGED)) Fluids.WATER.getStill(false) else super.getFluidState(state)
     }
 
-    override fun isTransparent(state: BlockState, world: BlockView, pos: BlockPos): Boolean {
-        return true
-    }
-
     override fun getRenderType(state: BlockState): BlockRenderType {
         return BlockRenderType.INVISIBLE
     }
@@ -86,7 +82,7 @@ class GlowingPlanktonBlock(settings: Settings) : Block(
         neighborPos: BlockPos
     ): BlockState {
         if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
         if (!canPlaceAt(state, world, pos)) {
             return Blocks.AIR.defaultState
@@ -98,7 +94,7 @@ class GlowingPlanktonBlock(settings: Settings) : Block(
         super.onEntityCollision(state, world, pos, entity)
         if (world is ServerWorld && !state.get(LIT)) {
             world.setBlockState(pos, state.with(LIT, true).with(LIGHT_LEVEL, 7))
-            world.scheduleBlockTick(pos, this, 20)
+            world.createAndScheduleBlockTick(pos, this, 20)
             val radius = 1.5
             val particleCount = 5
             val random = world.random
@@ -136,7 +132,7 @@ class GlowingPlanktonBlock(settings: Settings) : Block(
         val lightLevel = state.get(LIGHT_LEVEL)
         if (lightLevel > 0) {
             world.setBlockState(pos, state.with(LIGHT_LEVEL, lightLevel - 1))
-            world.scheduleBlockTick(pos, this, 20)
+            world.createAndScheduleBlockTick(pos, this, 20)
         } else if (state.get(LIT)) {
             world.setBlockState(pos, state.with(LIT, false))
         }

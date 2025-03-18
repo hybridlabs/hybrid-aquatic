@@ -7,9 +7,8 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.block.Blocks
-import net.minecraft.registry.Registries
-import net.minecraft.registry.RegistryWrapper
-import net.minecraft.registry.tag.BlockTags
+import net.minecraft.tag.BlockTags
+import net.minecraft.util.registry.Registry
 import java.util.concurrent.CompletableFuture
 
 class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.BlockTagProvider(output, registriesFuture) {
@@ -85,7 +84,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.RAFT)
             .add(HybridAquaticBlocks.BUOY)
             .add(HybridAquaticBlocks.HYBRID_CRATE)
-            .add(HybridAquaticBlocks.CHERRY_CRATE)
             .add(HybridAquaticBlocks.OAK_CRATE)
             .add(HybridAquaticBlocks.BIRCH_CRATE)
             .add(HybridAquaticBlocks.JUNGLE_CRATE)
@@ -104,8 +102,8 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.SEA_LETTUCE)
 
         // plushies
-        Registries.BLOCK
-            .filter(filterHybridAquatic(Registries.BLOCK))
+        Registry.BLOCK
+            .filter(filterHybridAquatic(Registry.BLOCK))
             .forEach { block ->
                 // plushies
                 if (block is PlushieBlock) {

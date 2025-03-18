@@ -5,11 +5,8 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.registry.tag.BiomeTags
+import net.minecraft.tag.BiomeTags
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 
 class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: World) :
     HybridAquaticCritterEntity(

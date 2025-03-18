@@ -1,11 +1,8 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.RegistryWrapper
-import net.minecraft.registry.tag.BiomeTags
+import net.minecraft.tag.BiomeTags
 import net.minecraft.util.Identifier
 import net.minecraft.world.biome.Biome
 import net.minecraft.world.biome.BiomeKeys
@@ -134,7 +131,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(Identifier("riverredux", "tropical_river"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.CHERRY)
-            .add(BiomeKeys.CHERRY_GROVE)
             .addOptional(Identifier("regions_unexplored", "mauve_hills"))
             .addOptional(Identifier("regions_unexplored", "magnolia_woodland"))
 

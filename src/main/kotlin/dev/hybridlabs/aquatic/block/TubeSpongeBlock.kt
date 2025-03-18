@@ -6,9 +6,9 @@ import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.particle.ParticleTypes
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties.WATERLOGGED
+import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.random.Random
@@ -46,7 +46,7 @@ class TubeSpongeBlock(
         neighborPos: BlockPos
     ): BlockState {
         if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
         return if (!canPlaceAt(state, world, pos)) {

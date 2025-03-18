@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.tag
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.TagKey
+import net.minecraft.tag.TagKey
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 import net.minecraft.world.biome.Biome
 
 object HybridAquaticBiomeTags {
@@ -39,6 +39,6 @@ object HybridAquaticBiomeTags {
     val ROCKY_BEACHES = create("rocky_beaches")
 
     private fun create(id: String): TagKey<Biome> {
-        return TagKey.of(RegistryKeys.BIOME, Identifier(HybridAquatic.MOD_ID, id))
+        return TagKey.of(Registry.BIOME_KEY, Identifier(HybridAquatic.MOD_ID, id))
     }
 }

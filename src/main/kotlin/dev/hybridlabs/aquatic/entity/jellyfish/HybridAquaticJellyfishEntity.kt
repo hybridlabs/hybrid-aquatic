@@ -18,24 +18,16 @@ import net.minecraft.entity.mob.HostileEntity.isSpawnDark
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
-import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.EasingType
-import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticJellyfishEntity(
@@ -122,7 +114,7 @@ open class HybridAquaticJellyfishEntity(
             moistness -= 1
             if (moistness <= -20) {
                 moistness = 0
-                damage(this.damageSources.dryOut(), 1.0f)
+                damage(DamageSource.DRYOUT, 1.0f)
             }
         }
     }
@@ -222,7 +214,7 @@ open class HybridAquaticJellyfishEntity(
         super.onPlayerCollision(player)
 
         if (player is ServerPlayerEntity && isVenomous && !player.hasVehicle()) {
-            player.damage(this.damageSources.mobAttack(this), 1.0f)
+            player.damage(DamageSource.mob(this), 1.0f)
             player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, venomLevel), this)
         }
     }

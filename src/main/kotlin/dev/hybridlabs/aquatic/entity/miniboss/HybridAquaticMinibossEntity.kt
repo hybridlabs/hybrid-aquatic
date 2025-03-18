@@ -9,14 +9,12 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.HostileEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.tag.FluidTags
+import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
-import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.util.GeckoLibUtil
+import software.bernie.geckolib3.util.GeckoLibUtil
 
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")

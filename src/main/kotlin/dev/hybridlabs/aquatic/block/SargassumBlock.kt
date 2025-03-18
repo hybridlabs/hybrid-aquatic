@@ -5,7 +5,7 @@ import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.registry.tag.FluidTags
+import net.minecraft.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.random.Random
@@ -56,6 +56,6 @@ class SargassumBlock(settings: Settings?) :
     }
 
     companion object {
-        protected val SHAPE: VoxelShape = createCuboidShape(0.0, 0.0, 0.0, 16.0, 9.0, 16.0)
+        private val SHAPE: VoxelShape = createCuboidShape(0.0, 0.0, 0.0, 16.0, 9.0, 16.0)
     }
 }

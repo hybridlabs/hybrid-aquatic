@@ -117,7 +117,7 @@ open class HybridAquaticSharkEntity(
             moistness -= 1
             if (moistness <= -20) {
                 moistness = 0
-                damage(this.damageSources.dryOut(), 2.0f)
+                damage(DamageSource.DRYOUT, 2.0f)
             }
         }
 

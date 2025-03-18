@@ -8,11 +8,8 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.registry.tag.BiomeTags
+import net.minecraft.tag.BiomeTags
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 
 class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
     HybridAquaticCritterEntity(
@@ -150,7 +147,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
 
             val attacker = source.attacker
             if (this.variant?.variantName == "crown_of_thorns" && attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
-                attacker.damage(this.damageSources.thorns(this), 2.0f)
+                attacker.damage(DamageSource.thorns(this), 2.0f)
                 attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 1))
             }
 
