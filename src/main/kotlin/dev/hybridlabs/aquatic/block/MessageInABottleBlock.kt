@@ -3,6 +3,7 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
+import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.block.Block
 import net.minecraft.block.BlockRenderType
@@ -12,8 +13,8 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.ShapeContext
 import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.entity.ItemEntity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.BlockItem
@@ -24,7 +25,6 @@ import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.util.math.Vec3d
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
@@ -43,27 +43,11 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
     }
 
     override fun getPickStack(world: BlockView, pos: BlockPos, state: BlockState): ItemStack {
-        val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity
-            ?: return super.getPickStack(world, pos, state)
-        return createItemStack(blockEntity)
-    }
-
-    override fun onStateReplaced(
-        state: BlockState,
-        world: World,
-        pos: BlockPos,
-        newState: BlockState,
-        moved: Boolean
-    ) {
-        if (!state.isOf(newState.block)) {
-            (world.getBlockEntity(pos) as? MessageInABottleBlockEntity)?.let { blockEntity ->
-                val position = Vec3d.ofCenter(pos)
-                val itemEntity = ItemEntity(world, position.x, position.y, position.z, blockEntity.messageItemStack)
-                world.spawnEntity(itemEntity)
-            }
+        val blockEntity = world.getBlockEntity(pos)
+        if (blockEntity !is MessageInABottleBlockEntity) {
+            return super.getPickStack(world, pos, state)
         }
-
-        super.onStateReplaced(state, world, pos, newState, moved)
+        return createItemStack(blockEntity)
     }
 
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
@@ -95,13 +79,14 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
             // if not present, generate a random message
             if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
                 // get a random message
-                val registry = world.registryManager.get(HybridAquaticRegistryKeys.SEA_MESSAGE)
+                val registryManager = world.registryManager
+                val registry = registryManager.get(HybridAquaticRegistryKeys.SEA_MESSAGE)
                 val messageKey = registry.getRandom(world.random).getOrNull()?.registryKey() ?: return
                 val message = registry.get(messageKey) ?: return
 
                 // get block entity
                 val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity ?: return
-                blockEntity.messageItemStack = message.createBookItemStack()
+                blockEntity.messageItemStack = SeaMessageBookItem.createItemStack(message, registryManager)
             }
         }
     }
@@ -112,6 +97,10 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
         val pos = context.blockPos
         val fluidState = world.getFluidState(pos)
         return super.getPlacementState(context)?.with(WATERLOGGED, fluidState.fluid == Fluids.WATER)
+    }
+
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+        return false
     }
 
     override fun getStateForNeighborUpdate(

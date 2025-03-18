@@ -1,0 +1,39 @@
+{
+  "parent": "hybrid-aquatic:pearl",
+  "criteria": {
+    "obtain_black_pearl": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybrid-aquatic:black_pearl"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancements.hybrid-aquatic.black_pearl.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "hybrid-aquatic:black_pearl"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid-aquatic.black_pearl.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_black_pearl"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

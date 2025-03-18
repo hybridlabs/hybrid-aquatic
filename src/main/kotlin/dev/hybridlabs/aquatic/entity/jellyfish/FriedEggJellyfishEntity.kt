@@ -3,44 +3,27 @@ package dev.hybridlabs.aquatic.entity.jellyfish
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 
-class FriedEggJellyfishEntity(entityType: EntityType<out FriedEggJellyfishEntity>, world: World) : HybridAquaticJellyfishEntity(entityType, world) {
+class FriedEggJellyfishEntity(entityType: EntityType<out FriedEggJellyfishEntity>, world: World) :
+    HybridAquaticJellyfishEntity(entityType, world, false, 0) {
+
+    override fun getLimitPerChunk(): Int {
+        return 2
+    }
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
-            return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.75)
+            return createLivingAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
     }
 
-    override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.ENTITY_SLIME_HURT_SMALL
-    }
-
-    override fun getDeathSound(): SoundEvent {
-        return SoundEvents.ENTITY_SLIME_DEATH_SMALL
-    }
-
-    override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_SQUID_AMBIENT
-    }
-
-    override fun getSplashSound(): SoundEvent {
-        return SoundEvents.ENTITY_DOLPHIN_SPLASH
-    }
-
-    override fun getSwimSound(): SoundEvent {
-        return SoundEvents.ENTITY_SQUID_AMBIENT
-    }
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 

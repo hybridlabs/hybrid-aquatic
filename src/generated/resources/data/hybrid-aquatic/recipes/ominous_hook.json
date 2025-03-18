@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "hybrid-aquatic:coconut_crab_claw"
+    },
+    {
+      "item": "hybrid-aquatic:yeti_crab_claw"
+    },
+    {
+      "item": "hybrid-aquatic:ghost_crab_claw"
+    },
+    {
+      "item": "hybrid-aquatic:flower_crab_claw"
+    },
+    {
+      "item": "hybrid-aquatic:spider_crab_claw"
+    },
+    {
+      "item": "hybrid-aquatic:fiddler_crab_claw"
+    },
+    {
+      "item": "hybrid-aquatic:vampire_crab_claw"
+    },
+    {
+      "item": "hybrid-aquatic:dungeness_crab_claw"
+    },
+    {
+      "item": "hybrid-aquatic:lightfoot_crab_claw"
+    }
+  ],
+  "result": {
+    "item": "hybrid-aquatic:ominous_hook"
+  }
+}

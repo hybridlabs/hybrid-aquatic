@@ -1,0 +1,50 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_jungle",
+    {
+      "id": "wythers:flooded_jungle",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:rainforest",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:rocky_rainforest",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:crag_gardens",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:jacaranda_jungle",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:fragment_jungle",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:tropical_rainforest",
+      "required": false
+    },
+    {
+      "id": "terrestria:hemlock_rainforest",
+      "required": false
+    },
+    {
+      "id": "terrestria:hemlock_clearing",
+      "required": false
+    },
+    {
+      "id": "terrestria:rainbow_rainforest",
+      "required": false
+    },
+    {
+      "id": "terrestria:rainbow_rainforest_lake",
+      "required": false
+    }
+  ]
+}

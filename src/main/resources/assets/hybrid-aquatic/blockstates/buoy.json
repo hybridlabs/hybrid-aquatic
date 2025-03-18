@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hybrid-aquatic:geo/buoy.geo.json",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "hybrid-aquatic:geo/buoy.geo.json",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "hybrid-aquatic:geo/buoy.geo.json"
+    },
+    "facing=south": {
+      "model": "hybrid-aquatic:geo/buoy.geo.json"
+    }
+  }
+}

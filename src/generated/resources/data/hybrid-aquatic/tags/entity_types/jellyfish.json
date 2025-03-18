@@ -1,14 +1,20 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:fried_egg_jellyfish",
-    "hybrid-aquatic:cauliflower_jellyfish",
-    "hybrid-aquatic:moon_jellyfish",
-    "hybrid-aquatic:mauve_stinger",
-    "hybrid-aquatic:barreleye",
     "hybrid-aquatic:atolla_jellyfish",
-    "hybrid-aquatic:starfish",
+    "hybrid-aquatic:barrel_jellyfish",
+    "hybrid-aquatic:blue_jellyfish",
+    "hybrid-aquatic:big_red_jellyfish",
+    "hybrid-aquatic:cauliflower_jellyfish",
     "hybrid-aquatic:compass_jellyfish",
-    "hybrid-aquatic:blue_jellyfish"
+    "hybrid-aquatic:cosmic_jellyfish",
+    "hybrid-aquatic:firework_jellyfish",
+    "hybrid-aquatic:fried_egg_jellyfish",
+    "hybrid-aquatic:lions_mane_jellyfish",
+    "hybrid-aquatic:mauve_stinger",
+    "hybrid-aquatic:moon_jellyfish",
+    "hybrid-aquatic:nomura_jellyfish",
+    "hybrid-aquatic:sea_nettle",
+    "hybrid-aquatic:box_jellyfish"
   ]
 }

@@ -1,9 +1,9 @@
-//file:noinspection GroovyAssignabilityCheck, GrUnresolvedAccess, GrDeprecatedAPIUsage
+//file:noinspection ALL
 
 plugins {
-    id "fabric-loom" version "1.4-SNAPSHOT"
-    id "org.jetbrains.kotlin.jvm" version "1.9.+"
+    id "fabric-loom" version "1.6-SNAPSHOT"
     id "maven-publish"
+    id "org.jetbrains.kotlin.jvm"
 }
 
 version = mod_version
@@ -30,18 +30,29 @@ repositories {
     }
 
     maven {
+        name = "JamiesWhiteShirt"
+        url  = "https://maven.jamieswhiteshirt.com/libs-release/"
+    }
+
+    maven {
         name = "Modrinth"
         url  = "https://api.modrinth.com/maven/"
     }
 
     maven {
-        name = "Modrinth"
-        url  = "https://api.modrinth.com/maven"
+        name = "Debug Utils (GitLab)"
+        url  = "https://gitlab.com/api/v4/projects/21830712/packages/maven/"
     }
 
     maven {
-        name = "Debug Utils (GitLab)"
-        url  = "https://gitlab.com/api/v4/projects/21830712/packages/maven"
+        name = "Minecraft Forge"
+        url  = "https://maven.minecraftforge.net/"
+    }
+}
+
+fabricApi {
+    configureDataGeneration {
+        outputDirectory = file("src/generated/resources")
     }
 }
 
@@ -51,14 +62,16 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:$loader_version"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:$fabric_version"
-    modImplementation "net.fabricmc:fabric-language-kotlin:$fabric_kotlin_version"
-    
+    modImplementation "net.fabricmc:fabric-language-kotlin:$fabric_kotlin_version+kotlin.$kotlin_version"
+
     include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:$mixin_extras_version")))
 
     modImplementation "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
     modImplementation "com.terraformersmc:modmenu:$mod_menu_version"
 
     modRuntimeOnly "maven.modrinth:carpet:$carpet_version"
+
+    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")
 }
 
 loom {
@@ -70,29 +83,6 @@ loom {
         mod_id {
             sourceSet sourceSets.main
             sourceSet sourceSets.client
-        }
-    }
-
-    runs {
-        datagen {
-            inherit server
-            name "Data Generation"
-            vmArg "-Dfabric-api.datagen"
-            vmArg "-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}"
-            vmArg "-Dfabric-api.datagen.modid=$mod_id"
-
-            runDir "build/datagen"
-        }
-    }
-}
-
-// Add the generated resources to the main source set
-sourceSets {
-    main {
-        resources {
-            srcDirs += [
-                    "src/generated/resources"
-            ]
         }
     }
 }
@@ -107,13 +97,12 @@ processResources {
 
 java {
     withSourcesJar()
-    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = '17'
-    }
+kotlin {
+    jvmToolchain(17)
 }
 
 jar {

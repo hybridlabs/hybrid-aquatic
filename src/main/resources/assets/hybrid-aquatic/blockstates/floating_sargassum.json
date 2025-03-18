@@ -1,0 +1,51 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum"
+      },
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum",
+        "y": 90
+      },
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum",
+        "y": 180
+      },
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum",
+        "y": 270
+      },
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum_rooted"
+      },
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum_rooted",
+        "y": 90
+      },
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum_rooted",
+        "y": 180
+      },
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum_rooted",
+        "y": 270
+      },
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum_long_rooted"
+      },
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum_long_rooted",
+        "y": 90
+      },
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum_long_rooted",
+        "y": 180
+      },
+      {
+        "model": "hybrid-aquatic:block/floating_sargassum_long_rooted",
+        "y": 270
+      }
+    ]
+  }
+}

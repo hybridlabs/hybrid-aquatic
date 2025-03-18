@@ -1,157 +1,86 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"swim": {
+		"misc.idle": {
 			"loop": true,
-			"animation_length": 2.5,
+			"animation_length": 4,
 			"bones": {
-				"head": {
+				"body": {
 					"rotation": {
-						"0.0": {
-							"vector": [-5, 0, 0]
-						},
-						"1.0833": {
-							"vector": [-2.5, 0, 0]
-						},
-						"1.4167": {
-							"vector": [5, 0, 0]
-						},
-						"1.6667": {
-							"vector": [-2.5, 0, 0]
-						},
-						"2.0833": {
-							"vector": [5, 0, 0]
-						},
-						"2.5": {
-							"vector": [-5, 0, 0]
-						}
+						"vector": ["Math.cos(query.anim_time * 90)*2.5", 0, 0]
+					},
+					"position": {
+						"vector": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
 					}
 				},
-				"mantle": {
+				"tentacles_1": {
+					"rotation": {
+						"vector": [-22.5, 0, 0]
+					}
+				}
+			}
+		},
+		"misc.sit": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"position": {
+						"vector": [0, -1.75, 0]
+					},
 					"scale": {
-						"0.0": {
-							"vector": [1, 1, 1]
-						},
-						"0.625": {
-							"vector": [1.1, 1.1, 1]
-						},
-						"1.25": {
-							"vector": [0.9, 0.9, 1]
-						},
-						"1.7917": {
-							"vector": [1, 1, 1]
-						}
+						"vector": [1, 0.8, 1]
+					}
+				},
+				"tentacles_1": {
+					"rotation": {
+						"vector": [22.5, 0, 0]
+					}
+				}
+			}
+		},
+		"move.swim": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"body": {
+					"rotation": ["Math.sin(query.anim_time * 180)*-5", 0, 0]
+				},
+				"fin": {
+					"rotation": ["Math.cos(query.anim_time * 360)*2.5", 0, 0]
+				},
+				"tentacles_1": {
+					"rotation": ["Math.cos(query.anim_time * 180)*15", 0, 0]
+				},
+				"tentacles_2": {
+					"rotation": ["Math.sin(query.anim_time * 180)*10", 0, 0]
+				}
+			}
+		},
+		"move.run": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"body": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 180)*-5", 180, 0]
+					},
+					"position": {
+						"vector": [0, 0, 3]
 					}
 				},
 				"fin": {
 					"rotation": {
-						"0.0": {
-							"vector": [2.5, 0, 0]
-						},
-						"0.5833": {
-							"vector": [-2.5, 0, 0]
-						},
-						"1.0833": {
-							"vector": [-7.5, 0, 0]
-						},
-						"1.4167": {
-							"vector": [5, 0, 0]
-						},
-						"1.6667": {
-							"vector": [-5, 0, 0]
-						},
-						"2.0833": {
-							"vector": [5, 0, 0]
-						},
-						"2.5": {
-							"vector": [2.5, 0, 0]
-						}
-					},
-					"scale": {
-						"vector": [1, 0.7, 1]
+						"vector": ["Math.cos(query.anim_time * 360)*2.5", 0, 0]
 					}
 				},
-				"tentacles": {
+				"tentacles_1": {
 					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.625": {
-							"vector": [10, 0, 0]
-						},
-						"0.9583": {
-							"vector": [-30, 0, 0]
-						},
-						"1.25": {
-							"vector": [-20, 0, 0]
-						},
-						"1.5": {
-							"vector": [-10.83, 0, 0]
-						},
-						"1.6667": {
-							"vector": [-20, 0, 0]
-						},
-						"1.9583": {
-							"vector": [-10.83, 0, 0]
-						},
-						"2.2917": {
-							"vector": [-20, 0, 0]
-						},
-						"2.5": {
-							"vector": [0, 0, 0]
-						}
-					},
-					"position": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"2.5": {
-							"vector": [0, 0, 0]
-						}
+						"vector": ["Math.cos(query.anim_time * 180)*15", 0, 0]
 					}
 				},
-				"small": {
+				"tentacles_2": {
 					"rotation": {
-						"0.625": {
-							"vector": [5, 0, 0]
-						},
-						"0.9583": {
-							"vector": [7.5, 0, 0]
-						},
-						"1.25": {
-							"vector": [-5, 0, 0]
-						},
-						"1.5": {
-							"vector": [7.5, 0, 0]
-						},
-						"1.6667": {
-							"vector": [-5, 0, 0]
-						},
-						"1.9583": {
-							"vector": [7.5, 0, 0]
-						},
-						"2.2917": {
-							"vector": [-5, 0, 0]
-						},
-						"2.5": {
-							"vector": [5, 0, 0]
-						}
-					}
-				},
-				"siphon": {
-					"scale": {
-						"0.0": {
-							"vector": [1, 1, 1]
-						},
-						"0.4583": {
-							"vector": [1.2, 1.2, 1]
-						},
-						"0.9167": {
-							"vector": [1, 1, 1]
-						},
-						"2.5": {
-							"vector": [1, 1, 1]
-						}
+						"vector": ["Math.sin(query.anim_time * 180)*10", 0, 0]
 					}
 				}
 			}

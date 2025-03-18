@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CGC",
+    "CCC"
+  ],
+  "result": {
+    "item": "hybrid-aquatic:diving_helmet"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "C C",
+    "C C",
+    "   "
+  ],
+  "result": {
+    "item": "hybrid-aquatic:diving_boots"
+  },
+  "show_notification": true
+}

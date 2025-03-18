@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "hybrid-aquatic:raw_fish_steak"
+  },
+  "result": "hybrid-aquatic:cooked_fish_steak"
+}

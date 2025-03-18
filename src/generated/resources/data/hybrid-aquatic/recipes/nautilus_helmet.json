@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "N": {
+      "item": "minecraft:nautilus_shell"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "N N",
+    "   "
+  ],
+  "result": {
+    "item": "hybrid-aquatic:nautilus_helmet"
+  },
+  "show_notification": true
+}

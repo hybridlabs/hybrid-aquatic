@@ -1,164 +1,67 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"flop": {
+		"move.swim": {
 			"loop": true,
-			"animation_length": 2,
+			"animation_length": 4,
 			"bones": {
-				"moray_eel": {
-					"rotation": {
-						"vector": [0, 0, -90]
-					},
-					"position": {
-						"vector": [0, -1, 0]
-					}
-				},
 				"mouth": {
-					"rotation": {
-						"0.0": {
-							"vector": [-45, 0, 0]
-						},
-						"1.0": {
-							"vector": [0, 0, 0]
-						},
-						"2.0": {
-							"vector": [-45, 0, 0]
-						}
-					}
+					"rotation": ["-5+Math.cos(query.anim_time * 180)*5", 0, 0]
 				},
-				"body_2": {
-					"rotation": {
-						"vector": [7.52832, -4.95712, -0.65426]
-					}
+				"segment_1": {
+					"rotation": [0, "Math.sin(query.anim_time * 180)*15", 0]
 				},
-				"body_3": {
-					"rotation": {
-						"vector": [10.00933, -2.462, -0.43439]
-					}
+				"segment_2": {
+					"rotation": [0, "Math.cos(query.anim_time * 180)*15", 0]
 				},
-				"body_4": {
-					"rotation": {
-						"vector": [17.56274, 4.76804, 1.50701]
-					}
+				"segment_3": {
+					"rotation": [0, "Math.sin(query.anim_time * 180)*20", 0]
 				},
-				"body_5": {
-					"rotation": {
-						"vector": [15, 0, 0]
-					}
+				"body": {
+					"rotation": [0, "Math.sin(query.anim_time * 180)*5", 0]
 				}
 			}
 		},
-		"swim": {
+		"misc.idle": {
 			"loop": true,
-			"animation_length": 2,
+			"animation_length": 8,
 			"bones": {
 				"mouth": {
-					"rotation": {
-						"0.0": {
-							"vector": [-20, 0, 0]
-						},
-						"1.0": {
-							"vector": [-5, 0, 0]
-						},
-						"2.0": {
-							"vector": [-20, 0, 0]
-						}
-					}
+					"rotation": ["-5+Math.cos(query.anim_time * 90)*5", 0, 0]
 				},
-				"body_1": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, -22.5, 0]
-						},
-						"0.5": {
-							"vector": [0, -22.5, 0]
-						},
-						"1.0": {
-							"vector": [0, 22.5, 0]
-						},
-						"1.5": {
-							"vector": [0, 22.5, 0]
-						},
-						"2.0": {
-							"vector": [0, -22.5, 0]
-						}
-					}
+				"segment_1": {
+					"rotation": [0, "Math.sin(query.anim_time * 45)*15", 0]
 				},
-				"body_2": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 22.5, 0]
-						},
-						"0.5": {
-							"vector": [0, 0, 0]
-						},
-						"1.0": {
-							"vector": [0, -22.5, 0]
-						},
-						"1.5": {
-							"vector": [0, 0, 0]
-						},
-						"2.0": {
-							"vector": [0, 22.5, 0]
-						}
-					}
+				"segment_2": {
+					"rotation": [0, "Math.cos(query.anim_time * 45)*15", 0]
 				},
-				"body_3": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 22.5, 0]
-						},
-						"0.5": {
-							"vector": [0, 22.5, 0]
-						},
-						"1.0": {
-							"vector": [0, -22.5, 0]
-						},
-						"1.5": {
-							"vector": [0, -22.5, 0]
-						},
-						"2.0": {
-							"vector": [0, 22.5, 0]
-						}
-					}
+				"segment_3": {
+					"rotation": [0, "Math.sin(query.anim_time * 45)*20", 0]
 				},
-				"body_4": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.5": {
-							"vector": [0, 22.5, 0]
-						},
-						"1.0": {
-							"vector": [0, 0, 0]
-						},
-						"1.5": {
-							"vector": [0, -22.5, 0]
-						},
-						"2.0": {
-							"vector": [0, 0, 0]
-						}
-					}
+				"body": {
+					"rotation": [0, "Math.sin(query.anim_time * 90)*5", 0]
+				}
+			}
+		},
+		"flop": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"mouth": {
+					"rotation": ["-5+Math.cos(query.anim_time * 90)*5", 0, 0]
 				},
-				"body_5": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, -22.5, 0]
-						},
-						"0.5": {
-							"vector": [0, 25.14, 0]
-						},
-						"1.0": {
-							"vector": [0, 22.5, 0]
-						},
-						"1.5": {
-							"vector": [0, -19.69, 0]
-						},
-						"2.0": {
-							"vector": [0, -22.5, 0]
-						}
-					}
+				"segment_1": {
+					"rotation": [22.5, 0, 0]
+				},
+				"segment_2": {
+					"rotation": [22.67458, -6.92618, -2.88419]
+				},
+				"segment_3": {
+					"rotation": [22.57734, 4.61854, 1.91757]
+				},
+				"body": {
+					"rotation": [0, 0, -90],
+					"position": [-5, -1, -4]
 				}
 			}
 		}

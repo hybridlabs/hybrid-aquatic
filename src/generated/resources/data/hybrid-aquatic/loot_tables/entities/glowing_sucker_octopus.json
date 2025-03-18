@@ -39,7 +39,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "hybrid-aquatic:tentacle"
+          "name": "hybrid-aquatic:raw_tentacle"
         }
       ],
       "rolls": 1.0

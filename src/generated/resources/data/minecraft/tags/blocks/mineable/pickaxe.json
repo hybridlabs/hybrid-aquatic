@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:button_coral_block",
+    "hybrid-aquatic:dead_button_coral_block",
+    "hybrid-aquatic:sun_coral_block",
+    "hybrid-aquatic:dead_sun_coral_block",
+    "hybrid-aquatic:lophelia_coral_block",
+    "hybrid-aquatic:dead_lophelia_coral_block",
+    "hybrid-aquatic:thorn_coral_block",
+    "hybrid-aquatic:dead_thorn_coral_block",
+    "hybrid-aquatic:hydrothermal_vent_shaft",
+    "hybrid-aquatic:giant_clam"
+  ]
+}

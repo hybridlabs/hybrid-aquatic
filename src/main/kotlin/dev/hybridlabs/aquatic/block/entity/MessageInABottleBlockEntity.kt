@@ -53,7 +53,7 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
 
     private fun <E> animate(event: AnimationState<E>): PlayState where E : BlockEntity, E : GeoAnimatable {
         return if (cachedState.get(Properties.WATERLOGGED)) {
-            event.controller.setAnimation(RawAnimation.begin().then("water_bob", Animation.LoopType.LOOP))
+            event.controller.setAnimation(WATER_BOB_ANIMATION)
             PlayState.CONTINUE
         } else {
             PlayState.STOP
@@ -90,5 +90,7 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
          * The nbt key for the message text.
          */
         const val MESSAGE_KEY = "message"
+
+        val WATER_BOB_ANIMATION: RawAnimation = RawAnimation.begin().then("water_bob", Animation.LoopType.LOOP)
     }
 }

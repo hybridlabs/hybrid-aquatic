@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.block.entity.FishingPlaqueBlockEntity
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.client.item.TooltipData
 import net.minecraft.entity.Entity
@@ -19,7 +18,7 @@ import java.util.*
 class FishingNetItem(settings: Settings?): Item(settings) {
 
     override fun useOnEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, hand: Hand): ActionResult {
-        val validFishForNet = entity.type.isIn(HybridAquaticEntityTags.JELLYFISH) || entity.type.isIn(HybridAquaticEntityTags.CRITTER) || entity.type.isIn(HybridAquaticEntityTags.SMALL_PREY) || entity.type.isIn(HybridAquaticEntityTags.MEDIUM_PREY)
+        val validFishForNet = entity.type.isIn(HybridAquaticEntityTags.CAN_USE_FISHING_NET_ON)
 
         if (!alreadyHasFish(stack) && validFishForNet) {
             writeEntityToNet(entity, user, hand)
@@ -36,19 +35,14 @@ class FishingNetItem(settings: Settings?): Item(settings) {
             val nbtCopy = context.stack.nbt?.copy() ?: return super.useOnBlock(context)
 
             val optionalEntity = getEntityFromNBT(nbtCopy)
-            val blockEntity = context.world.getBlockEntity(context.blockPos)
 
             if (optionalEntity.isPresent) {
                 val entity = optionalEntity.get().create(context.world) ?: return ActionResult.FAIL
                 entity.readNbt(context.stack.nbt?.getCompound(ENTITY_KEY))
                 context.stack.nbt?.remove(ENTITY_KEY)
 
-                if (blockEntity != null && blockEntity is FishingPlaqueBlockEntity) {
-                    blockEntity.setStoredEntity(entity)
-                } else {
-                    entity.setPosition(context.hitPos)
-                    world.spawnEntity(entity)
-                }
+                entity.setPosition(context.hitPos)
+                world.spawnEntity(entity)
                 return ActionResult.SUCCESS
             }
         }
@@ -60,13 +54,13 @@ class FishingNetItem(settings: Settings?): Item(settings) {
     }
 
     companion object {
-        const val ENTITY_KEY: String = "storedEntity"
+        private const val ENTITY_KEY: String = "storedEntity"
 
         fun writeEntityToNet(entity: Entity, user: PlayerEntity, hand: Hand) {
             val entityCompound = NbtCompound()
             entity.saveNbt(entityCompound)
             entityCompound.putBoolean("PersistenceRequired", true)
-
+            entityCompound.putBoolean("FromFishingNet", true)
             val itemStack = user.getStackInHand(hand)
             itemStack.orCreateNbt.put(ENTITY_KEY, entityCompound)
         }

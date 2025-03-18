@@ -6,7 +6,43 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:crate"
+          "name": "hybrid-aquatic:crab_pot"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:hybrid_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:oak_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:spruce_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:birch_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:dark_oak_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:acacia_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:jungle_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:mangrove_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:cherry_crate"
         },
         {
           "type": "hybrid-aquatic:message_in_a_bottle"

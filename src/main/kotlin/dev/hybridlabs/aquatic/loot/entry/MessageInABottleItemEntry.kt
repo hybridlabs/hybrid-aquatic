@@ -5,6 +5,7 @@ import com.google.gson.JsonObject
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemStack
@@ -29,7 +30,8 @@ class MessageInABottleItemEntry(
     public override fun generateLoot(consumer: Consumer<ItemStack>, context: LootContext) {
         val world = context.world
         val random = context.random
-        val registry = world.registryManager.get(HybridAquaticRegistryKeys.SEA_MESSAGE)
+        val registryManager = world.registryManager
+        val registry = registryManager.get(HybridAquaticRegistryKeys.SEA_MESSAGE)
         registry.getRandom(random).ifPresent { messageEntry ->
             val message = messageEntry.value()
 
@@ -38,7 +40,7 @@ class MessageInABottleItemEntry(
                 val variants = MessageInABottleBlock.Variant.entries
                 putString(MessageInABottleBlockEntity.VARIANT_KEY, variants[random.nextInt(variants.size)].id)
 
-                val bookStack = message.createBookItemStack()
+                val bookStack = SeaMessageBookItem.createItemStack(message, registryManager)
                 put(MessageInABottleBlockEntity.MESSAGE_KEY, bookStack.writeNbt(NbtCompound()))
             }
 

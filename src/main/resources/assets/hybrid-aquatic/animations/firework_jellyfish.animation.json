@@ -1,0 +1,133 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"move.swim": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"tentacle_1": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*-10", 0, 0]
+					}
+				},
+				"tentacle_5": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90)*-10", 0, 0]
+					}
+				},
+				"tentacle_2": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*10", 0, 0]
+					}
+				},
+				"tentacle_6": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90)*10", 0, 0]
+					}
+				},
+				"tentacle_3": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*-10", 0, 0]
+					}
+				},
+				"tentacle_4": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90)*-10", 0, 0]
+					}
+				},
+				"tentacle_7": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90)*-10", 0, 0]
+					}
+				},
+				"tentacle_8": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90)*-10", 0, 0]
+					}
+				},
+				"body": {
+					"position": {
+						"vector": [0, "Math.cos(query.anim_time * 90)*0.5", 0]
+					},
+					"scale": {
+						"vector": ["1+Math.cos(query.anim_time * 90)*0.05", "1+Math.cos(query.anim_time * 90)*0.05", "1+Math.cos(query.anim_time * 90)*0.05"]
+					}
+				}
+			}
+		},
+		"flop": {
+			"loop": true,
+			"bones": {
+				"mauve_stinger": {
+					"position": {
+						"vector": [0, -5.4, 0]
+					}
+				},
+				"head": {
+					"scale": {
+						"vector": [1.2, 0.5, 1.2]
+					}
+				},
+				"core_tentacles": {
+					"position": {
+						"vector": [0, 0.5, 0]
+					},
+					"scale": {
+						"vector": [1, 0.2, 1]
+					}
+				},
+				"tentacle_a1": {
+					"rotation": {
+						"vector": [-90, 0, 0]
+					}
+				},
+				"tentacle_b1": {
+					"rotation": {
+						"vector": [-90, 0, 0]
+					}
+				},
+				"tentacle_c1": {
+					"rotation": {
+						"vector": [-90, 0, 0]
+					}
+				},
+				"tentacle_d1": {
+					"rotation": {
+						"vector": [90, 0, 0]
+					}
+				},
+				"tentacle_e1": {
+					"rotation": {
+						"vector": [90, 0, 0]
+					}
+				},
+				"tentacle_f1": {
+					"rotation": {
+						"vector": [90, 0, 0]
+					}
+				},
+				"tentacle_f2": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"tentacle_g1": {
+					"rotation": {
+						"vector": [-90, 0, 0]
+					}
+				},
+				"tentacle_h1": {
+					"rotation": {
+						"vector": [-90, 0, 0]
+					}
+				},
+				"body": {
+					"position": {
+						"vector": [0, 0.1, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

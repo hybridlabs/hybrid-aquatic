@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "hybrid-aquatic:coral_chunk"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " C ",
+    " C ",
+    " S "
+  ],
+  "result": {
+    "item": "hybrid-aquatic:coral_blade"
+  },
+  "show_notification": true
+}

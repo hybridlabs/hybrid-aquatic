@@ -8,6 +8,10 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+
+    plugins {
+        id("org.jetbrains.kotlin.jvm").version(kotlin_version)
+    }
 }
 
 rootProject.name = "hybrid-aquatic"

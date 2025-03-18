@@ -1,0 +1,46 @@
+{
+  "variants": {
+    "state=open,facing=east": {
+      "model": "hybrid-aquatic:block/giant_clam_open",
+      "y": 90
+    },
+    "state=open,facing=west": {
+      "model": "hybrid-aquatic:block/giant_clam_open",
+      "y": 90
+    },
+    "state=open,facing=north": {
+      "model": "hybrid-aquatic:block/giant_clam_open"
+    },
+    "state=open,facing=south": {
+      "model": "hybrid-aquatic:block/giant_clam_open"
+    },
+    "state=closed,facing=east": {
+      "model": "hybrid-aquatic:block/giant_clam_closed",
+      "y": 90
+    },
+    "state=closed,facing=west": {
+      "model": "hybrid-aquatic:block/giant_clam_closed",
+      "y": 90
+    },
+    "state=closed,facing=north": {
+      "model": "hybrid-aquatic:block/giant_clam_closed"
+    },
+    "state=closed,facing=south": {
+      "model": "hybrid-aquatic:block/giant_clam_closed"
+    },
+    "state=dead,facing=east": {
+      "model": "hybrid-aquatic:block/giant_clam_dead",
+      "y": 90
+    },
+    "state=dead,facing=west": {
+      "model": "hybrid-aquatic:block/giant_clam_dead",
+      "y": 90
+    },
+    "state=dead,facing=north": {
+      "model": "hybrid-aquatic:block/giant_clam_dead"
+    },
+    "state=dead,facing=south": {
+      "model": "hybrid-aquatic:block/giant_clam_dead"
+    }
+  }
+}

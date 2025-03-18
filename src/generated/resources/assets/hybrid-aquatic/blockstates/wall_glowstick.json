@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "hybrid-aquatic:block/wall_glowstick"
+    },
+    "facing=north": {
+      "model": "hybrid-aquatic:block/wall_glowstick",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "hybrid-aquatic:block/wall_glowstick",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "hybrid-aquatic:block/wall_glowstick",
+      "y": 180
+    }
+  }
+}

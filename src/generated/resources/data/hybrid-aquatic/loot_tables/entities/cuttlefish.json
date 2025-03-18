@@ -16,6 +16,16 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "hybrid-aquatic:cuttlebone"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "functions": [
             {
               "conditions": [
@@ -49,7 +59,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "hybrid-aquatic:tentacle"
+          "name": "hybrid-aquatic:raw_tentacle"
         }
       ],
       "rolls": 1.0
