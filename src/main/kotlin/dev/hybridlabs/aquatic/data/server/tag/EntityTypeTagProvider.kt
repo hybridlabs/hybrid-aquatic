@@ -72,6 +72,19 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
 
             .addOptional(Identifier("crittersandcompanions", "koi_fish"))
 
+            .addOptional(Identifier("aquaculture", "atlantic_herring"))
+            .addOptional(Identifier("aquaculture", "boulti"))
+            .addOptional(Identifier("aquaculture", "synodontis"))
+            .addOptional(Identifier("aquaculture", "smallmouth_bass"))
+            .addOptional(Identifier("aquaculture", "bluegill"))
+            .addOptional(Identifier("aquaculture", "minnow"))
+            .addOptional(Identifier("aquaculture", "perch"))
+            .addOptional(Identifier("aquaculture", "piranha"))
+            .addOptional(Identifier("aquaculture", "brown_shrooma"))
+            .addOptional(Identifier("aquaculture", "red_shrooma"))
+            .addOptional(Identifier("aquaculture", "pink_salmon"))
+            .addOptional(Identifier("aquaculture", "pollock"))
+
         // medium prey
         getOrCreateTagBuilder(HybridAquaticEntityTags.MEDIUM_PREY)
             .add(
@@ -94,6 +107,11 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(Identifier("rainbowreef", "parrotfish"))
             .addOptional(Identifier("rainbowreef", "ray"))
 
+            .addOptional(Identifier("aquaculture", "carp"))
+            .addOptional(Identifier("aquaculture", "catfish"))
+            .addOptional(Identifier("aquaculture", "bayad"))
+            .addOptional(Identifier("aquaculture", "blackfish"))
+
         // large prey
         getOrCreateTagBuilder(HybridAquaticEntityTags.LARGE_PREY)
             .add(
@@ -111,6 +129,16 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(Identifier("bountiful_critters", "ray"))
 
             .addOptional(Identifier("spawn", "tuna"))
+
+            .addOptional(Identifier("aquaculture", "arapaima"))
+            .addOptional(Identifier("aquaculture", "tuna"))
+            .addOptional(Identifier("aquaculture", "atlantic_cod"))
+            .addOptional(Identifier("aquaculture", "pacific_halibut"))
+            .addOptional(Identifier("aquaculture", "atlantic_halibut"))
+            .addOptional(Identifier("aquaculture", "capitaine"))
+            .addOptional(Identifier("aquaculture", "tambaqui"))
+            .addOptional(Identifier("aquaculture", "gar"))
+            .addOptional(Identifier("aquaculture", "muskellunge"))
 
         // crustaceans
         getOrCreateTagBuilder(HybridAquaticEntityTags.CRUSTACEAN)
@@ -211,6 +239,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             )
             .addOptional(Identifier("rainbowreef", "jellyfish"))
 
+            .addOptional(Identifier("aquaculture", "jellyfish"))
+
         // fish
         getOrCreateTagBuilder(HybridAquaticEntityTags.FISH)
             .add(
@@ -263,9 +293,12 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 EntityType.TROPICAL_FISH,
                 EntityType.AXOLOTL,
             )
+
+            // Naturalist
             .addOptional(Identifier("naturalist", "bass"))
             .addOptional(Identifier("naturalist", "catfish"))
 
+            // Rainbow Reef
             .addOptional(Identifier("rainbowreef", "angelfish"))
             .addOptional(Identifier("rainbowreef", "basslet"))
             .addOptional(Identifier("rainbowreef", "boxfish"))
@@ -281,6 +314,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(Identifier("rainbowreef", "parrotfish"))
             .addOptional(Identifier("rainbowreef", "ray"))
 
+            // Bountiful Critters
             .addOptional(Identifier("bountiful_critters", "stingray"))
             .addOptional(Identifier("bountiful_critters", "sunfish"))
             .addOptional(Identifier("bountiful_critters", "flounder"))
@@ -288,10 +322,12 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(Identifier("bountiful_critters", "angelfish"))
             .addOptional(Identifier("bountiful_critters", "neon_tetra"))
 
+            // Spawn
             .addOptional(Identifier("spawn", "tuna"))
             .addOptional(Identifier("spawn", "seahorse"))
             .addOptional(Identifier("spawn", "anglerfish"))
 
+            // Fish Of Thieves
             .addOptional(Identifier("fishofthieves", "ancientscale"))
             .addOptional(Identifier("fishofthieves", "battlegill"))
             .addOptional(Identifier("fishofthieves", "devilfish"))
@@ -303,7 +339,38 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(Identifier("fishofthieves", "wildsplash"))
             .addOptional(Identifier("fishofthieves", "wrecker"))
 
+            // Critters & Companions
             .addOptional(Identifier("crittersandcompanions", "koi_fish"))
+
+            // Aquaculture
+            .addOptional(Identifier("aquaculture", "atlantic_cod"))
+            .addOptional(Identifier("aquaculture", "blackfish"))
+            .addOptional(Identifier("aquaculture", "pacific_halibut"))
+            .addOptional(Identifier("aquaculture", "atlantic_halibut"))
+            .addOptional(Identifier("aquaculture", "atlantic_herring"))
+            .addOptional(Identifier("aquaculture", "pink_salmon"))
+            .addOptional(Identifier("aquaculture", "pollock"))
+            .addOptional(Identifier("aquaculture", "rainbow_trout"))
+            .addOptional(Identifier("aquaculture", "bayad"))
+            .addOptional(Identifier("aquaculture", "boulti"))
+            .addOptional(Identifier("aquaculture", "capitaine"))
+            .addOptional(Identifier("aquaculture", "synodontis"))
+            .addOptional(Identifier("aquaculture", "smallmouth_bass"))
+            .addOptional(Identifier("aquaculture", "bluegill"))
+            .addOptional(Identifier("aquaculture", "brown_trout"))
+            .addOptional(Identifier("aquaculture", "carp"))
+            .addOptional(Identifier("aquaculture", "catfish"))
+            .addOptional(Identifier("aquaculture", "gar"))
+            .addOptional(Identifier("aquaculture", "minnow"))
+            .addOptional(Identifier("aquaculture", "muskellunge"))
+            .addOptional(Identifier("aquaculture", "perch"))
+            .addOptional(Identifier("aquaculture", "arapaima"))
+            .addOptional(Identifier("aquaculture", "piranha"))
+            .addOptional(Identifier("aquaculture", "tambaqui"))
+            .addOptional(Identifier("aquaculture", "brown_shrooma"))
+            .addOptional(Identifier("aquaculture", "red_shrooma"))
+            .addOptional(Identifier("aquaculture", "red_grouper"))
+            .addOptional(Identifier("aquaculture", "tuna"))
 
         // entities that you can catch with the fishing net
         getOrCreateTagBuilder(HybridAquaticEntityTags.CAN_USE_FISHING_NET_ON)

@@ -31,6 +31,22 @@
     {
       "id": "rainbowreef:ray",
       "required": false
+    },
+    {
+      "id": "aquaculture:carp",
+      "required": false
+    },
+    {
+      "id": "aquaculture:catfish",
+      "required": false
+    },
+    {
+      "id": "aquaculture:bayad",
+      "required": false
+    },
+    {
+      "id": "aquaculture:blackfish",
+      "required": false
     }
   ]
 }

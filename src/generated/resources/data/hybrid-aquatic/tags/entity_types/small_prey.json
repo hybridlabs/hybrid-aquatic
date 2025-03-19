@@ -126,6 +126,54 @@
     {
       "id": "crittersandcompanions:koi_fish",
       "required": false
+    },
+    {
+      "id": "aquaculture:atlantic_herring",
+      "required": false
+    },
+    {
+      "id": "aquaculture:boulti",
+      "required": false
+    },
+    {
+      "id": "aquaculture:synodontis",
+      "required": false
+    },
+    {
+      "id": "aquaculture:smallmouth_bass",
+      "required": false
+    },
+    {
+      "id": "aquaculture:bluegill",
+      "required": false
+    },
+    {
+      "id": "aquaculture:minnow",
+      "required": false
+    },
+    {
+      "id": "aquaculture:perch",
+      "required": false
+    },
+    {
+      "id": "aquaculture:piranha",
+      "required": false
+    },
+    {
+      "id": "aquaculture:brown_shrooma",
+      "required": false
+    },
+    {
+      "id": "aquaculture:red_shrooma",
+      "required": false
+    },
+    {
+      "id": "aquaculture:pink_salmon",
+      "required": false
+    },
+    {
+      "id": "aquaculture:pollock",
+      "required": false
     }
   ]
 }

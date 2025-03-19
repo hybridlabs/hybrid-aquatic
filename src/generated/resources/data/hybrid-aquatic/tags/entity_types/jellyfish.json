@@ -19,6 +19,10 @@
     {
       "id": "rainbowreef:jellyfish",
       "required": false
+    },
+    {
+      "id": "aquaculture:jellyfish",
+      "required": false
     }
   ]
 }
