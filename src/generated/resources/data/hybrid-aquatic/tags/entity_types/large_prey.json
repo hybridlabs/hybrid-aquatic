@@ -9,6 +9,18 @@
     "hybrid-aquatic:coelacanth",
     "hybrid-aquatic:golden_dorado",
     "minecraft:player",
-    "minecraft:turtle"
+    "minecraft:turtle",
+    {
+      "id": "bountiful_critters:sunfish",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:ray",
+      "required": false
+    },
+    {
+      "id": "spawn:tuna",
+      "required": false
+    }
   ]
 }

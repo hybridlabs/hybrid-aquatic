@@ -22,8 +22,110 @@
     "hybrid-aquatic:flying_fish",
     "hybrid-aquatic:squirrelfish",
     "hybrid-aquatic:stonefish",
+    "hybrid-aquatic:anglerfish",
+    "hybrid-aquatic:carp",
     "minecraft:salmon",
     "minecraft:cod",
-    "minecraft:tropical_fish"
+    "minecraft:tropical_fish",
+    {
+      "id": "rainbowreef:angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:basslet",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:boxfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:butterfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:clownfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:dwarf_angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:goby",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:moorish_idol",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:pipefish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:tang",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:flounder",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:angelfish",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:neon_tetra",
+      "required": false
+    },
+    {
+      "id": "spawn:anglerfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:ancientscale",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:battlegill",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:devilfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:islehopper",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:plentifin",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:pondie",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:splashtail",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:stormfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:wildsplash",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:wrecker",
+      "required": false
+    },
+    {
+      "id": "crittersandcompanions:koi_fish",
+      "required": false
+    }
   ]
 }

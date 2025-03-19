@@ -48,6 +48,150 @@
     "minecraft:cod",
     "minecraft:salmon",
     "minecraft:tropical_fish",
-    "minecraft:axolotl"
+    "minecraft:axolotl",
+    {
+      "id": "naturalist:bass",
+      "required": false
+    },
+    {
+      "id": "naturalist:catfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:basslet",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:boxfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:butterfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:clownfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:dwarf_angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:goby",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:moorish_idol",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:pipefish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:tang",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:seahorse",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:hogfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:parrotfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:ray",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:stingray",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:sunfish",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:flounder",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:barreleye",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:angelfish",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:neon_tetra",
+      "required": false
+    },
+    {
+      "id": "spawn:tuna",
+      "required": false
+    },
+    {
+      "id": "spawn:seahorse",
+      "required": false
+    },
+    {
+      "id": "spawn:anglerfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:ancientscale",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:battlegill",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:devilfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:islehopper",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:plentifin",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:pondie",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:splashtail",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:stormfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:wildsplash",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:wrecker",
+      "required": false
+    },
+    {
+      "id": "crittersandcompanions:koi_fish",
+      "required": false
+    }
   ]
 }

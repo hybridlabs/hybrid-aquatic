@@ -11,6 +11,26 @@
     "hybrid-aquatic:parrotfish",
     "hybrid-aquatic:moray_eel",
     "hybrid-aquatic:john_dory",
-    "hybrid-aquatic:lantern_shark"
+    "hybrid-aquatic:lantern_shark",
+    {
+      "id": "naturalist:bass",
+      "required": false
+    },
+    {
+      "id": "naturalist:catfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:hogfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:parrotfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:ray",
+      "required": false
+    }
   ]
 }
