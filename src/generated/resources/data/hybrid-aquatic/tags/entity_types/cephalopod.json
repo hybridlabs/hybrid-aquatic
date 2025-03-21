@@ -9,6 +9,10 @@
     "hybrid-aquatic:umbrella_octopus",
     "hybrid-aquatic:vampire_squid",
     "minecraft:squid",
-    "minecraft:glow_squid"
+    "minecraft:glow_squid",
+    {
+      "id": "crittersandcompanions:dumbo_octopus",
+      "required": false
+    }
   ]
 }

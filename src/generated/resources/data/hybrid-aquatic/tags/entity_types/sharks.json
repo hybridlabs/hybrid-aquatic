@@ -9,6 +9,10 @@
     "hybrid-aquatic:thresher_shark",
     "hybrid-aquatic:tiger_shark",
     "hybrid-aquatic:whale_shark",
-    "hybrid-aquatic:lantern_shark"
+    "hybrid-aquatic:lantern_shark",
+    {
+      "id": "rainbowreef:small_shark",
+      "required": false
+    }
   ]
 }
