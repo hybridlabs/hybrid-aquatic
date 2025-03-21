@@ -16,7 +16,6 @@ import dev.hybridlabs.aquatic.client.render.block.entity.BuoyBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
-import dev.hybridlabs.aquatic.client.render.features.PlayerItemPorcupineFeature
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.BuoyBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
@@ -28,19 +27,14 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
-import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
-import net.minecraft.client.render.entity.LivingEntityRenderer
-import net.minecraft.client.render.entity.PlayerEntityRenderer
 import net.minecraft.client.render.entity.model.BipedEntityModel
-import net.minecraft.client.render.entity.model.PlayerEntityModel
 import net.minecraft.command.CommandRegistryAccess
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import software.bernie.geckolib.animatable.client.RenderProvider
 import software.bernie.geckolib.renderer.GeoArmorRenderer
@@ -57,19 +51,8 @@ object HybridAquaticClient : ClientModInitializer {
         registerWeatherRenderers()
         registerTooltips()
         registerGeoRenderers()
-        registerEntityFeatures()
 
         ClientCommandRegistrationCallback.EVENT.register(::registerCommands)
-    }
-
-    private fun registerEntityFeatures() {
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register { type, entityRenderer, registrationHelper, context ->
-            if (entityRenderer is PlayerEntityRenderer) {
-
-                @Suppress("UNCHECKED_CAST")
-                registrationHelper.register(PlayerItemPorcupineFeature(entityRenderer as LivingEntityRenderer<PlayerEntity, PlayerEntityModel<PlayerEntity>>?))
-            }
-        }
     }
 
     private fun registerGeoRenderers() {
