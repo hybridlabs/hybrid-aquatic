@@ -12,5 +12,13 @@
   "catch_duration": {
     "min": 800,
     "max": 1200
-  }
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "lilis_lucky_lures"
+      ]
+    }
+  ]
 }
