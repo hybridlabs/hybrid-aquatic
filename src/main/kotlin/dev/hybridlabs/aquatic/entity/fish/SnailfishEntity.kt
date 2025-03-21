@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -20,6 +21,11 @@ class SnailfishEntity(entityType: EntityType<out SnailfishEntity>, world: World)
 
     override fun getLimitPerChunk(): Int {
         return 3
+    }
+
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(1, StayDeepGoal(this, 1.0, 1, 4))
     }
 
     companion object {

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -29,6 +30,11 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
         }
+    }
+
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(1, StayDeepGoal(this, 1.0, 1, 12))
     }
 
     override fun getHurtSound(source: DamageSource?): SoundEvent {
