@@ -43,5 +43,6 @@
     "recipes": [
       "hybrid-aquatic:diving_suit"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

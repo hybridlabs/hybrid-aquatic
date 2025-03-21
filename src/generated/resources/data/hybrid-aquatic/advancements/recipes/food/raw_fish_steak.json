@@ -28,5 +28,6 @@
     "recipes": [
       "hybrid-aquatic:raw_fish_steak"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

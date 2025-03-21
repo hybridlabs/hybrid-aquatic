@@ -43,5 +43,6 @@
     "recipes": [
       "hybrid-aquatic:diving_boots"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -13,14 +13,17 @@
     }
   },
   "display": {
+    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.crab_claw.description"
     },
     "frame": "goal",
+    "hidden": false,
     "icon": {
       "item": "hybrid-aquatic:dungeness_crab_claw"
     },
+    "show_toast": true,
     "title": {
       "translate": "advancements.hybrid-aquatic.crab_claw.title"
     }

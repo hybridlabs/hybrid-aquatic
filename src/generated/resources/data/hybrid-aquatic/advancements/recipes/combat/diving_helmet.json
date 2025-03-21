@@ -56,5 +56,6 @@
     "recipes": [
       "hybrid-aquatic:diving_helmet"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

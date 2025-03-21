@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:cooked_lobster_tail_from_smelting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

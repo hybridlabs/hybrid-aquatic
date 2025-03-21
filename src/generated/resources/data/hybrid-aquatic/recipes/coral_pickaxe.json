@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "hybrid-aquatic:coral_pickaxe"
-  }
+  },
+  "show_notification": true
 }

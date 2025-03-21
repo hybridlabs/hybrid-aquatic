@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "hybrid-aquatic:turtle_chestplate"
-  }
+  },
+  "show_notification": true
 }

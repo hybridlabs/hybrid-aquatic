@@ -13,10 +13,7 @@ import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder
 import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.predicate.item.ItemPredicate
-import net.minecraft.recipe.CampfireCookingRecipe
 import net.minecraft.recipe.RecipeSerializer
-import net.minecraft.recipe.SmeltingRecipe
-import net.minecraft.recipe.SmokingRecipe
 import net.minecraft.recipe.book.RecipeCategory
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.util.Identifier
@@ -345,8 +342,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         output: Item,
         experience: Float
     ) {
-        offerFoodCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, ::SmeltingRecipe, input, output, experience)
-        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, ::SmokingRecipe, input, output, experience)
-        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, ::CampfireCookingRecipe, input, output, experience)
+        offerFoodCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, 200, input, output, experience)
+        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, input, output, experience)
+        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, input, output, experience)
     }
 }

@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "hybrid-aquatic:seashell_hoe"
-  }
+  },
+  "show_notification": true
 }

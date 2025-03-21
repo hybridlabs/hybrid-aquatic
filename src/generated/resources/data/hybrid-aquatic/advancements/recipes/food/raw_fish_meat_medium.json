@@ -28,5 +28,6 @@
     "recipes": [
       "hybrid-aquatic:raw_fish_meat_medium"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

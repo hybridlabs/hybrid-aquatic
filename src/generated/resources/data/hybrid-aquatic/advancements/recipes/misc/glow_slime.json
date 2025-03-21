@@ -43,5 +43,6 @@
     "recipes": [
       "hybrid-aquatic:glow_slime"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

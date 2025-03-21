@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "hybrid-aquatic:nautilus_pauldrons"
-  }
+  },
+  "show_notification": true
 }

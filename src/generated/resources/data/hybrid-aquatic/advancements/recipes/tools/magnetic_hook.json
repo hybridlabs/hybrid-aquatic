@@ -30,5 +30,6 @@
     "recipes": [
       "hybrid-aquatic:magnetic_hook"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

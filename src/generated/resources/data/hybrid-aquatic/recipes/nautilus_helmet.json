@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "hybrid-aquatic:nautilus_helmet"
-  }
+  },
+  "show_notification": true
 }

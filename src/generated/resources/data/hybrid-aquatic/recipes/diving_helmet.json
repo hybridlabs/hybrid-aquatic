@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "hybrid-aquatic:diving_helmet"
-  }
+  },
+  "show_notification": true
 }

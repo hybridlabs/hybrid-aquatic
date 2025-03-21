@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "minecraft:sponge"
-  }
+  },
+  "show_notification": true
 }

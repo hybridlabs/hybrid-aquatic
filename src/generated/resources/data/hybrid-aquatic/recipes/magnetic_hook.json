@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "hybrid-aquatic:magnetic_hook"
-  }
+  },
+  "show_notification": true
 }

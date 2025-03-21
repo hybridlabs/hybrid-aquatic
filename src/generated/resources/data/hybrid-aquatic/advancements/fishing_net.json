@@ -15,13 +15,17 @@
     }
   },
   "display": {
+    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.fishing_net.description"
     },
+    "frame": "task",
+    "hidden": false,
     "icon": {
       "item": "hybrid-aquatic:fishing_net"
     },
+    "show_toast": true,
     "title": {
       "translate": "advancements.hybrid-aquatic.fishing_net.title"
     }

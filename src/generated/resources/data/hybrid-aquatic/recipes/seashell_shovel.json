@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "hybrid-aquatic:seashell_shovel"
-  }
+  },
+  "show_notification": true
 }

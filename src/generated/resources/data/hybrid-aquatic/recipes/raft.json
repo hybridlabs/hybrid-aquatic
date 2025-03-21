@@ -14,5 +14,6 @@
   "result": {
     "count": 2,
     "item": "hybrid-aquatic:raft"
-  }
+  },
+  "show_notification": true
 }

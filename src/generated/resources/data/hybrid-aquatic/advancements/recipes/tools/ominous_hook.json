@@ -28,5 +28,6 @@
     "recipes": [
       "hybrid-aquatic:ominous_hook"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -43,5 +43,6 @@
     "recipes": [
       "hybrid-aquatic:glowing_hook"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "hybrid-aquatic:seashell_spear"
-  }
+  },
+  "show_notification": true
 }

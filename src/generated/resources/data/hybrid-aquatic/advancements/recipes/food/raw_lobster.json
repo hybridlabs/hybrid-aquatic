@@ -30,5 +30,6 @@
     "recipes": [
       "hybrid-aquatic:raw_lobster"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

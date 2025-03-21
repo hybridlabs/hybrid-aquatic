@@ -17,6 +17,7 @@
     }
   },
   "display": {
+    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.kill_karkinos.description"
@@ -26,6 +27,7 @@
     "icon": {
       "item": "hybrid-aquatic:karkinos_claw"
     },
+    "show_toast": true,
     "title": {
       "translate": "advancements.hybrid-aquatic.kill_karkinos.title"
     }
