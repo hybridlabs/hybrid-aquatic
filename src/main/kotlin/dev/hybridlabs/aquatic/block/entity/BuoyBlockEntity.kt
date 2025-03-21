@@ -3,18 +3,20 @@ package dev.hybridlabs.aquatic.block.entity
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.util.math.BlockPos
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
-import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
+import software.bernie.geckolib3.core.IAnimatable
+import software.bernie.geckolib3.core.PlayState
+import software.bernie.geckolib3.core.builder.AnimationBuilder
+import software.bernie.geckolib3.core.builder.ILoopType
+import software.bernie.geckolib3.core.controller.AnimationController
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent
+import software.bernie.geckolib3.core.manager.AnimationData
+import software.bernie.geckolib3.core.manager.AnimationFactory
+import software.bernie.geckolib3.util.GeckoLibUtil
 
+class BuoyBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.BUOY, pos, state), IAnimatable {
+    private val animCache = GeckoLibUtil.createFactory(this)
 
-class BuoyBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.BUOY, pos, state), GeoAnimatable {
-    private val animCache = GeckoLibUtil.createInstanceCache(this)
-
-    private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
+    private fun <E> predicate(event: AnimationEvent<E>): PlayState where E : BlockEntity?, E : IAnimatable {
         return if (world != null) {
             event.controller.setAnimation(FLOAT_ANIMATION)
             PlayState.CONTINUE
@@ -23,19 +25,15 @@ class BuoyBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAqua
         }
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(this, "controller", 0, ::predicate))
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(AnimationController(this, "controller", 0.0f, ::predicate))
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+    override fun getFactory(): AnimationFactory {
         return animCache
     }
 
-    override fun getTick(p0: Any): Double {
-        return RenderUtils.getCurrentTick()
-    }
-
     companion object {
-        val FLOAT_ANIMATION: RawAnimation = RawAnimation.begin().then("float", Animation.LoopType.LOOP)
+        val FLOAT_ANIMATION: AnimationBuilder = AnimationBuilder().addAnimation("float", ILoopType.EDefaultLoopTypes.LOOP)
     }
 }

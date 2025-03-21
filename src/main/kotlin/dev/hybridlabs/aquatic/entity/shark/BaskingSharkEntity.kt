@@ -5,17 +5,16 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib3.core.animation.AnimationController
+import software.bernie.geckolib3.core.animation.RawAnimation
 
 class BaskingSharkEntity(entityType: EntityType<out BaskingSharkEntity>, world: World) :
     HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.NONE), true, false) {
 
     private var isFeeding = false
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(this, "Open/Closed", 0) { state ->
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(AnimationController(this, "Open/Closed", 0) { state ->
             val animation = when {
                 isFeeding -> MOUTH_OPEN
                 else -> MOUTH_CLOSED

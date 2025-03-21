@@ -4,9 +4,9 @@ import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.util.math.MatrixStack
-import software.bernie.geckolib.model.GeoModel
-import software.bernie.geckolib.renderer.GeoEntityRenderer
-import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
+import software.bernie.geckolib3.model.GeoModel
+import software.bernie.geckolib3.renderer.GeoEntityRenderer
+import software.bernie.geckolib3.renderer.layer.AutoGlowingGeoLayer
 
 @Suppress("LeakingThis")
 open class HybridAquaticFishEntityRenderer<T: HybridAquaticFishEntity>(context: EntityRendererFactory.Context, model: GeoModel<T>, private var variableSize: Boolean = false, canGlow: Boolean = false): GeoEntityRenderer<T>(context, model) {

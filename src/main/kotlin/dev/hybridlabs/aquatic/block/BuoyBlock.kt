@@ -3,7 +3,14 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockEntityProvider
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.HorizontalFacingBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
@@ -44,7 +51,7 @@ open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, 
         val waterlogged = ctx.world.getFluidState(ctx.blockPos).fluid == Fluids.WATER
         return defaultState
             .with(Properties.WATERLOGGED, waterlogged)
-            .with(FACING, ctx.horizontalPlayerFacing.rotateYClockwise())
+            .with(FACING, ctx.playerLookDirection.rotateYClockwise())
     }
 
     override fun getFluidState(state: BlockState): FluidState {

@@ -37,7 +37,7 @@ open class HybridAquaticJellyfishEntity(
     private val venomLevel: Int
 
 ) : WaterCreatureEntity(type, world), GeoEntity {
-    private val factory = GeckoLibUtil.createInstanceCache(this)
+    private val factory = GeckoLibUtil.createFactory(this)
     var tiltAngle: Float = 0f
     var prevTiltAngle: Float = 0f
     var rollAngle: Float = 0f
@@ -272,8 +272,8 @@ open class HybridAquaticJellyfishEntity(
             dataTracker.set(JELLYFISH_SIZE, size)
         }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(
             AnimationController(
                 this,
                 "Swim/Idle",
@@ -288,7 +288,7 @@ open class HybridAquaticJellyfishEntity(
         )
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+    override fun getFactory(): AnimationFactory {
         return factory
     }
 

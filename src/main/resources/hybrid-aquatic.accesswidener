@@ -9,5 +9,6 @@ accessible class net/minecraft/client/render/BackgroundRenderer$StatusEffectFogM
 accessible class net/minecraft/client/render/BackgroundRenderer$BlindnessFogModifier
 accessible class net/minecraft/client/render/BackgroundRenderer$DarknessFogModifier
 accessible method net/minecraft/block/PointedDripstoneBlock getThickness (Lnet/minecraft/world/WorldView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;Z)Lnet/minecraft/block/enums/Thickness;
-accessible field net/minecraft/state/property/IntProperty min I
-accessible field net/minecraft/state/property/IntProperty max I
+accessible field net/minecraft/state/property/IntProperty field_37655 I
+accessible field net/minecraft/state/property/IntProperty field_37656 I
+accessible field net/minecraft/item/BlockItem BLOCK_ENTITY_TAG_KEY Ljava/lang/String;

@@ -36,15 +36,12 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
-import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
-import software.bernie.geckolib.util.GeckoLibUtil
+import software.bernie.geckolib3.GeoEntity
+import software.bernie.geckolib3.constant.DefaultAnimations
+import software.bernie.geckolib3.core.animation.AnimationController
+import software.bernie.geckolib3.core.animation.RawAnimation
+import software.bernie.geckolib3.core.`object`.PlayState
+import software.bernie.geckolib3.util.GeckoLibUtil
 import java.util.*
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
@@ -55,7 +52,7 @@ open class HybridAquaticSharkEntity(
     private val isPassive: Boolean,
     private val closePlayerAttack: Boolean
 ) : WaterCreatureEntity(entityType, world), Angerable, GeoEntity {
-    private val factory = GeckoLibUtil.createInstanceCache(this)
+    private val factory = GeckoLibUtil.createFactory(this)
     private var angerTime = 0
     private var angryAt: UUID? = null
 
@@ -245,15 +242,15 @@ open class HybridAquaticSharkEntity(
     //#endregion
 
     //#region Animations
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(this, "Swim/Charge/Idle", 4) { state ->
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(AnimationController(this, "Swim/Charge/Idle", 4) { state ->
             val animation = when {
                 state.isMoving -> if (this.isSprinting) DefaultAnimations.RUN else DefaultAnimations.SWIM
                 else -> DefaultAnimations.SWIM
             }
             state.setAndContinue(animation)
         })
-        controllerRegistrar.add(
+        data.addAnimationController(
             AnimationController(this, "Beached", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
                     if (this.isOnGround && !isSubmergedInWater) {
@@ -264,13 +261,13 @@ open class HybridAquaticSharkEntity(
                 }
             )
         )
-        controllerRegistrar.add(
+        data.addAnimationController(
             DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE)
         )
     }
 
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+    override fun getFactory(): AnimationFactory {
         return factory
     }
 

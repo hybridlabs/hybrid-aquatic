@@ -8,23 +8,22 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
-import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
+import software.bernie.geckolib3.core.IAnimatable
+import software.bernie.geckolib3.core.PlayState
+import software.bernie.geckolib3.core.builder.AnimationBuilder
+import software.bernie.geckolib3.core.builder.ILoopType
+import software.bernie.geckolib3.core.controller.AnimationController
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent
+import software.bernie.geckolib3.core.manager.AnimationData
+import software.bernie.geckolib3.core.manager.AnimationFactory
+import software.bernie.geckolib3.util.GeckoLibUtil
 
 /**
  * Represents the block entity for Message in a Bottle blocks.
  * @see MessageInABottleBlock
  */
-class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE, pos, state), GeoAnimatable {
-    private val instanceCache = GeckoLibUtil.createInstanceCache(this)
+class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE, pos, state), IAnimatable {
+    private val instanceCache = GeckoLibUtil.createFactory(this)
 
     /**
      * The variant of this bottle.
@@ -51,7 +50,7 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
         messageItemStack = ItemStack.fromNbt(nbt.getCompound(MESSAGE_KEY))
     }
 
-    private fun <E> animate(event: AnimationState<E>): PlayState where E : BlockEntity, E : GeoAnimatable {
+    private fun <E> animate(event: AnimationEvent<E>): PlayState where E : BlockEntity, E : IAnimatable {
         return if (cachedState.get(Properties.WATERLOGGED)) {
             event.controller.setAnimation(WATER_BOB_ANIMATION)
             PlayState.CONTINUE
@@ -60,16 +59,12 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
         }
     }
 
-    override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {
-        registrar.add(AnimationController(this, "controller", 0, ::animate))
+    override fun registerControllers(registrar: AnimationData) {
+        registrar.addAnimationController(AnimationController(this, "controller", 0.0f, ::animate))
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+    override fun getFactory(): AnimationFactory {
         return instanceCache
-    }
-
-    override fun getTick(animatable: Any): Double {
-        return RenderUtils.getCurrentTick()
     }
 
     override fun toInitialChunkDataNbt(): NbtCompound {
@@ -91,6 +86,6 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
          */
         const val MESSAGE_KEY = "message"
 
-        val WATER_BOB_ANIMATION: RawAnimation = RawAnimation.begin().then("water_bob", Animation.LoopType.LOOP)
+        val WATER_BOB_ANIMATION: AnimationBuilder = AnimationBuilder().addAnimation("water_bob", ILoopType.EDefaultLoopTypes.LOOP)
     }
 }

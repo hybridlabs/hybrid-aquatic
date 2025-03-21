@@ -6,8 +6,8 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.model.GeoModel
+import software.bernie.geckolib3.core.animation.AnimationState
+import software.bernie.geckolib3.model.GeoModel
 
 abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity> (
     private val id: String

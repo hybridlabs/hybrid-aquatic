@@ -80,7 +80,7 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
         }
     }
 
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
+    override fun <E : IAnimatable> predicate(event: AnimationEvent<E>): PlayState {
         if (isSubmergedInWater) {
             event.controller.setAnimation(IDLE_ANIMATION)
         }

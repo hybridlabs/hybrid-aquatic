@@ -10,7 +10,6 @@ import dev.hybridlabs.aquatic.client.command.RandomFishCommand
 import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
-import dev.hybridlabs.aquatic.client.render.armor.*
 import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.BuoyBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
@@ -42,8 +41,8 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import software.bernie.geckolib.animatable.client.RenderProvider
-import software.bernie.geckolib.renderer.GeoArmorRenderer
+import software.bernie.geckolib3.client.RenderProvider
+import software.bernie.geckolib3.renderer.GeoArmorRenderer
 
 object HybridAquaticClient : ClientModInitializer {
     override fun onInitializeClient() {

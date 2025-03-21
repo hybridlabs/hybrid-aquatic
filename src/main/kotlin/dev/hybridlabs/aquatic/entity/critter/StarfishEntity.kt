@@ -135,7 +135,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
         }
     }
 
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
+    override fun <E : IAnimatable> predicate(event: AnimationEvent<E>): PlayState {
         if (isSubmergedInWater) {
             event.controller.setAnimation(WALK_ANIMATION)
         }

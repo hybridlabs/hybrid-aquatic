@@ -28,6 +28,14 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
+import software.bernie.geckolib3.core.IAnimatable
+import software.bernie.geckolib3.core.PlayState
+import software.bernie.geckolib3.core.builder.AnimationBuilder
+import software.bernie.geckolib3.core.builder.ILoopType
+import software.bernie.geckolib3.core.controller.AnimationController
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent
+import software.bernie.geckolib3.core.manager.AnimationData
+import software.bernie.geckolib3.core.manager.AnimationFactory
 import software.bernie.geckolib3.util.GeckoLibUtil
 
 
@@ -38,8 +46,8 @@ open class HybridAquaticCritterEntity(
     private val variants: Map<String, CritterVariant> = mutableMapOf(),
     open val assumeDefault: Boolean = false,
     open val collisionRules: List<VariantCollisionRules> = listOf()
-) : WaterCreatureEntity(type, world), GeoEntity {
-    private val factory = GeckoLibUtil.createInstanceCache(this)
+) : WaterCreatureEntity(type, world), IAnimatable {
+    private val factory = GeckoLibUtil.createFactory(this)
     private var fromFishingNet = false
 
     init {
@@ -156,7 +164,7 @@ open class HybridAquaticCritterEntity(
 
     override fun tickWaterBreathingAir(air: Int) {}
 
-    open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
+    open fun <E : IAnimatable> predicate(event: AnimationEvent<E>): PlayState {
         if (isSubmergedInWater && event.isMoving) {
             event.controller.setAnimation(WALK_ANIMATION)
             return PlayState.CONTINUE
@@ -208,18 +216,18 @@ open class HybridAquaticCritterEntity(
         return SoundEvents.ENTITY_SLIME_JUMP_SMALL
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(
             AnimationController(
                 this,
                 "controller",
-                5,
+                5.0f,
                 ::predicate
             )
         )
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+    override fun getFactory(): AnimationFactory {
         return factory
     }
 
@@ -278,7 +286,7 @@ open class HybridAquaticCritterEntity(
             val bottomY = world.seaLevel - 128
 
             return pos.y in bottomY..topY &&
-                    world.getBlockState(pos.down()).isSolid &&
+                    world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
                     world.getFluidState(pos).isIn(FluidTags.WATER)
         }
 
@@ -290,9 +298,9 @@ open class HybridAquaticCritterEntity(
         const val VARIANT_DATA_KEY = "VariantData"
         const val CRITTER_SIZE_KEY = "CritterSize"
 
-        val WALK_ANIMATION: RawAnimation = RawAnimation.begin().then("walk", Animation.LoopType.LOOP)
-        val IDLE_ANIMATION: RawAnimation = RawAnimation.begin().then("idle", Animation.LoopType.LOOP)
-        val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().then("flop", Animation.LoopType.LOOP)
+        val WALK_ANIMATION: AnimationBuilder = AnimationBuilder().addAnimation("walk", ILoopType.EDefaultLoopTypes.LOOP)
+        val IDLE_ANIMATION: AnimationBuilder = AnimationBuilder().addAnimation("idle", ILoopType.EDefaultLoopTypes.LOOP)
+        val FLOP_ANIMATION: AnimationBuilder = AnimationBuilder().addAnimation("flop", ILoopType.EDefaultLoopTypes.LOOP)
     }
 
     @Suppress("UNUSED")

@@ -13,6 +13,9 @@ import net.minecraft.tag.BiomeTags
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import software.bernie.geckolib3.core.IAnimatable
+import software.bernie.geckolib3.core.PlayState
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent
 
 class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World) :
     HybridAquaticCritterEntity(
@@ -79,7 +82,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
         }
     }
 
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
+    override fun <E : IAnimatable> predicate(event: AnimationEvent<E>): PlayState {
         if (isSubmergedInWater) {
             event.controller.setAnimation(WALK_ANIMATION)
         }
@@ -91,7 +94,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
 
             val attacker = source?.attacker
             if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
-                attacker.damage(this.damageSources.thorns(this), 2.0f)
+                attacker.damage(DamageSource.thorns(this), 2.0f)
             }
 
             return true

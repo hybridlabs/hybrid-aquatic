@@ -32,15 +32,13 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.biome.Biome
-import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
-import software.bernie.geckolib.util.GeckoLibUtil
+import software.bernie.geckolib3.GeoEntity
+import software.bernie.geckolib3.constant.DefaultAnimations
+import software.bernie.geckolib3.core.animation.AnimationController
+import software.bernie.geckolib3.core.animation.AnimationState
+import software.bernie.geckolib3.core.animation.RawAnimation
+import software.bernie.geckolib3.core.`object`.PlayState
+import software.bernie.geckolib3.util.GeckoLibUtil
 
 
 @Suppress("DEPRECATION", "LeakingThis", "UNUSED_PARAMETER")
@@ -52,7 +50,7 @@ open class HybridAquaticCrustaceanEntity(
     open val assumeDefault: Boolean = false,
     open val collisionRules: List<HybridAquaticFishEntity.VariantCollisionRules> = listOf(),
 ) : WaterCreatureEntity(type, world), GeoEntity {
-    private val factory = GeckoLibUtil.createInstanceCache(this)
+    private val factory = GeckoLibUtil.createFactory(this)
     private var fromFishingNet = false
     private var songPlaying = false
     private var songSource: BlockPos? = null
@@ -309,11 +307,11 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     //#region Animations
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(
             DefaultAnimations.genericWalkIdleController(this)
         )
-        controllerRegistrar.add(
+        data.addAnimationController(
             AnimationController(this, "Hide", 5,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
                     if (this.isHiding) {
@@ -324,7 +322,7 @@ open class HybridAquaticCrustaceanEntity(
                 }
             )
         )
-        controllerRegistrar.add(
+        data.addAnimationController(
             AnimationController(this, "Dance", 5,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
                     if (this.canDance && isSongPlaying() && !state.isMoving) {
@@ -337,7 +335,7 @@ open class HybridAquaticCrustaceanEntity(
         )
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+    override fun getFactory(): AnimationFactory {
         return factory
     }
 

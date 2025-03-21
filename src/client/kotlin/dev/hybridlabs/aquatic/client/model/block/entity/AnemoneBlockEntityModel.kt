@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.block.entity
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import net.minecraft.util.Identifier
-import software.bernie.geckolib.model.GeoModel
+import software.bernie.geckolib3.model.GeoModel
 
 class AnemoneBlockEntityModel : GeoModel<AnemoneBlockEntity>() {
     override fun getAnimationResource(entity: AnemoneBlockEntity): Identifier {

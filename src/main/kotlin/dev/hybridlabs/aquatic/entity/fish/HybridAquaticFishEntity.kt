@@ -47,7 +47,7 @@ open class HybridAquaticFishEntity(
     open val collisionRules: List<VariantCollisionRules> = listOf()
 ) : WaterCreatureEntity(type, world), GeoEntity {
 
-    private val factory = GeckoLibUtil.createInstanceCache(this)
+    private val factory = GeckoLibUtil.createFactory(this)
 
     override fun initGoals() {
         super.initGoals()
@@ -309,8 +309,8 @@ open class HybridAquaticFishEntity(
     }
 
     //#region Animations
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(
             AnimationController(this, "Swim/Idle", 5,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticFishEntity> ->
                     if (state.isMoving) {
@@ -322,7 +322,7 @@ open class HybridAquaticFishEntity(
         )
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+    override fun getFactory(): AnimationFactory {
         return factory
     }
 

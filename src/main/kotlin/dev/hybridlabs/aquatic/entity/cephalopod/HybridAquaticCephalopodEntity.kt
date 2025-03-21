@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.block.Blocks
@@ -51,7 +50,7 @@ open class HybridAquaticCephalopodEntity(
     open var hasInk: Boolean,
     open var hasGlowInk: Boolean
 ) : WaterCreatureEntity(type, world), GeoEntity {
-    private val factory = GeckoLibUtil.createInstanceCache(this)
+    private val factory = GeckoLibUtil.createFactory(this)
 
     override fun initGoals() {
         goalSelector.add(0, EscapeDangerGoal(this, 1.25))
@@ -314,8 +313,8 @@ open class HybridAquaticCephalopodEntity(
         return this.maxAir
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(
             AnimationController(
                 this,
                 "Swim/Run",
@@ -334,7 +333,7 @@ open class HybridAquaticCephalopodEntity(
         )
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+    override fun getFactory(): AnimationFactory {
         return factory
     }
 

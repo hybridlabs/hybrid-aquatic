@@ -81,7 +81,7 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
                 // get a random message
                 val registryManager = world.registryManager
                 val registry = registryManager.get(HybridAquaticRegistryKeys.SEA_MESSAGE)
-                val messageKey = registry.getRandom(world.random).getOrNull()?.registryKey() ?: return
+                val messageKey = registry.getRandom(world.random).getOrNull()?.key?.orElse(null) ?: return
                 val message = registry.get(messageKey) ?: return
 
                 // get block entity

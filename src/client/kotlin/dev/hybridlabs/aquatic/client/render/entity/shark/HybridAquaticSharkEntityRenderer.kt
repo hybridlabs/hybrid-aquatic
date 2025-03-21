@@ -4,9 +4,9 @@ import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.util.math.MatrixStack
-import software.bernie.geckolib.model.GeoModel
-import software.bernie.geckolib.renderer.GeoEntityRenderer
-import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
+import software.bernie.geckolib3.model.GeoModel
+import software.bernie.geckolib3.renderer.GeoEntityRenderer
+import software.bernie.geckolib3.renderer.layer.AutoGlowingGeoLayer
 
 @Suppress("LeakingThis")
 open class HybridAquaticSharkEntityRenderer<T : HybridAquaticSharkEntity>(

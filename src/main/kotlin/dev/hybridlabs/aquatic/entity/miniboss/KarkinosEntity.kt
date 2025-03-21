@@ -31,11 +31,10 @@ import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import net.minecraft.world.Difficulty
 import net.minecraft.world.World
-import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib3.constant.DefaultAnimations
+import software.bernie.geckolib3.core.animation.AnimationController
+import software.bernie.geckolib3.core.animation.RawAnimation
+import software.bernie.geckolib3.core.`object`.PlayState
 
 
 class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, world: World) :
@@ -209,7 +208,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         bossBar.name = this.displayName
     }
 
-    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+    override fun registerControllers(controllers: AnimationData) {
         controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
         controllers.add(AnimationController(this, 5) { state ->

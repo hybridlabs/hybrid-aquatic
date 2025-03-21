@@ -62,8 +62,8 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         return Identifier("hybrid-aquatic", "entities/decorator_crab")
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(this, "With/Without", 0) { state ->
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(AnimationController(this, "With/Without", 0) { state ->
             val animation = when {
                 coralTimer == 0 -> WITH_CORAL
                 else -> WITHOUT_CORAL

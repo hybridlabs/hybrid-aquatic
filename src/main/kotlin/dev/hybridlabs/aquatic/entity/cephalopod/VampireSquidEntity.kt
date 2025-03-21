@@ -5,9 +5,8 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib3.core.animation.AnimationController
+import software.bernie.geckolib3.core.animation.RawAnimation
 
 class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: World) :
     HybridAquaticCephalopodEntity(
@@ -22,8 +21,8 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
 
     private var isFeeding = false
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(this, "Open/Closed", 4) { state ->
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(AnimationController(this, "Open/Closed", 4) { state ->
             val animation = when {
                 isFeeding -> TENTACLES_EXTENDED
                 else -> TENTACLES_RETRACTED

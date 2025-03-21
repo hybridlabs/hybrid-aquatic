@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.jellyfish
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import net.minecraft.util.Identifier
-import software.bernie.geckolib.model.GeoModel
+import software.bernie.geckolib3.model.GeoModel
 
 abstract class HybridAquaticJellyfishEntityModel<T: HybridAquaticJellyfishEntity> (private val id: String) : GeoModel<T>() {
     override fun getModelResource(animatable: T): Identifier {

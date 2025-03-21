@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.miniboss
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
 import net.minecraft.util.Identifier
-import software.bernie.geckolib.model.GeoModel
+import software.bernie.geckolib3.model.GeoModel
 
 abstract class HybridAquaticMinibossEntityModel<T: HybridAquaticMinibossEntity> (private val id: String) : GeoModel<T>() {
     override fun getModelResource(animatable: T): Identifier {

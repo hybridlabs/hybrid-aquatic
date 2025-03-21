@@ -1,16 +1,34 @@
 package dev.hybridlabs.aquatic.block
 
-import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodTypes
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
-import net.minecraft.block.*
+import net.minecraft.block.AbstractBlock
+import net.minecraft.block.Block
+import net.minecraft.block.Blocks
+import net.minecraft.block.CoralBlock
+import net.minecraft.block.CoralBlockBlock
+import net.minecraft.block.CoralFanBlock
+import net.minecraft.block.CoralWallFanBlock
+import net.minecraft.block.DeadCoralBlock
+import net.minecraft.block.DeadCoralFanBlock
+import net.minecraft.block.DeadCoralWallFanBlock
+import net.minecraft.block.DoorBlock
+import net.minecraft.block.FenceBlock
+import net.minecraft.block.FenceGateBlock
+import net.minecraft.block.MapColor
+import net.minecraft.block.Material
+import net.minecraft.block.PillarBlock
+import net.minecraft.block.PressurePlateBlock
+import net.minecraft.block.SlabBlock
+import net.minecraft.block.StairsBlock
+import net.minecraft.block.TrapdoorBlock
+import net.minecraft.block.WoodenButtonBlock
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.block.piston.PistonBehavior
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
+import org.spongepowered.include.com.google.common.collect.ImmutableSet
 
 /**
  * The registry of all blocks in Hybrid Aquatic.
@@ -18,12 +36,11 @@ import net.minecraft.util.registry.Registry
 object HybridAquaticBlocks {
     val ANEMONE = register(
         "anemone", AnemoneBlock(
-            FabricBlockSettings.create()
+            FabricBlockSettings.of(Material.UNDERWATER_PLANT)
                 .mapColor(MapColor.DARK_DULL_PINK)
                 .ticksRandomly()
                 .strength(0.4f)
                 .nonOpaque()
-                .pistonBehavior(PistonBehavior.DESTROY)
                 .sounds(BlockSoundGroup.SLIME)
                 .drops(Identifier(HybridAquatic.MOD_ID, "blocks/anemone"))
         )
@@ -31,12 +48,11 @@ object HybridAquaticBlocks {
 
     val STRAWBERRY_ANEMONE = register(
         "strawberry_anemone", StrawberryAnemoneBlock(
-            FabricBlockSettings.create()
+            FabricBlockSettings.of(Material.UNDERWATER_PLANT)
                 .mapColor(MapColor.DARK_RED)
                 .ticksRandomly()
                 .strength(0.4f)
                 .nonOpaque()
-                .pistonBehavior(PistonBehavior.DESTROY)
                 .sounds(BlockSoundGroup.SLIME)
                 .drops(Identifier(HybridAquatic.MOD_ID, "blocks/strawberry_anemone"))
         )
@@ -195,25 +211,24 @@ object HybridAquaticBlocks {
     val DRIFTWOOD_SLAB = register("driftwood_slab", SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_STAIRS)))
     val DRIFTWOOD_BUTTON = register(
         "driftwood_button",
-        ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.OAK, 25, true)
+        WoodenButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON))
     )
     val DRIFTWOOD_PRESSURE_PLATE = register(
         "driftwood_pressure_plate",
         PressurePlateBlock(
             PressurePlateBlock.ActivationRule.EVERYTHING,
             FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE),
-            BlockSetType.OAK
         )
     )
     val DRIFTWOOD_FENCE = register("driftwood_fence", FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE)))
     val DRIFTWOOD_FENCE_GATE = register(
         "driftwood_fence_gate",
-        FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE), HybridAquaticWoodTypes.DRIFTWOOD)
+        FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE))
     )
     val DRIFTWOOD_DOOR =
-        register("driftwood_door", DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR), BlockSetType.OAK))
+        register("driftwood_door", DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR)))
     val DRIFTWOOD_TRAPDOOR =
-        register("driftwood_trapdoor", TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR), BlockSetType.OAK))
+        register("driftwood_trapdoor", TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)))
 
     val DEAD_LOPHELIA_CORAL_BLOCK = register(
         "dead_lophelia_coral_block", DeadCoralBlock(

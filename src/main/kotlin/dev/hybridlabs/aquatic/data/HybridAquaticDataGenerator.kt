@@ -23,22 +23,21 @@ import net.minecraft.util.registry.Registry
 
 object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(generator: FabricDataGenerator) {
-        val pack = generator.createPack()
-        pack.addProvider(::LanguageProvider)
-        pack.addProvider(::ModelProvider)
-        pack.addProvider(::BlockLootTableProvider)
-        pack.addProvider(::EntityTypeLootTableProvider)
-        pack.addProvider(::FishingLootTableProvider)
-        pack.addProvider(::GenericLootTableProvider)
-        pack.addProvider(::AdvancementProvider)
-        pack.addProvider(::BiomeTagProvider)
-        pack.addProvider(::BlockTagProvider)
-        pack.addProvider(::ItemTagProvider)
-        pack.addProvider(::EntityTypeTagProvider)
-        pack.addProvider(::ConfiguredFeatureProvider)
-        pack.addProvider(::PlacedFeatureProvider)
-        pack.addProvider(::RecipeProvider)
-        pack.addProvider(::SeaMessageProvider)
+        generator.addProvider(::LanguageProvider)
+        generator.addProvider(::ModelProvider)
+        generator.addProvider(::BlockLootTableProvider)
+        generator.addProvider(::EntityTypeLootTableProvider)
+        generator.addProvider(::FishingLootTableProvider)
+        generator.addProvider(::GenericLootTableProvider)
+        generator.addProvider(::AdvancementProvider)
+        generator.addProvider(::BiomeTagProvider)
+        generator.addProvider(::BlockTagProvider)
+        generator.addProvider(::ItemTagProvider)
+        generator.addProvider(::EntityTypeTagProvider)
+        generator.addProvider(::ConfiguredFeatureProvider)
+        generator.addProvider(::PlacedFeatureProvider)
+        generator.addProvider(::RecipeProvider)
+        generator.addProvider(::SeaMessageProvider)
     }
 
     override fun buildRegistry(registryBuilder: RegistryBuilder) {

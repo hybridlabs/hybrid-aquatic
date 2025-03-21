@@ -6,9 +6,9 @@ import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
-import software.bernie.geckolib.model.GeoModel
-import software.bernie.geckolib.renderer.GeoEntityRenderer
-import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
+import software.bernie.geckolib3.model.GeoModel
+import software.bernie.geckolib3.renderer.GeoEntityRenderer
+import software.bernie.geckolib3.renderer.layer.AutoGlowingGeoLayer
 
 @Suppress("LeakingThis")
 open class HybridAquaticJellyfishEntityRenderer<T: HybridAquaticJellyfishEntity>(context: EntityRendererFactory.Context, model: GeoModel<T>, private var variableSize: Boolean = false, canGlow: Boolean = false): GeoEntityRenderer<T>(context, model) {

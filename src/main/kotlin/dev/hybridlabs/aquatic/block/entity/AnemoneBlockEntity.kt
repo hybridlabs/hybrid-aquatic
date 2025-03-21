@@ -10,20 +10,19 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
-import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
+import software.bernie.geckolib3.core.IAnimatable
+import software.bernie.geckolib3.core.PlayState
+import software.bernie.geckolib3.core.builder.AnimationBuilder
+import software.bernie.geckolib3.core.builder.ILoopType
+import software.bernie.geckolib3.core.controller.AnimationController
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent
+import software.bernie.geckolib3.core.manager.AnimationData
+import software.bernie.geckolib3.core.manager.AnimationFactory
+import software.bernie.geckolib3.util.GeckoLibUtil
 import java.util.function.Function
 
-class AnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.ANEMONE, pos, state), GeoAnimatable {
-    private val factory = GeckoLibUtil.createInstanceCache(this)
+class AnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.ANEMONE, pos, state), IAnimatable {
+    private val factory = GeckoLibUtil.createFactory(this)
 
     private var hideTimer = 0
     private var cooldownTimer = 0
@@ -109,7 +108,7 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridA
         cooldownTimer = COOLDOWN_DURATION
     }
 
-    private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
+    private fun <E> predicate(event: AnimationEvent<E>): PlayState where E : BlockEntity?, E : IAnimatable {
         return if (world != null) {
             event.controller.setAnimation(SWAY_ANIMATION)
             PlayState.CONTINUE
@@ -118,16 +117,12 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridA
         }
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(this, "controller", 0, ::predicate))
+    override fun registerControllers(data: AnimationData) {
+        data.addAnimationController(AnimationController(this, "controller", 0.0f, ::predicate))
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+    override fun getFactory(): AnimationFactory {
         return factory
-    }
-
-    override fun getTick(o: Any): Double {
-        return RenderUtils.getCurrentTick()
     }
 
     override fun toInitialChunkDataNbt(): NbtCompound {
@@ -158,7 +153,7 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridA
     companion object {
         private const val HIDE_DURATION = 200
         private const val COOLDOWN_DURATION = 40
-        val SWAY_ANIMATION: RawAnimation = RawAnimation.begin().then("sway", Animation.LoopType.LOOP)
+        val SWAY_ANIMATION: AnimationBuilder = AnimationBuilder().addAnimation("sway", ILoopType.EDefaultLoopTypes.LOOP)
 
         private val IRRELEVANT_NBT_KEYS: List<String> = listOf(
             "Air",

@@ -1,8 +1,5 @@
 package dev.hybridlabs.aquatic.client
 
-import software.bernie.geckolib.animatable.GeoItem
-import software.bernie.geckolib.animatable.client.RenderProvider
-
 /**
  * Stores Geckolib render providers for use on the common side.
  * This allows us to reference renderers in Geckolib [GeoItem]

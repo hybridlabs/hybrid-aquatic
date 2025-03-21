@@ -20,7 +20,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
 abstract class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, world: World) : HostileEntity(type, world), GeoEntity {
 
-    private val factory = GeckoLibUtil.createInstanceCache(this)
+    private val factory = GeckoLibUtil.createFactory(this)
 
     private var attackTick = 0
 
@@ -67,7 +67,7 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, 
         return true
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+    override fun getFactory(): AnimationFactory {
         return factory
     }
 

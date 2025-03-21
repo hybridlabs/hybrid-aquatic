@@ -6,9 +6,9 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib3.core.IAnimatable
+import software.bernie.geckolib3.core.PlayState
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent
 
 class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: World) :
     HybridAquaticCritterEntity(entityType, world, variants = hashMapOf(
@@ -47,7 +47,7 @@ class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: Worl
         }
     }
 
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
+    override fun <E : IAnimatable> predicate(event: AnimationEvent<E>): PlayState {
         if (isSubmergedInWater) {
             event.controller.setAnimation(WALK_ANIMATION)
         } else {

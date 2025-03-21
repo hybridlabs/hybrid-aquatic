@@ -8,12 +8,13 @@ import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.util.registry.Registry
 
-class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
+class LanguageProvider(output: FabricDataGenerator) : FabricLanguageProvider(output) {
     override fun generateTranslations(builder: TranslationBuilder) {
         // item group
 

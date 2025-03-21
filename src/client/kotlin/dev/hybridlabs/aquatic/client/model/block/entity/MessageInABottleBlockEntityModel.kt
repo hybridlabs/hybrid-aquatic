@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.block.MessageInABottleBlock.Variant
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.util.Identifier
-import software.bernie.geckolib.model.GeoModel
+import software.bernie.geckolib3.model.GeoModel
 
 class MessageInABottleBlockEntityModel : GeoModel<MessageInABottleBlockEntity>() {
     override fun getModelResource(blockEntity: MessageInABottleBlockEntity): Identifier {
