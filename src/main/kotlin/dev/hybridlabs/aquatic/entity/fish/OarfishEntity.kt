@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -25,7 +26,11 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: World) :
 
     override fun initGoals() {
         super.initGoals()
-        goalSelector.add(1, StayDeepGoal(this, 1.0, 1, 16))
+        if (world.isDay) {
+            goalSelector.add(1, StayDeepGoal(this, 1.0, 1, 16))
+        } else {
+            goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
+        }
     }
 
     companion object {
