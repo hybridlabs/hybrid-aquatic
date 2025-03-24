@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FishJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -28,6 +29,7 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Worl
     override fun initGoals() {
         super.initGoals()
         targetSelector.add(5, FishJumpGoal(this, 10))
+        goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
     }
 
     override fun tick() {
