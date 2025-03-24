@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -16,6 +17,11 @@ class CoelacanthEntity(entityType: EntityType<out CoelacanthEntity>, world: Worl
 
     override fun getLimitPerChunk(): Int {
         return 1
+    }
+
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(1, StayDeepGoal(this, 1.0, 1, 8))
     }
 
     companion object {

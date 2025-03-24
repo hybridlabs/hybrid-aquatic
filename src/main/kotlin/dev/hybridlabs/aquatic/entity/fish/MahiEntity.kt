@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FishJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
@@ -41,6 +42,7 @@ class MahiEntity(entityType: EntityType<out MahiEntity>, world: World) :
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(5, FishJumpGoal(this, 10))
+        goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 12))
     }
 
     companion object {

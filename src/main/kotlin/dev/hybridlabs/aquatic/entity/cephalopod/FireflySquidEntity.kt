@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -16,6 +18,15 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
         true,
         true
     ) {
+
+    override fun initGoals() {
+        super.initGoals()
+        if (world.isDay) {
+            goalSelector.add(1, StayDeepGoal(this, 1.0, 1, 8))
+        } else {
+            goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
+        }
+    }
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
