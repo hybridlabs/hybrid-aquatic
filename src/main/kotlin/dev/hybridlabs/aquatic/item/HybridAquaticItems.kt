@@ -1378,6 +1378,12 @@ object HybridAquaticItems {
 
         //#endregion
 
+        //#region Turtles
+
+    val LEATHERBACK_TURTLE_SPAWN_EGG = registerSpawnEgg("leatherback_turtle_spawn_egg", HybridAquaticEntityTypes.LEATHERBACK_TURTLE, 0x4c6d98, 0xeff0f4)
+
+        //#endregion
+
         //#region Jellyfish
 
     val BARREL_JELLYFISH_SPAWN_EGG = registerSpawnEgg("barrel_jellyfish_spawn_egg", HybridAquaticEntityTypes.BARREL_JELLYFISH, 0xd6f3ea, 0x413c83)

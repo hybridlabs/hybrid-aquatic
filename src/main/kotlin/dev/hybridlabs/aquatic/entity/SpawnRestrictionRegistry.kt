@@ -7,12 +7,15 @@ import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import dev.hybridlabs.aquatic.entity.turtle.HybridAquaticTurtleEntity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnRestriction
 import net.minecraft.entity.SpawnRestriction.SpawnPredicate
 import net.minecraft.entity.mob.HostileEntity
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.passive.AnimalEntity
+import net.minecraft.entity.passive.TurtleEntity
 import net.minecraft.world.Heightmap
 
 /**
@@ -88,6 +91,11 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.VAMPIRE_SQUID,
             HybridAquaticEntityTypes.UMBRELLA_OCTOPUS,
         ).forEach { registerCephalopodUnderground(it) }
+
+        // turtles
+        setOf(
+            HybridAquaticEntityTypes.LEATHERBACK_TURTLE,
+        ).forEach { registerTurtle(it) }
 
         // jellies
         setOf(
@@ -187,6 +195,10 @@ object SpawnRestrictionRegistry {
         registerWaterCreature(entityType, HybridAquaticSharkEntity::canUndergroundSpawn)
     }
 
+    private fun <T : TurtleEntity> registerTurtle(entityType: EntityType<T>) {
+        registerAnimalEntity(entityType, HybridAquaticTurtleEntity::canSpawn)
+    }
+
     private fun <T : WaterCreatureEntity> registerJelly(entityType: EntityType<T>) {
         registerWaterCreature(entityType, HybridAquaticJellyfishEntity::canSpawn)
     }
@@ -228,6 +240,14 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : WaterCreatureEntity> registerLandWaterCreature(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
+        register(
+            entityType,
+            SpawnRestriction.Location.NO_RESTRICTIONS,
+            predicate
+        )
+    }
+
+    private fun <T : AnimalEntity> registerAnimalEntity(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
             SpawnRestriction.Location.NO_RESTRICTIONS,

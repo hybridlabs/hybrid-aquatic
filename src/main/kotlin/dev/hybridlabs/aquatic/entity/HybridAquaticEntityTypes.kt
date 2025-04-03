@@ -11,6 +11,7 @@ import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.shark.*
+import dev.hybridlabs.aquatic.entity.turtle.LeatherbackTurtleEntity
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
@@ -545,6 +546,14 @@ object HybridAquaticEntityTypes {
         StarfishEntity.createMobAttributes()
     )
 
+    //turtles
+    val LEATHERBACK_TURTLE = registerTurtle(
+        "leatherback_turtle",
+        ::LeatherbackTurtleEntity,
+        EntityDimensions.fixed(0.75f, 0.75f),
+        LeatherbackTurtleEntity.createMobAttributes()
+    )
+
     //jellyfish
     val ATOLLA_JELLYFISH = registerJellyUnderground(
         "atolla_jellyfish",
@@ -802,6 +811,15 @@ object HybridAquaticEntityTypes {
         attributeContainer: DefaultAttributeContainer.Builder
     ): EntityType<T> {
         return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.CEPHALOPOD)
+    }
+
+    private fun <T : LivingEntity> registerTurtle(
+        id: String,
+        entityFactory: EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: DefaultAttributeContainer.Builder
+    ): EntityType<T> {
+        return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.TURTLE)
     }
 
     private fun <T : LivingEntity> registerJelly(
