@@ -63,6 +63,7 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.FLOATING_SARGASSUM)
             entries.add(HybridAquaticItems.WATER_LETTUCE)
             entries.add(HybridAquaticItems.JUNGLE_LILY_PAD)
+            entries.add(HybridAquaticItems.LEATHERBACK_TURTLE_EGG)
 
             entries.add(HybridAquaticItems.BUTTON_CORAL_BLOCK)
             entries.add(HybridAquaticItems.SUN_CORAL_BLOCK)

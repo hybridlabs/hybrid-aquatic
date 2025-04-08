@@ -29,7 +29,6 @@ import net.minecraft.world.WorldView
 
 @Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION")
 class ThermalVentBlock(
-    private val emitsParticles: Boolean,
     private val fireDamage: Int,
     settings: Settings?
 ) : Block(settings), Waterloggable {

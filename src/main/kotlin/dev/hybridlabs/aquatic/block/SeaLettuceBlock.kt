@@ -18,7 +18,7 @@ import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
 @Suppress("OVERRIDE_DEPRECATION")
-class SeaLettuceBlock(settings: Settings?) : PlantBlock(settings), Fertilizable, FluidFillable {
+class SeaLettuceBlock(settings: Settings) : PlantBlock(settings), Fertilizable, FluidFillable {
     override fun getOutlineShape(
         state: BlockState,
         world: BlockView,

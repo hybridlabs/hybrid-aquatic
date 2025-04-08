@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.turtle
 
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
@@ -14,11 +15,9 @@ class LeatherbackTurtleEntity(entityType: EntityType<out LeatherbackTurtleEntity
         listOf(
             HybridAquaticEntityTags.NONE),
         listOf(
-            HybridAquaticEntityTags.SHARK)) {
-
-    override fun getLimitPerChunk(): Int {
-        return 1
-    }
+            HybridAquaticEntityTags.SHARK),
+        HybridAquaticBlocks.LEATHERBACK_TURTLE_EGG
+    ) {
 
     override fun createChild(world: ServerWorld, entity: PassiveEntity): PassiveEntity? {
         return HybridAquaticEntityTypes.LEATHERBACK_TURTLE.create(world)

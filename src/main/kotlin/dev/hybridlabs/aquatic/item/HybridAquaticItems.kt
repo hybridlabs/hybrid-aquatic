@@ -213,6 +213,7 @@ object HybridAquaticItems {
     val HYDROTHERMAL_VENT = registerBlockItem("hydrothermal_vent", HybridAquaticBlocks.THERMAL_VENT)
     val TUBE_WORM = registerBlockItem("tube_worm", HybridAquaticBlocks.TUBE_WORM)
     val TUBE_SPONGE = registerBlockItem("tube_sponge", HybridAquaticBlocks.TUBE_SPONGE)
+    val LEATHERBACK_TURTLE_EGG = registerBlockItem("leatherback_turtle_egg", HybridAquaticBlocks.LEATHERBACK_TURTLE_EGG)
 
             //#region Coral Blocks
 

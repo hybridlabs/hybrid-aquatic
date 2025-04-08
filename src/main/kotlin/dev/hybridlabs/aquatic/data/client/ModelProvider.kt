@@ -172,6 +172,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.SEA_LETTUCE,
             HybridAquaticItems.SARGASSUM,
             HybridAquaticItems.TUBE_SPONGE,
+            HybridAquaticItems.LEATHERBACK_TURTLE_EGG,
             HybridAquaticItems.UNI,
             HybridAquaticItems.RAW_CRAYFISH,
             HybridAquaticItems.COCONUT_CRAB_CLAW,

@@ -167,6 +167,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.CHERRY_CRATE to "Cherry Crate",
             HybridAquaticBlocks.BUOY to "Buoy",
             HybridAquaticBlocks.GIANT_CLAM to "Giant Clam",
+            HybridAquaticBlocks.LEATHERBACK_TURTLE_EGG to "Leatherback Turtle Egg",
 
             HybridAquaticBlocks.RED_ALGAE to "Red Algae",
             HybridAquaticBlocks.TALL_RED_ALGAE to "Tall Red Algae",

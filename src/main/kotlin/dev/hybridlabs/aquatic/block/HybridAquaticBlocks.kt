@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.block.egg.LeatherbackTurtleEggBlock
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodTypes
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.*
@@ -60,6 +61,12 @@ object HybridAquaticBlocks {
     val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie", createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK, Blocks.LIGHT_BLUE_WOOL))
     val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie", createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL))
     val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie", createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.LIGHT_GRAY_WOOL))
+
+    val LEATHERBACK_TURTLE_EGG = register(
+        "leatherback_turtle_egg", LeatherbackTurtleEggBlock(
+            FabricBlockSettings.copyOf(Blocks.TURTLE_EGG)
+        )
+    )
 
     val CRAB_POT = register(
         "crab_pot", CrateBlock(
@@ -440,7 +447,7 @@ object HybridAquaticBlocks {
 
     val THERMAL_VENT = register(
         "hydrothermal_vent_shaft", ThermalVentBlock(
-            true, 2, FabricBlockSettings.copyOf(Blocks.TUFF)
+            2, FabricBlockSettings.copyOf(Blocks.TUFF)
                 .nonOpaque()
                 .hardness(0.5F)
                 .pistonBehavior(PistonBehavior.DESTROY)

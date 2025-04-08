@@ -550,7 +550,7 @@ object HybridAquaticEntityTypes {
     val LEATHERBACK_TURTLE = registerTurtle(
         "leatherback_turtle",
         ::LeatherbackTurtleEntity,
-        EntityDimensions.fixed(0.75f, 0.75f),
+        EntityDimensions.fixed(1.25f, 0.3f),
         LeatherbackTurtleEntity.createMobAttributes()
     )
 
