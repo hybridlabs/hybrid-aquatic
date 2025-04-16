@@ -384,6 +384,17 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add(itemTranslationKey.plus(".description"), translation)
         }
 
+        mapOf(
+            "item.hybrid-aquatic.hook" to "Can be applied at an angling table",
+            HybridAquaticItems.BARBED_HOOK.translationKey to "Increases fishing speed during the day",
+            HybridAquaticItems.GLOWING_HOOK.translationKey to "Increases fishing speed at night",
+            HybridAquaticItems.MAGNETIC_HOOK.translationKey to "Increases treasure chance",
+            HybridAquaticItems.CREEPERMAGNET_HOOK.translationKey to "Don't use indoors",
+            HybridAquaticItems.OMINOUS_HOOK.translationKey to "Summons Karkinos",
+        ).forEach { (itemTranslationKey, translation) ->
+            builder.add(itemTranslationKey.plus(".description_tide"), translation)
+        }
+
         // enchantments
         mapOf(
             HybridAquaticEnchantments.LIVECATCH to "Live Catch",
