@@ -94,6 +94,7 @@ object SpawnRestrictionRegistry {
         // turtles
         setOf(
             HybridAquaticEntityTypes.LEATHERBACK_TURTLE,
+            HybridAquaticEntityTypes.HAWKSBILL_TURTLE,
         ).forEach { registerTurtle(it) }
 
         // jellies

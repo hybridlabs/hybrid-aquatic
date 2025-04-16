@@ -12,6 +12,7 @@ import dev.hybridlabs.aquatic.client.render.entity.fish.*
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
+import dev.hybridlabs.aquatic.client.render.entity.turtle.HawksbillTurtleEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.turtle.LeatherbackTurtleEntityRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
@@ -74,6 +75,7 @@ object HybridAquaticEntityRenderers {
 
     //region turtles
     val LEATHERBACK_TURTLE = EntityRendererRegistry.register(HybridAquaticEntityTypes.LEATHERBACK_TURTLE, ::LeatherbackTurtleEntityRenderer)
+    val HAWKSBILL_TURTLE = EntityRendererRegistry.register(HybridAquaticEntityTypes.HAWKSBILL_TURTLE, ::HawksbillTurtleEntityRenderer)
 
     //endregion
 

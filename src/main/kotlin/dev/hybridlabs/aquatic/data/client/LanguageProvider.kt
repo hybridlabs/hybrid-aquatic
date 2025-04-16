@@ -467,6 +467,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.ARROW_SQUID to "Arrow Squid",
             HybridAquaticEntityTypes.FIREFLY_SQUID to "Firefly Squid",
             HybridAquaticEntityTypes.LEATHERBACK_TURTLE to "Leatherback Turtle",
+            HybridAquaticEntityTypes.HAWKSBILL_TURTLE to "Hawksbill Turtle",
             HybridAquaticEntityTypes.STINGRAY to "Stingray",
             HybridAquaticEntityTypes.MANTA_RAY to "Manta Ray",
             HybridAquaticEntityTypes.SURGEONFISH to "Surgeonfish",

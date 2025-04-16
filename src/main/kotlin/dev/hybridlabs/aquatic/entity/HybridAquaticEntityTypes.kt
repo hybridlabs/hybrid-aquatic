@@ -11,6 +11,7 @@ import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.shark.*
+import dev.hybridlabs.aquatic.entity.turtle.HawksbillTurtleEntity
 import dev.hybridlabs.aquatic.entity.turtle.LeatherbackTurtleEntity
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
@@ -550,8 +551,15 @@ object HybridAquaticEntityTypes {
     val LEATHERBACK_TURTLE = registerTurtle(
         "leatherback_turtle",
         ::LeatherbackTurtleEntity,
-        EntityDimensions.fixed(1.25f, 0.3f),
+        EntityDimensions.fixed(1.5f, 0.75f),
         LeatherbackTurtleEntity.createMobAttributes()
+    )
+
+    val HAWKSBILL_TURTLE = registerTurtle(
+        "hawksbill_turtle",
+        ::HawksbillTurtleEntity,
+        EntityDimensions.fixed(1.0f, 0.5f),
+        HawksbillTurtleEntity.createMobAttributes()
     )
 
     //jellyfish
