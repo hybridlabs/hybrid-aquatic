@@ -83,7 +83,11 @@ class EntitySpawnConfigGenerator {
         //#endregion
 
         //#region Turtles
-        addUndergroundCephalopod(HybridAquaticEntityTypes.LEATHERBACK_TURTLE, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.SANDY_BEACHES), 2, 1, 1)
+        addTurtle(HybridAquaticEntityTypes.LEATHERBACK_TURTLE, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.SANDY_BEACHES), 2, 1, 1)
+        addTurtle(HybridAquaticEntityTypes.HAWKSBILL_TURTLE, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.SANDY_BEACHES), 2, 1, 1)
+        addTurtle(HybridAquaticEntityTypes.LOGGERHEAD_TURTLE, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.SANDY_BEACHES), 2, 1, 1)
+        addTurtle(HybridAquaticEntityTypes.GREEN_TURTLE, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.SANDY_BEACHES), 2, 1, 1)
+        addTurtle(HybridAquaticEntityTypes.RIDLEY_TURTLE, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.SANDY_BEACHES), 2, 1, 1)
         //#endregion
 
         //#region Jellyfish
@@ -210,6 +214,16 @@ class EntitySpawnConfigGenerator {
         maxGroup: Int
     ) {
         add(entityType, spawnTags, HybridAquaticSpawnGroup.SHARK_UNDERGROUND.spawnGroup, weight, minGroup, maxGroup)
+    }
+
+    private fun addTurtle(
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
+        weight: Int,
+        minGroup: Int,
+        maxGroup: Int
+    ) {
+        add(entityType, spawnTags, HybridAquaticSpawnGroup.TURTLE.spawnGroup, weight, minGroup, maxGroup)
     }
 
     private fun addJelly(

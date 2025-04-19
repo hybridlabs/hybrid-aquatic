@@ -569,7 +569,7 @@ object HybridAquaticEntityTypes {
     )
 
     val GREEN_TURTLE = registerTurtle(
-        "hawksbill_turtle",
+        "green_turtle",
         ::GreenTurtleEntity,
         EntityDimensions.fixed(1.0f, 0.5f),
         GreenTurtleEntity.createMobAttributes()

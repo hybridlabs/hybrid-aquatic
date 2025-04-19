@@ -1396,7 +1396,6 @@ object HybridAquaticItems {
 
     val BARREL_JELLYFISH_SPAWN_EGG = registerSpawnEgg("barrel_jellyfish_spawn_egg", HybridAquaticEntityTypes.BARREL_JELLYFISH, 0xd6f3ea, 0x413c83)
     val BLUE_JELLYFISH_SPAWN_EGG = registerSpawnEgg("blue_jellyfish_spawn_egg", HybridAquaticEntityTypes.BLUE_JELLYFISH, 0x4dc0e8, 0xff6b97)
-    val MAN_O_WAR_SPAWN_EGG = registerSpawnEgg("man_o_war_spawn_egg", HybridAquaticEntityTypes.MAN_O_WAR, 0x4dc0e8, 0xff6b97)
     val CAULIFLOWER_JELLYFISH_SPAWN_EGG = registerSpawnEgg("cauliflower_jellyfish_spawn_egg", HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH, 0x623062, 0x89a1d8)
     val COMPASS_JELLYFISH_SPAWN_EGG = registerSpawnEgg("compass_jellyfish_spawn_egg", HybridAquaticEntityTypes.COMPASS_JELLYFISH, 0xfcf9bd, 0xa16470)
     val FRIED_EGG_JELLYFISH_SPAWN_EGG = registerSpawnEgg("fried_egg_jellyfish_spawn_egg", HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH, 0xfbbf2d, 0x76445f)
