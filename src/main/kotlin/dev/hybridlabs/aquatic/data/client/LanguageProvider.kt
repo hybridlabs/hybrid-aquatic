@@ -168,6 +168,9 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BUOY to "Buoy",
             HybridAquaticBlocks.GIANT_CLAM to "Giant Clam",
             HybridAquaticBlocks.LEATHERBACK_TURTLE_EGG to "Leatherback Turtle Egg",
+            HybridAquaticBlocks.LOGGERHEAD_TURTLE_EGG to "Leatherback Turtle Egg",
+            HybridAquaticBlocks.GREEN_TURTLE_EGG to "Green Turtle Egg",
+            HybridAquaticBlocks.RIDLEY_TURTLE_EGG to "Ridley Turtle Egg",
 
             HybridAquaticBlocks.RED_ALGAE to "Red Algae",
             HybridAquaticBlocks.TALL_RED_ALGAE to "Tall Red Algae",
@@ -479,6 +482,9 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.FIREFLY_SQUID to "Firefly Squid",
             HybridAquaticEntityTypes.LEATHERBACK_TURTLE to "Leatherback Turtle",
             HybridAquaticEntityTypes.HAWKSBILL_TURTLE to "Hawksbill Turtle",
+            HybridAquaticEntityTypes.LOGGERHEAD_TURTLE to "Loggerhead Turtle",
+            HybridAquaticEntityTypes.GREEN_TURTLE to "Green Turtle",
+            HybridAquaticEntityTypes.RIDLEY_TURTLE to "Ridley Turtle",
             HybridAquaticEntityTypes.STINGRAY to "Stingray",
             HybridAquaticEntityTypes.MANTA_RAY to "Manta Ray",
             HybridAquaticEntityTypes.SURGEONFISH to "Surgeonfish",
@@ -526,6 +532,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.COSMIC_JELLYFISH to "Cosmic Jellyfish",
             HybridAquaticEntityTypes.FIREWORK_JELLYFISH to "Firework Jellyfish",
             HybridAquaticEntityTypes.BLUE_JELLYFISH to "Blue Jellyfish",
+            HybridAquaticEntityTypes.MAN_O_WAR to "Man O' War",
         )
 
         // verify display name list is valid

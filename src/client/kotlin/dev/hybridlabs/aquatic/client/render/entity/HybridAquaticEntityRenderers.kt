@@ -12,8 +12,7 @@ import dev.hybridlabs.aquatic.client.render.entity.fish.*
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
-import dev.hybridlabs.aquatic.client.render.entity.turtle.HawksbillTurtleEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.turtle.LeatherbackTurtleEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.turtle.*
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 
@@ -76,6 +75,9 @@ object HybridAquaticEntityRenderers {
     //region turtles
     val LEATHERBACK_TURTLE = EntityRendererRegistry.register(HybridAquaticEntityTypes.LEATHERBACK_TURTLE, ::LeatherbackTurtleEntityRenderer)
     val HAWKSBILL_TURTLE = EntityRendererRegistry.register(HybridAquaticEntityTypes.HAWKSBILL_TURTLE, ::HawksbillTurtleEntityRenderer)
+    val LOGGERHEAD_TURTLE = EntityRendererRegistry.register(HybridAquaticEntityTypes.LOGGERHEAD_TURTLE, ::LoggerheadTurtleEntityRenderer)
+    val GREEN_TURTLE = EntityRendererRegistry.register(HybridAquaticEntityTypes.GREEN_TURTLE, ::GreenTurtleEntityRenderer)
+    val RIDLEY_TURTLE = EntityRendererRegistry.register(HybridAquaticEntityTypes.RIDLEY_TURTLE, ::RidleyTurtleEntityRenderer)
 
     //endregion
 
@@ -98,6 +100,7 @@ object HybridAquaticEntityRenderers {
     val BARREL_JELLYFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.BARREL_JELLYFISH, ::BarrelJellyfishEntityRenderer)
     val COMPASS_JELLYFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.COMPASS_JELLYFISH, ::CompassJellyfishEntityRenderer)
     val BLUE_JELLYFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.BLUE_JELLYFISH, ::BlueJellyfishEntityRenderer)
+    val MAN_O_WAR = EntityRendererRegistry.register(HybridAquaticEntityTypes.MAN_O_WAR, ::ManOWarEntityRenderer)
     val MAUVE_STINGER = EntityRendererRegistry.register(HybridAquaticEntityTypes.MAUVE_STINGER, ::MauveStingerEntityRenderer)
     val LIONS_MANE_JELLYFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH, ::LionsManeJellyfishEntityRenderer)
     val ATOLLA_JELLYFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.ATOLLA_JELLYFISH, ::AtollaJellyfishEntityRenderer)

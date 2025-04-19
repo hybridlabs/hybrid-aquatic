@@ -2,7 +2,10 @@ package dev.hybridlabs.aquatic.block
 
 import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.block.egg.GreenTurtleEggBlock
 import dev.hybridlabs.aquatic.block.egg.LeatherbackTurtleEggBlock
+import dev.hybridlabs.aquatic.block.egg.LoggerheadTurtleEggBlock
+import dev.hybridlabs.aquatic.block.egg.RidleyTurtleEggBlock
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodTypes
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.*
@@ -64,6 +67,24 @@ object HybridAquaticBlocks {
 
     val LEATHERBACK_TURTLE_EGG = register(
         "leatherback_turtle_egg", LeatherbackTurtleEggBlock(
+            FabricBlockSettings.copyOf(Blocks.TURTLE_EGG)
+        )
+    )
+
+    val LOGGERHEAD_TURTLE_EGG = register(
+        "loggerhead_turtle_egg", LoggerheadTurtleEggBlock(
+            FabricBlockSettings.copyOf(Blocks.TURTLE_EGG)
+        )
+    )
+
+    val GREEN_TURTLE_EGG = register(
+        "green_turtle_egg", GreenTurtleEggBlock(
+            FabricBlockSettings.copyOf(Blocks.TURTLE_EGG)
+        )
+    )
+
+    val RIDLEY_TURTLE_EGG = register(
+        "ridley_turtle_egg", RidleyTurtleEggBlock(
             FabricBlockSettings.copyOf(Blocks.TURTLE_EGG)
         )
     )

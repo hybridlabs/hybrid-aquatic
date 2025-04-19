@@ -11,8 +11,7 @@ import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.shark.*
-import dev.hybridlabs.aquatic.entity.turtle.HawksbillTurtleEntity
-import dev.hybridlabs.aquatic.entity.turtle.LeatherbackTurtleEntity
+import dev.hybridlabs.aquatic.entity.turtle.*
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
@@ -562,6 +561,27 @@ object HybridAquaticEntityTypes {
         HawksbillTurtleEntity.createMobAttributes()
     )
 
+    val LOGGERHEAD_TURTLE = registerTurtle(
+        "loggerhead_turtle",
+        ::LoggerheadTurtleEntity,
+        EntityDimensions.fixed(1.0f, 0.5f),
+        LoggerheadTurtleEntity.createMobAttributes()
+    )
+
+    val GREEN_TURTLE = registerTurtle(
+        "hawksbill_turtle",
+        ::GreenTurtleEntity,
+        EntityDimensions.fixed(1.0f, 0.5f),
+        GreenTurtleEntity.createMobAttributes()
+    )
+
+    val RIDLEY_TURTLE = registerTurtle(
+        "ridley_turtle",
+        ::RidleyTurtleEntity,
+        EntityDimensions.fixed(0.75f, 0.3f),
+        RidleyTurtleEntity.createMobAttributes()
+    )
+
     //jellyfish
     val ATOLLA_JELLYFISH = registerJellyUnderground(
         "atolla_jellyfish",
@@ -607,6 +627,13 @@ object HybridAquaticEntityTypes {
 
     val BLUE_JELLYFISH = registerJelly(
         "blue_jellyfish",
+        ::BlueJellyfishEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        BlueJellyfishEntity.createMobAttributes()
+    )
+
+    val MAN_O_WAR = registerJelly(
+        "man_o_war",
         ::BlueJellyfishEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
         BlueJellyfishEntity.createMobAttributes()

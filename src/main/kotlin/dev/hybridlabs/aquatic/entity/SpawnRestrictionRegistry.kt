@@ -95,6 +95,9 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.LEATHERBACK_TURTLE,
             HybridAquaticEntityTypes.HAWKSBILL_TURTLE,
+            HybridAquaticEntityTypes.LOGGERHEAD_TURTLE,
+            HybridAquaticEntityTypes.GREEN_TURTLE,
+            HybridAquaticEntityTypes.RIDLEY_TURTLE,
         ).forEach { registerTurtle(it) }
 
         // jellies
@@ -104,6 +107,7 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH,
             HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH,
             HybridAquaticEntityTypes.BLUE_JELLYFISH,
+            HybridAquaticEntityTypes.MAN_O_WAR,
             HybridAquaticEntityTypes.COMPASS_JELLYFISH,
             HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH,
             HybridAquaticEntityTypes.NOMURA_JELLYFISH,

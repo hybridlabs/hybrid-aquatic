@@ -88,6 +88,7 @@ class EntitySpawnConfigGenerator {
 
         //#region Jellyfish
         addJelly(HybridAquaticEntityTypes.BARREL_JELLYFISH, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 5, 1, 2)
+        addJelly(HybridAquaticEntityTypes.MAN_O_WAR, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 5, 1, 2)
         addJelly(HybridAquaticEntityTypes.MOON_JELLYFISH, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.SANDY_BEACHES), 5, 3, 5)
         addJelly(HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS), 5, 1, 3)
         addJelly(HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 5, 1, 3)

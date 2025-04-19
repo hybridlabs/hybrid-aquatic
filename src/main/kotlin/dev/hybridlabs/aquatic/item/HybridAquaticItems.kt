@@ -214,6 +214,9 @@ object HybridAquaticItems {
     val TUBE_WORM = registerBlockItem("tube_worm", HybridAquaticBlocks.TUBE_WORM)
     val TUBE_SPONGE = registerBlockItem("tube_sponge", HybridAquaticBlocks.TUBE_SPONGE)
     val LEATHERBACK_TURTLE_EGG = registerBlockItem("leatherback_turtle_egg", HybridAquaticBlocks.LEATHERBACK_TURTLE_EGG)
+    val LOGGERHEAD_TURTLE_EGG = registerBlockItem("loggerhead_turtle_egg", HybridAquaticBlocks.LOGGERHEAD_TURTLE_EGG)
+    val GREEN_TURTLE_EGG = registerBlockItem("green_turtle_egg", HybridAquaticBlocks.GREEN_TURTLE_EGG)
+    val RIDLEY_TURTLE_EGG = registerBlockItem("ridley_turtle_egg", HybridAquaticBlocks.RIDLEY_TURTLE_EGG)
 
             //#region Coral Blocks
 
@@ -1383,6 +1386,9 @@ object HybridAquaticItems {
 
     val LEATHERBACK_TURTLE_SPAWN_EGG = registerSpawnEgg("leatherback_turtle_spawn_egg", HybridAquaticEntityTypes.LEATHERBACK_TURTLE, 0x4c6d98, 0xeff0f4)
     val HAWKSBILL_TURTLE_SPAWN_EGG = registerSpawnEgg("hawksbill_turtle_spawn_egg", HybridAquaticEntityTypes.HAWKSBILL_TURTLE, 0x4c6d98, 0xeff0f4)
+    val LOGGERHEAD_TURTLE_SPAWN_EGG = registerSpawnEgg("loggerhead_turtle_spawn_egg", HybridAquaticEntityTypes.LOGGERHEAD_TURTLE, 0x4c6d98, 0xeff0f4)
+    val GREEN_TURTLE_SPAWN_EGG = registerSpawnEgg("green_turtle_spawn_egg", HybridAquaticEntityTypes.GREEN_TURTLE, 0x4c6d98, 0xeff0f4)
+    val RIDLEY_TURTLE_SPAWN_EGG = registerSpawnEgg("ridley_turtle_spawn_egg", HybridAquaticEntityTypes.RIDLEY_TURTLE, 0x4c6d98, 0xeff0f4)
 
         //#endregion
 
@@ -1390,6 +1396,7 @@ object HybridAquaticItems {
 
     val BARREL_JELLYFISH_SPAWN_EGG = registerSpawnEgg("barrel_jellyfish_spawn_egg", HybridAquaticEntityTypes.BARREL_JELLYFISH, 0xd6f3ea, 0x413c83)
     val BLUE_JELLYFISH_SPAWN_EGG = registerSpawnEgg("blue_jellyfish_spawn_egg", HybridAquaticEntityTypes.BLUE_JELLYFISH, 0x4dc0e8, 0xff6b97)
+    val MAN_O_WAR_SPAWN_EGG = registerSpawnEgg("man_o_war_spawn_egg", HybridAquaticEntityTypes.MAN_O_WAR, 0x4dc0e8, 0xff6b97)
     val CAULIFLOWER_JELLYFISH_SPAWN_EGG = registerSpawnEgg("cauliflower_jellyfish_spawn_egg", HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH, 0x623062, 0x89a1d8)
     val COMPASS_JELLYFISH_SPAWN_EGG = registerSpawnEgg("compass_jellyfish_spawn_egg", HybridAquaticEntityTypes.COMPASS_JELLYFISH, 0xfcf9bd, 0xa16470)
     val FRIED_EGG_JELLYFISH_SPAWN_EGG = registerSpawnEgg("fried_egg_jellyfish_spawn_egg", HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH, 0xfbbf2d, 0x76445f)
