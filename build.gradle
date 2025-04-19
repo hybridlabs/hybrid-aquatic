@@ -15,6 +15,11 @@ base {
 
 repositories {
     maven {
+        name = "KotlinX"
+        url = "https://maven.pkg.jetbrains.space/public/p/kotlinx/maven"
+    }
+
+    maven {
         name = "Terraformers"
         url  = "https://maven.terraformersmc.com/releases/"
     }
