@@ -66,7 +66,7 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: World) :
         goalSelector.add(1, MeleeAttackGoal(this, 1.5, false))
         targetSelector.add(3, RevengeGoal(this).setGroupRevenge())
         targetSelector.add(3, UniversalAngerGoal(this, true))
-        targetSelector.add(1, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, false) { this.shouldAngerAt(it) })
+        targetSelector.add(1, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { this.shouldAngerAt(it) })
         targetSelector.add(2, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasStatusEffect(HybridAquaticStatusEffects.BLEEDING) && it !is PiranhaEntity })
     }
 
