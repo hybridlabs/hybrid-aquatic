@@ -57,6 +57,7 @@ open class HybridAquaticFishEntity(
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(0, MoveIntoWaterGoal(this))
+        goalSelector.add(0, EscapeDangerGoal(this, 1.25))
         goalSelector.add(1, SwimAroundGoal(this, 1.0, 10))
         goalSelector.add(1, LookAroundGoal(this))
         goalSelector.add(2, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
