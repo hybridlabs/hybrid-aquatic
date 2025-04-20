@@ -137,20 +137,23 @@ object SpawnRestrictionRegistry {
 
         // crustaceans
         setOf(
-            HybridAquaticEntityTypes.DUNGENESS_CRAB,
             HybridAquaticEntityTypes.FIDDLER_CRAB,
             HybridAquaticEntityTypes.HERMIT_CRAB,
             HybridAquaticEntityTypes.GHOST_CRAB,
-            HybridAquaticEntityTypes.FLOWER_CRAB,
             HybridAquaticEntityTypes.VAMPIRE_CRAB,
             HybridAquaticEntityTypes.LIGHTFOOT_CRAB,
-            HybridAquaticEntityTypes.HORSESHOE_CRAB,
             HybridAquaticEntityTypes.COCONUT_CRAB,
+        ).forEach { registerTerrestrialCrustacean(it) }
+
+        setOf(
+            HybridAquaticEntityTypes.DUNGENESS_CRAB,
+            HybridAquaticEntityTypes.FLOWER_CRAB,
+            HybridAquaticEntityTypes.HORSESHOE_CRAB,
             HybridAquaticEntityTypes.DECORATOR_CRAB,
             HybridAquaticEntityTypes.SHRIMP,
             HybridAquaticEntityTypes.CRAYFISH,
             HybridAquaticEntityTypes.LOBSTER,
-        ).forEach { registerCrustacean(it) }
+        ).forEach { registerAquaticCrustacean(it) }
 
         setOf(
             HybridAquaticEntityTypes.YETI_CRAB,
@@ -195,8 +198,12 @@ object SpawnRestrictionRegistry {
         registerWaterCreature(entityType, HybridAquaticJellyfishEntity::canUndergroundSpawn)
     }
 
-    private fun <T : WaterCreatureEntity> registerCrustacean(entityType: EntityType<T>) {
-        registerLandWaterCreature(entityType, HybridAquaticCrustaceanEntity::canSpawn)
+    private fun <T : WaterCreatureEntity> registerTerrestrialCrustacean(entityType: EntityType<T>) {
+        registerLandWaterCreature(entityType, HybridAquaticCrustaceanEntity::canSurfaceSpawn)
+    }
+
+    private fun <T : WaterCreatureEntity> registerAquaticCrustacean(entityType: EntityType<T>) {
+        registerLandWaterCreature(entityType, HybridAquaticCrustaceanEntity::canWaterSpawn)
     }
 
     private fun <T : WaterCreatureEntity> registerCrustaceanUnderground(entityType: EntityType<T>) {
