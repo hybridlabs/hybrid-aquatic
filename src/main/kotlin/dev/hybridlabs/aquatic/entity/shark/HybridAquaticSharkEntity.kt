@@ -67,26 +67,21 @@ open class HybridAquaticSharkEntity(
     init {
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
         setPathfindingPenalty(PathNodeType.WALKABLE, 10.0f)
-        moveControl = AquaticMoveControl(this, 75, 5, movementSpeed, 0.1F, true)
-        lookControl = YawAdjustingLookControl(this, 5)
+        moveControl = AquaticMoveControl(this, 85, 10, movementSpeed, 0.1F, true)
+        lookControl = YawAdjustingLookControl(this, 10)
         navigation = SwimNavigation(this, world)
     }
 
     override fun initGoals() {
         super.initGoals()
+        goalSelector.add(0, MoveIntoWaterGoal(this))
         goalSelector.add(4, SwimAroundGoal(this, 1.0, 2))
         goalSelector.add(4, LookAroundGoal(this))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(1, SharkAttackGoal(this))
-        targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { entity: LivingEntity ->
-            shouldAngerAt(entity) || shouldProximityAttack(entity as PlayerEntity) && !isPassive
-        })
-        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) {
-            it.hasStatusEffect(HybridAquaticStatusEffects.BLEEDING) && it !is HybridAquaticSharkEntity && !isPassive
-        })
-        targetSelector.add(3, ActiveTargetGoal(
-            this, LivingEntity::class.java, 10, true, true
-        ) { entity: LivingEntity -> prey.any { preyType -> entity.type.isIn(preyType) } && hunger < MAX_HUNGER / 4 })
+        targetSelector.add(1, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { entity: LivingEntity -> shouldAngerAt(entity) || shouldProximityAttack(entity as PlayerEntity) && !isPassive })
+        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasStatusEffect(HybridAquaticStatusEffects.BLEEDING) && it !is HybridAquaticSharkEntity && !isPassive })
+        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.isIn(preyType) } && hunger < MAX_HUNGER / 4 })
     }
 
     override fun initialize(
@@ -121,16 +116,7 @@ open class HybridAquaticSharkEntity(
 
         if (!this.isSubmergedInWater && this.isOnGround) {
             this.pitch = 0.0f
-        }
-
-        isSprinting = isAttacking
-
-        val originalSpeed = movementSpeed
-
-        movementSpeed = if (isAttacking) {
-            originalSpeed * 2
-        } else {
-            originalSpeed
+            this.yaw = 0.0f
         }
 
         if (hunger > 0) hunger -= 1
