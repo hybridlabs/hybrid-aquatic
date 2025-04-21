@@ -4,7 +4,6 @@ import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity.VariantCollisionRules.ExclusionStatus.EXCLUSIVE
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity.VariantCollisionRules.ExclusionStatus.INCLUSIVE
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
-import net.minecraft.block.Blocks
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
@@ -17,11 +16,9 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.GuardianEntity
-import net.minecraft.entity.mob.HostileEntity.isSpawnDark
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -41,7 +38,7 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 
-@Suppress("LeakingThis", "UNUSED_PARAMETER")
+@Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
 open class HybridAquaticFishEntity(
     type: EntityType<out HybridAquaticFishEntity>,
     world: World,
@@ -381,7 +378,21 @@ open class HybridAquaticFishEntity(
         const val VARIANT_DATA_KEY = "VariantData"
         const val FISH_SIZE_KEY = "FishSize"
 
-        @Suppress("UNUSED_PARAMETER", "DEPRECATION")
+        fun canShallowSpawn(
+            type: EntityType<out WaterCreatureEntity>,
+            world: ServerWorldAccess,
+            reason: SpawnReason,
+            pos: BlockPos,
+            random: Random
+        ): Boolean {
+            val topY = world.seaLevel - 1
+            val bottomY = world.seaLevel - 8
+
+            return pos.y in bottomY..topY &&
+                    world.isWater(pos) &&
+                    world.isSkyVisibleAllowingSea(pos)
+        }
+
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
@@ -389,33 +400,26 @@ open class HybridAquaticFishEntity(
             pos: BlockPos,
             random: Random
         ): Boolean {
-            val topY = world.seaLevel - 4
+            val topY = world.seaLevel - 12
             val bottomY = world.seaLevel - 24
 
             return pos.y in bottomY..topY &&
-                    world.getFluidState(pos).isIn(FluidTags.WATER) &&
-                    world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&
-                    world.getBlockState(pos.up()).isOf(Blocks.WATER) &&
-                    world.isSkyVisibleAllowingSea(pos) &&
-                    !isSpawnDark(world, pos, random)
+                    world.isWater(pos) &&
+                    world.isSkyVisibleAllowingSea(pos)
         }
 
-        @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-        fun canUndergroundSpawn(
+        fun canDeepSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
             reason: SpawnReason,
             pos: BlockPos,
             random: Random
         ): Boolean {
-            val topY = world.seaLevel - 24
+            val topY = world.seaLevel - 28
             val bottomY = world.seaLevel - 128
 
             return pos.y in bottomY..topY &&
-                    world.getFluidState(pos).isIn(FluidTags.WATER) &&
-                    world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&
-                    world.getBlockState(pos.up()).isOf(Blocks.WATER) &&
-                    isSpawnDark(world, pos, random)
+                    world.isWater(pos)
         }
 
         fun getScaleAdjustment(fish: HybridAquaticFishEntity, adjustment: Float): Float {

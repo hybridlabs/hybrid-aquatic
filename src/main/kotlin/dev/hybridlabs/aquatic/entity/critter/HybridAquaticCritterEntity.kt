@@ -17,7 +17,6 @@ import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -288,7 +287,7 @@ open class HybridAquaticCritterEntity(
 
             return pos.y in bottomY..topY &&
                     world.getBlockState(pos.down()).isSolid &&
-                    world.getFluidState(pos).isIn(FluidTags.WATER)
+                    world.isWater(pos)
         }
 
         fun getScaleAdjustment(critter: HybridAquaticCritterEntity, adjustment: Float): Float {

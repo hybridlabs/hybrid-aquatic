@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.entity.shark
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.minecraft.block.Blocks
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
@@ -23,7 +22,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.predicate.entity.EntityPredicates
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -433,6 +431,21 @@ open class HybridAquaticSharkEntity(
 
         val BEACHED: RawAnimation = RawAnimation.begin().thenPlay("misc.beached")
 
+        fun canShallowSpawn(
+            type: EntityType<out WaterCreatureEntity>,
+            world: ServerWorldAccess,
+            reason: SpawnReason,
+            pos: BlockPos,
+            random: Random
+        ): Boolean {
+            val topY = world.seaLevel - 1
+            val bottomY = world.seaLevel - 4
+
+            return pos.y in bottomY..topY &&
+                    world.isWater(pos) &&
+                    world.isSkyVisibleAllowingSea(pos)
+        }
+
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
@@ -440,30 +453,27 @@ open class HybridAquaticSharkEntity(
             pos: BlockPos,
             random: Random
         ): Boolean {
-            val topY = world.seaLevel - 4
+            val topY = world.seaLevel - 8
             val bottomY = world.seaLevel - 24
 
-            return pos.y in bottomY..topY && world.getFluidState(pos)
-                .isIn(FluidTags.WATER) && world.getFluidState(pos.down()).isIn(FluidTags.WATER) && world.getBlockState(
-                pos.up()
-            ).isOf(Blocks.WATER) && world.isSkyVisibleAllowingSea(pos) && !isSpawnDark(world, pos, random)
+            return pos.y in bottomY..topY &&
+                    world.isWater(pos)
         }
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-        fun canUndergroundSpawn(
+        fun canDeepSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
             reason: SpawnReason,
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            val topY = world.seaLevel - 24
+            val topY = world.seaLevel - 28
             val bottomY = world.seaLevel - 128
 
-            return pos.y in bottomY..topY && world.getFluidState(pos)
-                .isIn(FluidTags.WATER) && world.getFluidState(pos.down()).isIn(FluidTags.WATER) && world.getBlockState(
-                pos.up()
-            ).isOf(Blocks.WATER) && isSpawnDark(world, pos, random)
+            return pos.y in bottomY..topY &&
+                    world.isWater(pos) &&
+                    isSpawnDark(world, pos, random)
         }
 
         fun getScaleAdjustment(shark: HybridAquaticSharkEntity, adjustment: Float): Float {

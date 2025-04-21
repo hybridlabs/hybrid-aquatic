@@ -18,7 +18,6 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.entity.mob.HostileEntity.isSpawnDark
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
@@ -370,8 +369,7 @@ open class HybridAquaticCrustaceanEntity(
 
             return pos.y <= topY &&
                     world.getBlockState(pos.down()).isSolid &&
-                    world.isAir(pos) &&
-                    !isSpawnDark(world, pos, random)
+                    world.isAir(pos)
         }
 
         fun canWaterSpawn(
@@ -385,11 +383,10 @@ open class HybridAquaticCrustaceanEntity(
 
             return pos.y >= bottomY &&
                     world.getBlockState(pos.down()).isSolid &&
-                    (world.isWater(pos)) &&
-                    !isSpawnDark(world, pos, random)
+                    world.isWater(pos)
         }
 
-        fun canUndergroundSpawn(
+        fun canDeepSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
             reason: SpawnReason,
@@ -401,8 +398,7 @@ open class HybridAquaticCrustaceanEntity(
 
             return pos.y in bottomY..topY &&
                     world.getBlockState(pos.down()).isSolid &&
-                    world.getBlockState(pos).isOf(Blocks.WATER) &&
-                    isSpawnDark(world, pos, random)
+                    world.isWater(pos)
         }
 
         fun getScaleAdjustment(crustacean: HybridAquaticCrustaceanEntity, adjustment: Float): Float {
