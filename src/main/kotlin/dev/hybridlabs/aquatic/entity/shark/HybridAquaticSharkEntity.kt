@@ -438,8 +438,8 @@ open class HybridAquaticSharkEntity(
             pos: BlockPos,
             random: Random
         ): Boolean {
-            val topY = world.seaLevel - 1
-            val bottomY = world.seaLevel - 4
+            val topY = world.seaLevel - 2
+            val bottomY = world.seaLevel - 6
 
             return pos.y in bottomY..topY &&
                     world.isWater(pos) &&
