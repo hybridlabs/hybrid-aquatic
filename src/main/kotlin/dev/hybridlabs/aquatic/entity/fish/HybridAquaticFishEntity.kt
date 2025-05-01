@@ -359,9 +359,8 @@ open class HybridAquaticFishEntity(
             return !fish.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
+        override fun attack(target: LivingEntity) {
+            if (canAttack(target) && !target.isBlocking) {
                 resetCooldown()
                 mob.tryAttack(target)
                 fish.isSprinting = true

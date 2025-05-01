@@ -343,9 +343,8 @@ open class HybridAquaticSharkEntity(
             return !shark.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.cooldown <= 0 && !target.isBlocking) {
+        override fun attack(target: LivingEntity) {
+            if (canAttack(target) && !target.isBlocking) {
                 resetCooldown()
                 shark.swingHand(Hand.MAIN_HAND)
                 shark.tryAttack(target)
@@ -359,10 +358,6 @@ open class HybridAquaticSharkEntity(
                     shark.dropStack(ItemStack(HybridAquaticItems.SHARK_TOOTH))
                 }
             }
-        }
-
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (shark.width * 2.5 + entity.width)
         }
 
         override fun start() {
