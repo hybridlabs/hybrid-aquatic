@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.ai.goal.ChaseBoatGoal
 import net.minecraft.entity.ai.goal.RevengeGoal
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -23,6 +24,7 @@ class BullSharkEntity(entityType: EntityType<out BullSharkEntity>, world: World)
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(1, RevengeGoal(this))
+        goalSelector.add(8, ChaseBoatGoal(this))
     }
 
     companion object {

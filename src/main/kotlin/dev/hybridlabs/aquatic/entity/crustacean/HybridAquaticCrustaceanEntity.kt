@@ -9,8 +9,7 @@ import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.EscapeDangerGoal
-import net.minecraft.entity.ai.goal.WanderAroundGoal
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.ai.pathing.PathNodeType
@@ -19,8 +18,8 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.entity.mob.HostileEntity.isSpawnDark
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvent
@@ -50,7 +49,7 @@ open class HybridAquaticCrustaceanEntity(
     open val canDance: Boolean,
     private val variants: Map<String, CrustaceanVariant> = mutableMapOf(),
     open val assumeDefault: Boolean = false,
-    open val collisionRules: List<HybridAquaticFishEntity.VariantCollisionRules> = listOf(),
+    open val collisionRules: List<VariantCollisionRules> = listOf(),
 ) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false
@@ -101,7 +100,10 @@ open class HybridAquaticCrustaceanEntity(
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(1, EscapeDangerGoal(this, 1.0))
+        goalSelector.add(5, LookAroundGoal(this))
+        goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(3, WanderAroundGoal(this, 0.4))
+        goalSelector.add(3, WanderAroundFarGoal(this, 0.3))
     }
 
     override fun initialize(
@@ -126,8 +128,8 @@ open class HybridAquaticCrustaceanEntity(
                 } else if (collisionRules.isNotEmpty()) {
                     for (rule in collisionRules) {
                         val variantSet = rule.variants.toSet()
-                        if ((rule.exclusionStatus == HybridAquaticFishEntity.VariantCollisionRules.ExclusionStatus.EXCLUSIVE && validKeys.toSet() == variantSet) ||
-                            (rule.exclusionStatus == HybridAquaticFishEntity.VariantCollisionRules.ExclusionStatus.INCLUSIVE && validKeys.containsAll(
+                        if ((rule.exclusionStatus == VariantCollisionRules.ExclusionStatus.EXCLUSIVE && validKeys.toSet() == variantSet) ||
+                            (rule.exclusionStatus == VariantCollisionRules.ExclusionStatus.INCLUSIVE && validKeys.containsAll(
                                 variantSet
                             ))
                         ) {
@@ -356,23 +358,35 @@ open class HybridAquaticCrustaceanEntity(
         val DANCE: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
         val HIDE: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
 
-        fun canSpawn(
+        fun canSurfaceSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
             reason: SpawnReason,
             pos: BlockPos,
             random: Random
         ): Boolean {
-            val topY = world.seaLevel + 5
-            val bottomY = world.seaLevel - 24
+            val topY = world.seaLevel + 8
 
-            return pos.y in bottomY..topY &&
+            return pos.y <= topY &&
                     world.getBlockState(pos.down()).isSolid &&
-                    (world.isWater(pos) || world.isAir(pos)) &&
-                    !isSpawnDark(world, pos, random)
+                    world.isAir(pos)
         }
 
-        fun canUndergroundSpawn(
+        fun canWaterSpawn(
+            type: EntityType<out WaterCreatureEntity>,
+            world: ServerWorldAccess,
+            reason: SpawnReason,
+            pos: BlockPos,
+            random: Random
+        ): Boolean {
+            val bottomY = world.seaLevel - 24
+
+            return pos.y >= bottomY &&
+                    world.getBlockState(pos.down()).isSolid &&
+                    world.isWater(pos)
+        }
+
+        fun canDeepSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
             reason: SpawnReason,
@@ -384,8 +398,7 @@ open class HybridAquaticCrustaceanEntity(
 
             return pos.y in bottomY..topY &&
                     world.getBlockState(pos.down()).isSolid &&
-                    world.getBlockState(pos).isOf(Blocks.WATER) &&
-                    isSpawnDark(world, pos, random)
+                    world.isWater(pos)
         }
 
         fun getScaleAdjustment(crustacean: HybridAquaticCrustaceanEntity, adjustment: Float): Float {

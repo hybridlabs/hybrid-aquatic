@@ -105,18 +105,6 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
         this.usedPlayer = playerEntity;
     }
 
-    // Damages lure
-    @Inject(
-            method = "use",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/loot/context/LootContextParameterSet$Builder;build(Lnet/minecraft/loot/context/LootContextType;)Lnet/minecraft/loot/context/LootContextParameterSet;"
-            )
-    )
-    private void lureDamage(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
-        lureItemStack.damage(1, usedPlayer, (test) -> this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f));
-    }
-
     // Increases chance of getting treasure item with magnetic hook
     @ModifyArg(
             method = "use",
@@ -158,6 +146,9 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
                 
                 instance = LootTable.EMPTY;
             }
+            
+            // Damage lure AFTER we catch anything with it
+            lureItemStack.damage(1, usedPlayer, (player) -> this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f));
         }
         
         return instance;

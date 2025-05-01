@@ -1,9 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
-import net.minecraft.block.Blocks
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
@@ -25,7 +23,6 @@ import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
@@ -423,15 +420,13 @@ open class HybridAquaticCephalopodEntity(
             val bottomY = world.seaLevel - 24
 
             return pos.y in bottomY..topY &&
-                    world.getFluidState(pos).isIn(FluidTags.WATER) &&
-                    world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&
-                    world.getBlockState(pos.up()).isOf(Blocks.WATER) &&
+                    world.isWater(pos) &&
                     world.isSkyVisibleAllowingSea(pos) &&
                     !isSpawnDark(world, pos, random)
         }
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-        fun canUndergroundSpawn(
+        fun canDeepSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
             reason: SpawnReason,
@@ -442,9 +437,7 @@ open class HybridAquaticCephalopodEntity(
             val bottomY = world.seaLevel - 128
 
             return pos.y in bottomY..topY &&
-                    world.getFluidState(pos).isIn(FluidTags.WATER) &&
-                    world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&
-                    world.getBlockState(pos.up()).isOf(Blocks.WATER) &&
+                    world.isWater(pos) &&
                     isSpawnDark(world, pos, random)
         }
 

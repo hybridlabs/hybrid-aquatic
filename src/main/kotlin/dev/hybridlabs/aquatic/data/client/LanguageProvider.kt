@@ -95,7 +95,11 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         mapOf(
+            "profile.item.hybrid-aquatic.coelacanth" to "The Coelacanth, a rare, ancient fish thought to be extinct until its rediscovery, known for its lobed pectoral fins and living fossil status, providing a link to early tetrapods.",
+            "profile.item.hybrid-aquatic.opah" to "The Opah, large, colorful, deep-bodied fish known for its warm-blooded circulatory system, which is rare among fish, allowing it to maintain body temperature in cold waters.",
             "profile.item.hybrid-aquatic.anglerfish" to "The Anglerfish, a deep sea predator known for its bioluminescent lure, which it uses to attract prey in the dark ocean depths.",
+            "profile.item.hybrid-aquatic.parrotfish" to "The Parrotfish, a colorful reef fish with a beak-like mouth, used to scrape algae from coral, contributing to the health of coral reefs.",
+            "profile.item.hybrid-aquatic.seahorse" to "The Seahorse, a small, upright-swimming fish with a prehensile tail, known for its unique appearance and male pregnancy, where males carry the young in a specialized pouch.",
             "profile.item.hybrid-aquatic.barreleye" to "The Barreleye, a deep-sea fish known for its transparent head and tubular eyes, which allow it to look upward to detect prey and predators above.",
             "profile.item.hybrid-aquatic.boxfish" to "The Boxfish, a small, square-shaped fish with a rigid, box-like body, known for its ability to release toxins when stressed.",
             "profile.item.hybrid-aquatic.betta" to "The Betta, also known as the Siamese fighting fish, is a colorful, territorial freshwater fish known for its vibrant fins and aggressive behavior towards other males.",
@@ -110,9 +114,12 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "profile.item.hybrid-aquatic.gourami" to "The Gourami, a diverse group of freshwater fish, recognized for their labyrinth organ allowing them to breathe air and their peaceful nature in community tanks.",
             "profile.item.hybrid-aquatic.mackerel" to "The Mackerel, a fast-swimming, pelagic fish with streamlined bodies, valued for its role in the food chain and commercial fishing.",
             "profile.item.hybrid-aquatic.moray_eel" to "The Moray Eel, a long, slender predator with a snake-like body and sharp teeth, known for hiding in crevices in reefs and ambushing prey.",
+            "profile.item.hybrid-aquatic.needlefish" to "The Needlefish, a slender, elongated fish with a pointed beak filled with sharp teeth, often found near the surface in tropical and subtropical waters.",
+            "profile.item.hybrid-aquatic.flashlight_fish" to "The Flashlight Fish, a small, deep-sea fish with bioluminescent organs near its eyes, used to attract prey and communicate in dark waters.",
             "profile.item.hybrid-aquatic.oscar" to "The Oscar, a large, aggressive freshwater cichlid fish, popular in aquariums for its intelligence and striking patterns.",
             "profile.item.hybrid-aquatic.pearlfish" to "The Pearlfish, a slender fish that often lives symbiotically within the body cavities of sea cucumbers, known for its unusual habitat choice.",
             "profile.item.hybrid-aquatic.piranha" to "The Piranha, a notorious freshwater fish known for its sharp teeth and powerful bite, often exaggerated for its feeding frenzy behavior.",
+            "profile.item.hybrid-aquatic.john_dory" to "The John Dory, a deep-bodied, laterally compressed fish with a distinctive dark spot on its side, known for its unique body shape and fine texture.",
             "profile.item.hybrid-aquatic.rockfish" to "The Rockfish, a long-lived marine fish with venomous spines, known for its camouflage abilities and preference for rocky sea floors.",
             "profile.item.hybrid-aquatic.sea_bass" to "The Sea Bass, a popular game and commercial fish, recognized for its firm texture and mild flavor, often found in coastal waters.",
             "profile.item.hybrid-aquatic.snailfish" to "The Snailfish, a soft-bodied, deep-sea fish adapted to extreme pressures, often found clinging to rocks or ice with its pelvic fins.",
@@ -127,6 +134,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "profile.item.hybrid-aquatic.surgeonfish_orangeshoulder" to "The Orange Shoulder Surgeonfish, a tropical reef fish known for the distinctive orange patch on its side and its role in grazing on algae to maintain coral reef ecosystems.",
             "profile.item.hybrid-aquatic.surgeonfish_sohal" to "The Sohal Surgeonfish, a striking fish with bold, horizontal blue and white stripes and a sharp spine, commonly found in the Red Sea and the Arabian Gulf.",
             "profile.item.hybrid-aquatic.unicornfish" to "The Unicornfish, a tropical fish named for the horn-like projection on its forehead, known for its elongated body and ability to adapt to various reef environments.",
+            "profile.item.hybrid-aquatic.flying_fish" to "The Flying Fish, a fish known for its ability to glide above the water's surface using elongated pectoral fins, helping it escape predators.",
             "profile.item.hybrid-aquatic.yellow_tang" to "The Yellow Tang, a bright yellow reef fish popular in aquariums, known for its grazing on algae and playing a role in maintaining reef health.",
             "profile.item.hybrid-aquatic.neon_tetra" to "The Neon Tetra, a small, brightly colored freshwater fish known for its iridescent blue and red stripes, making it a popular choice for home aquariums.",
             "profile.item.hybrid-aquatic.tiger_barb" to "The Tiger Barb, a lively, freshwater fish recognized by its bold black stripes over an orange-gold body, often kept in groups in community tanks.",
@@ -134,6 +142,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "profile.item.hybrid-aquatic.triggerfish" to "The Triggerfish, a brightly colored, reef-dwelling fish known for its strong jaws, sharp teeth, and the ability to lock its dorsal fin in an upright position for defense.",
             "profile.item.hybrid-aquatic.yellowfin_tuna" to "The Yellowfin Tuna, a fast-swimming, large, pelagic fish with a streamlined body and yellow-colored fins, highly valued in commercial and sport fishing.",
             "profile.item.hybrid-aquatic.bluefin_tuna" to "The Bluefin Tuna, a large, powerful tuna species known for its high-speed swimming and prized status in sushi cuisine, often subject to conservation efforts due to overfishing.",
+            "profile.item.hybrid-aquatic.mahi" to "The Mahi, a colorful, fast-swimming fish with a bright green-blue body and a blunt head, valued for its firm, flavorful flesh.",
+            "profile.item.hybrid-aquatic.oarfish" to "The Oarfish, a long, slender deep-sea fish known for its ribbon-like body and considered the world's longest bony fish, often associated with sea serpent myths.",
 
         ).forEach { (key, profile) ->
             builder.add(key, profile)
@@ -289,6 +299,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.SURGEONFISH_ORANGESHOULDER to "Orangeshoulder Surgeonfish",
             HybridAquaticItems.SURGEONFISH_LINED to "Lined Surgeonfish",
             HybridAquaticItems.CLOWNFISH to "Clownfish",
+            HybridAquaticItems.JOHN_DORY to "John Dory",
             HybridAquaticItems.UNICORNFISH to "Unicornfish",
             HybridAquaticItems.TIGER_BARB to "Tiger Barb",
             HybridAquaticItems.OSCAR to "Oscar",
