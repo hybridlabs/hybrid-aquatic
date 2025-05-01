@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
-import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.data.DataTracker
@@ -9,7 +8,6 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.HostileEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
@@ -85,8 +83,7 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, 
             val bottomY = world.seaLevel - 24
 
             return pos.y in bottomY..topY &&
-                    world.getFluidState(pos.down()).isIn(FluidTags.WATER) &&
-                    world.getBlockState(pos.up()).isOf(Blocks.WATER)
+                    world.isWater(pos)
         }
     }
 }
