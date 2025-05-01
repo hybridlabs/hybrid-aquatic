@@ -3,21 +3,10 @@ package dev.hybridlabs.aquatic.entity.shark
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.minecraft.block.Blocks
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityPose
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
-import net.minecraft.entity.ai.goal.ActiveTargetGoal
-import net.minecraft.entity.ai.goal.LookAroundGoal
-import net.minecraft.entity.ai.goal.LookAtEntityGoal
-import net.minecraft.entity.ai.goal.MeleeAttackGoal
-import net.minecraft.entity.ai.goal.SwimAroundGoal
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.damage.DamageSource
@@ -33,7 +22,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.predicate.entity.EntityPredicates
-import net.minecraft.registry.tag.FluidTags
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -55,7 +43,7 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.UUID
+import java.util.*
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticSharkEntity(
@@ -79,26 +67,21 @@ open class HybridAquaticSharkEntity(
     init {
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
         setPathfindingPenalty(PathNodeType.WALKABLE, 10.0f)
-        moveControl = AquaticMoveControl(this, 75, 5, movementSpeed, 0.1F, true)
-        lookControl = YawAdjustingLookControl(this, 5)
+        moveControl = AquaticMoveControl(this, 85, 10, movementSpeed, 0.1F, true)
+        lookControl = YawAdjustingLookControl(this, 10)
         navigation = SwimNavigation(this, world)
     }
 
     override fun initGoals() {
         super.initGoals()
+        goalSelector.add(0, MoveIntoWaterGoal(this))
         goalSelector.add(4, SwimAroundGoal(this, 1.0, 2))
         goalSelector.add(4, LookAroundGoal(this))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(1, SharkAttackGoal(this))
-        targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { entity: LivingEntity ->
-            shouldAngerAt(entity) || shouldProximityAttack(entity as PlayerEntity) && !isPassive
-        })
-        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) {
-            it.hasStatusEffect(HybridAquaticStatusEffects.BLEEDING) && it !is HybridAquaticSharkEntity && !isPassive
-        })
-        targetSelector.add(3, ActiveTargetGoal(
-            this, LivingEntity::class.java, 10, true, true
-        ) { entity: LivingEntity -> prey.any { preyType -> entity.type.isIn(preyType) } && hunger < MAX_HUNGER / 4 })
+        targetSelector.add(1, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { entity: LivingEntity -> shouldAngerAt(entity) || shouldProximityAttack(entity as PlayerEntity) && !isPassive })
+        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasStatusEffect(HybridAquaticStatusEffects.BLEEDING) && it !is HybridAquaticSharkEntity && !isPassive })
+        targetSelector.add(1, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.isIn(preyType) } && hunger < MAX_HUNGER / 4 })
     }
 
     override fun initialize(
@@ -133,16 +116,7 @@ open class HybridAquaticSharkEntity(
 
         if (!this.isSubmergedInWater && this.isOnGround) {
             this.pitch = 0.0f
-        }
-
-        isSprinting = isAttacking
-
-        val originalSpeed = movementSpeed
-
-        movementSpeed = if (isAttacking) {
-            originalSpeed * 2
-        } else {
-            originalSpeed
+            this.yaw = 0.0f
         }
 
         if (hunger > 0) hunger -= 1
@@ -369,8 +343,9 @@ open class HybridAquaticSharkEntity(
             return !shark.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity) {
-            if (canAttack(target) && !target.isBlocking) {
+        override fun attack(target: LivingEntity, squaredDistance: Double) {
+            val d = getSquaredMaxAttackDistance(target)
+            if (squaredDistance <= d && this.cooldown <= 0 && !target.isBlocking) {
                 resetCooldown()
                 shark.swingHand(Hand.MAIN_HAND)
                 shark.tryAttack(target)
@@ -384,6 +359,10 @@ open class HybridAquaticSharkEntity(
                     shark.dropStack(ItemStack(HybridAquaticItems.SHARK_TOOTH))
                 }
             }
+        }
+
+        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
+            return (shark.width * 2.5 + entity.width)
         }
 
         override fun start() {
@@ -438,6 +417,21 @@ open class HybridAquaticSharkEntity(
 
         val BEACHED: RawAnimation = RawAnimation.begin().thenPlay("misc.beached")
 
+        fun canShallowSpawn(
+            type: EntityType<out WaterCreatureEntity>,
+            world: ServerWorldAccess,
+            reason: SpawnReason,
+            pos: BlockPos,
+            random: Random
+        ): Boolean {
+            val topY = world.seaLevel - 2
+            val bottomY = world.seaLevel - 6
+
+            return pos.y in bottomY..topY &&
+                    world.isWater(pos) &&
+                    world.isSkyVisibleAllowingSea(pos)
+        }
+
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
@@ -445,30 +439,27 @@ open class HybridAquaticSharkEntity(
             pos: BlockPos,
             random: Random
         ): Boolean {
-            val topY = world.seaLevel - 4
+            val topY = world.seaLevel - 8
             val bottomY = world.seaLevel - 24
 
-            return pos.y in bottomY..topY && world.getFluidState(pos)
-                .isIn(FluidTags.WATER) && world.getFluidState(pos.down()).isIn(FluidTags.WATER) && world.getBlockState(
-                pos.up()
-            ).isOf(Blocks.WATER) && world.isSkyVisibleAllowingSea(pos) && !isSpawnDark(world, pos, random)
+            return pos.y in bottomY..topY &&
+                    world.isWater(pos)
         }
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-        fun canUndergroundSpawn(
+        fun canDeepSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
             reason: SpawnReason,
             pos: BlockPos,
             random: Random?
         ): Boolean {
-            val topY = world.seaLevel - 24
+            val topY = world.seaLevel - 28
             val bottomY = world.seaLevel - 128
 
-            return pos.y in bottomY..topY && world.getFluidState(pos)
-                .isIn(FluidTags.WATER) && world.getFluidState(pos.down()).isIn(FluidTags.WATER) && world.getBlockState(
-                pos.up()
-            ).isOf(Blocks.WATER) && isSpawnDark(world, pos, random)
+            return pos.y in bottomY..topY &&
+                    world.isWater(pos) &&
+                    isSpawnDark(world, pos, random)
         }
 
         fun getScaleAdjustment(shark: HybridAquaticSharkEntity, adjustment: Float): Float {
