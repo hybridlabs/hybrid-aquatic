@@ -13,6 +13,7 @@ import net.minecraft.entity.SpawnRestriction.SpawnPredicate
 import net.minecraft.entity.mob.HostileEntity
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.world.Heightmap
 
 /**
