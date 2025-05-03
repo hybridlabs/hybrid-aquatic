@@ -57,6 +57,7 @@ repositories {
 
 fabricApi {
     configureDataGeneration {
+        setModId("$mod_id")
         outputDirectory = file("src/generated/resources")
     }
 }
