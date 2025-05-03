@@ -247,6 +247,35 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         }
 
         listOf(
+            HybridAquaticItems.COOKED_CRAB,
+            HybridAquaticItems.COOKED_SHRIMP,
+            HybridAquaticItems.COOKED_LOBSTER,
+            HybridAquaticItems.COOKED_CRAYFISH,
+            HybridAquaticItems.COOKED_LOBSTER_TAIL,
+            HybridAquaticItems.RAW_CRAB,
+            HybridAquaticItems.RAW_SHRIMP,
+            HybridAquaticItems.RAW_LOBSTER,
+            HybridAquaticItems.RAW_CRAYFISH,
+            HybridAquaticItems.RAW_LOBSTER_TAIL,
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridAquaticItemTags.CRUSTACEAN_MEAT).add(item)
+        }
+
+        listOf(
+            HybridAquaticItems.BLUEFIN_TUNA,
+            HybridAquaticItems.YELLOWFIN_TUNA,
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridAquaticItemTags.TUNA).add(item)
+        }
+
+        listOf(
+            HybridAquaticItems.BLUE_SPOTTED_STINGRAY,
+            HybridAquaticItems.SPOTTED_EAGLE_RAY,
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridAquaticItemTags.RAY).add(item)
+        }
+
+        listOf(
             HybridAquaticItems.LIONFISH,
             HybridAquaticItems.STONEFISH,
             HybridAquaticItems.TOADFISH,
