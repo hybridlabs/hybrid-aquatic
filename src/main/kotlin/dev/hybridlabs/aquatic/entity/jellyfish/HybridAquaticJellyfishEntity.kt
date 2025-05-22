@@ -348,7 +348,7 @@ open class HybridAquaticJellyfishEntity(
                     world.isSkyVisibleAllowingSea(pos)
         }
 
-        fun canDeepSpawb(
+        fun canDeepSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
             reason: SpawnReason,
