@@ -211,7 +211,7 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : WaterCreatureEntity> registerDeepJelly(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticJellyfishEntity::canDeepSpawb)
+        registerWaterCreature(entityType, HybridAquaticJellyfishEntity::canDeepSpawn)
     }
 
     private fun <T : WaterCreatureEntity> registerTerrestrialCrustacean(entityType: EntityType<T>) {
