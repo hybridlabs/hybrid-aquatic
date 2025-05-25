@@ -2,7 +2,11 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.entity.crustacean.YetiCrabEntity
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.enums.Thickness
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
@@ -151,7 +155,7 @@ class ThermalVentBlock(
         state: BlockState,
         world: BlockView,
         pos: BlockPos,
-        context: ShapeContext
+        context: ShapeContext?
     ): VoxelShape {
         val voxelShape = when (val thickness = state.get(THICKNESS) as Thickness) {
             Thickness.TIP -> TIP_SHAPE

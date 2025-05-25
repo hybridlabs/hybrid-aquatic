@@ -1,7 +1,11 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.HorizontalFacingBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
@@ -89,7 +93,7 @@ class GiantClamBlock(
         state: BlockState,
         world: BlockView,
         pos: BlockPos,
-        context: ShapeContext
+        context: ShapeContext?
     ): VoxelShape = SHAPE
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {

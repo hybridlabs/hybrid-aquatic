@@ -1,6 +1,11 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -63,7 +68,7 @@ class TubeSpongeBlock(
         return COLLISION_SHAPE
     }
 
-    override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape {
+    override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext?): VoxelShape {
         return SHAPE
     }
 

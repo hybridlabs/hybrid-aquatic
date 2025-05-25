@@ -2,7 +2,14 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockEntityProvider
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.PlantBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -73,7 +80,7 @@ class StrawberryAnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEn
         state: BlockState,
         world: BlockView,
         pos: BlockPos,
-        context: ShapeContext
+        context: ShapeContext?
     ): VoxelShape {
         return SHAPE
     }

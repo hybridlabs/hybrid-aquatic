@@ -132,7 +132,7 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
         state: BlockState,
         world: BlockView,
         pos: BlockPos,
-        context: ShapeContext
+        context: ShapeContext?
     ): VoxelShape {
         return if (state.get(WATERLOGGED)) WATER_SHAPE else SHAPE
     }

@@ -2,7 +2,12 @@
 
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.Entity
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
@@ -49,7 +54,7 @@ class GlowingPlanktonBlock(settings: Settings) : Block(
         state: BlockState,
         world: BlockView,
         pos: BlockPos,
-        context: ShapeContext
+        context: ShapeContext?
     ): VoxelShape {
         return SHAPE
     }

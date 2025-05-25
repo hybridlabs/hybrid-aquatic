@@ -1,6 +1,11 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.HorizontalFacingBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -57,7 +62,7 @@ class RaftBlock(settings: Settings) : Block(settings), Waterloggable {
         state: BlockState,
         world: BlockView,
         pos: BlockPos,
-        context: ShapeContext
+        context: ShapeContext?
     ): VoxelShape {
         return if (state.get(Properties.WATERLOGGED)) SHAPE else LAND_SHAPE
     }
