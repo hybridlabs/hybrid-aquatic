@@ -23,6 +23,7 @@ import net.minecraft.util.Identifier
 
 object HybridAquaticEntityTypes {
 
+    //#region fish
 
     val AFRICAN_BUTTERFLY = registerFish(
         "african_butterfly",
@@ -346,7 +347,10 @@ object HybridAquaticEntityTypes {
         DanioEntity.createMobAttributes()
     )
 
-    //cephalopods
+    //endregion
+
+    //#region cephalopods
+
     val ARROW_SQUID = registerCephalopod(
         "arrow_squid",
         ::ArrowSquidEntity,
@@ -396,7 +400,10 @@ object HybridAquaticEntityTypes {
         NautilusEntity.createMobAttributes()
     )
 
-    //crustaceans
+    //endregion
+
+    //#region crustaceans
+
     val COCONUT_CRAB = registerCrustacean(
         "coconut_crab",
         ::CoconutCrabEntity,
@@ -516,7 +523,9 @@ object HybridAquaticEntityTypes {
         KarkinosEntity.createMobAttributes()
     )
 
-    //critters
+    //endregion
+
+    //#region critters
     val NUDIBRANCH = registerCritter(
         "nudibranch",
         ::NudibranchEntity,
@@ -545,7 +554,9 @@ object HybridAquaticEntityTypes {
         StarfishEntity.createMobAttributes()
     )
 
-    //jellyfish
+    //endregion
+
+    //#region jellyfish
     val ATOLLA_JELLYFISH = registerJellyUnderground(
         "atolla_jellyfish",
         ::AtollaJellyfishEntity,
@@ -651,7 +662,9 @@ object HybridAquaticEntityTypes {
         SeaNettleEntity.createMobAttributes()
     )
 
-    //sharks
+    //endregion
+
+    //#region sharks
     val BASKING_SHARK = registerShark(
         "basking_shark",
         ::BaskingSharkEntity,
@@ -683,7 +696,7 @@ object HybridAquaticEntityTypes {
     val GREAT_WHITE_SHARK = registerShark(
         "great_white_shark",
         ::GreatWhiteSharkEntity,
-        EntityDimensions.fixed(2.0f, 1.0f),
+        EntityDimensions.fixed(1.75f, 0.8f),
         GreatWhiteSharkEntity.createMobAttributes()
     )
 
@@ -711,9 +724,11 @@ object HybridAquaticEntityTypes {
     val WHALE_SHARK = registerShark(
         "whale_shark",
         ::WhaleSharkEntity,
-        EntityDimensions.fixed(2.5f, 0.8f),
+        EntityDimensions.fixed(2.0f, 0.8f),
         WhaleSharkEntity.createMobAttributes()
     )
+
+    //endregion
 
     private fun <T : LivingEntity> registerShark(
         id: String,
@@ -723,6 +738,7 @@ object HybridAquaticEntityTypes {
     ): EntityType<T> {
         return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.SHARK)
     }
+
     private fun <T : LivingEntity> registerSharkUnderground(
         id: String,
         entityFactory: EntityFactory<T>,
