@@ -168,6 +168,9 @@
 				},
 				"tail_fin": {
 					"rotation": [20, 0, 0]
+				},
+				"body": {
+					"rotation": [0, 0, 0]
 				}
 			}
 		}
