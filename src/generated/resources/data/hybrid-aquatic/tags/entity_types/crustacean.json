@@ -18,6 +18,26 @@
     "hybrid-aquatic:vampire_crab",
     "hybrid-aquatic:yeti_crab",
     {
+      "id": "seafarer:crab",
+      "required": false
+    },
+    {
+      "id": "seafarer:horseshoe_crab",
+      "required": false
+    },
+    {
+      "id": "seafarer:mantis_shrimp",
+      "required": false
+    },
+    {
+      "id": "seafarer:sexy_shrimp",
+      "required": false
+    },
+    {
+      "id": "seafarer:spider_crab",
+      "required": false
+    },
+    {
       "id": "rainbowreef:arrow_crab",
       "required": false
     },

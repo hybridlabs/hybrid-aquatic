@@ -11,6 +11,14 @@
     "minecraft:player",
     "minecraft:turtle",
     {
+      "id": "seafarer:sunfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:manta_ray",
+      "required": false
+    },
+    {
       "id": "bountiful_critters:sunfish",
       "required": false
     },

@@ -11,6 +11,10 @@
     "hybrid-aquatic:whale_shark",
     "hybrid-aquatic:lantern_shark",
     {
+      "id": "seafarer:zebra_shark",
+      "required": false
+    },
+    {
       "id": "rainbowreef:small_shark",
       "required": false
     }

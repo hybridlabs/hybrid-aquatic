@@ -50,6 +50,54 @@
     "minecraft:tropical_fish",
     "minecraft:axolotl",
     {
+      "id": "seafarer:barreleye",
+      "required": false
+    },
+    {
+      "id": "seafarer:sunfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:garden_eel",
+      "required": false
+    },
+    {
+      "id": "seafarer:mandarin_goby",
+      "required": false
+    },
+    {
+      "id": "seafarer:frogfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:blue_tang",
+      "required": false
+    },
+    {
+      "id": "seafarer:copperband_butterflyfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:parrotfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:filefish",
+      "required": false
+    },
+    {
+      "id": "seafarer:leafy_scorpionfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:chimaera",
+      "required": false
+    },
+    {
+      "id": "seafarer:squirrelfish",
+      "required": false
+    },
+    {
       "id": "naturalist:bass",
       "required": false
     },

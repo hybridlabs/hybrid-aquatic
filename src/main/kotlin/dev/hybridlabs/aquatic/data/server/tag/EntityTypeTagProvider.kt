@@ -42,6 +42,17 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 EntityType.COD,
                 EntityType.TROPICAL_FISH
             )
+
+            .addOptional(Identifier("seafarer", "barreleye"))
+            .addOptional(Identifier("seafarer", "garden_eel"))
+            .addOptional(Identifier("seafarer", "mandarin_goby"))
+            .addOptional(Identifier("seafarer", "frogfish"))
+            .addOptional(Identifier("seafarer", "blue_tang"))
+            .addOptional(Identifier("seafarer", "copperband_butterflyfish"))
+            .addOptional(Identifier("seafarer", "filefish"))
+            .addOptional(Identifier("seafarer", "leafy_scorpionfish"))
+            .addOptional(Identifier("seafarer", "squirrelfish"))
+
             .addOptional(Identifier("rainbowreef", "angelfish"))
             .addOptional(Identifier("rainbowreef", "basslet"))
             .addOptional(Identifier("rainbowreef", "boxfish"))
@@ -100,6 +111,10 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.JOHN_DORY,
                 HybridAquaticEntityTypes.LANTERN_SHARK,
             )
+
+            .addOptional(Identifier("seafarer", "chimaera"))
+            .addOptional(Identifier("seafarer", "marine_iguana"))
+
             .addOptional(Identifier("naturalist", "bass"))
             .addOptional(Identifier("naturalist", "catfish"))
 
@@ -125,6 +140,10 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 EntityType.PLAYER,
                 EntityType.TURTLE,
             )
+
+            .addOptional(Identifier("seafarer", "sunfish"))
+            .addOptional(Identifier("seafarer", "manta_ray"))
+
             .addOptional(Identifier("bountiful_critters", "sunfish"))
             .addOptional(Identifier("bountiful_critters", "ray"))
 
@@ -160,6 +179,13 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.VAMPIRE_CRAB,
                 HybridAquaticEntityTypes.YETI_CRAB,
             )
+
+            .addOptional(Identifier("seafarer", "crab"))
+            .addOptional(Identifier("seafarer", "horseshoe_crab"))
+            .addOptional(Identifier("seafarer", "mantis_shrimp"))
+            .addOptional(Identifier("seafarer", "sexy_shrimp"))
+            .addOptional(Identifier("seafarer", "spider_crab"))
+
             .addOptional(Identifier("rainbowreef", "arrow_crab"))
             .addOptional(Identifier("rainbowreef", "crab"))
 
@@ -205,6 +231,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.WHALE_SHARK,
                 HybridAquaticEntityTypes.LANTERN_SHARK,
             )
+
+            .addOptional(Identifier("seafarer", "zebra_shark"))
+
             .addOptional(Identifier("rainbowreef", "small_shark"))
 
         // critters
@@ -293,6 +322,20 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 EntityType.TROPICAL_FISH,
                 EntityType.AXOLOTL,
             )
+
+            // Seafarer
+            .addOptional(Identifier("seafarer", "barreleye"))
+            .addOptional(Identifier("seafarer", "sunfish"))
+            .addOptional(Identifier("seafarer", "garden_eel"))
+            .addOptional(Identifier("seafarer", "mandarin_goby"))
+            .addOptional(Identifier("seafarer", "frogfish"))
+            .addOptional(Identifier("seafarer", "blue_tang"))
+            .addOptional(Identifier("seafarer", "copperband_butterflyfish"))
+            .addOptional(Identifier("seafarer", "parrotfish"))
+            .addOptional(Identifier("seafarer", "filefish"))
+            .addOptional(Identifier("seafarer", "leafy_scorpionfish"))
+            .addOptional(Identifier("seafarer", "chimaera"))
+            .addOptional(Identifier("seafarer", "squirrelfish"))
 
             // Naturalist
             .addOptional(Identifier("naturalist", "bass"))

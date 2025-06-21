@@ -13,6 +13,14 @@
     "hybrid-aquatic:john_dory",
     "hybrid-aquatic:lantern_shark",
     {
+      "id": "seafarer:chimaera",
+      "required": false
+    },
+    {
+      "id": "seafarer:marine_iguana",
+      "required": false
+    },
+    {
       "id": "naturalist:bass",
       "required": false
     },
