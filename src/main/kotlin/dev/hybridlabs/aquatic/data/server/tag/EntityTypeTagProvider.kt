@@ -280,6 +280,10 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.SEA_NETTLE,
                 HybridAquaticEntityTypes.BOX_JELLYFISH,
             )
+
+            .addOptional(Identifier("jellyfishing", "jellyfish"))
+            .addOptional(Identifier("jellyfishing", "blue_jellyfish"))
+
             .addOptional(Identifier("rainbowreef", "jellyfish"))
 
             .addOptional(Identifier("aquaculture", "jellyfish"))

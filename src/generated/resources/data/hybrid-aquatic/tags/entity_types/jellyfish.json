@@ -17,6 +17,14 @@
     "hybrid-aquatic:sea_nettle",
     "hybrid-aquatic:box_jellyfish",
     {
+      "id": "jellyfishing:jellyfish",
+      "required": false
+    },
+    {
+      "id": "jellyfishing:blue_jellyfish",
+      "required": false
+    },
+    {
       "id": "rainbowreef:jellyfish",
       "required": false
     },
