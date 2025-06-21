@@ -180,6 +180,11 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.YETI_CRAB,
             )
 
+            .addOptional(Identifier("shellfish", "crayfish"))
+            .addOptional(Identifier("shellfish", "lobster"))
+            .addOptional(Identifier("shellfish", "crab"))
+            .addOptional(Identifier("shellfish", "shrimp"))
+
             .addOptional(Identifier("seafarer", "crab"))
             .addOptional(Identifier("seafarer", "horseshoe_crab"))
             .addOptional(Identifier("seafarer", "mantis_shrimp"))
@@ -204,6 +209,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 EntityType.SQUID,
                 EntityType.GLOW_SQUID
             )
+
+            .addOptional(Identifier("crittersandcompanions", "dumbo_octopus"))
             .addOptional(Identifier("crittersandcompanions", "dumbo_octopus"))
 
         getOrCreateTagBuilder(HybridAquaticEntityTags.NONE)
@@ -245,6 +252,13 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.STARFISH,
                 HybridAquaticEntityTypes.SEA_ANGEL,
             )
+
+            .addOptional(Identifier("shellfish", "sea_snail"))
+            .addOptional(Identifier("shellfish", "sea_urchin"))
+            .addOptional(Identifier("shellfish", "clam"))
+            .addOptional(Identifier("shellfish", "oyster"))
+            .addOptional(Identifier("shellfish", "mussel"))
+
             .addOptional(Identifier("crittersandcompanions", "sea_bunny"))
 
         // jellyfish

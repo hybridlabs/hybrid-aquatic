@@ -7,6 +7,26 @@
     "hybrid-aquatic:starfish",
     "hybrid-aquatic:sea_angel",
     {
+      "id": "shellfish:sea_snail",
+      "required": false
+    },
+    {
+      "id": "shellfish:sea_urchin",
+      "required": false
+    },
+    {
+      "id": "shellfish:clam",
+      "required": false
+    },
+    {
+      "id": "shellfish:oyster",
+      "required": false
+    },
+    {
+      "id": "shellfish:mussel",
+      "required": false
+    },
+    {
       "id": "crittersandcompanions:sea_bunny",
       "required": false
     }

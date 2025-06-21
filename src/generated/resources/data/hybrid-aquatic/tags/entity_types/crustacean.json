@@ -18,6 +18,22 @@
     "hybrid-aquatic:vampire_crab",
     "hybrid-aquatic:yeti_crab",
     {
+      "id": "shellfish:crayfish",
+      "required": false
+    },
+    {
+      "id": "shellfish:lobster",
+      "required": false
+    },
+    {
+      "id": "shellfish:crab",
+      "required": false
+    },
+    {
+      "id": "shellfish:shrimp",
+      "required": false
+    },
+    {
       "id": "seafarer:crab",
       "required": false
     },

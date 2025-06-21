@@ -13,6 +13,10 @@
     {
       "id": "crittersandcompanions:dumbo_octopus",
       "required": false
+    },
+    {
+      "id": "crittersandcompanions:dumbo_octopus",
+      "required": false
     }
   ]
 }
