@@ -362,6 +362,23 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 EntityType.AXOLOTL,
             )
 
+            // Tide Mod
+            .addOptional(Identifier("tide", "angelfish"))
+            .addOptional(Identifier("tide", "barracuda"))
+            .addOptional(Identifier("tide", "bass"))
+            .addOptional(Identifier("tide", "bluegill"))
+            .addOptional(Identifier("tide", "catfish"))
+            .addOptional(Identifier("tide", "clayfish"))
+            .addOptional(Identifier("tide", "guppy"))
+            .addOptional(Identifier("tide", "mackerel"))
+            .addOptional(Identifier("tide", "mint_carp"))
+            .addOptional(Identifier("tide", "ocean_perch"))
+            .addOptional(Identifier("tide", "pike"))
+            .addOptional(Identifier("tide", "sailfish"))
+            .addOptional(Identifier("tide", "trout"))
+            .addOptional(Identifier("tide", "tuna"))
+            .addOptional(Identifier("tide", "yellow_perch"))
+
             // Alexs Mods
             .addOptional(Identifier("alexsmobs", "blobfish"))
             .addOptional(Identifier("alexsmobs", "catfish"))

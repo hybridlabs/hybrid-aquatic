@@ -50,6 +50,66 @@
     "minecraft:tropical_fish",
     "minecraft:axolotl",
     {
+      "id": "tide:angelfish",
+      "required": false
+    },
+    {
+      "id": "tide:barracuda",
+      "required": false
+    },
+    {
+      "id": "tide:bass",
+      "required": false
+    },
+    {
+      "id": "tide:bluegill",
+      "required": false
+    },
+    {
+      "id": "tide:catfish",
+      "required": false
+    },
+    {
+      "id": "tide:clayfish",
+      "required": false
+    },
+    {
+      "id": "tide:guppy",
+      "required": false
+    },
+    {
+      "id": "tide:mackerel",
+      "required": false
+    },
+    {
+      "id": "tide:mint_carp",
+      "required": false
+    },
+    {
+      "id": "tide:ocean_perch",
+      "required": false
+    },
+    {
+      "id": "tide:pike",
+      "required": false
+    },
+    {
+      "id": "tide:sailfish",
+      "required": false
+    },
+    {
+      "id": "tide:trout",
+      "required": false
+    },
+    {
+      "id": "tide:tuna",
+      "required": false
+    },
+    {
+      "id": "tide:yellow_perch",
+      "required": false
+    },
+    {
       "id": "alexsmobs:blobfish",
       "required": false
     },
