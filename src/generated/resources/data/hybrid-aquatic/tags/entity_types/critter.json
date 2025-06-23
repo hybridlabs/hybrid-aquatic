@@ -7,6 +7,14 @@
     "hybrid-aquatic:starfish",
     "hybrid-aquatic:sea_angel",
     {
+      "id": "alexsmobs:triops",
+      "required": false
+    },
+    {
+      "id": "alexscaves:sea_pig",
+      "required": false
+    },
+    {
       "id": "shellfish:sea_snail",
       "required": false
     },

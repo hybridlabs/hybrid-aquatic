@@ -28,6 +28,14 @@
     "minecraft:cod",
     "minecraft:tropical_fish",
     {
+      "id": "alexsmobs:flying_fish",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:devils_hole_pupfish",
+      "required": false
+    },
+    {
       "id": "seafarer:barreleye",
       "required": false
     },

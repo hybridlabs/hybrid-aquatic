@@ -11,6 +11,14 @@
     "hybrid-aquatic:whale_shark",
     "hybrid-aquatic:lantern_shark",
     {
+      "id": "alexsmobs:hammerhead_shark",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:frilled_shark",
+      "required": false
+    },
+    {
       "id": "seafarer:zebra_shark",
       "required": false
     },

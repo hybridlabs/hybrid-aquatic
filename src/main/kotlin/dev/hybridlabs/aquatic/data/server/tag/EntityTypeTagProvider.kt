@@ -43,6 +43,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 EntityType.TROPICAL_FISH
             )
 
+            .addOptional(Identifier("alexsmobs", "flying_fish"))
+            .addOptional(Identifier("alexsmobs", "devils_hole_pupfish"))
+
             .addOptional(Identifier("seafarer", "barreleye"))
             .addOptional(Identifier("seafarer", "garden_eel"))
             .addOptional(Identifier("seafarer", "mandarin_goby"))
@@ -112,6 +115,11 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.LANTERN_SHARK,
             )
 
+            .addOptional(Identifier("alexsmobs", "blobfish"))
+            .addOptional(Identifier("alexsmobs", "catfish"))
+
+            .addOptional(Identifier("alexscaves", "tripodfish"))
+
             .addOptional(Identifier("seafarer", "chimaera"))
             .addOptional(Identifier("seafarer", "marine_iguana"))
 
@@ -180,6 +188,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.YETI_CRAB,
             )
 
+            .addOptional(Identifier("alexsmobs", "lobster"))
+
             .addOptional(Identifier("shellfish", "crayfish"))
             .addOptional(Identifier("shellfish", "lobster"))
             .addOptional(Identifier("shellfish", "crab"))
@@ -210,6 +220,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 EntityType.GLOW_SQUID
             )
 
+            .addOptional(Identifier("alexsmobs", "mimic_octopus"))
+            .addOptional(Identifier("alexsmobs", "giant_squid"))
+
             .addOptional(Identifier("crittersandcompanions", "dumbo_octopus"))
             .addOptional(Identifier("crittersandcompanions", "dumbo_octopus"))
 
@@ -239,6 +252,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.LANTERN_SHARK,
             )
 
+            .addOptional(Identifier("alexsmobs", "hammerhead_shark"))
+            .addOptional(Identifier("alexsmobs", "frilled_shark"))
+
             .addOptional(Identifier("seafarer", "zebra_shark"))
 
             .addOptional(Identifier("rainbowreef", "small_shark"))
@@ -252,6 +268,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.STARFISH,
                 HybridAquaticEntityTypes.SEA_ANGEL,
             )
+
+            .addOptional(Identifier("alexsmobs", "triops"))
+            .addOptional(Identifier("alexscaves", "sea_pig"))
 
             .addOptional(Identifier("shellfish", "sea_snail"))
             .addOptional(Identifier("shellfish", "sea_urchin"))
@@ -280,6 +299,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.SEA_NETTLE,
                 HybridAquaticEntityTypes.BOX_JELLYFISH,
             )
+
+            .addOptional(Identifier("alexsmobs", "comb_jelly"))
 
             .addOptional(Identifier("jellyfishing", "jellyfish"))
             .addOptional(Identifier("jellyfishing", "blue_jellyfish"))
@@ -340,6 +361,15 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 EntityType.TROPICAL_FISH,
                 EntityType.AXOLOTL,
             )
+
+            // Alexs Mods
+            .addOptional(Identifier("alexsmobs", "blobfish"))
+            .addOptional(Identifier("alexsmobs", "catfish"))
+            .addOptional(Identifier("alexsmobs", "devils_hole_pupfish"))
+            .addOptional(Identifier("alexsmobs", "flying_fish"))
+
+            .addOptional(Identifier("alexscaves", "tripodfish"))
+            .addOptional(Identifier("alexscaves", "lanternfish"))
 
             // Seafarer
             .addOptional(Identifier("seafarer", "barreleye"))

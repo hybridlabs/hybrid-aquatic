@@ -17,6 +17,10 @@
     "hybrid-aquatic:sea_nettle",
     "hybrid-aquatic:box_jellyfish",
     {
+      "id": "alexsmobs:comb_jelly",
+      "required": false
+    },
+    {
       "id": "jellyfishing:jellyfish",
       "required": false
     },

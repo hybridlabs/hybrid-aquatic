@@ -18,6 +18,10 @@
     "hybrid-aquatic:vampire_crab",
     "hybrid-aquatic:yeti_crab",
     {
+      "id": "alexsmobs:lobster",
+      "required": false
+    },
+    {
       "id": "shellfish:crayfish",
       "required": false
     },

@@ -11,6 +11,14 @@
     "minecraft:squid",
     "minecraft:glow_squid",
     {
+      "id": "alexsmobs:mimic_octopus",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:giant_squid",
+      "required": false
+    },
+    {
       "id": "crittersandcompanions:dumbo_octopus",
       "required": false
     },

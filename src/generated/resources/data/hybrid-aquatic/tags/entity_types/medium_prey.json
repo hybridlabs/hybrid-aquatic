@@ -13,6 +13,18 @@
     "hybrid-aquatic:john_dory",
     "hybrid-aquatic:lantern_shark",
     {
+      "id": "alexsmobs:blobfish",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:catfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:tripodfish",
+      "required": false
+    },
+    {
       "id": "seafarer:chimaera",
       "required": false
     },
