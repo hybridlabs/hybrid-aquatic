@@ -43,6 +43,17 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
+        addDrop(HybridAquaticBlocks.FLOATING_SARGASSUM) { block ->
+            LootTable.builder().pool(
+                LootPool.builder()
+                    .with(ItemEntry.builder(block))
+                    .conditionally(WITH_SILK_TOUCH_OR_SHEARS)
+            )
+        }
+
+
+        addDrop(HybridAquaticBlocks.SARGASSUM)
+
         //region wood
         addDrop(HybridAquaticBlocks.DRIFTWOOD_LOG)
         addDrop(HybridAquaticBlocks.DRIFTWOOD_WOOD)

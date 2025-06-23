@@ -132,15 +132,28 @@ object HybridAquaticBlocks {
         )
     )
 
-    val SARGASSUM = register("sargassum", SargassumBlock(FabricBlockSettings.copyOf(Blocks.KELP).nonOpaque()))
+    val SARGASSUM = register(
+        "sargassum",
+        SargassumBlock(
+            FabricBlockSettings
+                .copyOf(Blocks.KELP)
+                .nonOpaque()
+        )
+    )
 
     val SARGASSUM_PLANT = register(
         "sargassum_plant",
-        SargassumPlantBlock(FabricBlockSettings.copyOf(Blocks.KELP_PLANT).nonOpaque().dropsLike(SARGASSUM))
+        SargassumPlantBlock(
+            FabricBlockSettings
+                .copyOf(Blocks.KELP_PLANT)
+                .nonOpaque()
+                .dropsLike(SARGASSUM)
+        )
     )
 
     val FLOATING_SARGASSUM = register(
-        "floating_sargassum", FloatingSargassumBlock(
+        "floating_sargassum",
+        FloatingSargassumBlock(
             FabricBlockSettings
                 .copyOf(Blocks.LILY_PAD)
                 .noCollision()
