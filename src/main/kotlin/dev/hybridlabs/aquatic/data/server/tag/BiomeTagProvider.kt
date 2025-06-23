@@ -100,6 +100,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(Identifier("terralith", "orchid_swamp"))
             .addOptional(Identifier("biomesoplenty", "bayou"))
             .addOptional(Identifier("biomeswevegone", "cypress_swamplands"))
+            .addOptional(Identifier("biomeswevegone", "cypress_wetlands"))
             .addOptional(Identifier("biomeswevegone", "bayou"))
             .addOptional(Identifier("terrestria", "cypress_swamp"))
 
