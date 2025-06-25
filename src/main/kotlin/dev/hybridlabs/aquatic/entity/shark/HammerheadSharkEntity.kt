@@ -1,18 +1,50 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.VariantHolder
 import net.minecraft.entity.ai.goal.RevengeGoal
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.function.ValueLists
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
+import java.util.function.IntFunction
+import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, world: World) :
-    HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.CRUSTACEAN, HybridAquaticEntityTags.SMALL_PREY), false, false) {
+    HybridAquaticSharkEntity(
+        entityType,
+        world,
+        listOf(HybridAquaticEntityTags.CRUSTACEAN, HybridAquaticEntityTags.SMALL_PREY),
+        false,
+        false
+    ),
+    VariantHolder<HammerheadSharkEntity.Type> {
 
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(1, RevengeGoal(this))
+    }
+
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        variant = Type.entries.random(Random)
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {
@@ -24,6 +56,7 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 26.0)
         }
+        val TYPE: TrackedData<Int> = DataTracker.registerData(HammerheadSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
     }
 
     override fun getMaxSize(): Int {
@@ -32,5 +65,55 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
 
     override fun getMinSize(): Int {
         return -3
+    }
+
+    override fun initDataTracker() {
+        dataTracker.startTracking(TYPE, 0)
+        super.initDataTracker()
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        nbt.putString("Type", this.variant.asString())
+        super.writeCustomDataToNbt(nbt)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        this.variant = Type.byName(nbt.getString("Type"))
+        super.readCustomDataFromNbt(nbt)
+    }
+
+    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+        BLUE(0, "blue"),
+        BROWN(1, "brown"),
+        OLIVE(2, "olive");
+
+        override fun asString(): String {
+            return this.key
+        }
+
+        companion object {
+            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                { obj: Type -> obj.id },
+                entries.toTypedArray(),
+                ValueLists.OutOfBoundsHandling.ZERO
+            )
+
+            fun byName(name: String?): Type {
+                return CODEC.byId(name, BLUE) as Type
+            }
+
+            fun fromId(id: Int): Type {
+                return BY_ID.apply(id) as Type
+            }
+        }
+    }
+
+    override fun getVariant(): Type {
+        return Type.fromId((dataTracker.get(TYPE) as Int))
+    }
+
+    override fun setVariant(type: Type) {
+        dataTracker.set(TYPE, type.id)
     }
 }
