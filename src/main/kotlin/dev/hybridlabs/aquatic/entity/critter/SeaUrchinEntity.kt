@@ -8,7 +8,6 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.registry.tag.BiomeTags
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
@@ -18,46 +17,7 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 
 class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World) :
-    HybridAquaticCritterEntity(
-        entityType, world, variants = hashMapOf(
-            "black" to CritterVariant.biomeVariant(
-                "black", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "blue" to CritterVariant.biomeVariant(
-                "blue", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "purple" to CritterVariant.biomeVariant(
-                "purple", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "red" to CritterVariant.biomeVariant(
-                "red", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "long_black" to CritterVariant.biomeVariant(
-                "long_black", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "long_blue" to CritterVariant.biomeVariant(
-                "long_blue", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "long_purple" to CritterVariant.biomeVariant(
-                "long_purple", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "long_red" to CritterVariant.biomeVariant(
-                "long_red", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-        )
-    ) {
-
-    public override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/sea_urchin")
-    }
+    HybridAquaticCritterEntity(entityType, world) {
 
     private var timeUntilNextBreak = 0
     private var spawnUrchinOnNextBreak = false

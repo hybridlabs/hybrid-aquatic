@@ -1,43 +1,16 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.registry.tag.BiomeTags
 import net.minecraft.world.World
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 
 class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: World) :
-    HybridAquaticCritterEntity(
-        entityType, world, variants = hashMapOf(
-            "sea_pig" to CritterVariant.biomeVariant(
-                "sea_pig", listOf(BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.ANIMATION)
-            ),
-            "black" to CritterVariant.biomeVariant(
-                "black",
-                listOf(
-                    HybridAquaticBiomeTags.TROPICAL_OCEANS,
-                    HybridAquaticBiomeTags.TEMPERATE_OCEANS,
-                    HybridAquaticBiomeTags.REEF
-                ),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "red" to CritterVariant.biomeVariant(
-                "red",
-                listOf(
-                    HybridAquaticBiomeTags.TROPICAL_OCEANS,
-                    HybridAquaticBiomeTags.TEMPERATE_OCEANS,
-                    HybridAquaticBiomeTags.REEF
-                ),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-        )
-    ) {
+    HybridAquaticCritterEntity(entityType, world) {
 
     override fun remove(reason: RemovalReason) {
         if (!world.isClient && this.isDead) {

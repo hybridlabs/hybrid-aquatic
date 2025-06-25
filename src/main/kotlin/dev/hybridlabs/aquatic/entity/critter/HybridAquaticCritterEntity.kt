@@ -39,9 +39,6 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HybridAquaticCritterEntity(
     type: EntityType<out HybridAquaticCritterEntity>,
     world: World,
-    private val variants: Map<String, CritterVariant> = mutableMapOf(),
-    open val assumeDefault: Boolean = false,
-    open val collisionRules: List<VariantCollisionRules> = listOf()
 ) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false
@@ -71,8 +68,6 @@ open class HybridAquaticCritterEntity(
 
     override fun initDataTracker() {
         super.initDataTracker()
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
         dataTracker.startTracking(CRITTER_SIZE, 0)
         dataTracker.startTracking(CRITTER_FLAGS, 0.toByte())
         dataTracker.startTracking(IS_CLIMBING_WALL, false)
@@ -93,47 +88,6 @@ open class HybridAquaticCritterEntity(
         entityNbt: NbtCompound?
     ): EntityData? {
         this.air = this.maxAir
-
-        if (variants.isNotEmpty()) {
-            if (spawnReason == SpawnReason.SPAWN_EGG) {
-                variantKey = variants.keys.elementAt(random.nextBetween(0, variants.size - 1))
-            } else {
-                // Handle collisions
-                val validKeys =
-                    variants.filter { it.value.spawnCondition(world, spawnReason, blockPos, random) }.map { it.key }
-
-                if (validKeys.isEmpty()) {
-                    variantKey = variants.keys.random()
-                } else if (collisionRules.isNotEmpty()) {
-                    for (rule in collisionRules) {
-                        val variantSet = rule.variants.toSet()
-                        if ((rule.exclusionStatus == VariantCollisionRules.ExclusionStatus.EXCLUSIVE && validKeys.toSet() == variantSet) ||
-                            (rule.exclusionStatus == VariantCollisionRules.ExclusionStatus.INCLUSIVE && validKeys.containsAll(
-                                variantSet
-                            ))
-                        ) {
-                            variantKey = rule.collisionHandler(validKeys.toSet(), random, world)
-                            break
-                        }
-                    }
-                } else {
-                    // Default to a priority based system
-                    val validityFilter = variants.filter { validKeys.contains(it.key) }
-                    variantKey = if (validityFilter.isNotEmpty()) {
-                        val maxPriority = validityFilter.values.maxOf { it.priority }
-                        val filteredMap = validityFilter.filter { it.value.priority == maxPriority }
-                        if (filteredMap.isNotEmpty()) {
-                            filteredMap.keys.random()
-                        } else {
-                            validKeys.random()
-                        }
-                    } else {
-                        validKeys.random()
-                    }
-                }
-            }
-        }
-
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -148,16 +102,12 @@ open class HybridAquaticCritterEntity(
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
-        nbt.putString(VARIANT_KEY, variantKey)
-        nbt.put(VARIANT_DATA_KEY, variantData)
         nbt.putInt(CRITTER_SIZE_KEY, size)
         nbt.putBoolean("FromFishingNet", fromFishingNet)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        variantKey = nbt.getString(VARIANT_KEY)
-        variantData = nbt.getCompound(VARIANT_DATA_KEY)
         size = nbt.getInt(CRITTER_SIZE_KEY)
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
@@ -235,28 +185,6 @@ open class HybridAquaticCritterEntity(
         return true
     }
 
-    private var variantData: NbtCompound
-        get() = dataTracker.get(VARIANT_DATA)
-        set(value) {
-            dataTracker.set(VARIANT_DATA, value)
-        }
-
-    private var variantKey: String
-        get() = dataTracker.get(VARIANT).ifBlank {
-            if (!assumeDefault && variants.isNotEmpty()) {
-                variants.isNotEmpty()
-            }
-            dataTracker.get(VARIANT)
-        }
-        private set(value) {
-            dataTracker.set(VARIANT, value)
-        }
-
-    @Suppress("UNUSED_PARAMETER")
-    var variant: CritterVariant?
-        get() = variants[variantKey]
-        private set(value) {}
-
     var size: Int
         get() = dataTracker.get(CRITTER_SIZE)
         set(size) {
@@ -264,10 +192,6 @@ open class HybridAquaticCritterEntity(
         }
 
     companion object {
-        val VARIANT: TrackedData<String> =
-            DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.STRING)
-        var VARIANT_DATA: TrackedData<NbtCompound> =
-            DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.NBT_COMPOUND)
         val CRITTER_SIZE: TrackedData<Int> =
             DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CRITTER_FLAGS: TrackedData<Byte> =
@@ -294,8 +218,6 @@ open class HybridAquaticCritterEntity(
             return 1.0f + (critter.size * adjustment)
         }
 
-        const val VARIANT_KEY = "Variant"
-        const val VARIANT_DATA_KEY = "VariantData"
         const val CRITTER_SIZE_KEY = "CritterSize"
 
         val WALK_ANIMATION: RawAnimation = RawAnimation.begin().then("walk", Animation.LoopType.LOOP)
