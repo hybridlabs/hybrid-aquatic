@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.shark.HammerheadSharkEntity
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
@@ -67,7 +66,7 @@ class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: Worl
     }
 
     override fun initDataTracker() {
-        dataTracker.startTracking(HammerheadSharkEntity.TYPE, 0)
+        dataTracker.startTracking(TYPE, 0)
         super.initDataTracker()
     }
 
@@ -115,10 +114,10 @@ class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: Worl
     }
 
     override fun getVariant(): Type {
-        return Type.fromId((dataTracker.get(HammerheadSharkEntity.TYPE) as Int))
+        return Type.fromId((dataTracker.get(TYPE) as Int))
     }
 
     override fun setVariant(type: Type) {
-        dataTracker.set(HammerheadSharkEntity.TYPE, type.id)
+        dataTracker.set(TYPE, type.id)
     }
 }
