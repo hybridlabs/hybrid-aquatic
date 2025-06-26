@@ -1,7 +1,5 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity.VariantCollisionRules.ExclusionStatus.EXCLUSIVE
-import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity.VariantCollisionRules.ExclusionStatus.INCLUSIVE
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
@@ -17,7 +15,6 @@ import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
@@ -25,8 +22,6 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
-import net.minecraft.world.biome.Biome
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -223,81 +218,5 @@ open class HybridAquaticCritterEntity(
         val WALK_ANIMATION: RawAnimation = RawAnimation.begin().then("walk", Animation.LoopType.LOOP)
         val IDLE_ANIMATION: RawAnimation = RawAnimation.begin().then("idle", Animation.LoopType.LOOP)
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().then("flop", Animation.LoopType.LOOP)
-    }
-
-    @Suppress("UNUSED")
-    data class CritterVariant(
-        val variantName: String,
-        val spawnCondition: (WorldAccess, SpawnReason, BlockPos, Random) -> Boolean,
-        val ignore: List<Ignore> = emptyList(),
-        val priority: Int = 0,
-        var providedVariant: (World, BlockPos, Random, HybridAquaticCritterEntity) -> String = { _, _, _, _ ->
-            variantName
-        }
-    ) {
-
-        fun getProvidedVariant(critter: HybridAquaticCritterEntity): String {
-            return providedVariant(critter.world, critter.blockPos, critter.random, critter)
-        }
-
-        companion object {
-
-            fun biomeVariant(
-                variantName: String,
-                biomes: List<TagKey<Biome>>,
-                ignore: List<Ignore> = emptyList()
-            ): CritterVariant {
-                return CritterVariant(variantName, { world, _, pos, _ ->
-                    val biome = world.getBiome(pos)
-                    biomes.any { biome.isIn(it) }
-                }, ignore)
-            }
-        }
-
-        enum class Ignore {
-            TEXTURE,
-            MODEL,
-            ANIMATION
-        }
-    }
-
-    @Suppress("UNUSED")
-    data class VariantCollisionRules(
-        val variants: Set<String>,
-        val collisionHandler: (Set<String>, Random, ServerWorldAccess) -> String,
-        val exclusionStatus: ExclusionStatus = INCLUSIVE
-    ) {
-        enum class ExclusionStatus {
-            INCLUSIVE,
-            EXCLUSIVE
-        }
-
-        fun equalDistribution(variants: Set<String>, status: ExclusionStatus = INCLUSIVE): VariantCollisionRules {
-            return VariantCollisionRules(variants, { possibleVariants, _, _ ->
-                possibleVariants.random()
-            }, status)
-        }
-
-        fun weightedDistribution(
-            weights: Set<Pair<String, Double>>,
-            status: ExclusionStatus = EXCLUSIVE
-        ): VariantCollisionRules {
-            return VariantCollisionRules(weights.map { pair -> pair.first }.toSet(), { _, random, _ ->
-                val weightTotal = weights.sumOf { pair -> pair.second }
-                val randomVal = random.nextFloat() * weightTotal
-                var accumulatedWeight = 0.0
-                var result = ""
-
-                for (pair in weights) {
-                    accumulatedWeight += pair.second
-                    if (randomVal < accumulatedWeight) {
-                        result = pair.first
-                        break
-                    }
-                }
-
-                result
-            }, status)
-        }
     }
 }
