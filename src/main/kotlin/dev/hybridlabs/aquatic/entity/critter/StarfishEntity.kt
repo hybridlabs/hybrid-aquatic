@@ -25,6 +25,7 @@ import software.bernie.geckolib.core.`object`.PlayState
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
     HybridAquaticCritterEntity(
         entityType, world),
