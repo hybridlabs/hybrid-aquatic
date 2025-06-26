@@ -8,10 +8,8 @@ import net.minecraft.world.World
 
 class TriggerfishEntity(entityType: EntityType<out TriggerfishEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
-        listOf(
-            HybridAquaticEntityTags.CRUSTACEAN
-        ),
+        entityType, world,
+        listOf(HybridAquaticEntityTags.CRUSTACEAN),
         listOf(
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK

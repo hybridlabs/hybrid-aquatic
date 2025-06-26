@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -10,24 +9,7 @@ import net.minecraft.world.World
 
 class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, variants = hashMapOf(
-            "common" to FishVariant.biomeVariant(
-                "common", listOf(HybridAquaticBiomeTags.REEF),
-                ignore = listOf(FishVariant.Ignore.ANIMATION)
-            ),
-            "big_belly" to FishVariant.biomeVariant(
-                "big_belly", listOf(HybridAquaticBiomeTags.REEF),
-                ignore = listOf(FishVariant.Ignore.ANIMATION)
-            ),
-            "thorny" to FishVariant.biomeVariant(
-                "thorny", listOf(HybridAquaticBiomeTags.REEF),
-                ignore = listOf(FishVariant.Ignore.ANIMATION)
-            ),
-            "pygmy" to FishVariant.biomeVariant(
-                "pygmy", listOf(HybridAquaticBiomeTags.REEF),
-                ignore = listOf(FishVariant.Ignore.ANIMATION)
-            ),
-        ),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE
         ),

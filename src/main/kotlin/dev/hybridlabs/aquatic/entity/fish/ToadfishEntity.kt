@@ -24,10 +24,8 @@ import java.util.function.Predicate
 
 class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
+        entityType, world,
+        listOf(HybridAquaticEntityTags.NONE),
         listOf(
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.LARGE_PREY,

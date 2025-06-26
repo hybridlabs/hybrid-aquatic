@@ -12,7 +12,7 @@ import net.minecraft.world.World
 
 class OpahEntity(entityType: EntityType<out OpahEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.CEPHALOPOD,
             HybridAquaticEntityTags.SMALL_PREY

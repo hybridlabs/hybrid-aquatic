@@ -9,9 +9,7 @@ import net.minecraft.world.World
 class TigerBarbEntity(entityType: EntityType<out TigerBarbEntity>, world: World) :
     HybridAquaticSchoolingFishEntity(
         entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
+        listOf(HybridAquaticEntityTags.NONE),
         listOf(
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.LARGE_PREY,

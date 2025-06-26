@@ -7,7 +7,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.world.World
 
 class OscarEntity(entityType: EntityType<out OscarEntity>, world: World) :
-    HybridAquaticFishEntity(entityType, world, emptyMap(),
+    HybridAquaticFishEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE),
         listOf(

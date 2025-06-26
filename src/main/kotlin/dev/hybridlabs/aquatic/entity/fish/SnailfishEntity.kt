@@ -9,7 +9,7 @@ import net.minecraft.world.World
 
 class SnailfishEntity(entityType: EntityType<out SnailfishEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE
         ),

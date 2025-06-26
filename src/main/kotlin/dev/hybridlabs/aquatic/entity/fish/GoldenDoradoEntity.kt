@@ -15,7 +15,7 @@ import java.util.*
 
 class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.SMALL_PREY,
             HybridAquaticEntityTags.MEDIUM_PREY,

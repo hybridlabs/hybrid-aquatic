@@ -11,7 +11,7 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.world.World
 
 class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) :
-    HybridAquaticFishEntity(entityType, world, emptyMap(),
+    HybridAquaticFishEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.SMALL_PREY,
             HybridAquaticEntityTags.CRUSTACEAN),

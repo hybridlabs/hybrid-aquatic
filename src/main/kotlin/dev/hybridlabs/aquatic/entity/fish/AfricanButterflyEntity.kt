@@ -10,7 +10,7 @@ import net.minecraft.world.World
 
 class AfricanButterflyEntity(entityType: EntityType<out AfricanButterflyEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+        entityType, world,
         listOf(HybridAquaticEntityTags.NONE),
         listOf(
             HybridAquaticEntityTags.MEDIUM_PREY,

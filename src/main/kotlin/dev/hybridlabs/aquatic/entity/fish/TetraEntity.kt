@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -17,22 +16,6 @@ class TetraEntity(entityType: EntityType<out TetraEntity>, world: World) :
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK
-        ),
-        variants = hashMapOf(
-            "neon" to FishVariant.biomeVariant(
-                "neon",
-                listOf(
-                    HybridAquaticBiomeTags.JUNGLE,
-                    HybridAquaticBiomeTags.MANGROVES,
-                    HybridAquaticBiomeTags.MARSHES,
-                    HybridAquaticBiomeTags.TROPICAL_RIVERS
-                ),
-                ignore = listOf(FishVariant.Ignore.ANIMATION, FishVariant.Ignore.MODEL)
-            ),
-            "cave" to FishVariant.biomeVariant(
-                "cave", listOf(HybridAquaticBiomeTags.CAVES),
-                ignore = listOf(FishVariant.Ignore.ANIMATION, FishVariant.Ignore.MODEL)
-            )
         )
     ) {
 

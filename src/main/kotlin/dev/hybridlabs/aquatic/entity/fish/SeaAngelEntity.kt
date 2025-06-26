@@ -9,7 +9,7 @@ import net.minecraft.world.World
 
 class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE
         ),

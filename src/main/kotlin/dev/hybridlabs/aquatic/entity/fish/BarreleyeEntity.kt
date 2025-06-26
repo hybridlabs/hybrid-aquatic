@@ -9,7 +9,7 @@ import net.minecraft.world.World
 
 class BarreleyeEntity(entityType: EntityType<out BarreleyeEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE
         ),

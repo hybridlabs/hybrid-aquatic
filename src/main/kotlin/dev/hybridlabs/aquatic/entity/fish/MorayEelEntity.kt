@@ -8,7 +8,7 @@ import net.minecraft.world.World
 
 class MorayEelEntity(entityType: EntityType<out MorayEelEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.SMALL_PREY,
             HybridAquaticEntityTags.CRUSTACEAN,

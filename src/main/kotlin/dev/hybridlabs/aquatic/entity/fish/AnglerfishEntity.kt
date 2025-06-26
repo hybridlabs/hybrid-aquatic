@@ -18,7 +18,7 @@ import java.util.*
 
 class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.SMALL_PREY
         ),

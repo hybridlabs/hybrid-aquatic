@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -9,10 +8,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
 class GoldfishEntity(entityType: EntityType<out GoldfishEntity>, world: World) :
-    HybridAquaticFishEntity(entityType, world, variants = hashMapOf(
-        "shubunkin" to FishVariant.biomeVariant("shubunkin", listOf(HybridAquaticBiomeTags.CHERRY),
-            ignore = listOf(FishVariant.Ignore.MODEL, FishVariant.Ignore.ANIMATION)),
-        ),
+    HybridAquaticFishEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE),
         listOf(

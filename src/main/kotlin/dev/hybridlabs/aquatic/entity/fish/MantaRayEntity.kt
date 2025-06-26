@@ -9,7 +9,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.world.World
 
 class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: World) :
-    HybridAquaticFishEntity(entityType, world, emptyMap(),
+    HybridAquaticFishEntity(entityType, world,
         listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.NONE)) {
 
     override fun initGoals() {

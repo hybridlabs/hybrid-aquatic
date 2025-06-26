@@ -10,7 +10,7 @@ import net.minecraft.world.World
 
 class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.CEPHALOPOD,
             HybridAquaticEntityTags.SMALL_PREY

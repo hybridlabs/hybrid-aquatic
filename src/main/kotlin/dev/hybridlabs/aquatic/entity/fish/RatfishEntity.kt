@@ -8,7 +8,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.world.World
 
 class RatfishEntity(entityType: EntityType<out RatfishEntity>, world: World) :
-    HybridAquaticFishEntity(entityType, world, emptyMap(),
+    HybridAquaticFishEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.CRUSTACEAN),
         listOf(

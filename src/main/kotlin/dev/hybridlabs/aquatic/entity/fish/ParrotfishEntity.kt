@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -10,9 +9,7 @@ import net.minecraft.world.World
 
 class ParrotfishEntity(entityType: EntityType<out ParrotfishEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, variants = hashMapOf(
-            "humphead" to FishVariant.biomeVariant("humphead", listOf(HybridAquaticBiomeTags.REEF)),
-        ),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE
         ),

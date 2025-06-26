@@ -12,7 +12,7 @@ import net.minecraft.world.World
 
 class StonefishEntity(entityType: EntityType<out StonefishEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.SMALL_PREY
         ),

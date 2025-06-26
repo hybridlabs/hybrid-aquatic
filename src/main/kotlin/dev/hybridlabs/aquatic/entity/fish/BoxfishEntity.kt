@@ -7,7 +7,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.world.World
 
 class BoxfishEntity(entityType: EntityType<out BoxfishEntity>, world: World) :
-    HybridAquaticFishEntity(entityType, world, emptyMap(),
+    HybridAquaticFishEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE),
         listOf(

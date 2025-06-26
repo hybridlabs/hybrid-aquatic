@@ -20,10 +20,7 @@ open class HybridAquaticSchoolingFishEntity(
     override val predator: List<TagKey<EntityType<*>>>,
     private var leader: HybridAquaticSchoolingFishEntity? = null,
     private var groupSize: Int = 1,
-    private val variants: Map<String, FishVariant> = hashMapOf(),
-    override val assumeDefault: Boolean = false,
-    override val collisionRules: List<VariantCollisionRules> = listOf()
-) : HybridAquaticFishEntity(type, world, variants, listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.NONE)) {
+) : HybridAquaticFishEntity(type, world, listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.NONE)) {
 
     override fun initGoals() {
         super.initGoals()

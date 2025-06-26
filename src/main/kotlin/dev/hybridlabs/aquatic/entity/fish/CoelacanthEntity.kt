@@ -8,7 +8,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.world.World
 
 class CoelacanthEntity(entityType: EntityType<out CoelacanthEntity>, world: World) :
-    HybridAquaticFishEntity(entityType, world, emptyMap(),
+    HybridAquaticFishEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.SMALL_PREY,
             HybridAquaticEntityTags.CEPHALOPOD),

@@ -1,5 +1,48 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
+import dev.hybridlabs.aquatic.entity.fish.SurgeonfishEntity
+import net.minecraft.util.Identifier
 
-class SurgeonfishEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("surgeonfish")
+class SurgeonfishEntityModel : HybridAquaticFishEntityModel<SurgeonfishEntity>("surgeonfish") {
+
+    private val BLUE_TANG_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/surgeonfish/surgeonfish_blue_tang.png")
+    private val POWDER_BLUE_TANG_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/surgeonfish/surgeonfish_powder_blue_tang.png")
+    private val YELLOW_TANG_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/surgeonfish/surgeonfish_yellow_tang.png")
+    private val LINED_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/surgeonfish/surgeonfish_lined.png")
+    private val ORANGESHOULDER_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/surgeonfish/surgeonfish_orangeshoulder.png")
+    private val SOHAL_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/surgeonfish/surgeonfish_sohal.png")
+    private val UNICORNFISH_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/surgeonfish/surgeonfish_unicornfish.png")
+
+    private val BLUE_TANG_MODEL = Identifier("hybrid-aquatic", "geo/fish/surgeonfish/surgeonfish_blue_tang.geo.json")
+    private val POWDER_BLUE_TANG_MODEL = Identifier("hybrid-aquatic", "geo/fish/surgeonfish/surgeonfish_powder_blue_tang.geo.json")
+    private val YELLOW_TANG_MODEL = Identifier("hybrid-aquatic", "geo/fish/surgeonfish/surgeonfish_yellow_tang.geo.json")
+    private val LINED_MODEL = Identifier("hybrid-aquatic", "geo/fish/surgeonfish/surgeonfish_lined.geo.json")
+    private val ORANGESHOULDER_MODEL = Identifier("hybrid-aquatic", "geo/fish/surgeonfish/surgeonfish_orangeshoulder.geo.json")
+    private val SOHAL_MODEL = Identifier("hybrid-aquatic", "geo/fish/surgeonfish/surgeonfish_sohal.geo.json")
+    private val UNICORNFISH_MODEL = Identifier("hybrid-aquatic", "geo/fish/surgeonfish/surgeonfish_unicornfish.geo.json")
+
+    override fun getTextureResource(animatable: SurgeonfishEntity): Identifier {
+        return when (animatable.variant) {
+            SurgeonfishEntity.Type.BLUE_TANG -> BLUE_TANG_TEXTURE
+            SurgeonfishEntity.Type.POWDER_BLUE_TANG -> POWDER_BLUE_TANG_TEXTURE
+            SurgeonfishEntity.Type.YELLOW_TANG -> YELLOW_TANG_TEXTURE
+            SurgeonfishEntity.Type.LINED -> LINED_TEXTURE
+            SurgeonfishEntity.Type.ORANGESHOULDER -> ORANGESHOULDER_TEXTURE
+            SurgeonfishEntity.Type.SOHAL -> SOHAL_TEXTURE
+            SurgeonfishEntity.Type.UNICORNFISH -> UNICORNFISH_TEXTURE
+        }
+    }
+
+    override fun getModelResource(animatable: SurgeonfishEntity): Identifier {
+        return when (animatable.variant) {
+            SurgeonfishEntity.Type.BLUE_TANG -> BLUE_TANG_MODEL
+            SurgeonfishEntity.Type.POWDER_BLUE_TANG -> POWDER_BLUE_TANG_MODEL
+            SurgeonfishEntity.Type.YELLOW_TANG -> YELLOW_TANG_MODEL
+            SurgeonfishEntity.Type.LINED -> LINED_MODEL
+            SurgeonfishEntity.Type.ORANGESHOULDER -> ORANGESHOULDER_MODEL
+            SurgeonfishEntity.Type.SOHAL -> SOHAL_MODEL
+            SurgeonfishEntity.Type.UNICORNFISH -> UNICORNFISH_MODEL
+            else -> BLUE_TANG_MODEL
+        }
+    }
+}

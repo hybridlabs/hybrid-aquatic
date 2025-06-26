@@ -8,7 +8,7 @@ import net.minecraft.world.World
 
 class SeaBassEntity(entityType: EntityType<out SeaBassEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE
         ),
