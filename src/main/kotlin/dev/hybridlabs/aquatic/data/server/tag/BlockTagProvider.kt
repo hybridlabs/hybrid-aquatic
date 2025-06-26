@@ -99,10 +99,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.DRIFTWOOD_LOG)
             .add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG)
 
-        getOrCreateTagBuilder(BlockTags.UNDERWATER_BONEMEALS)
-            .add(HybridAquaticBlocks.RED_ALGAE)
-            .add(HybridAquaticBlocks.SEA_LETTUCE)
-
         // plushies
         Registries.BLOCK
             .filter(filterHybridAquatic(Registries.BLOCK))
