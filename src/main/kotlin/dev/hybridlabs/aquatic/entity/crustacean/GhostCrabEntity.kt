@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
@@ -8,16 +7,7 @@ import net.minecraft.world.World
 
 class GhostCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
     HybridAquaticCrustaceanEntity(
-        entityType, world, true, variants = hashMapOf(
-            "purple" to CrustaceanVariant.biomeVariant("purple", HybridAquaticBiomeTags.SANDY_BEACHES,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)),
-            "yellow" to CrustaceanVariant.biomeVariant("yellow", HybridAquaticBiomeTags.SANDY_BEACHES,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)),
-            "red" to CrustaceanVariant.biomeVariant("red", HybridAquaticBiomeTags.SANDY_BEACHES,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)),
-            "white" to CrustaceanVariant.biomeVariant("white", HybridAquaticBiomeTags.SANDY_BEACHES,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)))
-    ) {
+        entityType, world, true) {
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {

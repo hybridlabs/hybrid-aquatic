@@ -1,21 +1,12 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.world.World
 
 class FiddlerCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
-    HybridAquaticCrustaceanEntity(
-        entityType, world, true, variants = hashMapOf(
-            "blue" to CrustaceanVariant.biomeVariant("blue", HybridAquaticBiomeTags.SWAMP,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)),
-            "red" to CrustaceanVariant.biomeVariant("red", HybridAquaticBiomeTags.SWAMP,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)),
-            "purple" to CrustaceanVariant.biomeVariant("purple", HybridAquaticBiomeTags.SWAMP,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)))
-    ) {
+    HybridAquaticCrustaceanEntity(entityType, world, true) {
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {

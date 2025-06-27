@@ -6,7 +6,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.world.World
 
 class SpiderCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
-    HybridAquaticCrustaceanEntity(entityType, world, false, emptyMap()) {
+    HybridAquaticCrustaceanEntity(entityType, world, false) {
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {

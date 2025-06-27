@@ -21,7 +21,6 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
@@ -29,8 +28,6 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
-import net.minecraft.world.biome.Biome
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -47,9 +44,6 @@ open class HybridAquaticCrustaceanEntity(
     type: EntityType<out HybridAquaticCrustaceanEntity>,
     world: World,
     open val canDance: Boolean,
-    private val variants: Map<String, CrustaceanVariant> = mutableMapOf(),
-    open val assumeDefault: Boolean = false,
-    open val collisionRules: List<VariantCollisionRules> = listOf(),
 ) : WaterCreatureEntity(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false
@@ -67,34 +61,10 @@ open class HybridAquaticCrustaceanEntity(
             dataTracker.set(CRUSTACEAN_SIZE, size)
         }
 
-    private var variantData: NbtCompound
-        get() = dataTracker.get(VARIANT_DATA)
-        set(value) {
-            dataTracker.set(VARIANT_DATA, value)
-        }
-
-    private var variantKey: String
-        get() = dataTracker.get(VARIANT).ifBlank {
-            if (!assumeDefault && variants.isNotEmpty()) {
-                variants.isNotEmpty()
-            }
-            dataTracker.get(VARIANT)
-        }
-        private set(value) {
-            dataTracker.set(VARIANT, value)
-        }
-
-    @Suppress("UNUSED_PARAMETER")
-    var variant: CrustaceanVariant?
-        get() = variants[variantKey]
-        private set(value) {}
-
     override fun initDataTracker() {
         super.initDataTracker()
         dataTracker.startTracking(CRUSTACEAN_SIZE, 0)
         dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
     }
 
     override fun initGoals() {
@@ -113,48 +83,6 @@ open class HybridAquaticCrustaceanEntity(
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-
-        if (variants.isNotEmpty()) {
-            if (spawnReason == SpawnReason.SPAWN_EGG) {
-                variantKey = variants.keys.elementAt(random.nextBetween(0, variants.size - 1))
-            } else {
-                // Handle collisions
-                val validKeys =
-                    variants.filter { it.value.spawnCondition(world, spawnReason, blockPos, random) }.map { it.key }
-
-                if (validKeys.isEmpty()) {
-                    variantKey = variants.keys.random()
-                } else if (collisionRules.isNotEmpty()) {
-                    for (rule in collisionRules) {
-                        val variantSet = rule.variants.toSet()
-                        if ((rule.exclusionStatus == VariantCollisionRules.ExclusionStatus.EXCLUSIVE && validKeys.toSet() == variantSet) ||
-                            (rule.exclusionStatus == VariantCollisionRules.ExclusionStatus.INCLUSIVE && validKeys.containsAll(
-                                variantSet
-                            ))
-                        ) {
-                            variantKey = rule.collisionHandler(validKeys.toSet(), random, world)
-                            break
-                        }
-                    }
-                } else {
-                    // Default to a priority based system
-                    val validityFilter = variants.filter { validKeys.contains(it.key) }
-                    variantKey = if (validityFilter.isNotEmpty()) {
-                        val maxPriority = validityFilter.values.maxOf { it.priority }
-                        val filteredMap = validityFilter.filter { it.value.priority == maxPriority }
-                        if (filteredMap.isNotEmpty()) {
-                            filteredMap.keys.random()
-                        } else {
-                            validKeys.random()
-                        }
-                    } else {
-                        validKeys.random()
-                    }
-                }
-            }
-        }
-
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -250,16 +178,12 @@ open class HybridAquaticCrustaceanEntity(
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
-        nbt.putString(VARIANT_KEY, variantKey)
-        nbt.put(VARIANT_DATA_KEY, variantData)
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
         nbt.putBoolean("FromFishingNet", fromFishingNet)
     }
 
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
-        variantKey = nbt.getString(VARIANT_KEY)
-        variantData = nbt.getCompound(VARIANT_DATA_KEY)
         size = nbt.getInt(CRUSTACEAN_SIZE_KEY)
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
@@ -350,10 +274,6 @@ open class HybridAquaticCrustaceanEntity(
             DataTracker.registerData(HybridAquaticCrustaceanEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val ATTEMPT_ATTACK: TrackedData<Boolean> =
             DataTracker.registerData(HybridAquaticCrustaceanEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
-        val VARIANT: TrackedData<String> =
-            DataTracker.registerData(HybridAquaticCrustaceanEntity::class.java, TrackedDataHandlerRegistry.STRING)
-        var VARIANT_DATA: TrackedData<NbtCompound> =
-            DataTracker.registerData(HybridAquaticCrustaceanEntity::class.java, TrackedDataHandlerRegistry.NBT_COMPOUND)
 
         val DANCE: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
         val HIDE: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
@@ -405,86 +325,6 @@ open class HybridAquaticCrustaceanEntity(
             return 1.0f + (crustacean.size * adjustment)
         }
 
-        const val VARIANT_KEY = "Variant"
-        const val VARIANT_DATA_KEY = "VariantData"
         const val CRUSTACEAN_SIZE_KEY = "CrustaceanSize"
-    }
-
-    @Suppress("UNUSED")
-    data class CrustaceanVariant(
-        val variantName: String,
-        val spawnCondition: (WorldAccess, SpawnReason, BlockPos, Random) -> Boolean,
-        val ignore: List<Ignore> = emptyList(),
-        val priority: Int = 0,
-        var providedVariant: (World, BlockPos, Random, HybridAquaticCrustaceanEntity) -> String = { _, _, _, _ ->
-            variantName
-        }
-    ) {
-
-        fun getProvidedVariant(crustacean: HybridAquaticCrustaceanEntity): String {
-            return providedVariant(crustacean.world, crustacean.blockPos, crustacean.random, crustacean)
-        }
-
-        companion object {
-            fun biomeVariant(
-                variantName: String,
-                biomes: TagKey<Biome>,
-                ignore: List<Ignore> = emptyList()
-            ): CrustaceanVariant {
-                return CrustaceanVariant(variantName, { world, _, pos, _ ->
-                    world.getBiome(pos).isIn(biomes)
-                }, ignore)
-            }
-        }
-
-        enum class Ignore {
-            TEXTURE,
-            MODEL,
-            ANIMATION
-        }
-    }
-
-    @Suppress("UNUSED")
-    data class VariantCollisionRules(
-        val variants: Set<String>,
-        val collisionHandler: (Set<String>, Random, ServerWorldAccess) -> String,
-        val exclusionStatus: ExclusionStatus = ExclusionStatus.INCLUSIVE
-    ) {
-
-        enum class ExclusionStatus {
-            INCLUSIVE,
-            EXCLUSIVE
-        }
-
-        fun equalDistribution(
-            variants: Set<String>,
-            status: ExclusionStatus = ExclusionStatus.INCLUSIVE
-        ): VariantCollisionRules {
-            return VariantCollisionRules(variants, { possibleVariants, _, _ ->
-                possibleVariants.random()
-            }, status)
-        }
-
-        fun weightedDistribution(
-            weights: Set<Pair<String, Double>>,
-            status: ExclusionStatus = ExclusionStatus.EXCLUSIVE
-        ): VariantCollisionRules {
-            return VariantCollisionRules(weights.map { pair -> pair.first }.toSet(), { _, random, _ ->
-                val weightTotal = weights.sumOf { pair -> pair.second }
-                val randomVal = random.nextFloat() * weightTotal
-                var accumulatedWeight = 0.0
-                var result = ""
-
-                for (pair in weights) {
-                    accumulatedWeight += pair.second
-                    if (randomVal < accumulatedWeight) {
-                        result = pair.first
-                        break
-                    }
-                }
-
-                result
-            }, status)
-        }
     }
 }

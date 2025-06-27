@@ -1,33 +1,13 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
 class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
     HybridAquaticCrustaceanEntity(
-        entityType, world, false, variants = hashMapOf(
-            "shell" to CrustaceanVariant.biomeVariant(
-                "shell", HybridAquaticBiomeTags.SANDY_BEACHES,
-                ignore = listOf(CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "skull" to CrustaceanVariant.biomeVariant(
-                "skull", HybridAquaticBiomeTags.SANDY_BEACHES,
-                ignore = listOf(CrustaceanVariant.Ignore.ANIMATION)
-            ),
-        )
-    ) {
-
-    public override fun getLootTableId(): Identifier {
-        return when (this.variant?.variantName) {
-            "skull" -> Identifier("hybrid-aquatic", "gameplay/hermit_crab_skull")
-            "shell" -> Identifier("hybrid-aquatic", "gameplay/hermit_crab_shell")
-            else -> super.getLootTableId()
-        }
-    }
+        entityType, world, false) {
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {

@@ -1,34 +1,37 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.VariantHolder
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.util.Identifier
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.function.ValueLists
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
+import java.util.function.IntFunction
+import kotlin.random.Random
 
 class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
     HybridAquaticCrustaceanEntity(
-        entityType, world, false, variants = hashMapOf(
-            "american" to CrustaceanVariant.biomeVariant("american", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)),
-            "california_spiny" to CrustaceanVariant.biomeVariant("california_spiny", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)),
-            "ornate_spiny" to CrustaceanVariant.biomeVariant("ornate_spiny", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)),
-            "regal_slipper" to CrustaceanVariant.biomeVariant("regal_slipper", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.ANIMATION)),
-            )
-    ) {
+        entityType, world, false),
+    VariantHolder<LobsterEntity.Type> {
 
-    public override fun getLootTableId(): Identifier {
-        return when (this.variant?.variantName) {
-            "american" -> Identifier("hybrid-aquatic", "gameplay/clawed_lobster")
-            "california_spiny" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
-            "ornate_spiny" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
-            "regal_slipper" -> Identifier("hybrid-aquatic", "gameplay/clawless_lobster")
-            else -> super.getLootTableId()
-        }
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        variant = Type.entries.random(Random)
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {
@@ -40,12 +43,65 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
+        val TYPE: TrackedData<Int> = DataTracker.registerData(LobsterEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
     }
+
     override fun getMaxSize() : Int {
         return 5
     }
 
     override fun getMinSize(): Int {
         return -5
+    }
+
+    override fun initDataTracker() {
+        dataTracker.startTracking(TYPE, 0)
+        super.initDataTracker()
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        nbt.putString("Type", this.variant.asString())
+        super.writeCustomDataToNbt(nbt)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        this.variant = Type.byName(nbt.getString("Type"))
+        super.readCustomDataFromNbt(nbt)
+    }
+
+    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+        AMERICAN(0, "american"),
+        CALIFORNIA_SPINY(1, "california_spiny"),
+        ORNATE_SPINY(2, "ornate_spiny"),
+        REGAL_SLIPPER(3, "regal_slipper");
+
+        override fun asString(): String {
+            return this.key
+        }
+
+        companion object {
+            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                { obj: Type -> obj.id },
+                entries.toTypedArray(),
+                ValueLists.OutOfBoundsHandling.ZERO
+            )
+
+            fun byName(name: String?): Type {
+                return CODEC.byId(name, AMERICAN) as Type
+            }
+
+            fun fromId(id: Int): Type {
+                return BY_ID.apply(id) as Type
+            }
+        }
+    }
+
+    override fun getVariant(): Type {
+        return Type.fromId((dataTracker.get(TYPE) as Int))
+    }
+
+    override fun setVariant(type: Type) {
+        dataTracker.set(TYPE, type.id)
     }
 }

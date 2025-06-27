@@ -1,14 +1,12 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
-import net.minecraft.registry.tag.BiomeTags
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
@@ -20,46 +18,7 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 
 class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
-    HybridAquaticCrustaceanEntity(
-        entityType, world, false, variants = hashMapOf(
-            "brain" to CrustaceanVariant.biomeVariant(
-                "brain", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "fire" to CrustaceanVariant.biomeVariant(
-                "fire", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "bubble" to CrustaceanVariant.biomeVariant(
-                "bubble", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "horn" to CrustaceanVariant.biomeVariant(
-                "horn", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "tube" to CrustaceanVariant.biomeVariant(
-                "tube", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "sun" to CrustaceanVariant.biomeVariant(
-                "sun", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "button" to CrustaceanVariant.biomeVariant(
-                "button", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "lophelia" to CrustaceanVariant.biomeVariant(
-                "lophelia", BiomeTags.IS_DEEP_OCEAN,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "thorn" to CrustaceanVariant.biomeVariant(
-                "thorn", BiomeTags.IS_DEEP_OCEAN,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            )
-        )
-    ) {
+    HybridAquaticCrustaceanEntity(entityType, world, false) {
 
     override fun getLootTableId(): Identifier {
         return Identifier("hybrid-aquatic", "entities/decorator_crab")
