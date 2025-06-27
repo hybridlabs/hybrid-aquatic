@@ -5,7 +5,7 @@ import net.minecraft.util.Identifier
 
 class LobsterEntityModel : HybridAquaticCrustaceanEntityModel<LobsterEntity>("lobster") {
 
-    private val AMERICAN_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/crustacean/lobster_american.png")
+    private val AMERICAN_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_american.png")
     private val CALIFORNIA_SPINY_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_california_spiny.png")
     private val ORNATE_SPINY_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_ornate_spiny.png")
     private val REGAL_SLIPPER_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_regal_slipper.png")
