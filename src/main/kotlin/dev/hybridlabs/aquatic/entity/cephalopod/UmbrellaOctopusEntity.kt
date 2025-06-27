@@ -11,7 +11,6 @@ class UmbrellaOctopusEntity(entityType: EntityType<out UmbrellaOctopusEntity>, w
     HybridAquaticCephalopodEntity(
         entityType,
         world,
-        emptyMap(),
         HybridAquaticEntityTags.NONE,
         HybridAquaticEntityTags.SHARK,
         false,

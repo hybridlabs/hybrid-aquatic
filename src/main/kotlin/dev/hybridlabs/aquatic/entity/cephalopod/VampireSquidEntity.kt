@@ -14,7 +14,6 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
     HybridAquaticCephalopodEntity(
         entityType,
         world,
-        emptyMap(),
         HybridAquaticEntityTags.NONE,
         HybridAquaticEntityTags.SHARK,
         false,

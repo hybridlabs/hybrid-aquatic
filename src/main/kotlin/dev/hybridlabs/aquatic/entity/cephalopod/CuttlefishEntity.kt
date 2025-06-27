@@ -11,7 +11,6 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
     HybridAquaticCephalopodEntity(
         entityType,
         world,
-        emptyMap(),
         HybridAquaticEntityTags.CRUSTACEAN,
         HybridAquaticEntityTags.SHARK,
         true,

@@ -10,7 +10,6 @@ class ArrowSquidEntity(entityType: EntityType<out ArrowSquidEntity>, world: Worl
     HybridAquaticCephalopodEntity(
         entityType,
         world,
-        emptyMap(),
         HybridAquaticEntityTags.CRUSTACEAN,
         HybridAquaticEntityTags.SHARK,
         true,

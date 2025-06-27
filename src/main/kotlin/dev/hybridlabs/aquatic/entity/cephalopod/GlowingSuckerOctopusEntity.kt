@@ -10,7 +10,6 @@ class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopus
     HybridAquaticCephalopodEntity(
         entityType,
         world,
-        emptyMap(),
         HybridAquaticEntityTags.CRUSTACEAN,
         HybridAquaticEntityTags.SHARK,
         false,

@@ -34,8 +34,6 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
-import net.minecraft.world.biome.Biome
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -49,7 +47,6 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HybridAquaticCephalopodEntity(
     type: EntityType<out HybridAquaticCephalopodEntity>,
     world: World,
-    private val variants: Map<String, CephalopodVariant> = hashMapOf(),
     open val prey: TagKey<EntityType<*>>,
     open val predator: TagKey<EntityType<*>>,
     open var hasInk: Boolean,
@@ -72,8 +69,6 @@ open class HybridAquaticCephalopodEntity(
         dataTracker.startTracking(CEPHALOPOD_SIZE, 0)
         dataTracker.startTracking(ATTEMPT_ATTACK, false)
         dataTracker.startTracking(HUNGER, MAX_HUNGER)
-        dataTracker.startTracking(VARIANT, "")
-        dataTracker.startTracking(VARIANT_DATA, NbtCompound())
     }
 
     override fun initialize(
@@ -84,11 +79,6 @@ open class HybridAquaticCephalopodEntity(
         entityNbt: NbtCompound?
     ): EntityData? {
         this.air = getMaxMoistness()
-
-        for (pair in variants) if (pair.value.spawnCondition(world, spawnReason, blockPos, random)) {
-            variantKey = pair.key
-        }
-
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
         this.pitch = 0.0f
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
@@ -199,8 +189,6 @@ open class HybridAquaticCephalopodEntity(
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
         nbt.putInt(MOISTNESS_KEY, moistness)
-        nbt.putString(VARIANT_KEY, variantKey)
-        nbt.put(VARIANT_DATA_KEY, variantData)
         nbt.putInt(CEPHALOPOD_SIZE_KEY, size)
         nbt.putInt(HUNGER_KEY, hunger)
         nbt.putBoolean("FromFishingNet", fromFishingNet)
@@ -209,8 +197,6 @@ open class HybridAquaticCephalopodEntity(
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         super.readCustomDataFromNbt(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
-        variantKey = nbt.getString(VARIANT_KEY)
-        variantData = nbt.getCompound(VARIANT_DATA_KEY)
         size = nbt.getInt(CEPHALOPOD_SIZE_KEY)
         hunger = nbt.getInt(HUNGER_KEY)
         fromFishingNet = nbt.getBoolean("FromFishingNet")
@@ -287,25 +273,6 @@ open class HybridAquaticCephalopodEntity(
         get() = dataTracker.get(ATTEMPT_ATTACK)
         set(attemptAttack) {
             dataTracker.set(ATTEMPT_ATTACK, attemptAttack)
-        }
-
-    private var variantData: NbtCompound
-        get() = dataTracker.get(VARIANT_DATA)
-        set(value) {
-            dataTracker.set(VARIANT_DATA, value)
-        }
-
-    private var variantKey: String
-        get() = dataTracker.get(VARIANT)
-        private set(value) {
-            dataTracker.set(VARIANT, value)
-            dataTracker.set(VARIANT, value)
-        }
-
-    var variant: CephalopodVariant?
-        get() = variants[variantKey]
-        private set(value) {
-            variants
         }
 
     // endregion
@@ -396,16 +363,10 @@ open class HybridAquaticCephalopodEntity(
             DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val ATTEMPT_ATTACK: TrackedData<Boolean> =
             DataTracker.registerData(HybridAquaticCephalopodEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
-        val VARIANT: TrackedData<String> =
-            DataTracker.registerData(HybridAquaticCephalopodEntity::class.java, TrackedDataHandlerRegistry.STRING)
-        var VARIANT_DATA: TrackedData<NbtCompound> =
-            DataTracker.registerData(HybridAquaticCephalopodEntity::class.java, TrackedDataHandlerRegistry.NBT_COMPOUND)
 
         const val MAX_HUNGER = 2400
         const val HUNGER_KEY = "Hunger"
         const val MOISTNESS_KEY = "Moistness"
-        const val VARIANT_KEY = "Variant"
-        const val VARIANT_DATA_KEY = "VariantData"
         const val CEPHALOPOD_SIZE_KEY = "CephalopodSize"
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
@@ -445,33 +406,4 @@ open class HybridAquaticCephalopodEntity(
             return 1.0f + (cephalopod.size * adjustment)
         }
     }
-
-    @Suppress("UNUSED")
-    data class CephalopodVariant(
-        var variantName: String,
-        val spawnCondition: (WorldAccess, SpawnReason, BlockPos, Random) -> Boolean,
-        var ignore: List<Ignore> = emptyList()
-    ) {
-        companion object {
-            /**
-             * Creates a biome variant of a cephalopod
-             */
-            fun biomeVariant(
-                variantName: String,
-                biomes: TagKey<Biome>,
-                ignore: List<Ignore> = emptyList()
-            ): CephalopodVariant {
-                return CephalopodVariant(variantName, { world, _, pos, _ ->
-                    world.getBiome(pos).isIn(biomes)
-                }, ignore)
-            }
-        }
-
-        enum class Ignore {
-            TEXTURE,
-            MODEL,
-            ANIMATION
-        }
-    }
-
 }

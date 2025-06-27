@@ -12,7 +12,6 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
     HybridAquaticCephalopodEntity(
         entityType,
         world,
-        emptyMap(),
         HybridAquaticEntityTags.CRUSTACEAN,
         HybridAquaticEntityTags.SHARK,
         true,

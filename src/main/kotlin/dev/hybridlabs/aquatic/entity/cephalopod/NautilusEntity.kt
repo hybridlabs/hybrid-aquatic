@@ -15,7 +15,6 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: World) :
     HybridAquaticCephalopodEntity(
         entityType,
         world,
-        emptyMap(),
         HybridAquaticEntityTags.NONE,
         HybridAquaticEntityTags.SHARK,
         false,
