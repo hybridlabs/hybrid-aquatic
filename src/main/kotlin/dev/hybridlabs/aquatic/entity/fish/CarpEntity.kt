@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
@@ -13,6 +14,7 @@ import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.entry.RegistryEntry
+import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
@@ -54,6 +56,13 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    override fun getLootTableId(): Identifier {
+        return when (variant) {
+            Type.COMMON -> HybridAquaticLootTables.CARP
+            else -> HybridAquaticLootTables.KOI
+        }
+    }
+
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
@@ -63,7 +72,9 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(TunaEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(TunaEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
     }
 
     override fun initDataTracker() {
@@ -113,6 +124,7 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
                     biome.isIn(HybridAquaticBiomeTags.CHERRY) -> {
                         Type.fromId(random.nextInt(1, 5))
                     }
+
                     else -> {
                         COMMON
                     }

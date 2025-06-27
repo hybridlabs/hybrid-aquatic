@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FishJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
+import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
@@ -15,6 +16,7 @@ import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.entry.RegistryEntry
+import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
@@ -58,6 +60,13 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: World) :
         super.initGoals()
         goalSelector.add(5, FishJumpGoal(this, 10))
         goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 16))
+    }
+
+    override fun getLootTableId(): Identifier {
+        return when (variant) {
+            Type.YELLOWFIN -> HybridAquaticLootTables.YELLOWFIN
+            Type.BLUEFIN -> HybridAquaticLootTables.BLUEFIN
+        }
     }
 
     companion object {

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
@@ -10,6 +11,7 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
@@ -32,6 +34,15 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
     ): EntityData? {
         variant = Type.entries.random(Random)
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun getLootTableId(): Identifier {
+        return when (variant) {
+            LobsterEntity.Type.AMERICAN -> HybridAquaticLootTables.CLAWED_LOBSTER
+            LobsterEntity.Type.CALIFORNIA_SPINY -> HybridAquaticLootTables.CLAWLESS_LOBSTER
+            LobsterEntity.Type.ORNATE_SPINY -> HybridAquaticLootTables.CLAWLESS_LOBSTER
+            LobsterEntity.Type.REGAL_SLIPPER -> HybridAquaticLootTables.CLAWLESS_LOBSTER
+        }
     }
 
     companion object {
