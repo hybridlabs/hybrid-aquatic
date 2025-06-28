@@ -112,7 +112,7 @@ object HybridAquaticEntityTypes {
     val CLOWNFISH = registerFish(
         "clownfish",
         ::ClownfishEntity,
-        EntityDimensions.fixed(0.4f, 0.35f),
+        EntityDimensions.fixed(0.3f, 0.3f),
         ClownfishEntity.createMobAttributes()
     )
 
@@ -703,7 +703,7 @@ object HybridAquaticEntityTypes {
     val HAMMERHEAD_SHARK = registerShark(
         "hammerhead_shark",
         ::HammerheadSharkEntity,
-        EntityDimensions.fixed(1.5f, 0.6f),
+        EntityDimensions.fixed(1.25f, 0.6f),
         HammerheadSharkEntity.createMobAttributes()
     )
 
@@ -724,7 +724,7 @@ object HybridAquaticEntityTypes {
     val WHALE_SHARK = registerShark(
         "whale_shark",
         ::WhaleSharkEntity,
-        EntityDimensions.fixed(2.0f, 0.8f),
+        EntityDimensions.fixed(2.5f, 0.8f),
         WhaleSharkEntity.createMobAttributes()
     )
 
