@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
@@ -14,6 +15,7 @@ import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.entry.RegistryEntry
+import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
@@ -34,6 +36,13 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: World) :
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(1, RevengeGoal(this))
+    }
+
+    override fun getLootTableId(): Identifier {
+        return when (variant) {
+            Type.BLUE_SPOTTED -> HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY
+            Type.SPOTTED_EAGLE -> HybridAquaticLootTables.SPOTTED_EAGLE_RAY
+        }
     }
 
     override fun initialize(
