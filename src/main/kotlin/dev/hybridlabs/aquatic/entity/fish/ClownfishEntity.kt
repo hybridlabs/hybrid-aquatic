@@ -48,7 +48,7 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)

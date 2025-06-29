@@ -8,12 +8,12 @@ import java.util.function.Predicate
 class FishFollowGroupLeaderGoal(
     val fish: HybridAquaticSchoolingFishEntity
 ): Goal() {
-    private val MIN_SEARCH_DELAY = 200
+    private val minSearchDelay = 200
     private var moveDelay = 0
     private var checkSurroundingDelay = getSurroundingSearchDelay(fish)
 
     protected fun getSurroundingSearchDelay(fish: HybridAquaticSchoolingFishEntity?): Int {
-        return toGoalTicks(MIN_SEARCH_DELAY + fish!!.random.nextInt(MIN_SEARCH_DELAY) % 20)
+        return toGoalTicks(minSearchDelay + fish!!.random.nextInt(minSearchDelay) % 20)
     }
 
     override fun canStart(): Boolean {
