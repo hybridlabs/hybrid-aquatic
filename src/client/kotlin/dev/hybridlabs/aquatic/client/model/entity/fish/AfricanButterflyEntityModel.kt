@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
+import dev.hybridlabs.aquatic.entity.fish.AfricanButterflyEntity
 
-class AfricanButterflyEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("african_butterfly")
+class AfricanButterflyEntityModel : HybridAquaticFishEntityModel<AfricanButterflyEntity>("african_butterfly")
 

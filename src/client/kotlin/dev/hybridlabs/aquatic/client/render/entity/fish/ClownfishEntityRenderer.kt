@@ -4,5 +4,5 @@ import dev.hybridlabs.aquatic.client.model.entity.fish.ClownfishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
 
-class ClownfishEntityRenderer(context: Context) : HybridAquaticFishEntityRenderer<ClownfishEntity>(context,
-    ClownfishEntityModel(), true, false)
+class ClownfishEntityRenderer(context: Context) :
+    HybridAquaticFishEntityRenderer<ClownfishEntity>(context, ClownfishEntityModel(), true, false)

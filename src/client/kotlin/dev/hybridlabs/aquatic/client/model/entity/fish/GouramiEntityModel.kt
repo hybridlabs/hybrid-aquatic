@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
-import net.minecraft.util.Identifier
+import dev.hybridlabs.aquatic.entity.fish.GouramiEntity
 
-class GouramiEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("gourami")
+class GouramiEntityModel : HybridAquaticFishEntityModel<GouramiEntity>("gourami")

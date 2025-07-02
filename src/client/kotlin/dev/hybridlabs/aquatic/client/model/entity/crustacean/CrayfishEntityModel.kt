@@ -1,5 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
+import dev.hybridlabs.aquatic.entity.crustacean.CrayfishEntity
 
-class CrayfishEntityModel : HybridAquaticCrustaceanEntityModel<HybridAquaticCrustaceanEntity>("crayfish")
+class CrayfishEntityModel : HybridAquaticCrustaceanEntityModel<CrayfishEntity>("crayfish")

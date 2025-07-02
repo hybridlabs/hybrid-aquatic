@@ -1,5 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.NautilusEntity
 
-class NautilusEntityModel : HybridAquaticCephalopodEntityModel<HybridAquaticCephalopodEntity>("nautilus")
+class NautilusEntityModel : HybridAquaticCephalopodEntityModel<NautilusEntity>("nautilus")

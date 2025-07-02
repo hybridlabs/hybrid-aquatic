@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.critter
 
-import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
-import net.minecraft.util.Identifier
+import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
 
-class SeaUrchinEntityModel : HybridAquaticCritterEntityModel<HybridAquaticCritterEntity>("sea_urchin")
+class SeaUrchinEntityModel : HybridAquaticCritterEntityModel<SeaUrchinEntity>("sea_urchin")

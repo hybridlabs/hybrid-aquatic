@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.jellyfish
 
-import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
+import dev.hybridlabs.aquatic.entity.jellyfish.CosmicJellyfishEntity
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.util.Identifier
 
-class CosmicJellyfishEntityModel : HybridAquaticJellyfishEntityModel<HybridAquaticJellyfishEntity>("cosmic_jellyfish") {
-    override fun getRenderType(animatable: HybridAquaticJellyfishEntity, texture: Identifier): RenderLayer {
+class CosmicJellyfishEntityModel : HybridAquaticJellyfishEntityModel<CosmicJellyfishEntity>("cosmic_jellyfish") {
+    override fun getRenderType(animatable: CosmicJellyfishEntity, texture: Identifier): RenderLayer {
         return RenderLayer.getEntityTranslucent(texture)
     }
 }

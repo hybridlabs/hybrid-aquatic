@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
-import net.minecraft.util.Identifier
+import dev.hybridlabs.aquatic.entity.fish.TriggerfishEntity
 
-class TriggerfishEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("triggerfish")
+class TriggerfishEntityModel : HybridAquaticFishEntityModel<TriggerfishEntity>("triggerfish")

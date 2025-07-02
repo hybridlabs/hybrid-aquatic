@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.jellyfish
 
-import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
+import dev.hybridlabs.aquatic.entity.jellyfish.MauveStingerEntity
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.util.Identifier
 
-class MauveStingerEntityModel : HybridAquaticJellyfishEntityModel<HybridAquaticJellyfishEntity>("mauve_stinger") {
-    override fun getRenderType(animatable: HybridAquaticJellyfishEntity, texture: Identifier): RenderLayer {
+class MauveStingerEntityModel : HybridAquaticJellyfishEntityModel<MauveStingerEntity>("mauve_stinger") {
+    override fun getRenderType(animatable: MauveStingerEntity, texture: Identifier): RenderLayer {
         return RenderLayer.getEntityTranslucent(texture)
     }
 }
