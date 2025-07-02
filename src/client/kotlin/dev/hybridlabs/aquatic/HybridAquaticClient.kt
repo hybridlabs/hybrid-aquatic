@@ -102,6 +102,9 @@ object HybridAquaticClient : ClientModInitializer {
             HybridAquaticBlocks.RED_ALGAE,
             HybridAquaticBlocks.TALL_RED_ALGAE,
 
+            HybridAquaticBlocks.BULL_KELP,
+            HybridAquaticBlocks.BULL_KELP_PLANT,
+
             HybridAquaticBlocks.SARGASSUM,
             HybridAquaticBlocks.SARGASSUM_PLANT,
             HybridAquaticBlocks.FLOATING_SARGASSUM,

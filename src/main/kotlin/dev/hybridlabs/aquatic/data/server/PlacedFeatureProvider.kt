@@ -42,6 +42,33 @@ class PlacedFeatureProvider(
             )
         )
 
+        // bull kelp
+        entries.add(
+            HybridAquaticPlacedFeatures.BULL_KELP,
+            PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.BULL_KELP),
+                listOf(
+                    NoiseBasedCountPlacementModifier.of(10, 80.0, 0.0),
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
+                    BiomePlacementModifier.of(),
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticPlacedFeatures.BULL_KELP_FOREST,
+            PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.BULL_KELP),
+                listOf(
+                    NoiseBasedCountPlacementModifier.of(120, 80.0, 0.0),
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
+                    BiomePlacementModifier.of(),
+                )
+            )
+        )
+
         // sargassum
         entries.add(
             HybridAquaticPlacedFeatures.SARGASSUM,

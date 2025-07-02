@@ -67,6 +67,17 @@ class ConfiguredFeatureProvider(
             )
         )
 
+        //#region Bull Kelp
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.BULL_KELP,
+            ConfiguredFeature(
+                HybridAquaticFeatures.BULL_KELP, BullKelpFeatureConfig(
+                    SimpleBlockStateProvider.of(HybridAquaticBlocks.BULL_KELP)
+                )
+            )
+        )
+
         //#region Sargassum
 
         entries.add(

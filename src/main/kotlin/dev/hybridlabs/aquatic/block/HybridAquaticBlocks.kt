@@ -151,6 +151,25 @@ object HybridAquaticBlocks {
         )
     )
 
+    val BULL_KELP = register(
+        "bull_kelp",
+        BullKelpBlock(
+            FabricBlockSettings
+                .copyOf(Blocks.KELP)
+                .nonOpaque()
+        )
+    )
+
+    val BULL_KELP_PLANT = register(
+        "bull_kelp_plant",
+        BullKelpPlantBlock(
+            FabricBlockSettings
+                .copyOf(Blocks.KELP_PLANT)
+                .nonOpaque()
+                .dropsLike(BULL_KELP)
+        )
+    )
+
     val FLOATING_SARGASSUM = register(
         "floating_sargassum",
         FloatingSargassumBlock(
