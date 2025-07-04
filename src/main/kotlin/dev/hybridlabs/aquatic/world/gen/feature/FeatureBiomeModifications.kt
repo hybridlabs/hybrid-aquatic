@@ -24,24 +24,6 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
-            GenerationStep.Feature.VEGETAL_DECORATION,
-            HybridAquaticPlacedFeatures.SARGASSUM
-        )
-
-        BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.DEEP_COLD_OCEANS),
-            GenerationStep.Feature.VEGETAL_DECORATION,
-            HybridAquaticPlacedFeatures.BULL_KELP
-        )
-
-        BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS),
-            GenerationStep.Feature.VEGETAL_DECORATION,
-            HybridAquaticPlacedFeatures.BULL_KELP_FOREST
-        )
-
-        BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.SARGASSUM_FOREST
@@ -51,6 +33,18 @@ object FeatureBiomeModifications {
             BiomeSelectors.tag(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.FLOATING_SARGASSUM
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.BULL_KELP
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.SUGAR_KELP
         )
 
         BiomeModifications.addFeature(
