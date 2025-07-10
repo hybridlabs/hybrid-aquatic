@@ -31,6 +31,19 @@ object HybridAquaticBlocks {
         )
     )
 
+    val GIANT_GREEN_ANEMONE = register(
+        "giant_green_anemone", GiantGreenAnemoneBlock(
+            FabricBlockSettings.create()
+                .mapColor(MapColor.LIME)
+                .ticksRandomly()
+                .strength(0.4f)
+                .nonOpaque()
+                .pistonBehavior(PistonBehavior.DESTROY)
+                .sounds(BlockSoundGroup.SLIME)
+                .drops(Identifier(HybridAquatic.MOD_ID, "blocks/giant_green_anemone"))
+        )
+    )
+
     val STRAWBERRY_ANEMONE = register(
         "strawberry_anemone", StrawberryAnemoneBlock(
             FabricBlockSettings.create()

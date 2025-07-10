@@ -35,6 +35,14 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
+        addDrop(HybridAquaticBlocks.GIANT_GREEN_ANEMONE) { block ->
+            LootTable.builder().pool(
+                LootPool.builder()
+                    .with(ItemEntry.builder(block))
+                    .conditionally(WITH_SILK_TOUCH_OR_SHEARS)
+            )
+        }
+
         addDrop(HybridAquaticBlocks.STRAWBERRY_ANEMONE) { block ->
             LootTable.builder().pool(
                 LootPool.builder()

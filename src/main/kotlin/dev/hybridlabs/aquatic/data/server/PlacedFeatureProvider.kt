@@ -43,6 +43,19 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticPlacedFeatures.GREEN_ANEMONE_PATCH,
+            PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.GREEN_ANEMONE_PATCH),
+                listOf(
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
+                    CountPlacementModifier.of(2),
+                    BiomePlacementModifier.of(),
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticPlacedFeatures.DELESSERIA,
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.DELESSERIA),

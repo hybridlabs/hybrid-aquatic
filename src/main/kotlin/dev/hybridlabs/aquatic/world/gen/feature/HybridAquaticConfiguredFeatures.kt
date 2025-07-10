@@ -11,6 +11,7 @@ import net.minecraft.world.gen.feature.ConfiguredFeature
  */
 object HybridAquaticConfiguredFeatures {
     val ANEMONE_PATCH = register("anemone_patch")
+    val GREEN_ANEMONE_PATCH = register("green_anemone_patch")
     val SARGASSUM = register("sargassum")
     val FLOATING_SARGASSUM = register("floating_sargassum")
     val BULL_KELP = register("bull_kelp")

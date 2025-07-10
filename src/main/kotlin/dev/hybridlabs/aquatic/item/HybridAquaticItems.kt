@@ -202,6 +202,7 @@ object HybridAquaticItems {
         //#region Nature Blocks
 
     val ANEMONE = registerBlockItem("anemone", HybridAquaticBlocks.ANEMONE)
+    val GIANT_GREEN_ANEMONE = registerBlockItem("giant_green_anemone", HybridAquaticBlocks.GIANT_GREEN_ANEMONE)
     val STRAWBERRY_ANEMONE = registerBlockItem("strawberry_anemone", HybridAquaticBlocks.STRAWBERRY_ANEMONE)
     val GIANT_CLAM = registerBlockItem("giant_clam", HybridAquaticBlocks.GIANT_CLAM)
     val SARGASSUM = registerBlockItem("sargassum", HybridAquaticBlocks.SARGASSUM)

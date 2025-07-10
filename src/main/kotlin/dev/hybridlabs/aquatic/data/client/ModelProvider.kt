@@ -50,6 +50,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             // builtin
             mapOf(
                 HybridAquaticBlocks.ANEMONE to (null to TEMPLATE_ANEMONE),
+                HybridAquaticBlocks.GIANT_GREEN_ANEMONE to (null to TEMPLATE_ANEMONE),
                 HybridAquaticBlocks.STRAWBERRY_ANEMONE to (null to TEMPLATE_ANEMONE),
                 HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE to (Blocks.GLASS to TEMPLATE_MESSAGE_IN_A_BOTTLE),
             ).forEach { (block, info) ->

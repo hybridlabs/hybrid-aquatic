@@ -97,6 +97,7 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.BUOY)
             entries.add(HybridAquaticItems.RAFT)
             entries.add(HybridAquaticBlocks.ANEMONE)
+            entries.add(HybridAquaticBlocks.GIANT_GREEN_ANEMONE)
             entries.add(HybridAquaticBlocks.STRAWBERRY_ANEMONE)
             entries.add(HybridAquaticItems.GIANT_CLAM)
             entries.add(HybridAquaticItems.TUBE_SPONGE)
