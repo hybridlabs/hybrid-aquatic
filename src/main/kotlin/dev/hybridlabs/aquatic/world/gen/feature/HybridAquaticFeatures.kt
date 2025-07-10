@@ -17,6 +17,7 @@ object HybridAquaticFeatures {
     val SARGASSUM = register("sargassum", SargassumFeature(SargassumFeatureConfig.CODEC))
     val BULL_KELP = register("bull_kelp", BullKelpFeature(BullKelpFeatureConfig.CODEC))
     val SUGAR_KELP = register("sugar_kelp", SugarKelpFeature(SugarKelpFeatureConfig.CODEC))
+    val DELESSERIA = register("delesseria", DelesseriaFeature(DelesseriaFeatureConfig.CODEC))
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch", SeaLettuceFeature(ProbabilityConfig.CODEC))
     val RED_ALGAE_PATCH = register("red_algae_patch", RedAlgaeFeature(ProbabilityConfig.CODEC))
 

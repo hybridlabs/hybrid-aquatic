@@ -42,7 +42,6 @@ class PlacedFeatureProvider(
             )
         )
 
-        // sugar kelp
         entries.add(
             HybridAquaticPlacedFeatures.SUGAR_KELP,
             PlacedFeature(
@@ -56,7 +55,19 @@ class PlacedFeatureProvider(
             )
         )
 
-        // bull kelp
+        entries.add(
+            HybridAquaticPlacedFeatures.DELESSERIA,
+            PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.DELESSERIA),
+                listOf(
+                    NoiseBasedCountPlacementModifier.of(120, 80.0, 0.0),
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
+                    BiomePlacementModifier.of(),
+                )
+            )
+        )
+
         entries.add(
             HybridAquaticPlacedFeatures.BULL_KELP,
             PlacedFeature(

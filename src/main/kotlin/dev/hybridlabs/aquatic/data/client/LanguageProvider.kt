@@ -184,6 +184,12 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BULL_KELP to "Bull Kelp",
             HybridAquaticBlocks.BULL_KELP_PLANT to "Bull Kelp Plant",
 
+            HybridAquaticBlocks.SUGAR_KELP to "Sugar Kelp",
+            HybridAquaticBlocks.SUGAR_KELP_PLANT to "Sugar Kelp Plant",
+
+            HybridAquaticBlocks.DELESSERIA to "Delesseria",
+            HybridAquaticBlocks.DELESSERIA_PLANT to "Delesseria Plant",
+
             HybridAquaticBlocks.SARGASSUM to "Sargassum",
             HybridAquaticBlocks.SARGASSUM_PLANT to "Sargassum Plant",
             HybridAquaticBlocks.FLOATING_SARGASSUM to "Floating Sargassum",

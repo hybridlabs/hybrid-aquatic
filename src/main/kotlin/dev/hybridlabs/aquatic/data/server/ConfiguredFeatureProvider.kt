@@ -78,7 +78,14 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        //#region Bull Kelp
+        entries.add(
+            HybridAquaticConfiguredFeatures.DELESSERIA,
+            ConfiguredFeature(
+                HybridAquaticFeatures.DELESSERIA, DelesseriaFeatureConfig(
+                    SimpleBlockStateProvider.of(HybridAquaticBlocks.DELESSERIA)
+                )
+            )
+        )
 
         entries.add(
             HybridAquaticConfiguredFeatures.SUGAR_KELP,

@@ -174,6 +174,16 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             )
 
             registerTintableCrossBlockState(
+                HybridAquaticBlocks.DELESSERIA,
+                BlockStateModelGenerator.TintType.NOT_TINTED,
+            )
+
+            registerTintableCrossBlockState(
+                HybridAquaticBlocks.DELESSERIA_PLANT,
+                BlockStateModelGenerator.TintType.NOT_TINTED,
+            )
+
+            registerTintableCrossBlockState(
                 HybridAquaticBlocks.BULL_KELP,
                 BlockStateModelGenerator.TintType.NOT_TINTED,
             )
