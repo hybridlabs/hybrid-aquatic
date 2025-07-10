@@ -87,15 +87,6 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.SUGAR_KELP,
-            ConfiguredFeature(
-                HybridAquaticFeatures.SUGAR_KELP, SugarKelpFeatureConfig(
-                    SimpleBlockStateProvider.of(HybridAquaticBlocks.SUGAR_KELP)
-                )
-            )
-        )
-
         //#region Sargassum
 
         entries.add(

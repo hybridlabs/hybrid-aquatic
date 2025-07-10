@@ -105,9 +105,6 @@ object HybridAquaticClient : ClientModInitializer {
             HybridAquaticBlocks.BULL_KELP,
             HybridAquaticBlocks.BULL_KELP_PLANT,
 
-            HybridAquaticBlocks.SUGAR_KELP,
-            HybridAquaticBlocks.SUGAR_KELP_PLANT,
-
             HybridAquaticBlocks.DELESSERIA,
             HybridAquaticBlocks.DELESSERIA_PLANT,
 

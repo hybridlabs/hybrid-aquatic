@@ -18,15 +18,9 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
-            GenerationStep.Feature.VEGETAL_DECORATION,
-            HybridAquaticPlacedFeatures.SARGASSUM
-        )
-
-        BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
             GenerationStep.Feature.VEGETAL_DECORATION,
-            HybridAquaticPlacedFeatures.SARGASSUM_FOREST
+            HybridAquaticPlacedFeatures.SARGASSUM
         )
 
         BiomeModifications.addFeature(
@@ -43,18 +37,6 @@ object FeatureBiomeModifications {
 
         BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS),
-            GenerationStep.Feature.VEGETAL_DECORATION,
-            HybridAquaticPlacedFeatures.SUGAR_KELP
-        )
-
-        BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_ARCTIC_OCEANS),
-            GenerationStep.Feature.VEGETAL_DECORATION,
-            HybridAquaticPlacedFeatures.DELESSERIA
-        )
-
-        BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
             GenerationStep.Feature.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.DELESSERIA
         )

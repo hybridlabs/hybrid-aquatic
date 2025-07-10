@@ -43,19 +43,6 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticPlacedFeatures.SUGAR_KELP,
-            PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.SUGAR_KELP),
-                listOf(
-                    NoiseBasedCountPlacementModifier.of(120, 80.0, 0.0),
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-                    BiomePlacementModifier.of(),
-                )
-            )
-        )
-
-        entries.add(
             HybridAquaticPlacedFeatures.DELESSERIA,
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.DELESSERIA),
@@ -84,19 +71,6 @@ class PlacedFeatureProvider(
         // sargassum
         entries.add(
             HybridAquaticPlacedFeatures.SARGASSUM,
-            PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.SARGASSUM),
-                listOf(
-                    NoiseBasedCountPlacementModifier.of(10, 80.0, 0.0),
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-                    BiomePlacementModifier.of(),
-                )
-            )
-        )
-
-        entries.add(
-            HybridAquaticPlacedFeatures.SARGASSUM_FOREST,
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.SARGASSUM),
                 listOf(

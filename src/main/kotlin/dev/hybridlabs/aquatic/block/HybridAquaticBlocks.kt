@@ -170,25 +170,6 @@ object HybridAquaticBlocks {
         )
     )
 
-    val SUGAR_KELP = register(
-        "sugar_kelp",
-        SugarKelpBlock(
-            FabricBlockSettings
-                .copyOf(Blocks.KELP)
-                .nonOpaque()
-        )
-    )
-
-    val SUGAR_KELP_PLANT = register(
-        "sugar_kelp_plant",
-        SugarKelpPlantBlock(
-            FabricBlockSettings
-                .copyOf(Blocks.KELP_PLANT)
-                .nonOpaque()
-                .dropsLike(SUGAR_KELP)
-        )
-    )
-
     val DELESSERIA = register(
         "delesseria",
         DelesseriaBlock(
