@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -9,7 +10,6 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import software.bernie.geckolib.core.animatable.GeoAnimatable
@@ -83,7 +83,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
 
     private fun breakKelpUnderneath() {
         val posUnderneath = BlockPos(this.x.toInt(), (this.y + 1).toInt(), this.z.toInt())
-        if (world.getBlockState(posUnderneath).isOf(Blocks.KELP_PLANT)) {
+        if (world.getBlockState(posUnderneath).isIn(HybridAquaticBlockTags.URCHIN_BREAKABLES)) {
             world.setBlockState(posUnderneath, Blocks.AIR.defaultState)
             if (spawnUrchinOnNextBreak) {
                 val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.create(world)

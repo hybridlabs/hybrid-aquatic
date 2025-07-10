@@ -10,6 +10,8 @@ object HybridAquaticBlockTags {
 
     val PLUSHIES = create("plushies")
 
+    val URCHIN_BREAKABLES = create("urchin_breakables")
+
     val ANEMONES_GENERATE_IN = create("anemones_generate_in")
 
     val GIANT_CLAM_GENERATE_IN = create("giant_clam_generate_in")
