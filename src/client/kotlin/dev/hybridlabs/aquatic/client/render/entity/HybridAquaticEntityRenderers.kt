@@ -3,10 +3,7 @@
 package dev.hybridlabs.aquatic.client.render.entity
 
 import dev.hybridlabs.aquatic.client.render.entity.cephalopods.*
-import dev.hybridlabs.aquatic.client.render.entity.critter.NudibranchEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.SeaCucumberEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.SeaUrchinEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.StarfishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.critter.*
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
 import dev.hybridlabs.aquatic.client.render.entity.fish.*
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
@@ -123,6 +120,7 @@ object HybridAquaticEntityRenderers {
     //region critters
     val STARFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.STARFISH, ::StarfishEntityRenderer)
     val NUDIBRANCH = EntityRendererRegistry.register(HybridAquaticEntityTypes.NUDIBRANCH, ::NudibranchEntityRenderer)
+    val SEA_SLUG = EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_SLUG, ::SeaSlugEntityRenderer)
     val SEA_CUCUMBER = EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_CUCUMBER, ::SeaCucumberEntityRenderer)
     val SEA_URCHIN = EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_URCHIN, ::SeaUrchinEntityRenderer)
 

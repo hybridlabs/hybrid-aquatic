@@ -2,10 +2,7 @@ package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.cephalopod.*
-import dev.hybridlabs.aquatic.entity.critter.NudibranchEntity
-import dev.hybridlabs.aquatic.entity.critter.SeaCucumberEntity
-import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
-import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
+import dev.hybridlabs.aquatic.entity.critter.*
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
@@ -531,6 +528,13 @@ object HybridAquaticEntityTypes {
         ::NudibranchEntity,
         EntityDimensions.fixed(0.5f, 0.3f),
         NudibranchEntity.createMobAttributes()
+    )
+
+    val SEA_SLUG = registerCritter(
+        "sea_slug",
+        ::SeaSlugEntity,
+        EntityDimensions.fixed(0.5f, 0.3f),
+        SeaSlugEntity.createMobAttributes()
     )
 
     val SEA_CUCUMBER = registerCritter(

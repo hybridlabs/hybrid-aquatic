@@ -138,6 +138,7 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.STARFISH,
             HybridAquaticEntityTypes.NUDIBRANCH,
+            HybridAquaticEntityTypes.SEA_SLUG,
             HybridAquaticEntityTypes.SEA_CUCUMBER,
             HybridAquaticEntityTypes.SEA_URCHIN,
         ).forEach { registerCritter(it) }
