@@ -15,9 +15,6 @@ import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -29,7 +26,7 @@ class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: Worl
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 2.0)
@@ -46,15 +43,6 @@ class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: Worl
     ): EntityData? {
         variant = Type.entries.random(Random)
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
-    }
-
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater) {
-            event.controller.setAnimation(WALK_ANIMATION)
-        } else {
-            event.controller.setAnimation(FLOP_ANIMATION)
-        }
-        return PlayState.CONTINUE
     }
 
     override fun getMaxSize() : Int {

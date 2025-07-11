@@ -23,10 +23,11 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.GeoAnimatable
+import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -109,24 +110,17 @@ open class HybridAquaticCritterEntity(
 
     override fun tickWaterBreathingAir(air: Int) {}
 
-    open fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isSubmergedInWater && event.isMoving) {
-            event.controller.setAnimation(WALK_ANIMATION)
-            return PlayState.CONTINUE
-
-        }
-
-        if (!isSubmergedInWater) {
-            event.controller.setAnimation(FLOP_ANIMATION)
-            return PlayState.CONTINUE
-
-        }
-
-        if (isSubmergedInWater && !event.isMoving) {
-            event.controller.setAnimation(IDLE_ANIMATION)
-            return PlayState.CONTINUE
-        }
-        return PlayState.CONTINUE
+    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
+        controllerRegistrar.add(
+            AnimationController(this, "Swim/Idle", 5,
+                AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCritterEntity> ->
+                    if (state.isMoving) {
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.WALK)
+                    } else {
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+                })
+        )
     }
 
     protected open fun getMinSize(): Int {
@@ -159,17 +153,6 @@ open class HybridAquaticCritterEntity(
 
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.ENTITY_SLIME_JUMP_SMALL
-    }
-
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
-            AnimationController(
-                this,
-                "controller",
-                5,
-                ::predicate
-            )
-        )
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
@@ -214,9 +197,5 @@ open class HybridAquaticCritterEntity(
         }
 
         const val CRITTER_SIZE_KEY = "CritterSize"
-
-        val WALK_ANIMATION: RawAnimation = RawAnimation.begin().then("walk", Animation.LoopType.LOOP)
-        val IDLE_ANIMATION: RawAnimation = RawAnimation.begin().then("idle", Animation.LoopType.LOOP)
-        val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().then("flop", Animation.LoopType.LOOP)
     }
 }
