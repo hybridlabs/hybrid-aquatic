@@ -66,7 +66,6 @@ open class HybridAquaticCritterEntity(
         super.initDataTracker()
         dataTracker.startTracking(CRITTER_SIZE, 0)
         dataTracker.startTracking(CRITTER_FLAGS, 0.toByte())
-        dataTracker.startTracking(IS_CLIMBING_WALL, false)
     }
 
     override fun initGoals() {
@@ -174,8 +173,6 @@ open class HybridAquaticCritterEntity(
             DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CRITTER_FLAGS: TrackedData<Byte> =
             DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.BYTE)
-        val IS_CLIMBING_WALL: TrackedData<Boolean> =
-            DataTracker.registerData(HybridAquaticCritterEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
 
         fun canSpawn(
             type: EntityType<out WaterCreatureEntity>,

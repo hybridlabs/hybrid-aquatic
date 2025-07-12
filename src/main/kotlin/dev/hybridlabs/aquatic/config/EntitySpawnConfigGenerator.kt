@@ -138,12 +138,12 @@ class EntitySpawnConfigGenerator {
         addUndergroundCrustacean(HybridAquaticEntityTypes.SPIDER_CRAB, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS), 3, 1, 2)
         //#endregion
 
-        //#region Critters
-        addCritter(HybridAquaticEntityTypes.NUDIBRANCH, listOf(HybridAquaticBiomeTags.ARCTIC_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 3, 1, 2)
+        //#region Crittersm
+        addCritter(HybridAquaticEntityTypes.NUDIBRANCH, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 3, 1, 2)
         addCritter(HybridAquaticEntityTypes.SEA_SLUG, listOf(HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 3, 1, 2)
-        addCritter(HybridAquaticEntityTypes.STARFISH, listOf(HybridAquaticBiomeTags.ARCTIC_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.SANDY_BEACHES), 5, 1, 3)
+        addCritter(HybridAquaticEntityTypes.STARFISH, listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN, HybridAquaticBiomeTags.SANDY_BEACHES), 5, 1, 3)
         addCritter(HybridAquaticEntityTypes.SEA_CUCUMBER, listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN), 3, 1, 3)
-        addCritter(HybridAquaticEntityTypes.SEA_URCHIN, listOf(HybridAquaticBiomeTags.ARCTIC_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 5, 1, 3)
+        addCritter(HybridAquaticEntityTypes.SEA_URCHIN, listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN), 5, 1, 3)
         //#endregion
     }
 
