@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.critter.SeaSlugEntity
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
 
 class SeaSlugEntityRenderer(context: Context) :
-    HybridAquaticCritterEntityRenderer<SeaSlugEntity>(context, SeaSlugEntityModel())
+    HybridAquaticCritterEntityRenderer<SeaSlugEntity>(context, SeaSlugEntityModel(), true)

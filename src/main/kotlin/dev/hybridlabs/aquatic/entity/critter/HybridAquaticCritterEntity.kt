@@ -1,12 +1,12 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
-import net.minecraft.entity.ai.goal.EscapeDangerGoal
-import net.minecraft.entity.ai.goal.MoveIntoWaterGoal
-import net.minecraft.entity.ai.goal.WanderAroundGoal
+import net.minecraft.entity.ai.goal.*
+import net.minecraft.entity.ai.pathing.EntityNavigation
 import net.minecraft.entity.ai.pathing.MobNavigation
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.damage.DamageSource
@@ -26,8 +26,6 @@ import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -46,15 +44,15 @@ open class HybridAquaticCritterEntity(
         navigation = MobNavigation(this, world)
     }
 
-    override fun hasNoDrag(): Boolean {
-        return this.isClimbing
+    override fun createNavigation(world: World): EntityNavigation {
+        return MobNavigation(this, world)
     }
 
     override fun tick() {
         super.tick()
 
-        if (!isWet) {
-            this.speed = 0.01F
+        if (!isSubmergedInWater) {
+            this.speed = 0.0F
         }
     }
 
@@ -70,9 +68,11 @@ open class HybridAquaticCritterEntity(
 
     override fun initGoals() {
         super.initGoals()
-        goalSelector.add(2, MoveIntoWaterGoal(this))
-        goalSelector.add(3, EscapeDangerGoal(this, 0.35))
-        goalSelector.add(5, WanderAroundGoal(this, 0.35, 10))
+        goalSelector.add(1, MoveIntoWaterGoal(this))
+        goalSelector.add(1, EscapeDangerGoal(this, 0.3))
+        goalSelector.add(5, LookAroundGoal(this))
+        goalSelector.add(3, WanderAroundGoal(this, 0.3))
+        goalSelector.add(3, WanderAroundFarGoal(this, 0.3))
     }
 
     override fun initialize(
@@ -88,7 +88,7 @@ open class HybridAquaticCritterEntity(
     }
 
     override fun shouldSwimInFluids(): Boolean {
-        return !isOnGround || !isClimbing
+        return !isOnGround
     }
 
     override fun isPushedByFluids(): Boolean {
@@ -107,18 +107,15 @@ open class HybridAquaticCritterEntity(
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
+    override fun getGroup(): EntityGroup {
+        return EntityGroup.AQUATIC
+    }
+
     override fun tickWaterBreathingAir(air: Int) {}
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
-            AnimationController(this, "Swim/Idle", 5,
-                AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCritterEntity> ->
-                    if (state.isMoving) {
-                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.WALK)
-                    } else {
-                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-                })
+            DefaultAnimations.genericWalkIdleController(this)
         )
     }
 
@@ -144,14 +141,6 @@ open class HybridAquaticCritterEntity(
 
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.ENTITY_SLIME_DEATH_SMALL
-    }
-
-    override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_TROPICAL_FISH_AMBIENT
-    }
-
-    override fun getSwimSound(): SoundEvent {
-        return SoundEvents.ENTITY_SLIME_JUMP_SMALL
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {

@@ -8,7 +8,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory.Context
 import net.minecraft.client.util.math.MatrixStack
 
 class SeaUrchinEntityRenderer(context: Context) :
-    HybridAquaticCritterEntityRenderer<SeaUrchinEntity>(context, SeaUrchinEntityModel()) {
+    HybridAquaticCritterEntityRenderer<SeaUrchinEntity>(context, SeaUrchinEntityModel(), true) {
     override fun render(
         entity: SeaUrchinEntity,
         entityYaw: Float,

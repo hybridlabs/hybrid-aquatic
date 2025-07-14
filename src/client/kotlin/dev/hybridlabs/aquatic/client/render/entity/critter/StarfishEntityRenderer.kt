@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
 
 class StarfishEntityRenderer(context: Context) :
-    HybridAquaticCritterEntityRenderer<StarfishEntity>(context, StarfishEntityModel())
+    HybridAquaticCritterEntityRenderer<StarfishEntity>(context, StarfishEntityModel(), true)

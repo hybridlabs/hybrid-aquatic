@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.critter.NudibranchEntity
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
 
 class NudibranchEntityRenderer(context: Context) :
-    HybridAquaticCritterEntityRenderer<NudibranchEntity>(context, NudibranchEntityModel())
+    HybridAquaticCritterEntityRenderer<NudibranchEntity>(context, NudibranchEntityModel(), true)
