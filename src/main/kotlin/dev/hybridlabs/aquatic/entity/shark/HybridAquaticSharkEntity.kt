@@ -56,12 +56,20 @@ open class HybridAquaticSharkEntity(
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var angerTime = 0
     private var angryAt: UUID? = null
+    private var fromFishingNet = false
 
     var hunger: Int
         get() = dataTracker.get(HUNGER)
         set(hunger) {
             dataTracker.set(HUNGER, hunger)
         }
+
+    private var moistness: Int
+        get() = dataTracker.get(MOISTNESS)
+        set(moistness) {
+            dataTracker.set(MOISTNESS, moistness)
+        }
+
 
     //#region Initialization
     init {
@@ -98,11 +106,12 @@ open class HybridAquaticSharkEntity(
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    override fun getGroup(): EntityGroup {
+        return EntityGroup.AQUATIC
+    }
+
     override fun tick() {
         super.tick()
-        if (isAiDisabled) {
-            return
-        }
 
         if (this.isSubmergedInWater) {
             moistness = getMaxMoistness()
@@ -132,8 +141,7 @@ open class HybridAquaticSharkEntity(
         return 4
     }
 
-    //#region NBT & Data
-    private var fromFishingNet = false
+    //#region NBT
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         super.writeCustomDataToNbt(nbt)
@@ -206,11 +214,6 @@ open class HybridAquaticSharkEntity(
     //#endregion
 
     //#region Water Breathing
-    private var moistness: Int
-        get() = dataTracker.get(MOISTNESS)
-        set(moistness) {
-            dataTracker.set(MOISTNESS, moistness)
-        }
 
     override fun tickWaterBreathingAir(air: Int) {}
 
@@ -230,17 +233,34 @@ open class HybridAquaticSharkEntity(
 
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(this, "Swim/Charge/Idle", 4) { state ->
-            val animation = when {
-                state.isMoving -> if (this.isSprinting) DefaultAnimations.RUN else DefaultAnimations.SWIM
-                else -> DefaultAnimations.SWIM
-            }
-            state.setAndContinue(animation)
-        })
+        controllerRegistrar.add(
+            AnimationController(this, "Swim", 4,
+                AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
+                    if (state.isMoving && this.isSubmergedInWater) {
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SWIM)
+                    } else {
+                        PlayState.STOP
+                    }
+                }
+            )
+        )
+
+        controllerRegistrar.add(
+            AnimationController(this, "Charge", 4,
+                AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
+                    if (state.isMoving && this.isSubmergedInWater && this.isSprinting) {
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.RUN)
+                    } else {
+                        PlayState.STOP
+                    }
+                }
+            )
+        )
+
         controllerRegistrar.add(
             AnimationController(this, "Beached", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
-                    if (this.isOnGround && !isSubmergedInWater) {
+                    if (this.isOnGround && !this.isSubmergedInWater) {
                         return@AnimationStateHandler state.setAndContinue(BEACHED)
                     } else {
                         PlayState.STOP
@@ -248,11 +268,11 @@ open class HybridAquaticSharkEntity(
                 }
             )
         )
+
         controllerRegistrar.add(
             DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE)
         )
     }
-
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
@@ -269,17 +289,7 @@ open class HybridAquaticSharkEntity(
         return SoundEvents.ENTITY_COD_DEATH
     }
 
-    override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_TROPICAL_FISH_AMBIENT
-    }
-
     //#endregion
-
-    private fun shouldProximityAttack(player: PlayerEntity): Boolean {
-        if (customName?.string == "friend") return false
-
-        return closePlayerAttack && player.squaredDistanceTo(this) <= 5 && !player.isCreative
-    }
 
     //#region Angerable Implementation Details
     override fun getAngerTime(): Int {
@@ -300,6 +310,12 @@ open class HybridAquaticSharkEntity(
 
     override fun chooseRandomAngerTime() {
         setAngerTime(ANGER_TIME_RANGE.get(random))
+    }
+
+    private fun shouldProximityAttack(player: PlayerEntity): Boolean {
+        if (customName?.string == "friend") return false
+
+        return closePlayerAttack && player.squaredDistanceTo(this) <= 5 && !player.isCreative
     }
     //#endregion
 
@@ -398,7 +414,6 @@ open class HybridAquaticSharkEntity(
         }
     }
 
-
     companion object {
         const val MOISTNESS_KEY = "Moistness"
         const val SHARK_SIZE_KEY = "SharkSize"
@@ -414,9 +429,9 @@ open class HybridAquaticSharkEntity(
         val ATTEMPT_ATTACK: TrackedData<Boolean> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
         val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(10, 30)
-
         val BEACHED: RawAnimation = RawAnimation.begin().thenPlay("misc.beached")
 
+        //#region Spawning
         fun canShallowSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,
@@ -465,5 +480,6 @@ open class HybridAquaticSharkEntity(
         fun getScaleAdjustment(shark: HybridAquaticSharkEntity, adjustment: Float): Float {
             return 1.0f + (shark.size * adjustment)
         }
+        //#endregion
     }
 }
