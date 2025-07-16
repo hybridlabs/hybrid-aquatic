@@ -20,21 +20,11 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
-@Suppress("DEPRECATION")
-class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, world: World) :
+class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: World) :
     HybridAquaticSharkEntity(
-        entityType,
-        world,
-        listOf(HybridAquaticEntityTags.CRUSTACEAN, HybridAquaticEntityTags.SMALL_PREY),
-        false,
-        false
+        entityType, world, listOf(HybridAquaticEntityTags.CEPHALOPOD, HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN), false, false
     ),
-    VariantHolder<HammerheadSharkEntity.Type> {
-
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(1, RevengeGoal(this))
-    }
+    VariantHolder<HoundSharkEntity.Type> {
 
     override fun initialize(
         world: ServerWorldAccess,
@@ -47,16 +37,25 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    override fun getLimitPerChunk(): Int {
+        return 1
+    }
+
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(1, RevengeGoal(this))
+    }
+
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 45.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 26.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(HammerheadSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val TYPE: TrackedData<Int> = DataTracker.registerData(HoundSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
     }
 
     override fun getMaxSize(): Int {
@@ -83,9 +82,7 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
     }
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        BLUE(0, "blue"),
-        BROWN(1, "brown"),
-        OLIVE(2, "olive");
+        LEOPARD(0, "leopard");
 
         override fun asString(): String {
             return this.key
@@ -100,7 +97,7 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
             )
 
             fun byName(name: String?): Type {
-                return CODEC.byId(name, BLUE) as Type
+                return CODEC.byId(name, LEOPARD) as Type
             }
 
             fun fromId(id: Int): Type {

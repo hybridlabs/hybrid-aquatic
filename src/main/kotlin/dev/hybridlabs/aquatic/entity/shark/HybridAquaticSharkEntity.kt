@@ -236,7 +236,7 @@ open class HybridAquaticSharkEntity(
         controllerRegistrar.add(
             AnimationController(this, "Swim", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
-                    if (state.isMoving && this.isSubmergedInWater) {
+                    if (this.isSubmergedInWater) {
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SWIM)
                     } else {
                         PlayState.STOP
@@ -248,7 +248,7 @@ open class HybridAquaticSharkEntity(
         controllerRegistrar.add(
             AnimationController(this, "Charge", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
-                    if (state.isMoving && this.isSubmergedInWater && this.isSprinting) {
+                    if (this.isSubmergedInWater && this.isSprinting) {
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.RUN)
                     } else {
                         PlayState.STOP

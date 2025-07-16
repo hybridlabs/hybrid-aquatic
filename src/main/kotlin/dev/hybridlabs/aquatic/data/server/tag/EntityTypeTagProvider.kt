@@ -113,6 +113,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.MORAY_EEL,
                 HybridAquaticEntityTypes.JOHN_DORY,
                 HybridAquaticEntityTypes.LANTERN_SHARK,
+                HybridAquaticEntityTypes.HOUND_SHARK,
             )
 
             .addOptional(Identifier("alexsmobs", "blobfish"))
@@ -246,6 +247,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.FRILLED_SHARK,
                 HybridAquaticEntityTypes.GREAT_WHITE_SHARK,
                 HybridAquaticEntityTypes.HAMMERHEAD_SHARK,
+                HybridAquaticEntityTypes.HOUND_SHARK,
                 HybridAquaticEntityTypes.THRESHER_SHARK,
                 HybridAquaticEntityTypes.TIGER_SHARK,
                 HybridAquaticEntityTypes.WHALE_SHARK,
@@ -265,6 +267,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.NUDIBRANCH,
                 HybridAquaticEntityTypes.SEA_CUCUMBER,
                 HybridAquaticEntityTypes.SEA_URCHIN,
+                HybridAquaticEntityTypes.SEA_SLUG,
                 HybridAquaticEntityTypes.STARFISH,
                 HybridAquaticEntityTypes.SEA_ANGEL,
             )

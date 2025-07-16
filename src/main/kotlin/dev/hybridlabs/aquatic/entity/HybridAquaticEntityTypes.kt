@@ -690,6 +690,13 @@ object HybridAquaticEntityTypes {
         FrilledSharkEntity.createMobAttributes()
     )
 
+    val HOUND_SHARK = registerShark(
+        "hound_shark",
+        ::HoundSharkEntity,
+        EntityDimensions.fixed(1.0f, 0.3f),
+        HoundSharkEntity.createMobAttributes()
+    )
+
     val LANTERN_SHARK = registerSharkUnderground(
         "lantern_shark",
         ::LanternSharkEntity,

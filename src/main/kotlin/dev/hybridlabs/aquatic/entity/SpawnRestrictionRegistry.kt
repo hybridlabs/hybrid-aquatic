@@ -125,6 +125,7 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.GREAT_WHITE_SHARK,
             HybridAquaticEntityTypes.TIGER_SHARK,
             HybridAquaticEntityTypes.HAMMERHEAD_SHARK,
+            HybridAquaticEntityTypes.HOUND_SHARK,
             HybridAquaticEntityTypes.THRESHER_SHARK,
             HybridAquaticEntityTypes.BULL_SHARK,
         ).forEach { registerShark(it) }

@@ -1455,6 +1455,7 @@ object HybridAquaticItems {
     val LANTERN_SHARK_SPAWN_EGG = registerSpawnEgg("lantern_shark_spawn_egg", HybridAquaticEntityTypes.LANTERN_SHARK, 0x543f46, 0x84d5fe)
     val GREAT_WHITE_SHARK_SPAWN_EGG = registerSpawnEgg("great_white_shark_spawn_egg", HybridAquaticEntityTypes.GREAT_WHITE_SHARK, 0x5e6e7d, 0xf3f3f8)
     val HAMMERHEAD_SHARK_SPAWN_EGG = registerSpawnEgg("hammerhead_shark_spawn_egg", HybridAquaticEntityTypes.HAMMERHEAD_SHARK, 0x78909a, 0xd7e1dd)
+    val HOUND_SHARK_SHARK_SPAWN_EGG = registerSpawnEgg("hound_shark_spawn_egg", HybridAquaticEntityTypes.HOUND_SHARK, 0xa18469, 0x5e453a)
     val THRESHER_SHARK_SPAWN_EGG = registerSpawnEgg("thresher_shark_spawn_egg", HybridAquaticEntityTypes.THRESHER_SHARK, 0x5591af, 0xd7e1dd)
     val TIGER_SHARK_SPAWN_EGG = registerSpawnEgg("tiger_shark_spawn_egg", HybridAquaticEntityTypes.TIGER_SHARK, 0xb79167, 0xf0f3e6)
     val WHALE_SHARK_SPAWN_EGG = registerSpawnEgg("whale_shark_spawn_egg", HybridAquaticEntityTypes.WHALE_SHARK, 0x4c6d98, 0xeff0f4)
