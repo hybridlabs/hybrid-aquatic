@@ -1,41 +1,43 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.VariantHolder
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
+import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.function.ValueLists
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
+import java.util.function.IntFunction
+import kotlin.random.Random
 
 class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
-    HybridAquaticCrustaceanEntity(entityType, world, false) {
+    HybridAquaticCrustaceanEntity(entityType, world, false),
+    VariantHolder<DecoratorCrabEntity.Type> {
 
     override fun getLootTableId(): Identifier {
         return Identifier("hybrid-aquatic", "entities/decorator_crab")
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(this, "With/Without", 0) { state ->
-            val animation = when {
-                coralTimer == 0 -> WITH_CORAL
-                else -> WITHOUT_CORAL
-            }
-            state.setAndContinue(animation)
-        })
-        super.registerControllers(controllerRegistrar)
-    }
-
-    private var coralTimer = 0
+    var coralTimer: Int
+        get() = dataTracker.get(CORAL_TIMER)
+        set(value) = dataTracker.set(CORAL_TIMER, value)
 
     override fun interactMob(player: PlayerEntity, hand: Hand): ActionResult {
         val itemStack = player.getStackInHand(hand)
@@ -56,7 +58,20 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
     override fun tick() {
         super.tick()
 
-        if (coralTimer > 0) coralTimer -= 1
+        if (coralTimer > 0) {
+            dataTracker.set(CORAL_TIMER, coralTimer - 1)
+        }
+    }
+
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        variant = Type.entries.random(Random)
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {
@@ -69,8 +84,10 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
 
-        val WITH_CORAL: RawAnimation = RawAnimation.begin().thenPlay("misc.with_coral")
-        val WITHOUT_CORAL: RawAnimation = RawAnimation.begin().thenPlay("misc.without_coral")
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(DecoratorCrabEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val CORAL_TIMER: TrackedData<Int> =
+            DataTracker.registerData(DecoratorCrabEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
     }
 
     override fun getMaxSize(): Int {
@@ -79,5 +96,64 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
 
     override fun getMinSize(): Int {
         return -5
+    }
+
+    override fun initDataTracker() {
+        dataTracker.startTracking(TYPE, 0)
+        dataTracker.startTracking(CORAL_TIMER, 0)
+        super.initDataTracker()
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        nbt.putString("Type", this.variant.asString())
+        nbt.putInt("CoralTimer", coralTimer)
+        super.writeCustomDataToNbt(nbt)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        this.variant = Type.byName(nbt.getString("Type"))
+        this.coralTimer = nbt.getInt("CoralTimer")
+        super.readCustomDataFromNbt(nbt)
+    }
+
+    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+        BRAIN(0, "brain"),
+        BUBBLE(1, "bubble"),
+        BUTTON(2, "button"),
+        FIRE(3, "fire"),
+        HORN(4, "horn"),
+        LOPHELIA(5, "lophelia"),
+        SUN(6, "sun"),
+        THORN(7, "thorn"),
+        TUBE(8, "tube");
+
+        override fun asString(): String {
+            return this.key
+        }
+
+        companion object {
+            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                { obj: Type -> obj.id },
+                entries.toTypedArray(),
+                ValueLists.OutOfBoundsHandling.ZERO
+            )
+
+            fun byName(name: String?): Type {
+                return CODEC.byId(name, BRAIN) as Type
+            }
+
+            fun fromId(id: Int): Type {
+                return BY_ID.apply(id) as Type
+            }
+        }
+    }
+
+    override fun getVariant(): Type {
+        return Type.fromId((dataTracker.get(TYPE) as Int))
+    }
+
+    override fun setVariant(type: Type) {
+        dataTracker.set(TYPE, type.id)
     }
 }
