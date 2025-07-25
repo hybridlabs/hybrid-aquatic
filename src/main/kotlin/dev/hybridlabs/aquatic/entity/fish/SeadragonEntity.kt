@@ -19,7 +19,7 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
-class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
+class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: World) :
     HybridAquaticFishEntity(
         entityType, world,
         listOf(
@@ -33,7 +33,7 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
             HybridAquaticEntityTags.SHARK
         )
     ),
-    VariantHolder<SeahorseEntity.Type> {
+    VariantHolder<SeadragonEntity.Type> {
 
     override fun getLimitPerChunk(): Int {
         return 2
@@ -46,7 +46,7 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        variant = Type.entries.random(Random)
+        variant = SeadragonEntity.Type.entries.random(Random)
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
@@ -59,7 +59,7 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(SeahorseEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val TYPE: TrackedData<Int> = DataTracker.registerData(SeadragonEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
     }
 
     override fun initDataTracker() {
@@ -78,10 +78,7 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
     }
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        COMMON(0, "common"),
-        PYGMY(1, "pygmy"),
-        THORNY(2, "thorny"),
-        BIG_BELLY(3, "big_belly");
+        LEAFY(0, "leafy");
 
         override fun asString(): String {
             return this.key
@@ -96,7 +93,7 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
             )
 
             fun byName(name: String?): Type {
-                return CODEC.byId(name, COMMON) as Type
+                return CODEC.byId(name, LEAFY) as Type
             }
 
             fun fromId(id: Int): Type {

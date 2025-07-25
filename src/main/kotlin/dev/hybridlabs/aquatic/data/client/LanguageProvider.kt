@@ -488,6 +488,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.BETTA to "Betta",
             HybridAquaticEntityTypes.GOLDFISH to "Goldfish",
             HybridAquaticEntityTypes.SEAHORSE to "Seahorse",
+            HybridAquaticEntityTypes.SEADRAGON to "Seadragon",
             HybridAquaticEntityTypes.MOON_JELLYFISH to "Moon Jellyfish",
             HybridAquaticEntityTypes.GOURAMI to "Gourami",
             HybridAquaticEntityTypes.BOXFISH to "Boxfish",

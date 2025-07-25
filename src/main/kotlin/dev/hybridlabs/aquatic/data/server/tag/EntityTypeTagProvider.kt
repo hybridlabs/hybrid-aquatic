@@ -347,6 +347,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.WRECKFISH,
                 HybridAquaticEntityTypes.SEA_BASS,
                 HybridAquaticEntityTypes.SEAHORSE,
+                HybridAquaticEntityTypes.SEADRAGON,
                 HybridAquaticEntityTypes.SUNFISH,
                 HybridAquaticEntityTypes.SURGEONFISH,
                 HybridAquaticEntityTypes.TETRA,
