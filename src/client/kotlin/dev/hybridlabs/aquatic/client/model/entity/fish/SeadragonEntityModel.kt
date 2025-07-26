@@ -25,6 +25,7 @@ class SeadragonEntityModel : HybridAquaticFishEntityModel<SeadragonEntity>("sead
         return when (animatable.variant) {
             SeadragonEntity.Type.LEAFY -> LEAFY_TEXTURE
             SeadragonEntity.Type.WEEDY -> WEEDY_TEXTURE
+            SeadragonEntity.Type.RUBY -> RUBY_TEXTURE
         }
     }
 
@@ -32,6 +33,7 @@ class SeadragonEntityModel : HybridAquaticFishEntityModel<SeadragonEntity>("sead
         return when (animatable.variant) {
             SeadragonEntity.Type.LEAFY -> LEAFY_MODEL
             SeadragonEntity.Type.WEEDY -> WEEDY_MODEL
+            SeadragonEntity.Type.RUBY -> RUBY_MODEL
         }
     }
 
@@ -39,6 +41,7 @@ class SeadragonEntityModel : HybridAquaticFishEntityModel<SeadragonEntity>("sead
         return when (animatable.variant) {
             SeadragonEntity.Type.LEAFY -> LEAFY_ANIMATION
             SeadragonEntity.Type.WEEDY -> WEEDY_ANIMATION
+            SeadragonEntity.Type.RUBY -> RUBY_ANIMATION
         }
     }
 }
