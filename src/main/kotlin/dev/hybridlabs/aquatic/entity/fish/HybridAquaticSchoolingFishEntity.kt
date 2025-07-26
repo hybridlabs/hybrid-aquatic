@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.VariantHolder
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.world.LocalDifficulty
@@ -21,6 +22,12 @@ open class HybridAquaticSchoolingFishEntity(
     private var leader: HybridAquaticSchoolingFishEntity? = null,
     private var groupSize: Int = 1,
 ) : HybridAquaticFishEntity(type, world, listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.NONE)) {
+
+    open fun getVariant(): Any? {
+        return if (this is VariantHolder<*>) {
+            (this as VariantHolder<*>).variant
+        } else null
+    }
 
     override fun initGoals() {
         super.initGoals()
@@ -44,10 +51,12 @@ open class HybridAquaticSchoolingFishEntity(
     }
 
     private fun joinGroupOf(groupLeader: HybridAquaticSchoolingFishEntity): HybridAquaticSchoolingFishEntity {
+        if (this.getVariant() != groupLeader.getVariant()) return this
         this.leader = groupLeader
         groupLeader.increaseGroupSize()
         return groupLeader
     }
+
 
     fun leaveGroup() {
         leader!!.decreaseGroupSize()
@@ -92,12 +101,19 @@ open class HybridAquaticSchoolingFishEntity(
     }
 
     fun pullInOtherFish(fish: Stream<out HybridAquaticSchoolingFishEntity?>) {
-        fish.limit((this.getMaxGroupSize() - this.groupSize).toLong())
-            .filter { fishx: HybridAquaticSchoolingFishEntity? -> fishx !== this }
-            .forEach { fishx: HybridAquaticSchoolingFishEntity? ->
+        val selfVariant = this.getVariant()
+        fish
+            .filter { fishx ->
+                fishx != null &&
+                        fishx !== this &&
+                        fishx.getVariant() == selfVariant
+            }
+            .limit((this.getMaxGroupSize() - this.groupSize).toLong())
+            .forEach { fishx ->
                 fishx!!.joinGroupOf(this)
             }
     }
+
 
     override fun initialize(
         world: ServerWorldAccess,
@@ -112,7 +128,10 @@ open class HybridAquaticSchoolingFishEntity(
         if (entityData == null) {
             entityData = FishData(this)
         } else {
-            joinGroupOf((entityData as FishData).leader)
+            val leader = (entityData as FishData).leader
+            if (this.getVariant() == leader.getVariant()) {
+                joinGroupOf(leader)
+            }
         }
         return entityData
     }
