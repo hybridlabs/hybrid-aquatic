@@ -277,7 +277,7 @@ object HybridAquaticEntityTypes {
     val SEADRAGON = registerFish(
         "seadragon",
         ::SeadragonEntity,
-        EntityDimensions.fixed(0.6f, 0.5f),
+        EntityDimensions.fixed(0.6f, 0.3f),
         SeadragonEntity.createMobAttributes()
     )
 

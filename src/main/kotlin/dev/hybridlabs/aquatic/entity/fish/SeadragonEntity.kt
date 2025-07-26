@@ -46,7 +46,7 @@ class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: World)
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        variant = SeadragonEntity.Type.entries.random(Random)
+        variant = Type.entries.random(Random)
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
@@ -78,7 +78,8 @@ class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: World)
     }
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        LEAFY(0, "leafy");
+        LEAFY(0, "leafy"),
+        WEEDY(1, "weedy");
 
         override fun asString(): String {
             return this.key
