@@ -59,7 +59,6 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: World) :
     override fun initGoals() {
         super.initGoals()
         goalSelector.add(5, FishJumpGoal(this, 10))
-        goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 16))
     }
 
     override fun getLootTableId(): Identifier {
