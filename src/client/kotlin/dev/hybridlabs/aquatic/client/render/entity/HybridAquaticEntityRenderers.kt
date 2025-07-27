@@ -60,6 +60,7 @@ object HybridAquaticEntityRenderers {
     val DISCUS = EntityRendererRegistry.register(HybridAquaticEntityTypes.DISCUS, ::DiscusEntityRenderer)
     val SURGEONFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.SURGEONFISH, ::SurgeonfishEntityRenderer)
     val PARROTFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.PARROTFISH, ::ParrotfishEntityRenderer)
+    val SHEEPSHEAD_WRASSE = EntityRendererRegistry.register(HybridAquaticEntityTypes.SHEEPSHEAD_WRASSE, ::SheepsheadWrasseEntityRenderer)
     val CARP = EntityRendererRegistry.register(HybridAquaticEntityTypes.CARP, ::CarpEntityRenderer)
 
     //endregion

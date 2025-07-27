@@ -60,6 +60,7 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.OPAH,
             HybridAquaticEntityTypes.TRIGGERFISH,
             HybridAquaticEntityTypes.PARROTFISH,
+            HybridAquaticEntityTypes.SHEEPSHEAD_WRASSE,
             HybridAquaticEntityTypes.NEEDLEFISH,
             HybridAquaticEntityTypes.MACKEREL,
             HybridAquaticEntityTypes.STINGRAY,

@@ -19,10 +19,6 @@ class ParrotfishEntity(entityType: EntityType<out ParrotfishEntity>, world: Worl
         )
     ) {
 
-    public override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/parrotfish")
-    }
-
     override fun getLimitPerChunk(): Int {
         return 3
     }
