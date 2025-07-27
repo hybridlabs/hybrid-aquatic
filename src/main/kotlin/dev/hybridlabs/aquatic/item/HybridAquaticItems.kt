@@ -206,6 +206,7 @@ object HybridAquaticItems {
     val STRAWBERRY_ANEMONE = registerBlockItem("strawberry_anemone", HybridAquaticBlocks.STRAWBERRY_ANEMONE)
     val GIANT_CLAM = registerBlockItem("giant_clam", HybridAquaticBlocks.GIANT_CLAM)
     val SARGASSUM = registerBlockItem("sargassum", HybridAquaticBlocks.SARGASSUM)
+    val BULL_KELP = registerBlockItem("bull_kelp", HybridAquaticBlocks.BULL_KELP)
     val FLOATING_SARGASSUM = registerPlaceableInWaterBlockItem("floating_sargassum", HybridAquaticBlocks.FLOATING_SARGASSUM)
     val WATER_LETTUCE = registerPlaceableInWaterBlockItem("water_lettuce", HybridAquaticBlocks.WATER_LETTUCE)
     val JUNGLE_LILY_PAD = registerPlaceableInWaterBlockItem("jungle_lily_pad", HybridAquaticBlocks.JUNGLE_LILY_PAD)

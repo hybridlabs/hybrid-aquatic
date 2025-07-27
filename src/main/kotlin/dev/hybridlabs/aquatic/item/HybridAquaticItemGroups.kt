@@ -59,6 +59,7 @@ object  HybridAquaticItemGroups {
 
             entries.add(HybridAquaticItems.SEA_LETTUCE)
             entries.add(HybridAquaticItems.RED_ALGAE)
+            entries.add(HybridAquaticItems.BULL_KELP)
             entries.add(HybridAquaticItems.SARGASSUM)
             entries.add(HybridAquaticItems.FLOATING_SARGASSUM)
             entries.add(HybridAquaticItems.WATER_LETTUCE)

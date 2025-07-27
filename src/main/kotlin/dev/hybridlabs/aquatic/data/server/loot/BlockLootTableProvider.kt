@@ -61,6 +61,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
 
 
         addDrop(HybridAquaticBlocks.SARGASSUM)
+        addDrop(HybridAquaticBlocks.BULL_KELP)
 
         //region wood
         addDrop(HybridAquaticBlocks.DRIFTWOOD_LOG)
