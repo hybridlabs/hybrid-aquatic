@@ -30,6 +30,7 @@
 			}
 		},
 		"move.swim": {
+			"loop": true,
 			"animation_length": 4,
 			"bones": {
 				"body": {
