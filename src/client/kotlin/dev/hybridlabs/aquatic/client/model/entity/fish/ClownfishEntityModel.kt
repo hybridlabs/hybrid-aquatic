@@ -9,6 +9,8 @@ class ClownfishEntityModel : HybridAquaticFishEntityModel<ClownfishEntity>("clow
     private val CLARKII_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_clarkii.png")
     private val TOMATO_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_tomato.png")
     private val CINNAMON_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_cinnamon.png")
+    private val PINK_SKUNK_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_pink_skunk.png")
+    private val ORANGE_SKUNK_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_orange_skunk.png")
 
     private val SMALL_CLOWNFISH_MODEL = Identifier("hybrid-aquatic", "geo/fish/clownfish/clownfish_small.geo.json")
     private val BIG_CLOWNFISH_MODEL = Identifier("hybrid-aquatic", "geo/fish/clownfish/clownfish_big.geo.json")
@@ -19,6 +21,8 @@ class ClownfishEntityModel : HybridAquaticFishEntityModel<ClownfishEntity>("clow
             ClownfishEntity.Type.CLARKII -> CLARKII_TEXTURE
             ClownfishEntity.Type.TOMATO -> TOMATO_TEXTURE
             ClownfishEntity.Type.CINNAMON -> CINNAMON_TEXTURE
+            ClownfishEntity.Type.PINK_SKUNK -> PINK_SKUNK_TEXTURE
+            ClownfishEntity.Type.ORANGE_SKUNK -> ORANGE_SKUNK_TEXTURE
         }
     }
 
