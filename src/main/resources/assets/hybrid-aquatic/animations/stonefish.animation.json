@@ -24,6 +24,9 @@
 				"left_fin": {
 					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*-5"]
 				},
+				"dorsal_fin_2": {
+					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*-10"]
+				},
 				"right_fin": {
 					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*5"]
 				}
