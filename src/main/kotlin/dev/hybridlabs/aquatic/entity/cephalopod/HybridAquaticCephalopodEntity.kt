@@ -387,6 +387,24 @@ open class HybridAquaticCephalopodEntity(
         }
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
+        fun canNightSpawn(
+            type: EntityType<out WaterCreatureEntity>,
+            world: ServerWorldAccess,
+            reason: SpawnReason,
+            pos: BlockPos,
+            random: Random
+        ): Boolean {
+            val topY = world.seaLevel - 4
+            val bottomY = world.seaLevel - 24
+
+            return !world.toServerWorld().isDay &&
+                    pos.y in bottomY..topY &&
+                    world.isWater(pos) &&
+                    world.isSkyVisibleAllowingSea(pos) &&
+                    !isSpawnDark(world, pos, random)
+        }
+
+        @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canDeepSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,

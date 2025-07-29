@@ -336,6 +336,22 @@ open class HybridAquaticFishEntity(
                     world.isSkyVisibleAllowingSea(pos)
         }
 
+        fun canNightSpawn(
+            type: EntityType<out WaterCreatureEntity>,
+            world: ServerWorldAccess,
+            reason: SpawnReason,
+            pos: BlockPos,
+            random: Random
+        ): Boolean {
+            val topY = world.seaLevel - 12
+            val bottomY = world.seaLevel - 24
+
+            return !world.toServerWorld().isDay &&
+                    pos.y in bottomY..topY &&
+                    world.isWater(pos) &&
+                    world.isSkyVisibleAllowingSea(pos)
+        }
+
         fun canDeepSpawn(
             type: EntityType<out WaterCreatureEntity>,
             world: ServerWorldAccess,

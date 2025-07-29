@@ -54,10 +54,6 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.ROCKFISH,
             HybridAquaticEntityTypes.WRECKFISH,
             HybridAquaticEntityTypes.SEA_BASS,
-            HybridAquaticEntityTypes.MORAY_EEL,
-            HybridAquaticEntityTypes.FLASHLIGHT_FISH,
-            HybridAquaticEntityTypes.SQUIRRELFISH,
-            HybridAquaticEntityTypes.OPAH,
             HybridAquaticEntityTypes.TRIGGERFISH,
             HybridAquaticEntityTypes.PARROTFISH,
             HybridAquaticEntityTypes.SHEEPSHEAD_WRASSE,
@@ -68,13 +64,21 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.PEARLFISH,
         ).forEach { registerFish(it) }
 
+        // night fish
+        setOf(
+            HybridAquaticEntityTypes.MORAY_EEL,
+            HybridAquaticEntityTypes.FLASHLIGHT_FISH,
+            HybridAquaticEntityTypes.SQUIRRELFISH,
+            HybridAquaticEntityTypes.OPAH,
+            HybridAquaticEntityTypes.OARFISH,
+        ).forEach { registerNightFish(it) }
+
         // deep fish
         setOf(
             HybridAquaticEntityTypes.ANGLERFISH,
             HybridAquaticEntityTypes.BARRELEYE,
             HybridAquaticEntityTypes.COELACANTH,
             HybridAquaticEntityTypes.DRAGONFISH,
-            HybridAquaticEntityTypes.OARFISH,
             HybridAquaticEntityTypes.RATFISH,
             HybridAquaticEntityTypes.JOHN_DORY,
             HybridAquaticEntityTypes.SNAILFISH,
@@ -84,14 +88,18 @@ object SpawnRestrictionRegistry {
         // cephalopods
         setOf(
             HybridAquaticEntityTypes.ARROW_SQUID,
-            HybridAquaticEntityTypes.FIREFLY_SQUID,
             HybridAquaticEntityTypes.CUTTLEFISH,
         ).forEach { registerCephalopod(it) }
+
+        // night cephalopods
+        setOf(
+            HybridAquaticEntityTypes.FIREFLY_SQUID,
+            HybridAquaticEntityTypes.NAUTILUS,
+        ).forEach { registerNightCephalopod(it) }
 
         // deep cephalopods
         setOf(
             HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS,
-            HybridAquaticEntityTypes.NAUTILUS,
             HybridAquaticEntityTypes.VAMPIRE_SQUID,
             HybridAquaticEntityTypes.UMBRELLA_OCTOPUS,
         ).forEach { registerDeepCephalopod(it) }
@@ -186,12 +194,20 @@ object SpawnRestrictionRegistry {
         registerWaterCreature(entityType, HybridAquaticFishEntity::canSpawn)
     }
 
+    private fun <T : WaterCreatureEntity> registerNightFish(entityType: EntityType<T>) {
+        registerWaterCreature(entityType, HybridAquaticFishEntity::canNightSpawn)
+    }
+
     private fun <T : WaterCreatureEntity> registerDeepFish(entityType: EntityType<T>) {
         registerWaterCreature(entityType, HybridAquaticFishEntity::canDeepSpawn)
     }
 
     private fun <T : WaterCreatureEntity> registerCephalopod(entityType: EntityType<T>) {
         registerWaterCreature(entityType, HybridAquaticCephalopodEntity::canSpawn)
+    }
+
+    private fun <T : WaterCreatureEntity> registerNightCephalopod(entityType: EntityType<T>) {
+        registerWaterCreature(entityType, HybridAquaticCephalopodEntity::canNightSpawn)
     }
 
     private fun <T : WaterCreatureEntity> registerDeepCephalopod(entityType: EntityType<T>) {
