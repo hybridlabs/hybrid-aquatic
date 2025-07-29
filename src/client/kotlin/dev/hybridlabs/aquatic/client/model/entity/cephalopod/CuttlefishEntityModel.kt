@@ -1,27 +1,25 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
-import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.cephalopod.CuttlefishEntity
 import net.minecraft.util.Identifier
 
 class CuttlefishEntityModel : HybridAquaticCephalopodEntityModel<CuttlefishEntity>("cuttlefish") {
-    override fun getTextureResource(animatable: CuttlefishEntity): Identifier {
-        val texturePath = when (animatable.randomValue) {
-            0 -> "textures/entity/cephalopod/cuttlefish/cuttlefish.png"
-            1 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_zebra.png"
-            2 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_disruptive.png"
-            3 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_white.png"
-            4 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_black.png"
-            5 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_black_white.png"
-            6 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_white_black.png"
-            7 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_red_white.png"
-            8 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_white_red.png"
-            9 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_creeper_black.png"
-            10 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_creeper_white.png"
-            11 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_creeper_red.png"
-            else -> "textures/entity/cephalopod/cuttlefish/cuttlefish.png"
-        }
 
-        return Identifier(HybridAquatic.MOD_ID, texturePath)
+    private val RED_CUTTLEFISH_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_red.png")
+    private val RED_CUTTLEFISH_1_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_red_1.png")
+    private val RED_CUTTLEFISH_2_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_red_2.png")
+    private val BLACK_CUTTLEFISH_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_black.png")
+    private val BLACK_CUTTLEFISH_1_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_black_1.png")
+    private val BLACK_CUTTLEFISH_2_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_black_2.png")
+
+    override fun getTextureResource(animatable: CuttlefishEntity): Identifier {
+        return when (animatable.variant) {
+            CuttlefishEntity.Type.RED -> RED_CUTTLEFISH_TEXTURE
+            CuttlefishEntity.Type.RED_1 -> RED_CUTTLEFISH_1_TEXTURE
+            CuttlefishEntity.Type.RED_2 -> RED_CUTTLEFISH_2_TEXTURE
+            CuttlefishEntity.Type.BLACK -> BLACK_CUTTLEFISH_TEXTURE
+            CuttlefishEntity.Type.BLACK_1 -> BLACK_CUTTLEFISH_1_TEXTURE
+            CuttlefishEntity.Type.BLACK_2 -> BLACK_CUTTLEFISH_2_TEXTURE
+        }
     }
 }
