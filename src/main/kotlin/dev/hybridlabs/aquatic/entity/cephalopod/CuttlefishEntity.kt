@@ -81,11 +81,7 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
         RED(0, "red"),
-        RED_1(1, "red_1"),
-        RED_2(2, "red_2"),
-        BLACK(3, "black"),
-        BLACK_1(4, "black_1"),
-        BLACK_2(5, "black_2");
+        BLACK(1, "black");
 
         override fun asString(): String {
             return this.key
