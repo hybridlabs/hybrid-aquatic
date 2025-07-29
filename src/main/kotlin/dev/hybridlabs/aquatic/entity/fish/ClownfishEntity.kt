@@ -77,7 +77,9 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
         TOMATO(2, "tomato"),
         PINK_SKUNK(3, "pink_skunk"),
         ORANGE_SKUNK(4, "orange_skunk"),
-        CINNAMON(5, "cinnamon");
+        CINNAMON(5, "cinnamon"),
+        PERCULA(6, "percula"),
+        WHITEBAND(7, "whiteband");
 
         override fun asString(): String {
             return this.key

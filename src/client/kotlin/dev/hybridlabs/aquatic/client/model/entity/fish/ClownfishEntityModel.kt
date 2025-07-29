@@ -9,6 +9,8 @@ class ClownfishEntityModel : HybridAquaticFishEntityModel<ClownfishEntity>("clow
     private val CLARKII_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_clarkii.png")
     private val TOMATO_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_tomato.png")
     private val CINNAMON_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_cinnamon.png")
+    private val WHITEBAND_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_whiteband.png")
+    private val PERCULA_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_percula.png")
     private val PINK_SKUNK_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_pink_skunk.png")
     private val ORANGE_SKUNK_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/clownfish/clownfish_orange_skunk.png")
 
@@ -23,12 +25,16 @@ class ClownfishEntityModel : HybridAquaticFishEntityModel<ClownfishEntity>("clow
             ClownfishEntity.Type.CINNAMON -> CINNAMON_TEXTURE
             ClownfishEntity.Type.PINK_SKUNK -> PINK_SKUNK_TEXTURE
             ClownfishEntity.Type.ORANGE_SKUNK -> ORANGE_SKUNK_TEXTURE
+            ClownfishEntity.Type.WHITEBAND -> WHITEBAND_TEXTURE
+            ClownfishEntity.Type.PERCULA -> PERCULA_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: ClownfishEntity): Identifier {
         return when (animatable.variant) {
             ClownfishEntity.Type.OCELLARIS -> BIG_CLOWNFISH_MODEL
+            ClownfishEntity.Type.PERCULA -> BIG_CLOWNFISH_MODEL
+            ClownfishEntity.Type.WHITEBAND -> BIG_CLOWNFISH_MODEL
             else -> SMALL_CLOWNFISH_MODEL
         }
     }
