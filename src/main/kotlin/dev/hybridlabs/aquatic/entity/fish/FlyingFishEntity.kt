@@ -8,6 +8,11 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
+import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.`object`.PlayState
 
 class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: World) :
     HybridAquaticSchoolingFishEntity(
@@ -45,6 +50,18 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Worl
         }
     }
 
+    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
+        controllerRegistrar.add(
+            AnimationController(this, "Fly/Swim/Idle", 5
+            ) { state: AnimationState<HybridAquaticFishEntity> ->
+                when {
+                    this.isGliding -> state.setAndContinue(DefaultAnimations.FLY)
+                    state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
+                    else -> state.setAndContinue(DefaultAnimations.IDLE)
+                }
+            }
+        )
+    }
 
     private fun startGliding() {
         isGliding = true
