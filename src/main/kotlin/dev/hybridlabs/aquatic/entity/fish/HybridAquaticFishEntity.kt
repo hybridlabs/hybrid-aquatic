@@ -247,14 +247,13 @@ open class HybridAquaticFishEntity(
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
-            AnimationController(this, "Swim/Idle", 5,
-                AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticFishEntity> ->
-                    if (state.isMoving) {
-                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SWIM)
-                    } else {
-                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-                })
+            AnimationController(this, "Swim/Idle", 5
+            ) { state: AnimationState<HybridAquaticFishEntity> ->
+                when {
+                    state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
+                    else -> state.setAndContinue(DefaultAnimations.IDLE)
+                }
+            }
         )
     }
 
