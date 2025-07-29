@@ -25,7 +25,7 @@
 					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*-5"]
 				},
 				"right_fin": {
-					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*-5"]
+					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*5"]
 				}
 			}
 		},
