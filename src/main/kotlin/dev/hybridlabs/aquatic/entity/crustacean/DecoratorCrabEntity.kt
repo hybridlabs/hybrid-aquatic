@@ -117,15 +117,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
     }
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        BRAIN(0, "brain"),
-        BUBBLE(1, "bubble"),
-        BUTTON(2, "button"),
-        FIRE(3, "fire"),
-        HORN(4, "horn"),
-        LOPHELIA(5, "lophelia"),
-        SUN(6, "sun"),
-        THORN(7, "thorn"),
-        TUBE(8, "tube");
+        CORAL(0, "coral");
 
         override fun asString(): String {
             return this.key
@@ -140,7 +132,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
             )
 
             fun byName(name: String?): Type {
-                return CODEC.byId(name, BRAIN) as Type
+                return CODEC.byId(name, CORAL) as Type
             }
 
             fun fromId(id: Int): Type {
