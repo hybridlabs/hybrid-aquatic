@@ -83,9 +83,7 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
     }
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        BLUE(0, "blue"),
-        BROWN(1, "brown"),
-        OLIVE(2, "olive");
+        COMMON(0, "common");
 
         override fun asString(): String {
             return this.key
@@ -100,7 +98,7 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
             )
 
             fun byName(name: String?): Type {
-                return CODEC.byId(name, BLUE) as Type
+                return CODEC.byId(name, COMMON) as Type
             }
 
             fun fromId(id: Int): Type {

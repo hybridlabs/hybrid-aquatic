@@ -1,19 +1,23 @@
 package dev.hybridlabs.aquatic.client.model.entity.shark
 
+import dev.hybridlabs.aquatic.entity.shark.HammerheadSharkEntity
 import dev.hybridlabs.aquatic.entity.shark.WhaleSharkEntity
 import net.minecraft.util.Identifier
+import kotlin.random.Random
 
 class WhaleSharkEntityModel : HybridAquaticSharkEntityModel<WhaleSharkEntity>("whale_shark") {
 
-    private val BLUE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/shark/whale_shark.png")
-    private val BROWN_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/shark/whale_shark_brown.png")
-    private val GRAY_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/shark/whale_shark_gray.png")
+    private val commonTextures = listOf(
+        Identifier("hybrid-aquatic", "textures/entity/shark/whale_shark.png"),
+        Identifier("hybrid-aquatic", "textures/entity/shark/whale_shark_brown.png"),
+        Identifier("hybrid-aquatic", "textures/entity/shark/whale_shark_gray.png")
+    )
 
     override fun getTextureResource(animatable: WhaleSharkEntity): Identifier {
+        val seed = animatable.uuid.leastSignificantBits
+        val random = Random(seed)
         return when (animatable.variant) {
-            WhaleSharkEntity.Type.BLUE -> BLUE_TEXTURE
-            WhaleSharkEntity.Type.BROWN -> BROWN_TEXTURE
-            WhaleSharkEntity.Type.GRAY -> GRAY_TEXTURE
+            WhaleSharkEntity.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
         }
     }
 }
