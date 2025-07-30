@@ -38,9 +38,8 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
 
     override fun getLootTableId(): Identifier {
         return when (variant) {
-            LobsterEntity.Type.AMERICAN -> HybridAquaticLootTables.CLAWED_LOBSTER
-            LobsterEntity.Type.CALIFORNIA_SPINY -> HybridAquaticLootTables.CLAWLESS_LOBSTER
-            LobsterEntity.Type.ORNATE_SPINY -> HybridAquaticLootTables.CLAWLESS_LOBSTER
+            LobsterEntity.Type.CLAWED -> HybridAquaticLootTables.CLAWED_LOBSTER
+            LobsterEntity.Type.CLAWLESS -> HybridAquaticLootTables.CLAWLESS_LOBSTER
             LobsterEntity.Type.REGAL_SLIPPER -> HybridAquaticLootTables.CLAWLESS_LOBSTER
         }
     }
@@ -81,10 +80,9 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
     }
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        AMERICAN(0, "american"),
-        CALIFORNIA_SPINY(1, "california_spiny"),
-        ORNATE_SPINY(2, "ornate_spiny"),
-        REGAL_SLIPPER(3, "regal_slipper");
+        CLAWED(0, "clawed"),
+        CLAWLESS(1, "clawless"),
+        REGAL_SLIPPER(2, "regal_slipper");
 
         override fun asString(): String {
             return this.key
@@ -99,7 +97,7 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
             )
 
             fun byName(name: String?): Type {
-                return CODEC.byId(name, AMERICAN) as Type
+                return CODEC.byId(name, CLAWED) as Type
             }
 
             fun fromId(id: Int): Type {
