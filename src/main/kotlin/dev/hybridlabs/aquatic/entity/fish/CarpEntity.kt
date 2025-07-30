@@ -94,10 +94,7 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
         COMMON(0, "common"),
-        AI_GOROMO(1, "ai_goromo"),
-        HAJIRO(2, "hajiro"),
-        PLATINUM(3, "platinum"),
-        TANCHO(4, "tancho");
+        KOI(1, "koi");
 
         override fun asString(): String {
             return this.key
