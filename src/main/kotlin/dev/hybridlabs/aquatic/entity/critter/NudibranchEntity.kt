@@ -69,15 +69,7 @@ class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: Worl
     }
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        BABA(0, "baba"),
-        BULLOCK(1, "bullock"),
-        FESTIVA(2, "festiva"),
-        KUBARYANA(3, "kubaryana"),
-        KUNIEI(4, "kuniei"),
-        MAGNIFICENT(5, "magnificent"),
-        PYJAMA(6, "pyjama"),
-        SAGAMI(7, "sagami"),
-        YONOWAE(8, "yonowae");
+        COMMON(0, "common");
 
         override fun asString(): String {
             return this.key
@@ -92,7 +84,7 @@ class NudibranchEntity(entityType: EntityType<out NudibranchEntity>, world: Worl
             )
 
             fun byName(name: String?): Type {
-                return CODEC.byId(name, BABA) as Type
+                return CODEC.byId(name, COMMON) as Type
             }
 
             fun fromId(id: Int): Type {
