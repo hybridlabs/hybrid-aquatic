@@ -88,28 +88,10 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
     }
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        BRITTLESTAR_BLACK(0, "brittlestar_black"),
-        BRITTLESTAR_WHITE(1, "brittlestar_white"),
-        BRITTLESTAR_YELLOW(2, "brittlestar_yellow"),
-        CROWN_OF_THORNS(3, "crown_of_thorns"),
-        GREEN(4, "green"),
-        MEDIUM_GREEN(5, "medium_green"),
-        MEDIUM_KNOBBED_GREEN(6, "medium_knobbed_green"),
-        BLUE(7, "blue"),
-        MEDIUM_BLUE(8, "medium_blue"),
-        MEDIUM_KNOBBED_BLUE(9, "medium_knobbed_blue"),
-        RED(10, "red"),
-        MEDIUM_RED(11, "medium_red"),
-        MEDIUM_KNOBBED_RED(12, "medium_knobbed_red"),
-        YELLOW(13, "yellow"),
-        MEDIUM_YELLOW(14, "medium_yellow"),
-        MEDIUM_KNOBBED_YELLOW(15, "medium_knobbed_yellow"),
-        PURPLE(16, "purple"),
-        MEDIUM_PURPLE(17, "medium_purple"),
-        MEDIUM_KNOBBED_PURPLE(18, "medium_knobbed_purple"),
-        ORANGE(19, "orange"),
-        MEDIUM_ORANGE(20, "medium_orange"),
-        MEDIUM_KNOBBED_ORANGE(21, "medium_knobbed_orange");
+        BRITTLESTAR(0, "brittlestar"),
+        CROWN_OF_THORNS(1, "crown_of_thorns"),
+        SMALL(2, "small"),
+        MEDIUM(3, "medium");
 
         override fun asString(): String {
             return this.key
@@ -124,7 +106,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             )
 
             fun byName(name: String?): Type {
-                return CODEC.byId(name, RED) as Type
+                return CODEC.byId(name, SMALL) as Type
             }
 
             fun fromId(id: Int): Type {
@@ -133,36 +115,20 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
 
             private val REEF_VARIANTS = listOf(
                 CROWN_OF_THORNS,
-                GREEN,
-                MEDIUM_GREEN,
-                MEDIUM_KNOBBED_GREEN,
-                BLUE,
-                MEDIUM_BLUE,
-                MEDIUM_KNOBBED_BLUE,
-                RED,
-                MEDIUM_RED,
-                MEDIUM_KNOBBED_RED,
-                YELLOW,
-                MEDIUM_YELLOW,
-                MEDIUM_KNOBBED_YELLOW,
-                PURPLE,
-                MEDIUM_PURPLE,
-                MEDIUM_KNOBBED_PURPLE,
-                ORANGE,
-                MEDIUM_ORANGE,
-                MEDIUM_KNOBBED_ORANGE
+                SMALL,
+                MEDIUM,
             )
 
             fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
                 return when {
                     biome.isIn(BiomeTags.IS_DEEP_OCEAN) -> {
-                        Type.fromId(random.nextInt(0, 3))
+                        BRITTLESTAR
                     }
                     biome.isIn(HybridAquaticBiomeTags.REEF) -> {
                         REEF_VARIANTS[random.nextInt(REEF_VARIANTS.size)]
                     }
                     else -> {
-                        Type.fromId(random.nextInt(4, 22))
+                        Type.fromId(random.nextInt(2, 4))
                     }
                 }
             }

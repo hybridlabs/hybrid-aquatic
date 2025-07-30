@@ -2,31 +2,41 @@ package dev.hybridlabs.aquatic.client.model.entity.critter
 
 import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
 import net.minecraft.util.Identifier
+import kotlin.random.Random
 
 class StarfishEntityModel : HybridAquaticCritterEntityModel<StarfishEntity>("starfish") {
 
-    private val BRITTLESTAR_BLACK_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_black.png")
-    private val BRITTLESTAR_WHITE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_white.png")
-    private val BRITTLESTAR_YELLOW_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_yellow.png")
+    private val brittlestarTextures = listOf(
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_black.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_white.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_yellow.png"),
+    )
+
+    private val smallTextures = listOf(
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_blue.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_green.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_orange.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_purple.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_red.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_yellow.png"),
+    )
+
+    private val mediumTextures = listOf(
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_blue.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_green.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_orange.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_purple.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_red.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_yellow.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_blue.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_green.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_orange.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_purple.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_red.png"),
+        Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_yellow.png"),
+    )
+
     private val CROWN_OF_THORNS_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_crown_of_thorns.png")
-    private val RED_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_red.png")
-    private val MEDIUM_RED_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_red.png")
-    private val KNOBBED_RED_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_red.png")
-    private val ORANGE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_orange.png")
-    private val MEDIUM_ORANGE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_orange.png")
-    private val KNOBBED_ORANGE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_orange.png")
-    private val YELLOW_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_yellow.png")
-    private val MEDIUM_YELLOW_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_yellow.png")
-    private val KNOBBED_YELLOW_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_yellow.png")
-    private val GREEN_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_green.png")
-    private val MEDIUM_GREEN_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_green.png")
-    private val KNOBBED_GREEN_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_green.png")
-    private val BLUE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_blue.png")
-    private val MEDIUM_BLUE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_blue.png")
-    private val KNOBBED_BLUE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_blue.png")
-    private val PURPLE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_purple.png")
-    private val MEDIUM_PURPLE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_purple.png")
-    private val KNOBBED_PURPLE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_purple.png")
 
     private val STARFISH_MODEL = Identifier("hybrid-aquatic", "geo/critter/starfish/starfish.geo.json")
     private val BRITTLESTAR_MODEL = Identifier("hybrid-aquatic", "geo/critter/starfish/starfish_brittlestar.geo.json")
@@ -37,37 +47,19 @@ class StarfishEntityModel : HybridAquaticCritterEntityModel<StarfishEntity>("sta
     private val CROWN_OF_THORNS_ANIMATION = Identifier("hybrid-aquatic", "animations/starfish_crown_of_thorns.animation.json")
 
     override fun getTextureResource(animatable: StarfishEntity): Identifier {
+        val seed = animatable.uuid.leastSignificantBits
+        val random = Random(seed)
         return when (animatable.variant) {
-            StarfishEntity.Type.BRITTLESTAR_BLACK -> BRITTLESTAR_BLACK_TEXTURE
-            StarfishEntity.Type.BRITTLESTAR_WHITE -> BRITTLESTAR_WHITE_TEXTURE
-            StarfishEntity.Type.BRITTLESTAR_YELLOW -> BRITTLESTAR_YELLOW_TEXTURE
             StarfishEntity.Type.CROWN_OF_THORNS -> CROWN_OF_THORNS_TEXTURE
-            StarfishEntity.Type.RED -> RED_TEXTURE
-            StarfishEntity.Type.MEDIUM_RED -> MEDIUM_RED_TEXTURE
-            StarfishEntity.Type.MEDIUM_KNOBBED_RED -> KNOBBED_RED_TEXTURE
-            StarfishEntity.Type.ORANGE -> ORANGE_TEXTURE
-            StarfishEntity.Type.MEDIUM_ORANGE -> MEDIUM_ORANGE_TEXTURE
-            StarfishEntity.Type.MEDIUM_KNOBBED_ORANGE -> KNOBBED_ORANGE_TEXTURE
-            StarfishEntity.Type.YELLOW -> YELLOW_TEXTURE
-            StarfishEntity.Type.MEDIUM_YELLOW -> MEDIUM_YELLOW_TEXTURE
-            StarfishEntity.Type.MEDIUM_KNOBBED_YELLOW -> KNOBBED_YELLOW_TEXTURE
-            StarfishEntity.Type.GREEN -> GREEN_TEXTURE
-            StarfishEntity.Type.MEDIUM_GREEN -> MEDIUM_GREEN_TEXTURE
-            StarfishEntity.Type.MEDIUM_KNOBBED_GREEN -> KNOBBED_GREEN_TEXTURE
-            StarfishEntity.Type.BLUE -> BLUE_TEXTURE
-            StarfishEntity.Type.MEDIUM_BLUE -> MEDIUM_BLUE_TEXTURE
-            StarfishEntity.Type.MEDIUM_KNOBBED_BLUE -> KNOBBED_BLUE_TEXTURE
-            StarfishEntity.Type.PURPLE -> PURPLE_TEXTURE
-            StarfishEntity.Type.MEDIUM_PURPLE -> MEDIUM_PURPLE_TEXTURE
-            StarfishEntity.Type.MEDIUM_KNOBBED_PURPLE -> KNOBBED_PURPLE_TEXTURE
+            StarfishEntity.Type.BRITTLESTAR -> brittlestarTextures[random.nextInt(brittlestarTextures.size)]
+            StarfishEntity.Type.SMALL -> smallTextures[random.nextInt(smallTextures.size)]
+            StarfishEntity.Type.MEDIUM -> mediumTextures[random.nextInt(mediumTextures.size)]
         }
     }
 
     override fun getModelResource(animatable: StarfishEntity): Identifier {
         return when (animatable.variant) {
-            StarfishEntity.Type.BRITTLESTAR_BLACK -> BRITTLESTAR_MODEL
-            StarfishEntity.Type.BRITTLESTAR_WHITE -> BRITTLESTAR_MODEL
-            StarfishEntity.Type.BRITTLESTAR_YELLOW -> BRITTLESTAR_MODEL
+            StarfishEntity.Type.BRITTLESTAR -> BRITTLESTAR_MODEL
             StarfishEntity.Type.CROWN_OF_THORNS -> CROWN_OF_THORNS_MODEL
             else -> STARFISH_MODEL
         }
@@ -75,9 +67,7 @@ class StarfishEntityModel : HybridAquaticCritterEntityModel<StarfishEntity>("sta
 
     override fun getAnimationResource(animatable: StarfishEntity): Identifier {
         return when (animatable.variant) {
-            StarfishEntity.Type.BRITTLESTAR_BLACK -> BRITTLESTAR_ANIMATION
-            StarfishEntity.Type.BRITTLESTAR_WHITE -> BRITTLESTAR_ANIMATION
-            StarfishEntity.Type.BRITTLESTAR_YELLOW -> BRITTLESTAR_ANIMATION
+            StarfishEntity.Type.BRITTLESTAR -> BRITTLESTAR_ANIMATION
             StarfishEntity.Type.CROWN_OF_THORNS -> CROWN_OF_THORNS_ANIMATION
             else -> STARFISH_ANIMATION
         }
