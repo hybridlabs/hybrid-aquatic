@@ -3,21 +3,42 @@ package dev.hybridlabs.aquatic.entity.critter
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import net.minecraft.block.Blocks
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.function.ValueLists
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
+import java.util.function.IntFunction
+import kotlin.random.Random
 
 class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World) :
-    HybridAquaticCritterEntity(entityType, world) {
+    HybridAquaticCritterEntity(entityType, world),
+    VariantHolder<SeaUrchinEntity.Type> {
 
     private var timeUntilNextBreak = 0
     private var spawnUrchinOnNextBreak = false
+
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        variant = Type.entries.random(Random)
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+    }
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
@@ -29,6 +50,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 2.0)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
         }
+        val TYPE: TrackedData<Int> = DataTracker.registerData(SeaUrchinEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
     }
 
     override fun onPlayerCollision(player: PlayerEntity) {
@@ -92,5 +114,54 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World)
 
     override fun getMinSize(): Int {
         return -5
+    }
+
+    override fun initDataTracker() {
+        dataTracker.startTracking(TYPE, 0)
+        super.initDataTracker()
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        nbt.putString("Type", this.variant.asString())
+        super.writeCustomDataToNbt(nbt)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        this.variant = Type.byName(nbt.getString("Type"))
+        super.readCustomDataFromNbt(nbt)
+    }
+
+    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+        SMALL(0, "small"),
+        LARGE(1, "large");
+
+        override fun asString(): String {
+            return this.key
+        }
+
+        companion object {
+            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                { obj: Type -> obj.id },
+                entries.toTypedArray(),
+                ValueLists.OutOfBoundsHandling.ZERO
+            )
+
+            fun byName(name: String?): Type {
+                return CODEC.byId(name, SMALL) as Type
+            }
+
+            fun fromId(id: Int): Type {
+                return BY_ID.apply(id) as Type
+            }
+        }
+    }
+
+    override fun getVariant(): Type {
+        return Type.fromId((dataTracker.get(TYPE) as Int))
+    }
+
+    override fun setVariant(type: Type) {
+        dataTracker.set(TYPE, type.id)
     }
 }
