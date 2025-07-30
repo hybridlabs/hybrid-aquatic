@@ -23,7 +23,6 @@ class SeaUrchinEntityModel : HybridAquaticCritterEntityModel<SeaUrchinEntity>("s
     override fun getTextureResource(animatable: SeaUrchinEntity): Identifier {
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
-
         return when (animatable.variant) {
             SeaUrchinEntity.Type.SMALL -> smallTextures[random.nextInt(smallTextures.size)]
             SeaUrchinEntity.Type.LARGE -> largeTextures[random.nextInt(largeTextures.size)]
