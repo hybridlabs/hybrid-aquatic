@@ -20,7 +20,6 @@ import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.biome.Biome
 import java.util.function.IntFunction
-import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: World) :
@@ -80,7 +79,7 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
         entityNbt: NbtCompound?
     ): EntityData? {
         val biome = world.getBiome(this.blockPos)
-        val selectedType = Type.fromBiome(biome, Random.Default)
+        val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -109,13 +108,8 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
     }
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        BLACK_TEATFISH(0, "black_teatfish"),
-        WHITE_TEATFISH(1, "white_teatfish"),
-        GREENFISH(2, "greenfish"),
-        PRICKLY_REDFISH(3, "prickly_redfish"),
-        CURRYFISH(4, "curryfish"),
-        SANDFISH(5, "sandfish"),
-        SEA_PIG(6, "sea_pig");
+        COMMON(0, "common"),
+        SEA_PIG(1, "sea_pig");
 
         override fun asString(): String {
             return this.key
@@ -130,19 +124,18 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
             )
 
             fun byName(name: String?): Type {
-                return CODEC.byId(name, BLACK_TEATFISH) as Type
+                return CODEC.byId(name, COMMON) as Type
             }
 
             fun fromId(id: Int): Type {
                 return BY_ID.apply(id) as Type
             }
 
-            fun fromBiome(biome: RegistryEntry<Biome?>, random: Random): Type {
+            fun fromBiome(biome: RegistryEntry<Biome?>): Type {
                 return if (biome.isIn(BiomeTags.IS_DEEP_OCEAN)) {
                     SEA_PIG
                 } else {
-                    val randomId = random.nextInt(0, 6)
-                    fromId(randomId)
+                    COMMON
                 }
             }
         }
