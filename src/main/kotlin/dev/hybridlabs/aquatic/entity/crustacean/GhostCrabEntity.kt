@@ -70,10 +70,7 @@ class GhostCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>,
     }
 
     enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        PURPLE(0, "purple"),
-        RED(1, "red"),
-        WHITE(2, "white"),
-        YELLOW(3, "yellow");
+        COMMON(0, "common");
 
         override fun asString(): String {
             return this.key
@@ -88,7 +85,7 @@ class GhostCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>,
             )
 
             fun byName(name: String?): Type {
-                return CODEC.byId(name, PURPLE) as Type
+                return CODEC.byId(name, COMMON) as Type
             }
 
             fun fromId(id: Int): Type {
