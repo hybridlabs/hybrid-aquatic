@@ -21,8 +21,6 @@ class NudibranchEntityModel : HybridAquaticCritterEntityModel<NudibranchEntity>(
     override fun getTextureResource(animatable: NudibranchEntity): Identifier {
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
-        return when (animatable.variant) {
-            NudibranchEntity.Companion.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
-        }
+        return commonTextures[random.nextInt(commonTextures.size)]
     }
 }
