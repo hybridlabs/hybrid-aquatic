@@ -37,7 +37,7 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
             HybridAquaticEntityTags.SHARK
         )
     ),
-    VariantHolder<CarpEntity.Type> {
+    VariantHolder<CarpEntity.Companion.Type> {
 
     override fun getLimitPerChunk(): Int {
         return 2
@@ -73,6 +73,44 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
 
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            COMMON(0, "common"),
+            KOI(1, "koi");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, COMMON) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+
+                fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
+                    return when {
+                        biome.isIn(HybridAquaticBiomeTags.CHERRY) -> {
+                            Type.fromId(random.nextInt(1, 5))
+                        }
+
+                        else -> {
+                            COMMON
+                        }
+                    }
+                }
+            }
+        }
+
         val TYPE: TrackedData<Int> =
             DataTracker.registerData(CarpEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
     }
@@ -90,44 +128,6 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        COMMON(0, "common"),
-        KOI(1, "koi");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, COMMON) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-
-            fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
-                return when {
-                    biome.isIn(HybridAquaticBiomeTags.CHERRY) -> {
-                        Type.fromId(random.nextInt(1, 5))
-                    }
-
-                    else -> {
-                        COMMON
-                    }
-                }
-            }
-        }
     }
 
     override fun getVariant(): Type {
