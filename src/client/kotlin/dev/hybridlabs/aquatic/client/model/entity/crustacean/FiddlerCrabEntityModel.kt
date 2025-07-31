@@ -16,7 +16,7 @@ class FiddlerCrabEntityModel : HybridAquaticCrustaceanEntityModel<FiddlerCrabEnt
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return when (animatable.variant) {
-            FiddlerCrabEntity.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
+            FiddlerCrabEntity.Companion.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
         }
     }
 }
