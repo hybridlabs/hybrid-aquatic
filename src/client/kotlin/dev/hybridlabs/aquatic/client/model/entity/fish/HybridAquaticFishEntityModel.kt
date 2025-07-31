@@ -22,6 +22,10 @@ abstract class HybridAquaticFishEntityModel<T: HybridAquaticFishEntity> (private
         return Identifier(HybridAquatic.MOD_ID, "animations/$id.animation.json")
     }
 
+    fun getLayerTextureResource(layer: String): Identifier {
+        return Identifier(HybridAquatic.MOD_ID, "textures/entity/fish/$id/${id}_$layer.png")
+    }
+
     override fun setCustomAnimations(
         animatable: T,
         instanceId: Long,
