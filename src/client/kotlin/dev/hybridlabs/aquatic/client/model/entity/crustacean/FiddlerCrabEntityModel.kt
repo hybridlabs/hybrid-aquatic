@@ -15,8 +15,6 @@ class FiddlerCrabEntityModel : HybridAquaticCrustaceanEntityModel<FiddlerCrabEnt
     override fun getTextureResource(animatable: FiddlerCrabEntity): Identifier {
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
-        return when (animatable.variant) {
-            FiddlerCrabEntity.Companion.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
-        }
+        return commonTextures[random.nextInt(commonTextures.size)]
     }
 }

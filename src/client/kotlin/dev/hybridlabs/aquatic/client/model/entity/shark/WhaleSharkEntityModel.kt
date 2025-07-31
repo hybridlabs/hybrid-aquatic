@@ -16,8 +16,6 @@ class WhaleSharkEntityModel : HybridAquaticSharkEntityModel<WhaleSharkEntity>("w
     override fun getTextureResource(animatable: WhaleSharkEntity): Identifier {
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
-        return when (animatable.variant) {
-            WhaleSharkEntity.Companion.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
-        }
+        return commonTextures[random.nextInt(commonTextures.size)]
     }
 }

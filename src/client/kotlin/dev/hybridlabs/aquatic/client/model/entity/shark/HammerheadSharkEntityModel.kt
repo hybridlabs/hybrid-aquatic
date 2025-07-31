@@ -16,8 +16,6 @@ class HammerheadSharkEntityModel : HybridAquaticSharkEntityModel<HammerheadShark
     override fun getTextureResource(animatable: HammerheadSharkEntity): Identifier {
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
-        return when (animatable.variant) {
-            HammerheadSharkEntity.Companion.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
-        }
+        return commonTextures[random.nextInt(commonTextures.size)]
     }
 }

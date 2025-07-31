@@ -17,8 +17,6 @@ class GhostCrabEntityModel : HybridAquaticCrustaceanEntityModel<GhostCrabEntity>
     override fun getTextureResource(animatable: GhostCrabEntity): Identifier {
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
-        return when (animatable.variant) {
-            GhostCrabEntity.Companion.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
-        }
+        return commonTextures[random.nextInt(commonTextures.size)]
     }
 }
