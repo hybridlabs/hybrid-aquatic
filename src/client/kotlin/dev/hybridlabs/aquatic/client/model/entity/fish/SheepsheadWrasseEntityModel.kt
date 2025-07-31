@@ -13,13 +13,13 @@ class SheepsheadWrasseEntityModel : HybridAquaticFishEntityModel<SheepsheadWrass
 
     override fun getTextureResource(animatable: SheepsheadWrasseEntity): Identifier {
         return when (animatable.variant) {
-            SheepsheadWrasseEntity.Type.CALIFORNIA_SHEEPSHEAD -> CALIFORNIA_SHEEPSHEAD_TEXTURE
+            SheepsheadWrasseEntity.Companion.Type.CALIFORNIA_SHEEPSHEAD -> CALIFORNIA_SHEEPSHEAD_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: SheepsheadWrasseEntity): Identifier {
         return when (animatable.variant) {
-            SheepsheadWrasseEntity.Type.CALIFORNIA_SHEEPSHEAD -> CALIFORNIA_SHEEPSHEAD_MODEL
+            SheepsheadWrasseEntity.Companion.Type.CALIFORNIA_SHEEPSHEAD -> CALIFORNIA_SHEEPSHEAD_MODEL
         }
     }
 }

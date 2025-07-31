@@ -31,7 +31,7 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: World) :
         listOf(HybridAquaticEntityTags.CRUSTACEAN),
         listOf(HybridAquaticEntityTags.SHARK)
     ),
-    VariantHolder<StingrayEntity.Type> {
+    VariantHolder<StingrayEntity.Companion.Type> {
 
     override fun initGoals() {
         super.initGoals()
@@ -66,7 +66,47 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(StingrayEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(StingrayEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            SPOTTED_EAGLE(0, "spotted_eagle"),
+            BLUE_SPOTTED(1, "blue_spotted");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, BLUE_SPOTTED) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+
+                fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
+                    return when {
+                        biome.isIn(HybridAquaticBiomeTags.REEF) -> {
+                            Type.fromId(random.nextInt(0, 3))
+                        }
+
+                        else -> {
+                            Type.fromId(random.nextInt(0, 3))
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun initDataTracker() {
@@ -82,43 +122,6 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: World) :
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        SPOTTED_EAGLE(0, "spotted_eagle"),
-        BLUE_SPOTTED(1, "blue_spotted");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, BLUE_SPOTTED) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-
-            fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
-                return when {
-                    biome.isIn(HybridAquaticBiomeTags.REEF) -> {
-                        Type.fromId(random.nextInt(0, 3))
-                    }
-                    else -> {
-                        Type.fromId(random.nextInt(0, 3))
-                    }
-                }
-            }
-        }
     }
 
     override fun getVariant(): Type {

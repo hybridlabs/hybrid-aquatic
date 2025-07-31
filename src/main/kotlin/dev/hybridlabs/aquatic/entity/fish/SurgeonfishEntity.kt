@@ -31,7 +31,7 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Wo
             HybridAquaticEntityTags.SHARK
         )
     ),
-    VariantHolder<SurgeonfishEntity.Type> {
+    VariantHolder<SurgeonfishEntity.Companion.Type> {
 
     override fun getLimitPerChunk(): Int {
         return 3
@@ -69,7 +69,40 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Wo
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(SurgeonfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(SurgeonfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            BLUE_TANG(0, "blue_tang"),
+            POWDER_BLUE_TANG(1, "powder_blue_tang"),
+            YELLOW_TANG(2, "yellow_tang"),
+            LINED(3, "lined"),
+            ORANGESHOULDER(4, "orangeshoulder"),
+            SOHAL(5, "sohal"),
+            UNICORNFISH(6, "unicornfish");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, BLUE_TANG) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
     override fun initDataTracker() {
@@ -85,37 +118,6 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Wo
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        BLUE_TANG(0, "blue_tang"),
-        POWDER_BLUE_TANG(1, "powder_blue_tang"),
-        YELLOW_TANG(2, "yellow_tang"),
-        LINED(3, "lined"),
-        ORANGESHOULDER(4, "orangeshoulder"),
-        SOHAL(5, "sohal"),
-        UNICORNFISH(6, "unicornfish");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, BLUE_TANG) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-        }
     }
 
     override fun getVariant(): Type {

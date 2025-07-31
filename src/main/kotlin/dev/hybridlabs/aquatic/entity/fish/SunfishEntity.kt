@@ -30,7 +30,7 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) :
         listOf(HybridAquaticEntityTags.JELLYFISH),
         listOf(HybridAquaticEntityTags.SHARK)
     ),
-    VariantHolder<SunfishEntity.Type> {
+    VariantHolder<SunfishEntity.Companion.Type> {
 
     override fun getLimitPerChunk(): Int {
         return 2
@@ -66,7 +66,61 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(SurgeonfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(SunfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            OCEAN(0, "ocean"),
+            GIANT(1, "giant"),
+            HOODWINKER(2, "hoodwinker"),
+            SHARPTAIL(3, "sharptail");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, OCEAN) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+
+                fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
+                    return when {
+                        biome.isIn(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                            HOODWINKER
+                        }
+
+                        biome.isIn(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS) -> {
+                            SHARPTAIL
+                        }
+
+                        biome.isIn(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
+                            OCEAN
+                        }
+
+                        biome.isIn(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS) -> {
+                            GIANT
+                        }
+
+                        else -> {
+                            Type.fromId(random.nextInt(0, 4))
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun initDataTracker() {
@@ -82,58 +136,6 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) :
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        OCEAN(0, "ocean"),
-        GIANT(1, "giant"),
-        HOODWINKER(2, "hoodwinker"),
-        SHARPTAIL(3, "sharptail");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, OCEAN) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-
-            fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
-                return when {
-                    biome.isIn(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
-                        HOODWINKER
-                    }
-
-                    biome.isIn(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS) -> {
-                        SHARPTAIL
-                    }
-
-                    biome.isIn(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
-                        OCEAN
-                    }
-
-                    biome.isIn(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS) -> {
-                        GIANT
-                    }
-
-                    else -> {
-                        Type.fromId(random.nextInt(0, 4))
-                    }
-                }
-            }
-        }
     }
 
     override fun getVariant(): Type {

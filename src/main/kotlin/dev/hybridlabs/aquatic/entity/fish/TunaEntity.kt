@@ -37,7 +37,7 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: World) :
             HybridAquaticEntityTags.SHARK
         )
     ),
-    VariantHolder<TunaEntity.Type> {
+    VariantHolder<TunaEntity.Companion.Type> {
 
     override fun getLimitPerChunk(): Int {
         return 3
@@ -77,7 +77,51 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(TunaEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(TunaEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            YELLOWFIN(0, "yellowfin"),
+            BLUEFIN(1, "bluefin");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, YELLOWFIN) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+
+                fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
+                    return when {
+                        biome.isIn(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
+                            BLUEFIN
+                        }
+
+                        biome.isIn(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                            YELLOWFIN
+                        }
+
+                        else -> {
+                            Type.fromId(random.nextInt(0, 2))
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun initDataTracker() {
@@ -93,46 +137,6 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: World) :
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        YELLOWFIN(0, "yellowfin"),
-        BLUEFIN(1, "bluefin");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, YELLOWFIN) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-
-            fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
-                return when {
-                    biome.isIn(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
-                        BLUEFIN
-                    }
-                    biome.isIn(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
-                        YELLOWFIN
-                    }
-                    else -> {
-                        Type.fromId(random.nextInt(0, 2))
-                    }
-                }
-            }
-        }
     }
 
     override fun getVariant(): Type {

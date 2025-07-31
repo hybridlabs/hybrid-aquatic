@@ -23,25 +23,25 @@ class SeadragonEntityModel : HybridAquaticFishEntityModel<SeadragonEntity>("sead
 
     override fun getTextureResource(animatable: SeadragonEntity): Identifier {
         return when (animatable.variant) {
-            SeadragonEntity.Type.LEAFY -> LEAFY_TEXTURE
-            SeadragonEntity.Type.WEEDY -> WEEDY_TEXTURE
-            SeadragonEntity.Type.RUBY -> RUBY_TEXTURE
+            SeadragonEntity.Companion.Type.LEAFY -> LEAFY_TEXTURE
+            SeadragonEntity.Companion.Type.WEEDY -> WEEDY_TEXTURE
+            SeadragonEntity.Companion.Type.RUBY -> RUBY_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: SeadragonEntity): Identifier {
         return when (animatable.variant) {
-            SeadragonEntity.Type.LEAFY -> LEAFY_MODEL
-            SeadragonEntity.Type.WEEDY -> WEEDY_MODEL
-            SeadragonEntity.Type.RUBY -> RUBY_MODEL
+            SeadragonEntity.Companion.Type.LEAFY -> LEAFY_MODEL
+            SeadragonEntity.Companion.Type.WEEDY -> WEEDY_MODEL
+            SeadragonEntity.Companion.Type.RUBY -> RUBY_MODEL
         }
     }
 
     override fun getAnimationResource(animatable: SeadragonEntity): Identifier {
         return when (animatable.variant) {
-            SeadragonEntity.Type.LEAFY -> LEAFY_ANIMATION
-            SeadragonEntity.Type.WEEDY -> WEEDY_ANIMATION
-            SeadragonEntity.Type.RUBY -> RUBY_ANIMATION
+            SeadragonEntity.Companion.Type.LEAFY -> LEAFY_ANIMATION
+            SeadragonEntity.Companion.Type.WEEDY -> WEEDY_ANIMATION
+            SeadragonEntity.Companion.Type.RUBY -> RUBY_ANIMATION
         }
     }
 }

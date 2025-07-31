@@ -17,7 +17,7 @@ class HammerheadSharkEntityModel : HybridAquaticSharkEntityModel<HammerheadShark
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return when (animatable.variant) {
-            HammerheadSharkEntity.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
+            HammerheadSharkEntity.Companion.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
         }
     }
 }

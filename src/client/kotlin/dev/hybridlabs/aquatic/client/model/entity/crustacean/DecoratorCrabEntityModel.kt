@@ -25,7 +25,7 @@ class DecoratorCrabEntityModel : HybridAquaticCrustaceanEntityModel<DecoratorCra
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return when (animatable.variant) {
-            DecoratorCrabEntity.Type.CORAL -> coralTextures[random.nextInt(coralTextures.size)]
+            DecoratorCrabEntity.Companion.Type.CORAL -> coralTextures[random.nextInt(coralTextures.size)]
         }
     }
 

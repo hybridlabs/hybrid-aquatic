@@ -20,14 +20,18 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World) :
-    HybridAquaticFishEntity(entityType, world,
+    HybridAquaticFishEntity(
+        entityType, world,
         listOf(
-            HybridAquaticEntityTags.NONE),
+            HybridAquaticEntityTags.NONE
+        ),
         listOf(
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK)),
-    VariantHolder<ClownfishEntity.Type> {
+            HybridAquaticEntityTags.SHARK
+        )
+    ),
+    VariantHolder<ClownfishEntity.Companion.Type> {
 
     override fun getLimitPerChunk(): Int {
         return 2
@@ -53,7 +57,42 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(ClownfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(ClownfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            OCELLARIS(0, "ocellaris"),
+            CLARKII(1, "clarkii"),
+            TOMATO(2, "tomato"),
+            PINK_SKUNK(3, "pink_skunk"),
+            ORANGE_SKUNK(4, "orange_skunk"),
+            CINNAMON(5, "cinnamon"),
+            PERCULA(6, "percula"),
+            WHITEBAND(7, "whiteband");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, OCELLARIS) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
     override fun initDataTracker() {
@@ -69,38 +108,6 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        OCELLARIS(0, "ocellaris"),
-        CLARKII(1, "clarkii"),
-        TOMATO(2, "tomato"),
-        PINK_SKUNK(3, "pink_skunk"),
-        ORANGE_SKUNK(4, "orange_skunk"),
-        CINNAMON(5, "cinnamon"),
-        PERCULA(6, "percula"),
-        WHITEBAND(7, "whiteband");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, OCELLARIS) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-        }
     }
 
     override fun getVariant(): Type {

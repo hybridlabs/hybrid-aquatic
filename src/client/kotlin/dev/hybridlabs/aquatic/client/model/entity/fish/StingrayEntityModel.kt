@@ -13,15 +13,15 @@ class StingrayEntityModel : HybridAquaticFishEntityModel<StingrayEntity>("stingr
 
     override fun getTextureResource(animatable: StingrayEntity): Identifier {
         return when (animatable.variant) {
-            StingrayEntity.Type.BLUE_SPOTTED -> BLUE_SPOTTED_TEXTURE
-            StingrayEntity.Type.SPOTTED_EAGLE -> SPOTTED_EAGLE_TEXTURE
+            StingrayEntity.Companion.Type.BLUE_SPOTTED -> BLUE_SPOTTED_TEXTURE
+            StingrayEntity.Companion.Type.SPOTTED_EAGLE -> SPOTTED_EAGLE_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: StingrayEntity): Identifier {
         return when (animatable.variant) {
-            StingrayEntity.Type.BLUE_SPOTTED -> BLUE_SPOTTED_MODEL
-            StingrayEntity.Type.SPOTTED_EAGLE -> SPOTTED_EAGLE_MODEL
+            StingrayEntity.Companion.Type.BLUE_SPOTTED -> BLUE_SPOTTED_MODEL
+            StingrayEntity.Companion.Type.SPOTTED_EAGLE -> SPOTTED_EAGLE_MODEL
             else -> BLUE_SPOTTED_MODEL
         }
     }

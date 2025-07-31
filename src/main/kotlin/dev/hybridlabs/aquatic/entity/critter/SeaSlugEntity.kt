@@ -20,7 +20,7 @@ import kotlin.random.Random
 
 class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
     HybridAquaticCritterEntity(entityType, world),
-    VariantHolder<SeaSlugEntity.Type> {
+    VariantHolder<SeaSlugEntity.Companion.Type> {
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
@@ -31,7 +31,34 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 2.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(SeaSlugEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(SeaSlugEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            SPOTTED_SEA_HARE(0, "spotted_sea_hare");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, SPOTTED_SEA_HARE) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
     override fun initialize(
@@ -45,7 +72,7 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 
@@ -66,31 +93,6 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        SPOTTED_SEA_HARE(0, "spotted_sea_hare");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, SPOTTED_SEA_HARE) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-        }
     }
 
     override fun getVariant(): Type {

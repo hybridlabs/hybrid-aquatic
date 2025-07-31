@@ -28,7 +28,7 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
         true,
         false
     ),
-    VariantHolder<CuttlefishEntity.Type> {
+    VariantHolder<CuttlefishEntity.Companion.Type> {
 
 
     override fun initialize(
@@ -54,6 +54,32 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
 
         val TYPE: TrackedData<Int> =
             DataTracker.registerData(CuttlefishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            RED(0, "red"),
+            BLACK(1, "black");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, RED) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
     override fun getMaxSize(): Int {
@@ -77,32 +103,6 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        RED(0, "red"),
-        BLACK(1, "black");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, RED) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-        }
     }
 
     override fun getVariant(): Type {

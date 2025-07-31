@@ -33,7 +33,7 @@ class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: World)
             HybridAquaticEntityTags.SHARK
         )
     ),
-    VariantHolder<SeadragonEntity.Type> {
+    VariantHolder<SeadragonEntity.Companion.Type> {
 
     override fun getLimitPerChunk(): Int {
         return 2
@@ -59,7 +59,36 @@ class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: World)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(SeadragonEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(SeadragonEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            LEAFY(0, "leafy"),
+            WEEDY(1, "weedy"),
+            RUBY(2, "ruby");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, LEAFY) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
     override fun initDataTracker() {
@@ -75,33 +104,6 @@ class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: World)
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        LEAFY(0, "leafy"),
-        WEEDY(1, "weedy"),
-        RUBY(2, "ruby");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, LEAFY) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-        }
     }
 
     override fun getVariant(): Type {

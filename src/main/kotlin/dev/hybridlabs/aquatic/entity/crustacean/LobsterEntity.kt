@@ -22,8 +22,9 @@ import kotlin.random.Random
 
 class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
     HybridAquaticCrustaceanEntity(
-        entityType, world, false),
-    VariantHolder<LobsterEntity.Type> {
+        entityType, world, false
+    ),
+    VariantHolder<LobsterEntity.Companion.Type> {
 
     override fun initialize(
         world: ServerWorldAccess,
@@ -38,9 +39,8 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
 
     override fun getLootTableId(): Identifier {
         return when (variant) {
-            LobsterEntity.Type.CLAWED -> HybridAquaticLootTables.CLAWED_LOBSTER
-            LobsterEntity.Type.CLAWLESS -> HybridAquaticLootTables.CLAWLESS_LOBSTER
-            LobsterEntity.Type.REGAL_SLIPPER -> HybridAquaticLootTables.CLAWLESS_LOBSTER
+            Type.CLAWED -> HybridAquaticLootTables.CLAWED_LOBSTER
+            else -> HybridAquaticLootTables.CLAWLESS_LOBSTER
         }
     }
 
@@ -53,10 +53,39 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(LobsterEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(LobsterEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            CLAWED(0, "clawed"),
+            CLAWLESS(1, "clawless"),
+            REGAL_SLIPPER(2, "regal_slipper");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, CLAWED) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 
@@ -77,33 +106,6 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        CLAWED(0, "clawed"),
-        CLAWLESS(1, "clawless"),
-        REGAL_SLIPPER(2, "regal_slipper");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, CLAWED) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-        }
     }
 
     override fun getVariant(): Type {

@@ -18,7 +18,7 @@ class GhostCrabEntityModel : HybridAquaticCrustaceanEntityModel<GhostCrabEntity>
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return when (animatable.variant) {
-            GhostCrabEntity.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
+            GhostCrabEntity.Companion.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
         }
     }
 }

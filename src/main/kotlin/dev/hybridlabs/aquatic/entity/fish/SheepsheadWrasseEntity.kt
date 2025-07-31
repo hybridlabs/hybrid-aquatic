@@ -11,7 +11,6 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
@@ -32,7 +31,7 @@ class SheepsheadWrasseEntity(entityType: EntityType<out SheepsheadWrasseEntity>,
             HybridAquaticEntityTags.SHARK
         )
     ),
-    VariantHolder<SheepsheadWrasseEntity.Type> {
+    VariantHolder<SheepsheadWrasseEntity.Companion.Type> {
 
     override fun getLimitPerChunk(): Int {
         return 1
@@ -45,7 +44,7 @@ class SheepsheadWrasseEntity(entityType: EntityType<out SheepsheadWrasseEntity>,
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        variant = SheepsheadWrasseEntity.Type.entries.random(Random)
+        variant = Type.entries.random(Random)
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
@@ -58,7 +57,34 @@ class SheepsheadWrasseEntity(entityType: EntityType<out SheepsheadWrasseEntity>,
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(SheepsheadWrasseEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(SheepsheadWrasseEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            CALIFORNIA_SHEEPSHEAD(0, "california_sheepshead");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, CALIFORNIA_SHEEPSHEAD) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
     override fun initDataTracker() {
@@ -74,31 +100,6 @@ class SheepsheadWrasseEntity(entityType: EntityType<out SheepsheadWrasseEntity>,
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        CALIFORNIA_SHEEPSHEAD(0, "california_sheepshead");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, CALIFORNIA_SHEEPSHEAD) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-        }
     }
 
     override fun getVariant(): Type {

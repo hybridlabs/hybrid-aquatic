@@ -25,7 +25,7 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: World) :
     HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.NONE), true, false),
-    VariantHolder<WhaleSharkEntity.Type> {
+    VariantHolder<WhaleSharkEntity.Companion.Type> {
 
     private var isFeeding = false
 
@@ -84,7 +84,33 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Worl
 
         val MOUTH_OPEN: RawAnimation = RawAnimation.begin().thenPlay("misc.mouth_open")
         val MOUTH_CLOSED: RawAnimation = RawAnimation.begin().thenPlay("misc.mouth_closed")
-        val TYPE: TrackedData<Int> = DataTracker.registerData(WhaleSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(WhaleSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            COMMON(0, "common");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, COMMON) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
     override fun getMaxSize(): Int {
@@ -108,31 +134,6 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Worl
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        COMMON(0, "common");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, COMMON) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-        }
     }
 
     override fun getVariant(): Type {

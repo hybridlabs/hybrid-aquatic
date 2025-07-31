@@ -25,14 +25,14 @@ class SeaCucumberEntityModel : HybridAquaticCritterEntityModel<SeaCucumberEntity
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return when (animatable.variant) {
-            SeaCucumberEntity.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
-            SeaCucumberEntity.Type.SEA_PIG -> SEA_PIG_TEXTURE
+            SeaCucumberEntity.Companion.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
+            SeaCucumberEntity.Companion.Type.SEA_PIG -> SEA_PIG_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: SeaCucumberEntity): Identifier {
         return when (animatable.variant) {
-            SeaCucumberEntity.Type.SEA_PIG -> SEA_PIG_MODEL
+            SeaCucumberEntity.Companion.Type.SEA_PIG -> SEA_PIG_MODEL
             else -> SEA_CUCUMBER_MODEL
         }
     }

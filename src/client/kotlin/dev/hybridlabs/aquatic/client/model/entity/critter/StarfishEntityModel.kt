@@ -50,25 +50,25 @@ class StarfishEntityModel : HybridAquaticCritterEntityModel<StarfishEntity>("sta
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return when (animatable.variant) {
-            StarfishEntity.Type.CROWN_OF_THORNS -> CROWN_OF_THORNS_TEXTURE
-            StarfishEntity.Type.BRITTLESTAR -> brittlestarTextures[random.nextInt(brittlestarTextures.size)]
-            StarfishEntity.Type.SMALL -> smallTextures[random.nextInt(smallTextures.size)]
-            StarfishEntity.Type.MEDIUM -> mediumTextures[random.nextInt(mediumTextures.size)]
+            StarfishEntity.Companion.Type.CROWN_OF_THORNS -> CROWN_OF_THORNS_TEXTURE
+            StarfishEntity.Companion.Type.BRITTLESTAR -> brittlestarTextures[random.nextInt(brittlestarTextures.size)]
+            StarfishEntity.Companion.Type.SMALL -> smallTextures[random.nextInt(smallTextures.size)]
+            StarfishEntity.Companion.Type.MEDIUM -> mediumTextures[random.nextInt(mediumTextures.size)]
         }
     }
 
     override fun getModelResource(animatable: StarfishEntity): Identifier {
         return when (animatable.variant) {
-            StarfishEntity.Type.BRITTLESTAR -> BRITTLESTAR_MODEL
-            StarfishEntity.Type.CROWN_OF_THORNS -> CROWN_OF_THORNS_MODEL
+            StarfishEntity.Companion.Type.BRITTLESTAR -> BRITTLESTAR_MODEL
+            StarfishEntity.Companion.Type.CROWN_OF_THORNS -> CROWN_OF_THORNS_MODEL
             else -> STARFISH_MODEL
         }
     }
 
     override fun getAnimationResource(animatable: StarfishEntity): Identifier {
         return when (animatable.variant) {
-            StarfishEntity.Type.BRITTLESTAR -> BRITTLESTAR_ANIMATION
-            StarfishEntity.Type.CROWN_OF_THORNS -> CROWN_OF_THORNS_ANIMATION
+            StarfishEntity.Companion.Type.BRITTLESTAR -> BRITTLESTAR_ANIMATION
+            StarfishEntity.Companion.Type.CROWN_OF_THORNS -> CROWN_OF_THORNS_ANIMATION
             else -> STARFISH_ANIMATION
         }
     }

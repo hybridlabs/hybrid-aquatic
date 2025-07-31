@@ -11,9 +11,9 @@ class RockfishEntityModel : HybridAquaticFishEntityModel<RockfishEntity>("rockfi
 
     override fun getTextureResource(animatable: RockfishEntity): Identifier {
         return when (animatable.variant) {
-            RockfishEntity.Type.VERMILION -> VERMILION_TEXTURE
-            RockfishEntity.Type.COPPER -> COPPER_TEXTURE
-            RockfishEntity.Type.YELLOWEYE -> YELLOWEYE_TEXTURE
+            RockfishEntity.Companion.Type.VERMILION -> VERMILION_TEXTURE
+            RockfishEntity.Companion.Type.COPPER -> COPPER_TEXTURE
+            RockfishEntity.Companion.Type.YELLOWEYE -> YELLOWEYE_TEXTURE
         }
     }
 }

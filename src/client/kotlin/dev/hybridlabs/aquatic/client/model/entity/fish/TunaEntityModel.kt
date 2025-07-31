@@ -13,15 +13,15 @@ class TunaEntityModel : HybridAquaticFishEntityModel<TunaEntity>("tuna") {
 
     override fun getTextureResource(animatable: TunaEntity): Identifier {
         return when (animatable.variant) {
-            TunaEntity.Type.YELLOWFIN -> YELLOWFIN_TEXTURE
-            TunaEntity.Type.BLUEFIN -> BLUEFIN_TEXTURE
+            TunaEntity.Companion.Type.YELLOWFIN -> YELLOWFIN_TEXTURE
+            TunaEntity.Companion.Type.BLUEFIN -> BLUEFIN_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: TunaEntity): Identifier {
         return when (animatable.variant) {
-            TunaEntity.Type.YELLOWFIN -> YELLOWFIN_MODEL
-            TunaEntity.Type.BLUEFIN -> BLUEFIN_MODEL
+            TunaEntity.Companion.Type.YELLOWFIN -> YELLOWFIN_MODEL
+            TunaEntity.Companion.Type.BLUEFIN -> BLUEFIN_MODEL
             else -> YELLOWFIN_MODEL
         }
     }

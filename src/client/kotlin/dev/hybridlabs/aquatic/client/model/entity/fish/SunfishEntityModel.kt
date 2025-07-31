@@ -17,19 +17,19 @@ class SunfishEntityModel : HybridAquaticFishEntityModel<SunfishEntity>("sunfish"
 
     override fun getTextureResource(animatable: SunfishEntity): Identifier {
         return when (animatable.variant) {
-            SunfishEntity.Type.OCEAN -> OCEAN_TEXTURE
-            SunfishEntity.Type.HOODWINKER -> HOODWINKER_TEXTURE
-            SunfishEntity.Type.SHARPTAIL -> SHARPTAIL_TEXTURE
-            SunfishEntity.Type.GIANT -> GIANT_TEXTURE
+            SunfishEntity.Companion.Type.OCEAN -> OCEAN_TEXTURE
+            SunfishEntity.Companion.Type.HOODWINKER -> HOODWINKER_TEXTURE
+            SunfishEntity.Companion.Type.SHARPTAIL -> SHARPTAIL_TEXTURE
+            SunfishEntity.Companion.Type.GIANT -> GIANT_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: SunfishEntity): Identifier {
         return when (animatable.variant) {
-            SunfishEntity.Type.OCEAN -> OCEAN_MODEL
-            SunfishEntity.Type.HOODWINKER -> HOODWINKER_MODEL
-            SunfishEntity.Type.SHARPTAIL -> SHARPTAIL_MODEL
-            SunfishEntity.Type.GIANT -> GIANT_MODEL
+            SunfishEntity.Companion.Type.OCEAN -> OCEAN_MODEL
+            SunfishEntity.Companion.Type.HOODWINKER -> HOODWINKER_MODEL
+            SunfishEntity.Companion.Type.SHARPTAIL -> SHARPTAIL_MODEL
+            SunfishEntity.Companion.Type.GIANT -> GIANT_MODEL
             else -> OCEAN_MODEL
         }
     }

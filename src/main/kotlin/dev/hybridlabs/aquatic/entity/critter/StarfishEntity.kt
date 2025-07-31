@@ -26,7 +26,7 @@ import kotlin.random.Random
 class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
     HybridAquaticCritterEntity(
         entityType, world),
-    VariantHolder<StarfishEntity.Type> {
+    VariantHolder<StarfishEntity.Companion.Type> {
 
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
@@ -39,6 +39,54 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
         }
         val TYPE: TrackedData<Int> = DataTracker.registerData(StarfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            BRITTLESTAR(0, "brittlestar"),
+            CROWN_OF_THORNS(1, "crown_of_thorns"),
+            SMALL(2, "small"),
+            MEDIUM(3, "medium");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, SMALL) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+
+                private val REEF_VARIANTS = listOf(
+                    CROWN_OF_THORNS,
+                    SMALL,
+                    MEDIUM,
+                )
+
+                fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
+                    return when {
+                        biome.isIn(BiomeTags.IS_DEEP_OCEAN) -> {
+                            BRITTLESTAR
+                        }
+                        biome.isIn(HybridAquaticBiomeTags.REEF) -> {
+                            REEF_VARIANTS[random.nextInt(REEF_VARIANTS.size)]
+                        }
+                        else -> {
+                            Type.fromId(random.nextInt(2, 4))
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun damage(source: DamageSource, amount: Float): Boolean {
@@ -85,54 +133,6 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        BRITTLESTAR(0, "brittlestar"),
-        CROWN_OF_THORNS(1, "crown_of_thorns"),
-        SMALL(2, "small"),
-        MEDIUM(3, "medium");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, SMALL) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-
-            private val REEF_VARIANTS = listOf(
-                CROWN_OF_THORNS,
-                SMALL,
-                MEDIUM,
-            )
-
-            fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
-                return when {
-                    biome.isIn(BiomeTags.IS_DEEP_OCEAN) -> {
-                        BRITTLESTAR
-                    }
-                    biome.isIn(HybridAquaticBiomeTags.REEF) -> {
-                        REEF_VARIANTS[random.nextInt(REEF_VARIANTS.size)]
-                    }
-                    else -> {
-                        Type.fromId(random.nextInt(2, 4))
-                    }
-                }
-            }
-        }
     }
 
     override fun getVariant(): Type {

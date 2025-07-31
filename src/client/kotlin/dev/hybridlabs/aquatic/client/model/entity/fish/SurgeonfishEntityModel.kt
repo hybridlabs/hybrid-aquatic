@@ -23,25 +23,25 @@ class SurgeonfishEntityModel : HybridAquaticFishEntityModel<SurgeonfishEntity>("
 
     override fun getTextureResource(animatable: SurgeonfishEntity): Identifier {
         return when (animatable.variant) {
-            SurgeonfishEntity.Type.BLUE_TANG -> BLUE_TANG_TEXTURE
-            SurgeonfishEntity.Type.POWDER_BLUE_TANG -> POWDER_BLUE_TANG_TEXTURE
-            SurgeonfishEntity.Type.YELLOW_TANG -> YELLOW_TANG_TEXTURE
-            SurgeonfishEntity.Type.LINED -> LINED_TEXTURE
-            SurgeonfishEntity.Type.ORANGESHOULDER -> ORANGESHOULDER_TEXTURE
-            SurgeonfishEntity.Type.SOHAL -> SOHAL_TEXTURE
-            SurgeonfishEntity.Type.UNICORNFISH -> UNICORNFISH_TEXTURE
+            SurgeonfishEntity.Companion.Type.BLUE_TANG -> BLUE_TANG_TEXTURE
+            SurgeonfishEntity.Companion.Type.POWDER_BLUE_TANG -> POWDER_BLUE_TANG_TEXTURE
+            SurgeonfishEntity.Companion.Type.YELLOW_TANG -> YELLOW_TANG_TEXTURE
+            SurgeonfishEntity.Companion.Type.LINED -> LINED_TEXTURE
+            SurgeonfishEntity.Companion.Type.ORANGESHOULDER -> ORANGESHOULDER_TEXTURE
+            SurgeonfishEntity.Companion.Type.SOHAL -> SOHAL_TEXTURE
+            SurgeonfishEntity.Companion.Type.UNICORNFISH -> UNICORNFISH_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: SurgeonfishEntity): Identifier {
         return when (animatable.variant) {
-            SurgeonfishEntity.Type.BLUE_TANG -> BLUE_TANG_MODEL
-            SurgeonfishEntity.Type.POWDER_BLUE_TANG -> POWDER_BLUE_TANG_MODEL
-            SurgeonfishEntity.Type.YELLOW_TANG -> YELLOW_TANG_MODEL
-            SurgeonfishEntity.Type.LINED -> LINED_MODEL
-            SurgeonfishEntity.Type.ORANGESHOULDER -> ORANGESHOULDER_MODEL
-            SurgeonfishEntity.Type.SOHAL -> SOHAL_MODEL
-            SurgeonfishEntity.Type.UNICORNFISH -> UNICORNFISH_MODEL
+            SurgeonfishEntity.Companion.Type.BLUE_TANG -> BLUE_TANG_MODEL
+            SurgeonfishEntity.Companion.Type.POWDER_BLUE_TANG -> POWDER_BLUE_TANG_MODEL
+            SurgeonfishEntity.Companion.Type.YELLOW_TANG -> YELLOW_TANG_MODEL
+            SurgeonfishEntity.Companion.Type.LINED -> LINED_MODEL
+            SurgeonfishEntity.Companion.Type.ORANGESHOULDER -> ORANGESHOULDER_MODEL
+            SurgeonfishEntity.Companion.Type.SOHAL -> SOHAL_MODEL
+            SurgeonfishEntity.Companion.Type.UNICORNFISH -> UNICORNFISH_MODEL
             else -> BLUE_TANG_MODEL
         }
     }

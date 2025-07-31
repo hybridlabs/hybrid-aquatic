@@ -13,15 +13,15 @@ class MahiEntityModel : HybridAquaticFishEntityModel<MahiEntity>("mahi") {
 
     override fun getTextureResource(animatable: MahiEntity): Identifier {
         return when (animatable.variant) {
-            MahiEntity.Type.MAHI -> MAHI_TEXTURE
-            MahiEntity.Type.POMPANO -> POMPANO_TEXTURE
+            MahiEntity.Companion.Type.MAHI -> MAHI_TEXTURE
+            MahiEntity.Companion.Type.POMPANO -> POMPANO_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: MahiEntity): Identifier {
         return when (animatable.variant) {
-            MahiEntity.Type.MAHI -> MAHI_MODEL
-            MahiEntity.Type.POMPANO -> POMPANO_MODEL
+            MahiEntity.Companion.Type.MAHI -> MAHI_MODEL
+            MahiEntity.Companion.Type.POMPANO -> POMPANO_MODEL
             else -> MAHI_MODEL
         }
     }

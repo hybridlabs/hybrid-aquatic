@@ -11,13 +11,13 @@ class SeaSlugEntityModel : HybridAquaticCritterEntityModel<SeaSlugEntity>("sea_s
 
     override fun getTextureResource(animatable: SeaSlugEntity): Identifier {
         return when (animatable.variant) {
-            SeaSlugEntity.Type.SPOTTED_SEA_HARE -> SPOTTED_SEA_HARE_TEXTURE
+            SeaSlugEntity.Companion.Type.SPOTTED_SEA_HARE -> SPOTTED_SEA_HARE_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: SeaSlugEntity): Identifier {
         return when (animatable.variant) {
-            SeaSlugEntity.Type.SPOTTED_SEA_HARE -> SPOTTED_SEA_HARE_MODEL
+            SeaSlugEntity.Companion.Type.SPOTTED_SEA_HARE -> SPOTTED_SEA_HARE_MODEL
             else -> SPOTTED_SEA_HARE_MODEL
         }
     }

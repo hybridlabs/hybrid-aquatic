@@ -29,7 +29,7 @@ import kotlin.random.Random
 
 class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
     HybridAquaticCrustaceanEntity(entityType, world, false),
-    VariantHolder<DecoratorCrabEntity.Type> {
+    VariantHolder<DecoratorCrabEntity.Companion.Type> {
 
     override fun getLootTableId(): Identifier {
         return Identifier("hybrid-aquatic", "entities/decorator_crab")
@@ -88,6 +88,31 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
             DataTracker.registerData(DecoratorCrabEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val CORAL_TIMER: TrackedData<Int> =
             DataTracker.registerData(DecoratorCrabEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            CORAL(0, "coral");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, CORAL) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
     override fun getMaxSize(): Int {
@@ -114,31 +139,6 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         this.variant = Type.byName(nbt.getString("Type"))
         this.coralTimer = nbt.getInt("CoralTimer")
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        CORAL(0, "coral");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, CORAL) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-        }
     }
 
     override fun getVariant(): Type {

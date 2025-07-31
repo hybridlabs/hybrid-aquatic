@@ -29,7 +29,7 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
         false,
         false
     ),
-    VariantHolder<HammerheadSharkEntity.Type> {
+    VariantHolder<HammerheadSharkEntity.Companion.Type> {
 
     override fun initGoals() {
         super.initGoals()
@@ -57,6 +57,31 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 26.0)
         }
         val TYPE: TrackedData<Int> = DataTracker.registerData(HammerheadSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            COMMON(0, "common");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, COMMON) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
     override fun getMaxSize(): Int {
@@ -80,31 +105,6 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        COMMON(0, "common");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, COMMON) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-        }
     }
 
     override fun getVariant(): Type {

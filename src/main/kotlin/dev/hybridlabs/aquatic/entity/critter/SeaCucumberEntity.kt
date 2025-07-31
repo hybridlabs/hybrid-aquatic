@@ -24,7 +24,7 @@ import java.util.function.IntFunction
 @Suppress("DEPRECATION")
 class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: World) :
     HybridAquaticCritterEntity(entityType, world),
-    VariantHolder<SeaCucumberEntity.Type> {
+    VariantHolder<SeaCucumberEntity.Companion.Type> {
 
     override fun remove(reason: RemovalReason) {
         if (!world.isClient && this.isDead) {
@@ -68,7 +68,43 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 2.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(SeaCucumberEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(SeaCucumberEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            COMMON(0, "common"),
+            SEA_PIG(1, "sea_pig");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, COMMON) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+
+                fun fromBiome(biome: RegistryEntry<Biome?>): Type {
+                    return if (biome.isIn(BiomeTags.IS_DEEP_OCEAN)) {
+                        SEA_PIG
+                    } else {
+                        COMMON
+                    }
+                }
+            }
+        }
     }
 
     override fun initialize(
@@ -105,40 +141,6 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
     override fun readCustomDataFromNbt(nbt: NbtCompound) {
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
-    }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        COMMON(0, "common"),
-        SEA_PIG(1, "sea_pig");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, COMMON) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-
-            fun fromBiome(biome: RegistryEntry<Biome?>): Type {
-                return if (biome.isIn(BiomeTags.IS_DEEP_OCEAN)) {
-                    SEA_PIG
-                } else {
-                    COMMON
-                }
-            }
-        }
     }
 
     override fun getVariant(): Type {

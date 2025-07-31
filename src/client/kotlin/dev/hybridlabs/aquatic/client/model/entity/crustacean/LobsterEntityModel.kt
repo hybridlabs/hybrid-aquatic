@@ -24,15 +24,15 @@ class LobsterEntityModel : HybridAquaticCrustaceanEntityModel<LobsterEntity>("lo
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return when (animatable.variant) {
-            LobsterEntity.Type.CLAWED -> clawedTextures[random.nextInt(clawedTextures.size)]
-            LobsterEntity.Type.CLAWLESS -> clawlessTextures[random.nextInt(clawlessTextures.size)]
-            LobsterEntity.Type.REGAL_SLIPPER -> REGAL_SLIPPER_TEXTURE
+            LobsterEntity.Companion.Type.CLAWED -> clawedTextures[random.nextInt(clawedTextures.size)]
+            LobsterEntity.Companion.Type.CLAWLESS -> clawlessTextures[random.nextInt(clawlessTextures.size)]
+            LobsterEntity.Companion.Type.REGAL_SLIPPER -> REGAL_SLIPPER_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: LobsterEntity): Identifier {
         return when (animatable.variant) {
-            LobsterEntity.Type.REGAL_SLIPPER -> SLIPPER_LOBSTER_MODEL
+            LobsterEntity.Companion.Type.REGAL_SLIPPER -> SLIPPER_LOBSTER_MODEL
             else -> LOBSTER_MODEL
         }
     }

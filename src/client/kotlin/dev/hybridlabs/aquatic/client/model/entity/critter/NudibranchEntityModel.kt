@@ -22,7 +22,7 @@ class NudibranchEntityModel : HybridAquaticCritterEntityModel<NudibranchEntity>(
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return when (animatable.variant) {
-            NudibranchEntity.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
+            NudibranchEntity.Companion.Type.COMMON -> commonTextures[random.nextInt(commonTextures.size)]
         }
     }
 }

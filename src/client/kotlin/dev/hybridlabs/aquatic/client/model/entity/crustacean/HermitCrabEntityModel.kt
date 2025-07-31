@@ -13,14 +13,14 @@ class HermitCrabEntityModel : HybridAquaticCrustaceanEntityModel<HermitCrabEntit
 
     override fun getTextureResource(animatable: HermitCrabEntity): Identifier {
         return when (animatable.variant) {
-            HermitCrabEntity.Type.SHELL -> SHELL_TEXTURE
-            HermitCrabEntity.Type.SKULL -> SKULL_TEXTURE
+            HermitCrabEntity.Companion.Type.SHELL -> SHELL_TEXTURE
+            HermitCrabEntity.Companion.Type.SKULL -> SKULL_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: HermitCrabEntity): Identifier {
         return when (animatable.variant) {
-            HermitCrabEntity.Type.SKULL -> SKULL_MODEL
+            HermitCrabEntity.Companion.Type.SKULL -> SKULL_MODEL
             else -> SHELL_MODEL
         }
     }

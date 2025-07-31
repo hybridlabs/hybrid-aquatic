@@ -19,22 +19,22 @@ class ClownfishEntityModel : HybridAquaticFishEntityModel<ClownfishEntity>("clow
 
     override fun getTextureResource(animatable: ClownfishEntity): Identifier {
         return when (animatable.variant) {
-            ClownfishEntity.Type.OCELLARIS -> OCELLARIS_TEXTURE
-            ClownfishEntity.Type.CLARKII -> CLARKII_TEXTURE
-            ClownfishEntity.Type.TOMATO -> TOMATO_TEXTURE
-            ClownfishEntity.Type.CINNAMON -> CINNAMON_TEXTURE
-            ClownfishEntity.Type.PINK_SKUNK -> PINK_SKUNK_TEXTURE
-            ClownfishEntity.Type.ORANGE_SKUNK -> ORANGE_SKUNK_TEXTURE
-            ClownfishEntity.Type.WHITEBAND -> WHITEBAND_TEXTURE
-            ClownfishEntity.Type.PERCULA -> PERCULA_TEXTURE
+            ClownfishEntity.Companion.Type.OCELLARIS -> OCELLARIS_TEXTURE
+            ClownfishEntity.Companion.Type.CLARKII -> CLARKII_TEXTURE
+            ClownfishEntity.Companion.Type.TOMATO -> TOMATO_TEXTURE
+            ClownfishEntity.Companion.Type.CINNAMON -> CINNAMON_TEXTURE
+            ClownfishEntity.Companion.Type.PINK_SKUNK -> PINK_SKUNK_TEXTURE
+            ClownfishEntity.Companion.Type.ORANGE_SKUNK -> ORANGE_SKUNK_TEXTURE
+            ClownfishEntity.Companion.Type.WHITEBAND -> WHITEBAND_TEXTURE
+            ClownfishEntity.Companion.Type.PERCULA -> PERCULA_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: ClownfishEntity): Identifier {
         return when (animatable.variant) {
-            ClownfishEntity.Type.OCELLARIS -> BIG_CLOWNFISH_MODEL
-            ClownfishEntity.Type.PERCULA -> BIG_CLOWNFISH_MODEL
-            ClownfishEntity.Type.WHITEBAND -> BIG_CLOWNFISH_MODEL
+            ClownfishEntity.Companion.Type.OCELLARIS -> BIG_CLOWNFISH_MODEL
+            ClownfishEntity.Companion.Type.PERCULA -> BIG_CLOWNFISH_MODEL
+            ClownfishEntity.Companion.Type.WHITEBAND -> BIG_CLOWNFISH_MODEL
             else -> SMALL_CLOWNFISH_MODEL
         }
     }

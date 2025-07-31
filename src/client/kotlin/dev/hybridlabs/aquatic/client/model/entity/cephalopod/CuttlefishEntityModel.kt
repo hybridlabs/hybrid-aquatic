@@ -22,8 +22,8 @@ class CuttlefishEntityModel : HybridAquaticCephalopodEntityModel<CuttlefishEntit
         val random = Random(seed)
 
         return when (animatable.variant) {
-            CuttlefishEntity.Type.RED -> redTextures[random.nextInt(redTextures.size)]
-            CuttlefishEntity.Type.BLACK -> blackTextures[random.nextInt(blackTextures.size)]
+            CuttlefishEntity.Companion.Type.RED -> redTextures[random.nextInt(redTextures.size)]
+            CuttlefishEntity.Companion.Type.BLACK -> blackTextures[random.nextInt(blackTextures.size)]
         }
     }
 }

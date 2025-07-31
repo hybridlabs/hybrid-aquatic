@@ -17,19 +17,19 @@ class SeahorseEntityModel : HybridAquaticFishEntityModel<SeahorseEntity>("seahor
 
     override fun getTextureResource(animatable: SeahorseEntity): Identifier {
         return when (animatable.variant) {
-            SeahorseEntity.Type.COMMON -> COMMON_TEXTURE
-            SeahorseEntity.Type.PYGMY -> PYGMY_TEXTURE
-            SeahorseEntity.Type.THORNY -> THORNY_TEXTURE
-            SeahorseEntity.Type.BIG_BELLY -> BIG_BELLY_TEXTURE
+            SeahorseEntity.Companion.Type.COMMON -> COMMON_TEXTURE
+            SeahorseEntity.Companion.Type.PYGMY -> PYGMY_TEXTURE
+            SeahorseEntity.Companion.Type.THORNY -> THORNY_TEXTURE
+            SeahorseEntity.Companion.Type.BIG_BELLY -> BIG_BELLY_TEXTURE
         }
     }
 
     override fun getModelResource(animatable: SeahorseEntity): Identifier {
         return when (animatable.variant) {
-            SeahorseEntity.Type.COMMON -> COMMON_MODEL
-            SeahorseEntity.Type.PYGMY -> PYGMY_MODEL
-            SeahorseEntity.Type.THORNY -> THORNY_MODEL
-            SeahorseEntity.Type.BIG_BELLY -> BIG_BELLY_MODEL
+            SeahorseEntity.Companion.Type.COMMON -> COMMON_MODEL
+            SeahorseEntity.Companion.Type.PYGMY -> PYGMY_MODEL
+            SeahorseEntity.Companion.Type.THORNY -> THORNY_MODEL
+            SeahorseEntity.Companion.Type.BIG_BELLY -> BIG_BELLY_MODEL
             else -> COMMON_MODEL
         }
     }
