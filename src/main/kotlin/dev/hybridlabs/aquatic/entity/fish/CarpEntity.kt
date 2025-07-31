@@ -74,7 +74,7 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
         }
 
         val TYPE: TrackedData<Int> =
-            DataTracker.registerData(TunaEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+            DataTracker.registerData(CarpEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
     }
 
     override fun initDataTracker() {
