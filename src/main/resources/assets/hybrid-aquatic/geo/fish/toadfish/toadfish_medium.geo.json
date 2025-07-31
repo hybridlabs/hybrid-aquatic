@@ -1,0 +1,72 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.toadfish",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "body",
+					"pivot": [-0.5, 2.5, 0],
+					"cubes": [
+						{"origin": [-3, 1, -2.5], "size": [5, 3, 5], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "left_fin",
+					"parent": "body",
+					"pivot": [2.00355, 1.75, -0.54645],
+					"cubes": [
+						{"origin": [1.85355, 1.25, -0.14645], "size": [1, 1, 0], "pivot": [2.35355, 1.75, -0.14645], "rotation": [0, -45, 0], "uv": [8, 14]}
+					]
+				},
+				{
+					"name": "right_fin",
+					"parent": "body",
+					"pivot": [-3.00355, 1.75, -0.54645],
+					"cubes": [
+						{"origin": [-3.85355, 1.25, -0.14645], "size": [1, 1, 0], "pivot": [-3.35355, 1.75, -0.14645], "rotation": [0, 45, 0], "uv": [8, 14], "mirror": true}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "body",
+					"pivot": [-0.5, 2.9, 2.5],
+					"cubes": [
+						{"origin": [-1.5, 1.9, 2.5], "size": [2, 2, 2], "uv": [0, 8]}
+					]
+				},
+				{
+					"name": "tail_fin",
+					"parent": "tail",
+					"pivot": [-0.5, 2.9, 4.5],
+					"cubes": [
+						{"origin": [-0.5, 1.4, 4.5], "size": [0, 3, 3], "uv": [8, 8]}
+					]
+				},
+				{
+					"name": "pelvic_fin",
+					"parent": "body",
+					"pivot": [-0.5, 1.5, 3],
+					"cubes": [
+						{"origin": [-0.5, 0.20709, 2.03701], "size": [0, 2, 2], "pivot": [-0.5, 1.20709, 3.03701], "rotation": [22.5, 0, 0], "uv": [0, 12]}
+					]
+				},
+				{
+					"name": "dorsal_fin",
+					"parent": "body",
+					"pivot": [-0.5, 4, 1],
+					"cubes": [
+						{"origin": [-0.5, 4, 0.5], "size": [0, 2, 2], "uv": [4, 12]}
+					]
+				}
+			]
+		}
+	]
+}
