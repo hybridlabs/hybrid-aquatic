@@ -19,8 +19,8 @@ class CarpEntityModel : HybridAquaticFishEntityModel<CarpEntity>("carp") {
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return when (animatable.variant) {
-            CarpEntity.Type.COMMON -> COMMON_TEXTURE
-            CarpEntity.Type.KOI -> koiTextures[random.nextInt(koiTextures.size)]
+            CarpEntity.Companion.Type.COMMON -> COMMON_TEXTURE
+            CarpEntity.Companion.Type.KOI -> koiTextures[random.nextInt(koiTextures.size)]
         }
     }
 }
