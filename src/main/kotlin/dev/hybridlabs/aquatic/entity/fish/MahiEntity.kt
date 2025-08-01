@@ -22,7 +22,7 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 class MahiEntity(entityType: EntityType<out MahiEntity>, world: World) :
-    HybridAquaticFishEntity(
+    HybridAquaticSchoolingFishEntity(
         entityType, world,
         listOf(
             HybridAquaticEntityTags.SMALL_PREY,
@@ -35,7 +35,7 @@ class MahiEntity(entityType: EntityType<out MahiEntity>, world: World) :
     VariantHolder<MahiEntity.Companion.Type> {
 
     override fun getLimitPerChunk(): Int {
-        return 2
+        return 4
     }
 
     override fun initialize(
