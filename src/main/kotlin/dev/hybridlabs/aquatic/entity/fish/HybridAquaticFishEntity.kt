@@ -31,6 +31,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
@@ -247,10 +248,11 @@ open class HybridAquaticFishEntity(
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
-            AnimationController(this, "Swim/Idle", 5
+            AnimationController(this, "Swim/Idle/Flop", 4
             ) { state: AnimationState<HybridAquaticFishEntity> ->
                 when {
                     state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
+                    this.isOnGround && shouldFlopOnLand() -> state.setAndContinue(FLOP)
                     else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
             }
@@ -300,6 +302,8 @@ open class HybridAquaticFishEntity(
             DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         val ATTEMPT_ATTACK: TrackedData<Boolean> =
             DataTracker.registerData(HybridAquaticFishEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+
+        val FLOP: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
 
         const val MAX_HUNGER = 2400
         const val HUNGER_KEY = "Hunger"
