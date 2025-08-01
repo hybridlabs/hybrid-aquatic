@@ -50,9 +50,11 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
         enum class OverlayTextures(val id: Int, val key: String) : StringIdentifiable {
             NONE(0, ""),
             STRIPES_SMALL(1, "stripes_small"),
-            STRIPES_CIRCLE_SMALL(2, "stripes_circle_small"),
-            STRIPES (3, "stripes"),
-            STRIPES_CIRCLE(4, "stripes_circle");
+            CIRCLE_SMALL(2, "circle_small"),
+            STRIPES_CIRCLE_SMALL(3, "stripes_circle_small"),
+            STRIPES (4, "stripes"),
+            CIRCLE(5, "circle"),
+            STRIPES_CIRCLE(6, "stripes_circle");
 
             override fun asString(): String {
                 return this.key
@@ -147,8 +149,8 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
 
         overlayTexture = when (selectedType) {
             Type.CROWN_OF_THORNS, Type.BRITTLESTAR -> OverlayTextures.NONE
-            Type.SMALL -> OverlayTextures.byId(listOf(0, 1, 2).random(Random))
-            Type.MEDIUM -> OverlayTextures.byId(listOf(0, 3, 4).random(Random))
+            Type.SMALL -> OverlayTextures.byId(listOf(0, 1, 2, 3).random(Random))
+            Type.MEDIUM -> OverlayTextures.byId(listOf(0, 4, 5, 6).random(Random))
         }
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
