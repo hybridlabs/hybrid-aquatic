@@ -5,9 +5,9 @@ import net.minecraft.util.Identifier
 
 class HoundSharkEntityModel : HybridAquaticSharkEntityModel<HoundSharkEntity>("hound_shark") {
 
-    private val LEOPARD_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/shark/leopard_shark.png")
+    private val LEOPARD_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/shark/hound_shark/leopard_shark.png")
 
-    private val LEOPARD_MODEL = Identifier("hybrid-aquatic", "geo/shark/leopard_shark.geo.json")
+    private val LEOPARD_MODEL = Identifier("hybrid-aquatic", "geo/shark/hound_shark/leopard_shark.geo.json")
 
     private val LEOPARD_ANIMATION = Identifier("hybrid-aquatic", "animations/leopard_shark.animation.json")
 
