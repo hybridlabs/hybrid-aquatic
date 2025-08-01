@@ -147,16 +147,8 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
 
         overlayTexture = when (selectedType) {
             Type.CROWN_OF_THORNS, Type.BRITTLESTAR -> OverlayTextures.NONE
-
-            Type.SMALL -> {
-                val smallLayers = listOf(0, 1, 2)
-                OverlayTextures.byId(random.nextInt(smallLayers.size))
-            }
-
-            Type.MEDIUM -> {
-                val mediumLayers = listOf(0, 3, 4)
-                OverlayTextures.byId(random.nextInt(mediumLayers.size))
-            }
+            Type.SMALL -> OverlayTextures.byId(listOf(0, 1, 2).random(Random))
+            Type.MEDIUM -> OverlayTextures.byId(listOf(0, 3, 4).random(Random))
         }
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
