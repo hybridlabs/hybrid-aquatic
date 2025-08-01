@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
-class HybridAquaticSharkFaceEntityLayer<T: HybridAquaticSharkEntity>(
+class HybridAquaticSharkEntityLayer<T: HybridAquaticSharkEntity>(
     renderer: HybridAquaticSharkEntityRenderer<T>
 ) : GeoRenderLayer<T>(renderer) {
 
