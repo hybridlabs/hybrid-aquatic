@@ -18,4 +18,8 @@ abstract class HybridAquaticCritterEntityModel<T : HybridAquaticCritterEntity>(p
     override fun getAnimationResource(animatable: T): Identifier {
         return Identifier(HybridAquatic.MOD_ID, "animations/$id.animation.json")
     }
+
+    fun getLayerTextureResource(layer: String): Identifier {
+        return Identifier(HybridAquatic.MOD_ID, "textures/entity/critter/$id/${id}_$layer.png")
+    }
 }
