@@ -33,10 +33,9 @@ class HybridAquaticFishEntityLayer<T: HybridAquaticFishEntity>(
         packedOverlay: Int
     ) {
         if (animatable !is OverlayTextureFeature) return
-        println(animatable.overlayTextureName)
-        if (animatable.overlayTextureName.isEmpty()) return
+        if (animatable.getOverlayTextureName().isEmpty()) return
 
-        val layerTexture: Identifier = getLayerTextureResource(animatable.overlayTextureName)
+        val layerTexture: Identifier = getLayerTextureResource(animatable.getOverlayTextureName())
         val layerRenderLayer = RenderLayer.getEntityTranslucent(layerTexture)
 
         getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderLayer,

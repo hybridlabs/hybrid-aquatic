@@ -46,14 +46,17 @@ class DanioEntity(entityType: EntityType<out DanioEntity>, world: World) :
     }
 
     override fun initDataTracker() {
-        dataTracker.startTracking(OverlayTexture, 0)
         super.initDataTracker()
+        dataTracker.startTracking(OverlayTexture, 0)
     }
 
-    override var overlayTextureName: String = ""
     private var overlayTexture
         get() = OverlayTextures.byId(dataTracker.get(OverlayTexture))
-        set(value) { overlayTextureName = value.asString(); return dataTracker.set(OverlayTexture, value.id) }
+        set(value) { dataTracker.set(OverlayTexture, value.id) }
+
+    override fun getOverlayTextureName(): String {
+        return OverlayTextures.byId(dataTracker.get(OverlayTexture)).asString();
+    }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
         nbt.putInt("texture_overlay", this.overlayTexture.id)
