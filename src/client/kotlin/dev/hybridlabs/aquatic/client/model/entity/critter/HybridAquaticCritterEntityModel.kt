@@ -20,6 +20,6 @@ abstract class HybridAquaticCritterEntityModel<T : HybridAquaticCritterEntity>(p
     }
 
     fun getLayerTextureResource(layer: String): Identifier {
-        return Identifier(HybridAquatic.MOD_ID, "textures/entity/critter/$id/${id}_$layer.png")
+        return Identifier(HybridAquatic.MOD_ID, "textures/entity/critter/$id/layers/${id}_$layer.png")
     }
 }

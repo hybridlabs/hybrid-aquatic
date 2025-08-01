@@ -18,4 +18,8 @@ abstract class HybridAquaticCrustaceanEntityModel<T : HybridAquaticCrustaceanEnt
     override fun getAnimationResource(animatable: T): Identifier {
         return Identifier(HybridAquatic.MOD_ID, "animations/$id.animation.json")
     }
+
+    fun getLayerTextureResource(layer: String): Identifier {
+        return Identifier(HybridAquatic.MOD_ID, "textures/entity/crustacean/$id/layers/${id}_$layer.png")
+    }
 }
