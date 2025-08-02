@@ -183,25 +183,6 @@ object HybridAquaticBlocks {
         )
     )
 
-    val DELESSERIA = register(
-        "delesseria",
-        DelesseriaBlock(
-            FabricBlockSettings
-                .copyOf(Blocks.KELP)
-                .nonOpaque()
-        )
-    )
-
-    val DELESSERIA_PLANT = register(
-        "delesseria_plant",
-        DelesseriaPlantBlock(
-            FabricBlockSettings
-                .copyOf(Blocks.KELP_PLANT)
-                .nonOpaque()
-                .dropsLike(DELESSERIA)
-        )
-    )
-
     val FLOATING_SARGASSUM = register(
         "floating_sargassum",
         FloatingSargassumBlock(

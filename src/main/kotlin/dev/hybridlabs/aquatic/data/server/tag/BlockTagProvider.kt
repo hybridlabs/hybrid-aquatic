@@ -30,7 +30,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBlockTags.URCHIN_BREAKABLES)
             .add(HybridAquaticBlocks.BULL_KELP_PLANT)
             .add(HybridAquaticBlocks.SARGASSUM_PLANT)
-            .add(HybridAquaticBlocks.DELESSERIA_PLANT)
             .add(Blocks.KELP_PLANT)
 
         getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)

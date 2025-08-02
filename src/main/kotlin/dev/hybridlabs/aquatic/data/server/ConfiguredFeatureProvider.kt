@@ -104,15 +104,6 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.DELESSERIA,
-            ConfiguredFeature(
-                HybridAquaticFeatures.DELESSERIA, DelesseriaFeatureConfig(
-                    SimpleBlockStateProvider.of(HybridAquaticBlocks.DELESSERIA)
-                )
-            )
-        )
-
         //#region Sargassum
 
         entries.add(
