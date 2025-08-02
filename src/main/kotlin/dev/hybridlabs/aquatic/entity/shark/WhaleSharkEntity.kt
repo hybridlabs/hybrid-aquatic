@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.entity.crustacean.ShrimpEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
@@ -108,7 +107,7 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Worl
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        val overlayID = world.random.nextBetween(0, ShrimpEntity.Companion.OverlayTextures.entries.size - 1)
+        val overlayID = world.random.nextBetween(0, WhaleSharkEntity.Companion.OverlayTextures.entries.size - 1)
         overlayTexture = OverlayTextures.byId(overlayID)
 
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
