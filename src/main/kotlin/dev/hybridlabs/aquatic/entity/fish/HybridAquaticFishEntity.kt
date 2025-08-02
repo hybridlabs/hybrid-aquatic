@@ -241,7 +241,7 @@ open class HybridAquaticFishEntity(
             ) { state: AnimationState<HybridAquaticFishEntity> ->
                 when {
                     state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
-                    this.isOnGround && shouldFlopOnLand() -> state.setAndContinue(FLOP)
+                    !this.isSubmergedInWater && shouldFlopOnLand() -> state.setAndContinue(FLOP)
                     else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
             }
