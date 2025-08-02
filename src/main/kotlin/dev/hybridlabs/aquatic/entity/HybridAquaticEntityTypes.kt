@@ -6,6 +6,7 @@ import dev.hybridlabs.aquatic.entity.critter.*
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
+import dev.hybridlabs.aquatic.entity.mammal.KillerWhaleEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
@@ -762,6 +763,17 @@ object HybridAquaticEntityTypes {
 
     //endregion
 
+    //#region dolphins
+
+    val KILLER_WHALE = registerDolphin(
+        "killer_whale",
+        ::KillerWhaleEntity,
+        EntityDimensions.fixed(2.5f, 1.5f),
+        KillerWhaleEntity.createMobAttributes()
+    )
+
+    //endregion
+
     private fun <T : LivingEntity> registerShark(
         id: String,
         entityFactory: EntityFactory<T>,
@@ -832,6 +844,15 @@ object HybridAquaticEntityTypes {
         attributeContainer: DefaultAttributeContainer.Builder
     ): EntityType<T> {
         return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.FISH_UNDERGROUND)
+    }
+
+    private fun <T : LivingEntity> registerDolphin(
+        id: String,
+        entityFactory: EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: DefaultAttributeContainer.Builder
+    ): EntityType<T> {
+        return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.DOLPHIN)
     }
 
     private fun <T : LivingEntity> registerCephalopod(

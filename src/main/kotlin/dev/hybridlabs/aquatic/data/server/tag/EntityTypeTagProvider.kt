@@ -263,6 +263,13 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
 
             .addOptional(Identifier("rainbowreef", "small_shark"))
 
+        // dolphins
+        getOrCreateTagBuilder(HybridAquaticEntityTags.DOLPHIN)
+            .add(
+                HybridAquaticEntityTypes.KILLER_WHALE,
+                EntityType.DOLPHIN,
+            )
+
         // critters
         getOrCreateTagBuilder(HybridAquaticEntityTags.CRITTER)
             .add(
@@ -493,6 +500,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addTag(HybridAquaticEntityTags.JELLYFISH)
             .addTag(HybridAquaticEntityTags.CRITTER)
             .addTag(HybridAquaticEntityTags.CRUSTACEAN)
+            .addTag(HybridAquaticEntityTags.DOLPHIN)
             .addTag(HybridAquaticEntityTags.FISH)
             .addTag(HybridAquaticEntityTags.SHARK)
     }

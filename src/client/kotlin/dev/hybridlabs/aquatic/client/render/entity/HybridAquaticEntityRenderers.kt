@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.client.render.entity.critter.*
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
 import dev.hybridlabs.aquatic.client.render.entity.fish.*
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
+import dev.hybridlabs.aquatic.client.render.entity.mammal.KillerWhaleEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
@@ -68,6 +69,11 @@ object HybridAquaticEntityRenderers {
     //region rays
     val STINGRAY = EntityRendererRegistry.register(HybridAquaticEntityTypes.STINGRAY, ::StingrayEntityRenderer)
     val MANTA_RAY = EntityRendererRegistry.register(HybridAquaticEntityTypes.MANTA_RAY, ::MantaRayEntityRenderer)
+
+    //endregion
+
+    //region rays
+    val KILLER_WHALE = EntityRendererRegistry.register(HybridAquaticEntityTypes.KILLER_WHALE, ::KillerWhaleEntityRenderer)
 
     //endregion
 

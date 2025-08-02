@@ -120,6 +120,10 @@ class EntitySpawnConfigGenerator {
         addUndergroundShark(HybridAquaticEntityTypes.LANTERN_SHARK, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 2)
         //#endregion
 
+        //#region Dolphins
+        addDolphin(HybridAquaticEntityTypes.KILLER_WHALE, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 3, 1, 4)
+        //#endregion
+
         //#region Crustaceans
         addCrustacean(HybridAquaticEntityTypes.DUNGENESS_CRAB, listOf(HybridAquaticBiomeTags.SANDY_BEACHES), 5, 2, 3)
         addCrustacean(HybridAquaticEntityTypes.FIDDLER_CRAB, listOf(HybridAquaticBiomeTags.SWAMP, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.MARSHES), 5, 2, 3)
@@ -142,7 +146,7 @@ class EntitySpawnConfigGenerator {
         addUndergroundCrustacean(HybridAquaticEntityTypes.SPIDER_CRAB, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS), 3, 1, 2)
         //#endregion
 
-        //#region Crittersm
+        //#region Critters
         addCritter(HybridAquaticEntityTypes.NUDIBRANCH, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 3, 1, 2)
         addCritter(HybridAquaticEntityTypes.SEA_SLUG, listOf(HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 3, 1, 2)
         addCritter(HybridAquaticEntityTypes.STARFISH, listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN, HybridAquaticBiomeTags.SANDY_BEACHES), 5, 1, 3)
@@ -210,6 +214,16 @@ class EntitySpawnConfigGenerator {
         maxGroup: Int
     ) {
         add(entityType, spawnTags, HybridAquaticSpawnGroup.SHARK_UNDERGROUND.spawnGroup, weight, minGroup, maxGroup)
+    }
+
+    private fun addDolphin(
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
+        weight: Int,
+        minGroup: Int,
+        maxGroup: Int
+    ) {
+        add(entityType, spawnTags, HybridAquaticSpawnGroup.DOLPHIN.spawnGroup, weight, minGroup, maxGroup)
     }
 
     private fun addJelly(

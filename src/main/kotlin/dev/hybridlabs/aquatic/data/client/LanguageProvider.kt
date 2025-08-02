@@ -185,9 +185,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BULL_KELP to "Bull Kelp",
             HybridAquaticBlocks.BULL_KELP_PLANT to "Bull Kelp Plant",
 
-            HybridAquaticBlocks.DELESSERIA to "Delesseria",
-            HybridAquaticBlocks.DELESSERIA_PLANT to "Delesseria Plant",
-
             HybridAquaticBlocks.SARGASSUM to "Sargassum",
             HybridAquaticBlocks.SARGASSUM_PLANT to "Sargassum Plant",
             HybridAquaticBlocks.FLOATING_SARGASSUM to "Floating Sargassum",
@@ -510,6 +507,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.HAMMERHEAD_SHARK to "Hammerhead Shark",
             HybridAquaticEntityTypes.HOUND_SHARK to "Hound Shark",
             HybridAquaticEntityTypes.WHALE_SHARK to "Whale Shark",
+            HybridAquaticEntityTypes.KILLER_WHALE to "Killer Whale",
             HybridAquaticEntityTypes.KARKINOS to "Karkinos",
             HybridAquaticEntityTypes.DUNGENESS_CRAB to "Crab",
             HybridAquaticEntityTypes.FIDDLER_CRAB to "Fiddler Crab",

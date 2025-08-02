@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
+import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.entity.EntityType
@@ -146,6 +147,11 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.LANTERN_SHARK,
         ).forEach { registerDeepShark(it) }
 
+        // dolphins
+        setOf(
+            HybridAquaticEntityTypes.KILLER_WHALE,
+        ).forEach { registerDolphin(it) }
+
         // critters
         setOf(
             HybridAquaticEntityTypes.STARFISH,
@@ -224,6 +230,10 @@ object SpawnRestrictionRegistry {
 
     private fun <T : WaterCreatureEntity> registerDeepShark(entityType: EntityType<T>) {
         registerWaterCreature(entityType, HybridAquaticSharkEntity::canDeepSpawn)
+    }
+
+    private fun <T : WaterCreatureEntity> registerDolphin(entityType: EntityType<T>) {
+        registerWaterCreature(entityType, HybridAquaticDolphinEntity::canSpawn)
     }
 
     private fun <T : WaterCreatureEntity> registerJelly(entityType: EntityType<T>) {
