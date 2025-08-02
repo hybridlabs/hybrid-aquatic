@@ -10,9 +10,8 @@ class SunfishEntityModel : HybridAquaticFishEntityModel<SunfishEntity>("sunfish"
     private val SHARPTAIL_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/sunfish/sunfish_sharptail.png")
     private val GIANT_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/sunfish/sunfish_giant.png")
 
-    private val OCEAN_MODEL = Identifier("hybrid-aquatic", "geo/fish/sunfish/sunfish_ocean.geo.json")
+    private val SUNFISH_MODEL = Identifier("hybrid-aquatic", "geo/fish/sunfish/sunfish.geo.json")
     private val HOODWINKER_MODEL = Identifier("hybrid-aquatic", "geo/fish/sunfish/sunfish_hoodwinker.geo.json")
-    private val SHARPTAIL_MODEL = Identifier("hybrid-aquatic", "geo/fish/sunfish/sunfish_sharptail.geo.json")
     private val GIANT_MODEL = Identifier("hybrid-aquatic", "geo/fish/sunfish/sunfish_giant.geo.json")
 
     override fun getTextureResource(animatable: SunfishEntity): Identifier {
@@ -26,11 +25,11 @@ class SunfishEntityModel : HybridAquaticFishEntityModel<SunfishEntity>("sunfish"
 
     override fun getModelResource(animatable: SunfishEntity): Identifier {
         return when (animatable.variant) {
-            SunfishEntity.Companion.Type.OCEAN -> OCEAN_MODEL
+            SunfishEntity.Companion.Type.OCEAN -> SUNFISH_MODEL
+            SunfishEntity.Companion.Type.SHARPTAIL -> SUNFISH_MODEL
             SunfishEntity.Companion.Type.HOODWINKER -> HOODWINKER_MODEL
-            SunfishEntity.Companion.Type.SHARPTAIL -> SHARPTAIL_MODEL
             SunfishEntity.Companion.Type.GIANT -> GIANT_MODEL
-            else -> OCEAN_MODEL
+            else -> SUNFISH_MODEL
         }
     }
 }
