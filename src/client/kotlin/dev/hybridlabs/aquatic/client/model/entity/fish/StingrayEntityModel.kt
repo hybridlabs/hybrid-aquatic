@@ -11,6 +11,9 @@ class StingrayEntityModel : HybridAquaticFishEntityModel<StingrayEntity>("stingr
     private val BLUE_SPOTTED_MODEL = Identifier("hybrid-aquatic", "geo/fish/stingray/stingray_blue_spotted.geo.json")
     private val SPOTTED_EAGLE_MODEL = Identifier("hybrid-aquatic", "geo/fish/stingray/stingray_spotted_eagle.geo.json")
 
+    private val BLUE_SPOTTED_ANIMATION = Identifier("hybrid-aquatic", "animations/stingray_blue_spotted.geo.json")
+    private val SPOTTED_EAGLE_ANIMATION = Identifier("hybrid-aquatic", "animations/stingray_spotted_eagle.geo.json")
+
     override fun getTextureResource(animatable: StingrayEntity): Identifier {
         return when (animatable.variant) {
             StingrayEntity.Companion.Type.BLUE_SPOTTED -> BLUE_SPOTTED_TEXTURE
@@ -22,7 +25,13 @@ class StingrayEntityModel : HybridAquaticFishEntityModel<StingrayEntity>("stingr
         return when (animatable.variant) {
             StingrayEntity.Companion.Type.BLUE_SPOTTED -> BLUE_SPOTTED_MODEL
             StingrayEntity.Companion.Type.SPOTTED_EAGLE -> SPOTTED_EAGLE_MODEL
-            else -> BLUE_SPOTTED_MODEL
+        }
+    }
+
+    override fun getAnimationResource(animatable: StingrayEntity): Identifier {
+        return when (animatable.variant) {
+            StingrayEntity.Companion.Type.BLUE_SPOTTED -> BLUE_SPOTTED_ANIMATION
+            StingrayEntity.Companion.Type.SPOTTED_EAGLE -> SPOTTED_EAGLE_ANIMATION
         }
     }
 }
