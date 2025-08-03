@@ -100,7 +100,7 @@ open class HybridAquaticCephalopodEntity(
             }
 
             if (!this.isSubmergedInWater) {
-                this.pitch = -90.0f
+                this.pitch = 0.0f
                 this.yaw = this.prevYaw
                 this.headYaw = this.prevHeadYaw
             }
@@ -120,7 +120,7 @@ open class HybridAquaticCephalopodEntity(
     override fun damage(source: DamageSource, amount: Float): Boolean {
         if (super.damage(source, amount) && this.attacker != null) {
             if (!world.isClient) {
-                if (this.hasInk || this.hasGlowInk) {
+                if (this.isSubmergedInWater && this.hasInk || this.hasGlowInk) {
                     this.squirt()
                 }
 
