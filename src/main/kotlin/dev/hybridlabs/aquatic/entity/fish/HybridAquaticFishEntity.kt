@@ -240,7 +240,7 @@ open class HybridAquaticFishEntity(
             AnimationController(this, "Swim/Idle/Flop", 4
             ) { state: AnimationState<HybridAquaticFishEntity> ->
                 when {
-                    state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
+                    state.isMoving && isSubmergedInWater -> state.setAndContinue(DefaultAnimations.SWIM)
                     !this.isSubmergedInWater && shouldFlopOnLand() -> state.setAndContinue(FLOP)
                     else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
