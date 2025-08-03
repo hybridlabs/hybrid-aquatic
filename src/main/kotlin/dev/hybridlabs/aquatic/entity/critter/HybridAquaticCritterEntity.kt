@@ -39,7 +39,8 @@ open class HybridAquaticCritterEntity(
 
     init {
         setPathfindingPenalty(PathNodeType.WATER, 0.0f)
-        setPathfindingPenalty(PathNodeType.WALKABLE, 10.0f)
+        setPathfindingPenalty(PathNodeType.WATER_BORDER, -1.0f)
+        setPathfindingPenalty(PathNodeType.WALKABLE, -1.0f)
         moveControl = MoveControl(this)
         navigation = MobNavigation(this, world)
     }
