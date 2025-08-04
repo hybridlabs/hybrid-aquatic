@@ -22,6 +22,7 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World) :
     HybridAquaticCritterEntity(entityType, world),
     VariantHolder<SeaUrchinEntity.Companion.Type> {

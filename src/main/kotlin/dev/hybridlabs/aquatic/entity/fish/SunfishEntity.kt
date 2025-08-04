@@ -24,6 +24,7 @@ import net.minecraft.world.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) :
     HybridAquaticFishEntity(
         entityType, world,

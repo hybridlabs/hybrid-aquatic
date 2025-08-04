@@ -19,6 +19,7 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: World) :
     HybridAquaticFishEntity(
         entityType, world,

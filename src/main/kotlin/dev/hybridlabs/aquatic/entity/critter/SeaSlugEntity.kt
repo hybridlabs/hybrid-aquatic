@@ -18,6 +18,7 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
     HybridAquaticCritterEntity(entityType, world),
     VariantHolder<SeaSlugEntity.Companion.Type> {

@@ -12,7 +12,7 @@ class FishFollowGroupLeaderGoal(
     private var moveDelay = 0
     private var checkSurroundingDelay = getSurroundingSearchDelay(fish)
 
-    protected fun getSurroundingSearchDelay(fish: HybridAquaticSchoolingFishEntity?): Int {
+    private fun getSurroundingSearchDelay(fish: HybridAquaticSchoolingFishEntity?): Int {
         return toGoalTicks(minSearchDelay + fish!!.random.nextInt(minSearchDelay) % 20)
     }
 

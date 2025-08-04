@@ -15,7 +15,7 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.EasingType
 import software.bernie.geckolib.util.GeckoLibUtil
 
-@Suppress("LeakingThis", "UNUSED_PARAMETER")
+@Suppress("LeakingThis", "unused")
 open class HybridAquaticOctopusEntity(
     type: EntityType<out HybridAquaticCephalopodEntity>,
     world: World,

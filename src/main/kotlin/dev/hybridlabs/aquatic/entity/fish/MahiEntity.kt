@@ -21,6 +21,7 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class MahiEntity(entityType: EntityType<out MahiEntity>, world: World) :
     HybridAquaticSchoolingFishEntity(
         entityType, world,

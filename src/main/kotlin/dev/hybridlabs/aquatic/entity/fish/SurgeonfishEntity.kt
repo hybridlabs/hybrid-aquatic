@@ -21,6 +21,7 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: World) :
     HybridAquaticFishEntity(
         entityType, world,

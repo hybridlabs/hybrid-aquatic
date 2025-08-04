@@ -11,9 +11,6 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
-/**
- * Renders the Anemone block entity as an item.
- */
 class GiantGreenAnemoneBlockItemRenderer : DynamicItemRenderer {
     private val giantGreenAnemoneBlockEntity = GiantGreenAnemoneBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.GIANT_GREEN_ANEMONE.defaultState)
     private val renderer = GiantGreenAnemoneBlockEntityRenderer(HybridAquaticClient.createBlockEntityRendererFactoryContext())

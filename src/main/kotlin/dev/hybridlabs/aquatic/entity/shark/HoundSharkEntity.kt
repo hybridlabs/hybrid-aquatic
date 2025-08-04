@@ -20,6 +20,7 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: World) :
     HybridAquaticSharkEntity(
         entityType, world, listOf(HybridAquaticEntityTags.CEPHALOPOD, HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN), false, false

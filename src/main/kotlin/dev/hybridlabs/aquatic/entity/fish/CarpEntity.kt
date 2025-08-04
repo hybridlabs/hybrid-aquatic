@@ -24,7 +24,7 @@ import net.minecraft.world.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
-
+@Suppress("DEPRECATION")
 class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
     HybridAquaticFishEntity(
         entityType, world,

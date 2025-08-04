@@ -1,3 +1,5 @@
+@file:Suppress("unused", "SameParameterValue")
+
 package dev.hybridlabs.aquatic.potions
 
 import dev.hybridlabs.aquatic.HybridAquatic

@@ -19,6 +19,7 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World) :
     HybridAquaticFishEntity(
         entityType, world,

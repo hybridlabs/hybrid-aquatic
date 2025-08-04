@@ -6,24 +6,18 @@ import kotlin.random.Random
 
 class CuttlefishEntityModel : HybridAquaticCephalopodEntityModel<CuttlefishEntity>("cuttlefish") {
 
-    private val redTextures = listOf(
+    private val commonTextures = listOf(
         Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_red.png"),
         Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_red_1.png"),
-        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_red_2.png")
-    )
-
-    private val blackTextures = listOf(
+        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_red_2.png"),
         Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_black.png"),
         Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_black_1.png"),
         Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/cuttlefish_black_2.png")
     )
+
     override fun getTextureResource(animatable: CuttlefishEntity): Identifier {
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
-
-        return when (animatable.variant) {
-            CuttlefishEntity.Companion.Type.RED -> redTextures[random.nextInt(redTextures.size)]
-            CuttlefishEntity.Companion.Type.BLACK -> blackTextures[random.nextInt(blackTextures.size)]
-        }
+        return commonTextures[random.nextInt(commonTextures.size)]
     }
 }

@@ -25,6 +25,7 @@ import net.minecraft.world.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: World) :
     HybridAquaticFishEntity(
         entityType, world,

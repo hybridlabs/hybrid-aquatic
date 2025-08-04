@@ -13,9 +13,6 @@ import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
-/**
- * Renders the Message in a Bottle block entity as an item.
- */
 class MessageInABottleBlockItemRenderer : DynamicItemRenderer {
     private val messageInABottleBlockEntity = MessageInABottleBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.defaultState)
     private val renderer = MessageInABottleBlockEntityRenderer(HybridAquaticClient.createBlockEntityRendererFactoryContext())
