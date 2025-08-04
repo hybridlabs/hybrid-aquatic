@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
@@ -12,13 +11,11 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
-import net.minecraft.world.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -58,7 +55,7 @@ class BoxfishEntity(entityType: EntityType<out BoxfishEntity>, world: World) :
         }
 
         enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-            LONGHORN_COWFISH(0, "whitespotted"),
+            LONGHORN_COWFISH(0, "longhorn_cowfish"),
             WHITESPOTTED(1, "whitespotted");
 
             override fun asString(): String {
