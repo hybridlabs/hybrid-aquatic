@@ -5,13 +5,7 @@ package dev.hybridlabs.aquatic.block
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import net.minecraft.block.Block
-import net.minecraft.block.BlockRenderType
-import net.minecraft.block.BlockState
-import net.minecraft.block.BlockWithEntity
-import net.minecraft.block.Blocks
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.Waterloggable
+import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
@@ -156,19 +150,8 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
      * Represents the variants of a Message in a Bottle.
      */
     enum class Variant(val id: String) : StringIdentifiable {
-        /**
-         * The default bottle variant.
-         */
         BOTTLE("bottle"),
-
-        /**
-         * The jar variant.
-         */
         JAR("jar"),
-
-        /**
-         * The longneck variant.
-         */
         LONGNECK("longneck");
 
         override fun asString(): String {
@@ -178,9 +161,6 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
         companion object {
             private val BY_ID = entries.associateBy(Variant::id)
 
-            /**
-             * Retrieves a variant based on [id].
-             */
             fun byId(id: String): Variant {
                 return BY_ID[id] ?: BOTTLE
             }
@@ -188,20 +168,10 @@ class MessageInABottleBlock(settings: Settings) : BlockWithEntity(settings), Wat
     }
 
     companion object {
-        /**
-         * The default shape of a Message in a Bottle block.
-         */
         val SHAPE: VoxelShape = Block.createCuboidShape(2.0, 0.0, 2.0, 13.0, 6.0, 14.0)
 
-        /**
-         * The shape of a Message in a Bottle block in water.
-         */
         val WATER_SHAPE: VoxelShape = Block.createCuboidShape(1.0, 13.0, 1.0, 15.0, 16.0, 15.0)
 
-        /**
-         * Creates a Message in a Bottle item stack from [blockEntity].
-         * @return an item stack
-         */
         fun createItemStack(blockEntity: MessageInABottleBlockEntity): ItemStack {
             val stack = ItemStack(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE)
             stack.orCreateNbt.put(BlockItem.BLOCK_ENTITY_TAG_KEY, blockEntity.createNbt())
