@@ -277,8 +277,8 @@ open class HybridAquaticDolphinEntity(
     }
 
     init {
-        this.moveControl = AquaticMoveControl(this, 85, 10, 0.02f, 0.1f, true)
-        this.lookControl = YawAdjustingLookControl(this, 10)
+        this.moveControl = AquaticMoveControl(this, 85, 5, 0.02f, 0.1f, true)
+        this.lookControl = YawAdjustingLookControl(this, 15)
         this.setCanPickUpLoot(true)
     }
 
