@@ -97,11 +97,6 @@ open class HybridAquaticFishEntity(
                 damage(this.damageSources.dryOut(), 1.0f)
             }
         }
-
-        if (!isSubmergedInWater || isOnGround) {
-            this.pitch = 0.0f
-            this.yaw = 90.0f
-        }
     }
 
     override fun tickMovement() {
@@ -241,7 +236,7 @@ open class HybridAquaticFishEntity(
             ) { state: AnimationState<HybridAquaticFishEntity> ->
                 when {
                     state.isMoving && isSubmergedInWater -> state.setAndContinue(DefaultAnimations.SWIM)
-                    !this.isSubmergedInWater && shouldFlopOnLand() -> state.setAndContinue(FLOP)
+                    !this.isSubmergedInWater && !this.isSwimming && shouldFlopOnLand() && this.moistness < 580 -> state.setAndContinue(FLOP)
                     else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
             }
