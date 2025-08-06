@@ -2,6 +2,8 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.ai.control.AquaticMoveControl
+import net.minecraft.entity.ai.control.YawAdjustingLookControl
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.world.World
@@ -12,6 +14,12 @@ class KillerWhaleEntity(entityType: EntityType<out KillerWhaleEntity>, world: Wo
             HybridAquaticEntityTags.MEDIUM_PREY),
         listOf(
             HybridAquaticEntityTags.NONE)) {
+
+    init {
+        this.moveControl = AquaticMoveControl(this, 85, 5, 0.02f, 0.1f, true)
+        this.lookControl = YawAdjustingLookControl(this, 20)
+        this.setCanPickUpLoot(true)
+    }
 
     override fun getLimitPerChunk(): Int {
         return 2

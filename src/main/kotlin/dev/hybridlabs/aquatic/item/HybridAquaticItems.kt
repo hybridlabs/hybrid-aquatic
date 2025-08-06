@@ -1468,7 +1468,7 @@ object HybridAquaticItems {
 
       //#region Dolphins
 
-    val KILLER_WHALE_SPAWN_EGG = registerSpawnEgg("killer_whale_spawn_egg", HybridAquaticEntityTypes.KILLER_WHALE, 0x6a6558, 0xb5b3a6)
+    val KILLER_WHALE_SPAWN_EGG = registerSpawnEgg("killer_whale_spawn_egg", HybridAquaticEntityTypes.KILLER_WHALE, 0x21222e, 0xe6e6ec)
 
         //#endregion
 

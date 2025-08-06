@@ -54,7 +54,6 @@ open class HybridAquaticDolphinEntity(
         this.air = this.maxAir
         this.pitch = 0.0f
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        this.size = this.random.nextBetween(getMinSize(), getMaxSize())
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
