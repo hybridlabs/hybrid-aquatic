@@ -2,7 +2,10 @@ package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.cephalopod.*
-import dev.hybridlabs.aquatic.entity.critter.*
+import dev.hybridlabs.aquatic.entity.critter.SeaCucumberEntity
+import dev.hybridlabs.aquatic.entity.critter.SeaSlugEntity
+import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
+import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
@@ -627,7 +630,7 @@ object HybridAquaticEntityTypes {
     )
 
     val CEPHEIDAE_JELLYFISH = registerJelly(
-        "cauliflower_jellyfish",
+        "cepheidae_jellyfish",
         ::CepheidaeJellyfishEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
         CepheidaeJellyfishEntity.createMobAttributes()
@@ -643,7 +646,7 @@ object HybridAquaticEntityTypes {
     val MAUVE_STINGER = registerJelly(
         "mauve_stinger",
         ::MauveStingerEntity,
-        EntityDimensions.fixed(0.35f, 0.35f),
+        EntityDimensions.fixed(0.25f, 0.25f),
         MauveStingerEntity.createMobAttributes()
     )
 

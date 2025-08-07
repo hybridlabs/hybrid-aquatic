@@ -172,7 +172,10 @@ open class HybridAquaticJellyfishEntity(
 
             val vec3d = this.velocity
             val d = vec3d.horizontalLength()
-            this.bodyYaw += (-(MathHelper.atan2(vec3d.x, vec3d.z).toFloat()) * 57.295776f - this.bodyYaw) * 0.1f
+            val targetYaw = -(MathHelper.atan2(vec3d.x, vec3d.z).toFloat()) * (180f / Math.PI.toFloat())
+            val deltaYaw = MathHelper.wrapDegrees(targetYaw - this.bodyYaw)
+            this.bodyYaw += deltaYaw * 0.1f
+            this.headYaw = this.bodyYaw
             this.yaw = this.bodyYaw
             this.rollAngle += 3.1415927f * this.turningSpeed * 1.5f
             this.tiltAngle += (-(MathHelper.atan2(d, vec3d.y).toFloat()) * 57.295776f - this.tiltAngle) * 0.1f
