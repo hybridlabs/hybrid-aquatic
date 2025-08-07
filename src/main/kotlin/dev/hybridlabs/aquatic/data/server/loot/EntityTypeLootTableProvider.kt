@@ -321,17 +321,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.NUDIBRANCH) {
-            pool(
-                LootPool.builder()
-                    .with(
-                        ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
-                            .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0F)))
-                    )
-            )
-        }
-
         export(exporter, HybridAquaticEntityTypes.SEA_URCHIN) {
             pool(
                 LootPool.builder()

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
@@ -10,13 +11,14 @@ import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
+import net.minecraft.world.biome.Biome
 import java.util.function.IntFunction
-import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
@@ -37,7 +39,8 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
             DataTracker.registerData(SeaSlugEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
         enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-            SPOTTED_SEA_HARE(0, "spotted_sea_hare");
+            SPOTTED_SEA_HARE(0, "spotted_sea_hare"),
+            NUDIBRANCH(1, "nudibranch");
 
             override fun asString(): String {
                 return this.key
@@ -58,6 +61,24 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
                 fun fromId(id: Int): Type {
                     return BY_ID.apply(id) as Type
                 }
+
+                fun fromBiome(biome: RegistryEntry<Biome>): Type {
+                    return when {
+
+                        biome.isIn(HybridAquaticBiomeTags.REEF) -> {
+                            NUDIBRANCH
+                        }
+
+                        biome.isIn(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                            NUDIBRANCH
+                            SPOTTED_SEA_HARE
+                        }
+
+                        else -> {
+                            SPOTTED_SEA_HARE
+                        }
+                    }
+                }
             }
         }
     }
@@ -69,7 +90,9 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
         entityData: EntityData?,
         entityNbt: NbtCompound?
     ): EntityData? {
-        variant = Type.entries.random(Random)
+        val biome = world.getBiome(this.blockPos)
+        val selectedType = Type.fromBiome(biome)
+        this.variant = selectedType
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 

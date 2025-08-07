@@ -1440,7 +1440,6 @@ object HybridAquaticItems {
 
         //#region Critters
 
-    val NUDIBRANCH_SPAWN_EGG = registerSpawnEgg("nudibranch_spawn_egg", HybridAquaticEntityTypes.NUDIBRANCH, 0xf7be47, 0xb853a3)
     val SEA_SLUG_SPAWN_EGG = registerSpawnEgg("sea_slug_spawn_egg", HybridAquaticEntityTypes.SEA_SLUG, 0xf7be47, 0xb853a3)
     val SEA_CUCUMBER_SPAWN_EGG = registerSpawnEgg("sea_cucumber_spawn_egg", HybridAquaticEntityTypes.SEA_CUCUMBER, 0x225b6d, 0x0c2627)
     val SEA_URCHIN_SPAWN_EGG = registerSpawnEgg("sea_urchin_spawn_egg", HybridAquaticEntityTypes.SEA_URCHIN, 0x994066, 0x41142c)

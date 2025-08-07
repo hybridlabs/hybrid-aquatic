@@ -273,7 +273,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         // critters
         getOrCreateTagBuilder(HybridAquaticEntityTags.CRITTER)
             .add(
-                HybridAquaticEntityTypes.NUDIBRANCH,
                 HybridAquaticEntityTypes.SEA_CUCUMBER,
                 HybridAquaticEntityTypes.SEA_URCHIN,
                 HybridAquaticEntityTypes.SEA_SLUG,

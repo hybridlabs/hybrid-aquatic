@@ -145,8 +145,7 @@ class EntitySpawnConfigGenerator {
         //#endregion
 
         //#region Critters
-        addCritter(HybridAquaticEntityTypes.NUDIBRANCH, listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 3, 1, 2)
-        addCritter(HybridAquaticEntityTypes.SEA_SLUG, listOf(HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 3, 1, 2)
+        addCritter(HybridAquaticEntityTypes.SEA_SLUG, listOf(HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 3, 1, 2)
         addCritter(HybridAquaticEntityTypes.STARFISH, listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN, HybridAquaticBiomeTags.SANDY_BEACHES), 5, 1, 3)
         addCritter(HybridAquaticEntityTypes.SEA_CUCUMBER, listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN), 3, 1, 3)
         addCritter(HybridAquaticEntityTypes.SEA_URCHIN, listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN), 5, 1, 3)

@@ -546,13 +546,6 @@ object HybridAquaticEntityTypes {
     //endregion
 
     //#region critters
-    val NUDIBRANCH = registerCritter(
-        "nudibranch",
-        ::NudibranchEntity,
-        EntityDimensions.fixed(0.5f, 0.3f),
-        NudibranchEntity.createMobAttributes()
-    )
-
     val SEA_SLUG = registerCritter(
         "sea_slug",
         ::SeaSlugEntity,
