@@ -130,7 +130,7 @@ open class HybridAquaticDolphinEntity(
     override fun initGoals() {
         goalSelector.add(0, BreatheAirGoal(this))
         goalSelector.add(0, MoveIntoWaterGoal(this))
-        goalSelector.add(4, SwimAroundGoal(this, 1.0, 10))
+        goalSelector.add(4, SwimAroundGoal(this, 1.0, 2))
         goalSelector.add(4, LookAroundGoal(this))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
         goalSelector.add(5, HADolphinJumpGoal(this, 10))
