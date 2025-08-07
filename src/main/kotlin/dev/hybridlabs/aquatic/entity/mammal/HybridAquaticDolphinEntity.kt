@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import dev.hybridlabs.aquatic.entity.ai.goal.HADolphinJumpGoal
 import net.minecraft.entity.*
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
@@ -122,6 +123,7 @@ open class HybridAquaticDolphinEntity(
         goalSelector.add(4, SwimAroundGoal(this, 1.0, 10))
         goalSelector.add(4, LookAroundGoal(this))
         goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
+        goalSelector.add(5, HADolphinJumpGoal(this, 10))
         goalSelector.add(6, MeleeAttackGoal(this, 1.2000000476837158, true))
         goalSelector.add(8, ChaseBoatGoal(this))
     }
