@@ -5,7 +5,7 @@ import net.minecraft.entity.*
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
 import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.ai.pathing.EntityNavigation
+import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
@@ -117,6 +117,16 @@ open class HybridAquaticDolphinEntity(
         this.moistness = nbt.getInt("Moistness")
     }
 
+    init {
+        setPathfindingPenalty(PathNodeType.WATER, 0.0f)
+        setPathfindingPenalty(PathNodeType.WATER_BORDER, -1.0f)
+        setPathfindingPenalty(PathNodeType.WALKABLE, -1.0f)
+        setCanPickUpLoot(true)
+        moveControl = AquaticMoveControl(this, 85, 5, 0.02f, 0.1f, true)
+        lookControl = YawAdjustingLookControl(this, 15)
+        navigation = SwimNavigation(this, world)
+    }
+
     override fun initGoals() {
         goalSelector.add(0, BreatheAirGoal(this))
         goalSelector.add(0, MoveIntoWaterGoal(this))
@@ -126,10 +136,6 @@ open class HybridAquaticDolphinEntity(
         goalSelector.add(5, HADolphinJumpGoal(this, 10))
         goalSelector.add(6, MeleeAttackGoal(this, 1.2000000476837158, true))
         goalSelector.add(8, ChaseBoatGoal(this))
-    }
-
-    override fun createNavigation(world: World): EntityNavigation {
-        return SwimNavigation(this, world)
     }
 
     override fun tryAttack(target: Entity): Boolean {
@@ -275,12 +281,6 @@ open class HybridAquaticDolphinEntity(
 
     private fun getMaxMoistness(): Int {
         return 1800
-    }
-
-    init {
-        this.moveControl = AquaticMoveControl(this, 85, 5, 0.02f, 0.1f, true)
-        this.lookControl = YawAdjustingLookControl(this, 15)
-        this.setCanPickUpLoot(true)
     }
 
     companion object {
