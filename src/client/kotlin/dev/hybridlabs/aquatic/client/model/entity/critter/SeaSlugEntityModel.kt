@@ -23,7 +23,7 @@ class SeaSlugEntityModel : HybridAquaticCritterEntityModel<SeaSlugEntity>("sea_s
     private val SPOTTED_SEA_HARE_MODEL = Identifier("hybrid-aquatic", "geo/critter/sea_slug/spotted_sea_hare.geo.json")
     private val NUDIBRANCH_MODEL = Identifier("hybrid-aquatic", "geo/critter/sea_slug/nudibranch.geo.json")
 
-    private val SEA_HARE_ANIMATION = Identifier("hybrid-aquatic", "animations/sea_hare.animation.json")
+    private val SEA_HARE_ANIMATION = Identifier("hybrid-aquatic", "animations/sea_slug.animation.json")
     private val NUDIBRANCH_ANIMATION = Identifier("hybrid-aquatic", "animations/nudibranch.animation.json")
 
     override fun getTextureResource(animatable: SeaSlugEntity): Identifier {
