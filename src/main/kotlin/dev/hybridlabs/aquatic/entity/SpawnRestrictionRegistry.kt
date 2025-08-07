@@ -109,8 +109,7 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.MOON_JELLYFISH,
             HybridAquaticEntityTypes.SEA_NETTLE,
-            HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH,
-            HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH,
+            HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH,
             HybridAquaticEntityTypes.BLUE_JELLYFISH,
             HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH,
             HybridAquaticEntityTypes.NOMURA_JELLYFISH,

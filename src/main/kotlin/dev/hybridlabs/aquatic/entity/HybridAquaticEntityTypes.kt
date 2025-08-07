@@ -633,18 +633,11 @@ object HybridAquaticEntityTypes {
         BlueJellyfishEntity.createMobAttributes()
     )
 
-    val CAULIFLOWER_JELLYFISH = registerJelly(
+    val CEPHEIDAE_JELLYFISH = registerJelly(
         "cauliflower_jellyfish",
-        ::CauliflowerJellyfishEntity,
+        ::CepheidaeJellyfishEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
-        CauliflowerJellyfishEntity.createMobAttributes()
-    )
-
-    val FRIED_EGG_JELLYFISH = registerJelly(
-        "fried_egg_jellyfish",
-        ::FriedEggJellyfishEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        FriedEggJellyfishEntity.createMobAttributes()
+        CepheidaeJellyfishEntity.createMobAttributes()
     )
 
     val LIONS_MANE_JELLYFISH = registerJelly(

@@ -443,18 +443,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH) {
-            pool(
-                LootPool.builder()
-                    .with(
-                        ItemEntry.builder(Items.SLIME_BALL)
-                            .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
-                            .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0F)))
-                    )
-            )
-        }
-
-        export(exporter, HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH) {
+        export(exporter, HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH) {
             pool(
                 LootPool.builder()
                     .with(

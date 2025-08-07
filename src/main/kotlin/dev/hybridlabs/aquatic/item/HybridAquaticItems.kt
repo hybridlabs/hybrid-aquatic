@@ -1387,8 +1387,7 @@ object HybridAquaticItems {
 
     val BARREL_JELLYFISH_SPAWN_EGG = registerSpawnEgg("barrel_jellyfish_spawn_egg", HybridAquaticEntityTypes.BARREL_JELLYFISH, 0xd6f3ea, 0x413c83)
     val BLUE_JELLYFISH_SPAWN_EGG = registerSpawnEgg("blue_jellyfish_spawn_egg", HybridAquaticEntityTypes.BLUE_JELLYFISH, 0x4dc0e8, 0xff6b97)
-    val CAULIFLOWER_JELLYFISH_SPAWN_EGG = registerSpawnEgg("cauliflower_jellyfish_spawn_egg", HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH, 0x623062, 0x89a1d8)
-    val FRIED_EGG_JELLYFISH_SPAWN_EGG = registerSpawnEgg("fried_egg_jellyfish_spawn_egg", HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH, 0xfbbf2d, 0x76445f)
+    val CEPHEIDAE_JELLYFISH_SPAWN_EGG = registerSpawnEgg("cepheidae_jellyfish_spawn_egg", HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH, 0x623062, 0x89a1d8)
     val LIONS_MANE_JELLYFISH_SPAWN_EGG = registerSpawnEgg("lions_mane_jellyfish_spawn_egg", HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH, 0xf6d5b1, 0x541e48)
     val MOON_JELLYFISH_SPAWN_EGG = registerSpawnEgg("moon_jellyfish_spawn_egg", HybridAquaticEntityTypes.MOON_JELLYFISH, 0xa293f3, 0xe0caf8)
     val NOMURA_JELLYFISH_SPAWN_EGG = registerSpawnEgg("nomura_jellyfish_spawn_egg", HybridAquaticEntityTypes.NOMURA_JELLYFISH, 0xe5dccf, 0x64353b)
