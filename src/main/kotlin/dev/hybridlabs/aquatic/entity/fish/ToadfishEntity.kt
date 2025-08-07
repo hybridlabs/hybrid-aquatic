@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.Goal
-import net.minecraft.entity.ai.goal.SwimAroundGoal
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
@@ -39,7 +38,6 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
 
     override fun initGoals() {
         goalSelector.add(0, InflateGoal())
-        goalSelector.add(4, SwimAroundGoal(this, 1.0, 10))
     }
 
     var inflateTicks = 0
@@ -110,10 +108,10 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
         }
     }
 
-    override fun damage(source: DamageSource?, amount: Float): Boolean {
+    override fun damage(source: DamageSource, amount: Float): Boolean {
         if (super.damage(source, amount)) {
 
-            val attacker = source?.attacker
+            val attacker = source.attacker
             if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
                 attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 1))
             }
@@ -168,14 +166,9 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
 
-        private val PUFF_STATE: TrackedData<Int> =
-            DataTracker.registerData(ToadfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        private val BLOW_UP_FILTER: Predicate<LivingEntity> = Predicate { entity ->
-            if (entity is PlayerEntity && entity.isCreative) false else entity.group != EntityGroup.AQUATIC
-        }
-        private val BLOW_UP_TARGET_PREDICATE: TargetPredicate =
-            TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility()
-                .setPredicate(BLOW_UP_FILTER)
+        private val PUFF_STATE: TrackedData<Int> = DataTracker.registerData(ToadfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        private val BLOW_UP_FILTER: Predicate<LivingEntity> = Predicate { entity -> if (entity is PlayerEntity && entity.isCreative) false else entity.group != EntityGroup.AQUATIC }
+        private val BLOW_UP_TARGET_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility().setPredicate(BLOW_UP_FILTER)
 
         const val NOT_PUFFED = 0
         const val SEMI_PUFFED = 1

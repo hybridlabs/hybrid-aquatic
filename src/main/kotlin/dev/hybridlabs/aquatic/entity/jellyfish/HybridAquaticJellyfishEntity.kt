@@ -200,18 +200,16 @@ open class HybridAquaticJellyfishEntity(
 
     }
 
-    override fun damage(source: DamageSource?, amount: Float): Boolean {
+    override fun damage(source: DamageSource, amount: Float): Boolean {
         if (super.damage(source, amount)) {
 
-            val attacker = source?.attacker
+            val attacker = source.attacker
             if (attacker is PlayerEntity && isVenomous && attacker.mainHandStack.isEmpty) {
                 attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, venomLevel))
                 playSound(SoundEvents.ENTITY_PUFFER_FISH_STING, 0.5F, 0.5F)
             }
-
             return true
         }
-
         return false
     }
 
@@ -224,7 +222,7 @@ open class HybridAquaticJellyfishEntity(
         }
     }
 
-    override fun travel(movementInput: Vec3d?) {
+    override fun travel(movementInput: Vec3d) {
         this.move(MovementType.SELF, this.velocity)
     }
 

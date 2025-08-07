@@ -107,7 +107,6 @@ open class HybridAquaticFishEntity(
             this.velocityDirty = true
             this.playSound(this.flopSound, this.soundVolume, this.soundPitch)
         }
-
         super.tickMovement()
     }
 
@@ -147,7 +146,7 @@ open class HybridAquaticFishEntity(
     }
 
     override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.65f
+        return dimensions.height * 0.6f
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
@@ -160,10 +159,6 @@ open class HybridAquaticFishEntity(
 
     //#region SFX
     open val flopSound: SoundEvent = SoundEvents.ENTITY_PUFFER_FISH_FLOP
-
-    override fun getSwimSound(): SoundEvent {
-        return SoundEvents.ENTITY_DOLPHIN_SWIM
-    }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.ENTITY_COD_HURT
