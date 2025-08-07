@@ -33,7 +33,7 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Worl
     private var angryAt: UUID? = null
 
     override fun getLimitPerChunk(): Int {
-        return 3
+        return 2
     }
 
     override fun initGoals() {
