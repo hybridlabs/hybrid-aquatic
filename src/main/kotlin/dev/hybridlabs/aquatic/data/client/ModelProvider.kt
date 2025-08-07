@@ -265,7 +265,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.BLUEFIN_TUNA,
             HybridAquaticItems.UNICORNFISH,
             HybridAquaticItems.STONEFISH,
-            HybridAquaticItems.TOADFISH,
+            HybridAquaticItems.BLOWFISH,
             HybridAquaticItems.PARROTFISH,
             HybridAquaticItems.SUNFISH,
             HybridAquaticItems.KOI,

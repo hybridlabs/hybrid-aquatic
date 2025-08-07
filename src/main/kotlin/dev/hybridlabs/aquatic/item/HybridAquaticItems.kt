@@ -1019,8 +1019,8 @@ object HybridAquaticItems {
         )
     )
 
-    val TOADFISH = register(
-        "toadfish",
+    val BLOWFISH = register(
+        "blowfish",
         Item(
             FabricItemSettings()
                 .food(
@@ -1347,7 +1347,7 @@ object HybridAquaticItems {
     val SURGEONFISH_SPAWN_EGG = registerSpawnEgg("surgeonfish_spawn_egg", HybridAquaticEntityTypes.SURGEONFISH, 0x88a1d7, 0x211b2f)
     val TETRA_SPAWN_EGG = registerSpawnEgg("tetra_spawn_egg", HybridAquaticEntityTypes.TETRA, 0x4eb1cc, 0xe64d43)
     val TIGER_BARB_SPAWN_EGG = registerSpawnEgg("tiger_barb_spawn_egg", HybridAquaticEntityTypes.TIGER_BARB, 0xfbbf2d, 0x611851)
-    val TOADFISH_SPAWN_EGG = registerSpawnEgg("toadfish_spawn_egg", HybridAquaticEntityTypes.TOADFISH, 0xfcf2ce, 0x885e6d)
+    val BLOWFISH_SPAWN_EGG = registerSpawnEgg("blowfish_spawn_egg", HybridAquaticEntityTypes.BLOWFISH, 0xfcf2ce, 0x885e6d)
     val TRIGGERFISH_SPAWN_EGG = registerSpawnEgg("triggerfish_spawn_egg", HybridAquaticEntityTypes.TRIGGERFISH, 0x5b7c7e, 0xbdcdda)
     val TUNA_SPAWN_EGG = registerSpawnEgg("tuna_spawn_egg", HybridAquaticEntityTypes.TUNA, 0x36668d, 0xf5d58d)
     val GOLDEN_DORADO_SPAWN_EGG = registerSpawnEgg("golden_dorado_spawn_egg", HybridAquaticEntityTypes.GOLDEN_DORADO, 0xd16020, 0xa4975f)

@@ -660,11 +660,11 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.TOADFISH) {
+        export(exporter, HybridAquaticEntityTypes.BLOWFISH) {
             pool(
                 LootPool.builder()
                     .with(
-                        ItemEntry.builder(HybridAquaticItems.TOADFISH)
+                        ItemEntry.builder(HybridAquaticItems.BLOWFISH)
                             .apply(LootingEnchantLootFunction.builder(UniformLootNumberProvider.create(0.0F, 1.0F)))
                             .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0F)))
                     )

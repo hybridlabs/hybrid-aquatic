@@ -48,7 +48,7 @@ class LiveCatchEnchantment : Enchantment(Rarity.RARE, EnchantmentTarget.FISHING_
             HybridAquaticItems.GOLDFISH to HybridAquaticEntityTypes.GOLDFISH,
             HybridAquaticItems.STONEFISH to HybridAquaticEntityTypes.STONEFISH,
             HybridAquaticItems.SEAHORSE to HybridAquaticEntityTypes.SEAHORSE,
-            HybridAquaticItems.TOADFISH to HybridAquaticEntityTypes.TOADFISH,
+            HybridAquaticItems.BLOWFISH to HybridAquaticEntityTypes.BLOWFISH,
             HybridAquaticItems.MACKEREL to HybridAquaticEntityTypes.MACKEREL,
             HybridAquaticItems.FLYING_FISH to HybridAquaticEntityTypes.FLYING_FISH,
 

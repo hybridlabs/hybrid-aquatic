@@ -180,7 +180,7 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.PEARLFISH)
             entries.add(HybridAquaticItems.SNAILFISH)
             entries.add(HybridAquaticItems.BOXFISH)
-            entries.add(HybridAquaticItems.TOADFISH)
+            entries.add(HybridAquaticItems.BLOWFISH)
             entries.add(HybridAquaticItems.STONEFISH)
             entries.add(HybridAquaticItems.GOLDEN_DORADO)
             entries.add(HybridAquaticItems.LIONFISH)

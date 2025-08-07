@@ -21,7 +21,7 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import java.util.function.Predicate
 
-class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
+class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: World) :
     HybridAquaticFishEntity(
         entityType, world,
         listOf(HybridAquaticEntityTags.NONE),
@@ -141,7 +141,7 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
     private inner class InflateGoal : Goal() {
         override fun canStart(): Boolean {
             val nearbyEntities = world.getEntitiesByClass(LivingEntity::class.java, boundingBox.expand(2.0)) {
-                BLOW_UP_TARGET_PREDICATE.test(this@ToadfishEntity, it)
+                BLOW_UP_TARGET_PREDICATE.test(this@BlowfishEntity, it)
             }
             return nearbyEntities.isNotEmpty()
         }
@@ -166,7 +166,7 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
 
-        private val PUFF_STATE: TrackedData<Int> = DataTracker.registerData(ToadfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        private val PUFF_STATE: TrackedData<Int> = DataTracker.registerData(BlowfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
         private val BLOW_UP_FILTER: Predicate<LivingEntity> = Predicate { entity -> if (entity is PlayerEntity && entity.isCreative) false else entity.group != EntityGroup.AQUATIC }
         private val BLOW_UP_TARGET_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility().setPredicate(BLOW_UP_FILTER)
 

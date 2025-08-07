@@ -321,11 +321,11 @@ object HybridAquaticEntityTypes {
         TigerBarbEntity.createMobAttributes()
     )
 
-    val TOADFISH = registerFish(
+    val BLOWFISH = registerFish(
         "toadfish",
-        ::ToadfishEntity,
+        ::BlowfishEntity,
         EntityDimensions.fixed(0.3f, 0.3f),
-        ToadfishEntity.createMobAttributes()
+        BlowfishEntity.createMobAttributes()
     )
 
     val TRIGGERFISH = registerFish(

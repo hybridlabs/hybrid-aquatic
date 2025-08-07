@@ -48,7 +48,7 @@ class EntitySpawnConfigGenerator {
         addFish(HybridAquaticEntityTypes.LIONFISH, listOf(HybridAquaticBiomeTags.REEF), 3, 1, 2)
         addFish(HybridAquaticEntityTypes.STONEFISH, listOf(HybridAquaticBiomeTags.REEF), 1, 1, 1)
         addFish(HybridAquaticEntityTypes.STINGRAY, listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 3, 1, 2)
-        addFish(HybridAquaticEntityTypes.TOADFISH, listOf(HybridAquaticBiomeTags.REEF), 1, 1, 1)
+        addFish(HybridAquaticEntityTypes.BLOWFISH, listOf(HybridAquaticBiomeTags.REEF), 1, 1, 1)
         addFish(HybridAquaticEntityTypes.SURGEONFISH, listOf(HybridAquaticBiomeTags.REEF), 5, 1, 3)
         addFish(HybridAquaticEntityTypes.CLOWNFISH, listOf(HybridAquaticBiomeTags.REEF), 3, 1, 2)
         addFish(HybridAquaticEntityTypes.BOXFISH, listOf(HybridAquaticBiomeTags.REEF), 1, 1, 1)

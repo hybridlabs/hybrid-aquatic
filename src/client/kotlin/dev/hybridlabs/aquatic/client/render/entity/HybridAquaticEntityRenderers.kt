@@ -51,7 +51,7 @@ object HybridAquaticEntityRenderers {
     val TRIGGERFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.TRIGGERFISH, ::TriggerfishEntityRenderer)
     val OSCAR = EntityRendererRegistry.register(HybridAquaticEntityTypes.OSCAR, ::OscarEntityRenderer)
     val DANIO = EntityRendererRegistry.register(HybridAquaticEntityTypes.DANIO, ::DanioEntityRenderer)
-    val TOADFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.TOADFISH, ::ToadfishEntityRenderer)
+    val BLOWFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.BLOWFISH, ::BlowfishEntityRenderer)
     val TETRA = EntityRendererRegistry.register(HybridAquaticEntityTypes.TETRA, ::TetraEntityRenderer)
     val STONEFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.STONEFISH, ::StonefishEntityRenderer)
     val BETTA = EntityRendererRegistry.register(HybridAquaticEntityTypes.BETTA, ::BettaEntityRenderer)
