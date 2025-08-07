@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.jellyfish.CepheidaeJellyfishEntity
 import net.minecraft.client.render.entity.EntityRendererFactory.Context
 
 class CepheidaeJellyfishEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<CepheidaeJellyfishEntity>(context, CepheidaeJellyfishEntityModel(), true, true)
+    HybridAquaticJellyfishEntityRenderer<CepheidaeJellyfishEntity>(context, CepheidaeJellyfishEntityModel(), true, false)

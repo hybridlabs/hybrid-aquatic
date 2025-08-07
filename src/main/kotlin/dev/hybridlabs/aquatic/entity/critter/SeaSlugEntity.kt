@@ -39,7 +39,7 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
             DataTracker.registerData(SeaSlugEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
         enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-            SPOTTED_SEA_HARE(0, "spotted_sea_hare"),
+            SEA_HARE(0, "spotted_sea_hare"),
             NUDIBRANCH(1, "nudibranch");
 
             override fun asString(): String {
@@ -55,7 +55,7 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
                 )
 
                 fun byName(name: String?): Type {
-                    return CODEC.byId(name, SPOTTED_SEA_HARE) as Type
+                    return CODEC.byId(name, SEA_HARE) as Type
                 }
 
                 fun fromId(id: Int): Type {
@@ -71,11 +71,11 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
 
                         biome.isIn(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
                             NUDIBRANCH
-                            SPOTTED_SEA_HARE
+                            SEA_HARE
                         }
 
                         else -> {
-                            SPOTTED_SEA_HARE
+                            SEA_HARE
                         }
                     }
                 }

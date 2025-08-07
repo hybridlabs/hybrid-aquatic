@@ -20,7 +20,7 @@ class SeaSlugEntityModel : HybridAquaticCritterEntityModel<SeaSlugEntity>("sea_s
         Identifier("hybrid-aquatic", "textures/entity/critter/sea_slug/nudibranch_yonowae.png")
     )
 
-    private val SPOTTED_SEA_HARE_MODEL = Identifier("hybrid-aquatic", "geo/critter/sea_slug/spotted_sea_hare.geo.json")
+    private val SPOTTED_SEA_HARE_MODEL = Identifier("hybrid-aquatic", "geo/critter/sea_slug/sea_hare.geo.json")
     private val NUDIBRANCH_MODEL = Identifier("hybrid-aquatic", "geo/critter/sea_slug/nudibranch.geo.json")
 
     private val SEA_HARE_ANIMATION = Identifier("hybrid-aquatic", "animations/sea_slug.animation.json")
@@ -30,21 +30,21 @@ class SeaSlugEntityModel : HybridAquaticCritterEntityModel<SeaSlugEntity>("sea_s
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return when (animatable.variant) {
-            SeaSlugEntity.Companion.Type.SPOTTED_SEA_HARE -> SPOTTED_SEA_HARE_TEXTURE
+            SeaSlugEntity.Companion.Type.SEA_HARE -> SPOTTED_SEA_HARE_TEXTURE
             SeaSlugEntity.Companion.Type.NUDIBRANCH -> nudibranchTextures[random.nextInt(nudibranchTextures.size)]
         }
     }
 
     override fun getModelResource(animatable: SeaSlugEntity): Identifier {
         return when (animatable.variant) {
-            SeaSlugEntity.Companion.Type.SPOTTED_SEA_HARE -> SPOTTED_SEA_HARE_MODEL
+            SeaSlugEntity.Companion.Type.SEA_HARE -> SPOTTED_SEA_HARE_MODEL
             SeaSlugEntity.Companion.Type.NUDIBRANCH -> NUDIBRANCH_MODEL
         }
     }
 
     override fun getAnimationResource(animatable: SeaSlugEntity): Identifier {
         return when (animatable.variant) {
-            SeaSlugEntity.Companion.Type.SPOTTED_SEA_HARE -> SEA_HARE_ANIMATION
+            SeaSlugEntity.Companion.Type.SEA_HARE -> SEA_HARE_ANIMATION
             SeaSlugEntity.Companion.Type.NUDIBRANCH -> NUDIBRANCH_ANIMATION
         }
     }
