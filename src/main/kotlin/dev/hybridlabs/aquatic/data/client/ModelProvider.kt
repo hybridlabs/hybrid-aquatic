@@ -72,6 +72,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 TextureMap.getSubId(HybridAquaticBlocks.STRAWBERRY_ANEMONE, "_top")
             )
 
+            registerBuiltinWithParticle(
+                HybridAquaticBlocks.GIANT_GREEN_ANEMONE,
+                TextureMap.getSubId(HybridAquaticBlocks.STRAWBERRY_ANEMONE, "_top")
+            )
+
             // simple cubes
             setOf(
                 HybridAquaticBlocks.HYBRID_CRATE,
