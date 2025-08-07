@@ -57,8 +57,7 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
             DataTracker.registerData(CuttlefishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
 
         enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-            RED(0, "red"),
-            BLACK(1, "black");
+            COMMON(0, "red");
 
             override fun asString(): String {
                 return this.key
@@ -73,7 +72,7 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
                 )
 
                 fun byName(name: String?): Type {
-                    return CODEC.byId(name, RED) as Type
+                    return CODEC.byId(name, COMMON) as Type
                 }
 
                 fun fromId(id: Int): Type {
