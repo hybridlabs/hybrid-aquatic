@@ -94,7 +94,6 @@ object HybridAquaticEntityRenderers {
     val CAULIFLOWER_JELLYFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH, ::CauliflowerJellyfishEntityRenderer)
     val NOMURA_JELLYFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.NOMURA_JELLYFISH, ::NomuraJellyfishEntityRenderer)
     val BARREL_JELLYFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.BARREL_JELLYFISH, ::BarrelJellyfishEntityRenderer)
-    val COMPASS_JELLYFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.COMPASS_JELLYFISH, ::CompassJellyfishEntityRenderer)
     val BLUE_JELLYFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.BLUE_JELLYFISH, ::BlueJellyfishEntityRenderer)
     val MAUVE_STINGER = EntityRendererRegistry.register(HybridAquaticEntityTypes.MAUVE_STINGER, ::MauveStingerEntityRenderer)
     val LIONS_MANE_JELLYFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH, ::LionsManeJellyfishEntityRenderer)

@@ -536,7 +536,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH to "Cauliflower Jellyfish",
             HybridAquaticEntityTypes.NOMURA_JELLYFISH to "Nomura Jellyfish",
             HybridAquaticEntityTypes.BARREL_JELLYFISH to "Barrel Jellyfish",
-            HybridAquaticEntityTypes.COMPASS_JELLYFISH to "Compass Jellyfish",
             HybridAquaticEntityTypes.MAUVE_STINGER to "Mauve Stinger",
             HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH to "Lion's Mane Jellyfish",
             HybridAquaticEntityTypes.ATOLLA_JELLYFISH to "Atolla Jellyfish",

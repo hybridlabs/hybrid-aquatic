@@ -640,13 +640,6 @@ object HybridAquaticEntityTypes {
         CauliflowerJellyfishEntity.createMobAttributes()
     )
 
-    val COMPASS_JELLYFISH = registerJelly(
-        "compass_jellyfish",
-        ::CompassJellyfishEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        CompassJellyfishEntity.createMobAttributes()
-    )
-
     val FRIED_EGG_JELLYFISH = registerJelly(
         "fried_egg_jellyfish",
         ::FriedEggJellyfishEntity,

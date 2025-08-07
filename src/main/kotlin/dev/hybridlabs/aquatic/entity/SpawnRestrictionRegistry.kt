@@ -112,7 +112,6 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH,
             HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH,
             HybridAquaticEntityTypes.BLUE_JELLYFISH,
-            HybridAquaticEntityTypes.COMPASS_JELLYFISH,
             HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH,
             HybridAquaticEntityTypes.NOMURA_JELLYFISH,
             HybridAquaticEntityTypes.BARREL_JELLYFISH,

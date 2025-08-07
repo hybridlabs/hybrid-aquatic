@@ -104,10 +104,6 @@ open class HybridAquaticJellyfishEntity(
         return 0.4f
     }
 
-    override fun getMoveEffect(): MoveEffect {
-        return MoveEffect.EVENTS
-    }
-
     override fun tick() {
         super.tick()
         if (isAiDisabled) {
