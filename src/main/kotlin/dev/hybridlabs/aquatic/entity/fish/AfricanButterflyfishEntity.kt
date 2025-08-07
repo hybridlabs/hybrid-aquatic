@@ -8,7 +8,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 
-class AfricanButterflyEntity(entityType: EntityType<out AfricanButterflyEntity>, world: World) :
+class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfishEntity>, world: World) :
     HybridAquaticFishEntity(
         entityType, world,
         listOf(HybridAquaticEntityTags.NONE),

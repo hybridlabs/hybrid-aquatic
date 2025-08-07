@@ -442,7 +442,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         val entityNameMap = mapOf(
             HybridAquaticEntityTypes.CLOWNFISH to "Clownfish",
             HybridAquaticEntityTypes.DAMSELFISH to "Damselfish",
-            HybridAquaticEntityTypes.AFRICAN_BUTTERFLY to "African Butterfly Fish",
+            HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH to "African Butterflyfish",
             HybridAquaticEntityTypes.ANGLERFISH to "Anglerfish",
             HybridAquaticEntityTypes.JOHN_DORY to "John Dory",
             HybridAquaticEntityTypes.SNAILFISH to "Snailfish",

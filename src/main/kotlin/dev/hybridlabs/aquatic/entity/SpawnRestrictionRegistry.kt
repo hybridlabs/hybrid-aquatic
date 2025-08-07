@@ -23,7 +23,7 @@ object SpawnRestrictionRegistry {
     fun registerSpawnRestrictions() {
         // shallow fish
         setOf(
-            HybridAquaticEntityTypes.AFRICAN_BUTTERFLY,
+            HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH,
             HybridAquaticEntityTypes.FLYING_FISH,
             HybridAquaticEntityTypes.DAMSELFISH,
             HybridAquaticEntityTypes.TIGER_BARB,

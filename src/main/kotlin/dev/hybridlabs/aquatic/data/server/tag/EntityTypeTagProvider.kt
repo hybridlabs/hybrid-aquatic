@@ -32,7 +32,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.DAMSELFISH,
                 HybridAquaticEntityTypes.GOURAMI,
                 HybridAquaticEntityTypes.CUTTLEFISH,
-                HybridAquaticEntityTypes.AFRICAN_BUTTERFLY,
+                HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH,
                 HybridAquaticEntityTypes.FLYING_FISH,
                 HybridAquaticEntityTypes.SQUIRRELFISH,
                 HybridAquaticEntityTypes.STONEFISH,
@@ -321,7 +321,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         // fish
         getOrCreateTagBuilder(HybridAquaticEntityTags.FISH)
             .add(
-                HybridAquaticEntityTypes.AFRICAN_BUTTERFLY,
+                HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH,
                 HybridAquaticEntityTypes.STONEFISH,
                 HybridAquaticEntityTypes.DAMSELFISH,
                 HybridAquaticEntityTypes.PEARLFISH,

@@ -27,11 +27,11 @@ object HybridAquaticEntityTypes {
 
     //#region fish
 
-    val AFRICAN_BUTTERFLY = registerFish(
-        "african_butterfly",
-        ::AfricanButterflyEntity,
+    val AFRICAN_BUTTERFLYFISH = registerFish(
+        "african_butterflyfish",
+        ::AfricanButterflyfishEntity,
         EntityDimensions.fixed(0.25f, 0.2f),
-        AfricanButterflyEntity.createMobAttributes()
+        AfricanButterflyfishEntity.createMobAttributes()
     )
 
     val DAMSELFISH = registerFish(
