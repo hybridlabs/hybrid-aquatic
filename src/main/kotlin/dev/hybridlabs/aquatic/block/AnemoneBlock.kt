@@ -1,18 +1,11 @@
+@file:Suppress("OVERRIDE_DEPRECATION")
+
 package dev.hybridlabs.aquatic.block
 
-import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import net.minecraft.block.Block
-import net.minecraft.block.BlockEntityProvider
-import net.minecraft.block.BlockRenderType
-import net.minecraft.block.BlockState
-import net.minecraft.block.BlockWithEntity
-import net.minecraft.block.Blocks
-import net.minecraft.block.PlantBlock
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.Waterloggable
+import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
@@ -33,11 +26,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.random.Random
 import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockView
-import net.minecraft.world.GameRules
-import net.minecraft.world.World
-import net.minecraft.world.WorldView
-import net.minecraft.world.tick.ScheduledTickView
+import net.minecraft.world.*
 
 class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
     init {
@@ -69,7 +58,7 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         }
     }
 
-    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity): BlockState {
+    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
         if (world is ServerWorld) {
             if (player.isCreative && world.gameRules.getBoolean(GameRules.DO_TILE_DROPS)) {
                 val blockEntity = world.getBlockEntity(pos)
@@ -87,18 +76,13 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
     }
 
     override fun getStateForNeighborUpdate(
-        state: BlockState,
-        world: WorldView,
-        tickView: ScheduledTickView,
-        pos: BlockPos,
-        direction: Direction,
-        neighborPos: BlockPos,
-        neighborState: BlockState,
-        random: Random
-    ): BlockState {
-        if (state.get(WATERLOGGED)) {
-            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
-        }
+        state: BlockState?,
+        direction: Direction?,
+        neighborState: BlockState?,
+        world: WorldAccess?,
+        pos: BlockPos?,
+        neighborPos: BlockPos?
+    ): BlockState? {
 
         return if (!canPlaceAt(state, world, pos)) {
             Blocks.AIR.defaultState
@@ -147,17 +131,16 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         builder.add(WATERLOGGED)
     }
 
-    override fun getCodec(): MapCodec<out PlantBlock> {
-        return CODEC
-    }
-
-    override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
+    override fun canPathfindThrough(
+        state: BlockState?,
+        world: BlockView?,
+        pos: BlockPos?,
+        type: NavigationType?
+    ): Boolean {
         return false
     }
 
     companion object {
-        val CODEC: MapCodec<AnemoneBlock> = createCodec(::AnemoneBlock)
-
         private val SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
         private val COLLISION_SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0)
     }

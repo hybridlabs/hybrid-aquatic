@@ -22,6 +22,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.registry.tag.TagKey
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.TimeHelper
@@ -33,11 +34,14 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
-import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.*
-import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.core.animatable.GeoAnimatable
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.*
 
@@ -154,12 +158,13 @@ open class HybridAquaticSharkEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?
+        entityData: EntityData?,
+        entityNBT: NbtCompound?
     ): EntityData? {
         this.air = getMaxMoistness()
         pitch = 0.0f
         this.size = this.random.nextBetween(getMinSize(),getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData)
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNBT)
     }
 
     override fun tick() {
@@ -173,14 +178,14 @@ open class HybridAquaticSharkEntity(
             moistness -= 1
             if (moistness <= -20) {
                 moistness = 0
-                damage(world, this.damageSources.dryOut(), 1.0f)
+                damage(this.damageSources.dryOut(), 1.0f)
             }
         }
 
         if (isAttacking) {
-            attributes.getCustomInstance(EntityAttributes.MOVEMENT_SPEED)?.baseValue = 3.0
+            attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 3.0
         } else {
-            attributes.getCustomInstance(EntityAttributes.MOVEMENT_SPEED)?.baseValue = 1.0
+            attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 1.0
         }
 
         if (world.isClient && isTouchingWater && isAttacking) {
@@ -248,6 +253,7 @@ open class HybridAquaticSharkEntity(
         }
         return PlayState.CONTINUE
     }
+
     protected open fun getMinSize() : Int {
         return 0
     }
@@ -347,10 +353,10 @@ open class HybridAquaticSharkEntity(
         return 0
     }
 
-    override fun dropLoot(world: ServerWorld, source: DamageSource, causedByPlayer: Boolean) {
+    override fun dropLoot(source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.attacker
         if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity) {
-            super.dropLoot(world, source, causedByPlayer)
+            super.dropLoot(source, causedByPlayer)
         }
     }
 

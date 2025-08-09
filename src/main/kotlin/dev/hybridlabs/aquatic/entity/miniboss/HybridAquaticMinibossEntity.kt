@@ -20,21 +20,18 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
-import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar
-import software.bernie.geckolib.animation.Animation
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.PlayState
-import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animatable.GeoAnimatable
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.core.animation.*
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
-open class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, world: World) : HostileEntity(type, world), GeoEntity {
+open class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, world: World) : HostileEntity(type, world),
+    GeoEntity {
 
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var attackTick = 0
@@ -88,7 +85,7 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, worl
         return false
     }
 
-    override fun registerControllers(controllerRegistrar: ControllerRegistrar) {
+    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(AnimationController(this, "controller", ::predicate))
         controllerRegistrar.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_STRIKE))
     }
@@ -106,7 +103,8 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, worl
         return factory
     }
 
-    internal open class AttackGoal(private val miniboss: HybridAquaticMinibossEntity) : MeleeAttackGoal(miniboss, 0.6, false) {
+    internal open class AttackGoal(private val miniboss: HybridAquaticMinibossEntity) :
+        MeleeAttackGoal(miniboss, 0.6, false) {
         override fun attack(target: LivingEntity, squaredDistance: Double) {
             val d = getSquaredMaxAttackDistance(target)
             if (squaredDistance <= d && this.isCooledDown) {
@@ -137,8 +135,8 @@ open class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, worl
 
     companion object {
 
-        val WALK_ANIMATION: RawAnimation  = RawAnimation.begin().then("walk", Animation.LoopType.LOOP)
-        val IDLE_ANIMATION: RawAnimation  = RawAnimation.begin().then("idle", Animation.LoopType.LOOP)
+        val WALK_ANIMATION: RawAnimation = RawAnimation.begin().then("walk", Animation.LoopType.LOOP)
+        val IDLE_ANIMATION: RawAnimation = RawAnimation.begin().then("idle", Animation.LoopType.LOOP)
 
         val ATTEMPT_ATTACK: TrackedData<Boolean> =
             DataTracker.registerData(HybridAquaticMinibossEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)

@@ -98,7 +98,7 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
         if (world is ServerWorld) {
             if (isAlive && getPuffState() > 0) {
                 val nearbyEntities = world.getEntitiesByClass(MobEntity::class.java, boundingBox.expand(0.3)) {
-                    BLOW_UP_TARGET_PREDICATE.test(world, this, it)
+                    BLOW_UP_TARGET_PREDICATE.test(this, it)
                 }
                 nearbyEntities.forEach { sting(it) }
             }
@@ -110,7 +110,7 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
         if (world is ServerWorld) {
             val puffLevel = getPuffState()
             val damageSource = this.damageSources.mobAttack(this)
-            if (mob.damage(world, damageSource, (1 + puffLevel).toFloat())) {
+            if (mob.damage(damageSource, (1 + puffLevel).toFloat())) {
                 mob.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 60 * puffLevel, 0), this)
                 playSound(SoundEvents.ENTITY_PUFFER_FISH_STING, 1.0f, 1.0f)
             }
@@ -121,7 +121,7 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
         val world = world
         if (world is ServerWorld) {
             val puffLevel = getPuffState()
-            if (puffLevel > 0 && player.damage(world, this.damageSources.mobAttack(this), (1 + puffLevel).toFloat())) {
+            if (puffLevel > 0 && player.damage(this.damageSources.mobAttack(this), (1 + puffLevel).toFloat())) {
                 player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 60 * puffLevel, 0), this)
             }
         }
@@ -132,7 +132,7 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
             val world = world
             if (world is ServerWorld) {
                 val nearbyEntities = world.getEntitiesByClass(LivingEntity::class.java, boundingBox.expand(2.0)) {
-                    BLOW_UP_TARGET_PREDICATE.test(world, this@ToadfishEntity, it)
+                    BLOW_UP_TARGET_PREDICATE.test(this@ToadfishEntity, it)
                 }
                 return nearbyEntities.isNotEmpty()
             }
@@ -153,11 +153,10 @@ class ToadfishEntity(entityType: EntityType<out ToadfishEntity>, world: World) :
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.MAX_HEALTH, 3.0)
-                .add(EntityAttributes.MOVEMENT_SPEED, 0.7)
-                .add(EntityAttributes.ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
-                .add(EntityAttributes.STEP_HEIGHT, 1.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.7)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
         }
 
         private val PUFF_STATE: TrackedData<Int> = DataTracker.registerData(ToadfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)

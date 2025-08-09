@@ -31,11 +31,11 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.world.Difficulty
 import net.minecraft.world.World
-import software.bernie.geckolib.animatable.GeoAnimatable
-import software.bernie.geckolib.animation.Animation
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.PlayState
-import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.core.animatable.GeoAnimatable
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 
 class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, world: World) :
     HybridAquaticMinibossEntity(entityType, world) {
@@ -86,13 +86,13 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
             if (flipTimer <= 0) {
                 isFlipped = false
-                attributes.getCustomInstance(EntityAttributes.MOVEMENT_SPEED)?.baseValue = 0.75
-                attributes.getCustomInstance(EntityAttributes.ARMOR_TOUGHNESS)?.baseValue = 5.0
-                attributes.getCustomInstance(EntityAttributes.ARMOR)?.baseValue = 8.0
+                attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 0.75
+                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)?.baseValue = 5.0
+                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR)?.baseValue = 8.0
             } else {
-                attributes.getCustomInstance(EntityAttributes.MOVEMENT_SPEED)?.baseValue = 0.0
-                attributes.getCustomInstance(EntityAttributes.ARMOR_TOUGHNESS)?.baseValue = 0.0
-                attributes.getCustomInstance(EntityAttributes.ARMOR)?.baseValue = 0.0
+                attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 0.0
+                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR_TOUGHNESS)?.baseValue = 0.0
+                attributes.getCustomInstance(EntityAttributes.GENERIC_ARMOR)?.baseValue = 0.0
             }
         }
 
@@ -139,14 +139,14 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         return if (isFlipped) 0.0f else super.getMovementSpeed()
     }
 
-    override fun damage(world: ServerWorld, source: DamageSource, amount: Float): Boolean {
+    override fun damage(source: DamageSource, amount: Float): Boolean {
         val registryManager = world.registryManager
         val dmgSourcesRegistry = damageSources.registry
 
         if (source.type == dmgSourcesRegistry[DamageTypes.ARROW]) return false
         else if (source.type == dmgSourcesRegistry[DamageTypes.IN_WALL]) return false
 
-        val damaged = super.damage(world, source, amount)
+        val damaged = super.damage(source, amount)
 
         if (damaged && source.source is PlayerEntity && !isFlipped) {
             val player = source.source as PlayerEntity
@@ -178,15 +178,14 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.MAX_HEALTH, 300.0)
-                .add(EntityAttributes.MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.ATTACK_DAMAGE, 10.0)
-                .add(EntityAttributes.ATTACK_SPEED, 8.0)
-                .add(EntityAttributes.FOLLOW_RANGE, 32.0)
-                .add(EntityAttributes.KNOCKBACK_RESISTANCE, 50.0)
-                .add(EntityAttributes.ARMOR_TOUGHNESS, 5.0)
-                .add(EntityAttributes.ARMOR, 8.0)
-                .add(EntityAttributes.STEP_HEIGHT, 2.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 300.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10.0)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 8.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 50.0)
+                .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 5.0)
+                .add(EntityAttributes.GENERIC_ARMOR, 8.0)
         }
 
         val FLIPPED_ANIMATION: RawAnimation = RawAnimation.begin().then("flipped", Animation.LoopType.LOOP)

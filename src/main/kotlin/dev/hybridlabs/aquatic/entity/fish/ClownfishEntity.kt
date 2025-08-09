@@ -12,32 +12,50 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World) :
-    HybridAquaticFishEntity(entityType, world, variants = hashMapOf(
-        "ocellaris" to FishVariant.biomeVariant("ocellaris", HybridAquaticBiomeTags.REEF,
-            ignore = listOf(FishVariant.Ignore.ANIMATION)),
-        "percula" to FishVariant.biomeVariant("percula", HybridAquaticBiomeTags.REEF,
-            ignore = listOf(FishVariant.Ignore.ANIMATION)),
-        "whiteband" to FishVariant.biomeVariant("whiteband", HybridAquaticBiomeTags.REEF,
-            ignore = listOf(FishVariant.Ignore.ANIMATION)),
-        "tomato" to FishVariant.biomeVariant("tomato", HybridAquaticBiomeTags.REEF,
-            ignore = listOf(FishVariant.Ignore.ANIMATION)),
-        "cinnamon" to FishVariant.biomeVariant("cinnamon", HybridAquaticBiomeTags.REEF,
-            ignore = listOf(FishVariant.Ignore.ANIMATION)),
-        "clarkii" to FishVariant.biomeVariant("clarkii", HybridAquaticBiomeTags.REEF,
-            ignore = listOf(FishVariant.Ignore.ANIMATION)),
-        "pink_skunk" to FishVariant.biomeVariant("pink_skunk", HybridAquaticBiomeTags.REEF,
-            ignore = listOf(FishVariant.Ignore.ANIMATION)),
-        "orange_skunk" to FishVariant.biomeVariant("orange_skunk", HybridAquaticBiomeTags.REEF,
-            ignore = listOf(FishVariant.Ignore.ANIMATION)),
+    HybridAquaticFishEntity(
+        entityType, world, variants = hashMapOf(
+            "ocellaris" to FishVariant.biomeVariant(
+                "ocellaris", HybridAquaticBiomeTags.REEF,
+                ignore = listOf(FishVariant.Ignore.ANIMATION)
+            ),
+            "percula" to FishVariant.biomeVariant(
+                "percula", HybridAquaticBiomeTags.REEF,
+                ignore = listOf(FishVariant.Ignore.ANIMATION)
+            ),
+            "whiteband" to FishVariant.biomeVariant(
+                "whiteband", HybridAquaticBiomeTags.REEF,
+                ignore = listOf(FishVariant.Ignore.ANIMATION)
+            ),
+            "tomato" to FishVariant.biomeVariant(
+                "tomato", HybridAquaticBiomeTags.REEF,
+                ignore = listOf(FishVariant.Ignore.ANIMATION)
+            ),
+            "cinnamon" to FishVariant.biomeVariant(
+                "cinnamon", HybridAquaticBiomeTags.REEF,
+                ignore = listOf(FishVariant.Ignore.ANIMATION)
+            ),
+            "clarkii" to FishVariant.biomeVariant(
+                "clarkii", HybridAquaticBiomeTags.REEF,
+                ignore = listOf(FishVariant.Ignore.ANIMATION)
+            ),
+            "pink_skunk" to FishVariant.biomeVariant(
+                "pink_skunk", HybridAquaticBiomeTags.REEF,
+                ignore = listOf(FishVariant.Ignore.ANIMATION)
+            ),
+            "orange_skunk" to FishVariant.biomeVariant(
+                "orange_skunk", HybridAquaticBiomeTags.REEF,
+                ignore = listOf(FishVariant.Ignore.ANIMATION)
+            ),
         ),
-        HybridAquaticEntityTags.NONE, HybridAquaticEntityTags.CLOWNFISH_PREDATOR) {
+        HybridAquaticEntityTags.NONE, HybridAquaticEntityTags.CLOWNFISH_PREDATOR
+    ) {
 
     override fun getLimitPerChunk(): Int {
         return 2
     }
 
-    public override fun getLootTableId(): Identifier {
-        return when (this.variant?.variantName) {
+    public override fun getLootTableId(): Identifier? {
+        return when (this.variant.variantName) {
             "ocellaris" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
             "percula" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
             "whiteband" -> Identifier.of("hybrid-aquatic", "entities/clownfish")
@@ -55,11 +73,10 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.MAX_HEALTH, 2.0)
-                .add(EntityAttributes.MOVEMENT_SPEED, 0.7)
-                .add(EntityAttributes.ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
-                .add(EntityAttributes.STEP_HEIGHT, 1.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.7)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
         }
     }
 
@@ -80,7 +97,12 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: World)
     }
 
     private fun navigateToAnemone(ventBlockPos: BlockPos) {
-        this.navigation.startMovingTo(ventBlockPos.x.toDouble(), ventBlockPos.y.toDouble(), ventBlockPos.z.toDouble(), this.getAttributeValue(EntityAttributes.MOVEMENT_SPEED))
+        this.navigation.startMovingTo(
+            ventBlockPos.x.toDouble(),
+            ventBlockPos.y.toDouble(),
+            ventBlockPos.z.toDouble(),
+            this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED)
+        )
     }
 
     private fun findNearbyAnemone(): BlockPos? {

@@ -13,9 +13,9 @@ import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.world.Difficulty
 import net.minecraft.world.World
-import software.bernie.geckolib.animatable.GeoAnimatable
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.core.animatable.GeoAnimatable
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.`object`.PlayState
 
 class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: World) :
     HybridAquaticSchoolingFishEntity(entityType, world, HybridAquaticEntityTags.PIRANHA_PREY, HybridAquaticEntityTags.PIRANHA_PREDATOR) {
@@ -27,13 +27,12 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: World) :
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.MAX_HEALTH, 3.0)
-                .add(EntityAttributes.MOVEMENT_SPEED, 1.0)
-                .add(EntityAttributes.ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.ATTACK_SPEED, 2.0)
-                .add(EntityAttributes.ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
-                .add(EntityAttributes.STEP_HEIGHT, 1.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 2.0)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
         }
     }
 
@@ -78,7 +77,7 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: World) :
         super.tick()
 
         if (isSprinting) {
-            attributes.getCustomInstance(EntityAttributes.MOVEMENT_SPEED)?.baseValue = 1.5
+            attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 1.5
         }
     }
 }

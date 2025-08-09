@@ -16,15 +16,6 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) :
         "sharptail" to FishVariant.biomeVariant("sharptail", HybridAquaticBiomeTags.OCEAN)),
         HybridAquaticEntityTags.SUNFISH_PREY, HybridAquaticEntityTags.SUNFISH_PREDATOR) {
 
-    public override fun getLootTableId(): Identifier {
-        return when (this.variant?.variantName) {
-            "ocean" -> Identifier.of("hybrid-aquatic", "gameplay/sunfish")
-            "hoodwinker" -> Identifier.of("hybrid-aquatic", "gameplay/sunfish")
-            "sharptail" -> Identifier.of("hybrid-aquatic", "gameplay/sunfish")
-            else -> super.getLootTableId()
-        }
-    }
-
     override fun getLimitPerChunk(): Int {
         return 2
     }
@@ -32,12 +23,11 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: World) :
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.MAX_HEALTH, 16.0)
-                .add(EntityAttributes.MOVEMENT_SPEED, 0.5)
-                .add(EntityAttributes.ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.FOLLOW_RANGE, 12.0)
-                .add(EntityAttributes.STEP_HEIGHT, 1.0)
-                .add(EntityAttributes.KNOCKBACK_RESISTANCE, 10.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 12.0)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 10.0)
         }
     }
 }

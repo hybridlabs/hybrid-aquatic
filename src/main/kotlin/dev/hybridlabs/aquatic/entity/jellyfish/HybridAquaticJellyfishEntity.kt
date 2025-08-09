@@ -31,15 +31,11 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
-import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.Animation
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.PlayState
-import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.core.animatable.GeoAnimatable
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.core.animation.*
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
@@ -127,7 +123,7 @@ open class HybridAquaticJellyfishEntity(
                 moistness = 0
 
                 (world as? ServerWorld)?.also { world ->
-                    damage(world, this.damageSources.dryOut(), 1.0f)
+                    damage(this.damageSources.dryOut(), 1.0f)
                 }
             }
         }
@@ -206,8 +202,8 @@ open class HybridAquaticJellyfishEntity(
         }
     }
 
-    override fun damage(world: ServerWorld, source: DamageSource?, amount: Float): Boolean {
-        if (super.damage(world, source, amount) && this.attacker != null) {
+    override fun damage(source: DamageSource?, amount: Float): Boolean {
+        if (super.damage(source, amount) && this.attacker != null) {
             if (!world.isClient) {
                 this.squirt()
             }
@@ -221,7 +217,7 @@ open class HybridAquaticJellyfishEntity(
                 }
             }
 
-            if (super.damage(world, source, amount) && this.attacker != null) {
+            if (super.damage(source, amount) && this.attacker != null) {
                 if (!world.isClient) {
                     this.squirt()
                 }
@@ -242,10 +238,10 @@ open class HybridAquaticJellyfishEntity(
         }
     }
 
-    override fun dropLoot(world: ServerWorld, source: DamageSource, causedByPlayer: Boolean) {
+    override fun dropLoot(source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.attacker
         if (attacker !is TurtleEntity) {
-            super.dropLoot(world, source, causedByPlayer)
+            super.dropLoot(source, causedByPlayer)
         }
     }
 

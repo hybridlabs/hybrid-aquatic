@@ -15,10 +15,10 @@ class BarrelJellyfishEntity(entityType: EntityType<out BarrelJellyfishEntity>, w
     companion object {
         fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.MAX_HEALTH, 6.0)
-                .add(EntityAttributes.MOVEMENT_SPEED, 0.75)
-                .add(EntityAttributes.ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.FOLLOW_RANGE, 20.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.75)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
 
         }
     }
