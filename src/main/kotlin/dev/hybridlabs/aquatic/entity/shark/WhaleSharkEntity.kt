@@ -17,9 +17,9 @@ import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.RawAnimation
 import java.util.function.IntFunction
 
 class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: World) :
@@ -104,13 +104,12 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Worl
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         val overlayID = world.random.nextBetween(0, WhaleSharkEntity.Companion.OverlayTextures.entries.size - 1)
         overlayTexture = OverlayTextures.byId(overlayID)
 
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun getMaxSize(): Int {
@@ -131,9 +130,9 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Worl
         return WhaleSharkEntity.Companion.OverlayTextures.byId(dataTracker.get(OverlayTexture)).asString()
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(OverlayTexture, 0)
-        super.initDataTracker()
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(OverlayTexture, 0)
+        super.initDataTracker(builder)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {

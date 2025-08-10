@@ -104,8 +104,7 @@ class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, w
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         val faceID = world.random.nextBetween(0, FaceScarTextures.entries.size - 1)
         val bodyID = world.random.nextBetween(0, BodyScarTextures.entries.size - 1)
@@ -113,7 +112,7 @@ class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, w
         faceScarTexture = FaceScarTextures.byId(faceID)
         bodyScarTexture = BodyScarTextures.byId(bodyID)
 
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun getMaxSize(): Int {
@@ -143,10 +142,10 @@ class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, w
         return GreatWhiteSharkEntity.Companion.BodyScarTextures.byId(dataTracker.get(BodyScarTexture)).asString()
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(FaceScarTexture, 0)
-        dataTracker.startTracking(BodyScarTexture, 0)
-        super.initDataTracker()
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(FaceScarTexture, 0)
+        builder.add(BodyScarTexture, 0)
+        super.initDataTracker(builder)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {

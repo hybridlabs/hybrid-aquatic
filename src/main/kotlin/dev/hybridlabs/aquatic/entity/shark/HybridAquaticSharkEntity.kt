@@ -35,13 +35,10 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.*
 
@@ -97,18 +94,13 @@ open class HybridAquaticSharkEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = getMaxMoistness()
         pitch = 0.0f
         yaw = 0.0f
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
-    }
-
-    override fun getGroup(): EntityGroup {
-        return EntityGroup.AQUATIC
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun tick() {
@@ -162,12 +154,12 @@ open class HybridAquaticSharkEntity(
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(SHARK_SIZE, 0)
-        dataTracker.startTracking(HUNGER, MAX_HUNGER)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(MOISTNESS, getMaxMoistness())
+        builder.add(SHARK_SIZE, 0)
+        builder.add(HUNGER, MAX_HUNGER)
+        builder.add(ATTEMPT_ATTACK, false)
     }
 
     //#endregion
@@ -206,10 +198,6 @@ open class HybridAquaticSharkEntity(
 
     protected open fun getMaxSize(): Int {
         return 0
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.65f
     }
 
     //#endregion
@@ -360,10 +348,9 @@ open class HybridAquaticSharkEntity(
             return !shark.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.cooldown <= 0 && !target.isBlocking) {
-                resetCooldown()
+        override fun attack(target: LivingEntity) {
+            if (this.canAttack(target)) {
+                this.resetCooldown()
                 shark.swingHand(Hand.MAIN_HAND)
                 shark.tryAttack(target)
                 shark.playSound(SoundEvents.ENTITY_FOX_BITE, 0.5F, 0.0F)
@@ -376,10 +363,6 @@ open class HybridAquaticSharkEntity(
                     shark.dropStack(ItemStack(HybridAquaticItems.SHARK_TOOTH))
                 }
             }
-        }
-
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (shark.width * 2.5 + entity.width)
         }
 
         override fun start() {
@@ -430,6 +413,7 @@ open class HybridAquaticSharkEntity(
         val ATTEMPT_ATTACK: TrackedData<Boolean> =
             DataTracker.registerData(HybridAquaticSharkEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
         val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(10, 30)
+
         val BEACHED: RawAnimation = RawAnimation.begin().thenPlay("misc.beached")
 
         //#region Spawning

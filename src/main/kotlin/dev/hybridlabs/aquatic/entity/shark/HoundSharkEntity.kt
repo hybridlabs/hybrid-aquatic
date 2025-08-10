@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.shark
 
+import dev.hybridlabs.aquatic.entity.cephalopod.CuttlefishEntity
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
@@ -20,22 +21,20 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
-@Suppress("DEPRECATION")
 class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: World) :
     HybridAquaticSharkEntity(
         entityType, world, listOf(HybridAquaticEntityTags.CEPHALOPOD, HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN), false, false
     ),
-    VariantHolder<HoundSharkEntity.Type> {
+    VariantHolder<HoundSharkEntity.Companion.Type> {
 
     override fun initialize(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         variant = Type.entries.random(Random)
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun getLimitPerChunk(): Int {
@@ -57,6 +56,32 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Worl
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
         }
         val TYPE: TrackedData<Int> = DataTracker.registerData(HoundSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            LEOPARD(0, "leopard");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.EnumCodec<Type> = StringIdentifiable.createCodec { HoundSharkEntity.Companion.Type.entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, LEOPARD)
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
     override fun getMaxSize(): Int {
@@ -67,9 +92,9 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Worl
         return -3
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        super.initDataTracker()
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(TYPE, 0)
+        super.initDataTracker(builder)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
@@ -81,32 +106,6 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Worl
         this.variant = Type.byName(nbt.getString("Type"))
         super.readCustomDataFromNbt(nbt)
     }
-
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
-        LEOPARD(0, "leopard");
-
-        override fun asString(): String {
-            return this.key
-        }
-
-        companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
-                { obj: Type -> obj.id },
-                entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
-            )
-
-            fun byName(name: String?): Type {
-                return CODEC.byId(name, LEOPARD) as Type
-            }
-
-            fun fromId(id: Int): Type {
-                return BY_ID.apply(id) as Type
-            }
-        }
-    }
-
     override fun getVariant(): Type {
         return Type.fromId((dataTracker.get(TYPE) as Int))
     }
