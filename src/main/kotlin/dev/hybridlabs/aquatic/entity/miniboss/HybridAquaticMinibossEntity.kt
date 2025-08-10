@@ -13,7 +13,7 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -24,9 +24,9 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, 
 
     private var attackTick = 0
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(ATTEMPT_ATTACK, false)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
@@ -57,10 +57,6 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, 
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
         return false
-    }
-
-    override fun canBreatheInWater(): Boolean {
-        return true
     }
 
     override fun isAngryAt(player: PlayerEntity?): Boolean {
