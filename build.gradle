@@ -1,7 +1,7 @@
 //file:noinspection ALL
 
 plugins {
-    id "fabric-loom" version "1.10-SNAPSHOT"
+    id "fabric-loom" version "1.11-SNAPSHOT"
     id "maven-publish"
     id "org.jetbrains.kotlin.jvm"
 }
@@ -45,11 +45,6 @@ repositories {
     }
 
     maven {
-        name = "Debug Utils (GitLab)"
-        url  = "https://gitlab.com/api/v4/projects/21830712/packages/maven/"
-    }
-
-    maven {
         name = "Minecraft Forge"
         url  = "https://maven.minecraftforge.net/"
     }
@@ -73,7 +68,6 @@ dependencies {
     modImplementation "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
     modImplementation "com.terraformersmc:modmenu:$mod_menu_version"
 
-    modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
     modRuntimeOnly "maven.modrinth:carpet:$carpet_version"
 
     include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")
