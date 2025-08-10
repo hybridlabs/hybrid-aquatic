@@ -28,11 +28,11 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER", "unused")
@@ -49,13 +49,12 @@ open class HybridAquaticDolphinEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = this.maxAir
         this.pitch = 0.0f
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     protected open fun getMinSize(): Int {
@@ -83,10 +82,6 @@ open class HybridAquaticDolphinEntity(
         return factory
     }
 
-    override fun canBreatheInWater(): Boolean {
-        return false
-    }
-
     override fun tickWaterBreathingAir(air: Int) {
     }
 
@@ -102,10 +97,10 @@ open class HybridAquaticDolphinEntity(
             dataTracker.set(DOLPHIN_SIZE, size)
         }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(DOLPHIN_SIZE, 0)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(MOISTNESS, getMaxMoistness())
+        builder.add(DOLPHIN_SIZE, 0)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
@@ -157,10 +152,6 @@ open class HybridAquaticDolphinEntity(
 
     override fun getNextAirOnLand(air: Int): Int {
         return this.maxAir
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
-        return 0.3f
     }
 
     override fun getMaxLookPitchChange(): Int {
