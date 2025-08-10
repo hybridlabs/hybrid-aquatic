@@ -48,7 +48,7 @@ class CepheidaeJellyfishEntity(entityType: EntityType<out CepheidaeJellyfishEnti
             }
 
             companion object {
-                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                val CODEC: StringIdentifiable.EnumCodec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
                 private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
                     { obj: Type -> obj.id },
                     entries.toTypedArray(),
@@ -70,11 +70,10 @@ class CepheidaeJellyfishEntity(entityType: EntityType<out CepheidaeJellyfishEnti
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         variant = Type.entries.random(Random)
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun getMaxSize(): Int {
@@ -85,9 +84,9 @@ class CepheidaeJellyfishEntity(entityType: EntityType<out CepheidaeJellyfishEnti
         return -5
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        super.initDataTracker()
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(TYPE, 0)
+        super.initDataTracker(builder)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
