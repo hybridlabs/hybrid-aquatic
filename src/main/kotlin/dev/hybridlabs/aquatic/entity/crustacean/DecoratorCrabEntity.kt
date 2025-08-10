@@ -17,7 +17,6 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
-import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
@@ -31,10 +30,6 @@ import kotlin.random.Random
 class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
     HybridAquaticCrustaceanEntity(entityType, world, false),
     VariantHolder<DecoratorCrabEntity.Companion.Type> {
-
-    override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/decorator_crab")
-    }
 
     var coralTimer: Int
         get() = dataTracker.get(CORAL_TIMER)
@@ -68,11 +63,10 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         variant = Type.entries.random(Random)
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -98,7 +92,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
             }
 
             companion object {
-                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                val CODEC: StringIdentifiable.EnumCodec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
                 private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
                     { obj: Type -> obj.id },
                     entries.toTypedArray(),
@@ -124,10 +118,10 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         return -5
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        dataTracker.startTracking(CORAL_TIMER, 0)
-        super.initDataTracker()
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(TYPE, 0)
+        builder.add(CORAL_TIMER, 0)
+        super.initDataTracker(builder)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {

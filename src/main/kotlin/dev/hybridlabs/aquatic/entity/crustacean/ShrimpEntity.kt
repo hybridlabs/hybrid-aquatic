@@ -66,13 +66,12 @@ class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, wo
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         val overlayID = world.random.nextBetween(0, OverlayTextures.entries.size - 1)
         overlayTexture = OverlayTextures.byId(overlayID)
 
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun getMaxSize() : Int {
@@ -93,9 +92,9 @@ class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, wo
         return ShrimpEntity.Companion.OverlayTextures.byId(dataTracker.get(OverlayTexture)).asString()
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(OverlayTexture, 0)
-        super.initDataTracker()
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(OverlayTexture, 0)
+        super.initDataTracker(builder)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {

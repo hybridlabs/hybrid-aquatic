@@ -5,7 +5,6 @@ import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
@@ -29,13 +28,9 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("DEPRECATION", "LeakingThis", "UNUSED_PARAMETER")
@@ -60,10 +55,10 @@ open class HybridAquaticCrustaceanEntity(
             dataTracker.set(CRUSTACEAN_SIZE, size)
         }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(CRUSTACEAN_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(CRUSTACEAN_SIZE, 0)
+        builder.add(ATTEMPT_ATTACK, false)
     }
 
     override fun initGoals() {
@@ -79,11 +74,10 @@ open class HybridAquaticCrustaceanEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     // region movement
@@ -163,10 +157,6 @@ open class HybridAquaticCrustaceanEntity(
 
     // end region
 
-    override fun getGroup(): EntityGroup {
-        return EntityGroup.AQUATIC
-    }
-
     protected open fun getMinSize(): Int {
         return 0
     }
@@ -208,10 +198,6 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     // region water breathing
-
-    override fun canBreatheInWater(): Boolean {
-        return true
-    }
 
     override fun tickWaterBreathingAir(air: Int) {
     }

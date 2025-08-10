@@ -10,7 +10,9 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.loot.LootTable
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.RegistryKey
 import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
@@ -30,14 +32,13 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         variant = Type.entries.random(Random)
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getLootTableId(): Identifier {
+    override fun getLootTableId(): RegistryKey<LootTable> {
         return when (variant) {
             Type.SHELL -> HybridAquaticLootTables.HERMIT_CRAB_SHELL
             Type.SKULL -> HybridAquaticLootTables.HERMIT_CRAB_SKULL
@@ -66,7 +67,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
             }
 
             companion object {
-                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                val CODEC: StringIdentifiable.EnumCodec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
                 private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
                     { obj: Type -> obj.id },
                     entries.toTypedArray(),
@@ -92,9 +93,9 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         return -5
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        super.initDataTracker()
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(TYPE, 0)
+        super.initDataTracker(builder)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
