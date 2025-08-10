@@ -47,7 +47,7 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
             }
 
             companion object {
-                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                val CODEC: StringIdentifiable.EnumCodec<Type> = StringIdentifiable.createCodec { Type.entries.toTypedArray() }
                 private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
                     { obj: Type -> obj.id },
                     entries.toTypedArray(),
@@ -87,13 +87,12 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         val biome = world.getBiome(this.blockPos)
         val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun getMaxSize(): Int {
@@ -104,9 +103,9 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: World) :
         return -5
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        super.initDataTracker()
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(TYPE, 0)
+        super.initDataTracker(builder)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {

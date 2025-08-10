@@ -86,7 +86,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             }
 
             companion object {
-                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                val CODEC: StringIdentifiable.EnumCodec<Type> = StringIdentifiable.createCodec { StarfishEntity.Companion.Type.entries.toTypedArray() }
                 private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
                     { obj: Type -> obj.id },
                     entries.toTypedArray(),
@@ -140,8 +140,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         val biome = world.getBiome(this.blockPos)
         val selectedType = Type.fromBiome(biome, Random.Default)
@@ -152,7 +151,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             Type.SMALL -> OverlayTextures.byId(listOf(0, 1, 2, 3).random(Random))
             Type.MEDIUM -> OverlayTextures.byId(listOf(0, 4, 5, 6).random(Random))
         }
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun getMaxSize(): Int {
@@ -172,10 +171,10 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
         return StarfishEntity.Companion.OverlayTextures.byId(dataTracker.get(OverlayTexture)).asString()
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        dataTracker.startTracking(OverlayTexture, 0)
-        super.initDataTracker()
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(TYPE, 0)
+        builder.add(OverlayTexture, 0)
+        super.initDataTracker(builder)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {

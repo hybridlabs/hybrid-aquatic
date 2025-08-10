@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.MoveControl
@@ -23,9 +22,9 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -61,10 +60,10 @@ open class HybridAquaticCritterEntity(
         return 1.0F
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(CRITTER_SIZE, 0)
-        dataTracker.startTracking(CRITTER_FLAGS, 0.toByte())
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(CRITTER_SIZE, 0)
+        builder.add(CRITTER_FLAGS, 0.toByte())
     }
 
     override fun initGoals() {
@@ -80,12 +79,11 @@ open class HybridAquaticCritterEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         this.air = this.maxAir
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun shouldSwimInFluids(): Boolean {
@@ -106,10 +104,6 @@ open class HybridAquaticCritterEntity(
         super.readCustomDataFromNbt(nbt)
         size = nbt.getInt(CRITTER_SIZE_KEY)
         fromFishingNet = nbt.getBoolean("FromFishingNet")
-    }
-
-    override fun getGroup(): EntityGroup {
-        return EntityGroup.AQUATIC
     }
 
     override fun tickWaterBreathingAir(air: Int) {}
@@ -146,10 +140,6 @@ open class HybridAquaticCritterEntity(
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
-    }
-
-    override fun canBreatheInWater(): Boolean {
-        return true
     }
 
     var size: Int
