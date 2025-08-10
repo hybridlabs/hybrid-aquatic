@@ -12,6 +12,7 @@ import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.StringIdentifiable.EnumCodec
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
@@ -19,7 +20,6 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
-@Suppress("DEPRECATION")
 class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: World) :
     HybridAquaticCephalopodEntity(
         entityType,
@@ -33,14 +33,13 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
 
 
     override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        world: ServerWorldAccess?,
+        difficulty: LocalDifficulty?,
+        spawnReason: SpawnReason?,
+        entityData: EntityData?
     ): EntityData? {
         variant = Type.entries.random(Random)
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -64,7 +63,7 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
             }
 
             companion object {
-                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                val CODEC: EnumCodec<Type> = StringIdentifiable.createCodec { Type.entries.toTypedArray() }
                 private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
                     { obj: Type -> obj.id },
                     entries.toTypedArray(),
@@ -72,7 +71,7 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
                 )
 
                 fun byName(name: String?): Type {
-                    return CODEC.byId(name, COMMON) as Type
+                    return CODEC.byId(name, COMMON)
                 }
 
                 fun fromId(id: Int): Type {
@@ -90,9 +89,9 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Worl
         return -5
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        super.initDataTracker()
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(TYPE, 0)
+        super.initDataTracker(builder)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {

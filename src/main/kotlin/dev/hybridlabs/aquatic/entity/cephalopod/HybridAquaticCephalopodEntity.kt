@@ -2,7 +2,10 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
-import net.minecraft.entity.*
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.control.AquaticMoveControl
 import net.minecraft.entity.ai.control.YawAdjustingLookControl
 import net.minecraft.entity.ai.goal.ActiveTargetGoal
@@ -35,12 +38,12 @@ import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.EasingType
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.EasingType
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
@@ -63,25 +66,24 @@ open class HybridAquaticCephalopodEntity(
             ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { hunger <= 1200 && it.type.isIn(prey) })
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(CEPHALOPOD_SIZE, 0)
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
-        dataTracker.startTracking(HUNGER, MAX_HUNGER)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(MOISTNESS, getMaxMoistness())
+        builder.add(CEPHALOPOD_SIZE, 0)
+        builder.add(ATTEMPT_ATTACK, false)
+        builder.add(HUNGER, MAX_HUNGER)
     }
 
     override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        world: ServerWorldAccess?,
+        difficulty: LocalDifficulty?,
+        spawnReason: SpawnReason?,
+        entityData: EntityData?
     ): EntityData? {
         this.air = getMaxMoistness()
         this.size = this.random.nextBetween(getMinSize(), getMaxSize())
         this.pitch = 0.0f
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun tick() {
@@ -200,10 +202,6 @@ open class HybridAquaticCephalopodEntity(
         size = nbt.getInt(CEPHALOPOD_SIZE_KEY)
         hunger = nbt.getInt(HUNGER_KEY)
         fromFishingNet = nbt.getBoolean("FromFishingNet")
-    }
-
-    override fun getActiveEyeHeight(pose: EntityPose?, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
     }
 
     override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
@@ -326,11 +324,10 @@ open class HybridAquaticCephalopodEntity(
             return !cephalopod.fromFishingNet && super.canStart()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
-                resetCooldown()
-                mob.tryAttack(target)
+        override fun attack(target: LivingEntity) {
+            if (this.canAttack(target)) {
+                this.resetCooldown()
+                this.mob.tryAttack(target)
                 cephalopod.isSprinting = true
                 cephalopod.attemptAttack = true
 
@@ -338,10 +335,6 @@ open class HybridAquaticCephalopodEntity(
                     cephalopod.hunger = HybridAquaticSharkEntity.MAX_HUNGER
                 cephalopod.health = cephalopod.maxHealth
             }
-        }
-
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (1.25f + entity.width).toDouble()
         }
 
         override fun start() {
