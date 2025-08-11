@@ -7,9 +7,7 @@ import net.minecraft.util.math.BlockPos
 import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.*
-import software.bernie.geckolib.core.animation.*
 import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
 
 class GiantGreenAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(HybridAquaticBlockEntityTypes.GIANT_GREEN_ANEMONE, pos, state),

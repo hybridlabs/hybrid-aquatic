@@ -8,12 +8,7 @@ import net.minecraft.util.math.BlockPos
 import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.*
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
 
 class StrawberryAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(HybridAquaticBlockEntityTypes.STRAWBERRY_ANEMONE, pos, state), GeoAnimatable {
