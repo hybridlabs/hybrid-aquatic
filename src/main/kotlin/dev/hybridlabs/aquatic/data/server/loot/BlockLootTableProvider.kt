@@ -11,7 +11,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.block.DeadCoralWallFanBlock
 import net.minecraft.block.WallTorchBlock
-import net.minecraft.item.BlockItem.BLOCK_ENTITY_TAG_KEY
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.condition.MatchToolLootCondition
@@ -22,16 +21,27 @@ import net.minecraft.loot.function.CopyNbtLootFunction
 import net.minecraft.loot.provider.nbt.ContextLootNbtProvider
 import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.registry.Registries
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.ItemTags
+import java.util.concurrent.CompletableFuture
 
-class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTableProvider(output) {
+@Suppress("DEPRECATION")
+class BlockLootTableProvider(
+    output: FabricDataOutput,
+    registryLookup: CompletableFuture<RegistryWrapper.WrapperLookup>?
+) : FabricBlockLootTableProvider(output, registryLookup) {
+
+    private val BLOCK_ENTITY_TAG_KEY = "block_entity"
+
     override fun generate() {
         // anemone
         addDrop(HybridAquaticBlocks.ANEMONE) { block ->
             LootTable.builder().pool(
                 LootPool.builder()
                     .with(ItemEntry.builder(block))
-                    .conditionally(WITH_SILK_TOUCH_OR_SHEARS)
+                    .conditionally(WITH_SHEARS)
             )
         }
 
@@ -39,7 +49,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder()
                     .with(ItemEntry.builder(block))
-                    .conditionally(WITH_SILK_TOUCH_OR_SHEARS)
+                    .conditionally(WITH_SHEARS)
             )
         }
 
@@ -47,7 +57,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder()
                     .with(ItemEntry.builder(block))
-                    .conditionally(WITH_SILK_TOUCH_OR_SHEARS)
+                    .conditionally(WITH_SHEARS)
             )
         }
 
@@ -55,7 +65,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder()
                     .with(ItemEntry.builder(block))
-                    .conditionally(WITH_SILK_TOUCH_OR_SHEARS)
+                    .conditionally(WITH_SHEARS)
             )
         }
 
@@ -83,19 +93,24 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         //endregion
 
         //region corals
+        addDropWithSilkTouch(HybridAquaticBlocks.GIANT_CLAM)
         addDropWithSilkTouch(HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK)
-        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK)
         addDropWithSilkTouch(HybridAquaticBlocks.LOPHELIA_CORAL)
         addDropWithSilkTouch(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL)
         addDropWithSilkTouch(HybridAquaticBlocks.LOPHELIA_CORAL_FAN)
         addDropWithSilkTouch(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN)
 
         addDropWithSilkTouch(HybridAquaticBlocks.THORN_CORAL_BLOCK)
-        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK)
         addDropWithSilkTouch(HybridAquaticBlocks.THORN_CORAL)
         addDropWithSilkTouch(HybridAquaticBlocks.DEAD_THORN_CORAL)
         addDropWithSilkTouch(HybridAquaticBlocks.THORN_CORAL_FAN)
         addDropWithSilkTouch(HybridAquaticBlocks.DEAD_THORN_CORAL_FAN)
+
+        addDropWithSilkTouch(HybridAquaticBlocks.SUN_CORAL_BLOCK)
+        addDropWithSilkTouch(HybridAquaticBlocks.SUN_CORAL)
+        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_SUN_CORAL)
+        addDropWithSilkTouch(HybridAquaticBlocks.SUN_CORAL_FAN)
+        addDropWithSilkTouch(HybridAquaticBlocks.DEAD_SUN_CORAL_FAN)
 
         //endregion
 
@@ -104,8 +119,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        ItemEntry.builder(block).conditionally(WITH_SILK_TOUCH),
-                        LootTableEntry.builder(HybridAquaticLootTables.VENT_LOOT_ID)
+                        ItemEntry.builder(block)
+                            .conditionally(createSilkTouchCondition()),
+                        LootTableEntry.builder(
+                            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.VENT_LOOT_ID)
+                        )
                     )
                 )
             )
@@ -116,7 +134,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        ItemEntry.builder(block).conditionally(WITH_SILK_TOUCH).apply(
+                        ItemEntry.builder(block).conditionally(createSilkTouchCondition()).apply(
                             CopyNbtLootFunction.builder(ContextLootNbtProvider.BLOCK_ENTITY)
                                 .withOperation(VARIANT_KEY, "$BLOCK_ENTITY_TAG_KEY.$VARIANT_KEY")
                                 .withOperation(MESSAGE_KEY, "$BLOCK_ENTITY_TAG_KEY.$MESSAGE_KEY")
@@ -135,9 +153,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(HybridAquaticLootTables.CRAB_POT_TREASURE_ID).conditionally(
-                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
-                        ),
+                        LootTableEntry.builder(
+                            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.CRAB_POT_TREASURE_ID)
+                        )
+                            .conditionally(
+                                MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                            ),
                         ItemEntry.builder(block),
                     )
                 )
@@ -148,9 +169,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID).conditionally(
-                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
-                        ),
+                        LootTableEntry.builder(
+                            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID)
+                        )
+                            .conditionally(
+                                MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                            ),
                         ItemEntry.builder(block),
                     )
                 )
@@ -161,9 +185,14 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID).conditionally(
-                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
-                        ),
+                        LootTableEntry.builder(
+                            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
+                        )
+                            .conditionally(
+                                MatchToolLootCondition.builder(
+                                    ItemPredicate.Builder.create().tag(ItemTags.AXES)
+                                )
+                            ),
                         ItemEntry.builder(block),
                     )
                 )
@@ -174,9 +203,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID).conditionally(
-                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
-                        ),
+                        LootTableEntry.builder(
+                            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID)
+                        )
+                            .conditionally(
+                                MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                            ),
                         ItemEntry.builder(block),
                     )
                 )
@@ -187,9 +219,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID).conditionally(
-                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
-                        ),
+                        LootTableEntry.builder(
+                            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID)
+                        )
+                            .conditionally(
+                                MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                            ),
                         ItemEntry.builder(block),
                     )
                 )
@@ -200,9 +235,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID).conditionally(
-                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
-                        ),
+                        LootTableEntry.builder(
+                            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID)
+                        )
+                            .conditionally(
+                                MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                            ),
                         ItemEntry.builder(block),
                     )
                 )
@@ -213,9 +251,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID).conditionally(
-                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
-                        ),
+                        LootTableEntry.builder(
+                            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID)
+                        )
+                            .conditionally(
+                                MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                            ),
                         ItemEntry.builder(block),
                     )
                 )
@@ -226,9 +267,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID).conditionally(
-                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
-                        ),
+                        LootTableEntry.builder(
+                            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID)
+                        )
+                            .conditionally(
+                                MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                            ),
                         ItemEntry.builder(block),
                     )
                 )
@@ -239,9 +283,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID).conditionally(
-                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
-                        ),
+                        LootTableEntry.builder(
+                            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID)
+                        )
+                            .conditionally(
+                                MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                            ),
                         ItemEntry.builder(block),
                     )
                 )
@@ -252,9 +299,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.builder().pool(
                 LootPool.builder().with(
                     AlternativeEntry.builder(
-                        LootTableEntry.builder(HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID).conditionally(
-                            MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
-                        ),
+                        LootTableEntry.builder(
+                            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID)
+                        )
+                            .conditionally(
+                                MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ItemTags.AXES))
+                            ),
                         ItemEntry.builder(block),
                     )
                 )
@@ -266,7 +316,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             .filter(filterHybridAquatic(Registries.BLOCK))
             .filter { block ->
                 block !is WallTorchBlock && block !is DeadCoralWallFanBlock
-                        && block.lootTableId !in lootTables
+                        && block.lootTableKey !in lootTables
             }
             .forEach(::addDrop)
     }
