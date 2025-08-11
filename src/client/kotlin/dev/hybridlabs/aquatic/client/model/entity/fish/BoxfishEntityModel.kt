@@ -9,14 +9,14 @@ class BoxfishEntityModel : HybridAquaticFishEntityModel<BoxfishEntity>("boxfish"
         return RenderLayer.getEntityTranslucent(texture)
     }
 
-    private val LONGHORN_COWFISH_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/boxfish/longhorn_cowfish.png")
-    private val WHITESPOTTED_BOXFISH_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/boxfish/whitespotted_boxfish.png")
+    private val LONGHORN_COWFISH_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/fish/boxfish/longhorn_cowfish.png")
+    private val WHITESPOTTED_BOXFISH_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/fish/boxfish/whitespotted_boxfish.png")
 
-    private val COWFISH_MODEL = Identifier("hybrid-aquatic", "geo/fish/boxfish/cowfish.geo.json")
-    private val BOXFISH_MODEL = Identifier("hybrid-aquatic", "geo/fish/boxfish/boxfish.geo.json")
+    private val COWFISH_MODEL = Identifier.of("hybrid-aquatic", "geo/fish/boxfish/cowfish.geo.json")
+    private val BOXFISH_MODEL = Identifier.of("hybrid-aquatic", "geo/fish/boxfish/boxfish.geo.json")
 
-    private val COWFISH_ANIMATION = Identifier("hybrid-aquatic", "animations/cowfish.animation.json")
-    private val BOXFISH_ANIMATION = Identifier("hybrid-aquatic", "animations/boxfish.animation.json")
+    private val COWFISH_ANIMATION = Identifier.of("hybrid-aquatic", "animations/cowfish.animation.json")
+    private val BOXFISH_ANIMATION = Identifier.of("hybrid-aquatic", "animations/boxfish.animation.json")
 
     override fun getTextureResource(animatable: BoxfishEntity): Identifier {
         return when (animatable.variant) {

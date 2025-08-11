@@ -25,9 +25,9 @@ class HybridAquaticCrustaceanEntityLayer<T: HybridAquaticCrustaceanEntity>(
         poseStack: MatrixStack,
         animatable: T,
         bakedModel: BakedGeoModel,
-        renderType: RenderLayer,
+        renderType: RenderLayer?,
         bufferSource: VertexConsumerProvider,
-        buffer: VertexConsumer,
+        buffer: VertexConsumer?,
         partialTick: Float,
         packedLight: Int,
         packedOverlay: Int
@@ -40,6 +40,7 @@ class HybridAquaticCrustaceanEntityLayer<T: HybridAquaticCrustaceanEntity>(
 
         getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderLayer,
             bufferSource.getBuffer(layerRenderLayer), partialTick, packedLight, OverlayTexture.DEFAULT_UV,
-            1f, 1f, 1f, 1f)
+            1
+        )
     }
 }

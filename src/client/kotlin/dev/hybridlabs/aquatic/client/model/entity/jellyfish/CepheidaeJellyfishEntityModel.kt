@@ -9,11 +9,11 @@ class CepheidaeJellyfishEntityModel : HybridAquaticJellyfishEntityModel<Cepheida
         return RenderLayer.getEntityTranslucent(texture)
     }
 
-    private val CAULIFLOWER_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.png")
-    private val FRIED_EGG_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.png")
+    private val CAULIFLOWER_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.png")
+    private val FRIED_EGG_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.png")
 
-    private val CAULIFLOWER_MODEL = Identifier("hybrid-aquatic", "geo/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.geo.json")
-    private val FRIED_EGG_MODEL = Identifier("hybrid-aquatic", "geo/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.geo.json")
+    private val CAULIFLOWER_MODEL = Identifier.of("hybrid-aquatic", "geo/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.geo.json")
+    private val FRIED_EGG_MODEL = Identifier.of("hybrid-aquatic", "geo/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.geo.json")
 
     override fun getTextureResource(animatable: CepheidaeJellyfishEntity): Identifier {
         return when (animatable.variant) {

@@ -27,7 +27,7 @@ object HybridAquaticEntityModelLayers {
     private val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie", WhaleSharkPlushieModel::createModelData)
 
     private fun register(id: String, modelProvider: TexturedModelDataProvider): EntityModelLayer {
-        val layer = EntityModelLayer(Identifier(HybridAquatic.MOD_ID, id), "main")
+        val layer = EntityModelLayer(Identifier.of(HybridAquatic.MOD_ID, id), "main")
         EntityModelLayerRegistry.registerModelLayer(layer, modelProvider)
         return layer
     }

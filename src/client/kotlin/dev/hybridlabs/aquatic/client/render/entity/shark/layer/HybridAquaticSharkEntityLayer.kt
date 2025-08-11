@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
-class HybridAquaticSharkEntityLayer<T: HybridAquaticSharkEntity>(
+class HybridAquaticSharkEntityLayer<T : HybridAquaticSharkEntity>(
     renderer: HybridAquaticSharkEntityRenderer<T>
 ) : GeoRenderLayer<T>(renderer) {
 
@@ -25,9 +25,9 @@ class HybridAquaticSharkEntityLayer<T: HybridAquaticSharkEntity>(
         poseStack: MatrixStack,
         animatable: T,
         bakedModel: BakedGeoModel,
-        renderType: RenderLayer,
+        renderType: RenderLayer?,
         bufferSource: VertexConsumerProvider,
-        buffer: VertexConsumer,
+        buffer: VertexConsumer?,
         partialTick: Float,
         packedLight: Int,
         packedOverlay: Int
@@ -38,8 +38,10 @@ class HybridAquaticSharkEntityLayer<T: HybridAquaticSharkEntity>(
         val layerTexture: Identifier = getLayerTextureResource(animatable.getOverlayTextureName())
         val layerRenderLayer = RenderLayer.getEntityTranslucent(layerTexture)
 
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderLayer,
+        getRenderer().reRender(
+            getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderLayer,
             bufferSource.getBuffer(layerRenderLayer), partialTick, packedLight, OverlayTexture.DEFAULT_UV,
-            1f, 1f, 1f, 1f)
+            1
+        )
     }
 }

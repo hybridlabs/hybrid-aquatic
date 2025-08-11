@@ -5,14 +5,14 @@ import net.minecraft.util.Identifier
 
 class StingrayEntityModel : HybridAquaticFishEntityModel<StingrayEntity>("stingray") {
 
-    private val BLUE_SPOTTED_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/stingray/stingray_blue_spotted.png")
-    private val SPOTTED_EAGLE_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/stingray/stingray_spotted_eagle.png")
+    private val BLUE_SPOTTED_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/fish/stingray/stingray_blue_spotted.png")
+    private val SPOTTED_EAGLE_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/fish/stingray/stingray_spotted_eagle.png")
 
-    private val BLUE_SPOTTED_MODEL = Identifier("hybrid-aquatic", "geo/fish/stingray/stingray_blue_spotted.geo.json")
-    private val SPOTTED_EAGLE_MODEL = Identifier("hybrid-aquatic", "geo/fish/stingray/stingray_spotted_eagle.geo.json")
+    private val BLUE_SPOTTED_MODEL = Identifier.of("hybrid-aquatic", "geo/fish/stingray/stingray_blue_spotted.geo.json")
+    private val SPOTTED_EAGLE_MODEL = Identifier.of("hybrid-aquatic", "geo/fish/stingray/stingray_spotted_eagle.geo.json")
 
-    private val BLUE_SPOTTED_ANIMATION = Identifier("hybrid-aquatic", "animations/stingray_blue_spotted.animation.json")
-    private val SPOTTED_EAGLE_ANIMATION = Identifier("hybrid-aquatic", "animations/stingray_spotted_eagle.animation.json")
+    private val BLUE_SPOTTED_ANIMATION = Identifier.of("hybrid-aquatic", "animations/stingray_blue_spotted.animation.json")
+    private val SPOTTED_EAGLE_ANIMATION = Identifier.of("hybrid-aquatic", "animations/stingray_spotted_eagle.animation.json")
 
     override fun getTextureResource(animatable: StingrayEntity): Identifier {
         return when (animatable.variant) {

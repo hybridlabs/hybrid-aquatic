@@ -5,11 +5,11 @@ import net.minecraft.util.Identifier
 
 class HermitCrabEntityModel : HybridAquaticCrustaceanEntityModel<HermitCrabEntity>("hermit_crab") {
 
-    private val SHELL_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_shell.png")
-    private val SKULL_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_skull.png")
+    private val SHELL_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_shell.png")
+    private val SKULL_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_skull.png")
 
-    private val SHELL_MODEL = Identifier("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_shell.geo.json")
-    private val SKULL_MODEL = Identifier("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_skull.geo.json")
+    private val SHELL_MODEL = Identifier.of("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_shell.geo.json")
+    private val SKULL_MODEL = Identifier.of("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_skull.geo.json")
 
     override fun getTextureResource(animatable: HermitCrabEntity): Identifier {
         return when (animatable.variant) {

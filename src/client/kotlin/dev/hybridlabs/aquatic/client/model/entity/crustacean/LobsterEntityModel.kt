@@ -7,18 +7,18 @@ import kotlin.random.Random
 class LobsterEntityModel : HybridAquaticCrustaceanEntityModel<LobsterEntity>("lobster") {
 
     private val clawlessTextures = listOf(
-        Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_ornate_spiny.png"),
-        Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_california_spiny.png")
+        Identifier.of("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_ornate_spiny.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_california_spiny.png")
     )
 
     private val clawedTextures = listOf(
-        Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_american.png")
+        Identifier.of("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_american.png")
     )
 
-    private val REGAL_SLIPPER_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_regal_slipper.png")
+    private val REGAL_SLIPPER_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_regal_slipper.png")
 
-    private val LOBSTER_MODEL = Identifier("hybrid-aquatic", "geo/crustacean/lobster/lobster.geo.json")
-    private val SLIPPER_LOBSTER_MODEL = Identifier("hybrid-aquatic", "geo/crustacean/lobster/lobster_slipper.geo.json")
+    private val LOBSTER_MODEL = Identifier.of("hybrid-aquatic", "geo/crustacean/lobster/lobster.geo.json")
+    private val SLIPPER_LOBSTER_MODEL = Identifier.of("hybrid-aquatic", "geo/crustacean/lobster/lobster_slipper.geo.json")
 
     override fun getTextureResource(animatable: LobsterEntity): Identifier {
         val seed = animatable.uuid.leastSignificantBits

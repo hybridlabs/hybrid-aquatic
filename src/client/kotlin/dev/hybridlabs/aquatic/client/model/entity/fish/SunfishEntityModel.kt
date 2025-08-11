@@ -5,14 +5,14 @@ import net.minecraft.util.Identifier
 
 class SunfishEntityModel : HybridAquaticFishEntityModel<SunfishEntity>("sunfish") {
 
-    private val OCEAN_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/sunfish/sunfish_ocean.png")
-    private val HOODWINKER_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/sunfish/sunfish_hoodwinker.png")
-    private val SHARPTAIL_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/sunfish/sunfish_sharptail.png")
-    private val GIANT_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/sunfish/sunfish_giant.png")
+    private val OCEAN_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/fish/sunfish/sunfish_ocean.png")
+    private val HOODWINKER_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/fish/sunfish/sunfish_hoodwinker.png")
+    private val SHARPTAIL_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/fish/sunfish/sunfish_sharptail.png")
+    private val GIANT_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/fish/sunfish/sunfish_giant.png")
 
-    private val SUNFISH_MODEL = Identifier("hybrid-aquatic", "geo/fish/sunfish/sunfish.geo.json")
-    private val HOODWINKER_MODEL = Identifier("hybrid-aquatic", "geo/fish/sunfish/sunfish_hoodwinker.geo.json")
-    private val GIANT_MODEL = Identifier("hybrid-aquatic", "geo/fish/sunfish/sunfish_giant.geo.json")
+    private val SUNFISH_MODEL = Identifier.of("hybrid-aquatic", "geo/fish/sunfish/sunfish.geo.json")
+    private val HOODWINKER_MODEL = Identifier.of("hybrid-aquatic", "geo/fish/sunfish/sunfish_hoodwinker.geo.json")
+    private val GIANT_MODEL = Identifier.of("hybrid-aquatic", "geo/fish/sunfish/sunfish_giant.geo.json")
 
     override fun getTextureResource(animatable: SunfishEntity): Identifier {
         return when (animatable.variant) {

@@ -9,17 +9,17 @@ class SeadragonEntityModel : HybridAquaticFishEntityModel<SeadragonEntity>("sead
         return RenderLayer.getEntityTranslucent(texture)
     }
 
-    private val LEAFY_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/seadragon/leafy_seadragon.png")
-    private val WEEDY_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/seadragon/weedy_seadragon.png")
-    private val RUBY_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/fish/seadragon/ruby_seadragon.png")
+    private val LEAFY_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/fish/seadragon/leafy_seadragon.png")
+    private val WEEDY_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/fish/seadragon/weedy_seadragon.png")
+    private val RUBY_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/fish/seadragon/ruby_seadragon.png")
 
-    private val LEAFY_MODEL = Identifier("hybrid-aquatic", "geo/fish/seadragon/leafy_seadragon.geo.json")
-    private val WEEDY_MODEL = Identifier("hybrid-aquatic", "geo/fish/seadragon/weedy_seadragon.geo.json")
-    private val RUBY_MODEL = Identifier("hybrid-aquatic", "geo/fish/seadragon/ruby_seadragon.geo.json")
+    private val LEAFY_MODEL = Identifier.of("hybrid-aquatic", "geo/fish/seadragon/leafy_seadragon.geo.json")
+    private val WEEDY_MODEL = Identifier.of("hybrid-aquatic", "geo/fish/seadragon/weedy_seadragon.geo.json")
+    private val RUBY_MODEL = Identifier.of("hybrid-aquatic", "geo/fish/seadragon/ruby_seadragon.geo.json")
 
-    private val LEAFY_ANIMATION = Identifier("hybrid-aquatic", "animations/seadragon_leafy.animation.json")
-    private val WEEDY_ANIMATION = Identifier("hybrid-aquatic", "animations/seadragon_weedy.animation.json")
-    private val RUBY_ANIMATION = Identifier("hybrid-aquatic", "animations/seadragon_ruby.animation.json")
+    private val LEAFY_ANIMATION = Identifier.of("hybrid-aquatic", "animations/seadragon_leafy.animation.json")
+    private val WEEDY_ANIMATION = Identifier.of("hybrid-aquatic", "animations/seadragon_weedy.animation.json")
+    private val RUBY_ANIMATION = Identifier.of("hybrid-aquatic", "animations/seadragon_ruby.animation.json")
 
     override fun getTextureResource(animatable: SeadragonEntity): Identifier {
         return when (animatable.variant) {

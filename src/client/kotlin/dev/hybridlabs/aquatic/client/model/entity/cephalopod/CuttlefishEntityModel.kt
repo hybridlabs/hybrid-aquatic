@@ -7,12 +7,12 @@ import kotlin.random.Random
 class CuttlefishEntityModel : HybridAquaticCephalopodEntityModel<CuttlefishEntity>("cuttlefish") {
 
     private val commonTextures = listOf(
-        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_4.png"),
-        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_6.png"),
-        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_5.png"),
-        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_1.png"),
-        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_2.png"),
-        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_3.png")
+        Identifier.of("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_4.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_6.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_5.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_1.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_2.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_3.png")
     )
 
     override fun getTextureResource(animatable: CuttlefishEntity): Identifier {

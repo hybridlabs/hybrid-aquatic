@@ -15,6 +15,6 @@ class FlashlightFishEntityModel : HybridAquaticFishEntityModel<FlashlightFishEnt
             "textures/entity/fish/flashlight_fish/flashlight_fish_off.png"
         }
 
-        return Identifier(HybridAquatic.MOD_ID, texturePath)
+        return Identifier.of(HybridAquatic.MOD_ID, texturePath)
     }
 }

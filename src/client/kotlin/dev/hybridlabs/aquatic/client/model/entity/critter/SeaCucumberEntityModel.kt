@@ -12,21 +12,21 @@ class SeaCucumberEntityModel : HybridAquaticCritterEntityModel<SeaCucumberEntity
     }
 
     private val commonTextures = listOf(
-    Identifier("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_black_teatfish.png"),
-    Identifier("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_white_teatfish.png"),
-    Identifier("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_greenfish.png"),
-    Identifier("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_prickly_redfish.png"),
-    Identifier("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_curryfish.png"),
-    Identifier("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_sandfish.png")
+    Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_black_teatfish.png"),
+    Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_white_teatfish.png"),
+    Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_greenfish.png"),
+    Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_prickly_redfish.png"),
+    Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_curryfish.png"),
+    Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_cucumber_sandfish.png")
     )
 
-    private val SEA_PIG_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_pig.png")
+    private val SEA_PIG_TEXTURE = Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_cucumber/sea_pig.png")
 
-    private val SEA_PIG_MODEL = Identifier("hybrid-aquatic", "geo/critter/sea_cucumber/sea_pig.geo.json")
-    private val SEA_CUCUMBER_MODEL = Identifier("hybrid-aquatic", "geo/critter/sea_cucumber/sea_cucumber.geo.json")
+    private val SEA_PIG_MODEL = Identifier.of("hybrid-aquatic", "geo/critter/sea_cucumber/sea_pig.geo.json")
+    private val SEA_CUCUMBER_MODEL = Identifier.of("hybrid-aquatic", "geo/critter/sea_cucumber/sea_cucumber.geo.json")
 
-    private val SEA_PIG_ANIMATION = Identifier("hybrid-aquatic", "animations/sea_pig.animation.json")
-    private val SEA_CUCUMBER_ANIMATION = Identifier("hybrid-aquatic", "animations/sea_cucumber.animation.json")
+    private val SEA_PIG_ANIMATION = Identifier.of("hybrid-aquatic", "animations/sea_pig.animation.json")
+    private val SEA_CUCUMBER_ANIMATION = Identifier.of("hybrid-aquatic", "animations/sea_cucumber.animation.json")
 
     override fun getTextureResource(animatable: SeaCucumberEntity): Identifier {
         val seed = animatable.uuid.leastSignificantBits

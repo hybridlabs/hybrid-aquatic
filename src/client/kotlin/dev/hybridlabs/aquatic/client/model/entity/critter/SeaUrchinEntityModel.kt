@@ -7,17 +7,17 @@ import kotlin.random.Random
 class SeaUrchinEntityModel : HybridAquaticCritterEntityModel<SeaUrchinEntity>("sea_urchin") {
 
     private val largeTextures = listOf(
-        Identifier("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_black.png"),
-        Identifier("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_blue.png"),
-        Identifier("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_purple.png"),
-        Identifier("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_red.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_black.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_blue.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_purple.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_red.png"),
     )
 
     private val smallTextures = listOf(
-        Identifier("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_black.png"),
-        Identifier("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_blue.png"),
-        Identifier("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_purple.png"),
-        Identifier("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_red.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_black.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_blue.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_purple.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_red.png"),
     )
 
     override fun getTextureResource(animatable: SeaUrchinEntity): Identifier {

@@ -6,25 +6,26 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 abstract class HybridAquaticDolphinEntityModel<T : HybridAquaticDolphinEntity>(private val id: String) :
     GeoModel<T>() {
     override fun getModelResource(animatable: T): Identifier {
-        return Identifier(HybridAquatic.MOD_ID, "geo/mammal/$id/$id.geo.json")
+        return Identifier.of(HybridAquatic.MOD_ID, "geo/mammal/$id/$id.geo.json")
     }
 
     override fun getTextureResource(animatable: T): Identifier {
-        return Identifier(HybridAquatic.MOD_ID, "textures/entity/mammal/$id/$id.png")
+        return Identifier.of(HybridAquatic.MOD_ID, "textures/entity/mammal/$id/$id.png")
     }
 
     override fun getAnimationResource(animatable: T): Identifier {
-        return Identifier(HybridAquatic.MOD_ID, "animations/$id.animation.json")
+        return Identifier.of(HybridAquatic.MOD_ID, "animations/$id.animation.json")
     }
 
     fun getLayerTextureResource(layer: String): Identifier {
-        return Identifier(HybridAquatic.MOD_ID, "textures/entity/mammal/$id/layers/${id}_$layer.png")
+        return Identifier.of(HybridAquatic.MOD_ID, "textures/entity/mammal/$id/layers/${id}_$layer.png")
     }
 
     override fun setCustomAnimations(

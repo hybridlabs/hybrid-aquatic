@@ -7,9 +7,9 @@ import kotlin.random.Random
 class FiddlerCrabEntityModel : HybridAquaticCrustaceanEntityModel<FiddlerCrabEntity>("fiddler_crab") {
 
     private val commonTextures = listOf(
-        Identifier("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_blue.png"),
-        Identifier("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_purple.png"),
-        Identifier("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_red.png")
+        Identifier.of("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_blue.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_purple.png"),
+        Identifier.of("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_red.png")
     )
 
     override fun getTextureResource(animatable: FiddlerCrabEntity): Identifier {
