@@ -10,7 +10,10 @@ class CorrosionStatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0x9d913
     override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int): Boolean {
         if (entity.world.isClient)
         corrodeTool(entity)
-        corrodeArmor(entity)
+        corrodeHelmet(entity)
+        corrodeChestplate(entity)
+        corrodeLeggings(entity)
+        corrodeBoots(entity)
     return true
     }
 
@@ -21,20 +24,47 @@ class CorrosionStatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0x9d913
     private fun corrodeTool(entity: LivingEntity) {
         val mainHandStack = entity.mainHandStack
         if (mainHandStack.isDamageable) {
-            mainHandStack.damage(1, entity) { it.sendToolBreakStatus(entity.activeHand) }
+            mainHandStack.damage(1, entity, EquipmentSlot.MAINHAND)
         }
 
         val offHandStack = entity.offHandStack
         if (offHandStack.isDamageable) {
-            offHandStack.damage(1, entity) { it.sendToolBreakStatus(entity.activeHand) }
+            mainHandStack.damage(1, entity, EquipmentSlot.MAINHAND)
         }
     }
 
-    private fun corrodeArmor(entity: LivingEntity) {
+    private fun corrodeHelmet(entity: LivingEntity) {
         for (slot in EquipmentSlot.entries) {
             val armorStack = entity.getEquippedStack(slot)
             if (armorStack.isDamageable) {
-                armorStack.damage(1, entity) { it.sendEquipmentBreakStatus(slot) }
+                armorStack.damage(1, entity, EquipmentSlot.HEAD)
+            }
+        }
+    }
+
+    private fun corrodeChestplate(entity: LivingEntity) {
+        for (slot in EquipmentSlot.entries) {
+            val armorStack = entity.getEquippedStack(slot)
+            if (armorStack.isDamageable) {
+                armorStack.damage(1, entity, EquipmentSlot.CHEST)
+            }
+        }
+    }
+
+    private fun corrodeLeggings(entity: LivingEntity) {
+        for (slot in EquipmentSlot.entries) {
+            val armorStack = entity.getEquippedStack(slot)
+            if (armorStack.isDamageable) {
+                armorStack.damage(1, entity, EquipmentSlot.LEGS)
+            }
+        }
+    }
+
+    private fun corrodeBoots(entity: LivingEntity) {
+        for (slot in EquipmentSlot.entries) {
+            val armorStack = entity.getEquippedStack(slot)
+            if (armorStack.isDamageable) {
+                armorStack.damage(1, entity, EquipmentSlot.FEET)
             }
         }
     }
