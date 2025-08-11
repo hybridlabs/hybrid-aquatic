@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.block.*
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -13,7 +15,6 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
-@Suppress("OVERRIDE_DEPRECATION")
 class SargassumBlock(settings: Settings?) :
     AbstractPlantStemBlock(settings, Direction.UP, SHAPE, true, 0.14),
     FluidFillable {
@@ -29,7 +30,13 @@ class SargassumBlock(settings: Settings?) :
         return !state.isOf(Blocks.MAGMA_BLOCK)
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canFillWithFluid(
+        player: PlayerEntity?,
+        world: BlockView,
+        pos: BlockPos,
+        state: BlockState,
+        fluid: Fluid?
+    ): Boolean {
         return false
     }
 
@@ -55,7 +62,12 @@ class SargassumBlock(settings: Settings?) :
         return Fluids.WATER.getStill(false)
     }
 
+    override fun getCodec(): MapCodec<out AbstractPlantStemBlock> {
+        return CODEC
+    }
+
     companion object {
-        protected val SHAPE: VoxelShape = createCuboidShape(0.0, 0.0, 0.0, 16.0, 9.0, 16.0)
+        val CODEC: MapCodec<SargassumBlock> = createCodec(::SargassumBlock)
+        private val SHAPE: VoxelShape = createCuboidShape(0.0, 0.0, 0.0, 16.0, 9.0, 16.0)
     }
 }

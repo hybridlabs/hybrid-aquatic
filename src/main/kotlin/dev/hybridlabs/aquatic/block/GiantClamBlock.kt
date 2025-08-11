@@ -35,7 +35,6 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.WorldView
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class GiantClamBlock(
     private val emitsParticles: Boolean,
     settings: Settings
@@ -49,7 +48,7 @@ class GiantClamBlock(
             .with(WATERLOGGED, true)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun canPathfindThrough(state: BlockState?, type: NavigationType?): Boolean {
         return false
     }
 

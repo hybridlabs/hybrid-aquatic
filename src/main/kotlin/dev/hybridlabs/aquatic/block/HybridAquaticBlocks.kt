@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package dev.hybridlabs.aquatic.block
 
 import com.google.common.collect.ImmutableSet

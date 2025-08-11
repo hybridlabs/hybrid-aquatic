@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.block.*
 import net.minecraft.entity.Entity
 import net.minecraft.entity.vehicle.BoatEntity
@@ -18,7 +19,6 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class JungleLilyPadBlock(settings: Settings?) : PlantBlock(settings) {
     init {
         defaultState = defaultState.with(Properties.WATERLOGGED, true)
@@ -94,7 +94,12 @@ class JungleLilyPadBlock(settings: Settings?) : PlantBlock(settings) {
         }
     }
 
+    override fun getCodec(): MapCodec<out PlantBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<JungleLilyPadBlock> = createCodec(::JungleLilyPadBlock)
         private val SHAPE: VoxelShape = createCuboidShape(1.0, 15.0, 1.0, 15.0, 16.0, 15.0)
     }
 }

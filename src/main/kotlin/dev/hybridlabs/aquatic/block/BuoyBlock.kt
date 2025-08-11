@@ -1,16 +1,7 @@
-@file:Suppress("OVERRIDE_DEPRECATION")
-
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
-import net.minecraft.block.Block
-import net.minecraft.block.BlockEntityProvider
-import net.minecraft.block.BlockRenderType
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.HorizontalFacingBlock
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.Waterloggable
+import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
@@ -28,14 +19,13 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("DEPRECATION")
 open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, Waterloggable {
     init {
         defaultState = stateManager.defaultState
             .with(Properties.WATERLOGGED, false)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun canPathfindThrough(state: BlockState?, type: NavigationType?): Boolean {
         return false
     }
 

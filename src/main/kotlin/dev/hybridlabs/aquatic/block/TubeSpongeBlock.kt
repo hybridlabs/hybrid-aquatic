@@ -23,7 +23,6 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class TubeSpongeBlock(
     private val emitsParticles: Boolean,
     settings: Settings

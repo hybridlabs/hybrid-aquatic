@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.block.*
 import net.minecraft.entity.Entity
 import net.minecraft.entity.vehicle.BoatEntity
@@ -18,7 +19,6 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class WaterLettuceBlock(settings: Settings) : PlantBlock(settings), Waterloggable {
     init {
         defaultState = defaultState.with(WATERLOGGED, true)
@@ -94,7 +94,12 @@ class WaterLettuceBlock(settings: Settings) : PlantBlock(settings), Waterloggabl
         }
     }
 
+    override fun getCodec(): MapCodec<out PlantBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<WaterLettuceBlock> = createCodec(::WaterLettuceBlock)
         private val SHAPE: VoxelShape = createCuboidShape(3.0, 14.0, 3.0, 13.0, 16.0, 13.0)
     }
 }

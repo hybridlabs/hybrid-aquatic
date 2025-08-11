@@ -19,7 +19,7 @@ object HybridAquaticBlockEntityTypes {
     val BUOY: BlockEntityType<BuoyBlockEntity> = register("buoy", FabricBlockEntityTypeBuilder.create(::BuoyBlockEntity, HybridAquaticBlocks.BUOY))
 
     private fun <T : BlockEntity> register(id: String, builder: FabricBlockEntityTypeBuilder<T>): BlockEntityType<T> {
-        val identifier = Identifier(HybridAquatic.MOD_ID, id)
+        val identifier = Identifier.of(HybridAquatic.MOD_ID, id)
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, identifier, builder.build(
             Util.getChoiceType(
                 TypeReferences.BLOCK_ENTITY,

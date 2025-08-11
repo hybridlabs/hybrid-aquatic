@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
@@ -15,6 +16,7 @@ import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.registry.tag.FluidTags
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.math.BlockPos
@@ -25,45 +27,10 @@ import net.minecraft.world.GameRules
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-@Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
 class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
     init {
         defaultState = stateManager.defaultState
             .with(WATERLOGGED, true)
-    }
-
-    override fun onEntityCollision(state: BlockState, world: World, pos: BlockPos, entity: Entity) {
-        if (entity is LivingEntity) {
-            if (entity is ClownfishEntity) {
-                if (!world.isClient) {
-                    tryHideClownfish(entity, world, pos)
-                }
-            }
-        }
-    }
-
-    private fun tryHideClownfish(entity: ClownfishEntity, world: World, pos: BlockPos) {
-        if (entity.isBaby || !entity.navigation.isIdle) {
-            return
-        }
-
-        val blockEntity = world.getBlockEntity(pos)
-        if (blockEntity is AnemoneBlockEntity) {
-            if (blockEntity.hideClownfish(entity)) {
-                entity.discard()
-            }
-        }
-    }
-
-    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
-        if (!world.isClient && player.isCreative && world.gameRules.getBoolean(GameRules.DO_TILE_DROPS)) {
-            val blockEntity = world.getBlockEntity(pos)
-            if (blockEntity is AnemoneBlockEntity) {
-                blockEntity.emergencyReleaseHiddenClownfish()
-            }
-        }
-
-        super.onBreak(world, pos, state, player)
     }
 
     override fun canPlantOnTop(floor: BlockState, world: BlockView, pos: BlockPos): Boolean {
@@ -96,7 +63,7 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         state: BlockState,
         type: BlockEntityType<T>
     ): BlockEntityTicker<T>? {
-        return BlockWithEntity.checkType(type, HybridAquaticBlockEntityTypes.ANEMONE, AnemoneBlockEntity::tick)
+        return BlockWithEntity.validateTicker(type, HybridAquaticBlockEntityTypes.ANEMONE, AnemoneBlockEntity::tick)
     }
 
     override fun getCollisionShape(
@@ -141,11 +108,16 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         builder.add(WATERLOGGED)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
         return false
     }
 
+    override fun getCodec(): MapCodec<out PlantBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<AnemoneBlock> = createCodec(::AnemoneBlock)
         private val SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
         private val COLLISION_SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0)
     }

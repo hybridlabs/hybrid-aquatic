@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.block.*
 import net.minecraft.entity.Entity
 import net.minecraft.entity.vehicle.BoatEntity
@@ -94,7 +95,13 @@ class FloatingSargassumBlock(settings: Settings) : PlantBlock(settings), Waterlo
         }
     }
 
+    override fun getCodec(): MapCodec<out PlantBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<FloatingSargassumBlock> = createCodec(::FloatingSargassumBlock)
+
         private val SHAPE: VoxelShape = createCuboidShape(0.0, 14.0, 0.0, 16.0, 15.0, 16.0)
     }
 }

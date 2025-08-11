@@ -31,7 +31,6 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
-@Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION")
 class ThermalVentBlock(
     private val emitsParticles: Boolean,
     private val fireDamage: Int,
@@ -44,7 +43,7 @@ class ThermalVentBlock(
             .with(WATERLOGGED, true)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
         return false
     }
 
@@ -54,7 +53,7 @@ class ThermalVentBlock(
         return supportingState.isOf(this) || supportingState.isSideSolidFullSquare(world, supportingPos, Direction.UP)
     }
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
+    override fun getPlacementState(ctx: ItemPlacementContext): BlockState {
         val world = ctx.world
         val pos = ctx.blockPos
         return defaultState

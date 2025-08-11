@@ -13,10 +13,9 @@ import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
-class WallGlowstickBlock(settings: Settings) : WallTorchBlock(settings, GLOW), Waterloggable {
+class WallGlowstickBlock(settings: Settings) : WallTorchBlock(GLOW, settings), Waterloggable {
     init {
         defaultState = stateManager.defaultState.with(Properties.WATERLOGGED, false)
     }
@@ -49,12 +48,7 @@ class WallGlowstickBlock(settings: Settings) : WallTorchBlock(settings, GLOW), W
         super.appendProperties(builder.add(Properties.WATERLOGGED))
     }
 
-    override fun canPathfindThrough(
-        state: BlockState?,
-        world: BlockView?,
-        pos: BlockPos?,
-        type: NavigationType?
-    ): Boolean {
+    override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
         return true
     }
 }
