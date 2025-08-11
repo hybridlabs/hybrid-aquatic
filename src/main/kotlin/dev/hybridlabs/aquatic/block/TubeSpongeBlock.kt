@@ -1,11 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.PlantBlock
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.Waterloggable
+import com.mojang.serialization.MapCodec
+import net.minecraft.block.*
 import net.minecraft.entity.ai.pathing.NavigationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
@@ -24,8 +20,7 @@ import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 
 class TubeSpongeBlock(
-    private val emitsParticles: Boolean,
-    settings: Settings
+    settings: Settings,
 ) : PlantBlock(settings), Waterloggable {
 
     private var bubbleTimer = 0
@@ -67,7 +62,12 @@ class TubeSpongeBlock(
         return COLLISION_SHAPE
     }
 
-    override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext?): VoxelShape {
+    override fun getOutlineShape(
+        state: BlockState,
+        world: BlockView,
+        pos: BlockPos,
+        context: ShapeContext?
+    ): VoxelShape {
         return SHAPE
     }
 
@@ -75,7 +75,9 @@ class TubeSpongeBlock(
         val fluidState = ctx.world.getFluidState(ctx.blockPos)
         return if (fluidState.isIn(FluidTags.WATER)) defaultState.with(
             WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).isOf(
-                Fluids.WATER)) else null
+                Fluids.WATER
+            )
+        ) else null
     }
 
     override fun canPathfindThrough(state: BlockState, type: NavigationType): Boolean {
@@ -91,7 +93,7 @@ class TubeSpongeBlock(
     }
 
     override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
-        if (state.get(WATERLOGGED) && emitsParticles && bubbleTimer % 20 == 0) {
+        if (state.get(WATERLOGGED) && bubbleTimer % 20 == 0) {
             (bubbleTimer / 60).toFloat() * 0.05f
             val upwardVelocity = 0.1f
 
@@ -100,14 +102,17 @@ class TubeSpongeBlock(
                 pos.x + 0.5, pos.y + 0.75, pos.z + 0.5,
                 random.nextFloat() / 2.0, upwardVelocity.toDouble(), random.nextFloat() / 2.0
             )
-
             bubbleTimer = 0
         }
-
         bubbleTimer++
     }
 
+    override fun getCodec(): MapCodec<out PlantBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<TubeSpongeBlock> = createCodec(::TubeSpongeBlock)
         private val SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
         private val COLLISION_SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
     }
