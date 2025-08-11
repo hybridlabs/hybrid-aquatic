@@ -1,15 +1,19 @@
 package dev.hybridlabs.aquatic.item
 
 import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.tooltip.TooltipType
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
-import net.minecraft.world.World
 
 open class HookItem(settings: Settings) : Item(settings) {
-    override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
+    override fun appendTooltip(
+        stack: ItemStack,
+        context: TooltipContext,
+        tooltip: MutableList<Text>,
+        type: TooltipType
+    ) {
         val isTideLoaded = FabricLoader.getInstance().isModLoaded("tide")
 
         if (isTideLoaded) {
@@ -26,7 +30,7 @@ open class HookItem(settings: Settings) : Item(settings) {
             tooltip.add(hookText)
         }
 
-        super.appendTooltip(stack, world, tooltip, context)
+        super.appendTooltip(stack, context, tooltip, type)
     }
 
     override fun isEnchantable(stack: ItemStack?): Boolean {
