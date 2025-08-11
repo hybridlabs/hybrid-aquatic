@@ -915,6 +915,6 @@ object HybridAquaticEntityTypes {
      * Registers an entity type to the entity type registry.
      */
     private fun <T : Entity> register(id: String, entity: EntityType<T>): EntityType<T> {
-        return Registry.register(Registries.ENTITY_TYPE, Identifier(HybridAquatic.MOD_ID, id), entity)
+        return Registry.register(Registries.ENTITY_TYPE, Identifier.of(HybridAquatic.MOD_ID, id), entity)
     }
 }
