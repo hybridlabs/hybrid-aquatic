@@ -20,6 +20,6 @@ object HybridAquaticFeatures {
     val RED_ALGAE_PATCH = register("red_algae_patch", RedAlgaeFeature(ProbabilityConfig.CODEC))
 
     private fun <FC : FeatureConfig, F : Feature<FC>> register(id: String, feature: F): Feature<FC> {
-        return Registry.register(Registries.FEATURE, Identifier(HybridAquatic.MOD_ID, id), feature)
+        return Registry.register(Registries.FEATURE, Identifier.of(HybridAquatic.MOD_ID, id), feature)
     }
 }
