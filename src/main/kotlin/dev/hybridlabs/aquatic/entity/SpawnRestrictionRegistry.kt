@@ -9,6 +9,8 @@ import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnLocation
+import net.minecraft.entity.SpawnLocationTypes
 import net.minecraft.entity.SpawnRestriction
 import net.minecraft.entity.SpawnRestriction.SpawnPredicate
 import net.minecraft.entity.mob.HostileEntity
@@ -267,7 +269,7 @@ object SpawnRestrictionRegistry {
     ) {
         register(
             entityType,
-            SpawnRestriction.Location.IN_WATER,
+            SpawnLocationTypes.IN_WATER,
             predicate
         )
     }
@@ -275,7 +277,7 @@ object SpawnRestrictionRegistry {
     private fun <T : HostileEntity> registerMiniboss(entityType: EntityType<T>, predicate: SpawnPredicate<T>) {
         register(
             entityType,
-            SpawnRestriction.Location.IN_WATER,
+            SpawnLocationTypes.IN_WATER,
             predicate
         )
     }
@@ -286,14 +288,14 @@ object SpawnRestrictionRegistry {
     ) {
         register(
             entityType,
-            SpawnRestriction.Location.NO_RESTRICTIONS,
+            SpawnLocationTypes.UNRESTRICTED,
             predicate
         )
     }
 
     private fun <T : MobEntity> register(
         entityType: EntityType<T>,
-        location: SpawnRestriction.Location,
+        location: SpawnLocation,
         predicate: SpawnPredicate<T>
     ) {
         SpawnRestriction.register(entityType, location, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, predicate)
