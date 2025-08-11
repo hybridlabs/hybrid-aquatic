@@ -4,7 +4,6 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
 
 class GoldfishEntity(entityType: EntityType<out GoldfishEntity>, world: World) :
@@ -15,10 +14,6 @@ class GoldfishEntity(entityType: EntityType<out GoldfishEntity>, world: World) :
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK)) {
-
-    public override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/goldfish")
-    }
 
     override fun getLimitPerChunk(): Int {
         return 4

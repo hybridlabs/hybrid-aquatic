@@ -44,10 +44,9 @@ class WreckfishEntity(entityType: EntityType<out WreckfishEntity>, world: World)
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
         entityData: EntityData?,
-        entityNbt: NbtCompound?
     ): EntityData? {
         variant = Type.entries.random(Random)
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -62,9 +61,9 @@ class WreckfishEntity(entityType: EntityType<out WreckfishEntity>, world: World)
         val TYPE: TrackedData<Int> = DataTracker.registerData(WreckfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        super.initDataTracker()
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        builder.add(TYPE, 0)
+        super.initDataTracker(builder)
     }
 
     override fun writeCustomDataToNbt(nbt: NbtCompound) {
@@ -85,7 +84,7 @@ class WreckfishEntity(entityType: EntityType<out WreckfishEntity>, world: World)
         }
 
         companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+            val CODEC: StringIdentifiable.EnumCodec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
             private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
                 { obj: Type -> obj.id },
                 entries.toTypedArray(),

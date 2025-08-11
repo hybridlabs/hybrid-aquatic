@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.VariantHolder
-import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.world.LocalDifficulty
 import net.minecraft.world.ServerWorldAccess
@@ -119,12 +118,11 @@ open class HybridAquaticSchoolingFishEntity(
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         var entityData = entityData
         pitch = 0.0f
-        super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        super.initialize(world, difficulty, spawnReason, entityData)
         if (entityData == null) {
             entityData = FishData(this)
         } else {

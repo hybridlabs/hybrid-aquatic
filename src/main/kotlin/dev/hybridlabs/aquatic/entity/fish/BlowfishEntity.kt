@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
@@ -17,6 +16,7 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.tag.EntityTypeTags
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import java.util.function.Predicate
@@ -43,9 +43,9 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: World) :
     var inflateTicks = 0
     var deflateTicks = 0
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(PUFF_STATE, NOT_PUFFED)
+    override fun initDataTracker(builder: DataTracker.Builder) {
+        super.initDataTracker(builder)
+        builder.add(PUFF_STATE, NOT_PUFFED)
     }
 
     fun getPuffState(): Int {
@@ -167,7 +167,7 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: World) :
         }
 
         private val PUFF_STATE: TrackedData<Int> = DataTracker.registerData(BlowfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        private val BLOW_UP_FILTER: Predicate<LivingEntity> = Predicate { entity -> if (entity is PlayerEntity && entity.isCreative) false else entity.group != EntityGroup.AQUATIC }
+        private val BLOW_UP_FILTER: Predicate<LivingEntity> = Predicate { entity -> if (entity is PlayerEntity && entity.isCreative) false else entity != EntityTypeTags.AQUATIC }
         private val BLOW_UP_TARGET_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility().setPredicate(BLOW_UP_FILTER)
 
         const val NOT_PUFFED = 0

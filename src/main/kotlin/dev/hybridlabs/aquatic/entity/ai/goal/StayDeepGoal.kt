@@ -24,7 +24,7 @@ class StayDeepGoal(
         var pos = BlockPos.ofFloored(vec)
 
         while (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
-            mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER) &&
+            mob.world.getBlockState(pos).canPathfindThrough(NavigationType.WATER) &&
             pos.y > 1
         ) {
             pos = pos.down()
@@ -34,7 +34,7 @@ class StayDeepGoal(
         var height = 0
 
         while (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
-            mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER) &&
+            mob.world.getBlockState(pos).canPathfindThrough(NavigationType.WATER) &&
             height < distanceOffSeabed
         ) {
             pos = pos.up()
@@ -53,7 +53,7 @@ class StayDeepGoal(
             val pos = BlockPos.ofFloored(x, y, z)
 
             if (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
-                mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER)
+                mob.world.getBlockState(pos).canPathfindThrough(NavigationType.WATER)
             ) {
                 return Vec3d(x, y, z)
             }

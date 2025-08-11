@@ -22,9 +22,8 @@ class StayNearSurfaceGoal(
 
         var pos = BlockPos.ofFloored(vec)
 
-        // Move upward until reaching the surface
         while (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
-            mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER)
+            mob.world.getBlockState(pos).canPathfindThrough(NavigationType.WATER)
         ) {
             pos = pos.up()
         }
@@ -32,9 +31,8 @@ class StayNearSurfaceGoal(
         pos = pos.down()
         var depth = 0
 
-        // Move downward slightly to ensure the fish doesn't break the surface
         while (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
-            mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER) &&
+            mob.world.getBlockState(pos).canPathfindThrough(NavigationType.WATER) &&
             depth < maxDepth
         ) {
             pos = pos.down()
@@ -53,7 +51,7 @@ class StayNearSurfaceGoal(
             val pos = BlockPos.ofFloored(x, y, z)
 
             if (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
-                mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER)
+                mob.world.getBlockState(pos).canPathfindThrough(NavigationType.WATER)
             ) {
                 return Vec3d(x, y, z)
             }
