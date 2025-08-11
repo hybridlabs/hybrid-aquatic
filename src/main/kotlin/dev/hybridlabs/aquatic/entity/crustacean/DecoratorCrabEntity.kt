@@ -35,20 +35,22 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         get() = dataTracker.get(CORAL_TIMER)
         set(value) = dataTracker.set(CORAL_TIMER, value)
 
-    override fun interactMob(player: PlayerEntity, hand: Hand): ActionResult {
+    public override fun interactMob(player: PlayerEntity, hand: Hand?): ActionResult {
         val itemStack = player.getStackInHand(hand)
-        if (!itemStack.isEmpty && itemStack.isOf(Items.SHEARS) && coralTimer == 0) {
+        if (itemStack.isOf(Items.SHEARS)) {
             if (!world.isClient) {
                 this.coralTimer = 3600
                 this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0f, 1.0f)
                 this.emitGameEvent(GameEvent.SHEAR, player)
-                itemStack.damage(1, player) { it.sendToolBreakStatus(hand) }
+                itemStack.damage(1, player, getSlotForHand(hand))
                 dropStack(ItemStack(HybridAquaticItems.CORAL_CHUNK))
                 return ActionResult.SUCCESS
+            } else {
+                return ActionResult.CONSUME
             }
-            return ActionResult.CONSUME
+        } else {
+            return super.interactMob(player, hand)
         }
-        return super.interactMob(player, hand)
     }
 
     override fun tick() {
