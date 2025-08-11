@@ -12,11 +12,8 @@ import java.util.function.Supplier
 
 class ManglerfishArmorItem(material: ArmorMaterial, type: Type, settings: Settings) : ArmorItem(material, type, settings), GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
-    private val renderProvider: Supplier<Any> = GeoItem.makeRenderer(this)
+    private val renderProvider: Supplier<Any> = Supplier { GeoRenderProviderStorage.manglerfishArmorRenderProvider.invoke() }
 
-    override fun createRenderer(consumer: Consumer<Any>) {
-        consumer.accept(GeoRenderProviderStorage.manglerfishArmorRenderProvider.invoke())
-    }
 
     override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {
     }

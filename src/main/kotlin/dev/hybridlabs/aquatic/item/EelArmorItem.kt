@@ -7,16 +7,11 @@ import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.function.Consumer
 import java.util.function.Supplier
 
 class EelArmorItem(material: ArmorMaterial, type: Type, settings: Settings) : ArmorItem(material, type, settings), GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
-    private val renderProvider: Supplier<Any> = GeoItem.makeRenderer(this)
-
-    override fun createRenderer(consumer: Consumer<Any>) {
-        consumer.accept(GeoRenderProviderStorage.eelArmorRenderProvider.invoke())
-    }
+    private val renderProvider: Supplier<Any> = Supplier { GeoRenderProviderStorage.eelArmorRenderProvider.invoke() }
 
     override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {
     }

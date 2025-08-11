@@ -6,19 +6,12 @@ import net.minecraft.item.ArmorMaterial
 import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.function.Consumer
 import java.util.function.Supplier
 
 class DivingArmorItem(material: ArmorMaterial, type: Type, settings: Settings) : ArmorItem(material, type, settings), GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
-    private val renderProvider: Supplier<Any> = GeoItem.makeRenderer(this)
-
-    override fun createRenderer(consumer: Consumer<Any>) {
-        consumer.accept(GeoRenderProviderStorage.divingArmorRenderProvider.invoke())
-    }
+    private val renderProvider: Supplier<Any> = Supplier { GeoRenderProviderStorage.divingArmorRenderProvider.invoke() }
 
     override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {
     }
