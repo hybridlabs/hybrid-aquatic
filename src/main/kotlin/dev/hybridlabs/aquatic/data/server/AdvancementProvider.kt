@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.minecraft.advancement.Advancement
+import net.minecraft.advancement.AdvancementEntry
 import net.minecraft.advancement.AdvancementFrame
 import net.minecraft.advancement.criterion.EnterBlockCriterion
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
@@ -15,19 +16,20 @@ import net.minecraft.block.Blocks.WATER
 import net.minecraft.item.Items
 import net.minecraft.predicate.entity.EntityPredicate
 import net.minecraft.predicate.item.ItemPredicate
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import java.util.function.Consumer
 
 class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(output) {
-    override fun generateAdvancement(consumer: Consumer<Advancement>?) {
+    override fun generateAdvancement(p0: RegistryWrapper.WrapperLookup?, p1: Consumer<AdvancementEntry>?) {
         val rootAdvancement = Advancement.Builder.create()
             .display(
                 HybridAquaticItems.YELLOWFIN_TUNA,
                 Text.translatable("advancements.hybrid-aquatic.enter_water.title"),
                 Text.translatable("advancements.hybrid-aquatic.enter_water.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.TASK,
                 true,
                 true,
@@ -37,7 +39,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "enter_water",
                 EnterBlockCriterion.Conditions.block(WATER)
             )
-            .build(Identifier("hybrid-aquatic", "root"))
+            .build(Identifier.of("hybrid-aquatic", "root"))
         consumer?.accept(rootAdvancement)
 
         val boatAdvancement = Advancement.Builder.create()
@@ -46,7 +48,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 Items.OAK_BOAT,
                 Text.translatable("advancements.hybrid-aquatic.boat.title"),
                 Text.translatable("advancements.hybrid-aquatic.boat.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.TASK,
                 true,
                 true,
@@ -58,7 +60,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.create().tag(ItemTags.BOATS).build()
                 )
             )
-            .build(Identifier("hybrid-aquatic", "boat"))
+            .build(Identifier.of("hybrid-aquatic", "boat"))
         consumer?.accept(boatAdvancement)
 
         val fishingNetAdvancement = Advancement.Builder.create()
@@ -67,7 +69,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.FISHING_NET,
                 Text.translatable("advancements.hybrid-aquatic.fishing_net.title"),
                 Text.translatable("advancements.hybrid-aquatic.fishing_net.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.TASK,
                 true,
                 true,
@@ -77,7 +79,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "fishing_net",
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.FISHING_NET)
             )
-            .build(Identifier("hybrid-aquatic", "fishing_net"))
+            .build(Identifier.of("hybrid-aquatic", "fishing_net"))
         consumer?.accept(fishingNetAdvancement)
 
         val glowstickAdvancement = Advancement.Builder.create()
@@ -86,7 +88,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.GLOWSTICK,
                 Text.translatable("advancements.hybrid-aquatic.glowstick.title"),
                 Text.translatable("advancements.hybrid-aquatic.glowstick.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.TASK,
                 true,
                 true,
@@ -96,7 +98,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_glowstick",
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.GLOWSTICK)
             )
-            .build(Identifier("hybrid-aquatic", "glowstick"))
+            .build(Identifier.of("hybrid-aquatic", "glowstick"))
         consumer?.accept(glowstickAdvancement)
 
         val buoyAdvancement = Advancement.Builder.create()
@@ -115,7 +117,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_buoy",
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.BUOY)
             )
-            .build(Identifier("hybrid-aquatic", "buoy"))
+            .build(Identifier.of("hybrid-aquatic", "buoy"))
         consumer?.accept(buoyAdvancement)
 
         val divingSuitAdvancement = Advancement.Builder.create()
@@ -124,7 +126,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.DIVING_HELMET,
                 Text.translatable("advancements.hybrid-aquatic.diving_suit.title"),
                 Text.translatable("advancements.hybrid-aquatic.diving_suit.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.GOAL,
                 true,
                 true,
@@ -139,7 +141,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HybridAquaticItems.DIVING_BOOTS
                 )
             )
-            .build(Identifier("hybrid-aquatic", "diving_suit"))
+            .build(Identifier.of("hybrid-aquatic", "diving_suit"))
         consumer?.accept(divingSuitAdvancement)
 
         val obtainPearlAdvancement = Advancement.Builder.create()
@@ -148,7 +150,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.PEARL,
                 Text.translatable("advancements.hybrid-aquatic.pearl.title"),
                 Text.translatable("advancements.hybrid-aquatic.pearl.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.TASK,
                 true,
                 true,
@@ -158,7 +160,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_pearl",
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.PEARL)
             )
-            .build(Identifier("hybrid-aquatic", "pearl"))
+            .build(Identifier.of("hybrid-aquatic", "pearl"))
         consumer?.accept(obtainPearlAdvancement)
 
         val obtainBlackPearlAdvancement = Advancement.Builder.create()
@@ -167,7 +169,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.BLACK_PEARL,
                 Text.translatable("advancements.hybrid-aquatic.black_pearl.title"),
                 Text.translatable("advancements.hybrid-aquatic.black_pearl.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.TASK,
                 true,
                 true,
@@ -177,7 +179,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_black_pearl",
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.BLACK_PEARL)
             )
-            .build(Identifier("hybrid-aquatic", "black_pearl"))
+            .build(Identifier.of("hybrid-aquatic", "black_pearl"))
         consumer?.accept(obtainBlackPearlAdvancement)
 
         val fishingHookAdvancement = Advancement.Builder.create()
@@ -186,7 +188,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.BARBED_HOOK,
                 Text.translatable("advancements.hybrid-aquatic.hook.title"),
                 Text.translatable("advancements.hybrid-aquatic.hook.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.TASK,
                 true,
                 true,
@@ -198,7 +200,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.create().tag(HybridAquaticItemTags.LURE_ITEMS).build()
                 )
             )
-            .build(Identifier("hybrid-aquatic", "hook"))
+            .build(Identifier.of("hybrid-aquatic", "hook"))
         consumer?.accept(fishingHookAdvancement)
 
         val creeperHookAdvancement = Advancement.Builder.create()
@@ -207,7 +209,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.CREEPERMAGNET_HOOK,
                 Text.translatable("advancements.hybrid-aquatic.creeper_hook.title"),
                 Text.translatable("advancements.hybrid-aquatic.creeper_hook.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.GOAL,
                 true,
                 true,
@@ -217,7 +219,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "has_creeper_hook",
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.CREEPERMAGNET_HOOK)
             )
-            .build(Identifier("hybrid-aquatic", "creeper_hook"))
+            .build(Identifier.of("hybrid-aquatic", "creeper_hook"))
         consumer?.accept(creeperHookAdvancement)
 
         val crabClawAdvancement = Advancement.Builder.create()
@@ -226,7 +228,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.DUNGENESS_CRAB_CLAW,
                 Text.translatable("advancements.hybrid-aquatic.crab_claw.title"),
                 Text.translatable("advancements.hybrid-aquatic.crab_claw.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.GOAL,
                 true,
                 true,
@@ -238,7 +240,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.create().tag(HybridAquaticItemTags.CRAB_CLAW).build()
                 )
             )
-            .build(Identifier("hybrid-aquatic", "crab_claw"))
+            .build(Identifier.of("hybrid-aquatic", "crab_claw"))
         consumer?.accept(crabClawAdvancement)
 
         val ominousHookAdvancement = Advancement.Builder.create()
@@ -247,7 +249,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.OMINOUS_HOOK,
                 Text.translatable("advancements.hybrid-aquatic.ominous_hook.title"),
                 Text.translatable("advancements.hybrid-aquatic.ominous_hook.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.GOAL,
                 true,
                 true,
@@ -257,7 +259,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_ominous_hook",
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.OMINOUS_HOOK)
             )
-            .build(Identifier("hybrid-aquatic", "ominous_hook"))
+            .build(Identifier.of("hybrid-aquatic", "ominous_hook"))
         consumer?.accept(ominousHookAdvancement)
 
         val killKarkinosAdvancement = Advancement.Builder.create()
@@ -266,7 +268,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.KARKINOS_CLAW,
                 Text.translatable("advancements.hybrid-aquatic.kill_karkinos.title"),
                 Text.translatable("advancements.hybrid-aquatic.kill_karkinos.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.CHALLENGE,
                 true,
                 true,
@@ -278,7 +280,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     EntityPredicate.Builder.create().type(HybridAquaticEntityTypes.KARKINOS).build()
                 )
             )
-            .build(Identifier("hybrid-aquatic", "kill_karkinos"))
+            .build(Identifier.of("hybrid-aquatic", "kill_karkinos"))
         consumer?.accept(killKarkinosAdvancement)
 
         val killSharkAdvancement = Advancement.Builder.create()
@@ -287,7 +289,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.SHARK_TOOTH,
                 Text.translatable("advancements.hybrid-aquatic.bigger_boat.title"),
                 Text.translatable("advancements.hybrid-aquatic.bigger_boat.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.GOAL,
                 true,
                 true,
@@ -299,7 +301,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     EntityPredicate.Builder.create().type(HybridAquaticEntityTags.SHARK).build()
                 )
             )
-            .build(Identifier("hybrid-aquatic", "bigger_boat"))
+            .build(Identifier.of("hybrid-aquatic", "bigger_boat"))
         consumer?.accept(killSharkAdvancement)
 
     }

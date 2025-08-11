@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.block.Blocks
-import net.minecraft.data.server.recipe.RecipeJsonProvider
+import net.minecraft.data.server.recipe.RecipeExporter
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder
 import net.minecraft.item.Item
@@ -15,12 +15,16 @@ import net.minecraft.item.Items
 import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.recipe.RecipeSerializer
 import net.minecraft.recipe.book.RecipeCategory
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.util.Identifier
-import java.util.function.Consumer
+import java.util.concurrent.CompletableFuture
 
-class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
-    override fun generate(exporter: Consumer<RecipeJsonProvider>) {
+class RecipeProvider(
+    output: FabricDataOutput,
+    registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>?
+) : FabricRecipeProvider(output, registriesFuture) {
+    override fun generate(exporter: RecipeExporter) {
         // misc recipes
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, Blocks.SPONGE)
             .pattern("SS ")
@@ -38,7 +42,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_stick", InventoryChangedCriterion.Conditions.items(Items.STICK))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.BUOY,2)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.BUOY, 2)
             .pattern(" L ")
             .pattern(" S ")
             .pattern(" W ")
@@ -48,7 +52,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_lantern", InventoryChangedCriterion.Conditions.items(Items.LANTERN))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_BLADE,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_BLADE, 1)
             .pattern(" C ")
             .pattern(" C ")
             .pattern(" S ")
@@ -57,7 +61,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_coral_chunk", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.CORAL_CHUNK))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_PICKAXE,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_PICKAXE, 1)
             .pattern("CCC")
             .pattern(" S ")
             .pattern(" S ")
@@ -66,7 +70,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_coral_chunk", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.CORAL_CHUNK))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_AXE,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_AXE, 1)
             .pattern(" CC")
             .pattern(" SC")
             .pattern(" S ")
@@ -75,7 +79,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_coral_chunk", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.CORAL_CHUNK))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_SHOVEL,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_SHOVEL, 1)
             .pattern(" C ")
             .pattern(" S ")
             .pattern(" S ")
@@ -84,7 +88,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_coral_chunk", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.CORAL_CHUNK))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_HOE,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_HOE, 1)
             .pattern(" CC")
             .pattern(" S ")
             .pattern(" S ")
@@ -93,7 +97,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_coral_chunk", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.CORAL_CHUNK))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_SPEAR,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_SPEAR, 1)
             .pattern(" N ")
             .pattern(" N ")
             .pattern(" S ")
@@ -102,7 +106,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_shell", InventoryChangedCriterion.Conditions.items(Items.NAUTILUS_SHELL))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_PICKAXE,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_PICKAXE, 1)
             .pattern("NNN")
             .pattern(" S ")
             .pattern(" S ")
@@ -111,7 +115,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_shell", InventoryChangedCriterion.Conditions.items(Items.NAUTILUS_SHELL))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_AXE,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_AXE, 1)
             .pattern(" NN")
             .pattern(" SN")
             .pattern(" S ")
@@ -120,7 +124,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_shell", InventoryChangedCriterion.Conditions.items(Items.NAUTILUS_SHELL))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_SHOVEL,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_SHOVEL, 1)
             .pattern(" N ")
             .pattern(" S ")
             .pattern(" S ")
@@ -129,7 +133,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_shell", InventoryChangedCriterion.Conditions.items(Items.NAUTILUS_SHELL))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_HOE,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_HOE, 1)
             .pattern(" NN")
             .pattern(" S ")
             .pattern(" S ")
@@ -138,7 +142,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_shell", InventoryChangedCriterion.Conditions.items(Items.NAUTILUS_SHELL))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.NAUTILUS_HELMET,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.NAUTILUS_HELMET, 1)
             .pattern("NNN")
             .pattern("N N")
             .pattern("   ")
@@ -146,7 +150,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_shell", InventoryChangedCriterion.Conditions.items(Items.NAUTILUS_SHELL))
             .offerTo(exporter)
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.NAUTILUS_PAULDRONS,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.NAUTILUS_PAULDRONS, 1)
             .pattern("N N")
             .pattern("N N")
             .pattern("   ")
@@ -154,14 +158,26 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .criterion("has_shell", InventoryChangedCriterion.Conditions.items(Items.NAUTILUS_SHELL))
             .offerTo(exporter)
 
-        offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, HybridAquaticBlocks.DRIFTWOOD_SLAB, HybridAquaticBlocks.DRIFTWOOD_PLANKS)
+        offerSlabRecipe(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticBlocks.DRIFTWOOD_SLAB,
+            HybridAquaticBlocks.DRIFTWOOD_PLANKS
+        )
         offerBarkBlockRecipe(exporter, HybridAquaticBlocks.DRIFTWOOD_WOOD, HybridAquaticBlocks.DRIFTWOOD_LOG)
         offerPlanksRecipe(exporter, HybridAquaticBlocks.DRIFTWOOD_PLANKS, HybridAquaticItemTags.DRIFTWOOD_LOG_WOOD, 4)
-        offerPressurePlateRecipe(exporter, HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE, HybridAquaticBlocks.DRIFTWOOD_PLANKS)
+        offerPressurePlateRecipe(
+            exporter,
+            HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE,
+            HybridAquaticBlocks.DRIFTWOOD_PLANKS
+        )
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, HybridAquaticBlocks.DRIFTWOOD_BUTTON, 1)
             .input(HybridAquaticBlocks.DRIFTWOOD_PLANKS)
-            .criterion("has_driftwood_planks", InventoryChangedCriterion.Conditions.items(HybridAquaticBlocks.DRIFTWOOD_PLANKS))
+            .criterion(
+                "has_driftwood_planks",
+                InventoryChangedCriterion.Conditions.items(HybridAquaticBlocks.DRIFTWOOD_PLANKS)
+            )
             .offerTo(exporter)
 
         // armor recipes
@@ -169,8 +185,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .pattern("S S")
             .pattern("SSS")
             .pattern("SSS")
-            .input('S', Items.SCUTE)
-            .criterion("has_scute", InventoryChangedCriterion.Conditions.items(Items.SCUTE))
+            .input('S', Items.TURTLE_SCUTE)
+            .criterion("has_scute", InventoryChangedCriterion.Conditions.items(Items.TURTLE_SCUTE))
             .offerTo(exporter)
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, HybridAquaticItems.DIVING_HELMET)
@@ -241,7 +257,10 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, HybridAquaticItems.CREEPERMAGNET_HOOK)
             .input(HybridAquaticItems.MAGNETIC_HOOK)
             .input(Items.GUNPOWDER)
-            .criterion("has_magnetic_hook", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.MAGNETIC_HOOK))
+            .criterion(
+                "has_magnetic_hook",
+                InventoryChangedCriterion.Conditions.items(HybridAquaticItems.MAGNETIC_HOOK)
+            )
             .offerTo(exporter)
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.TOOLS, HybridAquaticItems.OMINOUS_HOOK)
@@ -254,8 +273,11 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .input(HybridAquaticItems.VAMPIRE_CRAB_CLAW)
             .input(HybridAquaticItems.DUNGENESS_CRAB_CLAW)
             .input(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW)
-            .criterion("has_crab_claw", InventoryChangedCriterion.Conditions.items(
-                ItemPredicate.Builder.create().tag(HybridAquaticItemTags.CRAB_CLAW).build()))
+            .criterion(
+                "has_crab_claw", InventoryChangedCriterion.Conditions.items(
+                    ItemPredicate.Builder.create().tag(HybridAquaticItemTags.CRAB_CLAW).build()
+                )
+            )
             .offerTo(exporter)
 
         //#endregion
@@ -297,33 +319,45 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .offerTo(exporter)
 
         // food items
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, HybridAquaticItems.RAW_CRAB,1)
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, HybridAquaticItems.RAW_CRAB, 1)
             .input(HybridAquaticItemTags.CRAB_CLAW)
-            .criterion("has_crab_claw", InventoryChangedCriterion.Conditions.items(
-                ItemPredicate.Builder.create().tag(HybridAquaticItemTags.CRAB_CLAW).build()))
+            .criterion(
+                "has_crab_claw", InventoryChangedCriterion.Conditions.items(
+                    ItemPredicate.Builder.create().tag(HybridAquaticItemTags.CRAB_CLAW).build()
+                )
+            )
             .offerTo(exporter)
 
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, HybridAquaticItems.RAW_LOBSTER,1)
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, HybridAquaticItems.RAW_LOBSTER, 1)
             .input(HybridAquaticItems.LOBSTER_CLAW)
             .criterion("has_lobster_claw", InventoryChangedCriterion.Conditions.items(HybridAquaticItems.LOBSTER_CLAW))
             .offerTo(exporter)
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_MEAT, 1)
             .input(HybridAquaticItemTags.SMALL_FISH)
-            .criterion("has_small_fish", InventoryChangedCriterion.Conditions.items(
-                ItemPredicate.Builder.create().tag(HybridAquaticItemTags.SMALL_FISH).build()))
-            .offerTo(exporter, Identifier("hybrid-aquatic", "raw_fish_meat_small"))
+            .criterion(
+                "has_small_fish", InventoryChangedCriterion.Conditions.items(
+                    ItemPredicate.Builder.create().tag(HybridAquaticItemTags.SMALL_FISH).build()
+                )
+            )
+            .offerTo(exporter, Identifier.of("hybrid-aquatic", "raw_fish_meat_small"))
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_MEAT, 2)
             .input(HybridAquaticItemTags.MEDIUM_FISH)
-            .criterion("has_medium_fish", InventoryChangedCriterion.Conditions.items(
-                ItemPredicate.Builder.create().tag(HybridAquaticItemTags.MEDIUM_FISH).build()))
-            .offerTo(exporter, Identifier("hybrid-aquatic", "raw_fish_meat_medium"))
+            .criterion(
+                "has_medium_fish", InventoryChangedCriterion.Conditions.items(
+                    ItemPredicate.Builder.create().tag(HybridAquaticItemTags.MEDIUM_FISH).build()
+                )
+            )
+            .offerTo(exporter, Identifier.of("hybrid-aquatic", "raw_fish_meat_medium"))
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_STEAK, 2)
             .input(HybridAquaticItemTags.LARGE_FISH)
-            .criterion("has_large_fish", InventoryChangedCriterion.Conditions.items(
-                ItemPredicate.Builder.create().tag(HybridAquaticItemTags.LARGE_FISH).build()))
+            .criterion(
+                "has_large_fish", InventoryChangedCriterion.Conditions.items(
+                    ItemPredicate.Builder.create().tag(HybridAquaticItemTags.LARGE_FISH).build()
+                )
+            )
             .offerTo(exporter)
 
         // cooking recipes
@@ -338,13 +372,14 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     }
 
     private fun offerCookingRecipes(
-        exporter: Consumer<RecipeJsonProvider>,
+        exporter: RecipeExporter,
         input: Item,
         output: Item,
         experience: Float
     ) {
         offerFoodCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING, 200, input, output, experience)
         offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, input, output, experience)
-        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, input, output, experience)
+        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, input, output, experience
+        )
     }
 }
