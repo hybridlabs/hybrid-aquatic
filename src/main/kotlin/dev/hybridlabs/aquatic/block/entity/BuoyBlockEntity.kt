@@ -7,6 +7,7 @@ import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.util.GeckoLibUtil
+import software.bernie.geckolib.util.RenderUtil
 
 
 class BuoyBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.BUOY, pos, state), GeoAnimatable {
@@ -29,8 +30,8 @@ class BuoyBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAqua
         return animCache
     }
 
-    override fun getTick(p0: Any): Double {
-        return RenderUtils.getCurrentTick()
+    override fun getTick(blockEntity: Any?): Double {
+        return RenderUtil.getCurrentTick()
     }
 
     companion object {

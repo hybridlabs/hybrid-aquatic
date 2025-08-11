@@ -1,6 +1,7 @@
 accessWidener v2 named
 
 accessible method net/minecraft/block/BlockWithEntity checkType (Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityTicker;)Lnet/minecraft/block/entity/BlockEntityTicker;
+accessible method net/minecraft/block/BlockWithEntity validateTicker (Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityType;Lnet/minecraft/block/entity/BlockEntityTicker;)Lnet/minecraft/block/entity/BlockEntityTicker;
 
 accessible field net/minecraft/block/entity/BlockEntityType blocks Ljava/util/Set;
 mutable field net/minecraft/block/entity/BlockEntityType blocks Ljava/util/Set;

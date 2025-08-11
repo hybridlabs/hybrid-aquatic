@@ -8,6 +8,7 @@ import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.util.GeckoLibUtil
+import software.bernie.geckolib.util.RenderUtil
 
 class GiantGreenAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(HybridAquaticBlockEntityTypes.GIANT_GREEN_ANEMONE, pos, state),
@@ -33,7 +34,7 @@ class GiantGreenAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
     }
 
     override fun getTick(o: Any): Double {
-        return RenderUtils.getCurrentTick()
+        return RenderUtil.getCurrentTick()
     }
 
     override fun toUpdatePacket(): BlockEntityUpdateS2CPacket {
