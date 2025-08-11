@@ -13,9 +13,11 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.loot.LootTable
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.entry.RegistryEntry
-import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
@@ -39,11 +41,12 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: World) :
         goalSelector.add(1, RevengeGoal(this))
     }
 
-    override fun getLootTableId(): Identifier {
-        return when (variant) {
+    override fun getLootTableId(): RegistryKey<LootTable> {
+        val id = when (variant) {
             Type.BLUE_SPOTTED -> HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY
             Type.SPOTTED_EAGLE -> HybridAquaticLootTables.SPOTTED_EAGLE_RAY
         }
+        return RegistryKey.of(RegistryKeys.LOOT_TABLE, id)
     }
 
     override fun initialize(

@@ -10,8 +10,10 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.loot.LootTable
 import net.minecraft.nbt.NbtCompound
-import net.minecraft.util.Identifier
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
@@ -37,11 +39,12 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
         return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getLootTableId(): Identifier {
-        return when (variant) {
+    override fun getLootTableId(): RegistryKey<LootTable> {
+        val id = when (variant) {
             Type.CLAWED -> HybridAquaticLootTables.CLAWED_LOBSTER
             else -> HybridAquaticLootTables.CLAWLESS_LOBSTER
         }
+        return RegistryKey.of(RegistryKeys.LOOT_TABLE, id)
     }
 
     companion object {

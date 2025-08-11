@@ -43,11 +43,10 @@ class MahiEntity(entityType: EntityType<out MahiEntity>, world: World) :
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         variant = Type.entries.random(Random)
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun initGoals() {

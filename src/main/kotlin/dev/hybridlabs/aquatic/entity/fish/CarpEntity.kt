@@ -12,7 +12,10 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
 import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.loot.LootTable
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
@@ -55,11 +58,12 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
         return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getLootTableId(): Identifier {
-        return when (variant) {
+    override fun getLootTableId(): RegistryKey<LootTable> {
+        val id = when (variant) {
             Type.COMMON -> HybridAquaticLootTables.CARP
             else -> HybridAquaticLootTables.KOI
         }
+        return RegistryKey.of(RegistryKeys.LOOT_TABLE, id)
     }
 
     companion object {

@@ -16,10 +16,6 @@ class BettaEntity(entityType: EntityType<out BettaEntity>, world: World) :
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK)) {
 
-    public override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/betta")
-    }
-
     override fun getLimitPerChunk(): Int {
         return 2
     }

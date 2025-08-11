@@ -13,7 +13,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry
 import net.minecraft.loot.LootTable
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.registry.RegistryKey
-import net.minecraft.util.Identifier
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.function.ValueLists
 import net.minecraft.world.LocalDifficulty
@@ -39,10 +39,11 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     }
 
     override fun getLootTableId(): RegistryKey<LootTable> {
-        return when (variant) {
+        val id = when (variant) {
             Type.SHELL -> HybridAquaticLootTables.HERMIT_CRAB_SHELL
             Type.SKULL -> HybridAquaticLootTables.HERMIT_CRAB_SKULL
         }
+        return RegistryKey.of(RegistryKeys.LOOT_TABLE, id)
     }
 
     companion object {
