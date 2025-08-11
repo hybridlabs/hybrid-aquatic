@@ -13,14 +13,19 @@ import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.function.SetCountLootFunction
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
-import net.minecraft.util.Identifier
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.RegistryWrapper
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class GenericLootTableProvider(output: FabricDataOutput) :
-    SimpleFabricLootTableProvider(output, LootContextTypes.GENERIC) {
-    override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
+class GenericLootTableProvider(
+    output: FabricDataOutput,
+    registryLookup: CompletableFuture<RegistryWrapper.WrapperLookup>?
+) : SimpleFabricLootTableProvider(output, registryLookup, LootContextTypes.GENERIC) {
+    override fun accept(exporter: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) {
         exporter.accept(
-            HybridAquaticLootTables.CRAB_POT_TREASURE_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.CRAB_POT_TREASURE_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.CRAB_POT_TREASURE_ID)
                 .pool(
@@ -77,7 +82,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID)
                 .pool(
@@ -99,7 +104,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.OAK_CRATE_TREASURE_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.OAK_CRATE_TREASURE_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
@@ -175,7 +180,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
@@ -251,7 +256,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
@@ -327,7 +332,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
@@ -403,7 +408,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
@@ -479,7 +484,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
@@ -555,7 +560,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
@@ -631,7 +636,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 // the universal crate loot pool
@@ -711,7 +716,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.VENT_LOOT_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.VENT_LOOT_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.VENT_LOOT_ID)
                 .pool(
@@ -732,7 +737,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_BLUE_TANG,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.SURGEONFISH_BLUE_TANG),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -741,7 +746,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -750,7 +755,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_UNICORNFISH,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.SURGEONFISH_UNICORNFISH),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -759,7 +764,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_SOHAL,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.SURGEONFISH_SOHAL),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -768,7 +773,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_LINED,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.SURGEONFISH_LINED),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -777,7 +782,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_ORANGESHOULDER,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.SURGEONFISH_ORANGESHOULDER),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -786,7 +791,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_POWDER_BLUE_TANG,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.SURGEONFISH_POWDER_BLUE_TANG),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -795,7 +800,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_YELLOW_TANG,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.SURGEONFISH_YELLOW_TANG),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -804,7 +809,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.KOI,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.KOI),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -813,7 +818,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CARP,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.CARP),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -822,7 +827,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.YELLOWFIN,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.YELLOWFIN),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -831,7 +836,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.BLUEFIN,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.BLUEFIN),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -840,7 +845,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SPOTTED_EAGLE_RAY,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.SPOTTED_EAGLE_RAY),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -849,7 +854,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CLAWED_LOBSTER,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.CLAWED_LOBSTER),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -862,7 +867,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CLAWLESS_LOBSTER,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.CLAWLESS_LOBSTER),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -871,7 +876,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.HERMIT_CRAB_SKULL,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.HERMIT_CRAB_SKULL),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -880,7 +885,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.HERMIT_CRAB_SHELL,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.HERMIT_CRAB_SHELL),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -889,7 +894,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_FIRE,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.DECORATOR_FIRE),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -898,7 +903,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_BRAIN,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.DECORATOR_BRAIN),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -907,7 +912,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_TUBE,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.DECORATOR_TUBE),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -916,7 +921,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_BUBBLE,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.DECORATOR_BUBBLE),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -925,7 +930,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_HORN,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.DECORATOR_HORN),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -934,7 +939,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_THORN,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.DECORATOR_THORN),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -943,7 +948,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_LOPHELIA,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.DECORATOR_LOPHELIA),
             LootTable.builder()
                 .pool(
                     LootPool.builder()
@@ -952,7 +957,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID,
+            RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID),
             LootTable.builder()
                 .randomSequenceId(HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID)
                 .pool(

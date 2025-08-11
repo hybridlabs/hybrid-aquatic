@@ -20,10 +20,17 @@ import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.ItemTags
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
+import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
-class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(output) {
-    override fun generateAdvancement(p0: RegistryWrapper.WrapperLookup?, p1: Consumer<AdvancementEntry>?) {
+class AdvancementProvider(
+    output: FabricDataOutput,
+    registryLookup: CompletableFuture<RegistryWrapper.WrapperLookup>
+) : FabricAdvancementProvider(output, registryLookup) {
+    override fun generateAdvancement(
+        registryLookup: RegistryWrapper.WrapperLookup,
+        consumer: Consumer<AdvancementEntry>
+    ) {
         val rootAdvancement = Advancement.Builder.create()
             .display(
                 HybridAquaticItems.YELLOWFIN_TUNA,
@@ -40,10 +47,11 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 EnterBlockCriterion.Conditions.block(WATER)
             )
             .build(Identifier.of("hybrid-aquatic", "root"))
-        consumer?.accept(rootAdvancement)
+
+        consumer.accept(rootAdvancement)
+
 
         val boatAdvancement = Advancement.Builder.create()
-            .parent(rootAdvancement)
             .display(
                 Items.OAK_BOAT,
                 Text.translatable("advancements.hybrid-aquatic.boat.title"),
@@ -61,7 +69,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 )
             )
             .build(Identifier.of("hybrid-aquatic", "boat"))
-        consumer?.accept(boatAdvancement)
+        consumer.accept(boatAdvancement)
 
         val fishingNetAdvancement = Advancement.Builder.create()
             .parent(rootAdvancement)
@@ -80,7 +88,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.FISHING_NET)
             )
             .build(Identifier.of("hybrid-aquatic", "fishing_net"))
-        consumer?.accept(fishingNetAdvancement)
+        consumer.accept(fishingNetAdvancement)
 
         val glowstickAdvancement = Advancement.Builder.create()
             .parent(boatAdvancement)
@@ -99,7 +107,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.GLOWSTICK)
             )
             .build(Identifier.of("hybrid-aquatic", "glowstick"))
-        consumer?.accept(glowstickAdvancement)
+        consumer.accept(glowstickAdvancement)
 
         val buoyAdvancement = Advancement.Builder.create()
             .parent(boatAdvancement)
@@ -107,7 +115,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.BUOY,
                 Text.translatable("advancements.hybrid-aquatic.buoy.title"),
                 Text.translatable("advancements.hybrid-aquatic.buoy.description"),
-                Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+                Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),
                 AdvancementFrame.TASK,
                 true,
                 true,
@@ -118,7 +126,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.BUOY)
             )
             .build(Identifier.of("hybrid-aquatic", "buoy"))
-        consumer?.accept(buoyAdvancement)
+        consumer.accept(buoyAdvancement)
 
         val divingSuitAdvancement = Advancement.Builder.create()
             .parent(boatAdvancement)
@@ -142,7 +150,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 )
             )
             .build(Identifier.of("hybrid-aquatic", "diving_suit"))
-        consumer?.accept(divingSuitAdvancement)
+        consumer.accept(divingSuitAdvancement)
 
         val obtainPearlAdvancement = Advancement.Builder.create()
             .parent(divingSuitAdvancement)
@@ -161,7 +169,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.PEARL)
             )
             .build(Identifier.of("hybrid-aquatic", "pearl"))
-        consumer?.accept(obtainPearlAdvancement)
+        consumer.accept(obtainPearlAdvancement)
 
         val obtainBlackPearlAdvancement = Advancement.Builder.create()
             .parent(obtainPearlAdvancement)
@@ -180,7 +188,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.BLACK_PEARL)
             )
             .build(Identifier.of("hybrid-aquatic", "black_pearl"))
-        consumer?.accept(obtainBlackPearlAdvancement)
+        consumer.accept(obtainBlackPearlAdvancement)
 
         val fishingHookAdvancement = Advancement.Builder.create()
             .parent(fishingNetAdvancement)
@@ -201,7 +209,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 )
             )
             .build(Identifier.of("hybrid-aquatic", "hook"))
-        consumer?.accept(fishingHookAdvancement)
+        consumer.accept(fishingHookAdvancement)
 
         val creeperHookAdvancement = Advancement.Builder.create()
             .parent(fishingHookAdvancement)
@@ -220,7 +228,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.CREEPERMAGNET_HOOK)
             )
             .build(Identifier.of("hybrid-aquatic", "creeper_hook"))
-        consumer?.accept(creeperHookAdvancement)
+        consumer.accept(creeperHookAdvancement)
 
         val crabClawAdvancement = Advancement.Builder.create()
             .parent(rootAdvancement)
@@ -241,7 +249,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 )
             )
             .build(Identifier.of("hybrid-aquatic", "crab_claw"))
-        consumer?.accept(crabClawAdvancement)
+        consumer.accept(crabClawAdvancement)
 
         val ominousHookAdvancement = Advancement.Builder.create()
             .parent(crabClawAdvancement)
@@ -260,7 +268,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 InventoryChangedCriterion.Conditions.items(HybridAquaticItems.OMINOUS_HOOK)
             )
             .build(Identifier.of("hybrid-aquatic", "ominous_hook"))
-        consumer?.accept(ominousHookAdvancement)
+        consumer.accept(ominousHookAdvancement)
 
         val killKarkinosAdvancement = Advancement.Builder.create()
             .parent(ominousHookAdvancement)
@@ -277,11 +285,11 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .criterion(
                 "kill_karkinos",
                 OnKilledCriterion.Conditions.createPlayerKilledEntity(
-                    EntityPredicate.Builder.create().type(HybridAquaticEntityTypes.KARKINOS).build()
+                    EntityPredicate.Builder.create().type(HybridAquaticEntityTypes.KARKINOS)
                 )
             )
             .build(Identifier.of("hybrid-aquatic", "kill_karkinos"))
-        consumer?.accept(killKarkinosAdvancement)
+        consumer.accept(killKarkinosAdvancement)
 
         val killSharkAdvancement = Advancement.Builder.create()
             .parent(boatAdvancement)
@@ -298,11 +306,10 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .criterion(
                 "kill_shark",
                 OnKilledCriterion.Conditions.createPlayerKilledEntity(
-                    EntityPredicate.Builder.create().type(HybridAquaticEntityTags.SHARK).build()
+                    EntityPredicate.Builder.create().type(HybridAquaticEntityTags.SHARK)
                 )
             )
             .build(Identifier.of("hybrid-aquatic", "bigger_boat"))
-        consumer?.accept(killSharkAdvancement)
-
+        consumer.accept(killSharkAdvancement)
     }
 }
