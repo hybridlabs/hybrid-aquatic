@@ -101,6 +101,6 @@ object HybridAquaticPotions {
     }
 
     private fun register(id: String, potion: Potion): Potion {
-        return Registry.register(Registries.POTION, Identifier(HybridAquatic.MOD_ID, id), potion)
+        return Registry.register(Registries.POTION, Identifier.of(HybridAquatic.MOD_ID, id), potion)
     }
 }

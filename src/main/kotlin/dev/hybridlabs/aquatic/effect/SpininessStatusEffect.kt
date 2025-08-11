@@ -12,7 +12,7 @@ class SpininessStatusEffect : StatusEffect(StatusEffectCategory.BENEFICIAL, 0x69
         return duration % 40 == 0
     }
 
-    override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
+    override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int): Boolean {
         entity.recentDamageSource?.let { damageSource ->
             val attacker = damageSource.source
             if (attacker is LivingEntity && !attacker.isDead) {
@@ -21,5 +21,6 @@ class SpininessStatusEffect : StatusEffect(StatusEffectCategory.BENEFICIAL, 0x69
                 }
             }
         }
+        return true
     }
 }

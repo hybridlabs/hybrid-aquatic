@@ -18,7 +18,7 @@ enum class HybridAquaticArmorMaterials(
     private val toughness: Float,
     private val knockbackResistance: Float,
     private val repairIngredient: Supplier<Ingredient>
-) : ArmorMaterial {
+) : ArmorMaterial() {
     DIVING("diving", 15, intArrayOf(2, 5, 4, 2), 9,
         SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.0f, 0.0f, Supplier<Ingredient> {
             Ingredient.ofItems(

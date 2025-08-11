@@ -7,10 +7,11 @@ import net.minecraft.entity.effect.StatusEffectCategory
 
 class CorrosionStatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0x9d9136) {
 
-    override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
-        if (entity.world.isClient) return
+    override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int): Boolean {
+        if (entity.world.isClient)
         corrodeTool(entity)
         corrodeArmor(entity)
+    return true
     }
 
     override fun canApplyUpdateEffect(duration: Int, amplifier: Int): Boolean {
