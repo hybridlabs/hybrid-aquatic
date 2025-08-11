@@ -2,13 +2,8 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.entity.crustacean.YetiCrabEntity
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.Waterloggable
+import net.minecraft.block.*
 import net.minecraft.block.enums.Thickness
-import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
@@ -121,7 +116,7 @@ class ThermalVentBlock(
         if (world.isClient || pos == null || state == null) return
 
         if (state.get(THICKNESS) == Thickness.TIP && state.get(WATERLOGGED) && entity !is YetiCrabEntity) {
-            if (!entity.bypassesSteppingEffects() && entity is LivingEntity && !EnchantmentHelper.hasFrostWalker(entity)) {
+            if (!entity.bypassesSteppingEffects() && entity is LivingEntity) {
                 entity.damage(world.damageSources.hotFloor(), fireDamage.toFloat())
                 entity.addStatusEffect(StatusEffectInstance(HybridAquaticStatusEffects.CORROSION, 200, 0))
             }
