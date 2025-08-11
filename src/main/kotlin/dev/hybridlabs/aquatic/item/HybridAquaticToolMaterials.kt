@@ -1,12 +1,14 @@
 package dev.hybridlabs.aquatic.item
 
+import net.minecraft.block.Block
 import net.minecraft.item.ToolMaterial
 import net.minecraft.recipe.Ingredient
+import net.minecraft.registry.tag.BlockTags
+import net.minecraft.registry.tag.TagKey
 import java.util.function.Supplier
 
 
 enum class HybridAquaticToolMaterials(
-    private val miningLevel: Int,
     private val itemDurability: Int,
     private val miningSpeed: Float,
     private val attackDamage: Float,
@@ -14,10 +16,16 @@ enum class HybridAquaticToolMaterials(
     private val repairIngredient: Supplier<Ingredient>
 ) :
     ToolMaterial {
-    SEASHELL(1, 131, 4.0f, 1.0f, 22,
-        Supplier<Ingredient> { Ingredient.ofItems(net.minecraft.item.Items.NAUTILUS_SHELL) }),
-    CORAL(2, 250, 6.0f, 2.0f, 14,
-        Supplier<Ingredient> { Ingredient.ofItems(HybridAquaticItems.CORAL_CHUNK) });
+    SEASHELL(131, 4.0f, 1.0f, 22, Supplier<Ingredient> { Ingredient.ofItems(net.minecraft.item.Items.NAUTILUS_SHELL) }) {
+        override fun getInverseTag(): TagKey<Block> {
+            return BlockTags.INCORRECT_FOR_STONE_TOOL
+        }
+    },
+    CORAL(250, 6.0f, 2.0f, 14, Supplier<Ingredient> { Ingredient.ofItems(HybridAquaticItems.CORAL_CHUNK) }) {
+        override fun getInverseTag(): TagKey<Block> {
+            return BlockTags.INCORRECT_FOR_IRON_TOOL
+        }
+    };
 
     override fun getDurability(): Int {
         return this.itemDurability
@@ -29,10 +37,6 @@ enum class HybridAquaticToolMaterials(
 
     override fun getAttackDamage(): Float {
         return this.attackDamage
-    }
-
-    override fun getMiningLevel(): Int {
-        return this.miningLevel
     }
 
     override fun getEnchantability(): Int {
