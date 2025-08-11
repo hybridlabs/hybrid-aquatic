@@ -5,6 +5,7 @@ import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterial
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
+import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import java.util.function.Supplier
@@ -14,7 +15,7 @@ enum class HybridAquaticArmorMaterials(
     private val durabilityMultiplier: Int,
     private val protectionAmounts: IntArray,
     private val enchantability: Int,
-    private val equipSound: SoundEvent,
+    private val equipSound: RegistryEntry<SoundEvent>,
     private val toughness: Float,
     private val knockbackResistance: Float,
     private val repairIngredient: Supplier<Ingredient>
@@ -44,7 +45,7 @@ enum class HybridAquaticArmorMaterials(
             )
         }),
     MOONJELLYFISH("moon_jelly", 15, intArrayOf(1, 1, 1, 1), 15,
-        SoundEvents.BLOCK_SLIME_BLOCK_PLACE, 0.0f, 0.0f, Supplier<Ingredient> {
+        SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, Supplier<Ingredient> {
             Ingredient.ofItems(
                 Items.SLIME_BALL
             )
@@ -52,7 +53,7 @@ enum class HybridAquaticArmorMaterials(
     TURTLE("turtle", 25, intArrayOf(2, 6, 5, 2), 9,
         SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, 1.0f, 0.3f, Supplier<Ingredient> {
             Ingredient.ofItems(
-                Items.SCUTE
+                Items.TURTLE_SCUTE
             )
         });
 
