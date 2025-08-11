@@ -2,10 +2,10 @@ package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.tooltip.TooltipType
 import net.minecraft.nbt.NbtElement
 import net.minecraft.registry.DynamicRegistryManager
 import net.minecraft.stat.Stats
@@ -22,8 +22,13 @@ class SeaMessageBookItem(settings: Settings) : Item(settings) {
         return super.getName(stack)
     }
 
-    override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-        world?.registryManager?.let { registryManager ->
+    override fun appendTooltip(
+        stack: ItemStack,
+        context: TooltipContext,
+        tooltip: MutableList<Text>,
+        type: TooltipType
+    ) {
+        world.registryManager?.let { registryManager ->
             val message = getSeaMessage(stack, registryManager) ?: return@let
             message.author.ifPresent { author ->
                 tooltip.add(Text.translatable("book.byAuthor", author).formatted(Formatting.GRAY))
