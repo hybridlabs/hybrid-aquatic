@@ -36,10 +36,10 @@ object HybridAquaticItemTags {
     val ARMORS = createConventional("armors")
 
     private fun create(id: String): TagKey<Item> {
-        return TagKey.of(RegistryKeys.ITEM, Identifier(HybridAquatic.MOD_ID, id))
+        return TagKey.of(RegistryKeys.ITEM, Identifier.of(HybridAquatic.MOD_ID, id))
     }
 
     private fun createConventional(id: String): TagKey<Item> {
-        return TagRegistration.ITEM_TAG_REGISTRATION.registerCommon(id)
+        return TagRegistration.ITEM_TAG_REGISTRATION.registerC(id)
     }
 }
