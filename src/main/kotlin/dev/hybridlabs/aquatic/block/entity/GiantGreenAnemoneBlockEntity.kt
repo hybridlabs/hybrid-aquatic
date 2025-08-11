@@ -11,8 +11,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import software.bernie.geckolib.util.RenderUtil
 
 class GiantGreenAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
-    BlockEntity(HybridAquaticBlockEntityTypes.GIANT_GREEN_ANEMONE, pos, state),
-    GeoAnimatable {
+    BlockEntity(HybridAquaticBlockEntityTypes.GIANT_GREEN_ANEMONE, pos, state), GeoAnimatable {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
 
