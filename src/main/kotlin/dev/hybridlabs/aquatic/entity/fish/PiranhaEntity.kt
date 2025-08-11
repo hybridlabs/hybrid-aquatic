@@ -18,8 +18,8 @@ import net.minecraft.util.TimeHelper
 import net.minecraft.util.math.intprovider.UniformIntProvider
 import net.minecraft.world.Difficulty
 import net.minecraft.world.World
+import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
 import java.util.*
 
 class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: World) :

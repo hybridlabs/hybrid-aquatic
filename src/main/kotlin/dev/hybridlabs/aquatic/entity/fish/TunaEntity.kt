@@ -45,13 +45,12 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: World) :
         world: ServerWorldAccess,
         difficulty: LocalDifficulty,
         spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
+        entityData: EntityData?
     ): EntityData? {
         val biome = world.getBiome(this.blockPos)
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.initialize(world, difficulty, spawnReason, entityData)
     }
 
     override fun initGoals() {

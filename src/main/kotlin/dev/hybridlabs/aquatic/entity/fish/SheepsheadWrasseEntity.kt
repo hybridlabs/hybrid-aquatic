@@ -39,9 +39,9 @@ class SheepsheadWrasseEntity(entityType: EntityType<out SheepsheadWrasseEntity>,
     }
 
     override fun initialize(
-        world: ServerWorldAccess?,
-        difficulty: LocalDifficulty?,
-        spawnReason: SpawnReason?,
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
         entityData: EntityData?
     ): EntityData? {
         variant = Type.entries.random(Random)
