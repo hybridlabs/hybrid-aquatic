@@ -9,10 +9,11 @@ import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.block.enums.Instrument
 import net.minecraft.block.piston.PistonBehavior
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.Identifier
 
@@ -29,7 +30,12 @@ object HybridAquaticBlocks {
                 .nonOpaque()
                 .pistonBehavior(PistonBehavior.DESTROY)
                 .sounds(BlockSoundGroup.SLIME)
-                .drops(Identifier(HybridAquatic.MOD_ID, "blocks/anemone"))
+                .drops(
+                    RegistryKey.of(
+                        RegistryKeys.LOOT_TABLE,
+                        Identifier.of(HybridAquatic.MOD_ID, "blocks/anemone")
+                    )
+                )
         )
     )
 
@@ -42,7 +48,12 @@ object HybridAquaticBlocks {
                 .nonOpaque()
                 .pistonBehavior(PistonBehavior.DESTROY)
                 .sounds(BlockSoundGroup.SLIME)
-                .drops(Identifier(HybridAquatic.MOD_ID, "blocks/giant_green_anemone"))
+                .drops(
+                    RegistryKey.of(
+                        RegistryKeys.LOOT_TABLE,
+                        Identifier.of(HybridAquatic.MOD_ID, "blocks/giant_green_anemone")
+                    )
+                )
         )
     )
 
@@ -55,7 +66,12 @@ object HybridAquaticBlocks {
                 .nonOpaque()
                 .pistonBehavior(PistonBehavior.DESTROY)
                 .sounds(BlockSoundGroup.SLIME)
-                .drops(Identifier(HybridAquatic.MOD_ID, "blocks/strawberry_anemone"))
+                .drops(
+                    RegistryKey.of(
+                        RegistryKeys.LOOT_TABLE,
+                        Identifier.of(HybridAquatic.MOD_ID, "blocks/strawberry_anemone")
+                    )
+                )
         )
     )
 
@@ -67,14 +83,28 @@ object HybridAquaticBlocks {
         )
     )
 
-    val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie", createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL))
-    val BULL_SHARK_PLUSHIE = register("bull_shark_plushie", createPlushieBlock(PlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL))
-    val FRILLED_SHARK_PLUSHIE = register("frilled_shark_plushie", createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK, Blocks.GRAY_WOOL))
-    val GREAT_WHITE_SHARK_PLUSHIE = register("great_white_shark_plushie", createPlushieBlock(PlushieBlock.Variant.GREAT_WHITE_SHARK, Blocks.LIGHT_GRAY_WOOL))
-    val HAMMERHEAD_SHARK_PLUSHIE = register("hammerhead_shark_plushie", createPlushieBlock(PlushieBlock.Variant.HAMMERHEAD_SHARK, Blocks.LIGHT_GRAY_WOOL))
-    val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie", createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK, Blocks.LIGHT_BLUE_WOOL))
-    val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie", createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL))
-    val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie", createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.LIGHT_GRAY_WOOL))
+    val BASKING_SHARK_PLUSHIE =
+        register("basking_shark_plushie", createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL))
+    val BULL_SHARK_PLUSHIE =
+        register("bull_shark_plushie", createPlushieBlock(PlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL))
+    val FRILLED_SHARK_PLUSHIE =
+        register("frilled_shark_plushie", createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK, Blocks.GRAY_WOOL))
+    val GREAT_WHITE_SHARK_PLUSHIE = register(
+        "great_white_shark_plushie",
+        createPlushieBlock(PlushieBlock.Variant.GREAT_WHITE_SHARK, Blocks.LIGHT_GRAY_WOOL)
+    )
+    val HAMMERHEAD_SHARK_PLUSHIE = register(
+        "hammerhead_shark_plushie",
+        createPlushieBlock(PlushieBlock.Variant.HAMMERHEAD_SHARK, Blocks.LIGHT_GRAY_WOOL)
+    )
+    val THRESHER_SHARK_PLUSHIE = register(
+        "thresher_shark_plushie",
+        createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK, Blocks.LIGHT_BLUE_WOOL)
+    )
+    val TIGER_SHARK_PLUSHIE =
+        register("tiger_shark_plushie", createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL))
+    val WHALE_SHARK_PLUSHIE =
+        register("whale_shark_plushie", createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.LIGHT_GRAY_WOOL))
 
     val CRAB_POT = register(
         "crab_pot", CrateBlock(
@@ -253,31 +283,29 @@ object HybridAquaticBlocks {
     val DRIFTWOOD_SLAB = register("driftwood_slab", SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_STAIRS)))
     val DRIFTWOOD_BUTTON = register(
         "driftwood_button",
-        ButtonBlock(FabricBlockSettings.copyOf(Blocks.OAK_BUTTON), BlockSetType.OAK, 25, true)
+        ButtonBlock(BlockSetType.OAK, 25, FabricBlockSettings.copyOf(Blocks.OAK_BUTTON))
     )
     val DRIFTWOOD_PRESSURE_PLATE = register(
         "driftwood_pressure_plate",
         PressurePlateBlock(
-            PressurePlateBlock.ActivationRule.EVERYTHING,
-            FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE),
-            BlockSetType.OAK
+            BlockSetType.OAK,
+            FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE)
         )
     )
     val DRIFTWOOD_FENCE = register("driftwood_fence", FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE)))
     val DRIFTWOOD_FENCE_GATE = register(
         "driftwood_fence_gate",
-        FenceGateBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE), HybridAquaticWoodTypes.DRIFTWOOD)
+        FenceGateBlock(HybridAquaticWoodTypes.DRIFTWOOD, FabricBlockSettings.copyOf(Blocks.OAK_FENCE))
     )
     val DRIFTWOOD_DOOR =
-        register("driftwood_door", DoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_DOOR), BlockSetType.OAK))
+        register("driftwood_door", DoorBlock(BlockSetType.OAK, FabricBlockSettings.copyOf(Blocks.OAK_DOOR)))
     val DRIFTWOOD_TRAPDOOR =
-        register("driftwood_trapdoor", TrapdoorBlock(FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR), BlockSetType.OAK))
+        register("driftwood_trapdoor", TrapdoorBlock(BlockSetType.OAK, FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR)))
 
     val DEAD_LOPHELIA_CORAL_BLOCK = register(
         "dead_lophelia_coral_block", DeadCoralBlock(
             FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.OFF_WHITE)
-                .instrument(Instrument.BASEDRUM)
                 .requiresTool()
                 .hardness(1.0F)
                 .sounds(BlockSoundGroup.CORAL)
@@ -288,7 +316,6 @@ object HybridAquaticBlocks {
         "lophelia_coral_block", CoralBlockBlock(
             DEAD_LOPHELIA_CORAL_BLOCK, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.OFF_WHITE)
-                .instrument(Instrument.BASEDRUM)
                 .requiresTool()
                 .hardness(1.0F)
                 .sounds(BlockSoundGroup.CORAL)
@@ -299,7 +326,6 @@ object HybridAquaticBlocks {
         "dead_button_coral_block", DeadCoralBlock(
             FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.OFF_WHITE)
-                .instrument(Instrument.BASEDRUM)
                 .requiresTool()
                 .hardness(1.0F)
                 .sounds(BlockSoundGroup.CORAL)
@@ -310,7 +336,6 @@ object HybridAquaticBlocks {
         "button_coral_block", CoralBlockBlock(
             DEAD_BUTTON_CORAL_BLOCK, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.PURPLE)
-                .instrument(Instrument.BASEDRUM)
                 .requiresTool()
                 .hardness(1.0F)
                 .sounds(BlockSoundGroup.CORAL)
@@ -321,7 +346,6 @@ object HybridAquaticBlocks {
         "dead_sun_coral_block", DeadCoralBlock(
             FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.OFF_WHITE)
-                .instrument(Instrument.BASEDRUM)
                 .requiresTool()
                 .hardness(1.0F)
                 .sounds(BlockSoundGroup.CORAL)
@@ -332,7 +356,6 @@ object HybridAquaticBlocks {
         "sun_coral_block", CoralBlockBlock(
             DEAD_SUN_CORAL_BLOCK, FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.PURPLE)
-                .instrument(Instrument.BASEDRUM)
                 .requiresTool()
                 .hardness(1.0F)
                 .sounds(BlockSoundGroup.CORAL)
@@ -425,8 +448,11 @@ object HybridAquaticBlocks {
     val DEAD_THORN_CORAL_BLOCK = register(
         "dead_thorn_coral_block",
         DeadCoralBlock(
-            FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.OFF_WHITE)
-                .instrument(Instrument.BASEDRUM).requiresTool().hardness(1.0F).sounds(BlockSoundGroup.CORAL)
+            FabricBlockSettings.copyOf(Blocks.DEAD_FIRE_CORAL_BLOCK)
+                .mapColor(MapColor.OFF_WHITE)
+                .requiresTool()
+                .hardness(1.0F)
+                .sounds(BlockSoundGroup.CORAL)
         )
     )
 
@@ -434,8 +460,11 @@ object HybridAquaticBlocks {
         "thorn_coral_block",
         CoralBlockBlock(
             DEAD_THORN_CORAL_BLOCK,
-            FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_BLOCK).mapColor(MapColor.BLACK).instrument(Instrument.BASEDRUM)
-                .requiresTool().hardness(1.0F).sounds(BlockSoundGroup.CORAL)
+            FabricBlockSettings.copyOf(Blocks.FIRE_CORAL_BLOCK)
+                .mapColor(MapColor.BLACK)
+                .requiresTool()
+                .hardness(1.0F)
+                .sounds(BlockSoundGroup.CORAL)
         )
     )
 
@@ -524,7 +553,12 @@ object HybridAquaticBlocks {
                 .nonOpaque()
                 .hardness(1.0F)
                 .pistonBehavior(PistonBehavior.DESTROY)
-                .drops(Identifier(HybridAquatic.MOD_ID, "blocks/giant_clam"))
+                .drops(
+                    RegistryKey.of(
+                        RegistryKeys.LOOT_TABLE,
+                        Identifier.of(HybridAquatic.MOD_ID, "blocks/giant_clam")
+                    )
+                )
         )
     )
 
@@ -546,12 +580,11 @@ object HybridAquaticBlocks {
                 .breakInstantly()
                 .pistonBehavior(PistonBehavior.DESTROY)
                 .sounds(BlockSoundGroup.WOOL)
-                .instrument(Instrument.CUSTOM_HEAD)
         )
     }
 
     private fun register(id: String, block: Block): Block {
-        return Registry.register(Registries.BLOCK, Identifier(HybridAquatic.MOD_ID, id), block)
+        return Registry.register(Registries.BLOCK, Identifier.of(HybridAquatic.MOD_ID, id), block)
     }
 
     /**
