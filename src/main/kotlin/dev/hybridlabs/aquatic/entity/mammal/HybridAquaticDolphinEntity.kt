@@ -7,7 +7,6 @@ import net.minecraft.entity.ai.control.YawAdjustingLookControl
 import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.ai.pathing.PathNodeType
 import net.minecraft.entity.ai.pathing.SwimNavigation
-import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.data.DataTracker
 import net.minecraft.entity.data.TrackedData
@@ -131,19 +130,6 @@ open class HybridAquaticDolphinEntity(
         goalSelector.add(5, HADolphinJumpGoal(this, 10))
         goalSelector.add(6, MeleeAttackGoal(this, 1.2000000476837158, true))
         goalSelector.add(8, ChaseBoatGoal(this))
-    }
-
-    override fun tryAttack(target: Entity): Boolean {
-        val bl = target.damage(
-            this.damageSources.mobAttack(this),
-            this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toInt().toFloat()
-        )
-        if (bl) {
-            this.applyDamageEffects(this, target)
-            this.playSound(SoundEvents.ENTITY_DOLPHIN_ATTACK, 1.0f, 1.0f)
-        }
-
-        return bl
     }
 
     override fun getMaxAir(): Int {
