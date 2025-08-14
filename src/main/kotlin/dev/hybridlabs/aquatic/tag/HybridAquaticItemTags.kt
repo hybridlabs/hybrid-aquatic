@@ -35,6 +35,12 @@ object HybridAquaticItemTags {
     val FOOD_POISONING = createConventional("foods/food_poisoning")
     val ARMORS = createConventional("armors")
 
+    val REPAIRS_DIVING_HELMET = create("repairs_diving_helmet")
+    val REPAIRS_NAUTILUS_ARMOR = create("repairs_nautilus_armor")
+    val REPAIRS_MANGLERFISH_ARMOR = create("repairs_manglerfish_armor")
+    val REPAIRS_EEL_SCARF = create("repairs_eel_scarf")
+    val REPAIRS_MOON_JELLYFISH_HAT = create("repairs_moon_jellyfish_hat")
+
     private fun create(id: String): TagKey<Item> {
         return TagKey.of(RegistryKeys.ITEM, Identifier.of(HybridAquatic.MOD_ID, id))
     }

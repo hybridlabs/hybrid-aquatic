@@ -6,6 +6,7 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
+import net.minecraft.item.Items
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.ItemTags
@@ -341,6 +342,12 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             getOrCreateTagBuilder(ItemTags.FISHES).add(item)
             getOrCreateTagBuilder(HybridAquaticItemTags.COOLING).add(item)
         }
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.REPAIRS_DIVING_HELMET).add(Items.COPPER_INGOT)
+        getOrCreateTagBuilder(HybridAquaticItemTags.REPAIRS_NAUTILUS_ARMOR).add(Items.NAUTILUS_SHELL)
+        getOrCreateTagBuilder(HybridAquaticItemTags.REPAIRS_MANGLERFISH_ARMOR).add(HybridAquaticItems.GLOW_SLIME)
+        getOrCreateTagBuilder(HybridAquaticItemTags.REPAIRS_EEL_SCARF).add(HybridAquaticItems.MORAY_EEL)
+        getOrCreateTagBuilder(HybridAquaticItemTags.REPAIRS_MOON_JELLYFISH_HAT).add(Items.SLIME_BALL)
 
         // plushies
         Registries.ITEM
