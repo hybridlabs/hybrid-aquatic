@@ -1,13 +1,9 @@
 package dev.hybridlabs.aquatic.block
 
-import com.mojang.authlib.yggdrasil.ServicesKeySet.lazy
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks.addBlocks
 import net.minecraft.block.Block
-import net.minecraft.block.BlockState
 import net.minecraft.block.SkullBlock
 import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.state.StateManager
 import net.minecraft.util.Identifier
 import net.minecraft.util.StringIdentifiable
 
@@ -16,11 +12,7 @@ import net.minecraft.util.StringIdentifiable
  */
 class PlushieBlock(variant: Variant, val particleBlock: Block, settings: Settings) : SkullBlock(variant, settings) {
     init {
-        BlockEntityType.SKULL.addBlocks(this)
-    }
-
-    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        super.appendProperties(builder)
+        BlockEntityType.SKULL.addSupportedBlock(this)
     }
 
     enum class Variant(val id: String) : SkullType, StringIdentifiable {
@@ -35,6 +27,8 @@ class PlushieBlock(variant: Variant, val particleBlock: Block, settings: Setting
 
         val textureLocation: Identifier by lazy { Identifier.of(HybridAquatic.MOD_ID, "textures/entity/block/plushie/${id}_plushie.png") }
 
-        override fun asString(): String = id
+        override fun asString(): String {
+            return id
+        }
     }
 }
