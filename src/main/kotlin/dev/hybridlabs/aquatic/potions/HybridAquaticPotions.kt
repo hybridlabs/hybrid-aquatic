@@ -5,15 +5,16 @@ package dev.hybridlabs.aquatic.potions
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.potion.Potion
 import net.minecraft.potion.Potions
-import net.minecraft.recipe.BrewingRecipeRegistry
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
+import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.util.Identifier
 
 object HybridAquaticPotions {
@@ -95,8 +96,16 @@ object HybridAquaticPotions {
         Items.INK_SAC
     )
 
-    private fun registerPotionWithRecipe(id: String, potion: Potion, inputPotion: Potion, ingredient: Item): Potion {
-        BrewingRecipeRegistry.registerPotionRecipe(inputPotion, ingredient, potion)
+    private fun registerPotionWithRecipe(
+        id: String,
+        potion: Potion,
+        inputPotion: RegistryEntry<Potion>,
+        ingredient: Item
+    ): Potion {
+        FabricBrewingRecipeRegistryBuilder.BUILD.apply {
+            registerPotionWithRecipe(id, potion, inputPotion, ingredient)
+        }
+
         return register(id, potion)
     }
 
