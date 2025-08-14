@@ -19,8 +19,8 @@ class GiantGreenAnemoneBlockEntityModel : GeoModel<GiantGreenAnemoneBlockEntity>
     }
 
     companion object {
-        val ANIMATION_LOCATION = Identifier(HybridAquatic.MOD_ID, "animations/anemone.animation.json")
-        val MODEL_LOCATION = Identifier(HybridAquatic.MOD_ID, "geo/giant_green_anemone.geo.json")
-        val TEXTURE_LOCATION = Identifier(HybridAquatic.MOD_ID, "textures/block/giant_green_anemone.png")
+        val ANIMATION_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "animations/anemone.animation.json")
+        val MODEL_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "geo/giant_green_anemone.geo.json")
+        val TEXTURE_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "textures/block/giant_green_anemone.png")
     }
 }

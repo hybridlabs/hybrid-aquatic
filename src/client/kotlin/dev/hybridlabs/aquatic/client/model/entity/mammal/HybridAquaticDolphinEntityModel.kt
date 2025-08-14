@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
-import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
@@ -33,7 +32,7 @@ abstract class HybridAquaticDolphinEntityModel<T : HybridAquaticDolphinEntity>(p
         animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = MinecraftClient.getInstance().tickDelta
+        val deltaTime: Float = animationState.partialTick
 
         val body = animationProcessor.getBone(EntityModelPartNames.BODY)
 

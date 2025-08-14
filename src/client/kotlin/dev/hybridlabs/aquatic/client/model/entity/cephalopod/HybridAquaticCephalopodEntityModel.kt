@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
-import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
@@ -29,7 +28,7 @@ abstract class HybridAquaticCephalopodEntityModel<T : HybridAquaticCephalopodEnt
         animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = MinecraftClient.getInstance().tickDelta
+        val deltaTime: Float = animationState.partialTick
 
         val body = animationProcessor.getBone(EntityModelPartNames.BODY)
         body.rotX = MathHelper.lerp(deltaTime, animatable.prevPitch, animatable.pitch) * -MathHelper.RADIANS_PER_DEGREE
