@@ -23,6 +23,7 @@ import net.minecraft.entity.passive.IronGolemEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.predicate.entity.EntityPredicates
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -181,8 +182,9 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             val player = source.source as PlayerEntity
             val heldItem = player.mainHandStack
 
-            if (EnchantmentHelper.getLevel(Enchantments.BANE_OF_ARTHROPODS, heldItem) > 2 ||
-                EnchantmentHelper.getLevel(Enchantments.RIPTIDE, heldItem) > 0
+            val enchantmentsRegistry = registryManager.getWrapperOrThrow(RegistryKeys.ENCHANTMENT)
+            if (EnchantmentHelper.getLevel(enchantmentsRegistry.getOrThrow(Enchantments.BANE_OF_ARTHROPODS), heldItem) > 2 ||
+                (EnchantmentHelper.getLevel(enchantmentsRegistry.getOrThrow(Enchantments.RIPTIDE), heldItem) > 0)
             ) {
                 beFlipped()
             }
