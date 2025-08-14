@@ -1,5 +1,3 @@
-@file:Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-
 package dev.hybridlabs.aquatic.block
 
 import com.mojang.serialization.MapCodec
