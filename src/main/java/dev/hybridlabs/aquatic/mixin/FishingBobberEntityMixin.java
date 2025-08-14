@@ -4,8 +4,6 @@ import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
-import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments;
-import dev.hybridlabs.aquatic.enchantment.LiveCatchEnchantment;
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -153,29 +151,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
         
         return instance;
     }
-    
-    // Replaces item that spawns when you fish a fish with a fish entity
-    @Inject(
-            method = "use",
-            at = @At(
-                    value = "NEW",
-                    target = "Lnet/minecraft/entity/ItemEntity;",
-                    ordinal = 0
-            )
-    )
-    private void spawnFishEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local(ordinal = 1) LocalRef<ItemStack> itemInIterator) {
-        if (EnchantmentHelper.getLevel(HybridAquaticEnchantments.INSTANCE.getLIVECATCH(), usedItem) > 0) {
-            HashMap<Item, EntityType<? extends WaterCreatureEntity>> ITEM_TO_ENTITY = LiveCatchEnchantment.Companion.getITEM_TO_ENTITYTYPE();
-            var entityType = ITEM_TO_ENTITY.get(itemInIterator.get().getItem());
-            
-            if (entityType != null) {
-                createAndLaunchEntityAtPlayer(entityType);
-                
-                itemInIterator.set(ItemStack.EMPTY);
-            }
-        }
-    }
-    
+
     @Unique
     private void createAndLaunchEntityAtPlayer(EntityType<?> entityType) {
         if (this.getWorld() instanceof ServerWorld serverWorld) {
