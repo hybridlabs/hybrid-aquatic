@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.block.entity
 
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes.getEncoded
+import dev.hybridlabs.aquatic.component.HybridAquaticComponentTypes.putEncoded
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.item.ItemStack
@@ -19,8 +21,7 @@ import software.bernie.geckolib.util.RenderUtil
  * Represents the block entity for Message in a Bottle blocks.
  * @see MessageInABottleBlock
  */
-class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE, pos, state),
-    GeoAnimatable {
+class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE, pos, state), GeoAnimatable {
     private val instanceCache = GeckoLibUtil.createInstanceCache(this)
 
     /**
@@ -33,19 +34,21 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
      */
     var messageItemStack: ItemStack = ItemStack.EMPTY
 
-    override fun writeNbt(nbt: NbtCompound, registryLookup: RegistryWrapper.WrapperLookup) {
-        super.writeNbt(nbt)
-        nbt.putString(VARIANT_KEY, variant.id)
+    override fun writeNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        super.writeNbt(nbt, registries)
+
+        nbt.putEncoded(VARIANT_KEY, MessageInABottleBlock.Variant.CODEC, variant)
 
         if (!messageItemStack.isEmpty) {
-            nbt.put(MESSAGE_KEY, messageItemStack.writeNbt(NbtCompound()))
+            nbt.putEncoded(MESSAGE_KEY, ItemStack.CODEC, messageItemStack)
         }
     }
 
-    override fun readNbt(nbt: NbtCompound, registryLookup: RegistryWrapper.WrapperLookup) {
-        super.readNbt(nbt)
-        variant = MessageInABottleBlock.Variant.byId(nbt.getString(VARIANT_KEY))
-        messageItemStack = ItemStack.fromNbt(nbt.getCompound(MESSAGE_KEY))
+    override fun readNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        super.readNbt(nbt, registries)
+
+        nbt.getEncoded(VARIANT_KEY, MessageInABottleBlock.Variant.CODEC)?.also { variant = it }
+        nbt.getEncoded(MESSAGE_KEY, ItemStack.CODEC)?.also { messageItemStack = it }
     }
 
     private fun <E> animate(event: AnimationState<E>): PlayState where E : BlockEntity, E : GeoAnimatable {
@@ -69,8 +72,8 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) : BlockEntit
         return RenderUtil.getCurrentTick()
     }
 
-    override fun toInitialChunkDataNbt(registryLookup: RegistryWrapper.WrapperLookup?): NbtCompound? {
-        return createNbt()
+    override fun toInitialChunkDataNbt(registries: RegistryWrapper.WrapperLookup): NbtCompound {
+        return createNbt(registries)
     }
 
     override fun toUpdatePacket(): BlockEntityUpdateS2CPacket {

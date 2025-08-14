@@ -28,7 +28,7 @@ class SeaMessageBookItem(settings: Settings) : Item(settings) {
         tooltip: MutableList<Text>,
         type: TooltipType
     ) {
-        world.registryManager?.let { registryManager ->
+        world?.registryManager?.let { registryManager ->
             val message = getSeaMessage(stack, registryManager) ?: return@let
             message.author.ifPresent { author ->
                 tooltip.add(Text.translatable("book.byAuthor", author).formatted(Formatting.GRAY))
@@ -48,7 +48,7 @@ class SeaMessageBookItem(settings: Settings) : Item(settings) {
 
         private fun setSeaMessage(stack: ItemStack, message: SeaMessage, registryManager: DynamicRegistryManager): ItemStack {
             val id = message.getId(registryManager) ?: return stack
-			val nbt = stack.orCreateNbt
+            val nbt = stack.orCreateNbt
             nbt.putString(SEA_MESSAGE_KEY, id.toString())
             return stack
         }
