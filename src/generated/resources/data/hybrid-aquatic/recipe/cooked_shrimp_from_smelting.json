@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "ingredient": {
+    "item": "hybrid-aquatic:raw_shrimp"
+  },
+  "result": {
+    "id": "hybrid-aquatic:cooked_shrimp"
+  }
+}

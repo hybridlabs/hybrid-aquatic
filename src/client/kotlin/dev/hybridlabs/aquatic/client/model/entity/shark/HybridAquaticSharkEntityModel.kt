@@ -7,7 +7,6 @@ import net.minecraft.client.render.entity.model.EntityModelPartNames
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.MathHelper
 import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity> (

@@ -19,8 +19,8 @@ class BuoyBlockEntityModel : GeoModel<BuoyBlockEntity>() {
     }
 
     companion object {
-        val ANIMATION_LOCATION = Identifier(HybridAquatic.MOD_ID, "animations/buoy.animation.json")
-        val MODEL_LOCATION = Identifier(HybridAquatic.MOD_ID, "geo/buoy.geo.json")
-        val TEXTURE_LOCATION = Identifier(HybridAquatic.MOD_ID, "textures/block/buoy.png")
+        val ANIMATION_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "animations/buoy.animation.json")
+        val MODEL_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "geo/buoy.geo.json")
+        val TEXTURE_LOCATION = Identifier.of(HybridAquatic.MOD_ID, "textures/block/buoy.png")
     }
 }

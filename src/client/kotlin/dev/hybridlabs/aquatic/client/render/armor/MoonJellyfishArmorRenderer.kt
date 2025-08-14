@@ -7,5 +7,5 @@ import software.bernie.geckolib.model.DefaultedItemGeoModel
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 
 class MoonJellyfishArmorRenderer : GeoArmorRenderer<MoonJellyfishArmorItem>(
-    DefaultedItemGeoModel(Identifier(HybridAquatic.MOD_ID, "armor/moon_jellyfish_armor"))
+    DefaultedItemGeoModel(Identifier.of(HybridAquatic.MOD_ID, "armor/moon_jellyfish_armor"))
 )

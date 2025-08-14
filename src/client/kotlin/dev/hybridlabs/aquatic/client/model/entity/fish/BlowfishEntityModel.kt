@@ -19,7 +19,7 @@ class BlowfishEntityModel : HybridAquaticFishEntityModel<BlowfishEntity>("blowfi
             else -> "textures/entity/fish/blowfish/blowfish_large.png"
         }
 
-        return Identifier(HybridAquatic.MOD_ID, texturePath)
+        return Identifier.of(HybridAquatic.MOD_ID, texturePath)
     }
 
     override fun getModelResource(animatable: BlowfishEntity): Identifier {
@@ -31,6 +31,6 @@ class BlowfishEntityModel : HybridAquaticFishEntityModel<BlowfishEntity>("blowfi
             else -> "geo/fish/blowfish/blowfish_large.geo.json"
         }
 
-        return Identifier(HybridAquatic.MOD_ID, texturePath)
+        return Identifier.of(HybridAquatic.MOD_ID, texturePath)
     }
 }

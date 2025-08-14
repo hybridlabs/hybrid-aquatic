@@ -1,5 +1,3 @@
-@file:Suppress("unused", "SameParameterValue")
-
 package dev.hybridlabs.aquatic.potions
 
 import dev.hybridlabs.aquatic.HybridAquatic
@@ -18,98 +16,84 @@ import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.util.Identifier
 
 object HybridAquaticPotions {
+    private val registeredData: MutableList<RecipeData> = mutableListOf()
+
+    init {
+        FabricBrewingRecipeRegistryBuilder.BUILD.register { builder ->
+            registeredData.forEach { data ->
+                builder.registerPotionRecipe(data.inputPotion, data.ingredient, data.potion)
+            }
+        }
+    }
+
     val GLOWING_POTION = registerPotionWithRecipe(
         "glowing",
-        Potion(StatusEffectInstance(StatusEffects.GLOWING, 3600, 0)),
-        Potions.AWKWARD,
-        Items.GLOW_INK_SAC
+        Potion("glowing", StatusEffectInstance(StatusEffects.GLOWING, 3600, 0)),
+        HybridAquaticItems.GLOW_SLIME,
     )
 
     val CLARITY_POTION = registerPotionWithRecipe(
         "clarity",
-        Potion(StatusEffectInstance(HybridAquaticStatusEffects.CLARITY, 1200, 0)),
-        Potions.AWKWARD,
-        HybridAquaticItems.BARRELEYE
+        Potion("clarity", StatusEffectInstance(HybridAquaticStatusEffects.CLARITY, 1200, 0)),
+        HybridAquaticItems.BARRELEYE,
     )
 
     val THALASSOPHOBIA_POTION = registerPotionWithRecipe(
         "thalassophobia",
-        Potion(StatusEffectInstance(HybridAquaticStatusEffects.THALASSOPHOBIA, 1200, 0)),
-        Potions.AWKWARD,
-        HybridAquaticItems.ANGLERFISH
+        Potion("thalassophobia", StatusEffectInstance(HybridAquaticStatusEffects.THALASSOPHOBIA, 1200, 0)),
+        HybridAquaticItems.ANGLERFISH,
     )
 
     val MINOR_LUCK_POTION = registerPotionWithRecipe(
         "minor_luck",
-        Potion(StatusEffectInstance(StatusEffects.LUCK, 1200, 0)),
-        Potions.AWKWARD,
-        HybridAquaticItems.PEARL
+        Potion("minor_luck", StatusEffectInstance(StatusEffects.LUCK, 1200, 0)),
+        HybridAquaticItems.PEARL,
     )
 
     val MAJOR_LUCK_POTION = registerPotionWithRecipe(
         "major_luck",
-        Potion(StatusEffectInstance(StatusEffects.LUCK, 600, 1)),
-        Potions.AWKWARD,
-        HybridAquaticItems.BLACK_PEARL
+        Potion("major_luck", StatusEffectInstance(StatusEffects.LUCK, 600, 1)),
+        HybridAquaticItems.BLACK_PEARL,
     )
 
     val BLEEDING_POTION = registerPotionWithRecipe(
         "bleeding",
-        Potion(StatusEffectInstance(HybridAquaticStatusEffects.BLEEDING, 200, 0)),
-        Potions.AWKWARD,
-        HybridAquaticItems.SHARK_TOOTH
+        Potion("bleeding", StatusEffectInstance(HybridAquaticStatusEffects.BLEEDING, 200, 0)),
+        HybridAquaticItems.SHARK_TOOTH,
     )
 
     val SWIMMING_POTION = registerPotionWithRecipe(
         "swimming",
-        Potion(StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 1200, 0),
+        Potion("swimming", StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 1200, 0),
             StatusEffectInstance(StatusEffects.HUNGER, 600, 0)),
-        Potions.AWKWARD,
-        HybridAquaticItems.MAHI
+        HybridAquaticItems.MAHI,
     )
 
     val BUOYANCY_POTION = registerPotionWithRecipe(
         "buoyancy",
-        Potion(StatusEffectInstance(HybridAquaticStatusEffects.BUOYANCY, 200, 0)),
-        Potions.AWKWARD,
-        Items.KELP
+        Potion("buoyancy", StatusEffectInstance(HybridAquaticStatusEffects.BUOYANCY, 200, 0)),
+        Items.KELP,
     )
 
     val SPININESS_POTION = registerPotionWithRecipe(
         "spininess",
-        Potion(StatusEffectInstance(HybridAquaticStatusEffects.SPININESS, 300, 0)),
-        Potions.AWKWARD,
-        HybridAquaticItems.SEA_URCHIN_SPINE
+        Potion("spininess", StatusEffectInstance(HybridAquaticStatusEffects.SPININESS, 300, 0)),
+        HybridAquaticItems.SEA_URCHIN_SPINE,
     )
 
-    val CORROSION_POTION = registerPotionWithRecipe(
-        "corrosion",
-        Potion(StatusEffectInstance(HybridAquaticStatusEffects.CORROSION, 300, 0)),
-        Potions.AWKWARD,
-        HybridAquaticItems.SULFUR
-    )
-
-    val BLINDNESS_POTION = registerPotionWithRecipe(
-        "blindness",
-        Potion(StatusEffectInstance(StatusEffects.BLINDNESS, 300, 0)),
-        Potions.AWKWARD,
-        Items.INK_SAC
-    )
-
-    private fun registerPotionWithRecipe(
-        id: String,
-        potion: Potion,
-        inputPotion: RegistryEntry<Potion>,
-        ingredient: Item
-    ): Potion {
-        FabricBrewingRecipeRegistryBuilder.BUILD.apply {
-            registerPotionWithRecipe(id, potion, inputPotion, ingredient)
-        }
-
-        return register(id, potion)
+    private fun registerPotionWithRecipe(id: String, potion: Potion, ingredient: Item, inputPotion: RegistryEntry<Potion> = Potions.AWKWARD): RegistryEntry<Potion> {
+        val entry = register(id, potion)
+        registeredData.add(RecipeData(entry, ingredient, inputPotion))
+        return entry
     }
 
-    private fun register(id: String, potion: Potion): Potion {
-        return Registry.register(Registries.POTION, Identifier.of(HybridAquatic.MOD_ID, id), potion)
+    private fun register(id: String, potion: Potion): RegistryEntry<Potion> {
+        return Registry.registerReference(Registries.POTION, Identifier.of(HybridAquatic.MOD_ID, id), potion)
     }
+
+    private data class RecipeData(
+        val potion: RegistryEntry<Potion>,
+        val ingredient: Item,
+        val inputPotion: RegistryEntry<Potion>,
+    )
 }

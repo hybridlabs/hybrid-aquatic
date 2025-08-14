@@ -8,7 +8,6 @@
         "FishingBobberEntityMixin",
         "FishingRodItemMixin",
         "PlayerEntityMixin",
-        "ServerPlayerEntityMixin",
         "SpawnGroupMixin"
     ],
     "injectors": {

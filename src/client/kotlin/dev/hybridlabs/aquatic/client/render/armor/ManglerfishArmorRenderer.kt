@@ -7,5 +7,5 @@ import software.bernie.geckolib.model.DefaultedItemGeoModel
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 
 class ManglerfishArmorRenderer : GeoArmorRenderer<ManglerfishArmorItem>(
-    DefaultedItemGeoModel(Identifier(HybridAquatic.MOD_ID, "armor/manglerfish_armor"))
+    DefaultedItemGeoModel(Identifier.of(HybridAquatic.MOD_ID, "armor/manglerfish_armor"))
 )

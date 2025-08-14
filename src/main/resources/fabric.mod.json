@@ -4,7 +4,7 @@
     "version": "${version}",
 
     "name": "Hybrid Aquatic",
-    "description": "A mod that enhances your underwater Minecraft experience! Explore improved rivers, swamps, oceans, and undersea caves with new creatures, blocks, and (coming soon) biomes.",
+    "description": "A mod that enhances your underwater Minecraft experience! Explore improved rivers, swamps, oceans, and undersea caves with new creatures, blocks, and more!",
 
     "authors": [
         "MysticKoko",
@@ -62,7 +62,7 @@
     "accessWidener": "hybrid-aquatic.accesswidener",
 
     "depends": {
-        "minecraft": "~1.20.1",
+        "minecraft": "~1.21",
         "java": ">=17",
         "fabric-language-kotlin": "*",
         "fabric-api": ">=0.92",

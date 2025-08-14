@@ -2,13 +2,10 @@ package dev.hybridlabs.aquatic.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
-import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -18,20 +15,20 @@ import net.minecraft.item.Items;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.HashMap;
 
 @Mixin(FishingBobberEntity.class)
 public abstract class FishingBobberEntityMixin extends ProjectileEntity implements CustomFishingBobberEntityData {
@@ -44,14 +41,22 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
 
     @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
     private void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
-        hybrid_aquatic$setLureItem(ItemStack.fromNbt(nbt.getCompound("lureItem")));
+        if (nbt.contains("lureItem", NbtElement.COMPOUND_TYPE)) {
+            hybrid_aquatic$setLureItem(
+                    ItemStack.fromNbtOrEmpty(this.getRegistryManager(), nbt.getCompound("lureItem"))
+            );
+        } else {
+            hybrid_aquatic$setLureItem(ItemStack.EMPTY);
+        }
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
     private void writeCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
-        NbtCompound itemStack = new NbtCompound();
-        hybrid_aquatic$getLureItem().writeNbt(itemStack);
-        nbt.put("lureItem", itemStack);
+        // Save the lure item as a nested NBT
+        ItemStack lure = this.hybrid_aquatic$getLureItem();
+        if (!lure.isEmpty()) {
+            nbt.put("lureItem", lure.encode(this.getRegistryManager()));
+        }
     }
 
     @Unique
@@ -146,7 +151,7 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity implemen
             }
             
             // Damage lure AFTER we catch anything with it
-            lureItemStack.damage(1, usedPlayer, (player) -> this.getWorld().playSoundFromEntity(null, this, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f));
+            lureItemStack.damage(1, usedPlayer, EquipmentSlot.MAINHAND);
         }
         
         return instance;

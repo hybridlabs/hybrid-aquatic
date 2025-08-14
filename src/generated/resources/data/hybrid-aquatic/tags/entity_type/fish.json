@@ -1,0 +1,443 @@
+{
+  "values": [
+    "hybrid-aquatic:african_butterflyfish",
+    "hybrid-aquatic:stonefish",
+    "hybrid-aquatic:damselfish",
+    "hybrid-aquatic:pearlfish",
+    "hybrid-aquatic:betta",
+    "hybrid-aquatic:john_dory",
+    "hybrid-aquatic:snailfish",
+    "hybrid-aquatic:carp",
+    "hybrid-aquatic:clownfish",
+    "hybrid-aquatic:boxfish",
+    "hybrid-aquatic:danio",
+    "hybrid-aquatic:discus",
+    "hybrid-aquatic:flashlight_fish",
+    "hybrid-aquatic:squirrelfish",
+    "hybrid-aquatic:flying_fish",
+    "hybrid-aquatic:goldfish",
+    "hybrid-aquatic:gourami",
+    "hybrid-aquatic:lionfish",
+    "hybrid-aquatic:mackerel",
+    "hybrid-aquatic:mahi",
+    "hybrid-aquatic:moray_eel",
+    "hybrid-aquatic:needlefish",
+    "hybrid-aquatic:oarfish",
+    "hybrid-aquatic:opah",
+    "hybrid-aquatic:oscar",
+    "hybrid-aquatic:parrotfish",
+    "hybrid-aquatic:sheepshead_wrasse",
+    "hybrid-aquatic:piranha",
+    "hybrid-aquatic:rockfish",
+    "hybrid-aquatic:wreckfish",
+    "hybrid-aquatic:sea_bass",
+    "hybrid-aquatic:seahorse",
+    "hybrid-aquatic:seadragon",
+    "hybrid-aquatic:sunfish",
+    "hybrid-aquatic:surgeonfish",
+    "hybrid-aquatic:tetra",
+    "hybrid-aquatic:tiger_barb",
+    "hybrid-aquatic:triggerfish",
+    "hybrid-aquatic:tuna",
+    "hybrid-aquatic:manta_ray",
+    "hybrid-aquatic:stingray",
+    "hybrid-aquatic:anglerfish",
+    "hybrid-aquatic:barreleye",
+    "hybrid-aquatic:dragonfish",
+    "hybrid-aquatic:ratfish",
+    "hybrid-aquatic:golden_dorado",
+    "hybrid-aquatic:coelacanth",
+    "minecraft:cod",
+    "minecraft:salmon",
+    "minecraft:tropical_fish",
+    "minecraft:axolotl",
+    {
+      "id": "tide:angelfish",
+      "required": false
+    },
+    {
+      "id": "tide:barracuda",
+      "required": false
+    },
+    {
+      "id": "tide:bass",
+      "required": false
+    },
+    {
+      "id": "tide:bluegill",
+      "required": false
+    },
+    {
+      "id": "tide:catfish",
+      "required": false
+    },
+    {
+      "id": "tide:clayfish",
+      "required": false
+    },
+    {
+      "id": "tide:guppy",
+      "required": false
+    },
+    {
+      "id": "tide:mackerel",
+      "required": false
+    },
+    {
+      "id": "tide:mint_carp",
+      "required": false
+    },
+    {
+      "id": "tide:ocean_perch",
+      "required": false
+    },
+    {
+      "id": "tide:pike",
+      "required": false
+    },
+    {
+      "id": "tide:sailfish",
+      "required": false
+    },
+    {
+      "id": "tide:trout",
+      "required": false
+    },
+    {
+      "id": "tide:tuna",
+      "required": false
+    },
+    {
+      "id": "tide:yellow_perch",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:blobfish",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:catfish",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:devils_hole_pupfish",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:flying_fish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:tripodfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:lanternfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:barreleye",
+      "required": false
+    },
+    {
+      "id": "seafarer:sunfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:garden_eel",
+      "required": false
+    },
+    {
+      "id": "seafarer:mandarin_goby",
+      "required": false
+    },
+    {
+      "id": "seafarer:frogfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:blue_tang",
+      "required": false
+    },
+    {
+      "id": "seafarer:copperband_butterflyfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:parrotfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:filefish",
+      "required": false
+    },
+    {
+      "id": "seafarer:leafy_scorpionfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:chimaera",
+      "required": false
+    },
+    {
+      "id": "seafarer:squirrelfish",
+      "required": false
+    },
+    {
+      "id": "naturalist:bass",
+      "required": false
+    },
+    {
+      "id": "naturalist:catfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:basslet",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:boxfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:butterfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:clownfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:dwarf_angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:goby",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:moorish_idol",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:pipefish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:tang",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:seahorse",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:hogfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:parrotfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:ray",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:stingray",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:sunfish",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:flounder",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:barreleye",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:angelfish",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:neon_tetra",
+      "required": false
+    },
+    {
+      "id": "spawn:tuna",
+      "required": false
+    },
+    {
+      "id": "spawn:seahorse",
+      "required": false
+    },
+    {
+      "id": "spawn:anglerfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:ancientscale",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:battlegill",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:devilfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:islehopper",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:plentifin",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:pondie",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:splashtail",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:stormfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:wildsplash",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:wrecker",
+      "required": false
+    },
+    {
+      "id": "crittersandcompanions:koi_fish",
+      "required": false
+    },
+    {
+      "id": "aquaculture:atlantic_cod",
+      "required": false
+    },
+    {
+      "id": "aquaculture:blackfish",
+      "required": false
+    },
+    {
+      "id": "aquaculture:pacific_halibut",
+      "required": false
+    },
+    {
+      "id": "aquaculture:atlantic_halibut",
+      "required": false
+    },
+    {
+      "id": "aquaculture:atlantic_herring",
+      "required": false
+    },
+    {
+      "id": "aquaculture:pink_salmon",
+      "required": false
+    },
+    {
+      "id": "aquaculture:pollock",
+      "required": false
+    },
+    {
+      "id": "aquaculture:rainbow_trout",
+      "required": false
+    },
+    {
+      "id": "aquaculture:bayad",
+      "required": false
+    },
+    {
+      "id": "aquaculture:boulti",
+      "required": false
+    },
+    {
+      "id": "aquaculture:capitaine",
+      "required": false
+    },
+    {
+      "id": "aquaculture:synodontis",
+      "required": false
+    },
+    {
+      "id": "aquaculture:smallmouth_bass",
+      "required": false
+    },
+    {
+      "id": "aquaculture:bluegill",
+      "required": false
+    },
+    {
+      "id": "aquaculture:brown_trout",
+      "required": false
+    },
+    {
+      "id": "aquaculture:carp",
+      "required": false
+    },
+    {
+      "id": "aquaculture:catfish",
+      "required": false
+    },
+    {
+      "id": "aquaculture:gar",
+      "required": false
+    },
+    {
+      "id": "aquaculture:minnow",
+      "required": false
+    },
+    {
+      "id": "aquaculture:muskellunge",
+      "required": false
+    },
+    {
+      "id": "aquaculture:perch",
+      "required": false
+    },
+    {
+      "id": "aquaculture:arapaima",
+      "required": false
+    },
+    {
+      "id": "aquaculture:piranha",
+      "required": false
+    },
+    {
+      "id": "aquaculture:tambaqui",
+      "required": false
+    },
+    {
+      "id": "aquaculture:brown_shrooma",
+      "required": false
+    },
+    {
+      "id": "aquaculture:red_shrooma",
+      "required": false
+    },
+    {
+      "id": "aquaculture:red_grouper",
+      "required": false
+    },
+    {
+      "id": "aquaculture:tuna",
+      "required": false
+    }
+  ]
+}

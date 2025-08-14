@@ -69,8 +69,6 @@ dependencies {
     modImplementation "com.terraformersmc:modmenu:$mod_menu_version"
 
     modRuntimeOnly "maven.modrinth:carpet:$carpet_version"
-
-    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")
 }
 
 loom {
@@ -96,12 +94,12 @@ processResources {
 
 java {
     withSourcesJar()
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 jar {

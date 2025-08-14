@@ -11,9 +11,15 @@ import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
 import dev.hybridlabs.aquatic.client.render.armor.*
-import dev.hybridlabs.aquatic.client.render.block.entity.*
+import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.block.entity.BuoyBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.block.entity.GiantGreenAnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
-import dev.hybridlabs.aquatic.client.render.item.*
+import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.BuoyBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.GiantGreenAnemoneBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
@@ -30,7 +36,7 @@ import net.minecraft.command.CommandRegistryAccess
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
-import software.bernie.geckolib.animatable.client.RenderProvider
+import software.bernie.geckolib.animatable.client.GeoRenderProvider
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 
 object HybridAquaticClient : ClientModInitializer {
@@ -58,17 +64,17 @@ object HybridAquaticClient : ClientModInitializer {
         GeoRenderProviderStorage.moonjellyfishArmorRenderProvider = createBasicRenderProvider(::MoonJellyfishArmorRenderer)
     }
 
-    private fun createBasicRenderProvider(rendererProvider: () -> GeoArmorRenderer<*>): () -> RenderProvider {
+    private fun createBasicRenderProvider(rendererProvider: () -> GeoArmorRenderer<*>): () -> GeoRenderProvider {
         return {
-            object : RenderProvider {
+            object : GeoRenderProvider {
                 private val renderer: GeoArmorRenderer<*> by lazy(rendererProvider)
 
-                override fun getHumanoidArmorModel(
-                    livingEntity: LivingEntity,
-                    itemStack: ItemStack,
-                    equipmentSlot: EquipmentSlot,
-                    original: BipedEntityModel<LivingEntity>
-                ): BipedEntityModel<LivingEntity> {
+                override fun <T : LivingEntity?> getGeoArmorRenderer(
+                    livingEntity: T?,
+                    itemStack: ItemStack?,
+                    equipmentSlot: EquipmentSlot?,
+                    original: BipedEntityModel<T>?
+                ): BipedEntityModel<*> {
                     renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original)
                     return renderer
                 }
@@ -90,7 +96,6 @@ object HybridAquaticClient : ClientModInitializer {
             HybridAquaticBlocks.ANEMONE,
             HybridAquaticBlocks.GIANT_GREEN_ANEMONE,
             HybridAquaticBlocks.STRAWBERRY_ANEMONE,
-            HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE,
         )
         registry.putBlocks(
             RenderLayer.getCutout(),
@@ -155,7 +160,6 @@ object HybridAquaticClient : ClientModInitializer {
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.ANEMONE, ::AnemoneBlockEntityRenderer)
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.GIANT_GREEN_ANEMONE, ::GiantGreenAnemoneBlockEntityRenderer)
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.STRAWBERRY_ANEMONE, ::StrawberryAnemoneBlockEntityRenderer)
-        BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE, ::MessageInABottleBlockEntityRenderer)
         BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.BUOY, ::BuoyBlockEntityRenderer)
     }
 
@@ -168,7 +172,6 @@ object HybridAquaticClient : ClientModInitializer {
         registry.register(HybridAquaticItems.GIANT_GREEN_ANEMONE, GiantGreenAnemoneBlockItemRenderer())
         registry.register(HybridAquaticItems.STRAWBERRY_ANEMONE, StrawberryAnemoneBlockItemRenderer())
         registry.register(HybridAquaticItems.BUOY, BuoyBlockItemRenderer())
-        registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE, MessageInABottleBlockItemRenderer())
     }
 
     fun createBlockEntityRendererFactoryContext(): BlockEntityRendererFactory.Context {

@@ -8,6 +8,7 @@ import net.minecraft.entity.projectile.FishingBobberEntity
 object HybridAquaticNetworking {
     init {
         PayloadTypeRegistry.playS2C().register(FishingBobberLurePacket.ID, FishingBobberLurePacket.PACKET_CODEC)
+        PayloadTypeRegistry.playC2S().register(FishingBobberLurePacket.ID, FishingBobberLurePacket.PACKET_CODEC)
 
         // Sends lure item to the client back
         ServerPlayNetworking.registerGlobalReceiver(FishingBobberLurePacket.ID) { packet, context ->
