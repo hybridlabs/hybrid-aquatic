@@ -3,8 +3,6 @@ package dev.hybridlabs.aquatic.data.client
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.data.server.seamessage.SeaMessageProvider
-import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
-import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
@@ -13,9 +11,14 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.registry.Registries
+import net.minecraft.registry.RegistryWrapper
+import java.util.concurrent.CompletableFuture
 
-class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
-    override fun generateTranslations(builder: TranslationBuilder) {
+class LanguageProvider(
+    output: FabricDataOutput,
+    registryLookup: CompletableFuture<RegistryWrapper.WrapperLookup>
+) : FabricLanguageProvider(output, registryLookup) {
+    override fun generateTranslations(p0: RegistryWrapper.WrapperLookup, builder: TranslationBuilder) {
         // item group
         builder.add(
             Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.BLOCKS)
@@ -362,19 +365,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add(item, translation)
         }
 
-        // effects
-        mapOf(
-            HybridAquaticStatusEffects.BLEEDING to "Bleeding",
-            HybridAquaticStatusEffects.CLARITY to "Clarity",
-            HybridAquaticStatusEffects.CORROSION to "Corrosion",
-            HybridAquaticStatusEffects.THALASSOPHOBIA to "Thalassophobia",
-            HybridAquaticStatusEffects.BUOYANCY to "Buoyancy",
-            HybridAquaticStatusEffects.SPININESS to "Spininess",
-        ).forEach { (effect, translation) ->
-            val identifier = Registries.STATUS_EFFECT.getId(effect)
-            builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
-        }
-
         // Item descriptions
         mapOf(
             "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
@@ -408,13 +398,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.OMINOUS_HOOK.translationKey to "Summons Karkinos",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".description_tide"), translation)
-        }
-
-        // enchantments
-        mapOf(
-            HybridAquaticEnchantments.LIVECATCH to "Live Catch",
-        ).forEach { (enchantment, translation) ->
-            builder.add(enchantment, translation)
         }
 
         mapOf(
