@@ -9,7 +9,6 @@ import dev.hybridlabs.aquatic.client.GeoRenderProviderStorage
 import dev.hybridlabs.aquatic.client.command.RandomFishCommand
 import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
-import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
 import dev.hybridlabs.aquatic.client.render.armor.*
 import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
 import dev.hybridlabs.aquatic.client.render.block.entity.BuoyBlockEntityRenderer
@@ -42,7 +41,6 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer
 object HybridAquaticClient : ClientModInitializer {
     override fun onInitializeClient() {
         HybridAquaticEntityModelLayers
-        HybridAquaticClientNetworking
 
         registerBlockRenderLayers()
         registerBlockEntityRenderers()

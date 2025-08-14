@@ -12,7 +12,12 @@ class FishingNetTooltip : PredicateItemTooltipCallback(HybridAquaticItems.FISHIN
         TODO("Not yet implemented")
     }
 
-    override fun appendTooltip(stack: ItemStack, context: Item.TooltipContext, lines: MutableList<Text>) {
+    override fun appendTooltip(
+        stack: ItemStack,
+        context: Item.TooltipContext,
+        lines: MutableList<Text>?,
+        type: TooltipType
+    ) {
         val nbtCopy = stack.nbt?.copy()
         if (nbtCopy != null) {
             val optionalEntity = FishingNetItem.getEntityFromNBT(nbtCopy)

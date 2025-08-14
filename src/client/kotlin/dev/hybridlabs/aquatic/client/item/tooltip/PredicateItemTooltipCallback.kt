@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.client.item.tooltip
 
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
-import net.minecraft.client.item.TooltipContext
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.tooltip.TooltipType
 import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.text.Text
 
@@ -31,11 +31,21 @@ abstract class PredicateItemTooltipCallback(
      */
     constructor(vararg items: Item) : this(ItemPredicate.Builder.create().items(*items))
 
-    override fun getTooltip(stack: ItemStack, context: TooltipContext, lines: MutableList<Text>) {
+    override fun getTooltip(
+        stack: ItemStack,
+        context: Item.TooltipContext,
+        type: TooltipType,
+        lines: MutableList<Text>
+    ) {
         if (itemPredicate.test(stack)) {
-            appendTooltip(stack, context, lines)
+            appendTooltip(stack, context, lines, type)
         }
     }
 
-    abstract fun appendTooltip(stack: ItemStack, context: TooltipContext, lines: MutableList<Text>)
+    abstract fun appendTooltip(
+        stack: ItemStack,
+        context: Item.TooltipContext,
+        lines: MutableList<Text>?,
+        type: TooltipType
+    )
 }
