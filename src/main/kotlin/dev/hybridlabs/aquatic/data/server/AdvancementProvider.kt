@@ -273,7 +273,7 @@ class AdvancementProvider(
         val killKarkinosAdvancement = Advancement.Builder.create()
             .parent(ominousHookAdvancement)
             .display(
-                HybridAquaticItems.KARKINOS_CLAW,
+                HybridAquaticItems.DUNGENESS_CRAB_CLAW,
                 Text.translatable("advancements.hybrid-aquatic.kill_karkinos.title"),
                 Text.translatable("advancements.hybrid-aquatic.kill_karkinos.description"),
                 Identifier.of("textures/gui/advancements/backgrounds/adventure.png"),

@@ -246,16 +246,6 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        // message in a bottle
-        entries.add(
-            HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE,
-            ConfiguredFeature(
-                HybridAquaticFeatures.MESSAGE_IN_A_BOTTLE, MessageInABottleFeatureConfig(
-                    SimpleBlockStateProvider.of(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE)
-                )
-            )
-        )
-
         // thermal vents
         entries.add(
             HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH,

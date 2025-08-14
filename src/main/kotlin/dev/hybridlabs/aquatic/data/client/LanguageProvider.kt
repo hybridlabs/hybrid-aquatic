@@ -35,20 +35,11 @@ class LanguageProvider(
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Spawn Eggs"
         )
 
-        // message in a bottle
-        HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.translationKey.let { key ->
-            builder.add(key, "Message in a Bottle")
-            builder.add("$key.jar", "Message in a Jar")
-            builder.add("$key.longneck", "Message in a Longneck Bottle")
-        }
-
         // sea messages
         SeaMessageProvider.BUILT_IN.forEach { message ->
             builder.add(message.translationKey, message.englishText)
             message.englishTitle?.let { title -> builder.add(message.titleTranslationKey, title) }
         }
-
-        builder.add(HybridAquaticItems.SEA_MESSAGE_BOOK, "Sea Message")
 
         //advancements
         mapOf(
@@ -339,7 +330,6 @@ class LanguageProvider(
             HybridAquaticItems.CREEPERMAGNET_HOOK to "CreeperMagnet Hook",
             HybridAquaticItems.OMINOUS_HOOK to "Ominous Hook",
             HybridAquaticItems.FISHING_NET to "Fishing Net",
-            HybridAquaticItems.KARKINOS_CLAW to "Karkinos Claw",
             HybridAquaticItems.SEASHELL_SPEAR to "Seashell Spear",
             HybridAquaticItems.SEASHELL_PICKAXE to "Seashell Pickaxe",
             HybridAquaticItems.SEASHELL_AXE to "Seashell Axe",

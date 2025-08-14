@@ -95,9 +95,7 @@ object HybridAquaticItems {
 
     //#region Tools - Weapons - Hooks
 
-    val SEA_MESSAGE_BOOK = register("sea_message_book", SeaMessageBookItem(Item.Settings()))
     val FISHING_NET = register("fishing_net", FishingNetItem(Item.Settings().maxCount(1)))
-    val KARKINOS_CLAW = register("karkinos_claw", KarkinosClawItem(Item.Settings().maxCount(1)))
 
     val BARBED_HOOK = register("barbed_hook", HookItem(Item.Settings().maxDamage(16)))
     val GLOWING_HOOK = register("glowing_hook", HookItem(Item.Settings().maxDamage(16)))
@@ -271,7 +269,6 @@ object HybridAquaticItems {
     val RAFT = registerPlaceableInWaterBlockItem("raft", HybridAquaticBlocks.RAFT)
     val GLOWSTICK =
         registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
-    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleItem(Item.Settings()))
 
     //#region Plushies
 

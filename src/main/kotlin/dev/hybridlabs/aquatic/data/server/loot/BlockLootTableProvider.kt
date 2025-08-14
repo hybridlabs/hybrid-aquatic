@@ -1,11 +1,7 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.MESSAGE_KEY
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.VARIANT_KEY
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem.Companion.SEA_MESSAGE_KEY
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
@@ -17,8 +13,6 @@ import net.minecraft.loot.condition.MatchToolLootCondition
 import net.minecraft.loot.entry.AlternativeEntry
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.entry.LootTableEntry
-import net.minecraft.loot.function.CopyNbtLootFunction
-import net.minecraft.loot.provider.nbt.ContextLootNbtProvider
 import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKey
@@ -27,13 +21,10 @@ import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.ItemTags
 import java.util.concurrent.CompletableFuture
 
-@Suppress("DEPRECATION")
 class BlockLootTableProvider(
     output: FabricDataOutput,
     registryLookup: CompletableFuture<RegistryWrapper.WrapperLookup>?
 ) : FabricBlockLootTableProvider(output, registryLookup) {
-
-    private val BLOCK_ENTITY_TAG_KEY = "block_entity"
 
     override fun generate() {
         // anemone
@@ -123,25 +114,6 @@ class BlockLootTableProvider(
                             .conditionally(createSilkTouchCondition()),
                         LootTableEntry.builder(
                             RegistryKey.of(RegistryKeys.LOOT_TABLE, HybridAquaticLootTables.VENT_LOOT_ID)
-                        )
-                    )
-                )
-            )
-        }
-
-        // message in a bottle
-        addDrop(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE) { block ->
-            LootTable.builder().pool(
-                LootPool.builder().with(
-                    AlternativeEntry.builder(
-                        ItemEntry.builder(block).conditionally(createSilkTouchCondition()).apply(
-                            CopyNbtLootFunction.builder(ContextLootNbtProvider.BLOCK_ENTITY)
-                                .withOperation(VARIANT_KEY, "$BLOCK_ENTITY_TAG_KEY.$VARIANT_KEY")
-                                .withOperation(MESSAGE_KEY, "$BLOCK_ENTITY_TAG_KEY.$MESSAGE_KEY")
-                        ),
-                        ItemEntry.builder(HybridAquaticItems.SEA_MESSAGE_BOOK).apply(
-                            CopyNbtLootFunction.builder(ContextLootNbtProvider.BLOCK_ENTITY)
-                                .withOperation("$MESSAGE_KEY.tag.$SEA_MESSAGE_KEY", SEA_MESSAGE_KEY)
                         )
                     )
                 )

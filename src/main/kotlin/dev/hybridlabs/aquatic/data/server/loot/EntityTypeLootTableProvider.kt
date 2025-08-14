@@ -50,12 +50,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput, lookup: CompletableF
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(8.0F, 16.0F)))
                     )
             )
-            pool(
-                LootPool.builder()
-                    .with(
-                        ItemEntry.builder(HybridAquaticItems.KARKINOS_CLAW)
-                    )
-            )
         }
 
         export(exporter, HybridAquaticEntityTypes.DECORATOR_CRAB) {

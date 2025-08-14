@@ -7,10 +7,8 @@ import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquati
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
-import net.minecraft.block.Blocks
 import net.minecraft.block.FluidBlock
 import net.minecraft.data.client.*
-import net.minecraft.item.Items
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 import net.minecraft.util.Identifier
@@ -52,13 +50,10 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.ANEMONE to (null to TEMPLATE_ANEMONE),
                 HybridAquaticBlocks.GIANT_GREEN_ANEMONE to (null to TEMPLATE_ANEMONE),
                 HybridAquaticBlocks.STRAWBERRY_ANEMONE to (null to TEMPLATE_ANEMONE),
-                HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE to (Blocks.GLASS to TEMPLATE_MESSAGE_IN_A_BOTTLE),
             ).forEach { (block, info) ->
-                val (particleBlock, template) = info
+                val (_, template) = info
 
                 excludeFromSimpleItemModelGeneration(block)
-
-                particleBlock?.let { b -> registerBuiltinWithParticle(block, TextureMap.getId(b)) }
                 registerParentedItemModel(block, template)
             }
 
@@ -310,13 +305,10 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         ).forEach { item ->
             generator.register(item, Models.HANDHELD)
         }
-
-        generator.register(HybridAquaticItems.SEA_MESSAGE_BOOK, Items.WRITTEN_BOOK, Models.GENERATED)
     }
 
     companion object {
         private val TEMPLATE_ANEMONE = Identifier.of(HybridAquatic.MOD_ID, "item/template_anemone")
-        private val TEMPLATE_MESSAGE_IN_A_BOTTLE = Identifier.of(HybridAquatic.MOD_ID, "item/template_message_in_a_bottle")
         private val TEMPLATE_PLUSHIE = Identifier.of(HybridAquatic.MOD_ID, "item/template_plushie")
     }
 }

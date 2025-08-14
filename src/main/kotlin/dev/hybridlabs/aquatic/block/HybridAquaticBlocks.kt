@@ -75,14 +75,6 @@ object HybridAquaticBlocks {
         )
     )
 
-    val MESSAGE_IN_A_BOTTLE = register(
-        "message_in_a_bottle", MessageInABottleBlock(
-            FabricBlockSettings.copyOf(Blocks.GLASS)
-                .breakInstantly()
-                .pistonBehavior(PistonBehavior.DESTROY)
-        )
-    )
-
     val BASKING_SHARK_PLUSHIE =
         register("basking_shark_plushie", createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL))
     val BULL_SHARK_PLUSHIE =

@@ -1,8 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.block.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.block.MessageInABottleBlock.Variant
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.util.Identifier
 import software.bernie.geckolib.model.GeoModel

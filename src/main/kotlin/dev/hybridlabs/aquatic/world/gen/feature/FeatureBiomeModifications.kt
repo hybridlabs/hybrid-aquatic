@@ -108,12 +108,6 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.BOTTLE_SPAWN_BIOMES),
-            GenerationStep.Feature.TOP_LAYER_MODIFICATION,
-            HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE
-        )
-
-        BiomeModifications.addFeature(
             BiomeSelectors.tag(BiomeTags.IS_DEEP_OCEAN),
             GenerationStep.Feature.SURFACE_STRUCTURES,
             HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH

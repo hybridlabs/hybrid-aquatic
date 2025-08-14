@@ -4,8 +4,6 @@ package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.MessageInABottleBlock
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
@@ -15,20 +13,12 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.BlockPos
 
 object  HybridAquaticItemGroups {
     val BLOCKS = register("blocks", FabricItemGroup.builder()
         .displayName(Text.translatable("itemGroup.${HybridAquatic.MOD_ID}.blocks"))
         .icon { ItemStack(HybridAquaticItems.ANEMONE) }
         .entries { _, entries ->
-            // message in a bottle variants
-            MessageInABottleBlock.Variant.entries.forEach { variant ->
-                val blockEntity = MessageInABottleBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.defaultState)
-                    .also { blockEntity -> blockEntity.variant = variant }
-                val stack = MessageInABottleBlock.createItemStack(blockEntity)
-                entries.add(stack)
-            }
 
             // blocks
             entries.add(HybridAquaticBlocks.GLOWSTICK)
@@ -211,7 +201,6 @@ object  HybridAquaticItemGroups {
             entries.add(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW)
             entries.add(HybridAquaticItems.YETI_CRAB_CLAW)
             entries.add(HybridAquaticItems.SPIDER_CRAB_CLAW)
-            entries.add(HybridAquaticItems.KARKINOS_CLAW)
             entries.add(HybridAquaticItems.GLOW_SLIME)
             entries.add(HybridAquaticItems.SHARK_TOOTH)
             entries.add(HybridAquaticItems.PEARL)

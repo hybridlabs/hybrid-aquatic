@@ -195,19 +195,6 @@ class PlacedFeatureProvider(
             )
         )
 
-        // message in a bottle
-        entries.add(
-            HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE,
-            PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE),
-                listOf(
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
-                    RarityFilterPlacementModifier.of(150),
-                )
-            )
-        )
-
         // thermal vents
         entries.add(
             HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH,

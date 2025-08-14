@@ -2,7 +2,6 @@
 
 package dev.hybridlabs.aquatic.client.render.block.entity
 
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.client.model.block.entity.MessageInABottleBlockEntityModel
 import net.minecraft.client.render.VertexConsumer
 import net.minecraft.client.render.VertexConsumerProvider

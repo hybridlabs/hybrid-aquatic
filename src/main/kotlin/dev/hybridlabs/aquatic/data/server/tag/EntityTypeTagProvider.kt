@@ -12,6 +12,13 @@ import java.util.concurrent.CompletableFuture
 
 class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.EntityTypeTagProvider(output, registriesFuture) {
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
+        getOrCreateTagBuilder(EntityTypeTags.CAN_BREATHE_UNDER_WATER)
+            .addTag(HybridAquaticEntityTags.CRITTER)
+            .addTag(HybridAquaticEntityTags.CRUSTACEAN)
+            .addTag(HybridAquaticEntityTags.JELLYFISH)
+            .addTag(HybridAquaticEntityTags.FISH)
+            .addTag(HybridAquaticEntityTags.SHARK)
+
         // small prey
         getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_PREY)
             .add(
