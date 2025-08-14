@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.client.item.TooltipData
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -9,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemUsageContext
+import net.minecraft.item.tooltip.TooltipData
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
