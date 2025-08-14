@@ -14,7 +14,7 @@ import java.util.concurrent.CompletableFuture
 class SeaMessageProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricDynamicRegistryProvider(output, registriesFuture) {
     override fun configure(registries: RegistryWrapper.WrapperLookup, entries: Entries) {
         BUILT_IN.forEach { message ->
-            val key = RegistryKey.of(HybridAquaticRegistryKeys.SEA_MESSAGE, Identifier(HybridAquatic.MOD_ID, message.id))
+            val key = RegistryKey.of(HybridAquaticRegistryKeys.SEA_MESSAGE, Identifier.of(HybridAquatic.MOD_ID, message.id))
             entries.add(key, SeaMessage(message.translationKey, message.englishTitle != null, message.infinite, Optional.ofNullable(message.author)))
         }
     }

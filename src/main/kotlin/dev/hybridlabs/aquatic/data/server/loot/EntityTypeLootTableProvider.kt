@@ -8,26 +8,22 @@ import net.minecraft.entity.EntityType
 import net.minecraft.item.Items
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
-import net.minecraft.loot.condition.EntityPropertiesLootCondition
-import net.minecraft.loot.context.LootContext
 import net.minecraft.loot.context.LootContextTypes
 import net.minecraft.loot.entry.ItemEntry
-import net.minecraft.loot.function.FurnaceSmeltLootFunction
-import net.minecraft.loot.function.LootingEnchantLootFunction
 import net.minecraft.loot.function.SetCountLootFunction
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
-import net.minecraft.predicate.entity.EntityFlagsPredicate
-import net.minecraft.predicate.entity.EntityPredicate
-import net.minecraft.util.Identifier
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryWrapper
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
 /**
  * Generates entity loot tables.
  */
-class EntityTypeLootTableProvider(output: FabricDataOutput) :
-    SimpleFabricLootTableProvider(output, LootContextTypes.ENTITY) {
-    override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
+class EntityTypeLootTableProvider(output: FabricDataOutput, lookup: CompletableFuture<RegistryWrapper.WrapperLookup>) :
+    SimpleFabricLootTableProvider(output, lookup, LootContextTypes.ENTITY) {
+    override fun accept(exporter: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>) {
         // nautilus
         export(exporter, HybridAquaticEntityTypes.NAUTILUS) {
             pool(
@@ -40,14 +36,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_TENTACLE)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0F)))
                     )
             )
@@ -75,14 +63,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_CRAB)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -93,14 +73,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_CRAB)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -111,14 +83,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.DUNGENESS_CRAB_CLAW)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -129,14 +93,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.FIDDLER_CRAB_CLAW)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -147,14 +103,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.SPIDER_CRAB_CLAW)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -165,14 +113,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.GHOST_CRAB_CLAW)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -183,14 +123,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.VAMPIRE_CRAB_CLAW)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -201,14 +133,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.FLOWER_CRAB_CLAW)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -219,14 +143,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.COCONUT_CRAB_CLAW)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -237,14 +153,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.YETI_CRAB_CLAW)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -255,14 +163,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -273,14 +173,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.LOBSTER_CLAW)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 2.0F)))
                     )
             )
@@ -288,14 +180,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_LOBSTER_TAIL)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
+
                     )
             )
         }
@@ -305,14 +190,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_CRAYFISH)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0F)))
                     )
             )
@@ -323,14 +200,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_SHRIMP)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0F)))
                     )
             )
@@ -342,14 +211,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_TENTACLE)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 3.0F)))
                     )
             )
@@ -371,14 +232,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_TENTACLE)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 3.0F)))
                     )
             )
@@ -395,14 +248,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_TENTACLE)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 3.0F)))
                     )
             )
@@ -419,14 +264,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_TENTACLE)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 3.0F)))
                     )
             )
@@ -466,14 +303,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.builder()
                     .with(
                         ItemEntry.builder(HybridAquaticItems.RAW_TENTACLE)
-                            .apply(
-                                FurnaceSmeltLootFunction.builder().conditionally(
-                                    EntityPropertiesLootCondition.builder(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
                             .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0F, 3.0F)))
                     )
             )
@@ -992,15 +821,10 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
      * Exports a loot table for [entityType] to [exporter] using its loot table id.
      */
     private fun export(
-        exporter: BiConsumer<Identifier, LootTable.Builder>,
+        exporter: BiConsumer<RegistryKey<LootTable>, LootTable.Builder>,
         entityType: EntityType<*>,
         builder: LootTable.Builder.() -> Unit
     ) {
         exporter.accept(entityType.lootTableId, LootTable.builder().apply(builder))
-    }
-
-    companion object {
-        private val NEEDS_ENTITY_ON_FIRE: EntityPredicate.Builder =
-            EntityPredicate.Builder.create().flags(EntityFlagsPredicate.Builder.create().onFire(true).build())
     }
 }

@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.config.HybridAquaticConfig
 import dev.hybridlabs.aquatic.config.HybridAquaticConfigHandler
 import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
+import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
@@ -62,6 +63,8 @@ object HybridAquatic : ModInitializer {
 
         HybridAquaticItems
         HybridAquaticItemGroups
+
+        HybridAquaticEnchantments
 
         HybridAquaticFeatures
         HybridAquaticPlacedFeatures
