@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.component.DataComponentTypes
+import net.minecraft.component.type.NbtComponent
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -10,13 +12,13 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemUsageContext
 import net.minecraft.item.tooltip.TooltipData
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.sound.SoundEvents
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
-import net.minecraft.world.World
 import java.util.*
 
+@Suppress("DEPRECATION")
 class FishingNetItem(settings: Settings?): Item(settings) {
-
     override fun useOnEntity(stack: ItemStack, user: PlayerEntity, entity: LivingEntity, hand: Hand): ActionResult {
         val validFishForNet = entity.type.isIn(HybridAquaticEntityTags.CAN_USE_FISHING_NET_ON)
 
@@ -29,20 +31,24 @@ class FishingNetItem(settings: Settings?): Item(settings) {
     }
 
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
-        val world: World = context.world
+        val world = context.world
 
         if (!world.isClient) {
-            val nbtCopy = context.stack.nbt?.copy() ?: return super.useOnBlock(context)
+            val storedData = context.stack.get(DataComponentTypes.CUSTOM_DATA)?.nbt ?: return super.useOnBlock(context)
 
-            val optionalEntity = getEntityFromNBT(nbtCopy)
-
+            val optionalEntity = getEntityFromNBT(storedData)
             if (optionalEntity.isPresent) {
-                val entity = optionalEntity.get().create(context.world) ?: return ActionResult.FAIL
-                entity.readNbt(context.stack.nbt?.getCompound(ENTITY_KEY))
-                context.stack.nbt?.remove(ENTITY_KEY)
+                val entityType = optionalEntity.get()
+                val entity = entityType.create(world) ?: return ActionResult.FAIL
 
+                entity.readNbt(storedData)
                 entity.setPosition(context.hitPos)
                 world.spawnEntity(entity)
+
+                // Clear stored fish
+                context.stack.remove(DataComponentTypes.CUSTOM_DATA)
+
+                context.player?.playSound(SoundEvents.ITEM_BUNDLE_REMOVE_ONE, 1.0f, 1.0f)
                 return ActionResult.SUCCESS
             }
         }
@@ -54,30 +60,25 @@ class FishingNetItem(settings: Settings?): Item(settings) {
     }
 
     companion object {
-        private const val ENTITY_KEY: String = "storedEntity"
-
         fun writeEntityToNet(entity: Entity, user: PlayerEntity, hand: Hand) {
             val entityCompound = NbtCompound()
             entity.saveNbt(entityCompound)
             entityCompound.putBoolean("PersistenceRequired", true)
             entityCompound.putBoolean("FromFishingNet", true)
+
             val itemStack = user.getStackInHand(hand)
-            itemStack.orCreateNbt.put(ENTITY_KEY, entityCompound)
+
+            val nbtComponent = NbtComponent.of(entityCompound)
+            itemStack.set(DataComponentTypes.CUSTOM_DATA, nbtComponent)
         }
 
         fun getEntityFromNBT(nbt: NbtCompound): Optional<EntityType<*>> {
-            val storedNBT = nbt.getCompound(ENTITY_KEY)
-            if (storedNBT != null) {
-                return EntityType.fromNbt(storedNBT)
-            }
-            return Optional.empty()
+            return EntityType.fromNbt(nbt)
         }
 
         fun alreadyHasFish(stack: ItemStack): Boolean {
-            val nbtCopy = stack.nbt?.copy() ?: return false
-            val entityNBT = nbtCopy.getCompound(ENTITY_KEY) ?: return false
-
-            return !entityNBT.isEmpty
+            val storedData = stack.get(DataComponentTypes.CUSTOM_DATA)?.nbt ?: return false
+            return !storedData.isEmpty
         }
     }
 }
