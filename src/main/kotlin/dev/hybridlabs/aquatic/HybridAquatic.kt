@@ -70,7 +70,7 @@ object HybridAquatic : ModInitializer {
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
 
-        HybridAquaticNetworking.registerNetworking()
+        HybridAquaticNetworking
 
         HybridAquaticLootPoolEntryTypes
         LootTableModifications.registerLootModifications()
