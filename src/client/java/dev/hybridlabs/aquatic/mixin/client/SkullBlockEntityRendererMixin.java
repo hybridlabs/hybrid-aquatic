@@ -45,7 +45,7 @@ public abstract class SkullBlockEntityRendererMixin {
                     shift = At.Shift.BEFORE,
                     remap = false
             ),
-            locals = LocalCapture.CAPTURE_FAILEXCEPTION
+            locals = LocalCapture.CAPTURE_FAILHARD
     )
     private static void injectModels(EntityModelLoader modelLoader, CallbackInfoReturnable<Map<SkullBlock.SkullType, SkullBlockEntityModel>> cir, ImmutableMap.Builder<SkullBlock.SkullType, SkullBlockEntityModel> builder) {
         // inject plushie variants

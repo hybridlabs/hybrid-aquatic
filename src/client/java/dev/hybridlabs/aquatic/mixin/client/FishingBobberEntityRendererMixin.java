@@ -21,15 +21,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(FishingBobberEntityRenderer.class)
 public abstract class FishingBobberEntityRendererMixin {
   @Unique
-  private static final RenderLayer BARBED_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/bobber/barbed_bobber.png"));
+  private static final RenderLayer BARBED_HOOK_LAYER = getRenderLayer(Identifier.of(HybridAquatic.MOD_ID, "textures/entity/bobber/barbed_bobber.png"));
   @Unique
-  private static final RenderLayer GLOWING_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/bobber/glowing_bobber.png"));
+  private static final RenderLayer GLOWING_HOOK_LAYER = getRenderLayer(Identifier.of(HybridAquatic.MOD_ID, "textures/entity/bobber/glowing_bobber.png"));
   @Unique
-  private static final RenderLayer MAGNETIC_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/bobber/magnetic_bobber.png"));
+  private static final RenderLayer MAGNETIC_HOOK_LAYER = getRenderLayer(Identifier.of(HybridAquatic.MOD_ID, "textures/entity/bobber/magnetic_bobber.png"));
   @Unique
-  private static final RenderLayer CREEPERMAGNET_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/bobber/creepermagnet_bobber.png"));
+  private static final RenderLayer CREEPERMAGNET_HOOK_LAYER = getRenderLayer(Identifier.of(HybridAquatic.MOD_ID, "textures/entity/bobber/creepermagnet_bobber.png"));
   @Unique
-  private static final RenderLayer OMINOUS_HOOK_LAYER = getRenderLayer(new Identifier(HybridAquatic.MOD_ID, "textures/entity/bobber/ominous_bobber.png"));
+  private static final RenderLayer OMINOUS_HOOK_LAYER = getRenderLayer(Identifier.of(HybridAquatic.MOD_ID, "textures/entity/bobber/ominous_bobber.png"));
   
   @Unique
   FishingBobberEntity entity;
