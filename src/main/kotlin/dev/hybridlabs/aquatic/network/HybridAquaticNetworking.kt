@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.projectile.FishingBobberEntity
 
 object HybridAquaticNetworking {
+
+
     init {
         PayloadTypeRegistry.playS2C().register(FishingBobberLurePacket.ID, FishingBobberLurePacket.PACKET_CODEC)
         PayloadTypeRegistry.playC2S().register(FishingBobberLurePacket.ID, FishingBobberLurePacket.PACKET_CODEC)
