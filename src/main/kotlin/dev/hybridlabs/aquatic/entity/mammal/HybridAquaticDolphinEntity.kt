@@ -303,11 +303,10 @@ open class HybridAquaticDolphinEntity(
             random: Random
         ): Boolean {
             val topY = world.seaLevel - 8
-            val bottomY = world.seaLevel - 32
+            val bottomY = world.seaLevel - 64
 
             return pos.y in bottomY..topY &&
-                    world.isWater(pos) &&
-                    world.isSkyVisibleAllowingSea(pos)
+                    world.isWater(pos)
         }
     }
 }

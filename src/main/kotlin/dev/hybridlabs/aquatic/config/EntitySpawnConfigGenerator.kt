@@ -220,7 +220,7 @@ class EntitySpawnConfigGenerator {
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, HybridAquaticSpawnGroup.DOLPHIN.spawnGroup, weight, minGroup, maxGroup)
+        add(entityType, spawnTags, SpawnGroup.WATER_CREATURE, weight, minGroup, maxGroup)
     }
 
     private fun addJelly(
