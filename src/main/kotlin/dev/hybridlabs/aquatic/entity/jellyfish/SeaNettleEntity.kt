@@ -18,6 +18,7 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: World) :
     HybridAquaticJellyfishEntity(entityType, world, true, 1),
     VariantHolder<SeaNettleEntity.Companion.Type> {

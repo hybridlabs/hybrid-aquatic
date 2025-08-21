@@ -18,6 +18,7 @@ import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class CepheidaeJellyfishEntity(entityType: EntityType<out CepheidaeJellyfishEntity>, world: World) :
     HybridAquaticJellyfishEntity(entityType, world, false, 0),
     VariantHolder<CepheidaeJellyfishEntity.Companion.Type> {
