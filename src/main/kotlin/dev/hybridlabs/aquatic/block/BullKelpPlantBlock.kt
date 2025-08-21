@@ -10,6 +10,7 @@ import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.WorldAccess
 
+@Suppress("OVERRIDE_DEPRECATION")
 class BullKelpPlantBlock(settings: Settings) :
     AbstractPlantBlock(settings, Direction.UP, VoxelShapes.fullCube(), true), FluidFillable {
     override fun getStem(): AbstractPlantStemBlock {

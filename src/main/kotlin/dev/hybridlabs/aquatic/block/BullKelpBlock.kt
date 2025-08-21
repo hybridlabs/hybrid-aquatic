@@ -56,6 +56,6 @@ class BullKelpBlock(settings: Settings?) :
     }
 
     companion object {
-        protected val SHAPE: VoxelShape = createCuboidShape(0.0, 0.0, 0.0, 16.0, 9.0, 16.0)
+        private val SHAPE: VoxelShape = createCuboidShape(0.0, 0.0, 0.0, 16.0, 9.0, 16.0)
     }
 }
