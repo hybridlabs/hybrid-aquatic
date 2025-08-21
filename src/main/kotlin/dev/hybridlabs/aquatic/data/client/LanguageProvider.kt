@@ -480,7 +480,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.TRIGGERFISH to "Triggerfish",
             HybridAquaticEntityTypes.OSCAR to "Oscar",
             HybridAquaticEntityTypes.DANIO to "Danio",
-            HybridAquaticEntityTypes.BLOWFISH to "Toadfish",
+            HybridAquaticEntityTypes.BLOWFISH to "Blowfish",
             HybridAquaticEntityTypes.TETRA to "Tetra",
             HybridAquaticEntityTypes.STONEFISH to "Stonefish",
             HybridAquaticEntityTypes.BETTA to "Betta",
