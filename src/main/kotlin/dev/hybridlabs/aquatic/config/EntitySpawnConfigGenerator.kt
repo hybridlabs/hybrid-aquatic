@@ -41,7 +41,6 @@ class EntitySpawnConfigGenerator {
         addFish(HybridAquaticEntityTypes.OPAH, listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 3, 1, 1)
         addFish(HybridAquaticEntityTypes.ROCKFISH, listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 3)
         addFish(HybridAquaticEntityTypes.SEA_BASS, listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 3)
-        addFish(HybridAquaticEntityTypes.WRECKFISH, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 1)
         addFish(HybridAquaticEntityTypes.SHEEPSHEAD_WRASSE, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS), 3, 1, 1)
         addFish(HybridAquaticEntityTypes.SEAHORSE, listOf(HybridAquaticBiomeTags.REEF), 1, 1, 2)
         addFish(HybridAquaticEntityTypes.SEADRAGON, listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 1, 1, 2)

@@ -468,7 +468,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.GOLDEN_DORADO to "Golden Dorado",
             HybridAquaticEntityTypes.MORAY_EEL to "Moray Eel",
             HybridAquaticEntityTypes.ROCKFISH to "Rockfish",
-            HybridAquaticEntityTypes.WRECKFISH to "Wreckfish",
             HybridAquaticEntityTypes.SEA_BASS to "Sea Bass",
             HybridAquaticEntityTypes.TIGER_BARB to "Tiger Barb",
             HybridAquaticEntityTypes.CARP to "Carp",

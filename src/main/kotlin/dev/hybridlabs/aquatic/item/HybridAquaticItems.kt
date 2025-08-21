@@ -1337,7 +1337,6 @@ object HybridAquaticItems {
     val SHEEPSHEAD_WRASSE_SPAWN_EGG = registerSpawnEgg("sheepshead_wrasse_spawn_egg", HybridAquaticEntityTypes.SHEEPSHEAD_WRASSE, 0x2c2628, 0xdc5f5d)
     val PIRANHA_SPAWN_EGG = registerSpawnEgg("piranha_spawn_egg", HybridAquaticEntityTypes.PIRANHA, 0x535f92, 0xaf3b3d)
     val ROCKFISH_SPAWN_EGG = registerSpawnEgg("rockfish_spawn_egg", HybridAquaticEntityTypes.ROCKFISH, 0x711b2f, 0xeb5948)
-    val WRECKFISH_SPAWN_EGG = registerSpawnEgg("wreckfish_spawn_egg", HybridAquaticEntityTypes.WRECKFISH, 0x711b2f, 0xeb5948)
     val SEA_BASS_SPAWN_EGG = registerSpawnEgg("sea_bass_spawn_egg", HybridAquaticEntityTypes.SEA_BASS, 0x323337, 0xe7e8e8)
     val SEAHORSE_SPAWN_EGG = registerSpawnEgg("seahorse_spawn_egg", HybridAquaticEntityTypes.SEAHORSE, 0xffc9ab, 0xe63f5e)
     val SEADRAGON_SPAWN_EGG = registerSpawnEgg("seadragon_spawn_egg", HybridAquaticEntityTypes.SEADRAGON, 0xffc9ab, 0xe63f5e)

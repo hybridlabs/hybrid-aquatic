@@ -53,7 +53,6 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.BLOWFISH,
             HybridAquaticEntityTypes.STONEFISH,
             HybridAquaticEntityTypes.ROCKFISH,
-            HybridAquaticEntityTypes.WRECKFISH,
             HybridAquaticEntityTypes.SEA_BASS,
             HybridAquaticEntityTypes.TRIGGERFISH,
             HybridAquaticEntityTypes.PARROTFISH,

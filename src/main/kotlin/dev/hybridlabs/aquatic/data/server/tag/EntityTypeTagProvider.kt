@@ -141,7 +141,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HybridAquaticEntityTags.LARGE_PREY)
             .add(
                 HybridAquaticEntityTypes.SUNFISH,
-                HybridAquaticEntityTypes.WRECKFISH,
                 HybridAquaticEntityTypes.OARFISH,
                 HybridAquaticEntityTypes.OPAH,
                 HybridAquaticEntityTypes.TUNA,
@@ -350,7 +349,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.SHEEPSHEAD_WRASSE,
                 HybridAquaticEntityTypes.PIRANHA,
                 HybridAquaticEntityTypes.ROCKFISH,
-                HybridAquaticEntityTypes.WRECKFISH,
                 HybridAquaticEntityTypes.SEA_BASS,
                 HybridAquaticEntityTypes.SEAHORSE,
                 HybridAquaticEntityTypes.SEADRAGON,
