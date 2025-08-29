@@ -1,0 +1,250 @@
+@file:Suppress("UnstableApiUsage")
+
+package dev.hybridlabs.aquatic.data.server
+
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.TubeWormBlock
+import dev.hybridlabs.aquatic.world.gen.feature.*
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
+import net.minecraft.core.Direction
+import net.minecraft.core.HolderLookup
+import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.util.random.SimpleWeightedRandomList
+import net.minecraft.util.valueproviders.ConstantInt
+import net.minecraft.util.valueproviders.UniformInt
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.HorizontalDirectionalBlock
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
+import net.minecraft.world.level.levelgen.feature.Feature
+import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
+import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider
+import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider
+import net.minecraft.world.level.levelgen.synth.NormalNoise
+import java.util.concurrent.CompletableFuture
+
+class ConfiguredFeatureProvider(
+    output: FabricDataOutput,
+    registriesFuture: CompletableFuture<HolderLookup.Provider>
+) : FabricDynamicRegistryProvider(output, registriesFuture) {
+    override fun configure(registries: HolderLookup.Provider, entries: Entries) {
+        // anemone patch
+        entries.add(
+            HybridAquaticConfiguredFeatures.ANEMONE_PATCH,
+            ConfiguredFeature(
+                Feature.NO_BONEMEAL_FLOWER,
+                RandomPatchConfiguration(
+                    3, 3, 3,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            WeightedStateProvider(
+                                SimpleWeightedRandomList.builder<BlockState>()
+                                    .add(
+                                        HybridAquaticBlocks.ANEMONE.get().defaultBlockState()
+                                            .setValue(WATERLOGGED, true), 1
+                                    )
+                                    .add(
+                                        HybridAquaticBlocks.STRAWBERRY_ANEMONE.get().defaultBlockState().setValue(
+                                            WATERLOGGED,
+                                            true
+                                        ), 3
+                                    )
+                                    .build()
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH,
+            ConfiguredFeature(
+                HybridAquaticFeatures.RED_ALGAE_PATCH.get(), ProbabilityFeatureConfiguration(
+                    0.33f
+                )
+            )
+        )
+
+        //#region Sargassum
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.SARGASSUM,
+            ConfiguredFeature(
+                HybridAquaticFeatures.SARGASSUM.get(), SargassumFeatureConfig(
+                    SimpleStateProvider.simple(HybridAquaticBlocks.SARGASSUM.get())
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.FLOATING_SARGASSUM,
+            ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                    100, 10, 10,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            NoiseProvider(
+                                237L,
+                                NormalNoise.NoiseParameters(-5, 5.0, *DoubleArray(0)),
+                                1.0f,
+                                listOf<BlockState>(
+                                    HybridAquaticBlocks.FLOATING_SARGASSUM.get().defaultBlockState()
+                                )
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.WATER_LETTUCE,
+            ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                    5, 3, 3,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            SimpleStateProvider.simple(HybridAquaticBlocks.WATER_LETTUCE.get())
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD,
+            ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                    5, 3, 3,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            SimpleStateProvider.simple(HybridAquaticBlocks.JUNGLE_LILY_PAD.get())
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.GLOWING_PLANKTON,
+            ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                    100, 12, 12,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            BlockStateProvider.simple(HybridAquaticBlocks.GLOWING_PLANKTON.get().defaultBlockState())
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH,
+            ConfiguredFeature(
+                HybridAquaticFeatures.SEA_LETTUCE_PATCH.get(), ProbabilityFeatureConfiguration(
+                    0.33f
+                )
+            )
+        )
+
+        // tube sponge patch
+        entries.add(
+            HybridAquaticConfiguredFeatures.TUBE_SPONGE_PATCH,
+            ConfiguredFeature(
+                Feature.FLOWER,
+                RandomPatchConfiguration(
+                    4, 2, 2,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            BlockStateProvider.simple(
+                                HybridAquaticBlocks.TUBE_SPONGE.get().defaultBlockState().setValue(WATERLOGGED, true)
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+        // giant clam patch
+        entries.add(
+            HybridAquaticConfiguredFeatures.GIANT_CLAM_PATCH,
+            ConfiguredFeature(
+                Feature.NO_BONEMEAL_FLOWER, RandomPatchConfiguration(
+                    2, 2, 2,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            WeightedStateProvider(
+                                SimpleWeightedRandomList.builder<BlockState>()
+                                    .add(
+                                        HybridAquaticBlocks.GIANT_CLAM.get().defaultBlockState()
+                                            .setValue(WATERLOGGED, true)
+                                            .setValue(HorizontalDirectionalBlock.FACING, Direction.EAST), 1
+                                    )
+                                    .add(
+                                        HybridAquaticBlocks.GIANT_CLAM.get().defaultBlockState()
+                                            .setValue(WATERLOGGED, true)
+                                            .setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH), 1
+                                    )
+                                    .build()
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+        // message in a bottle
+        entries.add(
+            HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE,
+            ConfiguredFeature(
+                HybridAquaticFeatures.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleFeatureConfig(
+                    SimpleStateProvider.simple(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get())
+                )
+            )
+        )
+
+        // thermal vents
+        entries.add(
+            HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH,
+            ConfiguredFeature(
+                HybridAquaticFeatures.VENT_PATCH.get(), VentPatchFeatureConfig(
+                    SimpleStateProvider.simple(Blocks.TUFF),
+                    SimpleStateProvider.simple(HybridAquaticBlocks.THERMAL_VENT.get()),
+                    SimpleStateProvider.simple(HybridAquaticBlocks.TUBE_WORM.get()),
+                    UniformInt.of(2, 3),
+                    ConstantInt.of(3),
+                    UniformInt.of(1, 3),
+                    ConstantInt.of(4),
+                    UniformInt.of(TubeWormBlock.WORMS.min, TubeWormBlock.WORMS.max),
+                )
+            )
+        )
+    }
+
+    override fun getName(): String {
+        return "Configured Features"
+    }
+}

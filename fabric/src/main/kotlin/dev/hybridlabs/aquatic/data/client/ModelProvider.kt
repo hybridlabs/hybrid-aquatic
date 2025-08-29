@@ -1,0 +1,314 @@
+package dev.hybridlabs.aquatic.data.client
+
+import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.PlushieBlock
+import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.data.models.BlockModelGenerators
+import net.minecraft.data.models.ItemModelGenerators
+import net.minecraft.data.models.model.ModelLocationUtils
+import net.minecraft.data.models.model.ModelTemplates
+import net.minecraft.data.models.model.TextureMapping
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.SpawnEggItem
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.LiquidBlock
+
+class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
+    override fun generateBlockStateModels(generator: BlockModelGenerators) {
+        generator.run {
+            // plushies
+            BuiltInRegistries.BLOCK
+                .filterIsInstance<PlushieBlock>()
+                .forEach { block ->
+                    skipAutoItemBlock(block)
+                    createAirLikeBlock(block, TextureMapping.getBlockTexture(block.particleBlock))
+                    delegateItemModel(block, TEMPLATE_PLUSHIE)
+                }
+
+            // fluids
+            BuiltInRegistries.BLOCK
+                .filterIsInstance<LiquidBlock>()
+                .forEach { block ->
+                    val id = BuiltInRegistries.BLOCK.getKey(block)
+                    if (id.namespace == HybridAquatic.MOD_ID) {
+                        createNonTemplateModelBlock(block)
+                    }
+                }
+
+            // spawn eggs
+            BuiltInRegistries.ITEM
+                .filter(filterHybridAquatic(BuiltInRegistries.ITEM))
+                .forEach { item ->
+                    if (item is SpawnEggItem) {
+                        delegateItemModel(item, ModelLocationUtils.decorateItemModelLocation("template_spawn_egg"))
+                    }
+                }
+
+            // builtin
+            mapOf<Block, Pair<Block?, ResourceLocation>>(
+                HybridAquaticBlocks.ANEMONE.get() to (null to TEMPLATE_ANEMONE),
+                HybridAquaticBlocks.STRAWBERRY_ANEMONE.get() to (null to TEMPLATE_ANEMONE),
+                HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get() to (Blocks.GLASS to TEMPLATE_MESSAGE_IN_A_BOTTLE),
+            ).forEach { (block, info) ->
+                val (particleBlock, template) = info
+
+                skipAutoItemBlock(block)
+
+                particleBlock?.let { b -> createAirLikeBlock(block, TextureMapping.getBlockTexture(b)) }
+                delegateItemModel(block, template)
+            }
+
+            createAirLikeBlock(
+                HybridAquaticBlocks.ANEMONE.get(),
+                TextureMapping.getBlockTexture(HybridAquaticBlocks.ANEMONE.get(), "_top")
+            )
+
+            createAirLikeBlock(
+                HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(),
+                TextureMapping.getBlockTexture(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(), "_top")
+            )
+
+            // simple cubes
+            setOf(
+                HybridAquaticBlocks.HYBRID_CRATE.get(),
+                HybridAquaticBlocks.OAK_CRATE.get(),
+                HybridAquaticBlocks.SPRUCE_CRATE.get(),
+                HybridAquaticBlocks.BIRCH_CRATE.get(),
+                HybridAquaticBlocks.DARK_OAK_CRATE.get(),
+                HybridAquaticBlocks.JUNGLE_CRATE.get(),
+                HybridAquaticBlocks.ACACIA_CRATE.get(),
+                HybridAquaticBlocks.MANGROVE_CRATE.get(),
+                HybridAquaticBlocks.CHERRY_CRATE.get(),
+            ).forEach(generator::createTrivialCube)
+
+            // wood
+            val driftwoodPool = family(HybridAquaticBlocks.DRIFTWOOD_PLANKS.get())
+
+            woodProvider(HybridAquaticBlocks.DRIFTWOOD_LOG.get()).log(HybridAquaticBlocks.DRIFTWOOD_LOG.get())
+                .wood(HybridAquaticBlocks.DRIFTWOOD_WOOD.get())
+            woodProvider(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG.get()).log(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG.get())
+                .wood(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
+
+            createDoor(HybridAquaticBlocks.DRIFTWOOD_DOOR.get())
+            createTrapdoor(HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR.get())
+
+            driftwoodPool.stairs(HybridAquaticBlocks.DRIFTWOOD_STAIRS.get())
+            driftwoodPool.slab(HybridAquaticBlocks.DRIFTWOOD_SLAB.get())
+            driftwoodPool.button(HybridAquaticBlocks.DRIFTWOOD_BUTTON.get())
+            driftwoodPool.pressurePlate(HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
+            driftwoodPool.fence(HybridAquaticBlocks.DRIFTWOOD_FENCE.get())
+            driftwoodPool.fenceGate(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE.get())
+
+            createNormalTorch(HybridAquaticBlocks.GLOWSTICK.get(), HybridAquaticBlocks.WALL_GLOWSTICK.get())
+
+            createCoral(
+                HybridAquaticBlocks.LOPHELIA_CORAL.get(),
+                HybridAquaticBlocks.DEAD_LOPHELIA_CORAL.get(),
+                HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.LOPHELIA_CORAL_FAN.get(),
+                HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
+                HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN.get(),
+                HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN.get()
+            )
+
+            createCoral(
+                HybridAquaticBlocks.BUTTON_CORAL.get(),
+                HybridAquaticBlocks.DEAD_BUTTON_CORAL.get(),
+                HybridAquaticBlocks.BUTTON_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.DEAD_BUTTON_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.BUTTON_CORAL_FAN.get(),
+                HybridAquaticBlocks.DEAD_BUTTON_CORAL_FAN.get(),
+                HybridAquaticBlocks.BUTTON_CORAL_WALL_FAN.get(),
+                HybridAquaticBlocks.DEAD_BUTTON_CORAL_WALL_FAN.get()
+            )
+
+            createCoral(
+                HybridAquaticBlocks.THORN_CORAL.get(),
+                HybridAquaticBlocks.DEAD_THORN_CORAL.get(),
+                HybridAquaticBlocks.THORN_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.THORN_CORAL_FAN.get(),
+                HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get(),
+                HybridAquaticBlocks.THORN_CORAL_WALL_FAN.get(),
+                HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN.get()
+            )
+
+            createCoral(
+                HybridAquaticBlocks.SUN_CORAL.get(),
+                HybridAquaticBlocks.DEAD_SUN_CORAL.get(),
+                HybridAquaticBlocks.SUN_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.DEAD_SUN_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.SUN_CORAL_FAN.get(),
+                HybridAquaticBlocks.DEAD_SUN_CORAL_FAN.get(),
+                HybridAquaticBlocks.SUN_CORAL_WALL_FAN.get(),
+                HybridAquaticBlocks.DEAD_SUN_CORAL_WALL_FAN.get()
+            )
+
+            createCrossBlockWithDefaultItem(
+                HybridAquaticBlocks.SARGASSUM_PLANT.get(),
+                BlockModelGenerators.TintState.NOT_TINTED,
+            )
+
+            createCrossBlockWithDefaultItem(
+                HybridAquaticBlocks.SARGASSUM.get(),
+                BlockModelGenerators.TintState.NOT_TINTED,
+            )
+
+            createCrossBlockWithDefaultItem(
+                HybridAquaticBlocks.SEA_LETTUCE.get(),
+                BlockModelGenerators.TintState.NOT_TINTED,
+            )
+        }
+    }
+
+    override fun generateItemModels(generator: ItemModelGenerators) {
+        setOf(
+            HybridAquaticItems.BUOY.get(),
+            HybridAquaticItems.RED_ALGAE.get(),
+            HybridAquaticItems.SEA_LETTUCE.get(),
+            HybridAquaticItems.SARGASSUM.get(),
+            HybridAquaticItems.TUBE_SPONGE.get(),
+            HybridAquaticItems.UNI.get(),
+            HybridAquaticItems.RAW_CRAYFISH.get(),
+            HybridAquaticItems.COCONUT_CRAB_CLAW.get(),
+            HybridAquaticItems.DUNGENESS_CRAB_CLAW.get(),
+            HybridAquaticItems.FIDDLER_CRAB_CLAW.get(),
+            HybridAquaticItems.FLOWER_CRAB_CLAW.get(),
+            HybridAquaticItems.GHOST_CRAB_CLAW.get(),
+            HybridAquaticItems.LIGHTFOOT_CRAB_CLAW.get(),
+            HybridAquaticItems.LOBSTER_CLAW.get(),
+            HybridAquaticItems.SPIDER_CRAB_CLAW.get(),
+            HybridAquaticItems.VAMPIRE_CRAB_CLAW.get(),
+            HybridAquaticItems.YETI_CRAB_CLAW.get(),
+            HybridAquaticItems.RAW_CRAB.get(),
+            HybridAquaticItems.COOKED_CRAB.get(),
+            HybridAquaticItems.RAW_SHRIMP.get(),
+            HybridAquaticItems.COOKED_SHRIMP.get(),
+            HybridAquaticItems.COOKED_CRAYFISH.get(),
+            HybridAquaticItems.RAW_LOBSTER.get(),
+            HybridAquaticItems.COOKED_LOBSTER.get(),
+            HybridAquaticItems.RAW_LOBSTER_TAIL.get(),
+            HybridAquaticItems.COOKED_LOBSTER_TAIL.get(),
+            HybridAquaticItems.RAW_FISH_STEAK.get(),
+            HybridAquaticItems.COOKED_FISH_STEAK.get(),
+            HybridAquaticItems.RAW_FISH_MEAT.get(),
+            HybridAquaticItems.COOKED_FISH_MEAT.get(),
+            HybridAquaticItems.RAW_TENTACLE.get(),
+            HybridAquaticItems.COOKED_TENTACLE.get(),
+            HybridAquaticItems.GLOW_SLIME.get(),
+            HybridAquaticItems.SHARK_TOOTH.get(),
+            HybridAquaticItems.PEARL.get(),
+            HybridAquaticItems.BLACK_PEARL.get(),
+            HybridAquaticItems.SULFUR.get(),
+            HybridAquaticItems.ANGLERFISH.get(),
+            HybridAquaticItems.BARRELEYE.get(),
+            HybridAquaticItems.BETTA.get(),
+            HybridAquaticItems.PEARLFISH.get(),
+            HybridAquaticItems.SNAILFISH.get(),
+            HybridAquaticItems.BLUE_SPOTTED_STINGRAY.get(),
+            HybridAquaticItems.BLUE_TANG.get(),
+            HybridAquaticItems.SURGEONFISH_SOHAL.get(),
+            HybridAquaticItems.SURGEONFISH_ORANGESHOULDER.get(),
+            HybridAquaticItems.SURGEONFISH_LINED.get(),
+            HybridAquaticItems.YELLOW_TANG.get(),
+            HybridAquaticItems.POWDER_BLUE_TANG.get(),
+            HybridAquaticItems.CLOWNFISH.get(),
+            HybridAquaticItems.SERGEANT_MAJOR.get(),
+            HybridAquaticItems.JOHN_DORY.get(),
+            HybridAquaticItems.BOXFISH.get(),
+            HybridAquaticItems.DANIO.get(),
+            HybridAquaticItems.DISCUS.get(),
+            HybridAquaticItems.DRAGONFISH.get(),
+            HybridAquaticItems.FLASHLIGHT_FISH.get(),
+            HybridAquaticItems.GOURAMI.get(),
+            HybridAquaticItems.LIONFISH.get(),
+            HybridAquaticItems.MAHI.get(),
+            HybridAquaticItems.MORAY_EEL.get(),
+            HybridAquaticItems.NEEDLEFISH.get(),
+            HybridAquaticItems.MACKEREL.get(),
+            HybridAquaticItems.FLYING_FISH.get(),
+            HybridAquaticItems.SQUIRRELFISH.get(),
+            HybridAquaticItems.COELACANTH.get(),
+            HybridAquaticItems.GOLDEN_DORADO.get(),
+            HybridAquaticItems.OPAH.get(),
+            HybridAquaticItems.OARFISH.get(),
+            HybridAquaticItems.OSCAR.get(),
+            HybridAquaticItems.PIRANHA.get(),
+            HybridAquaticItems.RATFISH.get(),
+            HybridAquaticItems.ROCKFISH.get(),
+            HybridAquaticItems.SEA_BASS.get(),
+            HybridAquaticItems.NEON_TETRA.get(),
+            HybridAquaticItems.TIGER_BARB.get(),
+            HybridAquaticItems.TRIGGERFISH.get(),
+            HybridAquaticItems.YELLOWFIN_TUNA.get(),
+            HybridAquaticItems.BLUEFIN_TUNA.get(),
+            HybridAquaticItems.UNICORNFISH.get(),
+            HybridAquaticItems.STONEFISH.get(),
+            HybridAquaticItems.TOADFISH.get(),
+            HybridAquaticItems.PARROTFISH.get(),
+            HybridAquaticItems.SUNFISH.get(),
+            HybridAquaticItems.KOI.get(),
+            HybridAquaticItems.CARP.get(),
+            HybridAquaticItems.GOLDFISH.get(),
+            HybridAquaticItems.SPOTTED_EAGLE_RAY.get(),
+            HybridAquaticItems.SEAHORSE.get(),
+            HybridAquaticItems.CUTTLEBONE.get(),
+            HybridAquaticItems.SEA_URCHIN_SPINE.get(),
+            HybridAquaticItems.CORAL_CHUNK.get(),
+            HybridAquaticItems.BARBED_HOOK.get(),
+            HybridAquaticItems.GLOWING_HOOK.get(),
+            HybridAquaticItems.MAGNETIC_HOOK.get(),
+            HybridAquaticItems.CREEPERMAGNET_HOOK.get(),
+            HybridAquaticItems.OMINOUS_HOOK.get(),
+            HybridAquaticItems.DIVING_HELMET.get(),
+            HybridAquaticItems.DIVING_SUIT.get(),
+            HybridAquaticItems.DIVING_LEGGINGS.get(),
+            HybridAquaticItems.DIVING_BOOTS.get(),
+            HybridAquaticItems.NAUTILUS_HELMET.get(),
+            HybridAquaticItems.NAUTILUS_PAULDRONS.get(),
+            HybridAquaticItems.MANGLERFISH_LURE.get(),
+            HybridAquaticItems.MANGLERFISH_FIN.get(),
+            HybridAquaticItems.TURTLE_CHESTPLATE.get(),
+            HybridAquaticItems.EEL_SCARF.get(),
+            HybridAquaticItems.MOON_JELLYFISH_HAT.get()
+        ).forEach { item ->
+            generator.generateFlatItem(item, ModelTemplates.FLAT_ITEM)
+        }
+
+        setOf(
+            HybridAquaticItems.SEASHELL_SPEAR,
+            HybridAquaticItems.SEASHELL_PICKAXE,
+            HybridAquaticItems.SEASHELL_AXE,
+            HybridAquaticItems.SEASHELL_SHOVEL,
+            HybridAquaticItems.SEASHELL_HOE,
+            HybridAquaticItems.CORAL_BLADE,
+            HybridAquaticItems.CORAL_PICKAXE,
+            HybridAquaticItems.CORAL_AXE,
+            HybridAquaticItems.CORAL_SHOVEL,
+            HybridAquaticItems.CORAL_HOE
+        ).forEach { item ->
+            generator.generateFlatItem(item.get(), ModelTemplates.FLAT_HANDHELD_ITEM)
+        }
+
+        generator.generateFlatItem(
+            HybridAquaticItems.SEA_MESSAGE_BOOK.get(),
+            Items.WRITTEN_BOOK,
+            ModelTemplates.FLAT_ITEM
+        )
+    }
+
+    companion object {
+        private val TEMPLATE_ANEMONE = ResourceLocation(HybridAquatic.MOD_ID, "item/template_anemone")
+        private val TEMPLATE_MESSAGE_IN_A_BOTTLE =
+            ResourceLocation(HybridAquatic.MOD_ID, "item/template_message_in_a_bottle")
+        private val TEMPLATE_PLUSHIE = ResourceLocation(HybridAquatic.MOD_ID, "item/template_plushie")
+    }
+}
