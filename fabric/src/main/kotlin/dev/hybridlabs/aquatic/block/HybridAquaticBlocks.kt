@@ -1,10 +1,13 @@
 package dev.hybridlabs.aquatic.block
 
+import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodTypes
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.minecraft.world.level.block.state.properties.BlockSetType
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument
@@ -487,18 +490,18 @@ object HybridAquaticBlocks {
         return CommonClass.BLOCKS.register(id, block)
     }
 
-    /*
     /**
      * Adds [addedBlocks] to the supported blocks list of a block entity type.
      */
-    fun addBlocks(vararg addedBlocks: Block) {
-        if (blocks !is ImmutableSet<Block>) {
-            blocks.addAll(addedBlocks)
+
+    fun <T : BlockEntity> BlockEntityType<T>.addBlocks(vararg addedBlocks: Block) {
+        if (validBlocks !is ImmutableSet) {
+            validBlocks.addAll(addedBlocks)
         } else {
-            blocks = blocks.toMutableSet().apply {
+            validBlocks = validBlocks.toMutableSet().apply {
                 addAll(addedBlocks)
             }
         }
     }
-     */
+
 }

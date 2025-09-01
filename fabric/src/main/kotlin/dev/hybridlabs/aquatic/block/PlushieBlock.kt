@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks.addBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.resources.ResourceLocation
@@ -11,11 +12,13 @@ import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.SimpleWaterloggedBlock
 import net.minecraft.world.level.block.SkullBlock
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.level.block.state.properties.Property
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 
@@ -23,14 +26,16 @@ import net.minecraft.world.level.material.Fluids
  * Represents any Plushie block.
  */
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class PlushieBlock(variant: Variant, val particleBlock: Block, settings: BlockBehaviour.Properties) : SkullBlock(variant, settings), SimpleWaterloggedBlock {
+class PlushieBlock(variant: Variant, val particleBlock: Block, settings: BlockBehaviour.Properties) :
+    SkullBlock(variant, settings), SimpleWaterloggedBlock {
     init {
         this.registerDefaultState(stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true))
-        //BlockEntityType.SKULL.
+        BlockEntityType.SKULL.addBlocks(this)
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
         builder.add(WATERLOGGED)
+        builder.add(*arrayOf<Property<*>>(ROTATION))
     }
 
     override fun getFluidState(state: BlockState): FluidState =
@@ -71,7 +76,12 @@ class PlushieBlock(variant: Variant, val particleBlock: Block, settings: BlockBe
         TIGER_SHARK("tiger_shark"),
         WHALE_SHARK("whale_shark");
 
-        val textureLocation: ResourceLocation by lazy { ResourceLocation(HybridAquatic.MOD_ID, "textures/entity/block/plushie/${id}_plushie.png") }
+        val textureLocation: ResourceLocation by lazy {
+            ResourceLocation(
+                HybridAquatic.MOD_ID,
+                "textures/entity/block/plushie/${id}_plushie.png"
+            )
+        }
 
         override fun getSerializedName(): String = id
     }
