@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.Shapes
 class SargassumBushBlock(settings: Properties) :
     GrowingPlantBodyBlock(settings, Direction.UP, Shapes.block(), true), LiquidBlockContainer {
     override fun getHeadBlock(): GrowingPlantHeadBlock {
-        return HybridAquaticBlocks.SARGASSUM as GrowingPlantHeadBlock
+        return HybridAquaticBlocks.SARGASSUM.get() as GrowingPlantHeadBlock
     }
 
     override fun getFluidState(state: BlockState): FluidState {
