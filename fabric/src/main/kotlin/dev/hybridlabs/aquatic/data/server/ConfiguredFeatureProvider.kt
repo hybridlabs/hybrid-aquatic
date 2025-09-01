@@ -69,7 +69,7 @@ class ConfiguredFeatureProvider(
         entries.add(
             HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH,
             ConfiguredFeature(
-                HybridAquaticFeatures.RED_ALGAE_PATCH.get(), ProbabilityFeatureConfiguration(
+                HybridAquaticFeatures.RED_ALGAE_PATCH, ProbabilityFeatureConfiguration(
                     0.33f
                 )
             )
@@ -80,7 +80,7 @@ class ConfiguredFeatureProvider(
         entries.add(
             HybridAquaticConfiguredFeatures.SARGASSUM,
             ConfiguredFeature(
-                HybridAquaticFeatures.SARGASSUM.get(), SargassumFeatureConfig(
+                HybridAquaticFeatures.SARGASSUM, SargassumFeatureConfig(
                     SimpleStateProvider.simple(HybridAquaticBlocks.SARGASSUM.get())
                 )
             )
@@ -160,7 +160,7 @@ class ConfiguredFeatureProvider(
         entries.add(
             HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH,
             ConfiguredFeature(
-                HybridAquaticFeatures.SEA_LETTUCE_PATCH.get(), ProbabilityFeatureConfiguration(
+                HybridAquaticFeatures.SEA_LETTUCE_PATCH, ProbabilityFeatureConfiguration(
                     0.33f
                 )
             )
@@ -220,7 +220,7 @@ class ConfiguredFeatureProvider(
         entries.add(
             HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE,
             ConfiguredFeature(
-                HybridAquaticFeatures.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleFeatureConfig(
+                HybridAquaticFeatures.MESSAGE_IN_A_BOTTLE, MessageInABottleFeatureConfig(
                     SimpleStateProvider.simple(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get())
                 )
             )
@@ -230,7 +230,7 @@ class ConfiguredFeatureProvider(
         entries.add(
             HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH,
             ConfiguredFeature(
-                HybridAquaticFeatures.VENT_PATCH.get(), VentPatchFeatureConfig(
+                HybridAquaticFeatures.VENT_PATCH, VentPatchFeatureConfig(
                     SimpleStateProvider.simple(Blocks.TUFF),
                     SimpleStateProvider.simple(HybridAquaticBlocks.THERMAL_VENT.get()),
                     SimpleStateProvider.simple(HybridAquaticBlocks.TUBE_WORM.get()),
