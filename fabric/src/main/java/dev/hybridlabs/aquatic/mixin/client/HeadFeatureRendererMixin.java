@@ -19,8 +19,8 @@ public abstract class HeadFeatureRendererMixin<T extends LivingEntity> {
      * Translates the Plushie models up when on the player's head.
      */
     @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;" +
-            "ILnet/minecraft/world/entity/LivingEntity;FFFFFF)V", at = @At(value = "INVOKE", target =
-            "Lcom/mojang" + "/blaze3d/vertex/PoseStack;" + "translate(FFF)V", ordinal = 0, shift = At.Shift.BEFORE))
+            "ILnet/minecraft/world/entity/LivingEntity;FFFFFF)V", at = @At(value = "INVOKE", target = "Lcom/mojang" +
+            "/blaze3d/vertex/PoseStack;translate(DDD)V", ordinal = 0, shift = At.Shift.BEFORE))
     private void translatePlushieUp(PoseStack matrices, MultiBufferSource vertices, int light, T entity,
                                     float limbAngle, float limbDistance, float tickDelta, float animationProgress,
                                     float headYaw, float headPitch, CallbackInfo ci) {
