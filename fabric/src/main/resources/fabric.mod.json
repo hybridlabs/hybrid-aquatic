@@ -34,7 +34,13 @@
                 "adapter": "kotlin"
             }
         ],
-        "client": [],
+        "client": [
+            {
+                "value": "dev.hybridlabs.aquatic.HybridAquaticClient",
+                "adapter": "kotlin"
+            }
+
+        ],
         "fabric-datagen": [
             {
                 "value": "dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator",

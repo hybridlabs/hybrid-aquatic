@@ -26,12 +26,12 @@ import net.minecraft.world.phys.shapes.VoxelShape
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class JungleLilyPadBlock(settings: Properties?) : BushBlock(settings) {
     init {
-        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED,true))
+        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (fluidStateAbove.`is`(Fluids.EMPTY)) {
+        if (fluidStateAbove != (Fluids.EMPTY)) {
             return false
         }
 
@@ -41,14 +41,14 @@ class JungleLilyPadBlock(settings: Properties?) : BushBlock(settings) {
         }
 
         val fluidState = world.getFluidState(pos)
-        return fluidState.`is`(WATER) || canSupportCenter(world, pos.below(), Direction.UP)
+        return fluidState == WATER || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
         val world = context.level
         val pos = context.clickedPos
         val fluidState = world.getFluidState(pos)
-        return if (fluidState.`is`(WATER)) {
+        return if (fluidState == WATER) {
             super.getStateForPlacement(context)?.setValue(WATERLOGGED, true)
         } else {
             null

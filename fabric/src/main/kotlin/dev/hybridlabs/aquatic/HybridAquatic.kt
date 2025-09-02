@@ -12,6 +12,7 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
 import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
@@ -44,6 +45,8 @@ object HybridAquatic : ModInitializer {
 
     private val logger: Logger = LoggerFactory.getLogger(MOD_NAME)
 
+    val configFile: Path = FabricLoader.getInstance().configDir.resolve("$MOD_ID.json")
+    val configHandler = HybridAquaticConfigHandler(configFile.toFile())
 
     override fun onInitialize() {
         logger.info("Initializing $MOD_NAME")
@@ -71,19 +74,19 @@ object HybridAquatic : ModInitializer {
         HybridAquaticNetworking.registerNetworking()
 
         HybridAquaticLootPoolEntryTypes
-        //LootTableModifications.registerLootModifications()
+        LootTableModifications.registerLootModifications()
 
         FeatureBiomeModifications.registerBiomeModifications()
         SpawnRestrictionRegistry.registerSpawnRestrictions()
 
-        //initializeConfig(configFile, configHandler)
+        initializeConfig()
 
         registerDynamicRegistries()
         registerWanderingTraderTrades()
         registerCustomTrades()
         registerFlammables(FlammableBlockRegistry.getDefaultInstance())
         registerStrippables()
-        //registerBiomeModifications(configHandler.config)
+        registerBiomeModifications(configHandler.config)
     }
 
     private fun initializeConfig() {

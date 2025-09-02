@@ -84,6 +84,7 @@ loom {
 
     sourceSets.main.java.srcDirs += project(":common").file('src/main/java')
     sourceSets.main.resources.srcDirs += project(':common').file("src/main/resources")
+    sourceSets.main.resources.srcDirs += project(':fabric').file("src/main/resources")
 
     runs {
         client {

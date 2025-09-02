@@ -26,12 +26,12 @@ import net.minecraft.world.phys.shapes.VoxelShape
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class WaterLettuceBlock(settings: Properties) : BushBlock(settings), SimpleWaterloggedBlock {
     init {
-        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED,true))
+        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (fluidStateAbove.`is`(Fluids.EMPTY)) {
+        if (fluidStateAbove != (Fluids.EMPTY)) {
             return false
         }
 
@@ -41,14 +41,14 @@ class WaterLettuceBlock(settings: Properties) : BushBlock(settings), SimpleWater
         }
 
         val fluidState = world.getFluidState(pos)
-        return fluidState.`is`(Fluids.WATER) || canSupportCenter(world, pos.below(), Direction.UP)
+        return fluidState == Fluids.WATER || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
         val world = context.level
         val pos = context.clickedPos
         val fluidState = world.getFluidState(pos)
-        return if (fluidState.`is`(Fluids.WATER)) {
+        return if (fluidState == Fluids.WATER) {
             super.getStateForPlacement(context)?.setValue(WATERLOGGED, true)
         } else {
             null
