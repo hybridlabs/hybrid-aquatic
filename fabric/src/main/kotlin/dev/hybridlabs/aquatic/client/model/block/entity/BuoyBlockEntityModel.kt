@@ -20,7 +20,7 @@ class BuoyBlockEntityModel : GeoModel<BuoyBlockEntity>() {
 
     companion object {
         val ANIMATION_LOCATION = ResourceLocation(Constants.MOD_ID, "animations/buoy.animation.json")
-        val MODEL_LOCATION = ResourceLocation(Constants.MOD_ID, "geo/buoy.geo")
+        val MODEL_LOCATION = ResourceLocation(Constants.MOD_ID, "geo/buoy.geo.json")
         val TEXTURE_LOCATION = ResourceLocation(Constants.MOD_ID, "textures/block/buoy.png")
     }
 }
