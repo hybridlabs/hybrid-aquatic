@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks.addBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.SimpleWaterloggedBlock
 import net.minecraft.world.level.block.SkullBlock
 import net.minecraft.world.level.block.entity.BlockEntityType
-import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -26,10 +25,12 @@ import net.minecraft.world.level.material.Fluids
  * Represents any Plushie block.
  */
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class PlushieBlock(variant: Variant, val particleBlock: Block, settings: BlockBehaviour.Properties) :
+class PlushieBlock(variant: Variant, val particleBlock: Block, settings: Properties) :
     SkullBlock(variant, settings), SimpleWaterloggedBlock {
     init {
-        this.registerDefaultState(stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true))
+        this.registerDefaultState(
+            stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true).setValue(ROTATION, 0)
+        )
         BlockEntityType.SKULL.addBlocks(this)
     }
 
@@ -78,7 +79,7 @@ class PlushieBlock(variant: Variant, val particleBlock: Block, settings: BlockBe
 
         val textureLocation: ResourceLocation by lazy {
             ResourceLocation(
-                HybridAquatic.MOD_ID,
+                Constants.MOD_ID,
                 "textures/entity/block/plushie/${id}_plushie.png"
             )
         }

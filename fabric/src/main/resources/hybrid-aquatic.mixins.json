@@ -12,7 +12,17 @@
         "ServerPlayerEntityMixin",
         "SpawnGroupMixin"
     ],
+    "client": [
+        "client.BookScreenMixin",
+        "client.ClientPlayNetworkHandlerMixin",
+        "client.FishingBobberEntityClientMixin",
+        "client.FishingBobberEntityRendererMixin",
+        "client.FogRendererMixin",
+        "client.HeadFeatureRendererMixin",
+        "client.InGameHudMixin",
+        "client.SkullBlockEntityRendererMixin"
+    ],
     "injectors": {
         "defaultRequire": 1
-  }
+    }
 }
