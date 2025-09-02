@@ -31,8 +31,8 @@ abstract class PlushieModel : SkullModelBase() {
     override fun renderToBuffer(
         matrices: PoseStack,
         vertices: VertexConsumer,
-        overlay: Int,
         light: Int,
+        overlay: Int,
         red: Float,
         green: Float,
         blue: Float,

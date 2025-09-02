@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
 import com.google.common.collect.ImmutableMap;
+import com.llamalad7.mixinextras.sugar.Local;
 import dev.hybridlabs.aquatic.block.PlushieBlock;
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers;
 import kotlin.enums.EnumEntries;
@@ -14,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,9 +38,9 @@ public abstract class SkullBlockEntityRendererMixin {
      */
     @Inject(method = "createSkullRenderers", at = @At(value = "INVOKE", target = "Lcom/google/common/collect" +
             "/ImmutableMap$Builder;build()Lcom/google/common/collect/ImmutableMap;", shift = At.Shift.BEFORE, remap =
-            false), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
+            false))
     private static void injectModels(EntityModelSet modelLoader, CallbackInfoReturnable<Map<SkullBlock.Type,
-            SkullModelBase>> cir, ImmutableMap.Builder<SkullBlock.Type, SkullModelBase> builder) {
+            SkullModelBase>> cir, @Local ImmutableMap.Builder<SkullBlock.Type, SkullModelBase> builder) {
         // inject plushie variants
         HybridAquaticEntityModelLayers.INSTANCE.injectModels(modelLoader, builder);
     }
