@@ -31,7 +31,7 @@ class WaterLettuceBlock(settings: Properties) : BushBlock(settings), SimpleWater
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (fluidStateAbove != (Fluids.EMPTY)) {
+        if (!fluidStateAbove.`is`(Fluids.EMPTY)) {
             return false
         }
 
@@ -48,7 +48,7 @@ class WaterLettuceBlock(settings: Properties) : BushBlock(settings), SimpleWater
         val world = context.level
         val pos = context.clickedPos
         val fluidState = world.getFluidState(pos)
-        return if (fluidState == Fluids.WATER) {
+        return if (fluidState.`is`(Fluids.WATER)) {
             super.getStateForPlacement(context)?.setValue(WATERLOGGED, true)
         } else {
             null
