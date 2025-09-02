@@ -59,6 +59,7 @@ dependencies {
 configurations {
     datagenOutput
 }
+
 fabricApi {
     configureDataGeneration {
         outputDirectory = file("src/generated/resources")

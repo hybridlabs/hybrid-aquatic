@@ -23,8 +23,7 @@ object HybridAquaticFeatures {
         id: String,
         feature: F
     ): RegistryObject<Feature<FeatureConfiguration>> {
-        return CommonClass.CONFIGURED_FEATURE.register(id) { feature as Feature<FeatureConfiguration>? }
-
-        //return Registry.register(BuiltInRegistries.FEATURE, ResourceLocation(HybridAquatic.MOD_ID, id), feature)
+        @Suppress("UNCHECKED_CAST")
+        return CommonClass.FEATURE.register(id) { feature as Feature<FeatureConfiguration> }
     }
 }

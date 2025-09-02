@@ -3,9 +3,25 @@ package dev.hybridlabs.aquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
+import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.config.HybridAquaticConfig
 import dev.hybridlabs.aquatic.config.HybridAquaticConfigHandler
+import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
+import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
+import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
+import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades.registerCustomTrades
+import dev.hybridlabs.aquatic.world.gen.feature.FeatureBiomeModifications
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
@@ -34,39 +50,39 @@ object HybridAquatic : ModInitializer {
         CommonClass.init()
 
         HybridAquaticBlocks
-        //HybridAquaticBlockEntityTypes
+        HybridAquaticBlockEntityTypes
 
-        //HybridAquaticBiomeTags
+        HybridAquaticBiomeTags
 
-        //HybridAquaticEntityTypes
+        HybridAquaticEntityTypes
 
-        //HybridAquaticPotions
-        //HybridAquaticMobEffects
+        HybridAquaticPotions
+        HybridAquaticMobEffects
 
-        //HybridAquaticItems
-        //HybridAquaticItemGroups
+        HybridAquaticItems
+        HybridAquaticItemGroups
 
-        //HybridAquaticEnchantments
+        HybridAquaticEnchantments
 
-        //HybridAquaticFeatures
-        //HybridAquaticPlacedFeatures
-        //HybridAquaticConfiguredFeatures
+        HybridAquaticFeatures
+        HybridAquaticPlacedFeatures
+        HybridAquaticConfiguredFeatures
 
-        //HybridAquaticNetworking.registerNetworking()
+        HybridAquaticNetworking.registerNetworking()
 
-        //HybridAquaticLootPoolEntryTypes
+        HybridAquaticLootPoolEntryTypes
         //LootTableModifications.registerLootModifications()
 
-        //FeatureBiomeModifications.registerBiomeModifications()
-        //SpawnRestrictionRegistry.registerSpawnRestrictions()
+        FeatureBiomeModifications.registerBiomeModifications()
+        SpawnRestrictionRegistry.registerSpawnRestrictions()
 
         //initializeConfig(configFile, configHandler)
 
-        //registerDynamicRegistries()
-        //registerWanderingTraderTrades()
-        //registerCustomTrades()
-        //registerFlammables(FlammableBlockRegistry.getDefaultInstance())
-        //registerStrippables()
+        registerDynamicRegistries()
+        registerWanderingTraderTrades()
+        registerCustomTrades()
+        registerFlammables(FlammableBlockRegistry.getDefaultInstance())
+        registerStrippables()
         //registerBiomeModifications(configHandler.config)
     }
 

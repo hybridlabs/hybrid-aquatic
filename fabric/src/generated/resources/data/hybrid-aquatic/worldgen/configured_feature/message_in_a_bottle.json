@@ -6,7 +6,7 @@
       "state": {
         "Name": "hybrid-aquatic:message_in_a_bottle",
         "Properties": {
-          "waterlogged": "false"
+          "waterlogged": "true"
         }
       }
     }

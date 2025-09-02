@@ -43,9 +43,6 @@
         {
           "type": "minecraft:item",
           "name": "hybrid-aquatic:cherry_crate"
-        },
-        {
-          "type": "hybrid-aquatic:message_in_a_bottle"
         }
       ],
       "rolls": 1.0

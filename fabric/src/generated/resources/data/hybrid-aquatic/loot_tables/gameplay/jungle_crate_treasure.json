@@ -233,10 +233,6 @@
         {
           "type": "minecraft:item",
           "name": "hybrid-aquatic:basking_shark_plushie"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:thresher_shark_plushie"
         }
       ],
       "rolls": 1.0

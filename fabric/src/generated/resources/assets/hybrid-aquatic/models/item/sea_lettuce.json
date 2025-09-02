@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hybrid-aquatic:item/sea_lettuce"
+    "layer0": "hybrid-aquatic:block/sea_lettuce"
   }
 }

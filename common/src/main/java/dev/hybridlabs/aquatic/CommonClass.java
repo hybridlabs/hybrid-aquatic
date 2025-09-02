@@ -38,8 +38,8 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.BLOCK_ENTITY_TYPE, MOD_ID);
     public static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS =
             RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
-    public static final RegistrationProvider<Feature<?>> CONFIGURED_FEATURE =
-            RegistrationProvider.get(BuiltInRegistries.FEATURE, MOD_ID);
+    public static final RegistrationProvider<Feature<?>> FEATURE = RegistrationProvider.get(BuiltInRegistries.FEATURE
+            , MOD_ID);
 
     public static void init() {
 

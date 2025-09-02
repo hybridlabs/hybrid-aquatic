@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.data.client
 
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
@@ -173,8 +174,8 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         setOf(
             HybridAquaticItems.BUOY.get(),
             HybridAquaticItems.RED_ALGAE.get(),
-            HybridAquaticItems.SEA_LETTUCE.get(),
-            HybridAquaticItems.SARGASSUM.get(),
+            //HybridAquaticItems.SEA_LETTUCE.get(),
+            //HybridAquaticItems.SARGASSUM.get(),
             HybridAquaticItems.TUBE_SPONGE.get(),
             HybridAquaticItems.UNI.get(),
             HybridAquaticItems.RAW_CRAYFISH.get(),
@@ -306,9 +307,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     }
 
     companion object {
-        private val TEMPLATE_ANEMONE = ResourceLocation(HybridAquatic.MOD_ID, "item/template_anemone")
+        private val TEMPLATE_ANEMONE = ResourceLocation(Constants.MOD_ID, "item/template_anemone")
         private val TEMPLATE_MESSAGE_IN_A_BOTTLE =
-            ResourceLocation(HybridAquatic.MOD_ID, "item/template_message_in_a_bottle")
-        private val TEMPLATE_PLUSHIE = ResourceLocation(HybridAquatic.MOD_ID, "item/template_plushie")
+            ResourceLocation(Constants.MOD_ID, "item/template_message_in_a_bottle")
+        private val TEMPLATE_PLUSHIE = ResourceLocation(Constants.MOD_ID, "item/template_plushie")
     }
 }
