@@ -1,5 +1,4 @@
 plugins {
-    id 'multiloader-common'
     id 'net.neoforged.moddev.legacyforge'
     id 'org.jetbrains.kotlin.jvm'
 }
@@ -19,45 +18,41 @@ legacyForge {
 repositories {
     maven {
         name = "Terraformers"
-        url  = "https://maven.terraformersmc.com/releases/"
+        url = "https://maven.terraformersmc.com/releases/"
     }
 
     maven {
         name = "Jitpack"
-        url  = "https://jitpack.io/"
+        url = "https://jitpack.io/"
     }
 
     maven {
         name = "Geckolib"
-        url  = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+        url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
     }
 
     maven {
         name = "JamiesWhiteShirt"
-        url  = "https://maven.jamieswhiteshirt.com/libs-release/"
+        url = "https://maven.jamieswhiteshirt.com/libs-release/"
     }
 
     maven {
         name = "Modrinth"
-        url  = "https://api.modrinth.com/maven/"
+        url = "https://api.modrinth.com/maven/"
     }
 
     maven {
         name = "Debug Utils (GitLab)"
-        url  = "https://gitlab.com/api/v4/projects/21830712/packages/maven/"
+        url = "https://gitlab.com/api/v4/projects/21830712/packages/maven/"
     }
 
     maven {
         name = "Minecraft Forge"
-        url  = "https://maven.minecraftforge.net/"
+        url = "https://maven.minecraftforge.net/"
     }
     mavenCentral()
 }
 
-configurations{
-    commonKotlin
-    commonJava
-}
 
 configurations.create('commonKotlinOut')
 configurations.create('commonJavaOut')
@@ -91,6 +86,6 @@ configurations {
 }
 
 artifacts {
-    //commonJava sourceSets.main.java.sourceDirectories.singleFile
+    commonJava sourceSets.main.java.sourceDirectories.singleFile
     commonResources sourceSets.main.resources.sourceDirectories.singleFile
 }
