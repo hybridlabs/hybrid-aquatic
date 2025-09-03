@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic;
 
 import dev.hybridlabs.aquatic.platform.ForgePlatformHelper;
-import net.funkpla.examplemod.platform.registration.RegistrationProvider;
-import net.funkpla.examplemod.platform.registration.RegistryObject;
+import dev.hybridlabs.aquatic.platform.registration.RegistrationProvider;
+import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;

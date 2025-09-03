@@ -6,7 +6,7 @@ plugins {
 
 mixin {
     add(sourceSets.main, "${forge_mod_id}.refmap.json")
-    config("${mod_id}.forge.mixins.json")
+    config("${mod_id}.mixins.json")
 }
 
 legacyForge {

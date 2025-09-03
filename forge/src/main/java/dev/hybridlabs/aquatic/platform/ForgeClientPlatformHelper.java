@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.platform;
 
 
-import net.funkpla.examplemod.platform.registration.RegistryObject;
-import net.funkpla.examplemod.platform.services.ClientPlatformHelper;
+import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
+import dev.hybridlabs.aquatic. platform.services.ClientPlatformHelper;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

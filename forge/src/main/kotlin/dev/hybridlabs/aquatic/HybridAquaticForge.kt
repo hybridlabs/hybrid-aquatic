@@ -14,7 +14,7 @@ import thedarkcolour.kotlinforforge.forge.runForDist
  */
 @Suppress("UnusedExpression")
 @Mod(Constants.FORGE_MOD_ID)
-object ExampleModForge {
+object HybridAquaticForge {
     val LOGGER = Constants.LOG
 
     init {
@@ -22,10 +22,10 @@ object ExampleModForge {
 
         runForDist(
             clientTarget = {
-                MOD_BUS.addListener(ExampleModForge::onClientSetup)
+                MOD_BUS.addListener(HybridAquaticForge::onClientSetup)
             },
             serverTarget = {
-                MOD_BUS.addListener(ExampleModForge::onServerSetup)
+                MOD_BUS.addListener(HybridAquaticForge::onServerSetup)
             })
 
     }

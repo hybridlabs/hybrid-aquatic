@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.platform;
 
-import net.funkpla.examplemod.CommonClass;
-import net.funkpla.examplemod.Constants;
-import net.funkpla.examplemod.platform.registration.RegistryObject;
-import net.funkpla.examplemod.platform.services.PlatformHelper;
+import dev.hybridlabs.aquatic.CommonClass;
+import dev.hybridlabs.aquatic.Constants;
+import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
+import dev.hybridlabs.aquatic.platform.services.PlatformHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
