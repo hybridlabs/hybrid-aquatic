@@ -173,9 +173,9 @@ open class HybridAquaticFishEntity(
 
     override fun getDefaultLootTable(): ResourceLocation {
         return if (variant != null) {
-            super.getLootTable().withPath { path -> "${path}_${variant!!.variantName}" }
+            super.getDefaultLootTable().withPath { path -> "${path}_${variant!!.variantName}" }
         } else {
-            super.getLootTable()
+            super.getDefaultLootTable()
         }
     }
 
