@@ -1,9 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityGroup
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.*
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.Goal
 import net.minecraft.entity.attribute.DefaultAttributeContainer
@@ -154,6 +152,24 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: World) :
         override fun stop() {
             inflateTicks = 0
         }
+    }
+
+    override fun getDimensions(pose: EntityPose): EntityDimensions {
+        val scale = when (getPuffState()) {
+            NOT_PUFFED -> 0.5f
+            SEMI_PUFFED -> 0.7f
+            FULLY_PUFFED -> 1.0f
+            else -> 0.5f
+        }
+        return super.getDimensions(pose).scaled(scale)
+    }
+
+    override fun onTrackedDataSet(data: TrackedData<*>) {
+        if (PUFF_STATE == data) {
+            this.calculateDimensions()
+        }
+
+        super.onTrackedDataSet(data)
     }
 
     companion object {
