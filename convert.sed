@@ -90,6 +90,7 @@ s/.isAiDisabled/.isNoAi/g
 s/isAngryAt/isPreventingPlayerRest/g
 s/isFertilizable/isValidBonemealTarget/g
 s/isClient /isClientSide /g
+s/isClient)/isClientSide)/g
 s/isPushedByFluids/isPushedByFluid/g
 s/isSideSolidFullSquare/isFaceSturdy/g
 s/isSkyVisibleAllowingSea/canSeeSkyFromBelowWater/g
@@ -165,12 +166,40 @@ s/WorldAccess /LevelAccessor /g
 s/WorldView/LevelReader/g
 s/writeCustomDataToNbt/addAdditionalSaveData/g
 s/YawAdjustingLookControl/SmoothSwimmingLookControl/g
-s/client\.render\./client.renderer./g
+s/minecraft\.client\.render\./minecraft.client.renderer./g
 s/chooseStemState(/canGrowInto(/g
 s/ctx.blockPos)/ctx.clickedPos)/g
 s/ctx.world.get/ctx.level.get/g
 s/VoxelShapes/Shapes/g
 s/world: World)/world: Level)/g
 s/world: World /world: Level /g
+s/world: World,/world: Level,/g
 s/VertexConsumerProvider/MultiBufferSource/g
 s/MatrixStack/PoseStack/g
+s/world: World /world: Level /g
+s/ onEntityCollision/ entityInside/g
+s/ BlockEntityProvider/ EntityBlock/g
+s/Blcok/Block/g
+s/ onBreak/ playerWillDestroy/g
+s/.onBreak/.playerWillDestroy/g
+s/DO_TILE_DROPS/RULE_DOBLOCKDROPS/g
+s/.getFace(/.getFaceShape(/g
+s/ mayPlantOn(/ mayPlaceOn(/g
+s/\.state.get(/.state.getValue(/g
+s/BlockWithEntity/BaseEntityBlock/g
+s/\.checkType/\.createTickerHelper/g
+s/state.get(/state.getValue(/g
+s/\.isOf(/.`is`(/g
+s/BlockRenderType/RenderShape/g
+s/getRenderType(state/getRenderShape(state/g
+s/ FeatureContext/ FeaturePlaceContext /g
+s/ FeatureConfig/ FeatureConfiguration /g
+s/structureWorldAccess/structureLevelAccessor/g
+s/Type.OCEAN_FLOOR/Types.OCEAN_FLOOR/g
+s/BlockStateProvider.TYPE_CODEC/BlockStateProvider.CODEC/g
+s/context\.world/context.level()/g
+s/context\.origin/context.origin()/g
+s/context\.random/context.random()/g
+s/createBlockEntity/newBlockEntity/g
+s/appendProperties/createBlockStateDefinition/g
+s/StateManager/StateDefinition/g
