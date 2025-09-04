@@ -1,13 +1,8 @@
 package dev.hybridlabs.aquatic.client.render.entity.jellyfish
 
 import dev.hybridlabs.aquatic.client.model.entity.jellyfish.AtollaJellyfishEntityModel
-import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
-import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
+import dev.hybridlabs.aquatic.entity.jellyfish.AtollaJellyfishEntity
+import net.minecraft.client.render.entity.EntityRendererFactory.Context
 
 class AtollaJellyfishEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<HybridAquaticJellyfishEntity>(
-        context,
-        AtollaJellyfishEntityModel(),
-        true,
-        true
-    )
+    HybridAquaticJellyfishEntityRenderer<AtollaJellyfishEntity>(context, AtollaJellyfishEntityModel(), true, true)

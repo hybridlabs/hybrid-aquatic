@@ -1,77 +1,70 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
-import net.minecraft.core.particles.ParticleTypes
-import net.minecraft.server.level.ServerLevel
-import net.minecraft.util.RandomSource
-import net.minecraft.util.StringRepresentable
-import net.minecraft.world.InteractionHand
-import net.minecraft.world.InteractionResult
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
-import net.minecraft.world.item.context.BlockPlaceContext
-import net.minecraft.world.level.BlockGetter
-import net.minecraft.world.level.Level
-import net.minecraft.world.level.LevelReader
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.HorizontalDirectionalBlock
-import net.minecraft.world.level.block.Rotation
-import net.minecraft.world.level.block.SimpleWaterloggedBlock
-import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.block.state.StateDefinition
-import net.minecraft.world.level.block.state.properties.BlockStateProperties
-import net.minecraft.world.level.block.state.properties.BooleanProperty
-import net.minecraft.world.level.block.state.properties.DirectionProperty
-import net.minecraft.world.level.block.state.properties.EnumProperty
-import net.minecraft.world.level.material.FluidState
-import net.minecraft.world.level.material.Fluids
-import net.minecraft.world.level.pathfinder.PathComputationType
-import net.minecraft.world.phys.BlockHitResult
-import net.minecraft.world.phys.shapes.CollisionContext
-import net.minecraft.world.phys.shapes.VoxelShape
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.HorizontalFacingBlock
+import net.minecraft.block.ShapeContext
+import net.minecraft.block.Waterloggable
+import net.minecraft.entity.Entity
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.ai.pathing.NavigationType
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.fluid.FluidState
+import net.minecraft.fluid.Fluids
+import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
+import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.state.StateManager
+import net.minecraft.state.property.BooleanProperty
+import net.minecraft.state.property.DirectionProperty
+import net.minecraft.state.property.EnumProperty
+import net.minecraft.state.property.Properties
+import net.minecraft.util.ActionResult
+import net.minecraft.util.BlockRotation
+import net.minecraft.util.Hand
+import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
+import net.minecraft.util.math.random.Random
+import net.minecraft.util.shape.VoxelShape
+import net.minecraft.world.BlockView
+import net.minecraft.world.World
+import net.minecraft.world.WorldView
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class GiantClamBlock(
     private val emitsParticles: Boolean,
-    settings: Properties
-) : Block(settings), SimpleWaterloggedBlock {
+    settings: Settings
+) : Block(settings), Waterloggable {
 
     private var pearlTimer: Int = 6000
 
     init {
-        this.registerDefaultState(
-            stateDefinition.any()
-                .setValue(STATE, GiantClamState.OPEN)
-                .setValue(WATERLOGGED, true)
-        )
+        defaultState = stateManager.defaultState
+            .with(STATE, GiantClamState.OPEN)
+            .with(WATERLOGGED, true)
     }
 
-    override fun isPathfindable(
-        state: BlockState,
-        level: BlockGetter,
-        pos: BlockPos,
-        type: PathComputationType
-    ): Boolean {
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
         return false
     }
 
-    override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
-        val supportingPos = pos.below()
+    override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
+        val supportingPos = pos.down()
         val supportingState = world.getBlockState(supportingPos)
-        return supportingState.isFaceSturdy(world, supportingPos, Direction.UP)
+        return supportingState.isSideSolidFullSquare(world, supportingPos, Direction.UP)
     }
 
-    override fun tick(state: BlockState, world: ServerLevel, pos: BlockPos, random: RandomSource) {
-        val waterlogged = state.getValue(WATERLOGGED)
-        val currentState = state.getValue(STATE)
+    override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random?) {
+        val waterlogged = state.get(WATERLOGGED)
+        val currentState = state.get(STATE)
 
         if (!waterlogged && currentState != GiantClamState.DEAD) {
-            world.setBlock(pos, state.setValue(STATE, GiantClamState.DEAD), 3)
+            world.setBlockState(pos, state.with(STATE, GiantClamState.DEAD), 3)
             return
         }
 
@@ -80,92 +73,92 @@ class GiantClamBlock(
 
             val newState = if (pearlTimer > 0) GiantClamState.CLOSED else GiantClamState.OPEN
             if (newState != currentState) {
-                world.setBlock(pos, state.setValue(STATE, newState), 2)
+                world.setBlockState(pos, state.with(STATE, newState), 2)
             }
 
             if (pearlTimer > 0) {
-                world.scheduleTick(pos, this, 20)
+                world.scheduleBlockTick(pos, this, 20)
             }
         }
     }
 
     override fun getCollisionShape(
         state: BlockState,
-        level: BlockGetter,
+        world: BlockView,
         pos: BlockPos,
-        context: CollisionContext
+        context: ShapeContext
     ): VoxelShape = COLLISION_SHAPE
 
-    override fun getShape(
+    override fun getOutlineShape(
         state: BlockState,
-        level: BlockGetter,
+        world: BlockView,
         pos: BlockPos,
-        context: CollisionContext
+        context: ShapeContext?
     ): VoxelShape = SHAPE
 
-    override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
-        val waterlogged = ctx.level.getFluidState(ctx.clickedPos).`is`(Fluids.WATER)
-        return defaultBlockState()
-            .setValue(WATERLOGGED, waterlogged)
-            .setValue(STATE, if (waterlogged) GiantClamState.CLOSED else GiantClamState.DEAD)
-            .setValue(FACING, ctx.horizontalDirection.clockWise)
+    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
+        val waterlogged = ctx.world.getFluidState(ctx.blockPos).fluid == Fluids.WATER
+        return defaultState
+            .with(WATERLOGGED, waterlogged)
+            .with(STATE, if (waterlogged) GiantClamState.CLOSED else GiantClamState.DEAD)
+            .with(FACING, ctx.horizontalPlayerFacing.rotateYClockwise())
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
+        return if (state.get(WATERLOGGED)) Fluids.WATER.getStill(false) else super.getFluidState(state)
     }
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         builder.add(STATE, WATERLOGGED, FACING)
     }
 
-    override fun use(
+    override fun onUse(
         state: BlockState,
-        world: Level,
+        world: World,
         pos: BlockPos,
-        player: Player,
-        hand: InteractionHand,
+        player: PlayerEntity,
+        hand: Hand,
         hit: BlockHitResult
-    ): InteractionResult {
-        if (!world.isClientSide) {
-            val currentState = state.getValue(STATE)
+    ): ActionResult {
+        if (!world.isClient) {
+            val currentState = state.get(STATE)
             if (currentState == GiantClamState.OPEN) {
                 pearlTimer = 6000
-                world.setBlock(pos, state.setValue(STATE, GiantClamState.CLOSED), 3)
+                world.setBlockState(pos, state.with(STATE, GiantClamState.CLOSED), 3)
 
                 val randomValue = world.random.nextFloat()
                 val itemToDrop = when {
-                    randomValue < 0.70 -> ItemStack(HybridAquaticItems.PEARL.get())
-                    randomValue < 0.95 -> ItemStack(HybridAquaticItems.BLACK_PEARL.get())
+                    randomValue < 0.70 -> ItemStack(HybridAquaticItems.PEARL)
+                    randomValue < 0.95 -> ItemStack(HybridAquaticItems.BLACK_PEARL)
                     else -> ItemStack(Items.ENDER_PEARL)
                 }
 
-                popResource(world, pos, itemToDrop)
+                dropStack(world, pos, itemToDrop)
             } else {
-                return InteractionResult.PASS
+                return ActionResult.PASS
             }
         }
-        return InteractionResult.SUCCESS
+        return ActionResult.SUCCESS
     }
 
-    override fun stepOn(world: Level, pos: BlockPos, state: BlockState, entity: Entity) {
-        if (world.isClientSide) return
+    override fun onSteppedOn(world: World, pos: BlockPos?, state: BlockState?, entity: Entity) {
+        if (world.isClient || pos == null || state == null) return
 
-        val currentState = state.getValue(STATE)
+        val currentState = state.get(STATE)
         if (currentState == GiantClamState.OPEN) {
-            world.setBlock(pos, state.setValue(STATE, GiantClamState.CLOSED), 3)
+            world.setBlockState(pos, state.with(STATE, GiantClamState.CLOSED), 3)
             pearlTimer = 6000
 
-            if (!entity.isSteppingCarefully && entity is LivingEntity) {
-                entity.hurt(world.damageSources().inWall(), 4.0f)
+            if (!entity.bypassesSteppingEffects() && entity is LivingEntity) {
+                entity.damage(world.damageSources.inWall(), 4.0f)
             }
         }
 
-        super.stepOn(world, pos, state, entity)
+        super.onSteppedOn(world, pos, state, entity)
     }
 
-    override fun animateTick(state: BlockState, world: Level, pos: BlockPos, random: RandomSource) {
-        if (state.getValue(STATE) == GiantClamState.OPEN && emitsParticles && random.nextInt(5) == 0) {
+    override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+        if (state.get(STATE) == GiantClamState.OPEN && emitsParticles && random.nextInt(5) == 0) {
             for (i in 0..random.nextInt(1)) {
                 world.addParticle(
                     ParticleTypes.BUBBLE_COLUMN_UP,
@@ -176,13 +169,13 @@ class GiantClamBlock(
         }
     }
 
-    override fun rotate(state: BlockState, rotation: Rotation): BlockState {
-        return state.setValue(FACING, rotation.rotate(state.getValue(FACING) as Direction)) as BlockState
+    override fun rotate(state: BlockState, rotation: BlockRotation): BlockState {
+        return state.with(FACING, rotation.rotate(state.get(FACING) as Direction)) as BlockState
     }
 
     companion object {
-        val FACING: DirectionProperty = HorizontalDirectionalBlock.FACING
-        val STATE: EnumProperty<GiantClamState> = EnumProperty.create(
+        val FACING: DirectionProperty = HorizontalFacingBlock.FACING
+        val STATE: EnumProperty<GiantClamState> = EnumProperty.of(
             "state",
             GiantClamState::class.java,
             GiantClamState.OPEN,
@@ -190,15 +183,15 @@ class GiantClamBlock(
             GiantClamState.DEAD
         )
 
-        val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
-        private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
-        private val COLLISION_SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
+        val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
+        private val SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
+        private val COLLISION_SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
     }
 
-    enum class GiantClamState : StringRepresentable {
+    enum class GiantClamState : StringIdentifiable {
         OPEN, CLOSED, DEAD;
 
-        override fun getSerializedName(): String {
+        override fun asString(): String {
             return name.lowercase()
         }
     }

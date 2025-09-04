@@ -1,19 +1,28 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.entity.ai.goal.RevengeGoal
+import net.minecraft.entity.ai.goal.UniversalAngerGoal
+import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.mob.Angerable
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.util.TimeHelper
+import net.minecraft.util.math.intprovider.UniformIntProvider
 import net.minecraft.world.Difficulty
-import net.minecraft.world.effect.MobEffectInstance
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier
-import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
-import net.minecraft.world.level.Level
+import net.minecraft.world.World
+import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import java.util.*
 
-class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
+class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: World) :
     HybridAquaticSchoolingFishEntity(
         entityType, world,
         listOf(HybridAquaticEntityTags.SMALL_PREY),
@@ -22,45 +31,57 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK
         )
-    ) {
+    ), Angerable {
 
-    override fun getMaxSpawnClusterSize(): Int {
+    private var angerTime = 0
+    private var angryAt: UUID? = null
+
+    override fun getLimitPerChunk(): Int {
         return 4
     }
 
     companion object {
-        fun createMobAttributes(): AttributeSupplier.Builder {
+
+        val ANGER_TIME_RANGE: UniformIntProvider = TimeHelper.betweenSeconds(10, 30)
+        fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.6)
-                .add(Attributes.ATTACK_DAMAGE, 2.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 4.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.0)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
     }
 
-    override fun registerGoals() {
-        super.registerGoals()
-        targetSelector.addGoal(1, HurtByTargetGoal(this, *arrayOfNulls(0)).setAlertOthers(*arrayOfNulls(0)))
-        targetSelector.addGoal(
-            1,
-            NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) {
-                it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is PiranhaEntity
-            })
+    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
+        controllerRegistrar.add(
+            DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE)
+        )
+        super.registerControllers(controllerRegistrar)
     }
 
-    override fun doHurtTarget(target: Entity): Boolean {
-        if (super.doHurtTarget(target)) {
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(1, MeleeAttackGoal(this, 1.5, false))
+        targetSelector.add(3, RevengeGoal(this).setGroupRevenge())
+        targetSelector.add(3, UniversalAngerGoal(this, true))
+        targetSelector.add(1, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { this.shouldAngerAt(it) })
+        targetSelector.add(2, ActiveTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasStatusEffect(HybridAquaticStatusEffects.BLEEDING) && it !is PiranhaEntity })
+    }
+
+    override fun tryAttack(target: Entity?): Boolean {
+        if (super.tryAttack(target)) {
             if (target is LivingEntity) {
                 var i = 0
-                if (level().difficulty == Difficulty.NORMAL) {
+                if (world.difficulty == Difficulty.NORMAL) {
                     i = 7
-                } else if (level().difficulty == Difficulty.HARD) {
+                } else if (world.difficulty == Difficulty.HARD) {
                     i = 15
                 }
 
                 if (i > 0) {
-                    target.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), i * 20, 0), this)
+                    target.addStatusEffect(StatusEffectInstance(HybridAquaticStatusEffects.BLEEDING, i * 20, 0), this)
                 }
             }
 
@@ -74,7 +95,29 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
         super.tick()
 
         if (isSprinting) {
-            attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 1.5
+            attributes.getCustomInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)?.baseValue = 1.5
         }
     }
+
+    //#region Angerable Implementation Details
+    override fun getAngerTime(): Int {
+        return angerTime
+    }
+
+    override fun setAngerTime(angerTime: Int) {
+        this.angerTime = angerTime
+    }
+
+    override fun getAngryAt(): UUID? {
+        return angryAt
+    }
+
+    override fun setAngryAt(angryAt: UUID?) {
+        this.angryAt = angryAt
+    }
+
+    override fun chooseRandomAngerTime() {
+        setAngerTime(ANGER_TIME_RANGE.get(random))
+    }
+    //#endregion
 }

@@ -1,12 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.jellyfish
 
-import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.resources.ResourceLocation
+import dev.hybridlabs.aquatic.entity.jellyfish.LionsManeJellyfishEntity
+import net.minecraft.client.render.RenderLayer
+import net.minecraft.util.Identifier
 
-class LionsManeJellyfishEntityModel :
-    HybridAquaticJellyfishEntityModel<HybridAquaticJellyfishEntity>("lions_mane_jellyfish") {
-    override fun getRenderType(animatable: HybridAquaticJellyfishEntity, texture: ResourceLocation): RenderType {
-        return RenderType.entityTranslucent(texture)
+class LionsManeJellyfishEntityModel : HybridAquaticJellyfishEntityModel<LionsManeJellyfishEntity>("lions_mane_jellyfish") {
+    override fun getRenderType(animatable: LionsManeJellyfishEntity, texture: Identifier): RenderLayer {
+        return RenderLayer.getEntityTranslucent(texture)
     }
 }

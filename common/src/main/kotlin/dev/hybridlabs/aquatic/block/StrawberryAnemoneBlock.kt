@@ -1,122 +1,101 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
-import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
-import net.minecraft.tags.FluidTags
-import net.minecraft.world.effect.MobEffectInstance
-import net.minecraft.world.effect.MobEffects
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.item.context.BlockPlaceContext
-import net.minecraft.world.level.BlockGetter
-import net.minecraft.world.level.Level
-import net.minecraft.world.level.LevelAccessor
-import net.minecraft.world.level.block.*
-import net.minecraft.world.level.block.entity.BlockEntity
-import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.block.state.StateDefinition
-import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
-import net.minecraft.world.level.material.FluidState
-import net.minecraft.world.level.material.Fluids
-import net.minecraft.world.level.pathfinder.PathComputationType
-import net.minecraft.world.phys.shapes.CollisionContext
-import net.minecraft.world.phys.shapes.VoxelShape
+import net.minecraft.block.*
+import net.minecraft.block.entity.BlockEntity
+import net.minecraft.entity.ai.pathing.NavigationType
+import net.minecraft.fluid.FluidState
+import net.minecraft.fluid.Fluids
+import net.minecraft.item.ItemPlacementContext
+import net.minecraft.registry.tag.FluidTags
+import net.minecraft.state.StateManager
+import net.minecraft.state.property.Properties.WATERLOGGED
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
+import net.minecraft.util.shape.VoxelShape
+import net.minecraft.world.BlockView
+import net.minecraft.world.WorldAccess
 
 @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
-class StrawberryAnemoneBlock(settings: Properties) : BushBlock(settings), EntityBlock, SimpleWaterloggedBlock {
+class StrawberryAnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
     init {
-        this.registerDefaultState(
-            stateDefinition.any()
-                .setValue(WATERLOGGED, true)
-        )
+        defaultState = stateManager.defaultState
+            .with(WATERLOGGED, true)
     }
 
-    override fun entityInside(state: BlockState, world: Level, pos: BlockPos, entity: Entity) {
-        if (entity is LivingEntity && entity !is ClownfishEntity) {
-            entity.addEffect(MobEffectInstance(MobEffects.POISON, 3 * 20, 0))
-        }
-    }
-
-    override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return !floor.getCollisionShape(world, pos).getFaceShape(Direction.UP).isEmpty || floor.isFaceSturdy(
+    override fun canPlantOnTop(floor: BlockState, world: BlockView, pos: BlockPos): Boolean {
+        return !floor.getCollisionShape(world, pos).getFace(Direction.UP).isEmpty || floor.isSideSolidFullSquare(
             world,
             pos,
             Direction.UP
         )
     }
 
-    override fun updateShape(
+    override fun getStateForNeighborUpdate(
         state: BlockState,
         direction: Direction,
         neighborState: BlockState,
-        world: LevelAccessor,
+        world: WorldAccess,
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        if (state.getValue(WATERLOGGED)) {
-            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
+        if (state.get(WATERLOGGED)) {
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
         }
 
-        return if (!canSurvive(state, world, pos)) {
-            Blocks.AIR.defaultBlockState()
-        } else super.updateShape(state, direction, neighborState, world, pos, neighborPos)
+        return if (!canPlaceAt(state, world, pos)) {
+            Blocks.AIR.defaultState
+        } else super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
     }
 
     override fun getCollisionShape(
         state: BlockState,
-        world: BlockGetter,
+        world: BlockView,
         pos: BlockPos,
-        context: CollisionContext
+        context: ShapeContext
     ): VoxelShape {
         return COLLISION_SHAPE
     }
 
-    override fun getShape(
+    override fun getOutlineShape(
         state: BlockState,
-        world: BlockGetter,
+        world: BlockView,
         pos: BlockPos,
-        context: CollisionContext
+        context: ShapeContext?
     ): VoxelShape {
         return SHAPE
     }
 
-    override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
-        val fluidState = ctx.level.getFluidState(ctx.clickedPos)
-        return if (fluidState.`is`(FluidTags.WATER)) defaultBlockState().setValue(
+    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
+        val fluidState = ctx.world.getFluidState(ctx.blockPos)
+        return if (fluidState.isIn(FluidTags.WATER)) defaultState.with(
             WATERLOGGED,
-            ctx.level.getFluidState(ctx.clickedPos).`is`(Fluids.WATER)
+            ctx.world.getFluidState(ctx.blockPos).isOf(Fluids.WATER)
         ) else null
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
+        return if (state.get(WATERLOGGED)) Fluids.WATER.getStill(false) else super.getFluidState(state)
     }
 
-    override fun getRenderShape(state: BlockState): RenderShape {
-        return RenderShape.ENTITYBLOCK_ANIMATED
+    override fun getRenderType(state: BlockState): BlockRenderType {
+        return BlockRenderType.ENTITYBLOCK_ANIMATED
     }
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+    override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return StrawberryAnemoneBlockEntity(pos, state)
     }
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
+    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         builder.add(WATERLOGGED)
     }
 
-    override fun isPathfindable(
-        state: BlockState,
-        level: BlockGetter,
-        pos: BlockPos,
-        type: PathComputationType
-    ): Boolean {
+    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
         return false
     }
 
     companion object {
-        private val SHAPE = box(4.0, 0.0, 4.0, 12.0, 9.0, 12.0)
-        private val COLLISION_SHAPE = box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)
+        private val SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 9.0, 12.0)
+        private val COLLISION_SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)
     }
 }

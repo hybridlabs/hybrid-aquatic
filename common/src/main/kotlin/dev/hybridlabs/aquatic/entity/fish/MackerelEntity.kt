@@ -1,12 +1,13 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier
-import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.level.Level
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.world.World
 
-class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
+class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: World) :
     HybridAquaticSchoolingFishEntity(
         entityType, world,
         listOf(
@@ -19,18 +20,23 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
         )
     ) {
 
-    override fun getMaxSpawnClusterSize(): Int {
+    override fun getLimitPerChunk(): Int {
         return 8
     }
 
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 8))
+    }
+
     companion object {
-        fun createMobAttributes(): AttributeSupplier.Builder {
+        fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.6)
-                .add(Attributes.ATTACK_DAMAGE, 1.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 4.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
     }
 }

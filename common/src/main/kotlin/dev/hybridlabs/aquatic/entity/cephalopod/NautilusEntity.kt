@@ -1,19 +1,20 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.sounds.SoundEvent
-import net.minecraft.sounds.SoundEvents
-import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier
-import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.level.Level
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.damage.DamageSource
+import net.minecraft.sound.SoundEvent
+import net.minecraft.sound.SoundEvents
+import net.minecraft.world.World
 
-class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
+class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: World) :
     HybridAquaticCephalopodEntity(
         entityType,
         world,
-        emptyMap(),
         HybridAquaticEntityTags.NONE,
         HybridAquaticEntityTags.SHARK,
         false,
@@ -21,22 +22,31 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
     ) {
 
     companion object {
-        fun createMobAttributes(): AttributeSupplier.Builder {
+        fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.4)
-                .add(Attributes.ATTACK_DAMAGE, 2.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 8.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
         }
     }
 
-    override fun getHurtSound(damageSource: DamageSource): SoundEvent {
-        return SoundEvents.SHULKER_CLOSE
+    override fun initGoals() {
+        super.initGoals()
+        if (world.isDay) {
+            goalSelector.add(1, StayDeepGoal(this, 1.0, 1, 12))
+        } else {
+            goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
+        }
+    }
+
+    override fun getHurtSound(source: DamageSource?): SoundEvent {
+        return SoundEvents.ENTITY_SHULKER_CLOSE
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.SHULKER_HURT_CLOSED
+        return SoundEvents.ENTITY_SHULKER_HURT_CLOSED
     }
 
     override fun getMaxSize(): Int {

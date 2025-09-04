@@ -1,42 +1,44 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.entity.goal.SharkJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.SharkJumpGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier
-import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
-import net.minecraft.world.level.Level
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.ai.goal.ChaseBoatGoal
+import net.minecraft.entity.ai.goal.RevengeGoal
+import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.world.World
 
-class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, world: Level) :
+class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, world: World) :
     HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.LARGE_PREY), false, true) {
 
-    override fun registerGoals() {
-        super.registerGoals()
-        goalSelector.addGoal(1, HurtByTargetGoal(this))
-        goalSelector.addGoal(5, SharkJumpGoal(this, 10))
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(1, RevengeGoal(this))
+        goalSelector.add(8, ChaseBoatGoal(this))
+        goalSelector.add(5, SharkJumpGoal(this, 10))
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
+    override fun getLimitPerChunk(): Int {
         return 1
     }
 
     companion object {
-        fun createMobAttributes(): AttributeSupplier.Builder {
+        fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 54.0)
-                .add(Attributes.MOVEMENT_SPEED, 1.0)
-                .add(Attributes.ATTACK_DAMAGE, 8.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 54.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.5)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0)
         }
     }
 
     override fun getMaxSize(): Int {
-        return 5
+        return 3
     }
 
     override fun getMinSize(): Int {
-        return 0
+        return -3
     }
 }

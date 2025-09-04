@@ -1,32 +1,39 @@
 package dev.hybridlabs.aquatic.item
 
-import net.minecraft.ChatFormatting
-import net.minecraft.network.chat.Component
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.TooltipFlag
-import net.minecraft.world.level.Level
+import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.client.item.TooltipContext
+import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
+import net.minecraft.text.Text
+import net.minecraft.util.Formatting
+import net.minecraft.world.World
 
-open class HookItem(settings: Properties) : Item(settings) {
-    override fun appendHoverText(
-        stack: ItemStack,
-        world: Level?,
-        tooltip: MutableList<Component>,
-        context: TooltipFlag
-    ) {
-        val text = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)
-        val hookText = Component.translatable("item.hybrid-aquatic.hook.description").withStyle(ChatFormatting.GRAY)
+open class HookItem(settings: Settings) : Item(settings) {
+    override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
+        val isTideLoaded = FabricLoader.getInstance().isModLoaded("tide")
 
-        tooltip.add(text)
-        tooltip.add(hookText)
-        super.appendHoverText(stack, world, tooltip, context)
+        if (isTideLoaded) {
+            val tideText = Text.translatable(this.translationKey.plus(".description")).formatted(Formatting.GRAY)
+            val hookTideText = Text.translatable("item.hybrid-aquatic.hook.description_tide").formatted(Formatting.GRAY)
+
+            tooltip.add(tideText)
+            tooltip.add(hookTideText)
+        } else {
+            val text = Text.translatable(this.translationKey.plus(".description")).formatted(Formatting.GRAY)
+            val hookText = Text.translatable("item.hybrid-aquatic.hook.description").formatted(Formatting.GRAY)
+
+            tooltip.add(text)
+            tooltip.add(hookText)
+        }
+
+        super.appendTooltip(stack, world, tooltip, context)
     }
 
-    override fun isEnchantable(stack: ItemStack): Boolean {
+    override fun isEnchantable(stack: ItemStack?): Boolean {
         return false
     }
 
-    override fun getEnchantmentValue(): Int {
+    override fun getEnchantability(): Int {
         return 0
     }
 }

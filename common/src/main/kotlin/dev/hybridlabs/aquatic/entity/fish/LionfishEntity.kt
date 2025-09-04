@@ -1,54 +1,46 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.effect.MobEffectInstance
-import net.minecraft.world.effect.MobEffects
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier
-import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.level.Level
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.world.World
 
-class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world, emptyMap(),
+class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) :
+    HybridAquaticFishEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.CRUSTACEAN
-        ),
+            HybridAquaticEntityTags.CRUSTACEAN),
         listOf(
             HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+            HybridAquaticEntityTags.SHARK)) {
 
-    override fun getMaxSpawnClusterSize(): Int {
+    override fun getLimitPerChunk(): Int {
         return 2
     }
 
     companion object {
-        fun createMobAttributes(): AttributeSupplier.Builder {
+        fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.5)
-                .add(Attributes.ATTACK_DAMAGE, 3.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 8.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
         }
     }
 
-    override fun shouldFlopOnLand(): Boolean {
-        return false
-    }
+    override fun damage(source: DamageSource, amount: Float): Boolean {
+        if (super.damage(source, amount)) {
 
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
-        if (super.hurt(source, amount)) {
-
-            val attacker = source.directEntity
-            if (attacker is LivingEntity && attacker.mainHandItem.isEmpty) {
-                attacker.addEffect(MobEffectInstance(MobEffects.POISON, 200, 0))
-                attacker.addEffect(MobEffectInstance(MobEffects.CONFUSION, 200, 0))
+            val attacker = source.attacker
+            if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
+                attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 0))
+                attacker.addStatusEffect(StatusEffectInstance(StatusEffects.NAUSEA, 200, 0))
             }
 
             return true
