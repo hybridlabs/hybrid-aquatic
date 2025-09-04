@@ -1,19 +1,5 @@
 package dev.hybridlabs.aquatic.entity
 
-import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.cephalopod.*
-import dev.hybridlabs.aquatic.entity.critter.SeaCucumberEntity
-import dev.hybridlabs.aquatic.entity.critter.SeaSlugEntity
-import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
-import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
-import dev.hybridlabs.aquatic.entity.crustacean.*
-import dev.hybridlabs.aquatic.entity.fish.*
-import dev.hybridlabs.aquatic.entity.jellyfish.*
-import dev.hybridlabs.aquatic.entity.mammal.KillerWhaleEntity
-import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
-import dev.hybridlabs.aquatic.entity.shark.*
-import dev.hybridlabs.aquatic.platform.registration.RegistryObject
-import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.world.entity.*

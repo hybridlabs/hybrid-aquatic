@@ -19,7 +19,7 @@ import software.bernie.geckolib.util.RenderUtils
 import java.util.function.Function
 
 class AnemoneBlockEntity(pos: BlockPos, state: BlockState) :
-    BlockEntity(HybridAquaticBlockEntityTypes.ANEMONE.get(), pos, state), GeoAnimatable {
+    BlockEntity(HybridAquaticBlockEntityTypes.ANEMONE, pos, state), GeoAnimatable {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     private var hideTimer = 0

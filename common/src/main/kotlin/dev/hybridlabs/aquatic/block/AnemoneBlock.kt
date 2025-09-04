@@ -3,46 +3,48 @@ package dev.hybridlabs.aquatic.block
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import net.minecraft.block.*
-import net.minecraft.block.entity.BlockEntity
-import net.minecraft.block.entity.BlockEntityTicker
-import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.entity.Entity
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.ai.pathing.PathComputationType
-import net.minecraft.entity.player.Player
-import net.minecraft.fluid.FluidState
-import net.minecraft.fluid.Fluids
-import net.minecraft.item.BlockPlaceContext
-import net.minecraft.registry.tag.FluidTags
-import net.minecraft.state.StateManager
-import net.minecraft.state.property.Properties.WATERLOGGED
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockGetter
-import net.minecraft.world.GameRules
-import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.tags.FluidTags
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.GameRules
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.BushBlock
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityTicker
+import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.state.BlockBehaviour
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
+import net.minecraft.world.level.material.FluidState
+import net.minecraft.world.level.material.Fluids
+import net.minecraft.world.level.pathfinder.PathComputationType
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
-class AnemoneBlock(settings: Properties) : BushBlock(settings), BlockEntityProvider, SimpleWaterloggedBlcok {
+class AnemoneBlock(settings: BlockBehaviour.Properties) : BushBlock(settings), BlockEntityProvider, SimpleWaterloggedBlcok {
     init {
         defaultBlockState() = stateManager.defaultBlockState()
             .with(WATERLOGGED, true)
     }
 
-    override fun onEntityCollision(state: BlockState, world: World, pos: BlockPos, entity: Entity) {
+    override fun onEntityCollision(state: BlockState, world: LevelAccessor, pos: BlockPos, entity: Entity) {
         if (entity is LivingEntity) {
             if (entity is ClownfishEntity) {
-                if (!world.isClient) {
+                if (!world.isClientSide) {
                     tryHideClownfish(entity, world, pos)
                 }
             }
         }
     }
 
-    private fun tryHideClownfish(entity: ClownfishEntity, world: World, pos: BlockPos) {
+    private fun tryHideClownfish(entity: ClownfishEntity, world: LevelAccessor, pos: BlockPos) {
         if (entity.isBaby || !entity.navigation.isIdle) {
             return
         }
@@ -55,7 +57,7 @@ class AnemoneBlock(settings: Properties) : BushBlock(settings), BlockEntityProvi
         }
     }
 
-    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player:Player) {
+    override fun onBreak(world: LevelAccessor, pos: BlockPos, state: BlockState, player: Player) {
         if (!world.isClientSide && player.isCreative && world.gameRules.getBoolean(GameRules.DO_TILE_DROPS)) {
             val blockEntity = world.getBlockEntity(pos)
             if (blockEntity is AnemoneBlockEntity) {
@@ -92,10 +94,10 @@ class AnemoneBlock(settings: Properties) : BushBlock(settings), BlockEntityProvi
     }
 
     override fun <T : BlockEntity> getTicker(
-        world: World,
+        world: LevelAccessor,
         state: BlockState,
         type: BlockEntityType<T>
-    ): BlockEntityTicker<T>? {
+    ): BlockEntityTicker<T> {
         return BlockWithEntity.checkType(type, HybridAquaticBlockEntityTypes.ANEMONE, AnemoneBlockEntity::tick)
     }
 
@@ -121,12 +123,12 @@ class AnemoneBlock(settings: Properties) : BushBlock(settings), BlockEntityProvi
         val fluidState = ctx.level.getFluidState(ctx.clickedPos)
         return if (fluidState.`is`(FluidTags.WATER)) defaultBlockState().with(
             WATERLOGGED,
-            ctx.level.getFluidState(ctx.clickedPos).isOf(Fluids.WATER)
+            ctx.level.getFluidState(ctx.clickedPos).`is`(Fluids.WATER)
         ) else null
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
+        return if (state.hasProperty(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
     override fun getRenderType(state: BlockState): BlockRenderType {

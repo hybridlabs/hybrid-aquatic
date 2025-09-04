@@ -13,7 +13,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import software.bernie.geckolib.util.RenderUtils
 
 class StrawberryAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
-    BlockEntity(HybridAquaticBlockEntityTypes.STRAWBERRY_ANEMONE.get(), pos, state), GeoAnimatable {
+    BlockEntity(HybridAquaticBlockEntityTypes.STRAWBERRY_ANEMONE, pos, state), GeoAnimatable {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
@@ -37,7 +37,7 @@ class StrawberryAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
         return RenderUtils.getCurrentTick()
     }
 
-    override fun getUpdateTag(): CompoundTag? {
+    override fun getUpdateTag(): CompoundTag {
         return saveWithoutMetadata()
     }
 

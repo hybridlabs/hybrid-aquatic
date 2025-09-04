@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.block.entity
 
-import net.minecraft.block.BlockState
-import net.minecraft.block.entity.BlockEntity
+import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
-import net.minecraft.util.math.BlockPos
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.state.BlockState
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.*
@@ -17,7 +17,7 @@ class GiantGreenAnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEnti
 
 
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
-        return if (world != null) {
+        return if (level != null) {
             event.controller.setAnimation(SWAY_ANIMATION)
             PlayState.CONTINUE
         } else {
@@ -37,12 +37,12 @@ class GiantGreenAnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEnti
         return RenderUtils.getCurrentTick()
     }
 
-    override fun toInitialChunkDataNbt(): CompoundTag {
-        return createNbt()
+    override fun getUpdateTag(): CompoundTag {
+        return saveWithoutMetadata()
     }
 
-    override fun toUpdatePacket(): BlockEntityUpdateS2CPacket {
-        return BlockEntityUpdateS2CPacket.create(this)
+    override fun getUpdatePacket(): ClientboundBlockEntityDataPacket {
+        return ClientboundBlockEntityDataPacket.create(this)
     }
 
     companion object {

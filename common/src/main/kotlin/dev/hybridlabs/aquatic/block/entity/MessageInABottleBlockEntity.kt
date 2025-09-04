@@ -20,7 +20,7 @@ import software.bernie.geckolib.util.RenderUtils
  * @see dev.hybridlabs.aquatic.block.MessageInABottleBlock
  */
 class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
-    BlockEntity(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE.get(), pos, state), GeoAnimatable {
+    BlockEntity(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE, pos, state), GeoAnimatable {
     private val instanceCache = GeckoLibUtil.createInstanceCache(this)
 
     /**

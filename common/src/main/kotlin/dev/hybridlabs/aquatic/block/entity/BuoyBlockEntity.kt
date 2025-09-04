@@ -10,7 +10,6 @@ import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import software.bernie.geckolib.util.RenderUtils
 
-
 class BuoyBlockEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(HybridAquaticBlockEntityTypes.BUOY.get(), pos, state), GeoAnimatable {
     private val animCache = GeckoLibUtil.createInstanceCache(this)

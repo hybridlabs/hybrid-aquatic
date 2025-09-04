@@ -1,20 +1,24 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.*
-import net.minecraft.fluid.Fluid
-import net.minecraft.fluid.FluidState
-import net.minecraft.fluid.Fluids
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.shape.Shapes
-import net.minecraft.world.BlockGetter
-import net.minecraft.world.WorldAccess
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.GrowingPlantBodyBlock
+import net.minecraft.world.level.block.GrowingPlantHeadBlock
+import net.minecraft.world.level.block.LiquidBlockContainer
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.material.Fluid
+import net.minecraft.world.level.material.FluidState
+import net.minecraft.world.level.material.Fluids
+import net.minecraft.world.phys.shapes.Shapes
 
 @Suppress("OVERRIDE_DEPRECATION")
 class BullKelpPlantBlock(settings: Properties) :
     GrowingPlantBodyBlock(settings, Direction.UP, Shapes.block(), true), LiquidBlockContainer {
     override fun getHeadBlock(): GrowingPlantHeadBlock {
-        return HybridAquaticBlocks.BULL_KELP as GrowingPlantHeadBlock
+        return HybridAquaticBlocks.BULL_KELP
     }
 
     override fun getFluidState(state: BlockState): FluidState {
