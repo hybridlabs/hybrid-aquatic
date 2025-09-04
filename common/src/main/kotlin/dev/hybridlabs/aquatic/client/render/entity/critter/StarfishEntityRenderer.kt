@@ -1,23 +1,14 @@
 package dev.hybridlabs.aquatic.client.render.entity.critter
 
-import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.client.model.entity.critter.StarfishEntityModel
-import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
-import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
+import dev.hybridlabs.aquatic.client.render.entity.critter.layer.HybridAquaticCritterEntityLayer
+import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
+import net.minecraft.client.render.entity.EntityRendererFactory.Context
 
 class StarfishEntityRenderer(context: Context) :
-    HybridAquaticCritterEntityRenderer<HybridAquaticCritterEntity>(context, StarfishEntityModel()) {
-    override fun render(
-        entity: HybridAquaticCritterEntity,
-        entityYaw: Float,
-        partialTick: Float,
-        poseStack: PoseStack,
-        bufferSource: MultiBufferSource,
-        packedLight: Int
-    ) {
-        val size = HybridAquaticCritterEntity.getScaleAdjustment(entity, 0.05f)
-        poseStack.scale(size, size, size)
-        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
+    HybridAquaticCritterEntityRenderer<StarfishEntity>(context, StarfishEntityModel(), true) {
+
+    init {
+        addRenderLayer(HybridAquaticCritterEntityLayer(this))
     }
 }

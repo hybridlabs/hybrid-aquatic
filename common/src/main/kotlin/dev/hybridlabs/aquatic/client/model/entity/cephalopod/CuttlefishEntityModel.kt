@@ -1,27 +1,23 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
-import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.cephalopod.CuttlefishEntity
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.Identifier
+import kotlin.random.Random
 
 class CuttlefishEntityModel : HybridAquaticCephalopodEntityModel<CuttlefishEntity>("cuttlefish") {
-    override fun getTextureResource(animatable: CuttlefishEntity): ResourceLocation {
-        val texturePath = when (animatable.randomValue) {
-            0 -> "textures/entity/cephalopod/cuttlefish/cuttlefish.png"
-            1 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_zebra.png"
-            2 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_disruptive.png"
-            3 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_white.png"
-            4 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_black.png"
-            5 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_black_white.png"
-            6 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_white_black.png"
-            7 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_red_white.png"
-            8 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_white_red.png"
-            9 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_creeper_black.png"
-            10 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_creeper_white.png"
-            11 -> "textures/entity/cephalopod/cuttlefish/cuttlefish_creeper_red.png"
-            else -> "textures/entity/cephalopod/cuttlefish/cuttlefish.png"
-        }
 
-        return ResourceLocation(HybridAquatic.MOD_ID, texturePath)
+    private val commonTextures = listOf(
+        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_4.png"),
+        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_6.png"),
+        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_5.png"),
+        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_1.png"),
+        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_2.png"),
+        Identifier("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_3.png")
+    )
+
+    override fun getTextureResource(animatable: CuttlefishEntity): Identifier {
+        val seed = animatable.uuid.leastSignificantBits
+        val random = Random(seed)
+        return commonTextures[random.nextInt(commonTextures.size)]
     }
 }

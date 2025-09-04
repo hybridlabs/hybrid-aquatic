@@ -27,21 +27,53 @@
 			"loop": true,
 			"bones": {
 				"body": {
-					"rotation": ["0+math.sin(query.anim_time*90*1-160)*1.5", "0-math.sin(query.anim_time*45*3)*6", "0-math.sin(query.anim_time*45*1.5)*0.5"],
-					"position": ["0+math.sin(query.anim_time*90*3-80)*0.5", "0+math.sin(query.anim_time*45*1-80)*0.5", 0]
+					"rotation": ["0+math.sin(query.anim_time*90*1-160)*2.5", "0-math.sin(query.anim_time*90*3)*12", "0-math.sin(query.anim_time*90*1.5)*0.5"],
+					"position": ["0+math.sin(query.anim_time*90*3-80)*1", "0+math.sin(query.anim_time*90*1-80)*1", 0]
 				},
 				"right_fin": {
-					"rotation": [0, "0+math.sin(query.anim_time*90*3+40)*5", "0-math.sin(query.anim_time*45*1-50)*5"]
+					"rotation": [0, "0+math.sin(query.anim_time*90*3+80)*10", "0-math.sin(query.anim_time*90*1.5)*0.5"]
 				},
 				"left_fin": {
-					"rotation": [0, "0+math.sin(query.anim_time*90*3+40)*5", "0+math.sin(query.anim_time*45*1-50)*5"]
+					"rotation": [0, "0+math.sin(query.anim_time*90*3+80)*10", "0+math.sin(query.anim_time*90*1-50)*5"]
 				},
 				"tail": {
-					"rotation": ["0+math.sin(query.anim_time*90*1-200)*2", "0-math.sin(query.anim_time*45*3-80)*6", 0],
-					"position": [0, 0, -0.25]
+					"rotation": [0, "0-math.sin(query.anim_time*90*3-120)*8", 0]
 				},
 				"tail_fin": {
-					"rotation": ["0+math.cos(query.anim_time*90*1-200)*-2", "0-math.sin(query.anim_time*45*3-160)*8", "0-math.sin(query.anim_time*45*3-160)*3"]
+					"rotation": ["0+math.sin(query.anim_time*90*1-220)*4", "0-math.sin(query.anim_time*90*3-160)*10", "0-math.sin(query.anim_time*90*3-160)*3"]
+				},
+				"pelvic_fin": {
+					"rotation": [0, 0, "Math.sin(query.anim_time*90*3+80)*-10"]
+				},
+				"dorsal_fin": {
+					"rotation": [0, 0, "Math.sin(query.anim_time*90*3+80)*10"]
+				}
+			}
+		},
+		"misc.flop": {
+			"loop": true,
+			"animation_length": 0.5,
+			"bones": {
+				"body": {
+					"rotation": {
+						"0.0": [0, 0, -90],
+						"0.1667": [0, 22.5, -90],
+						"0.3333": [0, -22.5, -90],
+						"0.5": [0, 0, -90]
+					},
+					"position": {
+						"0.0": [-1, -2.5, 0],
+						"0.1667": [-1, 1, 0],
+						"0.5": [-1, -2.5, 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"0.0": [0, -12.5, 0],
+						"0.1667": [0, 10, 0],
+						"0.3333": [0, 32.5, 0],
+						"0.5": [0, -12.5, 0]
+					}
 				}
 			}
 		}

@@ -1,29 +1,30 @@
 package dev.hybridlabs.aquatic.client.render.entity.miniboss
 
-import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
-import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
+import net.minecraft.client.render.VertexConsumerProvider
+import net.minecraft.client.render.entity.EntityRendererFactory
+import net.minecraft.client.util.math.MatrixStack
 import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
-open class HybridAquaticMinibossEntityRenderer<T : HybridAquaticMinibossEntity>(
-    context: Context,
+@Suppress("LeakingThis")
+open class HybridAquaticMinibossEntityRenderer<T: HybridAquaticMinibossEntity>(
+    context: EntityRendererFactory.Context,
     model: GeoModel<T>,
     canGlow: Boolean = false
-) : GeoEntityRenderer<T>(context, model) {
+): GeoEntityRenderer<T>(context, model) {
 
     init {
-        if (canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
+        if(canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
     }
 
     override fun render(
         entity: T,
         entityYaw: Float,
         partialTick: Float,
-        poseStack: PoseStack,
-        bufferSource: MultiBufferSource,
+        poseStack: MatrixStack,
+        bufferSource: VertexConsumerProvider,
         packedLight: Int
     ) {
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)

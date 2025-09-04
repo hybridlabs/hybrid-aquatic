@@ -16,6 +16,58 @@
     "hybrid-aquatic:shrimp",
     "hybrid-aquatic:spider_crab",
     "hybrid-aquatic:vampire_crab",
-    "hybrid-aquatic:yeti_crab"
+    "hybrid-aquatic:yeti_crab",
+    {
+      "id": "alexsmobs:lobster",
+      "required": false
+    },
+    {
+      "id": "shellfish:crayfish",
+      "required": false
+    },
+    {
+      "id": "shellfish:lobster",
+      "required": false
+    },
+    {
+      "id": "shellfish:crab",
+      "required": false
+    },
+    {
+      "id": "shellfish:shrimp",
+      "required": false
+    },
+    {
+      "id": "seafarer:crab",
+      "required": false
+    },
+    {
+      "id": "seafarer:horseshoe_crab",
+      "required": false
+    },
+    {
+      "id": "seafarer:mantis_shrimp",
+      "required": false
+    },
+    {
+      "id": "seafarer:sexy_shrimp",
+      "required": false
+    },
+    {
+      "id": "seafarer:spider_crab",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:arrow_crab",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:crab",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:krill",
+      "required": false
+    }
   ]
 }

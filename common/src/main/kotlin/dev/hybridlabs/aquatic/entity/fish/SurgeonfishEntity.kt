@@ -1,59 +1,131 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier
-import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.level.Level
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.VariantHolder
+import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.util.Identifier
+import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.function.ValueLists
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
+import net.minecraft.world.World
+import java.util.function.IntFunction
+import kotlin.random.Random
 
-class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Level) :
+@Suppress("DEPRECATION")
+class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: World) :
     HybridAquaticFishEntity(
-        entityType, world, variants = hashMapOf(
-            "sohal" to FishVariant.biomeVariant("sohal", listOf(HybridAquaticBiomeTags.REEF)),
-            "lined" to FishVariant.biomeVariant("lined", listOf(HybridAquaticBiomeTags.REEF)),
-            "orangeshoulder" to FishVariant.biomeVariant("orangeshoulder", listOf(HybridAquaticBiomeTags.REEF)),
-            "unicornfish" to FishVariant.biomeVariant("unicornfish", listOf(HybridAquaticBiomeTags.REEF)),
-            "powder_blue_tang" to FishVariant.biomeVariant("powder_blue_tang", listOf(HybridAquaticBiomeTags.REEF)),
-            "yellow_tang" to FishVariant.biomeVariant("yellow_tang", listOf(HybridAquaticBiomeTags.REEF)),
-            "blue_tang" to FishVariant.biomeVariant("blue_tang", listOf(HybridAquaticBiomeTags.REEF))
-        ),
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
+        entityType, world,
+        listOf(HybridAquaticEntityTags.NONE),
         listOf(
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK
         )
-    ) {
+    ),
+    VariantHolder<SurgeonfishEntity.Companion.Type> {
 
-    public override fun getDefaultLootTable(): ResourceLocation {
-        return when (this.variant?.variantName) {
-            "blue_tang" -> ResourceLocation("hybrid-aquatic", "gameplay/surgeonfish_blue_tang")
-            "yellow_tang" -> ResourceLocation("hybrid-aquatic", "gameplay/surgeonfish_yellow_tang")
-            "powder_blue_tang" -> ResourceLocation("hybrid-aquatic", "gameplay/surgeonfish_powder_blue_tang")
-            "sohal" -> ResourceLocation("hybrid-aquatic", "gameplay/surgeonfish_sohal")
-            "orangeshoulder" -> ResourceLocation("hybrid-aquatic", "gameplay/surgeonfish_orangeshoulder")
-            "lined" -> ResourceLocation("hybrid-aquatic", "gameplay/surgeonfish_lined")
-            "unicornfish" -> ResourceLocation("hybrid-aquatic", "gameplay/surgeonfish_unicornfish")
-            else -> super.getDefaultLootTable()
-        }
-    }
-
-    override fun getMaxSpawnClusterSize(): Int {
+    override fun getLimitPerChunk(): Int {
         return 3
     }
 
-    companion object {
-        fun createMobAttributes(): AttributeSupplier.Builder {
-            return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.6)
-                .add(Attributes.ATTACK_DAMAGE, 1.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 4.0)
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        variant = Type.entries.random(Random)
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun getLootTableId(): Identifier {
+        return when (variant) {
+            Type.BLUE_TANG -> HybridAquaticLootTables.SURGEONFISH_BLUE_TANG
+            Type.POWDER_BLUE_TANG -> HybridAquaticLootTables.SURGEONFISH_POWDER_BLUE_TANG
+            Type.YELLOW_TANG -> HybridAquaticLootTables.SURGEONFISH_YELLOW_TANG
+            Type.LINED -> HybridAquaticLootTables.SURGEONFISH_LINED
+            Type.ORANGESHOULDER -> HybridAquaticLootTables.SURGEONFISH_ORANGESHOULDER
+            Type.SOHAL -> HybridAquaticLootTables.SURGEONFISH_SOHAL
+            Type.UNICORNFISH -> HybridAquaticLootTables.SURGEONFISH_UNICORNFISH
         }
+    }
+
+    companion object {
+        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+            return createLivingAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
+        }
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(SurgeonfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            BLUE_TANG(0, "blue_tang"),
+            POWDER_BLUE_TANG(1, "powder_blue_tang"),
+            YELLOW_TANG(2, "yellow_tang"),
+            LINED(3, "lined"),
+            ORANGESHOULDER(4, "orangeshoulder"),
+            SOHAL(5, "sohal"),
+            UNICORNFISH(6, "unicornfish");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, BLUE_TANG) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
+    }
+
+    override fun initDataTracker() {
+        dataTracker.startTracking(TYPE, 0)
+        super.initDataTracker()
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        nbt.putString("Type", this.variant.asString())
+        super.writeCustomDataToNbt(nbt)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        this.variant = Type.byName(nbt.getString("Type"))
+        super.readCustomDataFromNbt(nbt)
+    }
+
+    override fun getVariant(): Type {
+        return Type.fromId((dataTracker.get(TYPE) as Int))
+    }
+
+    override fun setVariant(type: Type) {
+        dataTracker.set(TYPE, type.id)
     }
 }

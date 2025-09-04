@@ -1,5 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
+import dev.hybridlabs.aquatic.entity.fish.DiscusEntity
 
-class DiscusEntityModel : HybridAquaticFishEntityModel<HybridAquaticFishEntity>("discus")
+class DiscusEntityModel : HybridAquaticFishEntityModel<DiscusEntity>("discus")

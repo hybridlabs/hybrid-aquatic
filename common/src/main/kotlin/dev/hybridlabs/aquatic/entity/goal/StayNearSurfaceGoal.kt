@@ -1,0 +1,64 @@
+package dev.hybridlabs.aquatic.entity.ai.goal
+
+import net.minecraft.entity.ai.goal.WanderAroundGoal
+import net.minecraft.entity.ai.pathing.NavigationType
+import net.minecraft.entity.mob.PathAwareEntity
+import net.minecraft.registry.tag.FluidTags
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Vec3d
+import java.util.*
+
+class StayNearSurfaceGoal(
+    mob: PathAwareEntity,
+    speed: Double,
+    chance: Int,
+    private val maxDepth: Int
+) : WanderAroundGoal(mob, speed, chance) {
+
+    private val random: Random = Random()
+
+    override fun getWanderTarget(): Vec3d? {
+        val vec = getRandomWaterPos() ?: return null
+
+        var pos = BlockPos.ofFloored(vec)
+
+        // Move upward until reaching the surface
+        while (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
+            mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER)
+        ) {
+            pos = pos.up()
+        }
+
+        pos = pos.down()
+        var depth = 0
+
+        // Move downward slightly to ensure the fish doesn't break the surface
+        while (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
+            mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER) &&
+            depth < maxDepth
+        ) {
+            pos = pos.down()
+            depth++
+        }
+
+        return Vec3d.ofCenter(pos)
+    }
+
+    private fun getRandomWaterPos(): Vec3d? {
+        var attempts = 0
+        while (attempts < 10) {
+            val x = mob.x + (random.nextDouble() * 20 - 10)
+            val y = mob.y + (random.nextDouble() * 14 - 7)
+            val z = mob.z + (random.nextDouble() * 20 - 10)
+            val pos = BlockPos.ofFloored(x, y, z)
+
+            if (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
+                mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER)
+            ) {
+                return Vec3d(x, y, z)
+            }
+            attempts++
+        }
+        return null
+    }
+}

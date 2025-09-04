@@ -1,47 +1,45 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.goal.FishFollowGroupLeaderGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.FishFollowGroupLeaderGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.nbt.CompoundTag
-import net.minecraft.tags.TagKey
-import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.SpawnGroupData
-import net.minecraft.world.level.Level
-import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.VariantHolder
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.registry.tag.TagKey
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
+import net.minecraft.world.World
 import java.util.stream.Stream
 
 @Suppress("NAME_SHADOWING")
 open class HybridAquaticSchoolingFishEntity(
     type: EntityType<out HybridAquaticFishEntity>,
-    world: Level,
+    world: World,
     override val prey: List<TagKey<EntityType<*>>>,
     override val predator: List<TagKey<EntityType<*>>>,
     private var leader: HybridAquaticSchoolingFishEntity? = null,
     private var groupSize: Int = 1,
-    protected val variants: Map<String, FishVariant> = hashMapOf(),
-    override val assumeDefault: Boolean = false,
-    override val collisionRules: List<VariantCollisionRules> = listOf()
-) : HybridAquaticFishEntity(
-    type,
-    world,
-    variants,
-    listOf(HybridAquaticEntityTags.NONE),
-    listOf(HybridAquaticEntityTags.NONE)
-) {
+) : HybridAquaticFishEntity(type, world, listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.NONE)) {
 
-    override fun registerGoals() {
-        super.registerGoals()
-        goalSelector.addGoal(5, FishFollowGroupLeaderGoal(this))
+    open fun getVariant(): Any? {
+        return if (this is VariantHolder<*>) {
+            (this as VariantHolder<*>).variant
+        } else null
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(5, FishFollowGroupLeaderGoal(this))
+    }
+
+    override fun getLimitPerChunk(): Int {
         return this.getMaxGroupSize()
     }
 
     open fun getMaxGroupSize(): Int {
-        return super.getMaxSpawnClusterSize()
+        return super.getLimitPerChunk()
     }
 
     override fun hasSelfControl(): Boolean {
@@ -53,10 +51,12 @@ open class HybridAquaticSchoolingFishEntity(
     }
 
     private fun joinGroupOf(groupLeader: HybridAquaticSchoolingFishEntity): HybridAquaticSchoolingFishEntity {
+        if (this.getVariant() != groupLeader.getVariant()) return this
         this.leader = groupLeader
         groupLeader.increaseGroupSize()
         return groupLeader
     }
+
 
     fun leaveGroup() {
         leader!!.decreaseGroupSize()
@@ -77,9 +77,9 @@ open class HybridAquaticSchoolingFishEntity(
 
     override fun tick() {
         super.tick()
-        if (this.hasOtherFishInGroup() && level().random.nextInt(200) == 1) {
+        if (this.hasOtherFishInGroup() && world.random.nextInt(200) == 1) {
             val list: List<HybridAquaticFishEntity?> =
-                level().getEntitiesOfClass(this.javaClass, boundingBox.inflate(8.0, 8.0, 8.0))
+                world.getNonSpectatingEntities(this.javaClass, boundingBox.expand(8.0, 8.0, 8.0))
             if (list.size <= 1) {
                 this.groupSize = 1
             }
@@ -91,40 +91,50 @@ open class HybridAquaticSchoolingFishEntity(
     }
 
     fun isCloseEnoughToLeader(): Boolean {
-        return this.distanceToSqr(this.leader) <= 121.0
+        return this.squaredDistanceTo(this.leader) <= 121.0
     }
 
     fun moveTowardLeader() {
         if (this.hasLeader()) {
-            getNavigation().moveTo(this.leader, 1.0)
+            getNavigation().startMovingTo(this.leader, 1.0)
         }
     }
 
     fun pullInOtherFish(fish: Stream<out HybridAquaticSchoolingFishEntity?>) {
-        fish.limit((this.getMaxGroupSize() - this.groupSize).toLong())
-            .filter { fishx: HybridAquaticSchoolingFishEntity? -> fishx !== this }
-            .forEach { fishx: HybridAquaticSchoolingFishEntity? ->
+        val selfVariant = this.getVariant()
+        fish
+            .filter { fishx ->
+                fishx != null &&
+                        fishx !== this &&
+                        fishx.getVariant() == selfVariant
+            }
+            .limit((this.getMaxGroupSize() - this.groupSize).toLong())
+            .forEach { fishx ->
                 fishx!!.joinGroupOf(this)
             }
     }
 
-    override fun finalizeSpawn(
-        world: ServerLevelAccessor,
-        difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
-    ): SpawnGroupData? {
+
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
         var entityData = entityData
-        xRot = 0.0f
-        super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        pitch = 0.0f
+        super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
         if (entityData == null) {
             entityData = FishData(this)
         } else {
-            joinGroupOf((entityData as FishData).leader)
+            val leader = (entityData as FishData).leader
+            if (this.getVariant() == leader.getVariant()) {
+                joinGroupOf(leader)
+            }
         }
         return entityData
     }
 
-    open class FishData(val leader: HybridAquaticSchoolingFishEntity) : SpawnGroupData
+    open class FishData(val leader: HybridAquaticSchoolingFishEntity) : EntityData
 }

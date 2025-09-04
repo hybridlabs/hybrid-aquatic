@@ -1,22 +1,22 @@
-package dev.hybridlabs.aquatic.entity.goal
+package dev.hybridlabs.aquatic.entity.ai.goal
 
 import com.mojang.datafixers.DataFixUtils
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticSchoolingFishEntity
-import net.minecraft.world.entity.ai.goal.Goal
+import net.minecraft.entity.ai.goal.Goal
 import java.util.function.Predicate
 
 class FishFollowGroupLeaderGoal(
     val fish: HybridAquaticSchoolingFishEntity
-) : Goal() {
+): Goal() {
     private val minSearchDelay = 200
     private var moveDelay = 0
     private var checkSurroundingDelay = getSurroundingSearchDelay(fish)
 
-    fun getSurroundingSearchDelay(fish: HybridAquaticSchoolingFishEntity?): Int {
-        return reducedTickDelay(minSearchDelay + fish!!.random.nextInt(minSearchDelay) % 20)
+    private fun getSurroundingSearchDelay(fish: HybridAquaticSchoolingFishEntity?): Int {
+        return toGoalTicks(minSearchDelay + fish!!.random.nextInt(minSearchDelay) % 20)
     }
 
-    override fun canUse(): Boolean {
+    override fun canStart(): Boolean {
         return if (fish.hasOtherFishInGroup()) {
             false
         } else if (fish.hasLeader()) {
@@ -29,19 +29,18 @@ class FishFollowGroupLeaderGoal(
             val predicate =
                 Predicate { fish: HybridAquaticSchoolingFishEntity -> fish.canHaveMoreFishInGroup() || !fish.hasLeader() }
             val list = fish
-                .level()
-                .getEntitiesOfClass(fish.javaClass, fish.boundingBox.inflate(8.0, 8.0, 8.0), predicate)
+                .world
+                .getEntitiesByClass(fish.javaClass, fish.boundingBox.expand(8.0, 8.0, 8.0), predicate)
             val schoolingFishEntity =
-                DataFixUtils.orElse(
-                    list.stream().filter { obj: HybridAquaticSchoolingFishEntity? -> obj!!.canHaveMoreFishInGroup() }
-                        .findAny(), fish)
+                DataFixUtils.orElse(list.stream().filter { obj: HybridAquaticSchoolingFishEntity? -> obj!!.canHaveMoreFishInGroup() }
+                    .findAny(), fish)
             schoolingFishEntity!!.pullInOtherFish(
                 list.stream().filter { fish: HybridAquaticSchoolingFishEntity? -> !fish!!.hasLeader() })
             fish.hasLeader()
         }
     }
 
-    override fun canContinueToUse(): Boolean {
+    override fun shouldContinue(): Boolean {
         return fish.hasLeader() && fish.isCloseEnoughToLeader()
     }
 
@@ -55,7 +54,7 @@ class FishFollowGroupLeaderGoal(
 
     override fun tick() {
         if (--moveDelay <= 0) {
-            moveDelay = adjustedTickDelay(10)
+            moveDelay = getTickCount(10)
             fish.moveTowardLeader()
         }
     }

@@ -23,6 +23,10 @@
     {
       "id": "regions_unexplored:prismachasm",
       "required": false
+    },
+    {
+      "id": "alexscaves:abyssal_chasm",
+      "required": false
     }
   ]
 }

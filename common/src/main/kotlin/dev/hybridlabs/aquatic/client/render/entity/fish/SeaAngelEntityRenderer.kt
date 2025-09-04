@@ -1,10 +1,8 @@
 package dev.hybridlabs.aquatic.client.render.entity.fish
 
 import dev.hybridlabs.aquatic.client.model.entity.fish.SeaAngelEntityModel
-import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
-import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
+import dev.hybridlabs.aquatic.entity.fish.SeaAngelEntity
+import net.minecraft.client.render.entity.EntityRendererFactory.Context
 
-class SeaAngelEntityRenderer(context: Context) : HybridAquaticFishEntityRenderer<HybridAquaticFishEntity>(
-    context,
-    SeaAngelEntityModel(), true, true
-)
+class SeaAngelEntityRenderer(context: Context) :
+    HybridAquaticFishEntityRenderer<SeaAngelEntity>(context, SeaAngelEntityModel(), true, true)

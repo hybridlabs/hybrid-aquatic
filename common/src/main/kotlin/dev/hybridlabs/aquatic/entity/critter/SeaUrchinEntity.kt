@@ -1,100 +1,99 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import net.minecraft.core.BlockPos
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.server.level.ServerPlayer
-import net.minecraft.tags.BiomeTags
-import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier
-import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.player.Player
-import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Blocks
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
+import net.minecraft.block.Blocks
+import net.minecraft.entity.*
+import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.function.ValueLists
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
+import net.minecraft.world.World
+import java.util.function.IntFunction
+import kotlin.random.Random
 
-class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level) :
-    HybridAquaticCritterEntity(
-        entityType, world, variants = hashMapOf(
-            "black" to CritterVariant.biomeVariant(
-                "black", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "blue" to CritterVariant.biomeVariant(
-                "blue", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "purple" to CritterVariant.biomeVariant(
-                "purple", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "red" to CritterVariant.biomeVariant(
-                "red", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "long_black" to CritterVariant.biomeVariant(
-                "long_black", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "long_blue" to CritterVariant.biomeVariant(
-                "long_blue", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "long_purple" to CritterVariant.biomeVariant(
-                "long_purple", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-            "long_red" to CritterVariant.biomeVariant(
-                "long_red", listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN),
-                ignore = listOf(CritterVariant.Ignore.MODEL, CritterVariant.Ignore.ANIMATION)
-            ),
-        )
-    ) {
-
-    public override fun getDefaultLootTable(): ResourceLocation {
-        return ResourceLocation("hybrid-aquatic", "entities/sea_urchin")
-    }
+@Suppress("DEPRECATION")
+class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: World) :
+    HybridAquaticCritterEntity(entityType, world),
+    VariantHolder<SeaUrchinEntity.Companion.Type> {
 
     private var timeUntilNextBreak = 0
     private var spawnUrchinOnNextBreak = false
 
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        variant = Type.entries.random(Random)
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
     companion object {
-        fun createMobAttributes(): AttributeSupplier.Builder {
+        fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 2.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.1)
-                .add(Attributes.ATTACK_DAMAGE, 2.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 2.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 2.0)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
+        }
+        val TYPE: TrackedData<Int> = DataTracker.registerData(SeaUrchinEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            SMALL(0, "small"),
+            LARGE(1, "large");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, SMALL) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
         }
     }
 
-    override fun playerTouch(player: Player) {
-        super.playerTouch(player)
+    override fun onPlayerCollision(player: PlayerEntity) {
+        super.onPlayerCollision(player)
 
-        if (player is ServerPlayer) {
-            player.hurt(this.damageSources().mobAttack(this), 0.5f)
+        if (player is ServerPlayerEntity) {
+            player.damage(this.damageSources.mobAttack(this), 0.5f)
         }
     }
 
-    override fun <E : GeoAnimatable> predicate(event: AnimationState<E>): PlayState {
-        if (isUnderWater) {
-            event.controller.setAnimation(WALK_ANIMATION)
-        }
-        return PlayState.CONTINUE
-    }
+    override fun damage(source: DamageSource?, amount: Float): Boolean {
+        if (super.damage(source, amount)) {
 
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
-        if (super.hurt(source, amount)) {
-
-            val attacker = source.directEntity
-            if (attacker is LivingEntity && attacker.mainHandItem.isEmpty) {
-                attacker.hurt(this.damageSources().thorns(this), 2.0f)
+            val attacker = source?.attacker
+            if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
+                attacker.damage(this.damageSources.thorns(this), 2.0f)
             }
 
             return true
@@ -106,7 +105,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
     override fun tick() {
         super.tick()
 
-        if (level().isClientSide) {
+        if (world.isClient) {
             return
         }
 
@@ -115,20 +114,20 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
             return
         }
 
-        if (level().random.nextInt(6000) < 300) {
+        if (world.random.nextInt(6000) < 300) {
             breakKelpUnderneath()
-            timeUntilNextBreak = 2400 + level().random.nextInt(1200)
+            timeUntilNextBreak = 2400 + world.random.nextInt(1200)
         }
     }
 
     private fun breakKelpUnderneath() {
         val posUnderneath = BlockPos(this.x.toInt(), (this.y + 1).toInt(), this.z.toInt())
-        if (level().getBlockState(posUnderneath).`is`(Blocks.KELP_PLANT)) {
-            level().setBlockAndUpdate(posUnderneath, Blocks.AIR.defaultBlockState())
+        if (world.getBlockState(posUnderneath).isIn(HybridAquaticBlockTags.URCHIN_BREAKABLES)) {
+            world.setBlockState(posUnderneath, Blocks.AIR.defaultState)
             if (spawnUrchinOnNextBreak) {
-                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.get().create(level())
-                newUrchin?.moveTo(this.x, this.y, this.z, this.yRot, 0.0f)
-                level().addFreshEntity(newUrchin)
+                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.create(world)
+                newUrchin?.refreshPositionAndAngles(this.x, this.y, this.z, this.yaw, 0.0f)
+                world.spawnEntity(newUrchin)
                 spawnUrchinOnNextBreak = false
             } else {
                 spawnUrchinOnNextBreak = true
@@ -142,5 +141,28 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
 
     override fun getMinSize(): Int {
         return -5
+    }
+
+    override fun initDataTracker() {
+        dataTracker.startTracking(TYPE, 0)
+        super.initDataTracker()
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        nbt.putString("Type", this.variant.asString())
+        super.writeCustomDataToNbt(nbt)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        this.variant = Type.byName(nbt.getString("Type"))
+        super.readCustomDataFromNbt(nbt)
+    }
+
+    override fun getVariant(): Type {
+        return Type.fromId((dataTracker.get(TYPE) as Int))
+    }
+
+    override fun setVariant(type: Type) {
+        dataTracker.set(TYPE, type.id)
     }
 }

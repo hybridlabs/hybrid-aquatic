@@ -9,8 +9,66 @@
     "hybrid-aquatic:sea_bass",
     "hybrid-aquatic:lionfish",
     "hybrid-aquatic:parrotfish",
+    "hybrid-aquatic:sheepshead_wrasse",
     "hybrid-aquatic:moray_eel",
     "hybrid-aquatic:john_dory",
-    "hybrid-aquatic:lantern_shark"
+    "hybrid-aquatic:lantern_shark",
+    "hybrid-aquatic:hound_shark",
+    {
+      "id": "alexsmobs:blobfish",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:catfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:tripodfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:chimaera",
+      "required": false
+    },
+    {
+      "id": "seafarer:marine_iguana",
+      "required": false
+    },
+    {
+      "id": "naturalist:bass",
+      "required": false
+    },
+    {
+      "id": "naturalist:catfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:hogfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:parrotfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:ray",
+      "required": false
+    },
+    {
+      "id": "aquaculture:carp",
+      "required": false
+    },
+    {
+      "id": "aquaculture:catfish",
+      "required": false
+    },
+    {
+      "id": "aquaculture:bayad",
+      "required": false
+    },
+    {
+      "id": "aquaculture:blackfish",
+      "required": false
+    }
   ]
 }

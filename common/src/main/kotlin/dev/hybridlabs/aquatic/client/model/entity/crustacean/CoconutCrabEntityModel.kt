@@ -1,5 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
+import dev.hybridlabs.aquatic.entity.crustacean.CoconutCrabEntity
 
-class CoconutCrabEntityModel : HybridAquaticCrustaceanEntityModel<HybridAquaticCrustaceanEntity>("coconut_crab")
+class CoconutCrabEntityModel : HybridAquaticCrustaceanEntityModel<CoconutCrabEntity>("coconut_crab")

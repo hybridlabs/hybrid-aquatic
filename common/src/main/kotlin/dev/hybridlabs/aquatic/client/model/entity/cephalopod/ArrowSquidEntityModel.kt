@@ -1,5 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.ArrowSquidEntity
 
-class ArrowSquidEntityModel : HybridAquaticCephalopodEntityModel<HybridAquaticCephalopodEntity>("arrow_squid")
+class ArrowSquidEntityModel : HybridAquaticCephalopodEntityModel<ArrowSquidEntity>("arrow_squid")

@@ -5,29 +5,17 @@ import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
-import net.minecraft.core.HolderLookup
-import net.minecraft.resources.ResourceKey
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryWrapper
+import net.minecraft.util.Identifier
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
-class SeaMessageProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
-    FabricDynamicRegistryProvider(output, registriesFuture) {
-    override fun configure(registries: HolderLookup.Provider, entries: Entries) {
+class SeaMessageProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricDynamicRegistryProvider(output, registriesFuture) {
+    override fun configure(registries: RegistryWrapper.WrapperLookup, entries: Entries) {
         BUILT_IN.forEach { message ->
-            val key = ResourceKey<SeaMessage>.create<SeaMessage>(
-                HybridAquaticRegistryKeys.SEA_MESSAGE,
-                ResourceLocation(HybridAquatic.MOD_ID, message.id)
-            )
-            entries.add(
-                key,
-                SeaMessage(
-                    message.translationKey,
-                    message.englishTitle != null,
-                    message.infinite,
-                    Optional.ofNullable(message.author)
-                )
-            )
+            val key = RegistryKey.of(HybridAquaticRegistryKeys.SEA_MESSAGE, Identifier(HybridAquatic.MOD_ID, message.id))
+            entries.add(key, SeaMessage(message.translationKey, message.englishTitle != null, message.infinite, Optional.ofNullable(message.author)))
         }
     }
 
@@ -40,84 +28,29 @@ class SeaMessageProvider(output: FabricDataOutput, registriesFuture: Completable
          * The built-in Hybrid Aquatic sea messages.
          */
         val BUILT_IN: Set<GeneratedSeaMessageData> = setOf(
-            GeneratedSeaMessageData(
-                "the_creepers_code",
-                "The creepers have a code...",
-                englishTitle = "The Creeper's Code"
-            ),
+            GeneratedSeaMessageData("the_creepers_code", "The creepers have a code...", englishTitle = "The Creeper's Code"),
             GeneratedSeaMessageData("poyo", "I hate litterbugs.", "Poyo"),
-            GeneratedSeaMessageData(
-                "rick_roll",
-                "Never gonna give you up!\nNever gonna let you down!\nNever gonna run around and desert you!"
-            ),
-            GeneratedSeaMessageData("bold_muddy", "AW MAN I DROWNED!", "Bold Muddy"),
-            GeneratedSeaMessageData(
-                "catpenjoe",
-                "If you wanna get a catgirl, you first have to become a catboy.",
-                "Kaupenjoe"
-            ),
+            GeneratedSeaMessageData("rick_roll", "Never gonna give you up!\nNever gonna let you down!\nNever gonna run around and desert you!"),
+            GeneratedSeaMessageData("catpenjoe", "If you wanna get a catgirl, you first have to become a catboy.", "Kaupenjoe"),
             GeneratedSeaMessageData("willowshine", "Beware the fish girl", "Willowshine"),
             GeneratedSeaMessageData("loss", "| ||\n|| |_"),
-            GeneratedSeaMessageData(
-                "threats",
-                "Try to counter unanticipated threats by anticipating them",
-                "DaDolphin",
-                englishTitle = "Seamoth"
-            ),
-            GeneratedSeaMessageData(
-                "warranty",
-                "We've been trying to reach you about your car's extended warranty.",
-                englishTitle = "IMPORTANT: PLEASE READ"
-            ),
+            GeneratedSeaMessageData("threats", "Try to counter unanticipated threats by anticipating them", "DaDolphin", englishTitle = "Seamoth"),
+            GeneratedSeaMessageData("warranty", "We've been trying to reach you about your car's extended warranty.", englishTitle = "IMPORTANT: PLEASE READ"),
             GeneratedSeaMessageData("poke", "I like cheese", "Poke", englishTitle = "Cheese"),
+            GeneratedSeaMessageData("gerson", "Im old!", "Gerson Boom", englishTitle = "Hammer Of Justicec"),
             GeneratedSeaMessageData("one_piece", "THE ONE PIECE IS REAL", "Poke", englishTitle = "One Piece"),
-            GeneratedSeaMessageData(
-                "mylo",
-                "Mylo, you are the best friend I could have ever hoped to have. \nRest in peace, my sweet prince. I hope you have sweet dreams and find the peace you deserve.",
-                "MysticKoko",
-                englishTitle = "The Best Boy"
-            ),
+            GeneratedSeaMessageData("mylo", "Mylo, you are the best friend I could have ever hoped to have. \nRest in peace, my sweet prince. I hope you have sweet dreams and find the peace you deserve.", "MysticKoko", englishTitle = "The Best Boy"),
             GeneratedSeaMessageData("womp_womp", "womp womp", "MrPress", englishTitle = "Catchphrase"),
-            GeneratedSeaMessageData(
-                "crocodile",
-                "It's always the crocodile you don't see you have to worry about.",
-                "Jeremy Wade",
-                englishTitle = "The Unseen Crocodile"
-            ),
-            GeneratedSeaMessageData(
-                "bad_luck",
-                "According to the Luck and Probability department it’s statistically bad luck to wish people good luck during a crisis.",
-                "Agent Estevez",
-                englishTitle = "Important Notice: FBC"
-            ),
-            GeneratedSeaMessageData(
-                "cryptic_gun_message",
-                "< You/We wield the Gun/You >",
-                "The Board",
-                englishTitle = "Hotline"
-            ),
+            GeneratedSeaMessageData("crocodile", "It's always the crocodile you don't see you have to worry about.", "Jeremy Wade", englishTitle = "The Unseen Crocodile"),
+            GeneratedSeaMessageData("bad_luck", "According to the Luck and Probability department it’s statistically bad luck to wish people good luck during a crisis.", "Agent Estevez", englishTitle = "Important Notice: FBC"),
+            GeneratedSeaMessageData("cryptic_gun_message", "< You/We wield the Gun/You >", "The Board", englishTitle = "Hotline"),
             GeneratedSeaMessageData("boo", "Boo"),
-            GeneratedSeaMessageData(
-                "yashaa",
-                "Why are you crying on a nice day like today? I mean, it's even snowing...",
-                "Yashaa",
-                englishTitle = "Cepriestess"
-            ),
-            GeneratedSeaMessageData(
-                "river_to_sea",
-                "From the river to the sea, Palestine will be free!",
-                englishTitle = "River To Sea"
-            ),
+            GeneratedSeaMessageData("yashaa", "Why are you crying on a nice day like today? I mean, it's even snowing...", "Yashaa", englishTitle = "Cepriestess"),
+            GeneratedSeaMessageData("river_to_sea", "From the river to the sea, Palestine will be free!", englishTitle = "River To Sea"),
             GeneratedSeaMessageData("free_palestine", "#FreePalestine", englishTitle = "Freedom"),
             GeneratedSeaMessageData("free_gaza", "#FreeGaza", englishTitle = "Freedom"),
-            GeneratedSeaMessageData(
-                "control_oop",
-                "Objects of Power shape reality around us. Handle with care.",
-                author = "FBC",
-                englishTitle = "Object of Power: Sea Message"
-            ),
-            GeneratedSeaMessageData(
-                "dylan", """
+            GeneratedSeaMessageData("control_oop", "Objects of Power shape reality around us. Handle with care.", author = "FBC", englishTitle = "Object of Power: Sea Message"),
+            GeneratedSeaMessageData("dylan", """
                 You are a worm through time.
                 The thunder song distorts you.
                 Happiness comes.
@@ -165,8 +98,7 @@ class SeaMessageProvider(output: FabricDataOutput, registriesFuture: Completable
                 You want to smile.
                 You want to hurt.
                 You don’t want to be.
-            """.trimIndent(), "Prime Candidate 6", infinite = true
-            ),
+            """.trimIndent(), "Prime Candidate 6", infinite = true),
         )
     }
 }

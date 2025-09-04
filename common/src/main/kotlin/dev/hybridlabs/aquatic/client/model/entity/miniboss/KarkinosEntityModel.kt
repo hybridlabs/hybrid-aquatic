@@ -1,5 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.miniboss
 
-import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
+import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 
-class KarkinosEntityModel : HybridAquaticMinibossEntityModel<HybridAquaticMinibossEntity>("karkinos")
+class KarkinosEntityModel : HybridAquaticMinibossEntityModel<KarkinosEntity>("karkinos")

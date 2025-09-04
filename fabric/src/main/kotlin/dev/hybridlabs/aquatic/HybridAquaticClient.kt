@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package dev.hybridlabs.aquatic
 
 import com.mojang.brigadier.CommandDispatcher
@@ -9,16 +11,9 @@ import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
 import dev.hybridlabs.aquatic.client.render.armor.*
-import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.BuoyBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
-import dev.hybridlabs.aquatic.client.render.features.PlayerItemPorcupineFeature
-import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.BuoyBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.*
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
@@ -26,20 +21,15 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
-import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback
-import net.minecraft.client.Minecraft
-import net.minecraft.client.model.HumanoidModel
-import net.minecraft.client.model.PlayerModel
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
-import net.minecraft.client.renderer.entity.LivingEntityRenderer
-import net.minecraft.client.renderer.entity.player.PlayerRenderer
-import net.minecraft.commands.CommandBuildContext
-import net.minecraft.world.entity.EquipmentSlot
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.ItemStack
+import net.minecraft.client.MinecraftClient
+import net.minecraft.client.render.RenderLayer
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
+import net.minecraft.client.render.entity.model.BipedEntityModel
+import net.minecraft.command.CommandRegistryAccess
+import net.minecraft.entity.EquipmentSlot
+import net.minecraft.entity.LivingEntity
+import net.minecraft.item.ItemStack
 import software.bernie.geckolib.animatable.client.RenderProvider
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 
@@ -48,26 +38,15 @@ object HybridAquaticClient : ClientModInitializer {
         HybridAquaticEntityModelLayers
         HybridAquaticClientNetworking
 
-        registerBlockRenderTypes()
+        registerBlockRenderLayers()
         registerBlockEntityRenderers()
         registerBuiltinItemRenderers()
         registerEntityRenderers()
         registerWeatherRenderers()
         registerTooltips()
         registerGeoRenderers()
-        registerEntityFeatures()
 
         ClientCommandRegistrationCallback.EVENT.register(::registerCommands)
-    }
-
-    private fun registerEntityFeatures() {
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register { type, entityRenderer, registrationHelper, context ->
-            if (entityRenderer is PlayerRenderer) {
-
-                @Suppress("UNCHECKED_CAST")
-                registrationHelper.register(PlayerItemPorcupineFeature(entityRenderer as LivingEntityRenderer<Player, PlayerModel<Player>>?))
-            }
-        }
     }
 
     private fun registerGeoRenderers() {
@@ -76,8 +55,7 @@ object HybridAquaticClient : ClientModInitializer {
         GeoRenderProviderStorage.manglerfishArmorRenderProvider = createBasicRenderProvider(::ManglerfishArmorRenderer)
         GeoRenderProviderStorage.turtleArmorRenderProvider = createBasicRenderProvider(::TurtleArmorRenderer)
         GeoRenderProviderStorage.eelArmorRenderProvider = createBasicRenderProvider(::EelArmorRenderer)
-        GeoRenderProviderStorage.moonjellyfishArmorRenderProvider =
-            createBasicRenderProvider(::MoonJellyfishArmorRenderer)
+        GeoRenderProviderStorage.moonjellyfishArmorRenderProvider = createBasicRenderProvider(::MoonJellyfishArmorRenderer)
     }
 
     private fun createBasicRenderProvider(rendererProvider: () -> GeoArmorRenderer<*>): () -> RenderProvider {
@@ -89,10 +67,10 @@ object HybridAquaticClient : ClientModInitializer {
                     livingEntity: LivingEntity,
                     itemStack: ItemStack,
                     equipmentSlot: EquipmentSlot,
-                    original: HumanoidModel<LivingEntity>
-                ): HumanoidModel<LivingEntity> {
+                    original: BipedEntityModel<LivingEntity>
+                ): BipedEntityModel<LivingEntity> {
                     renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original)
-                    return renderer as HumanoidModel<LivingEntity>
+                    return renderer
                 }
             }
         }
@@ -106,80 +84,79 @@ object HybridAquaticClient : ClientModInitializer {
         ItemTooltipCallback.EVENT.register(FishingNetTooltip())
     }
 
-    private fun registerBlockRenderTypes(registry: BlockRenderLayerMap = BlockRenderLayerMap.INSTANCE) {
+    private fun registerBlockRenderLayers(registry: BlockRenderLayerMap = BlockRenderLayerMap.INSTANCE) {
         registry.putBlocks(
-            RenderType.translucent(),
-            HybridAquaticBlocks.ANEMONE.get(),
-            HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(),
-            HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get(),
+            RenderLayer.getTranslucent(),
+            HybridAquaticBlocks.ANEMONE,
+            HybridAquaticBlocks.GIANT_GREEN_ANEMONE,
+            HybridAquaticBlocks.STRAWBERRY_ANEMONE,
+            HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE,
         )
         registry.putBlocks(
-            RenderType.cutout(),
-            HybridAquaticBlocks.RED_ALGAE.get(),
-            HybridAquaticBlocks.TALL_RED_ALGAE.get(),
+            RenderLayer.getCutout(),
+            HybridAquaticBlocks.RED_ALGAE,
+            HybridAquaticBlocks.TALL_RED_ALGAE,
 
-            HybridAquaticBlocks.SARGASSUM.get(),
-            HybridAquaticBlocks.SARGASSUM_PLANT.get(),
-            HybridAquaticBlocks.FLOATING_SARGASSUM.get(),
+            HybridAquaticBlocks.BULL_KELP,
+            HybridAquaticBlocks.BULL_KELP_PLANT,
 
-            HybridAquaticBlocks.WATER_LETTUCE.get(),
-            HybridAquaticBlocks.JUNGLE_LILY_PAD.get(),
+            HybridAquaticBlocks.SARGASSUM,
+            HybridAquaticBlocks.SARGASSUM_PLANT,
+            HybridAquaticBlocks.FLOATING_SARGASSUM,
 
-            HybridAquaticBlocks.GLOWING_PLANKTON.get(),
+            HybridAquaticBlocks.WATER_LETTUCE,
+            HybridAquaticBlocks.JUNGLE_LILY_PAD,
 
-            HybridAquaticBlocks.SEA_LETTUCE.get(),
-            HybridAquaticBlocks.TALL_SEA_LETTUCE.get(),
+            HybridAquaticBlocks.GLOWING_PLANKTON,
 
-            HybridAquaticBlocks.CRAB_POT.get(),
-            HybridAquaticBlocks.GIANT_CLAM.get(),
-            HybridAquaticBlocks.TUBE_WORM.get(),
+            HybridAquaticBlocks.SEA_LETTUCE,
+            HybridAquaticBlocks.TALL_SEA_LETTUCE,
 
-            HybridAquaticBlocks.LOPHELIA_CORAL.get(),
-            HybridAquaticBlocks.LOPHELIA_CORAL_FAN.get(),
-            HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL.get(),
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.CRAB_POT,
+            HybridAquaticBlocks.GIANT_CLAM,
+            HybridAquaticBlocks.TUBE_WORM,
 
-            HybridAquaticBlocks.SUN_CORAL.get(),
-            HybridAquaticBlocks.SUN_CORAL_FAN.get(),
-            HybridAquaticBlocks.SUN_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.DEAD_SUN_CORAL.get(),
-            HybridAquaticBlocks.DEAD_SUN_CORAL_FAN.get(),
-            HybridAquaticBlocks.DEAD_SUN_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.LOPHELIA_CORAL,
+            HybridAquaticBlocks.LOPHELIA_CORAL_FAN,
+            HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN,
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL,
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN,
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN,
 
-            HybridAquaticBlocks.BUTTON_CORAL.get(),
-            HybridAquaticBlocks.BUTTON_CORAL_FAN.get(),
-            HybridAquaticBlocks.BUTTON_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL.get(),
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL_FAN.get(),
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.SUN_CORAL,
+            HybridAquaticBlocks.SUN_CORAL_FAN,
+            HybridAquaticBlocks.SUN_CORAL_WALL_FAN,
+            HybridAquaticBlocks.DEAD_SUN_CORAL,
+            HybridAquaticBlocks.DEAD_SUN_CORAL_FAN,
+            HybridAquaticBlocks.DEAD_SUN_CORAL_WALL_FAN,
 
-            HybridAquaticBlocks.THORN_CORAL.get(),
-            HybridAquaticBlocks.THORN_CORAL_FAN.get(),
-            HybridAquaticBlocks.THORN_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.DEAD_THORN_CORAL.get(),
-            HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get(),
-            HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.BUTTON_CORAL,
+            HybridAquaticBlocks.BUTTON_CORAL_FAN,
+            HybridAquaticBlocks.BUTTON_CORAL_WALL_FAN,
+            HybridAquaticBlocks.DEAD_BUTTON_CORAL,
+            HybridAquaticBlocks.DEAD_BUTTON_CORAL_FAN,
+            HybridAquaticBlocks.DEAD_BUTTON_CORAL_WALL_FAN,
 
-            HybridAquaticBlocks.DRIFTWOOD_DOOR.get(),
-            HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR.get(),
-            HybridAquaticBlocks.GLOWSTICK.get(),
-            HybridAquaticBlocks.WALL_GLOWSTICK.get(),
+            HybridAquaticBlocks.THORN_CORAL,
+            HybridAquaticBlocks.THORN_CORAL_FAN,
+            HybridAquaticBlocks.THORN_CORAL_WALL_FAN,
+            HybridAquaticBlocks.DEAD_THORN_CORAL,
+            HybridAquaticBlocks.DEAD_THORN_CORAL_FAN,
+            HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN,
+
+            HybridAquaticBlocks.DRIFTWOOD_DOOR,
+            HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR,
+            HybridAquaticBlocks.GLOWSTICK,
+            HybridAquaticBlocks.WALL_GLOWSTICK,
         )
     }
 
     private fun registerBlockEntityRenderers() {
-        BlockEntityRenderers.register(HybridAquaticBlockEntityTypes.ANEMONE.get(), ::AnemoneBlockEntityRenderer)
-        BlockEntityRenderers.register(
-            HybridAquaticBlockEntityTypes.STRAWBERRY_ANEMONE.get(),
-            ::StrawberryAnemoneBlockEntityRenderer
-        )
-        BlockEntityRenderers.register(
-            HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE.get(),
-            ::MessageInABottleBlockEntityRenderer
-        )
-        BlockEntityRenderers.register(HybridAquaticBlockEntityTypes.BUOY.get(), ::BuoyBlockEntityRenderer)
+        BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.ANEMONE, ::AnemoneBlockEntityRenderer)
+        BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.GIANT_GREEN_ANEMONE, ::GiantGreenAnemoneBlockEntityRenderer)
+        BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.STRAWBERRY_ANEMONE, ::StrawberryAnemoneBlockEntityRenderer)
+        BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE, ::MessageInABottleBlockEntityRenderer)
+        BlockEntityRendererFactories.register(HybridAquaticBlockEntityTypes.BUOY, ::BuoyBlockEntityRenderer)
     }
 
     private fun registerEntityRenderers() {
@@ -187,28 +164,26 @@ object HybridAquaticClient : ClientModInitializer {
     }
 
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
-        registry.register(HybridAquaticItems.ANEMONE.get(), AnemoneBlockItemRenderer())
-        registry.register(HybridAquaticItems.STRAWBERRY_ANEMONE.get(), StrawberryAnemoneBlockItemRenderer())
-        registry.register(HybridAquaticItems.BUOY.get(), BuoyBlockItemRenderer())
-        registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleBlockItemRenderer())
+        registry.register(HybridAquaticItems.ANEMONE, AnemoneBlockItemRenderer())
+        registry.register(HybridAquaticItems.GIANT_GREEN_ANEMONE, GiantGreenAnemoneBlockItemRenderer())
+        registry.register(HybridAquaticItems.STRAWBERRY_ANEMONE, StrawberryAnemoneBlockItemRenderer())
+        registry.register(HybridAquaticItems.BUOY, BuoyBlockItemRenderer())
+        registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE, MessageInABottleBlockItemRenderer())
     }
 
-    fun createBlocEntityRendererProviderContext(): BlockEntityRendererProvider.Context {
-        val client = Minecraft.getInstance()
-        return BlockEntityRendererProvider.Context(
+    fun createBlockEntityRendererFactoryContext(): BlockEntityRendererFactory.Context {
+        val client = MinecraftClient.getInstance()
+        return BlockEntityRendererFactory.Context(
             client.blockEntityRenderDispatcher,
-            client.blockRenderer,
+            client.blockRenderManager,
             client.itemRenderer,
             client.entityRenderDispatcher,
-            client.entityModels,
-            client.font
+            client.entityModelLoader,
+            client.textRenderer
         )
     }
 
-    private fun registerCommands(
-        dispatcher: CommandDispatcher<FabricClientCommandSource>,
-        access: CommandBuildContext
-    ) {
+    private fun registerCommands(dispatcher: CommandDispatcher<FabricClientCommandSource>, access: CommandRegistryAccess) {
         RandomFishCommand.register(dispatcher)
     }
 }

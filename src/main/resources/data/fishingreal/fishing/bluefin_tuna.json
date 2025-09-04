@@ -1,0 +1,8 @@
+{
+  "input": {
+    "item": "hybrid-aquatic:bluefin_tuna"
+  },
+  "result": {
+    "id": "hybrid-aquatic:tuna"
+  }
+}

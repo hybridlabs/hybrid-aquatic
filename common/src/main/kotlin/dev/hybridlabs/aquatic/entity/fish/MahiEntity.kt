@@ -1,26 +1,30 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.goal.FishJumpGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.entity.ai.goal.FishJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier
-import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.level.Level
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.VariantHolder
+import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.function.ValueLists
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
+import net.minecraft.world.World
+import java.util.function.IntFunction
+import kotlin.random.Random
 
-class MahiEntity(entityType: EntityType<out MahiEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world, variants = hashMapOf(
-            "mahi" to FishVariant.biomeVariant(
-                "mahi", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS),
-                ignore = listOf(FishVariant.Ignore.ANIMATION)
-            ),
-            "pompano" to FishVariant.biomeVariant(
-                "pompano", listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS),
-                ignore = listOf(FishVariant.Ignore.ANIMATION)
-            ),
-        ),
+@Suppress("DEPRECATION")
+class MahiEntity(entityType: EntityType<out MahiEntity>, world: World) :
+    HybridAquaticSchoolingFishEntity(
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.SMALL_PREY,
             HybridAquaticEntityTags.CEPHALOPOD
@@ -28,29 +32,90 @@ class MahiEntity(entityType: EntityType<out MahiEntity>, world: Level) :
         listOf(
             HybridAquaticEntityTags.SHARK
         )
-    ) {
+    ),
+    VariantHolder<MahiEntity.Companion.Type> {
 
-    public override fun getDefaultLootTable(): ResourceLocation {
-        return ResourceLocation("hybrid-aquatic", "entities/mahi")
+    override fun getLimitPerChunk(): Int {
+        return 4
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        variant = Type.entries.random(Random)
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun registerGoals() {
-        super.registerGoals()
-        goalSelector.addGoal(5, FishJumpGoal(this, 10))
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(5, FishJumpGoal(this, 10))
+        goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 12))
     }
 
     companion object {
-        fun createMobAttributes(): AttributeSupplier.Builder {
+        fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.7)
-                .add(Attributes.ATTACK_DAMAGE, 3.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 8.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.7)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
         }
+
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(MahiEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            MAHI(0, "mahi"),
+            POMPANO(1, "pompano");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, MAHI) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
+    }
+
+    override fun initDataTracker() {
+        dataTracker.startTracking(TYPE, 0)
+        super.initDataTracker()
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        nbt.putString("Type", this.variant.asString())
+        super.writeCustomDataToNbt(nbt)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        this.variant = Type.byName(nbt.getString("Type"))
+        super.readCustomDataFromNbt(nbt)
+    }
+
+    override fun getVariant(): Type {
+        return Type.fromId((dataTracker.get(TYPE) as Int))
+    }
+
+    override fun setVariant(type: Type) {
+        dataTracker.set(TYPE, type.id)
     }
 }

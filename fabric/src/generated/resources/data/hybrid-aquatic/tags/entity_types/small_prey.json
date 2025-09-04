@@ -18,12 +18,206 @@
     "hybrid-aquatic:damselfish",
     "hybrid-aquatic:gourami",
     "hybrid-aquatic:cuttlefish",
-    "hybrid-aquatic:african_butterfly",
+    "hybrid-aquatic:african_butterflyfish",
     "hybrid-aquatic:flying_fish",
     "hybrid-aquatic:squirrelfish",
     "hybrid-aquatic:stonefish",
+    "hybrid-aquatic:anglerfish",
+    "hybrid-aquatic:carp",
     "minecraft:salmon",
     "minecraft:cod",
-    "minecraft:tropical_fish"
+    "minecraft:tropical_fish",
+    {
+      "id": "alexsmobs:flying_fish",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:devils_hole_pupfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:barreleye",
+      "required": false
+    },
+    {
+      "id": "seafarer:garden_eel",
+      "required": false
+    },
+    {
+      "id": "seafarer:mandarin_goby",
+      "required": false
+    },
+    {
+      "id": "seafarer:frogfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:blue_tang",
+      "required": false
+    },
+    {
+      "id": "seafarer:copperband_butterflyfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:filefish",
+      "required": false
+    },
+    {
+      "id": "seafarer:leafy_scorpionfish",
+      "required": false
+    },
+    {
+      "id": "seafarer:squirrelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:basslet",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:boxfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:butterfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:clownfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:dwarf_angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:goby",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:moorish_idol",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:pipefish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:tang",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:flounder",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:angelfish",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:neon_tetra",
+      "required": false
+    },
+    {
+      "id": "spawn:anglerfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:ancientscale",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:battlegill",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:devilfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:islehopper",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:plentifin",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:pondie",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:splashtail",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:stormfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:wildsplash",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:wrecker",
+      "required": false
+    },
+    {
+      "id": "crittersandcompanions:koi_fish",
+      "required": false
+    },
+    {
+      "id": "aquaculture:atlantic_herring",
+      "required": false
+    },
+    {
+      "id": "aquaculture:boulti",
+      "required": false
+    },
+    {
+      "id": "aquaculture:synodontis",
+      "required": false
+    },
+    {
+      "id": "aquaculture:smallmouth_bass",
+      "required": false
+    },
+    {
+      "id": "aquaculture:bluegill",
+      "required": false
+    },
+    {
+      "id": "aquaculture:minnow",
+      "required": false
+    },
+    {
+      "id": "aquaculture:perch",
+      "required": false
+    },
+    {
+      "id": "aquaculture:piranha",
+      "required": false
+    },
+    {
+      "id": "aquaculture:brown_shrooma",
+      "required": false
+    },
+    {
+      "id": "aquaculture:red_shrooma",
+      "required": false
+    },
+    {
+      "id": "aquaculture:pink_salmon",
+      "required": false
+    },
+    {
+      "id": "aquaculture:pollock",
+      "required": false
+    }
   ]
 }

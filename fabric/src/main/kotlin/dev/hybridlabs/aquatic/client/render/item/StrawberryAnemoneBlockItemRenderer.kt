@@ -11,9 +11,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 
-/**
- * Renders the Anemone block entity as an item.
- */
 class StrawberryAnemoneBlockItemRenderer : DynamicItemRenderer {
     private val strawberryAnemoneBlockEntity =
         StrawberryAnemoneBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.STRAWBERRY_ANEMONE.get().defaultBlockState())

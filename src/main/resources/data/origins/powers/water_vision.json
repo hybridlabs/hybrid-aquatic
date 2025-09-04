@@ -1,0 +1,35 @@
+{
+  "loading_priority": 1,
+  "type": "origins:multiple",
+  "night_vision": {
+    "type": "origins:toggle_night_vision",
+    "strength": 1.0,
+    "condition": {
+      "type": "origins:submerged_in",
+      "fluid": "minecraft:water"
+    },
+    "active_by_default": true,
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": false
+    }
+  },
+  "clarity": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:apply_effect",
+      "effect": {
+        "effect": "hybrid-aquatic:clarity",
+        "duration": 100,
+        "amplifier": 0,
+        "show_particles": false,
+        "show_icon": false
+      }
+    },
+    "condition": {
+      "type": "origins:submerged_in",
+      "fluid": "minecraft:water"
+    }
+  }
+}

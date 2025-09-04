@@ -1,117 +1,119 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.sounds.SoundEvents
-import net.minecraft.tags.BiomeTags
-import net.minecraft.world.InteractionHand
-import net.minecraft.world.InteractionResult
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier
-import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
-import net.minecraft.world.level.Level
-import net.minecraft.world.level.gameevent.GameEvent
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
+import net.minecraft.entity.EntityData
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.VariantHolder
+import net.minecraft.entity.attribute.DefaultAttributeContainer
+import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.data.DataTracker
+import net.minecraft.entity.data.TrackedData
+import net.minecraft.entity.data.TrackedDataHandlerRegistry
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.sound.SoundEvents
+import net.minecraft.util.ActionResult
+import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
+import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.function.ValueLists
+import net.minecraft.world.LocalDifficulty
+import net.minecraft.world.ServerWorldAccess
+import net.minecraft.world.World
+import net.minecraft.world.event.GameEvent
+import java.util.function.IntFunction
+import kotlin.random.Random
 
-class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(
-        entityType, world, false, variants = hashMapOf(
-            "brain" to CrustaceanVariant.biomeVariant(
-                "brain", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "fire" to CrustaceanVariant.biomeVariant(
-                "fire", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "bubble" to CrustaceanVariant.biomeVariant(
-                "bubble", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "horn" to CrustaceanVariant.biomeVariant(
-                "horn", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "tube" to CrustaceanVariant.biomeVariant(
-                "tube", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "sun" to CrustaceanVariant.biomeVariant(
-                "sun", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "button" to CrustaceanVariant.biomeVariant(
-                "button", HybridAquaticBiomeTags.REEF,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "lophelia" to CrustaceanVariant.biomeVariant(
-                "lophelia", BiomeTags.IS_DEEP_OCEAN,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            ),
-            "thorn" to CrustaceanVariant.biomeVariant(
-                "thorn", BiomeTags.IS_DEEP_OCEAN,
-                ignore = listOf(CrustaceanVariant.Ignore.MODEL, CrustaceanVariant.Ignore.ANIMATION)
-            )
-        )
-    ) {
+@Suppress("DEPRECATION")
+class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
+    HybridAquaticCrustaceanEntity(entityType, world, false),
+    VariantHolder<DecoratorCrabEntity.Companion.Type> {
 
-    override fun getDefaultLootTable(): ResourceLocation {
-        return ResourceLocation("hybrid-aquatic", "entities/decorator_crab")
+    override fun getLootTableId(): Identifier {
+        return Identifier("hybrid-aquatic", "entities/decorator_crab")
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(this, "With/Without", 0) { state ->
-            val animation = when {
-                coralTimer == 0 -> WITH_CORAL
-                else -> WITHOUT_CORAL
-            }
-            state.setAndContinue(animation)
-        })
-        super.registerControllers(controllerRegistrar)
-    }
+    var coralTimer: Int
+        get() = dataTracker.get(CORAL_TIMER)
+        set(value) = dataTracker.set(CORAL_TIMER, value)
 
-    private var coralTimer = 0
-
-    override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
-        val itemStack = player.getItemInHand(hand)
-        if (!itemStack.isEmpty && itemStack.`is`(Items.SHEARS) && coralTimer == 0) {
-            if (!level().isClientSide) {
+    override fun interactMob(player: PlayerEntity, hand: Hand): ActionResult {
+        val itemStack = player.getStackInHand(hand)
+        if (!itemStack.isEmpty && itemStack.isOf(Items.SHEARS) && coralTimer == 0) {
+            if (!world.isClient) {
                 this.coralTimer = 3600
-                this.playSound(SoundEvents.SHEEP_SHEAR, 1.0f, 1.0f)
-                this.gameEvent(GameEvent.SHEAR, player)
-                itemStack.hurtAndBreak(1, player) { it.broadcastBreakEvent(hand) }
-                spawnAtLocation(ItemStack(HybridAquaticItems.CORAL_CHUNK.get()))
-                return InteractionResult.SUCCESS
+                this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0f, 1.0f)
+                this.emitGameEvent(GameEvent.SHEAR, player)
+                itemStack.damage(1, player) { it.sendToolBreakStatus(hand) }
+                dropStack(ItemStack(HybridAquaticItems.CORAL_CHUNK))
+                return ActionResult.SUCCESS
             }
-            return InteractionResult.CONSUME
+            return ActionResult.CONSUME
         }
-        return super.mobInteract(player, hand)
+        return super.interactMob(player, hand)
     }
 
     override fun tick() {
         super.tick()
 
-        if (coralTimer > 0) coralTimer -= 1
+        if (coralTimer > 0) {
+            dataTracker.set(CORAL_TIMER, coralTimer - 1)
+        }
+    }
+
+    override fun initialize(
+        world: ServerWorldAccess,
+        difficulty: LocalDifficulty,
+        spawnReason: SpawnReason,
+        entityData: EntityData?,
+        entityNbt: NbtCompound?
+    ): EntityData? {
+        variant = Type.entries.random(Random)
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {
-        fun createMobAttributes(): AttributeSupplier.Builder {
+        fun createMobAttributes(): DefaultAttributeContainer.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.3)
-                .add(Attributes.ATTACK_DAMAGE, 2.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 4.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
         }
 
-        val WITH_CORAL: RawAnimation = RawAnimation.begin().thenPlay("misc.with_coral")
-        val WITHOUT_CORAL: RawAnimation = RawAnimation.begin().thenPlay("misc.without_coral")
+        val TYPE: TrackedData<Int> =
+            DataTracker.registerData(DecoratorCrabEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val CORAL_TIMER: TrackedData<Int> =
+            DataTracker.registerData(DecoratorCrabEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+
+        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+            CORAL(0, "coral");
+
+            override fun asString(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ValueLists.OutOfBoundsHandling.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byId(name, CORAL) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
     }
 
     override fun getMaxSize(): Int {
@@ -120,5 +122,31 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
 
     override fun getMinSize(): Int {
         return -5
+    }
+
+    override fun initDataTracker() {
+        dataTracker.startTracking(TYPE, 0)
+        dataTracker.startTracking(CORAL_TIMER, 0)
+        super.initDataTracker()
+    }
+
+    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+        nbt.putString("Type", this.variant.asString())
+        nbt.putInt("CoralTimer", coralTimer)
+        super.writeCustomDataToNbt(nbt)
+    }
+
+    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+        this.variant = Type.byName(nbt.getString("Type"))
+        this.coralTimer = nbt.getInt("CoralTimer")
+        super.readCustomDataFromNbt(nbt)
+    }
+
+    override fun getVariant(): Type {
+        return Type.fromId((dataTracker.get(TYPE) as Int))
+    }
+
+    override fun setVariant(type: Type) {
+        dataTracker.set(TYPE, type.id)
     }
 }

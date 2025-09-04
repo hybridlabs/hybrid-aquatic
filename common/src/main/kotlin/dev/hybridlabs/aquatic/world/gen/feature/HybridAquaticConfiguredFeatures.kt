@@ -11,8 +11,10 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
  */
 object HybridAquaticConfiguredFeatures {
     val ANEMONE_PATCH = register("anemone_patch")
+    val GREEN_ANEMONE_PATCH = register("green_anemone_patch")
     val SARGASSUM = register("sargassum")
     val FLOATING_SARGASSUM = register("floating_sargassum")
+    val BULL_KELP = register("bull_kelp")
     val GLOWING_PLANKTON = register("glowing_plankton")
 
     val WATER_LETTUCE = register("water_lettuce")

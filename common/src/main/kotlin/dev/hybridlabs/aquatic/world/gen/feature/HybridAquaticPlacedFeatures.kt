@@ -11,10 +11,11 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature
  */
 object HybridAquaticPlacedFeatures {
     val ANEMONE_PATCH = register("anemone_patch")
+    val GREEN_ANEMONE_PATCH = register("green_anemone_patch")
 
     val SARGASSUM = register("sargassum")
-    val SARGASSUM_FOREST = register("sargassum_forest")
     val FLOATING_SARGASSUM = register("floating_sargassum")
+    val BULL_KELP = register("bull_kelp")
 
     val WATER_LETTUCE = register("water_lettuce")
 
