@@ -1,8 +1,8 @@
-package dev.hybridlabs.aquatic.client.renderer.block.entity
+package dev.hybridlabs.aquatic.client.render.block.entity
 
 import dev.hybridlabs.aquatic.block.entity.GiantGreenAnemoneBlockEntity
 import dev.hybridlabs.aquatic.client.model.block.entity.GiantGreenAnemoneBlockEntityModel
-import net.minecraft.client.renderer.block.entity.Bloc.EntityRendererProvider.Context
+import net.minecraft.client.renderer.block.model.BlockModelDefinition
 import software.bernie.geckolib.renderer.GeoBlockRenderer
 
-class GiantGreenAnemoneBlockEntityRenderer(context: Context) : GeoBlockRenderer<GiantGreenAnemoneBlockEntity>(GiantGreenAnemoneBlockEntityModel())
+class GiantGreenAnemoneBlockEntityRenderer(context: BlockModelDefinition.Context) : GeoBlockRenderer<GiantGreenAnemoneBlockEntity>(GiantGreenAnemoneBlockEntityModel())

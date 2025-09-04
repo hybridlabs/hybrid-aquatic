@@ -1,17 +1,17 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.mammal
+package dev.hybridlabs.aquatic.client.render.entity.mammal
 
+import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
-import net.minecraft.client.util.math.PoseStack
 import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 
-open class HybridAquaticDolphinEntityRenderer<T: HybridAquaticDolphinEntity>(
-    context:.EntityRendererProvider.Context,
+open class HybridAquaticDolphinEntityRenderer<T : HybridAquaticDolphinEntity>(
+    context: EntityRendererProvider.Context,
     model: GeoModel<T>,
     private var variableSize: Boolean = false
-): GeoEntityRenderer<T>(context, model) {
+) : GeoEntityRenderer<T>(context, model) {
 
     override fun render(
         entity: T,

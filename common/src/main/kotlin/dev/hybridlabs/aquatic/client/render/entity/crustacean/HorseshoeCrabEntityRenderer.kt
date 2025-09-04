@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.crustacean
+package dev.hybridlabs.aquatic.client.render.entity.crustacean
 
 import dev.hybridlabs.aquatic.client.model.entity.crustacean.HorseshoeCrabEntityModel
 import dev.hybridlabs.aquatic.entity.crustacean.HorseshoeCrabEntity

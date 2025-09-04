@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.block.entity
+package dev.hybridlabs.aquatic.client.render.block.entity
 
 import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
 import dev.hybridlabs.aquatic.client.model.block.entity.BuoyBlockEntityModel
@@ -9,6 +9,6 @@ import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 class BuoyBlockEntityRenderer(context: BlockEntityRendererProvider.Context) :
     GeoBlockRenderer<BuoyBlockEntity>(BuoyBlockEntityModel()) {
     init {
-        addRenderType(AutoGlowingGeoLayer(this))
+        addRenderLayer(AutoGlowingGeoLayer(this))
     }
 }

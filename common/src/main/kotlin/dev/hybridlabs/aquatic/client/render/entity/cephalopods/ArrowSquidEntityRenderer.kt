@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.cephalopods
+package dev.hybridlabs.aquatic.client.render.entity.cephalopods
 
 import dev.hybridlabs.aquatic.client.model.entity.cephalopod.ArrowSquidEntityModel
 import dev.hybridlabs.aquatic.entity.cephalopod.ArrowSquidEntity

@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.critter
+package dev.hybridlabs.aquatic.client.render.entity.critter
 
 import dev.hybridlabs.aquatic.client.model.entity.critter.SeaSlugEntityModel
 import dev.hybridlabs.aquatic.entity.critter.SeaSlugEntity

@@ -1,11 +1,11 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.critter
+package dev.hybridlabs.aquatic.client.render.entity.critter
 
+import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.client.model.entity.critter.SeaUrchinEntityModel
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
-import net.minecraft.client.util.math.PoseStack
 
 class SeaUrchinEntityRenderer(context: Context) :
     HybridAquaticCritterEntityRenderer<SeaUrchinEntity>(context, SeaUrchinEntityModel(), true) {

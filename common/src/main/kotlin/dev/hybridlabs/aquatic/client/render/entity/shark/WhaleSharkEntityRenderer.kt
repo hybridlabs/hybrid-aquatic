@@ -1,7 +1,8 @@
 package dev.hybridlabs.aquatic.client.renderer.entity.shark
 
 import dev.hybridlabs.aquatic.client.model.entity.shark.WhaleSharkEntityModel
-import dev.hybridlabs.aquatic.client.renderer.entity.shark.layer.HybridAquaticSharkEntityLayer
+import dev.hybridlabs.aquatic.client.render.entity.shark.HybridAquaticSharkEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.shark.layer.HybridAquaticSharkEntityLayer
 import dev.hybridlabs.aquatic.entity.shark.WhaleSharkEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
@@ -9,6 +10,6 @@ class WhaleSharkEntityRenderer(context: Context) :
     HybridAquaticSharkEntityRenderer<WhaleSharkEntity>(context, WhaleSharkEntityModel(), true) {
 
     init {
-        addRenderType(HybridAquaticSharkEntityLayer(this))
+        addRenderLayer(HybridAquaticSharkEntityLayer(this))
     }
 }

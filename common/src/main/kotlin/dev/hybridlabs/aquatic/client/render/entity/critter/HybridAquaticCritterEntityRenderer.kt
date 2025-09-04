@@ -1,17 +1,18 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.critter
+package dev.hybridlabs.aquatic.client.render.entity.critter
 
+import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
-import net.minecraft.client.util.math.PoseStack
 import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 
 open class HybridAquaticCritterEntityRenderer<T : HybridAquaticCritterEntity>(
-    context:.EntityRendererProvider.Context,
+    context: EntityRendererProvider.Context,
     model: GeoModel<T>,
-    private var variableSize: Boolean = false,
+    private var variableSize: Boolean = false
 ) : GeoEntityRenderer<T>(context, model) {
+
     override fun getMotionAnimThreshold(animatable: T): Float {
         return 0.0025f
     }

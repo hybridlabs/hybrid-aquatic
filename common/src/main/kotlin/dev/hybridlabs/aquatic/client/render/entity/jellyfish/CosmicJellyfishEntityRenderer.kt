@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.jellyfish
+package dev.hybridlabs.aquatic.client.render.entity.jellyfish
 
 import dev.hybridlabs.aquatic.client.model.entity.jellyfish.CosmicJellyfishEntityModel
 import dev.hybridlabs.aquatic.entity.jellyfish.CosmicJellyfishEntity

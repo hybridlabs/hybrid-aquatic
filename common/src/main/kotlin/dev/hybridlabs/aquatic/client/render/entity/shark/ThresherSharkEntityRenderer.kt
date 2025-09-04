@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.shark
+package dev.hybridlabs.aquatic.client.render.entity.shark
 
 import dev.hybridlabs.aquatic.client.model.entity.shark.ThresherSharkEntityModel
 import dev.hybridlabs.aquatic.entity.shark.ThresherSharkEntity

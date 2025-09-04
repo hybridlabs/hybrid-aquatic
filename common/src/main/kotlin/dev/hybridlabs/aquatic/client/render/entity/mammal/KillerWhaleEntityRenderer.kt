@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.mammal
+package dev.hybridlabs.aquatic.client.render.entity.mammal
 
 import dev.hybridlabs.aquatic.client.model.entity.mammal.KillerWhaleEntityModel
 import dev.hybridlabs.aquatic.entity.mammal.KillerWhaleEntity

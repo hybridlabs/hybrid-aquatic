@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.fish
+package dev.hybridlabs.aquatic.client.render.entity.fish
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
@@ -17,7 +17,7 @@ open class HybridAquaticFishEntityRenderer<T : HybridAquaticFishEntity>(
 ) : GeoEntityRenderer<T>(context, model) {
 
     init {
-        if (canGlow) addRenderType(AutoGlowingGeoLayer(this))
+        if (canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
     }
 
     override fun getDeathMaxRotation(animatable: T): Float {

@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.crustacean
+package dev.hybridlabs.aquatic.client.render.entity.crustacean
 
 import dev.hybridlabs.aquatic.client.model.entity.crustacean.ShrimpEntityModel
 import dev.hybridlabs.aquatic.client.renderer.entity.crustacean.layer.HybridAquaticCrustaceanEntityLayer
@@ -9,6 +9,6 @@ class ShrimpEntityRenderer(context: Context) :
     HybridAquaticCrustaceanEntityRenderer<ShrimpEntity>(context, ShrimpEntityModel(), true, false) {
 
     init {
-        addRenderType(HybridAquaticCrustaceanEntityLayer(this))
+        addRenderLayer(HybridAquaticCrustaceanEntityLayer(this))
     }
 }

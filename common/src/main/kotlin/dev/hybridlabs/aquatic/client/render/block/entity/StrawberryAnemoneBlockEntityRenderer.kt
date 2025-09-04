@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.block.entity
+package dev.hybridlabs.aquatic.client.render.block.entity
 
 import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
 import dev.hybridlabs.aquatic.client.model.block.entity.StrawberryAnemoneBlockEntityModel

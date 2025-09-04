@@ -1,21 +1,21 @@
 package dev.hybridlabs.aquatic.client.renderer.entity.crustacean.layer
 
+import com.mojang.blaze3d.vertex.PoseStack
+import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.crustacean.HybridAquaticCrustaceanEntityModel
-import dev.hybridlabs.aquatic.client.renderer.entity.crustacean.HybridAquaticCrustaceanEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.crustacean.HybridAquaticCrustaceanEntityRenderer
 import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import net.minecraft.client.renderer.OverlayTexture
 import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.VertexConsumer
 import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.util.math.PoseStack
+import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.renderer.layer.GeoRenderType
+import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
 class HybridAquaticCrustaceanEntityLayer<T: HybridAquaticCrustaceanEntity>(
     renderer: HybridAquaticCrustaceanEntityRenderer<T>
-) : GeoRenderType<T>(renderer) {
+) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(layer: String): ResourceLocation {
         return (geoModel as HybridAquaticCrustaceanEntityModel).getLayerTextureResource(layer)

@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.miniboss
+package dev.hybridlabs.aquatic.client.render.entity.miniboss
 
 import dev.hybridlabs.aquatic.client.model.entity.miniboss.KarkinosEntityModel
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity

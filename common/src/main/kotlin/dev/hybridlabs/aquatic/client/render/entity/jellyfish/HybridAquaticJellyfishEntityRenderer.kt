@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.jellyfish
+package dev.hybridlabs.aquatic.client.render.entity.jellyfish
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
@@ -19,7 +19,7 @@ open class HybridAquaticJellyfishEntityRenderer<T : HybridAquaticJellyfishEntity
 ) : GeoEntityRenderer<T>(context, model) {
 
     init {
-        if (canGlow) addRenderType(AutoGlowingGeoLayer(this))
+        if (canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
     }
 
     override fun applyRotations(jellyfishEntity: T, matrixStack: PoseStack, f: Float, g: Float, h: Float) {
