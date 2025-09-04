@@ -9,9 +9,8 @@ s/Shapes.fullCube(/Shapes.block(/g
 s/AbstractPlantBlock/GrowingPlantBodyBlock/g
 s/Block(settings: Settings/Block(settings: Properties/g
 s/getWanderTarget(/getPosition(/g
-s/utils.Identifier/resources.ResourceLocation/g
+s/util.Identifier/resources.ResourceLocation/g
 s/ofCenter/atCenterOf/g
-s/utils.Identifier/resources.ResourceLocation/g
 s/ EntityData?/ SpawnGroupData?/g
 s/ EntityPose / Pose /g
 s/ EntityPose, / Pose, /g
@@ -28,7 +27,8 @@ s/.EntityRendererFactory/.EntityRendererProvider/g
 s/.isIn(/.`is`(/g
 s/).cube/).addBox/g
 s/\.uv(/\.texOffs(/g
-s/\WIdentifier/ResourceLocation/g
+s/\.Identifier/\.ResourceLocation/g
+s/ Identifier/ ResourceLocation/g
 s/\WModelData/MeshDefinition/g
 s/AbstractPlantStemBlock/GrowingPlantHeadBlock/g
 #'s/ActivationRule/Sensitivity/g

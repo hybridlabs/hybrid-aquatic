@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.render.armor
+package dev.hybridlabs.aquatic.client.renderer.armor
 
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.item.DivingArmorItem

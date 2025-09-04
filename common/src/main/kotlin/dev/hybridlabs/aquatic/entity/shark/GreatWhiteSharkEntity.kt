@@ -5,32 +5,32 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.goal.ChaseBoatGoal
 import net.minecraft.entity.ai.goal.RevengeGoal
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
 import net.minecraft.world.World
 
-class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, world: World) :
+class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, world: Level) :
     HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.LARGE_PREY), false, true) {
 
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(1, RevengeGoal(this))
-        goalSelector.add(8, ChaseBoatGoal(this))
-        goalSelector.add(5, SharkJumpGoal(this, 10))
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, RevengeGoal(this))
+        goalSelector.addGoal(8, ChaseBoatGoal(this))
+        goalSelector.addGoal(5, SharkJumpGoal(this, 10))
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 1
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 54.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.5)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0)
+                .add(Attributes.MAX_HEALTH, 54.0)
+                .add(Attributes.MOVEMENT_SPEED, 1.5)
+                .add(Attributes.ATTACK_DAMAGE, 8.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 32.0)
         }
     }
 

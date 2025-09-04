@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.render.entity.fish
+package dev.hybridlabs.aquatic.client.renderer.entity.fish
 
 import dev.hybridlabs.aquatic.client.model.entity.fish.ToadfishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.ToadfishEntity

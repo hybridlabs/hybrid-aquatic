@@ -2,15 +2,15 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.fish.BlowfishEntity
-import net.minecraft.client.render.RenderLayer
-import net.minecraft.util.Identifier
+import net.minecraft.client.renderer.RenderType
+import net.minecraft.resources.ResourceLocation
 
 class BlowfishEntityModel : HybridAquaticFishEntityModel<BlowfishEntity>("blowfish") {
-    override fun getRenderType(animatable: BlowfishEntity, texture: Identifier): RenderLayer {
-        return RenderLayer.getEntityTranslucent(texture)
+    override fun getRenderType(animatable: BlowfishEntity, texture: ResourceLocation): RenderType {
+        return RenderType.entityTranslucent(texture)
     }
 
-    override fun getTextureResource(animatable: BlowfishEntity): Identifier {
+    override fun getTextureResource(animatable: BlowfishEntity): ResourceLocation {
         val puffState = animatable.getPuffState()
 
         val texturePath = when (puffState) {
@@ -19,10 +19,10 @@ class BlowfishEntityModel : HybridAquaticFishEntityModel<BlowfishEntity>("blowfi
             else -> "textures/entity/fish/blowfish/blowfish_large.png"
         }
 
-        return Identifier(HybridAquatic.MOD_ID, texturePath)
+        return ResourceLocation(Constants.MOD_ID, texturePath)
     }
 
-    override fun getModelResource(animatable: BlowfishEntity): Identifier {
+    override fun getModelResource(animatable: BlowfishEntity): ResourceLocation {
         val puffState = animatable.getPuffState()
 
         val texturePath = when (puffState) {
@@ -31,6 +31,6 @@ class BlowfishEntityModel : HybridAquaticFishEntityModel<BlowfishEntity>("blowfi
             else -> "geo/fish/blowfish/blowfish_large.geo.json"
         }
 
-        return Identifier(HybridAquatic.MOD_ID, texturePath)
+        return ResourceLocation(Constants.MOD_ID, texturePath)
     }
 }

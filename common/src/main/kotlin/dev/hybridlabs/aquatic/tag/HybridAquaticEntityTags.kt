@@ -24,6 +24,6 @@ object HybridAquaticEntityTags {
     val CAN_USE_FISHING_NET_ON = create("can_use_fishing_net_on")
 
     private fun create(id: String): TagKey<EntityType<*>> {
-        return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation(HybridAquatic.MOD_ID, id))
+        return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation(Constants.MOD_ID, id))
     }
 }

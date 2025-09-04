@@ -2,30 +2,30 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.ai.goal.HADolphinJumpGoal
 import net.minecraft.entity.*
-import net.minecraft.entity.ai.control.AquaticMoveControl
-import net.minecraft.entity.ai.control.YawAdjustingLookControl
+import net.minecraft.entity.ai.control.SmoothSwimmingMoveControl
+import net.minecraft.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.ai.pathing.PathNodeType
-import net.minecraft.entity.ai.pathing.SwimNavigation
-import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.ai.pathing.BlockPathTypes
+import net.minecraft.entity.ai.pathing.WaterBoundPathNavigation
+import net.minecraft.entity.attribute.Attributes
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.data.SynchedEntityData
+import net.minecraft.entity.data.EntityDataAccessor
+import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.entity.mob.WaterAnimal
+import net.minecraft.entity.player.Player
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.Mth
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.random.Random
-import net.minecraft.world.LocalDifficulty
-import net.minecraft.world.ServerWorldAccess
+import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.ServerLevelAccess
 import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -41,21 +41,21 @@ open class HybridAquaticDolphinEntity(
     world: World,
     open val prey: List<TagKey<EntityType<*>>>,
     open val predator: List<TagKey<EntityType<*>>>,
-) : WaterCreatureEntity(type, world), GeoEntity {
+) : WaterAnimal(type, world), GeoEntity {
 
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
-    override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
-    ): EntityData? {
-        this.air = this.maxAir
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
+    ): SpawnGroupData? {
+        this.airSupply= this.maxAir
         this.pitch = 0.0f
-        this.size = this.random.nextBetween(getMinSize(), getMaxSize())
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     protected open fun getMinSize(): Int {
@@ -83,69 +83,69 @@ open class HybridAquaticDolphinEntity(
         return factory
     }
 
-    override fun canBreatheInWater(): Boolean {
+    override fun canBreatheUnderwater(): Boolean {
         return false
     }
 
-    override fun tickWaterBreathingAir(air: Int) {
+    override fun handleAirSupply(air: Int) {
     }
 
     private var moistness: Int
-        get() = dataTracker.get(MOISTNESS)
+        get() = entityData.get(MOISTNESS)
         set(moistness) {
-            dataTracker.set(MOISTNESS, moistness)
+            entityData.set(MOISTNESS, moistness)
         }
 
     var size: Int
-        get() = dataTracker.get(DOLPHIN_SIZE)
+        get() = entityData.get(DOLPHIN_SIZE)
         set(size) {
-            dataTracker.set(DOLPHIN_SIZE, size)
+            entityData.set(DOLPHIN_SIZE, size)
         }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(DOLPHIN_SIZE, 0)
+    override fun initSynchedEntityData() {
+        super.initSynchedEntityData()
+        entityData.define(MOISTNESS, getMaxMoistness())
+        entityData.define(DOLPHIN_SIZE, 0)
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
-        super.writeCustomDataToNbt(nbt)
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        super.addAdditionalSaveData(nbt)
         nbt.putInt("Moistness", this.moistness)
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
         this.moistness = nbt.getInt("Moistness")
     }
 
     init {
-        setPathfindingPenalty(PathNodeType.WATER, 0.0f)
-        setPathfindingPenalty(PathNodeType.WATER_BORDER, -1.0f)
-        setPathfindingPenalty(PathNodeType.WALKABLE, -1.0f)
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.WATER_BORDER, -1.0f)
+        setPathfindingMalus(BlockPathTypes.WALKABLE, -1.0f)
         setCanPickUpLoot(true)
-        moveControl = AquaticMoveControl(this, 85, 5, 0.02f, 0.1f, true)
-        lookControl = YawAdjustingLookControl(this, 15)
-        navigation = SwimNavigation(this, world)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02f, 0.1f, true)
+        lookControl = SmoothSwimmingLookControl(this, 15)
+        navigation = WaterBoundPathNavigation(this, world)
     }
 
-    override fun initGoals() {
-        goalSelector.add(0, BreatheAirGoal(this))
-        goalSelector.add(0, MoveIntoWaterGoal(this))
-        goalSelector.add(4, SwimAroundGoal(this, 1.0, 2))
-        goalSelector.add(4, LookAroundGoal(this))
-        goalSelector.add(5, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))
-        goalSelector.add(5, HADolphinJumpGoal(this, 10))
-        goalSelector.add(6, MeleeAttackGoal(this, 1.2000000476837158, true))
-        goalSelector.add(8, ChaseBoatGoal(this))
+    override fun registerGoals() {
+        goalSelector.addGoal(0, BreatheAirGoal(this))
+        goalSelector.addGoal(0, TryFindWaterGoal(this))
+        goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
+        goalSelector.addGoal(4,RandomRandomLookAroundGoal(this))
+        goalSelector.addGoal(5, LookAtPlayerGoal(this,Player::class.java, 6.0f))
+        goalSelector.addGoal(5, HADolphinJumpGoal(this, 10))
+        goalSelector.addGoal(6, MeleeAttackGoal(this, 1.2000000476837158, true))
+        goalSelector.addGoal(8, ChaseBoatGoal(this))
     }
 
-    override fun tryAttack(target: Entity): Boolean {
+    override fun doHurtTarget(target: Entity): Boolean {
         val bl = target.damage(
             this.damageSources.mobAttack(this),
-            this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toInt().toFloat()
+            this.getAttributeValue(Attributes.ATTACK_DAMAGE).toInt().toFloat()
         )
         if (bl) {
             this.applyDamageEffects(this, target)
-            this.playSound(SoundEvents.ENTITY_DOLPHIN_ATTACK, 1.0f, 1.0f)
+            this.playSound(SoundEvents._DOLPHIN_ATTACK, 1.0f, 1.0f)
         }
 
         return bl
@@ -159,7 +159,7 @@ open class HybridAquaticDolphinEntity(
         return this.maxAir
     }
 
-    override fun getActiveEyeHeight(pose: EntityPose, dimensions: EntityDimensions): Float {
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return 0.3f
     }
 
@@ -199,10 +199,10 @@ open class HybridAquaticDolphinEntity(
 
     override fun tick() {
         super.tick()
-        if (this.isAiDisabled) {
-            this.air = this.maxAir
+        if (this.isNoAi) {
+            this.airSupply= this.maxAir
         } else {
-            if (this.isWet) {
+            if (this.isInWaterRainOrBubble) {
                 this.moistness = 2400
             } else {
                 this.moistness -= 1
@@ -222,10 +222,10 @@ open class HybridAquaticDolphinEntity(
                 }
             }
 
-            if (world.isClient && this.isTouchingWater && (velocity.lengthSquared() > 0.03)) {
+            if (world.isClientSide && this.isTouchingWater && (velocity.lengthSquared() > 0.03)) {
                 val vec3d = this.getRotationVec(0.0f)
-                val f = MathHelper.cos(this.yaw * 0.017453292f) * 0.3f
-                val g = MathHelper.sin(this.yaw * 0.017453292f) * 0.3f
+                val f = Mth.cos(this.yaw * 0.017453292f) * 0.3f
+                val g = Mth.sin(this.yaw * 0.017453292f) * 0.3f
                 val h = 1.2f - random.nextFloat() * 0.7f
 
                 for (i in 0..1) {
@@ -247,23 +247,23 @@ open class HybridAquaticDolphinEntity(
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent? {
-        return SoundEvents.ENTITY_DOLPHIN_HURT
+        return SoundEvents._DOLPHIN_HURT
     }
 
     override fun getDeathSound(): SoundEvent? {
-        return SoundEvents.ENTITY_DOLPHIN_DEATH
+        return SoundEvents._DOLPHIN_DEATH
     }
 
     override fun getAmbientSound(): SoundEvent? {
-        return if (this.isTouchingWater) SoundEvents.ENTITY_DOLPHIN_AMBIENT_WATER else SoundEvents.ENTITY_DOLPHIN_AMBIENT
+        return if (this.isTouchingWater) SoundEvents._DOLPHIN_AMBIENT_WATER else SoundEvents._DOLPHIN_AMBIENT
     }
 
     override fun getSplashSound(): SoundEvent {
-        return SoundEvents.ENTITY_DOLPHIN_SPLASH
+        return SoundEvents._DOLPHIN_SPLASH
     }
 
     override fun getSwimSound(): SoundEvent {
-        return SoundEvents.ENTITY_DOLPHIN_SWIM
+        return SoundEvents._DOLPHIN_SWIM
     }
 
     override fun travel(movementInput: Vec3d) {
@@ -285,10 +285,10 @@ open class HybridAquaticDolphinEntity(
 
     companion object {
         const val MAX_AIR: Int = 4800
-        val MOISTNESS: TrackedData<Int> =
-            DataTracker.registerData(HybridAquaticDolphinEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val DOLPHIN_SIZE: TrackedData<Int> =
-            DataTracker.registerData(HybridAquaticDolphinEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val MOISTNESS: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(HybridAquaticDolphinEntity::class.java, EntityDataSerializers.INTEGER)
+        val DOLPHIN_SIZE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(HybridAquaticDolphinEntity::class.java, EntityDataSerializers.INTEGER)
 
 
         fun getScaleAdjustment(fish: HybridAquaticDolphinEntity, adjustment: Float): Float {
@@ -296,9 +296,9 @@ open class HybridAquaticDolphinEntity(
         }
 
         fun canSpawn(
-            type: EntityType<out WaterCreatureEntity>,
-            world: ServerWorldAccess,
-            reason: SpawnReason,
+            type: EntityType<out WaterAnimal>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
             random: Random
         ): Boolean {
@@ -306,7 +306,7 @@ open class HybridAquaticDolphinEntity(
             val bottomY = world.seaLevel - 64
 
             return pos.y in bottomY..topY &&
-                    world.isWater(pos)
+                    world.isWaterAt(pos)
         }
     }
 }

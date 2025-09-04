@@ -39,6 +39,6 @@ object HybridAquaticBiomeTags {
     val ROCKY_BEACHES = create("rocky_beaches")
 
     private fun create(id: String): TagKey<Biome> {
-        return TagKey.create(Registries.BIOME, ResourceLocation(HybridAquatic.MOD_ID, id))
+        return TagKey.create(Registries.BIOME, ResourceLocation(Constants.MOD_ID, id))
     }
 }

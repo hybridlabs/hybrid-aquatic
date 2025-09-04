@@ -2,25 +2,25 @@ package dev.hybridlabs.aquatic.client.model.block.entity
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.entity.GiantGreenAnemoneBlockEntity
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
 
 class GiantGreenAnemoneBlockEntityModel : GeoModel<GiantGreenAnemoneBlockEntity>() {
-    override fun getAnimationResource(entity: GiantGreenAnemoneBlockEntity): Identifier {
+    override fun getAnimationResource(entity: GiantGreenAnemoneBlockEntity): ResourceLocation {
         return ANIMATION_LOCATION
     }
 
-    override fun getModelResource(animatable: GiantGreenAnemoneBlockEntity): Identifier {
+    override fun getModelResource(animatable: GiantGreenAnemoneBlockEntity): ResourceLocation {
         return MODEL_LOCATION
     }
 
-    override fun getTextureResource(entity: GiantGreenAnemoneBlockEntity): Identifier {
+    override fun getTextureResource(entity: GiantGreenAnemoneBlockEntity): ResourceLocation {
         return TEXTURE_LOCATION
     }
 
     companion object {
-        val ANIMATION_LOCATION = Identifier(HybridAquatic.MOD_ID, "animations/anemone.animation.json")
-        val MODEL_LOCATION = Identifier(HybridAquatic.MOD_ID, "geo/giant_green_anemone.geo.json")
-        val TEXTURE_LOCATION = Identifier(HybridAquatic.MOD_ID, "textures/block/giant_green_anemone.png")
+        val ANIMATION_LOCATION = ResourceLocation(Constants.MOD_ID, "animations/anemone.animation.json")
+        val MODEL_LOCATION = ResourceLocation(Constants.MOD_ID, "geo/giant_green_anemone.geo.json")
+        val TEXTURE_LOCATION = ResourceLocation(Constants.MOD_ID, "textures/block/giant_green_anemone.png")
     }
 }

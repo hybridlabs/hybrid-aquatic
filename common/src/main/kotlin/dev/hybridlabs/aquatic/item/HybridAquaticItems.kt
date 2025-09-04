@@ -8,13 +8,13 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.Block
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.effect.MobEffectInstance
+import net.minecraft.entity.effect.MobEffects
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.item.*
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.math.Direction
 
 object HybridAquaticItems {
@@ -956,7 +956,7 @@ object HybridAquaticItems {
                     FoodComponent.Builder()
                         .hunger(1)
                         .saturationModifier(0.2F)
-                        .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 2), 1.0f)
+                        .statusEffect(MobEffectInstance(MobEffects.POISON, 1200, 2), 1.0f)
                         .meat()
                         .build()
                 )
@@ -1027,7 +1027,7 @@ object HybridAquaticItems {
                     FoodComponent.Builder()
                         .hunger(1)
                         .saturationModifier(0.4F)
-                        .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 1), 1.0f)
+                        .statusEffect(MobEffectInstance(MobEffects.POISON, 1200, 1), 1.0f)
                         .meat()
                         .build()
                 )
@@ -1042,7 +1042,7 @@ object HybridAquaticItems {
                     FoodComponent.Builder()
                         .hunger(1)
                         .saturationModifier(0.4F)
-                        .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 1), 1.0f)
+                        .statusEffect(MobEffectInstance(MobEffects.POISON, 1200, 1), 1.0f)
                         .meat()
                         .build()
                 )
@@ -1057,7 +1057,7 @@ object HybridAquaticItems {
                     FoodComponent.Builder()
                         .hunger(2)
                         .saturationModifier(0.4F)
-                        .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 0), 1.0f)
+                        .statusEffect(MobEffectInstance(MobEffects.POISON, 1200, 0), 1.0f)
                         .meat()
                         .build()
                 )
@@ -1100,7 +1100,7 @@ object HybridAquaticItems {
                     FoodComponent.Builder()
                         .hunger(2)
                         .saturationModifier(0.4F)
-                        .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 0), 1.0f)
+                        .statusEffect(MobEffectInstance(MobEffects.POISON, 1200, 0), 1.0f)
                         .meat()
                         .build()
                 )
@@ -1115,7 +1115,7 @@ object HybridAquaticItems {
                     FoodComponent.Builder()
                         .hunger(2)
                         .saturationModifier(0.4F)
-                        .statusEffect(StatusEffectInstance(StatusEffects.POISON, 1200, 0), 1.0f)
+                        .statusEffect(MobEffectInstance(MobEffects.POISON, 1200, 0), 1.0f)
                         .meat()
                         .build()
                 )
@@ -1471,7 +1471,7 @@ object HybridAquaticItems {
     //#endregion
 
     private fun register(id: String, item: Item): Item {
-        return Registry.register(Registries.ITEM, Identifier(HybridAquatic.MOD_ID, id), item)
+        return Registry.register(Registries.ITEM, ResourceLocation(Constants.MOD_ID, id), item)
     }
 
     private fun <T : MobEntity> registerSpawnEgg(

@@ -4,12 +4,12 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.PlantBlock
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.Waterloggable
-import net.minecraft.entity.ai.pathing.NavigationType
+import net.minecraft.block.CollisionContext
+import net.minecraft.block.SimpleWaterloggedBlcok
+import net.minecraft.entity.ai.pathing.PathComputationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.BlockPlaceContext
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.state.StateManager
@@ -18,80 +18,80 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.random.Random
 import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockView
+import net.minecraft.world.BlockGetter
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
-import net.minecraft.world.WorldView
+import net.minecraft.world.LevelReader
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class TubeSpongeBlock(
     private val emitsParticles: Boolean,
     settings: Settings
-) : PlantBlock(settings), Waterloggable {
+) : BushBlock(settings), SimpleWaterloggedBlcok {
 
     private var bubbleTimer = 0
 
     init {
-        defaultState = stateManager.defaultState
+        defaultBlockState() = stateManager.defaultBlockState()
             .with(WATERLOGGED, true)
     }
 
-    override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
-        val supportingPos = pos.down()
+    override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
+        val supportingPos = pos.below()
         val supportingState = world.getBlockState(supportingPos)
-        return supportingState.isSideSolidFullSquare(world, supportingPos, Direction.UP)
+        return supportingState.isFaceSturdy(world, supportingPos, Direction.UP)
     }
 
-    override fun getStateForNeighborUpdate(
+    override fun updateShape(
         state: BlockState,
         direction: Direction,
         neighborState: BlockState,
-        world: WorldAccess,
+        world: LevelAccessor,
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
         if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
         }
 
-        return if (!canPlaceAt(state, world, pos)) {
-            Blocks.AIR.defaultState
-        } else super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
+        return if (!canSurvive(state, world, pos)) {
+            Blocks.AIR.defaultBlockState()
+        } else super.updateShape(state, direction, neighborState, world, pos, neighborPos)
     }
 
     override fun getCollisionShape(
         state: BlockState,
-        world: BlockView,
+        world: BlockGetter,
         pos: BlockPos,
-        context: ShapeContext
+        context: CollisionContext
     ): VoxelShape {
         return COLLISION_SHAPE
     }
 
-    override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext?): VoxelShape {
+    override fun getShape(state: BlockState, world: BlockGetter, pos: BlockPos, context: CollisionContext?): VoxelShape {
         return SHAPE
     }
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
-        val fluidState = ctx.world.getFluidState(ctx.blockPos)
-        return if (fluidState.isIn(FluidTags.WATER)) defaultState.with(
-            WATERLOGGED, ctx.world.getFluidState(ctx.blockPos).isOf(
+    override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
+        val fluidState = ctx.level.getFluidState(ctx.clickedPos)
+        return if (fluidState.`is`(FluidTags.WATER)) defaultBlockState().with(
+            WATERLOGGED, ctx.level.getFluidState(ctx.clickedPos).isOf(
                 Fluids.WATER)) else null
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
         return false
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(WATERLOGGED)) Fluids.WATER.getStill(false) else super.getFluidState(state)
+        return if (state.get(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         builder.add(WATERLOGGED)
     }
 
-    override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+    override fun animateTick(state: BlockState, world: World, pos: BlockPos, random: RandomSource) {
         if (state.get(WATERLOGGED) && emitsParticles && bubbleTimer % 20 == 0) {
             (bubbleTimer / 60).toFloat() * 0.05f
             val upwardVelocity = 0.1f
@@ -109,7 +109,7 @@ class TubeSpongeBlock(
     }
 
     companion object {
-        private val SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
-        private val COLLISION_SHAPE = createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
+        private val SHAPE = box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
+        private val COLLISION_SHAPE = box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
     }
 }

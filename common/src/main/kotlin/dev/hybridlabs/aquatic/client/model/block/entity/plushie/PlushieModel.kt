@@ -22,8 +22,8 @@ abstract class PlushieModel : SkullModelBase() {
     open val jaw: ModelPart? = null
 
     override fun setupAnim(animationProgress: Float, yaw: Float, pitch: Float) {
-        root.yRot = yaw * Mth.DEG_TO_RAD
-        root.xRot = pitch * Mth.DEG_TO_RAD
+        root.yRot = yRot * Mth.DEG_TO_RAD
+        root.xRot = xRot * Mth.DEG_TO_RAD
 
         jaw?.xRot = (sin((animationProgress * 3.1415927f * 0.2f).toDouble()) + 1.0).toFloat() * 0.2f
     }

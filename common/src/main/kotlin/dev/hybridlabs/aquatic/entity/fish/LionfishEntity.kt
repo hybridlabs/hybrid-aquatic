@@ -3,14 +3,14 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.effect.MobEffectInstance
+import net.minecraft.entity.effect.MobEffects
 import net.minecraft.world.World
 
-class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) :
+class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: Level) :
     HybridAquaticFishEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.SMALL_PREY,
@@ -19,18 +19,18 @@ class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) :
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK)) {
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 2
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
+                .add(Attributes.MAX_HEALTH, 6.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 3.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 8.0)
         }
     }
 
@@ -39,8 +39,8 @@ class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: World) :
 
             val attacker = source.attacker
             if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
-                attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 0))
-                attacker.addStatusEffect(StatusEffectInstance(StatusEffects.NAUSEA, 200, 0))
+                attacker.addMobEffect(MobEffectInstance(MobEffects.POISON, 200, 0))
+                attacker.addMobEffect(MobEffectInstance(MobEffects.NAUSEA, 200, 0))
             }
 
             return true

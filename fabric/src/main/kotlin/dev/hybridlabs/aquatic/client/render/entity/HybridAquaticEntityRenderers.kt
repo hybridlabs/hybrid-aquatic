@@ -1,17 +1,17 @@
 @file:Suppress("unused")
 
-package dev.hybridlabs.aquatic.client.render.entity
+package dev.hybridlabs.aquatic.client.renderer.entity
 
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.*
-import dev.hybridlabs.aquatic.client.render.entity.critter.NudibranchEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.SeaCucumberEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.SeaUrchinEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.StarfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
-import dev.hybridlabs.aquatic.client.render.entity.fish.*
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.*
+import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.*
+import dev.hybridlabs.aquatic.client.renderer.entity.critter.NudibranchEntityRenderer
+import dev.hybridlabs.aquatic.client.renderer.entity.critter.SeaCucumberEntityRenderer
+import dev.hybridlabs.aquatic.client.renderer.entity.critter.SeaUrchinEntityRenderer
+import dev.hybridlabs.aquatic.client.renderer.entity.critter.StarfishEntityRenderer
+import dev.hybridlabs.aquatic.client.renderer.entity.crustacean.*
+import dev.hybridlabs.aquatic.client.renderer.entity.fish.*
+import dev.hybridlabs.aquatic.client.renderer.entity.jellyfish.*
+import dev.hybridlabs.aquatic.client.renderer.entity.miniboss.KarkinosEntityRenderer
+import dev.hybridlabs.aquatic.client.renderer.entity.shark.*
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 

@@ -12,7 +12,7 @@ object HybridAquaticLootPoolEntryTypes {
     private fun register(id: String, serializer: MessageInABottleItemEntry.Serializer): LootPoolEntryType {
         return Registry.register(
             BuiltInRegistries.LOOT_POOL_ENTRY_TYPE,
-            ResourceLocation(HybridAquatic.MOD_ID, id), LootPoolEntryType(serializer)
+            ResourceLocation(Constants.MOD_ID, id), LootPoolEntryType(serializer)
         )
     }
 }

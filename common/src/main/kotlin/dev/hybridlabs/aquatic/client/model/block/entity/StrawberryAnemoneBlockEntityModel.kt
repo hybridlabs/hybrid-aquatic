@@ -19,8 +19,8 @@ class StrawberryAnemoneBlockEntityModel : GeoModel<StrawberryAnemoneBlockEntity>
     }
 
     companion object {
-        val ANIMATION_LOCATION = ResourceLocation(HybridAquatic.MOD_ID, "animations/anemone.animation.json")
-        val MODEL_LOCATION = ResourceLocation(HybridAquatic.MOD_ID, "geo/strawberry_anemone.geo.json")
-        val TEXTURE_LOCATION = ResourceLocation(HybridAquatic.MOD_ID, "textures/block/strawberry_anemone.png")
+        val ANIMATION_LOCATION = ResourceLocation(Constants.MOD_ID, "animations/anemone.animation.json")
+        val MODEL_LOCATION = ResourceLocation(Constants.MOD_ID, "geo/strawberry_anemone.geo.json")
+        val TEXTURE_LOCATION = ResourceLocation(Constants.MOD_ID, "textures/block/strawberry_anemone.png")
     }
 }

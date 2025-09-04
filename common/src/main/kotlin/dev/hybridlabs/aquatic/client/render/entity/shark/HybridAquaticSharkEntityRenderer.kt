@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.render.entity.shark
+package dev.hybridlabs.aquatic.client.renderer.entity.shark
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
@@ -17,7 +17,7 @@ open class HybridAquaticSharkEntityRenderer<T : HybridAquaticSharkEntity>(
 ) : GeoEntityRenderer<T>(context, model) {
 
     init {
-        if (canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
+        if (canGlow) addRenderType(AutoGlowingGeoLayer(this))
     }
 
     override fun getDeathMaxRotation(animatable: T): Float {

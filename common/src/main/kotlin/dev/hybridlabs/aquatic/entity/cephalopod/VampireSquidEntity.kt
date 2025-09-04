@@ -50,9 +50,9 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
         }
     }
 
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(1, StayDeepGoal(this, 1.0, 1, 12))
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 12))
     }
 
     companion object {

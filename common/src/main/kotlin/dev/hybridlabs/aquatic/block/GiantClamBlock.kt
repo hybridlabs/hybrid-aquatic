@@ -4,19 +4,19 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.HorizontalFacingBlock
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.Waterloggable
+import net.minecraft.block.CollisionContext
+import net.minecraft.block.SimpleWaterloggedBlcok
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.ai.pathing.NavigationType
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.ai.pathing.PathComputationType
+import net.minecraft.entity.player.Player
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.BlockPlaceContext
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.particle.ParticleTypes
-import net.minecraft.server.world.ServerWorld
+import net.minecraft.server.world.ServerLevel
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.DirectionProperty
@@ -25,41 +25,41 @@ import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.Hand
-import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.StringRepresentable
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.random.Random
 import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockView
+import net.minecraft.world.BlockGetter
 import net.minecraft.world.World
-import net.minecraft.world.WorldView
+import net.minecraft.world.LevelReader
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class GiantClamBlock(
     private val emitsParticles: Boolean,
     settings: Settings
-) : Block(settings), Waterloggable {
+) : Block(settings), SimpleWaterloggedBlcok {
 
     private var pearlTimer: Int = 6000
 
     init {
-        defaultState = stateManager.defaultState
+        defaultBlockState() = stateManager.defaultBlockState()
             .with(STATE, GiantClamState.OPEN)
             .with(WATERLOGGED, true)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
         return false
     }
 
-    override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
-        val supportingPos = pos.down()
+    override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
+        val supportingPos = pos.below()
         val supportingState = world.getBlockState(supportingPos)
-        return supportingState.isSideSolidFullSquare(world, supportingPos, Direction.UP)
+        return supportingState.isFaceSturdy(world, supportingPos, Direction.UP)
     }
 
-    override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random?) {
+    override fun scheduledTick(state: BlockState, world: ServerLevel, pos: BlockPos, random: Random?) {
         val waterlogged = state.get(WATERLOGGED)
         val currentState = state.get(STATE)
 
@@ -84,28 +84,28 @@ class GiantClamBlock(
 
     override fun getCollisionShape(
         state: BlockState,
-        world: BlockView,
+        world: BlockGetter,
         pos: BlockPos,
-        context: ShapeContext
+        context: CollisionContext
     ): VoxelShape = COLLISION_SHAPE
 
-    override fun getOutlineShape(
+    override fun getShape(
         state: BlockState,
-        world: BlockView,
+        world: BlockGetter,
         pos: BlockPos,
-        context: ShapeContext?
+        context: CollisionContext?
     ): VoxelShape = SHAPE
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
-        val waterlogged = ctx.world.getFluidState(ctx.blockPos).fluid == Fluids.WATER
-        return defaultState
+    override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
+        val waterlogged = ctx.level.getFluidState(ctx.clickedPos).fluid == Fluids.WATER
+        return defaultBlockState()
             .with(WATERLOGGED, waterlogged)
             .with(STATE, if (waterlogged) GiantClamState.CLOSED else GiantClamState.DEAD)
             .with(FACING, ctx.horizontalPlayerFacing.rotateYClockwise())
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(WATERLOGGED)) Fluids.WATER.getStill(false) else super.getFluidState(state)
+        return if (state.get(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
@@ -116,7 +116,7 @@ class GiantClamBlock(
         state: BlockState,
         world: World,
         pos: BlockPos,
-        player: PlayerEntity,
+        player:Player,
         hand: Hand,
         hit: BlockHitResult
     ): ActionResult {
@@ -142,7 +142,7 @@ class GiantClamBlock(
     }
 
     override fun onSteppedOn(world: World, pos: BlockPos?, state: BlockState?, entity: Entity) {
-        if (world.isClient || pos == null || state == null) return
+        if (world.isClientSide || pos == null || state == null) return
 
         val currentState = state.get(STATE)
         if (currentState == GiantClamState.OPEN) {
@@ -157,7 +157,7 @@ class GiantClamBlock(
         super.onSteppedOn(world, pos, state, entity)
     }
 
-    override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+    override fun animateTick(state: BlockState, world: World, pos: BlockPos, random: RandomSource) {
         if (state.get(STATE) == GiantClamState.OPEN && emitsParticles && random.nextInt(5) == 0) {
             for (i in 0..random.nextInt(1)) {
                 world.addParticle(
@@ -184,11 +184,11 @@ class GiantClamBlock(
         )
 
         val WATERLOGGED: BooleanProperty = Properties.WATERLOGGED
-        private val SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
-        private val COLLISION_SHAPE: VoxelShape = createCuboidShape(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
+        private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
+        private val COLLISION_SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 8.0, 14.0)
     }
 
-    enum class GiantClamState : StringIdentifiable {
+    enum class GiantClamState : StringRepresentable {
         OPEN, CLOSED, DEAD;
 
         override fun asString(): String {

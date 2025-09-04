@@ -2,28 +2,28 @@ package dev.hybridlabs.aquatic.entity.jellyfish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.StayInWaterGoal
 import net.minecraft.entity.*
-import net.minecraft.entity.ai.control.AquaticMoveControl
-import net.minecraft.entity.ai.control.YawAdjustingLookControl
+import net.minecraft.entity.ai.control.SmoothSwimmingMoveControl
+import net.minecraft.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.entity.ai.goal.Goal
-import net.minecraft.entity.ai.pathing.PathNodeType
-import net.minecraft.entity.ai.pathing.SwimNavigation
+import net.minecraft.entity.ai.pathing.BlockPathTypes
+import net.minecraft.entity.ai.pathing.WaterBoundPathNavigation
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.entity.mob.WaterCreatureEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.entity.data.SynchedEntityData
+import net.minecraft.entity.data.EntityDataAccessor
+import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.entity.effect.MobEffectInstance
+import net.minecraft.entity.effect.MobEffects
+import net.minecraft.entity.mob.WaterAnimal
+import net.minecraft.entity.player.Player
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.server.network.ServerPlayer
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.MathHelper
+import net.minecraft.util.math.Mth
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.random.Random
-import net.minecraft.world.ServerWorldAccess
+import net.minecraft.world.ServerLevelAccess
 import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -41,7 +41,7 @@ open class HybridAquaticJellyfishEntity(
     private val isVenomous: Boolean,
     private val venomLevel: Int
 
-) : WaterCreatureEntity(type, world), GeoEntity {
+) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     var tiltAngle: Float = 0f
     var prevTiltAngle: Float = 0f
@@ -61,43 +61,43 @@ open class HybridAquaticJellyfishEntity(
     init {
         random.setSeed(id.toLong())
         this.thrustTimerSpeed = 1.0f / (random.nextFloat() + 1.0f) * 0.2f
-        setPathfindingPenalty(PathNodeType.WATER, 0.0f)
-        setPathfindingPenalty(PathNodeType.WATER_BORDER, -1.0f)
-        setPathfindingPenalty(PathNodeType.WALKABLE, -1.0f)
-        moveControl = AquaticMoveControl(this, 85, 10, 0.05F, 0.1F, true)
-        lookControl = YawAdjustingLookControl(this, 10)
-        navigation = SwimNavigation(this, world)
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.WATER_BORDER, -1.0f)
+        setPathfindingMalus(BlockPathTypes.WALKABLE, -1.0f)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.05F, 0.1F, true)
+        lookControl = SmoothSwimmingLookControl(this, 10)
+        navigation = WaterBoundPathNavigation(this, world)
     }
 
-    override fun initGoals() {
-        goalSelector.add(0, SwimGoal(this))
-        goalSelector.add(0, StayInWaterGoal(this))
+    override fun registerGoals() {
+        goalSelector.addGoal(0, SwimGoal(this))
+        goalSelector.addGoal(0, StayInWaterGoal(this))
     }
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(MOISTNESS, getMaxMoistness())
-        dataTracker.startTracking(JELLYFISH_SIZE, 0)
+    override fun initSynchedEntityData() {
+        super.initSynchedEntityData()
+        entityData.define(MOISTNESS, getMaxMoistness())
+        entityData.define(JELLYFISH_SIZE, 0)
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 4
     }
 
-    override fun getActiveEyeHeight(pose: EntityPose?, dimensions: EntityDimensions): Float {
+    override fun getStandingEyeHeight(pose: EntityPose?, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.5f
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.ENTITY_SQUID_AMBIENT
+        return SoundEvents._SQUID_AMBIENT
     }
 
     override fun getHurtSound(source: DamageSource?): SoundEvent {
-        return SoundEvents.ENTITY_SLIME_HURT
+        return SoundEvents._SLIME_HURT
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.ENTITY_SLIME_DEATH
+        return SoundEvents._SLIME_DEATH
     }
 
     override fun getSoundVolume(): Float {
@@ -106,11 +106,11 @@ open class HybridAquaticJellyfishEntity(
 
     override fun tick() {
         super.tick()
-        if (isAiDisabled) {
+        if .isNoAi) {
             return
         }
 
-        if (isWet) {
+        if (isInWaterRainOrBubble) {
             moistness = getMaxMoistness()
         } else {
             moistness -= 1
@@ -122,12 +122,12 @@ open class HybridAquaticJellyfishEntity(
     }
 
 
-    override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
+    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return !fromFishingNet && !hasCustomName()
     }
 
-    override fun tickMovement() {
-        super.tickMovement()
+    override fun aiStep() {
+        super.aiStep()
         this.prevTiltAngle = this.tiltAngle
         this.prevRollAngle = this.rollAngle
         this.prevThrustTimer = this.thrustTimer
@@ -149,7 +149,7 @@ open class HybridAquaticJellyfishEntity(
         if (this.isInsideWaterOrBubbleColumn) {
             if (this.thrustTimer < 3.1415927f) {
                 val f = this.thrustTimer / 3.1415927f
-                this.tentacleAngle = MathHelper.sin(f * f * 3.1415927f) * 3.1415927f * 0.25f
+                this.tentacleAngle = Mth.sin(f * f * 3.1415927f) * 3.1415927f * 0.25f
                 if (f.toDouble() > 0.75) {
                     this.swimVelocityScale = 0.5f
                     this.turningSpeed = 0.5f
@@ -172,19 +172,19 @@ open class HybridAquaticJellyfishEntity(
 
             val vec3d = this.velocity
             val d = vec3d.horizontalLength()
-            val targetYaw = -(MathHelper.atan2(vec3d.x, vec3d.z).toFloat()) * (180f / Math.PI.toFloat())
-            val deltaYaw = MathHelper.wrapDegrees(targetYaw - this.bodyYaw)
+            val targetYaw = -(Mth.atan2(vec3d.x, vec3d.z).toFloat()) * (180f / Math.PI.toFloat())
+            val deltaYaw = Mth.wrapDegrees(targetYaw - this.bodyYaw)
             this.bodyYaw += deltaYaw * 0.1f
             this.headYaw = this.bodyYaw
             this.yaw = this.bodyYaw
             this.rollAngle += 3.1415927f * this.turningSpeed * 1.5f
-            this.tiltAngle += (-(MathHelper.atan2(d, vec3d.y).toFloat()) * 57.295776f - this.tiltAngle) * 0.1f
+            this.tiltAngle += (-(Mth.atan2(d, vec3d.y).toFloat()) * 57.295776f - this.tiltAngle) * 0.1f
         } else {
-            this.tentacleAngle = MathHelper.abs(MathHelper.sin(this.thrustTimer)) * 3.1415927f * 0.25f
+            this.tentacleAngle = Mth.abs(Mth.sin(this.thrustTimer)) * 3.1415927f * 0.25f
             if (!world.isClient) {
                 var e = velocity.y
-                if (this.hasStatusEffect(StatusEffects.LEVITATION)) {
-                    e = 0.05 * (getStatusEffect(StatusEffects.LEVITATION)!!.amplifier + 1).toDouble()
+                if (this.hasMobEffect(MobEffects.LEVITATION)) {
+                    e = 0.05 * (getMobEffect(MobEffects.LEVITATION)!!.amplifier + 1).toDouble()
                 } else if (!this.hasNoGravity()) {
                     e -= 0.08
                 }
@@ -204,21 +204,21 @@ open class HybridAquaticJellyfishEntity(
         if (super.damage(source, amount)) {
 
             val attacker = source.attacker
-            if (attacker is PlayerEntity && isVenomous && attacker.mainHandStack.isEmpty) {
-                attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, venomLevel))
-                playSound(SoundEvents.ENTITY_PUFFER_FISH_STING, 0.5F, 0.5F)
+            if (attacker isPlayer && isVenomous && attacker.mainHandStack.isEmpty) {
+                attacker.addMobEffect(MobEffectInstance(MobEffects.POISON, 200, venomLevel))
+                playSound(SoundEvents._PUFFER_FISH_STING, 0.5F, 0.5F)
             }
             return true
         }
         return false
     }
 
-    override fun onPlayerCollision(player: PlayerEntity) {
+    override fun onPlayerCollision(player:Player) {
         super.onPlayerCollision(player)
 
-        if (player is ServerPlayerEntity && isVenomous && !player.hasVehicle()) {
+        if (player is ServerPlayer && isVenomous && !player.hasVehicle()) {
             player.damage(this.damageSources.mobAttack(this), 1.0f)
-            player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, venomLevel), this)
+            player.addMobEffect(MobEffectInstance(MobEffects.POISON, 100, venomLevel), this)
         }
     }
 
@@ -245,7 +245,7 @@ open class HybridAquaticJellyfishEntity(
     }
 
     internal class SwimGoal(private val jellyfish: HybridAquaticJellyfishEntity) : Goal() {
-        override fun canStart(): Boolean {
+        override fun canUse(): Boolean {
             return true
         }
 
@@ -255,24 +255,24 @@ open class HybridAquaticJellyfishEntity(
                 jellyfish.setSwimmingVector(0.0f, 0.0f, 0.0f)
             } else if (jellyfish.random.nextInt(toGoalTicks(50)) == 0 || !jellyfish.touchingWater || !jellyfish.hasSwimmingVector()) {
                 val f = jellyfish.random.nextFloat() * 6.2831855f
-                val g = MathHelper.cos(f) * 0.2f
+                val g = Mth.cos(f) * 0.2f
                 val h = -0.1f + jellyfish.random.nextFloat() * 0.2f
-                val j = MathHelper.sin(f) * 0.2f
+                val j = Mth.sin(f) * 0.2f
                 jellyfish.setSwimmingVector(g, h, j)
             }
         }
     }
 
     private var moistness: Int
-        get() = dataTracker.get(MOISTNESS)
+        get() = entityData.get(MOISTNESS)
         set(moistness) {
-            dataTracker.set(MOISTNESS, moistness)
+            entityData.set(MOISTNESS, moistness)
         }
 
     var size: Int
-        get() = dataTracker.get(JELLYFISH_SIZE)
+        get() = entityData.get(JELLYFISH_SIZE)
         set(size) {
-            dataTracker.set(JELLYFISH_SIZE, size)
+            entityData.set(JELLYFISH_SIZE, size)
         }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
@@ -295,7 +295,7 @@ open class HybridAquaticJellyfishEntity(
         return factory
     }
 
-    override fun tickWaterBreathingAir(air: Int) {}
+    override fun handleAirSupply(air: Int) {}
 
     private fun getMaxMoistness(): Int {
         return 300
@@ -309,8 +309,8 @@ open class HybridAquaticJellyfishEntity(
         return 0
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
-        super.writeCustomDataToNbt(nbt)
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        super.addAdditionalSaveData(nbt)
         nbt.putInt(MOISTNESS_KEY, moistness)
         nbt.putInt(JELLYFISH_SIZE_KEY, size)
         nbt.putBoolean("FromFishingNet", fromFishingNet)
@@ -318,23 +318,23 @@ open class HybridAquaticJellyfishEntity(
 
     private var fromFishingNet = false
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
-        super.readCustomDataFromNbt(nbt)
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
+        super.readAdditionalSaveData(nbt)
         moistness = nbt.getInt(MOISTNESS_KEY)
         size = nbt.getInt(JELLYFISH_SIZE_KEY)
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
     companion object {
-        val MOISTNESS: TrackedData<Int> =
-            DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val JELLYFISH_SIZE: TrackedData<Int> =
-            DataTracker.registerData(HybridAquaticJellyfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val MOISTNESS: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(HybridAquaticJellyfishEntity::class.java, EntityDataSerializers.INTEGER)
+        val JELLYFISH_SIZE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(HybridAquaticJellyfishEntity::class.java, EntityDataSerializers.INTEGER)
 
         fun canSpawn(
-            type: EntityType<out WaterCreatureEntity>,
-            world: ServerWorldAccess,
-            reason: SpawnReason,
+            type: EntityType<out WaterAnimal>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
             random: Random
         ): Boolean {
@@ -342,14 +342,14 @@ open class HybridAquaticJellyfishEntity(
             val bottomY = world.seaLevel - 24
 
             return pos.y in bottomY..topY &&
-                    world.isWater(pos) &&
-                    world.isSkyVisibleAllowingSea(pos)
+                    world.isWaterAt(pos) &&
+                    world.canSeeSkyFromBelowWater(pos)
         }
 
         fun canDeepSpawn(
-            type: EntityType<out WaterCreatureEntity>,
-            world: ServerWorldAccess,
-            reason: SpawnReason,
+            type: EntityType<out WaterAnimal>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
             random: Random
         ): Boolean {
@@ -357,7 +357,7 @@ open class HybridAquaticJellyfishEntity(
             val bottomY = world.seaLevel - 128
 
             return pos.y in bottomY..topY &&
-                    world.isWater(pos)
+                    world.isWaterAt(pos)
         }
 
         fun getScaleAdjustment(jellyfish: HybridAquaticJellyfishEntity, adjustment: Float): Float {

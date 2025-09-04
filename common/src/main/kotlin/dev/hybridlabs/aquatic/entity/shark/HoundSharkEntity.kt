@@ -3,60 +3,60 @@ package dev.hybridlabs.aquatic.entity.shark
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.MobSpawnType
 import net.minecraft.entity.VariantHolder
 import net.minecraft.entity.ai.goal.RevengeGoal
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.util.StringIdentifiable
-import net.minecraft.util.function.ValueLists
-import net.minecraft.world.LocalDifficulty
-import net.minecraft.world.ServerWorldAccess
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
+import net.minecraft.entity.data.SynchedEntityData
+import net.minecraft.entity.data.EntityDataAccessor
+import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.util.StringRepresentable
+import net.minecraft.util.function.ByIdMap
+import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.ServerLevelAccess
 import net.minecraft.world.World
 import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: World) :
+class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Level) :
     HybridAquaticSharkEntity(
         entityType, world, listOf(HybridAquaticEntityTags.CEPHALOPOD, HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN), false, false
     ),
     VariantHolder<HoundSharkEntity.Type> {
 
-    override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
-    ): EntityData? {
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
+    ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 1
     }
 
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(1, RevengeGoal(this))
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, RevengeGoal(this))
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
+                .add(Attributes.MAX_HEALTH, 12.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 3.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 16.0)
         }
-        val TYPE: TrackedData<Int> = DataTracker.registerData(HoundSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val TYPE: EntityDataAccessor<Int> = SynchedEntityData.defineId(HoundSharkEntity::class.java, EntityDataSerializers.INTEGER)
     }
 
     override fun getMaxSize(): Int {
@@ -67,22 +67,22 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Worl
         return -3
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        super.initDataTracker()
+    override fun initSynchedEntityData() {
+        entityData.define(TYPE, 0)
+        super.initSynchedEntityData()
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putString("Type", this.variant.asString())
-        super.writeCustomDataToNbt(nbt)
+        super.addAdditionalSaveData(nbt)
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
         this.variant = Type.byName(nbt.getString("Type"))
-        super.readCustomDataFromNbt(nbt)
+        super.readAdditionalSaveData(nbt)
     }
 
-    enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+    enum class Type(val id: Int, private val key: String) : StringRepresentable {
         LEOPARD(0, "leopard");
 
         override fun asString(): String {
@@ -90,15 +90,15 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Worl
         }
 
         companion object {
-            val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-            private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+            val CODEC: StringRepresentable.EnumCodec<Type> = StringRepresentable.fromEnum { entries.toTypedArray() }
+            private val BY_ID: IntFunction<Type> = ByIdMap.continuous(
                 { obj: Type -> obj.id },
                 entries.toTypedArray(),
-                ValueLists.OutOfBoundsHandling.ZERO
+                ByIdMap.OutOfBoundsStrategy.ZERO
             )
 
             fun byName(name: String?): Type {
-                return CODEC.byId(name, LEOPARD) as Type
+                return CODEC.byName(name, LEOPARD) as Type
             }
 
             fun fromId(id: Int): Type {
@@ -108,10 +108,10 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Worl
     }
 
     override fun getVariant(): Type {
-        return Type.fromId((dataTracker.get(TYPE) as Int))
+        return Type.fromId((entityData.get(TYPE) as Int))
     }
 
     override fun setVariant(type: Type) {
-        dataTracker.set(TYPE, type.id)
+        entityData.set(TYPE, type.id)
     }
 }

@@ -5,24 +5,24 @@ import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.util.StringIdentifiable
-import net.minecraft.util.function.ValueLists
-import net.minecraft.world.LocalDifficulty
-import net.minecraft.world.ServerWorldAccess
+import net.minecraft.entity.MobSpawnType
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
+import net.minecraft.entity.data.SynchedEntityData
+import net.minecraft.entity.data.EntityDataAccessor
+import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.util.StringRepresentable
+import net.minecraft.util.function.ByIdMap
+import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.ServerLevelAccess
 import net.minecraft.world.World
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 import java.util.function.IntFunction
 
-class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: World) :
+class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Level) :
     HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.NONE), true, false),
     OverlayTextureFeature {
 
@@ -56,27 +56,27 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Worl
         }
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 1
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 60.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
+                .add(Attributes.MAX_HEALTH, 60.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.6)
+                .add(Attributes.ATTACK_DAMAGE, 2.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 16.0)
         }
 
         val MOUTH_OPEN: RawAnimation = RawAnimation.begin().thenPlay("misc.mouth_open")
         val MOUTH_CLOSED: RawAnimation = RawAnimation.begin().thenPlay("misc.mouth_closed")
 
-        val OverlayTexture: TrackedData<Int> =
-            DataTracker.registerData(WhaleSharkEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val OverlayTexture: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(WhaleSharkEntity::class.java, EntityDataSerializers.INTEGER)
 
-        enum class OverlayTextures(val id: Int, val key: String) : StringIdentifiable {
+        enum class OverlayTextures(val id: Int, val key: String) : StringRepresentable {
             SPOTS(0, "spots"),
             SMALL_SPOTS(1, "small_spots");
 
@@ -86,11 +86,11 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Worl
 
             companion object {
                 val CODEC: Codec<OverlayTextures> =
-                    StringIdentifiable.createCodec { OverlayTextures.entries.toTypedArray() }
-                val BY_ID: IntFunction<OverlayTextures> = ValueLists.createIdToValueFunction(
+                    StringRepresentable.fromEnum { OverlayTextures.entries.toTypedArray() }
+                val BY_ID: IntFunction<OverlayTextures> = ByIdMap.continuous(
                     { overlayTex: OverlayTextures -> overlayTex.id },
                     OverlayTextures.entries.toTypedArray(),
-                    ValueLists.OutOfBoundsHandling.WRAP
+                    ByIdMap.OutOfBoundsStrategy.WRAP
                 )
 
                 fun byId(id: Int): OverlayTextures {
@@ -100,17 +100,17 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Worl
         }
     }
 
-    override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
-    ): EntityData? {
-        val overlayID = world.random.nextBetween(0, WhaleSharkEntity.Companion.OverlayTextures.entries.size - 1)
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
+    ): SpawnGroupData? {
+        val overlayID = world.random.nextIntBetweenInclusive(0, WhaleSharkEntity.Companion.OverlayTextures.entries.size - 1)
         overlayTexture = OverlayTextures.byId(overlayID)
 
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun getMaxSize(): Int {
@@ -122,28 +122,28 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Worl
     }
 
     private var overlayTexture
-        get() = WhaleSharkEntity.Companion.OverlayTextures.byId(dataTracker.get(OverlayTexture))
+        get() = WhaleSharkEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture))
         set(value) {
-            dataTracker.set(OverlayTexture, value.id)
+            entityData.set(OverlayTexture, value.id)
         }
 
     override fun getOverlayTextureName(): String {
-        return WhaleSharkEntity.Companion.OverlayTextures.byId(dataTracker.get(OverlayTexture)).asString()
+        return WhaleSharkEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).asString()
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(OverlayTexture, 0)
-        super.initDataTracker()
+    override fun initSynchedEntityData() {
+        entityData.define(OverlayTexture, 0)
+        super.initSynchedEntityData()
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putInt("texture_overlay", this.overlayTexture.id)
-        super.writeCustomDataToNbt(nbt)
+        super.addAdditionalSaveData(nbt)
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
         if (nbt.contains("texture_overlay")) this.overlayTexture =
             WhaleSharkEntity.Companion.OverlayTextures.byId(nbt.getInt("texture_overlay"))
-        super.readCustomDataFromNbt(nbt)
+        super.readAdditionalSaveData(nbt)
     }
 }

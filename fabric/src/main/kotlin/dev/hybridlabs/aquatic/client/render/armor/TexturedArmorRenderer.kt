@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.render.armor
+package dev.hybridlabs.aquatic.client.renderer.armor
 
 import com.mojang.blaze3d.vertex.PoseStack
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer

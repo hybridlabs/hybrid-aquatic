@@ -4,12 +4,12 @@ import dev.hybridlabs.aquatic.entity.ai.goal.FishFollowGroupLeaderGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.MobSpawnType
 import net.minecraft.entity.VariantHolder
-import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.registry.tag.TagKey
-import net.minecraft.world.LocalDifficulty
-import net.minecraft.world.ServerWorldAccess
+import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.ServerLevelAccess
 import net.minecraft.world.World
 import java.util.stream.Stream
 
@@ -29,17 +29,17 @@ open class HybridAquaticSchoolingFishEntity(
         } else null
     }
 
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(5, FishFollowGroupLeaderGoal(this))
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(5, FishFollowGroupLeaderGoal(this))
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return this.getMaxGroupSize()
     }
 
     open fun getMaxGroupSize(): Int {
-        return super.getLimitPerChunk()
+        return super.getSpawnClusterSize()
     }
 
     override fun hasSelfControl(): Boolean {
@@ -115,16 +115,16 @@ open class HybridAquaticSchoolingFishEntity(
     }
 
 
-    override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
-    ): EntityData? {
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
+    ): SpawnGroupData? {
         var entityData = entityData
-        pitch = 0.0f
-        super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        xRot = 0.0f
+        super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
         if (entityData == null) {
             entityData = FishData(this)
         } else {

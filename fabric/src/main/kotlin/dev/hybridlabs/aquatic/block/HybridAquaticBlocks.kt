@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.minecraft.world.level.block.state.properties.BlockSetType
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument
+import net.minecraft.world.level.block.state.properties.NoteBloc.NoteBlockInstrument
 import net.minecraft.world.level.material.MapColor
 import net.minecraft.world.level.material.PushReaction
 import java.util.function.Supplier
@@ -146,19 +146,19 @@ object HybridAquaticBlocks {
         "floating_sargassum"
     ) {
         FloatingSargassumBlock(
-            FabricBlockSettings.copyOf(Blocks.LILY_PAD).noCollision().breakInstantly().mapColor(MapColor.WOOD)
+            FabricBlockSettings.copyOf(Blocks.LILY_PAD).noCollission().instabreak().mapColor(MapColor.WOOD)
         )
     }
 
     val WATER_LETTUCE = register("water_lettuce") {
         WaterLettuceBlock(
-            FabricBlockSettings.copyOf(Blocks.LILY_PAD).noCollision().breakInstantly()
+            FabricBlockSettings.copyOf(Blocks.LILY_PAD).noCollission().instabreak()
         )
     }
 
     val JUNGLE_LILY_PAD = register("jungle_lily_pad") {
         JungleLilyPadBlock(
-            FabricBlockSettings.copyOf(Blocks.LILY_PAD).breakInstantly()
+            FabricBlockSettings.copyOf(Blocks.LILY_PAD).instabreak()
         )
     }
 
@@ -221,7 +221,7 @@ object HybridAquaticBlocks {
     ) {
         BaseCoralPlantBlock(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE).instrument(
-                NoteBlockInstrument.BASEDRUM
+                NoteBloc.NoteBlockInstrument.BASEDRUM
             )
                 .requiresCorrectToolForDrops().strength(1.0F).sound(SoundType.CORAL_BLOCK)
         )
@@ -233,7 +233,7 @@ object HybridAquaticBlocks {
         CoralBlock(
             DEAD_LOPHELIA_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
+                .instrument(NoteBloc.NoteBlockInstrument.BASEDRUM)
                 .requiresCorrectToolForDrops().strength(1.0F).sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -243,7 +243,7 @@ object HybridAquaticBlocks {
     ) {
         BaseCoralPlantBlock(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
+                .instrument(NoteBloc.NoteBlockInstrument.BASEDRUM)
                 .requiresCorrectToolForDrops().strength(1.0F).sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -254,7 +254,7 @@ object HybridAquaticBlocks {
         CoralBlock(
             DEAD_BUTTON_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK).mapColor(MapColor.COLOR_PURPLE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
+                .instrument(NoteBloc.NoteBlockInstrument.BASEDRUM)
                 .requiresCorrectToolForDrops().strength(1.0F).sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -264,7 +264,7 @@ object HybridAquaticBlocks {
     ) {
         BaseCoralPlantBlock(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
+                .instrument(NoteBloc.NoteBlockInstrument.BASEDRUM)
                 .requiresCorrectToolForDrops().strength(1.0F).sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -275,7 +275,7 @@ object HybridAquaticBlocks {
         CoralBlock(
             DEAD_SUN_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK).mapColor(MapColor.COLOR_PURPLE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
+                .instrument(NoteBloc.NoteBlockInstrument.BASEDRUM)
                 .requiresCorrectToolForDrops().strength(1.0F).sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -373,7 +373,7 @@ object HybridAquaticBlocks {
     ) {
         BaseCoralPlantBlock(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
+                .instrument(NoteBloc.NoteBlockInstrument.BASEDRUM)
                 .requiresCorrectToolForDrops().strength(1.0F).sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -384,7 +384,7 @@ object HybridAquaticBlocks {
         CoralBlock(
             DEAD_THORN_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK).mapColor(MapColor.COLOR_BLACK)
-                .instrument(NoteBlockInstrument.BASEDRUM)
+                .instrument(NoteBloc.NoteBlockInstrument.BASEDRUM)
                 .requiresCorrectToolForDrops().strength(1.0F).sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -464,7 +464,7 @@ object HybridAquaticBlocks {
         GiantClamBlock(
             true,
             Properties.copy(Blocks.TUFF).noOcclusion().strength(1.0F).pushReaction(PushReaction.DESTROY)
-            //.drops(ResourceLocation(HybridAquatic.MOD_ID, "blocks/giant_clam"))
+            //.drops(ResourceLocation(Constants.MOD_ID, "blocks/giant_clam"))
         )
     }
 
@@ -481,8 +481,8 @@ object HybridAquaticBlocks {
         return PlushieBlock(
             variant,
             particleBlock,
-            FabricBlockSettings.create().breakInstantly().pushReaction(PushReaction.DESTROY).sound(SoundType.WOOL)
-                .instrument(NoteBlockInstrument.CUSTOM_HEAD)
+            FabricBlockSettings.create().instabreak().pushReaction(PushReaction.DESTROY).sound(SoundType.WOOL)
+                .instrument(NoteBloc.NoteBlockInstrument.CUSTOM_HEAD)
         )
     }
 

@@ -5,27 +5,27 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.MobSpawnType
 import net.minecraft.entity.VariantHolder
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.nbt.NbtCompound
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
+import net.minecraft.entity.data.SynchedEntityData
+import net.minecraft.entity.data.EntityDataAccessor
+import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.registry.entry.RegistryEntry
-import net.minecraft.util.Identifier
-import net.minecraft.util.StringIdentifiable
-import net.minecraft.util.function.ValueLists
-import net.minecraft.world.LocalDifficulty
-import net.minecraft.world.ServerWorldAccess
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.StringRepresentable
+import net.minecraft.util.function.ByIdMap
+import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.ServerLevelAccess
 import net.minecraft.world.World
 import net.minecraft.world.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
+class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
     HybridAquaticFishEntity(
         entityType, world,
         listOf(
@@ -39,24 +39,24 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
     ),
     VariantHolder<CarpEntity.Companion.Type> {
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 2
     }
 
-    override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
-    ): EntityData? {
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
+    ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPos)
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun getLootTableId(): Identifier {
+    override fun getLootTableId(): ResourceLocation {
         return when (variant) {
             Type.COMMON -> HybridAquaticLootTables.CARP
             else -> HybridAquaticLootTables.KOI
@@ -64,16 +64,16 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
+                .add(Attributes.MAX_HEALTH, 3.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.6)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 4.0)
         }
 
-        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+        enum class Type(val id: Int, private val key: String) : StringRepresentable {
             COMMON(0, "common"),
             KOI(1, "koi");
 
@@ -82,24 +82,24 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
             }
 
             companion object {
-                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                val CODEC: StringRepresentable.EnumCodec<Type> = StringRepresentable.fromEnum { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ByIdMap.continuous(
                     { obj: Type -> obj.id },
                     entries.toTypedArray(),
-                    ValueLists.OutOfBoundsHandling.ZERO
+                    ByIdMap.OutOfBoundsStrategy.ZERO
                 )
 
                 fun byName(name: String?): Type {
-                    return CODEC.byId(name, COMMON) as Type
+                    return CODEC.byName(name, COMMON) as Type
                 }
 
                 fun fromId(id: Int): Type {
                     return BY_ID.apply(id) as Type
                 }
 
-                fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
+                fun fromBiome(biome: RegistryEntry<Biome>, random: RandomSource): Type {
                     return when {
-                        biome.isIn(HybridAquaticBiomeTags.CHERRY) -> {
+                        biome.`is`(HybridAquaticBiomeTags.CHERRY) -> {
                             Type.fromId(random.nextInt(1, 5))
                         }
 
@@ -111,30 +111,30 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: World) :
             }
         }
 
-        val TYPE: TrackedData<Int> =
-            DataTracker.registerData(CarpEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val TYPE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(CarpEntity::class.java, EntityDataSerializers.INTEGER)
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        super.initDataTracker()
+    override fun initSynchedEntityData() {
+        entityData.define(TYPE, 0)
+        super.initSynchedEntityData()
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putString("Type", this.variant.asString())
-        super.writeCustomDataToNbt(nbt)
+        super.addAdditionalSaveData(nbt)
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
         this.variant = Type.byName(nbt.getString("Type"))
-        super.readCustomDataFromNbt(nbt)
+        super.readAdditionalSaveData(nbt)
     }
 
     override fun getVariant(): Type {
-        return Type.fromId((dataTracker.get(TYPE) as Int))
+        return Type.fromId((entityData.get(TYPE) as Int))
     }
 
     override fun setVariant(type: Type) {
-        dataTracker.set(TYPE, type.id)
+        entityData.set(TYPE, type.id)
     }
 }

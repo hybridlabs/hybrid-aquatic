@@ -25,7 +25,7 @@ object HybridAquaticItemGroups {
 
     val BLOCKS = register("blocks") {
         FabricItemGroup.builder()
-            .title(Component.translatable("itemGroup.${HybridAquatic.MOD_ID}.blocks"))
+            .title(Component.translatable("itemGroup.${Constants.MOD_ID}.blocks"))
             .icon { ItemStack(HybridAquaticItems.ANEMONE.get()) }
             .displayItems { _, entries ->
                 // message in a bottle variants
@@ -122,7 +122,7 @@ object HybridAquaticItemGroups {
 
                 BuiltInRegistries.ITEM.forEach { item ->
                     val id = BuiltInRegistries.ITEM.getKey(item)
-                    if (id.namespace != HybridAquatic.MOD_ID) {
+                    if (id.namespace != Constants.MOD_ID) {
                         return@forEach
                     }
                 }
@@ -135,7 +135,7 @@ object HybridAquaticItemGroups {
         "items"
     ) {
         FabricItemGroup.builder()
-            .title(Component.translatable("itemGroup.${HybridAquatic.MOD_ID}.items"))
+            .title(Component.translatable("itemGroup.${Constants.MOD_ID}.items"))
             .icon { ItemStack(HybridAquaticItems.BARBED_HOOK.get()) }
             .displayItems { _, entries ->
 
@@ -270,7 +270,7 @@ object HybridAquaticItemGroups {
                 // spawn eggs
                 BuiltInRegistries.ITEM.forEach { item ->
                     val id = BuiltInRegistries.ITEM.getKey(item)
-                    if (id.namespace != HybridAquatic.MOD_ID) {
+                    if (id.namespace != Constants.MOD_ID) {
                         return@forEach
                     }
                 }
@@ -282,12 +282,12 @@ object HybridAquaticItemGroups {
         "spawn_eggs"
     ) {
         FabricItemGroup.builder()
-            .title(Component.translatable("itemGroup.${HybridAquatic.MOD_ID}.spawn_eggs"))
+            .title(Component.translatable("itemGroup.${Constants.MOD_ID}.spawn_eggs"))
             .icon { ItemStack(HybridAquaticItems.YELLOWFIN_TUNA.get()) }
             .displayItems { _, entries ->
                 BuiltInRegistries.ITEM.forEach { item ->
                     val id = BuiltInRegistries.ITEM.getKey(item)
-                    if (id.namespace != HybridAquatic.MOD_ID) {
+                    if (id.namespace != Constants.MOD_ID) {
                         return@forEach
                     }
                     if (item is SpawnEggItem) {

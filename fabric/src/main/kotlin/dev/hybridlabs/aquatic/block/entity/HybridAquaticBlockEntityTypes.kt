@@ -37,7 +37,7 @@ object HybridAquaticBlockEntityTypes {
         id: String,
         builder: FabricBlockEntityTypeBuilder<T>
     ): RegistryObject<BlockEntityType<T>> {
-        val identifier = ResourceLocation(HybridAquatic.MOD_ID, id)
+        val identifier = ResourceLocation(Constants.MOD_ID, id)
         return CommonClass.BLOCK_ENTITY_TYPES.register(id) {
             builder.build(
                 Util.fetchChoiceType(

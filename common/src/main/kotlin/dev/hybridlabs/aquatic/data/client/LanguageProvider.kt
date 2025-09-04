@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.data.client
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.data.server.seamessage.SeaMessageProvider
-import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects
+import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
@@ -364,12 +364,12 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         // effects
         mapOf(
-            HybridAquaticStatusEffects.BLEEDING to "Bleeding",
-            HybridAquaticStatusEffects.CLARITY to "Clarity",
-            HybridAquaticStatusEffects.CORROSION to "Corrosion",
-            HybridAquaticStatusEffects.THALASSOPHOBIA to "Thalassophobia",
-            HybridAquaticStatusEffects.BUOYANCY to "Buoyancy",
-            HybridAquaticStatusEffects.SPININESS to "Spininess",
+            HybridAquaticMobEffects.BLEEDING to "Bleeding",
+            HybridAquaticMobEffects.CLARITY to "Clarity",
+            HybridAquaticMobEffects.CORROSION to "Corrosion",
+            HybridAquaticMobEffects.THALASSOPHOBIA to "Thalassophobia",
+            HybridAquaticMobEffects.BUOYANCY to "Buoyancy",
+            HybridAquaticMobEffects.SPININESS to "Spininess",
         ).forEach { (effect, translation) ->
             val identifier = Registries.STATUS_EFFECT.getId(effect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)

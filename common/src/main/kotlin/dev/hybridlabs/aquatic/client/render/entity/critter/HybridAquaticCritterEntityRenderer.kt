@@ -1,14 +1,14 @@
-package dev.hybridlabs.aquatic.client.render.entity.critter
+package dev.hybridlabs.aquatic.client.renderer.entity.critter
 
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
-import net.minecraft.client.render.VertexConsumerProvider
-import net.minecraft.client.render.entity.EntityRendererFactory
+import net.minecraft.client.renderer.VertexConsumerProvider
+import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.util.math.MatrixStack
 import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 
 open class HybridAquaticCritterEntityRenderer<T : HybridAquaticCritterEntity>(
-    context: EntityRendererFactory.Context,
+    context:.EntityRendererProvider.Context,
     model: GeoModel<T>,
     private var variableSize: Boolean = false,
 ) : GeoEntityRenderer<T>(context, model) {

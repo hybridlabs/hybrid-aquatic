@@ -1,8 +1,8 @@
-package dev.hybridlabs.aquatic.client.render.entity.crustacean
+package dev.hybridlabs.aquatic.client.renderer.entity.crustacean
 
 import dev.hybridlabs.aquatic.client.model.entity.crustacean.DungenessCrabEntityModel
 import dev.hybridlabs.aquatic.entity.crustacean.DungenessCrabEntity
-import net.minecraft.client.render.entity.EntityRendererFactory.Context
+import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class DungenessCrabEntityRenderer(context: Context) :
     HybridAquaticCrustaceanEntityRenderer<DungenessCrabEntity>(context, DungenessCrabEntityModel(), true, false)

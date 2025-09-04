@@ -1,10 +1,10 @@
-package dev.hybridlabs.aquatic.client.render.item
+package dev.hybridlabs.aquatic.client.renderer.item
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.HybridAquaticClient
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
-import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.renderer.block.entity.StrawberryAnemoneBlockEntityRenderer
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry.DynamicItemRenderer
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.core.BlockPos

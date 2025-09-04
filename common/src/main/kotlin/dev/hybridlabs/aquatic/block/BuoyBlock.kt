@@ -9,13 +9,13 @@ import net.minecraft.block.BlockRenderType
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.HorizontalFacingBlock
-import net.minecraft.block.ShapeContext
-import net.minecraft.block.Waterloggable
+import net.minecraft.block.CollisionContext
+import net.minecraft.block.SimpleWaterloggedBlcok
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.entity.ai.pathing.NavigationType
+import net.minecraft.entity.ai.pathing.PathComputationType
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.BlockPlaceContext
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.Properties
@@ -23,19 +23,19 @@ import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
-import net.minecraft.util.shape.VoxelShapes
-import net.minecraft.world.BlockView
+import net.minecraft.util.shape.Shapes
+import net.minecraft.world.BlockGetter
 import net.minecraft.world.WorldAccess
-import net.minecraft.world.WorldView
+import net.minecraft.world.LevelReader
 
 @Suppress("DEPRECATION")
-open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, Waterloggable {
+open class BuoyBlock(settings: Properties): Block(settings), BlockEntityProvider, SimpleWaterloggedBlcok {
     init {
-        defaultState = stateManager.defaultState
+        defaultBlockState() = stateManager.defaultBlockState()
             .with(Properties.WATERLOGGED, false)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
         return false
     }
 
@@ -47,52 +47,52 @@ open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, 
         return BuoyBlockEntity(pos, state)
     }
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState {
-        val waterlogged = ctx.world.getFluidState(ctx.blockPos).fluid == Fluids.WATER
-        return defaultState
+    override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState {
+        val waterlogged = ctx.level.getFluidState(ctx.clickedPos).fluid == Fluids.WATER
+        return defaultBlockState()
             .with(Properties.WATERLOGGED, waterlogged)
             .with(FACING, ctx.horizontalPlayerFacing.rotateYClockwise())
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(Properties.WATERLOGGED)) Fluids.WATER.getStill(false) else super.getFluidState(state)
+        return if (state.get(Properties.WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
-    override fun getStateForNeighborUpdate(
+    override fun updateShape(
         state: BlockState,
         direction: Direction,
         neighborState: BlockState,
-        world: WorldAccess,
+        world: LevelAccessor,
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        return if (canPlaceAt(state, world, pos)) super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
-        else Blocks.AIR.defaultState
+        return if (canSurvive(state, world, pos)) super.updateShape(state, direction, neighborState, world, pos, neighborPos)
+        else Blocks.AIR.defaultBlockState()
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         builder.add(Properties.WATERLOGGED, FACING)
     }
 
-    override fun getOutlineShape(
+    override fun getShape(
         state: BlockState,
-        world: BlockView,
+        world: BlockGetter,
         pos: BlockPos,
-        context: ShapeContext?
+        context: CollisionContext?
     ): VoxelShape {
         return SHAPE
     }
 
     override fun getCollisionShape(
         state: BlockState,
-        world: BlockView,
+        world: BlockGetter,
         pos: BlockPos,
-        context: ShapeContext
+        context: CollisionContext
     ): VoxelShape = COLLISION_SHAPE
 
-    override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
+    override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val placedOn = world.getBlockState(pos)
-        val isAirAbove = world.getBlockState(pos.up()).isAir && world.getBlockState(pos.up(2)).isAir
+        val isAirAbove = world.getBlockState(pos.above()).isAir && world.getBlockState(pos.above(2)).isAir
 
         return placedOn.fluidState.isOf(Fluids.WATER) && isAirAbove
     }
@@ -104,10 +104,10 @@ open class BuoyBlock(settings: Settings): Block(settings), BlockEntityProvider, 
     companion object {
         val FACING: DirectionProperty = HorizontalFacingBlock.FACING
 
-        private val CUBE_SHAPE: VoxelShape = createCuboidShape(0.5, 3.0, 0.5, 15.5, 16.0, 15.5)
-        private val POLE_SHAPE: VoxelShape = createCuboidShape(6.0, 16.0, 6.0, 10.0, 42.0, 10.0)
+        private val CUBE_SHAPE: VoxelShape = box(0.5, 3.0, 0.5, 15.5, 16.0, 15.5)
+        private val POLE_SHAPE: VoxelShape = box(6.0, 16.0, 6.0, 10.0, 42.0, 10.0)
 
-        private val SHAPE: VoxelShape = VoxelShapes.union(CUBE_SHAPE, POLE_SHAPE)
-        private val COLLISION_SHAPE: VoxelShape = VoxelShapes.union(CUBE_SHAPE, POLE_SHAPE)
+        private val SHAPE: VoxelShape = Shapes.union(CUBE_SHAPE, POLE_SHAPE)
+        private val COLLISION_SHAPE: VoxelShape = Shapes.union(CUBE_SHAPE, POLE_SHAPE)
     }
 }

@@ -1,10 +1,10 @@
-package dev.hybridlabs.aquatic.client.render.entity.critter
+package dev.hybridlabs.aquatic.client.renderer.entity.critter
 
 import dev.hybridlabs.aquatic.client.model.entity.critter.SeaUrchinEntityModel
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
-import net.minecraft.client.render.VertexConsumerProvider
-import net.minecraft.client.render.entity.EntityRendererFactory.Context
+import net.minecraft.client.renderer.VertexConsumerProvider
+import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 import net.minecraft.client.util.math.MatrixStack
 
 class SeaUrchinEntityRenderer(context: Context) :

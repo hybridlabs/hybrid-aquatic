@@ -21,6 +21,6 @@ object HybridAquaticBlockTags {
     val MESSAGE_IN_A_BOTTLE_SPAWNS_IN = create("message_in_a_bottle_spawns_in")
 
     private fun create(id: String): TagKey<Block> {
-        return TagKey.create(Registries.BLOCK, ResourceLocation(HybridAquatic.MOD_ID, id))
+        return TagKey.create(Registries.BLOCK, ResourceLocation(Constants.MOD_ID, id))
     }
 }

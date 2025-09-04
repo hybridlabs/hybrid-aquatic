@@ -8,18 +8,18 @@ import software.bernie.geckolib.model.GeoModel
 abstract class HybridAquaticMinibossEntityModel<T : HybridAquaticMinibossEntity>(private val id: String) :
     GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {
-        return ResourceLocation(HybridAquatic.MOD_ID, "geo/miniboss/${id}/$id.geo.json")
+        return ResourceLocation(Constants.MOD_ID, "geo/miniboss/${id}/$id.geo.json")
     }
 
     override fun getTextureResource(animatable: T): ResourceLocation {
-        return ResourceLocation(HybridAquatic.MOD_ID, "textures/entity/miniboss/${id}/$id.png")
+        return ResourceLocation(Constants.MOD_ID, "textures/entity/miniboss/${id}/$id.png")
     }
 
     fun getVariantTexture(variant: String): ResourceLocation {
-        return ResourceLocation(HybridAquatic.MOD_ID, "textures/entity/miniboss/${id}/${id}_$variant.png")
+        return ResourceLocation(Constants.MOD_ID, "textures/entity/miniboss/${id}/${id}_$variant.png")
     }
 
     override fun getAnimationResource(animatable: T): ResourceLocation {
-        return ResourceLocation(HybridAquatic.MOD_ID, "animations/$id.animation.json")
+        return ResourceLocation(Constants.MOD_ID, "animations/$id.animation.json")
     }
 }

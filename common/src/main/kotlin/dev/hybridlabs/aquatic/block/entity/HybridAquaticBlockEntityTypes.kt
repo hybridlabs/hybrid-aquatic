@@ -8,7 +8,7 @@ import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.datafixer.TypeReferences
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Util
 
 object HybridAquaticBlockEntityTypes {
@@ -19,7 +19,7 @@ object HybridAquaticBlockEntityTypes {
     val BUOY: BlockEntityType<BuoyBlockEntity> = register("buoy", FabricBlockEntityTypeBuilder.create(::BuoyBlockEntity, HybridAquaticBlocks.BUOY))
 
     private fun <T : BlockEntity> register(id: String, builder: FabricBlockEntityTypeBuilder<T>): BlockEntityType<T> {
-        val identifier = Identifier(HybridAquatic.MOD_ID, id)
+        val identifier = ResourceLocation(Constants.MOD_ID, id)
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, identifier, builder.build(
             Util.getChoiceType(
                 TypeReferences.BLOCK_ENTITY,

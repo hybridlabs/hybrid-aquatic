@@ -3,11 +3,11 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
 import net.minecraft.world.World
 
-class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: World) :
+class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: Level) :
     HybridAquaticFishEntity(
         entityType, world,
         listOf(
@@ -18,23 +18,23 @@ class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: World) :
         )
     ) {
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 2
     }
 
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(1, StayDeepGoal(this, 1.0, 1, 12))
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 12))
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
+                .add(Attributes.MAX_HEALTH, 1.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.2)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 8.0)
         }
     }
 

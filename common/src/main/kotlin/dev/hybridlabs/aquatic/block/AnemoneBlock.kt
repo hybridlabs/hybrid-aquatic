@@ -9,26 +9,26 @@ import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.ai.pathing.NavigationType
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.ai.pathing.PathComputationType
+import net.minecraft.entity.player.Player
 import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
-import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.BlockPlaceContext
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties.WATERLOGGED
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockView
+import net.minecraft.world.BlockGetter
 import net.minecraft.world.GameRules
 import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
 @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
-class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvider, Waterloggable {
+class AnemoneBlock(settings: Properties) : BushBlock(settings), BlockEntityProvider, SimpleWaterloggedBlcok {
     init {
-        defaultState = stateManager.defaultState
+        defaultBlockState() = stateManager.defaultBlockState()
             .with(WATERLOGGED, true)
     }
 
@@ -55,8 +55,8 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         }
     }
 
-    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
-        if (!world.isClient && player.isCreative && world.gameRules.getBoolean(GameRules.DO_TILE_DROPS)) {
+    override fun onBreak(world: World, pos: BlockPos, state: BlockState, player:Player) {
+        if (!world.isClientSide && player.isCreative && world.gameRules.getBoolean(GameRules.DO_TILE_DROPS)) {
             val blockEntity = world.getBlockEntity(pos)
             if (blockEntity is AnemoneBlockEntity) {
                 blockEntity.emergencyReleaseHiddenClownfish()
@@ -66,29 +66,29 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         super.onBreak(world, pos, state, player)
     }
 
-    override fun canPlantOnTop(floor: BlockState, world: BlockView, pos: BlockPos): Boolean {
-        return !floor.getCollisionShape(world, pos).getFace(Direction.UP).isEmpty || floor.isSideSolidFullSquare(
+    override fun mayPlantOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
+        return !floor.getCollisionShape(world, pos).getFace(Direction.UP).isEmpty || floor.isFaceSturdy(
             world,
             pos,
             Direction.UP
         )
     }
 
-    override fun getStateForNeighborUpdate(
+    override fun updateShape(
         state: BlockState,
         direction: Direction,
         neighborState: BlockState,
-        world: WorldAccess,
+        world: LevelAccessor,
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
         if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world))
+            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
         }
 
-        return if (!canPlaceAt(state, world, pos)) {
-            Blocks.AIR.defaultState
-        } else super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
+        return if (!canSurvive(state, world, pos)) {
+            Blocks.AIR.defaultBlockState()
+        } else super.updateShape(state, direction, neighborState, world, pos, neighborPos)
     }
 
     override fun <T : BlockEntity> getTicker(
@@ -101,32 +101,32 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
 
     override fun getCollisionShape(
         state: BlockState,
-        world: BlockView,
+        world: BlockGetter,
         pos: BlockPos,
-        context: ShapeContext
+        context: CollisionContext
     ): VoxelShape {
         return COLLISION_SHAPE
     }
 
-    override fun getOutlineShape(
+    override fun getShape(
         state: BlockState,
-        world: BlockView,
+        world: BlockGetter,
         pos: BlockPos,
-        context: ShapeContext?
+        context: CollisionContext?
     ): VoxelShape {
         return SHAPE
     }
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
-        val fluidState = ctx.world.getFluidState(ctx.blockPos)
-        return if (fluidState.isIn(FluidTags.WATER)) defaultState.with(
+    override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
+        val fluidState = ctx.level.getFluidState(ctx.clickedPos)
+        return if (fluidState.`is`(FluidTags.WATER)) defaultBlockState().with(
             WATERLOGGED,
-            ctx.world.getFluidState(ctx.blockPos).isOf(Fluids.WATER)
+            ctx.level.getFluidState(ctx.clickedPos).isOf(Fluids.WATER)
         ) else null
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(WATERLOGGED)) Fluids.WATER.getStill(false) else super.getFluidState(state)
+        return if (state.get(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
     override fun getRenderType(state: BlockState): BlockRenderType {
@@ -141,12 +141,12 @@ class AnemoneBlock(settings: Settings) : PlantBlock(settings), BlockEntityProvid
         builder.add(WATERLOGGED)
     }
 
-    override fun canPathfindThrough(state: BlockState, world: BlockView, pos: BlockPos, type: NavigationType): Boolean {
+    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
         return false
     }
 
     companion object {
-        private val SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
-        private val COLLISION_SHAPE = createCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0)
+        private val SHAPE = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
+        private val COLLISION_SHAPE = box(1.0, 0.0, 1.0, 15.0, 8.0, 15.0)
     }
 }

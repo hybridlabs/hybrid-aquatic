@@ -1,47 +1,47 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import net.minecraft.entity.ai.goal.WanderAroundGoal
-import net.minecraft.entity.ai.pathing.NavigationType
-import net.minecraft.entity.mob.PathAwareEntity
+import net.minecraft.entity.ai.goal.RandomStrollGoal
+import net.minecraft.entity.ai.pathing.PathComputationType
+import net.minecraft.entity.mob.PathfinderMob
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import java.util.*
 
 class StayDeepGoal(
-    mob: PathAwareEntity,
+    mob: PathfinderMob,
     speed: Double,
     chance: Int,
     private val maxHeight: Int
-) : WanderAroundGoal(mob, speed, chance) {
+) : RandomStrollGoal(mob, speed, chance) {
 
     private val random: Random = Random()
 
-    override fun getWanderTarget(): Vec3d? {
+    override fun getPosition(): Vec3d? {
         val vec = getRandomWaterPos() ?: return null
 
         val distanceOffSeabed = 1 + random.nextInt(maxHeight.coerceAtLeast(1))
-        var pos = BlockPos.ofFloored(vec)
+        var pos = BlockPos.containing(vec)
 
-        while (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
-            mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER) &&
+        while (mob.level()..getFluidState(pos).`is`(FluidTags.WATER) &&
+            mob.level()..getBlockState(pos).isPathfindable(mob.level()., pos, PathComputationType.WATER) &&
             pos.y > 1
         ) {
-            pos = pos.down()
+            pos = pos.below()
         }
 
-        pos = pos.up()
+        pos = pos.above()
         var height = 0
 
-        while (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
-            mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER) &&
+        while (mob.level()..getFluidState(pos).`is`(FluidTags.WATER) &&
+            mob.level()..getBlockState(pos).isPathfindable(mob.level()., pos, PathComputationType.WATER) &&
             height < distanceOffSeabed
         ) {
-            pos = pos.up()
+            pos = pos.above()
             height++
         }
 
-        return Vec3d.ofCenter(pos)
+        return Vec3d.atCenterOf(pos)
     }
 
     private fun getRandomWaterPos(): Vec3d? {
@@ -50,10 +50,10 @@ class StayDeepGoal(
             val x = mob.x + (random.nextDouble() * 20 - 10)
             val y = mob.y + (random.nextDouble() * 14 - 7)
             val z = mob.z + (random.nextDouble() * 20 - 10)
-            val pos = BlockPos.ofFloored(x, y, z)
+            val pos = BlockPos.containing(x, y, z)
 
-            if (mob.world.getFluidState(pos).isIn(FluidTags.WATER) &&
-                mob.world.getBlockState(pos).canPathfindThrough(mob.world, pos, NavigationType.WATER)
+            if (mob.level()..getFluidState(pos).`is`(FluidTags.WATER) &&
+                mob.level()..getBlockState(pos).isPathfindable(mob.level()., pos, PathComputationType.WATER)
             ) {
                 return Vec3d(x, y, z)
             }

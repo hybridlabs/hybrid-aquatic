@@ -9,7 +9,7 @@ import dev.hybridlabs.aquatic.item.SeaMessageBookItem.Companion.SEA_MESSAGE_KEY
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
-import net.minecraft.block.DeadCoralWallFanBlock
+import net.minecraft.block.BaseCoralWallFanBlock
 import net.minecraft.block.WallTorchBlock
 import net.minecraft.item.BlockItem.BLOCK_ENTITY_TAG_KEY
 import net.minecraft.loot.LootPool
@@ -265,7 +265,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         Registries.BLOCK
             .filter(filterHybridAquatic(Registries.BLOCK))
             .filter { block ->
-                block !is WallTorchBlock && block !is DeadCoralWallFanBlock
+                block !is WallTorchBlock && block !is BaseCoralWallFanBlock
                         && block.lootTableId !in lootTables
             }
             .forEach(::addDrop)

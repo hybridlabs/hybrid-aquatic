@@ -13,7 +13,7 @@ import net.minecraft.data.client.*
 import net.minecraft.item.Items
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
 
 class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     override fun generateBlockStateModels(generator: BlockStateModelGenerator) {
@@ -33,7 +33,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 .filterIsInstance<FluidBlock>()
                 .forEach { block ->
                     val id = Registries.BLOCK.getId(block)
-                    if (id.namespace == HybridAquatic.MOD_ID) {
+                    if (id.namespace == Constants.MOD_ID) {
                         registerSimpleState(block)
                     }
                 }
@@ -315,8 +315,8 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     }
 
     companion object {
-        private val TEMPLATE_ANEMONE = Identifier(HybridAquatic.MOD_ID, "item/template_anemone")
-        private val TEMPLATE_MESSAGE_IN_A_BOTTLE = Identifier(HybridAquatic.MOD_ID, "item/template_message_in_a_bottle")
-        private val TEMPLATE_PLUSHIE = Identifier(HybridAquatic.MOD_ID, "item/template_plushie")
+        private val TEMPLATE_ANEMONE = ResourceLocation(Constants.MOD_ID, "item/template_anemone")
+        private val TEMPLATE_MESSAGE_IN_A_BOTTLE = ResourceLocation(Constants.MOD_ID, "item/template_message_in_a_bottle")
+        private val TEMPLATE_PLUSHIE = ResourceLocation(Constants.MOD_ID, "item/template_plushie")
     }
 }

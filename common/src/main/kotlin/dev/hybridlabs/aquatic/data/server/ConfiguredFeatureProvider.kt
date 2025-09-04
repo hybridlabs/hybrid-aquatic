@@ -42,9 +42,9 @@ class ConfiguredFeatureProvider(
                         SimpleBlockFeatureConfig(
                             WeightedBlockStateProvider(
                                 DataPool.builder<BlockState>()
-                                    .add(HybridAquaticBlocks.ANEMONE.defaultState.with(Properties.WATERLOGGED, true), 1)
+                                    .add(HybridAquaticBlocks.ANEMONE.defaultBlockState().with(Properties.WATERLOGGED, true), 1)
                                     .add(
-                                        HybridAquaticBlocks.STRAWBERRY_ANEMONE.defaultState.with(
+                                        HybridAquaticBlocks.STRAWBERRY_ANEMONE.defaultBlockState().with(
                                             Properties.WATERLOGGED,
                                             true
                                         ), 3
@@ -68,9 +68,9 @@ class ConfiguredFeatureProvider(
                         SimpleBlockFeatureConfig(
                             WeightedBlockStateProvider(
                                 DataPool.builder<BlockState>()
-                                    .add(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.defaultState.with(Properties.WATERLOGGED, true), 1)
+                                    .add(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.defaultBlockState().with(Properties.WATERLOGGED, true), 1)
                                     .add(
-                                        HybridAquaticBlocks.STRAWBERRY_ANEMONE.defaultState.with(
+                                        HybridAquaticBlocks.STRAWBERRY_ANEMONE.defaultBlockState().with(
                                             Properties.WATERLOGGED,
                                             true
                                         ), 3
@@ -128,7 +128,7 @@ class ConfiguredFeatureProvider(
                                 DoublePerlinNoiseSampler.NoiseParameters(-5, 5.0, *DoubleArray(0)),
                                 1.0f,
                                 listOf<BlockState>(
-                                    HybridAquaticBlocks.FLOATING_SARGASSUM.defaultState
+                                    HybridAquaticBlocks.FLOATING_SARGASSUM.defaultBlockState()
                                 )
                             )
                         ),
@@ -178,7 +178,7 @@ class ConfiguredFeatureProvider(
                     PlacedFeatures.createEntry(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockFeatureConfig(
-                            BlockStateProvider.of(HybridAquaticBlocks.GLOWING_PLANKTON.defaultState)
+                            BlockStateProvider.of(HybridAquaticBlocks.GLOWING_PLANKTON.defaultBlockState())
                         ),
                         BlockPredicate.matchingBlocks(Blocks.WATER)
                     )
@@ -206,7 +206,7 @@ class ConfiguredFeatureProvider(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockFeatureConfig(
                             BlockStateProvider.of(
-                                HybridAquaticBlocks.TUBE_SPONGE.defaultState.with(
+                                HybridAquaticBlocks.TUBE_SPONGE.defaultBlockState().with(
                                     Properties.WATERLOGGED,
                                     true
                                 )
@@ -230,11 +230,11 @@ class ConfiguredFeatureProvider(
                             WeightedBlockStateProvider(
                                 DataPool.builder<BlockState>()
                                     .add(
-                                        HybridAquaticBlocks.GIANT_CLAM.defaultState.with(Properties.WATERLOGGED, true)
+                                        HybridAquaticBlocks.GIANT_CLAM.defaultBlockState().with(Properties.WATERLOGGED, true)
                                             .with(HorizontalFacingBlock.FACING, Direction.EAST), 1
                                     )
                                     .add(
-                                        HybridAquaticBlocks.GIANT_CLAM.defaultState.with(Properties.WATERLOGGED, true)
+                                        HybridAquaticBlocks.GIANT_CLAM.defaultBlockState().with(Properties.WATERLOGGED, true)
                                             .with(HorizontalFacingBlock.FACING, Direction.NORTH), 1
                                     )
                                     .build()

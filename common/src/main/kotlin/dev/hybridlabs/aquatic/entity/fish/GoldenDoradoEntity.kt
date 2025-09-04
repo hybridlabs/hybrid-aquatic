@@ -2,18 +2,18 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.ai.goal.ActiveTargetGoal
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal
 import net.minecraft.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.entity.ai.goal.RevengeGoal
 import net.minecraft.entity.ai.goal.UniversalAngerGoal
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
 import net.minecraft.entity.mob.Angerable
-import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.Player
 import net.minecraft.world.World
 import java.util.*
 
-class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: World) :
+class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: Level) :
     HybridAquaticFishEntity(
         entityType, world,
         listOf(
@@ -29,26 +29,26 @@ class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: 
     private var angerTime = 0
     private var angryAt: UUID? = null
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 1
     }
 
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(1, MeleeAttackGoal(this, 1.5, false))
-        targetSelector.add(3, RevengeGoal(this))
-        targetSelector.add(3, UniversalAngerGoal(this, true))
-        targetSelector.add(1, ActiveTargetGoal(this, PlayerEntity::class.java, 10, true, true) { this.shouldAngerAt(it) })
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, MeleeAttackGoal(this, 1.5, false))
+        targetSelector.addGoal(3, RevengeGoal(this))
+        targetSelector.addGoal(3, UniversalAngerGoal(this, true))
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this,Player::class.java, 10, true, true) { this.shouldAngerAt(it) })
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
+                .add(Attributes.MAX_HEALTH, 10.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.6)
+                .add(Attributes.ATTACK_DAMAGE, 5.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 16.0)
         }
     }
 

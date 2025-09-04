@@ -1,26 +1,26 @@
 package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.crustacean.LobsterEntity
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
 class LobsterEntityModel : HybridAquaticCrustaceanEntityModel<LobsterEntity>("lobster") {
 
     private val clawlessTextures = listOf(
-        Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_ornate_spiny.png"),
-        Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_california_spiny.png")
+        ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_ornate_spiny.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_california_spiny.png")
     )
 
     private val clawedTextures = listOf(
-        Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_american.png")
+        ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_american.png")
     )
 
-    private val REGAL_SLIPPER_TEXTURE = Identifier("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_regal_slipper.png")
+    private val REGAL_SLIPPER_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_regal_slipper.png")
 
-    private val LOBSTER_MODEL = Identifier("hybrid-aquatic", "geo/crustacean/lobster/lobster.geo.json")
-    private val SLIPPER_LOBSTER_MODEL = Identifier("hybrid-aquatic", "geo/crustacean/lobster/lobster_slipper.geo.json")
+    private val LOBSTER_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/lobster/lobster.geo.json")
+    private val SLIPPER_LOBSTER_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/lobster/lobster_slipper.geo.json")
 
-    override fun getTextureResource(animatable: LobsterEntity): Identifier {
+    override fun getTextureResource(animatable: LobsterEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return when (animatable.variant) {
@@ -30,7 +30,7 @@ class LobsterEntityModel : HybridAquaticCrustaceanEntityModel<LobsterEntity>("lo
         }
     }
 
-    override fun getModelResource(animatable: LobsterEntity): Identifier {
+    override fun getModelResource(animatable: LobsterEntity): ResourceLocation {
         return when (animatable.variant) {
             LobsterEntity.Companion.Type.REGAL_SLIPPER -> SLIPPER_LOBSTER_MODEL
             else -> LOBSTER_MODEL

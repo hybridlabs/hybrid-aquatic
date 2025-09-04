@@ -4,50 +4,50 @@ import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.entity.*
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.nbt.NbtCompound
+import net.minecraft.entity.data.SynchedEntityData
+import net.minecraft.entity.data.EntityDataAccessor
+import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.entity.effect.MobEffectInstance
+import net.minecraft.entity.effect.MobEffects
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.registry.tag.BiomeTags
-import net.minecraft.util.StringIdentifiable
-import net.minecraft.util.function.ValueLists
-import net.minecraft.world.LocalDifficulty
-import net.minecraft.world.ServerWorldAccess
+import net.minecraft.util.StringRepresentable
+import net.minecraft.util.function.ByIdMap
+import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.ServerLevelAccess
 import net.minecraft.world.World
 import net.minecraft.world.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
+class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
     HybridAquaticCritterEntity(
         entityType, world
     ),
     VariantHolder<StarfishEntity.Companion.Type>, OverlayTextureFeature {
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 2.0)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0)
+                .add(Attributes.MAX_HEALTH, 1.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.3)
+                .add(Attributes.ATTACK_DAMAGE, 2.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 2.0)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
         }
 
-        val TYPE: TrackedData<Int> =
-            DataTracker.registerData(StarfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        val OverlayTexture: TrackedData<Int> =
-            DataTracker.registerData(StarfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val TYPE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(StarfishEntity::class.java, EntityDataSerializers.INTEGER)
+        val OverlayTexture: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(StarfishEntity::class.java, EntityDataSerializers.INTEGER)
 
-        enum class OverlayTextures(val id: Int, val key: String) : StringIdentifiable {
+        enum class OverlayTextures(val id: Int, val key: String) : StringRepresentable {
             NONE(0, ""),
             STRIPES_SMALL(1, "stripes_small"),
             CIRCLE_SMALL(2, "circle_small"),
@@ -62,11 +62,11 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
 
             companion object {
                 val CODEC: Codec<OverlayTextures> =
-                    StringIdentifiable.createCodec { OverlayTextures.entries.toTypedArray() }
-                val BY_ID: IntFunction<OverlayTextures> = ValueLists.createIdToValueFunction(
+                    StringRepresentable.fromEnum { OverlayTextures.entries.toTypedArray() }
+                val BY_ID: IntFunction<OverlayTextures> = ByIdMap.continuous(
                     { overlayTex: OverlayTextures -> overlayTex.id },
                     OverlayTextures.entries.toTypedArray(),
-                    ValueLists.OutOfBoundsHandling.WRAP
+                    ByIdMap.OutOfBoundsStrategy.WRAP
                 )
 
                 fun byId(id: Int): OverlayTextures {
@@ -75,7 +75,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             }
         }
 
-        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+        enum class Type(val id: Int, private val key: String) : StringRepresentable {
             BRITTLESTAR(0, "brittlestar"),
             CROWN_OF_THORNS(1, "crown_of_thorns"),
             SMALL(2, "small"),
@@ -86,15 +86,15 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             }
 
             companion object {
-                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                val CODEC: StringRepresentable.EnumCodec<Type> = StringRepresentable.fromEnum { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ByIdMap.continuous(
                     { obj: Type -> obj.id },
                     entries.toTypedArray(),
-                    ValueLists.OutOfBoundsHandling.ZERO
+                    ByIdMap.OutOfBoundsStrategy.ZERO
                 )
 
                 fun byName(name: String?): Type {
-                    return CODEC.byId(name, SMALL) as Type
+                    return CODEC.byName(name, SMALL) as Type
                 }
 
                 fun fromId(id: Int): Type {
@@ -107,13 +107,13 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
                     MEDIUM,
                 )
 
-                fun fromBiome(biome: RegistryEntry<Biome>, random: Random): Type {
+                fun fromBiome(biome: RegistryEntry<Biome>, random: RandomSource): Type {
                     return when {
-                        biome.isIn(BiomeTags.IS_DEEP_OCEAN) -> {
+                        biome.`is`(BiomeTags.IS_DEEP_OCEAN) -> {
                             BRITTLESTAR
                         }
 
-                        biome.isIn(HybridAquaticBiomeTags.REEF) -> {
+                        biome.`is`(HybridAquaticBiomeTags.REEF) -> {
                             REEF_VARIANTS[random.nextInt(REEF_VARIANTS.size)]
                         }
 
@@ -130,19 +130,19 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
         val attacker = source.attacker
 
         if (this.variant == Type.CROWN_OF_THORNS && attacker is LivingEntity) {
-            attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 100, 1))
+            attacker.addMobEffect(MobEffectInstance(MobEffects.POISON, 100, 1))
         }
 
         return super.damage(source, amount)
     }
 
-    override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
-    ): EntityData? {
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
+    ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPos)
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
@@ -152,7 +152,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
             Type.SMALL -> OverlayTextures.byId(listOf(0, 1, 2, 3).random(Random))
             Type.MEDIUM -> OverlayTextures.byId(listOf(0, 4, 5, 6).random(Random))
         }
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun getMaxSize(): Int {
@@ -164,37 +164,37 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: World) :
     }
 
     private var overlayTexture
-        get() = StarfishEntity.Companion.OverlayTextures.byId(dataTracker.get(OverlayTexture))
+        get() = StarfishEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture))
         set(value) {
-            dataTracker.set(OverlayTexture, value.id)
+            entityData.set(OverlayTexture, value.id)
         }
     override fun getOverlayTextureName(): String {
-        return StarfishEntity.Companion.OverlayTextures.byId(dataTracker.get(OverlayTexture)).asString()
+        return StarfishEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).asString()
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        dataTracker.startTracking(OverlayTexture, 0)
-        super.initDataTracker()
+    override fun initSynchedEntityData() {
+        entityData.define(TYPE, 0)
+        entityData.define(OverlayTexture, 0)
+        super.initSynchedEntityData()
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putString("Type", this.variant.asString())
         nbt.putInt("texture_overlay", this.overlayTexture.id)
-        super.writeCustomDataToNbt(nbt)
+        super.addAdditionalSaveData(nbt)
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
         this.variant = Type.byName(nbt.getString("Type"))
         if(nbt.contains("texture_overlay")) this.overlayTexture = StarfishEntity.Companion.OverlayTextures.byId(nbt.getInt("texture_overlay"))
-        super.readCustomDataFromNbt(nbt)
+        super.readAdditionalSaveData(nbt)
     }
 
     override fun getVariant(): Type {
-        return Type.fromId((dataTracker.get(TYPE) as Int))
+        return Type.fromId((entityData.get(TYPE) as Int))
     }
 
     override fun setVariant(type: Type) {
-        dataTracker.set(TYPE, type.id)
+        entityData.set(TYPE, type.id)
     }
 }

@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.block.entity
 
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.util.math.BlockPos
 import software.bernie.geckolib.core.animatable.GeoAnimatable
@@ -37,7 +37,7 @@ class GiantGreenAnemoneBlockEntity(pos: BlockPos, state: BlockState) : BlockEnti
         return RenderUtils.getCurrentTick()
     }
 
-    override fun toInitialChunkDataNbt(): NbtCompound {
+    override fun toInitialChunkDataNbt(): CompoundTag {
         return createNbt()
     }
 

@@ -31,7 +31,7 @@ data class GeneratedSeaMessageData(
     /**
      * The automated translation key for this message.
      */
-    val translationKey: String = "${HybridAquatic.MOD_ID}.sea_message.$id"
+    val translationKey: String = "${Constants.MOD_ID}.sea_message.$id"
 
     /**
      * The automated title translation key for this message.

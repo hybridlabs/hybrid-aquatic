@@ -7,8 +7,8 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.SkullBlock
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.state.StateManager
-import net.minecraft.util.Identifier
-import net.minecraft.util.StringIdentifiable
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.StringRepresentable
 
 /**
  * Represents any Plushie block.
@@ -22,7 +22,7 @@ class PlushieBlock(variant: Variant, val particleBlock: Block, settings: Setting
         super.appendProperties(builder)
     }
 
-    enum class Variant(val id: String) : SkullType, StringIdentifiable {
+    enum class Variant(val id: String) : SkullType, StringRepresentable {
         BASKING_SHARK("basking_shark"),
         BULL_SHARK("bull_shark"),
         FRILLED_SHARK("frilled_shark"),
@@ -32,7 +32,7 @@ class PlushieBlock(variant: Variant, val particleBlock: Block, settings: Setting
         TIGER_SHARK("tiger_shark"),
         WHALE_SHARK("whale_shark");
 
-        val textureLocation: Identifier by lazy { Identifier(HybridAquatic.MOD_ID, "textures/entity/block/plushie/${id}_plushie.png") }
+        val textureLocation: ResourceLocation by lazy { ResourceLocation(Constants.MOD_ID, "textures/entity/block/plushie/${id}_plushie.png") }
 
         override fun asString(): String = id
     }

@@ -11,7 +11,7 @@ import net.minecraft.world.phys.Vec3
 <<<<<<<< HEAD:common/src/main/kotlin/dev/hybridlabs/aquatic/entity/fish/AfricanButterflyEntity.kt
 class AfricanButterflyEntity(entityType: EntityType<out AfricanButterflyEntity>, world: Level) :
 ========
-class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfishEntity>, world: World) :
+class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfishEntity>, world: Level) :
 >>>>>>>> latest:common/src/main/kotlin/dev/hybridlabs/aquatic/entity/fish/AfricanButterflyfishEntity.kt
     HybridAquaticFishEntity(
         entityType, world,
@@ -77,11 +77,11 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)
 ========
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
+                .add(Attributes.MAX_HEALTH, 2.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 4.0)
 >>>>>>>> latest:common/src/main/kotlin/dev/hybridlabs/aquatic/entity/fish/AfricanButterflyfishEntity.kt
         }
     }

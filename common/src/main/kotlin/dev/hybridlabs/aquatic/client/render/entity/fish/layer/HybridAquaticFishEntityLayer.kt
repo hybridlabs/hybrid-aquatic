@@ -1,23 +1,23 @@
-package dev.hybridlabs.aquatic.client.render.entity.fish.layer
+package dev.hybridlabs.aquatic.client.renderer.entity.fish.layer
 
 import dev.hybridlabs.aquatic.client.model.entity.fish.HybridAquaticFishEntityModel
-import dev.hybridlabs.aquatic.client.render.entity.fish.HybridAquaticFishEntityRenderer
+import dev.hybridlabs.aquatic.client.renderer.entity.fish.HybridAquaticFishEntityRenderer
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
-import net.minecraft.client.render.OverlayTexture
-import net.minecraft.client.render.RenderLayer
-import net.minecraft.client.render.VertexConsumer
-import net.minecraft.client.render.VertexConsumerProvider
+import net.minecraft.client.renderer.OverlayTexture
+import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.VertexConsumer
+import net.minecraft.client.renderer.VertexConsumerProvider
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer
+import software.bernie.geckolib.renderer.layer.GeoRenderType
 
 class HybridAquaticFishEntityLayer<T: HybridAquaticFishEntity>(
     renderer: HybridAquaticFishEntityRenderer<T>
-) : GeoRenderLayer<T>(renderer) {
+) : GeoRenderType<T>(renderer) {
 
-    private fun getLayerTextureResource(layer: String): Identifier {
+    private fun getLayerTextureResource(layer: String): ResourceLocation {
         return (geoModel as HybridAquaticFishEntityModel).getLayerTextureResource(layer)
     }
 
@@ -25,7 +25,7 @@ class HybridAquaticFishEntityLayer<T: HybridAquaticFishEntity>(
         poseStack: MatrixStack,
         animatable: T,
         bakedModel: BakedGeoModel,
-        renderType: RenderLayer,
+        renderType: RenderType,
         bufferSource: VertexConsumerProvider,
         buffer: VertexConsumer,
         partialTick: Float,
@@ -35,11 +35,11 @@ class HybridAquaticFishEntityLayer<T: HybridAquaticFishEntity>(
         if (animatable !is OverlayTextureFeature) return
         if (animatable.getOverlayTextureName().isEmpty()) return
 
-        val layerTexture: Identifier = getLayerTextureResource(animatable.getOverlayTextureName())
-        val layerRenderLayer = RenderLayer.getEntityTranslucent(layerTexture)
+        val layerTexture: ResourceLocation = getLayerTextureResource(animatable.getOverlayTextureName())
+        val layerRenderType = RenderType.entityTranslucent(layerTexture)
 
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderLayer,
-            bufferSource.getBuffer(layerRenderLayer), partialTick, packedLight, OverlayTexture.DEFAULT_UV,
+        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderType,
+            bufferSource.getBuffer(layerRenderType), partialTick, packedLight, OverlayTexture.DEFAULT_UV,
             1f, 1f, 1f, 1f)
     }
 }

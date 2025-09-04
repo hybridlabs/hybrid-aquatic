@@ -10,22 +10,22 @@ import dev.hybridlabs.aquatic.client.command.RandomFishCommand
 import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
-import dev.hybridlabs.aquatic.client.render.armor.*
-import dev.hybridlabs.aquatic.client.render.block.entity.*
-import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
-import dev.hybridlabs.aquatic.client.render.item.*
+import dev.hybridlabs.aquatic.client.renderer.armor.*
+import dev.hybridlabs.aquatic.client.renderer.block.entity.*
+import dev.hybridlabs.aquatic.client.renderer.entity.HybridAquaticEntityRenderers
+import dev.hybridlabs.aquatic.client.renderer.item.*
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.api.ClientModInitializer
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderTypeMap
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.render.RenderLayer
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
-import net.minecraft.client.render.entity.model.BipedEntityModel
+import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.block.entity.BlockEntityRendererFactories
+import net.minecraft.client.renderer.block.entity.Bloc.EntityRendererProvider
+import net.minecraft.client.renderer.entity.model.HumanoidModel
 import net.minecraft.command.CommandRegistryAccess
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -38,7 +38,7 @@ object HybridAquaticClient : ClientModInitializer {
         HybridAquaticEntityModelLayers
         HybridAquaticClientNetworking
 
-        registerBlockRenderLayers()
+        registerBlockRenderTypes()
         registerBlockEntityRenderers()
         registerBuiltinItemRenderers()
         registerEntityRenderers()
@@ -67,8 +67,8 @@ object HybridAquaticClient : ClientModInitializer {
                     livingEntity: LivingEntity,
                     itemStack: ItemStack,
                     equipmentSlot: EquipmentSlot,
-                    original: BipedEntityModel<LivingEntity>
-                ): BipedEntityModel<LivingEntity> {
+                    original: HumanoidModel<LivingEntity>
+                ): HumanoidModel<LivingEntity> {
                     renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original)
                     return renderer
                 }
@@ -84,16 +84,16 @@ object HybridAquaticClient : ClientModInitializer {
         ItemTooltipCallback.EVENT.register(FishingNetTooltip())
     }
 
-    private fun registerBlockRenderLayers(registry: BlockRenderLayerMap = BlockRenderLayerMap.INSTANCE) {
+    private fun registerBlockRenderTypes(registry: BlockRenderTypeMap = BlockRenderTypeMap.INSTANCE) {
         registry.putBlocks(
-            RenderLayer.getTranslucent(),
+            RenderType.getTranslucent(),
             HybridAquaticBlocks.ANEMONE,
             HybridAquaticBlocks.GIANT_GREEN_ANEMONE,
             HybridAquaticBlocks.STRAWBERRY_ANEMONE,
             HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE,
         )
         registry.putBlocks(
-            RenderLayer.getCutout(),
+            RenderType.getCutout(),
             HybridAquaticBlocks.RED_ALGAE,
             HybridAquaticBlocks.TALL_RED_ALGAE,
 
@@ -171,9 +171,9 @@ object HybridAquaticClient : ClientModInitializer {
         registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE, MessageInABottleBlockItemRenderer())
     }
 
-    fun createBlockEntityRendererFactoryContext(): BlockEntityRendererFactory.Context {
+    fun createBloc.EntityRendererProviderContext(): Bloc.EntityRendererProvider.Context {
         val client = MinecraftClient.getInstance()
-        return BlockEntityRendererFactory.Context(
+        return Bloc.EntityRendererProvider.Context(
             client.blockEntityRenderDispatcher,
             client.blockRenderManager,
             client.itemRenderer,

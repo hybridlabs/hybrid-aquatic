@@ -4,8 +4,8 @@ import dev.hybridlabs.aquatic.entity.ai.goal.FishJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -14,7 +14,7 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 
-class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: World) :
+class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Level) :
     HybridAquaticSchoolingFishEntity(
         entityType, world,
         listOf(HybridAquaticEntityTags.NONE),
@@ -27,14 +27,14 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Worl
 
     private var isGliding = false
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 6
     }
 
-    override fun initGoals() {
-        super.initGoals()
-        targetSelector.add(5, FishJumpGoal(this, 10))
-        goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
+    override fun registerGoals() {
+        super.registerGoals()
+        targetSelector.addGoal(5, FishJumpGoal(this, 10))
+        goalSelector.addGoal(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
     }
 
     override fun tick() {
@@ -84,13 +84,13 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Worl
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
+                .add(Attributes.MAX_HEALTH, 3.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.6)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 4.0)
         }
     }
 }

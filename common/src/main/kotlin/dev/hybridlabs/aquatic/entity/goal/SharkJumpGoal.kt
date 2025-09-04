@@ -26,7 +26,7 @@ class SharkJumpGoal(private val shark: HybridAquaticSharkEntity, chance: Int) : 
             val var6 = var5.size
             for (var7 in 0 until var6) {
                 val k = var5[var7]
-                if (!isWater(blockPos, i, j, k) || !isAirAbove(blockPos, i, j, k)) {
+                if (!isWaterAt(blockPos, i, j, k) || !isAirAbove(blockPos, i, j, k)) {
                     return false
                 }
             }
@@ -34,7 +34,7 @@ class SharkJumpGoal(private val shark: HybridAquaticSharkEntity, chance: Int) : 
         }
     }
 
-    private fun isWater(pos: BlockPos, offsetX: Int, offsetZ: Int, multiplier: Int): Boolean {
+    private fun isWaterAt(pos: BlockPos, offsetX: Int, offsetZ: Int, multiplier: Int): Boolean {
         val blockPos = pos.offset(offsetX * multiplier, 0, offsetZ * multiplier)
         return shark.level().getFluidState(blockPos).`is`(FluidTags.WATER) && !shark.level().getBlockState(blockPos)
             .blocksMotion()

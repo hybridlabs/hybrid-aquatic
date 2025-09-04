@@ -2,12 +2,12 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.util.Identifier
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.World
 
-class GoldfishEntity(entityType: EntityType<out GoldfishEntity>, world: World) :
+class GoldfishEntity(entityType: EntityType<out GoldfishEntity>, world: Level) :
     HybridAquaticFishEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE),
@@ -16,22 +16,22 @@ class GoldfishEntity(entityType: EntityType<out GoldfishEntity>, world: World) :
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK)) {
 
-    public override fun getLootTableId(): Identifier {
-        return Identifier("hybrid-aquatic", "entities/goldfish")
+    public override fun getLootTableId(): ResourceLocation {
+        return ResourceLocation("hybrid-aquatic", "entities/goldfish")
     }
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 4
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
+                .add(Attributes.MAX_HEALTH, 3.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 4.0)
         }
     }
 }

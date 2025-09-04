@@ -3,34 +3,34 @@ package dev.hybridlabs.aquatic.entity.critter
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
+import net.minecraft.entity.MobSpawnType
 import net.minecraft.entity.VariantHolder
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.nbt.NbtCompound
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
+import net.minecraft.entity.data.SynchedEntityData
+import net.minecraft.entity.data.EntityDataAccessor
+import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.registry.tag.BiomeTags
-import net.minecraft.util.StringIdentifiable
-import net.minecraft.util.function.ValueLists
-import net.minecraft.world.LocalDifficulty
-import net.minecraft.world.ServerWorldAccess
+import net.minecraft.util.StringRepresentable
+import net.minecraft.util.function.ByIdMap
+import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.ServerLevelAccess
 import net.minecraft.world.World
 import net.minecraft.world.biome.Biome
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: World) :
+class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Level) :
     HybridAquaticCritterEntity(entityType, world),
     VariantHolder<SeaCucumberEntity.Companion.Type> {
 
     override fun remove(reason: RemovalReason) {
-        if (!world.isClient && this.isDead) {
+        if (!world.isClientSide && this.isDead) {
             if (world.random.nextInt(4) == 0) {
                 val text = this.customName
-                val isAiDisabled = this.isAiDisabled
+                val.isNoAi = this.isNoAi
                 val spawnCount = 1 + world.random.nextInt(2)
 
                 for (l in 0 until spawnCount) {
@@ -40,7 +40,7 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
 
                     pearlfishEntity?.let {
                         it.customName = text
-                        it.isAiDisabled = isAiDisabled
+                        it.isNoAi =.isNoAi
                         it.isInvulnerable = this.isInvulnerable
                         it.refreshPositionAndAngles(
                             this.x + offsetX,
@@ -60,19 +60,19 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 2.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 2.0)
+                .add(Attributes.MAX_HEALTH, 2.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.3)
+                .add(Attributes.ATTACK_DAMAGE, 2.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 2.0)
         }
 
-        val TYPE: TrackedData<Int> =
-            DataTracker.registerData(SeaCucumberEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val TYPE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(SeaCucumberEntity::class.java, EntityDataSerializers.INTEGER)
 
-        enum class Type(val id: Int, private val key: String) : StringIdentifiable {
+        enum class Type(val id: Int, private val key: String) : StringRepresentable {
             COMMON(0, "common"),
             SEA_PIG(1, "sea_pig");
 
@@ -81,15 +81,15 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
             }
 
             companion object {
-                val CODEC: StringIdentifiable.Codec<Type> = StringIdentifiable.createCodec { entries.toTypedArray() }
-                private val BY_ID: IntFunction<Type> = ValueLists.createIdToValueFunction(
+                val CODEC: StringRepresentable.EnumCodec<Type> = StringRepresentable.fromEnum { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ByIdMap.continuous(
                     { obj: Type -> obj.id },
                     entries.toTypedArray(),
-                    ValueLists.OutOfBoundsHandling.ZERO
+                    ByIdMap.OutOfBoundsStrategy.ZERO
                 )
 
                 fun byName(name: String?): Type {
-                    return CODEC.byId(name, COMMON) as Type
+                    return CODEC.byName(name, COMMON) as Type
                 }
 
                 fun fromId(id: Int): Type {
@@ -97,7 +97,7 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
                 }
 
                 fun fromBiome(biome: RegistryEntry<Biome?>): Type {
-                    return if (biome.isIn(BiomeTags.IS_DEEP_OCEAN)) {
+                    return if (biome.`is`(BiomeTags.IS_DEEP_OCEAN)) {
                         SEA_PIG
                     } else {
                         COMMON
@@ -107,17 +107,17 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
         }
     }
 
-    override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
-    ): EntityData? {
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
+    ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPos)
         val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun getMaxSize(): Int {
@@ -128,26 +128,26 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Wo
         return -5
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(TYPE, 0)
-        super.initDataTracker()
+    override fun initSynchedEntityData() {
+        entityData.define(TYPE, 0)
+        super.initSynchedEntityData()
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putString("Type", this.variant.asString())
-        super.writeCustomDataToNbt(nbt)
+        super.addAdditionalSaveData(nbt)
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
         this.variant = Type.byName(nbt.getString("Type"))
-        super.readCustomDataFromNbt(nbt)
+        super.readAdditionalSaveData(nbt)
     }
 
     override fun getVariant(): Type {
-        return Type.fromId((dataTracker.get(TYPE) as Int))
+        return Type.fromId((entityData.get(TYPE) as Int))
     }
 
     override fun setVariant(type: Type) {
-        dataTracker.set(TYPE, type.id)
+        entityData.set(TYPE, type.id)
     }
 }

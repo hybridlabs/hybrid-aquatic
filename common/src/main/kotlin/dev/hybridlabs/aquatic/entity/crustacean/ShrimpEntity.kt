@@ -4,36 +4,36 @@ import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import net.minecraft.entity.EntityData
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.util.StringIdentifiable
-import net.minecraft.util.function.ValueLists
-import net.minecraft.world.LocalDifficulty
-import net.minecraft.world.ServerWorldAccess
+import net.minecraft.entity.MobSpawnType
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
+import net.minecraft.entity.data.SynchedEntityData
+import net.minecraft.entity.data.EntityDataAccessor
+import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.util.StringRepresentable
+import net.minecraft.util.function.ByIdMap
+import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.ServerLevelAccess
 import net.minecraft.world.World
 import java.util.function.IntFunction
 
-class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: World) :
+class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
     HybridAquaticCrustaceanEntity(entityType, world, false), OverlayTextureFeature {
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
+                .add(Attributes.MAX_HEALTH, 1.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.25)
+                .add(Attributes.ATTACK_DAMAGE, 2.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 4.0)
         }
 
-        val OverlayTexture: TrackedData<Int> =
-            DataTracker.registerData(ShrimpEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
+        val OverlayTexture: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(ShrimpEntity::class.java, EntityDataSerializers.INTEGER)
 
-        enum class OverlayTextures(val id: Int, val key: String) : StringIdentifiable {
+        enum class OverlayTextures(val id: Int, val key: String) : StringRepresentable {
             NONE(0, ""),
             STRIPES(1, "stripes"),
             TAIL(2, "tail"),
@@ -48,11 +48,11 @@ class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, wo
 
             companion object {
                 val CODEC: Codec<OverlayTextures> =
-                    StringIdentifiable.createCodec { OverlayTextures.entries.toTypedArray() }
-                val BY_ID: IntFunction<OverlayTextures> = ValueLists.createIdToValueFunction(
+                    StringRepresentable.fromEnum { OverlayTextures.entries.toTypedArray() }
+                val BY_ID: IntFunction<OverlayTextures> = ByIdMap.continuous(
                     { overlayTex: OverlayTextures -> overlayTex.id },
                     OverlayTextures.entries.toTypedArray(),
-                    ValueLists.OutOfBoundsHandling.WRAP
+                    ByIdMap.OutOfBoundsStrategy.WRAP
                 )
 
                 fun byId(id: Int): OverlayTextures {
@@ -62,17 +62,17 @@ class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, wo
         }
     }
 
-    override fun initialize(
-        world: ServerWorldAccess,
-        difficulty: LocalDifficulty,
-        spawnReason: SpawnReason,
-        entityData: EntityData?,
-        entityNbt: NbtCompound?
-    ): EntityData? {
-        val overlayID = world.random.nextBetween(0, OverlayTextures.entries.size - 1)
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
+    ): SpawnGroupData? {
+        val overlayID = world.random.nextIntBetweenInclusive(0, OverlayTextures.entries.size - 1)
         overlayTexture = OverlayTextures.byId(overlayID)
 
-        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun getMaxSize() : Int {
@@ -84,27 +84,27 @@ class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, wo
     }
 
     private var overlayTexture
-        get() = ShrimpEntity.Companion.OverlayTextures.byId(dataTracker.get(OverlayTexture))
+        get() = ShrimpEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture))
         set(value) {
-            dataTracker.set(OverlayTexture, value.id)
+            entityData.set(OverlayTexture, value.id)
         }
 
     override fun getOverlayTextureName(): String {
-        return ShrimpEntity.Companion.OverlayTextures.byId(dataTracker.get(OverlayTexture)).asString()
+        return ShrimpEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).asString()
     }
 
-    override fun initDataTracker() {
-        dataTracker.startTracking(OverlayTexture, 0)
-        super.initDataTracker()
+    override fun initSynchedEntityData() {
+        entityData.define(OverlayTexture, 0)
+        super.initSynchedEntityData()
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putInt("texture_overlay", this.overlayTexture.id)
-        super.writeCustomDataToNbt(nbt)
+        super.addAdditionalSaveData(nbt)
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
         if(nbt.contains("texture_overlay")) this.overlayTexture = ShrimpEntity.Companion.OverlayTextures.byId(nbt.getInt("texture_overlay"))
-        super.readCustomDataFromNbt(nbt)
+        super.readAdditionalSaveData(nbt)
     }
 }

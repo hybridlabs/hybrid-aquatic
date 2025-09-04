@@ -16,7 +16,7 @@ class FishFollowGroupLeaderGoal(
         return toGoalTicks(minSearchDelay + fish!!.random.nextInt(minSearchDelay) % 20)
     }
 
-    override fun canStart(): Boolean {
+    override fun canUse(): Boolean {
         return if (fish.hasOtherFishInGroup()) {
             false
         } else if (fish.hasLeader()) {

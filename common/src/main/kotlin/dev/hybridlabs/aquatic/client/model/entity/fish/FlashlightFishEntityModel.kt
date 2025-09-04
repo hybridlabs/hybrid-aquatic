@@ -15,6 +15,6 @@ class FlashlightFishEntityModel : HybridAquaticFishEntityModel<FlashlightFishEnt
             "textures/entity/fish/flashlight_fish/flashlight_fish_off.png"
         }
 
-        return ResourceLocation(HybridAquatic.MOD_ID, texturePath)
+        return ResourceLocation(Constants.MOD_ID, texturePath)
     }
 }

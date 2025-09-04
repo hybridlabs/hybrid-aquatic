@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.properties.WoodType
 object HybridAquaticWoodTypes {
     val DRIFTWOOD: WoodType = WoodTypeBuilder.copyOf(WoodType.OAK).build(
         ResourceLocation(
-            HybridAquatic.MOD_ID,
+            Constants.MOD_ID,
             "driftwood"
         ), HybridAquaticBlockSetTypes.DRIFTWOOD
     )

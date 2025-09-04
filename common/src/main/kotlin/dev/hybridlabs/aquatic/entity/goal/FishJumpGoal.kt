@@ -26,7 +26,7 @@ class FishJumpGoal(private val fish: HybridAquaticFishEntity, chance: Int) : Jum
             val var6 = var5.size
             for (var7 in 0 until var6) {
                 val k = var5[var7]
-                if (!isWater(blockPos, i, j, k) || !isAirAbove(blockPos, i, j, k)) {
+                if (!isWaterAt(blockPos, i, j, k) || !isAirAbove(blockPos, i, j, k)) {
                     return false
                 }
             }
@@ -34,7 +34,7 @@ class FishJumpGoal(private val fish: HybridAquaticFishEntity, chance: Int) : Jum
         }
     }
 
-    private fun isWater(pos: BlockPos, offsetX: Int, offsetZ: Int, multiplier: Int): Boolean {
+    private fun isWaterAt(pos: BlockPos, offsetX: Int, offsetZ: Int, multiplier: Int): Boolean {
         val blockPos = pos.offset(offsetX * multiplier, 0, offsetZ * multiplier)
         return fish.level().getFluidState(blockPos).`is`(FluidTags.WATER) && !fish.level().getBlockState(blockPos)
             .blocksMotion()

@@ -1,13 +1,13 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnReason
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.entity.mob.HostileEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.nbt.NbtCompound
+import net.minecraft.entity.MobSpawnType
+import net.minecraft.entity.data.SynchedEntityData
+import net.minecraft.entity.data.EntityDataAccessor
+import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.entity.mob.Monster
+import net.minecraft.entity.player.Player
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
@@ -18,52 +18,52 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
-abstract class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, world: World) : HostileEntity(type, world), GeoEntity {
+abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world: Level) : Monster(type, world), GeoEntity {
 
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     private var attackTick = 0
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(ATTEMPT_ATTACK, false)
+    override fun initSynchedEntityData() {
+        super.initSynchedEntityData()
+        entityData.define(ATTEMPT_ATTACK, false)
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
-        super.writeCustomDataToNbt(nbt)
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        super.addAdditionalSaveData(nbt)
         nbt.putInt("AttackTick", this.attackTick)
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
-        super.readCustomDataFromNbt(nbt)
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
+        super.readAdditionalSaveData(nbt)
         this.attackTick = nbt.getInt("AttackTick")
     }
 
     override fun tick() {
         super.tick()
-        if (isAiDisabled) {
+        if .isNoAi) {
             return
         }
     }
 
-    override fun tickMovement() {
-        this.tickHandSwing()
-        super.tickMovement()
+    override fun aiStep() {
+        this.updateSwingTime()
+        super.aiStep()
     }
 
-    override fun isPushedByFluids(): Boolean {
+    override fun isPushedByFluid(): Boolean {
         return false
     }
 
-    override fun canImmediatelyDespawn(distanceSquared: Double): Boolean {
+    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return false
     }
 
-    override fun canBreatheInWater(): Boolean {
+    override fun canBreatheUnderwater(): Boolean {
         return true
     }
 
-    override fun isAngryAt(player: PlayerEntity?): Boolean {
+    override fun isPreventingPlayerRest(player:Player?): Boolean {
         return true
     }
 
@@ -73,13 +73,13 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, 
 
     companion object {
 
-        val ATTEMPT_ATTACK: TrackedData<Boolean> =
-            DataTracker.registerData(HybridAquaticMinibossEntity::class.java, TrackedDataHandlerRegistry.BOOLEAN)
+        val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HybridAquaticMinibossEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         fun canSpawn(
-            type: EntityType<out HostileEntity>,
-            world: WorldAccess,
-            reason: SpawnReason,
+            type: EntityType<out Monster>,
+            world: LevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
             random: Random
         ): Boolean {
@@ -87,7 +87,7 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out HostileEntity>, 
             val bottomY = world.seaLevel - 24
 
             return pos.y in bottomY..topY &&
-                    world.isWater(pos)
+                    world.isWaterAt(pos)
         }
     }
 }

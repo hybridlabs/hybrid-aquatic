@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.render.features
+package dev.hybridlabs.aquatic.client.renderer.features
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.interfaces.Porcupine
@@ -6,14 +6,14 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.model.PlayerModel
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.LivingEntityRenderer
-import net.minecraft.client.renderer.entity.layers.RenderLayer
+import net.minecraft.client.renderer.entity.layers.RenderType
 import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemDisplayContext
 
 class PlayerItemPorcupineFeature(entityRenderer: LivingEntityRenderer<Player, PlayerModel<Player>>?) :
-    RenderLayer<Player, PlayerModel<Player>>(entityRenderer) {
+    RenderType<Player, PlayerModel<Player>>(entityRenderer) {
 
     val itemRenderer = Minecraft.getInstance().itemRenderer
 

@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.render.entity.cephalopods
+package dev.hybridlabs.aquatic.client.renderer.entity.cephalopods
 
 import dev.hybridlabs.aquatic.client.model.entity.cephalopod.CuttlefishEntityModel
 import dev.hybridlabs.aquatic.entity.cephalopod.CuttlefishEntity

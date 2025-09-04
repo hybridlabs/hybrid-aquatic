@@ -36,6 +36,6 @@ object HybridAquaticPlacedFeatures {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
 
     private fun register(id: String): ResourceKey<PlacedFeature> {
-        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation(HybridAquatic.MOD_ID, id))
+        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation(Constants.MOD_ID, id))
     }
 }

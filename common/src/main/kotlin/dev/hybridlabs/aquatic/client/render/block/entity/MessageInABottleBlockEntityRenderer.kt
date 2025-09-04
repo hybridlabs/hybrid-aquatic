@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package dev.hybridlabs.aquatic.client.render.block.entity
+package dev.hybridlabs.aquatic.client.renderer.block.entity
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer

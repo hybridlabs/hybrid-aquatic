@@ -14,17 +14,17 @@ import net.minecraft.item.SpawnEggItem
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.text.Text
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.math.BlockPos
 
 object  HybridAquaticItemGroups {
     val BLOCKS = register("blocks", FabricItemGroup.builder()
-        .displayName(Text.translatable("itemGroup.${HybridAquatic.MOD_ID}.blocks"))
+        .displayName(Text.translatable("itemGroup.${Constants.MOD_ID}.blocks"))
         .icon { ItemStack(HybridAquaticItems.ANEMONE) }
         .entries { _, entries ->
             // message in a bottle variants
             MessageInABottleBlock.Variant.entries.forEach { variant ->
-                val blockEntity = MessageInABottleBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.defaultState)
+                val blockEntity = MessageInABottleBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.defaultBlockState())
                     .also { blockEntity -> blockEntity.variant = variant }
                 val stack = MessageInABottleBlock.createItemStack(blockEntity)
                 entries.add(stack)
@@ -115,7 +115,7 @@ object  HybridAquaticItemGroups {
 
             Registries.ITEM.forEach { item ->
                 val id = Registries.ITEM.getId(item)
-                if (id.namespace != HybridAquatic.MOD_ID) {
+                if (id.namespace != Constants.MOD_ID) {
                     return@forEach
                 }
             }
@@ -124,7 +124,7 @@ object  HybridAquaticItemGroups {
     )
 
     val ITEMS = register("items", FabricItemGroup.builder()
-        .displayName(Text.translatable("itemGroup.${HybridAquatic.MOD_ID}.items"))
+        .displayName(Text.translatable("itemGroup.${Constants.MOD_ID}.items"))
         .icon { ItemStack(HybridAquaticItems.BARBED_HOOK) }
         .entries { _, entries ->
 
@@ -260,7 +260,7 @@ object  HybridAquaticItemGroups {
             // spawn eggs
             Registries.ITEM.forEach { item ->
                 val id = Registries.ITEM.getId(item)
-                if (id.namespace != HybridAquatic.MOD_ID) {
+                if (id.namespace != Constants.MOD_ID) {
                     return@forEach
                 }
             }
@@ -269,12 +269,12 @@ object  HybridAquaticItemGroups {
     )
 
     val SPAWN_EGGS = register("spawn_eggs", FabricItemGroup.builder()
-        .displayName(Text.translatable("itemGroup.${HybridAquatic.MOD_ID}.spawn_eggs"))
+        .displayName(Text.translatable("itemGroup.${Constants.MOD_ID}.spawn_eggs"))
         .icon { ItemStack(HybridAquaticItems.YELLOWFIN_TUNA) }
         .entries { _, entries ->
             Registries.ITEM.forEach { item ->
                 val id = Registries.ITEM.getId(item)
-                if (id.namespace != HybridAquatic.MOD_ID) {
+                if (id.namespace != Constants.MOD_ID) {
                     return@forEach
                 }
                 if (item is SpawnEggItem) {
@@ -286,6 +286,6 @@ object  HybridAquaticItemGroups {
     )
 
     private fun register(id: String, itemGroup: ItemGroup): ItemGroup {
-        return Registry.register(Registries.ITEM_GROUP, Identifier(HybridAquatic.MOD_ID, id), itemGroup)
+        return Registry.register(Registries.ITEM_GROUP, ResourceLocation(Constants.MOD_ID, id), itemGroup)
     }
 }

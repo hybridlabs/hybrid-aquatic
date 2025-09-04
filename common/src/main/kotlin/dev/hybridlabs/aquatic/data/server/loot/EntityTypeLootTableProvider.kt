@@ -19,14 +19,14 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.predicate.entity.EntityFlagsPredicate
 import net.minecraft.predicate.entity.EntityPredicate
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
 import java.util.function.BiConsumer
 
 /**
  * Generates entity loot tables.
  */
 class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTableProvider(output, LootContextTypes.ENTITY) {
-    override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
+    override fun accept(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
         // nautilus
         export(exporter, HybridAquaticEntityTypes.NAUTILUS) {
             pool(
@@ -917,7 +917,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) : SimpleFabricLootTa
     /**
      * Exports a loot table for [entityType] to [exporter] using its loot table id.
      */
-    private fun export(exporter: BiConsumer<Identifier, LootTable.Builder>, entityType: EntityType<*>, builder: LootTable.Builder.() -> Unit) {
+    private fun export(exporter: BiConsumer<ResourceLocation, LootTable.Builder>, entityType: EntityType<*>, builder: LootTable.Builder.() -> Unit) {
         exporter.accept(entityType.lootTableId, LootTable.builder().apply(builder))
     }
 

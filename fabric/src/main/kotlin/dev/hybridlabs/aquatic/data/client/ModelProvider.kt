@@ -38,7 +38,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 .filterIsInstance<LiquidBlock>()
                 .forEach { block ->
                     val id = BuiltInRegistries.BLOCK.getKey(block)
-                    if (id.namespace == HybridAquatic.MOD_ID) {
+                    if (id.namespace == Constants.MOD_ID) {
                         createNonTemplateModelBlock(block)
                     }
                 }

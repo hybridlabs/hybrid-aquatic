@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.ai.goal.EscapeDangerGoal
-import net.minecraft.entity.ai.goal.SwimAroundGoal
-import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.ai.goal.PanicGoal
+import net.minecraft.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.entity.mob.WaterAnimal
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.world.World
 import software.bernie.geckolib.animatable.GeoEntity
@@ -24,12 +24,12 @@ open class HybridAquaticOctopusEntity(
     open var hasInk: Boolean,
     open var hasGlowInk: Boolean,
     open var canCamouflage: Boolean
-) : WaterCreatureEntity(type, world), GeoEntity {
+) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
-    override fun initGoals() {
-        goalSelector.add(0, EscapeDangerGoal(this, 1.25))
-        goalSelector.add(3, SwimAroundGoal(this, 1.0, 10))
+    override fun registerGoals() {
+        goalSelector.addGoal(0, PanicGoal(this, 1.25))
+        goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 10))
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
@@ -39,7 +39,7 @@ open class HybridAquaticOctopusEntity(
                 "Swim/Run",
                 20
             ) { state: AnimationState<HybridAquaticOctopusEntity> ->
-                if (!this.isSubmergedInWater && isOnGround) {
+                if (!this.isUnderWater && isOnGround) {
                     state.setAndContinue(DefaultAnimations.SIT)
                 } else {
                     if (state.isMoving) {

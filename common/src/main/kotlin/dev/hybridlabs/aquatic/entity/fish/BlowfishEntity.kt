@@ -6,22 +6,22 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.TargetPredicate
 import net.minecraft.entity.ai.goal.Goal
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
 import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.DataTracker
-import net.minecraft.entity.data.TrackedData
-import net.minecraft.entity.data.TrackedDataHandlerRegistry
-import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.data.SynchedEntityData
+import net.minecraft.entity.data.EntityDataAccessor
+import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.entity.effect.MobEffectInstance
+import net.minecraft.entity.effect.MobEffects
 import net.minecraft.entity.mob.MobEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.nbt.NbtCompound
+import net.minecraft.entity.player.Player
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.sound.SoundEvents
 import net.minecraft.world.World
 import java.util.function.Predicate
 
-class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: World) :
+class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
     HybridAquaticFishEntity(
         entityType, world,
         listOf(HybridAquaticEntityTags.NONE),
@@ -32,43 +32,43 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: World) :
         )
     ) {
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 2
     }
 
-    override fun initGoals() {
-        goalSelector.add(0, InflateGoal())
+    override fun registerGoals() {
+        goalSelector.addGoal(0, InflateGoal())
     }
 
     var inflateTicks = 0
     var deflateTicks = 0
 
-    override fun initDataTracker() {
-        super.initDataTracker()
-        dataTracker.startTracking(PUFF_STATE, NOT_PUFFED)
+    override fun initSynchedEntityData() {
+        super.initSynchedEntityData()
+        entityData.define(PUFF_STATE, NOT_PUFFED)
     }
 
     fun getPuffState(): Int {
-        return dataTracker.get(PUFF_STATE)
+        return entityData.get(PUFF_STATE)
     }
 
     private fun setPuffState(state: Int) {
-        dataTracker.set(PUFF_STATE, state)
+        entityData.set(PUFF_STATE, state)
     }
 
-    override fun writeCustomDataToNbt(nbt: NbtCompound) {
-        super.writeCustomDataToNbt(nbt)
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        super.addAdditionalSaveData(nbt)
         nbt.putInt("PuffState", getPuffState())
     }
 
-    override fun readCustomDataFromNbt(nbt: NbtCompound) {
-        super.readCustomDataFromNbt(nbt)
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
+        super.readAdditionalSaveData(nbt)
         setPuffState(nbt.getInt("PuffState").coerceAtMost(FULLY_PUFFED))
     }
 
     override fun tick() {
         super.tick()
-        if (!world.isClient && isAlive && canMoveVoluntarily()) {
+        if (!world.isClientSide && isAlive && canMoveVoluntarily()) {
             when {
                 inflateTicks > 0 -> handleInflation()
                 getPuffState() != NOT_PUFFED -> handleDeflation()
@@ -78,10 +78,10 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: World) :
 
     private fun handleInflation() {
         if (getPuffState() == NOT_PUFFED) {
-            playSound(SoundEvents.ENTITY_PUFFER_FISH_BLOW_UP, soundVolume, soundPitch)
+            playSound(SoundEvents._PUFFER_FISH_BLOW_UP, soundVolume, soundPitch)
             setPuffState(SEMI_PUFFED)
         } else if (inflateTicks > 40 && getPuffState() == SEMI_PUFFED) {
-            playSound(SoundEvents.ENTITY_PUFFER_FISH_BLOW_UP, soundVolume, soundPitch)
+            playSound(SoundEvents._PUFFER_FISH_BLOW_UP, soundVolume, soundPitch)
             setPuffState(FULLY_PUFFED)
         }
         inflateTicks++
@@ -89,17 +89,17 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: World) :
 
     private fun handleDeflation() {
         if (deflateTicks > 60 && getPuffState() == FULLY_PUFFED) {
-            playSound(SoundEvents.ENTITY_PUFFER_FISH_BLOW_OUT, soundVolume, soundPitch)
+            playSound(SoundEvents._PUFFER_FISH_BLOW_OUT, soundVolume, soundPitch)
             setPuffState(SEMI_PUFFED)
         } else if (deflateTicks > 100 && getPuffState() == SEMI_PUFFED) {
-            playSound(SoundEvents.ENTITY_PUFFER_FISH_BLOW_OUT, soundVolume, soundPitch)
+            playSound(SoundEvents._PUFFER_FISH_BLOW_OUT, soundVolume, soundPitch)
             setPuffState(NOT_PUFFED)
         }
         deflateTicks++
     }
 
-    override fun tickMovement() {
-        super.tickMovement()
+    override fun aiStep() {
+        super.aiStep()
         if (isAlive && getPuffState() > 0) {
             val nearbyEntities = world.getEntitiesByClass(MobEntity::class.java, boundingBox.expand(0.3)) {
                 BLOW_UP_TARGET_PREDICATE.test(this, it)
@@ -113,7 +113,7 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: World) :
 
             val attacker = source.attacker
             if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
-                attacker.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 200, 1))
+                attacker.addMobEffect(MobEffectInstance(MobEffects.POISON, 200, 1))
             }
 
             return true
@@ -126,20 +126,20 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: World) :
         val puffLevel = getPuffState()
         val damageSource = this.damageSources.mobAttack(this)
         if (mob.damage(damageSource, (1 + puffLevel).toFloat())) {
-            mob.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 60 * puffLevel, 0), this)
-            playSound(SoundEvents.ENTITY_PUFFER_FISH_STING, 1.0f, 1.0f)
+            mob.addMobEffect(MobEffectInstance(MobEffects.POISON, 60 * puffLevel, 0), this)
+            playSound(SoundEvents._PUFFER_FISH_STING, 1.0f, 1.0f)
         }
     }
 
-    override fun onPlayerCollision(player: PlayerEntity) {
+    override fun onPlayerCollision(player:Player) {
         val puffLevel = getPuffState()
         if (puffLevel > 0 && player.damage(this.damageSources.mobAttack(this), (1 + puffLevel).toFloat())) {
-            player.addStatusEffect(StatusEffectInstance(StatusEffects.POISON, 60 * puffLevel, 0), this)
+            player.addMobEffect(MobEffectInstance(MobEffects.POISON, 60 * puffLevel, 0), this)
         }
     }
 
     private inner class InflateGoal : Goal() {
-        override fun canStart(): Boolean {
+        override fun canUse(): Boolean {
             val nearbyEntities = world.getEntitiesByClass(LivingEntity::class.java, boundingBox.expand(2.0)) {
                 BLOW_UP_TARGET_PREDICATE.test(this@BlowfishEntity, it)
             }
@@ -157,17 +157,17 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: World) :
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
+                .add(Attributes.MAX_HEALTH, 3.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.3)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 4.0)
         }
 
-        private val PUFF_STATE: TrackedData<Int> = DataTracker.registerData(BlowfishEntity::class.java, TrackedDataHandlerRegistry.INTEGER)
-        private val BLOW_UP_FILTER: Predicate<LivingEntity> = Predicate { entity -> if (entity is PlayerEntity && entity.isCreative) false else entity.group != EntityGroup.AQUATIC }
+        private val PUFF_STATE: EntityDataAccessor<Int> = SynchedEntityData.defineId(BlowfishEntity::class.java, EntityDataSerializers.INTEGER)
+        private val BLOW_UP_FILTER: Predicate<LivingEntity> = Predicate { entity -> if (entity isPlayer && entity.isCreative) false else entity.group != EntityGroup.AQUATIC }
         private val BLOW_UP_TARGET_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility().setPredicate(BLOW_UP_FILTER)
 
         const val NOT_PUFFED = 0

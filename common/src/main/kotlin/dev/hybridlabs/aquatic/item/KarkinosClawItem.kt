@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.item
 
 import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.Multimap
-import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes
+import com.jamieswhiteshirt.reachentityattributes.ReachAttributes
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.ai.attributes.Attribute
 import net.minecraft.world.entity.ai.attributes.AttributeModifier
@@ -17,7 +17,7 @@ class KarkinosClawItem(settings: Properties) : Item(settings) {
     init {
         val builder = ImmutableMultimap.builder<Attribute, AttributeModifier>()
         builder.put(
-            ReachEntityAttributes.REACH,
+            ReachAttributes.REACH,
             AttributeModifier(
                 UUID.fromString("592e9225-a554-42c9-9366-0fe5c53d9305"),
                 "Reach modifier",

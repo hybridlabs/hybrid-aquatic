@@ -4,11 +4,11 @@ import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
 import net.minecraft.world.World
 
-class DragonfishEntity(entityType: EntityType<out DragonfishEntity>, world: World) :
+class DragonfishEntity(entityType: EntityType<out DragonfishEntity>, world: Level) :
     HybridAquaticFishEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE),
@@ -17,27 +17,27 @@ class DragonfishEntity(entityType: EntityType<out DragonfishEntity>, world: Worl
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK)) {
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 4
     }
 
-    override fun initGoals() {
-        super.initGoals()
+    override fun registerGoals() {
+        super.registerGoals()
         if (world.isDay) {
-            goalSelector.add(1, StayDeepGoal(this, 1.0, 1, 8))
+            goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 8))
         } else {
-            goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
+            goalSelector.addGoal(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
         }
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 4.0)
+                .add(Attributes.MAX_HEALTH, 3.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.25)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 4.0)
         }
     }
 }

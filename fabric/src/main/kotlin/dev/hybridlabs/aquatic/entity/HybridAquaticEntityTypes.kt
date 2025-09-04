@@ -860,7 +860,7 @@ object HybridAquaticEntityTypes {
         id: String,
         entityFactory: EntityFactory<T>,
         dimensions: EntityDimensions,
-        attributeContainer: DefaultAttributeContainer.Builder
+        attributeContainer: AttributeSupplier.Builder
     ): EntityType<T> {
         return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.DOLPHIN)
     }

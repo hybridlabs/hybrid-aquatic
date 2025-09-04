@@ -6,31 +6,31 @@ import net.minecraft.fluid.FluidState
 import net.minecraft.fluid.Fluids
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.util.shape.VoxelShapes
-import net.minecraft.world.BlockView
+import net.minecraft.util.shape.Shapes
+import net.minecraft.world.BlockGetter
 import net.minecraft.world.WorldAccess
 
 @Suppress("OVERRIDE_DEPRECATION")
-class BullKelpPlantBlock(settings: Settings) :
-    AbstractPlantBlock(settings, Direction.UP, VoxelShapes.fullCube(), true), FluidFillable {
-    override fun getStem(): AbstractPlantStemBlock {
-        return HybridAquaticBlocks.BULL_KELP as AbstractPlantStemBlock
+class BullKelpPlantBlock(settings: Properties) :
+    GrowingPlantBodyBlock(settings, Direction.UP, Shapes.block(), true), LiquidBlockContainer {
+    override fun getHeadBlock(): GrowingPlantHeadBlock {
+        return HybridAquaticBlocks.BULL_KELP as GrowingPlantHeadBlock
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return Fluids.WATER.getStill(false)
+        return Fluids.WATER.getSource(false)
     }
 
     override fun canAttachTo(state: BlockState): Boolean {
-        return state.isOf(Blocks.SAND) || state.isOf(Blocks.GRAVEL) || state.isOf(stem) || super.canAttachTo(state)
+        return state.`is`(Blocks.SAND) || state.`is`(Blocks.GRAVEL) || state.`is`(headBlock) || super.canAttachTo(state)
     }
 
-    override fun canFillWithFluid(world: BlockView, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canPlaceLiquid(world: BlockGetter, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
         return false
     }
 
-    override fun tryFillWithFluid(
-        world: WorldAccess,
+    override fun placeLiquid(
+        world: LevelAccessor,
         pos: BlockPos,
         state: BlockState,
         fluidState: FluidState

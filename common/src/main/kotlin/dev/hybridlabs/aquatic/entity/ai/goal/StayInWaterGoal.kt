@@ -7,7 +7,7 @@ import net.minecraft.util.math.Vec3d
 
 class StayInWaterGoal(private val mob: MobEntity) : Goal() {
 
-    override fun canStart(): Boolean {
+    override fun canUse(): Boolean {
         return true
     }
 

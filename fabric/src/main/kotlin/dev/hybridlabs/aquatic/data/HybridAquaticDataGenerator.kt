@@ -50,7 +50,7 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
     fun <T> filterHybridAquatic(registry: Registry<T>): (T & Any) -> Boolean {
         return { o ->
             val id = registry.getKey(o)
-            id!!.namespace == HybridAquatic.MOD_ID
+            id!!.namespace == Constants.MOD_ID
         }
     }
 }

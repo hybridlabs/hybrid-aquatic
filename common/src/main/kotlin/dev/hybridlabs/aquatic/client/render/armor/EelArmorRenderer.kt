@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.render.armor
+package dev.hybridlabs.aquatic.client.renderer.armor
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.item.EelArmorItem
@@ -7,5 +7,5 @@ import software.bernie.geckolib.model.DefaultedItemGeoModel
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 
 class EelArmorRenderer : GeoArmorRenderer<EelArmorItem>(
-    DefaultedItemGeoModel(ResourceLocation(HybridAquatic.MOD_ID, "armor/eel_armor"))
+    DefaultedItemGeoModel(ResourceLocation(Constants.MOD_ID, "armor/eel_armor"))
 )

@@ -9,12 +9,12 @@ import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.context.LootContextTypes
 import net.minecraft.loot.entry.ItemEntry
-import net.minecraft.util.Identifier
+import net.minecraft.resources.ResourceLocation
 import java.util.function.BiConsumer
 
 class FishingLootTableProvider(output: FabricDataOutput) :
     SimpleFabricLootTableProvider(output, LootContextTypes.FISHING) {
-    override fun accept(exporter: BiConsumer<Identifier, LootTable.Builder>) {
+    override fun accept(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
         exporter.accept(
             HybridAquaticLootTables.FISHING_DEEP_SEA_FISH_ID,
             LootTable.builder()

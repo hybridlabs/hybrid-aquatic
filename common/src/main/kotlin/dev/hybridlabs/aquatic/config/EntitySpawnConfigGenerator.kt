@@ -16,7 +16,7 @@ import net.minecraft.world.biome.Biome
 class EntitySpawnConfigGenerator {
     private val list: MutableList<EntitySpawnConfig> = mutableListOf()
 
-    fun initialize() {
+    fun finalizeSpawn() {
         //#region Fish
         addFish(HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH, listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.MARSHES, HybridAquaticBiomeTags.MANGROVES), 2, 1, 1)
         addFish(HybridAquaticEntityTypes.GOLDEN_DORADO, listOf(HybridAquaticBiomeTags.TROPICAL_RIVERS, HybridAquaticBiomeTags.RIVERS, HybridAquaticBiomeTags.JUNGLE), 1, 1, 1)
@@ -290,7 +290,7 @@ class EntitySpawnConfigGenerator {
     companion object {
         fun generate(): List<EntitySpawnConfig> {
             val generator = EntitySpawnConfigGenerator()
-            generator.initialize()
+            generator.finalizeSpawn()
             return generator.list
         }
     }

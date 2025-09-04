@@ -1,8 +1,8 @@
-package dev.hybridlabs.aquatic.client.render.entity.miniboss
+package dev.hybridlabs.aquatic.client.renderer.entity.miniboss
 
 import dev.hybridlabs.aquatic.client.model.entity.miniboss.KarkinosEntityModel
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
-import net.minecraft.client.render.entity.EntityRendererFactory.Context
+import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class KarkinosEntityRenderer(context: Context) :
     HybridAquaticMinibossEntityRenderer<KarkinosEntity>(context, KarkinosEntityModel()) {

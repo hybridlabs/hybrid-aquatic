@@ -5,12 +5,12 @@ import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.ai.goal.Goal
-import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttributes
-import net.minecraft.entity.mob.PathAwareEntity
+import net.minecraft.entity.attribute.AttributeSupplier
+import net.minecraft.entity.attribute.Attributes
+import net.minecraft.entity.mob.PathfinderMob
 import net.minecraft.world.World
 
-class OpahEntity(entityType: EntityType<out OpahEntity>, world: World) :
+class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
     HybridAquaticFishEntity(
         entityType, world,
         listOf(
@@ -23,33 +23,33 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: World) :
         )
     ) {
 
-    override fun getLimitPerChunk(): Int {
+    override fun getSpawnClusterSize(): Int {
         return 2
     }
 
-    override fun initGoals() {
-        super.initGoals()
-        goalSelector.add(2, FollowTunaGoal(this, 1.5, 4.0F, 8.0F))
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(2, FollowTunaGoal(this, 1.5, 4.0F, 8.0F))
         if (world.isDay) {
-            goalSelector.add(1, StayDeepGoal(this, 1.0, 1, 12))
+            goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 12))
         } else {
-            goalSelector.add(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
+            goalSelector.addGoal(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
         }
     }
 
     companion object {
-        fun createMobAttributes(): DefaultAttributeContainer.Builder {
+        fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.7)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 8.0)
+                .add(Attributes.MAX_HEALTH, 6.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.7)
+                .add(Attributes.ATTACK_DAMAGE, 5.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 8.0)
         }
     }
 
     internal class FollowTunaGoal(
-        private val mob: PathAwareEntity,
+        private val mob: PathfinderMob,
         private val speed: Double,
         private val minDistance: Float,
         private val maxDistance: Float
@@ -57,8 +57,8 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: World) :
 
         private lateinit var target: TunaEntity
 
-        override fun canStart(): Boolean {
-            val closestTuna = mob.world.getEntitiesByClass(
+        override fun canUse(): Boolean {
+            val closestTuna = mob.level()..getEntitiesByClass(
                 TunaEntity::class.java,
                 mob.boundingBox.expand(maxDistance.toDouble())
             ) { true }
