@@ -7,8 +7,8 @@ import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import net.minecraft.client.renderer.OverlayTexture
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.VertexConsumer
-import net.minecraft.client.renderer.VertexConsumerProvider
-import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.util.math.PoseStack
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderType
@@ -22,11 +22,11 @@ class HybridAquaticCritterEntityLayer<T: HybridAquaticCritterEntity>(
     }
 
     override fun render(
-        poseStack: MatrixStack,
+        poseStack: PoseStack,
         animatable: T,
         bakedModel: BakedGeoModel,
         renderType: RenderType,
-        bufferSource: VertexConsumerProvider,
+        bufferSource: MultiBufferSource,
         buffer: VertexConsumer,
         partialTick: Float,
         packedLight: Int,

@@ -14,7 +14,7 @@ s/ofCenter/atCenterOf/g
 s/ EntityData?/ SpawnGroupData?/g
 s/ EntityPose / Pose /g
 s/ EntityPose, / Pose, /g
-s/ LookAroundGoal/RandomLookAroundGoal/g
+s/ LookAroundGoal/ RandomLookAroundGoal/g
 s/ movementSpeed,/ speed,/g
 s/ pitch / xRot /g
 s/ PlayerEntity/Player/g
@@ -36,7 +36,6 @@ s/ActiveTargetGoal/NearestAttackableTargetGoal/g
 s/addChild/addOrReplaceChild/g
 s/AdvancementFrame/FrameType/g
 s/AquaticMoveControl/SmoothSwimmingMoveControl/g
-s/BlockPathType./BlockPathTypes./g
 s/BlockPlacementContext/BlockPlaceContext/g
 s/BlockView/BlockGetter/g
 s/breakInstantly/instabreak/g
@@ -86,7 +85,7 @@ s/Identifier/ResourceLocation/g
 s/initDataTracker/defineSynchedData/g
 s/initGoals/registerGoals/g
 s/initialize(/finalizeSpawn(/g
-s/.Instrument/.NoteBlockInstrument/g
+s/\.Instrument/.NoteBlockInstrument/g
 s/.isAiDisabled/.isNoAi/g
 s/isAngryAt/isPreventingPlayerRest/g
 s/isFertilizable/isValidBonemealTarget/g
@@ -102,8 +101,7 @@ s/isWet/isInWaterRainOrBubble/g
 s/ItemPlacementContext/BlockPlaceContext/g
 s/LevelAccess /LevelAccessor /g
 s/LocalDifficulty/DifficultyInstance/g
-s/LookAroundGoal/RandomLookAroundGoal/g
-s/LookAtEntityGoal/LookAtPlayerGoal/g
+s/ LookAtEntityGoal/ LookAtPlayerGoal/g
 s/MathHelper/Mth/g
 s/mob.world/mob.level()./g
 s/ModelPartBuilder/CubeListBuilder/g
@@ -146,8 +144,8 @@ s/stairsBlock/stairBlock/g
 s/startTracking(/define(/g
 s/state.isOf(/state.`is`(/g
 s/StatusEffect/MobEffect/g
-s/SwimAroundGoal/RandomSwimmingGoal/g
-s/SwimNavigation/WaterBoundPathNavigation/g
+s/ SwimAroundGoal/ RandomSwimmingGoal/g
+s/ SwimNavigation/ WaterBoundPathNavigation/g
 s/targetSelector.add(/targetSelector.addGoal(/g
 s/TexturedModel.of/LayerDefinition.create/g
 s/TexturedModelData/TexturedModel/g
@@ -159,8 +157,8 @@ s/TrackedData/EntityDataAccessor/g
 s/tryAttack/doHurtTarget/g
 s/tryFillWithFluid/placeLiquid/g
 s/ValueLists/ByIdMap/g
-s/WanderAroundGoal/RandomStrollGoal/g
-s/WaterCreatureEntity/WaterAnimal/g
+s/ WanderAroundGoal/ RandomStrollGoal/g
+s/ WaterCreatureEntity/ WaterAnimal/g
 s/Waterloggable/SimpleWaterloggedBlcok/g
 s/WorldAccess,/LevelAccessor,/g
 s/WorldAccess /LevelAccessor /g
@@ -174,3 +172,5 @@ s/ctx.world.get/ctx.level.get/g
 s/VoxelShapes/Shapes/g
 s/world: World)/world: Level)/g
 s/world: World /world: Level /g
+s/VertexConsumerProvider/MultiBufferSource/g
+s/MatrixStack/PoseStack/g

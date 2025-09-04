@@ -5,9 +5,9 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.GiantGreenAnemoneBlockEntity
 import dev.hybridlabs.aquatic.client.renderer.block.entity.GiantGreenAnemoneBlockEntityRenderer
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry.DynamicItemRenderer
-import net.minecraft.client.renderer.VertexConsumerProvider
+import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.model.json.ItemDisplayContext
-import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.client.util.math.PoseStack
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 
@@ -18,8 +18,8 @@ class GiantGreenAnemoneBlockItemRenderer : DynamicItemRenderer {
     override fun render(
         stack: ItemStack,
         mode: ItemDisplayContext,
-        matrices: MatrixStack,
-        vertexConsumers: VertexConsumerProvider,
+        matrices: PoseStack,
+        vertexConsumers: MultiBufferSource,
         light: Int,
         overlay: Int
     ) {

@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.client.renderer.entity.critter
 
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
-import net.minecraft.client.renderer.VertexConsumerProvider
+import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
-import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.client.util.math.PoseStack
 import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 
@@ -24,8 +24,8 @@ open class HybridAquaticCritterEntityRenderer<T : HybridAquaticCritterEntity>(
         entity: T,
         entityYaw: Float,
         partialTick: Float,
-        poseStack: MatrixStack,
-        bufferSource: VertexConsumerProvider,
+        poseStack: PoseStack,
+        bufferSource: MultiBufferSource,
         packedLight: Int
     ) {
         if (variableSize) {
