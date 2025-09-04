@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import net.minecraft.client.MinecraftClient

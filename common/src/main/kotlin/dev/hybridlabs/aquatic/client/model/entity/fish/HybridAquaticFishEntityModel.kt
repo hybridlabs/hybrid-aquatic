@@ -1,11 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.HybridAquatic
+import com.mojang.authlib.minecraft.client.MinecraftClient
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
-import net.minecraft.client.MinecraftClient
-import net.minecraft.client.renderer.entity.model.EntityModelPartNames
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.util.math.Mth
+import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
@@ -37,6 +36,6 @@ abstract class HybridAquaticFishEntityModel<T: HybridAquaticFishEntity> (private
         val body = animationProcessor.getBone(EntityModelPartNames.BODY)
 
         val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.prevPitch, animatable.pitch), -45f, 45f)
-        body.rotX = xRot * -Mth.RADIANS_PER_DEGREE
+        body.rotX = xRot * -Mth.RAD_TO_DEG
     }
 }
