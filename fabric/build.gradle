@@ -80,10 +80,12 @@ loom {
 
     compileKotlin {
         source(project(":common").sourceSets.main.kotlin)
+        source(project(":common").sourceSets.main.java)
         inputs.file "../gradle.properties"
     }
     sourceSets.main.resources.srcDirs += project(':common').file("src/main/resources")
     sourceSets.main.java.srcDirs += project(":common").file('src/main/java')
+    sourceSets.main.java.srcDirs += project(":common").file('src/main/kotlin')
 
     runs {
         client {

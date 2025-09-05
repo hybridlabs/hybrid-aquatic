@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.network
 
-import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking

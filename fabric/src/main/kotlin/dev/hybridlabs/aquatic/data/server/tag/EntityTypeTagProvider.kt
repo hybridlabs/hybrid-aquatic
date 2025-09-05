@@ -32,7 +32,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.DAMSELFISH.get(),
                 HybridAquaticEntityTypes.GOURAMI.get(),
                 HybridAquaticEntityTypes.CUTTLEFISH.get(),
-                HybridAquaticEntityTypes.AFRICAN_BUTTERFLY.get(),
+                HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
                 HybridAquaticEntityTypes.FLYING_FISH.get(),
                 HybridAquaticEntityTypes.SQUIRRELFISH.get(),
                 HybridAquaticEntityTypes.STONEFISH.get(),
@@ -135,7 +135,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         // critters
         getOrCreateTagBuilder(HybridAquaticEntityTags.CRITTER)
             .add(
-                HybridAquaticEntityTypes.NUDIBRANCH.get(),
+                HybridAquaticEntityTypes.SEA_SLUG.get(),
                 HybridAquaticEntityTypes.SEA_CUCUMBER.get(),
                 HybridAquaticEntityTypes.SEA_URCHIN.get(),
                 HybridAquaticEntityTypes.STARFISH.get(),
@@ -149,11 +149,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.BARREL_JELLYFISH.get(),
                 HybridAquaticEntityTypes.BLUE_JELLYFISH.get(),
                 HybridAquaticEntityTypes.BIG_RED_JELLYFISH.get(),
-                HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH.get(),
-                HybridAquaticEntityTypes.COMPASS_JELLYFISH.get(),
+                HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get(),
                 HybridAquaticEntityTypes.COSMIC_JELLYFISH.get(),
                 HybridAquaticEntityTypes.FIREWORK_JELLYFISH.get(),
-                HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH.get(),
                 HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH.get(),
                 HybridAquaticEntityTypes.MAUVE_STINGER.get(),
                 HybridAquaticEntityTypes.MOON_JELLYFISH.get(),
@@ -165,7 +163,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         // fish
         getOrCreateTagBuilder(HybridAquaticEntityTags.FISH)
             .add(
-                HybridAquaticEntityTypes.AFRICAN_BUTTERFLY.get(),
+                HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
                 HybridAquaticEntityTypes.STONEFISH.get(),
                 HybridAquaticEntityTypes.DAMSELFISH.get(),
                 HybridAquaticEntityTypes.PEARLFISH.get(),

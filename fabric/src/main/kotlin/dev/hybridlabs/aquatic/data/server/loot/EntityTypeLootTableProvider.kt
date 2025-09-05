@@ -460,7 +460,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.NUDIBRANCH.get()) {
+        export(exporter, HybridAquaticEntityTypes.SEA_SLUG.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -567,16 +567,6 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.COMPASS_JELLYFISH.get()) {
-            pool(
-                LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
-                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
-                    ).build()
-            )
-        }
 
         export(exporter, HybridAquaticEntityTypes.BARREL_JELLYFISH.get()) {
             pool(
@@ -600,18 +590,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH.get()) {
-            pool(
-                LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
-                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
-                    ).build()
-            )
-        }
-
-        export(exporter, HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -839,11 +818,11 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.TOADFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.BLOWFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.TOADFISH.get())
+                        LootItem.lootTableItem(HybridAquaticItems.BLOWFISH.get())
                             .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()

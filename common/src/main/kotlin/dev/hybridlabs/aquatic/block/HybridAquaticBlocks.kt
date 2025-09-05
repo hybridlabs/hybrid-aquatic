@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.CommonClass
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodTypes
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -367,7 +368,7 @@ object HybridAquaticBlocks {
     val LOPHELIA_CORAL_WALL_FAN = register(
         "lophelia_coral_wall_fan",
         CoralWallFanBlock(
-            DEAD_LOPHELIA_CORAL_WALL_FAN,
+            DEAD_LOPHELIA_CORAL_WALL_FAN.get(),
             Properties.copy(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(LOPHELIA_CORAL.get())
         )
     )
