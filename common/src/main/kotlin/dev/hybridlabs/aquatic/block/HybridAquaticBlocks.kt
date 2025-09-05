@@ -164,16 +164,14 @@ object HybridAquaticBlocks {
                 .noOcclusion()
         )
     )
-    /*
         val SARGASSUM_PLANT = register(
             "sargassum_plant",
             SargassumPlantBlock(
                 Properties.copy (Blocks.KELP_PLANT)
                     .noOcclusion()
-                    .dropsLike(SARGASSUM)
+                    .dropsLike(SARGASSUM.get())
             )
         )
-     */
 
     val BULL_KELP = register(
         "bull_kelp",

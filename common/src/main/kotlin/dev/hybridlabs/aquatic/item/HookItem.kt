@@ -1,39 +1,39 @@
 package dev.hybridlabs.aquatic.item
 
-import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.client.item.TooltipContext
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.text.Text
-import net.minecraft.util.Formatting
-import net.minecraft.world.World
+import dev.hybridlabs.aquatic.platform.Services
+import net.minecraft.ChatFormatting
+import net.minecraft.network.chat.Component
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.level.Level
 
-open class HookItem(settings: Settings) : Item(settings) {
-    override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-        val isTideLoaded = FabricLoader.getInstance().isModLoaded("tide")
+open class HookItem(settings: Properties) : Item(settings) {
+    override fun appendHoverText(stack: ItemStack, world: Level?, tooltip: MutableList<Component>, context: TooltipFlag) {
+        val isTideLoaded = Services.PLATFORM.isModLoaded("tide")
 
         if (isTideLoaded) {
-            val tideText = Text.translatable(this.translationKey.plus(".description")).formatted(Formatting.GRAY)
-            val hookTideText = Text.translatable("item.hybrid-aquatic.hook.description_tide").formatted(Formatting.GRAY)
+            val tideComponent = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)
+            val hookTideComponent = Component.translatable("item.hybrid-aquatic.hook.description_tide").withStyle(ChatFormatting.GRAY)
 
-            tooltip.add(tideText)
-            tooltip.add(hookTideText)
+            tooltip.add(tideComponent)
+            tooltip.add(hookTideComponent)
         } else {
-            val text = Text.translatable(this.translationKey.plus(".description")).formatted(Formatting.GRAY)
-            val hookText = Text.translatable("item.hybrid-aquatic.hook.description").formatted(Formatting.GRAY)
+            val text = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)
+            val hookComponent = Component.translatable("item.hybrid-aquatic.hook.description").withStyle(ChatFormatting.GRAY)
 
             tooltip.add(text)
-            tooltip.add(hookText)
+            tooltip.add(hookComponent)
         }
 
-        super.appendTooltip(stack, world, tooltip, context)
+        super.appendHoverText(stack, world, tooltip, context)
     }
 
-    override fun isEnchantable(stack: ItemStack?): Boolean {
+    override fun isEnchantable(stack: ItemStack): Boolean {
         return false
     }
 
-    override fun getEnchantability(): Int {
+    override fun getEnchantmentValue(): Int {
         return 0
     }
 }

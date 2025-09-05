@@ -2,116 +2,116 @@
 
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.CommonClass
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
-import net.minecraft.item.ItemGroup
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
-import net.minecraft.item.SpawnEggItem
-import net.minecraft.registry.Registries
-import net.minecraft.registry.Registry
-import net.minecraft.text.Text
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.util.math.BlockPos
+import dev.hybridlabs.aquatic.platform.registration.RegistryObject
+import net.minecraft.core.BlockPos
+import net.minecraft.core.registries.Registries
+import net.minecraft.network.chat.Component
+import net.minecraft.world.item.CreativeModeTab
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.SpawnEggItem
 
 object  HybridAquaticItemGroups {
-    val BLOCKS = register("blocks", FabricItemGroup.builder()
-        .displayName(Text.translatable("itemGroup.${Constants.MOD_ID}.blocks"))
+    val BLOCKS = register("blocks",
+        CreativeModeTab.builder(CreativeModeTab.Row.TOP,0)
+
+        .title(Component.translatable("itemGroup.${Constants.MOD_ID}.blocks"))
         .icon { ItemStack(HybridAquaticItems.ANEMONE) }
-        .entries { _, entries ->
+        .displayItems { _, entries ->
             // message in a bottle variants
             MessageInABottleBlock.Variant.entries.forEach { variant ->
-                val blockEntity = MessageInABottleBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.defaultBlockState())
+                val blockEntity = MessageInABottleBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.defaultBlockState())
                     .also { blockEntity -> blockEntity.variant = variant }
                 val stack = MessageInABottleBlock.createItemStack(blockEntity)
-                entries.add(stack)
+                entries.accept(stack)
             }
 
             // blocks
-            entries.add(HybridAquaticBlocks.GLOWSTICK)
-            entries.add(HybridAquaticBlocks.DRIFTWOOD_LOG)
-            entries.add(HybridAquaticBlocks.DRIFTWOOD_WOOD)
-            entries.add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG)
-            entries.add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD)
-            entries.add(HybridAquaticBlocks.DRIFTWOOD_PLANKS)
-            entries.add(HybridAquaticBlocks.DRIFTWOOD_STAIRS)
-            entries.add(HybridAquaticBlocks.DRIFTWOOD_SLAB)
-            entries.add(HybridAquaticBlocks.DRIFTWOOD_FENCE)
-            entries.add(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE)
-            entries.add(HybridAquaticBlocks.DRIFTWOOD_DOOR)
-            entries.add(HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR)
-            entries.add(HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE)
-            entries.add(HybridAquaticBlocks.DRIFTWOOD_BUTTON)
+            entries.accept(HybridAquaticBlocks.GLOWSTICK.get())
+            entries.accept(HybridAquaticBlocks.DRIFTWOOD_LOG.get())
+            entries.accept(HybridAquaticBlocks.DRIFTWOOD_WOOD.get())
+            entries.accept(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG.get())
+            entries.accept(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
+            entries.accept(HybridAquaticBlocks.DRIFTWOOD_PLANKS.get())
+            entries.accept(HybridAquaticBlocks.DRIFTWOOD_STAIRS.get())
+            entries.accept(HybridAquaticBlocks.DRIFTWOOD_SLAB.get())
+            entries.accept(HybridAquaticBlocks.DRIFTWOOD_FENCE.get())
+            entries.accept(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE.get())
+            entries.accept(HybridAquaticBlocks.DRIFTWOOD_DOOR.get())
+            entries.accept(HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR.get())
+            entries.accept(HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
+            entries.accept(HybridAquaticBlocks.DRIFTWOOD_BUTTON.get())
 
-            entries.add(HybridAquaticBlocks.CRAB_POT)
-            entries.add(HybridAquaticBlocks.HYBRID_CRATE)
-            entries.add(HybridAquaticBlocks.OAK_CRATE)
-            entries.add(HybridAquaticBlocks.SPRUCE_CRATE)
-            entries.add(HybridAquaticBlocks.BIRCH_CRATE)
-            entries.add(HybridAquaticBlocks.DARK_OAK_CRATE)
-            entries.add(HybridAquaticBlocks.JUNGLE_CRATE)
-            entries.add(HybridAquaticBlocks.ACACIA_CRATE)
-            entries.add(HybridAquaticBlocks.MANGROVE_CRATE)
-            entries.add(HybridAquaticBlocks.CHERRY_CRATE)
+            entries.accept(HybridAquaticBlocks.CRAB_POT.get())
+            entries.accept(HybridAquaticBlocks.HYBRID_CRATE.get())
+            entries.accept(HybridAquaticBlocks.OAK_CRATE.get())
+            entries.accept(HybridAquaticBlocks.SPRUCE_CRATE.get())
+            entries.accept(HybridAquaticBlocks.BIRCH_CRATE.get())
+            entries.accept(HybridAquaticBlocks.DARK_OAK_CRATE.get())
+            entries.accept(HybridAquaticBlocks.JUNGLE_CRATE.get())
+            entries.accept(HybridAquaticBlocks.ACACIA_CRATE.get())
+            entries.accept(HybridAquaticBlocks.MANGROVE_CRATE.get())
+            entries.accept(HybridAquaticBlocks.CHERRY_CRATE.get())
 
-            entries.add(HybridAquaticItems.SEA_LETTUCE)
-            entries.add(HybridAquaticItems.RED_ALGAE)
-            entries.add(HybridAquaticItems.BULL_KELP)
-            entries.add(HybridAquaticItems.SARGASSUM)
-            entries.add(HybridAquaticItems.FLOATING_SARGASSUM)
-            entries.add(HybridAquaticItems.WATER_LETTUCE)
-            entries.add(HybridAquaticItems.JUNGLE_LILY_PAD)
+            entries.accept(HybridAquaticItems.SEA_LETTUCE.get())
+            entries.accept(HybridAquaticItems.RED_ALGAE.get())
+            entries.accept(HybridAquaticItems.BULL_KELP.get())
+            entries.accept(HybridAquaticItems.SARGASSUM.get())
+            entries.accept(HybridAquaticItems.FLOATING_SARGASSUM.get())
+            entries.accept(HybridAquaticItems.WATER_LETTUCE.get())
+            entries.accept(HybridAquaticItems.JUNGLE_LILY_PAD.get())
 
-            entries.add(HybridAquaticItems.BUTTON_CORAL_BLOCK)
-            entries.add(HybridAquaticItems.SUN_CORAL_BLOCK)
-            entries.add(HybridAquaticItems.LOPHELIA_CORAL_BLOCK)
-            entries.add(HybridAquaticItems.THORN_CORAL_BLOCK)
+            entries.accept(HybridAquaticItems.BUTTON_CORAL_BLOCK.get())
+            entries.accept(HybridAquaticItems.SUN_CORAL_BLOCK.get())
+            entries.accept(HybridAquaticItems.LOPHELIA_CORAL_BLOCK.get())
+            entries.accept(HybridAquaticItems.THORN_CORAL_BLOCK.get())
 
-            entries.add(HybridAquaticItems.BUTTON_CORAL)
-            entries.add(HybridAquaticItems.SUN_CORAL)
-            entries.add(HybridAquaticItems.LOPHELIA_CORAL)
-            entries.add(HybridAquaticItems.THORN_CORAL)
+            entries.accept(HybridAquaticItems.BUTTON_CORAL.get())
+            entries.accept(HybridAquaticItems.SUN_CORAL.get())
+            entries.accept(HybridAquaticItems.LOPHELIA_CORAL.get())
+            entries.accept(HybridAquaticItems.THORN_CORAL.get())
 
-            entries.add(HybridAquaticItems.BUTTON_CORAL_FAN)
-            entries.add(HybridAquaticItems.SUN_CORAL_FAN)
-            entries.add(HybridAquaticItems.LOPHELIA_CORAL_FAN)
-            entries.add(HybridAquaticItems.THORN_CORAL_FAN)
+            entries.accept(HybridAquaticItems.BUTTON_CORAL_FAN.get())
+            entries.accept(HybridAquaticItems.SUN_CORAL_FAN.get())
+            entries.accept(HybridAquaticItems.LOPHELIA_CORAL_FAN.get())
+            entries.accept(HybridAquaticItems.THORN_CORAL_FAN.get())
 
-            entries.add(HybridAquaticItems.DEAD_BUTTON_CORAL_BLOCK)
-            entries.add(HybridAquaticItems.DEAD_SUN_CORAL_BLOCK)
-            entries.add(HybridAquaticItems.DEAD_LOPHELIA_CORAL_BLOCK)
-            entries.add(HybridAquaticItems.DEAD_THORN_CORAL_BLOCK)
+            entries.accept(HybridAquaticItems.DEAD_BUTTON_CORAL_BLOCK.get())
+            entries.accept(HybridAquaticItems.DEAD_SUN_CORAL_BLOCK.get())
+            entries.accept(HybridAquaticItems.DEAD_LOPHELIA_CORAL_BLOCK.get())
+            entries.accept(HybridAquaticItems.DEAD_THORN_CORAL_BLOCK.get())
 
-            entries.add(HybridAquaticItems.DEAD_BUTTON_CORAL)
-            entries.add(HybridAquaticItems.DEAD_SUN_CORAL)
-            entries.add(HybridAquaticItems.DEAD_LOPHELIA_CORAL)
-            entries.add(HybridAquaticItems.DEAD_THORN_CORAL)
+            entries.accept(HybridAquaticItems.DEAD_BUTTON_CORAL.get())
+            entries.accept(HybridAquaticItems.DEAD_SUN_CORAL.get())
+            entries.accept(HybridAquaticItems.DEAD_LOPHELIA_CORAL.get())
+            entries.accept(HybridAquaticItems.DEAD_THORN_CORAL.get())
 
-            entries.add(HybridAquaticItems.DEAD_BUTTON_CORAL_FAN)
-            entries.add(HybridAquaticItems.DEAD_SUN_CORAL_FAN)
-            entries.add(HybridAquaticItems.DEAD_LOPHELIA_CORAL_FAN)
-            entries.add(HybridAquaticItems.DEAD_THORN_CORAL_FAN)
+            entries.accept(HybridAquaticItems.DEAD_BUTTON_CORAL_FAN.get())
+            entries.accept(HybridAquaticItems.DEAD_SUN_CORAL_FAN.get())
+            entries.accept(HybridAquaticItems.DEAD_LOPHELIA_CORAL_FAN.get())
+            entries.accept(HybridAquaticItems.DEAD_THORN_CORAL_FAN.get())
 
-            entries.add(HybridAquaticItems.BUOY)
-            entries.add(HybridAquaticItems.RAFT)
-            entries.add(HybridAquaticBlocks.ANEMONE)
-            entries.add(HybridAquaticBlocks.GIANT_GREEN_ANEMONE)
-            entries.add(HybridAquaticBlocks.STRAWBERRY_ANEMONE)
-            entries.add(HybridAquaticItems.GIANT_CLAM)
-            entries.add(HybridAquaticItems.TUBE_SPONGE)
-            entries.add(HybridAquaticItems.TUBE_WORM)
-            entries.add(HybridAquaticItems.HYDROTHERMAL_VENT)
-            entries.add(HybridAquaticBlocks.BASKING_SHARK_PLUSHIE)
-            entries.add(HybridAquaticBlocks.BULL_SHARK_PLUSHIE)
-            entries.add(HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE)
-            entries.add(HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE)
-            entries.add(HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE)
-            entries.add(HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE)
-            entries.add(HybridAquaticBlocks.TIGER_SHARK_PLUSHIE)
-            entries.add(HybridAquaticBlocks.WHALE_SHARK_PLUSHIE)
+            entries.accept(HybridAquaticItems.BUOY.get())
+            entries.accept(HybridAquaticItems.RAFT.get())
+            entries.accept(HybridAquaticBlocks.ANEMONE.get())
+            entries.accept(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get())
+            entries.accept(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get())
+            entries.accept(HybridAquaticItems.GIANT_CLAM.get())
+            entries.accept(HybridAquaticItems.TUBE_SPONGE.get())
+            entries.accept(HybridAquaticItems.TUBE_WORM.get())
+            entries.accept(HybridAquaticItems.HYDROTHERMAL_VENT.get())
+            entries.accept(HybridAquaticBlocks.BASKING_SHARK_PLUSHIE.get())
+            entries.accept(HybridAquaticBlocks.BULL_SHARK_PLUSHIE.get())
+            entries.accept(HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE.get())
+            entries.accept(HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE.get())
+            entries.accept(HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE.get())
+            entries.accept(HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE.get())
+            entries.accept(HybridAquaticBlocks.TIGER_SHARK_PLUSHIE.get())
+            entries.accept(HybridAquaticBlocks.WHALE_SHARK_PLUSHIE.get())
 
             Registries.ITEM.forEach { item ->
                 val id = Registries.ITEM.getId(item)
@@ -124,7 +124,7 @@ object  HybridAquaticItemGroups {
     )
 
     val ITEMS = register("items", FabricItemGroup.builder()
-        .displayName(Text.translatable("itemGroup.${Constants.MOD_ID}.items"))
+        .displayName(Component.translatable("itemGroup.${Constants.MOD_ID}.items"))
         .icon { ItemStack(HybridAquaticItems.BARBED_HOOK) }
         .entries { _, entries ->
 
@@ -269,7 +269,7 @@ object  HybridAquaticItemGroups {
     )
 
     val SPAWN_EGGS = register("spawn_eggs", FabricItemGroup.builder()
-        .displayName(Text.translatable("itemGroup.${Constants.MOD_ID}.spawn_eggs"))
+        .displayName(Component.translatable("itemGroup.${Constants.MOD_ID}.spawn_eggs"))
         .icon { ItemStack(HybridAquaticItems.YELLOWFIN_TUNA) }
         .entries { _, entries ->
             Registries.ITEM.forEach { item ->
@@ -285,7 +285,8 @@ object  HybridAquaticItemGroups {
         .build()
     )
 
-    private fun register(id: String, itemGroup: ItemGroup): ItemGroup {
-        return Registry.register(Registries.ITEM_GROUP, ResourceLocation(Constants.MOD_ID, id), itemGroup)
+
+    private fun register(id: String, itemGroup: CreativeModeTab): RegistryObject<CreativeModeTab> {
+        return CommonClass.CREATIVE_MODE_TABS.register(id) { itemGroup }
     }
 }
