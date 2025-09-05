@@ -11,6 +11,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
+import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.*
@@ -40,9 +41,9 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Leve
         goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 8))
         goalSelector.addGoal(1, MeleeAttackGoal(this, 1.5, false))
         targetSelector.addGoal(3, HurtByTargetGoal(this))
-        targetSelector.addGoal(3, UniversalAngerGoal(this, true))
+        targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.shouldAngerAt(it) })
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasMobEffect(HybridAquaticMobEffects.BLEEDING) && it !is AnglerfishEntity
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is AnglerfishEntity
         })
     }
 
@@ -75,7 +76,7 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Leve
     }
 
     override fun startPersistentAngerTimer() {
-        startPersistentAngerTimer(PiranhaEntity.ANGER_TIME_RANGE.get(random))
+        this.remainingPersistentAngerTime = PiranhaEntity.ANGER_TIME_RANGE.sample(this.random)
     }
     //#endregion
 }

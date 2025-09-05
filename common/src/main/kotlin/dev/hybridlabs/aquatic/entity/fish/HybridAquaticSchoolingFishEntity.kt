@@ -2,16 +2,14 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FishFollowGroupLeaderGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.MobSpawnType
-import net.minecraft.entity.VariantHolder
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.registry.tag.TagKey
+import net.minecraft.tags.TagKey
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
+import net.minecraft.world.entity.*
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
 import java.util.stream.Stream
+import javax.xml.crypto.Data
 
 @Suppress("NAME_SHADOWING")
 open class HybridAquaticSchoolingFishEntity(
@@ -77,9 +75,9 @@ open class HybridAquaticSchoolingFishEntity(
 
     override fun tick() {
         super.tick()
-        if (this.hasOtherFishInGroup() && world.random.nextInt(200) == 1) {
-            val list: List<HybridAquaticFishEntity?> =
-                world.getNonSpectatingEntities(this.javaClass, boundingBox.expand(8.0, 8.0, 8.0))
+        if (this.hasOtherFishInGroup() && level().random.nextInt(200) == 1) {
+            val list: MutableList<Entity> =
+                level().getEntitiesOfClass(this.javaClass, boundingBox.inflate(8.0, 8.0, 8.0))
             if (list.size <= 1) {
                 this.groupSize = 1
             }
@@ -91,12 +89,12 @@ open class HybridAquaticSchoolingFishEntity(
     }
 
     fun isCloseEnoughToLeader(): Boolean {
-        return this.squaredDistanceTo(this.leader) <= 121.0
+        return this.distanceToSqr(this.leader!!) <= 121.0
     }
 
     fun moveTowardLeader() {
         if (this.hasLeader()) {
-            getNavigation().startMovingTo(this.leader, 1.0)
+            getNavigation().moveTo(this.leader!!, 1.0)
         }
     }
 
@@ -136,5 +134,5 @@ open class HybridAquaticSchoolingFishEntity(
         return entityData
     }
 
-    open class FishData(val leader: HybridAquaticSchoolingFishEntity) : EntityData
+    open class FishData(val leader: HybridAquaticSchoolingFishEntity) : Data, SpawnGroupData
 }

@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.effect.MobEffectInstance
-import net.minecraft.entity.effect.MobEffects
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -40,7 +40,7 @@ class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: Level) :
             val attacker = source.attacker
             if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
                 attacker.addMobEffect(MobEffectInstance(MobEffects.POISON, 200, 0))
-                attacker.addMobEffect(MobEffectInstance(MobEffects.NAUSEA, 200, 0))
+                attacker.addMobEffect(MobEffectInstance(MobEffects.CONFUSION, 200, 0))
             }
 
             return true

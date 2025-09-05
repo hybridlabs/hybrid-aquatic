@@ -26,6 +26,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -211,7 +212,7 @@ open class HybridAquaticDolphinEntity(
                 }
 
                 if (this.onGround) {
-                    this.velocity = velocity.add(
+                    this.deltaMovement = deltaMovement.add(
                         ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble(),
                         0.5,
                         ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
@@ -222,7 +223,7 @@ open class HybridAquaticDolphinEntity(
                 }
             }
 
-            if (level().isClientSide && this.wasTouchingWater && (velocity.lengthSquared() > 0.03)) {
+            if (level().isClientSide && this.wasTouchingWater && (deltaMovement.lengthSquared() > 0.03)) {
                 val vec3d = this.getRotationVec(0.0f)
                 val f = Mth.cos(this.xRot * 0.017453292f) * 0.3f
                 val g = Mth.sin(this.xRot * 0.017453292f) * 0.3f
@@ -266,13 +267,13 @@ open class HybridAquaticDolphinEntity(
         return SoundEvents.DOLPHIN_SWIM
     }
 
-    override fun travel(movementInput: Vec3d) {
-        if (this.canMoveVoluntarily() && this.isTouchingWater) {
-            this.updateVelocity(this.movementSpeed, movementInput)
-            this.move(MovementType.SELF, this.velocity)
-            this.velocity = velocity.multiply(0.9)
+    override fun travel(movementInput: Vec3) {
+        if (this.hasSelfControl()() && this.wasTouchingWater) {
+            this.updateVelocity(this.speed, movementInput)
+            this.move(MovementType.SELF, this.deltaMovement)
+            this.deltaMovement = deltaMovement.multiply(0.9)
             if (this.target == null) {
-                this.velocity = velocity.add(0.0, -0.005, 0.0)
+                this.deltaMovement = deltaMovement.add(0.0, -0.005, 0.0)
             }
         } else {
             super.travel(movementInput)

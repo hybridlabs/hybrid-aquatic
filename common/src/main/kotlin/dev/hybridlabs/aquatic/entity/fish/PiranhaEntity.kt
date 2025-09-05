@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.Difficulty
 import net.minecraft.world.effect.MobEffectInstance
@@ -14,6 +15,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
+import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
+import net.minecraft.world.entity.animal.Wolf
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -40,7 +43,8 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
 
     companion object {
 
-        val ANGER_TIME_RANGE: IntProvider = TimeHelper.betweenSeconds(10, 30)
+        val ANGER_TIME_RANGE: IntProvider = TimeUtil.rangeOfSeconds(10, 30)
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 4.0)
@@ -63,23 +67,29 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
         super.registerGoals()
         goalSelector.addGoal(1, MeleeAttackGoal(this, 1.5, false))
         targetSelector.addGoal(3, HurtByTargetGoal(this).setAlertOthers())
-        targetSelector.addGoal(3, UniversalAngerGoal(this, true))
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.shouldAngerAt(it) })
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasMobEffect(HybridAquaticMobEffects.BLEEDING) && it !is PiranhaEntity })
+        targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, true))
+        targetSelector.addGoal(
+            1,
+            NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.shouldAngerAt(it) })
+        targetSelector.addGoal(
+            2,
+            NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) {
+                it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is PiranhaEntity
+            })
     }
 
-    override fun doHurtTarget(target: Entity?): Boolean {
+    override fun doHurtTarget(target: Entity): Boolean {
         if (super.doHurtTarget(target)) {
             if (target is LivingEntity) {
                 var i = 0
-                if (world.difficulty == Difficulty.NORMAL) {
+                if (level().difficulty == Difficulty.NORMAL) {
                     i = 7
-                } else if (world.difficulty == Difficulty.HARD) {
+                } else if (level().difficulty == Difficulty.HARD) {
                     i = 15
                 }
 
                 if (i > 0) {
-                    target.addMobEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING, i * 20, 0), this)
+                    target.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), i * 20, 0), this)
                 }
             }
 
@@ -115,7 +125,7 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
     }
 
     override fun startPersistentAngerTimer() {
-        startPersistentAngerTimer(ANGER_TIME_RANGE)
+        this.remainingPersistentAngerTime = ANGER_TIME_RANGE.sample(this.random)
     }
     //#endregion
 }

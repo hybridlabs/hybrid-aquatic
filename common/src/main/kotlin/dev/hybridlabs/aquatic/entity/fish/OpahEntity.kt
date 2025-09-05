@@ -58,7 +58,7 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
         private lateinit var target: TunaEntity
 
         override fun canUse(): Boolean {
-            val closestTuna = mob.level()..getEntitiesByClass(
+            val closestTuna = mob.level().getEntitiesOfClass(
                 TunaEntity::class.java,
                 mob.boundingBox.inflate(maxDistance.toDouble())
             ) { true }

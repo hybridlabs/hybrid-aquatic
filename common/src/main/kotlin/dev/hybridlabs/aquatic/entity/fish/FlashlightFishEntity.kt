@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 
 class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, world: Level) :
@@ -26,7 +27,7 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
 
     private fun checkNearbyEntities() {
         val detectionRadius = 4.0
-        val nearbyEntities = level().getEntitiesOfClass(LivingEntity::class.java, boundingBox.inflate(detectionRadius)) { it isPlayer }
+        val nearbyEntities = level().getEntitiesOfClass(LivingEntity::class.java, boundingBox.inflate(detectionRadius)) { it.`is`(Player) }
 
         isLightOn = nearbyEntities.isEmpty()
     }

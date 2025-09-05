@@ -3,14 +3,13 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.core.RegistryAccess
+import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.ByIdMap
-import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
@@ -98,7 +97,7 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
                     return BY_ID.apply(id) as Type
                 }
 
-                fun fromBiome(biome: RegistryAccess.RegistryEntry<Biome>, random: RandomSource): Type {
+                fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
                         biome.`is`(HybridAquaticBiomeTags.CHERRY) -> {
                             Type.fromId(random.nextInt(1, 5))

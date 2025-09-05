@@ -50,7 +50,7 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Le
                             0.0f
                         )
 
-                        world.spawnEntity(it)
+                        level().addFreshEntity(it)
                     }
                 }
             }

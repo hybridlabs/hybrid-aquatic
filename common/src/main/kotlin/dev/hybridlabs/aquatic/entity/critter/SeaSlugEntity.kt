@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import net.minecraft.core.RegistryAccess
+import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -62,7 +62,7 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: Level) :
                     return BY_ID.apply(id) as Type
                 }
 
-                fun fromBiome(biome: RegistryAccess.RegistryEntry<Biome>): Type {
+                fun fromBiome(biome: Holder<Biome>): Type {
                     return when {
 
                         biome.`is`(HybridAquaticBiomeTags.REEF) -> {
