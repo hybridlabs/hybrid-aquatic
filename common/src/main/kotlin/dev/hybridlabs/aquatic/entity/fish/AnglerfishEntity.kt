@@ -3,14 +3,13 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.ai.goal.RevengeGoal
-import net.minecraft.entity.ai.goal.UniversalAngerGoal
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.NeutralMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
@@ -40,7 +39,7 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Leve
         super.registerGoals()
         goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 8))
         goalSelector.addGoal(1, MeleeAttackGoal(this, 1.5, false))
-        targetSelector.addGoal(3, RevengeGoal(this))
+        targetSelector.addGoal(3, HurtByTargetGoal(this))
         targetSelector.addGoal(3, UniversalAngerGoal(this, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.shouldAngerAt(it) })
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasMobEffect(HybridAquaticMobEffects.BLEEDING) && it !is AnglerfishEntity

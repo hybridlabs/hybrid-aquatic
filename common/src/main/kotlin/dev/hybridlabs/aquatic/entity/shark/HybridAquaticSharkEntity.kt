@@ -389,7 +389,7 @@ open class HybridAquaticSharkEntity(
                 shark.health = shark.maxHealth
 
                 if (target.mainHandItem.`is`(Items.SHIELD) && target.isBlocking) {
-                    shark.spawnAtLocation(ItemStack(HybridAquaticItems.SHARK_TOOTH))
+                    shark.spawnAtLocation(ItemStack(HybridAquaticItems.SHARK_TOOTH.get()))
                 }
             }
         }

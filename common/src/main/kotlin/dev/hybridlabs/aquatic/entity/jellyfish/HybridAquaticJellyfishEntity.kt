@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.StayInWaterGoal
+import net.minecraft.commands.arguments.ResourceArgument.getMobEffect
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -10,6 +11,7 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
@@ -23,6 +25,7 @@ import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -105,7 +108,7 @@ open class HybridAquaticJellyfishEntity(
 
     override fun tick() {
         super.tick()
-        if isNoAi) {
+        if (isNoAi) {
             return
         }
 
@@ -115,7 +118,7 @@ open class HybridAquaticJellyfishEntity(
             moistness -= 1
             if (moistness <= -20) {
                 moistness = 0
-                damage(this.damageSources.dryOut(), 1.0f)
+                damage(this.damageSources().dryOut(), 1.0f)
             }
         }
     }
@@ -145,7 +148,7 @@ open class HybridAquaticJellyfishEntity(
             }
         }
 
-        if (this.isInsideWaterOrBubbleColumn) {
+        if (this.isInWaterOrBubble) {
             if (this.thrustTimer < 3.1415927f) {
                 val f = this.thrustTimer / 3.1415927f
                 this.tentacleAngle = Mth.sin(f * f * 3.1415927f) * 3.1415927f * 0.25f
@@ -169,26 +172,26 @@ open class HybridAquaticJellyfishEntity(
                 )
             }
 
-            val vec3d = this.velocity
+            val vec3d = this.deltaMovement
             val d = vec3d.horizontalLength()
             val targetYaw = -(Mth.atan2(vec3d.x, vec3d.z).toFloat()) * (180f / Math.PI.toFloat())
             val deltaYaw = Mth.wrapDegrees(targetYaw - this.bodyYaw)
             this.bodyYaw += deltaYaw * 0.1f
-            this.headYaw = this.bodyYaw
-            this.yaw = this.bodyYaw
+            this.yHeadRot = this.bodyYaw
+            this.xRot = this.bodyYaw
             this.rollAngle += 3.1415927f * this.turningSpeed * 1.5f
             this.tiltAngle += (-(Mth.atan2(d, vec3d.y).toFloat()) * 57.295776f - this.tiltAngle) * 0.1f
         } else {
             this.tentacleAngle = Mth.abs(Mth.sin(this.thrustTimer)) * 3.1415927f * 0.25f
-            if (!world.isClientSide) {
-                var e = velocity.y
-                if (this.hasMobEffect(MobEffects.LEVITATION)) {
-                    e = 0.05 * (getMobEffect(MobEffects.LEVITATION)!!.amplifier + 1).toDouble()
-                } else if (!this.hasNoGravity()) {
+            if (!level().isClientSide) {
+                var e = deltaMovement.y
+                if (this.hasEffect(MobEffects.LEVITATION)) {
+                    e = 0.05 * (getMobEffect(MobEffects.LEVITATION).amplifier + 1).toDouble()
+                } else if (!this.isNoGravity) {
                     e -= 0.08
                 }
 
-                this.setVelocity(0.0, e * 0.9800000190734863, 0.0)
+                this.setDeltaMovement(0.0, e * 0.9800000190734863, 0.0)
 
 
             }
@@ -222,7 +225,7 @@ open class HybridAquaticJellyfishEntity(
     }
 
     override fun travel(movementInput: Vec3) {
-        this.move(MovementType.SELF, this.velocity)
+        this.move(MovementType.SELF, this.deltaMovement)
     }
 
     override fun handleStatus(status: Byte) {
@@ -252,7 +255,7 @@ open class HybridAquaticJellyfishEntity(
             val i = jellyfish.despawnCounter
             if (i > 100) {
                 jellyfish.setSwimmingVector(0.0f, 0.0f, 0.0f)
-            } else if (jellyfish.random.nextInt(toGoalTicks(50)) == 0 || !jellyfish.touchingWater || !jellyfish.hasSwimmingVector()) {
+            } else if (jellyfish.random.nextInt(toGoalTicks(50)) == 0 || !jellyfish.wasTouchingWater || !jellyfish.hasSwimmingVector()) {
                 val f = jellyfish.random.nextFloat() * 6.2831855f
                 val g = Mth.cos(f) * 0.2f
                 val h = -0.1f + jellyfish.random.nextFloat() * 0.2f

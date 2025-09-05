@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.ai.goal.RevengeGoal
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.world.World
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
+import net.minecraft.world.level.Level
 
 class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, world: Level) :
     HybridAquaticSharkEntity(
@@ -18,7 +18,7 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, RevengeGoal(this))
+        goalSelector.addGoal(1, HurtByTargetGoal(this))
     }
 
     companion object {

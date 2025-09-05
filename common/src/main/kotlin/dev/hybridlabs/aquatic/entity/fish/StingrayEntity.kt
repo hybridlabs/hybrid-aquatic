@@ -19,6 +19,7 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
@@ -36,7 +37,7 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, RevengeGoal(this))
+        goalSelector.addGoal(1, HurtByTargetGoal(this))
     }
 
     override fun getDefaultLootTable(): ResourceLocation {

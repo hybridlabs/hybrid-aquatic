@@ -14,6 +14,7 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
@@ -43,7 +44,7 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Leve
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, RevengeGoal(this))
+        goalSelector.addGoal(1, HurtByTargetGoal(this))
     }
 
     companion object {

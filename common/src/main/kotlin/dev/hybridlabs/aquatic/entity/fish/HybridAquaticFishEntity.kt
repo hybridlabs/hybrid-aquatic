@@ -13,20 +13,10 @@ import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.EntityDimensions
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.Pose
-import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
-import net.minecraft.world.entity.ai.goal.PanicGoal
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
-import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
-import net.minecraft.world.entity.ai.goal.TryFindWaterGoal
+import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
@@ -43,7 +33,6 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
-import kotlin.jvm.java
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
 open class HybridAquaticFishEntity(
@@ -89,7 +78,7 @@ open class HybridAquaticFishEntity(
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        this.airSupply= getMaxMoistness()
+        this.airSupply = getMaxMoistness()
         xRot = 0.0f
         yRot = 0.0f
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())

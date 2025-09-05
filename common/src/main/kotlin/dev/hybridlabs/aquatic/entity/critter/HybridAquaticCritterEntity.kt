@@ -75,7 +75,6 @@ open class HybridAquaticCritterEntity(
         goalSelector.addGoal(1, PanicGoal(this, 0.3))
         goalSelector.addGoal(5, RandomLookAroundGoal(this))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.3))
-        goalSelector.addGoal(3, WanderAroundFarGoal(this, 0.3))
     }
 
     override fun finalizeSpawn(
@@ -85,7 +84,7 @@ open class HybridAquaticCritterEntity(
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        this.airSupply= this.maxAir
+        this.airSupply= this.maxAirSupply
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -173,7 +172,7 @@ open class HybridAquaticCritterEntity(
             val bottomY = world.seaLevel - 128
 
             return pos.y in bottomY..topY &&
-                    world.getBlockState(pos.down()).isSolid &&
+                    world.getBlockState(pos.below()).isSolid &&
                     world.isWaterAt(pos)
         }
 

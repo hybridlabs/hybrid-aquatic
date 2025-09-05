@@ -1,8 +1,12 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.ai.goal.HADolphinJumpGoal
+import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.TagKey
@@ -29,6 +33,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
+import kotlin.random.Random
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER", "unused")
 open class HybridAquaticDolphinEntity(
@@ -47,8 +52,8 @@ open class HybridAquaticDolphinEntity(
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        this.airSupply= this.maxAir
-        this.pitch = 0.0f
+        this.airSupply= this.maxAirSupply
+        this.yRot = 0.0f
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -97,8 +102,8 @@ open class HybridAquaticDolphinEntity(
             entityData.set(DOLPHIN_SIZE, size)
         }
 
-    override fun initSynchedEntityData() {
-        super.initSynchedEntityData()
+    override fun defineSynchedData() {
+        super.defineSynchedData()
         entityData.define(MOISTNESS, getMaxMoistness())
         entityData.define(DOLPHIN_SIZE, 0)
     }
@@ -146,12 +151,12 @@ open class HybridAquaticDolphinEntity(
         return bl
     }
 
-    override fun getMaxAir(): Int {
+    override fun getMaxAirSupply(): Int {
         return 4800
     }
 
-    override fun getNextAirOnLand(air: Int): Int {
-        return this.maxAir
+    override fun getAirSupply(): Int {
+        return this.maxAirSupply
     }
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
@@ -166,7 +171,7 @@ open class HybridAquaticDolphinEntity(
         return 1
     }
 
-    override fun canStartRiding(entity: Entity): Boolean {
+    override fun startRiding(vehicle: Entity): Boolean {
         return true
     }
 
@@ -182,7 +187,7 @@ open class HybridAquaticDolphinEntity(
     override fun loot(item: ItemEntity) {
         if (getEquippedStack(EquipmentSlot.MAINHAND).isEmpty) {
             val itemStack = item.stack
-            if (this.canPickupItem(itemStack)) {
+            if (this.pickUpItem(itemStack)) {
                 this.triggerItemPickedUpByEntityCriteria(item)
                 this.equipStack(EquipmentSlot.MAINHAND, itemStack)
                 this.updateDropChances(EquipmentSlot.MAINHAND)
@@ -195,7 +200,7 @@ open class HybridAquaticDolphinEntity(
     override fun tick() {
         super.tick()
         if (this.isNoAi) {
-            this.airSupply= this.maxAir
+            this.airSupply= this.maxAirSupply
         } else {
             if (this.isInWaterRainOrBubble) {
                 this.moistness = 2400
@@ -211,7 +216,7 @@ open class HybridAquaticDolphinEntity(
                         0.5,
                         ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
                     )
-                    this.yaw = random.nextFloat() * 360.0f
+                    this.xRot = random.nextFloat() * 360.0f
                     this.isOnGround = false
                     this.velocityDirty = true
                 }
@@ -219,8 +224,8 @@ open class HybridAquaticDolphinEntity(
 
             if (level().isClientSide && this.wasTouchingWater && (velocity.lengthSquared() > 0.03)) {
                 val vec3d = this.getRotationVec(0.0f)
-                val f = Mth.cos(this.yaw * 0.017453292f) * 0.3f
-                val g = Mth.sin(this.yaw * 0.017453292f) * 0.3f
+                val f = Mth.cos(this.xRot * 0.017453292f) * 0.3f
+                val g = Mth.sin(this.xRot * 0.017453292f) * 0.3f
                 val h = 1.2f - random.nextFloat() * 0.7f
 
                 for (i in 0..1) {
@@ -281,9 +286,9 @@ open class HybridAquaticDolphinEntity(
     companion object {
         const val MAX_AIR: Int = 4800
         val MOISTNESS: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HybridAquaticDolphinEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(HybridAquaticDolphinEntity::class.java, EntityDataSerializers.INT)
         val DOLPHIN_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HybridAquaticDolphinEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(HybridAquaticDolphinEntity::class.java, EntityDataSerializers.INT)
 
 
         fun getScaleAdjustment(fish: HybridAquaticDolphinEntity, adjustment: Float): Float {

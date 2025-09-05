@@ -116,11 +116,11 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
     private fun breakKelpUnderneath() {
         val posUnderneath = BlockPos(this.x.toInt(), (this.y + 1).toInt(), this.z.toInt())
         if (level().getBlockState(posUnderneath).`is`(HybridAquaticBlockTags.URCHIN_BREAKABLES)) {
-            level().setBlockState(posUnderneath, Blocks.AIR.defaultBlockState())
+            level().setBlockAndUpdate(posUnderneath, Blocks.AIR.defaultBlockState())
             if (spawnUrchinOnNextBreak) {
-                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.create(level())
-                newUrchin?.refreshPositionAndAngles(this.x, this.y, this.z, this.yaw, 0.0f)
-                level().spawnEntity(newUrchin)
+                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.spawn(level())
+                newUrchin?.refreshPositionAndAngles(this.x, this.y, this.z, this.xRot, 0.0f)
+                level().addFreshEntity(newUrchin)
                 spawnUrchinOnNextBreak = false
             } else {
                 spawnUrchinOnNextBreak = true

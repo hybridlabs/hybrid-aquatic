@@ -2,12 +2,20 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -54,7 +62,7 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
         }
 
         val TYPE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(SeahorseEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(SeahorseEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             COMMON(0, "common"),
@@ -85,9 +93,9 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
         }
     }
 
-    override fun initSynchedEntityData() {
+    override fun defineSynchedData() {
         entityData.define(TYPE, 0)
-        super.initSynchedEntityData()
+        super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
