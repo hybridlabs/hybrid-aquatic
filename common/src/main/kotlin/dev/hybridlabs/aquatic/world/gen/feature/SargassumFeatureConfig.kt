@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 
-data class SargassumFeatureConfig(val toPlace: BlockStateProvider) : FeatureConfiguration uration uration {
+data class SargassumFeatureConfig(val toPlace: BlockStateProvider) : FeatureConfiguration {
     companion object {
         val CODEC: Codec<SargassumFeatureConfig> = RecordCodecBuilder.create { instance ->
             instance.group(

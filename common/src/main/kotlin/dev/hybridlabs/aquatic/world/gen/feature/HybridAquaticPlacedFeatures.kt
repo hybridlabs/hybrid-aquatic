@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
-import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.Constants
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
@@ -9,6 +9,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature
 /**
  * A registry of placed features for Hybrid Aquatic.
  */
+@Suppress("UNUSED_PARAMETER")
 object HybridAquaticPlacedFeatures {
     val ANEMONE_PATCH = register("anemone_patch")
     val GREEN_ANEMONE_PATCH = register("green_anemone_patch")

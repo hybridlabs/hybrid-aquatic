@@ -16,9 +16,9 @@ class RedAlgaeFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
     Feature<ProbabilityFeatureConfiguration>(codec) {
     override fun place(context: FeaturePlaceContext<ProbabilityFeatureConfiguration>): Boolean {
         var bl = false
-        val random = context.random()()()
+        val random = context.random()
         val structureLevelAccessor = context.level()
-        val blockPos = context.origin()()()
+        val blockPos = context.origin()
         val probabilityConfig = context.config() as ProbabilityFeatureConfiguration
         val i = random.nextInt(8) - random.nextInt(8)
         val j = random.nextInt(8) - random.nextInt(8)

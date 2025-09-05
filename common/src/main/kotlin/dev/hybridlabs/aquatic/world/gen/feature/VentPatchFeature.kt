@@ -29,8 +29,8 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
     override fun place(context: FeaturePlaceContext<VentPatchFeatureConfig>): Boolean {
         var generated = false
         val world = context.level()
-        val origin = context.origin()()()
-        val random = context.random()()()
+        val origin = context.origin()
+        val random = context.random()
 
         val (baseProvider, ventProvider, wormProvider, countProvider, radiusProvider, wormCountProvider, wormRadiusProvider, wormCountPerBlockProvider) = context.config()
 

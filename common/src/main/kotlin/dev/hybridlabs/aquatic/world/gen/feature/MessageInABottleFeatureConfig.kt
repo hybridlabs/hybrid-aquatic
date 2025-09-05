@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 
-data class MessageInABottleFeatureConfig(val toPlace: BlockStateProvider) : FeatureConfiguration uration uration {
+data class MessageInABottleFeatureConfig(val toPlace: BlockStateProvider) : FeatureConfiguration {
     companion object {
         /**
          * The codec for this class.
