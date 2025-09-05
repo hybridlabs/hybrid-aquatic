@@ -2,12 +2,11 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.entity.ai.goal.SharkJumpGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.ai.goal.ChaseBoatGoal
-import net.minecraft.entity.ai.goal.RevengeGoal
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.world.World
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.FollowBoatGoal
+import net.minecraft.world.level.Level
 
 class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, world: Level) :
     HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.LARGE_PREY), false, true) {
@@ -15,11 +14,11 @@ class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, w
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, RevengeGoal(this))
-        goalSelector.addGoal(8, ChaseBoatGoal(this))
+        goalSelector.addGoal(8, FollowBoatGoal(this))
         goalSelector.addGoal(5, SharkJumpGoal(this, 10))
     }
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 1
     }
 

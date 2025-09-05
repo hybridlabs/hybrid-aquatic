@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.ai.goal.PanicGoal
-import net.minecraft.entity.ai.goal.RandomSwimmingGoal
-import net.minecraft.entity.mob.WaterAnimal
-import net.minecraft.registry.tag.TagKey
-import net.minecraft.world.World
+import net.minecraft.tags.TagKey
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.goal.PanicGoal
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.level.Level
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -39,7 +39,7 @@ open class HybridAquaticOctopusEntity(
                 "Swim/Run",
                 20
             ) { state: AnimationState<HybridAquaticOctopusEntity> ->
-                if (!this.isUnderWater && isOnGround) {
+                if (!this.isUnderWater && onGround()) {
                     state.setAndContinue(DefaultAnimations.SIT)
                 } else {
                     if (state.isMoving) {

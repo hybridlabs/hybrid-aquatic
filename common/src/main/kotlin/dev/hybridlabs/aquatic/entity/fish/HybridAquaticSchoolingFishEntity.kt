@@ -34,12 +34,12 @@ open class HybridAquaticSchoolingFishEntity(
         goalSelector.addGoal(5, FishFollowGroupLeaderGoal(this))
     }
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return this.getMaxGroupSize()
     }
 
     open fun getMaxGroupSize(): Int {
-        return super.getSpawnClusterSize()
+        return super.getMaxSpawnClusterSize()
     }
 
     override fun hasSelfControl(): Boolean {

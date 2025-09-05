@@ -2,14 +2,16 @@ package dev.hybridlabs.aquatic.enchantment
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.minecraft.enchantment.Enchantment
-import net.minecraft.enchantment.EnchantmentTarget
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.EquipmentSlot
-import net.minecraft.item.Items
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.enchantment.Enchantment
+import net.minecraft.world.item.enchantment.EnchantmentCategory
 
-class LiveCatchEnchantment : Enchantment(Rarity.RARE, EnchantmentTarget.FISHING_ROD, arrayOf(EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND)) {
-    override fun getMinPower(level: Int): Int {
+class LiveCatchEnchantment :
+    Enchantment(Rarity.RARE, EnchantmentCategory.FISHING_ROD, arrayOf(EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND)) {
+
+    override fun getMinLevel(): Int {
         return 25
     }
 

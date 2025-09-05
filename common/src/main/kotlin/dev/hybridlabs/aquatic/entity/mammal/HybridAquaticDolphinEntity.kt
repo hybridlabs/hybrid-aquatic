@@ -1,32 +1,27 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.ai.goal.HADolphinJumpGoal
-import net.minecraft.entity.*
-import net.minecraft.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.entity.ai.control.SmoothSwimmingLookControl
-import net.minecraft.entity.ai.goal.*
-import net.minecraft.entity.ai.pathing.BlockPathTypes
-import net.minecraft.entity.ai.pathing.WaterBoundPathNavigation
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
-import net.minecraft.entity.mob.WaterAnimal
-import net.minecraft.entity.player.Player
-import net.minecraft.item.ItemStack
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.particle.ParticleTypes
-import net.minecraft.registry.tag.TagKey
-import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Mth
-import net.minecraft.util.math.Vec3d
-import net.minecraft.util.math.random.Random
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.TagKey
+import net.minecraft.util.Mth
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.*
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
+import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
+import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.item.ItemEntity
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -128,14 +123,14 @@ open class HybridAquaticDolphinEntity(
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(0, BreatheAirGoal(this))
+        goalSelector.addGoal(0, BreathAirGoal(this))
         goalSelector.addGoal(0, TryFindWaterGoal(this))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
-        goalSelector.addGoal(4,RandomRandomLookAroundGoal(this))
-        goalSelector.addGoal(5, LookAtPlayerGoal(this,Player::class.java, 6.0f))
+        goalSelector.addGoal(4, RandomLookAroundGoal(this))
+        goalSelector.addGoal(5, LookAtPlayerGoal(this, Player::class.java, 6.0f))
         goalSelector.addGoal(5, HADolphinJumpGoal(this, 10))
         goalSelector.addGoal(6, MeleeAttackGoal(this, 1.2000000476837158, true))
-        goalSelector.addGoal(8, ChaseBoatGoal(this))
+        goalSelector.addGoal(8, FollowBoatGoal(this))
     }
 
     override fun doHurtTarget(target: Entity): Boolean {
@@ -145,7 +140,7 @@ open class HybridAquaticDolphinEntity(
         )
         if (bl) {
             this.applyDamageEffects(this, target)
-            this.playSound(SoundEvents._DOLPHIN_ATTACK, 1.0f, 1.0f)
+            this.playSound(SoundEvents.DOLPHIN_ATTACK, 1.0f, 1.0f)
         }
 
         return bl
@@ -163,11 +158,11 @@ open class HybridAquaticDolphinEntity(
         return 0.3f
     }
 
-    override fun getMaxLookPitchChange(): Int {
+    override fun getMaxHeadYRot(): Int {
         return 1
     }
 
-    override fun getMaxHeadRotation(): Int {
+    override fun getMaxHeadXRot(): Int {
         return 1
     }
 
@@ -210,7 +205,7 @@ open class HybridAquaticDolphinEntity(
                     this.damage(this.damageSources.dryOut(), 1.0f)
                 }
 
-                if (this.isOnGround) {
+                if (this.onGround) {
                     this.velocity = velocity.add(
                         ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble(),
                         0.5,
@@ -222,20 +217,20 @@ open class HybridAquaticDolphinEntity(
                 }
             }
 
-            if (world.isClientSide && this.isTouchingWater && (velocity.lengthSquared() > 0.03)) {
+            if (level().isClientSide && this.wasTouchingWater && (velocity.lengthSquared() > 0.03)) {
                 val vec3d = this.getRotationVec(0.0f)
                 val f = Mth.cos(this.yaw * 0.017453292f) * 0.3f
                 val g = Mth.sin(this.yaw * 0.017453292f) * 0.3f
                 val h = 1.2f - random.nextFloat() * 0.7f
 
                 for (i in 0..1) {
-                    world.addParticle(
+                    level().addParticle(
                         ParticleTypes.DOLPHIN,
                         this.x - vec3d.x * h.toDouble() + f.toDouble(),
                         this.y - vec3d.y,
                         this.z - vec3d.z * h.toDouble() + g.toDouble(), 0.0, 0.0, 0.0
                     )
-                    world.addParticle(
+                    level().addParticle(
                         ParticleTypes.DOLPHIN,
                         this.x - (vec3d.x * h.toDouble()) - (f.toDouble()),
                         this.y - vec3d.y,
@@ -247,23 +242,23 @@ open class HybridAquaticDolphinEntity(
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent? {
-        return SoundEvents._DOLPHIN_HURT
+        return SoundEvents.DOLPHIN_HURT
     }
 
     override fun getDeathSound(): SoundEvent? {
-        return SoundEvents._DOLPHIN_DEATH
+        return SoundEvents.DOLPHIN_DEATH
     }
 
     override fun getAmbientSound(): SoundEvent? {
-        return if (this.isTouchingWater) SoundEvents._DOLPHIN_AMBIENT_WATER else SoundEvents._DOLPHIN_AMBIENT
+        return if (this.wasTouchingWater) SoundEvents.DOLPHIN_AMBIENT_WATER else SoundEvents.DOLPHIN_AMBIENT
     }
 
-    override fun getSplashSound(): SoundEvent {
-        return SoundEvents._DOLPHIN_SPLASH
+    override fun getSwimSplashSound(): SoundEvent {
+        return SoundEvents.DOLPHIN_SPLASH
     }
 
     override fun getSwimSound(): SoundEvent {
-        return SoundEvents._DOLPHIN_SWIM
+        return SoundEvents.DOLPHIN_SWIM
     }
 
     override fun travel(movementInput: Vec3d) {

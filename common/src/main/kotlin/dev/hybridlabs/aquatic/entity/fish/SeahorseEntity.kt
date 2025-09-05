@@ -1,21 +1,13 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.MobSpawnType
-import net.minecraft.entity.VariantHolder
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.StringRepresentable
-import net.minecraft.util.function.ByIdMap
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.Level
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -36,7 +28,7 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
     ),
     VariantHolder<SeahorseEntity.Companion.Type> {
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
@@ -70,7 +62,7 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
             THORNY(2, "thorny"),
             BIG_BELLY(3, "big_belly");
 
-            override fun asString(): String {
+            override fun getSerializedName(): String {
                 return this.key
             }
 
@@ -99,7 +91,7 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.asString())
+        nbt.putString("Type", this.variant.toString())
         super.addAdditionalSaveData(nbt)
     }
 

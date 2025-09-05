@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.entity.crustacean.layer
+package dev.hybridlabs.aquatic.client.render.entity.crustacean.layer
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
@@ -11,11 +11,11 @@ import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.renderer.layer.GeoRenderType
+import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
 class HybridAquaticCrustaceanEntityLayer<T: HybridAquaticCrustaceanEntity>(
     renderer: HybridAquaticCrustaceanEntityRenderer<T>
-) : GeoRenderType<T>(renderer) {
+) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(layer: String): ResourceLocation {
         return (geoModel as HybridAquaticCrustaceanEntityModel).getLayerTextureResource(layer)
@@ -39,7 +39,7 @@ class HybridAquaticCrustaceanEntityLayer<T: HybridAquaticCrustaceanEntity>(
         val layerRenderType = RenderType.entityTranslucent(layerTexture)
 
         getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderType,
-            bufferSource.getBuffer(layerRenderType), partialTick, packedLight, OverlayTexture.DEFAULT_UV,
+            bufferSource.getBuffer(layerRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
             1f, 1f, 1f, 1f)
     }
 }

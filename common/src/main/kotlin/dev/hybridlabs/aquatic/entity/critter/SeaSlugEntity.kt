@@ -1,23 +1,23 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.MobSpawnType
-import net.minecraft.entity.VariantHolder
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.core.RegistryAccess
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.registry.entry.RegistryEntry
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
-import net.minecraft.util.function.ByIdMap
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
-import net.minecraft.world.biome.Biome
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.VariantHolder
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
@@ -36,13 +36,13 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: Level) :
         }
 
         val TYPE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(SeaSlugEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(SeaSlugEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             SEA_HARE(0, "spotted_sea_hare"),
             NUDIBRANCH(1, "nudibranch");
 
-            override fun asString(): String {
+            override fun getSerializedName(): String {
                 return this.key
             }
 
@@ -62,7 +62,7 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: Level) :
                     return BY_ID.apply(id) as Type
                 }
 
-                fun fromBiome(biome: RegistryEntry<Biome>): Type {
+                fun fromBiome(biome: RegistryAccess.RegistryEntry<Biome>): Type {
                     return when {
 
                         biome.`is`(HybridAquaticBiomeTags.REEF) -> {
@@ -90,7 +90,7 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: Level) :
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        val biome = world.getBiome(this.blockPos)
+        val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
@@ -104,13 +104,13 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: Level) :
         return -5
     }
 
-    override fun initSynchedEntityData() {
+    override fun defineSynchedData() {
         entityData.define(TYPE, 0)
-        super.initSynchedEntityData()
+        super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.asString())
+        nbt.putString("Type", this.variant.toString())
         super.addAdditionalSaveData(nbt)
     }
 

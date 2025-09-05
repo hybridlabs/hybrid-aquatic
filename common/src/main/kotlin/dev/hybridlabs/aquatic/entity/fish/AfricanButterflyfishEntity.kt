@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.goal.FishJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.FishJumpGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -8,11 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
 
-<<<<<<<< HEAD:common/src/main/kotlin/dev/hybridlabs/aquatic/entity/fish/AfricanButterflyEntity.kt
-class AfricanButterflyEntity(entityType: EntityType<out AfricanButterflyEntity>, world: Level) :
-========
 class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfishEntity>, world: Level) :
->>>>>>>> latest:common/src/main/kotlin/dev/hybridlabs/aquatic/entity/fish/AfricanButterflyfishEntity.kt
     HybridAquaticFishEntity(
         entityType, world,
         listOf(HybridAquaticEntityTags.NONE),
@@ -70,19 +66,11 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-<<<<<<<< HEAD:common/src/main/kotlin/dev/hybridlabs/aquatic/entity/fish/AfricanButterflyEntity.kt
-                .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.6)
-                .add(Attributes.ATTACK_DAMAGE, 1.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 4.0)
-========
                 .add(Attributes.MAX_HEALTH, 2.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)
->>>>>>>> latest:common/src/main/kotlin/dev/hybridlabs/aquatic/entity/fish/AfricanButterflyfishEntity.kt
         }
     }
 }

@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -50,7 +51,7 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
             blockState.setValue(WORMS, (blockState.getValue(WORMS) + 1).coerceAtMost(WORMS.max))
         } else {
             val fluidState = ctx.level.getFluidState(ctx.clickedPos)
-            val isWaterlogged = fluidState == Fluids.WATER
+            val isWaterlogged = (fluidState.`is`(FluidTags.WATER))
             super.getStateForPlacement(ctx)?.setValue(WATERLOGGED, isWaterlogged)
         }
     }

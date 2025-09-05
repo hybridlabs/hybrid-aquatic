@@ -1,16 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal
-import net.minecraft.entity.ai.goal.MeleeAttackGoal
-import net.minecraft.entity.ai.goal.RevengeGoal
-import net.minecraft.entity.ai.goal.UniversalAngerGoal
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.mob.Angerable
-import net.minecraft.entity.player.Player
-import net.minecraft.world.World
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.NeutralMob
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.Level
 import java.util.*
 
 class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: Level) :
@@ -24,12 +22,12 @@ class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: 
         listOf(
             HybridAquaticEntityTags.SHARK
         )
-    ), Angerable {
+    ), NeutralMob {
 
     private var angerTime = 0
     private var angryAt: UUID? = null
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 1
     }
 
@@ -38,7 +36,7 @@ class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: 
         goalSelector.addGoal(1, MeleeAttackGoal(this, 1.5, false))
         targetSelector.addGoal(3, RevengeGoal(this))
         targetSelector.addGoal(3, UniversalAngerGoal(this, true))
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this,Player::class.java, 10, true, true) { this.shouldAngerAt(it) })
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.shouldAngerAt(it) })
     }
 
     companion object {
@@ -53,24 +51,24 @@ class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: 
     }
 
     //#region Angerable Implementation Details
-    override fun getAngerTime(): Int {
+    override fun getRemainingPersistentAngerTime(): Int {
         return angerTime
     }
 
-    override fun setAngerTime(angerTime: Int) {
+    override fun setRemainingPersistentAngerTime(p0: Int) {
         this.angerTime = angerTime
     }
 
-    override fun getAngryAt(): UUID? {
+    override fun getPersistentAngerTarget(): UUID? {
         return angryAt
     }
 
-    override fun setAngryAt(angryAt: UUID?) {
+    override fun setPersistentAngerTarget(p0: UUID?) {
         this.angryAt = angryAt
     }
 
-    override fun chooseRandomAngerTime() {
-        setAngerTime(PiranhaEntity.ANGER_TIME_RANGE.get(random))
+    override fun startPersistentAngerTimer() {
+        startPersistentAngerTimer(PiranhaEntity.ANGER_TIME_RANGE.get(random))
     }
     //#endregion
 }

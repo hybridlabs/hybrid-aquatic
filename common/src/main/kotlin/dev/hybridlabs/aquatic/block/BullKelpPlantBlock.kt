@@ -18,7 +18,7 @@ import net.minecraft.world.phys.shapes.Shapes
 class BullKelpPlantBlock(settings: Properties) :
     GrowingPlantBodyBlock(settings, Direction.UP, Shapes.block(), true), LiquidBlockContainer {
     override fun getHeadBlock(): GrowingPlantHeadBlock {
-        return HybridAquaticBlocks.BULL_KELP.get() as GrowingPlantHeadBlock
+        return HybridAquaticBlocks.BULL_KELP.get()
     }
 
     override fun getFluidState(state: BlockState): FluidState {

@@ -3,25 +3,25 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.MobSpawnType
-import net.minecraft.entity.VariantHolder
-import net.minecraft.entity.ai.goal.RevengeGoal
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.core.RegistryAccess
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.registry.entry.RegistryEntry
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.ByIdMap
+import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
-import net.minecraft.util.function.ByIdMap
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
-import net.minecraft.world.biome.Biome
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.VariantHolder
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -39,7 +39,7 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
         goalSelector.addGoal(1, RevengeGoal(this))
     }
 
-    override fun getLootTableId(): ResourceLocation {
+    override fun getDefaultLootTable(): ResourceLocation {
         return when (variant) {
             Type.BLUE_SPOTTED -> HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY
             Type.SPOTTED_EAGLE -> HybridAquaticLootTables.SPOTTED_EAGLE_RAY
@@ -53,7 +53,7 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        val biome = world.getBiome(this.blockPos)
+        val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
@@ -69,13 +69,13 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
         }
 
         val TYPE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(StingrayEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(StingrayEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             SPOTTED_EAGLE(0, "spotted_eagle"),
             BLUE_SPOTTED(1, "blue_spotted");
 
-            override fun asString(): String {
+            override fun getSerializedName(): String {
                 return this.key
             }
 
@@ -95,7 +95,7 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
                     return BY_ID.apply(id) as Type
                 }
 
-                fun fromBiome(biome: RegistryEntry<Biome>, random: RandomSource): Type {
+                fun fromBiome(biome: RegistryAccess.RegistryEntry<Biome>, random: RandomSource): Type {
                     return when {
                         biome.`is`(HybridAquaticBiomeTags.REEF) -> {
                             Type.fromId(random.nextInt(0, 3))
@@ -110,13 +110,13 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
         }
     }
 
-    override fun initSynchedEntityData() {
+    override fun defineSynchedData() {
         entityData.define(TYPE, 0)
-        super.initSynchedEntityData()
+        super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.asString())
+        nbt.putString("Type", this.variant.toString())
         super.addAdditionalSaveData(nbt)
     }
 

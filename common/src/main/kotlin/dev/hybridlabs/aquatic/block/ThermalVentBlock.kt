@@ -35,7 +35,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 class ThermalVentBlock(
     private val emitsParticles: Boolean,
     private val fireDamage: Int,
-    settings: Properties?
+    settings: Properties
 ) : Block(settings), SimpleWaterloggedBlock {
 
     init {

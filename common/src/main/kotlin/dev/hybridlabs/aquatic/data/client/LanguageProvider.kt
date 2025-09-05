@@ -10,6 +10,7 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
+import net.minecraft.core.registries.Registries
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.MobEntity
 import net.minecraft.registry.Registries
@@ -18,17 +19,17 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
     override fun generateTranslations(builder: TranslationBuilder) {
         // item group
         builder.add(
-            Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.BLOCKS)
+            Registries.CREATIVE_MODE_TAB.getKey(HybridAquaticItemGroups.BLOCKS)
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Blocks"
         )
 
         builder.add(
-            Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.ITEMS)
+            Registries.CREATIVE_MODE_TAB.getKey(HybridAquaticItemGroups.ITEMS)
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Items"
         )
 
         builder.add(
-            Registries.ITEM_GROUP.getKey(HybridAquaticItemGroups.SPAWN_EGGS)
+            Registries.CREATIVE_MODE_TAB.getKey(HybridAquaticItemGroups.SPAWN_EGGS)
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Spawn Eggs"
         )
 

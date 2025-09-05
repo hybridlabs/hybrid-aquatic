@@ -36,17 +36,8 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class GiantClamBlock : Block, SimpleWaterloggedBlock {
-
-    private val emitsParticles: Boolean
-
-    constructor(emitsParticles: Boolean, settings: Properties) : super(settings) {
-        this.emitsParticles = emitsParticles
-        this.registerDefaultState(
-            stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true)
-                .setValue(STATE, GiantClamState.OPEN)
-        )
-    }
+class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) : Block(settings),
+    SimpleWaterloggedBlock {
 
     private var pearlTimer: Int = 6000
 
@@ -54,7 +45,7 @@ class GiantClamBlock : Block, SimpleWaterloggedBlock {
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        type: PathComputationType
+        type: PathComputationType,
     ): Boolean {
         return false
     }
@@ -92,14 +83,14 @@ class GiantClamBlock : Block, SimpleWaterloggedBlock {
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape = COLLISION_SHAPE
 
     override fun getShape(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape = SHAPE
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
@@ -124,7 +115,7 @@ class GiantClamBlock : Block, SimpleWaterloggedBlock {
         pos: BlockPos,
         player: Player,
         hand: InteractionHand,
-        hit: BlockHitResult
+        hit: BlockHitResult,
     ): InteractionResult {
         if (!world.isClientSide) {
             val currentState = state.getValue(STATE)
@@ -134,8 +125,8 @@ class GiantClamBlock : Block, SimpleWaterloggedBlock {
 
                 val randomValue = world.random.nextFloat()
                 val itemToDrop = when {
-                    randomValue < 0.70 -> ItemStack(HybridAquaticItems.PEARL)
-                    randomValue < 0.95 -> ItemStack(HybridAquaticItems.BLACK_PEARL)
+                    randomValue < 0.70 -> ItemStack(HybridAquaticItems.PEARL.get())
+                    randomValue < 0.95 -> ItemStack(HybridAquaticItems.BLACK_PEARL.get())
                     else -> ItemStack(Items.ENDER_PEARL)
                 }
 
@@ -200,5 +191,12 @@ class GiantClamBlock : Block, SimpleWaterloggedBlock {
         override fun getSerializedName(): String {
             return name.lowercase()
         }
+    }
+
+    init {
+        this.registerDefaultState(
+            stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true)
+                .setValue(STATE, GiantClamState.OPEN)
+        )
     }
 }

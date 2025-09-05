@@ -19,7 +19,7 @@ open class HybridAquaticJellyfishEntityRenderer<T : HybridAquaticJellyfishEntity
 ) : GeoEntityRenderer<T>(context, model) {
 
     init {
-        if (canGlow) addRenderType(AutoGlowingGeoLayer(this))
+        if (canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
     }
 
     override fun applyRotations(jellyfishEntity: T, matrixStack: PoseStack, f: Float, g: Float, h: Float) {

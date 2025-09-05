@@ -36,7 +36,7 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
     private var angerTime = 0
     private var angryAt: UUID? = null
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 4
     }
 

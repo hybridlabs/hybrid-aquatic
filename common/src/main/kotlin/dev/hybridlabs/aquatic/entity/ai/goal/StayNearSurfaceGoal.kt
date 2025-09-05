@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import net.minecraft.entity.ai.goal.RandomStrollGoal
-import net.minecraft.entity.ai.pathing.PathComputationType
-import net.minecraft.entity.mob.PathfinderMob
-import net.minecraft.registry.tag.FluidTags
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Vec3d
+import net.minecraft.core.BlockPos
+import net.minecraft.tags.FluidTags
+import net.minecraft.world.entity.PathfinderMob
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
+import net.minecraft.world.level.pathfinder.PathComputationType
+import net.minecraft.world.phys.Vec3
 import java.util.*
 
 class StayNearSurfaceGoal(
@@ -17,7 +17,7 @@ class StayNearSurfaceGoal(
 
     private val random: Random = Random()
 
-    override fun getPosition(): Vec3d? {
+    override fun getPosition(): Vec3? {
         val vec = getRandomWaterPos() ?: return null
 
         var pos = BlockPos.containing(vec)
@@ -41,10 +41,10 @@ class StayNearSurfaceGoal(
             depth++
         }
 
-        return Vec3d.atCenterOf(pos)
+        return Vec3.atCenterOf(pos)
     }
 
-    private fun getRandomWaterPos(): Vec3d? {
+    private fun getRandomWaterPos(): Vec3? {
         var attempts = 0
         while (attempts < 10) {
             val x = mob.x + (random.nextDouble() * 20 - 10)
@@ -55,7 +55,7 @@ class StayNearSurfaceGoal(
             if (mob.level()..getFluidState(pos).`is`(FluidTags.WATER) &&
                 mob.level()..getBlockState(pos).isPathfindable(mob.level()., pos, PathComputationType.WATER)
             ) {
-                return Vec3d(x, y, z)
+                return Vec3(x, y, z)
             }
             attempts++
         }

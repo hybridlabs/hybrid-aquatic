@@ -22,7 +22,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 
 @Suppress("OVERRIDE_DEPRECATION")
-class TallRedAlgaeBlock(settings: Properties?) : DoublePlantBlock(settings), LiquidBlockContainer {
+class TallRedAlgaeBlock(settings: Properties) : DoublePlantBlock(settings), LiquidBlockContainer {
     override fun getShape(
         state: BlockState,
         world: BlockGetter,

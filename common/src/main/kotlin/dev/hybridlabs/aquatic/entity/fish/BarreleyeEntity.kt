@@ -2,10 +2,10 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.world.World
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.Level
 
 class BarreleyeEntity(entityType: EntityType<out BarreleyeEntity>, world: Level) :
     HybridAquaticFishEntity(
@@ -20,7 +20,7 @@ class BarreleyeEntity(entityType: EntityType<out BarreleyeEntity>, world: Level)
         )
     ) {
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 

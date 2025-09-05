@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.world.World
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.Level
 
 class KillerWhaleEntity(entityType: EntityType<out KillerWhaleEntity>, world: Level) :
     HybridAquaticDolphinEntity(entityType, world,
@@ -13,7 +13,7 @@ class KillerWhaleEntity(entityType: EntityType<out KillerWhaleEntity>, world: Le
         listOf(
             HybridAquaticEntityTags.NONE)) {
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 

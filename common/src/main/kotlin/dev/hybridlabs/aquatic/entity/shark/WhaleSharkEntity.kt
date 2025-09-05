@@ -3,20 +3,20 @@ package dev.hybridlabs.aquatic.entity.shark
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.MobSpawnType
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
-import net.minecraft.util.function.ByIdMap
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
@@ -56,7 +56,7 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Leve
         }
     }
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 1
     }
 
@@ -74,13 +74,13 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Leve
         val MOUTH_CLOSED: RawAnimation = RawAnimation.begin().thenPlay("misc.mouth_closed")
 
         val OverlayTexture: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(WhaleSharkEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(WhaleSharkEntity::class.java, EntityDataSerializers.INT)
 
         enum class OverlayTextures(val id: Int, val key: String) : StringRepresentable {
             SPOTS(0, "spots"),
             SMALL_SPOTS(1, "small_spots");
 
-            override fun asString(): String {
+            override fun getSerializedName(): String {
                 return this.key
             }
 
@@ -128,12 +128,12 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Leve
         }
 
     override fun getOverlayTextureName(): String {
-        return WhaleSharkEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).asString()
+        return WhaleSharkEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).toString()
     }
 
-    override fun initSynchedEntityData() {
+    override fun defineSynchedData() {
         entityData.define(OverlayTexture, 0)
-        super.initSynchedEntityData()
+        super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

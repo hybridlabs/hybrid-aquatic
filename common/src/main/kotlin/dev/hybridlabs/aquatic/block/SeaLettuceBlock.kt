@@ -20,7 +20,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION")
-class SeaLettuceBlock(settings: Properties?) : BushBlock(settings), BonemealableBlock, LiquidBlockContainer {
+class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableBlock, LiquidBlockContainer {
     override fun getShape(
         state: BlockState,
         world: BlockGetter,

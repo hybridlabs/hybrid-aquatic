@@ -9,6 +9,11 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.MobEffectInstance
 import net.minecraft.entity.effect.MobEffects
 import net.minecraft.world.World
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
 
 class StonefishEntity(entityType: EntityType<out StonefishEntity>, world: Level) :
     HybridAquaticFishEntity(
@@ -23,7 +28,7 @@ class StonefishEntity(entityType: EntityType<out StonefishEntity>, world: Level)
         )
     ) {
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 

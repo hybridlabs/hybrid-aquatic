@@ -1,11 +1,9 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import net.minecraft.entity.ai.goal.RandomStrollGoal
-import net.minecraft.entity.ai.pathing.PathComputationType
-import net.minecraft.entity.mob.PathfinderMob
-import net.minecraft.registry.tag.FluidTags
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Vec3d
+import net.minecraft.core.BlockPos
+import net.minecraft.world.entity.PathfinderMob
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
+import net.minecraft.world.phys.Vec3
 import java.util.*
 
 class StayDeepGoal(
@@ -17,7 +15,7 @@ class StayDeepGoal(
 
     private val random: Random = Random()
 
-    override fun getPosition(): Vec3d? {
+    override fun getPosition(): Vec3? {
         val vec = getRandomWaterPos() ?: return null
 
         val distanceOffSeabed = 1 + random.nextInt(maxHeight.coerceAtLeast(1))
@@ -41,10 +39,10 @@ class StayDeepGoal(
             height++
         }
 
-        return Vec3d.atCenterOf(pos)
+        return Vec3.atCenterOf(pos)
     }
 
-    private fun getRandomWaterPos(): Vec3d? {
+    private fun getRandomWaterPos(): Vec3? {
         var attempts = 0
         while (attempts < 10) {
             val x = mob.x + (random.nextDouble() * 20 - 10)

@@ -48,7 +48,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
                 this.playSound(SoundEvents.SHEEP_SHEAR, 1.0f, 1.0f)
                 this.gameEvent(GameEvent.SHEAR, player)
                 itemStack.hurtAndBreak(1, player) { it.broadcastBreakEvent(hand) }
-                spawnAtLocation(ItemStack(HybridAquaticItems.CORAL_CHUNK))
+                spawnAtLocation(ItemStack(HybridAquaticItems.CORAL_CHUNK.get()))
                 return InteractionResult.SUCCESS
             }
             return InteractionResult.CONSUME

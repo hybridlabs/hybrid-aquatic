@@ -4,24 +4,25 @@ import dev.hybridlabs.aquatic.entity.ai.goal.FishJumpGoal
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.MobSpawnType
-import net.minecraft.entity.VariantHolder
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
+import net.minecraft.core.RegistryAccess
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.registry.entry.RegistryEntry
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.ByIdMap
+import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
-import net.minecraft.util.function.ByIdMap
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
-import net.minecraft.world.biome.Biome
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.VariantHolder
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -39,7 +40,7 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
     ),
     VariantHolder<TunaEntity.Companion.Type> {
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 3
     }
 
@@ -50,7 +51,7 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        val biome = world.getBiome(this.blockPos)
+        val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
@@ -61,7 +62,7 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
         goalSelector.addGoal(5, FishJumpGoal(this, 10))
     }
 
-    override fun getLootTableId(): ResourceLocation {
+    override fun getDefaultLootTable(): ResourceLocation {
         return when (variant) {
             Type.YELLOWFIN -> HybridAquaticLootTables.YELLOWFIN
             Type.BLUEFIN -> HybridAquaticLootTables.BLUEFIN
@@ -79,13 +80,13 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
         }
 
         val TYPE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(TunaEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(TunaEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             YELLOWFIN(0, "yellowfin"),
             BLUEFIN(1, "bluefin");
 
-            override fun asString(): String {
+            override fun getSerializedName(): String {
                 return this.key
             }
 
@@ -105,7 +106,7 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
                     return BY_ID.apply(id) as Type
                 }
 
-                fun fromBiome(biome: RegistryEntry<Biome>, random: RandomSource): Type {
+                fun fromBiome(biome: RegistryAccess.RegistryEntry<Biome>, random: RandomSource): Type {
                     return when {
                         biome.`is`(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
                             BLUEFIN
@@ -124,13 +125,13 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
         }
     }
 
-    override fun initSynchedEntityData() {
+    override fun defineSynchedData() {
         entityData.define(TYPE, 0)
-        super.initSynchedEntityData()
+        super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.asString())
+        nbt.putString("Type", this.variant.toString())
         super.addAdditionalSaveData(nbt)
     }
 

@@ -3,16 +3,15 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.goal.FishJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.util.math.Vec3d
-import net.minecraft.world.World
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.Level
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 
 class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Level) :
     HybridAquaticSchoolingFishEntity(
@@ -27,7 +26,7 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
 
     private var isGliding = false
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 6
     }
 
@@ -40,7 +39,7 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
     override fun tick() {
         super.tick()
 
-        if (!this.isTouchingWater && !isOnGround) {
+        if (!this.wasTouchingWater && !onGround()) {
             if (!isGliding) {
                 startGliding()
             }
@@ -74,13 +73,13 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
     private fun applyGlidingPhysics() {
         if (!isGliding) return
 
-        val motion = this.velocity
-        val newMotion = Vec3d(
+        val motion = this.deltaMovement
+        val newMotion = Vec3(
             motion.x * 1.1,
             (motion.y * 0.95).coerceAtLeast(-0.1),
             motion.z * 1.1
         )
-        this.velocity = newMotion
+        this.deltaMovement = newMotion
     }
 
     companion object {

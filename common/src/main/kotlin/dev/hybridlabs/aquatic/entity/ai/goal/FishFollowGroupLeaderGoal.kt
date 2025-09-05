@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.ai.goal
 
 import com.mojang.datafixers.DataFixUtils
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticSchoolingFishEntity
-import net.minecraft.entity.ai.goal.Goal
+import net.minecraft.world.entity.ai.goal.Goal
 import java.util.function.Predicate
 
 class FishFollowGroupLeaderGoal(
@@ -29,8 +29,8 @@ class FishFollowGroupLeaderGoal(
             val predicate =
                 Predicate { fish: HybridAquaticSchoolingFishEntity -> fish.canHaveMoreFishInGroup() || !fish.hasLeader() }
             val list = fish
-                .world
-                .getEntitiesByClass(fish.javaClass, fish.boundingBox.expand(8.0, 8.0, 8.0), predicate)
+                .level()
+                .getEntitiesOfClass(fish.javaClass, fish.boundingBox.inflate(8.0, 8.0, 8.0), predicate)
             val schoolingFishEntity =
                 DataFixUtils.orElse(list.stream().filter { obj: HybridAquaticSchoolingFishEntity? -> obj!!.canHaveMoreFishInGroup() }
                     .findAny(), fish)
@@ -40,7 +40,7 @@ class FishFollowGroupLeaderGoal(
         }
     }
 
-    override fun shouldContinue(): Boolean {
+    override fun canContinueToUse(): Boolean {
         return fish.hasLeader() && fish.isCloseEnoughToLeader()
     }
 

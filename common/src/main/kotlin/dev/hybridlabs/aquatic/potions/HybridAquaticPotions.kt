@@ -2,9 +2,12 @@
 
 package dev.hybridlabs.aquatic.potions
 
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import net.minecraft.core.Registry
+import net.minecraft.core.registries.Registries
 import net.minecraft.entity.effect.MobEffectInstance
 import net.minecraft.entity.effect.MobEffects
 import net.minecraft.item.Item
@@ -15,6 +18,13 @@ import net.minecraft.recipe.BrewingRecipeRegistry
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.alchemy.Potion
+import net.minecraft.world.item.alchemy.Potions
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry
 
 object HybridAquaticPotions {
     val GLOWING_POTION = registerPotionWithRecipe(
@@ -26,14 +36,14 @@ object HybridAquaticPotions {
 
     val CLARITY_POTION = registerPotionWithRecipe(
         "clarity",
-        Potion(MobEffectInstance(HybridAquaticMobEffects.CLARITY, 1200, 0)),
+        Potion(MobEffectInstance(HybridAquaticMobEffects.CLARITY.get(), 1200, 0)),
         Potions.AWKWARD,
         HybridAquaticItems.BARRELEYE
     )
 
     val THALASSOPHOBIA_POTION = registerPotionWithRecipe(
         "thalassophobia",
-        Potion(MobEffectInstance(HybridAquaticMobEffects.THALASSOPHOBIA, 1200, 0)),
+        Potion(MobEffectInstance(HybridAquaticMobEffects.THALASSOPHOBIA.get(), 1200, 0)),
         Potions.AWKWARD,
         HybridAquaticItems.ANGLERFISH
     )
@@ -54,7 +64,7 @@ object HybridAquaticPotions {
 
     val BLEEDING_POTION = registerPotionWithRecipe(
         "bleeding",
-        Potion(MobEffectInstance(HybridAquaticMobEffects.BLEEDING, 200, 0)),
+        Potion(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), 200, 0)),
         Potions.AWKWARD,
         HybridAquaticItems.SHARK_TOOTH
     )
@@ -69,21 +79,21 @@ object HybridAquaticPotions {
 
     val BUOYANCY_POTION = registerPotionWithRecipe(
         "buoyancy",
-        Potion(MobEffectInstance(HybridAquaticMobEffects.BUOYANCY, 200, 0)),
+        Potion(MobEffectInstance(HybridAquaticMobEffects.BUOYANCY.get(), 200, 0)),
         Potions.AWKWARD,
         Items.KELP
     )
 
     val SPININESS_POTION = registerPotionWithRecipe(
         "spininess",
-        Potion(MobEffectInstance(HybridAquaticMobEffects.SPININESS, 300, 0)),
+        Potion(MobEffectInstance(HybridAquaticMobEffects.SPININESS.get(), 300, 0)),
         Potions.AWKWARD,
         HybridAquaticItems.SEA_URCHIN_SPINE
     )
 
     val CORROSION_POTION = registerPotionWithRecipe(
         "corrosion",
-        Potion(MobEffectInstance(HybridAquaticMobEffects.CORROSION, 300, 0)),
+        Potion(MobEffectInstance(HybridAquaticMobEffects.CORROSION.get(), 300, 0)),
         Potions.AWKWARD,
         HybridAquaticItems.SULFUR
     )

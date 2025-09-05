@@ -3,24 +3,24 @@ package dev.hybridlabs.aquatic.entity.critter
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import net.minecraft.entity.*
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
-import net.minecraft.entity.effect.MobEffectInstance
-import net.minecraft.entity.effect.MobEffects
+import net.minecraft.core.RegistryAccess
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.registry.entry.RegistryEntry
-import net.minecraft.registry.tag.BiomeTags
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.util.ByIdMap
+import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
-import net.minecraft.util.function.ByIdMap
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
-import net.minecraft.world.biome.Biome
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
+import net.minecraft.world.entity.*
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -43,9 +43,9 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         }
 
         val TYPE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(StarfishEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(StarfishEntity::class.java, EntityDataSerializers.INT)
         val OverlayTexture: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(StarfishEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(StarfishEntity::class.java, EntityDataSerializers.INT)
 
         enum class OverlayTextures(val id: Int, val key: String) : StringRepresentable {
             NONE(0, ""),
@@ -56,7 +56,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
             CIRCLE(5, "circle"),
             STRIPES_CIRCLE(6, "stripes_circle");
 
-            override fun asString(): String {
+            override fun getSerializedName(): String {
                 return this.key
             }
 
@@ -81,7 +81,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
             SMALL(2, "small"),
             MEDIUM(3, "medium");
 
-            override fun asString(): String {
+            override fun getSerializedName(): String {
                 return this.key
             }
 
@@ -107,7 +107,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
                     MEDIUM,
                 )
 
-                fun fromBiome(biome: RegistryEntry<Biome>, random: RandomSource): Type {
+                fun fromBiome(biome: RegistryAccess.RegistryEntry<Biome>, random: RandomSource): Type {
                     return when {
                         biome.`is`(BiomeTags.IS_DEEP_OCEAN) -> {
                             BRITTLESTAR
@@ -143,7 +143,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        val biome = world.getBiome(this.blockPos)
+        val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
 
@@ -169,17 +169,17 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
             entityData.set(OverlayTexture, value.id)
         }
     override fun getOverlayTextureName(): String {
-        return StarfishEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).asString()
+        return StarfishEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).toString()
     }
 
-    override fun initSynchedEntityData() {
+    override fun defineSynchedData() {
         entityData.define(TYPE, 0)
         entityData.define(OverlayTexture, 0)
-        super.initSynchedEntityData()
+        super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.asString())
+        nbt.putString("Type", this.variant.toString())
         nbt.putInt("texture_overlay", this.overlayTexture.id)
         super.addAdditionalSaveData(nbt)
     }

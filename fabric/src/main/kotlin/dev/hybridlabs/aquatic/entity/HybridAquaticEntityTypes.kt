@@ -1,5 +1,12 @@
 package dev.hybridlabs.aquatic.entity
 
+import dev.hybridlabs.aquatic.entity.fish.*
+import dev.hybridlabs.aquatic.entity.cephalopod.*
+import dev.hybridlabs.aquatic.entity.crustacean.*
+import dev.hybridlabs.aquatic.entity.shark.*
+import dev.hybridlabs.aquatic.entity.critter.*
+import dev.hybridlabs.aquatic.entity.mammal.*
+import dev.hybridlabs.aquatic.entity.jellyfish.*
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.world.entity.*

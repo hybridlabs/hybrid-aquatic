@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.client.render.entity.miniboss
 
 import com.mojang.blaze3d.vertex.PoseStack
+import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
@@ -12,11 +13,12 @@ import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 open class HybridAquaticMinibossEntityRenderer<T : HybridAquaticMinibossEntity>(
     context: EntityRendererProvider.Context,
     model: GeoModel<T>,
+    private var variableSize: Boolean = false,
     canGlow: Boolean = false
 ) : GeoEntityRenderer<T>(context, model) {
 
     init {
-        if(canGlow) addRenderType(AutoGlowingGeoLayer(this))
+        if(canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
     }
 
     override fun render(

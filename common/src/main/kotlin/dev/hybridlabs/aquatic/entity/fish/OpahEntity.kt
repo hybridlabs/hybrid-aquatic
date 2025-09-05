@@ -3,12 +3,12 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.ai.goal.Goal
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.mob.PathfinderMob
-import net.minecraft.world.World
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.PathfinderMob
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.Goal
+import net.minecraft.world.level.Level
 
 class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
     HybridAquaticFishEntity(
@@ -23,14 +23,14 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
         )
     ) {
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(2, FollowTunaGoal(this, 1.5, 4.0F, 8.0F))
-        if (world.isDay) {
+        if (level().isDay) {
             goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 12))
         } else {
             goalSelector.addGoal(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
@@ -60,7 +60,7 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
         override fun canUse(): Boolean {
             val closestTuna = mob.level()..getEntitiesByClass(
                 TunaEntity::class.java,
-                mob.boundingBox.expand(maxDistance.toDouble())
+                mob.boundingBox.inflate(maxDistance.toDouble())
             ) { true }
                 .minByOrNull { it.squaredDistanceTo(mob) }
 
@@ -71,12 +71,12 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
             return false
         }
 
-        override fun shouldContinue(): Boolean {
-            return target.isAlive && mob.squaredDistanceTo(target) > (minDistance * minDistance)
+        override fun canContinueToUse(): Boolean {
+            return target.isAlive && mob.distanceTo(target) > (minDistance * minDistance)
         }
 
         override fun start() {
-            mob.navigation.startMovingTo(target, speed)
+            mob.navigation.moveTo(target, speed)
         }
 
         override fun stop() {
@@ -85,7 +85,7 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
 
         override fun tick() {
             target.let {
-                mob.navigation.startMovingTo(it, speed)
+                mob.navigation.moveTo(it, speed)
             }
         }
     }

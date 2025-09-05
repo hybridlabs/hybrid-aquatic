@@ -15,7 +15,7 @@ class OscarEntity(entityType: EntityType<out OscarEntity>, world: Level) :
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK)) {
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 

@@ -1,12 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
+import com.mojang.authlib.minecraft.client.MinecraftClient
 import dev.hybridlabs.aquatic.Constants
-import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
-import net.minecraft.client.MinecraftClient
-import net.minecraft.client.renderer.entity.model.EntityModelPartNames
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.util.math.Mth
+import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 

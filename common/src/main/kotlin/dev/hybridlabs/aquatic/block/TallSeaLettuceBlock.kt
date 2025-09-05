@@ -20,7 +20,7 @@ import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-class TallSeaLettuceBlock(settings: Properties?) : DoublePlantBlock(settings), LiquidBlockContainer {
+class TallSeaLettuceBlock(settings: Properties) : DoublePlantBlock(settings), LiquidBlockContainer {
     override fun getShape(
         state: BlockState,
         world: BlockGetter,

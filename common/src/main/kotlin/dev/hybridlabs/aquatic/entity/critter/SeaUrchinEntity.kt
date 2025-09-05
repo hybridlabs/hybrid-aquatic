@@ -2,23 +2,24 @@ package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
-import net.minecraft.block.Blocks
-import net.minecraft.entity.*
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
-import net.minecraft.entity.player.Player
+import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.server.network.ServerPlayer
+import net.minecraft.network.protocol.game.ClientboundGameEventPacket
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
-import net.minecraft.util.function.ByIdMap
-import net.minecraft.util.math.BlockPos
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
+import net.minecraft.world.entity.*
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.block.Blocks
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -35,7 +36,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
@@ -51,13 +52,13 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
                 .add(Attributes.FOLLOW_RANGE, 2.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
         }
-        val TYPE: EntityDataAccessor<Int> = SynchedEntityData.defineId(SeaUrchinEntity::class.java, EntityDataSerializers.INTEGER)
+        val TYPE: EntityDataAccessor<Int> = SynchedEntityData.defineId(SeaUrchinEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             SMALL(0, "small"),
             LARGE(1, "large");
 
-            override fun asString(): String {
+            override fun getSerializedName(): String {
                 return this.key
             }
 
@@ -80,32 +81,24 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
         }
     }
 
-    override fun onPlayerCollision(player:Player) {
-        super.onPlayerCollision(player)
-
-        if (player is ServerPlayer) {
-            player.damage(this.damageSources.mobAttack(this), 0.5f)
+    override fun playerTouch(entity: Player) {
+        if (entity is ServerPlayer  && entity.hurt(damageSources().mobAttack(this), 0.5f)) {
+            if (!this.isSilent) {
+                entity.connection.send(ClientboundGameEventPacket(ClientboundGameEventPacket.PUFFER_FISH_STING, 0.0f))
+            }
         }
     }
 
-    override fun damage(source: DamageSource?, amount: Float): Boolean {
-        if (super.damage(source, amount)) {
-
-            val attacker = source?.attacker
-            if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
-                attacker.damage(this.damageSources.thorns(this), 2.0f)
-            }
-
-            return true
+    private fun touch(mob: Mob) {
+        if (mob.hurt(damageSources().mobAttack(this), 0.5f)) {
+           this.playSound(SoundEvents.PUFFER_FISH_STING, 1.0f, 1.0f)
         }
-
-        return false
     }
 
     override fun tick() {
         super.tick()
 
-        if (world.isClientSide) {
+        if (level().isClientSide) {
             return
         }
 
@@ -114,20 +107,20 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
             return
         }
 
-        if (world.random.nextInt(6000) < 300) {
+        if (level().random.nextInt(6000) < 300) {
             breakKelpUnderneath()
-            timeUntilNextBreak = 2400 + world.random.nextInt(1200)
+            timeUntilNextBreak = 2400 + level().random.nextInt(1200)
         }
     }
 
     private fun breakKelpUnderneath() {
         val posUnderneath = BlockPos(this.x.toInt(), (this.y + 1).toInt(), this.z.toInt())
-        if (world.getBlockState(posUnderneath).`is`(HybridAquaticBlockTags.URCHIN_BREAKABLES)) {
-            world.setBlockState(posUnderneath, Blocks.AIR.defaultBlockState())
+        if (level().getBlockState(posUnderneath).`is`(HybridAquaticBlockTags.URCHIN_BREAKABLES)) {
+            level().setBlockState(posUnderneath, Blocks.AIR.defaultBlockState())
             if (spawnUrchinOnNextBreak) {
-                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.create(world)
+                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.create(level())
                 newUrchin?.refreshPositionAndAngles(this.x, this.y, this.z, this.yaw, 0.0f)
-                world.spawnEntity(newUrchin)
+                level().spawnEntity(newUrchin)
                 spawnUrchinOnNextBreak = false
             } else {
                 spawnUrchinOnNextBreak = true
@@ -143,13 +136,13 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
         return -5
     }
 
-    override fun initSynchedEntityData() {
+    override fun defineSynchedData() {
         entityData.define(TYPE, 0)
-        super.initSynchedEntityData()
+        super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.asString())
+        nbt.putString("Type", this.variant.toString())
         super.addAdditionalSaveData(nbt)
     }
 

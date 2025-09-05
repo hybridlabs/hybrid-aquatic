@@ -1,19 +1,20 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import net.minecraft.block.Blocks
-import net.minecraft.entity.ai.goal.Goal
-import net.minecraft.entity.mob.MobEntity
-import net.minecraft.util.math.Vec3d
+import net.minecraft.world.entity.Mob
+import net.minecraft.world.entity.ai.goal.Goal
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.phys.Vec3
 
-class StayInWaterGoal(private val mob: MobEntity) : Goal() {
+@Suppress("DEPRECATION")
+class StayInWaterGoal(private val mob: Mob) : Goal() {
 
     override fun canUse(): Boolean {
         return true
     }
 
     override fun tick() {
-        val blockPos = mob.blockPos
-        val blockAbove = mob.entityWorld.getBlockState(blockPos.up(1))
+        val blockPos = mob.blockPosition()
+        val blockAbove = mob.level().getBlockState(blockPos.above(1))
 
         if (!blockAbove.`is`(Blocks.WATER)) {
             setDownwardVelocity()
@@ -22,7 +23,7 @@ class StayInWaterGoal(private val mob: MobEntity) : Goal() {
 
     private fun setDownwardVelocity() {
         val downwardVelocity = -0.25
-        val currentVelocity = mob.velocity
-        mob.velocity = Vec3d(currentVelocity.x, downwardVelocity, currentVelocity.z)
+        val currentVelocity = mob.deltaMovement
+        mob.deltaMovement = Vec3(currentVelocity.x, downwardVelocity, currentVelocity.z)
     }
 }

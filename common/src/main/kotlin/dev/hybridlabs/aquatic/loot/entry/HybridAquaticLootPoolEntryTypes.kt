@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.loot.entry
 
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.HybridAquatic
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries

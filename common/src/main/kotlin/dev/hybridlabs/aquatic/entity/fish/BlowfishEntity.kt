@@ -1,24 +1,23 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityGroup
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.ai.TargetPredicate
-import net.minecraft.entity.ai.goal.Goal
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
-import net.minecraft.entity.effect.MobEffectInstance
-import net.minecraft.entity.effect.MobEffects
-import net.minecraft.entity.mob.MobEntity
-import net.minecraft.entity.player.Player
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.sound.SoundEvents
-import net.minecraft.world.World
+import net.minecraft.network.protocol.game.ClientboundGameEventPacket
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.Mob
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.Goal
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.Level
 import java.util.function.Predicate
 
 class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
@@ -32,7 +31,7 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
         )
     ) {
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
@@ -43,8 +42,8 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
     var inflateTicks = 0
     var deflateTicks = 0
 
-    override fun initSynchedEntityData() {
-        super.initSynchedEntityData()
+    override fun defineSynchedData() {
+        super.defineSynchedData()
         entityData.define(PUFF_STATE, NOT_PUFFED)
     }
 
@@ -78,10 +77,10 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
 
     private fun handleInflation() {
         if (getPuffState() == NOT_PUFFED) {
-            playSound(SoundEvents._PUFFER_FISH_BLOW_UP, soundVolume, soundPitch)
+            playSound(SoundEvents.PUFFER_FISH_BLOW_UP, soundVolume, soundPitch)
             setPuffState(SEMI_PUFFED)
         } else if (inflateTicks > 40 && getPuffState() == SEMI_PUFFED) {
-            playSound(SoundEvents._PUFFER_FISH_BLOW_UP, soundVolume, soundPitch)
+            playSound(SoundEvents.PUFFER_FISH_BLOW_UP, soundVolume, soundPitch)
             setPuffState(FULLY_PUFFED)
         }
         inflateTicks++
@@ -89,10 +88,10 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
 
     private fun handleDeflation() {
         if (deflateTicks > 60 && getPuffState() == FULLY_PUFFED) {
-            playSound(SoundEvents._PUFFER_FISH_BLOW_OUT, soundVolume, soundPitch)
+            playSound(SoundEvents.PUFFER_FISH_BLOW_OUT, soundVolume, soundPitch)
             setPuffState(SEMI_PUFFED)
         } else if (deflateTicks > 100 && getPuffState() == SEMI_PUFFED) {
-            playSound(SoundEvents._PUFFER_FISH_BLOW_OUT, soundVolume, soundPitch)
+            playSound(SoundEvents.PUFFER_FISH_BLOW_OUT, soundVolume, soundPitch)
             setPuffState(NOT_PUFFED)
         }
         deflateTicks++
@@ -108,39 +107,34 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
         }
     }
 
-    override fun damage(source: DamageSource, amount: Float): Boolean {
-        if (super.damage(source, amount)) {
+    private fun touch(mob: Mob) {
+        val i = this.getPuffState()
+        if (mob.hurt(damageSources().mobAttack(this), (1 + i).toFloat())) {
+            mob.addEffect(
+                MobEffectInstance(MobEffects.POISON, 60 * i, 0),
+                this
+            )
+            this.playSound(SoundEvents.PUFFER_FISH_STING, 1.0f, 1.0f)
+        }
+    }
 
-            val attacker = source.attacker
-            if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
-                attacker.addMobEffect(MobEffectInstance(MobEffects.POISON, 200, 1))
+    override fun playerTouch(entity: Player) {
+        val i = this.getPuffState()
+        if (entity is ServerPlayer && i > 0 && entity.hurt(damageSources().mobAttack(this), (1 + i).toFloat())) {
+            if (!this.isSilent) {
+                entity.connection.send(ClientboundGameEventPacket(ClientboundGameEventPacket.PUFFER_FISH_STING, 0.0f))
             }
 
-            return true
-        }
-
-        return false
-    }
-
-    private fun sting(mob: MobEntity) {
-        val puffLevel = getPuffState()
-        val damageSource = this.damageSources.mobAttack(this)
-        if (mob.damage(damageSource, (1 + puffLevel).toFloat())) {
-            mob.addMobEffect(MobEffectInstance(MobEffects.POISON, 60 * puffLevel, 0), this)
-            playSound(SoundEvents._PUFFER_FISH_STING, 1.0f, 1.0f)
-        }
-    }
-
-    override fun onPlayerCollision(player:Player) {
-        val puffLevel = getPuffState()
-        if (puffLevel > 0 && player.damage(this.damageSources.mobAttack(this), (1 + puffLevel).toFloat())) {
-            player.addMobEffect(MobEffectInstance(MobEffects.POISON, 60 * puffLevel, 0), this)
+            entity.addEffect(
+                MobEffectInstance(MobEffects.POISON, 60 * i, 0),
+                this
+            )
         }
     }
 
     private inner class InflateGoal : Goal() {
         override fun canUse(): Boolean {
-            val nearbyEntities = world.getEntitiesByClass(LivingEntity::class.java, boundingBox.expand(2.0)) {
+            val nearbyEntities = level().getEntitiesOfClass(LivingEntity::class.java, boundingBox.inflate(2.0)) {
                 BLOW_UP_TARGET_PREDICATE.test(this@BlowfishEntity, it)
             }
             return nearbyEntities.isNotEmpty()
@@ -166,9 +160,13 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
                 .add(Attributes.FOLLOW_RANGE, 4.0)
         }
 
-        private val PUFF_STATE: EntityDataAccessor<Int> = SynchedEntityData.defineId(BlowfishEntity::class.java, EntityDataSerializers.INTEGER)
-        private val BLOW_UP_FILTER: Predicate<LivingEntity> = Predicate { entity -> if (entity isPlayer && entity.isCreative) false else entity.group != EntityGroup.AQUATIC }
-        private val BLOW_UP_TARGET_PREDICATE: TargetPredicate = TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility().setPredicate(BLOW_UP_FILTER)
+        private val PUFF_STATE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(BlowfishEntity::class.java, EntityDataSerializers.INT)
+        private val BLOW_UP_FILTER: Predicate<LivingEntity> =
+            Predicate { entity -> if (entity isPlayer && entity . isCreative) false else entity.group != EntityGroup.AQUATIC }
+        private val BLOW_UP_TARGET_PREDICATE: TargetPredicate =
+            TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility()
+                .setPredicate(BLOW_UP_FILTER)
 
         const val NOT_PUFFED = 0
         const val SEMI_PUFFED = 1

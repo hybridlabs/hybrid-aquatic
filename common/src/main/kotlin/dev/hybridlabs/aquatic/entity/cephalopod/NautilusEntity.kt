@@ -3,13 +3,13 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
-import net.minecraft.world.World
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.Level
 
 class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
     HybridAquaticCephalopodEntity(
@@ -34,19 +34,19 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        if (world.isDay) {
+        if (level().isDay) {
             goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 12))
         } else {
             goalSelector.addGoal(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
         }
     }
 
-    override fun getHurtSound(source: DamageSource?): SoundEvent {
-        return SoundEvents._SHULKER_CLOSE
+    override fun getHurtSound(source: DamageSource): SoundEvent {
+        return SoundEvents.SHULKER_CLOSE
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents._SHULKER_HURT_CLOSED
+        return SoundEvents.SHULKER_HURT_CLOSED
     }
 
     override fun getMaxSize(): Int {

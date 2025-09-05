@@ -18,7 +18,7 @@ class ParrotfishEntity(entityType: EntityType<out ParrotfishEntity>, world: Leve
         )
     ) {
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 3
     }
 

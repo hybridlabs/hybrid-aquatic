@@ -1,31 +1,32 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.MobSpawnType
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
-import net.minecraft.entity.mob.Monster
-import net.minecraft.entity.player.Player
+import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.random.Random
-import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.monster.Monster
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.util.GeckoLibUtil
+import kotlin.random.Random
 
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
-abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world: Level) : Monster(type, world), GeoEntity {
+abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world: Level) : Monster(type, world),
+    GeoEntity {
 
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     private var attackTick = 0
 
-    override fun initSynchedEntityData() {
-        super.initSynchedEntityData()
+    override fun defineSynchedData() {
+        super.defineSynchedData()
         entityData.define(ATTEMPT_ATTACK, false)
     }
 
@@ -37,13 +38,6 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         super.readAdditionalSaveData(nbt)
         this.attackTick = nbt.getInt("AttackTick")
-    }
-
-    override fun tick() {
-        super.tick()
-        if .isNoAi) {
-            return
-        }
     }
 
     override fun aiStep() {
@@ -63,7 +57,7 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
         return true
     }
 
-    override fun isPreventingPlayerRest(player:Player?): Boolean {
+    override fun isPreventingPlayerRest(player: Player?): Boolean {
         return true
     }
 
@@ -81,7 +75,7 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
             world: LevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: Random
+            random: Random,
         ): Boolean {
             val topY = world.seaLevel
             val bottomY = world.seaLevel - 24

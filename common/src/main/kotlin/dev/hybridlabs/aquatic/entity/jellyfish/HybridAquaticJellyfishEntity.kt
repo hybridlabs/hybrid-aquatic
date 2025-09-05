@@ -1,30 +1,28 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.StayInWaterGoal
-import net.minecraft.entity.*
-import net.minecraft.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.entity.ai.control.SmoothSwimmingLookControl
-import net.minecraft.entity.ai.goal.Goal
-import net.minecraft.entity.ai.pathing.BlockPathTypes
-import net.minecraft.entity.ai.pathing.WaterBoundPathNavigation
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
-import net.minecraft.entity.effect.MobEffectInstance
-import net.minecraft.entity.effect.MobEffects
-import net.minecraft.entity.mob.WaterAnimal
-import net.minecraft.entity.player.Player
+import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.server.network.ServerPlayer
-import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Mth
-import net.minecraft.util.math.Vec3d
-import net.minecraft.util.math.random.Random
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.util.Mth
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.effect.MobEffects
+import net.minecraft.world.entity.EntityDimensions
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.Pose
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
+import net.minecraft.world.entity.ai.goal.Goal
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
+import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -33,6 +31,7 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.EasingType
 import software.bernie.geckolib.util.GeckoLibUtil
+import kotlin.random.Random
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticJellyfishEntity(
@@ -74,30 +73,30 @@ open class HybridAquaticJellyfishEntity(
         goalSelector.addGoal(0, StayInWaterGoal(this))
     }
 
-    override fun initSynchedEntityData() {
-        super.initSynchedEntityData()
+    override fun defineSynchedData() {
+        super.defineSynchedData()
         entityData.define(MOISTNESS, getMaxMoistness())
         entityData.define(JELLYFISH_SIZE, 0)
     }
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 4
     }
 
-    override fun getStandingEyeHeight(pose: EntityPose?, dimensions: EntityDimensions): Float {
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.5f
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents._SQUID_AMBIENT
+        return SoundEvents.SQUID_AMBIENT
     }
 
-    override fun getHurtSound(source: DamageSource?): SoundEvent {
-        return SoundEvents._SLIME_HURT
+    override fun getHurtSound(source: DamageSource): SoundEvent {
+        return SoundEvents.SLIME_HURT
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents._SLIME_DEATH
+        return SoundEvents.SLIME_DEATH
     }
 
     override fun getSoundVolume(): Float {
@@ -106,7 +105,7 @@ open class HybridAquaticJellyfishEntity(
 
     override fun tick() {
         super.tick()
-        if .isNoAi) {
+        if isNoAi) {
             return
         }
 
@@ -134,7 +133,7 @@ open class HybridAquaticJellyfishEntity(
         this.prevTentacleAngle = this.tentacleAngle
         this.thrustTimer += this.thrustTimerSpeed
         if (thrustTimer.toDouble() > 6.283185307179586) {
-            if (world.isClientSide) {
+            if (level().isClientSide) {
                 this.thrustTimer = 6.2831855f
             } else {
                 this.thrustTimer -= 6.2831855f
@@ -142,7 +141,7 @@ open class HybridAquaticJellyfishEntity(
                     this.thrustTimerSpeed = 1.0f / (random.nextFloat() + 1.0f) * 0.2f
                 }
 
-                world.sendEntityStatus(this, 19.toByte())
+                level().sendEntityStatus(this, 19.toByte())
             }
         }
 
@@ -162,8 +161,8 @@ open class HybridAquaticJellyfishEntity(
                 this.turningSpeed *= 0.99f
             }
 
-            if (!world.isClientSide) {
-                this.setVelocity(
+            if (!level().isClientSide) {
+                this.setDeltaMovement(
                     (this.swimX * this.swimVelocityScale).toDouble(),
                     (this.swimY * this.swimVelocityScale).toDouble(),
                     (this.swimZ * this.swimVelocityScale).toDouble()
@@ -222,7 +221,7 @@ open class HybridAquaticJellyfishEntity(
         }
     }
 
-    override fun travel(movementInput: Vec3d) {
+    override fun travel(movementInput: Vec3) {
         this.move(MovementType.SELF, this.velocity)
     }
 
@@ -327,9 +326,9 @@ open class HybridAquaticJellyfishEntity(
 
     companion object {
         val MOISTNESS: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HybridAquaticJellyfishEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(HybridAquaticJellyfishEntity::class.java, EntityDataSerializers.INT)
         val JELLYFISH_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HybridAquaticJellyfishEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(HybridAquaticJellyfishEntity::class.java, EntityDataSerializers.INT)
 
         fun canSpawn(
             type: EntityType<out WaterAnimal>,

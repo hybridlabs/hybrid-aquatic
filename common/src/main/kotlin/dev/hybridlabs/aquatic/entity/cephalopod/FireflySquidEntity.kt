@@ -1,12 +1,10 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.world.World
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.Level
 
 class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: Level) :
     HybridAquaticCephalopodEntity(
@@ -17,15 +15,6 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
         true,
         true
     ) {
-
-    override fun registerGoals() {
-        super.registerGoals()
-        if (world.isDay) {
-            goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 8))
-        } else {
-            goalSelector.addGoal(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
-        }
-    }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
