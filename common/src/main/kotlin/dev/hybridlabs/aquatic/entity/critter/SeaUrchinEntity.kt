@@ -52,7 +52,9 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
                 .add(Attributes.FOLLOW_RANGE, 2.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
         }
-        val TYPE: EntityDataAccessor<Int> = SynchedEntityData.defineId(SeaUrchinEntity::class.java, EntityDataSerializers.INT)
+
+        val TYPE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(SeaUrchinEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             SMALL(0, "small"),
@@ -82,7 +84,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
     }
 
     override fun playerTouch(entity: Player) {
-        if (entity is ServerPlayer  && entity.hurt(damageSources().mobAttack(this), 0.5f)) {
+        if (entity is ServerPlayer && entity.hurt(damageSources().mobAttack(this), 0.5f)) {
             if (!this.isSilent) {
                 entity.connection.send(ClientboundGameEventPacket(ClientboundGameEventPacket.PUFFER_FISH_STING, 0.0f))
             }
@@ -91,7 +93,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
 
     private fun touch(mob: Mob) {
         if (mob.hurt(damageSources().mobAttack(this), 0.5f)) {
-           this.playSound(SoundEvents.PUFFER_FISH_STING, 1.0f, 1.0f)
+            this.playSound(SoundEvents.PUFFER_FISH_STING, 1.0f, 1.0f)
         }
     }
 
@@ -118,8 +120,8 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
         if (level().getBlockState(posUnderneath).`is`(HybridAquaticBlockTags.URCHIN_BREAKABLES)) {
             level().setBlockAndUpdate(posUnderneath, Blocks.AIR.defaultBlockState())
             if (spawnUrchinOnNextBreak) {
-                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.spawn(level())
-                newUrchin?.refreshPositionAndAngles(this.x, this.y, this.z, this.xRot, 0.0f)
+                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.get().create(level())
+                newUrchin?.moveTo(this.x, this.y, this.z, this.xRot, 0.0f)
                 level().addFreshEntity(newUrchin)
                 spawnUrchinOnNextBreak = false
             } else {

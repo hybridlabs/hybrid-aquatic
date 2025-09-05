@@ -13,7 +13,6 @@ import net.minecraft.world.BossEvent
 import net.minecraft.world.Difficulty
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.damagesource.DamageType
 import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.entity.EntitySelector
 import net.minecraft.world.entity.EntityType
@@ -32,7 +31,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.enchantment.EnchantmentHelper
 import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.pathfinder.BlockPathTypes.
+import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
@@ -58,7 +57,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     }
 
     init {
-        setPathfindingMalus(BlockPathTypes..WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         moveControl = MoveControl(this)
         navigation = this.landNavigation
         setMaxUpStep(1.5F)
@@ -82,7 +81,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         goalSelector.addGoal(1, KarkinosAttackGoal(this))
         goalSelector.addGoal(7, LeapAtTargetGoal(this, 0.3F))
         goalSelector.addGoal(4, WaterAvoidingRandomStrollGoal(this, 0.3))
-        goalSelector.addGoal(5, RandomRandomLookAroundGoal(this))
+        goalSelector.addGoal(5, RandomLookAroundGoal(this))
         goalSelector.addGoal(8, LookAtPlayerGoal(this, Player::class.java, 16.0f))
         targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true, null))
@@ -173,15 +172,14 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
-        val dmgSourcesRegistry = damageSources().damageTypes
         var adjustedAmount = amount
 
-        if (source.type() == dmgSourcesRegistry.getHolderOrThrow(DamageTypes.ARROW).value() as DamageType)
+        if (source.type() == DamageTypes.ARROW)
             adjustedAmount *= 0.5f
-        else if (source.type() == dmgSourcesRegistry.getHolderOrThrow(DamageTypes.IN_WALL).value() as DamageType)
+        else if (source.type() == DamageTypes.IN_WALL)
             adjustedAmount *= 0.5f
 
-        val damaged = super.hurt(source, amount)
+        val damaged = super.hurt(source, adjustedAmount)
 
         if (source.directEntity is Player && !isFlipped) {
             val player = source.directEntity as Player

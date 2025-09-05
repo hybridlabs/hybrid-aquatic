@@ -1,18 +1,15 @@
 package dev.hybridlabs.aquatic.client.model.entity.shark
 
-import com.mojang.authlib.minecraft.client.MinecraftClient
 import dev.hybridlabs.aquatic.Constants
-import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
-import net.minecraft.client.MinecraftClient
-import net.minecraft.client.renderer.entity.model.EntityModelPartNames
+import net.minecraft.client.Minecraft
+import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import net.minecraft.util.math.Mth
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
-abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity> (
+abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity>(
     private val id: String
 ) : GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {
@@ -37,11 +34,11 @@ abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity> (
         animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = MinecraftClient.getInstance().tickDelta
+        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
 
-        val body = animationProcessor.getBone(EntityModelPartNames.BODY)
+        val body = animationProcessor.getBone(PartNames.BODY)
 
-        val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.prevPitch, animatable.pitch), -45f, 45f)
+        val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
         body.rotX = xRot * -Mth.RAD_TO_DEG
     }
 }

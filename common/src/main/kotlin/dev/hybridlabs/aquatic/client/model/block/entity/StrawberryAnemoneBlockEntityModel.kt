@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.block.entity
 
-import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel

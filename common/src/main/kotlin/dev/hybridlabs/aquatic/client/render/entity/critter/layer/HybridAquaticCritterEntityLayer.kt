@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.client.render.entity.critter.layer
 
+import com.mojang.blaze3d.platform.GlUtil.getRenderer
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.critter.HybridAquaticCritterEntityModel
@@ -11,11 +12,11 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.renderer.layer.GeoRenderType
+import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
 class HybridAquaticCritterEntityLayer<T: HybridAquaticCritterEntity>(
     renderer: HybridAquaticCritterEntityRenderer<T>
-) : GeoRenderType<T>(renderer) {
+) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(layer: String): ResourceLocation {
         return (geoModel as HybridAquaticCritterEntityModel).getLayerTextureResource(layer)

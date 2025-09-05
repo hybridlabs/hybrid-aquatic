@@ -7,11 +7,12 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 
 class FishingNetTooltip :
-    dev.hybridlabs.aquatic.client.item.tooltip.PredicateItemTooltipCallback(HybridAquaticItems.FISHING_NET.get()) {
+
+    PredicateItemTooltipCallback(HybridAquaticItems.FISHING_NET.get()) {
     override fun appendTooltip(stack: ItemStack, context: TooltipFlag, lines: MutableList<Component>) {
         val nbtCopy = stack.tag?.copy()
         if (nbtCopy != null) {
-            val optionalEntity = FishingNetItem.Companion.getEntityFromNBT(nbtCopy)
+            val optionalEntity = FishingNetItem.getEntityFromNBT(nbtCopy)
             if (optionalEntity.isPresent) {
                 val entityName = optionalEntity.get().description
                 lines.add(Component.translatable("item.hybrid-aquatic.fishing_net.description", entityName))

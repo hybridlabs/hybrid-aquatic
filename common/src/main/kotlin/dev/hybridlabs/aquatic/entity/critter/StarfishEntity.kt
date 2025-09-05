@@ -52,7 +52,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
             STRIPES_SMALL(1, "stripes_small"),
             CIRCLE_SMALL(2, "circle_small"),
             STRIPES_CIRCLE_SMALL(3, "stripes_circle_small"),
-            STRIPES (4, "stripes"),
+            STRIPES(4, "stripes"),
             CIRCLE(5, "circle"),
             STRIPES_CIRCLE(6, "stripes_circle");
 
@@ -126,14 +126,14 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         }
     }
 
-    override fun damage(source: DamageSource, amount: Float): Boolean {
-        val attacker = source.attacker
+    override fun hurt(source: DamageSource, amount: Float): Boolean {
+        val attacker = source.directEntity
 
         if (this.variant == Type.CROWN_OF_THORNS && attacker is LivingEntity) {
-            attacker.addMobEffect(MobEffectInstance(MobEffects.POISON, 100, 1))
+            attacker.addEffect(MobEffectInstance(MobEffects.POISON, 100, 1))
         }
 
-        return super.damage(source, amount)
+        return super.hurt(source, amount)
     }
 
     override fun finalizeSpawn(
@@ -168,6 +168,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         set(value) {
             entityData.set(OverlayTexture, value.id)
         }
+
     override fun getOverlayTextureName(): String {
         return StarfishEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).toString()
     }
@@ -186,7 +187,8 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         this.variant = Type.byName(nbt.getString("Type"))
-        if(nbt.contains("texture_overlay")) this.overlayTexture = StarfishEntity.Companion.OverlayTextures.byId(nbt.getInt("texture_overlay"))
+        if (nbt.contains("texture_overlay")) this.overlayTexture =
+            StarfishEntity.Companion.OverlayTextures.byId(nbt.getInt("texture_overlay"))
         super.readAdditionalSaveData(nbt)
     }
 

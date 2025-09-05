@@ -165,14 +165,14 @@ object HybridAquaticBlocks {
                 .noOcclusion()
         )
     )
-        val SARGASSUM_PLANT = register(
-            "sargassum_plant",
-            SargassumPlantBlock(
-                Properties.copy (Blocks.KELP_PLANT)
-                    .noOcclusion()
-                    .dropsLike(SARGASSUM.get())
-            )
+    val SARGASSUM_PLANT = register(
+        "sargassum_plant",
+        SargassumPlantBlock(
+            Properties.copy(Blocks.KELP_PLANT)
+                .noOcclusion()
+                .dropsLike(SARGASSUM.get())
         )
+    )
 
     val BULL_KELP = register(
         "bull_kelp",
@@ -403,7 +403,7 @@ object HybridAquaticBlocks {
 
     val BUTTON_CORAL_FAN = register(
         "button_coral_fan",
-        CoralFanBlock(DEAD_BUTTON_CORAL_FAN, Properties.copy(Blocks.FIRE_CORAL_FAN))
+        CoralFanBlock(DEAD_BUTTON_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN))
     )
 
     val DEAD_BUTTON_CORAL =
@@ -422,7 +422,7 @@ object HybridAquaticBlocks {
     val BUTTON_CORAL_WALL_FAN = register(
         "button_coral_wall_fan",
         CoralWallFanBlock(
-            DEAD_BUTTON_CORAL_WALL_FAN,
+            DEAD_BUTTON_CORAL_WALL_FAN.get(),
             Properties.copy(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(LOPHELIA_CORAL.get())
         )
     )
@@ -452,7 +452,7 @@ object HybridAquaticBlocks {
 
     val THORN_CORAL_FAN = register(
         "thorn_coral_fan",
-        CoralFanBlock(DEAD_THORN_CORAL_FAN, Properties.copy(Blocks.FIRE_CORAL_FAN))
+        CoralFanBlock(DEAD_THORN_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN))
     )
 
     val DEAD_THORN_CORAL =
@@ -469,7 +469,7 @@ object HybridAquaticBlocks {
     val THORN_CORAL_WALL_FAN = register(
         "thorn_coral_wall_fan",
         CoralWallFanBlock(
-            DEAD_THORN_CORAL_WALL_FAN,
+            DEAD_THORN_CORAL_WALL_FAN.get(),
             Properties.copy(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(THORN_CORAL.get())
         )
     )

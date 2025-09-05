@@ -62,9 +62,9 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
                 TunaEntity::class.java,
                 mob.boundingBox.inflate(maxDistance.toDouble())
             ) { true }
-                .minByOrNull { it.squaredDistanceTo(mob) }
+                .minByOrNull { it.distanceToSqr(mob) }
 
-            if (closestTuna != null && closestTuna.squaredDistanceTo(mob) > (minDistance * minDistance)) {
+            if (closestTuna != null && closestTuna.distanceToSqr(mob) > (minDistance * minDistance)) {
                 target = closestTuna
                 return true
             }

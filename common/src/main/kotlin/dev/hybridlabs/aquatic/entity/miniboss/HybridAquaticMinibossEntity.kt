@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.monster.Monster
@@ -14,7 +15,6 @@ import net.minecraft.world.level.LevelAccessor
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.util.GeckoLibUtil
-import kotlin.random.Random
 
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
@@ -75,7 +75,7 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
             world: LevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: Random,
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel
             val bottomY = world.seaLevel - 24

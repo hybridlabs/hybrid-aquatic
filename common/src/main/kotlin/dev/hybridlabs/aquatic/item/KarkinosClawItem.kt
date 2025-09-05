@@ -2,12 +2,11 @@ package dev.hybridlabs.aquatic.item
 
 import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.Multimap
-import com.jamieswhiteshirt.reachentityattributes.ReachAttributes
+import dev.hybridlabs.aquatic.platform.Services
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.ai.attributes.Attribute
 import net.minecraft.world.entity.ai.attributes.AttributeModifier
 import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
 import java.util.*
 
 class KarkinosClawItem(settings: Properties) : Item(settings) {
@@ -17,7 +16,7 @@ class KarkinosClawItem(settings: Properties) : Item(settings) {
     init {
         val builder = ImmutableMultimap.builder<Attribute, AttributeModifier>()
         builder.put(
-            ReachAttributes.REACH,
+            Services.PLATFORM.reachAttribute,
             AttributeModifier(
                 UUID.fromString("592e9225-a554-42c9-9366-0fe5c53d9305"),
                 "Reach modifier",
@@ -28,11 +27,10 @@ class KarkinosClawItem(settings: Properties) : Item(settings) {
         attributes = builder.build()
     }
 
-    override fun getAttributeModifiers(
-        stack: ItemStack,
+    override fun getDefaultAttributeModifiers(
         slot: EquipmentSlot
     ): Multimap<Attribute, AttributeModifier> {
         return if (slot == EquipmentSlot.OFFHAND) attributes
-        else super.getAttributeModifiers(stack, slot)
+        else super.getDefaultAttributeModifiers(slot)
     }
 }

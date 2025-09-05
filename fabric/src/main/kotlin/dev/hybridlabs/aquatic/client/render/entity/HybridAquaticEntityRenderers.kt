@@ -1,25 +1,32 @@
 @file:Suppress("unused")
 
-package dev.hybridlabs.aquatic.client.renderer.entity
+package dev.hybridlabs.aquatic.client.render.entity
 
-import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.*
-import dev.hybridlabs.aquatic.client.renderer.entity.critter.NudibranchEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.critter.SeaCucumberEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.critter.SeaUrchinEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.critter.StarfishEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.crustacean.*
-import dev.hybridlabs.aquatic.client.renderer.entity.fish.*
-import dev.hybridlabs.aquatic.client.renderer.entity.jellyfish.*
-import dev.hybridlabs.aquatic.client.renderer.entity.miniboss.KarkinosEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.shark.*
+import dev.hybridlabs.aquatic.client.render.entity.cephalopods.ArrowSquidEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.cephalopods.CuttlefishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.cephalopods.FireflySquidEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.cephalopods.GlowingSuckerOctopusEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.critter.SeaCucumberEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.critter.SeaSlugEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.critter.SeaUrchinEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.critter.StarfishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
+import dev.hybridlabs.aquatic.client.render.entity.fish.*
+import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
+import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.shark.*
+import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.NautilusEntityRenderer
+import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.UmbrellaOctopusEntityRenderer
+import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.VampireSquidEntityRenderer
+import dev.hybridlabs.aquatic.client.renderer.entity.shark.WhaleSharkEntityRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 
 object HybridAquaticEntityRenderers {
     //region fish
     val AFRICAN_BUTTERFLY = EntityRendererRegistry.register(
-        HybridAquaticEntityTypes.AFRICAN_BUTTERFLY.get(),
-        ::AfricanButterflyEntityRenderer
+        HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
+        ::AfricanButterflyfishEntityRenderer
     )
     val DAMSELFISH =
         EntityRendererRegistry.register(HybridAquaticEntityTypes.DAMSELFISH.get(), ::DamselfishEntityRenderer)
@@ -63,7 +70,7 @@ object HybridAquaticEntityRenderers {
         EntityRendererRegistry.register(HybridAquaticEntityTypes.TRIGGERFISH.get(), ::TriggerfishEntityRenderer)
     val OSCAR = EntityRendererRegistry.register(HybridAquaticEntityTypes.OSCAR.get(), ::OscarEntityRenderer)
     val DANIO = EntityRendererRegistry.register(HybridAquaticEntityTypes.DANIO.get(), ::DanioEntityRenderer)
-    val TOADFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.TOADFISH.get(), ::ToadfishEntityRenderer)
+    val TOADFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.BLOWFISH.get(), ::BlowfishEntityRenderer)
     val TETRA = EntityRendererRegistry.register(HybridAquaticEntityTypes.TETRA.get(), ::TetraEntityRenderer)
     val STONEFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.STONEFISH.get(), ::StonefishEntityRenderer)
     val BETTA = EntityRendererRegistry.register(HybridAquaticEntityTypes.BETTA.get(), ::BettaEntityRenderer)
@@ -112,15 +119,11 @@ object HybridAquaticEntityRenderers {
     //region jellyfish
     val SEA_NETTLE =
         EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_NETTLE.get(), ::SeaNettleEntityRenderer)
-    val FRIED_EGG_JELLYFISH =
+    val CEPHEIDAE_JELLYFISH =
         EntityRendererRegistry.register(
-            HybridAquaticEntityTypes.FRIED_EGG_JELLYFISH.get(),
-            ::FriedEggJellyfishEntityRenderer
+            HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get(),
+            ::CepheidaeJellyfishEntityRenderer
         )
-    val CAULIFLOWER_JELLYFISH = EntityRendererRegistry.register(
-        HybridAquaticEntityTypes.CAULIFLOWER_JELLYFISH.get(),
-        ::CauliflowerJellyfishEntityRenderer
-    )
     val NOMURA_JELLYFISH =
         EntityRendererRegistry.register(
             HybridAquaticEntityTypes.NOMURA_JELLYFISH.get(),
@@ -130,11 +133,6 @@ object HybridAquaticEntityRenderers {
         EntityRendererRegistry.register(
             HybridAquaticEntityTypes.BARREL_JELLYFISH.get(),
             ::BarrelJellyfishEntityRenderer
-        )
-    val COMPASS_JELLYFISH =
-        EntityRendererRegistry.register(
-            HybridAquaticEntityTypes.COMPASS_JELLYFISH.get(),
-            ::CompassJellyfishEntityRenderer
         )
     val BLUE_JELLYFISH =
         EntityRendererRegistry.register(HybridAquaticEntityTypes.BLUE_JELLYFISH.get(), ::BlueJellyfishEntityRenderer)
@@ -204,7 +202,7 @@ object HybridAquaticEntityRenderers {
     //region critters
     val STARFISH = EntityRendererRegistry.register(HybridAquaticEntityTypes.STARFISH.get(), ::StarfishEntityRenderer)
     val NUDIBRANCH =
-        EntityRendererRegistry.register(HybridAquaticEntityTypes.NUDIBRANCH.get(), ::NudibranchEntityRenderer)
+        EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_SLUG.get(), ::SeaSlugEntityRenderer)
     val SEA_CUCUMBER =
         EntityRendererRegistry.register(HybridAquaticEntityTypes.SEA_CUCUMBER.get(), ::SeaCucumberEntityRenderer)
     val SEA_URCHIN =

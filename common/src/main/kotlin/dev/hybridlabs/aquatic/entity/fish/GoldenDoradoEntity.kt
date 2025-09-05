@@ -38,7 +38,9 @@ class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: 
         goalSelector.addGoal(1, MeleeAttackGoal(this, 1.5, false))
         targetSelector.addGoal(3, HurtByTargetGoal(this))
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.shouldAngerAt(it) })
+        targetSelector.addGoal(
+            1,
+            NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
     }
 
     companion object {

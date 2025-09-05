@@ -1,7 +1,10 @@
 package dev.hybridlabs.aquatic.platform.services;
 
+import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
+
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
@@ -9,11 +12,13 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
@@ -68,6 +73,11 @@ public class FabricPlatformHelper implements PlatformHelper {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Attribute getReachAttribute() {
+        return ReachEntityAttributes.REACH;
     }
 
     public BlockBehaviour.Properties getBlockSettings() {

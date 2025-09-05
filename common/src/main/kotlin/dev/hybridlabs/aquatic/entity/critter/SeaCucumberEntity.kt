@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import net.minecraft.core.RegistryAccess
+import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -36,17 +36,17 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Le
                 for (l in 0 until spawnCount) {
                     val offsetX = (level().random.nextFloat() - 0.5f) * 2.0f
                     val offsetZ = (level().random.nextFloat() - 0.5f) * 2.0f
-                    val pearlfishEntity = HybridAquaticEntityTypes.PEARLFISH.create(level())
+                    val pearlfishEntity = HybridAquaticEntityTypes.PEARLFISH.get().create(level())
 
                     pearlfishEntity?.let {
                         it.customName = text
                         it.isNoAi = isNoAi
                         it.isInvulnerable = this.isInvulnerable
-                        it.refreshPositionAndAngles(
+                        it.moveTo(
                             this.x + offsetX,
                             this.y + 0.5,
                             this.z + offsetZ,
-                            world.random.nextFloat() * 360.0f,
+                            level().random.nextFloat() * 360.0f,
                             0.0f
                         )
 
@@ -96,7 +96,7 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Le
                     return BY_ID.apply(id) as Type
                 }
 
-                fun fromBiome(biome: RegistryAccess.RegistryEntry<Biome?>): Type {
+                fun fromBiome(biome: Holder<Biome>): Type {
                     return if (biome.`is`(BiomeTags.IS_DEEP_OCEAN)) {
                         SEA_PIG
                     } else {

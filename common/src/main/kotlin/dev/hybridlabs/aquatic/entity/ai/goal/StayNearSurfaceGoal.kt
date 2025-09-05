@@ -23,8 +23,8 @@ class StayNearSurfaceGoal(
         var pos = BlockPos.containing(vec)
 
         // Move upward until reaching the surface
-        while (mob.level()..getFluidState(pos).`is`(FluidTags.WATER) &&
-            mob.level()..getBlockState(pos).isPathfindable(mob.level()., pos, PathComputationType.WATER)
+        while (mob.level().getFluidState(pos).`is`(FluidTags.WATER) &&
+            mob.level().getBlockState(pos).isPathfindable(mob.level(), pos, PathComputationType.WATER)
         ) {
             pos = pos.above()
         }
@@ -33,8 +33,8 @@ class StayNearSurfaceGoal(
         var depth = 0
 
         // Move downward slightly to ensure the fish doesn't break the surface
-        while (mob.level()..getFluidState(pos).`is`(FluidTags.WATER) &&
-            mob.level()..getBlockState(pos).isPathfindable(mob.level()., pos, PathComputationType.WATER) &&
+        while (mob.level().getFluidState(pos).`is`(FluidTags.WATER) &&
+            mob.level().getBlockState(pos).isPathfindable(mob.level(), pos, PathComputationType.WATER) &&
             depth < maxDepth
         ) {
             pos = pos.below()
@@ -52,8 +52,8 @@ class StayNearSurfaceGoal(
             val z = mob.z + (random.nextDouble() * 20 - 10)
             val pos = BlockPos.containing(x, y, z)
 
-            if (mob.level()..getFluidState(pos).`is`(FluidTags.WATER) &&
-                mob.level()..getBlockState(pos).isPathfindable(mob.level()., pos, PathComputationType.WATER)
+            if (mob.level().getFluidState(pos).`is`(FluidTags.WATER) &&
+                mob.level().getBlockState(pos).isPathfindable(mob.level(), pos, PathComputationType.WATER)
             ) {
                 return Vec3(x, y, z)
             }

@@ -11,12 +11,15 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 
 class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(entityType, world,
+    HybridAquaticSchoolingFishEntity(
+        entityType, world,
         listOf(HybridAquaticEntityTags.NONE),
         listOf(
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK)) {
+            HybridAquaticEntityTags.SHARK
+        )
+    ) {
 
     var isLightOn: Boolean = true
 
@@ -27,7 +30,8 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
 
     private fun checkNearbyEntities() {
         val detectionRadius = 4.0
-        val nearbyEntities = level().getEntitiesOfClass(LivingEntity::class.java, boundingBox.inflate(detectionRadius)) { it.`is`(Player) }
+        val nearbyEntities =
+            level().getEntitiesOfClass(LivingEntity::class.java, boundingBox.inflate(detectionRadius)) { it is Player }
 
         isLightOn = nearbyEntities.isEmpty()
     }

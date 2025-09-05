@@ -16,7 +16,6 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
-import net.minecraft.world.entity.animal.Wolf
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -70,7 +69,7 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, true))
         targetSelector.addGoal(
             1,
-            NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.shouldAngerAt(it) })
+            NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
         targetSelector.addGoal(
             2,
             NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) {

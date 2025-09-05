@@ -7,8 +7,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class StarfishEntityRenderer(context: Context) :
     HybridAquaticCritterEntityRenderer<StarfishEntity>(context, StarfishEntityModel(), true) {
-
     init {
-        addRenderType(HybridAquaticCritterEntityLayer(this))
+        addRenderLayer(HybridAquaticCritterEntityLayer(this))
     }
 }

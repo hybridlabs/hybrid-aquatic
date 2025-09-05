@@ -5,6 +5,7 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -37,12 +38,12 @@ class StonefishEntity(entityType: EntityType<out StonefishEntity>, world: Level)
         }
     }
 
-    override fun damage(source: DamageSource, amount: Float): Boolean {
-        if (super.damage(source, amount)) {
+    override fun hurt(source: DamageSource, amount: Float): Boolean {
+        if (super.hurt(source, amount)) {
 
-            val attacker = source.attacker
-            if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
-                attacker.addMobEffect(MobEffectInstance(MobEffects.POISON, 200, 2))
+            val attacker = source.directEntity
+            if (attacker is LivingEntity && attacker.mainHandItem.isEmpty) {
+                attacker.addEffect(MobEffectInstance(MobEffects.POISON, 200, 2))
             }
 
             return true

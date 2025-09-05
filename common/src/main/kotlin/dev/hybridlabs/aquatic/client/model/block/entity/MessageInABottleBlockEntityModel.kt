@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.block.entity
 
-import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock.Variant
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import net.minecraft.client.renderer.RenderType

@@ -87,7 +87,8 @@ open class HybridAquaticSharkEntity(
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, LookAtPlayerGoal(this, Player::class.java, 6.0f))
         goalSelector.addGoal(1, SharkAttackGoal(this))
-        targetSelector.addGoal(1,
+        targetSelector.addGoal(
+            1,
             NearestAttackableTargetGoal(
                 this,
                 Player::class.java,
@@ -95,11 +96,13 @@ open class HybridAquaticSharkEntity(
                 true,
                 true
             ) { entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive })
-        targetSelector.addGoal(1,
+        targetSelector.addGoal(
+            1,
             NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) {
                 it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive
             })
-        targetSelector.addGoal(1,
+        targetSelector.addGoal(
+            1,
             NearestAttackableTargetGoal(
                 this,
                 LivingEntity::class.java,
@@ -116,7 +119,7 @@ open class HybridAquaticSharkEntity(
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        this.airSupply= getMaxMoistness()
+        this.airSupply = getMaxMoistness()
         xRot = 0.0f
         yRot = 0.0f
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
@@ -251,7 +254,8 @@ open class HybridAquaticSharkEntity(
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
-            AnimationController(this, "Swim", 4,
+            AnimationController(
+                this, "Swim", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
                     if (this.isUnderWater) {
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SWIM)
@@ -263,7 +267,8 @@ open class HybridAquaticSharkEntity(
         )
 
         controllerRegistrar.add(
-            AnimationController(this, "Charge", 4,
+            AnimationController(
+                this, "Charge", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
                     if (this.isUnderWater && this.isSprinting) {
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.RUN)
@@ -275,7 +280,8 @@ open class HybridAquaticSharkEntity(
         )
 
         controllerRegistrar.add(
-            AnimationController(this, "Beached", 4,
+            AnimationController(
+                this, "Beached", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
                     if (this.onGround() && !this.isUnderWater) {
                         return@AnimationStateHandler state.setAndContinue(BEACHED)
@@ -317,7 +323,7 @@ open class HybridAquaticSharkEntity(
         this.angerTime = angerTime
     }
 
-    override fun getPersistentAngerTarget():UUID? {
+    override fun getPersistentAngerTarget(): UUID? {
         return this.angryAt
     }
 
@@ -329,7 +335,7 @@ open class HybridAquaticSharkEntity(
         remainingPersistentAngerTime = ANGER_TIME_RANGE.sample(random)
     }
 
-    private fun shouldProximityAttack(player:Player): Boolean {
+    private fun shouldProximityAttack(player: Player): Boolean {
         if (customName?.string == "friend") return false
 
         return closePlayerAttack && player.distanceToSqr(this) <= 5 && !player.isCreative
@@ -454,7 +460,7 @@ open class HybridAquaticSharkEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: Random
+            random: RandomSource
         ): Boolean {
             val topY = world.seaLevel - 2
             val bottomY = world.seaLevel - 6
@@ -469,7 +475,7 @@ open class HybridAquaticSharkEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: Random
+            random: RandomSource
         ): Boolean {
             val topY = world.seaLevel - 8
             val bottomY = world.seaLevel - 24

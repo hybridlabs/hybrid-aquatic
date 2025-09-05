@@ -11,11 +11,11 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.renderer.layer.GeoRenderType
+import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
 class HybridAquaticSharkEntityLayer<T: HybridAquaticSharkEntity>(
     renderer: HybridAquaticSharkEntityRenderer<T>
-) : GeoRenderType<T>(renderer) {
+) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(layer: String): ResourceLocation {
         return (geoModel as HybridAquaticSharkEntityModel).getLayerTextureResource(layer)

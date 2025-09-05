@@ -13,9 +13,11 @@ import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.Mob
+import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.Goal
+import net.minecraft.world.entity.ai.targeting.TargetingConditions
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.function.Predicate
@@ -163,10 +165,10 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
         private val PUFF_STATE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(BlowfishEntity::class.java, EntityDataSerializers.INT)
         private val BLOW_UP_FILTER: Predicate<LivingEntity> =
-            Predicate { entity -> if (entity isPlayer && entity.isCreative) false else entity.group != EntityGroup.AQUATIC }
-        private val BLOW_UP_TARGET_PREDICATE: TargetPredicate =
-            TargetPredicate.createNonAttackable().ignoreDistanceScalingFactor().ignoreVisibility()
-                .setPredicate(BLOW_UP_FILTER)
+            Predicate { entity -> if (entity is Player && entity.isCreative) false else entity.mobType != MobType.WATER }
+        private val BLOW_UP_TARGET_PREDICATE: TargetingConditions =
+            TargetingConditions.forNonCombat().ignoreInvisibilityTesting().ignoreLineOfSight()
+                .selector(BLOW_UP_FILTER)
 
         const val NOT_PUFFED = 0
         const val SEMI_PUFFED = 1

@@ -1,8 +1,9 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
-import com.mojang.authlib.minecraft.client.MinecraftClient
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
+import net.minecraft.client.Minecraft
+import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
@@ -32,11 +33,11 @@ abstract class HybridAquaticDolphinEntityModel<T : HybridAquaticDolphinEntity>(p
         animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = MinecraftClient.getInstance().tickDelta
+        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
 
-        val body = animationProcessor.getBone(EntityModelPartNames.BODY)
+        val body = animationProcessor.getBone(PartNames.BODY)
 
-        val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.prevPitch, animatable.pitch), -45f, 45f)
+        val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
         body.rotX = xRot * -Mth.RAD_TO_DEG
     }
 }

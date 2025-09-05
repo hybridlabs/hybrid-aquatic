@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.TagKey
 import net.minecraft.util.Mth
+import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
@@ -34,7 +35,6 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.util.GeckoLibUtil
-import kotlin.random.Random
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER", "unused")
 open class HybridAquaticDolphinEntity(
@@ -53,7 +53,7 @@ open class HybridAquaticDolphinEntity(
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        this.airSupply= this.maxAirSupply
+        this.airSupply = this.maxAirSupply
         this.yRot = 0.0f
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
@@ -70,7 +70,8 @@ open class HybridAquaticDolphinEntity(
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
-            AnimationController(this, "Swim/Idle", 4
+            AnimationController(
+                this, "Swim/Idle", 4
             ) { state: AnimationState<HybridAquaticDolphinEntity> ->
                 when {
                     state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
@@ -140,12 +141,12 @@ open class HybridAquaticDolphinEntity(
     }
 
     override fun doHurtTarget(target: Entity): Boolean {
-        val bl = target.damage(
-            this.damageSources.mobAttack(this),
+        val bl = target.hurt(
+            this.damageSources().mobAttack(this),
             this.getAttributeValue(Attributes.ATTACK_DAMAGE).toInt().toFloat()
         )
         if (bl) {
-            this.applyDamageEffects(this, target)
+            this.doEnchantDamageEffects(this, target)
             this.playSound(SoundEvents.DOLPHIN_ATTACK, 1.0f, 1.0f)
         }
 
@@ -176,23 +177,23 @@ open class HybridAquaticDolphinEntity(
         return true
     }
 
-    override fun canEquip(stack: ItemStack): Boolean {
-        val equipmentSlot = getPreferredEquipmentSlot(stack)
-        return if (!getEquippedStack(equipmentSlot).isEmpty) {
+    override fun canHoldItem(stack: ItemStack): Boolean {
+        val equipmentSlot = getEquipmentSlotForItem(stack)
+        return if (!getItemBySlot(equipmentSlot).isEmpty) {
             false
         } else {
-            equipmentSlot == EquipmentSlot.MAINHAND && super.canEquip(stack)
+            equipmentSlot == EquipmentSlot.MAINHAND && super.canHoldItem(stack)
         }
     }
 
-    override fun loot(item: ItemEntity) {
-        if (getEquippedStack(EquipmentSlot.MAINHAND).isEmpty) {
-            val itemStack = item.stack
-            if (this.pickUpItem(itemStack)) {
-                this.triggerItemPickedUpByEntityCriteria(item)
-                this.equipStack(EquipmentSlot.MAINHAND, itemStack)
-                this.updateDropChances(EquipmentSlot.MAINHAND)
-                this.sendPickup(item, itemStack.count)
+    override fun pickUpItem(item: ItemEntity) {
+        if (getItemBySlot(EquipmentSlot.MAINHAND).isEmpty) {
+            val itemStack = item.item
+            if (this.canHoldItem(itemStack)) {
+                this.onItemPickup(item)
+                this.setItemSlot(EquipmentSlot.MAINHAND, itemStack)
+                this.setGuaranteedDrop(EquipmentSlot.MAINHAND)
+                this.take(item, itemStack.count)
                 item.discard()
             }
         }
@@ -201,30 +202,30 @@ open class HybridAquaticDolphinEntity(
     override fun tick() {
         super.tick()
         if (this.isNoAi) {
-            this.airSupply= this.maxAirSupply
+            this.airSupply = this.maxAirSupply
         } else {
             if (this.isInWaterRainOrBubble) {
                 this.moistness = 2400
             } else {
                 this.moistness -= 1
                 if (this.moistness <= 0) {
-                    this.damage(this.damageSources.dryOut(), 1.0f)
+                    this.hurt(this.damageSources().dryOut(), 1.0f)
                 }
 
-                if (this.onGround) {
+                if (this.onGround()) {
                     this.deltaMovement = deltaMovement.add(
                         ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble(),
                         0.5,
                         ((random.nextFloat() * 2.0f - 1.0f) * 0.2f).toDouble()
                     )
                     this.xRot = random.nextFloat() * 360.0f
-                    this.isOnGround = false
-                    this.velocityDirty = true
+                    this.setOnGround(false)
+                    this.hasImpulse = true
                 }
             }
 
-            if (level().isClientSide && this.wasTouchingWater && (deltaMovement.lengthSquared() > 0.03)) {
-                val vec3d = this.getRotationVec(0.0f)
+            if (level().isClientSide && this.wasTouchingWater && (deltaMovement.lengthSqr() > 0.03)) {
+                val vec3d = this.getViewVector(0.0f)
                 val f = Mth.cos(this.xRot * 0.017453292f) * 0.3f
                 val g = Mth.sin(this.xRot * 0.017453292f) * 0.3f
                 val h = 1.2f - random.nextFloat() * 0.7f
@@ -268,10 +269,10 @@ open class HybridAquaticDolphinEntity(
     }
 
     override fun travel(movementInput: Vec3) {
-        if (this.hasSelfControl()() && this.wasTouchingWater) {
-            this.updateVelocity(this.speed, movementInput)
-            this.move(MovementType.SELF, this.deltaMovement)
-            this.deltaMovement = deltaMovement.multiply(0.9)
+        if (this.isEffectiveAi && this.wasTouchingWater) {
+            this.moveRelative(this.speed, movementInput)
+            this.move(MoverType.SELF, this.deltaMovement)
+            this.deltaMovement = deltaMovement.scale(0.9)
             if (this.target == null) {
                 this.deltaMovement = deltaMovement.add(0.0, -0.005, 0.0)
             }
@@ -301,7 +302,7 @@ open class HybridAquaticDolphinEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: Random
+            random: RandomSource
         ): Boolean {
             val topY = world.seaLevel - 8
             val bottomY = world.seaLevel - 64

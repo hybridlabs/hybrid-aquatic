@@ -11,13 +11,17 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: Level) :
-    HybridAquaticFishEntity(entityType, world,
+    HybridAquaticFishEntity(
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.CRUSTACEAN),
+            HybridAquaticEntityTags.CRUSTACEAN
+        ),
         listOf(
             HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK)) {
+            HybridAquaticEntityTags.SHARK
+        )
+    ) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
@@ -34,13 +38,13 @@ class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: Level) :
         }
     }
 
-    override fun damage(source: DamageSource, amount: Float): Boolean {
-        if (super.damage(source, amount)) {
+    override fun hurt(source: DamageSource, amount: Float): Boolean {
+        if (super.hurt(source, amount)) {
 
-            val attacker = source.attacker
-            if (attacker is LivingEntity && attacker.mainHandStack.isEmpty) {
-                attacker.addMobEffect(MobEffectInstance(MobEffects.POISON, 200, 0))
-                attacker.addMobEffect(MobEffectInstance(MobEffects.CONFUSION, 200, 0))
+            val attacker = source.directEntity
+            if (attacker is LivingEntity && attacker.mainHandItem.isEmpty) {
+                attacker.addEffect(MobEffectInstance(MobEffects.POISON, 200, 0))
+                attacker.addEffect(MobEffectInstance(MobEffects.CONFUSION, 200, 0))
             }
 
             return true

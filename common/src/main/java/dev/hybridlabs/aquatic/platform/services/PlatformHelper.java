@@ -1,10 +1,12 @@
 package dev.hybridlabs.aquatic.platform.services;
 
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
+
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -70,4 +72,6 @@ public interface PlatformHelper {
             @NotNull String id,
             EntityType<T> entityType,
             Callable<AttributeSupplier.Builder> attributeContainer);
+
+    Attribute getReachAttribute();
 }

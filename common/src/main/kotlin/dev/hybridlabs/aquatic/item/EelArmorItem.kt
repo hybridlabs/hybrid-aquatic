@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.client.GeoRenderProviderStorage
+import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
 import software.bernie.geckolib.animatable.GeoItem
@@ -13,7 +13,7 @@ import java.util.function.Supplier
 class EelArmorItem(material: ArmorMaterial, type: Type, settings: Properties) : ArmorItem(material, type, settings),
     GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
-    private val renderProvider: Supplier<Any> = GeoItem.makeRenderer(this)
+    private val renderProvider: Supplier<Any> = GeoItem.(this)
 
     override fun createRenderer(consumer: Consumer<Any>) {
         consumer.accept(GeoRenderProviderStorage.eelArmorRenderProvider.invoke())

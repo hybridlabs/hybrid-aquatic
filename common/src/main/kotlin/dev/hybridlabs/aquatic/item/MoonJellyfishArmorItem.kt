@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.client.GeoRenderProviderStorage
+import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ArmorItem
@@ -18,7 +18,7 @@ import java.util.function.Supplier
 class MoonJellyfishArmorItem(material: ArmorMaterial, type: Type, settings: Properties) :
     ArmorItem(material, type, settings), GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
-    private val renderProvider: Supplier<Any> = GeoItem.makeRender(this)
+    private val renderProvider: Supplier<Any> = GeoItem.mak(this)
 
     override fun createRenderer(consumer: Consumer<Any>) {
         consumer.accept(GeoRenderProviderStorage.moonjellyfishArmorRenderProvider.invoke())
