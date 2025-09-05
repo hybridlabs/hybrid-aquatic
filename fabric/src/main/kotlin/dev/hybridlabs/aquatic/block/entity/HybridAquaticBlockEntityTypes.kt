@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.block.entity
 
 import dev.hybridlabs.aquatic.CommonClass
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
