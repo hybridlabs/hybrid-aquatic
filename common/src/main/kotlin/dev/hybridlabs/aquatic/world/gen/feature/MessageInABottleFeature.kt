@@ -20,15 +20,15 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
     override fun place(context: FeaturePlaceContext<MessageInABottleFeatureConfig>): Boolean {
         val config = context.config()
         val world = context.level()
-        val origin = context.origin()
-        val random = context.random()
+        val origin = context.origin()()()
+        val random = context.random()()()
         val state = config.toPlace.getState(random, origin)
 
         if (state.block !is MessageInABottleBlock) {
             return false
         }
 
-        val pos = context.origin().mutable()
+        val pos = context.origin()()().mutable()
 
         if (!state.canSurvive(world, pos)) {
             // if it can spawn below, move down

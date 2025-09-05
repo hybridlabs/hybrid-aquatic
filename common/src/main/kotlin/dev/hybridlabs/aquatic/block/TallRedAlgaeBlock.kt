@@ -1,48 +1,49 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.LiquidBlockContainer
-import net.minecraft.block.CollisionContext
-import net.minecraft.block.TallPlantBlock
-import net.minecraft.block.enums.DoubleBlockHalf
-import net.minecraft.fluid.Fluid
-import net.minecraft.fluid.FluidState
-import net.minecraft.fluid.Fluids
-import net.minecraft.item.BlockPlaceContext
-import net.minecraft.item.ItemStack
-import net.minecraft.registry.tag.FluidTags
-import net.minecraft.state.property.EnumProperty
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockGetter
-import net.minecraft.world.WorldAccess
-import net.minecraft.world.LevelReader
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.tags.FluidTags
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.DoublePlantBlock
+import net.minecraft.world.level.block.LiquidBlockContainer
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
+import net.minecraft.world.level.block.state.properties.EnumProperty
+import net.minecraft.world.level.material.Fluid
+import net.minecraft.world.level.material.FluidState
+import net.minecraft.world.level.material.Fluids
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.VoxelShape
+
 
 @Suppress("OVERRIDE_DEPRECATION")
-class TallRedAlgaeBlock(settings: Properties?) : TallPlantBlock(settings), LiquidBlockContainer {
+class TallRedAlgaeBlock(settings: Properties?) : DoublePlantBlock(settings), LiquidBlockContainer {
     override fun getShape(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext?
+        context: CollisionContext
     ): VoxelShape {
         return SHAPE
     }
 
-    override fun mayPlantOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.isOf(Blocks.MAGMA_BLOCK)
+    override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
+        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK)
     }
 
     override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
-        return ItemStack(HybridAquaticBlocks.RED_ALGAE)
+        return ItemStack(HybridAquaticBlocks.RED_ALGAE.get())
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
         val blockState = super.getStateForPlacement(ctx)
         if (blockState != null) {
-            val fluidState = ctx.level.getFluidState(ctx.blockPos.up())
+            val fluidState = ctx.level.getFluidState(ctx.clickedPos.above())
             if (fluidState.`is`(FluidTags.WATER) && fluidState.amount == 8) {
                 return blockState
             }
@@ -52,9 +53,9 @@ class TallRedAlgaeBlock(settings: Properties?) : TallPlantBlock(settings), Liqui
     }
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
-        if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-            val blockState = world.getBlockState(pos.down())
-            return blockState.isOf(this) && blockState.get(HALF) == DoubleBlockHalf.LOWER
+        if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
+            val blockState = world.getBlockState(pos.below())
+            return blockState.`is`(this) && blockState.getValue(HALF) == DoubleBlockHalf.LOWER
         } else {
             val fluidState = world.getFluidState(pos)
             return super.canSurvive(state, world, pos) && fluidState.`is`(FluidTags.WATER) && fluidState.amount == 8
@@ -79,7 +80,7 @@ class TallRedAlgaeBlock(settings: Properties?) : TallPlantBlock(settings), Liqui
     }
 
     companion object {
-        val HALF: EnumProperty<DoubleBlockHalf> = TallPlantBlock.HALF
+        val HALF: EnumProperty<DoubleBlockHalf> = DoublePlantBlock.HALF
         private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 16.0, 14.0)
     }
 }

@@ -30,7 +30,7 @@ class MessageInABottleItemEntry(
 
     public override fun createItemStack(consumer: Consumer<ItemStack?>, context: LootContext) {
         val world = context.level
-        val random = context.random
+        val random = context.random()()
         val registryManager = world.registryAccess()
         val registry = registryManager.registryOrThrow<SeaMessage>(HybridAquaticRegistryKeys.SEA_MESSAGE)
         registry.getRandom(random).ifPresent { messageEntry ->

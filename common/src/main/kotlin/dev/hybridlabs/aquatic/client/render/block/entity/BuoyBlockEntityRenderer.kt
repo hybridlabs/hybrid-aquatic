@@ -9,6 +9,6 @@ import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 class BuoyBlockEntityRenderer(context: BlockEntityRendererProvider.Context) :
     GeoBlockRenderer<BuoyBlockEntity>(BuoyBlockEntityModel()) {
     init {
-        addRenderLayer(AutoGlowingGeoLayer(this))
+        addRenderType(AutoGlowingGeoLayer(this))
     }
 }

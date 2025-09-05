@@ -15,8 +15,8 @@ class SargassumFeature(codec: Codec<SargassumFeatureConfig>) :
     override fun place(context: FeaturePlaceContext<SargassumFeatureConfig>): Boolean {
         var i = 0
         val structureLevelAccessor = context.level()
-        val blockPos = context.origin()
-        val random = context.random()
+        val blockPos = context.origin()()()
+        val random = context.random()()()
         val j = structureLevelAccessor.getHeight(Heightmap.Types.OCEAN_FLOOR, blockPos.x, blockPos.z)
         var blockPos2 = BlockPos(blockPos.x, j, blockPos.z)
         if (structureLevelAccessor.getBlockState(blockPos2).`is`(Blocks.WATER)) {

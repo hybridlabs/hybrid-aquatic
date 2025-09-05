@@ -9,6 +9,6 @@ class StarfishEntityRenderer(context: Context) :
     HybridAquaticCritterEntityRenderer<StarfishEntity>(context, StarfishEntityModel(), true) {
 
     init {
-        addRenderLayer(HybridAquaticCritterEntityLayer(this))
+        addRenderType(HybridAquaticCritterEntityLayer(this))
     }
 }

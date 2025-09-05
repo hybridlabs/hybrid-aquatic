@@ -16,7 +16,7 @@ import java.util.stream.Stream
 @Suppress("NAME_SHADOWING")
 open class HybridAquaticSchoolingFishEntity(
     type: EntityType<out HybridAquaticFishEntity>,
-    world: World,
+    world: Level,
     override val prey: List<TagKey<EntityType<*>>>,
     override val predator: List<TagKey<EntityType<*>>>,
     private var leader: HybridAquaticSchoolingFishEntity? = null,

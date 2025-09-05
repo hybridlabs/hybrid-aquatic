@@ -15,7 +15,7 @@ class StayInWaterGoal(private val mob: MobEntity) : Goal() {
         val blockPos = mob.blockPos
         val blockAbove = mob.entityWorld.getBlockState(blockPos.up(1))
 
-        if (!blockAbove.isOf(Blocks.WATER)) {
+        if (!blockAbove.`is`(Blocks.WATER)) {
             setDownwardVelocity()
         }
     }

@@ -32,7 +32,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticCritterEntity(
     type: EntityType<out HybridAquaticCritterEntity>,
-    world: World,
+    world: Level,
 ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false

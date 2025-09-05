@@ -37,7 +37,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticJellyfishEntity(
     type: EntityType<out HybridAquaticJellyfishEntity>,
-    world: World,
+    world: Level,
     private val isVenomous: Boolean,
     private val venomLevel: Int
 
@@ -134,7 +134,7 @@ open class HybridAquaticJellyfishEntity(
         this.prevTentacleAngle = this.tentacleAngle
         this.thrustTimer += this.thrustTimerSpeed
         if (thrustTimer.toDouble() > 6.283185307179586) {
-            if (world.isClient) {
+            if (world.isClientSide) {
                 this.thrustTimer = 6.2831855f
             } else {
                 this.thrustTimer -= 6.2831855f
@@ -162,7 +162,7 @@ open class HybridAquaticJellyfishEntity(
                 this.turningSpeed *= 0.99f
             }
 
-            if (!world.isClient) {
+            if (!world.isClientSide) {
                 this.setVelocity(
                     (this.swimX * this.swimVelocityScale).toDouble(),
                     (this.swimY * this.swimVelocityScale).toDouble(),
@@ -181,7 +181,7 @@ open class HybridAquaticJellyfishEntity(
             this.tiltAngle += (-(Mth.atan2(d, vec3d.y).toFloat()) * 57.295776f - this.tiltAngle) * 0.1f
         } else {
             this.tentacleAngle = Mth.abs(Mth.sin(this.thrustTimer)) * 3.1415927f * 0.25f
-            if (!world.isClient) {
+            if (!world.isClientSide) {
                 var e = velocity.y
                 if (this.hasMobEffect(MobEffects.LEVITATION)) {
                     e = 0.05 * (getMobEffect(MobEffects.LEVITATION)!!.amplifier + 1).toDouble()

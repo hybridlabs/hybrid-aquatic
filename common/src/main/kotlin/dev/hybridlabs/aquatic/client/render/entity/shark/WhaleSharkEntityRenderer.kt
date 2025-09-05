@@ -10,6 +10,6 @@ class WhaleSharkEntityRenderer(context: Context) :
     HybridAquaticSharkEntityRenderer<WhaleSharkEntity>(context, WhaleSharkEntityModel(), true) {
 
     init {
-        addRenderLayer(HybridAquaticSharkEntityLayer(this))
+        addRenderType(HybridAquaticSharkEntityLayer(this))
     }
 }

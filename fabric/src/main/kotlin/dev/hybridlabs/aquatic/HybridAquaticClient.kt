@@ -16,7 +16,7 @@ import dev.hybridlabs.aquatic.client.renderer.entity.HybridAquaticEntityRenderer
 import dev.hybridlabs.aquatic.client.renderer.item.*
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.api.ClientModInitializer
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderTypeMap
+import net.fabricmc.fabric.api.blockrenderlayer.v1.RenderShapeMap
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
@@ -38,7 +38,7 @@ object HybridAquaticClient : ClientModInitializer {
         HybridAquaticEntityModelLayers
         HybridAquaticClientNetworking
 
-        registerBlockRenderTypes()
+        registerRenderShapes()
         registerBlockEntityRenderers()
         registerBuiltinItemRenderers()
         registerEntityRenderers()
@@ -84,7 +84,7 @@ object HybridAquaticClient : ClientModInitializer {
         ItemTooltipCallback.EVENT.register(FishingNetTooltip())
     }
 
-    private fun registerBlockRenderTypes(registry: BlockRenderTypeMap = BlockRenderTypeMap.INSTANCE) {
+    private fun registerRenderShapes(registry: RenderShapeMap = RenderShapeMap.INSTANCE) {
         registry.putBlocks(
             RenderType.getTranslucent(),
             HybridAquaticBlocks.ANEMONE,

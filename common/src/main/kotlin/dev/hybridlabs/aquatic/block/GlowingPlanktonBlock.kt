@@ -2,84 +2,85 @@
 
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.Block
-import net.minecraft.block.BlockRenderType
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.CollisionContext
-import net.minecraft.block.SimpleWaterloggedBlcok
-import net.minecraft.entity.Entity
-import net.minecraft.entity.ai.pathing.PathComputationType
-import net.minecraft.fluid.FluidState
-import net.minecraft.fluid.Fluids
-import net.minecraft.item.BlockPlaceContext
-import net.minecraft.particle.ParticleTypes
-import net.minecraft.server.world.ServerLevel
-import net.minecraft.state.StateManager
-import net.minecraft.state.property.BooleanProperty
-import net.minecraft.state.property.Properties.WATERLOGGED
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockGetter
-import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
-import net.minecraft.world.LevelReader
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.core.particles.ParticleTypes
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.util.RandomSource
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.RenderShape
+import net.minecraft.world.level.block.SimpleWaterloggedBlock
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
+import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.level.block.state.properties.IntegerProperty
+import net.minecraft.world.level.material.FluidState
+import net.minecraft.world.level.material.Fluids
+import net.minecraft.world.level.pathfinder.PathComputationType
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION")
 class GlowingPlanktonBlock(settings: Properties) : Block(
-    settings.luminance { state -> state.get(LIGHT_LEVEL) }
-), SimpleWaterloggedBlcok {
+    settings.lightLevel { state -> state.getValue(LIGHT_LEVEL) }
+), SimpleWaterloggedBlock {
     init {
-        defaultBlockState() = defaultBlockState()
-            .with(WATERLOGGED, true)
-            .with(LIT, false)
-            .with(LIGHT_LEVEL, 0) as BlockState
+        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true)
+            .setValue(LIT, false)
+            .setValue(LIGHT_LEVEL, 0) as BlockState)
     }
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (fluidStateAbove.fluid != Fluids.EMPTY) {
+        if (fluidStateAbove != Fluids.EMPTY) {
             return false
         }
-        val stateBelow = world.getBlockState(pos.down())
+        val stateBelow = world.getBlockState(pos.below())
         if (stateBelow.block == this) {
             return false
         }
         val fluidState = world.getFluidState(pos)
-        return fluidState.fluid == Fluids.WATER
+        return fluidState == Fluids.WATER
     }
 
     override fun getShape(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext?
+        context: CollisionContext
     ): VoxelShape {
         return SHAPE
     }
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        val world = context.world
-        val pos = context.blockPos
+        val world = context.level
+        val pos = context.clickedPos
         val fluidState = world.getFluidState(pos)
-        return if (fluidState.fluid == Fluids.WATER) {
-            super.getStateForPlacement(context)?.with(WATERLOGGED, true)
+        return if (fluidState == Fluids.WATER) {
+            super.getStateForPlacement(context)?.setValue(WATERLOGGED, true)
         } else {
             null
         }
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
+        return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
-    override fun isTransparent(state: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
+    override fun propagatesSkylightDown(state: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
         return true
     }
 
-    override fun getRenderType(state: BlockState): BlockRenderType {
-        return BlockRenderType.INVISIBLE
+    override fun getRenderShape(state: BlockState): RenderShape {
+        return RenderShape.INVISIBLE
     }
 
     override fun updateShape(
@@ -90,7 +91,7 @@ class GlowingPlanktonBlock(settings: Properties) : Block(
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        if (state.get(WATERLOGGED)) {
+        if (state.getValue(WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
         }
         if (!canSurvive(state, world, pos)) {
@@ -99,11 +100,10 @@ class GlowingPlanktonBlock(settings: Properties) : Block(
         return super.updateShape(state, direction, neighborState, world, pos, neighborPos)
     }
 
-    override fun onEntityCollision(state: BlockState, world: World, pos: BlockPos, entity: Entity) {
-        super.onEntityCollision(state, world, pos, entity)
-        if (world is ServerLevel && !state.get(LIT)) {
-            world.setBlockState(pos, state.with(LIT, true).with(LIGHT_LEVEL, 7))
-            world.scheduleBlockTick(pos, this, 20)
+    override fun entityInside(state: BlockState, world: Level, pos: BlockPos, entity: Entity) {
+        if (world is ServerLevel && !state.getValue(LIT)) {
+            world.setBlockAndUpdate(pos, state.setValue(LIT, true).setValue(LIGHT_LEVEL, 7))
+            world.scheduleTick(pos, this, 20)
             val radius = 1.5
             val particleCount = 5
             val random = world.random
@@ -117,7 +117,7 @@ class GlowingPlanktonBlock(settings: Properties) : Block(
                 val particleY = entity.y + offsetY
                 val particleZ = entity.z + offsetZ
 
-                world.spawnParticles(
+                world.sendParticles(
                     ParticleTypes.GLOW,
                     particleX,
                     particleY,
@@ -132,22 +132,22 @@ class GlowingPlanktonBlock(settings: Properties) : Block(
         }
     }
 
-    override fun scheduledTick(
+    override fun tick(
         state: BlockState,
         world: ServerLevel,
         pos: BlockPos,
-        random: net.minecraft.util.math.random.Random
+        random: RandomSource
     ) {
-        val lightLevel = state.get(LIGHT_LEVEL)
+        val lightLevel = state.getValue(LIGHT_LEVEL)
         if (lightLevel > 0) {
-            world.setBlockState(pos, state.with(LIGHT_LEVEL, lightLevel - 1))
-            world.scheduleBlockTick(pos, this, 20)
-        } else if (state.get(LIT)) {
-            world.setBlockState(pos, state.with(LIT, false))
+            world.setBlockAndUpdate(pos, state.setValue(LIGHT_LEVEL, lightLevel - 1))
+            world.scheduleTick(pos, this, 20)
+        } else if (state.getValue(LIT)) {
+            world.setBlockAndUpdate(pos, state.setValue(LIT, false))
         }
     }
 
-    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(WATERLOGGED, LIT, LIGHT_LEVEL)
     }
 
@@ -156,8 +156,9 @@ class GlowingPlanktonBlock(settings: Properties) : Block(
     }
 
     companion object {
-        val LIT: BooleanProperty = BooleanProperty.of("lit")
-        val LIGHT_LEVEL: net.minecraft.state.property.IntProperty = net.minecraft.state.property.IntProperty.of("light_level", 0, 7)
+        val LIT: BooleanProperty = BooleanProperty.create("lit")
+        val LIGHT_LEVEL:
+                IntegerProperty = IntegerProperty.create("light_level", 0, 7)
         private val SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
     }
 }

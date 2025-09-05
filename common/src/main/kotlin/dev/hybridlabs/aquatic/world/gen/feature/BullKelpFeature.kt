@@ -2,52 +2,52 @@ package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.KelpBlock
-import net.minecraft.util.math.BlockPos
-import net.minecraft.world.Heightmap
-import net.minecraft.world.gen.feature.Feature
-import net.minecraft.world.gen.feature.util.FeatureContext
+import net.minecraft.core.BlockPos
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.KelpBlock
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.levelgen.Heightmap
+import net.minecraft.world.level.levelgen.feature.Feature
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 
 class BullKelpFeature(codec: Codec<BullKelpFeatureConfig>) :
     Feature<BullKelpFeatureConfig>(codec) {
-    override fun generate(context: FeatureContext<BullKelpFeatureConfig>): Boolean {
+    override fun place(context: FeaturePlaceContext<BullKelpFeatureConfig>): Boolean {
         var i = 0
-        val structureLevelAccessor = context.world
-        val blockPos = context.origin
-        val random = context.random
-        val j = structureWorldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR, blockPos.x, blockPos.z)
+        val structureLevelAccessor = context.level()
+        val blockPos = context.origin()
+        val random = context.random()
+        val j = structureLevelAccessor.getHeight(Heightmap.Types.OCEAN_FLOOR, blockPos.x, blockPos.z)
         var blockPos2 = BlockPos(blockPos.x, j, blockPos.z)
-        if (structureWorldAccess.getBlockState(blockPos2).isOf(Blocks.WATER)) {
-            val blockState = HybridAquaticBlocks.BULL_KELP.defaultBlockState()
-            val blockState2 = HybridAquaticBlocks.BULL_KELP_PLANT.defaultBlockState()
+        if (structureLevelAccessor.getBlockState(blockPos2).`is`(Blocks.WATER)) {
+            val blockState = HybridAquaticBlocks.BULL_KELP.get().defaultBlockState()
+            val blockState2 = HybridAquaticBlocks.BULL_KELP_PLANT.get().defaultBlockState()
             val k = 1 + random.nextInt(10)
 
             for (l in 0..k) {
-                if (structureWorldAccess.getBlockState(blockPos2)
-                        .isOf(Blocks.WATER) && structureWorldAccess.getBlockState(blockPos2.up())
-                        .isOf(Blocks.WATER) && blockState2.canSurvive(structureLevelAccessor, blockPos2)
+                if (structureLevelAccessor.getBlockState(blockPos2)
+                        .`is`(Blocks.WATER) && structureLevelAccessor.getBlockState(blockPos2.above())
+                        .`is`(Blocks.WATER) && blockState2.canSurvive(structureLevelAccessor, blockPos2)
                 ) {
                     if (l == k) {
-                        structureWorldAccess.setBlockState(
+                        structureLevelAccessor.setBlock(
                             blockPos2,
-                            blockState.with(KelpBlock.AGE, random.nextInt(4) + 20) as BlockState,
+                            blockState.setValue(KelpBlock.AGE, random.nextInt(4) + 20) as BlockState,
                             2
                         )
                         ++i
                     } else {
-                        structureWorldAccess.setBlockState(blockPos2, blockState2, 2)
+                        structureLevelAccessor.setBlock(blockPos2, blockState2, 2)
                     }
                 } else if (l > 0) {
-                    val blockPos3 = blockPos2.down()
-                    if (blockState.canSurvive(structureLevelAccessor, blockPos3) && !structureWorldAccess.getBlockState(
-                            blockPos3.down()
-                        ).isOf(HybridAquaticBlocks.BULL_KELP)
+                    val blockPos3 = blockPos2.below()
+                    if (blockState.canSurvive(structureLevelAccessor, blockPos3) && !(structureLevelAccessor.getBlockState(
+                            blockPos3.below()
+                        ).`is`(HybridAquaticBlocks.BULL_KELP.get()))
                     ) {
-                        structureWorldAccess.setBlockState(
+                        structureLevelAccessor.setBlock(
                             blockPos3,
-                            blockState.with(KelpBlock.AGE, random.nextInt(4) + 20) as BlockState,
+                            blockState.setValue(KelpBlock.AGE, random.nextInt(4) + 20) as BlockState,
                             2
                         )
                         ++i
@@ -55,7 +55,7 @@ class BullKelpFeature(codec: Codec<BullKelpFeatureConfig>) :
                     break
                 }
 
-                blockPos2 = blockPos2.up()
+                blockPos2 = blockPos2.above()
             }
         }
 

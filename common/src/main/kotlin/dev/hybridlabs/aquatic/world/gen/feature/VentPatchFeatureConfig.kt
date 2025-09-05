@@ -16,7 +16,7 @@ data class VentPatchFeatureConfig(
     val wormCount: IntProvider,
     val wormSpreadRadius: IntProvider,
     val wormCountPerBlock: IntProvider,
-) : FeatureConfiguration {
+) : FeatureConfiguration uration uration {
     companion object {
         val CODEC: Codec<VentPatchFeatureConfig> = RecordCodecBuilder.create { instance ->
             instance.group(

@@ -1,37 +1,32 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.HorizontalFacingBlock
-import net.minecraft.block.CollisionContext
-import net.minecraft.block.SimpleWaterloggedBlcok
-import net.minecraft.entity.ai.pathing.PathComputationType
-import net.minecraft.fluid.FluidState
-import net.minecraft.fluid.Fluids
-import net.minecraft.item.BlockPlaceContext
-import net.minecraft.state.StateManager
-import net.minecraft.state.property.DirectionProperty
-import net.minecraft.state.property.Properties
-import net.minecraft.util.BlockRotation
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockGetter
-import net.minecraft.world.WorldAccess
-import net.minecraft.world.LevelReader
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
+import net.minecraft.world.level.block.state.properties.DirectionProperty
+import net.minecraft.world.level.material.FluidState
+import net.minecraft.world.level.material.Fluids
+import net.minecraft.world.level.pathfinder.PathComputationType
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class RaftBlock(settings: Properties) : Block(settings), SimpleWaterloggedBlcok {
+class RaftBlock(settings: Properties) : Block(settings), SimpleWaterloggedBlock {
     init {
-        defaultBlockState() = defaultBlockState()
-            .with(Properties.WATERLOGGED, false)
+        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState {
-        val waterlogged = ctx.level.getFluidState(ctx.clickedPos).fluid == Fluids.WATER
+        val waterlogged = ctx.level.getFluidState(ctx.clickedPos) == Fluids.WATER
         return defaultBlockState()
-            .with(Properties.WATERLOGGED, waterlogged)
-            .with(BuoyBlock.FACING, ctx.horizontalPlayerFacing.rotateYClockwise())
+            .setValue(WATERLOGGED, waterlogged)
+            .setValue(BuoyBlock.FACING, ctx.horizontalDirection.clockWise)
     }
 
     override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
@@ -39,7 +34,7 @@ class RaftBlock(settings: Properties) : Block(settings), SimpleWaterloggedBlcok 
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(Properties.WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
+        return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
     override fun updateShape(
@@ -54,38 +49,38 @@ class RaftBlock(settings: Properties) : Block(settings), SimpleWaterloggedBlcok 
         else Blocks.AIR.defaultBlockState()
     }
 
-    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        builder.add(Properties.WATERLOGGED, FACING)
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+        builder.add(WATERLOGGED, FACING)
     }
 
     override fun getShape(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext?
+        context: CollisionContext
     ): VoxelShape {
-        return if (state.get(Properties.WATERLOGGED)) SHAPE else LAND_SHAPE
+        return if (state.getValue(WATERLOGGED)) SHAPE else LAND_SHAPE
     }
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (fluidStateAbove.fluid != Fluids.EMPTY) {
+        if (fluidStateAbove != Fluids.EMPTY) {
             return false
         }
-        val stateBelow = world.getBlockState(pos.down())
+        val stateBelow = world.getBlockState(pos.below())
         if (stateBelow.block == this) {
             return false
         }
         val fluidState = world.getFluidState(pos)
-        return fluidState.fluid == Fluids.WATER || sideCoversSmallSquare(world, pos.below(), Direction.UP)
+        return fluidState == Fluids.WATER || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
-    override fun rotate(state: BlockState, rotation: BlockRotation): BlockState {
-        return state.with(FACING, rotation.rotate(state.get(FACING) as Direction)) as BlockState
+    override fun rotate(state: BlockState, rotation: Rotation): BlockState {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING) as Direction)) as BlockState
     }
 
     companion object {
-        val FACING: DirectionProperty = HorizontalFacingBlock.FACING
+        val FACING: DirectionProperty = HorizontalDirectionalBlock.FACING
         private val SHAPE: VoxelShape = box(1.0, 12.0, 1.0, 15.0, 16.0, 15.0)
         private val LAND_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 2.5, 15.0)
     }

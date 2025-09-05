@@ -105,7 +105,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
     override fun tick() {
         super.tick()
 
-        if (world.isClient) {
+        if (world.isClientSide) {
             return
         }
 

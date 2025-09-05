@@ -9,6 +9,6 @@ class ShrimpEntityRenderer(context: Context) :
     HybridAquaticCrustaceanEntityRenderer<ShrimpEntity>(context, ShrimpEntityModel(), true, false) {
 
     init {
-        addRenderLayer(HybridAquaticCrustaceanEntityLayer(this))
+        addRenderType(HybridAquaticCrustaceanEntityLayer(this))
     }
 }

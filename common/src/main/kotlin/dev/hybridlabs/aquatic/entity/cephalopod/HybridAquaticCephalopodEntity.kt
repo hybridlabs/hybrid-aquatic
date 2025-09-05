@@ -2,38 +2,38 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
-import net.minecraft.entity.*
-import net.minecraft.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.entity.ai.control.SmoothSwimmingLookControl
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal
-import net.minecraft.entity.ai.goal.PanicGoal
-import net.minecraft.entity.ai.goal.MeleeAttackGoal
-import net.minecraft.entity.ai.goal.RandomSwimmingGoal
-import net.minecraft.entity.ai.pathing.EntityNavigation
-import net.minecraft.entity.ai.pathing.BlockPathTypes
-import net.minecraft.entity.ai.pathing.WaterBoundPathNavigation
-import net.minecraft.entity.damage.DamageSource
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
-import net.minecraft.entity.effect.MobEffectInstance
-import net.minecraft.entity.effect.MobEffects
-import net.minecraft.entity.mob.Monster.isDarkEnoughToSpawn
-import net.minecraft.entity.mob.WaterAnimal
+import net.minecraft.core.BlockPos
+import net.minecraft.core.particles.ParticleTypes
+import net.minecraft.core.particles.SimpleParticleType
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.particle.ParticleEffect
-import net.minecraft.particle.ParticleTypes
-import net.minecraft.registry.tag.TagKey
-import net.minecraft.server.world.ServerLevel
-import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Box
-import net.minecraft.util.math.Vec3d
-import net.minecraft.util.math.random.Random
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.TagKey
+import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
+import net.minecraft.world.entity.*
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.world.entity.ai.goal.PanicGoal
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
+import net.minecraft.world.entity.ai.navigation.PathNavigation
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
+import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.phys.AABB
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -46,7 +46,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
 open class HybridAquaticCephalopodEntity(
     type: EntityType<out HybridAquaticCephalopodEntity>,
-    world: World,
+    world: Level,
     open val prey: TagKey<EntityType<*>>,
     open val predator: TagKey<EntityType<*>>,
     open var hasInk: Boolean,
@@ -60,11 +60,17 @@ open class HybridAquaticCephalopodEntity(
         goalSelector.addGoal(2, CephalopodAttackGoal(this))
         targetSelector.addGoal(
             1,
-            NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { hunger <= 1200 && it.type.`is`(prey) })
+            NearestAttackableTargetGoal(
+                this,
+                LivingEntity::class.java,
+                10,
+                true,
+                true
+            ) { hunger <= 1200 && it.type.`is`(prey) })
     }
 
-    override fun initSynchedEntityData() {
-        super.initSynchedEntityData()
+    override fun defineSynchedData() {
+        super.defineSynchedData()
         entityData.define(MOISTNESS, getMaxMoistness())
         entityData.define(CEPHALOPOD_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
@@ -80,13 +86,13 @@ open class HybridAquaticCephalopodEntity(
     ): SpawnGroupData? {
         this.airSupply= getMaxMoistness()
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
-        this.pitch = 0.0f
+        this.xRot = 0.0f
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun tick() {
         super.tick()
-        if .isNoAi) {
+        if (isNoAi) {
             return
         }
 
@@ -96,17 +102,17 @@ open class HybridAquaticCephalopodEntity(
             moistness -= 1
             if (moistness <= -20) {
                 moistness = 0
-                damage(this.damageSources.dryOut(), 1.0f)
+                hurt(this.damageSources().dryOut(), 1.0f)
             }
 
             if (!this.isUnderWater) {
-                this.pitch = 0.0f
-                this.yaw = this.prevYaw
-                this.headYaw = this.prevHeadYaw
+                this.xRot = 0.0f
+                this.yRot = this.yRotO
+                this.yHeadRot = this.yHeadRotO
             }
         }
 
-        isSprinting = isAttacking
+        isSprinting = isAggressive
 
         if (hunger > 0) hunger -= 1
     }
@@ -117,19 +123,19 @@ open class HybridAquaticCephalopodEntity(
         return 600
     }
 
-    override fun damage(source: DamageSource, amount: Float): Boolean {
-        if (super.damage(source, amount) && this.attacker != null) {
-            if (!world.isClient) {
+    override fun hurt(source: DamageSource, amount: Float): Boolean {
+        if (super.hurt(source, amount) && this.lastHurtByMob != null) {
+            if (!level().isClientSide) {
                 if (this.isUnderWater && this.hasInk || this.hasGlowInk) {
                     this.squirt()
                 }
 
-                val attackerPos = this.attacker?.pos
+                val attackerPos = this.lastHurtByMob?.position()
                 if (attackerPos != null) {
-                    val directionAway = this.pos.subtract(attackerPos).normalize().multiply(10.0)
-                    val targetPos = this.pos.add(directionAway.x, 0.0, directionAway.z)
+                    val directionAway = this.position().subtract(attackerPos).normalize().scale(10.0)
+                    val targetPos = this.position().add(directionAway.x, 0.0, directionAway.z)
 
-                    this.navigation.startMovingTo(targetPos.x, targetPos.y, targetPos.z, 1.5)
+                    this.navigation.moveTo(targetPos.x, targetPos.y, targetPos.z, 1.5)
                 }
             }
             return true
@@ -138,22 +144,22 @@ open class HybridAquaticCephalopodEntity(
     }
 
     private fun squirt() {
-        this.playSound(this.getSquirtSound(), this.soundVolume, this.soundPitch)
+        this.playSound(this.getSquirtSound(), this.soundVolume, this.voicePitch)
 
-        val entityPosition = Vec3d(this.x, this.y, this.z)
+        val entityPosition = Vec3(this.x, this.y, this.z)
         val radius = 3.0
 
-        val affectedEntities = world.getEntitiesByClass(
+        val affectedEntities = level().getEntitiesOfClass(
             LivingEntity::class.java,
-            Box(
+            AABB(
                 entityPosition.x - radius, entityPosition.y - radius, entityPosition.z - radius,
                 entityPosition.x + radius, entityPosition.y + radius, entityPosition.z + radius
             )
         ) { it != this && it.isAlive }
 
         for (entity in affectedEntities) {
-            entity.addMobEffect(MobEffectInstance(MobEffects.BLINDNESS, 100, 0))
-            entity.addMobEffect(MobEffectInstance(MobEffects.DARKNESS, 100, 0))
+            entity.addEffect(MobEffectInstance(MobEffects.BLINDNESS, 100, 0))
+            entity.addEffect(MobEffectInstance(MobEffects.DARKNESS, 100, 0))
         }
 
         for (i in 0..199) {
@@ -162,9 +168,9 @@ open class HybridAquaticCephalopodEntity(
             val offsetZ = (random.nextDouble() - 0.5) * 2.0
 
             val randomMultiplier = 0.5 + random.nextDouble() * 1.5
-            val velocity = Vec3d(offsetX, offsetY, offsetZ).normalize().multiply(randomMultiplier)
+            val velocity = Vec3(offsetX, offsetY, offsetZ).normalize().scale(randomMultiplier)
 
-            (world as ServerLevel).spawnParticles(
+            (level() as ServerLevel).sendParticles(
                 this.getInkParticle(),
                 entityPosition.x,
                 entityPosition.y,
@@ -178,7 +184,7 @@ open class HybridAquaticCephalopodEntity(
         }
     }
 
-    protected open fun getInkParticle(): ParticleEffect {
+    protected open fun getInkParticle(): SimpleParticleType {
         return if (this.hasGlowInk) {
             ParticleTypes.GLOW_SQUID_INK
         } else {
@@ -202,7 +208,7 @@ open class HybridAquaticCephalopodEntity(
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
-    override fun getStandingEyeHeight(pose: EntityPose?, dimensions: EntityDimensions): Float {
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.5f
     }
 
@@ -219,34 +225,34 @@ open class HybridAquaticCephalopodEntity(
         navigation = WaterBoundPathNavigation(this, world)
     }
 
-    override fun dropLoot(source: DamageSource, causedByPlayer: Boolean) {
-        val attacker = source.attacker
+    override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
+        val attacker = source.directEntity
         if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticCephalopodEntity) {
-            super.dropLoot(source, causedByPlayer)
+            super.dropFromLootTable(source, causedByPlayer)
         }
     }
 
-    override fun getSpawnClusterSize(): Int {
+    override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents._SQUID_AMBIENT
+        return SoundEvents.SQUID_AMBIENT
     }
 
-    override fun getHurtSound(source: DamageSource?): SoundEvent {
-        return SoundEvents._SQUID_HURT
+    override fun getHurtSound(source: DamageSource): SoundEvent {
+        return SoundEvents.SQUID_HURT
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents._SQUID_DEATH
+        return SoundEvents.SQUID_DEATH
     }
 
     private fun getSquirtSound(): SoundEvent {
-        return SoundEvents._SQUID_SQUIRT
+        return SoundEvents.SQUID_SQUIRT
     }
 
-    override fun createNavigation(world: Level): EntityNavigation {
+    override fun createNavigation(world: Level): PathNavigation{
         return WaterBoundPathNavigation(this, world)
     }
 
@@ -278,12 +284,12 @@ open class HybridAquaticCephalopodEntity(
 
     // endregion
 
-    override fun getMaxAir(): Int {
+    override fun getMaxAirSupply(): Int {
         return 600
     }
 
-    public override fun getNextAirOnLand(air: Int): Int {
-        return this.maxAir
+    public override fun increaseAirSupply(air: Int): Int {
+        return this.maxAirSupply
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
@@ -293,7 +299,7 @@ open class HybridAquaticCephalopodEntity(
                 "Swim/Run",
                 20
             ) { state: AnimationState<HybridAquaticCephalopodEntity> ->
-                if (!this.isUnderWater && isOnGround) {
+                if (!this.isUnderWater && onGround()) {
                     state.setAndContinue(DefaultAnimations.SIT)
                 } else {
                     if (state.isMoving) {
@@ -326,10 +332,10 @@ open class HybridAquaticCephalopodEntity(
             return !cephalopod.fromFishingNet && super.canUse()
         }
 
-        override fun attack(target: LivingEntity, squaredDistance: Double) {
-            val d = getSquaredMaxAttackDistance(target)
-            if (squaredDistance <= d && this.isCooledDown) {
-                resetCooldown()
+        override fun checkAndPerformAttack(target: LivingEntity, squaredDistance: Double) {
+            val d = getAttackReachSqr(target)
+            if (squaredDistance <= d && this.isTimeToAttack) {
+                resetAttackCooldown()
                 mob.doHurtTarget(target)
                 cephalopod.isSprinting = true
                 cephalopod.attemptAttack = true
@@ -340,8 +346,8 @@ open class HybridAquaticCephalopodEntity(
             }
         }
 
-        override fun getSquaredMaxAttackDistance(entity: LivingEntity): Double {
-            return (1.25f + entity.width).toDouble()
+        override fun getAttackReachSqr(entity: LivingEntity): Double {
+            return (1.25f + entity.bbWidth).toDouble()
         }
 
         override fun start() {
@@ -357,11 +363,11 @@ open class HybridAquaticCephalopodEntity(
 
     companion object {
         val MOISTNESS: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HybridAquaticCephalopodEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(HybridAquaticCephalopodEntity::class.java, EntityDataSerializers.INT)
         val CEPHALOPOD_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HybridAquaticCephalopodEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(HybridAquaticCephalopodEntity::class.java, EntityDataSerializers.INT)
         val HUNGER: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HybridAquaticFishEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(HybridAquaticFishEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticCephalopodEntity::class.java, EntityDataSerializers.BOOLEAN)
 
@@ -376,7 +382,7 @@ open class HybridAquaticCephalopodEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: Random
+            random: RandomSource
         ): Boolean {
             val topY = world.seaLevel - 4
             val bottomY = world.seaLevel - 24
@@ -393,12 +399,12 @@ open class HybridAquaticCephalopodEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: Random
+            random: RandomSource
         ): Boolean {
             val topY = world.seaLevel - 4
             val bottomY = world.seaLevel - 24
 
-            return !world.toServerLevel().isDay &&
+            return !world.level.isDay &&
                     pos.y in bottomY..topY &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos) &&
@@ -411,7 +417,7 @@ open class HybridAquaticCephalopodEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: Random
+            random: RandomSource
         ): Boolean {
             val topY = world.seaLevel - 24
             val bottomY = world.seaLevel - 128

@@ -5,35 +5,37 @@ package dev.hybridlabs.aquatic.block
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import net.minecraft.block.*
-import net.minecraft.block.entity.BlockEntity
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.ai.pathing.PathComputationType
-import net.minecraft.fluid.FluidState
-import net.minecraft.fluid.Fluids
-import net.minecraft.item.BlockItem
-import net.minecraft.item.BlockPlaceContext
-import net.minecraft.item.ItemStack
-import net.minecraft.state.StateManager
-import net.minecraft.state.property.Properties.WATERLOGGED
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.util.StringRepresentable
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockGetter
-import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
-import net.minecraft.world.LevelReader
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.item.BlockItem
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
+import net.minecraft.world.level.material.FluidState
+import net.minecraft.world.level.material.Fluids
+import net.minecraft.world.level.pathfinder.PathComputationType
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.VoxelShape
 import kotlin.jvm.optionals.getOrNull
 
 /**
  * Represents the Message in a Bottle block.
  * @see MessageInABottleBlockEntity
  */
-class MessageInABottleBlock(settings: Properties) : BlockWithEntity(settings), SimpleWaterloggedBlcok {
+class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), SimpleWaterloggedBlock {
     init {
         // add waterlogged to default state
-        defaultBlockState() = defaultBlockState().with(WATERLOGGED, false)
+        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false))
     }
 
     override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
@@ -47,35 +49,35 @@ class MessageInABottleBlock(settings: Properties) : BlockWithEntity(settings), S
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         // cannot place below water
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (fluidStateAbove.fluid != Fluids.EMPTY) {
+        if (fluidStateAbove.`is`(Fluids.EMPTY)) {
             return false
         }
 
         // cannot stack
-        val stateBelow = world.getBlockState(pos.down())
+        val stateBelow = world.getBlockState(pos.below())
         if (stateBelow.block == this) {
             return false
         }
 
         // check valid placement
         val fluidState = world.getFluidState(pos)
-        return fluidState.fluid == Fluids.WATER || sideCoversSmallSquare(world, pos.below(), Direction.UP)
+        return fluidState == Fluids.WATER || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
-    override fun onPlaced(
-        world: World,
+    override fun setPlacedBy(
+        world: Level,
         pos: BlockPos,
         state: BlockState,
         placer: LivingEntity?,
         stack: ItemStack
     ) {
-        stack.getSubNbt(BlockItem.BLOCK_ENTITY_TAG_KEY)?.let { nbt ->
+        stack.getTagElement(BlockItem.BLOCK_ENTITY_TAG)?.let { nbt ->
             // if not present, generate a random message
             if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
                 // get a random message
-                val registryManager = world.registryManager
-                val registry = registryManager.get(HybridAquaticRegistryKeys.SEA_MESSAGE)
-                val messageKey = registry.getRandom(world.random).getOrNull()?.registryKey() ?: return
+                val registryManager = world.registryAccess()
+                val registry = registryManager.registryOrThrow<SeaMessage>(HybridAquaticRegistryKeys.SEA_MESSAGE)
+                val messageKey = registry.getRandom(world.random).getOrNull()?.key() ?: return
                 val message = registry.get(messageKey) ?: return
 
                 // get block entity
@@ -87,10 +89,10 @@ class MessageInABottleBlock(settings: Properties) : BlockWithEntity(settings), S
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
         // place in water as waterlogged
-        val world = context.world
-        val pos = context.blockPos
+        val world = context.level
+        val pos = context.clickedPos
         val fluidState = world.getFluidState(pos)
-        return super.getStateForPlacement(context)?.with(WATERLOGGED, fluidState.fluid == Fluids.WATER)
+        return super.getStateForPlacement(context)?.setValue(WATERLOGGED, fluidState == Fluids.WATER)
     }
 
     override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
@@ -106,7 +108,7 @@ class MessageInABottleBlock(settings: Properties) : BlockWithEntity(settings), S
         neighborPos: BlockPos
     ): BlockState {
         // tick fluid when waterlogged
-        if (state.get(WATERLOGGED)) {
+        if (state.getValue(WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
         }
 
@@ -119,30 +121,30 @@ class MessageInABottleBlock(settings: Properties) : BlockWithEntity(settings), S
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
+        return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
     override fun getShape(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext?
+        context: CollisionContext
     ): VoxelShape {
-        return if (state.get(WATERLOGGED)) WATER_SHAPE else SHAPE
+        return if (state.getValue(WATERLOGGED)) WATER_SHAPE else SHAPE
     }
 
-    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        super.appendProperties(
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+        super.createBlockStateDefinition(
             // append waterlogged
             builder.add(WATERLOGGED)
         )
     }
 
-    override fun getRenderType(state: BlockState): BlockRenderType {
-        return BlockRenderType.ENTITYBLOCK_ANIMATED
+    override fun getRenderShape(state: BlockState): RenderShape {
+        return RenderShape.ENTITYBLOCK_ANIMATED
     }
 
-    override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return MessageInABottleBlockEntity(pos, state)
     }
 
@@ -154,7 +156,7 @@ class MessageInABottleBlock(settings: Properties) : BlockWithEntity(settings), S
         JAR("jar"),
         LONGNECK("longneck");
 
-        override fun asString(): String {
+        override fun getSerializedName(): String {
             return id
         }
 
@@ -168,13 +170,13 @@ class MessageInABottleBlock(settings: Properties) : BlockWithEntity(settings), S
     }
 
     companion object {
-        val SHAPE: VoxelShape = Block.box(2.0, 0.0, 2.0, 13.0, 6.0, 14.0)
+        val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 13.0, 6.0, 14.0)
 
-        val WATER_SHAPE: VoxelShape = Block.box(1.0, 13.0, 1.0, 15.0, 16.0, 15.0)
+        val WATER_SHAPE: VoxelShape = box(1.0, 13.0, 1.0, 15.0, 16.0, 15.0)
 
         fun createItemStack(blockEntity: MessageInABottleBlockEntity): ItemStack {
-            val stack = ItemStack(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE)
-            stack.orCreateNbt.put(BlockItem.BLOCK_ENTITY_TAG_KEY, blockEntity.createNbt())
+            val stack = ItemStack(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get())
+            stack.getOrCreateTag().put(BlockItem.BLOCK_ENTITY_TAG, blockEntity.saveWithoutMetadata())
             return stack
         }
     }

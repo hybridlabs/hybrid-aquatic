@@ -18,7 +18,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 @Suppress("LeakingThis", "unused")
 open class HybridAquaticOctopusEntity(
     type: EntityType<out HybridAquaticCephalopodEntity>,
-    world: World,
+    world: Level,
     open val prey: TagKey<EntityType<*>>,
     open val predator: TagKey<EntityType<*>>,
     open var hasInk: Boolean,

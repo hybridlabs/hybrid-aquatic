@@ -1,39 +1,38 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.PlantBlock
-import net.minecraft.block.CollisionContext
-import net.minecraft.block.SimpleWaterloggedBlcok
-import net.minecraft.entity.ai.pathing.PathComputationType
-import net.minecraft.fluid.FluidState
-import net.minecraft.fluid.Fluids
-import net.minecraft.item.BlockPlaceContext
-import net.minecraft.particle.ParticleTypes
-import net.minecraft.registry.tag.FluidTags
-import net.minecraft.state.StateManager
-import net.minecraft.state.property.Properties.WATERLOGGED
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.math.random.Random
-import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockGetter
-import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
-import net.minecraft.world.LevelReader
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.core.particles.ParticleTypes
+import net.minecraft.tags.FluidTags
+import net.minecraft.util.RandomSource
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.BushBlock
+import net.minecraft.world.level.block.SimpleWaterloggedBlock
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
+import net.minecraft.world.level.material.FluidState
+import net.minecraft.world.level.material.Fluids
+import net.minecraft.world.level.pathfinder.PathComputationType
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class TubeSpongeBlock(
     private val emitsParticles: Boolean,
-    settings: Settings
-) : BushBlock(settings), SimpleWaterloggedBlcok {
+    settings: Properties
+) : BushBlock(settings), SimpleWaterloggedBlock {
 
     private var bubbleTimer = 0
 
     init {
-        defaultBlockState() = stateManager.defaultBlockState()
-            .with(WATERLOGGED, true)
+        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
@@ -50,7 +49,7 @@ class TubeSpongeBlock(
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        if (state.get(WATERLOGGED)) {
+        if (state.getValue(WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
         }
 
@@ -68,14 +67,14 @@ class TubeSpongeBlock(
         return COLLISION_SHAPE
     }
 
-    override fun getShape(state: BlockState, world: BlockGetter, pos: BlockPos, context: CollisionContext?): VoxelShape {
+    override fun getShape(state: BlockState, world: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         return SHAPE
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
         val fluidState = ctx.level.getFluidState(ctx.clickedPos)
-        return if (fluidState.`is`(FluidTags.WATER)) defaultBlockState().with(
-            WATERLOGGED, ctx.level.getFluidState(ctx.clickedPos).isOf(
+        return if (fluidState.`is`(FluidTags.WATER)) defaultBlockState().setValue(
+            WATERLOGGED, ctx.level.getFluidState(ctx.clickedPos).`is`(
                 Fluids.WATER)) else null
     }
 
@@ -84,15 +83,15 @@ class TubeSpongeBlock(
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
+        return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
-    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(WATERLOGGED)
     }
 
-    override fun animateTick(state: BlockState, world: World, pos: BlockPos, random: RandomSource) {
-        if (state.get(WATERLOGGED) && emitsParticles && bubbleTimer % 20 == 0) {
+    override fun animateTick(state: BlockState, world: Level, pos: BlockPos, random: RandomSource) {
+        if (state.getValue(WATERLOGGED) && emitsParticles && bubbleTimer % 20 == 0) {
             (bubbleTimer / 60).toFloat() * 0.05f
             val upwardVelocity = 0.1f
 

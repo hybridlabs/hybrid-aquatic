@@ -38,7 +38,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER", "unused")
 open class HybridAquaticDolphinEntity(
     type: EntityType<out HybridAquaticDolphinEntity>,
-    world: World,
+    world: Level,
     open val prey: List<TagKey<EntityType<*>>>,
     open val predator: List<TagKey<EntityType<*>>>,
 ) : WaterAnimal(type, world), GeoEntity {

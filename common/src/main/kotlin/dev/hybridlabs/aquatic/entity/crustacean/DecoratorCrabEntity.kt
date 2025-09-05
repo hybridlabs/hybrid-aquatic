@@ -1,29 +1,29 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.minecraft.entity.EntityData
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.MobSpawnType
-import net.minecraft.entity.VariantHolder
-import net.minecraft.entity.attribute.AttributeSupplier
-import net.minecraft.entity.attribute.Attributes
-import net.minecraft.entity.data.SynchedEntityData
-import net.minecraft.entity.data.EntityDataAccessor
-import net.minecraft.entity.data.EntityDataSerializers
-import net.minecraft.entity.player.Player
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.sound.SoundEvents
-import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
-import net.minecraft.util.function.ByIdMap
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.ServerLevelAccess
-import net.minecraft.world.World
-import net.minecraft.world.event.GameEvent
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.VariantHolder
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.gameevent.GameEvent
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -32,7 +32,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
     HybridAquaticCrustaceanEntity(entityType, world, false),
     VariantHolder<DecoratorCrabEntity.Companion.Type> {
 
-    override fun getLootTableId(): ResourceLocation {
+    override fun getDefaultLootTable(): ResourceLocation {
         return ResourceLocation("hybrid-aquatic", "entities/decorator_crab")
     }
 
@@ -40,20 +40,20 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         get() = entityData.get(CORAL_TIMER)
         set(value) = entityData.set(CORAL_TIMER, value)
 
-    override fun interactMob(player:Player, hand: Hand): ActionResult {
-        val itemStack = player.getStackInHand(hand)
-        if (!itemStack.isEmpty && itemStack.isOf(Items.SHEARS) && coralTimer == 0) {
-            if (!world.isClient) {
+    override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
+        val itemStack = player.getItemInHand(hand)
+        if (!itemStack.isEmpty && itemStack.`is`(Items.SHEARS) && coralTimer == 0) {
+            if (!level().isClientSide) {
                 this.coralTimer = 3600
-                this.playSound(SoundEvents._SHEEP_SHEAR, 1.0f, 1.0f)
-                this.emitGameEvent(GameEvent.SHEAR, player)
-                itemStack.damage(1, player) { it.sendToolBreakStatus(hand) }
-                dropStack(ItemStack(HybridAquaticItems.CORAL_CHUNK))
-                return ActionResult.SUCCESS
+                this.playSound(SoundEvents.SHEEP_SHEAR, 1.0f, 1.0f)
+                this.gameEvent(GameEvent.SHEAR, player)
+                itemStack.hurtAndBreak(1, player) { it.broadcastBreakEvent(hand) }
+                spawnAtLocation(ItemStack(HybridAquaticItems.CORAL_CHUNK))
+                return InteractionResult.SUCCESS
             }
-            return ActionResult.CONSUME
+            return InteractionResult.CONSUME
         }
-        return super.interactMob(player, hand)
+        return super.mobInteract(player, hand)
     }
 
     override fun tick() {
@@ -86,14 +86,14 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         }
 
         val TYPE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(DecoratorCrabEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(DecoratorCrabEntity::class.java, EntityDataSerializers.INT)
         val CORAL_TIMER: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(DecoratorCrabEntity::class.java, EntityDataSerializers.INTEGER)
+            SynchedEntityData.defineId(DecoratorCrabEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             CORAL(0, "coral");
 
-            override fun asString(): String {
+            override fun getSerializedName(): String {
                 return this.key
             }
 
@@ -124,14 +124,14 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         return -5
     }
 
-    override fun initSynchedEntityData() {
+    override fun defineSynchedData() {
         entityData.define(TYPE, 0)
         entityData.define(CORAL_TIMER, 0)
-        super.initSynchedEntityData()
+        super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.asString())
+        nbt.putString("Type", this.variant.toString())
         nbt.putInt("CoralTimer", coralTimer)
         super.addAdditionalSaveData(nbt)
     }

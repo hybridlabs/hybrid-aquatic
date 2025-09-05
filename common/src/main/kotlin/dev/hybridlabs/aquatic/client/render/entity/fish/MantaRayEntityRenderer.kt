@@ -9,6 +9,6 @@ class MantaRayEntityRenderer(context: Context) :
     HybridAquaticFishEntityRenderer<MantaRayEntity>(context, MantaRayEntityModel(), true, false) {
 
     init {
-        addRenderLayer(HybridAquaticFishEntityLayer(this))
+        addRenderType(HybridAquaticFishEntityLayer(this))
     }
 }

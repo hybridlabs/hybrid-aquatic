@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
-import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -12,14 +11,19 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.GameRules
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.BushBlock
+import net.minecraft.world.level.block.EntityBlock
+import net.minecraft.world.level.block.RenderShape
+import net.minecraft.world.level.block.SimpleWaterloggedBlock
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityTicker
 import net.minecraft.world.level.block.entity.BlockEntityType
-import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
@@ -28,24 +32,23 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
-class AnemoneBlock(settings: BlockBehaviour.Properties) : BushBlock(settings), BlockEntityProvider, SimpleWaterloggedBlcok {
+class AnemoneBlock(settings: Properties) : BushBlock(settings), EntityBlock, SimpleWaterloggedBlock {
     init {
-        defaultBlockState() = stateManager.defaultBlockState()
-            .with(WATERLOGGED, true)
+        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
 
-    override fun onEntityCollision(state: BlockState, world: LevelAccessor, pos: BlockPos, entity: Entity) {
+    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
         if (entity is LivingEntity) {
             if (entity is ClownfishEntity) {
-                if (!world.isClientSide) {
-                    tryHideClownfish(entity, world, pos)
+                if (!level.isClientSide) {
+                    tryHideClownfish(entity, level, pos)
                 }
             }
         }
     }
 
     private fun tryHideClownfish(entity: ClownfishEntity, world: LevelAccessor, pos: BlockPos) {
-        if (entity.isBaby || !entity.navigation.isIdle) {
+        if (entity.isBaby || !entity.navigation.isDone) {
             return
         }
 
@@ -57,19 +60,19 @@ class AnemoneBlock(settings: BlockBehaviour.Properties) : BushBlock(settings), B
         }
     }
 
-    override fun onBreak(world: LevelAccessor, pos: BlockPos, state: BlockState, player: Player) {
-        if (!world.isClientSide && player.isCreative && world.gameRules.getBoolean(GameRules.DO_TILE_DROPS)) {
+    override fun playerWillDestroy(world: Level, pos: BlockPos, state: BlockState, player: Player) {
+        if (!world.isClientSide && player.isCreative && world.gameRules.getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
             val blockEntity = world.getBlockEntity(pos)
             if (blockEntity is AnemoneBlockEntity) {
                 blockEntity.emergencyReleaseHiddenClownfish()
             }
         }
 
-        super.onBreak(world, pos, state, player)
+        super.playerWillDestroy(world, pos, state, player)
     }
 
-    override fun mayPlantOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return !floor.getCollisionShape(world, pos).getFace(Direction.UP).isEmpty || floor.isFaceSturdy(
+    override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
+        return !floor.getCollisionShape(world, pos).getFaceShape(Direction.UP).isEmpty || floor.isFaceSturdy(
             world,
             pos,
             Direction.UP
@@ -84,7 +87,7 @@ class AnemoneBlock(settings: BlockBehaviour.Properties) : BushBlock(settings), B
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        if (state.get(WATERLOGGED)) {
+        if (state.getValue(WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
         }
 
@@ -93,12 +96,12 @@ class AnemoneBlock(settings: BlockBehaviour.Properties) : BushBlock(settings), B
         } else super.updateShape(state, direction, neighborState, world, pos, neighborPos)
     }
 
-    override fun <T : BlockEntity> getTicker(
-        world: LevelAccessor,
+    override fun <T : BlockEntity?> getTicker(
+        level: Level,
         state: BlockState,
         type: BlockEntityType<T>
-    ): BlockEntityTicker<T> {
-        return BlockWithEntity.checkType(type, HybridAquaticBlockEntityTypes.ANEMONE, AnemoneBlockEntity::tick)
+    ): BlockEntityTicker<T>? {
+        return getTicker(level, state, type)
     }
 
     override fun getCollisionShape(
@@ -114,14 +117,14 @@ class AnemoneBlock(settings: BlockBehaviour.Properties) : BushBlock(settings), B
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext?
+        context: CollisionContext
     ): VoxelShape {
         return SHAPE
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
         val fluidState = ctx.level.getFluidState(ctx.clickedPos)
-        return if (fluidState.`is`(FluidTags.WATER)) defaultBlockState().with(
+        return if (fluidState.`is`(FluidTags.WATER)) defaultBlockState().setValue(
             WATERLOGGED,
             ctx.level.getFluidState(ctx.clickedPos).`is`(Fluids.WATER)
         ) else null
@@ -131,15 +134,15 @@ class AnemoneBlock(settings: BlockBehaviour.Properties) : BushBlock(settings), B
         return if (state.hasProperty(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
-    override fun getRenderType(state: BlockState): BlockRenderType {
-        return BlockRenderType.ENTITYBLOCK_ANIMATED
+    override fun getRenderShape(state: BlockState): RenderShape {
+        return RenderShape.ENTITYBLOCK_ANIMATED
     }
 
-    override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return AnemoneBlockEntity(pos, state)
     }
 
-    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(WATERLOGGED)
     }
 

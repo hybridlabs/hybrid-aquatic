@@ -16,7 +16,7 @@ open class HybridAquaticMinibossEntityRenderer<T : HybridAquaticMinibossEntity>(
 ) : GeoEntityRenderer<T>(context, model) {
 
     init {
-        if(canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
+        if(canGlow) addRenderType(AutoGlowingGeoLayer(this))
     }
 
     override fun render(

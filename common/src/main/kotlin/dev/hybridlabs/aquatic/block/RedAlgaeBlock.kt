@@ -1,27 +1,23 @@
 package dev.hybridlabs.aquatic.block
 
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.BonemealableBlock
-import net.minecraft.block.LiquidBlockContainer
-import net.minecraft.block.PlantBlock
-import net.minecraft.block.CollisionContext
-import net.minecraft.block.TallSeagrassBlock
-import net.minecraft.block.enums.DoubleBlockHalf
-import net.minecraft.fluid.Fluid
-import net.minecraft.fluid.FluidState
-import net.minecraft.fluid.Fluids
-import net.minecraft.item.BlockPlaceContext
-import net.minecraft.registry.tag.FluidTags
-import net.minecraft.server.world.ServerLevel
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
-import net.minecraft.util.math.random.Random
-import net.minecraft.util.shape.VoxelShape
-import net.minecraft.world.BlockGetter
-import net.minecraft.world.World
-import net.minecraft.world.WorldAccess
-import net.minecraft.world.LevelReader
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.tags.FluidTags
+import net.minecraft.util.RandomSource
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
+import net.minecraft.world.level.material.Fluid
+import net.minecraft.world.level.material.FluidState
+import net.minecraft.world.level.material.Fluids
+import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION")
 class RedAlgaeBlock(settings: Properties?) : BushBlock(settings), BonemealableBlock, LiquidBlockContainer {
@@ -29,13 +25,13 @@ class RedAlgaeBlock(settings: Properties?) : BushBlock(settings), BonemealableBl
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext?
+        context: CollisionContext
     ): VoxelShape {
         return SHAPE
     }
 
-    override fun mayPlantOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.isOf(Blocks.MAGMA_BLOCK)
+    override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
+        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK)
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
@@ -59,11 +55,11 @@ class RedAlgaeBlock(settings: Properties?) : BushBlock(settings), BonemealableBl
         return blockState
     }
 
-    override fun isBonemealableBlock(world: LevelReader, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
         return true
     }
 
-    override fun canGrow(world: World, random: Random, pos: BlockPos, state: BlockState): Boolean {
+    override fun isBonemealSuccess(world: Level, random: RandomSource, pos: BlockPos, state: BlockState): Boolean {
         return true
     }
 
@@ -71,13 +67,13 @@ class RedAlgaeBlock(settings: Properties?) : BushBlock(settings), BonemealableBl
         return Fluids.WATER.getSource(false)
     }
 
-    override fun.performBonemeal(world: ServerLevel, random: Random, pos: BlockPos, state: BlockState) {
-        val blockState = HybridAquaticBlocks.TALL_RED_ALGAE.defaultBlockState()
-        val blockState2 = blockState.with(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER) as BlockState
+    override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
+        val blockState = HybridAquaticBlocks.TALL_RED_ALGAE.get().defaultBlockState()
+        val blockState2 = blockState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER) as BlockState
         val blockPos = pos.above()
-        if (world.getBlockState(blockPos).isOf(Blocks.WATER)) {
-            world.setBlockState(pos, blockState, 2)
-            world.setBlockState(blockPos, blockState2, 2)
+        if (world.getBlockState(blockPos).`is`(Blocks.WATER)) {
+            world.setBlock(pos, blockState, 2)
+            world.setBlock(blockPos, blockState2, 2)
         }
     }
 

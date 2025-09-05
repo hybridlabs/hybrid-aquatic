@@ -216,7 +216,7 @@ class PlacedFeatureProvider(
                 listOf(
                     SquarePlacementModifier.of(),
                     PlacedFeatures.BOTTOM_TO_120_RANGE,
-                    SurfaceThresholdFilterPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG, Int.MIN_VALUE, -2),
+                    SurfaceThresholdFilterPlacementModifier.of(Heightmap.Types.OCEAN_FLOOR_WG, Int.MIN_VALUE, -2),
                     NoiseBasedCountPlacementModifier.of(10, 100.0, 0.0),
                     BiomePlacementModifier.of(),
                 )

@@ -11,10 +11,15 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.HorizontalDirectionalBlock
+import net.minecraft.world.level.block.RenderShape
+import net.minecraft.world.level.block.Rotation
+import net.minecraft.world.level.block.SimpleWaterloggedBlock
 import net.minecraft.world.level.block.entity.BlockEntity
-import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
 import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
@@ -24,33 +29,32 @@ import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("DEPRECATION")
-open class BuoyBlock(settings: Properties): Block(settings), BlockEntityProvider, SimpleWaterloggedBlcok {
+open class BuoyBlock(settings: Properties): Block(settings), EntityBlock, SimpleWaterloggedBlock {
     init {
-        defaultBlockState() = stateManager.defaultBlockState()
-            .with(Properties.WATERLOGGED, false)
+        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false))
     }
 
     override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
         return false
     }
 
-    override fun getRenderType(state: BlockState): BlockRenderType {
-        return BlockRenderType.ENTITYBLOCK_ANIMATED
+    override fun getRenderShape(state: BlockState): RenderShape {
+        return RenderShape.ENTITYBLOCK_ANIMATED
     }
 
-    override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return BuoyBlockEntity(pos, state)
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState {
-        val waterlogged = ctx.level.getFluidState(ctx.clickedPos).fluid == Fluids.WATER
+        val waterlogged = ctx.level.getFluidState(ctx.clickedPos) == Fluids.WATER
         return defaultBlockState()
-            .with(Properties.WATERLOGGED, waterlogged)
-            .with(FACING, ctx.horizontalPlayerFacing.rotateYClockwise())
+            .setValue(WATERLOGGED, waterlogged)
+            .setValue(FACING, ctx.horizontalDirection.clockWise)
     }
 
     override fun getFluidState(state: BlockState): FluidState {
-        return if (state.get(Properties.WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
+        return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
     override fun updateShape(
@@ -65,15 +69,15 @@ open class BuoyBlock(settings: Properties): Block(settings), BlockEntityProvider
         else Blocks.AIR.defaultBlockState()
     }
 
-    override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
-        builder.add(Properties.WATERLOGGED, FACING)
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+        builder.add(WATERLOGGED, FACING)
     }
 
     override fun getShape(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext?
+        context: CollisionContext
     ): VoxelShape {
         return SHAPE
     }
@@ -92,8 +96,8 @@ open class BuoyBlock(settings: Properties): Block(settings), BlockEntityProvider
         return placedOn.fluidState.`is`(Fluids.WATER) && isAirAbove
     }
 
-    override fun rotate(state: BlockState, rotation: BlockRotation): BlockState {
-        return state.with(FACING, rotation.rotate(state.get(FACING) as Direction)) as BlockState
+    override fun rotate(state: BlockState, rotation: Rotation): BlockState {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING) as Direction)) as BlockState
     }
 
     companion object {
@@ -102,7 +106,7 @@ open class BuoyBlock(settings: Properties): Block(settings), BlockEntityProvider
         private val CUBE_SHAPE: VoxelShape = box(0.5, 3.0, 0.5, 15.5, 16.0, 15.5)
         private val POLE_SHAPE: VoxelShape = box(6.0, 16.0, 6.0, 10.0, 42.0, 10.0)
 
-        private val SHAPE: VoxelShape = Shapes.union(CUBE_SHAPE, POLE_SHAPE)
-        private val COLLISION_SHAPE: VoxelShape = Shapes.union(CUBE_SHAPE, POLE_SHAPE)
+        private val SHAPE: VoxelShape = Shapes.or(CUBE_SHAPE, POLE_SHAPE)
+        private val COLLISION_SHAPE: VoxelShape = Shapes.or(CUBE_SHAPE, POLE_SHAPE)
     }
 }

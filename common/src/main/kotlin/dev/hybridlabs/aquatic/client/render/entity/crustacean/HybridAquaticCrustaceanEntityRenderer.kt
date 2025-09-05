@@ -25,7 +25,7 @@ open class HybridAquaticCrustaceanEntityRenderer<T : HybridAquaticCrustaceanEnti
     }
 
     init {
-        if (canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
+        if (canGlow) addRenderType(AutoGlowingGeoLayer(this))
     }
 
     override fun getDeathMaxRotation(animatable: T): Float {
