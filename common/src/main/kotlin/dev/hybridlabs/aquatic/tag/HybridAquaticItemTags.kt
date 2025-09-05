@@ -2,8 +2,7 @@
 
 package dev.hybridlabs.aquatic.tag
 
-import dev.hybridlabs.aquatic.HybridAquatic
-import net.fabricmc.fabric.impl.tag.convention.TagRegistration
+import dev.hybridlabs.aquatic.Constants
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
@@ -40,6 +39,6 @@ object HybridAquaticItemTags {
     }
 
     private fun createConventional(id: String): TagKey<Item> {
-        return TagRegistration.ITEM_TAG_REGISTRATION.registerCommon(id)
+		return TagKey.create(Registries.ITEM, ResourceLocation("c", id));
     }
 }
