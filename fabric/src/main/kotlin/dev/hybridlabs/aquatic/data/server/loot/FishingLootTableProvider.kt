@@ -142,7 +142,7 @@ class FishingLootTableProvider(output: FabricDataOutput) :
                                 .setWeight(2)
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.TOADFISH.get())
+                            LootItem.lootTableItem(HybridAquaticItems.BLOWFISH.get())
                                 .setWeight(1)
                         )
                         .add(

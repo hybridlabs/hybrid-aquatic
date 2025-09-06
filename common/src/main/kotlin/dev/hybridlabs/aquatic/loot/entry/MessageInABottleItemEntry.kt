@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.loot.entry
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonObject
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
-import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem
@@ -30,9 +29,9 @@ class MessageInABottleItemEntry(
 
     public override fun createItemStack(consumer: Consumer<ItemStack?>, context: LootContext) {
         val world = context.level
-        val random = context.random()()
+        val random = context.random
         val registryManager = world.registryAccess()
-        val registry = registryManager.registryOrThrow<SeaMessage>(HybridAquaticRegistryKeys.SEA_MESSAGE)
+        val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
         registry.getRandom(random).ifPresent { messageEntry ->
             val message = messageEntry.value()
 

@@ -80,7 +80,7 @@ sourceSets.main.java.srcDirs += project(":common").file('src/main/java')
 dependencies {
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
-    modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
+    //modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
     implementation 'org.jetbrains:annotations:25.0.0'
     implementation 'thedarkcolour:kotlinforforge:4.11.0'
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0"))

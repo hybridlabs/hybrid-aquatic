@@ -14,30 +14,17 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FogType;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.List;
-
 @Mixin(FogRenderer.class)
 public class FogRendererMixin {
-
-    @Shadow
-    private static float fogRed, fogGreen, fogBlue;
-    @Mutable
-    @Final
-    @Shadow
-    private static List<FogRenderer.MobEffectFogFunction> MOB_EFFECT_FOG;
 
     @Inject(method = "setupFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;" +
             "setShaderFogStart(F)V"), locals = LocalCapture.CAPTURE_FAILHARD)
@@ -47,15 +34,12 @@ public class FogRendererMixin {
 
         if (entity instanceof LocalPlayer clientPlayerEntity && cameraSubmersionType == FogType.WATER) {
             Level world = clientPlayerEntity.level();
-            MobEffectInstance clarityEffect =
-                    clientPlayerEntity.getEffect((HybridAquaticMobEffects.INSTANCE.getCLARITY()).get());
+            MobEffectInstance clarityEffect = clientPlayerEntity.getEffect(HybridAquaticMobEffects.INSTANCE.getCLARITY().get());
             MobEffectInstance conduitEffect = clientPlayerEntity.getEffect(MobEffects.CONDUIT_POWER);
-            MobEffectInstance thalassophobiaEffect =
-                    clientPlayerEntity.getEffect((HybridAquaticMobEffects.INSTANCE.getTHALASSOPHOBIA()).get());
+            MobEffectInstance thalassophobiaEffect = clientPlayerEntity.getEffect(HybridAquaticMobEffects.INSTANCE.getTHALASSOPHOBIA().get());
 
-            var livingEntity = (LivingEntity) clientPlayerEntity;
             if (clarityEffect != null) {
-                new ClarityFogModifier().setupFog(fogData, livingEntity, clarityEffect, viewDistance, tickDelta);
+                new ClarityFogModifier().setupFog(fogData, clientPlayerEntity, clarityEffect, viewDistance, tickDelta);
             } else if (conduitEffect != null) {
                 new ConduitPowerFogModifier().setupFog(fogData, clientPlayerEntity, conduitEffect, viewDistance,
                         tickDelta);
@@ -65,9 +49,9 @@ public class FogRendererMixin {
             } else {
                 fogData.start = -8.0F;
                 int topY = world.getSeaLevel();
-                float fogStep = (float) (topY - camera.getPosition().y) / 48.0f;
-                fogData.end = Mth.lerp(fogStep, 80.0f, 12.0f);
-                fogData.end *= Math.max(0.25F, clientPlayerEntity.getWaterVision());
+                float fogStep = (float) (topY - camera.getPosition().y) / 64.0f;
+                fogData.end = Mth.lerp(fogStep, 80.0f, -64.0f);
+                fogData.end *= Math.max(0.5F, clientPlayerEntity.getWaterVision());
                 Holder<Biome> registryEntry = world.getBiome(clientPlayerEntity.blockPosition());
                 if (registryEntry.is(BiomeTags.HAS_CLOSER_WATER_FOG)) {
                     fogData.end *= 1.0F;
@@ -77,7 +61,7 @@ public class FogRendererMixin {
                     fogData.end = viewDistance;
                     fogData.shape = FogShape.SPHERE;
                 }
-                fogData.end = Math.max(fogData.end, 12.0f);
+                fogData.end = Math.max(fogData.end, 16.0f);
             }
         }
     }

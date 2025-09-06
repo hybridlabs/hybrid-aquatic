@@ -18,8 +18,8 @@ import net.minecraft.world.level.levelgen.Heightmap
 /**
  * Registers spawn restrictions for all entities when initialised.
  */
-object SpawnPlacementsRegistry {
-    fun registerSpawnPlacementss() {
+object SpawnRestrictionRegistry {
+    fun registerSpawnRestrictions() {
         // shallow fish
         setOf(
             HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),

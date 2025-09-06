@@ -18,7 +18,7 @@ import java.util.function.Supplier
 class MoonJellyfishArmorItem(material: ArmorMaterial, type: Type, settings: Properties) :
     ArmorItem(material, type, settings), GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
-    private val renderProvider: Supplier<Any> = GeoItem.mak(this)
+    private val renderProvider: Supplier<Any> = GeoItem.makeRenderer(this)
 
     override fun createRenderer(consumer: Consumer<Any>) {
         consumer.accept(GeoRenderProviderStorage.moonjellyfishArmorRenderProvider.invoke())

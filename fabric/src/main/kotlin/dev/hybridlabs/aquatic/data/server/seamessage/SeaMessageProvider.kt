@@ -1,20 +1,24 @@
 package dev.hybridlabs.aquatic.data.server.seamessage
 
-import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
-import net.minecraft.registry.RegistryKey
-import net.minecraft.registry.RegistryWrapper
+import net.minecraft.core.HolderLookup
+import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
-class SeaMessageProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricDynamicRegistryProvider(output, registriesFuture) {
-    override fun configure(registries: RegistryWrapper.WrapperLookup, entries: Entries) {
+class SeaMessageProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
+    FabricDynamicRegistryProvider(output, registriesFuture) {
+    override fun configure(registries: HolderLookup.Provider, entries: Entries) {
         BUILT_IN.forEach { message ->
-            val key = RegistryKey.of(HybridAquaticRegistryKeys.SEA_MESSAGE, ResourceLocation(Constants.MOD_ID, message.id))
+            val key = ResourceKey.create(
+                HybridAquaticRegistryKeys.SEA_MESSAGE,
+                ResourceLocation(Constants.MOD_ID, message.id)
+            )
             entries.add(key, SeaMessage(message.translationKey, message.englishTitle != null, message.infinite, Optional.ofNullable(message.author)))
         }
     }

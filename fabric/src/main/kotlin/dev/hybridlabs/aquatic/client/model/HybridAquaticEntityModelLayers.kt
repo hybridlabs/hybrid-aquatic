@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
 import dev.hybridlabs.aquatic.mixin.client.SkullBlockEntityRendererMixin
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.TexturedModelProvider
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.TexturedModelDataProvider
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
 import net.minecraft.client.model.SkullModelBase
 import net.minecraft.client.model.geom.EntityModelSet
@@ -28,7 +28,7 @@ object HybridAquaticEntityModelLayers {
     private val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie", TigerSharkPlushieModel::createModelData)
     private val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie", WhaleSharkPlushieModel::createModelData)
 
-    private fun register(id: String, modelProvider: TexturedModelProvider): ModelLayerLocation {
+    private fun register(id: String, modelProvider: TexturedModelDataProvider): ModelLayerLocation {
         val layer = ModelLayerLocation(ResourceLocation(Constants.MOD_ID, id), "main")
         registerModelLayer(layer, modelProvider)
         return layer

@@ -6,25 +6,24 @@ import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
-import net.minecraft.registry.RegistryWrapper
-import net.minecraft.world.Heightmap
-import net.minecraft.world.gen.feature.PlacedFeature
-import net.minecraft.world.gen.feature.PlacedFeatures
-import net.minecraft.world.gen.placementmodifier.*
+import net.minecraft.core.HolderLookup
+import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.world.level.levelgen.Heightmap
+import net.minecraft.world.level.levelgen.placement.*
 import java.util.concurrent.CompletableFuture
 
 class PlacedFeatureProvider(
     output: FabricDataOutput,
-    registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>
+    registriesFuture: CompletableFuture<HolderLookup.Provider>
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
-    override fun configure(registries: RegistryWrapper.WrapperLookup, entries: Entries) {
+    override fun configure(registries: HolderLookup.Provider, entries: Entries) {
 
         fun seaweedModifier(count: Int): List<PlacementModifier> {
             return listOf(
-                SquarePlacementModifier.of(),
-                PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-                CountPlacementModifier.of(count),
-                BiomePlacementModifier.of()
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                CountPlacement.of(count),
+                BiomeFilter.biome()
             )
         }
 
@@ -34,10 +33,10 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.ANEMONE_PATCH),
                 listOf(
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-                    CountPlacementModifier.of(2),
-                    BiomePlacementModifier.of(),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    CountPlacement.of(2),
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -47,10 +46,10 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.GREEN_ANEMONE_PATCH),
                 listOf(
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-                    CountPlacementModifier.of(2),
-                    BiomePlacementModifier.of(),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    CountPlacement.of(2),
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -60,10 +59,10 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.BULL_KELP),
                 listOf(
-                    NoiseBasedCountPlacementModifier.of(120, 80.0, 0.0),
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-                    BiomePlacementModifier.of(),
+                    NoiseBasedCountPlacement.of(120, 80.0, 0.0),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -74,10 +73,10 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.SARGASSUM),
                 listOf(
-                    NoiseBasedCountPlacementModifier.of(120, 80.0, 0.0),
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-                    BiomePlacementModifier.of(),
+                    NoiseBasedCountPlacement.of(120, 80.0, 0.0),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -87,10 +86,10 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.FLOATING_SARGASSUM),
                 listOf(
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
-                    NoiseBasedCountPlacementModifier.of(30, 80.0, 0.0),
-                    BiomePlacementModifier.of(),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    NoiseBasedCountPlacement.of(30, 80.0, 0.0),
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -100,10 +99,10 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.WATER_LETTUCE),
                 listOf(
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
-                    CountPlacementModifier.of(5),
-                    BiomePlacementModifier.of(),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    CountPlacement.of(5),
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -113,10 +112,10 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD),
                 listOf(
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
-                    CountPlacementModifier.of(5),
-                    BiomePlacementModifier.of(),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    CountPlacement.of(5),
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -126,10 +125,10 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.GLOWING_PLANKTON),
                 listOf(
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
-                    NoiseBasedCountPlacementModifier.of(80, 100.0, 0.0),
-                    BiomePlacementModifier.of(),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    NoiseBasedCountPlacement.of(80, 100.0, 0.0),
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -139,10 +138,10 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH),
                 listOf(
-                    NoiseBasedCountPlacementModifier.of(10, 80.0, 0.0),
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-                    BiomePlacementModifier.of(),
+                    NoiseBasedCountPlacement.of(10, 80.0, 0.0),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -152,10 +151,10 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH),
                 listOf(
-                    NoiseBasedCountPlacementModifier.of(400, 100.0, 0.0),
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-                    BiomePlacementModifier.of(),
+                    NoiseBasedCountPlacement.of(400, 100.0, 0.0),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -174,10 +173,10 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.GIANT_CLAM_PATCH),
                 listOf(
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-                    CountPlacementModifier.of(1),
-                    BiomePlacementModifier.of(),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    CountPlacement.of(1),
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -188,9 +187,9 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.TUBE_SPONGE_PATCH),
                 listOf(
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP,
-                    CountPlacementModifier.of(1),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    CountPlacement.of(1),
                 )
             )
         )
@@ -201,9 +200,9 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE),
                 listOf(
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
-                    RarityFilterPlacementModifier.of(150),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    RarityFilter.onAverageOnceEvery(150),
                 )
             )
         )
@@ -214,11 +213,11 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH),
                 listOf(
-                    SquarePlacementModifier.of(),
-                    PlacedFeatures.BOTTOM_TO_120_RANGE,
-                    SurfaceThresholdFilterPlacementModifier.of(Heightmap.Types.OCEAN_FLOOR_WG, Int.MIN_VALUE, -2),
-                    NoiseBasedCountPlacementModifier.of(10, 100.0, 0.0),
-                    BiomePlacementModifier.of(),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
+                    SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Int.MIN_VALUE, -2),
+                    NoiseBasedCountPlacement.of(10, 100.0, 0.0),
+                    BiomeFilter.biome()
                 )
             )
         )

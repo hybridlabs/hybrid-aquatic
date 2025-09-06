@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.Constants
-import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
@@ -253,7 +252,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.BLUEFIN_TUNA.get(),
             HybridAquaticItems.UNICORNFISH.get(),
             HybridAquaticItems.STONEFISH.get(),
-            HybridAquaticItems.TOADFISH.get(),
+            HybridAquaticItems.BLOWFISH.get(),
             HybridAquaticItems.PARROTFISH.get(),
             HybridAquaticItems.SUNFISH.get(),
             HybridAquaticItems.KOI.get(),

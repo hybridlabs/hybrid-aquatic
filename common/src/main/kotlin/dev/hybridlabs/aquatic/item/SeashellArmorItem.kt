@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.client.GeoRenderProviderStorage
+import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
 import software.bernie.geckolib.animatable.GeoItem

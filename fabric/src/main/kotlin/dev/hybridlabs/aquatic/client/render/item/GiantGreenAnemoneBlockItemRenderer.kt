@@ -1,19 +1,21 @@
-package dev.hybridlabs.aquatic.client.renderer.item
+package dev.hybridlabs.aquatic.client.render.item
 
+import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.HybridAquaticClient
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.GiantGreenAnemoneBlockEntity
-import dev.hybridlabs.aquatic.client.renderer.block.entity.GiantGreenAnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.block.entity.GiantGreenAnemoneBlockEntityRenderer
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry.DynamicItemRenderer
 import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.model.json.ItemDisplayContext
-import net.minecraft.client.util.math.PoseStack
-import net.minecraft.item.ItemStack
-import net.minecraft.util.math.BlockPos
+import net.minecraft.core.BlockPos
+import net.minecraft.world.item.ItemDisplayContext
+import net.minecraft.world.item.ItemStack
 
 class GiantGreenAnemoneBlockItemRenderer : DynamicItemRenderer {
-    private val giantGreenAnemoneBlockEntity = GiantGreenAnemoneBlockEntity(BlockPos.ORIGIN, HybridAquaticBlocks.GIANT_GREEN_ANEMONE.defaultBlockState())
-    private val renderer = GiantGreenAnemoneBlockEntityRenderer(HybridAquaticClient.createBloc.EntityRendererProviderContext())
+    private val giantGreenAnemoneBlockEntity =
+        GiantGreenAnemoneBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get().defaultBlockState())
+    private val renderer =
+        GiantGreenAnemoneBlockEntityRenderer(HybridAquaticClient.createBlockEntityRendererProviderContext())
 
     override fun render(
         stack: ItemStack,

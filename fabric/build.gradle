@@ -46,7 +46,7 @@ dependencies {
     implementation 'org.jetbrains:annotations:25.0.0'
 
     //We still have to load the loader-specific version of any mods included in common
-    modImplementation "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
+    modApi "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
     include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")
     modApi("com.terraformersmc:modmenu:${modmenu_version}")
     include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")

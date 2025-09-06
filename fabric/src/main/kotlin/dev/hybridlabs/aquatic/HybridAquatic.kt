@@ -77,6 +77,7 @@ object HybridAquatic : ModInitializer {
         LootTableModifications.registerLootModifications()
 
         FeatureBiomeModifications.registerBiomeModifications()
+
         SpawnRestrictionRegistry.registerSpawnRestrictions()
 
         initializeConfig()

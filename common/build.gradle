@@ -7,9 +7,7 @@ plugins {
 legacyForge {
     validateAccessTransformers = false
     mcpVersion = minecraft_version
-    if (file("src/main/resources/META-INF/accesstransformer.cfg").exists()) {
-        accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
-    }
+    accessTransformers = [project(':common').file("src/main/resources/META-INF/accesstransformer.cfg")]
     parchment {
         minecraftVersion = parchment_minecraft
         mappingsVersion = parchment_version
@@ -64,7 +62,7 @@ dependencies {
     implementation 'org.jetbrains:annotations:25.0.0'
 
     //We load the Forge version of any included mod dependencies
-    modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
+    modApi "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
     commonKotlinOut files("src/main/kotlin")
     commonJavaOut files("src/main/java/")
 }

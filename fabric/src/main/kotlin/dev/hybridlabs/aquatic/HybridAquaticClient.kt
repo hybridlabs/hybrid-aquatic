@@ -5,17 +5,21 @@ package dev.hybridlabs.aquatic
 import com.mojang.brigadier.CommandDispatcher
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.client.GeoRenderProviderStorage
 import dev.hybridlabs.aquatic.client.command.RandomFishCommand
 import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
+import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
 import dev.hybridlabs.aquatic.client.render.armor.*
 import dev.hybridlabs.aquatic.client.render.block.entity.*
-import dev.hybridlabs.aquatic.client.renderer.armor.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
-import dev.hybridlabs.aquatic.client.renderer.item.*
+import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.BuoyBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.GiantGreenAnemoneBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
+import dev.hybridlabs.aquatic.client.renderer.item.StrawberryAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
@@ -23,7 +27,6 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.HumanoidModel
-import net.minecraft.client.renderer.RenderStateShard
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
@@ -86,88 +89,88 @@ object HybridAquaticClient : ClientModInitializer {
         ItemTooltipCallback.EVENT.register(FishingNetTooltip())
     }
 
-    private fun registerRenderShapes(registry: RenderStateShard = RenderStateShard.) {
-        registry.putBlocks(
+    private fun registerRenderShapes() {
+        ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.translucent(),
-            HybridAquaticBlocks.ANEMONE,
-            HybridAquaticBlocks.GIANT_GREEN_ANEMONE,
-            HybridAquaticBlocks.STRAWBERRY_ANEMONE,
-            HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE,
+            HybridAquaticBlocks.ANEMONE.get(),
+            HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(),
+            HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(),
+            HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get(),
         )
-        registry.putBlocks(
+        ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.cutout(),
-            HybridAquaticBlocks.RED_ALGAE,
-            HybridAquaticBlocks.TALL_RED_ALGAE,
+            HybridAquaticBlocks.RED_ALGAE.get(),
+            HybridAquaticBlocks.TALL_RED_ALGAE.get(),
 
-            HybridAquaticBlocks.BULL_KELP,
-            HybridAquaticBlocks.BULL_KELP_PLANT,
+            HybridAquaticBlocks.BULL_KELP.get(),
+            HybridAquaticBlocks.BULL_KELP_PLANT.get(),
 
-            HybridAquaticBlocks.SARGASSUM,
-            HybridAquaticBlocks.SARGASSUM_PLANT,
-            HybridAquaticBlocks.FLOATING_SARGASSUM,
+            HybridAquaticBlocks.SARGASSUM.get(),
+            HybridAquaticBlocks.SARGASSUM_PLANT.get(),
+            HybridAquaticBlocks.FLOATING_SARGASSUM.get(),
 
-            HybridAquaticBlocks.WATER_LETTUCE,
-            HybridAquaticBlocks.JUNGLE_LILY_PAD,
+            HybridAquaticBlocks.WATER_LETTUCE.get(),
+            HybridAquaticBlocks.JUNGLE_LILY_PAD.get(),
 
-            HybridAquaticBlocks.GLOWING_PLANKTON,
+            HybridAquaticBlocks.GLOWING_PLANKTON.get(),
 
-            HybridAquaticBlocks.SEA_LETTUCE,
-            HybridAquaticBlocks.TALL_SEA_LETTUCE,
+            HybridAquaticBlocks.SEA_LETTUCE.get(),
+            HybridAquaticBlocks.TALL_SEA_LETTUCE.get(),
 
-            HybridAquaticBlocks.CRAB_POT,
-            HybridAquaticBlocks.GIANT_CLAM,
-            HybridAquaticBlocks.TUBE_WORM,
+            HybridAquaticBlocks.CRAB_POT.get(),
+            HybridAquaticBlocks.GIANT_CLAM.get(),
+            HybridAquaticBlocks.TUBE_WORM.get(),
 
-            HybridAquaticBlocks.LOPHELIA_CORAL,
-            HybridAquaticBlocks.LOPHELIA_CORAL_FAN,
-            HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN,
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL,
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN,
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN,
+            HybridAquaticBlocks.LOPHELIA_CORAL.get(),
+            HybridAquaticBlocks.LOPHELIA_CORAL_FAN.get(),
+            HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL.get(),
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.SUN_CORAL,
-            HybridAquaticBlocks.SUN_CORAL_FAN,
-            HybridAquaticBlocks.SUN_CORAL_WALL_FAN,
-            HybridAquaticBlocks.DEAD_SUN_CORAL,
-            HybridAquaticBlocks.DEAD_SUN_CORAL_FAN,
-            HybridAquaticBlocks.DEAD_SUN_CORAL_WALL_FAN,
+            HybridAquaticBlocks.SUN_CORAL.get(),
+            HybridAquaticBlocks.SUN_CORAL_FAN.get(),
+            HybridAquaticBlocks.SUN_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.DEAD_SUN_CORAL.get(),
+            HybridAquaticBlocks.DEAD_SUN_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_SUN_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BUTTON_CORAL,
-            HybridAquaticBlocks.BUTTON_CORAL_FAN,
-            HybridAquaticBlocks.BUTTON_CORAL_WALL_FAN,
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL,
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL_FAN,
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL_WALL_FAN,
+            HybridAquaticBlocks.BUTTON_CORAL.get(),
+            HybridAquaticBlocks.BUTTON_CORAL_FAN.get(),
+            HybridAquaticBlocks.BUTTON_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.DEAD_BUTTON_CORAL.get(),
+            HybridAquaticBlocks.DEAD_BUTTON_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_BUTTON_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.THORN_CORAL,
-            HybridAquaticBlocks.THORN_CORAL_FAN,
-            HybridAquaticBlocks.THORN_CORAL_WALL_FAN,
-            HybridAquaticBlocks.DEAD_THORN_CORAL,
-            HybridAquaticBlocks.DEAD_THORN_CORAL_FAN,
-            HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN,
+            HybridAquaticBlocks.THORN_CORAL.get(),
+            HybridAquaticBlocks.THORN_CORAL_FAN.get(),
+            HybridAquaticBlocks.THORN_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.DEAD_THORN_CORAL.get(),
+            HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.DRIFTWOOD_DOOR,
-            HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR,
-            HybridAquaticBlocks.GLOWSTICK,
-            HybridAquaticBlocks.WALL_GLOWSTICK,
+            HybridAquaticBlocks.DRIFTWOOD_DOOR.get(),
+            HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR.get(),
+            HybridAquaticBlocks.GLOWSTICK.get(),
+            HybridAquaticBlocks.WALL_GLOWSTICK.get(),
         )
     }
 
     private fun registerBlockEntityRenderers() {
-        BlockEntityRenderers.register(HybridAquaticBlockEntityTypes.ANEMONE, ::AnemoneBlockEntityRenderer)
+        BlockEntityRenderers.register(HybridAquaticBlockEntityTypes.ANEMONE.get(), ::AnemoneBlockEntityRenderer)
         BlockEntityRenderers.register(
-            HybridAquaticBlockEntityTypes.GIANT_GREEN_ANEMONE,
+            HybridAquaticBlockEntityTypes.GIANT_GREEN_ANEMONE.get(),
             ::GiantGreenAnemoneBlockEntityRenderer
         )
         BlockEntityRenderers.register(
-            HybridAquaticBlockEntityTypes.STRAWBERRY_ANEMONE,
+            HybridAquaticBlockEntityTypes.STRAWBERRY_ANEMONE.get(),
             ::StrawberryAnemoneBlockEntityRenderer
         )
         BlockEntityRenderers.register(
-            HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE,
+            HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE.get(),
             ::MessageInABottleBlockEntityRenderer
         )
-        BlockEntityRenderers.register(HybridAquaticBlockEntityTypes.BUOY, ::BuoyBlockEntityRenderer)
+        BlockEntityRenderers.register(HybridAquaticBlockEntityTypes.BUOY.get(), ::BuoyBlockEntityRenderer)
     }
 
     private fun registerEntityRenderers() {

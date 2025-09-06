@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.data
 
-import dev.hybridlabs.aquatic.HybridAquatic
-import dev.hybridlabs.aquatic.block.SeaMessage
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.data.client.LanguageProvider
 import dev.hybridlabs.aquatic.data.client.ModelProvider
 import dev.hybridlabs.aquatic.data.server.AdvancementProvider
@@ -44,7 +43,7 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
     }
 
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
-        registryBuilder.add<SeaMessage>(HybridAquaticRegistryKeys.SEA_MESSAGE) {}
+        registryBuilder.add(HybridAquaticRegistryKeys.SEA_MESSAGE) {}
     }
 
     fun <T> filterHybridAquatic(registry: Registry<T>): (T & Any) -> Boolean {

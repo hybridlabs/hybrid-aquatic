@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.data.server.seamessage
 
-import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.Constants
 
 data class GeneratedSeaMessageData(
     /**

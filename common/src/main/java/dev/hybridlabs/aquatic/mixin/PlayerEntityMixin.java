@@ -1,24 +1,30 @@
 package dev.hybridlabs.aquatic.mixin;
 
 import com.google.common.collect.ImmutableList;
+
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
-import dev.hybridlabs.aquatic.effect.HybridAquaticStatusEffects;
+import dev.hybridlabs.aquatic.access.Entityish;
+import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects;
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import dev.hybridlabs.aquatic.item.HybridAquaticToolMaterials;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolItem;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.util.collection.DefaultedList;
+
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.level.Level;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -30,11 +36,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
+@Mixin(Player.class)
+public abstract class PlayerEntityMixin extends Entity
+        implements CustomPlayerEntityData, Entityish {
 
-    @Shadow
-    protected boolean isSubmergedInWater;
+    public PlayerEntityMixin(EntityType<?> entityType, Level level) {
+        super(entityType, level);
+    }
 
     @Shadow
     public abstract boolean isSwimming();
@@ -55,38 +63,49 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
         return haHurtTime;
     }
 
-    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-    private void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
+    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
+    private void readCustomDataFromNbt(CompoundTag nbt, CallbackInfo ci) {
         hybrid_aquatic$setHurtTime(nbt.getInt("haHurtTime"));
     }
 
-    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-    private void writeCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
+    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
+    private void writeCustomDataToNbt(CompoundTag nbt, CallbackInfo ci) {
         nbt.putInt("haHurtTime", hybrid_aquatic$getHurtTime());
     }
 
-    @Inject(method = "shouldSwimInFluids", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isAffectedByFluids", at = @At("HEAD"), cancellable = true)
     private void overrideShouldSwimInFluids(CallbackInfoReturnable<Boolean> ci) {
-        if (isWearingDivingBoots && !isSwimming() && isSubmergedInWater) {
+        if (isWearingDivingBoots && !isSwimming() && isUnderWater()) {
             ci.setReturnValue(false);
         }
     }
 
     @Inject(
-            method = "damage",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/player/PlayerEntity;getWorld()Lnet/minecraft/world/World;",
-                    ordinal = 0,
-                    shift = At.Shift.BEFORE
-            )
-    )
+            method = "hurt",
+            at =
+                    @At(
+                            value = "INVOKE",
+                            target =
+                                    "Lnet/minecraft/world/entity/player/Player;level()Lnet/minecraft/world/level/Level;",
+                            ordinal = 0,
+                            shift = At.Shift.BEFORE))
+    private void setCustomHurtTimeOnDamage(
+            DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        Player object = (Player) (Object) this;
 
-    private void setCustomHurtTimeOnDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        PlayerEntity object = ((PlayerEntity) (Object) this);
-
-        if (object.isTouchingWater()) {
-            LivingEntity foundEntity = object.getWorld().getClosestEntity(HybridAquaticSharkEntity.class, TargetPredicate.createNonAttackable().setBaseMaxDistance(32).setPredicate(Entity::isSubmergedInWater), object, object.getX(), object.getEyeY(), object.getZ(), object.getBoundingBox().expand(16));
+        if (object.isInWater()) {
+            LivingEntity foundEntity =
+                    object.level()
+                            .getNearestEntity(
+                                    HybridAquaticSharkEntity.class,
+                                    TargetingConditions.forNonCombat()
+                                            .range(32)
+                                            .selector(Entity::isUnderWater),
+                                    object,
+                                    object.getX(),
+                                    object.getEyeY(),
+                                    object.getZ(),
+                                    object.getBoundingBox().inflate(16));
             if (foundEntity != null) hybrid_aquatic$setHurtTime(200);
         }
     }
@@ -109,33 +128,46 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
 
     @Unique
     private void updateDivingHelmet() {
-        var player = (PlayerEntity) (Object) this;
-        ItemStack itemStack = player.getEquippedStack(EquipmentSlot.HEAD);
+        var player = (Player) (Object) this;
+        ItemStack itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
 
-        if (itemStack.isOf(HybridAquaticItems.INSTANCE.getDIVING_HELMET())) {
-            if (!player.isSubmergedIn(FluidTags.WATER)) {
-                player.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 600, 0, false, false, false));
+        if (itemStack.is(HybridAquaticItems.INSTANCE.getDIVING_HELMET().get())) {
+            if (!player.isEyeInFluid(FluidTags.WATER)) {
+                player.addEffect(
+                        new MobEffectInstance(
+                                MobEffects.WATER_BREATHING, 600, 0, false, false, false));
             } else {
-                player.addStatusEffect(new StatusEffectInstance(HybridAquaticStatusEffects.INSTANCE.getCLARITY(), 600, 0, false, false, false));
+                player.addEffect(
+                        new MobEffectInstance(
+                                HybridAquaticMobEffects.INSTANCE.getCLARITY().get(),
+                                600,
+                                0,
+                                false,
+                                false,
+                                false));
             }
         }
     }
 
     @Unique
     private void updateDivingBoots() {
-        var player = (PlayerEntity) (Object) this;
-        ItemStack itemStack = player.getEquippedStack(EquipmentSlot.FEET);
-        isWearingDivingBoots = itemStack.isOf(HybridAquaticItems.INSTANCE.getDIVING_BOOTS());
+        var player = (Player) (Object) this;
+        ItemStack itemStack = player.getItemBySlot(EquipmentSlot.FEET);
+        isWearingDivingBoots = itemStack.is(HybridAquaticItems.INSTANCE.getDIVING_BOOTS().get());
     }
 
 
     @Unique
     private void updateTurtleChestplate() {
-        var player = (PlayerEntity) (Object) this;
-        var itemStack = player.getEquippedStack(EquipmentSlot.CHEST);
-        if (itemStack.isOf(HybridAquaticItems.INSTANCE.getTURTLE_CHESTPLATE())) {
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 200, 0, false, false, true));
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 200, 0, false, false, true));
+        var player = (Player) (Object) this;
+        var itemStack = player.getItemBySlot(EquipmentSlot.CHEST);
+        if (itemStack.is(HybridAquaticItems.INSTANCE.getTURTLE_CHESTPLATE().get())) {
+            player.addEffect(
+                    new MobEffectInstance(
+                            MobEffects.DAMAGE_RESISTANCE, 200, 0, false, false, true));
+            player.addEffect(
+                    new MobEffectInstance(
+                            MobEffects.MOVEMENT_SLOWDOWN, 200, 0, false, false, true));
         }
     }
 
@@ -144,18 +176,19 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
 
     @Unique
     private void repairCoralTools() {
-        var player = (PlayerEntity) (Object) this;
+        var player = (Player) (Object) this;
         var inventory = player.getInventory();
 
-        if (player.isSubmergedIn(FluidTags.WATER)) {
+        if (player.isEyeInFluid(FluidTags.WATER)) {
             if (coralRepairTick > 5) {
-                List<DefaultedList<ItemStack>> combinedInventory = ImmutableList.of(inventory.main, inventory.offHand);
+                List<NonNullList<ItemStack>> combinedInventory =
+                        ImmutableList.of(inventory.items, inventory.offhand);
                 List<ItemStack> coralItems = new ArrayList<>();
                 for (List<ItemStack> list : combinedInventory) {
                     for (ItemStack itemStack : list) {
-                        if (itemStack.getItem() instanceof ToolItem tool &&
-                                tool.getMaterial() == HybridAquaticToolMaterials.CORAL &&
-                                itemStack.isDamaged()) {
+                        if (itemStack.getItem() instanceof TieredItem tool
+                                && tool.getTier() == HybridAquaticToolMaterials.CORAL
+                                && itemStack.isDamaged()) {
                             coralItems.add(itemStack);
                         }
                     }
@@ -163,8 +196,8 @@ public abstract class PlayerEntityMixin implements CustomPlayerEntityData {
 
                 if (!coralItems.isEmpty()) {
                     ItemStack item = coralItems.get(player.getRandom().nextInt(coralItems.size()));
-                    item.setDamage(item.getDamage() - 1);
-                    inventory.markDirty();
+                    item.setDamageValue(item.getDamageValue() - 1);
+                    inventory.setChanged();
                 }
                 coralRepairTick = 0;
             }

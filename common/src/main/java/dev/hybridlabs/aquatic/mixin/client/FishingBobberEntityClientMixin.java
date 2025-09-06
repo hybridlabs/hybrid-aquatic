@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import dev.hybridlabs.aquatic.platform.ClientServices;
+import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -19,12 +19,11 @@ public abstract class FishingBobberEntityClientMixin {
     @Inject(method = "recreateFromPacket", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity" +
             "/projectile/FishingHook;getPlayerOwner()Lnet/minecraft/world/entity/player/Player;"))
     private void test(ClientboundAddEntityPacket packet, CallbackInfo ci) {
-        FriendlyByteBuf packetData = PacketByteBufs.create();
+        FriendlyByteBuf packetData = new FriendlyByteBuf(Unpooled.buffer());
         packetData.writeInt(packet.getId());
 
         ResourceLocation packetId = HybridAquaticNetworking.INSTANCE.getFISHING_BOBBER_LURE();
 
-        if (ClientPlayNetworking.canSend(packetId))
-            ClientPlayNetworking.send(packetId, packetData);
+        ClientServices.PLATFORM.sendPacket(packetId, packetData);
     }
 }
