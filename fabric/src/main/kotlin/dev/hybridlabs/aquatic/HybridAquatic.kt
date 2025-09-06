@@ -53,14 +53,13 @@ object HybridAquatic : ModInitializer {
         CommonClass.init()
 
         HybridAquaticBlocks
+        HybridAquaticEntityTypes
         HybridAquaticBlockEntityTypes
 
         HybridAquaticBiomeTags
 
-        HybridAquaticEntityTypes
-
-        HybridAquaticPotions
         HybridAquaticMobEffects
+        HybridAquaticPotions
 
         HybridAquaticItems
         HybridAquaticItemGroups

@@ -6,8 +6,8 @@ import dev.hybridlabs.aquatic.client.model.entity.crustacean.HybridAquaticCrusta
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.HybridAquaticCrustaceanEntityRenderer
 import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
@@ -18,7 +18,7 @@ class HybridAquaticCrustaceanEntityLayer<T: HybridAquaticCrustaceanEntity>(
 ) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(layer: String): ResourceLocation {
-        return (geoModel as HybridAquaticCrustaceanEntityModel).getLayerTextureResource(layer)
+        return (geoModel as HybridAquaticCrustaceanEntityModel).getLayerTextureResource(layer.lowercase())
     }
 
     override fun render(

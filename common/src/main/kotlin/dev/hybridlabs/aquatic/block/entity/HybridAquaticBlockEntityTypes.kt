@@ -1,38 +1,34 @@
 package dev.hybridlabs.aquatic.block.entity
 
-import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
-import net.minecraft.Util
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.util.datafix.fixes.References
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 
 object HybridAquaticBlockEntityTypes {
-    val ANEMONE = register("anemone", ::AnemoneBlockEntity, HybridAquaticBlocks.ANEMONE.get())
+    val ANEMONE =
+        register("anemone", ::AnemoneBlockEntity, HybridAquaticBlocks.ANEMONE)
     val GIANT_GREEN_ANEMONE =
-        register("giant_green_anemone", ::GiantGreenAnemoneBlockEntity, HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get())
+        register("giant_green_anemone", ::GiantGreenAnemoneBlockEntity, HybridAquaticBlocks.GIANT_GREEN_ANEMONE)
     val STRAWBERRY_ANEMONE =
-        register("strawberry_anemone", ::StrawberryAnemoneBlockEntity, HybridAquaticBlocks.STRAWBERRY_ANEMONE.get())
+        register("strawberry_anemone", ::StrawberryAnemoneBlockEntity, HybridAquaticBlocks.STRAWBERRY_ANEMONE)
     val MESSAGE_IN_A_BOTTLE =
-        register("message_in_a_bottle", ::MessageInABottleBlockEntity, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get())
-    val BUOY = register("buoy", ::BuoyBlockEntity, HybridAquaticBlocks.BUOY.get())
+        register("message_in_a_bottle", ::MessageInABottleBlockEntity, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE)
+    val BUOY =
+        register("buoy", ::BuoyBlockEntity, HybridAquaticBlocks.BUOY)
 
-    private fun <T : BlockEntity> register(
+
+    fun <T : BlockEntity?> register(
         id: String,
-        supplier: BlockEntityType.BlockEntitySupplier<T>,
-        vararg validBlocks: Block
-    ): RegistryObject<BlockEntityType<T>> {
-        val identifier = ResourceLocation(Constants.MOD_ID, id)
-        val type = Util.fetchChoiceType(
-            References.BLOCK_ENTITY,
-            identifier.toString()
-        )!!
-        val blockEntityType = BlockEntityType(supplier, ImmutableSet.copyOf(validBlocks), type)
-        return CommonClass.BLOCK_ENTITY_TYPES.register<BlockEntityType<T>>(id) { blockEntityType }
+        factory: BlockEntityType.BlockEntitySupplier<T>, vararg validBlocks: RegistryObject<Block>?
+    ): RegistryObject<BlockEntityType<T?>> {
+
+        return CommonClass.BLOCK_ENTITY_TYPES.register(id) {
+            val blocks = validBlocks.map { block -> block?.get() }.toTypedArray()
+            val builder = BlockEntityType.Builder.of(factory, *blocks)
+            builder.build(null)
+        }
     }
 }

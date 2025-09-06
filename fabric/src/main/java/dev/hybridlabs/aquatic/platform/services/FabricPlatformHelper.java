@@ -1,11 +1,8 @@
 package dev.hybridlabs.aquatic.platform.services;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
-
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.EntityType;
@@ -18,7 +15,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
@@ -81,6 +77,6 @@ public class FabricPlatformHelper implements PlatformHelper {
     }
 
     public BlockBehaviour.Properties getBlockSettings() {
-        return FabricBlockSettings.create();
+        return BlockBehaviour.Properties.of();
     }
 }

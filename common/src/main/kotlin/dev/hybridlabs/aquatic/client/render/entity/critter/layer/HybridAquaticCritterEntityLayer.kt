@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.client.render.entity.critter.layer
 
-import com.mojang.blaze3d.platform.GlUtil.getRenderer
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.critter.HybridAquaticCritterEntityModel
@@ -19,7 +18,7 @@ class HybridAquaticCritterEntityLayer<T: HybridAquaticCritterEntity>(
 ) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(layer: String): ResourceLocation {
-        return (geoModel as HybridAquaticCritterEntityModel).getLayerTextureResource(layer)
+        return (geoModel as HybridAquaticCritterEntityModel).getLayerTextureResource(layer.lowercase())
     }
 
     override fun render(

@@ -18,7 +18,7 @@ class HybridAquaticSharkEntityLayer<T: HybridAquaticSharkEntity>(
 ) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(layer: String): ResourceLocation {
-        return (geoModel as HybridAquaticSharkEntityModel).getLayerTextureResource(layer)
+        return (geoModel as HybridAquaticSharkEntityModel).getLayerTextureResource(layer.lowercase())
     }
 
     override fun render(

@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.client.render.entity.fish.layer
 
-import com.mojang.blaze3d.platform.GlUtil.getRenderer
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.fish.HybridAquaticFishEntityModel
@@ -19,7 +18,7 @@ class HybridAquaticFishEntityLayer<T: HybridAquaticFishEntity>(
 ) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(layer: String): ResourceLocation {
-        return (geoModel as HybridAquaticFishEntityModel).getLayerTextureResource(layer)
+        return (geoModel as HybridAquaticFishEntityModel).getLayerTextureResource(layer.lowercase())
     }
 
     override fun render(

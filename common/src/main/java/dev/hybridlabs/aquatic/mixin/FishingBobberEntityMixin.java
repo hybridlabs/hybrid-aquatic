@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReceiver;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
@@ -98,12 +100,12 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
     }
 
     // Increases chance of getting treasure item with magnetic hook
-    @Inject(method = "retrieve", at = @At(value = "RETURN", target = "Lnet/minecraft/world/entity/player" + "/Player;"
-            + "getLuck()F"))
-    private void increaseLuck(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
+    @WrapOperation(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player" +
+            "/Player;getLuck()F"))
+    private float increaseLuck(Player player, Operation<Float> original) {
         if (lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK()))
-            luck += 27;
-        return luck;
+            return player.getLuck() + 27;
+        return original.call(player);
     }
 
     // Whenever we may want to replace entities we use this. This will make sure not to spawn any
