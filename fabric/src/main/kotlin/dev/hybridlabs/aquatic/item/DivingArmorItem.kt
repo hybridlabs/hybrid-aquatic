@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
 import software.bernie.geckolib.animatable.GeoItem
@@ -16,7 +15,7 @@ class DivingArmorItem(material: ArmorMaterial, type: Type, settings: Properties)
     private val renderProvider: Supplier<Any> = GeoItem.makeRenderer(this)
 
     override fun createRenderer(consumer: Consumer<Any>) {
-        consumer.accept(GeoRenderProviderStorage.divingArmorRenderProvider.invoke())
+        //consumer.accept(GeoRenderProviderStorage.divingArmorRenderProvider.invoke())
     }
 
     override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {

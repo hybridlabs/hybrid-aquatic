@@ -62,7 +62,7 @@ dependencies {
     implementation 'org.jetbrains:annotations:25.0.0'
 
     //We load the Forge version of any included mod dependencies
-    modApi "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
+    modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
     commonKotlinOut files("src/main/kotlin")
     commonJavaOut files("src/main/java/")
 }
