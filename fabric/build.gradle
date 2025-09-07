@@ -66,8 +66,10 @@ fabricApi {
         outputDirectory = file("src/generated/resources")
         client = true
     }
+    dependencies {
+        datagenOutput files(runDatagen)
+    }
 }
-
 
 loom {
     if (project(":common").file("src/main/resources/${mod_id}.accesswidener").exists()) {

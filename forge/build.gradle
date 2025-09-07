@@ -4,6 +4,18 @@ plugins {
     id 'org.jetbrains.kotlin.jvm'
 }
 
+// This config will copy the output of Fabric's runDatagen task into
+// 'src/generated/resources/fabric' when the Forge runData task is run.
+configurations.create('fabricDatagen')
+dependencies {
+    fabricDatagen project(path: ':fabric', configuration: 'datagenOutput')
+}
+tasks.register('copyDatagen', Copy) {
+    group "build"
+    from configurations.fabricDatagen // this will create a task dependency
+    into "src/generated/fabric/resources"
+}
+
 mixin {
     add(sourceSets.main, "${forge_mod_id}.refmap.json")
     config("${mod_id}.mixins.json")
@@ -20,7 +32,8 @@ legacyForge {
 
     def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
     if (at.exists()) {
-        accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
+        accessTransformers = [project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')]
+
     }
 
     parchment {
@@ -44,9 +57,8 @@ legacyForge {
         }
         data {
             data()
-            programArguments.addAll '--mod', 'examplemod', '--all',
-                    '--output', file('src/generated/resources/').getAbsolutePath(),
-                    '--existing', file('src/main/resources/').getAbsolutePath(),
+            programArguments.addAll '--mod', 'hybrid_aquatic', '--all',
+                    '--output', file('src/generated/forge/resources/').getAbsolutePath(),
                     '--existing', file('src/generated/fabric/resources/').getAbsolutePath()
         }
         server {
@@ -68,19 +80,22 @@ repositories {
     }
     maven {
         name = "Geckolib"
-        url  = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+        url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
     }
     mavenCentral()
 }
 
 sourceSets.main.resources.srcDirs += project(':common').file("src/main/resources")
-//sourceSets.main.resources.srcDirs += project(':fabric').file("src/generated/resources")
+sourceSets.main.resources.srcDirs {
+    'src/generated/forge/resources'
+    'src/generated/fabric/resources'
+}
 sourceSets.main.java.srcDirs += project(":common").file('src/main/java')
 
 dependencies {
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
-    //modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
+    modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
     implementation 'org.jetbrains:annotations:25.0.0'
     implementation 'thedarkcolour:kotlinforforge:4.11.0'
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0"))
