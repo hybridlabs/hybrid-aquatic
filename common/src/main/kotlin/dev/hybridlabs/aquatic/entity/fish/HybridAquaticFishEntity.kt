@@ -115,8 +115,8 @@ open class HybridAquaticFishEntity(
             this.setOnGround(false)
             this.hasImpulse = true
             this.playSound(this.flopSound, this.soundVolume, this.voicePitch)
-            super.aiStep()
         }
+        super.aiStep()
     }
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
