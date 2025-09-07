@@ -1,4 +1,15 @@
 package dev.hybridlabs.aquatic
+
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
+import net.minecraft.world.entity.MobCategory
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
@@ -19,6 +30,28 @@ object HybridAquaticForge {
 
     init {
         CommonClass.init()
+
+
+        HybridAquaticSpawnGroup.entries.toTypedArray().forEach {
+            MobCategory.create(
+                it.name.uppercase(),
+                it.name,
+                it.spawnCap,
+                it.peaceful,
+                it.rare,
+                it.immediateDespawnRange
+            )
+        }
+
+        HybridAquaticEntityTypes
+        HybridAquaticBlocks
+        HybridAquaticBlockEntityTypes
+        HybridAquaticMobEffects
+        HybridAquaticItems
+
+        HybridAquaticFeatures
+        HybridAquaticPlacedFeatures
+        HybridAquaticConfiguredFeatures
 
         runForDist(
             clientTarget = {
