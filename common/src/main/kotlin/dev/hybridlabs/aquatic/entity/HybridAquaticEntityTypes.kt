@@ -14,7 +14,6 @@ import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
-import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
@@ -761,7 +760,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.SHARK
+            Services.PLATFORM.getMobCategoryByName("SHARK".lowercase())
         )
     }
 
@@ -776,7 +775,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.SHARK_UNDERGROUND
+            Services.PLATFORM.getMobCategoryByName("SHARK_UNDERGROUND".lowercase())
         )
     }
 
@@ -791,7 +790,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.CRITTER
+            Services.PLATFORM.getMobCategoryByName("CRITTER".lowercase())
         )
     }
 
@@ -806,7 +805,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.CRUSTACEAN
+            Services.PLATFORM.getMobCategoryByName("CRUSTACEAN".lowercase())
         )
     }
 
@@ -821,7 +820,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.CRUSTACEAN_UNDERGROUND
+            Services.PLATFORM.getMobCategoryByName("CRUSTACEAN_UNDERGROUND".lowercase())
         )
     }
 
@@ -831,7 +830,10 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
     ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.FISH)
+        return registerCustomSpawnGroup(
+            id, entityFactory, dimensions, attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("FISH".lowercase())
+        )
     }
 
     private fun <T : LivingEntity> registerRay(
@@ -840,7 +842,10 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
     ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(id, entityFactory, dimensions, attributeContainer, HybridAquaticSpawnGroup.FISH)
+        return registerCustomSpawnGroup(
+            id, entityFactory, dimensions, attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("FISH".lowercase())
+        )
     }
 
     private fun <T : LivingEntity> registerFishUnderground(
@@ -854,7 +859,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.FISH_UNDERGROUND
+            Services.PLATFORM.getMobCategoryByName("FISH_UNDERGROUND".lowercase())
         )
     }
 
@@ -869,7 +874,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.DOLPHIN
+            Services.PLATFORM.getMobCategoryByName("DOLPHIN".lowercase())
         )
     }
 
@@ -884,7 +889,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.CEPHALOPOD
+            Services.PLATFORM.getMobCategoryByName("CEPHALOPOD".lowercase())
         )
     }
 
@@ -899,7 +904,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.CEPHALOPOD
+            Services.PLATFORM.getMobCategoryByName("CEPHALOPOD".lowercase())
         )
     }
 
@@ -914,7 +919,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.JELLY
+            Services.PLATFORM.getMobCategoryByName("JELLY".lowercase())
         )
     }
 
@@ -929,7 +934,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.JELLY_UNDERGROUND
+            Services.PLATFORM.getMobCategoryByName("JELLY_UNDERGROUND".lowercase())
         )
     }
 
@@ -944,7 +949,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            HybridAquaticSpawnGroup.MINIBOSS
+            Services.PLATFORM.getMobCategoryByName("MINIBOSS".lowercase())
         )
     }
 
@@ -956,9 +961,9 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
-        hybridAquaticSpawnGroup: HybridAquaticSpawnGroup,
+        hybridAquaticSpawnGroup: MobCategory?,
     ): RegistryObject<EntityType<T>> {
-        return registerLiving(id, entityFactory, dimensions, attributeContainer, hybridAquaticSpawnGroup.spawnGroup)
+        return registerLiving(id, entityFactory, dimensions, attributeContainer, hybridAquaticSpawnGroup)
     }
 
     /**
@@ -969,7 +974,7 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
-        spawnGroup: MobCategory,
+        spawnGroup: MobCategory?,
     ): RegistryObject<EntityType<T>> {
         val entityType = EntityType.Builder.of(entityFactory, spawnGroup).sized(dimensions.width, dimensions.height)
         return register(id, entityType, attributeContainer)

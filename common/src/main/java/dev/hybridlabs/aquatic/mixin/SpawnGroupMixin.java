@@ -34,6 +34,10 @@ public class SpawnGroupMixin {
             "$VALUES:[Lnet/minecraft/world/entity/MobCategory;", shift = At.Shift.AFTER))
     private static void injectEnum(CallbackInfo ci) {
         int vanillaSpawnGroupsLength = $VALUES.length;
+        for (int i = 0; i < vanillaSpawnGroupsLength; i++) {
+            MobCategory category = $VALUES[i];
+            HybridAquaticSpawnGroup.BY_NAME.put(category.name(), category);
+        }
         HybridAquaticSpawnGroup[] haSpawnGroups = HybridAquaticSpawnGroup.values();
         $VALUES = Arrays.copyOf($VALUES, vanillaSpawnGroupsLength + haSpawnGroups.length);
 
@@ -42,6 +46,8 @@ public class SpawnGroupMixin {
             HybridAquaticSpawnGroup haSpawnGroup = haSpawnGroups[i];
             haSpawnGroup.spawnGroup = $VALUES[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos,
                     haSpawnGroup);
+
+            HybridAquaticSpawnGroup.BY_NAME.put(haSpawnGroup.name(), haSpawnGroup.spawnGroup);
         }
     }
 }

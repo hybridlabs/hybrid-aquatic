@@ -2,30 +2,33 @@ package dev.hybridlabs.aquatic.utils;
 
 import net.minecraft.world.entity.MobCategory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum HybridAquaticSpawnGroup {
-    FISH("ha_fish", 8, true, false, 64),
+    FISH("fish", 8, true, false, 64),
 
-    FISH_UNDERGROUND("ha_fish_underground", 8, true, true, 64),
+    FISH_UNDERGROUND("fish_underground", 8, true, true, 64),
 
-    DOLPHIN("ha_dolphin", 4, true, true, 64),
+    DOLPHIN("dolphin", 4, true, true, 64),
 
-    CEPHALOPOD("ha_cephalopod", 5, true, false, 64),
+    CEPHALOPOD("cephalopod", 5, true, false, 64),
 
-    JELLY("ha_jelly", 5, true, false, 64),
+    JELLY("jelly", 5, true, false, 64),
 
-    JELLY_UNDERGROUND("ha_jelly_underground", 5, true, true, 64),
+    JELLY_UNDERGROUND("jelly_underground", 5, true, true, 64),
 
-    SHARK("ha_shark", 5, true, true, 128),
+    SHARK("shark", 5, true, true, 128),
 
-    SHARK_UNDERGROUND("ha_shark_underground", 5, true, true, 128),
+    SHARK_UNDERGROUND("shark_underground", 5, true, true, 128),
 
     CRUSTACEAN("crustacean", 5, true, false, 64),
 
     CRUSTACEAN_UNDERGROUND("crustacean_underground", 5, true, false, 64),
 
-    CRITTER("ha_critter", 5, true, false, 64),
+    CRITTER("critter", 5, true, false, 64),
 
-    MINIBOSS("ha_miniboss", 10, false, true, 128);
+    MINIBOSS("miniboss", 10, false, true, 128);
 
     public MobCategory spawnGroup;
     public final String name;
@@ -40,5 +43,11 @@ public enum HybridAquaticSpawnGroup {
         this.peaceful = peaceful;
         this.rare = rare;
         this.immediateDespawnRange = immediateDespawnRange;
+    }
+
+    public static Map<String, MobCategory> BY_NAME = new HashMap<>();
+
+    public static MobCategory byName(String name) {
+        return BY_NAME.get(name);
     }
 }
