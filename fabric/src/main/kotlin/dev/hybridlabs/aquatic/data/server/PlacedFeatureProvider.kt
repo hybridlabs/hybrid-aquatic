@@ -41,6 +41,7 @@ class PlacedFeatureProvider(
             )
         )
 
+        /*
         entries.add(
             HybridAquaticPlacedFeatures.GREEN_ANEMONE_PATCH,
             PlacedFeature(
@@ -53,7 +54,9 @@ class PlacedFeatureProvider(
                 )
             )
         )
+         */
 
+        /*
         entries.add(
             HybridAquaticPlacedFeatures.BULL_KELP,
             PlacedFeature(
@@ -66,6 +69,7 @@ class PlacedFeatureProvider(
                 )
             )
         )
+         */
 
         // sargassum
         entries.add(
