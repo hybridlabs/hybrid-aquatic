@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.platform.services;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import dev.hybridlabs.aquatic.CommonClass;
+import dev.hybridlabs.aquatic.item.HybridAquaticBlockEntityItems;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -78,6 +79,11 @@ public class FabricPlatformHelper implements PlatformHelper {
     @Override
     public @Nullable MobCategory getMobCategoryByName(String name) {
         return HybridAquaticSpawnGroup.byName(name);
+    }
+
+    @Override
+    public Item getBEItemByName(String name) {
+        return HybridAquaticBlockEntityItems.INSTANCE.getBlockEntityItems().get(name).get();
     }
 
     public BlockBehaviour.Properties getBlockSettings() {

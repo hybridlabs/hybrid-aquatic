@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -67,4 +68,5 @@ public interface PlatformHelper {
 
     @Nullable MobCategory getMobCategoryByName(String name);
 
+    Item getBEItemByName(String name);
 }
