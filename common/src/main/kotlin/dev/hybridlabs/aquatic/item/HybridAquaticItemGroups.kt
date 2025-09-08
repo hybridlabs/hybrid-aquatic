@@ -13,7 +13,6 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.minecraft.world.item.SpawnEggItem
 
 object HybridAquaticItemGroups {
@@ -249,6 +248,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.CORAL_HOE.get())
                 entries.accept(HybridAquaticItems.FISHING_NET.get())
 
+                /*
                 entries.accept(HybridAquaticItems.DIVING_HELMET.get())
                 entries.accept(HybridAquaticItems.DIVING_SUIT.get())
                 entries.accept(HybridAquaticItems.DIVING_LEGGINGS.get())
@@ -261,6 +261,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.MANGLERFISH_FIN.get())
                 entries.accept(HybridAquaticItems.EEL_SCARF.get())
                 entries.accept(HybridAquaticItems.MOON_JELLYFISH_HAT.get())
+                 */
 
 
                 // spawn eggs

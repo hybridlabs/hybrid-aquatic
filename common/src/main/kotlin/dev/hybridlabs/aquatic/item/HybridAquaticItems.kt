@@ -6,7 +6,6 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.platform.Services
-import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -221,9 +220,10 @@ object HybridAquaticItems {
 
         //#region Nature Blocks
 
-    val ANEMONE = registerBlockItem("anemone") { HybridAquaticBlocks.ANEMONE.get() }
-    val GIANT_GREEN_ANEMONE = registerBlockItem("giant_green_anemone") { HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get() }
-    val STRAWBERRY_ANEMONE = registerBlockItem("strawberry_anemone") { HybridAquaticBlocks.STRAWBERRY_ANEMONE.get() }
+    val ANEMONE = register("anemone") { Services.PLATFORM.getBEItemByName("anemone") }
+    val STRAWBERRY_ANEMONE = register("strawberry_anemone") { Services.PLATFORM.getBEItemByName("strawberry_anemone") }
+    val GIANT_GREEN_ANEMONE =
+        register("giant_green_anemone") { Services.PLATFORM.getBEItemByName("giant_green_anemone") }
     val GIANT_CLAM = registerBlockItem("giant_clam") { HybridAquaticBlocks.GIANT_CLAM.get() }
     val SARGASSUM = registerBlockItem("sargassum") { HybridAquaticBlocks.SARGASSUM.get() }
     val BULL_KELP = registerBlockItem("bull_kelp") { HybridAquaticBlocks.BULL_KELP.get() }
@@ -1607,7 +1607,7 @@ object HybridAquaticItems {
 
     //#endregion
 
-    private fun register(id: String, item: Supplier<Item>): RegistryObject<Item> {
+    fun register(id: String, item: Supplier<Item>): Supplier<Item> {
         return CommonClass.ITEMS.register(id, item)
     }
 

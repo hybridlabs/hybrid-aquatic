@@ -55,6 +55,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             mapOf<Block, Pair<Block?, ResourceLocation>>(
                 HybridAquaticBlocks.ANEMONE.get() to (null to TEMPLATE_ANEMONE),
                 HybridAquaticBlocks.STRAWBERRY_ANEMONE.get() to (null to TEMPLATE_ANEMONE),
+                HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get() to (null to TEMPLATE_ANEMONE),
                 HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get() to (Blocks.GLASS to TEMPLATE_MESSAGE_IN_A_BOTTLE),
             ).forEach { (block, info) ->
                 val (particleBlock, template) = info
@@ -268,6 +269,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.MAGNETIC_HOOK.get(),
             HybridAquaticItems.CREEPERMAGNET_HOOK.get(),
             HybridAquaticItems.OMINOUS_HOOK.get(),
+            /*
             HybridAquaticItems.DIVING_HELMET.get(),
             HybridAquaticItems.DIVING_SUIT.get(),
             HybridAquaticItems.DIVING_LEGGINGS.get(),
@@ -279,6 +281,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.TURTLE_CHESTPLATE.get(),
             HybridAquaticItems.EEL_SCARF.get(),
             HybridAquaticItems.MOON_JELLYFISH_HAT.get()
+             */
         ).forEach { item ->
             generator.generateFlatItem(item, ModelTemplates.FLAT_ITEM)
         }
