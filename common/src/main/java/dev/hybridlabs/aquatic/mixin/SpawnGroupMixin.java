@@ -47,7 +47,7 @@ public class SpawnGroupMixin {
             haSpawnGroup.spawnGroup = $VALUES[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos,
                     haSpawnGroup);
 
-            HybridAquaticSpawnGroup.BY_NAME.put(haSpawnGroup.name(), haSpawnGroup.spawnGroup);
+            HybridAquaticSpawnGroup.BY_NAME.put(haSpawnGroup.name().toUpperCase(), haSpawnGroup.spawnGroup);
         }
     }
 }
