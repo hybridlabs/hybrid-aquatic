@@ -58,7 +58,7 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val blockPos = pos.below()
-        return canSurvive(world.getBlockState(blockPos), world, blockPos)
+        return super.canSurvive(world.getBlockState(blockPos), world, blockPos)
     }
 
     override fun updateShape(
