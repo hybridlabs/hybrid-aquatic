@@ -66,4 +66,5 @@ public interface PlatformHelper {
     Attribute getReachAttribute();
 
     @Nullable MobCategory getMobCategoryByName(String name);
+
 }

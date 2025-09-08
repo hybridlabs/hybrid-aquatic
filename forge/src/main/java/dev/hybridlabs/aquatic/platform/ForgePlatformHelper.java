@@ -153,4 +153,10 @@ public class ForgePlatformHelper implements PlatformHelper {
     public MobCategory getMobCategoryByName(String name) {
         return MobCategory.byName(name);
     }
+
+    @Override
+    public String getSkullRendererTarget() {
+        return "";
+    }
+
 }

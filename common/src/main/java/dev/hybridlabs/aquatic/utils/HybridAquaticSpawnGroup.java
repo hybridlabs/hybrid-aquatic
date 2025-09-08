@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.utils;
 
 import net.minecraft.world.entity.MobCategory;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public enum HybridAquaticSpawnGroup {
     FISH("fish", 8, true, false, 64),
@@ -45,7 +45,7 @@ public enum HybridAquaticSpawnGroup {
         this.immediateDespawnRange = immediateDespawnRange;
     }
 
-    public static Map<String, MobCategory> BY_NAME = new HashMap<>();
+    public static final Map<String, MobCategory> BY_NAME = new ConcurrentHashMap<>();
 
     public static MobCategory byName(String name) {
         return BY_NAME.get(name);
