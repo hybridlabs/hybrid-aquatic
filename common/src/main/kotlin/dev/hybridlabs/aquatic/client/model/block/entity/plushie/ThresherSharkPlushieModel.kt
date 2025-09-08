@@ -2,8 +2,7 @@ package dev.hybridlabs.aquatic.client.model.block.entity.plushie
 
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import net.minecraft.client.model.geom.ModelPart
-import net.minecraft.client.model.geom.PartNames.BODY
-import net.minecraft.client.model.geom.PartNames.TAIL_FIN
+import net.minecraft.client.model.geom.PartNames.*
 import net.minecraft.client.model.geom.PartPose
 import net.minecraft.client.model.geom.builders.CubeListBuilder
 import net.minecraft.client.model.geom.builders.LayerDefinition
@@ -38,6 +37,12 @@ class ThresherSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
                 CubeListBuilder.create()
                     .texOffs(10, 10).addBox(-0.5f, -4.5f, -1.55f, 1.0f, 7.0f, 2.0f),
                 PartPose.offsetAndRotation(0.0f, -2.5f, 4.5627f, -0.3927f, 0.0f, 0.0f)
+            )
+
+            rootPart.addOrReplaceChild(
+                JAW,
+                CubeListBuilder.create(),
+                PartPose.ZERO
             )
 
 

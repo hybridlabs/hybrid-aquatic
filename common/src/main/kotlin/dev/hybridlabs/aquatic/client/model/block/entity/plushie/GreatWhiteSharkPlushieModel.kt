@@ -18,7 +18,7 @@ class GreatWhiteSharkPlushieModel(override val root: ModelPart) : PlushieModel()
     override val jaw: ModelPart = root.getChild(JAW)
 
     companion object {
-        fun createModelData(): LayerDefinition? {
+        fun createModelData(): LayerDefinition {
             val modelData = MeshDefinition()
             val rootPart = modelData.root
 

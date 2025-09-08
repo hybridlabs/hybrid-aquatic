@@ -32,6 +32,12 @@ class FrilledSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
                 PartPose.ZERO
             )
 
+            rootPart.addOrReplaceChild(
+                JAW,
+                CubeListBuilder.create(),
+                PartPose.ZERO
+            )
+
             bodyPart.addOrReplaceChild(
                 RIGHT_FIN,
                 CubeListBuilder.create().texOffs(0, 6).addBox(-1.0f, -1.0f, 0.0f, 1.0f, 2.0f, 0.0f),
@@ -49,7 +55,6 @@ class FrilledSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
                 CubeListBuilder.create().texOffs(0, 12).addBox(-0.5f, -3.5f, -0.5f, 1.0f, 5.0f, 2.0f),
                 PartPose.offsetAndRotation(0.0f, -1.5f, 4.0f, -0.3927f, 0.0f, 0.0f)
             )
-
 
             return LayerDefinition.create(modelData, 32, 32)
         }

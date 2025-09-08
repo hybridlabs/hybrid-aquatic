@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Mixin(SkullBlockRenderer.class)
-public abstract class SkullBlockEntityRendererMixin {
+public abstract class SkullBlockEntityModelMixin {
     /**
      * Injects custom skull textures into the skull renderer.
      */
