@@ -53,7 +53,7 @@
     },
 
     "mixins": [
-        "hybrid-aquatic.mixins.json"
+        "hybrid-aquatic.fabric.mixins.json"
     ],
 
     "accessWidener": "hybrid-aquatic.accesswidener",

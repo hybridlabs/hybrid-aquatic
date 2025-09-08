@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "hybrid-aquatic:geo/buoy.geo.json",
+        "model": "hybrid-aquatic:geo/buoy.geo",
       "y": 90
     },
     "facing=west": {
-      "model": "hybrid-aquatic:geo/buoy.geo.json",
+        "model": "hybrid-aquatic:geo/buoy.geo",
       "y": 90
     },
     "facing=north": {
-      "model": "hybrid-aquatic:geo/buoy.geo.json"
+        "model": "hybrid-aquatic:geo/buoy.geo"
     },
     "facing=south": {
-      "model": "hybrid-aquatic:geo/buoy.geo.json"
+        "model": "hybrid-aquatic:geo/buoy.geo"
     }
   }
 }
