@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:spotted_eagle_ray"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

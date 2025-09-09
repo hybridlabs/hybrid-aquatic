@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:cooked_fish_meat",
+    "hybrid-aquatic:cooked_fish_steak",
+    "hybrid-aquatic:cooked_tentacle",
+    "hybrid-aquatic:cooked_crab",
+    "hybrid-aquatic:cooked_shrimp",
+    "hybrid-aquatic:cooked_lobster",
+    "hybrid-aquatic:cooked_crayfish",
+    "hybrid-aquatic:cooked_lobster_tail"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:crab_pot"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:hybrid_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:oak_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:spruce_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:birch_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:dark_oak_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:acacia_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:jungle_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:mangrove_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:cherry_crate"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "hybrid-aquatic:gameplay/fishing/treasure"
+}

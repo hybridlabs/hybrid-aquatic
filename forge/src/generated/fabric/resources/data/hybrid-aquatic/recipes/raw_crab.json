@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "hybrid-aquatic:claw"
+    }
+  ],
+  "result": {
+    "item": "hybrid-aquatic:raw_crab"
+  }
+}

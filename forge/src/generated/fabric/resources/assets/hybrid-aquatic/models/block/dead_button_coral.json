@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "hybrid-aquatic:block/dead_button_coral"
+  }
+}

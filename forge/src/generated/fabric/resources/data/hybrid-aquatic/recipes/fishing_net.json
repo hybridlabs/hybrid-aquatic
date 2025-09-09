@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "minecraft:stick"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "  S",
+    " IS",
+    "I  "
+  ],
+  "result": {
+    "item": "hybrid-aquatic:fishing_net"
+  },
+  "show_notification": true
+}

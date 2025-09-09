@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:sargassum"
+          "name": "minecraft:air"
         }
       ],
       "rolls": 1.0

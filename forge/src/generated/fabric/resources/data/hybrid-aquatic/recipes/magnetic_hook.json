@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "NIN",
+    "N N",
+    "I I"
+  ],
+  "result": {
+    "item": "hybrid-aquatic:magnetic_hook"
+  },
+  "show_notification": true
+}

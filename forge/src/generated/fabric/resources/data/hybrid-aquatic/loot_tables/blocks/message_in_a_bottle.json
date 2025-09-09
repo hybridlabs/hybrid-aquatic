@@ -1,0 +1,70 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "function": "minecraft:copy_nbt",
+                  "ops": [
+                    {
+                      "op": "replace",
+                      "source": "variant",
+                      "target": "BlockEntityTag.variant"
+                    },
+                    {
+                      "op": "replace",
+                      "source": "message",
+                      "target": "BlockEntityTag.message"
+                    }
+                  ],
+                  "source": "block_entity"
+                }
+              ],
+              "name": "hybrid-aquatic:message_in_a_bottle"
+            },
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "minecraft:copy_nbt",
+                  "ops": [
+                    {
+                      "op": "replace",
+                      "source": "message.tag.sea_message",
+                      "target": "sea_message"
+                    }
+                  ],
+                  "source": "block_entity"
+                }
+              ],
+              "name": "hybrid-aquatic:sea_message_book"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}
