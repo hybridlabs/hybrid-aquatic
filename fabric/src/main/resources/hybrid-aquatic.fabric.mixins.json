@@ -17,7 +17,8 @@
         "client.FishingBobberEntityRendererMixin",
         "client.FogRendererMixin",
         "client.HeadFeatureRendererMixin",
-        "client.InGameHudMixin"
+        "client.InGameHudMixin",
+        "client.SkullBlockEntityModelMixin"
     ],
     "injectors": {
         "defaultRequire": 1
