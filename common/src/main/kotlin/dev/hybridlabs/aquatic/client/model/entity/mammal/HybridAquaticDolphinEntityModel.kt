@@ -38,6 +38,6 @@ abstract class HybridAquaticDolphinEntityModel<T : HybridAquaticDolphinEntity>(p
         val body = animationProcessor.getBone(PartNames.BODY)
 
         val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
-        body.rotX = xRot * -Mth.RAD_TO_DEG
+        body.rotX = xRot * -Mth.DEG_TO_RAD
     }
 }
