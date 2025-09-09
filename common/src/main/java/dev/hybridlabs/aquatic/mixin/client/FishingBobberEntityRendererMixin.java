@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import dev.hybridlabs.aquatic.HybridAquatic;
+import dev.hybridlabs.aquatic.Constants;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -21,20 +21,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(FishingHookRenderer.class)
 public abstract class FishingBobberEntityRendererMixin {
     @Unique
-    private static final RenderType BARBED_HOOK_LAYER = getRenderType(new ResourceLocation(HybridAquatic.MOD_ID,
+    private static final RenderType BARBED_HOOK_LAYER = getRenderType(new ResourceLocation(Constants.MOD_ID,
             "textures/entity/bobber/barbed_bobber.png"));
     @Unique
-    private static final RenderType GLOWING_HOOK_LAYER = getRenderType(new ResourceLocation(HybridAquatic.MOD_ID,
+    private static final RenderType GLOWING_HOOK_LAYER = getRenderType(new ResourceLocation(Constants.MOD_ID,
             "textures/entity/bobber/glowing_bobber.png"));
     @Unique
-    private static final RenderType MAGNETIC_HOOK_LAYER = getRenderType(new ResourceLocation(HybridAquatic.MOD_ID,
+    private static final RenderType MAGNETIC_HOOK_LAYER = getRenderType(new ResourceLocation(Constants.MOD_ID,
             "textures/entity/bobber/magnetic_bobber.png"));
     @Unique
-    private static final RenderType CREEPERMAGNET_HOOK_LAYER =
-            getRenderType(new ResourceLocation(HybridAquatic.MOD_ID, "textures/entity/bobber/creepermagnet_bobber" +
+    private static final RenderType CREEPERMAGNET_HOOK_LAYER = getRenderType(new ResourceLocation(Constants.MOD_ID,
+            "textures/entity/bobber/creepermagnet_bobber" +
                     ".png"));
     @Unique
-    private static final RenderType OMINOUS_HOOK_LAYER = getRenderType(new ResourceLocation(HybridAquatic.MOD_ID,
+    private static final RenderType OMINOUS_HOOK_LAYER = getRenderType(new ResourceLocation(Constants.MOD_ID,
             "textures/entity/bobber/ominous_bobber.png"));
 
     @Unique

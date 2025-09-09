@@ -2,10 +2,13 @@ package dev.hybridlabs.aquatic.platform;
 
 
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
-import dev.hybridlabs.aquatic. platform.services.ClientPlatformHelper;
+import dev.hybridlabs.aquatic.platform.services.ClientPlatformHelper;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -19,6 +22,13 @@ public class ForgeClientPlatformHelper implements ClientPlatformHelper {
 
         var handler = new ForgeClientPlatformHelper.RendererRegistrationHandler<E>(entityType, entityRendererFactory);
         ForgePlatformHelper.getEventBus().addListener(handler::handleEvent);
+    }
+
+    @Override
+    public void registerBlockRenderers(RenderType renderType, Block... blocks) {
+        for (Block block : blocks) {
+            ItemBlockRenderTypes.setRenderLayer(block, renderType);
+        }
     }
 
     private record RendererRegistrationHandler<T extends Entity>(RegistryObject<EntityType<T>> type,
