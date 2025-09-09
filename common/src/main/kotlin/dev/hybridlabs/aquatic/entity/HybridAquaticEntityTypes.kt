@@ -314,7 +314,7 @@ object HybridAquaticEntityTypes {
     )
 
     val BLOWFISH = registerFish(
-        "toadfish",
+        "blowfish",
         ::BlowfishEntity,
         EntityDimensions.fixed(0.3f, 0.3f),
         BlowfishEntity::createMobAttributes
