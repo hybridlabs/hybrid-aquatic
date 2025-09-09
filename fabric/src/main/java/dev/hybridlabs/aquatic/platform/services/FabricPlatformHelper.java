@@ -77,7 +77,7 @@ public class FabricPlatformHelper implements PlatformHelper {
 
     @Override
     public @Nullable MobCategory getMobCategoryByName(String name) {
-        return HybridAquaticSpawnGroup.byName(name);
+        return HybridAquaticSpawnGroup.byName(name.toLowerCase());
     }
 
     public BlockBehaviour.Properties getBlockSettings() {
