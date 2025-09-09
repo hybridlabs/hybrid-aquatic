@@ -4,12 +4,10 @@ import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
 import java.util.concurrent.Callable;
@@ -66,7 +64,5 @@ public interface PlatformHelper {
 
     Attribute getReachAttribute();
 
-    @Nullable MobCategory getMobCategoryByName(String name);
-
-    Item getBEItemByName(String name);
+    MobCategory getMobCategoryByName(String name);
 }

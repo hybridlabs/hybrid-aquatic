@@ -269,7 +269,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.MAGNETIC_HOOK.get(),
             HybridAquaticItems.CREEPERMAGNET_HOOK.get(),
             HybridAquaticItems.OMINOUS_HOOK.get(),
-            /*
             HybridAquaticItems.DIVING_HELMET.get(),
             HybridAquaticItems.DIVING_SUIT.get(),
             HybridAquaticItems.DIVING_LEGGINGS.get(),
@@ -281,7 +280,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.TURTLE_CHESTPLATE.get(),
             HybridAquaticItems.EEL_SCARF.get(),
             HybridAquaticItems.MOON_JELLYFISH_HAT.get()
-             */
         ).forEach { item ->
             generator.generateFlatItem(item, ModelTemplates.FLAT_ITEM)
         }

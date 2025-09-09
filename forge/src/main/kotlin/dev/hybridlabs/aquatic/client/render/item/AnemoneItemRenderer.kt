@@ -1,10 +1,10 @@
-package dev.hybridlabs.aquatic.render.item
+package dev.hybridlabs.aquatic.client.render.item
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.block.BlockEntityHelper.Companion.createBlockEntityRendererProviderContext
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
-import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
+import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.EntityModelSet
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
@@ -14,18 +14,15 @@ import net.minecraft.core.BlockPos
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 
-class StrawberryAnemoneItemRenderer(
-    blockEntityRenderDispatcher: BlockEntityRenderDispatcher,
-    entityModelSet: EntityModelSet
-) :
+class AnemoneItemRenderer(blockEntityRenderDispatcher: BlockEntityRenderDispatcher, entityModelSet: EntityModelSet) :
     BlockEntityWithoutLevelRenderer(
         blockEntityRenderDispatcher, entityModelSet
     ) {
 
     constructor() : this(client.blockEntityRenderDispatcher, client.entityModels)
 
-    val blockEntity by lazy {
-        StrawberryAnemoneBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.STRAWBERRY_ANEMONE.get().defaultBlockState())
+    val anemoneBlockEntity by lazy {
+        AnemoneBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.ANEMONE.get().defaultBlockState())
     }
 
     override fun renderByItem(
@@ -33,12 +30,12 @@ class StrawberryAnemoneItemRenderer(
         poseStack: PoseStack, buffer: MultiBufferSource, packedLight: Int,
         packedOverlay: Int
     ) {
-        RENDERER.render(blockEntity, 1.0f, poseStack, buffer, packedLight, packedOverlay)
+        RENDERER.render(anemoneBlockEntity, 1.0f, poseStack, buffer, packedLight, packedOverlay)
     }
 
     companion object {
-        private val RENDERER: StrawberryAnemoneBlockEntityRenderer =
-            StrawberryAnemoneBlockEntityRenderer(createBlockEntityRendererProviderContext())
+        private val RENDERER: AnemoneBlockEntityRenderer =
+            AnemoneBlockEntityRenderer(createBlockEntityRendererProviderContext())
         private val client: Minecraft = Minecraft.getInstance()
     }
 }

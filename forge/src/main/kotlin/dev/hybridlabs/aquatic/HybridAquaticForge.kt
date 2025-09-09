@@ -17,7 +17,6 @@ import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.item.HybridAquaticBlockEntityItems
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
@@ -64,7 +63,6 @@ object HybridAquaticForge {
 
         HybridAquaticEntityTypes
         HybridAquaticBlocks
-        HybridAquaticBlockEntityItems
         HybridAquaticBlockEntityTypes
         HybridAquaticMobEffects
         HybridAquaticItems

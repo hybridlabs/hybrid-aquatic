@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.platform;
 
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.Constants;
-import dev.hybridlabs.aquatic.item.HybridAquaticBlockEntityItems;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import dev.hybridlabs.aquatic.platform.services.PlatformHelper;
 import net.minecraft.world.entity.*;
@@ -153,11 +152,6 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public MobCategory getMobCategoryByName(String name) {
         return MobCategory.byName(name);
-    }
-
-    @Override
-    public Item getBEItemByName(String name) {
-        return HybridAquaticBlockEntityItems.INSTANCE.getBlockEntityItems().get(name).get();
     }
 
 }

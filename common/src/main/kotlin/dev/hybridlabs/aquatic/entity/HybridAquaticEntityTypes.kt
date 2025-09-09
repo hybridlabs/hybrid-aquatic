@@ -961,7 +961,7 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
-        hybridAquaticSpawnGroup: MobCategory?,
+        hybridAquaticSpawnGroup: MobCategory,
     ): RegistryObject<EntityType<T>> {
         return registerLiving(id, entityFactory, dimensions, attributeContainer, hybridAquaticSpawnGroup)
     }
@@ -974,7 +974,7 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
-        spawnGroup: MobCategory?,
+        spawnGroup: MobCategory,
     ): RegistryObject<EntityType<T>> {
         val entityType = EntityType.Builder.of(entityFactory, spawnGroup).sized(dimensions.width, dimensions.height)
         return register(id, entityType, attributeContainer)
