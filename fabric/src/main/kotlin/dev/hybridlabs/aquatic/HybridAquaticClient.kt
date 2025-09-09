@@ -59,6 +59,7 @@ object HybridAquaticClient : ClientModInitializer {
         registerWeatherRenderers()
         registerTooltips()
         registerGeoRenderers()
+        registerModelLayers()
 
         ClientCommandRegistrationCallback.EVENT.register(::registerCommands)
     }
