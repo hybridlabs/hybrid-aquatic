@@ -153,13 +153,23 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.DEAD_SUN_CORAL_WALL_FAN.get()
             )
 
-            createCrossBlockWithDefaultItem(
+            createCrossBlock(
                 HybridAquaticBlocks.SARGASSUM_PLANT.get(),
                 BlockModelGenerators.TintState.NOT_TINTED,
             )
 
-            createCrossBlockWithDefaultItem(
+            createCrossBlock(
                 HybridAquaticBlocks.SARGASSUM.get(),
+                BlockModelGenerators.TintState.NOT_TINTED,
+            )
+
+            createCrossBlock(
+                HybridAquaticBlocks.BULL_KELP_PLANT.get(),
+                BlockModelGenerators.TintState.NOT_TINTED,
+            )
+
+            createCrossBlock(
+                HybridAquaticBlocks.BULL_KELP.get(),
                 BlockModelGenerators.TintState.NOT_TINTED,
             )
 
@@ -176,6 +186,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.RED_ALGAE.get(),
             //HybridAquaticItems.SEA_LETTUCE.get(),
             //HybridAquaticItems.SARGASSUM.get(),
+            HybridAquaticItems.BULL_KELP.get(),
             HybridAquaticItems.TUBE_SPONGE.get(),
             HybridAquaticItems.UNI.get(),
             HybridAquaticItems.RAW_CRAYFISH.get(),

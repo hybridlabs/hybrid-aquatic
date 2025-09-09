@@ -10,8 +10,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeat
  * A registry of world generation features for Hybrid Aquatic.
  */
 object HybridAquaticFeatures {
-    val MESSAGE_IN_A_BOTTLE =
-        register("message_in_a_bottle", MessageInABottleFeature(MessageInABottleFeatureConfig.CODEC))
+    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleFeature(MessageInABottleFeatureConfig.CODEC))
     val BULL_KELP = register("bull_kelp", BullKelpFeature(BullKelpFeatureConfig.CODEC))
     val VENT_PATCH = register("vent_patch", VentPatchFeature(VentPatchFeatureConfig.CODEC))
     val SARGASSUM = register("sargassum", SargassumFeature(SargassumFeatureConfig.CODEC))

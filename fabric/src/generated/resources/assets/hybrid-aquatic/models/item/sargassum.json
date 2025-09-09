@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "hybrid-aquatic:block/sargassum"
-  }
+  "parent": "hybrid-aquatic:block/sargassum"
 }
