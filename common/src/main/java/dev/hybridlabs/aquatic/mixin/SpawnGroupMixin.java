@@ -36,7 +36,7 @@ public class SpawnGroupMixin {
         int vanillaSpawnGroupsLength = $VALUES.length;
         for (int i = 0; i < vanillaSpawnGroupsLength; i++) {
             MobCategory category = $VALUES[i];
-            HybridAquaticSpawnGroup.BY_NAME.put(category.name(), category);
+            HybridAquaticSpawnGroup.BY_NAME.put(category.name().toLowerCase(), category);
         }
         HybridAquaticSpawnGroup[] haSpawnGroups = HybridAquaticSpawnGroup.values();
         $VALUES = Arrays.copyOf($VALUES, vanillaSpawnGroupsLength + haSpawnGroups.length);
@@ -47,7 +47,7 @@ public class SpawnGroupMixin {
             haSpawnGroup.spawnGroup = $VALUES[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos,
                     haSpawnGroup);
 
-            HybridAquaticSpawnGroup.BY_NAME.put(haSpawnGroup.name().toUpperCase(), haSpawnGroup.spawnGroup);
+            HybridAquaticSpawnGroup.BY_NAME.put(haSpawnGroup.name().toLowerCase(), haSpawnGroup.spawnGroup);
         }
     }
 }
