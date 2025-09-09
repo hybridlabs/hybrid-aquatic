@@ -438,6 +438,7 @@ object HybridAquaticEntityRenderers {
             ::WhaleSharkEntityRenderer
         )
     val HOUND_SHARK =
+        ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.HOUND_SHARK,
             ::HoundSharkEntityRenderer
         )
