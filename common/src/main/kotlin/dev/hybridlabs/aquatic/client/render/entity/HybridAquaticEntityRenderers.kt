@@ -437,6 +437,10 @@ object HybridAquaticEntityRenderers {
             HybridAquaticEntityTypes.WHALE_SHARK,
             ::WhaleSharkEntityRenderer
         )
+    val HOUND_SHARK =
+            HybridAquaticEntityTypes.HOUND_SHARK,
+            ::HoundSharkEntityRenderer
+        )
 
     //endregion
 
