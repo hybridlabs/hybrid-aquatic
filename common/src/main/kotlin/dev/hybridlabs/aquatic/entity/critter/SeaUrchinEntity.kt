@@ -42,6 +42,14 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    override fun getDimensions(pose: Pose): EntityDimensions {
+        val scale = when (variant) {
+            Type.LARGE -> 2.0f
+            else -> 1.0f
+        }
+        return super.getDimensions(pose).scale(scale)
+    }
+
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()

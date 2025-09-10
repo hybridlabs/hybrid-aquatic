@@ -10,10 +10,7 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.Mob
-import net.minecraft.world.entity.MobType
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.Goal
@@ -150,6 +147,16 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
         override fun stop() {
             inflateTicks = 0
         }
+    }
+
+    override fun getDimensions(pose: Pose): EntityDimensions {
+        val scale = when (getPuffState()) {
+            NOT_PUFFED -> 0.5f
+            SEMI_PUFFED -> 0.7f
+            FULLY_PUFFED -> 1.0f
+            else -> 1.0f
+        }
+        return super.getDimensions(pose).scale(scale)
     }
 
     companion object {

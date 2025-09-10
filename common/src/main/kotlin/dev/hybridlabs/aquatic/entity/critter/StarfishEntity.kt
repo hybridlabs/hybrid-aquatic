@@ -31,6 +31,14 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
     ),
     VariantHolder<StarfishEntity.Companion.Type>, OverlayTextureFeature {
 
+    override fun getDimensions(pose: Pose): EntityDimensions {
+        val scale = when (variant) {
+            Type.CROWN_OF_THORNS -> 2.0f
+            else -> 1.0f
+        }
+        return super.getDimensions(pose).scale(scale)
+    }
+
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()

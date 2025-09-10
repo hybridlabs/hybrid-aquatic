@@ -316,7 +316,7 @@ object HybridAquaticEntityTypes {
     val BLOWFISH = registerFish(
         "blowfish",
         ::BlowfishEntity,
-        EntityDimensions.fixed(0.3f, 0.3f),
+        EntityDimensions.scalable(0.3f, 0.3f),
         BlowfishEntity::createMobAttributes
     )
 
@@ -558,14 +558,14 @@ object HybridAquaticEntityTypes {
     val SEA_URCHIN = registerCritter(
         "sea_urchin",
         ::SeaUrchinEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
+        EntityDimensions.scalable(0.5f, 0.5f),
         SeaUrchinEntity::createMobAttributes
     )
 
     val STARFISH = registerCritter(
         "starfish",
         ::StarfishEntity,
-        EntityDimensions.fixed(0.5f, 0.2f),
+        EntityDimensions.scalable(0.5f, 0.2f),
         StarfishEntity::createMobAttributes
     )
 
@@ -659,7 +659,7 @@ object HybridAquaticEntityTypes {
     val SEA_NETTLE = registerJelly(
         "sea_nettle",
         ::SeaNettleEntity,
-        EntityDimensions.fixed(0.75f, 0.75f),
+        EntityDimensions.scalable(0.75f, 0.75f),
         SeaNettleEntity::createMobAttributes
     )
 

@@ -7,10 +7,7 @@ import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.SpawnGroupData
-import net.minecraft.world.entity.VariantHolder
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -25,6 +22,14 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
 
     override fun getMaxSpawnClusterSize(): Int {
         return 3
+    }
+
+    override fun getDimensions(pose: Pose): EntityDimensions {
+        val scale = when (variant) {
+            Type.COMPASS -> 0.6f
+            else -> 1.0f
+        }
+        return super.getDimensions(pose).scale(scale)
     }
 
     companion object {
