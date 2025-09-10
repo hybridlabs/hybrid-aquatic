@@ -23,8 +23,8 @@ public class ConduitPowerFogModifier implements FogRenderer.MobEffectFogFunction
 
         float f = effect.isInfiniteDuration() ? 5.0F : Mth.lerp(Math.min(1.0F, (float) effect.getDuration() / 20.0F),
                 viewDistance, 5.0F);
-        fogData.start = f * 16.0F * fogDistanceMultiplier;
-        fogData.end = f * 24.0F * fogDistanceMultiplier;
+        fogData.start = f * 24.0F * fogDistanceMultiplier;
+        fogData.end = f * 48.0F * fogDistanceMultiplier;
         fogData.shape = FogShape.SPHERE;
     }
 }

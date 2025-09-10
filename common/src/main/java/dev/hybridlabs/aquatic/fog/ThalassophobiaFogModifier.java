@@ -23,8 +23,8 @@ public class ThalassophobiaFogModifier implements FogRenderer.MobEffectFogFuncti
 
         float f = effect.isInfiniteDuration() ? 5.0F : Mth.lerp(Math.min(1.0F, (float) effect.getDuration() / 20.0F),
                 viewDistance, 5.0F);
-        fogData.start = f * 2.0F * fogDistanceMultiplier;
-        fogData.end = f * 4.0F * fogDistanceMultiplier;
+        fogData.start = f * 8.0F * fogDistanceMultiplier;
+        fogData.end = f * 16.0F * fogDistanceMultiplier;
         fogData.shape = FogShape.SPHERE;
     }
 }
