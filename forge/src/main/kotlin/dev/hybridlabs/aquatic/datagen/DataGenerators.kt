@@ -1,5 +1,6 @@
 package datagen
 
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.config.HybridAquaticConfigHandler
 import dev.hybridlabs.aquatic.initializeConfig
@@ -25,7 +26,7 @@ object DataGenerators {
         val packOutput = generator.packOutput
         val lookupProvider = event.lookupProvider
 
-        val configFile = Constants.CONFIG_FILE
+        val configFile = CommonClass.CONFIG_FILE
         val configHandler = HybridAquaticConfigHandler(configFile.toFile())
         initializeConfig(configFile, configHandler)
 

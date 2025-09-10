@@ -105,6 +105,15 @@ class ConfiguredFeatureProvider(
             )
         )
 
+        entries.add(
+            HybridAquaticConfiguredFeatures.BULL_KELP,
+            ConfiguredFeature(
+                HybridAquaticFeatures.BULL_KELP.get(), BullKelpFeatureConfig(
+                    SimpleStateProvider.simple(HybridAquaticBlocks.BULL_KELP.get())
+                )
+            )
+        )
+
         //#region Sargassum
 
         entries.add(

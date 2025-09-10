@@ -1,0 +1,6 @@
+{
+    "type": "forge:add_features",
+    "biomes": "#hybrid-aquatic:bottle_spawn_biomes",
+    "features": "hybrid-aquatic:sea_lettuce_patch",
+    "step": "top_layer_modification"
+}

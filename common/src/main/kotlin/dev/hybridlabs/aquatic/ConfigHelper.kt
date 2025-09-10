@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.config.HybridAquaticConfigHandler
 import java.nio.file.Path
 import kotlin.io.path.notExists
 
-fun initializeConfig(configFile: Path = Constants.CONFIG_FILE, configHandler: HybridAquaticConfigHandler) {
+fun initializeConfig(configFile: Path = CommonClass.CONFIG_FILE, configHandler: HybridAquaticConfigHandler) {
     val logger = Constants.LOG
     if (configFile.notExists()) {
         logger.info("${Constants.MOD_NAME} config file did not exist, creating one")

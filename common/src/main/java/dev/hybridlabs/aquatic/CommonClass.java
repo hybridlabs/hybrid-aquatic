@@ -13,6 +13,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 
+import java.nio.file.Path;
+
 import static dev.hybridlabs.aquatic.Constants.MOD_ID;
 import static dev.hybridlabs.aquatic.Constants.MOD_NAME;
 
@@ -40,6 +42,7 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
     public static final RegistrationProvider<Feature<?>> FEATURE = RegistrationProvider.get(BuiltInRegistries.FEATURE
             , MOD_ID);
+    public static final Path CONFIG_FILE = Services.PLATFORM.getConfigDir().resolve(MOD_ID + ".json");
 
     public static void init() {
 
