@@ -1,17 +1,13 @@
-package dev.hybridlabs.aquatic.datagen
+package datagen
 
 import dev.hybridlabs.aquatic.Constants
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
-import net.minecraft.core.HolderGetter
-import net.minecraft.core.HolderSet
+import dev.hybridlabs.aquatic.config.HybridAquaticConfigHandler
+import dev.hybridlabs.aquatic.initializeConfig
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.level.biome.Biome
-import net.minecraft.world.level.levelgen.GenerationStep
-import net.minecraft.world.level.levelgen.placement.PlacedFeature
+import net.minecraft.world.level.biome.MobSpawnSettings
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider
 import net.minecraftforge.common.world.ForgeBiomeModifiers
 import net.minecraftforge.data.event.GatherDataEvent
@@ -29,46 +25,31 @@ object DataGenerators {
         val packOutput = generator.packOutput
         val lookupProvider = event.lookupProvider
 
-        /*
         val configFile = Constants.CONFIG_FILE
-        val configHandler = HybridBirdsConfigHandler(configFile.toFile())
+        val configHandler = HybridAquaticConfigHandler(configFile.toFile())
         initializeConfig(configFile, configHandler)
-        */
 
         val builder: RegistrySetBuilder = RegistrySetBuilder().add(
             ForgeRegistries.Keys.BIOME_MODIFIERS
         ) { context ->
-            val key =
-                ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation(Constants.MOD_ID, "test"))
-            val biomes: HolderGetter<Biome> = context.lookup(Registries.BIOME)
-            val placedFeatures: HolderGetter<PlacedFeature> = context.lookup(Registries.PLACED_FEATURE)
-
-
-            val feature = placedFeatures.getOrThrow(HybridAquaticPlacedFeatures.WATER_LETTUCE)
-            val biome = biomes.getOrThrow(HybridAquaticBiomeTags.SWAMP)
-            context.register(
-                key, ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                    biome,
-                    HolderSet.direct(feature),
-                    GenerationStep.Decoration.VEGETAL_DECORATION
+            val biomeRegistry = context.lookup(Registries.BIOME)
+            configHandler.config.entitySpawnConfig.forEach {
+                val location = "${it.type.toShortString()}_${it.biomes.location.path}"
+                val key = ResourceKey.create(
+                    ForgeRegistries.Keys.BIOME_MODIFIERS,
+                    ResourceLocation(Constants.MOD_ID, location)
                 )
-            )
-        }
-        /*
-        configHandler.config.entitySpawnConfig.forEach {
-            val key = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, EntityType.getKey(it.type))
-            context.register(
-                key, ForgeBiomeModifiers.AddSpawnsBiomeModifier(
-                    biomeRegistry.get(it.biomes).get(),
-                    listOf(
-                        MobSpawnSettings.SpawnerData(it.type, it.weight, it.minGroupSize, it.maxGroupSize)
+                context.register(
+                    key, ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                        biomeRegistry.get(it.biomes).get(),
+                        listOf(
+                            MobSpawnSettings.SpawnerData(it.type, it.weight, it.minGroupSize, it.maxGroupSize)
+                        )
+
                     )
-
                 )
-            )
+            }
         }
-    }
-     */
 
         generator.addProvider(
             event.includeServer(), DatapackBuiltinEntriesProvider(

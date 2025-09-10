@@ -86,10 +86,9 @@ repositories {
 }
 
 sourceSets.main.resources.srcDirs += project(':common').file("src/main/resources")
-sourceSets.main.resources.srcDirs {
-    'src/generated/forge/resources'
-    'src/generated/fabric/resources'
-}
+sourceSets.main.resources.srcDirs += 'src/generated/forge/resources'
+sourceSets.main.resources.srcDirs += 'src/generated/fabric/resources'
+
 sourceSets.main.java.srcDirs += project(":common").file('src/main/java')
 
 dependencies {
