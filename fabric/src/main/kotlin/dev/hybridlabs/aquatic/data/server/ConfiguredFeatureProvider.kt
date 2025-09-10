@@ -32,7 +32,7 @@ import java.util.concurrent.CompletableFuture
 
 class ConfiguredFeatureProvider(
     output: FabricDataOutput,
-    registriesFuture: CompletableFuture<HolderLookup.Provider>
+    registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
         // anemone patch
@@ -67,6 +67,36 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticConfiguredFeatures.GREEN_ANEMONE_PATCH,
+            ConfiguredFeature(
+                Feature.NO_BONEMEAL_FLOWER,
+                RandomPatchConfiguration(
+                    3, 3, 3,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            WeightedStateProvider(
+                                SimpleWeightedRandomList.builder<BlockState>()
+                                    .add(
+                                        HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get().defaultBlockState()
+                                            .setValue(WATERLOGGED, true), 1
+                                    )
+                                    .add(
+                                        HybridAquaticBlocks.STRAWBERRY_ANEMONE.get().defaultBlockState().setValue(
+                                            WATERLOGGED,
+                                            true
+                                        ), 3
+                                    )
+                                    .build()
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH,
             ConfiguredFeature(
                 HybridAquaticFeatures.RED_ALGAE_PATCH.get(), ProbabilityFeatureConfiguration(
@@ -82,6 +112,15 @@ class ConfiguredFeatureProvider(
             ConfiguredFeature(
                 HybridAquaticFeatures.SARGASSUM.get(), SargassumFeatureConfig(
                     SimpleStateProvider.simple(HybridAquaticBlocks.SARGASSUM.get())
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.BULL_KELP,
+            ConfiguredFeature(
+                HybridAquaticFeatures.BULL_KELP.get(), BullKelpFeatureConfig(
+                    SimpleStateProvider.simple(HybridAquaticBlocks.BULL_KELP.get())
                 )
             )
         )

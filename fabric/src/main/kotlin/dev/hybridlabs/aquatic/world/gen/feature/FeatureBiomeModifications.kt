@@ -17,13 +17,11 @@ object FeatureBiomeModifications {
             HybridAquaticPlacedFeatures.ANEMONE_PATCH
         )
 
-        /*
         BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.TEMPERATE_OCEANS),
             GenerationStep.Decoration.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.GREEN_ANEMONE_PATCH
         )
-        */
 
         BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
@@ -37,13 +35,11 @@ object FeatureBiomeModifications {
             HybridAquaticPlacedFeatures.FLOATING_SARGASSUM
         )
 
-        /*
         BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
             GenerationStep.Decoration.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.BULL_KELP
         )
-        */
 
         BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.REEF),
