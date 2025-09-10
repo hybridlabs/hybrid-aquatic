@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -15,10 +14,6 @@ class GoldfishEntity(entityType: EntityType<out GoldfishEntity>, world: Level) :
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK)) {
-
-    public override fun getDefaultLootTable(): ResourceLocation {
-        return ResourceLocation("hybrid-aquatic", "entities/goldfish")
-    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4
