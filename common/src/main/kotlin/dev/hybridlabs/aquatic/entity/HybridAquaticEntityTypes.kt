@@ -103,11 +103,11 @@ object HybridAquaticEntityTypes {
         ParrotfishEntity::createMobAttributes
     )
 
-    val SHEEPSHEAD_WRASSE = registerFish(
+    val WRASSE = registerFish(
         "sheepshead_wrasse",
-        ::SheepsheadWrasseEntity,
+        ::WrasseEntity,
         EntityDimensions.fixed(0.75f, 0.6f),
-        SheepsheadWrasseEntity::createMobAttributes
+        WrasseEntity::createMobAttributes
     )
 
     val SURGEONFISH = registerFish(

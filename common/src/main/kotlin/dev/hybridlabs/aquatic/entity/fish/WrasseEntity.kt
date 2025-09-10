@@ -20,7 +20,7 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class SheepsheadWrasseEntity(entityType: EntityType<out SheepsheadWrasseEntity>, world: Level) :
+class WrasseEntity(entityType: EntityType<out WrasseEntity>, world: Level) :
     HybridAquaticFishEntity(
         entityType, world,
         listOf(
@@ -32,7 +32,7 @@ class SheepsheadWrasseEntity(entityType: EntityType<out SheepsheadWrasseEntity>,
             HybridAquaticEntityTags.SHARK
         )
     ),
-    VariantHolder<SheepsheadWrasseEntity.Companion.Type> {
+    VariantHolder<WrasseEntity.Companion.Type> {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
@@ -60,7 +60,7 @@ class SheepsheadWrasseEntity(entityType: EntityType<out SheepsheadWrasseEntity>,
         }
 
         val TYPE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(SheepsheadWrasseEntity::class.java, EntityDataSerializers.INT)
+            SynchedEntityData.defineId(WrasseEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             CALIFORNIA_SHEEPSHEAD(0, "california_sheepshead");
