@@ -121,6 +121,10 @@ class EntitySpawnConfigGenerator {
         addDolphin(HybridAquaticEntityTypes.KILLER_WHALE.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 5, 1, 4)
         //#endregion
 
+        //#region Mammals
+        addDolphin(HybridAquaticEntityTypes.OTTER.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS), 5, 1, 4)
+        //#endregion
+
         //#region Crustaceans
         addCrustacean(HybridAquaticEntityTypes.DUNGENESS_CRAB.get(), listOf(HybridAquaticBiomeTags.SANDY_BEACHES), 5, 2, 3)
         addCrustacean(HybridAquaticEntityTypes.FIDDLER_CRAB.get(), listOf(HybridAquaticBiomeTags.SWAMP, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.MARSHES), 5, 2, 3)
@@ -220,6 +224,16 @@ class EntitySpawnConfigGenerator {
         maxGroup: Int
     ) {
         add(entityType, spawnTags, MobCategory.WATER_CREATURE, weight, minGroup, maxGroup)
+    }
+
+    private fun addMammal(
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
+        weight: Int,
+        minGroup: Int,
+        maxGroup: Int
+    ) {
+        add(entityType, spawnTags, HybridAquaticSpawnGroup.MAMMAL.spawnGroup, weight, minGroup, maxGroup)
     }
 
     private fun addJelly(

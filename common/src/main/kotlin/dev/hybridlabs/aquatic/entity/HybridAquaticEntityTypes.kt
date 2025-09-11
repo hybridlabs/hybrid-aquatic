@@ -10,6 +10,7 @@ import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.mammal.KillerWhaleEntity
+import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.platform.Services
@@ -82,14 +83,14 @@ object HybridAquaticEntityTypes {
         PearlfishEntity::createMobAttributes
     )
 
-    val STINGRAY = registerRay(
+    val STINGRAY = registerFish(
         "stingray",
         ::StingrayEntity,
         EntityDimensions.fixed(0.75f, 0.2f),
         StingrayEntity::createMobAttributes
     )
 
-    val MANTA_RAY = registerRay(
+    val MANTA_RAY = registerFish(
         "manta_ray",
         ::MantaRayEntity,
         EntityDimensions.fixed(1.0f, 0.3f),
@@ -738,13 +739,20 @@ object HybridAquaticEntityTypes {
 
     //endregion
 
-    //#region dolphins
+    //#region mammals
 
     val KILLER_WHALE = registerDolphin(
         "killer_whale",
         ::KillerWhaleEntity,
         EntityDimensions.fixed(2.5f, 1.5f),
         KillerWhaleEntity::createMobAttributes
+    )
+
+    val OTTER = registerDolphin(
+        "otter",
+        ::OtterEntity,
+        EntityDimensions.fixed(0.6f, 0.6f),
+        OtterEntity::createMobAttributes
     )
 
     //endregion
@@ -825,18 +833,6 @@ object HybridAquaticEntityTypes {
     }
 
     private fun <T : LivingEntity> registerFish(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(
-            id, entityFactory, dimensions, attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("FISH")
-        )
-    }
-
-    private fun <T : LivingEntity> registerRay(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,

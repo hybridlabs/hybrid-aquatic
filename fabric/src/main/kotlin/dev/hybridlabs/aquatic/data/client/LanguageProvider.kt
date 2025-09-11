@@ -263,7 +263,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.BLUE_SPOTTED_STINGRAY.get() to "Blue Spotted Stingray",
             HybridAquaticItems.SPOTTED_EAGLE_RAY.get() to "Spotted Eagle Ray",
             HybridAquaticItems.SUNFISH.get() to "Sunfish",
-            HybridAquaticItems.BLOWFISH.get() to "Toadfish",
+            HybridAquaticItems.BLOWFISH.get() to "Blowfish",
             HybridAquaticItems.PARROTFISH.get() to "Parrotfish",
             HybridAquaticItems.STONEFISH.get() to "Stonefish",
             HybridAquaticItems.SEAHORSE.get() to "Seahorse",
@@ -422,7 +422,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         val entityNameMap = mapOf(
             HybridAquaticEntityTypes.CLOWNFISH.get() to "Clownfish",
             HybridAquaticEntityTypes.DAMSELFISH.get() to "Damselfish",
-            HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get() to "African Butterfly Fish",
+            HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get() to "African Butterflyfish",
             HybridAquaticEntityTypes.ANGLERFISH.get() to "Anglerfish",
             HybridAquaticEntityTypes.JOHN_DORY.get() to "John Dory",
             HybridAquaticEntityTypes.SNAILFISH.get() to "Snailfish",
@@ -484,7 +484,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.HAMMERHEAD_SHARK.get() to "Hammerhead Shark",
             HybridAquaticEntityTypes.WHALE_SHARK.get() to "Whale Shark",
             HybridAquaticEntityTypes.KARKINOS.get() to "Karkinos",
-            HybridAquaticEntityTypes.DUNGENESS_CRAB.get() to "Crab",
+            HybridAquaticEntityTypes.DUNGENESS_CRAB.get() to "Dungeness Crab",
             HybridAquaticEntityTypes.FIDDLER_CRAB.get() to "Fiddler Crab",
             HybridAquaticEntityTypes.HERMIT_CRAB.get() to "Hermit Crab",
             HybridAquaticEntityTypes.GHOST_CRAB.get() to "Ghost Crab",
@@ -517,9 +517,10 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.FIREWORK_JELLYFISH.get() to "Firework Jellyfish",
             HybridAquaticEntityTypes.BLUE_JELLYFISH.get() to "Blue Jellyfish",
             HybridAquaticEntityTypes.SEADRAGON.get() to "Seadragon",
-            HybridAquaticEntityTypes.WRASSE.get() to "Sheepshead Wrasse",
+            HybridAquaticEntityTypes.WRASSE.get() to "Wrasse",
             HybridAquaticEntityTypes.HOUND_SHARK.get() to "Hound Shark",
             HybridAquaticEntityTypes.KILLER_WHALE.get() to "Orca",
+            HybridAquaticEntityTypes.OTTER.get() to "Otter",
         )
 
         // verify display name list is valid

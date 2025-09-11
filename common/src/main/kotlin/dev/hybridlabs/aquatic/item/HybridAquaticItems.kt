@@ -1454,8 +1454,8 @@ object HybridAquaticItems {
 
     //#region Fish
 
-    val AFRICAN_BUTTERFLY_SPAWN_EGG =
-        registerSpawnEgg("african_butterfly_spawn_egg", HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH, 0xb57955, 0x1e3555)
+    val AFRICAN_BUTTERFLYFISH_SPAWN_EGG =
+        registerSpawnEgg("african_butterflyfish_spawn_egg", HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH, 0xb57955, 0x1e3555)
     val BARRELEYE_SPAWN_EGG =
         registerSpawnEgg("barreleye_spawn_egg", HybridAquaticEntityTypes.BARRELEYE, 0x4b4343, 0x6bc96c)
     val BETTA_SPAWN_EGG =
@@ -1549,7 +1549,8 @@ object HybridAquaticItems {
         registerSpawnEgg("john_dory_spawn_egg", HybridAquaticEntityTypes.JOHN_DORY, 0xdcc6c6, 0x8a7f55)
     val SNAILFISH_SPAWN_EGG =
         registerSpawnEgg("snailfish_spawn_egg", HybridAquaticEntityTypes.SNAILFISH, 0xe0c2ed, 0xf0dcef)
-    val OARFISH_SPAWN_EGG = registerSpawnEgg("oarfish_spawn_egg", HybridAquaticEntityTypes.OARFISH, 0x8892ab, 0xb04743)
+    val OARFISH_SPAWN_EGG =
+        registerSpawnEgg("oarfish_spawn_egg", HybridAquaticEntityTypes.OARFISH, 0x8892ab, 0xb04743)
     val RATFISH_SPAWN_EGG =
         registerSpawnEgg("ratfish_spawn_egg", HybridAquaticEntityTypes.RATFISH, 0xa16470, 0x673146)
 
@@ -1569,9 +1570,7 @@ object HybridAquaticItems {
     //#region Deep Sea Cephalopod
 
     val GLOWING_SUCKER_OCTOPUS_SPAWN_EGG =
-        registerSpawnEgg(
-        "glowing_sucker_octopus_spawn_egg", HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS, 0x892f4f, 0x84d5fe
-    )
+        registerSpawnEgg("glowing_sucker_octopus_spawn_egg", HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS, 0x892f4f, 0x84d5fe)
     val NAUTILUS_SPAWN_EGG =
         registerSpawnEgg("nautilus_spawn_egg", HybridAquaticEntityTypes.NAUTILUS, 0xd4ccc3, 0xae4635)
     val UMBRELLA_OCTOPUS_SPAWN_EGG =
@@ -1588,13 +1587,9 @@ object HybridAquaticItems {
     val BLUE_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg("blue_jellyfish_spawn_egg", HybridAquaticEntityTypes.BLUE_JELLYFISH, 0x4dc0e8, 0xff6b97)
     val CEPHEIDAE_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg(
-        "cepheidae_jellyfish_spawn_egg", HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH, 0x623062, 0x89a1d8
-    )
+        registerSpawnEgg("cepheidae_jellyfish_spawn_egg", HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH, 0x623062, 0x89a1d8)
     val LIONS_MANE_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg(
-        "lions_mane_jellyfish_spawn_egg", HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH, 0xf6d5b1, 0x541e48
-    )
+        registerSpawnEgg("lions_mane_jellyfish_spawn_egg", HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH, 0xf6d5b1, 0x541e48)
     val MOON_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg("moon_jellyfish_spawn_egg", HybridAquaticEntityTypes.MOON_JELLYFISH, 0xa293f3, 0xe0caf8)
     val NOMURA_JELLYFISH_SPAWN_EGG =
@@ -1711,10 +1706,13 @@ object HybridAquaticItems {
 
     //#endregion
 
-    //#region Dolphins
+    //#region Mammals
 
     val KILLER_WHALE_SPAWN_EGG =
         registerSpawnEgg("killer_whale_spawn_egg", HybridAquaticEntityTypes.KILLER_WHALE, 0x21222e, 0xe6e6ec)
+
+    val OTTER_SPAWN_EGG =
+        registerSpawnEgg("otter_spawn_egg", HybridAquaticEntityTypes.OTTER, 0x21222e, 0xe6e6ec)
 
     //#endregion
 

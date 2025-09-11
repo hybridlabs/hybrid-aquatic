@@ -12,6 +12,8 @@ public enum HybridAquaticSpawnGroup {
 
     DOLPHIN("dolphin", 4, true, true, 64),
 
+    MAMMAL("mammal", 4, true, true, 64),
+
     CEPHALOPOD("cephalopod", 5, true, false, 64),
 
     JELLY("jelly", 5, true, false, 64),
