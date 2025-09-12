@@ -10,22 +10,16 @@ configurations.create('fabricDatagen')
 dependencies {
     fabricDatagen project(path: ':fabric', configuration: 'datagenOutput')
 }
-tasks.register('copyDatagen', Copy) {
-    group "build"
-    from configurations.fabricDatagen // this will create a task dependency
-    into "src/generated/fabric/resources"
-}
-
-mixin {
-    add(sourceSets.main, "${forge_mod_id}.refmap.json")
-    config("${mod_id}.forge.mixins.json")
-}
 
 legacyForge {
     apply plugin: 'org.jetbrains.kotlin.jvm'
     apply plugin: 'kotlin'
     version = "${minecraft_version}-${forge_version}"
 
+    mixin {
+        add(sourceSets.main, "${forge_mod_id}.refmap.json")
+        config("${mod_id}.forge.mixins.json")
+    }
 
     // AT validation is broken on Forge 1.20.1
     validateAccessTransformers = false
@@ -45,11 +39,6 @@ legacyForge {
         main.kotlin.srcDirs = ['src/main/java', 'src/main/kotlin']
     }
 
-    compileKotlin {
-        source(project(":common").sourceSets.main.kotlin)
-        source(project(":common").sourceSets.main.java)
-        inputs.file "../gradle.properties"
-    }
 
     runs {
         client {
@@ -85,13 +74,14 @@ repositories {
     mavenCentral()
 }
 
-sourceSets.main.resources.srcDirs += project(':common').file("src/main/resources")
-sourceSets.main.resources.srcDirs += 'src/generated/forge/resources'
-sourceSets.main.resources.srcDirs += 'src/generated/fabric/resources'
+sourceSets.main.resources.srcDirs += 'src/generated/resources'
 
-sourceSets.main.java.srcDirs += project(":common").file('src/main/java')
+processResources {
+    from configurations.fabricDatagen.singleFile
+}
 
 dependencies {
+    compileOnly project(":common")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
     modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
@@ -107,11 +97,7 @@ jar {
     ])
 }
 
-subprojects {
-    apply plugin: 'java'
-    apply plugin: 'org.jetbrains.kotlin.jvm'
-    apply plugin: 'kotlin'
-    repositories {
-        mavenCentral()
-    }
+compileKotlin {
+    source(project(":common").sourceSets.main.allSource)
+    inputs.file "../gradle.properties"
 }
