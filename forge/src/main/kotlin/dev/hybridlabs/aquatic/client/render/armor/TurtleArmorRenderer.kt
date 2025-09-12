@@ -1,3 +1,5 @@
+package dev.hybridlabs.aquatic.client.render.armor
+
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.item.TurtleArmorItem
 import net.minecraft.resources.ResourceLocation

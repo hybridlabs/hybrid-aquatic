@@ -2,8 +2,8 @@ package datagen
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.config.ConfigHelper.initializeConfig
 import dev.hybridlabs.aquatic.config.HybridAquaticConfigHandler
-import dev.hybridlabs.aquatic.initializeConfig
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey

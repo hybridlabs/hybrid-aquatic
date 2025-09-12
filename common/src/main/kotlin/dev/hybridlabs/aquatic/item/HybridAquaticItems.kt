@@ -21,37 +21,49 @@ object HybridAquaticItems {
     val DIVING_HELMET = register(
         "diving_helmet"
     ) {
-        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.HELMET, Item.Properties().stacksTo(1))
+        Services.PLATFORM.createArmor(
+            HybridAquaticArmorMaterials.DIVING,
+            ArmorItem.Type.HELMET,
+            Item.Properties().stacksTo(1)
+        )
     }
 
     val DIVING_SUIT = register(
         "diving_suit"
     ) {
-        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1))
+        Services.PLATFORM.createArmor(
+            HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+        )
     }
 
     val DIVING_LEGGINGS = register(
         "diving_leggings"
     ) {
-        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1))
+        Services.PLATFORM.createArmor(
+            HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1)
+        )
     }
 
     val DIVING_BOOTS = register(
         "diving_boots"
     ) {
-        DivingArmorItem(HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1))
+        Services.PLATFORM.createArmor(
+            HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
+        )
     }
 
     val NAUTILUS_HELMET = register(
         "nautilus_helmet"
     ) {
-        SeashellArmorItem(HybridAquaticArmorMaterials.SEASHELL, ArmorItem.Type.HELMET, Item.Properties().stacksTo(1))
+        Services.PLATFORM.createArmor(
+            HybridAquaticArmorMaterials.SEASHELL, ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
+        )
     }
 
     val NAUTILUS_PAULDRONS = register(
         "nautilus_pauldrons"
     ) {
-        SeashellArmorItem(
+        Services.PLATFORM.createArmor(
             HybridAquaticArmorMaterials.SEASHELL, ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
@@ -59,13 +71,15 @@ object HybridAquaticItems {
     val TURTLE_CHESTPLATE = register(
         "turtle_chestplate"
     ) {
-        TurtleArmorItem(HybridAquaticArmorMaterials.TURTLE, ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1))
+        Services.PLATFORM.createArmor(
+            HybridAquaticArmorMaterials.TURTLE, ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+        )
     }
 
     val MANGLERFISH_LURE = register(
         "manglerfish_lure"
     ) {
-        ManglerfishArmorItem(
+        Services.PLATFORM.createArmor(
             HybridAquaticArmorMaterials.MANGLERFISH, ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
         )
     }
@@ -73,7 +87,7 @@ object HybridAquaticItems {
     val MANGLERFISH_FIN = register(
         "manglerfish_fin"
     ) {
-        ManglerfishArmorItem(
+        Services.PLATFORM.createArmor(
             HybridAquaticArmorMaterials.MANGLERFISH, ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
@@ -81,13 +95,17 @@ object HybridAquaticItems {
     val EEL_SCARF = register(
         "eel_scarf"
     ) {
-        EelArmorItem(HybridAquaticArmorMaterials.EEL, ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1))
+        Services.PLATFORM.createArmor(
+            HybridAquaticArmorMaterials.EEL,
+            ArmorItem.Type.CHESTPLATE,
+            Item.Properties().stacksTo(1)
+        )
     }
 
     val MOON_JELLYFISH_HAT = register(
         "moon_jellyfish_hat"
     ) {
-        MoonJellyfishArmorItem(
+        Services.PLATFORM.createArmor(
             HybridAquaticArmorMaterials.MOONJELLYFISH, ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
         )
     }
@@ -118,102 +136,41 @@ object HybridAquaticItems {
 
     val SEASHELL_PICKAXE = register(
         "seashell_pickaxe"
-    ) {
-        PickaxeItem(
-            HybridAquaticToolMaterials.SEASHELL,
-            1,
-            -2.8f,
-            Item.Properties()
-        )
-    }
+    ) { SeashellPickaxeItem(Item.Properties()) }
 
     val SEASHELL_AXE = register(
         "seashell_axe"
-    ) {
-        AxeItem(
-            HybridAquaticToolMaterials.SEASHELL,
-            7F,
-            -3.2f,
-            Item.Properties()
-        )
-    }
+    ) { SeashellAxeItem(Item.Properties()) }
 
     val SEASHELL_SHOVEL = register(
         "seashell_shovel"
-    ) {
-        ShovelItem(
-            HybridAquaticToolMaterials.SEASHELL,
-            1.5F,
-            -3.0f,
-            Item.Properties()
-        )
-    }
+    ) { SeashellShovelItem(Item.Properties()) }
 
     val SEASHELL_HOE = register(
         "seashell_hoe"
     ) {
-        HoeItem(
-            HybridAquaticToolMaterials.SEASHELL,
-            1,
-            -2.0f,
-            Item.Properties()
-        )
+        SeashellHoeItem(Item.Properties())
     }
 
     val CORAL_BLADE = register(
         "coral_blade"
-    ) {
-        SwordItem(
-            HybridAquaticToolMaterials.CORAL,
-            3,
-            -2.4f,
-            Item.Properties()
-        )
-    }
+    ) { CoralBladeItem(Item.Properties()) }
 
     val CORAL_PICKAXE = register(
         "coral_pickaxe"
-    ) {
-        PickaxeItem(
-            HybridAquaticToolMaterials.CORAL,
-            1,
-            -2.8f,
-            Item.Properties()
-        )
-    }
+    ) { CoralPickaxeItem(Item.Properties()) }
 
     val CORAL_AXE = register(
         "coral_axe"
-    ) {
-        AxeItem(
-            HybridAquaticToolMaterials.CORAL,
-            1F,
-            -3.2f,
-            Item.Properties()
-        )
-    }
+    ) { CoralAxeItem(Item.Properties()) }
 
     val CORAL_SHOVEL = register(
         "coral_shovel"
-    ) {
-        ShovelItem(
-            HybridAquaticToolMaterials.CORAL,
-            1F,
-            -3.0f,
-            Item.Properties()
-        )
-    }
+    ) { CoralShovelItem(Item.Properties()) }
 
     val CORAL_HOE = register(
         "coral_hoe"
-    ) {
-        HoeItem(
-            HybridAquaticToolMaterials.CORAL,
-            1,
-            -2.0f,
-            Item.Properties()
-        )
-    }
+    ) { CoralHoeItem(Item.Properties()) }
 
     //#endregion
 
@@ -222,19 +179,16 @@ object HybridAquaticItems {
     //#region Nature Blocks
 
     val ANEMONE = register("anemone") {
-        AnemoneBlockItem(HybridAquaticBlocks.ANEMONE.get(), Item.Properties())
+        Services.PLATFORM.createBlockItem(HybridAquaticBlocks.ANEMONE.get(), Item.Properties())
     }
+
     val STRAWBERRY_ANEMONE = register("strawberry_anemone") {
-        StrawberryAnemoneBlockItem(
-            HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(),
-            Item.Properties()
-        )
+        Services.PLATFORM.createBlockItem(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(), Item.Properties())
     }
     val GIANT_GREEN_ANEMONE = register("giant_green_anemone") {
-        GiantGreenAnemoneBlockItem(
-            HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(), Item.Properties()
-        )
+        Services.PLATFORM.createBlockItem(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(), Item.Properties())
     }
+
     val GIANT_CLAM = registerBlockItem("giant_clam") { HybridAquaticBlocks.GIANT_CLAM.get() }
     val SARGASSUM = registerBlockItem("sargassum") { HybridAquaticBlocks.SARGASSUM.get() }
     val BULL_KELP = registerBlockItem("bull_kelp") { HybridAquaticBlocks.BULL_KELP.get() }
@@ -326,7 +280,8 @@ object HybridAquaticItems {
     val RAFT = registerPlaceableInWaterBlockItem("raft") { HybridAquaticBlocks.RAFT.get() }
     val GLOWSTICK =
         registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
-    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") { MessageInABottleItem(Item.Properties()) }
+    val MESSAGE_IN_A_BOTTLE =
+        register("message_in_a_bottle") { Services.PLATFORM.createMessageInABottleItem(Item.Properties()) }
 
     //#region Plushies
 

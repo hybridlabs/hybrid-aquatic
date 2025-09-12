@@ -2,14 +2,15 @@ package dev.hybridlabs.aquatic.platform;
 
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.Constants;
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
+import dev.hybridlabs.aquatic.item.*;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import dev.hybridlabs.aquatic.platform.services.PlatformHelper;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -114,11 +115,6 @@ public class ForgePlatformHelper implements PlatformHelper {
         return ForgeMod.BLOCK_REACH.get();
     }
 
-    @Override
-    public BlockBehaviour.Properties getBlockSettings() {
-        return BlockBehaviour.Properties.of();
-    }
-
     private record SpawnPlacementRegistrationHandler<T extends LivingEntity>(
             RegistryObject<EntityType<T>> type,
             SpawnPlacements.Type decoratorType,
@@ -154,4 +150,38 @@ public class ForgePlatformHelper implements PlatformHelper {
         return MobCategory.byName(name.toLowerCase());
     }
 
+    @Override
+    public ArmorItem createArmor(ArmorMaterial material, ArmorItem.Type type, Item.Properties settings) {
+        if (material.equals(HybridAquaticArmorMaterials.DIVING)) {
+            return new DivingArmorItem(material, type, settings);
+        } else if (material.equals(HybridAquaticArmorMaterials.SEASHELL)) {
+            return new SeashellArmorItem(material, type, settings);
+        } else if (material.equals(HybridAquaticArmorMaterials.MANGLERFISH)) {
+            return new ManglerfishArmorItem(material, type, settings);
+        } else if (material.equals(HybridAquaticArmorMaterials.EEL)) {
+            return new EelArmorItem(material, type, settings);
+        } else if (material.equals(HybridAquaticArmorMaterials.TURTLE)) {
+            return new TurtleArmorItem(material, type, settings);
+        } else if (material.equals(HybridAquaticArmorMaterials.MOONJELLYFISH)) {
+            return new MoonJellyfishArmorItem(material, type, settings);
+        }
+        return new ArmorItem(material, type, settings);
+    }
+
+    @Override
+    public Item createBlockItem(Block block, Item.Properties properties) {
+        if (block.equals(HybridAquaticBlocks.INSTANCE.getANEMONE().get())) {
+            return new AnemoneBlockItem(block, properties);
+        } else if (block.equals(HybridAquaticBlocks.INSTANCE.getSTRAWBERRY_ANEMONE().get())) {
+            return new StrawberryAnemoneBlockItem(block, properties);
+        } else if (block.equals(HybridAquaticBlocks.INSTANCE.getGIANT_GREEN_ANEMONE().get())) {
+            return new GiantGreenAnemoneBlockItem(block, properties);
+        }
+        return new BlockItem(block, properties);
+    }
+
+    @Override
+    public Item createMessageInABottleItem(Item.Properties properties) {
+        return new MessageInABottleItem(properties);
+    }
 }

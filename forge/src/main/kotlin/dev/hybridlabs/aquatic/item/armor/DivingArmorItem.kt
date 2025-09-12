@@ -49,6 +49,4 @@ class DivingArmorItem(material: ArmorMaterial, type: Type, settings: Properties)
             }
         })
     }
-
-
 }

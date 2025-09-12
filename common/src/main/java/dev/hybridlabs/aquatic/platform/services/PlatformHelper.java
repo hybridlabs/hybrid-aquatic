@@ -4,8 +4,11 @@ import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.NotNull;
 
@@ -57,12 +60,17 @@ public interface PlatformHelper {
                                                 SpawnPlacements.Type decoratorType, Heightmap.Types heightMapType,
                                                 SpawnPlacements.SpawnPredicate<T> decoratorPredicate);
 
-    BlockBehaviour.Properties getBlockSettings();
-
     <T extends LivingEntity> void registerAttributes(@NotNull String id, EntityType<T> entityType,
                                                      Callable<AttributeSupplier.Builder> attributeContainer);
 
     Attribute getReachAttribute();
 
     MobCategory getMobCategoryByName(String name);
+
+    ArmorItem createArmor(ArmorMaterial material, ArmorItem.Type type, Item.Properties settings);
+
+    Item createBlockItem(Block block, Item.Properties properties);
+
+    Item createMessageInABottleItem(Item.Properties properties);
 }
+
