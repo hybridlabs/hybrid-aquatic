@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "hybrid-aquatic:block/oak_crate"
-  }
-}
