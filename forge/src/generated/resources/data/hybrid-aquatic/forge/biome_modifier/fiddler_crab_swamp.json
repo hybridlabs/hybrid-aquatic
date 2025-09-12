@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:swamp",
+  "spawners": {
+    "type": "hybrid-aquatic:fiddler_crab",
+    "maxCount": 3,
+    "minCount": 2,
+    "weight": 5
+  }
+}

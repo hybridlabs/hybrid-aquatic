@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:reef",
+  "spawners": {
+    "type": "hybrid-aquatic:triggerfish",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 3
+  }
+}

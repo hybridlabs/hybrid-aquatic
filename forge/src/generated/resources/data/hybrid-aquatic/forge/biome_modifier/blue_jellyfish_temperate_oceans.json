@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:temperate_oceans",
+  "spawners": {
+    "type": "hybrid-aquatic:blue_jellyfish",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 3
+  }
+}

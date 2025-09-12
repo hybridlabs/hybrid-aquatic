@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:rivers",
+  "spawners": {
+    "type": "hybrid-aquatic:golden_dorado",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

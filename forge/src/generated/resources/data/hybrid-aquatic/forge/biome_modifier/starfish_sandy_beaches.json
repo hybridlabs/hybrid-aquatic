@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:sandy_beaches",
+  "spawners": {
+    "type": "hybrid-aquatic:starfish",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 5
+  }
+}

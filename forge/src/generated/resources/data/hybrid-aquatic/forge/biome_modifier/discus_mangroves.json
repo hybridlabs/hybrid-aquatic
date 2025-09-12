@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:mangroves",
+  "spawners": {
+    "type": "hybrid-aquatic:discus",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 3
+  }
+}

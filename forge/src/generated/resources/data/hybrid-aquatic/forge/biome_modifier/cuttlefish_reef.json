@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:reef",
+  "spawners": {
+    "type": "hybrid-aquatic:cuttlefish",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 1
+  }
+}

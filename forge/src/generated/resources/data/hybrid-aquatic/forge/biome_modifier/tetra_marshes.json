@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:marshes",
+  "spawners": {
+    "type": "hybrid-aquatic:tetra",
+    "maxCount": 3,
+    "minCount": 2,
+    "weight": 3
+  }
+}

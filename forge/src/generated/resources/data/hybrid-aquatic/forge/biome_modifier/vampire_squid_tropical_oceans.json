@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:tropical_oceans",
+  "spawners": {
+    "type": "hybrid-aquatic:vampire_squid",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 2
+  }
+}

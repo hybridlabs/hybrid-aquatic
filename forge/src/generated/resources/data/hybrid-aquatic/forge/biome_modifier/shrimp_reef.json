@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:reef",
+  "spawners": {
+    "type": "hybrid-aquatic:shrimp",
+    "maxCount": 3,
+    "minCount": 2,
+    "weight": 3
+  }
+}

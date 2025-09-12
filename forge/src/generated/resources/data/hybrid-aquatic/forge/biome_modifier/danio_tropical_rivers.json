@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:tropical_rivers",
+  "spawners": {
+    "type": "hybrid-aquatic:danio",
+    "maxCount": 3,
+    "minCount": 2,
+    "weight": 3
+  }
+}

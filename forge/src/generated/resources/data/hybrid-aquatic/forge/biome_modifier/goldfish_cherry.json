@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:cherry",
+  "spawners": {
+    "type": "hybrid-aquatic:goldfish",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 5
+  }
+}

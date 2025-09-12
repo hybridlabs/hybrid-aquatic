@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:temperate_oceans",
+  "spawners": {
+    "type": "hybrid-aquatic:mackerel",
+    "maxCount": 5,
+    "minCount": 3,
+    "weight": 5
+  }
+}

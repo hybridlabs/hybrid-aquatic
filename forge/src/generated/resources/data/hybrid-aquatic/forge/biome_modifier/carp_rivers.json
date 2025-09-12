@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:rivers",
+  "spawners": {
+    "type": "hybrid-aquatic:carp",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 5
+  }
+}

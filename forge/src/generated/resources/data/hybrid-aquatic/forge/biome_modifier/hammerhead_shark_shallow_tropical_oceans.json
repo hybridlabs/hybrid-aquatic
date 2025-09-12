@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:shallow_tropical_oceans",
+  "spawners": {
+    "type": "hybrid-aquatic:hammerhead_shark",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 3
+  }
+}
