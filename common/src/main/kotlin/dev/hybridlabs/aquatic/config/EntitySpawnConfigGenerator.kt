@@ -121,8 +121,8 @@ class EntitySpawnConfigGenerator {
         addDolphin(HybridAquaticEntityTypes.KILLER_WHALE.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 5, 1, 4)
         //#endregion
 
-        //#region Mammals
-        addDolphin(HybridAquaticEntityTypes.OTTER.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS), 5, 1, 4)
+        //#region Mammal
+        addMammal(HybridAquaticEntityTypes.OTTER.get(), listOf(HybridAquaticBiomeTags.RIVERS, HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.SANDY_BEACHES, HybridAquaticBiomeTags.ROCKY_BEACHES), 5, 1, 4)
         //#endregion
 
         //#region Crustaceans

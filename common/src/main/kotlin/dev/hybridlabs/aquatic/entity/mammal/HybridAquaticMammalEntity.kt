@@ -1,12 +1,14 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.FluidTags
 import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
@@ -18,6 +20,7 @@ import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.animatable.GeoEntity
@@ -151,17 +154,17 @@ open class HybridAquaticMammalEntity(
         }
 
         fun canSpawn(
-            type: EntityType<out WaterAnimal>,
-            world: ServerLevelAccessor,
-            reason: MobSpawnType,
+            type: EntityType<out HybridAquaticMammalEntity>,
+            level: LevelAccessor,
+            spawnReason: MobSpawnType,
             pos: BlockPos,
             random: RandomSource
         ): Boolean {
-            val topY = world.seaLevel + 4
-            val bottomY = world.seaLevel
-
-            return pos.y in bottomY..topY &&
-                    world.isWaterAt(pos)
+            val mutable = pos.mutable()
+            do {
+                mutable.move(Direction.UP)
+            } while (level.getFluidState(mutable).`is`(FluidTags.WATER))
+            return level.getBlockState(mutable).isAir
         }
     }
 }
