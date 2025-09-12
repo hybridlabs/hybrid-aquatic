@@ -19,7 +19,7 @@ public abstract class SkullBlockEntityTextureMixin {
      * We still need to do this on Forge because we don't override
      * looking up the texture in SKIN_BY_TYPE.
      */
-    @Inject(method = "lambda$static$0", at = @At("TAIL"))
+    @Inject(method = {"lambda$static$0", "m_260765_"}, at = @At("TAIL"))
     private static void injectTextures(HashMap<SkullBlock.Type, ResourceLocation> map, CallbackInfo info) {
         // inject plushie variants
         EnumEntries<PlushieBlock.Variant> variants = PlushieBlock.Variant.getEntries();
