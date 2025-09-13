@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.FlashlightFishEntity
 import net.minecraft.resources.ResourceLocation
 
@@ -15,6 +15,6 @@ class FlashlightFishEntityModel : HybridAquaticFishEntityModel<FlashlightFishEnt
             "textures/entity/fish/flashlight_fish/flashlight_fish_off.png"
         }
 
-        return ResourceLocation(Constants.MOD_ID, texturePath)
+        return CommonClass.locate(texturePath)
     }
 }

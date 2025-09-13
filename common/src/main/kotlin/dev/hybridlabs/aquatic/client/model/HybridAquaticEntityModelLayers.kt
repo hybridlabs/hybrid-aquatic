@@ -1,13 +1,12 @@
 package dev.hybridlabs.aquatic.client.model
 
 import com.google.common.collect.ImmutableMap
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
 import net.minecraft.client.model.SkullModelBase
 import net.minecraft.client.model.geom.EntityModelSet
 import net.minecraft.client.model.geom.ModelLayerLocation
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.block.SkullBlock
 
 /**
@@ -24,7 +23,7 @@ object HybridAquaticEntityModelLayers {
     val WHALE_SHARK_PLUSHIE = getModelLayerLocation("whale_shark_plushie")
 
     private fun getModelLayerLocation(id: String): ModelLayerLocation {
-        return ModelLayerLocation(ResourceLocation(Constants.MOD_ID, id), "main")
+        return ModelLayerLocation(CommonClass.locate(id), "main")
     }
 
     /**

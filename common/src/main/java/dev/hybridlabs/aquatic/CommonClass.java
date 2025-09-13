@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic;
 import dev.hybridlabs.aquatic.platform.Services;
 import dev.hybridlabs.aquatic.platform.registration.RegistrationProvider;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
@@ -43,6 +44,11 @@ public class CommonClass {
     public static final RegistrationProvider<Feature<?>> FEATURE = RegistrationProvider.get(BuiltInRegistries.FEATURE
             , MOD_ID);
     public static final Path CONFIG_FILE = Services.PLATFORM.getConfigDir().resolve(MOD_ID + ".json");
+
+    public static ResourceLocation locate(String path) {
+        return new ResourceLocation(MOD_ID, path);
+    }
+
 
     public static void init() {
 

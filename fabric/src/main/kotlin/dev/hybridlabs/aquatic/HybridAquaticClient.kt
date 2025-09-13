@@ -23,7 +23,6 @@ import dev.hybridlabs.aquatic.client.render.armor.*
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.BuoyBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.GiantGreenAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
 import dev.hybridlabs.aquatic.client.renderer.item.StrawberryAnemoneBlockItemRenderer
@@ -191,7 +190,6 @@ object HybridAquaticClient : ClientModInitializer {
         registry.register(HybridAquaticItems.ANEMONE.get(), AnemoneBlockItemRenderer())
         registry.register(HybridAquaticItems.GIANT_GREEN_ANEMONE.get(), GiantGreenAnemoneBlockItemRenderer())
         registry.register(HybridAquaticItems.STRAWBERRY_ANEMONE.get(), StrawberryAnemoneBlockItemRenderer())
-        registry.register(HybridAquaticItems.BUOY.get(), BuoyBlockItemRenderer())
         registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleBlockItemRenderer())
     }
 

@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
@@ -13,15 +13,15 @@ abstract class HybridAquaticCephalopodEntityModel<T : HybridAquaticCephalopodEnt
     GeoModel<T>() {
 
     override fun getModelResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "geo/cephalopod/$id/$id.geo.json")
+        return CommonClass.locate("geo/cephalopod/$id/$id.geo.json")
     }
 
     override fun getTextureResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "textures/entity/cephalopod/$id/$id.png")
+        return CommonClass.locate("textures/entity/cephalopod/$id/$id.png")
     }
 
     override fun getAnimationResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "animations/$id.animation.json")
+        return CommonClass.locate("animations/$id.animation.json")
     }
 
     override fun setCustomAnimations(

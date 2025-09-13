@@ -367,7 +367,7 @@ open class HybridAquaticCephalopodEntity(
         val CEPHALOPOD_SIZE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HybridAquaticCephalopodEntity::class.java, EntityDataSerializers.INT)
         val HUNGER: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HybridAquaticFishEntity::class.java, EntityDataSerializers.INT)
+            SynchedEntityData.defineId(HybridAquaticCephalopodEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticCephalopodEntity::class.java, EntityDataSerializers.BOOLEAN)
 

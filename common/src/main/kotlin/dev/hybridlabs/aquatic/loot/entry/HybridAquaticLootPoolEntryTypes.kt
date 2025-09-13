@@ -1,9 +1,8 @@
 package dev.hybridlabs.aquatic.loot.entry
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType
 
 object HybridAquaticLootPoolEntryTypes {
@@ -12,7 +11,7 @@ object HybridAquaticLootPoolEntryTypes {
     private fun register(id: String, serializer: MessageInABottleItemEntry.Serializer): LootPoolEntryType {
         return Registry.register(
             BuiltInRegistries.LOOT_POOL_ENTRY_TYPE,
-            ResourceLocation(Constants.MOD_ID, id), LootPoolEntryType(serializer)
+            CommonClass.locate(id), LootPoolEntryType(serializer)
         )
     }
 }

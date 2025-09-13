@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneBlockItemRenderer
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.block.Block
@@ -12,7 +12,7 @@ class StrawberryAnemoneBlockItem(block: Block, properties: Properties) : BlockIt
     override fun initializeClient(consumer: Consumer<IClientItemExtensions?>) {
         consumer.accept(object : IClientItemExtensions {
             override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-                return StrawberryAnemoneItemRenderer()
+                return StrawberryAnemoneBlockItemRenderer()
             }
         })
     }

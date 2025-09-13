@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.client.render.item
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.block.BlockEntityHelper.Companion.createBlockEntityRendererProviderContext
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
-import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.block.entity.GiantGreenAnemoneBlockEntity
+import dev.hybridlabs.aquatic.client.render.block.entity.GiantGreenAnemoneBlockEntityRenderer
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.EntityModelSet
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
@@ -14,7 +14,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 
-class StrawberryAnemoneItemRenderer(
+class GiantGreenAnemoneBlockItemRenderer(
     blockEntityRenderDispatcher: BlockEntityRenderDispatcher,
     entityModelSet: EntityModelSet
 ) :
@@ -25,7 +25,7 @@ class StrawberryAnemoneItemRenderer(
     constructor() : this(client.blockEntityRenderDispatcher, client.entityModels)
 
     val blockEntity by lazy {
-        StrawberryAnemoneBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.STRAWBERRY_ANEMONE.get().defaultBlockState())
+        GiantGreenAnemoneBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get().defaultBlockState())
     }
 
     override fun renderByItem(
@@ -37,8 +37,8 @@ class StrawberryAnemoneItemRenderer(
     }
 
     companion object {
-        private val RENDERER: StrawberryAnemoneBlockEntityRenderer =
-            StrawberryAnemoneBlockEntityRenderer(createBlockEntityRendererProviderContext())
+        private val RENDERER: GiantGreenAnemoneBlockEntityRenderer =
+            GiantGreenAnemoneBlockEntityRenderer(createBlockEntityRendererProviderContext())
         private val client: Minecraft = Minecraft.getInstance()
     }
 }

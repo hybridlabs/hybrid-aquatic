@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.critter
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
@@ -8,18 +8,18 @@ import software.bernie.geckolib.model.GeoModel
 abstract class HybridAquaticCritterEntityModel<T : HybridAquaticCritterEntity>(private val id: String) : GeoModel<T>() {
 
     override fun getModelResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "geo/critter/$id/$id.geo.json")
+        return CommonClass.locate("geo/critter/$id/$id.geo.json")
     }
 
     override fun getTextureResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "textures/entity/critter/$id/$id.png")
+        return CommonClass.locate("textures/entity/critter/$id/$id.png")
     }
 
     override fun getAnimationResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "animations/$id.animation.json")
+        return CommonClass.locate("animations/$id.animation.json")
     }
 
     fun getLayerTextureResource(layer: String): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "textures/entity/critter/$id/layers/${id}_$layer.png")
+        return CommonClass.locate("textures/entity/critter/$id/layers/${id}_$layer.png")
     }
 }

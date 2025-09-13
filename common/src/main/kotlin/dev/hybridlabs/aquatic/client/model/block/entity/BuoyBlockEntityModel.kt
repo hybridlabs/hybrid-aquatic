@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.block.entity
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
@@ -19,8 +19,8 @@ class BuoyBlockEntityModel : GeoModel<BuoyBlockEntity>() {
     }
 
     companion object {
-        val ANIMATION_LOCATION = ResourceLocation(Constants.MOD_ID, "animations/buoy.animation.json")
-        val MODEL_LOCATION = ResourceLocation(Constants.MOD_ID, "geo/buoy.geo.json")
-        val TEXTURE_LOCATION = ResourceLocation(Constants.MOD_ID, "textures/block/buoy.png")
+        val ANIMATION_LOCATION = CommonClass.locate("animations/buoy.animation.json")
+        val MODEL_LOCATION = CommonClass.locate("geo/buoy.geo.json")
+        val TEXTURE_LOCATION = CommonClass.locate("textures/block/buoy.png")
     }
 }

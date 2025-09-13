@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock.Variant
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.client.render.item.MessageInABottleItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.client.extensions.common.IClientItemExtensions
@@ -31,7 +31,7 @@ class MessageInABottleItem(settings: Properties) :
     override fun initializeClient(consumer: Consumer<IClientItemExtensions?>) {
         consumer.accept(object : IClientItemExtensions {
             override fun getCustomRenderer(): BlockEntityWithoutLevelRenderer {
-                return MessageInABottleItemRenderer()
+                return MessageInABottleBlockItemRenderer()
             }
         })
     }

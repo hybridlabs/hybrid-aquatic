@@ -2,12 +2,11 @@
 
 package dev.hybridlabs.aquatic.potions
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.item.Item
@@ -103,6 +102,6 @@ object HybridAquaticPotions {
     }
 
     private fun register(id: String, potion: Potion): Potion {
-        return Registry.register(BuiltInRegistries.POTION, ResourceLocation(Constants.MOD_ID, id), potion)
+        return Registry.register(BuiltInRegistries.POTION, CommonClass.locate(id), potion)
     }
 }

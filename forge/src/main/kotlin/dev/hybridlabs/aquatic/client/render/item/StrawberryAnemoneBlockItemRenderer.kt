@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.client.render.item
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.block.BlockEntityHelper.Companion.createBlockEntityRendererProviderContext
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
+import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
+import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.EntityModelSet
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
@@ -14,7 +14,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 
-class MessageInABottleItemRenderer(
+class StrawberryAnemoneBlockItemRenderer(
     blockEntityRenderDispatcher: BlockEntityRenderDispatcher,
     entityModelSet: EntityModelSet
 ) :
@@ -25,7 +25,7 @@ class MessageInABottleItemRenderer(
     constructor() : this(client.blockEntityRenderDispatcher, client.entityModels)
 
     val blockEntity by lazy {
-        MessageInABottleBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get().defaultBlockState())
+        StrawberryAnemoneBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.STRAWBERRY_ANEMONE.get().defaultBlockState())
     }
 
     override fun renderByItem(
@@ -37,8 +37,8 @@ class MessageInABottleItemRenderer(
     }
 
     companion object {
-        private val RENDERER =
-            MessageInABottleBlockEntityRenderer(createBlockEntityRendererProviderContext())
+        private val RENDERER: StrawberryAnemoneBlockEntityRenderer =
+            StrawberryAnemoneBlockEntityRenderer(createBlockEntityRendererProviderContext())
         private val client: Minecraft = Minecraft.getInstance()
     }
 }

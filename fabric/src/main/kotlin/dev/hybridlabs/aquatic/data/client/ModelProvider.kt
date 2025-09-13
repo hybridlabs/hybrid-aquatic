@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.data.client
 
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
@@ -318,9 +319,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     }
 
     companion object {
-        private val TEMPLATE_ANEMONE = ResourceLocation(Constants.MOD_ID, "item/template_anemone")
+        private val TEMPLATE_ANEMONE = CommonClass.locate("item/template_anemone")
         private val TEMPLATE_MESSAGE_IN_A_BOTTLE =
-            ResourceLocation(Constants.MOD_ID, "item/template_message_in_a_bottle")
-        private val TEMPLATE_PLUSHIE = ResourceLocation(Constants.MOD_ID, "item/template_plushie")
+            CommonClass.locate("item/template_message_in_a_bottle")
+        private val TEMPLATE_PLUSHIE = CommonClass.locate("item/template_plushie")
     }
 }

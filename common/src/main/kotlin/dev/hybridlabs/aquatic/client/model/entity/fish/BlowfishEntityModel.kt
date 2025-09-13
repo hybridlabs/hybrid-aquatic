@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.BlowfishEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
@@ -19,7 +19,7 @@ class BlowfishEntityModel : HybridAquaticFishEntityModel<BlowfishEntity>("blowfi
             else -> "textures/entity/fish/blowfish/blowfish_large.png"
         }
 
-        return ResourceLocation(Constants.MOD_ID, texturePath)
+        return CommonClass.locate(texturePath)
     }
 
     override fun getModelResource(animatable: BlowfishEntity): ResourceLocation {
@@ -31,6 +31,6 @@ class BlowfishEntityModel : HybridAquaticFishEntityModel<BlowfishEntity>("blowfi
             else -> "geo/fish/blowfish/blowfish_large.geo.json"
         }
 
-        return ResourceLocation(Constants.MOD_ID, texturePath)
+        return CommonClass.locate(texturePath)
     }
 }

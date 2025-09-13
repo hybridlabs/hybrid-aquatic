@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
@@ -12,19 +12,19 @@ import software.bernie.geckolib.model.GeoModel
 abstract class HybridAquaticMammalEntityModel<T : HybridAquaticMammalEntity>(private val id: String) :
     GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "geo/mammal/$id/$id.geo.json")
+        return CommonClass.locate("geo/mammal/$id/$id.geo.json")
     }
 
     override fun getTextureResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "textures/entity/mammal/$id/$id.png")
+        return CommonClass.locate("textures/entity/mammal/$id/$id.png")
     }
 
     override fun getAnimationResource(animatable: T): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "animations/$id.animation.json")
+        return CommonClass.locate("animations/$id.animation.json")
     }
 
     fun getLayerTextureResource(layer: String): ResourceLocation {
-        return ResourceLocation(Constants.MOD_ID, "textures/entity/mammal/$id/layers/${id}_$layer.png")
+        return CommonClass.locate("textures/entity/mammal/$id/layers/${id}_$layer.png")
     }
 
     override fun setCustomAnimations(

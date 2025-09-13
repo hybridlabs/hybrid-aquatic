@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.block.entity
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.entity.GiantGreenAnemoneBlockEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
@@ -19,8 +19,8 @@ class GiantGreenAnemoneBlockEntityModel : GeoModel<GiantGreenAnemoneBlockEntity>
     }
 
     companion object {
-        val ANIMATION_LOCATION = ResourceLocation(Constants.MOD_ID, "animations/anemone.animation.json")
-        val MODEL_LOCATION = ResourceLocation(Constants.MOD_ID, "geo/giant_green_anemone.geo.json")
-        val TEXTURE_LOCATION = ResourceLocation(Constants.MOD_ID, "textures/block/giant_green_anemone.png")
+        val ANIMATION_LOCATION = CommonClass.locate("animations/anemone.animation.json")
+        val MODEL_LOCATION = CommonClass.locate("geo/giant_green_anemone.geo.json")
+        val TEXTURE_LOCATION = CommonClass.locate("textures/block/giant_green_anemone.png")
     }
 }

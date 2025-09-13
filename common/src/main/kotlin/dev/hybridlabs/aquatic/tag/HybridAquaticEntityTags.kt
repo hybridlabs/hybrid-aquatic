@@ -1,8 +1,7 @@
 package dev.hybridlabs.aquatic.tag
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import net.minecraft.core.registries.Registries
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 
@@ -24,6 +23,6 @@ object HybridAquaticEntityTags {
     val CAN_USE_FISHING_NET_ON = create("can_use_fishing_net_on")
 
     private fun create(id: String): TagKey<EntityType<*>> {
-        return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation(Constants.MOD_ID, id))
+        return TagKey.create(Registries.ENTITY_TYPE, CommonClass.locate(id))
     }
 }

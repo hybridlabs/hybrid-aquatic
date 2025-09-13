@@ -1,8 +1,7 @@
 package dev.hybridlabs.aquatic.tag
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import net.minecraft.core.registries.Registries
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.world.level.biome.Biome
 
@@ -39,6 +38,6 @@ object HybridAquaticBiomeTags {
     val ROCKY_BEACHES = create("rocky_beaches")
 
     private fun create(id: String): TagKey<Biome> {
-        return TagKey.create(Registries.BIOME, ResourceLocation(Constants.MOD_ID, id))
+        return TagKey.create(Registries.BIOME, CommonClass.locate(id))
     }
 }

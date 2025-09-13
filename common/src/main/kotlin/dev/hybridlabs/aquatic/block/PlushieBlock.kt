@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks.addBlocks
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.StringRepresentable
@@ -32,7 +32,7 @@ class PlushieBlock(variant: Variant, val particleBlock: Block, settings: Propert
         TIGER_SHARK("tiger_shark"),
         WHALE_SHARK("whale_shark");
 
-        val textureLocation: ResourceLocation by lazy { ResourceLocation(Constants.MOD_ID, "textures/entity/block/plushie/${id}_plushie.png") }
+        val textureLocation: ResourceLocation by lazy { CommonClass.locate("textures/entity/block/plushie/${id}_plushie.png") }
 
         override fun getSerializedName(): String = id
     }

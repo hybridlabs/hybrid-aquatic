@@ -1,11 +1,10 @@
 package dev.hybridlabs.aquatic.client.render.armor
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.item.DivingArmorItem
-import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.DefaultedItemGeoModel
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 
 class DivingArmorRenderer : GeoArmorRenderer<DivingArmorItem>(
-    DefaultedItemGeoModel(ResourceLocation(Constants.MOD_ID, "armor/diving_armor"))
+    DefaultedItemGeoModel(CommonClass.locate("armor/diving_armor"))
 )

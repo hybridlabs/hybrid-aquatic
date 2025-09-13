@@ -2,7 +2,7 @@
 
 package dev.hybridlabs.aquatic.tag
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
@@ -35,7 +35,7 @@ object HybridAquaticItemTags {
     val ARMORS = createConventional("armors")
 
     private fun create(id: String): TagKey<Item> {
-        return TagKey.create(Registries.ITEM, ResourceLocation(Constants.MOD_ID, id))
+        return TagKey.create(Registries.ITEM, CommonClass.locate(id))
     }
 
     private fun createConventional(id: String): TagKey<Item> {
