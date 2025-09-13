@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.render.item
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.hybridlabs.aquatic.HybridAquaticClient
+import dev.hybridlabs.aquatic.block.BlockEntityHelper
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack
 class AnemoneBlockItemRenderer : DynamicItemRenderer {
     private val anemoneBlockEntity =
         AnemoneBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.ANEMONE.get().defaultBlockState())
-    private val renderer = AnemoneBlockEntityRenderer(HybridAquaticClient.createBlockEntityRendererProviderContext())
+    private val renderer = AnemoneBlockEntityRenderer(BlockEntityHelper.createBlockEntityRendererProviderContext())
 
     override fun render(
         stack: ItemStack,

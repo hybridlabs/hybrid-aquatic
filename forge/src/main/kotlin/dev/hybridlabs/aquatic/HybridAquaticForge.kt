@@ -26,8 +26,6 @@ import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
-import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.world.entity.MobCategory
 import net.minecraftforge.client.event.EntityRenderersEvent
 import net.minecraftforge.fml.common.Mod
@@ -37,13 +35,6 @@ import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
 
-/**
- * Main mod class. Should be an `object` declaration annotated with `@Mod`.
- * The modid should be declared in this object and should match the modId entry
- * in mods.toml.
- *
- * An example for blocks is in the `blocks` package of this mod.
- */
 @Suppress("UnusedExpression")
 @Mod(Constants.FORGE_MOD_ID)
 object HybridAquaticForge {
@@ -158,19 +149,6 @@ object HybridAquaticForge {
         event.registerSkullModel(
             PlushieBlock.Variant.WHALE_SHARK,
             BullSharkPlushieModel(modelLoader.bakeLayer(WHALE_SHARK_PLUSHIE))
-        )
-    }
-
-    fun createBlockEntityRendererProviderContext(): BlockEntityRendererProvider.Context {
-        val client =
-            Minecraft.getInstance()
-        return BlockEntityRendererProvider.Context(
-            client.blockEntityRenderDispatcher,
-            client.blockRenderer,
-            client.itemRenderer,
-            client.entityRenderDispatcher,
-            client.entityModels,
-            client.font
         )
     }
 

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.render.item
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.hybridlabs.aquatic.HybridAquaticClient
+import dev.hybridlabs.aquatic.block.BlockEntityHelper
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.GiantGreenAnemoneBlockEntity
 import dev.hybridlabs.aquatic.client.render.block.entity.GiantGreenAnemoneBlockEntityRenderer
@@ -15,7 +15,7 @@ class GiantGreenAnemoneBlockItemRenderer : DynamicItemRenderer {
     private val giantGreenAnemoneBlockEntity =
         GiantGreenAnemoneBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get().defaultBlockState())
     private val renderer =
-        GiantGreenAnemoneBlockEntityRenderer(HybridAquaticClient.createBlockEntityRendererProviderContext())
+        GiantGreenAnemoneBlockEntityRenderer(BlockEntityHelper.createBlockEntityRendererProviderContext())
 
     override fun render(
         stack: ItemStack,

@@ -48,6 +48,7 @@ object HybridAquatic : ModInitializer {
     val configFile: Path = FabricLoader.getInstance().configDir.resolve("$MOD_ID.json")
     val configHandler = HybridAquaticConfigHandler(configFile.toFile())
 
+    @Suppress("UnusedExpression")
     override fun onInitialize() {
         logger.info("Initializing $MOD_NAME")
         CommonClass.init()
