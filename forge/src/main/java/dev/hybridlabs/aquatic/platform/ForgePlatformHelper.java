@@ -22,6 +22,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.javafmlmod.FMLModContainer;
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.fml.loading.FMLPaths;
+import network.HybridAquaticNetworking;
 import org.jetbrains.annotations.NotNull;
 import thedarkcolour.kotlinforforge.KotlinModContainer;
 
@@ -183,5 +184,10 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public Item createMessageInABottleItem(Item.Properties properties) {
         return new MessageInABottleItem(properties);
+    }
+
+    @Override
+    public void sendHookToServer(int entityId, ItemStack entityData) {
+        HybridAquaticNetworking.INSTANCE.sendHookPacket(entityId, entityData);
     }
 }

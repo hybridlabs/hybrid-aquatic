@@ -7,11 +7,16 @@
     "mixins": [
         "EnchantmentMixin",
         "EntityMixin",
+        "FishingBobberEntityMixin",
+        "FishingRodItemMixin",
         "PlayerEntityMixin",
         "ServerPlayerEntityMixin"
     ],
     "client": [
         "client.BookScreenMixin",
+        "client.ClientPlayNetworkHandlerMixin",
+        "client.FishingBobberEntityClientMixin",
+        "client.FishingBobberEntityRendererMixin",
         "client.FogRendererMixin",
         "client.HeadFeatureRendererMixin",
         "client.InGameHudMixin",

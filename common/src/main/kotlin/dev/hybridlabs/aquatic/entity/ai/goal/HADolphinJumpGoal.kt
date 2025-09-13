@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
+import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.FluidTags
@@ -10,7 +10,7 @@ import kotlin.math.abs
 import kotlin.math.atan2
 
 @Suppress("DEPRECATION")
-class HADolphinJumpGoal(private val dolphin: HybridAquaticMammalEntity, chance: Int) : JumpGoal() {
+class HADolphinJumpGoal(private val dolphin: HybridAquaticDolphinEntity, chance: Int) : JumpGoal() {
     private val chance: Int = reducedTickDelay(chance)
     private var inWater = false
 

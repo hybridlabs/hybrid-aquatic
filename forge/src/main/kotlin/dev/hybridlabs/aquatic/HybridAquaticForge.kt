@@ -16,6 +16,7 @@ import dev.hybridlabs.aquatic.client.render.block.HybridAquaticBlockRenderers
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
@@ -30,6 +31,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
+import network.HybridAquaticNetworking
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
 
@@ -49,7 +51,6 @@ object HybridAquaticForge {
         CommonClass.init()
 
         // Extend the MobCategory enum with our spawn groups
-
         HybridAquaticSpawnGroup.entries.toTypedArray().forEach {
             MobCategory.create(
                 it.name.uppercase(),
@@ -66,12 +67,14 @@ object HybridAquaticForge {
         HybridAquaticBlockEntityTypes
         HybridAquaticMobEffects
         HybridAquaticItems
+        HybridAquaticEnchantments
 
         HybridAquaticFeatures
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
 
         HybridAquaticItemGroups
+        HybridAquaticNetworking.registerPackets()
 
         runForDist(
             clientTarget = {

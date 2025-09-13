@@ -4,10 +4,7 @@ import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.NotNull;
@@ -72,5 +69,7 @@ public interface PlatformHelper {
     Item createBlockItem(Block block, Item.Properties properties);
 
     Item createMessageInABottleItem(Item.Properties properties);
+
+    void sendHookToServer(int entityId, ItemStack entityData);
 }
 

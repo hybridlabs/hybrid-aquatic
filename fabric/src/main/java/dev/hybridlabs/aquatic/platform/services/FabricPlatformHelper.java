@@ -4,10 +4,15 @@ import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
 import dev.hybridlabs.aquatic.item.*;
+import dev.hybridlabs.aquatic.network.HybridAquaticNetworking;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -113,7 +118,16 @@ public class FabricPlatformHelper implements PlatformHelper {
 
     @Override
     public Item createMessageInABottleItem(Item.Properties properties) {
-        return new MessageInABottleItem(properties);
+        return new dev.hybridlabs.aquatic.item.MessageInABottleItem(properties);
+    }
+
+    @Override
+    public void sendHookToServer(int entityId, ItemStack entityData) {
+        FriendlyByteBuf packetData = PacketByteBufs.create();
+        packetData.writeInt(entityId);
+        ResourceLocation packetId = HybridAquaticNetworking.INSTANCE.getFISHING_BOBBER_LURE();
+        if (ClientPlayNetworking.canSend(packetId))
+            ClientPlayNetworking.send(packetId, packetData);
     }
 
 }

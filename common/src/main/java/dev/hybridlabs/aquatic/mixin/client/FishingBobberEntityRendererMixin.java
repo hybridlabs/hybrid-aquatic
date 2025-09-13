@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import dev.hybridlabs.aquatic.Constants;
+import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -21,21 +21,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(FishingHookRenderer.class)
 public abstract class FishingBobberEntityRendererMixin {
     @Unique
-    private static final RenderType BARBED_HOOK_LAYER = getRenderType(new ResourceLocation(Constants.MOD_ID,
-            "textures/entity/bobber/barbed_bobber.png"));
+    private static final RenderType BARBED_HOOK_LAYER = getRenderType(CommonClass.locate("textures/entity/bobber" +
+            "/barbed_bobber.png"));
     @Unique
-    private static final RenderType GLOWING_HOOK_LAYER = getRenderType(new ResourceLocation(Constants.MOD_ID,
-            "textures/entity/bobber/glowing_bobber.png"));
+    private static final RenderType GLOWING_HOOK_LAYER = getRenderType(CommonClass.locate("textures/entity/bobber" +
+            "/glowing_bobber.png"));
     @Unique
-    private static final RenderType MAGNETIC_HOOK_LAYER = getRenderType(new ResourceLocation(Constants.MOD_ID,
-            "textures/entity/bobber/magnetic_bobber.png"));
+    private static final RenderType MAGNETIC_HOOK_LAYER =
+            getRenderType(CommonClass.locate("textures/entity/bobber" + "/magnetic_bobber.png"));
     @Unique
-    private static final RenderType CREEPERMAGNET_HOOK_LAYER = getRenderType(new ResourceLocation(Constants.MOD_ID,
-            "textures/entity/bobber/creepermagnet_bobber" +
-                    ".png"));
+    private static final RenderType CREEPERMAGNET_HOOK_LAYER = getRenderType(CommonClass.locate("textures/entity" +
+            "/bobber/creepermagnet_bobber.png"));
     @Unique
-    private static final RenderType OMINOUS_HOOK_LAYER = getRenderType(new ResourceLocation(Constants.MOD_ID,
-            "textures/entity/bobber/ominous_bobber.png"));
+    private static final RenderType OMINOUS_HOOK_LAYER = getRenderType(CommonClass.locate("textures/entity/bobber" +
+            "/ominous_bobber.png"));
 
     @Unique
     FishingHook entity;
@@ -56,15 +55,15 @@ public abstract class FishingBobberEntityRendererMixin {
         RenderType currentRenderType = renderLayer;
 
         ItemStack currentStack = ((CustomFishingBobberEntityData) entity).hybrid_aquatic$getLureItem();
-        if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK()))
+        if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK().get()))
             currentRenderType = BARBED_HOOK_LAYER;
-        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getGLOWING_HOOK()))
+        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getGLOWING_HOOK().get()))
             currentRenderType = GLOWING_HOOK_LAYER;
-        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK()))
+        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK().get()))
             currentRenderType = MAGNETIC_HOOK_LAYER;
-        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK()))
+        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK().get()))
             currentRenderType = CREEPERMAGNET_HOOK_LAYER;
-        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK()))
+        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK().get()))
             currentRenderType = OMINOUS_HOOK_LAYER;
 
         return instance.getBuffer(currentRenderType);
