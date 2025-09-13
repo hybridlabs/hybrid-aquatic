@@ -73,6 +73,7 @@ object HybridAquaticForge {
         HybridAquaticItemGroups
         HybridAquaticNetworking.registerPackets()
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
+        FORGE_BUS.addListener(HybridAquaticCustomTrades::registerWandererTrades)
 
         runForDist(
             clientTarget = {

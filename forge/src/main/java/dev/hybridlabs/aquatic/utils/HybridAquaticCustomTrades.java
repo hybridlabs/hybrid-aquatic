@@ -1,12 +1,16 @@
 package dev.hybridlabs.aquatic.utils;
 
 
+import dev.hybridlabs.aquatic.block.PlushieBlock;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 
 import java.util.Arrays;
 
@@ -60,4 +64,12 @@ public class HybridAquaticCustomTrades {
 
         }
     }
+
+    public static void registerWandererTrades(WandererTradesEvent event) {
+        var rareTrades = event.getRareTrades();
+        BuiltInRegistries.ITEM.stream().filter((item) -> item instanceof BlockItem && ((BlockItem) item).getBlock() instanceof PlushieBlock).forEach((block) -> {
+            rareTrades.add(new BasicItemListing(8, new ItemStack(block), 1, 2, 2f));
+        });
+    }
 }
+
