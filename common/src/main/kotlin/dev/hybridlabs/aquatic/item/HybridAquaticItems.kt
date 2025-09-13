@@ -316,27 +316,6 @@ object HybridAquaticItems {
 
     //#endregion
 
-    //#region Wood Blocks
-
-    val DRIFTWOOD_PLANKS = registerBlockItem("driftwood_planks") { HybridAquaticBlocks.DRIFTWOOD_PLANKS.get() }
-    val DRIFTWOOD_LOG = registerBlockItem("driftwood_log") { HybridAquaticBlocks.DRIFTWOOD_LOG.get() }
-    val DRIFTWOOD_WOOD = registerBlockItem("driftwood_wood") { HybridAquaticBlocks.DRIFTWOOD_WOOD.get() }
-    val STRIPPED_DRIFTWOOD_LOG =
-        registerBlockItem("stripped_driftwood_log") { HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG.get() }
-    val STRIPPED_DRIFTWOOD_WOOD =
-        registerBlockItem("stripped_driftwood_wood") { HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD.get() }
-    val DRIFTWOOD_DOOR = registerBlockItem("driftwood_door") { HybridAquaticBlocks.DRIFTWOOD_DOOR.get() }
-    val DRIFTWOOD_TRAPDOOR = registerBlockItem("driftwood_trapdoor") { HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR.get() }
-    val DRIFTWOOD_SLAB = registerBlockItem("driftwood_slab") { HybridAquaticBlocks.DRIFTWOOD_SLAB.get() }
-    val DRIFTWOOD_STAIRS = registerBlockItem("driftwood_stairs") { HybridAquaticBlocks.DRIFTWOOD_STAIRS.get() }
-    val DRIFTWOOD_FENCE = registerBlockItem("driftwood_fence") { HybridAquaticBlocks.DRIFTWOOD_FENCE.get() }
-    val DRIFTWOOD_FENCE_GATE =
-        registerBlockItem("driftwood_fence_gate") { HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE.get() }
-    val DRIFTWOOD_PRESSURE_PLATE =
-        registerBlockItem("driftwood_pressure_plate") { HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE.get() }
-    val DRIFTWOOD_BUTTON = registerBlockItem("driftwood_button") { HybridAquaticBlocks.DRIFTWOOD_BUTTON.get() }
-
-    //#endregion
 
     //#endregion
 
@@ -1687,7 +1666,7 @@ object HybridAquaticItems {
 
     }
 
-    private fun registerBlockItem(id: String, block: Supplier<Block>): Supplier<Item> {
+    fun registerBlockItem(id: String, block: Supplier<Block>): Supplier<Item> {
         return register(id) { BlockItem(block.get(), Item.Properties()) }
     }
 

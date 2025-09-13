@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.data.server.tag
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -29,16 +30,16 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.WATER)
 
         getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
-            .add(HybridAquaticBlocks.DRIFTWOOD_FENCE.get())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
 
         getOrCreateTagBuilder(BlockTags.FENCE_GATES)
-            .add(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE.get())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get())
 
         getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
-            .add(HybridAquaticBlocks.DRIFTWOOD_LOG.get())
-            .add(HybridAquaticBlocks.DRIFTWOOD_WOOD.get())
-            .add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG.get())
-            .add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get())
+            .add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get())
+            .add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
 
         getOrCreateTagBuilder(BlockTags.UNDERWATER_BONEMEALS)
             .add(HybridAquaticBlocks.RED_ALGAE.get())
@@ -83,8 +84,8 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.GIANT_CLAM.get())
 
         getOrCreateTagBuilder(BlockTags.LOGS)
-            .add(HybridAquaticBlocks.DRIFTWOOD_LOG.get())
-            .add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG.get())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get())
+            .add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get())
 
         getOrCreateTagBuilder(BlockTags.UNDERWATER_BONEMEALS)
             .add(HybridAquaticBlocks.RED_ALGAE.get())

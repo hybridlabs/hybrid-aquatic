@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.HybridAquaticWoodItems
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
@@ -158,7 +159,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     LootPool.lootPool()
                         .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DRIFTWOOD_LOG.get())
+                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
                         ).build()
                 )
@@ -236,7 +237,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     LootPool.lootPool()
                         .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DRIFTWOOD_LOG.get())
+                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
                         ).build()
                 )
@@ -314,7 +315,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     LootPool.lootPool()
                         .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DRIFTWOOD_LOG.get())
+                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
                         ).build()
                 )
@@ -392,7 +393,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     LootPool.lootPool()
                         .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DRIFTWOOD_LOG.get())
+                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
                         ).build()
                 )
@@ -470,7 +471,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     LootPool.lootPool()
                         .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DRIFTWOOD_LOG.get())
+                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
                         ).build()
                 )
@@ -548,7 +549,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     LootPool.lootPool()
                         .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DRIFTWOOD_LOG.get())
+                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
                         ).build()
                 )
@@ -626,7 +627,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     LootPool.lootPool()
                         .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DRIFTWOOD_LOG.get())
+                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
                         ).build()
                 )
@@ -708,7 +709,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     LootPool.lootPool()
                         .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DRIFTWOOD_LOG.get())
+                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
                         ).build()
                 )

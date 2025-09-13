@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -91,22 +92,22 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             ).forEach(generator::createTrivialCube)
 
             // wood
-            val driftwoodPool = family(HybridAquaticBlocks.DRIFTWOOD_PLANKS.get())
+            val driftwoodPool = family(HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get())
 
-            woodProvider(HybridAquaticBlocks.DRIFTWOOD_LOG.get()).log(HybridAquaticBlocks.DRIFTWOOD_LOG.get())
-                .wood(HybridAquaticBlocks.DRIFTWOOD_WOOD.get())
-            woodProvider(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG.get()).log(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG.get())
-                .wood(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
+            woodProvider(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get()).log(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get())
+                .wood(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get())
+            woodProvider(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get()).log(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get())
+                .wood(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
 
-            createDoor(HybridAquaticBlocks.DRIFTWOOD_DOOR.get())
-            createTrapdoor(HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR.get())
+            createDoor(HybridAquaticWoodBlocks.DRIFTWOOD_DOOR.get())
+            createTrapdoor(HybridAquaticWoodBlocks.DRIFTWOOD_TRAPDOOR.get())
 
-            driftwoodPool.stairs(HybridAquaticBlocks.DRIFTWOOD_STAIRS.get())
-            driftwoodPool.slab(HybridAquaticBlocks.DRIFTWOOD_SLAB.get())
-            driftwoodPool.button(HybridAquaticBlocks.DRIFTWOOD_BUTTON.get())
-            driftwoodPool.pressurePlate(HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
-            driftwoodPool.fence(HybridAquaticBlocks.DRIFTWOOD_FENCE.get())
-            driftwoodPool.fenceGate(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE.get())
+            driftwoodPool.stairs(HybridAquaticWoodBlocks.DRIFTWOOD_STAIRS.get())
+            driftwoodPool.slab(HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get())
+            driftwoodPool.button(HybridAquaticWoodBlocks.DRIFTWOOD_BUTTON.get())
+            driftwoodPool.pressurePlate(HybridAquaticWoodBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
+            driftwoodPool.fence(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
+            driftwoodPool.fenceGate(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get())
 
             createNormalTorch(HybridAquaticBlocks.GLOWSTICK.get(), HybridAquaticBlocks.WALL_GLOWSTICK.get())
 

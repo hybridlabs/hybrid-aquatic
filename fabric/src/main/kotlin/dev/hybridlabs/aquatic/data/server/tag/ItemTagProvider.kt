@@ -1,8 +1,9 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.HybridAquaticWoodItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
@@ -27,43 +28,43 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         //#region wood
         getOrCreateTagBuilder(ItemTags.PLANKS)
-            .add(HybridAquaticBlocks.DRIFTWOOD_PLANKS.get().asItem())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
-            .add(HybridAquaticBlocks.DRIFTWOOD_LOG.get().asItem())
-            .add(HybridAquaticBlocks.DRIFTWOOD_WOOD.get().asItem())
-            .add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG.get().asItem())
-            .add(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD.get().asItem())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get().asItem())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get().asItem())
+            .add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get().asItem())
+            .add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get().asItem())
 
         getOrCreateTagBuilder(HybridAquaticItemTags.DRIFTWOOD_LOG_WOOD)
-            .add(HybridAquaticItems.DRIFTWOOD_LOG.get())
-            .add(HybridAquaticItems.STRIPPED_DRIFTWOOD_LOG.get())
-            .add(HybridAquaticItems.DRIFTWOOD_WOOD.get())
-            .add(HybridAquaticItems.STRIPPED_DRIFTWOOD_WOOD.get())
+            .add(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
+            .add(HybridAquaticWoodItems.STRIPPED_DRIFTWOOD_LOG.get())
+            .add(HybridAquaticWoodItems.DRIFTWOOD_WOOD.get())
+            .add(HybridAquaticWoodItems.STRIPPED_DRIFTWOOD_WOOD.get())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_FENCES)
-            .add(HybridAquaticBlocks.DRIFTWOOD_FENCE.get().asItem())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.FENCE_GATES)
-            .add(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE.get().asItem())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_DOORS)
-            .add(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE.get().asItem())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS)
-            .add(HybridAquaticBlocks.DRIFTWOOD_BUTTON.get().asItem())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_BUTTON.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES)
-            .add(HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE.get().asItem())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_PRESSURE_PLATE.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_SLABS)
-            .add(HybridAquaticBlocks.DRIFTWOOD_SLAB.get().asItem())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS)
-            .add(HybridAquaticBlocks.DRIFTWOOD_STAIRS.get().asItem())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_STAIRS.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS)
-            .add(HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR.get().asItem())
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_TRAPDOOR.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.SWORDS)
             .add(HybridAquaticItems.SEASHELL_SPEAR.get())

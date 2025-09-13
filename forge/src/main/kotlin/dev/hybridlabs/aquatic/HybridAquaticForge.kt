@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BASKING_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BULL_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.FRILLED_SHARK_PLUSHIE
@@ -20,6 +21,7 @@ import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.HybridAquaticWoodItems
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
@@ -38,7 +40,7 @@ import thedarkcolour.kotlinforforge.forge.runForDist
 @Suppress("UnusedExpression")
 @Mod(Constants.FORGE_MOD_ID)
 object HybridAquaticForge {
-    val LOGGER = Constants.LOG
+    val LOGGER = Constants.LOG!!
 
     init {
         CommonClass.init()
@@ -57,9 +59,11 @@ object HybridAquaticForge {
 
         HybridAquaticEntityTypes
         HybridAquaticBlocks
+        HybridAquaticWoodBlocks
         HybridAquaticBlockEntityTypes
         HybridAquaticMobEffects
         HybridAquaticItems
+        HybridAquaticWoodItems
         HybridAquaticEnchantments
 
         HybridAquaticFeatures

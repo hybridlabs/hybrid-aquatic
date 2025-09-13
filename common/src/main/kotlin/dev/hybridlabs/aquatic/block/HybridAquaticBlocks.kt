@@ -2,13 +2,11 @@ package dev.hybridlabs.aquatic.block
 
 import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodTypes
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
-import net.minecraft.world.level.block.state.properties.BlockSetType
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument
 import net.minecraft.world.level.material.MapColor
 import net.minecraft.world.level.material.PushReaction
@@ -239,38 +237,6 @@ object HybridAquaticBlocks {
     val SEA_LETTUCE = register("sea_lettuce") { SeaLettuceBlock(Properties.copy((Blocks.SEAGRASS))) }
     val TALL_SEA_LETTUCE = register("tall_sea_lettuce") { TallSeaLettuceBlock(Properties.copy((Blocks.TALL_SEAGRASS))) }
 
-    val DRIFTWOOD_LOG = register("driftwood_log") { RotatedPillarBlock(Properties.copy((Blocks.OAK_PLANKS))) }
-    val STRIPPED_DRIFTWOOD_LOG =
-        register("stripped_driftwood_log") { RotatedPillarBlock(Properties.copy((Blocks.OAK_PLANKS))) }
-    val DRIFTWOOD_WOOD = register("driftwood_wood") { RotatedPillarBlock(Properties.copy((Blocks.OAK_PLANKS))) }
-    val STRIPPED_DRIFTWOOD_WOOD =
-        register("stripped_driftwood_wood") { RotatedPillarBlock(Properties.copy((Blocks.OAK_PLANKS))) }
-    val DRIFTWOOD_PLANKS = register("driftwood_planks") { Block(Properties.copy((Blocks.OAK_PLANKS))) }
-    val DRIFTWOOD_STAIRS = register(
-        "driftwood_stairs"
-    ) { StairBlock(DRIFTWOOD_PLANKS.get().defaultBlockState(), Properties.copy(Blocks.OAK_STAIRS)) }
-    val DRIFTWOOD_SLAB = register("driftwood_slab") { SlabBlock(Properties.copy(Blocks.OAK_STAIRS)) }
-    val DRIFTWOOD_BUTTON = register(
-        "driftwood_button"
-    ) {
-        ButtonBlock(Properties.copy(Blocks.OAK_BUTTON), BlockSetType.OAK, 25, true)
-    }
-    val DRIFTWOOD_PRESSURE_PLATE = register(
-        "driftwood_pressure_plate"
-    ) {
-        PressurePlateBlock(
-            PressurePlateBlock.Sensitivity.EVERYTHING, Properties.copy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.OAK
-        )
-    }
-    val DRIFTWOOD_FENCE = register("driftwood_fence") { FenceBlock(Properties.copy(Blocks.OAK_FENCE)) }
-    val DRIFTWOOD_FENCE_GATE = register(
-        "driftwood_fence_gate"
-    ) {
-        FenceGateBlock(Properties.copy(Blocks.OAK_FENCE), HybridAquaticWoodTypes.DRIFTWOOD)
-    }
-    val DRIFTWOOD_DOOR = register("driftwood_door") { DoorBlock(Properties.copy(Blocks.OAK_DOOR), BlockSetType.OAK) }
-    val DRIFTWOOD_TRAPDOOR =
-        register("driftwood_trapdoor") { TrapDoorBlock(Properties.copy(Blocks.OAK_TRAPDOOR), BlockSetType.OAK) }
 
     val DEAD_LOPHELIA_CORAL_BLOCK = register(
         "dead_lophelia_coral_block"
@@ -544,7 +510,7 @@ object HybridAquaticBlocks {
         )
     }
 
-    private fun <T : Block> register(id: String, block: Supplier<T>): RegistryObject<Block> {
+    fun <T : Block> register(id: String, block: Supplier<T>): RegistryObject<Block> {
         return CommonClass.BLOCKS.register(id, block)
     }
 

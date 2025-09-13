@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.CommonClass
@@ -7,6 +5,7 @@ import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.core.BlockPos
 import net.minecraft.core.registries.BuiltInRegistries
@@ -30,25 +29,25 @@ object HybridAquaticItemGroups {
                         HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get().defaultBlockState()
                     )
                         .also { blockEntity -> blockEntity.variant = variant }
-                    val stack = MessageInABottleBlock.createItemStack(blockEntity)
+                    val stack = MessageInABottleBlock.Companion.createItemStack(blockEntity)
                     entries.accept(stack)
                 }
 
                 // blocks
                 entries.accept(HybridAquaticBlocks.GLOWSTICK.get())
-                entries.accept(HybridAquaticBlocks.DRIFTWOOD_LOG.get())
-                entries.accept(HybridAquaticBlocks.DRIFTWOOD_WOOD.get())
-                entries.accept(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_LOG.get())
-                entries.accept(HybridAquaticBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
-                entries.accept(HybridAquaticBlocks.DRIFTWOOD_PLANKS.get())
-                entries.accept(HybridAquaticBlocks.DRIFTWOOD_STAIRS.get())
-                entries.accept(HybridAquaticBlocks.DRIFTWOOD_SLAB.get())
-                entries.accept(HybridAquaticBlocks.DRIFTWOOD_FENCE.get())
-                entries.accept(HybridAquaticBlocks.DRIFTWOOD_FENCE_GATE.get())
-                entries.accept(HybridAquaticBlocks.DRIFTWOOD_DOOR.get())
-                entries.accept(HybridAquaticBlocks.DRIFTWOOD_TRAPDOOR.get())
-                entries.accept(HybridAquaticBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
-                entries.accept(HybridAquaticBlocks.DRIFTWOOD_BUTTON.get())
+                entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get())
+                entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get())
+                entries.accept(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get())
+                entries.accept(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
+                entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get())
+                entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_STAIRS.get())
+                entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get())
+                entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
+                entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get())
+                entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_DOOR.get())
+                entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_TRAPDOOR.get())
+                entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
+                entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_BUTTON.get())
 
                 entries.accept(HybridAquaticBlocks.CRAB_POT.get())
                 entries.accept(HybridAquaticBlocks.HYBRID_CRATE.get())
