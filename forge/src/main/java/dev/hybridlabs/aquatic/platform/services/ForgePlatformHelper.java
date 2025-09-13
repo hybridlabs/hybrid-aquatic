@@ -1,11 +1,11 @@
-package dev.hybridlabs.aquatic.platform;
+package dev.hybridlabs.aquatic.platform.services;
 
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.Constants;
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
 import dev.hybridlabs.aquatic.item.*;
+import dev.hybridlabs.aquatic.network.HybridAquaticNetworking;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
-import dev.hybridlabs.aquatic.platform.services.PlatformHelper;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -22,7 +22,6 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.javafmlmod.FMLModContainer;
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.fml.loading.FMLPaths;
-import network.HybridAquaticNetworking;
 import org.jetbrains.annotations.NotNull;
 import thedarkcolour.kotlinforforge.KotlinModContainer;
 

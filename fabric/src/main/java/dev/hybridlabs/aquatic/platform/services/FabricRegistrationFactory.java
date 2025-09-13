@@ -1,5 +1,6 @@
-package dev.hybridlabs.aquatic;
+package dev.hybridlabs.aquatic.platform.services;
 
+import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.platform.registration.RegistrationProvider;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import net.minecraft.core.Holder;

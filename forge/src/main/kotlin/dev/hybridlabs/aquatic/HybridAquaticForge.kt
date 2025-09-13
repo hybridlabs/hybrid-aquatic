@@ -20,6 +20,8 @@ import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
+import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
@@ -31,7 +33,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
-import network.HybridAquaticNetworking
+import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
 
@@ -75,6 +77,7 @@ object HybridAquaticForge {
 
         HybridAquaticItemGroups
         HybridAquaticNetworking.registerPackets()
+        FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
 
         runForDist(
             clientTarget = {

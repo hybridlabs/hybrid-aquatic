@@ -1,8 +1,7 @@
-package dev.hybridlabs.aquatic.platform;
+package dev.hybridlabs.aquatic.platform.services;
 
 
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
-import dev.hybridlabs.aquatic.platform.services.ClientPlatformHelper;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

@@ -1,4 +1,4 @@
-package network
+package dev.hybridlabs.aquatic.network
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData
