@@ -5,8 +5,8 @@ import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
+import dev.hybridlabs.aquatic.config.ConfigHelper
 import dev.hybridlabs.aquatic.config.HybridAquaticConfig
-import dev.hybridlabs.aquatic.config.HybridAquaticConfigHandler
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
@@ -32,27 +32,17 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
-import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.npc.VillagerTrades
 import net.minecraft.world.item.BlockItem
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-import java.nio.file.Path
-import kotlin.io.path.notExists
 
 object HybridAquatic : ModInitializer {
-    const val MOD_ID: String = "hybrid-aquatic"
-    const val MOD_NAME: String = "Hybrid Aquatic"
 
-    private val logger: Logger = LoggerFactory.getLogger(MOD_NAME)
-
-    val configFile: Path = FabricLoader.getInstance().configDir.resolve("$MOD_ID.json")
-    val configHandler = HybridAquaticConfigHandler(configFile.toFile())
+    private val logger = Constants.LOG
 
     @Suppress("UnusedExpression")
     override fun onInitialize() {
-        logger.info("Initializing $MOD_NAME")
+        logger.info("Initializing ${Constants.MOD_NAME}")
         CommonClass.init()
 
         HybridAquaticBlocks
@@ -84,40 +74,15 @@ object HybridAquatic : ModInitializer {
 
         SpawnRestrictionRegistry.registerSpawnRestrictions()
 
-        initializeConfig()
 
         registerDynamicRegistries()
         registerWanderingTraderTrades()
         registerCustomTrades()
         registerFlammables(FlammableBlockRegistry.getDefaultInstance())
         registerStrippables()
+
+        val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
         registerBiomeModifications(configHandler.config)
-    }
-
-    private fun initializeConfig() {
-        val configFile: Path = FabricLoader.getInstance().configDir.resolve("$MOD_ID.json")
-        val configHandler = HybridAquaticConfigHandler(configFile.toFile())
-        if (configFile.notExists()) {
-            logger.info("$MOD_NAME config file did not exist, creating one")
-            configHandler.save()
-        } else {
-            logger.info("Loading $MOD_NAME config file")
-            configHandler.load()
-
-            // check config data version, if updated then reset
-            val defaultConfig = configHandler.defaultConfig
-            val config = configHandler.config
-            if (config.dataVersion < defaultConfig.dataVersion) {
-                logger.info("Old $MOD_NAME config file found, upgrading")
-
-                configHandler.backup()
-
-                configHandler.config = defaultConfig
-                configHandler.save()
-
-                logger.info("$MOD_NAME config reset, the old config has been backed up to \"${configHandler.backupFile}\"")
-            }
-        }
     }
 
     private fun registerDynamicRegistries() {
@@ -144,8 +109,6 @@ object HybridAquatic : ModInitializer {
         registry.add(HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get(), 5, 20)
         registry.add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get(), 5, 20)
         registry.add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get(), 5, 20)
-
-        registry.add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get(), 5, 5)
     }
 
     private fun registerStrippables() {

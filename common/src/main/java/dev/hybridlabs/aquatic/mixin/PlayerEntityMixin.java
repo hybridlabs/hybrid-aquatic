@@ -1,14 +1,11 @@
 package dev.hybridlabs.aquatic.mixin;
 
 import com.google.common.collect.ImmutableList;
-
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
-import dev.hybridlabs.aquatic.access.Entityish;
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects;
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import dev.hybridlabs.aquatic.item.HybridAquaticToolMaterials;
-
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.FluidTags;
@@ -24,7 +21,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -37,8 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(Player.class)
-public abstract class PlayerEntityMixin extends Entity
-        implements CustomPlayerEntityData, Entityish {
+public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEntityData {
 
     public PlayerEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);

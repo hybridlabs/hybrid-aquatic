@@ -22,7 +22,10 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.item.HybridAquaticWoodItems
+import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
+import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
+import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
@@ -40,40 +43,39 @@ import thedarkcolour.kotlinforforge.forge.runForDist
 @Suppress("UnusedExpression")
 @Mod(Constants.FORGE_MOD_ID)
 object HybridAquaticForge {
-    val LOGGER = Constants.LOG!!
+    private val logger = Constants.LOG!!
 
     init {
         CommonClass.init()
 
-        // Extend the MobCategory enum with our spawn groups
-        HybridAquaticSpawnGroup.entries.toTypedArray().forEach {
-            MobCategory.create(
-                it.name.uppercase(),
-                it.name,
-                it.spawnCap,
-                it.peaceful,
-                it.rare,
-                it.immediateDespawnRange
-            )
-        }
+        createSpawnGroups()
 
-        HybridAquaticEntityTypes
         HybridAquaticBlocks
         HybridAquaticWoodBlocks
+        HybridAquaticEntityTypes
         HybridAquaticBlockEntityTypes
+
+        HybridAquaticBiomeTags
+
         HybridAquaticMobEffects
+        HybridAquaticPotions
+
         HybridAquaticItems
         HybridAquaticWoodItems
+        HybridAquaticItemGroups
+
         HybridAquaticEnchantments
 
         HybridAquaticFeatures
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
 
-        HybridAquaticItemGroups
         HybridAquaticNetworking.registerPackets()
-        FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
+
+        HybridAquaticLootPoolEntryTypes
+
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerWandererTrades)
+        FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
 
         runForDist(
             clientTarget = {
@@ -87,6 +89,20 @@ object HybridAquaticForge {
                 MOD_BUS.addListener(::onServerSetup)
             })
 
+    }
+
+    private fun createSpawnGroups() {
+        // Extend the MobCategory enum with our spawn groups
+        HybridAquaticSpawnGroup.entries.toTypedArray().forEach {
+            MobCategory.create(
+                it.name.uppercase(),
+                it.name,
+                it.spawnCap,
+                it.peaceful,
+                it.rare,
+                it.immediateDespawnRange
+            )
+        }
     }
 
 
@@ -163,13 +179,13 @@ object HybridAquaticForge {
      * Fired on the mod specific event bus.
      */
     private fun onClientSetup(event: FMLClientSetupEvent) {
-        LOGGER.info("Initializing client...")
+        logger.info("Initializing client...")
     }
 
     /**
      * Fired on the global Forge bus.
      */
     private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {
-        LOGGER.info("Server starting...")
+        logger.info("Server starting...")
     }
 }
