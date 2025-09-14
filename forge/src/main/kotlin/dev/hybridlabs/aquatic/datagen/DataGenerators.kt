@@ -3,7 +3,6 @@ package datagen
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.config.ConfigHelper.initializeConfig
-import dev.hybridlabs.aquatic.config.HybridAquaticConfigHandler
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
@@ -25,9 +24,7 @@ object DataGenerators {
         val packOutput = generator.packOutput
         val lookupProvider = event.lookupProvider
 
-        val configFile = CommonClass.CONFIG_FILE
-        val configHandler = HybridAquaticConfigHandler(configFile.toFile())
-        initializeConfig(configFile, configHandler)
+        val configHandler = initializeConfig(CommonClass.CONFIG_FILE)
 
         val builder: RegistrySetBuilder = RegistrySetBuilder().add(
             ForgeRegistries.Keys.BIOME_MODIFIERS
