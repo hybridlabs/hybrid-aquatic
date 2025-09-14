@@ -3,7 +3,9 @@ package dev.hybridlabs.aquatic.platform.services;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
-import dev.hybridlabs.aquatic.item.*;
+import dev.hybridlabs.aquatic.item.AnemoneBlockItem;
+import dev.hybridlabs.aquatic.item.GiantGreenAnemoneBlockItem;
+import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup;
@@ -16,7 +18,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.NotNull;
@@ -84,24 +89,6 @@ public class FabricPlatformHelper implements PlatformHelper {
     @Override
     public @Nullable MobCategory getMobCategoryByName(String name) {
         return HybridAquaticSpawnGroup.byName(name.toLowerCase());
-    }
-
-    @Override
-    public ArmorItem createArmor(ArmorMaterial material, ArmorItem.Type type, Item.Properties settings) {
-        if (material.equals(HybridAquaticArmorMaterials.DIVING)) {
-            return new DivingArmorItem(material, type, settings);
-        } else if (material.equals(HybridAquaticArmorMaterials.SEASHELL)) {
-            return new SeashellArmorItem(material, type, settings);
-        } else if (material.equals(HybridAquaticArmorMaterials.MANGLERFISH)) {
-            return new ManglerfishArmorItem(material, type, settings);
-        } else if (material.equals(HybridAquaticArmorMaterials.EEL)) {
-            return new EelArmorItem(material, type, settings);
-        } else if (material.equals(HybridAquaticArmorMaterials.TURTLE)) {
-            return new TurtleArmorItem(material, type, settings);
-        } else if (material.equals(HybridAquaticArmorMaterials.MOONJELLYFISH)) {
-            return new MoonJellyfishArmorItem(material, type, settings);
-        }
-        return new ArmorItem(material, type, settings);
     }
 
     @Override

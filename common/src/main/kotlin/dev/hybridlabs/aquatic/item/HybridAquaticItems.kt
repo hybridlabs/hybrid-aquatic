@@ -5,7 +5,7 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.platform.Services
+import dev.hybridlabs.aquatic.platform.Services.*
 import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -21,8 +21,7 @@ object HybridAquaticItems {
     val DIVING_HELMET = register(
         "diving_helmet"
     ) {
-        Services.PLATFORM.createArmor(
-            HybridAquaticArmorMaterials.DIVING,
+        DIVING_ARMOR_FACTORY.create(
             ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
@@ -31,72 +30,71 @@ object HybridAquaticItems {
     val DIVING_SUIT = register(
         "diving_suit"
     ) {
-        Services.PLATFORM.createArmor(
-            HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+        DIVING_ARMOR_FACTORY.create(
+            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
 
     val DIVING_LEGGINGS = register(
         "diving_leggings"
     ) {
-        Services.PLATFORM.createArmor(
-            HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1)
+        DIVING_ARMOR_FACTORY.create(
+            ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1)
         )
     }
 
     val DIVING_BOOTS = register(
         "diving_boots"
     ) {
-        Services.PLATFORM.createArmor(
-            HybridAquaticArmorMaterials.DIVING, ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
+        DIVING_ARMOR_FACTORY.create(
+            ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
         )
     }
 
     val NAUTILUS_HELMET = register(
         "nautilus_helmet"
     ) {
-        Services.PLATFORM.createArmor(
-            HybridAquaticArmorMaterials.SEASHELL, ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
+        SEASHELL_ARMOR_FACTORY.create(
+            ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
         )
     }
 
     val NAUTILUS_PAULDRONS = register(
         "nautilus_pauldrons"
     ) {
-        Services.PLATFORM.createArmor(
-            HybridAquaticArmorMaterials.SEASHELL, ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+        SEASHELL_ARMOR_FACTORY.create(
+            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
 
     val TURTLE_CHESTPLATE = register(
         "turtle_chestplate"
     ) {
-        Services.PLATFORM.createArmor(
-            HybridAquaticArmorMaterials.TURTLE, ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+        TURTLE_ARMOR_FACTORY.create(
+            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
 
     val MANGLERFISH_LURE = register(
         "manglerfish_lure"
     ) {
-        Services.PLATFORM.createArmor(
-            HybridAquaticArmorMaterials.MANGLERFISH, ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
+        MANGLERFISH_ARMOR_FACTORY.create(
+            ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
         )
     }
 
     val MANGLERFISH_FIN = register(
         "manglerfish_fin"
     ) {
-        Services.PLATFORM.createArmor(
-            HybridAquaticArmorMaterials.MANGLERFISH, ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+        MANGLERFISH_ARMOR_FACTORY.create(
+            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
 
     val EEL_SCARF = register(
         "eel_scarf"
     ) {
-        Services.PLATFORM.createArmor(
-            HybridAquaticArmorMaterials.EEL,
+        EEL_ARMOR_FACTORY.create(
             ArmorItem.Type.CHESTPLATE,
             Item.Properties().stacksTo(1)
         )
@@ -105,8 +103,8 @@ object HybridAquaticItems {
     val MOON_JELLYFISH_HAT = register(
         "moon_jellyfish_hat"
     ) {
-        Services.PLATFORM.createArmor(
-            HybridAquaticArmorMaterials.MOONJELLYFISH, ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
+        MOON_JELLYFISH_ARMOR_FACTORY.create(
+            ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
         )
     }
     //#endregion
@@ -179,14 +177,14 @@ object HybridAquaticItems {
     //#region Nature Blocks
 
     val ANEMONE = register("anemone") {
-        Services.PLATFORM.createBlockItem(HybridAquaticBlocks.ANEMONE.get(), Item.Properties())
+        PLATFORM.createBlockItem(HybridAquaticBlocks.ANEMONE.get(), Item.Properties())
     }
 
     val STRAWBERRY_ANEMONE = register("strawberry_anemone") {
-        Services.PLATFORM.createBlockItem(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(), Item.Properties())
+        PLATFORM.createBlockItem(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(), Item.Properties())
     }
     val GIANT_GREEN_ANEMONE = register("giant_green_anemone") {
-        Services.PLATFORM.createBlockItem(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(), Item.Properties())
+        PLATFORM.createBlockItem(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(), Item.Properties())
     }
 
     val GIANT_CLAM = registerBlockItem("giant_clam") { HybridAquaticBlocks.GIANT_CLAM.get() }
@@ -281,7 +279,7 @@ object HybridAquaticItems {
     val GLOWSTICK =
         registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
     val MESSAGE_IN_A_BOTTLE =
-        register("message_in_a_bottle") { Services.PLATFORM.createMessageInABottleItem(Item.Properties()) }
+        register("message_in_a_bottle") { PLATFORM.createMessageInABottleItem(Item.Properties()) }
 
     //#region Plushies
 
@@ -1662,7 +1660,7 @@ object HybridAquaticItems {
         primaryColor: Int,
         secondaryColor: Int
     ): Supplier<SpawnEggItem> {
-        return Services.PLATFORM.registerSpawnEggItem(id, { type.get() }, primaryColor, secondaryColor)
+        return PLATFORM.registerSpawnEggItem(id, { type.get() }, primaryColor, secondaryColor)
 
     }
 

@@ -4,7 +4,9 @@ import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.NotNull;
@@ -63,8 +65,6 @@ public interface PlatformHelper {
     Attribute getReachAttribute();
 
     MobCategory getMobCategoryByName(String name);
-
-    ArmorItem createArmor(ArmorMaterial material, ArmorItem.Type type, Item.Properties settings);
 
     Item createBlockItem(Block block, Item.Properties properties);
 

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.platform;
 
 import dev.hybridlabs.aquatic.Constants;
-import dev.hybridlabs.aquatic.platform.services.PlatformHelper;
+import dev.hybridlabs.aquatic.platform.services.*;
 
 import java.util.ServiceLoader;
 
@@ -15,6 +15,15 @@ public class Services {
     // the mod is running on.  For example this can be used to check if the code is running on Forge
     // vs Fabric, or to ask the modloader if another mod is loaded.
     public static final PlatformHelper PLATFORM = load(PlatformHelper.class);
+
+
+    public static final EelArmorProvider EEL_ARMOR_FACTORY = load(EelArmorProvider.class);
+    public static final DivingArmorProvider DIVING_ARMOR_FACTORY = load(DivingArmorProvider.class);
+    public static final SeashellArmorProvider SEASHELL_ARMOR_FACTORY = load(SeashellArmorProvider.class);
+    public static final ManglerfishArmorProvider MANGLERFISH_ARMOR_FACTORY = load(ManglerfishArmorProvider.class);
+    public static final MoonJellyfishArmorProvider MOON_JELLYFISH_ARMOR_FACTORY =
+            load(MoonJellyfishArmorProvider.class);
+    public static final TurtleArmorProvider TURTLE_ARMOR_FACTORY = load(TurtleArmorProvider.class);
 
     // This code is used to load a service for the current environment. Your implementation of the
     // service must be defined  manually by including a text file in META-INF/services named with
