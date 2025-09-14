@@ -332,7 +332,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.CORAL_AXE.get() to "Coral Axe",
             HybridAquaticItems.CORAL_SHOVEL.get() to "Coral Shovel",
             HybridAquaticItems.CORAL_HOE.get() to "Coral Hoe",
-            /*
             HybridAquaticItems.DIVING_HELMET.get() to "Diving Helmet",
             HybridAquaticItems.DIVING_SUIT.get() to "Diving Suit",
             HybridAquaticItems.DIVING_LEGGINGS.get() to "Diving Leggings",
@@ -342,12 +341,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.MANGLERFISH_LURE.get() to "Manglerfish Lure",
             HybridAquaticItems.MANGLERFISH_FIN.get() to "Manglerfish Fin",
             HybridAquaticItems.EEL_SCARF.get() to "Eel Scarf",
-
-            */
             HybridAquaticItems.TURTLE_CHESTPLATE.get() to "Turtle Chestplate",
-            /*
             HybridAquaticItems.MOON_JELLYFISH_HAT.get() to "Moon Jellyfish Hat",
-            */
         ).forEach { (item, translation) ->
             builder.add(item, translation)
         }
@@ -384,9 +379,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.ACACIA_CRATE.get().descriptionId to "Break with an axe to open",
             HybridAquaticBlocks.CHERRY_CRATE.get().descriptionId to "Break with an axe to open",
             HybridAquaticItems.FISHING_NET.get().descriptionId to "Stored Entity: %s",
-            /*
             HybridAquaticItems.MOON_JELLYFISH_HAT.get().descriptionId to "Made by Jakotens",
-             */
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".description"), translation)
         }
