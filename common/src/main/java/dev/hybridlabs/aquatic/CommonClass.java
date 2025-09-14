@@ -13,6 +13,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 
 import java.nio.file.Path;
 
@@ -43,6 +44,9 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
     public static final RegistrationProvider<Feature<?>> FEATURE = RegistrationProvider.get(BuiltInRegistries.FEATURE
             , MOD_ID);
+    public static final RegistrationProvider<LootPoolEntryType> LOOT_POOL_ENTRY_TYPE =
+            RegistrationProvider.get(BuiltInRegistries.LOOT_POOL_ENTRY_TYPE, MOD_ID);
+
     public static final Path CONFIG_FILE = Services.PLATFORM.getConfigDir().resolve(MOD_ID + ".json");
 
     public static ResourceLocation locate(String path) {
