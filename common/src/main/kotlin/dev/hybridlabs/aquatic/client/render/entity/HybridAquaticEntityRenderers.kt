@@ -252,6 +252,12 @@ object HybridAquaticEntityRenderers {
             ::SeahorseEntityRenderer
         )
 
+    val SEADRAGON =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.SEADRAGON,
+            ::SeadragonEntityRenderer
+        )
+
     val MOON_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.MOON_JELLYFISH,
