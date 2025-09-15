@@ -61,7 +61,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
 
         // check valid placement
         val fluidState = world.getFluidState(pos)
-        return fluidState == Fluids.WATER || canSupportCenter(world, pos.below(), Direction.UP)
+        return fluidState == Fluids.WATER.getSource(false) || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
     override fun setPlacedBy(
@@ -92,7 +92,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         val world = context.level
         val pos = context.clickedPos
         val fluidState = world.getFluidState(pos)
-        return super.getStateForPlacement(context)?.setValue(WATERLOGGED, fluidState == Fluids.WATER)
+        return super.getStateForPlacement(context)?.setValue(WATERLOGGED, fluidState == Fluids.WATER.getSource(false))
     }
 
     override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
