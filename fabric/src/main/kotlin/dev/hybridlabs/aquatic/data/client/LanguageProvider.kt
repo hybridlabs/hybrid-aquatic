@@ -153,6 +153,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.TIGER_SHARK_PLUSHIE.get() to "Tiger Shark Plushie",
             HybridAquaticBlocks.WHALE_SHARK_PLUSHIE.get() to "Whale Shark Plushie",
             HybridAquaticBlocks.ANEMONE.get() to "Anemone",
+            HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get() to "Giant Green Anemone",
             HybridAquaticBlocks.STRAWBERRY_ANEMONE.get() to "Strawberry Anemone",
             HybridAquaticBlocks.TUBE_SPONGE.get() to "Tube Sponge",
             HybridAquaticBlocks.CRAB_POT.get() to "Crab Pot",
