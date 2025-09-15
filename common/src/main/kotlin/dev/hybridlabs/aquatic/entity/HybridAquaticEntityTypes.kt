@@ -748,7 +748,7 @@ object HybridAquaticEntityTypes {
         KillerWhaleEntity::createMobAttributes
     )
 
-    val OTTER = registerDolphin(
+    val OTTER = registerMammal(
         "otter",
         ::OtterEntity,
         EntityDimensions.fixed(0.6f, 0.6f),
@@ -870,7 +870,22 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("DOLPHIN")
+            MobCategory.WATER_CREATURE
+        )
+    }
+
+    private fun <T : LivingEntity> registerMammal(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            MobCategory.WATER_CREATURE
         )
     }
 

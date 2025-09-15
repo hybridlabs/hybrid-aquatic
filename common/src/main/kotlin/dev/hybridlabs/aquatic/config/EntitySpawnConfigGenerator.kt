@@ -122,7 +122,7 @@ class EntitySpawnConfigGenerator {
         //#endregion
 
         //#region Mammal
-        addMammal(HybridAquaticEntityTypes.OTTER.get(), listOf(HybridAquaticBiomeTags.RIVERS, HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.SANDY_BEACHES, HybridAquaticBiomeTags.ROCKY_BEACHES), 5, 1, 4)
+        addMammal(HybridAquaticEntityTypes.OTTER.get(), listOf(HybridAquaticBiomeTags.RIVERS, HybridAquaticBiomeTags.SANDY_BEACHES, HybridAquaticBiomeTags.ROCKY_BEACHES), 5, 1, 4)
         //#endregion
 
         //#region Crustaceans
@@ -245,11 +245,7 @@ class EntitySpawnConfigGenerator {
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(
-            entityType, spawnTags,
-            MobCategory.WATER_CREATURE,
-            weight, minGroup, maxGroup
-        )
+        add(entityType, spawnTags, MobCategory.WATER_CREATURE, weight, minGroup, maxGroup)
     }
 
     private fun addMammal(
@@ -259,7 +255,7 @@ class EntitySpawnConfigGenerator {
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, Services.PLATFORM.getMobCategoryByName("MAMMAL"), weight, minGroup, maxGroup)
+        add(entityType, spawnTags, MobCategory.WATER_CREATURE, weight, minGroup, maxGroup)
     }
 
     private fun addJelly(

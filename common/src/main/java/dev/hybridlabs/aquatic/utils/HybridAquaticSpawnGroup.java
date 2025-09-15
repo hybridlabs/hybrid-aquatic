@@ -10,10 +10,6 @@ public enum HybridAquaticSpawnGroup {
 
     FISH_UNDERGROUND("fish_underground", 8, true, true, 64),
 
-    DOLPHIN("dolphin", 4, true, true, 64),
-
-    MAMMAL("mammal", 4, true, true, 64),
-
     CEPHALOPOD("cephalopod", 5, true, false, 64),
 
     JELLY("jelly", 5, true, false, 64),
