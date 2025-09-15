@@ -72,6 +72,7 @@
 				},
 				{
 					"name": "left_fin",
+					"parent": "body",
 					"pivot": [1, 2.25, -0.75],
 					"cubes": [
 						{"origin": [0.82322, 1.93235, -1.16332], "size": [0, 2, 2], "pivot": [1, 2, -1], "rotation": [-22.5, 45, 0], "uv": [0, 16]}
@@ -79,6 +80,7 @@
 				},
 				{
 					"name": "right_fin",
+					"parent": "body",
 					"pivot": [-1, 2.25, -0.75],
 					"cubes": [
 						{"origin": [-0.82322, 1.93235, -1.16332], "size": [0, 2, 2], "pivot": [-1, 2, -1], "rotation": [-22.5, -45, 0], "uv": [0, 16], "mirror": true}
