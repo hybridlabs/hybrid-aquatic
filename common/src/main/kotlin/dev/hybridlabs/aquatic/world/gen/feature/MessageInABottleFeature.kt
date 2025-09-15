@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
-import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
