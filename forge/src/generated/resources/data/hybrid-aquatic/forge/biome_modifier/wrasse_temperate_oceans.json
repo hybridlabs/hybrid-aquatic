@@ -2,7 +2,7 @@
   "type": "forge:add_spawns",
   "biomes": "#hybrid-aquatic:temperate_oceans",
   "spawners": {
-    "type": "hybrid-aquatic:sheepshead_wrasse",
+    "type": "hybrid-aquatic:wrasse",
     "maxCount": 1,
     "minCount": 1,
     "weight": 3
