@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.control
 
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
-import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.phys.Vec3
 import kotlin.math.max

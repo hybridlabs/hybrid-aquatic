@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.crustacean.FiddlerCrabEntity
 import dev.hybridlabs.aquatic.entity.crustacean.GhostCrabEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random

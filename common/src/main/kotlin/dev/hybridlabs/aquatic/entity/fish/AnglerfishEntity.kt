@@ -66,7 +66,7 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Leve
         return angerTime
     }
 
-    override fun setRemainingPersistentAngerTime(p0: Int) {
+    override fun setRemainingPersistentAngerTime(angerTime: Int) {
         this.angerTime = angerTime
     }
 
@@ -74,7 +74,7 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Leve
         return angryAt
     }
 
-    override fun setPersistentAngerTarget(p0: UUID?) {
+    override fun setPersistentAngerTarget(angryAt: UUID?) {
         this.angryAt = angryAt
     }
 

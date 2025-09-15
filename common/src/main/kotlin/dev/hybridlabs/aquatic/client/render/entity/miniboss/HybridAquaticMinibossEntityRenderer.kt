@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.client.render.entity.miniboss
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider

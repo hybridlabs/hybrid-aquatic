@@ -85,9 +85,9 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
             At.Shift.AFTER))
     private void reduceCooldownTime(BlockPos pos, CallbackInfo ci) {
         Item lureItem = this.lureItemStack.getItem();
-        if (lureItem.equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK()) && this.level().isDay()) {
+        if (lureItem.equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK().get()) && this.level().isDay()) {
             timeUntilLured -= 75;
-        } else if (lureItem.equals(HybridAquaticItems.INSTANCE.getGLOWING_HOOK()) && this.level().isNight()) {
+        } else if (lureItem.equals(HybridAquaticItems.INSTANCE.getGLOWING_HOOK().get()) && this.level().isNight()) {
             timeUntilLured -= 75;
         }
     }
@@ -103,7 +103,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
     @WrapOperation(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player" +
             "/Player;getLuck()F"))
     private float increaseLuck(Player player, Operation<Float> original) {
-        if (lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK()))
+        if (lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK().get()))
             return player.getLuck() + 27;
         return original.call(player);
     }

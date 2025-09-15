@@ -29,7 +29,7 @@ object HybridAquaticItemGroups {
                         HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get().defaultBlockState()
                     )
                         .also { blockEntity -> blockEntity.variant = variant }
-                    val stack = MessageInABottleBlock.Companion.createItemStack(blockEntity)
+                    val stack = MessageInABottleBlock.createItemStack(blockEntity)
                     entries.accept(stack)
                 }
 

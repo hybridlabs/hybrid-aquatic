@@ -12,7 +12,7 @@ logoFile = "${mod_id}.png" #optional (needs to be in the root of your mod jar (r
 credits = "Thanks for this example mod goes to Java" #optional
 authors = "${mod_author}" #optional
 description = '''${description}''' #mandatory (Supports multiline text)
-[[dependencies.${mod_id}]] #optional
+[[dependencies.${forge_mod_id}]] #optional
 modId = "forge" #mandatory
 mandatory = true #mandatory
 versionRange = "[${forge_version},)" #mandatory

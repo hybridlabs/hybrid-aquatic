@@ -183,7 +183,6 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) :
             "UUID"
         )
 
-        @Suppress("UNUSED_PARAMETER")
         fun tick(world: Level, pos: BlockPos, state: BlockState, blockEntity: AnemoneBlockEntity) {
             blockEntity.tick(world)
         }

@@ -67,7 +67,7 @@ SeaMessageBookItem(settings: Properties) : Item(settings) {
 
             val unparsedId = nbt.getString(SEA_MESSAGE_KEY)
             val id = ResourceLocation.tryParse(unparsedId) ?: return null
-            val registry = registryManager.registryOrThrow<SeaMessage>(HybridAquaticRegistryKeys.SEA_MESSAGE)
+            val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
             return registry.get(id)
         }
 

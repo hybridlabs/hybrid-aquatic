@@ -69,11 +69,6 @@ public class ForgePlatformHelper implements PlatformHelper {
     }
 
     @Override
-    public String getEnvironmentName() {
-        return PlatformHelper.super.getEnvironmentName();
-    }
-
-    @Override
     public <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(
             @NotNull String name,
             Supplier<EntityType<T>> entityType,

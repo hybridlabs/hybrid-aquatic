@@ -76,7 +76,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
             if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
                 // get a random message
                 val registryManager = world.registryAccess()
-                val registry = registryManager.registryOrThrow<SeaMessage>(HybridAquaticRegistryKeys.SEA_MESSAGE)
+                val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
                 val messageKey = registry.getRandom(world.random).getOrNull()?.key() ?: return
                 val message = registry.get(messageKey) ?: return
 

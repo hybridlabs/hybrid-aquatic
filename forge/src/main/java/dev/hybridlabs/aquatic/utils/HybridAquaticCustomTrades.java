@@ -67,9 +67,7 @@ public class HybridAquaticCustomTrades {
 
     public static void registerWandererTrades(WandererTradesEvent event) {
         var rareTrades = event.getRareTrades();
-        BuiltInRegistries.ITEM.stream().filter((item) -> item instanceof BlockItem && ((BlockItem) item).getBlock() instanceof PlushieBlock).forEach((block) -> {
-            rareTrades.add(new BasicItemListing(8, new ItemStack(block), 1, 2, 2f));
-        });
+        BuiltInRegistries.ITEM.stream().filter((item) -> item instanceof BlockItem && ((BlockItem) item).getBlock() instanceof PlushieBlock).forEach((block) -> rareTrades.add(new BasicItemListing(8, new ItemStack(block), 1, 2, 2f)));
     }
 }
 

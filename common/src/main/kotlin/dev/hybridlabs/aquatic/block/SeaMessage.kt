@@ -35,7 +35,7 @@ data class SeaMessage(
      * Retrieves the id of this sea message.
      */
     fun getId(registryManager: RegistryAccess): ResourceLocation? {
-        val registry = registryManager.registryOrThrow<SeaMessage>(HybridAquaticRegistryKeys.SEA_MESSAGE)
+        val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
         return registry.getKey(this)
     }
 

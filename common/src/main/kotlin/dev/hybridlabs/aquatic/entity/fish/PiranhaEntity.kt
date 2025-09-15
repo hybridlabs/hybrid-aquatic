@@ -111,7 +111,7 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
         return angerTime
     }
 
-    override fun setRemainingPersistentAngerTime(p0: Int) {
+    override fun setRemainingPersistentAngerTime(angerTime: Int) {
         this.angerTime = angerTime
     }
 
@@ -119,7 +119,7 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
         return angryAt
     }
 
-    override fun setPersistentAngerTarget(p0: UUID?) {
+    override fun setPersistentAngerTarget(angryAt: UUID?) {
         this.angryAt = angryAt
     }
 

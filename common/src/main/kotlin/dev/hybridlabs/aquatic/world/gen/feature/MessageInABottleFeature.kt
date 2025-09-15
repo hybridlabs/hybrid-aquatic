@@ -51,7 +51,7 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
 
             // set random message
             val registryManager = world.registryAccess()
-            val registry = registryManager.registryOrThrow<SeaMessage>(HybridAquaticRegistryKeys.SEA_MESSAGE)
+            val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
             registry.getRandom(random).ifPresent { messageEntry ->
                 val message = messageEntry.value()
                 val stack = SeaMessageBookItem.createItemStack(message, registryManager)
