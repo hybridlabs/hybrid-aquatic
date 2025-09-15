@@ -24,10 +24,10 @@
 				"dorsal_fin": {
 					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*-10"]
 				},
-				"left_pelvic_fin": {
+				"left_pectoral_fin": {
 					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*10"]
 				},
-				"right_pelvic_fin": {
+				"right_pectoral_fin": {
 					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*10"]
 				}
 			}
@@ -55,10 +55,10 @@
 				"dorsal_fin": {
 					"rotation": [0, 0, "Math.sin(query.anim_time * 180)*5"]
 				},
-				"left_pelvic_fin": {
+				"left_pectoral_fin": {
 					"rotation": [0, 0, "Math.sin(query.anim_time * 180)*5"]
 				},
-				"right_pelvic_fin": {
+				"right_pectoral_fin": {
 					"rotation": [0, 0, "Math.sin(query.anim_time * 180)*5"]
 				}
 			}

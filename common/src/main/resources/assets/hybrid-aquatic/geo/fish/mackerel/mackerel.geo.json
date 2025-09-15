@@ -22,7 +22,7 @@
 					]
 				},
 				{
-					"name": "left_pelvic_fin",
+					"name": "left_pectoral_fin",
 					"parent": "body",
 					"pivot": [0, 0.07612, -4],
 					"cubes": [
@@ -30,7 +30,7 @@
 					]
 				},
 				{
-					"name": "right_pelvic_fin",
+					"name": "right_pectoral_fin",
 					"parent": "body",
 					"pivot": [0, 0.07612, -4],
 					"cubes": [
