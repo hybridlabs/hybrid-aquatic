@@ -76,6 +76,7 @@ object HybridAquaticForge {
         HybridAquaticLootPoolEntryTypes
         LootTableModifications
 
+        MOD_BUS.addListener(::registerPotionsRecipes)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerWandererTrades)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
 
@@ -191,10 +192,9 @@ object HybridAquaticForge {
         logger.info("Server starting...")
     }
 
-    private fun registerPotions(event: FMLCommonSetupEvent) {
+    private fun registerPotionsRecipes(event: FMLCommonSetupEvent) {
         event.enqueueWork {
             HybridAquaticPotions.registerPotionRecipes()
         }
-
     }
 }
