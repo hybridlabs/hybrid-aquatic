@@ -50,7 +50,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         // cannot place below water
         val fluidStateAbove = world.getFluidState(pos.above())
         if (fluidStateAbove.`is`(Fluids.EMPTY)) {
-            return false
+            return true
         }
 
         // cannot stack
