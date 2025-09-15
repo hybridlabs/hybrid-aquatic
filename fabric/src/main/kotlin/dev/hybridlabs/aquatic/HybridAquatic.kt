@@ -53,7 +53,7 @@ object HybridAquatic : ModInitializer {
         HybridAquaticBiomeTags
 
         HybridAquaticMobEffects
-        HybridAquaticPotions
+        HybridAquaticPotions.registerPotionRecipes()
 
         HybridAquaticItems
         HybridAquaticWoodItems

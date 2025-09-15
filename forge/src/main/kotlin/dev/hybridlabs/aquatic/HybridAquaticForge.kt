@@ -25,6 +25,7 @@ import dev.hybridlabs.aquatic.item.HybridAquaticWoodItems
 import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
+import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
@@ -35,6 +36,7 @@ import net.minecraft.world.entity.MobCategory
 import net.minecraftforge.client.event.EntityRenderersEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
@@ -58,13 +60,13 @@ object HybridAquaticForge {
         HybridAquaticBiomeTags
 
         HybridAquaticMobEffects
-        //HybridAquaticPotions
 
         HybridAquaticItems
         HybridAquaticWoodItems
         HybridAquaticItemGroups
 
         HybridAquaticEnchantments
+        HybridAquaticPotions
 
         HybridAquaticFeatures
         HybridAquaticPlacedFeatures
@@ -187,5 +189,12 @@ object HybridAquaticForge {
      */
     private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {
         logger.info("Server starting...")
+    }
+
+    private fun registerPotions(event: FMLCommonSetupEvent) {
+        event.enqueueWork {
+            HybridAquaticPotions.registerPotionRecipes()
+        }
+
     }
 }
