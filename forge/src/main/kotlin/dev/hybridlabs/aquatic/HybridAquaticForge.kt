@@ -19,6 +19,7 @@ import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.item.HybridAquaticWoodItems
@@ -34,6 +35,7 @@ import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.minecraft.world.entity.MobCategory
 import net.minecraftforge.client.event.EntityRenderersEvent
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
@@ -86,6 +88,7 @@ object HybridAquaticForge {
                 MOD_BUS.addListener(::registerModelLayers)
                 MOD_BUS.addListener(::registerSkullModels)
                 MOD_BUS.addListener(::registerBlockEntityRenderers)
+                MOD_BUS.addListener(::registerSpawnPlacements)
                 HybridAquaticEntityRenderers
             },
             serverTarget = {
@@ -106,6 +109,10 @@ object HybridAquaticForge {
                 it.immediateDespawnRange
             )
         }
+    }
+
+    private fun registerSpawnPlacements(event: SpawnPlacementRegisterEvent){
+        SpawnRestrictionRegistry.registerSpawnRestrictions()
     }
 
 
