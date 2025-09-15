@@ -22,9 +22,9 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.item.HybridAquaticWoodItems
+import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
-import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
@@ -58,7 +58,7 @@ object HybridAquaticForge {
         HybridAquaticBiomeTags
 
         HybridAquaticMobEffects
-        HybridAquaticPotions
+        //HybridAquaticPotions
 
         HybridAquaticItems
         HybridAquaticWoodItems
@@ -71,8 +71,8 @@ object HybridAquaticForge {
         HybridAquaticConfiguredFeatures
 
         HybridAquaticNetworking.registerPackets()
-
         HybridAquaticLootPoolEntryTypes
+        LootTableModifications
 
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerWandererTrades)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)

@@ -24,7 +24,7 @@ class MessageInABottleItemEntry(
     functions: Array<LootItemFunction>
 ) : LootPoolSingletonContainer(weight, quality, conditions, functions) {
     override fun getType(): LootPoolEntryType {
-        return HybridAquaticLootPoolEntryTypes.MESSAGE_IN_A_BOTTLE
+        return HybridAquaticLootPoolEntryTypes.MESSAGE_IN_A_BOTTLE.get()
     }
 
     public override fun createItemStack(consumer: Consumer<ItemStack?>, context: LootContext) {
