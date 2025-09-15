@@ -167,6 +167,7 @@ object HybridAquaticBlocks {
             Properties.copy(Blocks.KELP).noOcclusion()
         )
     }
+
     val SARGASSUM_PLANT = register(
         "sargassum_plant"
     ) {

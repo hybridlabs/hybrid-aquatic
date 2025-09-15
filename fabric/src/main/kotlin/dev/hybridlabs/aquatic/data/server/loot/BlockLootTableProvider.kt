@@ -43,6 +43,38 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
+        add(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+            )
+        }
+
+        add(HybridAquaticBlocks.FLOATING_SARGASSUM.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+            )
+        }
+
+        add(HybridAquaticBlocks.SARGASSUM.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .build()
+            )
+        }
+
+        add(HybridAquaticBlocks.BULL_KELP.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .build()
+            )
+        }
+
         //region wood
         createSingleItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get())
         createSingleItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get())

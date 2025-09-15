@@ -3,15 +3,10 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "hybrid-aquatic:bull_kelp"
         }
       ],
       "rolls": 1.0
