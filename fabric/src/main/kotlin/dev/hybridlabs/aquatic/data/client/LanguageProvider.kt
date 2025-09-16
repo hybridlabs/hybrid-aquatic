@@ -516,7 +516,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.SEADRAGON.get() to "Seadragon",
             HybridAquaticEntityTypes.WRASSE.get() to "Wrasse",
             HybridAquaticEntityTypes.HOUND_SHARK.get() to "Hound Shark",
-            HybridAquaticEntityTypes.KILLER_WHALE.get() to "Orca",
+            HybridAquaticEntityTypes.ORCA.get() to "Orca",
             HybridAquaticEntityTypes.OTTER.get() to "Otter",
         )
 

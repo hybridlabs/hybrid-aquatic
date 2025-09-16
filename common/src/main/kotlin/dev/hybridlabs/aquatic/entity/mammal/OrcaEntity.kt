@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class KillerWhaleEntity(entityType: EntityType<out KillerWhaleEntity>, world: Level) :
+class OrcaEntity(entityType: EntityType<out OrcaEntity>, world: Level) :
     HybridAquaticDolphinEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.MEDIUM_PREY),

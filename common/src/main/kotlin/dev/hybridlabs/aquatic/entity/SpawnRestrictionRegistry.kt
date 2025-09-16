@@ -147,7 +147,7 @@ object SpawnRestrictionRegistry {
 
         // dolphins
         setOf(
-            HybridAquaticEntityTypes.KILLER_WHALE.get(),
+            HybridAquaticEntityTypes.ORCA.get(),
         ).forEach { registerDolphin(it) }
 
         setOf(

@@ -9,7 +9,7 @@ import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
-import dev.hybridlabs.aquatic.entity.mammal.KillerWhaleEntity
+import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.shark.*
@@ -741,11 +741,11 @@ object HybridAquaticEntityTypes {
 
     //#region mammals
 
-    val KILLER_WHALE = registerDolphin(
-        "killer_whale",
-        ::KillerWhaleEntity,
+    val ORCA = registerDolphin(
+        "orca",
+        ::OrcaEntity,
         EntityDimensions.fixed(2.5f, 1.5f),
-        KillerWhaleEntity::createMobAttributes
+        OrcaEntity::createMobAttributes
     )
 
     val OTTER = registerMammal(
