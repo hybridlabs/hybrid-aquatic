@@ -447,18 +447,6 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HybridAquaticItems.COOKED_TENTACLE.get(),
             0.15f
         )
-        offerCookingRecipes(
-            exporter,
-            HybridAquaticItems.BULL_KELP.get(),
-            Items.DRIED_KELP,
-            0.15f
-        )
-        offerCookingRecipes(
-            exporter,
-            HybridAquaticItems.SARGASSUM.get(),
-            Items.DRIED_KELP,
-            0.15f
-        )
     }
 
     private fun offerCookingRecipes(

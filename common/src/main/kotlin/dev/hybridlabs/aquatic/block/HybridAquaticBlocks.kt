@@ -489,7 +489,7 @@ object HybridAquaticBlocks {
         GiantClamBlock(
             true, Properties.copy(Blocks.TUFF).noOcclusion().strength(1.0F).pushReaction(PushReaction.DESTROY)
         )
-        //.drops(ResourceLocation(Constants.MOD_ID, "blocks/giant_clam")}
+        //.drops(ResourceLocation(Constants.MOD_ID, "blocks/giant_clam")
     }
 
     val BUOY =

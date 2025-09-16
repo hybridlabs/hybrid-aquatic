@@ -87,6 +87,33 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get())
             .add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get())
 
+        getOrCreateTagBuilder(BlockTags.WOODEN_SLABS)
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get())
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS)
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_STAIRS.get())
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_DOORS)
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_DOOR.get())
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS)
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_TRAPDOOR.get())
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS)
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_BUTTON.get())
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES)
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
+
+        getOrCreateTagBuilder(BlockTags.FENCE_GATES)
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get())
+
+        getOrCreateTagBuilder(BlockTags.PLANKS)
+            .add(HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get())
+
         getOrCreateTagBuilder(BlockTags.UNDERWATER_BONEMEALS)
             .add(HybridAquaticBlocks.RED_ALGAE.get())
             .add(HybridAquaticBlocks.SEA_LETTUCE.get())

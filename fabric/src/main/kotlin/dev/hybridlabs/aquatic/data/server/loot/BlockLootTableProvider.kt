@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.MESSAGE_KEY
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.VARIANT_KEY
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
@@ -11,6 +12,7 @@ import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.advancements.critereon.ItemPredicate
+import net.minecraft.advancements.critereon.StatePropertiesPredicate
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.BlockItem.BLOCK_ENTITY_TAG
@@ -22,8 +24,11 @@ import net.minecraft.world.level.storage.loot.entries.AlternativesEntry
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.entries.LootTableReference
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition
 import net.minecraft.world.level.storage.loot.predicates.MatchTool
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 
 class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTableProvider(output) {
     override fun generate() {
@@ -48,6 +53,27 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
                     .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+            )
+        }
+
+        add(HybridAquaticBlocks.TUBE_WORM.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1f))
+                    .add(
+                        (2..4).fold(LootItem.lootTableItem(block)) { item, worms ->
+                            item.apply(
+                                SetItemCountFunction.setCount(ConstantValue.exactly(worms.toFloat()))
+                                    .`when`(
+                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                            .setProperties(
+                                                StatePropertiesPredicate.Builder.properties()
+                                                    .hasProperty(TubeWormBlock.WORMS, worms)
+                                            )
+                                    )
+                            )
+                        }
+                    )
             )
         }
 
