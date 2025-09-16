@@ -24,7 +24,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class JungleLilyPadBlock(settings: Properties?) : BushBlock(settings) {
+class JungleLilyPadBlock(settings: Properties) : BushBlock(settings) {
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
