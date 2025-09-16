@@ -72,15 +72,15 @@
 					"parent": "tail",
 					"pivot": [0, 4.5, 2],
 					"cubes": [
-						{"origin": [0, 4.5, 2], "size": [0, 2, 2], "pivot": [0, 4.5, 2], "rotation": [-17.5, 0, 0], "uv": [16, 21]}
+						{"origin": [0, 4.5, 2.25], "size": [0, 2, 2], "uv": [16, 21]}
 					]
 				},
 				{
 					"name": "pelvic_fin",
 					"parent": "tail",
-					"pivot": [0, 1.5, 2],
+					"pivot": [0, 1, 1],
 					"cubes": [
-						{"origin": [0, -1, 1.5], "size": [0, 3, 3], "pivot": [0, 1.5, 2], "rotation": [-22.5, 0, 0], "uv": [6, 19]}
+						{"origin": [0, -1.75, 0.5], "size": [0, 3, 3], "uv": [6, 19]}
 					]
 				},
 				{
