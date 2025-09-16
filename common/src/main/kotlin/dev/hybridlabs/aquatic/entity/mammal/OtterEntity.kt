@@ -1,9 +1,11 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
-import dev.hybridlabs.aquatic.entity.ai.control.OtterFloatControl
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.tags.FluidTags
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -16,20 +18,16 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         listOf(
             HybridAquaticEntityTags.NONE)) {
 
-    init {
-        moveControl = OtterFloatControl(this)
-    }
-
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
-    fun isBelowWaterline(): Boolean {
-        return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
+    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
+        return null
     }
 
-    private fun getWaterline(): Float {
-        return 0.4f
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
+        return dimensions.height * 0.8f
     }
 
     companion object {

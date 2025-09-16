@@ -1,11 +1,13 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import dev.hybridlabs.aquatic.entity.ai.control.FloatControl
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.FluidTags
@@ -17,7 +19,7 @@ import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
@@ -32,15 +34,29 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
-@Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER", "unused")
+@Suppress("LeakingThis", "UNUSED_PARAMETER", "unused")
 open class HybridAquaticMammalEntity(
     type: EntityType<out HybridAquaticMammalEntity>,
     world: Level,
     open val prey: List<TagKey<EntityType<*>>>,
     open val predator: List<TagKey<EntityType<*>>>,
-) : WaterAnimal(type, world), GeoEntity {
+) : Animal(type, world), GeoEntity {
 
     private val factory = GeckoLibUtil.createInstanceCache(this)
+
+
+    init {
+        moveControl = MoveControl(this)
+        navigation = AmphibiousPathNavigation(this, world)
+    }
+
+    fun isBelowWaterline(): Boolean {
+        return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
+    }
+
+    open fun getWaterline(): Float {
+        return 0.5f
+    }
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
@@ -53,6 +69,10 @@ open class HybridAquaticMammalEntity(
         this.yRot = 0.0f
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
+        return null
     }
 
     protected open fun getMinSize(): Int {
@@ -83,13 +103,6 @@ open class HybridAquaticMammalEntity(
         return factory
     }
 
-    override fun canBreatheUnderwater(): Boolean {
-        return false
-    }
-
-    override fun handleAirSupply(air: Int) {
-    }
-
     var size: Int
         get() = entityData.get(MAMMAL_SIZE)
         set(size) {
@@ -105,30 +118,21 @@ open class HybridAquaticMammalEntity(
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0f)
         setPathfindingMalus(BlockPathTypes.WALKABLE, 0.0f)
-        moveControl = MoveControl(this)
+        moveControl = FloatControl(this)
         lookControl = LookControl(this)
         navigation = AmphibiousPathNavigation(this, world)
     }
 
     override fun registerGoals() {
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.5, 2))
-        goalSelector.addGoal(3, RandomSwimmingGoal(this, 0.5, 2))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
-        goalSelector.addGoal(4, TryFindWaterGoal(this))
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 6.0f))
+        goalSelector.addGoal(5, TryFindWaterGoal(this))
         goalSelector.addGoal(6, MeleeAttackGoal(this, 1.2000000476837158, true))
     }
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return 0.3f
-    }
-
-    override fun getMaxHeadYRot(): Int {
-        return 1
-    }
-
-    override fun getMaxHeadXRot(): Int {
-        return 1
     }
 
     override fun getAmbientSound(): SoundEvent? {
@@ -143,14 +147,22 @@ open class HybridAquaticMammalEntity(
         return SoundEvents.DOLPHIN_SWIM
     }
 
+    override fun aiStep() {
+        super.aiStep()
+        val vec3d = this.deltaMovement
+        if (!this.onGround() && this.isSwimming && vec3d.y < 0.0) {
+            this.deltaMovement = vec3d.multiply(1.0, 0.6, 1.0)
+        }
+    }
+
     companion object {
         val MAMMAL_SIZE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HybridAquaticMammalEntity::class.java, EntityDataSerializers.INT)
 
         val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
 
-        fun getScaleAdjustment(fish: HybridAquaticMammalEntity, adjustment: Float): Float {
-            return 1.0f + (fish.size * adjustment)
+        fun getScaleAdjustment(mammal: HybridAquaticMammalEntity, adjustment: Float): Float {
+            return 1.0f + (mammal.size * adjustment)
         }
 
         fun canSpawn(

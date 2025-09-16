@@ -4,5 +4,9 @@ import dev.hybridlabs.aquatic.client.model.entity.mammal.OtterEntityModel
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
-class OtterEntityRenderer(context: Context) :
-    HybridAquaticMammalEntityRenderer<OtterEntity>(context, OtterEntityModel())
+class OtterEntityRenderer(context: Context) : HybridAquaticMammalEntityRenderer<OtterEntity>(context, OtterEntityModel()) {
+
+    init {
+        this.shadowRadius = 0.5f
+    }
+}

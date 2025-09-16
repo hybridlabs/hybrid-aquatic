@@ -2,10 +2,9 @@ package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
-import net.minecraft.client.Minecraft
-import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
+import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
@@ -30,14 +29,15 @@ abstract class HybridAquaticMammalEntityModel<T : HybridAquaticMammalEntity>(pri
     override fun setCustomAnimations(
         animatable: T,
         instanceId: Long,
-        animationState: AnimationState<T>
+        animationState: AnimationState<T>,
     ) {
-        super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
+        val head = animationProcessor.getBone("head")
 
-        val body = animationProcessor.getBone(PartNames.BODY)
+        if (head != null) {
+            val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
 
-        val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
-        body.rotX = xRot * -Mth.DEG_TO_RAD
+            head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
+            head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
+        }
     }
 }
