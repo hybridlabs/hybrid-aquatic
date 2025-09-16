@@ -107,7 +107,7 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Leve
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        val overlayID = world.random.nextIntBetweenInclusive(0, WhaleSharkEntity.Companion.OverlayTextures.entries.size - 1)
+        val overlayID = world.random.nextIntBetweenInclusive(0, OverlayTextures.entries.size - 1)
         overlayTexture = OverlayTextures.byId(overlayID)
 
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
@@ -122,13 +122,13 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Leve
     }
 
     private var overlayTexture
-        get() = WhaleSharkEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture))
+        get() = OverlayTextures.byId(entityData.get(OverlayTexture))
         set(value) {
             entityData.set(OverlayTexture, value.id)
         }
 
     override fun getOverlayTextureName(): String {
-        return WhaleSharkEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).toString()
+        return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
     }
 
     override fun defineSynchedData() {
@@ -143,7 +143,7 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Leve
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         if (nbt.contains("texture_overlay")) this.overlayTexture =
-            WhaleSharkEntity.Companion.OverlayTextures.byId(nbt.getInt("texture_overlay"))
+            OverlayTextures.byId(nbt.getInt("texture_overlay"))
         super.readAdditionalSaveData(nbt)
     }
 }
