@@ -7,14 +7,14 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
-import net.minecraft.data.recipes.FinishedRecipe
-import net.minecraft.data.recipes.RecipeCategory
-import net.minecraft.data.recipes.ShapedRecipeBuilder
-import net.minecraft.data.recipes.ShapelessRecipeBuilder
+import net.minecraft.data.recipes.*
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.crafting.AbstractCookingRecipe
+import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.level.block.Blocks
 import java.util.function.Consumer
@@ -447,6 +447,9 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HybridAquaticItems.COOKED_TENTACLE.get(),
             0.15f
         )
+
+        offerKelpCookingRecipes(exporter, HybridAquaticItemTags.KELPS, Items.DRIED_KELP, 0.15f)
+
     }
 
     private fun offerCookingRecipes(
@@ -466,5 +469,33 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             output,
             experience
         )
+    }
+
+    private fun offerKelpCookingRecipes(
+        exporter: Consumer<FinishedRecipe>,
+        inputTag: TagKey<Item>,
+        output: Item,
+        experience: Float
+    ) {
+        offerKelpCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING_RECIPE, 200, inputTag, output, experience)
+        offerKelpCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING_RECIPE, 100, inputTag, output, experience)
+        offerKelpCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, 600, inputTag, output, experience)
+    }
+
+    private fun offerKelpCookingRecipe(
+        exporter: Consumer<FinishedRecipe>,
+        cooker: String,
+        serializer: RecipeSerializer<out AbstractCookingRecipe>,
+        cookingTime: Int,
+        inputTag: TagKey<Item>,
+        output: Item,
+        experience: Float
+    ) {
+        val builder = SimpleCookingRecipeBuilder
+            .generic(Ingredient.of(inputTag), RecipeCategory.FOOD, output, experience, cookingTime, serializer)
+            .unlockedBy("has_kelp", has(inputTag))
+
+        val recipeId = getItemName(output) + "_from_" + cooker
+        builder.save(exporter, recipeId)
     }
 }

@@ -249,6 +249,13 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         }
 
         listOf(
+            HybridAquaticItems.SARGASSUM.get(),
+            HybridAquaticItems.BULL_KELP.get(),
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridAquaticItemTags.KELPS).add(item)
+        }
+
+        listOf(
             HybridAquaticItems.LIONFISH.get(),
             HybridAquaticItems.STONEFISH.get(),
             HybridAquaticItems.BLOWFISH.get(),
