@@ -31,7 +31,7 @@ class JungleLilyPadBlock(settings: Properties?) : BushBlock(settings) {
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (!fluidStateAbove.`is`(Fluids.EMPTY)) {
+        if (!fluidStateAbove.`is`( Fluids.EMPTY)) {
             return false
         }
 
@@ -41,7 +41,7 @@ class JungleLilyPadBlock(settings: Properties?) : BushBlock(settings) {
         }
 
         val fluidState = world.getFluidState(pos)
-        return fluidState == WATER || canSupportCenter(world, pos.below(), Direction.UP)
+        return fluidState.`is`(WATER) || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {

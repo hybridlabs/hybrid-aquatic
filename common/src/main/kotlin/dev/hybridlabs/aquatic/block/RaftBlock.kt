@@ -23,10 +23,10 @@ class RaftBlock(settings: Properties) : Block(settings), SimpleWaterloggedBlock 
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState {
-        val waterlogged = ctx.level.getFluidState(ctx.clickedPos) == Fluids.WATER
+        val waterlogged = ctx.level.getFluidState(ctx.clickedPos) == Fluids.WATER.getSource(false)
         return defaultBlockState()
             .setValue(WATERLOGGED, waterlogged)
-            .setValue(BuoyBlock.FACING, ctx.horizontalDirection.clockWise)
+            .setValue(FACING, ctx.horizontalDirection.clockWise)
     }
 
     override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
@@ -64,15 +64,17 @@ class RaftBlock(settings: Properties) : Block(settings), SimpleWaterloggedBlock 
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (fluidStateAbove != Fluids.EMPTY) {
+        if (!fluidStateAbove.`is`( Fluids.EMPTY)) {
             return false
         }
+
         val stateBelow = world.getBlockState(pos.below())
         if (stateBelow.block == this) {
             return false
         }
+
         val fluidState = world.getFluidState(pos)
-        return fluidState == Fluids.WATER || canSupportCenter(world, pos.below(), Direction.UP)
+        return fluidState.`is`(Fluids.WATER) || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
     override fun rotate(state: BlockState, rotation: Rotation): BlockState {
