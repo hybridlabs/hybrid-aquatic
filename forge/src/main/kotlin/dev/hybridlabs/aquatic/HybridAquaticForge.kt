@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
+import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BASKING_SHARK_PLUSHIE
@@ -27,6 +28,7 @@ import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
 import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
+import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
@@ -40,9 +42,11 @@ import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
+import net.minecraftforge.registries.DataPackRegistryEvent
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
+
 
 @Suppress("UnusedExpression")
 @Mod(Constants.FORGE_MOD_ID)
@@ -78,6 +82,8 @@ object HybridAquaticForge {
         HybridAquaticLootPoolEntryTypes
         LootTableModifications
 
+
+        MOD_BUS.addListener(::loadSeaMessages)
         MOD_BUS.addListener(::registerPotionsRecipes)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerWandererTrades)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
@@ -97,6 +103,14 @@ object HybridAquaticForge {
 
     }
 
+    fun loadSeaMessages(event: DataPackRegistryEvent.NewRegistry) {
+        event.dataPackRegistry(
+            HybridAquaticRegistryKeys.SEA_MESSAGE,
+            SeaMessage.CODEC,
+            SeaMessage.CODEC,
+        )
+    }
+
     private fun createSpawnGroups() {
         // Extend the MobCategory enum with our spawn groups
         HybridAquaticSpawnGroup.entries.toTypedArray().forEach {
@@ -111,7 +125,7 @@ object HybridAquaticForge {
         }
     }
 
-    private fun registerSpawnPlacements(event: SpawnPlacementRegisterEvent){
+    private fun registerSpawnPlacements(event: SpawnPlacementRegisterEvent) {
         SpawnRestrictionRegistry.registerSpawnRestrictions()
     }
 
