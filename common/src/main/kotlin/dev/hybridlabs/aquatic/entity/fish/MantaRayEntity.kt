@@ -98,7 +98,7 @@ class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
         }
 
     override fun getOverlayTextureName(): String {
-        return MantaRayEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).toString()
+        return MantaRayEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
     }
 
     override fun defineSynchedData() {

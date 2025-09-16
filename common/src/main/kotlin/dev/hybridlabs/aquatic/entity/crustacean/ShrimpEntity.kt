@@ -84,13 +84,13 @@ class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, wo
     }
 
     private var overlayTexture
-        get() = ShrimpEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture))
+        get() = OverlayTextures.byId(entityData.get(OverlayTexture))
         set(value) {
             entityData.set(OverlayTexture, value.id)
         }
 
     override fun getOverlayTextureName(): String {
-        return ShrimpEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).toString()
+        return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
     }
 
     override fun defineSynchedData() {
@@ -104,7 +104,7 @@ class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, wo
     }
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
-        if(nbt.contains("texture_overlay")) this.overlayTexture = ShrimpEntity.Companion.OverlayTextures.byId(nbt.getInt("texture_overlay"))
+        if(nbt.contains("texture_overlay")) this.overlayTexture = OverlayTextures.byId(nbt.getInt("texture_overlay"))
         super.readAdditionalSaveData(nbt)
     }
 }

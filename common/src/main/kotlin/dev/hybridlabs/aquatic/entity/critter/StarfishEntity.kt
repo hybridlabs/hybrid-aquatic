@@ -172,13 +172,13 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
     }
 
     private var overlayTexture
-        get() = StarfishEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture))
+        get() = OverlayTextures.byId(entityData.get(OverlayTexture))
         set(value) {
             entityData.set(OverlayTexture, value.id)
         }
 
     override fun getOverlayTextureName(): String {
-        return StarfishEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).toString()
+        return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
     }
 
     override fun defineSynchedData() {
@@ -196,7 +196,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         this.variant = Type.byName(nbt.getString("Type"))
         if (nbt.contains("texture_overlay")) this.overlayTexture =
-            StarfishEntity.Companion.OverlayTextures.byId(nbt.getInt("texture_overlay"))
+            OverlayTextures.byId(nbt.getInt("texture_overlay"))
         super.readAdditionalSaveData(nbt)
     }
 
