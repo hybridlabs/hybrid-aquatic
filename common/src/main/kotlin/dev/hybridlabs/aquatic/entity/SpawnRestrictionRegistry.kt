@@ -12,6 +12,7 @@ import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacements
+import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.monster.Monster
 import net.minecraft.world.level.levelgen.Heightmap
@@ -237,7 +238,7 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : HybridAquaticMammalEntity> registerMammal(entityType: EntityType<T>) {
-        registerLandWaterCreature(entityType, HybridAquaticMammalEntity::canSpawn)
+        registerMammalEntity(entityType, HybridAquaticMammalEntity::canSpawn)
     }
 
     private fun <T : WaterAnimal> registerJelly(entityType: EntityType<T>) {
@@ -286,6 +287,14 @@ object SpawnRestrictionRegistry {
         register(
             entityType,
             SpawnPlacements.Type.IN_WATER,
+            predicate
+        )
+    }
+
+    private fun <T : Animal> registerMammalEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+        register(
+            entityType,
+            SpawnPlacements.Type.NO_RESTRICTIONS,
             predicate
         )
     }
