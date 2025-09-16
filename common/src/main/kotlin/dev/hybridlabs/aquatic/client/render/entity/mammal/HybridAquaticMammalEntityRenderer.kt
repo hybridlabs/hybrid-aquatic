@@ -32,4 +32,8 @@ open class HybridAquaticMammalEntityRenderer<T : HybridAquaticMammalEntity>(
         return 0f
     }
 
+    override fun getMotionAnimThreshold(animatable: T): Float {
+        return 0.0025f
+    }
+
 }

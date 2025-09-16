@@ -16,7 +16,6 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.LookControl
-import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
 import net.minecraft.world.entity.animal.Animal
@@ -44,9 +43,8 @@ open class HybridAquaticMammalEntity(
 
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
-
     init {
-        moveControl = MoveControl(this)
+        moveControl = FloatControl(this)
         navigation = AmphibiousPathNavigation(this, world)
     }
 
