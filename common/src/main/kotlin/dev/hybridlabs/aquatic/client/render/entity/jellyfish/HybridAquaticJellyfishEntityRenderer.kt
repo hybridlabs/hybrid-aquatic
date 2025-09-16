@@ -27,7 +27,7 @@ open class HybridAquaticJellyfishEntityRenderer<T : HybridAquaticJellyfishEntity
         val j = Mth.lerp(h, jellyfishEntity.prevRollAngle, jellyfishEntity.rollAngle)
         matrixStack.translate(0.0f, 0.25f, 0.0f)
         matrixStack.mulPose(Axis.YP.rotationDegrees(180.0f - g))
-        matrixStack.mulPose(Axis.YP.rotationDegrees(i))
+        matrixStack.mulPose(Axis.XP.rotationDegrees(i))
         matrixStack.mulPose(Axis.YP.rotationDegrees(j))
         matrixStack.translate(0.0f, 0.0f, 0.0f)
     }
