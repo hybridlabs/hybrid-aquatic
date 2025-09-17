@@ -72,7 +72,7 @@ object HybridAquaticEntityTypes {
     val BARRACUDA = registerFish(
         "barracuda",
         ::BarracudaEntity,
-        EntityDimensions.fixed(1.25f, 0.5f),
+        EntityDimensions.fixed(1.0f, 0.5f),
         BarracudaEntity::createMobAttributes
     )
 
