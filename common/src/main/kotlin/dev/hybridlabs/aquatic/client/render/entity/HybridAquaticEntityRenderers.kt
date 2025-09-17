@@ -189,6 +189,12 @@ object HybridAquaticEntityRenderers {
             ::NeedlefishEntityRenderer
         )
 
+    val BARRACUDA =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.BARRACUDA,
+            ::BarracudaEntityRenderer
+        )
+
     val MACKEREL =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.MACKEREL,

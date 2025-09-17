@@ -45,6 +45,7 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.CLOWNFISH.get(),
             HybridAquaticEntityTypes.TUNA.get(),
             HybridAquaticEntityTypes.MAHI.get(),
+            HybridAquaticEntityTypes.BARRACUDA.get(),
             HybridAquaticEntityTypes.SURGEONFISH.get(),
             HybridAquaticEntityTypes.BOXFISH.get(),
             HybridAquaticEntityTypes.SEAHORSE.get(),
