@@ -22,7 +22,6 @@ class MahiEntityModel : HybridAquaticFishEntityModel<MahiEntity>("mahi") {
         return when (animatable.variant) {
             MahiEntity.Companion.Type.MAHI -> MAHI_MODEL
             MahiEntity.Companion.Type.POMPANO -> POMPANO_MODEL
-            else -> MAHI_MODEL
         }
     }
 }

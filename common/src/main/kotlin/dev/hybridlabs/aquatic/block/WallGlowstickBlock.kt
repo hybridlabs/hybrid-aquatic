@@ -51,10 +51,10 @@ class WallGlowstickBlock(settings: Properties) : WallTorchBlock(settings, GLOW),
     }
 
     override fun isPathfindable(
-        state: BlockState?,
-        world: BlockGetter?,
-        pos: BlockPos?,
-        type: PathComputationType?
+        state: BlockState,
+        world: BlockGetter,
+        pos: BlockPos,
+        type: PathComputationType
     ): Boolean {
         return true
     }

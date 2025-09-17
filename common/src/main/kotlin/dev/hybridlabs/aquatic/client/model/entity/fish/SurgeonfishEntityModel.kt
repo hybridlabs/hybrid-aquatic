@@ -42,7 +42,6 @@ class SurgeonfishEntityModel : HybridAquaticFishEntityModel<SurgeonfishEntity>("
             SurgeonfishEntity.Companion.Type.ORANGESHOULDER -> ORANGESHOULDER_MODEL
             SurgeonfishEntity.Companion.Type.SOHAL -> SOHAL_MODEL
             SurgeonfishEntity.Companion.Type.UNICORNFISH -> UNICORNFISH_MODEL
-            else -> BLUE_TANG_MODEL
         }
     }
 }

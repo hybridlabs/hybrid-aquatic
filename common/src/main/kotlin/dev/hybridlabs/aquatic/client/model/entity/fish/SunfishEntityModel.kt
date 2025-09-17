@@ -29,7 +29,6 @@ class SunfishEntityModel : HybridAquaticFishEntityModel<SunfishEntity>("sunfish"
             SunfishEntity.Companion.Type.SHARPTAIL -> SUNFISH_MODEL
             SunfishEntity.Companion.Type.HOODWINKER -> HOODWINKER_MODEL
             SunfishEntity.Companion.Type.GIANT -> GIANT_MODEL
-            else -> SUNFISH_MODEL
         }
     }
 }

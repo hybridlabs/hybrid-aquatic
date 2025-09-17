@@ -22,7 +22,6 @@ class TunaEntityModel : HybridAquaticFishEntityModel<TunaEntity>("tuna") {
         return when (animatable.variant) {
             TunaEntity.Companion.Type.YELLOWFIN -> YELLOWFIN_MODEL
             TunaEntity.Companion.Type.BLUEFIN -> BLUEFIN_MODEL
-            else -> YELLOWFIN_MODEL
         }
     }
 }

@@ -57,7 +57,7 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
         return true
     }
 
-    override fun isPreventingPlayerRest(player: Player?): Boolean {
+    override fun isPreventingPlayerRest(player: Player): Boolean {
         return true
     }
 

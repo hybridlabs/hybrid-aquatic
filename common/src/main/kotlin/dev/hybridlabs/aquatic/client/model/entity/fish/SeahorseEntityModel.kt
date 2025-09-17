@@ -30,7 +30,6 @@ class SeahorseEntityModel : HybridAquaticFishEntityModel<SeahorseEntity>("seahor
             SeahorseEntity.Companion.Type.PYGMY -> PYGMY_MODEL
             SeahorseEntity.Companion.Type.THORNY -> THORNY_MODEL
             SeahorseEntity.Companion.Type.BIG_BELLY -> BIG_BELLY_MODEL
-            else -> COMMON_MODEL
         }
     }
 }

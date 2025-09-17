@@ -2,7 +2,7 @@
   "type": "forge:add_spawns",
   "biomes": "#hybrid-aquatic:temperate_oceans",
   "spawners": {
-    "type": "hybrid-aquatic:killer_whale",
+    "type": "hybrid-aquatic:orca",
     "maxCount": 4,
     "minCount": 1,
     "weight": 5
