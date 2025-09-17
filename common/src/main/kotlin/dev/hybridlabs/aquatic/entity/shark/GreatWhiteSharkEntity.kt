@@ -19,10 +19,6 @@ class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, w
         goalSelector.addGoal(5, SharkJumpGoal(this, 10))
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 1
-    }
-
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()

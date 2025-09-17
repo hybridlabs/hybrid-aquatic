@@ -17,10 +17,6 @@ class ThresherSharkEntity(entityType: EntityType<out ThresherSharkEntity>, world
         false
     ) {
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 1
-    }
-
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))

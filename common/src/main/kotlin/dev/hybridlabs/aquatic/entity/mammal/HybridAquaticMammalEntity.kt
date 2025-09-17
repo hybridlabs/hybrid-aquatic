@@ -56,6 +56,10 @@ open class HybridAquaticMammalEntity(
         return 0.5f
     }
 
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,

@@ -83,6 +83,7 @@ open class HybridAquaticSharkEntity(
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, TryFindWaterGoal(this))
+        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.5, 16.0F))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, LookAtPlayerGoal(this, Player::class.java, 6.0f))
@@ -158,7 +159,7 @@ open class HybridAquaticSharkEntity(
     }
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 4
+        return 1
     }
 
     //#region NBT

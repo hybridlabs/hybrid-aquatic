@@ -9,11 +9,13 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
 class FrilledSharkEntity(entityType: EntityType<out FrilledSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.CEPHALOPOD), false, false) {
-
-    override fun getMaxSpawnClusterSize(): Int {
-        return 1
-    }
+    HybridAquaticSharkEntity(
+        entityType,
+        world,
+        listOf(HybridAquaticEntityTags.CEPHALOPOD),
+        false,
+        false
+    ) {
 
     override fun registerGoals() {
         super.registerGoals()

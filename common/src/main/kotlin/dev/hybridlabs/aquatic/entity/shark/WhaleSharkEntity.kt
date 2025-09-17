@@ -56,10 +56,6 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Leve
         }
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 1
-    }
-
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()

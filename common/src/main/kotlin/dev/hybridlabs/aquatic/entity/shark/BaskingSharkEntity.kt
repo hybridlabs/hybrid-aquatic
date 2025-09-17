@@ -42,10 +42,6 @@ class BaskingSharkEntity(entityType: EntityType<out BaskingSharkEntity>, world: 
         }
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 1
-    }
-
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()

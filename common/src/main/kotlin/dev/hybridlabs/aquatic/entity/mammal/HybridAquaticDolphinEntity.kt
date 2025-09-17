@@ -67,6 +67,10 @@ open class HybridAquaticDolphinEntity(
         return 0
     }
 
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(

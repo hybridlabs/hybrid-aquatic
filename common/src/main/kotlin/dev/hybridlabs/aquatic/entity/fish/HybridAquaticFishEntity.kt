@@ -163,7 +163,7 @@ open class HybridAquaticFishEntity(
     }
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 8
+        return 1
     }
 
     //#region SFX

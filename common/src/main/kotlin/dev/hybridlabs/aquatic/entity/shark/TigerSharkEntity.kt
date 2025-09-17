@@ -87,10 +87,6 @@ class TigerSharkEntity(entityType: EntityType<out TigerSharkEntity>, world: Leve
         goalSelector.addGoal(1, HurtByTargetGoal(this))
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 1
-    }
-
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()

@@ -38,10 +38,6 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Leve
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 1
-    }
-
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))

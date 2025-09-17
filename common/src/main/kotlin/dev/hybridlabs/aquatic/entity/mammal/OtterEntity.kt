@@ -18,10 +18,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         listOf(
             HybridAquaticEntityTags.NONE)) {
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
     }

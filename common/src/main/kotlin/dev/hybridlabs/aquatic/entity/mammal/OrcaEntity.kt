@@ -13,10 +13,6 @@ class OrcaEntity(entityType: EntityType<out OrcaEntity>, world: Level) :
         listOf(
             HybridAquaticEntityTags.NONE)) {
 
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
     override fun getMaxSize(): Int {
         return 3
     }
