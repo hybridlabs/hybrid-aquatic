@@ -88,29 +88,9 @@ open class HybridAquaticSharkEntity(
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, LookAtPlayerGoal(this, Player::class.java, 6.0f))
         goalSelector.addGoal(1, SharkAttackGoal(this))
-        targetSelector.addGoal(
-            1,
-            NearestAttackableTargetGoal(
-                this,
-                Player::class.java,
-                10,
-                true,
-                true
-            ) { entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive })
-        targetSelector.addGoal(
-            1,
-            NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) {
-                it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive
-            })
-        targetSelector.addGoal(
-            1,
-            NearestAttackableTargetGoal(
-                this,
-                LivingEntity::class.java,
-                10,
-                true,
-                true
-            ) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive })
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive })
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
     }
 
     override fun finalizeSpawn(

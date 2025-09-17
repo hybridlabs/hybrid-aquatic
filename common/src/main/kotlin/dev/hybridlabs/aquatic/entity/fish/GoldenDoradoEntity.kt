@@ -36,11 +36,9 @@ class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: 
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, MeleeAttackGoal(this, 1.5, false))
-        targetSelector.addGoal(3, HurtByTargetGoal(this))
+        targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
-        targetSelector.addGoal(
-            1,
-            NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
     }
 
     companion object {
