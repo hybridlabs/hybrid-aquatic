@@ -68,7 +68,7 @@ open class HybridAquaticFishEntity(
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         this.airSupply = getMaxMoistness()
         xRot = 0.0f
@@ -99,7 +99,7 @@ open class HybridAquaticFishEntity(
     }
 
     override fun aiStep() {
-        if (!this.isInWater && this.onGround() && this.verticalCollision) {
+        if (this.shouldFlopOnLand() && !this.isInWater && this.onGround() && this.verticalCollision) {
             this.deltaMovement = deltaMovement.add(
                 ((random.nextFloat() * 2.0f - 1.0f) * 0.05f).toDouble(), 0.4000000059604645,
                 ((random.nextFloat() * 2.0f - 1.0f) * 0.05f).toDouble()
@@ -108,6 +108,7 @@ open class HybridAquaticFishEntity(
             this.hasImpulse = true
             this.playSound(this.flopSound, this.soundVolume, this.voicePitch)
         }
+
         super.aiStep()
     }
 
@@ -147,7 +148,7 @@ open class HybridAquaticFishEntity(
     }
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.6f
+        return dimensions.height * 0.5f
     }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
@@ -230,7 +231,7 @@ open class HybridAquaticFishEntity(
             ) { state: AnimationState<HybridAquaticFishEntity> ->
                 when {
                     state.isMoving && isUnderWater -> state.setAndContinue(DefaultAnimations.SWIM)
-                    !this.isUnderWater && !this.isSwimming && shouldFlopOnLand() && this.moistness < 580 -> state.setAndContinue(FLOP)
+                    !this.isUnderWater && !this.isSwimming && shouldFlopOnLand() && this.moistness < 590 -> state.setAndContinue(FLOP)
                     else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
             }
@@ -293,7 +294,7 @@ open class HybridAquaticFishEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 1
             val bottomY = world.seaLevel - 8
@@ -308,7 +309,7 @@ open class HybridAquaticFishEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 12
             val bottomY = world.seaLevel - 24
@@ -323,7 +324,7 @@ open class HybridAquaticFishEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 12
             val bottomY = world.seaLevel - 24
@@ -339,7 +340,7 @@ open class HybridAquaticFishEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 28
             val bottomY = world.seaLevel - 128
