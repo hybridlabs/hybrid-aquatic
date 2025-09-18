@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:waterlogged_vegetation_patch",
+  "config": {
+    "depth": 5,
+    "extra_bottom_block_chance": 0.3,
+    "extra_edge_column_chance": 0.05,
+    "ground_state": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:mossy_cobblestone"
+          },
+          "weight": 5
+        },
+        {
+          "data": {
+            "Name": "minecraft:stone"
+          },
+          "weight": 5
+        }
+      ]
+    },
+    "replaceable": "#hybrid-aquatic:tide_pool_replaceable",
+    "surface": "floor",
+    "vegetation_chance": 0.2,
+    "vegetation_feature": {
+      "feature": "hybrid-aquatic:green_anemone_patch",
+      "placement": []
+    },
+    "vertical_range": 5,
+    "xz_radius": {
+      "type": "minecraft:biased_to_bottom",
+      "value": {
+        "max_inclusive": 7,
+        "min_inclusive": 5
+      }
+    }
+  }
+}

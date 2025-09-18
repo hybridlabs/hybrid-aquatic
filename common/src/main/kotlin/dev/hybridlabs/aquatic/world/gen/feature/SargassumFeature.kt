@@ -58,7 +58,7 @@ class SargassumFeature(codec: Codec<SargassumFeatureConfig>) :
                     break
                 }
 
-                blockPos2 = blockPos2.below()
+                blockPos2 = blockPos2.above()
             }
         }
 

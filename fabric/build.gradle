@@ -51,9 +51,14 @@ dependencies {
     include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")
     modApi("com.terraformersmc:modmenu:${modmenu_version}")
     include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")
+    modImplementation("com.terraformersmc:biolith-fabric:${biolith_version}") {
+        exclude(group: "com.github.glitchfiend")
+    }
+    modImplementation "maven.modrinth:lithostitched:${lithostitched_version}-fabric-1.20"
 
     modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
     modRuntimeOnly "maven.modrinth:carpet:$carpet_version"
+    modRuntimeOnly "maven.modrinth:cyanide:4.1.1-fabric"
 
 }
 

@@ -29,6 +29,13 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBlockTags.MESSAGE_IN_A_BOTTLE_SPAWNS_IN)
             .add(Blocks.WATER)
 
+        getOrCreateTagBuilder(HybridAquaticBlockTags.TIDE_POOL_REPLACEABLE)
+            .add(Blocks.WATER)
+            .add(Blocks.CLAY)
+            .add(Blocks.GRAVEL)
+            .add(Blocks.DIRT)
+            .add(Blocks.SAND)
+
         getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
             .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
 
