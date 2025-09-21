@@ -1,6 +1,6 @@
 {
     "type": "forge:add_features",
     "biomes": "#hybrid_aquatic:marshes",
-    "features": "hybrid-aquatic:sea_lettuce_patch",
+    "features": "hybrid-aquatic:water_lettuce",
     "step": "vegetal_decoration"
 }
