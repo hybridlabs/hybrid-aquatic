@@ -71,6 +71,14 @@ repositories {
         name = "Geckolib"
         url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
     }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven/"
+    }
+    maven {
+        name = "Terraformers"
+        url = "https://maven.terraformersmc.com/releases/"
+    }
     mavenCentral()
 }
 
@@ -85,6 +93,10 @@ dependencies {
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
     modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
+    modImplementation("com.terraformersmc:biolith-fabric:${biolith_version}") {
+        exclude(group: "com.github.glitchfiend")
+    }
+    modImplementation "maven.modrinth:lithostitched:${lithostitched_version}-forge-1.20"
     implementation 'org.jetbrains:annotations:25.0.0'
     implementation 'thedarkcolour:kotlinforforge:4.11.0'
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0"))
