@@ -222,6 +222,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addTag(HybridAquaticEntityTags.JELLYFISH)
             .addTag(HybridAquaticEntityTags.CRITTER)
             .addTag(HybridAquaticEntityTags.CRUSTACEAN)
+            .addTag(HybridAquaticEntityTags.CEPHALOPOD)
             .addTag(HybridAquaticEntityTags.FISH)
             .addTag(HybridAquaticEntityTags.SHARK)
     }
