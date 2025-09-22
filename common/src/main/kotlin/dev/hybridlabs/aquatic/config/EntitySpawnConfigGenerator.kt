@@ -35,16 +35,16 @@ class EntitySpawnConfigGenerator {
         addFish(HybridAquaticEntityTypes.SQUIRRELFISH.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 5, 3, 5)
         addFish(HybridAquaticEntityTypes.MAHI.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 3, 1, 3)
         addFish(HybridAquaticEntityTypes.FLYING_FISH.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 5, 2, 6)
-        addFish(HybridAquaticEntityTypes.NEEDLEFISH.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 3)
-        addFish(HybridAquaticEntityTypes.BARRACUDA.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 2, 1, 1)
+        addFish(HybridAquaticEntityTypes.NEEDLEFISH.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 3)
+        addFish(HybridAquaticEntityTypes.BARRACUDA.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 2, 1, 1)
         addFish(HybridAquaticEntityTypes.DAMSELFISH.get(), listOf(HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.TROPICAL_OCEANS), 5, 3, 5)
         addFish(HybridAquaticEntityTypes.MACKEREL.get(), listOf(HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 5, 3, 5)
         addFish(HybridAquaticEntityTypes.OPAH.get(), listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 3, 1, 1)
         addFish(HybridAquaticEntityTypes.ROCKFISH.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 3)
         addFish(HybridAquaticEntityTypes.SEA_BASS.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 3)
-        addFish(HybridAquaticEntityTypes.WRASSE.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS), 3, 1, 1)
+        addFish(HybridAquaticEntityTypes.WRASSE.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS), 3, 1, 1)
         addFish(HybridAquaticEntityTypes.SEAHORSE.get(), listOf(HybridAquaticBiomeTags.REEF), 1, 1, 2)
-        addFish(HybridAquaticEntityTypes.SEADRAGON.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 1, 1, 2)
+        addFish(HybridAquaticEntityTypes.SEADRAGON.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 1, 1, 2)
         addFish(HybridAquaticEntityTypes.LIONFISH.get(), listOf(HybridAquaticBiomeTags.REEF), 3, 1, 2)
         addFish(HybridAquaticEntityTypes.STONEFISH.get(), listOf(HybridAquaticBiomeTags.REEF), 1, 1, 1)
         addFish(HybridAquaticEntityTypes.STINGRAY.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 3, 1, 2)
@@ -86,9 +86,9 @@ class EntitySpawnConfigGenerator {
         //#endregion
 
         //#region Jellyfish
-        addJelly(HybridAquaticEntityTypes.BARREL_JELLYFISH.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 5, 1, 2)
-        addJelly(HybridAquaticEntityTypes.MOON_JELLYFISH.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.SANDY_BEACHES), 5, 3, 5)
-        addJelly(HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 5, 1, 3)
+        addJelly(HybridAquaticEntityTypes.BARREL_JELLYFISH.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 5, 1, 2)
+        addJelly(HybridAquaticEntityTypes.MOON_JELLYFISH.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.SANDY_BEACHES), 5, 3, 5)
+        addJelly(HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS), 5, 1, 3)
         addJelly(HybridAquaticEntityTypes.BLUE_JELLYFISH.get(), listOf(HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 3, 1, 2)
         addJelly(HybridAquaticEntityTypes.SEA_NETTLE.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 5, 3, 5)
         addJelly(HybridAquaticEntityTypes.NOMURA_JELLYFISH.get(), listOf(HybridAquaticBiomeTags.ARCTIC_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS), 1, 1, 2)
@@ -104,22 +104,22 @@ class EntitySpawnConfigGenerator {
 
         //#region Sharks
         addShark(HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(), listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 1, 1, 1)
-        addShark(HybridAquaticEntityTypes.TIGER_SHARK.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS), 2, 1, 2)
+        addShark(HybridAquaticEntityTypes.TIGER_SHARK.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS), 2, 1, 2)
         addShark(HybridAquaticEntityTypes.HAMMERHEAD_SHARK.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS), 3, 1, 3)
         addShark(HybridAquaticEntityTypes.HOUND_SHARK.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS), 3, 1, 3)
         addShark(HybridAquaticEntityTypes.THRESHER_SHARK.get(), listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 3, 1, 1)
         addShark(HybridAquaticEntityTypes.BULL_SHARK.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 2, 1, 1)
         addShark(HybridAquaticEntityTypes.WHALE_SHARK.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 1, 1, 1)
-        addShark(HybridAquaticEntityTypes.BASKING_SHARK.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 1, 1, 1)
+        addShark(HybridAquaticEntityTypes.BASKING_SHARK.get(), listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 1, 1, 1)
         //#endregion
 
         //#region Deep Sharks
-        addUndergroundShark(HybridAquaticEntityTypes.FRILLED_SHARK.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 1)
-        addUndergroundShark(HybridAquaticEntityTypes.LANTERN_SHARK.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 2)
+        addUndergroundShark(HybridAquaticEntityTypes.FRILLED_SHARK.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 3, 1, 1)
+        addUndergroundShark(HybridAquaticEntityTypes.LANTERN_SHARK.get(), listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 3, 1, 2)
         //#endregion
 
         //#region Dolphins
-        addDolphin(HybridAquaticEntityTypes.ORCA.get(), listOf(HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 5, 1, 4)
+        addDolphin(HybridAquaticEntityTypes.ORCA.get(), listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 5, 1, 4)
         //#endregion
 
         //#region Mammal
