@@ -61,7 +61,7 @@ dependencies {
 
     //We load the Forge version of any included mod dependencies
     modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
-    modImplementation("com.terraformersmc:biolith-forge:${biolith_version}") {
+    implementation("com.terraformersmc:biolith-forge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
     modImplementation "maven.modrinth:lithostitched:${lithostitched_version}-forge-1.20"
