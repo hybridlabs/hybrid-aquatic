@@ -1,9 +1,13 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import net.minecraft.core.BlockPos
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
 
 class SpiderCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
     HybridAquaticCrustaceanEntity(entityType, world, false) {
@@ -17,9 +21,34 @@ class SpiderCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)
         }
+
+        fun canSpawn(
+            type: EntityType<out SpiderCrabEntity>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
+        ): Boolean {
+            val minShallowSpawn = world.seaLevel - 4
+            val maxShallowSpawn = world.seaLevel - 24
+            val shallowSpawn = minShallowSpawn..maxShallowSpawn
+
+            val minDeepSpawn = world.seaLevel - 24
+            val maxDeepSpawn = world.seaLevel - 128
+            val deepSpawn = minDeepSpawn..maxDeepSpawn
+
+            val fullMoon = world.moonPhase == 0
+            val newMoon = world.moonPhase == 4
+
+            val spawnY = if (fullMoon || newMoon) shallowSpawn else deepSpawn
+
+            return pos.y in spawnY &&
+                    world.getBlockState(pos.below()).isSolid &&
+                    world.isEmptyBlock(pos)
+        }
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 

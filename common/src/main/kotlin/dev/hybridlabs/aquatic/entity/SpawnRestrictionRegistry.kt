@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.crustacean.GhostCrabEntity
 import dev.hybridlabs.aquatic.entity.crustacean.HorseshoeCrabEntity
 import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
+import dev.hybridlabs.aquatic.entity.crustacean.SpiderCrabEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
@@ -185,10 +186,10 @@ object SpawnRestrictionRegistry {
 
         registerLandWaterCreature(HybridAquaticEntityTypes.HORSESHOE_CRAB.get(), HorseshoeCrabEntity::canSpawn)
         registerLandWaterCreature(HybridAquaticEntityTypes.GHOST_CRAB.get(), GhostCrabEntity::canSpawn)
+        registerLandWaterCreature(HybridAquaticEntityTypes.SPIDER_CRAB.get(), SpiderCrabEntity::canSpawn)
 
         setOf(
             HybridAquaticEntityTypes.YETI_CRAB.get(),
-            HybridAquaticEntityTypes.SPIDER_CRAB.get(),
             HybridAquaticEntityTypes.GIANT_ISOPOD.get()
         ).forEach { registerDeepCrustacean(it) }
 
