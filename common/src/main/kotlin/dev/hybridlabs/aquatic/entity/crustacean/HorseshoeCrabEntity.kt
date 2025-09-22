@@ -26,21 +26,28 @@ class HorseshoeCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
-            val surfaceSpawn = world.seaLevel + 8
-            val underwaterSpawn = world.seaLevel - 24
+            val minShallowSpawn = world.seaLevel + 8
+            val maxShallowSpawn = world.seaLevel - 4
+            val shallowSpawn = minShallowSpawn..maxShallowSpawn
+
+            val minDeepSpawn = world.seaLevel - 16
+            val maxDeepSpawn = world.seaLevel - 128
+            val deepSpawn = minDeepSpawn..maxDeepSpawn
+
             val fullMoon = world.moonPhase == 0
+            val newMoon = world.moonPhase == 4
 
-            val spawnY = if (fullMoon) surfaceSpawn else underwaterSpawn
+            val spawnY = if (fullMoon || newMoon) shallowSpawn else deepSpawn
 
-            return pos.y <= spawnY &&
+            return pos.y in spawnY &&
                     world.getBlockState(pos.below()).isSolid &&
                     world.isEmptyBlock(pos)
         }
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 
