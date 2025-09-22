@@ -14,8 +14,7 @@ import net.minecraft.world.level.levelgen.SurfaceRules.*
 
 object HybridAquaticBiomes {
     val TIDE_POOLS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tide_pools"))
-    val TIDE_POOL_SURFACE_RULE: RuleSource =
-        ifTrue(isBiome(TIDE_POOLS), state(Blocks.SAND.defaultBlockState()))
+    val TIDE_POOL_SURFACE_RULE: RuleSource = ifTrue(isBiome(TIDE_POOLS), state(Blocks.SAND.defaultBlockState()))
 
     fun addBiomes() {
         BiomePlacement.addOverworld(
