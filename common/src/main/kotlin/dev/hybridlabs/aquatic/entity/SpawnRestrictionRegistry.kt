@@ -2,6 +2,8 @@ package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
+import dev.hybridlabs.aquatic.entity.crustacean.GhostCrabEntity
+import dev.hybridlabs.aquatic.entity.crustacean.HorseshoeCrabEntity
 import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
@@ -167,7 +169,6 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.FIDDLER_CRAB.get(),
             HybridAquaticEntityTypes.HERMIT_CRAB.get(),
-            HybridAquaticEntityTypes.GHOST_CRAB.get(),
             HybridAquaticEntityTypes.VAMPIRE_CRAB.get(),
             HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get(),
             HybridAquaticEntityTypes.COCONUT_CRAB.get(),
@@ -176,12 +177,14 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.DUNGENESS_CRAB.get(),
             HybridAquaticEntityTypes.FLOWER_CRAB.get(),
-            HybridAquaticEntityTypes.HORSESHOE_CRAB.get(),
             HybridAquaticEntityTypes.DECORATOR_CRAB.get(),
             HybridAquaticEntityTypes.SHRIMP.get(),
             HybridAquaticEntityTypes.CRAYFISH.get(),
             HybridAquaticEntityTypes.LOBSTER.get(),
         ).forEach { registerAquaticCrustacean(it) }
+
+        registerLandWaterCreature(HybridAquaticEntityTypes.HORSESHOE_CRAB.get(), HorseshoeCrabEntity::canSpawn)
+        registerLandWaterCreature(HybridAquaticEntityTypes.GHOST_CRAB.get(), GhostCrabEntity::canSpawn)
 
         setOf(
             HybridAquaticEntityTypes.YETI_CRAB.get(),
@@ -272,7 +275,7 @@ object SpawnRestrictionRegistry {
 
     private fun <T : WaterAnimal> registerWaterCreature(
         entityType: EntityType<T>,
-        predicate: SpawnPlacements.SpawnPredicate<T>
+        predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
         register(
             entityType,
@@ -283,7 +286,7 @@ object SpawnRestrictionRegistry {
 
     private fun <T : Monster> registerMiniboss(
         entityType: EntityType<T>,
-        predicate: SpawnPlacements.SpawnPredicate<T>
+        predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
         register(
             entityType,
@@ -302,7 +305,7 @@ object SpawnRestrictionRegistry {
 
     private fun <T : WaterAnimal> registerLandWaterCreature(
         entityType: EntityType<T>,
-        predicate: SpawnPlacements.SpawnPredicate<T>
+        predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
         register(
             entityType,
@@ -314,7 +317,7 @@ object SpawnRestrictionRegistry {
     private fun <T : Mob> register(
         entityType: EntityType<T>,
         location: SpawnPlacements.Type,
-        predicate: SpawnPlacements.SpawnPredicate<T>
+        predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
         SpawnPlacements.register(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)
     }

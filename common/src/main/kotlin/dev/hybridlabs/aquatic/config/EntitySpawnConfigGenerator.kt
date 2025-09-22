@@ -130,7 +130,7 @@ class EntitySpawnConfigGenerator {
         addCrustacean(HybridAquaticEntityTypes.DUNGENESS_CRAB.get(), listOf(HybridAquaticBiomeTags.SANDY_BEACHES, HybridAquaticBiomeTags.TIDE_POOLS), 5, 2, 3)
         addCrustacean(HybridAquaticEntityTypes.FIDDLER_CRAB.get(), listOf(HybridAquaticBiomeTags.SWAMP, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.MARSHES), 5, 2, 3)
         addCrustacean(HybridAquaticEntityTypes.GHOST_CRAB.get(), listOf(HybridAquaticBiomeTags.SANDY_BEACHES), 5, 1, 3)
-        addCrustacean(HybridAquaticEntityTypes.HORSESHOE_CRAB.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS), 3, 1, 1)
+        addCrustacean(HybridAquaticEntityTypes.HORSESHOE_CRAB.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.SANDY_BEACHES), 3, 1, 1)
         addCrustacean(HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get(), listOf(HybridAquaticBiomeTags.ROCKY_BEACHES), 3, 1, 3)
         addCrustacean(HybridAquaticEntityTypes.FLOWER_CRAB.get(), listOf(HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.MARSHES), 3, 1, 2)
         addCrustacean(HybridAquaticEntityTypes.VAMPIRE_CRAB.get(), listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.TROPICAL_RIVERS), 3, 1, 2)

@@ -1,9 +1,13 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import net.minecraft.core.BlockPos
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
 
 class HorseshoeCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
     HybridAquaticCrustaceanEntity(entityType, world, false) {
@@ -15,6 +19,24 @@ class HorseshoeCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)
+        }
+
+        fun canSpawn(
+            type: EntityType<out HorseshoeCrabEntity>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource
+        ): Boolean {
+            val surfaceSpawn = world.seaLevel + 8
+            val underwaterSpawn = world.seaLevel - 24
+            val fullMoon = world.moonPhase == 0
+
+            val spawnY = if (fullMoon) surfaceSpawn else underwaterSpawn
+
+            return pos.y <= spawnY &&
+                    world.getBlockState(pos.below()).isSolid &&
+                    world.isEmptyBlock(pos)
         }
     }
 
