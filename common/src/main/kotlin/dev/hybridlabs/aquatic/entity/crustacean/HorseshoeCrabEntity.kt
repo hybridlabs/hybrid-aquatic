@@ -37,8 +37,7 @@ class HorseshoeCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
             val spawnY = if (fullMoon || newMoon) shallowSpawn else deepSpawn
 
             return pos.y in spawnY &&
-                    world.getBlockState(pos.below()).isSolid &&
-                    world.isEmptyBlock(pos)
+                    world.getBlockState(pos.below()).isSolid
         }
     }
 
