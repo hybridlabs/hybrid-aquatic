@@ -176,6 +176,64 @@
 					"rotation": [0, 0, -7.5]
 				}
 			}
+		},
+		"misc.flop": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"rotation": [0, 0, -90],
+					"position": [0.5, 2, 0]
+				},
+				"segment_1": {
+					"rotation": [22.5, 0, 0]
+				},
+				"segment_2": {
+					"rotation": [-12.5, 0, 0],
+					"position": [-0.1, 0, 0]
+				},
+				"segment_3": {
+					"rotation": [-22.5, 0, 0]
+				},
+				"segment_4": {
+					"rotation": [-22.5193, -2.30959, 0.95723]
+				},
+				"dorsal_fin_4": {
+					"rotation": [0, 0, -45]
+				},
+				"tail": {
+					"rotation": [-22.5193, -2.30959, 0.95723]
+				},
+				"dorsal_fin_5": {
+					"rotation": [0, 0, -45]
+				},
+				"dorsal_fin_3": {
+					"rotation": [0, 0, -45]
+				},
+				"dorsal_fin_2": {
+					"rotation": [0, 0, -45]
+				},
+				"dorsal_fin_1": {
+					"rotation": [0, 0, -45]
+				},
+				"left_fin": {
+					"rotation": [0, -15, 0]
+				},
+				"left_pectoral_fin": {
+					"rotation": [-22.57734, -4.61854, 1.91757]
+				},
+				"right_pectoral_fin": {
+					"rotation": [-45, 0, 0]
+				},
+				"head": {
+					"rotation": [22.5, 0, 0]
+				},
+				"mouth": {
+					"rotation": ["10+Math.sin(query.anim_time*25*3+80)*-10", 0, 0]
+				},
+				"head_fin": {
+					"rotation": [0, 0, -7.5]
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2
