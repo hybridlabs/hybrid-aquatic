@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
@@ -29,6 +30,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("biomesoplenty", "gravel_beach"))
             .addOptional(ResourceLocation("biomeswevegone", "dacite_shore"))
             .addOptional(ResourceLocation("biomeswevegone", "basalt_barrera"))
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.TIDE_POOLS)
+            .add(HybridAquaticBiomes.TIDE_POOLS)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.BOTTLE_SPAWN_BIOMES)
             .forceAddTag(BiomeTags.IS_OCEAN)

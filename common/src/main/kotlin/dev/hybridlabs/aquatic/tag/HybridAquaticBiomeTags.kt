@@ -25,6 +25,7 @@ object HybridAquaticBiomeTags {
     val DEEP_TROPICAL_OCEANS = create("deep_tropical_oceans")
     val SHALLOW_TROPICAL_OCEANS = create("shallow_tropical_oceans")
 
+    val TIDE_POOLS = create("tide_pools")
     val REEF = create("reef")
     val JUNGLE = create("jungle")
     val CHERRY = create("cherry")

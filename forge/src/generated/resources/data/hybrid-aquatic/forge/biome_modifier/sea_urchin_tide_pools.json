@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:tide_pools",
+  "spawners": {
+    "type": "hybrid-aquatic:sea_urchin",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 5
+  }
+}

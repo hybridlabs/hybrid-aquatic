@@ -18,7 +18,7 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.TEMPERATE_OCEANS),
+            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
             GenerationStep.Decoration.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.GREEN_ANEMONE_PATCH
         )
@@ -48,7 +48,7 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.TROPICAL_OCEANS),
+            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
             GenerationStep.Decoration.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.RED_ALGAE_PATCH
         )
