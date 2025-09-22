@@ -4,6 +4,7 @@ package dev.hybridlabs.aquatic.data.server
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.TubeWormBlock
+import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.world.gen.feature.*
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
@@ -11,6 +12,7 @@ import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.util.random.SimpleWeightedRandomList
+import net.minecraft.util.valueproviders.BiasedToBottomInt
 import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.block.Blocks
@@ -20,13 +22,16 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties.WAT
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.feature.Feature
+import net.minecraft.world.level.levelgen.feature.Feature.WATERLOGGED_VEGETATION_PATCH
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration
+import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider
+import net.minecraft.world.level.levelgen.placement.CaveSurface
 import net.minecraft.world.level.levelgen.synth.NormalNoise
 import java.util.concurrent.CompletableFuture
 
@@ -35,6 +40,7 @@ class ConfiguredFeatureProvider(
     registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
+        HybridAquaticConfiguredFeatures
         // anemone patch
         entries.add(
             HybridAquaticConfiguredFeatures.ANEMONE_PATCH,
@@ -66,7 +72,7 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        entries.add(
+        val GREEN = entries.add(
             HybridAquaticConfiguredFeatures.GREEN_ANEMONE_PATCH,
             ConfiguredFeature(
                 Feature.NO_BONEMEAL_FLOWER,
@@ -282,6 +288,32 @@ class ConfiguredFeatureProvider(
                 )
             )
         )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.TIDE_POOL,
+            ConfiguredFeature(
+                WATERLOGGED_VEGETATION_PATCH, VegetationPatchConfiguration(
+                    HybridAquaticBlockTags.TIDE_POOL_REPLACEABLE,
+                    WeightedStateProvider(
+                        SimpleWeightedRandomList.builder<BlockState>()
+                            .add(Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 5)
+                            .add(Blocks.STONE.defaultBlockState(), 5)
+                            .build()
+                    ),
+                    PlacementUtils.inlinePlaced(
+                        GREEN
+                    ),
+                    CaveSurface.FLOOR,
+                    ConstantInt.of(5),
+                    0.3f,
+                    5,
+                    0.2f,
+                    BiasedToBottomInt.of(5, 7),
+                    0.05f
+                )
+            )
+        )
+
     }
 
     override fun getName(): String {

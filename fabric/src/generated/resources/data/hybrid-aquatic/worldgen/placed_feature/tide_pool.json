@@ -1,0 +1,31 @@
+{
+  "feature": "hybrid-aquatic:tide_pool",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 40
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 67
+        },
+        "min_inclusive": {
+          "absolute": 62
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
