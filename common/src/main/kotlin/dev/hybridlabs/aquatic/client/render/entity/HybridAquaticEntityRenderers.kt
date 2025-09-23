@@ -234,6 +234,12 @@ object HybridAquaticEntityRenderers {
             ::TetraEntityRenderer
         )
 
+    val PUPFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.PUPFISH,
+            ::PupfishEntityRenderer
+        )
+
     val STONEFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.STONEFISH,

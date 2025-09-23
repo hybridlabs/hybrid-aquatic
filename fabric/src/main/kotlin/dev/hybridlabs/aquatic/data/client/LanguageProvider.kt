@@ -458,6 +458,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.DANIO.get() to "Danio",
             HybridAquaticEntityTypes.BLOWFISH.get() to "Toadfish",
             HybridAquaticEntityTypes.TETRA.get() to "Tetra",
+            HybridAquaticEntityTypes.PUPFISH.get() to "Pupfish",
             HybridAquaticEntityTypes.STONEFISH.get() to "Stonefish",
             HybridAquaticEntityTypes.BETTA.get() to "Betta",
             HybridAquaticEntityTypes.GOLDFISH.get() to "Goldfish",

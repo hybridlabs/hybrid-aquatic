@@ -21,6 +21,7 @@ class EntitySpawnConfigGenerator {
         addFish(HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(), listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.MARSHES, HybridAquaticBiomeTags.MANGROVES), 2, 1, 1)
         addFish(HybridAquaticEntityTypes.GOLDEN_DORADO.get(), listOf(HybridAquaticBiomeTags.TROPICAL_RIVERS, HybridAquaticBiomeTags.RIVERS, HybridAquaticBiomeTags.JUNGLE), 1, 1, 1)
         addFish(HybridAquaticEntityTypes.TETRA.get(), listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.MARSHES, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.TROPICAL_RIVERS, HybridAquaticBiomeTags.CAVES), 3, 2, 3)
+        addFish(HybridAquaticEntityTypes.PUPFISH.get(), listOf(BiomeTags.IS_BADLANDS), 3, 1, 1)
         addFish(HybridAquaticEntityTypes.TIGER_BARB.get(), listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.SWAMP, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.MARSHES, HybridAquaticBiomeTags.TROPICAL_RIVERS), 3, 2, 3)
         addFish(HybridAquaticEntityTypes.GOURAMI.get(), listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.MARSHES, HybridAquaticBiomeTags.TROPICAL_RIVERS), 3, 1, 1)
         addFish(HybridAquaticEntityTypes.DISCUS.get(), listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.TROPICAL_RIVERS), 3, 1, 1)

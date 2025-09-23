@@ -314,6 +314,13 @@ object HybridAquaticEntityTypes {
         TetraEntity::createMobAttributes
     )
 
+    val PUPFISH = registerFish(
+        "pupfish",
+        ::PupfishEntity,
+        EntityDimensions.fixed(0.3f, 0.3f),
+        PupfishEntity::createMobAttributes
+    )
+
     val TIGER_BARB = registerFish(
         "tiger_barb",
         ::TigerBarbEntity,

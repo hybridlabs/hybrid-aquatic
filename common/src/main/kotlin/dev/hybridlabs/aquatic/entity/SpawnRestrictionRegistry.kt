@@ -76,6 +76,7 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.OPAH.get(),
         ).forEach { registerNightFish(it) }
 
+        registerWaterCreature(HybridAquaticEntityTypes.PUPFISH.get(), PupfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.FLYING_FISH.get(), FlyingFishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.SUNFISH.get(), SunfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.SQUIRRELFISH.get(), SquirrelfishEntity::canSpawn)

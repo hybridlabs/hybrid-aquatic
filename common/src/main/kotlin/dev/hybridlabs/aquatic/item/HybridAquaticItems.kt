@@ -1461,6 +1461,8 @@ object HybridAquaticItems {
         registerSpawnEgg("surgeonfish_spawn_egg", HybridAquaticEntityTypes.SURGEONFISH, 0x88a1d7, 0x211b2f)
     val TETRA_SPAWN_EGG =
         registerSpawnEgg("tetra_spawn_egg", HybridAquaticEntityTypes.TETRA, 0x4eb1cc, 0xe64d43)
+    val PUPFISH_SPAWN_EGG =
+        registerSpawnEgg("pupfish_spawn_egg", HybridAquaticEntityTypes.PUPFISH, 0x020c44, 0x2785f5)
     val TIGER_BARB_SPAWN_EGG =
         registerSpawnEgg("tiger_barb_spawn_egg", HybridAquaticEntityTypes.TIGER_BARB, 0xfbbf2d, 0x611851)
     val BLOWFISH_SPAWN_EGG =
