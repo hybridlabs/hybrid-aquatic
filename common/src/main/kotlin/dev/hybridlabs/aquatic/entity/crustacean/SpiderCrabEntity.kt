@@ -40,7 +40,6 @@ class SpiderCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
             return pos.y in spawnY &&
                     world.getBlockState(pos.below()).isSolid
         }
-
     }
 
     override fun getMaxSize(): Int {

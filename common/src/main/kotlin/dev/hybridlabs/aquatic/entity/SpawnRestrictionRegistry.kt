@@ -1,12 +1,17 @@
 package dev.hybridlabs.aquatic.entity
 
+import dev.hybridlabs.aquatic.entity.cephalopod.FireflySquidEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.NautilusEntity
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.crustacean.GhostCrabEntity
 import dev.hybridlabs.aquatic.entity.crustacean.HorseshoeCrabEntity
 import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
 import dev.hybridlabs.aquatic.entity.crustacean.SpiderCrabEntity
+import dev.hybridlabs.aquatic.entity.fish.DragonfishEntity
+import dev.hybridlabs.aquatic.entity.fish.FlashlightFishEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
+import dev.hybridlabs.aquatic.entity.fish.OarfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
@@ -72,18 +77,19 @@ object SpawnRestrictionRegistry {
         // night fish
         setOf(
             HybridAquaticEntityTypes.MORAY_EEL.get(),
-            HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(),
             HybridAquaticEntityTypes.SQUIRRELFISH.get(),
             HybridAquaticEntityTypes.OPAH.get(),
-            HybridAquaticEntityTypes.OARFISH.get(),
         ).forEach { registerNightFish(it) }
+
+        registerWaterCreature(HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(), FlashlightFishEntity::canSpawn)
+        registerWaterCreature(HybridAquaticEntityTypes.DRAGONFISH.get(), DragonfishEntity::canSpawn)
+        registerWaterCreature(HybridAquaticEntityTypes.OARFISH.get(), OarfishEntity::canSpawn)
 
         // deep fish
         setOf(
             HybridAquaticEntityTypes.ANGLERFISH.get(),
             HybridAquaticEntityTypes.BARRELEYE.get(),
             HybridAquaticEntityTypes.COELACANTH.get(),
-            HybridAquaticEntityTypes.DRAGONFISH.get(),
             HybridAquaticEntityTypes.RATFISH.get(),
             HybridAquaticEntityTypes.JOHN_DORY.get(),
             HybridAquaticEntityTypes.SNAILFISH.get(),
@@ -96,18 +102,15 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.CUTTLEFISH.get(),
         ).forEach { registerCephalopod(it) }
 
-        // night cephalopods
-        setOf(
-            HybridAquaticEntityTypes.FIREFLY_SQUID.get(),
-            HybridAquaticEntityTypes.NAUTILUS.get(),
-        ).forEach { registerNightCephalopod(it) }
-
         // deep cephalopods
         setOf(
             HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS.get(),
             HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
             HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(),
         ).forEach { registerDeepCephalopod(it) }
+
+        registerWaterCreature(HybridAquaticEntityTypes.NAUTILUS.get(), NautilusEntity::canSpawn)
+        registerWaterCreature(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), FireflySquidEntity::canSpawn)
 
         // jellies
         setOf(
@@ -216,10 +219,6 @@ object SpawnRestrictionRegistry {
 
     private fun <T : WaterAnimal> registerCephalopod(entityType: EntityType<T>) {
         registerWaterCreature(entityType, HybridAquaticCephalopodEntity::canSpawn)
-    }
-
-    private fun <T : WaterAnimal> registerNightCephalopod(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticCephalopodEntity::canNightSpawn)
     }
 
     private fun <T : WaterAnimal> registerDeepCephalopod(entityType: EntityType<T>) {

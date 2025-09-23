@@ -3,13 +3,17 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
 
 class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
     HybridAquaticCephalopodEntity(
@@ -29,6 +33,21 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)
+        }
+
+        fun canSpawn(
+            type: EntityType<out NautilusEntity>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
+        ): Boolean {
+            val nightSpawn = (world.seaLevel - 24)..(world.seaLevel - 8)
+            val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 24)
+
+            val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
+
+            return pos.y in spawnY && world.isWaterAt(pos)
         }
     }
 

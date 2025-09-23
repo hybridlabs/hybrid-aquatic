@@ -3,12 +3,16 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.core.BlockPos
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
 
 class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, world: Level) :
     HybridAquaticSchoolingFishEntity(
@@ -57,6 +61,23 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)
+        }
+
+        fun canSpawn(
+            type: EntityType<out FlashlightFishEntity>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
+        ): Boolean {
+            val nightSpawn = (world.seaLevel - 16)..(world.seaLevel - 1)
+            val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 24)
+
+            val newMoon = world.moonPhase == 4
+
+            val spawnY = if ((newMoon) && !world.level.isDay) nightSpawn else daySpawn
+
+            return pos.y in spawnY && world.isWaterAt(pos)
         }
     }
 }
