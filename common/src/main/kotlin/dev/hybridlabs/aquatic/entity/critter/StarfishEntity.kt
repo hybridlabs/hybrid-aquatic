@@ -188,7 +188,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.toString())
+        nbt.putString("Type", this.variant.serializedName)
         nbt.putInt("texture_overlay", this.overlayTexture.id)
         super.addAdditionalSaveData(nbt)
     }

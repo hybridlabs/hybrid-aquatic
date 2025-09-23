@@ -112,7 +112,7 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Le
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.toString())
+        nbt.putString("Type", this.variant.serializedName)
         super.addAdditionalSaveData(nbt)
     }
 

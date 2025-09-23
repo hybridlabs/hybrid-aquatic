@@ -100,7 +100,7 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.toString())
+        nbt.putString("Type", this.variant.serializedName)
         super.addAdditionalSaveData(nbt)
     }
 

@@ -96,6 +96,11 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                         biome.`is`(BiomeTags.IS_BEACH) -> {
                             SEA
                         }
+
+                        biome.`is`(BiomeTags.IS_OCEAN) -> {
+                            SEA
+                        }
+
                         else -> {
                             RIVER
                         }
@@ -111,7 +116,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.toString())
+        nbt.putString("Type", this.variant.serializedName)
+
         super.addAdditionalSaveData(nbt)
     }
 

@@ -131,7 +131,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.toString())
+        nbt.putString("Type", this.variant.serializedName)
         nbt.putInt("CoralTimer", coralTimer)
         super.addAdditionalSaveData(nbt)
     }

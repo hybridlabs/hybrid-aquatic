@@ -134,7 +134,7 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Le
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.toString())
+        nbt.putString("Type", this.variant.serializedName)
         super.addAdditionalSaveData(nbt)
     }
 

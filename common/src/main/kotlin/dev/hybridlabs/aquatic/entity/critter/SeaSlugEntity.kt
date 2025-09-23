@@ -110,7 +110,7 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: Level) :
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.toString())
+        nbt.putString("Type", this.variant.serializedName)
         super.addAdditionalSaveData(nbt)
     }
 

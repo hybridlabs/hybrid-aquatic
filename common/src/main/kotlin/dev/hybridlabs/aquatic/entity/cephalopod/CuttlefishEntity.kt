@@ -95,7 +95,7 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Leve
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.toString())
+        nbt.putString("Type", this.variant.serializedName)
         super.addAdditionalSaveData(nbt)
     }
 
