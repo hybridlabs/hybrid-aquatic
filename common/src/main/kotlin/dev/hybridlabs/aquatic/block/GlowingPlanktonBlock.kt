@@ -33,29 +33,32 @@ class GlowingPlanktonBlock(settings: Properties) : Block(
     settings.lightLevel { state -> state.getValue(LIGHT_LEVEL) }
 ), SimpleWaterloggedBlock {
     init {
-        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true)
-            .setValue(LIT, false)
-            .setValue(LIGHT_LEVEL, 0) as BlockState)
+        this.registerDefaultState(
+            stateDefinition.any().setValue(WATERLOGGED, true)
+                .setValue(LIT, false)
+                .setValue(LIGHT_LEVEL, 0) as BlockState
+        )
     }
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (fluidStateAbove != Fluids.EMPTY) {
+        if (!fluidStateAbove.`is`(Fluids.EMPTY)) {
             return false
         }
+
         val stateBelow = world.getBlockState(pos.below())
         if (stateBelow.block == this) {
             return false
         }
         val fluidState = world.getFluidState(pos)
-        return fluidState == Fluids.WATER
+        return fluidState == Fluids.WATER.getSource(false)
     }
 
     override fun getShape(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         return SHAPE
     }
@@ -64,7 +67,7 @@ class GlowingPlanktonBlock(settings: Properties) : Block(
         val world = context.level
         val pos = context.clickedPos
         val fluidState = world.getFluidState(pos)
-        return if (fluidState == Fluids.WATER) {
+        return if (fluidState == Fluids.WATER.getSource(false)) {
             super.getStateForPlacement(context)?.setValue(WATERLOGGED, true)
         } else {
             null
@@ -89,7 +92,7 @@ class GlowingPlanktonBlock(settings: Properties) : Block(
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
         if (state.getValue(WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
@@ -136,7 +139,7 @@ class GlowingPlanktonBlock(settings: Properties) : Block(
         state: BlockState,
         world: ServerLevel,
         pos: BlockPos,
-        random: RandomSource
+        random: RandomSource,
     ) {
         val lightLevel = state.getValue(LIGHT_LEVEL)
         if (lightLevel > 0) {
@@ -151,7 +154,12 @@ class GlowingPlanktonBlock(settings: Properties) : Block(
         builder.add(WATERLOGGED, LIT, LIGHT_LEVEL)
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(
+        state: BlockState,
+        world: BlockGetter,
+        pos: BlockPos,
+        type: PathComputationType,
+    ): Boolean {
         return true
     }
 
