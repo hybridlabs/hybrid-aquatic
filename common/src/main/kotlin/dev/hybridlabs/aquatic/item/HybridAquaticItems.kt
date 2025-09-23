@@ -5,6 +5,11 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.item.coral.*
+import dev.hybridlabs.aquatic.item.seashell.SeashellAxeItem
+import dev.hybridlabs.aquatic.item.seashell.SeashellHoeItem
+import dev.hybridlabs.aquatic.item.seashell.SeashellPickaxeItem
+import dev.hybridlabs.aquatic.item.seashell.SeashellShovelItem
 import dev.hybridlabs.aquatic.platform.Services.*
 import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance

@@ -1,5 +1,6 @@
-package dev.hybridlabs.aquatic.item
+package dev.hybridlabs.aquatic.item.armor
 
+import dev.hybridlabs.aquatic.item.HybridAquaticArmorMaterials
 import net.minecraft.world.item.ArmorItem
 import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache

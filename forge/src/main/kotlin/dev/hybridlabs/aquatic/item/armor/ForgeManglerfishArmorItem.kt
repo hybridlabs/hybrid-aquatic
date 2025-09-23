@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.item.armor
 
 import dev.hybridlabs.aquatic.client.render.armor.ManglerfishArmorRenderer
-import dev.hybridlabs.aquatic.item.ManglerfishArmorItem
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity

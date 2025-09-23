@@ -1,5 +1,6 @@
-package dev.hybridlabs.aquatic.item
+package dev.hybridlabs.aquatic.item.armor
 
+import dev.hybridlabs.aquatic.item.HybridAquaticArmorMaterials
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ArmorItem

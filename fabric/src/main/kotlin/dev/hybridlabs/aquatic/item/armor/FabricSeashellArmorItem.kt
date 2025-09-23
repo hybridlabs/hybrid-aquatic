@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.item.armor
 
 import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
-import dev.hybridlabs.aquatic.item.SeashellArmorItem
 import software.bernie.geckolib.animatable.GeoItem
 import java.util.function.Consumer
 import java.util.function.Supplier
