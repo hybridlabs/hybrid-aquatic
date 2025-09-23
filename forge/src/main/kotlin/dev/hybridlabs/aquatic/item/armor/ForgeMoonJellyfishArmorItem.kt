@@ -13,7 +13,6 @@ import java.util.function.Consumer
 class ForgeMoonJellyfishArmorItem(type: Type, settings: Properties) :
     MoonJellyfishArmorItem(type, settings), GeoItem {
 
-
     override fun initializeClient(consumer: Consumer<IClientItemExtensions?>) {
         consumer.accept(object : IClientItemExtensions {
             private var renderer: GeoArmorRenderer<*>? = null

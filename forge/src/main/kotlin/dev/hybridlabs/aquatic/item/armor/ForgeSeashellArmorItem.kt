@@ -1,7 +1,6 @@
-package dev.hybridlabs.aquatic.item
+package dev.hybridlabs.aquatic.item.armor
 
 import dev.hybridlabs.aquatic.client.render.armor.SeashellArmorRenderer
-import dev.hybridlabs.aquatic.item.armor.SeashellArmorItem
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
