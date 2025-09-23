@@ -61,15 +61,15 @@ class EntitySpawnConfigGenerator {
         //#endregion
 
         //#region Deep Fish
-        addUndergroundFish(HybridAquaticEntityTypes.OARFISH.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 1, 1, 1)
-        addUndergroundFish(HybridAquaticEntityTypes.ANGLERFISH.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 1, 1, 2)
-        addUndergroundFish(HybridAquaticEntityTypes.JOHN_DORY.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 2, 1, 3)
-        addUndergroundFish(HybridAquaticEntityTypes.BARRELEYE.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 1, 1, 1)
-        addUndergroundFish(HybridAquaticEntityTypes.DRAGONFISH.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 1, 1, 2)
-        addUndergroundFish(HybridAquaticEntityTypes.RATFISH.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS), 1, 1, 3)
-        addUndergroundFish(HybridAquaticEntityTypes.SEA_ANGEL.get(), listOf(HybridAquaticBiomeTags.ARCTIC_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS), 1, 1, 1)
-        addUndergroundFish(HybridAquaticEntityTypes.COELACANTH.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.TEMPERATE_OCEANS), 1, 1, 2)
-        addUndergroundFish(HybridAquaticEntityTypes.SNAILFISH.get(), listOf(BiomeTags.IS_OCEAN), 3, 1, 5)
+        addUndergroundFish(HybridAquaticEntityTypes.OARFISH.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS), 1, 1, 1)
+        addUndergroundFish(HybridAquaticEntityTypes.ANGLERFISH.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS), 1, 1, 2)
+        addUndergroundFish(HybridAquaticEntityTypes.JOHN_DORY.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS), 2, 1, 3)
+        addUndergroundFish(HybridAquaticEntityTypes.BARRELEYE.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS), 1, 1, 1)
+        addUndergroundFish(HybridAquaticEntityTypes.DRAGONFISH.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS), 1, 1, 2)
+        addUndergroundFish(HybridAquaticEntityTypes.RATFISH.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_COLD_OCEANS), 1, 1, 3)
+        addUndergroundFish(HybridAquaticEntityTypes.SEA_ANGEL.get(), listOf(HybridAquaticBiomeTags.ARCTIC_OCEANS, HybridAquaticBiomeTags.DEEP_COLD_OCEANS), 1, 1, 1)
+        addUndergroundFish(HybridAquaticEntityTypes.COELACANTH.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS), 1, 1, 2)
+        addUndergroundFish(HybridAquaticEntityTypes.SNAILFISH.get(), listOf(BiomeTags.IS_DEEP_OCEAN), 3, 1, 5)
         //#endregion
 
         //#region Cephalopods

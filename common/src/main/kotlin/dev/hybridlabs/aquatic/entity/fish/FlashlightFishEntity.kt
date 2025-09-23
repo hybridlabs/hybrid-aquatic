@@ -73,9 +73,7 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
             val nightSpawn = (world.seaLevel - 16)..(world.seaLevel - 1)
             val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 24)
 
-            val newMoon = world.moonPhase == 4
-
-            val spawnY = if ((newMoon) && !world.level.isDay) nightSpawn else daySpawn
+            val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
 
             return pos.y in spawnY && world.isWaterAt(pos)
         }
