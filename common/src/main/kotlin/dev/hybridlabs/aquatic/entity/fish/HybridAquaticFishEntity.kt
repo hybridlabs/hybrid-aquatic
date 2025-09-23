@@ -77,23 +77,26 @@ open class HybridAquaticFishEntity(
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    override fun getMobType(): MobType {
+        return MobType.WATER
+    }
+
     override fun createNavigation(world: Level): PathNavigation {
         return WaterBoundPathNavigation(this, world)
     }
 
     override fun tick() {
         super.tick()
-        if (isNoAi) {
-            return
-        }
 
-        if (isUnderWater) {
+        if (this.isUnderWater) {
             moistness = getMaxMoistness()
         } else {
             moistness -= 1
             if (moistness <= -20) {
                 moistness = 0
-                hurt(this.damageSources().dryOut(), 1.0f)
+                hurt(this.damageSources().dryOut(), 2.0f)
+                this.xRot = 0.0f
+                this.yRot = 0.0f
             }
         }
     }
@@ -118,8 +121,6 @@ open class HybridAquaticFishEntity(
             super.dropFromLootTable(source, causedByPlayer)
         }
     }
-
-    //override fun Air(air: Int) {}
 
     private fun getMaxMoistness(): Int {
         return 600

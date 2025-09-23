@@ -90,11 +90,12 @@ open class HybridAquaticCephalopodEntity(
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    override fun getMobType(): MobType {
+        return MobType.WATER
+    }
+
     override fun tick() {
         super.tick()
-        if (isNoAi) {
-            return
-        }
 
         if (isInWaterRainOrBubble) {
             moistness = getMaxMoistness()

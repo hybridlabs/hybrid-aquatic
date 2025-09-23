@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.entity.ai.goal.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.core.BlockPos
@@ -82,6 +83,7 @@ open class HybridAquaticSharkEntity(
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(0, TryFindWaterGoal(this))
         goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.5, 16.0F))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))

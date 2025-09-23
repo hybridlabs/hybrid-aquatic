@@ -80,6 +80,10 @@ open class HybridAquaticJellyfishEntity(
         entityData.define(JELLYFISH_SIZE, 0)
     }
 
+    override fun getMobType(): MobType {
+        return MobType.WATER
+    }
+
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
@@ -106,9 +110,6 @@ open class HybridAquaticJellyfishEntity(
 
     override fun tick() {
         super.tick()
-        if (isNoAi) {
-            return
-        }
 
         if (isInWaterRainOrBubble) {
             moistness = getMaxMoistness()
