@@ -23,7 +23,6 @@ object HybridAquaticBlocks {
             Properties.of().mapColor(MapColor.TERRACOTTA_PINK).randomTicks().strength(0.4f).noOcclusion()
                 .pushReaction(PushReaction.DESTROY).sound(SoundType.SLIME_BLOCK)
         )
-        //.drops(ResourceLocation(Constants.MOD_ID, "blocks/anemone"))
     }
 
     val GIANT_GREEN_ANEMONE = register(
@@ -33,7 +32,6 @@ object HybridAquaticBlocks {
             Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).randomTicks().strength(0.4f).noOcclusion()
                 .pushReaction(PushReaction.DESTROY).sound(SoundType.SLIME_BLOCK)
         )
-        //.drops(ResourceLocation(Constants.MOD_ID, "blocks/giant_green_anemone"))
     }
 
     val STRAWBERRY_ANEMONE = register(
@@ -43,7 +41,6 @@ object HybridAquaticBlocks {
             Properties.of().mapColor(MapColor.COLOR_RED).randomTicks().strength(0.4f).noOcclusion()
                 .pushReaction(PushReaction.DESTROY).sound(SoundType.SLIME_BLOCK)
         )
-        //.drops(ResourceLocation(Constants.MOD_ID, "blocks/strawberry_anemone"))
     }
 
     val MESSAGE_IN_A_BOTTLE = register(
@@ -54,111 +51,25 @@ object HybridAquaticBlocks {
         )
     }
 
-    val BASKING_SHARK_PLUSHIE =
-        register("basking_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL) }
-    val BULL_SHARK_PLUSHIE =
-        register("bull_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL) }
-    val FRILLED_SHARK_PLUSHIE =
-        register("frilled_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK, Blocks.GRAY_WOOL) }
-    val GREAT_WHITE_SHARK_PLUSHIE = register(
-        "great_white_shark_plushie"
-    ) {
-        createPlushieBlock(PlushieBlock.Variant.GREAT_WHITE_SHARK, Blocks.LIGHT_GRAY_WOOL)
-    }
-    val HAMMERHEAD_SHARK_PLUSHIE = register(
-        "hammerhead_shark_plushie"
-    ) {
-        createPlushieBlock(PlushieBlock.Variant.HAMMERHEAD_SHARK, Blocks.LIGHT_GRAY_WOOL)
-    }
-    val THRESHER_SHARK_PLUSHIE = register(
-        "thresher_shark_plushie"
-    ) {
-        createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK, Blocks.LIGHT_BLUE_WOOL)
-    }
-    val TIGER_SHARK_PLUSHIE =
-        register("tiger_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL) }
-    val WHALE_SHARK_PLUSHIE =
-        register("whale_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL) }
+    val BULL_SHARK_PLUSHIE = register("bull_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val FRILLED_SHARK_PLUSHIE = register("frilled_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK, Blocks.GRAY_WOOL) }
+    val GREAT_WHITE_SHARK_PLUSHIE = register("great_white_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.GREAT_WHITE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val HAMMERHEAD_SHARK_PLUSHIE = register("hammerhead_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.HAMMERHEAD_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK, Blocks.LIGHT_BLUE_WOOL) }
+    val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL) }
+    val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
 
-    val CRAB_POT = register(
-        "crab_pot"
-    ) {
-        CrateBlock(
-            Properties.copy(Blocks.OAK_PLANKS).noOcclusion().strength(0.75F)
-        )
-    }
-
-    val HYBRID_CRATE = register(
-        "hybrid_crate"
-    ) {
-        CrateBlock(
-            Properties.copy(Blocks.OAK_PLANKS).strength(0.75F)
-        )
-    }
-
-    val OAK_CRATE = register(
-        "oak_crate"
-    ) {
-        CrateBlock(
-            Properties.copy(Blocks.OAK_PLANKS).strength(0.75F)
-        )
-    }
-
-    val SPRUCE_CRATE = register(
-        "spruce_crate"
-    ) {
-        CrateBlock(
-            Properties.copy(Blocks.SPRUCE_PLANKS).strength(0.75F)
-        )
-    }
-
-    val BIRCH_CRATE = register(
-        "birch_crate"
-    ) {
-        CrateBlock(
-            Properties.copy(Blocks.BIRCH_PLANKS).strength(0.75F)
-        )
-    }
-
-    val DARK_OAK_CRATE = register(
-        "dark_oak_crate"
-    ) {
-        CrateBlock(
-            Properties.copy(Blocks.DARK_OAK_PLANKS).strength(0.75F)
-        )
-    }
-
-    val ACACIA_CRATE = register(
-        "acacia_crate"
-    ) {
-        CrateBlock(
-            Properties.copy(Blocks.ACACIA_PLANKS).strength(0.75F)
-        )
-    }
-
-    val JUNGLE_CRATE = register(
-        "jungle_crate"
-    ) {
-        CrateBlock(
-            Properties.copy(Blocks.JUNGLE_PLANKS).strength(0.75F)
-        )
-    }
-
-    val MANGROVE_CRATE = register(
-        "mangrove_crate"
-    ) {
-        CrateBlock(
-            Properties.copy(Blocks.MANGROVE_PLANKS).strength(0.75F)
-        )
-    }
-
-    val CHERRY_CRATE = register(
-        "cherry_crate"
-    ) {
-        CrateBlock(
-            Properties.copy(Blocks.CHERRY_PLANKS).strength(0.75F)
-        )
-    }
+    val CRAB_POT = register("crab_pot") { CrateBlock(Properties.copy(Blocks.OAK_PLANKS).noOcclusion().strength(0.75F)) }
+    val HYBRID_CRATE = register("hybrid_crate") { CrateBlock(Properties.copy(Blocks.OAK_PLANKS).strength(0.75F)) }
+    val OAK_CRATE = register("oak_crate") { CrateBlock(Properties.copy(Blocks.OAK_PLANKS).strength(0.75F)) }
+    val SPRUCE_CRATE = register("spruce_crate") { CrateBlock(Properties.copy(Blocks.SPRUCE_PLANKS).strength(0.75F)) }
+    val BIRCH_CRATE = register("birch_crate") { CrateBlock(Properties.copy(Blocks.BIRCH_PLANKS).strength(0.75F)) }
+    val DARK_OAK_CRATE = register("dark_oak_crate") { CrateBlock(Properties.copy(Blocks.DARK_OAK_PLANKS).strength(0.75F)) }
+    val ACACIA_CRATE = register("acacia_crate") { CrateBlock(Properties.copy(Blocks.ACACIA_PLANKS).strength(0.75F)) }
+    val JUNGLE_CRATE = register("jungle_crate") { CrateBlock(Properties.copy(Blocks.JUNGLE_PLANKS).strength(0.75F)) }
+    val MANGROVE_CRATE = register("mangrove_crate") { CrateBlock(Properties.copy(Blocks.MANGROVE_PLANKS).strength(0.75F)) }
+    val CHERRY_CRATE = register("cherry_crate") { CrateBlock(Properties.copy(Blocks.CHERRY_PLANKS).strength(0.75F)) }
 
     val SARGASSUM = register(
         "sargassum"
@@ -238,11 +149,10 @@ object HybridAquaticBlocks {
     val SEA_LETTUCE = register("sea_lettuce") { SeaLettuceBlock(Properties.copy((Blocks.SEAGRASS))) }
     val TALL_SEA_LETTUCE = register("tall_sea_lettuce") { TallSeaLettuceBlock(Properties.copy((Blocks.TALL_SEAGRASS))) }
 
-
     val DEAD_LOPHELIA_CORAL_BLOCK = register(
         "dead_lophelia_coral_block"
     ) {
-        BaseCoralPlantBlock(
+        Block(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)
                 .instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.0F)
                 .sound(SoundType.CORAL_BLOCK)
@@ -261,10 +171,44 @@ object HybridAquaticBlocks {
         )
     }
 
+    val DEAD_LOPHELIA_CORAL_FAN = register("dead_lophelia_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val LOPHELIA_CORAL_FAN = register("lophelia_coral_fan") { CoralFanBlock(DEAD_LOPHELIA_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_LOPHELIA_CORAL = register("dead_lophelia_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
+    val LOPHELIA_CORAL = register("lophelia_coral") { CoralPlantBlock(DEAD_LOPHELIA_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
+    val DEAD_LOPHELIA_CORAL_WALL_FAN = register("dead_lophelia_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN).dropsLike(DEAD_LOPHELIA_CORAL.get())) }
+    val LOPHELIA_CORAL_WALL_FAN = register("lophelia_coral_wall_fan") { CoralWallFanBlock(DEAD_LOPHELIA_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(LOPHELIA_CORAL.get())) }
+
+    val DEAD_SUN_CORAL_BLOCK = register(
+        "dead_sun_coral_block"
+    ) {
+        Block(
+            Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)
+                .instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.0F)
+                .sound(SoundType.CORAL_BLOCK)
+        )
+    }
+
+    val SUN_CORAL_BLOCK = register(
+        "sun_coral_block"
+    ) {
+        CoralBlock(
+            DEAD_SUN_CORAL_BLOCK.get(),
+            Properties.copy(Blocks.FIRE_CORAL_BLOCK).mapColor(MapColor.COLOR_PURPLE)
+                .instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.0F)
+                .sound(SoundType.CORAL_BLOCK)
+        )
+    }
+    val DEAD_SUN_CORAL_FAN = register("dead_sun_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val SUN_CORAL_FAN = register("sun_coral_fan") { CoralFanBlock(DEAD_SUN_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_SUN_CORAL = register("dead_sun_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
+    val SUN_CORAL = register("sun_coral") { CoralPlantBlock(DEAD_SUN_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
+    val DEAD_SUN_CORAL_WALL_FAN = register("dead_sun_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN).dropsLike(DEAD_LOPHELIA_CORAL.get())) }
+    val SUN_CORAL_WALL_FAN = register("sun_coral_wall_fan") { CoralWallFanBlock(DEAD_SUN_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(LOPHELIA_CORAL.get())) }
+
     val DEAD_BUTTON_CORAL_BLOCK = register(
         "dead_button_coral_block"
     ) {
-        BaseCoralPlantBlock(
+        Block(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)
                 .instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.0F)
                 .sound(SoundType.CORAL_BLOCK)
@@ -282,119 +226,17 @@ object HybridAquaticBlocks {
         )
     }
 
-    val DEAD_SUN_CORAL_BLOCK = register(
-        "dead_sun_coral_block"
-    ) {
-        BaseCoralPlantBlock(
-            Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE)
-                .instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.0F)
-                .sound(SoundType.CORAL_BLOCK)
-        )
-    }
-
-    val SUN_CORAL_BLOCK = register(
-        "sun_coral_block"
-    ) {
-        CoralBlock(
-            DEAD_SUN_CORAL_BLOCK.get(),
-            Properties.copy(Blocks.FIRE_CORAL_BLOCK).mapColor(MapColor.COLOR_PURPLE)
-                .instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.0F)
-                .sound(SoundType.CORAL_BLOCK)
-        )
-    }
-
-    val DEAD_LOPHELIA_CORAL_FAN =
-        register("dead_lophelia_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-
-    val LOPHELIA_CORAL_FAN = register(
-        "lophelia_coral_fan"
-    ) { CoralFanBlock(DEAD_LOPHELIA_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
-
-    val DEAD_LOPHELIA_CORAL =
-        register("dead_lophelia_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
-
-    val DEAD_LOPHELIA_CORAL_WALL_FAN = register(
-        "dead_lophelia_coral_wall_fan"
-    ) {
-        BaseCoralWallFanBlock(
-            Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN).dropsLike(DEAD_LOPHELIA_CORAL.get())
-        )
-    }
-
-    val LOPHELIA_CORAL =
-        register("lophelia_coral") { CoralBlock(DEAD_LOPHELIA_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
-
-    val LOPHELIA_CORAL_WALL_FAN = register(
-        "lophelia_coral_wall_fan"
-    ) {
-        CoralWallFanBlock(
-            DEAD_LOPHELIA_CORAL_WALL_FAN.get(),
-            Properties.copy(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(LOPHELIA_CORAL.get())
-        )
-    }
-
-    val DEAD_SUN_CORAL_FAN =
-        register("dead_sun_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-
-    val SUN_CORAL_FAN =
-        register("sun_coral_fan") { CoralFanBlock(DEAD_SUN_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
-
-    val DEAD_SUN_CORAL = register("dead_sun_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
-
-    val DEAD_SUN_CORAL_WALL_FAN = register(
-        "dead_sun_coral_wall_fan"
-    ) {
-        BaseCoralWallFanBlock(
-            Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN).dropsLike(DEAD_LOPHELIA_CORAL.get())
-        )
-    }
-
-    val SUN_CORAL = register("sun_coral") { CoralBlock(DEAD_SUN_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
-
-    val SUN_CORAL_WALL_FAN = register(
-        "sun_coral_wall_fan"
-    ) {
-        CoralWallFanBlock(
-            DEAD_SUN_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(LOPHELIA_CORAL.get())
-        )
-    }
-
-    val DEAD_BUTTON_CORAL_FAN =
-        register("dead_button_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-
-    val BUTTON_CORAL_FAN = register(
-        "button_coral_fan"
-    ) {
-        CoralFanBlock(DEAD_BUTTON_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN))
-    }
-
-    val DEAD_BUTTON_CORAL =
-        register("dead_button_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
-
-    val DEAD_BUTTON_CORAL_WALL_FAN = register(
-        "dead_button_coral_wall_fan"
-    ) {
-        BaseCoralWallFanBlock(
-            Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN).dropsLike(DEAD_LOPHELIA_CORAL.get())
-        )
-    }
-
-    val BUTTON_CORAL =
-        register("button_coral") { CoralBlock(DEAD_BUTTON_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
-
-    val BUTTON_CORAL_WALL_FAN = register(
-        "button_coral_wall_fan"
-    ) {
-        CoralWallFanBlock(
-            DEAD_BUTTON_CORAL_WALL_FAN.get(),
-            Properties.copy(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(LOPHELIA_CORAL.get())
-        )
-    }
+    val DEAD_BUTTON_CORAL_FAN = register("dead_button_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BUTTON_CORAL_FAN = register("button_coral_fan") { CoralFanBlock(DEAD_BUTTON_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_BUTTON_CORAL = register("dead_button_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
+    val BUTTON_CORAL = register("button_coral") { CoralPlantBlock(DEAD_BUTTON_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
+    val DEAD_BUTTON_CORAL_WALL_FAN = register("dead_button_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN).dropsLike(DEAD_LOPHELIA_CORAL.get())) }
+    val BUTTON_CORAL_WALL_FAN = register("button_coral_wall_fan") { CoralWallFanBlock(DEAD_BUTTON_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(LOPHELIA_CORAL.get())) }
 
     val DEAD_THORN_CORAL_BLOCK = register(
         "dead_thorn_coral_block"
     ) {
-        BaseCoralPlantBlock(
+        Block(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK).mapColor(MapColor.TERRACOTTA_WHITE).instrument(
                     NoteBlockInstrument.BASEDRUM
                 ).requiresCorrectToolForDrops().strength(1.0F).sound(SoundType.CORAL_BLOCK)
@@ -412,32 +254,12 @@ object HybridAquaticBlocks {
         )
     }
 
-    val DEAD_THORN_CORAL_FAN =
-        register("dead_thorn_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-
-    val THORN_CORAL_FAN = register(
-        "thorn_coral_fan"
-    ) {
-        CoralFanBlock(DEAD_THORN_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN))
-    }
-
+    val DEAD_THORN_CORAL_FAN = register("dead_thorn_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val THORN_CORAL_FAN = register("thorn_coral_fan") { CoralFanBlock(DEAD_THORN_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
     val DEAD_THORN_CORAL = register("dead_thorn_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
-
-    val DEAD_THORN_CORAL_WALL_FAN = register(
-        "dead_thorn_coral_wall_fan"
-    ) {
-        BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN).dropsLike(DEAD_THORN_CORAL.get()))
-    }
-
-    val THORN_CORAL = register("thorn_coral") { CoralBlock(DEAD_THORN_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
-
-    val THORN_CORAL_WALL_FAN = register(
-        "thorn_coral_wall_fan"
-    ) {
-        CoralWallFanBlock(
-            DEAD_THORN_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(THORN_CORAL.get())
-        )
-    }
+    val DEAD_THORN_CORAL_WALL_FAN = register("dead_thorn_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN).dropsLike(DEAD_THORN_CORAL.get())) }
+    val THORN_CORAL = register("thorn_coral") { CoralPlantBlock(DEAD_THORN_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
+    val THORN_CORAL_WALL_FAN = register("thorn_coral_wall_fan") { CoralWallFanBlock(DEAD_THORN_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN).dropsLike(THORN_CORAL.get())) }
 
     val GLOWSTICK = register(
         "glowstick"
@@ -489,7 +311,6 @@ object HybridAquaticBlocks {
         GiantClamBlock(
             true, Properties.copy(Blocks.TUFF).noOcclusion().strength(1.0F).pushReaction(PushReaction.DESTROY)
         )
-        //.drops(ResourceLocation(Constants.MOD_ID, "blocks/giant_clam")
     }
 
     val BUOY =
