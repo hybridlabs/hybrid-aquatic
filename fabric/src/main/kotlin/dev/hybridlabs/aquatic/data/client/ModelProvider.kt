@@ -187,7 +187,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.BUOY.get(),
             HybridAquaticItems.RED_ALGAE.get(),
             //HybridAquaticItems.SEA_LETTUCE.get(),
-            //HybridAquaticItems.SARGASSUM.get(),
+            HybridAquaticItems.SARGASSUM.get(),
             HybridAquaticItems.BULL_KELP.get(),
             HybridAquaticItems.TUBE_SPONGE.get(),
             HybridAquaticItems.UNI.get(),
