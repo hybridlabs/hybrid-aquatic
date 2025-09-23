@@ -137,18 +137,6 @@ open class HybridAquaticMammalEntity(
         return 0.3f
     }
 
-    override fun getAmbientSound(): SoundEvent? {
-        return SoundEvents.FOX_AMBIENT
-    }
-
-    override fun getSwimSplashSound(): SoundEvent {
-        return SoundEvents.DOLPHIN_SPLASH
-    }
-
-    override fun getSwimSound(): SoundEvent {
-        return SoundEvents.DOLPHIN_SWIM
-    }
-
     override fun aiStep() {
         super.aiStep()
         val vec3d = this.deltaMovement

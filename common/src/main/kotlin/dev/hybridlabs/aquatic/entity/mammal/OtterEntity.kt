@@ -7,10 +7,13 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.BiomeTags
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -39,6 +42,26 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun getAmbientSound(): SoundEvent? {
+        return SoundEvents.FOX_AMBIENT
+    }
+
+    override fun getHurtSound(damageSource: DamageSource): SoundEvent? {
+        return SoundEvents.FOX_HURT
+    }
+
+    override fun getDeathSound(): SoundEvent? {
+        return SoundEvents.FOX_DEATH
+    }
+
+    override fun getSwimSplashSound(): SoundEvent {
+        return SoundEvents.DOLPHIN_SPLASH
+    }
+
+    override fun getSwimSound(): SoundEvent {
+        return SoundEvents.DOLPHIN_SWIM
     }
 
 
