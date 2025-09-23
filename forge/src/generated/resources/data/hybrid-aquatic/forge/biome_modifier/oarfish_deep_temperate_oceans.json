@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:deep_temperate_oceans",
+  "spawners": {
+    "type": "hybrid-aquatic:oarfish",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

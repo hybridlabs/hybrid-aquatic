@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:shallow_temperate_oceans",
+  "spawners": {
+    "type": "hybrid-aquatic:wrasse",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 3
+  }
+}
