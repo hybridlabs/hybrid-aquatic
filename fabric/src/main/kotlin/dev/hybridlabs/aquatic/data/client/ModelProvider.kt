@@ -74,6 +74,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             )
 
             createAirLikeBlock(
+                HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(),
+                TextureMapping.getBlockTexture(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(), "_top")
+            )
+
+            createAirLikeBlock(
                 HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(),
                 TextureMapping.getBlockTexture(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(), "_top")
             )
