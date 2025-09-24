@@ -21,7 +21,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
-    HybridAquaticFishEntity(
+    HybridAquaticSchoolingFishEntity(
         entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE

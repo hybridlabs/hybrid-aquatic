@@ -16,6 +16,10 @@ open class HybridAquaticFishEntityRenderer<T : HybridAquaticFishEntity>(
     canGlow: Boolean = false
 ) : GeoEntityRenderer<T>(context, model) {
 
+    override fun getMotionAnimThreshold(animatable: T): Float {
+        return 0.0025f
+    }
+
     init {
         if (canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
     }
