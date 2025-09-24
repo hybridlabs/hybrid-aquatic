@@ -6,13 +6,10 @@ import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
-import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.placement.PlacementUtils
-import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.VerticalAnchor
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
 import net.minecraft.world.level.levelgen.placement.*
 import java.util.concurrent.CompletableFuture
 
@@ -232,10 +229,9 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.TIDE_POOL),
                 listOf(
-                    CountPlacement.of(40),
+                    CountPlacement.of(32),
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    HeightRangePlacement.uniform(VerticalAnchor.absolute(62), VerticalAnchor.absolute(67)),
+                    HeightRangePlacement.triangle(VerticalAnchor.absolute(63), VerticalAnchor.absolute(68)),
                     BiomeFilter.biome()
                 )
             )

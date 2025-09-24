@@ -3,24 +3,20 @@
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 40
+      "count": 32
     },
     {
       "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:heightmap",
-      "heightmap": "OCEAN_FLOOR"
-    },
-    {
       "type": "minecraft:height_range",
       "height": {
-        "type": "minecraft:uniform",
+        "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "absolute": 67
+          "absolute": 68
         },
         "min_inclusive": {
-          "absolute": 62
+          "absolute": 63
         }
       }
     },

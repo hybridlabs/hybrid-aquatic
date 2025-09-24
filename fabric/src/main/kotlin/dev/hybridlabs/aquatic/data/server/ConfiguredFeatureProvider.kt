@@ -40,7 +40,6 @@ class ConfiguredFeatureProvider(
     registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
-        HybridAquaticConfiguredFeatures
         // anemone patch
         entries.add(
             HybridAquaticConfiguredFeatures.ANEMONE_PATCH,
@@ -296,20 +295,21 @@ class ConfiguredFeatureProvider(
                     HybridAquaticBlockTags.TIDE_POOL_REPLACEABLE,
                     WeightedStateProvider(
                         SimpleWeightedRandomList.builder<BlockState>()
-                            .add(Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 5)
-                            .add(Blocks.STONE.defaultBlockState(), 5)
+                            .add(Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 2)
+                            .add(Blocks.STONE.defaultBlockState(), 2)
+                            .add(Blocks.TUFF.defaultBlockState(), 1)
                             .build()
                     ),
                     PlacementUtils.inlinePlaced(
                         GREEN
                     ),
                     CaveSurface.FLOOR,
-                    ConstantInt.of(5),
-                    0.3f,
+                    BiasedToBottomInt.of(1,7),
+                    0.0f,
                     5,
                     0.2f,
-                    BiasedToBottomInt.of(5, 7),
-                    0.05f
+                    BiasedToBottomInt.of(4, 5),
+                    0.33f
                 )
             )
         )

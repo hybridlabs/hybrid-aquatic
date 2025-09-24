@@ -19,7 +19,7 @@ object HybridAquaticBiomes {
     fun addBiomes() {
         BiomePlacement.addOverworld(
             TIDE_POOLS, ParameterPoint(
-                Parameter.span(-1f, 1f),
+                Parameter.span(-0.45f, 1f),
                 Parameter.span(-0.45f, -0.15f),
                 Parameter.span(-0.195f, -0.110f),
                 Parameter.span(-0.25f, 0.05f),
