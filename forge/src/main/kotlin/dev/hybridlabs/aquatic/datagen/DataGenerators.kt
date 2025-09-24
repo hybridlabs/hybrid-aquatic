@@ -30,7 +30,7 @@ object DataGenerators {
             ForgeRegistries.Keys.BIOME_MODIFIERS
         ) { context ->
             val biomeRegistry = context.lookup(Registries.BIOME)
-            configHandler.config.entitySpawnConfig.forEach {
+            configHandler.defaultConfig.entitySpawnConfig.forEach {
                 val location = "${it.type.toShortString()}_${it.biomes.location.path}"
                 val key = ResourceKey.create(
                     ForgeRegistries.Keys.BIOME_MODIFIERS,

@@ -30,11 +30,14 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.WATER)
 
         getOrCreateTagBuilder(HybridAquaticBlockTags.TIDE_POOL_REPLACEABLE)
-            .add(Blocks.WATER)
             .add(Blocks.CLAY)
             .add(Blocks.GRAVEL)
             .add(Blocks.DIRT)
             .add(Blocks.SAND)
+            .add(Blocks.GRASS_BLOCK)
+            .add(Blocks.STONE)
+            .add(Blocks.MOSSY_COBBLESTONE)
+            .add(Blocks.TUFF)
 
         getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
             .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
