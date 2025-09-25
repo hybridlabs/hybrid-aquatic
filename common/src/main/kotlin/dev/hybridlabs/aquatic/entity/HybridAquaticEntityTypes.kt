@@ -282,7 +282,7 @@ object HybridAquaticEntityTypes {
     val SEAHORSE = registerFish(
         "seahorse",
         ::SeahorseEntity,
-        EntityDimensions.fixed(0.3f, 0.5f),
+        EntityDimensions.fixed(0.2f, 0.5f),
         SeahorseEntity::createMobAttributes
     )
 
