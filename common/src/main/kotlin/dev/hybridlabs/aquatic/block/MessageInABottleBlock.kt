@@ -128,10 +128,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        super.createBlockStateDefinition(
-            // append waterlogged
-            builder.add(WATERLOGGED)
-        )
+        builder.add(WATERLOGGED)
     }
 
     override fun getRenderShape(state: BlockState): RenderShape {
