@@ -21,7 +21,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -50,7 +49,6 @@ open class HybridAquaticFishEntity(
         goalSelector.addGoal(0, PanicGoal(this, 1.25))
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(1, RandomLookAroundGoal(this))
-        goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 6.0f))
         goalSelector.addGoal(1, FishAttackGoal(this))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
     }
@@ -154,10 +152,6 @@ open class HybridAquaticFishEntity(
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return !this.fromFishingNet && !this.hasCustomName()
-    }
-
-    override fun getMaxSpawnClusterSize(): Int {
-        return 1
     }
 
     //#region SFX

@@ -29,7 +29,7 @@ open class HybridAquaticSchoolingFishEntity(
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, FishFollowGroupLeaderGoal(this))
+        goalSelector.addGoal(0, FishFollowGroupLeaderGoal(this))
     }
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -50,11 +50,15 @@ open class HybridAquaticSchoolingFishEntity(
 
     private fun joinGroupOf(groupLeader: HybridAquaticSchoolingFishEntity): HybridAquaticSchoolingFishEntity {
         if (this.getVariant() != groupLeader.getVariant()) return this
+
+        if (groupLeader.groupSize >= groupLeader.getMaxGroupSize()) {
+            return this
+        }
+
         this.leader = groupLeader
         groupLeader.increaseGroupSize()
         return groupLeader
     }
-
 
     fun leaveGroup() {
         leader!!.decreaseGroupSize()
@@ -100,18 +104,16 @@ open class HybridAquaticSchoolingFishEntity(
 
     fun pullInOtherFish(fish: Stream<out HybridAquaticSchoolingFishEntity?>) {
         val selfVariant = this.getVariant()
-        fish
-            .filter { fishx ->
-                fishx != null &&
-                        fishx !== this &&
-                        fishx.getVariant() == selfVariant
-            }
+        fish.filter { fishx ->
+            fishx != null &&
+                    fishx !== this &&
+                    fishx.getVariant() == selfVariant &&
+                    this.groupSize < this.getMaxGroupSize()
+        }
             .limit((this.getMaxGroupSize() - this.groupSize).toLong())
-            .forEach { fishx ->
-                fishx!!.joinGroupOf(this)
+            .forEach { fishx -> fishx!!.joinGroupOf(this)
             }
     }
-
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
