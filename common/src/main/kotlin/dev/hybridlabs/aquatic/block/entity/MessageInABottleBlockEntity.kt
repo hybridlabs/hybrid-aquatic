@@ -10,7 +10,10 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.Animation
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import software.bernie.geckolib.util.RenderUtils
@@ -48,7 +51,7 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
         messageItemStack = ItemStack.of(nbt.getCompound(MESSAGE_KEY))
     }
 
-    private fun <E> animate(event: AnimationState<E>): PlayState where E : BlockEntity, E : GeoAnimatable {
+    private fun <E> predicate(event: software.bernie.geckolib.core.animation.AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
         return if (blockState.hasProperty(WATERLOGGED)) {
             event.controller.setAnimation(WATER_BOB_ANIMATION)
             PlayState.CONTINUE
@@ -57,8 +60,8 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
         }
     }
 
-    override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {
-        registrar.add(AnimationController(this, "controller", 0, ::animate))
+    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
+        controllerRegistrar.add(AnimationController(this, "controller", 0, ::predicate))
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {

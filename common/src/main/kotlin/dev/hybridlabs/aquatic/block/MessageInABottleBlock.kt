@@ -34,7 +34,6 @@ import kotlin.jvm.optionals.getOrNull
  */
 class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), SimpleWaterloggedBlock {
     init {
-        // add waterlogged to default state
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false))
     }
 
@@ -47,21 +46,18 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
     }
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
-        // cannot place below water
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (fluidStateAbove.`is`(Fluids.EMPTY)) {
-            return true
+        if (!fluidStateAbove.`is`( Fluids.EMPTY)) {
+            return false
         }
 
-        // cannot stack
         val stateBelow = world.getBlockState(pos.below())
         if (stateBelow.block == this) {
             return false
         }
 
-        // check valid placement
         val fluidState = world.getFluidState(pos)
-        return fluidState == Fluids.WATER.getSource(false) || canSupportCenter(world, pos.below(), Direction.UP)
+        return fluidState.`is`(Fluids.WATER) || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
     override fun setPlacedBy(
@@ -87,12 +83,10 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         }
     }
 
-    override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
-        // place in water as waterlogged
-        val world = context.level
-        val pos = context.clickedPos
-        val fluidState = world.getFluidState(pos)
-        return super.getStateForPlacement(context)?.setValue(WATERLOGGED, fluidState == Fluids.WATER.getSource(false))
+    override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState {
+        val waterlogged = ctx.level.getFluidState(ctx.clickedPos) == Fluids.WATER.getSource(false)
+        return defaultBlockState()
+            .setValue(WATERLOGGED, waterlogged)
     }
 
     override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {

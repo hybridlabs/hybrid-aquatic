@@ -22,6 +22,7 @@ class RaftBlock(settings: Properties) : Block(settings), SimpleWaterloggedBlock 
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
+
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState {
         val waterlogged = ctx.level.getFluidState(ctx.clickedPos) == Fluids.WATER.getSource(false)
         return defaultBlockState()
