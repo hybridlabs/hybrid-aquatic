@@ -1,11 +1,15 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.ByIdMap
+import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
@@ -45,8 +49,28 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: Level)
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+
+        val variant = Type.entries.random(Random).id
+        this.variant = Type.fromId(variant)
+
+        if (spawnReason == MobSpawnType.CHUNK_GENERATION || spawnReason == MobSpawnType.NATURAL) {
+            val fishCount = (this.maxSpawnClusterSize * this.random.nextFloat()).toInt()
+            if (fishCount > 0 && !level().isClientSide()) {
+                for (i in 0 until fishCount) {
+                    val distance = 1.5f
+                    val entity = ClownfishEntity(HybridAquaticEntityTypes.CLOWNFISH.get(), this.level())
+                    entity.variant = this.variant
+                    entity.moveTo(
+                        this.x + this.random.nextFloat() * distance,
+                        this.y + this.random.nextFloat() * distance,
+                        this.z + this.random.nextFloat() * distance
+                    )
+                    level().addFreshEntity(entity)
+                }
+            }
+        }
+        return spawnData
     }
 
     companion object {
@@ -57,6 +81,17 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: Level)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)
+        }
+
+        fun canSpawn(
+            type: EntityType<out ClownfishEntity>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
+        ): Boolean {
+            return world.isWaterAt(pos) &&
+                    world.getBlockState(pos.below()).`is`(HybridAquaticBlockTags.CLOWNFISH_ANEMONES)
         }
 
         val TYPE: EntityDataAccessor<Int> =

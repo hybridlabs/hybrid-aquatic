@@ -44,13 +44,11 @@ object SpawnRestrictionRegistry {
 
         // fish
         setOf(
-            HybridAquaticEntityTypes.CLOWNFISH.get(),
             HybridAquaticEntityTypes.TUNA.get(),
             HybridAquaticEntityTypes.MAHI.get(),
             HybridAquaticEntityTypes.BARRACUDA.get(),
             HybridAquaticEntityTypes.SURGEONFISH.get(),
             HybridAquaticEntityTypes.BOXFISH.get(),
-            HybridAquaticEntityTypes.SEAHORSE.get(),
             HybridAquaticEntityTypes.SEADRAGON.get(),
             HybridAquaticEntityTypes.LIONFISH.get(),
             HybridAquaticEntityTypes.BLOWFISH.get(),
@@ -58,7 +56,6 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.ROCKFISH.get(),
             HybridAquaticEntityTypes.SEA_BASS.get(),
             HybridAquaticEntityTypes.TRIGGERFISH.get(),
-            HybridAquaticEntityTypes.PARROTFISH.get(),
             HybridAquaticEntityTypes.WRASSE.get(),
             HybridAquaticEntityTypes.NEEDLEFISH.get(),
             HybridAquaticEntityTypes.MACKEREL.get(),
@@ -73,6 +70,9 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.OPAH.get(),
         ).forEach { registerNightFish(it) }
 
+        registerWaterCreature(HybridAquaticEntityTypes.CLOWNFISH.get(), ClownfishEntity::canSpawn)
+        registerWaterCreature(HybridAquaticEntityTypes.PARROTFISH.get(), ParrotfishEntity::canSpawn)
+        registerWaterCreature(HybridAquaticEntityTypes.SEAHORSE.get(), SeahorseEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.PUPFISH.get(), PupfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.FLYING_FISH.get(), FlyingFishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.SUNFISH.get(), SunfishEntity::canSpawn)

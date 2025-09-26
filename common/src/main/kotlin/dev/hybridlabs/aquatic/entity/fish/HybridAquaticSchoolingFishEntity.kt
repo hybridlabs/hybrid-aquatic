@@ -48,7 +48,7 @@ open class HybridAquaticSchoolingFishEntity(
         return this.leader != null && leader!!.isAlive
     }
 
-    private fun joinGroupOf(groupLeader: HybridAquaticSchoolingFishEntity): HybridAquaticSchoolingFishEntity {
+    fun joinGroupOf(groupLeader: HybridAquaticSchoolingFishEntity): HybridAquaticSchoolingFishEntity {
         if (this.getVariant() != groupLeader.getVariant()) return this
 
         if (groupLeader.groupSize >= groupLeader.getMaxGroupSize()) {

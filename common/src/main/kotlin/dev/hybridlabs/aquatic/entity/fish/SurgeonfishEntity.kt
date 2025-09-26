@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
@@ -23,7 +24,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
+    HybridAquaticSchoolingFishEntity(
         entityType, world,
         listOf(HybridAquaticEntityTags.NONE),
         listOf(
@@ -45,8 +46,29 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Le
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+
+        val variant = Type.entries.random(Random).id
+        this.variant = Type.fromId(variant)
+
+        if (spawnReason == MobSpawnType.CHUNK_GENERATION || spawnReason == MobSpawnType.NATURAL) {
+            val fishCount = (this.maxSpawnClusterSize * this.random.nextFloat()).toInt()
+            if (fishCount > 0 && !level().isClientSide()) {
+                for (i in 0 until  fishCount) {
+                    val distance = 1.5f
+                    val entity = SurgeonfishEntity(HybridAquaticEntityTypes.SURGEONFISH.get(), this.level())
+                    entity.variant = this.variant
+                    entity.moveTo(
+                        this.x + this.random.nextFloat() * distance,
+                        this.y + this.random.nextFloat() * distance,
+                        this.z + this.random.nextFloat() * distance
+                    )
+                    entity.joinGroupOf(this)
+                    level().addFreshEntity(entity)
+                }
+            }
+        }
+        return spawnData
     }
 
     override fun getDefaultLootTable(): ResourceLocation {

@@ -3,6 +3,9 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.SeadragonEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.Mth
+import software.bernie.geckolib.constant.DataTickets
+import software.bernie.geckolib.core.animation.AnimationState
 
 class SeadragonEntityModel : HybridAquaticFishEntityModel<SeadragonEntity>("seadragon") {
     override fun getRenderType(animatable: SeadragonEntity, texture: ResourceLocation): RenderType {
@@ -42,6 +45,21 @@ class SeadragonEntityModel : HybridAquaticFishEntityModel<SeadragonEntity>("sead
             SeadragonEntity.Companion.Type.LEAFY -> LEAFY_ANIMATION
             SeadragonEntity.Companion.Type.WEEDY -> WEEDY_ANIMATION
             SeadragonEntity.Companion.Type.RUBY -> RUBY_ANIMATION
+        }
+    }
+
+    override fun setCustomAnimations(
+        animatable: SeadragonEntity,
+        instanceId: Long,
+        animationState: AnimationState<SeadragonEntity>,
+    ) {
+        val head = animationProcessor.getBone("head")
+
+        if (head != null) {
+            val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
+
+            head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
+            head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
         }
     }
 }

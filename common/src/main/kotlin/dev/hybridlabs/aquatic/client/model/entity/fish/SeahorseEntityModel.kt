@@ -22,7 +22,6 @@ class SeahorseEntityModel : HybridAquaticFishEntityModel<SeahorseEntity>("seahor
         }
     }
 
-
     override fun setCustomAnimations(
         animatable: SeahorseEntity,
         instanceId: Long,
