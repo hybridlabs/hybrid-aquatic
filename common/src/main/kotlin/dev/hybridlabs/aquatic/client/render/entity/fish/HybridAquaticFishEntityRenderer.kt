@@ -22,6 +22,7 @@ open class HybridAquaticFishEntityRenderer<T : HybridAquaticFishEntity>(
 
     init {
         if (canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
+        this.shadowRadius = 0.3f
     }
 
     override fun getDeathMaxRotation(animatable: T): Float {
