@@ -64,6 +64,7 @@ class MahiEntity(entityType: EntityType<out MahiEntity>, world: Level) :
                         this.y + this.random.nextFloat() * distance,
                         this.z + this.random.nextFloat() * distance
                     )
+                    entity.joinGroupOf(this)
                     level().addFreshEntity(entity)
                 }
             }
