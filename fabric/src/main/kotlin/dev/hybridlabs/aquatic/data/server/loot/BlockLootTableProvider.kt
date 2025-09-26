@@ -56,6 +56,22 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
+        add(HybridAquaticBlocks.RED_ALGAE.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+            )
+        }
+
+        add(HybridAquaticBlocks.SEA_LETTUCE.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+            )
+        }
+
         add(HybridAquaticBlocks.TUBE_WORM.get()) { block ->
             LootTable.lootTable().withPool(
                 LootPool.lootPool()
