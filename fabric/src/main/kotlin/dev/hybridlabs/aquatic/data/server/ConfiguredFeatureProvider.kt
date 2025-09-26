@@ -62,6 +62,12 @@ class ConfiguredFeatureProvider(
                                             true
                                         ), 3
                                     )
+                                    .add(
+                                        HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get().defaultBlockState().setValue(
+                                            WATERLOGGED,
+                                            true
+                                        ), 1
+                                    )
                                     .build()
                             )
                         ),

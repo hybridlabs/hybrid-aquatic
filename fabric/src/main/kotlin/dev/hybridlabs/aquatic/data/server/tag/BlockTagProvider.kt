@@ -39,6 +39,10 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.MOSSY_COBBLESTONE)
             .add(Blocks.TUFF)
 
+        getOrCreateTagBuilder(HybridAquaticBlockTags.CLOWNFISH_ANEMONES)
+            .add(HybridAquaticBlocks.ANEMONE.get())
+            .add(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get())
+
         getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
             .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
 

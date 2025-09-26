@@ -25,6 +25,15 @@
                   }
                 },
                 "weight": 3
+              },
+              {
+                "data": {
+                  "Name": "hybrid-aquatic:giant_green_anemone",
+                  "Properties": {
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
               }
             ]
           }
