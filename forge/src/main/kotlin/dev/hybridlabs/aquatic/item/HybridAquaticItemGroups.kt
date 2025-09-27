@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION", "unused")
+
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.CommonClass
