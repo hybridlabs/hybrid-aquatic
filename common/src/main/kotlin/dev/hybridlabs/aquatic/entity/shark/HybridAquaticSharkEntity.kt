@@ -23,6 +23,7 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
@@ -71,7 +72,7 @@ open class HybridAquaticSharkEntity(
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.WATER_BORDER, -1.0f)
         setPathfindingMalus(BlockPathTypes.WALKABLE, -1.0f)
-        moveControl = SmoothSwimmingMoveControl(this, 85, 5, speed, 0.1F, true)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 1.0F, 0.1F, true)
         lookControl = SmoothSwimmingLookControl(this, 15)
         navigation = WaterBoundPathNavigation(this, world)
     }
@@ -80,7 +81,7 @@ open class HybridAquaticSharkEntity(
         super.registerGoals()
         goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.5, 16.0F))
-        goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
+        goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(0, SharkAttackGoal(this, 1.0, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive })
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive })
@@ -107,6 +108,10 @@ open class HybridAquaticSharkEntity(
         return false
     }
 
+    override fun createNavigation(world: Level): PathNavigation {
+        return WaterBoundPathNavigation(this, world)
+    }
+
     override fun tick() {
         super.tick()
 
@@ -117,12 +122,9 @@ open class HybridAquaticSharkEntity(
             if (moistness <= -20) {
                 moistness = 0
                 hurt(this.damageSources().dryOut(), 2.0f)
+                this.xRot = 0.0f
+                this.yRot = 0.0f
             }
-        }
-
-        if (!this.isUnderWater && this.onGround()) {
-            this.xRot = 0.0f
-            this.yRot = 0.0f
         }
 
         if (hunger > 0) hunger -= 1
@@ -170,6 +172,7 @@ open class HybridAquaticSharkEntity(
 
 
     //#region Movement
+
     override fun aiStep() {
         this.updateSwingTime()
         super.aiStep()
@@ -208,18 +211,8 @@ open class HybridAquaticSharkEntity(
 
     //#region Water Breathing
 
-    override fun handleAirSupply(air: Int) {}
-
     private fun getMaxMoistness(): Int {
         return 1200
-    }
-
-    override fun getMaxAirSupply(): Int {
-        return 4800
-    }
-
-    public override fun increaseAirSupply(air: Int): Int {
-        return this.maxAirSupply
     }
 
     //#endregion

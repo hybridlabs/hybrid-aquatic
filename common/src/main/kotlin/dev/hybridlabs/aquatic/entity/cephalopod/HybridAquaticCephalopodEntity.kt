@@ -22,7 +22,6 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
-import net.minecraft.world.entity.ai.goal.PanicGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
@@ -55,8 +54,7 @@ open class HybridAquaticCephalopodEntity(
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun registerGoals() {
-        goalSelector.addGoal(0, PanicGoal(this, 1.25))
-        goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 10))
+        goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(2, CephalopodAttackGoal(this))
         targetSelector.addGoal(
             1,
@@ -225,7 +223,7 @@ open class HybridAquaticCephalopodEntity(
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.WATER_BORDER, -1.0f)
         setPathfindingMalus(BlockPathTypes.WALKABLE, -1.0f)
-        moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.05F, 0.1F, true)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 10, 1.0F, 0.1F, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
     }
@@ -289,14 +287,6 @@ open class HybridAquaticCephalopodEntity(
 
     // endregion
 
-    override fun getMaxAirSupply(): Int {
-        return 600
-    }
-
-    public override fun increaseAirSupply(air: Int): Int {
-        return this.maxAirSupply
-    }
-
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             AnimationController(
@@ -326,7 +316,7 @@ open class HybridAquaticCephalopodEntity(
     }
 
     protected open fun getMaxSize(): Int {
-        return 0
+        return 3
     }
 
     private var fromFishingNet = false
@@ -393,24 +383,6 @@ open class HybridAquaticCephalopodEntity(
             val bottomY = world.seaLevel - 24
 
             return pos.y in bottomY..topY &&
-                    world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos) &&
-                    !isDarkEnoughToSpawn(world, pos, random)
-        }
-
-        @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-        fun canNightSpawn(
-            type: EntityType<out WaterAnimal>,
-            world: ServerLevelAccessor,
-            reason: MobSpawnType,
-            pos: BlockPos,
-            random: RandomSource
-        ): Boolean {
-            val topY = world.seaLevel - 4
-            val bottomY = world.seaLevel - 24
-
-            return !world.level.isDay &&
-                    pos.y in bottomY..topY &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos) &&
                     !isDarkEnoughToSpawn(world, pos, random)

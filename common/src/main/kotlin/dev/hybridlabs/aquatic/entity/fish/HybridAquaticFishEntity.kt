@@ -36,11 +36,11 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
 open class HybridAquaticFishEntity(
-    type: EntityType<out HybridAquaticFishEntity>,
+    entityType: EntityType<out HybridAquaticFishEntity>,
     world: Level,
     open val prey: List<TagKey<EntityType<*>>>,
     open val predator: List<TagKey<EntityType<*>>>,
-) : WaterAnimal(type, world), GeoEntity {
+) : WaterAnimal(entityType, world), GeoEntity {
 
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
@@ -112,7 +112,7 @@ open class HybridAquaticFishEntity(
             this.hasImpulse = true
             this.playSound(this.flopSound, this.soundVolume, this.voicePitch)
         }
-
+        this.updateSwingTime()
         super.aiStep()
     }
 
@@ -237,10 +237,6 @@ open class HybridAquaticFishEntity(
 
     // endregion
 
-    override fun increaseAirSupply(air: Int): Int {
-        return this.maxAirSupply
-    }
-
     protected open fun hasSelfControl(): Boolean {
         return true
     }
@@ -277,7 +273,7 @@ open class HybridAquaticFishEntity(
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.WATER_BORDER, -1.0f)
         setPathfindingMalus(BlockPathTypes.WALKABLE, -1.0f)
-        moveControl = SmoothSwimmingMoveControl(this, 85, 5, speed, 0.1f, true)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 1.0F, 0.1f, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
     }
