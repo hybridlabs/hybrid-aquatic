@@ -20,6 +20,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.phys.Vec3
 import java.util.function.IntFunction
 
 class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
@@ -36,7 +37,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome)
@@ -64,6 +65,15 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         return SoundEvents.DOLPHIN_SWIM
     }
 
+    override fun travel(travelVector: Vec3) {
+        if (this.isControlledByLocalInstance && this.isInWater) {
+            this.moveRelative(this.speed, travelVector)
+            this.move(MoverType.SELF, this.deltaMovement)
+            this.deltaMovement = deltaMovement.scale(0.3)
+        } else {
+            super.travel(travelVector)
+        }
+    }
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
@@ -74,17 +84,17 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     }
 
     override fun getWaterline(): Float {
-        return 0.15f
+        return 0.125f
     }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 12.0)
+                .add(Attributes.MAX_HEALTH, 10.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
+                .add(Attributes.FOLLOW_RANGE, 16.0)
         }
 
         val TYPE: EntityDataAccessor<Int> =
