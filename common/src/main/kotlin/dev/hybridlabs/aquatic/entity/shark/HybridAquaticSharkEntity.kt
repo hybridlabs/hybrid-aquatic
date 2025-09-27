@@ -67,7 +67,6 @@ open class HybridAquaticSharkEntity(
             entityData.set(MOISTNESS, moistness)
         }
 
-
     //#region Initialization
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -103,6 +102,10 @@ open class HybridAquaticSharkEntity(
 
     override fun getMobType(): MobType {
         return MobType.WATER
+    }
+
+    override fun isPushedByFluid(): Boolean {
+        return false
     }
 
     override fun tick() {
@@ -173,8 +176,17 @@ open class HybridAquaticSharkEntity(
         super.aiStep()
     }
 
-    override fun travel(movementInput: Vec3) {
-        super.travel(movementInput)
+    override fun travel(travelVector: Vec3) {
+        if (this.isEffectiveAi && this.isInWater) {
+            this.moveRelative(0.01f, travelVector)
+            this.move(MoverType.SELF, this.deltaMovement)
+            this.deltaMovement = deltaMovement.scale(0.9)
+            if (this.target == null) {
+                this.deltaMovement = deltaMovement.add(0.0, -0.005, 0.0)
+            }
+        } else {
+            super.travel(travelVector)
+        }
     }
 
     override fun getMaxHeadXRot(): Int {
@@ -384,7 +396,7 @@ open class HybridAquaticSharkEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 2
             val bottomY = world.seaLevel - 6
@@ -399,7 +411,7 @@ open class HybridAquaticSharkEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 8
             val bottomY = world.seaLevel - 24
@@ -414,7 +426,7 @@ open class HybridAquaticSharkEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 28
             val bottomY = world.seaLevel - 128

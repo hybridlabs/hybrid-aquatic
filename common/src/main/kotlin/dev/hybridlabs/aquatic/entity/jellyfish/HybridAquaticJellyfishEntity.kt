@@ -84,6 +84,10 @@ open class HybridAquaticJellyfishEntity(
         return MobType.WATER
     }
 
+    override fun isPushedByFluid(): Boolean {
+        return false
+    }
+
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
