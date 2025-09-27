@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.entity.ai.goal.SharkAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -16,20 +16,17 @@ import net.minecraft.util.RandomSource
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.InteractionHand
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -51,12 +48,12 @@ open class HybridAquaticSharkEntity(
     world: Level,
     private val prey: List<TagKey<EntityType<*>>>,
     private val isPassive: Boolean,
-    private val closePlayerAttack: Boolean
+    private val closePlayerAttack: Boolean,
 ) : WaterAnimal(entityType, world), NeutralMob, GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var angerTime = 0
     private var angryAt: UUID? = null
-    private var fromFishingNet = false
+    var fromFishingNet = false
 
     var hunger: Int
         get() = entityData.get(HUNGER)
@@ -84,12 +81,9 @@ open class HybridAquaticSharkEntity(
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, StayInWaterGoal(this))
-        goalSelector.addGoal(0, TryFindWaterGoal(this))
         goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.5, 16.0F))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
-        goalSelector.addGoal(4, RandomLookAroundGoal(this))
-        goalSelector.addGoal(5, LookAtPlayerGoal(this, Player::class.java, 6.0f))
-        goalSelector.addGoal(1, SharkAttackGoal(this))
+        goalSelector.addGoal(0, SharkAttackGoal(this, 1.0, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive })
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive })
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
@@ -100,11 +94,9 @@ open class HybridAquaticSharkEntity(
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         this.airSupply = getMaxMoistness()
-        xRot = 0.0f
-        yRot = 0.0f
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -251,7 +243,7 @@ open class HybridAquaticSharkEntity(
 
         controllerRegistrar.add(
             AnimationController(
-                this, "Charge", 4,
+                this, "Charge", 8,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
                     if (this.isUnderWater && this.isSprinting) {
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.RUN)
@@ -321,7 +313,7 @@ open class HybridAquaticSharkEntity(
     private fun shouldProximityAttack(player: Player): Boolean {
         if (customName?.string == "friend") return false
 
-        return closePlayerAttack && player.distanceToSqr(this) <= 5 && !player.isCreative
+        return closePlayerAttack && player.distanceToSqr(this) <= 8 && !player.isCreative
     }
     //#endregion
 
@@ -360,60 +352,9 @@ open class HybridAquaticSharkEntity(
         return this.oAttackAnim + f * tickDelta
     }
 
-    internal class SharkAttackGoal(private val shark: HybridAquaticSharkEntity) : MeleeAttackGoal(shark, 1.0, true) {
-        override fun canUse(): Boolean {
-            return !shark.fromFishingNet && super.canUse()
-        }
-
-        override fun checkAndPerformAttack(target: LivingEntity, squaredDistance: Double) {
-            val d = getAttackReachSqr(target)
-            if (squaredDistance <= d && this.attackInterval <= 0 && !target.isBlocking) {
-                resetAttackCooldown()
-                shark.swing(InteractionHand.MAIN_HAND)
-                shark.doHurtTarget(target)
-                shark.playSound(SoundEvents.FOX_BITE, 0.5F, 0.0F)
-                target.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), 200, 0), shark)
-
-                if (target.health <= 0) shark.hunger = MAX_HUNGER
-                shark.health = shark.maxHealth
-
-                if (target.mainHandItem.`is`(Items.SHIELD) && target.isBlocking) {
-                    shark.spawnAtLocation(ItemStack(HybridAquaticItems.SHARK_TOOTH.get()))
-                }
-            }
-        }
-
-        override fun getAttackReachSqr(entity: LivingEntity): Double {
-            return (shark.bbWidth * 2.5 + entity.bbWidth)
-        }
-
-        override fun start() {
-            super.start()
-            shark.isSprinting = true
-            shark.swinging = false
-            shark.swingTime = 0
-        }
-
-        override fun stop() {
-            val livingEntity = shark.target
-            if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingEntity)) {
-                shark.target = null
-            }
-
-            shark.isSprinting = false
-            shark.isAggressive = false
-            shark.navigation.stop()
-        }
-
-        override fun requiresUpdateEveryTick(): Boolean {
-            return true
-        }
-    }
-
     override fun doHurtTarget(target: Entity): Boolean {
         if (super.doHurtTarget(target)) {
             playSound(SoundEvents.FOX_BITE, 1.0F, 0.0F)
-
             return true
         } else {
             return false
