@@ -19,6 +19,9 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
 
 class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
@@ -56,6 +59,20 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         super.registerControllers(controllerRegistrar)
+
+        controllerRegistrar.add(
+            AnimationController(
+                this, "Charge", 8,
+                AnimationController.AnimationStateHandler { state: AnimationState<PiranhaEntity> ->
+                    if (this.isUnderWater && this.isSprinting) {
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.RUN)
+                    } else {
+                        PlayState.STOP
+                    }
+                }
+            )
+        )
+
         controllerRegistrar.add(
             DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE)
         )
