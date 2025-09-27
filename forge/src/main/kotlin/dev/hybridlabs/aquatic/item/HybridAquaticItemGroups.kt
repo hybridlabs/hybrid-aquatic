@@ -73,25 +73,25 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.LOPHELIA_CORAL_BLOCK.get())
                 entries.accept(HybridAquaticItems.THORN_CORAL_BLOCK.get())
 
-                entries.accept(HybridAquaticItems.BUTTON_CORAL.get())
-                entries.accept(HybridAquaticItems.SUN_CORAL.get())
-                entries.accept(HybridAquaticItems.LOPHELIA_CORAL.get())
-                entries.accept(HybridAquaticItems.THORN_CORAL.get())
-
-                entries.accept(HybridAquaticItems.BUTTON_CORAL_FAN.get())
-                entries.accept(HybridAquaticItems.SUN_CORAL_FAN.get())
-                entries.accept(HybridAquaticItems.LOPHELIA_CORAL_FAN.get())
-                entries.accept(HybridAquaticItems.THORN_CORAL_FAN.get())
-
                 entries.accept(HybridAquaticItems.DEAD_BUTTON_CORAL_BLOCK.get())
                 entries.accept(HybridAquaticItems.DEAD_SUN_CORAL_BLOCK.get())
                 entries.accept(HybridAquaticItems.DEAD_LOPHELIA_CORAL_BLOCK.get())
                 entries.accept(HybridAquaticItems.DEAD_THORN_CORAL_BLOCK.get())
 
+                entries.accept(HybridAquaticItems.BUTTON_CORAL.get())
+                entries.accept(HybridAquaticItems.SUN_CORAL.get())
+                entries.accept(HybridAquaticItems.LOPHELIA_CORAL.get())
+                entries.accept(HybridAquaticItems.THORN_CORAL.get())
+
                 entries.accept(HybridAquaticItems.DEAD_BUTTON_CORAL.get())
                 entries.accept(HybridAquaticItems.DEAD_SUN_CORAL.get())
                 entries.accept(HybridAquaticItems.DEAD_LOPHELIA_CORAL.get())
                 entries.accept(HybridAquaticItems.DEAD_THORN_CORAL.get())
+
+                entries.accept(HybridAquaticItems.BUTTON_CORAL_FAN.get())
+                entries.accept(HybridAquaticItems.SUN_CORAL_FAN.get())
+                entries.accept(HybridAquaticItems.LOPHELIA_CORAL_FAN.get())
+                entries.accept(HybridAquaticItems.THORN_CORAL_FAN.get())
 
                 entries.accept(HybridAquaticItems.DEAD_BUTTON_CORAL_FAN.get())
                 entries.accept(HybridAquaticItems.DEAD_SUN_CORAL_FAN.get())
