@@ -12,7 +12,6 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.NeutralMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
@@ -56,15 +55,14 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
+        super.registerControllers(controllerRegistrar)
         controllerRegistrar.add(
             DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE)
         )
-        super.registerControllers(controllerRegistrar)
     }
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, MeleeAttackGoal(this, 1.5, false))
         targetSelector.addGoal(1, HurtByTargetGoal(this).setAlertOthers())
         targetSelector.addGoal(1, ResetUniversalAngerTargetGoal(this, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
@@ -89,14 +87,6 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
             return true
         } else {
             return false
-        }
-    }
-
-    override fun tick() {
-        super.tick()
-
-        if (isSprinting) {
-            attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 1.5
         }
     }
 

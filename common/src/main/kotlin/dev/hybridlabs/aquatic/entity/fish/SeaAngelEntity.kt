@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -20,11 +19,6 @@ class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: Level) :
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
-    }
-
-    override fun registerGoals() {
-        super.registerGoals()
-        goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 12))
     }
 
     companion object {

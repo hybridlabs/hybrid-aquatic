@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -20,7 +19,6 @@ class FrilledSharkEntity(entityType: EntityType<out FrilledSharkEntity>, world: 
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))
-        goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 16))
     }
 
     companion object {

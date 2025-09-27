@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -22,11 +21,6 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
 
     override fun getMaxSpawnClusterSize(): Int {
         return 8
-    }
-
-    override fun registerGoals() {
-        super.registerGoals()
-        goalSelector.addGoal(1, StayNearSurfaceGoal(this, 1.0, 1, 8))
     }
 
     companion object {

@@ -12,8 +12,6 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.NeutralMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
-import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
@@ -55,8 +53,6 @@ class BarracudaEntity(entityType: EntityType<out BarracudaEntity>, world: Level)
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, MeleeAttackGoal(this, 1.5, false))
-        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.5, 16.0F))
         targetSelector.addGoal(1, HurtByTargetGoal(this).setAlertOthers())
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })

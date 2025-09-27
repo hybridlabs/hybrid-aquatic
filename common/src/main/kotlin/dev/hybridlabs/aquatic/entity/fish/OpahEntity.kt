@@ -1,7 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.PathfinderMob
@@ -30,11 +28,6 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(2, FollowTunaGoal(this, 1.5, 4.0F, 8.0F))
-        if (level().isDay) {
-            goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 12))
-        } else {
-            goalSelector.addGoal(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
-        }
     }
 
     companion object {

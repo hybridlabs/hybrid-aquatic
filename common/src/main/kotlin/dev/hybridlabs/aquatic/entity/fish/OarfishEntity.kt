@@ -1,7 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -26,15 +24,6 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
-    }
-
-    override fun registerGoals() {
-        super.registerGoals()
-        if (level().isDay) {
-            goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 16))
-        } else {
-            goalSelector.addGoal(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
-        }
     }
 
     companion object {

@@ -1,7 +1,5 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.ai.goal.StayDeepGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvent
@@ -48,15 +46,6 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
             val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
 
             return pos.y in spawnY && world.isWaterAt(pos)
-        }
-    }
-
-    override fun registerGoals() {
-        super.registerGoals()
-        if (level().isDay) {
-            goalSelector.addGoal(1, StayDeepGoal(this, 1.0, 1, 12))
-        } else {
-            goalSelector.addGoal(1, StayNearSurfaceGoal(this, 1.0, 1, 4))
         }
     }
 

@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.StayNearSurfaceGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -75,7 +74,6 @@ class MahiEntity(entityType: EntityType<out MahiEntity>, world: Level) :
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
-        goalSelector.addGoal(1, StayNearSurfaceGoal(this, 1.0, 1, 12))
     }
 
     companion object {

@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FishAttackGoal
-import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -17,6 +16,7 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
+import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
@@ -46,6 +46,7 @@ open class HybridAquaticFishEntity(
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.0, 12.0F))
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(0, FishAttackGoal(this, 1.0, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
@@ -111,13 +112,6 @@ open class HybridAquaticFishEntity(
         super.aiStep()
     }
 
-    override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
-        val attacker = source.directEntity
-        if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticCephalopodEntity) {
-            super.dropFromLootTable(source, causedByPlayer)
-        }
-    }
-
     private fun getMaxMoistness(): Int {
         return 600
     }
@@ -172,6 +166,50 @@ open class HybridAquaticFishEntity(
     }
 
     //#region end
+
+    override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
+        val attacker = source.directEntity
+        if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity) {
+            super.dropFromLootTable(source, causedByPlayer)
+        }
+    }
+
+    private fun getHandSwingDuration(): Int {
+        return 40
+    }
+
+    override fun updateSwingTime() {
+        val i = this.getHandSwingDuration()
+        if (this.swinging) {
+            ++this.swingTime
+            if (this.swingTime >= i) {
+                this.swingTime = 0
+                this.swinging = false
+            }
+        } else {
+            this.swingTime = 0
+        }
+
+        this.attackAnim = swingTime.toFloat() / i.toFloat()
+    }
+
+    override fun getAttackAnim(tickDelta: Float): Float {
+        var f = this.attackAnim - this.oAttackAnim
+        if (f < 0.0f) {
+            ++f
+        }
+
+        return this.oAttackAnim + f * tickDelta
+    }
+
+    override fun doHurtTarget(target: Entity): Boolean {
+        if (super.doHurtTarget(target)) {
+            playSound(SoundEvents.FOX_BITE, 1.0F, 1.0F)
+            return true
+        } else {
+            return false
+        }
+    }
 
     //#region Properties
 
