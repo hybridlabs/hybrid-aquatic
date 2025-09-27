@@ -93,6 +93,8 @@ open class HybridAquaticFishEntity(
                 this.yRot = 0.0f
             }
         }
+
+        if (hunger > 0) hunger -= 1
     }
 
     override fun aiStep() {
@@ -191,12 +193,6 @@ open class HybridAquaticFishEntity(
             entityData.set(HUNGER, hunger)
         }
 
-    private var attemptAttack: Boolean
-        get() = entityData.get(ATTEMPT_ATTACK)
-        set(attemptAttack) {
-            entityData.set(ATTEMPT_ATTACK, attemptAttack)
-        }
-
     // endregion
 
     override fun increaseAirSupply(air: Int): Int {
@@ -283,7 +279,7 @@ open class HybridAquaticFishEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return checkSurfaceWaterAnimalSpawnRules(type, world, reason, pos, random);
+            return checkSurfaceWaterAnimalSpawnRules(type, world, reason, pos, random)
         }
 
         fun canNightSpawn(
