@@ -33,12 +33,4 @@ class ThresherSharkEntity(entityType: EntityType<out ThresherSharkEntity>, world
                 .add(Attributes.FOLLOW_RANGE, 16.0)
         }
     }
-
-    override fun getMaxSize(): Int {
-        return 2
-    }
-
-    override fun getMinSize(): Int {
-        return -2
-    }
 }

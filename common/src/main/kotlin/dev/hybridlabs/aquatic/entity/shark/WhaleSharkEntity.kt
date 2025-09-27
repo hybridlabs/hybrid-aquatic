@@ -109,14 +109,6 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Leve
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun getMaxSize(): Int {
-        return 3
-    }
-
-    override fun getMinSize(): Int {
-        return -3
-    }
-
     private var overlayTexture
         get() = OverlayTextures.byId(entityData.get(OverlayTexture))
         set(value) {

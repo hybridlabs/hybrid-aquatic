@@ -31,12 +31,4 @@ class FrilledSharkEntity(entityType: EntityType<out FrilledSharkEntity>, world: 
                 .add(Attributes.FOLLOW_RANGE, 16.0)
         }
     }
-
-    override fun getMaxSize(): Int {
-        return 3
-    }
-
-    override fun getMinSize(): Int {
-        return -3
-    }
 }

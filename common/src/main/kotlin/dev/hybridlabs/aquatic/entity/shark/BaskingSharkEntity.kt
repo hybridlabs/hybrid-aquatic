@@ -55,12 +55,4 @@ class BaskingSharkEntity(entityType: EntityType<out BaskingSharkEntity>, world: 
         val MOUTH_OPEN: RawAnimation = RawAnimation.begin().thenPlay("misc.mouth_open")
         val MOUTH_CLOSED: RawAnimation = RawAnimation.begin().thenPlay("misc.mouth_closed")
     }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
-    }
 }

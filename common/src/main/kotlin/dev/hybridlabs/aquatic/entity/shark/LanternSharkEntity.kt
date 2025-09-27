@@ -23,12 +23,4 @@ class LanternSharkEntity(entityType: EntityType<out LanternSharkEntity>, world: 
                 .add(Attributes.FOLLOW_RANGE, 8.0)
         }
     }
-
-    override fun getMaxSize() : Int {
-        return 3
-    }
-
-    override fun getMinSize(): Int {
-        return -3
-    }
 }

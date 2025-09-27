@@ -98,19 +98,6 @@ open class HybridAquaticCephalopodEntity(
         return false
     }
 
-    override fun travel(travelVector: Vec3) {
-        if (this.isEffectiveAi && this.isInWater) {
-            this.moveRelative(0.01f, travelVector)
-            this.move(MoverType.SELF, this.deltaMovement)
-            this.deltaMovement = deltaMovement.scale(0.9)
-            if (this.target == null) {
-                this.deltaMovement = deltaMovement.add(0.0, -0.005, 0.0)
-            }
-        } else {
-            super.travel(travelVector)
-        }
-    }
-
     override fun tick() {
         super.tick()
 

@@ -33,12 +33,4 @@ class BullSharkEntity(entityType: EntityType<out BullSharkEntity>, world: Level)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
         }
     }
-
-    override fun getMaxSize(): Int {
-        return 2
-    }
-
-    override fun getMinSize(): Int {
-        return -2
-    }
 }

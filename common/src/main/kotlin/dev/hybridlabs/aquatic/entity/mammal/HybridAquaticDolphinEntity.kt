@@ -27,7 +27,6 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
-import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -270,19 +269,6 @@ open class HybridAquaticDolphinEntity(
 
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.DOLPHIN_SWIM
-    }
-
-    override fun travel(movementInput: Vec3) {
-        if (this.isEffectiveAi && this.wasTouchingWater) {
-            this.moveRelative(this.speed, movementInput)
-            this.move(MoverType.SELF, this.deltaMovement)
-            this.deltaMovement = deltaMovement.scale(0.9)
-            if (this.target == null) {
-                this.deltaMovement = deltaMovement.add(0.0, -0.005, 0.0)
-            }
-        } else {
-            super.travel(movementInput)
-        }
     }
 
     private fun getMaxMoistness(): Int {

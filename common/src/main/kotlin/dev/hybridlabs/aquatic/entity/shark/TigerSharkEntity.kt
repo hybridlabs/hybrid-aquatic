@@ -97,12 +97,4 @@ class TigerSharkEntity(entityType: EntityType<out TigerSharkEntity>, world: Leve
                 .add(Attributes.FOLLOW_RANGE, 16.0)
         }
     }
-
-    override fun getMaxSize(): Int {
-        return 2
-    }
-
-    override fun getMinSize(): Int {
-        return -2
-    }
 }

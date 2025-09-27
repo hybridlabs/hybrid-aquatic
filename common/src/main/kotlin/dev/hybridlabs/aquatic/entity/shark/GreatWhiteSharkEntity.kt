@@ -29,12 +29,4 @@ class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, w
                 .add(Attributes.FOLLOW_RANGE, 32.0)
         }
     }
-
-    override fun getMaxSize(): Int {
-        return 3
-    }
-
-    override fun getMinSize(): Int {
-        return -3
-    }
 }

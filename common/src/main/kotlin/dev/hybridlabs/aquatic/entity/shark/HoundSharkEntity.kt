@@ -55,14 +55,6 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Leve
         val TYPE: EntityDataAccessor<Int> = SynchedEntityData.defineId(HoundSharkEntity::class.java, EntityDataSerializers.INT)
     }
 
-    override fun getMaxSize(): Int {
-        return 3
-    }
-
-    override fun getMinSize(): Int {
-        return -3
-    }
-
     override fun defineSynchedData() {
         entityData.define(TYPE, 0)
         super.defineSynchedData()
