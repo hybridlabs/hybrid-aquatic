@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.entity.ai.goal.SharkJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -16,7 +16,7 @@ class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, w
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))
         goalSelector.addGoal(8, FollowBoatGoal(this))
-        goalSelector.addGoal(5, SharkJumpGoal(this, 10))
+        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
     }
 
     companion object {

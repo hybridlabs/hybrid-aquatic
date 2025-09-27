@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.FishJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -27,7 +27,7 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
 
     override fun registerGoals() {
         super.registerGoals()
-        targetSelector.addGoal(5, FishJumpGoal(this, 10))
+        targetSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
     }
 
     override fun tick() {

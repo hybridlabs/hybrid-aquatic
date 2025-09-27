@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.goal.FishAttackGoal
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.core.BlockPos
@@ -16,7 +17,7 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
@@ -45,11 +46,8 @@ open class HybridAquaticFishEntity(
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(0, TryFindWaterGoal(this))
-        goalSelector.addGoal(0, PanicGoal(this, 1.25))
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 10))
-        goalSelector.addGoal(1, RandomLookAroundGoal(this))
-        goalSelector.addGoal(1, FishAttackGoal(this))
+        goalSelector.addGoal(0, FishAttackGoal(this, 1.0, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
     }
 
@@ -134,7 +132,7 @@ open class HybridAquaticFishEntity(
         nbt.putBoolean("FromFishingNet", fromFishingNet)
     }
 
-    private var fromFishingNet = false
+    var fromFishingNet = false
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         super.readAdditionalSaveData(nbt)
@@ -187,7 +185,7 @@ open class HybridAquaticFishEntity(
             entityData.set(FISH_SIZE, size)
         }
 
-    private var hunger: Int
+    var hunger: Int
         get() = entityData.get(HUNGER)
         set(hunger) {
             entityData.set(HUNGER, hunger)
@@ -245,25 +243,6 @@ open class HybridAquaticFishEntity(
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
     }
-
-    internal class FishAttackGoal(private val fish: HybridAquaticFishEntity) : MeleeAttackGoal(fish, 1.0, true) {
-        override fun canUse(): Boolean {
-            return !fish.fromFishingNet && super.canUse()
-        }
-
-        override fun checkAndPerformAttack(target: LivingEntity, squaredDistance: Double) {
-            val d = getAttackReachSqr(target)
-            if (squaredDistance <= d && this.isTimeToAttack)
-                resetAttackCooldown()
-                mob.doHurtTarget(target)
-                fish.isSprinting = true
-                fish.attemptAttack = true
-
-                if (target.health <= 0)
-                    fish.hunger = MAX_HUNGER
-                fish.health = fish.maxHealth
-            }
-        }
 
     companion object {
         val MOISTNESS: EntityDataAccessor<Int> =

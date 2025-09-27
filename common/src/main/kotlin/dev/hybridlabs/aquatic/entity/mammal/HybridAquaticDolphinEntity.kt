@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
-import dev.hybridlabs.aquatic.entity.ai.goal.HADolphinJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
@@ -139,7 +139,7 @@ open class HybridAquaticDolphinEntity(
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, LookAtPlayerGoal(this, Player::class.java, 6.0f))
-        goalSelector.addGoal(5, HADolphinJumpGoal(this, 10))
+        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
         goalSelector.addGoal(6, MeleeAttackGoal(this, 1.2000000476837158, true))
         goalSelector.addGoal(8, FollowBoatGoal(this))
     }

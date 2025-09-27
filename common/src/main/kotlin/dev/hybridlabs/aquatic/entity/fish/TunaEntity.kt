@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.FishJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -58,7 +58,7 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, FishJumpGoal(this, 10))
+        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
     }
 
     override fun getDefaultLootTable(): ResourceLocation {
