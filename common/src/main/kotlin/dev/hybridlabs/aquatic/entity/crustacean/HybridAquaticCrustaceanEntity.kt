@@ -252,7 +252,7 @@ open class HybridAquaticCrustaceanEntity(
         controllerRegistrar.add(
             AnimationController(this, "Dance", 5,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
-                    if (this.canDance && isSongPlaying() && !state.isMoving) {
+                    if (this.canDance && isSongPlaying()) {
                         return@AnimationStateHandler state.setAndContinue(DANCE)
                     } else {
                         PlayState.STOP
