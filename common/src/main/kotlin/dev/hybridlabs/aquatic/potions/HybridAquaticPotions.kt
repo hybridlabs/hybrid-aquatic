@@ -67,10 +67,10 @@ object HybridAquaticPotions {
         Potion(MobEffectInstance(HybridAquaticMobEffects.BUOYANCY.get(), 200, 0))
     }
 
-    val SPININESS_POTION = register(
-        "spininess"
+    val THORNS_POTION = register(
+        "thorns"
     ) {
-        Potion(MobEffectInstance(HybridAquaticMobEffects.SPININESS.get(), 300, 0))
+        Potion(MobEffectInstance(HybridAquaticMobEffects.THORNS.get(), 300, 0))
     }
 
     val CORROSION_POTION = register(
@@ -97,7 +97,7 @@ object HybridAquaticPotions {
             Potions.AWKWARD, HybridAquaticItems.SULFUR.get(), HybridAquaticPotions.CORROSION_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.SEA_URCHIN_SPINE.get(), HybridAquaticPotions.SPININESS_POTION.get()
+            Potions.AWKWARD, HybridAquaticItems.SEA_URCHIN_SPINE.get(), HybridAquaticPotions.THORNS_POTION.get()
         )
         PotionBrewing.addMix(
             Potions.AWKWARD, Items.KELP, HybridAquaticPotions.BUOYANCY_POTION.get()

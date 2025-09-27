@@ -10,7 +10,7 @@ object HybridAquaticMobEffects {
     val CLARITY = register("clarity") { ClarityMobEffect() }
     val THALASSOPHOBIA = register("thalassophobia") { ThalassophobiaMobEffect() }
     val BUOYANCY = register("buoyancy") { BuoyancyMobEffect() }
-    val SPININESS = register("spininess") { SpininessMobEffect() }
+    val THORNS = register("thorns") { ThornsMobEffect() }
     val CORROSION = register("corrosion") { CorrosionMobEffect() }
 
     private fun register(id: String, effect: Supplier<MobEffect>): RegistryObject<MobEffect> {

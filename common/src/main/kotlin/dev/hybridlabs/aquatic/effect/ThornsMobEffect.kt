@@ -7,7 +7,7 @@ import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectCategory
 import net.minecraft.world.entity.LivingEntity
 
-class SpininessMobEffect : MobEffect(MobEffectCategory.BENEFICIAL, 0x695672) {
+class ThornsMobEffect : MobEffect(MobEffectCategory.BENEFICIAL, 0x695672) {
 
     override fun isDurationEffectTick(duration: Int, amplifier: Int): Boolean {
         return true

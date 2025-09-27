@@ -357,7 +357,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticMobEffects.CORROSION.get() to "Corrosion",
             HybridAquaticMobEffects.THALASSOPHOBIA.get() to "Thalassophobia",
             HybridAquaticMobEffects.BUOYANCY.get() to "Buoyancy",
-            HybridAquaticMobEffects.SPININESS.get() to "Spininess",
+            HybridAquaticMobEffects.THORNS.get() to "Thorns",
         ).forEach { (effect, translation) ->
             val identifier = BuiltInRegistries.MOB_EFFECT.getKey(effect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
@@ -402,7 +402,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "bleeding" to "Bleeding",
             "swimming" to "Swimming",
             "buoyancy" to "Buoyancy",
-            "spininess" to "Spininess",
+            "thorns" to "Thorns",
             "minor_luck" to "Minor Luck",
             "major_luck" to "Major Luck",
             "blindness" to "Blindness",
