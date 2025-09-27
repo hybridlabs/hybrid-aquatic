@@ -9,18 +9,19 @@ class CorrosionMobEffect : MobEffect(MobEffectCategory.HARMFUL, 0x9d9136) {
 
     override fun applyEffectTick(entity: LivingEntity, amplifier: Int) {
         if (entity.level().isClientSide) return
-        corrodeTool(entity)
-        corrodeArmor(entity)
+        val damage = amplifier + 1
+        corrodeTool(entity, damage)
+        corrodeArmor(entity, damage)
     }
 
     override fun isDurationEffectTick(duration: Int, amplifier: Int): Boolean {
         return duration % 20 == 0
     }
 
-    private fun corrodeTool(entity: LivingEntity) {
+    private fun corrodeTool(entity: LivingEntity, damage: Int) {
         val mainHandStack = entity.mainHandItem
         if (mainHandStack.isDamageableItem) {
-            mainHandStack.hurtAndBreak(1, entity) { it.broadcastBreakEvent(entity.usedItemHand) }
+            mainHandStack.hurtAndBreak(damage, entity) { it.broadcastBreakEvent(entity.usedItemHand) }
         }
 
         val offHandStack = entity.offhandItem
@@ -29,11 +30,11 @@ class CorrosionMobEffect : MobEffect(MobEffectCategory.HARMFUL, 0x9d9136) {
         }
     }
 
-    private fun corrodeArmor(entity: LivingEntity) {
+    private fun corrodeArmor(entity: LivingEntity, damage: Int) {
         for (slot in EquipmentSlot.entries) {
             val armorStack = entity.getItemBySlot(slot)
             if (armorStack.isDamageableItem) {
-                armorStack.hurtAndBreak(1, entity) { it.broadcastBreakEvent(slot) }
+                armorStack.hurtAndBreak(damage, entity) { it.broadcastBreakEvent(slot) }
             }
         }
     }
