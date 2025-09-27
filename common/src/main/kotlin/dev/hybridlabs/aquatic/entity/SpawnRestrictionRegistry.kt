@@ -59,6 +59,7 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.WRASSE.get(),
             HybridAquaticEntityTypes.NEEDLEFISH.get(),
             HybridAquaticEntityTypes.MACKEREL.get(),
+            HybridAquaticEntityTypes.HERRING.get(),
             HybridAquaticEntityTypes.STINGRAY.get(),
             HybridAquaticEntityTypes.MANTA_RAY.get(),
             HybridAquaticEntityTypes.PEARLFISH.get(),

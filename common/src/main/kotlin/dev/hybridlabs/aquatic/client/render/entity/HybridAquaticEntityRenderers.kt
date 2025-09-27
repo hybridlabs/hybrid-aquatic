@@ -201,6 +201,12 @@ object HybridAquaticEntityRenderers {
             ::MackerelEntityRenderer
         )
 
+    val HERRING =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.HERRING,
+            ::HerringEntityRenderer
+        )
+
     val RATFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.RATFISH, ::RatfishEntityRenderer

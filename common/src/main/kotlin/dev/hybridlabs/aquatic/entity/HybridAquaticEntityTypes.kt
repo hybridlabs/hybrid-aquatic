@@ -223,6 +223,13 @@ object HybridAquaticEntityTypes {
         MackerelEntity::createMobAttributes
     )
 
+    val HERRING = registerFish(
+        "herring",
+        ::HerringEntity,
+        EntityDimensions.fixed(0.4f, 0.25f),
+        HerringEntity::createMobAttributes
+    )
+
     val OSCAR = registerFish(
         "oscar",
         ::OscarEntity,
