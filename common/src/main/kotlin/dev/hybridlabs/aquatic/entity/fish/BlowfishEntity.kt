@@ -159,9 +159,9 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
 
     override fun getDimensions(pose: Pose): EntityDimensions {
         val scale = when (getPuffState()) {
-            NOT_PUFFED -> 0.5f
-            SEMI_PUFFED -> 0.7f
-            FULLY_PUFFED -> 5.0f
+            NOT_PUFFED -> 0.75f
+            SEMI_PUFFED -> 1.0f
+            FULLY_PUFFED -> 1.25f
             else -> 1.0f
         }
         return super.getDimensions(pose).scale(scale)
