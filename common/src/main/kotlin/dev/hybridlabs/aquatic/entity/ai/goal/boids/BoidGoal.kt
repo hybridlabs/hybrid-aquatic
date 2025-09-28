@@ -24,10 +24,6 @@ class BoidGoal(
     }
 
     override fun tick() {
-        if (!enabled) {
-            return
-        }
-
         if (--this.timeToFindNearbyEntities <= 0) {
             this.timeToFindNearbyEntities = this.adjustedTickDelay(40)
             nearbyMobs = getNearbyEntitiesOfSameClass(mob)
@@ -37,9 +33,15 @@ class BoidGoal(
 
         if (nearbyMobs!!.isEmpty()) {
             enabled = false
+            return
         }
 
-        mob.addDeltaMovement(random())
+        if (mob.level().gameTime % 4 == 0L) {
+            mob.addDeltaMovement(random())
+        } else {
+            mob.addDeltaMovement(mob.deltaMovement.normalize().scale(0.07))
+        }
+
         mob.addDeltaMovement(cohesion())
         mob.addDeltaMovement(alignment())
         mob.addDeltaMovement(separation())
@@ -47,14 +49,10 @@ class BoidGoal(
 
     fun random(): Vec3 {
         val velocity = mob.deltaMovement
-
-        if (velocity.lengthSqr() < 0.3)
-            return Vec3(
-                randomSign() * 0.025,
-                0.0,
-                randomSign() * 0.025
-            )
-
+        if (velocity.length() < 1.2) {
+            val pitch = (mob.random.nextGaussian() * 180) - 90
+            return Vec3.directionFromRotation(pitch.toFloat(), 0f).scale(0.1)
+        }
         return Vec3.ZERO
     }
 
