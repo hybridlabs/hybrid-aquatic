@@ -11,9 +11,9 @@ import software.bernie.geckolib.core.animation.AnimationState
 class HerringEntityModel : HybridAquaticFishEntityModel<HerringEntity>("herring") {
 
     override fun getModelResource(animatable: HerringEntity): ResourceLocation {
-        val herrings = animatable.getFishCount()
+        val fish = animatable.getFishCount()
 
-        val texturePath = when (herrings) {
+        val texturePath = when (fish) {
             1 -> "geo/fish/herring/herring.geo.json"
             2 -> "geo/fish/herring/herring_two.geo.json"
             3 -> "geo/fish/herring/herring_three.geo.json"
@@ -23,9 +23,9 @@ class HerringEntityModel : HybridAquaticFishEntityModel<HerringEntity>("herring"
     }
 
     override fun getAnimationResource(animatable: HerringEntity): ResourceLocation {
-        val herrings = animatable.getFishCount()
+        val fish = animatable.getFishCount()
 
-        val texturePath = when (herrings) {
+        val texturePath = when (fish) {
             1 -> "animations/herring.animation.json"
             2 -> "animations/herring_two.animation.json"
             3 -> "animations/herring_three.animation.json"
