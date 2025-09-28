@@ -1,0 +1,15 @@
+{
+  "bounding_box_type": "full",
+  "id": "ocean_ruin_warm",
+  "spawns": {
+    "SHARK": [
+      {
+        "type": "hybrid-aquatic:tiger_shark",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 1
+      }
+    ]
+  },
+  "structure": "minecraft:ocean_ruin_warm"
+}
