@@ -156,14 +156,14 @@ object HybridAquaticEntityTypes {
     val FLASHLIGHT_FISH = registerFish(
         "flashlight_fish",
         ::FlashlightFishEntity,
-        EntityDimensions.scalable(0.3f, 0.3f),
+        EntityDimensions.scalable(0.25f, 0.25f),
         FlashlightFishEntity::createMobAttributes
     )
 
     val SQUIRRELFISH = registerFish(
         "squirrelfish",
         ::SquirrelfishEntity,
-        EntityDimensions.fixed(0.2f, 0.25f),
+        EntityDimensions.scalable(0.25f, 0.25f),
         SquirrelfishEntity::createMobAttributes
     )
 
@@ -219,14 +219,14 @@ object HybridAquaticEntityTypes {
     val MACKEREL = registerFish(
         "mackerel",
         ::MackerelEntity,
-        EntityDimensions.scalable(0.3f, 0.3f),
+        EntityDimensions.scalable(0.25f, 0.25f),
         MackerelEntity::createMobAttributes
     )
 
     val HERRING = registerFish(
         "herring",
         ::HerringEntity,
-        EntityDimensions.scalable(0.3f, 0.3f),
+        EntityDimensions.scalable(0.25f, 0.25f),
         HerringEntity::createMobAttributes
     )
 
