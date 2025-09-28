@@ -3,6 +3,8 @@ package datagen
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.config.ConfigHelper.initializeConfig
+import dev.hybridlabs.aquatic.world.gen.structure.BuiltinSpawnModifiers
+import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
@@ -47,6 +49,20 @@ object DataGenerators {
                 )
             }
         }
+
+        builder.add(ForgeRegistries.Keys.STRUCTURE_MODIFIERS) { context ->
+            BuiltinSpawnModifiers.forEach {
+                val key = ResourceKey.create(
+                    ForgeRegistries.Keys.STRUCTURE_MODIFIERS,
+                    CommonClass.locate(it.id)
+                )
+                context.register(
+                    key,
+                    StructureSpawnModifier(it)
+                )
+            }
+        }
+
 
         generator.addProvider(
             event.includeServer(), DatapackBuiltinEntriesProvider(

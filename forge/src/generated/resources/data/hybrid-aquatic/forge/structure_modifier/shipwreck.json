@@ -1,0 +1,18 @@
+{
+  "type": "hybrid-aquatic:ha_structure_spawns",
+  "modifier": {
+    "bounding_box_type": "full",
+    "id": "shipwreck",
+    "spawns": {
+      "SHARK": [
+        {
+          "type": "hybrid-aquatic:hound_shark",
+          "maxCount": 4,
+          "minCount": 1,
+          "weight": 1
+        }
+      ]
+    },
+    "structure": "minecraft:shipwreck"
+  }
+}

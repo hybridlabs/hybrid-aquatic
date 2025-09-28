@@ -16,13 +16,13 @@ import dev.hybridlabs.aquatic.data.server.tag.BiomeTagProvider
 import dev.hybridlabs.aquatic.data.server.tag.BlockTagProvider
 import dev.hybridlabs.aquatic.data.server.tag.EntityTypeTagProvider
 import dev.hybridlabs.aquatic.data.server.tag.ItemTagProvider
+import dev.hybridlabs.aquatic.data.structure_spawn_modifier.StructureSpawnModifierProvider
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.core.Registry
 import net.minecraft.core.RegistrySetBuilder
-import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 
 object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
@@ -43,11 +43,13 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::PlacedFeatureProvider)
         pack.addProvider(::RecipeProvider)
         pack.addProvider(::SeaMessageProvider)
+        pack.addProvider(::StructureSpawnModifierProvider)
     }
 
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
         registryBuilder.add(HybridAquaticRegistryKeys.SEA_MESSAGE) {}
-        registryBuilder.add(Registries.CONFIGURED_FEATURE){
+        registryBuilder.add(HybridAquaticRegistryKeys.STRUCTURE_SPAWN_MODIFIER) {}
+        registryBuilder.add(Registries.CONFIGURED_FEATURE) {
             HybridAquaticConfiguredFeatures
         }
     }
