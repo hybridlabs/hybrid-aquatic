@@ -11,7 +11,7 @@ import software.bernie.geckolib.core.animation.AnimationState
 class MackerelEntityModel : HybridAquaticFishEntityModel<MackerelEntity>("mackerel") {
 
     override fun getModelResource(animatable: MackerelEntity): ResourceLocation {
-        val mackerels = animatable.getMackerels()
+        val mackerels = animatable.getFishCount()
 
         val texturePath = when (mackerels) {
             1 -> "geo/fish/mackerel/mackerel.geo.json"
@@ -23,7 +23,7 @@ class MackerelEntityModel : HybridAquaticFishEntityModel<MackerelEntity>("macker
     }
 
     override fun getAnimationResource(animatable: MackerelEntity): ResourceLocation {
-        val mackerels = animatable.getMackerels()
+        val mackerels = animatable.getFishCount()
 
         val texturePath = when (mackerels) {
             1 -> "animations/mackerel.animation.json"

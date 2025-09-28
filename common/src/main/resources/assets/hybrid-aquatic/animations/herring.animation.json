@@ -156,7 +156,7 @@
 				"tail": {
 					"rotation": {
 						"0.0": {
-							"post": [0, -10, 0],
+							"post": [0, -12.5, 0],
 							"lerp_mode": "catmullrom"
 						},
 						"0.1667": {
@@ -168,7 +168,7 @@
 							"lerp_mode": "catmullrom"
 						},
 						"0.5": {
-							"post": [0, -10, 0],
+							"post": [0, -12.5, 0],
 							"lerp_mode": "catmullrom"
 						}
 					}
@@ -176,7 +176,7 @@
 				"tail_fin": {
 					"rotation": {
 						"0.0": {
-							"post": [0, 5, 0],
+							"post": [0, -17.5, 0],
 							"lerp_mode": "catmullrom"
 						},
 						"0.1667": {
@@ -188,12 +188,13 @@
 							"lerp_mode": "catmullrom"
 						},
 						"0.5": {
-							"post": [0, 5, 0],
+							"post": [0, -17.5, 0],
 							"lerp_mode": "catmullrom"
 						}
 					}
 				}
 			}
 		}
-	}
+	},
+	"geckolib_format_version": 2
 }

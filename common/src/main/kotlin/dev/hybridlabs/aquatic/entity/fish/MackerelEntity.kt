@@ -33,33 +33,33 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
 
     override fun defineSynchedData() {
         super.defineSynchedData()
-        entityData.define(MACKERELS, ONE_MACKEREL)
+        entityData.define(FISHCOUNT, ONE_FISH)
     }
 
     override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
         super.onSyncedDataUpdated(key)
-        if (key == MACKERELS) {
+        if (key == FISHCOUNT) {
             refreshDimensions()
         }
     }
 
-    fun getMackerels(): Int {
-        return entityData.get(MACKERELS)
+    fun getFishCount(): Int {
+        return entityData.get(FISHCOUNT)
     }
 
-    private fun setMackerels(state: Int) {
-        entityData.set(MACKERELS, state)
+    private fun setFishCount(state: Int) {
+        entityData.set(FISHCOUNT, state)
         refreshDimensions()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         super.addAdditionalSaveData(nbt)
-        nbt.putInt("Mackerels", getMackerels())
+        nbt.putInt("FishCount", getFishCount())
     }
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         super.readAdditionalSaveData(nbt)
-        setMackerels(nbt.getInt("Mackerels").coerceAtMost(THREE_MACKERELS))
+        setFishCount(nbt.getInt("FishCount").coerceAtMost(THREE_FISH))
     }
 
     override fun tick() {
@@ -67,9 +67,9 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
 
         if (!level().isClientSide) {
             when (health.toInt()) {
-                3 -> setMackerels(THREE_MACKERELS)
-                2 -> setMackerels(TWO_MACKERELS)
-                1 -> setMackerels(ONE_MACKEREL)
+                3 -> setFishCount(THREE_FISH)
+                2 -> setFishCount(TWO_FISH)
+                1 -> setFishCount(ONE_FISH)
             }
         }
     }
@@ -85,19 +85,19 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
         this.health = startingHealth.toFloat()
 
         when (startingHealth) {
-            3 -> setMackerels(THREE_MACKERELS)
-            2 -> setMackerels(TWO_MACKERELS)
-            1 -> setMackerels(ONE_MACKEREL)
+            3 -> setFishCount(THREE_FISH)
+            2 -> setFishCount(TWO_FISH)
+            1 -> setFishCount(ONE_FISH)
         }
 
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun getDimensions(pose: Pose): EntityDimensions {
-        val scale = when (getMackerels()) {
-            ONE_MACKEREL -> 1.0f
-            TWO_MACKERELS -> 2.0f
-            THREE_MACKERELS -> 3.0f
+        val scale = when (getFishCount()) {
+            ONE_FISH -> 1.0f
+            TWO_FISH -> 2.0f
+            THREE_FISH -> 3.0f
             else -> 1.0f
         }
 
@@ -122,12 +122,12 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
     }
 
     companion object {
-        private val MACKERELS: EntityDataAccessor<Int> =
+        private val FISHCOUNT: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(MackerelEntity::class.java, EntityDataSerializers.INT)
 
-        const val ONE_MACKEREL = 1
-        const val TWO_MACKERELS = 2
-        const val THREE_MACKERELS = 3
+        const val ONE_FISH = 1
+        const val TWO_FISH = 2
+        const val THREE_FISH = 3
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
