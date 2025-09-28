@@ -37,7 +37,7 @@ object HybridAquaticEntityTypes {
     val DAMSELFISH = registerFish(
         "damselfish",
         ::DamselfishEntity,
-        EntityDimensions.fixed(0.25f, 0.25f),
+        EntityDimensions.scalable(0.25f, 0.25f),
         DamselfishEntity::createMobAttributes
     )
 
