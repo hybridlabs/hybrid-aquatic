@@ -23,7 +23,7 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Level) :
     HybridAquaticSharkEntity(
-        entityType, world, listOf(HybridAquaticEntityTags.CEPHALOPOD, HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN), false, false
+        entityType, world, listOf(HybridAquaticEntityTags.SHARK, HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN), false, false
     ),
     VariantHolder<HoundSharkEntity.Type> {
 

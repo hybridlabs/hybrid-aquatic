@@ -26,9 +26,11 @@ import dev.hybridlabs.aquatic.world.gen.feature.FeatureBiomeModifications
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
+import dev.hybridlabs.aquatic.world.gen.structure.SpawnModifiers
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.SERVER_STARTING
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
@@ -85,6 +87,8 @@ object HybridAquatic : ModInitializer {
 
         val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
         registerBiomeModifications(configHandler.config)
+
+        SERVER_STARTING.register { server -> SpawnModifiers.register(server, structureModifiers) }
     }
 
     private fun registerDynamicRegistries() {

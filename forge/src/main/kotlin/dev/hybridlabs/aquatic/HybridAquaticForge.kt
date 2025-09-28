@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic
 
+import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
@@ -35,14 +36,18 @@ import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
+import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import net.minecraft.world.entity.MobCategory
 import net.minecraftforge.client.event.EntityRenderersEvent
+import net.minecraftforge.common.world.StructureModifier
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.minecraftforge.registries.DataPackRegistryEvent
+import net.minecraftforge.registries.DeferredRegister
+import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
@@ -57,6 +62,7 @@ object HybridAquaticForge {
         CommonClass.init()
 
         createSpawnGroups()
+        registerStructureModifiers()
 
         HybridAquaticBlocks
         HybridAquaticWoodBlocks
@@ -81,7 +87,6 @@ object HybridAquaticForge {
         HybridAquaticNetworking.registerPackets()
         HybridAquaticLootPoolEntryTypes
         LootTableModifications
-
 
         MOD_BUS.addListener(::loadSeaMessages)
         MOD_BUS.addListener(::registerPotionsRecipes)
@@ -217,5 +222,15 @@ object HybridAquaticForge {
         event.enqueueWork {
             HybridAquaticPotions.registerPotionRecipes()
         }
+    }
+
+    private fun registerStructureModifiers() {
+        val structureModifiers: DeferredRegister<Codec<out StructureModifier?>?> =
+            DeferredRegister.create(ForgeRegistries.Keys.STRUCTURE_MODIFIER_SERIALIZERS, Constants.MOD_ID)
+        structureModifiers.register(MOD_BUS)
+        structureModifiers.register<Codec<out StructureModifier?>?>(
+            "ha_structure_spawns",
+            StructureSpawnModifier::makeCodec
+        )
     }
 }
