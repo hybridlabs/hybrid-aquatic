@@ -16,5 +16,25 @@ val structureModifiers = mapOf(
                         MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.HOUND_SHARK.get(), 1, 1, 4)
                     )
                 )
+            },
+
+    BuiltinStructures.RUINED_PORTAL_OCEAN to
+            Supplier {
+                SpawnModifier(
+                    Services.PLATFORM.getMobCategoryByName("SHARK"),
+                    listOf(
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(), 1, 1, 4)
+                    )
+                )
+            },
+
+    BuiltinStructures.OCEAN_RUIN_WARM to
+            Supplier {
+                SpawnModifier(
+                    Services.PLATFORM.getMobCategoryByName("SHARK"),
+                    listOf(
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.TIGER_SHARK.get(), 1, 1, 4)
+                    )
+                )
             }
 )
