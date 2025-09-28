@@ -20,7 +20,7 @@ class HerringEntity(entityType: EntityType<out HerringEntity>, world: Level) :
     ) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 8
+        return 12
     }
 
     companion object {

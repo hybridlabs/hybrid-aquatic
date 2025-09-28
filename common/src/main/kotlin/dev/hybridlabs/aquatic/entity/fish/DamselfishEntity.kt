@@ -20,7 +20,7 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
     ) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 3
+        return 8
     }
 
     companion object {
