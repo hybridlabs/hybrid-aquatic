@@ -1,17 +1,23 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.RandomSource
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
+@Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, world: Level) :
     HybridAquaticSchoolingFishEntity(
         entityType, world,
@@ -25,10 +31,6 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
 
     var isLightOn: Boolean = true
 
-    override fun tick() {
-        super.tick()
-        checkNearbyEntities()
-    }
 
     private fun checkNearbyEntities() {
         val detectionRadius = 4.0
@@ -42,6 +44,98 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
         return 4
     }
 
+    override fun defineSynchedData() {
+        super.defineSynchedData()
+        entityData.define(FISHCOUNT, ONE_FISH)
+    }
+
+    override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
+        super.onSyncedDataUpdated(key)
+        if (key == FISHCOUNT) {
+            refreshDimensions()
+        }
+    }
+
+    fun getFishCount(): Int {
+        return entityData.get(FISHCOUNT)
+    }
+
+    private fun setFishCount(state: Int) {
+        entityData.set(FISHCOUNT, state)
+        refreshDimensions()
+    }
+
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        super.addAdditionalSaveData(nbt)
+        nbt.putInt("FishCount", getFishCount())
+    }
+
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
+        super.readAdditionalSaveData(nbt)
+        setFishCount(nbt.getInt("FishCount").coerceAtMost(THREE_FISH))
+    }
+
+    override fun tick() {
+        super.tick()
+
+        if (!level().isClientSide) {
+            when (health.toInt()) {
+                3 -> setFishCount(THREE_FISH)
+                2 -> setFishCount(TWO_FISH)
+                1 -> setFishCount(ONE_FISH)
+            }
+        }
+        
+        checkNearbyEntities()
+    }
+
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?,
+    ): SpawnGroupData? {
+        val startingHealth = this.random.nextIntBetweenInclusive(1, 3)
+        this.health = startingHealth.toFloat()
+
+        when (startingHealth) {
+            3 -> setFishCount(THREE_FISH)
+            2 -> setFishCount(TWO_FISH)
+            1 -> setFishCount(ONE_FISH)
+        }
+
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun getDimensions(pose: Pose): EntityDimensions {
+        val scale = when (getFishCount()) {
+            ONE_FISH -> 1.0f
+            TWO_FISH -> 2.0f
+            THREE_FISH -> 3.0f
+            else -> 1.0f
+        }
+
+        return super.getDimensions(pose).scale(scale)
+    }
+
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
+        return dimensions.height * 0.5f
+    }
+
+    override fun hurt(source: DamageSource, amount: Float): Boolean {
+        val oldHealth = this.health.toInt()
+        val result = super.hurt(source, amount)
+        val newHealth = this.health.toInt()
+
+        if (result && !level().isClientSide) {
+            if (oldHealth - newHealth == 1 && newHealth > 0) {
+                spawnAtLocation(HybridAquaticItems.FLASHLIGHT_FISH.get())
+            }
+        }
+        return result
+    }
+
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
@@ -51,6 +145,13 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)
         }
+        
+        private val FISHCOUNT: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(FlashlightFishEntity::class.java, EntityDataSerializers.INT)
+
+        const val ONE_FISH = 1
+        const val TWO_FISH = 2
+        const val THREE_FISH = 3
 
         fun canSpawn(
             type: EntityType<out FlashlightFishEntity>,
@@ -59,7 +160,7 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val nightSpawn = (world.seaLevel - 16)..(world.seaLevel - 1)
+            val nightSpawn = (world.seaLevel - 16)..< world.seaLevel
             val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 24)
 
             val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
