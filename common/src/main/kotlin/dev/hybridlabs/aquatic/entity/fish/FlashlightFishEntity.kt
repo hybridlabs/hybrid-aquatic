@@ -123,6 +123,20 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
         return dimensions.height * 0.5f
     }
 
+    override fun canCollideWith(entity: Entity): Boolean {
+        if (entity is FlashlightFishEntity) {
+            return false
+        }
+        return super.canCollideWith(entity)
+    }
+
+    override fun doPush(entity: Entity) {
+        if (entity is FlashlightFishEntity) {
+            return
+        }
+        super.doPush(entity)
+    }
+
     override fun hurt(source: DamageSource, amount: Float): Boolean {
         val oldHealth = this.health.toInt()
         val result = super.hurt(source, amount)

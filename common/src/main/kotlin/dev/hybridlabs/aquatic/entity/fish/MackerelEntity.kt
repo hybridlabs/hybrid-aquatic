@@ -96,8 +96,8 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
     override fun getDimensions(pose: Pose): EntityDimensions {
         val scale = when (getFishCount()) {
             ONE_FISH -> 1.0f
-            TWO_FISH -> 2.0f
-            THREE_FISH -> 3.0f
+            TWO_FISH -> 1.5f
+            THREE_FISH -> 2.5f
             else -> 1.0f
         }
 
@@ -106,6 +106,20 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.5f
+    }
+
+    override fun canCollideWith(entity: Entity): Boolean {
+        if (entity is MackerelEntity) {
+            return false
+        }
+        return super.canCollideWith(entity)
+    }
+
+    override fun doPush(entity: Entity) {
+        if (entity is MackerelEntity) {
+            return
+        }
+        super.doPush(entity)
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
