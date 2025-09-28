@@ -46,12 +46,20 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
         entityData.define(PUFF_STATE, NOT_PUFFED)
     }
 
+    override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
+        super.onSyncedDataUpdated(key)
+        if (key == PUFF_STATE) {
+            refreshDimensions()
+        }
+    }
+
     fun getPuffState(): Int {
         return entityData.get(PUFF_STATE)
     }
 
     private fun setPuffState(state: Int) {
         entityData.set(PUFF_STATE, state)
+        refreshDimensions()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
@@ -153,7 +161,7 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
         val scale = when (getPuffState()) {
             NOT_PUFFED -> 0.5f
             SEMI_PUFFED -> 0.7f
-            FULLY_PUFFED -> 1.0f
+            FULLY_PUFFED -> 5.0f
             else -> 1.0f
         }
         return super.getDimensions(pose).scale(scale)
