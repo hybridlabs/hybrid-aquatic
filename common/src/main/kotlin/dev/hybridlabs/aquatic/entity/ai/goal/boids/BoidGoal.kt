@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.ai.goal.boids
 
-import net.minecraft.util.Mth
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.ai.goal.Goal
@@ -49,11 +48,12 @@ class BoidGoal(
     fun random(): Vec3 {
         val velocity = mob.deltaMovement
 
-        if (Mth.abs(velocity.x.toFloat()) < 0.1 && Mth.abs(velocity.z.toFloat()) < 0.1) return Vec3(
-            randomSign() * 0.2,
-            0.0,
-            randomSign() * 0.2
-        )
+        if (velocity.lengthSqr() < 0.3)
+            return Vec3(
+                randomSign() * 0.025,
+                0.0,
+                randomSign() * 0.025
+            )
 
         return Vec3.ZERO
     }

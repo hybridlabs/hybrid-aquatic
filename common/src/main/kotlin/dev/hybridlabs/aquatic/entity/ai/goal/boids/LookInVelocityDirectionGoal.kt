@@ -5,10 +5,8 @@ import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.ai.goal.Goal
 
 
-class LimitSpeedAndLookInVelocityDirectionGoal(
-    private val mob: Mob,
-    private val minSpeed: Float,
-    private val maxSpeed: Float,
+class LookInVelocityDirectionGoal(
+    private val mob: Mob
 ) :
     Goal() {
     override fun canUse(): Boolean {
@@ -16,13 +14,7 @@ class LimitSpeedAndLookInVelocityDirectionGoal(
     }
 
     override fun tick() {
-        var velocity = mob.deltaMovement
-        val speed = velocity.length()
-
-        if (speed < minSpeed) velocity = velocity.normalize().scale(minSpeed.toDouble())
-        if (speed > maxSpeed) velocity = velocity.normalize().scale(maxSpeed.toDouble())
-
-        mob.deltaMovement = velocity
+        val velocity = mob.deltaMovement
         mob.lookAt(
             EntityAnchorArgument.Anchor.EYES,
             mob.position().add(velocity.scale(3.0))
