@@ -242,11 +242,11 @@ open class HybridAquaticFishEntity(
     }
 
     protected open fun getMinSize(): Int {
-        return -3
+        return -5
     }
 
     protected open fun getMaxSize(): Int {
-        return 3
+        return 5
     }
 
     //#region Animations
