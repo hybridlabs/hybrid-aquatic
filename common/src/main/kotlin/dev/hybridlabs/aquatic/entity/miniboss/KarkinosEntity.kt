@@ -174,9 +174,9 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     override fun hurt(source: DamageSource, amount: Float): Boolean {
         var adjustedAmount = amount
 
-        if (source.type() == DamageTypes.ARROW)
+        if (source.`is`(DamageTypes.THORNS))
             adjustedAmount *= 0.5f
-        else if (source.type() == DamageTypes.IN_WALL)
+        else if (source.`is`(DamageTypes.IN_WALL))
             adjustedAmount *= 0.5f
 
         val damaged = super.hurt(source, adjustedAmount)
