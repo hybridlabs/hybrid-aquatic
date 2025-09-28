@@ -23,7 +23,11 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Level) :
     HybridAquaticSharkEntity(
-        entityType, world, listOf(HybridAquaticEntityTags.SHARK, HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN), false, false
+        entityType,
+        world,
+        listOf(HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN),
+        false,
+        false
     ),
     VariantHolder<HoundSharkEntity.Type> {
 
@@ -32,7 +36,7 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Leve
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
@@ -52,7 +56,9 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Leve
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
         }
-        val TYPE: EntityDataAccessor<Int> = SynchedEntityData.defineId(HoundSharkEntity::class.java, EntityDataSerializers.INT)
+
+        val TYPE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(HoundSharkEntity::class.java, EntityDataSerializers.INT)
     }
 
     override fun defineSynchedData() {
