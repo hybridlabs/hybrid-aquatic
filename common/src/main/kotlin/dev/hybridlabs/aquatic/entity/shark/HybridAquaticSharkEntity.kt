@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.entity.ai.goal.SharkAttackGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.StayInWaterGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag

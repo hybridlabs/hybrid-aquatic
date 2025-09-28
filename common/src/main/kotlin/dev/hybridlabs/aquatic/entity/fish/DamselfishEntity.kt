@@ -1,5 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.LimitSpeedAndLookInVelocityDirectionGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
@@ -26,6 +29,13 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
             HybridAquaticEntityTags.SHARK
         )
     ) {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(5, BoidGoal(this, 0.1f, 0.3f, 8/20f, 1/20f))
+        goalSelector.addGoal(3, StayInWaterGoal(this))
+        goalSelector.addGoal(2, LimitSpeedAndLookInVelocityDirectionGoal(this, 0.1f, 0.25f))
+    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 12
@@ -146,7 +156,7 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 2.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.6)
+                .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)

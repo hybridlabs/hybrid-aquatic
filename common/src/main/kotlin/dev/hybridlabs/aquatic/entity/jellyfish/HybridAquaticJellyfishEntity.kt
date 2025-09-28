@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.StayInWaterGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
