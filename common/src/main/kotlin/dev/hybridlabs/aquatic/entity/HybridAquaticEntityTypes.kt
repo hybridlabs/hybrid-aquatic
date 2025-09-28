@@ -219,7 +219,7 @@ object HybridAquaticEntityTypes {
     val MACKEREL = registerFish(
         "mackerel",
         ::MackerelEntity,
-        EntityDimensions.fixed(0.4f, 0.25f),
+        EntityDimensions.scalable(0.3f, 0.3f),
         MackerelEntity::createMobAttributes
     )
 
