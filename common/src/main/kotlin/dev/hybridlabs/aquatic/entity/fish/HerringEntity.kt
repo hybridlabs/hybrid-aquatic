@@ -28,7 +28,7 @@ class HerringEntity(entityType: EntityType<out HerringEntity>, world: Level) :
     ) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 6
+        return 12
     }
 
     override fun defineSynchedData() {

@@ -29,7 +29,7 @@ class SquirrelfishEntity(entityType: EntityType<out SquirrelfishEntity>, world: 
     ) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 4
+        return 12
     }
 
     override fun defineSynchedData() {

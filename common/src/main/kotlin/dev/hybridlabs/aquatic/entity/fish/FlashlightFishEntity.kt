@@ -41,7 +41,7 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
     }
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 4
+        return 12
     }
 
     override fun defineSynchedData() {

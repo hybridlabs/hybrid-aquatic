@@ -28,7 +28,7 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
     ) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 6
+        return 12
     }
 
     override fun defineSynchedData() {
