@@ -88,7 +88,9 @@ object HybridAquatic : ModInitializer {
         val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
         registerBiomeModifications(configHandler.config)
 
-        SERVER_STARTING.register { server -> SpawnModifiers.register(server, structureModifiers) }
+        SERVER_STARTING.register { server -> SpawnModifiers.register(server,
+            dev.hybridlabs.aquatic.world.gen.structure.structureModifiers
+        ) }
     }
 
     private fun registerDynamicRegistries() {

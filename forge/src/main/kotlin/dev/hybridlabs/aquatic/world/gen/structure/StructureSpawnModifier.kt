@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.world.gen.structure
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
-import dev.hybridlabs.aquatic.structureModifiers
 import net.minecraft.core.Holder
 import net.minecraft.world.level.levelgen.structure.Structure
 import net.minecraftforge.common.world.ModifiableStructureInfo

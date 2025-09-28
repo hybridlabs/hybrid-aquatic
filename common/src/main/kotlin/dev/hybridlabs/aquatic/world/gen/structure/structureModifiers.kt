@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic
+package dev.hybridlabs.aquatic.world.gen.structure
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.platform.Services
