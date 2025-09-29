@@ -60,7 +60,7 @@ class PlacedFeatureProvider(
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH),
                 listOf(
-                    NoiseBasedCountPlacement.of(30, 80.0, 0.0),
+                    NoiseBasedCountPlacement.of(150, 80.0, 0.0),
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                     BiomeFilter.biome()
