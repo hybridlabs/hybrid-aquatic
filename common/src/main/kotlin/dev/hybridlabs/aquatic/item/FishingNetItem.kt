@@ -5,17 +5,18 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
+import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.material.Fluids
 import java.util.*
 
-class FishingNetItem(settings: Properties?) : Item(settings) {
+class FishingNetItem(settings: Properties) : Item(settings) {
 
     override fun interactLivingEntity(
         stack: ItemStack,
@@ -33,26 +34,53 @@ class FishingNetItem(settings: Properties?) : Item(settings) {
         return super.interactLivingEntity(stack, user, entity, hand)
     }
 
-    override fun useOn(context: UseOnContext): InteractionResult? {
-        val world: Level = context.level
+    override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
+        val stack = player.getItemInHand(hand)
 
-        if (!world.isClientSide) {
-            val nbtCopy = context.itemInHand.tag?.copy() ?: return super.useOn(context)
+        if (!level.isClientSide) {
+            val nbtCopy = stack.tag?.copy()
+            if (nbtCopy != null) {
+                val optionalEntity = getEntityFromNBT(nbtCopy)
+                if (optionalEntity.isPresent) {
+                    val hitResult = getPlayerPOVHitResult(level, player, net.minecraft.world.level.ClipContext.Fluid.SOURCE_ONLY)
+                    if (hitResult.type != net.minecraft.world.phys.HitResult.Type.BLOCK) {
+                        return InteractionResultHolder.pass(stack)
+                    }
 
-            val optionalEntity = getEntityFromNBT(nbtCopy)
+                    val pos = hitResult.blockPos
+                    val clickedFace = hitResult.direction
+                    var spawnPos = pos.relative(clickedFace)
 
-            if (optionalEntity.isPresent) {
-                val entity = optionalEntity.get().create(context.level) ?: return InteractionResult.FAIL
-                entity.load(context.itemInHand.tag?.getCompound(ENTITY_KEY))
-                context.itemInHand.tag?.remove(ENTITY_KEY)
+                    val fluidState = level.getFluidState(pos)
+                    if (fluidState.`is`(Fluids.WATER)) {
+                        spawnPos = pos
+                    }
 
-                entity.setPos(context.clickedPos.center)
-                (world as ServerLevel).addFreshEntity(entity)
-                return InteractionResult.SUCCESS
+                    val entityType = optionalEntity.get()
+                    val entity = entityType.create(level) ?: return InteractionResultHolder.fail(stack)
+                    val tag = stack.tag ?: return InteractionResultHolder.fail(stack)
+                    val entityData = tag.getCompound(ENTITY_KEY)
+                    entity.load(entityData)
+
+                    entity.moveTo(
+                        spawnPos.x + 0.5,
+                        spawnPos.y + 0.1,
+                        spawnPos.z + 0.5,
+                        level.random.nextFloat() * 360f,
+                        0f
+                    )
+
+                    (level as ServerLevel).addFreshEntity(entity)
+                    stack.tag?.remove(ENTITY_KEY)
+
+                    return InteractionResultHolder.success(stack)
+                }
             }
         }
-        return super.useOn(context)
+
+        return InteractionResultHolder.pass(stack)
     }
+
 
 
     companion object {
@@ -69,10 +97,7 @@ class FishingNetItem(settings: Properties?) : Item(settings) {
 
         fun getEntityFromNBT(nbt: CompoundTag): Optional<EntityType<*>> {
             val storedNBT = nbt.getCompound(ENTITY_KEY)
-            if (storedNBT != null) {
-                return EntityType.by(storedNBT)
-            }
-            return Optional.empty()
+            return EntityType.by(storedNBT)
         }
 
         fun alreadyHasFish(stack: ItemStack): Boolean {
