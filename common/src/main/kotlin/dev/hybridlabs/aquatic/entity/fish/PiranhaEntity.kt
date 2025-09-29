@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.IntProvider
@@ -80,10 +82,26 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
+        goalSelector.addGoal(3, StayInWaterGoal(this))
         targetSelector.addGoal(1, HurtByTargetGoal(this).setAlertOthers())
         targetSelector.addGoal(1, ResetUniversalAngerTargetGoal(this, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is PiranhaEntity })
+    }
+
+    override fun canCollideWith(entity: Entity): Boolean {
+        if (entity is PiranhaEntity) {
+            return false
+        }
+        return super.canCollideWith(entity)
+    }
+
+    override fun doPush(entity: Entity) {
+        if (entity is PiranhaEntity) {
+            return
+        }
+        super.doPush(entity)
     }
 
     override fun doHurtTarget(target: Entity): Boolean {

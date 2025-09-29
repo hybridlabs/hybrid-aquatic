@@ -1,6 +1,9 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -18,6 +21,26 @@ class DanioEntity(entityType: EntityType<out DanioEntity>, world: Level) :
             HybridAquaticEntityTags.SHARK
         )
     ) {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
+        goalSelector.addGoal(3, StayInWaterGoal(this))
+    }
+
+    override fun canCollideWith(entity: Entity): Boolean {
+        if (entity is DanioEntity) {
+            return false
+        }
+        return super.canCollideWith(entity)
+    }
+
+    override fun doPush(entity: Entity) {
+        if (entity is DanioEntity) {
+            return
+        }
+        super.doPush(entity)
+    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4
