@@ -35,7 +35,7 @@ class BoidGoal(
         return true
     }
 
-    fun getMaxDelta(): Double {
+    private fun getMaxDelta(): Double {
         return maxSpeed * 0.125
     }
 

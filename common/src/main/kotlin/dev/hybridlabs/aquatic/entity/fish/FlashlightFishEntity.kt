@@ -15,7 +15,6 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
@@ -35,16 +34,6 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
         super.registerGoals()
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
         goalSelector.addGoal(3, StayInWaterGoal(this))
-    }
-
-    var isLightOn: Boolean = true
-
-    private fun checkNearbyEntities() {
-        val detectionRadius = 4.0
-        val nearbyEntities =
-            level().getEntitiesOfClass(LivingEntity::class.java, boundingBox.inflate(detectionRadius)) { it is Player }
-
-        isLightOn = nearbyEntities.isEmpty()
     }
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -182,7 +171,7 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.6)
+                .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)

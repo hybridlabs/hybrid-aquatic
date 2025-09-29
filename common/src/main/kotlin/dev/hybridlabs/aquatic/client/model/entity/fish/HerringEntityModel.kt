@@ -13,25 +13,25 @@ class HerringEntityModel : HybridAquaticFishEntityModel<HerringEntity>("herring"
     override fun getModelResource(animatable: HerringEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val texturePath = when (fish) {
+        val modelPath = when (fish) {
             1 -> "geo/fish/herring/herring.geo.json"
             2 -> "geo/fish/herring/herring_two.geo.json"
             3 -> "geo/fish/herring/herring_three.geo.json"
             else -> "geo/fish/herring/herring.geo.json"
         }
-        return CommonClass.locate(texturePath)
+        return CommonClass.locate(modelPath)
     }
 
     override fun getAnimationResource(animatable: HerringEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val texturePath = when (fish) {
+        val animationPath = when (fish) {
             1 -> "animations/herring.animation.json"
             2 -> "animations/herring_two.animation.json"
             3 -> "animations/herring_three.animation.json"
             else -> "animations/herring.animation.json"
         }
-        return CommonClass.locate(texturePath)
+        return CommonClass.locate(animationPath)
     }
 
     override fun setCustomAnimations(

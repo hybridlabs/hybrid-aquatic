@@ -14,40 +14,28 @@ class FlashlightFishEntityModel : HybridAquaticFishEntityModel<FlashlightFishEnt
         return RenderType.entityTranslucent(texture)
     }
 
-    override fun getTextureResource(animatable: FlashlightFishEntity): ResourceLocation {
-        val isLightOn = animatable.isLightOn
-
-        val texturePath = if (isLightOn) {
-            "textures/entity/fish/flashlight_fish/flashlight_fish.png"
-        } else {
-            "textures/entity/fish/flashlight_fish/flashlight_fish_off.png"
-        }
-
-        return CommonClass.locate(texturePath)
-    }
-
     override fun getModelResource(animatable: FlashlightFishEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val texturePath = when (fish) {
+        val modelPath = when (fish) {
             1 -> "geo/fish/flashlight_fish/flashlight_fish.geo.json"
             2 -> "geo/fish/flashlight_fish/flashlight_fish_two.geo.json"
             3 -> "geo/fish/flashlight_fish/flashlight_fish_three.geo.json"
             else -> "geo/fish/flashlight_fish/flashlight_fish.geo.json"
         }
-        return CommonClass.locate(texturePath)
+        return CommonClass.locate(modelPath)
     }
 
     override fun getAnimationResource(animatable: FlashlightFishEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val texturePath = when (fish) {
+        val animationPath = when (fish) {
             1 -> "animations/flashlight_fish.animation.json"
             2 -> "animations/flashlight_fish_two.animation.json"
             3 -> "animations/flashlight_fish_three.animation.json"
             else -> "animations/flashlight_fish.animation.json"
         }
-        return CommonClass.locate(texturePath)
+        return CommonClass.locate(animationPath)
     }
 
     override fun setCustomAnimations(

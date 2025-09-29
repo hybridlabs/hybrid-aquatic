@@ -13,25 +13,25 @@ class DamselfishEntityModel : HybridAquaticFishEntityModel<DamselfishEntity>("da
     override fun getModelResource(animatable: DamselfishEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val texturePath = when (fish) {
+        val modelPath = when (fish) {
             1 -> "geo/fish/damselfish/damselfish.geo.json"
             2 -> "geo/fish/damselfish/damselfish_two.geo.json"
             3 -> "geo/fish/damselfish/damselfish_three.geo.json"
             else -> "geo/fish/damselfish/damselfish.geo.json"
         }
-        return CommonClass.locate(texturePath)
+        return CommonClass.locate(modelPath)
     }
 
     override fun getAnimationResource(animatable: DamselfishEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val texturePath = when (fish) {
+        val animationPath = when (fish) {
             1 -> "animations/damselfish.animation.json"
             2 -> "animations/damselfish_two.animation.json"
             3 -> "animations/damselfish_three.animation.json"
             else -> "animations/damselfish.animation.json"
         }
-        return CommonClass.locate(texturePath)
+        return CommonClass.locate(animationPath)
     }
 
     override fun setCustomAnimations(

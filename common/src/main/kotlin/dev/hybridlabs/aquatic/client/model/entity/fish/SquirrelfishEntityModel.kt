@@ -17,25 +17,25 @@ class SquirrelfishEntityModel : HybridAquaticFishEntityModel<SquirrelfishEntity>
     override fun getModelResource(animatable: SquirrelfishEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val texturePath = when (fish) {
+        val modelPath = when (fish) {
             1 -> "geo/fish/squirrelfish/squirrelfish.geo.json"
             2 -> "geo/fish/squirrelfish/squirrelfish_two.geo.json"
             3 -> "geo/fish/squirrelfish/squirrelfish_three.geo.json"
             else -> "geo/fish/squirrelfish/squirrelfish.geo.json"
         }
-        return CommonClass.locate(texturePath)
+        return CommonClass.locate(modelPath)
     }
 
     override fun getAnimationResource(animatable: SquirrelfishEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val texturePath = when (fish) {
+        val animationPath = when (fish) {
             1 -> "animations/squirrelfish.animation.json"
             2 -> "animations/squirrelfish_two.animation.json"
             3 -> "animations/squirrelfish_three.animation.json"
             else -> "animations/squirrelfish.animation.json"
         }
-        return CommonClass.locate(texturePath)
+        return CommonClass.locate(animationPath)
     }
 
     override fun setCustomAnimations(

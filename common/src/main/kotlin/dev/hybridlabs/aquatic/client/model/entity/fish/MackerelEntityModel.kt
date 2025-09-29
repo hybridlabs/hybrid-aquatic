@@ -13,25 +13,25 @@ class MackerelEntityModel : HybridAquaticFishEntityModel<MackerelEntity>("macker
     override fun getModelResource(animatable: MackerelEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val texturePath = when (fish) {
+        val modelPath = when (fish) {
             1 -> "geo/fish/mackerel/mackerel.geo.json"
             2 -> "geo/fish/mackerel/mackerel_two.geo.json"
             3 -> "geo/fish/mackerel/mackerel_three.geo.json"
             else -> "geo/fish/mackerel/mackerel.geo.json"
         }
-        return CommonClass.locate(texturePath)
+        return CommonClass.locate(modelPath)
     }
 
     override fun getAnimationResource(animatable: MackerelEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val texturePath = when (fish) {
+        val animationPath = when (fish) {
             1 -> "animations/mackerel.animation.json"
             2 -> "animations/mackerel_two.animation.json"
             3 -> "animations/mackerel_three.animation.json"
             else -> "animations/mackerel.animation.json"
         }
-        return CommonClass.locate(texturePath)
+        return CommonClass.locate(animationPath)
     }
 
     override fun setCustomAnimations(
