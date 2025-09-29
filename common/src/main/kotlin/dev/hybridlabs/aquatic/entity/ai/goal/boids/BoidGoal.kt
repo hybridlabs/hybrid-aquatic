@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.ai.goal.boids
 import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.Mob
+import net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.phys.Vec3
 import java.util.function.Predicate
@@ -14,12 +15,11 @@ class BoidGoal(
     private val separationRange: Float,
     private val alignmentInfluence: Float,
     private val cohesionInfluence: Float,
-    private val maxSpeed: Float,
 ) :
     Goal() {
     private var timeToFindNearbyEntities = 0
     private var nearbyMobs: MutableList<out Mob> = mutableListOf()
-
+    private val maxSpeed: Float = mob.getAttributeValue(MOVEMENT_SPEED).toFloat()
 
     override fun canUse(): Boolean {
         if (--this.timeToFindNearbyEntities <= 0) {
@@ -35,16 +35,18 @@ class BoidGoal(
         return true
     }
 
+    fun getMaxDelta(): Double {
+        return maxSpeed * 0.125
+    }
 
     override fun tick() {
 
-
-        val boidVec = cohesion().add(alignment().add(separation().add(random())))
+        var boidVec = cohesion().add(alignment().add(separation().add(random())))
+        if (boidVec.length() > getMaxDelta()) {
+            boidVec = boidVec.normalize().scale(getMaxDelta())
+        }
 
         mob.addDeltaMovement(boidVec)
-
-        if (mob.deltaMovement.length() > maxSpeed) mob.deltaMovement =
-            mob.deltaMovement.normalize().scale(maxSpeed.toDouble())
 
         val target = mob.position().add(mob.deltaMovement)
         mob.lookAt(
@@ -55,7 +57,7 @@ class BoidGoal(
 
     fun random(): Vec3 {
         val velocity = mob.deltaMovement
-        if (velocity.length() < 0.00625) {
+        if (velocity.length() < maxSpeed * 0.001) {
             val yaw = (mob.random.nextGaussian() * 40) - 20
             val pitch = (mob.random.nextGaussian() * 2) - 1
             return Vec3.directionFromRotation(pitch.toFloat(), yaw.toFloat()).scale(0.1)
