@@ -163,7 +163,6 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.GOURAMI.get())
                 entries.accept(HybridAquaticItems.PIRANHA.get())
                 entries.accept(HybridAquaticItems.GOLDFISH.get())
-                entries.accept(HybridAquaticItems.KOI.get())
                 entries.accept(HybridAquaticItems.CARP.get())
                 entries.accept(HybridAquaticItems.ANGLERFISH.get())
                 entries.accept(HybridAquaticItems.BARRELEYE.get())
@@ -172,14 +171,8 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.RATFISH.get())
                 entries.accept(HybridAquaticItems.SQUIRRELFISH.get())
                 entries.accept(HybridAquaticItems.CLOWNFISH.get())
-                entries.accept(HybridAquaticItems.BLUE_TANG.get())
-                entries.accept(HybridAquaticItems.YELLOW_TANG.get())
-                entries.accept(HybridAquaticItems.POWDER_BLUE_TANG.get())
-                entries.accept(HybridAquaticItems.UNICORNFISH.get())
-                entries.accept(HybridAquaticItems.SURGEONFISH_SOHAL.get())
-                entries.accept(HybridAquaticItems.SURGEONFISH_ORANGESHOULDER.get())
-                entries.accept(HybridAquaticItems.SURGEONFISH_LINED.get())
-                entries.accept(HybridAquaticItems.SERGEANT_MAJOR.get())
+                entries.accept(HybridAquaticItems.SURGEONFISH.get())
+                entries.accept(HybridAquaticItems.DAMSELFISH.get())
                 entries.accept(HybridAquaticItems.SEAHORSE.get())
                 entries.accept(HybridAquaticItems.MACKEREL.get())
                 entries.accept(HybridAquaticItems.FLYING_FISH.get())
@@ -200,8 +193,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.NEEDLEFISH.get())
                 entries.accept(HybridAquaticItems.PARROTFISH.get())
                 entries.accept(HybridAquaticItems.MORAY_EEL.get())
-                entries.accept(HybridAquaticItems.YELLOWFIN_TUNA.get())
-                entries.accept(HybridAquaticItems.BLUEFIN_TUNA.get())
+                entries.accept(HybridAquaticItems.TUNA.get())
                 entries.accept(HybridAquaticItems.MAHI.get())
                 entries.accept(HybridAquaticItems.OPAH.get())
                 entries.accept(HybridAquaticItems.OARFISH.get())
@@ -280,7 +272,7 @@ object HybridAquaticItemGroups {
 
         CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
             .title(Component.translatable("itemGroup.${Constants.MOD_ID}.spawn_eggs"))
-            .icon { ItemStack(HybridAquaticItems.YELLOWFIN_TUNA.get()) }
+            .icon { ItemStack(HybridAquaticItems.TUNA.get()) }
             .displayItems { _, entries ->
                 BuiltInRegistries.ITEM.forEach { item ->
                     val id = BuiltInRegistries.ITEM.getKey(item)

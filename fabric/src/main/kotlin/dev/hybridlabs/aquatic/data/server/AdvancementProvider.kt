@@ -20,7 +20,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
     override fun generateAdvancement(consumer: Consumer<Advancement>?) {
         val rootAdvancement = Advancement.Builder.advancement()
             .display(
-                HybridAquaticItems.YELLOWFIN_TUNA.get(),
+                HybridAquaticItems.TUNA.get(),
                 Component.translatable("advancements.hybrid-aquatic.enter_water.title"),
                 Component.translatable("advancements.hybrid-aquatic.enter_water.description"),
                 ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),

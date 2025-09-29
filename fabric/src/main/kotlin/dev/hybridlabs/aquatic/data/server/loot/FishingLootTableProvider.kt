@@ -66,31 +66,7 @@ class FishingLootTableProvider(output: FabricDataOutput) :
                 .pool(
                     LootPool.lootPool()
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SURGEONFISH_LINED.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SURGEONFISH_ORANGESHOULDER.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SURGEONFISH_SOHAL.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.YELLOW_TANG.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.POWDER_BLUE_TANG.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.BLUE_TANG.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.UNICORNFISH.get())
+                            LootItem.lootTableItem(HybridAquaticItems.SURGEONFISH.get())
                                 .setWeight(3)
                         )
                         .add(
@@ -171,11 +147,7 @@ class FishingLootTableProvider(output: FabricDataOutput) :
                 .pool(
                     LootPool.lootPool()
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.BLUEFIN_TUNA.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.YELLOWFIN_TUNA.get())
+                            LootItem.lootTableItem(HybridAquaticItems.TUNA.get())
                                 .setWeight(2)
                         )
                         .add(
@@ -270,10 +242,6 @@ class FishingLootTableProvider(output: FabricDataOutput) :
                         .add(
                             LootItem.lootTableItem(HybridAquaticItems.CARP.get())
                                 .setWeight(4)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.KOI.get())
-                                .setWeight(1)
                         )
                         .add(
                             LootItem.lootTableItem(HybridAquaticItems.GOLDEN_DORADO.get())

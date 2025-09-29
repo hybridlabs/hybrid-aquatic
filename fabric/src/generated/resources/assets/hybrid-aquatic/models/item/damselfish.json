@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hybrid-aquatic:item/bluefin_tuna"
+    "layer0": "hybrid-aquatic:item/damselfish"
   }
 }

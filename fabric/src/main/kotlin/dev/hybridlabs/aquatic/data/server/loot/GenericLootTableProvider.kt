@@ -750,110 +750,11 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_BLUE_TANG,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BLUE_TANG.get())).build()
-                )
-        )
-
-        exporter.accept(
             HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
                         .add(LootItem.lootTableItem(HybridAquaticItems.BLUE_SPOTTED_STINGRAY.get())).build()
-                )
-        )
-
-        exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_UNICORNFISH,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.UNICORNFISH.get())).build()
-                )
-        )
-
-        exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_SOHAL,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.SURGEONFISH_SOHAL.get())).build()
-                )
-        )
-
-        exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_LINED,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.SURGEONFISH_LINED.get())).build()
-                )
-        )
-
-        exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_ORANGESHOULDER,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.SURGEONFISH_ORANGESHOULDER.get())).build()
-                )
-        )
-
-        exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_POWDER_BLUE_TANG,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.POWDER_BLUE_TANG.get())).build()
-                )
-        )
-
-        exporter.accept(
-            HybridAquaticLootTables.SURGEONFISH_YELLOW_TANG,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.YELLOW_TANG.get())).build()
-                )
-        )
-
-        exporter.accept(
-            HybridAquaticLootTables.KOI,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.KOI.get())).build()
-                )
-        )
-
-        exporter.accept(
-            HybridAquaticLootTables.CARP,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.CARP.get())).build()
-                )
-        )
-
-        exporter.accept(
-            HybridAquaticLootTables.YELLOWFIN,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.YELLOWFIN_TUNA.get())).build()
-                )
-        )
-
-        exporter.accept(
-            HybridAquaticLootTables.BLUEFIN,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BLUEFIN_TUNA.get())).build()
                 )
         )
 

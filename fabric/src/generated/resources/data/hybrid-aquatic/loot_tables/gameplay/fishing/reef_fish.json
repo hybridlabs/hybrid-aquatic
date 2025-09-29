@@ -6,37 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:surgeonfish_lined",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:surgeonfish_orangeshoulder",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:surgeonfish_sohal",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:yellow_tang",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:powder_blue_tang",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:blue_tang",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:unicorn_fish",
+          "name": "hybrid-aquatic:surgeonfish",
           "weight": 3
         },
         {

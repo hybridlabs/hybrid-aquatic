@@ -20,21 +20,12 @@ object HybridAquaticLootTables {
     val CHERRY_CRATE_TREASURE_ID = CommonClass.locate("gameplay/cherry_crate_treasure")
     val VENT_LOOT_ID = CommonClass.locate("gameplay/vent_drops")
 
-    val SURGEONFISH_UNICORNFISH = CommonClass.locate("gameplay/surgeonfish_unicornfish")
-    val SURGEONFISH_SOHAL = CommonClass.locate("gameplay/surgeonfish_sohal")
-    val SURGEONFISH_ORANGESHOULDER = CommonClass.locate("gameplay/surgeonfish_orangeshoulder")
-    val SURGEONFISH_LINED = CommonClass.locate("gameplay/surgeonfish_lined")
-    val SURGEONFISH_YELLOW_TANG = CommonClass.locate("gameplay/surgeonfish_yellow_tang")
-    val SURGEONFISH_BLUE_TANG = CommonClass.locate("gameplay/surgeonfish_blue_tang")
-    val SURGEONFISH_POWDER_BLUE_TANG = CommonClass.locate("gameplay/surgeonfish_powder_blue_tang")
-
-    val KOI = CommonClass.locate("gameplay/koi")
-    val CARP = CommonClass.locate("gameplay/carp")
-
     val CLAWED_LOBSTER = CommonClass.locate("gameplay/clawed_lobster")
     val CLAWLESS_LOBSTER = CommonClass.locate("gameplay/clawless_lobster")
+
     val HERMIT_CRAB_SKULL = CommonClass.locate("gameplay/hermit_crab_skull")
     val HERMIT_CRAB_SHELL = CommonClass.locate("gameplay/hermit_crab_shell")
+
     val DECORATOR_FIRE = CommonClass.locate("gameplay/decorator_fire")
     val DECORATOR_BRAIN = CommonClass.locate("gameplay/decorator_brain")
     val DECORATOR_TUBE = CommonClass.locate("gameplay/decorator_tube")
@@ -45,9 +36,6 @@ object HybridAquaticLootTables {
 
     val BLUE_SPOTTED_STINGRAY = CommonClass.locate("gameplay/blue_spotted_stingray")
     val SPOTTED_EAGLE_RAY = CommonClass.locate("gameplay/spotted_eagle_ray")
-
-    val YELLOWFIN = CommonClass.locate("gameplay/yellowfin")
-    val BLUEFIN = CommonClass.locate("gameplay/bluefin")
 
     val CRAB_DIGGING_TREASURE_ID = CommonClass.locate("gameplay/crab_digging_treasure")
 }

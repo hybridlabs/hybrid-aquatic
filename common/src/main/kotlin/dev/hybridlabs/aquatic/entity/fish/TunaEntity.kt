@@ -61,13 +61,6 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
         goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
     }
 
-    override fun getDefaultLootTable(): ResourceLocation {
-        return when (variant) {
-            Type.YELLOWFIN -> HybridAquaticLootTables.YELLOWFIN
-            Type.BLUEFIN -> HybridAquaticLootTables.BLUEFIN
-        }
-    }
-
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()

@@ -139,7 +139,7 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
 
         if (result && !level().isClientSide) {
             if (oldHealth - newHealth == 1 && newHealth > 0) {
-                spawnAtLocation(HybridAquaticItems.SERGEANT_MAJOR.get())
+                spawnAtLocation(HybridAquaticItems.DAMSELFISH.get())
             }
         }
         return result

@@ -233,14 +233,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.PEARLFISH.get(),
             HybridAquaticItems.SNAILFISH.get(),
             HybridAquaticItems.BLUE_SPOTTED_STINGRAY.get(),
-            HybridAquaticItems.BLUE_TANG.get(),
-            HybridAquaticItems.SURGEONFISH_SOHAL.get(),
-            HybridAquaticItems.SURGEONFISH_ORANGESHOULDER.get(),
-            HybridAquaticItems.SURGEONFISH_LINED.get(),
-            HybridAquaticItems.YELLOW_TANG.get(),
-            HybridAquaticItems.POWDER_BLUE_TANG.get(),
+            HybridAquaticItems.SURGEONFISH.get(),
             HybridAquaticItems.CLOWNFISH.get(),
-            HybridAquaticItems.SERGEANT_MAJOR.get(),
+            HybridAquaticItems.DAMSELFISH.get(),
             HybridAquaticItems.JOHN_DORY.get(),
             HybridAquaticItems.BOXFISH.get(),
             HybridAquaticItems.DANIO.get(),
@@ -267,14 +262,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.NEON_TETRA.get(),
             HybridAquaticItems.TIGER_BARB.get(),
             HybridAquaticItems.TRIGGERFISH.get(),
-            HybridAquaticItems.YELLOWFIN_TUNA.get(),
-            HybridAquaticItems.BLUEFIN_TUNA.get(),
-            HybridAquaticItems.UNICORNFISH.get(),
+            HybridAquaticItems.TUNA.get(),
             HybridAquaticItems.STONEFISH.get(),
             HybridAquaticItems.BLOWFISH.get(),
             HybridAquaticItems.PARROTFISH.get(),
             HybridAquaticItems.SUNFISH.get(),
-            HybridAquaticItems.KOI.get(),
             HybridAquaticItems.CARP.get(),
             HybridAquaticItems.GOLDFISH.get(),
             HybridAquaticItems.SPOTTED_EAGLE_RAY.get(),
@@ -326,8 +318,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
     companion object {
         private val TEMPLATE_ANEMONE = CommonClass.locate("item/template_anemone")
-        private val TEMPLATE_MESSAGE_IN_A_BOTTLE =
-            CommonClass.locate("item/template_message_in_a_bottle")
+        private val TEMPLATE_MESSAGE_IN_A_BOTTLE = CommonClass.locate("item/template_message_in_a_bottle")
         private val TEMPLATE_PLUSHIE = CommonClass.locate("item/template_plushie")
     }
 }

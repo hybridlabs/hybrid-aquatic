@@ -692,83 +692,8 @@ object HybridAquaticItems {
         )
     }
 
-    val BLUE_TANG = register(
-        "blue_tang"
-    ) {
-        Item(
-            Item.Properties()
-                .food(
-                    FoodProperties.Builder()
-                        .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
-                        .build()
-                )
-        )
-    }
-
-    val SURGEONFISH_SOHAL = register(
-        "surgeonfish_sohal"
-    ) {
-        Item(
-            Item.Properties()
-                .food(
-                    FoodProperties.Builder()
-                        .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
-                        .build()
-                )
-        )
-    }
-
-    val SURGEONFISH_LINED = register(
-        "surgeonfish_lined"
-    ) {
-        Item(
-            Item.Properties()
-                .food(
-                    FoodProperties.Builder()
-                        .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
-                        .build()
-                )
-        )
-    }
-
-    val SURGEONFISH_ORANGESHOULDER = register(
-        "surgeonfish_orangeshoulder"
-    ) {
-        Item(
-            Item.Properties()
-                .food(
-                    FoodProperties.Builder()
-                        .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
-                        .build()
-                )
-        )
-    }
-
-    val YELLOW_TANG = register(
-        "yellow_tang"
-    ) {
-        Item(
-            Item.Properties()
-                .food(
-                    FoodProperties.Builder()
-                        .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
-                        .build()
-                )
-        )
-    }
-
-    val POWDER_BLUE_TANG = register(
-        "powder_blue_tang"
+    val SURGEONFISH = register(
+        "surgeonfish"
     ) {
         Item(
             Item.Properties()
@@ -812,24 +737,8 @@ object HybridAquaticItems {
         )
     }
 
-    val UNICORNFISH = register(
-        "unicorn_fish"
-    ) {
-        Item(
-            Item.Properties()
-                .food(
-                    FoodProperties.Builder()
-                        .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
-                        .build()
-                )
-        )
-
-    }
-
-    val SERGEANT_MAJOR = register(
-        "sergeant_major"
+    val DAMSELFISH = register(
+        "damselfish"
     ) {
         Item(
             Item.Properties()
@@ -1014,21 +923,6 @@ object HybridAquaticItems {
                         .nutrition(1)
                         .saturationMod(0.2F)
                         .effect(MobEffectInstance(MobEffects.POISON, 1200, 2), 1.0f)
-                        .meat()
-                        .build()
-                )
-        )
-    }
-
-    val KOI = register(
-        "koi"
-    ) {
-        Item(
-            Item.Properties()
-                .food(
-                    FoodProperties.Builder()
-                        .nutrition(1)
-                        .saturationMod(0.2F)
                         .meat()
                         .build()
                 )
@@ -1310,23 +1204,8 @@ object HybridAquaticItems {
         )
     }
 
-    val YELLOWFIN_TUNA = register(
+    val TUNA = register(
         "yellowfin_tuna"
-    ) {
-        Item(
-            Item.Properties()
-                .food(
-                    FoodProperties.Builder()
-                        .nutrition(3)
-                        .saturationMod(0.8F)
-                        .meat()
-                        .build()
-                )
-        )
-    }
-
-    val BLUEFIN_TUNA = register(
-        "bluefin_tuna"
     ) {
         Item(
             Item.Properties()

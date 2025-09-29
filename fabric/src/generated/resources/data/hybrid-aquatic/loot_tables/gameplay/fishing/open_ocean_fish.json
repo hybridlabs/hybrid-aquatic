@@ -6,11 +6,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:bluefin_tuna",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
           "name": "hybrid-aquatic:yellowfin_tuna",
           "weight": 2
         },

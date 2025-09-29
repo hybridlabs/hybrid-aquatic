@@ -55,10 +55,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:koi"
-        },
-        {
-          "type": "minecraft:item",
           "name": "hybrid-aquatic:golden_dorado"
         }
       ],

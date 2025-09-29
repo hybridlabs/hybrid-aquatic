@@ -671,7 +671,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.SERGEANT_MAJOR.get())
+                        LootItem.lootTableItem(HybridAquaticItems.DAMSELFISH.get())
                             .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
@@ -693,7 +693,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.BLUE_TANG.get())
+                        LootItem.lootTableItem(HybridAquaticItems.SURGEONFISH.get())
                             .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
@@ -944,6 +944,17 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.MACKEREL.get())
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.TUNA.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.TUNA.get())
                             .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()

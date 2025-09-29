@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.Holder
@@ -8,7 +7,6 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -54,13 +52,6 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
-    }
-
-    override fun getDefaultLootTable(): ResourceLocation {
-        return when (variant) {
-            Type.COMMON -> HybridAquaticLootTables.CARP
-            else -> HybridAquaticLootTables.KOI
-        }
     }
 
     companion object {
