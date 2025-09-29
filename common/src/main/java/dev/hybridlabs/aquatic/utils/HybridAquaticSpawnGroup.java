@@ -8,21 +8,21 @@ import java.util.concurrent.ConcurrentHashMap;
 public enum HybridAquaticSpawnGroup {
     FISH("fish", 8, true, false, 64),
 
-    FISH_UNDERGROUND("fish_underground", 8, true, false, 64),
+    FISH_UNDERGROUND("fish_underground", 8, true, true, 64),
 
     CEPHALOPOD("cephalopod", 5, true, false, 64),
 
     JELLY("jelly", 5, true, false, 64),
 
-    JELLY_UNDERGROUND("jelly_underground", 5, true, false, 64),
+    JELLY_UNDERGROUND("jelly_underground", 5, true, true, 64),
 
-    SHARK("shark", 5, true, false, 128),
+    SHARK("shark", 5, true, true, 128),
 
-    SHARK_UNDERGROUND("shark_underground", 5, true, false, 128),
+    SHARK_UNDERGROUND("shark_underground", 5, true, true, 128),
 
     CRUSTACEAN("crustacean", 5, true, false, 64),
 
-    CRUSTACEAN_UNDERGROUND("crustacean_underground", 5, true, false, 64),
+    CRUSTACEAN_UNDERGROUND("crustacean_underground", 5, true, true, 64),
 
     CRITTER("critter", 5, true, false, 64),
 

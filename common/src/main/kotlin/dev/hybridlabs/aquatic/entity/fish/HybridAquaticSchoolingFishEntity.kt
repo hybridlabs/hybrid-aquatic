@@ -21,6 +21,10 @@ open class HybridAquaticSchoolingFishEntity(
     private var groupSize: Int = 1,
 ) : HybridAquaticFishEntity(type, world, listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.NONE)) {
 
+    override fun nextStep(): Float {
+        return Float.MAX_VALUE
+    }
+
     open fun getVariant(): Any? {
         return if (this is VariantHolder<*>) {
             (this as VariantHolder<*>).variant
