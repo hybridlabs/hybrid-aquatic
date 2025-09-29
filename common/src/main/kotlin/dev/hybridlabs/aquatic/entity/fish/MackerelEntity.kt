@@ -31,7 +31,7 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, BoidGoal(this, 0.15f, 0.5f, 8 / 20f, 1 / 20f, bbWidth / 2))
+        goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f, speed))
         goalSelector.addGoal(3, StayInWaterGoal(this))
     }
 
