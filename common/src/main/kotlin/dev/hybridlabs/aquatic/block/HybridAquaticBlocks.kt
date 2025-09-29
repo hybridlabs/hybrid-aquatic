@@ -346,7 +346,15 @@ object HybridAquaticBlocks {
         ) {
             BuoyBlock(Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noParticlesOnBreak().lightLevel { 12 }
                 .strength(0.75F)
+            )
+        }
 
+    val GLOWSLIME_BLOCK =
+        register(
+            "glowslime_block"
+        ) {
+            SlimeBlock(Properties.copy(Blocks.SLIME_BLOCK).lightLevel { 12 }
+                .strength(0.75F)
             )
         }
 

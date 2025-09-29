@@ -281,26 +281,20 @@ object HybridAquaticItems {
 
     //#region Artificial Blocks
 
+    val GLOWSLIME_BLOCK = registerBlockItem("glowslime_block") { HybridAquaticBlocks.GLOWSLIME_BLOCK.get() }
     val BUOY = registerPlaceableInWaterBlockItem("buoy") { HybridAquaticBlocks.BUOY.get() }
     val RAFT = registerPlaceableInWaterBlockItem("raft") { HybridAquaticBlocks.RAFT.get() }
-    val GLOWSTICK =
-        registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
-    val MESSAGE_IN_A_BOTTLE =
-        register("message_in_a_bottle") { PLATFORM.createMessageInABottleItem(Item.Properties()) }
+    val GLOWSTICK = registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
+    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") { PLATFORM.createMessageInABottleItem(Item.Properties()) }
 
     //#region Plushies
 
-    val BASKING_SHARK_PLUSHIE =
-        registerBlockItem("basking_shark_plushie") { HybridAquaticBlocks.BASKING_SHARK_PLUSHIE.get() }
+    val BASKING_SHARK_PLUSHIE = registerBlockItem("basking_shark_plushie") { HybridAquaticBlocks.BASKING_SHARK_PLUSHIE.get() }
     val BULL_SHARK_PLUSHIE = registerBlockItem("bull_shark_plushie") { HybridAquaticBlocks.BULL_SHARK_PLUSHIE.get() }
-    val FRILLED_SHARK_PLUSHIE =
-        registerBlockItem("frilled_shark_plushie") { HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE.get() }
-    val GREAT_WHITE_SHARK_PLUSHIE =
-        registerBlockItem("great_white_shark_plushie") { HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE.get() }
-    val HAMMERHEAD_SHARK_PLUSHIE =
-        registerBlockItem("hammerhead_shark_plushie") { HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE.get() }
-    val THRESHER_SHARK_PLUSHIE =
-        registerBlockItem("thresher_shark_plushie") { HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE.get() }
+    val FRILLED_SHARK_PLUSHIE = registerBlockItem("frilled_shark_plushie") { HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE.get() }
+    val GREAT_WHITE_SHARK_PLUSHIE = registerBlockItem("great_white_shark_plushie") { HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE.get() }
+    val HAMMERHEAD_SHARK_PLUSHIE = registerBlockItem("hammerhead_shark_plushie") { HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE.get() }
+    val THRESHER_SHARK_PLUSHIE = registerBlockItem("thresher_shark_plushie") { HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE.get() }
     val TIGER_SHARK_PLUSHIE = registerBlockItem("tiger_shark_plushie") { HybridAquaticBlocks.TIGER_SHARK_PLUSHIE.get() }
     val WHALE_SHARK_PLUSHIE = registerBlockItem("whale_shark_plushie") { HybridAquaticBlocks.WHALE_SHARK_PLUSHIE.get() }
 
@@ -328,7 +322,7 @@ object HybridAquaticItems {
 
     //#region Crafting Ingredients
 
-    val GLOW_SLIME = register("glow_slime") { Item(Item.Properties()) }
+    val GLOWSLIME = register("glowslime") { Item(Item.Properties()) }
     val SEA_URCHIN_SPINE = register("sea_urchin_spine") { Item(Item.Properties()) }
     val SHARK_TOOTH = register("shark_tooth") { Item(Item.Properties()) }
     val SULFUR = register("sulfur") { Item(Item.Properties()) }
@@ -1207,7 +1201,7 @@ object HybridAquaticItems {
     }
 
     val TUNA = register(
-        "yellowfin_tuna"
+        "tuna"
     ) {
         Item(
             Item.Properties()

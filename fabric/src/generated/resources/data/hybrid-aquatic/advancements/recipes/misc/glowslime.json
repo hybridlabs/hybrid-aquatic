@@ -1,24 +1,24 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_glow_slime": {
+    "has_glow_ink_sac": {
       "conditions": {
         "items": [
           {
             "items": [
-              "hybrid-aquatic:glowslime"
+              "minecraft:glow_ink_sac"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_stick": {
+    "has_slime_ball": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stick"
+              "minecraft:slime_ball"
             ]
           }
         ]
@@ -27,21 +27,21 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid-aquatic:glowstick"
+        "recipe": "hybrid-aquatic:glowslime"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_stick",
-      "has_glow_slime",
+      "has_slime_ball",
+      "has_glow_ink_sac",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "hybrid-aquatic:glowstick"
+      "hybrid-aquatic:glowslime"
     ]
   },
   "sends_telemetry_event": false

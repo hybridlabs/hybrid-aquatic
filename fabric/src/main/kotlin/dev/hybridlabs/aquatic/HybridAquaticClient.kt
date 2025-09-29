@@ -105,6 +105,7 @@ object HybridAquaticClient : ClientModInitializer {
             HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(),
             HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(),
             HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get(),
+            HybridAquaticBlocks.GLOWSLIME_BLOCK.get(),
         )
         ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.cutout(),

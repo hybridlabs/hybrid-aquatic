@@ -117,6 +117,14 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
+        add(HybridAquaticBlocks.GLOWSLIME_BLOCK.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .build()
+            )
+        }
+
         add(HybridAquaticBlocks.SARGASSUM.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()

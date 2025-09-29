@@ -21,7 +21,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "hybrid-aquatic:glow_slime"
+          "name": "hybrid-aquatic:glowslime"
         }
       ],
       "rolls": 1.0

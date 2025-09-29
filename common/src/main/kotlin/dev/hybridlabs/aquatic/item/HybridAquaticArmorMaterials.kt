@@ -37,7 +37,7 @@ enum class HybridAquaticArmorMaterials(
         "manglerfish", 15, intArrayOf(1, 1, 1, 1), 15,
         SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, Supplier<Ingredient> {
             Ingredient.of(
-                HybridAquaticItems.GLOW_SLIME.get()
+                HybridAquaticItems.GLOWSLIME.get()
             )
         }),
     EEL(

@@ -34,7 +34,6 @@ object HybridAquaticItemGroups {
                 }
 
                 // blocks
-                entries.accept(HybridAquaticBlocks.GLOWSTICK.get())
                 entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get())
                 entries.accept(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get())
                 entries.accept(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get())
@@ -59,6 +58,10 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticBlocks.ACACIA_CRATE.get())
                 entries.accept(HybridAquaticBlocks.MANGROVE_CRATE.get())
                 entries.accept(HybridAquaticBlocks.CHERRY_CRATE.get())
+                entries.accept(HybridAquaticBlocks.GLOWSLIME_BLOCK.get())
+                entries.accept(HybridAquaticBlocks.GLOWSTICK.get())
+                entries.accept(HybridAquaticItems.BUOY.get())
+                entries.accept(HybridAquaticItems.RAFT.get())
 
                 entries.accept(HybridAquaticItems.DUNEGRASS.get())
                 entries.accept(HybridAquaticItems.SEA_LETTUCE.get())
@@ -99,8 +102,6 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.DEAD_LOPHELIA_CORAL_FAN.get())
                 entries.accept(HybridAquaticItems.DEAD_THORN_CORAL_FAN.get())
 
-                entries.accept(HybridAquaticItems.BUOY.get())
-                entries.accept(HybridAquaticItems.RAFT.get())
                 entries.accept(HybridAquaticBlocks.ANEMONE.get())
                 entries.accept(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get())
                 entries.accept(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get())
@@ -210,7 +211,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.YETI_CRAB_CLAW.get())
                 entries.accept(HybridAquaticItems.SPIDER_CRAB_CLAW.get())
                 entries.accept(HybridAquaticItems.KARKINOS_CLAW.get())
-                entries.accept(HybridAquaticItems.GLOW_SLIME.get())
+                entries.accept(HybridAquaticItems.GLOWSLIME.get())
                 entries.accept(HybridAquaticItems.SHARK_TOOTH.get())
                 entries.accept(HybridAquaticItems.PEARL.get())
                 entries.accept(HybridAquaticItems.BLACK_PEARL.get())
