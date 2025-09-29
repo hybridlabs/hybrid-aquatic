@@ -167,6 +167,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.DUNEGRASS.get() to "Dunegrass",
             HybridAquaticBlocks.TALL_DUNEGRASS.get() to "Tall Dunegrass",
 
+            HybridAquaticBlocks.CATTAIL.get() to "Cattail",
+
             HybridAquaticBlocks.SARGASSUM.get() to "Sargassum",
             HybridAquaticBlocks.SARGASSUM_PLANT.get() to "Sargassum Plant",
             HybridAquaticBlocks.BULL_KELP.get() to "Bull Kelp",

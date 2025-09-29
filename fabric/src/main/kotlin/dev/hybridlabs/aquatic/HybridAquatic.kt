@@ -113,6 +113,7 @@ object HybridAquatic : ModInitializer {
     private fun registerFlammables(registry: FlammableBlockRegistry) {
         registry.add(HybridAquaticBlocks.DUNEGRASS.get(), 5, 5)
         registry.add(HybridAquaticBlocks.TALL_DUNEGRASS.get(), 5, 5)
+        registry.add(HybridAquaticBlocks.CATTAIL.get(), 5, 5)
         registry.add(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get(), 5, 5)
         registry.add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get(), 5, 5)
         registry.add(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get(), 5, 5)

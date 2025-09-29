@@ -202,6 +202,7 @@ object HybridAquaticItems {
         registerPlaceableInWaterBlockItem("jungle_lily_pad") { HybridAquaticBlocks.JUNGLE_LILY_PAD.get() }
     val RED_ALGAE = registerBlockItem("red_algae") { HybridAquaticBlocks.RED_ALGAE.get() }
     val DUNEGRASS = registerBlockItem("dunegrass") { HybridAquaticBlocks.DUNEGRASS.get() }
+    val CATTAIL = registerBlockItem("cattail") { HybridAquaticBlocks.CATTAIL.get() }
     val SEA_LETTUCE = registerBlockItem("sea_lettuce") { HybridAquaticBlocks.SEA_LETTUCE.get() }
     val HYDROTHERMAL_VENT = registerBlockItem("hydrothermal_vent") { HybridAquaticBlocks.THERMAL_VENT.get() }
     val TUBE_WORM = registerBlockItem("tube_worm") { HybridAquaticBlocks.TUBE_WORM.get() }

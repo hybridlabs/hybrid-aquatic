@@ -111,6 +111,8 @@ object HybridAquaticClient : ClientModInitializer {
             HybridAquaticBlocks.DUNEGRASS.get(),
             HybridAquaticBlocks.TALL_DUNEGRASS.get(),
 
+            HybridAquaticBlocks.CATTAIL.get(),
+
             HybridAquaticBlocks.RED_ALGAE.get(),
             HybridAquaticBlocks.TALL_RED_ALGAE.get(),
 
