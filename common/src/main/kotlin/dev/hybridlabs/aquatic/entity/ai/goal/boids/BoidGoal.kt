@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal.boids
 
+import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.ai.goal.Goal
@@ -13,63 +14,59 @@ class BoidGoal(
     private val separationRange: Float,
     private val alignmentInfluence: Float,
     private val cohesionInfluence: Float,
+    private val maxSpeed: Float,
 ) :
     Goal() {
     private var timeToFindNearbyEntities = 0
-    private var nearbyMobs: MutableList<out Mob>? = null
-    private var enabled = true
+    private var nearbyMobs: MutableList<out Mob> = mutableListOf()
+
 
     override fun canUse(): Boolean {
-        return true
-    }
-
-    override fun tick() {
         if (--this.timeToFindNearbyEntities <= 0) {
             this.timeToFindNearbyEntities = this.adjustedTickDelay(40)
             nearbyMobs = getNearbyEntitiesOfSameClass(mob)
         } else {
-            nearbyMobs!!.removeIf { obj: LivingEntity -> obj.isDeadOrDying }
+            nearbyMobs.removeIf { obj: LivingEntity -> obj.isDeadOrDying }
         }
 
-        if (nearbyMobs!!.isEmpty()) {
-            enabled = false
-            return
+        if (nearbyMobs.isEmpty()) {
+            return false
         }
+        return true
+    }
 
-        if (mob.level().gameTime % 4 == 0L) {
-            mob.addDeltaMovement(random())
-        } else {
-            mob.addDeltaMovement(mob.deltaMovement.normalize().scale(0.07))
-        }
 
-        mob.addDeltaMovement(cohesion())
-        mob.addDeltaMovement(alignment())
-        mob.addDeltaMovement(separation())
+    override fun tick() {
+
+
+        val boidVec = cohesion().add(alignment().add(separation().add(random())))
+
+        mob.addDeltaMovement(boidVec)
+
+        if (mob.deltaMovement.length() > maxSpeed) mob.deltaMovement =
+            mob.deltaMovement.normalize().scale(maxSpeed.toDouble())
+
+        val target = mob.position().add(mob.deltaMovement)
+        mob.lookAt(
+            EntityAnchorArgument.Anchor.EYES,
+            Vec3(target.x, target.y + mob.eyeHeight, target.z)
+        )
     }
 
     fun random(): Vec3 {
         val velocity = mob.deltaMovement
-        if (velocity.length() < 1.2) {
-            val pitch = (mob.random.nextGaussian() * 180) - 90
-            return Vec3.directionFromRotation(pitch.toFloat(), 0f).scale(0.1)
+        if (velocity.length() < 0.00625) {
+            val yaw = (mob.random.nextGaussian() * 40) - 20
+            val pitch = (mob.random.nextGaussian() * 2) - 1
+            return Vec3.directionFromRotation(pitch.toFloat(), yaw.toFloat()).scale(0.1)
         }
-        return Vec3.ZERO
-    }
-
-    private fun randomSign(): Int {
-        val isNegative = mob.random.nextBoolean()
-
-        if (isNegative) {
-            return -1
-        }
-
-        return 1
+        return mob.forward.scale(0.1)
     }
 
     private fun separation(): Vec3 {
         var c = Vec3.ZERO
 
-        for (nearbyMob in nearbyMobs!!) {
+        for (nearbyMob in nearbyMobs) {
             if ((nearbyMob.position().subtract(mob.position()).length()) < separationRange) {
                 c = c.subtract(nearbyMob.position().subtract(mob.position()))
             }
@@ -81,11 +78,11 @@ class BoidGoal(
     private fun alignment(): Vec3 {
         var c = Vec3.ZERO
 
-        for (nearbyMob in nearbyMobs!!) {
+        for (nearbyMob in nearbyMobs) {
             c = c.add(nearbyMob.deltaMovement)
         }
 
-        c = c.scale((1f / nearbyMobs!!.size).toDouble())
+        c = c.scale((1f / nearbyMobs.size).toDouble())
         c = c.subtract(mob.deltaMovement)
         return c.scale(alignmentInfluence.toDouble())
     }
@@ -93,11 +90,11 @@ class BoidGoal(
     private fun cohesion(): Vec3 {
         var c = Vec3.ZERO
 
-        for (nearbyMob in nearbyMobs!!) {
+        for (nearbyMob in nearbyMobs) {
             c = c.add(nearbyMob.position())
         }
 
-        c = c.scale((1f / nearbyMobs!!.size).toDouble())
+        c = c.scale((1f / nearbyMobs.size).toDouble())
         c = c.subtract(mob.position())
         return c.scale(cohesionInfluence.toDouble())
     }

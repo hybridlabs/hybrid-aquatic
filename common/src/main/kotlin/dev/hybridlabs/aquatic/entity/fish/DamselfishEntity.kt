@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.boids.LookInVelocityDirectionGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -32,9 +31,8 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, BoidGoal(this, 0.025f, 1.0f, 8/20f, 1/20f))
+        goalSelector.addGoal(5, BoidGoal(this, 0.1f, 1.5f, 8 / 20f, 1 / 20f, bbWidth / 2))
         goalSelector.addGoal(3, StayInWaterGoal(this))
-        goalSelector.addGoal(2, LookInVelocityDirectionGoal(this))
     }
 
     override fun getMaxSpawnClusterSize(): Int {
