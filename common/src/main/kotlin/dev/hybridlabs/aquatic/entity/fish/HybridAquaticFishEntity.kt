@@ -161,14 +161,6 @@ open class HybridAquaticFishEntity(
         return SoundEvents.COD_DEATH
     }
 
-    override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.COD_AMBIENT
-    }
-
-    override fun getSwimSplashSound(): SoundEvent {
-        return SoundEvents.DOLPHIN_SPLASH
-    }
-
     //#region end
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
