@@ -2,12 +2,8 @@ package dev.hybridlabs.aquatic.block
 
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.server.level.ServerLevel
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.vehicle.Boat
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
-import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
@@ -19,7 +15,6 @@ import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
-import net.minecraft.world.phys.Vec3
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
@@ -89,14 +84,6 @@ class WaterLettuceBlock(settings: Properties) : BushBlock(settings), SimpleWater
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
         builder.add(WATERLOGGED)
-    }
-
-    override fun entityInside(state: BlockState, world: Level, pos: BlockPos, entity: Entity) {
-        super.entityInside(state, world, pos, entity)
-        if (world is ServerLevel && entity is Boat) {
-            entity.makeStuckInBlock(state, Vec3(0.66, 0.66, 0.66))
-            world.destroyBlock(BlockPos(pos), true, entity)
-        }
     }
 
     companion object {
