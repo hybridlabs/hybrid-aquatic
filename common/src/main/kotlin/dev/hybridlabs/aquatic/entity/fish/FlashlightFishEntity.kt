@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
@@ -29,8 +31,13 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
         )
     ) {
 
-    var isLightOn: Boolean = true
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(5, BoidGoal(this, 0.15f, 0.5f, 8 / 20f, 1 / 20f, bbWidth / 2))
+        goalSelector.addGoal(3, StayInWaterGoal(this))
+    }
 
+    var isLightOn: Boolean = true
 
     private fun checkNearbyEntities() {
         val detectionRadius = 4.0
@@ -79,14 +86,15 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
         super.tick()
 
         if (!level().isClientSide) {
-            when (health.toInt()) {
-                3 -> setFishCount(THREE_FISH)
-                2 -> setFishCount(TWO_FISH)
-                1 -> setFishCount(ONE_FISH)
+            val maxHp = getAttributeValue(Attributes.MAX_HEALTH).toFloat()
+            val fraction = health / maxHp
+
+            when {
+                fraction > 2f / 3f -> setFishCount(THREE_FISH)
+                fraction > 1f / 3f -> setFishCount(TWO_FISH)
+                else -> setFishCount(ONE_FISH)
             }
         }
-        
-        checkNearbyEntities()
     }
 
     override fun finalizeSpawn(
@@ -96,13 +104,17 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?,
     ): SpawnGroupData? {
-        val startingHealth = this.random.nextIntBetweenInclusive(1, 3)
-        this.health = startingHealth.toFloat()
+        val maxHp = getAttributeValue(Attributes.MAX_HEALTH).toFloat()
+        val startingFraction = this.random.nextFloat()
+        val startingHealth = (maxHp * startingFraction.coerceAtLeast(0.34f))
 
-        when (startingHealth) {
-            3 -> setFishCount(THREE_FISH)
-            2 -> setFishCount(TWO_FISH)
-            1 -> setFishCount(ONE_FISH)
+        this.health = startingHealth
+
+        val fraction = health / maxHp
+        when {
+            fraction > 2f / 3f -> setFishCount(THREE_FISH)
+            fraction > 1f / 3f -> setFishCount(TWO_FISH)
+            else -> setFishCount(ONE_FISH)
         }
 
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
@@ -138,22 +150,38 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
-        val oldHealth = this.health.toInt()
+        val maxHp = getAttributeValue(Attributes.MAX_HEALTH).toFloat()
+        val oldFraction = health / maxHp
+
         val result = super.hurt(source, amount)
-        val newHealth = this.health.toInt()
 
         if (result && !level().isClientSide) {
-            if (oldHealth - newHealth == 1 && newHealth > 0) {
+            val newFraction = health / maxHp
+
+            val oldFishCount = when {
+                oldFraction > 2f / 3f -> MackerelEntity.THREE_FISH
+                oldFraction > 1f / 3f -> MackerelEntity.TWO_FISH
+                else -> MackerelEntity.ONE_FISH
+            }
+
+            val newFishCount = when {
+                newFraction > 2f / 3f -> MackerelEntity.THREE_FISH
+                newFraction > 1f / 3f -> MackerelEntity.TWO_FISH
+                else -> MackerelEntity.ONE_FISH
+            }
+
+            if (newFishCount in 1..<oldFishCount) {
                 spawnAtLocation(HybridAquaticItems.FLASHLIGHT_FISH.get())
             }
         }
+
         return result
     }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 3.0)
+                .add(Attributes.MAX_HEALTH, 9.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.6)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
