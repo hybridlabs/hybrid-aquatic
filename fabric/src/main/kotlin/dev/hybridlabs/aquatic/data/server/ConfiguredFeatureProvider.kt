@@ -116,6 +116,14 @@ class ConfiguredFeatureProvider(
             )
         )
 
+        entries.add(
+            HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH,
+            ConfiguredFeature(
+                HybridAquaticFeatures.DUNEGRASS_PATCH.get(), ProbabilityFeatureConfiguration(
+                    0.5f
+                )
+            )
+        )
 
         //#region Sargassum
 

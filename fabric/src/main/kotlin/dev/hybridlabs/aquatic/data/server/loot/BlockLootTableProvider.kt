@@ -56,6 +56,14 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
+        add(HybridAquaticBlocks.DUNEGRASS.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+            )
+        }
+
         add(HybridAquaticBlocks.RED_ALGAE.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()

@@ -28,6 +28,8 @@ object HybridAquaticPlacedFeatures {
 
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch")
 
+    val DUNEGRASS_PATCH = register("dunegrass_patch")
+
     val GIANT_CLAM_PATCH = register("giant_clam_patch")
 
     val THERMAL_VENT_PATCH = register("thermal_vent_patch")

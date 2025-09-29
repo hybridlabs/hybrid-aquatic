@@ -60,6 +60,12 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
+            BiomeSelectors.tag(HybridAquaticBiomeTags.SANDY_BEACHES),
+            GenerationStep.Decoration.VEGETAL_DECORATION,
+            HybridAquaticPlacedFeatures.DUNEGRASS_PATCH
+        )
+
+        BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.REEF),
             GenerationStep.Decoration.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH

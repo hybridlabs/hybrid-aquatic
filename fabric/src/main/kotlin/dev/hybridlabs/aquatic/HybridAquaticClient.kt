@@ -108,6 +108,9 @@ object HybridAquaticClient : ClientModInitializer {
         )
         ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.cutout(),
+            HybridAquaticBlocks.DUNEGRASS.get(),
+            HybridAquaticBlocks.TALL_DUNEGRASS.get(),
+
             HybridAquaticBlocks.RED_ALGAE.get(),
             HybridAquaticBlocks.TALL_RED_ALGAE.get(),
 

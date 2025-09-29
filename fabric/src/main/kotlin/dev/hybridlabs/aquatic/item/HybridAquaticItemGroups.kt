@@ -60,6 +60,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticBlocks.MANGROVE_CRATE.get())
                 entries.accept(HybridAquaticBlocks.CHERRY_CRATE.get())
 
+                entries.accept(HybridAquaticItems.DUNEGRASS.get())
                 entries.accept(HybridAquaticItems.SEA_LETTUCE.get())
                 entries.accept(HybridAquaticItems.RED_ALGAE.get())
                 entries.accept(HybridAquaticItems.BULL_KELP.get())

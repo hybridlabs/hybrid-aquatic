@@ -56,6 +56,19 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticPlacedFeatures.DUNEGRASS_PATCH,
+            PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH),
+                listOf(
+                    NoiseBasedCountPlacement.of(30, 80.0, 0.0),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticPlacedFeatures.BULL_KELP,
             PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.BULL_KELP),
