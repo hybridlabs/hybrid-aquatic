@@ -511,6 +511,25 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
+        export(exporter, HybridAquaticEntityTypes.OCTOPUS.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_TENTACLE.get())
+                            .apply(
+                                SmeltItemFunction.smelted().`when`(
+                                    LootItemEntityPropertyCondition.hasProperties(
+                                        LootContext.EntityTarget.THIS,
+                                        NEEDS_ENTITY_ON_FIRE
+                                    )
+                                )
+                            )
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
         // jellyfish
         export(exporter, HybridAquaticEntityTypes.MOON_JELLYFISH.get()) {
             pool(

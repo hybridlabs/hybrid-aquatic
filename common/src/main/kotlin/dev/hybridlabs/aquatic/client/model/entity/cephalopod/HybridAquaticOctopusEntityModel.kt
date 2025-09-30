@@ -24,6 +24,10 @@ abstract class HybridAquaticOctopusEntityModel<T : HybridAquaticOctopusEntity>(p
         return CommonClass.locate("animations/$id.animation.json")
     }
 
+    fun getLayerTextureResource(): ResourceLocation {
+        return CommonClass.locate("textures/entity/cephalopod/$id/${id}_tint.png")
+    }
+
     override fun setCustomAnimations(
         animatable: T,
         instanceId: Long,

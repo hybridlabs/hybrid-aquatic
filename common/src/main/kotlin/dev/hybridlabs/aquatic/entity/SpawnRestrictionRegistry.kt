@@ -97,6 +97,7 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.ARROW_SQUID.get(),
             HybridAquaticEntityTypes.CUTTLEFISH.get(),
+            HybridAquaticEntityTypes.OCTOPUS.get(),
         ).forEach { registerCephalopod(it) }
 
         // deep cephalopods

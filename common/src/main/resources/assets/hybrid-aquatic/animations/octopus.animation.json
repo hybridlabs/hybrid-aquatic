@@ -1,0 +1,213 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"misc.idle": {
+			"loop": true,
+			"bones": {
+				"left_tentacle_1": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [-0.5, 0, 0]
+					}
+				},
+				"left_tentacle_2": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0.5]
+					}
+				},
+				"left_tentacle_3": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, -0.5]
+					}
+				},
+				"left_tentacle_4": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [-0.5, 0, 0]
+					}
+				},
+				"right_tentacle_1": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [0.5, 0, 0]
+					}
+				},
+				"right_tentacle_2": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0.5]
+					}
+				},
+				"right_tentacle_3": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, -0.5]
+					}
+				},
+				"right_tentacle_4": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [0.5, 0, 0]
+					}
+				}
+			}
+		},
+		"move.swim": {
+			"loop": true,
+			"bones": {
+				"left_tentacle_1": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [-0.5, 0, 0]
+					}
+				},
+				"left_tentacle_2": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0.5]
+					}
+				},
+				"left_tentacle_3": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, -0.5]
+					}
+				},
+				"left_tentacle_4": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [-0.5, 0, 0]
+					}
+				},
+				"right_tentacle_1": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [0.5, 0, 0]
+					}
+				},
+				"right_tentacle_2": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0.5]
+					}
+				},
+				"right_tentacle_3": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, -0.5]
+					}
+				},
+				"right_tentacle_4": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [0.5, 0, 0]
+					}
+				}
+			}
+		},
+		"misc.sit": {
+			"loop": true,
+			"bones": {
+				"left_tentacle_1": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [-0.5, 0, 0]
+					}
+				},
+				"left_tentacle_2": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0.5]
+					}
+				},
+				"left_tentacle_3": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, -0.5]
+					}
+				},
+				"left_tentacle_4": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [-0.5, 0, 0]
+					}
+				},
+				"right_tentacle_1": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [0.5, 0, 0]
+					}
+				},
+				"right_tentacle_2": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0.5]
+					}
+				},
+				"right_tentacle_3": {
+					"rotation": {
+						"vector": [0, 22.5, 0]
+					},
+					"position": {
+						"vector": [0, 0, -0.5]
+					}
+				},
+				"right_tentacle_4": {
+					"rotation": {
+						"vector": [0, -22.5, 0]
+					},
+					"position": {
+						"vector": [0.5, 0, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

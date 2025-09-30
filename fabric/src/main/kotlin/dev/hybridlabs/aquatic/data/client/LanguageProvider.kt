@@ -458,6 +458,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.GOURAMI.get() to "Gourami",
             HybridAquaticEntityTypes.BOXFISH.get() to "Boxfish",
             HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS.get() to "Glowing Sucker Octopus",
+            HybridAquaticEntityTypes.OCTOPUS.get() to "Octopus",
             HybridAquaticEntityTypes.DISCUS.get() to "Discus",
             HybridAquaticEntityTypes.ARROW_SQUID.get() to "Arrow Squid",
             HybridAquaticEntityTypes.FIREFLY_SQUID.get() to "Firefly Squid",

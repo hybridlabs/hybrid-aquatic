@@ -78,6 +78,7 @@ class EntitySpawnConfigGenerator {
         addCephalopod(HybridAquaticEntityTypes.ARROW_SQUID.get(), listOf(HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 5, 1, 3)
         addCephalopod(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 5, 3, 5)
         addCephalopod(HybridAquaticEntityTypes.CUTTLEFISH.get(), listOf(HybridAquaticBiomeTags.REEF), 1, 1, 2)
+        addCephalopod(HybridAquaticEntityTypes.OCTOPUS.get(), listOf(HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS), 1, 1, 2)
         //#endregion
 
         //#region Deep Cephalopods
