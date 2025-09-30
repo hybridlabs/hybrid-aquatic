@@ -7,7 +7,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class UmbrellaOctopusEntity(entityType: EntityType<out UmbrellaOctopusEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
+    HybridAquaticOctopusEntity(
         entityType,
         world,
         HybridAquaticEntityTags.NONE,
@@ -25,13 +25,5 @@ class UmbrellaOctopusEntity(entityType: EntityType<out UmbrellaOctopusEntity>, w
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)
         }
-    }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
     }
 }

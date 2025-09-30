@@ -7,7 +7,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopusEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
+    HybridAquaticOctopusEntity(
         entityType,
         world,
         HybridAquaticEntityTags.CRUSTACEAN,
@@ -25,13 +25,5 @@ class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopus
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)
         }
-    }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
     }
 }

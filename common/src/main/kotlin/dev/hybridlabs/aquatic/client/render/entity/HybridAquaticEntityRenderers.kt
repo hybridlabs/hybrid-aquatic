@@ -16,7 +16,7 @@ import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
 import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.NautilusEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.UmbrellaOctopusEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.cephalopods.UmbrellaOctopusEntityRenderer
 import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.VampireSquidEntityRenderer
 import dev.hybridlabs.aquatic.client.renderer.entity.shark.WhaleSharkEntityRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
