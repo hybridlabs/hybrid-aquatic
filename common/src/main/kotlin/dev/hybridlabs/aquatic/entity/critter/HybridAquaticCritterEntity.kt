@@ -15,8 +15,6 @@ import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.control.MoveControl
-import net.minecraft.world.entity.ai.goal.PanicGoal
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.goal.TryFindWaterGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
@@ -73,8 +71,6 @@ open class HybridAquaticCritterEntity(
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, TryFindWaterGoal(this))
-        goalSelector.addGoal(1, PanicGoal(this, 0.3))
-        goalSelector.addGoal(5, RandomLookAroundGoal(this))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.3))
     }
 
