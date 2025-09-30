@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.Vec3i
 import net.minecraft.util.RandomSource
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.entity.MobSpawnType
@@ -17,7 +18,6 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
 import net.minecraft.world.level.block.state.properties.DripstoneThickness
-import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
@@ -26,6 +26,13 @@ import kotlin.math.sqrt
 
 @Suppress("NAME_SHADOWING", "SameParameterValue")
 class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatchFeatureConfig>(codec) {
+    companion object {
+        val MAX_VENT_HEIGHT = 5
+        val MIN_VENT_HEIGHT = 2
+        val MIN_VENT_CLEARANCE = 2
+
+    }
+
     override fun place(context: FeaturePlaceContext<VentPatchFeatureConfig>): Boolean {
         var generated = false
         val world = context.level()
@@ -41,18 +48,15 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
             val offsetZ = random.nextInt(radius * 2 + 1) - radius
             val candidatePos = origin.offset(offsetX, 0, offsetZ)
 
-            val topY = world.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, candidatePos.x, candidatePos.z)
-            val candidateTopPos = BlockPos(candidatePos.x, topY, candidatePos.z)
-
             val distanceFromCenter = sqrt((offsetX * offsetX + offsetZ * offsetZ).toDouble())
             val heightMultiplier = 1.0 - (distanceFromCenter / radius).coerceIn(0.0, 1.0)
 
-            if (generateSingleVent(world, candidateTopPos, random, heightMultiplier, baseProvider, ventProvider)) {
+            if (generateSingleVent(world, candidatePos, random, heightMultiplier, baseProvider, ventProvider)) {
                 val wormCount = wormCountProvider.sample(random)
                 val wormRadius = wormRadiusProvider.sample(random)
                 generateTubeWormPatch(
                     world,
-                    candidateTopPos,
+                    candidatePos,
                     random,
                     wormCount,
                     wormCountPerBlockProvider,
@@ -60,9 +64,9 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
                     wormProvider
                 )
 
-                val biome = world.getBiome(candidateTopPos)
+                val biome = world.getBiome(candidatePos)
                 if (biome.`is`(HybridAquaticBiomeTags.ARCTIC_OCEANS)) {
-                    spawnYetiCrabsAroundVent(world, candidateTopPos, random, 1, 3)
+                    spawnYetiCrabsAroundVent(world, candidatePos, random, 1, 3)
                 }
 
                 generated = true
@@ -92,6 +96,15 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
         }
 
         val baseThickness = 1 + random.nextInt(3)
+
+        val minHeight = baseThickness + MAX_VENT_HEIGHT + MIN_VENT_CLEARANCE
+
+        mutablePos.move(Vec3i(0, minHeight, 0))
+        while (mutablePos.y > rootPos.y) {
+            if (!world.isWaterAt(mutablePos)) return false
+            mutablePos.move(Direction.DOWN)
+        }
+
         repeat(baseThickness) {
             val state = baseProvider.getState(random, mutablePos)
             world.setBlock(mutablePos, state, Block.UPDATE_CLIENTS)
@@ -119,16 +132,14 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
             val offsetZ = random.nextInt(radius * 2 + 1) - radius
             val spawnPos = rootPos.offset(offsetX, 0, offsetZ)
 
-            val spawnY = world.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, spawnPos.x, spawnPos.z)
-            val candidatePos = BlockPos(spawnPos.x, spawnY, spawnPos.z)
 
-            if (world.isWaterAt(candidatePos)) {
+            if (world.isWaterAt(spawnPos)) {
                 val yetiCrabEntity = HybridAquaticEntityTypes.YETI_CRAB.get().create(world.level) ?: return@repeat
-                yetiCrabEntity.moveTo(candidatePos, random.nextFloat() * 360F, 0F)
+                yetiCrabEntity.moveTo(spawnPos, random.nextFloat() * 360F, 0F)
                 yetiCrabEntity.setPersistenceRequired()
                 yetiCrabEntity.finalizeSpawn(
                     world,
-                    world.getCurrentDifficultyAt(candidatePos),
+                    world.getCurrentDifficultyAt(spawnPos),
                     MobSpawnType.STRUCTURE,
                     null,
                     null
@@ -168,9 +179,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
     }
 
     private fun calculateVentHeight(heightMultiplier: Double): Int {
-        val maxVentHeight = 5
-        val minVentHeight = 2
-        return max(minVentHeight, (minVentHeight + (maxVentHeight - minVentHeight) * heightMultiplier).toInt())
+        return max(MIN_VENT_HEIGHT, (MIN_VENT_HEIGHT + (MAX_VENT_HEIGHT - MIN_VENT_HEIGHT) * heightMultiplier).toInt())
     }
 
     private fun generateTubeWormPatch(
@@ -189,12 +198,16 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
                 random.nextInt(radius * 2) - radius,
             )
 
-            val targetPos = pos.offset(offset)
-            val surfaceY = world.getHeight(Heightmap.Types.OCEAN_FLOOR, targetPos.x, targetPos.z)
-            val tubeWormPos = BlockPos(targetPos.x, surfaceY, targetPos.z)
+            val tubeWormPos = pos.offset(offset).mutable()
 
-            if (world.getBlockState(tubeWormPos).block != Blocks.WATER) {
-                return@repeat
+
+            repeat(3){
+                val testState = world.getBlockState(tubeWormPos)
+                if (testState.block != Blocks.WATER) {
+                    tubeWormPos.move(Direction.UP)
+                } else if (!testState.isFaceSturdy(world, tubeWormPos, Direction.UP)) {
+                    tubeWormPos.move(Direction.DOWN)
+                }
             }
 
             val state = stateProvider.getState(random, tubeWormPos)

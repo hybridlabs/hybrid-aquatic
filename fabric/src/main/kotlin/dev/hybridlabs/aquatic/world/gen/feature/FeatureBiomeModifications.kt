@@ -120,7 +120,7 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
-            BiomeSelectors.tag(BiomeTags.IS_DEEP_OCEAN),
+            BiomeSelectors.tag(BiomeTags.IS_OCEAN),
             GenerationStep.Decoration.SURFACE_STRUCTURES,
             HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH
         )
