@@ -25,7 +25,9 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Leve
         entityType,
         world,
         HybridAquaticEntityTags.CRUSTACEAN,
-        HybridAquaticEntityTags.SHARK,
+        listOf(
+            HybridAquaticEntityTags.SHARK
+        ),
         true,
         false
     ),

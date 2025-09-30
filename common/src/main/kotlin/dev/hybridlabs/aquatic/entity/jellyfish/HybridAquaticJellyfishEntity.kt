@@ -62,8 +62,6 @@ open class HybridAquaticJellyfishEntity(
         random.setSeed(id.toLong())
         this.thrustTimerSpeed = 1.0f / (random.nextFloat() + 1.0f) * 0.2f
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WATER_BORDER, -1.0f)
-        setPathfindingMalus(BlockPathTypes.WALKABLE, -1.0f)
         moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.05F, 0.1F, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)

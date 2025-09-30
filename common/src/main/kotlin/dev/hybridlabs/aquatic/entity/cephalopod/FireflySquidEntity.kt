@@ -10,12 +10,15 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
+@Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: Level) :
     HybridAquaticCephalopodEntity(
         entityType,
         world,
         HybridAquaticEntityTags.CRUSTACEAN,
-        HybridAquaticEntityTags.SHARK,
+        listOf(
+            HybridAquaticEntityTags.SHARK
+        ),
         true,
         true
     ) {
@@ -37,7 +40,7 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val nightSpawn = (world.seaLevel - 16)..(world.seaLevel - 1)
+            val nightSpawn = (world.seaLevel - 16)..<world.seaLevel
             val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 24)
 
             val newMoon = world.moonPhase == 4

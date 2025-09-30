@@ -124,8 +124,6 @@ open class HybridAquaticDolphinEntity(
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WATER_BORDER, -1.0f)
-        setPathfindingMalus(BlockPathTypes.WALKABLE, -1.0f)
         setCanPickUpLoot(true)
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02f, 0.1f, true)
         lookControl = SmoothSwimmingLookControl(this, 15)

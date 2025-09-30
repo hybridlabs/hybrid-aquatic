@@ -8,8 +8,6 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.sounds.SoundEvent
-import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.FluidTags
 import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
@@ -118,8 +116,6 @@ open class HybridAquaticMammalEntity(
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WALKABLE, 0.0f)
         moveControl = FloatControl(this)
         lookControl = LookControl(this)
         navigation = AmphibiousPathNavigation(this, world)

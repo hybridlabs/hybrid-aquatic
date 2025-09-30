@@ -40,8 +40,8 @@ open class HybridAquaticCritterEntity(
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WATER_BORDER, -1.0f)
-        setPathfindingMalus(BlockPathTypes.WALKABLE, -1.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
         navigation = GroundPathNavigation(this, world)
     }
@@ -79,7 +79,7 @@ open class HybridAquaticCritterEntity(
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         this.airSupply = this.maxAirSupply
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
@@ -167,7 +167,7 @@ open class HybridAquaticCritterEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel
             val bottomY = world.seaLevel - 128

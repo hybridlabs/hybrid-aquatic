@@ -51,8 +51,6 @@ open class HybridAquaticOctopusEntity(
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WATER_BORDER, -1.0f)
-        setPathfindingMalus(BlockPathTypes.WALKABLE, -1.0f)
         moveControl = MoveControl(this)
         groundNavigation = GroundPathNavigation(this, world)
         waterNavigation = WaterBoundPathNavigation(this, world)

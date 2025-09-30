@@ -11,7 +11,9 @@ class ArrowSquidEntity(entityType: EntityType<out ArrowSquidEntity>, world: Leve
         entityType,
         world,
         HybridAquaticEntityTags.CRUSTACEAN,
-        HybridAquaticEntityTags.SHARK,
+        listOf(
+            HybridAquaticEntityTags.SHARK
+        ),
         true,
         false
     ) {

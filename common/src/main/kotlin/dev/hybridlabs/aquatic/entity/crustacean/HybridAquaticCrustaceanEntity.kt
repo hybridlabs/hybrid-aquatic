@@ -19,9 +19,13 @@ import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.MoveControl
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
+import net.minecraft.world.entity.ai.goal.PanicGoal
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
+import net.minecraft.world.entity.ai.navigation.WallClimberNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
@@ -69,7 +73,6 @@ open class HybridAquaticCrustaceanEntity(
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, PanicGoal(this, 1.0))
-        goalSelector.addGoal(5, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, LookAtPlayerGoal(this, Player::class.java, 6.0f))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
         goalSelector.addGoal(3, WaterAvoidingRandomStrollGoal(this, 0.3))
@@ -90,9 +93,10 @@ open class HybridAquaticCrustaceanEntity(
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WALKABLE, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
-        navigation = GroundPathNavigation(this, world)
+        navigation = WallClimberNavigation(this, world)
     }
 
     override fun aiStep() {

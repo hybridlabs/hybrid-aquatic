@@ -13,12 +13,15 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
+@Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
     HybridAquaticCephalopodEntity(
         entityType,
         world,
         HybridAquaticEntityTags.NONE,
-        HybridAquaticEntityTags.SHARK,
+        listOf(
+            HybridAquaticEntityTags.SHARK
+        ),
         false,
         false
     ) {

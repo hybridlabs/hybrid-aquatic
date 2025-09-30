@@ -21,6 +21,7 @@ import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
@@ -47,7 +48,7 @@ open class HybridAquaticCephalopodEntity(
     type: EntityType<out HybridAquaticCephalopodEntity>,
     world: Level,
     open val prey: TagKey<EntityType<*>>,
-    open val predator: TagKey<EntityType<*>>,
+    open val predator: List<TagKey<EntityType<*>>>,
     open var hasInk: Boolean,
     open var hasGlowInk: Boolean
 ) : WaterAnimal(type, world), GeoEntity {
@@ -56,15 +57,8 @@ open class HybridAquaticCephalopodEntity(
     override fun registerGoals() {
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(2, CephalopodAttackGoal(this))
-        targetSelector.addGoal(
-            1,
-            NearestAttackableTargetGoal(
-                this,
-                LivingEntity::class.java,
-                10,
-                true,
-                true
-            ) { hunger <= 1200 && it.type.`is`(prey) })
+        goalSelector.addGoal(3, AvoidEntityGoal(this, LivingEntity::class.java, 8.0f, 1.0, 1.0) { entity: LivingEntity -> predator.any { predatorTag -> entity.type.`is`(predatorTag) } })
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { hunger <= 1200 && it.type.`is`(prey) })
     }
 
     override fun defineSynchedData() {
@@ -221,8 +215,6 @@ open class HybridAquaticCephalopodEntity(
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WATER_BORDER, -1.0f)
-        setPathfindingMalus(BlockPathTypes.WALKABLE, -1.0f)
         moveControl = SmoothSwimmingMoveControl(this, 85, 10, 1.0F, 0.1F, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
