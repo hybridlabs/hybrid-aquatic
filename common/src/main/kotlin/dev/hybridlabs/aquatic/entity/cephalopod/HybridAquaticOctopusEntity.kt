@@ -107,8 +107,8 @@ open class HybridAquaticOctopusEntity(
         entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(SITTING, true)
-        entityData.define(TARGET_COLOR, 19578105)
-        entityData.define(CURRENT_COLOR, 19578105)
+        entityData.define(TARGET_COLOR, 12799593)
+        entityData.define(CURRENT_COLOR, 12799593)
     }
 
     override fun finalizeSpawn(
