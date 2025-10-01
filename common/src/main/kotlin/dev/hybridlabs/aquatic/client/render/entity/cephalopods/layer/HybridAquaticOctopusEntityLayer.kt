@@ -47,7 +47,7 @@ class HybridAquaticOctopusEntityLayer<T: HybridAquaticOctopusEntity>(
         val target = Color.ofOpaque(animatable.getTargetColor())
 
         if (current != target) {
-            val blendSpeed = 0.05f
+            val blendSpeed = 0.025f
             current = Color.ofRGB(
                 Mth.lerp(blendSpeed, current.redFloat, target.redFloat),
                 Mth.lerp(blendSpeed, current.greenFloat, target.greenFloat),

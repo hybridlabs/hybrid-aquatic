@@ -119,7 +119,6 @@ open class HybridAquaticOctopusEntity(
     ): SpawnGroupData? {
         this.airSupply = getMaxMoistness()
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
-        this.xRot = 0.0f
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
@@ -159,7 +158,7 @@ open class HybridAquaticOctopusEntity(
         return entityData.get(TARGET_COLOR)
     }
 
-    fun setTargetColor(targetColor: Int) {
+    private fun setTargetColor(targetColor: Int) {
         entityData.set(TARGET_COLOR, targetColor)
     }
 
@@ -177,18 +176,20 @@ open class HybridAquaticOctopusEntity(
         val sharedBlock = level().getBlockState(currentPos)
         val floor = level().getBlockState(floorPos)
 
-        if (!sharedBlock.isAir) {
+        if (!sharedBlock.isAir && !sharedBlock.fluidState.`is`(net.minecraft.tags.FluidTags.WATER)) {
             val sharedColor = sharedBlock.getMapColor(this.level(), currentPos).col
             if (this.getTargetColor() != sharedColor && sharedColor != 0) {
                 this.setTargetColor(sharedColor)
             }
-        } else {
+        }
+        else if (!floor.fluidState.`is`(net.minecraft.tags.FluidTags.WATER)) {
             val floorColor = floor.getMapColor(this.level(), floorPos).col
             if (this.getTargetColor() != floorColor && floorColor != 0) {
                 this.setTargetColor(floorColor)
             }
         }
     }
+
 
     protected open fun getInkParticle(): SimpleParticleType {
         return ParticleTypes.SQUID_INK
@@ -224,10 +225,8 @@ open class HybridAquaticOctopusEntity(
         return !fromFishingNet && !hasCustomName()
     }
 
-    override fun handleAirSupply(air: Int) {}
-
     private fun getMaxMoistness(): Int {
-        return 600
+        return 1200
     }
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
@@ -302,7 +301,7 @@ open class HybridAquaticOctopusEntity(
                 "Sit/Swim/Idle",
                 20
             ) { state: AnimationState<HybridAquaticOctopusEntity> ->
-                if (isSitting()) {
+                if (isSitting() || this.onGround()) {
                     state.setAndContinue(DefaultAnimations.SIT)
                 } else {
                     if (state.isMoving) {

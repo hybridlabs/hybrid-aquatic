@@ -30,7 +30,7 @@
 				},
 				"body": {
 					"position": {
-						"vector": [0, 2, 0]
+						"vector": [0, 2, -1]
 					}
 				},
 				"head": {
@@ -298,7 +298,7 @@
 				},
 				"body": {
 					"rotation": {
-						"vector": [90, 0, -180]
+						"vector": [91.52493, 2.2802, 180.19488]
 					},
 					"position": {
 						"vector": [0, "1+math.sin(query.anim_time*90*1-80)*1", "1+math.sin(query.anim_time*90*1-80)*-1"]
