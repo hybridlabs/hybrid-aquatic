@@ -6,7 +6,7 @@
 			"bones": {
 				"left_tentacle_1": {
 					"rotation": {
-						"vector": ["42.5+math.cos(query.anim_time*15*1.5)*2.5", "-22.5+math.cos(query.anim_time*15*1.5)*5", 0]
+						"vector": ["42.5+math.cos(query.anim_time*15*1.5)*2.5", "math.cos(query.anim_time*15*1.5)*5", 0]
 					},
 					"position": {
 						"vector": [-0.25, 0, -0.5]
@@ -14,7 +14,7 @@
 				},
 				"left_tentacle_2": {
 					"rotation": {
-						"vector": [12.56853, "17.2766+math.cos(query.anim_time*15*1.5)*-5", "43.857+math.cos(query.anim_time*15*1.5)*-2.5"]
+						"vector": [12.56853, "math.cos(query.anim_time*15*1.5)*-5", "43.857+math.cos(query.anim_time*15*1.5)*-2.5"]
 					},
 					"position": {
 						"vector": [0.5, 0, 0.25]
@@ -22,7 +22,7 @@
 				},
 				"left_tentacle_4": {
 					"rotation": {
-						"vector": ["-42.5+math.cos(query.anim_time*15*1.5)*-2.5", "22.5+math.cos(query.anim_time*15*1.5)*-5", 0]
+						"vector": ["-42.5+math.cos(query.anim_time*15*1.5)*-2.5", "math.cos(query.anim_time*15*1.5)*-5", 0]
 					},
 					"position": {
 						"vector": [-0.25, 0, 0.5]
@@ -60,7 +60,7 @@
 				},
 				"right_tentacle_1": {
 					"rotation": {
-						"vector": ["42.5+math.cos(query.anim_time*15*1.5)*-2.5", "22.5+math.cos(query.anim_time*15*1.5)*-5", 0]
+						"vector": ["42.5+math.cos(query.anim_time*15*1.5)*-2.5", "math.cos(query.anim_time*15*1.5)*-5", 0]
 					},
 					"position": {
 						"vector": [0.25, 0, -0.5]
@@ -73,7 +73,7 @@
 				},
 				"right_tentacle_2": {
 					"rotation": {
-						"vector": [12.56853, "-17.2766+math.cos(query.anim_time*15*1.5)*5", "-43.857+math.cos(query.anim_time*15*1.5)*-2.5"]
+						"vector": [12.56853, "math.cos(query.anim_time*15*1.5)*5", "-43.857+math.cos(query.anim_time*15*1.5)*-2.5"]
 					},
 					"position": {
 						"vector": [-0.5, 0, 0.25]
@@ -81,7 +81,7 @@
 				},
 				"right_tentacle_4": {
 					"rotation": {
-						"vector": ["-42.5+math.cos(query.anim_time*15*1.5)*2.5", "-22.5+math.cos(query.anim_time*15*1.5)*5", 0]
+						"vector": ["-42.5+math.cos(query.anim_time*15*1.5)*2.5", "math.cos(query.anim_time*15*1.5)*5", 0]
 					},
 					"position": {
 						"vector": [0.25, 0, 0.5]
@@ -99,7 +99,7 @@
 				},
 				"left_tentacle_3": {
 					"rotation": {
-						"vector": ["-15.0685+math.cos(query.anim_time*15*1.5)*2.5", "-17.2766+math.cos(query.anim_time*15*1.5)*5", 46.35707]
+						"vector": ["-15.0685+math.cos(query.anim_time*15*1.5)*2.5", "math.cos(query.anim_time*15*1.5)*5", 46.35707]
 					},
 					"position": {
 						"vector": [0.5, 0, -0.25]
@@ -112,7 +112,7 @@
 				},
 				"right_tentacle_3": {
 					"rotation": {
-						"vector": ["-13.4428+math.cos(query.anim_time*15*1.5)*-2.5", "13.8504+math.cos(query.anim_time*15*1.5)*-5", -45.47171]
+						"vector": ["-13.4428+math.cos(query.anim_time*15*1.5)*-2.5", "math.cos(query.anim_time*15*1.5)*-5", -45.47171]
 					},
 					"position": {
 						"vector": [-0.5, 0, -0.25]
@@ -140,7 +140,7 @@
 			"bones": {
 				"left_tentacle_1": {
 					"rotation": {
-						"vector": ["42.5+math.cos(query.anim_time*45*1-80)*10", -22.5, 0]
+						"vector": ["42.5+math.cos(query.anim_time*45*1-80)*10", 0, 0]
 					},
 					"position": {
 						"vector": [-0.25, 0, -0.5]
@@ -148,7 +148,7 @@
 				},
 				"left_tentacle_2": {
 					"rotation": {
-						"vector": [11.25, 11.25, "42.5+math.cos(query.anim_time*45*1-80)*10"]
+						"vector": [11.25, 0, "42.5+math.cos(query.anim_time*45*1-80)*10"]
 					},
 					"position": {
 						"vector": [0.5, 0, 0.25]
@@ -156,7 +156,7 @@
 				},
 				"left_tentacle_4": {
 					"rotation": {
-						"vector": ["-42.5+math.cos(query.anim_time*45*1-80)*-10", 22.5, 0]
+						"vector": ["-42.5+math.cos(query.anim_time*45*1-80)*-10", 0, 0]
 					},
 					"position": {
 						"vector": [-0.25, 0, 0.5]
@@ -194,7 +194,7 @@
 				},
 				"right_tentacle_1": {
 					"rotation": {
-						"vector": ["42.5+math.cos(query.anim_time*45*1-80)*10", 22.5, 0]
+						"vector": ["42.5+math.cos(query.anim_time*45*1-80)*10", 0, 0]
 					},
 					"position": {
 						"vector": [0.25, 0, -0.5]
@@ -207,7 +207,7 @@
 				},
 				"right_tentacle_2": {
 					"rotation": {
-						"vector": [11.25, -11.25, "-42.5+math.cos(query.anim_time*45*1-80)*-10"]
+						"vector": [11.25, 0, "-42.5+math.cos(query.anim_time*45*1-80)*-10"]
 					},
 					"position": {
 						"vector": [-0.5, 0, 0.25]
@@ -215,7 +215,7 @@
 				},
 				"right_tentacle_4": {
 					"rotation": {
-						"vector": ["-42.5+math.cos(query.anim_time*45*1-80)*-10", -22.5, 0]
+						"vector": ["-42.5+math.cos(query.anim_time*45*1-80)*-10", 0, 0]
 					},
 					"position": {
 						"vector": [0.25, 0, 0.5]
@@ -233,7 +233,7 @@
 				},
 				"left_tentacle_3": {
 					"rotation": {
-						"vector": [-11.25, -11.25, "42.5+math.cos(query.anim_time*45*1-80)*10"]
+						"vector": [-11.25, 0, "42.5+math.cos(query.anim_time*45*1-80)*10"]
 					},
 					"position": {
 						"vector": [0.5, 0, 0.25]
@@ -246,7 +246,7 @@
 				},
 				"right_tentacle_3": {
 					"rotation": {
-						"vector": [-11.25, 11.25, "-42.5+math.cos(query.anim_time*45*1-80)*-10"]
+						"vector": [-11.25, 0, "-42.5+math.cos(query.anim_time*45*1-80)*-10"]
 					},
 					"position": {
 						"vector": [-0.5, 0, 0.25]
@@ -282,7 +282,7 @@
 				},
 				"left_tentacle_2": {
 					"rotation": {
-						"vector": [14.6484, 6.14337, "64.6788+math.cos(query.anim_time*90*1-80)*10"]
+						"vector": [12.91459, -17.5, "59.0861+math.cos(query.anim_time*90*1-80)*10"]
 					},
 					"position": {
 						"vector": [0.5, 0, 0.25]
@@ -353,7 +353,7 @@
 				},
 				"right_tentacle_2": {
 					"rotation": {
-						"vector": [14.6484, -6.14337, "-64.6788+math.cos(query.anim_time*90*1-80)*-10"]
+						"vector": [14.6484, 17.5, "-64.6788+math.cos(query.anim_time*90*1-80)*-10"]
 					},
 					"position": {
 						"vector": [-0.5, 0, 0.25]
@@ -379,7 +379,7 @@
 				},
 				"left_tentacle_3": {
 					"rotation": {
-						"vector": [-14.6484, -6.14337, "64.6788+math.cos(query.anim_time*90*1-80)*10"]
+						"vector": [-14.6484, 17.5, "64.6788+math.cos(query.anim_time*90*1-80)*10"]
 					},
 					"position": {
 						"vector": [0.5, 0, 0.25]
@@ -392,7 +392,7 @@
 				},
 				"right_tentacle_3": {
 					"rotation": {
-						"vector": [-14.6484, 6.14337, "-64.6788+math.cos(query.anim_time*90*1-80)*-10"]
+						"vector": [-14.6484, -17.5, "-64.6788+math.cos(query.anim_time*90*1-80)*-10"]
 					},
 					"position": {
 						"vector": [-0.5, 0, 0.25]

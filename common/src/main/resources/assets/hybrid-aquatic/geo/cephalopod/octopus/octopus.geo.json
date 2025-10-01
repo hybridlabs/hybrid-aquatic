@@ -55,6 +55,7 @@
 					"name": "left_tentacle_1",
 					"parent": "body",
 					"pivot": [1, 2, -1],
+					"rotation": [0, -22.5, 0],
 					"cubes": [
 						{"origin": [0, 0, -5], "size": [2, 2, 4], "uv": [0, 16]}
 					]
@@ -72,6 +73,7 @@
 					"name": "left_tentacle_2",
 					"parent": "body",
 					"pivot": [1, 2, -1],
+					"rotation": [0, 22.5, 0],
 					"cubes": [
 						{"origin": [1, 0, -2], "size": [4, 2, 2], "uv": [0, 22]}
 					]
@@ -89,6 +91,7 @@
 					"name": "left_tentacle_3",
 					"parent": "body",
 					"pivot": [1, 2, 1],
+					"rotation": [0, -22.5, 0],
 					"cubes": [
 						{"origin": [1, 0, 0], "size": [4, 2, 2], "uv": [24, 23]}
 					]
@@ -106,6 +109,7 @@
 					"name": "left_tentacle_4",
 					"parent": "body",
 					"pivot": [1, 2, 1],
+					"rotation": [0, 22.5, 0],
 					"cubes": [
 						{"origin": [0, 0, 1], "size": [2, 2, 4], "uv": [16, 9]}
 					]
@@ -123,6 +127,7 @@
 					"name": "right_tentacle_1",
 					"parent": "body",
 					"pivot": [-1, 2, -1],
+					"rotation": [0, 22.5, 0],
 					"cubes": [
 						{"origin": [-2, 0, -5], "size": [2, 2, 4], "uv": [0, 16], "mirror": true}
 					]
@@ -140,6 +145,7 @@
 					"name": "right_tentacle_2",
 					"parent": "body",
 					"pivot": [-1, 2, -1],
+					"rotation": [0, -22.5, 0],
 					"cubes": [
 						{"origin": [-5, 0, -2], "size": [4, 2, 2], "uv": [0, 22], "mirror": true}
 					]
@@ -157,6 +163,7 @@
 					"name": "right_tentacle_3",
 					"parent": "body",
 					"pivot": [-1, 2, 1],
+					"rotation": [0, 22.5, 0],
 					"cubes": [
 						{"origin": [-5, 0, 0], "size": [4, 2, 2], "uv": [24, 15]}
 					]
@@ -174,6 +181,7 @@
 					"name": "right_tentacle_4",
 					"parent": "body",
 					"pivot": [-1, 2, 1],
+					"rotation": [0, -22.5, 0],
 					"cubes": [
 						{"origin": [-2, 0, 1], "size": [2, 2, 4], "uv": [16, 9], "mirror": true}
 					]
