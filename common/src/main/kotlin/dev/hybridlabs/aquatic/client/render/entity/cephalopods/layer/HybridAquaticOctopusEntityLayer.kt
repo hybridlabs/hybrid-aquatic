@@ -37,6 +37,8 @@ class HybridAquaticOctopusEntityLayer<T: HybridAquaticOctopusEntity>(
     ) {
         if (animatable !is OverlayTextureFeature) return
 
+        if (!animatable.isSitting()) return
+
         val overlayName = animatable.getOverlayTextureName()
         if (overlayName.isEmpty()) return
 

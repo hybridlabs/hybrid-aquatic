@@ -23,6 +23,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -50,7 +51,8 @@ open class HybridAquaticFishEntity(
         goalSelector.addGoal(0, FishAttackGoal(this, 1.0, true))
         goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.0, 12.0F))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
-        goalSelector.addGoal(3, AvoidEntityGoal(this, LivingEntity::class.java, 8.0f, 1.0, 1.3) { entity: LivingEntity -> predator.any { predatorTag -> entity.type.`is`(predatorTag) } })
+        goalSelector.addGoal(3, AvoidEntityGoal(this, LivingEntity::class.java, 8.0f, 1.3, 1.5) { entity: LivingEntity -> predator.any { predatorTag -> entity.type.`is`(predatorTag) } })
+        goalSelector.addGoal(3, AvoidEntityGoal(this, Player::class.java, 8.0f, 1.3, 1.5))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
     }
 

@@ -18,12 +18,12 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.world.entity.ai.goal.PanicGoal
-import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.monster.Monster
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -44,7 +44,6 @@ open class HybridAquaticOctopusEntity(
     open val prey: TagKey<EntityType<*>>,
     open val predator: TagKey<EntityType<*>>,
     open var hasInk: Boolean,
-    open var canCamouflage: Boolean,
 ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var waterNavigation: WaterBoundPathNavigation
@@ -96,7 +95,10 @@ open class HybridAquaticOctopusEntity(
 
     override fun registerGoals() {
         goalSelector.addGoal(0, PanicGoal(this, 1.25))
+        goalSelector.addGoal(3, RandomStrollGoal(this, 0.5, 2))
         goalSelector.addGoal(3, OctopusSwimmingGoal(this, 1.0, 10))
+        goalSelector.addGoal(4, RandomLookAroundGoal(this))
+        goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 6.0f))
     }
 
     override fun defineSynchedData() {
@@ -106,8 +108,8 @@ open class HybridAquaticOctopusEntity(
         entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(SITTING, false)
-        entityData.define(TARGET_COLOR, 6645808)
-        entityData.define(CURRENT_COLOR, 6645808)
+        entityData.define(TARGET_COLOR, 19578105)
+        entityData.define(CURRENT_COLOR, 19578105)
     }
 
     override fun finalizeSpawn(

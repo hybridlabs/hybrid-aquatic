@@ -12,7 +12,6 @@ class GlowingSuckerOctopusEntity(entityType: EntityType<out GlowingSuckerOctopus
         world,
         HybridAquaticEntityTags.CRUSTACEAN,
         HybridAquaticEntityTags.SHARK,
-        false,
         false
     ) {
 

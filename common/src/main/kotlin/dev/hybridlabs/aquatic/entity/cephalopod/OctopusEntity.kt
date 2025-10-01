@@ -21,18 +21,17 @@ class OctopusEntity(entityType: EntityType<out OctopusEntity>, world: Level) :
         world,
         HybridAquaticEntityTags.CRUSTACEAN,
         HybridAquaticEntityTags.SHARK,
-        false,
-        true
+        false
     ), OverlayTextureFeature {
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 6.0)
+                .add(Attributes.MAX_HEALTH, 12.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.6)
-                .add(Attributes.ATTACK_DAMAGE, 2.0)
+                .add(Attributes.ATTACK_DAMAGE, 4.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 8.0)
+                .add(Attributes.FOLLOW_RANGE, 16.0)
         }
 
         val OverlayTexture: EntityDataAccessor<Int> =

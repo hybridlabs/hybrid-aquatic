@@ -12,7 +12,6 @@ class UmbrellaOctopusEntity(entityType: EntityType<out UmbrellaOctopusEntity>, w
         world,
         HybridAquaticEntityTags.NONE,
         HybridAquaticEntityTags.SHARK,
-        false,
         false
     ) {
 
