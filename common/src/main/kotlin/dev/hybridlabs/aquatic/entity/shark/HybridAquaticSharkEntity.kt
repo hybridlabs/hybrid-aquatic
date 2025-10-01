@@ -221,7 +221,7 @@ open class HybridAquaticSharkEntity(
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             AnimationController(
-                this, "Swim", 4,
+                this, "Swim", 8,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
                     if (this.isUnderWater) {
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SWIM)
