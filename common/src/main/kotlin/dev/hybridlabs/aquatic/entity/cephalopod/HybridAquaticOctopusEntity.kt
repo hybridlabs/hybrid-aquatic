@@ -346,7 +346,7 @@ open class HybridAquaticOctopusEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y <= world.seaLevel - 64 &&
+            return pos.y >= world.seaLevel - 64 &&
                     world.getBlockState(pos.below()).isSolid
         }
 
