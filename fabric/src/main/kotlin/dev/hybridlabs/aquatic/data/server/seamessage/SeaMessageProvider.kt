@@ -54,6 +54,10 @@ class SeaMessageProvider(output: FabricDataOutput, registriesFuture: Completable
             GeneratedSeaMessageData("free_gaza", "#FreeGaza", englishTitle = "Freedom"),
             GeneratedSeaMessageData("seafarer", "I feel like some kind of Seafarer", englishTitle = "Seafarer"),
             GeneratedSeaMessageData("rainbow_reef", "This reef is so colorful! It's like a Rainbow Reef!", englishTitle = "Rainbow Reef"),
+            GeneratedSeaMessageData("fintastic", "I'm feeling Fintastic today!", englishTitle = "Fintastic"),
+            GeneratedSeaMessageData("unusual_fish", "I saw some Unusual Fish in the Ocean", englishTitle = "Unusual Fish"),
+            GeneratedSeaMessageData("tide", "I hope Tide carries this message to someone", englishTitle = "Tide"),
+            GeneratedSeaMessageData("ben", "My friend Ben caught a shark the other day", englishTitle = "Ben"),
             GeneratedSeaMessageData("control_oop", "Objects of Power shape reality around us. Handle with care.", author = "FBC", englishTitle = "Object of Power: Sea Message"),
             GeneratedSeaMessageData("dylan", """
                 You are a worm through time.
