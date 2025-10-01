@@ -22,7 +22,6 @@ import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
-import net.minecraft.world.entity.monster.Monster
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
@@ -107,7 +106,7 @@ open class HybridAquaticOctopusEntity(
         entityData.define(OCTOPUS_SIZE, 0)
         entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(ATTEMPT_ATTACK, false)
-        entityData.define(SITTING, false)
+        entityData.define(SITTING, true)
         entityData.define(TARGET_COLOR, 19578105)
         entityData.define(CURRENT_COLOR, 19578105)
     }
@@ -347,13 +346,8 @@ open class HybridAquaticOctopusEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.seaLevel - 4
-            val bottomY = world.seaLevel - 24
-
-            return pos.y in bottomY..topY &&
-                    world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos) &&
-                    !Monster.isDarkEnoughToSpawn(world, pos, random)
+            return pos.y <= world.seaLevel - 64 &&
+                    world.getBlockState(pos.below()).isSolid
         }
 
         fun getScaleAdjustment(octopus: HybridAquaticOctopusEntity, adjustment: Float): Float {
