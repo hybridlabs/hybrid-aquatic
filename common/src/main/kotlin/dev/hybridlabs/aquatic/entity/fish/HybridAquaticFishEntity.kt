@@ -50,7 +50,7 @@ open class HybridAquaticFishEntity(
         goalSelector.addGoal(0, FishAttackGoal(this, 1.0, true))
         goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.0, 12.0F))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
-        goalSelector.addGoal(3, AvoidEntityGoal(this, LivingEntity::class.java, 8.0f, 1.0, 1.0) { entity: LivingEntity -> predator.any { predatorTag -> entity.type.`is`(predatorTag) } })
+        goalSelector.addGoal(3, AvoidEntityGoal(this, LivingEntity::class.java, 8.0f, 1.0, 1.3) { entity: LivingEntity -> predator.any { predatorTag -> entity.type.`is`(predatorTag) } })
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
     }
 
