@@ -74,61 +74,36 @@
 				}
 			}
 		},
-		"flop": {
+		"misc.flop": {
 			"loop": true,
-			"animation_length": 2,
 			"bones": {
 				"body": {
-					"rotation": {
-						"0.0": {
-							"vector": [2.5, 0, 0]
-						},
-						"1.0": {
-							"vector": [-2.5, 0, 0]
-						},
-						"2.0": {
-							"vector": [2.5, 0, 0]
-						}
-					}
+					"rotation": [0, -22.5, 0],
+					"position": [0, -0.75, 0]
 				},
 				"tail": {
-					"rotation": {
-						"0.0": {
-							"vector": [-5, 0, 0]
-						},
-						"1.0": {
-							"vector": [0, 0, 0]
-						},
-						"2.0": {
-							"vector": [-5, 0, 0]
-						}
-					}
+					"rotation": [-2.70569, 22.47741, -1.03509]
 				},
-				"leftfin": {
-					"rotation": {
-						"0.0": {
-							"vector": [2.5, 0, 0]
-						},
-						"1.0": {
-							"vector": [-2.5, 0, 0]
-						},
-						"2.0": {
-							"vector": [2.5, 0, 0]
-						}
-					}
+				"tail_tip": {
+					"rotation": [0, 45, 0]
 				},
-				"rightfin": {
-					"rotation": {
-						"0.0": {
-							"vector": [2.5, 0, 0]
-						},
-						"1.0": {
-							"vector": [-2.5, 0, 0]
-						},
-						"2.0": {
-							"vector": [2.5, 0, 0]
-						}
-					}
+				"left_fin": {
+					"rotation": [0, 0, 2.5]
+				},
+				"left_fin_tip": {
+					"rotation": [0, 0, 5]
+				},
+				"left_fin_back": {
+					"rotation": [-7.5, 0, 0]
+				},
+				"right_fin": {
+					"rotation": [0, 0, -2.5]
+				},
+				"right_fin_tip": {
+					"rotation": [0, 0, -5]
+				},
+				"right_fin_back": {
+					"rotation": [-7.5, 0, 0]
 				}
 			}
 		}
