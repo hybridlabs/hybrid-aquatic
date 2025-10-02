@@ -7,6 +7,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
+import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
 
 class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfishEntity>, world: Level) :
     HybridAquaticFishEntity(
@@ -41,6 +45,19 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
         } else if (isGliding) {
             stopGliding()
         }
+    }
+
+    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
+        controllerRegistrar.add(
+            AnimationController(this, "Fly/Swim/Idle", 5
+            ) { state: AnimationState<HybridAquaticFishEntity> ->
+                when {
+                    this.isGliding -> state.setAndContinue(DefaultAnimations.FLY)
+                    state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
+                    else -> state.setAndContinue(DefaultAnimations.IDLE)
+                }
+            }
+        )
     }
 
     private fun startGliding() {
