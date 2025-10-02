@@ -36,7 +36,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, TryFindWaterGoal(this))
+        goalSelector.addGoal(5, TryFindWaterGoal(this))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
     }
 

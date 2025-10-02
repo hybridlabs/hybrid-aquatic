@@ -31,7 +31,7 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, TryFindWaterGoal(this))
+        goalSelector.addGoal(5, TryFindWaterGoal(this))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
     }
 
