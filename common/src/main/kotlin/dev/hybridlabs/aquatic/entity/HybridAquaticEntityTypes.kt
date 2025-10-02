@@ -879,21 +879,6 @@ object HybridAquaticEntityTypes {
         )
     }
 
-    private fun <T : LivingEntity> registerDolphin(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(
-            id,
-            entityFactory,
-            dimensions,
-            attributeContainer,
-            MobCategory.WATER_CREATURE
-        )
-    }
-
     private fun <T : LivingEntity> registerMammal(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
