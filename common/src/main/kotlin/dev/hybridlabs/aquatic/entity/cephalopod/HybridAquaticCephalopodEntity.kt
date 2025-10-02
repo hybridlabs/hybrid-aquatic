@@ -388,7 +388,7 @@ open class HybridAquaticCephalopodEntity(
             pos: BlockPos,
             random: RandomSource
         ): Boolean {
-            val topY = world.seaLevel - 24
+            val topY = world.seaLevel - 48
             val bottomY = world.seaLevel - 128
 
             return pos.y in bottomY..topY &&

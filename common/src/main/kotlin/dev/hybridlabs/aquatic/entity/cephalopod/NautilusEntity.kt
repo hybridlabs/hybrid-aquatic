@@ -44,7 +44,7 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
             random: RandomSource,
         ): Boolean {
             val nightSpawn = (world.seaLevel - 24)..(world.seaLevel - 8)
-            val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 24)
+            val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 48)
 
             val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
 

@@ -41,7 +41,7 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
             random: RandomSource,
         ): Boolean {
             val nightSpawn = (world.seaLevel - 16)..<world.seaLevel
-            val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 24)
+            val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 48)
 
             val newMoon = world.moonPhase == 4
 

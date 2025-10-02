@@ -1,9 +1,6 @@
 package dev.hybridlabs.aquatic.entity
 
-import dev.hybridlabs.aquatic.entity.cephalopod.FireflySquidEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticOctopusEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.NautilusEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.*
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
@@ -108,9 +105,9 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS.get(),
             HybridAquaticEntityTypes.OCTOPUS.get(),
-            HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(),
-        ).forEach { registerDeepCephalopod(it) }
+        ).forEach { registerOctopus(it) }
 
+        registerWaterCreature(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), UmbrellaOctopusEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.NAUTILUS.get(), NautilusEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), FireflySquidEntity::canSpawn)
 
