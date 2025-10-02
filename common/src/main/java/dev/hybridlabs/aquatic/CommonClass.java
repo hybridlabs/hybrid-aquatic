@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
@@ -31,6 +32,7 @@ public class CommonClass {
     // Create some static RegistrationProviders for reuse elsewhere.
     public static final RegistrationProvider<Block> BLOCKS = RegistrationProvider.get(BuiltInRegistries.BLOCK, MOD_ID);
     public static final RegistrationProvider<Item> ITEMS = RegistrationProvider.get(BuiltInRegistries.ITEM, MOD_ID);
+    public static final RegistrationProvider<PaintingVariant> PAINTINGS = RegistrationProvider.get(BuiltInRegistries.PAINTING_VARIANT, MOD_ID);
     public static final RegistrationProvider<Enchantment> ENCHANTMENTS =
             RegistrationProvider.get(BuiltInRegistries.ENCHANTMENT, MOD_ID);
     public static final RegistrationProvider<Potion> POTIONS = RegistrationProvider.get(BuiltInRegistries.POTION,
