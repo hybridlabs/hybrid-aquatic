@@ -14,12 +14,6 @@
 				"left_fin": {
 					"rotation": [0, "15+math.sin(query.anim_time*45*3+40)*25", 0]
 				},
-				"tail_fin": {
-					"rotation": ["0+math.cos(query.anim_time*90*1-200)*-2", "0-math.sin(query.anim_time*45*3-160)*16", "0-math.sin(query.anim_time*45*3-160)*3"]
-				},
-				"lure": {
-					"rotation": ["-15+math.sin(query.anim_time*90*1-160)*5", 0, 0]
-				},
 				"mouth": {
 					"rotation": ["10+math.sin(query.anim_time*90*1-160)*5", 0, 0]
 				},
@@ -193,7 +187,7 @@
 			"bones": {
 				"body": {
 					"rotation": [0, 0, -90],
-					"position": [0.5, 2, 0]
+					"position": [0.5, -1, 7]
 				},
 				"segment_1": {
 					"rotation": [22.5, 0, 0]

@@ -213,7 +213,7 @@ open class HybridAquaticFishEntity(
 
     //#region Properties
 
-    private var moistness: Int
+    var moistness: Int
         get() = entityData.get(MOISTNESS)
         set(moistness) {
             entityData.set(MOISTNESS, moistness)
