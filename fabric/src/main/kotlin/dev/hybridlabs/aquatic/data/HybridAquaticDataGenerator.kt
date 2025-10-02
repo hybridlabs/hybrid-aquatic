@@ -16,6 +16,7 @@ import dev.hybridlabs.aquatic.data.server.tag.BiomeTagProvider
 import dev.hybridlabs.aquatic.data.server.tag.BlockTagProvider
 import dev.hybridlabs.aquatic.data.server.tag.EntityTypeTagProvider
 import dev.hybridlabs.aquatic.data.server.tag.ItemTagProvider
+import dev.hybridlabs.aquatic.data.server.worldgen.BiomeProvider
 import dev.hybridlabs.aquatic.data.structure_spawn_modifier.StructureSpawnModifierProvider
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
@@ -24,6 +25,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.core.Registry
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
+import net.minecraft.world.level.biome.Biome
 
 object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(generator: FabricDataGenerator) {
@@ -44,6 +46,7 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::RecipeProvider)
         pack.addProvider(::SeaMessageProvider)
         pack.addProvider(::StructureSpawnModifierProvider)
+        pack.addProvider(::BiomeProvider)
     }
 
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
