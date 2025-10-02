@@ -14,6 +14,10 @@ class SunfishEntityModel : HybridAquaticFishEntityModel<SunfishEntity>("sunfish"
     private val HOODWINKER_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/sunfish/sunfish_hoodwinker.geo.json")
     private val GIANT_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/sunfish/sunfish_giant.geo.json")
 
+    private val SUNFISH_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/sunfish.animation.json")
+    private val HOODWINKER_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/sunfish_hoodwinker.animation.json")
+    private val GIANT_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/sunfish_giant.animation.json")
+
     override fun getTextureResource(animatable: SunfishEntity): ResourceLocation {
         return when (animatable.variant) {
             SunfishEntity.Companion.Type.OCEAN -> OCEAN_TEXTURE
@@ -29,6 +33,15 @@ class SunfishEntityModel : HybridAquaticFishEntityModel<SunfishEntity>("sunfish"
             SunfishEntity.Companion.Type.SHARPTAIL -> SUNFISH_MODEL
             SunfishEntity.Companion.Type.HOODWINKER -> HOODWINKER_MODEL
             SunfishEntity.Companion.Type.GIANT -> GIANT_MODEL
+        }
+    }
+
+    override fun getAnimationResource(animatable: SunfishEntity): ResourceLocation {
+        return when (animatable.variant) {
+            SunfishEntity.Companion.Type.OCEAN -> SUNFISH_ANIMATION
+            SunfishEntity.Companion.Type.SHARPTAIL -> SUNFISH_ANIMATION
+            SunfishEntity.Companion.Type.HOODWINKER -> HOODWINKER_ANIMATION
+            SunfishEntity.Companion.Type.GIANT -> GIANT_ANIMATION
         }
     }
 }
