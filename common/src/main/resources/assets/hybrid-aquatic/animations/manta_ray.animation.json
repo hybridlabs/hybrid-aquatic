@@ -10,13 +10,22 @@
 					"position": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
 				},
 				"tail": {
-					"rotation": ["Math.cos(query.anim_time * 90)*10", 0, 0]
+					"rotation": ["Math.sin(query.anim_time * 90)*10", 0, 0]
 				},
 				"right_fin": {
 					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*5"]
 				},
 				"left_fin": {
 					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*-5"]
+				},
+				"tail_tip": {
+					"rotation": ["Math.sin(query.anim_time * 90)*10", 0, 0]
+				},
+				"right_fin_tip": {
+					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*10"]
+				},
+				"left_fin_tip": {
+					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*-10"]
 				}
 			}
 		},
@@ -54,61 +63,29 @@
 				}
 			}
 		},
-		"flop": {
+		"misc.flop": {
 			"loop": true,
-			"animation_length": 2,
 			"bones": {
 				"body": {
-					"rotation": {
-						"0.0": {
-							"vector": [2.5, 0, 0]
-						},
-						"1.0": {
-							"vector": [-2.5, 0, 0]
-						},
-						"2.0": {
-							"vector": [2.5, 0, 0]
-						}
-					}
+					"position": [0, -1, 0]
 				},
 				"tail": {
-					"rotation": {
-						"0.0": {
-							"vector": [-5, 0, 0]
-						},
-						"1.0": {
-							"vector": [0, 0, 0]
-						},
-						"2.0": {
-							"vector": [-5, 0, 0]
-						}
-					}
+					"rotation": [-10, 0, 0]
 				},
-				"leftfin": {
-					"rotation": {
-						"0.0": {
-							"vector": [2.5, 0, 0]
-						},
-						"1.0": {
-							"vector": [-2.5, 0, 0]
-						},
-						"2.0": {
-							"vector": [2.5, 0, 0]
-						}
-					}
+				"tail_tip": {
+					"rotation": [5, 0, 0]
 				},
-				"rightfin": {
-					"rotation": {
-						"0.0": {
-							"vector": [2.5, 0, 0]
-						},
-						"1.0": {
-							"vector": [-2.5, 0, 0]
-						},
-						"2.0": {
-							"vector": [2.5, 0, 0]
-						}
-					}
+				"right_fin": {
+					"rotation": [0, 0, -10]
+				},
+				"right_fin_tip": {
+					"rotation": [0, 0, 7.5]
+				},
+				"left_fin": {
+					"rotation": [0, 0, 10]
+				},
+				"left_fin_tip": {
+					"rotation": [0, 0, -7.5]
 				}
 			}
 		}
