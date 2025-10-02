@@ -23,7 +23,7 @@
             "argument1": {
               "type": "minecraft:add",
               "argument1": -1,
-              "argument2": 1
+              "argument2": 2
             },
             "argument2": {
               "type": "minecraft:spline",
