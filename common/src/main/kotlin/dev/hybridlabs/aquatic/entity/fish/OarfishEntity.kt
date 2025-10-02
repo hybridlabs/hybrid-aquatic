@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -31,6 +32,11 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
             HybridAquaticEntityTags.SHARK
         )
     ) {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(3, StayInWaterGoal(this))
+    }
 
     override fun aiStep() {
         super.aiStep()
@@ -74,6 +80,11 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
         }
     }
 
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
+        return if (isFeeding()) { (0.05f)
+        } else { (0.5f) }
+    }
+
     override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
         super.onSyncedDataUpdated(key)
         if (key == FEEDING) {
@@ -97,16 +108,12 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
         refreshDimensions()
     }
 
-    fun isFeeding(): Boolean {
+    private fun isFeeding(): Boolean {
         return entityData.get(FEEDING)
     }
 
     private fun setFeeding(vertical: Boolean) {
         entityData.set(FEEDING, vertical)
-    }
-
-    override fun isVisuallySwimming(): Boolean {
-        return this.isSwimming
     }
 
     override fun getMaxSpawnClusterSize(): Int {
