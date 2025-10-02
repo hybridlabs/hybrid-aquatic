@@ -19,7 +19,6 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.*
-import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
@@ -45,20 +44,14 @@ open class HybridAquaticOctopusEntity(
     open var hasInk: Boolean,
 ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private var waterNavigation: WaterBoundPathNavigation
-    private var groundNavigation: GroundPathNavigation
     private var sittingTimer: Int = 0
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         moveControl = OctopusMoveControl(this, 85, 10, 1.0F, 0.1F, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
-        groundNavigation = GroundPathNavigation(this, world)
-        waterNavigation = WaterBoundPathNavigation(this, world)
+        navigation = WaterBoundPathNavigation(this, world)
     }
-
-    private var swimTicksRemaining: Int = 0
-    private var swimmingState: Boolean = false
 
     override fun aiStep() {
         super.aiStep()
@@ -190,7 +183,6 @@ open class HybridAquaticOctopusEntity(
             }
         }
     }
-
 
     protected open fun getInkParticle(): SimpleParticleType {
         return ParticleTypes.SQUID_INK
