@@ -57,7 +57,7 @@
 				}
 			}
 		},
-		"move.flop": {
+		"misc.flop": {
 			"loop": true,
 			"animation_length": 0.5,
 			"bones": {

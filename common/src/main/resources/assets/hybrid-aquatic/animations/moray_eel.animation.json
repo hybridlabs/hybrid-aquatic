@@ -76,28 +76,6 @@
 				}
 			}
 		},
-		"flop": {
-			"loop": true,
-			"animation_length": 4,
-			"bones": {
-				"mouth": {
-					"rotation": ["-5+Math.cos(query.anim_time * 90)*5", 0, 0]
-				},
-				"segment_1": {
-					"rotation": [22.5, 0, 0]
-				},
-				"segment_2": {
-					"rotation": [22.67458, -6.92618, -2.88419]
-				},
-				"segment_3": {
-					"rotation": [22.57734, 4.61854, 1.91757]
-				},
-				"body": {
-					"rotation": [0, 0, -90],
-					"position": [-5, -1, -4]
-				}
-			}
-		},
 		"misc.flop": {
 			"loop": true,
 			"bones": {
