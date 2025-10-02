@@ -311,9 +311,8 @@ class ConfiguredFeatureProvider(
                     HybridAquaticBlockTags.TIDE_POOL_REPLACEABLE,
                     WeightedStateProvider(
                         SimpleWeightedRandomList.builder<BlockState>()
-                            .add(Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 2)
-                            .add(Blocks.STONE.defaultBlockState(), 2)
-                            .add(Blocks.TUFF.defaultBlockState(), 1)
+                            .add(HybridAquaticBlocks.SHORESTONE.get().defaultBlockState(), 3)
+                            .add(HybridAquaticBlocks.BARNACLE_SHORESTONE.get().defaultBlockState(), 1)
                             .build()
                     ),
                     PlacementUtils.inlinePlaced(

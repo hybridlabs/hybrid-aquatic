@@ -282,6 +282,8 @@ object HybridAquaticItems {
     //#region Artificial Blocks
 
     val GLOWSLIME_BLOCK = registerBlockItem("glowslime_block") { HybridAquaticBlocks.GLOWSLIME_BLOCK.get() }
+    val SHORESTONE = registerBlockItem("shorestone") { HybridAquaticBlocks.SHORESTONE.get() }
+    val BARNACLE_SHORESTONE = registerBlockItem("barnacle_shorestone") { HybridAquaticBlocks.BARNACLE_SHORESTONE.get() }
     val BUOY = registerPlaceableInWaterBlockItem("buoy") { HybridAquaticBlocks.BUOY.get() }
     val RAFT = registerPlaceableInWaterBlockItem("raft") { HybridAquaticBlocks.RAFT.get() }
     val GLOWSTICK = registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)

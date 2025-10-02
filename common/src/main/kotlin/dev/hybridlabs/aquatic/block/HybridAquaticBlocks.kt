@@ -207,7 +207,7 @@ object HybridAquaticBlocks {
         CoralBlock(
             DEAD_SUN_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK)
-                .mapColor(MapColor.COLOR_PURPLE)
+                .mapColor(MapColor.TERRACOTTA_ORANGE)
                 .instrument(NoteBlockInstrument.BASEDRUM)
                 .requiresCorrectToolForDrops()
                 .strength(1.0F)
@@ -240,7 +240,7 @@ object HybridAquaticBlocks {
         CoralBlock(
             DEAD_BUTTON_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK)
-                .mapColor(MapColor.COLOR_PURPLE)
+                .mapColor(MapColor.TERRACOTTA_WHITE)
                 .instrument(NoteBlockInstrument.BASEDRUM)
                 .requiresCorrectToolForDrops()
                 .strength(1.0F)
@@ -354,7 +354,22 @@ object HybridAquaticBlocks {
             "glowslime_block"
         ) {
             SlimeBlock(Properties.copy(Blocks.SLIME_BLOCK).lightLevel { 12 }
-                .strength(0.75F)
+            )
+        }
+
+    val SHORESTONE =
+        register(
+            "shorestone"
+        ) {
+            Block(Properties.copy(Blocks.TUFF)
+            )
+        }
+
+    val BARNACLE_SHORESTONE =
+        register(
+            "barnacle_shorestone"
+        ) {
+            Block(Properties.copy(Blocks.TUFF)
             )
         }
 

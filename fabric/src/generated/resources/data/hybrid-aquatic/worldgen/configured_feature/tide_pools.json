@@ -15,19 +15,13 @@
       "entries": [
         {
           "data": {
-            "Name": "minecraft:mossy_cobblestone"
+            "Name": "hybrid-aquatic:shorestone"
           },
-          "weight": 2
+          "weight": 3
         },
         {
           "data": {
-            "Name": "minecraft:stone"
-          },
-          "weight": 2
-        },
-        {
-          "data": {
-            "Name": "minecraft:tuff"
+            "Name": "hybrid-aquatic:barnacle_shorestone"
           },
           "weight": 1
         }

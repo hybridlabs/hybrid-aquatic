@@ -158,6 +158,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.ACACIA_CRATE.get() to "Acacia Crate",
             HybridAquaticBlocks.MANGROVE_CRATE.get() to "Mangrove Crate",
             HybridAquaticBlocks.CHERRY_CRATE.get() to "Cherry Crate",
+            HybridAquaticBlocks.SHORESTONE.get() to "Shorestone",
+            HybridAquaticBlocks.BARNACLE_SHORESTONE.get() to "Barnacle Shorestone",
             HybridAquaticBlocks.BUOY.get() to "Buoy",
             HybridAquaticBlocks.GIANT_CLAM.get() to "Giant Clam",
 
