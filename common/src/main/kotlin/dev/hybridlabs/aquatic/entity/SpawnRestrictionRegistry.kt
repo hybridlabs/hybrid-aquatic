@@ -8,7 +8,6 @@ import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
-import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
@@ -155,11 +154,6 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.LANTERN_SHARK.get(),
         ).forEach { registerDeepShark(it) }
 
-        // dolphins
-        setOf(
-            HybridAquaticEntityTypes.ORCA.get(),
-        ).forEach { registerDolphin(it) }
-
         setOf(
             HybridAquaticEntityTypes.OTTER.get(),
         ).forEach { registerMammal(it) }
@@ -242,10 +236,6 @@ object SpawnRestrictionRegistry {
 
     private fun <T : WaterAnimal> registerDeepShark(entityType: EntityType<T>) {
         registerWaterCreature(entityType, HybridAquaticSharkEntity::canDeepSpawn)
-    }
-
-    private fun <T : WaterAnimal> registerDolphin(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticDolphinEntity::canSpawn)
     }
 
     private fun <T : HybridAquaticMammalEntity> registerMammal(entityType: EntityType<T>) {

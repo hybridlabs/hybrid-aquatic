@@ -8,7 +8,6 @@ import dev.hybridlabs.aquatic.client.render.entity.critter.StarfishEntityRendere
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
 import dev.hybridlabs.aquatic.client.render.entity.fish.*
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
-import dev.hybridlabs.aquatic.client.render.entity.mammal.OrcaEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
@@ -644,12 +643,6 @@ object HybridAquaticEntityRenderers {
         )
 
     //endregion
-
-    val ORCA =
-        ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.ORCA,
-            ::OrcaEntityRenderer
-        )
 
     val OTTER =
         ClientServices.PLATFORM.registerEntityRenderer(

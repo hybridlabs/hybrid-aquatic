@@ -121,10 +121,6 @@ class EntitySpawnConfigGenerator {
         addUndergroundShark(HybridAquaticEntityTypes.LANTERN_SHARK.get(), listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS), 3, 1, 2)
         //#endregion
 
-        //#region Dolphins
-        addDolphin(HybridAquaticEntityTypes.ORCA.get(), listOf(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 5, 1, 4)
-        //#endregion
-
         //#region Mammal
         addMammal(HybridAquaticEntityTypes.OTTER.get(), listOf(HybridAquaticBiomeTags.RIVERS, HybridAquaticBiomeTags.SANDY_BEACHES, HybridAquaticBiomeTags.ROCKY_BEACHES), 5, 1, 4)
         //#endregion
@@ -240,16 +236,6 @@ class EntitySpawnConfigGenerator {
             Services.PLATFORM.getMobCategoryByName("SHARK_UNDERGROUND"),
             weight, minGroup, maxGroup
         )
-    }
-
-    private fun addDolphin(
-        entityType: EntityType<*>,
-        spawnTags: List<TagKey<Biome>>,
-        weight: Int,
-        minGroup: Int,
-        maxGroup: Int
-    ) {
-        add(entityType, spawnTags, MobCategory.WATER_CREATURE, weight, minGroup, maxGroup)
     }
 
     private fun addMammal(

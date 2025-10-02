@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:shallow_tropical_oceans",
+  "spawners": {
+    "type": "hybrid-aquatic:octopus",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 1
+  }
+}
