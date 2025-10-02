@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.tags.BlockTags
 import net.minecraft.util.random.SimpleWeightedRandomList
 import net.minecraft.util.valueproviders.BiasedToBottomInt
 import net.minecraft.util.valueproviders.ConstantInt
@@ -19,14 +20,15 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.HorizontalDirectionalBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
+import net.minecraft.world.level.levelgen.GeodeBlockSettings
+import net.minecraft.world.level.levelgen.GeodeCrackSettings
+import net.minecraft.world.level.levelgen.GeodeLayerSettings
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.feature.Feature
+import net.minecraft.world.level.levelgen.feature.Feature.GEODE
 import net.minecraft.world.level.levelgen.feature.Feature.WATERLOGGED_VEGETATION_PATCH
-import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration
-import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration
+import net.minecraft.world.level.levelgen.feature.configurations.*
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider
@@ -318,7 +320,7 @@ class ConfiguredFeatureProvider(
                         GREEN
                     ),
                     CaveSurface.FLOOR,
-                    BiasedToBottomInt.of(1,7),
+                    BiasedToBottomInt.of(1, 7),
                     0.0f,
                     5,
                     0.2f,
@@ -328,6 +330,35 @@ class ConfiguredFeatureProvider(
             )
         )
 
+        entries.add(
+            HybridAquaticConfiguredFeatures.BOULDER,
+            ConfiguredFeature(
+                GEODE, GeodeConfiguration(
+                    GeodeBlockSettings(
+                        BlockStateProvider.simple(Blocks.STONE),
+                        BlockStateProvider.simple(Blocks.STONE),
+                        BlockStateProvider.simple(Blocks.STONE),
+                        BlockStateProvider.simple(Blocks.STONE),
+                        BlockStateProvider.simple(Blocks.STONE),
+                        mutableListOf(Blocks.STONE.defaultBlockState()),
+                        BlockTags.FEATURES_CANNOT_REPLACE,
+                        BlockTags.GEODE_INVALID_BLOCKS
+                    ),
+                    GeodeLayerSettings(0.5, 1.0, 1.25, 1.75),
+                    GeodeCrackSettings(0.0, 0.0, 0),
+                    0.0,
+                    0.0,
+                    false,
+                    ConstantInt.of(5),
+                    UniformInt.of(3, 4),
+                    BiasedToBottomInt.of(1, 2),
+                    -16,
+                    16,
+                    0.07,
+                    50
+                )
+            )
+        )
     }
 
     override fun getName(): String {

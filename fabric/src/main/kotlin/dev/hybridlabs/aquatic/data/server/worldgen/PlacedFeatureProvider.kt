@@ -8,6 +8,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.util.valueproviders.ConstantInt
+import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.placement.*
@@ -203,13 +205,28 @@ class PlacedFeatureProvider(
 
         // tide pools
         entries.add(
-            HybridAquaticPlacedFeatures.TIDE_POOL, PlacedFeature(
+            HybridAquaticPlacedFeatures.TIDE_POOLS, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.TIDE_POOL), listOf(
                     CountPlacement.of(32),
                     InSquarePlacement.spread(),
                     HeightRangePlacement.triangle(VerticalAnchor.absolute(63), VerticalAnchor.absolute(68)),
                     BiomeFilter.biome()
                 )
+            )
+        )
+
+        // tide pool boulder
+        entries.add(
+            HybridAquaticPlacedFeatures.BOULDERS, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.BOULDER), listOf(
+                    CountPlacement.of(UniformInt.of(4,6)),
+                    HeightRangePlacement.uniform(VerticalAnchor.absolute(53), VerticalAnchor.absolute(53)),
+                    RandomOffsetPlacement.of(ConstantInt.of(8),ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(UniformInt.of(-3,3),UniformInt.of(-3,1)),
+                    SurfaceWaterDepthFilter.forMaxDepth(6),
+                    BiomeFilter.biome()
+                )
+
             )
         )
     }
