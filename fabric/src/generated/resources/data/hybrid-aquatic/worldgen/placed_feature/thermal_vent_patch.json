@@ -8,7 +8,7 @@
     {
       "type": "minecraft:surface_relative_threshold_filter",
       "heightmap": "WORLD_SURFACE_WG",
-      "max_inclusive": -40
+      "max_inclusive": -64
     },
     {
       "type": "minecraft:biome"
