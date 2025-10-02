@@ -25,7 +25,7 @@ import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: Level) :
     HybridAquaticFishEntity(
         entityType, world,
@@ -89,9 +89,8 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: Level) :
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             OCEAN(0, "ocean"),
-            GIANT(1, "giant"),
-            HOODWINKER(2, "hoodwinker"),
-            SHARPTAIL(3, "sharptail");
+            HOODWINKER(1, "hoodwinker"),
+            SHARPTAIL(2, "sharptail");
 
             override fun getSerializedName(): String {
                 return this.key
@@ -125,10 +124,6 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: Level) :
 
                         biome.`is`(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
                             OCEAN
-                        }
-
-                        biome.`is`(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS) -> {
-                            GIANT
                         }
 
                         else -> {
