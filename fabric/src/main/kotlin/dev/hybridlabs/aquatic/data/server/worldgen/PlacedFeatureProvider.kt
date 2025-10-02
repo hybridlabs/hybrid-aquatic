@@ -206,7 +206,7 @@ class PlacedFeatureProvider(
         // tide pools
         entries.add(
             HybridAquaticPlacedFeatures.TIDE_POOLS, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.TIDE_POOL), listOf(
+                entries.ref(HybridAquaticConfiguredFeatures.TIDE_POOLS), listOf(
                     CountPlacement.of(32),
                     InSquarePlacement.spread(),
                     HeightRangePlacement.triangle(VerticalAnchor.absolute(63), VerticalAnchor.absolute(68)),

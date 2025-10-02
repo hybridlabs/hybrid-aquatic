@@ -305,7 +305,7 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticConfiguredFeatures.TIDE_POOL,
+            HybridAquaticConfiguredFeatures.TIDE_POOLS,
             ConfiguredFeature(
                 WATERLOGGED_VEGETATION_PATCH, VegetationPatchConfiguration(
                     HybridAquaticBlockTags.TIDE_POOL_REPLACEABLE,
