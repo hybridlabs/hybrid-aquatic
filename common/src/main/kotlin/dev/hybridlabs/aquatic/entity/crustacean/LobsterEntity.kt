@@ -15,6 +15,8 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
+import net.minecraft.world.entity.ai.goal.TryFindWaterGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
@@ -26,6 +28,12 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
         entityType, world, false
     ),
     VariantHolder<LobsterEntity.Companion.Type> {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, TryFindWaterGoal(this))
+        goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
+    }
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,

@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
@@ -13,6 +14,11 @@ class GhostCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>,
     HybridAquaticCrustaceanEntity(
         entityType, world, true
     ) {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(3, WaterAvoidingRandomStrollGoal(this, 0.4))
+    }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

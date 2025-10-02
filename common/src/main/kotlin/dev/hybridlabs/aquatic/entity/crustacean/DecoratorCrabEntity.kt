@@ -18,6 +18,8 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
+import net.minecraft.world.entity.ai.goal.TryFindWaterGoal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -31,6 +33,12 @@ import kotlin.random.Random
 class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
     HybridAquaticCrustaceanEntity(entityType, world, false),
     VariantHolder<DecoratorCrabEntity.Companion.Type> {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, TryFindWaterGoal(this))
+        goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
+    }
 
     override fun getDefaultLootTable(): ResourceLocation {
         return ResourceLocation("hybrid-aquatic", "entities/decorator_crab")

@@ -3,10 +3,18 @@ package dev.hybridlabs.aquatic.entity.crustacean
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
+import net.minecraft.world.entity.ai.goal.TryFindWaterGoal
 import net.minecraft.world.level.Level
 
 class YetiCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
     HybridAquaticCrustaceanEntity(entityType, world, false) {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, TryFindWaterGoal(this))
+        goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
+    }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
