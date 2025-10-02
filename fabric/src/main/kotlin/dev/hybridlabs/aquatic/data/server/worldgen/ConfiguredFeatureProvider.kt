@@ -1,6 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-package dev.hybridlabs.aquatic.data.server
+package dev.hybridlabs.aquatic.data.server.worldgen
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.TubeWormBlock

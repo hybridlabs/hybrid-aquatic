@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.data.client.LanguageProvider
 import dev.hybridlabs.aquatic.data.client.ModelProvider
 import dev.hybridlabs.aquatic.data.server.AdvancementProvider
-import dev.hybridlabs.aquatic.data.server.ConfiguredFeatureProvider
+import dev.hybridlabs.aquatic.data.server.worldgen.ConfiguredFeatureProvider
 import dev.hybridlabs.aquatic.data.server.PlacedFeatureProvider
 import dev.hybridlabs.aquatic.data.server.RecipeProvider
 import dev.hybridlabs.aquatic.data.server.loot.BlockLootTableProvider
