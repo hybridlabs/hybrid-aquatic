@@ -9,7 +9,7 @@
       }
     },
     "extra_bottom_block_chance": 0.0,
-    "extra_edge_column_chance": 0.33,
+    "extra_edge_column_chance": 0.5,
     "ground_state": {
       "type": "minecraft:weighted_state_provider",
       "entries": [
@@ -38,8 +38,8 @@
     "xz_radius": {
       "type": "minecraft:biased_to_bottom",
       "value": {
-        "max_inclusive": 5,
-        "min_inclusive": 4
+        "max_inclusive": 4,
+        "min_inclusive": 3
       }
     }
   }

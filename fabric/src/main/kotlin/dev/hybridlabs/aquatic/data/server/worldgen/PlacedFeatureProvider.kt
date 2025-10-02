@@ -8,12 +8,15 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.util.valueproviders.ClampedNormalInt
 import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.placement.*
 import java.util.concurrent.CompletableFuture
+import java.util.zip.ZipEntry
+import kotlin.coroutines.Continuation
 
 class PlacedFeatureProvider(
     output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>
@@ -207,9 +210,12 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.TIDE_POOLS, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.TIDE_POOLS), listOf(
-                    CountPlacement.of(32),
-                    InSquarePlacement.spread(),
+                    CountPlacement.of(24),
+                    RandomOffsetPlacement.of(ConstantInt.of(8), ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(ClampedNormalInt.of(0.0f,3.0f,-10,10),ConstantInt.ZERO),
                     HeightRangePlacement.triangle(VerticalAnchor.absolute(63), VerticalAnchor.absolute(68)),
+                    CountPlacement.of(3),
+                    RandomOffsetPlacement.of(UniformInt.of(-12,12),ConstantInt.ZERO),
                     BiomeFilter.biome()
                 )
             )

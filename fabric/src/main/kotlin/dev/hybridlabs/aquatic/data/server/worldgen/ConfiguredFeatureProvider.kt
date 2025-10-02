@@ -323,8 +323,8 @@ class ConfiguredFeatureProvider(
                     0.0f,
                     5,
                     0.2f,
-                    BiasedToBottomInt.of(4, 5),
-                    0.33f
+                    BiasedToBottomInt.of(3, 4),
+                    0.5f
                 )
             )
         )
@@ -338,7 +338,7 @@ class ConfiguredFeatureProvider(
                         BlockStateProvider.simple(Blocks.STONE),
                         BlockStateProvider.simple(Blocks.STONE),
                         BlockStateProvider.simple(Blocks.STONE),
-                        BlockStateProvider.simple(Blocks.STONE),
+                        BlockStateProvider.simple(HybridAquaticBlocks.SHORESTONE.get()),
                         mutableListOf(Blocks.STONE.defaultBlockState()),
                         BlockTags.FEATURES_CANNOT_REPLACE,
                         BlockTags.GEODE_INVALID_BLOCKS
