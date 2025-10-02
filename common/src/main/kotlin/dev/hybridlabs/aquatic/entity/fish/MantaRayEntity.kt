@@ -116,4 +116,8 @@ class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
             MantaRayEntity.Companion.OverlayTextures.byId(nbt.getInt("texture_overlay"))
         super.readAdditionalSaveData(nbt)
     }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
 }

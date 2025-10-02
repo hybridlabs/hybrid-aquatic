@@ -132,4 +132,8 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
     override fun setVariant(type: Type) {
         entityData.set(TYPE, type.id)
     }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
 }
