@@ -38,7 +38,9 @@ abstract class HybridAquaticOctopusEntityModel<T : HybridAquaticOctopusEntity>(p
 
         val body = animationProcessor.getBone(PartNames.BODY)
 
-        val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRot, animatable.xRotO), -45f, 45f)
-        body.rotX = xRot * -Mth.DEG_TO_RAD
+        if (!animatable.isSitting()) {
+            val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRot, animatable.xRotO), -45f, 45f)
+            body.rotX = xRot * -Mth.DEG_TO_RAD
+        }
     }
 }

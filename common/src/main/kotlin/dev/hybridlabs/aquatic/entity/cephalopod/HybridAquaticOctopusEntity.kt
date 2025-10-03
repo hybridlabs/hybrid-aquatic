@@ -60,9 +60,10 @@ open class HybridAquaticOctopusEntity(
                 if (this.isSitting()) {
                     if (--this.sittingTimer <= 0) {
                         this.setSitting(false)
+                    } else {
+                        this.deltaMovement = deltaMovement.subtract(0.0, 0.01, 0.0)
+                        this.yHeadRot = 0F
                     }
-                    this.deltaMovement = deltaMovement.subtract(0.0, 0.01, 0.0)
-                    this.yHeadRot = 0F
                 } else if (random.nextFloat() <= 0.001f) {
                     this.sittingTimer = random.nextInt(200, 650)
                     this.setSitting(true)
