@@ -15,7 +15,8 @@ class PaintingVariantTagProvider (output: FabricDataOutput, registriesFuture: Co
     FabricTagProvider<PaintingVariant>(output, Registries.PAINTING_VARIANT, registriesFuture) {
     override fun addTags(arg: HolderLookup.Provider) {
         setOf(
-            HybridAquaticPaintings.TEST_PAINTING1
+            HybridAquaticPaintings.TEST_PAINTING1,
+            HybridAquaticPaintings.TEST_PAINTING2
         ).forEach { painting ->
             getOrCreateTagBuilder(PaintingVariantTags.PLACEABLE).add(painting)
         }

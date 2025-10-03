@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:test_painting1"
+    "hybrid-aquatic:test_painting1",
+    "hybrid-aquatic:test_painting2"
   ]
 }
