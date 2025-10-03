@@ -289,6 +289,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.BETTA.get() to "Betta",
             HybridAquaticItems.PEARLFISH.get() to "Pearlfish",
             HybridAquaticItems.SNAILFISH.get() to "Snailfish",
+            HybridAquaticItems.JOHN_DORY.get() to "John Dory",
             HybridAquaticItems.DISCUS.get() to "Discus",
             HybridAquaticItems.GOURAMI.get() to "Gourami",
             HybridAquaticItems.RATFISH.get() to "Ratfish",
