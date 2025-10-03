@@ -1,4 +1,5 @@
 modLoader = "kotlinforforge" #mandatory
+
 loaderVersion = "[4,)" #mandatory This is typically bumped every Minecraft version by Forge. See https://files.minecraftforge.net/ for a list of versions.
 license = "${license}" # Review your options at https://choosealicense.com/.
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
@@ -24,3 +25,13 @@ mandatory = true
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
+[[dependencies.${forge_mod_id}]]
+modId = "geckolib"
+mandatory = true
+versionRange = "[4.7.4,)"
+side = "SERVER"
+[[dependencies.${forge_mod_id}]]
+modId = "lithostitched"
+mandatory = true
+versionRange = "[1.4.11,)"
+side = "SERVER"
