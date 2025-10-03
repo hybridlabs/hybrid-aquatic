@@ -77,17 +77,6 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
           "name": "minecraft:skull_banner_pattern"
         },
         {
@@ -104,6 +93,73 @@
             }
           ],
           "name": "minecraft:coast_armor_trim_smithing_template"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.5,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 32.0,
+                "min": 16.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "hybrid-aquatic:driftwood_log"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.25,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:great_white_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:whale_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:tiger_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:hammerhead_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:frilled_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:basking_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:thresher_shark_plushie"
         }
       ],
       "rolls": 1.0
@@ -158,74 +214,7 @@
         }
       ],
       "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "chance": 0.25,
-          "condition": "minecraft:random_chance"
-        }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 32.0,
-                "min": 16.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "hybrid-aquatic:driftwood_log"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "chance": 0.1,
-          "condition": "minecraft:random_chance"
-        }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:great_white_shark_plushie"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:whale_shark_plushie"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:tiger_shark_plushie"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:hammerhead_shark_plushie"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:frilled_shark_plushie"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:basking_shark_plushie"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid-aquatic:thresher_shark_plushie"
-        }
-      ],
-      "rolls": 1.0
     }
   ],
-  "random_sequence": "hybrid-aquatic:gameplay/oak_crate_treasure"
+  "random_sequence": "hybrid-aquatic:gameplay/spruce_crate_treasure"
 }

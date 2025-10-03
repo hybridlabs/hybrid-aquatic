@@ -20,6 +20,44 @@ import java.util.function.BiConsumer
 class GenericLootTableProvider(output: FabricDataOutput) :
     SimpleFabricLootTableProvider(output, LootContextParamSets.ALL_PARAMS) {
     override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
+        fun universalCratePool(): LootPool.Builder {
+            return LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1.0f))
+                .add(LootItem.lootTableItem(HybridAquaticItems.BARBED_HOOK.get()))
+                .add(LootItem.lootTableItem(HybridAquaticItems.GLOWING_HOOK.get()))
+                .add(LootItem.lootTableItem(HybridAquaticItems.MAGNETIC_HOOK.get()))
+                .add(LootItem.lootTableItem(Items.IRON_INGOT)
+                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(3f, 9f))))
+                .add(LootItem.lootTableItem(Items.GOLD_INGOT)
+                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(3f, 9f))))
+                .add(LootItem.lootTableItem(Items.DIAMOND)
+                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f))))
+                .add(LootItem.lootTableItem(Items.EMERALD)
+                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f))))
+                .add(LootItem.lootTableItem(Items.SKULL_BANNER_PATTERN))
+                .add(LootItem.lootTableItem(Items.COAST_ARMOR_TRIM_SMITHING_TEMPLATE)
+                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 4f))))
+        }
+
+        fun driftwoodPool(): LootPool.Builder {
+            return LootPool.lootPool()
+                .`when`(LootItemRandomChanceCondition.randomChance(0.5f))
+                .add(LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
+                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(16f, 32f))))
+        }
+
+        fun plushiePool(): LootPool.Builder {
+            return LootPool.lootPool()
+                .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
+                .add(LootItem.lootTableItem(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HybridAquaticItems.WHALE_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HybridAquaticItems.TIGER_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get()))
+        }
+
         exporter.accept(
             HybridAquaticLootTables.CRAB_POT_TREASURE_ID,
             LootTable.lootTable()
@@ -105,39 +143,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
             HybridAquaticLootTables.OAK_CRATE_TREASURE_ID,
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
-                // the universal crate loot pool
-                .pool(
-                    LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BARBED_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GLOWING_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.MAGNETIC_HOOK.get()))
-                        .add(
-                            LootItem.lootTableItem(Items.IRON_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.GOLD_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.DIAMOND)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.EMERALD)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.SKULL_BANNER_PATTERN)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.COAST_ARMOR_TRIM_SMITHING_TEMPLATE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
-                        ).build()
-                )
-                // the type-specific crate loot pool
+                .pool(universalCratePool().build())
+                .pool(driftwoodPool().build())
+                .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
@@ -154,68 +162,15 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
                         ).build()
                 )
-                // the chance to get driftwood out of a crate
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
-                        ).build()
-                )
-                // the rare chance to get a special item
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.1f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.WHALE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.TIGER_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get()))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get())
-                        ).build()
-                )
         )
 
         exporter.accept(
             HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
-                // the universal crate loot pool
-                .pool(
-                    LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BARBED_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GLOWING_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.MAGNETIC_HOOK.get()))
-                        .add(
-                            LootItem.lootTableItem(Items.IRON_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.GOLD_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.DIAMOND)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.EMERALD)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.SKULL_BANNER_PATTERN)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.COAST_ARMOR_TRIM_SMITHING_TEMPLATE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
-                        ).build()
-                )
-                // the type-specific crate loot pool
+                .setRandomSequence(HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID)
+                .pool(universalCratePool().build())
+                .pool(driftwoodPool().build())
+                .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
@@ -232,68 +187,15 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 16.0f)))
                         ).build()
                 )
-                // the chance to get driftwood out of a crate
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
-                        ).build()
-                )
-                // the rare chance to get a special item
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.1f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.WHALE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.TIGER_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get()))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get())
-                        ).build()
-                )
         )
 
         exporter.accept(
             HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
-                // the universal crate loot pool
-                .pool(
-                    LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BARBED_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GLOWING_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.MAGNETIC_HOOK.get()))
-                        .add(
-                            LootItem.lootTableItem(Items.IRON_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.GOLD_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.DIAMOND)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.EMERALD)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.SKULL_BANNER_PATTERN)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.COAST_ARMOR_TRIM_SMITHING_TEMPLATE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
-                        ).build()
-                )
-                // the type-specific crate loot pool
+                .setRandomSequence(HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID)
+                .pool(universalCratePool().build())
+                .pool(driftwoodPool().build())
+                .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
@@ -310,68 +212,15 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         ).build()
                 )
-                // the chance to get driftwood out of a crate
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
-                        ).build()
-                )
-                // the rare chance to get a special item
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.1f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.WHALE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.TIGER_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get()))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get())
-                        ).build()
-                )
         )
 
         exporter.accept(
             HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
-                // the universal crate loot pool
-                .pool(
-                    LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BARBED_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GLOWING_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.MAGNETIC_HOOK.get()))
-                        .add(
-                            LootItem.lootTableItem(Items.IRON_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.GOLD_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.DIAMOND)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.EMERALD)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.SKULL_BANNER_PATTERN)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.COAST_ARMOR_TRIM_SMITHING_TEMPLATE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
-                        ).build()
-                )
-                // the type-specific crate loot pool
+                .setRandomSequence(HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID)
+                .pool(universalCratePool().build())
+                .pool(driftwoodPool().build())
+                .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
@@ -388,68 +237,15 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
                         ).build()
                 )
-                // the chance to get driftwood out of a crate
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
-                        ).build()
-                )
-                // the rare chance to get a special item
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.1f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.WHALE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.TIGER_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get()))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get())
-                        ).build()
-                )
         )
 
         exporter.accept(
             HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
-                // the universal crate loot pool
-                .pool(
-                    LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BARBED_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GLOWING_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.MAGNETIC_HOOK.get()))
-                        .add(
-                            LootItem.lootTableItem(Items.IRON_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.GOLD_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.DIAMOND)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.EMERALD)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.SKULL_BANNER_PATTERN)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.COAST_ARMOR_TRIM_SMITHING_TEMPLATE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
-                        ).build()
-                )
-                // the type-specific crate loot pool
+                .setRandomSequence(HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID)
+                .pool(universalCratePool().build())
+                .pool(driftwoodPool().build())
+                .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
@@ -466,68 +262,15 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0f, 12.0f)))
                         ).build()
                 )
-                // the chance to get driftwood out of a crate
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
-                        ).build()
-                )
-                // the rare chance to get a special item
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.1f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.WHALE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.TIGER_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get()))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get())
-                        ).build()
-                )
         )
 
         exporter.accept(
             HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
-                // the universal crate loot pool
-                .pool(
-                    LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BARBED_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GLOWING_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.MAGNETIC_HOOK.get()))
-                        .add(
-                            LootItem.lootTableItem(Items.IRON_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.GOLD_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.DIAMOND)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.EMERALD)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.SKULL_BANNER_PATTERN)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.COAST_ARMOR_TRIM_SMITHING_TEMPLATE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
-                        ).build()
-                )
-                // the type-specific crate loot pool
+                .setRandomSequence(HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID)
+                .pool(universalCratePool().build())
+                .pool(driftwoodPool().build())
+                .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
@@ -544,68 +287,15 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         ).build()
                 )
-                // the chance to get driftwood out of a crate
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
-                        ).build()
-                )
-                // the rare chance to get a special item
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.1f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.WHALE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.TIGER_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get()))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get())
-                        ).build()
-                )
         )
 
         exporter.accept(
             HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
-                // the universal crate loot pool
-                .pool(
-                    LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BARBED_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GLOWING_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.MAGNETIC_HOOK.get()))
-                        .add(
-                            LootItem.lootTableItem(Items.IRON_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.GOLD_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.DIAMOND)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.EMERALD)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.SKULL_BANNER_PATTERN)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.COAST_ARMOR_TRIM_SMITHING_TEMPLATE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
-                        ).build()
-                )
-                // the type-specific crate loot pool
+                .setRandomSequence(HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID)
+                .pool(universalCratePool().build())
+                .pool(driftwoodPool().build())
+                .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
@@ -622,68 +312,15 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0f, 12.0f)))
                         ).build()
                 )
-                // the chance to get driftwood out of a crate
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
-                        ).build()
-                )
-                // the rare chance to get a special item
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.1f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.WHALE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.TIGER_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get()))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get())
-                        ).build()
-                )
         )
 
         exporter.accept(
             HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
-                // the universal crate loot pool
-                .pool(
-                    LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BARBED_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GLOWING_HOOK.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.MAGNETIC_HOOK.get()))
-                        .add(
-                            LootItem.lootTableItem(Items.IRON_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.GOLD_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.DIAMOND)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.EMERALD)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.SKULL_BANNER_PATTERN)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
-                        )
-                        .add(
-                            LootItem.lootTableItem(Items.COAST_ARMOR_TRIM_SMITHING_TEMPLATE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
-                        ).build()
-                )
-                // the type-specific crate loot pool
+                .setRandomSequence(HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID)
+                .pool(universalCratePool().build())
+                .pool(driftwoodPool().build())
+                .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
@@ -703,26 +340,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                             LootItem.lootTableItem(Items.COCOA_BEANS)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
                         ).build()
-                )
-                // the chance to get driftwood out of a crate
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
-                        ).build()
-                )
-                // the rare chance to get a special item
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.1f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.WHALE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.TIGER_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get())).build()
                 )
         )
 
