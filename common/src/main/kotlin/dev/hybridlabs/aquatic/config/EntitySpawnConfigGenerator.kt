@@ -85,7 +85,6 @@ class EntitySpawnConfigGenerator {
         addUndergroundCephalopod(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 2, 1, 1)
         addUndergroundCephalopod(HybridAquaticEntityTypes.NAUTILUS.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 2)
         addUndergroundCephalopod(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 1, 1, 1)
-        addUndergroundCephalopod(HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 2, 1, 1)
         //#endregion
 
         //#region Jellyfish

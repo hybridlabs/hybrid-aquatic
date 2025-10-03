@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.cephalopod.HybridAquaticOctopusEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.cephalopods.HybridAquaticOctopusEntityRenderer
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticOctopusEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
@@ -36,6 +37,11 @@ class HybridAquaticOctopusEntityLayer<T: HybridAquaticOctopusEntity>(
         packedOverlay: Int,
     ) {
         if (animatable !is OverlayTextureFeature) return
+
+        if (animatable is OctopusEntity &&
+            animatable.variant != OctopusEntity.Companion.Type.OCTOPUS) {
+            return
+        }
 
         if (!animatable.isSitting()) return
 

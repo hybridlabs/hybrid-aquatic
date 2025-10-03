@@ -367,12 +367,6 @@ object HybridAquaticEntityRenderers {
             ::FireflySquidEntityRenderer
         )
 
-    val GLOWING_SUCKER_OCTOPUS =
-        ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS,
-            ::GlowingSuckerOctopusEntityRenderer
-        )
-
     val OCTOPUS =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.OCTOPUS,

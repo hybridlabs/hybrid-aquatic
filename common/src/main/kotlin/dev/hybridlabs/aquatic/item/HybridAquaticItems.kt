@@ -1389,8 +1389,6 @@ object HybridAquaticItems {
 
     //#region Deep Sea Cephalopod
 
-    val GLOWING_SUCKER_OCTOPUS_SPAWN_EGG =
-        registerSpawnEgg("glowing_sucker_octopus_spawn_egg", HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS, 0x892f4f, 0x84d5fe)
     val OCTOPUS_SPAWN_EGG =
         registerSpawnEgg("octopus_spawn_egg", HybridAquaticEntityTypes.OCTOPUS, 0x73275c, 0xc34e69)
     val NAUTILUS_SPAWN_EGG =

@@ -103,7 +103,6 @@ object SpawnRestrictionRegistry {
 
         // octopuses
         setOf(
-            HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS.get(),
             HybridAquaticEntityTypes.OCTOPUS.get(),
         ).forEach { registerOctopus(it) }
 

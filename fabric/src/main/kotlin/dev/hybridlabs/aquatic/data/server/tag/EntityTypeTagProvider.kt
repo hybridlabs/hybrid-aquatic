@@ -101,7 +101,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.ARROW_SQUID.get(),
                 HybridAquaticEntityTypes.CUTTLEFISH.get(),
                 HybridAquaticEntityTypes.FIREFLY_SQUID.get(),
-                HybridAquaticEntityTypes.GLOWING_SUCKER_OCTOPUS.get(),
                 HybridAquaticEntityTypes.OCTOPUS.get(),
                 HybridAquaticEntityTypes.NAUTILUS.get(),
                 HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(),

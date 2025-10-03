@@ -408,13 +408,6 @@ object HybridAquaticEntityTypes {
         CuttlefishEntity::createMobAttributes
     )
 
-    val GLOWING_SUCKER_OCTOPUS = registerCephalopodUnderground(
-        "glowing_sucker_octopus",
-        ::GlowingSuckerOctopusEntity,
-        EntityDimensions.fixed(0.5f, 0.6f),
-        GlowingSuckerOctopusEntity::createMobAttributes
-    )
-
     val OCTOPUS = registerCephalopod(
         "octopus",
         ::OctopusEntity,

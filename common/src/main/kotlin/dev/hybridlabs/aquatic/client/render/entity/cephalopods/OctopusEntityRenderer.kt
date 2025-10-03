@@ -10,7 +10,7 @@ class OctopusEntityRenderer(context: Context) :
         context,
         OctopusEntityModel(),
         true,
-        false
+        true
     ) {
 
     init {
