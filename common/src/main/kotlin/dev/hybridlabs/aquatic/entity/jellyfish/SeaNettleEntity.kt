@@ -22,7 +22,7 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
     VariantHolder<SeaNettleEntity.Companion.Type> {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 3
+        return 2
     }
 
     override fun getDimensions(pose: Pose): EntityDimensions {
