@@ -65,8 +65,6 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.BUOY.get())
                 entries.accept(HybridAquaticItems.RAFT.get())
 
-                entries.accept(HybridAquaticItems.SHORESTONE.get())
-                entries.accept(HybridAquaticItems.BARNACLE_SHORESTONE.get())
                 entries.accept(HybridAquaticItems.DUNEGRASS.get())
                 entries.accept(HybridAquaticItems.SEA_LETTUCE.get())
                 entries.accept(HybridAquaticItems.RED_ALGAE.get())

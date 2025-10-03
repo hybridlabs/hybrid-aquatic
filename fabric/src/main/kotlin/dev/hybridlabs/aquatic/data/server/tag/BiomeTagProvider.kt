@@ -1,8 +1,6 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
-import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
@@ -156,7 +154,5 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("regions_unexplored", "scorching_caves"))
             .addOptional(ResourceLocation("regions_unexplored", "ancient_delta"))
             .addOptional(ResourceLocation("regions_unexplored", "prismachasm"))
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.TIDE_POOLS)
-            .addOptional(HybridAquaticBiomes.TIDE_POOLS)
     }
 }

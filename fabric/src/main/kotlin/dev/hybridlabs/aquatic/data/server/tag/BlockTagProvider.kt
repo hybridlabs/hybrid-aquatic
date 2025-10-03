@@ -29,16 +29,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBlockTags.MESSAGE_IN_A_BOTTLE_SPAWNS_IN)
             .add(Blocks.WATER)
 
-        getOrCreateTagBuilder(HybridAquaticBlockTags.TIDE_POOL_REPLACEABLE)
-            .add(Blocks.CLAY)
-            .add(Blocks.GRAVEL)
-            .add(Blocks.DIRT)
-            .add(Blocks.SAND)
-            .add(Blocks.GRASS_BLOCK)
-            .add(Blocks.STONE)
-            .add(Blocks.MOSSY_COBBLESTONE)
-            .add(Blocks.TUFF)
-
         getOrCreateTagBuilder(HybridAquaticBlockTags.CLOWNFISH_ANEMONES)
             .add(HybridAquaticBlocks.ANEMONE.get())
             .add(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get())
@@ -96,8 +86,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK.get())
             .add(HybridAquaticBlocks.THERMAL_VENT.get())
             .add(HybridAquaticBlocks.GIANT_CLAM.get())
-            .add(HybridAquaticBlocks.SHORESTONE.get())
-            .add(HybridAquaticBlocks.BARNACLE_SHORESTONE.get())
 
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
             .add(HybridAquaticBlocks.RAFT.get())

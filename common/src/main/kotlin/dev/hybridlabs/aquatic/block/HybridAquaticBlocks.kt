@@ -356,22 +356,6 @@ object HybridAquaticBlocks {
             )
         }
 
-    val SHORESTONE =
-        register(
-            "shorestone"
-        ) {
-            Block(Properties.copy(Blocks.TUFF)
-            )
-        }
-
-    val BARNACLE_SHORESTONE =
-        register(
-            "barnacle_shorestone"
-        ) {
-            Block(Properties.copy(Blocks.TUFF)
-            )
-        }
-
     private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block): PlushieBlock {
         return PlushieBlock(
             variant,

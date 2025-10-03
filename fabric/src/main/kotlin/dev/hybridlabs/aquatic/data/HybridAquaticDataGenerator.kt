@@ -4,7 +4,6 @@ import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.data.client.LanguageProvider
 import dev.hybridlabs.aquatic.data.client.ModelProvider
 import dev.hybridlabs.aquatic.data.server.AdvancementProvider
-import dev.hybridlabs.aquatic.data.server.worldgen.ConfiguredFeatureProvider
 import dev.hybridlabs.aquatic.data.server.PlacedFeatureProvider
 import dev.hybridlabs.aquatic.data.server.RecipeProvider
 import dev.hybridlabs.aquatic.data.server.loot.BlockLootTableProvider
@@ -13,10 +12,9 @@ import dev.hybridlabs.aquatic.data.server.loot.FishingLootTableProvider
 import dev.hybridlabs.aquatic.data.server.loot.GenericLootTableProvider
 import dev.hybridlabs.aquatic.data.server.seamessage.SeaMessageProvider
 import dev.hybridlabs.aquatic.data.server.tag.*
-import dev.hybridlabs.aquatic.data.server.worldgen.BiomeProvider
+import dev.hybridlabs.aquatic.data.server.worldgen.ConfiguredFeatureProvider
 import dev.hybridlabs.aquatic.data.structure_spawn_modifier.StructureSpawnModifierProvider
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
@@ -34,7 +32,6 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::FishingLootTableProvider)
         pack.addProvider(::GenericLootTableProvider)
         pack.addProvider(::AdvancementProvider)
-        pack.addProvider(::BiomeProvider)
         pack.addProvider(::BiomeTagProvider)
         pack.addProvider(::BlockTagProvider)
         pack.addProvider(::PaintingVariantTagProvider)
@@ -50,9 +47,6 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
         registryBuilder.add(HybridAquaticRegistryKeys.SEA_MESSAGE) {}
         registryBuilder.add(HybridAquaticRegistryKeys.STRUCTURE_SPAWN_MODIFIER) {}
-        registryBuilder.add(Registries.BIOME) {
-            HybridAquaticBiomes
-        }
         registryBuilder.add(Registries.CONFIGURED_FEATURE) {
             HybridAquaticConfiguredFeatures
         }

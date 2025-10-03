@@ -125,16 +125,16 @@ class EntitySpawnConfigGenerator {
         //#endregion
 
         //#region Crustaceans
-        addCrustacean(HybridAquaticEntityTypes.DUNGENESS_CRAB.get(), listOf(HybridAquaticBiomeTags.SANDY_BEACHES, HybridAquaticBiomeTags.TIDE_POOLS), 5, 2, 3)
+        addCrustacean(HybridAquaticEntityTypes.DUNGENESS_CRAB.get(), listOf(HybridAquaticBiomeTags.SANDY_BEACHES), 5, 2, 3)
         addCrustacean(HybridAquaticEntityTypes.FIDDLER_CRAB.get(), listOf(HybridAquaticBiomeTags.SWAMP, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.MARSHES), 5, 2, 3)
         addCrustacean(HybridAquaticEntityTypes.GHOST_CRAB.get(), listOf(HybridAquaticBiomeTags.SANDY_BEACHES), 5, 1, 3)
         addCrustacean(HybridAquaticEntityTypes.HORSESHOE_CRAB.get(), listOf(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.SANDY_BEACHES), 3, 1, 1)
-        addCrustacean(HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get(), listOf(HybridAquaticBiomeTags.ROCKY_BEACHES, HybridAquaticBiomeTags.TIDE_POOLS), 3, 1, 3)
+        addCrustacean(HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get(), listOf(HybridAquaticBiomeTags.ROCKY_BEACHES), 3, 1, 3)
         addCrustacean(HybridAquaticEntityTypes.FLOWER_CRAB.get(), listOf(HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.MARSHES), 3, 1, 2)
         addCrustacean(HybridAquaticEntityTypes.VAMPIRE_CRAB.get(), listOf(HybridAquaticBiomeTags.JUNGLE, HybridAquaticBiomeTags.TROPICAL_RIVERS), 3, 1, 2)
         addCrustacean(HybridAquaticEntityTypes.SHRIMP.get(), listOf(HybridAquaticBiomeTags.REEF), 3, 2, 3)
         addCrustacean(HybridAquaticEntityTypes.LOBSTER.get(), listOf(HybridAquaticBiomeTags.REEF,  HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS), 3, 1, 2)
-        addCrustacean(HybridAquaticEntityTypes.DECORATOR_CRAB.get(), listOf(HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.TIDE_POOLS), 1, 1, 2)
+        addCrustacean(HybridAquaticEntityTypes.DECORATOR_CRAB.get(), listOf(HybridAquaticBiomeTags.REEF), 1, 1, 2)
         addCrustacean(HybridAquaticEntityTypes.CRAYFISH.get(), listOf(HybridAquaticBiomeTags.RIVERS), 5, 2, 3)
         addCrustacean(HybridAquaticEntityTypes.COCONUT_CRAB.get(), listOf(HybridAquaticBiomeTags.SANDY_BEACHES), 3, 1, 2)
         addCrustacean(HybridAquaticEntityTypes.HERMIT_CRAB.get(), listOf(HybridAquaticBiomeTags.SANDY_BEACHES, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS), 3, 1, 2)
@@ -147,10 +147,10 @@ class EntitySpawnConfigGenerator {
         //#endregion
 
         //#region Critters
-        addCritter(HybridAquaticEntityTypes.SEA_SLUG.get(), listOf(HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS, HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.TIDE_POOLS), 3, 1, 2)
-        addCritter(HybridAquaticEntityTypes.STARFISH.get(), listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN, HybridAquaticBiomeTags.SANDY_BEACHES, HybridAquaticBiomeTags.TIDE_POOLS), 5, 1, 3)
-        addCritter(HybridAquaticEntityTypes.SEA_CUCUMBER.get(), listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN, HybridAquaticBiomeTags.TIDE_POOLS), 3, 1, 3)
-        addCritter(HybridAquaticEntityTypes.SEA_URCHIN.get(), listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN, HybridAquaticBiomeTags.TIDE_POOLS), 5, 1, 3)
+        addCritter(HybridAquaticEntityTypes.SEA_SLUG.get(), listOf(HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS, HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 3, 1, 2)
+        addCritter(HybridAquaticEntityTypes.STARFISH.get(), listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN, HybridAquaticBiomeTags.SANDY_BEACHES), 5, 1, 3)
+        addCritter(HybridAquaticEntityTypes.SEA_CUCUMBER.get(), listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN), 3, 1, 3)
+        addCritter(HybridAquaticEntityTypes.SEA_URCHIN.get(), listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN), 5, 1, 3)
         //#endregion
     }
 

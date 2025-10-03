@@ -94,8 +94,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.ACACIA_CRATE.get(),
                 HybridAquaticBlocks.MANGROVE_CRATE.get(),
                 HybridAquaticBlocks.CHERRY_CRATE.get(),
-                HybridAquaticBlocks.SHORESTONE.get(),
-                HybridAquaticBlocks.BARNACLE_SHORESTONE.get(),
             ).forEach(generator::createTrivialCube)
 
             // wood
