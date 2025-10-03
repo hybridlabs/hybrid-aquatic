@@ -408,7 +408,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         mapOf(
-            HybridAquaticPaintings.TEST_PAINTING1 to listOf("Test Painting", "Aqua")
+            HybridAquaticPaintings.TEST_PAINTING1 to listOf("Test Painting", "Aqua"),
+            HybridAquaticPaintings.TEST_PAINTING2 to listOf("Test Huge Painting", "Aqua")
         ).forEach { (painting, name) ->
             builder.add("painting.hybrid-aquatic.${painting.path}.title", name[0])
             builder.add("painting.hybrid-aquatic.${painting.path}.author", name[1])
