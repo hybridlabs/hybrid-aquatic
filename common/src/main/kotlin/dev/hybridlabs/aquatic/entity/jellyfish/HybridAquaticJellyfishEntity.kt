@@ -82,6 +82,10 @@ open class HybridAquaticJellyfishEntity(
         return MobType.WATER
     }
 
+    override fun canBreatheUnderwater(): Boolean {
+        return true
+    }
+
     override fun isPushedByFluid(): Boolean {
         return false
     }

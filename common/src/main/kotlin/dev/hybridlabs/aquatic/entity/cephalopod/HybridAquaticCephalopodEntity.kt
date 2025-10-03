@@ -76,7 +76,6 @@ open class HybridAquaticCephalopodEntity(
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        this.airSupply= getMaxMoistness()
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         this.xRot = 0.0f
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
@@ -84,6 +83,10 @@ open class HybridAquaticCephalopodEntity(
 
     override fun getMobType(): MobType {
         return MobType.WATER
+    }
+
+    override fun canBreatheUnderwater(): Boolean {
+        return true
     }
 
     override fun isPushedByFluid(): Boolean {
@@ -113,8 +116,6 @@ open class HybridAquaticCephalopodEntity(
 
         if (hunger > 0) hunger -= 1
     }
-
-    override fun handleAirSupply(air: Int) {}
 
     private fun getMaxMoistness(): Int {
         return 600

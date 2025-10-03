@@ -71,13 +71,16 @@ open class HybridAquaticFishEntity(
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?,
     ): SpawnGroupData? {
-        this.airSupply = getMaxMoistness()
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun getMobType(): MobType {
         return MobType.WATER
+    }
+
+    override fun canBreatheUnderwater(): Boolean {
+        return true
     }
 
     override fun isPushedByFluid(): Boolean {

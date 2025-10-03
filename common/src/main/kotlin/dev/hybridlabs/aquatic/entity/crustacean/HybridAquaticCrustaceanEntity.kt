@@ -166,6 +166,10 @@ open class HybridAquaticCrustaceanEntity(
         return MobType.WATER
     }
 
+    override fun canBreatheUnderwater(): Boolean {
+        return true
+    }
+
     protected open fun getMinSize(): Int {
         return 0
     }
@@ -205,17 +209,6 @@ open class HybridAquaticCrustaceanEntity(
     override fun createNavigation(world: Level): PathNavigation {
         return GroundPathNavigation(this, world)
     }
-
-    // region water breathing
-
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-
-    override fun handleAirSupply(air: Int) {
-    }
-
-    // endregion
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.directEntity

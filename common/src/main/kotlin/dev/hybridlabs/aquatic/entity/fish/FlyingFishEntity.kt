@@ -4,11 +4,15 @@ import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.RandomSource
+import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.BreathAirGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.phys.Vec3
@@ -17,6 +21,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 
+@Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Level) :
     HybridAquaticSchoolingFishEntity(
         entityType, world,
@@ -36,12 +41,17 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(0, BreathAirGoal(this))
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
         goalSelector.addGoal(4, HybridAquaticJumpGoal(this, 10))
     }
 
     override fun tick() {
         super.tick()
+
+        if (this.isNoAi) {
+            this.airSupply = this.maxAirSupply
+        }
 
         if (!this.wasTouchingWater && !onGround()) {
             if (!isGliding) {
@@ -84,6 +94,33 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
             motion.z * 1.1
         )
         this.deltaMovement = newMotion
+    }
+
+    override fun handleAirSupply(airSupply: Int) {
+        if (isInWater && !isNoAi) {
+            this.airSupply = airSupply - 1
+        } else {
+            this.airSupply = this.maxAirSupply
+        }
+    }
+
+    override fun getMaxAirSupply(): Int {
+        return 900
+    }
+
+    override fun increaseAirSupply(currentAir: Int): Int {
+        return this.maxAirSupply
+    }
+
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?,
+    ): SpawnGroupData? {
+        this.airSupply = this.maxAirSupply
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {

@@ -81,13 +81,16 @@ open class HybridAquaticCritterEntity(
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?,
     ): SpawnGroupData? {
-        this.airSupply = this.maxAirSupply
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun getMobType(): MobType {
         return MobType.WATER
+    }
+
+    override fun canBreatheUnderwater(): Boolean {
+        return true
     }
 
     override fun isAffectedByFluids(): Boolean {
@@ -144,10 +147,6 @@ open class HybridAquaticCritterEntity(
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
-    }
-
-    override fun canBreatheUnderwater(): Boolean {
-        return true
     }
 
     var size: Int
