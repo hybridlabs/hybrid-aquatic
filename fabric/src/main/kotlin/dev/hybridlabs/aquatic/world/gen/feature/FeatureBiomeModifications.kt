@@ -42,12 +42,6 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.REEF),
-            GenerationStep.Decoration.VEGETAL_DECORATION,
-            HybridAquaticPlacedFeatures.GLOWING_PLANKTON
-        )
-
-        BiomeModifications.addFeature(
             BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
             GenerationStep.Decoration.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.RED_ALGAE_PATCH
