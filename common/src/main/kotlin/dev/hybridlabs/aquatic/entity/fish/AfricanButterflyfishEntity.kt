@@ -2,10 +2,15 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
@@ -37,7 +42,11 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
     override fun tick() {
         super.tick()
 
-        if (!this.isInWater && !onGround()) {
+        if (this.isNoAi) {
+            this.airSupply = this.maxAirSupply
+        }
+
+        if (!this.wasTouchingWater && !onGround()) {
             if (!isGliding) {
                 startGliding()
             }
@@ -45,6 +54,33 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
         } else if (isGliding) {
             stopGliding()
         }
+    }
+
+    override fun handleAirSupply(airSupply: Int) {
+        if (isInWater && !isNoAi) {
+            this.airSupply = airSupply - 1
+        } else {
+            this.airSupply = this.maxAirSupply
+        }
+    }
+
+    override fun getMaxAirSupply(): Int {
+        return 900
+    }
+
+    override fun increaseAirSupply(currentAir: Int): Int {
+        return this.maxAirSupply
+    }
+
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
+    ): SpawnGroupData? {
+        this.airSupply = this.maxAirSupply
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
