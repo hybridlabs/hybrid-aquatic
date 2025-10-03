@@ -193,7 +193,7 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
-                    CountOnEveryLayerPlacement.of(16),
+                    CountOnEveryLayerPlacement.of(8),
                     SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
                     BiomeFilter.biome()
                 )

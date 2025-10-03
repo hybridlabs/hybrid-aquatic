@@ -3,7 +3,7 @@
   "placement": [
     {
       "type": "minecraft:count_on_every_layer",
-      "count": 16
+      "count": 8
     },
     {
       "type": "minecraft:surface_relative_threshold_filter",

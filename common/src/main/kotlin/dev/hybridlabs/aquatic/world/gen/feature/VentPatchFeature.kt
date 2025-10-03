@@ -27,9 +27,9 @@ import kotlin.math.sqrt
 @Suppress("NAME_SHADOWING", "SameParameterValue")
 class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatchFeatureConfig>(codec) {
     companion object {
-        val MAX_VENT_HEIGHT = 5
-        val MIN_VENT_HEIGHT = 2
-        val MIN_VENT_CLEARANCE = 2
+        const val MAX_VENT_HEIGHT = 5
+        const val MIN_VENT_HEIGHT = 2
+        const val MIN_VENT_CLEARANCE = 2
 
     }
 
