@@ -60,16 +60,16 @@ object HybridAquaticBlocks {
     val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL) }
     val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
 
-    val CRAB_POT = register("crab_pot") { CrateBlock(Properties.copy(Blocks.OAK_PLANKS).noOcclusion().strength(0.75F)) }
-    val HYBRID_CRATE = register("hybrid_crate") { CrateBlock(Properties.copy(Blocks.OAK_PLANKS).strength(0.75F)) }
-    val OAK_CRATE = register("oak_crate") { CrateBlock(Properties.copy(Blocks.OAK_PLANKS).strength(0.75F)) }
-    val SPRUCE_CRATE = register("spruce_crate") { CrateBlock(Properties.copy(Blocks.SPRUCE_PLANKS).strength(0.75F)) }
-    val BIRCH_CRATE = register("birch_crate") { CrateBlock(Properties.copy(Blocks.BIRCH_PLANKS).strength(0.75F)) }
-    val DARK_OAK_CRATE = register("dark_oak_crate") { CrateBlock(Properties.copy(Blocks.DARK_OAK_PLANKS).strength(0.75F)) }
-    val ACACIA_CRATE = register("acacia_crate") { CrateBlock(Properties.copy(Blocks.ACACIA_PLANKS).strength(0.75F)) }
-    val JUNGLE_CRATE = register("jungle_crate") { CrateBlock(Properties.copy(Blocks.JUNGLE_PLANKS).strength(0.75F)) }
-    val MANGROVE_CRATE = register("mangrove_crate") { CrateBlock(Properties.copy(Blocks.MANGROVE_PLANKS).strength(0.75F)) }
-    val CHERRY_CRATE = register("cherry_crate") { CrateBlock(Properties.copy(Blocks.CHERRY_PLANKS).strength(0.75F)) }
+    val CRAB_POT = register("crab_pot") { CrateBlock(Properties.copy(Blocks.OAK_PLANKS).noOcclusion()) }
+    val HYBRID_CRATE = register("hybrid_crate") { CrateBlock(Properties.copy(Blocks.OAK_PLANKS)) }
+    val OAK_CRATE = register("oak_crate") { CrateBlock(Properties.copy(Blocks.OAK_PLANKS)) }
+    val SPRUCE_CRATE = register("spruce_crate") { CrateBlock(Properties.copy(Blocks.SPRUCE_PLANKS)) }
+    val BIRCH_CRATE = register("birch_crate") { CrateBlock(Properties.copy(Blocks.BIRCH_PLANKS)) }
+    val DARK_OAK_CRATE = register("dark_oak_crate") { CrateBlock(Properties.copy(Blocks.DARK_OAK_PLANKS)) }
+    val ACACIA_CRATE = register("acacia_crate") { CrateBlock(Properties.copy(Blocks.ACACIA_PLANKS)) }
+    val JUNGLE_CRATE = register("jungle_crate") { CrateBlock(Properties.copy(Blocks.JUNGLE_PLANKS)) }
+    val MANGROVE_CRATE = register("mangrove_crate") { CrateBlock(Properties.copy(Blocks.MANGROVE_PLANKS)) }
+    val CHERRY_CRATE = register("cherry_crate") { CrateBlock(Properties.copy(Blocks.CHERRY_PLANKS)) }
 
     val SARGASSUM = register(
         "sargassum"
@@ -345,7 +345,6 @@ object HybridAquaticBlocks {
             "buoy"
         ) {
             BuoyBlock(Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noParticlesOnBreak().lightLevel { 12 }
-                .strength(0.75F)
             )
         }
 
