@@ -1,6 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-package dev.hybridlabs.aquatic.data.server
+package dev.hybridlabs.aquatic.data.server.worldgen
 
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
@@ -8,15 +8,9 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.placement.PlacementUtils
-import net.minecraft.util.valueproviders.ClampedNormalInt
-import net.minecraft.util.valueproviders.ConstantInt
-import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.levelgen.Heightmap
-import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.placement.*
 import java.util.concurrent.CompletableFuture
-import java.util.zip.ZipEntry
-import kotlin.coroutines.Continuation
 
 class PlacedFeatureProvider(
     output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>
@@ -81,7 +75,7 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.SARGASSUM, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.SARGASSUM), listOf(
-                    NoiseBasedCountPlacement.of(120, 80.0, 0.0),
+                    NoiseBasedCountPlacement.of(80, 80.0, 0.0),
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     BiomeFilter.biome()
@@ -138,7 +132,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH), listOf(
                     NoiseBasedCountPlacement.of(10, 80.0, 0.0),
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     BiomeFilter.biome()
                 )
             )
@@ -147,9 +141,9 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH), listOf(
-                    NoiseBasedCountPlacement.of(400, 100.0, 0.0),
+                    NoiseBasedCountPlacement.of(120, 100.0, 0.0),
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     BiomeFilter.biome()
                 )
             )

@@ -24,7 +24,7 @@ object FeatureBiomeModifications {
         )
 
         BiomeModifications.addFeature(
-            BiomeSelectors.tag(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+            BiomeSelectors.tag(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
             GenerationStep.Decoration.VEGETAL_DECORATION,
             HybridAquaticPlacedFeatures.SARGASSUM
         )

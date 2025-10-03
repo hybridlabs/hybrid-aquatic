@@ -32,7 +32,7 @@ class SargassumFeature(codec: Codec<SargassumFeatureConfig>) :
                     if (l == k) {
                         structureLevelAccessor.setBlock(
                             blockPos2,
-                            blockState.setValue(KelpBlock.AGE, random.nextInt(4) + 20) as BlockState,
+                            blockState.setValue(KelpBlock.AGE, random.nextInt(4) + 12) as BlockState,
                             2
                         )
                         ++i
@@ -50,7 +50,7 @@ class SargassumFeature(codec: Codec<SargassumFeatureConfig>) :
                     ) {
                         structureLevelAccessor.setBlock(
                             blockPos3,
-                            blockState.setValue(KelpBlock.AGE, random.nextInt(4) + 20) as BlockState,
+                            blockState.setValue(KelpBlock.AGE, random.nextInt(4) + 12) as BlockState,
                             2
                         )
                         ++i
