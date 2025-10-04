@@ -80,18 +80,18 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     override fun aiStep() {
         super.aiStep()
         if (!level().isClientSide() && this.isEffectiveAi) {
-            if (!this.onGround()) {
+            if (this.isInWater) {
                 if (this.isFloating()) {
                     if (--this.floatingTimer <= 0) {
                         this.setFloating(false)
                         this.moveControl = swimControl
                     }
                     this.yHeadRot = 0F
-                    this.yBodyRot = 0F
                 } else if (random.nextFloat() <= 0.001f) {
                     this.floatingTimer = random.nextInt(500, 1000)
                     this.setFloating(true)
                     this.moveControl = floatControl
+                    this.navigation.stop()
                 }
             } else {
                 this.setFloating(false)
