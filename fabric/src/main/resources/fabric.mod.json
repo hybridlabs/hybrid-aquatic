@@ -4,7 +4,7 @@
     "version": "${version}",
 
     "name": "Hybrid Aquatic",
-    "description": "A mod that enhances your underwater Minecraft experience! Explore improved rivers, swamps, oceans, and undersea caves with new creatures, blocks, and (coming soon) biomes.",
+    "description": "${description}",
 
     "authors": [
         "MysticKoko",
@@ -14,7 +14,8 @@
         "SupervillainMadi",
         "Ragno",
         "TheNuclearNexus",
-        "dragoncommands"
+        "dragoncommands",
+        "murphy slaw"
     ],
 
     "contact": {
