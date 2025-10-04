@@ -30,7 +30,7 @@ class OctopusEntity(entityType: EntityType<out OctopusEntity>, world: Level) :
         world,
         HybridAquaticEntityTags.CRUSTACEAN,
         HybridAquaticEntityTags.SHARK,
-        false,
+        true,
     ), VariantHolder<OctopusEntity.Companion.Type>, OverlayTextureFeature {
 
     override fun finalizeSpawn(
