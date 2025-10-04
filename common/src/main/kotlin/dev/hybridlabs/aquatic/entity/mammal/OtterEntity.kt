@@ -173,26 +173,13 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             AnimationController(
-                this, "Float", 8,
-                AnimationController.AnimationStateHandler { state: AnimationState<OtterEntity> ->
-                    if (isInWater && isFloating()) {
-                        return@AnimationStateHandler state.setAndContinue(FLOAT)
-                    } else {
-                        PlayState.STOP
-                    }
-                }
-            )
-        )
-
-        controllerRegistrar.add(
-            AnimationController(
-                this, "Swim/Idle", 4
+                this, "Walk/Idle", 4
             ) { state: AnimationState<OtterEntity> ->
-                if (isUnderWater) {
+                if (!isInWater) {
                     return@AnimationController if (state.isMoving) {
-                        state.setAndContinue(DefaultAnimations.SWIM)
+                        state.setAndContinue(DefaultAnimations.WALK)
                     } else {
-                        state.setAndContinue(WATER_IDLE)
+                        state.setAndContinue(DefaultAnimations.IDLE)
                     }
                 }
                 PlayState.STOP
@@ -201,15 +188,20 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
         controllerRegistrar.add(
             AnimationController(
-                this, "Walk/Idle", 4
+                this, "Swim/Float/idle", 4
             ) { state: AnimationState<OtterEntity> ->
-                if (onGround()) {
+                if (isInWater) {
+                    if (isFloating()) {
+                        return@AnimationController state.setAndContinue(FLOAT)
+                    }
+
                     return@AnimationController if (state.isMoving) {
-                        state.setAndContinue(DefaultAnimations.WALK)
+                        state.setAndContinue(DefaultAnimations.SWIM)
                     } else {
-                        state.setAndContinue(DefaultAnimations.IDLE)
+                        state.setAndContinue(WATER_IDLE)
                     }
                 }
+
                 PlayState.STOP
             }
         )
