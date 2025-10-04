@@ -84,10 +84,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                         this.setFloating(false)
                         this.moveControl = swimControl
                     }
-                    this.deltaMovement = deltaMovement.add(0.0, 0.01, 0.0)
                     this.yHeadRot = 0F
+                    this.yBodyRot = 0F
                 } else if (random.nextFloat() <= 0.001f) {
-                    this.floatingTimer = random.nextInt(200, 650)
+                    this.floatingTimer = random.nextInt(500, 1000)
                     this.setFloating(true)
                     this.moveControl = floatControl
                 }
@@ -95,6 +95,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                 this.setFloating(false)
             }
         }
+    }
+
+    override fun maxUpStep(): Float {
+        return 1.0F
     }
 
     fun isFloating(): Boolean {
