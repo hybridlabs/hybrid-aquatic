@@ -130,7 +130,7 @@
 				},
 				"torso": {
 					"rotation": ["0-math.sin(query.anim_time*22.5*8-210)*1", "0+math.sin(query.anim_time*22.5*4-230)*2", "0-math.sin(query.anim_time*22.5*4-180)*2"],
-					"position": [0, -1, 0]
+					"position": [0, 1, 0]
 				}
 			}
 		},
