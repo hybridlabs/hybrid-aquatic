@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_ocean",
+  "features": "hybrid-aquatic:thermal_vent_patch",
+  "step": "surface_structures"
+}

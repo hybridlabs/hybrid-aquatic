@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid-aquatic:tropical_rivers",
+  "features": "hybrid-aquatic:jungle_lily_pad",
+  "step": "vegetal_decoration"
+}

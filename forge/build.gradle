@@ -1,7 +1,7 @@
 plugins {
-    id 'multiloader-loader';
-    id 'net.neoforged.moddev.legacyforge';
-    id 'org.jetbrains.kotlin.jvm';
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev.legacyforge'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 // This config will copy the output of Fabric's runDatagen task into
@@ -48,7 +48,8 @@ legacyForge {
             data()
             programArguments.addAll '--mod', 'hybrid_aquatic', '--all',
                     '--output', file('src/generated/resources/').getAbsolutePath(),
-                    '--existing', file('src/main/resources/').getAbsolutePath()
+                    '--existing', file('src/main/resources/').getAbsolutePath(),
+                    '--existing', file("../fabric/src/generated/resources").getAbsolutePath()
         }
         server {
             server()

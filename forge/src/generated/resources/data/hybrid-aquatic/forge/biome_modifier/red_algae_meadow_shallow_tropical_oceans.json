@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid-aquatic:shallow_tropical_oceans",
+  "features": "hybrid-aquatic:red_algae_meadow",
+  "step": "vegetal_decoration"
+}

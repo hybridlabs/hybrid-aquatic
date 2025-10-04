@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid-aquatic:bottle_spawn_biomes",
+  "features": "hybrid-aquatic:message_in_a_bottle",
+  "step": "top_layer_modification"
+}

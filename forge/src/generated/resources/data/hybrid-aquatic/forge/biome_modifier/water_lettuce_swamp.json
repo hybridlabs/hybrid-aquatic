@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid-aquatic:swamp",
+  "features": "hybrid-aquatic:water_lettuce",
+  "step": "vegetal_decoration"
+}
