@@ -158,6 +158,8 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
+        this.overlayColor = this.overlayColor
+        this.starfishColor = this.starfishColor
 
         overlayTexture = when (selectedType) {
             Type.CROWN_OF_THORNS, Type.BRITTLESTAR -> OverlayTextures.NONE
