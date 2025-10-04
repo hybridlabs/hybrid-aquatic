@@ -12,29 +12,11 @@ class StarfishEntityModel : HybridAquaticCritterEntityModel<StarfishEntity>("sta
         ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_yellow.png"),
     )
 
-    private val smallTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_blue.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_green.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_orange.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_purple.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_red.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_yellow.png"),
-    )
-
     private val mediumTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_blue.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_green.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_orange.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_purple.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_red.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_yellow.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_blue.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_green.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_orange.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_purple.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_red.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed_yellow.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed.png")
     )
+    private val SMALL_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_small.png")
 
     private val CROWN_OF_THORNS_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_crown_of_thorns.png")
 
@@ -52,7 +34,7 @@ class StarfishEntityModel : HybridAquaticCritterEntityModel<StarfishEntity>("sta
         return when (animatable.variant) {
             StarfishEntity.Companion.Type.CROWN_OF_THORNS -> CROWN_OF_THORNS_TEXTURE
             StarfishEntity.Companion.Type.BRITTLESTAR -> brittlestarTextures[random.nextInt(brittlestarTextures.size)]
-            StarfishEntity.Companion.Type.SMALL -> smallTextures[random.nextInt(smallTextures.size)]
+            StarfishEntity.Companion.Type.SMALL -> SMALL_TEXTURE
             StarfishEntity.Companion.Type.MEDIUM -> mediumTextures[random.nextInt(mediumTextures.size)]
         }
     }

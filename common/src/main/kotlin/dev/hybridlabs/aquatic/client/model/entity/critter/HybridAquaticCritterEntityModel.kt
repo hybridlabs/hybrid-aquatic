@@ -19,7 +19,7 @@ abstract class HybridAquaticCritterEntityModel<T : HybridAquaticCritterEntity>(p
         return CommonClass.locate("animations/$id.animation.json")
     }
 
-    fun getLayerTextureResource(layer: String): ResourceLocation {
+    open fun getLayerTextureResource(layer: String): ResourceLocation {
         return CommonClass.locate("textures/entity/critter/$id/layers/${id}_$layer.png")
     }
 }

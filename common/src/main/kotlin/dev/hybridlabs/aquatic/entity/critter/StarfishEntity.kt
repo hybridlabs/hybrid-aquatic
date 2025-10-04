@@ -54,6 +54,10 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
             SynchedEntityData.defineId(StarfishEntity::class.java, EntityDataSerializers.INT)
         val OverlayTexture: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(StarfishEntity::class.java, EntityDataSerializers.INT)
+        val OverlayColor: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(StarfishEntity::class.java, EntityDataSerializers.INT)
+        val StarfishColor: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(StarfishEntity::class.java, EntityDataSerializers.INT)
 
         enum class OverlayTextures(val id: Int, val key: String) : StringRepresentable {
             NONE(0, ""),
@@ -177,6 +181,38 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
             entityData.set(OverlayTexture, value.id)
         }
 
+    var overlayColor: Int
+        get() {
+            var color = entityData.get(OverlayColor)
+            if (color == -1) {
+                val r = random.nextInt(256)
+                val g = random.nextInt(256)
+                val b = random.nextInt(256)
+                color = (255 shl 24) or (r shl 16) or (g shl 8) or b
+                entityData.set(OverlayColor, color)
+            }
+            return color
+        }
+        set(value) {
+            entityData.set(OverlayColor, value)
+        }
+
+    var starfishColor: Int
+        get() {
+            var color = entityData.get(StarfishColor)
+            if (color == -1) {
+                val r = random.nextInt(256)
+                val g = random.nextInt(256)
+                val b = random.nextInt(256)
+                color = (255 shl 24) or (r shl 16) or (g shl 8) or b
+                entityData.set(StarfishColor, color)
+            }
+            return color
+        }
+        set(value) {
+            entityData.set(StarfishColor, value)
+        }
+
     override fun getOverlayTextureName(): String {
         return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
     }
@@ -184,19 +220,34 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
     override fun defineSynchedData() {
         entityData.define(TYPE, 0)
         entityData.define(OverlayTexture, 0)
+        entityData.define(StarfishColor, -1)
+        entityData.define(OverlayColor, -1)
         super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putString("Type", this.variant.serializedName)
-        nbt.putInt("texture_overlay", this.overlayTexture.id)
+        nbt.putInt("Overlay", this.overlayTexture.id)
+        nbt.putInt("Starfish_Color", starfishColor)
+        nbt.putInt("Overlay_Color", overlayColor)
         super.addAdditionalSaveData(nbt)
     }
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         this.variant = Type.byName(nbt.getString("Type"))
-        if (nbt.contains("texture_overlay")) this.overlayTexture =
-            OverlayTextures.byId(nbt.getInt("texture_overlay"))
+
+        if (nbt.contains("Overlay")) {
+            this.overlayTexture = OverlayTextures.byId(nbt.getInt("Overlay"))
+        }
+
+        if (nbt.contains("Overlay_Color")) {
+            this.overlayColor = nbt.getInt("Overlay_Color")
+        }
+
+        if (nbt.contains("Starfish_Color")) {
+            this.starfishColor = nbt.getInt("Starfish_Color")
+        }
+
         super.readAdditionalSaveData(nbt)
     }
 
