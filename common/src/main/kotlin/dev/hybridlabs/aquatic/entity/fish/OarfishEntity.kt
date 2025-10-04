@@ -66,7 +66,6 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
         }
     }
 
-
     override fun getDimensions(pose: Pose): EntityDimensions {
         return if (isFeeding()) {
             EntityDimensions.scalable(0.5f, 5.0f)
