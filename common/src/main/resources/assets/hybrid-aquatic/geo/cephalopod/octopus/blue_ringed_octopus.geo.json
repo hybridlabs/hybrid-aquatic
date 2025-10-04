@@ -12,12 +12,7 @@
 			},
 			"bones": [
 				{
-					"name": "octopus",
-					"pivot": [0, 0, 0]
-				},
-				{
 					"name": "body",
-					"parent": "octopus",
 					"pivot": [0, 2, 0]
 				},
 				{

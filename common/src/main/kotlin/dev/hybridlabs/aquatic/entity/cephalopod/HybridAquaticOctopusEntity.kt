@@ -63,7 +63,6 @@ open class HybridAquaticOctopusEntity(
                     } else {
                         this.deltaMovement = deltaMovement.subtract(0.0, 0.01, 0.0)
                         this.yHeadRot = 0F
-                        this.xRot = 0F
                     }
                 } else if (random.nextFloat() <= 0.001f) {
                     this.sittingTimer = random.nextInt(200, 650)
