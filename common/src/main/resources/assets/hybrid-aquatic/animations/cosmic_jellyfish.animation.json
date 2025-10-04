@@ -107,6 +107,51 @@
 					}
 				}
 			}
+		},
+		"misc.flop": {
+			"loop": true,
+			"bones": {
+				"mauve_stinger": {
+					"position": [0, -5.4, 0]
+				},
+				"head": {
+					"scale": [1.2, 0.5, 1.2]
+				},
+				"core_tentacles": {
+					"position": [0, 0.5, 0],
+					"scale": [1, 0.2, 1]
+				},
+				"tentacle_a1": {
+					"rotation": [-90, 0, 0]
+				},
+				"tentacle_b1": {
+					"rotation": [-90, 0, 0]
+				},
+				"tentacle_c1": {
+					"rotation": [-90, 0, 0]
+				},
+				"tentacle_d1": {
+					"rotation": [90, 0, 0]
+				},
+				"tentacle_e1": {
+					"rotation": [90, 0, 0]
+				},
+				"tentacle_f1": {
+					"rotation": [90, 0, 0]
+				},
+				"tentacle_f2": {
+					"rotation": [0, 0, 0]
+				},
+				"tentacle_g1": {
+					"rotation": [-90, 0, 0]
+				},
+				"tentacle_h1": {
+					"rotation": [-90, 0, 0]
+				},
+				"body": {
+					"position": [0, -7.9, 0]
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

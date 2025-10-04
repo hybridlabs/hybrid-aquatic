@@ -80,6 +80,42 @@
 					"rotation": ["Math.cos(query.anim_time * 90)*-7.5", 0, 0]
 				}
 			}
+		},
+		"misc.flop": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"position": [0, 8.3, 0]
+				},
+				"tentacle_a1": {
+					"rotation": [-90, 0, 0]
+				},
+				"tentacle_b1": {
+					"rotation": [-90, 0, 0]
+				},
+				"tentacle_c1": {
+					"rotation": [-90, 0, 0]
+				},
+				"tentacle_d1": {
+					"rotation": [90, 0, 0]
+				},
+				"tentacle_e1": {
+					"rotation": [90, 0, 0]
+				},
+				"tentacle_f1": {
+					"rotation": [90, 0, 0]
+				},
+				"tentacle_g1": {
+					"rotation": [-90, 0, 0]
+				},
+				"tentacle_h1": {
+					"rotation": [-90, 0, 0]
+				},
+				"head": {
+					"position": [0, -9, 0],
+					"scale": [1, 0.7, 1]
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

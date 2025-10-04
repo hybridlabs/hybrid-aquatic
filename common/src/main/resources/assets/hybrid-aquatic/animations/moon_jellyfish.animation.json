@@ -65,6 +65,37 @@
 					"position": [0, -1.75, 0]
 				}
 			}
+		},
+		"misc.flop": {
+			"loop": true,
+			"bones": {
+				"head": {
+					"position": [0, -0.5, 0],
+					"scale": [1.2, 0.8, 1.2]
+				},
+				"core_tentacles": {
+					"position": [0, 1, 0]
+				},
+				"tentacle_1": {
+					"rotation": [-54.7356, 30, 54.7356],
+					"position": [-0.5, 0.25, -0.5]
+				},
+				"tentacle_2": {
+					"rotation": [-54.7356, -30, -54.73561],
+					"position": [0.5, 0.25, -0.5]
+				},
+				"tentacle_3": {
+					"rotation": [54.73561, 30, -54.73561],
+					"position": [0.5, 0.25, 0.5]
+				},
+				"tentacle_4": {
+					"rotation": [54.7356, -30, 54.7356],
+					"position": [-0.5, 0.25, 0.5]
+				},
+				"body": {
+					"position": [0, -1.75, 0]
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2
