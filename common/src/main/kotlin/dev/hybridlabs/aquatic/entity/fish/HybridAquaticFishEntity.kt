@@ -123,6 +123,8 @@ open class HybridAquaticFishEntity(
         super.aiStep()
     }
 
+    override fun handleAirSupply(air: Int) {}
+
     private fun getMaxMoistness(): Int {
         return 600
     }

@@ -117,6 +117,8 @@ open class HybridAquaticCephalopodEntity(
         if (hunger > 0) hunger -= 1
     }
 
+    override fun handleAirSupply(air: Int) {}
+
     private fun getMaxMoistness(): Int {
         return 600
     }

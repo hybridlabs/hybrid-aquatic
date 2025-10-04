@@ -292,6 +292,8 @@ open class HybridAquaticOctopusEntity(
         return !fromFishingNet && !hasCustomName()
     }
 
+    override fun handleAirSupply(air: Int) {}
+
     private fun getMaxMoistness(): Int {
         return 1200
     }

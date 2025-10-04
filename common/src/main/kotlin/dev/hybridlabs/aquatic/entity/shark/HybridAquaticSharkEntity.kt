@@ -214,6 +214,8 @@ open class HybridAquaticSharkEntity(
 
     //#region Water Breathing
 
+    override fun handleAirSupply(air: Int) {}
+
     private fun getMaxMoistness(): Int {
         return 1200
     }
