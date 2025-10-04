@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import dev.hybridlabs.aquatic.entity.ai.control.FloatControl
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -35,18 +36,24 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import java.util.function.IntFunction
 
 class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
-    HybridAquaticMammalEntity(entityType, world,
+    HybridAquaticMammalEntity(
+        entityType, world,
         listOf(
             HybridAquaticEntityTags.CRUSTACEAN,
-            HybridAquaticEntityTags.SMALL_PREY),
+            HybridAquaticEntityTags.SMALL_PREY
+        ),
         listOf(
-            HybridAquaticEntityTags.NONE)),
+            HybridAquaticEntityTags.NONE
+        )
+    ),
     VariantHolder<OtterEntity.Companion.Type> {
     private var floatingTimer: Int = 0
+    private val swimControl = OtterMoveControl(this, 85, 10, 1.0F, 1.0F, true)
+    private val floatControl = FloatControl(this)
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        moveControl = OtterMoveControl(this, 85, 10, 1.0F, 1.0F, true)
+        moveControl = swimControl
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = AmphibiousPathNavigation(this, world)
     }
@@ -75,12 +82,14 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                 if (this.isFloating()) {
                     if (--this.floatingTimer <= 0) {
                         this.setFloating(false)
+                        this.moveControl = swimControl
                     }
                     this.deltaMovement = deltaMovement.add(0.0, 0.01, 0.0)
                     this.yHeadRot = 0F
                 } else if (random.nextFloat() <= 0.001f) {
                     this.floatingTimer = random.nextInt(200, 650)
                     this.setFloating(true)
+                    this.moveControl = floatControl
                 }
             } else {
                 this.setFloating(false)
@@ -187,6 +196,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
         }
+
         val FLOAT: RawAnimation = RawAnimation.begin().thenPlay("misc.float")
         val FLOATING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(OtterEntity::class.java, EntityDataSerializers.BOOLEAN)
@@ -284,7 +294,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         maxTurnY,
         inWaterSpeedModifier,
         outsideWaterSpeedModifier,
-        applyGravity) {
+        applyGravity
+    ) {
 
         override fun tick() {
             if (!otter.isFloating()) {
