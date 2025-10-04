@@ -33,8 +33,10 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 import java.util.function.IntFunction
 
+@Suppress("DEPRECATION")
 class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     HybridAquaticMammalEntity(
         entityType, world,
@@ -78,7 +80,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     override fun aiStep() {
         super.aiStep()
         if (!level().isClientSide() && this.isEffectiveAi) {
-            if (this.isInWater) {
+            if (!this.onGround()) {
                 if (this.isFloating()) {
                     if (--this.floatingTimer <= 0) {
                         this.setFloating(false)
@@ -171,22 +173,44 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             AnimationController(
-                this,
-                "Sit/Swim/Idle",
-                20
-            ) { state: AnimationState<OtterEntity> ->
-                if (isInWater) {
-                    when {
-                        isFloating() -> state.setAndContinue(FLOAT)
-                        state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
-                        else -> state.setAndContinue(WATER_IDLE)
-                    }
-                } else {
-                    when {
-                        onGround() && state.isMoving -> state.setAndContinue(DefaultAnimations.WALK)
-                        else -> state.setAndContinue(DefaultAnimations.IDLE)
+                this, "Float", 8,
+                AnimationController.AnimationStateHandler { state: AnimationState<OtterEntity> ->
+                    if (isInWater && isFloating()) {
+                        return@AnimationStateHandler state.setAndContinue(FLOAT)
+                    } else {
+                        PlayState.STOP
                     }
                 }
+            )
+        )
+
+        controllerRegistrar.add(
+            AnimationController(
+                this, "Swim/Idle", 4
+            ) { state: AnimationState<OtterEntity> ->
+                if (isUnderWater) {
+                    return@AnimationController if (state.isMoving) {
+                        state.setAndContinue(DefaultAnimations.SWIM)
+                    } else {
+                        state.setAndContinue(WATER_IDLE)
+                    }
+                }
+                PlayState.STOP
+            }
+        )
+
+        controllerRegistrar.add(
+            AnimationController(
+                this, "Walk/Idle", 4
+            ) { state: AnimationState<OtterEntity> ->
+                if (onGround()) {
+                    return@AnimationController if (state.isMoving) {
+                        state.setAndContinue(DefaultAnimations.WALK)
+                    } else {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+                }
+                PlayState.STOP
             }
         )
     }
