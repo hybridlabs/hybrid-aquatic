@@ -31,9 +31,7 @@ import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
@@ -50,7 +48,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     ),
     VariantHolder<OtterEntity.Companion.Type> {
     private var floatingTimer: Int = 0
-    private val swimControl = OtterMoveControl(this, 85, 10, 1.0F, 1.0F, true)
+    private val swimControl = OtterMoveControl(this, 85, 10, 0.8F, 1.0F, true)
     private val floatControl = FloatControl(this)
 
     init {
@@ -172,40 +170,37 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
-            AnimationController(
-                this, "Walk/Idle", 4
-            ) { state: AnimationState<OtterEntity> ->
-                if (!isInWater) {
-                    return@AnimationController if (state.isMoving) {
+            AnimationController(this, "otter_controller", 5) { state ->
+                when {
+                    isInWater && isFloating() && state.isMoving -> {
+                        state.setAndContinue(FLOAT_SWIM)
+                    }
+                    isInWater && isFloating() && !state.isMoving -> {
+                        state.setAndContinue(FLOAT_IDLE)
+                    }
+
+                    isInWater && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.SWIM)
+                    }
+                    isInWater && !state.isMoving -> {
+                        state.setAndContinue(WATER_IDLE)
+                    }
+
+                    !isInWater && state.isMoving -> {
                         state.setAndContinue(DefaultAnimations.WALK)
-                    } else {
+                    }
+                    !isInWater && !state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+
+                    else -> {
                         state.setAndContinue(DefaultAnimations.IDLE)
                     }
                 }
-                PlayState.STOP
-            }
-        )
-
-        controllerRegistrar.add(
-            AnimationController(
-                this, "Swim/Float/idle", 4
-            ) { state: AnimationState<OtterEntity> ->
-                if (isInWater) {
-                    if (isFloating()) {
-                        return@AnimationController state.setAndContinue(FLOAT)
-                    }
-
-                    return@AnimationController if (state.isMoving) {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    } else {
-                        state.setAndContinue(WATER_IDLE)
-                    }
-                }
-
-                PlayState.STOP
             }
         )
     }
+
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
@@ -217,7 +212,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                 .add(Attributes.FOLLOW_RANGE, 16.0)
         }
 
-        val FLOAT: RawAnimation = RawAnimation.begin().thenPlay("misc.float")
+        val FLOAT_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.float_idle")
+        val FLOAT_SWIM: RawAnimation = RawAnimation.begin().thenPlay("move.float_swim")
         val FLOATING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(OtterEntity::class.java, EntityDataSerializers.BOOLEAN)
         val TYPE: EntityDataAccessor<Int> =
