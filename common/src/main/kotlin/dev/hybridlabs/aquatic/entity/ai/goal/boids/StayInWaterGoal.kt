@@ -13,7 +13,7 @@ class StayInWaterGoal(private val mob: Mob) : Goal() {
 
     override fun tick() {
         val blockPos = mob.blockPosition()
-        val blockAbove = mob.level().getBlockState(blockPos.above(2))
+        val blockAbove = mob.level().getBlockState(blockPos.above(1))
         val blockBelow = mob.level().getBlockState(blockPos.below(1))
         val amount = amount()
 
