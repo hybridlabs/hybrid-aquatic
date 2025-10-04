@@ -17,6 +17,7 @@ import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.level.pathfinder.PathComputationType
 
 
+@Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
 class GlowstickBlock(settings: Properties) : TorchBlock(settings, GLOW), SimpleWaterloggedBlock {
     init {
         this.registerDefaultState(stateDefinition.any()

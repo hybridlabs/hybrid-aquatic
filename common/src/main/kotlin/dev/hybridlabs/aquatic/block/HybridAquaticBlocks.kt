@@ -352,7 +352,7 @@ object HybridAquaticBlocks {
         register(
             "glowslime_block"
         ) {
-            SlimeBlock(Properties.copy(Blocks.SLIME_BLOCK).lightLevel { 12 }
+            SlimeBlock(Properties.copy(Blocks.SLIME_BLOCK).lightLevel { 14 }
             )
         }
 
