@@ -166,8 +166,13 @@ open class HybridAquaticCrustaceanEntity(
         return MobType.WATER
     }
 
+    // region water breathing
+
     override fun canBreatheUnderwater(): Boolean {
         return true
+    }
+
+    override fun handleAirSupply(air: Int) {
     }
 
     protected open fun getMinSize(): Int {
