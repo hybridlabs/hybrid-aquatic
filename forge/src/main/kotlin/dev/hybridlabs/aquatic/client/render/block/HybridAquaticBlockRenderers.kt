@@ -9,6 +9,11 @@ object HybridAquaticBlockRenderers {
     fun registerRenderShapes() {
         ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.cutout(),
+            HybridAquaticBlocks.DUNEGRASS.get(),
+            HybridAquaticBlocks.TALL_DUNEGRASS.get(),
+            HybridAquaticBlocks.CATTAIL.get(),
+            HybridAquaticBlocks.GLOWSLIME_BLOCK.get(),
+
             HybridAquaticBlocks.RED_ALGAE.get(),
             HybridAquaticBlocks.TALL_RED_ALGAE.get(),
 
