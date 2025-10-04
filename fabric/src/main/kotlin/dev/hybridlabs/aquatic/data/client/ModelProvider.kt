@@ -225,6 +225,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.COOKED_TENTACLE.get(),
             HybridAquaticItems.GLOWSLIME.get(),
             HybridAquaticItems.SHARK_TOOTH.get(),
+            HybridAquaticItems.PRISMARINE_ROD.get(),
             HybridAquaticItems.PEARL.get(),
             HybridAquaticItems.BLACK_PEARL.get(),
             HybridAquaticItems.SULFUR.get(),

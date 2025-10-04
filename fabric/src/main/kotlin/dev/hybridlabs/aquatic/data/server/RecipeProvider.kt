@@ -74,6 +74,22 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, Items.TRIDENT, 1)
+            .pattern("SSS")
+            .pattern(" R ")
+            .pattern(" R ")
+            .define('S', HybridAquaticItems.SHARK_TOOTH.get())
+            .define('R', HybridAquaticItems.PRISMARINE_ROD.get())
+            .unlockedBy(
+                "has_shark_tooth",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SHARK_TOOTH.get())
+            )
+            .unlockedBy(
+                "has_prismarine_rod",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PRISMARINE_ROD.get())
+            )
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_PICKAXE.get(), 1)
             .pattern("CCC")
             .pattern(" S ")

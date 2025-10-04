@@ -220,6 +220,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.BUOY.get())
                 entries.accept(HybridAquaticItems.CUTTLEBONE.get())
                 entries.accept(HybridAquaticItems.CORAL_CHUNK.get())
+                entries.accept(HybridAquaticItems.PRISMARINE_ROD.get())
                 entries.accept(HybridAquaticItems.SEA_URCHIN_SPINE.get())
 
                 // lures

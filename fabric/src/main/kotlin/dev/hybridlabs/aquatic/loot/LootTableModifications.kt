@@ -1,12 +1,18 @@
 package dev.hybridlabs.aquatic.loot
 
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents
 import net.minecraft.advancements.critereon.EntityPredicate
 import net.minecraft.advancements.critereon.FishingHookPredicate
+import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.storage.loot.BuiltInLootTables
 import net.minecraft.world.level.storage.loot.LootContext
+import net.minecraft.world.level.storage.loot.LootPool
+import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.entries.LootTableReference
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 
 object LootTableModifications {
     fun registerLootModifications() {
@@ -49,6 +55,17 @@ object LootTableModifications {
                                         )
                                 )
                         }
+                    }
+
+                    EntityType.ELDER_GUARDIAN.defaultLootTable -> {
+                        tableBuilder.pool(
+                            LootPool.lootPool()
+                                .add(
+                                    LootItem.lootTableItem(HybridAquaticItems.PRISMARINE_ROD.get())
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                )
+                                .build()
+                        )
                     }
                 }
             }
