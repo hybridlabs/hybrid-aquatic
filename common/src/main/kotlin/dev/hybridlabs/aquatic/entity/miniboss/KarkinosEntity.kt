@@ -1,7 +1,8 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosMeleeAttackGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosAttackGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosHeavyAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosSummonGoal
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -14,6 +15,7 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.BossEvent
 import net.minecraft.world.Difficulty
+import net.minecraft.world.InteractionHand
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobType
@@ -36,6 +38,7 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 
@@ -46,6 +49,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     private var timeSinceLastFlip: Int = 0
     var summonCooldown: Int = 0
     private var summonTimer: Int = 0
+    var lastAttackBlocked = false
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -70,8 +74,9 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         ServerBossEvent(displayName, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_20)
 
     override fun registerGoals() {
-        goalSelector.addGoal(1, KarkinosSummonGoal(this))
-        goalSelector.addGoal(2, KarkinosMeleeAttackGoal(this, 0.5, true))
+        goalSelector.addGoal(0, KarkinosSummonGoal(this))
+        goalSelector.addGoal(1, KarkinosHeavyAttackGoal(this, 0.5, true))
+        goalSelector.addGoal(2, KarkinosAttackGoal(this, 0.5, true))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.5))
         goalSelector.addGoal(3, LookAtPlayerGoal(this, Player::class.java, 16.0f))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
@@ -161,6 +166,23 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         summonCooldown = 300
     }
 
+    fun isSlamming(): Boolean {
+        return entityData.get(SLAMMING)
+    }
+
+    private fun setSlamming(summon: Boolean) {
+        entityData.set(SLAMMING, summon)
+    }
+
+    fun startSlamming() {
+        setSlamming(true)
+        navigation.stop()
+    }
+
+    fun stopSlamming() {
+        setSlamming(false)
+    }
+
     private fun summonKarcinogens() {
         val random = this.random
         val count = 3
@@ -215,10 +237,12 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         super.defineSynchedData()
         entityData.define(FLIPPED, false)
         entityData.define(SUMMONING, false)
+        entityData.define(SLAMMING, false)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putBoolean("Flipped", isFlipped())
+        nbt.putBoolean("Slamming", isSlamming())
         nbt.putBoolean("Summoning", isSummoning())
         nbt.putInt("SummonTimer", summonTimer)
         nbt.putInt("SummonCooldown", summonCooldown)
@@ -231,6 +255,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             bossBar.name = this.displayName
         }
         this.setFlipped(nbt.getBoolean("Flipped"))
+        this.setSlamming(nbt.getBoolean("Slamming"))
         this.setSummoning(nbt.getBoolean("Summoning"))
         this.summonTimer = nbt.getInt("SummonTimer")
         this.summonCooldown = nbt.getInt("SummonCooldown")
@@ -304,8 +329,13 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         bossBar.name = this.displayName
     }
 
+    fun triggerHeavyAttackAnimation() {
+        swinging = true
+        swing(InteractionHand.MAIN_HAND)
+    }
+
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "flip_controller", 8) { state ->
+        controllers.add(AnimationController(this, "Flip", 8) { state ->
             if (isFlipped()) {
                 state.setAndContinue(FLIP_ANIMATION)
                 PlayState.CONTINUE
@@ -313,15 +343,31 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
                 PlayState.STOP
             }
         })
-        controllers.add(AnimationController(this, "summon_controller", 4) { state ->
+
+        controllers.add(AnimationController(this, "Summon", 4) { state ->
             if (isSummoning()) {
-                state.setAndContinue(SUMMON_ANIMATION)
+                state.setAndContinue(DefaultAnimations.ATTACK_CAST)
                 PlayState.CONTINUE
             } else {
                 PlayState.STOP
             }
         })
+
         controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
+
+        controllers.add(
+            AnimationController(this, "Slam", 4,
+                AnimationController.AnimationStateHandler { state: AnimationState<*> ->
+                    if (isSlamming()) {
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.ATTACK_SLAM)
+                    } else {
+                        state.controller.forceAnimationReset()
+                        return@AnimationStateHandler PlayState.STOP
+                    }
+                }
+            )
+        )
+
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
 
@@ -336,7 +382,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     companion object {
 
         val FLIP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flip")
-        val SUMMON_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.summon")
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
@@ -351,6 +396,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         val FLIPPED: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(KarkinosEntity::class.java, EntityDataSerializers.BOOLEAN)
         val SUMMONING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(KarkinosEntity::class.java, EntityDataSerializers.BOOLEAN)
+        val SLAMMING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(KarkinosEntity::class.java, EntityDataSerializers.BOOLEAN)
     }
 
