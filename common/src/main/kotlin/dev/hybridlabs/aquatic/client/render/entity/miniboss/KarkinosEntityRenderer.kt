@@ -13,4 +13,8 @@ class KarkinosEntityRenderer(context: Context) :
     override fun getDeathMaxRotation(animatable: KarkinosEntity): Float {
         return 0f
     }
+
+    init {
+        this.shadowRadius = 1.5f
+    }
 }
