@@ -66,6 +66,7 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
                 .add(Attributes.MOVEMENT_SPEED, 0.6)
                 .add(Attributes.ATTACK_DAMAGE, 5.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
         }
 
         val TYPE: EntityDataAccessor<Int> =

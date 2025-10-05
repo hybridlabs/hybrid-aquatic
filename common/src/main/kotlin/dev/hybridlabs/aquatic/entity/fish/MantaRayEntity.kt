@@ -38,6 +38,7 @@ class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 5.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
         }
 
         val OverlayTexture: EntityDataAccessor<Int> =
