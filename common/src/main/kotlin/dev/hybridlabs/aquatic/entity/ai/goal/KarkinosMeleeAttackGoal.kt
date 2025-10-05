@@ -35,7 +35,7 @@ open class KarkinosMeleeAttackGoal(
         } else {
             this.lastCanUseCheck = i
 
-            if (karkinos.isFlipped()) {
+            if (karkinos.isFlipped() && karkinos.isSummoning()) {
                 return false
             }
 
