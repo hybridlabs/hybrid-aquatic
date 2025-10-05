@@ -26,7 +26,9 @@ public enum HybridAquaticSpawnGroup {
 
     CRITTER("critter", 5, true, false, 64),
 
-    MINIBOSS("miniboss", 10, false, true, 128);
+    MINIBOSS("miniboss", 10, false, true, 128),
+
+    MINION("minion", 12, false, true, 128);
 
     public MobCategory spawnGroup;
     public final String name;

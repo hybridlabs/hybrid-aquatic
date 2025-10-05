@@ -1482,6 +1482,8 @@ object HybridAquaticItems {
 
     val KARKINOS_SPAWN_EGG =
         registerSpawnEgg("karkinos_spawn_egg", HybridAquaticEntityTypes.KARKINOS, 0x852c2a, 0x3d1031)
+    val KARCINOGEN_SPAWN_EGG =
+        registerSpawnEgg("karcinogen_spawn_egg", HybridAquaticEntityTypes.KARCINOGEN, 0x852c2a, 0x3d1031)
 
     //#endregion
 

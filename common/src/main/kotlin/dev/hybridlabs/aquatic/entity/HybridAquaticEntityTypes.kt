@@ -10,6 +10,7 @@ import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
+import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.platform.Services
@@ -559,6 +560,13 @@ object HybridAquaticEntityTypes {
         KarkinosEntity::createMobAttributes
     )
 
+    val KARCINOGEN = registerMinion(
+        "karcinogen",
+        ::KarcinogenEntity,
+        EntityDimensions.fixed(1.0f, 0.6f),
+        KarcinogenEntity::createMobAttributes
+    )
+
     //endregion
 
     //#region critters
@@ -959,6 +967,21 @@ object HybridAquaticEntityTypes {
             dimensions,
             attributeContainer,
             Services.PLATFORM.getMobCategoryByName("MINIBOSS")
+        )
+    }
+
+    private fun <T : LivingEntity> registerMinion(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("MINION")
         )
     }
 

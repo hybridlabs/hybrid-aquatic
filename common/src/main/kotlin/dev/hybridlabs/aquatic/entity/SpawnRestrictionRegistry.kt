@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
+import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinionEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
@@ -192,6 +193,10 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.KARKINOS.get(),
         ).forEach { registerMiniboss(it) }
+
+        setOf(
+            HybridAquaticEntityTypes.KARCINOGEN.get(),
+        ).forEach { registerMinion(it) }
     }
 
     private fun <T : WaterAnimal> registerShallowFish(entityType: EntityType<T>) {
@@ -266,6 +271,10 @@ object SpawnRestrictionRegistry {
         registerMiniboss(entityType, HybridAquaticMinibossEntity::canSpawn)
     }
 
+    private fun <T : Monster> registerMinion(entityType: EntityType<T>) {
+        registerMinion(entityType, HybridAquaticMinionEntity::canSpawn)
+    }
+
     private fun <T : WaterAnimal> registerWaterCreature(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
@@ -278,6 +287,17 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : Monster> registerMiniboss(
+        entityType: EntityType<T>,
+        predicate: SpawnPlacements.SpawnPredicate<T>,
+    ) {
+        register(
+            entityType,
+            SpawnPlacements.Type.IN_WATER,
+            predicate
+        )
+    }
+
+    private fun <T : Monster> registerMinion(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {

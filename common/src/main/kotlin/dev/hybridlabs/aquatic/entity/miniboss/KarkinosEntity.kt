@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosMeleeAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosSummonGoal
 import net.minecraft.nbt.CompoundTag
@@ -157,10 +158,10 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     fun stopSummoning() {
         setSummoning(false)
         summonTimer = 0
-        summonCooldown = 240
+        summonCooldown = 300
     }
 
-    private fun summonKarkinoids() {
+    private fun summonKarcinogens() {
         val random = this.random
         val count = 3 + random.nextInt(3)
 
@@ -169,16 +170,18 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             val offsetZ = (random.nextDouble() - 0.5) * 6.0
             val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
 
-            val karkinoid = EntityType.VEX.create(level())
-            if (karkinoid != null) {
-                karkinoid.moveTo(
+            val karcinogen = HybridAquaticEntityTypes.KARCINOGEN.get().create(level())
+            if (karcinogen != null) {
+                karcinogen.moveTo(
                     spawnPos.x.toDouble() + 0.5,
                     spawnPos.y.toDouble(),
                     spawnPos.z.toDouble() + 0.5,
                     random.nextFloat() * 360f,
                     0f
                 )
-                level().addFreshEntity(karkinoid)
+                karcinogen.setOwner(this)
+                karcinogen.setLimitedLife(200)
+                level().addFreshEntity(karcinogen)
             }
         }
     }
@@ -231,7 +234,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         if (isSummoning()) {
             summonTimer--
             if (summonTimer == 0) {
-                summonKarkinoids()
+                summonKarcinogens()
                 stopSummoning()
             }
         }

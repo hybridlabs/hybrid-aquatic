@@ -17,12 +17,10 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
-@Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
+@Suppress("LeakingThis", "UNUSED_PARAMETER")
 abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world: Level) : Monster(type, world),
     GeoEntity {
-
     private val factory = GeckoLibUtil.createInstanceCache(this)
-
     private var attackTick = 0
 
     override fun defineSynchedData() {
@@ -77,11 +75,7 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.seaLevel
-            val bottomY = world.seaLevel - 24
-
-            return pos.y in bottomY..topY &&
-                    world.isWaterAt(pos)
+            return world.isWaterAt(pos)
         }
     }
 }

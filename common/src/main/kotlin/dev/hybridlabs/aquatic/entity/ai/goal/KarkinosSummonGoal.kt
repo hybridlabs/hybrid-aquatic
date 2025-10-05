@@ -16,7 +16,8 @@ class KarkinosSummonGoal(
         return karkinos.health <= karkinos.maxHealth / 2f &&
                 !karkinos.isFlipped() &&
                 !karkinos.isSummoning() &&
-                karkinos.summonCooldown <= 0
+                karkinos.summonCooldown <= 0 &&
+                karkinos.target != null
     }
 
     override fun start() {
