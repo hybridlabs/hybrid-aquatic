@@ -25,7 +25,7 @@ class FrilledSharkEntity(entityType: EntityType<out FrilledSharkEntity>, world: 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 24.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.4)
+                .add(Attributes.MOVEMENT_SPEED, 0.7)
                 .add(Attributes.ATTACK_DAMAGE, 4.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
