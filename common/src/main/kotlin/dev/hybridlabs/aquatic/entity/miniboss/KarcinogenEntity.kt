@@ -39,6 +39,14 @@ class KarcinogenEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wo
         return 1.0F
     }
 
+    override fun isAffectedByFluids(): Boolean {
+        return !onGround()
+    }
+
+    override fun isPushedByFluid(): Boolean {
+        return false
+    }
+
     override fun tick() {
         super.tick()
 

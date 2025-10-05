@@ -43,9 +43,9 @@ import software.bernie.geckolib.core.`object`.PlayState
 class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, world: Level) :
     HybridAquaticMinibossEntity(entityType, world) {
     private var flippedTimer: Int = 0
-    private var timeSinceLastFlip: Int = 0
-    var summonCooldown: Int = 0
+    private var flippedCooldown: Int = 0
     private var summonTimer: Int = 0
+    var summonCooldown: Int = 0
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -222,7 +222,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         nbt.putBoolean("Summoning", isSummoning())
         nbt.putInt("SummonTimer", summonTimer)
         nbt.putInt("SummonCooldown", summonCooldown)
-
         super.addAdditionalSaveData(nbt)
     }
 
@@ -234,7 +233,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         this.setSummoning(nbt.getBoolean("Summoning"))
         this.summonTimer = nbt.getInt("SummonTimer")
         this.summonCooldown = nbt.getInt("SummonCooldown")
-
         super.readAdditionalSaveData(nbt)
     }
 
@@ -259,8 +257,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
                 }
             }
 
-            if (timeSinceLastFlip > 0) {
-                timeSinceLastFlip--
+            if (flippedCooldown > 0) {
+                flippedCooldown--
             }
         }
 
@@ -290,7 +288,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         if (result && !level().isClientSide &&
             source.directEntity is Player &&
             !isFlipped() &&
-            timeSinceLastFlip <= 0 &&
+            flippedCooldown <= 0 &&
             health > maxHealth / 2f
         ) {
 
@@ -302,7 +300,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
             if (hasFlipEnchant) {
                 this.flippedTimer = random.nextInt(60, 100)
-                this.timeSinceLastFlip = 200
+                this.flippedCooldown = 200
                 this.setFlipped(true)
             }
         }
@@ -344,16 +342,15 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     }
 
     companion object {
-
         val FLIP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flip")
         val SUMMON_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.summon")
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 300.0)
+                .add(Attributes.MAX_HEALTH, 400.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 10.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.5)
+                .add(Attributes.ATTACK_KNOCKBACK, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
         }
