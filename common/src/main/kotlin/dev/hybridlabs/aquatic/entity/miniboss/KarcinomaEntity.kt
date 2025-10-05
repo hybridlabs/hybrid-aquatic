@@ -19,7 +19,6 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
 
 class KarcinomaEntity(entityType: EntityType<out HybridAquaticMinionEntity>, world: Level) :
@@ -41,16 +40,29 @@ class KarcinomaEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wor
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "flop_controller", 4) { state ->
-            if (!isInWater) {
-                state.setAndContinue(FLOP_ANIMATION)
-                PlayState.CONTINUE
-            } else {
-                PlayState.STOP
-            }
-        })
-        controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
+
+        controllers.add(
+            AnimationController(this, "Swim/Run/Idle", 4) { state ->
+                when {
+                    isInWater && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.SWIM)
+                    }
+
+                    isInWater && isSprinting && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+
+                    isInWater && !state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+
+                    else -> {
+                        state.setAndContinue(FLOP_ANIMATION)
+                    }
+                }
+            }
+        )
     }
 
     override fun travel(travelVector: Vec3) {
