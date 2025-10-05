@@ -9,10 +9,8 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.Difficulty
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.*
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.TargetGoal
@@ -67,8 +65,9 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(1, MinionMeleeAttackGoal(this))
-        targetSelector.addGoal(1, MinionCopyOwnerTargetGoal(this))
+        goalSelector.addGoal(0, MinionMeleeAttackGoal(this))
+        targetSelector.addGoal(0, MinionCopyOwnerTargetGoal(this))
+        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.0, 16.0F))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.5))
         goalSelector.addGoal(3, LookAtPlayerGoal(this, Player::class.java, 8.0f))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
@@ -184,9 +183,10 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
             super.start()
         }
     }
+
     internal class MinionMeleeAttackGoal (
         private val minion : HybridAquaticMinionEntity
-    ) : MeleeAttackGoal(minion, 0.5, true) {
+    ) : MeleeAttackGoal(minion, minion.getAttributeValue(Attributes.MOVEMENT_SPEED), true) {
         override fun start() {
             minion.isSprinting = true
             super.start()

@@ -82,7 +82,7 @@ open class HybridAquaticSharkEntity(
         goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.5, 16.0F))
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 2))
-        goalSelector.addGoal(0, SharkAttackGoal(this, 1.0, true))
+        goalSelector.addGoal(0, SharkAttackGoal(this, 1.5, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive })
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive })
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })

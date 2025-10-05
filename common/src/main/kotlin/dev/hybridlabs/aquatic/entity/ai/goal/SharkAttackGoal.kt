@@ -7,6 +7,7 @@ import net.minecraft.world.InteractionHand
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.EntitySelector
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Items
@@ -16,7 +17,7 @@ import kotlin.math.max
 
 open class SharkAttackGoal(
     protected val shark: HybridAquaticSharkEntity,
-    private val speedModifier: Double,
+    private val speedMultiplier: Double = 1.0,
     private val followingTargetEvenIfNotSeen: Boolean,
 ) :
     Goal() {
@@ -27,6 +28,8 @@ open class SharkAttackGoal(
     private var ticksUntilNextPathRecalculation = 0
     private var ticksUntilNextAttack: Int = 0
     private var lastCanUseCheck: Long = 0
+    private val speedModifier: Double
+        get() = shark.getAttributeValue(Attributes.MOVEMENT_SPEED) * speedMultiplier
 
     init {
         this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)

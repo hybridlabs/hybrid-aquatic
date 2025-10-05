@@ -48,7 +48,7 @@ open class HybridAquaticFishEntity(
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(0, FishAttackGoal(this, 1.0, true))
+        goalSelector.addGoal(0, FishAttackGoal(this, 1.5, true))
         goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.0, 12.0F))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(3, AvoidEntityGoal(this, LivingEntity::class.java, 8.0f, 1.3, 1.5) { entity: LivingEntity -> predator.any { predatorTag -> entity.type.`is`(predatorTag) } })
