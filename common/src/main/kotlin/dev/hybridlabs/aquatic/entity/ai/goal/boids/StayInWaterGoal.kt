@@ -14,15 +14,10 @@ class StayInWaterGoal(private val mob: Mob) : Goal() {
     override fun tick() {
         val blockPos = mob.blockPosition()
         val blockAbove = mob.level().getBlockState(blockPos.above(1))
-        val blockBelow = mob.level().getBlockState(blockPos.below(1))
         val amount = amount()
 
         if (blockAbove.fluidState.isEmpty) {
             mob.addDeltaMovement(Vec3(0.0, -amount.toDouble(), 0.0))
-        }
-
-        if (blockBelow.fluidState.isEmpty) {
-            mob.addDeltaMovement(Vec3(0.0, amount.toDouble(), 0.0))
         }
     }
 
