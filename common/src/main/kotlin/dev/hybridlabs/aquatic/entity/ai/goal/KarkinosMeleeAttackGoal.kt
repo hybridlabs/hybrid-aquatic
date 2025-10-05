@@ -17,9 +17,6 @@ open class KarkinosMeleeAttackGoal(
 ) :
     Goal() {
     private var path: Path? = null
-    private var pathedTargetX = 0.0
-    private var pathedTargetY = 0.0
-    private var pathedTargetZ = 0.0
     private var ticksUntilNextPathRecalculation = 0
     private var ticksUntilNextAttack: Int = 0
     private var lastCanUseCheck: Long = 0
@@ -104,36 +101,23 @@ open class KarkinosMeleeAttackGoal(
 
     override fun tick() {
         val livingEntity = karkinos.target
+
+        if (!karkinos.navigation.isInProgress) {
+            if (livingEntity != null) {
+                karkinos.navigation.moveTo(livingEntity, speedModifier)
+            }
+        }
+
         if (livingEntity != null) {
-            karkinos.lookControl.setLookAt(livingEntity, 30.0f, 30.0f)
+            if (karkinos.distanceToSqr(livingEntity) < 16.0) {
+                karkinos.lookControl.setLookAt(livingEntity, 10.0f, 10.0f)
+            }
             val d0 = karkinos.getPerceivedTargetDistanceSquareForMeleeAttack(livingEntity)
             this.ticksUntilNextPathRecalculation =
                 max((this.ticksUntilNextPathRecalculation - 1).toDouble(), 0.0).toInt()
-            if ((this.followingTargetEvenIfNotSeen || karkinos.sensing.hasLineOfSight(livingEntity)) &&
-                (this.ticksUntilNextPathRecalculation <= 0) &&
-                (this.pathedTargetX == 0.0 &&
-                        (this.pathedTargetY == 0.0) &&
-                        (this.pathedTargetZ == 0.0) || (livingEntity.distanceToSqr(
-                    this.pathedTargetX,
-                    this.pathedTargetY,
-                    this.pathedTargetZ
-                ) >= 1.0) || (karkinos.random.nextFloat() < 0.05f))
-            ) {
-                this.pathedTargetX = livingEntity.x
-                this.pathedTargetY = livingEntity.y
-                this.pathedTargetZ = livingEntity.z
-                this.ticksUntilNextPathRecalculation = 4 + karkinos.random.nextInt(7)
-                if (d0 > 1024.0) {
-                    this.ticksUntilNextPathRecalculation += 10
-                } else if (d0 > 256.0) {
-                    this.ticksUntilNextPathRecalculation += 5
-                }
-
-                if (!karkinos.navigation.moveTo(livingEntity, this.speedModifier)) {
-                    this.ticksUntilNextPathRecalculation += 15
-                }
-
-                this.ticksUntilNextPathRecalculation = this.adjustedTickDelay(this.ticksUntilNextPathRecalculation)
+            if ((followingTargetEvenIfNotSeen || karkinos.sensing.hasLineOfSight(livingEntity)) && ticksUntilNextPathRecalculation <= 0) {
+                karkinos.navigation.moveTo(livingEntity, speedModifier)
+                ticksUntilNextPathRecalculation = 20
             }
 
             this.ticksUntilNextAttack =
@@ -156,6 +140,6 @@ open class KarkinosMeleeAttackGoal(
     }
 
     protected open fun getAttackReachSqr(attackTarget: LivingEntity): Double {
-        return (karkinos.bbWidth * 1.5f * karkinos.bbWidth * 1.5f + attackTarget.bbWidth).toDouble()
+        return (karkinos.bbWidth * 1.75f * karkinos.bbWidth * 1.75f + attackTarget.bbWidth).toDouble()
     }
 }

@@ -163,7 +163,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
     private fun summonKarcinogens() {
         val random = this.random
-        val count = 3 + random.nextInt(3)
+        val count = 3
 
         for (i in 0 until count) {
             val offsetX = (random.nextDouble() - 0.5) * 6.0
@@ -257,7 +257,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             val weapon = player.mainHandItem
             val hasFlipEnchant =
                 EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, weapon) > 1 ||
-                        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.KNOCKBACK, weapon) > 2 ||
                         EnchantmentHelper.getItemEnchantmentLevel(Enchantments.RIPTIDE, weapon) > 1
 
             if (hasFlipEnchant) {

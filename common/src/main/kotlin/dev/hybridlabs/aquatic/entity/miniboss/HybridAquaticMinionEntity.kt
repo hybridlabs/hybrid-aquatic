@@ -65,13 +65,13 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(0, MinionMeleeAttackGoal(this))
-        targetSelector.addGoal(0, MinionCopyOwnerTargetGoal(this))
-        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.0, 16.0F))
-        goalSelector.addGoal(3, RandomStrollGoal(this, 0.5))
-        goalSelector.addGoal(3, LookAtPlayerGoal(this, Player::class.java, 8.0f))
-        goalSelector.addGoal(4, RandomLookAroundGoal(this))
-        targetSelector.addGoal(2, HurtByTargetGoal(this))
+        goalSelector.addGoal(1, MinionMeleeAttackGoal(this))
+        targetSelector.addGoal(1, MinionCopyOwnerTargetGoal(this))
+        goalSelector.addGoal(2, MoveTowardsTargetGoal(this, 1.0, 16.0F))
+        goalSelector.addGoal(4, RandomStrollGoal(this, 0.5))
+        goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 8.0f))
+        goalSelector.addGoal(5, RandomLookAroundGoal(this))
+        targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true, null))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, IronGolem::class.java, 10, true, true, null))
         super.registerGoals()

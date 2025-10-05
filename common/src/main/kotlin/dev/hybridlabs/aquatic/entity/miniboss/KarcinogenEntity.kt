@@ -23,7 +23,7 @@ class KarcinogenEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wo
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(3, LeapAtTargetGoal(this, 0.4f))
+        goalSelector.addGoal(0, LeapAtTargetGoal(this, 0.4f))
         super.registerGoals()
     }
 
@@ -43,7 +43,7 @@ class KarcinogenEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wo
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.7)
+                .add(Attributes.MOVEMENT_SPEED, 0.6)
                 .add(Attributes.ATTACK_DAMAGE, 4.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
