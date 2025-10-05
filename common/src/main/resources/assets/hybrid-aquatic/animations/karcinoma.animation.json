@@ -108,6 +108,49 @@
 				}
 			}
 		},
+		"move.walk": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time*90*3)*5", "0-math.sin(query.anim_time*90*1-160)*5", 0]
+					},
+					"position": {
+						"vector": ["0+math.sin(query.anim_time*90*1-80)*0.75", "0+math.sin(query.anim_time*90*3-80)*-1", 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time*90*3)*-10", 0, 0]
+					}
+				},
+				"tail_fin": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time*90*3)*-10", 0, 0]
+					}
+				},
+				"left_claw": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 180)*5", 0, 0]
+					}
+				},
+				"left_eye": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time*90*3)*7.5", 0, 0]
+					}
+				},
+				"right_eye": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time*90*3)*7.5", 0, 0]
+					}
+				},
+				"right_claw": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 180)*5", 0, 0]
+					}
+				}
+			}
+		},
 		"move.run": {
 			"loop": true,
 			"bones": {
