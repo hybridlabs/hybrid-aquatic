@@ -42,7 +42,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     HybridAquaticMinibossEntity(entityType, world) {
     private var flippedTimer: Int = 0
     private var timeSinceLastFlip: Int = 0
-    var summonTimer: Int = 0
+    var summonCooldown: Int = 0
+    private var summonTimer: Int = 0
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -139,7 +140,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         return entityData.get(SUMMONING)
     }
 
-    fun setSummoning(summon: Boolean) {
+    private fun setSummoning(summon: Boolean) {
         if (summon && health <= maxHealth / 2f) return
         entityData.set(SUMMONING, summon)
     }
@@ -147,10 +148,12 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     fun startSummoning() {
         setSummoning(true)
         summonTimer = 60
+        summonCooldown = 20 * 20
         navigation.stop()
-        if (!level().isClientSide) {
-            summonKarkinoids()
-        }
+    }
+
+    fun stopSummoning() {
+        setSummoning(false)
     }
 
     private fun summonKarkinoids() {
@@ -176,10 +179,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         }
     }
 
-    fun stopSummoning() {
-        setSummoning(false)
-    }
-
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(FLIPPED, false)
@@ -189,6 +188,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putBoolean("Flipped", isFlipped())
         nbt.putBoolean("Summoning", isSummoning())
+        nbt.putInt("SummonTimer", summonTimer)
+        nbt.putInt("SummonCooldown", summonCooldown)
 
         super.addAdditionalSaveData(nbt)
     }
@@ -199,6 +200,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         }
         this.setFlipped(nbt.getBoolean("Flipped"))
         this.setSummoning(nbt.getBoolean("Summoning"))
+        this.summonTimer = nbt.getInt("SummonTimer")
+        this.summonCooldown = nbt.getInt("SummonCooldown")
 
         super.readAdditionalSaveData(nbt)
     }
@@ -219,10 +222,12 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             }
         }
 
-        if (summonTimer > 0) {
+        if (isSummoning()) {
             summonTimer--
-            if (summonTimer == 0)
+            if (summonTimer == 0) {
+                summonKarkinoids()
                 stopSummoning()
+            }
         }
 
         bossBar.progress = health / maxHealth
@@ -269,7 +274,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
                 PlayState.STOP
             }
         })
-        controllers.add(AnimationController(this, "summon_controller", 8) { state ->
+        controllers.add(AnimationController(this, "summon_controller", 4) { state ->
             if (isSummoning()) {
                 state.setAndContinue(SUMMON_ANIMATION)
                 PlayState.CONTINUE

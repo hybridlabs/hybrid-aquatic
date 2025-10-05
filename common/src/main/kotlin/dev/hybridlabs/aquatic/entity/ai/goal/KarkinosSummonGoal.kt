@@ -16,21 +16,17 @@ class KarkinosSummonGoal(
         return karkinos.health <= karkinos.maxHealth / 2f &&
                 !karkinos.isFlipped() &&
                 !karkinos.isSummoning() &&
-                karkinos.summonTimer <= 0
+                karkinos.summonCooldown <= 0
     }
 
     override fun start() {
         karkinos.navigation.stop()
         karkinos.isAggressive = false
         karkinos.isSprinting = false
-
-        karkinos.setSummoning(true)
-        karkinos.summonTimer = 20 * 20
         karkinos.startSummoning()
     }
 
     override fun stop() {
-        karkinos.setSummoning(false)
         karkinos.stopSummoning()
     }
 
@@ -40,6 +36,6 @@ class KarkinosSummonGoal(
 
     override fun tick() {
         karkinos.lookControl.setLookAt(karkinos.x, karkinos.y + karkinos.eyeHeight.toDouble(), karkinos.z)
-        if (karkinos.summonTimer > 0) karkinos.summonTimer--
+        if (karkinos.summonCooldown > 0) karkinos.summonCooldown--
     }
 }
