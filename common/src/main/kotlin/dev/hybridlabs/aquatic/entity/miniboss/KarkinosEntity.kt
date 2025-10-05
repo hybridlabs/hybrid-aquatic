@@ -24,7 +24,6 @@ import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
-import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.IronGolem
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.enchantment.EnchantmentHelper
@@ -42,10 +41,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     HybridAquaticMinibossEntity(entityType, world) {
     private var flippedTimer: Int = 0
     private var timeSinceLastFlip: Int = 0
-
-    override fun createNavigation(world: Level): PathNavigation {
-        return GroundPathNavigation(this, world)
-    }
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -69,10 +64,10 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         ServerBossEvent(displayName, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_20)
 
     override fun registerGoals() {
-        goalSelector.addGoal(1, KarkinosMeleeAttackGoal(this, 0.5, true))
-        goalSelector.addGoal(4, RandomStrollGoal(this, 0.5))
-        goalSelector.addGoal(5, RandomLookAroundGoal(this))
-        goalSelector.addGoal(8, LookAtPlayerGoal(this, Player::class.java, 16.0f))
+        goalSelector.addGoal(1, KarkinosMeleeAttackGoal(this, 0.8, true))
+        goalSelector.addGoal(3, RandomStrollGoal(this, 0.5))
+        goalSelector.addGoal(3, LookAtPlayerGoal(this, Player::class.java, 16.0f))
+        goalSelector.addGoal(4, RandomLookAroundGoal(this))
         targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true, null))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, IronGolem::class.java, 10, true, true, null))
