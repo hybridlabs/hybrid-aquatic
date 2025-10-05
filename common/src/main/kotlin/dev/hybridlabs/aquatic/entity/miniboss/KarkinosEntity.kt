@@ -18,6 +18,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
@@ -49,6 +50,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         moveControl = KarkinosMoveControl(this)
         navigation = GroundPathNavigation(this, world)
+        lookControl = LookControl(this)
     }
 
     override fun maxUpStep(): Float {
@@ -124,7 +126,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     }
 
     override fun getMobType(): MobType {
-        return MobType.ARTHROPOD
+        return MobType.WATER
     }
 
     fun isFlipped(): Boolean {
@@ -141,19 +143,20 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     }
 
     private fun setSummoning(summon: Boolean) {
-        if (summon && health <= maxHealth / 2f) return
         entityData.set(SUMMONING, summon)
     }
 
     fun startSummoning() {
         setSummoning(true)
         summonTimer = 60
-        summonCooldown = 20 * 20
+        summonCooldown = 240
         navigation.stop()
     }
 
     fun stopSummoning() {
         setSummoning(false)
+        summonTimer = 0
+        summonCooldown = 240
     }
 
     private fun summonKarkinoids() {
@@ -222,6 +225,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             }
         }
 
+        if (summonCooldown > 0) summonCooldown--
+
         if (isSummoning()) {
             summonTimer--
             if (summonTimer == 0) {
@@ -253,7 +258,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
             if (hasFlipEnchant) {
                 this.flippedTimer = random.nextInt(60, 100)
-                this.timeSinceLastFlip = 400
+                this.timeSinceLastFlip = 240
                 this.setFlipped(true)
             }
         }

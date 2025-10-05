@@ -23,19 +23,23 @@ class KarkinosSummonGoal(
         karkinos.navigation.stop()
         karkinos.isAggressive = false
         karkinos.isSprinting = false
-        karkinos.startSummoning()
-    }
 
-    override fun stop() {
-        karkinos.stopSummoning()
+        karkinos.startSummoning()
     }
 
     override fun canContinueToUse(): Boolean {
         return karkinos.isSummoning()
     }
 
+    override fun stop() {
+        karkinos.stopSummoning()
+    }
+
     override fun tick() {
-        karkinos.lookControl.setLookAt(karkinos.x, karkinos.y + karkinos.eyeHeight.toDouble(), karkinos.z)
-        if (karkinos.summonCooldown > 0) karkinos.summonCooldown--
+        karkinos.lookControl.setLookAt(
+            karkinos.x,
+            karkinos.y + karkinos.eyeHeight.toDouble(),
+            karkinos.z
+        )
     }
 }
