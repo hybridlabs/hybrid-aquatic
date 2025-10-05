@@ -17,7 +17,6 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal
-import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
@@ -49,8 +48,7 @@ open class HybridAquaticFishEntity(
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(0, FishAttackGoal(this, 1.5, true))
-        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.0, 12.0F))
+        goalSelector.addGoal(0, FishAttackGoal(this, 1.1, true))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(3, AvoidEntityGoal(this, LivingEntity::class.java, 8.0f, 1.3, 1.5) { entity: LivingEntity -> predator.any { predatorTag -> entity.type.`is`(predatorTag) } })
         goalSelector.addGoal(3, AvoidEntityGoal(this, Player::class.java, 8.0f, 1.3, 1.5))
@@ -111,9 +109,6 @@ open class HybridAquaticFishEntity(
             this.moveRelative(this.speed, travelVector)
             this.move(MoverType.SELF, this.deltaMovement)
             this.deltaMovement = deltaMovement.scale(0.9)
-            if (this.target == null) {
-                this.deltaMovement = deltaMovement.add(0.0, -0.005, 0.0)
-            }
         } else {
             super.travel(travelVector)
         }
@@ -284,7 +279,7 @@ open class HybridAquaticFishEntity(
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
-        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, true)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
     }

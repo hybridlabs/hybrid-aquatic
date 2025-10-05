@@ -56,7 +56,7 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
         }
     }
 
-    override fun handleAirSupply(airSupply: Int) {
+    override fun handleAirSupply(air: Int) {
         if (isInWater && !isNoAi) {
             this.airSupply = airSupply - 1
         } else {

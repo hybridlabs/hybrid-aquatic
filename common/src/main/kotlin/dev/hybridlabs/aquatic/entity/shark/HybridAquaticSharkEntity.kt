@@ -20,7 +20,6 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
@@ -74,7 +73,7 @@ open class HybridAquaticSharkEntity(
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
-        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1F, true)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 15)
         navigation = WaterBoundPathNavigation(this, world)
     }
@@ -86,9 +85,8 @@ open class HybridAquaticSharkEntity(
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, StayInWaterGoal(this))
-        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.5, 16.0F))
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 2))
-        goalSelector.addGoal(0, SharkAttackGoal(this, 1.0, true))
+        goalSelector.addGoal(0, SharkAttackGoal(this, 1.1, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive })
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive })
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
@@ -182,9 +180,6 @@ open class HybridAquaticSharkEntity(
             this.moveRelative(this.speed, travelVector)
             this.move(MoverType.SELF, this.deltaMovement)
             this.deltaMovement = deltaMovement.scale(0.9)
-            if (this.target == null) {
-                this.deltaMovement = deltaMovement.add(0.0, -0.005, 0.0)
-            }
         } else {
             super.travel(travelVector)
         }

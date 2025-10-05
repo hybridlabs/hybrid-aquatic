@@ -96,9 +96,9 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
         this.deltaMovement = newMotion
     }
 
-    override fun handleAirSupply(airSupply: Int) {
+    override fun handleAirSupply(air: Int) {
         if (isInWater && !isNoAi) {
-            this.airSupply = airSupply - 1
+            this.airSupply = air - 1
         } else {
             this.airSupply = this.maxAirSupply
         }

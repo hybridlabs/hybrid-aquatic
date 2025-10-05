@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
+@Suppress("UNUSED_PARAMETER", "DEPRECATION")
 class DragonfishEntity(entityType: EntityType<out DragonfishEntity>, world: Level) :
     HybridAquaticFishEntity(entityType, world,
         listOf(
@@ -27,7 +28,7 @@ class DragonfishEntity(entityType: EntityType<out DragonfishEntity>, world: Leve
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25)
+                .add(Attributes.MOVEMENT_SPEED, 0.4)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)
@@ -40,7 +41,7 @@ class DragonfishEntity(entityType: EntityType<out DragonfishEntity>, world: Leve
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val nightSpawn = (world.seaLevel - 16)..(world.seaLevel - 1)
+            val nightSpawn = (world.seaLevel - 16)..<world.seaLevel
             val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 48)
 
             val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
