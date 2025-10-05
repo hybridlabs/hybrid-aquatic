@@ -2,21 +2,24 @@ package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.entity.EntitySelector
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
+import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.Items
+import net.minecraft.world.level.pathfinder.Path
 import java.util.*
 import kotlin.math.max
 
-open class KarkinosAttackGoal(
+open class KarkinosMeleeAttackGoal(
     protected val karkinos: KarkinosEntity,
     private val speedModifier: Double,
     private val followingTargetEvenIfNotSeen: Boolean,
 ) :
-    MeleeAttackGoal(karkinos, speedModifier, true) {
+    Goal() {
+    private var path: Path? = null
     private var ticksUntilNextPathRecalculation = 0
     private var ticksUntilNextAttack: Int = 0
+    private var lastCanUseCheck: Long = 0
     private var attackDelayTicks = 0
     private var pendingTarget: LivingEntity? = null
 
@@ -25,24 +28,69 @@ open class KarkinosAttackGoal(
     }
 
     override fun canUse(): Boolean {
-        if (karkinos.isFlipped() || karkinos.isSummoning()) return false
+        val i = karkinos.level().gameTime
+        if (i - this.lastCanUseCheck < 20L) {
+            return false
+        } else {
+            this.lastCanUseCheck = i
 
-        return super.canUse()
+            if (karkinos.isFlipped() || karkinos.isSummoning()) return false
+
+            val livingEntity = karkinos.target
+            if (livingEntity == null) {
+                return false
+            } else if (!livingEntity.isAlive) {
+                return false
+            } else {
+                this.path = karkinos.navigation.createPath(livingEntity, 3)
+                return if (this.path != null) {
+                    true
+                } else {
+                    getAttackReachSqr(livingEntity) >= karkinos.distanceToSqr(
+                        livingEntity.x,
+                        livingEntity.y,
+                        livingEntity.z
+                    )
+                }
+            }
+        }
     }
 
     override fun canContinueToUse(): Boolean {
-        if (karkinos.isFlipped() || karkinos.isSummoning() || karkinos.lastAttackBlocked) return false
-        return super.canContinueToUse()
+        if (karkinos.isFlipped() || karkinos.isSummoning()) return false
+
+        val livingEntity = karkinos.target ?: return false
+
+        return if (!livingEntity.isAlive) {
+            false
+        } else if (!this.followingTargetEvenIfNotSeen) {
+            !karkinos.navigation.isDone
+        } else if (!karkinos.isWithinRestriction(livingEntity.blockPosition())) {
+            false
+        } else {
+            livingEntity !is Player || (!livingEntity.isSpectator && !livingEntity.isCreative)
+        }
     }
 
     override fun start() {
+        karkinos.navigation.moveTo(this.path, this.speedModifier)
+        karkinos.isAggressive = true
         karkinos.isSprinting = true
-        return super.start()
+        karkinos.swinging = false
+        karkinos.swingTime = 0
+        this.ticksUntilNextPathRecalculation = 0
+        this.ticksUntilNextAttack = 0
     }
 
     override fun stop() {
+        val livingEntity = karkinos.target
+        if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingEntity)) {
+            karkinos.target = null
+        }
+
         karkinos.isSprinting = false
-        return super.stop()
+        karkinos.isAggressive = false
+        karkinos.navigation.stop()
     }
 
     override fun requiresUpdateEveryTick(): Boolean {
@@ -58,17 +106,7 @@ open class KarkinosAttackGoal(
         if (attackDelayTicks > 0) {
             attackDelayTicks--
             if (attackDelayTicks == 0 && pendingTarget != null && !karkinos.level().isClientSide) {
-                val target = pendingTarget!!
-
-                val wasHurt = karkinos.doHurtTarget(target)
-
-                if (target is Player) {
-                    val itemInUse = target.useItem
-                    if (itemInUse.`is`(Items.SHIELD) && !wasHurt) {
-                        karkinos.lastAttackBlocked = true
-                    }
-                }
-
+                karkinos.doHurtTarget(pendingTarget!!)
                 resetAttackCooldown()
                 pendingTarget = null
             }
@@ -100,7 +138,7 @@ open class KarkinosAttackGoal(
         }
     }
 
-    override fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
+    protected open fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
         val reachSqr = getAttackReachSqr(enemy)
         if (distToEnemySqr <= reachSqr && ticksUntilNextAttack <= 0 && attackDelayTicks == 0) {
             karkinos.swing(InteractionHand.MAIN_HAND)
@@ -110,11 +148,11 @@ open class KarkinosAttackGoal(
         }
     }
 
-    override fun resetAttackCooldown() {
+    private fun resetAttackCooldown() {
         this.ticksUntilNextAttack = this.adjustedTickDelay(20)
     }
 
-    override fun getAttackReachSqr(attackTarget: LivingEntity): Double {
+    protected open fun getAttackReachSqr(attackTarget: LivingEntity): Double {
         return (karkinos.bbWidth * 1.75f * karkinos.bbWidth * 1.75f + attackTarget.bbWidth).toDouble()
     }
 }
