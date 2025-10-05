@@ -158,6 +158,6 @@ open class FishAttackGoal(
     }
 
     protected open fun getAttackReachSqr(attackTarget: LivingEntity): Double {
-        return (fish.bbWidth * 2.0f * fish.bbWidth * 2.0f + attackTarget.bbWidth).toDouble()
+        return (fish.bbWidth * 1.75f * fish.bbWidth * 1.75f + attackTarget.bbWidth).toDouble()
     }
 }

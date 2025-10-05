@@ -168,6 +168,6 @@ open class SharkAttackGoal(
     }
 
     protected open fun getAttackReachSqr(attackTarget: LivingEntity): Double {
-        return (shark.bbWidth * 1.5f * shark.bbWidth * 1.5f + attackTarget.bbWidth).toDouble()
+        return (shark.bbWidth * 1.75f * shark.bbWidth * 1.75f + attackTarget.bbWidth).toDouble()
     }
 }
