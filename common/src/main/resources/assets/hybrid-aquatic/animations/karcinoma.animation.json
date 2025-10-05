@@ -44,6 +44,27 @@
 				}
 			}
 		},
+		"misc.flop": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"rotation": [0, 0, -90],
+					"position": [0.75, 1, 0]
+				},
+				"tail": {
+					"rotation": [-22.5, -10, 0]
+				},
+				"tail_fin": {
+					"rotation": [-22.5, 22.5, 45]
+				},
+				"left_claw": {
+					"rotation": [0, 45, 0]
+				},
+				"right_eye": {
+					"rotation": [0, -22.5, 0]
+				}
+			}
+		},
 		"move.swim": {
 			"loop": true,
 			"bones": {
