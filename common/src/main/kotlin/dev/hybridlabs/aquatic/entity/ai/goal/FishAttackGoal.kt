@@ -44,7 +44,7 @@ open class FishAttackGoal(
             } else if (!livingEntity.isAlive) {
                 return false
             } else {
-                this.path = fish.navigation.createPath(livingEntity, 0)
+                this.path = fish.navigation.createPath(livingEntity, 3)
                 return if (this.path != null) {
                     true
                 } else {

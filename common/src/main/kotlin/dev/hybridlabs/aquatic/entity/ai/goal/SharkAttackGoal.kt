@@ -48,7 +48,7 @@ open class SharkAttackGoal(
             } else if (!livingEntity.isAlive) {
                 return false
             } else {
-                this.path = shark.navigation.createPath(livingEntity, 0)
+                this.path = shark.navigation.createPath(livingEntity, 3)
                 return if (this.path != null) {
                     true
                 } else {

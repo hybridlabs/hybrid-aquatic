@@ -45,7 +45,7 @@ open class KarkinosMeleeAttackGoal(
             } else if (!livingEntity.isAlive) {
                 return false
             } else {
-                this.path = karkinos.navigation.createPath(livingEntity, 0)
+                this.path = karkinos.navigation.createPath(livingEntity, 3)
                 return if (this.path != null) {
                     true
                 } else {
