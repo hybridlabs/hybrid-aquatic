@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosMeleeAttackGoal
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -11,17 +12,15 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.BossEvent
 import net.minecraft.world.Difficulty
-import net.minecraft.world.InteractionHand
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.damagesource.DamageTypes
-import net.minecraft.world.entity.EntitySelector
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.MoveControl
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
@@ -41,11 +40,21 @@ import software.bernie.geckolib.core.`object`.PlayState
 
 class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, world: Level) :
     HybridAquaticMinibossEntity(entityType, world) {
-
-    private var landNavigation: PathNavigation = createNavigation(world)
+    private var flippedTimer: Int = 0
+    private var timeSinceLastFlip: Int = 0
 
     override fun createNavigation(world: Level): PathNavigation {
         return GroundPathNavigation(this, world)
+    }
+
+    init {
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        moveControl = KarkinosMoveControl(this)
+        navigation = GroundPathNavigation(this, world)
+    }
+
+    override fun maxUpStep(): Float {
+        return 1.5F
     }
 
     override fun isAffectedByFluids(): Boolean {
@@ -56,46 +65,17 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         return false
     }
 
-    init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        moveControl = MoveControl(this)
-        navigation = this.landNavigation
-        setMaxUpStep(1.5F)
-    }
-
-    private var flipTimer: Int = 0
-    private val flipDuration: Int = 60
     private var bossBar: ServerBossEvent =
         ServerBossEvent(displayName, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_20)
 
-    private var isFlipped: Boolean
-        get() = entityData.get(FLIPPED)
-        set(bool) = entityData.set(FLIPPED, bool)
-
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(FLIPPED, false)
-    }
-
     override fun registerGoals() {
-        goalSelector.addGoal(1, KarkinosAttackGoal(this))
-        goalSelector.addGoal(7, LeapAtTargetGoal(this, 0.3F))
-        goalSelector.addGoal(4, WaterAvoidingRandomStrollGoal(this, 0.3))
+        goalSelector.addGoal(1, KarkinosMeleeAttackGoal(this, 0.5, true))
+        goalSelector.addGoal(4, RandomStrollGoal(this, 0.5))
         goalSelector.addGoal(5, RandomLookAroundGoal(this))
         goalSelector.addGoal(8, LookAtPlayerGoal(this, Player::class.java, 16.0f))
         targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true, null))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, IronGolem::class.java, 10, true, true, null))
-    }
-
-    private fun beFlipped() {
-        isFlipped = true
-        flipTimer = flipDuration
-    }
-
-
-    override fun shouldDiscardFriction(): Boolean {
-        return false
     }
 
     private fun getHandSwingDuration(): Int {
@@ -126,26 +106,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         return this.oAttackAnim + f * tickDelta
     }
 
-    override fun customServerAiStep() {
-
-        if (isFlipped) {
-            flipTimer--
-
-            if (flipTimer <= 0) {
-                isFlipped = false
-                attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 0.5
-                attributes.getInstance(Attributes.KNOCKBACK_RESISTANCE)?.baseValue = 1.0
-            } else {
-                attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 0.0
-                attributes.getInstance(Attributes.KNOCKBACK_RESISTANCE)?.baseValue = 0.0
-            }
-        }
-
-        bossBar.progress = health / maxHealth
-
-        super.customServerAiStep()
-    }
-
     override fun startSeenByPlayer(player: ServerPlayer) {
         super.startSeenByPlayer(player)
         bossBar.addPlayer(player)
@@ -164,45 +124,83 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         }
     }
 
-    override fun isPushable(): Boolean =
-        this.isFlipped
-
-    override fun getSpeed(): Float {
-        return if (isFlipped) 0.0f else super.getSpeed()
-    }
-
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
-        var adjustedAmount = amount
-
-        if (source.`is`(DamageTypes.THORNS))
-            adjustedAmount *= 0.5f
-        else if (source.`is`(DamageTypes.IN_WALL))
-            adjustedAmount *= 0.5f
-
-        val damaged = super.hurt(source, adjustedAmount)
-
-        if (source.directEntity is Player && !isFlipped) {
-            val player = source.directEntity as Player
-
-            if (EnchantmentHelper.getEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, player) > 2 ||
-                EnchantmentHelper.getEnchantmentLevel(Enchantments.RIPTIDE, player) > 0
-            ) {
-                beFlipped()
-            }
-        }
-
-        return damaged
-    }
-
     override fun getMobType(): MobType {
         return MobType.ARTHROPOD
+    }
+
+    fun isFlipped(): Boolean {
+        return entityData.get(FLIPPED)
+    }
+
+    private fun setFlipped(flipped: Boolean) {
+        if (flipped && health <= maxHealth / 2f) return
+        entityData.set(FLIPPED, flipped)
+    }
+
+    override fun defineSynchedData() {
+        super.defineSynchedData()
+        entityData.define(FLIPPED, false)
+    }
+
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        nbt.putBoolean("Flipped", isFlipped())
+
+        super.addAdditionalSaveData(nbt)
     }
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         if (hasCustomName()) {
             bossBar.name = this.displayName
         }
+        this.setFlipped(nbt.getBoolean("Flipped"))
+
         super.readAdditionalSaveData(nbt)
+    }
+
+    override fun aiStep() {
+        if (!level().isClientSide && this.isEffectiveAi) {
+            if (this.isFlipped()) {
+                if (--this.flippedTimer <= 0) {
+                    this.setFlipped(false)
+                } else {
+                    this.deltaMovement = deltaMovement.subtract(0.0, 0.01, 0.0)
+                    this.yHeadRot = 0f
+                }
+            }
+
+            if (timeSinceLastFlip > 0) {
+                timeSinceLastFlip--
+            }
+        }
+
+        bossBar.progress = health / maxHealth
+        super.aiStep()
+    }
+
+    override fun hurt(source: DamageSource, amount: Float): Boolean {
+        val result = super.hurt(source, amount)
+
+        if (result && !level().isClientSide &&
+            source.directEntity is Player &&
+            !isFlipped() &&
+            timeSinceLastFlip <= 0 &&
+            health > maxHealth / 2f
+        ) {
+
+            val player = source.directEntity as Player
+            val weapon = player.mainHandItem
+            val hasFlipEnchant =
+                EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, weapon) > 1 ||
+                        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.KNOCKBACK, weapon) > 2 ||
+                        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.RIPTIDE, weapon) > 1
+
+            if (hasFlipEnchant) {
+                this.flippedTimer = random.nextInt(60, 100)
+                this.timeSinceLastFlip = 400
+                this.setFlipped(true)
+            }
+        }
+        return result
     }
 
     override fun setCustomName(name: Component?) {
@@ -213,8 +211,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
-        controllers.add(AnimationController(this, 5) { state ->
-            if (isFlipped) {
+        controllers.add(AnimationController(this, 10) { state ->
+            if (isFlipped()) {
                 state.setAndContinue(FLIP)
                 PlayState.CONTINUE
             } else {
@@ -239,9 +237,9 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 300.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.35)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 10.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.5)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
         }
@@ -250,45 +248,15 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             SynchedEntityData.defineId(KarkinosEntity::class.java, EntityDataSerializers.BOOLEAN)
     }
 
-    internal open class KarkinosAttackGoal(private val karkinos: KarkinosEntity) :
-        MeleeAttackGoal(karkinos, 0.6, false) {
-        override fun checkAndPerformAttack(target: LivingEntity, squaredDistance: Double) {
-            val d = getAttackReachSqr(target)
-            if (squaredDistance <= d && this.attackInterval <= 0) {
-                resetAttackCooldown()
-                karkinos.swing(InteractionHand.MAIN_HAND)
-                karkinos.doHurtTarget(target)
+    internal class KarkinosMoveControl(
+        private val karkinos: KarkinosEntity,
+    ) : MoveControl(
+        karkinos
+    ) {
+        override fun tick() {
+            if (!karkinos.isFlipped()) {
+                super.tick()
             }
-        }
-
-        override fun getAttackReachSqr(entity: LivingEntity): Double {
-            return (karkinos.bbWidth * 2.0 + entity.bbWidth)
-        }
-
-        override fun start() {
-            super.start()
-            karkinos.isSprinting = true
-            karkinos.swinging = false
-            karkinos.swingTime = 0
-        }
-
-        override fun stop() {
-            val livingEntity = karkinos.target
-            if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingEntity)) {
-                karkinos.target = null
-            }
-
-            karkinos.isSprinting = false
-            karkinos.isAggressive = false
-            karkinos.navigation.stop()
-        }
-
-        override fun requiresUpdateEveryTick(): Boolean {
-            return true
-        }
-
-        override fun canContinueToUse(): Boolean {
-            return !karkinos.isFlipped && super.canContinueToUse()
         }
     }
 }
