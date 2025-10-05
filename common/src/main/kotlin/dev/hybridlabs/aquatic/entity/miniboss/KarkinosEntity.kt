@@ -205,7 +205,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
                     0f
                 )
                 karcinoma.setOwner(this)
-                karcinoma.setLimitedLife(200)
+                karcinoma.setLimitedLife(400)
                 level().addFreshEntity(karcinoma)
             }
         }
