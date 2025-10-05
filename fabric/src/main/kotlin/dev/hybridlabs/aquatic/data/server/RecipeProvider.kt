@@ -33,6 +33,28 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.PEARL_BLOCK.get())
+            .pattern("PPP")
+            .pattern("PPP")
+            .pattern("PPP")
+            .define('P', HybridAquaticItems.PEARL.get())
+            .unlockedBy(
+                "has_pearl",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PEARL.get())
+            )
+            .save(exporter)
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.BLACK_PEARL_BLOCK.get())
+            .pattern("PPP")
+            .pattern("PPP")
+            .pattern("PPP")
+            .define('P', HybridAquaticItems.BLACK_PEARL.get())
+            .unlockedBy(
+                "has_black_pearl",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.BLACK_PEARL.get())
+            )
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.GLOWSLIME_BLOCK.get())
             .pattern("SSS")
             .pattern("SSS")

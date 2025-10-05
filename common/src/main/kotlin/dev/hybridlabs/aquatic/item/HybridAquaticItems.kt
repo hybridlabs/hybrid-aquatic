@@ -253,12 +253,46 @@ object HybridAquaticItems {
         HybridAquaticBlocks.LOPHELIA_CORAL_FAN,
         HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN
     )
-
     val DEAD_LOPHELIA_CORAL_FAN = registerVerticallyAttachable(
         "dead_lophelia_coral_fan",
         HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN,
         HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN
     )
+
+    val ROSE_CORAL_BLOCK =
+        registerBlockItem("rose_coral_block") { HybridAquaticBlocks.ROSE_CORAL_BLOCK.get() }
+    val DEAD_ROSE_CORAL_BLOCK =
+        registerBlockItem("dead_rose_coral_block") { HybridAquaticBlocks.DEAD_ROSE_CORAL_BLOCK.get() }
+    val ROSE_CORAL = registerBlockItem("rose_coral") { HybridAquaticBlocks.ROSE_CORAL.get() }
+    val DEAD_ROSE_CORAL = registerBlockItem("dead_rose_coral") { HybridAquaticBlocks.DEAD_ROSE_CORAL.get() }
+    val ROSE_CORAL_FAN = registerVerticallyAttachable(
+        "rose_coral_fan",
+        HybridAquaticBlocks.ROSE_CORAL_FAN,
+        HybridAquaticBlocks.ROSE_CORAL_WALL_FAN
+    )
+    val DEAD_ROSE_CORAL_FAN = registerVerticallyAttachable(
+        "dead_rose_coral_fan",
+        HybridAquaticBlocks.DEAD_ROSE_CORAL_FAN,
+        HybridAquaticBlocks.DEAD_ROSE_CORAL_WALL_FAN
+    )
+
+    val LEAF_CORAL_BLOCK =
+        registerBlockItem("leaf_coral_block") { HybridAquaticBlocks.LEAF_CORAL_BLOCK.get() }
+    val DEAD_LEAF_CORAL_BLOCK =
+        registerBlockItem("dead_leaf_coral_block") { HybridAquaticBlocks.DEAD_LEAF_CORAL_BLOCK.get() }
+    val LEAF_CORAL = registerBlockItem("leaf_coral") { HybridAquaticBlocks.LEAF_CORAL.get() }
+    val DEAD_LEAF_CORAL = registerBlockItem("dead_leaf_coral") { HybridAquaticBlocks.DEAD_LEAF_CORAL.get() }
+    val LEAF_CORAL_FAN = registerVerticallyAttachable(
+        "leaf_coral_fan",
+        HybridAquaticBlocks.LEAF_CORAL_FAN,
+        HybridAquaticBlocks.LEAF_CORAL_WALL_FAN
+    )
+    val DEAD_LEAF_CORAL_FAN = registerVerticallyAttachable(
+        "dead_leaf_coral_fan",
+        HybridAquaticBlocks.DEAD_LEAF_CORAL_FAN,
+        HybridAquaticBlocks.DEAD_LEAF_CORAL_WALL_FAN
+    )
+
     val THORN_CORAL_BLOCK = registerBlockItem("thorn_coral_block") { HybridAquaticBlocks.THORN_CORAL_BLOCK.get() }
     val DEAD_THORN_CORAL_BLOCK =
         registerBlockItem("dead_thorn_coral_block") { HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK.get() }
@@ -282,6 +316,8 @@ object HybridAquaticItems {
     //#region Artificial Blocks
 
     val GLOWSLIME_BLOCK = registerBlockItem("glowslime_block") { HybridAquaticBlocks.GLOWSLIME_BLOCK.get() }
+    val PEARL_BLOCK = registerBlockItem("pearl_block") { HybridAquaticBlocks.PEARL_BLOCK.get() }
+    val BLACK_PEARL_BLOCK = registerBlockItem("black_pearl_block") { HybridAquaticBlocks.BLACK_PEARL_BLOCK.get() }
     val BUOY = registerPlaceableInWaterBlockItem("buoy") { HybridAquaticBlocks.BUOY.get() }
     val RAFT = registerPlaceableInWaterBlockItem("raft") { HybridAquaticBlocks.RAFT.get() }
     val GLOWSTICK = registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)

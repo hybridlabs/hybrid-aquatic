@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hybrid-aquatic:block/rose_coral_fan"
+  }
+}

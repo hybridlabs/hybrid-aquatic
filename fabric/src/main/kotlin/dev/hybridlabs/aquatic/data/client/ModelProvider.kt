@@ -94,6 +94,8 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.ACACIA_CRATE.get(),
                 HybridAquaticBlocks.MANGROVE_CRATE.get(),
                 HybridAquaticBlocks.CHERRY_CRATE.get(),
+                HybridAquaticBlocks.PEARL_BLOCK.get(),
+                HybridAquaticBlocks.BLACK_PEARL_BLOCK.get(),
             ).forEach(generator::createTrivialCube)
 
             // wood
@@ -125,6 +127,28 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
                 HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN.get(),
                 HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN.get()
+            )
+
+            createCoral(
+                HybridAquaticBlocks.ROSE_CORAL.get(),
+                HybridAquaticBlocks.DEAD_ROSE_CORAL.get(),
+                HybridAquaticBlocks.ROSE_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.DEAD_ROSE_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.ROSE_CORAL_FAN.get(),
+                HybridAquaticBlocks.DEAD_ROSE_CORAL_FAN.get(),
+                HybridAquaticBlocks.ROSE_CORAL_WALL_FAN.get(),
+                HybridAquaticBlocks.DEAD_ROSE_CORAL_WALL_FAN.get()
+            )
+
+            createCoral(
+                HybridAquaticBlocks.LEAF_CORAL.get(),
+                HybridAquaticBlocks.DEAD_LEAF_CORAL.get(),
+                HybridAquaticBlocks.LEAF_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.DEAD_LEAF_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.LEAF_CORAL_FAN.get(),
+                HybridAquaticBlocks.DEAD_LEAF_CORAL_FAN.get(),
+                HybridAquaticBlocks.LEAF_CORAL_WALL_FAN.get(),
+                HybridAquaticBlocks.DEAD_LEAF_CORAL_WALL_FAN.get()
             )
 
             createCoral(
