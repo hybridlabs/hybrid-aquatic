@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosMeleeAttackGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosSummonGoal
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -41,6 +42,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     HybridAquaticMinibossEntity(entityType, world) {
     private var flippedTimer: Int = 0
     private var timeSinceLastFlip: Int = 0
+    var summonTimer: Int = 0
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -65,6 +67,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
     override fun registerGoals() {
         goalSelector.addGoal(1, KarkinosMeleeAttackGoal(this, 0.8, true))
+        goalSelector.addGoal(1, KarkinosSummonGoal(this))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.5))
         goalSelector.addGoal(3, LookAtPlayerGoal(this, Player::class.java, 16.0f))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
@@ -132,13 +135,60 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         entityData.set(FLIPPED, flipped)
     }
 
+    fun isSummoning(): Boolean {
+        return entityData.get(SUMMONING)
+    }
+
+    fun setSummoning(summon: Boolean) {
+        if (summon && health <= maxHealth / 2f) return
+        entityData.set(SUMMONING, summon)
+    }
+
+    fun startSummoning() {
+        setSummoning(true)
+        summonTimer = 60
+        navigation.stop()
+        if (!level().isClientSide) {
+            summonKarkinoids()
+        }
+    }
+
+    private fun summonKarkinoids() {
+        val random = this.random
+        val count = 3 + random.nextInt(3)
+
+        for (i in 0 until count) {
+            val offsetX = (random.nextDouble() - 0.5) * 6.0
+            val offsetZ = (random.nextDouble() - 0.5) * 6.0
+            val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
+
+            val karkinoid = EntityType.VEX.create(level())
+            if (karkinoid != null) {
+                karkinoid.moveTo(
+                    spawnPos.x.toDouble() + 0.5,
+                    spawnPos.y.toDouble(),
+                    spawnPos.z.toDouble() + 0.5,
+                    random.nextFloat() * 360f,
+                    0f
+                )
+                level().addFreshEntity(karkinoid)
+            }
+        }
+    }
+
+    fun stopSummoning() {
+        setSummoning(false)
+    }
+
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(FLIPPED, false)
+        entityData.define(SUMMONING, false)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putBoolean("Flipped", isFlipped())
+        nbt.putBoolean("Summoning", isSummoning())
 
         super.addAdditionalSaveData(nbt)
     }
@@ -148,6 +198,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             bossBar.name = this.displayName
         }
         this.setFlipped(nbt.getBoolean("Flipped"))
+        this.setSummoning(nbt.getBoolean("Summoning"))
 
         super.readAdditionalSaveData(nbt)
     }
@@ -166,6 +217,12 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             if (timeSinceLastFlip > 0) {
                 timeSinceLastFlip--
             }
+        }
+
+        if (summonTimer > 0) {
+            summonTimer--
+            if (summonTimer == 0)
+                stopSummoning()
         }
 
         bossBar.progress = health / maxHealth
@@ -204,17 +261,24 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
-        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
-        controllers.add(AnimationController(this, 10) { state ->
+        controllers.add(AnimationController(this, "flip_controller", 8) { state ->
             if (isFlipped()) {
-                state.setAndContinue(FLIP)
+                state.setAndContinue(FLIP_ANIMATION)
                 PlayState.CONTINUE
             } else {
                 PlayState.STOP
             }
-        }
-        )
+        })
+        controllers.add(AnimationController(this, "summon_controller", 8) { state ->
+            if (isSummoning()) {
+                state.setAndContinue(SUMMON_ANIMATION)
+                PlayState.CONTINUE
+            } else {
+                PlayState.STOP
+            }
+        })
+        controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
+        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
@@ -227,7 +291,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
     companion object {
 
-        val FLIP: RawAnimation = RawAnimation.begin().thenPlay("misc.flip")
+        val FLIP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flip")
+        val SUMMON_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.summon")
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
@@ -241,6 +306,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
         val FLIPPED: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(KarkinosEntity::class.java, EntityDataSerializers.BOOLEAN)
+        val SUMMONING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(KarkinosEntity::class.java, EntityDataSerializers.BOOLEAN)
     }
 
     internal class KarkinosMoveControl(
@@ -249,7 +316,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         karkinos
     ) {
         override fun tick() {
-            if (!karkinos.isFlipped()) {
+            if (!karkinos.isFlipped() && !karkinos.isSummoning()) {
                 super.tick()
             }
         }
