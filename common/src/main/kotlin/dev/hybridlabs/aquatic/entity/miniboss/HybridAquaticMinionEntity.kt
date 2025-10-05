@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.entity.ai.goal.MinionAttackGoal
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -9,8 +10,10 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.Difficulty
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.*
-import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
+import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.TargetGoal
@@ -65,7 +68,7 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(0, MinionMeleeAttackGoal(this))
+        goalSelector.addGoal(0, MinionAttackGoal(this, 0.5, true))
         targetSelector.addGoal(0, MinionCopyOwnerTargetGoal(this))
         goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.2, 16.0F))
         goalSelector.addGoal(4, RandomStrollGoal(this, 0.5))
@@ -181,20 +184,6 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
             val ownerTarget = owner.target ?: return
             mob.target = ownerTarget
             super.start()
-        }
-    }
-
-    internal class MinionMeleeAttackGoal (
-        private val minion : HybridAquaticMinionEntity
-    ) : MeleeAttackGoal(minion, minion.getAttributeValue(Attributes.MOVEMENT_SPEED), true) {
-        override fun start() {
-            minion.isSprinting = true
-            super.start()
-        }
-
-        override fun stop() {
-            minion.isSprinting = false
-            super.stop()
         }
     }
 }

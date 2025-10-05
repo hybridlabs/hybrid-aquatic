@@ -360,7 +360,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         karkinos
     ) {
         override fun tick() {
-            if (!karkinos.isFlipped() && !karkinos.isSummoning()) {
+            if (!karkinos.isFlipped() || !karkinos.isSummoning() || !karkinos.onGround()) {
                 super.tick()
             }
         }
