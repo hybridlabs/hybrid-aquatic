@@ -201,7 +201,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         )
     }
 
-
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
