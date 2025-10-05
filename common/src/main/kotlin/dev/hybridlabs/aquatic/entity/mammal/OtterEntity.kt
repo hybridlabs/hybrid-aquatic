@@ -15,6 +15,7 @@ import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.damagesource.DamageSources
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -27,7 +28,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.pathfinder.BlockPathTypes
-import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
@@ -48,7 +48,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     ),
     VariantHolder<OtterEntity.Companion.Type> {
     private var floatingTimer: Int = 0
-    private val swimControl = OtterMoveControl(this, 85, 10, 0.8F, 1.0F, true)
+    private val swimControl = OtterMoveControl(this, 85, 10, 1.6F, 0.4F, true)
     private val floatControl = FloatControl(this)
 
     init {
@@ -56,19 +56,30 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         moveControl = swimControl
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = AmphibiousPathNavigation(this, world)
+        this.isInvulnerableTo(DamageSources(level().registryAccess()).drown())
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(3, RandomStrollGoal(this, 0.5, 2))
-        goalSelector.addGoal(3, OtterSwimmingGoal(this, 0.5, 2))
+        goalSelector.addGoal(0, BreathAirGoal(this))
+        goalSelector.addGoal(1, RandomStrollGoal(this,0.5))
+        goalSelector.addGoal(2, OtterSwimmingGoal(this, 1.0, 10))
+        goalSelector.addGoal(3, LookAtPlayerGoal(this, Player::class.java, 6.0f))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
-        goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 6.0f))
         goalSelector.addGoal(5, TryFindWaterGoal(this))
         goalSelector.addGoal(6, MeleeAttackGoal(this, 1.2, true))
     }
 
     override fun canBreatheUnderwater(): Boolean {
-        return true
+        return false
+    }
+
+
+    override fun getMaxAirSupply(): Int {
+        return 1600
+    }
+
+    override fun increaseAirSupply(currentAir: Int): Int {
+        return this.maxAirSupply
     }
 
     override fun isPushedByFluid(): Boolean {
@@ -77,22 +88,22 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     override fun aiStep() {
         super.aiStep()
-        if (!level().isClientSide() && this.isEffectiveAi) {
-            if (this.isInWater) {
+        if (!level().isClientSide() && isEffectiveAi) {
+            if (isInWater) {
                 if (this.isFloating()) {
                     if (--this.floatingTimer <= 0) {
                         this.setFloating(false)
                         this.moveControl = swimControl
                     }
                     this.yHeadRot = 0F
-                } else if (random.nextFloat() <= 0.001f) {
+                } else if (random.nextFloat() <= 0.02f) {
                     this.floatingTimer = random.nextInt(500, 1000)
                     this.setFloating(true)
                     this.moveControl = floatControl
-                    this.navigation.stop()
                 }
             } else {
                 this.setFloating(false)
+                this.moveControl = swimControl
             }
         }
     }
@@ -146,16 +157,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         return SoundEvents.DOLPHIN_SWIM
     }
 
-    override fun travel(travelVector: Vec3) {
-        if (this.isControlledByLocalInstance && this.isInWater) {
-            this.moveRelative(this.speed, travelVector)
-            this.move(MoverType.SELF, this.deltaMovement)
-            this.deltaMovement = deltaMovement.scale(0.3)
-        } else {
-            super.travel(travelVector)
-        }
-    }
-
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
     }
@@ -175,6 +176,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                     isInWater && isFloating() && state.isMoving -> {
                         state.setAndContinue(FLOAT_SWIM)
                     }
+
                     isInWater && isFloating() && !state.isMoving -> {
                         state.setAndContinue(FLOAT_IDLE)
                     }
@@ -182,6 +184,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                     isInWater && state.isMoving -> {
                         state.setAndContinue(DefaultAnimations.SWIM)
                     }
+
                     isInWater && !state.isMoving -> {
                         state.setAndContinue(WATER_IDLE)
                     }
@@ -189,6 +192,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                     !isInWater && state.isMoving -> {
                         state.setAndContinue(DefaultAnimations.WALK)
                     }
+
                     !isInWater && !state.isMoving -> {
                         state.setAndContinue(DefaultAnimations.IDLE)
                     }
@@ -289,7 +293,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     }
 
     internal class OtterSwimmingGoal(private val otter: OtterEntity, speedModifier: Double, interval: Int) :
-        RandomSwimmingGoal(otter, speedModifier, interval) {
+        RandomStrollGoal(otter, speedModifier, interval) {
 
         override fun canUse(): Boolean {
             return !otter.isFloating() && super.canUse()
