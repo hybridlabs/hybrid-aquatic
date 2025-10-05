@@ -241,8 +241,10 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     override fun tick() {
         super.tick()
 
-        if (isInWater) {
+        if (isInWater && !onGround()) {
             isSwimming = false
+            this.deltaMovement = deltaMovement.subtract(0.0, 0.1, 0.0)
+            navigation.stop()
         }
     }
 
@@ -368,7 +370,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         karkinos
     ) {
         override fun tick() {
-            if (!karkinos.isFlipped() || !karkinos.isSummoning() || !karkinos.onGround()) {
+            if (!karkinos.isFlipped() && !karkinos.isSummoning()) {
                 super.tick()
             }
         }
