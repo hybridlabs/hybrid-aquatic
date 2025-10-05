@@ -6,25 +6,19 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.control.LookControl
-import net.minecraft.world.entity.ai.control.MoveControl
-import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal
-import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 
-class KarcinogenEntity(entityType: EntityType<out HybridAquaticMinionEntity>, world: Level) :
+class KarcinomaEntity(entityType: EntityType<out HybridAquaticMinionEntity>, world: Level) :
     HybridAquaticMinionEntity(entityType, world) {
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        moveControl = MoveControl(this)
-        lookControl = LookControl(this)
-        navigation = GroundPathNavigation(this, world)
-    }
-
-    override fun registerGoals() {
-        goalSelector.addGoal(0, LeapAtTargetGoal(this, 0.4f))
-        super.registerGoals()
+        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 1.0F, 0.1f, true)
+        lookControl = SmoothSwimmingLookControl(this, 10)
+        navigation = WaterBoundPathNavigation(this, world)
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
@@ -35,10 +29,6 @@ class KarcinogenEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wo
         return SoundEvents.TURTLE_EGG_BREAK
     }
 
-    override fun maxUpStep(): Float {
-        return 1.0F
-    }
-
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
@@ -46,7 +36,7 @@ class KarcinogenEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wo
                 .add(Attributes.MOVEMENT_SPEED, 0.6)
                 .add(Attributes.ATTACK_DAMAGE, 4.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 16.0)
+                .add(Attributes.FOLLOW_RANGE, 24.0)
         }
     }
 }

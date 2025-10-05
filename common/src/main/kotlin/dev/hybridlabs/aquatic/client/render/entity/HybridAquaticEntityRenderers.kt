@@ -10,6 +10,7 @@ import dev.hybridlabs.aquatic.client.render.entity.fish.*
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinogenEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinomaEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
 import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.NautilusEntityRenderer
@@ -656,6 +657,12 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.KARCINOGEN,
             ::KarcinogenEntityRenderer
+        )
+
+    val KARCINOMA =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.KARCINOMA,
+            ::KarcinomaEntityRenderer
         )
 
     //endregion

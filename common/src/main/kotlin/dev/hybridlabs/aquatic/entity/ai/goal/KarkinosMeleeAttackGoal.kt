@@ -32,9 +32,7 @@ open class KarkinosMeleeAttackGoal(
         } else {
             this.lastCanUseCheck = i
 
-            if (karkinos.isFlipped() && karkinos.isSummoning()) {
-                return false
-            }
+            if (karkinos.isFlipped() || karkinos.isSummoning()) return false
 
             val livingEntity = karkinos.target
             if (livingEntity == null) {
@@ -57,9 +55,7 @@ open class KarkinosMeleeAttackGoal(
     }
 
     override fun canContinueToUse(): Boolean {
-        if (karkinos.isFlipped()) {
-            return false
-        }
+        if (karkinos.isFlipped() || karkinos.isSummoning()) return false
 
         val livingEntity = karkinos.target ?: return false
 
@@ -100,6 +96,11 @@ open class KarkinosMeleeAttackGoal(
     }
 
     override fun tick() {
+        if (karkinos.isFlipped()) {
+            stop()
+            return
+        }
+
         val livingEntity = karkinos.target
 
         if (!karkinos.navigation.isInProgress) {

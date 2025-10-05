@@ -196,6 +196,7 @@ object SpawnRestrictionRegistry {
 
         setOf(
             HybridAquaticEntityTypes.KARCINOGEN.get(),
+            HybridAquaticEntityTypes.KARCINOMA.get(),
         ).forEach { registerMinion(it) }
     }
 

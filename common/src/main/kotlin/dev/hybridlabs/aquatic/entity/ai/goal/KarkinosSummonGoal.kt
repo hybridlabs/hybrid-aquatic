@@ -13,7 +13,11 @@ class KarkinosSummonGoal(
     }
 
     override fun canUse(): Boolean {
-        return karkinos.health <= karkinos.maxHealth / 2f &&
+        val canSummonKarcinomas =
+            karkinos.health <= karkinos.maxHealth / 2f ||
+                    karkinos.isUnderWater
+
+        return canSummonKarcinomas &&
                 !karkinos.isFlipped() &&
                 !karkinos.isSummoning() &&
                 karkinos.summonCooldown <= 0 &&
@@ -22,7 +26,6 @@ class KarkinosSummonGoal(
 
     override fun start() {
         karkinos.navigation.stop()
-
         karkinos.startSummoning()
     }
 

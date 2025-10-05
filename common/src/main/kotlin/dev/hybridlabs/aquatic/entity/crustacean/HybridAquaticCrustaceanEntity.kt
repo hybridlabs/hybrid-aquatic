@@ -22,7 +22,6 @@ import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.PanicGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
-import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
@@ -210,10 +209,6 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     //#endregion
-
-    override fun createNavigation(world: Level): PathNavigation {
-        return GroundPathNavigation(this, world)
-    }
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.directEntity

@@ -11,6 +11,7 @@ import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
+import dev.hybridlabs.aquatic.entity.miniboss.KarcinomaEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.platform.Services
@@ -565,6 +566,13 @@ object HybridAquaticEntityTypes {
         ::KarcinogenEntity,
         EntityDimensions.fixed(0.75f, 0.6f),
         KarcinogenEntity::createMobAttributes
+    )
+
+    val KARCINOMA = registerMinion(
+        "karcinoma",
+        ::KarcinomaEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        KarcinomaEntity::createMobAttributes
     )
 
     //endregion

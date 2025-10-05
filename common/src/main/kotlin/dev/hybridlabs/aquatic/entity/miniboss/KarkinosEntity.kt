@@ -186,6 +186,31 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         }
     }
 
+    private fun summonKarcinomas() {
+        val random = this.random
+        val count = 3
+
+        for (i in 0 until count) {
+            val offsetX = (random.nextDouble() - 0.5) * 6.0
+            val offsetZ = (random.nextDouble() - 0.5) * 6.0
+            val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
+
+            val karcinoma = HybridAquaticEntityTypes.KARCINOMA.get().create(level())
+            if (karcinoma != null) {
+                karcinoma.moveTo(
+                    spawnPos.x.toDouble() + 0.5,
+                    spawnPos.y.toDouble(),
+                    spawnPos.z.toDouble() + 0.5,
+                    random.nextFloat() * 360f,
+                    0f
+                )
+                karcinoma.setOwner(this)
+                karcinoma.setLimitedLife(200)
+                level().addFreshEntity(karcinoma)
+            }
+        }
+    }
+
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(FLIPPED, false)
@@ -233,8 +258,14 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
         if (isSummoning()) {
             summonTimer--
+
             if (summonTimer == 0) {
-                summonKarcinogens()
+                if (this.isUnderWater) {
+                    summonKarcinomas()
+                    summonKarcinogens()
+                } else {
+                    summonKarcinogens()
+                }
                 stopSummoning()
             }
         }
@@ -261,7 +292,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
             if (hasFlipEnchant) {
                 this.flippedTimer = random.nextInt(60, 100)
-                this.timeSinceLastFlip = 240
+                this.timeSinceLastFlip = 200
                 this.setFlipped(true)
             }
         }
