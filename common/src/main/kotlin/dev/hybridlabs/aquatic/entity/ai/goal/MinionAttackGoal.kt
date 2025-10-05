@@ -12,7 +12,7 @@ import java.util.*
 import kotlin.math.max
 
 open class MinionAttackGoal(
-    protected val minion: HybridAquaticMinionEntity,
+    private val minion: HybridAquaticMinionEntity,
     private val speedMultiplier: Double = 1.0,
     private val followingTargetEvenIfNotSeen: Boolean,
 ) :
