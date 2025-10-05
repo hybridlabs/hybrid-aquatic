@@ -148,7 +148,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
     fun startSummoning() {
         setSummoning(true)
-        summonTimer = 60
+        playSound(SoundEvents.EVOKER_PREPARE_ATTACK, 1.0f, 1.0f)
+        summonTimer = 40
         summonCooldown = 240
         navigation.stop()
     }
