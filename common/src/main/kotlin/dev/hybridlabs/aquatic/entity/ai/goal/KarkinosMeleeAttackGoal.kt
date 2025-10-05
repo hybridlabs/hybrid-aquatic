@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EntitySelector
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.pathfinder.Path
 import java.util.*
 import kotlin.math.max
@@ -107,6 +108,16 @@ open class KarkinosMeleeAttackGoal(
             attackDelayTicks--
             if (attackDelayTicks == 0 && pendingTarget != null && !karkinos.level().isClientSide) {
                 karkinos.doHurtTarget(pendingTarget!!)
+
+                val target = pendingTarget
+                if (target is Player) {
+                    val itemInUse = target.useItem
+                    if (itemInUse.`is`(Items.SHIELD)) {
+                        target.disableShield(true)
+
+                        target.level().broadcastEntityEvent(target, 30.toByte())
+                    }
+                }
                 resetAttackCooldown()
                 pendingTarget = null
             }
