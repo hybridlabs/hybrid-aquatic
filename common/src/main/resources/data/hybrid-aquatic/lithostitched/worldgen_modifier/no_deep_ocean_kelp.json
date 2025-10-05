@@ -7,8 +7,7 @@
         "minecraft:seagrass_deep",
         "minecraft:seagrass_simple",
         "minecraft:kelp_cold",
-        "minecraft:kelp_warm",
-        "minecraft:trees_water"
+        "minecraft:kelp_warm"
     ],
     "step": "vegetal_decoration"
 }
