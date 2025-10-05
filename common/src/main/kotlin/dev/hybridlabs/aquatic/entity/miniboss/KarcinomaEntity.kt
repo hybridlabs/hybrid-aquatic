@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
@@ -16,6 +17,9 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 
 
 class KarcinomaEntity(entityType: EntityType<out HybridAquaticMinionEntity>, world: Level) :
@@ -27,11 +31,24 @@ class KarcinomaEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wor
         navigation = WaterBoundPathNavigation(this, world)
     }
 
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
+    }
+
     override fun createNavigation(level: Level): PathNavigation {
         return WaterBoundPathNavigation(this, level)
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(AnimationController(this, "flop_controller", 4) { state ->
+            if (!isInWater) {
+                state.setAndContinue(FLOP_ANIMATION)
+                PlayState.CONTINUE
+            } else {
+                PlayState.STOP
+            }
+        })
         controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
@@ -49,6 +66,15 @@ class KarcinomaEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wor
         }
     }
 
+    override fun tick() {
+        super.tick()
+
+        if (!this.isInWater) {
+            this.xRot = 0.0f
+            this.yRot = 0.0f
+        }
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.TURTLE_EGG_CRACK
     }
@@ -58,6 +84,9 @@ class KarcinomaEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wor
     }
 
     companion object {
+
+        val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
