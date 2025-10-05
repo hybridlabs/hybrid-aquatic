@@ -27,6 +27,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -87,10 +88,6 @@ open class HybridAquaticFishEntity(
         return false
     }
 
-    override fun createNavigation(world: Level): PathNavigation {
-        return WaterBoundPathNavigation(this, world)
-    }
-
     override fun tick() {
         super.tick()
 
@@ -107,6 +104,19 @@ open class HybridAquaticFishEntity(
         }
 
         if (hunger > 0) hunger -= 1
+    }
+
+    override fun travel(travelVector: Vec3) {
+        if (this.isEffectiveAi && this.isInWater) {
+            this.moveRelative(this.speed, travelVector)
+            this.move(MoverType.SELF, this.deltaMovement)
+            this.deltaMovement = deltaMovement.scale(0.9)
+            if (this.target == null) {
+                this.deltaMovement = deltaMovement.add(0.0, -0.005, 0.0)
+            }
+        } else {
+            super.travel(travelVector)
+        }
     }
 
     override fun aiStep() {
@@ -277,6 +287,10 @@ open class HybridAquaticFishEntity(
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 1.0F, 0.1f, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
+    }
+
+    override fun createNavigation(level: Level): PathNavigation {
+        return WaterBoundPathNavigation(this, level)
     }
 
     companion object {

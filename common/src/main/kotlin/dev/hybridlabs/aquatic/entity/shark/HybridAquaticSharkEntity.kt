@@ -31,6 +31,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -41,6 +42,7 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.*
+
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticSharkEntity(
@@ -77,6 +79,10 @@ open class HybridAquaticSharkEntity(
         navigation = WaterBoundPathNavigation(this, world)
     }
 
+    override fun createNavigation(level: Level): PathNavigation {
+        return WaterBoundPathNavigation(this, level)
+    }
+
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, StayInWaterGoal(this))
@@ -109,10 +115,6 @@ open class HybridAquaticSharkEntity(
 
     override fun isPushedByFluid(): Boolean {
         return false
-    }
-
-    override fun createNavigation(world: Level): PathNavigation {
-        return WaterBoundPathNavigation(this, world)
     }
 
     override fun tick() {
@@ -175,6 +177,18 @@ open class HybridAquaticSharkEntity(
 
 
     //#region Movement
+    override fun travel(travelVector: Vec3) {
+        if (this.isEffectiveAi && this.isInWater) {
+            this.moveRelative(this.speed, travelVector)
+            this.move(MoverType.SELF, this.deltaMovement)
+            this.deltaMovement = deltaMovement.scale(0.9)
+            if (this.target == null) {
+                this.deltaMovement = deltaMovement.add(0.0, -0.005, 0.0)
+            }
+        } else {
+            super.travel(travelVector)
+        }
+    }
 
     override fun aiStep() {
         this.updateSwingTime()
