@@ -56,6 +56,10 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         super.addAdditionalSaveData(nbt)
         nbt.putInt("AttackTick", this.attackTick)
+
+        if (this.hasLimitedLife) {
+            nbt.putInt("LifeTicks", this.limitedLifeTicks)
+        }
     }
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
@@ -165,7 +169,7 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
     }
 
     internal class MinionCopyOwnerTargetGoal(
-        private val minion: HybridAquaticMinionEntity
+        private val minion: HybridAquaticMinionEntity,
     ) : TargetGoal(minion, false) {
 
         private val copyOwnerTargeting: TargetingConditions =

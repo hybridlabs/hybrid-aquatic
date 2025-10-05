@@ -238,6 +238,14 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         super.readAdditionalSaveData(nbt)
     }
 
+    override fun tick() {
+        super.tick()
+
+        if (isInWater) {
+            isSwimming = false
+        }
+    }
+
     override fun aiStep() {
         if (!level().isClientSide && this.isEffectiveAi) {
             if (this.isFlipped()) {
