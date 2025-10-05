@@ -22,7 +22,7 @@ class KarcinomaEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wor
     HybridAquaticMinionEntity(entityType, world) {
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 1.0F, 0.1f, true)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
     }

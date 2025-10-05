@@ -284,7 +284,7 @@ open class HybridAquaticFishEntity(
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
-        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 1.0F, 0.1f, true)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
     }
