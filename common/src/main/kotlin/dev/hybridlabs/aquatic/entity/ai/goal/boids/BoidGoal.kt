@@ -36,7 +36,7 @@ class BoidGoal(
     }
 
     private fun getMaxDelta(): Double {
-        return maxSpeed * 0.125
+        return maxSpeed * 0.075
     }
 
     override fun tick() {
