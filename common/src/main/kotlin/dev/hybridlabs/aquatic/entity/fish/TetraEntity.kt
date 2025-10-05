@@ -20,6 +20,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 
+@Suppress("DEPRECATION")
 class TetraEntity(entityType: EntityType<out TetraEntity>, world: Level) :
     HybridAquaticSchoolingFishEntity(
         entityType, world,
@@ -74,7 +75,7 @@ class TetraEntity(entityType: EntityType<out TetraEntity>, world: Level) :
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.4)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)
