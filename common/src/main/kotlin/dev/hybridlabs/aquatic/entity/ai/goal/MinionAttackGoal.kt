@@ -148,7 +148,7 @@ open class MinionAttackGoal(
     }
 
     private fun resetAttackCooldown() {
-        this.ticksUntilNextAttack = this.adjustedTickDelay(20)
+        this.ticksUntilNextAttack = this.adjustedTickDelay(10)
     }
 
     protected open fun getAttackReachSqr(attackTarget: LivingEntity): Double {
