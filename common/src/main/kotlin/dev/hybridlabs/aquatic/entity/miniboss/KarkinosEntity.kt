@@ -70,8 +70,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         ServerBossEvent(displayName, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_20)
 
     override fun registerGoals() {
-        goalSelector.addGoal(1, KarkinosMeleeAttackGoal(this, 0.8, true))
         goalSelector.addGoal(1, KarkinosSummonGoal(this))
+        goalSelector.addGoal(2, KarkinosMeleeAttackGoal(this, 0.5, true))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.5))
         goalSelector.addGoal(3, LookAtPlayerGoal(this, Player::class.java, 16.0f))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
@@ -150,7 +150,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     fun startSummoning() {
         setSummoning(true)
         playSound(SoundEvents.EVOKER_PREPARE_ATTACK, 1.0f, 1.0f)
-        summonTimer = 40
+        summonTimer = 30
         summonCooldown = 240
         navigation.stop()
     }
@@ -219,7 +219,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
                 if (--this.flippedTimer <= 0) {
                     this.setFlipped(false)
                 } else {
-                    this.deltaMovement = deltaMovement.subtract(0.0, 0.01, 0.0)
+                    this.deltaMovement = deltaMovement.multiply(0.0, 0.0, 0.0)
                     this.yHeadRot = 0f
                 }
             }

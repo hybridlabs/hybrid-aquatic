@@ -22,8 +22,6 @@ class KarkinosSummonGoal(
 
     override fun start() {
         karkinos.navigation.stop()
-        karkinos.isAggressive = false
-        karkinos.isSprinting = false
 
         karkinos.startSummoning()
     }

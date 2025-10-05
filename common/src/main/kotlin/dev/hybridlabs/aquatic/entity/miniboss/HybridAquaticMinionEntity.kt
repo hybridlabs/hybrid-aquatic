@@ -13,8 +13,11 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.TargetGoal
 import net.minecraft.world.entity.ai.targeting.TargetingConditions
+import net.minecraft.world.entity.animal.IronGolem
 import net.minecraft.world.entity.monster.Monster
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
@@ -27,12 +30,11 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
-@Suppress("LeakingThis")
+@Suppress("LeakingThis", "UNUSED_PARAMETER")
 abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: Level) : Monster(type, world),
     GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var owner: Mob? = null
-    private var boundOrigin: BlockPos? = null
     private var hasLimitedLife = false
     private var limitedLifeTicks = 0
     private var attackTick = 0
@@ -58,9 +60,6 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         super.readAdditionalSaveData(nbt)
         this.attackTick = nbt.getInt("AttackTick")
-        if (nbt.contains("BoundX")) {
-            this.boundOrigin = BlockPos(nbt.getInt("BoundX"), nbt.getInt("BoundY"), nbt.getInt("BoundZ"))
-        }
 
         if (nbt.contains("LifeTicks")) {
             this.setLimitedLife(nbt.getInt("LifeTicks"))
@@ -68,11 +67,14 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(1, MeleeAttackGoal(this, 0.6, true))
+        goalSelector.addGoal(1, MinionMeleeAttackGoal(this))
         targetSelector.addGoal(1, MinionCopyOwnerTargetGoal(this))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.5))
         goalSelector.addGoal(3, LookAtPlayerGoal(this, Player::class.java, 8.0f))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
+        targetSelector.addGoal(2, HurtByTargetGoal(this))
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true, null))
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, IronGolem::class.java, 10, true, true, null))
         super.registerGoals()
     }
 
@@ -182,5 +184,17 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
             super.start()
         }
     }
+    internal class MinionMeleeAttackGoal (
+        private val minion : HybridAquaticMinionEntity
+    ) : MeleeAttackGoal(minion, 0.5, true) {
+        override fun start() {
+            minion.isSprinting = true
+            super.start()
+        }
 
+        override fun stop() {
+            minion.isSprinting = false
+            super.stop()
+        }
+    }
 }
