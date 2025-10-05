@@ -20,6 +20,8 @@ open class KarkinosMeleeAttackGoal(
     private var ticksUntilNextPathRecalculation = 0
     private var ticksUntilNextAttack: Int = 0
     private var lastCanUseCheck: Long = 0
+    private var attackDelayTicks = 0
+    private var pendingTarget: LivingEntity? = null
 
     init {
         this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
@@ -101,6 +103,15 @@ open class KarkinosMeleeAttackGoal(
             return
         }
 
+        if (attackDelayTicks > 0) {
+            attackDelayTicks--
+            if (attackDelayTicks == 0 && pendingTarget != null && !karkinos.level().isClientSide) {
+                karkinos.doHurtTarget(pendingTarget!!)
+                resetAttackCooldown()
+                pendingTarget = null
+            }
+        }
+
         val livingEntity = karkinos.target
 
         if (!karkinos.navigation.isInProgress) {
@@ -128,11 +139,12 @@ open class KarkinosMeleeAttackGoal(
     }
 
     protected open fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
-        val d0 = this.getAttackReachSqr(enemy)
-        if (distToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0) {
-            this.resetAttackCooldown()
+        val reachSqr = getAttackReachSqr(enemy)
+        if (distToEnemySqr <= reachSqr && ticksUntilNextAttack <= 0 && attackDelayTicks == 0) {
             karkinos.swing(InteractionHand.MAIN_HAND)
-            karkinos.doHurtTarget(enemy)
+            attackDelayTicks = 10
+            pendingTarget = enemy
+            ticksUntilNextAttack = attackDelayTicks
         }
     }
 
