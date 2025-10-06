@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
+import dev.hybridlabs.aquatic.entity.mammal.OtterEntity.Companion.OtterAction
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
@@ -48,7 +49,7 @@ class OtterEntityModel : HybridAquaticMammalEntityModel<OtterEntity>("otter") {
         val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
         val body = animationProcessor.getBone(PartNames.BODY)
 
-        if (!animatable.isFloating()) {
+        if (animatable.getAction() != OtterAction.FLOATING){
             val head = animationProcessor.getBone("head")
 
             if (head != null) {
@@ -61,7 +62,7 @@ class OtterEntityModel : HybridAquaticMammalEntityModel<OtterEntity>("otter") {
             val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
             body?.rotX = xRot * -Mth.DEG_TO_RAD
         } else {
-            body?.rotX = Mth.lerp(0.1f, body?.rotX ?: 0f, 0f)
+            body?.rotX = Mth.lerp(0.1f, body.rotX, 0f)
         }
     }
 }
