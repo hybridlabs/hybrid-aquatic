@@ -231,10 +231,10 @@ open class HybridAquaticCrustaceanEntity(
             DefaultAnimations.genericWalkIdleController(this)
         )
         controllerRegistrar.add(
-            AnimationController(this, "Hide", 5,
+            AnimationController(this, "Hide", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
                     if (this.isHiding) {
-                        return@AnimationStateHandler state.setAndContinue(HIDE)
+                        return@AnimationStateHandler state.setAndContinue(HIDE_ANIMATION)
                     } else {
                         PlayState.STOP
                     }
@@ -242,10 +242,10 @@ open class HybridAquaticCrustaceanEntity(
             )
         )
         controllerRegistrar.add(
-            AnimationController(this, "Dance", 5,
+            AnimationController(this, "Dance", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
                     if (this.canDance && isSongPlaying()) {
-                        return@AnimationStateHandler state.setAndContinue(DANCE)
+                        return@AnimationStateHandler state.setAndContinue(DANCE_ANIMATION)
                     } else {
                         PlayState.STOP
                     }
@@ -266,8 +266,8 @@ open class HybridAquaticCrustaceanEntity(
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
 
-        val DANCE: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
-        val HIDE: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
+        val DANCE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
+        val HIDE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
 
         fun canSurfaceSpawn(
             type: EntityType<out WaterAnimal>,

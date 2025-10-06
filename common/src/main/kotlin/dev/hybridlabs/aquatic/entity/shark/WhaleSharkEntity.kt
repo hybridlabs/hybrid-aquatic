@@ -28,15 +28,15 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Leve
 
     private var isFeeding = false
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(this, "Open/Closed", 0) { state ->
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(AnimationController(this, "Open/Closed", 0) { state ->
             val animation = when {
                 isFeeding -> MOUTH_OPEN
                 else -> MOUTH_CLOSED
             }
             state.setAndContinue(animation)
         })
-        super.registerControllers(controllerRegistrar)
+        super.registerControllers(controllers)
     }
 
     override fun tick() {

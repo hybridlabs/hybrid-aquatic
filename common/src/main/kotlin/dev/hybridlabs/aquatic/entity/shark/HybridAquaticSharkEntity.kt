@@ -36,9 +36,7 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.*
 
@@ -232,47 +230,24 @@ open class HybridAquaticSharkEntity(
     //#endregion
 
     //#region Animations
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
-            AnimationController(
-                this, "Swim", 8,
-                AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
-                    if (this.isUnderWater) {
-                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SWIM)
-                    } else {
-                        PlayState.STOP
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
+            AnimationController(this, "Shark Controller", 8) { state ->
+                when {
+                    isInWater -> {
+                        state.setAndContinue(if (isSprinting && state.isMoving) DefaultAnimations.RUN else DefaultAnimations.SWIM)
+                    }
+                    onGround() -> {
+                        state.setAndContinue(BEACHED_ANIMATION)
+                    }
+                    else -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
                     }
                 }
-            )
+            }
         )
 
-        controllerRegistrar.add(
-            AnimationController(
-                this, "Charge", 8,
-                AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
-                    if (this.isUnderWater && this.isSprinting) {
-                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.RUN)
-                    } else {
-                        PlayState.STOP
-                    }
-                }
-            )
-        )
-
-        controllerRegistrar.add(
-            AnimationController(
-                this, "Beached", 4,
-                AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticSharkEntity> ->
-                    if (this.onGround() && !this.isUnderWater) {
-                        return@AnimationStateHandler state.setAndContinue(BEACHED)
-                    } else {
-                        PlayState.STOP
-                    }
-                }
-            )
-        )
-
-        controllerRegistrar.add(
+        controllers.add(
             DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE)
         )
     }
@@ -381,7 +356,7 @@ open class HybridAquaticSharkEntity(
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticSharkEntity::class.java, EntityDataSerializers.BOOLEAN)
         val ANGER_TIME_RANGE: UniformInt = TimeUtil.rangeOfSeconds(10, 30)
-        val BEACHED: RawAnimation = RawAnimation.begin().thenPlay("misc.beached")
+        val BEACHED_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.beached")
 
         //#region Spawning
         fun canShallowSpawn(

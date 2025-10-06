@@ -9,7 +9,6 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -99,12 +98,6 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
         }
     }
 
-    private fun touch(mob: Mob) {
-        if (mob.hurt(damageSources().mobAttack(this), 0.5f)) {
-            this.playSound(SoundEvents.PUFFER_FISH_STING, 1.0f, 1.0f)
-        }
-    }
-
     override fun tick() {
         super.tick()
 
@@ -130,7 +123,9 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
             if (spawnUrchinOnNextBreak) {
                 val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.get().create(level())
                 newUrchin?.moveTo(this.x, this.y, this.z, this.xRot, 0.0f)
-                level().addFreshEntity(newUrchin)
+                if (newUrchin != null) {
+                    level().addFreshEntity(newUrchin)
+                }
                 spawnUrchinOnNextBreak = false
             } else {
                 spawnUrchinOnNextBreak = true

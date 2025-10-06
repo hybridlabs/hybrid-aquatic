@@ -45,12 +45,12 @@ class KarcinomaEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wor
         controllers.add(
             AnimationController(this, "Swim/Run/Idle", 4) { state ->
                 when {
-                    isInWater && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
+                    isInWater && isSprinting && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.RUN)
                     }
 
-                    isInWater && isSprinting && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
+                    isInWater && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.SWIM)
                     }
 
                     isInWater && !state.isMoving -> {

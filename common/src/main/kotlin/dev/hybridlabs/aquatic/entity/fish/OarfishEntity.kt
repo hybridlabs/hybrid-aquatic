@@ -114,14 +114,14 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
         return 2
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
             AnimationController(this, "Flop/Idle/Swim/Feed", 5
             ) { state: AnimationState<OarfishEntity> ->
                 when {
                     this.isFeeding() -> state.setAndContinue(DefaultAnimations.SIT)
                     state.isMoving && isUnderWater -> state.setAndContinue(DefaultAnimations.SWIM)
-                    !this.isUnderWater && !this.isSwimming && this.moistness < 595 -> state.setAndContinue(FLOP)
+                    !this.isUnderWater && !this.isSwimming && this.moistness < 595 -> state.setAndContinue(FLOP_ANIMATION)
                     else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
             }

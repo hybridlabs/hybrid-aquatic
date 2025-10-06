@@ -32,7 +32,6 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
@@ -256,14 +255,29 @@ open class HybridAquaticFishEntity(
     }
 
     //#region Animations
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
-            AnimationController(this, "Swim/Idle/Flop", 8
-            ) { state: AnimationState<HybridAquaticFishEntity> ->
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
+            AnimationController(this, "Fish Controller", 4) { state ->
                 when {
-                    state.isMoving && isUnderWater -> state.setAndContinue(DefaultAnimations.SWIM)
-                    !this.isUnderWater && !this.isSwimming && this.moistness < 595 -> state.setAndContinue(FLOP)
-                    else -> state.setAndContinue(DefaultAnimations.IDLE)
+                    isInWater && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.SWIM)
+                    }
+
+                    isInWater && isSprinting && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.RUN)
+                    }
+
+                    isInWater && !state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+
+                    this.moistness < 595 -> {
+                        state.setAndContinue(FLOP_ANIMATION)
+                    }
+
+                    else -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
                 }
             }
         )
@@ -298,7 +312,7 @@ open class HybridAquaticFishEntity(
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticFishEntity::class.java, EntityDataSerializers.BOOLEAN)
 
-        val FLOP: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
+        val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
 
         const val MAX_HUNGER = 2400
         const val HUNGER_KEY = "Hunger"

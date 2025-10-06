@@ -83,8 +83,8 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
             AnimationController(this, "Fly/Swim/Idle", 5
             ) { state: AnimationState<HybridAquaticFishEntity> ->
                 when {

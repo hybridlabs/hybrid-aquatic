@@ -63,8 +63,8 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
         }
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
             AnimationController(this, "Fly/Swim/Idle", 5
             ) { state: AnimationState<HybridAquaticFishEntity> ->
                 when {

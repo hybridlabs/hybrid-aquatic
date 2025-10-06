@@ -59,10 +59,10 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
         }
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        super.registerControllers(controllerRegistrar)
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        super.registerControllers(controllers)
 
-        controllerRegistrar.add(
+        controllers.add(
             AnimationController(
                 this, "Charge", 8,
                 AnimationController.AnimationStateHandler { state: AnimationState<PiranhaEntity> ->
@@ -75,7 +75,7 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
             )
         )
 
-        controllerRegistrar.add(
+        controllers.add(
             DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE)
         )
     }
