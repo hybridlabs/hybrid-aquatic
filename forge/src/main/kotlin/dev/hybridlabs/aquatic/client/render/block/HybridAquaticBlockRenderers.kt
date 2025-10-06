@@ -43,6 +43,20 @@ object HybridAquaticBlockRenderers {
             HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
             HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN.get(),
 
+            HybridAquaticBlocks.LEAF_CORAL.get(),
+            HybridAquaticBlocks.LEAF_CORAL_FAN.get(),
+            HybridAquaticBlocks.LEAF_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.DEAD_LEAF_CORAL.get(),
+            HybridAquaticBlocks.DEAD_LEAF_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_LEAF_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.ROSE_CORAL.get(),
+            HybridAquaticBlocks.ROSE_CORAL_FAN.get(),
+            HybridAquaticBlocks.ROSE_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.DEAD_ROSE_CORAL.get(),
+            HybridAquaticBlocks.DEAD_ROSE_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_ROSE_CORAL_WALL_FAN.get(),
+
             HybridAquaticBlocks.SUN_CORAL.get(),
             HybridAquaticBlocks.SUN_CORAL_FAN.get(),
             HybridAquaticBlocks.SUN_CORAL_WALL_FAN.get(),

@@ -84,7 +84,7 @@ object HybridAquaticClient : ClientModInitializer {
                     original: HumanoidModel<LivingEntity>
                 ): HumanoidModel<LivingEntity> {
                     renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original)
-                    return renderer as HumanoidModel<LivingEntity>
+                    return renderer
                 }
             }
         }
@@ -149,6 +149,20 @@ object HybridAquaticClient : ClientModInitializer {
             HybridAquaticBlocks.DEAD_SUN_CORAL.get(),
             HybridAquaticBlocks.DEAD_SUN_CORAL_FAN.get(),
             HybridAquaticBlocks.DEAD_SUN_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.LEAF_CORAL.get(),
+            HybridAquaticBlocks.LEAF_CORAL_FAN.get(),
+            HybridAquaticBlocks.LEAF_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.DEAD_LEAF_CORAL.get(),
+            HybridAquaticBlocks.DEAD_LEAF_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_LEAF_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.ROSE_CORAL.get(),
+            HybridAquaticBlocks.ROSE_CORAL_FAN.get(),
+            HybridAquaticBlocks.ROSE_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.DEAD_ROSE_CORAL.get(),
+            HybridAquaticBlocks.DEAD_ROSE_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_ROSE_CORAL_WALL_FAN.get(),
 
             HybridAquaticBlocks.BUTTON_CORAL.get(),
             HybridAquaticBlocks.BUTTON_CORAL_FAN.get(),
