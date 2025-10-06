@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
-import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.entity.ai.control.FloatControl
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.Holder
@@ -17,7 +16,6 @@ import net.minecraft.util.Mth
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.damagesource.DamageSources
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -37,6 +35,7 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
 import java.util.function.IntFunction
 import kotlin.math.max
@@ -122,6 +121,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    //#region SFX
     override fun getAmbientSound(): SoundEvent? {
         return SoundEvents.FOX_AMBIENT
     }
@@ -142,6 +142,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         return SoundEvents.DOLPHIN_SWIM
     }
 
+    //#endregion
+
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
     }
@@ -154,54 +156,44 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         return 0.125f
     }
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
-            AnimationController(this, "otter_controller", 5) { state ->
-                when {
-                    isInWater && isFloating() && state.isMoving -> {
-                        state.setAndContinue(FLOAT_SWIM)
-                    }
-
-                    isInWater && isFloating() && !state.isMoving -> {
-                        state.setAndContinue(FLOAT_IDLE)
-                    }
-
-                    isInWater && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    }
-
-                    isInWater && !state.isMoving -> {
-                        state.setAndContinue(WATER_IDLE)
-                    }
-
-                    !isInWater && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.WALK)
-                    }
-
-                    !isInWater && !state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-
-                    else -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-                }
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(AnimationController(this, "Otter Controller", 8) { state ->
+            if (isFloating) {
+                state.setAndContinue(FLOAT_ANIMATION)
+                return@AnimationController PlayState.CONTINUE
             }
-        )
+
+            if (isInWater) {
+                if (state.isMoving) {
+                    state.setAndContinue(DefaultAnimations.SWIM)
+                } else {
+                    state.setAndContinue(WATER_IDLE)
+                }
+
+                return@AnimationController PlayState.CONTINUE
+            }
+
+            if (state.isMoving) {
+                state.setAndContinue(DefaultAnimations.WALK)
+            } else {
+                state.setAndContinue(DefaultAnimations.IDLE)
+            }
+
+            PlayState.CONTINUE
+        })
     }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.MOVEMENT_SPEED, 0.6)
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
         }
 
-        val FLOAT_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.float_idle")
-        val FLOAT_SWIM: RawAnimation = RawAnimation.begin().thenPlay("move.float_swim")
+        val FLOAT_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.float_idle")
         val FLOATING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(OtterEntity::class.java, EntityDataSerializers.BOOLEAN)
         val TYPE: EntityDataAccessor<Int> =
@@ -277,8 +269,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         entityData.set(TYPE, type.id)
     }
 
-    internal class OtterSwimmingGoal(private val otter: OtterEntity, speedModifier: Double, interval: Int) :
-        RandomStrollGoal(otter, speedModifier, interval) {
+    internal class OtterSwimmingGoal(private val otter: OtterEntity, speedModifier: Double, interval: Int) : RandomStrollGoal(otter, speedModifier, interval) {
         init {
             this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
         }

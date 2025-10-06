@@ -84,8 +84,8 @@ open class HybridAquaticMammalEntity(
     }
 
     //#region Animations
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
             AnimationController(
                 this, "Walk/Swim/Idle", 4
             ) { state: AnimationState<HybridAquaticMammalEntity> ->
