@@ -35,7 +35,6 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
 import java.util.function.IntFunction
 import kotlin.math.max
@@ -157,29 +156,37 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "Otter Controller", 8) { state ->if (isInWater) {
-                if (state.isMoving) {
-                    state.setAndContinue(DefaultAnimations.SWIM)
-                } else {
-                    state.setAndContinue(WATER_IDLE)
+        controllers.add(
+            AnimationController(this, "otter_controller", 5) { state ->
+                when {
+                    isInWater && isFloating() -> {
+                        state.setAndContinue(FLOAT_ANIMATION)
+                    }
+
+                    isInWater && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.SWIM)
+                    }
+
+                    isInWater && !state.isMoving -> {
+                        state.setAndContinue(WATER_IDLE)
+                    }
+
+                    !isInWater && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.WALK)
+                    }
+
+                    !isInWater && !state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+
+                    else -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
                 }
-
-                return@AnimationController PlayState.CONTINUE
             }
+        )
 
-            if (isFloating) {
-                state.setAndContinue(FLOAT_ANIMATION)
-                return@AnimationController PlayState.CONTINUE
-            }
 
-            if (state.isMoving) {
-                state.setAndContinue(DefaultAnimations.WALK)
-            } else {
-                state.setAndContinue(DefaultAnimations.IDLE)
-            }
-
-            PlayState.CONTINUE
-        })
     }
 
     companion object {
