@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.entity.ai.control.FloatControl
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.Holder
@@ -12,6 +13,7 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.BiomeTags
 import net.minecraft.util.ByIdMap
+import net.minecraft.util.Mth
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
@@ -19,20 +21,25 @@ import net.minecraft.world.damagesource.DamageSources
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
+import net.minecraft.world.entity.ai.util.DefaultRandomPos
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
+import java.util.*
 import java.util.function.IntFunction
+import kotlin.math.max
 
 @Suppress("DEPRECATION")
 class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
@@ -47,65 +54,43 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         )
     ),
     VariantHolder<OtterEntity.Companion.Type> {
-    private var floatingTimer: Int = 0
-    private val swimControl = OtterMoveControl(this, 85, 10, 1.6F, 0.4F, true)
+    private val swimControl = SmoothSwimmingMoveControl(this, 85, 10, 1.0F, 0.5F, true)
     private val floatControl = FloatControl(this)
+    private var isFloating = false
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         moveControl = swimControl
-        lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = AmphibiousPathNavigation(this, world)
-        this.isInvulnerableTo(DamageSources(level().registryAccess()).drown())
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(0, BreathAirGoal(this))
-        goalSelector.addGoal(1, RandomStrollGoal(this,0.5))
-        goalSelector.addGoal(2, OtterSwimmingGoal(this, 1.0, 10))
-        goalSelector.addGoal(3, LookAtPlayerGoal(this, Player::class.java, 6.0f))
+        goalSelector.addGoal(1, OtterDiveGoal(this, 1.0))
+        goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.7, 60))
+        goalSelector.addGoal(2, OtterFloatGoal(this))
+        goalSelector.addGoal(3, RandomStrollGoal(this, 0.6, 60))
+        goalSelector.addGoal(3, TryFindWaterGoal(this))
+        goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 6.0f))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
-        goalSelector.addGoal(5, TryFindWaterGoal(this))
         goalSelector.addGoal(6, MeleeAttackGoal(this, 1.2, true))
     }
 
     override fun canBreatheUnderwater(): Boolean {
-        return false
-    }
-
-
-    override fun getMaxAirSupply(): Int {
-        return 1600
-    }
-
-    override fun increaseAirSupply(currentAir: Int): Int {
-        return this.maxAirSupply
+        return true
     }
 
     override fun isPushedByFluid(): Boolean {
         return false
     }
 
-    override fun aiStep() {
-        super.aiStep()
-        if (!level().isClientSide() && isEffectiveAi) {
-            if (isInWater) {
-                if (this.isFloating()) {
-                    if (--this.floatingTimer <= 0) {
-                        this.setFloating(false)
-                        this.moveControl = swimControl
-                    }
-                    this.yHeadRot = 0F
-                } else if (random.nextFloat() <= 0.02f) {
-                    this.floatingTimer = random.nextInt(500, 1000)
-                    this.setFloating(true)
-                    this.moveControl = floatControl
-                }
-            } else {
-                this.setFloating(false)
-                this.moveControl = swimControl
-            }
+    override fun travel(travelVector: Vec3) {
+        if (this.isEffectiveAi && this.isInWater && !this.isFloating) {
+            this.moveRelative((this.speed / 3 - 0.02F), travelVector)
+            this.move(MoverType.SELF, this.deltaMovement)
+            val slowdown: Double = Blocks.WATER.friction.toDouble()
+            this.deltaMovement = deltaMovement.multiply(slowdown, 0.8, slowdown)
         }
+        super.travel(travelVector)
     }
 
     override fun maxUpStep(): Float {
@@ -294,9 +279,121 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     internal class OtterSwimmingGoal(private val otter: OtterEntity, speedModifier: Double, interval: Int) :
         RandomStrollGoal(otter, speedModifier, interval) {
+        init {
+            this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
+        }
+
+        override fun start() {
+            otter.isFloating = false
+            otter.moveControl = otter.swimControl
+            super.start()
+        }
+
+        override fun requiresUpdateEveryTick(): Boolean {
+            return true
+        }
+
+        override fun tick() {
+            var deltaMovement: Vec3 = this.mob.deltaMovement
+            if ((this.mob as HybridAquaticMammalEntity).isBelowWaterline()) {
+                this.mob.deltaMovement = deltaMovement.add(0.0, 0.01, 0.0)
+                if (this.mob.isUnderWater)
+                    deltaMovement = this.mob.deltaMovement
+                this.mob.deltaMovement = deltaMovement.add(0.0, 0.01, 0.0)
+                deltaMovement = this.mob.deltaMovement
+                this.mob.setDeltaMovement(deltaMovement.x, max(deltaMovement.y, 0.0), deltaMovement.z)
+            }
+            super.tick()
+        }
+
+        override fun getPosition(): Vec3? {
+            val pos = DefaultRandomPos.getPos(otter, 16, 0)
+            if (pos != null) {
+                val height = otter.level().getHeight(Heightmap.Types.WORLD_SURFACE, pos.x.toInt(), pos.z.toInt())
+                return Vec3(pos.x, height.toDouble(), pos.z)
+            }
+            return null
+        }
 
         override fun canUse(): Boolean {
-            return !otter.isFloating() && super.canUse()
+            return otter.isInWater && !otter.isFloating() && super.canUse()
+        }
+    }
+
+    internal class OtterDiveGoal(private val otter: OtterEntity, private val speedModifier: Double) : Goal() {
+
+        private var target: Vec3 = Vec3.ZERO
+        private val minDiveHeight = 4
+        private val minDiveDelay = 200
+        private var nextDiveTime = 0L
+
+        init {
+            this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
+        }
+
+        private fun waterDepth(): Int {
+            val depth = Mth.abs(
+                otter.y.toInt() - otter.level().getHeight(Heightmap.Types.OCEAN_FLOOR, otter.x.toInt(), otter.z.toInt())
+            )
+            return depth
+        }
+
+        override fun canUse(): Boolean {
+            return otter.isInWater && !otter.isUnderWater && otter.level().gameTime > nextDiveTime && waterDepth() >= minDiveHeight
+        }
+
+        override fun canContinueToUse(): Boolean {
+            return target != Vec3.ZERO && otter.navigation.isInProgress && !otter.isVehicle
+        }
+
+        override fun start() {
+            otter.moveControl = otter.swimControl
+            otter.isFloating = false
+            val pos = DefaultRandomPos.getPos(otter, 16, 0)
+            if (pos != null) {
+                val height = otter.level().getHeight(Heightmap.Types.OCEAN_FLOOR, pos.x.toInt(), pos.z.toInt())
+                target = Vec3(pos.x, height.toDouble() + 1, pos.z)
+                otter.navigation.moveTo(target.x(), target.y(), target.z(), speedModifier)
+            }
+        }
+
+        override fun stop() {
+            target = Vec3.ZERO
+            nextDiveTime = otter.level().gameTime + minDiveDelay
+            otter.navigation.stop()
+
+        }
+    }
+
+    internal class OtterFloatGoal(private val otter: OtterEntity) : Goal() {
+        private var floatingTimer: Long = 0
+        private var nextFloatTime: Long = 0
+        private val minFloatDelay = 300
+
+        init {
+            this.flags = EnumSet.of(Flag.MOVE)
+        }
+
+        override fun canUse(): Boolean {
+            return otter.isInWater && !otter.isUnderWater && otter.level().gameTime > nextFloatTime && otter.random.nextFloat() <= 0.1
+        }
+
+        override fun canContinueToUse(): Boolean {
+            return otter.isInWater && otter.level().gameTime < floatingTimer
+        }
+
+        override fun start() {
+            otter.setFloating(true)
+            otter.moveControl = otter.floatControl
+            this.floatingTimer = otter.random.nextInt(100, 300) + otter.level().gameTime
+            this.otter.navigation.stop()
+            otter.deltaMovement = Vec3.ZERO
+        }
+
+        override fun stop() {
+            floatingTimer = 0
+            nextFloatTime = otter.level().gameTime + minFloatDelay
+            otter.setFloating(false)
         }
     }
 
@@ -317,9 +414,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     ) {
 
         override fun tick() {
-            if (!otter.isFloating()) {
-                super.tick()
-            }
+            if (otter.isFloating()) return
+            super.tick()
         }
     }
 }

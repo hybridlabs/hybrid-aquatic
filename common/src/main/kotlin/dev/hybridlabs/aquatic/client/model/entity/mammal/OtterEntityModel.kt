@@ -48,7 +48,7 @@ class OtterEntityModel : HybridAquaticMammalEntityModel<OtterEntity>("otter") {
         val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
         val body = animationProcessor.getBone(PartNames.BODY)
 
-        if (animatable.isSwimming && !animatable.isFloating()) {
+        if (!animatable.isFloating()) {
             val head = animationProcessor.getBone("head")
 
             if (head != null) {
