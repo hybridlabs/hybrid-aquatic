@@ -157,19 +157,18 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "Otter Controller", 8) { state ->
-            if (isFloating) {
-                state.setAndContinue(FLOAT_ANIMATION)
-                return@AnimationController PlayState.CONTINUE
-            }
-
-            if (isInWater) {
+        controllers.add(AnimationController(this, "Otter Controller", 8) { state ->if (isInWater) {
                 if (state.isMoving) {
                     state.setAndContinue(DefaultAnimations.SWIM)
                 } else {
                     state.setAndContinue(WATER_IDLE)
                 }
 
+                return@AnimationController PlayState.CONTINUE
+            }
+
+            if (isFloating) {
+                state.setAndContinue(FLOAT_ANIMATION)
                 return@AnimationController PlayState.CONTINUE
             }
 
