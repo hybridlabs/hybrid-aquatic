@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public enum HybridAquaticSpawnGroup {
-    FISH("fish", 12, true, false, 64),
+    FISH("fish", 8, true, false, 64),
 
-    FISH_UNDERGROUND("fish_underground", 12, true, true, 64),
+    FISH_UNDERGROUND("fish_underground", 8, true, true, 64),
 
     CEPHALOPOD("cephalopod", 8, true, false, 64),
 
