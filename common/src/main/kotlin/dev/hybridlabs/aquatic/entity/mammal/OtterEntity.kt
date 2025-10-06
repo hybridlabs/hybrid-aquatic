@@ -52,7 +52,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         )
     ),
     VariantHolder<OtterEntity.Companion.Type> {
-    private val swimControl = SmoothSwimmingMoveControl(this, 85, 10, 1.0F, 0.5F, true)
+    private val swimControl = SmoothSwimmingMoveControl(this, 85, 10, 0.6F, 0.6F, true)
     private val floatControl = FloatControl(this)
     private var isFloating = false
 
@@ -63,14 +63,14 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(1, OtterDiveGoal(this, 1.0))
-        goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.7, 60))
+        goalSelector.addGoal(1, OtterDiveGoal(this, 0.6))
+        goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.6, 60))
         goalSelector.addGoal(2, OtterFloatGoal(this))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.6, 60))
         goalSelector.addGoal(3, TryFindWaterGoal(this))
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 6.0f))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
-        goalSelector.addGoal(6, MeleeAttackGoal(this, 1.2, true))
+        goalSelector.addGoal(6, MeleeAttackGoal(this, 0.6, true))
     }
 
     override fun canBreatheUnderwater(): Boolean {
@@ -79,6 +79,14 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     override fun isPushedByFluid(): Boolean {
         return false
+    }
+
+    override fun tick() {
+        super.tick()
+
+        if (!this.isUnderWater) {
+            this.xRot = 0.0f
+        }
     }
 
     override fun travel(travelVector: Vec3) {
@@ -157,8 +165,16 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "otter_controller", 5) { state ->
+            AnimationController(this, "otter_controller", 8) { state ->
                 when {
+                    !isInWater && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.WALK)
+                    }
+
+                    !isInWater && !state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+
                     isInWater && isFloating() -> {
                         state.setAndContinue(FLOAT_ANIMATION)
                     }
@@ -169,14 +185,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
                     isInWater && !state.isMoving -> {
                         state.setAndContinue(WATER_IDLE)
-                    }
-
-                    !isInWater && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.WALK)
-                    }
-
-                    !isInWater && !state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
                     }
 
                     else -> {
@@ -275,7 +283,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         entityData.set(TYPE, type.id)
     }
 
-    internal class OtterSwimmingGoal(private val otter: OtterEntity, speedModifier: Double, interval: Int) : RandomStrollGoal(otter, speedModifier, interval) {
+    internal class OtterSwimmingGoal(private val otter: OtterEntity, speedModifier: Double, interval: Int) :
+        RandomStrollGoal(otter, speedModifier, interval) {
         init {
             this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
         }
@@ -372,11 +381,11 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         }
 
         override fun canUse(): Boolean {
-            return otter.isInWater && !otter.isUnderWater && otter.level().gameTime > nextFloatTime && otter.random.nextFloat() <= 0.1
+            return otter.isInWater && !otter.onGround() && !otter.isUnderWater && otter.level().gameTime > nextFloatTime && otter.random.nextFloat() <= 0.1
         }
 
         override fun canContinueToUse(): Boolean {
-            return otter.isInWater && otter.level().gameTime < floatingTimer
+            return otter.isInWater && !otter.onGround() &&  otter.level().gameTime < floatingTimer
         }
 
         override fun start() {
