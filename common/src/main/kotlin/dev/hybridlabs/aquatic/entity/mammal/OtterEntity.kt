@@ -58,7 +58,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        moveControl = swimControl
+        moveControl = floatControl
         navigation = AmphibiousPathNavigation(this, world)
     }
 
