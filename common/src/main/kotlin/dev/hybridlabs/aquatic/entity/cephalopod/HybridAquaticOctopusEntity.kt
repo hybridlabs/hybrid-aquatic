@@ -21,10 +21,10 @@ import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -36,7 +36,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.EasingType
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -53,9 +53,19 @@ open class HybridAquaticOctopusEntity(
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        moveControl = OctopusMoveControl(this, 85, 10, 1.0F, 0.1F, true)
+        moveControl = OctopusMoveControl(this, 85, 10, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
+    }
+
+    override fun travel(travelVector: Vec3) {
+        if (this.isEffectiveAi && this.isInWater) {
+            this.moveRelative(this.speed, travelVector)
+            this.move(MoverType.SELF, this.deltaMovement)
+            this.deltaMovement = deltaMovement.scale(0.9)
+        } else {
+            super.travel(travelVector)
+        }
     }
 
     override fun aiStep() {
@@ -67,7 +77,6 @@ open class HybridAquaticOctopusEntity(
                         this.setSitting(false)
                     } else {
                         this.deltaMovement = deltaMovement.subtract(0.0, 0.01, 0.0)
-                        this.yHeadRot = 0F
                     }
                 } else if (random.nextFloat() <= 0.001f) {
                     this.sittingTimer = random.nextInt(200, 650)
@@ -92,11 +101,8 @@ open class HybridAquaticOctopusEntity(
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(0, PanicGoal(this, 1.25))
-        goalSelector.addGoal(3, RandomStrollGoal(this, 0.5, 2))
         goalSelector.addGoal(3, OctopusSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
-        goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 6.0f))
     }
 
     override fun defineSynchedData() {
@@ -138,23 +144,34 @@ open class HybridAquaticOctopusEntity(
 
         this.determineTargetColor()
 
-        if (isInWaterRainOrBubble) {
+        if (this.isInWater) {
             moistness = getMaxMoistness()
         } else {
             moistness -= 1
             if (moistness <= -20) {
                 moistness = 0
-                hurt(this.damageSources().dryOut(), 1.0f)
-            }
-
-            if (!this.isUnderWater) {
+                hurt(this.damageSources().dryOut(), 2.0f)
                 this.xRot = 0.0f
-                this.yRot = this.yRotO
-                this.yHeadRot = this.yHeadRotO
+                this.yRot = 0.0f
+                this.yHeadRot = 0.0f
             }
         }
 
+        if (this.isSitting()) {
+            this.xRot = 0.0f
+            this.yRot = 0.0f
+            this.yHeadRot = 0.0f
+        }
+
         if (hunger > 0) hunger -= 1
+    }
+
+    override fun getMaxHeadXRot(): Int {
+        return 1
+    }
+
+    override fun getMaxHeadYRot(): Int {
+        return 1
     }
 
     fun getTargetColor(): Int {
@@ -184,8 +201,7 @@ open class HybridAquaticOctopusEntity(
             if (this.getTargetColor() != sharedColor && sharedColor != 0) {
                 this.setTargetColor(sharedColor)
             }
-        }
-        else if (!floor.fluidState.`is`(net.minecraft.tags.FluidTags.WATER)) {
+        } else if (!floor.fluidState.`is`(net.minecraft.tags.FluidTags.WATER)) {
             val floorColor = floor.getMapColor(this.level(), floorPos).col
             if (this.getTargetColor() != floorColor && floorColor != 0) {
                 this.setTargetColor(floorColor)
@@ -363,24 +379,21 @@ open class HybridAquaticOctopusEntity(
 
     // endregion
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
-            AnimationController(
-                this,
-                "Sit/Swim/Idle",
-                20
-            ) { state: AnimationState<HybridAquaticOctopusEntity> ->
-                if (isSitting() || this.onGround()) {
-                    state.setAndContinue(DefaultAnimations.SIT)
-                } else {
-                    if (state.isMoving) {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    } else {
-                        state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-                }
-            }.setOverrideEasingType(EasingType.EASE_IN_OUT_SINE)
-        )
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(AnimationController(this, "Swim/Idle", 10
+        ) { state: AnimationState<*> ->
+            state.setAndContinue(
+                if (state.isMoving) DefaultAnimations.SWIM else DefaultAnimations.IDLE
+            )
+        })
+        controllers.add(AnimationController(this, "Sit", 10) { state ->
+            if (isSitting() || this.onGround()) {
+                state.setAndContinue(DefaultAnimations.SIT)
+                PlayState.CONTINUE
+            } else {
+                PlayState.STOP
+            }
+        })
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
@@ -398,8 +411,10 @@ open class HybridAquaticOctopusEntity(
             SynchedEntityData.defineId(HybridAquaticOctopusEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticOctopusEntity::class.java, EntityDataSerializers.BOOLEAN)
-        private val CURRENT_COLOR: EntityDataAccessor<Int> = SynchedEntityData.defineId(HybridAquaticOctopusEntity::class.java, EntityDataSerializers.INT)
-        private val TARGET_COLOR: EntityDataAccessor<Int> = SynchedEntityData.defineId(HybridAquaticOctopusEntity::class.java, EntityDataSerializers.INT)
+        private val CURRENT_COLOR: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(HybridAquaticOctopusEntity::class.java, EntityDataSerializers.INT)
+        private val TARGET_COLOR: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(HybridAquaticOctopusEntity::class.java, EntityDataSerializers.INT)
 
         const val MAX_HUNGER = 2400
         const val HUNGER_KEY = "Hunger"
@@ -423,7 +438,11 @@ open class HybridAquaticOctopusEntity(
         }
     }
 
-    internal class OctopusSwimmingGoal(private val octopus: HybridAquaticOctopusEntity, speedModifier: Double, interval: Int) :
+    internal class OctopusSwimmingGoal(
+        private val octopus: HybridAquaticOctopusEntity,
+        speedModifier: Double,
+        interval: Int,
+    ) :
         RandomSwimmingGoal(octopus, speedModifier, interval) {
 
         override fun canUse(): Boolean {
@@ -444,7 +463,8 @@ open class HybridAquaticOctopusEntity(
         maxTurnY,
         inWaterSpeedModifier,
         outsideWaterSpeedModifier,
-        applyGravity) {
+        applyGravity
+    ) {
 
         override fun tick() {
             if (!octopus.isSitting()) {

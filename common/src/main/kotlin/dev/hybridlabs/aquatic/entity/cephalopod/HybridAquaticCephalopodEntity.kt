@@ -40,7 +40,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.EasingType
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
@@ -218,9 +218,19 @@ open class HybridAquaticCephalopodEntity(
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        moveControl = SmoothSwimmingMoveControl(this, 85, 10, 1.0F, 0.1F, true)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
+    }
+
+    override fun travel(travelVector: Vec3) {
+        if (this.isEffectiveAi && this.isInWater) {
+            this.moveRelative(this.speed, travelVector)
+            this.move(MoverType.SELF, this.deltaMovement)
+            this.deltaMovement = deltaMovement.scale(0.9)
+        } else {
+            super.travel(travelVector)
+        }
     }
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
@@ -282,24 +292,23 @@ open class HybridAquaticCephalopodEntity(
 
     // endregion
 
-    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
-            AnimationController(
-                this,
-                "Swim/Run",
-                20
-            ) { state: AnimationState<HybridAquaticCephalopodEntity> ->
-                if (!this.isUnderWater && onGround()) {
-                    state.setAndContinue(DefaultAnimations.SIT)
-                } else {
-                    if (state.isMoving) {
-                        state.setAndContinue(if (this.isSprinting) DefaultAnimations.RUN else DefaultAnimations.SWIM)
-                    } else {
-                        state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-                }
-            }.setOverrideEasingType(EasingType.EASE_IN_OUT_SINE)
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
+            AnimationController(this, "Swim/Idle", 10
+            ) { state: AnimationState<*> ->
+                state.setAndContinue(
+                    if (state.isMoving) DefaultAnimations.SWIM else DefaultAnimations.IDLE
+                )
+            }
         )
+        controllers.add(AnimationController(this, "Sit", 10) { state ->
+            if (onGround()) {
+                state.setAndContinue(DefaultAnimations.SIT)
+                PlayState.CONTINUE
+            } else {
+                PlayState.STOP
+            }
+        })
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {

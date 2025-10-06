@@ -12,7 +12,12 @@
 			},
 			"bones": [
 				{
+					"name": "octopus",
+					"pivot": [0, 3, 0]
+				},
+				{
 					"name": "body",
+					"parent": "octopus",
 					"pivot": [0, 3, 0],
 					"cubes": [
 						{"origin": [-3, 3, -3], "size": [6, 5, 6], "uv": [0, 0]}

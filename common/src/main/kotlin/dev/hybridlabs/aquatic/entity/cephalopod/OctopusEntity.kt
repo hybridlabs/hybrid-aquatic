@@ -24,6 +24,7 @@ import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class OctopusEntity(entityType: EntityType<out OctopusEntity>, world: Level) :
     HybridAquaticOctopusEntity(
         entityType,
@@ -55,7 +56,7 @@ class OctopusEntity(entityType: EntityType<out OctopusEntity>, world: Level) :
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 12.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.6)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 4.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)

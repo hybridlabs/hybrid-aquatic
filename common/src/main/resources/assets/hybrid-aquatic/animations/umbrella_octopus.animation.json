@@ -65,62 +65,38 @@
 			"loop": true,
 			"bones": {
 				"left_tentacle_2": {
-					"rotation": {
-						"vector": [0, 0, "Math.cos(query.anim_time * 90)*10"]
-					}
+					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*10"]
 				},
 				"left_tentacle_3": {
-					"rotation": {
-						"vector": [0, 0, "Math.cos(query.anim_time * 90)*10"]
-					}
+					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*10"]
 				},
 				"right_tentacle_3": {
-					"rotation": {
-						"vector": [0, 0, "Math.cos(query.anim_time * 90)*-10"]
-					}
+					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*-10"]
 				},
 				"right_tentacle_2": {
-					"rotation": {
-						"vector": [0, 0, "Math.cos(query.anim_time * 90)*-10"]
-					}
+					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*-10"]
 				},
 				"left_tentacle_1": {
-					"rotation": {
-						"vector": ["Math.cos(query.anim_time * 90)*10", 0, 0]
-					}
+					"rotation": ["Math.cos(query.anim_time * 90)*10", 0, 0]
 				},
 				"left_tentacle_4": {
-					"rotation": {
-						"vector": ["Math.cos(query.anim_time * 90)*-10", 0, 0]
-					}
+					"rotation": ["Math.cos(query.anim_time * 90)*-10", 0, 0]
 				},
 				"right_tentacle_4": {
-					"rotation": {
-						"vector": ["Math.cos(query.anim_time * 90)*-10", 0, 0]
-					}
+					"rotation": ["Math.cos(query.anim_time * 90)*-10", 0, 0]
 				},
 				"right_tentacle_1": {
-					"rotation": {
-						"vector": ["Math.cos(query.anim_time * 90)*10", 0, 0]
-					}
+					"rotation": ["Math.cos(query.anim_time * 90)*10", 0, 0]
 				},
 				"left_fin": {
-					"rotation": {
-						"vector": [0, 0, "10+math.sin(query.anim_time*90*1-80)*25"]
-					}
+					"rotation": [0, 0, "10+math.sin(query.anim_time*90*1-80)*25"]
 				},
 				"right_fin": {
-					"rotation": {
-						"vector": [0, 0, "-10+math.sin(query.anim_time*90*1-80)*-25"]
-					}
+					"rotation": [0, 0, "-10+math.sin(query.anim_time*90*1-80)*-25"]
 				},
 				"body": {
-					"rotation": {
-						"vector": ["5+Math.cos(query.anim_time * 90)*5", 0, 0]
-					},
-					"position": {
-						"vector": [0, "1+math.sin(query.anim_time*90*1-80)*1", "math.cos(query.anim_time*90*1-80)*1"]
-					}
+					"rotation": ["90+Math.cos(query.anim_time * 90)*-5", 0, 0],
+					"position": [0, "1+math.sin(query.anim_time*90*1-80)*-1", "math.cos(query.anim_time*90*1-80)*1"]
 				}
 			}
 		},
