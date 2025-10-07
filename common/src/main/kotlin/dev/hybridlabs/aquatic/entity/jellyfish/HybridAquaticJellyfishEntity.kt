@@ -309,11 +309,11 @@ open class HybridAquaticJellyfishEntity(
     }
 
     protected open fun getMinSize(): Int {
-        return 0
+        return -3
     }
 
     protected open fun getMaxSize(): Int {
-        return 0
+        return 3
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

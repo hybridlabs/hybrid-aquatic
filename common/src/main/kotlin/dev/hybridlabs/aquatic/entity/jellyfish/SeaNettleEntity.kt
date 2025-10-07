@@ -104,14 +104,6 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
         return spawnData
     }
 
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
-    }
-
     override fun defineSynchedData() {
         entityData.define(TYPE, 0)
         super.defineSynchedData()

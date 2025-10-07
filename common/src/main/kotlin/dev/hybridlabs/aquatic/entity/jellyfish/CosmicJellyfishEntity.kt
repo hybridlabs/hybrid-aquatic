@@ -22,12 +22,4 @@ class CosmicJellyfishEntity(entityType: EntityType<out CosmicJellyfishEntity>, w
                 .add(Attributes.FOLLOW_RANGE, 20.0)
         }
     }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
-    }
 }
