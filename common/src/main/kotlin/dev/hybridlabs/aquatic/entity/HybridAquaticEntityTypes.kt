@@ -610,7 +610,7 @@ object HybridAquaticEntityTypes {
 
     //#region jellyfish
     val CROWN_JELLYFISH = registerJellyUnderground(
-        "atolla_jellyfish",
+        "crown_jellyfish",
         ::CrownJellyfishEntity,
         EntityDimensions.fixed(0.75f, 0.75f),
         CrownJellyfishEntity::createMobAttributes
