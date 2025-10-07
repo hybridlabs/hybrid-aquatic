@@ -45,11 +45,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     HybridAquaticMammalEntity(
         entityType, world,
         listOf(
-            HybridAquaticEntityTags.CRUSTACEAN,
-            HybridAquaticEntityTags.SMALL_PREY
+            HybridAquaticEntityTags.KELP_PREY
         ),
         listOf(
-            HybridAquaticEntityTags.NONE
+            HybridAquaticEntityTags.SHARK
         )
     ),
     VariantHolder<OtterEntity.Companion.Type> {

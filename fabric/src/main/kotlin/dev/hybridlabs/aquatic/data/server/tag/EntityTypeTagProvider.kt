@@ -16,6 +16,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_PREY)
             .add(
                 HybridAquaticEntityTypes.CLOWNFISH.get(),
+                HybridAquaticEntityTypes.CARP.get(),
                 HybridAquaticEntityTypes.PEARLFISH.get(),
                 HybridAquaticEntityTypes.SNAILFISH.get(),
                 HybridAquaticEntityTypes.BOXFISH.get(),
@@ -73,6 +74,12 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 EntityType.PLAYER,
                 EntityType.TURTLE,
             )
+
+        // otter prey
+        getOrCreateTagBuilder(HybridAquaticEntityTags.KELP_PREY)
+            .add(HybridAquaticEntityTypes.SEA_URCHIN.get())
+            .forceAddTag(HybridAquaticEntityTags.CRUSTACEAN)
+            .forceAddTag(HybridAquaticEntityTags.SMALL_PREY)
 
         // crustaceans
         getOrCreateTagBuilder(HybridAquaticEntityTags.CRUSTACEAN)

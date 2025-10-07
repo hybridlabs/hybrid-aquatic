@@ -11,6 +11,7 @@ object HybridAquaticEntityTags {
     val LARGE_PREY = create("large_prey")
     val MEDIUM_PREY = create("medium_prey")
     val SMALL_PREY = create("small_prey")
+    val KELP_PREY = create("kelp_prey")
 
     val CRITTER = create("critter")
     val CRUSTACEAN = create("crustacean")
