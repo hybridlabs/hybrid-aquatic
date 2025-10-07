@@ -70,7 +70,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     /**
      * Override hurt() to disable drowning damage.
      *
-     * We want otters to seek air for the behavior but it's too sad when they drown.
+     * We want otters to seek air for the behavior, but it's too sad when they drown.
      */
     override fun hurt(source: DamageSource, amount: Float): Boolean {
         if (source == damageSources().drown()) return false
@@ -235,7 +235,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
             EntityDataSerializers.INT
         )
 
-
         /** Enum for the action state machine, with codec to store in NBT */
         enum class OtterAction(val id: Int, private val key: String) : StringRepresentable {
             IDLE(0, "idle"),
@@ -347,7 +346,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     }
 
     /** Check if the otter is close to a given BlockPos. "Close" is arbitratrily 12. */
-    fun closeToBlockPos(blockpos: BlockPos?): Boolean {
+    private fun closeToBlockPos(blockpos: BlockPos?): Boolean {
         return blockpos?.closerToCenterThan(this.position(), 12.0) ?: false
     }
 
@@ -396,11 +395,11 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     /* Swimming goal for otters. Has a timeout to allow other goals to run */
     internal class OtterSwimmingGoal(private val otter: OtterEntity, speedModifier: Double, interval: Int) :
         RandomStrollGoal(otter, speedModifier, interval) {
-        var swimTimer = 0L
-        val maxSwimTime = 300L
+        private var swimTimer = 0L
+        private val maxSwimTime = 300L
 
         init {
-            // We set LOOK here as well as MOVE so the otter doesn't randomly follow its eyeline when swimmming
+            // We set LOOK here as well as MOVE so the otter doesn't randomly follow its eyeline when swimming
             this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
         }
 
@@ -489,7 +488,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
             target = Vec3.ZERO
             nextDiveTime = otter.level().gameTime + minDiveDelay
             otter.navigation.stop()
-            // Re-enable gravity counterforce on y axis
+            // Re-enable gravity counterforce on y-axis
             otter.swimControl.applyGravity = true
         }
     }
