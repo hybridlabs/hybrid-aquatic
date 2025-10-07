@@ -420,10 +420,10 @@ object HybridAquaticEntityRenderers {
             ::LionsManeJellyfishEntityRenderer
         )
 
-    val ATOLLA_JELLYFISH =
+    val CROWN_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.ATOLLA_JELLYFISH,
-            ::AtollaJellyfishEntityRenderer
+            HybridAquaticEntityTypes.CROWN_JELLYFISH,
+            ::CrownJellyfishEntityRenderer
         )
 
     val BIG_RED_JELLYFISH =

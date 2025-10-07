@@ -148,7 +148,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         // jellyfish
         getOrCreateTagBuilder(HybridAquaticEntityTags.JELLYFISH)
             .add(
-                HybridAquaticEntityTypes.ATOLLA_JELLYFISH.get(),
+                HybridAquaticEntityTypes.CROWN_JELLYFISH.get(),
                 HybridAquaticEntityTypes.BARREL_JELLYFISH.get(),
                 HybridAquaticEntityTypes.BLUE_JELLYFISH.get(),
                 HybridAquaticEntityTypes.BIG_RED_JELLYFISH.get(),

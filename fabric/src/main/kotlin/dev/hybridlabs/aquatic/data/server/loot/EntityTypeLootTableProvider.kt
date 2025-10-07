@@ -601,7 +601,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.ATOLLA_JELLYFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.CROWN_JELLYFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(

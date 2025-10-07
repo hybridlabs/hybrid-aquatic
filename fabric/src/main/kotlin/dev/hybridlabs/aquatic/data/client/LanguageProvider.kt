@@ -528,7 +528,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.BARREL_JELLYFISH.get() to "Barrel Jellyfish",
             HybridAquaticEntityTypes.MAUVE_STINGER.get() to "Mauve Stinger",
             HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH.get() to "Lion's Mane Jellyfish",
-            HybridAquaticEntityTypes.ATOLLA_JELLYFISH.get() to "Atolla Jellyfish",
+            HybridAquaticEntityTypes.CROWN_JELLYFISH.get() to "Crown Jellyfish",
             HybridAquaticEntityTypes.BIG_RED_JELLYFISH.get() to "Big Red Jellyfish",
             HybridAquaticEntityTypes.COSMIC_JELLYFISH.get() to "Cosmic Jellyfish",
             HybridAquaticEntityTypes.FIREWORK_JELLYFISH.get() to "Firework Jellyfish",

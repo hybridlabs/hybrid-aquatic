@@ -97,7 +97,7 @@ class EntitySpawnConfigGenerator {
         addJelly(HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH.get(), listOf(HybridAquaticBiomeTags.ARCTIC_OCEANS, HybridAquaticBiomeTags.COLD_OCEANS), 1, 1, 2)
         addJelly(HybridAquaticEntityTypes.BOX_JELLYFISH.get(), listOf(HybridAquaticBiomeTags.MANGROVES, HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.SANDY_BEACHES), 1, 1, 1)
 
-        addUndergroundJelly(HybridAquaticEntityTypes.ATOLLA_JELLYFISH.get(), listOf(BiomeTags.IS_DEEP_OCEAN), 1, 1, 1)
+        addUndergroundJelly(HybridAquaticEntityTypes.CROWN_JELLYFISH.get(), listOf(BiomeTags.IS_DEEP_OCEAN), 1, 1, 1)
         addUndergroundJelly(HybridAquaticEntityTypes.BIG_RED_JELLYFISH.get(), listOf(BiomeTags.IS_DEEP_OCEAN), 1, 1, 1)
         addUndergroundJelly(HybridAquaticEntityTypes.COSMIC_JELLYFISH.get(), listOf(BiomeTags.IS_DEEP_OCEAN), 2, 1, 1)
         addUndergroundJelly(HybridAquaticEntityTypes.FIREWORK_JELLYFISH.get(), listOf(BiomeTags.IS_DEEP_OCEAN), 2, 1, 1)

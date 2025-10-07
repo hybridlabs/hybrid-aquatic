@@ -5,7 +5,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class AtollaJellyfishEntity(entityType: EntityType<out AtollaJellyfishEntity>, world: Level) :
+class CrownJellyfishEntity(entityType: EntityType<out CrownJellyfishEntity>, world: Level) :
     HybridAquaticJellyfishEntity(entityType, world, true, 1) {
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -21,13 +21,5 @@ class AtollaJellyfishEntity(entityType: EntityType<out AtollaJellyfishEntity>, w
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)
         }
-    }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
     }
 }

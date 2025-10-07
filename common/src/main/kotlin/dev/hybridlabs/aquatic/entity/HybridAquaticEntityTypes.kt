@@ -609,11 +609,11 @@ object HybridAquaticEntityTypes {
     //endregion
 
     //#region jellyfish
-    val ATOLLA_JELLYFISH = registerJellyUnderground(
+    val CROWN_JELLYFISH = registerJellyUnderground(
         "atolla_jellyfish",
-        ::AtollaJellyfishEntity,
+        ::CrownJellyfishEntity,
         EntityDimensions.fixed(0.75f, 0.75f),
-        AtollaJellyfishEntity::createMobAttributes
+        CrownJellyfishEntity::createMobAttributes
     )
 
     val BIG_RED_JELLYFISH = registerJellyUnderground(

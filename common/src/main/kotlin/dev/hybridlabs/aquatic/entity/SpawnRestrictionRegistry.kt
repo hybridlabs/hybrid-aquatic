@@ -124,7 +124,7 @@ object SpawnRestrictionRegistry {
         ).forEach { registerJelly(it) }
 
         setOf(
-            HybridAquaticEntityTypes.ATOLLA_JELLYFISH.get(),
+            HybridAquaticEntityTypes.CROWN_JELLYFISH.get(),
             HybridAquaticEntityTypes.BIG_RED_JELLYFISH.get(),
             HybridAquaticEntityTypes.COSMIC_JELLYFISH.get(),
             HybridAquaticEntityTypes.FIREWORK_JELLYFISH.get(),

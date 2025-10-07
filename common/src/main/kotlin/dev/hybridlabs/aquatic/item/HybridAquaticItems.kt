@@ -1460,8 +1460,8 @@ object HybridAquaticItems {
 
     val MAUVE_STINGER_SPAWN_EGG =
         registerSpawnEgg("mauve_stinger_spawn_egg", HybridAquaticEntityTypes.MAUVE_STINGER, 0x633063, 0xbc787a)
-    val ATOLLA_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("atolla_jellyfish_spawn_egg", HybridAquaticEntityTypes.ATOLLA_JELLYFISH, 0xa32858, 0x4dc0e8)
+    val CROWN_JELLYFISH_SPAWN_EGG =
+        registerSpawnEgg("crown_jellyfish_spawn_egg", HybridAquaticEntityTypes.CROWN_JELLYFISH, 0xa32858, 0x4dc0e8)
     val BIG_RED_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg("big_red_jellyfish_spawn_egg", HybridAquaticEntityTypes.BIG_RED_JELLYFISH, 0xf4e5e5, 0xe72e46)
     val COSMIC_JELLYFISH_SPAWN_EGG =
