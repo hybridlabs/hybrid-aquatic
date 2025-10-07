@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.ai.goal.boids
 import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.Mob
+import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.phys.Vec3
@@ -104,7 +105,11 @@ class BoidGoal(
     companion object {
 
         fun getNearbyEntitiesOfSameClass(mob: Mob): MutableList<out Mob> {
-            val predicate: Predicate<Mob> = Predicate { other -> other != mob }
+            val predicate: Predicate<Mob> =
+                Predicate { other -> other != mob
+                        && (mob is VariantHolder<*>) && (other is VariantHolder<*>)
+                        && (mob as VariantHolder<*>).variant == (other as VariantHolder<*>).variant
+                }
 
             return mob.level().getEntitiesOfClass(mob.javaClass, mob.boundingBox.inflate(4.0, 4.0, 4.0), predicate)
         }

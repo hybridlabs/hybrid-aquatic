@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -32,6 +34,12 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Le
         )
     ),
     VariantHolder<SurgeonfishEntity.Companion.Type> {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
+        goalSelector.addGoal(3, StayInWaterGoal(this))
+    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 3
