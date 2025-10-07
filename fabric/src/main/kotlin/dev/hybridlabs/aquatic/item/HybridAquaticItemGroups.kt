@@ -189,6 +189,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.DAMSELFISH.get())
                 entries.accept(HybridAquaticItems.SEAHORSE.get())
                 entries.accept(HybridAquaticItems.MACKEREL.get())
+                entries.accept(HybridAquaticItems.HERRING.get())
                 entries.accept(HybridAquaticItems.FLYING_FISH.get())
                 entries.accept(HybridAquaticItems.JOHN_DORY.get())
                 entries.accept(HybridAquaticItems.PEARLFISH.get())

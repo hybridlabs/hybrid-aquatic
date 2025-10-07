@@ -274,6 +274,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.MORAY_EEL.get(),
             HybridAquaticItems.NEEDLEFISH.get(),
             HybridAquaticItems.MACKEREL.get(),
+            HybridAquaticItems.HERRING.get(),
             HybridAquaticItems.FLYING_FISH.get(),
             HybridAquaticItems.SQUIRRELFISH.get(),
             HybridAquaticItems.COELACANTH.get(),

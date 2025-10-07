@@ -114,6 +114,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.DANIO.get(),
             HybridAquaticItems.NEON_TETRA.get(),
             HybridAquaticItems.MACKEREL.get(),
+            HybridAquaticItems.HERRING.get(),
             HybridAquaticItems.JOHN_DORY.get()
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.SMALL_FISH).add(item)
@@ -165,6 +166,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.GOLDFISH.get(),
             HybridAquaticItems.CARP.get(),
             HybridAquaticItems.MACKEREL.get(),
+            HybridAquaticItems.HERRING.get(),
             HybridAquaticItems.DAMSELFISH.get(),
             HybridAquaticItems.SEA_BASS.get(),
             HybridAquaticItems.PARROTFISH.get(),
@@ -260,6 +262,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.SEA_BASS.get(),
             HybridAquaticItems.SEAHORSE.get(),
             HybridAquaticItems.MACKEREL.get(),
+            HybridAquaticItems.HERRING.get(),
             HybridAquaticItems.BOXFISH.get(),
             HybridAquaticItems.BLOWFISH.get(),
             HybridAquaticItems.STONEFISH.get(),

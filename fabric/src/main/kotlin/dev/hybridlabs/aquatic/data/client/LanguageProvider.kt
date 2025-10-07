@@ -287,6 +287,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.MORAY_EEL.get() to "Moray Eel",
             HybridAquaticItems.NEEDLEFISH.get() to "Needlefish",
             HybridAquaticItems.MACKEREL.get() to "Mackerel",
+            HybridAquaticItems.HERRING.get() to "Herring",
             HybridAquaticItems.FLYING_FISH.get() to "Flying Fish",
             HybridAquaticItems.PIRANHA.get() to "Piranha",
             HybridAquaticItems.ANGLERFISH.get() to "Anglerfish",

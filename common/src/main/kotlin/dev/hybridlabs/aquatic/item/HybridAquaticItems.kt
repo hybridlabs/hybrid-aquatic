@@ -650,6 +650,21 @@ object HybridAquaticItems {
         )
     }
 
+    val HERRING = register(
+        "herring"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(1)
+                        .saturationMod(0.4F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
     val FLYING_FISH = register(
         "flying_fish"
     ) {

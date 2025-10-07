@@ -159,6 +159,10 @@ class FishingLootTableProvider(output: FabricDataOutput) :
                                 .setWeight(4)
                         )
                         .add(
+                            LootItem.lootTableItem(HybridAquaticItems.HERRING.get())
+                                .setWeight(4)
+                        )
+                        .add(
                             LootItem.lootTableItem(HybridAquaticItems.NEEDLEFISH.get())
                                 .setWeight(3)
                         )

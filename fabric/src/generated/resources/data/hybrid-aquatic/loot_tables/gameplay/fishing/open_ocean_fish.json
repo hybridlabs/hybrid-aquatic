@@ -21,6 +21,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "hybrid-aquatic:herring",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
           "name": "hybrid-aquatic:needlefish",
           "weight": 3
         },

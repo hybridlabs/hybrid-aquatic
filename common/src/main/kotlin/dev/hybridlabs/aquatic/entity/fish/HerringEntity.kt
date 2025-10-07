@@ -159,7 +159,7 @@ class HerringEntity(entityType: EntityType<out HerringEntity>, world: Level) :
             }
 
             if (newFishCount in 1..<oldFishCount) {
-                spawnAtLocation(HybridAquaticItems.MACKEREL.get())
+                spawnAtLocation(HybridAquaticItems.HERRING.get())
             }
         }
 

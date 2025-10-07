@@ -45,6 +45,7 @@ class LiveCatchEnchantment :
             HybridAquaticItems.SEAHORSE to HybridAquaticEntityTypes.SEAHORSE,
             HybridAquaticItems.BLOWFISH to HybridAquaticEntityTypes.BLOWFISH,
             HybridAquaticItems.MACKEREL to HybridAquaticEntityTypes.MACKEREL,
+            HybridAquaticItems.HERRING to HybridAquaticEntityTypes.HERRING,
             HybridAquaticItems.FLYING_FISH to HybridAquaticEntityTypes.FLYING_FISH,
 
             HybridAquaticItems.RATFISH to HybridAquaticEntityTypes.RATFISH,
