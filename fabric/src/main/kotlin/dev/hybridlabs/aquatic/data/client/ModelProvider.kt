@@ -204,7 +204,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 BlockModelGenerators.TintState.NOT_TINTED,
             )
 
-            createCrossBlockWithDefaultItem(
+            createCrossBlock(
                 HybridAquaticBlocks.SEA_LETTUCE.get(),
                 BlockModelGenerators.TintState.NOT_TINTED,
             )
@@ -217,6 +217,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.DUNEGRASS.get(),
             HybridAquaticItems.CATTAIL.get(),
             HybridAquaticItems.RED_ALGAE.get(),
+            HybridAquaticItems.SEA_LETTUCE.get(),
             HybridAquaticItems.SARGASSUM.get(),
             HybridAquaticItems.BULL_KELP.get(),
             HybridAquaticItems.TUBE_SPONGE.get(),
