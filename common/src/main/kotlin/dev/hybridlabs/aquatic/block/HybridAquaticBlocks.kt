@@ -6,6 +6,7 @@ import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument
 import net.minecraft.world.level.material.MapColor
@@ -152,10 +153,10 @@ object HybridAquaticBlocks {
     val CATTAIL = register("cattail") { CattailBlock(Properties.copy(Blocks.TALL_GRASS)) }
 
     val RED_ALGAE = register("red_algae") { RedAlgaeBlock(Properties.copy(Blocks.SEAGRASS)) }
-    val TALL_RED_ALGAE = register("tall_red_algae") { TallRedAlgaeBlock(Properties.copy(Blocks.TALL_SEAGRASS)) }
+    val TALL_RED_ALGAE = register("tall_red_algae") { TallRedAlgaeBlock(Properties.copy(Blocks.TALL_SEAGRASS).offsetType(BlockBehaviour.OffsetType.NONE)) }
 
     val SEA_LETTUCE = register("sea_lettuce") { SeaLettuceBlock(Properties.copy((Blocks.SEAGRASS))) }
-    val TALL_SEA_LETTUCE = register("tall_sea_lettuce") { TallSeaLettuceBlock(Properties.copy((Blocks.TALL_SEAGRASS))) }
+    val TALL_SEA_LETTUCE = register("tall_sea_lettuce") { TallSeaLettuceBlock(Properties.copy((Blocks.TALL_SEAGRASS)).offsetType(BlockBehaviour.OffsetType.NONE)) }
 
     val DEAD_LOPHELIA_CORAL_BLOCK = register(
         "dead_lophelia_coral_block"
