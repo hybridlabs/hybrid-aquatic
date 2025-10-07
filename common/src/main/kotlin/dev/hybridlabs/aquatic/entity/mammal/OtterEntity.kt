@@ -572,5 +572,12 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
             if (otter.isUnderWater && otter.y < 62) return false
             return super.resetXRotOnTick()
         }
+
+        override fun setLookAt(x: Double, y: Double, z: Double) {
+            if (otter.getAction() == OtterAction.FLOATING) {
+                val lookVec = Vec3(x, y, z).scale(-1.0)
+                super.setLookAt(lookVec.z, y, lookVec.x, mob.headRotSpeed.toFloat(), mob.maxHeadXRot.toFloat())
+            }
+        }
     }
 }
