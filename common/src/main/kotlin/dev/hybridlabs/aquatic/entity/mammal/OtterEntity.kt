@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
-import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
@@ -84,7 +83,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     override fun registerGoals() {
         goalSelector.addGoal(1, OtterBreathAirGoal(this))
-        goalSelector.addGoal(1, TryFindWaterGoal(this))
+        goalSelector.addGoal(1, OtterFindWaterGoal(this))
         goalSelector.addGoal(2, OtterDiveGoal(this, 1.0))
         goalSelector.addGoal(2, OtterFloatGoal(this))
         goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.8, 20))
@@ -337,7 +336,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     }
 
     fun setAction(action: OtterAction) {
-        Constants.LOG.info("SetAction for otter {}: {}", this.id, action.serializedName)
         entityData.set(ACTION, action.id)
     }
 
@@ -368,6 +366,19 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
             otter.setAction(OtterAction.IDLE)
         }
     }
+
+    internal class OtterFindWaterGoal(val otter: OtterEntity) : TryFindWaterGoal(otter) {
+        override fun start() {
+            super.start()
+            otter.setAction(OtterAction.WALKING)
+        }
+
+        override fun stop() {
+            super.stop()
+            otter.setAction(OtterAction.IDLE)
+        }
+    }
+
 
     /** RandomStrollGoal so that otters will walk around on land. */
     internal class OtterWalkingGoal(private val otter: OtterEntity, speedModifier: Double, interval: Int) :
@@ -433,7 +444,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
             if (pos != null) {
                 pos = Vec3(pos.x, 63.5, pos.z)
             }
-            Constants.LOG.info("Swim target: {}", pos)
             return pos
         }
     }
@@ -480,7 +490,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                 target = pos.center
                 otter.navigation.moveTo(target.x, target.y, target.z, speedModifier)
             }
-            Constants.LOG.info("Dive target: {}, Otter: {}", target, otter.blockPosition())
         }
 
         override fun stop() {
