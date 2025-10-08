@@ -61,7 +61,7 @@ class OtterEntityModel : HybridAquaticMammalEntityModel<OtterEntity>("otter") {
 
             val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
             body?.rotX = xRot * -Mth.DEG_TO_RAD
-        } else {
+        } else if (animatable.isInWater && animatable.getAction() == OtterAction.FLOATING) {
             body?.rotX = Mth.lerp(0.1f, body.rotX, 0f)
         }
     }

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
@@ -53,7 +54,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     ),
     VariantHolder<OtterEntity.Companion.Type> {
     private val swimControl = OtterMoveControl(this, 45, 3, 0.02F, 1.0F, true)
-    private var action: OtterAction = OtterAction.IDLE
 
     init {
         moveControl = swimControl
@@ -63,6 +63,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         // Setting WATER_BORDER to zero makes surface water blocks preferred
         setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0f)
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.WALKABLE, 1.0f)
     }
 
     /**
@@ -82,11 +83,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     override fun registerGoals() {
         goalSelector.addGoal(1, OtterBreathAirGoal(this))
-        goalSelector.addGoal(1, OtterFindWaterGoal(this))
         goalSelector.addGoal(2, OtterDiveGoal(this, 1.0))
         goalSelector.addGoal(2, OtterFloatGoal(this))
         goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.8, 20))
-        goalSelector.addGoal(3, OtterWalkingGoal(this, 0.6, 20))
+        goalSelector.addGoal(3, OtterWalkingGoal(this, 0.7, 20))
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
     }
@@ -122,7 +122,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     }
 
     override fun travel(travelVector: Vec3) {
-        if (this.isEffectiveAi && this.isInWater && this.action != OtterAction.FLOATING) {
+        if (this.isEffectiveAi && this.isInWater && this.getAction() != OtterAction.FLOATING) {
             this.moveRelative(this.speed, travelVector)
             this.move(MoverType.SELF, this.deltaMovement)
             this.deltaMovement = deltaMovement.multiply(0.9, 1.0, 0.9)
@@ -187,29 +187,23 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
             AnimationController(this, "otter_controller", 8) { state ->
-                val bob = state.animatable.getAction()
-                when (bob) {
-                    OtterAction.WALKING -> {
+                when {
+                    state.isMoving && getAction() == OtterAction.WALKING ->
                         state.setAndContinue(DefaultAnimations.WALK)
-                    }
 
-                    OtterAction.FLOATING -> {
+                    state.isMoving && getAction() == OtterAction.SWIMMING ->
+                        state.setAndContinue(DefaultAnimations.SWIM)
+
+                    state.isMoving && getAction() == OtterAction.DIVING ->
+                        state.setAndContinue(DefaultAnimations.SWIM)
+
+                    !state.isMoving && getAction() == OtterAction.FLOATING ->
                         state.setAndContinue(FLOAT_ANIMATION)
-                    }
 
-                    OtterAction.SWIMMING -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    }
-
-                    OtterAction.DIVING -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    }
-
-                    OtterAction.IDLE -> {
+                    else ->
                         if (isInWater) {
                             state.setAndContinue(WATER_IDLE)
                         } else state.setAndContinue(DefaultAnimations.IDLE)
-                    }
                 }
             }
         )
@@ -315,7 +309,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putString("Type", this.variant.serializedName)
-        nbt.putString("Action", this.action.serializedName)
+        nbt.putString("Action", this.getAction().serializedName)
 
         super.addAdditionalSaveData(nbt)
     }
@@ -336,6 +330,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     fun setAction(action: OtterAction) {
         entityData.set(ACTION, action.id)
+        Constants.LOG.info("otter: {}, action {}", id, action)
     }
 
     fun getAction(): OtterAction {
@@ -359,25 +354,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
             super.start()
             otter.setAction(OtterAction.SWIMMING)
         }
-
-        override fun stop() {
-            super.stop()
-            otter.setAction(OtterAction.IDLE)
-        }
     }
-
-    internal class OtterFindWaterGoal(val otter: OtterEntity) : TryFindWaterGoal(otter) {
-        override fun start() {
-            super.start()
-            otter.setAction(OtterAction.WALKING)
-        }
-
-        override fun stop() {
-            super.stop()
-            otter.setAction(OtterAction.IDLE)
-        }
-    }
-
 
     /** RandomStrollGoal so that otters will walk around on land. */
     internal class OtterWalkingGoal(private val otter: OtterEntity, speedModifier: Double, interval: Int) :
@@ -397,7 +374,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         }
 
         override fun stop() {
-            otter.setAction(OtterAction.IDLE)
             super.stop()
         }
     }
@@ -417,6 +393,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
             return otter.isInWater && otter.getAction() != OtterAction.FLOATING && swimTimer <= otter.level().gameTime && super.canUse()
         }
 
+        override fun canContinueToUse(): Boolean {
+            return otter.isInWater && super.canContinueToUse()
+        }
+
         /**If we get sufficiently close to our next path node, set forceTrigger to recompute the path */
         override fun tick() {
             if (otter.navigation.isDone || otter.closeToNextPos()) {
@@ -434,14 +414,14 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         override fun stop() {
             swimTimer = 0
             otter.navigation.stop()
-            otter.setAction(OtterAction.IDLE)
         }
 
         /* Pick a random position at sea level to pursue */
         override fun getPosition(): Vec3? {
             var pos = DefaultRandomPos.getPos(otter, 8, 0)
             if (pos != null) {
-                pos = Vec3(pos.x, 63.5, pos.z)
+                val height = otter.level().getHeight(Heightmap.Types.WORLD_SURFACE, pos.x.toInt(), pos.z.toInt()) + 1
+                pos = Vec3(pos.x, height.toDouble(), pos.z)
             }
             return pos
         }
@@ -492,7 +472,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         }
 
         override fun stop() {
-            otter.setAction(OtterAction.SWIMMING)
             target = Vec3.ZERO
             nextDiveTime = otter.level().gameTime + minDiveDelay
             otter.navigation.stop()
