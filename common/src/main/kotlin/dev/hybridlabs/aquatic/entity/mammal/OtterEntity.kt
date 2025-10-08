@@ -197,7 +197,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                     state.isMoving && getAction() == OtterAction.DIVING ->
                         state.setAndContinue(DefaultAnimations.SWIM)
 
-                    !state.isMoving && getAction() == OtterAction.FLOATING ->
+                    !state.isMoving && isInWater && getAction() == OtterAction.FLOATING ->
                         state.setAndContinue(FLOAT_ANIMATION)
 
                     else ->
