@@ -1207,6 +1207,21 @@ object HybridAquaticItems {
         )
     }
 
+    val SHEEPSHEAD_WRASSE = register(
+        "sheepshead_wrasse"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(2)
+                        .saturationMod(0.4F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
     val COELACANTH = register(
         "coelacanth"
     ) {

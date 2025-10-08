@@ -281,6 +281,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.SUNFISH.get() to "Sunfish",
             HybridAquaticItems.BLOWFISH.get() to "Blowfish",
             HybridAquaticItems.PARROTFISH.get() to "Parrotfish",
+            HybridAquaticItems.SHEEPSHEAD_WRASSE.get() to "Sheepshead Wrasse",
             HybridAquaticItems.STONEFISH.get() to "Stonefish",
             HybridAquaticItems.SEAHORSE.get() to "Seahorse",
             HybridAquaticItems.GOLDFISH.get() to "Goldfish",

@@ -209,6 +209,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.COELACANTH.get())
                 entries.accept(HybridAquaticItems.NEEDLEFISH.get())
                 entries.accept(HybridAquaticItems.PARROTFISH.get())
+                entries.accept(HybridAquaticItems.SHEEPSHEAD_WRASSE.get())
                 entries.accept(HybridAquaticItems.MORAY_EEL.get())
                 entries.accept(HybridAquaticItems.TUNA.get())
                 entries.accept(HybridAquaticItems.MAHI.get())
