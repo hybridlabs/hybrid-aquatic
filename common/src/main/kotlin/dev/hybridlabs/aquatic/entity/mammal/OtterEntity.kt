@@ -489,7 +489,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         }
 
         override fun canUse(): Boolean {
-            return otter.isInWater && !otter.onGround() && !otter.isUnderWater && otter.level().gameTime > nextFloatTime && otter.random.nextFloat() <= 0.3
+            return otter.isSwimming && !otter.onGround() && !otter.isUnderWater && otter.level().gameTime > nextFloatTime && otter.random.nextFloat() <= 0.3
         }
 
         override fun canContinueToUse(): Boolean {
