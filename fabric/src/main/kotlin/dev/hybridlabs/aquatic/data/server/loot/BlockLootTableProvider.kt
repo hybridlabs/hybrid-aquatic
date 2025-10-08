@@ -166,39 +166,45 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         //region corals
         createSilkTouchOnlyTable(HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK.get())
-
         createSilkTouchOnlyTable(HybridAquaticBlocks.LOPHELIA_CORAL.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL.get())
-
         createSilkTouchOnlyTable(HybridAquaticBlocks.LOPHELIA_CORAL_FAN.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get())
 
         createSilkTouchOnlyTable(HybridAquaticBlocks.THORN_CORAL_BLOCK.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK.get())
-
         createSilkTouchOnlyTable(HybridAquaticBlocks.THORN_CORAL.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_THORN_CORAL.get())
-
         createSilkTouchOnlyTable(HybridAquaticBlocks.THORN_CORAL_FAN.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get())
 
         createSilkTouchOnlyTable(HybridAquaticBlocks.SUN_CORAL_BLOCK.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_SUN_CORAL_BLOCK.get())
-
         createSilkTouchOnlyTable(HybridAquaticBlocks.SUN_CORAL.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_SUN_CORAL.get())
-
         createSilkTouchOnlyTable(HybridAquaticBlocks.SUN_CORAL_FAN.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_SUN_CORAL_FAN.get())
 
         createSilkTouchOnlyTable(HybridAquaticBlocks.BUTTON_CORAL_BLOCK.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_BUTTON_CORAL_BLOCK.get())
-
         createSilkTouchOnlyTable(HybridAquaticBlocks.BUTTON_CORAL.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_BUTTON_CORAL.get())
-
         createSilkTouchOnlyTable(HybridAquaticBlocks.BUTTON_CORAL_FAN.get())
         createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_BUTTON_CORAL_FAN.get())
+
+        createSilkTouchOnlyTable(HybridAquaticBlocks.ROSE_CORAL_BLOCK.get())
+        createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_ROSE_CORAL_BLOCK.get())
+        createSilkTouchOnlyTable(HybridAquaticBlocks.ROSE_CORAL.get())
+        createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_ROSE_CORAL.get())
+        createSilkTouchOnlyTable(HybridAquaticBlocks.ROSE_CORAL_FAN.get())
+        createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_ROSE_CORAL_FAN.get())
+
+        createSilkTouchOnlyTable(HybridAquaticBlocks.LEAF_CORAL_BLOCK.get())
+        createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_LEAF_CORAL_BLOCK.get())
+        createSilkTouchOnlyTable(HybridAquaticBlocks.LEAF_CORAL.get())
+        createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_LEAF_CORAL.get())
+        createSilkTouchOnlyTable(HybridAquaticBlocks.LEAF_CORAL_FAN.get())
+        createSilkTouchOnlyTable(HybridAquaticBlocks.DEAD_LEAF_CORAL_FAN.get())
 
         //endregion
 
