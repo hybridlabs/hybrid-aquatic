@@ -49,7 +49,9 @@ class OtterEntityModel : HybridAquaticMammalEntityModel<OtterEntity>("otter") {
         val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
         val body = animationProcessor.getBone(PartNames.BODY)
 
-        if (animatable.getAction() != OtterAction.FLOATING){
+        if (!animationState.isMoving && animatable.isInWater && !animatable.onGround() && animatable.getAction() == OtterAction.FLOATING) {
+            body?.rotX = Mth.lerp(0.1f, body.rotX, 0f)
+        } else {
             val head = animationProcessor.getBone("head")
 
             if (head != null) {
@@ -61,8 +63,6 @@ class OtterEntityModel : HybridAquaticMammalEntityModel<OtterEntity>("otter") {
 
             val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
             body?.rotX = xRot * -Mth.DEG_TO_RAD
-        } else if (animatable.isInWater && animatable.getAction() == OtterAction.FLOATING) {
-            body?.rotX = Mth.lerp(0.1f, body.rotX, 0f)
         }
     }
 }
