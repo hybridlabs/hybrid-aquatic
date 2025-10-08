@@ -103,15 +103,22 @@ class BoidGoal(
     }
 
     companion object {
-
         fun getNearbyEntitiesOfSameClass(mob: Mob): MutableList<out Mob> {
-            val predicate: Predicate<Mob> =
-                Predicate { other -> other != mob
-                        && (mob is VariantHolder<*>) && (other is VariantHolder<*>)
-                        && (mob as VariantHolder<*>).variant == (other as VariantHolder<*>).variant
+            val predicate = Predicate<Mob> { other ->
+                if (other == mob) return@Predicate false
+
+                if (mob is VariantHolder<*> && other is VariantHolder<*>) {
+                    return@Predicate mob.variant == other.variant
                 }
 
-            return mob.level().getEntitiesOfClass(mob.javaClass, mob.boundingBox.inflate(4.0, 4.0, 4.0), predicate)
+                other.type == mob.type
+            }
+
+            return mob.level().getEntitiesOfClass(
+                mob.javaClass,
+                mob.boundingBox.inflate(4.0, 4.0, 4.0),
+                predicate
+            )
         }
     }
 }
