@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.BiomeTags
+import net.minecraft.tags.FluidTags
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.Mth
 import net.minecraft.util.StringRepresentable
@@ -196,7 +197,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                     state.isMoving && getAction() == OtterAction.DIVING ->
                         state.setAndContinue(DefaultAnimations.SWIM)
 
-                    !state.isMoving && isInWater && !onGround() && getAction() == OtterAction.FLOATING ->
+                    !state.isMoving && getFluidHeight(FluidTags.WATER) > 0 && !onGround() && getAction() == OtterAction.FLOATING ->
                         state.setAndContinue(FLOAT_ANIMATION)
 
                     else ->
@@ -380,6 +381,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         private var swimTimer = 0L
         private val maxSwimTime = 300L
 
+
+
         init {
             // We set LOOK here as well as MOVE so the otter doesn't randomly follow its eyeline when swimming
             this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
@@ -488,6 +491,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
             this.flags = EnumSet.of(Flag.MOVE)
         }
 
+        override fun requiresUpdateEveryTick(): Boolean {
+            return true
+        }
+
         override fun canUse(): Boolean {
             return otter.isSwimming && !otter.onGround() && !otter.isUnderWater && otter.level().gameTime > nextFloatTime && otter.random.nextFloat() <= 0.3
         }
@@ -500,14 +507,14 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
             this.otter.navigation.stop()
             // Stop the otter in its tracks
             otter.deltaMovement = Vec3.ZERO
-            otter.setAction(OtterAction.FLOATING)
             this.floatingTimer = otter.random.nextInt(100, 300) + otter.level().gameTime
+            otter.setAction(OtterAction.FLOATING)
         }
 
         override fun stop() {
-            otter.setAction(OtterAction.IDLE)
             floatingTimer = 0
             nextFloatTime = otter.level().gameTime + minFloatDelay
+            otter.setAction(OtterAction.IDLE)
         }
     }
 
