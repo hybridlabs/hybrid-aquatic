@@ -12,7 +12,6 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.BiomeTags
-import net.minecraft.tags.FluidTags
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.Mth
 import net.minecraft.util.StringRepresentable
@@ -197,7 +196,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                     state.isMoving && getAction() == OtterAction.DIVING ->
                         state.setAndContinue(DefaultAnimations.SWIM)
 
-                    !state.isMoving && getFluidHeight(FluidTags.WATER) > 0 && !onGround() && getAction() == OtterAction.FLOATING ->
+                    !state.isMoving && isInWater && !onGround() && getAction() == OtterAction.FLOATING ->
                         state.setAndContinue(FLOAT_ANIMATION)
 
                     else ->
@@ -496,7 +495,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         }
 
         override fun canUse(): Boolean {
-            return otter.isSwimming && !otter.onGround() && !otter.isUnderWater && otter.level().gameTime > nextFloatTime && otter.random.nextFloat() <= 0.3
+            return otter.isInWater && !otter.onGround() && !otter.isUnderWater && otter.level().gameTime > nextFloatTime && otter.random.nextFloat() <= 0.3
         }
 
         override fun canContinueToUse(): Boolean {
@@ -551,7 +550,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     /* Extend LookControl to prevent the otter's xRot from being reset to zero every tick when underwater */
     internal class OtterLookControl(val otter: OtterEntity) : LookControl(otter) {
         override fun resetXRotOnTick(): Boolean {
-            if (otter.isUnderWater && otter.y < 62) return false
+            if (otter.isUnderWater && otter.y < otter.level().seaLevel -1) return false
             return super.resetXRotOnTick()
         }
 
