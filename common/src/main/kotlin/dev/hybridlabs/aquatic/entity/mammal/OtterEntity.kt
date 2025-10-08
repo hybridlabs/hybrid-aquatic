@@ -63,7 +63,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         // Setting WATER_BORDER to zero makes surface water blocks preferred
         setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0f)
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WALKABLE, 1.0f)
     }
 
     /**
@@ -373,9 +372,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
             super.start()
         }
 
-        override fun stop() {
-            super.stop()
-        }
     }
 
     /* Swimming goal for otters. Has a timeout to allow other goals to run */
