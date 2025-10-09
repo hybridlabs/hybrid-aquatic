@@ -32,10 +32,8 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.GOURAMI.get(),
             HybridAquaticEntityTypes.DANIO.get(),
             HybridAquaticEntityTypes.DISCUS.get(),
-            HybridAquaticEntityTypes.GOLDFISH.get(),
             HybridAquaticEntityTypes.BETTA.get(),
             HybridAquaticEntityTypes.TETRA.get(),
-            HybridAquaticEntityTypes.CARP.get(),
             HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
         ).forEach { registerShallowFish(it) }
 
@@ -69,6 +67,8 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.OPAH.get(),
         ).forEach { registerNightFish(it) }
 
+        registerWaterCreature(HybridAquaticEntityTypes.CARP.get(), CarpEntity::canSpawn)
+        registerWaterCreature(HybridAquaticEntityTypes.GOLDFISH.get(), GoldfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.CLOWNFISH.get(), ClownfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.PARROTFISH.get(), ParrotfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.SEAHORSE.get(), SeahorseEntity::canSpawn)

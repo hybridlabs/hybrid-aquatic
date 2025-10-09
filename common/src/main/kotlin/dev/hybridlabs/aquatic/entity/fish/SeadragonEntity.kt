@@ -1,11 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.ByIdMap
+import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
@@ -59,6 +62,17 @@ class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: Level)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 12.0)
+        }
+
+        fun canSpawn(
+            type: EntityType<out SeadragonEntity>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
+        ): Boolean {
+            return world.isWaterAt(pos) &&
+                    world.getBlockState(pos.below()).`is`(HybridAquaticBlockTags.KELPS)
         }
 
         val TYPE: EntityDataAccessor<Int> =
