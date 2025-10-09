@@ -164,10 +164,6 @@ object HybridAquaticBlocks {
         Block(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .strength(1.0F)
-                .sound(SoundType.CORAL_BLOCK)
         )
     }
 
@@ -178,9 +174,6 @@ object HybridAquaticBlocks {
             DEAD_LOPHELIA_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .strength(1.0F)
                 .sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -198,10 +191,6 @@ object HybridAquaticBlocks {
         Block(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_PINK)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .strength(1.0F)
-                .sound(SoundType.CORAL_BLOCK)
         )
     }
 
@@ -212,9 +201,6 @@ object HybridAquaticBlocks {
             DEAD_ROSE_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_PINK)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .strength(1.0F)
                 .sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -232,10 +218,6 @@ object HybridAquaticBlocks {
         Block(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_GREEN)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .strength(1.0F)
-                .sound(SoundType.CORAL_BLOCK)
         )
     }
 
@@ -246,9 +228,6 @@ object HybridAquaticBlocks {
             DEAD_LEAF_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_GREEN)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .strength(1.0F)
                 .sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -266,10 +245,6 @@ object HybridAquaticBlocks {
         Block(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .strength(1.0F)
-                .sound(SoundType.CORAL_BLOCK)
         )
     }
 
@@ -280,9 +255,6 @@ object HybridAquaticBlocks {
             DEAD_SUN_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_ORANGE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .strength(1.0F)
                 .sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -299,10 +271,6 @@ object HybridAquaticBlocks {
         Block(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .strength(1.0F)
-                .sound(SoundType.CORAL_BLOCK)
         )
     }
 
@@ -313,9 +281,6 @@ object HybridAquaticBlocks {
             DEAD_BUTTON_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .strength(1.0F)
                 .sound(SoundType.CORAL_BLOCK)
         )
     }
@@ -333,9 +298,6 @@ object HybridAquaticBlocks {
         Block(
             Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops().strength(1.0F)
-                .sound(SoundType.CORAL_BLOCK)
         )
     }
 
@@ -346,9 +308,6 @@ object HybridAquaticBlocks {
             DEAD_THORN_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.COLOR_BLACK)
-                .instrument(NoteBlockInstrument.BASEDRUM)
-                .requiresCorrectToolForDrops()
-                .strength(1.0F)
                 .sound(SoundType.CORAL_BLOCK)
         )
     }
