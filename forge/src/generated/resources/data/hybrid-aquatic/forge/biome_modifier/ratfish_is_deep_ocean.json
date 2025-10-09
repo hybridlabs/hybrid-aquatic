@@ -1,6 +1,6 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#hybrid-aquatic:deep_temperate_oceans",
+  "biomes": "#minecraft:is_deep_ocean",
   "spawners": {
     "type": "hybrid-aquatic:ratfish",
     "maxCount": 3,
