@@ -9,7 +9,6 @@ import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.core.registries.BuiltInRegistries
@@ -422,13 +421,13 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add("item.minecraft.tipped_arrow.effect.$potion", "Arrow of $translation")
         }
 
-        mapOf(
-            HybridAquaticPaintings.TEST_PAINTING1 to listOf("Test Painting", "Aqua"),
-            HybridAquaticPaintings.TEST_PAINTING2 to listOf("Test Huge Painting", "Aqua")
-        ).forEach { (painting, name) ->
-            builder.add("painting.hybrid-aquatic.${painting.path}.title", name[0])
-            builder.add("painting.hybrid-aquatic.${painting.path}.author", name[1])
-        }
+//        mapOf(
+//            HybridAquaticPaintings.TEST_PAINTING1 to listOf("Test Painting", "Aqua"),
+//            HybridAquaticPaintings.TEST_PAINTING2 to listOf("Test Huge Painting", "Aqua")
+//        ).forEach { (painting, name) ->
+//            builder.add("painting.hybrid-aquatic.${painting.path}.title", name[0])
+//            builder.add("painting.hybrid-aquatic.${painting.path}.author", name[1])
+//        }
     }
 
     private fun generateEntities(builder: TranslationBuilder) {
