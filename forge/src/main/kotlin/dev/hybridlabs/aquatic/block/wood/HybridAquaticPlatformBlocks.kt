@@ -1,6 +1,9 @@
 package dev.hybridlabs.aquatic.block.wood
 
+import dev.hybridlabs.aquatic.block.CattailBlock
+import dev.hybridlabs.aquatic.block.DunegrassBlock
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks.register
+import dev.hybridlabs.aquatic.block.TallDunegrassBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.BlockGetter
@@ -10,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockSetType
 
-object HybridAquaticWoodBlocks {
+object HybridAquaticPlatformBlocks {
     val DRIFTWOOD_LOG = register("driftwood_log") {
         BaseWoodBlock(
             Properties.copy(
@@ -168,5 +171,9 @@ object HybridAquaticWoodBlocks {
             PressurePlateBlock.Sensitivity.EVERYTHING, Properties.copy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.OAK
         )
     }
+
+    val DUNEGRASS = register("dunegrass") { DunegrassBlock(Properties.copy(Blocks.GRASS)) }
+    val TALL_DUNEGRASS = register("tall_dunegrass") { TallDunegrassBlock(Properties.copy(Blocks.TALL_GRASS)) }
+    val CATTAIL = register("cattail") { CattailBlock(Properties.copy(Blocks.TALL_GRASS)) }
 
 }

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.render.block
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.minecraft.client.renderer.RenderType
 
@@ -9,9 +9,9 @@ object HybridAquaticBlockRenderers {
     fun registerRenderShapes() {
         ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.cutout(),
-            HybridAquaticBlocks.DUNEGRASS.get(),
-            HybridAquaticBlocks.TALL_DUNEGRASS.get(),
-            HybridAquaticBlocks.CATTAIL.get(),
+            HybridAquaticPlatformBlocks.DUNEGRASS.get(),
+            HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get(),
+            HybridAquaticPlatformBlocks.CATTAIL.get(),
             HybridAquaticBlocks.GLOWSLIME_BLOCK.get(),
 
             HybridAquaticBlocks.RED_ALGAE.get(),
@@ -78,8 +78,8 @@ object HybridAquaticBlockRenderers {
             HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get(),
             HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN.get(),
 
-            HybridAquaticWoodBlocks.DRIFTWOOD_DOOR.get(),
-            HybridAquaticWoodBlocks.DRIFTWOOD_TRAPDOOR.get(),
+            HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get(),
+            HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get(),
 
             HybridAquaticBlocks.GLOWSTICK.get(),
             HybridAquaticBlocks.WALL_GLOWSTICK.get(),

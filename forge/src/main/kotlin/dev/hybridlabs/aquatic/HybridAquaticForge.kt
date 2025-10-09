@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BASKING_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BULL_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.FRILLED_SHARK_PLUSHIE
@@ -24,7 +24,7 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.item.HybridAquaticWoodItems
+import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
 import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
@@ -34,11 +34,14 @@ import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
+import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures.register
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import net.minecraft.world.entity.MobCategory
+import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.minecraftforge.client.event.EntityRenderersEvent
 import net.minecraftforge.common.world.StructureModifier
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
@@ -66,7 +69,7 @@ object HybridAquaticForge {
         registerStructureModifiers()
 
         HybridAquaticBlocks
-        HybridAquaticWoodBlocks
+        HybridAquaticPlatformBlocks
         HybridAquaticEntityTypes
         HybridAquaticBlockEntityTypes
         HybridAquaticPaintings
@@ -76,13 +79,14 @@ object HybridAquaticForge {
         HybridAquaticMobEffects
 
         HybridAquaticItems
-        HybridAquaticWoodItems
+        HybridAquaticPlatformItems
         HybridAquaticItemGroups
 
         HybridAquaticEnchantments
         HybridAquaticPotions
 
         HybridAquaticFeatures
+        HybridAquaticFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
 

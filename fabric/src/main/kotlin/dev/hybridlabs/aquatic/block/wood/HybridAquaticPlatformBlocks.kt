@@ -1,11 +1,17 @@
 package dev.hybridlabs.aquatic.block.wood
 
+import dev.hybridlabs.aquatic.block.BaseCattailBlock
+import dev.hybridlabs.aquatic.block.BaseDunegrassBlock
+import dev.hybridlabs.aquatic.block.BaseTallDunegrassBlock
+import dev.hybridlabs.aquatic.block.CattailBlock
+import dev.hybridlabs.aquatic.block.DunegrassBlock
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks.register
+import dev.hybridlabs.aquatic.block.TallDunegrassBlock
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.minecraft.world.level.block.state.properties.BlockSetType
 
-object HybridAquaticWoodBlocks {
+object HybridAquaticPlatformBlocks {
     val DRIFTWOOD_LOG = register("driftwood_log") { RotatedPillarBlock(Properties.copy((Blocks.OAK_PLANKS))) }
     val STRIPPED_DRIFTWOOD_LOG =
         register("stripped_driftwood_log") { RotatedPillarBlock(Properties.copy((Blocks.OAK_PLANKS))) }
@@ -39,4 +45,7 @@ object HybridAquaticWoodBlocks {
     val DRIFTWOOD_TRAPDOOR =
         register("driftwood_trapdoor") { TrapDoorBlock(Properties.copy(Blocks.OAK_TRAPDOOR), BlockSetType.OAK) }
 
+    val DUNEGRASS = register("dunegrass") { DunegrassBlock(Properties.copy(Blocks.GRASS)) }
+    val TALL_DUNEGRASS = register("tall_dunegrass") { TallDunegrassBlock(Properties.copy(Blocks.TALL_GRASS)) }
+    val CATTAIL = register("cattail") { CattailBlock(Properties.copy(Blocks.TALL_GRASS)) }
 }

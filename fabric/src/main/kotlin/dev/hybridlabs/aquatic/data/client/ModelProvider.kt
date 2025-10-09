@@ -4,9 +4,10 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.core.registries.BuiltInRegistries
@@ -99,22 +100,22 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             ).forEach(generator::createTrivialCube)
 
             // wood
-            val driftwoodPool = family(HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get())
+            val driftwoodPool = family(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
 
-            woodProvider(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get()).log(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get())
-                .wood(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get())
-            woodProvider(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get()).log(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get())
-                .wood(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
+            woodProvider(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get()).log(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get())
+                .wood(HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get())
+            woodProvider(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get()).log(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get())
+                .wood(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
 
-            createDoor(HybridAquaticWoodBlocks.DRIFTWOOD_DOOR.get())
-            createTrapdoor(HybridAquaticWoodBlocks.DRIFTWOOD_TRAPDOOR.get())
+            createDoor(HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get())
+            createTrapdoor(HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get())
 
-            driftwoodPool.stairs(HybridAquaticWoodBlocks.DRIFTWOOD_STAIRS.get())
-            driftwoodPool.slab(HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get())
-            driftwoodPool.button(HybridAquaticWoodBlocks.DRIFTWOOD_BUTTON.get())
-            driftwoodPool.pressurePlate(HybridAquaticWoodBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
-            driftwoodPool.fence(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
-            driftwoodPool.fenceGate(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get())
+            driftwoodPool.stairs(HybridAquaticPlatformBlocks.DRIFTWOOD_STAIRS.get())
+            driftwoodPool.slab(HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get())
+            driftwoodPool.button(HybridAquaticPlatformBlocks.DRIFTWOOD_BUTTON.get())
+            driftwoodPool.pressurePlate(HybridAquaticPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
+            driftwoodPool.fence(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE.get())
+            driftwoodPool.fenceGate(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE_GATE.get())
 
             createNormalTorch(HybridAquaticBlocks.GLOWSTICK.get(), HybridAquaticBlocks.WALL_GLOWSTICK.get())
 
@@ -214,8 +215,8 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     override fun generateItemModels(generator: ItemModelGenerators) {
         setOf(
             HybridAquaticItems.BUOY.get(),
-            HybridAquaticItems.DUNEGRASS.get(),
-            HybridAquaticItems.CATTAIL.get(),
+            HybridAquaticPlatformItems.DUNEGRASS.get(),
+            HybridAquaticPlatformItems.CATTAIL.get(),
             HybridAquaticItems.RED_ALGAE.get(),
             HybridAquaticItems.SEA_LETTUCE.get(),
             HybridAquaticItems.SARGASSUM.get(),

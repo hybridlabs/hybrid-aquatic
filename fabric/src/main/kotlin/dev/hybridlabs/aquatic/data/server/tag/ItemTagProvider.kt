@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.item.HybridAquaticWoodItems
+import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
@@ -28,43 +28,43 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         //#region wood
         getOrCreateTagBuilder(ItemTags.PLANKS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get().asItem())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get().asItem())
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get().asItem())
-            .add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get().asItem())
-            .add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get().asItem())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get().asItem())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get().asItem())
+            .add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get().asItem())
+            .add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get().asItem())
 
         getOrCreateTagBuilder(HybridAquaticItemTags.DRIFTWOOD_LOG_WOOD)
-            .add(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
-            .add(HybridAquaticWoodItems.STRIPPED_DRIFTWOOD_LOG.get())
-            .add(HybridAquaticWoodItems.DRIFTWOOD_WOOD.get())
-            .add(HybridAquaticWoodItems.STRIPPED_DRIFTWOOD_WOOD.get())
+            .add(HybridAquaticPlatformItems.DRIFTWOOD_LOG.get())
+            .add(HybridAquaticPlatformItems.STRIPPED_DRIFTWOOD_LOG.get())
+            .add(HybridAquaticPlatformItems.DRIFTWOOD_WOOD.get())
+            .add(HybridAquaticPlatformItems.STRIPPED_DRIFTWOOD_WOOD.get())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_FENCES)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get().asItem())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.FENCE_GATES)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get().asItem())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE_GATE.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_DOORS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get().asItem())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE_GATE.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_BUTTON.get().asItem())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_BUTTON.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_PRESSURE_PLATE.get().asItem())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_SLABS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get().asItem())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_STAIRS.get().asItem())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_STAIRS.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_TRAPDOOR.get().asItem())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.SWORDS)
             .add(HybridAquaticItems.SEASHELL_SPEAR.get())

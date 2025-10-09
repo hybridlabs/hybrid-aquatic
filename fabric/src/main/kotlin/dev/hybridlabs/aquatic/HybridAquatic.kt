@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.config.ConfigHelper
 import dev.hybridlabs.aquatic.config.HybridAquaticConfig
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
@@ -13,7 +13,7 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.item.HybridAquaticWoodItems
+import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
 import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
@@ -22,6 +22,7 @@ import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades.registerCustomTrades
+import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
 import dev.hybridlabs.aquatic.world.gen.feature.FeatureBiomeModifications
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
@@ -39,6 +40,7 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.npc.VillagerTrades
 import net.minecraft.world.item.BlockItem
+import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 
 object HybridAquatic : ModInitializer {
 
@@ -50,7 +52,7 @@ object HybridAquatic : ModInitializer {
         CommonClass.init()
 
         HybridAquaticBlocks
-        HybridAquaticWoodBlocks
+        HybridAquaticPlatformBlocks
         HybridAquaticEntityTypes
         HybridAquaticBlockEntityTypes
         HybridAquaticPaintings
@@ -61,12 +63,13 @@ object HybridAquatic : ModInitializer {
         HybridAquaticPotions.registerPotionRecipes()
 
         HybridAquaticItems
-        HybridAquaticWoodItems
+        HybridAquaticPlatformItems
         HybridAquaticItemGroups
 
         HybridAquaticEnchantments
 
         HybridAquaticFeatures
+        HybridAquaticFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
 
@@ -111,27 +114,27 @@ object HybridAquatic : ModInitializer {
     }
 
     private fun registerFlammables(registry: FlammableBlockRegistry) {
-        registry.add(HybridAquaticBlocks.DUNEGRASS.get(), 5, 5)
-        registry.add(HybridAquaticBlocks.TALL_DUNEGRASS.get(), 5, 5)
-        registry.add(HybridAquaticBlocks.CATTAIL.get(), 5, 5)
-        registry.add(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get(), 5, 5)
-        registry.add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get(), 5, 5)
-        registry.add(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get(), 5, 5)
-        registry.add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get(), 5, 5)
-        registry.add(HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get(), 5, 20)
-        registry.add(HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get(), 5, 20)
-        registry.add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get(), 5, 20)
-        registry.add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get(), 5, 20)
+        registry.add(HybridAquaticPlatformBlocks.DUNEGRASS.get(), 5, 5)
+        registry.add(HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get(), 5, 5)
+        registry.add(HybridAquaticPlatformBlocks.CATTAIL.get(), 5, 5)
+        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get(), 5, 5)
+        registry.add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get(), 5, 5)
+        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get(), 5, 5)
+        registry.add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get(), 5, 5)
+        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get(), 5, 20)
+        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get(), 5, 20)
+        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE.get(), 5, 20)
+        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(), 5, 20)
     }
 
     private fun registerStrippables() {
         StrippableBlockRegistry.register(
-            HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get(),
-            HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get()
+            HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get(),
+            HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get()
         )
         StrippableBlockRegistry.register(
-            HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get(),
-            HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get()
+            HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get(),
+            HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get()
         )
     }
 

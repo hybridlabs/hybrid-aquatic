@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.data.server.seamessage.SeaMessageProvider
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
@@ -164,10 +164,10 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.RED_ALGAE.get() to "Red Algae",
             HybridAquaticBlocks.TALL_RED_ALGAE.get() to "Tall Red Algae",
 
-            HybridAquaticBlocks.DUNEGRASS.get() to "Dunegrass",
-            HybridAquaticBlocks.TALL_DUNEGRASS.get() to "Tall Dunegrass",
+            HybridAquaticPlatformBlocks.DUNEGRASS.get() to "Dunegrass",
+            HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get() to "Tall Dunegrass",
 
-            HybridAquaticBlocks.CATTAIL.get() to "Cattail",
+            HybridAquaticPlatformBlocks.CATTAIL.get() to "Cattail",
 
             HybridAquaticBlocks.SARGASSUM.get() to "Sargassum",
             HybridAquaticBlocks.SARGASSUM_PLANT.get() to "Sargassum Plant",
@@ -223,19 +223,19 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.GLOWSLIME_BLOCK.get() to "Glowslime Block",
             HybridAquaticBlocks.PEARL_BLOCK.get() to "Pearl Block",
             HybridAquaticBlocks.BLACK_PEARL_BLOCK.get() to "Black Pearl Block",
-            HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get() to "Driftwood Log",
-            HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get() to "Driftwood Wood",
-            HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get() to "Stripped Driftwood Log",
-            HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get() to "Stripped Driftwood Wood",
-            HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get() to "Driftwood Planks",
-            HybridAquaticWoodBlocks.DRIFTWOOD_STAIRS.get() to "Driftwood Stairs",
-            HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get() to "Driftwood Slab",
-            HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get() to "Driftwood Fence",
-            HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get() to "Driftwood Fence Gate",
-            HybridAquaticWoodBlocks.DRIFTWOOD_DOOR.get() to "Driftwood Door",
-            HybridAquaticWoodBlocks.DRIFTWOOD_TRAPDOOR.get() to "Driftwood Trapdoor",
-            HybridAquaticWoodBlocks.DRIFTWOOD_PRESSURE_PLATE.get() to "Driftwood Pressure Plate",
-            HybridAquaticWoodBlocks.DRIFTWOOD_BUTTON.get() to "Driftwood Button",
+            HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get() to "Driftwood Log",
+            HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get() to "Driftwood Wood",
+            HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get() to "Stripped Driftwood Log",
+            HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get() to "Stripped Driftwood Wood",
+            HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get() to "Driftwood Planks",
+            HybridAquaticPlatformBlocks.DRIFTWOOD_STAIRS.get() to "Driftwood Stairs",
+            HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get() to "Driftwood Slab",
+            HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE.get() to "Driftwood Fence",
+            HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE_GATE.get() to "Driftwood Fence Gate",
+            HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get() to "Driftwood Door",
+            HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get() to "Driftwood Trapdoor",
+            HybridAquaticPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get() to "Driftwood Pressure Plate",
+            HybridAquaticPlatformBlocks.DRIFTWOOD_BUTTON.get() to "Driftwood Button",
             HybridAquaticBlocks.THERMAL_VENT.get() to "Thermal Vent",
             HybridAquaticBlocks.TUBE_WORM.get() to "Tube Worm",
         ).forEach { (block, translation) ->

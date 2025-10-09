@@ -5,7 +5,7 @@ package dev.hybridlabs.aquatic
 import com.mojang.brigadier.CommandDispatcher
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.client.command.RandomFishCommand
 import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
@@ -109,10 +109,10 @@ object HybridAquaticClient : ClientModInitializer {
         )
         ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.cutout(),
-            HybridAquaticBlocks.DUNEGRASS.get(),
-            HybridAquaticBlocks.TALL_DUNEGRASS.get(),
+            HybridAquaticPlatformBlocks.DUNEGRASS.get(),
+            HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get(),
 
-            HybridAquaticBlocks.CATTAIL.get(),
+            HybridAquaticPlatformBlocks.CATTAIL.get(),
 
             HybridAquaticBlocks.RED_ALGAE.get(),
             HybridAquaticBlocks.TALL_RED_ALGAE.get(),
@@ -178,8 +178,8 @@ object HybridAquaticClient : ClientModInitializer {
             HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get(),
             HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN.get(),
 
-            HybridAquaticWoodBlocks.DRIFTWOOD_DOOR.get(),
-            HybridAquaticWoodBlocks.DRIFTWOOD_TRAPDOOR.get(),
+            HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get(),
+            HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get(),
             HybridAquaticBlocks.GLOWSTICK.get(),
             HybridAquaticBlocks.WALL_GLOWSTICK.get(),
         )

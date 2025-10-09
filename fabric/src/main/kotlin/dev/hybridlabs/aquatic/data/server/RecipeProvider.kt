@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.data.server
 
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -261,35 +261,35 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         slab(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get(),
-            HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get()
+            HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get(),
+            HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
         woodFromLogs(
             exporter,
-            HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get(),
-            HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get()
+            HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get(),
+            HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get()
         )
         planksFromLog(
             exporter,
-            HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get(),
+            HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get(),
             HybridAquaticItemTags.DRIFTWOOD_LOG_WOOD,
             4
         )
         pressurePlate(
             exporter,
-            HybridAquaticWoodBlocks.DRIFTWOOD_PRESSURE_PLATE.get(),
-            HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get()
+            HybridAquaticPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get(),
+            HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
         ShapelessRecipeBuilder.shapeless(
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticWoodBlocks.DRIFTWOOD_BUTTON.get(),
+            HybridAquaticPlatformBlocks.DRIFTWOOD_BUTTON.get(),
             1
         )
-            .requires(HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get())
+            .requires(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
             .unlockedBy(
                 "has_driftwood_planks",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
             )
             .save(exporter)
 

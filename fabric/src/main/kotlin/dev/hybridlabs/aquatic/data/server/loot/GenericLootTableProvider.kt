@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.item.HybridAquaticWoodItems
+import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
@@ -42,7 +42,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         fun driftwoodPool(): LootPool.Builder {
             return LootPool.lootPool()
                 .`when`(LootItemRandomChanceCondition.randomChance(0.5f))
-                .add(LootItem.lootTableItem(HybridAquaticWoodItems.DRIFTWOOD_LOG.get())
+                .add(LootItem.lootTableItem(HybridAquaticPlatformItems.DRIFTWOOD_LOG.get())
                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(16f, 32f))))
         }
 

@@ -19,7 +19,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION")
-class DunegrassBlock(settings: Properties) : BushBlock(settings), BonemealableBlock {
+open class BaseDunegrassBlock(settings: Properties) : BushBlock(settings), BonemealableBlock {
     override fun getShape(
         state: BlockState,
         world: BlockGetter,
@@ -37,15 +37,12 @@ class DunegrassBlock(settings: Properties) : BushBlock(settings), BonemealableBl
         return true
     }
 
-    override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
-        val blockState = HybridAquaticBlocks.TALL_DUNEGRASS.get().defaultBlockState()
-        val blockStateUpper = blockState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER)
-        val blockPosAbove = pos.above()
-
-        if (world.isEmptyBlock(blockPosAbove)) {
-            world.setBlock(pos, blockState, 2)
-            world.setBlock(blockPosAbove, blockStateUpper, 2)
-        }
+    override fun performBonemeal(
+        level: ServerLevel,
+        random: RandomSource,
+        pos: BlockPos,
+        state: BlockState
+    ) {
     }
 
     override fun mayPlaceOn(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {

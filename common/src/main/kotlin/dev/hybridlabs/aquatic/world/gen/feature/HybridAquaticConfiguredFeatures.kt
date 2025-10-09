@@ -29,7 +29,7 @@ object HybridAquaticConfiguredFeatures {
     val THERMAL_VENT_PATCH = register("thermal_vent_patch")
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
 
-    private fun register(id: String): ResourceKey<ConfiguredFeature<*, *>> {
+    fun register(id: String): ResourceKey<ConfiguredFeature<*, *>> {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, CommonClass.locate(id))
     }
 }

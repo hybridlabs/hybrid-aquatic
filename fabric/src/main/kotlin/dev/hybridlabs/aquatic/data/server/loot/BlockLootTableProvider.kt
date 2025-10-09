@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.MESSAGE_KEY
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.VARIANT_KEY
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem.Companion.SEA_MESSAGE_KEY
@@ -57,7 +57,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
-        add(HybridAquaticBlocks.DUNEGRASS.get()) { block ->
+        add(HybridAquaticPlatformBlocks.DUNEGRASS.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
@@ -65,7 +65,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
-        add(HybridAquaticBlocks.CATTAIL.get()) { block ->
+        add(HybridAquaticPlatformBlocks.CATTAIL.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
@@ -143,22 +143,22 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         }
 
         //region wood
-        createSingleItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get())
-        createSingleItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get())
-        createSingleItemTable(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get())
-        createSingleItemTable(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
-        createSingleItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get())
-        createSingleItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_STAIRS.get())
-        createSingleItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_TRAPDOOR.get())
-        createSingleItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
-        createSingleItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_BUTTON.get())
-        createSingleItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
-        createSingleItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get())
+        createSingleItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get())
+        createSingleItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get())
+        createSingleItemTable(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get())
+        createSingleItemTable(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
+        createSingleItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
+        createSingleItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_STAIRS.get())
+        createSingleItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get())
+        createSingleItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
+        createSingleItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_BUTTON.get())
+        createSingleItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE.get())
+        createSingleItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE_GATE.get())
         add(
-            HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get(),
-            createSlabItemTable(HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get())
+            HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get(),
+            createSlabItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get())
         )
-        add(HybridAquaticWoodBlocks.DRIFTWOOD_DOOR.get(), createDoorTable(HybridAquaticWoodBlocks.DRIFTWOOD_DOOR.get()))
+        add(HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get(), createDoorTable(HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get()))
 
         createSingleItemTable(HybridAquaticBlocks.GLOWSTICK.get())
 

@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.data.server.tag
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticWoodBlocks
+import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -42,16 +42,16 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.KELP_PLANT)
 
         getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE.get())
 
         getOrCreateTagBuilder(BlockTags.FENCE_GATES)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE_GATE.get())
 
         getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get())
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_WOOD.get())
-            .add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get())
-            .add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get())
+            .add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get())
+            .add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
 
         getOrCreateTagBuilder(BlockTags.UNDERWATER_BONEMEALS)
             .add(HybridAquaticBlocks.RED_ALGAE.get())
@@ -124,35 +124,35 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.CHERRY_CRATE.get())
 
         getOrCreateTagBuilder(BlockTags.LOGS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_LOG.get())
-            .add(HybridAquaticWoodBlocks.STRIPPED_DRIFTWOOD_LOG.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get())
+            .add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get())
 
         getOrCreateTagBuilder(BlockTags.WOODEN_SLABS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_SLAB.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get())
 
         getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_STAIRS.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_STAIRS.get())
 
         getOrCreateTagBuilder(BlockTags.WOODEN_DOORS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_DOOR.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get())
 
         getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE.get())
 
         getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_TRAPDOOR.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get())
 
         getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_BUTTON.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_BUTTON.get())
 
         getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
 
         getOrCreateTagBuilder(BlockTags.FENCE_GATES)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE_GATE.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE_GATE.get())
 
         getOrCreateTagBuilder(BlockTags.PLANKS)
-            .add(HybridAquaticWoodBlocks.DRIFTWOOD_PLANKS.get())
+            .add(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
 
         getOrCreateTagBuilder(BlockTags.UNDERWATER_BONEMEALS)
             .add(HybridAquaticBlocks.RED_ALGAE.get())

@@ -147,10 +147,6 @@ object HybridAquaticBlocks {
         )
     }
 
-    val DUNEGRASS = register("dunegrass") { DunegrassBlock(Properties.copy(Blocks.GRASS)) }
-    val TALL_DUNEGRASS = register("tall_dunegrass") { TallDunegrassBlock(Properties.copy(Blocks.TALL_GRASS)) }
-
-    val CATTAIL = register("cattail") { CattailBlock(Properties.copy(Blocks.TALL_GRASS)) }
 
     val RED_ALGAE = register("red_algae") { RedAlgaeBlock(Properties.copy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
     val TALL_RED_ALGAE = register("tall_red_algae") { TallRedAlgaeBlock(Properties.copy(Blocks.TALL_SEAGRASS).offsetType(BlockBehaviour.OffsetType.NONE)) }
