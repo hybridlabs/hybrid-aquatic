@@ -33,6 +33,14 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.ANEMONE.get())
             .add(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get())
 
+        getOrCreateTagBuilder(HybridAquaticBlockTags.KELPS)
+            .add(HybridAquaticBlocks.BULL_KELP.get())
+            .add(HybridAquaticBlocks.BULL_KELP_PLANT.get())
+            .add(HybridAquaticBlocks.SARGASSUM.get())
+            .add(HybridAquaticBlocks.SARGASSUM_PLANT.get())
+            .add(Blocks.KELP)
+            .add(Blocks.KELP_PLANT)
+
         getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
             .add(HybridAquaticWoodBlocks.DRIFTWOOD_FENCE.get())
 
