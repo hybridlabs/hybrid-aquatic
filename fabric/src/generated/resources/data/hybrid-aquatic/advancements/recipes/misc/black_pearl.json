@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_glowslime": {
+    "has_black_pearl_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "hybrid-aquatic:glowslime"
+              "hybrid-aquatic:black_pearl_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid-aquatic:glowslime_block"
+        "recipe": "hybrid-aquatic:black_pearl"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_glowslime",
+      "has_black_pearl_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "hybrid-aquatic:glowslime_block"
+      "hybrid-aquatic:black_pearl"
     ]
   },
   "sends_telemetry_event": false

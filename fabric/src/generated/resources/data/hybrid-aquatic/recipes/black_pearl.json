@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "building",
+  "category": "misc",
   "ingredients": [
     {
-      "item": "hybrid-aquatic:glowslime_block"
+      "item": "hybrid-aquatic:black_pearl_block"
     }
   ],
   "result": {
     "count": 9,
-    "item": "hybrid-aquatic:glowslime"
+    "item": "hybrid-aquatic:black_pearl"
   }
 }

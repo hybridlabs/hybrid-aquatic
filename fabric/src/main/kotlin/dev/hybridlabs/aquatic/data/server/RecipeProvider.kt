@@ -44,6 +44,18 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
+        ShapelessRecipeBuilder.shapeless(
+            RecipeCategory.MISC,
+            HybridAquaticItems.PEARL.get(),
+            9
+        )
+            .requires(HybridAquaticItems.PEARL_BLOCK.get())
+            .unlockedBy(
+                "has_pearl_block",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PEARL_BLOCK.get())
+            )
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.BLACK_PEARL_BLOCK.get())
             .pattern("PPP")
             .pattern("PPP")
@@ -55,16 +67,40 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
+        ShapelessRecipeBuilder.shapeless(
+            RecipeCategory.MISC,
+            HybridAquaticItems.BLACK_PEARL.get(),
+            9
+        )
+            .requires(HybridAquaticItems.BLACK_PEARL_BLOCK.get())
+            .unlockedBy(
+                "has_black_pearl_block",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.BLACK_PEARL_BLOCK.get())
+            )
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.GLOWSLIME_BLOCK.get())
             .pattern("SSS")
             .pattern("SSS")
             .pattern("SSS")
             .define('S', HybridAquaticItems.GLOWSLIME.get())
             .unlockedBy(
-                "has_glow_slime",
+                "has_glowslime",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME.get())
             )
             .save(exporter)
+
+        ShapelessRecipeBuilder.shapeless(
+            RecipeCategory.MISC,
+            HybridAquaticItems.GLOWSLIME.get(),
+            9
+        )
+            .requires(HybridAquaticItems.GLOWSLIME_BLOCK.get())
+            .unlockedBy(
+                "has_glowslime_block",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME_BLOCK.get())
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_block"))
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.RAFT.get(), 2)
             .pattern("SS ")
