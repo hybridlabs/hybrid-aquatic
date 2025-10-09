@@ -40,7 +40,7 @@ class SeaMessageProvider(output: FabricDataOutput, registriesFuture: Completable
             GeneratedSeaMessageData("threats", "Try to counter unanticipated threats by anticipating them", "DaDolphin", englishTitle = "Seamoth"),
             GeneratedSeaMessageData("warranty", "We've been trying to reach you about your car's extended warranty.", englishTitle = "IMPORTANT: PLEASE READ"),
             GeneratedSeaMessageData("poke", "I like cheese", "Poke", englishTitle = "Cheese"),
-            GeneratedSeaMessageData("gerson", "Im old!", "Gerson Boom", englishTitle = "Hammer Of Justicec"),
+            GeneratedSeaMessageData("gerson", "Im old!", "Gerson Boom", englishTitle = "Hammer Of Justice"),
             GeneratedSeaMessageData("one_piece", "THE ONE PIECE IS REAL", "Poke", englishTitle = "One Piece"),
             GeneratedSeaMessageData("mylo", "Mylo, you are the best friend I could have ever hoped to have. \nRest in peace, my sweet prince. I hope you have sweet dreams and find the peace you deserve.", "MysticKoko", englishTitle = "The Best Boy"),
             GeneratedSeaMessageData("womp_womp", "womp womp", "MrPress", englishTitle = "Catchphrase"),
