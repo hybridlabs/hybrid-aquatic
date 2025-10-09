@@ -4,12 +4,11 @@ import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
-import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments;
-import dev.hybridlabs.aquatic.enchantment.LiveCatchEnchantment;
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -25,11 +24,11 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -38,8 +37,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.HashMap;
 
 @Mixin(FishingHook.class)
 public abstract class FishingBobberEntityMixin extends Entity implements CustomFishingBobberEntityData {
@@ -133,24 +130,6 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
         }
 
         return instance;
-    }
-
-    // Replaces item that spawns when you fish a fish with a fish entity
-    @Inject(method = "retrieve", at = @At(value = "NEW", target = "Lnet/minecraft/world/entity/item/ItemEntity;"))
-    private void spawnFishEntity(ItemStack usedItem, CallbackInfoReturnable<Integer> cir,
-                                 @Local(ordinal = 1) LocalRef<ItemStack> itemInIterator) {
-        if (EnchantmentHelper.getItemEnchantmentLevel(HybridAquaticEnchantments.INSTANCE.getLIVECATCH().get(),
-                usedItem) > 0) {
-            HashMap<? super Object, ? super Object> ITEM_TO_ENTITY =
-                    LiveCatchEnchantment.Companion.getITEM_TO_ENTITYTYPE();
-            var entityType = ITEM_TO_ENTITY.get(itemInIterator.get().getItem());
-
-            if (entityType != null) {
-                createAndLaunchEntityAtPlayer((EntityType<?>) entityType);
-
-                itemInIterator.set(ItemStack.EMPTY);
-            }
-        }
     }
 
     @Unique

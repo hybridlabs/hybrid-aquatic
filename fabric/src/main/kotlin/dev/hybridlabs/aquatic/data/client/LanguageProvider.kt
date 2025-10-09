@@ -5,7 +5,6 @@ import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.data.server.seamessage.SeaMessageProvider
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
-import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
@@ -393,13 +392,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.MOON_JELLYFISH_HAT.get().descriptionId to "Made by Jakotens",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".description"), translation)
-        }
-
-        // enchantments
-        mapOf(
-            HybridAquaticEnchantments.LIVECATCH.get() to "Live Catch",
-        ).forEach { (enchantment, translation) ->
-            builder.add(enchantment, translation)
         }
 
         mapOf(

@@ -2,10 +2,10 @@
 
 package dev.hybridlabs.aquatic.data.server.worldgen
 
+import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.world.gen.feature.*
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures.register
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.Direction
@@ -73,7 +73,7 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        val GREEN = entries.add(
+        entries.add(
             HybridAquaticConfiguredFeatures.GREEN_ANEMONE_PATCH,
             ConfiguredFeature(
                 Feature.NO_BONEMEAL_FLOWER,
@@ -113,11 +113,10 @@ class ConfiguredFeatureProvider(
         )
 
 
-        val DUNEGRASS_PATCH = register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
         entries.add(
             HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH,
             ConfiguredFeature(
-                DUNEGRASS_PATCH.get(), ProbabilityFeatureConfiguration(
+                HybridAquatic.DUNEGRASS_PATCH.get(), ProbabilityFeatureConfiguration(
                     0.5f
                 )
             )

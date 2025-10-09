@@ -8,7 +8,6 @@ import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.config.ConfigHelper
 import dev.hybridlabs.aquatic.config.HybridAquaticConfig
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
-import dev.hybridlabs.aquatic.enchantment.HybridAquaticEnchantments
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
@@ -43,6 +42,7 @@ import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 
 object HybridAquatic : ModInitializer {
+    val DUNEGRASS_PATCH = HybridAquaticFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
 
     private val logger = Constants.LOG
 
@@ -66,10 +66,7 @@ object HybridAquatic : ModInitializer {
         HybridAquaticPlatformItems
         HybridAquaticItemGroups
 
-        HybridAquaticEnchantments
-
         HybridAquaticFeatures
-        HybridAquaticFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
 
