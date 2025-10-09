@@ -359,7 +359,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.BARBED_HOOK.get())
             )
             .unlockedBy(
-                "has_glow_slime",
+                "has_glowslime",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME.get())
             )
             .save(exporter)
@@ -415,14 +415,14 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .requires(Items.GLOW_INK_SAC)
             .unlockedBy("has_slime_ball", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SLIME_BALL))
             .unlockedBy("has_glow_ink_sac", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLOW_INK_SAC))
-            .save(exporter)
+            .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_slime"))
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.GLOWSTICK.get(), 4)
             .requires(Items.STICK)
             .requires(HybridAquaticItems.GLOWSLIME.get())
             .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK))
             .unlockedBy(
-                "has_glow_slime",
+                "has_glowslime",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME.get())
             )
             .save(exporter)

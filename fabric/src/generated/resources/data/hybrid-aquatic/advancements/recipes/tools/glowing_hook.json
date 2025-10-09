@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_glow_slime": {
+    "has_glowslime": {
       "conditions": {
         "items": [
           {
@@ -35,7 +35,7 @@
   "requirements": [
     [
       "has_barbed_hook",
-      "has_glow_slime",
+      "has_glowslime",
       "has_the_recipe"
     ]
   ],
