@@ -1,26 +1,25 @@
 package dev.hybridlabs.aquatic;
 
+import static dev.hybridlabs.aquatic.Constants.MOD_ID;
+import static dev.hybridlabs.aquatic.Constants.MOD_NAME;
+
 import dev.hybridlabs.aquatic.platform.Services;
 import dev.hybridlabs.aquatic.platform.registration.RegistrationProvider;
+
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 
 import java.nio.file.Path;
-
-import static dev.hybridlabs.aquatic.Constants.MOD_ID;
-import static dev.hybridlabs.aquatic.Constants.MOD_NAME;
 
 // This class is part of the common project meaning it is shared between all supported loaders. Code
 //  written here can only  import and access the vanilla codebase, libraries used by vanilla, and
@@ -33,12 +32,8 @@ public class CommonClass {
     public static final RegistrationProvider<Block> BLOCKS = RegistrationProvider.get(BuiltInRegistries.BLOCK, MOD_ID);
     public static final RegistrationProvider<Item> ITEMS = RegistrationProvider.get(BuiltInRegistries.ITEM, MOD_ID);
     public static final RegistrationProvider<PaintingVariant> PAINTINGS = RegistrationProvider.get(BuiltInRegistries.PAINTING_VARIANT, MOD_ID);
-    public static final RegistrationProvider<Enchantment> ENCHANTMENTS =
-            RegistrationProvider.get(BuiltInRegistries.ENCHANTMENT, MOD_ID);
     public static final RegistrationProvider<Potion> POTIONS = RegistrationProvider.get(BuiltInRegistries.POTION,
             MOD_ID);
-    public static final RegistrationProvider<SoundEvent> SOUND_EVENTS =
-            RegistrationProvider.get(BuiltInRegistries.SOUND_EVENT, MOD_ID);
     public static final RegistrationProvider<MobEffect> MOB_EFFECTS =
             RegistrationProvider.get(BuiltInRegistries.MOB_EFFECT, MOD_ID);
     public static final RegistrationProvider<EntityType<?>> ENTITY_TYPES =
@@ -60,10 +55,6 @@ public class CommonClass {
 
 
     public static void init() {
-
-        Constants.LOG.info("Hello from Common init on {}! we are currently in a {} environment!",
-                Services.PLATFORM.getPlatformName(), Services.PLATFORM.getEnvironmentName());
-
         if (Services.PLATFORM.isModLoaded(MOD_ID)) {
             Constants.LOG.info("{} loaded.", MOD_NAME);
         }

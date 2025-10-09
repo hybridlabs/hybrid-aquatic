@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
-import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
@@ -103,7 +102,15 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
+        targetSelector.addGoal(
+            1,
+            NearestAttackableTargetGoal(
+                this,
+                LivingEntity::class.java,
+                10,
+                true,
+                true
+            ) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
     }
 
     /* Make otters seek air every 40 secs or so */
@@ -353,7 +360,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     fun setAction(action: OtterAction) {
         entityData.set(ACTION, action.id)
-        Constants.LOG.info("otter: {}, action {}", id, action)
     }
 
     fun getAction(): OtterAction {
@@ -371,7 +377,12 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         return closeToBlockPos(blockpos)
     }
 
-    internal class OtterAttackGoal(val otter: OtterEntity, speedModifier: Double, followingTargetEvenIfNotSeen: Boolean) : MeleeAttackGoal(otter,
+    internal class OtterAttackGoal(
+        val otter: OtterEntity,
+        speedModifier: Double,
+        followingTargetEvenIfNotSeen: Boolean
+    ) : MeleeAttackGoal(
+        otter,
         speedModifier, followingTargetEvenIfNotSeen
     ) {
         override fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
@@ -589,7 +600,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     /* Extend LookControl to prevent the otter's xRot from being reset to zero every tick when underwater */
     internal class OtterLookControl(val otter: OtterEntity) : LookControl(otter) {
         override fun resetXRotOnTick(): Boolean {
-            if (otter.isUnderWater && otter.y < otter.level().seaLevel -1) return false
+            if (otter.isUnderWater && otter.y < otter.level().seaLevel - 1) return false
             return super.resetXRotOnTick()
         }
 
