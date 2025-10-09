@@ -518,7 +518,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.SHRIMP.get() to "Shrimp",
             HybridAquaticEntityTypes.CRAYFISH.get() to "Crayfish",
             HybridAquaticEntityTypes.LOBSTER.get() to "Lobster",
-            HybridAquaticEntityTypes.SEA_SLUG.get() to "Nudibranch",
+            HybridAquaticEntityTypes.SEA_SLUG.get() to "Sea Slug",
             HybridAquaticEntityTypes.SEA_CUCUMBER.get() to "Sea Cucumber",
             HybridAquaticEntityTypes.SEA_URCHIN.get() to "Sea Urchin",
             HybridAquaticEntityTypes.STARFISH.get() to "Starfish",
