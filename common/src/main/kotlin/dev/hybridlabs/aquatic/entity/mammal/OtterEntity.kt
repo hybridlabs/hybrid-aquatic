@@ -16,6 +16,7 @@ import net.minecraft.util.ByIdMap
 import net.minecraft.util.Mth
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.InteractionHand
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -23,6 +24,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
 import net.minecraft.world.entity.ai.util.DefaultRandomPos
 import net.minecraft.world.entity.player.Player
@@ -54,6 +56,18 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     ),
     VariantHolder<OtterEntity.Companion.Type> {
     private val swimControl = OtterMoveControl(this, 45, 3, 0.02F, 1.0F, true)
+
+    var hunger: Int
+        get() = entityData.get(HUNGER)
+        set(hunger) {
+            entityData.set(HUNGER, hunger)
+        }
+
+    override fun tick() {
+        super.tick()
+
+        if (hunger > 0) hunger -= 1
+    }
 
     init {
         moveControl = swimControl
@@ -88,6 +102,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         goalSelector.addGoal(3, OtterWalkingGoal(this, 0.7, 20))
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
+        goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
     }
 
     /* Make otters seek air every 40 secs or so */
@@ -218,8 +234,13 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                 .add(Attributes.FOLLOW_RANGE, 16.0)
         }
 
+        const val MAX_HUNGER = 2400
+        const val HUNGER_KEY = "Hunger"
+
         val FLOAT_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.float_idle")
         val TYPE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(OtterEntity::class.java, EntityDataSerializers.INT)
+        val HUNGER: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(OtterEntity::class.java, EntityDataSerializers.INT)
         val ACTION: EntityDataAccessor<Int> = SynchedEntityData.defineId(
             OtterEntity::class.java,
@@ -302,12 +323,14 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     override fun defineSynchedData() {
         entityData.define(TYPE, 0)
+        entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(ACTION, 0) // OtterAction.IDLE
         super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putString("Type", this.variant.serializedName)
+        nbt.putInt(HUNGER_KEY, hunger)
         nbt.putString("Action", this.getAction().serializedName)
 
         super.addAdditionalSaveData(nbt)
@@ -315,6 +338,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         this.variant = Type.byName(nbt.getString("Type"))
+        hunger = nbt.getInt(HUNGER_KEY)
         this.setAction(OtterAction.byName(nbt.getString("Action")))
         super.readAdditionalSaveData(nbt)
     }
@@ -345,6 +369,23 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     fun closeToNextPos(): Boolean {
         val blockpos = this.getNavigation().path?.nextNode?.asBlockPos()
         return closeToBlockPos(blockpos)
+    }
+
+    internal class OtterAttackGoal(val otter: OtterEntity, speedModifier: Double, followingTargetEvenIfNotSeen: Boolean) : MeleeAttackGoal(otter,
+        speedModifier, followingTargetEvenIfNotSeen
+    ) {
+        override fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
+            val d0 = this.getAttackReachSqr(enemy)
+            if (distToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0) {
+                this.resetAttackCooldown()
+                otter.swing(InteractionHand.MAIN_HAND)
+                otter.doHurtTarget(enemy)
+
+                if (enemy.health <= 0) otter.hunger = MAX_HUNGER
+                otter.health = otter.maxHealth
+            }
+            super.checkAndPerformAttack(enemy, distToEnemySqr)
+        }
     }
 
     /** Extend vanilla BreathAirGoal to add animation hints */
@@ -379,8 +420,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         RandomStrollGoal(otter, speedModifier, interval) {
         private var swimTimer = 0L
         private val maxSwimTime = 300L
-
-
 
         init {
             // We set LOOK here as well as MOVE so the otter doesn't randomly follow its eyeline when swimming
