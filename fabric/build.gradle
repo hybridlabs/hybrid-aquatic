@@ -1,9 +1,9 @@
 plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
+    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
     id "org.jetbrains.kotlin.jvm"
 }
-
 repositories {
     maven { url "https://maven.terraformersmc.com/releases/" }
     maven {
@@ -34,7 +34,6 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
-
     mappings loom.layered {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
@@ -48,14 +47,13 @@ dependencies {
 
     //We still have to load the loader-specific version of any mods included in common
     modApi "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
-    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")
     modApi("com.terraformersmc:modmenu:${modmenu_version}")
     include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")
-    modImplementation "maven.modrinth:lithostitched:${lithostitched_version}-fabric-1.20"
+    modImplementation "maven.modrinth:lithostitched:${lithostitched_version}-fabric-${minecraft_version}"
 
     modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
     modRuntimeOnly "maven.modrinth:carpet:$carpet_version"
-    modRuntimeOnly "maven.modrinth:cyanide:4.1.1-fabric"
+    modRuntimeOnly "maven.modrinth:cyanide:5.0.0-fabric"
 
 }
 
@@ -73,7 +71,6 @@ fabricApi {
         datagenOutput files(runDatagen)
     }
 }
-
 
 loom {
     if (project(":common").file("src/main/resources/${mod_id}.accesswidener").exists()) {

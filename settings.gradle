@@ -28,4 +28,4 @@ plugins {
 rootProject.name = 'hybrid-aquatic'
 include("common")
 include("fabric")
-include("forge")
+include("neoforge")
