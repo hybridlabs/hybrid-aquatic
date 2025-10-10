@@ -4,8 +4,8 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.constant.DataTickets
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 abstract class HybridAquaticMammalEntityModel<T : HybridAquaticMammalEntity>(private val id: String) :
@@ -36,7 +36,7 @@ abstract class HybridAquaticMammalEntityModel<T : HybridAquaticMammalEntity>(pri
         if (head != null) {
             val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
 
-            head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
+            head.rotX = entityData!!.headPitch() * Mth.DEG_TO_RAD
             head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
         }
     }

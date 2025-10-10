@@ -6,16 +6,16 @@ import kotlin.random.Random
 
 class MahiEntityModel : HybridAquaticFishEntityModel<MahiEntity>("mahi") {
 
-    private val POMPANO_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/mahi/mahi_pompano.png")
+    private val POMPANO_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/mahi/mahi_pompano.png")
 
     private val mahiTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi_2.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi_3.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi_2.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi_3.png"),
     )
 
-    private val MAHI_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/mahi/mahi_mahi.geo.json")
-    private val POMPANO_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/mahi/mahi_pompano.geo.json")
+    private val MAHI_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/fish/mahi/mahi_mahi.geo.json")
+    private val POMPANO_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/fish/mahi/mahi_pompano.geo.json")
 
     override fun getTextureResource(animatable: MahiEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits

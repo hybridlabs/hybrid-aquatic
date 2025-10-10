@@ -2,6 +2,8 @@
 
 package dev.hybridlabs.aquatic.item
 
+
+// TODO: tag meat items
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
@@ -131,8 +133,6 @@ object HybridAquaticItems {
     ) {
         SwordItem(
             HybridAquaticToolMaterials.SEASHELL,
-            2,
-            -2.4f,
             Item.Properties()
         )
     }
@@ -318,17 +318,23 @@ object HybridAquaticItems {
     val BLACK_PEARL_BLOCK = registerBlockItem("black_pearl_block") { HybridAquaticBlocks.BLACK_PEARL_BLOCK.get() }
     val BUOY = registerPlaceableInWaterBlockItem("buoy") { HybridAquaticBlocks.BUOY.get() }
     val RAFT = registerPlaceableInWaterBlockItem("raft") { HybridAquaticBlocks.RAFT.get() }
-    val GLOWSTICK = registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
+    val GLOWSTICK =
+        registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") { PLATFORM.createMessageInABottleItem(Item.Properties()) }
 
     //#region Plushies
 
-    val BASKING_SHARK_PLUSHIE = registerBlockItem("basking_shark_plushie") { HybridAquaticBlocks.BASKING_SHARK_PLUSHIE.get() }
+    val BASKING_SHARK_PLUSHIE =
+        registerBlockItem("basking_shark_plushie") { HybridAquaticBlocks.BASKING_SHARK_PLUSHIE.get() }
     val BULL_SHARK_PLUSHIE = registerBlockItem("bull_shark_plushie") { HybridAquaticBlocks.BULL_SHARK_PLUSHIE.get() }
-    val FRILLED_SHARK_PLUSHIE = registerBlockItem("frilled_shark_plushie") { HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE.get() }
-    val GREAT_WHITE_SHARK_PLUSHIE = registerBlockItem("great_white_shark_plushie") { HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE.get() }
-    val HAMMERHEAD_SHARK_PLUSHIE = registerBlockItem("hammerhead_shark_plushie") { HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE.get() }
-    val THRESHER_SHARK_PLUSHIE = registerBlockItem("thresher_shark_plushie") { HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE.get() }
+    val FRILLED_SHARK_PLUSHIE =
+        registerBlockItem("frilled_shark_plushie") { HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE.get() }
+    val GREAT_WHITE_SHARK_PLUSHIE =
+        registerBlockItem("great_white_shark_plushie") { HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE.get() }
+    val HAMMERHEAD_SHARK_PLUSHIE =
+        registerBlockItem("hammerhead_shark_plushie") { HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE.get() }
+    val THRESHER_SHARK_PLUSHIE =
+        registerBlockItem("thresher_shark_plushie") { HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE.get() }
     val TIGER_SHARK_PLUSHIE = registerBlockItem("tiger_shark_plushie") { HybridAquaticBlocks.TIGER_SHARK_PLUSHIE.get() }
     val WHALE_SHARK_PLUSHIE = registerBlockItem("whale_shark_plushie") { HybridAquaticBlocks.WHALE_SHARK_PLUSHIE.get() }
 
@@ -386,8 +392,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -401,8 +406,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -416,8 +420,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.5F)
-                        .meat()
+                        .saturationModifier(0.5F)
                         .build()
                 )
         )
@@ -431,8 +434,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -446,8 +448,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.5F)
-                        .meat()
+                        .saturationModifier(0.5F)
                         .build()
                 )
         )
@@ -461,8 +462,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -476,8 +476,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.5F)
-                        .meat()
+                        .saturationModifier(0.5F)
                         .build()
                 )
         )
@@ -491,8 +490,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -506,8 +504,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(5)
-                        .saturationMod(0.6F)
-                        .meat()
+                        .saturationModifier(0.6F)
                         .build()
                 )
         )
@@ -521,8 +518,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -536,8 +532,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(5)
-                        .saturationMod(0.6F)
-                        .meat()
+                        .saturationModifier(0.6F)
                         .build()
                 )
         )
@@ -551,8 +546,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(8)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -566,8 +560,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.6F)
-                        .meat()
+                        .saturationModifier(0.6F)
                         .build()
                 )
         )
@@ -581,8 +574,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.6F)
-                        .meat()
+                        .saturationModifier(0.6F)
                         .build()
                 )
         )
@@ -596,8 +588,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -611,8 +602,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -626,8 +616,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.6F)
-                        .meat()
+                        .saturationModifier(0.6F)
                         .build()
                 )
         )
@@ -641,8 +630,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -656,8 +644,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -671,8 +658,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -686,8 +672,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -701,8 +686,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -716,8 +700,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -731,8 +714,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -746,8 +728,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -761,8 +742,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -776,8 +756,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -789,7 +768,7 @@ object HybridAquaticItems {
         Item(
             Item.Properties()
                 .food(
-                    FoodProperties.Builder().nutrition(1).saturationMod(0.2F).meat().build()
+                    FoodProperties.Builder().nutrition(1).saturationModifier(0.2F).build()
                 )
         )
     }
@@ -802,8 +781,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -817,8 +795,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -832,8 +809,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -847,8 +823,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -862,8 +837,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -877,8 +851,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -892,8 +865,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -907,8 +879,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -922,8 +893,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -937,8 +907,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -952,8 +921,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -967,9 +935,8 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
+                        .saturationModifier(0.2F)
                         .effect(MobEffectInstance(MobEffects.POISON, 1200, 2), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -983,8 +950,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -998,8 +964,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1013,8 +978,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1028,9 +992,8 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
+                        .saturationModifier(0.4F)
                         .effect(MobEffectInstance(MobEffects.POISON, 1200, 1), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1044,9 +1007,8 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
+                        .saturationModifier(0.4F)
                         .effect(MobEffectInstance(MobEffects.POISON, 1200, 1), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1060,9 +1022,8 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
+                        .saturationModifier(0.4F)
                         .effect(MobEffectInstance(MobEffects.POISON, 1200, 0), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1076,8 +1037,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1091,8 +1051,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1106,9 +1065,8 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
+                        .saturationModifier(0.4F)
                         .effect(MobEffectInstance(MobEffects.POISON, 1200, 0), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1122,9 +1080,8 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
+                        .saturationModifier(0.4F)
                         .effect(MobEffectInstance(MobEffects.POISON, 1200, 0), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1138,8 +1095,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1153,8 +1109,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1168,8 +1123,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1183,8 +1137,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1198,8 +1151,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1213,8 +1165,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1228,8 +1179,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1243,8 +1193,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1258,8 +1207,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -1273,8 +1221,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -1288,8 +1235,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -1303,8 +1249,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -1318,8 +1263,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -1332,7 +1276,12 @@ object HybridAquaticItems {
     //#region Fish
 
     val AFRICAN_BUTTERFLYFISH_SPAWN_EGG =
-        registerSpawnEgg("african_butterflyfish_spawn_egg", HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH, 0xb57955, 0x1e3555)
+        registerSpawnEgg(
+            "african_butterflyfish_spawn_egg",
+            HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH,
+            0xb57955,
+            0x1e3555
+        )
     val BARRELEYE_SPAWN_EGG =
         registerSpawnEgg("barreleye_spawn_egg", HybridAquaticEntityTypes.BARRELEYE, 0x4b4343, 0x6bc96c)
     val BETTA_SPAWN_EGG =
@@ -1470,9 +1419,19 @@ object HybridAquaticItems {
     val BLUE_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg("blue_jellyfish_spawn_egg", HybridAquaticEntityTypes.BLUE_JELLYFISH, 0x4dc0e8, 0xff6b97)
     val CEPHEIDAE_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("cepheidae_jellyfish_spawn_egg", HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH, 0x623062, 0x89a1d8)
+        registerSpawnEgg(
+            "cepheidae_jellyfish_spawn_egg",
+            HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH,
+            0x623062,
+            0x89a1d8
+        )
     val LIONS_MANE_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("lions_mane_jellyfish_spawn_egg", HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH, 0xf6d5b1, 0x541e48)
+        registerSpawnEgg(
+            "lions_mane_jellyfish_spawn_egg",
+            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH,
+            0xf6d5b1,
+            0x541e48
+        )
     val MOON_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg("moon_jellyfish_spawn_egg", HybridAquaticEntityTypes.MOON_JELLYFISH, 0xa293f3, 0xe0caf8)
     val NOMURA_JELLYFISH_SPAWN_EGG =
@@ -1495,8 +1454,9 @@ object HybridAquaticItems {
     val COSMIC_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg("cosmic_jellyfish_spawn_egg", HybridAquaticEntityTypes.COSMIC_JELLYFISH, 0xe7debb, 0xffd375)
     val FIREWORK_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("firework_jellyfish_spawn_egg", HybridAquaticEntityTypes.FIREWORK_JELLYFISH, 0x6975e8, 0xfc7fb7
-    )
+        registerSpawnEgg(
+            "firework_jellyfish_spawn_egg", HybridAquaticEntityTypes.FIREWORK_JELLYFISH, 0x6975e8, 0xfc7fb7
+        )
 
     //#endregion
 
@@ -1612,7 +1572,7 @@ object HybridAquaticItems {
         primaryColor: Int,
         secondaryColor: Int
     ): Supplier<SpawnEggItem> {
-        return PLATFORM.registerSpawnEggItem(id, { type.get() }, primaryColor, secondaryColor)
+        return PLATFORM.registerSpawnEggItem(id, type.get(), primaryColor, secondaryColor)
 
     }
 

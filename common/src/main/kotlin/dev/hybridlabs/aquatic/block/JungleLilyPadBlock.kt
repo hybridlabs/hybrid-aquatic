@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -53,6 +54,10 @@ class JungleLilyPadBlock(settings: Properties) : BushBlock(settings) {
         } else {
             null
         }
+    }
+
+    override fun codec(): MapCodec<out BushBlock?> {
+        TODO("Not yet implemented")
     }
 
     override fun updateShape(

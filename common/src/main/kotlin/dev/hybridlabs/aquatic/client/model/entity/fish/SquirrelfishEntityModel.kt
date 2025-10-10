@@ -7,7 +7,7 @@ import net.minecraft.client.model.geom.PartNames
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 
 class SquirrelfishEntityModel : HybridAquaticFishEntityModel<SquirrelfishEntity>("squirrelfish") {
     override fun getRenderType(animatable: SquirrelfishEntity, texture: ResourceLocation): RenderType {
@@ -44,7 +44,7 @@ class SquirrelfishEntityModel : HybridAquaticFishEntityModel<SquirrelfishEntity>
         animationState: AnimationState<SquirrelfishEntity>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
+        val deltaTime: Float = Minecraft.getInstance().timer.gameTimeDeltaTicks
 
         val body = animationProcessor.getBone(PartNames.BODY)
         val body2 = animationProcessor.getBone("body2")

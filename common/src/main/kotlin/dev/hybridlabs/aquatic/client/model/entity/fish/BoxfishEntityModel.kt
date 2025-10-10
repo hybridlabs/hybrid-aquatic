@@ -9,14 +9,14 @@ class BoxfishEntityModel : HybridAquaticFishEntityModel<BoxfishEntity>("boxfish"
         return RenderType.entityTranslucent(texture)
     }
 
-    private val LONGHORN_COWFISH_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/boxfish/longhorn_cowfish.png")
-    private val WHITESPOTTED_BOXFISH_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/boxfish/whitespotted_boxfish.png")
+    private val LONGHORN_COWFISH_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/boxfish/longhorn_cowfish.png")
+    private val WHITESPOTTED_BOXFISH_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/boxfish/whitespotted_boxfish.png")
 
-    private val COWFISH_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/boxfish/cowfish.geo.json")
-    private val BOXFISH_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/boxfish/boxfish.geo.json")
+    private val COWFISH_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/fish/boxfish/cowfish.geo.json")
+    private val BOXFISH_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/fish/boxfish/boxfish.geo.json")
 
-    private val COWFISH_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/cowfish.animation.json")
-    private val BOXFISH_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/boxfish.animation.json")
+    private val COWFISH_ANIMATION = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "animations/cowfish.animation.json")
+    private val BOXFISH_ANIMATION = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "animations/boxfish.animation.json")
 
     override fun getTextureResource(animatable: BoxfishEntity): ResourceLocation {
         return when (animatable.variant) {

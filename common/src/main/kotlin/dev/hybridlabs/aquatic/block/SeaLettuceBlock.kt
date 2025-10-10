@@ -1,10 +1,12 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -28,6 +30,10 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
         context: CollisionContext
     ): VoxelShape {
         return SHAPE
+    }
+
+    override fun codec(): MapCodec<out BushBlock?> {
+        TODO("Not yet implemented")
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
@@ -55,9 +61,10 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
         return blockState
     }
 
-    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState): Boolean {
         return true
     }
+
 
     override fun isBonemealSuccess(world: Level, random: RandomSource, pos: BlockPos, state: BlockState): Boolean {
         return true
@@ -77,7 +84,13 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
         }
     }
 
-    override fun canPlaceLiquid(world: BlockGetter, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canPlaceLiquid(
+        p0: Player?,
+        world: BlockGetter,
+        pos: BlockPos,
+        state: BlockState,
+        fluid: Fluid
+    ): Boolean {
         return false
     }
 

@@ -6,10 +6,9 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
-import net.minecraft.world.level.Level
 import software.bernie.geckolib.animatable.GeoItem
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
 abstract class MoonJellyfishArmorItem(type: Type, settings: Properties) :
@@ -25,14 +24,14 @@ abstract class MoonJellyfishArmorItem(type: Type, settings: Properties) :
 
     override fun appendHoverText(
         stack: ItemStack,
-        level: Level?,
-        tooltipComponents: MutableList<Component?>,
+        context: TooltipContext,
+        tooltipComponents: MutableList<Component>,
         isAdvanced: TooltipFlag
     ) {
         val jellyfishHatText =
             Component.translatable("item.hybrid-aquatic.moon_jellyfish_hat.description").withStyle(ChatFormatting.GRAY)
 
         tooltipComponents.add(jellyfishHatText)
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced)
+        super.appendHoverText(stack, context, tooltipComponents, isAdvanced)
     }
 }

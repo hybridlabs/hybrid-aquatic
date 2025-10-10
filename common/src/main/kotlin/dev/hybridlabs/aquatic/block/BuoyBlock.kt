@@ -28,7 +28,7 @@ open class BuoyBlock(settings: Properties): Block(settings), EntityBlock, Simple
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false))
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 

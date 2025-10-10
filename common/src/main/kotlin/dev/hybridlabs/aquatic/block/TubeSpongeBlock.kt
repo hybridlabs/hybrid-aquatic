@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
@@ -41,6 +42,10 @@ class TubeSpongeBlock(
         return supportingState.isFaceSturdy(world, supportingPos, Direction.UP)
     }
 
+    override fun codec(): MapCodec<out BushBlock?> {
+        TODO("Not yet implemented")
+    }
+
     override fun updateShape(
         state: BlockState,
         direction: Direction,
@@ -78,7 +83,7 @@ class TubeSpongeBlock(
                 Fluids.WATER)) else null
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 

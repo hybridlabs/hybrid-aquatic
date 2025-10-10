@@ -38,11 +38,10 @@ class BoxfishEntity(entityType: EntityType<out BoxfishEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -85,9 +84,9 @@ class BoxfishEntity(entityType: EntityType<out BoxfishEntity>, world: Level) :
             SynchedEntityData.defineId(BoxfishEntity::class.java, EntityDataSerializers.INT)
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(TYPE, 0)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(TYPE, 0)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

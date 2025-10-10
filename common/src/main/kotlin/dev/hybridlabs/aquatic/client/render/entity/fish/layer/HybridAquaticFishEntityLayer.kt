@@ -12,8 +12,9 @@ import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
+import software.bernie.geckolib.util.Color
 
-class HybridAquaticFishEntityLayer<T: HybridAquaticFishEntity>(
+class HybridAquaticFishEntityLayer<T : HybridAquaticFishEntity>(
     renderer: HybridAquaticFishEntityRenderer<T>
 ) : GeoRenderLayer<T>(renderer) {
 
@@ -25,9 +26,9 @@ class HybridAquaticFishEntityLayer<T: HybridAquaticFishEntity>(
         poseStack: PoseStack,
         animatable: T,
         bakedModel: BakedGeoModel,
-        renderType: RenderType,
+        renderType: RenderType?,
         bufferSource: MultiBufferSource,
-        buffer: VertexConsumer,
+        buffer: VertexConsumer?,
         partialTick: Float,
         packedLight: Int,
         packedOverlay: Int
@@ -38,8 +39,17 @@ class HybridAquaticFishEntityLayer<T: HybridAquaticFishEntity>(
         val layerTexture: ResourceLocation = getLayerTextureResource(animatable.getOverlayTextureName())
         val layerRenderType = RenderType.entityTranslucent(layerTexture)
 
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderType,
-            bufferSource.getBuffer(layerRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1f, 1f, 1f, 1f)
+        getRenderer().reRender(
+            getDefaultBakedModel(animatable),
+            poseStack,
+            bufferSource,
+            animatable,
+            layerRenderType,
+            bufferSource.getBuffer(layerRenderType),
+            partialTick,
+            packedLight,
+            OverlayTexture.NO_OVERLAY,
+            Color.WHITE.argbInt
+        )
     }
 }

@@ -56,7 +56,7 @@ class BarracudaEntity(entityType: EntityType<out BarracudaEntity>, world: Level)
         targetSelector.addGoal(1, HurtByTargetGoal(this).setAlertOthers())
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is BarracudaEntity })
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.asHolder()) && it !is BarracudaEntity })
     }
 
     override fun doHurtTarget(target: Entity): Boolean {
@@ -70,7 +70,7 @@ class BarracudaEntity(entityType: EntityType<out BarracudaEntity>, world: Level)
                 }
 
                 if (i > 0) {
-                    target.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), i * 20, 0), this)
+                    target.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.asHolder(), i * 20, 0), this)
                 }
             }
 

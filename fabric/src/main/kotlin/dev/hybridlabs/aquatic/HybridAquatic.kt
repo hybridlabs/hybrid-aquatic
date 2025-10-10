@@ -60,11 +60,11 @@ object HybridAquatic : ModInitializer {
         HybridAquaticBiomeTags
 
         HybridAquaticMobEffects
-        HybridAquaticPotions.registerPotionRecipes()
+        //HybridAquaticPotions.registerPotionRecipes()
 
-        HybridAquaticItems
-        HybridAquaticPlatformItems
-        HybridAquaticItemGroups
+        //HybridAquaticItems
+        //HybridAquaticPlatformItems
+        //HybridAquaticItemGroups
 
         HybridAquaticFeatures
         HybridAquaticPlacedFeatures
@@ -72,25 +72,25 @@ object HybridAquatic : ModInitializer {
 
         HybridAquaticNetworking.registerNetworking()
 
-        HybridAquaticLootPoolEntryTypes
-        LootTableModifications.registerLootModifications()
+        //HybridAquaticLootPoolEntryTypes
+        //LootTableModifications.registerLootModifications()
 
-        FeatureBiomeModifications.registerBiomeModifications()
+        //FeatureBiomeModifications.registerBiomeModifications()
 
         SpawnRestrictionRegistry.registerSpawnRestrictions()
 
 
         registerDynamicRegistries()
-        registerWanderingTraderTrades()
-        registerCustomTrades()
+        //registerWanderingTraderTrades()
+        //registerCustomTrades()
         registerFlammables(FlammableBlockRegistry.getDefaultInstance())
         registerStrippables()
 
         val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
-        registerBiomeModifications(configHandler.config)
+        //registerBiomeModifications(configHandler.config)
 
         SERVER_STARTING.register { server ->
-            FabricSpawnModifiers.load(server)
+            //FabricSpawnModifiers.load(server)
         }
     }
 

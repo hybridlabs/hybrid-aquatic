@@ -30,7 +30,7 @@ class RaftBlock(settings: Properties) : Block(settings), SimpleWaterloggedBlock 
             .setValue(FACING, ctx.horizontalDirection.clockWise)
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 

@@ -75,13 +75,12 @@ class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
-        val overlayID = world.random.nextIntBetweenInclusive(0, MantaRayEntity.Companion.OverlayTextures.entries.size - 1)
+        val overlayID = world.random.nextIntBetweenInclusive(0, OverlayTextures.entries.size - 1)
         overlayTexture = OverlayTextures.byId(overlayID)
 
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     override fun getMaxSize(): Int {
@@ -93,18 +92,18 @@ class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
     }
 
     private var overlayTexture
-        get() = MantaRayEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture))
+        get() = OverlayTextures.byId(entityData.get(OverlayTexture))
         set(value) {
             entityData.set(OverlayTexture, value.id)
         }
 
     override fun getOverlayTextureName(): String {
-        return MantaRayEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
+        return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
     }
 
-    override fun defineSynchedData() {
-        entityData.define(OverlayTexture, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(OverlayTexture, 0)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
@@ -114,7 +113,7 @@ class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         if (nbt.contains("texture_overlay")) this.overlayTexture =
-            MantaRayEntity.Companion.OverlayTextures.byId(nbt.getInt("texture_overlay"))
+            OverlayTextures.byId(nbt.getInt("texture_overlay"))
         super.readAdditionalSaveData(nbt)
     }
 

@@ -2,11 +2,12 @@ package dev.hybridlabs.aquatic.entity.crustacean
 
 
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
+import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.ResourceKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -19,13 +20,15 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.storage.loot.LootTable
 import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
     HybridAquaticCrustaceanEntity(
-        entityType, world, false),
+        entityType, world, false
+    ),
     VariantHolder<HermitCrabEntity.Companion.Type> {
 
     override fun registerGoals() {
@@ -37,17 +40,16 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getDefaultLootTable(): ResourceLocation {
+    override fun getDefaultLootTable(): ResourceKey<LootTable?> {
         return when (variant) {
-            Type.SHELL -> HybridAquaticLootTables.HERMIT_CRAB_SHELL
-            Type.SKULL -> HybridAquaticLootTables.HERMIT_CRAB_SKULL
+            Type.SHELL -> ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.HERMIT_CRAB_SHELL)
+            Type.SKULL -> ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.HERMIT_CRAB_SKULL)
         }
     }
 
@@ -62,7 +64,9 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
                 .add(Attributes.ARMOR, 5.0)
                 .add(Attributes.ARMOR_TOUGHNESS, 5.0)
         }
-        val TYPE: EntityDataAccessor<Int> = SynchedEntityData.defineId(HermitCrabEntity::class.java, EntityDataSerializers.INT)
+
+        val TYPE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(HermitCrabEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             SHELL(0, "shell"),
@@ -91,7 +95,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         }
     }
 
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 
@@ -99,9 +103,9 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         return -5
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

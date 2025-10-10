@@ -7,26 +7,27 @@ import net.minecraft.world.entity.LivingEntity
 
 class CorrosionMobEffect : MobEffect(MobEffectCategory.HARMFUL, 0x9d9136) {
 
-    override fun applyEffectTick(entity: LivingEntity, amplifier: Int) {
-        if (entity.level().isClientSide) return
+    override fun applyEffectTick(entity: LivingEntity, amplifier: Int): Boolean {
+        if (entity.level().isClientSide) return false
         val damage = amplifier + 1
         corrodeTool(entity, damage)
         corrodeArmor(entity, damage)
+        return true
     }
 
-    override fun isDurationEffectTick(duration: Int, amplifier: Int): Boolean {
+    override fun shouldApplyEffectTickThisTick(duration: Int, amplifier: Int): Boolean {
         return duration % 20 == 0
     }
 
     private fun corrodeTool(entity: LivingEntity, damage: Int) {
         val mainHandStack = entity.mainHandItem
         if (mainHandStack.isDamageableItem) {
-            mainHandStack.hurtAndBreak(damage, entity) { it.broadcastBreakEvent(entity.usedItemHand) }
+            mainHandStack.hurtAndBreak(damage, entity, entity.getEquipmentSlotForItem(mainHandStack))
         }
 
         val offHandStack = entity.offhandItem
         if (offHandStack.isDamageableItem) {
-            offHandStack.hurtAndBreak(1, entity) { it.broadcastBreakEvent(entity.usedItemHand) }
+            mainHandStack.hurtAndBreak(1, entity, entity.getEquipmentSlotForItem(mainHandStack))
         }
     }
 
@@ -34,7 +35,7 @@ class CorrosionMobEffect : MobEffect(MobEffectCategory.HARMFUL, 0x9d9136) {
         for (slot in EquipmentSlot.entries) {
             val armorStack = entity.getItemBySlot(slot)
             if (armorStack.isDamageableItem) {
-                armorStack.hurtAndBreak(damage, entity) { it.broadcastBreakEvent(slot) }
+                armorStack.hurtAndBreak(damage, entity, entity.getEquipmentSlotForItem(armorStack))
             }
         }
     }

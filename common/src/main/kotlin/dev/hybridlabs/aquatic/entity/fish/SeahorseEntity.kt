@@ -40,19 +40,14 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
         return 2
     }
 
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.8f
-    }
-
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -108,9 +103,9 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

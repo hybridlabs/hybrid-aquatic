@@ -2,11 +2,12 @@ package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
+import net.minecraft.client.DeltaTracker
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 abstract class HybridAquaticCephalopodEntityModel<T : HybridAquaticCephalopodEntity>(private val id: String) :
@@ -30,9 +31,9 @@ abstract class HybridAquaticCephalopodEntityModel<T : HybridAquaticCephalopodEnt
         animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
+        val deltaTime: DeltaTracker = Minecraft.getInstance().timer
 
         val body = animationProcessor.getBone(PartNames.BODY)
-        body.rotX = Mth.lerp(deltaTime, animatable.xRot, animatable.xRotO) * -Mth.DEG_TO_RAD
+        body.rotX = Mth.lerp(deltaTime.gameTimeDeltaTicks, animatable.xRot, animatable.xRotO) * -Mth.DEG_TO_RAD
     }
 }

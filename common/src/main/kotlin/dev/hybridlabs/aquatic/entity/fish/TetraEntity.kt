@@ -62,13 +62,12 @@ class TetraEntity(entityType: EntityType<out TetraEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
-        val selectedType = TetraEntity.Companion.Type.fromBiome(biome)
+        val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -123,9 +122,9 @@ class TetraEntity(entityType: EntityType<out TetraEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

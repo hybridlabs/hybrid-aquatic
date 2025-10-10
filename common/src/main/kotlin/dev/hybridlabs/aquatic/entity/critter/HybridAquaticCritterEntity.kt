@@ -12,7 +12,6 @@ import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
@@ -22,11 +21,11 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -39,9 +38,9 @@ open class HybridAquaticCritterEntity(
     private var fromFishingNet = false
 
     init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
         navigation = GroundPathNavigation(this, world)
     }
@@ -62,10 +61,10 @@ open class HybridAquaticCritterEntity(
         return 1.0F
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(CRITTER_SIZE, 0)
-        entityData.define(CRITTER_FLAGS, 0.toByte())
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(CRITTER_SIZE, 0)
+        builder.define(CRITTER_FLAGS, 0.toByte())
     }
 
     override fun registerGoals() {
@@ -78,20 +77,18 @@ open class HybridAquaticCritterEntity(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
-
+    // TODO: this is a tag now
+    /*
     override fun canBreatheUnderwater(): Boolean {
         return true
     }
+     */
 
     override fun isAffectedByFluids(): Boolean {
         return !onGround()

@@ -1,9 +1,11 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.LevelAccessor
@@ -33,17 +35,27 @@ class BullKelpBlock(settings: Properties) :
         return !state.`is`(Blocks.MAGMA_BLOCK)
     }
 
-    override fun canPlaceLiquid(world: BlockGetter, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canPlaceLiquid(
+        p0: Player?,
+        p1: BlockGetter,
+        p2: BlockPos,
+        p3: BlockState,
+        p4: Fluid
+    ): Boolean {
         return false
     }
 
     override fun placeLiquid(
-        world: LevelAccessor,
-        pos: BlockPos,
-        state: BlockState,
-        fluidState: FluidState
+        p0: LevelAccessor,
+        p1: BlockPos,
+        p2: BlockState,
+        p3: FluidState
     ): Boolean {
         return false
+    }
+
+    override fun codec(): MapCodec<out GrowingPlantHeadBlock?> {
+        TODO("Not yet implemented")
     }
 
     override fun getBlocksToGrowWhenBonemealed(random: RandomSource): Int {

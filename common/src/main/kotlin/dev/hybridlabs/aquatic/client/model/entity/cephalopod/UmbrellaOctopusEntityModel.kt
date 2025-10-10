@@ -7,12 +7,12 @@ import kotlin.random.Random
 class UmbrellaOctopusEntityModel : HybridAquaticOctopusEntityModel<UmbrellaOctopusEntity>("umbrella_octopus") {
 
     private val commonTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_yellow.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_brown.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_orange.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_pink.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_purple.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_white.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_yellow.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_brown.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_orange.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_pink.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_purple.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_white.png"),
     )
 
     override fun getTextureResource(animatable: UmbrellaOctopusEntity): ResourceLocation {

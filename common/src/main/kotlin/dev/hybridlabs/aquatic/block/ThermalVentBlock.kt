@@ -5,12 +5,14 @@ import dev.hybridlabs.aquatic.entity.crustacean.YetiCrabEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
+import net.minecraft.core.registries.Registries
 import net.minecraft.util.RandomSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.item.enchantment.EnchantmentHelper
+import net.minecraft.world.item.enchantment.Enchantments.FROST_WALKER
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
@@ -39,11 +41,13 @@ class ThermalVentBlock(
 ) : Block(settings), SimpleWaterloggedBlock {
 
     init {
-        this.registerDefaultState(stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true)
-            .setValue(THICKNESS, DripstoneThickness.TIP))
+        this.registerDefaultState(
+            stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true)
+                .setValue(THICKNESS, DripstoneThickness.TIP)
+        )
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 
@@ -90,7 +94,7 @@ class ThermalVentBlock(
         }
     }
 
-    private fun getThickness(world: LevelReader, currentPos: BlockPos): DripstoneThickness{
+    private fun getThickness(world: LevelReader, currentPos: BlockPos): DripstoneThickness {
         val blockAbove = world.getBlockState(currentPos.relative(Direction.UP))
 
         return if (blockAbove.`is`(this)) {
@@ -121,9 +125,12 @@ class ThermalVentBlock(
         if (world.isClientSide) return
 
         if (state.getValue(THICKNESS) == DripstoneThickness.TIP && state.getValue(WATERLOGGED) && entity !is YetiCrabEntity) {
-            if (!entity.isSteppingCarefully && entity is LivingEntity && !EnchantmentHelper.hasFrostWalker(entity)) {
+            if (!entity.isSteppingCarefully && entity is LivingEntity && (EnchantmentHelper.getEnchantmentLevel(
+                    world.registryAccess().registry(Registries.ENCHANTMENT).get().getHolder(FROST_WALKER).get(), entity
+                ) < 1)
+            ) {
                 entity.hurt(world.damageSources().hotFloor(), fireDamage.toFloat())
-                entity.addEffect(MobEffectInstance(HybridAquaticMobEffects.CORROSION.get(), 200, 0))
+                entity.addEffect(MobEffectInstance(HybridAquaticMobEffects.CORROSION.asHolder(), 200, 0))
             }
         }
 
@@ -180,7 +187,13 @@ class ThermalVentBlock(
     }
 
     companion object {
-        val THICKNESS: EnumProperty<DripstoneThickness> = EnumProperty.create("thickness", DripstoneThickness::class.java, DripstoneThickness.TIP, DripstoneThickness.MIDDLE, DripstoneThickness.BASE)
+        val THICKNESS: EnumProperty<DripstoneThickness> = EnumProperty.create(
+            "thickness",
+            DripstoneThickness::class.java,
+            DripstoneThickness.TIP,
+            DripstoneThickness.MIDDLE,
+            DripstoneThickness.BASE
+        )
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
 
         private val TIP_COLLISION_SHAPE = box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0)

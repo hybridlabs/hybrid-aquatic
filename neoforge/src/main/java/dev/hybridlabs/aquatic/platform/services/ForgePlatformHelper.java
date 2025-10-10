@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.platform.services;
 
+
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.Constants;
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
@@ -9,8 +10,8 @@ import dev.hybridlabs.aquatic.item.MessageInABottleItem;
 import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
+
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -18,18 +19,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.javafmlmod.FMLModContainer;
-import net.minecraftforge.fml.loading.FMLLoader;
-import net.minecraftforge.fml.loading.FMLPaths;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+
 import org.jetbrains.annotations.NotNull;
-import thedarkcolour.kotlinforforge.KotlinModContainer;
 
 import java.nio.file.Path;
 import java.util.concurrent.Callable;
@@ -40,14 +38,7 @@ public class ForgePlatformHelper implements PlatformHelper {
     public static IEventBus getEventBus() {
         final ModContainer cont =
                 ModList.get().getModContainerById(Constants.FORGE_MOD_ID).orElseThrow();
-        if (cont instanceof FMLModContainer fmlModContainer) {
-            return fmlModContainer.getEventBus();
-        } else if (cont instanceof KotlinModContainer kotlinModContainer) {
-            return kotlinModContainer.getEventBus$kfflang();
-        } else {
-            throw new ClassCastException(
-                    "The container of the mod " + Constants.FORGE_MOD_ID + " is not a FML one!");
-        }
+        return cont.getEventBus();
     }
 
     @Override
@@ -71,13 +62,13 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(
             @NotNull String name,
-            Supplier<EntityType<T>> entityType,
+            EntityType<T> entityType,
             int backgroundColor,
             int highlightColor) {
         return CommonClass.ITEMS.register(
                 name,
                 () ->
-                        new ForgeSpawnEggItem(
+                        new SpawnEggItem(
                                 entityType,
                                 backgroundColor,
                                 highlightColor,
@@ -92,7 +83,7 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public <T extends Mob> void registerSpawnPlacement(
             RegistryObject<EntityType<T>> entityType,
-            SpawnPlacements.Type decoratorType,
+            SpawnPlacementType decoratorType,
             Heightmap.Types heightMapType,
             SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
 
@@ -112,43 +103,8 @@ public class ForgePlatformHelper implements PlatformHelper {
     }
 
     @Override
-    public Attribute getReachAttribute() {
-        return ForgeMod.BLOCK_REACH.get();
-    }
-
-    private record SpawnPlacementRegistrationHandler<T extends LivingEntity>(
-            RegistryObject<EntityType<T>> type,
-            SpawnPlacements.Type decoratorType,
-            Heightmap.Types heightMapType,
-            SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
-
-        private void handleEvent(SpawnPlacementRegisterEvent event) {
-            event.register(
-                    type.get(),
-                    decoratorType,
-                    heightMapType,
-                    decoratorPredicate,
-                    SpawnPlacementRegisterEvent.Operation.REPLACE);
-        }
-    }
-
-    private record AttributeRegistrationHandler(
-            String id,
-            EntityType<? extends LivingEntity> type,
-            Callable<AttributeSupplier.Builder> supplier) {
-
-        private void handleEvent(EntityAttributeCreationEvent event) {
-            try {
-                event.put(type, supplier.call().build());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    @Override
     public MobCategory getMobCategoryByName(String name) {
-        return MobCategory.byName(name.toLowerCase());
+        return MobCategory.valueOf(name.toLowerCase());
     }
 
     @Override
@@ -171,5 +127,35 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public void sendHookToServer(int entityId, ItemStack entityData) {
         HybridAquaticNetworking.INSTANCE.sendHookPacket(entityId, entityData);
+    }
+
+    private record SpawnPlacementRegistrationHandler<T extends LivingEntity>(
+            RegistryObject<EntityType<T>> type,
+            SpawnPlacementType decoratorType,
+            Heightmap.Types heightMapType,
+            SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
+
+        private void handleEvent(RegisterSpawnPlacementsEvent event) {
+            event.register(
+                    type.get(),
+                    decoratorType,
+                    heightMapType,
+                    decoratorPredicate,
+                    RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        }
+    }
+
+    private record AttributeRegistrationHandler(
+            String id,
+            EntityType<? extends LivingEntity> type,
+            Callable<AttributeSupplier.Builder> supplier) {
+
+        private void handleEvent(EntityAttributeCreationEvent event) {
+            try {
+                event.put(type, supplier.call().build());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

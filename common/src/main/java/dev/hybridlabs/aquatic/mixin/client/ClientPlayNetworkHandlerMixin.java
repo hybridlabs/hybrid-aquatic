@@ -20,12 +20,9 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin {
-    @Shadow
-    @Final
-    private Minecraft minecraft;
 
     @Shadow
-    public abstract RegistryAccess registryAccess();
+    public abstract RegistryAccess.Frozen registryAccess();
 
     /**
      * Allows usage of Sea Message books to open a book screen.
@@ -35,7 +32,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
         if (stack.is(HybridAquaticItems.INSTANCE.getSEA_MESSAGE_BOOK().get())) {
             SeaMessage message = SeaMessageBookItem.Companion.getSeaMessage(stack, this.registryAccess());
             if (message != null) {
-                this.minecraft.setScreen(new BookViewScreen(new SeaMessageBookContents(message)));
+                //this.minecraft.setScreen(new BookViewScreen(new SeaMessageBookContents(message)));
             }
         }
     }

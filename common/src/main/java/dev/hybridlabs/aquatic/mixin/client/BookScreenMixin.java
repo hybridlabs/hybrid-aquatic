@@ -13,9 +13,11 @@ public class BookScreenMixin {
     @Shadow
     private BookViewScreen.BookAccess bookAccess;
 
+    /*
     @WrapWithCondition(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/screens" +
             "/inventory/BookViewScreen;pageMsg:Lnet/minecraft/network/chat/Component;", ordinal = 0))
     private boolean onRenderPageCount(BookViewScreen instance, Component value) {
         return !(this.bookAccess instanceof SeaMessageBookContents seaContents && seaContents.getMessage().getInfinite());
     }
+     */
 }

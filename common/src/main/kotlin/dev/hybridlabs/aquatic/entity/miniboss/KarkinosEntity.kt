@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.miniboss
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosMeleeAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosSummonGoal
+import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -16,7 +17,6 @@ import net.minecraft.world.BossEvent
 import net.minecraft.world.Difficulty
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.LookControl
@@ -32,13 +32,12 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.enchantment.EnchantmentHelper
 import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
-
 
 class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, world: Level) :
     HybridAquaticMinibossEntity(entityType, world) {
@@ -48,7 +47,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     var summonCooldown: Int = 0
 
     init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
         moveControl = KarkinosMoveControl(this)
         navigation = GroundPathNavigation(this, world)
         lookControl = LookControl(this)
@@ -67,7 +66,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
     }
 
     private var bossBar: ServerBossEvent =
-        ServerBossEvent(displayName, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_20)
+        ServerBossEvent(displayName!!, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_20)
 
     override fun registerGoals() {
         goalSelector.addGoal(1, KarkinosSummonGoal(this))
@@ -124,10 +123,6 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         } else {
             noActionTime = 0
         }
-    }
-
-    override fun getMobType(): MobType {
-        return MobType.WATER
     }
 
     fun isFlipped(): Boolean {
@@ -211,10 +206,10 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         }
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(FLIPPED, false)
-        entityData.define(SUMMONING, false)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(FLIPPED, false)
+        builder.define(SUMMONING, false)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
@@ -227,7 +222,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         if (hasCustomName()) {
-            bossBar.name = this.displayName
+            bossBar.name = this.displayName!!
         }
         this.setFlipped(nbt.getBoolean("Flipped"))
         this.setSummoning(nbt.getBoolean("Summoning"))
@@ -295,8 +290,14 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             val player = source.directEntity as Player
             val weapon = player.mainHandItem
             val hasFlipEnchant =
-                EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, weapon) > 1 ||
-                        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.RIPTIDE, weapon) > 1
+                EnchantmentHelper.getItemEnchantmentLevel(
+                    level().registryAccess().registry(Registries.ENCHANTMENT).get()
+                        .getHolder(Enchantments.BANE_OF_ARTHROPODS).get(), weapon
+                ) > 1 ||
+                        EnchantmentHelper.getItemEnchantmentLevel(
+                            level().registryAccess().registry(Registries.ENCHANTMENT).get()
+                                .getHolder(Enchantments.RIPTIDE).get(), weapon
+                        ) > 1
 
             if (hasFlipEnchant) {
                 this.flippedTimer = random.nextInt(60, 100)
@@ -309,7 +310,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
     override fun setCustomName(name: Component?) {
         super.setCustomName(name)
-        bossBar.name = this.displayName
+        bossBar.name = this.displayName!!
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {

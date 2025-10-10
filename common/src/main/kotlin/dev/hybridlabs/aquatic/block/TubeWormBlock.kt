@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
 import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -111,7 +112,7 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
         builder.add(WORMS, WATERLOGGED)
     }
 
-    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState): Boolean {
         return false
     }
 
@@ -122,8 +123,12 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
     override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
+    }
+
+    override fun codec(): MapCodec<out BushBlock?> {
+        TODO("Not yet implemented")
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {

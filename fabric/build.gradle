@@ -73,9 +73,7 @@ fabricApi {
 }
 
 loom {
-    if (project(":common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
-        accessWidenerPath.set(project(":common").file("src/main/resources/${mod_id}.accesswidener"))
-    }
+    accessWidenerPath.set(project(":common").file("src/main/resources/hybrid-aquatic.accesswidener"))
     mixin {
         defaultRefmapName.set("${mod_id}.refmap.json")
     }

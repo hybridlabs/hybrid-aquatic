@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -48,6 +49,10 @@ class WaterLettuceBlock(settings: Properties) : BushBlock(settings), SimpleWater
         } else {
             null
         }
+    }
+
+    override fun codec(): MapCodec<out BushBlock?> {
+        TODO("Not yet implemented")
     }
 
     override fun updateShape(

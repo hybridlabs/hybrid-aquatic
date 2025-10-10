@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import net.minecraft.core.BlockPos
@@ -55,7 +56,7 @@ class AnemoneBlock(settings: Properties) : BushBlock(settings), EntityBlock, Sim
         }
     }
 
-    override fun playerWillDestroy(world: Level, pos: BlockPos, state: BlockState, player: Player) {
+    override fun playerWillDestroy(world: Level, pos: BlockPos, state: BlockState, player: Player): BlockState {
         if (!world.isClientSide && player.isCreative && world.gameRules.getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
             val blockEntity = world.getBlockEntity(pos)
             if (blockEntity is AnemoneBlockEntity) {
@@ -63,7 +64,11 @@ class AnemoneBlock(settings: Properties) : BushBlock(settings), EntityBlock, Sim
             }
         }
 
-        super.playerWillDestroy(world, pos, state, player)
+        return super.playerWillDestroy(world, pos, state, player)
+    }
+
+    override fun codec(): MapCodec<out BushBlock?> {
+        TODO("Not yet implemented")
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
@@ -141,7 +146,7 @@ class AnemoneBlock(settings: Properties) : BushBlock(settings), EntityBlock, Sim
         builder.add(WATERLOGGED)
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 

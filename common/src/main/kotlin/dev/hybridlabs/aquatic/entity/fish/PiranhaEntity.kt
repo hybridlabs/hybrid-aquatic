@@ -19,11 +19,11 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
 
 class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
@@ -87,7 +87,7 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
         targetSelector.addGoal(1, HurtByTargetGoal(this).setAlertOthers())
         targetSelector.addGoal(1, ResetUniversalAngerTargetGoal(this, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is PiranhaEntity })
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.asHolder()) && it !is PiranhaEntity })
     }
 
     override fun canCollideWith(entity: Entity): Boolean {
@@ -115,7 +115,7 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
                 }
 
                 if (i > 0) {
-                    target.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), i * 20, 0), this)
+                    target.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.asHolder(), i * 20, 0), this)
                 }
             }
 

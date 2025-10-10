@@ -9,11 +9,11 @@ class CepheidaeJellyfishEntityModel : HybridAquaticJellyfishEntityModel<Cepheida
         return RenderType.entityTranslucent(texture)
     }
 
-    private val CAULIFLOWER_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.png")
-    private val FRIED_EGG_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.png")
+    private val CAULIFLOWER_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.png")
+    private val FRIED_EGG_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.png")
 
-    private val CAULIFLOWER_MODEL = ResourceLocation("hybrid-aquatic", "geo/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.geo.json")
-    private val FRIED_EGG_MODEL = ResourceLocation("hybrid-aquatic", "geo/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.geo.json")
+    private val CAULIFLOWER_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.geo.json")
+    private val FRIED_EGG_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.geo.json")
 
     override fun getTextureResource(animatable: CepheidaeJellyfishEntity): ResourceLocation {
         return when (animatable.variant) {

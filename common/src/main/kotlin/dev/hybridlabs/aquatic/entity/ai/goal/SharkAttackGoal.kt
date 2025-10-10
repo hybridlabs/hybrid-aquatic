@@ -76,7 +76,7 @@ open class SharkAttackGoal(
         } else if (!shark.isWithinRestriction(livingEntity.blockPosition())) {
             false
         } else {
-            livingEntity !is Player || !livingEntity.isSpectator() && !livingEntity.isCreative
+            livingEntity !is Player || !livingEntity.isSpectator && !livingEntity.isCreative
         }
     }
 
@@ -109,7 +109,7 @@ open class SharkAttackGoal(
         val livingEntity = shark.target
         if (livingEntity != null) {
             shark.lookControl.setLookAt(livingEntity, 30.0f, 30.0f)
-            val d0 = shark.getPerceivedTargetDistanceSquareForMeleeAttack(livingEntity)
+            val d0 = shark.distanceToSqr(livingEntity)
             this.ticksUntilNextPathRecalculation =
                 max((this.ticksUntilNextPathRecalculation - 1).toDouble(), 0.0).toInt()
             if ((this.followingTargetEvenIfNotSeen || shark.sensing.hasLineOfSight(livingEntity)) &&
@@ -151,7 +151,7 @@ open class SharkAttackGoal(
             this.resetAttackCooldown()
             shark.swing(InteractionHand.MAIN_HAND)
             shark.doHurtTarget(enemy)
-            if (!enemy.isBlocking) { enemy.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), 200, 0), shark) }
+            if (!enemy.isBlocking) { enemy.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.asHolder(), 200, 0), shark) }
 
             if (enemy.health <= 0) shark.hunger = HybridAquaticSharkEntity.MAX_HUNGER
             shark.health = shark.maxHealth

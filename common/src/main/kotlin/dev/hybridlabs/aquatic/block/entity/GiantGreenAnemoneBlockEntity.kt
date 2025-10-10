@@ -1,16 +1,21 @@
 package dev.hybridlabs.aquatic.block.entity
 
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.Animation
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
+import software.bernie.geckolib.util.RenderUtil
 
 class GiantGreenAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(HybridAquaticBlockEntityTypes.GIANT_GREEN_ANEMONE.get(), pos, state), GeoAnimatable {
@@ -35,11 +40,11 @@ class GiantGreenAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
     }
 
     override fun getTick(o: Any): Double {
-        return RenderUtils.getCurrentTick()
+        return RenderUtil.getCurrentTick()
     }
 
-    override fun getUpdateTag(): CompoundTag {
-        return saveWithoutMetadata()
+    override fun getUpdateTag(registries: HolderLookup.Provider): CompoundTag {
+        return saveWithoutMetadata(registries)
     }
 
     override fun getUpdatePacket(): ClientboundBlockEntityDataPacket {

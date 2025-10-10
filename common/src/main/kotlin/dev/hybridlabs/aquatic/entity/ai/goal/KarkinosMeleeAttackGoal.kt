@@ -65,8 +65,7 @@ open class KarkinosMeleeAttackGoal(
                 if (target is Player) {
                     val itemInUse = target.useItem
                     if (itemInUse.`is`(Items.SHIELD)) {
-                        target.disableShield(true)
-
+                        target.disableShield()
                         target.level().broadcastEntityEvent(target, 30.toByte())
                     }
                 }
@@ -87,7 +86,6 @@ open class KarkinosMeleeAttackGoal(
             if (karkinos.distanceToSqr(livingEntity) < 16.0) {
                 karkinos.lookControl.setLookAt(livingEntity, 10.0f, 10.0f)
             }
-            val d0 = karkinos.getPerceivedTargetDistanceSquareForMeleeAttack(livingEntity)
             this.ticksUntilNextPathRecalculation =
                 max((this.ticksUntilNextPathRecalculation - 1).toDouble(), 0.0).toInt()
             if ((followingTargetEvenIfNotSeen || karkinos.sensing.hasLineOfSight(livingEntity)) && ticksUntilNextPathRecalculation <= 0) {
@@ -97,13 +95,12 @@ open class KarkinosMeleeAttackGoal(
 
             this.ticksUntilNextAttack =
                 max((this.ticksUntilNextAttack - 1).toDouble(), 0.0).toInt()
-            this.checkAndPerformAttack(livingEntity, d0)
+            this.checkAndPerformAttack(livingEntity)
         }
     }
 
-    override fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
-        val reachSqr = getAttackReachSqr(enemy)
-        if (distToEnemySqr <= reachSqr && ticksUntilNextAttack <= 0 && attackDelayTicks == 0) {
+    override fun checkAndPerformAttack(enemy: LivingEntity) {
+        if (canPerformAttack(enemy) && ticksUntilNextAttack <= 0 && attackDelayTicks == 0) {
             karkinos.swing(InteractionHand.MAIN_HAND)
             attackDelayTicks = 10
             pendingTarget = enemy
@@ -115,7 +112,7 @@ open class KarkinosMeleeAttackGoal(
         this.ticksUntilNextAttack = this.adjustedTickDelay(20)
     }
 
-    override fun getAttackReachSqr(attackTarget: LivingEntity): Double {
-        return (karkinos.bbWidth * 1.75f * karkinos.bbWidth * 1.75f + attackTarget.bbWidth).toDouble()
+    override fun canPerformAttack(attackTarget: LivingEntity): Boolean {
+        return (karkinos.bbWidth * 1.75f * karkinos.bbWidth * 1.75f + attackTarget.bbWidth).toDouble() <= karkinos.distanceToSqr(attackTarget)
     }
 }

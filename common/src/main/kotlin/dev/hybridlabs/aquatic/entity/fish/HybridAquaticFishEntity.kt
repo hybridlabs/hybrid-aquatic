@@ -25,14 +25,14 @@ import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
@@ -54,32 +54,32 @@ open class HybridAquaticFishEntity(
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(MOISTNESS, getMaxMoistness())
-        entityData.define(FISH_SIZE, 0)
-        entityData.define(ATTEMPT_ATTACK, false)
-        entityData.define(HUNGER, MAX_HUNGER)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(MOISTNESS,getMaxMoistness())
+        builder.define(FISH_SIZE, 0)
+        builder.define(ATTEMPT_ATTACK, false)
+        builder.define(HUNGER, MAX_HUNGER)
+        builder.build()
     }
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
 
+    // TODO: This is a tag now
+    /*
     override fun canBreatheUnderwater(): Boolean {
         return true
     }
+     */
 
     override fun isPushedByFluid(): Boolean {
         return false
@@ -155,9 +155,6 @@ open class HybridAquaticFishEntity(
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
-    }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return !this.fromFishingNet && !this.hasCustomName()
@@ -290,9 +287,9 @@ open class HybridAquaticFishEntity(
     // endregion
 
     init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)

@@ -2,15 +2,17 @@
 
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.component.DataComponents
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -37,17 +39,17 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false))
     }
 
-    override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
-        val blockEntity = world.getBlockEntity(pos)
+    override fun getCloneItemStack(level: LevelReader, pos: BlockPos, state: BlockState): ItemStack {
+        val blockEntity = level.getBlockEntity(pos)
         if (blockEntity !is MessageInABottleBlockEntity) {
-            return super.getCloneItemStack(world, pos, state)
+            return super.getCloneItemStack(level, pos, state)
         }
         return createItemStack(blockEntity)
     }
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (!fluidStateAbove.`is`( Fluids.EMPTY)) {
+        if (!fluidStateAbove.`is`(Fluids.EMPTY)) {
             return false
         }
 
@@ -67,9 +69,9 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         placer: LivingEntity?,
         stack: ItemStack
     ) {
-        stack.getTagElement(BlockItem.BLOCK_ENTITY_TAG)?.let { nbt ->
+        stack.get(DataComponents.BLOCK_ENTITY_DATA)?.let { component ->
             // if not present, generate a random message
-            if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
+            if (MessageInABottleBlockEntity.MESSAGE_KEY !in component) {
                 // get a random message
                 val registryManager = world.registryAccess()
                 val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
@@ -89,7 +91,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
             .setValue(WATERLOGGED, waterlogged)
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 
@@ -131,6 +133,10 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         builder.add(WATERLOGGED)
     }
 
+    override fun codec(): MapCodec<out BaseEntityBlock?> {
+        TODO("Not yet implemented")
+    }
+
     override fun getRenderShape(state: BlockState): RenderShape {
         return RenderShape.ENTITYBLOCK_ANIMATED
     }
@@ -167,7 +173,10 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
 
         fun createItemStack(blockEntity: MessageInABottleBlockEntity): ItemStack {
             val stack = ItemStack(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get())
-            stack.getOrCreateTag().put(BlockItem.BLOCK_ENTITY_TAG, blockEntity.saveWithoutMetadata())
+            stack.set(
+                DataComponents.BLOCK_ENTITY_DATA,
+                CustomData.of(blockEntity.saveWithoutMetadata(blockEntity.level!!.registryAccess()))
+            )
             return stack
         }
     }

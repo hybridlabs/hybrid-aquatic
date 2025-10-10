@@ -29,10 +29,7 @@ class MessageInABottleBlockEntityRenderer(context: BlockEntityRendererProvider.C
         partialTick: Float,
         packedLight: Int,
         packedOverlay: Int,
-        red: Float,
-        green: Float,
-        blue: Float,
-        alpha: Float
+        colour: Int
     ) {
         val pos = blockEntity.blockPos
 
@@ -61,10 +58,7 @@ class MessageInABottleBlockEntityRenderer(context: BlockEntityRendererProvider.C
             partialTick,
             packedLight,
             packedOverlay,
-            red,
-            green,
-            blue,
-            alpha
+            colour
         )
     }
 }

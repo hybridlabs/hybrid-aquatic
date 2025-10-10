@@ -9,7 +9,10 @@ import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.RandomSource
 import net.minecraft.world.Difficulty
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.entity.*
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.Mob
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
@@ -25,9 +28,9 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.ServerLevelAccessor
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -48,9 +51,9 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
         }
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(ATTEMPT_ATTACK, false)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(ATTEMPT_ATTACK, false)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
@@ -97,10 +100,6 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
         this.limitedLifeTicks = limitedLifeTicks
     }
 
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
-
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
@@ -110,13 +109,12 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
         level: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         reason: MobSpawnType,
-        spawnData: SpawnGroupData?,
-        dataTag: CompoundTag?,
+        spawnData: SpawnGroupData?
     ): SpawnGroupData? {
         val randomsource = level.random
         this.populateDefaultEquipmentSlots(randomsource, difficulty)
-        this.populateDefaultEquipmentEnchantments(randomsource, difficulty)
-        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag)
+        this.populateDefaultEquipmentEnchantments(level, randomsource, difficulty)
+        return super.finalizeSpawn(level, difficulty, reason, spawnData)
     }
 
     override fun aiStep() {
@@ -140,9 +138,12 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
         }
     }
 
+    // TODO: this is a tag now
+    /*
     override fun canBreatheUnderwater(): Boolean {
         return true
     }
+     */
 
     override fun isPreventingPlayerRest(player: Player): Boolean {
         return true

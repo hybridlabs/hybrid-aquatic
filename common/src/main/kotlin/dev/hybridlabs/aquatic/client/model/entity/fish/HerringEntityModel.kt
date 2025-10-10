@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 
 class HerringEntityModel : HybridAquaticFishEntityModel<HerringEntity>("herring") {
 
@@ -40,7 +40,7 @@ class HerringEntityModel : HybridAquaticFishEntityModel<HerringEntity>("herring"
         animationState: AnimationState<HerringEntity>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
+        val deltaTime: Float = Minecraft.getInstance().timer.gameTimeDeltaTicks
 
         val body = animationProcessor.getBone(PartNames.BODY)
         val body2 = animationProcessor.getBone("body2")

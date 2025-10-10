@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -29,7 +30,11 @@ open class BaseDunegrassBlock(settings: Properties) : BushBlock(settings), Bonem
         return SHAPE
     }
 
-    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isValidBonemealTarget(
+        p0: LevelReader,
+        p1: BlockPos,
+        p2: BlockState
+    ): Boolean {
         return true
     }
 
@@ -43,6 +48,10 @@ open class BaseDunegrassBlock(settings: Properties) : BushBlock(settings), Bonem
         pos: BlockPos,
         state: BlockState
     ) {
+    }
+
+    override fun codec(): MapCodec<out BushBlock?> {
+        TODO("Not yet implemented")
     }
 
     override fun mayPlaceOn(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {

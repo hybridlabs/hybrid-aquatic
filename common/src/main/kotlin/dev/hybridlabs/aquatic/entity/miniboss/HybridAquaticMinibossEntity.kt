@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -23,9 +23,9 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var attackTick = 0
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(ATTEMPT_ATTACK, false)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(ATTEMPT_ATTACK, false)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
@@ -51,9 +51,12 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
         return false
     }
 
+    // TODO: this is a tag now
+    /*
     override fun canBreatheUnderwater(): Boolean {
         return true
     }
+     */
 
     override fun isPreventingPlayerRest(player: Player): Boolean {
         return true

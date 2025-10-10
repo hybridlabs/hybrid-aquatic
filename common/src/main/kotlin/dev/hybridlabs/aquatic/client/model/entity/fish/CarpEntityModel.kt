@@ -6,13 +6,13 @@ import kotlin.random.Random
 
 class CarpEntityModel : HybridAquaticFishEntityModel<CarpEntity>("carp") {
 
-    private val COMMON_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/carp.png")
+    private val COMMON_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/carp/carp.png")
 
     private val koiTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/carp_ai_goromo.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/carp_hajiro.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/carp_platinum.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/carp_tancho.png")
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/carp/carp_ai_goromo.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/carp/carp_hajiro.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/carp/carp_platinum.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/carp/carp_tancho.png")
     )
 
     override fun getTextureResource(animatable: CarpEntity): ResourceLocation {

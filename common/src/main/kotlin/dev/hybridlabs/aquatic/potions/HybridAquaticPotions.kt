@@ -4,14 +4,10 @@ package dev.hybridlabs.aquatic.potions
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
-import net.minecraft.world.item.Items
 import net.minecraft.world.item.alchemy.Potion
-import net.minecraft.world.item.alchemy.PotionBrewing
-import net.minecraft.world.item.alchemy.Potions
 import java.util.function.Supplier
 
 object HybridAquaticPotions {
@@ -25,13 +21,13 @@ object HybridAquaticPotions {
     val CLARITY_POTION = register(
         "clarity"
     ) {
-        Potion(MobEffectInstance(HybridAquaticMobEffects.CLARITY.get(), 1200, 0))
+        Potion(MobEffectInstance(HybridAquaticMobEffects.CLARITY.asHolder(), 1200, 0))
     }
 
     val THALASSOPHOBIA_POTION = register(
         "thalassophobia"
     ) {
-        Potion(MobEffectInstance(HybridAquaticMobEffects.THALASSOPHOBIA.get(), 1200, 0))
+        Potion(MobEffectInstance(HybridAquaticMobEffects.THALASSOPHOBIA.asHolder(), 1200, 0))
     }
 
     val MINOR_LUCK_POTION = register(
@@ -49,7 +45,7 @@ object HybridAquaticPotions {
     val BLEEDING_POTION = register(
         "bleeding"
     ) {
-        Potion(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), 200, 0))
+        Potion(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.asHolder(), 200, 0))
     }
 
     val SWIMMING_POTION = register(
@@ -64,19 +60,19 @@ object HybridAquaticPotions {
     val BUOYANCY_POTION = register(
         "buoyancy"
     ) {
-        Potion(MobEffectInstance(HybridAquaticMobEffects.BUOYANCY.get(), 200, 0))
+        Potion(MobEffectInstance(HybridAquaticMobEffects.BUOYANCY.asHolder(), 200, 0))
     }
 
     val THORNS_POTION = register(
         "thorns"
     ) {
-        Potion(MobEffectInstance(HybridAquaticMobEffects.THORNS.get(), 300, 0))
+        Potion(MobEffectInstance(HybridAquaticMobEffects.THORNS.asHolder(), 300, 0))
     }
 
     val CORROSION_POTION = register(
         "corrosion"
     ) {
-        Potion(MobEffectInstance(HybridAquaticMobEffects.CORROSION.get(), 300, 0))
+        Potion(MobEffectInstance(HybridAquaticMobEffects.CORROSION.asHolder(), 300, 0))
     }
 
     val BLINDNESS_POTION = register(
@@ -89,7 +85,8 @@ object HybridAquaticPotions {
         return CommonClass.POTIONS.register(id, potion)
     }
 
-    fun registerPotionRecipes() {
+    /*
+    fun registerPotionRecipes(potionBrewing: PotionBrewing) {
         PotionBrewing.addMix(
             Potions.AWKWARD, Items.INK_SAC, HybridAquaticPotions.BLINDNESS_POTION.get()
         )
@@ -124,4 +121,5 @@ object HybridAquaticPotions {
             Potions.AWKWARD, Items.GLOW_INK_SAC, HybridAquaticPotions.GLOWING_POTION.get()
         )
     }
+     */
 }

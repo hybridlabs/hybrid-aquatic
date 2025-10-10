@@ -5,11 +5,11 @@ import net.minecraft.resources.ResourceLocation
 
 class HermitCrabEntityModel : HybridAquaticCrustaceanEntityModel<HermitCrabEntity>("hermit_crab") {
 
-    private val SHELL_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_shell.png")
-    private val SKULL_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_skull.png")
+    private val SHELL_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_shell.png")
+    private val SKULL_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_skull.png")
 
-    private val SHELL_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_shell.geo.json")
-    private val SKULL_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_skull.geo.json")
+    private val SHELL_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_shell.geo.json")
+    private val SKULL_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_skull.geo.json")
 
     override fun getTextureResource(animatable: HermitCrabEntity): ResourceLocation {
         return when (animatable.variant) {

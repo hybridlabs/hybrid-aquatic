@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes.GLOW
 import net.minecraft.world.item.context.BlockPlaceContext
-import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.SimpleWaterloggedBlock
@@ -16,7 +15,7 @@ import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.level.pathfinder.PathComputationType
 
-class WallGlowstickBlock(settings: Properties) : WallTorchBlock(settings, GLOW), SimpleWaterloggedBlock {
+class WallGlowstickBlock(settings: Properties) : WallTorchBlock(GLOW,settings), SimpleWaterloggedBlock {
     init {
         registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false))
     }
@@ -50,12 +49,7 @@ class WallGlowstickBlock(settings: Properties) : WallTorchBlock(settings, GLOW),
         super.createBlockStateDefinition(builder.add(WATERLOGGED))
     }
 
-    override fun isPathfindable(
-        state: BlockState,
-        world: BlockGetter,
-        pos: BlockPos,
-        type: PathComputationType
-    ): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return true
     }
 }

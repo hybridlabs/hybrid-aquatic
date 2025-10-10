@@ -6,10 +6,14 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
-import net.minecraft.world.level.Level
 
 open class HookItem(settings: Properties) : Item(settings) {
-    override fun appendHoverText(stack: ItemStack, world: Level?, tooltip: MutableList<Component>, context: TooltipFlag) {
+    override fun appendHoverText(
+        stack: ItemStack,
+        context: TooltipContext,
+        tooltip: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
         val isTideLoaded = Services.PLATFORM.isModLoaded("tide")
 
         if (isTideLoaded) {
@@ -26,7 +30,7 @@ open class HookItem(settings: Properties) : Item(settings) {
             tooltip.add(hookComponent)
         }
 
-        super.appendHoverText(stack, world, tooltip, context)
+        super.appendHoverText(stack, context, tooltip, tooltipFlag)
     }
 
     override fun isEnchantable(stack: ItemStack): Boolean {

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.GiantGreenAnemoneBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -25,6 +26,10 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
 class GiantGreenAnemoneBlock(settings: Properties) : BushBlock(settings), EntityBlock, SimpleWaterloggedBlock {
+    override fun codec(): MapCodec<out BushBlock?> {
+        TODO("Not yet implemented")
+    }
+
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
@@ -96,7 +101,7 @@ class GiantGreenAnemoneBlock(settings: Properties) : BushBlock(settings), Entity
         builder.add(WATERLOGGED)
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 

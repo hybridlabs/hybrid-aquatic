@@ -27,16 +27,16 @@ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -52,7 +52,7 @@ open class HybridAquaticOctopusEntity(
     private var sittingTimer: Int = 0
 
     init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
         moveControl = OctopusMoveControl(this, 85, 10, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
@@ -105,35 +105,33 @@ open class HybridAquaticOctopusEntity(
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(MOISTNESS, getMaxMoistness())
-        entityData.define(OCTOPUS_SIZE, 0)
-        entityData.define(HUNGER, MAX_HUNGER)
-        entityData.define(ATTEMPT_ATTACK, false)
-        entityData.define(SITTING, true)
-        entityData.define(TARGET_COLOR, 12799593)
-        entityData.define(CURRENT_COLOR, 12799593)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(MOISTNESS, getMaxMoistness())
+        builder.define(OCTOPUS_SIZE, 0)
+        builder.define(HUNGER, MAX_HUNGER)
+        builder.define(ATTEMPT_ATTACK, false)
+        builder.define(SITTING, true)
+        builder.define(TARGET_COLOR, 12799593)
+        builder.define(CURRENT_COLOR, 12799593)
     }
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
-
+    //TODO: this is a tag now
+    /*
     override fun canBreatheUnderwater(): Boolean {
         return true
     }
+     */
 
     override fun isPushedByFluid(): Boolean {
         return false
@@ -300,10 +298,6 @@ open class HybridAquaticOctopusEntity(
         this.setSitting(nbt.getBoolean("Sitting"))
     }
 
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
-    }
-
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return !fromFishingNet && !hasCustomName()
     }
@@ -380,12 +374,14 @@ open class HybridAquaticOctopusEntity(
     // endregion
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "Swim/Idle", 10
-        ) { state: AnimationState<*> ->
-            state.setAndContinue(
-                if (state.isMoving) DefaultAnimations.SWIM else DefaultAnimations.IDLE
-            )
-        })
+        controllers.add(
+            AnimationController(
+                this, "Swim/Idle", 10
+            ) { state: AnimationState<*> ->
+                state.setAndContinue(
+                    if (state.isMoving) DefaultAnimations.SWIM else DefaultAnimations.IDLE
+                )
+            })
         controllers.add(AnimationController(this, "Sit", 10) { state ->
             if (isSitting() || this.onGround()) {
                 state.setAndContinue(DefaultAnimations.SIT)

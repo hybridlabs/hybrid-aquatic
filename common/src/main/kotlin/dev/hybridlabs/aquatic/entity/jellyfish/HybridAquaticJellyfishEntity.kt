@@ -14,7 +14,9 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
-import net.minecraft.world.entity.*
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.MoverType
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.Goal
@@ -23,15 +25,15 @@ import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.EasingType
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.EasingType
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
@@ -61,7 +63,7 @@ open class HybridAquaticJellyfishEntity(
     init {
         random.setSeed(id.toLong())
         this.thrustTimerSpeed = 1.0f / (random.nextFloat() + 1.0f) * 0.2f
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
         moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.05F, 0.1F, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
@@ -72,19 +74,18 @@ open class HybridAquaticJellyfishEntity(
         goalSelector.addGoal(0, StayInWaterGoal(this))
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(MOISTNESS, getMaxMoistness())
-        entityData.define(JELLYFISH_SIZE, 0)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(MOISTNESS, getMaxMoistness())
+        builder.define(JELLYFISH_SIZE, 0)
     }
 
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
-
+    // TODO: this is a tag now
+    /*
     override fun canBreatheUnderwater(): Boolean {
         return true
     }
+    */
 
     override fun isPushedByFluid(): Boolean {
         return false
@@ -94,9 +95,6 @@ open class HybridAquaticJellyfishEntity(
         return 2
     }
 
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
-    }
 
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.SQUID_AMBIENT

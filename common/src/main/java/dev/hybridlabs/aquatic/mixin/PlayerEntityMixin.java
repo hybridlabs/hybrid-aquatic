@@ -134,7 +134,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             } else {
                 player.addEffect(
                         new MobEffectInstance(
-                                HybridAquaticMobEffects.INSTANCE.getCLARITY().get(),
+                                HybridAquaticMobEffects.INSTANCE.getCLARITY().asHolder(),
                                 600,
                                 0,
                                 false,

@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 
 class DamselfishEntityModel : HybridAquaticFishEntityModel<DamselfishEntity>("damselfish") {
 
@@ -39,14 +39,14 @@ class DamselfishEntityModel : HybridAquaticFishEntityModel<DamselfishEntity>("da
         instanceId: Long,
         animationState: AnimationState<DamselfishEntity>
     ) {
-        super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
+        super.setCustomAnimations(animatable,instanceId,animationState)
+        val timer = Minecraft.getInstance().timer
 
         val body = animationProcessor.getBone(PartNames.BODY)
         val body2 = animationProcessor.getBone("body2")
         val body3 = animationProcessor.getBone("body3")
 
-        val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRot, animatable.xRotO), -45f, 45f)
+        val xRot = Mth.clamp(Mth.lerp(timer.gameTimeDeltaTicks, animatable.xRot, animatable.xRotO), -45f, 45f)
         body.rotX = xRot * -Mth.DEG_TO_RAD
         body2?.rotX = xRot * -Mth.DEG_TO_RAD
         body3?.rotX = xRot * -Mth.DEG_TO_RAD

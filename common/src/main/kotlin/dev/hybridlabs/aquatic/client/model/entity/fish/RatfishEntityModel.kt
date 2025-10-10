@@ -11,8 +11,8 @@ class RatfishEntityModel : HybridAquaticFishEntityModel<RatfishEntity>("ratfish"
     }
 
     private val commonTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_brown.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_silver.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_brown.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_silver.png"),
         )
 
     override fun getTextureResource(animatable: RatfishEntity): ResourceLocation {

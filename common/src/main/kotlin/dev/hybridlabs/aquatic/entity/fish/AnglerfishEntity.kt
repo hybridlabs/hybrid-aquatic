@@ -39,7 +39,7 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Leve
         targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is AnglerfishEntity })
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.asHolder()) && it !is AnglerfishEntity })
     }
 
     companion object {

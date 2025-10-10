@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.LivingEntityRenderer
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.core.`object`.Color
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
+import software.bernie.geckolib.util.Color
 
 
 class StarfishColorLayer(
@@ -27,12 +27,12 @@ class StarfishColorLayer(
         poseStack: PoseStack,
         animatable: StarfishEntity,
         bakedModel: BakedGeoModel,
-        renderType: RenderType,
+        renderType: RenderType?,
         bufferSource: MultiBufferSource,
-        buffer: VertexConsumer,
+        buffer: VertexConsumer?,
         partialTick: Float,
         packedLight: Int,
-        packedOverlay: Int,
+        packedOverlay: Int
     ) {
         if (animatable.variant != StarfishEntity.Companion.Type.SMALL &&
             animatable.variant != StarfishEntity.Companion.Type.MEDIUM) {
@@ -54,10 +54,7 @@ class StarfishColorLayer(
             partialTick,
             packedLight,
             LivingEntityRenderer.getOverlayCoords(animatable, 0.0f),
-            color.redFloat,
-            color.greenFloat,
-            color.blueFloat,
-            1f
+            color.argbInt
         )
     }
 

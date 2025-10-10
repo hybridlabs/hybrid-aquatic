@@ -31,7 +31,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
     ),
     VariantHolder<StarfishEntity.Companion.Type>, OverlayTextureFeature {
 
-    override fun getDimensions(pose: Pose): EntityDimensions {
+    override fun getDefaultDimensions(pose: Pose): EntityDimensions {
         val scale = when (variant) {
             Type.CROWN_OF_THORNS -> 2.0f
             else -> 1.0f
@@ -152,8 +152,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
@@ -166,7 +165,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
             Type.SMALL -> OverlayTextures.byId(listOf(0, 1, 2, 3).random(Random))
             Type.MEDIUM -> OverlayTextures.byId(listOf(0, 4, 5, 6).random(Random))
         }
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     override fun getMaxSize(): Int {
@@ -219,12 +218,12 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        entityData.define(OverlayTexture, 0)
-        entityData.define(StarfishColor, -1)
-        entityData.define(OverlayColor, -1)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        builder.define(OverlayTexture, 0)
+        builder.define(StarfishColor, -1)
+        builder.define(OverlayColor, -1)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

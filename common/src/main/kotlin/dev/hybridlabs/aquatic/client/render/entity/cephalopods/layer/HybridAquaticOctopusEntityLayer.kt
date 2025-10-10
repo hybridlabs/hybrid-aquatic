@@ -13,8 +13,8 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.core.`object`.Color
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
+import software.bernie.geckolib.util.Color
 
 
 class HybridAquaticOctopusEntityLayer<T: HybridAquaticOctopusEntity>(
@@ -29,12 +29,12 @@ class HybridAquaticOctopusEntityLayer<T: HybridAquaticOctopusEntity>(
         poseStack: PoseStack,
         animatable: T,
         bakedModel: BakedGeoModel,
-        renderType: RenderType,
+        renderType: RenderType?,
         bufferSource: MultiBufferSource,
-        buffer: VertexConsumer,
+        buffer: VertexConsumer?,
         partialTick: Float,
         packedLight: Int,
-        packedOverlay: Int,
+        packedOverlay: Int
     ) {
         if (animatable !is OverlayTextureFeature) return
 
@@ -74,10 +74,7 @@ class HybridAquaticOctopusEntityLayer<T: HybridAquaticOctopusEntity>(
             partialTick,
             packedLight,
             LivingEntityRenderer.getOverlayCoords(animatable, 0.0f),
-            current.brighter(1.2).redFloat,
-            current.brighter(1.2).greenFloat,
-            current.brighter(1.2).blueFloat,
-            1f
+            current.brighter(1.2).argbInt
         )
     }
 }

@@ -6,19 +6,19 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.constant.DataTickets
-import software.bernie.geckolib.core.animation.AnimationState
 
 class OtterEntityModel : HybridAquaticMammalEntityModel<OtterEntity>("otter") {
 
-    private val RIVER_OTTER_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/mammal/otter/river_otter.png")
-    private val SEA_OTTER_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/mammal/otter/sea_otter.png")
+    private val RIVER_OTTER_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/mammal/otter/river_otter.png")
+    private val SEA_OTTER_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/mammal/otter/sea_otter.png")
 
-    private val RIVER_OTTER_MODEL = ResourceLocation("hybrid-aquatic", "geo/mammal/otter/river_otter.geo.json")
-    private val SEA_OTTER_MODEL = ResourceLocation("hybrid-aquatic", "geo/mammal/otter/sea_otter.geo.json")
+    private val RIVER_OTTER_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/mammal/otter/river_otter.geo.json")
+    private val SEA_OTTER_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/mammal/otter/sea_otter.geo.json")
 
-    private val RIVER_OTTER_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/river_otter.animation.json")
-    private val SEA_OTTER_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/sea_otter.animation.json")
+    private val RIVER_OTTER_ANIMATION = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "animations/river_otter.animation.json")
+    private val SEA_OTTER_ANIMATION = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "animations/sea_otter.animation.json")
 
     override fun getTextureResource(animatable: OtterEntity): ResourceLocation {
         return when (animatable.variant) {
@@ -46,7 +46,7 @@ class OtterEntityModel : HybridAquaticMammalEntityModel<OtterEntity>("otter") {
         instanceId: Long,
         animationState: AnimationState<OtterEntity>
     ) {
-        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
+        val deltaTime: Float = Minecraft.getInstance().timer.gameTimeDeltaTicks
         val body = animationProcessor.getBone(PartNames.BODY)
 
         if (!animationState.isMoving && animatable.isInWater && !animatable.onGround() && animatable.getAction() == OtterAction.FLOATING) {
@@ -57,7 +57,7 @@ class OtterEntityModel : HybridAquaticMammalEntityModel<OtterEntity>("otter") {
             if (head != null) {
                 val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
 
-                head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
+                head.rotX = entityData!!.headPitch() * Mth.DEG_TO_RAD
                 head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
             }
 

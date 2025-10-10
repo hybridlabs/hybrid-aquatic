@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private val id: String) : GeoModel<T>() {
@@ -32,11 +32,11 @@ abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private
         animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
+        val timer= Minecraft.getInstance().timer
 
         val body = animationProcessor.getBone(PartNames.BODY)
 
-        val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRot, animatable.xRotO), -45f, 45f)
+        val xRot = Mth.clamp(Mth.lerp(timer.gameTimeDeltaTicks, animatable.xRot, animatable.xRotO), -45f, 45f)
         body.rotX = xRot * -Mth.DEG_TO_RAD
     }
 }

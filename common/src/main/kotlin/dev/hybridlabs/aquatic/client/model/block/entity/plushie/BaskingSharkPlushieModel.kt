@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.block.entity.plushie
 
+import com.mojang.blaze3d.vertex.PoseStack
+import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import net.minecraft.client.model.geom.ModelPart
 import net.minecraft.client.model.geom.PartNames.BODY
@@ -14,6 +16,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition
  * @see PlushieBlock.Variant.BASKING_SHARK
  */
 class BaskingSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
+
     companion object {
         fun createModelData(): LayerDefinition {
             val modelData = MeshDefinition()

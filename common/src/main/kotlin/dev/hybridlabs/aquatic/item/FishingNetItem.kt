@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.core.component.DataComponents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.material.Fluids
 import java.util.*
@@ -38,11 +40,12 @@ class FishingNetItem(settings: Properties) : Item(settings) {
         val stack = player.getItemInHand(hand)
 
         if (!level.isClientSide) {
-            val nbtCopy = stack.tag?.copy()
-            if (nbtCopy != null) {
-                val optionalEntity = getEntityFromNBT(nbtCopy)
+            val customData = stack.components.get(DataComponents.CUSTOM_DATA)
+            if (customData != null) {
+                val optionalEntity = getEntityFromNBT(customData)
                 if (optionalEntity.isPresent) {
-                    val hitResult = getPlayerPOVHitResult(level, player, net.minecraft.world.level.ClipContext.Fluid.SOURCE_ONLY)
+                    val hitResult =
+                        getPlayerPOVHitResult(level, player, net.minecraft.world.level.ClipContext.Fluid.SOURCE_ONLY)
                     if (hitResult.type != net.minecraft.world.phys.HitResult.Type.BLOCK) {
                         return InteractionResultHolder.pass(stack)
                     }
@@ -58,7 +61,9 @@ class FishingNetItem(settings: Properties) : Item(settings) {
 
                     val entityType = optionalEntity.get()
                     val entity = entityType.create(level) ?: return InteractionResultHolder.fail(stack)
-                    val tag = stack.tag ?: return InteractionResultHolder.fail(stack)
+                    val customData =
+                        stack.components.get(DataComponents.CUSTOM_DATA) ?: return InteractionResultHolder.fail(stack)
+                    val tag = customData.copyTag()
                     val entityData = tag.getCompound(ENTITY_KEY)
                     entity.load(entityData)
 
@@ -71,7 +76,7 @@ class FishingNetItem(settings: Properties) : Item(settings) {
                     )
 
                     (level as ServerLevel).addFreshEntity(entity)
-                    stack.tag?.remove(ENTITY_KEY)
+                    customData.update { tag -> tag.remove(ENTITY_KEY) }
 
                     return InteractionResultHolder.success(stack)
                 }
@@ -80,7 +85,6 @@ class FishingNetItem(settings: Properties) : Item(settings) {
 
         return InteractionResultHolder.pass(stack)
     }
-
 
 
     companion object {
@@ -92,19 +96,20 @@ class FishingNetItem(settings: Properties) : Item(settings) {
             entityCompound.putBoolean("PersistenceRequired", true)
             entityCompound.putBoolean("FromFishingNet", true)
             val itemStack = user.getItemInHand(hand)
-            itemStack.orCreateTag.put(ENTITY_KEY, entityCompound)
+            itemStack.components.get(DataComponents.CUSTOM_DATA)?.update { tag ->
+                tag.put(ENTITY_KEY, entityCompound)
+            }
         }
 
-        fun getEntityFromNBT(nbt: CompoundTag): Optional<EntityType<*>> {
+        fun getEntityFromNBT(customData: CustomData): Optional<EntityType<*>?> {
+            val nbt = customData.copyTag()
             val storedNBT = nbt.getCompound(ENTITY_KEY)
             return EntityType.by(storedNBT)
         }
 
         fun alreadyHasFish(stack: ItemStack): Boolean {
-            val nbtCopy = stack.tag?.copy() ?: return false
-            val entityNBT = nbtCopy.getCompound(ENTITY_KEY) ?: return false
-
-            return !entityNBT.isEmpty
+            val customData = stack.components.get(DataComponents.CUSTOM_DATA)
+            return (customData!!.contains(ENTITY_KEY))
         }
     }
 }

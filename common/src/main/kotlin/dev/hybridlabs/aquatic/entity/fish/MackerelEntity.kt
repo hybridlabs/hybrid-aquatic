@@ -39,9 +39,9 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
         return 12
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(FISHCOUNT, ONE_FISH)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(FISHCOUNT, ONE_FISH)
     }
 
     override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
@@ -89,8 +89,7 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val maxHp = getAttributeValue(Attributes.MAX_HEALTH).toFloat()
         val startingFraction = this.random.nextFloat()
@@ -105,10 +104,10 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
             else -> setFishCount(ONE_FISH)
         }
 
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getDimensions(pose: Pose): EntityDimensions {
+    override fun getDefaultDimensions(pose: Pose): EntityDimensions {
         val scale = when (getFishCount()) {
             ONE_FISH -> 1.0f
             TWO_FISH -> 1.5f
@@ -117,10 +116,6 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
         }
 
         return super.getDimensions(pose).scale(scale)
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
     }
 
     override fun canCollideWith(entity: Entity): Boolean {

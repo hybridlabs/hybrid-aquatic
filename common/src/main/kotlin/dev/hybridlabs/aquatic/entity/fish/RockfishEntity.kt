@@ -42,12 +42,11 @@ class RockfishEntity(entityType: EntityType<out RockfishEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
-        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData)
 
-        val variant = RockfishEntity.Companion.Type.entries.random(Random).id
+        val variant = Type.entries.random(Random).id
         this.variant = Type.fromId(variant)
 
         if (spawnReason == MobSpawnType.CHUNK_GENERATION || spawnReason == MobSpawnType.NATURAL) {
@@ -111,9 +110,9 @@ class RockfishEntity(entityType: EntityType<out RockfishEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(TYPE, 0)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(TYPE, 0)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

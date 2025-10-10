@@ -2,21 +2,18 @@ package dev.hybridlabs.aquatic.block.entity
 
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
+import software.bernie.geckolib.util.RenderUtil
 
 /**
  * Represents the block entity for Message in a Bottle blocks.
@@ -36,22 +33,24 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
      */
     var messageItemStack: ItemStack = ItemStack.EMPTY
 
-    override fun saveAdditional(nbt: CompoundTag) {
-        super.saveAdditional(nbt)
+    override fun saveAdditional(nbt: CompoundTag, registries: HolderLookup.Provider) {
+        super.saveAdditional(nbt, registries)
         nbt.putString(VARIANT_KEY, variant.id)
 
         if (!messageItemStack.isEmpty) {
-            nbt.put(MESSAGE_KEY, messageItemStack.save(CompoundTag()))
+            nbt.put(MESSAGE_KEY, messageItemStack.save(registries, CompoundTag()))
         }
     }
 
-    override fun load(nbt: CompoundTag) {
-        super.load(nbt)
+    override fun loadAdditional(nbt: CompoundTag, registries: HolderLookup.Provider) {
+        super.loadAdditional(nbt, registries)
         variant = MessageInABottleBlock.Variant.byId(nbt.getString(VARIANT_KEY))
-        messageItemStack = ItemStack.of(nbt.getCompound(MESSAGE_KEY))
+        messageItemStack = ItemStack.parse(registries, nbt).get()
     }
 
-    private fun <E> predicate(event: software.bernie.geckolib.core.animation.AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
+    private fun <E> predicate(
+        event: AnimationState<E>
+    ): PlayState where E : BlockEntity?, E : GeoAnimatable {
         return if (blockState.hasProperty(WATERLOGGED)) {
             event.controller.setAnimation(WATER_BOB_ANIMATION)
             PlayState.CONTINUE
@@ -69,11 +68,11 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
     }
 
     override fun getTick(animatable: Any): Double {
-        return RenderUtils.getCurrentTick()
+        return RenderUtil.getCurrentTick()
     }
 
-    override fun getUpdateTag(): CompoundTag {
-        return saveWithoutMetadata()
+    override fun getUpdateTag(registries: HolderLookup.Provider): CompoundTag {
+        return saveWithoutMetadata(registries)
     }
 
     override fun getUpdatePacket(): ClientboundBlockEntityDataPacket {

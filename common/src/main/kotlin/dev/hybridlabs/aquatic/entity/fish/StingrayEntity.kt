@@ -4,11 +4,12 @@ import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.Holder
+import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.ResourceKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.level.storage.loot.LootTable
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -39,10 +41,11 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
         goalSelector.addGoal(1, HurtByTargetGoal(this))
     }
 
-    override fun getDefaultLootTable(): ResourceLocation {
+    override fun getDefaultLootTable(): ResourceKey<LootTable?> {
         return when (variant) {
-            Type.BLUE_SPOTTED -> HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY
-            Type.SPOTTED_EAGLE -> HybridAquaticLootTables.SPOTTED_EAGLE_RAY
+            Type.BLUE_SPOTTED -> ResourceKey.create(
+                Registries.LOOT_TABLE,HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY)
+            Type.SPOTTED_EAGLE -> ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.SPOTTED_EAGLE_RAY)
         }
     }
 
@@ -50,13 +53,12 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -111,9 +113,9 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

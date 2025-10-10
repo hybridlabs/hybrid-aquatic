@@ -43,13 +43,12 @@ class MahiEntity(entityType: EntityType<out MahiEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
-        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData)
 
-        val variant = MahiEntity.Companion.Type.entries.random(Random).id
-        this.variant = MahiEntity.Companion.Type.fromId(variant)
+        val variant = Type.entries.random(Random).id
+        this.variant = Type.fromId(variant)
 
         if (spawnReason == MobSpawnType.CHUNK_GENERATION || spawnReason == MobSpawnType.NATURAL) {
             val fishCount = (this.maxSpawnClusterSize * this.random.nextFloat()).toInt()
@@ -116,9 +115,9 @@ class MahiEntity(entityType: EntityType<out MahiEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

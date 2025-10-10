@@ -105,7 +105,8 @@ open class FishAttackGoal(
         val livingEntity = fish.target
         if (livingEntity != null) {
             fish.lookControl.setLookAt(livingEntity, 30.0f, 30.0f)
-            val d0 = fish.getPerceivedTargetDistanceSquareForMeleeAttack(livingEntity)
+            val d0: Double = fish.distanceToSqr(livingEntity)
+
             this.ticksUntilNextPathRecalculation =
                 max((this.ticksUntilNextPathRecalculation - 1).toDouble(), 0.0).toInt()
             if ((this.followingTargetEvenIfNotSeen || fish.sensing.hasLineOfSight(livingEntity)) &&

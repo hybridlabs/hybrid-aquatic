@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.LivingEntityRenderer
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.core.`object`.Color
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
+import software.bernie.geckolib.util.Color
 
 
 class StarfishOverlayLayer(
@@ -27,12 +27,12 @@ class StarfishOverlayLayer(
         poseStack: PoseStack,
         animatable: StarfishEntity,
         bakedModel: BakedGeoModel,
-        renderType: RenderType,
+        renderType: RenderType?,
         bufferSource: MultiBufferSource,
-        buffer: VertexConsumer,
+        buffer: VertexConsumer?,
         partialTick: Float,
         packedLight: Int,
-        packedOverlay: Int,
+        packedOverlay: Int
     ) {
         val overlayName = animatable.getOverlayTextureName()
         if (overlayName.isEmpty()) return
@@ -52,10 +52,7 @@ class StarfishOverlayLayer(
             partialTick,
             packedLight,
             LivingEntityRenderer.getOverlayCoords(animatable, 0.0f),
-            color.redFloat,
-            color.greenFloat,
-            color.blueFloat,
-            1f
+            color.argbInt
         )
     }
 

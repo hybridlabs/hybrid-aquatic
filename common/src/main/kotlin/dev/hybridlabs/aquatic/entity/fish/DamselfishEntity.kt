@@ -15,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
+import software.bernie.geckolib.animation.AnimatableManager
 
 class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Level) :
     HybridAquaticSchoolingFishEntity(
@@ -39,9 +40,10 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
         return 12
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(FISHCOUNT, ONE_FISH)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(FISHCOUNT, ONE_FISH)
+        builder.build()
     }
 
     override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
@@ -89,8 +91,7 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val maxHp = getAttributeValue(Attributes.MAX_HEALTH).toFloat()
         val startingFraction = this.random.nextFloat()
@@ -105,10 +106,10 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
             else -> setFishCount(ONE_FISH)
         }
 
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getDimensions(pose: Pose): EntityDimensions {
+    override fun getDefaultDimensions(pose: Pose): EntityDimensions {
         val scale = when (getFishCount()) {
             ONE_FISH -> 1.0f
             TWO_FISH -> 1.5f
@@ -117,10 +118,6 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
         }
 
         return super.getDimensions(pose).scale(scale)
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
     }
 
     override fun canCollideWith(entity: Entity): Boolean {

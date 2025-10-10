@@ -1,10 +1,12 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.ByIdMap
@@ -26,6 +28,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.gameevent.GameEvent
+import net.minecraft.world.level.storage.loot.LootTable
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -40,8 +43,11 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
     }
 
-    override fun getDefaultLootTable(): ResourceLocation {
-        return ResourceLocation("hybrid-aquatic", "entities/decorator_crab")
+    override fun getDefaultLootTable(): ResourceKey<LootTable?> {
+        return ResourceKey<LootTable?>.create(
+            Registries.LOOT_TABLE,
+            ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "entities/decorator_crab")
+        )
     }
 
     var coralTimer: Int
@@ -55,7 +61,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
                 this.coralTimer = 3600
                 this.playSound(SoundEvents.SHEEP_SHEAR, 1.0f, 1.0f)
                 this.gameEvent(GameEvent.SHEAR, player)
-                itemStack.hurtAndBreak(1, player) { it.broadcastBreakEvent(hand) }
+                itemStack.hurtAndBreak(1, player,getSlotForHand(hand))
                 spawnAtLocation(ItemStack(HybridAquaticItems.CORAL_CHUNK.get()))
                 return InteractionResult.SUCCESS
             }
@@ -76,11 +82,10 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -132,10 +137,10 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         return -5
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        entityData.define(CORAL_TIMER, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        builder.define(CORAL_TIMER, 0)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

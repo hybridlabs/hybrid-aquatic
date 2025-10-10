@@ -40,9 +40,9 @@ class SquirrelfishEntity(entityType: EntityType<out SquirrelfishEntity>, world: 
         return 12
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(FISHCOUNT, ONE_FISH)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(FISHCOUNT, ONE_FISH)
     }
 
     override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
@@ -90,8 +90,7 @@ class SquirrelfishEntity(entityType: EntityType<out SquirrelfishEntity>, world: 
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val maxHp = getAttributeValue(Attributes.MAX_HEALTH).toFloat()
         val startingFraction = this.random.nextFloat()
@@ -106,10 +105,10 @@ class SquirrelfishEntity(entityType: EntityType<out SquirrelfishEntity>, world: 
             else -> setFishCount(ONE_FISH)
         }
 
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getDimensions(pose: Pose): EntityDimensions {
+    override fun getDefaultDimensions(pose: Pose): EntityDimensions {
         val scale = when (getFishCount()) {
             ONE_FISH -> 1.0f
             TWO_FISH -> 2.0f
@@ -117,11 +116,7 @@ class SquirrelfishEntity(entityType: EntityType<out SquirrelfishEntity>, world: 
             else -> 1.0f
         }
 
-        return super.getDimensions(pose).scale(scale)
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
+        return super.getDefaultDimensions(pose).scale(scale)
     }
 
     override fun canCollideWith(entity: Entity): Boolean {

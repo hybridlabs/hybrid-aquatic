@@ -32,13 +32,13 @@ import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.levelgen.Heightmap
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
 import java.util.*
 import java.util.function.IntFunction
 
@@ -74,8 +74,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         navigation = AmphibiousPathNavigation(this, this.level())
 
         // Setting WATER_BORDER to zero makes surface water blocks preferred
-        setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(PathType.WATER_BORDER, 0.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
     }
 
     /**
@@ -122,11 +122,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         return this.maxAirSupply
     }
 
-    /* Can't breathe underwater, but can't drown, either. */
-    override fun canBreatheUnderwater(): Boolean {
-        return false
-    }
-
     override fun isPushedByFluid(): Boolean {
         return false
     }
@@ -160,13 +155,12 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     //#region SFX
@@ -194,10 +188,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.6f
     }
 
     override fun getWaterline(): Float {
@@ -328,11 +318,11 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        entityData.define(HUNGER, MAX_HUNGER)
-        entityData.define(ACTION, 0) // OtterAction.IDLE
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        builder.define(HUNGER, MAX_HUNGER)
+        builder.define(ACTION, 0) // OtterAction.IDLE
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
@@ -385,9 +375,9 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         otter,
         speedModifier, followingTargetEvenIfNotSeen
     ) {
-        override fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
-            val d0 = this.getAttackReachSqr(enemy)
-            if (distToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0) {
+        override fun checkAndPerformAttack(enemy: LivingEntity) {
+            if (canPerformAttack(enemy))
+            {
                 this.resetAttackCooldown()
                 otter.swing(InteractionHand.MAIN_HAND)
                 otter.doHurtTarget(enemy)
@@ -395,7 +385,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                 if (enemy.health <= 0) otter.hunger = MAX_HUNGER
                 otter.health = otter.maxHealth
             }
-            super.checkAndPerformAttack(enemy, distToEnemySqr)
+            super.checkAndPerformAttack(enemy)
         }
     }
 

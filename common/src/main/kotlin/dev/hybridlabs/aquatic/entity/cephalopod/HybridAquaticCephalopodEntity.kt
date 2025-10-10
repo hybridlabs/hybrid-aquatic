@@ -31,16 +31,16 @@ import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
@@ -61,33 +61,33 @@ open class HybridAquaticCephalopodEntity(
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { hunger <= 1200 && it.type.`is`(prey) })
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(MOISTNESS, getMaxMoistness())
-        entityData.define(CEPHALOPOD_SIZE, 0)
-        entityData.define(ATTEMPT_ATTACK, false)
-        entityData.define(HUNGER, MAX_HUNGER)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(MOISTNESS, getMaxMoistness())
+        builder.define(CEPHALOPOD_SIZE, 0)
+        builder.define(ATTEMPT_ATTACK, false)
+        builder.define(HUNGER, MAX_HUNGER)
+        builder.build()
     }
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         this.xRot = 0.0f
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
 
+    // TODO: this is a tag now.
+    /*
     override fun canBreatheUnderwater(): Boolean {
         return true
     }
+     */
 
     override fun isPushedByFluid(): Boolean {
         return false
@@ -208,16 +208,13 @@ open class HybridAquaticCephalopodEntity(
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
-    }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return !fromFishingNet && !hasCustomName()
     }
 
     init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
         moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
@@ -264,6 +261,10 @@ open class HybridAquaticCephalopodEntity(
         return WaterBoundPathNavigation(this, world)
     }
 
+    override fun isWithinMeleeAttackRange(entity: LivingEntity): Boolean {
+        return (1.25f + entity.bbWidth).toDouble() <= distanceToSqr(entity)
+    }
+
     //region properties
 
     private var moistness: Int
@@ -294,7 +295,8 @@ open class HybridAquaticCephalopodEntity(
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Swim/Idle", 10
+            AnimationController(
+                this, "Swim/Idle", 10
             ) { state: AnimationState<*> ->
                 state.setAndContinue(
                     if (state.isMoving) DefaultAnimations.SWIM else DefaultAnimations.IDLE
@@ -331,9 +333,8 @@ open class HybridAquaticCephalopodEntity(
             return !cephalopod.fromFishingNet && super.canUse()
         }
 
-        override fun checkAndPerformAttack(target: LivingEntity, squaredDistance: Double) {
-            val d = getAttackReachSqr(target)
-            if (squaredDistance <= d && this.isTimeToAttack) {
+        override fun checkAndPerformAttack(target: LivingEntity) {
+            if (canPerformAttack(target)){
                 resetAttackCooldown()
                 mob.doHurtTarget(target)
                 cephalopod.isSprinting = true
@@ -345,9 +346,6 @@ open class HybridAquaticCephalopodEntity(
             }
         }
 
-        override fun getAttackReachSqr(entity: LivingEntity): Double {
-            return (1.25f + entity.bbWidth).toDouble()
-        }
 
         override fun start() {
             super.start()

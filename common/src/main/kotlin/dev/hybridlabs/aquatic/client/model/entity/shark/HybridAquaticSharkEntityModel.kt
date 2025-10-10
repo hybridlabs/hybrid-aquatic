@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity>(
@@ -34,7 +34,7 @@ abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity>(
         animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
+        val deltaTime: Float = Minecraft.getInstance().timer.gameTimeDeltaTicks
 
         val body = animationProcessor.getBone(PartNames.BODY)
 

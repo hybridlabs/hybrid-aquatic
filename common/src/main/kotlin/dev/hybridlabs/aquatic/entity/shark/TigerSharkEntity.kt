@@ -47,7 +47,7 @@ class TigerSharkEntity(entityType: EntityType<out TigerSharkEntity>, world: Leve
             val itemsToDrop = listOf(
                 ItemStack(Items.LEATHER_BOOTS),
                 ItemStack(Items.GLASS_BOTTLE),
-                ItemStack(Items.SCUTE),
+                ItemStack(Items.TURTLE_SCUTE),
                 ItemStack(Items.NAUTILUS_SHELL),
                 ItemStack(Items.SKELETON_SKULL),
                 ItemStack(Items.BONE),

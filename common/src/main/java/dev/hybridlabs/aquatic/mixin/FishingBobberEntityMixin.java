@@ -58,7 +58,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void readCustomDataFromNbt(CompoundTag nbt, CallbackInfo ci) {
-        hybrid_aquatic$setLureItem(ItemStack.of(nbt.getCompound("lureItem")));
+        hybrid_aquatic$setLureItem(ItemStack.(nbt.getCompound("lureItem")));
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))

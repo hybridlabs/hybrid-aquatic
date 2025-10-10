@@ -5,11 +5,11 @@ import net.minecraft.resources.ResourceLocation
 
 class HoundSharkEntityModel : HybridAquaticSharkEntityModel<HoundSharkEntity>("hound_shark") {
 
-    private val LEOPARD_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/shark/hound_shark/leopard_shark.png")
+    private val LEOPARD_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/shark/hound_shark/leopard_shark.png")
 
-    private val LEOPARD_MODEL = ResourceLocation("hybrid-aquatic", "geo/shark/hound_shark/leopard_shark.geo.json")
+    private val LEOPARD_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/shark/hound_shark/leopard_shark.geo.json")
 
-    private val LEOPARD_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/leopard_shark.animation.json")
+    private val LEOPARD_ANIMATION = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "animations/leopard_shark.animation.json")
 
     override fun getTextureResource(animatable: HoundSharkEntity): ResourceLocation {
         return when (animatable.variant) {

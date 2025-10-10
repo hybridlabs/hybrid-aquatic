@@ -35,11 +35,10 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Leve
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     override fun registerGoals() {
@@ -61,9 +60,9 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Leve
             SynchedEntityData.defineId(HoundSharkEntity::class.java, EntityDataSerializers.INT)
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

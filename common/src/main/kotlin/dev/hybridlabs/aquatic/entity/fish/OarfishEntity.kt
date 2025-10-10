@@ -15,10 +15,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
@@ -66,18 +66,14 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
         }
     }
 
-    override fun getDimensions(pose: Pose): EntityDimensions {
+    override fun getDefaultDimensions(pose: Pose): EntityDimensions {
         return if (isFeeding()) {
             EntityDimensions.scalable(0.5f, 5.0f)
         } else {
-            super.getDimensions(pose)
+            super.getDefaultDimensions(pose)
         }
     }
 
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return if (isFeeding()) { (dimensions.height * 0.95f)
-        } else { (dimensions.height * 0.5f) }
-    }
 
     override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
         super.onSyncedDataUpdated(key)
@@ -86,9 +82,9 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(FEEDING, false)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(FEEDING, false)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
@@ -116,12 +112,16 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Flop/Idle/Swim/Feed", 5
+            AnimationController(
+                this, "Flop/Idle/Swim/Feed", 5
             ) { state: AnimationState<OarfishEntity> ->
                 when {
                     this.isFeeding() -> state.setAndContinue(DefaultAnimations.SIT)
                     state.isMoving && isUnderWater -> state.setAndContinue(DefaultAnimations.SWIM)
-                    !this.isUnderWater && !this.isSwimming && this.moistness < 595 -> state.setAndContinue(FLOP_ANIMATION)
+                    !this.isUnderWater && !this.isSwimming && this.moistness < 595 -> state.setAndContinue(
+                        FLOP_ANIMATION
+                    )
+
                     else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
             }

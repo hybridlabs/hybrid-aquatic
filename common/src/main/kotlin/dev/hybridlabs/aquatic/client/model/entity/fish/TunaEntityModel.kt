@@ -5,11 +5,11 @@ import net.minecraft.resources.ResourceLocation
 
 class TunaEntityModel : HybridAquaticFishEntityModel<TunaEntity>("tuna") {
 
-    private val YELLOWFIN_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/tuna/tuna_yellowfin.png")
-    private val BLUEFIN_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/tuna/tuna_bluefin.png")
+    private val YELLOWFIN_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/tuna/tuna_yellowfin.png")
+    private val BLUEFIN_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/tuna/tuna_bluefin.png")
 
-    private val YELLOWFIN_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/tuna/tuna_yellowfin.geo.json")
-    private val BLUEFIN_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/tuna/tuna_bluefin.geo.json")
+    private val YELLOWFIN_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/fish/tuna/tuna_yellowfin.geo.json")
+    private val BLUEFIN_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/fish/tuna/tuna_bluefin.geo.json")
 
     override fun getTextureResource(animatable: TunaEntity): ResourceLocation {
         return when (animatable.variant) {

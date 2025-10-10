@@ -7,7 +7,6 @@ import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
-import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
@@ -41,12 +40,7 @@ class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) 
 
     private var pearlTimer: Int = 6000
 
-    override fun isPathfindable(
-        state: BlockState,
-        world: BlockGetter,
-        pos: BlockPos,
-        type: PathComputationType,
-    ): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 
@@ -109,13 +103,12 @@ class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) 
         builder.add(STATE, WATERLOGGED, FACING)
     }
 
-    override fun use(
+    override fun useWithoutItem(
         state: BlockState,
         world: Level,
         pos: BlockPos,
         player: Player,
-        hand: InteractionHand,
-        hit: BlockHitResult,
+        hit: BlockHitResult
     ): InteractionResult {
         if (!world.isClientSide) {
             val currentState = state.getValue(STATE)

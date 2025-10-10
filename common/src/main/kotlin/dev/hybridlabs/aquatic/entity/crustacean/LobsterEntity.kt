@@ -1,11 +1,12 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
+import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.ResourceKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -19,6 +20,7 @@ import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.goal.TryFindWaterGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.storage.loot.LootTable
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -39,17 +41,16 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getDefaultLootTable(): ResourceLocation {
+    override fun getDefaultLootTable(): ResourceKey<LootTable?> {
         return when (variant) {
-            Type.CLAWED -> HybridAquaticLootTables.CLAWED_LOBSTER
-            else -> HybridAquaticLootTables.CLAWLESS_LOBSTER
+            Type.CLAWED -> ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.CLAWED_LOBSTER)
+            else -> ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.CLAWLESS_LOBSTER)
         }
     }
 
@@ -102,9 +103,9 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
         return -5
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
@@ -123,5 +124,16 @@ class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, w
 
     override fun setVariant(type: Type) {
         entityData.set(TYPE, type.id)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        if (!super.equals(other)) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return super.hashCode()
     }
 }

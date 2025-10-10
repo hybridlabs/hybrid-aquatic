@@ -141,7 +141,6 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
                     world,
                     world.getCurrentDifficultyAt(spawnPos),
                     MobSpawnType.STRUCTURE,
-                    null,
                     null
                 )
                 world.addFreshEntity(yetiCrabEntity)

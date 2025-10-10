@@ -7,9 +7,9 @@ import kotlin.random.Random
 class WhaleSharkEntityModel : HybridAquaticSharkEntityModel<WhaleSharkEntity>("whale_shark") {
 
     private val commonTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/shark/whale_shark/whale_shark.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/shark/whale_shark/whale_shark_brown.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/shark/whale_shark/whale_shark_gray.png")
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/shark/whale_shark/whale_shark.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/shark/whale_shark/whale_shark_brown.png"),
+        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/shark/whale_shark/whale_shark_gray.png")
     )
 
     override fun getTextureResource(animatable: WhaleSharkEntity): ResourceLocation {

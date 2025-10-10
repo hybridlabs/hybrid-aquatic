@@ -69,7 +69,7 @@ open class MinionAttackGoal(
         } else if (!minion.isWithinRestriction(livingEntity.blockPosition())) {
             false
         } else {
-            livingEntity !is Player || !livingEntity.isSpectator() && !livingEntity.isCreative
+            livingEntity !is Player || !livingEntity.isSpectator && !livingEntity.isCreative
         }
     }
 
@@ -102,7 +102,7 @@ open class MinionAttackGoal(
         val livingEntity = minion.target
         if (livingEntity != null) {
             minion.lookControl.setLookAt(livingEntity, 30.0f, 30.0f)
-            val d0 = minion.getPerceivedTargetDistanceSquareForMeleeAttack(livingEntity)
+            val d0 = minion.distanceToSqr(livingEntity)
             this.ticksUntilNextPathRecalculation =
                 max((this.ticksUntilNextPathRecalculation - 1).toDouble(), 0.0).toInt()
             if ((this.followingTargetEvenIfNotSeen || minion.sensing.hasLineOfSight(livingEntity)) &&

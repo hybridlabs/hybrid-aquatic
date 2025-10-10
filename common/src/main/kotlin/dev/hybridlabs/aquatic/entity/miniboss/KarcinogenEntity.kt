@@ -11,12 +11,12 @@ import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 
 class KarcinogenEntity(entityType: EntityType<out HybridAquaticMinionEntity>, world: Level) :
     HybridAquaticMinionEntity(entityType, world) {
     init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
         moveControl = MoveControl(this)
         lookControl = LookControl(this)
         navigation = GroundPathNavigation(this, world)

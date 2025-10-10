@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block.entity
 
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
@@ -10,12 +11,11 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.core.animatable.GeoAnimatable
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.*
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animatable.GeoAnimatable
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtils
+import software.bernie.geckolib.util.RenderUtil
 import java.util.function.Function
 
 class AnemoneBlockEntity(pos: BlockPos, state: BlockState) :
@@ -124,21 +124,22 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) :
     }
 
     override fun getTick(o: Any): Double {
-        return RenderUtils.getCurrentTick()
+        return RenderUtil.getCurrentTick()
+
     }
 
-    override fun getUpdateTag(): CompoundTag {
-        return saveWithoutMetadata()
+    override fun getUpdateTag(registries: HolderLookup.Provider): CompoundTag {
+        return saveWithoutMetadata(registries)
     }
 
-    override fun saveAdditional(nbt: CompoundTag) {
+    override fun saveAdditional(nbt: CompoundTag, registries: HolderLookup.Provider) {
         hiddenClownfish?.let { clownfishNbt -> nbt.put("clownfish", clownfishNbt) }
 
         nbt.putInt("hide_timer", hideTimer)
         nbt.putInt("cooldown_timer", cooldownTimer)
     }
 
-    override fun load(nbt: CompoundTag) {
+    override fun loadAdditional(nbt: CompoundTag, registries: HolderLookup.Provider) {
         if (nbt.contains("clownfish", Tag.TAG_COMPOUND.toInt())) {
             val clownfishNbt = nbt.getCompound("clownfish")
             hiddenClownfish = clownfishNbt
