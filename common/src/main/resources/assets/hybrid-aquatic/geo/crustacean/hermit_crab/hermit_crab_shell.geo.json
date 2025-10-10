@@ -12,8 +12,13 @@
 			},
 			"bones": [
 				{
+					"name": "crustacean",
+					"pivot": [0, 0.5, -2.75]
+				},
+				{
 					"name": "body",
-					"pivot": [0, 1, 0]
+					"parent": "crustacean",
+					"pivot": [0, 0.5, -2.75]
 				},
 				{
 					"name": "torso",

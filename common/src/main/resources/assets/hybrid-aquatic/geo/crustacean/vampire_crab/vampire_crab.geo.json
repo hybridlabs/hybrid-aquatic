@@ -12,13 +12,13 @@
 			},
 			"bones": [
 				{
-					"name": "crab",
-					"pivot": [0, 0, 0]
+					"name": "crustacean",
+					"pivot": [0, 0.75, 0]
 				},
 				{
 					"name": "body",
-					"parent": "crab",
-					"pivot": [0, 2.25, -0.12866]
+					"parent": "crustacean",
+					"pivot": [0, 0.75, -0.0877]
 				},
 				{
 					"name": "torso",

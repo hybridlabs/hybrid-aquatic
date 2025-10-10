@@ -12,7 +12,12 @@
 			},
 			"bones": [
 				{
+					"name": "crustacean",
+					"pivot": [0, 0.5, -0.35]
+				},
+				{
 					"name": "body",
+					"parent": "crustacean",
 					"pivot": [0, 1.86223, -1.19728],
 					"cubes": [
 						{"origin": [-1, 0.5, -2.09728], "size": [2, 2, 3], "uv": [0, 0]},

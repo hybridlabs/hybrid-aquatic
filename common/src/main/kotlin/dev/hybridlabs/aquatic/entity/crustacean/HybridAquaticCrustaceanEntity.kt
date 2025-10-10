@@ -21,7 +21,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.PanicGoal
-import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
+import net.minecraft.world.entity.ai.navigation.WallClimberNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
@@ -64,6 +64,7 @@ open class HybridAquaticCrustaceanEntity(
         super.defineSynchedData()
         entityData.define(CRUSTACEAN_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
+        entityData.define(CLIMBING, 0.toByte())
     }
 
     override fun registerGoals() {
@@ -77,7 +78,7 @@ open class HybridAquaticCrustaceanEntity(
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
@@ -90,7 +91,7 @@ open class HybridAquaticCrustaceanEntity(
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
-        navigation = GroundPathNavigation(this, world)
+        navigation = WallClimberNavigation(this, world)
     }
 
     override fun aiStep() {
@@ -115,10 +116,6 @@ open class HybridAquaticCrustaceanEntity(
         return this.songPlaying
     }
 
-    override fun maxUpStep(): Float {
-        return 1.0F
-    }
-
     override fun isAffectedByFluids(): Boolean {
         return !onGround()
     }
@@ -135,6 +132,10 @@ open class HybridAquaticCrustaceanEntity(
     override fun tick() {
         super.tick()
 
+        if (!level().isClientSide) {
+            this.setClimbing(this.horizontalCollision)
+        }
+
         if ((this is HermitCrabEntity || this is GiantIsopodEntity) && isHiding) {
             hidingTimer--
 
@@ -147,6 +148,25 @@ open class HybridAquaticCrustaceanEntity(
                 attributes.getInstance(Attributes.ARMOR)?.baseValue = 50.0
             }
         }
+    }
+
+    override fun onClimbable(): Boolean {
+        return this.isClimbing()
+    }
+
+    private fun isClimbing(): Boolean {
+        return ((entityData.get(CLIMBING) as Byte).toInt() and 1) != 0
+    }
+
+    private fun setClimbing(climbing: Boolean) {
+        var b0 = entityData.get(CLIMBING) as Byte
+        b0 = if (climbing) {
+            (b0.toInt() or 1).toByte()
+        } else {
+            (b0.toInt() and -2).toByte()
+        }
+
+        entityData.set(CLIMBING, b0)
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
@@ -265,6 +285,8 @@ open class HybridAquaticCrustaceanEntity(
             SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
+        val CLIMBING: EntityDataAccessor<Byte> =
+            SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.BYTE)
 
         val DANCE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
         val HIDE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
@@ -274,7 +296,7 @@ open class HybridAquaticCrustaceanEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel + 8
 
@@ -288,7 +310,7 @@ open class HybridAquaticCrustaceanEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val bottomY = world.seaLevel - 24
 
@@ -302,7 +324,7 @@ open class HybridAquaticCrustaceanEntity(
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 24
             val bottomY = world.seaLevel - 128
