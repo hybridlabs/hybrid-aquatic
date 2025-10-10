@@ -19,7 +19,6 @@ import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), SimpleWaterloggedBlock {
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
@@ -49,10 +48,6 @@ class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), Simple
         } else {
             null
         }
-    }
-
-    override fun codec(): MapCodec<out BushBlock?> {
-        TODO("Not yet implemented")
     }
 
     override fun updateShape(
@@ -91,7 +86,12 @@ class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), Simple
         builder.add(WATERLOGGED)
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<FloatingSargassumBlock> = simpleCodec(::FloatingSargassumBlock)
         private val SHAPE: VoxelShape = box(0.0, 14.0, 0.0, 16.0, 15.0, 16.0)
     }
 }

@@ -22,7 +22,6 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 
-@Suppress("OVERRIDE_DEPRECATION")
 class TallRedAlgaeBlock(settings: Properties) : DoublePlantBlock(settings), LiquidBlockContainer {
     override fun getShape(
         state: BlockState,

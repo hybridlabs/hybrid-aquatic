@@ -8,12 +8,7 @@ import net.minecraft.tags.FluidTags
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.LevelAccessor
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.BushBlock
-import net.minecraft.world.level.block.EntityBlock
-import net.minecraft.world.level.block.RenderShape
-import net.minecraft.world.level.block.SimpleWaterloggedBlock
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
@@ -24,11 +19,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-@Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
 class StrawberryAnemoneBlock(settings: Properties) : BushBlock(settings), EntityBlock, SimpleWaterloggedBlock {
-    override fun codec(): MapCodec<out BushBlock?> {
-        TODO("Not yet implemented")
-    }
 
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
@@ -105,7 +96,12 @@ class StrawberryAnemoneBlock(settings: Properties) : BushBlock(settings), Entity
         return false
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<StrawberryAnemoneBlock> = simpleCodec(::StrawberryAnemoneBlock)
         private val SHAPE = box(4.0, 0.0, 4.0, 12.0, 9.0, 12.0)
         private val COLLISION_SHAPE = box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)
     }

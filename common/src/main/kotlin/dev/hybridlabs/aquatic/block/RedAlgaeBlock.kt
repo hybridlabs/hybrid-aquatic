@@ -32,10 +32,6 @@ class RedAlgaeBlock(settings: Properties?) : BushBlock(settings), BonemealableBl
         return SHAPE
     }
 
-    override fun codec(): MapCodec<out BushBlock?> {
-        TODO("Not yet implemented")
-    }
-
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
         return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK)
     }
@@ -102,7 +98,12 @@ class RedAlgaeBlock(settings: Properties?) : BushBlock(settings), BonemealableBl
         return false
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<RedAlgaeBlock> = simpleCodec(::RedAlgaeBlock)
         private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
     }
 }

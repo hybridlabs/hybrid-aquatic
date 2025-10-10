@@ -17,7 +17,6 @@ import net.minecraft.world.level.pathfinder.PathComputationType
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class RaftBlock(settings: Properties) : Block(settings), SimpleWaterloggedBlock {
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))

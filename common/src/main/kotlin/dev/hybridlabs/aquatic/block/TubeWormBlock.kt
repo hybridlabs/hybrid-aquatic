@@ -29,6 +29,7 @@ import org.jetbrains.annotations.Nullable
 @Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION")
 class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlock, SimpleWaterloggedBlock {
     companion object {
+        val CODEC: MapCodec<TubeWormBlock> = simpleCodec(::TubeWormBlock)
         val WORMS: IntegerProperty = IntegerProperty.create("worms", 1, 4)
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
 
@@ -127,12 +128,12 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
         return false
     }
 
-    override fun codec(): MapCodec<out BushBlock?> {
-        TODO("Not yet implemented")
-    }
-
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
         return !floor.getCollisionShape(world, pos).getFaceShape(Direction.UP).isEmpty ||
                 floor.isFaceSturdy(world, pos, Direction.UP)
+    }
+
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
     }
 }

@@ -387,7 +387,6 @@ object HybridAquaticBlocks {
     private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block): PlushieBlock {
         return PlushieBlock(
             variant,
-            particleBlock,
             Properties.of().instabreak().pushReaction(PushReaction.DESTROY).sound(SoundType.WOOL)
                 .instrument(NoteBlockInstrument.CUSTOM_HEAD)
         )

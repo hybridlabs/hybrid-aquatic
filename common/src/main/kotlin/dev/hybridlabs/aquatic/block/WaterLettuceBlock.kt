@@ -19,7 +19,6 @@ import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class WaterLettuceBlock(settings: Properties) : BushBlock(settings), SimpleWaterloggedBlock {
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
@@ -49,10 +48,6 @@ class WaterLettuceBlock(settings: Properties) : BushBlock(settings), SimpleWater
         } else {
             null
         }
-    }
-
-    override fun codec(): MapCodec<out BushBlock?> {
-        TODO("Not yet implemented")
     }
 
     override fun updateShape(
@@ -91,7 +86,12 @@ class WaterLettuceBlock(settings: Properties) : BushBlock(settings), SimpleWater
         builder.add(WATERLOGGED)
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<WaterLettuceBlock> = simpleCodec(::WaterLettuceBlock)
         private val SHAPE: VoxelShape = box(3.0, 14.0, 3.0, 13.0, 16.0, 13.0)
     }
 }

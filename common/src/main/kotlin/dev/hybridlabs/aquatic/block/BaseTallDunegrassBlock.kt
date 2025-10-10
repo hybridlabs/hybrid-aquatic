@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-@Suppress("OVERRIDE_DEPRECATION")
 open class BaseTallDunegrassBlock(settings: Properties) : DoublePlantBlock(settings) {
     override fun getShape(
         state: BlockState,

@@ -13,13 +13,10 @@ import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.BonemealableBlock
 import net.minecraft.world.level.block.BushBlock
-import net.minecraft.world.level.block.TallSeagrassBlock
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-@Suppress("OVERRIDE_DEPRECATION")
 open class BaseDunegrassBlock(settings: Properties) : BushBlock(settings), BonemealableBlock {
     override fun getShape(
         state: BlockState,
@@ -50,10 +47,6 @@ open class BaseDunegrassBlock(settings: Properties) : BushBlock(settings), Bonem
     ) {
     }
 
-    override fun codec(): MapCodec<out BushBlock?> {
-        TODO("Not yet implemented")
-    }
-
     override fun mayPlaceOn(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
         return state.`is`(BlockTags.SAND)
     }
@@ -81,7 +74,12 @@ open class BaseDunegrassBlock(settings: Properties) : BushBlock(settings), Bonem
         return this.mayPlaceOn(level.getBlockState(blockPos), level, blockPos)
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<BaseDunegrassBlock> = simpleCodec(::BaseDunegrassBlock)
         private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 16.0, 14.0)
     }
 }

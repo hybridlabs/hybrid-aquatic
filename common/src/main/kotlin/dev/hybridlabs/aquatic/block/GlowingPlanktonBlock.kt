@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package dev.hybridlabs.aquatic.block
 
 import net.minecraft.core.BlockPos
@@ -28,7 +26,6 @@ import net.minecraft.world.level.pathfinder.PathComputationType
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-@Suppress("OVERRIDE_DEPRECATION")
 class GlowingPlanktonBlock(settings: Properties) : Block(
     settings.lightLevel { state -> state.getValue(LIGHT_LEVEL) }
 ), SimpleWaterloggedBlock {

@@ -56,10 +56,6 @@ class JungleLilyPadBlock(settings: Properties) : BushBlock(settings) {
         }
     }
 
-    override fun codec(): MapCodec<out BushBlock?> {
-        TODO("Not yet implemented")
-    }
-
     override fun updateShape(
         state: BlockState,
         direction: Direction,
@@ -104,7 +100,12 @@ class JungleLilyPadBlock(settings: Properties) : BushBlock(settings) {
         }
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<JungleLilyPadBlock> = simpleCodec(::JungleLilyPadBlock)
         private val SHAPE: VoxelShape = box(1.0, 15.0, 1.0, 15.0, 16.0, 15.0)
     }
 }

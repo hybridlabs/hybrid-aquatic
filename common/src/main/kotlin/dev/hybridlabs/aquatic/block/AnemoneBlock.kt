@@ -67,10 +67,6 @@ class AnemoneBlock(settings: Properties) : BushBlock(settings), EntityBlock, Sim
         return super.playerWillDestroy(world, pos, state, player)
     }
 
-    override fun codec(): MapCodec<out BushBlock?> {
-        TODO("Not yet implemented")
-    }
-
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
         return !floor.getCollisionShape(world, pos).getFaceShape(Direction.UP).isEmpty || floor.isFaceSturdy(
             world,
@@ -150,7 +146,12 @@ class AnemoneBlock(settings: Properties) : BushBlock(settings), EntityBlock, Sim
         return false
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<AnemoneBlock> = simpleCodec(::AnemoneBlock)
         private val SHAPE = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
         private val COLLISION_SHAPE = box(1.0, 0.0, 1.0, 15.0, 8.0, 15.0)
     }

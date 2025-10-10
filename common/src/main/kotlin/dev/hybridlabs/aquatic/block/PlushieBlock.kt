@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.StateDefinition
 /**
  * Represents any Plushie block.
  */
-class PlushieBlock(variant: Variant, val particleBlock: Block, settings: Properties) : SkullBlock(variant, settings) {
+class PlushieBlock(variant: Variant, settings: Properties) : SkullBlock(variant, settings) {
     init {
         BlockEntityType.SKULL.addBlocks(this)
     }

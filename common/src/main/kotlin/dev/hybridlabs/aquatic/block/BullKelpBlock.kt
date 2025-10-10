@@ -9,10 +9,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.LevelAccessor
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.GrowingPlantHeadBlock
-import net.minecraft.world.level.block.LiquidBlockContainer
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.level.material.FluidState
@@ -54,10 +51,6 @@ class BullKelpBlock(settings: Properties) :
         return false
     }
 
-    override fun codec(): MapCodec<out GrowingPlantHeadBlock?> {
-        TODO("Not yet implemented")
-    }
-
     override fun getBlocksToGrowWhenBonemealed(random: RandomSource): Int {
         return 1
     }
@@ -71,7 +64,12 @@ class BullKelpBlock(settings: Properties) :
         return Fluids.WATER.getSource(false)
     }
 
+    override fun codec(): MapCodec<out GrowingPlantHeadBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<BullKelpBlock> = simpleCodec(::BullKelpBlock)
         private val SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 9.0, 16.0)
     }
 }

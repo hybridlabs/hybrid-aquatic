@@ -49,7 +49,11 @@ class SargassumPlantBlock(settings: Properties) :
         return false
     }
 
-    override fun codec(): MapCodec<out GrowingPlantBodyBlock?> {
-        TODO("Not yet implemented")
+    override fun codec(): MapCodec<out GrowingPlantBodyBlock> {
+        return CODEC
+    }
+
+    companion object {
+        val CODEC: MapCodec<SargassumPlantBlock> = simpleCodec(::SargassumPlantBlock)
     }
 }

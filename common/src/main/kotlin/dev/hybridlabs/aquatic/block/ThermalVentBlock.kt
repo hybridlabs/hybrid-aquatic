@@ -62,7 +62,7 @@ class ThermalVentBlock(
         val pos = ctx.clickedPos
         return defaultBlockState()
             .setValue(THICKNESS, getThickness(world, pos))
-            .setValue(WATERLOGGED, world.getFluidState(pos) == Fluids.WATER)
+            .setValue(WATERLOGGED, world.getFluidState(pos).`is`(Fluids.WATER))
     }
 
     override fun updateShape(

@@ -21,7 +21,6 @@ import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-@Suppress("OVERRIDE_DEPRECATION")
 class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableBlock, LiquidBlockContainer {
     override fun getShape(
         state: BlockState,
@@ -30,10 +29,6 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
         context: CollisionContext
     ): VoxelShape {
         return SHAPE
-    }
-
-    override fun codec(): MapCodec<out BushBlock?> {
-        TODO("Not yet implemented")
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
@@ -103,7 +98,12 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
         return false
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<SeaLettuceBlock> = simpleCodec(::SeaLettuceBlock)
         private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
     }
 }
