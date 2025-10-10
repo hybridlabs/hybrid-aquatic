@@ -29,11 +29,7 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.pathfinder.PathType
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.PlayState
-import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.util.GeckoLibUtil
 
@@ -160,13 +156,6 @@ open class HybridAquaticCrustaceanEntity(
     // end region
 
     // region water breathing
-
-    // TODO: this is a tag now
-    /*
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-     */
 
     override fun handleAirSupply(air: Int) {
     }

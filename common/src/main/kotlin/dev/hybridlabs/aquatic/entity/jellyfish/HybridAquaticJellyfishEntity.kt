@@ -80,13 +80,6 @@ open class HybridAquaticJellyfishEntity(
         builder.define(JELLYFISH_SIZE, 0)
     }
 
-    // TODO: this is a tag now
-    /*
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-    */
-
     override fun isPushedByFluid(): Boolean {
         return false
     }

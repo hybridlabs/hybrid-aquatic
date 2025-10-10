@@ -138,13 +138,6 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
         }
     }
 
-    // TODO: this is a tag now
-    /*
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-     */
-
     override fun isPreventingPlayerRest(player: Player): Boolean {
         return true
     }

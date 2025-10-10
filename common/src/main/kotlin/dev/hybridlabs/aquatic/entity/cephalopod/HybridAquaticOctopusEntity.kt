@@ -126,13 +126,6 @@ open class HybridAquaticOctopusEntity(
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    //TODO: this is a tag now
-    /*
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-     */
-
     override fun isPushedByFluid(): Boolean {
         return false
     }

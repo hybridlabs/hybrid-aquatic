@@ -17,13 +17,7 @@ import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.MoverType
-import net.minecraft.world.entity.NeutralMob
-import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
@@ -105,14 +99,6 @@ open class HybridAquaticSharkEntity(
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
-
-
-    // TODO: this is a tag now
-    /*
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-     */
 
     override fun isPushedByFluid(): Boolean {
         return false

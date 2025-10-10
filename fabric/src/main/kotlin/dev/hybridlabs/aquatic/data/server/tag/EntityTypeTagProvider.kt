@@ -234,5 +234,20 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addTag(HybridAquaticEntityTags.CEPHALOPOD)
             .addTag(HybridAquaticEntityTags.FISH)
             .addTag(HybridAquaticEntityTags.SHARK)
+
+        // entities that can breathe underwater
+        getOrCreateTagBuilder(EntityTypeTags.CAN_BREATHE_UNDER_WATER)
+            .addTag(HybridAquaticEntityTags.JELLYFISH)
+            .addTag(HybridAquaticEntityTags.CRITTER)
+            .addTag(HybridAquaticEntityTags.CRUSTACEAN)
+            .addTag(HybridAquaticEntityTags.CEPHALOPOD)
+            .addTag(HybridAquaticEntityTags.FISH)
+            .addTag(HybridAquaticEntityTags.SHARK)
+            .add(
+                HybridAquaticEntityTypes.KARKINOS.get(),
+                HybridAquaticEntityTypes.KARCINOMA.get(),
+                HybridAquaticEntityTypes.KARCINOGEN.get(),
+                HybridAquaticEntityTypes.OTTER.get(),
+            )
     }
 }
