@@ -161,7 +161,7 @@ class EntitySpawnConfigGenerator {
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, Services.PLATFORM.getMobCategoryByName("FISH"), weight, minGroup, maxGroup)
+        add(entityType, spawnTags, Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"), weight, minGroup, maxGroup)
     }
 
     private fun addUndergroundFish(
@@ -174,7 +174,7 @@ class EntitySpawnConfigGenerator {
         add(
             entityType,
             spawnTags,
-            Services.PLATFORM.getMobCategoryByName("FISH_UNDERGROUND"),
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH_UNDERGROUND"),
             weight,
             minGroup,
             maxGroup
@@ -190,7 +190,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("CEPHALOPOD"),
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
             weight, minGroup, maxGroup
         )
     }
@@ -204,7 +204,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("CEPHALOPOD"),
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
             weight, minGroup, maxGroup
         )
     }
@@ -218,7 +218,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("SHARK"),
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
             weight, minGroup, maxGroup
         )
     }
@@ -232,7 +232,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("SHARK_UNDERGROUND"),
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK_UNDERGROUND"),
             weight, minGroup, maxGroup
         )
     }
@@ -256,7 +256,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("JELLY"),
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY"),
             weight, minGroup, maxGroup
         )
     }
@@ -270,7 +270,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("JELLY_UNDERGROUND"),
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY_UNDERGROUND"),
             weight, minGroup, maxGroup
         )
     }
@@ -284,7 +284,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("CRUSTACEAN"),
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN"),
             weight, minGroup, maxGroup
         )
     }
@@ -298,7 +298,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("CRUSTACEAN_UNDERGROUND"),
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN_UNDERGROUND"),
             weight, minGroup, maxGroup
         )
     }
@@ -312,7 +312,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("CRITTER"),
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRITTER"),
             weight, minGroup, maxGroup
         )
     }
