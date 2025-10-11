@@ -31,12 +31,12 @@ abstract class HybridAquaticCrustaceanEntityModel<T : HybridAquaticCrustaceanEnt
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
 
-        val root = animationProcessor.getBone("crustacean")
+        val body = animationProcessor.getBone("crustacean")
 
         if (animatable.onClimbable()) {
-            root?.rotX = Math.toRadians(90.0).toFloat()
+            body?.rotX = Math.toRadians(90.0).toFloat()
         } else {
-            root?.rotX = 0.0F
+            body?.rotX = 0.0F
         }
     }
 }
