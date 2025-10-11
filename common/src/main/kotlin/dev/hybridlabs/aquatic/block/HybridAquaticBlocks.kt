@@ -354,9 +354,9 @@ object HybridAquaticBlocks {
         "tube_sponge"
     ) {
         TubeSpongeBlock(
-            true,
             Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.SLIME_BLOCK).noOcclusion()
-                .pushReaction(PushReaction.DESTROY)
+                .pushReaction(PushReaction.DESTROY),
+            true
         )
     }
 

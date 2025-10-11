@@ -43,7 +43,7 @@ dependencies {
     //We still have to load the loader-specific version of any mods included in common
     modApi "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
     modApi("com.terraformersmc:modmenu:${modmenu_version}")
-    modImplementation "maven.modrinth:lithostitched:${lithostitched_version}-fabric-${minecraft_version}"
+    //modImplementation "maven.modrinth:lithostitched:${lithostitched_version}-fabric-${minecraft_version}"
 
     modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
     modRuntimeOnly "maven.modrinth:carpet:$carpet_version"

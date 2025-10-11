@@ -26,11 +26,12 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class TubeSpongeBlock(
-    private val emitsParticles: Boolean,
-    settings: Properties
+    settings: Properties?,
+    private val emitsParticles: Boolean = false
 ) : BushBlock(settings), SimpleWaterloggedBlock {
 
     private var bubbleTimer = 0
+    val CODEC: MapCodec<TubeSpongeBlock> = simpleCodec(::TubeSpongeBlock)
 
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
@@ -43,7 +44,7 @@ class TubeSpongeBlock(
     }
 
     override fun codec(): MapCodec<out BushBlock?> {
-        TODO("Not yet implemented")
+        return CODEC
     }
 
     override fun updateShape(
@@ -80,7 +81,9 @@ class TubeSpongeBlock(
         val fluidState = ctx.level.getFluidState(ctx.clickedPos)
         return if (fluidState.`is`(FluidTags.WATER)) defaultBlockState().setValue(
             WATERLOGGED, ctx.level.getFluidState(ctx.clickedPos).`is`(
-                Fluids.WATER)) else null
+                Fluids.WATER
+            )
+        ) else null
     }
 
     override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
