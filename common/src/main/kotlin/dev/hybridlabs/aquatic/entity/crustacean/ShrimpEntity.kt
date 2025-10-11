@@ -14,8 +14,6 @@ import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal
-import net.minecraft.world.entity.ai.goal.TryFindWaterGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
@@ -23,17 +21,11 @@ import java.util.function.IntFunction
 class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
     HybridAquaticCrustaceanEntity(entityType, world, false), OverlayTextureFeature {
 
-    override fun registerGoals() {
-        super.registerGoals()
-        goalSelector.addGoal(5, TryFindWaterGoal(this))
-        goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
-    }
-
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 1.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25)
+                .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)

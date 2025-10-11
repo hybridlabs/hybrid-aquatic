@@ -22,6 +22,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.PanicGoal
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
@@ -73,6 +74,7 @@ open class HybridAquaticCrustaceanEntity(
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, PanicGoal(this, 1.0))
+        goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
         goalSelector.addGoal(5, LookAtPlayerGoal(this, Player::class.java, 6.0f))
     }
 

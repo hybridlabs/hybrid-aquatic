@@ -16,7 +16,6 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
@@ -27,11 +26,6 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     HybridAquaticCrustaceanEntity(
         entityType, world, false),
     VariantHolder<HermitCrabEntity.Companion.Type> {
-
-    override fun registerGoals() {
-        super.registerGoals()
-        goalSelector.addGoal(3, WaterAvoidingRandomStrollGoal(this, 0.4))
-    }
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
