@@ -12,6 +12,8 @@ public enum HybridAquaticSpawnGroup {
 
     CEPHALOPOD("cephalopod", 8, true, false, 64),
 
+    CEPHALOPOD_UNDERGROUND("cephalopod_underground", 8, true, true, 64),
+
     JELLY("jelly", 5, true, false, 64),
 
     JELLY_UNDERGROUND("jelly_underground", 5, true, false, 64),
