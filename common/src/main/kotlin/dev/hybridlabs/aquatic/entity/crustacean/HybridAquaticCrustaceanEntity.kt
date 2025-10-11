@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.ai.control.WallClimbNavigation
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
@@ -21,7 +22,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.PanicGoal
-import net.minecraft.world.entity.ai.navigation.WallClimberNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
@@ -37,6 +37,7 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
+
 
 @Suppress("DEPRECATION", "LeakingThis", "UNUSED_PARAMETER")
 open class HybridAquaticCrustaceanEntity(
@@ -54,6 +55,8 @@ open class HybridAquaticCrustaceanEntity(
     private var hidingTimer: Int = 0
     private var lastDamageTime: Long = 0
 
+    private var climbingTicks = 0
+
     var size: Int
         get() = entityData.get(CRUSTACEAN_SIZE)
         set(size) {
@@ -64,7 +67,7 @@ open class HybridAquaticCrustaceanEntity(
         super.defineSynchedData()
         entityData.define(CRUSTACEAN_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
-        entityData.define(CLIMBING, 0.toByte())
+        entityData.define(CLIMBING, false)
     }
 
     override fun registerGoals() {
@@ -91,7 +94,7 @@ open class HybridAquaticCrustaceanEntity(
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
-        navigation = WallClimberNavigation(this, world)
+        navigation = WallClimbNavigation(this, world)
     }
 
     override fun aiStep() {
@@ -105,6 +108,14 @@ open class HybridAquaticCrustaceanEntity(
         }
 
         super.aiStep()
+    }
+
+    override fun getMaxHeadXRot(): Int {
+        return 1
+    }
+
+    override fun getMaxHeadYRot(): Int {
+        return 1
     }
 
     override fun setRecordPlayingNearby(songPosition: BlockPos, playing: Boolean) {
@@ -129,11 +140,31 @@ open class HybridAquaticCrustaceanEntity(
         hidingTimer = 200
     }
 
+    fun isMoving(): Boolean {
+        return (this.onGround() || this.onClimbable()) && deltaMovement.lengthSqr() >= 0.0001
+    }
+
     override fun tick() {
         super.tick()
 
         if (!level().isClientSide) {
-            this.setClimbing(this.horizontalCollision)
+            setClimbingWall(horizontalCollision)
+        }
+
+        if (isClimbingWall()) {
+            climbingTicks++
+
+            val blockStateAtPos = level().getBlockState(blockPosition())
+            if (isMoving() && blockStateAtPos.fluidState.isEmpty && climbingTicks % 6 == 0) {
+                playStepSound(blockPosition(), blockStateAtPos)
+            }
+        } else {
+            climbingTicks = 0
+        }
+
+        if (onClimbable()) {
+            val velocity = deltaMovement
+            setDeltaMovement(velocity.x, velocity.y * 0.33, velocity.z)
         }
 
         if ((this is HermitCrabEntity || this is GiantIsopodEntity) && isHiding) {
@@ -150,23 +181,17 @@ open class HybridAquaticCrustaceanEntity(
         }
     }
 
+
     override fun onClimbable(): Boolean {
-        return this.isClimbing()
+        return this.climbingTicks > 8 && this.isClimbingWall()
     }
 
-    private fun isClimbing(): Boolean {
-        return ((entityData.get(CLIMBING) as Byte).toInt() and 1) != 0
+    private fun isClimbingWall(): Boolean {
+        return entityData.get(CLIMBING)
     }
 
-    private fun setClimbing(climbing: Boolean) {
-        var b0 = entityData.get(CLIMBING) as Byte
-        b0 = if (climbing) {
-            (b0.toInt() or 1).toByte()
-        } else {
-            (b0.toInt() and -2).toByte()
-        }
-
-        entityData.set(CLIMBING, b0)
+    private fun setClimbingWall(isClimbingWall: Boolean) {
+        entityData.set(CLIMBING, isClimbingWall)
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
@@ -285,8 +310,8 @@ open class HybridAquaticCrustaceanEntity(
             SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
-        val CLIMBING: EntityDataAccessor<Byte> =
-            SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.BYTE)
+        val CLIMBING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         val DANCE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
         val HIDE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
