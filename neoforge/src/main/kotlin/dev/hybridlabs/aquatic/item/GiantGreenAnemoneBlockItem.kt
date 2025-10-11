@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.client.render.item.GiantGreenAnemoneBlockItemRende
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.block.Block
-import net.minecraftforge.client.extensions.common.IClientItemExtensions
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 import java.util.function.Consumer
 
 class GiantGreenAnemoneBlockItem(block: Block, properties: Properties) : BlockItem(block, properties) {

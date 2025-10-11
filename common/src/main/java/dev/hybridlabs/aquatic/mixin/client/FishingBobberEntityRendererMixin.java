@@ -40,7 +40,7 @@ public abstract class FishingBobberEntityRendererMixin {
     FishingHook entity;
 
     @Inject(method = "render(Lnet/minecraft/world/entity/projectile/FishingHook;" + "FFLcom/mojang/blaze3d/vertex" +
-            "/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "HEAD"))
+            "/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "HEAD"), remap = false)
     private void objectGetter(FishingHook fishingBobberEntity, float f, float g, PoseStack matrixStack,
                               MultiBufferSource vertexConsumerProvider, int i, CallbackInfo ci) {
         entity = fishingBobberEntity;
@@ -50,7 +50,7 @@ public abstract class FishingBobberEntityRendererMixin {
             "render(Lnet/minecraft/world/entity/projectile/FishingHook;" + "FFLcom/mojang/blaze3d/vertex" +
                     "/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "INVOKE",
             target =
-                    "Lnet/minecraft/client/renderer/MultiBufferSource;getBuffer" + "(Lnet/minecraft/client/renderer" + "/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;", ordinal = 0))
+                    "Lnet/minecraft/client/renderer/MultiBufferSource;getBuffer" + "(Lnet/minecraft/client/renderer" + "/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;", ordinal = 0),remap = false)
     private VertexConsumer changeRenderType(MultiBufferSource instance, RenderType renderLayer) {
         RenderType currentRenderType = renderLayer;
 

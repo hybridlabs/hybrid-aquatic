@@ -1,42 +1,42 @@
 package dev.hybridlabs.aquatic.utils;
 
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.RegistrySetBuilder;
+import com.mojang.serialization.Lifecycle;
+import net.minecraft.core.*;
 import net.minecraft.resources.ResourceKey;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /** This subclasses RegistrySetBuilder and disables validating missing holders. Naughty! */
 public class NaughtyRegistrySetBuilder extends RegistrySetBuilder {
 
     @Override
-    public HolderLookup.@NotNull Provider buildPatch(
-            @NotNull RegistryAccess registries, HolderLookup.@NotNull Provider lookup) {
-        RegistrySetBuilder.BuildState state = createState(registries);
-        Map<ResourceKey<? extends Registry<?>>, RegistryContents<?>> map = new HashMap<>();
-        state.collectReferencedRegistries()
-                .forEach((p_272339_) -> map.put(p_272339_.key(), p_272339_));
-        this.entries.stream()
-                .map((RegistryStub<?> stub) -> stub.collectChanges(state))
-                .forEach((contents) -> map.put(contents.key(), contents));
+    public RegistrySetBuilder.PatchedRegistries buildPatch(RegistryAccess registryAccess, HolderLookup.Provider lookupProvider, Cloner.Factory clonerFactory) {
+        RegistrySetBuilder.BuildState registrysetbuilder$buildstate = this.createState(registryAccess);
+        Map<ResourceKey<? extends Registry<?>>, RegistrySetBuilder.RegistryContents<?>> map = new HashMap<>();
+        this.entries
+                .stream()
+                .map(registryStub -> registryStub.collectRegisteredValues(registrysetbuilder$buildstate))
+                .forEach(registryContents -> map.put(registryContents.key(), registryContents));
+        Set<ResourceKey<? extends Registry<?>>> set = registryAccess.listRegistries().collect(Collectors.toUnmodifiableSet());
+        lookupProvider.listRegistries()
+                .filter(resourceKey -> !set.contains(resourceKey))
+                .forEach(
+                        resourceKey -> map.putIfAbsent(resourceKey,
+                                new RegistrySetBuilder.RegistryContents<>(resourceKey, Lifecycle.stable(), Map.of())
+                        )
+                );
         Stream<HolderLookup.RegistryLookup<?>> stream =
-                registries.registries().map((entry) -> entry.value().asLookup());
-        HolderLookup.Provider holderlookup$provider =
-                HolderLookup.Provider.create(
-                        Stream.concat(
-                                stream,
-                                map.values().stream()
-                                        .map(RegistrySetBuilder.RegistryContents::buildAsLookup)
-                                        .peek(state::addOwner)));
-        state.fillMissingHolders(lookup);
-        // don't validate missing holder values
-        state.throwOnError();
-        return holderlookup$provider;
+                map.values().stream().map(registryContents -> registryContents.buildAsLookup(registrysetbuilder$buildstate.owner()));
+        HolderLookup.Provider holderlookup$provider = buildProviderWithContext(registrysetbuilder$buildstate.owner(),
+                registryAccess, stream);
+        registrysetbuilder$buildstate.reportUnclaimedRegisteredValues();
+        registrysetbuilder$buildstate.throwOnError();
+        HolderLookup.Provider holderlookup$provider1 = this.createLazyFullPatchedRegistries(registryAccess, lookupProvider, clonerFactory, map, holderlookup$provider);
+        return new RegistrySetBuilder.PatchedRegistries(holderlookup$provider1, holderlookup$provider);
     }
 }

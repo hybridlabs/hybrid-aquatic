@@ -7,37 +7,37 @@ import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.RotatedPillarBlock
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraftforge.common.ToolAction
+import net.neoforged.neoforge.common.ItemAbility
 
 open class BaseWoodBlock(settings: Properties) : RotatedPillarBlock(settings) {
-    override fun isFlammable(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Boolean {
+    override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
         return true
     }
 
-    override fun getFlammability(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Int {
+    override fun getFlammability(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
         return 5
     }
 
     override fun getFireSpreadSpeed(
-        state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+        state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
     ): Int {
         return 5
     }
 
     override fun getToolModifiedState(
-        state: BlockState?,
-        context: UseOnContext?,
-        toolAction: ToolAction?,
+        state: BlockState,
+        context: UseOnContext,
+        itemAbility: ItemAbility,
         simulate: Boolean
     ): BlockState? {
-        if (context!!.itemInHand.item is AxeItem) {
-            if (state!!.block == HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get())
+        if (context.itemInHand.item is AxeItem) {
+            if (state.block == HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get())
                 return HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get().defaultBlockState()
                     .setValue(AXIS, state.getValue(AXIS))
             if (state.block == HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get())
                 return HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get().defaultBlockState()
                     .setValue(AXIS, state.getValue(AXIS))
         }
-        return super.getToolModifiedState(state, context, toolAction, simulate)
+        return super.getToolModifiedState(state, context, itemAbility, simulate)
     }
 }

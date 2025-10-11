@@ -52,7 +52,7 @@ public interface PlatformHelper {
 
     <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(
             @NotNull String name,
-            EntityType<T> entityType,
+            Supplier<EntityType<T>> entityType,
             int backgroundColor,
             int highlightColor);
 

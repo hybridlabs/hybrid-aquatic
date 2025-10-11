@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic
 
 import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
@@ -26,33 +27,31 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
 import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
-import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
+import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge
 import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings
 import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades
-import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup
 import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
-import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
-import net.minecraftforge.client.event.EntityRenderersEvent
-import net.minecraftforge.common.world.StructureModifier
-import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
-import net.minecraftforge.fml.common.Mod
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
-import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
-import net.minecraftforge.registries.DataPackRegistryEvent
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.ForgeRegistries
-import thedarkcolour.kotlinforforge.forge.FORGE_BUS
-import thedarkcolour.kotlinforforge.forge.MOD_BUS
-import thedarkcolour.kotlinforforge.forge.runForDist
+import net.neoforged.fml.common.Mod
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
+import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
+import net.neoforged.neoforge.client.event.EntityRenderersEvent
+import net.neoforged.neoforge.common.world.StructureModifier
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
+import net.neoforged.neoforge.registries.DataPackRegistryEvent
+import net.neoforged.neoforge.registries.DeferredRegister
+import net.neoforged.neoforge.registries.NeoForgeRegistries
+import thedarkcolour.kotlinforforge.neoforge.forge.FORGE_BUS
+import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
+import thedarkcolour.kotlinforforge.neoforge.forge.runForDist
 
 
 @Suppress("UnusedExpression")
@@ -63,7 +62,6 @@ object HybridAquaticForge {
     init {
         CommonClass.init()
 
-        createSpawnGroups()
         registerStructureModifiers()
 
         HybridAquaticBlocks
@@ -87,13 +85,13 @@ object HybridAquaticForge {
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
 
-        HybridAquaticNetworking.registerPackets()
+        HybridAquaticNetworkingForge
         HybridAquaticLootPoolEntryTypes
         LootTableModifications
 
         MOD_BUS.addListener(::loadSeaMessages)
         MOD_BUS.addListener(::registerPotionsRecipes)
-        FORGE_BUS.addListener(HybridAquaticCustomTrades::registerWandererTrades)
+        FORGE_BUS. addListener(HybridAquaticCustomTrades::registerWandererTrades)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
 
         runForDist(
@@ -119,21 +117,7 @@ object HybridAquaticForge {
         )
     }
 
-    private fun createSpawnGroups() {
-        // Extend the MobCategory enum with our spawn groups
-        HybridAquaticSpawnGroup.entries.toTypedArray().forEach {
-            MobCategory.create(
-                it.name.uppercase(),
-                it.name,
-                it.spawnCap,
-                it.peaceful,
-                it.rare,
-                it.immediateDespawnRange
-            )
-        }
-    }
-
-    private fun registerSpawnPlacements(event: SpawnPlacementRegisterEvent) {
+    private fun registerSpawnPlacements(event: RegisterSpawnPlacementsEvent) {
         SpawnRestrictionRegistry.registerSpawnRestrictions()
     }
 
@@ -223,15 +207,15 @@ object HybridAquaticForge {
 
     private fun registerPotionsRecipes(event: FMLCommonSetupEvent) {
         event.enqueueWork {
-            HybridAquaticPotions.registerPotionRecipes()
+            //HybridAquaticPotions.registerPotionRecipes()
         }
     }
 
     private fun registerStructureModifiers() {
-        val structureModifiers: DeferredRegister<Codec<out StructureModifier?>?> =
-            DeferredRegister.create(ForgeRegistries.Keys.STRUCTURE_MODIFIER_SERIALIZERS, Constants.MOD_ID)
+        val structureModifiers: DeferredRegister<MapCodec<out StructureModifier?>?> =
+            DeferredRegister.create(NeoForgeRegistries.Keys.STRUCTURE_MODIFIER_SERIALIZERS, Constants.MOD_ID)
         structureModifiers.register(MOD_BUS)
-        structureModifiers.register<Codec<out StructureModifier?>?>(
+        structureModifiers.register<MapCodec<out StructureModifier?>?>(
             "ha_structure_spawns",
             StructureSpawnModifier::makeCodec
         )

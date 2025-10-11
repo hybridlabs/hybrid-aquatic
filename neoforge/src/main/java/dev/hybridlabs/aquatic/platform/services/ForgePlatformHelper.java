@@ -8,7 +8,7 @@ import dev.hybridlabs.aquatic.item.AnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.GiantGreenAnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.MessageInABottleItem;
 import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
-import dev.hybridlabs.aquatic.network.HybridAquaticNetworking;
+import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 
 import net.minecraft.world.entity.*;
@@ -24,6 +24,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
@@ -62,13 +63,13 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(
             @NotNull String name,
-            EntityType<T> entityType,
+            Supplier<EntityType<T>> entityType,
             int backgroundColor,
             int highlightColor) {
         return CommonClass.ITEMS.register(
                 name,
                 () ->
-                        new SpawnEggItem(
+                        new DeferredSpawnEggItem(
                                 entityType,
                                 backgroundColor,
                                 highlightColor,
@@ -104,7 +105,7 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     @Override
     public MobCategory getMobCategoryByName(String name) {
-        return MobCategory.valueOf(name.toLowerCase());
+        return MobCategory.valueOf(name);
     }
 
     @Override
@@ -126,7 +127,7 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     @Override
     public void sendHookToServer(int entityId, ItemStack entityData) {
-        HybridAquaticNetworking.INSTANCE.sendHookPacket(entityId, entityData);
+        HybridAquaticNetworkingForge.INSTANCE.sendHookPacket(entityId, entityData);
     }
 
     private record SpawnPlacementRegistrationHandler<T extends LivingEntity>(

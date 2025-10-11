@@ -16,49 +16,49 @@ import net.minecraft.world.level.block.state.properties.BlockSetType
 object HybridAquaticPlatformBlocks {
     val DRIFTWOOD_LOG = register("driftwood_log") {
         BaseWoodBlock(
-            Properties.copy(
+            Properties.ofFullCopy(
                 Blocks.OAK_LOG
             )
         )
     }
     val STRIPPED_DRIFTWOOD_LOG = register("stripped_driftwood_log") {
         BaseWoodBlock(
-            Properties.copy(
+            Properties.ofFullCopy(
                 Blocks.OAK_LOG
             )
         )
     }
     val DRIFTWOOD_WOOD = register("driftwood_wood") {
         BaseWoodBlock(
-            Properties.copy(
+            Properties.ofFullCopy(
                 Blocks.OAK_WOOD
             )
         )
     }
     val STRIPPED_DRIFTWOOD_WOOD = register("stripped_driftwood_wood") {
         BaseWoodBlock(
-            Properties.copy(
+            Properties.ofFullCopy(
                 Blocks.OAK_WOOD
             )
         )
     }
 
     val DRIFTWOOD_PLANKS = register("driftwood_planks") {
-        object : Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)) {
+        object : Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)) {
             override fun isFlammable(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Boolean {
                 return true
             }
 
             override fun getFlammability(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Int {
                 return 5
             }
 
             override fun getFireSpreadSpeed(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Int {
                 return 20
             }
@@ -66,21 +66,21 @@ object HybridAquaticPlatformBlocks {
     }
 
     val DRIFTWOOD_SLAB = register("driftwood_slab") {
-        object : SlabBlock(Properties.copy(Blocks.OAK_SLAB)) {
+        object : SlabBlock(Properties.ofFullCopy(Blocks.OAK_SLAB)) {
             override fun isFlammable(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Boolean {
                 return true
             }
 
             override fun getFlammability(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Int {
                 return 5
             }
 
             override fun getFireSpreadSpeed(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Int {
                 return 20
             }
@@ -88,21 +88,21 @@ object HybridAquaticPlatformBlocks {
     }
 
     val DRIFTWOOD_STAIRS = register("driftwood_stairs") {
-        object : StairBlock(DRIFTWOOD_PLANKS.get().defaultBlockState(), Properties.copy(Blocks.OAK_SLAB)) {
+        object : StairBlock(DRIFTWOOD_PLANKS.get().defaultBlockState(), Properties.ofFullCopy(Blocks.OAK_SLAB)) {
             override fun isFlammable(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Boolean {
                 return true
             }
 
             override fun getFlammability(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Int {
                 return 5
             }
 
             override fun getFireSpreadSpeed(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Int {
                 return 20
             }
@@ -110,21 +110,21 @@ object HybridAquaticPlatformBlocks {
     }
 
     val DRIFTWOOD_FENCE = register("driftwood_fence") {
-        object : FenceBlock(Properties.copy(Blocks.OAK_FENCE)) {
+        object : FenceBlock(Properties.ofFullCopy(Blocks.OAK_FENCE)) {
             override fun isFlammable(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Boolean {
                 return true
             }
 
             override fun getFlammability(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Int {
                 return 5
             }
 
             override fun getFireSpreadSpeed(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Int {
                 return 20
             }
@@ -136,44 +136,50 @@ object HybridAquaticPlatformBlocks {
     val DRIFTWOOD_FENCE_GATE = register(
         "driftwood_fence_gate"
     ) {
-        object : FenceGateBlock(Properties.copy(Blocks.OAK_FENCE_GATE), HybridAquaticWoodTypes.DRIFTWOOD) {
+        object : FenceGateBlock(
+            HybridAquaticWoodTypes.DRIFTWOOD, Properties.ofFullCopy(Blocks.OAK_FENCE_GATE)
+        ) {
             override fun isFlammable(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Boolean {
                 return true
             }
 
             override fun getFlammability(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Int {
                 return 5
             }
 
             override fun getFireSpreadSpeed(
-                state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+                state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
             ): Int {
                 return 20
             }
         }
     }
-    val DRIFTWOOD_DOOR = register("driftwood_door") { DoorBlock(Properties.copy(Blocks.OAK_DOOR), BlockSetType.OAK) }
+    val DRIFTWOOD_DOOR =
+        register("driftwood_door") { DoorBlock(BlockSetType.OAK, Properties.ofFullCopy(Blocks.OAK_DOOR)) }
     val DRIFTWOOD_TRAPDOOR =
-        register("driftwood_trapdoor") { TrapDoorBlock(Properties.copy(Blocks.OAK_TRAPDOOR), BlockSetType.OAK) }
+        register("driftwood_trapdoor") { TrapDoorBlock(BlockSetType.OAK, Properties.ofFullCopy(Blocks.OAK_TRAPDOOR)) }
     val DRIFTWOOD_BUTTON = register(
         "driftwood_button"
     ) {
-        ButtonBlock(Properties.copy(Blocks.OAK_BUTTON), BlockSetType.OAK, 25, true)
+        ButtonBlock(
+            BlockSetType.OAK, 25, Properties.ofFullCopy(Blocks.OAK_BUTTON)
+        )
+
     }
     val DRIFTWOOD_PRESSURE_PLATE = register(
         "driftwood_pressure_plate"
     ) {
         PressurePlateBlock(
-            PressurePlateBlock.Sensitivity.EVERYTHING, Properties.copy(Blocks.OAK_PRESSURE_PLATE), BlockSetType.OAK
+            BlockSetType.OAK, Properties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE)
         )
     }
 
-    val DUNEGRASS = register("dunegrass") { DunegrassBlock(Properties.copy(Blocks.GRASS)) }
-    val TALL_DUNEGRASS = register("tall_dunegrass") { TallDunegrassBlock(Properties.copy(Blocks.TALL_GRASS)) }
-    val CATTAIL = register("cattail") { CattailBlock(Properties.copy(Blocks.TALL_GRASS)) }
+    val DUNEGRASS = register("dunegrass") { DunegrassBlock(Properties.ofFullCopy(Blocks.SHORT_GRASS)) }
+    val TALL_DUNEGRASS = register("tall_dunegrass") { TallDunegrassBlock(Properties.ofFullCopy(Blocks.TALL_GRASS)) }
+    val CATTAIL = register("cattail") { CattailBlock(Properties.ofFullCopy(Blocks.TALL_GRASS)) }
 
 }

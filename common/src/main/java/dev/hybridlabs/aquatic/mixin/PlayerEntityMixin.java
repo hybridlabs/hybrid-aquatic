@@ -58,17 +58,17 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         return haHurtTime;
     }
 
-    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
+    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"),remap = false)
     private void readCustomDataFromNbt(CompoundTag nbt, CallbackInfo ci) {
         hybrid_aquatic$setHurtTime(nbt.getInt("haHurtTime"));
     }
 
-    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
+    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"),remap = false)
     private void writeCustomDataToNbt(CompoundTag nbt, CallbackInfo ci) {
         nbt.putInt("haHurtTime", hybrid_aquatic$getHurtTime());
     }
 
-    @Inject(method = "isAffectedByFluids", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isAffectedByFluids", at = @At("HEAD"), cancellable = true,remap = false)
     private void overrideShouldSwimInFluids(CallbackInfoReturnable<Boolean> ci) {
         if (isWearingDivingBoots && !isSwimming() && isUnderWater()) {
             ci.setReturnValue(false);
@@ -83,7 +83,8 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
                             target =
                                     "Lnet/minecraft/world/entity/player/Player;level()Lnet/minecraft/world/level/Level;",
                             ordinal = 0,
-                            shift = At.Shift.BEFORE))
+                            shift = At.Shift.BEFORE),
+    remap = false)
     private void setCustomHurtTimeOnDamage(
             DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         Player object = (Player) (Object) this;
@@ -105,7 +106,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         }
     }
 
-    @Inject(method = "tick", at = @At("TAIL"))
+    @Inject(method = "tick", at = @At("TAIL"),remap = false)
     private void tickDownCustomHurtTime(CallbackInfo ci) {
         int cHurtTime = hybrid_aquatic$getHurtTime();
         if (cHurtTime > 0) {

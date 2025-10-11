@@ -1578,7 +1578,7 @@ object HybridAquaticItems {
         primaryColor: Int,
         secondaryColor: Int
     ): Supplier<SpawnEggItem> {
-        return PLATFORM.registerSpawnEggItem(id, type.get(), primaryColor, secondaryColor)
+        return PLATFORM.registerSpawnEggItem(id, type, primaryColor, secondaryColor)
 
     }
 

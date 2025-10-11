@@ -10,18 +10,18 @@ import dev.hybridlabs.aquatic.world.gen.structure.BuiltinSpawnModifiers
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import net.minecraft.core.HolderSet
 import net.minecraft.core.registries.Registries
-import net.minecraft.data.worldgen.BootstapContext
+import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.biome.MobSpawnSettings
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider
-import net.minecraftforge.common.world.BiomeModifier
-import net.minecraftforge.common.world.ForgeBiomeModifiers
-import net.minecraftforge.common.world.StructureModifier
-import net.minecraftforge.data.event.GatherDataEvent
-import net.minecraftforge.eventbus.api.SubscribeEvent
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber
-import net.minecraftforge.registries.ForgeRegistries.Keys.BIOME_MODIFIERS
-import net.minecraftforge.registries.ForgeRegistries.Keys.STRUCTURE_MODIFIERS
+import net.neoforged.bus.api.SubscribeEvent
+import net.neoforged.fml.common.EventBusSubscriber
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider
+import net.neoforged.neoforge.common.world.BiomeModifier
+import net.neoforged.neoforge.common.world.BiomeModifiers
+import net.neoforged.neoforge.common.world.StructureModifier
+import net.neoforged.neoforge.data.event.GatherDataEvent
+import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.BIOME_MODIFIERS
+import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.STRUCTURE_MODIFIERS
 
 /**
  * Datagen for Forge specific data resources like biome modifiers.
@@ -68,7 +68,7 @@ object DataGenerators {
     /**
      * Create Forge structure spawn modifiers.
      */
-    private fun registerStructureSpawnModifiers(context: BootstapContext<StructureModifier>) {
+    private fun registerStructureSpawnModifiers(context: BootstrapContext<StructureModifier>) {
         for (structureModifier in BuiltinSpawnModifiers) {
             val key = ResourceKey.create(
                 STRUCTURE_MODIFIERS,
@@ -85,7 +85,7 @@ object DataGenerators {
      * Create Forge biome modifiers to add placed features.
      */
     private fun registerFeatures(
-        context: BootstapContext<BiomeModifier>,
+        context: BootstrapContext<BiomeModifier>,
     ) {
         val biomeRegistry = context.lookup(Registries.BIOME)
         val featureRegistry = context.lookup(Registries.PLACED_FEATURE)
@@ -97,7 +97,7 @@ object DataGenerators {
                 CommonClass.locate(location)
             )
             context.register(
-                key, ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+                key, BiomeModifiers.AddFeaturesBiomeModifier(
                     biomeRegistry.getOrThrow(addition.biomeTag),
                     HolderSet.direct(featureRegistry.getOrThrow(addition.placedFeature)),
                     addition.step
@@ -110,7 +110,7 @@ object DataGenerators {
      * Create Forge biome modifiers to add mob spawns based on the config.
      */
     private fun registerBiomeSpawns(
-        context: BootstapContext<BiomeModifier>,
+        context: BootstrapContext<BiomeModifier>,
     ) {
         val configHandler = initializeConfig(CommonClass.CONFIG_FILE)
         val biomeRegistry = context.lookup(Registries.BIOME)
@@ -122,7 +122,7 @@ object DataGenerators {
             )
 
             context.register(
-                key, ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                key, BiomeModifiers.AddSpawnsBiomeModifier(
                     biomeRegistry.get(spawnConfig.biomes).get(),
                     listOf(
                         MobSpawnSettings.SpawnerData(

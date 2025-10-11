@@ -13,11 +13,12 @@ logoFile = "${mod_id}.png"
 credits = '''${credits}'''
 authors = "${mod_author}"
 description = '''${description}'''
+enumExtensions="META-INF/enumextensions.json"
 
 [[dependencies.${forge_mod_id}]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
-versionRange = "[${forge_version},)"
+versionRange = "[${neoforge_version},)"
 ordering = "NONE"
 side = "BOTH"
 

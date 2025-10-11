@@ -24,8 +24,11 @@ public abstract class SkullBlockEntityModelMixin {
     /**
      * Injects custom skull textures into the skull renderer.
      */
-    @Inject(method = "method_3580", at = @At("TAIL"))
-    private static void injectTextures(HashMap<SkullBlock.Type, ResourceLocation> map, CallbackInfo info) {
+    @Inject(
+            method ="Lnet/minecraft/client/renderer/blockentity/SkullBlockRenderer;lambda$static$0(Ljava/util/HashMap;)V",
+            at = @At("TAIL"), remap = false)
+    private static void injectTextures(
+            HashMap<SkullBlock.Type, ResourceLocation> map, CallbackInfo info) {
         // inject plushie variants
         EnumEntries<PlushieBlock.Variant> variants = PlushieBlock.Variant.getEntries();
         for (PlushieBlock.Variant variant : variants) {
@@ -36,9 +39,8 @@ public abstract class SkullBlockEntityModelMixin {
     /**
      * Injects custom skull models into the skull renderer.
      */
-    @Inject(method = "createSkullRenderers", at = @At(value = "INVOKE", target = "Lcom/google/common/collect" +
-            "/ImmutableMap$Builder;build()Lcom/google/common/collect/ImmutableMap;", shift = At.Shift.BEFORE, remap =
-            false))
+    @Inject(method = "createSkullRenderers", at = @At(value = "RETURN",
+            shift = At.Shift.BEFORE), remap = false)
     private static void injectModels(EntityModelSet modelLoader, CallbackInfoReturnable<Map<SkullBlock.Type,
             SkullModelBase>> cir, @Local ImmutableMap.Builder<SkullBlock.Type, SkullModelBase> builder) {
         // inject plushie variants

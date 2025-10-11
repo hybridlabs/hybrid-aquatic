@@ -51,14 +51,14 @@ public abstract class FishingBobberEntityMixin extends Entity
         super(entityType, level);
     }
 
-    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
+    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"), remap = false)
     private void readCustomDataFromNbt(CompoundTag nbt, CallbackInfo ci) {
         hybrid_aquatic$setLureItem(
                 ItemStack.parseOptional(
                         this.level().registryAccess(), nbt.getCompound("lureItem")));
     }
 
-    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
+    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"), remap = false)
     private void writeCustomDataToNbt(CompoundTag nbt, CallbackInfo ci) {
         CompoundTag itemStack = new CompoundTag();
         hybrid_aquatic$getLureItem().save(this.level().registryAccess(), itemStack);
@@ -84,7 +84,7 @@ public abstract class FishingBobberEntityMixin extends Entity
                                             + "(Lnet"
                                             + "/minecraft/util/RandomSource;II)I",
                             ordinal = 2,
-                            shift = At.Shift.AFTER))
+                            shift = At.Shift.AFTER),remap = false)
     private void reduceCooldownTime(BlockPos pos, CallbackInfo ci) {
         Item lureItem = this.lureItemStack.getItem();
         if (lureItem.equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK().get())
@@ -104,7 +104,7 @@ public abstract class FishingBobberEntityMixin extends Entity
                             target =
                                     "Lnet/minecraft/world/level/Level;getServer()"
                                             + "Lnet/minecraft/server/MinecraftServer;",
-                            ordinal = 0))
+                            ordinal = 0),remap = false)
     private void objectGetter(
             ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local Player playerEntity) {
         this.usedItem = usedItem;
@@ -117,7 +117,7 @@ public abstract class FishingBobberEntityMixin extends Entity
             at =
                     @At(
                             value = "INVOKE",
-                            target = "Lnet/minecraft/world/entity/player" + "/Player;getLuck()F"))
+                            target = "Lnet/minecraft/world/entity/player" + "/Player;getLuck()F"),remap = false)
     private float increaseLuck(Player player, Operation<Float> original) {
         if (lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK().get()))
             return player.getLuck() + 27;
@@ -144,7 +144,7 @@ public abstract class FishingBobberEntityMixin extends Entity
                                             + "/level/storage/loot/LootTable;getRandomItems"
                                             + "(Lnet/minecraft/world/level"
                                             + "/storage/loot/LootParams;)"
-                                            + "Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"))
+                                            + "Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"),remap = false)
     private LootTable onHookReelEntity(LootTable instance, LootParams parameters) {
         if (!lureItemStack.isEmpty()) {
             if (lureItemStack.is(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK().get())) {
@@ -195,7 +195,7 @@ public abstract class FishingBobberEntityMixin extends Entity
                             value = "INVOKE",
                             target =
                                     "Lnet/minecraft/world/entity/projectile"
-                                            + "/FishingHook;discard()V"))
+                                            + "/FishingHook;discard()V"),remap = false)
     private void retrieveLureOnSuccess(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
         retrieveLure(usedPlayer);
     }
@@ -208,7 +208,7 @@ public abstract class FishingBobberEntityMixin extends Entity
                             value = "INVOKE",
                             target =
                                     "Lnet/minecraft/world/entity/projectile"
-                                            + "/FishingHook;discard()V"))
+                                            + "/FishingHook;discard()V"),remap = false)
     private void retrieveLureIfInvalid(Player player, CallbackInfoReturnable<Boolean> cir) {
         retrieveLure(player);
     }

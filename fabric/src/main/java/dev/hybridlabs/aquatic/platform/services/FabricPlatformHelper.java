@@ -48,14 +48,14 @@ public class FabricPlatformHelper implements PlatformHelper {
     @Override
     public <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(
             @NotNull String name,
-            EntityType<T> entityType,
+            Supplier<EntityType<T>> entityType,
             int backgroundColor,
             int highlightColor) {
         return CommonClass.ITEMS.register(
                 name,
                 () ->
                         new SpawnEggItem(
-                                entityType,
+                                entityType.get(),
                                 backgroundColor,
                                 highlightColor,
                                 new Item.Properties()));

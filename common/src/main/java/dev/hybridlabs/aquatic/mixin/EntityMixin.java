@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Entity.class)
 public class EntityMixin {
-    @ModifyReturnValue(method = "maxUpStep", at = @At("RETURN"))
+    @ModifyReturnValue(method = "maxUpStep", at = @At("RETURN"),remap = false)
     private float onGetStepHeight(float original) {
         // Allows player to walk in the water without jumping
         Entity entity = (Entity) (Object) this;

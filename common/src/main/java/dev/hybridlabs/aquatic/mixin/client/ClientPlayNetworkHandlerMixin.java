@@ -27,7 +27,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
     /**
      * Allows usage of Sea Message books to open a book screen.
      */
-    @Inject(method = "handleOpenBook", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "handleOpenBook", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILHARD, remap = false)
     private void onOpenWrittenBook(ClientboundOpenBookPacket packet, CallbackInfo ci, ItemStack stack) {
         if (stack.is(HybridAquaticItems.INSTANCE.getSEA_MESSAGE_BOOK().get())) {
             SeaMessage message = SeaMessageBookItem.Companion.getSeaMessage(stack, this.registryAccess());

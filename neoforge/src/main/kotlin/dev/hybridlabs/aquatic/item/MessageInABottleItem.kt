@@ -6,8 +6,9 @@ import dev.hybridlabs.aquatic.block.MessageInABottleBlock.Variant
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
+import net.minecraft.core.component.DataComponents
 import net.minecraft.world.item.ItemStack
-import net.minecraftforge.client.extensions.common.IClientItemExtensions
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 import java.util.function.Consumer
 
 /**
@@ -18,7 +19,7 @@ class MessageInABottleItem(settings: Properties) :
     PlaceableInWaterItem(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get(), settings) {
     override fun getDescriptionId(stack: ItemStack): String {
         // custom variant translation keys
-        val id = stack.getTagElement(BLOCK_ENTITY_TAG)?.getString(MessageInABottleBlockEntity.VARIANT_KEY) ?: ""
+        val id = stack.components[DataComponents.BLOCK_ENTITY_DATA]?.copyTag()?.getString(MessageInABottleBlockEntity.VARIANT_KEY) ?: ""
         val variant = Variant.byId(id)
         val key = descriptionId
         return when (variant) {

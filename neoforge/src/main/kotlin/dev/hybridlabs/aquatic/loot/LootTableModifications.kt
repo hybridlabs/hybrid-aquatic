@@ -2,19 +2,21 @@ package dev.hybridlabs.aquatic.loot
 
 import net.minecraft.advancements.critereon.EntityPredicate
 import net.minecraft.advancements.critereon.FishingHookPredicate
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.storage.loot.BuiltInLootTables
 import net.minecraft.world.level.storage.loot.LootContext
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
-import net.minecraft.world.level.storage.loot.entries.LootTableReference
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable.lootTableReference
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition
-import net.minecraftforge.event.LootTableLoadEvent
-import net.minecraftforge.eventbus.api.SubscribeEvent
-import net.minecraftforge.fml.common.Mod
+import net.neoforged.bus.api.SubscribeEvent
+import net.neoforged.fml.common.EventBusSubscriber
+import net.neoforged.neoforge.event.LootTableLoadEvent
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 object LootTableModifications {
 
     @SubscribeEvent
@@ -26,20 +28,45 @@ object LootTableModifications {
                         .add(LootItem.lootTableItem(Items.SALMON).setWeight(25))
                         .add(LootItem.lootTableItem(Items.TROPICAL_FISH).setWeight(2))
                         .add(LootItem.lootTableItem(Items.PUFFERFISH).setWeight(13)).add(
-                            LootTableReference.lootTableReference(HybridAquaticLootTables.FISHING_DEEP_SEA_FISH_ID)
+                            lootTableReference(
+                                ResourceKey.create(
+                                    Registries.LOOT_TABLE,
+                                    HybridAquaticLootTables.FISHING_DEEP_SEA_FISH_ID
+                                )
+                            )
                                 .setWeight(30).setQuality(1)
                         ).add(
-                            LootTableReference.lootTableReference(HybridAquaticLootTables.FISHING_OPEN_OCEAN_FISH_ID)
+                            lootTableReference(
+                                ResourceKey.create(
+                                    Registries.LOOT_TABLE,
+                                    HybridAquaticLootTables.FISHING_OPEN_OCEAN_FISH_ID
+                                )
+                            )
                                 .setWeight(40).setQuality(1)
                         ).add(
-                            LootTableReference.lootTableReference(HybridAquaticLootTables.FISHING_REEF_FISH_ID)
+                            lootTableReference(
+                                ResourceKey.create(
+                                    Registries.LOOT_TABLE,
+                                    HybridAquaticLootTables.FISHING_REEF_FISH_ID
+                                )
+                            )
                                 .setWeight(50).setQuality(-1)
                         ).add(
-                            LootTableReference.lootTableReference(HybridAquaticLootTables.FISHING_TROPICAL_FRESHWATER_FISH_ID)
+                            lootTableReference(
+                                ResourceKey.create(
+                                    Registries.LOOT_TABLE,
+                                    HybridAquaticLootTables.FISHING_TROPICAL_FRESHWATER_FISH_ID
+                                )
+                            )
                                 .setWeight(30).setQuality(1)
 
                         ).add(
-                            LootTableReference.lootTableReference(HybridAquaticLootTables.FISHING_TREASURE_ID)
+                            lootTableReference(
+                                ResourceKey.create(
+                                    Registries.LOOT_TABLE,
+                                    HybridAquaticLootTables.FISHING_TREASURE_ID
+                                )
+                            )
                                 .setWeight(10).setQuality(2).`when`(
                                     LootItemEntityPropertyCondition.hasProperties(
                                         LootContext.EntityTarget.THIS,
