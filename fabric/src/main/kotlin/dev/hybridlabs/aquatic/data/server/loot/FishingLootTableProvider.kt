@@ -4,18 +4,21 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class FishingLootTableProvider(output: FabricDataOutput) :
-    SimpleFabricLootTableProvider(output, LootContextParamSets.FISHING) {
-    override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
+class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    SimpleFabricLootTableProvider(output, lookupProvider, LootContextParamSets.FISHING) {
+    override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
         exporter.accept(
-            HybridAquaticLootTables.FISHING_DEEP_SEA_FISH_ID,
+            ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.FISHING_DEEP_SEA_FISH_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.FISHING_DEEP_SEA_FISH_ID)
                 .pool(
@@ -60,7 +63,7 @@ class FishingLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.FISHING_REEF_FISH_ID,
+            ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.FISHING_REEF_FISH_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.FISHING_REEF_FISH_ID)
                 .pool(
@@ -141,7 +144,7 @@ class FishingLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.FISHING_OPEN_OCEAN_FISH_ID,
+            ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.FISHING_OPEN_OCEAN_FISH_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.FISHING_OPEN_OCEAN_FISH_ID)
                 .pool(
@@ -202,7 +205,7 @@ class FishingLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.FISHING_TROPICAL_FRESHWATER_FISH_ID,
+            ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.FISHING_TROPICAL_FRESHWATER_FISH_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.FISHING_TROPICAL_FRESHWATER_FISH_ID)
                 .pool(
@@ -256,7 +259,7 @@ class FishingLootTableProvider(output: FabricDataOutput) :
 
         // fishing treasure loot table extension
         exporter.accept(
-            HybridAquaticLootTables.FISHING_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.FISHING_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.FISHING_TREASURE_ID)
                 .pool(

@@ -19,8 +19,6 @@ import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.TIGER_
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.WHALE_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
-import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
-import dev.hybridlabs.aquatic.client.render.armor.*
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
@@ -35,15 +33,9 @@ import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
-import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
 import net.minecraft.commands.CommandBuildContext
-import net.minecraft.world.entity.EquipmentSlot
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.item.ItemStack
-import software.bernie.geckolib.animatable.client.RenderProvider
-import software.bernie.geckolib.renderer.GeoArmorRenderer
 
 @Suppress("UnusedExpression")
 object HybridAquaticClient : ClientModInitializer {
@@ -57,38 +49,11 @@ object HybridAquaticClient : ClientModInitializer {
         registerEntityRenderers()
         registerWeatherRenderers()
         registerTooltips()
-        registerGeoRenderers()
         registerModelLayers()
 
         ClientCommandRegistrationCallback.EVENT.register(::registerCommands)
     }
 
-    private fun registerGeoRenderers() {
-        GeoRenderProviderStorage.divingArmorRenderProvider = createBasicRenderProvider(::DivingArmorRenderer)
-        GeoRenderProviderStorage.seashellArmorRenderProvider = createBasicRenderProvider(::SeashellArmorRenderer)
-        GeoRenderProviderStorage.manglerfishArmorRenderProvider = createBasicRenderProvider(::ManglerfishArmorRenderer)
-        GeoRenderProviderStorage.turtleArmorRenderProvider = createBasicRenderProvider(::TurtleArmorRenderer)
-        GeoRenderProviderStorage.eelArmorRenderProvider = createBasicRenderProvider(::EelArmorRenderer)
-        GeoRenderProviderStorage.moonjellyfishArmorRenderProvider = createBasicRenderProvider(::MoonJellyfishArmorRenderer)
-    }
-
-    private fun createBasicRenderProvider(rendererProvider: () -> GeoArmorRenderer<*>): () -> RenderProvider {
-        return {
-            object : RenderProvider {
-                private val renderer: GeoArmorRenderer<*> by lazy(rendererProvider)
-
-                override fun getHumanoidArmorModel(
-                    livingEntity: LivingEntity,
-                    itemStack: ItemStack,
-                    equipmentSlot: EquipmentSlot,
-                    original: HumanoidModel<LivingEntity>
-                ): HumanoidModel<LivingEntity> {
-                    renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original)
-                    return renderer
-                }
-            }
-        }
-    }
 
     private fun registerWeatherRenderers() {
         // TODO: hook up renderer to make this thing easier

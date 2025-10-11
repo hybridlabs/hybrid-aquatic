@@ -13,31 +13,35 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.advancements.critereon.StatePropertiesPredicate
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.ItemTags
-import net.minecraft.world.item.BlockItem.BLOCK_ENTITY_TAG
 import net.minecraft.world.level.block.BaseCoralWallFanBlock
 import net.minecraft.world.level.block.WallTorchBlock
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry
 import net.minecraft.world.level.storage.loot.entries.LootItem
-import net.minecraft.world.level.storage.loot.entries.LootTableReference
-import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable
+import net.minecraft.world.level.storage.loot.functions.CopyCustomDataFunction
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition
 import net.minecraft.world.level.storage.loot.predicates.MatchTool
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
+import java.util.concurrent.CompletableFuture
 
-class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTableProvider(output) {
+class BlockLootTableProvider(output: FabricDataOutput, registryLookup: CompletableFuture<HolderLookup.Provider>) :
+    FabricBlockLootTableProvider(output, registryLookup) {
 
     override fun generate() {
         // anemone
         add(HybridAquaticBlocks.ANEMONE.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()
-                    .add(LootItem.lootTableItem(block)).conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .add(LootItem.lootTableItem(block)).conditionally(hasShearsOrSilkTouch().build()).build()
             )
         }
 
@@ -45,7 +49,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(hasShearsOrSilkTouch().build()).build()
             )
         }
 
@@ -53,7 +57,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(hasShearsOrSilkTouch().build()).build()
             )
         }
 
@@ -61,7 +65,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(hasShearsOrSilkTouch().build()).build()
             )
         }
 
@@ -69,7 +73,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(hasShearsOrSilkTouch().build()).build()
             )
         }
 
@@ -77,7 +81,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(hasShearsOrSilkTouch().build()).build()
             )
         }
 
@@ -85,7 +89,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(hasShearsOrSilkTouch().build()).build()
             )
         }
 
@@ -114,7 +118,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(hasShearsOrSilkTouch().build()).build()
             )
         }
 
@@ -158,7 +162,10 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get(),
             createSlabItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get())
         )
-        add(HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get(), createDoorTable(HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get()))
+        add(
+            HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get(),
+            createDoorTable(HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get())
+        )
 
         createSingleItemTable(HybridAquaticBlocks.GLOWSTICK.get())
 
@@ -219,8 +226,13 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootItem.lootTableItem(block).`when`(HAS_SILK_TOUCH),
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.VENT_LOOT_ID)
+                        LootItem.lootTableItem(block).`when`(hasSilkTouch()),
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HybridAquaticLootTables.VENT_LOOT_ID
+                            )
+                        )
                     )
                 )
             )
@@ -231,13 +243,13 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootItem.lootTableItem(block).`when`(HAS_SILK_TOUCH).apply(
-                            CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                .copy(VARIANT_KEY, "$BLOCK_ENTITY_TAG.$VARIANT_KEY")
-                                .copy(MESSAGE_KEY, "$BLOCK_ENTITY_TAG.$MESSAGE_KEY")
+                        LootItem.lootTableItem(block).`when`(hasSilkTouch()).apply(
+                            CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                                .copy(VARIANT_KEY, VARIANT_KEY)
+                                .copy(MESSAGE_KEY, MESSAGE_KEY)
                         ),
                         LootItem.lootTableItem(HybridAquaticItems.SEA_MESSAGE_BOOK.get()).apply(
-                            CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                            CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
                                 .copy("$MESSAGE_KEY.tag.$SEA_MESSAGE_KEY", SEA_MESSAGE_KEY)
                         )
                     )
@@ -250,7 +262,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.CRAB_POT_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HybridAquaticLootTables.CRAB_POT_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem())
@@ -263,7 +280,9 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID)
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -276,7 +295,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HybridAquaticLootTables.OAK_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem())
@@ -289,7 +313,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -302,7 +331,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -315,7 +349,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID)
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID
+                            )
+                        )
                             .`when`(
 
                                 MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
@@ -330,7 +369,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -343,7 +387,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -356,7 +405,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID)
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID
+                            )
+                        )
                             .`when`(
                                 MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                             ),
@@ -370,7 +424,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),

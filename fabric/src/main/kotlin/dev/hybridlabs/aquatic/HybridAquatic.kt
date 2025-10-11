@@ -62,9 +62,9 @@ object HybridAquatic : ModInitializer {
         HybridAquaticMobEffects
         //HybridAquaticPotions.registerPotionRecipes()
 
-        //HybridAquaticItems
-        //HybridAquaticPlatformItems
-        //HybridAquaticItemGroups
+        HybridAquaticItems
+        HybridAquaticPlatformItems
+        HybridAquaticItemGroups
 
         HybridAquaticFeatures
         HybridAquaticPlacedFeatures

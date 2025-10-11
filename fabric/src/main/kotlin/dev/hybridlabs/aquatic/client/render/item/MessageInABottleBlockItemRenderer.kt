@@ -9,6 +9,7 @@ import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEn
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry.DynamicItemRenderer
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.core.BlockPos
+import net.minecraft.core.component.DataComponents
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
@@ -28,7 +29,7 @@ class MessageInABottleBlockItemRenderer : DynamicItemRenderer {
         overlay: Int
     ) {
         messageInABottleBlockEntity.variant = MessageInABottleBlock.Variant.byId(
-            stack.getTagElement(BlockItem.BLOCK_ENTITY_TAG)?.getString(MessageInABottleBlockEntity.VARIANT_KEY) ?: ""
+            stack.components.get(DataComponents.BLOCK_ENTITY_DATA)?.copyTag()?.getString(MessageInABottleBlockEntity.VARIANT_KEY) ?: ""
         )
         renderer.render(messageInABottleBlockEntity, 1.0f, matrices, vertexConsumers, light, overlay)
     }

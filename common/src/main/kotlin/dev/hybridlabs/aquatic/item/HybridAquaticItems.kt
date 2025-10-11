@@ -7,6 +7,12 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.item.armor.DivingArmorItem
+import dev.hybridlabs.aquatic.item.armor.EelArmorItem
+import dev.hybridlabs.aquatic.item.armor.ManglerfishArmorItem
+import dev.hybridlabs.aquatic.item.armor.MoonJellyfishArmorItem
+import dev.hybridlabs.aquatic.item.armor.SeashellArmorItem
+import dev.hybridlabs.aquatic.item.armor.TurtleArmorItem
 import dev.hybridlabs.aquatic.item.coral.*
 import dev.hybridlabs.aquatic.item.seashell.SeashellAxeItem
 import dev.hybridlabs.aquatic.item.seashell.SeashellHoeItem
@@ -28,7 +34,7 @@ object HybridAquaticItems {
     val DIVING_HELMET = register(
         "diving_helmet"
     ) {
-        DIVING_ARMOR_FACTORY.create(
+        DivingArmorItem(
             ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
@@ -37,7 +43,7 @@ object HybridAquaticItems {
     val DIVING_SUIT = register(
         "diving_suit"
     ) {
-        DIVING_ARMOR_FACTORY.create(
+        DivingArmorItem(
             ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
@@ -45,7 +51,7 @@ object HybridAquaticItems {
     val DIVING_LEGGINGS = register(
         "diving_leggings"
     ) {
-        DIVING_ARMOR_FACTORY.create(
+        DivingArmorItem(
             ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1)
         )
     }
@@ -53,7 +59,7 @@ object HybridAquaticItems {
     val DIVING_BOOTS = register(
         "diving_boots"
     ) {
-        DIVING_ARMOR_FACTORY.create(
+        DivingArmorItem(
             ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
         )
     }
@@ -61,7 +67,7 @@ object HybridAquaticItems {
     val NAUTILUS_HELMET = register(
         "nautilus_helmet"
     ) {
-        SEASHELL_ARMOR_FACTORY.create(
+        SeashellArmorItem(
             ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
         )
     }
@@ -69,7 +75,7 @@ object HybridAquaticItems {
     val NAUTILUS_PAULDRONS = register(
         "nautilus_pauldrons"
     ) {
-        SEASHELL_ARMOR_FACTORY.create(
+            SeashellArmorItem(
             ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
@@ -77,7 +83,7 @@ object HybridAquaticItems {
     val TURTLE_CHESTPLATE = register(
         "turtle_chestplate"
     ) {
-        TURTLE_ARMOR_FACTORY.create(
+        TurtleArmorItem(
             ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
@@ -85,7 +91,7 @@ object HybridAquaticItems {
     val MANGLERFISH_LURE = register(
         "manglerfish_lure"
     ) {
-        MANGLERFISH_ARMOR_FACTORY.create(
+        ManglerfishArmorItem(
             ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
         )
     }
@@ -93,7 +99,7 @@ object HybridAquaticItems {
     val MANGLERFISH_FIN = register(
         "manglerfish_fin"
     ) {
-        MANGLERFISH_ARMOR_FACTORY.create(
+        ManglerfishArmorItem(
             ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
@@ -101,7 +107,7 @@ object HybridAquaticItems {
     val EEL_SCARF = register(
         "eel_scarf"
     ) {
-        EEL_ARMOR_FACTORY.create(
+        EelArmorItem(
             ArmorItem.Type.CHESTPLATE,
             Item.Properties().stacksTo(1)
         )
@@ -110,7 +116,7 @@ object HybridAquaticItems {
     val MOON_JELLYFISH_HAT = register(
         "moon_jellyfish_hat"
     ) {
-        MOON_JELLYFISH_ARMOR_FACTORY.create(
+        MoonJellyfishArmorItem(
             ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
         )
     }

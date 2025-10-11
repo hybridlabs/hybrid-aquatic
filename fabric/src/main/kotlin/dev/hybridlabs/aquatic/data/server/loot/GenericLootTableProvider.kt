@@ -5,7 +5,9 @@ import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
@@ -15,11 +17,12 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class GenericLootTableProvider(output: FabricDataOutput) :
-    SimpleFabricLootTableProvider(output, LootContextParamSets.ALL_PARAMS) {
-    override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
+class GenericLootTableProvider(output: FabricDataOutput,lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    SimpleFabricLootTableProvider(output, lookupProvider,LootContextParamSets.ALL_PARAMS) {
+    override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
         fun universalCratePool(): LootPool.Builder {
             return LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1.0f))
@@ -59,7 +62,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         }
 
         exporter.accept(
-            HybridAquaticLootTables.CRAB_POT_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.CRAB_POT_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.CRAB_POT_TREASURE_ID)
                 .pool(
@@ -116,7 +119,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID)
                 .pool(
@@ -140,7 +143,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.OAK_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.OAK_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -165,7 +168,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -190,7 +193,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -215,7 +218,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -240,7 +243,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -265,7 +268,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -290,7 +293,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -315,7 +318,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -344,7 +347,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.VENT_LOOT_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.VENT_LOOT_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.VENT_LOOT_ID)
                 .pool(
@@ -367,7 +370,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -376,7 +379,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SPOTTED_EAGLE_RAY,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.SPOTTED_EAGLE_RAY),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -385,7 +388,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CLAWED_LOBSTER,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.CLAWED_LOBSTER),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -398,7 +401,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CLAWLESS_LOBSTER,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.CLAWLESS_LOBSTER),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -407,7 +410,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.HERMIT_CRAB_SKULL,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.HERMIT_CRAB_SKULL),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -416,7 +419,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.HERMIT_CRAB_SHELL,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.HERMIT_CRAB_SHELL),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -425,7 +428,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_FIRE,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.DECORATOR_FIRE),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -434,7 +437,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_BRAIN,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.DECORATOR_BRAIN),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -443,7 +446,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_TUBE,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.DECORATOR_TUBE),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -452,7 +455,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_BUBBLE,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.DECORATOR_BUBBLE),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -461,7 +464,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_HORN,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.DECORATOR_HORN),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -470,7 +473,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_THORN,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.DECORATOR_THORN),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -479,7 +482,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_LOPHELIA,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.DECORATOR_LOPHELIA),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -488,7 +491,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID)
                 .pool(

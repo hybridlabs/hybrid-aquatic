@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
+import net.minecraft.tags.BlockTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.Tier
@@ -21,14 +22,14 @@ enum class HybridAquaticToolMaterials(
         1, 131, 4.0f, 1.0f, 22,
         Supplier<Ingredient> { Ingredient.of(Items.NAUTILUS_SHELL) }) {
         override fun getIncorrectBlocksForDrops(): TagKey<Block?> {
-            TODO("Not yet implemented")
+            return BlockTags.INCORRECT_FOR_IRON_TOOL
         }
     },
     CORAL(
         2, 250, 6.0f, 2.0f, 14,
         Supplier<Ingredient> { Ingredient.of(HybridAquaticItems.CORAL_CHUNK.get()) }) {
         override fun getIncorrectBlocksForDrops(): TagKey<Block?> {
-            TODO("Not yet implemented")
+            return BlockTags.INCORRECT_FOR_IRON_TOOL
         }
     };
 

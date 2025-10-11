@@ -6,30 +6,32 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.advancements.critereon.EntityFlagsPredicate
 import net.minecraft.advancements.critereon.EntityPredicate
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.entity.EntityType
+import net.minecraft.core.HolderLookup
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.storage.loot.LootContext
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
-import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction
+import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
 /**
  * Generates entity loot tables.
  */
-class EntityTypeLootTableProvider(output: FabricDataOutput) :
-    SimpleFabricLootTableProvider(output, LootContextParamSets.ENTITY) {
-    override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
+class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    SimpleFabricLootTableProvider(exporter, lookupProvider, LootContextParamSets.ENTITY) {
+    override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
+        val lookup = lookupProvider.join()
         // nautilus
-        export(exporter, HybridAquaticEntityTypes.NAUTILUS.get()) {
+        export(exporter,  HybridAquaticEntityTypes.NAUTILUS.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -54,7 +56,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
         }
         //crustaceans
 
-        export(exporter, HybridAquaticEntityTypes.KARKINOS.get()) {
+        export(exporter, HybridAquaticEntityTypes.KARKINOS.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -69,7 +71,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.DECORATOR_CRAB.get()) {
+        export(exporter, HybridAquaticEntityTypes.DECORATOR_CRAB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -82,13 +84,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.HORSESHOE_CRAB.get()) {
+        export(exporter, HybridAquaticEntityTypes.HORSESHOE_CRAB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -101,13 +103,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.DUNGENESS_CRAB.get()) {
+        export(exporter, HybridAquaticEntityTypes.DUNGENESS_CRAB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -120,13 +122,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FIDDLER_CRAB.get()) {
+        export(exporter, HybridAquaticEntityTypes.FIDDLER_CRAB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -139,13 +141,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SPIDER_CRAB.get()) {
+        export(exporter, HybridAquaticEntityTypes.SPIDER_CRAB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -158,13 +160,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.GHOST_CRAB.get()) {
+        export(exporter, HybridAquaticEntityTypes.GHOST_CRAB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -177,13 +179,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.VAMPIRE_CRAB.get()) {
+        export(exporter, HybridAquaticEntityTypes.VAMPIRE_CRAB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -196,13 +198,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FLOWER_CRAB.get()) {
+        export(exporter, HybridAquaticEntityTypes.FLOWER_CRAB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -215,13 +217,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.COCONUT_CRAB.get()) {
+        export(exporter, HybridAquaticEntityTypes.COCONUT_CRAB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -234,13 +236,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.YETI_CRAB.get()) {
+        export(exporter, HybridAquaticEntityTypes.YETI_CRAB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -253,13 +255,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get()) {
+        export(exporter, HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -272,13 +274,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.LOBSTER.get()) {
+        export(exporter, HybridAquaticEntityTypes.LOBSTER.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -291,7 +293,8 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
@@ -307,12 +310,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.CRAYFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.CRAYFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -325,13 +329,14 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SHRIMP.get()) {
+        export(exporter, HybridAquaticEntityTypes.SHRIMP.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -344,14 +349,15 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
         // cephalopods
-        export(exporter, HybridAquaticEntityTypes.VAMPIRE_SQUID.get()) {
+        export(exporter, HybridAquaticEntityTypes.VAMPIRE_SQUID.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -364,12 +370,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
         }
-        export(exporter, HybridAquaticEntityTypes.CUTTLEFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.CUTTLEFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -393,13 +400,14 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.ARROW_SQUID.get()) {
+        export(exporter, HybridAquaticEntityTypes.ARROW_SQUID.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -418,13 +426,14 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FIREFLY_SQUID.get()) {
+        export(exporter, HybridAquaticEntityTypes.FIREFLY_SQUID.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -443,40 +452,44 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEA_CUCUMBER.get()) {
+        export(exporter, HybridAquaticEntityTypes.SEA_CUCUMBER.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEA_SLUG.get()) {
+        export(exporter, HybridAquaticEntityTypes.SEA_SLUG.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEA_URCHIN.get()) {
+        export(exporter, HybridAquaticEntityTypes.SEA_URCHIN.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.SEA_URCHIN_SPINE.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
@@ -484,7 +497,8 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.UNI.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
                     ).build()
             )
@@ -492,7 +506,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
 
         // end region
 
-        export(exporter, HybridAquaticEntityTypes.OCTOPUS.get()) {
+        export(exporter, HybridAquaticEntityTypes.OCTOPUS.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -505,229 +519,250 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
         }
 
         // jellyfish
-        export(exporter, HybridAquaticEntityTypes.MOON_JELLYFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.MOON_JELLYFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEA_NETTLE.get()) {
+        export(exporter, HybridAquaticEntityTypes.SEA_NETTLE.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.NOMURA_JELLYFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.NOMURA_JELLYFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BLUE_JELLYFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.BLUE_JELLYFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
 
-        export(exporter, HybridAquaticEntityTypes.BARREL_JELLYFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.BARREL_JELLYFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.MAUVE_STINGER.get()) {
+        export(exporter, HybridAquaticEntityTypes.MAUVE_STINGER.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.CROWN_JELLYFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.CROWN_JELLYFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.GLOWSLIME.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.ANGLERFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.ANGLERFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.ANGLERFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.DRAGONFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.DRAGONFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.DRAGONFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.ROCKFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.ROCKFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.ROCKFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEA_BASS.get()) {
+        export(exporter, HybridAquaticEntityTypes.SEA_BASS.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.SEA_BASS.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.CLOWNFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.CLOWNFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.CLOWNFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.DAMSELFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.DAMSELFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.DAMSELFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.JOHN_DORY.get()) {
+        export(exporter, HybridAquaticEntityTypes.JOHN_DORY.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.JOHN_DORY.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SURGEONFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.SURGEONFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.SURGEONFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BOXFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.BOXFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.BOXFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.LIONFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.LIONFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.LIONFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BARRELEYE.get()) {
+        export(exporter, HybridAquaticEntityTypes.BARRELEYE.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.GLOWSLIME.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
@@ -735,370 +770,404 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.BARRELEYE.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.STINGRAY.get()) {
+        export(exporter, HybridAquaticEntityTypes.STINGRAY.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.BLUE_SPOTTED_STINGRAY.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.GOURAMI.get()) {
+        export(exporter, HybridAquaticEntityTypes.GOURAMI.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.GOURAMI.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BETTA.get()) {
+        export(exporter, HybridAquaticEntityTypes.BETTA.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.BETTA.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.PEARLFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.PEARLFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.PEARLFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SNAILFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.SNAILFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.SNAILFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.DANIO.get()) {
+        export(exporter, HybridAquaticEntityTypes.DANIO.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.DANIO.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.DISCUS.get()) {
+        export(exporter, HybridAquaticEntityTypes.DISCUS.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.DISCUS.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BLOWFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.BLOWFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.BLOWFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.STONEFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.STONEFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.STONEFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.CARP.get()) {
+        export(exporter, HybridAquaticEntityTypes.CARP.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.CARP.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.GOLDFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.GOLDFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.GOLDFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.PARROTFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.PARROTFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.PARROTFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.WRASSE.get()) {
+        export(exporter, HybridAquaticEntityTypes.WRASSE.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.SHEEPSHEAD_WRASSE.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FLASHLIGHT_FISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.FLASHLIGHT_FISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.FLASHLIGHT_FISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.RATFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.RATFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.RATFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.PIRANHA.get()) {
+        export(exporter, HybridAquaticEntityTypes.PIRANHA.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.PIRANHA.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.MAHI.get()) {
+        export(exporter, HybridAquaticEntityTypes.MAHI.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.MAHI.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.OPAH.get()) {
+        export(exporter, HybridAquaticEntityTypes.OPAH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.OPAH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.NEEDLEFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.NEEDLEFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.NEEDLEFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.MACKEREL.get()) {
+        export(exporter, HybridAquaticEntityTypes.MACKEREL.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.MACKEREL.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.HERRING.get()) {
+        export(exporter, HybridAquaticEntityTypes.HERRING.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.HERRING.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.TUNA.get()) {
+        export(exporter, HybridAquaticEntityTypes.TUNA.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.TUNA.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FLYING_FISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.FLYING_FISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.FLYING_FISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.TRIGGERFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.TRIGGERFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.TRIGGERFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEAHORSE.get()) {
+        export(exporter, HybridAquaticEntityTypes.SEAHORSE.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.SEAHORSE.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SUNFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.SUNFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.SUNFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.COELACANTH.get()) {
+        export(exporter, HybridAquaticEntityTypes.COELACANTH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.COELACANTH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.GOLDEN_DORADO.get()) {
+        export(exporter, HybridAquaticEntityTypes.GOLDEN_DORADO.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.GOLDEN_DORADO.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.OARFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.OARFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.OARFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.OSCAR.get()) {
+        export(exporter, HybridAquaticEntityTypes.OSCAR.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.OSCAR.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.TIGER_BARB.get()) {
+        export(exporter, HybridAquaticEntityTypes.TIGER_BARB.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.TIGER_BARB.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.MORAY_EEL.get()) {
+        export(exporter, HybridAquaticEntityTypes.MORAY_EEL.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.MORAY_EEL.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SQUIRRELFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.SQUIRRELFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.SQUIRRELFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
@@ -1106,18 +1175,18 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
     }
 
     /**
-     * Exports a loot table for [entityType] to [exporter] using its loot table id.
+     * Exports a loot table for [entityTable] to [exporter] using its loot table id.
      */
     private fun export(
-        exporter: BiConsumer<ResourceLocation, LootTable.Builder>,
-        entityType: EntityType<*>,
+        exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>,
+        entityTable: ResourceKey<LootTable>,
         builder: LootTable.Builder.() -> Unit
     ) {
-        exporter.accept(entityType.defaultLootTable, LootTable.lootTable().apply(builder))
+        exporter.accept(entityTable, LootTable.lootTable().apply(builder))
     }
 
     companion object {
         private val NEEDS_ENTITY_ON_FIRE: EntityPredicate.Builder =
-            EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build())
+            EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true))
     }
 }

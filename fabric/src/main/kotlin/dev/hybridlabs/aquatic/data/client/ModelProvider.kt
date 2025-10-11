@@ -31,7 +31,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 .filterIsInstance<PlushieBlock>()
                 .forEach { block ->
                     skipAutoItemBlock(block)
-                    createAirLikeBlock(block, TextureMapping.getBlockTexture(block.particleBlock))
+                    createAirLikeBlock(block, block.asItem())
                     delegateItemModel(block, TEMPLATE_PLUSHIE)
                 }
 

@@ -16,15 +16,6 @@ public class Services {
     // vs Fabric, or to ask the modloader if another mod is loaded.
     public static final PlatformHelper PLATFORM = load(PlatformHelper.class);
 
-
-    public static final EelArmorProvider EEL_ARMOR_FACTORY = load(EelArmorProvider.class);
-    public static final DivingArmorProvider DIVING_ARMOR_FACTORY = load(DivingArmorProvider.class);
-    public static final SeashellArmorProvider SEASHELL_ARMOR_FACTORY = load(SeashellArmorProvider.class);
-    public static final ManglerfishArmorProvider MANGLERFISH_ARMOR_FACTORY = load(ManglerfishArmorProvider.class);
-    public static final MoonJellyfishArmorProvider MOON_JELLYFISH_ARMOR_FACTORY =
-            load(MoonJellyfishArmorProvider.class);
-    public static final TurtleArmorProvider TURTLE_ARMOR_FACTORY = load(TurtleArmorProvider.class);
-
     // This code is used to load a service for the current environment. Your implementation of the
     // service must be defined  manually by including a text file in META-INF/services named with
     // the fully qualified class  name of the service.  Inside the file you should write the fully

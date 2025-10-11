@@ -13,12 +13,4 @@ class PaintingVariantTagProvider (output: FabricDataOutput, registriesFuture: Co
     FabricTagProvider<PaintingVariant>(output, Registries.PAINTING_VARIANT, registriesFuture) {
     override fun addTags(arg: HolderLookup.Provider) {
     }
-
-    override fun reverseLookup(element: PaintingVariant): ResourceKey<PaintingVariant> {
-        return BuiltInRegistries.PAINTING_VARIANT.getResourceKey(element).orElseThrow {
-            IllegalArgumentException(
-                "Painting Variant $element is not registered"
-            )
-        } as ResourceKey<PaintingVariant>
-    }
 }

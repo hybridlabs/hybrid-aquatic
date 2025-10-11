@@ -31,8 +31,13 @@ abstract class PredicateItemTooltipCallback(
      */
     constructor(vararg items: Item) : this(ItemPredicate.Builder.item().of(*items))
 
-    override fun getTooltip(stack: ItemStack, context: TooltipFlag, lines: MutableList<Component>) {
-        if (itemPredicate.matches(stack)) {
+    override fun getTooltip(
+        stack: ItemStack,
+        toolTipContext: Item.TooltipContext,
+        context: TooltipFlag,
+        lines: MutableList<Component>
+    ) {
+        if (itemPredicate.test(stack)) {
             appendTooltip(stack, context, lines)
         }
     }

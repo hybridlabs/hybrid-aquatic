@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.data.server
 
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
@@ -7,20 +8,19 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
+import net.minecraft.core.HolderLookup
 import net.minecraft.data.recipes.*
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
-import net.minecraft.world.item.crafting.AbstractCookingRecipe
-import net.minecraft.world.item.crafting.Ingredient
-import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraft.world.item.crafting.*
 import net.minecraft.world.level.block.Blocks
-import java.util.function.Consumer
+import java.util.concurrent.CompletableFuture
 
-class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
-    override fun buildRecipes(exporter: Consumer<FinishedRecipe>) {
+class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    FabricRecipeProvider(output, lookupProvider) {
+    override fun buildRecipes(exporter: RecipeOutput) {
         // misc recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.SPONGE)
             .pattern("SS ")
@@ -100,7 +100,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 "has_glowslime_block",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME_BLOCK.get())
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_block"))
+            .save(exporter, CommonClass.locate("glowslime_from_block"))
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.RAFT.get(), 2)
             .pattern("SS ")
@@ -298,8 +298,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .pattern("S S")
             .pattern("SSS")
             .pattern("SSS")
-            .define('S', Items.SCUTE)
-            .unlockedBy("has_scute", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SCUTE))
+            .define('S', Items.TURTLE_SCUTE)
+            .unlockedBy("has_scute", InventoryChangeTrigger.TriggerInstance.hasItems(Items.TURTLE_SCUTE))
             .save(exporter)
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HybridAquaticItems.DIVING_HELMET.get())
@@ -415,7 +415,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .requires(Items.GLOW_INK_SAC)
             .unlockedBy("has_slime_ball", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SLIME_BALL))
             .unlockedBy("has_glow_ink_sac", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLOW_INK_SAC))
-            .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_slime"))
+            .save(exporter, CommonClass.locate("glowslime_from_slime"))
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.GLOWSTICK.get(), 4)
             .requires(Items.STICK)
@@ -468,7 +468,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     ItemPredicate.Builder.item().of(HybridAquaticItemTags.SMALL_FISH).build()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_small"))
+            .save(exporter, CommonClass.locate("raw_fish_meat_small"))
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_MEAT.get(), 2)
             .requires(HybridAquaticItemTags.MEDIUM_FISH)
@@ -477,7 +477,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     ItemPredicate.Builder.item().of(HybridAquaticItemTags.MEDIUM_FISH).build()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_medium"))
+            .save(exporter, CommonClass.locate("raw_fish_meat_medium"))
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_STEAK.get(), 2)
             .requires(HybridAquaticItemTags.LARGE_FISH)
@@ -537,18 +537,38 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
     }
 
-    private fun offerCookingRecipes(
-        exporter: Consumer<FinishedRecipe>,
+    private fun
+            offerCookingRecipes(
+        exporter: RecipeOutput,
         input: Item,
         output: Item,
         experience: Float
     ) {
-        simpleCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING_RECIPE, 200, input, output, experience)
-        simpleCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING_RECIPE, 100, input, output, experience)
+        simpleCookingRecipe(
+            exporter,
+            "smelting",
+            RecipeSerializer.SMELTING_RECIPE,
+            ::SmeltingRecipe,
+            200,
+            input,
+            output,
+            experience
+        )
+        simpleCookingRecipe(
+            exporter,
+            "smoking",
+            RecipeSerializer.SMOKING_RECIPE,
+            ::SmokingRecipe,
+            100,
+            input,
+            output,
+            experience
+        )
         simpleCookingRecipe(
             exporter,
             "campfire_cooking",
             RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
+            ::CampfireCookingRecipe,
             600,
             input,
             output,
@@ -557,27 +577,44 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     }
 
     private fun offerKelpCookingRecipes(
-        exporter: Consumer<FinishedRecipe>,
+        exporter: RecipeOutput,
         inputTag: TagKey<Item>,
         output: Item,
         experience: Float
     ) {
-        offerKelpCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING_RECIPE, 200, inputTag, output, experience)
-        offerKelpCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING_RECIPE, 100, inputTag, output, experience)
-        offerKelpCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, 600, inputTag, output, experience)
+        offerKelpCookingRecipe(
+            exporter, "smelting", RecipeSerializer.SMELTING_RECIPE, 200, inputTag, output, experience,
+            ::SmeltingRecipe
+        )
+        offerKelpCookingRecipe(
+            exporter,
+            "smoking",
+            RecipeSerializer.SMOKING_RECIPE,
+            100,
+            inputTag,
+            output,
+            experience,
+            ::SmokingRecipe
+        )
+        offerKelpCookingRecipe(
+            exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, 600, inputTag, output, experience,
+            ::CampfireCookingRecipe
+        )
     }
 
-    private fun offerKelpCookingRecipe(
-        exporter: Consumer<FinishedRecipe>,
+    private fun <T : AbstractCookingRecipe>
+            offerKelpCookingRecipe(
+        exporter: RecipeOutput,
         cooker: String,
-        serializer: RecipeSerializer<out AbstractCookingRecipe>,
+        serializer: RecipeSerializer<T>,
         cookingTime: Int,
         inputTag: TagKey<Item>,
         output: Item,
-        experience: Float
+        experience: Float,
+        factory: AbstractCookingRecipe.Factory<T>
     ) {
         val builder = SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(inputTag), RecipeCategory.FOOD, output, experience, cookingTime, serializer)
+            .generic(Ingredient.of(inputTag), RecipeCategory.FOOD, output, experience, cookingTime, serializer, factory)
             .unlockedBy("has_kelp", has(inputTag))
 
         val recipeId = getItemName(output) + "_from_" + cooker
