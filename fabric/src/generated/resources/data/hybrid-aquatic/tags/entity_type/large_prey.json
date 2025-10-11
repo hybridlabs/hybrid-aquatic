@@ -1,0 +1,14 @@
+{
+  "values": [
+    "hybrid-aquatic:sunfish",
+    "hybrid-aquatic:oarfish",
+    "hybrid-aquatic:opah",
+    "hybrid-aquatic:tuna",
+    "hybrid-aquatic:mahi",
+    "hybrid-aquatic:barracuda",
+    "hybrid-aquatic:coelacanth",
+    "hybrid-aquatic:golden_dorado",
+    "minecraft:player",
+    "minecraft:turtle"
+  ]
+}

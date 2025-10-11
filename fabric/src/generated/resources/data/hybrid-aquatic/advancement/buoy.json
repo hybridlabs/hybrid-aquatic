@@ -1,0 +1,34 @@
+{
+  "parent": "hybrid-aquatic:boat",
+  "criteria": {
+    "obtain_buoy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid-aquatic:buoy"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancements.hybrid-aquatic.buoy.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "hybrid-aquatic:buoy"
+    },
+    "title": {
+      "translate": "advancements.hybrid-aquatic.buoy.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_buoy"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

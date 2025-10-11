@@ -1,0 +1,34 @@
+{
+  "parent": "hybrid-aquatic:root",
+  "criteria": {
+    "has_boat": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:boats"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancements.hybrid-aquatic.boat.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:oak_boat"
+    },
+    "title": {
+      "translate": "advancements.hybrid-aquatic.boat.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_boat"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hybrid-aquatic:glowslime_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "hybrid-aquatic:glowslime"
+  }
+}

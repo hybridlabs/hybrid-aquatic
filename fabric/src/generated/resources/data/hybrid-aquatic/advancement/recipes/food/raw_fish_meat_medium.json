@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_medium_fish": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#hybrid-aquatic:medium_fish"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid-aquatic:raw_fish_meat_medium"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_medium_fish"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid-aquatic:raw_fish_meat_medium"
+    ]
+  }
+}

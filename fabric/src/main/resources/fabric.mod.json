@@ -61,7 +61,8 @@
         "java": ">=21",
         "fabric-language-kotlin": "*",
         "fabric-api": ">=0.116",
-        "geckolib": ">=4.8"
+        "geckolib": ">=4.8",
+        "lithostitched": ">=1.5"
     },
 
     "custom": {
