@@ -1,5 +1,6 @@
 {
   "type": "lithostitched:wrap_density_function",
+  "priority": 1,
   "target_function": "minecraft:overworld/offset",
   "wrapper_function": {
     "type": "minecraft:clamp",
