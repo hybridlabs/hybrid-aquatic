@@ -18,9 +18,10 @@ object HybridAquaticArmorMaterials {
         "diving",
         mapOf(
             ArmorItem.Type.HELMET to 2,
-            ArmorItem.Type.BODY to 5,
+            ArmorItem.Type.CHESTPLATE to 5,
             ArmorItem.Type.LEGGINGS to 4,
-            ArmorItem.Type.BOOTS to 2
+            ArmorItem.Type.BOOTS to 2,
+            ArmorItem.Type.BODY to 5
         ),
         9,
         SoundEvents.ARMOR_EQUIP_CHAIN,
@@ -36,9 +37,10 @@ object HybridAquaticArmorMaterials {
         "seashell",
         mapOf(
             ArmorItem.Type.HELMET to 2,
-            ArmorItem.Type.BODY to 4,
+            ArmorItem.Type.CHESTPLATE to 4,
             ArmorItem.Type.LEGGINGS to 3,
-            ArmorItem.Type.BOOTS to 2
+            ArmorItem.Type.BOOTS to 2,
+            ArmorItem.Type.BODY to 4
         ),
         22,
         SoundEvents.ARMOR_EQUIP_TURTLE,
@@ -54,9 +56,10 @@ object HybridAquaticArmorMaterials {
         "manglerfish",
         mapOf(
             ArmorItem.Type.HELMET to 1,
-            ArmorItem.Type.BODY to 1,
+            ArmorItem.Type.CHESTPLATE to 1,
             ArmorItem.Type.LEGGINGS to 1,
-            ArmorItem.Type.BOOTS to 1
+            ArmorItem.Type.BOOTS to 1,
+            ArmorItem.Type.BODY to 1
         ),
         15,
         SoundEvents.ARMOR_EQUIP_LEATHER,
@@ -73,9 +76,10 @@ object HybridAquaticArmorMaterials {
         "eel",
         mapOf(
             ArmorItem.Type.HELMET to 1,
-            ArmorItem.Type.BODY to 1,
+            ArmorItem.Type.CHESTPLATE to 1,
             ArmorItem.Type.LEGGINGS to 1,
-            ArmorItem.Type.BOOTS to 1
+            ArmorItem.Type.BOOTS to 1,
+            ArmorItem.Type.CHESTPLATE to 1
         ),
         15,
         SoundEvents.ARMOR_EQUIP_LEATHER,
@@ -92,9 +96,10 @@ object HybridAquaticArmorMaterials {
         "moon_jelly",
         mapOf(
             ArmorItem.Type.HELMET to 1,
-            ArmorItem.Type.BODY to 1,
+            ArmorItem.Type.CHESTPLATE to 1,
             ArmorItem.Type.LEGGINGS to 1,
-            ArmorItem.Type.BOOTS to 1
+            ArmorItem.Type.BOOTS to 1,
+            ArmorItem.Type.BODY to 1
         ),
         15,
         SoundEvents.ARMOR_EQUIP_GENERIC,
@@ -111,9 +116,10 @@ object HybridAquaticArmorMaterials {
         "turtle",
         mapOf(
             ArmorItem.Type.HELMET to 1,
-            ArmorItem.Type.BODY to 1,
+            ArmorItem.Type.CHESTPLATE to 1,
             ArmorItem.Type.LEGGINGS to 1,
-            ArmorItem.Type.BOOTS to 1
+            ArmorItem.Type.BOOTS to 1,
+            ArmorItem.Type.BODY to 1
         ),
         9,
         SoundEvents.ARMOR_EQUIP_TURTLE,
