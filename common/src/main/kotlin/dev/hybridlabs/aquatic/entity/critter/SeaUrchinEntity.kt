@@ -45,7 +45,7 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
             Type.LARGE -> 2.0f
             else -> 1.0f
         }
-        return super.getDimensions(pose).scale(scale)
+        return super.getDefaultDimensions(pose).scale(scale)
     }
 
     companion object {

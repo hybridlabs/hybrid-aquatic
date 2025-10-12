@@ -36,7 +36,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
             Type.CROWN_OF_THORNS -> 2.0f
             else -> 1.0f
         }
-        return super.getDimensions(pose).scale(scale)
+        return super.getDefaultDimensions(pose).scale(scale)
     }
 
     companion object {

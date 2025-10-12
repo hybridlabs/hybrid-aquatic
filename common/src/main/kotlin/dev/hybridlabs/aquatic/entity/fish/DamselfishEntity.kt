@@ -43,7 +43,6 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         super.defineSynchedData(builder)
         builder.define(FISHCOUNT, ONE_FISH)
-        builder.build()
     }
 
     override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
@@ -117,7 +116,7 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
             else -> 1.0f
         }
 
-        return super.getDimensions(pose).scale(scale)
+        return super.getDefaultDimensions(pose).scale(scale)
     }
 
     override fun canCollideWith(entity: Entity): Boolean {

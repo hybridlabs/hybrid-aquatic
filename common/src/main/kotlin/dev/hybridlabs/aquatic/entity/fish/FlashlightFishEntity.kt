@@ -116,7 +116,7 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
             else -> 1.0f
         }
 
-        return super.getDimensions(pose).scale(scale)
+        return super.getDefaultDimensions(pose).scale(scale)
     }
 
     override fun canCollideWith(entity: Entity): Boolean {
