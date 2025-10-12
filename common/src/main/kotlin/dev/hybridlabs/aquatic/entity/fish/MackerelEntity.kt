@@ -40,8 +40,8 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        super.defineSynchedData(builder)
         builder.define(FISHCOUNT, ONE_FISH)
+        super.defineSynchedData(builder)
     }
 
     override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
@@ -115,7 +115,7 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
             else -> 1.0f
         }
 
-        return super.getDimensions(pose).scale(scale)
+        return super.getDefaultDimensions(pose).scale(scale)
     }
 
     override fun canCollideWith(entity: Entity): Boolean {

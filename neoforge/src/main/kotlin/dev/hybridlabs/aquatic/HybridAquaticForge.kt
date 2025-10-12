@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic
 
-import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
@@ -33,12 +32,7 @@ import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades
-import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
-import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.neoforged.fml.common.Mod
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
@@ -62,7 +56,6 @@ object HybridAquaticForge {
     init {
         CommonClass.init()
 
-        registerStructureModifiers()
 
         HybridAquaticBlocks
         HybridAquaticPlatformBlocks
@@ -80,10 +73,12 @@ object HybridAquaticForge {
 
         HybridAquaticPotions
 
+        /*
         HybridAquaticFeatures
         HybridAquaticFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
+         */
 
         HybridAquaticNetworkingForge
         HybridAquaticLootPoolEntryTypes
@@ -93,6 +88,7 @@ object HybridAquaticForge {
         MOD_BUS.addListener(::registerPotionsRecipes)
         FORGE_BUS. addListener(HybridAquaticCustomTrades::registerWandererTrades)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
+        //registerStructureModifiers()
 
         runForDist(
             clientTarget = {

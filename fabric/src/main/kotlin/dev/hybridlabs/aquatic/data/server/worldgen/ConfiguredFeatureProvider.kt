@@ -10,6 +10,9 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.Registries
+import net.minecraft.data.worldgen.BootstrapContext
+import net.minecraft.data.worldgen.features.FeatureUtils
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.util.random.SimpleWeightedRandomList
 import net.minecraft.util.valueproviders.ConstantInt
@@ -35,12 +38,12 @@ class ConfiguredFeatureProvider(
     output: FabricDataOutput,
     registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
-    override fun configure(registries: HolderLookup.Provider, entries: Entries) {
-        // anemone patch
-        entries.add(
-            HybridAquaticConfiguredFeatures.ANEMONE_PATCH,
-            ConfiguredFeature(
-                Feature.NO_BONEMEAL_FLOWER,
+    companion object {
+        fun bootstrapConfiguredFeatures(bootstrap: BootstrapContext<ConfiguredFeature<*, *>>) {
+
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.ANEMONE_PATCH, Feature.NO_BONEMEAL_FLOWER,
                 RandomPatchConfiguration(
                     3, 3, 3,
                     PlacementUtils.filtered(
@@ -71,11 +74,10 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.GREEN_ANEMONE_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.GREEN_ANEMONE_PATCH,
                 Feature.NO_BONEMEAL_FLOWER,
                 RandomPatchConfiguration(
                     3, 3, 3,
@@ -101,50 +103,41 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH,
                 HybridAquaticFeatures.RED_ALGAE_PATCH.get(), ProbabilityFeatureConfiguration(
                     0.33f
                 )
             )
-        )
-
-
-        entries.add(
-            HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH,
                 HybridAquatic.DUNEGRASS_PATCH.get(), ProbabilityFeatureConfiguration(
                     0.5f
                 )
             )
-        )
 
-        //#region Sargassum
-
-        entries.add(
-            HybridAquaticConfiguredFeatures.SARGASSUM,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.SARGASSUM,
                 HybridAquaticFeatures.SARGASSUM.get(), SargassumFeatureConfig(
                     SimpleStateProvider.simple(HybridAquaticBlocks.SARGASSUM.get())
                 )
             )
-        )
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.BULL_KELP,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.BULL_KELP,
                 HybridAquaticFeatures.BULL_KELP.get(), BullKelpFeatureConfig(
                     SimpleStateProvider.simple(HybridAquaticBlocks.BULL_KELP.get())
                 )
             )
-        )
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.FLOATING_SARGASSUM,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.FLOATING_SARGASSUM,
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     100, 10, 10,
                     PlacementUtils.filtered(
@@ -163,11 +156,10 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.WATER_LETTUCE,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.WATER_LETTUCE,
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     5, 3, 3,
                     PlacementUtils.filtered(
@@ -179,11 +171,10 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD,
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     5, 3, 3,
                     PlacementUtils.filtered(
@@ -195,11 +186,10 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.GLOWING_PLANKTON,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.GLOWING_PLANKTON,
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     100, 12, 12,
                     PlacementUtils.filtered(
@@ -211,21 +201,18 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH,
                 HybridAquaticFeatures.SEA_LETTUCE_PATCH.get(), ProbabilityFeatureConfiguration(
                     0.33f
                 )
             )
-        )
 
-        // tube sponge patch
-        entries.add(
-            HybridAquaticConfiguredFeatures.TUBE_SPONGE_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.TUBE_SPONGE_PATCH,
                 Feature.FLOWER,
                 RandomPatchConfiguration(
                     4, 2, 2,
@@ -240,12 +227,10 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        // giant clam patch
-        entries.add(
-            HybridAquaticConfiguredFeatures.GIANT_CLAM_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.GIANT_CLAM_PATCH,
                 Feature.NO_BONEMEAL_FLOWER, RandomPatchConfiguration(
                     2, 2, 2,
                     PlacementUtils.filtered(
@@ -270,22 +255,18 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        // message in a bottle
-        entries.add(
-            HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE,
                 HybridAquaticFeatures.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleFeatureConfig(
                     SimpleStateProvider.simple(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get())
                 )
             )
-        )
 
-        // thermal vents
-        entries.add(
-            HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH,
                 HybridAquaticFeatures.VENT_PATCH.get(), VentPatchFeatureConfig(
                     SimpleStateProvider.simple(Blocks.TUFF),
                     SimpleStateProvider.simple(HybridAquaticBlocks.THERMAL_VENT.get()),
@@ -297,7 +278,28 @@ class ConfiguredFeatureProvider(
                     UniformInt.of(TubeWormBlock.WORMS.min, TubeWormBlock.WORMS.max),
                 )
             )
-        )
+        }
+    }
+
+    override fun configure(registries: HolderLookup.Provider, entries: Entries) {
+        val reg = registries.lookup(Registries.CONFIGURED_FEATURE).get()
+
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.ANEMONE_PATCH))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.BULL_KELP))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.FLOATING_SARGASSUM))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.GIANT_CLAM_PATCH))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.GLOWING_PLANKTON))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.GREEN_ANEMONE_PATCH))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.SARGASSUM))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.TUBE_SPONGE_PATCH))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.WATER_LETTUCE))
+
     }
 
     override fun getName(): String {

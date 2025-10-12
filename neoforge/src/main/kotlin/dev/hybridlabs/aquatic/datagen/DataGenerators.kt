@@ -47,13 +47,15 @@ object DataGenerators {
         builder.add(BIOME_MODIFIERS)
         { context ->
             registerBiomeSpawns(context)
-            registerFeatures(context)
+            //registerFeatures(context)
         }
 
+        /*
         builder.add(STRUCTURE_MODIFIERS)
         { context ->
             registerStructureSpawnModifiers(context)
         }
+         */
 
         generator.addProvider(
             event.includeServer(), DatapackBuiltinEntriesProvider(

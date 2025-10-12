@@ -1,0 +1,17 @@
+{
+  "feature": "hybrid-aquatic:thermal_vent_patch",
+  "placement": [
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": 5
+    },
+    {
+      "type": "minecraft:surface_relative_threshold_filter",
+      "heightmap": "WORLD_SURFACE_WG",
+      "max_inclusive": -64
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

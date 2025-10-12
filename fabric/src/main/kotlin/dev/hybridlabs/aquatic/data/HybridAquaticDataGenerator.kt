@@ -15,7 +15,6 @@ import dev.hybridlabs.aquatic.data.server.worldgen.ConfiguredFeatureProvider
 import dev.hybridlabs.aquatic.data.server.worldgen.PlacedFeatureProvider
 import dev.hybridlabs.aquatic.data.structure_spawn_modifier.StructureSpawnModifierProvider
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.core.Registry
@@ -47,9 +46,8 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
         registryBuilder.add(HybridAquaticRegistryKeys.SEA_MESSAGE) {}
         registryBuilder.add(HybridAquaticRegistryKeys.STRUCTURE_SPAWN_MODIFIER) {}
-        registryBuilder.add(Registries.CONFIGURED_FEATURE) {
-            HybridAquaticConfiguredFeatures
-        }
+        registryBuilder.add(Registries.PLACED_FEATURE, PlacedFeatureProvider::bootstrapPlacedFeatures)
+        registryBuilder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureProvider::bootstrapConfiguredFeatures)
     }
 
     fun <T> filterHybridAquatic(registry: Registry<T>): (T & Any) -> Boolean {

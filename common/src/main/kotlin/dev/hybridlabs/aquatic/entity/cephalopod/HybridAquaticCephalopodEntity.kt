@@ -67,7 +67,6 @@ open class HybridAquaticCephalopodEntity(
         builder.define(CEPHALOPOD_SIZE, 0)
         builder.define(ATTEMPT_ATTACK, false)
         builder.define(HUNGER, MAX_HUNGER)
-        builder.build()
     }
 
     override fun finalizeSpawn(
