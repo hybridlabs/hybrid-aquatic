@@ -15,7 +15,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import software.bernie.geckolib.animation.AnimatableManager
 
 class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Level) :
     HybridAquaticSchoolingFishEntity(
