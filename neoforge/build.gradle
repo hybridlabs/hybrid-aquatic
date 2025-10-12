@@ -89,10 +89,7 @@ dependencies {
 
 jar {
     manifest.attributes([
-            "MixinConfigs": [
-                    "${mod_id}.common.mixins.json",
-                    "${mod_id}.forge.mixins.json"
-            ]
+            "MixinConfigs": "${mod_id}.forge.mixins.json"
     ])
 }
 

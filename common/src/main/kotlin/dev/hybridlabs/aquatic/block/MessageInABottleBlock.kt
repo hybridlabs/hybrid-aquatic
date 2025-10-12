@@ -8,6 +8,7 @@ import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.RegistryAccess
 import net.minecraft.core.component.DataComponents
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.entity.LivingEntity
@@ -173,10 +174,11 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
 
         fun createItemStack(blockEntity: MessageInABottleBlockEntity): ItemStack {
             val stack = ItemStack(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get())
+
             stack.set(
                 DataComponents.BLOCK_ENTITY_DATA,
-                CustomData.of(blockEntity.saveWithoutMetadata(blockEntity.level!!.registryAccess()))
-            )
+                CustomData.of(blockEntity.saveWithoutMetadata(RegistryAccess.EMPTY)
+            ))
             return stack
         }
     }

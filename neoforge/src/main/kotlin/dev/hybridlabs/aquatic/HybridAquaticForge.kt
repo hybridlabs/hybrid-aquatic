@@ -32,7 +32,12 @@ import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades
+import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
+import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.neoforged.fml.common.Mod
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
@@ -73,12 +78,10 @@ object HybridAquaticForge {
 
         HybridAquaticPotions
 
-        /*
         HybridAquaticFeatures
         HybridAquaticFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
-         */
 
         HybridAquaticNetworkingForge
         HybridAquaticLootPoolEntryTypes
@@ -119,14 +122,14 @@ object HybridAquaticForge {
 
 
     private fun registerModelLayers(event: EntityRenderersEvent.RegisterLayerDefinitions) {
-        event.registerLayerDefinition(BASKING_SHARK_PLUSHIE, BaskingSharkPlushieModel.Companion::createModelData)
-        event.registerLayerDefinition(BULL_SHARK_PLUSHIE, BullSharkPlushieModel.Companion::createModelData)
-        event.registerLayerDefinition(FRILLED_SHARK_PLUSHIE, FrilledSharkPlushieModel.Companion::createModelData)
-        event.registerLayerDefinition(GREAT_WHITE_SHARK_PLUSHIE, GreatWhiteSharkPlushieModel.Companion::createModelData)
-        event.registerLayerDefinition(HAMMERHEAD_SHARK_PLUSHIE, HammerheadSharkPlushieModel.Companion::createModelData)
-        event.registerLayerDefinition(THRESHER_SHARK_PLUSHIE, ThresherSharkPlushieModel.Companion::createModelData)
-        event.registerLayerDefinition(TIGER_SHARK_PLUSHIE, TigerSharkPlushieModel.Companion::createModelData)
-        event.registerLayerDefinition(WHALE_SHARK_PLUSHIE, WhaleSharkPlushieModel.Companion::createModelData)
+        event.registerLayerDefinition(BASKING_SHARK_PLUSHIE, BaskingSharkPlushieModel::createModelData)
+        event.registerLayerDefinition(BULL_SHARK_PLUSHIE, BullSharkPlushieModel::createModelData)
+        event.registerLayerDefinition(FRILLED_SHARK_PLUSHIE, FrilledSharkPlushieModel::createModelData)
+        event.registerLayerDefinition(GREAT_WHITE_SHARK_PLUSHIE, GreatWhiteSharkPlushieModel::createModelData)
+        event.registerLayerDefinition(HAMMERHEAD_SHARK_PLUSHIE, HammerheadSharkPlushieModel::createModelData)
+        event.registerLayerDefinition(THRESHER_SHARK_PLUSHIE, ThresherSharkPlushieModel::createModelData)
+        event.registerLayerDefinition(TIGER_SHARK_PLUSHIE, TigerSharkPlushieModel::createModelData)
+        event.registerLayerDefinition(WHALE_SHARK_PLUSHIE, WhaleSharkPlushieModel::createModelData)
     }
 
     private fun registerBlockEntityRenderers(event: EntityRenderersEvent.RegisterRenderers) {
@@ -155,6 +158,7 @@ object HybridAquaticForge {
             PlushieBlock.Variant.BASKING_SHARK,
             BaskingSharkPlushieModel(modelLoader.bakeLayer(BASKING_SHARK_PLUSHIE))
         )
+
         event.registerSkullModel(
             PlushieBlock.Variant.BULL_SHARK,
             BullSharkPlushieModel(modelLoader.bakeLayer(BULL_SHARK_PLUSHIE))

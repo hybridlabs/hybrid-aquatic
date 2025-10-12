@@ -187,17 +187,9 @@ object HybridAquaticItems {
 
     //#region Nature Blocks
 
-    val ANEMONE = register("anemone") {
-        PLATFORM.createBlockItem(HybridAquaticBlocks.ANEMONE.get(), Item.Properties())
-    }
-
-    val STRAWBERRY_ANEMONE = register("strawberry_anemone") {
-        PLATFORM.createBlockItem(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(), Item.Properties())
-    }
-    val GIANT_GREEN_ANEMONE = register("giant_green_anemone") {
-        PLATFORM.createBlockItem(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(), Item.Properties())
-    }
-
+    val ANEMONE = registerBlockItem("anemone"){ HybridAquaticBlocks.ANEMONE.get()}
+    val STRAWBERRY_ANEMONE = registerBlockItem("strawberry_anemone"){ HybridAquaticBlocks.STRAWBERRY_ANEMONE.get()}
+    val GIANT_GREEN_ANEMONE = registerBlockItem("giant_green_anemone"){ HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get()}
     val GIANT_CLAM = registerBlockItem("giant_clam") { HybridAquaticBlocks.GIANT_CLAM.get() }
     val SARGASSUM = registerBlockItem("sargassum") { HybridAquaticBlocks.SARGASSUM.get() }
     val BULL_KELP = registerBlockItem("bull_kelp") { HybridAquaticBlocks.BULL_KELP.get() }

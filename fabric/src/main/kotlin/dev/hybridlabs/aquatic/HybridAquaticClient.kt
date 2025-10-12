@@ -24,7 +24,7 @@ import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.GiantGreenAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
-import dev.hybridlabs.aquatic.client.renderer.item.StrawberryAnemoneBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer
@@ -45,7 +45,7 @@ object HybridAquaticClient : ClientModInitializer {
 
         registerRenderShapes()
         registerBlockEntityRenderers()
-        registerBuiltinItemRenderers()
+        //registerBuiltinItemRenderers()
         registerEntityRenderers()
         registerWeatherRenderers()
         registerTooltips()
@@ -169,13 +169,6 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerEntityRenderers() {
         HybridAquaticEntityRenderers
-    }
-
-    private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
-        registry.register(HybridAquaticItems.ANEMONE.get(), AnemoneBlockItemRenderer())
-        registry.register(HybridAquaticItems.GIANT_GREEN_ANEMONE.get(), GiantGreenAnemoneBlockItemRenderer())
-        registry.register(HybridAquaticItems.STRAWBERRY_ANEMONE.get(), StrawberryAnemoneBlockItemRenderer())
-        registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleBlockItemRenderer())
     }
 
     private fun registerCommands(
