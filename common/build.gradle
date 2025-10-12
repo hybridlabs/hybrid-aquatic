@@ -64,7 +64,7 @@ dependencies {
 
     //We load the Forge version of any included mod dependencies
     implementation "software.bernie.geckolib:geckolib-neoforge-${geckolib_version}"
-    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-${minecraft_version}"
+    // implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-${minecraft_version}"
 
 }
 
