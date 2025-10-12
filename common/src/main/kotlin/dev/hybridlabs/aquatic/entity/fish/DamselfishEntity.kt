@@ -15,7 +15,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import software.bernie.geckolib.animation.AnimatableManager
 
 class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Level) :
     HybridAquaticSchoolingFishEntity(
@@ -43,7 +42,6 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         super.defineSynchedData(builder)
         builder.define(FISHCOUNT, ONE_FISH)
-        builder.build()
     }
 
     override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
@@ -117,7 +115,7 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
             else -> 1.0f
         }
 
-        return super.getDimensions(pose).scale(scale)
+        return super.getDefaultDimensions(pose).scale(scale)
     }
 
     override fun canCollideWith(entity: Entity): Boolean {

@@ -115,7 +115,7 @@ class HerringEntity(entityType: EntityType<out HerringEntity>, world: Level) :
             else -> 1.0f
         }
 
-        return super.getDimensions(pose).scale(scale)
+        return super.getDefaultDimensions(pose).scale(scale)
     }
 
     override fun canCollideWith(entity: Entity): Boolean {
