@@ -56,9 +56,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
             // builtin
             mapOf<Block, Pair<Block?, ResourceLocation>>(
-                HybridAquaticBlocks.ANEMONE.get() to (null to TEMPLATE_ANEMONE),
-                HybridAquaticBlocks.STRAWBERRY_ANEMONE.get() to (null to TEMPLATE_ANEMONE),
-                HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get() to (null to TEMPLATE_ANEMONE),
                 HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get() to (Blocks.GLASS to TEMPLATE_MESSAGE_IN_A_BOTTLE),
             ).forEach { (block, info) ->
                 val (particleBlock, template) = info
@@ -347,7 +344,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     }
 
     companion object {
-        private val TEMPLATE_ANEMONE = CommonClass.locate("item/template_anemone")
         private val TEMPLATE_MESSAGE_IN_A_BOTTLE = CommonClass.locate("item/template_message_in_a_bottle")
         private val TEMPLATE_PLUSHIE = CommonClass.locate("item/template_plushie")
     }
