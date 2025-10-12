@@ -15,6 +15,9 @@ authors = "${mod_author}"
 description = '''${description}'''
 enumExtensions="META-INF/enumextensions.json"
 
+[[mixins]]
+config="${mod_id}.forge.mixins.json"
+
 [[dependencies.${forge_mod_id}]]
 modId = "neoforge"
 mandatory = true
