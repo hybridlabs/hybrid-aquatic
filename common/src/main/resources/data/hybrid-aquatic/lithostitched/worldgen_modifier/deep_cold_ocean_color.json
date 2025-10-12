@@ -1,6 +1,5 @@
 {
   "type": "lithostitched:replace_effects",
-  "priority": 1,
   "biomes": "minecraft:deep_cold_ocean",
   "effects": {
     "water_color": 1515858,

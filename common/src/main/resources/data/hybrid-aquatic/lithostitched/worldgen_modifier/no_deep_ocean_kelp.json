@@ -1,6 +1,5 @@
 {
     "type": "lithostitched:remove_features",
-    "priority": 1,
     "biomes": "#minecraft:is_deep_ocean",
     "features": [
         "minecraft:seagrass_deep_cold",
