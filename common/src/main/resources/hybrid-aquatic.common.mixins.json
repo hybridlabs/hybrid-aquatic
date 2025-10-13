@@ -6,7 +6,6 @@
     "refmap": "hybrid_aquatic.refmap.json",
     "mixins": [
         "EnchantmentMixin",
-        "EntityMixin",
         "FishingBobberEntityMixin",
         "FishingRodItemMixin",
         "PlayerEntityMixin",

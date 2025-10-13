@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.mixin;
 
 import com.google.common.collect.ImmutableList;
+import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects;
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity;
@@ -16,6 +17,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -32,6 +36,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE;
+
 @Mixin(Player.class)
 public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEntityData {
 
@@ -47,6 +53,10 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
 
     @Unique
     private boolean isWearingDivingBoots;
+
+    @Unique
+    private static final AttributeModifier hybrid_aquatic$stepModifier =
+            new AttributeModifier(CommonClass.locate("diving_boots_step_modifier"), 0.4, ADD_VALUE);
 
     @Override
     public void hybrid_aquatic$setHurtTime(int value) {
@@ -150,6 +160,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         var player = (Player) (Object) this;
         ItemStack itemStack = player.getItemBySlot(EquipmentSlot.FEET);
         isWearingDivingBoots = itemStack.is(HybridAquaticItems.INSTANCE.getDIVING_BOOTS().get());
+        updateStepHeight();
     }
 
 
@@ -199,6 +210,22 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             }
 
             coralRepairTick++;
+        }
+    }
+
+    @Unique
+    private void updateStepHeight() {
+        // Allows player to walk in the water without jumping
+        LivingEntity entity = (LivingEntity)(Object) this;
+        if (entity instanceof Player player) {
+            AttributeInstance stepHeight = player.getAttribute(Attributes.STEP_HEIGHT);
+            if (stepHeight != null) {
+                if (isWearingDivingBoots && player.isUnderWater()) {
+                    stepHeight.addOrUpdateTransientModifier(hybrid_aquatic$stepModifier);
+                } else {
+                    stepHeight.removeModifier(hybrid_aquatic$stepModifier);
+                }
+            }
         }
     }
 }
