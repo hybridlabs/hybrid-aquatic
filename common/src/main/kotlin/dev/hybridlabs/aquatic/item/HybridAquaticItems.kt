@@ -131,7 +131,7 @@ object HybridAquaticItems {
         SeashellSpearItem(
             Item.Properties().attributes(
                 SwordItem
-                    .createAttributes(Tiers.IRON, 3, 1.6F)
+                    .createAttributes(Tiers.IRON, 1, -2.4F)
             ).durability(250)
         )
     }
@@ -142,7 +142,7 @@ object HybridAquaticItems {
         SeashellPickaxeItem(
             Item.Properties().attributes(
                 PickaxeItem
-                    .createAttributes(Tiers.IRON, 3.0F, 1.2F)
+                    .createAttributes(Tiers.IRON, -1.0F, -2.8F)
             ).durability(250)
         )
     }
@@ -153,7 +153,7 @@ object HybridAquaticItems {
         SeashellAxeItem(
             Item.Properties().attributes(
                 AxeItem
-                    .createAttributes(Tiers.IRON, 9.0F, 0.8F)
+                    .createAttributes(Tiers.IRON, 9.0F, -3.2F)
             ).durability(250)
         )
     }
@@ -164,7 +164,7 @@ object HybridAquaticItems {
         SeashellShovelItem(
             Item.Properties().attributes(
                 ShovelItem
-                    .createAttributes(Tiers.IRON, 3.5F, 1.0F)
+                    .createAttributes(Tiers.IRON, -1.5F, -3.0F)
             ).durability(250)
         )
     }
@@ -175,7 +175,7 @@ object HybridAquaticItems {
         SeashellHoeItem(
             Item.Properties().attributes(
                 HoeItem
-                    .createAttributes(Tiers.IRON, 1.0F, 2.0F)
+                    .createAttributes(Tiers.IRON, -2.0F, -2.0F)
             ).durability(250)
         )
     }
@@ -186,7 +186,7 @@ object HybridAquaticItems {
         CoralBladeItem(
             Item.Properties().attributes(
                 SwordItem
-                    .createAttributes(Tiers.IRON, 5, 1.6F)
+                    .createAttributes(Tiers.IRON, 2, -2.4F)
             ).durability(131)
         )
     }
@@ -197,7 +197,7 @@ object HybridAquaticItems {
         CoralPickaxeItem(
             Item.Properties().attributes(
                 PickaxeItem
-                    .createAttributes(Tiers.STONE, 3.0F, 1.2F)
+                    .createAttributes(Tiers.STONE, -1.0F, -2.8F)
             ).durability(131)
         )
     }
@@ -208,7 +208,7 @@ object HybridAquaticItems {
         CoralAxeItem(
             Item.Properties().attributes(
                 AxeItem
-                    .createAttributes(Tiers.STONE, 9.0F, 0.8F)
+                    .createAttributes(Tiers.STONE, 4.0F, -3.2F)
             ).durability(131)
         )
     }
@@ -219,7 +219,7 @@ object HybridAquaticItems {
         CoralShovelItem(
             Item.Properties().attributes(
                 ShovelItem
-                    .createAttributes(Tiers.STONE, 3.5F, 1.0F)
+                    .createAttributes(Tiers.STONE, -1.5F, -3.0F)
             ).durability(131)
         )
     }
@@ -230,7 +230,7 @@ object HybridAquaticItems {
         CoralHoeItem(
             Item.Properties().attributes(
                 HoeItem
-                    .createAttributes(Tiers.STONE, 1.0F, 2.0F)
+                    .createAttributes(Tiers.STONE, -1.0F, -2.0F)
             ).durability(131)
         )
     }
