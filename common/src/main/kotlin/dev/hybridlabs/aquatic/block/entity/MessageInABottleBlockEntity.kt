@@ -3,9 +3,11 @@ package dev.hybridlabs.aquatic.block.entity
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.component.DataComponents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
@@ -45,7 +47,9 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
     override fun loadAdditional(nbt: CompoundTag, registries: HolderLookup.Provider) {
         super.loadAdditional(nbt, registries)
         variant = MessageInABottleBlock.Variant.byId(nbt.getString(VARIANT_KEY))
-        messageItemStack = ItemStack.parse(registries, nbt).get()
+        val message  = nbt.getCompound(MESSAGE_KEY)
+        messageItemStack  = ItemStack.parseOptional(registries,nbt)
+        messageItemStack.set(DataComponents.CUSTOM_DATA, CustomData.of(message))
     }
 
     private fun <E> predicate(
