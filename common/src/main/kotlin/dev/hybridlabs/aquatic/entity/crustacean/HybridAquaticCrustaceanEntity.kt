@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.ai.control.WallClimbNavigation
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
@@ -20,6 +21,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.PanicGoal
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
@@ -49,21 +51,18 @@ open class HybridAquaticCrustaceanEntity(
     private var hidingTimer: Int = 0
     private var lastDamageTime: Long = 0
 
+    private var climbingTicks = 0
+
     var size: Int
         get() = entityData.get(CRUSTACEAN_SIZE)
         set(size) {
             entityData.set(CRUSTACEAN_SIZE, size)
         }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        super.defineSynchedData(builder)
-        builder.define(CRUSTACEAN_SIZE, 0)
-        builder.define(ATTEMPT_ATTACK, false)
-    }
-
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, PanicGoal(this, 1.0))
+        goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
         goalSelector.addGoal(5, LookAtPlayerGoal(this, Player::class.java, 6.0f))
     }
 
@@ -84,7 +83,7 @@ open class HybridAquaticCrustaceanEntity(
         setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
         setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
-        navigation = GroundPathNavigation(this, world)
+        navigation = WallClimbNavigation(this, world)
     }
 
     override fun aiStep() {
@@ -100,6 +99,14 @@ open class HybridAquaticCrustaceanEntity(
         super.aiStep()
     }
 
+    override fun getMaxHeadXRot(): Int {
+        return 1
+    }
+
+    override fun getMaxHeadYRot(): Int {
+        return 1
+    }
+
     override fun setRecordPlayingNearby(songPosition: BlockPos, playing: Boolean) {
         this.songSource = songPosition
         this.songPlaying = playing
@@ -107,10 +114,6 @@ open class HybridAquaticCrustaceanEntity(
 
     private fun isSongPlaying(): Boolean {
         return this.songPlaying
-    }
-
-    override fun maxUpStep(): Float {
-        return 1.0F
     }
 
     override fun isAffectedByFluids(): Boolean {
@@ -129,6 +132,26 @@ open class HybridAquaticCrustaceanEntity(
     override fun tick() {
         super.tick()
 
+        if (!level().isClientSide) {
+            setClimbingWall(horizontalCollision)
+        }
+
+        if (isClimbingWall()) {
+            climbingTicks++
+
+            val blockStateAtPos = level().getBlockState(blockPosition())
+            if (isMoving() && blockStateAtPos.fluidState.isEmpty && climbingTicks % 6 == 0) {
+                playStepSound(blockPosition(), blockStateAtPos)
+            }
+        } else {
+            climbingTicks = 0
+        }
+
+        if (onClimbable()) {
+            val velocity = deltaMovement
+            setDeltaMovement(velocity.x, velocity.y * 0.33, velocity.z)
+        }
+
         if ((this is HermitCrabEntity || this is GiantIsopodEntity) && isHiding) {
             hidingTimer--
 
@@ -143,6 +166,26 @@ open class HybridAquaticCrustaceanEntity(
         }
     }
 
+    //#region Climbing
+
+    fun isMoving(): Boolean {
+        return (this.onGround() || this.onClimbable()) && deltaMovement.lengthSqr() >= 0.0001
+    }
+
+    override fun onClimbable(): Boolean {
+        return this.climbingTicks > 8 && this.isClimbingWall()
+    }
+
+    private fun isClimbingWall(): Boolean {
+        return entityData.get(CLIMBING)
+    }
+
+    private fun setClimbingWall(isClimbingWall: Boolean) {
+        entityData.set(CLIMBING, isClimbingWall)
+    }
+
+    //#endregion
+
     override fun hurt(source: DamageSource, amount: Float): Boolean {
         if (this is HermitCrabEntity || this is GiantIsopodEntity && !isHiding) {
             startHiding()
@@ -155,8 +198,6 @@ open class HybridAquaticCrustaceanEntity(
 
     // end region
 
-    // region water breathing
-
     override fun handleAirSupply(air: Int) {
     }
 
@@ -167,6 +208,8 @@ open class HybridAquaticCrustaceanEntity(
     protected open fun getMaxSize(): Int {
         return 0
     }
+
+    //#region Data
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         super.addAdditionalSaveData(nbt)
@@ -180,10 +223,19 @@ open class HybridAquaticCrustaceanEntity(
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(CRUSTACEAN_SIZE, 0)
+        builder.define(ATTEMPT_ATTACK, false)
+        builder.define(CLIMBING, false)
+    }
+
+    //#endregion
+
     //#region SFX
 
     override fun nextStep(): Float {
-        return this.moveDist + 0.25f
+        return this.moveDist + 0.5f
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
@@ -217,8 +269,7 @@ open class HybridAquaticCrustaceanEntity(
             DefaultAnimations.genericWalkIdleController(this)
         )
         controllerRegistrar.add(
-            AnimationController(
-                this, "Hide", 4,
+            AnimationController(this, "Hide", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
                     if (this.isHiding) {
                         return@AnimationStateHandler state.setAndContinue(HIDE_ANIMATION)
@@ -229,8 +280,7 @@ open class HybridAquaticCrustaceanEntity(
             )
         )
         controllerRegistrar.add(
-            AnimationController(
-                this, "Dance", 4,
+            AnimationController(this, "Dance", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
                     if (this.canDance && isSongPlaying()) {
                         return@AnimationStateHandler state.setAndContinue(DANCE_ANIMATION)
@@ -252,6 +302,8 @@ open class HybridAquaticCrustaceanEntity(
         val CRUSTACEAN_SIZE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
+        val CLIMBING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         val DANCE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")

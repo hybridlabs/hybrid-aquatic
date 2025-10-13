@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import dev.hybridlabs.aquatic.entity.ai.control.WallClimbNavigation
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -16,8 +17,6 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.goal.TryFindWaterGoal
-import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
-import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
@@ -36,35 +35,50 @@ open class HybridAquaticCritterEntity(
 ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false
+    private var climbingTicks = 0
 
     init {
         setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(PathType.WATER_BORDER, -1.0f)
         setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
         setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
-        navigation = GroundPathNavigation(this, world)
+        navigation = WallClimbNavigation(this, world)
     }
 
-    override fun createNavigation(world: Level): PathNavigation {
-        return GroundPathNavigation(this, world)
+    fun isMoving(): Boolean {
+        return (this.onGround() || this.onClimbable()) && deltaMovement.lengthSqr() >= 0.0001
     }
 
     override fun tick() {
         super.tick()
 
-        if (!isUnderWater) {
-            this.speed = 0.0F
+        if (!level().isClientSide) {
+            setClimbingWall(horizontalCollision)
         }
-    }
 
-    override fun maxUpStep(): Float {
-        return 1.0F
+        if (isClimbingWall()) {
+            climbingTicks++
+
+            val blockStateAtPos = level().getBlockState(blockPosition())
+            if (isMoving() && blockStateAtPos.fluidState.isEmpty && climbingTicks % 6 == 0) {
+                playStepSound(blockPosition(), blockStateAtPos)
+            }
+        } else {
+            climbingTicks = 0
+        }
+
+        if (onClimbable()) {
+            val velocity = deltaMovement
+            setDeltaMovement(velocity.x, velocity.y * 0.33, velocity.z)
+        }
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         super.defineSynchedData(builder)
         builder.define(CRITTER_SIZE, 0)
         builder.define(CRITTER_FLAGS, 0.toByte())
+        builder.define(CLIMBING, false)
     }
 
     override fun registerGoals() {
@@ -73,11 +87,23 @@ open class HybridAquaticCritterEntity(
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.3))
     }
 
+    override fun onClimbable(): Boolean {
+        return this.climbingTicks > 8 && this.isClimbingWall()
+    }
+
+    private fun isClimbingWall(): Boolean {
+        return entityData.get(CLIMBING)
+    }
+
+    private fun setClimbingWall(isClimbingWall: Boolean) {
+        entityData.set(CLIMBING, isClimbingWall)
+    }
+
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
     ): SpawnGroupData? {
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
@@ -150,6 +176,8 @@ open class HybridAquaticCritterEntity(
             SynchedEntityData.defineId(HybridAquaticCritterEntity::class.java, EntityDataSerializers.INT)
         val CRITTER_FLAGS: EntityDataAccessor<Byte> =
             SynchedEntityData.defineId(HybridAquaticCritterEntity::class.java, EntityDataSerializers.BYTE)
+        val CLIMBING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HybridAquaticCritterEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         fun canSpawn(
             type: EntityType<out WaterAnimal>,
