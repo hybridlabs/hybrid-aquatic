@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#hybrid-aquatic:rivers",
+  "features": "hybrid-aquatic:water_lettuce",
+  "step": "vegetal_decoration"
+}

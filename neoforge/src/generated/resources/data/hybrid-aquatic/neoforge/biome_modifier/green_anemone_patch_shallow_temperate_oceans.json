@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#hybrid-aquatic:shallow_temperate_oceans",
+  "features": "hybrid-aquatic:green_anemone_patch",
+  "step": "vegetal_decoration"
+}

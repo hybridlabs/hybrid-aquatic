@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#hybrid-aquatic:sandy_beaches",
+  "features": "hybrid-aquatic:dunegrass_patch",
+  "step": "vegetal_decoration"
+}

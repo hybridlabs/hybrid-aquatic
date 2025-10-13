@@ -7,7 +7,6 @@ import dev.hybridlabs.aquatic.utils.NaughtyRegistrySetBuilder
 import dev.hybridlabs.aquatic.world.gen.feature.BiomeFeatureAddition
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.structure.BuiltinSpawnModifiers
-import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import net.minecraft.core.HolderSet
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
@@ -19,6 +18,7 @@ import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider
 import net.neoforged.neoforge.common.world.BiomeModifier
 import net.neoforged.neoforge.common.world.BiomeModifiers
 import net.neoforged.neoforge.common.world.StructureModifier
+import net.neoforged.neoforge.common.world.StructureModifiers.AddSpawnsStructureModifier
 import net.neoforged.neoforge.data.event.GatherDataEvent
 import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.BIOME_MODIFIERS
 import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.STRUCTURE_MODIFIERS
@@ -47,15 +47,13 @@ object DataGenerators {
         builder.add(BIOME_MODIFIERS)
         { context ->
             registerBiomeSpawns(context)
-            //registerFeatures(context)
+            registerFeatures(context)
         }
 
-        /*
         builder.add(STRUCTURE_MODIFIERS)
         { context ->
             registerStructureSpawnModifiers(context)
         }
-         */
 
         generator.addProvider(
             event.includeServer(), DatapackBuiltinEntriesProvider(
@@ -76,10 +74,14 @@ object DataGenerators {
                 STRUCTURE_MODIFIERS,
                 CommonClass.locate(structureModifier.id)
             )
-            context.register(
-                key,
-                StructureSpawnModifier(structureModifier)
-            )
+            val reg = context.lookup(Registries.STRUCTURE)
+            val structure = reg.getOrThrow(structureModifier.structure)
+            structureModifier.spawns.values.flatten().let { spawns ->
+                context.register(
+                    key,
+                    AddSpawnsStructureModifier(HolderSet.direct(structure), spawns)
+                )
+            }
         }
     }
 
