@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -18,11 +17,10 @@ public class EntityMixin {
         Entity entity = (Entity) (Object) this;
         if (entity instanceof Player player) {
             ItemStack stack = player.getItemBySlot(EquipmentSlot.FEET);
-            if (stack.is(HybridAquaticItems.INSTANCE.getDIVING_BOOTS().get()) && player.isEyeInFluid(FluidTags.WATER)) {
+            if (stack.is(HybridAquaticItems.INSTANCE.getDIVING_BOOTS().get()) && player.isUnderWater()) {
                 return original * 1.67f;
             }
         }
-
         return original;
     }
 }
