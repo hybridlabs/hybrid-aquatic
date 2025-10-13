@@ -2,12 +2,10 @@ package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.core.registries.Registries
-import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvents
@@ -28,7 +26,6 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.gameevent.GameEvent
-import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.LootTable
 import java.util.function.IntFunction
 import kotlin.random.Random

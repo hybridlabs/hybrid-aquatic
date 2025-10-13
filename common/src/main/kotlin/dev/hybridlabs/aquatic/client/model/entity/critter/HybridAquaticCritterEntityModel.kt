@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 abstract class HybridAquaticCritterEntityModel<T : HybridAquaticCritterEntity>(private val id: String) : GeoModel<T>() {
