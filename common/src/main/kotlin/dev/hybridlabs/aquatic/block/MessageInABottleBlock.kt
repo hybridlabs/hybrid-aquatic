@@ -177,7 +177,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
 
             stack.set(
                 DataComponents.BLOCK_ENTITY_DATA,
-                CustomData.of(blockEntity.saveWithoutMetadata(RegistryAccess.EMPTY)
+                CustomData.of(blockEntity.getUpdateTag(RegistryAccess.EMPTY)
             ))
             return stack
         }
