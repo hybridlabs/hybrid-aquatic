@@ -22,14 +22,21 @@ open class HybridAquaticJellyfishEntityRenderer<T : HybridAquaticJellyfishEntity
         if (canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
     }
 
-    override fun applyRotations(jellyfishEntity: T, matrixStack: PoseStack, f: Float, g: Float, h: Float) {
-        val i = Mth.lerp(h, jellyfishEntity.prevTiltAngle, jellyfishEntity.tiltAngle)
-        val j = Mth.lerp(h, jellyfishEntity.prevRollAngle, jellyfishEntity.rollAngle)
-        matrixStack.translate(0.0f, 0.25f, 0.0f)
-        matrixStack.mulPose(Axis.YP.rotationDegrees(180.0f - g))
-        matrixStack.mulPose(Axis.XP.rotationDegrees(i))
-        matrixStack.mulPose(Axis.YP.rotationDegrees(j))
-        matrixStack.translate(0.0f, 0.0f, 0.0f)
+    override fun applyRotations(
+        jellyfishEntity: T,
+        poseStack: PoseStack,
+        ageInTicks: Float,
+        rotationYaw: Float,
+        partialTick: Float,
+        nativeScale: Float
+    ) {
+        val i = Mth.lerp(partialTick, jellyfishEntity.prevTiltAngle, jellyfishEntity.tiltAngle)
+        val j = Mth.lerp(partialTick, jellyfishEntity.prevRollAngle, jellyfishEntity.rollAngle)
+        poseStack.translate(0.0f, 0.25f, 0.0f)
+        poseStack.mulPose(Axis.YP.rotationDegrees(180.0f - rotationYaw))
+        poseStack.mulPose(Axis.XP.rotationDegrees(i))
+        poseStack.mulPose(Axis.YP.rotationDegrees(j))
+        poseStack.translate(0.0f, 0.0f, 0.0f)
     }
 
     override fun getDeathMaxRotation(animatable: T): Float {
