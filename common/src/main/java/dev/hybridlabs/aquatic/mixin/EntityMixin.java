@@ -18,7 +18,7 @@ public class EntityMixin {
         if (entity instanceof Player player) {
             ItemStack stack = player.getItemBySlot(EquipmentSlot.FEET);
             if (stack.is(HybridAquaticItems.INSTANCE.getDIVING_BOOTS().get()) && player.isUnderWater()) {
-                return original * 1.67f;
+                return original * 2.0f;
             }
         }
         return original;
