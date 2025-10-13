@@ -2,23 +2,14 @@
 
 package dev.hybridlabs.aquatic.item
 
-
 // TODO: tag meat items
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.item.armor.DivingArmorItem
-import dev.hybridlabs.aquatic.item.armor.EelArmorItem
-import dev.hybridlabs.aquatic.item.armor.ManglerfishArmorItem
-import dev.hybridlabs.aquatic.item.armor.MoonJellyfishArmorItem
-import dev.hybridlabs.aquatic.item.armor.SeashellArmorItem
-import dev.hybridlabs.aquatic.item.armor.TurtleArmorItem
+import dev.hybridlabs.aquatic.item.armor.*
 import dev.hybridlabs.aquatic.item.coral.*
-import dev.hybridlabs.aquatic.item.seashell.SeashellAxeItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellHoeItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellPickaxeItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellShovelItem
-import dev.hybridlabs.aquatic.platform.Services.*
+import dev.hybridlabs.aquatic.item.seashell.*
+import dev.hybridlabs.aquatic.platform.Services.PLATFORM
 import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -75,7 +66,7 @@ object HybridAquaticItems {
     val NAUTILUS_PAULDRONS = register(
         "nautilus_pauldrons"
     ) {
-            SeashellArmorItem(
+        SeashellArmorItem(
             ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
@@ -137,49 +128,112 @@ object HybridAquaticItems {
     val SEASHELL_SPEAR = register(
         "seashell_spear"
     ) {
-        SwordItem(
-            HybridAquaticToolMaterials.SEASHELL,
-            Item.Properties()
+        SeashellSpearItem(
+            Item.Properties().attributes(
+                SwordItem
+                    .createAttributes(Tiers.IRON, 3, 1.6F)
+            ).durability(250)
         )
     }
 
     val SEASHELL_PICKAXE = register(
         "seashell_pickaxe"
-    ) { SeashellPickaxeItem(Item.Properties()) }
+    ) {
+        SeashellPickaxeItem(
+            Item.Properties().attributes(
+                PickaxeItem
+                    .createAttributes(Tiers.IRON, 3.0F, 1.2F)
+            ).durability(250)
+        )
+    }
 
     val SEASHELL_AXE = register(
         "seashell_axe"
-    ) { SeashellAxeItem(Item.Properties()) }
+    ) {
+        SeashellAxeItem(
+            Item.Properties().attributes(
+                AxeItem
+                    .createAttributes(Tiers.IRON, 9.0F, 0.8F)
+            ).durability(250)
+        )
+    }
 
     val SEASHELL_SHOVEL = register(
         "seashell_shovel"
-    ) { SeashellShovelItem(Item.Properties()) }
+    ) {
+        SeashellShovelItem(
+            Item.Properties().attributes(
+                ShovelItem
+                    .createAttributes(Tiers.IRON, 3.5F, 1.0F)
+            ).durability(250)
+        )
+    }
 
     val SEASHELL_HOE = register(
         "seashell_hoe"
     ) {
-        SeashellHoeItem(Item.Properties())
+        SeashellHoeItem(
+            Item.Properties().attributes(
+                HoeItem
+                    .createAttributes(Tiers.IRON, 1.0F, 2.0F)
+            ).durability(250)
+        )
     }
 
     val CORAL_BLADE = register(
         "coral_blade"
-    ) { CoralBladeItem(Item.Properties()) }
+    ) {
+        CoralBladeItem(
+            Item.Properties().attributes(
+                SwordItem
+                    .createAttributes(Tiers.IRON, 5, 1.6F)
+            ).durability(131)
+        )
+    }
 
     val CORAL_PICKAXE = register(
         "coral_pickaxe"
-    ) { CoralPickaxeItem(Item.Properties()) }
+    ) {
+        CoralPickaxeItem(
+            Item.Properties().attributes(
+                PickaxeItem
+                    .createAttributes(Tiers.STONE, 3.0F, 1.2F)
+            ).durability(131)
+        )
+    }
 
     val CORAL_AXE = register(
         "coral_axe"
-    ) { CoralAxeItem(Item.Properties()) }
+    ) {
+        CoralAxeItem(
+            Item.Properties().attributes(
+                AxeItem
+                    .createAttributes(Tiers.STONE, 9.0F, 0.8F)
+            ).durability(131)
+        )
+    }
 
     val CORAL_SHOVEL = register(
         "coral_shovel"
-    ) { CoralShovelItem(Item.Properties()) }
+    ) {
+        CoralShovelItem(
+            Item.Properties().attributes(
+                ShovelItem
+                    .createAttributes(Tiers.STONE, 3.5F, 1.0F)
+            ).durability(131)
+        )
+    }
 
     val CORAL_HOE = register(
         "coral_hoe"
-    ) { CoralHoeItem(Item.Properties()) }
+    ) {
+        CoralHoeItem(
+            Item.Properties().attributes(
+                HoeItem
+                    .createAttributes(Tiers.STONE, 1.0F, 2.0F)
+            ).durability(131)
+        )
+    }
 
     //#endregion
 
@@ -187,9 +241,9 @@ object HybridAquaticItems {
 
     //#region Nature Blocks
 
-    val ANEMONE = registerBlockItem("anemone"){ HybridAquaticBlocks.ANEMONE.get()}
-    val STRAWBERRY_ANEMONE = registerBlockItem("strawberry_anemone"){ HybridAquaticBlocks.STRAWBERRY_ANEMONE.get()}
-    val GIANT_GREEN_ANEMONE = registerBlockItem("giant_green_anemone"){ HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get()}
+    val ANEMONE = registerBlockItem("anemone") { HybridAquaticBlocks.ANEMONE.get() }
+    val STRAWBERRY_ANEMONE = registerBlockItem("strawberry_anemone") { HybridAquaticBlocks.STRAWBERRY_ANEMONE.get() }
+    val GIANT_GREEN_ANEMONE = registerBlockItem("giant_green_anemone") { HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get() }
     val GIANT_CLAM = registerBlockItem("giant_clam") { HybridAquaticBlocks.GIANT_CLAM.get() }
     val SARGASSUM = registerBlockItem("sargassum") { HybridAquaticBlocks.SARGASSUM.get() }
     val BULL_KELP = registerBlockItem("bull_kelp") { HybridAquaticBlocks.BULL_KELP.get() }
@@ -1568,7 +1622,7 @@ object HybridAquaticItems {
         id: String,
         type: Supplier<EntityType<T>>,
         primaryColor: Int,
-        secondaryColor: Int
+        secondaryColor: Int,
     ): Supplier<SpawnEggItem> {
         return PLATFORM.registerSpawnEggItem(id, type, primaryColor, secondaryColor)
 
@@ -1586,7 +1640,7 @@ object HybridAquaticItems {
         id: String,
         standingBlock: Supplier<Block>,
         wallBlock: Supplier<Block>,
-        direction: Direction = Direction.DOWN
+        direction: Direction = Direction.DOWN,
     ): Supplier<Item> {
         return register(id) {
             StandingAndWallBlockItem(
