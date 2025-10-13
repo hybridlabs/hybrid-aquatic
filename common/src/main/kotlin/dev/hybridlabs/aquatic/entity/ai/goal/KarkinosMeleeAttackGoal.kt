@@ -113,6 +113,6 @@ open class KarkinosMeleeAttackGoal(
     }
 
     override fun canPerformAttack(attackTarget: LivingEntity): Boolean {
-        return (karkinos.bbWidth * 1.75f * karkinos.bbWidth * 1.75f + attackTarget.bbWidth).toDouble() <= karkinos.distanceToSqr(attackTarget)
+        return karkinos.distanceToSqr(attackTarget) <= (karkinos.bbWidth * 1.75f * karkinos.bbWidth * 1.75f + attackTarget.bbWidth).toDouble()
     }
 }
