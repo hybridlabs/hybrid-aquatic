@@ -64,13 +64,6 @@ open class HybridAquaticCrustaceanEntity(
             entityData.set(CRUSTACEAN_SIZE, size)
         }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(CRUSTACEAN_SIZE, 0)
-        entityData.define(ATTEMPT_ATTACK, false)
-        entityData.define(CLIMBING, false)
-    }
-
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, PanicGoal(this, 1.0))
@@ -142,10 +135,6 @@ open class HybridAquaticCrustaceanEntity(
         hidingTimer = 200
     }
 
-    fun isMoving(): Boolean {
-        return (this.onGround() || this.onClimbable()) && deltaMovement.lengthSqr() >= 0.0001
-    }
-
     override fun tick() {
         super.tick()
 
@@ -183,6 +172,11 @@ open class HybridAquaticCrustaceanEntity(
         }
     }
 
+    //#region Climbing
+
+    fun isMoving(): Boolean {
+        return (this.onGround() || this.onClimbable()) && deltaMovement.lengthSqr() >= 0.0001
+    }
 
     override fun onClimbable(): Boolean {
         return this.climbingTicks > 8 && this.isClimbingWall()
@@ -196,6 +190,8 @@ open class HybridAquaticCrustaceanEntity(
         entityData.set(CLIMBING, isClimbingWall)
     }
 
+    //#endregion
+
     override fun hurt(source: DamageSource, amount: Float): Boolean {
         if (this is HermitCrabEntity || this is GiantIsopodEntity && !isHiding) {
             startHiding()
@@ -206,13 +202,11 @@ open class HybridAquaticCrustaceanEntity(
         return super.hurt(source, amount)
     }
 
-    // end region
+    //#region Water Breathing
 
     override fun getMobType(): MobType {
         return MobType.WATER
     }
-
-    // region water breathing
 
     override fun canBreatheUnderwater(): Boolean {
         return true
@@ -221,6 +215,8 @@ open class HybridAquaticCrustaceanEntity(
     override fun handleAirSupply(air: Int) {
     }
 
+    //#endregion
+
     protected open fun getMinSize(): Int {
         return 0
     }
@@ -228,6 +224,8 @@ open class HybridAquaticCrustaceanEntity(
     protected open fun getMaxSize(): Int {
         return 0
     }
+
+    //#region Data
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         super.addAdditionalSaveData(nbt)
@@ -241,10 +239,19 @@ open class HybridAquaticCrustaceanEntity(
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
 
+    override fun defineSynchedData() {
+        super.defineSynchedData()
+        entityData.define(CRUSTACEAN_SIZE, 0)
+        entityData.define(ATTEMPT_ATTACK, false)
+        entityData.define(CLIMBING, false)
+    }
+
+    //#endregion
+
     //#region SFX
 
     override fun nextStep(): Float {
-        return this.moveDist + 0.25f
+        return this.moveDist + 0.5f
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
