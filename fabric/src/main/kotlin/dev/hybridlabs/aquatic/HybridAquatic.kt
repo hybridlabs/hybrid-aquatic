@@ -21,6 +21,7 @@ import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades.registerCustomTrades
 import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
+import dev.hybridlabs.aquatic.world.gen.feature.FeatureBiomeModifications
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
@@ -73,7 +74,7 @@ object HybridAquatic : ModInitializer {
         HybridAquaticLootPoolEntryTypes
         LootTableModifications.registerLootModifications()
 
-        //FeatureBiomeModifications.registerBiomeModifications()
+        FeatureBiomeModifications.registerBiomeModifications()
 
         SpawnRestrictionRegistry.registerSpawnRestrictions()
 
