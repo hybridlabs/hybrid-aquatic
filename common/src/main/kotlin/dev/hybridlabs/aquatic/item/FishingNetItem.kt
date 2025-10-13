@@ -76,7 +76,9 @@ class FishingNetItem(settings: Properties) : Item(settings) {
                     )
 
                     (level as ServerLevel).addFreshEntity(entity)
-                    customData.update { tag -> tag.remove(ENTITY_KEY) }
+                    stack.update(DataComponents.CUSTOM_DATA, CustomData.EMPTY) { data ->
+                        data.update { compoundTag -> compoundTag.remove(ENTITY_KEY) }
+                    }
 
                     return InteractionResultHolder.success(stack)
                 }
@@ -96,8 +98,8 @@ class FishingNetItem(settings: Properties) : Item(settings) {
             entityCompound.putBoolean("PersistenceRequired", true)
             entityCompound.putBoolean("FromFishingNet", true)
             val itemStack = user.getItemInHand(hand)
-            itemStack.components.get(DataComponents.CUSTOM_DATA)?.update { tag ->
-                tag.put(ENTITY_KEY, entityCompound)
+            itemStack.update(DataComponents.CUSTOM_DATA, CustomData.EMPTY) { data ->
+                data.update { compoundTag -> compoundTag.put(ENTITY_KEY, entityCompound) }
             }
         }
 
@@ -109,7 +111,7 @@ class FishingNetItem(settings: Properties) : Item(settings) {
 
         fun alreadyHasFish(stack: ItemStack): Boolean {
             val customData = stack.components.get(DataComponents.CUSTOM_DATA)
-            return (customData!!.contains(ENTITY_KEY))
+            return (customData?.contains(ENTITY_KEY) ?: false)
         }
     }
 }
