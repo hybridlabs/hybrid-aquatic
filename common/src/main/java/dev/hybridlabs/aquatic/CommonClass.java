@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic;
 
 import static dev.hybridlabs.aquatic.Constants.MOD_ID;
 import static dev.hybridlabs.aquatic.Constants.MOD_NAME;
+import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE;
 
 import dev.hybridlabs.aquatic.platform.Services;
 import dev.hybridlabs.aquatic.platform.registration.RegistrationProvider;
@@ -10,6 +11,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
@@ -51,6 +53,8 @@ public class CommonClass {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 
+    public static final AttributeModifier DIVING_BOOTS_STEP_MODIFIER =
+            new AttributeModifier(CommonClass.locate("diving_boots_step_modifier"), 0.4, ADD_VALUE);
 
     public static void init() {
         if (Services.PLATFORM.isModLoaded(MOD_ID)) {
