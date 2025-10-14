@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.mixin;
 import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes;
@@ -38,14 +37,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FishingHook.class)
-public abstract class FishingBobberEntityMixin extends Entity
-        implements CustomFishingBobberEntityData {
+public abstract class FishingBobberEntityMixin extends Entity implements CustomFishingBobberEntityData {
 
-    // Gets fishing rod item and player that used it for Injects in "use()" function below
-    @Unique ItemStack usedItem;
-    @Unique Player usedPlayer;
-    @Shadow private int timeUntilLured;
-    @Unique private ItemStack lureItemStack = Items.AIR.getDefaultInstance();
+    @Shadow
+    private int timeUntilLured;
+
+    @Shadow
+    public abstract Player getPlayerOwner();
+
+    @Unique
+    private ItemStack lureItemStack = Items.AIR.getDefaultInstance();
 
     private FishingBobberEntityMixin(EntityType<? extends Projectile> entityType, Level level) {
         super(entityType, level);
@@ -94,21 +95,6 @@ public abstract class FishingBobberEntityMixin extends Entity
                 && this.level().isNight()) {
             timeUntilLured -= 75;
         }
-    }
-
-    @Inject(
-            method = "retrieve",
-            at =
-                    @At(
-                            value = "INVOKE",
-                            target =
-                                    "Lnet/minecraft/world/level/Level;getServer()"
-                                            + "Lnet/minecraft/server/MinecraftServer;",
-                            ordinal = 0),remap = false)
-    private void objectGetter(
-            ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local Player playerEntity) {
-        this.usedItem = usedItem;
-        this.usedPlayer = playerEntity;
     }
 
     // Increases chance of getting treasure item with magnetic hook
@@ -161,8 +147,9 @@ public abstract class FishingBobberEntityMixin extends Entity
             }
 
             // Damage lure AFTER we catch anything with it
-            lureItemStack.hurtAndBreak(1, usedPlayer, EquipmentSlot.MAINHAND);
+            lureItemStack.hurtAndBreak(1, getPlayerOwner(), EquipmentSlot.MAINHAND);
         }
+
         return instance;
     }
 
@@ -174,7 +161,7 @@ public abstract class FishingBobberEntityMixin extends Entity
             if (entity == null) return;
 
             double modifier = 0.15;
-            Vec3 vecBetween = usedPlayer.position().subtract(this.position());
+            Vec3 vecBetween = getPlayerOwner().position().subtract(this.position());
             Vec3 vecBetweenMod = vecBetween.scale(modifier);
             var yOffset =
                     Math.sqrt(
@@ -184,7 +171,9 @@ public abstract class FishingBobberEntityMixin extends Entity
                                                     + Math.pow(vecBetween.z, 2)))
                             * 0.08;
             entity.setDeltaMovement(vecBetweenMod.x, vecBetweenMod.y + yOffset, vecBetweenMod.z);
+
         }
+
     }
 
     // Returns lure back on a successful fishing attempt
@@ -197,8 +186,7 @@ public abstract class FishingBobberEntityMixin extends Entity
                                     "Lnet/minecraft/world/entity/projectile"
                                             + "/FishingHook;discard()V"),remap = false)
     private void retrieveLureOnSuccess(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
-        Player player = ((FishingHook)(Object)this).getPlayerOwner();
-        retrieveLure(player);
+        retrieveLure(getPlayerOwner());
     }
 
     // Returns lure back if player removes fishing rod
@@ -225,6 +213,13 @@ public abstract class FishingBobberEntityMixin extends Entity
             if (player == null || player.isRemoved() || !player.isAlive()) {
                 pos = this.position();
             } else {
+
+                // Try to put the lure back in the player's offhand
+                if (player.getItemBySlot(EquipmentSlot.OFFHAND).isEmpty()) {
+                    player.setItemSlot(EquipmentSlot.OFFHAND, lureItemStack);
+                    if (player.getItemBySlot(EquipmentSlot.OFFHAND) == lureItemStack) return;
+                }
+                // Or just stick it in the inventory if the offhand is occupied
                 if (player.getInventory().add(lureItemStack)) return;
 
                 pos = player.position();
