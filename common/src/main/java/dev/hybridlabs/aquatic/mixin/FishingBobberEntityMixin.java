@@ -197,7 +197,8 @@ public abstract class FishingBobberEntityMixin extends Entity
                                     "Lnet/minecraft/world/entity/projectile"
                                             + "/FishingHook;discard()V"),remap = false)
     private void retrieveLureOnSuccess(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
-        retrieveLure(usedPlayer);
+        Player player = ((FishingHook)(Object)this).getPlayerOwner();
+        retrieveLure(player);
     }
 
     // Returns lure back if player removes fishing rod
