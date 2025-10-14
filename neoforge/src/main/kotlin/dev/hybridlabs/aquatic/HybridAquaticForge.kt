@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic
 
-import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
@@ -36,18 +35,14 @@ import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
-import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.neoforged.fml.common.Mod
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
-import net.neoforged.neoforge.common.world.StructureModifier
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
 import net.neoforged.neoforge.registries.DataPackRegistryEvent
-import net.neoforged.neoforge.registries.DeferredRegister
-import net.neoforged.neoforge.registries.NeoForgeRegistries
 import thedarkcolour.kotlinforforge.neoforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.neoforge.forge.runForDist
@@ -83,13 +78,13 @@ object HybridAquaticForge {
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
 
-        HybridAquaticNetworkingForge
+        MOD_BUS.addListener(HybridAquaticNetworkingForge::register)
         HybridAquaticLootPoolEntryTypes
         LootTableModifications
 
         MOD_BUS.addListener(::loadSeaMessages)
         MOD_BUS.addListener(::registerPotionsRecipes)
-        FORGE_BUS. addListener(HybridAquaticCustomTrades::registerWandererTrades)
+        FORGE_BUS.addListener(HybridAquaticCustomTrades::registerWandererTrades)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
         //registerStructureModifiers()
 
@@ -116,6 +111,7 @@ object HybridAquaticForge {
         )
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun registerSpawnPlacements(event: RegisterSpawnPlacementsEvent) {
         SpawnRestrictionRegistry.registerSpawnRestrictions()
     }
@@ -194,6 +190,7 @@ object HybridAquaticForge {
      * things such as renderers and keymaps
      * Fired on the mod specific event bus.
      */
+    @Suppress("UNUSED_PARAMETER")
     private fun onClientSetup(event: FMLClientSetupEvent) {
         logger.info("Initializing client...")
     }
@@ -201,6 +198,7 @@ object HybridAquaticForge {
     /**
      * Fired on the global Forge bus.
      */
+    @Suppress("UNUSED_PARAMETER")
     private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {
         logger.info("Server starting...")
     }
@@ -209,15 +207,5 @@ object HybridAquaticForge {
         event.enqueueWork {
             //HybridAquaticPotions.registerPotionRecipes()
         }
-    }
-
-    private fun registerStructureModifiers() {
-        val structureModifiers: DeferredRegister<MapCodec<out StructureModifier?>?> =
-            DeferredRegister.create(NeoForgeRegistries.Keys.STRUCTURE_MODIFIER_SERIALIZERS, Constants.MOD_ID)
-        structureModifiers.register(MOD_BUS)
-        structureModifiers.register<MapCodec<out StructureModifier?>?>(
-            "ha_structure_spawns",
-            StructureSpawnModifier::makeCodec
-        )
     }
 }

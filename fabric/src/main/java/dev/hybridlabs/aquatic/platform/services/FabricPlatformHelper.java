@@ -5,9 +5,11 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
 import dev.hybridlabs.aquatic.item.AnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.GiantGreenAnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
+import dev.hybridlabs.aquatic.network.FishingBobberPayload;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.*;
@@ -112,6 +114,8 @@ public class FabricPlatformHelper implements PlatformHelper {
 
     @Override
     public void sendHookToServer(int entityId, ItemStack entityData) {
-        // TODO: fix fabric networking
+        if (ClientPlayNetworking.canSend(FishingBobberPayload.Companion.getType())) {
+            ClientPlayNetworking.send(new FishingBobberPayload(entityId, entityData));
+        }
     }
 }

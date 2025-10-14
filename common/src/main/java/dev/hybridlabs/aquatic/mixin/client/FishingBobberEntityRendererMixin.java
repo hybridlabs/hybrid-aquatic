@@ -21,56 +21,85 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(FishingHookRenderer.class)
 public abstract class FishingBobberEntityRendererMixin {
     @Unique
-    private static final RenderType BARBED_HOOK_LAYER = getRenderType(CommonClass.locate("textures/entity/bobber" +
-            "/barbed_bobber.png"));
+    private static final RenderType BARBED_HOOK_LAYER =
+            getRenderType(CommonClass.locate("textures/entity/bobber" + "/barbed_bobber.png"));
+
     @Unique
-    private static final RenderType GLOWING_HOOK_LAYER = getRenderType(CommonClass.locate("textures/entity/bobber" +
-            "/glowing_bobber.png"));
+    private static final RenderType GLOWING_HOOK_LAYER =
+            getRenderType(CommonClass.locate("textures/entity/bobber" + "/glowing_bobber.png"));
+
     @Unique
     private static final RenderType MAGNETIC_HOOK_LAYER =
             getRenderType(CommonClass.locate("textures/entity/bobber" + "/magnetic_bobber.png"));
-    @Unique
-    private static final RenderType CREEPERMAGNET_HOOK_LAYER = getRenderType(CommonClass.locate("textures/entity" +
-            "/bobber/creepermagnet_bobber.png"));
-    @Unique
-    private static final RenderType OMINOUS_HOOK_LAYER = getRenderType(CommonClass.locate("textures/entity/bobber" +
-            "/ominous_bobber.png"));
 
     @Unique
-    FishingHook entity;
+    private static final RenderType CREEPERMAGNET_HOOK_LAYER =
+            getRenderType(
+                    CommonClass.locate("textures/entity" + "/bobber/creepermagnet_bobber.png"));
 
-    @Inject(method = "render(Lnet/minecraft/world/entity/projectile/FishingHook;" + "FFLcom/mojang/blaze3d/vertex" +
-            "/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "HEAD"), remap = false)
-    private void objectGetter(FishingHook fishingBobberEntity, float f, float g, PoseStack matrixStack,
-                              MultiBufferSource vertexConsumerProvider, int i, CallbackInfo ci) {
+    @Unique
+    private static final RenderType OMINOUS_HOOK_LAYER =
+            getRenderType(CommonClass.locate("textures/entity/bobber" + "/ominous_bobber.png"));
+
+    @Unique FishingHook entity;
+
+    @Unique
+    private static RenderType getRenderType(ResourceLocation textureLocation) {
+        return RenderType.entityCutout(textureLocation);
+    }
+
+    @Inject(
+            method =
+                    "render(Lnet/minecraft/world/entity/projectile/FishingHook;"
+                            + "FFLcom/mojang/blaze3d/vertex"
+                            + "/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
+            at = @At(value = "HEAD"),
+            remap = false)
+    private void objectGetter(
+            FishingHook fishingBobberEntity,
+            float f,
+            float g,
+            PoseStack matrixStack,
+            MultiBufferSource vertexConsumerProvider,
+            int i,
+            CallbackInfo ci) {
         entity = fishingBobberEntity;
     }
 
-    @Redirect(method =
-            "render(Lnet/minecraft/world/entity/projectile/FishingHook;" + "FFLcom/mojang/blaze3d/vertex" +
-                    "/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "INVOKE",
-            target =
-                    "Lnet/minecraft/client/renderer/MultiBufferSource;getBuffer" + "(Lnet/minecraft/client/renderer" + "/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;", ordinal = 0),remap = false)
+    @Redirect(
+            method =
+                    "render(Lnet/minecraft/world/entity/projectile/FishingHook;"
+                            + "FFLcom/mojang/blaze3d/vertex"
+                            + "/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
+            at =
+                    @At(
+                            value = "INVOKE",
+                            target =
+                                    "Lnet/minecraft/client/renderer/MultiBufferSource;getBuffer"
+                                            + "(Lnet/minecraft/client/renderer"
+                                            + "/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;",
+                            ordinal = 0),
+            remap = false)
     private VertexConsumer changeRenderType(MultiBufferSource instance, RenderType renderLayer) {
         RenderType currentRenderType = renderLayer;
 
-        ItemStack currentStack = ((CustomFishingBobberEntityData) entity).hybrid_aquatic$getLureItem();
+        ItemStack currentStack =
+                ((CustomFishingBobberEntityData) entity).hybrid_aquatic$getLureItem();
         if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK().get()))
             currentRenderType = BARBED_HOOK_LAYER;
         else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getGLOWING_HOOK().get()))
             currentRenderType = GLOWING_HOOK_LAYER;
-        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK().get()))
+        else if (currentStack
+                .getItem()
+                .equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK().get()))
             currentRenderType = MAGNETIC_HOOK_LAYER;
-        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK().get()))
+        else if (currentStack
+                .getItem()
+                .equals(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK().get()))
             currentRenderType = CREEPERMAGNET_HOOK_LAYER;
         else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK().get()))
             currentRenderType = OMINOUS_HOOK_LAYER;
 
         return instance.getBuffer(currentRenderType);
-    }
-
-    @Unique
-    private static RenderType getRenderType(ResourceLocation textureLocation) {
-        return RenderType.entityCutout(textureLocation);
     }
 }
