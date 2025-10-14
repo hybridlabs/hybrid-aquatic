@@ -71,7 +71,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
     ) {
         stack.get(DataComponents.BLOCK_ENTITY_DATA)?.let { component ->
             // if not present, generate a random message
-            if (MessageInABottleBlockEntity.MESSAGE_KEY !in component) {
+            component.copyTag()[MessageInABottleBlockEntity.MESSAGE_KEY]?.let {
                 // get a random message
                 val registryManager = world.registryAccess()
                 val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
