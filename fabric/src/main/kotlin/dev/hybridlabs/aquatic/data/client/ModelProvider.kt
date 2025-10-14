@@ -66,21 +66,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 delegateItemModel(block, template)
             }
 
-            createAirLikeBlock(
-                HybridAquaticBlocks.ANEMONE.get(),
-                TextureMapping.getBlockTexture(HybridAquaticBlocks.ANEMONE.get(), "_top")
-            )
-
-            createAirLikeBlock(
-                HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(),
-                TextureMapping.getBlockTexture(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(), "_top")
-            )
-
-            createAirLikeBlock(
-                HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(),
-                TextureMapping.getBlockTexture(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(), "_top")
-            )
-
             // simple cubes
             setOf(
                 HybridAquaticBlocks.HYBRID_CRATE.get(),
