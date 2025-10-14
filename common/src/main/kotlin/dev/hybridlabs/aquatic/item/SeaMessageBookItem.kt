@@ -16,6 +16,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
+import kotlin.jvm.optionals.getOrNull
 
 class
 SeaMessageBookItem(settings: Properties) : Item(settings) {
@@ -68,7 +69,7 @@ SeaMessageBookItem(settings: Properties) : Item(settings) {
             val customData = stack.get(DataComponents.CUSTOM_DATA)?.copyTag() ?: return null
             val id = ResourceLocation.tryParse(customData.getString(SEA_MESSAGE_KEY)) ?: return null
             val registry = registryManager.lookup(HybridAquaticRegistryKeys.SEA_MESSAGE).get()
-            return registry.getOrThrow(ResourceKey.create(HybridAquaticRegistryKeys.SEA_MESSAGE, id)).value()
+            return registry.get(ResourceKey.create(HybridAquaticRegistryKeys.SEA_MESSAGE, id)).getOrNull()?.value()
         }
     }
 }
