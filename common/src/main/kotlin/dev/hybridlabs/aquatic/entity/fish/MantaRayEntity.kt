@@ -23,7 +23,7 @@ import java.util.function.IntFunction
 
 class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
     HybridAquaticFishEntity(entityType, world,
-        listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.NONE)), OverlayTextureFeature {
+        listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.SHARK)), OverlayTextureFeature {
 
     override fun registerGoals() {
         super.registerGoals()
