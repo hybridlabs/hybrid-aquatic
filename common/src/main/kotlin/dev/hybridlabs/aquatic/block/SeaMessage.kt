@@ -4,8 +4,13 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.core.RegistryAccess
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.network.Filterable
+import net.minecraft.server.network.FilteredText
+import net.minecraft.world.item.component.WrittenBookContent
 import java.util.*
+import kotlin.jvm.optionals.getOrDefault
 
 /**
  * Represents a message inside a Message in a Bottle.
@@ -37,6 +42,26 @@ data class SeaMessage(
     fun getId(registryManager: RegistryAccess): ResourceLocation? {
         val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
         return registry.getKey(this)
+    }
+
+    /**
+     * Turn the message content into WrittenBookContent that can be consumed by
+     * BookViewScreen.BookAccess
+     */
+    fun getWrittenBookContent(): WrittenBookContent {
+        return WrittenBookContent(
+            Filterable.from(
+                FilteredText.passThrough(
+                    if (hasTitle)
+                        Component.translatable("$translationKey.title").toString()
+                    else ""
+                )
+            ),
+            author.getOrDefault(""),
+            0,
+            listOf(Filterable.passThrough(Component.translatable(translationKey))),
+            true
+        )
     }
 
     companion object {
