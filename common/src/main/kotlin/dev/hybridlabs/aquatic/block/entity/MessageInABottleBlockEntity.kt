@@ -1,15 +1,11 @@
 package dev.hybridlabs.aquatic.block.entity
 
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys.SEA_MESSAGE
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
-import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
@@ -35,31 +31,18 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
     /**
      * The message item inside this bottle.
      */
-    var messageItemStack: ItemStack = ItemStack.EMPTY
+    var messageId: ResourceLocation? = null
 
     override fun saveAdditional(nbt: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(nbt, registries)
-        nbt.putString("id", HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE.id.toString())
         nbt.putString(VARIANT_KEY, variant.id)
-        if (!messageItemStack.isEmpty && this.hasLevel()) {
-            nbt.putString(
-                MESSAGE_KEY,
-                SeaMessageBookItem.getSeaMessage(messageItemStack, registries)?.getId(this.level!!.registryAccess())
-                    .toString()
-            )
-        }
+        nbt.putString(MESSAGE_KEY, messageId.toString())
     }
 
     override fun loadAdditional(nbt: CompoundTag, registries: HolderLookup.Provider) {
         super.loadAdditional(nbt, registries)
         variant = MessageInABottleBlock.Variant.byId(nbt.getString(VARIANT_KEY))
-        val messageId = ResourceLocation.parse(nbt.getString(MESSAGE_KEY))
-        if (messageId != null) {
-            registries.lookupOrThrow(SEA_MESSAGE).get(ResourceKey.create(SEA_MESSAGE, messageId)).ifPresent { message ->
-                if (this.hasLevel())
-                    messageItemStack = SeaMessageBookItem.createItemStack(message.value(), this.level!!.registryAccess())
-            }
-        }
+        messageId = ResourceLocation.tryParse(nbt.getString(MESSAGE_KEY))
     }
 
     private fun <E> predicate(
@@ -86,7 +69,7 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
     }
 
     override fun getUpdateTag(registries: HolderLookup.Provider): CompoundTag {
-        return saveWithoutMetadata(registries)
+        return saveWithId(registries)
     }
 
     override fun getUpdatePacket(): ClientboundBlockEntityDataPacket {

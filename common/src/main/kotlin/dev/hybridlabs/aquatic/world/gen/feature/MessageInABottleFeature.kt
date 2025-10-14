@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.world.gen.feature
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.core.Direction
 import net.minecraft.world.level.block.Block
@@ -52,9 +51,7 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
             val registryManager = world.registryAccess()
             val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
             registry.getRandom(random).ifPresent { messageEntry ->
-                val message = messageEntry.value()
-                val stack = SeaMessageBookItem.createItemStack(message, registryManager)
-                blockEntity.messageItemStack = stack
+                blockEntity.messageId = messageEntry.key().location()
             }
         } else {
             return false

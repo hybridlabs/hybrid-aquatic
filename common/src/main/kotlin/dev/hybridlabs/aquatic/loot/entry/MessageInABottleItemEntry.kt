@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.core.component.DataComponents
 import net.minecraft.nbt.CompoundTag
@@ -35,23 +34,18 @@ class MessageInABottleItemEntry(
         val registryManager = world.registryAccess()
         val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
         registry.getRandom(random).ifPresent { messageEntry ->
-            val message = messageEntry.value()
 
             val stack = ItemStack(HybridAquaticItems.MESSAGE_IN_A_BOTTLE.get())
 
             val stuff = CompoundTag().apply {
                 val variants = MessageInABottleBlock.Variant.entries
                 putString(MessageInABottleBlockEntity.VARIANT_KEY, variants[random.nextInt(variants.size)].id)
-
-                val bookStack = SeaMessageBookItem.createItemStack(message, registryManager)
-                put(MessageInABottleBlockEntity.MESSAGE_KEY, bookStack.save(registryManager, CompoundTag()))
+                putString(MessageInABottleBlockEntity.MESSAGE_KEY, messageEntry.key().location().toString())
             }
             stack.set(DataComponents.CUSTOM_DATA, CustomData.of(stuff))
-
             consumer.accept(stack)
         }
     }
-
 
     companion object {
         val CODEC: MapCodec<MessageInABottleItemEntry> = RecordCodecBuilder.mapCodec {

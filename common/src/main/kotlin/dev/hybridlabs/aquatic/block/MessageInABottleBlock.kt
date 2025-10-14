@@ -4,7 +4,6 @@ package dev.hybridlabs.aquatic.block
 
 import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -77,11 +76,10 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
                 val registryManager = world.registryAccess()
                 val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
                 val messageKey = registry.getRandom(world.random).getOrNull()?.key() ?: return
-                val message = registry.get(messageKey) ?: return
 
                 // get block entity
                 val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity ?: return
-                blockEntity.messageItemStack = SeaMessageBookItem.createItemStack(message, registryManager)
+                blockEntity.messageId = messageKey.location()
             }
         }
     }

@@ -11,8 +11,6 @@
         "SpawnGroupMixin"
     ],
     "client": [
-        "client.BookScreenMixin",
-        "client.ClientPlayNetworkHandlerMixin",
         "client.FishingBobberEntityClientMixin",
         "client.FishingBobberEntityRendererMixin",
         "client.FogRendererMixin",

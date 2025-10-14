@@ -54,7 +54,7 @@
                   "ops": [
                     {
                       "op": "replace",
-                      "source": "message.tag.sea_message",
+                      "source": "message",
                       "target": "sea_message"
                     }
                   ],

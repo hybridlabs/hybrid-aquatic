@@ -53,7 +53,7 @@ data class SeaMessage(
             Filterable.from(
                 FilteredText.passThrough(
                     if (hasTitle)
-                        Component.translatable("$translationKey.title").toString()
+                        Component.translatable("$translationKey.title").getString(32)
                     else ""
                 )
             ),

@@ -250,7 +250,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(HybridAquaticItems.SEA_MESSAGE_BOOK.get()).apply(
                             CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                .copy("$MESSAGE_KEY.tag.$SEA_MESSAGE_KEY", SEA_MESSAGE_KEY)
+                                .copy(MESSAGE_KEY, SEA_MESSAGE_KEY)
                         )
                     )
                 ).build()
