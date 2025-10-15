@@ -9,10 +9,10 @@ import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.core.Holder
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.alchemy.Potion
 import net.minecraft.world.item.alchemy.Potions
-import net.minecraft.world.level.ItemLike
 import java.util.function.Supplier
 
 object HybridAquaticPotions {
@@ -89,19 +89,21 @@ object HybridAquaticPotions {
         return CommonClass.POTIONS.register(id, potion)
     }
 
-    data class PotionRecipe(val inputPotion: Holder<Potion>, val addition: ItemLike, val outputPotion: Holder<Potion>)
+    data class PotionRecipe(val inputPotion: Holder<Potion>, val addition: Item, val outputPotion: Holder<Potion>)
 
-    val recipes = listOf(
-        PotionRecipe(Potions.AWKWARD, Items.INK_SAC, BLINDNESS_POTION.asHolder()),
-        PotionRecipe(Potions.AWKWARD, HybridAquaticItems.SULFUR.get(), CORROSION_POTION.asHolder()),
-        PotionRecipe(Potions.AWKWARD, HybridAquaticItems.SEA_URCHIN_SPINE.get(), THORNS_POTION.asHolder()),
-        PotionRecipe(Potions.AWKWARD, Items.KELP, BUOYANCY_POTION.asHolder()),
-        PotionRecipe(Potions.AWKWARD, HybridAquaticItems.MAHI.get(), SWIMMING_POTION.asHolder()),
-        PotionRecipe(Potions.AWKWARD, HybridAquaticItems.SHARK_TOOTH.get(), BLEEDING_POTION.asHolder()),
-        PotionRecipe(Potions.AWKWARD, HybridAquaticItems.BLACK_PEARL.get(), MAJOR_LUCK_POTION.asHolder()),
-        PotionRecipe(Potions.AWKWARD, HybridAquaticItems.PEARL.get(), MINOR_LUCK_POTION.asHolder()),
-        PotionRecipe(Potions.AWKWARD, HybridAquaticItems.ANGLERFISH.get(), THALASSOPHOBIA_POTION.asHolder()),
-        PotionRecipe(Potions.AWKWARD, HybridAquaticItems.BARRELEYE.get(), CLARITY_POTION.asHolder()),
-        PotionRecipe(Potions.AWKWARD, Items.GLOW_INK_SAC, GLOWING_POTION.asHolder())
-    )
+    val recipes = Supplier {
+        listOf(
+            PotionRecipe(Potions.AWKWARD, Items.INK_SAC, BLINDNESS_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.SULFUR.get(), CORROSION_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.SEA_URCHIN_SPINE.get(), THORNS_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, Items.KELP, BUOYANCY_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.MAHI.get(), SWIMMING_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.SHARK_TOOTH.get(), BLEEDING_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.BLACK_PEARL.get(), MAJOR_LUCK_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.PEARL.get(), MINOR_LUCK_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.ANGLERFISH.get(), THALASSOPHOBIA_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.BARRELEYE.get(), CLARITY_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, Items.GLOW_INK_SAC, GLOWING_POTION.asHolder())
+        )
+    }
 }
