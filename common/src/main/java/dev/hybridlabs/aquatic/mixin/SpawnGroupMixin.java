@@ -35,7 +35,7 @@ public class SpawnGroupMixin {
     private static void injectEnum(CallbackInfo ci) {
         int vanillaSpawnGroupsLength = $VALUES.length;
         for (MobCategory category : $VALUES) {
-            HybridAquaticSpawnGroup.BY_NAME.put(category.name().toLowerCase(), category);
+            HybridAquaticSpawnGroup.BY_NAME.put(category.name(), category);
         }
         HybridAquaticSpawnGroup[] haSpawnGroups = HybridAquaticSpawnGroup.values();
         $VALUES = Arrays.copyOf($VALUES, vanillaSpawnGroupsLength + haSpawnGroups.length);
@@ -46,7 +46,7 @@ public class SpawnGroupMixin {
             haSpawnGroup.spawnGroup = $VALUES[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos,
                     haSpawnGroup);
 
-            HybridAquaticSpawnGroup.BY_NAME.put(haSpawnGroup.name().toLowerCase(), haSpawnGroup.spawnGroup);
+            HybridAquaticSpawnGroup.BY_NAME.put(haSpawnGroup.name(), haSpawnGroup.spawnGroup);
         }
     }
 }

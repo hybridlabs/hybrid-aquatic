@@ -123,7 +123,7 @@ object HybridAquaticForge {
         // Extend the MobCategory enum with our spawn groups
         HybridAquaticSpawnGroup.entries.toTypedArray().forEach {
             MobCategory.create(
-                it.name.uppercase(),
+                it.name,
                 it.name,
                 it.spawnCap,
                 it.peaceful,
