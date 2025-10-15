@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
+import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
@@ -223,7 +224,7 @@ open class HybridAquaticCephalopodEntity(
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.directEntity
-        if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticCephalopodEntity) {
+        if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticCephalopodEntity && attacker !is HybridAquaticMammalEntity) {
             super.dropFromLootTable(source, causedByPlayer)
         }
     }
