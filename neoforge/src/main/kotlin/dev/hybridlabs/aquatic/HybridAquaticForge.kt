@@ -36,11 +36,12 @@ import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
+import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.Mod
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
 import net.neoforged.neoforge.registries.DataPackRegistryEvent
 import thedarkcolour.kotlinforforge.neoforge.forge.FORGE_BUS
@@ -71,7 +72,6 @@ object HybridAquaticForge {
         HybridAquaticPlatformItems
         HybridAquaticItemGroups
 
-        HybridAquaticPotions
 
         HybridAquaticFeatures
         HybridAquaticFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
@@ -83,11 +83,10 @@ object HybridAquaticForge {
         LootTableModifications
 
         MOD_BUS.addListener(::loadSeaMessages)
-        MOD_BUS.addListener(::registerPotionsRecipes)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerWandererTrades)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
-        //registerStructureModifiers()
-
+        FORGE_BUS.addListener(::registerBrewingRecipes)
+        HybridAquaticPotions
         runForDist(
             clientTarget = {
                 MOD_BUS.addListener(::onClientSetup)
@@ -203,9 +202,15 @@ object HybridAquaticForge {
         logger.info("Server starting...")
     }
 
-    private fun registerPotionsRecipes(event: FMLCommonSetupEvent) {
-        event.enqueueWork {
-            //HybridAquaticPotions.registerPotionRecipes()
+    @SubscribeEvent
+    fun registerBrewingRecipes(event: RegisterBrewingRecipesEvent) {
+        for (recipe in HybridAquaticPotions.recipes.get()) {
+            event.builder.addMix(
+                recipe.inputPotion,
+                recipe.addition,
+                recipe.outputPotion
+            )
         }
     }
+
 }

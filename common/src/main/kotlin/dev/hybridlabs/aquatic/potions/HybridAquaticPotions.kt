@@ -4,10 +4,15 @@ package dev.hybridlabs.aquatic.potions
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
+import net.minecraft.core.Holder
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.Items
 import net.minecraft.world.item.alchemy.Potion
+import net.minecraft.world.item.alchemy.Potions
 import java.util.function.Supplier
 
 object HybridAquaticPotions {
@@ -52,8 +57,7 @@ object HybridAquaticPotions {
         "swimming"
     ) {
         Potion(
-            MobEffectInstance(MobEffects.DOLPHINS_GRACE, 1200, 0),
-            MobEffectInstance(MobEffects.HUNGER, 600, 0)
+            MobEffectInstance(MobEffects.DOLPHINS_GRACE, 1200, 0), MobEffectInstance(MobEffects.HUNGER, 600, 0)
         )
     }
 
@@ -85,41 +89,21 @@ object HybridAquaticPotions {
         return CommonClass.POTIONS.register(id, potion)
     }
 
-    /*
-    fun registerPotionRecipes(potionBrewing: PotionBrewing) {
-        PotionBrewing.addMix(
-            Potions.AWKWARD, Items.INK_SAC, HybridAquaticPotions.BLINDNESS_POTION.get()
-        )
-        PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.SULFUR.get(), HybridAquaticPotions.CORROSION_POTION.get()
-        )
-        PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.SEA_URCHIN_SPINE.get(), HybridAquaticPotions.THORNS_POTION.get()
-        )
-        PotionBrewing.addMix(
-            Potions.AWKWARD, Items.KELP, HybridAquaticPotions.BUOYANCY_POTION.get()
-        )
-        PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.MAHI.get(), HybridAquaticPotions.SWIMMING_POTION.get()
-        )
-        PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.SHARK_TOOTH.get(), HybridAquaticPotions.BLEEDING_POTION.get()
-        )
-        PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.BLACK_PEARL.get(), HybridAquaticPotions.MAJOR_LUCK_POTION.get()
-        )
-        PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.PEARL.get(), HybridAquaticPotions.MINOR_LUCK_POTION.get()
-        )
-        PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.ANGLERFISH.get(), HybridAquaticPotions.THALASSOPHOBIA_POTION.get()
-        )
-        PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.BARRELEYE.get(), HybridAquaticPotions.CLARITY_POTION.get()
-        )
-        PotionBrewing.addMix(
-            Potions.AWKWARD, Items.GLOW_INK_SAC, HybridAquaticPotions.GLOWING_POTION.get()
+    data class PotionRecipe(val inputPotion: Holder<Potion>, val addition: Item, val outputPotion: Holder<Potion>)
+
+    val recipes = Supplier {
+        listOf(
+            PotionRecipe(Potions.AWKWARD, Items.INK_SAC, BLINDNESS_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.SULFUR.get(), CORROSION_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.SEA_URCHIN_SPINE.get(), THORNS_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, Items.KELP, BUOYANCY_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.MAHI.get(), SWIMMING_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.SHARK_TOOTH.get(), BLEEDING_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.BLACK_PEARL.get(), MAJOR_LUCK_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.PEARL.get(), MINOR_LUCK_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.ANGLERFISH.get(), THALASSOPHOBIA_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, HybridAquaticItems.BARRELEYE.get(), CLARITY_POTION.asHolder()),
+            PotionRecipe(Potions.AWKWARD, Items.GLOW_INK_SAC, GLOWING_POTION.asHolder())
         )
     }
-     */
 }
