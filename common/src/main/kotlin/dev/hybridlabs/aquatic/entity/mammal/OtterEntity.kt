@@ -231,7 +231,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                 .add(Attributes.FOLLOW_RANGE, 16.0)
         }
 
-        const val MAX_HUNGER = 2400
+        const val MAX_HUNGER = 4800
         const val HUNGER_KEY = "Hunger"
 
         val FLOAT_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.float_idle")
