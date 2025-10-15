@@ -86,6 +86,10 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .add(HybridAquaticItems.SEASHELL_HOE.get())
             .add(HybridAquaticItems.CORAL_HOE.get())
 
+        getOrCreateTagBuilder(ItemTags.MEAT)
+            .forceAddTag(HybridAquaticItemTags.RAW_FISH)
+            .forceAddTag(HybridAquaticItemTags.COOKED_FISH)
+
         //#endregion
 
         listOf(
