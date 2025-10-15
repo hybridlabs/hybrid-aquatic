@@ -40,7 +40,7 @@ class KarcinogenEntity(entityType: EntityType<out HybridAquaticMinionEntity>, wo
     }
 
     override fun isAffectedByFluids(): Boolean {
-        return !onGround()
+        return false
     }
 
     override fun isPushedByFluid(): Boolean {
