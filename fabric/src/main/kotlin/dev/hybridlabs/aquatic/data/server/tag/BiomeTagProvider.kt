@@ -66,6 +66,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS)
             .add(Biomes.DEEP_OCEAN)
+            .addOptional(ResourceLocation("alexscaves", "abyssal_chasm"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS)
             .add(Biomes.OCEAN)
@@ -78,6 +79,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS)
             .add(Biomes.DEEP_LUKEWARM_OCEAN)
+            .addOptional(ResourceLocation("alexscaves", "abyssal_chasm"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS)
             .add(Biomes.LUKEWARM_OCEAN)
