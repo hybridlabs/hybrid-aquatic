@@ -53,8 +53,8 @@ public abstract class FishingBobberEntityRendererMixin {
                     "render(Lnet/minecraft/world/entity/projectile/FishingHook;"
                             + "FFLcom/mojang/blaze3d/vertex"
                             + "/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
-            at = @At(value = "HEAD"),
-            remap = false)
+            at = @At(value = "HEAD")
+    )
     private void objectGetter(
             FishingHook fishingBobberEntity,
             float f,
@@ -78,8 +78,8 @@ public abstract class FishingBobberEntityRendererMixin {
                                     "Lnet/minecraft/client/renderer/MultiBufferSource;getBuffer"
                                             + "(Lnet/minecraft/client/renderer"
                                             + "/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;",
-                            ordinal = 0),
-            remap = false)
+                            ordinal = 0)
+    )
     private VertexConsumer changeRenderType(MultiBufferSource instance, RenderType renderLayer) {
         RenderType currentRenderType = renderLayer;
 

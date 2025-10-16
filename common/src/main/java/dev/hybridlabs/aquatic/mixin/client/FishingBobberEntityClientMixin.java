@@ -19,7 +19,7 @@ public abstract class FishingBobberEntityClientMixin {
 
     // Sends a packet that asks server to send custom lure item of fishing bobber after a spawning packet
     @Inject(method = "recreateFromPacket", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity" +
-            "/projectile/FishingHook;getPlayerOwner()Lnet/minecraft/world/entity/player/Player;"), remap = false
+            "/projectile/FishingHook;getPlayerOwner()Lnet/minecraft/world/entity/player/Player;")
     )
     private void sendHook(ClientboundAddEntityPacket packet, CallbackInfo ci) {
         Services.PLATFORM.sendHookToServer(packet.getId(), hybrid_aquatic$DUMMY);

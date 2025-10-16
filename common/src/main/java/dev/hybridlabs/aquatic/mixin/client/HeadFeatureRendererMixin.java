@@ -26,7 +26,7 @@ public abstract class HeadFeatureRendererMixin<T extends LivingEntity> {
 
             at = @At(value = "INVOKE", target =
                     "Lnet/minecraft/world/entity/WalkAnimationState;position(F)F",
-                     ordinal = 0, shift = At.Shift.AFTER), remap=false)
+                     ordinal = 0, shift = At.Shift.AFTER))
 
     private void translatePlushieUp(PoseStack matrices, MultiBufferSource vertices, int light, T entity,
                                     float limbAngle, float limbDistance, float tickDelta, float animationProgress,

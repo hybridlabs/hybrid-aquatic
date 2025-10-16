@@ -20,7 +20,7 @@ public abstract class SkullBlockEntityTextureMixin {
      * looking up the texture in SKIN_BY_TYPE.
      */
 
-    @Inject(method = "lambda$static$0(Ljava/util/HashMap;)V", at = @At("TAIL"),remap = false)
+    @Inject(method = "lambda$static$0(Ljava/util/HashMap;)V", at = @At("TAIL"))
     private static void injectTextures(HashMap<SkullBlock.Type, ResourceLocation> map, CallbackInfo info) {
         // inject plushie variants
         EnumEntries<PlushieBlock.Variant> variants = PlushieBlock.Variant.getEntries();
