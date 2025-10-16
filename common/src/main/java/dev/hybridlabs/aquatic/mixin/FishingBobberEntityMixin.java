@@ -52,14 +52,14 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
         super(entityType, level);
     }
 
-    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"), remap = false)
+    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void readCustomDataFromNbt(CompoundTag nbt, CallbackInfo ci) {
         hybrid_aquatic$setLureItem(
                 ItemStack.parseOptional(
                         this.level().registryAccess(), nbt.getCompound("lureItem")));
     }
 
-    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"), remap = false)
+    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
     private void writeCustomDataToNbt(CompoundTag nbt, CallbackInfo ci) {
         CompoundTag itemStack = new CompoundTag();
         hybrid_aquatic$getLureItem().save(this.level().registryAccess(), itemStack);
@@ -85,7 +85,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
                                             + "(Lnet"
                                             + "/minecraft/util/RandomSource;II)I",
                             ordinal = 2,
-                            shift = At.Shift.AFTER),remap = false)
+                            shift = At.Shift.AFTER))
     private void reduceCooldownTime(BlockPos pos, CallbackInfo ci) {
         Item lureItem = this.lureItemStack.getItem();
         if (lureItem.equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK().get())
@@ -103,7 +103,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
             at =
                     @At(
                             value = "INVOKE",
-                            target = "Lnet/minecraft/world/entity/player" + "/Player;getLuck()F"),remap = false)
+                            target = "Lnet/minecraft/world/entity/player" + "/Player;getLuck()F"))
     private float increaseLuck(Player player, Operation<Float> original) {
         if (lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK().get()))
             return player.getLuck() + 27;
@@ -130,7 +130,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
                                             + "/level/storage/loot/LootTable;getRandomItems"
                                             + "(Lnet/minecraft/world/level"
                                             + "/storage/loot/LootParams;)"
-                                            + "Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"),remap = false)
+                                            + "Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"))
     private LootTable onHookReelEntity(LootTable instance, LootParams parameters) {
         if (!lureItemStack.isEmpty()) {
             if (lureItemStack.is(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK().get())) {
@@ -184,7 +184,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
                             value = "INVOKE",
                             target =
                                     "Lnet/minecraft/world/entity/projectile"
-                                            + "/FishingHook;discard()V"),remap = false)
+                                            + "/FishingHook;discard()V"))
     private void retrieveLureOnSuccess(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
         retrieveLure(getPlayerOwner());
     }
@@ -197,7 +197,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
                             value = "INVOKE",
                             target =
                                     "Lnet/minecraft/world/entity/projectile"
-                                            + "/FishingHook;discard()V"),remap = false)
+                                            + "/FishingHook;discard()V"))
     private void retrieveLureIfInvalid(Player player, CallbackInfoReturnable<Boolean> cir) {
         retrieveLure(player);
     }

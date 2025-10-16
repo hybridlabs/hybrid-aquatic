@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public class FogRendererMixin {
 
     @Inject(method = "setupFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;" +
-            "setShaderFogStart(F)V"), locals = LocalCapture.CAPTURE_FAILHARD, remap = false)
+            "setShaderFogStart(F)V"), locals = LocalCapture.CAPTURE_FAILHARD)
     private static void hybrid$renderFog(Camera camera, FogRenderer.FogMode fogType, float viewDistance,
                                          boolean thickFog, float tickDelta, CallbackInfo ci,
                                          FogType cameraSubmersionType, Entity entity, FogRenderer.FogData fogData) {

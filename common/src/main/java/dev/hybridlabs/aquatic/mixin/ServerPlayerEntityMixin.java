@@ -20,7 +20,7 @@ public class ServerPlayerEntityMixin {
     /**
      * Allows usage of Sea Message books to open a book screen.
      */
-    @Inject(method = "openItemGui", at = @At("TAIL"), remap = false)
+    @Inject(method = "openItemGui", at = @At("TAIL"))
     private void onUseBook(ItemStack book, InteractionHand hand, CallbackInfo ci) {
         if (book.is(HybridAquaticItems.INSTANCE.getSEA_MESSAGE_BOOK().get())) {
             this.connection.send(new ClientboundOpenBookPacket(hand));

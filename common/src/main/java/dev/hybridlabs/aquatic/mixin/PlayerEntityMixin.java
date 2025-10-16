@@ -5,14 +5,11 @@ import com.google.common.collect.ImmutableList;
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects;
-import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import dev.hybridlabs.aquatic.item.HybridAquaticToolMaterials;
 
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -21,7 +18,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
@@ -51,14 +47,14 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
     @Unique
     private boolean isWearingDivingBoots;
 
-    @Inject(method = "isAffectedByFluids", at = @At("HEAD"), cancellable = true,remap = false)
+    @Inject(method = "isAffectedByFluids", at = @At("HEAD"), cancellable = true)
     private void overrideShouldSwimInFluids(CallbackInfoReturnable<Boolean> ci) {
         if (isWearingDivingBoots && !isSwimming() && isUnderWater()) {
             ci.setReturnValue(false);
         }
     }
 
-    @Inject(method = "tick", at = @At("TAIL"),remap = false)
+    @Inject(method = "tick", at = @At("TAIL"))
     private void updateEquipment(CallbackInfo ci) {
         // Gives Water Breathing/Clarity if player has Diving Helmet equipped
         updateDivingHelmet();

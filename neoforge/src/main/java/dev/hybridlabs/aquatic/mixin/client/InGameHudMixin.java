@@ -26,7 +26,7 @@ public class InGameHudMixin {
     private static final ResourceLocation DIVING_HELMET_OVERLAY =
             CommonClass.locate("textures/misc/diving_helmet_overlay.png");
 
-    @Inject(method = "render", at = @At("HEAD"),remap = false)
+    @Inject(method = "render", at = @At("HEAD"))
     private void onRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         Minecraft client = Minecraft.getInstance();
         Player player = client.player;
