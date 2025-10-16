@@ -564,14 +564,14 @@ object HybridAquaticEntityTypes {
     val KARCINOGEN = registerMinion(
         "karcinogen",
         ::KarcinogenEntity,
-        EntityDimensions.fixed(0.75f, 0.6f),
+        EntityDimensions.fixed(0.75f, 0.75f),
         KarcinogenEntity::createMobAttributes
     )
 
     val KARCINOMA = registerMinion(
         "karcinoma",
         ::KarcinomaEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
+        EntityDimensions.fixed(0.75f, 0.75f),
         KarcinomaEntity::createMobAttributes
     )
 
