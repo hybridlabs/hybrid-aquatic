@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
@@ -192,8 +193,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     //#endregion
 
-    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
-        return null
+    override fun getBreedOffspring(level: ServerLevel, otter: AgeableMob): OtterEntity? {
+        return HybridAquaticEntityTypes.OTTER.get().create(level)
     }
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
