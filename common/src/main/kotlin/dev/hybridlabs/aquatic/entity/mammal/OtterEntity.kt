@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
@@ -39,6 +40,9 @@ import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.RawAnimation
 import java.util.*
 import java.util.function.IntFunction
 
@@ -186,8 +190,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     //#endregion
 
-    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
-        return null
+    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): OtterEntity? {
+        return HybridAquaticEntityTypes.OTTER.get().create(p0)
     }
 
     override fun getWaterline(): Float {
