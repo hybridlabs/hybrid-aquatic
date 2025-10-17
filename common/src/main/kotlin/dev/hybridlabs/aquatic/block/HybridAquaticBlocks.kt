@@ -22,7 +22,7 @@ object HybridAquaticBlocks {
     ) {
         AnemoneBlock(
             Properties.of().mapColor(MapColor.TERRACOTTA_PINK).randomTicks().strength(0.4f).noOcclusion()
-                .pushReaction(PushReaction.DESTROY).sound(SoundType.SLIME_BLOCK)
+                .pushReaction(PushReaction.DESTROY).sound(SoundType.SLIME_BLOCK).noTerrainParticles()
         )
     }
 
@@ -31,7 +31,7 @@ object HybridAquaticBlocks {
     ) {
         GiantGreenAnemoneBlock(
             Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).randomTicks().strength(0.4f).noOcclusion()
-                .pushReaction(PushReaction.DESTROY).sound(SoundType.SLIME_BLOCK)
+                .pushReaction(PushReaction.DESTROY).sound(SoundType.SLIME_BLOCK).noTerrainParticles()
         )
     }
 
@@ -40,7 +40,7 @@ object HybridAquaticBlocks {
     ) {
         StrawberryAnemoneBlock(
             Properties.of().mapColor(MapColor.COLOR_RED).randomTicks().strength(0.4f).noOcclusion()
-                .pushReaction(PushReaction.DESTROY).sound(SoundType.SLIME_BLOCK)
+                .pushReaction(PushReaction.DESTROY).sound(SoundType.SLIME_BLOCK).noTerrainParticles()
         )
     }
 
@@ -52,14 +52,14 @@ object HybridAquaticBlocks {
         )
     }
 
-    val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL) }
-    val BULL_SHARK_PLUSHIE = register("bull_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL) }
-    val FRILLED_SHARK_PLUSHIE = register("frilled_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK, Blocks.GRAY_WOOL) }
-    val GREAT_WHITE_SHARK_PLUSHIE = register("great_white_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.GREAT_WHITE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
-    val HAMMERHEAD_SHARK_PLUSHIE = register("hammerhead_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.HAMMERHEAD_SHARK, Blocks.LIGHT_GRAY_WOOL) }
-    val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK, Blocks.LIGHT_BLUE_WOOL) }
-    val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL) }
-    val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK) }
+    val BULL_SHARK_PLUSHIE = register("bull_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BULL_SHARK) }
+    val FRILLED_SHARK_PLUSHIE = register("frilled_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK) }
+    val GREAT_WHITE_SHARK_PLUSHIE = register("great_white_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.GREAT_WHITE_SHARK) }
+    val HAMMERHEAD_SHARK_PLUSHIE = register("hammerhead_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.HAMMERHEAD_SHARK) }
+    val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK) }
+    val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK) }
+    val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK) }
 
     val PEARL_BLOCK = register("pearl_block") { Block(Properties.copy(Blocks.QUARTZ_BLOCK)) }
     val BLACK_PEARL_BLOCK = register("black_pearl_block") { Block(Properties.copy(Blocks.QUARTZ_BLOCK)) }
@@ -383,12 +383,13 @@ object HybridAquaticBlocks {
             )
         }
 
-    private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block): PlushieBlock {
+    private fun createPlushieBlock(variant: PlushieBlock.Variant): PlushieBlock {
         return PlushieBlock(
             variant,
             particleBlock,
             Properties.of().instabreak().pushReaction(PushReaction.DESTROY).sound(SoundType.WOOL)
                 .instrument(NoteBlockInstrument.CUSTOM_HEAD)
+                .noTerrainParticles()
         )
     }
 
