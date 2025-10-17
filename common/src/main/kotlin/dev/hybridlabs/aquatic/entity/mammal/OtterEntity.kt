@@ -193,8 +193,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
 
     //#endregion
 
-    override fun getBreedOffspring(level: ServerLevel, otter: AgeableMob): OtterEntity? {
-        return HybridAquaticEntityTypes.OTTER.get().create(level)
+    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): OtterEntity? {
+        return HybridAquaticEntityTypes.OTTER.get().create(p0)
     }
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {

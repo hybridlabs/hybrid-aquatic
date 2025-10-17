@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
+@Suppress("unused", "DEPRECATION")
 class GoldfishEntity(entityType: EntityType<out GoldfishEntity>, world: Level) :
     HybridAquaticFishEntity(entityType, world,
         listOf(

@@ -14,12 +14,14 @@ import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.shapes.Shapes
 
+@Suppress("unused", "DEPRECATION")
 class SargassumPlantBlock(settings: Properties) :
     GrowingPlantBodyBlock(settings, Direction.UP, Shapes.block(), true), LiquidBlockContainer {
     override fun getHeadBlock(): GrowingPlantHeadBlock {
         return HybridAquaticBlocks.SARGASSUM.get() as GrowingPlantHeadBlock
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getFluidState(state: BlockState): FluidState {
         return Fluids.WATER.getSource(false)
     }
