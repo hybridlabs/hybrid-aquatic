@@ -87,20 +87,20 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
             // simple cubes
             setOf(
-                HybridAquaticBlocks.HYBRID_CRATE.get(),
-                HybridAquaticBlocks.OAK_CRATE.get(),
-                HybridAquaticBlocks.SPRUCE_CRATE.get(),
-                HybridAquaticBlocks.BIRCH_CRATE.get(),
-                HybridAquaticBlocks.DARK_OAK_CRATE.get(),
-                HybridAquaticBlocks.JUNGLE_CRATE.get(),
-                HybridAquaticBlocks.ACACIA_CRATE.get(),
-                HybridAquaticBlocks.MANGROVE_CRATE.get(),
                 HybridAquaticBlocks.PEARL_BLOCK.get(),
                 HybridAquaticBlocks.BLACK_PEARL_BLOCK.get(),
             ).forEach(generator::createTrivialCube)
 
             // crates
             setOf(
+                HybridAquaticBlocks.HYBRID_CRATE.get(),
+                HybridAquaticBlocks.SPRUCE_CRATE.get(),
+                HybridAquaticBlocks.BIRCH_CRATE.get(),
+                HybridAquaticBlocks.DARK_OAK_CRATE.get(),
+                HybridAquaticBlocks.JUNGLE_CRATE.get(),
+                HybridAquaticBlocks.ACACIA_CRATE.get(),
+                HybridAquaticBlocks.MANGROVE_CRATE.get(),
+                HybridAquaticBlocks.OAK_CRATE.get(),
                 HybridAquaticBlocks.CHERRY_CRATE.get(),
             ).forEach { block ->
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP)
