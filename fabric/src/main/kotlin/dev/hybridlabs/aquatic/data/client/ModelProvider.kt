@@ -95,7 +95,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.JUNGLE_CRATE.get(),
                 HybridAquaticBlocks.ACACIA_CRATE.get(),
                 HybridAquaticBlocks.MANGROVE_CRATE.get(),
-                HybridAquaticBlocks.CHERRY_CRATE.get(),
                 HybridAquaticBlocks.PEARL_BLOCK.get(),
                 HybridAquaticBlocks.BLACK_PEARL_BLOCK.get(),
             ).forEach(generator::createTrivialCube)
