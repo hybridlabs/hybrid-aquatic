@@ -140,6 +140,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.TIGER_SHARK.get(),
                 HybridAquaticEntityTypes.WHALE_SHARK.get(),
                 HybridAquaticEntityTypes.LANTERN_SHARK.get(),
+                HybridAquaticEntityTypes.HOUND_SHARK.get(),
             )
 
         // critters
