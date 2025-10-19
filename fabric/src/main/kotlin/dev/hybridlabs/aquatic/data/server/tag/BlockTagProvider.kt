@@ -122,6 +122,9 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.JUNGLE_CRATE.get())
             .add(HybridAquaticBlocks.ACACIA_CRATE.get())
             .add(HybridAquaticBlocks.CHERRY_CRATE.get())
+            .add(HybridAquaticBlocks.BAMBOO_CRATE.get())
+            .add(HybridAquaticBlocks.WARPED_CRATE.get())
+            .add(HybridAquaticBlocks.CRIMSON_CRATE.get())
 
         getOrCreateTagBuilder(BlockTags.LOGS)
             .add(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get())

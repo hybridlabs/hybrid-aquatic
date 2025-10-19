@@ -102,6 +102,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.MANGROVE_CRATE.get(),
                 HybridAquaticBlocks.OAK_CRATE.get(),
                 HybridAquaticBlocks.CHERRY_CRATE.get(),
+                HybridAquaticBlocks.BAMBOO_CRATE.get(),
+                HybridAquaticBlocks.WARPED_CRATE.get(),
+                HybridAquaticBlocks.CRIMSON_CRATE.get(),
             ).forEach { block ->
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP)
             }
