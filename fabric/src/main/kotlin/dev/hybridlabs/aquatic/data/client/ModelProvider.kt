@@ -16,6 +16,7 @@ import net.minecraft.data.models.ItemModelGenerators
 import net.minecraft.data.models.model.ModelLocationUtils
 import net.minecraft.data.models.model.ModelTemplates
 import net.minecraft.data.models.model.TextureMapping
+import net.minecraft.data.models.model.TexturedModel
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.SpawnEggItem
@@ -98,6 +99,13 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.PEARL_BLOCK.get(),
                 HybridAquaticBlocks.BLACK_PEARL_BLOCK.get(),
             ).forEach(generator::createTrivialCube)
+
+            // crates
+            setOf(
+                HybridAquaticBlocks.CHERRY_CRATE.get(),
+            ).forEach { block ->
+                generator.createTrivialBlock(block, TexturedModel.CUBE_TOP)
+            }
 
             // wood
             val driftwoodPool = family(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
