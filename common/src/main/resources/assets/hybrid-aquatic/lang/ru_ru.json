@@ -597,5 +597,14 @@
   "profile.item.hybrid-aquatic.tiger_barb": "The Tiger Barb, a lively, freshwater fish recognized by its bold black stripes over an orange-gold body, often kept in groups in community tanks.",
   "profile.item.hybrid-aquatic.toadfish": "The Toadfish, a small, bottom-dwelling fish with a flattened body and rough skin, commonly found in coastal waters and known for its toxicity.",
   "profile.item.hybrid-aquatic.triggerfish": "The Triggerfish, a brightly colored, reef-dwelling fish known for its strong jaws, sharp teeth, and the ability to lock its dorsal fin in an upright position for defense.",
-  "profile.item.hybrid-aquatic.tuna": "The Tuna, a fast-swimming, large, pelagic fish with a streamlined body and yellow-colored fins, highly valued in commercial and sport fishing."
+  "profile.item.hybrid-aquatic.tuna": "The Tuna, a fast-swimming, large, pelagic fish with a streamlined body and yellow-colored fins, highly valued in commercial and sport fishing.",
+  "block.hybrid-aquatic.barnacle_shorestone": "Barnacle Shorestone",
+  "block.hybrid-aquatic.shorestone": "Shorestone",
+  "enchantment.hybrid-aquatic.live_catch": "Live Catch",
+  "entity.hybrid-aquatic.atolla_jellyfish": "Atolla Jellyfish",
+  "item.hybrid-aquatic.atolla_jellyfish_spawn_egg": "Atolla Jellyfish Spawn Egg",
+  "painting.hybrid-aquatic.test_painting1.author": "Aqua",
+  "painting.hybrid-aquatic.test_painting1.title": "Test Painting",
+  "painting.hybrid-aquatic.test_painting2.author": "Aqua",
+  "painting.hybrid-aquatic.test_painting2.title": "Test Huge Painting"
 }
