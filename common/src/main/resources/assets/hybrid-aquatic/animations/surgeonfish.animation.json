@@ -5,26 +5,26 @@
 			"loop": true,
 			"bones": {
 				"body": {
-					"rotation": ["Math.cos(query.anim_time * 90)*2.5", 0, 0],
-					"position": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
+					"rotation": ["Math.cos(query.anim_time*90)*2.5", 0, 0],
+					"position": [0, "Math.sin(query.anim_time*90)*-0.25", 0]
 				},
 				"pelvic_fin": {
-					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*10"]
+					"rotation": [0, 0, "Math.sin(query.anim_time*90)*10"]
 				},
 				"dorsal_fin": {
-					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*10"]
+					"rotation": [0, 0, "Math.sin(query.anim_time*90)*10"]
 				},
 				"tail": {
-					"rotation": [0, "Math.cos(query.anim_time * 90)*10", 0]
+					"rotation": [0, "Math.cos(query.anim_time*90)*10", 0]
 				},
 				"tail_fin": {
-					"rotation": [0, "Math.sin(query.anim_time * 90)*10", 0]
+					"rotation": [0, "Math.sin(query.anim_time*90)*10", 0]
 				},
 				"right_fin": {
-					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*5"]
+					"rotation": [0, 0, "Math.cos(query.anim_time*90)*5"]
 				},
 				"left_fin": {
-					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*-5"]
+					"rotation": [0, 0, "Math.cos(query.anim_time*90)*-5"]
 				}
 			}
 		},
@@ -33,13 +33,13 @@
 			"bones": {
 				"body": {
 					"rotation": [
-						"Math.cos(query.anim_time*360+60)*5*math.clamp(query.ground_speed*25,0,1)",
-						0,
-						"Math.sin(query.anim_time*360+60)*2.5*math.clamp(query.ground_speed*25,0,1)"
+						"0+math.sin(query.anim_time*90*1-160)*1.5*math.clamp(query.ground_speed*25,0,1)",
+						"0-math.sin(query.anim_time*90*3)*12*math.clamp(query.ground_speed*25,0,1)",
+						"0-math.sin(query.anim_time*90*1.5)*0.5*math.clamp(query.ground_speed*25,0,1)"
 					],
 					"position": [
 						"0+math.sin(query.anim_time*90*3-80)*1*math.clamp(query.ground_speed*25,0,1)",
-						"0+math.sin(query.anim_time*90*1-80)*1.5*math.clamp(query.ground_speed*25,0,1)",
+						"0+math.sin(query.anim_time*90*1-80)*0.75*math.clamp(query.ground_speed*25,0,1)",
 						0
 					]
 				},
