@@ -84,7 +84,7 @@ class BarracudaEntity(entityType: EntityType<out BarracudaEntity>, world: Level)
         super.tick()
 
         if (isSprinting) {
-            attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 1.5
+            attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 0.8
         }
     }
 
