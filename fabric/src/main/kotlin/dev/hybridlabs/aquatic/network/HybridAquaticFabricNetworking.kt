@@ -16,18 +16,16 @@ object HybridAquaticFabricNetworking {
     fun registerNetworking() {
         // Sends lure item to the client back
         ServerPlayNetworking.registerGlobalReceiver(FishingBobberPayload.type) { payload: FishingBobberPayload, context: ServerPlayNetworking.Context ->
-            context.server().execute {
-            }
             val foundEntity = context.player().level().getEntity(payload.id)
-            if (foundEntity != null && foundEntity is FishingHook) {
-                val additionalBobberData = foundEntity as CustomFishingBobberEntityData
+            if (foundEntity == null || foundEntity !is FishingHook) return@registerGlobalReceiver
 
-                if (ServerPlayNetworking.canSend(context.player(), FishingBobberPayload.type))
-                    ServerPlayNetworking.send(
-                        context.player(),
-                        FishingBobberPayload(payload.id, additionalBobberData.`hybrid_aquatic$getLureItem`())
-                    )
-            }
+            val additionalBobberData = foundEntity as CustomFishingBobberEntityData
+
+            if (ServerPlayNetworking.canSend(context.player(), FishingBobberPayload.type))
+                ServerPlayNetworking.send(
+                    context.player(),
+                    FishingBobberPayload(payload.id, additionalBobberData.`hybrid_aquatic$getLureItem`()
+                ))
         }
     }
 }
