@@ -113,35 +113,27 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
     // Whenever we may want to replace entities we use this. This will make sure not to spawn any
     // unwanted entities when we reel in the hook.
     @ModifyReceiver(
-            method = "retrieve",
-            slice =
-                    @Slice(
-                            from =
-                                    @At(
-                                            value = "NEW",
-                                            target =
-                                                    "Lnet/minecraft/world"
-                                                            + "/level/storage/loot/LootParams$Builder;")),
-            at =
-                    @At(
-                            value = "INVOKE",
-                            target =
-                                    "Lnet/minecraft/world"
-                                            + "/level/storage/loot/LootTable;getRandomItems"
-                                            + "(Lnet/minecraft/world/level"
-                                            + "/storage/loot/LootParams;)"
-                                            + "Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"))
+        method = "retrieve",
+        slice = @Slice(
+            from = @At(
+                value = "NEW",
+                target = "Lnet/minecraft/world/level/storage/loot/LootParams$Builder;")
+        ), at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/world/level/storage/loot/LootTable;getRandomItems"
+                     + "(Lnet/minecraft/world/level/storage/loot/LootParams;)"
+                     + "Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"
+    ))
     private LootTable onHookReelEntity(LootTable instance, LootParams parameters) {
         if (!lureItemStack.isEmpty()) {
             if (lureItemStack.is(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK().get())) {
                 var karkinosType = HybridAquaticEntityTypes.INSTANCE.getKARKINOS().get();
-                createAndLaunchEntityAtPlayer(karkinosType);
+                hybrid_aquatic$createAndLaunchEntityAtPlayer(karkinosType);
 
                 instance = LootTable.EMPTY;
             } else if (lureItemStack.is(
                     HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK().get())) {
                 var creeperType = EntityType.CREEPER;
-                createAndLaunchEntityAtPlayer(creeperType);
+                hybrid_aquatic$createAndLaunchEntityAtPlayer(creeperType);
 
                 instance = LootTable.EMPTY;
             }
@@ -154,7 +146,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
     }
 
     @Unique
-    private void createAndLaunchEntityAtPlayer(EntityType<?> entityType) {
+    private void hybrid_aquatic$createAndLaunchEntityAtPlayer(EntityType<?> entityType) {
         if (this.level() instanceof ServerLevel serverWorld) {
             Entity entity =
                     entityType.spawn(serverWorld, this.blockPosition(), MobSpawnType.MOB_SUMMONED);
@@ -202,10 +194,10 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
         retrieveLure(player);
     }
 
-    // TODO: Lures can disappear if you reload the world while fishing (or maybe even when you
-    // rejoin the server,
+    // TODO: Lures can disappear if you reload the world while fishing
+    //  (or maybe even when you rejoin the server,
     //  haven't checked that yet)
-    //       Really not sure how to fix that
+    //  Really not sure how to fix that
     @Unique
     private void retrieveLure(Player player) {
         if (!lureItemStack.isEmpty()) {

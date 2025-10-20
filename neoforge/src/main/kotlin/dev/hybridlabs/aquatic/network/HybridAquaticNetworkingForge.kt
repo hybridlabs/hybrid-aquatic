@@ -11,8 +11,6 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
-
-
 object HybridAquaticNetworkingForge {
     @SubscribeEvent // on the mod event bus
     fun register(event: RegisterPayloadHandlersEvent) {
@@ -38,15 +36,12 @@ object HybridAquaticNetworkingForge {
     object ClientPayloadHandler {
         fun handleDataOnMain(data: FishingBobberPayload, context: IPayloadContext) {
             val client = Minecraft.getInstance()
-            val foundEntity = client.level?.getEntity(data.id)
+            val foundEntity = client.level!!.getEntity(data.id)
             val itemStack = data.lure
             if (foundEntity != null && foundEntity is FishingHook) {
                 val additionalBobberData = foundEntity as CustomFishingBobberEntityData
                 additionalBobberData.`hybrid_aquatic$setLureItem`(itemStack)
-                sendHookPacket(
-                    data.id,
-                    itemStack
-                )
+                sendHookPacket(data.id, itemStack)
             }
         }
     }
@@ -54,14 +49,16 @@ object HybridAquaticNetworkingForge {
     object ServerPayloadHandler {
         fun handleDataOnMain(data: FishingBobberPayload, context: IPayloadContext) {
             val sender = context.player()
-            if (sender is ServerPlayer) {
-                val foundEntity = sender.level().getEntity(data.id)
-                if (foundEntity is FishingHook) {
-                    val additionalBobberData = foundEntity as CustomFishingBobberEntityData
-                    val item: ItemStack = additionalBobberData.`hybrid_aquatic$getLureItem`()
-                    sendClientHookPacket(sender, foundEntity.id, item)
-                }
-            }
+            if (sender !is ServerPlayer) return
+
+            val foundEntity = sender.level().getEntity(data.id)
+            if (foundEntity !is FishingHook) return
+
+            val additionalBobberData = foundEntity as CustomFishingBobberEntityData
+            val lureItem: ItemStack = additionalBobberData.`hybrid_aquatic$getLureItem`()
+            if (lureItem.isEmpty) return
+
+            sendClientHookPacket(sender, foundEntity.id, lureItem)
         }
     }
 
