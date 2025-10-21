@@ -16,6 +16,14 @@
     {
       "id": "biomesoplenty:floodplain",
       "required": false
+    },
+    {
+      "id": "still_life:mediterranean_marsh",
+      "required": false
+    },
+    {
+      "id": "still_life:temperate_marsh",
+      "required": false
     }
   ]
 }

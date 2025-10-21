@@ -23,6 +23,18 @@
     {
       "id": "regions_unexplored:prismachasm",
       "required": false
+    },
+    {
+      "id": "still_life:barren_caves",
+      "required": false
+    },
+    {
+      "id": "still_life:glowing_caves",
+      "required": false
+    },
+    {
+      "id": "still_life:mushroom_caves",
+      "required": false
     }
   ]
 }

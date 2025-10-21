@@ -21,6 +21,14 @@
     {
       "id": "mysticsbiomes:lagoon",
       "required": false
+    },
+    {
+      "id": "still_life:tropical_beach",
+      "required": false
+    },
+    {
+      "id": "still_life:mediterranean_beach",
+      "required": false
     }
   ]
 }
