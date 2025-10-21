@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties.WAT
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.feature.Feature
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration
@@ -40,66 +41,8 @@ class ConfiguredFeatureProvider(
         entries.add(
             HybridAquaticConfiguredFeatures.ANEMONE_PATCH,
             ConfiguredFeature(
-                Feature.NO_BONEMEAL_FLOWER,
-                RandomPatchConfiguration(
-                    3, 3, 3,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            WeightedStateProvider(
-                                SimpleWeightedRandomList.builder<BlockState>()
-                                    .add(
-                                        HybridAquaticBlocks.ANEMONE.get().defaultBlockState()
-                                            .setValue(WATERLOGGED, true), 1
-                                    )
-                                    .add(
-                                        HybridAquaticBlocks.STRAWBERRY_ANEMONE.get().defaultBlockState().setValue(
-                                            WATERLOGGED,
-                                            true
-                                        ), 3
-                                    )
-                                    .add(
-                                        HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get().defaultBlockState().setValue(
-                                            WATERLOGGED,
-                                            true
-                                        ), 1
-                                    )
-                                    .build()
-                            )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
-        )
-
-        entries.add(
-            HybridAquaticConfiguredFeatures.GREEN_ANEMONE_PATCH,
-            ConfiguredFeature(
-                Feature.NO_BONEMEAL_FLOWER,
-                RandomPatchConfiguration(
-                    3, 3, 3,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            WeightedStateProvider(
-                                SimpleWeightedRandomList.builder<BlockState>()
-                                    .add(
-                                        HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get().defaultBlockState()
-                                            .setValue(WATERLOGGED, true), 1
-                                    )
-                                    .add(
-                                        HybridAquaticBlocks.STRAWBERRY_ANEMONE.get().defaultBlockState().setValue(
-                                            WATERLOGGED,
-                                            true
-                                        ), 3
-                                    )
-                                    .build()
-                            )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
+                HybridAquaticFeatures.ANEMONE_PATCH.get(),
+                NoneFeatureConfiguration.NONE
             )
         )
 
@@ -112,7 +55,6 @@ class ConfiguredFeatureProvider(
             )
         )
 
-
         entries.add(
             HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH,
             ConfiguredFeature(
@@ -123,7 +65,6 @@ class ConfiguredFeatureProvider(
         )
 
         //#region Sargassum
-
         entries.add(
             HybridAquaticConfiguredFeatures.SARGASSUM,
             ConfiguredFeature(
@@ -190,22 +131,6 @@ class ConfiguredFeatureProvider(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
                             SimpleStateProvider.simple(HybridAquaticBlocks.JUNGLE_LILY_PAD.get())
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
-        )
-
-        entries.add(
-            HybridAquaticConfiguredFeatures.GLOWING_PLANKTON,
-            ConfiguredFeature(
-                Feature.RANDOM_PATCH, RandomPatchConfiguration(
-                    100, 12, 12,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            BlockStateProvider.simple(HybridAquaticBlocks.GLOWING_PLANKTON.get().defaultBlockState())
                         ),
                         BlockPredicate.matchesBlocks(Blocks.WATER)
                     )

@@ -9,17 +9,9 @@ object HybridAquaticBlockTags {
 
     val PLUSHIES = create("plushies")
 
-    val KELPS = create("kelps")
+    val KELP = create("kelp")
 
-    val ANEMONES_GENERATE_IN = create("anemones_generate_in")
-
-    val CLOWNFISH_ANEMONES = create("clownfish_anemones")
-
-    val GIANT_CLAM_GENERATE_IN = create("giant_clam_generate_in")
-
-    val TUBE_SPONGE_GENERATE_IN = create("tube_sponge_generate_in")
-
-    val MESSAGE_IN_A_BOTTLE_SPAWNS_IN = create("message_in_a_bottle_spawns_in")
+    val ANEMONES = create("anemones")
 
     private fun create(id: String): TagKey<Block> {
         return TagKey.create(Registries.BLOCK, CommonClass.locate(id))

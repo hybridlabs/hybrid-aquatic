@@ -17,23 +17,12 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
     FabricTagProvider.BlockTagProvider(output, registriesFuture) {
     override fun addTags(arg: HolderLookup.Provider) {
         // misc
-        getOrCreateTagBuilder(HybridAquaticBlockTags.ANEMONES_GENERATE_IN)
-            .add(Blocks.WATER)
-
-        getOrCreateTagBuilder(HybridAquaticBlockTags.GIANT_CLAM_GENERATE_IN)
-            .add(Blocks.WATER)
-
-        getOrCreateTagBuilder(HybridAquaticBlockTags.TUBE_SPONGE_GENERATE_IN)
-            .add(Blocks.WATER)
-
-        getOrCreateTagBuilder(HybridAquaticBlockTags.MESSAGE_IN_A_BOTTLE_SPAWNS_IN)
-            .add(Blocks.WATER)
-
-        getOrCreateTagBuilder(HybridAquaticBlockTags.CLOWNFISH_ANEMONES)
+        getOrCreateTagBuilder(HybridAquaticBlockTags.ANEMONES)
             .add(HybridAquaticBlocks.ANEMONE.get())
             .add(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get())
+            .add(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get())
 
-        getOrCreateTagBuilder(HybridAquaticBlockTags.KELPS)
+        getOrCreateTagBuilder(HybridAquaticBlockTags.KELP)
             .add(HybridAquaticBlocks.BULL_KELP.get())
             .add(HybridAquaticBlocks.BULL_KELP_PLANT.get())
             .add(HybridAquaticBlocks.SARGASSUM.get())

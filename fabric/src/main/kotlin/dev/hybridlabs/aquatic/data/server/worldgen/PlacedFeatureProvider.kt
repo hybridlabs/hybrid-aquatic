@@ -39,17 +39,6 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticPlacedFeatures.GREEN_ANEMONE_PATCH, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.GREEN_ANEMONE_PATCH), listOf(
-                    InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(2),
-                    BiomeFilter.biome()
-                )
-            )
-        )
-
-        entries.add(
             HybridAquaticPlacedFeatures.DUNEGRASS_PATCH, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH), listOf(
                     NoiseBasedCountPlacement.of(150, 80.0, 0.0),
@@ -111,17 +100,6 @@ class PlacedFeatureProvider(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                     CountPlacement.of(5),
-                    BiomeFilter.biome()
-                )
-            )
-        )
-
-        entries.add(
-            HybridAquaticPlacedFeatures.GLOWING_PLANKTON, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.GLOWING_PLANKTON), listOf(
-                    InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    NoiseBasedCountPlacement.of(80, 100.0, 0.0),
                     BiomeFilter.biome()
                 )
             )

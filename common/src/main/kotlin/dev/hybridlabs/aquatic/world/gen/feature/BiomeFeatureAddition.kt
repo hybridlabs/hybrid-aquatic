@@ -22,7 +22,7 @@ data class BiomeFeatureAddition(
             BiomeFeatureAddition(
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
-                HybridAquaticPlacedFeatures.GREEN_ANEMONE_PATCH
+                HybridAquaticPlacedFeatures.ANEMONE_PATCH
             ),
 
             BiomeFeatureAddition(

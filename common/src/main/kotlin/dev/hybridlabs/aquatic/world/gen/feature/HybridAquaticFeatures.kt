@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 
 /**
@@ -16,6 +17,7 @@ object HybridAquaticFeatures {
     val SARGASSUM = register("sargassum", SargassumFeature(SargassumFeatureConfig.CODEC))
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch", SeaLettuceFeature(ProbabilityFeatureConfiguration.CODEC))
     val RED_ALGAE_PATCH = register("red_algae_patch", RedAlgaeFeature(ProbabilityFeatureConfiguration.CODEC))
+    val ANEMONE_PATCH = register("anemone_patch", AnemoneFeature(NoneFeatureConfiguration.CODEC))
 
     fun <F : Feature<*>> register(
         id: String,
