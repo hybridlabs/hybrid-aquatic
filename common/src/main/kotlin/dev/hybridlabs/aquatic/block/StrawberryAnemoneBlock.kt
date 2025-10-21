@@ -20,13 +20,13 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
-class StrawberryAnemoneBlock(settings: Properties) : DirectionalBlock(settings), EntityBlock, SimpleWaterloggedBlock {
+class StrawberryAnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirectionalBlock(settings), EntityBlock, SimpleWaterloggedBlock {
     init {
-        this.registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, true))
+        this.registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.FLOOR).setValue(WATERLOGGED, true))
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
-        builder.add(FACING, WATERLOGGED)
+        builder.add(FACING, FACE, WATERLOGGED)
     }
 
     override fun updateShape(
@@ -53,6 +53,32 @@ class StrawberryAnemoneBlock(settings: Properties) : DirectionalBlock(settings),
         context: CollisionContext
     ): VoxelShape {
         return COLLISION_SHAPE
+    }
+
+    override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+        val direction = state.getValue(FACING)
+        when (state.getValue(FACE) as AttachFace) {
+            AttachFace.FLOOR -> {
+                return FLOOR_SHAPE
+            }
+
+            AttachFace.WALL -> {
+                val voxelShape: VoxelShape = when (direction) {
+                    Direction.EAST -> EAST_SHAPE
+                    Direction.WEST -> WEST_SHAPE
+                    Direction.SOUTH -> SOUTH_SHAPE
+                    Direction.NORTH, Direction.UP, Direction.DOWN -> NORTH_SHAPE
+
+                    else -> throw IncompatibleClassChangeError()
+                }
+
+                return voxelShape
+            }
+
+            AttachFace.CEILING -> {
+                return CEILING_SHAPE
+            }
+        }
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
