@@ -8,6 +8,7 @@ import net.minecraft.core.Holder
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.tags.FluidTags
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock
 import net.minecraft.world.level.block.state.properties.AttachFace
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -35,7 +36,7 @@ class AnemoneFeature(configuration: Codec<NoneFeatureConfiguration>) :
             .map { it.defaultBlockState() }
             .orElseGet { HybridAquaticBlocks.ANEMONE.get().defaultBlockState() }
             .setValue(FaceAttachedHorizontalDirectionalBlock.FACE, AttachFace.FLOOR)
-            .setValue(FaceAttachedHorizontalDirectionalBlock.FACING, Direction.NORTH)
+            .setValue(DirectionalBlock.FACING, Direction.NORTH)
             .setValue(BlockStateProperties.WATERLOGGED, true)
 
         for (j in 0 until 5) {
