@@ -17,7 +17,6 @@ object HybridAquaticFeatures {
     val SARGASSUM = register("sargassum", SargassumFeature(SargassumFeatureConfig.CODEC))
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch", SeaLettuceFeature(ProbabilityFeatureConfiguration.CODEC))
     val RED_ALGAE_PATCH = register("red_algae_patch", RedAlgaeFeature(ProbabilityFeatureConfiguration.CODEC))
-    val ANEMONE_PATCH = register("anemone_patch", AnemoneFeature(NoneFeatureConfiguration.CODEC))
 
     fun <F : Feature<*>> register(
         id: String,

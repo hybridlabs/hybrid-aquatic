@@ -20,22 +20,28 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
-class AnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirectionalBlock(settings), EntityBlock, SimpleWaterloggedBlock {
+class AnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirectionalBlock(settings), EntityBlock,
+    SimpleWaterloggedBlock {
     init {
-        this.registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.FLOOR).setValue(WATERLOGGED, true))
+        this.registerDefaultState(
+            stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(FACE, AttachFace.FLOOR)
+                .setValue(WATERLOGGED, true)
+        )
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
         builder.add(FACING, FACE, WATERLOGGED)
     }
-    
+
     override fun updateShape(
         state: BlockState,
         direction: Direction,
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
         if (state.getValue(WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
@@ -43,14 +49,15 @@ class AnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirectionalBloc
 
         return if (!canSurvive(state, world, pos)) {
             Blocks.AIR.defaultBlockState()
-        } else super.updateShape(state, direction, neighborState, world, pos, neighborPos)
+        }
+        else super.updateShape(state, direction, neighborState, world, pos, neighborPos)
     }
 
     override fun getCollisionShape(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         return COLLISION_SHAPE
     }
@@ -102,7 +109,12 @@ class AnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirectionalBloc
         return AnemoneBlockEntity(pos, state)
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(
+        state: BlockState,
+        world: BlockGetter,
+        pos: BlockPos,
+        type: PathComputationType,
+    ): Boolean {
         return false
     }
 
