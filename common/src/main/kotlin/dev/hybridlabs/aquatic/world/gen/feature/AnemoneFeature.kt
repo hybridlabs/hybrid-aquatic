@@ -35,7 +35,7 @@ class AnemoneFeature(configuration: Codec<NoneFeatureConfiguration>) :
         val baseBlock = anemone
             .map { it.defaultBlockState() }
             .orElseGet { HybridAquaticBlocks.ANEMONE.get().defaultBlockState() }
-            .setValue(FaceAttachedHorizontalDirectionalBlock.FACE, AttachFace.FLOOR)
+            .setValue(DirectionalBlock.FACING, Direction.NORTH)
             .setValue(BlockStateProperties.WATERLOGGED, true)
 
         for (j in 0 until 5) {
@@ -51,7 +51,7 @@ class AnemoneFeature(configuration: Codec<NoneFeatureConfiguration>) :
                 )
             ) {
                 var direction = Direction.getRandom(random)
-                while (!baseBlock.setValue(FaceAttachedHorizontalDirectionalBlock.FACING, direction)
+                while (!baseBlock.setValue(DirectionalBlock.FACING, direction)
                         .canSurvive(level, blockPos)
                 ) {
                     direction = Direction.getRandom(random)
@@ -60,7 +60,7 @@ class AnemoneFeature(configuration: Codec<NoneFeatureConfiguration>) :
                 level.setBlock(
                     blockPos,
                     baseBlock
-                        .setValue(FaceAttachedHorizontalDirectionalBlock.FACING, direction)
+                        .setValue(DirectionalBlock.FACING, direction)
                         .setValue(BlockStateProperties.WATERLOGGED, true),
                     2
                 )

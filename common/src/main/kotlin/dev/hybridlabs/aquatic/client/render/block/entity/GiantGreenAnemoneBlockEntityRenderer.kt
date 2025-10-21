@@ -24,51 +24,6 @@ class GiantGreenAnemoneBlockEntityRenderer(context: BlockEntityRendererProvider.
         packedLight: Int,
         packedOverlay: Int
     ) {
-        val state = animatable.blockState
-        val facing = state.getValue(HorizontalDirectionalBlock.FACING)
-        val face = state.getValue(BlockStateProperties.ATTACH_FACE)
-
-        if (face == AttachFace.WALL) {
-            val yaw = when (facing) {
-                Direction.NORTH -> 180f
-                Direction.SOUTH -> 0f
-                Direction.WEST -> -90f
-                Direction.EAST -> 90f
-                else -> 0f
-            }
-            poseStack.mulPose(Axis.YP.rotationDegrees(yaw))
-        }
-
-        poseStack.pushPose()
-
-        when (face) {
-            AttachFace.CEILING -> {
-                poseStack.mulPose(Axis.XP.rotationDegrees(180f))
-                poseStack.translate(0.0, -1.0, -1.0)
-            }
-
-            AttachFace.WALL -> {
-                poseStack.mulPose(Axis.XP.rotationDegrees(90f))
-                if (facing == Direction.NORTH) {
-                    poseStack.translate(-1.0, -1.0, -1.0)
-                }
-                if (facing == Direction.SOUTH) {
-                    poseStack.translate(0.0, 0.0, -1.0)
-                }
-                if (facing == Direction.EAST) {
-                    poseStack.translate(-1.0, 0.0, -1.0)
-                }
-                if (facing == Direction.WEST) {
-                    poseStack.translate(0.0, -1.0, -1.0)
-                }
-            }
-
-            AttachFace.FLOOR -> {
-                poseStack.mulPose(Axis.XP.rotationDegrees(0f))
-            }
-        }
-
         super.render(animatable, partialTick, poseStack, bufferSource, packedLight, packedOverlay)
-        poseStack.popPose()
     }
 }
