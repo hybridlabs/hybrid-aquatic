@@ -36,6 +36,7 @@ class AnemoneFeature(configuration: Codec<NoneFeatureConfiguration>) :
             .map { it.defaultBlockState() }
             .orElseGet { HybridAquaticBlocks.ANEMONE.get().defaultBlockState() }
             .setValue(FaceAttachedHorizontalDirectionalBlock.FACE, AttachFace.FLOOR)
+            .setValue(DirectionalBlock.FACING, Direction.NORTH)
             .setValue(BlockStateProperties.WATERLOGGED, true)
 
         for (j in 0 until 5) {
