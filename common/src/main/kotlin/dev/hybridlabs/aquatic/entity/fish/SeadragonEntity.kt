@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -22,7 +21,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
 import kotlin.random.Random
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "unused")
 class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: Level) :
     HybridAquaticFishEntity(
         entityType, world,
