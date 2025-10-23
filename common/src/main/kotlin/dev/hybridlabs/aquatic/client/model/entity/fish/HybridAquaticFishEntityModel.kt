@@ -33,6 +33,11 @@ abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private
         animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
+
+        if (!animatable.isInWater) {
+            return
+        }
+
         val deltaTime = Minecraft.getInstance().deltaFrameTime
         val body = animationProcessor.getBone(PartNames.BODY)
         val body2 = animationProcessor.getBone("body_2")
