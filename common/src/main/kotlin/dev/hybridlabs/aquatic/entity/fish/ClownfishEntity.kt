@@ -90,8 +90,7 @@ class ClownfishEntity(entityType: EntityType<out ClownfishEntity>, world: Level)
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return world.isWaterAt(pos) &&
-                    world.getBlockState(pos.below()).`is`(HybridAquaticBlockTags.ANEMONES)
+            return world.isWaterAt(pos)
         }
 
         val TYPE: EntityDataAccessor<Int> =

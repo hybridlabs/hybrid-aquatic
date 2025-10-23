@@ -71,8 +71,7 @@ class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: Level)
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return world.isWaterAt(pos) &&
-                    world.getBlockState(pos.below()).`is`(HybridAquaticBlockTags.KELP)
+            return world.isWaterAt(pos)
         }
 
         val TYPE: EntityDataAccessor<Int> =
