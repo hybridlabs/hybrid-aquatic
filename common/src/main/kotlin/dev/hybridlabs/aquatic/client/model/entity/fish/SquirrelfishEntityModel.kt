@@ -50,6 +50,10 @@ class SquirrelfishEntityModel : HybridAquaticFishEntityModel<SquirrelfishEntity>
         val body = animationProcessor.getBone(PartNames.BODY)
         val body2 = animationProcessor.getBone("body2")
         val body3 = animationProcessor.getBone("body3")
+        val tail2 = animationProcessor.getBone("tail2")
+        val tail3 = animationProcessor.getBone("tail3")
+        val tailFin2 = animationProcessor.getBone("tail_fin2")
+        val tailFin3 = animationProcessor.getBone("tail_fin3")
 
         val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRot, animatable.xRotO), -45f, 45f)
         body.rotX = xRot * -Mth.DEG_TO_RAD
@@ -67,5 +71,9 @@ class SquirrelfishEntityModel : HybridAquaticFishEntityModel<SquirrelfishEntity>
         body.rotZ = roll * -Mth.DEG_TO_RAD
         body2?.rotZ = roll * -Mth.DEG_TO_RAD
         body3?.rotZ = roll * -Mth.DEG_TO_RAD
+        tail2?.rotY = roll * Mth.DEG_TO_RAD
+        tail3?.rotY = roll * Mth.DEG_TO_RAD
+        tailFin2?.rotY = roll * Mth.DEG_TO_RAD
+        tailFin3?.rotY = roll * Mth.DEG_TO_RAD
     }
 }

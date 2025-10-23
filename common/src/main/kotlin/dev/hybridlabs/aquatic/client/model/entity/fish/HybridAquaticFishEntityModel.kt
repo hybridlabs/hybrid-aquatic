@@ -55,6 +55,6 @@ abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private
         body.rotX = tilt * -Mth.DEG_TO_RAD
         body.rotZ = roll * -Mth.DEG_TO_RAD
         tail.rotY += roll * Mth.DEG_TO_RAD
-        tailFin.rotY += roll * 2.0f * Mth.DEG_TO_RAD
+        tailFin.rotY += roll * Mth.DEG_TO_RAD
     }
 }

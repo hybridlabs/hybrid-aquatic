@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.HerringEntity
+import dev.hybridlabs.aquatic.entity.fish.MackerelEntity
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
@@ -46,6 +47,10 @@ class HerringEntityModel : HybridAquaticFishEntityModel<HerringEntity>("herring"
         val body = animationProcessor.getBone(PartNames.BODY)
         val body2 = animationProcessor.getBone("body2")
         val body3 = animationProcessor.getBone("body3")
+        val tail2 = animationProcessor.getBone("tail2")
+        val tail3 = animationProcessor.getBone("tail3")
+        val tailFin2 = animationProcessor.getBone("tail_fin2")
+        val tailFin3 = animationProcessor.getBone("tail_fin3")
 
         val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRot, animatable.xRotO), -45f, 45f)
         body.rotX = xRot * -Mth.DEG_TO_RAD
@@ -63,5 +68,9 @@ class HerringEntityModel : HybridAquaticFishEntityModel<HerringEntity>("herring"
         body.rotZ = roll * -Mth.DEG_TO_RAD
         body2?.rotZ = roll * -Mth.DEG_TO_RAD
         body3?.rotZ = roll * -Mth.DEG_TO_RAD
+        tail2?.rotY = roll * Mth.DEG_TO_RAD
+        tail3?.rotY = roll * Mth.DEG_TO_RAD
+        tailFin2?.rotY = roll * Mth.DEG_TO_RAD
+        tailFin3?.rotY = roll * Mth.DEG_TO_RAD
     }
 }
