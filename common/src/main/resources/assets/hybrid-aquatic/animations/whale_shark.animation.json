@@ -53,9 +53,6 @@
 						"0-math.sin(query.anim_time*22.5*2.5+60)*3*math.clamp(query.ground_speed*25,0,1)",
 						0
 					]
-				},
-				"body_3": {
-					"rotation": [0, "0-math.sin(query.anim_time*22.5*2.5-60)*6*math.clamp(query.ground_speed*25,0,1)", 0]
 				}
 			}
 		},
@@ -162,9 +159,6 @@
 			"bones": {
 				"body": {
 					"position": [0, -0.25, 0]
-				},
-				"body_3": {
-					"rotation": [-2.5, 0, 0]
 				},
 				"tail": {
 					"rotation": [-12.5, 0, 0]
