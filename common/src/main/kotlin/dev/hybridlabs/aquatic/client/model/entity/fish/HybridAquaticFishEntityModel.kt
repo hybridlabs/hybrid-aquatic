@@ -35,6 +35,7 @@ abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private
         super.setCustomAnimations(animatable, instanceId, animationState)
         val deltaTime = Minecraft.getInstance().deltaFrameTime
         val body = animationProcessor.getBone(PartNames.BODY)
+        val body2 = animationProcessor.getBone("body_2")
         val tail = animationProcessor.getBone(PartNames.TAIL)
         val tailFin = animationProcessor.getBone(PartNames.TAIL_FIN)
 
@@ -54,7 +55,8 @@ abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private
 
         body.rotX = tilt * -Mth.DEG_TO_RAD
         body.rotZ = roll * -Mth.DEG_TO_RAD
-        tail.rotY += roll * Mth.DEG_TO_RAD
-        tailFin.rotY += roll * Mth.DEG_TO_RAD
+        body2?.rotY += roll * Mth.DEG_TO_RAD
+        tail?.rotY += roll * Mth.DEG_TO_RAD
+        tailFin?.rotY += roll * Mth.DEG_TO_RAD
     }
 }

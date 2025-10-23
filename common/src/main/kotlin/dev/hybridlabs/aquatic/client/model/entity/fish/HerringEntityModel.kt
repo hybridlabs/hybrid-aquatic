@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.HerringEntity
-import dev.hybridlabs.aquatic.entity.fish.MackerelEntity
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
