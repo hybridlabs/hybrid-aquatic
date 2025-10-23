@@ -46,8 +46,7 @@ class ParrotfishEntity(entityType: EntityType<out ParrotfishEntity>, world: Leve
         ): Boolean {
             return world.isWaterAt(pos) &&
                     world.level.isDay &&
-                    world.canSeeSkyFromBelowWater(pos) &&
-                    world.getBlockState(pos.below()).`is`(BlockTags.CORAL_BLOCKS)
+                    world.canSeeSkyFromBelowWater(pos)
         }
     }
 }

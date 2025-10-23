@@ -72,8 +72,7 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return world.isWaterAt(pos) &&
-                    world.getBlockState(pos.below()).`is`(BlockTags.CORALS)
+            return world.isWaterAt(pos)
         }
 
         val TYPE: EntityDataAccessor<Int> =
