@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
+import kotlin.math.abs
 
 class FlashlightFishEntityModel : HybridAquaticFishEntityModel<FlashlightFishEntity>("flashlight_fish") {
     override fun getRenderType(animatable: FlashlightFishEntity, texture: ResourceLocation): RenderType {
@@ -54,5 +55,17 @@ class FlashlightFishEntityModel : HybridAquaticFishEntityModel<FlashlightFishEnt
         body.rotX = xRot * -Mth.DEG_TO_RAD
         body2?.rotX = xRot * -Mth.DEG_TO_RAD
         body3?.rotX = xRot * -Mth.DEG_TO_RAD
+
+        val yawDiff = animatable.yRot - animatable.yRotO
+        val targetRoll = Mth.clamp(yawDiff * 3f, -30f, 30f)
+
+        val turnSpeed = abs(yawDiff)
+        val smoothing = Mth.clamp(0.05f + turnSpeed * 0.02f, 0.05f, 0.25f)
+        animatable.currentRoll = Mth.lerp(smoothing, animatable.currentRoll, targetRoll)
+
+        val roll = Mth.lerp(deltaTime, animatable.prevRoll, animatable.currentRoll)
+        body.rotZ = roll * -Mth.DEG_TO_RAD
+        body2?.rotZ = roll * -Mth.DEG_TO_RAD
+        body3?.rotZ = roll * -Mth.DEG_TO_RAD
     }
 }
