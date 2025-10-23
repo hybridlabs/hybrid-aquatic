@@ -23,6 +23,10 @@ class BoidGoal(
     private val maxSpeed: Float = mob.getAttributeValue(MOVEMENT_SPEED).toFloat()
 
     override fun canUse(): Boolean {
+        if (!mob.isUnderWater) {
+            return false
+        }
+
         if (--this.timeToFindNearbyEntities <= 0) {
             this.timeToFindNearbyEntities = this.adjustedTickDelay(40)
             nearbyMobs = getNearbyEntitiesOfSameClass(mob)
