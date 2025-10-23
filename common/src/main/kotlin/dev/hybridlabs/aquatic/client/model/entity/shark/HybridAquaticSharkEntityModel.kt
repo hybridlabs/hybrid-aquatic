@@ -37,7 +37,11 @@ abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity>(
         super.setCustomAnimations(animatable, instanceId, animationState)
         val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
 
+        val head = animationProcessor.getBone(PartNames.HEAD)
         val body = animationProcessor.getBone(PartNames.BODY)
+        val body2 = animationProcessor.getBone("body_2")
+        val tail = animationProcessor.getBone(PartNames.TAIL)
+        val tailFin = animationProcessor.getBone(PartNames.TAIL_FIN)
 
         val tilt = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
 
@@ -50,7 +54,11 @@ abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity>(
 
         val roll = Mth.lerp(deltaTime, animatable.prevRoll, animatable.currentRoll)
 
-        body.rotX = tilt * -Mth.DEG_TO_RAD
-        body.rotZ = roll * -Mth.DEG_TO_RAD
+        head.rotY += roll * -Mth.DEG_TO_RAD
+        body.rotX += tilt * -Mth.DEG_TO_RAD
+        body.rotZ += roll * -Mth.DEG_TO_RAD
+        body2.rotY += roll * Mth.DEG_TO_RAD
+        tail.rotY += roll * Mth.DEG_TO_RAD
+        tailFin.rotY += roll * 2.0f * Mth.DEG_TO_RAD
     }
 }
