@@ -160,8 +160,6 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HybridAquaticBlocks.MANGROVE_CRATE.get() to "Mangrove Crate",
             HybridAquaticBlocks.CHERRY_CRATE.get() to "Cherry Crate",
             HybridAquaticBlocks.BAMBOO_CRATE.get() to "Bamboo Crate",
-            HybridAquaticBlocks.WARPED_CRATE.get() to "Warped Crate",
-            HybridAquaticBlocks.CRIMSON_CRATE.get() to "Crimson Crate",
             HybridAquaticBlocks.BUOY.get() to "Buoy",
             HybridAquaticBlocks.GIANT_CLAM.get() to "Giant Clam",
 
@@ -394,8 +392,6 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HybridAquaticBlocks.ACACIA_CRATE.get().descriptionId to "Break with an axe to open",
             HybridAquaticBlocks.CHERRY_CRATE.get().descriptionId to "Break with an axe to open",
             HybridAquaticBlocks.BAMBOO_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.WARPED_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.CRIMSON_CRATE.get().descriptionId to "Break with an axe to open",
             HybridAquaticItems.FISHING_NET.get().descriptionId to "Stored Entity: %s",
             HybridAquaticItems.MOON_JELLYFISH_HAT.get().descriptionId to "Made by Jakotens",
         ).forEach { (itemTranslationKey, translation) ->
