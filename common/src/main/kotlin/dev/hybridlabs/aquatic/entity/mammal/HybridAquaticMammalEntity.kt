@@ -140,7 +140,7 @@ open class HybridAquaticMammalEntity(
     }
 
     override fun isFood(p0: ItemStack): Boolean {
-        TODO("Not yet implemented")
+        return false
     }
 
     companion object {
