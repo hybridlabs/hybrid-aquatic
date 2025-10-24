@@ -75,8 +75,6 @@ object HybridAquaticBlocks {
     val MANGROVE_CRATE = register("mangrove_crate") { CrateBlock(Properties.copy(Blocks.MANGROVE_PLANKS)) }
     val CHERRY_CRATE = register("cherry_crate") { CrateBlock(Properties.copy(Blocks.CHERRY_PLANKS)) }
     val BAMBOO_CRATE = register("bamboo_crate") { CrateBlock(Properties.copy(Blocks.BAMBOO_PLANKS)) }
-    val WARPED_CRATE = register("warped_crate") { CrateBlock(Properties.copy(Blocks.WARPED_PLANKS)) }
-    val CRIMSON_CRATE = register("crimson_crate") { CrateBlock(Properties.copy(Blocks.CRIMSON_PLANKS)) }
 
     val SARGASSUM = register(
         "sargassum"
