@@ -347,8 +347,6 @@ object HybridAquaticItems {
     val MANGROVE_CRATE = registerBlockItem("mangrove_crate") { HybridAquaticBlocks.MANGROVE_CRATE.get() }
     val CHERRY_CRATE = registerBlockItem("cherry_crate") { HybridAquaticBlocks.CHERRY_CRATE.get() }
     val BAMBOO_CRATE = registerBlockItem("bamboo_crate") { HybridAquaticBlocks.BAMBOO_CRATE.get() }
-    val WARPED_CRATE = registerBlockItem("warped_crate") { HybridAquaticBlocks.WARPED_CRATE.get() }
-    val CRIMSON_CRATE = registerBlockItem("crimson_crate") { HybridAquaticBlocks.CRIMSON_CRATE.get() }
 
     //#endregion
 

@@ -59,8 +59,6 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticBlocks.ACACIA_CRATE.get())
                 entries.accept(HybridAquaticBlocks.MANGROVE_CRATE.get())
                 entries.accept(HybridAquaticBlocks.CHERRY_CRATE.get())
-                entries.accept(HybridAquaticBlocks.CRIMSON_CRATE.get())
-                entries.accept(HybridAquaticBlocks.WARPED_CRATE.get())
                 entries.accept(HybridAquaticBlocks.PEARL_BLOCK.get())
                 entries.accept(HybridAquaticBlocks.BLACK_PEARL_BLOCK.get())
                 entries.accept(HybridAquaticBlocks.GLOWSLIME_BLOCK.get())
