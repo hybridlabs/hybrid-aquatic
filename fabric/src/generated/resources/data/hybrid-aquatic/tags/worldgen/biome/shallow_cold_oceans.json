@@ -1,5 +1,9 @@
 {
   "values": [
-    "minecraft:cold_ocean"
+    "minecraft:cold_ocean",
+    {
+      "id": "still_life:cold_shallow_ocean",
+      "required": false
+    }
   ]
 }

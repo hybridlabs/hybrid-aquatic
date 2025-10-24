@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.AttachFace
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
@@ -19,18 +20,14 @@ import net.minecraft.world.level.pathfinder.PathComputationType
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
-class StrawberryAnemoneBlock(settings: Properties) : BushBlock(settings), EntityBlock, SimpleWaterloggedBlock {
-
+@Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
+class StrawberryAnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirectionalBlock(settings), EntityBlock, SimpleWaterloggedBlock {
     init {
-        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
+        this.registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.FLOOR).setValue(WATERLOGGED, true))
     }
 
-    override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return !floor.getCollisionShape(world, pos).getFaceShape(Direction.UP).isEmpty || floor.isFaceSturdy(
-            world,
-            pos,
-            Direction.UP
-        )
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
+        builder.add(FACING, FACE, WATERLOGGED)
     }
 
     override fun updateShape(
@@ -59,21 +56,39 @@ class StrawberryAnemoneBlock(settings: Properties) : BushBlock(settings), Entity
         return COLLISION_SHAPE
     }
 
-    override fun getShape(
-        state: BlockState,
-        world: BlockGetter,
-        pos: BlockPos,
-        context: CollisionContext
-    ): VoxelShape {
-        return SHAPE
+    override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
+        val direction = state.getValue(FACING)
+        when (state.getValue(FACE) as AttachFace) {
+            AttachFace.FLOOR -> {
+                return FLOOR_SHAPE
+            }
+
+            AttachFace.WALL -> {
+                val voxelShape: VoxelShape = when (direction) {
+                    Direction.EAST -> EAST_SHAPE
+                    Direction.WEST -> WEST_SHAPE
+                    Direction.SOUTH -> SOUTH_SHAPE
+                    Direction.NORTH, Direction.UP, Direction.DOWN -> NORTH_SHAPE
+
+                    else -> throw IncompatibleClassChangeError()
+                }
+
+                return voxelShape
+            }
+
+            AttachFace.CEILING -> {
+                return CEILING_SHAPE
+            }
+        }
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
         val fluidState = ctx.level.getFluidState(ctx.clickedPos)
-        return if (fluidState.`is`(FluidTags.WATER)) defaultBlockState().setValue(
-            WATERLOGGED,
-            ctx.level.getFluidState(ctx.clickedPos).`is`(Fluids.WATER)
-        ) else null
+        val baseState = super.getStateForPlacement(ctx) ?: return null
+
+        return if (fluidState.`is`(FluidTags.WATER)) {
+            baseState.setValue(WATERLOGGED, true)
+        } else null
     }
 
     override fun getFluidState(state: BlockState): FluidState {
@@ -88,21 +103,22 @@ class StrawberryAnemoneBlock(settings: Properties) : BushBlock(settings), Entity
         return StrawberryAnemoneBlockEntity(pos, state)
     }
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
-        builder.add(WATERLOGGED)
-    }
-
     override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 
-    override fun codec(): MapCodec<out BushBlock> {
+    override fun codec(): MapCodec<out FaceAttachedHorizontalDirectionalBlock> {
         return CODEC
     }
 
     companion object {
         val CODEC: MapCodec<StrawberryAnemoneBlock> = simpleCodec(::StrawberryAnemoneBlock)
-        private val SHAPE = box(4.0, 0.0, 4.0, 12.0, 9.0, 12.0)
+        private val CEILING_SHAPE: VoxelShape = box(4.0, 0.0, 8.0, 12.0, 9.0, 16.0)
+        private val FLOOR_SHAPE: VoxelShape = box(4.0, 0.0, 4.0, 12.0, 9.0, 12.0)
+        private val NORTH_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
+        private val SOUTH_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
+        private val WEST_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
+        private val EAST_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
         private val COLLISION_SHAPE = box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)
     }
 }

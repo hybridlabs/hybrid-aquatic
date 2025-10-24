@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -22,7 +21,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
 import kotlin.random.Random
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "unused")
 class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: Level) :
     HybridAquaticFishEntity(
         entityType, world,
@@ -70,8 +69,7 @@ class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: Level)
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return world.isWaterAt(pos) &&
-                    world.getBlockState(pos.below()).`is`(HybridAquaticBlockTags.KELPS)
+            return world.isWaterAt(pos)
         }
 
         val TYPE: EntityDataAccessor<Int> =

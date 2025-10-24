@@ -24,6 +24,14 @@
     {
       "id": "terrestria:cypress_swamp",
       "required": false
+    },
+    {
+      "id": "still_life:mediterranean_swamp",
+      "required": false
+    },
+    {
+      "id": "still_life:temperate_swamp",
+      "required": false
     }
   ]
 }

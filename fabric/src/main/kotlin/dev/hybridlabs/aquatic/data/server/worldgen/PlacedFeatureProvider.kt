@@ -45,17 +45,6 @@ class PlacedFeatureProvider(
 
             PlacementUtils.register(
                 bootstrap,
-                HybridAquaticPlacedFeatures.GREEN_ANEMONE_PATCH,
-                reg.get(HybridAquaticConfiguredFeatures.GREEN_ANEMONE_PATCH).get(), listOf(
-                    InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(2),
-                    BiomeFilter.biome()
-                )
-            )
-
-            PlacementUtils.register(
-                bootstrap,
                 HybridAquaticPlacedFeatures.DUNEGRASS_PATCH,
                 reg.get(HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH).get(), listOf(
                     NoiseBasedCountPlacement.of(150, 80.0, 0.0),
@@ -118,18 +107,6 @@ class PlacedFeatureProvider(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                     CountPlacement.of(5),
-                    BiomeFilter.biome()
-                )
-            )
-
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.GLOWING_PLANKTON,
-                reg.get(HybridAquaticConfiguredFeatures.GLOWING_PLANKTON).get(),
-                listOf(
-                    InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    NoiseBasedCountPlacement.of(80, 100.0, 0.0),
                     BiomeFilter.biome()
                 )
             )
@@ -222,8 +199,6 @@ class PlacedFeatureProvider(
         entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.DUNEGRASS_PATCH))
         entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.FLOATING_SARGASSUM))
         entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.GLOWING_PLANKTON))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.GREEN_ANEMONE_PATCH))
         entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.JUNGLE_LILY_PAD))
         entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE))
         entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW))

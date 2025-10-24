@@ -15,7 +15,8 @@ import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.level.pathfinder.PathComputationType
 
-class WallGlowstickBlock(settings: Properties) : WallTorchBlock(GLOW,settings), SimpleWaterloggedBlock {
+@Suppress("unused", "DEPRECATION")
+class WallGlowstickBlock(settings: Properties) : WallTorchBlock(GLOW, settings), SimpleWaterloggedBlock {
     init {
         registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false))
     }
@@ -41,6 +42,7 @@ class WallGlowstickBlock(settings: Properties) : WallTorchBlock(GLOW,settings), 
             ?.setValue(WATERLOGGED, fluidState == Fluids.WATER.getSource(false))
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getFluidState(state: BlockState): FluidState {
         return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
@@ -49,6 +51,7 @@ class WallGlowstickBlock(settings: Properties) : WallTorchBlock(GLOW,settings), 
         super.createBlockStateDefinition(builder.add(WATERLOGGED))
     }
 
+    @Deprecated("Deprecated in Java")
     override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return true
     }

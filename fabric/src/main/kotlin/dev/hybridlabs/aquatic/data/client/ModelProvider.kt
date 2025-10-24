@@ -16,6 +16,7 @@ import net.minecraft.data.models.ItemModelGenerators
 import net.minecraft.data.models.model.ModelLocationUtils
 import net.minecraft.data.models.model.ModelTemplates
 import net.minecraft.data.models.model.TextureMapping
+import net.minecraft.data.models.model.TexturedModel
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.SpawnEggItem
@@ -68,18 +69,27 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
             // simple cubes
             setOf(
+                HybridAquaticBlocks.PEARL_BLOCK.get(),
+                HybridAquaticBlocks.BLACK_PEARL_BLOCK.get(),
+            ).forEach(generator::createTrivialCube)
+
+            // crates
+            setOf(
                 HybridAquaticBlocks.HYBRID_CRATE.get(),
-                HybridAquaticBlocks.OAK_CRATE.get(),
                 HybridAquaticBlocks.SPRUCE_CRATE.get(),
                 HybridAquaticBlocks.BIRCH_CRATE.get(),
                 HybridAquaticBlocks.DARK_OAK_CRATE.get(),
                 HybridAquaticBlocks.JUNGLE_CRATE.get(),
                 HybridAquaticBlocks.ACACIA_CRATE.get(),
                 HybridAquaticBlocks.MANGROVE_CRATE.get(),
+                HybridAquaticBlocks.OAK_CRATE.get(),
                 HybridAquaticBlocks.CHERRY_CRATE.get(),
-                HybridAquaticBlocks.PEARL_BLOCK.get(),
-                HybridAquaticBlocks.BLACK_PEARL_BLOCK.get(),
-            ).forEach(generator::createTrivialCube)
+                HybridAquaticBlocks.BAMBOO_CRATE.get(),
+                HybridAquaticBlocks.WARPED_CRATE.get(),
+                HybridAquaticBlocks.CRIMSON_CRATE.get(),
+            ).forEach { block ->
+                generator.createTrivialBlock(block, TexturedModel.CUBE_TOP)
+            }
 
             // wood
             val driftwoodPool = family(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())

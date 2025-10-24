@@ -51,6 +51,8 @@ open class HybridAquaticSharkEntity(
     private val isPassive: Boolean,
     private val closePlayerAttack: Boolean,
 ) : WaterAnimal(entityType, world), NeutralMob, GeoEntity {
+    var prevRoll: Float = 0f
+    var currentRoll: Float = 0.0f
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var angerTime = 0
     private var angryAt: UUID? = null
@@ -108,6 +110,7 @@ open class HybridAquaticSharkEntity(
 
     override fun tick() {
         super.tick()
+        prevRoll = currentRoll
 
         if (this.isUnderWater) {
             moistness = getMaxMoistness()
@@ -178,6 +181,12 @@ open class HybridAquaticSharkEntity(
 
     override fun aiStep() {
         this.updateSwingTime()
+
+
+        prevRoll = currentRoll
+        var targetRoll = ((this.yRot - this.yRotO) * 0.1f).coerceIn(-0.45f, 0.45f)
+        targetRoll = -targetRoll
+        currentRoll += (targetRoll - currentRoll) * 0.05f
         super.aiStep()
     }
 

@@ -18,31 +18,13 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SANDY_BEACHES)
             .add(Biomes.BEACH)
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "wythers", "tropical_beach"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "biomesoplenty", "dune_beach"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "biomeswevegone", "rainbow_beach"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "terrestria", "volcanic_island_beach"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "mysticsbiomes", "lagoon"
-                )
-            )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("wythers", "tropical_beach"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("biomesoplenty", "dune_beach"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("biomeswevegone", "rainbow_beach"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("terrestria", "volcanic_island_beach"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("mysticsbiomes", "lagoon"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "tropical_beach"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "mediterranean_beach"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.ROCKY_BEACHES)
             .add(Biomes.STONY_SHORE)
@@ -71,61 +53,77 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
                 Biomes.FROZEN_OCEAN,
                 Biomes.DEEP_FROZEN_OCEAN
             )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "arctic_shallow_ocean"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "arctic_deep_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_ARCTIC_OCEANS)
             .add(Biomes.DEEP_FROZEN_OCEAN)
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "arctic_deep_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_ARCTIC_OCEANS)
             .add(Biomes.FROZEN_OCEAN)
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "arctic_shallow_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.COLD_OCEANS)
             .add(
                 Biomes.COLD_OCEAN,
                 Biomes.DEEP_COLD_OCEAN
             )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "cold_shallow_ocean"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "cold_deep_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_COLD_OCEANS)
             .add(Biomes.DEEP_COLD_OCEAN)
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "cold_deep_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS)
             .add(Biomes.COLD_OCEAN)
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "cold_shallow_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TEMPERATE_OCEANS)
             .add(
                 Biomes.OCEAN,
                 Biomes.DEEP_OCEAN
             )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "temperate_shallow_ocean"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "temperate_deep_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS)
             .add(Biomes.DEEP_OCEAN)
+            .addOptional(ResourceLocation.fromNamespaceAndPath("alexscaves", "abyssal_chasm"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "temperate_deep_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS)
             .add(Biomes.OCEAN)
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "temperate_shallow_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TROPICAL_OCEANS)
             .add(
                 Biomes.LUKEWARM_OCEAN,
                 Biomes.DEEP_LUKEWARM_OCEAN
             )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "subtropical_shallow_ocean"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "subtropical_deep_ocean"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "tropical_shallow_ocean"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "tropical_deep_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS)
             .add(Biomes.DEEP_LUKEWARM_OCEAN)
+            .addOptional(ResourceLocation.fromNamespaceAndPath("alexscaves", "abyssal_chasm"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "subtropical_deep_ocean"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "tropical_deep_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS)
             .add(Biomes.LUKEWARM_OCEAN)
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "subtropical_shallow_ocean"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "tropical_shallow_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.REEF)
             .add(Biomes.WARM_OCEAN)
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "regions_unexplored", "rocky_reef"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "biomeswevegone", "lush_stacks"
-                )
-            )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "rocky_reef"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("biomeswevegone", "lush_stacks"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "subtropical_shallow_ocean"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "tropical_shallow_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.JUNGLE)
             .forceAddTag(BiomeTags.IS_JUNGLE)
@@ -187,146 +185,65 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SWAMP)
             .add(Biomes.SWAMP)
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "wythers", "waterlily_swamp"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "terralith", "orchid_swamp"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "biomesoplenty", "bayou"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "biomeswevegone", "cypress_swamplands"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "biomeswevegone", "bayou"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "terrestria", "cypress_swamp"
-                )
-            )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("wythers", "waterlily_swamp"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("terralith", "orchid_swamp"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("biomesoplenty", "bayou"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("biomeswevegone", "cypress_swamplands"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("biomeswevegone", "bayou"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("terrestria", "cypress_swamp"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "mediterranean_swamp"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "temperate_swamp"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.MANGROVES)
             .add(Biomes.MANGROVE_SWAMP)
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "biomeswevegone", "white_mangrove_marshes"
-                )
-            )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("biomeswevegone", "white_mangrove_marshes"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "mangrove_marsh"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.MARSHES)
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "regions_unexplored", "marsh"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "biomesoplenty", "marsh"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "biomesoplenty", "wetland"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "biomesoplenty", "floodplain"
-                )
-            )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "marsh"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("biomesoplenty", "marsh"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("biomesoplenty", "wetland"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("biomesoplenty", "floodplain"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "mediterranean_marsh"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "temperate_marsh"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.RIVERS)
             .add(Biomes.RIVER)
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "wythers", "jungle_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "wythers", "tropical_forest_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "terralith", "warm_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "regions_unexplored", "tropical_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "regions_unexplored", "muddy_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "regions_unexplored", "cold_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "riverredux", "sandy_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "riverredux", "gravelly_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "riverredux", "tropical_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "riverredux", "carved_river"
-                )
-            )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("wythers", "jungle_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("wythers", "tropical_forest_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("terralith", "warm_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "tropical_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "muddy_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "cold_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("riverredux", "sandy_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("riverredux", "gravelly_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("riverredux", "tropical_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("riverredux", "carved_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("climaterivers", "cold_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("climaterivers", "lukewarm_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("climaterivers", "warm_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "boreal_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "desert_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "mediterranean_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "savanna_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "steppe_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "temperate_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "tropical_rainforest_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "tundra_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "warm_temperate_river"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TROPICAL_RIVERS)
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "wythers", "jungle_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "wythers", "tropical_forest_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "terralith", "warm_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "regions_unexplored", "tropical_river"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "riverredux", "tropical_river"
-                )
-            )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("wythers", "jungle_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("wythers", "tropical_forest_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("terralith", "warm_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "tropical_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("riverredux", "tropical_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("climaterivers", "lukewarm_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("climaterivers", "warm_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "desert_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "savanna_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "tropical_rainforest_river"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "warm_temperate_river"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.CHERRY)
             .add(Biomes.CHERRY_GROVE)
@@ -345,30 +262,13 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Biomes.LUSH_CAVES)
             .add(Biomes.DRIPSTONE_CAVES)
             .add(Biomes.DEEP_DARK)
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "regions_unexplored", "redstone_caves"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "regions_unexplored", "bioshroom_caves"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "regions_unexplored", "scorching_caves"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "regions_unexplored", "ancient_delta"
-                )
-            )
-            .addOptional(
-                ResourceLocation.fromNamespaceAndPath(
-                    "regions_unexplored", "prismachasm"
-                )
-            )
+            .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "redstone_caves"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "bioshroom_caves"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "scorching_caves"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "ancient_delta"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("regions_unexplored", "prismachasm"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "barren_caves"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "glowing_caves"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("still_life", "mushroom_caves"))
     }
 }

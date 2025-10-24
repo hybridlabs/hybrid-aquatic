@@ -63,7 +63,6 @@ open class HybridAquaticCrustaceanEntity(
         super.registerGoals()
         goalSelector.addGoal(1, PanicGoal(this, 1.0))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
-        goalSelector.addGoal(5, LookAtPlayerGoal(this, Player::class.java, 6.0f))
     }
 
     override fun finalizeSpawn(
@@ -139,10 +138,6 @@ open class HybridAquaticCrustaceanEntity(
         if (isClimbingWall()) {
             climbingTicks++
 
-            val blockStateAtPos = level().getBlockState(blockPosition())
-            if (isMoving() && blockStateAtPos.fluidState.isEmpty && climbingTicks % 6 == 0) {
-                playStepSound(blockPosition(), blockStateAtPos)
-            }
         } else {
             climbingTicks = 0
         }

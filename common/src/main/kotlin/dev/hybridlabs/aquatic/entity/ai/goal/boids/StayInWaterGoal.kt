@@ -8,7 +8,7 @@ import net.minecraft.world.phys.Vec3
 
 class StayInWaterGoal(private val mob: Mob) : Goal() {
     override fun canUse(): Boolean {
-        return true
+        return mob.isUnderWater
     }
 
     override fun tick() {

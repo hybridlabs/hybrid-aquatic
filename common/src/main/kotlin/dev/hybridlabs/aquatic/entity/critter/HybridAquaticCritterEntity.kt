@@ -60,10 +60,6 @@ open class HybridAquaticCritterEntity(
         if (isClimbingWall()) {
             climbingTicks++
 
-            val blockStateAtPos = level().getBlockState(blockPosition())
-            if (isMoving() && blockStateAtPos.fluidState.isEmpty && climbingTicks % 6 == 0) {
-                playStepSound(blockPosition(), blockStateAtPos)
-            }
         } else {
             climbingTicks = 0
         }

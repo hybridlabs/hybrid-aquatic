@@ -1,5 +1,17 @@
 {
   "values": [
-    "minecraft:deep_lukewarm_ocean"
+    "minecraft:deep_lukewarm_ocean",
+    {
+      "id": "alexscaves:abyssal_chasm",
+      "required": false
+    },
+    {
+      "id": "still_life:subtropical_deep_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:tropical_deep_ocean",
+      "required": false
+    }
   ]
 }

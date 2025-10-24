@@ -12,6 +12,7 @@ import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.TagKey
+import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
@@ -44,7 +45,8 @@ open class HybridAquaticFishEntity(
     open val prey: List<TagKey<EntityType<*>>>,
     open val predator: List<TagKey<EntityType<*>>>,
 ) : WaterAnimal(entityType, world), GeoEntity {
-
+    var prevRoll: Float = 0f
+    var currentRoll: Float = 0.0f
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun registerGoals() {
@@ -80,6 +82,7 @@ open class HybridAquaticFishEntity(
 
     override fun tick() {
         super.tick()
+        prevRoll = currentRoll
 
         if (this.isUnderWater) {
             moistness = getMaxMoistness()
@@ -90,6 +93,7 @@ open class HybridAquaticFishEntity(
                 hurt(this.damageSources().dryOut(), 2.0f)
                 this.xRot = 0.0f
                 this.yRot = 0.0f
+                currentRoll = Mth.lerp(0.2f, currentRoll, 0f)
             }
         }
 
@@ -116,6 +120,12 @@ open class HybridAquaticFishEntity(
             this.hasImpulse = true
             this.playSound(this.flopSound, this.soundVolume, this.voicePitch)
         }
+
+        prevRoll = currentRoll
+        var targetRoll = ((this.yRot - this.yRotO) * 0.1f).coerceIn(-0.45f, 0.45f)
+        targetRoll = -targetRoll
+        currentRoll += (targetRoll - currentRoll) * 0.05f
+
         this.updateSwingTime()
         super.aiStep()
     }

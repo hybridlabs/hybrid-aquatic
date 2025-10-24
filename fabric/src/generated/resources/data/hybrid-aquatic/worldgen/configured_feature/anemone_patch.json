@@ -12,6 +12,8 @@
                 "data": {
                   "Name": "hybrid-aquatic:anemone",
                   "Properties": {
+                    "face": "floor",
+                    "facing": "north",
                     "waterlogged": "true"
                   }
                 },
@@ -21,6 +23,8 @@
                 "data": {
                   "Name": "hybrid-aquatic:strawberry_anemone",
                   "Properties": {
+                    "face": "floor",
+                    "facing": "north",
                     "waterlogged": "true"
                   }
                 },
@@ -30,6 +34,8 @@
                 "data": {
                   "Name": "hybrid-aquatic:giant_green_anemone",
                   "Properties": {
+                    "face": "floor",
+                    "facing": "north",
                     "waterlogged": "true"
                   }
                 },

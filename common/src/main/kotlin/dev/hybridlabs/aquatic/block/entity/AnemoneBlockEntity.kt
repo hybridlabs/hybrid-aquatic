@@ -184,7 +184,7 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) :
             "UUID"
         )
 
-        fun tick(world: Level, pos: BlockPos, state: BlockState, blockEntity: AnemoneBlockEntity) {
+        fun tick(world: Level, blockEntity: AnemoneBlockEntity) {
             blockEntity.tick(world)
         }
 

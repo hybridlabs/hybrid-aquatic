@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
+@Suppress("unused", "DEPRECATION")
 class UmbrellaOctopusEntity(entityType: EntityType<out UmbrellaOctopusEntity>, world: Level) :
     HybridAquaticOctopusEntity(
         entityType,

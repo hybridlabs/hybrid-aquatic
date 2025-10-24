@@ -114,7 +114,6 @@
 					"name": "right_carapace",
 					"parent": "torso",
 					"pivot": [0, 10.0431, 14.2225],
-					"rotation": [0, 0, 0],
 					"cubes": [
 						{"origin": [-16, 10.04309, -10.77751], "size": [16, 4, 25], "pivot": [-8, 10.04309, 14.22249], "rotation": [-10, 0, 0], "uv": [0, 61]}
 					]
@@ -123,7 +122,6 @@
 					"name": "left_carapace",
 					"parent": "torso",
 					"pivot": [0, 10.0431, 14.2225],
-					"rotation": [0, 0, 0],
 					"cubes": [
 						{"origin": [0, 10.04309, -10.77751], "size": [16, 4, 25], "pivot": [8, 10.04309, 14.22249], "rotation": [-10, 0, 0], "uv": [0, 61], "mirror": true}
 					]

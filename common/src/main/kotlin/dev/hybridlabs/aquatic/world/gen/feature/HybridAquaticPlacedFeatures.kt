@@ -11,7 +11,6 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature
 @Suppress("UNUSED_PARAMETER")
 object HybridAquaticPlacedFeatures {
     val ANEMONE_PATCH = register("anemone_patch")
-    val GREEN_ANEMONE_PATCH = register("green_anemone_patch")
 
     val SARGASSUM = register("sargassum")
     val FLOATING_SARGASSUM = register("floating_sargassum")
@@ -20,8 +19,6 @@ object HybridAquaticPlacedFeatures {
     val WATER_LETTUCE = register("water_lettuce")
 
     val JUNGLE_LILY_PAD = register("jungle_lily_pad")
-
-    val GLOWING_PLANKTON = register("glowing_plankton")
 
     val RED_ALGAE_PATCH = register("red_algae_patch")
     val RED_ALGAE_MEADOW = register("red_algae_meadow")

@@ -53,14 +53,14 @@ object HybridAquaticBlocks {
         )
     }
 
-    val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK) }
-    val BULL_SHARK_PLUSHIE = register("bull_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BULL_SHARK) }
-    val FRILLED_SHARK_PLUSHIE = register("frilled_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK) }
-    val GREAT_WHITE_SHARK_PLUSHIE = register("great_white_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.GREAT_WHITE_SHARK) }
-    val HAMMERHEAD_SHARK_PLUSHIE = register("hammerhead_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.HAMMERHEAD_SHARK) }
-    val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK) }
-    val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK) }
-    val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK) }
+    val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL) }
+    val BULL_SHARK_PLUSHIE = register("bull_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val FRILLED_SHARK_PLUSHIE = register("frilled_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK, Blocks.GRAY_WOOL) }
+    val GREAT_WHITE_SHARK_PLUSHIE = register("great_white_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.GREAT_WHITE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val HAMMERHEAD_SHARK_PLUSHIE = register("hammerhead_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.HAMMERHEAD_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK, Blocks.LIGHT_BLUE_WOOL) }
+    val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL) }
+    val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
 
     val PEARL_BLOCK = register("pearl_block") { Block(Properties.ofFullCopy(Blocks.QUARTZ_BLOCK)) }
     val BLACK_PEARL_BLOCK = register("black_pearl_block") { Block(Properties.ofFullCopy(Blocks.QUARTZ_BLOCK)) }
@@ -75,6 +75,9 @@ object HybridAquaticBlocks {
     val JUNGLE_CRATE = register("jungle_crate") { CrateBlock(Properties.ofFullCopy(Blocks.JUNGLE_PLANKS)) }
     val MANGROVE_CRATE = register("mangrove_crate") { CrateBlock(Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)) }
     val CHERRY_CRATE = register("cherry_crate") { CrateBlock(Properties.ofFullCopy(Blocks.CHERRY_PLANKS)) }
+    val BAMBOO_CRATE = register("bamboo_crate") { CrateBlock(Properties.ofFullCopy(Blocks.BAMBOO_PLANKS)) }
+    val WARPED_CRATE = register("warped_crate") { CrateBlock(Properties.ofFullCopy(Blocks.WARPED_PLANKS)) }
+    val CRIMSON_CRATE = register("crimson_crate") { CrateBlock(Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)) }
 
     val SARGASSUM = register(
         "sargassum"
@@ -384,7 +387,7 @@ object HybridAquaticBlocks {
             )
         }
 
-    private fun createPlushieBlock(variant: PlushieBlock.Variant): PlushieBlock {
+    private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block ): PlushieBlock {
         return PlushieBlock(
             variant,
             Properties.of().instabreak().pushReaction(PushReaction.DESTROY).sound(SoundType.WOOL)

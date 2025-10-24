@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_top",
   "textures": {
-    "all": "hybrid-aquatic:block/acacia_crate"
+    "side": "hybrid-aquatic:block/acacia_crate_side",
+    "top": "hybrid-aquatic:block/acacia_crate_top"
   }
 }

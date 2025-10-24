@@ -19,6 +19,30 @@
     {
       "id": "riverredux:tropical_river",
       "required": false
+    },
+    {
+      "id": "climaterivers:lukewarm_river",
+      "required": false
+    },
+    {
+      "id": "climaterivers:warm_river",
+      "required": false
+    },
+    {
+      "id": "still_life:desert_river",
+      "required": false
+    },
+    {
+      "id": "still_life:savanna_river",
+      "required": false
+    },
+    {
+      "id": "still_life:tropical_rainforest_river",
+      "required": false
+    },
+    {
+      "id": "still_life:warm_temperate_river",
+      "required": false
     }
   ]
 }
