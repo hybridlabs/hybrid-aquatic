@@ -160,25 +160,4 @@ public class ForgePlatformHelper implements PlatformHelper {
         }
     }
 
-    @Override
-    public MobCategory getMobCategoryByName(String name) {
-        return MobCategory.byName(name);
-    }
-
-    @Override
-    public Item createBlockItem(Block block, Item.Properties properties) {
-        if (block.equals(HybridAquaticBlocks.INSTANCE.getANEMONE().get())) {
-            return new AnemoneBlockItem(block, properties);
-        } else if (block.equals(HybridAquaticBlocks.INSTANCE.getSTRAWBERRY_ANEMONE().get())) {
-            return new StrawberryAnemoneBlockItem(block, properties);
-        } else if (block.equals(HybridAquaticBlocks.INSTANCE.getGIANT_GREEN_ANEMONE().get())) {
-            return new GiantGreenAnemoneBlockItem(block, properties);
-        }
-        return new BlockItem(block, properties);
-    }
-
-    @Override
-    public Item createMessageInABottleItem(Item.Properties properties) {
-        return new MessageInABottleItem(properties);
-    }
 }
