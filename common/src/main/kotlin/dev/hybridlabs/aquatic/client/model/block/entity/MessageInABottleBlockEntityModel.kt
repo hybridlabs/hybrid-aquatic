@@ -28,15 +28,13 @@ class MessageInABottleBlockEntityModel : GeoModel<MessageInABottleBlockEntity>()
         return RenderType.entityTranslucent(texture)
     }
 
-    @Suppress("UnstableApiUsage")
-    override fun handleAnimations(
+    override fun setCustomAnimations(
         animatable: MessageInABottleBlockEntity,
         instanceId: Long,
-        animationState: AnimationState<MessageInABottleBlockEntity>,
-        partialTick: Float
+        animationState: AnimationState<MessageInABottleBlockEntity>
     ) {
         if (animatable.blockState.getValue(WATERLOGGED))
-            super.handleAnimations(animatable, instanceId, animationState, partialTick)
+            super.setCustomAnimations(animatable, instanceId, animationState)
     }
 
     companion object {
