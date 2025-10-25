@@ -401,6 +401,19 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
             )
         }
 
+        add(HybridAquaticBlocks.BAMBOO_CRATE.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool().add(
+                    AlternativesEntry.alternatives(
+                        LootTableReference.lootTableReference(HybridAquaticLootTables.BAMBOO_CRATE_TREASURE_ID).`when`(
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                        ),
+                        LootItem.lootTableItem(block.asItem()),
+                    )
+                ).build()
+            )
+        }
+
         add(HybridAquaticBlocks.MANGROVE_CRATE.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
