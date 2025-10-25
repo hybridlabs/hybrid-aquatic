@@ -1,9 +1,11 @@
 package dev.hybridlabs.aquatic.loot
 
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.advancements.critereon.EntityPredicate
 import net.minecraft.advancements.critereon.FishingHookPredicate
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
+import net.minecraft.world.entity.EntityType.ELDER_GUARDIAN
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.storage.loot.BuiltInLootTables
 import net.minecraft.world.level.storage.loot.LootContext
@@ -11,7 +13,9 @@ import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable.lootTableReference
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.event.LootTableLoadEvent
