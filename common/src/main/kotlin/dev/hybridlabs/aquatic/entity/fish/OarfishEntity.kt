@@ -56,7 +56,7 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
             }
 
             if (isFeeding()) {
-                hunger += 1
+                hunger += 2
 
                 if (hunger >= MAX_HUNGER) {
                     hunger = MAX_HUNGER
