@@ -4,6 +4,8 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents
 import net.minecraft.advancements.critereon.EntityPredicate
 import net.minecraft.advancements.critereon.FishingHookPredicate
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.storage.loot.BuiltInLootTables
 import net.minecraft.world.level.storage.loot.LootContext
@@ -55,17 +57,6 @@ object LootTableModifications {
                                         )
                                 )
                         }
-                    }
-
-                    EntityType.ELDER_GUARDIAN.defaultLootTable -> {
-                        tableBuilder.pool(
-                            LootPool.lootPool()
-                                .add(
-                                    LootItem.lootTableItem(HybridAquaticItems.PRISMARINE_ROD.get())
-                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
-                                )
-                                .build()
-                        )
                     }
                 }
             }

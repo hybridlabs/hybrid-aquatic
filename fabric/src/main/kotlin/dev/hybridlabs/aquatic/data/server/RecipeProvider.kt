@@ -22,6 +22,17 @@ import java.util.function.Consumer
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun buildRecipes(exporter: Consumer<FinishedRecipe>) {
         // misc recipes
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.PRISMARINE_ROD.get())
+            .pattern("P  ")
+            .pattern("P  ")
+            .pattern("   ")
+            .define('P', Items.PRISMARINE_SHARD)
+            .unlockedBy(
+                "has_prismarine",
+                InventoryChangeTrigger.TriggerInstance.hasItems(Items.PRISMARINE_SHARD)
+            )
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.SPONGE)
             .pattern("SS ")
             .pattern("SS ")
