@@ -14,6 +14,7 @@ object HybridAquaticLootTables {
     val SPRUCE_CRATE_TREASURE_ID = CommonClass.locate("gameplay/spruce_crate_treasure")
     val BIRCH_CRATE_TREASURE_ID = CommonClass.locate("gameplay/birch_crate_treasure")
     val JUNGLE_CRATE_TREASURE_ID = CommonClass.locate("gameplay/jungle_crate_treasure")
+    val BAMBOO_CRATE_TREASURE_ID = CommonClass.locate("gameplay/bamboo_crate_treasure")
     val ACACIA_CRATE_TREASURE_ID = CommonClass.locate("gameplay/acacia_crate_treasure")
     val DARK_OAK_CRATE_TREASURE_ID = CommonClass.locate("gameplay/dark_oak_crate_treasure")
     val MANGROVE_CRATE_TREASURE_ID = CommonClass.locate("gameplay/mangrove_crate_treasure")

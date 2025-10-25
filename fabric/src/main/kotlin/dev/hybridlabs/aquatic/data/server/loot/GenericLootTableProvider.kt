@@ -344,6 +344,39 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
+            HybridAquaticLootTables.BAMBOO_CRATE_TREASURE_ID,
+            LootTable.lootTable()
+                .setRandomSequence(HybridAquaticLootTables.BAMBOO_CRATE_TREASURE_ID)
+                .pool(universalCratePool().build())
+                .pool(driftwoodPool().build())
+                .pool(plushiePool().build())
+                .pool(
+                    LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0f))
+                        .add(
+                            LootItem.lootTableItem(Items.BAMBOO)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
+                        )
+                        .add(
+                            LootItem.lootTableItem(Items.SPYGLASS)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
+                        )
+                        .add(
+                            LootItem.lootTableItem(Items.SNIFFER_EGG)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
+                        )
+                        .add(
+                            LootItem.lootTableItem(Items.TORCHFLOWER_SEEDS)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
+                        )
+                        .add(
+                            LootItem.lootTableItem(Items.EXPERIENCE_BOTTLE)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 12.0f)))
+                        ).build()
+                )
+        )
+
+        exporter.accept(
             HybridAquaticLootTables.VENT_LOOT_ID,
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.VENT_LOOT_ID)
