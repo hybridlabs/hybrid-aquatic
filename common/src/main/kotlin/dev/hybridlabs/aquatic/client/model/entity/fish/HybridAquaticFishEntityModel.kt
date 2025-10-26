@@ -10,6 +10,7 @@ import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 import kotlin.math.abs
 
+@Suppress("OVERRIDE_DEPRECATION")
 abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private val id: String) : GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {
         return CommonClass.locate("geo/fish/$id/$id.geo.json")

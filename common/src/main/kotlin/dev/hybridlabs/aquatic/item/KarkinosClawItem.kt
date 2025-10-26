@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes.BLOCK_INTERACTION_RAN
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.component.ItemAttributeModifiers
 
+@Suppress("OVERRIDE_DEPRECATION")
 class KarkinosClawItem(settings: Properties) : Item(settings) {
 
     private var attributes: ItemAttributeModifiers

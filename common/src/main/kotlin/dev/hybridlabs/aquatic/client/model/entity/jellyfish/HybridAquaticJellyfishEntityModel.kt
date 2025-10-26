@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
 
+@Suppress("OVERRIDE_DEPRECATION")
 abstract class HybridAquaticJellyfishEntityModel<T : HybridAquaticJellyfishEntity>(private val id: String) :
     GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {

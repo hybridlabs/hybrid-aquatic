@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.block.entity.GiantGreenAnemoneBlockEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
 
+@Suppress("OVERRIDE_DEPRECATION")
 class GiantGreenAnemoneBlockEntityModel : GeoModel<GiantGreenAnemoneBlockEntity>() {
     override fun getAnimationResource(entity: GiantGreenAnemoneBlockEntity): ResourceLocation {
         return ANIMATION_LOCATION

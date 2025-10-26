@@ -2,8 +2,6 @@ package dev.hybridlabs.aquatic.client.gui
 
 import dev.hybridlabs.aquatic.block.SeaMessage
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.screens.inventory.BookViewScreen
-import net.minecraft.client.gui.screens.inventory.BookViewScreen.*
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.FormattedText
 import net.minecraft.network.chat.Style
@@ -26,7 +24,7 @@ class SeaMessageBookContents(val message: SeaMessage) {
     }
      */
 
-    override fun equals(obj: Any?): Boolean {
+    override fun equals(other: Any?): Boolean {
         TODO("Not yet implemented")
     }
 

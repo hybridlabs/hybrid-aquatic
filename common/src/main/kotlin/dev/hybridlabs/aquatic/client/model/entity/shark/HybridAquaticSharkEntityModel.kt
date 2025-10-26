@@ -10,6 +10,7 @@ import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 import kotlin.math.abs
 
+@Suppress("OVERRIDE_DEPRECATION")
 abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity>(
     private val id: String
 ) : GeoModel<T>() {
