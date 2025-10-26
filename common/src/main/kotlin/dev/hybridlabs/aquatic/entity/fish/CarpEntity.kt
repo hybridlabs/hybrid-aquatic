@@ -73,7 +73,9 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.seaLevel - 16)..< world.seaLevel + 64 && world.isWaterAt(pos)
+            return  pos.y in (world.seaLevel - 16)..< world.seaLevel + 64 &&
+                    world.isWaterAt(pos) &&
+                    world.canSeeSkyFromBelowWater(pos)
         }
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
