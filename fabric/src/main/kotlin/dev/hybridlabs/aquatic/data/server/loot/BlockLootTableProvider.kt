@@ -405,7 +405,12 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HybridAquaticLootTables.BAMBOO_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HybridAquaticLootTables.BAMBOO_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),

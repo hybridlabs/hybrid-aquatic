@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "minecraft:prismarine_shard"
+    }
+  },
+  "pattern": [
+    "P  ",
+    "P  ",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "hybrid-aquatic:prismarine_rod"
+  }
+}
