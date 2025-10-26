@@ -326,10 +326,7 @@ open class HybridAquaticFishEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.seaLevel - 1
-            val bottomY = world.seaLevel - 8
-
-            return pos.y in bottomY..topY &&
+            return  pos.y in (world.seaLevel - 8)..< (world.seaLevel - 1) &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
@@ -341,7 +338,9 @@ open class HybridAquaticFishEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return checkSurfaceWaterAnimalSpawnRules(type, world, reason, pos, random)
+            return  pos.y in (world.seaLevel - 24)..(world.seaLevel - 12) &&
+                    world.isWaterAt(pos) &&
+                    world.canSeeSkyFromBelowWater(pos)
         }
 
         fun canNightSpawn(
@@ -351,7 +350,7 @@ open class HybridAquaticFishEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return !world.level.isDay &&
+            return  !world.level.isDay &&
                     pos.y in (world.seaLevel - 24)..(world.seaLevel - 12) &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos)
