@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
 
+@Suppress("OVERRIDE_DEPRECATION")
 class BuoyBlockEntityModel : GeoModel<BuoyBlockEntity>() {
     override fun getAnimationResource(entity: BuoyBlockEntity): ResourceLocation {
         return ANIMATION_LOCATION

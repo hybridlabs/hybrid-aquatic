@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier
 import net.minecraft.world.item.Item
 import java.util.*
 
+@Suppress("OVERRIDE_DEPRECATION")
 class KarkinosClawItem(settings: Properties) : Item(settings) {
 
     private var attributes: Multimap<Attribute, AttributeModifier>
