@@ -1,6 +1,7 @@
 {
   "values": [
     "hybrid-aquatic:african_butterflyfish",
+    "hybrid-aquatic:blowfish",
     "hybrid-aquatic:stonefish",
     "hybrid-aquatic:damselfish",
     "hybrid-aquatic:pearlfish",
@@ -32,6 +33,7 @@
     "hybrid-aquatic:rockfish",
     "hybrid-aquatic:sea_bass",
     "hybrid-aquatic:seahorse",
+    "hybrid-aquatic:seadragon",
     "hybrid-aquatic:sunfish",
     "hybrid-aquatic:surgeonfish",
     "hybrid-aquatic:tetra",
