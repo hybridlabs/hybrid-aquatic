@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.block.entity.AnemoneBlockEntity
 import dev.hybridlabs.aquatic.block.entity.GiantGreenAnemoneBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -8,12 +7,7 @@ import net.minecraft.tags.FluidTags
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.LevelAccessor
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.EntityBlock
-import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock
-import net.minecraft.world.level.block.RenderShape
-import net.minecraft.world.level.block.SimpleWaterloggedBlock
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
@@ -108,17 +102,22 @@ class GiantGreenAnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirec
         return GiantGreenAnemoneBlockEntity(pos, state)
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(
+        state: BlockState,
+        level: BlockGetter,
+        pos: BlockPos,
+        type: PathComputationType
+    ): Boolean {
         return false
     }
-
+    
     companion object {
-        private val CEILING_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 16.0)
-        private val FLOOR_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
-        private val NORTH_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
-        private val SOUTH_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
-        private val WEST_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
-        private val EAST_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
+        private val CEILING_SHAPE: VoxelShape = box(1.0, 4.0, 1.0, 15.0, 16.0, 15.0)
+        private val FLOOR_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 12.0, 15.0)
+        private val NORTH_SHAPE: VoxelShape = box(1.0, 1.0, 4.0, 15.0, 15.0, 16.0)
+        private val SOUTH_SHAPE: VoxelShape = box(1.0, 1.0, 0.0, 15.0, 15.0, 12.0)
+        private val WEST_SHAPE: VoxelShape = box(4.0, 1.0, 1.0, 16.0, 15.0, 15.0)
+        private val EAST_SHAPE: VoxelShape = box(0.0, 1.0, 1.0, 12.0, 15.0, 15.0)
         private val COLLISION_SHAPE = box(1.0, 0.0, 1.0, 15.0, 8.0, 15.0)
     }
 }
