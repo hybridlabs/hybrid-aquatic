@@ -9,7 +9,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
  * A registry of configured features for Hybrid Aquatic.
  */
 object HybridAquaticConfiguredFeatures {
-    val ANEMONE_PATCH = register("anemone_patch")
+    val ANEMONES = register("anemones")
     val DUNEGRASS_PATCH = register("dunegrass_patch")
     val SARGASSUM = register("sargassum")
     val FLOATING_SARGASSUM = register("floating_sargassum")

@@ -1,5 +1,5 @@
 {
-  "feature": "hybrid-aquatic:anemone_patch",
+  "feature": "hybrid-aquatic:anemones",
   "placement": [
     {
       "type": "minecraft:in_square"
@@ -9,8 +9,12 @@
       "heightmap": "OCEAN_FLOOR"
     },
     {
+      "type": "minecraft:rarity_filter",
+      "chance": 10
+    },
+    {
       "type": "minecraft:count",
-      "count": 2
+      "count": 1
     },
     {
       "type": "minecraft:biome"

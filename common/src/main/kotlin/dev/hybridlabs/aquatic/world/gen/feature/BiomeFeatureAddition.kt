@@ -16,13 +16,13 @@ data class BiomeFeatureAddition(
             BiomeFeatureAddition(
                 HybridAquaticBiomeTags.REEF,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
-                HybridAquaticPlacedFeatures.ANEMONE_PATCH
+                HybridAquaticPlacedFeatures.ANEMONES
             ),
 
             BiomeFeatureAddition(
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
-                HybridAquaticPlacedFeatures.ANEMONE_PATCH
+                HybridAquaticPlacedFeatures.ANEMONES
             ),
 
             BiomeFeatureAddition(

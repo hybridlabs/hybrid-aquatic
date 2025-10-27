@@ -28,11 +28,12 @@ class PlacedFeatureProvider(
 
         // anemone patch
         entries.add(
-            HybridAquaticPlacedFeatures.ANEMONE_PATCH, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.ANEMONE_PATCH), listOf(
+            HybridAquaticPlacedFeatures.ANEMONES, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.ANEMONES), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(2),
+                    RarityFilter.onAverageOnceEvery(10),
+                    CountPlacement.of(1),
                     BiomeFilter.biome()
                 )
             )

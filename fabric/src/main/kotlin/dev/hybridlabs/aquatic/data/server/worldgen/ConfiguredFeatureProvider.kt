@@ -39,37 +39,10 @@ class ConfiguredFeatureProvider(
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
         // anemone patch
         entries.add(
-            HybridAquaticConfiguredFeatures.ANEMONE_PATCH,
+            HybridAquaticConfiguredFeatures.ANEMONES,
             ConfiguredFeature(
-                Feature.NO_BONEMEAL_FLOWER,
-                RandomPatchConfiguration(
-                    3, 3, 3,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            WeightedStateProvider(
-                                SimpleWeightedRandomList.builder<BlockState>()
-                                    .add(
-                                        HybridAquaticBlocks.ANEMONE.get()
-                                            .defaultBlockState()
-                                            .setValue(WATERLOGGED, true), 1
-                                    )
-                                    .add(
-                                        HybridAquaticBlocks.STRAWBERRY_ANEMONE.get()
-                                            .defaultBlockState().setValue(
-                                            WATERLOGGED, true), 3
-                                    )
-                                    .add(
-                                        HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get()
-                                            .defaultBlockState().setValue(
-                                            WATERLOGGED, true), 1
-                                    )
-                                    .build()
-                            )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
+                HybridAquaticFeatures.ANEMONES.get(),
+                NoneFeatureConfiguration()
             )
         )
 
