@@ -52,7 +52,29 @@ class GiantGreenAnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirec
         pos: BlockPos,
         context: CollisionContext
     ): VoxelShape {
-        return COLLISION_SHAPE
+        val direction = state.getValue(FACING)
+        when (state.getValue(FACE) as AttachFace) {
+            AttachFace.FLOOR -> {
+                return FLOOR_SHAPE
+            }
+
+            AttachFace.WALL -> {
+                val voxelShape: VoxelShape = when (direction) {
+                    Direction.EAST -> EAST_SHAPE
+                    Direction.WEST -> WEST_SHAPE
+                    Direction.SOUTH -> SOUTH_SHAPE
+                    Direction.NORTH, Direction.UP, Direction.DOWN -> NORTH_SHAPE
+
+                    else -> throw IncompatibleClassChangeError()
+                }
+
+                return voxelShape
+            }
+
+            AttachFace.CEILING -> {
+                return CEILING_SHAPE
+            }
+        }
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
