@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
@@ -303,6 +304,14 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                 fun fromBiome(biome: Holder<Biome>): Type {
                     return when {
                         biome.`is`(BiomeTags.IS_BEACH) -> {
+                            SEA
+                        }
+
+                        biome.`is`(HybridAquaticBiomeTags.ROCKY_BEACHES) -> {
+                            SEA
+                        }
+
+                        biome.`is`(HybridAquaticBiomeTags.SANDY_BEACHES) -> {
                             SEA
                         }
 
