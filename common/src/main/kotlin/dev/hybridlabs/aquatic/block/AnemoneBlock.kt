@@ -73,7 +73,29 @@ class AnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirectionalBloc
         pos: BlockPos,
         context: CollisionContext,
     ): VoxelShape {
-        return COLLISION_SHAPE
+        val direction = state.getValue(FACING)
+        when (state.getValue(FACE) as AttachFace) {
+            AttachFace.FLOOR -> {
+                return FLOOR_SHAPE
+            }
+
+            AttachFace.WALL -> {
+                val voxelShape: VoxelShape = when (direction) {
+                    Direction.EAST -> EAST_SHAPE
+                    Direction.WEST -> WEST_SHAPE
+                    Direction.SOUTH -> SOUTH_SHAPE
+                    Direction.NORTH, Direction.UP, Direction.DOWN -> NORTH_SHAPE
+
+                    else -> throw IncompatibleClassChangeError()
+                }
+
+                return voxelShape
+            }
+
+            AttachFace.CEILING -> {
+                return CEILING_SHAPE
+            }
+        }
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
@@ -139,6 +161,5 @@ class AnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirectionalBloc
         private val SOUTH_SHAPE: VoxelShape = box(1.0, 1.0, 0.0, 15.0, 15.0, 16.0)
         private val WEST_SHAPE: VoxelShape = box(0.0, 1.0, 1.0, 16.0, 15.0, 15.0)
         private val EAST_SHAPE: VoxelShape = box(0.0, 1.0, 1.0, 16.0, 15.0, 15.0)
-        private val COLLISION_SHAPE = box(1.0, 0.0, 1.0, 15.0, 8.0, 15.0)
     }
 }
