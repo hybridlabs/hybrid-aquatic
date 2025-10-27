@@ -110,7 +110,7 @@ class GiantGreenAnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirec
     ): Boolean {
         return false
     }
-    
+
     companion object {
         private val CEILING_SHAPE: VoxelShape = box(1.0, 4.0, 1.0, 15.0, 16.0, 15.0)
         private val FLOOR_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 12.0, 15.0)
