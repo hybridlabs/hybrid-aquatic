@@ -113,12 +113,12 @@ class GiantGreenAnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirec
 
     companion object {
         val CODEC: MapCodec<GiantGreenAnemoneBlock> = simpleCodec(::GiantGreenAnemoneBlock)
-        private val CEILING_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 16.0)
-        private val FLOOR_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
-        private val NORTH_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
-        private val SOUTH_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
-        private val WEST_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
-        private val EAST_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
+        private val CEILING_SHAPE: VoxelShape = box(1.0, 4.0, 1.0, 15.0, 16.0, 15.0)
+        private val FLOOR_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 12.0, 15.0)
+        private val NORTH_SHAPE: VoxelShape = box(1.0, 1.0, 4.0, 15.0, 15.0, 16.0)
+        private val SOUTH_SHAPE: VoxelShape = box(1.0, 1.0, 0.0, 15.0, 15.0, 12.0)
+        private val WEST_SHAPE: VoxelShape = box(4.0, 1.0, 1.0, 16.0, 15.0, 15.0)
+        private val EAST_SHAPE: VoxelShape = box(0.0, 1.0, 1.0, 12.0, 15.0, 15.0)
         private val COLLISION_SHAPE = box(1.0, 0.0, 1.0, 15.0, 8.0, 15.0)
     }
 }
