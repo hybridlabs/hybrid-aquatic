@@ -35,6 +35,7 @@ class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
     }
 
     override fun registerGoals() {
+        super.registerGoals()
         goalSelector.addGoal(0, InflateGoal())
     }
 
