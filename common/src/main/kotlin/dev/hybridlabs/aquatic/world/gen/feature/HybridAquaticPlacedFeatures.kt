@@ -10,7 +10,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature
  */
 @Suppress("UNUSED_PARAMETER")
 object HybridAquaticPlacedFeatures {
-    val ANEMONE_PATCH = register("anemone_patch")
+    val ANEMONES = register("anemones")
 
     val SARGASSUM = register("sargassum")
     val FLOATING_SARGASSUM = register("floating_sargassum")

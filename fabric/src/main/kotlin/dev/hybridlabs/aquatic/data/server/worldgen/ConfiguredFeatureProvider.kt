@@ -11,7 +11,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
-import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.worldgen.features.FeatureUtils
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.util.random.SimpleWeightedRandomList
@@ -24,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties.WAT
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.feature.Feature
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration
@@ -43,38 +43,10 @@ class ConfiguredFeatureProvider(
 
             FeatureUtils.register(
                 bootstrap,
-                HybridAquaticConfiguredFeatures.ANEMONE_PATCH, Feature.NO_BONEMEAL_FLOWER,
-                RandomPatchConfiguration(
-                    3, 3, 3,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            WeightedStateProvider(
-                                SimpleWeightedRandomList.builder<BlockState>()
-                                    .add(
-                                        HybridAquaticBlocks.ANEMONE.get().defaultBlockState()
-                                            .setValue(WATERLOGGED, true), 1
-                                    )
-                                    .add(
-                                        HybridAquaticBlocks.STRAWBERRY_ANEMONE.get().defaultBlockState().setValue(
-                                            WATERLOGGED,
-                                            true
-                                        ), 3
-                                    )
-                                    .add(
-                                        HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get().defaultBlockState().setValue(
-                                            WATERLOGGED,
-                                            true
-                                        ), 1
-                                    )
-                                    .build()
-                            )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
+                HybridAquaticConfiguredFeatures.ANEMONES,
+                HybridAquaticFeatures.ANEMONES.get(),
+                NoneFeatureConfiguration()
             )
-
 
             FeatureUtils.register(
                 bootstrap,
@@ -83,6 +55,7 @@ class ConfiguredFeatureProvider(
                     0.33f
                 )
             )
+
             FeatureUtils.register(
                 bootstrap,
                 HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH,
@@ -241,7 +214,7 @@ class ConfiguredFeatureProvider(
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
         val reg = registries.lookup(Registries.CONFIGURED_FEATURE).get()
 
-        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.ANEMONE_PATCH))
+        entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.ANEMONES))
         entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.BULL_KELP))
         entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH))
         entries.add(reg.getOrThrow(HybridAquaticConfiguredFeatures.FLOATING_SARGASSUM))

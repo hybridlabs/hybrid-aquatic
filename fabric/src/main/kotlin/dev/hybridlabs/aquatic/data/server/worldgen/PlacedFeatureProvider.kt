@@ -15,7 +15,7 @@ import net.minecraft.world.level.levelgen.placement.*
 import java.util.concurrent.CompletableFuture
 
 class PlacedFeatureProvider(
-    output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>
+    output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
 
     companion object {
@@ -33,12 +33,12 @@ class PlacedFeatureProvider(
             val reg = bootstrap.lookup(Registries.CONFIGURED_FEATURE)
             PlacementUtils.register(
                 bootstrap,
-                HybridAquaticPlacedFeatures.ANEMONE_PATCH,
-                reg.get(HybridAquaticConfiguredFeatures.ANEMONE_PATCH).get(),
-                listOf(
+                HybridAquaticPlacedFeatures.ANEMONES,
+                reg.get(HybridAquaticConfiguredFeatures.ANEMONES).get(), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(2),
+                    RarityFilter.onAverageOnceEvery(10),
+                    CountPlacement.of(1),
                     BiomeFilter.biome()
                 )
             )
@@ -194,7 +194,7 @@ class PlacedFeatureProvider(
         val reg = registries.lookup(Registries.PLACED_FEATURE).get()
 
 
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.ANEMONE_PATCH))
+        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.ANEMONES))
         entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.BULL_KELP))
         entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.DUNEGRASS_PATCH))
         entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.FLOATING_SARGASSUM))
@@ -213,5 +213,4 @@ class PlacedFeatureProvider(
     override fun getName(): String {
         return "Placed Features"
     }
-
 }
