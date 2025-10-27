@@ -133,7 +133,7 @@ class AnemoneBlock(settings: Properties) : FaceAttachedHorizontalDirectionalBloc
 
     companion object {
         val CODEC: MapCodec<AnemoneBlock> = simpleCodec(::AnemoneBlock)
-        private val CEILING_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 16.0)
+        private val CEILING_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
         private val FLOOR_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
         private val NORTH_SHAPE: VoxelShape = box(1.0, 0.0, 0.0, 15.0, 16.0, 15.0)
         private val SOUTH_SHAPE: VoxelShape = box(1.0, 0.0, 0.0, 15.0, 16.0, 15.0)
