@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#hybrid-aquatic:shallow_temperate_oceans",
-  "features": "hybrid-aquatic:green_anemone_patch",
+  "features": "hybrid-aquatic:anemones",
   "step": "vegetal_decoration"
 }
