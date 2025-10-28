@@ -38,11 +38,29 @@
 				"fin": {
 					"rotation": ["Math.cos(query.anim_time * 180)*-10", 0, 0]
 				},
-				"tentacles_1": {
-					"rotation": ["Math.cos(query.anim_time * 180)*15", 0, 0]
+				"right_feeding_tentacle": {
+					"rotation": [0, "30+Math.cos(query.anim_time * 180)*25", 0]
 				},
-				"tentacles_2": {
-					"rotation": ["Math.sin(query.anim_time * 180)*10", 0, 0]
+				"right_top_tentacle": {
+					"rotation": ["30+Math.cos(query.anim_time * 180)*15", 0, 45]
+				},
+				"left_top_tentacle": {
+					"rotation": ["30+Math.cos(query.anim_time * 180)*15", 0, -45]
+				},
+				"left_bottom_tentacle": {
+					"rotation": ["-30+Math.cos(query.anim_time * 180)*-15", 0, 45]
+				},
+				"right_bottom_tentacle": {
+					"rotation": ["-30+Math.cos(query.anim_time * 180)*-15", 0, -45]
+				},
+				"left_feeding_tentacle": {
+					"rotation": [0, "-30-Math.cos(query.anim_time * 180)*25", 0]
+				},
+				"right_feeding_tentacle_2": {
+					"rotation": [0, "15+Math.sin(query.anim_time * 180)*20", 0]
+				},
+				"left_feeding_tentacle_2": {
+					"rotation": [0, "-15-Math.sin(query.anim_time * 180)*20", 0]
 				}
 			}
 		},
