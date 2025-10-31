@@ -25,20 +25,8 @@ object LootTableModifications {
                     LootPool.lootPool().add(LootItem.lootTableItem(Items.COD).setWeight(60))
                         .add(LootItem.lootTableItem(Items.SALMON).setWeight(25))
                         .add(LootItem.lootTableItem(Items.TROPICAL_FISH).setWeight(2))
-                        .add(LootItem.lootTableItem(Items.PUFFERFISH).setWeight(13)).add(
-                            LootTableReference.lootTableReference(HybridAquaticLootTables.FISHING_DEEP_SEA_FISH_ID)
-                                .setWeight(30).setQuality(1)
-                        ).add(
-                            LootTableReference.lootTableReference(HybridAquaticLootTables.FISHING_OPEN_OCEAN_FISH_ID)
-                                .setWeight(40).setQuality(1)
-                        ).add(
-                            LootTableReference.lootTableReference(HybridAquaticLootTables.FISHING_REEF_FISH_ID)
-                                .setWeight(50).setQuality(-1)
-                        ).add(
-                            LootTableReference.lootTableReference(HybridAquaticLootTables.FISHING_TROPICAL_FRESHWATER_FISH_ID)
-                                .setWeight(30).setQuality(1)
-
-                        ).add(
+                        .add(LootItem.lootTableItem(Items.PUFFERFISH).setWeight(13))
+                        .add(
                             LootTableReference.lootTableReference(HybridAquaticLootTables.HA_CRATES)
                                 .setWeight(10).setQuality(2).`when`(
                                     LootItemEntityPropertyCondition.hasProperties(
