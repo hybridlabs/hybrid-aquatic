@@ -519,19 +519,5 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                         .add(LootItem.lootTableItem(HybridAquaticItems.LOPHELIA_CORAL.get())).build()
                 )
         )
-
-        exporter.accept(
-            HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID,
-            LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.CRAB_DIGGING_TREASURE_ID)
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(Items.AIR).setWeight(10))
-                        .add(LootItem.lootTableItem(Items.NAUTILUS_SHELL).setWeight(2))
-                        .add(LootItem.lootTableItem(Items.GOLD_NUGGET).setWeight(3))
-                        .add(LootItem.lootTableItem(Items.IRON_NUGGET).setWeight(5))
-                        .build()
-                )
-        )
     }
 }

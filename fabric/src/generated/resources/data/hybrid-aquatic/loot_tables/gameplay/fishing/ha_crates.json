@@ -38,6 +38,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "hybrid-aquatic:bamboo_crate"
+        },
+        {
+          "type": "minecraft:item",
           "name": "hybrid-aquatic:mangrove_crate"
         },
         {
@@ -48,5 +52,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "hybrid-aquatic:gameplay/fishing/treasure"
+  "random_sequence": "hybrid-aquatic:gameplay/fishing/ha_crates"
 }

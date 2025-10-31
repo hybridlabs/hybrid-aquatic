@@ -39,7 +39,7 @@ object LootTableModifications {
                                 .setWeight(30).setQuality(1)
 
                         ).add(
-                            LootTableReference.lootTableReference(HybridAquaticLootTables.FISHING_TREASURE_ID)
+                            LootTableReference.lootTableReference(HybridAquaticLootTables.HA_CRATES)
                                 .setWeight(10).setQuality(2).`when`(
                                     LootItemEntityPropertyCondition.hasProperties(
                                         LootContext.EntityTarget.THIS,
