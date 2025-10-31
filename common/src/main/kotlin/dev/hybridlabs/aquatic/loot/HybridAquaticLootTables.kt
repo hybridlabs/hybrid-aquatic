@@ -3,11 +3,11 @@ package dev.hybridlabs.aquatic.loot
 import dev.hybridlabs.aquatic.CommonClass
 
 object HybridAquaticLootTables {
-    val FISHING_REEF_FISH_ID = CommonClass.locate("gameplay/fishing/reef_fish")
-    val FISHING_DEEP_SEA_FISH_ID = CommonClass.locate("gameplay/fishing/deep_sea_fish")
-    val FISHING_OPEN_OCEAN_FISH_ID = CommonClass.locate("gameplay/fishing/open_ocean_fish")
-    val FISHING_TROPICAL_FRESHWATER_FISH_ID = CommonClass.locate("gameplay/fishing/tropical_freshwater_fish")
-    val FISHING_TREASURE_ID = CommonClass.locate("gameplay/fishing/treasure")
+    val HA_SMALL_FISH = CommonClass.locate("gameplay/fishing/ha_small_fish")
+    val HA_MEDIUM_FISH = CommonClass.locate("gameplay/fishing/ha_medium_fish")
+    val HA_LARGE_FISH = CommonClass.locate("gameplay/fishing/ha_large_fish")
+
+    val HA_CRATES = CommonClass.locate("gameplay/fishing/ha_crates")
     val CRAB_POT_TREASURE_ID = CommonClass.locate("gameplay/crab_pot_treasure")
     val HYBRID_CRATE_TREASURE_ID = CommonClass.locate("gameplay/hybrid_crate_treasure")
     val OAK_CRATE_TREASURE_ID = CommonClass.locate("gameplay/oak_crate_treasure")
@@ -19,6 +19,7 @@ object HybridAquaticLootTables {
     val DARK_OAK_CRATE_TREASURE_ID = CommonClass.locate("gameplay/dark_oak_crate_treasure")
     val MANGROVE_CRATE_TREASURE_ID = CommonClass.locate("gameplay/mangrove_crate_treasure")
     val CHERRY_CRATE_TREASURE_ID = CommonClass.locate("gameplay/cherry_crate_treasure")
+
     val VENT_LOOT_ID = CommonClass.locate("gameplay/vent_drops")
 
     val CLAWED_LOBSTER = CommonClass.locate("gameplay/clawed_lobster")
@@ -37,6 +38,4 @@ object HybridAquaticLootTables {
 
     val BLUE_SPOTTED_STINGRAY = CommonClass.locate("gameplay/blue_spotted_stingray")
     val SPOTTED_EAGLE_RAY = CommonClass.locate("gameplay/spotted_eagle_ray")
-
-    val CRAB_DIGGING_TREASURE_ID = CommonClass.locate("gameplay/crab_digging_treasure")
 }

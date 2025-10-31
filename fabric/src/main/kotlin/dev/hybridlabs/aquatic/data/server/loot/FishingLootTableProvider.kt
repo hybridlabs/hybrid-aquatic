@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
+import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.core.HolderLookup
@@ -10,6 +11,7 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
+import net.minecraft.world.level.storage.loot.entries.TagEntry
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
@@ -18,250 +20,52 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
     SimpleFabricLootTableProvider(output, lookupProvider, LootContextParamSets.FISHING) {
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
         exporter.accept(
-            ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.FISHING_DEEP_SEA_FISH_ID),
+            HybridAquaticLootTables.HA_SMALL_FISH,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.FISHING_DEEP_SEA_FISH_ID)
+                .setRandomSequence(HybridAquaticLootTables.HA_SMALL_FISH)
                 .pool(
                     LootPool.lootPool()
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.ANGLERFISH.get())
+                            TagEntry.expandTag(HybridAquaticItemTags.SMALL_FISH)
                                 .setWeight(3)
                         )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.BARRELEYE.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DRAGONFISH.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.FLASHLIGHT_FISH.get())
-                                .setWeight(4)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.RATFISH.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.OARFISH.get())
-                                .setWeight(1)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SUNFISH.get())
-                                .setWeight(1)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.OPAH.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.COELACANTH.get())
-                                .setWeight(1)
-                        ).build()
+                        .build()
                 )
         )
 
         exporter.accept(
-            ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.FISHING_REEF_FISH_ID),
+            HybridAquaticLootTables.HA_MEDIUM_FISH,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.FISHING_REEF_FISH_ID)
+                .setRandomSequence(HybridAquaticLootTables.HA_MEDIUM_FISH)
                 .pool(
                     LootPool.lootPool()
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SURGEONFISH.get())
+                            TagEntry.expandTag(HybridAquaticItemTags.MEDIUM_FISH)
                                 .setWeight(3)
                         )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.BLUE_SPOTTED_STINGRAY.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.CLOWNFISH.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.BOXFISH.get())
-                                .setWeight(5)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.LIONFISH.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.NEEDLEFISH.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.MORAY_EEL.get())
-                                .setWeight(1)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.PARROTFISH.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.ROCKFISH.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.TRIGGERFISH.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SEA_BASS.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SEAHORSE.get())
-                                .setWeight(1)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SPOTTED_EAGLE_RAY.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.BLOWFISH.get())
-                                .setWeight(1)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.STONEFISH.get())
-                                .setWeight(1)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.FLASHLIGHT_FISH.get())
-                                .setWeight(4)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.FLYING_FISH.get())
-                                .setWeight(4)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SQUIRRELFISH.get())
-                                .setWeight(4)
-                        ).build()
+                        .build()
                 )
         )
 
         exporter.accept(
-            ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.FISHING_OPEN_OCEAN_FISH_ID),
+            HybridAquaticLootTables.HA_LARGE_FISH,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.FISHING_OPEN_OCEAN_FISH_ID)
+                .setRandomSequence(HybridAquaticLootTables.HA_LARGE_FISH)
                 .pool(
                     LootPool.lootPool()
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.TUNA.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.MAHI.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.MACKEREL.get())
-                                .setWeight(4)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.HERRING.get())
-                                .setWeight(4)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.NEEDLEFISH.get())
+                            TagEntry.expandTag(HybridAquaticItemTags.LARGE_FISH)
                                 .setWeight(3)
                         )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.ROCKFISH.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SEA_BASS.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SPOTTED_EAGLE_RAY.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.OARFISH.get())
-                                .setWeight(1)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SUNFISH.get())
-                                .setWeight(1)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.OPAH.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.FLASHLIGHT_FISH.get())
-                                .setWeight(4)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.FLYING_FISH.get())
-                                .setWeight(4)
-                        ).build()
-                )
-        )
-
-        exporter.accept(
-            ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.FISHING_TROPICAL_FRESHWATER_FISH_ID),
-            LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.FISHING_TROPICAL_FRESHWATER_FISH_ID)
-                .pool(
-                    LootPool.lootPool()
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.NEON_TETRA.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.OSCAR.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.PIRANHA.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.TIGER_BARB.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DANIO.get())
-                                .setWeight(3)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.BETTA.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DISCUS.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.GOURAMI.get())
-                                .setWeight(2)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.GOLDFISH.get())
-                                .setWeight(1)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.CARP.get())
-                                .setWeight(4)
-                        )
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.GOLDEN_DORADO.get())
-                                .setWeight(1)
-                        ).build()
+                        .build()
                 )
         )
 
         // fishing treasure loot table extension
         exporter.accept(
-            ResourceKey.create(Registries.LOOT_TABLE, HybridAquaticLootTables.FISHING_TREASURE_ID),
+            HybridAquaticLootTables.HA_CRATES,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.FISHING_TREASURE_ID)
+                .setRandomSequence(HybridAquaticLootTables.HA_CRATES)
                 .pool(
                     LootPool.lootPool()
                         .add(LootItem.lootTableItem(HybridAquaticItems.CRAB_POT.get()))
@@ -272,6 +76,7 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
                         .add(LootItem.lootTableItem(HybridAquaticItems.DARK_OAK_CRATE.get()))
                         .add(LootItem.lootTableItem(HybridAquaticItems.ACACIA_CRATE.get()))
                         .add(LootItem.lootTableItem(HybridAquaticItems.JUNGLE_CRATE.get()))
+                        .add(LootItem.lootTableItem(HybridAquaticItems.BAMBOO_CRATE.get()))
                         .add(LootItem.lootTableItem(HybridAquaticItems.MANGROVE_CRATE.get()))
                         .add(LootItem.lootTableItem(HybridAquaticItems.CHERRY_CRATE.get())).build()
                     //.add(MessageInABottleLootItem.lootTableItem())
