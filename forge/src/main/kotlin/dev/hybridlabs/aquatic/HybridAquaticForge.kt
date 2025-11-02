@@ -93,6 +93,7 @@ object HybridAquaticForge {
 
         MOD_BUS.addListener(::loadSeaMessages)
         MOD_BUS.addListener(::registerPotionsRecipes)
+        MOD_BUS.addListener(::registerSpawnPlacements)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerWandererTrades)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
 
@@ -102,7 +103,6 @@ object HybridAquaticForge {
                 MOD_BUS.addListener(::registerModelLayers)
                 MOD_BUS.addListener(::registerSkullModels)
                 MOD_BUS.addListener(::registerBlockEntityRenderers)
-                MOD_BUS.addListener(::registerSpawnPlacements)
                 HybridAquaticEntityRenderers
             },
             serverTarget = {
