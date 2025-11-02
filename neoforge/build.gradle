@@ -82,7 +82,7 @@ processResources {
 dependencies {
     compileOnly project(":common")
     implementation "software.bernie.geckolib:geckolib-neoforge-$geckolib_version"
-    // implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-${minecraft_version}"
+    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-${minecraft_version}"
     implementation 'org.jetbrains:annotations:25.0.0'
     implementation "thedarkcolour:kotlinforforge-neoforge:${kotlin_for_forge_version}"
 }
