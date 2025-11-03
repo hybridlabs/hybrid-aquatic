@@ -121,7 +121,7 @@ class ThermalVentBlock(
         if (world.isClientSide) return
 
         if (state.getValue(THICKNESS) == DripstoneThickness.TIP && state.getValue(WATERLOGGED) && entity !is YetiCrabEntity) {
-            if (!entity.isSteppingCarefully && entity is LivingEntity && !EnchantmentHelper.hasFrostWalker(entity)) {
+            if (entity is LivingEntity && !entity.isInvulnerableTo(world.damageSources().hotFloor())) {
                 entity.hurt(world.damageSources().hotFloor(), fireDamage.toFloat())
                 entity.addEffect(MobEffectInstance(HybridAquaticMobEffects.CORROSION.get(), 200, 0))
             }
