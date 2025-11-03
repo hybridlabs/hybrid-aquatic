@@ -1,0 +1,13 @@
+{
+    "type": "hybrid-aquatic:ha_loot_modifier",
+    "conditions": [
+    ],
+    "target": "minecraft:gameplay/fishing/treasure",
+    "chance": 0.25,
+    "tables": [
+        {
+            "data": "hybrid-aquatic:gameplay/fishing/ha_crates",
+            "weight": 1
+        }
+    ]
+}

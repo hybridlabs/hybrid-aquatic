@@ -24,7 +24,7 @@ import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
-import dev.hybridlabs.aquatic.loot.LootTableModifications
+import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
 import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings
@@ -41,6 +41,7 @@ import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.minecraftforge.client.event.EntityRenderersEvent
+import net.minecraftforge.common.loot.IGlobalLootModifier
 import net.minecraftforge.common.world.StructureModifier
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.fml.common.Mod
@@ -65,6 +66,7 @@ object HybridAquaticForge {
 
         createSpawnGroups()
         registerStructureModifiers()
+        registerGlobalLootModifiers()
 
         HybridAquaticBlocks
         HybridAquaticPlatformBlocks
@@ -89,7 +91,6 @@ object HybridAquaticForge {
 
         HybridAquaticNetworking.registerPackets()
         HybridAquaticLootPoolEntryTypes
-        LootTableModifications
 
         MOD_BUS.addListener(::loadSeaMessages)
         MOD_BUS.addListener(::registerPotionsRecipes)
@@ -235,5 +236,11 @@ object HybridAquaticForge {
             "ha_structure_spawns",
             StructureSpawnModifier::makeCodec
         )
+    }
+
+    private fun registerGlobalLootModifiers(){
+        val lootModifiers = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Constants.MOD_ID)
+        lootModifiers.register(MOD_BUS)
+        lootModifiers.register<Codec<out IGlobalLootModifier>>("ha_loot_modifier", HAGlobalLootModifier::CODEC)
     }
 }
