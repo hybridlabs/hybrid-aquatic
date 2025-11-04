@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic
 
-import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
@@ -26,7 +25,6 @@ import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
 import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier
-import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier.Companion.CODEC
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge
 import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings

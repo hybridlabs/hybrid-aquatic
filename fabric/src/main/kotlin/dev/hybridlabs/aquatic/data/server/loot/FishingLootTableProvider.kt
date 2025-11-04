@@ -20,7 +20,10 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
     SimpleFabricLootTableProvider(output, lookupProvider, LootContextParamSets.FISHING) {
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
         exporter.accept(
-            HybridAquaticLootTables.HA_SMALL_FISH,
+            ResourceKey.create(
+                Registries.LOOT_TABLE,
+                HybridAquaticLootTables.HA_SMALL_FISH
+            ),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.HA_SMALL_FISH)
                 .pool(
@@ -34,7 +37,10 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
         )
 
         exporter.accept(
-            HybridAquaticLootTables.HA_MEDIUM_FISH,
+            ResourceKey.create(
+                Registries.LOOT_TABLE,
+                HybridAquaticLootTables.HA_MEDIUM_FISH
+            ),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.HA_MEDIUM_FISH)
                 .pool(
@@ -48,7 +54,10 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
         )
 
         exporter.accept(
-            HybridAquaticLootTables.HA_LARGE_FISH,
+            ResourceKey.create(
+                Registries.LOOT_TABLE,
+                HybridAquaticLootTables.HA_LARGE_FISH
+            ),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.HA_LARGE_FISH)
                 .pool(
@@ -63,7 +72,10 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
 
         // fishing treasure loot table extension
         exporter.accept(
-            HybridAquaticLootTables.HA_CRATES,
+            ResourceKey.create(
+                Registries.LOOT_TABLE,
+                HybridAquaticLootTables.HA_CRATES
+            ),
             LootTable.lootTable()
                 .setRandomSequence(HybridAquaticLootTables.HA_CRATES)
                 .pool(
