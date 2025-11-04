@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "entries": [
-        "hybrid-aquatic:fishing_fish",
-        "hybrid-aquatic:fishing_treasure"
-    ]
+  "replace": false,
+  "entries": [
+    "hybrid-aquatic:fishing_fish",
+    "hybrid-aquatic:fishing_treasure"
+  ]
 }

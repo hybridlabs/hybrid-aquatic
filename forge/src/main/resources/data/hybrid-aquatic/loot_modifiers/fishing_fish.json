@@ -2,8 +2,9 @@
     "type": "hybrid-aquatic:ha_loot_modifier",
     "conditions": [
     ],
-    "target": "minecraft:gameplay/fishing/fish",
+    "target": "minecraft:gameplay/fishing",
     "chance": 0.5,
+    "item_tag": "minecraft:fishes",
     "tables": [
         {
             "data": "hybrid-aquatic:gameplay/fishing/ha_large_fish",
