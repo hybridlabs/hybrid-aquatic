@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic
 
+import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
@@ -23,7 +25,8 @@ import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
-import dev.hybridlabs.aquatic.loot.LootTableModifications
+import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier
+import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier.Companion.CODEC
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge
 import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings
@@ -41,9 +44,12 @@ import net.neoforged.fml.common.Mod
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
 import net.neoforged.neoforge.registries.DataPackRegistryEvent
+import net.neoforged.neoforge.registries.DeferredRegister
+import net.neoforged.neoforge.registries.NeoForgeRegistries
 import thedarkcolour.kotlinforforge.neoforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.neoforge.forge.runForDist
@@ -80,7 +86,7 @@ object HybridAquaticForge {
 
         MOD_BUS.addListener(HybridAquaticNetworkingForge::register)
         HybridAquaticLootPoolEntryTypes
-        LootTableModifications
+        registerGlobalLootModifiers()
 
         MOD_BUS.addListener(::loadSeaMessages)
         MOD_BUS.addListener(::registerSpawnPlacements)
@@ -211,6 +217,11 @@ object HybridAquaticForge {
                 recipe.outputPotion
             )
         }
+    }
+    private fun registerGlobalLootModifiers(){
+        val lootModifiers = DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Constants.MOD_ID)
+        lootModifiers.register(MOD_BUS)
+        lootModifiers.register<MapCodec<out IGlobalLootModifier>>("ha_loot_modifier", HAGlobalLootModifier::CODEC)
     }
 
 }
