@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.tags.ItemTags
+import net.minecraft.world.item.Items
 import java.util.concurrent.CompletableFuture
 
 class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
@@ -24,6 +25,17 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.OMINOUS_HOOK.get()
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.LURE_ITEMS).add(item)
+        }
+
+        setOf(
+            Items.BOW,
+            Items.ENCHANTED_BOOK,
+            Items.NAME_TAG,
+            Items.FISHING_ROD,
+            Items.NAUTILUS_SHELL,
+            Items.SADDLE
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridAquaticItemTags.FISHING_TREASURE).add(item)
         }
 
         //#region wood
