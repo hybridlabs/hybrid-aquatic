@@ -63,6 +63,9 @@ object DataGenerators {
                 setOf(Constants.MOD_ID)
             )
         )
+        generator.addProvider(
+            event.includeServer(), HAGlobalLootModifierProvider(packOutput, lookupProvider)
+        )
     }
 
     /**
