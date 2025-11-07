@@ -417,6 +417,10 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             builder.add("item.minecraft.tipped_arrow.effect.$potion", "Arrow of $translation")
         }
 
+
+        // Workaround for Jade/WAILA not being able to find the mod display name on Forge
+        builder.add("modmenu.nameTranslation.hybrid-aquatic", "Hybrid Aquatic")
+
 //        mapOf(
 //            HybridAquaticPaintings.TEST_PAINTING1 to listOf("Test Painting", "Aqua"),
 //            HybridAquaticPaintings.TEST_PAINTING2 to listOf("Test Huge Painting", "Aqua")
