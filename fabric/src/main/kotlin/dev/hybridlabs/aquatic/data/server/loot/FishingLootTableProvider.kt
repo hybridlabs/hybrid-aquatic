@@ -91,7 +91,6 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
                         .add(LootItem.lootTableItem(HybridAquaticItems.BAMBOO_CRATE.get()))
                         .add(LootItem.lootTableItem(HybridAquaticItems.MANGROVE_CRATE.get()))
                         .add(LootItem.lootTableItem(HybridAquaticItems.CHERRY_CRATE.get())).build()
-                    //.add(MessageInABottleLootItem.lootTableItem())
                 )
         )
     }
