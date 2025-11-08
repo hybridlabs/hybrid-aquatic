@@ -32,10 +32,11 @@ class GhostCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y <= world.seaLevel + 8 &&
+            return pos.y <= world.seaLevel + 4 &&
                     world.getBlockState(pos.below()).isSolid &&
                     world.isEmptyBlock(pos) &&
-                    !world.level.isDay
+                    !world.level.isDay &&
+                    world.canSeeSkyFromBelowWater(pos)
         }
     }
 }

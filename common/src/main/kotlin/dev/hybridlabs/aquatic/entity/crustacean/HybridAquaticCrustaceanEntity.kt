@@ -311,7 +311,7 @@ open class HybridAquaticCrustaceanEntity(
             pos: BlockPos,
             random: RandomSource
         ): Boolean {
-            val topY = world.seaLevel + 8
+            val topY = world.seaLevel + 4
 
             return pos.y <= topY &&
                     world.getBlockState(pos.below()).isSolid &&
@@ -329,7 +329,8 @@ open class HybridAquaticCrustaceanEntity(
 
             return pos.y >= bottomY &&
                     world.getBlockState(pos.below()).isSolid &&
-                    world.isWaterAt(pos)
+                    world.isWaterAt(pos) &&
+                    world.canSeeSkyFromBelowWater(pos)
         }
 
         fun canDeepSpawn(
@@ -344,7 +345,8 @@ open class HybridAquaticCrustaceanEntity(
 
             return pos.y in bottomY..topY &&
                     world.getBlockState(pos.below()).isSolid &&
-                    world.isWaterAt(pos)
+                    world.isWaterAt(pos) &&
+                    world.canSeeSkyFromBelowWater(pos)
         }
 
         fun getScaleAdjustment(crustacean: HybridAquaticCrustaceanEntity, adjustment: Float): Float {

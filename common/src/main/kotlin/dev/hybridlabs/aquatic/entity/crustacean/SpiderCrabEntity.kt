@@ -39,7 +39,8 @@ class SpiderCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
             val spawnY = if ((fullMoon || newMoon) && !world.level.isDay) shallowSpawn else deepSpawn
 
             return pos.y in spawnY &&
-                    world.getBlockState(pos.below()).isSolid
+                    world.getBlockState(pos.below()).isSolid &&
+                    world.canSeeSkyFromBelowWater(pos)
         }
     }
 
