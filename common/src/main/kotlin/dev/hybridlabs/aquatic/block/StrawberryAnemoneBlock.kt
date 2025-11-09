@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState
 
 class StrawberryAnemoneBlock(settings: Properties) : BaseAnemoneBlock(settings) {
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return StrawberryAnemoneBlockEntity(pos, state)
+    override fun newBlockEntity(blockPos: BlockPos, blockState: BlockState): BlockEntity {
+        return StrawberryAnemoneBlockEntity(blockPos, blockState)
     }
 }

@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState
 
 class GiantGreenAnemoneBlock(settings: Properties) : BaseAnemoneBlock(settings) {
 
-    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
-        return GiantGreenAnemoneBlockEntity(pos, state)
+    override fun newBlockEntity(blockPos: BlockPos, blockState: BlockState): BlockEntity {
+        return GiantGreenAnemoneBlockEntity(blockPos, blockState)
     }
 }

@@ -93,8 +93,6 @@ open class BaseAnemoneBlock(settings: Properties) : DirectionalBlock(settings),
             Direction.SOUTH -> SOUTH_SHAPE
             Direction.WEST -> WEST_SHAPE
             Direction.EAST -> EAST_SHAPE
-
-            else -> throw IncompatibleClassChangeError()
         }
     }
 
@@ -106,8 +104,6 @@ open class BaseAnemoneBlock(settings: Properties) : DirectionalBlock(settings),
             Direction.SOUTH -> SOUTH_SHAPE
             Direction.WEST -> WEST_SHAPE
             Direction.EAST -> EAST_SHAPE
-
-            else -> throw IncompatibleClassChangeError()
         }
     }
 
