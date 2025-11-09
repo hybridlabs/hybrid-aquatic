@@ -36,7 +36,7 @@ class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
         super.aiStep()
 
         if (!level().isClientSide && this.isEffectiveAi) {
-            if (this.isInWater) {
+            if (!this.isInWater) {
                 if (isFeeding()) {
                     this.deltaMovement = deltaMovement.subtract(0.0, 0.01, 0.0)
                     this.xRot = 0f
