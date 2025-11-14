@@ -27,7 +27,6 @@ import java.util.concurrent.Callable
 object HybridAquaticEntityTypes {
 
     //#region fish
-
     val AFRICAN_BUTTERFLYFISH = registerFish(
         "african_butterflyfish",
         ::AfricanButterflyfishEntity,
