@@ -20,18 +20,19 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
         val world = context.level()
         val origin = context.origin()
         val random = context.random()
-        val state = config.toPlace.getState(random, origin)
+        val placedState = config.toPlace.getState(random, origin)
+        val originalState = world.getBlockState(origin.mutable())
 
-        if (state.block !is MessageInABottleBlock) {
+        if (originalState.isSolid || placedState.block !is MessageInABottleBlock) {
             return false
         }
 
         val pos = context.origin().mutable()
 
-        if (!state.canSurvive(world, pos)) {
+        if (!placedState.canSurvive(world, pos)) {
             // if it can spawn below, move down
             // most likely called when a bottle spawns on water
-            if (state.canSurvive(world, pos.below())) {
+            if (placedState.canSurvive(world, pos.below())) {
                 pos.move(Direction.DOWN)
             } else {
                 return false
@@ -39,7 +40,7 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
         }
 
         // set state
-        world.setBlock(pos, state.setValue(WATERLOGGED, world.isWaterAt(pos)), Block.UPDATE_CLIENTS)
+        world.setBlock(pos, placedState.setValue(WATERLOGGED, world.isWaterAt(pos)), Block.UPDATE_CLIENTS)
 
         val blockEntity = world.getBlockEntity(pos)
         if (blockEntity is MessageInABottleBlockEntity) {
