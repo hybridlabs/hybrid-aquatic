@@ -21,14 +21,14 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
         val world = context.level()
         val origin = context.origin()
         val random = context.random()
+        val pos = context.origin().mutable()
+
         val placedState = config.toPlace.getState(random, origin)
-        val originalState = world.getBlockState(origin.mutable())
+        val originalState = world.getBlockState(pos)
 
         if (originalState.isSolid || placedState.block !is MessageInABottleBlock) {
             return false
         }
-
-        val pos = context.origin().mutable()
 
         if (!placedState.canSurvive(world, pos)) {
             // if it can spawn below, move down
