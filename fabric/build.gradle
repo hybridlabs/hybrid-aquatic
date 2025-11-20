@@ -89,8 +89,8 @@ loom {
     }
 
     compileKotlin {
-        source(project(":common").sourceSets.main)
-        source(sourceSets.main)
+        source(project(":common").sourceSets.main.allSource)
+        source(sourceSets.main.allSource)
         inputs.file "../gradle.properties"
     }
 
