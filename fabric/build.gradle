@@ -69,6 +69,7 @@ fabricApi {
         outputDirectory = file("src/generated/resources")
         client = true
     }
+
     dependencies {
         datagenOutput files(runDatagen)
     }
@@ -76,16 +77,20 @@ fabricApi {
 
 
 loom {
-    if (project(":common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
-        accessWidenerPath.set(project(":common").file("src/main/resources/${mod_id}.accesswidener"))
+    var accessWidenerFile = file("src/main/resources/${mod_id}.accesswidener")
+    if (accessWidenerFile.exists()) {
+        accessWidenerPath.set(accessWidenerFile)
+    } else {
+        println "No access widener exists!"
     }
+
     mixin {
         defaultRefmapName.set("${mod_id}.refmap.json")
     }
 
-
     compileKotlin {
-        source(project(":common").sourceSets.main.allSource)
+        source(project(":common").sourceSets.main)
+        source(sourceSets.main)
         inputs.file "../gradle.properties"
     }
 
