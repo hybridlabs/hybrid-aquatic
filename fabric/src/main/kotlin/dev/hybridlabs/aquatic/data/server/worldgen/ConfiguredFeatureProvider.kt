@@ -5,7 +5,12 @@ package dev.hybridlabs.aquatic.data.server.worldgen
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.TubeWormBlock
-import dev.hybridlabs.aquatic.world.gen.feature.*
+import dev.hybridlabs.aquatic.world.gen.feature.BullKelpFeatureConfig
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.MessageInABottleFeatureConfig
+import dev.hybridlabs.aquatic.world.gen.feature.SargassumFeatureConfig
+import dev.hybridlabs.aquatic.world.gen.feature.VentPatchFeatureConfig
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.Direction

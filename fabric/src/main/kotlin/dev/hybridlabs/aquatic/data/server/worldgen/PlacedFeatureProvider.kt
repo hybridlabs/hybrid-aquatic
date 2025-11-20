@@ -9,7 +9,15 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.world.level.levelgen.Heightmap
-import net.minecraft.world.level.levelgen.placement.*
+import net.minecraft.world.level.levelgen.placement.BiomeFilter
+import net.minecraft.world.level.levelgen.placement.CountOnEveryLayerPlacement
+import net.minecraft.world.level.levelgen.placement.CountPlacement
+import net.minecraft.world.level.levelgen.placement.InSquarePlacement
+import net.minecraft.world.level.levelgen.placement.NoiseBasedCountPlacement
+import net.minecraft.world.level.levelgen.placement.PlacedFeature
+import net.minecraft.world.level.levelgen.placement.PlacementModifier
+import net.minecraft.world.level.levelgen.placement.RarityFilter
+import net.minecraft.world.level.levelgen.placement.SurfaceRelativeThresholdFilter
 import java.util.concurrent.CompletableFuture
 
 class PlacedFeatureProvider(

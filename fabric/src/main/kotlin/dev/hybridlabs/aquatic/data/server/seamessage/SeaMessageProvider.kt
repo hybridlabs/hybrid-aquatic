@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.resources.ResourceKey
-import java.util.*
+import java.util.Optional
 import java.util.concurrent.CompletableFuture
 
 class SeaMessageProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :

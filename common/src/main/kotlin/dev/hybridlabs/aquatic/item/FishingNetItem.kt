@@ -14,7 +14,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.material.Fluids
-import java.util.*
+import java.util.Optional
 
 class FishingNetItem(settings: Properties) : Item(settings) {
 

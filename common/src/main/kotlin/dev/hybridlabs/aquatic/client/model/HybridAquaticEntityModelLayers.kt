@@ -3,7 +3,14 @@ package dev.hybridlabs.aquatic.client.model
 import com.google.common.collect.ImmutableMap
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.BaskingSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.BullSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.FrilledSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.GreatWhiteSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.HammerheadSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.ThresherSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.TigerSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.WhaleSharkPlushieModel
 import net.minecraft.client.model.SkullModelBase
 import net.minecraft.client.model.geom.EntityModelSet
 import net.minecraft.client.model.geom.ModelLayerLocation

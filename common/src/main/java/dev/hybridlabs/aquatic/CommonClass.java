@@ -1,11 +1,7 @@
 package dev.hybridlabs.aquatic;
 
-import static dev.hybridlabs.aquatic.Constants.MOD_ID;
-import static dev.hybridlabs.aquatic.Constants.MOD_NAME;
-
 import dev.hybridlabs.aquatic.platform.Services;
 import dev.hybridlabs.aquatic.platform.registration.RegistrationProvider;
-
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -20,6 +16,9 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 
 import java.nio.file.Path;
+
+import static dev.hybridlabs.aquatic.Constants.MOD_ID;
+import static dev.hybridlabs.aquatic.Constants.MOD_NAME;
 
 // This class is part of the common project meaning it is shared between all supported loaders. Code
 //  written here can only  import and access the vanilla codebase, libraries used by vanilla, and

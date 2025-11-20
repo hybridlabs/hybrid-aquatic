@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.pathfinder.Path
-import java.util.*
+import java.util.EnumSet
 import kotlin.math.max
 
 open class SharkAttackGoal(

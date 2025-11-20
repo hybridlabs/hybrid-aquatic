@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.platform.registration;
 
 import dev.hybridlabs.aquatic.platform.Services;
-
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 

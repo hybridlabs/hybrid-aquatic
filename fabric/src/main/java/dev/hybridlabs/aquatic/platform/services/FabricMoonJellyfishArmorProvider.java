@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.platform.services;
 
-import dev.hybridlabs.aquatic.item.armor.MoonJellyfishArmorItem;
 import dev.hybridlabs.aquatic.item.armor.FabricMoonJellyfishArmorItem;
+import dev.hybridlabs.aquatic.item.armor.MoonJellyfishArmorItem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 

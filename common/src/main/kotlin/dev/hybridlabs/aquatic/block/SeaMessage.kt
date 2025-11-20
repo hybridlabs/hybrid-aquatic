@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.core.RegistryAccess
 import net.minecraft.resources.ResourceLocation
-import java.util.*
+import java.util.Optional
 
 /**
  * Represents a message inside a Message in a Bottle.

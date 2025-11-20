@@ -19,7 +19,16 @@ import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.*
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EntityDimensions
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.MobType
+import net.minecraft.world.entity.MoverType
+import net.minecraft.world.entity.NeutralMob
+import net.minecraft.world.entity.Pose
+import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
@@ -40,7 +49,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.*
+import java.util.UUID
 
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")

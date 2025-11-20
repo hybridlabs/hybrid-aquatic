@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.block.BaseTallDunegrassBlock
 import dev.hybridlabs.aquatic.block.TallDunegrassBlock
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import net.minecraft.core.BlockPos

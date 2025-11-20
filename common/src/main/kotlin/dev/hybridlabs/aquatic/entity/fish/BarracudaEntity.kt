@@ -17,7 +17,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
-import java.util.*
+import java.util.UUID
 
 class BarracudaEntity(entityType: EntityType<out BarracudaEntity>, world: Level) :
     HybridAquaticFishEntity(

@@ -5,7 +5,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.resources.ResourceKey;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

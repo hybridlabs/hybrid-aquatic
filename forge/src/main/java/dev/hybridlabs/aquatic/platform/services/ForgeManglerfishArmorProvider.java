@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.platform.services;
 
-import dev.hybridlabs.aquatic.item.armor.ManglerfishArmorItem;
 import dev.hybridlabs.aquatic.item.armor.ForgeManglerfishArmorItem;
+import dev.hybridlabs.aquatic.item.armor.ManglerfishArmorItem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 
