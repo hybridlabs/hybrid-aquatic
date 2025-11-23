@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal.boids
 
+import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.Mob
@@ -29,7 +30,7 @@ class BoidGoal(
 
         if (--this.timeToFindNearbyEntities <= 0) {
             this.timeToFindNearbyEntities = this.adjustedTickDelay(40)
-            nearbyMobs = getNearbyEntitiesOfSameClass(mob)
+            nearbyMobs = getRelevantNearbyEntities(mob)
         } else {
             nearbyMobs.removeIf { obj: LivingEntity -> obj.isDeadOrDying }
         }
@@ -107,19 +108,21 @@ class BoidGoal(
     }
 
     companion object {
-        fun getNearbyEntitiesOfSameClass(mob: Mob): MutableList<out Mob> {
+        fun getRelevantNearbyEntities(mob: Mob): MutableList<out Mob> {
             val predicate = Predicate<Mob> { other ->
                 if (other == mob) return@Predicate false
 
                 if (mob is VariantHolder<*> && other is VariantHolder<*>) {
-                    return@Predicate mob.variant == other.variant
+                    if (mob.variant != other.variant) {
+                        return@Predicate false
+                    }
                 }
 
-                other.type == mob.type
+                other.type.`is`(HybridAquaticEntityTags.BOIDABLE)
             }
 
             return mob.level().getEntitiesOfClass(
-                mob.javaClass,
+                Mob::class.java,
                 mob.boundingBox.inflate(4.0, 4.0, 4.0),
                 predicate
             )
