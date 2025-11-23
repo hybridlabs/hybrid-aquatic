@@ -1,14 +1,14 @@
 package dev.hybridlabs.aquatic.entity.ai.goal.boids
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.commands.arguments.EntityAnchorArgument
+import net.minecraft.tags.TagKey
+import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.phys.Vec3
-import java.util.function.Predicate
 
 
 class BoidGoal(
@@ -17,6 +17,7 @@ class BoidGoal(
     private val separationRange: Float,
     private val alignmentInfluence: Float,
     private val cohesionInfluence: Float,
+    private val relatedBoidables: TagKey<EntityType<*>>? = null,
 ) :
     Goal() {
     private var timeToFindNearbyEntities = 0
@@ -107,25 +108,31 @@ class BoidGoal(
         return c.scale(cohesionInfluence.toDouble())
     }
 
-    companion object {
-        fun getRelevantNearbyEntities(mob: Mob): MutableList<out Mob> {
-            val predicate = Predicate<Mob> { other ->
-                if (other == mob) return@Predicate false
+    fun canBoid(other: Mob): Boolean {
+        if (other == mob) return false
 
-                if (mob is VariantHolder<*> && other is VariantHolder<*>) {
-                    if (mob.variant != other.variant) {
-                        return@Predicate false
-                    }
-                }
-
-                other.type.`is`(HybridAquaticEntityTags.BOIDABLE)
+        if (mob is VariantHolder<*> && other is VariantHolder<*>) {
+            if (mob.variant == other.variant) {
+                return true
             }
-
-            return mob.level().getEntitiesOfClass(
-                Mob::class.java,
-                mob.boundingBox.inflate(4.0, 4.0, 4.0),
-                predicate
-            )
         }
+
+        if (other.type == mob.type) {
+            return true
+        }
+
+        if (relatedBoidables != null && other.type.`is`(relatedBoidables)) {
+            return true
+        }
+
+        return false
+    }
+
+    fun getRelevantNearbyEntities(mob: Mob): MutableList<out Mob> {
+        return mob.level().getEntitiesOfClass(
+            Mob::class.java,
+            mob.boundingBox.inflate(4.0, 4.0, 4.0),
+            ::canBoid
+        )
     }
 }
