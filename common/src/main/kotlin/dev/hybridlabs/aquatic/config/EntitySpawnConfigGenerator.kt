@@ -65,6 +65,9 @@ class EntitySpawnConfigGenerator {
         //#region Deep Fish
         addUndergroundFish(HybridAquaticEntityTypes.OARFISH.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS), 1, 1, 1)
         addUndergroundFish(HybridAquaticEntityTypes.ANGLERFISH.get(), listOf(BiomeTags.IS_DEEP_OCEAN), 1, 1, 2)
+        addUndergroundFish(HybridAquaticEntityTypes.FANGTOOTH.get(), listOf(BiomeTags.IS_DEEP_OCEAN), 1, 1, 2)
+        addUndergroundFish(HybridAquaticEntityTypes.VIPERFISH.get(), listOf(BiomeTags.IS_DEEP_OCEAN), 1, 1, 2)
+        addUndergroundFish(HybridAquaticEntityTypes.HATCHETFISH.get(), listOf(BiomeTags.IS_DEEP_OCEAN), 1, 1, 2)
         addUndergroundFish(HybridAquaticEntityTypes.JOHN_DORY.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS), 2, 1, 3)
         addUndergroundFish(HybridAquaticEntityTypes.BARRELEYE.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS), 1, 1, 1)
         addUndergroundFish(HybridAquaticEntityTypes.DRAGONFISH.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS), 1, 1, 2)
@@ -77,14 +80,12 @@ class EntitySpawnConfigGenerator {
         //#region Cephalopods
         addCephalopod(HybridAquaticEntityTypes.ARROW_SQUID.get(), listOf(HybridAquaticBiomeTags.COLD_OCEANS, HybridAquaticBiomeTags.ARCTIC_OCEANS), 5, 1, 3)
         addCephalopod(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 5, 3, 5)
-        addCephalopod(HybridAquaticEntityTypes.CUTTLEFISH.get(), listOf(
-            HybridAquaticBiomeTags.REEF,
-            HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-        ), 1, 1, 2)
+        addCephalopod(HybridAquaticEntityTypes.CUTTLEFISH.get(), listOf(HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,), 1, 1, 2)
         addCephalopod(HybridAquaticEntityTypes.OCTOPUS.get(), listOf(HybridAquaticBiomeTags.REEF, HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS, HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS), 1, 1, 2)
         //#endregion
 
         //#region Deep Cephalopods
+        addUndergroundCephalopod(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), listOf(HybridAquaticBiomeTags.DEEP_ARCTIC_OCEANS), 2, 1, 1)
         addUndergroundCephalopod(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 2, 1, 1)
         addUndergroundCephalopod(HybridAquaticEntityTypes.NAUTILUS.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 2)
         addUndergroundCephalopod(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 1, 1, 1)
@@ -151,6 +152,7 @@ class EntitySpawnConfigGenerator {
 
         //#region Critters
         addCritter(HybridAquaticEntityTypes.SEA_SLUG.get(), listOf(HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS, HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS, HybridAquaticBiomeTags.TROPICAL_OCEANS, HybridAquaticBiomeTags.REEF), 3, 1, 2)
+        addCritter(HybridAquaticEntityTypes.SCALYFOOT_SNAIL.get(), listOf(BiomeTags.IS_DEEP_OCEAN), 3, 1, 2)
         addCritter(HybridAquaticEntityTypes.STARFISH.get(), listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN, HybridAquaticBiomeTags.SANDY_BEACHES), 5, 1, 3)
         addCritter(HybridAquaticEntityTypes.SEA_CUCUMBER.get(), listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN), 3, 1, 3)
         addCritter(HybridAquaticEntityTypes.SEA_URCHIN.get(), listOf(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN), 5, 1, 3)

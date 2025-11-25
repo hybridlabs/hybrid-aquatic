@@ -1,109 +1,14 @@
 package dev.hybridlabs.aquatic.client.render.entity
 
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.ArrowSquidEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.CuttlefishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.FireflySquidEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.OctopusEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.UmbrellaOctopusEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.SeaCucumberEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.SeaSlugEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.SeaUrchinEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.StarfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.CoconutCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.CrayfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.DecoratorCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.DungenessCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.FiddlerCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.FlowerCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.GhostCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.GiantIsopodEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.HermitCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.HorseshoeCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.LightfootCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.LobsterEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.ShrimpEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.SpiderCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.VampireCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.YetiCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.AfricanButterflyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.AnglerfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.BarracudaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.BarreleyeEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.BettaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.BlowfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.BoxfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.CarpEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.ClownfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.CoelacanthEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.DamselfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.DanioEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.DiscusEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.DragonfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.FlashlightFishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.FlyingFishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.GoldenDoradoEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.GoldfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.GouramiEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.HerringEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.JohnDoryEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.LionfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.MackerelEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.MahiEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.MantaRayEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.MorayEelEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.NeedlefishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.OarfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.OpahEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.OscarEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.ParrotfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.PearlfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.PiranhaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.PupfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.RatfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.RockfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SeaAngelEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SeaBassEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SeadragonEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SeahorseEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SnailfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SquirrelfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.StingrayEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.StonefishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SunfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SurgeonfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.TetraEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.TigerBarbEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.TriggerfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.TunaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.WrasseEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.BarrelJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.BigRedJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.BlueJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.BoxJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.CepheidaeJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.CosmicJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.CrownJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.FireworkJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.LionsManeJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.MauveStingerEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.MoonJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.NomuraJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.SeaNettleEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.cephalopods.*
+import dev.hybridlabs.aquatic.client.render.entity.critter.*
+import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
+import dev.hybridlabs.aquatic.client.render.entity.fish.*
+import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinogenEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinomaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.BaskingSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.BullSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.FrilledSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.GreatWhiteSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.HammerheadSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.HoundSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.LanternSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.ThresherSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.TigerSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.NautilusEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.VampireSquidEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.miniboss.*
+import dev.hybridlabs.aquatic.client.render.entity.shark.*
+import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.*
 import dev.hybridlabs.aquatic.client.renderer.entity.shark.WhaleSharkEntityRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.platform.ClientServices
@@ -126,6 +31,24 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.ANGLERFISH,
             ::AnglerfishEntityRenderer
+        )
+
+    val FANGTOOTH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.FANGTOOTH,
+            ::FangtoothEntityRenderer
+        )
+
+    val VIPERFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.VIPERFISH,
+            ::ViperfishEntityRenderer
+        )
+
+    val HATCHETFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.HATCHETFISH,
+            ::HatchetfishEntityRenderer
         )
 
     val DRAGONFISH =
@@ -452,6 +375,12 @@ object HybridAquaticEntityRenderers {
             ::ArrowSquidEntityRenderer
         )
 
+    val COLOSSAL_SQUID =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.COLOSSAL_SQUID,
+            ::ColossalSquidEntityRenderer
+        )
+
     val FIREFLY_SQUID =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.FIREFLY_SQUID,
@@ -646,10 +575,16 @@ object HybridAquaticEntityRenderers {
             ::StarfishEntityRenderer
         )
 
-    val NUDIBRANCH =
+    val SEA_SLUG =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.SEA_SLUG,
             ::SeaSlugEntityRenderer
+        )
+
+    val SCALYFOOT_SNAIL =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.SCALYFOOT_SNAIL,
+            ::ScalyfootSnailEntityRenderer
         )
 
     val SEA_CUCUMBER =

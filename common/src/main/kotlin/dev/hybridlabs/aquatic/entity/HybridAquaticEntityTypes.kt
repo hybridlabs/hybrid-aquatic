@@ -2,12 +2,14 @@ package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.cephalopod.ArrowSquidEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.ColossalSquidEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.CuttlefishEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.FireflySquidEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.NautilusEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.UmbrellaOctopusEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.VampireSquidEntity
+import dev.hybridlabs.aquatic.entity.critter.ScalyfootSnailEntity
 import dev.hybridlabs.aquatic.entity.critter.SeaCucumberEntity
 import dev.hybridlabs.aquatic.entity.critter.SeaSlugEntity
 import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
@@ -42,11 +44,13 @@ import dev.hybridlabs.aquatic.entity.fish.DamselfishEntity
 import dev.hybridlabs.aquatic.entity.fish.DanioEntity
 import dev.hybridlabs.aquatic.entity.fish.DiscusEntity
 import dev.hybridlabs.aquatic.entity.fish.DragonfishEntity
+import dev.hybridlabs.aquatic.entity.fish.FangtoothEntity
 import dev.hybridlabs.aquatic.entity.fish.FlashlightFishEntity
 import dev.hybridlabs.aquatic.entity.fish.FlyingFishEntity
 import dev.hybridlabs.aquatic.entity.fish.GoldenDoradoEntity
 import dev.hybridlabs.aquatic.entity.fish.GoldfishEntity
 import dev.hybridlabs.aquatic.entity.fish.GouramiEntity
+import dev.hybridlabs.aquatic.entity.fish.HatchetfishEntity
 import dev.hybridlabs.aquatic.entity.fish.HerringEntity
 import dev.hybridlabs.aquatic.entity.fish.JohnDoryEntity
 import dev.hybridlabs.aquatic.entity.fish.LionfishEntity
@@ -78,6 +82,7 @@ import dev.hybridlabs.aquatic.entity.fish.TetraEntity
 import dev.hybridlabs.aquatic.entity.fish.TigerBarbEntity
 import dev.hybridlabs.aquatic.entity.fish.TriggerfishEntity
 import dev.hybridlabs.aquatic.entity.fish.TunaEntity
+import dev.hybridlabs.aquatic.entity.fish.ViperfishEntity
 import dev.hybridlabs.aquatic.entity.fish.WrasseEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.BarrelJellyfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.BigRedJellyfishEntity
@@ -145,6 +150,27 @@ object HybridAquaticEntityTypes {
         ::AnglerfishEntity,
         EntityDimensions.fixed(0.4f, 0.35f),
         AnglerfishEntity::createMobAttributes
+    )
+
+    val VIPERFISH = registerFishUnderground(
+        "viperfish",
+        ::ViperfishEntity,
+        EntityDimensions.fixed(0.4f, 0.35f),
+        ViperfishEntity::createMobAttributes
+    )
+
+    val FANGTOOTH = registerFishUnderground(
+        "fangtooth",
+        ::FangtoothEntity,
+        EntityDimensions.fixed(0.4f, 0.35f),
+        FangtoothEntity::createMobAttributes
+    )
+
+    val HATCHETFISH = registerFishUnderground(
+        "hatchetfish",
+        ::HatchetfishEntity,
+        EntityDimensions.fixed(0.4f, 0.35f),
+        HatchetfishEntity::createMobAttributes
     )
 
     val SNAILFISH = registerFishUnderground(
@@ -487,6 +513,13 @@ object HybridAquaticEntityTypes {
         ArrowSquidEntity::createMobAttributes
     )
 
+    val COLOSSAL_SQUID = registerCephalopod(
+        "colossal_squid",
+        ::ColossalSquidEntity,
+        EntityDimensions.fixed(3.0f, 1.0f),
+        ColossalSquidEntity::createMobAttributes
+    )
+
     val FIREFLY_SQUID = registerCephalopod(
         "firefly_squid",
         ::FireflySquidEntity,
@@ -674,6 +707,13 @@ object HybridAquaticEntityTypes {
         ::SeaSlugEntity,
         EntityDimensions.fixed(0.5f, 0.3f),
         SeaSlugEntity::createMobAttributes
+    )
+
+    val SCALYFOOT_SNAIL = registerCritter(
+        "scalyfoot_snail",
+        ::ScalyfootSnailEntity,
+        EntityDimensions.fixed(0.5f, 0.3f),
+        ScalyfootSnailEntity::createMobAttributes
     )
 
     val SEA_CUCUMBER = registerCritter(
