@@ -16,6 +16,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_PREY)
             .add(
                 HybridAquaticEntityTypes.CLOWNFISH.get(),
+                HybridAquaticEntityTypes.HATCHETFISH.get(),
+                HybridAquaticEntityTypes.VIPERFISH.get(),
+                HybridAquaticEntityTypes.FANGTOOTH.get(),
                 HybridAquaticEntityTypes.CARP.get(),
                 HybridAquaticEntityTypes.PEARLFISH.get(),
                 HybridAquaticEntityTypes.SNAILFISH.get(),
@@ -109,6 +112,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.CUTTLEFISH.get(),
                 HybridAquaticEntityTypes.FIREFLY_SQUID.get(),
                 HybridAquaticEntityTypes.OCTOPUS.get(),
+                HybridAquaticEntityTypes.COLOSSAL_SQUID.get(),
                 HybridAquaticEntityTypes.NAUTILUS.get(),
                 HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(),
                 HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
@@ -147,6 +151,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HybridAquaticEntityTags.CRITTER)
             .add(
                 HybridAquaticEntityTypes.SEA_SLUG.get(),
+                HybridAquaticEntityTypes.SCALYFOOT_SNAIL.get(),
                 HybridAquaticEntityTypes.SEA_CUCUMBER.get(),
                 HybridAquaticEntityTypes.SEA_URCHIN.get(),
                 HybridAquaticEntityTypes.STARFISH.get(),
@@ -176,6 +181,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .add(
                 HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
                 HybridAquaticEntityTypes.BLOWFISH.get(),
+                HybridAquaticEntityTypes.HATCHETFISH.get(),
+                HybridAquaticEntityTypes.FANGTOOTH.get(),
+                HybridAquaticEntityTypes.VIPERFISH.get(),
                 HybridAquaticEntityTypes.STONEFISH.get(),
                 HybridAquaticEntityTypes.DAMSELFISH.get(),
                 HybridAquaticEntityTypes.PEARLFISH.get(),
