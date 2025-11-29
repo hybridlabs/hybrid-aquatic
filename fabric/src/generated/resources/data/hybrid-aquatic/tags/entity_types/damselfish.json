@@ -3,7 +3,12 @@
   "values": [
     "hybrid-aquatic:damselfish",
     {
-      "id": "rainbow_reef:damselfish",
+      "id": "rainbowreef:damselfish",
+      "required": false
+    },
+    "hybrid-aquatic:damselfish",
+    {
+      "id": "rainbowreef:damselfish",
       "required": false
     }
   ]

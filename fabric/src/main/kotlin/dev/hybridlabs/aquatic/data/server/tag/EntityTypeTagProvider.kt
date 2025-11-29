@@ -154,19 +154,24 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.SEA_ANGEL.get(),
             )
 
-        // damselfish
         getOrCreateTagBuilder(HybridAquaticEntityTags.DAMSELFISH)
             .add(
                 HybridAquaticEntityTypes.DAMSELFISH.get(),
             )
-            .addOptional(ResourceLocation("rainbow_reef", "damselfish"))
+            .addOptional(ResourceLocation("rainbowreef", "damselfish"))
 
-        // damselfish
-        getOrCreateTagBuilder(HybridAquaticEntityTags.SURGEONFISH)
+        getOrCreateTagBuilder(HybridAquaticEntityTags.DAMSELFISH)
             .add(
-                HybridAquaticEntityTypes.SURGEONFISH.get(),
+                HybridAquaticEntityTypes.DAMSELFISH.get(),
             )
-            .addOptional(ResourceLocation("rainbow_reef", "tang"))
+            .addOptional(ResourceLocation("rainbowreef", "damselfish"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.MOONY)
+            .add(
+                HybridAquaticEntityTypes.TIGER_BARB.get(),
+                HybridAquaticEntityTypes.TETRA.get(),
+            )
+            .addOptional(ResourceLocation("fintastic", "moony"))
 
         // jellyfish
         getOrCreateTagBuilder(HybridAquaticEntityTags.JELLYFISH)
