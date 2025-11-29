@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:surgeonfish",
+    {
+      "id": "rainbow_reef:tang",
+      "required": false
+    }
+  ]
+}

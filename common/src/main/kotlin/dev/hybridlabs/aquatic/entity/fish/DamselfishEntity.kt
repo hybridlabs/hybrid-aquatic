@@ -36,7 +36,7 @@ class DamselfishEntity(entityType: EntityType<out DamselfishEntity>, world: Leve
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
+        goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f, HybridAquaticEntityTags.DAMSELFISH))
         goalSelector.addGoal(3, StayInWaterGoal(this))
     }
 

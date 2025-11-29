@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.EntityTypeTags
 import net.minecraft.world.entity.EntityType
 import java.util.concurrent.CompletableFuture
@@ -152,6 +153,20 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.STARFISH.get(),
                 HybridAquaticEntityTypes.SEA_ANGEL.get(),
             )
+
+        // damselfish
+        getOrCreateTagBuilder(HybridAquaticEntityTags.DAMSELFISH)
+            .add(
+                HybridAquaticEntityTypes.DAMSELFISH.get(),
+            )
+            .addOptional(ResourceLocation("rainbow_reef", "damselfish"))
+
+        // damselfish
+        getOrCreateTagBuilder(HybridAquaticEntityTags.SURGEONFISH)
+            .add(
+                HybridAquaticEntityTypes.SURGEONFISH.get(),
+            )
+            .addOptional(ResourceLocation("rainbow_reef", "tang"))
 
         // jellyfish
         getOrCreateTagBuilder(HybridAquaticEntityTags.JELLYFISH)

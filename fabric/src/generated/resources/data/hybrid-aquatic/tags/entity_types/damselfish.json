@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:damselfish",
+    {
+      "id": "rainbow_reef:damselfish",
+      "required": false
+    }
+  ]
+}
