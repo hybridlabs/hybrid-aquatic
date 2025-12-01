@@ -206,6 +206,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         setOf(
             HybridAquaticItems.BUOY.get(),
             HybridAquaticPlatformItems.DUNEGRASS.get(),
+            HybridAquaticPlatformItems.TALL_DUNEGRASS.get(),
             HybridAquaticPlatformItems.CATTAIL.get(),
             HybridAquaticItems.RED_ALGAE.get(),
             HybridAquaticItems.SEA_LETTUCE.get(),
