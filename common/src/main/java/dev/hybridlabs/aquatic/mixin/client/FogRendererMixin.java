@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects;
 import dev.hybridlabs.aquatic.fog.ClarityFogModifier;
 import dev.hybridlabs.aquatic.fog.ConduitPowerFogModifier;
@@ -22,10 +23,10 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public class FogRendererMixin {
 
     @Inject(method = "setupFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;" +
-            "setShaderFogStart(F)V"), locals = LocalCapture.CAPTURE_FAILHARD)
+                                                                         "setShaderFogStart(F)V"))
     private static void hybrid$renderFog(Camera camera, FogRenderer.FogMode fogType, float viewDistance,
                                          boolean thickFog, float tickDelta, CallbackInfo ci,
-                                         FogType cameraSubmersionType, Entity entity, FogRenderer.FogData fogData) {
+                                         @Local FogType cameraSubmersionType, @Local Entity entity, @Local FogRenderer.FogData fogData) {
 
         if (entity instanceof LocalPlayer clientPlayerEntity && cameraSubmersionType == FogType.WATER) {
             Level world = clientPlayerEntity.level();

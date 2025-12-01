@@ -33,6 +33,7 @@ object HybridAquaticPlatformItems {
     val DRIFTWOOD_BUTTON =
         HybridAquaticItems.registerBlockItem("driftwood_button") { HybridAquaticPlatformBlocks.DRIFTWOOD_BUTTON.get() }
     val DUNEGRASS = registerBlockItem("dunegrass") { HybridAquaticPlatformBlocks.DUNEGRASS.get() }
+    val TALL_DUNEGRASS = registerBlockItem("tall_dunegrass") { HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get() }
     val CATTAIL = registerBlockItem("cattail") { HybridAquaticPlatformBlocks.CATTAIL.get() }
     //#endregion
 
