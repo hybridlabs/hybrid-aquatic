@@ -899,7 +899,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            MobCategory.WATER_CREATURE
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL")
         )
     }
 
