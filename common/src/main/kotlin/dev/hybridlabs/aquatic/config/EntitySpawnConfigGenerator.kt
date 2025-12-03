@@ -164,7 +164,7 @@ class EntitySpawnConfigGenerator {
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"), weight, minGroup, maxGroup)
+        add(entityType, spawnTags, Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:fish"), weight, minGroup, maxGroup)
     }
 
     private fun addUndergroundFish(
@@ -177,7 +177,7 @@ class EntitySpawnConfigGenerator {
         add(
             entityType,
             spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH_UNDERGROUND"),
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:fish_underground"),
             weight,
             minGroup,
             maxGroup
@@ -193,7 +193,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:cephalopod"),
             weight, minGroup, maxGroup
         )
     }
@@ -207,7 +207,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:cephalopod"),
             weight, minGroup, maxGroup
         )
     }
@@ -221,7 +221,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:shark"),
             weight, minGroup, maxGroup
         )
     }
@@ -235,7 +235,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK_UNDERGROUND"),
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:shark_underground"),
             weight, minGroup, maxGroup
         )
     }
@@ -247,7 +247,7 @@ class EntitySpawnConfigGenerator {
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL"), weight, minGroup, maxGroup)
+        add(entityType, spawnTags, Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:mammal"), weight, minGroup, maxGroup)
     }
 
     private fun addJelly(
@@ -259,7 +259,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY"),
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:jelly"),
             weight, minGroup, maxGroup
         )
     }
@@ -273,7 +273,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY_UNDERGROUND"),
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:jelly_underground"),
             weight, minGroup, maxGroup
         )
     }
@@ -287,7 +287,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN"),
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:crustacean"),
             weight, minGroup, maxGroup
         )
     }
@@ -301,7 +301,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN_UNDERGROUND"),
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:crustacean_underground"),
             weight, minGroup, maxGroup
         )
     }
@@ -315,7 +315,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRITTER"),
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:critter"),
             weight, minGroup, maxGroup
         )
     }
