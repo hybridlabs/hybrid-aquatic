@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.mixin;
 
-import dev.hybridlabs.aquatic.Constants;
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup;
 import net.minecraft.world.entity.MobCategory;
 import org.spongepowered.asm.mixin.Final;
@@ -31,7 +30,7 @@ public class SpawnGroupMixin {
     @Unique
     private static MobCategory hybrid_aquatic$createHybridAquaticSpawnGroups(String enumname, int ordinal,
                                                                              HybridAquaticSpawnGroup spawnGroup) {
-        return ((MobCategory) (Object) new SpawnGroupMixin(spawnGroup.name, ordinal, spawnGroup.name,
+        return ((MobCategory) (Object) new SpawnGroupMixin(spawnGroup.name(), ordinal, spawnGroup.gName,
                 spawnGroup.spawnCap, spawnGroup.peaceful, spawnGroup.rare, spawnGroup.immediateDespawnRange));
     }
 
