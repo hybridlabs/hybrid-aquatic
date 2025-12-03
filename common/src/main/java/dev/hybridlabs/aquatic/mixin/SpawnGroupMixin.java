@@ -24,8 +24,8 @@ public class SpawnGroupMixin {
     private static MobCategory[] $VALUES;
 
     @Unique
-    private static MobCategory createHybridAquaticSpawnGroups(String enumname, int ordinal,
-                                                              HybridAquaticSpawnGroup spawnGroup) {
+    private static MobCategory hybrid_aquatic$createHybridAquaticSpawnGroups(String enumname, int ordinal,
+                                                                             HybridAquaticSpawnGroup spawnGroup) {
         return ((MobCategory) (Object) new SpawnGroupMixin(spawnGroup.name, ordinal, spawnGroup.name,
                 spawnGroup.spawnCap, spawnGroup.peaceful, spawnGroup.rare, spawnGroup.immediateDespawnRange));
     }
@@ -43,9 +43,9 @@ public class SpawnGroupMixin {
         for (int i = 0; i < haSpawnGroups.length; i++) {
             int pos = vanillaSpawnGroupsLength + i;
             HybridAquaticSpawnGroup haSpawnGroup = haSpawnGroups[i];
-            haSpawnGroup.spawnGroup = $VALUES[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos,
-                    haSpawnGroup);
-
+            haSpawnGroup.spawnGroup = $VALUES[pos] = hybrid_aquatic$createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos,
+                haSpawnGroup);
+            
             HybridAquaticSpawnGroup.BY_NAME.put(haSpawnGroup.name(), haSpawnGroup.spawnGroup);
         }
     }
