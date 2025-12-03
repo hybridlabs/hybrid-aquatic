@@ -1,13 +1,13 @@
 {
     "entries": [
         {
-            // The enum class the entry should be added to
+            "_enum_comment": "The enum class the entry should be added to",
             "enum": "net/minecraft/world/entity/MobCategory",
-            // The field name of the new entry, must be prefixed with the mod ID
+            "_name_comment": "The field name of the new entry, must be prefixed with the mod ID",
             "name": "HYBRID_AQUATIC_FISH",
-            // The constructor to be used
+            "_constructor_comment": "The constructor to be used",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            // Constant parameters provided directly.
+            "_parameters_comment": "Constant parameters provided directly.",
             "parameters": [
                 "hybrid_aquatic:fish",
                 8,
