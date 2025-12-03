@@ -247,7 +247,7 @@ class EntitySpawnConfigGenerator {
         minGroup: Int,
         maxGroup: Int
     ) {
-        add(entityType, spawnTags, MobCategory.WATER_CREATURE, weight, minGroup, maxGroup)
+        add(entityType, spawnTags, Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL"), weight, minGroup, maxGroup)
     }
 
     private fun addJelly(

@@ -18,8 +18,9 @@ public enum HybridAquaticSpawnGroup {
     HYBRID_AQUATIC_CRUSTACEAN_UNDERGROUND("crustacean_underground", 8, true, false, 64),
     HYBRID_AQUATIC_CRITTER("critter", 8, true, false, 64),
     HYBRID_AQUATIC_MINIBOSS("miniboss", 10, false, true, 128),
-    HYBRID_AQUATIC_MINION("minion", 12, false, true, 128);
-
+    HYBRID_AQUATIC_MINION("minion", 12, false, true, 128),
+    HYBRID_AQUATIC_MAMMAL("mammal", 5, true, false, 64);
+    
     public MobCategory spawnGroup;
     public final String name;
     public final int spawnCap;

@@ -159,6 +159,18 @@
                 true,
                 128
             ]
+        },
+        {
+            "enum": "net/minecraft/world/entity/MobCategory",
+            "name": "HYBRID_AQUATIC_MAMMAL",
+            "constructor": "(Ljava/lang/String;IZZI)V",
+            "parameters": [
+                "hybrid_aquatic:mammal",
+                5,
+                true,
+                false,
+                64
+            ]
         }
     ]
 }
