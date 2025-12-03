@@ -9,8 +9,7 @@
         "FishingBobberEntityMixin",
         "FishingRodItemMixin",
         "PlayerEntityMixin",
-        "ServerPlayerEntityMixin",
-        "SpawnGroupMixin"
+        "ServerPlayerEntityMixin"
     ],
     "client": [
         "client.FishingBobberEntityClientMixin",
