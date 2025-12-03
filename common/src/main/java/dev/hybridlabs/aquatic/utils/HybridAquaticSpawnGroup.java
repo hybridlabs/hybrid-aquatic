@@ -22,14 +22,14 @@ public enum HybridAquaticSpawnGroup {
     HYBRID_AQUATIC_MAMMAL("mammal", 5, true, false, 64);
     
     public MobCategory spawnGroup;
-    public final String name;
+    public final String gName;
     public final int spawnCap;
     public final boolean peaceful;
     public final boolean rare;
     public final int immediateDespawnRange;
 
     HybridAquaticSpawnGroup(String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
-        this.name = Constants.MOD_ID + ":" + name;
+        this.gName = Constants.MOD_ID + ":" + name;
         this.spawnCap = spawnCap;
         this.peaceful = peaceful;
         this.rare = rare;
