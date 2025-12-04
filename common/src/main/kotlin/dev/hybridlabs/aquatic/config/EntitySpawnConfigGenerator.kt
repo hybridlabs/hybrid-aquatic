@@ -86,6 +86,7 @@ class EntitySpawnConfigGenerator {
 
         //#region Deep Cephalopods
         addUndergroundCephalopod(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), listOf(HybridAquaticBiomeTags.DEEP_ARCTIC_OCEANS), 2, 1, 1)
+        addUndergroundCephalopod(HybridAquaticEntityTypes.GIANT_SQUID.get(), listOf(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS, HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS), 2, 1, 1)
         addUndergroundCephalopod(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 2, 1, 1)
         addUndergroundCephalopod(HybridAquaticEntityTypes.NAUTILUS.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 3, 1, 2)
         addUndergroundCephalopod(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), listOf(HybridAquaticBiomeTags.TROPICAL_OCEANS), 1, 1, 1)

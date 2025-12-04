@@ -488,6 +488,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.DISCUS.get() to "Discus",
             HybridAquaticEntityTypes.ARROW_SQUID.get() to "Arrow Squid",
             HybridAquaticEntityTypes.COLOSSAL_SQUID.get() to "Colossal Squid",
+            HybridAquaticEntityTypes.GIANT_SQUID.get() to "Giant Squid",
             HybridAquaticEntityTypes.FIREFLY_SQUID.get() to "Firefly Squid",
             HybridAquaticEntityTypes.STINGRAY.get() to "Stingray",
             HybridAquaticEntityTypes.MANTA_RAY.get() to "Manta Ray",

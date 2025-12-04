@@ -381,6 +381,12 @@ object HybridAquaticEntityRenderers {
             ::ColossalSquidEntityRenderer
         )
 
+    val GIANT_SQUID =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.GIANT_SQUID,
+            ::GiantSquidEntityRenderer
+        )
+
     val FIREFLY_SQUID =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.FIREFLY_SQUID,

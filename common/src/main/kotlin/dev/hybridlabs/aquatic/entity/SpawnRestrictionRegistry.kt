@@ -124,6 +124,7 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
             HybridAquaticEntityTypes.COLOSSAL_SQUID.get(),
+            HybridAquaticEntityTypes.GIANT_SQUID.get(),
         ).forEach { registerDeepCephalopod(it) }
 
         // octopuses

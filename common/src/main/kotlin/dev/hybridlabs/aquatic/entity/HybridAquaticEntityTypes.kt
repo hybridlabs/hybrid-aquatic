@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.entity.cephalopod.ArrowSquidEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.ColossalSquidEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.CuttlefishEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.FireflySquidEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.GiantSquidEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.NautilusEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.UmbrellaOctopusEntity
@@ -518,6 +519,13 @@ object HybridAquaticEntityTypes {
         ::ColossalSquidEntity,
         EntityDimensions.fixed(3.0f, 1.0f),
         ColossalSquidEntity::createMobAttributes
+    )
+
+    val GIANT_SQUID = registerCephalopod(
+        "giant_squid",
+        ::GiantSquidEntity,
+        EntityDimensions.fixed(3.0f, 1.0f),
+        GiantSquidEntity::createMobAttributes
     )
 
     val FIREFLY_SQUID = registerCephalopod(
