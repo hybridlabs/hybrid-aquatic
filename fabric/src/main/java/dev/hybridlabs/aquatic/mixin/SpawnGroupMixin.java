@@ -28,9 +28,9 @@ public class SpawnGroupMixin {
     private static MobCategory[] $VALUES;
 
     @Unique
-    private static MobCategory createHybridAquaticSpawnGroups(String enumname, int ordinal,
-                                                              HybridAquaticSpawnGroup spawnGroup) {
-        return ((MobCategory) (Object) new SpawnGroupMixin(spawnGroup.name, ordinal, spawnGroup.name,
+    private static MobCategory hybrid_aquatic$createHybridAquaticSpawnGroups(String enumname, int ordinal,
+                                                                             HybridAquaticSpawnGroup spawnGroup) {
+        return ((MobCategory) (Object) new SpawnGroupMixin(spawnGroup.name(), ordinal, spawnGroup.gName,
                 spawnGroup.spawnCap, spawnGroup.peaceful, spawnGroup.rare, spawnGroup.immediateDespawnRange));
     }
 
@@ -38,19 +38,17 @@ public class SpawnGroupMixin {
             "$VALUES:[Lnet/minecraft/world/entity/MobCategory;", shift = At.Shift.AFTER))
     private static void injectEnum(CallbackInfo ci) {
         int vanillaSpawnGroupsLength = $VALUES.length;
-        for (MobCategory category : $VALUES) {
-            HybridAquaticSpawnGroup.BY_NAME.put(category.name(), category);
-        }
+        
         HybridAquaticSpawnGroup[] haSpawnGroups = HybridAquaticSpawnGroup.values();
         $VALUES = Arrays.copyOf($VALUES, vanillaSpawnGroupsLength + haSpawnGroups.length);
 
         for (int i = 0; i < haSpawnGroups.length; i++) {
             int pos = vanillaSpawnGroupsLength + i;
             HybridAquaticSpawnGroup haSpawnGroup = haSpawnGroups[i];
-            haSpawnGroup.spawnGroup = $VALUES[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos,
+            haSpawnGroup.spawnGroup = $VALUES[pos] = hybrid_aquatic$createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos,
                     haSpawnGroup);
-
-            HybridAquaticSpawnGroup.BY_NAME.put(haSpawnGroup.name(), haSpawnGroup.spawnGroup);
         }
+        
+        Arrays.stream($VALUES).forEach(value -> HybridAquaticSpawnGroup.BY_NAME.put(value.getName(), value));
     }
 }

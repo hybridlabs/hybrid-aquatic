@@ -65,6 +65,14 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
+        add(HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+            )
+        }
+
         add(HybridAquaticPlatformBlocks.CATTAIL.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()

@@ -136,7 +136,7 @@ object HybridAquaticForge {
         HybridAquaticSpawnGroup.entries.toTypedArray().forEach {
             MobCategory.create(
                 it.name,
-                it.name,
+                it.gName,
                 it.spawnCap,
                 it.peaceful,
                 it.rare,
