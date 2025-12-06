@@ -417,7 +417,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.COLD_OCEANS,
                 HybridAquaticBiomeTags.ARCTIC_OCEANS),
-            3, 1, 3
+            3, 1, 2
         )
 
         addCephalopod(
@@ -425,7 +425,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.REEF),
-            3, 3, 5
+            3, 1, 2
         )
 
         addCephalopod(
@@ -443,7 +443,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS
             ),
-            3, 1, 2
+            3, 1, 1
         )
 
         addCephalopod(
@@ -457,7 +457,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.NAUTILUS.get(),
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 1, 2
+            3, 1, 1
         )
 
         addCephalopod(
