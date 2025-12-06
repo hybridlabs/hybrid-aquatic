@@ -36,7 +36,7 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
     private var isGliding = false
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 6
+        return 12
     }
 
     override fun registerGoals() {
@@ -65,7 +65,8 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Fly/Swim/Idle", 5
+            AnimationController(
+                this, "Fly/Swim/Idle", 5
             ) { state: AnimationState<HybridAquaticFishEntity> ->
                 when {
                     this.isGliding -> state.setAndContinue(DefaultAnimations.FLY)

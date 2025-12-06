@@ -18,7 +18,7 @@ class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: Level) :
     ) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     companion object {

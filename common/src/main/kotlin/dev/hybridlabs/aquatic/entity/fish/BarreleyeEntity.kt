@@ -20,7 +20,7 @@ class BarreleyeEntity(entityType: EntityType<out BarreleyeEntity>, world: Level)
     ) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     companion object {

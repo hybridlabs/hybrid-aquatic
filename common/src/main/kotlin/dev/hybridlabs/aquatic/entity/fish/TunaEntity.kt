@@ -38,7 +38,7 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
     VariantHolder<TunaEntity.Companion.Type> {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 3
+        return 4
     }
 
     override fun finalizeSpawn(

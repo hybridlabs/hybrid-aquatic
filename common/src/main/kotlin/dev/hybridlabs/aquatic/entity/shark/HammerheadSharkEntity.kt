@@ -16,6 +16,10 @@ class HammerheadSharkEntity(entityType: EntityType<out HammerheadSharkEntity>, w
         false
     ) {
 
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))

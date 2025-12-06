@@ -35,7 +35,7 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: Level) :
     VariantHolder<SunfishEntity.Companion.Type> {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     override fun finalizeSpawn(

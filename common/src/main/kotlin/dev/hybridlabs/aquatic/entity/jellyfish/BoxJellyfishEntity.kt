@@ -10,7 +10,7 @@ class BoxJellyfishEntity(entityType: EntityType<out BoxJellyfishEntity>, world: 
     HybridAquaticJellyfishEntity(entityType, world, true, 2) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     companion object {

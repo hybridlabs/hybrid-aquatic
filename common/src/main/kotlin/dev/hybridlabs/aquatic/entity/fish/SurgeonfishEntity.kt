@@ -42,7 +42,7 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Le
     }
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 3
+        return 6
     }
 
     override fun finalizeSpawn(

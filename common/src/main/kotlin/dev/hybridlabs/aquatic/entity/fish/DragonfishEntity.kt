@@ -21,7 +21,7 @@ class DragonfishEntity(entityType: EntityType<out DragonfishEntity>, world: Leve
             HybridAquaticEntityTags.SHARK)) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 4
+        return 2
     }
 
     companion object {

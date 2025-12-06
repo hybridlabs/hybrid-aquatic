@@ -34,6 +34,10 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
     ),
     VariantHolder<StingrayEntity.Companion.Type> {
 
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))

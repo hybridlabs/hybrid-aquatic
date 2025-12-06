@@ -31,7 +31,7 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Leve
     private var angryAt: UUID? = null
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     override fun registerGoals() {
