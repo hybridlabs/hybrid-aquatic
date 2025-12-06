@@ -903,7 +903,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:shark_underground")
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:shark")
         )
     }
 
@@ -948,7 +948,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:crustacean_underground")
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:crustacean")
         )
     }
 
@@ -975,7 +975,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:fish_underground")
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:fish")
         )
     }
 
@@ -1050,7 +1050,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:jelly_underground")
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:jelly")
         )
     }
 
