@@ -73,7 +73,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(hasShearsOrSilkTouch().build()).build()
             )
         }
 
