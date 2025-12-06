@@ -359,26 +359,6 @@ class EntitySpawnConfigGenerator {
         )
 
         addFish(
-            HybridAquaticEntityTypes.FANGTOOTH.get(),
-            listOf(
-                BiomeTags.IS_DEEP_OCEAN),
-            3, 1, 2
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.VIPERFISH.get(),
-            listOf(
-                BiomeTags.IS_DEEP_OCEAN),
-            3, 1, 2
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.HATCHETFISH.get(),
-            listOf(BiomeTags.IS_DEEP_OCEAN),
-            3, 1, 2
-        )
-
-        addFish(
             HybridAquaticEntityTypes.JOHN_DORY.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
@@ -485,21 +465,6 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_OCEANS),
             3, 1, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.GIANT_SQUID.get(),
-            listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
-            1, 0, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.COLOSSAL_SQUID.get(),
-            listOf(
-                HybridAquaticBiomeTags.DEEP_ARCTIC_OCEANS),
-            1, 0, 1
         )
 
         addCephalopod(
@@ -843,12 +808,6 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.REEF),
-            3, 1, 2
-        )
-
-        addCritter(
-            HybridAquaticEntityTypes.SCALYFOOT_SNAIL.get(),
-            listOf(BiomeTags.IS_DEEP_OCEAN),
             3, 1, 2
         )
 
