@@ -35,7 +35,7 @@ class RockfishEntity(entityType: EntityType<out RockfishEntity>, world: Level) :
     VariantHolder<RockfishEntity.Companion.Type> {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 3
+        return 4
     }
 
     override fun finalizeSpawn(

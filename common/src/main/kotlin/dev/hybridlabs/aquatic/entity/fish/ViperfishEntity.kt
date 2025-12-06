@@ -31,7 +31,7 @@ class ViperfishEntity(entityType: EntityType<out ViperfishEntity>, world: Level)
     private var angryAt: UUID? = null
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     override fun registerGoals() {

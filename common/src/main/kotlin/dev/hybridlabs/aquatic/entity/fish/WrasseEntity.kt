@@ -35,7 +35,7 @@ class WrasseEntity(entityType: EntityType<out WrasseEntity>, world: Level) :
     VariantHolder<WrasseEntity.Companion.Type> {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 1
+        return 2
     }
 
     override fun finalizeSpawn(

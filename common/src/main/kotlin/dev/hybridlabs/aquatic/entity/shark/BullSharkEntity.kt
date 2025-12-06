@@ -17,6 +17,10 @@ class BullSharkEntity(entityType: EntityType<out BullSharkEntity>, world: Level)
         true
     ) {
 
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))

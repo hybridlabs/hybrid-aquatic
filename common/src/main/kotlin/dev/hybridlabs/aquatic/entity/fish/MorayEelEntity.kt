@@ -21,7 +21,7 @@ class MorayEelEntity(entityType: EntityType<out MorayEelEntity>, world: Level) :
     ) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     override fun shouldFlopOnLand(): Boolean {

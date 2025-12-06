@@ -9,7 +9,7 @@ class CosmicJellyfishEntity(entityType: EntityType<out CosmicJellyfishEntity>, w
     HybridAquaticJellyfishEntity(entityType, world, false, 0) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     companion object {

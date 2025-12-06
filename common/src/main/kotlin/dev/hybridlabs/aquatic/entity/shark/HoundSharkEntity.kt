@@ -31,6 +31,10 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Leve
     ),
     VariantHolder<HoundSharkEntity.Type> {
 
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,

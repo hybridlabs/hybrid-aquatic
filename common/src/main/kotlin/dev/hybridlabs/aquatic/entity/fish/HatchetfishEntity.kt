@@ -28,7 +28,7 @@ class HatchetfishEntity(entityType: EntityType<out HatchetfishEntity>, world: Le
     ) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     companion object {

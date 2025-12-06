@@ -31,6 +31,10 @@ class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
         goalSelector.addGoal(1, HurtByTargetGoal(this))
     }
 
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
