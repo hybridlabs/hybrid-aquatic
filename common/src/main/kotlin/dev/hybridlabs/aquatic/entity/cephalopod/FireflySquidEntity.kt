@@ -23,6 +23,10 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
         true
     ) {
 
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()

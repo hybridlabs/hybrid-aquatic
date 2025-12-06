@@ -18,6 +18,10 @@ class ArrowSquidEntity(entityType: EntityType<out ArrowSquidEntity>, world: Leve
         false
     ) {
 
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
