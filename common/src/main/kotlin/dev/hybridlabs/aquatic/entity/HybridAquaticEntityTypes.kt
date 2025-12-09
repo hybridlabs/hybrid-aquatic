@@ -178,7 +178,7 @@ object HybridAquaticEntityTypes {
     val CARP = registerFish(
         "carp",
         ::CarpEntity,
-        EntityDimensions.fixed(0.5f, 0.4f),
+        EntityDimensions.fixed(0.75f, 0.5f),
         CarpEntity::createMobAttributes
     )
 

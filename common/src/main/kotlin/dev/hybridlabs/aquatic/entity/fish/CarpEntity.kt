@@ -43,6 +43,14 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
         return 2
     }
 
+    override fun getMinSize(): Int {
+        return -8
+    }
+
+    override fun getMaxSize(): Int {
+        return 0
+    }
+
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
@@ -79,7 +87,8 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             COMMON(0, "common"),
-            KOI(1, "koi");
+            KOI(1, "koi"),
+            MAGIKARP(2, "magikarp");
 
             override fun getSerializedName(): String {
                 return this.key
