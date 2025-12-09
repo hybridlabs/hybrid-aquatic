@@ -110,14 +110,18 @@ object HybridAquatic : ModInitializer {
             }
     }
 
+
     private fun registerFlammables(registry: FlammableBlockRegistry) {
-        registry.add(HybridAquaticPlatformBlocks.DUNEGRASS.get(), 5, 5)
-        registry.add(HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get(), 5, 5)
-        registry.add(HybridAquaticPlatformBlocks.CATTAIL.get(), 5, 5)
+        // same as vanilla grass
+        registry.add(HybridAquaticPlatformBlocks.DUNEGRASS.get(), 60, 100)
+        registry.add(HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get(), 60, 100)
+        registry.add(HybridAquaticPlatformBlocks.CATTAIL.get(), 60, 100)
+        // same as vanilla logs
         registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get(), 5, 5)
         registry.add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get(), 5, 5)
         registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get(), 5, 5)
         registry.add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get(), 5, 5)
+        // same as vanilla cut wood
         registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get(), 5, 20)
         registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get(), 5, 20)
         registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE.get(), 5, 20)
