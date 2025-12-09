@@ -16,12 +16,12 @@ class CattailBlock(settings: Properties): BaseCattailBlock(settings){
     }
 
     override fun getFlammability(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Int {
-        return 5
+        return 60
     }
 
     override fun getFireSpreadSpeed(
         state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
     ): Int {
-        return 5
+        return 100
     }
 }
