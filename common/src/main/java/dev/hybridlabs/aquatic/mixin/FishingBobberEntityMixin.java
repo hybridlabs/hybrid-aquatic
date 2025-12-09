@@ -8,6 +8,7 @@ import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 
+import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -46,7 +47,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
     public abstract Player getPlayerOwner();
 
     @Unique
-    private ItemStack lureItemStack = Items.AIR.getDefaultInstance();
+    private ItemStack hybrid_aquatic$lureItemStack = Items.AIR.getDefaultInstance();
 
     private FishingBobberEntityMixin(EntityType<? extends Projectile> entityType, Level level) {
         super(entityType, level);
@@ -55,23 +56,25 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void readCustomDataFromNbt(CompoundTag nbt, CallbackInfo ci) {
         hybrid_aquatic$setLureItem(
-                ItemStack.parseOptional(
-                        this.level().registryAccess(), nbt.getCompound("lureItem")));
+            ItemStack.parseOptional(
+                this.level().registryAccess(), nbt.getCompound("lureItem")));
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
     private void writeCustomDataToNbt(CompoundTag nbt, CallbackInfo ci) {
+        if (!hybrid_aquatic$lureItemStack.is(HybridAquaticItemTags.INSTANCE.getLURE_ITEMS())) return;
+        
         CompoundTag itemStack = new CompoundTag();
         hybrid_aquatic$getLureItem().save(this.level().registryAccess(), itemStack);
         nbt.put("lureItem", itemStack);
     }
 
     public ItemStack hybrid_aquatic$getLureItem() {
-        return lureItemStack;
+        return hybrid_aquatic$lureItemStack;
     }
 
     public void hybrid_aquatic$setLureItem(ItemStack item) {
-        lureItemStack = (item == null ? Items.AIR.getDefaultInstance() : item);
+        hybrid_aquatic$lureItemStack = (item == null ? Items.AIR.getDefaultInstance() : item);
     }
 
     // Reduces wait time faster if you have hooks on the fishing rod
@@ -87,7 +90,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
                             ordinal = 2,
                             shift = At.Shift.AFTER))
     private void reduceCooldownTime(BlockPos pos, CallbackInfo ci) {
-        Item lureItem = this.lureItemStack.getItem();
+        Item lureItem = this.hybrid_aquatic$lureItemStack.getItem();
         if (lureItem.equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK().get())
                 && this.level().isDay()) {
             timeUntilLured -= 75;
@@ -105,7 +108,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
                             value = "INVOKE",
                             target = "Lnet/minecraft/world/entity/player" + "/Player;getLuck()F"))
     private float increaseLuck(Player player, Operation<Float> original) {
-        if (lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK().get()))
+        if (hybrid_aquatic$lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK().get()))
             return player.getLuck() + 27;
         return original.call(player);
     }
@@ -124,13 +127,13 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
                      + "Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"
     ))
     private LootTable onHookReelEntity(LootTable instance, LootParams parameters) {
-        if (!lureItemStack.isEmpty()) {
-            if (lureItemStack.is(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK().get())) {
+        if (!hybrid_aquatic$lureItemStack.isEmpty()) {
+            if (hybrid_aquatic$lureItemStack.is(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK().get())) {
                 var karkinosType = HybridAquaticEntityTypes.INSTANCE.getKARKINOS().get();
                 hybrid_aquatic$createAndLaunchEntityAtPlayer(karkinosType);
 
                 instance = LootTable.EMPTY;
-            } else if (lureItemStack.is(
+            } else if (hybrid_aquatic$lureItemStack.is(
                     HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK().get())) {
                 var creeperType = EntityType.CREEPER;
                 hybrid_aquatic$createAndLaunchEntityAtPlayer(creeperType);
@@ -139,7 +142,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
             }
 
             // Damage lure AFTER we catch anything with it
-            lureItemStack.hurtAndBreak(1, getPlayerOwner(), EquipmentSlot.MAINHAND);
+            hybrid_aquatic$lureItemStack.hurtAndBreak(1, getPlayerOwner(), EquipmentSlot.MAINHAND);
         }
 
         return instance;
@@ -178,7 +181,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
                                     "Lnet/minecraft/world/entity/projectile"
                                             + "/FishingHook;discard()V"))
     private void retrieveLureOnSuccess(ItemStack usedItem, CallbackInfoReturnable<Integer> cir) {
-        retrieveLure(getPlayerOwner());
+        hybrid_aquatic$retrieveLure(getPlayerOwner());
     }
 
     // Returns lure back if player removes fishing rod
@@ -191,7 +194,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
                                     "Lnet/minecraft/world/entity/projectile"
                                             + "/FishingHook;discard()V"))
     private void retrieveLureIfInvalid(Player player, CallbackInfoReturnable<Boolean> cir) {
-        retrieveLure(player);
+        hybrid_aquatic$retrieveLure(player);
     }
 
     // TODO: Lures can disappear if you reload the world while fishing
@@ -199,8 +202,8 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
     //  haven't checked that yet)
     //  Really not sure how to fix that
     @Unique
-    private void retrieveLure(Player player) {
-        if (!lureItemStack.isEmpty()) {
+    private void hybrid_aquatic$retrieveLure(Player player) {
+        if (!hybrid_aquatic$lureItemStack.isEmpty()) {
             Vec3 pos;
             if (player == null || player.isRemoved() || !player.isAlive()) {
                 pos = this.position();
@@ -208,17 +211,17 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
 
                 // Try to put the lure back in the player's offhand
                 if (player.getItemBySlot(EquipmentSlot.OFFHAND).isEmpty()) {
-                    player.setItemSlot(EquipmentSlot.OFFHAND, lureItemStack);
-                    if (player.getItemBySlot(EquipmentSlot.OFFHAND) == lureItemStack) return;
+                    player.setItemSlot(EquipmentSlot.OFFHAND, hybrid_aquatic$lureItemStack);
+                    if (player.getItemBySlot(EquipmentSlot.OFFHAND) == hybrid_aquatic$lureItemStack) return;
                 }
                 // Or just stick it in the inventory if the offhand is occupied
-                if (player.getInventory().add(lureItemStack)) return;
+                if (player.getInventory().add(hybrid_aquatic$lureItemStack)) return;
 
                 pos = player.position();
             }
 
             ItemEntity itemEntity =
-                    new ItemEntity(this.level(), pos.x, pos.y, pos.z, lureItemStack);
+                    new ItemEntity(this.level(), pos.x, pos.y, pos.z, hybrid_aquatic$lureItemStack);
             itemEntity.setDeltaMovement(Vec3.ZERO);
             this.level().addFreshEntity(itemEntity);
         }

@@ -17,6 +17,8 @@ object HybridAquaticClientNetworking {
         registerGlobalReceiver(type) { payload: FishingBobberPayload, context: ClientPlayNetworking.Context ->
             context.client().execute {
                 val itemStack: ItemStack = payload.lure
+                if (itemStack.isEmpty) return@execute
+
                 val foundEntity = context.client().level?.getEntity(payload.id)
                 if (foundEntity == null || foundEntity !is FishingHook) return@execute
 
