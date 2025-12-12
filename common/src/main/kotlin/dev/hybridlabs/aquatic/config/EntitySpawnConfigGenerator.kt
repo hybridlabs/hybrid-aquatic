@@ -70,7 +70,16 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.MANGROVES,
                 HybridAquaticBiomeTags.MARSHES,
                 HybridAquaticBiomeTags.TROPICAL_RIVERS),
-            3, 1, 1
+            1, 1, 1
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.PLECO.get(),
+            listOf(
+                HybridAquaticBiomeTags.SWAMP,
+                HybridAquaticBiomeTags.MANGROVES,
+                HybridAquaticBiomeTags.MARSHES),
+            1, 1, 2
         )
 
         addFish(
@@ -79,7 +88,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.JUNGLE,
                 HybridAquaticBiomeTags.MANGROVES,
                 HybridAquaticBiomeTags.TROPICAL_RIVERS),
-            3, 1, 1
+            1, 1, 1
         )
 
         addFish(
@@ -87,7 +96,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.JUNGLE,
                 HybridAquaticBiomeTags.TROPICAL_RIVERS),
-            3, 4, 8
+            2, 4, 8
         )
 
         addFish(

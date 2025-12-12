@@ -16,6 +16,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_PREY)
             .add(
                 HybridAquaticEntityTypes.CLOWNFISH.get(),
+                HybridAquaticEntityTypes.PLECO.get(),
                 HybridAquaticEntityTypes.CARP.get(),
                 HybridAquaticEntityTypes.PEARLFISH.get(),
                 HybridAquaticEntityTypes.SNAILFISH.get(),
@@ -177,6 +178,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
                 HybridAquaticEntityTypes.BLOWFISH.get(),
                 HybridAquaticEntityTypes.STONEFISH.get(),
+                HybridAquaticEntityTypes.PLECO.get(),
                 HybridAquaticEntityTypes.DAMSELFISH.get(),
                 HybridAquaticEntityTypes.PEARLFISH.get(),
                 HybridAquaticEntityTypes.BETTA.get(),

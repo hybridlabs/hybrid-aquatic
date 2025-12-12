@@ -480,6 +480,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.SEAHORSE.get() to "Seahorse",
             HybridAquaticEntityTypes.MOON_JELLYFISH.get() to "Moon Jellyfish",
             HybridAquaticEntityTypes.GOURAMI.get() to "Gourami",
+            HybridAquaticEntityTypes.PLECO.get() to "Pleco",
             HybridAquaticEntityTypes.BOXFISH.get() to "Boxfish",
             HybridAquaticEntityTypes.OCTOPUS.get() to "Octopus",
             HybridAquaticEntityTypes.DISCUS.get() to "Discus",

@@ -61,6 +61,7 @@ import dev.hybridlabs.aquatic.entity.fish.OscarEntity
 import dev.hybridlabs.aquatic.entity.fish.ParrotfishEntity
 import dev.hybridlabs.aquatic.entity.fish.PearlfishEntity
 import dev.hybridlabs.aquatic.entity.fish.PiranhaEntity
+import dev.hybridlabs.aquatic.entity.fish.PlecoEntity
 import dev.hybridlabs.aquatic.entity.fish.PupfishEntity
 import dev.hybridlabs.aquatic.entity.fish.RatfishEntity
 import dev.hybridlabs.aquatic.entity.fish.RockfishEntity
@@ -278,6 +279,13 @@ object HybridAquaticEntityTypes {
         ::GouramiEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
         GouramiEntity::createMobAttributes
+    )
+
+    val PLECO = registerFish(
+        "pleco",
+        ::PlecoEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        PlecoEntity::createMobAttributes
     )
 
     val LIONFISH = registerFish(

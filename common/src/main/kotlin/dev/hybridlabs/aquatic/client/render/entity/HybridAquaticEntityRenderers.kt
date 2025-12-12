@@ -58,6 +58,7 @@ import dev.hybridlabs.aquatic.client.render.entity.fish.OscarEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.ParrotfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.PearlfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.PiranhaEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.fish.PlecoEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.PupfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.RatfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.RockfishEntityRenderer
@@ -372,6 +373,12 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.GOURAMI,
             ::GouramiEntityRenderer
+        )
+
+    val PLECO =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.PLECO,
+            ::PlecoEntityRenderer
         )
 
     val BOXFISH =
