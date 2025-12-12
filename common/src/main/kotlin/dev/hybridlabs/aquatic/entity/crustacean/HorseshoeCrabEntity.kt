@@ -39,6 +39,7 @@ class HorseshoeCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
 
             return pos.y in spawnY &&
                     world.getBlockState(pos.below()).isSolid &&
+                    world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
     }
