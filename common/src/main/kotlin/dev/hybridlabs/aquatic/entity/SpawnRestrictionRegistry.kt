@@ -32,13 +32,13 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.PIRANHA.get(),
             HybridAquaticEntityTypes.OSCAR.get(),
             HybridAquaticEntityTypes.GOURAMI.get(),
+            HybridAquaticEntityTypes.PLECO.get(),
             HybridAquaticEntityTypes.DANIO.get(),
             HybridAquaticEntityTypes.DISCUS.get(),
             HybridAquaticEntityTypes.BETTA.get(),
             HybridAquaticEntityTypes.TETRA.get(),
             HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
         ).forEach { registerShallowFish(it) }
-
 
         // fish
         setOf(
