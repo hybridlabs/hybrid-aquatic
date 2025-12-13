@@ -138,7 +138,14 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.CHERRY,
                 HybridAquaticBiomeTags.RIVERS),
-            5, 0, 2
+            3, 0, 2
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.SHINER.get(),
+            listOf(
+                HybridAquaticBiomeTags.RIVERS),
+            3, 0, 2
         )
 
         addFish(

@@ -69,6 +69,7 @@ import dev.hybridlabs.aquatic.entity.fish.SeaAngelEntity
 import dev.hybridlabs.aquatic.entity.fish.SeaBassEntity
 import dev.hybridlabs.aquatic.entity.fish.SeadragonEntity
 import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
+import dev.hybridlabs.aquatic.entity.fish.ShinerEntity
 import dev.hybridlabs.aquatic.entity.fish.SnailfishEntity
 import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
 import dev.hybridlabs.aquatic.entity.fish.StingrayEntity
@@ -274,6 +275,13 @@ object HybridAquaticEntityTypes {
         CarpEntity::createMobAttributes
     )
 
+    val SHINER = registerFish(
+        "shiner",
+        ::ShinerEntity,
+        EntityDimensions.fixed(0.75f, 0.5f),
+        ShinerEntity::createMobAttributes
+    )
+
     val GOURAMI = registerFish(
         "gourami",
         ::GouramiEntity,
@@ -284,7 +292,7 @@ object HybridAquaticEntityTypes {
     val PLECO = registerFish(
         "pleco",
         ::PlecoEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
+        EntityDimensions.fixed(0.8f, 0.5f),
         PlecoEntity::createMobAttributes
     )
 

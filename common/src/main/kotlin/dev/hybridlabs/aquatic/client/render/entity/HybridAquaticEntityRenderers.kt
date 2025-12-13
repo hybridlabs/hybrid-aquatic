@@ -66,6 +66,7 @@ import dev.hybridlabs.aquatic.client.render.entity.fish.SeaAngelEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.SeaBassEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.SeadragonEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.SeahorseEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.fish.ShinerEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.SnailfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.SquirrelfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.StingrayEntityRenderer
@@ -409,6 +410,12 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.CARP,
             ::CarpEntityRenderer
+        )
+
+    val SHINER =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.SHINER,
+            ::ShinerEntityRenderer
         )
 
     //endregion
