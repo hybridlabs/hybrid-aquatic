@@ -330,7 +330,8 @@ open class HybridAquaticCrustaceanEntity(
 
             return pos.y <= topY &&
                     world.getBlockState(pos.below()).isSolid &&
-                    world.isEmptyBlock(pos)
+                    world.isEmptyBlock(pos) &&
+                    world.canSeeSky(pos)
         }
 
         fun canWaterSpawn(
