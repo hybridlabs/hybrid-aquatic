@@ -30,6 +30,7 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.DAMSELFISH.get(),
             HybridAquaticEntityTypes.TIGER_BARB.get(),
             HybridAquaticEntityTypes.PIRANHA.get(),
+            HybridAquaticEntityTypes.SHINER.get(),
             HybridAquaticEntityTypes.OSCAR.get(),
             HybridAquaticEntityTypes.GOURAMI.get(),
             HybridAquaticEntityTypes.PLECO.get(),
