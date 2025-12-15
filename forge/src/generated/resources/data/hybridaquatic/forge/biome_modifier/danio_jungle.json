@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:jungle",
+  "spawners": {
+    "type": "hybridaquatic:danio",
+    "maxCount": 3,
+    "minCount": 2,
+    "weight": 3
+  }
+}

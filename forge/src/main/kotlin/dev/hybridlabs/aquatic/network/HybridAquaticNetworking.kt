@@ -55,7 +55,7 @@ object HybridAquaticNetworking {
                 val foundEntity = sender?.level()?.getEntity(packet.entityId)
                 if (foundEntity is FishingHook) {
                     val additionalBobberData = foundEntity as CustomFishingBobberEntityData
-                    val item: ItemStack = additionalBobberData.`hybrid_aquatic$getLureItem`()
+                    val item: ItemStack = additionalBobberData.lureItem
                     sendClientHookPacket(sender, foundEntity.id, item)
                 }
             }
@@ -66,7 +66,7 @@ object HybridAquaticNetworking {
                 val itemStack = packet.entityData
                 if (foundEntity != null && foundEntity is FishingHook) {
                     val additionalBobberData = foundEntity as CustomFishingBobberEntityData
-                    additionalBobberData.`hybrid_aquatic$setLureItem`(itemStack)
+                    additionalBobberData.lureItem = itemStack
                 }
             }
         }

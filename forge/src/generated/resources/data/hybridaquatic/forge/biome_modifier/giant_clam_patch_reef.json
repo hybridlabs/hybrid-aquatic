@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybridaquatic:reef",
+  "features": "hybridaquatic:giant_clam_patch",
+  "step": "vegetal_decoration"
+}

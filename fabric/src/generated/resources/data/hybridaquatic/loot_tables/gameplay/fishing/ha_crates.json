@@ -1,0 +1,56 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:crab_pot"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:hybrid_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:oak_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:spruce_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:birch_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:dark_oak_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:acacia_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:jungle_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:bamboo_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:mangrove_crate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:cherry_crate"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "hybridaquatic:gameplay/fishing/ha_crates"
+}

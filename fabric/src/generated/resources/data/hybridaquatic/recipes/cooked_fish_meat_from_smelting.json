@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "ingredient": {
+    "item": "hybridaquatic:raw_fish_meat"
+  },
+  "result": "hybridaquatic:cooked_fish_meat"
+}

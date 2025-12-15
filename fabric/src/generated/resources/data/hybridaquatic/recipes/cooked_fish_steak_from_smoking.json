@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "hybridaquatic:raw_fish_steak"
+  },
+  "result": "hybridaquatic:cooked_fish_steak"
+}

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:shallow_cold_oceans",
+  "spawners": {
+    "type": "hybridaquatic:herring",
+    "maxCount": 12,
+    "minCount": 4,
+    "weight": 5
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:reef",
+  "spawners": {
+    "type": "hybridaquatic:damselfish",
+    "maxCount": 12,
+    "minCount": 4,
+    "weight": 5
+  }
+}

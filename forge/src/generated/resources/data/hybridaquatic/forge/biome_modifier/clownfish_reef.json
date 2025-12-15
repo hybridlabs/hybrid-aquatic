@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:reef",
+  "spawners": {
+    "type": "hybridaquatic:clownfish",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 3
+  }
+}

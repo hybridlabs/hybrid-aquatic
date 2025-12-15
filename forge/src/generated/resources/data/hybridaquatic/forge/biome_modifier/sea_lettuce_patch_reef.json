@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybridaquatic:reef",
+  "features": "hybridaquatic:sea_lettuce_patch",
+  "step": "vegetal_decoration"
+}

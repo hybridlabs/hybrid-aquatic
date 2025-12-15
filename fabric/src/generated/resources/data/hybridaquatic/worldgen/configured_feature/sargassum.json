@@ -1,0 +1,14 @@
+{
+  "type": "hybridaquatic:sargassum",
+  "config": {
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hybridaquatic:sargassum",
+        "Properties": {
+          "age": "0"
+        }
+      }
+    }
+  }
+}

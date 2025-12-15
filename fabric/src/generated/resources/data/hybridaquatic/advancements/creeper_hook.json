@@ -1,0 +1,40 @@
+{
+  "parent": "hybridaquatic:hook",
+  "criteria": {
+    "has_creeper_hook": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybridaquatic:creepermagnet_hook"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancements.hybrid-aquatic.creeper_hook.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "hybridaquatic:creepermagnet_hook",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid-aquatic.creeper_hook.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_creeper_hook"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

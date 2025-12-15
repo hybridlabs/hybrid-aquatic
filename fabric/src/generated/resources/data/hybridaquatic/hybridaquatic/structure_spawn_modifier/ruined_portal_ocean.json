@@ -1,0 +1,15 @@
+{
+  "bounding_box_type": "full",
+  "id": "ruined_portal_ocean",
+  "spawns": {
+    "shark": [
+      {
+        "type": "hybridaquatic:great_white_shark",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 1
+      }
+    ]
+  },
+  "structure": "minecraft:ruined_portal_ocean"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "hybridaquatic:block/tall_dunegrass_top"
+  }
+}

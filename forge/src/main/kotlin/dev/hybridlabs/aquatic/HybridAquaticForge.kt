@@ -68,9 +68,9 @@ import thedarkcolour.kotlinforforge.forge.runForDist
 
 
 @Suppress("UnusedExpression")
-@Mod(Constants.FORGE_MOD_ID)
+@Mod(Constants.MOD_ID)
 object HybridAquaticForge {
-    private val logger = Constants.LOG!!
+    private val logger = Constants.LOGGER!!
 
     init {
         CommonClass.init()
@@ -136,7 +136,7 @@ object HybridAquaticForge {
         HybridAquaticSpawnGroup.entries.toTypedArray().forEach {
             MobCategory.create(
                 it.name,
-                it.gName,
+                it.location.toString(),
                 it.spawnCap,
                 it.peaceful,
                 it.rare,

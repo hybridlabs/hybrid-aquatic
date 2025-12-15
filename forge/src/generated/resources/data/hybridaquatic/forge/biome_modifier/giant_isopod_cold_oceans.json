@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:cold_oceans",
+  "spawners": {
+    "type": "hybridaquatic:giant_isopod",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 1
+  }
+}

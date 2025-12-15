@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:ratfish",
+    "hybridaquatic:stingray",
+    "hybridaquatic:triggerfish",
+    "hybridaquatic:needlefish",
+    "hybridaquatic:rockfish",
+    "hybridaquatic:sea_bass",
+    "hybridaquatic:lionfish",
+    "hybridaquatic:parrotfish",
+    "hybridaquatic:wrasse",
+    "hybridaquatic:moray_eel",
+    "hybridaquatic:john_dory",
+    "hybridaquatic:lantern_shark"
+  ]
+}

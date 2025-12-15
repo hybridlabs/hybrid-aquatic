@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:shallow_temperate_oceans",
+  "spawners": {
+    "type": "hybridaquatic:cuttlefish",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 3
+  }
+}

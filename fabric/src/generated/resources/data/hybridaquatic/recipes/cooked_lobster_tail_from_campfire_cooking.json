@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "hybridaquatic:raw_lobster_tail"
+  },
+  "result": "hybridaquatic:cooked_lobster_tail"
+}

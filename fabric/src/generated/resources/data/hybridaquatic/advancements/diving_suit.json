@@ -1,0 +1,55 @@
+{
+  "parent": "hybridaquatic:boat",
+  "criteria": {
+    "obtain_diving_suit": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybridaquatic:diving_helmet"
+            ]
+          },
+          {
+            "items": [
+              "hybridaquatic:diving_suit"
+            ]
+          },
+          {
+            "items": [
+              "hybridaquatic:diving_leggings"
+            ]
+          },
+          {
+            "items": [
+              "hybridaquatic:diving_boots"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancements.hybrid-aquatic.diving_suit.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "hybridaquatic:diving_helmet",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid-aquatic.diving_suit.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_diving_suit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

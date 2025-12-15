@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:lionfish",
-    "hybrid-aquatic:stonefish",
-    "hybrid-aquatic:blowfish",
-    "hybrid-aquatic:boxfish",
-    "hybrid-aquatic:blue_spotted_stingray",
-    "hybrid-aquatic:spotted_eagle_ray"
+    "hybridaquatic:lionfish",
+    "hybridaquatic:stonefish",
+    "hybridaquatic:blowfish",
+    "hybridaquatic:boxfish",
+    "hybridaquatic:blue_spotted_stingray",
+    "hybridaquatic:spotted_eagle_ray"
   ]
 }

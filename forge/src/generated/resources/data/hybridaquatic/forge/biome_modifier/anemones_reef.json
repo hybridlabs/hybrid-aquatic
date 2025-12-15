@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybridaquatic:reef",
+  "features": "hybridaquatic:anemones",
+  "step": "vegetal_decoration"
+}

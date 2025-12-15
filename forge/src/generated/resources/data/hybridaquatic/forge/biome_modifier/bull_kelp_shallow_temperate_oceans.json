@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybridaquatic:shallow_temperate_oceans",
+  "features": "hybridaquatic:bull_kelp",
+  "step": "vegetal_decoration"
+}

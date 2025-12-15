@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "hybridaquatic:medium_fish"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "hybridaquatic:raw_fish_meat"
+  }
+}

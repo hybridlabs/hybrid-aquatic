@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:coconut_crab",
+    "hybridaquatic:crayfish",
+    "hybridaquatic:decorator_crab",
+    "hybridaquatic:dungeness_crab",
+    "hybridaquatic:fiddler_crab",
+    "hybridaquatic:flower_crab",
+    "hybridaquatic:ghost_crab",
+    "hybridaquatic:giant_isopod",
+    "hybridaquatic:hermit_crab",
+    "hybridaquatic:horseshoe_crab",
+    "hybridaquatic:lightfoot_crab",
+    "hybridaquatic:lobster",
+    "hybridaquatic:shrimp",
+    "hybridaquatic:spider_crab",
+    "hybridaquatic:vampire_crab",
+    "hybridaquatic:yeti_crab"
+  ]
+}

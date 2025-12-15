@@ -20,7 +20,7 @@ object HybridAquaticNetworking {
 
                 val packetData = PacketByteBufs.create()
                 packetData.writeInt(foundEntity.id)
-                packetData.writeItem(additionalBobberData.`hybrid_aquatic$getLureItem`())
+                packetData.writeItem(additionalBobberData.lureItem)
 
                 val packetId = FISHING_BOBBER_LURE
                 if (ServerPlayNetworking.canSend(client, packetId)) ServerPlayNetworking.send(

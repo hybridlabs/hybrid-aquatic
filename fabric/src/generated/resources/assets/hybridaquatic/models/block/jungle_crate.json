@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "hybridaquatic:block/jungle_crate_side",
+    "top": "hybridaquatic:block/jungle_crate_top"
+  }
+}

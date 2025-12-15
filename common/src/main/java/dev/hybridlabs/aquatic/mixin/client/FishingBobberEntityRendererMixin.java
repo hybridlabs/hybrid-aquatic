@@ -54,7 +54,7 @@ public abstract class FishingBobberEntityRendererMixin {
     private VertexConsumer changeRenderType(MultiBufferSource instance, RenderType renderLayer) {
         RenderType currentRenderType = renderLayer;
 
-        ItemStack currentStack = ((CustomFishingBobberEntityData) entity).hybrid_aquatic$getLureItem();
+        ItemStack currentStack = ((CustomFishingBobberEntityData) entity).getLureItem();
         if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK().get()))
             currentRenderType = BARBED_HOOK_LAYER;
         else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getGLOWING_HOOK().get()))

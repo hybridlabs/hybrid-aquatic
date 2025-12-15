@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:rose_coral_wall_fan",
-    "hybrid-aquatic:leaf_coral_wall_fan",
-    "hybrid-aquatic:button_coral_wall_fan",
-    "hybrid-aquatic:sun_coral_wall_fan",
-    "hybrid-aquatic:lophelia_coral_wall_fan",
-    "hybrid-aquatic:thorn_coral_wall_fan"
+    "hybridaquatic:rose_coral_wall_fan",
+    "hybridaquatic:leaf_coral_wall_fan",
+    "hybridaquatic:button_coral_wall_fan",
+    "hybridaquatic:sun_coral_wall_fan",
+    "hybridaquatic:lophelia_coral_wall_fan",
+    "hybridaquatic:thorn_coral_wall_fan"
   ]
 }

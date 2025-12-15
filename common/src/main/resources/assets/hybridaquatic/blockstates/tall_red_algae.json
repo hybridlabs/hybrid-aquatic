@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "hybridaquatic:block/tall_red_algae_bottom"
+    },
+    "half=upper": {
+      "model": "hybridaquatic:block/tall_red_algae_top"
+    }
+  }
+}

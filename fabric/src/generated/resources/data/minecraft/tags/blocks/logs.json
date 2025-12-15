@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:driftwood_log",
-    "hybrid-aquatic:stripped_driftwood_log"
+    "hybridaquatic:driftwood_log",
+    "hybridaquatic:stripped_driftwood_log"
   ]
 }

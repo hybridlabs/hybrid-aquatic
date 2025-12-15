@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:bull_kelp",
+    "hybridaquatic:bull_kelp_plant",
+    "hybridaquatic:sargassum",
+    "hybridaquatic:sargassum_plant",
+    "minecraft:kelp",
+    "minecraft:kelp_plant"
+  ]
+}

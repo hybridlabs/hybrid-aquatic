@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "waterlogged=false": {
+        "model": "hybridaquatic:block/tube_sponge"
+      },
+    "waterlogged=true": {
+      "model": "hybridaquatic:block/wet_tube_sponge"
+    }
+  }
+}

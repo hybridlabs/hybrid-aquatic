@@ -18,7 +18,7 @@ class HAGlobalLootModifierProvider
     (output: PackOutput) :
     GlobalLootModifierProvider(output, Constants.MOD_ID) {
     override fun start() {
-        this.add<IGlobalLootModifier?>(
+        this.add<IGlobalLootModifier>(
             "fishing_fish",
             HAGlobalLootModifier(
                 emptyArray<LootItemCondition>(),
@@ -32,7 +32,7 @@ class HAGlobalLootModifierProvider
                 )
             )
         )
-        this.add<IGlobalLootModifier?>(
+        this.add<IGlobalLootModifier>(
             "fishing_treasure",
             HAGlobalLootModifier(
                 emptyArray<LootItemCondition>(),

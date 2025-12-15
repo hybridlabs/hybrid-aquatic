@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:barbed_hook",
+    "hybridaquatic:glowing_hook",
+    "hybridaquatic:magnetic_hook",
+    "hybridaquatic:creepermagnet_hook",
+    "hybridaquatic:ominous_hook"
+  ]
+}

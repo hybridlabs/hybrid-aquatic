@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hybridaquatic:block/driftwood_slab"
+    },
+    "type=double": {
+      "model": "hybridaquatic:block/driftwood_planks"
+    },
+    "type=top": {
+      "model": "hybridaquatic:block/driftwood_slab_top"
+    }
+  }
+}

@@ -904,7 +904,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:shark")
+            Services.PLATFORM.getHybridMobCategoryByName("shark")
         )
     }
 
@@ -919,7 +919,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:shark")
+            Services.PLATFORM.getHybridMobCategoryByName("shark")
         )
     }
 
@@ -934,7 +934,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:critter")
+            Services.PLATFORM.getHybridMobCategoryByName("critter")
         )
     }
 
@@ -949,7 +949,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:crustacean")
+            Services.PLATFORM.getHybridMobCategoryByName("crustacean")
         )
     }
 
@@ -964,7 +964,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:crustacean")
+            Services.PLATFORM.getHybridMobCategoryByName("crustacean")
         )
     }
 
@@ -976,7 +976,7 @@ object HybridAquaticEntityTypes {
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id, entityFactory, dimensions, attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:fish")
+            Services.PLATFORM.getHybridMobCategoryByName("fish")
         )
     }
 
@@ -991,7 +991,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:fish")
+            Services.PLATFORM.getHybridMobCategoryByName("fish")
         )
     }
 
@@ -1006,7 +1006,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:mammal")
+            Services.PLATFORM.getHybridMobCategoryByName("mammal")
         )
     }
 
@@ -1021,7 +1021,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:cephalopod")
+            Services.PLATFORM.getHybridMobCategoryByName("cephalopod")
         )
     }
 
@@ -1036,7 +1036,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:cephalopod")
+            Services.PLATFORM.getHybridMobCategoryByName("cephalopod")
         )
     }
 
@@ -1051,7 +1051,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:jelly")
+            Services.PLATFORM.getHybridMobCategoryByName("jelly")
         )
     }
 
@@ -1066,7 +1066,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:jelly")
+            Services.PLATFORM.getHybridMobCategoryByName("jelly")
         )
     }
 
@@ -1081,7 +1081,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:miniboss")
+            Services.PLATFORM.getHybridMobCategoryByName("miniboss")
         )
     }
 
@@ -1096,7 +1096,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:minion")
+            Services.PLATFORM.getHybridMobCategoryByName("minion")
         )
     }
 

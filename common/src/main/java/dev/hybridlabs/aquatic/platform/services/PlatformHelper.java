@@ -68,7 +68,7 @@ public interface PlatformHelper {
 
     Attribute getReachAttribute();
 
-    MobCategory getMobCategoryByName(String name);
+    MobCategory getHybridMobCategoryByName(String name);
 
     Item createBlockItem(Block block, Item.Properties properties);
 

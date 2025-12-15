@@ -1,0 +1,41 @@
+{
+  "parent": "hybridaquatic:ominous_hook",
+  "criteria": {
+    "kill_karkinos": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "hybridaquatic:karkinos"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "advancements.hybrid-aquatic.kill_karkinos.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "hybridaquatic:karkinos_claw"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid-aquatic.kill_karkinos.title"
+    }
+  },
+  "requirements": [
+    [
+      "kill_karkinos"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

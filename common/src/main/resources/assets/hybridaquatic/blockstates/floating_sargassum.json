@@ -1,0 +1,51 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hybridaquatic:block/floating_sargassum"
+      },
+      {
+        "model": "hybridaquatic:block/floating_sargassum",
+        "y": 90
+      },
+      {
+        "model": "hybridaquatic:block/floating_sargassum",
+        "y": 180
+      },
+      {
+        "model": "hybridaquatic:block/floating_sargassum",
+        "y": 270
+      },
+      {
+        "model": "hybridaquatic:block/floating_sargassum_rooted"
+      },
+      {
+        "model": "hybridaquatic:block/floating_sargassum_rooted",
+        "y": 90
+      },
+      {
+        "model": "hybridaquatic:block/floating_sargassum_rooted",
+        "y": 180
+      },
+      {
+        "model": "hybridaquatic:block/floating_sargassum_rooted",
+        "y": 270
+      },
+      {
+        "model": "hybridaquatic:block/floating_sargassum_long_rooted"
+      },
+      {
+        "model": "hybridaquatic:block/floating_sargassum_long_rooted",
+        "y": 90
+      },
+      {
+        "model": "hybridaquatic:block/floating_sargassum_long_rooted",
+        "y": 180
+      },
+      {
+        "model": "hybridaquatic:block/floating_sargassum_long_rooted",
+        "y": 270
+      }
+    ]
+  }
+}

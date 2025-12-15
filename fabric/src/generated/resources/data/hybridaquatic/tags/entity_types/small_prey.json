@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:clownfish",
+    "hybridaquatic:pleco",
+    "hybridaquatic:shiner",
+    "hybridaquatic:carp",
+    "hybridaquatic:pearlfish",
+    "hybridaquatic:snailfish",
+    "hybridaquatic:boxfish",
+    "hybridaquatic:oscar",
+    "hybridaquatic:flashlight_fish",
+    "hybridaquatic:mackerel",
+    "hybridaquatic:herring",
+    "hybridaquatic:barreleye",
+    "hybridaquatic:betta",
+    "hybridaquatic:tetra",
+    "hybridaquatic:danio",
+    "hybridaquatic:tiger_barb",
+    "hybridaquatic:surgeonfish",
+    "hybridaquatic:discus",
+    "hybridaquatic:damselfish",
+    "hybridaquatic:gourami",
+    "hybridaquatic:cuttlefish",
+    "hybridaquatic:african_butterflyfish",
+    "hybridaquatic:flying_fish",
+    "hybridaquatic:squirrelfish",
+    "hybridaquatic:stonefish",
+    "minecraft:salmon",
+    "minecraft:cod",
+    "minecraft:tropical_fish"
+  ]
+}

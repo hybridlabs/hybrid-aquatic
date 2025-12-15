@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:mangroves",
+  "spawners": {
+    "type": "hybridaquatic:tetra",
+    "maxCount": 3,
+    "minCount": 2,
+    "weight": 3
+  }
+}

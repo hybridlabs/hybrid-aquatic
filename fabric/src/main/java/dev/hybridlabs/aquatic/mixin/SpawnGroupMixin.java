@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.mixin;
 
 import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup;
 import net.minecraft.world.entity.MobCategory;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -16,8 +17,7 @@ import java.util.Arrays;
 @SuppressWarnings("unused")
 @Mixin(MobCategory.class)
 public class SpawnGroupMixin {
-    SpawnGroupMixin(String enumname, int ordinal, String name, int spawnCap, boolean peaceful, boolean rare,
-                    int immediateDespawnRange) {
+    SpawnGroupMixin(String enumname, int ordinal, String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
         throw new AssertionError();
     }
 
@@ -28,14 +28,17 @@ public class SpawnGroupMixin {
     private static MobCategory[] $VALUES;
 
     @Unique
-    private static MobCategory hybrid_aquatic$createHybridAquaticSpawnGroups(String enumname, int ordinal,
-                                                                             HybridAquaticSpawnGroup spawnGroup) {
-        return ((MobCategory) (Object) new SpawnGroupMixin(spawnGroup.name(), ordinal, spawnGroup.gName,
-                spawnGroup.spawnCap, spawnGroup.peaceful, spawnGroup.rare, spawnGroup.immediateDespawnRange));
+    private static MobCategory createHybridAquaticSpawnGroups(String enumname, int ordinal, HybridAquaticSpawnGroup spawnGroup) {
+        SpawnGroupMixin groups = new SpawnGroupMixin(
+                spawnGroup.name(), ordinal, spawnGroup.location.toString(),
+                spawnGroup.spawnCap, spawnGroup.peaceful, spawnGroup.rare, spawnGroup.immediateDespawnRange
+        );
+
+        return (MobCategory) (Object) groups;
     }
 
     @Inject(method = "<clinit>", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/MobCategory;" +
-            "$VALUES:[Lnet/minecraft/world/entity/MobCategory;", shift = At.Shift.AFTER))
+            "$VALUES:[Lnet/minecraft/world/entity/MobCategory;", shift = At.Shift.AFTER, opcode = Opcodes.PUTSTATIC))
     private static void injectEnum(CallbackInfo ci) {
         int vanillaSpawnGroupsLength = $VALUES.length;
         
@@ -45,8 +48,7 @@ public class SpawnGroupMixin {
         for (int i = 0; i < haSpawnGroups.length; i++) {
             int pos = vanillaSpawnGroupsLength + i;
             HybridAquaticSpawnGroup haSpawnGroup = haSpawnGroups[i];
-            haSpawnGroup.spawnGroup = $VALUES[pos] = hybrid_aquatic$createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos,
-                    haSpawnGroup);
+            haSpawnGroup.spawnGroup = $VALUES[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos, haSpawnGroup);
         }
         
         Arrays.stream($VALUES).forEach(value -> HybridAquaticSpawnGroup.BY_NAME.put(value.getName(), value));

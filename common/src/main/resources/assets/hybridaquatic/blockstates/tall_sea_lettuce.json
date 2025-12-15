@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "hybridaquatic:block/tall_sea_lettuce_bottom"
+    },
+    "half=upper": {
+      "model": "hybridaquatic:block/tall_sea_lettuce_top"
+    }
+  }
+}

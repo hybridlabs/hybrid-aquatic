@@ -1,15 +1,15 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:manglerfish_lure",
-    "hybrid-aquatic:manglerfish_fin",
-    "hybrid-aquatic:eel_scarf",
-    "hybrid-aquatic:moon_jellyfish_hat",
-    "hybrid-aquatic:nautilus_helmet",
-    "hybrid-aquatic:nautilus_pauldrons",
-    "hybrid-aquatic:diving_helmet",
-    "hybrid-aquatic:diving_suit",
-    "hybrid-aquatic:diving_leggings",
-    "hybrid-aquatic:diving_boots"
+    "hybridaquatic:manglerfish_lure",
+    "hybridaquatic:manglerfish_fin",
+    "hybridaquatic:eel_scarf",
+    "hybridaquatic:moon_jellyfish_hat",
+    "hybridaquatic:nautilus_helmet",
+    "hybridaquatic:nautilus_pauldrons",
+    "hybridaquatic:diving_helmet",
+    "hybridaquatic:diving_suit",
+    "hybridaquatic:diving_leggings",
+    "hybridaquatic:diving_boots"
   ]
 }

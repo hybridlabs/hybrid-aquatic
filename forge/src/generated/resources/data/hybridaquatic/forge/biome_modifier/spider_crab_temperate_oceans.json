@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:temperate_oceans",
+  "spawners": {
+    "type": "hybridaquatic:spider_crab",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 2
+  }
+}

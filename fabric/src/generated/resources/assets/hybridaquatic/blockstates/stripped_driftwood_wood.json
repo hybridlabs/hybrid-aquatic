@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "hybridaquatic:block/stripped_driftwood_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "hybridaquatic:block/stripped_driftwood_wood"
+    },
+    "axis=z": {
+      "model": "hybridaquatic:block/stripped_driftwood_wood",
+      "x": 90
+    }
+  }
+}

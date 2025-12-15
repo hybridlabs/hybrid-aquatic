@@ -1,0 +1,21 @@
+{
+  "type": "hybridaquatic:ha_loot_modifier",
+  "chance": 0.5,
+  "conditions": [],
+  "item_tag": "minecraft:fishes",
+  "tables": [
+    {
+      "data": "hybridaquatic:gameplay/fishing/ha_large_fish",
+      "weight": 1
+    },
+    {
+      "data": "hybridaquatic:gameplay/fishing/ha_medium_fish",
+      "weight": 2
+    },
+    {
+      "data": "hybridaquatic:gameplay/fishing/ha_small_fish",
+      "weight": 4
+    }
+  ],
+  "target": "minecraft:gameplay/fishing"
+}

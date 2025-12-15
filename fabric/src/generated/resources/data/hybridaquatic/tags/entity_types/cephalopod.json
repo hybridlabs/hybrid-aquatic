@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:arrow_squid",
+    "hybridaquatic:cuttlefish",
+    "hybridaquatic:firefly_squid",
+    "hybridaquatic:octopus",
+    "hybridaquatic:nautilus",
+    "hybridaquatic:umbrella_octopus",
+    "hybridaquatic:vampire_squid",
+    "minecraft:squid",
+    "minecraft:glow_squid"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "hybridaquatic:block/cattail_bottom"
+    },
+    "half=upper": {
+      "model": "hybridaquatic:block/cattail_top"
+    }
+  }
+}

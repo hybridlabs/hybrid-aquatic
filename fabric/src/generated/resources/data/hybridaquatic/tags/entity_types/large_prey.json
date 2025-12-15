@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:sunfish",
+    "hybridaquatic:oarfish",
+    "hybridaquatic:opah",
+    "hybridaquatic:tuna",
+    "hybridaquatic:mahi",
+    "hybridaquatic:barracuda",
+    "hybridaquatic:coelacanth",
+    "hybridaquatic:golden_dorado",
+    "minecraft:player",
+    "minecraft:turtle"
+  ]
+}

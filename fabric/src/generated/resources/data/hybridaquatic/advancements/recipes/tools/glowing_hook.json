@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_barbed_hook": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybridaquatic:barbed_hook"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_glowslime": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybridaquatic:glowslime"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybridaquatic:glowing_hook"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_barbed_hook",
+      "has_glowslime",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybridaquatic:glowing_hook"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:shallow_tropical_oceans",
+  "spawners": {
+    "type": "hybridaquatic:stingray",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 2
+  }
+}

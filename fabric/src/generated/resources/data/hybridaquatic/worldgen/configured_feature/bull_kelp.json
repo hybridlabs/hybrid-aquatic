@@ -1,0 +1,14 @@
+{
+  "type": "hybridaquatic:bull_kelp",
+  "config": {
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hybridaquatic:bull_kelp",
+        "Properties": {
+          "age": "0"
+        }
+      }
+    }
+  }
+}

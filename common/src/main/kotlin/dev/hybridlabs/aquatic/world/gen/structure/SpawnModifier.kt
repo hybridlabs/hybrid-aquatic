@@ -20,7 +20,7 @@ data class SpawnModifier(
         val CODEC: Codec<SpawnModifier> = RecordCodecBuilder.create { instance ->
             instance.group(
                 Codec.STRING.fieldOf("id").forGetter { modifier -> modifier.id },
-                ResourceKey.codec<Structure>(Registries.STRUCTURE).fieldOf("structure")
+                ResourceKey.codec(Registries.STRUCTURE).fieldOf("structure")
                     .forGetter { modifier -> modifier.structure },
                 BoundingBoxType.CODEC.fieldOf("bounding_box_type").forGetter { modifier -> modifier.boundingBoxType },
                 MAP_CODEC.fieldOf("spawns").forGetter { modifier -> modifier.spawns }

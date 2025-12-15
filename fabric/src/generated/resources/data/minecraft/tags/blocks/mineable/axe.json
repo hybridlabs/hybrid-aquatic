@@ -1,18 +1,18 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:raft",
-    "hybrid-aquatic:buoy",
-    "hybrid-aquatic:crab_pot",
-    "hybrid-aquatic:hybrid_crate",
-    "hybrid-aquatic:oak_crate",
-    "hybrid-aquatic:spruce_crate",
-    "hybrid-aquatic:birch_crate",
-    "hybrid-aquatic:dark_oak_crate",
-    "hybrid-aquatic:mangrove_crate",
-    "hybrid-aquatic:jungle_crate",
-    "hybrid-aquatic:acacia_crate",
-    "hybrid-aquatic:cherry_crate",
-    "hybrid-aquatic:bamboo_crate"
+    "hybridaquatic:raft",
+    "hybridaquatic:buoy",
+    "hybridaquatic:crab_pot",
+    "hybridaquatic:hybrid_crate",
+    "hybridaquatic:oak_crate",
+    "hybridaquatic:spruce_crate",
+    "hybridaquatic:birch_crate",
+    "hybridaquatic:dark_oak_crate",
+    "hybridaquatic:mangrove_crate",
+    "hybridaquatic:jungle_crate",
+    "hybridaquatic:acacia_crate",
+    "hybridaquatic:cherry_crate",
+    "hybridaquatic:bamboo_crate"
   ]
 }

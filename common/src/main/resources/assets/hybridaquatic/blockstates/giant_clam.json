@@ -1,0 +1,46 @@
+{
+  "variants": {
+    "state=open,facing=east": {
+      "model": "hybridaquatic:block/giant_clam_open",
+      "y": 90
+    },
+    "state=open,facing=west": {
+      "model": "hybridaquatic:block/giant_clam_open",
+      "y": 90
+    },
+    "state=open,facing=north": {
+      "model": "hybridaquatic:block/giant_clam_open"
+    },
+    "state=open,facing=south": {
+      "model": "hybridaquatic:block/giant_clam_open"
+    },
+    "state=closed,facing=east": {
+      "model": "hybridaquatic:block/giant_clam_closed",
+      "y": 90
+    },
+    "state=closed,facing=west": {
+      "model": "hybridaquatic:block/giant_clam_closed",
+      "y": 90
+    },
+    "state=closed,facing=north": {
+      "model": "hybridaquatic:block/giant_clam_closed"
+    },
+    "state=closed,facing=south": {
+      "model": "hybridaquatic:block/giant_clam_closed"
+    },
+    "state=dead,facing=east": {
+      "model": "hybridaquatic:block/giant_clam_dead",
+      "y": 90
+    },
+    "state=dead,facing=west": {
+      "model": "hybridaquatic:block/giant_clam_dead",
+      "y": 90
+    },
+    "state=dead,facing=north": {
+      "model": "hybridaquatic:block/giant_clam_dead"
+    },
+    "state=dead,facing=south": {
+      "model": "hybridaquatic:block/giant_clam_dead"
+    }
+  }
+}

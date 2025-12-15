@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybridaquatic:shallow_tropical_oceans",
+  "features": "hybridaquatic:sargassum",
+  "step": "vegetal_decoration"
+}

@@ -29,7 +29,7 @@ import net.minecraftforge.registries.ForgeRegistries.Keys.STRUCTURE_MODIFIERS
  * The rest of the generated resources are imported from the output of the Fabric project's runDatagen task.
  */
 @Suppress("Unused", "UnusedExpression")
-@EventBusSubscriber(modid = Constants.FORGE_MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Constants.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 object DataGenerators {
 
     @SubscribeEvent
@@ -118,7 +118,6 @@ object DataGenerators {
         val configHandler = initializeConfig(CommonClass.CONFIG_FILE)
         val biomeRegistry = context.lookup(Registries.BIOME)
         for (spawnConfig in configHandler.defaultConfig.entitySpawnConfig) {
-
             val location = "${spawnConfig.type.toShortString()}_${spawnConfig.biomes.location.path}"
             val key = ResourceKey.create(
                 BIOME_MODIFIERS, CommonClass.locate(location)

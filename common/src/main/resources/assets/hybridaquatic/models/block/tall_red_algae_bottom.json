@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "hybridaquatic:block/tall_red_algae_bottom"
+  }
+}

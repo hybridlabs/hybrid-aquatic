@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:carp",
+    "hybridaquatic:goldfish",
+    "hybridaquatic:dragonfish",
+    "hybridaquatic:piranha",
+    "hybridaquatic:anglerfish",
+    "hybridaquatic:barreleye",
+    "hybridaquatic:surgeonfish",
+    "hybridaquatic:clownfish",
+    "hybridaquatic:damselfish",
+    "hybridaquatic:boxfish",
+    "hybridaquatic:tiger_barb",
+    "hybridaquatic:flying_fish",
+    "hybridaquatic:snailfish",
+    "hybridaquatic:pearlfish",
+    "hybridaquatic:oscar",
+    "hybridaquatic:flashlight_fish",
+    "hybridaquatic:squirrelfish",
+    "hybridaquatic:blowfish",
+    "hybridaquatic:stonefish",
+    "hybridaquatic:discus",
+    "hybridaquatic:gourami",
+    "hybridaquatic:betta",
+    "hybridaquatic:danio",
+    "hybridaquatic:neon_tetra",
+    "hybridaquatic:mackerel",
+    "hybridaquatic:herring",
+    "hybridaquatic:john_dory"
+  ]
+}

@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:rose_coral",
-    "hybrid-aquatic:leaf_coral",
-    "hybrid-aquatic:button_coral",
-    "hybrid-aquatic:sun_coral",
-    "hybrid-aquatic:lophelia_coral",
-    "hybrid-aquatic:thorn_coral"
+    "hybridaquatic:rose_coral",
+    "hybridaquatic:leaf_coral",
+    "hybridaquatic:button_coral",
+    "hybridaquatic:sun_coral",
+    "hybridaquatic:lophelia_coral",
+    "hybridaquatic:thorn_coral"
   ]
 }

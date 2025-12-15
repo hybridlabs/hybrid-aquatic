@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:basking_shark",
+    "hybridaquatic:bull_shark",
+    "hybridaquatic:frilled_shark",
+    "hybridaquatic:great_white_shark",
+    "hybridaquatic:hammerhead_shark",
+    "hybridaquatic:thresher_shark",
+    "hybridaquatic:tiger_shark",
+    "hybridaquatic:whale_shark",
+    "hybridaquatic:lantern_shark",
+    "hybridaquatic:hound_shark"
+  ]
+}

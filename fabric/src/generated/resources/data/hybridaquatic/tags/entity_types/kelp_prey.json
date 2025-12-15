@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:sea_urchin",
+    "#hybridaquatic:crustacean",
+    "#hybridaquatic:small_prey"
+  ]
+}

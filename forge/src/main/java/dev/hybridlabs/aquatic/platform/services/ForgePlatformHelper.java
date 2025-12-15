@@ -9,6 +9,7 @@ import dev.hybridlabs.aquatic.item.MessageInABottleItem;
 import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -43,14 +44,14 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     public static IEventBus getEventBus() {
         final ModContainer cont =
-                ModList.get().getModContainerById(Constants.FORGE_MOD_ID).orElseThrow();
+                ModList.get().getModContainerById(Constants.MOD_ID).orElseThrow();
         if (cont instanceof FMLModContainer fmlModContainer) {
             return fmlModContainer.getEventBus();
         } else if (cont instanceof KotlinModContainer kotlinModContainer) {
             return kotlinModContainer.getEventBus$kfflang();
         } else {
             throw new ClassCastException(
-                    "The container of the mod " + Constants.FORGE_MOD_ID + " is not a FML one!");
+                    "The container of the mod " + Constants.MOD_ID + " is not a FML one!");
         }
     }
 
@@ -151,8 +152,9 @@ public class ForgePlatformHelper implements PlatformHelper {
     }
 
     @Override
-    public MobCategory getMobCategoryByName(String name) {
-        return MobCategory.byName(name);
+    public MobCategory getHybridMobCategoryByName(String name) {
+        ResourceLocation location = new ResourceLocation(Constants.MOD_ID, name);
+        return MobCategory.byName(location.toString());
     }
 
     @Override

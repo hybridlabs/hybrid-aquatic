@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:sea_slug",
+    "hybridaquatic:sea_cucumber",
+    "hybridaquatic:sea_urchin",
+    "hybridaquatic:starfish",
+    "hybridaquatic:sea_angel"
+  ]
+}

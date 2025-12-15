@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:arctic_oceans",
+  "spawners": {
+    "type": "hybridaquatic:nomura_jellyfish",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

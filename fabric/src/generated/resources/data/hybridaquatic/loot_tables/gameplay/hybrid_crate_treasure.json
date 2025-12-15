@@ -1,0 +1,59 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 0.0
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:manglerfish_fin"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:manglerfish_lure"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:eel_scarf"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:moon_jellyfish_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:great_white_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:whale_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:tiger_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:hammerhead_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:frilled_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:basking_shark_plushie"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybridaquatic:thresher_shark_plushie"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "hybridaquatic:gameplay/hybrid_crate_treasure"
+}

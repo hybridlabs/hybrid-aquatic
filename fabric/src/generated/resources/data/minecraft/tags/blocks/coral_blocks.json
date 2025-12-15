@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:button_coral_block",
-    "hybrid-aquatic:rose_coral_block",
-    "hybrid-aquatic:leaf_coral_block",
-    "hybrid-aquatic:sun_coral_block",
-    "hybrid-aquatic:lophelia_coral_block",
-    "hybrid-aquatic:thorn_coral_block"
+    "hybridaquatic:button_coral_block",
+    "hybridaquatic:rose_coral_block",
+    "hybridaquatic:leaf_coral_block",
+    "hybridaquatic:sun_coral_block",
+    "hybridaquatic:lophelia_coral_block",
+    "hybridaquatic:thorn_coral_block"
   ]
 }

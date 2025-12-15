@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:deep_temperate_oceans",
+  "spawners": {
+    "type": "hybridaquatic:coelacanth",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

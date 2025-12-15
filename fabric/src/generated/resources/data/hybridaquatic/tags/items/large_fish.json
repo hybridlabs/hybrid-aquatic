@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:sunfish",
+    "hybridaquatic:oarfish",
+    "hybridaquatic:tuna",
+    "hybridaquatic:mahi",
+    "hybridaquatic:opah",
+    "hybridaquatic:golden_dorado",
+    "hybridaquatic:coelacanth"
+  ]
+}

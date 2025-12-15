@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hybridaquatic:black_pearl_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "hybridaquatic:black_pearl"
+  }
+}

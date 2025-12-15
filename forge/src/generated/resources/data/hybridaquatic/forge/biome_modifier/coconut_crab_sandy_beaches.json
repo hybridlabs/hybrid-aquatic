@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:sandy_beaches",
+  "spawners": {
+    "type": "hybridaquatic:coconut_crab",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 2
+  }
+}

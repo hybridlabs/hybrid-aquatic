@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "thickness=base": {
+      "model": "hybridaquatic:block/chimney_base"
+    },
+    "thickness=middle": {
+      "model": "hybridaquatic:block/chimney_middle"
+    },
+    "thickness=tip": {
+      "model": "hybridaquatic:block/chimney_tip"
+    }
+  }
+}

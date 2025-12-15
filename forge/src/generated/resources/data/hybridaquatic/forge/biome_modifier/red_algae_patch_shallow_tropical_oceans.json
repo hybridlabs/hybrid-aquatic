@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybridaquatic:shallow_tropical_oceans",
+  "features": "hybridaquatic:red_algae_patch",
+  "step": "vegetal_decoration"
+}

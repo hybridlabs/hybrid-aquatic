@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "hybridaquatic:moray_eel",
+    "hybridaquatic:triggerfish",
+    "hybridaquatic:parrotfish",
+    "hybridaquatic:sheepshead_wrasse",
+    "hybridaquatic:ratfish",
+    "hybridaquatic:blue_spotted_stingray",
+    "hybridaquatic:spotted_eagle_ray",
+    "hybridaquatic:lionfish",
+    "hybridaquatic:rockfish",
+    "hybridaquatic:sea_bass",
+    "hybridaquatic:needlefish"
+  ]
+}

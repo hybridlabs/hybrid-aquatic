@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "hybridaquatic:block/oak_crate_side",
+    "top": "hybridaquatic:block/oak_crate_top"
+  }
+}

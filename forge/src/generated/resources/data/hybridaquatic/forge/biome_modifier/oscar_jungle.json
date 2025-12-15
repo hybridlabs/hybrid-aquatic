@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:jungle",
+  "spawners": {
+    "type": "hybridaquatic:oscar",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

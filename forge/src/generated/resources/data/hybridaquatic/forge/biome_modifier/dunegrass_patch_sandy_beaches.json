@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybridaquatic:sandy_beaches",
+  "features": "hybridaquatic:dunegrass_patch",
+  "step": "vegetal_decoration"
+}

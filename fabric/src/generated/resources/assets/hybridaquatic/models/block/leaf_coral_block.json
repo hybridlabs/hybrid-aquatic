@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "hybridaquatic:block/leaf_coral_block"
+  }
+}

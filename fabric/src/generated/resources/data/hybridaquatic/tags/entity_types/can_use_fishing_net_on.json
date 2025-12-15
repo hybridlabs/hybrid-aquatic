@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#hybridaquatic:jellyfish",
+    "#hybridaquatic:critter",
+    "#hybridaquatic:crustacean",
+    "#hybridaquatic:cephalopod",
+    "#hybridaquatic:fish",
+    "#hybridaquatic:sharks"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_ocean",
+  "features": "hybridaquatic:sponge_patch",
+  "step": "vegetal_decoration"
+}

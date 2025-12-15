@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.mixin.client;
 
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
+import dev.hybridlabs.aquatic.Constants;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -18,8 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ForgeGui.class)
 public class InGameHudMixin {
     @Unique
-    private static final ResourceLocation DIVING_HELMET_OVERLAY = new ResourceLocation("hybrid-aquatic",
-            "textures" + "/misc/diving_helmet_overlay.png");
+    private static final ResourceLocation DIVING_HELMET_OVERLAY = new ResourceLocation(Constants.MOD_ID, "textures/misc/diving_helmet_overlay.png");
 
     @Inject(method = "render", at = @At("HEAD"))
     private void onRender(GuiGraphics context, float tickDelta, CallbackInfo ci) {

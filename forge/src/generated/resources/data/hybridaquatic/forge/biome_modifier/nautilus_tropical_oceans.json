@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybridaquatic:tropical_oceans",
+  "spawners": {
+    "type": "hybridaquatic:nautilus",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 3
+  }
+}

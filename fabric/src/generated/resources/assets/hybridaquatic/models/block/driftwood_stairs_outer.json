@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "hybridaquatic:block/driftwood_planks",
+    "side": "hybridaquatic:block/driftwood_planks",
+    "top": "hybridaquatic:block/driftwood_planks"
+  }
+}
