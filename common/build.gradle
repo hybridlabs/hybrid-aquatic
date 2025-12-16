@@ -9,7 +9,7 @@ legacyForge {
     mcpVersion = minecraft_version
     accessTransformers = [project(':common').file("src/main/resources/META-INF/accesstransformer.cfg")]
     parchment {
-        minecraftVersion = parchment_minecraft
+        minecraftVersion = minecraft_version
         mappingsVersion = parchment_version
     }
 }
