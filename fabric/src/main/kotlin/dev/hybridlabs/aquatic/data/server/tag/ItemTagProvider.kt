@@ -106,6 +106,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         listOf(
             HybridAquaticItems.CARP.get(),
+            HybridAquaticItems.PLECO.get(),
             HybridAquaticItems.GOLDFISH.get(),
             HybridAquaticItems.DRAGONFISH.get(),
             HybridAquaticItems.PIRANHA.get(),

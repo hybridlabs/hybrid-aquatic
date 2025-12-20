@@ -6,12 +6,11 @@ import kotlin.random.Random
 
 class CarpEntityModel : HybridAquaticFishEntityModel<CarpEntity>("carp") {
 
-    private val PRUSSIAN_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/carp.geo.json")
-    private val CARP_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/prussian_carp.geo.json")
-
     private val COMMON_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/carp.png")
     private val PRUSSIAN_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/prussian_carp.png")
-    private val MAGIKARP_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/magikarp.png")
+
+    private val COMMON_CARP_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/carp.geo.json")
+    private val PRUSSIAN_CARP_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/prussian_carp.geo.json")
 
     private val koiTextures = listOf(
         ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_silver.png"),
@@ -34,17 +33,14 @@ class CarpEntityModel : HybridAquaticFishEntityModel<CarpEntity>("carp") {
         return when (animatable.variant) {
             CarpEntity.Companion.Type.COMMON -> COMMON_TEXTURE
             CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_TEXTURE
-            CarpEntity.Companion.Type.MAGIKARP -> MAGIKARP_TEXTURE
             CarpEntity.Companion.Type.KOI -> koiTextures[random.nextInt(koiTextures.size)]
         }
     }
 
     override fun getModelResource(animatable: CarpEntity): ResourceLocation {
         return when (animatable.variant) {
-            CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_MODEL
-            CarpEntity.Companion.Type.COMMON -> CARP_MODEL
-            CarpEntity.Companion.Type.KOI -> CARP_MODEL
-            CarpEntity.Companion.Type.MAGIKARP -> CARP_MODEL
+            CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_CARP_MODEL
+            else -> COMMON_CARP_MODEL
         }
     }
 }

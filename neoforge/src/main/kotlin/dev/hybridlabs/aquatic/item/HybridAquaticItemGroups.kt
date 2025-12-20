@@ -182,6 +182,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.PIRANHA.get())
                 entries.accept(HybridAquaticItems.GOLDFISH.get())
                 entries.accept(HybridAquaticItems.CARP.get())
+                entries.accept(HybridAquaticItems.PLECO.get())
                 entries.accept(HybridAquaticItems.ANGLERFISH.get())
                 entries.accept(HybridAquaticItems.BARRELEYE.get())
                 entries.accept(HybridAquaticItems.DRAGONFISH.get())

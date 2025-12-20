@@ -897,6 +897,48 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
+        export(exporter, HybridAquaticEntityTypes.PLECO.get().defaultLootTable) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.PLECO.get())
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.SHINER.get().defaultLootTable) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_FISH_MEAT.get())
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.SUNFISH.get().defaultLootTable) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_FISH_MEAT.get())
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.TROUT.get().defaultLootTable) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.GOLDFISH.get())
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
         export(exporter, HybridAquaticEntityTypes.GOLDFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
