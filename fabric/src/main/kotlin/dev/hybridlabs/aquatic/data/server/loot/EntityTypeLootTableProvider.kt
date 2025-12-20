@@ -851,6 +851,50 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
+        export(exporter, HybridAquaticEntityTypes.PLECO.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.PLECO.get())
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.SHINER.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_FISH_MEAT.get())
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.SUNFISH.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_FISH_MEAT.get())
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.TROUT.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_FISH_MEAT.get())
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 2.0F)))
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
         export(exporter, HybridAquaticEntityTypes.GOLDFISH.get()) {
             pool(
                 LootPool.lootPool()

@@ -89,8 +89,7 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             COMMON(0, "common"),
             PRUSSIAN(1, "prussian"),
-            KOI(2, "koi"),
-            MAGIKARP(3, "magikarp");
+            KOI(2, "koi");
 
             override fun getSerializedName(): String {
                 return this.key

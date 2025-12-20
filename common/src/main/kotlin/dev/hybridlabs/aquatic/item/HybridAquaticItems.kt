@@ -1006,6 +1006,21 @@ object HybridAquaticItems {
         )
     }
 
+    val PLECO = register(
+        "pleco"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(1)
+                        .saturationMod(0.2F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
     val GOLDFISH = register(
         "goldfish"
     ) {
