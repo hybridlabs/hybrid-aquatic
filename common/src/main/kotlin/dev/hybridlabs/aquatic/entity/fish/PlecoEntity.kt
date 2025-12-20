@@ -19,11 +19,19 @@ class PlecoEntity(entityType: EntityType<out PlecoEntity>, world: Level) :
         return 1
     }
 
+    override fun getMinSize(): Int {
+        return -8
+    }
+
+    override fun getMaxSize(): Int {
+        return 0
+    }
+
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.MOVEMENT_SPEED, 0.6)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)

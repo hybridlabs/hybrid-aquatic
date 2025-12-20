@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
@@ -24,72 +25,72 @@ import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
-@Suppress("DEPRECATION")
-class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
+@Suppress("DEPRECATION", "UNUSED_PARAMETER")
+class OceanSunfishEntity(entityType: EntityType<out OceanSunfishEntity>, world: Level) :
     HybridAquaticFishEntity(
         entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
+        listOf(HybridAquaticEntityTags.JELLYFISH),
+        listOf(HybridAquaticEntityTags.SHARK)
     ),
-    VariantHolder<CarpEntity.Companion.Type> {
+    VariantHolder<OceanSunfishEntity.Companion.Type> {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
-    override fun getMinSize(): Int {
-        return -8
-    }
-
-    override fun getMaxSize(): Int {
-        return 0
+        return 1
     }
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
+
     }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.6)
-                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.MAX_HEALTH, 12.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 2.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 4.0)
+                .add(Attributes.FOLLOW_RANGE, 16.0)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
         }
 
         fun canSpawn(
-            type: EntityType<out CarpEntity>,
+            type: EntityType<out OceanSunfishEntity>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return  pos.y in (world.seaLevel - 16)..< world.seaLevel + 64 &&
+            val spawnY = (world.seaLevel - 24) ..< (world.seaLevel - 8)
+
+            return pos.y in spawnY &&
                     world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    !world.level.isRaining &&
+                    !world.level.isThundering &&
+                    world.level.isDay
         }
 
+        val TYPE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(OceanSunfishEntity::class.java, EntityDataSerializers.INT)
+
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
-            COMMON(0, "common"),
-            PRUSSIAN(1, "prussian"),
-            KOI(2, "koi"),
-            MAGIKARP(3, "magikarp");
+            OCEAN(0, "ocean"),
+            HOODWINKER(1, "hoodwinker"),
+            SHARPTAIL(2, "sharptail");
 
             override fun getSerializedName(): String {
                 return this.key
@@ -104,7 +105,7 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
                 )
 
                 fun byName(name: String?): Type {
-                    return CODEC.byName(name, COMMON) as Type
+                    return CODEC.byName(name, OCEAN) as Type
                 }
 
                 fun fromId(id: Int): Type {
@@ -113,25 +114,30 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.CHERRY) -> {
-                            KOI
+                        biome.`is`(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                            HOODWINKER
+                        }
+
+                        biome.`is`(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS) -> {
+                            SHARPTAIL
+                        }
+
+                        biome.`is`(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
+                            OCEAN
                         }
 
                         else -> {
-                            Type.fromId(random.nextInt(0, 2))
+                            Type.fromId(random.nextInt(0, 4))
                         }
                     }
                 }
             }
         }
-
-        val TYPE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(CarpEntity::class.java, EntityDataSerializers.INT)
     }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        super.defineSynchedData(builder)
-        builder.define(TYPE, 0)
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

@@ -22,7 +22,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "hybrid-aquatic:sunfish"
+          "name": "hybrid-aquatic:ocean_sunfish"
         }
       ],
       "rolls": 1.0

@@ -1,9 +1,29 @@
 package dev.hybridlabs.aquatic.entity
 
-import dev.hybridlabs.aquatic.entity.cephalopod.*
+import dev.hybridlabs.aquatic.entity.cephalopod.FireflySquidEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticOctopusEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.NautilusEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.UmbrellaOctopusEntity
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
-import dev.hybridlabs.aquatic.entity.crustacean.*
-import dev.hybridlabs.aquatic.entity.fish.*
+import dev.hybridlabs.aquatic.entity.crustacean.CoconutCrabEntity
+import dev.hybridlabs.aquatic.entity.crustacean.GhostCrabEntity
+import dev.hybridlabs.aquatic.entity.crustacean.HorseshoeCrabEntity
+import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
+import dev.hybridlabs.aquatic.entity.crustacean.SpiderCrabEntity
+import dev.hybridlabs.aquatic.entity.fish.CarpEntity
+import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
+import dev.hybridlabs.aquatic.entity.fish.DragonfishEntity
+import dev.hybridlabs.aquatic.entity.fish.FlashlightFishEntity
+import dev.hybridlabs.aquatic.entity.fish.FlyingFishEntity
+import dev.hybridlabs.aquatic.entity.fish.GoldfishEntity
+import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
+import dev.hybridlabs.aquatic.entity.fish.OarfishEntity
+import dev.hybridlabs.aquatic.entity.fish.ParrotfishEntity
+import dev.hybridlabs.aquatic.entity.fish.PupfishEntity
+import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
+import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
+import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
@@ -11,8 +31,6 @@ import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinionEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
-import net.minecraft.world.entity.SpawnPlacementType
-import net.minecraft.world.entity.SpawnPlacementTypes
 import net.minecraft.world.entity.SpawnPlacements
 import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.animal.WaterAnimal
@@ -31,6 +49,8 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.TIGER_BARB.get(),
             HybridAquaticEntityTypes.PIRANHA.get(),
             HybridAquaticEntityTypes.SHINER.get(),
+            HybridAquaticEntityTypes.TROUT.get(),
+            HybridAquaticEntityTypes.SUNFISH.get(),
             HybridAquaticEntityTypes.OSCAR.get(),
             HybridAquaticEntityTypes.GOURAMI.get(),
             HybridAquaticEntityTypes.PLECO.get(),
@@ -77,7 +97,7 @@ object SpawnRestrictionRegistry {
         registerWaterCreature(HybridAquaticEntityTypes.SEAHORSE.get(), SeahorseEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.PUPFISH.get(), PupfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.FLYING_FISH.get(), FlyingFishEntity::canSpawn)
-        registerWaterCreature(HybridAquaticEntityTypes.SUNFISH.get(), SunfishEntity::canSpawn)
+        registerWaterCreature(HybridAquaticEntityTypes.OCEAN_SUNFISH.get(), OceanSunfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.SQUIRRELFISH.get(), SquirrelfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(), FlashlightFishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.DRAGONFISH.get(), DragonfishEntity::canSpawn)
@@ -285,7 +305,7 @@ object SpawnRestrictionRegistry {
     ) {
         register(
             entityType,
-            SpawnPlacementTypes.IN_WATER,
+            SpawnPlacements.Type.IN_WATER,
             predicate
         )
     }
@@ -296,7 +316,7 @@ object SpawnRestrictionRegistry {
     ) {
         register(
             entityType,
-            SpawnPlacementTypes.IN_WATER,
+            SpawnPlacements.Type.IN_WATER,
             predicate
         )
     }
@@ -307,7 +327,7 @@ object SpawnRestrictionRegistry {
     ) {
         register(
             entityType,
-            SpawnPlacementTypes.IN_WATER,
+            SpawnPlacements.Type.IN_WATER,
             predicate
         )
     }
@@ -315,7 +335,7 @@ object SpawnRestrictionRegistry {
     private fun <T : Animal> registerMammalEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
         register(
             entityType,
-            SpawnPlacementTypes.NO_RESTRICTIONS,
+            SpawnPlacements.Type.NO_RESTRICTIONS,
             predicate
         )
     }
@@ -326,14 +346,14 @@ object SpawnRestrictionRegistry {
     ) {
         register(
             entityType,
-            SpawnPlacementTypes.NO_RESTRICTIONS,
+            SpawnPlacements.Type.NO_RESTRICTIONS,
             predicate
         )
     }
 
     private fun <T : Mob> register(
         entityType: EntityType<T>,
-        location: SpawnPlacementType,
+        location: SpawnPlacements.Type,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
         SpawnPlacements.register(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)

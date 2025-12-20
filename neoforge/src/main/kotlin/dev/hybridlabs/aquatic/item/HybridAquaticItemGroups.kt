@@ -217,7 +217,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.MAHI.get())
                 entries.accept(HybridAquaticItems.OPAH.get())
                 entries.accept(HybridAquaticItems.OARFISH.get())
-                entries.accept(HybridAquaticItems.SUNFISH.get())
+                entries.accept(HybridAquaticItems.OCEAN_SUNFISH.get())
 
                 // miscellaneous items
                 entries.accept(HybridAquaticItems.LOBSTER_CLAW.get())

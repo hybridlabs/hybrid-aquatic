@@ -1077,11 +1077,11 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SUNFISH.get().defaultLootTable) {
+        export(exporter, HybridAquaticEntityTypes.OCEAN_SUNFISH.get().defaultLootTable) {
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.SUNFISH.get())
+                        LootItem.lootTableItem(HybridAquaticItems.OCEAN_SUNFISH.get())
                             .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
 
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))

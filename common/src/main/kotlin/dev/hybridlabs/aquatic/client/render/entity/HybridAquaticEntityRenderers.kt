@@ -71,11 +71,13 @@ import dev.hybridlabs.aquatic.client.render.entity.fish.SnailfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.SquirrelfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.StingrayEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.StonefishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.fish.OceanSunfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.SunfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.SurgeonfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.TetraEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.TigerBarbEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.TriggerfishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.fish.TroutEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.TunaEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.WrasseEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.BarrelJellyfishEntityRenderer
@@ -238,9 +240,9 @@ object HybridAquaticEntityRenderers {
         )
 
 
-    val SUNFISH =
+    val OCEAN_SUNFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SUNFISH, ::SunfishEntityRenderer
+            HybridAquaticEntityTypes.OCEAN_SUNFISH, ::OceanSunfishEntityRenderer
         )
 
     val MAHI =
@@ -416,6 +418,18 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.SHINER,
             ::ShinerEntityRenderer
+        )
+
+    val TROUT =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.TROUT,
+            ::TroutEntityRenderer
+        )
+
+    val SUNFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.SUNFISH,
+            ::SunfishEntityRenderer
         )
 
     //endregion
