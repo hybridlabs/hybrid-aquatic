@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: Level) :
+class TroutEntity(entityType: EntityType<out TroutEntity>, world: Level) :
     HybridAquaticFishEntity(entityType, world,
         listOf(
             HybridAquaticEntityTags.NONE),
@@ -16,14 +16,22 @@ class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: Level) :
             HybridAquaticEntityTags.SHARK)) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 3
+        return 2
+    }
+
+    override fun getMinSize(): Int {
+        return -8
+    }
+
+    override fun getMaxSize(): Int {
+        return 0
     }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.MAX_HEALTH, 8.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.6)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)

@@ -74,11 +74,13 @@ import dev.hybridlabs.aquatic.entity.fish.SnailfishEntity
 import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
 import dev.hybridlabs.aquatic.entity.fish.StingrayEntity
 import dev.hybridlabs.aquatic.entity.fish.StonefishEntity
+import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
 import dev.hybridlabs.aquatic.entity.fish.SunfishEntity
 import dev.hybridlabs.aquatic.entity.fish.SurgeonfishEntity
 import dev.hybridlabs.aquatic.entity.fish.TetraEntity
 import dev.hybridlabs.aquatic.entity.fish.TigerBarbEntity
 import dev.hybridlabs.aquatic.entity.fish.TriggerfishEntity
+import dev.hybridlabs.aquatic.entity.fish.TroutEntity
 import dev.hybridlabs.aquatic.entity.fish.TunaEntity
 import dev.hybridlabs.aquatic.entity.fish.WrasseEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.BarrelJellyfishEntity
@@ -271,14 +273,28 @@ object HybridAquaticEntityTypes {
     val CARP = registerFish(
         "carp",
         ::CarpEntity,
-        EntityDimensions.fixed(0.75f, 0.5f),
+        EntityDimensions.fixed(0.6f, 0.5f),
         CarpEntity::createMobAttributes
+    )
+
+    val TROUT = registerFish(
+        "trout",
+        ::TroutEntity,
+        EntityDimensions.fixed(0.75f, 0.5f),
+        TroutEntity::createMobAttributes
+    )
+
+    val SUNFISH = registerFish(
+        "sunfish",
+        ::SunfishEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        SunfishEntity::createMobAttributes
     )
 
     val SHINER = registerFish(
         "shiner",
         ::ShinerEntity,
-        EntityDimensions.fixed(0.75f, 0.5f),
+        EntityDimensions.fixed(0.5f, 0.5f),
         ShinerEntity::createMobAttributes
     )
 
@@ -415,11 +431,11 @@ object HybridAquaticEntityTypes {
         StonefishEntity::createMobAttributes
     )
 
-    val SUNFISH = registerFish(
-        "sunfish",
-        ::SunfishEntity,
+    val OCEAN_SUNFISH = registerFish(
+        "ocean_sunfish",
+        ::OceanSunfishEntity,
         EntityDimensions.fixed(1.25f, 2f),
-        SunfishEntity::createMobAttributes
+        OceanSunfishEntity::createMobAttributes
     )
 
     val TETRA = registerFish(

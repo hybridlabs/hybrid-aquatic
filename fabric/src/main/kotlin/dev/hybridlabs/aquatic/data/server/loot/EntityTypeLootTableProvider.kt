@@ -1016,11 +1016,11 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SUNFISH.get()) {
+        export(exporter, HybridAquaticEntityTypes.OCEAN_SUNFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.SUNFISH.get())
+                        LootItem.lootTableItem(HybridAquaticItems.OCEAN_SUNFISH.get())
                             .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()

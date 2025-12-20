@@ -18,6 +18,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.CLOWNFISH.get(),
                 HybridAquaticEntityTypes.PLECO.get(),
                 HybridAquaticEntityTypes.SHINER.get(),
+                HybridAquaticEntityTypes.SUNFISH.get(),
                 HybridAquaticEntityTypes.CARP.get(),
                 HybridAquaticEntityTypes.PEARLFISH.get(),
                 HybridAquaticEntityTypes.SNAILFISH.get(),
@@ -52,6 +53,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.STINGRAY.get(),
                 HybridAquaticEntityTypes.TRIGGERFISH.get(),
                 HybridAquaticEntityTypes.NEEDLEFISH.get(),
+                HybridAquaticEntityTypes.TROUT.get(),
                 HybridAquaticEntityTypes.ROCKFISH.get(),
                 HybridAquaticEntityTypes.SEA_BASS.get(),
                 HybridAquaticEntityTypes.LIONFISH.get(),
@@ -65,7 +67,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         // large prey
         getOrCreateTagBuilder(HybridAquaticEntityTags.LARGE_PREY)
             .add(
-                HybridAquaticEntityTypes.SUNFISH.get(),
+                HybridAquaticEntityTypes.OCEAN_SUNFISH.get(),
                 HybridAquaticEntityTypes.OARFISH.get(),
                 HybridAquaticEntityTypes.OPAH.get(),
                 HybridAquaticEntityTypes.TUNA.get(),
@@ -181,6 +183,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.STONEFISH.get(),
                 HybridAquaticEntityTypes.PLECO.get(),
                 HybridAquaticEntityTypes.SHINER.get(),
+                HybridAquaticEntityTypes.TROUT.get(),
+                HybridAquaticEntityTypes.SUNFISH.get(),
                 HybridAquaticEntityTypes.DAMSELFISH.get(),
                 HybridAquaticEntityTypes.PEARLFISH.get(),
                 HybridAquaticEntityTypes.BETTA.get(),
@@ -212,7 +216,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.SEA_BASS.get(),
                 HybridAquaticEntityTypes.SEAHORSE.get(),
                 HybridAquaticEntityTypes.SEADRAGON.get(),
-                HybridAquaticEntityTypes.SUNFISH.get(),
+                HybridAquaticEntityTypes.OCEAN_SUNFISH.get(),
                 HybridAquaticEntityTypes.SURGEONFISH.get(),
                 HybridAquaticEntityTypes.TETRA.get(),
                 HybridAquaticEntityTypes.TIGER_BARB.get(),
