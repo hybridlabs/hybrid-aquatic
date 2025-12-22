@@ -22,6 +22,7 @@ import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.PanicGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
@@ -48,8 +49,6 @@ open class HybridAquaticCrustaceanEntity(
 
     private var hidingTimer: Int = 0
     private var lastDamageTime: Long = 0
-
-    private var climbingTicks = 0
 
     var size: Int
         get() = entityData.get(CRUSTACEAN_SIZE)
