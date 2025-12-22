@@ -10,6 +10,7 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.item.enchantment.EnchantmentHelper
 import net.minecraft.world.item.enchantment.Enchantments.FROST_WALKER
@@ -124,11 +125,8 @@ class ThermalVentBlock(
     override fun stepOn(world: Level, pos: BlockPos, state: BlockState, entity: Entity) {
         if (world.isClientSide) return
 
-        if (state.getValue(THICKNESS) == DripstoneThickness.TIP && state.getValue(WATERLOGGED) && entity !is YetiCrabEntity) {
-            if (!entity.isSteppingCarefully && entity is LivingEntity && (EnchantmentHelper.getEnchantmentLevel(
-                    world.registryAccess().registry(Registries.ENCHANTMENT).get().getHolder(FROST_WALKER).get(), entity
-                ) < 1)
-            ) {
+        if (state.getValue(THICKNESS) == DripstoneThickness.TIP && state.getValue(WATERLOGGED)) {
+            if (entity is Player && !entity.isInvulnerableTo(world.damageSources().hotFloor())) {
                 entity.hurt(world.damageSources().hotFloor(), fireDamage.toFloat())
                 entity.addEffect(MobEffectInstance(HybridAquaticMobEffects.CORROSION.asHolder(), 200, 0))
             }
