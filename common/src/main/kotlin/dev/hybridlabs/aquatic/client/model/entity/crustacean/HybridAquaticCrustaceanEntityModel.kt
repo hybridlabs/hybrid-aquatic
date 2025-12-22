@@ -24,20 +24,4 @@ abstract class HybridAquaticCrustaceanEntityModel<T : HybridAquaticCrustaceanEnt
     fun getLayerTextureResource(layer: String): ResourceLocation {
         return CommonClass.locate("textures/entity/crustacean/$id/layers/${id}_$layer.png")
     }
-
-    override fun setCustomAnimations(
-        animatable: T,
-        instanceId: Long,
-        animationState: AnimationState<T>
-    ) {
-        super.setCustomAnimations(animatable, instanceId, animationState)
-
-        val body = animationProcessor.getBone("crustacean")
-
-        if (animatable.onClimbable()) {
-            body?.rotX = Math.toRadians(90.0).toFloat()
-        } else {
-            body?.rotX = 0.0F
-        }
-    }
 }
