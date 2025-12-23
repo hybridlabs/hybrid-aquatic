@@ -123,7 +123,7 @@ import java.util.concurrent.Callable
 object HybridAquaticEntityTypes {
 
     //#region fish
-    val AFRICAN_BUTTERFLYFISH = registerFish(
+    val AFRICAN_BUTTERFLYFISH = registerRiverFish(
         "african_butterflyfish",
         ::AfricanButterflyfishEntity,
         EntityDimensions.fixed(0.25f, 0.2f),
@@ -172,7 +172,7 @@ object HybridAquaticEntityTypes {
         BarracudaEntity::createMobAttributes
     )
 
-    val BETTA = registerFish(
+    val BETTA = registerRiverFish(
         "betta",
         ::BettaEntity,
         EntityDimensions.fixed(0.3f, 0.3f),
@@ -235,7 +235,7 @@ object HybridAquaticEntityTypes {
         BoxfishEntity::createMobAttributes
     )
 
-    val DISCUS = registerFish(
+    val DISCUS = registerRiverFish(
         "discus",
         ::DiscusEntity,
         EntityDimensions.fixed(0.35f, 0.45f),
@@ -263,49 +263,49 @@ object HybridAquaticEntityTypes {
         SquirrelfishEntity::createMobAttributes
     )
 
-    val GOLDFISH = registerFish(
+    val GOLDFISH = registerRiverFish(
         "goldfish",
         ::GoldfishEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
         GoldfishEntity::createMobAttributes
     )
 
-    val CARP = registerFish(
+    val CARP = registerRiverFish(
         "carp",
         ::CarpEntity,
         EntityDimensions.fixed(0.6f, 0.5f),
         CarpEntity::createMobAttributes
     )
 
-    val TROUT = registerFish(
+    val TROUT = registerRiverFish(
         "trout",
         ::TroutEntity,
         EntityDimensions.fixed(0.75f, 0.5f),
         TroutEntity::createMobAttributes
     )
 
-    val SUNFISH = registerFish(
+    val SUNFISH = registerRiverFish(
         "sunfish",
         ::SunfishEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
         SunfishEntity::createMobAttributes
     )
 
-    val SHINER = registerFish(
+    val SHINER = registerRiverFish(
         "shiner",
         ::ShinerEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
         ShinerEntity::createMobAttributes
     )
 
-    val GOURAMI = registerFish(
+    val GOURAMI = registerRiverFish(
         "gourami",
         ::GouramiEntity,
         EntityDimensions.fixed(0.5f, 0.5f),
         GouramiEntity::createMobAttributes
     )
 
-    val PLECO = registerFish(
+    val PLECO = registerRiverFish(
         "pleco",
         ::PlecoEntity,
         EntityDimensions.fixed(0.8f, 0.5f),
@@ -354,7 +354,7 @@ object HybridAquaticEntityTypes {
         HerringEntity::createMobAttributes
     )
 
-    val OSCAR = registerFish(
+    val OSCAR = registerRiverFish(
         "oscar",
         ::OscarEntity,
         EntityDimensions.fixed(0.4f, 0.4f),
@@ -368,7 +368,7 @@ object HybridAquaticEntityTypes {
         OpahEntity::createMobAttributes
     )
 
-    val PIRANHA = registerFish(
+    val PIRANHA = registerRiverFish(
         "piranha",
         ::PiranhaEntity,
         EntityDimensions.fixed(0.35f, 0.35f),
@@ -438,21 +438,21 @@ object HybridAquaticEntityTypes {
         OceanSunfishEntity::createMobAttributes
     )
 
-    val TETRA = registerFish(
+    val TETRA = registerRiverFish(
         "tetra",
         ::TetraEntity,
         EntityDimensions.fixed(0.3f, 0.3f),
         TetraEntity::createMobAttributes
     )
 
-    val PUPFISH = registerFish(
+    val PUPFISH = registerRiverFish(
         "pupfish",
         ::PupfishEntity,
         EntityDimensions.fixed(0.3f, 0.3f),
         PupfishEntity::createMobAttributes
     )
 
-    val TIGER_BARB = registerFish(
+    val TIGER_BARB = registerRiverFish(
         "tiger_barb",
         ::TigerBarbEntity,
         EntityDimensions.fixed(0.3f, 0.3f),
@@ -480,7 +480,7 @@ object HybridAquaticEntityTypes {
         TunaEntity::createMobAttributes
     )
 
-    val GOLDEN_DORADO = registerFish(
+    val GOLDEN_DORADO = registerRiverFish(
         "golden_dorado",
         ::GoldenDoradoEntity,
         EntityDimensions.fixed(1.0f, 0.6f),
@@ -501,7 +501,7 @@ object HybridAquaticEntityTypes {
         CoelacanthEntity::createMobAttributes
     )
 
-    val DANIO = registerFish(
+    val DANIO = registerRiverFish(
         "danio",
         ::DanioEntity,
         EntityDimensions.fixed(0.3f, 0.25f),
@@ -993,6 +993,18 @@ object HybridAquaticEntityTypes {
         return registerCustomSpawnGroup(
             id, entityFactory, dimensions, attributeContainer,
             Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:fish")
+        )
+    }
+
+    private fun <T : LivingEntity> registerRiverFish(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id, entityFactory, dimensions, attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:river_fish")
         )
     }
 
