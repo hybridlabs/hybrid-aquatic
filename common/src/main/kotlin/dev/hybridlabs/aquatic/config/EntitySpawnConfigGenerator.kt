@@ -78,6 +78,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.SWAMP,
                 HybridAquaticBiomeTags.MANGROVES,
+                HybridAquaticBiomeTags.JUNGLE,
                 HybridAquaticBiomeTags.MARSHES),
             1, 1, 2
         )
