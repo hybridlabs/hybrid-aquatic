@@ -13,6 +13,10 @@
     "hybrid-aquatic:moon_jellyfish",
     "hybrid-aquatic:nomura_jellyfish",
     "hybrid-aquatic:sea_nettle",
-    "hybrid-aquatic:box_jellyfish"
+    "hybrid-aquatic:box_jellyfish",
+    {
+      "id": "rainbowreef:jellyfish",
+      "required": false
+    }
   ]
 }

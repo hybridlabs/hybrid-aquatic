@@ -10,6 +10,46 @@
     "hybrid-aquatic:coelacanth",
     "hybrid-aquatic:golden_dorado",
     "minecraft:player",
-    "minecraft:turtle"
+    "minecraft:turtle",
+    {
+      "id": "bountiful_critters:sunfish",
+      "required": false
+    },
+    {
+      "id": "fintastic:arapaima",
+      "required": false
+    },
+    {
+      "id": "fintastic:catfish",
+      "required": false
+    },
+    {
+      "id": "fintastic:coelacanth",
+      "required": false
+    },
+    {
+      "id": "spawn:sunfish",
+      "required": false
+    },
+    {
+      "id": "spawn:tuna",
+      "required": false
+    },
+    {
+      "id": "spawn:barracuda",
+      "required": false
+    },
+    {
+      "id": "spawn:sea_cow",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:catfish",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:seal",
+      "required": false
+    }
   ]
 }
