@@ -31,6 +31,8 @@ import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinionEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
+import net.minecraft.world.entity.SpawnPlacementType
+import net.minecraft.world.entity.SpawnPlacementTypes
 import net.minecraft.world.entity.SpawnPlacements
 import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.animal.WaterAnimal
@@ -305,7 +307,7 @@ object SpawnRestrictionRegistry {
     ) {
         register(
             entityType,
-            SpawnPlacements.Type.IN_WATER,
+            SpawnPlacementTypes.IN_WATER,
             predicate
         )
     }
@@ -316,7 +318,7 @@ object SpawnRestrictionRegistry {
     ) {
         register(
             entityType,
-            SpawnPlacements.Type.IN_WATER,
+            SpawnPlacementTypes.IN_WATER,
             predicate
         )
     }
@@ -327,7 +329,7 @@ object SpawnRestrictionRegistry {
     ) {
         register(
             entityType,
-            SpawnPlacements.Type.IN_WATER,
+            SpawnPlacementTypes.IN_WATER,
             predicate
         )
     }
@@ -335,7 +337,7 @@ object SpawnRestrictionRegistry {
     private fun <T : Animal> registerMammalEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
         register(
             entityType,
-            SpawnPlacements.Type.NO_RESTRICTIONS,
+            SpawnPlacementTypes.NO_RESTRICTIONS,
             predicate
         )
     }
@@ -346,14 +348,14 @@ object SpawnRestrictionRegistry {
     ) {
         register(
             entityType,
-            SpawnPlacements.Type.NO_RESTRICTIONS,
+            SpawnPlacementTypes.NO_RESTRICTIONS,
             predicate
         )
     }
 
     private fun <T : Mob> register(
         entityType: EntityType<T>,
-        location: SpawnPlacements.Type,
+        location: SpawnPlacementType,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
         SpawnPlacements.register(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)

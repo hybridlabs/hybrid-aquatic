@@ -1017,8 +1017,7 @@ object HybridAquaticItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
