@@ -5,6 +5,7 @@
     "hybrid-aquatic:stingray",
     "hybrid-aquatic:triggerfish",
     "hybrid-aquatic:needlefish",
+    "hybrid-aquatic:trout",
     "hybrid-aquatic:rockfish",
     "hybrid-aquatic:sea_bass",
     "hybrid-aquatic:lionfish",
@@ -12,6 +13,38 @@
     "hybrid-aquatic:wrasse",
     "hybrid-aquatic:moray_eel",
     "hybrid-aquatic:john_dory",
-    "hybrid-aquatic:lantern_shark"
+    "hybrid-aquatic:lantern_shark",
+    {
+      "id": "rainbowreef:angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:hogfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:parrotfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:ray",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:stingray",
+      "required": false
+    },
+    {
+      "id": "fintastic:featherback",
+      "required": false
+    },
+    {
+      "id": "fintastic:freshwater_shark",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:blobfish",
+      "required": false
+    }
   ]
 }

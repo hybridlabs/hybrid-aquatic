@@ -9,6 +9,7 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -119,8 +120,8 @@ class ThermalVentBlock(
     override fun stepOn(world: Level, pos: BlockPos, state: BlockState, entity: Entity) {
         if (world.isClientSide) return
 
-        if (state.getValue(THICKNESS) == DripstoneThickness.TIP && state.getValue(WATERLOGGED) && entity !is YetiCrabEntity) {
-            if (entity is LivingEntity && !entity.isInvulnerableTo(world.damageSources().hotFloor())) {
+        if (state.getValue(THICKNESS) == DripstoneThickness.TIP && state.getValue(WATERLOGGED)) {
+            if (entity is Player && !entity.isInvulnerableTo(world.damageSources().hotFloor())) {
                 entity.hurt(world.damageSources().hotFloor(), fireDamage.toFloat())
                 entity.addEffect(MobEffectInstance(HybridAquaticMobEffects.CORROSION.get(), 200, 0))
             }

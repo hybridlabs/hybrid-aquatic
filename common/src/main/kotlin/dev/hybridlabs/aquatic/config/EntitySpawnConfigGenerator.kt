@@ -18,7 +18,7 @@ class EntitySpawnConfigGenerator {
 
     fun finalizeSpawn() {
         //#region Fish
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.JUNGLE,
@@ -27,7 +27,7 @@ class EntitySpawnConfigGenerator {
             2, 1, 1
         )
 
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_RIVERS,
@@ -36,7 +36,7 @@ class EntitySpawnConfigGenerator {
             1, 1, 1
         )
 
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.TETRA.get(),
             listOf(
                 HybridAquaticBiomeTags.JUNGLE,
@@ -47,12 +47,12 @@ class EntitySpawnConfigGenerator {
             3, 2, 3
         )
 
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.PUPFISH.get(),
             listOf(BiomeTags.IS_BADLANDS),
-            1, 1, 1)
+            1, 0, 1)
 
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.TIGER_BARB.get(),
             listOf(
                 HybridAquaticBiomeTags.JUNGLE,
@@ -63,34 +63,44 @@ class EntitySpawnConfigGenerator {
             3, 2, 3
         )
 
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.GOURAMI.get(),
             listOf(
                 HybridAquaticBiomeTags.JUNGLE,
                 HybridAquaticBiomeTags.MANGROVES,
                 HybridAquaticBiomeTags.MARSHES,
                 HybridAquaticBiomeTags.TROPICAL_RIVERS),
-            3, 1, 1
+            1, 1, 1
         )
 
-        addFish(
+        addRiverFish(
+            HybridAquaticEntityTypes.PLECO.get(),
+            listOf(
+                HybridAquaticBiomeTags.SWAMP,
+                HybridAquaticBiomeTags.MANGROVES,
+                HybridAquaticBiomeTags.JUNGLE,
+                HybridAquaticBiomeTags.MARSHES),
+            1, 1, 2
+        )
+
+        addRiverFish(
             HybridAquaticEntityTypes.DISCUS.get(),
             listOf(
                 HybridAquaticBiomeTags.JUNGLE,
                 HybridAquaticBiomeTags.MANGROVES,
                 HybridAquaticBiomeTags.TROPICAL_RIVERS),
-            3, 1, 1
+            1, 1, 1
         )
 
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.PIRANHA.get(),
             listOf(
                 HybridAquaticBiomeTags.JUNGLE,
                 HybridAquaticBiomeTags.TROPICAL_RIVERS),
-            3, 4, 8
+            2, 4, 8
         )
 
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.OSCAR.get(),
             listOf(
                 HybridAquaticBiomeTags.JUNGLE,
@@ -99,7 +109,7 @@ class EntitySpawnConfigGenerator {
             1, 1, 1
         )
 
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.DANIO.get(),
             listOf(
                 HybridAquaticBiomeTags.JUNGLE,
@@ -109,7 +119,7 @@ class EntitySpawnConfigGenerator {
             3, 2, 3
         )
 
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.BETTA.get(),
             listOf(
                 HybridAquaticBiomeTags.SWAMP,
@@ -118,16 +128,37 @@ class EntitySpawnConfigGenerator {
             1, 1, 1
         )
 
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.GOLDFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.CHERRY),
             3, 1, 2)
 
-        addFish(
+        addRiverFish(
             HybridAquaticEntityTypes.CARP.get(),
             listOf(
                 HybridAquaticBiomeTags.CHERRY,
+                HybridAquaticBiomeTags.RIVERS),
+            3, 0, 2
+        )
+
+        addRiverFish(
+            HybridAquaticEntityTypes.SUNFISH.get(),
+            listOf(
+                HybridAquaticBiomeTags.RIVERS),
+            3, 1, 2
+        )
+
+        addRiverFish(
+            HybridAquaticEntityTypes.TROUT.get(),
+            listOf(
+                HybridAquaticBiomeTags.RIVERS),
+            2, 0, 1
+        )
+
+        addRiverFish(
+            HybridAquaticEntityTypes.SHINER.get(),
+            listOf(
                 HybridAquaticBiomeTags.RIVERS),
             3, 1, 2
         )
@@ -145,7 +176,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.REEF),
-            3, 4, 12
+            5, 4, 12
         )
 
         addFish(
@@ -153,37 +184,14 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.REEF),
-            3, 4, 12
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.MAHI.get(),
-            listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
-            2, 1, 6
+            5, 4, 12
         )
 
         addFish(
             HybridAquaticEntityTypes.FLYING_FISH.get(),
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 4, 12
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.NEEDLEFISH.get(),
-            listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            2, 1, 4
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.BARRACUDA.get(),
-            listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            2, 1, 1
+            5, 4, 12
         )
 
         addFish(
@@ -191,7 +199,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.REEF,
                 HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 4, 12
+            5, 4, 12
         )
 
         addFish(
@@ -199,7 +207,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.COLD_OCEANS,
                 HybridAquaticBiomeTags.TEMPERATE_OCEANS),
-            3, 4, 12
+            5, 4, 12
         )
 
         addFish(
@@ -207,15 +215,43 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS,
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
-            3, 4, 12
+            5, 4, 12
+        )
+
+        addFish(HybridAquaticEntityTypes.RATFISH.get(),
+            listOf(
+                BiomeTags.IS_DEEP_OCEAN),
+            5, 1, 3
         )
 
         addFish(
-            HybridAquaticEntityTypes.OPAH.get(),
+            HybridAquaticEntityTypes.SNAILFISH.get(),
+            listOf(
+                BiomeTags.IS_DEEP_OCEAN),
+            5, 1, 3
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.NEEDLEFISH.get(),
+            listOf(
+                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HybridAquaticBiomeTags.TROPICAL_OCEANS),
+            4, 1, 4
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.MAHI.get(),
+            listOf(
+                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+            3, 1, 4
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.TUNA.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
-            2, 1, 2
+            3, 1, 4
         )
 
         addFish(
@@ -223,7 +259,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 1, 6
+            3, 1, 4
         )
 
         addFish(
@@ -232,6 +268,22 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.TROPICAL_OCEANS),
             3, 1, 3
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.BARRACUDA.get(),
+            listOf(
+                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HybridAquaticBiomeTags.TROPICAL_OCEANS),
+            3, 1, 1
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.OPAH.get(),
+            listOf(
+                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
+                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+            2, 1, 2
         )
 
         addFish(
@@ -260,14 +312,14 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.LIONFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.REEF),
-            2, 1, 2
+            3, 1, 2
         )
 
         addFish(
             HybridAquaticEntityTypes.STONEFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.REEF),
-            2, 1, 2
+            3, 1, 2
         )
 
         addFish(
@@ -282,14 +334,14 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.BLOWFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.REEF),
-            2, 1, 2
+            3, 1, 2
         )
 
         addFish(
             HybridAquaticEntityTypes.SURGEONFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.REEF),
-            3, 1, 6
+            4, 1, 4
         )
 
         addFish(
@@ -310,37 +362,29 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.TRIGGERFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.REEF),
-            2, 1, 1
+            3, 1, 1
         )
 
         addFish(
             HybridAquaticEntityTypes.PARROTFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.REEF),
-            2, 1, 2
+            4, 1, 2
         )
 
         addFish(
             HybridAquaticEntityTypes.MORAY_EEL.get(),
             listOf(
                 HybridAquaticBiomeTags.REEF),
-            2, 1, 2
+            3, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.SUNFISH.get(),
+            HybridAquaticEntityTypes.OCEAN_SUNFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
             1, 1, 2
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.TUNA.get(),
-            listOf(
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
-            2, 1, 6
         )
 
         addFish(
@@ -355,26 +399,6 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.ANGLERFISH.get(),
             listOf(
                 BiomeTags.IS_DEEP_OCEAN),
-            2, 1, 2
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.FANGTOOTH.get(),
-            listOf(
-                BiomeTags.IS_DEEP_OCEAN),
-            3, 1, 2
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.VIPERFISH.get(),
-            listOf(
-                BiomeTags.IS_DEEP_OCEAN),
-            3, 1, 2
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.HATCHETFISH.get(),
-            listOf(BiomeTags.IS_DEEP_OCEAN),
             3, 1, 2
         )
 
@@ -383,7 +407,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
-            3, 1, 2
+            4, 1, 2
         )
 
         addFish(
@@ -402,17 +426,12 @@ class EntitySpawnConfigGenerator {
             2, 1, 2
         )
 
-        addFish(HybridAquaticEntityTypes.RATFISH.get(),
-            listOf(
-                BiomeTags.IS_DEEP_OCEAN),
-            3, 1, 3
-        )
-
         addFish(
             HybridAquaticEntityTypes.SEA_ANGEL.get(),
             listOf(
                 HybridAquaticBiomeTags.ARCTIC_OCEANS,
-                HybridAquaticBiomeTags.DEEP_COLD_OCEANS),
+                HybridAquaticBiomeTags.DEEP_COLD_OCEANS,
+                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
             1, 1, 2
         )
 
@@ -423,12 +442,6 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
             1, 1, 1
         )
-
-        addFish(
-            HybridAquaticEntityTypes.SNAILFISH.get(),
-            listOf(
-                BiomeTags.IS_DEEP_OCEAN),
-            3, 1, 3)
         //#endregion
 
         //#region Cephalopods
@@ -485,21 +498,6 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_OCEANS),
             3, 1, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.GIANT_SQUID.get(),
-            listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
-            1, 0, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.COLOSSAL_SQUID.get(),
-            listOf(
-                HybridAquaticBiomeTags.DEEP_ARCTIC_OCEANS),
-            1, 0, 1
         )
 
         addCephalopod(
@@ -613,7 +611,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.MAUVE_STINGER.get(),
             listOf(
                 BiomeTags.IS_DEEP_OCEAN),
-            1, 1, 3
+            2, 1, 3
         )
         //#endregion
 
@@ -706,7 +704,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SANDY_BEACHES,
                 HybridAquaticBiomeTags.ROCKY_BEACHES
             ),
-            5, 1, 2
+            1, 0, 2
         )
         //#endregion
 
@@ -715,7 +713,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.DUNGENESS_CRAB.get(),
             listOf(
                 HybridAquaticBiomeTags.SANDY_BEACHES),
-            5, 1, 2
+            3, 1, 2
         )
 
         addCrustacean(
@@ -724,14 +722,14 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SWAMP,
                 HybridAquaticBiomeTags.MANGROVES,
                 HybridAquaticBiomeTags.MARSHES),
-            5, 1, 2
+            3, 1, 2
         )
 
         addCrustacean(
             HybridAquaticEntityTypes.GHOST_CRAB.get(),
             listOf(
                 HybridAquaticBiomeTags.SANDY_BEACHES),
-            5, 1, 2
+            3, 1, 2
         )
 
         addCrustacean(
@@ -739,7 +737,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.SANDY_BEACHES),
-            3, 1, 1
+            3, 1, 2
         )
 
         addCrustacean(
@@ -764,14 +762,14 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.JUNGLE,
                 HybridAquaticBiomeTags.TROPICAL_RIVERS),
-            3, 1, 2
+            1, 1, 2
         )
 
         addCrustacean(
             HybridAquaticEntityTypes.SHRIMP.get(),
             listOf(
                 HybridAquaticBiomeTags.REEF),
-            3, 1, 2
+            3, 2, 3
         )
 
         addCrustacean(
@@ -779,27 +777,27 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.REEF,
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
-            3, 1, 2
+            2, 1, 2
         )
         addCrustacean(
             HybridAquaticEntityTypes.DECORATOR_CRAB.get(),
             listOf(
                 HybridAquaticBiomeTags.REEF),
-            1, 1, 2
+            2, 1, 2
         )
 
         addCrustacean(
             HybridAquaticEntityTypes.CRAYFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.RIVERS),
-            5, 1, 2
+            2, 1, 2
         )
 
         addCrustacean(
             HybridAquaticEntityTypes.COCONUT_CRAB.get(),
             listOf(
                 HybridAquaticBiomeTags.SANDY_BEACHES),
-            3, 1, 2
+            2, 1, 2
         )
 
         addCrustacean(
@@ -807,7 +805,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.SANDY_BEACHES,
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
-            3, 1, 2
+            1, 1, 2
         )
 
         addCrustacean(
@@ -815,7 +813,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.DEEP_COLD_OCEANS,
                 HybridAquaticBiomeTags.DEEP_ARCTIC_OCEANS),
-            3, 1, 2
+            2, 1, 2
         )
 
         addCrustacean(
@@ -823,7 +821,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.COLD_OCEANS,
                 HybridAquaticBiomeTags.TEMPERATE_OCEANS),
-            3, 1, 2
+            1, 1, 2
         )
 
         addCrustacean(
@@ -831,7 +829,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.COLD_OCEANS),
-            3, 1, 2
+            2, 1, 2
         )
         //#endregion
 
@@ -843,13 +841,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.REEF),
-            3, 1, 2
-        )
-
-        addCritter(
-            HybridAquaticEntityTypes.SCALYFOOT_SNAIL.get(),
-            listOf(BiomeTags.IS_DEEP_OCEAN),
-            3, 1, 2
+            1, 0, 2
         )
 
         addCritter(
@@ -858,7 +850,7 @@ class EntitySpawnConfigGenerator {
                 BiomeTags.IS_OCEAN,
                 BiomeTags.IS_DEEP_OCEAN,
                 HybridAquaticBiomeTags.SANDY_BEACHES),
-            5, 1, 2
+            2, 0, 2
         )
 
         addCritter(
@@ -866,7 +858,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 BiomeTags.IS_OCEAN,
                 BiomeTags.IS_DEEP_OCEAN),
-            3, 1, 3
+            3, 1, 2
         )
 
         addCritter(
@@ -874,7 +866,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 BiomeTags.IS_OCEAN,
                 BiomeTags.IS_DEEP_OCEAN),
-            5, 1, 3
+            3, 0, 2
         )
         //#endregion
     }
@@ -890,6 +882,23 @@ class EntitySpawnConfigGenerator {
             entityType,
             spawnTags,
             Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:fish"),
+            weight,
+            minGroup,
+            maxGroup
+        )
+    }
+
+    private fun addRiverFish(
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
+        weight: Int,
+        minGroup: Int,
+        maxGroup: Int,
+    ) {
+        add(
+            entityType,
+            spawnTags,
+            Services.PLATFORM.getMobCategoryByName("hybrid-aquatic:river_fish"),
             weight,
             minGroup,
             maxGroup

@@ -23,7 +23,7 @@ import dev.hybridlabs.aquatic.entity.fish.ParrotfishEntity
 import dev.hybridlabs.aquatic.entity.fish.PupfishEntity
 import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
 import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
-import dev.hybridlabs.aquatic.entity.fish.SunfishEntity
+import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
@@ -48,15 +48,18 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.DAMSELFISH.get(),
             HybridAquaticEntityTypes.TIGER_BARB.get(),
             HybridAquaticEntityTypes.PIRANHA.get(),
+            HybridAquaticEntityTypes.SHINER.get(),
+            HybridAquaticEntityTypes.TROUT.get(),
+            HybridAquaticEntityTypes.SUNFISH.get(),
             HybridAquaticEntityTypes.OSCAR.get(),
             HybridAquaticEntityTypes.GOURAMI.get(),
+            HybridAquaticEntityTypes.PLECO.get(),
             HybridAquaticEntityTypes.DANIO.get(),
             HybridAquaticEntityTypes.DISCUS.get(),
             HybridAquaticEntityTypes.BETTA.get(),
             HybridAquaticEntityTypes.TETRA.get(),
             HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
         ).forEach { registerShallowFish(it) }
-
 
         // fish
         setOf(
@@ -94,7 +97,7 @@ object SpawnRestrictionRegistry {
         registerWaterCreature(HybridAquaticEntityTypes.SEAHORSE.get(), SeahorseEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.PUPFISH.get(), PupfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.FLYING_FISH.get(), FlyingFishEntity::canSpawn)
-        registerWaterCreature(HybridAquaticEntityTypes.SUNFISH.get(), SunfishEntity::canSpawn)
+        registerWaterCreature(HybridAquaticEntityTypes.OCEAN_SUNFISH.get(), OceanSunfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.SQUIRRELFISH.get(), SquirrelfishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(), FlashlightFishEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.DRAGONFISH.get(), DragonfishEntity::canSpawn)

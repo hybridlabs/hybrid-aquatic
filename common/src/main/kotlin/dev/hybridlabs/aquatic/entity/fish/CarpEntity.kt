@@ -43,6 +43,14 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
         return 2
     }
 
+    override fun getMinSize(): Int {
+        return -8
+    }
+
+    override fun getMaxSize(): Int {
+        return 0
+    }
+
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
@@ -80,7 +88,8 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             COMMON(0, "common"),
-            KOI(1, "koi");
+            PRUSSIAN(1, "prussian"),
+            KOI(2, "koi");
 
             override fun getSerializedName(): String {
                 return this.key
@@ -105,11 +114,11 @@ class CarpEntity(entityType: EntityType<out CarpEntity>, world: Level) :
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
                         biome.`is`(HybridAquaticBiomeTags.CHERRY) -> {
-                            Type.fromId(random.nextInt(1, 5))
+                            KOI
                         }
 
                         else -> {
-                            COMMON
+                            Type.fromId(random.nextInt(0, 2))
                         }
                     }
                 }

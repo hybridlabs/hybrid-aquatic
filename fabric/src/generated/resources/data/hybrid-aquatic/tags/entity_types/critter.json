@@ -6,6 +6,10 @@
     "hybrid-aquatic:sea_cucumber",
     "hybrid-aquatic:sea_urchin",
     "hybrid-aquatic:starfish",
-    "hybrid-aquatic:sea_angel"
+    "hybrid-aquatic:sea_angel",
+    {
+      "id": "spawn:clam",
+      "required": false
+    }
   ]
 }

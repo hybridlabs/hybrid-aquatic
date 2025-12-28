@@ -15,14 +15,14 @@ class DunegrassBlock(settings: Properties): BaseDunegrassBlock(settings){
     override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
         return ItemStack(HybridAquaticPlatformBlocks.DUNEGRASS.get())
     }
-    override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
+    override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
         val blockState = HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get().defaultBlockState()
         val blockStateUpper = blockState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER)
         val blockPosAbove = pos.above()
 
-        if (world.isEmptyBlock(blockPosAbove)) {
-            world.setBlock(pos, blockState, 2)
-            world.setBlock(blockPosAbove, blockStateUpper, 2)
+        if (level.isEmptyBlock(blockPosAbove)) {
+            level.setBlock(pos, blockState, 2)
+            level.setBlock(blockPosAbove, blockStateUpper, 2)
         }
     }
     override fun isFlammable(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Boolean {
@@ -30,12 +30,12 @@ class DunegrassBlock(settings: Properties): BaseDunegrassBlock(settings){
     }
 
     override fun getFlammability(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Int {
-        return 5
+        return 60
     }
 
     override fun getFireSpreadSpeed(
         state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
     ): Int {
-        return 5
+        return 100
     }
 }

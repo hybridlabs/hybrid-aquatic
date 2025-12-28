@@ -10,6 +10,18 @@
     "hybrid-aquatic:tiger_shark",
     "hybrid-aquatic:whale_shark",
     "hybrid-aquatic:lantern_shark",
-    "hybrid-aquatic:hound_shark"
+    "hybrid-aquatic:hound_shark",
+    {
+      "id": "rainbowreef:small_shark",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:frilled_shark",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:hammerhead_shark",
+      "required": false
+    }
   ]
 }

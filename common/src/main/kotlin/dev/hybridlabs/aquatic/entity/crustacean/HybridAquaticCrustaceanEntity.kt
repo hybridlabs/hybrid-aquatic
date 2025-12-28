@@ -23,6 +23,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.PanicGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
@@ -55,8 +57,6 @@ open class HybridAquaticCrustaceanEntity(
     private var hidingTimer: Int = 0
     private var lastDamageTime: Long = 0
 
-    private var climbingTicks = 0
-
     var size: Int
         get() = entityData.get(CRUSTACEAN_SIZE)
         set(size) {
@@ -87,7 +87,7 @@ open class HybridAquaticCrustaceanEntity(
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
-        navigation = WallClimbNavigation(this, world)
+        navigation = GroundPathNavigation(this, world)
     }
 
     override fun aiStep() {
@@ -136,22 +136,6 @@ open class HybridAquaticCrustaceanEntity(
     override fun tick() {
         super.tick()
 
-        if (!level().isClientSide) {
-            setClimbingWall(horizontalCollision)
-        }
-
-        if (isClimbingWall()) {
-            climbingTicks++
-
-        } else {
-            climbingTicks = 0
-        }
-
-        if (onClimbable()) {
-            val velocity = deltaMovement
-            setDeltaMovement(velocity.x, velocity.y * 0.33, velocity.z)
-        }
-
         if ((this is HermitCrabEntity || this is GiantIsopodEntity) && isHiding) {
             hidingTimer--
 
@@ -170,18 +154,6 @@ open class HybridAquaticCrustaceanEntity(
 
     fun isMoving(): Boolean {
         return (this.onGround() || this.onClimbable()) && deltaMovement.lengthSqr() >= 0.0001
-    }
-
-    override fun onClimbable(): Boolean {
-        return this.climbingTicks > 8 && this.isClimbingWall()
-    }
-
-    private fun isClimbingWall(): Boolean {
-        return entityData.get(CLIMBING)
-    }
-
-    private fun setClimbingWall(isClimbingWall: Boolean) {
-        entityData.set(CLIMBING, isClimbingWall)
     }
 
     //#endregion
@@ -237,7 +209,6 @@ open class HybridAquaticCrustaceanEntity(
         super.defineSynchedData()
         entityData.define(CRUSTACEAN_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
-        entityData.define(CLIMBING, false)
     }
 
     //#endregion
@@ -313,8 +284,6 @@ open class HybridAquaticCrustaceanEntity(
             SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
-        val CLIMBING: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         val DANCE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
         val HIDE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
@@ -330,7 +299,8 @@ open class HybridAquaticCrustaceanEntity(
 
             return pos.y <= topY &&
                     world.getBlockState(pos.below()).isSolid &&
-                    world.isEmptyBlock(pos)
+                    world.isEmptyBlock(pos) &&
+                    world.canSeeSky(pos)
         }
 
         fun canWaterSpawn(
