@@ -10,10 +10,11 @@
             {
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
+                "max": 1.0,
+                "min": 0.0
               },
-              "function": "minecraft:looting_enchant"
+              "enchantment": "minecraft:looting",
+              "function": "minecraft:enchanted_count_increase"
             },
             {
               "add": false,
@@ -21,7 +22,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "hybrid-aquatic:raw_fish_meat"
+          "name": "hybrid-aquatic:goldfish"
         }
       ],
       "rolls": 1.0
