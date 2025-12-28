@@ -965,7 +965,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRITTER")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN")
         )
     }
 
@@ -980,7 +980,7 @@ object HybridAquaticEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRITTER")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN")
         )
     }
 
