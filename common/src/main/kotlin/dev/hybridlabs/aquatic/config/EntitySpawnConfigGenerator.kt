@@ -480,13 +480,6 @@ class EntitySpawnConfigGenerator {
         )
 
         addCephalopod(
-            HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
-            listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 1, 1
-        )
-
-        addCephalopod(
             HybridAquaticEntityTypes.NAUTILUS.get(),
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_OCEANS),
