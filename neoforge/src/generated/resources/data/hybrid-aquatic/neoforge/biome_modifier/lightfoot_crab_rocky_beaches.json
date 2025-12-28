@@ -3,7 +3,7 @@
   "biomes": "#hybrid-aquatic:rocky_beaches",
   "spawners": {
     "type": "hybrid-aquatic:lightfoot_crab",
-    "maxCount": 3,
+    "maxCount": 2,
     "minCount": 1,
     "weight": 3
   }

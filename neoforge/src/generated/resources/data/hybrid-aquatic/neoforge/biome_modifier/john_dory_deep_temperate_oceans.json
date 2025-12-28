@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:deep_temperate_oceans",
   "spawners": {
     "type": "hybrid-aquatic:john_dory",
-    "maxCount": 3,
+    "maxCount": 2,
     "minCount": 1,
-    "weight": 2
+    "weight": 4
   }
 }

@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:shallow_temperate_oceans",
   "spawners": {
     "type": "hybrid-aquatic:cepheidae_jellyfish",
-    "maxCount": 3,
+    "maxCount": 2,
     "minCount": 1,
-    "weight": 5
+    "weight": 3
   }
 }

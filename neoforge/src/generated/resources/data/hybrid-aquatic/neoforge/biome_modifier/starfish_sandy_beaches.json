@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:sandy_beaches",
   "spawners": {
     "type": "hybrid-aquatic:starfish",
-    "maxCount": 3,
+    "maxCount": 2,
     "minCount": 1,
-    "weight": 5
+    "weight": 2
   }
 }

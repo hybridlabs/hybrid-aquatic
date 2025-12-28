@@ -3,7 +3,7 @@
   "biomes": "#hybrid-aquatic:sandy_beaches",
   "spawners": {
     "type": "hybrid-aquatic:horseshoe_crab",
-    "maxCount": 1,
+    "maxCount": 2,
     "minCount": 1,
     "weight": 3
   }

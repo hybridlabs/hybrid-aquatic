@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:cold_oceans",
   "spawners": {
     "type": "hybrid-aquatic:mackerel",
-    "maxCount": 5,
-    "minCount": 3,
+    "maxCount": 12,
+    "minCount": 4,
     "weight": 5
   }
 }

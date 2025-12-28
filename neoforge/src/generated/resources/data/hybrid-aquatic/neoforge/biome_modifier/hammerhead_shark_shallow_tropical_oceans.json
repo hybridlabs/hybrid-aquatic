@@ -3,7 +3,7 @@
   "biomes": "#hybrid-aquatic:shallow_tropical_oceans",
   "spawners": {
     "type": "hybrid-aquatic:hammerhead_shark",
-    "maxCount": 3,
+    "maxCount": 2,
     "minCount": 1,
     "weight": 3
   }

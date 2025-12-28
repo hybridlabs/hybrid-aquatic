@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:deep_temperate_oceans",
   "spawners": {
     "type": "hybrid-aquatic:opah",
-    "maxCount": 1,
+    "maxCount": 2,
     "minCount": 1,
-    "weight": 3
+    "weight": 2
   }
 }

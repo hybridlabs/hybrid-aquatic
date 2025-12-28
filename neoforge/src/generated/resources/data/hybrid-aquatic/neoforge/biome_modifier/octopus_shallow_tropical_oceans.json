@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:shallow_tropical_oceans",
   "spawners": {
     "type": "hybrid-aquatic:octopus",
-    "maxCount": 2,
+    "maxCount": 1,
     "minCount": 1,
-    "weight": 1
+    "weight": 3
   }
 }

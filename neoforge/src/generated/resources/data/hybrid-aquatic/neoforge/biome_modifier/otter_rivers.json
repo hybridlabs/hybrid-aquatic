@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:rivers",
   "spawners": {
     "type": "hybrid-aquatic:otter",
-    "maxCount": 4,
+    "maxCount": 2,
     "minCount": 1,
-    "weight": 5
+    "weight": 1
   }
 }

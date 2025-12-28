@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:cold_oceans",
   "spawners": {
     "type": "hybrid-aquatic:arrow_squid",
-    "maxCount": 3,
+    "maxCount": 2,
     "minCount": 1,
-    "weight": 5
+    "weight": 3
   }
 }

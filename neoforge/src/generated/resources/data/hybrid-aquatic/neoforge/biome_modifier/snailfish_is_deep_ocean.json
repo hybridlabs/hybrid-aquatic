@@ -3,8 +3,8 @@
   "biomes": "#minecraft:is_deep_ocean",
   "spawners": {
     "type": "hybrid-aquatic:snailfish",
-    "maxCount": 5,
+    "maxCount": 3,
     "minCount": 1,
-    "weight": 3
+    "weight": 5
   }
 }

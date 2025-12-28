@@ -3,7 +3,7 @@
   "biomes": "#hybrid-aquatic:deep_temperate_oceans",
   "spawners": {
     "type": "hybrid-aquatic:tuna",
-    "maxCount": 3,
+    "maxCount": 4,
     "minCount": 1,
     "weight": 3
   }

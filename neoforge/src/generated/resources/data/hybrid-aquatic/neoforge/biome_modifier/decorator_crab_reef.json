@@ -5,6 +5,6 @@
     "type": "hybrid-aquatic:decorator_crab",
     "maxCount": 2,
     "minCount": 1,
-    "weight": 1
+    "weight": 2
   }
 }

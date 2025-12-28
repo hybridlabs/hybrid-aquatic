@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:reef",
   "spawners": {
     "type": "hybrid-aquatic:flashlight_fish",
-    "maxCount": 5,
-    "minCount": 3,
+    "maxCount": 12,
+    "minCount": 4,
     "weight": 5
   }
 }

@@ -2,8 +2,8 @@
   "type": "neoforge:add_spawns",
   "biomes": "#hybrid-aquatic:deep_temperate_oceans",
   "spawners": {
-    "type": "hybrid-aquatic:sunfish",
-    "maxCount": 1,
+    "type": "hybrid-aquatic:ocean_sunfish",
+    "maxCount": 2,
     "minCount": 1,
     "weight": 1
   }

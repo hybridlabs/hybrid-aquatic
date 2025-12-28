@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:reef",
   "spawners": {
     "type": "hybrid-aquatic:surgeonfish",
-    "maxCount": 3,
+    "maxCount": 4,
     "minCount": 1,
-    "weight": 5
+    "weight": 4
   }
 }

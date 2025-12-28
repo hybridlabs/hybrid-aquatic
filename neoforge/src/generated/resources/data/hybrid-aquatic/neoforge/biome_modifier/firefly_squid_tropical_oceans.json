@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:tropical_oceans",
   "spawners": {
     "type": "hybrid-aquatic:firefly_squid",
-    "maxCount": 5,
-    "minCount": 3,
-    "weight": 5
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 3
   }
 }

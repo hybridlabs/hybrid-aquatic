@@ -4,7 +4,7 @@
   "spawners": {
     "type": "hybrid-aquatic:moon_jellyfish",
     "maxCount": 5,
-    "minCount": 3,
+    "minCount": 2,
     "weight": 5
   }
 }

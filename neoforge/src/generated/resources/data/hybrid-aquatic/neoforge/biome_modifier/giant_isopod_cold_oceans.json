@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:cold_oceans",
   "spawners": {
     "type": "hybrid-aquatic:giant_isopod",
-    "maxCount": 3,
+    "maxCount": 2,
     "minCount": 1,
-    "weight": 3
+    "weight": 1
   }
 }

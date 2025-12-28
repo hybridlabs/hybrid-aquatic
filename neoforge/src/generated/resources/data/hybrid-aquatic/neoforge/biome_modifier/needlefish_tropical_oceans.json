@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:tropical_oceans",
   "spawners": {
     "type": "hybrid-aquatic:needlefish",
-    "maxCount": 3,
+    "maxCount": 4,
     "minCount": 1,
-    "weight": 3
+    "weight": 4
   }
 }
