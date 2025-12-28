@@ -45,6 +45,6 @@ public class SpawnGroupMixin {
                     haSpawnGroup);
         }
         
-        Arrays.stream($VALUES).forEach(value -> HybridAquaticSpawnGroup.BY_NAME.put(value.getName(), value));
+        Arrays.stream($VALUES).forEach(value -> HybridAquaticSpawnGroup.BY_NAME.put(value.name(), value));
     }
 }
