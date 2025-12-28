@@ -8,169 +8,61 @@
             "_constructor_comment": "The constructor to be used",
             "constructor": "(Ljava/lang/String;IZZI)V",
             "_parameters_comment": "Constant parameters provided directly.",
-            "parameters": [
-                "hybrid_aquatic:fish",
-                8,
-                true,
-                false,
-                64
-            ]
+            "parameters": [ "hybrid_aquatic:fish", 16, true, false, 64 ]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
-            "name": "HYBRID_AQUATIC_FISH_UNDERGROUND",
+            "name": "HYBRID_AQUATIC_RIVER_FISH",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:fish_underground",
-                8,
-                true,
-                false,
-                64
-            ]
+            "parameters": [ "hybrid_aquatic:river_fish", 10, true, false, 64]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_CEPHALOPOD",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:cephalopod",
-                8,
-                true,
-                false,
-                64
-            ]
-        },
-        {
-            "enum": "net/minecraft/world/entity/MobCategory",
-            "name": "HYBRID_AQUATIC_CEPHALOPOD_UNDERGROUND",
-            "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:cephalopod_underground",
-                8,
-                true,
-                false,
-                64
-            ]
+            "parameters": [ "hybrid_aquatic:cephalopod", 4, true, false, 64]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_JELLY",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:jelly",
-                5,
-                true,
-                false,
-                64
-            ]
-        },
-        {
-            "enum": "net/minecraft/world/entity/MobCategory",
-            "name": "HYBRID_AQUATIC_JELLY_UNDERGROUND",
-            "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:jelly_undeground",
-                5,
-                true,
-                false,
-                64
-            ]
+            "parameters": [ "hybrid_aquatic:jelly", 4, true, false, 64]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_SHARK",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:shark",
-                8,
-                true,
-                true,
-                128
-            ]
-        },
-        {
-            "enum": "net/minecraft/world/entity/MobCategory",
-            "name": "HYBRID_AQUATIC_SHARK_UNDERGROUND",
-            "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:shark_undeground",
-                8,
-                true,
-                false,
-                128
-            ]
+            "parameters": [ "hybrid_aquatic:shark", 8, true, true, 128]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_CRUSTACEAN",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:crustacean",
-                8,
-                true,
-                false,
-                64
-            ]
-        },
-        {
-            "enum": "net/minecraft/world/entity/MobCategory",
-            "name": "HYBRID_AQUATIC_CRUSTACEAN_UNDERGROUND",
-            "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:crustacean_underground",
-                8,
-                true,
-                false,
-                64
-            ]
+            "parameters": [ "hybrid_aquatic:crustacean", 8, true, false, 64]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_CRITTER",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:critter",
-                8,
-                true,
-                false,
-                64
-            ]
+            "parameters": [ "hybrid_aquatic:critter", 8, true, false, 64]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_MINIBOSS",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:miniboss",
-                10,
-                false,
-                true,
-                128
-            ]
+            "parameters": [ "hybrid_aquatic:miniboss", 4, false, true, 128]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_MINION",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:minion",
-                10,
-                false,
-                true,
-                128
-            ]
+            "parameters": [ "hybrid_aquatic:minion", 8, false, true, 128]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_MAMMAL",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [
-                "hybrid_aquatic:mammal",
-                5,
-                true,
-                false,
-                64
-            ]
+            "parameters": [ "hybrid_aquatic:mammal", 2, true, false, 128]
         }
     ]
 }
