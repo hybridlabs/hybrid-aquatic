@@ -50,7 +50,7 @@ class EntitySpawnConfigGenerator {
         addRiverFish(
             HybridAquaticEntityTypes.PUPFISH.get(),
             listOf(BiomeTags.IS_BADLANDS),
-            1, 0, 1)
+            1, 1, 1)
 
         addRiverFish(
             HybridAquaticEntityTypes.TIGER_BARB.get(),
@@ -139,7 +139,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.CHERRY,
                 HybridAquaticBiomeTags.RIVERS),
-            3, 0, 2
+            3, 1, 2
         )
 
         addRiverFish(
@@ -153,7 +153,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.TROUT.get(),
             listOf(
                 HybridAquaticBiomeTags.RIVERS),
-            2, 0, 1
+            2, 1, 1
         )
 
         addRiverFish(
@@ -697,7 +697,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SANDY_BEACHES,
                 HybridAquaticBiomeTags.ROCKY_BEACHES
             ),
-            1, 0, 2
+            1, 1, 2
         )
         //#endregion
 
@@ -834,7 +834,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.REEF),
-            1, 0, 2
+            1, 1, 2
         )
 
         addCritter(
@@ -843,7 +843,7 @@ class EntitySpawnConfigGenerator {
                 BiomeTags.IS_OCEAN,
                 BiomeTags.IS_DEEP_OCEAN,
                 HybridAquaticBiomeTags.SANDY_BEACHES),
-            2, 0, 2
+            2, 1, 2
         )
 
         addCritter(
@@ -859,7 +859,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 BiomeTags.IS_OCEAN,
                 BiomeTags.IS_DEEP_OCEAN),
-            3, 0, 2
+            3, 1, 2
         )
         //#endregion
     }
