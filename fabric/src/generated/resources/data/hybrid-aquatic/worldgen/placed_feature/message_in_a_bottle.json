@@ -10,7 +10,7 @@
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 1
+      "chance": 150
     }
   ]
 }
