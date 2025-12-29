@@ -91,6 +91,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.BLACK_PEARL_BLOCK.get(),
                 HybridAquaticBlocks.SHORESTONE.get(),
                 HybridAquaticBlocks.BARNACLE_SHORESTONE.get(),
+                HybridAquaticBlocks.MARINE_SNOW.get(),
             ).forEach(generator::createTrivialCube)
 
             // crates

@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.world.gen.biome
 import com.terraformersmc.biolith.api.biome.BiomePlacement
 import com.terraformersmc.biolith.api.surface.SurfaceGeneration
 import dev.hybridlabs.aquatic.CommonClass
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
@@ -17,7 +18,7 @@ object HybridAquaticBiomes {
     val TIDE_POOL_SURFACE_RULE: RuleSource = ifTrue(isBiome(TIDE_POOLS), state(Blocks.SAND.defaultBlockState()))
 
     val ABYSSAL_PLAINS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("abyssal_plains"))
-    val ABYSSAL_PLAINS_SURFACE_RULE: RuleSource = ifTrue(isBiome(ABYSSAL_PLAINS), state(Blocks.NETHERRACK.defaultBlockState()))
+    val ABYSSAL_PLAINS_SURFACE_RULE: RuleSource = ifTrue(isBiome(ABYSSAL_PLAINS), state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState()))
 
     fun addBiomes() {
         BiomePlacement.addOverworld(
