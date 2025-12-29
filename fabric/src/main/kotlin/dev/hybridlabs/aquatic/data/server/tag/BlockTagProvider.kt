@@ -97,6 +97,8 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.BLACK_PEARL_BLOCK.get())
             .add(HybridAquaticBlocks.THERMAL_VENT.get())
             .add(HybridAquaticBlocks.GIANT_CLAM.get())
+            .add(HybridAquaticBlocks.SHORESTONE.get())
+            .add(HybridAquaticBlocks.BARNACLE_SHORESTONE.get())
 
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
             .add(HybridAquaticBlocks.RAFT.get())
@@ -147,6 +149,16 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(BlockTags.UNDERWATER_BONEMEALS)
             .add(HybridAquaticBlocks.RED_ALGAE.get())
             .add(HybridAquaticBlocks.SEA_LETTUCE.get())
+
+        getOrCreateTagBuilder(HybridAquaticBlockTags.TIDE_POOL_REPLACEABLE)
+            .add(Blocks.CLAY)
+            .add(Blocks.GRAVEL)
+            .add(Blocks.DIRT)
+            .add(Blocks.SAND)
+            .add(Blocks.GRASS_BLOCK)
+            .add(Blocks.STONE)
+            .add(Blocks.MOSSY_COBBLESTONE)
+            .add(Blocks.TUFF)
 
         // plushies
         BuiltInRegistries.BLOCK

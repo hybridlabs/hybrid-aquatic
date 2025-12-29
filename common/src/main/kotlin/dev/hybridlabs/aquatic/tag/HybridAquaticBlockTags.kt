@@ -13,6 +13,8 @@ object HybridAquaticBlockTags {
 
     val ANEMONES = create("anemones")
 
+    val TIDE_POOL_REPLACEABLE = create("tide_pool_replaceable")
+
     private fun create(id: String): TagKey<Block> {
         return TagKey.create(Registries.BLOCK, CommonClass.locate(id))
     }

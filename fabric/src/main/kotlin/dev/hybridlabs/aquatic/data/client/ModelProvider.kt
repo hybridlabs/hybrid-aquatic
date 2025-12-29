@@ -89,6 +89,8 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             setOf(
                 HybridAquaticBlocks.PEARL_BLOCK.get(),
                 HybridAquaticBlocks.BLACK_PEARL_BLOCK.get(),
+                HybridAquaticBlocks.SHORESTONE.get(),
+                HybridAquaticBlocks.BARNACLE_SHORESTONE.get(),
             ).forEach(generator::createTrivialCube)
 
             // crates

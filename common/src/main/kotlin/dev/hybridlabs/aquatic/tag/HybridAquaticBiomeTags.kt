@@ -36,6 +36,7 @@ object HybridAquaticBiomeTags {
     val TROPICAL_RIVERS = create("tropical_rivers")
     val SANDY_BEACHES = create("sandy_beaches")
     val ROCKY_BEACHES = create("rocky_beaches")
+    val TIDE_POOLS = create("tide_pools")
 
     private fun create(id: String): TagKey<Biome> {
         return TagKey.create(Registries.BIOME, CommonClass.locate(id))

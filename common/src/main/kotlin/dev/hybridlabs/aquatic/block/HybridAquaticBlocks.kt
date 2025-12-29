@@ -62,6 +62,22 @@ object HybridAquaticBlocks {
         )
     }
 
+    val SHORESTONE =
+        register(
+            "shorestone"
+        ) {
+            Block(Properties.copy(Blocks.TUFF)
+            )
+        }
+
+    val BARNACLE_SHORESTONE =
+        register(
+            "barnacle_shorestone"
+        ) {
+            Block(Properties.copy(Blocks.TUFF)
+            )
+        }
+
     val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL) }
     val BULL_SHARK_PLUSHIE = register("bull_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL) }
     val FRILLED_SHARK_PLUSHIE = register("frilled_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK, Blocks.GRAY_WOOL) }

@@ -8,16 +8,23 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.util.valueproviders.ClampedNormalInt
+import net.minecraft.util.valueproviders.ConstantInt
+import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.levelgen.Heightmap
+import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.placement.BiomeFilter
 import net.minecraft.world.level.levelgen.placement.CountOnEveryLayerPlacement
 import net.minecraft.world.level.levelgen.placement.CountPlacement
+import net.minecraft.world.level.levelgen.placement.HeightRangePlacement
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement
 import net.minecraft.world.level.levelgen.placement.NoiseBasedCountPlacement
 import net.minecraft.world.level.levelgen.placement.PlacedFeature
 import net.minecraft.world.level.levelgen.placement.PlacementModifier
+import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement
 import net.minecraft.world.level.levelgen.placement.RarityFilter
 import net.minecraft.world.level.levelgen.placement.SurfaceRelativeThresholdFilter
+import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter
 import java.util.concurrent.CompletableFuture
 
 class PlacedFeatureProvider(
@@ -33,6 +40,36 @@ class PlacedFeatureProvider(
                 BiomeFilter.biome()
             )
         }
+
+        // tide pools
+        entries.add(
+            HybridAquaticPlacedFeatures.TIDE_POOLS, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.TIDE_POOLS), listOf(
+                    CountPlacement.of(24),
+                    RandomOffsetPlacement.of(ConstantInt.of(8), ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(ClampedNormalInt.of(0.0f,3.0f,-10,10),ConstantInt.ZERO),
+                    HeightRangePlacement.triangle(VerticalAnchor.absolute(63), VerticalAnchor.absolute(68)),
+                    CountPlacement.of(3),
+                    RandomOffsetPlacement.of(UniformInt.of(-12,12),ConstantInt.ZERO),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        // tide pool boulder
+        entries.add(
+            HybridAquaticPlacedFeatures.BOULDERS, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.BOULDER), listOf(
+                    CountPlacement.of(UniformInt.of(4,6)),
+                    HeightRangePlacement.uniform(VerticalAnchor.absolute(53), VerticalAnchor.absolute(53)),
+                    RandomOffsetPlacement.of(ConstantInt.of(8),ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(UniformInt.of(-3,3),UniformInt.of(-3,1)),
+                    SurfaceWaterDepthFilter.forMaxDepth(6),
+                    BiomeFilter.biome()
+                )
+
+            )
+        )
 
         // anemone patch
         entries.add(
