@@ -5,14 +5,13 @@ import com.terraformersmc.biolith.api.biome.SubBiomeMatcher
 import com.terraformersmc.biolith.api.surface.SurfaceGeneration
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.BiomeTags
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.biome.Biomes
-import net.minecraft.world.level.biome.Climate.Parameter
-import net.minecraft.world.level.biome.Climate.ParameterPoint
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.levelgen.SurfaceRules.*
 
@@ -35,17 +34,82 @@ object HybridAquaticBiomes {
     val FROZEN_ABYSSAL_PLAINS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("frozen_abyssal_plains"))
     val FROZEN_ABYSSAL_PLAINS_SURFACE_RULE: RuleSource = ifTrue(isBiome(FROZEN_ABYSSAL_PLAINS), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
 
+    val THERMAL_VENT_CAVERNS: ResourceKey<Biome?> =
+        ResourceKey.create(Registries.BIOME, CommonClass.locate("thermal_vent_caverns"))
 
     fun addBiomes() {
-        BiomePlacement.addOverworld(
-            TIDE_POOLS, ParameterPoint(
-                Parameter.span(-0.45f, 1f),
-                Parameter.span(-0.45f, -0.15f),
-                Parameter.span(-0.195f, -0.110f),
-                Parameter.span(-0.25f, 0.05f),
-                Parameter.point(0f),
-                Parameter.span(-0.267f, 0.05f),
-                0
+        BiomePlacement.addSubOverworld(
+            Biomes.BEACH,
+            TIDE_POOLS,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.EDGE,
+                    SubBiomeMatcher.CriterionTypes.RATIO,
+                    0.0f,
+                    0.5f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    HybridAquaticBiomeTags.TROPICAL_OCEANS,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.DEEP_OCEAN,
+            THERMAL_VENT_CAVERNS,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    0.2f,
+                    0.9f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.DEEP_LUKEWARM_OCEAN,
+            THERMAL_VENT_CAVERNS,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    0.0f,
+                    0.5f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.DEEP_COLD_OCEAN,
+            THERMAL_VENT_CAVERNS,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    0.2f,
+                    0.9f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.DEEP_FROZEN_OCEAN,
+            THERMAL_VENT_CAVERNS,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    0.2f,
+                    0.9f,
+                    false
+                )
             )
         )
 

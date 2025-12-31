@@ -142,13 +142,24 @@ class BiomeProvider(
         )
 
         entries.add(
+            HybridAquaticBiomes.THERMAL_VENT_CAVERNS,
+            create(
+                entries,
+                temperature = 1.0f,
+                downfall = 0.0f,
+                waterColor = 0x3F76E4,
+                waterFogColor = 0xadb148
+            )
+        )
+
+        entries.add(
             HybridAquaticBiomes.ABYSSAL_PLAINS,
             create(
                 entries,
                 temperature = 0.2f,
                 downfall = 0.0f,
                 waterColor = 0x3F76E4,
-                waterFogColor = 0x050533
+                waterFogColor = 0x14121d
             )
         )
 
@@ -159,7 +170,7 @@ class BiomeProvider(
                 temperature = 0.5f,
                 downfall = 0.5f,
                 waterColor = 0x45ADF2,
-                waterFogColor = 0x041633
+                waterFogColor = 0x14121d
             )
         )
 
@@ -170,7 +181,7 @@ class BiomeProvider(
                 temperature = 0.5f,
                 downfall = 0.5f,
                 waterColor = 0x3D57D6,
-                waterFogColor = 0x050533
+                waterFogColor = 0x14121d
             )
         )
 
@@ -181,7 +192,7 @@ class BiomeProvider(
                 temperature = 0.5f,
                 downfall = 0.5f,
                 waterColor = 0x3938C9,
-                waterFogColor = 0x050533
+                waterFogColor = 0x14121d
             )
         )
     }

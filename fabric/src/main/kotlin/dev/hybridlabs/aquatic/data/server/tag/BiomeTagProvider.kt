@@ -20,8 +20,10 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(BiomeTags.IS_DEEP_OCEAN)
             .addOptional(HybridAquaticBiomes.ABYSSAL_PLAINS)
-            .addOptional(HybridAquaticBiomes.ABYSSAL_PLAINS)
-            .addOptional(HybridAquaticBiomes.ABYSSAL_PLAINS)
+            .addOptional(HybridAquaticBiomes.LUKEWARM_ABYSSAL_PLAINS)
+            .addOptional(HybridAquaticBiomes.COLD_ABYSSAL_PLAINS)
+            .addOptional(HybridAquaticBiomes.FROZEN_ABYSSAL_PLAINS)
+            .addOptional(HybridAquaticBiomes.THERMAL_VENT_CAVERNS)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SANDY_BEACHES)
             .add(Biomes.BEACH)

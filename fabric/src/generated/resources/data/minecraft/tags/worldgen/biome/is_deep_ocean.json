@@ -6,11 +6,19 @@
       "required": false
     },
     {
-      "id": "hybrid-aquatic:abyssal_plains",
+      "id": "hybrid-aquatic:lukewarm_abyssal_plains",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:abyssal_plains",
+      "id": "hybrid-aquatic:cold_abyssal_plains",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:frozen_abyssal_plains",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:thermal_vent_caverns",
       "required": false
     }
   ]
