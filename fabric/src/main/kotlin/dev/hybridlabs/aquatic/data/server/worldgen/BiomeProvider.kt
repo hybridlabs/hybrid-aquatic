@@ -102,6 +102,17 @@ class BiomeProvider(
         entries: Entries
     ) {
         entries.add(
+            HybridAquaticBiomes.TROPICAL_RIVER,
+            create(
+                entries,
+                temperature = 0.95f,
+                downfall = 0.9f,
+                waterColor = 0x3F76E4,
+                waterFogColor = 0x3F76E4
+            )
+        )
+
+        entries.add(
             HybridAquaticBiomes.TIDE_POOLS,
             create(
                 entries,

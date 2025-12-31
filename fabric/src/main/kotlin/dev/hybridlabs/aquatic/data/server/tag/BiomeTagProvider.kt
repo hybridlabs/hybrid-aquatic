@@ -150,6 +150,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("terralith", "warm_river"))
             .addOptional(ResourceLocation("regions_unexplored", "tropical_river"))
             .addOptional(ResourceLocation("riverredux", "tropical_river"))
+            .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.CHERRY)
             .add(Biomes.CHERRY_GROVE)
