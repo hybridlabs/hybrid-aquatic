@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.world.gen.biome
 
 import com.terraformersmc.biolith.api.biome.BiomePlacement
+import com.terraformersmc.biolith.api.biome.SubBiomeMatcher
 import com.terraformersmc.biolith.api.surface.SurfaceGeneration
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
@@ -8,6 +9,7 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.biome.Biome
+import net.minecraft.world.level.biome.Biomes
 import net.minecraft.world.level.biome.Climate.Parameter
 import net.minecraft.world.level.biome.Climate.ParameterPoint
 import net.minecraft.world.level.block.Blocks
@@ -18,7 +20,13 @@ object HybridAquaticBiomes {
     val TIDE_POOL_SURFACE_RULE: RuleSource = ifTrue(isBiome(TIDE_POOLS), state(Blocks.SAND.defaultBlockState()))
 
     val ABYSSAL_PLAINS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("abyssal_plains"))
-    val ABYSSAL_PLAINS_SURFACE_RULE: RuleSource = ifTrue(isBiome(ABYSSAL_PLAINS), state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState()))
+    val LUKEWARM_ABYSSAL_PLAINS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("lukewarm_abyssal_plains"))
+    val COLD_ABYSSAL_PLAINS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_abyssal_plains"))
+    val FROZEN_ABYSSAL_PLAINS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("frozen_abyssal_plains"))
+    val ABYSSAL_PLAINS_SURFACE_RULE: RuleSource = ifTrue(
+        isBiome(ABYSSAL_PLAINS),
+        ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState()))
+    )
 
     fun addBiomes() {
         BiomePlacement.addOverworld(
@@ -32,24 +40,72 @@ object HybridAquaticBiomes {
                 0
             )
         )
-        BiomePlacement.addOverworld(
-            ABYSSAL_PLAINS, ParameterPoint(
-                Parameter.span(-1.0f, 1.0f),
-                Parameter.span(-1.0f, 1.0f),
-                Parameter.span(-0.7f, -0.64f),
-                Parameter.span(-1.0f, 1.0f),
-                Parameter.point(0f),
-                Parameter.span(-1.0f, 1.0f),
-                0
+
+        BiomePlacement.addSubOverworld(
+            Biomes.DEEP_OCEAN,
+            ABYSSAL_PLAINS,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.70f,
+                    -0.64f,
+                    false
+                )
             )
         )
-        SurfaceGeneration.addOverworldSurfaceRules(
-            ResourceLocation("minecraft", "rules/overworld"),
-            ifTrue(abovePreliminarySurface(), sequence(TIDE_POOL_SURFACE_RULE))
+
+        BiomePlacement.addSubOverworld(
+            Biomes.DEEP_LUKEWARM_OCEAN,
+            ABYSSAL_PLAINS,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.70f,
+                    -0.64f,
+                    false
+                )
+            )
         )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.DEEP_COLD_OCEAN,
+            ABYSSAL_PLAINS,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.70f,
+                    -0.64f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.DEEP_FROZEN_OCEAN,
+            ABYSSAL_PLAINS,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.70f,
+                    -0.64f,
+                    false
+                )
+            )
+        )
+
         SurfaceGeneration.addOverworldSurfaceRules(
             ResourceLocation("minecraft", "rules/overworld"),
-            ifTrue(abovePreliminarySurface(), sequence(ABYSSAL_PLAINS_SURFACE_RULE))
+            ifTrue(
+                abovePreliminarySurface(),
+                sequence(
+                    TIDE_POOL_SURFACE_RULE,
+                    ABYSSAL_PLAINS_SURFACE_RULE
+                )
+            )
         )
     }
 }

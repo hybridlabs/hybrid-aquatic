@@ -3,7 +3,7 @@
   "values": [
     "minecraft:deep_frozen_ocean",
     {
-      "id": "still_life:arctic_deep_ocean",
+      "id": "hybrid-aquatic:frozen_abyssal_plains",
       "required": false
     }
   ]

@@ -20,15 +20,26 @@ class BiomeProvider(
     registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
 
-    fun create(entries: Entries): Biome {
+    fun create(
+        entries: Entries,
+        temperature: Float,
+        downfall: Float,
+        waterColor: Int,
+        waterFogColor: Int
+    ): Biome {
         return Biome.BiomeBuilder()
             .generationSettings(makeGenerationSettings(entries))
             .mobSpawnSettings(makeSpawnSettings())
             .hasPrecipitation(true)
-            .temperature(0.8f)
-            .downfall(0.4f)
-            .specialEffects(createStandardBiomeEffects().build())
-        .build()
+            .temperature(temperature)
+            .downfall(downfall)
+            .specialEffects(
+                createStandardBiomeEffects()
+                    .waterColor(waterColor)
+                    .waterFogColor(waterFogColor)
+                    .build()
+            )
+            .build()
     }
 
     fun makeGenerationSettings(entries: Entries): BiomeGenerationSettings {
@@ -90,13 +101,64 @@ class BiomeProvider(
         registries: HolderLookup.Provider,
         entries: Entries
     ) {
-        entries.add(HybridAquaticBiomes.TIDE_POOLS, create(entries))
-        entries.add(HybridAquaticBiomes.ABYSSAL_PLAINS, create(entries))
+        entries.add(
+            HybridAquaticBiomes.TIDE_POOLS,
+            create(
+                entries,
+                temperature = 1.1f,
+                downfall = 0.6f,
+                waterColor = 0x3FA7D6,
+                waterFogColor = 0x2E5D73
+            )
+        )
+
+        entries.add(
+            HybridAquaticBiomes.ABYSSAL_PLAINS,
+            create(
+                entries,
+                temperature = 0.2f,
+                downfall = 0.0f,
+                waterColor = 0x3F76E4,
+                waterFogColor = 0x050533
+            )
+        )
+
+        entries.add(
+            HybridAquaticBiomes.LUKEWARM_ABYSSAL_PLAINS,
+            create(
+                entries,
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x45ADF2,
+                waterFogColor = 0x041633
+            )
+        )
+
+        entries.add(
+            HybridAquaticBiomes.COLD_ABYSSAL_PLAINS,
+            create(
+                entries,
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x3D57D6,
+                waterFogColor = 0x050533
+            )
+        )
+
+        entries.add(
+            HybridAquaticBiomes.FROZEN_ABYSSAL_PLAINS,
+            create(
+                entries,
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x3938C9,
+                waterFogColor = 0x050533
+            )
+        )
     }
+
 
     override fun getName(): String {
         return "Biomes"
     }
-
-
 }

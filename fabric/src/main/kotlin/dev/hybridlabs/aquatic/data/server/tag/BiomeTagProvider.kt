@@ -20,6 +20,8 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(BiomeTags.IS_DEEP_OCEAN)
             .addOptional(HybridAquaticBiomes.ABYSSAL_PLAINS)
+            .addOptional(HybridAquaticBiomes.ABYSSAL_PLAINS)
+            .addOptional(HybridAquaticBiomes.ABYSSAL_PLAINS)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SANDY_BEACHES)
             .add(Biomes.BEACH)
@@ -47,6 +49,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_ARCTIC_OCEANS)
             .add(Biomes.DEEP_FROZEN_OCEAN)
+            .addOptional(HybridAquaticBiomes.FROZEN_ABYSSAL_PLAINS)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_ARCTIC_OCEANS)
             .add(Biomes.FROZEN_OCEAN)
@@ -59,6 +62,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_COLD_OCEANS)
             .add(Biomes.DEEP_COLD_OCEAN)
+            .addOptional(HybridAquaticBiomes.COLD_ABYSSAL_PLAINS)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS)
             .add(Biomes.COLD_OCEAN)
@@ -71,6 +75,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS)
             .add(Biomes.DEEP_OCEAN)
+            .addOptional(HybridAquaticBiomes.ABYSSAL_PLAINS)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS)
             .add(Biomes.OCEAN)
@@ -83,6 +88,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS)
             .add(Biomes.DEEP_LUKEWARM_OCEAN)
+            .addOptional(HybridAquaticBiomes.LUKEWARM_ABYSSAL_PLAINS)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS)
             .add(Biomes.LUKEWARM_OCEAN)
