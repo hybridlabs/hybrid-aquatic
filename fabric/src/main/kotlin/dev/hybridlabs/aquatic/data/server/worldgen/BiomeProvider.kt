@@ -140,7 +140,7 @@ class BiomeProvider(
         )
 
         entries.add(
-            HybridAquaticBiomes.THERMAL_VENT_CAVERNS,
+            HybridAquaticBiomes.SULFURIC_CAVES,
             create(
                 entries,
                 temperature = 1.0f,

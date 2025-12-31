@@ -108,7 +108,7 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
-                BiomeTags.IS_OCEAN,
+                HybridAquaticBiomeTags.HAS_THERMAL_VENTS,
                 GenerationStep.Decoration.SURFACE_STRUCTURES,
                 HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH
             )

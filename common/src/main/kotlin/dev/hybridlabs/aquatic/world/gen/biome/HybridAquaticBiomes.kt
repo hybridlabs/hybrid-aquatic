@@ -37,8 +37,8 @@ object HybridAquaticBiomes {
     val FROZEN_TRENCH: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("frozen_trench"))
     val FROZEN_TRENCH_SURFACE_RULE: RuleSource = ifTrue(isBiome(FROZEN_TRENCH), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
 
-    val THERMAL_VENT_CAVERNS: ResourceKey<Biome?> =
-        ResourceKey.create(Registries.BIOME, CommonClass.locate("thermal_vent_caverns"))
+    val SULFURIC_CAVES: ResourceKey<Biome?> =
+        ResourceKey.create(Registries.BIOME, CommonClass.locate("sulfuric_caves"))
 
     fun addBiomes() {
         BiomePlacement.addSubOverworld(
@@ -62,7 +62,7 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_OCEAN,
-            THERMAL_VENT_CAVERNS,
+            SULFURIC_CAVES,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.DEPTH,
@@ -76,7 +76,7 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_LUKEWARM_OCEAN,
-            THERMAL_VENT_CAVERNS,
+            SULFURIC_CAVES,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.DEPTH,
@@ -90,7 +90,7 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_COLD_OCEAN,
-            THERMAL_VENT_CAVERNS,
+            SULFURIC_CAVES,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.DEPTH,
@@ -104,7 +104,7 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_FROZEN_OCEAN,
-            THERMAL_VENT_CAVERNS,
+            SULFURIC_CAVES,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.DEPTH,
