@@ -6,8 +6,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.BiomeDefaultFeatures
-import net.minecraft.data.worldgen.placement.AquaticPlacements
-import net.minecraft.data.worldgen.placement.VegetationPlacements
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.level.biome.Biome
@@ -153,46 +151,57 @@ class BiomeProvider(
         )
 
         entries.add(
-            HybridAquaticBiomes.ABYSSAL_PLAINS,
+            HybridAquaticBiomes.TRENCH,
             create(
                 entries,
                 temperature = 0.2f,
                 downfall = 0.0f,
-                waterColor = 0x3F76E4,
-                waterFogColor = 0x14121d
+                waterColor = 0x1b2447,
+                waterFogColor = 0x1b2447
             )
         )
 
         entries.add(
-            HybridAquaticBiomes.LUKEWARM_ABYSSAL_PLAINS,
+            HybridAquaticBiomes.WARM_TRENCH,
             create(
                 entries,
                 temperature = 0.5f,
                 downfall = 0.5f,
-                waterColor = 0x45ADF2,
-                waterFogColor = 0x14121d
+                waterColor = 0x1b2447,
+                waterFogColor = 0x1b2447
             )
         )
 
         entries.add(
-            HybridAquaticBiomes.COLD_ABYSSAL_PLAINS,
+            HybridAquaticBiomes.LUKEWARM_TRENCH,
             create(
                 entries,
                 temperature = 0.5f,
                 downfall = 0.5f,
-                waterColor = 0x3D57D6,
-                waterFogColor = 0x14121d
+                waterColor = 0x1b2447,
+                waterFogColor = 0x1b2447
             )
         )
 
         entries.add(
-            HybridAquaticBiomes.FROZEN_ABYSSAL_PLAINS,
+            HybridAquaticBiomes.COLD_TRENCH,
             create(
                 entries,
                 temperature = 0.5f,
                 downfall = 0.5f,
-                waterColor = 0x3938C9,
-                waterFogColor = 0x14121d
+                waterColor = 0x1b2447,
+                waterFogColor = 0x1b2447
+            )
+        )
+
+        entries.add(
+            HybridAquaticBiomes.FROZEN_TRENCH,
+            create(
+                entries,
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x1b2447,
+                waterFogColor = 0x1b2447
             )
         )
     }

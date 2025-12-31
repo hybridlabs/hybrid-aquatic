@@ -22,17 +22,20 @@ object HybridAquaticBiomes {
     val TROPICAL_RIVER: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_river"))
     val TROPICAL_RIVER_SURFACE_RULE: RuleSource = ifTrue(isBiome(TROPICAL_RIVER), ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())))
 
-    val ABYSSAL_PLAINS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("abyssal_plains"))
-    val ABYSSAL_PLAINS_SURFACE_RULE: RuleSource = ifTrue(isBiome(ABYSSAL_PLAINS), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
+    val TRENCH: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("trench"))
+    val TRENCH_SURFACE_RULE: RuleSource = ifTrue(isBiome(TRENCH), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
 
-    val LUKEWARM_ABYSSAL_PLAINS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("lukewarm_abyssal_plains"))
-    val LUKEWARM_ABYSSAL_PLAINS_SURFACE_RULE: RuleSource = ifTrue(isBiome(LUKEWARM_ABYSSAL_PLAINS), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
+    val WARM_TRENCH: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("warm_trench"))
+    val WARM_TRENCH_SURFACE_RULE: RuleSource = ifTrue(isBiome(WARM_TRENCH), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
 
-    val COLD_ABYSSAL_PLAINS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_abyssal_plains"))
-    val COLD_ABYSSAL_PLAINS_SURFACE_RULE: RuleSource = ifTrue(isBiome(COLD_ABYSSAL_PLAINS), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
+    val LUKEWARM_TRENCH: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("lukewarm_trench"))
+    val LUKEWARM_TRENCH_SURFACE_RULE: RuleSource = ifTrue(isBiome(LUKEWARM_TRENCH), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
 
-    val FROZEN_ABYSSAL_PLAINS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("frozen_abyssal_plains"))
-    val FROZEN_ABYSSAL_PLAINS_SURFACE_RULE: RuleSource = ifTrue(isBiome(FROZEN_ABYSSAL_PLAINS), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
+    val COLD_TRENCH: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_trench"))
+    val COLD_TRENCH_SURFACE_RULE: RuleSource = ifTrue(isBiome(COLD_TRENCH), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
+
+    val FROZEN_TRENCH: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("frozen_trench"))
+    val FROZEN_TRENCH_SURFACE_RULE: RuleSource = ifTrue(isBiome(FROZEN_TRENCH), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
 
     val THERMAL_VENT_CAVERNS: ResourceKey<Biome?> =
         ResourceKey.create(Registries.BIOME, CommonClass.locate("thermal_vent_caverns"))
@@ -65,7 +68,7 @@ object HybridAquaticBiomes {
                     SubBiomeMatcher.CriterionTargets.DEPTH,
                     SubBiomeMatcher.CriterionTypes.VALUE,
                     0.2f,
-                    0.9f,
+                    0.5f,
                     false
                 )
             )
@@ -93,7 +96,7 @@ object HybridAquaticBiomes {
                     SubBiomeMatcher.CriterionTargets.DEPTH,
                     SubBiomeMatcher.CriterionTypes.VALUE,
                     0.2f,
-                    0.9f,
+                    0.5f,
                     false
                 )
             )
@@ -107,7 +110,7 @@ object HybridAquaticBiomes {
                     SubBiomeMatcher.CriterionTargets.DEPTH,
                     SubBiomeMatcher.CriterionTypes.VALUE,
                     0.2f,
-                    0.9f,
+                    0.5f,
                     false
                 )
             )
@@ -127,13 +130,20 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_OCEAN,
-            ABYSSAL_PLAINS,
+            TRENCH,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
                     -0.70f,
                     -0.64f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
                     false
                 )
             )
@@ -141,13 +151,41 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_LUKEWARM_OCEAN,
-            LUKEWARM_ABYSSAL_PLAINS,
+            LUKEWARM_TRENCH,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
                     -0.70f,
                     -0.64f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.WARM_OCEAN,
+            WARM_TRENCH,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.70f,
+                    -0.64f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
                     false
                 )
             )
@@ -155,7 +193,7 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_COLD_OCEAN,
-            COLD_ABYSSAL_PLAINS,
+            COLD_TRENCH,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
@@ -163,19 +201,33 @@ object HybridAquaticBiomes {
                     -0.70f,
                     -0.64f,
                     false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
+                    false
                 )
             )
         )
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_FROZEN_OCEAN,
-            FROZEN_ABYSSAL_PLAINS,
+            FROZEN_TRENCH,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
                     -0.70f,
                     -0.64f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
                     false
                 )
             )
@@ -187,10 +239,11 @@ object HybridAquaticBiomes {
                 abovePreliminarySurface(),
                 sequence(
                     TIDE_POOL_SURFACE_RULE,
-                    ABYSSAL_PLAINS_SURFACE_RULE,
-                    LUKEWARM_ABYSSAL_PLAINS_SURFACE_RULE,
-                    COLD_ABYSSAL_PLAINS_SURFACE_RULE,
-                    FROZEN_ABYSSAL_PLAINS_SURFACE_RULE,
+                    TRENCH_SURFACE_RULE,
+                    WARM_TRENCH_SURFACE_RULE,
+                    LUKEWARM_TRENCH_SURFACE_RULE,
+                    COLD_TRENCH_SURFACE_RULE,
+                    FROZEN_TRENCH_SURFACE_RULE,
                     TROPICAL_RIVER_SURFACE_RULE,
                 )
             )

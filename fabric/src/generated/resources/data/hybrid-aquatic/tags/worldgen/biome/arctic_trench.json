@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "hybrid-aquatic:frozen_trench",
+      "required": false
+    }
+  ]
+}

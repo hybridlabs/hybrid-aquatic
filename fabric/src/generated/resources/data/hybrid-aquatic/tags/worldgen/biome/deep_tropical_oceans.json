@@ -2,9 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:deep_lukewarm_ocean",
-    {
-      "id": "hybrid-aquatic:lukewarm_abyssal_plains",
-      "required": false
-    }
+    "minecraft:deep_lukewarm_ocean"
   ]
 }

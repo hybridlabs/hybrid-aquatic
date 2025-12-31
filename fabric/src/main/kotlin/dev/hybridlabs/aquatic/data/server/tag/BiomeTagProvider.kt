@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
-import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -17,13 +16,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
     FabricTagProvider<Biome>(output, Registries.BIOME, registriesFuture) {
     override fun addTags(arg: HolderLookup.Provider) {
         // spawn biomes
-
-        getOrCreateTagBuilder(BiomeTags.IS_DEEP_OCEAN)
-            .addOptional(HybridAquaticBiomes.ABYSSAL_PLAINS)
-            .addOptional(HybridAquaticBiomes.LUKEWARM_ABYSSAL_PLAINS)
-            .addOptional(HybridAquaticBiomes.COLD_ABYSSAL_PLAINS)
-            .addOptional(HybridAquaticBiomes.FROZEN_ABYSSAL_PLAINS)
-            .addOptional(HybridAquaticBiomes.THERMAL_VENT_CAVERNS)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SANDY_BEACHES)
             .add(Biomes.BEACH)
@@ -43,62 +35,82 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .forceAddTag(BiomeTags.IS_OCEAN)
             .forceAddTag(BiomeTags.IS_BEACH)
 
+        //#region Arctic Oceans
         getOrCreateTagBuilder(HybridAquaticBiomeTags.ARCTIC_OCEANS)
             .add(
                 Biomes.FROZEN_OCEAN,
                 Biomes.DEEP_FROZEN_OCEAN
             )
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_ARCTIC_OCEANS)
-            .add(Biomes.DEEP_FROZEN_OCEAN)
-            .addOptional(HybridAquaticBiomes.FROZEN_ABYSSAL_PLAINS)
-
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_ARCTIC_OCEANS)
             .add(Biomes.FROZEN_OCEAN)
 
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_ARCTIC_OCEANS)
+            .add(Biomes.DEEP_FROZEN_OCEAN)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.ARCTIC_TRENCH)
+            .addOptional(HybridAquaticBiomes.FROZEN_TRENCH)
+        //#endregion
+
+        //#region Cold Oceans
         getOrCreateTagBuilder(HybridAquaticBiomeTags.COLD_OCEANS)
             .add(
                 Biomes.COLD_OCEAN,
                 Biomes.DEEP_COLD_OCEAN
             )
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_COLD_OCEANS)
-            .add(Biomes.DEEP_COLD_OCEAN)
-            .addOptional(HybridAquaticBiomes.COLD_ABYSSAL_PLAINS)
-
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS)
             .add(Biomes.COLD_OCEAN)
 
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_COLD_OCEANS)
+            .add(Biomes.DEEP_COLD_OCEAN)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.COLD_TRENCH)
+            .addOptional(HybridAquaticBiomes.COLD_TRENCH)
+        //#endregion
+
+        //#region Temperate Oceans
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TEMPERATE_OCEANS)
             .add(
                 Biomes.OCEAN,
                 Biomes.DEEP_OCEAN
             )
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS)
-            .add(Biomes.DEEP_OCEAN)
-            .addOptional(HybridAquaticBiomes.ABYSSAL_PLAINS)
-
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS)
             .add(Biomes.OCEAN)
 
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS)
+            .add(Biomes.DEEP_OCEAN)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.TEMPERATE_TRENCH)
+            .addOptional(HybridAquaticBiomes.TRENCH)
+        //#endregion
+
+        //#region Tropical Oceans
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TROPICAL_OCEANS)
             .add(
                 Biomes.LUKEWARM_OCEAN,
                 Biomes.DEEP_LUKEWARM_OCEAN
             )
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS)
-            .add(Biomes.DEEP_LUKEWARM_OCEAN)
-            .addOptional(HybridAquaticBiomes.LUKEWARM_ABYSSAL_PLAINS)
-
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS)
             .add(Biomes.LUKEWARM_OCEAN)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS)
+            .add(Biomes.DEEP_LUKEWARM_OCEAN)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS)
+            .add(Biomes.DEEP_LUKEWARM_OCEAN)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.TROPICAL_TRENCH)
+            .addOptional(HybridAquaticBiomes.LUKEWARM_TRENCH)
+            .addOptional(HybridAquaticBiomes.WARM_TRENCH)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.REEF)
             .add(Biomes.WARM_OCEAN)
             .addOptional(ResourceLocation("regions_unexplored", "rocky_reef"))
             .addOptional(ResourceLocation("biomeswevegone", "lush_stacks"))
+        //#endregion
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.JUNGLE)
             .forceAddTag(BiomeTags.IS_JUNGLE)
