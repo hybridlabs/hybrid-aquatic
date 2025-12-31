@@ -217,7 +217,16 @@ class ConfiguredFeatureProvider(
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
-                            SimpleStateProvider.simple(HybridAquaticBlocks.JUNGLE_LILY_PAD.get())
+                            WeightedStateProvider(
+                                SimpleWeightedRandomList.builder<BlockState>()
+                                    .add(
+                                        HybridAquaticBlocks.JUNGLE_LILY_PAD.get().defaultBlockState()
+                                            .setValue(WATERLOGGED, true), 2
+                                    ).add(
+                                        Blocks.LILY_PAD.defaultBlockState(), 1
+                                    )
+                                    .build()
+                            )
                         ),
                         BlockPredicate.matchesBlocks(Blocks.WATER)
                     )

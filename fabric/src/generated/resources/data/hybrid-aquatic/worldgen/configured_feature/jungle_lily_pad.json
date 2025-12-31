@@ -6,13 +6,24 @@
         "type": "minecraft:simple_block",
         "config": {
           "to_place": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "hybrid-aquatic:jungle_lily_pad",
-              "Properties": {
-                "waterlogged": "true"
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "hybrid-aquatic:jungle_lily_pad",
+                  "Properties": {
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 2
+              },
+              {
+                "data": {
+                  "Name": "minecraft:lily_pad"
+                },
+                "weight": 1
               }
-            }
+            ]
           }
         }
       },

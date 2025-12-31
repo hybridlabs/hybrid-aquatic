@@ -145,7 +145,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    CountPlacement.of(5),
+                    CountPlacement.of(3),
                     BiomeFilter.biome()
                 )
             )

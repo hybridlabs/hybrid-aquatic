@@ -90,12 +90,6 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
-                HybridAquaticBiomeTags.JUNGLE,
-                GenerationStep.Decoration.VEGETAL_DECORATION,
-                HybridAquaticPlacedFeatures.JUNGLE_LILY_PAD
-            ),
-
-            BiomeFeatureAddition(
                 HybridAquaticBiomeTags.REEF,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH

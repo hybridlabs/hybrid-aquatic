@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.BiomeDefaultFeatures
+import net.minecraft.data.worldgen.placement.AquaticPlacements
+import net.minecraft.data.worldgen.placement.VegetationPlacements
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.level.biome.Biome
@@ -25,10 +27,23 @@ class BiomeProvider(
         temperature: Float,
         downfall: Float,
         waterColor: Int,
-        waterFogColor: Int
+        waterFogColor: Int,
+        extraFeatures: (BiomeGenerationSettings.Builder.() -> Unit)? = null
     ): Biome {
+        val builder = BiomeGenerationSettings.Builder(
+            entries.placedFeatures(),
+            entries.configuredCarvers()
+        )
+
+        addStandardFeatures(builder)
+        BiomeDefaultFeatures.addDefaultOres(builder)
+        BiomeDefaultFeatures.addDefaultSoftDisks(builder)
+
+        extraFeatures?.invoke(builder)
+
         return Biome.BiomeBuilder()
             .generationSettings(makeGenerationSettings(entries))
+            .generationSettings(builder.build())
             .mobSpawnSettings(makeSpawnSettings())
             .hasPrecipitation(true)
             .temperature(temperature)
@@ -47,8 +62,6 @@ class BiomeProvider(
         addStandardFeatures(builder)
         BiomeDefaultFeatures.addDefaultOres(builder)
         BiomeDefaultFeatures.addDefaultSoftDisks(builder)
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,entries.ref(HybridAquaticPlacedFeatures.BOULDERS))
-        builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,entries.ref(HybridAquaticPlacedFeatures.TIDE_POOLS))
         return builder.build()
     }
 
@@ -120,7 +133,12 @@ class BiomeProvider(
                 downfall = 0.6f,
                 waterColor = 0x3FA7D6,
                 waterFogColor = 0x2E5D73
-            )
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(HybridAquaticPlacedFeatures.TIDE_POOLS)
+                )
+            }
         )
 
         entries.add(
