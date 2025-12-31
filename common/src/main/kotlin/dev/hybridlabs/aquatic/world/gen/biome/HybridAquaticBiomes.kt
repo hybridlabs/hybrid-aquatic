@@ -81,8 +81,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.DEPTH,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.0f,
-                    0.5f,
+                    0.1f,
+                    0.6f,
                     false
                 )
             )
