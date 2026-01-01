@@ -17,6 +17,13 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
     override fun addTags(arg: HolderLookup.Provider) {
         // spawn biomes
 
+        getOrCreateTagBuilder(BiomeTags.IS_DEEP_OCEAN)
+            .addOptional(HybridAquaticBiomes.TRENCH)
+            .addOptional(HybridAquaticBiomes.LUKEWARM_TRENCH)
+            .addOptional(HybridAquaticBiomes.WARM_TRENCH)
+            .addOptional(HybridAquaticBiomes.COLD_TRENCH)
+            .addOptional(HybridAquaticBiomes.FROZEN_TRENCH)
+
         getOrCreateTagBuilder(HybridAquaticBiomeTags.HAS_THERMAL_VENTS)
             .addOptional(HybridAquaticBiomes.SULFURIC_CAVES)
 
@@ -98,6 +105,8 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS)
             .add(Biomes.LUKEWARM_OCEAN)
+            .addOptional(ResourceLocation("still_life", "subtropical_shallow_ocean"))
+            .addOptional(ResourceLocation("still_life", "tropical_shallow_ocean"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS)
             .add(Biomes.DEEP_LUKEWARM_OCEAN)
