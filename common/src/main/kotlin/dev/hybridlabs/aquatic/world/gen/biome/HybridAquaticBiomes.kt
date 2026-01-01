@@ -22,6 +22,9 @@ object HybridAquaticBiomes {
     val TROPICAL_RIVER: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_river"))
     val TROPICAL_RIVER_SURFACE_RULE: RuleSource = ifTrue(isBiome(TROPICAL_RIVER), ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())))
 
+    val BRINE_LAGOON: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("brine_lagoon"))
+    val BRINE_LAGOON_SURFACE_RULE: RuleSource = ifTrue(isBiome(BRINE_LAGOON), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
+
     val TRENCH: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("trench"))
     val TRENCH_SURFACE_RULE: RuleSource = ifTrue(isBiome(TRENCH), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
 
@@ -135,8 +138,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.70f,
-                    -0.64f,
+                    -0.69f,
+                    -0.65f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -150,14 +153,42 @@ object HybridAquaticBiomes {
         )
 
         BiomePlacement.addSubOverworld(
+            Biomes.DEEP_OCEAN,
+            BRINE_LAGOON,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.69f,
+                    -0.65f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    0.0f,
+                    0.5f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
             Biomes.DEEP_LUKEWARM_OCEAN,
             LUKEWARM_TRENCH,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.70f,
-                    -0.64f,
+                    -0.69f,
+                    -0.65f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -177,8 +208,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.70f,
-                    -0.64f,
+                    -0.69f,
+                    -0.65f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -198,8 +229,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.70f,
-                    -0.64f,
+                    -0.69f,
+                    -0.65f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -219,8 +250,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.70f,
-                    -0.64f,
+                    -0.69f,
+                    -0.65f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -239,6 +270,7 @@ object HybridAquaticBiomes {
                 abovePreliminarySurface(),
                 sequence(
                     TIDE_POOL_SURFACE_RULE,
+                    BRINE_LAGOON_SURFACE_RULE,
                     TRENCH_SURFACE_RULE,
                     WARM_TRENCH_SURFACE_RULE,
                     LUKEWARM_TRENCH_SURFACE_RULE,
