@@ -34,6 +34,9 @@ object HybridAquaticItemGroups {
                 }
 
                 // blocks
+                entries.accept(HybridAquaticBlocks.SHORESTONE.get())
+                entries.accept(HybridAquaticBlocks.BARNACLE_SHORESTONE.get())
+
                 entries.accept(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get())
                 entries.accept(HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get())
                 entries.accept(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get())
@@ -122,6 +125,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get())
                 entries.accept(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get())
                 entries.accept(HybridAquaticItems.GIANT_CLAM.get())
+                entries.accept(HybridAquaticItems.OYSTER.get())
                 entries.accept(HybridAquaticItems.TUBE_SPONGE.get())
                 entries.accept(HybridAquaticItems.TUBE_WORM.get())
                 entries.accept(HybridAquaticItems.HYDROTHERMAL_VENT.get())

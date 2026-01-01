@@ -1,0 +1,32 @@
+{
+  "variants": {
+    "state=open,facing=east": {
+      "model": "hybrid-aquatic:block/oyster_open",
+      "y": 90
+    },
+    "state=open,facing=west": {
+      "model": "hybrid-aquatic:block/oyster_open",
+      "y": 90
+    },
+    "state=open,facing=north": {
+      "model": "hybrid-aquatic:block/oyster_open"
+    },
+    "state=open,facing=south": {
+      "model": "hybrid-aquatic:block/oyster_open"
+    },
+    "state=closed,facing=east": {
+      "model": "hybrid-aquatic:block/oyster_closed",
+      "y": 90
+    },
+    "state=closed,facing=west": {
+      "model": "hybrid-aquatic:block/oyster_closed",
+      "y": 90
+    },
+    "state=closed,facing=north": {
+      "model": "hybrid-aquatic:block/oyster_closed"
+    },
+    "state=closed,facing=south": {
+      "model": "hybrid-aquatic:block/oyster_closed"
+    }
+  }
+}

@@ -208,6 +208,7 @@ object HybridAquaticItems {
     }
 
     val GIANT_CLAM = registerBlockItem("giant_clam") { HybridAquaticBlocks.GIANT_CLAM.get() }
+    val OYSTER = registerBlockItem("oyster") { HybridAquaticBlocks.OYSTER.get() }
     val SARGASSUM = registerBlockItem("sargassum") { HybridAquaticBlocks.SARGASSUM.get() }
     val BULL_KELP = registerBlockItem("bull_kelp") { HybridAquaticBlocks.BULL_KELP.get() }
     val FLOATING_SARGASSUM =

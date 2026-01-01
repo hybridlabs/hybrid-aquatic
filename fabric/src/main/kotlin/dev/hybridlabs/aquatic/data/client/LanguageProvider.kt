@@ -163,6 +163,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.MARINE_SNOW.get() to "Marine Snow",
             HybridAquaticBlocks.BUOY.get() to "Buoy",
             HybridAquaticBlocks.GIANT_CLAM.get() to "Giant Clam",
+            HybridAquaticBlocks.OYSTER.get() to "Oyster",
 
             HybridAquaticBlocks.RED_ALGAE.get() to "Red Algae",
             HybridAquaticBlocks.TALL_RED_ALGAE.get() to "Tall Red Algae",

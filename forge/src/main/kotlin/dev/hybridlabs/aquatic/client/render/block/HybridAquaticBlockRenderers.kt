@@ -34,6 +34,7 @@ object HybridAquaticBlockRenderers {
 
             HybridAquaticBlocks.CRAB_POT.get(),
             HybridAquaticBlocks.GIANT_CLAM.get(),
+            HybridAquaticBlocks.OYSTER.get(),
             HybridAquaticBlocks.TUBE_WORM.get(),
 
             HybridAquaticBlocks.LOPHELIA_CORAL.get(),

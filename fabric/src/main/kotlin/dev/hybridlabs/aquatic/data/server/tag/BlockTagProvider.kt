@@ -97,6 +97,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.BLACK_PEARL_BLOCK.get())
             .add(HybridAquaticBlocks.THERMAL_VENT.get())
             .add(HybridAquaticBlocks.GIANT_CLAM.get())
+            .add(HybridAquaticBlocks.OYSTER.get())
             .add(HybridAquaticBlocks.SHORESTONE.get())
             .add(HybridAquaticBlocks.BARNACLE_SHORESTONE.get())
 

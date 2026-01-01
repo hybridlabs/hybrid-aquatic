@@ -96,6 +96,18 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
+                HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.OYSTER_BED
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.OYSTER_BED
+            ),
+
+            BiomeFeatureAddition(
                 BiomeTags.IS_OCEAN,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH

@@ -191,6 +191,18 @@ class PlacedFeatureProvider(
             )
         )
 
+        // giant clam patch
+        entries.add(
+            HybridAquaticPlacedFeatures.OYSTER_BED, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.OYSTER_BED), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    CountPlacement.of(1),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
         // sponge patch
         entries.add(
             HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH, PlacedFeature(

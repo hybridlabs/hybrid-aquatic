@@ -284,6 +284,36 @@ class ConfiguredFeatureProvider(
             )
         )
 
+        // giant clam patch
+        entries.add(
+            HybridAquaticConfiguredFeatures.OYSTER_BED,
+            ConfiguredFeature(
+                Feature.NO_BONEMEAL_FLOWER, RandomPatchConfiguration(
+                    2, 2, 2,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            WeightedStateProvider(
+                                SimpleWeightedRandomList.builder<BlockState>()
+                                    .add(
+                                        HybridAquaticBlocks.OYSTER.get().defaultBlockState()
+                                            .setValue(WATERLOGGED, true)
+                                            .setValue(HorizontalDirectionalBlock.FACING, Direction.EAST), 1
+                                    )
+                                    .add(
+                                        HybridAquaticBlocks.OYSTER.get().defaultBlockState()
+                                            .setValue(WATERLOGGED, true)
+                                            .setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH), 1
+                                    )
+                                    .build()
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
         // message in a bottle
         entries.add(
             HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE,

@@ -402,6 +402,14 @@ object HybridAquaticBlocks {
         )
     }
 
+    val OYSTER = register(
+        "oyster"
+    ) {
+        OysterBlock(
+            true, Properties.copy(Blocks.TUFF).noOcclusion().strength(1.0F).pushReaction(PushReaction.DESTROY)
+        )
+    }
+
     val BUOY =
         register(
             "buoy"
