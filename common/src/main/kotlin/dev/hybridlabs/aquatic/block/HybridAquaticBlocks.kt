@@ -66,7 +66,7 @@ object HybridAquaticBlocks {
         register(
             "shorestone"
         ) {
-            Block(Properties.copy(Blocks.TUFF)
+            Block(Properties.copy(Blocks.SANDSTONE)
             )
         }
 
@@ -74,7 +74,7 @@ object HybridAquaticBlocks {
         register(
             "barnacle_shorestone"
         ) {
-            Block(Properties.copy(Blocks.TUFF)
+            Block(Properties.copy(Blocks.SANDSTONE)
             )
         }
 
