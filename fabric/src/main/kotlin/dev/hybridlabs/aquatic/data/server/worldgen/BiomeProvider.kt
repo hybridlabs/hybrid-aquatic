@@ -124,6 +124,17 @@ class BiomeProvider(
         )
 
         entries.add(
+            HybridAquaticBiomes.SEAGRASS_BED,
+            create(
+                entries,
+                temperature = 0.95f,
+                downfall = 0.9f,
+                waterColor = 0x3FA7D6,
+                waterFogColor = 0x2E5D73
+            )
+        )
+
+        entries.add(
             HybridAquaticBiomes.TIDE_POOLS,
             create(
                 entries,

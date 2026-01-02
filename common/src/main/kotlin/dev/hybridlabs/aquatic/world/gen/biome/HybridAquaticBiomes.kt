@@ -19,6 +19,9 @@ object HybridAquaticBiomes {
     val TIDE_POOLS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tide_pools"))
     val TIDE_POOL_SURFACE_RULE: RuleSource = ifTrue(isBiome(TIDE_POOLS), state(Blocks.SAND.defaultBlockState()))
 
+    val SEAGRASS_BED: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("seagrass_bed"))
+    val SEAGRASS_BED_SURFACE_RULE: RuleSource = ifTrue(isBiome(SEAGRASS_BED), ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())))
+
     val TROPICAL_RIVER: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_river"))
     val TROPICAL_RIVER_SURFACE_RULE: RuleSource = ifTrue(isBiome(TROPICAL_RIVER), ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())))
 
@@ -61,6 +64,25 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofBiome(
                     SubBiomeMatcher.CriterionTargets.NEIGHBOR,
                     HybridAquaticBiomeTags.TROPICAL_OCEANS,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.WARM_OCEAN,
+            SEAGRASS_BED,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.EDGE,
+                    SubBiomeMatcher.CriterionTypes.RATIO,
+                    0.0f,
+                    0.5f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                     false
                 )
             )
@@ -540,6 +562,7 @@ object HybridAquaticBiomes {
                     COLD_TRENCH_SURFACE_RULE,
                     FROZEN_TRENCH_SURFACE_RULE,
                     TROPICAL_RIVER_SURFACE_RULE,
+                    SEAGRASS_BED_SURFACE_RULE,
                 )
             )
         )

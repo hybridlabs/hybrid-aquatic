@@ -76,7 +76,7 @@ class PlacedFeatureProvider(
             HybridAquaticPlacedFeatures.ANEMONES, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.ANEMONES), listOf(
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
                     RarityFilter.onAverageOnceEvery(10),
                     CountPlacement.of(1),
                     BiomeFilter.biome()
@@ -156,7 +156,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH), listOf(
                     NoiseBasedCountPlacement.of(10, 80.0, 0.0),
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
                     BiomeFilter.biome()
                 )
             )
@@ -167,7 +167,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH), listOf(
                     NoiseBasedCountPlacement.of(120, 100.0, 0.0),
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
                     BiomeFilter.biome()
                 )
             )

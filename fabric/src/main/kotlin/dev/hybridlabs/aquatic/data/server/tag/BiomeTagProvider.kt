@@ -17,6 +17,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
     override fun addTags(arg: HolderLookup.Provider) {
         // spawn biomes
 
+        getOrCreateTagBuilder(BiomeTags.IS_OCEAN)
+            .addOptional(HybridAquaticBiomes.SEAGRASS_BED)
+
         getOrCreateTagBuilder(BiomeTags.IS_DEEP_OCEAN)
             .addOptional(HybridAquaticBiomes.TRENCH)
             .addOptional(HybridAquaticBiomes.LUKEWARM_TRENCH)
@@ -107,6 +110,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS)
             .add(Biomes.LUKEWARM_OCEAN)
+            .addOptional(HybridAquaticBiomes.SEAGRASS_BED)
             .addOptional(ResourceLocation("still_life", "subtropical_shallow_ocean"))
             .addOptional(ResourceLocation("still_life", "tropical_shallow_ocean"))
 
@@ -197,5 +201,8 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TIDE_POOLS)
             .addOptional(HybridAquaticBiomes.TIDE_POOLS)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.SEAGRASS_BED)
+            .addOptional(HybridAquaticBiomes.SEAGRASS_BED)
     }
 }

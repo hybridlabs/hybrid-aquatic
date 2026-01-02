@@ -240,7 +240,8 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.NEEDLEFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
+                HybridAquaticBiomeTags.TROPICAL_OCEANS,
+                HybridAquaticBiomeTags.SEAGRASS_BED),
             4, 1, 4
         )
 
@@ -301,7 +302,8 @@ class EntitySpawnConfigGenerator {
         addFish(
             HybridAquaticEntityTypes.SEAHORSE.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HybridAquaticBiomeTags.REEF,
+                HybridAquaticBiomeTags.SEAGRASS_BED),
             1, 1, 2
         )
 
@@ -309,7 +311,8 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.SEADRAGON.get(),
             listOf(
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
+                HybridAquaticBiomeTags.SEAGRASS_BED),
             1, 1, 2
         )
 
@@ -323,7 +326,8 @@ class EntitySpawnConfigGenerator {
         addFish(
             HybridAquaticEntityTypes.STONEFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HybridAquaticBiomeTags.REEF,
+                HybridAquaticBiomeTags.SEAGRASS_BED),
             3, 1, 2
         )
 
@@ -331,14 +335,16 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.STINGRAY.get(),
             listOf(
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.REEF),
+                HybridAquaticBiomeTags.REEF,
+                HybridAquaticBiomeTags.SEAGRASS_BED),
             2, 1, 2
         )
 
         addFish(
             HybridAquaticEntityTypes.BLOWFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HybridAquaticBiomeTags.REEF,
+                HybridAquaticBiomeTags.SEAGRASS_BED),
             3, 1, 2
         )
 
@@ -366,7 +372,8 @@ class EntitySpawnConfigGenerator {
         addFish(
             HybridAquaticEntityTypes.TRIGGERFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HybridAquaticBiomeTags.REEF,
+                HybridAquaticBiomeTags.SEAGRASS_BED),
             3, 1, 1
         )
 
@@ -380,7 +387,8 @@ class EntitySpawnConfigGenerator {
         addFish(
             HybridAquaticEntityTypes.MORAY_EEL.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HybridAquaticBiomeTags.REEF,
+                HybridAquaticBiomeTags.SEAGRASS_BED),
             3, 1, 2
         )
 
