@@ -6,9 +6,9 @@ import net.minecraft.resources.ResourceLocation
 class OceanSunfishEntityModel : HybridAquaticFishEntityModel<OceanSunfishEntity>("ocean_sunfish") {
 
     private val OCEAN_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/ocean_sunfish.png")
-    private val HOODWINKER_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/hoodwinker_sunfish.png")
-    private val SHARPTAIL_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/sharptail_sunfish.png")
-    private val GIANT_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/giant_sunfish.png")
+    private val HOODWINKER_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/hoodwinker_ocean_sunfish.png")
+    private val SHARPTAIL_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/sharptail_ocean_sunfish.png")
+    private val GIANT_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/giant_ocean_sunfish.png")
 
     private val SUNFISH_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/fish/ocean_sunfish/ocean_sunfish.geo.json")
     private val HOODWINKER_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/fish/ocean_sunfish/ocean_sunfish_hoodwinker.geo.json")
