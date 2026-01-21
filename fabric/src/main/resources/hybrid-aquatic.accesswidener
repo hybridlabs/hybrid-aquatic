@@ -27,3 +27,4 @@ accessible method net/minecraft/client/renderer/blockentity/BlockEntityRenderers
 accessible field net/minecraft/world/level/levelgen/structure/Structure settings Lnet/minecraft/world/level/levelgen/structure/Structure$StructureSettings;
 mutable field net/minecraft/world/level/levelgen/structure/Structure settings Lnet/minecraft/world/level/levelgen/structure/Structure$StructureSettings;
 mutable field net/minecraft/world/level/levelgen/structure/Structure$StructureSettings spawnOverrides Ljava/util/Map;
+accessible method net/minecraft/item/map/MapState addIcon (Lnet/minecraft/item/map/MapIcon$Type;Lnet/minecraft/world/WorldAccess;Ljava/lang/String;DDDLnet/minecraft/text/Text;)V

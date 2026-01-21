@@ -9,6 +9,8 @@
         "EntityMixin",
         "FishingBobberEntityMixin",
         "FishingRodItemMixin",
+        "MapItemSavedDataAccessor",
+        "MapItemSavedDataMixin",
         "PlayerEntityMixin",
         "ServerPlayerEntityMixin"
     ],
