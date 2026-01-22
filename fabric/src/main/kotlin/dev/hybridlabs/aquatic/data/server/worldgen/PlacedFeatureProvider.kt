@@ -67,7 +67,6 @@ class PlacedFeatureProvider(
                     SurfaceWaterDepthFilter.forMaxDepth(6),
                     BiomeFilter.biome()
                 )
-
             )
         )
 

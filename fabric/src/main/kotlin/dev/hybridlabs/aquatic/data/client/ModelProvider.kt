@@ -94,6 +94,12 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.MARINE_SNOW.get(),
             ).forEach(generator::createTrivialCube)
 
+            setOf(
+                HybridAquaticBlocks.GRASSY_SAND.get(),
+            ).forEach { block ->
+                generator.createTrivialBlock(block, TexturedModel.CUBE_TOP_BOTTOM)
+            }
+
             // crates
             setOf(
                 HybridAquaticBlocks.HYBRID_CRATE.get(),

@@ -6,12 +6,12 @@
       "minecraft:canyon"
     ]
   },
-  "downfall": 0.9,
+  "downfall": 0.5,
   "effects": {
     "fog_color": 12638463,
     "sky_color": 7907327,
-    "water_color": 4171734,
-    "water_fog_color": 3038579
+    "water_color": 4020182,
+    "water_fog_color": 329011
   },
   "features": [
     [],
@@ -68,7 +68,7 @@
     ],
     [
       "minecraft:freeze_top_layer",
-      "minecraft:forest_rock"
+      "minecraft:small_basalt_columns"
     ]
   ],
   "has_precipitation": true,
@@ -156,5 +156,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.95
+  "temperature": 0.5
 }

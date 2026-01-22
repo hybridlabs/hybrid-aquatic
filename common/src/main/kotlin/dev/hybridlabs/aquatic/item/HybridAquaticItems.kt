@@ -332,8 +332,11 @@ object HybridAquaticItems {
     val GLOWSLIME_BLOCK = registerBlockItem("glowslime_block") { HybridAquaticBlocks.GLOWSLIME_BLOCK.get() }
     val PEARL_BLOCK = registerBlockItem("pearl_block") { HybridAquaticBlocks.PEARL_BLOCK.get() }
     val BLACK_PEARL_BLOCK = registerBlockItem("black_pearl_block") { HybridAquaticBlocks.BLACK_PEARL_BLOCK.get() }
+
+    val GRASSY_SAND = registerBlockItem("grassy_sand") { HybridAquaticBlocks.GRASSY_SAND.get() }
     val SHORESTONE = registerBlockItem("shorestone") { HybridAquaticBlocks.SHORESTONE.get() }
     val BARNACLE_SHORESTONE = registerBlockItem("barnacle_shorestone") { HybridAquaticBlocks.BARNACLE_SHORESTONE.get() }
+
     val MARINE_SNOW = registerBlockItem("marine_snow") { HybridAquaticBlocks.MARINE_SNOW.get() }
     val BUOY = registerPlaceableInWaterBlockItem("buoy") { HybridAquaticBlocks.BUOY.get() }
     val RAFT = registerPlaceableInWaterBlockItem("raft") { HybridAquaticBlocks.RAFT.get() }

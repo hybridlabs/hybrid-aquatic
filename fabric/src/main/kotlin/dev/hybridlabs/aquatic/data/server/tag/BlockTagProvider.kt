@@ -116,6 +116,9 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.CHERRY_CRATE.get())
             .add(HybridAquaticBlocks.BAMBOO_CRATE.get())
 
+        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_SHOVEL)
+            .add(HybridAquaticBlocks.GRASSY_SAND.get())
+
         getOrCreateTagBuilder(BlockTags.LOGS)
             .add(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get())
             .add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get())

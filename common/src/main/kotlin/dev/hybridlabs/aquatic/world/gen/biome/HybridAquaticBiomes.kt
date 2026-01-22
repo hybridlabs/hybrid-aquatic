@@ -19,11 +19,33 @@ object HybridAquaticBiomes {
     val TIDE_POOLS: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tide_pools"))
     val TIDE_POOL_SURFACE_RULE: RuleSource = ifTrue(isBiome(TIDE_POOLS), state(Blocks.SAND.defaultBlockState()))
 
+    val BASALT_BEACH: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("basalt_beach"))
+    val BASALT_BEACH_SURFACE_RULE: RuleSource = ifTrue(
+        isBiome(BASALT_BEACH),
+        sequence(
+            ifTrue(ON_FLOOR, state(Blocks.BASALT.defaultBlockState())),
+            ifTrue(UNDER_FLOOR, state(Blocks.BASALT.defaultBlockState())),
+            ifTrue(DEEP_UNDER_FLOOR, state(Blocks.BASALT.defaultBlockState()))
+        )
+    )
+
     val SEAGRASS_BED: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("seagrass_bed"))
-    val SEAGRASS_BED_SURFACE_RULE: RuleSource = ifTrue(isBiome(SEAGRASS_BED), ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())))
+    val SEAGRASS_BED_SURFACE_RULE: RuleSource = ifTrue(isBiome(SEAGRASS_BED), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.GRASSY_SAND.get().defaultBlockState())))
+
+    val PLACER_RIVER: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("placer_river"))
+    val PLACER_RIVER_SURFACE_RULE: RuleSource = ifTrue(isBiome(PLACER_RIVER),
+        sequence(
+            ifTrue(ON_FLOOR, state(Blocks.RED_SAND.defaultBlockState())),
+            ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
+            ifTrue(DEEP_UNDER_FLOOR, state(Blocks.TERRACOTTA.defaultBlockState()))
+        )
+    )
 
     val TROPICAL_RIVER: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_river"))
     val TROPICAL_RIVER_SURFACE_RULE: RuleSource = ifTrue(isBiome(TROPICAL_RIVER), ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())))
+
+    val COLD_RIVER: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_river"))
+    val COLD_RIVER_SURFACE_RULE: RuleSource = ifTrue(isBiome(COLD_RIVER), ifTrue(ON_FLOOR, state(Blocks.GRAVEL.defaultBlockState())))
 
     val BRINE_LAGOON: ResourceKey<Biome?> = ResourceKey.create(Registries.BIOME, CommonClass.locate("brine_lagoon"))
     val BRINE_LAGOON_SURFACE_RULE: RuleSource = ifTrue(isBiome(BRINE_LAGOON), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
@@ -50,6 +72,155 @@ object HybridAquaticBiomes {
         ResourceKey.create(Registries.BIOME, CommonClass.locate("sulfuric_trench"))
 
     fun addBiomes() {
+
+        //#region River Generation Fixes
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            Biomes.OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    Biomes.OCEAN,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            Biomes.OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    Biomes.DEEP_OCEAN,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            Biomes.COLD_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    Biomes.COLD_OCEAN,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            Biomes.DEEP_COLD_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    Biomes.COLD_OCEAN,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            Biomes.FROZEN_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    Biomes.FROZEN_OCEAN,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            Biomes.FROZEN_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    Biomes.DEEP_FROZEN_OCEAN,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            Biomes.LUKEWARM_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    Biomes.LUKEWARM_OCEAN,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            Biomes.LUKEWARM_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    Biomes.DEEP_LUKEWARM_OCEAN,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            Biomes.WARM_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    Biomes.WARM_OCEAN,
+                    false
+                )
+            )
+        )
+        //#endregion
+
+        //#region New Rivers
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            PLACER_RIVER,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    BiomeTags.IS_BADLANDS,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            TROPICAL_RIVER,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    BiomeTags.IS_JUNGLE,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            COLD_RIVER,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    BiomeTags.IS_TAIGA,
+                    false
+                )
+            )
+        )
+        //#endregion
+
         BiomePlacement.addSubOverworld(
             Biomes.BEACH,
             TIDE_POOLS,
@@ -83,18 +254,6 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofBiome(
                     SubBiomeMatcher.CriterionTargets.NEIGHBOR,
                     HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            Biomes.RIVER,
-            TROPICAL_RIVER,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofBiome(
-                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
-                    BiomeTags.IS_JUNGLE,
                     false
                 )
             )
@@ -554,15 +713,19 @@ object HybridAquaticBiomes {
             ifTrue(
                 abovePreliminarySurface(),
                 sequence(
+                    BASALT_BEACH_SURFACE_RULE,
                     TIDE_POOL_SURFACE_RULE,
                     BRINE_LAGOON_SURFACE_RULE,
                     TRENCH_SURFACE_RULE,
-                    WARM_TRENCH_SURFACE_RULE,
                     LUKEWARM_TRENCH_SURFACE_RULE,
+                    WARM_TRENCH_SURFACE_RULE,
                     COLD_TRENCH_SURFACE_RULE,
                     FROZEN_TRENCH_SURFACE_RULE,
-                    TROPICAL_RIVER_SURFACE_RULE,
                     SEAGRASS_BED_SURFACE_RULE,
+
+                    PLACER_RIVER_SURFACE_RULE,
+                    TROPICAL_RIVER_SURFACE_RULE,
+                    COLD_RIVER_SURFACE_RULE,
                 )
             )
         )

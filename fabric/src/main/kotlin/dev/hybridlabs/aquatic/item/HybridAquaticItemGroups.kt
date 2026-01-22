@@ -34,6 +34,7 @@ object HybridAquaticItemGroups {
                 }
 
                 // blocks
+                entries.accept(HybridAquaticBlocks.GRASSY_SAND.get())
                 entries.accept(HybridAquaticBlocks.SHORESTONE.get())
                 entries.accept(HybridAquaticBlocks.BARNACLE_SHORESTONE.get())
 

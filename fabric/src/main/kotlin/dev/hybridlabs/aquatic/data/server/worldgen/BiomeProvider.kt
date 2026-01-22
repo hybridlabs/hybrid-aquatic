@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.BiomeDefaultFeatures
+import net.minecraft.data.worldgen.placement.MiscOverworldPlacements
+import net.minecraft.data.worldgen.placement.NetherPlacements
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.level.biome.Biome
@@ -113,6 +115,22 @@ class BiomeProvider(
         entries: Entries
     ) {
         entries.add(
+            HybridAquaticBiomes.COLD_RIVER,
+            create(
+                entries,
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x3D57D6,
+                waterFogColor = 0x050533
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                    entries.ref(MiscOverworldPlacements.FOREST_ROCK)
+                )
+            }
+        )
+
+        entries.add(
             HybridAquaticBiomes.TROPICAL_RIVER,
             create(
                 entries,
@@ -120,7 +138,28 @@ class BiomeProvider(
                 downfall = 0.9f,
                 waterColor = 0x3F76E4,
                 waterFogColor = 0x3F76E4
-            )
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                    entries.ref(MiscOverworldPlacements.FOREST_ROCK)
+                )
+            }
+        )
+
+        entries.add(
+            HybridAquaticBiomes.PLACER_RIVER,
+            create(
+                entries,
+                temperature = 0.95f,
+                downfall = 0.9f,
+                waterColor = 0x3F76E4,
+                waterFogColor = 0x3F76E4
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                    entries.ref(MiscOverworldPlacements.FOREST_ROCK)
+                )
+            }
         )
 
         entries.add(
@@ -131,7 +170,12 @@ class BiomeProvider(
                 downfall = 0.9f,
                 waterColor = 0x3FA7D6,
                 waterFogColor = 0x2E5D73
-            )
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                    entries.ref(MiscOverworldPlacements.FOREST_ROCK)
+                )
+            }
         )
 
         entries.add(
@@ -146,6 +190,22 @@ class BiomeProvider(
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     entries.ref(HybridAquaticPlacedFeatures.TIDE_POOLS)
+                )
+            }
+        )
+
+        entries.add(
+            HybridAquaticBiomes.BASALT_BEACH,
+            create(
+                entries,
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x3D57D6,
+                waterFogColor = 0x050533
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                    entries.ref(NetherPlacements.SMALL_BASALT_COLUMNS)
                 )
             }
         )
