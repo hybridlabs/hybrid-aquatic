@@ -222,6 +222,18 @@ object HybridAquaticBiomes {
         //#endregion
 
         BiomePlacement.addSubOverworld(
+            Biomes.STONY_SHORE,
+            BASALT_BEACH,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    BiomeTags.IS_OCEAN,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
             Biomes.BEACH,
             TIDE_POOLS,
             SubBiomeMatcher.of(
