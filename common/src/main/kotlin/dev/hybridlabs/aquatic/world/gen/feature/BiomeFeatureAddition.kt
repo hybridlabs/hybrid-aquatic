@@ -120,6 +120,12 @@ data class BiomeFeatureAddition(
 
             BiomeFeatureAddition(
                 HybridAquaticBiomeTags.REEF,
+                GenerationStep.Decoration.SURFACE_STRUCTURES,
+                HybridAquaticPlacedFeatures.SPIRE
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.REEF,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.OYSTER_BED
             ),

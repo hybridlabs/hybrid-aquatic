@@ -73,6 +73,18 @@ class PlacedFeatureProvider(
             )
         )
 
+        // anemone patch
+        entries.add(
+            HybridAquaticPlacedFeatures.SPIRE, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.SPIRE), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    CountPlacement.of(1),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
         entries.add(
             HybridAquaticPlacedFeatures.DUNEGRASS_PATCH, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH), listOf(

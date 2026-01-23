@@ -44,8 +44,15 @@ class ConfiguredFeatureProvider(
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
 
-        // anemone patch
+        entries.add(
+            HybridAquaticConfiguredFeatures.SPIRE,
+            ConfiguredFeature(
+                HybridAquaticFeatures.SPIRE.get(),
+                NoneFeatureConfiguration.INSTANCE
+            )
+        )
 
+        // anemone patch
         val ANEMONES = entries.add(
             HybridAquaticConfiguredFeatures.ANEMONES,
             ConfiguredFeature(
