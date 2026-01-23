@@ -159,6 +159,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.CHERRY_CRATE.get() to "Cherry Crate",
             HybridAquaticBlocks.BAMBOO_CRATE.get() to "Bamboo Crate",
             HybridAquaticBlocks.GRASSY_SAND.get() to "Grassy Sand",
+            HybridAquaticBlocks.CORALSTONE.get() to "Coralstone",
             HybridAquaticBlocks.SHORESTONE.get() to "Shorestone",
             HybridAquaticBlocks.BARNACLE_SHORESTONE.get() to "Barnacle Shorestone",
             HybridAquaticBlocks.MARINE_SNOW.get() to "Marine Snow",
@@ -166,6 +167,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.GIANT_CLAM.get() to "Giant Clam",
             HybridAquaticBlocks.OYSTER.get() to "Oyster",
 
+            HybridAquaticBlocks.SHORT_RED_ALGAE.get() to "Short Red Algae",
             HybridAquaticBlocks.RED_ALGAE.get() to "Red Algae",
             HybridAquaticBlocks.TALL_RED_ALGAE.get() to "Tall Red Algae",
 

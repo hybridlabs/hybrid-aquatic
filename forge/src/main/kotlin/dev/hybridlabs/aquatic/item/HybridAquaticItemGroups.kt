@@ -36,13 +36,12 @@ object HybridAquaticItemGroups {
                 }
 
                 // blocks
-                entries.accept(HybridAquaticBlocks.GRASSY_SAND.get())
-                entries.accept(HybridAquaticBlocks.SHORESTONE.get())
-                entries.accept(HybridAquaticBlocks.BARNACLE_SHORESTONE.get())
-                entries.accept(HybridAquaticBlocks.BLACK_SAND.get())
-                entries.accept(HybridAquaticBlocks.BLACK_SANDSTONE.get())
                 entries.accept(HybridAquaticBlocks.WHITE_SAND.get())
                 entries.accept(HybridAquaticBlocks.WHITE_SANDSTONE.get())
+                entries.accept(HybridAquaticBlocks.GRASSY_SAND.get())
+                entries.accept(HybridAquaticBlocks.CORALSTONE.get())
+                entries.accept(HybridAquaticBlocks.SHORESTONE.get())
+                entries.accept(HybridAquaticBlocks.BARNACLE_SHORESTONE.get())
 
                 entries.accept(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get())
                 entries.accept(HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get())

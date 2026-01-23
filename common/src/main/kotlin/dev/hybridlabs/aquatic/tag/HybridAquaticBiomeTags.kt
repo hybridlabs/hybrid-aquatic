@@ -24,6 +24,7 @@ object HybridAquaticBiomeTags {
     val DEEP_TEMPERATE_OCEANS = create("deep_temperate_oceans")
     val TEMPERATE_TRENCH = create("temperate_trench")
 
+    val WARM_OCEAN = create("warm_ocean")
     val TROPICAL_OCEANS = create("tropical_oceans")
     val SHALLOW_TROPICAL_OCEANS = create("shallow_tropical_oceans")
     val DEEP_TROPICAL_OCEANS = create("deep_tropical_oceans")
@@ -43,7 +44,8 @@ object HybridAquaticBiomeTags {
     val SANDY_BEACHES = create("sandy_beaches")
     val ROCKY_BEACHES = create("rocky_beaches")
     val TIDE_POOLS = create("tide_pools")
-    val SEAGRASS_BED = create("seagrass_bed")
+    val SEAGRASS_MEADOW = create("seagrass_meadow")
+    val RED_MEADOW = create("red_meadow")
 
     private fun create(id: String): TagKey<Biome> {
         return TagKey.create(Registries.BIOME, CommonClass.locate(id))

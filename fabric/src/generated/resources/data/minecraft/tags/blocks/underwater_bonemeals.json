@@ -1,8 +1,7 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:red_algae",
-    "hybrid-aquatic:sea_lettuce",
+    "hybrid-aquatic:short_red_algae",
     "hybrid-aquatic:red_algae",
     "hybrid-aquatic:sea_lettuce"
   ]

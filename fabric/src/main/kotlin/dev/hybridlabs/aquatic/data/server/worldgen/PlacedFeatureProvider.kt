@@ -7,28 +7,19 @@ import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
+import net.minecraft.data.worldgen.features.AquaticFeatures
 import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.util.valueproviders.ClampedInt
 import net.minecraft.util.valueproviders.ClampedNormalInt
 import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.VerticalAnchor
-import net.minecraft.world.level.levelgen.placement.BiomeFilter
-import net.minecraft.world.level.levelgen.placement.CountOnEveryLayerPlacement
-import net.minecraft.world.level.levelgen.placement.CountPlacement
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement
-import net.minecraft.world.level.levelgen.placement.InSquarePlacement
-import net.minecraft.world.level.levelgen.placement.NoiseBasedCountPlacement
-import net.minecraft.world.level.levelgen.placement.PlacedFeature
-import net.minecraft.world.level.levelgen.placement.PlacementModifier
-import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement
-import net.minecraft.world.level.levelgen.placement.RarityFilter
-import net.minecraft.world.level.levelgen.placement.SurfaceRelativeThresholdFilter
-import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter
+import net.minecraft.world.level.levelgen.placement.*
 import java.util.concurrent.CompletableFuture
 
 class PlacedFeatureProvider(
-    output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>
+    output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
 
@@ -75,7 +66,7 @@ class PlacedFeatureProvider(
             HybridAquaticPlacedFeatures.ANEMONES, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.ANEMONES), listOf(
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
                     RarityFilter.onAverageOnceEvery(10),
                     CountPlacement.of(1),
                     BiomeFilter.biome()
@@ -163,10 +154,11 @@ class PlacedFeatureProvider(
 
         entries.add(
             HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH), listOf(
-                    NoiseBasedCountPlacement.of(120, 100.0, 0.0),
+                entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_MEADOW), listOf(
+                    RarityFilter.onAverageOnceEvery(7),
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    CountPlacement.of(ClampedInt.of(UniformInt.of(-1, 3), 0, 3)),
                     BiomeFilter.biome()
                 )
             )
@@ -228,8 +220,19 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
-                    CountOnEveryLayerPlacement.of(5),
-                    SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
+                    CountPlacement.of(5),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        // corals
+        entries.add(
+            HybridAquaticPlacedFeatures.CORAL_REEF, PlacedFeature(
+                entries.ref(AquaticFeatures.WARM_OCEAN_VEGETATION), listOf(
+                    CountPlacement.of(10),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
                     BiomeFilter.biome()
                 )
             )

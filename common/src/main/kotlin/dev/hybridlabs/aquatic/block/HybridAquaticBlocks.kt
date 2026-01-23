@@ -63,7 +63,11 @@ object HybridAquaticBlocks {
         )
     }
 
+    val WHITE_SAND = register("white_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
+    val WHITE_SANDSTONE = register("white_sandstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
+
     val GRASSY_SAND = register("grassy_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
+    val CORALSTONE = register("coralstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
     val SHORESTONE = register("shorestone") { Block(Properties.copy(Blocks.SANDSTONE)) }
     val BARNACLE_SHORESTONE = register("barnacle_shorestone") { Block(Properties.copy(Blocks.SANDSTONE)) }
 
@@ -166,6 +170,7 @@ object HybridAquaticBlocks {
     }
 
 
+    val SHORT_RED_ALGAE = register("short_red_algae") { ShortRedAlgaeBlock(Properties.copy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
     val RED_ALGAE = register("red_algae") { RedAlgaeBlock(Properties.copy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
     val TALL_RED_ALGAE = register("tall_red_algae") { TallRedAlgaeBlock(Properties.copy(Blocks.TALL_SEAGRASS).offsetType(BlockBehaviour.OffsetType.NONE)) }
 

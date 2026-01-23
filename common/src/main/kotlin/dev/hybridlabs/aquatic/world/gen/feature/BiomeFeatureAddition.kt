@@ -35,20 +35,16 @@ data class BiomeFeatureAddition(
                 HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.FLOATING_SARGASSUM
-            ), BiomeFeatureAddition(
+            ),
+
+            BiomeFeatureAddition(
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.BULL_KELP
             ),
 
             BiomeFeatureAddition(
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
-                GenerationStep.Decoration.VEGETAL_DECORATION,
-                HybridAquaticPlacedFeatures.RED_ALGAE_PATCH
-            ),
-
-            BiomeFeatureAddition(
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
+                HybridAquaticBiomeTags.RED_MEADOW,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW
             ),
@@ -60,7 +56,7 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
-                HybridAquaticBiomeTags.REEF,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH
             ),
@@ -89,6 +85,7 @@ data class BiomeFeatureAddition(
                 HybridAquaticPlacedFeatures.JUNGLE_LILY_PAD
             ),
 
+            //#region Giant Clams
             BiomeFeatureAddition(
                 HybridAquaticBiomeTags.REEF,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
@@ -96,7 +93,45 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.RED_MEADOW,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+            ),
+            //#endregion
+
+            //#region Oyster Beds
+            BiomeFeatureAddition(
                 HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.OYSTER_BED
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.WARM_OCEAN,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.OYSTER_BED
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.REEF,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.OYSTER_BED
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.OYSTER_BED
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.RED_MEADOW,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.OYSTER_BED
             ),
@@ -106,6 +141,7 @@ data class BiomeFeatureAddition(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.OYSTER_BED
             ),
+            //#endregion
 
             BiomeFeatureAddition(
                 BiomeTags.IS_OCEAN,
@@ -123,9 +159,13 @@ data class BiomeFeatureAddition(
                 HybridAquaticBiomeTags.HAS_THERMAL_VENTS,
                 GenerationStep.Decoration.SURFACE_STRUCTURES,
                 HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.RED_MEADOW,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW
             )
-
         )
-
     }
 }

@@ -6,12 +6,12 @@
       "minecraft:canyon"
     ]
   },
-  "downfall": 0.9,
+  "downfall": 0.5,
   "effects": {
     "fog_color": 12638463,
     "sky_color": 7907327,
-    "water_color": 4171734,
-    "water_fog_color": 3038579
+    "water_color": 4445678,
+    "water_fog_color": 270131
   },
   "features": [
     [],
@@ -64,7 +64,9 @@
       "minecraft:spring_lava"
     ],
     [
-      "minecraft:glow_lichen"
+      "minecraft:glow_lichen",
+      "minecraft:seagrass_warm",
+      "minecraft:sea_pickle"
     ],
     [
       "minecraft:freeze_top_layer",
@@ -156,5 +158,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.95
+  "temperature": 0.5
 }

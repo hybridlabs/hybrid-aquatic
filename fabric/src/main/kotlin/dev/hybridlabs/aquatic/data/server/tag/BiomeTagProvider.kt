@@ -17,8 +17,15 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
     override fun addTags(arg: HolderLookup.Provider) {
         // spawn biomes
 
+        getOrCreateTagBuilder(BiomeTags.HAS_SHIPWRECK)
+            .addOptional(HybridAquaticBiomes.SEAGRASS_BED)
+            .addOptional(HybridAquaticBiomes.RED_MEADOW)
+            .addOptional(HybridAquaticBiomes.CORAL_REEF)
+
         getOrCreateTagBuilder(BiomeTags.IS_OCEAN)
             .addOptional(HybridAquaticBiomes.SEAGRASS_BED)
+            .addOptional(HybridAquaticBiomes.RED_MEADOW)
+            .addOptional(HybridAquaticBiomes.CORAL_REEF)
 
         getOrCreateTagBuilder(BiomeTags.IS_RIVER)
             .addOptional(HybridAquaticBiomes.PLACER_RIVER)
@@ -118,7 +125,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Biomes.LUKEWARM_OCEAN)
             .addOptional(ResourceLocation("still_life", "subtropical_shallow_ocean"))
             .addOptional(ResourceLocation("still_life", "tropical_shallow_ocean"))
-            .addOptional(HybridAquaticBiomes.SEAGRASS_BED)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.WARM_OCEAN)
+            .add(Biomes.WARM_OCEAN)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS)
             .add(Biomes.DEEP_LUKEWARM_OCEAN)
@@ -131,7 +140,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.WARM_TRENCH)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.REEF)
-            .add(Biomes.WARM_OCEAN)
+            .addOptional(HybridAquaticBiomes.CORAL_REEF)
             .addOptional(ResourceLocation("regions_unexplored", "rocky_reef"))
             .addOptional(ResourceLocation("biomeswevegone", "lush_stacks"))
         //#endregion
@@ -210,7 +219,10 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TIDE_POOLS)
             .addOptional(HybridAquaticBiomes.TIDE_POOLS)
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.SEAGRASS_BED)
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.SEAGRASS_MEADOW)
             .addOptional(HybridAquaticBiomes.SEAGRASS_BED)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.RED_MEADOW)
+            .addOptional(HybridAquaticBiomes.RED_MEADOW)
     }
 }

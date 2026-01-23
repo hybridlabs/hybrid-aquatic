@@ -12,6 +12,28 @@
                 "data": {
                   "Name": "hybrid-aquatic:oyster",
                   "Properties": {
+                    "facing": "north",
+                    "state": "open",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid-aquatic:oyster",
+                  "Properties": {
+                    "facing": "south",
+                    "state": "open",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid-aquatic:oyster",
+                  "Properties": {
                     "facing": "east",
                     "state": "open",
                     "waterlogged": "true"
@@ -23,7 +45,7 @@
                 "data": {
                   "Name": "hybrid-aquatic:oyster",
                   "Properties": {
-                    "facing": "north",
+                    "facing": "west",
                     "state": "open",
                     "waterlogged": "true"
                   }

@@ -64,7 +64,8 @@
       "minecraft:spring_lava"
     ],
     [
-      "minecraft:glow_lichen"
+      "minecraft:glow_lichen",
+      "minecraft:seagrass_river"
     ],
     [
       "minecraft:freeze_top_layer",

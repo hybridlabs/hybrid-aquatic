@@ -31,6 +31,7 @@ object HybridAquaticPlacedFeatures {
     val OYSTER_BED = register("oyster_bed")
 
     val THERMAL_VENT_PATCH = register("thermal_vent_patch")
+    val CORAL_REEF = register("coral_reef")
 
     val TUBE_SPONGE_PATCH = register("sponge_patch")
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")

@@ -89,6 +89,8 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             setOf(
                 HybridAquaticBlocks.PEARL_BLOCK.get(),
                 HybridAquaticBlocks.BLACK_PEARL_BLOCK.get(),
+                HybridAquaticBlocks.WHITE_SAND.get(),
+                HybridAquaticBlocks.CORALSTONE.get(),
                 HybridAquaticBlocks.SHORESTONE.get(),
                 HybridAquaticBlocks.BARNACLE_SHORESTONE.get(),
                 HybridAquaticBlocks.MARINE_SNOW.get(),
@@ -96,6 +98,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
             setOf(
                 HybridAquaticBlocks.GRASSY_SAND.get(),
+                HybridAquaticBlocks.WHITE_SANDSTONE.get(),
             ).forEach { block ->
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP_BOTTOM)
             }

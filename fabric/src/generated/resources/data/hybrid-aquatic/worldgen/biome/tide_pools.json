@@ -65,7 +65,8 @@
     ],
     [
       "minecraft:glow_lichen",
-      "hybrid-aquatic:tide_pools"
+      "hybrid-aquatic:tide_pools",
+      "minecraft:sea_pickle"
     ],
     [
       "minecraft:freeze_top_layer"

@@ -1,0 +1,49 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:noise_provider",
+            "noise": {
+              "amplitudes": [
+                1.0
+              ],
+              "firstOctave": -4
+            },
+            "scale": 1.0,
+            "seed": 237,
+            "states": [
+              {
+                "Name": "hybrid-aquatic:short_red_algae"
+              },
+              {
+                "Name": "hybrid-aquatic:red_algae"
+              },
+              {
+                "Name": "hybrid-aquatic:tall_red_algae",
+                "Properties": {
+                  "half": "lower"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        }
+      ]
+    },
+    "tries": 500,
+    "xz_spread": 10,
+    "y_spread": 10
+  }
+}

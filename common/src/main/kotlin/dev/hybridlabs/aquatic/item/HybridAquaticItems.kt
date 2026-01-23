@@ -216,6 +216,7 @@ object HybridAquaticItems {
     val WATER_LETTUCE = registerPlaceableInWaterBlockItem("water_lettuce") { HybridAquaticBlocks.WATER_LETTUCE.get() }
     val JUNGLE_LILY_PAD =
         registerPlaceableInWaterBlockItem("jungle_lily_pad") { HybridAquaticBlocks.JUNGLE_LILY_PAD.get() }
+    val SHORT_RED_ALGAE = registerBlockItem("short_red_algae") { HybridAquaticBlocks.SHORT_RED_ALGAE.get() }
     val RED_ALGAE = registerBlockItem("red_algae") { HybridAquaticBlocks.RED_ALGAE.get() }
     val SEA_LETTUCE = registerBlockItem("sea_lettuce") { HybridAquaticBlocks.SEA_LETTUCE.get() }
     val HYDROTHERMAL_VENT = registerBlockItem("hydrothermal_vent") { HybridAquaticBlocks.THERMAL_VENT.get() }
@@ -334,6 +335,9 @@ object HybridAquaticItems {
     val BLACK_PEARL_BLOCK = registerBlockItem("black_pearl_block") { HybridAquaticBlocks.BLACK_PEARL_BLOCK.get() }
 
     val GRASSY_SAND = registerBlockItem("grassy_sand") { HybridAquaticBlocks.GRASSY_SAND.get() }
+    val WHITE_SAND = registerBlockItem("white_sand") { HybridAquaticBlocks.WHITE_SAND.get() }
+    val WHITE_SANDSTONE = registerBlockItem("white_sandstone") { HybridAquaticBlocks.WHITE_SANDSTONE.get() }
+    val CORALSTONE = registerBlockItem("coralstone") { HybridAquaticBlocks.CORALSTONE.get() }
     val SHORESTONE = registerBlockItem("shorestone") { HybridAquaticBlocks.SHORESTONE.get() }
     val BARNACLE_SHORESTONE = registerBlockItem("barnacle_shorestone") { HybridAquaticBlocks.BARNACLE_SHORESTONE.get() }
 

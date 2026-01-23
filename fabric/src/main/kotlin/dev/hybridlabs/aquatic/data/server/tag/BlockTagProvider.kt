@@ -43,6 +43,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
 
         getOrCreateTagBuilder(BlockTags.UNDERWATER_BONEMEALS)
+            .add(HybridAquaticBlocks.SHORT_RED_ALGAE.get())
             .add(HybridAquaticBlocks.RED_ALGAE.get())
             .add(HybridAquaticBlocks.SEA_LETTUCE.get())
 
@@ -69,8 +70,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.SUN_CORAL.get())
             .add(HybridAquaticBlocks.THORN_CORAL.get())
             .add(HybridAquaticBlocks.LOPHELIA_CORAL.get())
-            .add(HybridAquaticBlocks.RED_ALGAE.get())
-            .add(HybridAquaticBlocks.SEA_LETTUCE.get())
 
         getOrCreateTagBuilder(BlockTags.WALL_CORALS)
             .add(HybridAquaticBlocks.ROSE_CORAL_WALL_FAN.get())
@@ -149,10 +148,6 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(BlockTags.PLANKS)
             .add(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
-
-        getOrCreateTagBuilder(BlockTags.UNDERWATER_BONEMEALS)
-            .add(HybridAquaticBlocks.RED_ALGAE.get())
-            .add(HybridAquaticBlocks.SEA_LETTUCE.get())
 
         getOrCreateTagBuilder(HybridAquaticBlockTags.TIDE_POOL_REPLACEABLE)
             .add(Blocks.CLAY)

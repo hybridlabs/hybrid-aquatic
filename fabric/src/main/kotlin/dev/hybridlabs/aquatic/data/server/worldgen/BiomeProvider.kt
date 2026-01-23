@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.BiomeDefaultFeatures
+import net.minecraft.data.worldgen.placement.AquaticPlacements
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements
 import net.minecraft.data.worldgen.placement.NetherPlacements
 import net.minecraft.world.entity.EntityType
@@ -127,6 +128,10 @@ class BiomeProvider(
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                     entries.ref(MiscOverworldPlacements.FOREST_ROCK)
                 )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(AquaticPlacements.SEAGRASS_RIVER)
+                )
             }
         )
 
@@ -142,6 +147,10 @@ class BiomeProvider(
                 addFeature(
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                     entries.ref(MiscOverworldPlacements.FOREST_ROCK)
+                )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(AquaticPlacements.SEAGRASS_RIVER)
                 )
             }
         )
@@ -159,6 +168,34 @@ class BiomeProvider(
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                     entries.ref(MiscOverworldPlacements.FOREST_ROCK)
                 )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(AquaticPlacements.SEAGRASS_RIVER)
+                )
+            }
+        )
+
+        entries.add(
+            HybridAquaticBiomes.CORAL_REEF,
+            create(
+                entries,
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x43D5EE,
+                waterFogColor = 0x041F33
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(HybridAquaticPlacedFeatures.CORAL_REEF)
+                )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(AquaticPlacements.SEAGRASS_WARM)
+                )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(AquaticPlacements.SEA_PICKLE)
+                )
             }
         )
 
@@ -166,14 +203,42 @@ class BiomeProvider(
             HybridAquaticBiomes.SEAGRASS_BED,
             create(
                 entries,
-                temperature = 0.95f,
-                downfall = 0.9f,
-                waterColor = 0x3FA7D6,
-                waterFogColor = 0x2E5D73
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x43D5EE,
+                waterFogColor = 0x041F33
             ) {
                 addFeature(
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                     entries.ref(MiscOverworldPlacements.FOREST_ROCK)
+                )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(AquaticPlacements.SEAGRASS_WARM)
+                )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(AquaticPlacements.SEA_PICKLE)
+                )
+            }
+        )
+
+        entries.add(
+            HybridAquaticBiomes.RED_MEADOW,
+            create(
+                entries,
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x43D5EE,
+                waterFogColor = 0x041F33
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                    entries.ref(MiscOverworldPlacements.FOREST_ROCK)
+                )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(AquaticPlacements.SEA_PICKLE)
                 )
             }
         )
@@ -190,6 +255,10 @@ class BiomeProvider(
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     entries.ref(HybridAquaticPlacedFeatures.TIDE_POOLS)
+                )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(AquaticPlacements.SEA_PICKLE)
                 )
             }
         )
@@ -298,7 +367,6 @@ class BiomeProvider(
             )
         )
     }
-
 
     override fun getName(): String {
         return "Biomes"

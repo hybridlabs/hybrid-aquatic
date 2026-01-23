@@ -14,6 +14,7 @@ object HybridAquaticBlockRenderers {
             HybridAquaticPlatformBlocks.CATTAIL.get(),
             HybridAquaticBlocks.GLOWSLIME_BLOCK.get(),
 
+            HybridAquaticBlocks.SHORT_RED_ALGAE.get(),
             HybridAquaticBlocks.RED_ALGAE.get(),
             HybridAquaticBlocks.TALL_RED_ALGAE.get(),
 
