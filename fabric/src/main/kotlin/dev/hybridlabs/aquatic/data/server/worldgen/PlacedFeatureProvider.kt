@@ -9,7 +9,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.features.AquaticFeatures
 import net.minecraft.data.worldgen.placement.PlacementUtils
-import net.minecraft.util.valueproviders.ClampedInt
 import net.minecraft.util.valueproviders.ClampedNormalInt
 import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.util.valueproviders.UniformInt
@@ -66,7 +65,7 @@ class PlacedFeatureProvider(
             HybridAquaticPlacedFeatures.ANEMONES, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.ANEMONES), listOf(
                     InSquarePlacement.spread(),
-                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     RarityFilter.onAverageOnceEvery(10),
                     CountPlacement.of(1),
                     BiomeFilter.biome()
@@ -146,7 +145,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH), listOf(
                     NoiseBasedCountPlacement.of(10, 80.0, 0.0),
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     BiomeFilter.biome()
                 )
             )
@@ -155,10 +154,9 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_MEADOW), listOf(
-                    RarityFilter.onAverageOnceEvery(7),
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(ClampedInt.of(UniformInt.of(-1, 3), 0, 3)),
+                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                    NoiseBasedCountPlacement.of(10, 80.0, 0.0),
                     BiomeFilter.biome()
                 )
             )
@@ -220,8 +218,8 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
-                    CountPlacement.of(5),
-                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    CountOnEveryLayerPlacement.of(5),
+                    SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
                     BiomeFilter.biome()
                 )
             )
@@ -231,7 +229,7 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.CORAL_REEF, PlacedFeature(
                 entries.ref(AquaticFeatures.WARM_OCEAN_VEGETATION), listOf(
-                    CountPlacement.of(10),
+                    CountOnEveryLayerPlacement.of(10),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
                     BiomeFilter.biome()
                 )

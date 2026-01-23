@@ -76,6 +76,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticPlatformItems.DUNEGRASS.get())
                 entries.accept(HybridAquaticPlatformItems.TALL_DUNEGRASS.get())
                 entries.accept(HybridAquaticItems.SEA_LETTUCE.get())
+                entries.accept(HybridAquaticItems.SHORT_RED_ALGAE.get())
                 entries.accept(HybridAquaticItems.RED_ALGAE.get())
                 entries.accept(HybridAquaticItems.BULL_KELP.get())
                 entries.accept(HybridAquaticItems.SARGASSUM.get())

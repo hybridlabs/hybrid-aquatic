@@ -9,7 +9,7 @@
             "type": "minecraft:noise_provider",
             "noise": {
               "amplitudes": [
-                1.0
+                4.0
               ],
               "firstOctave": -4
             },

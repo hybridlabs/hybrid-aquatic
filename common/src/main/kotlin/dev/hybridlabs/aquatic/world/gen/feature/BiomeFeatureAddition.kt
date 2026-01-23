@@ -159,12 +159,6 @@ data class BiomeFeatureAddition(
                 HybridAquaticBiomeTags.HAS_THERMAL_VENTS,
                 GenerationStep.Decoration.SURFACE_STRUCTURES,
                 HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH
-            ),
-
-            BiomeFeatureAddition(
-                HybridAquaticBiomeTags.RED_MEADOW,
-                GenerationStep.Decoration.VEGETAL_DECORATION,
-                HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW
             )
         )
     }

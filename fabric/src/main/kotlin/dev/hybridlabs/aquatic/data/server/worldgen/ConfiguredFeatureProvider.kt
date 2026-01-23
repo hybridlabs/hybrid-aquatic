@@ -51,7 +51,7 @@ class ConfiguredFeatureProvider(
             ConfiguredFeature(
                 Feature.NO_BONEMEAL_FLOWER,
                 RandomPatchConfiguration(
-                    3, 3, 3,
+                    4, 2, 2,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
@@ -148,15 +148,13 @@ class ConfiguredFeatureProvider(
             ConfiguredFeature(
                 Feature.RANDOM_PATCH,
                 RandomPatchConfiguration(
-                    500,
-                    10,
-                    10,
+                    500, 10, 10,
                     PlacementUtils.onlyWhenEmpty(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
                             NoiseProvider(
                                 237L,
-                                NormalNoise.NoiseParameters(-4, 1.0, *DoubleArray(0)),
+                                NormalNoise.NoiseParameters(-4, 4.0, *DoubleArray(0)),
                                 1.0f,
                                 listOf<BlockState>(
                                     HybridAquaticBlocks.SHORT_RED_ALGAE.get().defaultBlockState(),

@@ -141,8 +141,8 @@ class BiomeProvider(
                 entries,
                 temperature = 0.95f,
                 downfall = 0.9f,
-                waterColor = 0x3F76E4,
-                waterFogColor = 0x3F76E4
+                waterColor = 0x3A7A6A,
+                waterFogColor = 0x4D7A60
             ) {
                 addFeature(
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,

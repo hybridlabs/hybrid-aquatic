@@ -284,6 +284,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.BARRACUDA.get(),
             listOf(
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.TROPICAL_OCEANS),
             3, 1, 1
         )
@@ -307,6 +308,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.SEAHORSE.get(),
             listOf(
                 HybridAquaticBiomeTags.REEF,
+                HybridAquaticBiomeTags.RED_MEADOW,
                 HybridAquaticBiomeTags.SEAGRASS_MEADOW),
             1, 1, 2
         )
@@ -341,6 +343,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.REEF,
+                HybridAquaticBiomeTags.RED_MEADOW,
                 HybridAquaticBiomeTags.SEAGRASS_MEADOW),
             2, 1, 2
         )
@@ -357,6 +360,7 @@ class EntitySpawnConfigGenerator {
         addFish(
             HybridAquaticEntityTypes.SURGEONFISH.get(),
             listOf(
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.REEF),
             4, 1, 4
         )
@@ -371,6 +375,7 @@ class EntitySpawnConfigGenerator {
         addFish(
             HybridAquaticEntityTypes.BOXFISH.get(),
             listOf(
+                HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.REEF),
             2, 1, 1
         )
@@ -387,6 +392,7 @@ class EntitySpawnConfigGenerator {
         addFish(
             HybridAquaticEntityTypes.PARROTFISH.get(),
             listOf(
+                HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.REEF),
             4, 1, 2
         )
@@ -539,6 +545,8 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.WARM_OCEAN,
+                HybridAquaticBiomeTags.RED_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.TROPICAL_OCEANS),
             3, 1, 2
         )
@@ -550,6 +558,8 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.REEF,
+                HybridAquaticBiomeTags.RED_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.SANDY_BEACHES
             ),
             5, 2, 5
@@ -560,6 +570,8 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.WARM_OCEAN,
+                HybridAquaticBiomeTags.RED_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
             3, 1, 2
         )
@@ -576,6 +588,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.SEA_NETTLE.get(),
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_OCEANS,
+                HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.TEMPERATE_OCEANS),
             3, 1, 4
         )
@@ -673,6 +686,8 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.WARM_OCEAN,
+                HybridAquaticBiomeTags.RED_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
             2, 1, 1
         )
@@ -682,6 +697,8 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.WARM_OCEAN,
+                HybridAquaticBiomeTags.RED_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
             3, 1, 2
         )
@@ -782,6 +799,8 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.HORSESHOE_CRAB.get(),
             listOf(
                 HybridAquaticBiomeTags.WARM_OCEAN,
+                HybridAquaticBiomeTags.RED_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.SANDY_BEACHES),
             3, 1, 2
@@ -798,6 +817,8 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.FLOWER_CRAB.get(),
             listOf(
                 HybridAquaticBiomeTags.WARM_OCEAN,
+                HybridAquaticBiomeTags.RED_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.MANGROVES,
                 HybridAquaticBiomeTags.MARSHES),
@@ -816,6 +837,8 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.SHRIMP.get(),
             listOf(
                 HybridAquaticBiomeTags.WARM_OCEAN,
+                HybridAquaticBiomeTags.RED_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.REEF),
             3, 2, 3
         )
@@ -825,6 +848,8 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.REEF,
+                HybridAquaticBiomeTags.RED_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
             2, 1, 2
         )
@@ -854,6 +879,8 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.HERMIT_CRAB.get(),
             listOf(
                 HybridAquaticBiomeTags.SANDY_BEACHES,
+                HybridAquaticBiomeTags.RED_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
             1, 1, 2
         )
@@ -891,6 +918,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.WARM_OCEAN,
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.REEF),
             1, 0, 2
         )

@@ -12,7 +12,6 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.BiomeTags
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.biome.Biomes
-import net.minecraft.world.level.biome.Climate
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.levelgen.SurfaceRules.*
 

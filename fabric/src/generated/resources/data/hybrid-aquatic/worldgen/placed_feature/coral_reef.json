@@ -2,7 +2,7 @@
   "feature": "minecraft:warm_ocean_vegetation",
   "placement": [
     {
-      "type": "minecraft:count",
+      "type": "minecraft:count_on_every_layer",
       "count": 10
     },
     {
