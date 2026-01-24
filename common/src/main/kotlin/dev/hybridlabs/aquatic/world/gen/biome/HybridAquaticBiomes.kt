@@ -23,7 +23,7 @@ object HybridAquaticBiomes {
         isBiome(Biomes.WARM_OCEAN),
         sequence(
             ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
-            ifTrue(UNDER_FLOOR, state(HybridAquaticBlocks.CORALSTONE.get().defaultBlockState())),
+            ifTrue(UNDER_FLOOR, state(HybridAquaticBlocks.SHORESTONE.get().defaultBlockState())),
             ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
         )
     )
@@ -124,17 +124,34 @@ object HybridAquaticBiomes {
     //#region Trench Rules
     val TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("trench"))
     val TRENCH_SURFACE_RULE: RuleSource =
-        ifTrue(isBiome(TRENCH), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
+        ifTrue(isBiome(
+            TRENCH),
+            sequence(
+                ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())),
+                ifTrue(UNDER_FLOOR, state(Blocks.MUD.defaultBlockState())),
+                ifTrue(DEEP_UNDER_FLOOR, state(Blocks.TUFF.defaultBlockState())),
+            )
+        )
 
     val WARM_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("warm_trench"))
     val WARM_TRENCH_SURFACE_RULE: RuleSource =
-        ifTrue(isBiome(WARM_TRENCH), ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())))
+        ifTrue(isBiome(WARM_TRENCH),
+            sequence(
+                ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())),
+                ifTrue(UNDER_FLOOR, state(Blocks.MUD.defaultBlockState())),
+                ifTrue(DEEP_UNDER_FLOOR, state(Blocks.TUFF.defaultBlockState())),
+            )
+        )
 
     val LUKEWARM_TRENCH: ResourceKey<Biome> =
         ResourceKey.create(Registries.BIOME, CommonClass.locate("lukewarm_trench"))
     val LUKEWARM_TRENCH_SURFACE_RULE: RuleSource = ifTrue(
         isBiome(LUKEWARM_TRENCH),
-        ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState()))
+        sequence(
+            ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())),
+            ifTrue(UNDER_FLOOR, state(Blocks.MUD.defaultBlockState())),
+            ifTrue(DEEP_UNDER_FLOOR, state(Blocks.TUFF.defaultBlockState())),
+        )
     )
 
     val COLD_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_trench"))
@@ -144,8 +161,13 @@ object HybridAquaticBiomes {
     val FROZEN_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("frozen_trench"))
     val FROZEN_TRENCH_SURFACE_RULE: RuleSource = ifTrue(
         isBiome(FROZEN_TRENCH),
-        ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState()))
+        sequence(
+            ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())),
+            ifTrue(UNDER_FLOOR, state(Blocks.MUD.defaultBlockState())),
+            ifTrue(DEEP_UNDER_FLOOR, state(Blocks.TUFF.defaultBlockState())),
+        )
     )
+
     //#endregion
 
     val SULFURIC_CAVES: ResourceKey<Biome> =

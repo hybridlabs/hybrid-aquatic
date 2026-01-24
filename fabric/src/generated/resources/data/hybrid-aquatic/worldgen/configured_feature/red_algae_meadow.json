@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:random_patch",
+  "type": "minecraft:flower",
   "config": {
     "feature": {
       "feature": {
@@ -17,15 +17,15 @@
             "seed": 237,
             "states": [
               {
-                "Name": "hybrid-aquatic:short_red_algae"
+                "Name": "hybrid-aquatic:sea_lettuce"
               },
               {
                 "Name": "hybrid-aquatic:red_algae"
               },
               {
-                "Name": "hybrid-aquatic:tall_red_algae",
+                "Name": "hybrid-aquatic:sargassum",
                 "Properties": {
-                  "half": "lower"
+                  "age": "0"
                 }
               }
             ]
@@ -37,13 +37,13 @@
           "type": "minecraft:block_predicate_filter",
           "predicate": {
             "type": "minecraft:matching_blocks",
-            "blocks": "minecraft:air"
+            "blocks": "minecraft:water"
           }
         }
       ]
     },
     "tries": 500,
-    "xz_spread": 10,
-    "y_spread": 10
+    "xz_spread": 12,
+    "y_spread": 2
   }
 }

@@ -337,6 +337,7 @@ object HybridAquaticItems {
     val GRASSY_SAND = registerBlockItem("grassy_sand") { HybridAquaticBlocks.GRASSY_SAND.get() }
     val WHITE_SAND = registerBlockItem("white_sand") { HybridAquaticBlocks.WHITE_SAND.get() }
     val WHITE_SANDSTONE = registerBlockItem("white_sandstone") { HybridAquaticBlocks.WHITE_SANDSTONE.get() }
+    val SUSPICIOUS_RED_SAND = registerBlockItem("suspicious_red_sand") { HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get() }
     val CORALSTONE = registerBlockItem("coralstone") { HybridAquaticBlocks.CORALSTONE.get() }
     val SHORESTONE = registerBlockItem("shorestone") { HybridAquaticBlocks.SHORESTONE.get() }
     val BARNACLE_SHORESTONE = registerBlockItem("barnacle_shorestone") { HybridAquaticBlocks.BARNACLE_SHORESTONE.get() }

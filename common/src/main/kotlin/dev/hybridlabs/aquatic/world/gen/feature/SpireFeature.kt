@@ -17,14 +17,19 @@ class SpireFeature(codec: Codec<NoneFeatureConfiguration>) : Feature<NoneFeature
         val random = context.random()
         val origin = context.origin()
 
-        val height = random.nextInt(10) + 6
+        val height = random.nextInt(6) + 6
         val baseRadius = random.nextFloat() * 3f + 4f
+
+        val minRadius = 2.0f
 
         val coralstone = HybridAquaticBlocks.CORALSTONE.get().defaultBlockState()
 
-        for (y in 0..<height) {
+        for (y in 0 until height) {
             val progress = y.toFloat() / height
-            val radius = baseRadius * (1.0f - progress)
+
+            var radius = baseRadius * Mth.cos(progress * (Math.PI.toFloat() / 2f))
+
+            radius = maxOf(radius, minRadius)
 
             val r = Mth.ceil(radius)
 

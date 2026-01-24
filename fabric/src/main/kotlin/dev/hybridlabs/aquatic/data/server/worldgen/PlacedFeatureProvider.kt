@@ -73,7 +73,7 @@ class PlacedFeatureProvider(
             )
         )
 
-        // anemone patch
+        // spire
         entries.add(
             HybridAquaticPlacedFeatures.SPIRE, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.SPIRE), listOf(
@@ -167,7 +167,7 @@ class PlacedFeatureProvider(
             HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_MEADOW), listOf(
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     NoiseBasedCountPlacement.of(10, 80.0, 0.0),
                     BiomeFilter.biome()
                 )

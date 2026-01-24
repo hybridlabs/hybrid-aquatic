@@ -97,6 +97,10 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             ).forEach(generator::createTrivialCube)
 
             setOf(
+                HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get(),
+            ).forEach(generator::createBrushableBlock)
+
+            setOf(
                 HybridAquaticBlocks.GRASSY_SAND.get(),
                 HybridAquaticBlocks.WHITE_SANDSTONE.get(),
             ).forEach { block ->

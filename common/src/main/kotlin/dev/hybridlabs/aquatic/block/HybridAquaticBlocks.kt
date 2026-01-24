@@ -3,11 +3,13 @@ package dev.hybridlabs.aquatic.block
 import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.level.block.BaseCoralFanBlock
 import net.minecraft.world.level.block.BaseCoralPlantBlock
 import net.minecraft.world.level.block.BaseCoralWallFanBlock
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.BrushableBlock
 import net.minecraft.world.level.block.CoralBlock
 import net.minecraft.world.level.block.CoralFanBlock
 import net.minecraft.world.level.block.CoralPlantBlock
@@ -66,6 +68,12 @@ object HybridAquaticBlocks {
     val WHITE_SAND = register("white_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
     val WHITE_SANDSTONE = register("white_sandstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
 
+    val SUSPICIOUS_RED_SAND = register("suspicious_red_sand") { BrushableBlock(
+        Blocks.RED_SAND,
+        Properties.copy(Blocks.RED_SAND),
+        SoundEvents.BRUSH_SAND,
+        SoundEvents.BRUSH_SAND_COMPLETED) }
+    
     val GRASSY_SAND = register("grassy_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
     val CORALSTONE = register("coralstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
     val SHORESTONE = register("shorestone") { Block(Properties.copy(Blocks.SANDSTONE)) }
