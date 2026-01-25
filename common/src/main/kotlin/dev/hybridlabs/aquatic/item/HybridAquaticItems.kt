@@ -334,6 +334,7 @@ object HybridAquaticItems {
     val PEARL_BLOCK = registerBlockItem("pearl_block") { HybridAquaticBlocks.PEARL_BLOCK.get() }
     val BLACK_PEARL_BLOCK = registerBlockItem("black_pearl_block") { HybridAquaticBlocks.BLACK_PEARL_BLOCK.get() }
 
+    val CRYSTALLINE_SULFUR = registerBlockItem("crystalline_sulfur") { HybridAquaticBlocks.CRYSTALLINE_SULFUR.get() }
     val GRASSY_SAND = registerBlockItem("grassy_sand") { HybridAquaticBlocks.GRASSY_SAND.get() }
     val WHITE_SAND = registerBlockItem("white_sand") { HybridAquaticBlocks.WHITE_SAND.get() }
     val WHITE_SANDSTONE = registerBlockItem("white_sandstone") { HybridAquaticBlocks.WHITE_SANDSTONE.get() }

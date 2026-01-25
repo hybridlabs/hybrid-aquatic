@@ -5,8 +5,8 @@
     "radius": {
       "type": "minecraft:uniform",
       "value": {
-        "max_inclusive": 3,
-        "min_inclusive": 2
+        "max_inclusive": 5,
+        "min_inclusive": 3
       }
     },
     "state_provider": {

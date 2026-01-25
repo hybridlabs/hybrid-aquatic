@@ -14,6 +14,12 @@ data class BiomeFeatureAddition(
     companion object {
         val builtIn = listOf(
             BiomeFeatureAddition(
+                BiomeTags.IS_FOREST,
+                GenerationStep.Decoration.LAKES,
+                HybridAquaticPlacedFeatures.BIG_LAKE
+            ),
+
+            BiomeFeatureAddition(
                 HybridAquaticBiomeTags.REEF,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.ANEMONES
@@ -128,6 +134,12 @@ data class BiomeFeatureAddition(
                 HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 GenerationStep.Decoration.UNDERGROUND_ORES,
                 HybridAquaticPlacedFeatures.SAND_CIRCLE
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.SULFURIC_CAVE,
+                GenerationStep.Decoration.UNDERGROUND_ORES,
+                HybridAquaticPlacedFeatures.SULFUR_DEPOSIT
             ),
 
             BiomeFeatureAddition(

@@ -86,7 +86,7 @@ class ThermalVentBlock(
 
     override fun animateTick(state: BlockState, world: Level, pos: BlockPos, random: RandomSource) {
         if (state.getValue(THICKNESS) == DripstoneThickness.TIP && state.getValue(WATERLOGGED)) {
-            spawnSmokeParticle(world, pos, random)
+            addAlwaysVisibleParticle(world, pos, random)
         }
     }
 
@@ -105,7 +105,7 @@ class ThermalVentBlock(
         }
     }
 
-    private fun spawnSmokeParticle(world: Level, pos: BlockPos, random: RandomSource) {
+    private fun addAlwaysVisibleParticle(world: Level, pos: BlockPos, random: RandomSource) {
         world.addParticle(
             ParticleTypes.CAMPFIRE_SIGNAL_SMOKE,
             pos.x.toDouble() + 0.5 + random.nextDouble() / 4.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),

@@ -167,6 +167,28 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticPlacedFeatures.SULFUR_DEPOSIT, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.SULFUR_DEPOSIT), listOf(
+                    CountPlacement.of(16),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticPlacedFeatures.BIG_LAKE, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.BIG_LAKE), listOf(
+                    RarityFilter.onAverageOnceEvery(100),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticPlacedFeatures.DISK_SUSPICIOUS_SAND, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.DISK_SUSPICIOUS_SAND), listOf(
                     InSquarePlacement.spread(),

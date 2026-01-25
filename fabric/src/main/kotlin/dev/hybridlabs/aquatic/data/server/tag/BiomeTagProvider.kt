@@ -44,6 +44,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.SULFURIC_CAVES)
             .addOptional(HybridAquaticBiomes.SULFURIC_TRENCH)
 
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.SULFURIC_CAVE)
+            .addOptional(HybridAquaticBiomes.SULFURIC_CAVES)
+
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SANDY_BEACHES)
             .add(Biomes.BEACH)
             .addOptional(ResourceLocation("wythers", "tropical_beach"))

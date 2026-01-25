@@ -13,6 +13,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeat
 object HybridAquaticFeatures {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleFeature(MessageInABottleFeatureConfig.CODEC))
     val ANEMONES = register("anemones", AnemoneFeature())
+    val BIG_LAKE = register("big_lake", BigLakeFeature(BigLakeFeature.Configuration.CODEC))
     val SPIRE = register("spire", SpireFeature(NoneFeatureConfiguration.CODEC))
     val BULL_KELP = register("bull_kelp", BullKelpFeature(BullKelpFeatureConfig.CODEC))
     val VENT_PATCH = register("vent_patch", VentPatchFeature(VentPatchFeatureConfig.CODEC))

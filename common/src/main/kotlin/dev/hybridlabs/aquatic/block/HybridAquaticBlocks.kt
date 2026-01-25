@@ -74,6 +74,7 @@ object HybridAquaticBlocks {
         SoundEvents.BRUSH_SAND,
         SoundEvents.BRUSH_SAND_COMPLETED) }
     
+    val CRYSTALLINE_SULFUR = register("crystalline_sulfur") { Block(Properties.copy(Blocks.AMETHYST_BLOCK)) }
     val GRASSY_SAND = register("grassy_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
     val CORALSTONE = register("coralstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
     val SHORESTONE = register("shorestone") { Block(Properties.copy(Blocks.SANDSTONE)) }

@@ -33,6 +33,7 @@ import net.minecraft.world.level.levelgen.feature.Feature.WATERLOGGED_VEGETATION
 import net.minecraft.world.level.levelgen.feature.configurations.*
 import net.minecraft.world.level.levelgen.feature.stateproviders.*
 import net.minecraft.world.level.levelgen.placement.CaveSurface
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest
 import net.minecraft.world.level.levelgen.synth.NormalNoise
 import java.util.concurrent.CompletableFuture
 
@@ -50,7 +51,17 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        // anemone patch
+        entries.add(
+            HybridAquaticConfiguredFeatures.BIG_LAKE,
+            ConfiguredFeature(
+                HybridAquaticFeatures.BIG_LAKE.get(),
+                BigLakeFeature.Configuration(
+                    BlockStateProvider.simple(Blocks.WATER),
+                    BlockStateProvider.simple(Blocks.STONE)
+                )
+            )
+        )
+
         val ANEMONES = entries.add(
             HybridAquaticConfiguredFeatures.ANEMONES,
             ConfiguredFeature(
@@ -192,6 +203,19 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticConfiguredFeatures.SULFUR_DEPOSIT,
+            ConfiguredFeature(
+                Feature.ORE,
+                OreConfiguration(
+                    TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES),
+                    HybridAquaticBlocks.CRYSTALLINE_SULFUR.get().defaultBlockState(),
+                    20,
+                    0.0f
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticConfiguredFeatures.DISK_SUSPICIOUS_SAND,
             ConfiguredFeature(
                 Feature.DISK,
@@ -211,7 +235,7 @@ class ConfiguredFeatureProvider(
                 DiskConfiguration(
                     RuleBasedBlockStateProvider.simple(HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get()),
                     BlockPredicate.matchesBlocks(listOf<Block>(Blocks.RED_SAND, Blocks.CLAY)),
-                    UniformInt.of(2, 3),
+                    UniformInt.of(3, 5),
                     1
                 )
             )

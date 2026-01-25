@@ -31,6 +31,7 @@ object HybridAquaticBiomeTags {
     val TROPICAL_TRENCH = create("tropical_trench")
 
     val HAS_THERMAL_VENTS = create("has_thermal_vents")
+    val SULFURIC_CAVE = create("sulfuric_trench")
 
     val REEF = create("reef")
     val JUNGLE = create("jungle")

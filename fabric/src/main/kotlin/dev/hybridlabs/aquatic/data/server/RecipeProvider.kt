@@ -94,6 +94,29 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.CRYSTALLINE_SULFUR.get())
+            .pattern("SSS")
+            .pattern("SSS")
+            .pattern("SSS")
+            .define('S', HybridAquaticItems.SULFUR.get())
+            .unlockedBy(
+                "has_sulfur",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SULFUR.get())
+            )
+            .save(exporter)
+
+        ShapelessRecipeBuilder.shapeless(
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.SULFUR.get(),
+            9
+        )
+            .requires(HybridAquaticItems.CRYSTALLINE_SULFUR.get())
+            .unlockedBy(
+                "has_sulfur",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SULFUR.get())
+            )
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.GLOWSLIME_BLOCK.get())
             .pattern("SSS")
             .pattern("SSS")

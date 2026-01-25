@@ -137,6 +137,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.TUBE_SPONGE.get())
                 entries.accept(HybridAquaticItems.TUBE_WORM.get())
                 entries.accept(HybridAquaticItems.HYDROTHERMAL_VENT.get())
+                entries.accept(HybridAquaticItems.CRYSTALLINE_SULFUR.get())
                 entries.accept(HybridAquaticBlocks.BASKING_SHARK_PLUSHIE.get())
                 entries.accept(HybridAquaticBlocks.BULL_SHARK_PLUSHIE.get())
                 entries.accept(HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE.get())
