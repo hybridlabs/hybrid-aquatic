@@ -17,6 +17,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
     override fun addTags(arg: HolderLookup.Provider) {
         // spawn biomes
 
+        getOrCreateTagBuilder(BiomeTags.HAS_CLOSER_WATER_FOG)
+            .forceAddTag(BiomeTags.IS_DEEP_OCEAN)
+
         getOrCreateTagBuilder(BiomeTags.HAS_SHIPWRECK)
             .addOptional(HybridAquaticBiomes.SEAGRASS_BED)
             .addOptional(HybridAquaticBiomes.RED_MEADOW)
@@ -39,6 +42,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.COLD_TRENCH)
             .addOptional(HybridAquaticBiomes.FROZEN_TRENCH)
             .addOptional(HybridAquaticBiomes.SULFURIC_TRENCH)
+            .addOptional(HybridAquaticBiomes.BRINE_LAGOON)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.HAS_THERMAL_VENTS)
             .addOptional(HybridAquaticBiomes.SULFURIC_CAVES)
