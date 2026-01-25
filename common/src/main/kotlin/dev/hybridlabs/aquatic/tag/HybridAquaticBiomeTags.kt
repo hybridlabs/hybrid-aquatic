@@ -40,6 +40,7 @@ object HybridAquaticBiomeTags {
     val MARSHES = create("marshes")
     val MANGROVES = create("mangroves")
     val RIVERS = create("rivers")
+    val PLACER_RIVERS = create("placer_rivers")
     val TROPICAL_RIVERS = create("tropical_rivers")
     val SANDY_BEACHES = create("sandy_beaches")
     val ROCKY_BEACHES = create("rocky_beaches")

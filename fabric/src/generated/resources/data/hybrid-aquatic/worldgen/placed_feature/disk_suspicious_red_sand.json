@@ -1,5 +1,5 @@
 {
-  "feature": "hybrid-aquatic:spire",
+  "feature": "hybrid-aquatic:disk_suspicious_red_sand",
   "placement": [
     {
       "type": "minecraft:in_square"
@@ -7,10 +7,6 @@
     {
       "type": "minecraft:heightmap",
       "heightmap": "OCEAN_FLOOR_WG"
-    },
-    {
-      "type": "minecraft:count",
-      "count": 1
     },
     {
       "type": "minecraft:biome"

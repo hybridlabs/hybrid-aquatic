@@ -120,8 +120,26 @@ data class BiomeFeatureAddition(
 
             BiomeFeatureAddition(
                 HybridAquaticBiomeTags.REEF,
-                GenerationStep.Decoration.SURFACE_STRUCTURES,
+                GenerationStep.Decoration.LOCAL_MODIFICATIONS,
                 HybridAquaticPlacedFeatures.SPIRE
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
+                GenerationStep.Decoration.UNDERGROUND_ORES,
+                HybridAquaticPlacedFeatures.SAND_CIRCLE
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.SANDY_BEACHES,
+                GenerationStep.Decoration.UNDERGROUND_ORES,
+                HybridAquaticPlacedFeatures.DISK_SUSPICIOUS_SAND
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.PLACER_RIVERS,
+                GenerationStep.Decoration.UNDERGROUND_ORES,
+                HybridAquaticPlacedFeatures.DISK_SUSPICIOUS_RED_SAND
             ),
 
             BiomeFeatureAddition(

@@ -14,7 +14,10 @@ import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.VerticalAnchor
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
 import net.minecraft.world.level.levelgen.placement.*
+import net.minecraft.world.level.material.Fluid
+import net.minecraft.world.level.material.Fluids
 import java.util.concurrent.CompletableFuture
 
 class PlacedFeatureProvider(
@@ -78,7 +81,7 @@ class PlacedFeatureProvider(
             HybridAquaticPlacedFeatures.SPIRE, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.SPIRE), listOf(
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
                     CountPlacement.of(1),
                     BiomeFilter.biome()
                 )
@@ -153,6 +156,37 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticPlacedFeatures.SAND_CIRCLE, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.SAND_CIRCLE), listOf(
+                    CountPlacement.of(UniformInt.of(0, 1)),
+                    InSquarePlacement.spread(),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticPlacedFeatures.DISK_SUSPICIOUS_SAND, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.DISK_SUSPICIOUS_SAND), listOf(
+                    InSquarePlacement.spread(),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticPlacedFeatures.DISK_SUSPICIOUS_RED_SAND, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.DISK_SUSPICIOUS_RED_SAND), listOf(
+                    InSquarePlacement.spread(),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticPlacedFeatures.RED_ALGAE_PATCH, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH), listOf(
                     NoiseBasedCountPlacement.of(10, 80.0, 0.0),
@@ -166,9 +200,9 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_MEADOW), listOf(
-                    InSquarePlacement.spread(),
+                    BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(*arrayOf<Fluid>(Fluids.WATER))),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    NoiseBasedCountPlacement.of(10, 80.0, 0.0),
+                    CountPlacement.of(100),
                     BiomeFilter.biome()
                 )
             )
@@ -242,7 +276,7 @@ class PlacedFeatureProvider(
             HybridAquaticPlacedFeatures.CORAL_REEF, PlacedFeature(
                 entries.ref(AquaticFeatures.WARM_OCEAN_VEGETATION), listOf(
                     CountOnEveryLayerPlacement.of(10),
-                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     BiomeFilter.biome()
                 )
             )

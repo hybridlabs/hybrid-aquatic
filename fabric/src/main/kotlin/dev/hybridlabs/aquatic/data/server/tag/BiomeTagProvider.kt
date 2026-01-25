@@ -192,6 +192,10 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("riverredux", "carved_river"))
             .addOptional(HybridAquaticBiomes.COLD_RIVER)
             .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
+            .addOptional(HybridAquaticBiomes.PLACER_RIVER)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.PLACER_RIVERS)
+            .addOptional(HybridAquaticBiomes.PLACER_RIVER)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TROPICAL_RIVERS)
             .addOptional(ResourceLocation("wythers", "jungle_river"))

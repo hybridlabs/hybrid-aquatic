@@ -17,6 +17,7 @@ import net.minecraft.util.random.SimpleWeightedRandomList
 import net.minecraft.util.valueproviders.BiasedToBottomInt
 import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.util.valueproviders.UniformInt
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.HorizontalDirectionalBlock
 import net.minecraft.world.level.block.state.BlockState
@@ -30,10 +31,7 @@ import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.Feature.GEODE
 import net.minecraft.world.level.levelgen.feature.Feature.WATERLOGGED_VEGETATION_PATCH
 import net.minecraft.world.level.levelgen.feature.configurations.*
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
-import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider
-import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider
-import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider
+import net.minecraft.world.level.levelgen.feature.stateproviders.*
 import net.minecraft.world.level.levelgen.placement.CaveSurface
 import net.minecraft.world.level.levelgen.synth.NormalNoise
 import java.util.concurrent.CompletableFuture
@@ -176,6 +174,45 @@ class ConfiguredFeatureProvider(
                         ),
                         BlockPredicate.matchesBlocks(Blocks.WATER)
                     )
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.SAND_CIRCLE,
+            ConfiguredFeature(
+                Feature.DISK,
+                DiskConfiguration(
+                    RuleBasedBlockStateProvider.simple(Blocks.SAND),
+                    BlockPredicate.matchesBlocks(listOf<Block>(HybridAquaticBlocks.GRASSY_SAND.get())),
+                    UniformInt.of(3, 8),
+                    1
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.DISK_SUSPICIOUS_SAND,
+            ConfiguredFeature(
+                Feature.DISK,
+                DiskConfiguration(
+                    RuleBasedBlockStateProvider.simple(Blocks.SUSPICIOUS_SAND),
+                    BlockPredicate.matchesBlocks(listOf<Block>(Blocks.SAND)),
+                    UniformInt.of(1, 2),
+                    1
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.DISK_SUSPICIOUS_RED_SAND,
+            ConfiguredFeature(
+                Feature.DISK,
+                DiskConfiguration(
+                    RuleBasedBlockStateProvider.simple(HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get()),
+                    BlockPredicate.matchesBlocks(listOf<Block>(Blocks.RED_SAND, Blocks.CLAY)),
+                    UniformInt.of(2, 3),
+                    1
                 )
             )
         )
