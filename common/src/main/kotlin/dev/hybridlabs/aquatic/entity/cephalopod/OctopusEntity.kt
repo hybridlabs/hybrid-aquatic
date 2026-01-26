@@ -148,13 +148,13 @@ class OctopusEntity(entityType: EntityType<out OctopusEntity>, world: Level) :
     }
 
     private var overlayTexture
-        get() = OctopusEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture))
+        get() = OverlayTextures.byId(entityData.get(OverlayTexture))
         set(value) {
             entityData.set(OverlayTexture, value.id)
         }
 
     override fun getOverlayTextureName(): String {
-        return OctopusEntity.Companion.OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
+        return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
     }
 
     override fun defineSynchedData() {
@@ -172,7 +172,7 @@ class OctopusEntity(entityType: EntityType<out OctopusEntity>, world: Level) :
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         this.variant = Type.byName(nbt.getString("Type"))
         if (nbt.contains("texture_overlay")) this.overlayTexture =
-            OctopusEntity.Companion.OverlayTextures.byId(nbt.getInt("texture_overlay"))
+            OverlayTextures.byId(nbt.getInt("texture_overlay"))
         super.readAdditionalSaveData(nbt)
     }
 
