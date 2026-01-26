@@ -5,8 +5,6 @@ import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.core.BlockPos
-import net.minecraft.core.particles.ParticleTypes
-import net.minecraft.core.particles.SimpleParticleType
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -54,7 +52,7 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
     private var sittingTimer: Int = 0
 
     open val targetConfig: MobTargetConfiguration? = null
-    open val hasInk: Boolean = false
+    open val inkConfig: InkConfiguration? = null
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -221,8 +219,8 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
                     this.setSitting(false)
                 }
 
-                if (this.isUnderWater && this.hasInk) {
-                    this.squirt()
+                if (this.isUnderWater) {
+                    inkConfig?.run(::squirt)
                 }
 
                 val attackerPos = this.lastHurtByMob?.position()
@@ -238,7 +236,7 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
         return false
     }
 
-    private fun squirt() {
+    private fun squirt(config: InkConfiguration) {
         this.playSound(this.getSquirtSound(), this.soundVolume, this.voicePitch)
 
         val entityPosition = Vec3(this.x, this.y, this.z)
@@ -266,7 +264,7 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
             val velocity = Vec3(offsetX, offsetY, offsetZ).normalize().scale(randomMultiplier)
 
             (level() as ServerLevel).sendParticles(
-                this.getInkParticle(),
+                config.particle,
                 entityPosition.x,
                 entityPosition.y,
                 entityPosition.z,
@@ -277,10 +275,6 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
                 0.1
             )
         }
-    }
-
-    protected open fun getInkParticle(): SimpleParticleType {
-        return ParticleTypes.SQUID_INK
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

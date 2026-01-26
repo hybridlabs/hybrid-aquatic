@@ -36,7 +36,7 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HybridA
         listOf(HybridAquaticEntityTags.SHARK),
     )
 
-    override val hasInk: Boolean = true
+    override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
