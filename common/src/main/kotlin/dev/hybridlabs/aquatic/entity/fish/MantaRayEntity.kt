@@ -8,6 +8,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.tags.TagKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -21,9 +22,9 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
 
-class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
-    HybridAquaticFishEntity(entityType, world,
-        listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.SHARK)), OverlayTextureFeature {
+class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) : HybridAquaticFishEntity(type, world), OverlayTextureFeature {
+
+    override val predator: List<TagKey<EntityType<*>>> = listOf(HybridAquaticEntityTags.SHARK)
 
     override fun registerGoals() {
         super.registerGoals()

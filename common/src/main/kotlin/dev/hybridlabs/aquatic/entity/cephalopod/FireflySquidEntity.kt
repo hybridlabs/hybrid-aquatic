@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
+import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
@@ -11,17 +12,15 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.CRUSTACEAN,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        true,
-        true
-    ) {
+class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
+
+    override val prey: TagKey<EntityType<*>> = HybridAquaticEntityTags.CRUSTACEAN
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.SHARK
+    )
+
+    override val hasInk: Boolean = true
+    override val hasGlowInk: Boolean = true
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

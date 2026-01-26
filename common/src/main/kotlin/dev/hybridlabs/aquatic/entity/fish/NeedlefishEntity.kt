@@ -3,23 +3,21 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class NeedlefishEntity(entityType: EntityType<out NeedlefishEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.CEPHALOPOD
-        ),
-        listOf(
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class NeedlefishEntity(type: EntityType<out NeedlefishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world) {
+    override val prey: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.SMALL_PREY,
+        HybridAquaticEntityTags.CEPHALOPOD
+    )
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.SHARK
+    )
 
     override fun registerGoals() {
         super.registerGoals()

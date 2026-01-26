@@ -16,14 +16,12 @@ import java.util.stream.Stream
 import javax.xml.crypto.Data
 
 @Suppress("NAME_SHADOWING")
-open class HybridAquaticSchoolingFishEntity(
-    type: EntityType<out HybridAquaticFishEntity>,
-    world: Level,
-    override val prey: List<TagKey<EntityType<*>>>,
-    override val predator: List<TagKey<EntityType<*>>>,
-    private var leader: HybridAquaticSchoolingFishEntity? = null,
-    private var groupSize: Int = 1,
-) : HybridAquaticFishEntity(type, world, listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.NONE)) {
+open class HybridAquaticSchoolingFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: Level, ) : HybridAquaticFishEntity(type, world) {
+    private var leader: HybridAquaticSchoolingFishEntity? = null
+    private var groupSize: Int = 1
+
+    override val prey: List<TagKey<EntityType<*>>> = emptyList()
+    override val predator: List<TagKey<EntityType<*>>> = emptyList()
 
     override fun nextStep(): Float {
         return Float.MAX_VALUE

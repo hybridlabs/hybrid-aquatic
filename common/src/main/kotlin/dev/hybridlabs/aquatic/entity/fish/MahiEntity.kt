@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.tags.TagKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -22,18 +23,16 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class MahiEntity(entityType: EntityType<out MahiEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.CEPHALOPOD
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        )
-    ),
-    VariantHolder<MahiEntity.Companion.Type> {
+class MahiEntity(type: EntityType<out MahiEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<MahiEntity.Companion.Type> {
+
+    override val prey: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.SMALL_PREY,
+        HybridAquaticEntityTags.CEPHALOPOD
+    )
+
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.SHARK
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4

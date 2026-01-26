@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.tags.TagKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
@@ -24,21 +25,15 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.CEPHALOPOD,
-            HybridAquaticEntityTags.SHARK
-        )
-    ),
-    VariantHolder<SeahorseEntity.Companion.Type> {
+class SeahorseEntity(type: EntityType<out SeahorseEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<SeahorseEntity.Companion.Type> {
+
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.SMALL_PREY,
+        HybridAquaticEntityTags.MEDIUM_PREY,
+        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.CEPHALOPOD,
+        HybridAquaticEntityTags.SHARK
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

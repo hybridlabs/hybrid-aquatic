@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -10,18 +11,15 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class StonefishEntity(entityType: EntityType<out StonefishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
+class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val prey: List<TagKey<EntityType<*>>> = listOf(
             HybridAquaticEntityTags.SMALL_PREY
-        ),
-        listOf(
+        )
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK
         )
-    ) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

@@ -55,18 +55,20 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HybridAquaticCephalopodEntity(
     type: EntityType<out HybridAquaticCephalopodEntity>,
     world: Level,
-    open val prey: TagKey<EntityType<*>>,
-    open val predator: List<TagKey<EntityType<*>>>,
-    open var hasInk: Boolean,
-    open var hasGlowInk: Boolean
 ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
+
+    open val prey: TagKey<EntityType<*>>? = null
+    open val predator: List<TagKey<EntityType<*>>> = emptyList()
+
+    open val hasInk: Boolean = false
+    open val hasGlowInk: Boolean = false
 
     override fun registerGoals() {
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(2, CephalopodAttackGoal(this))
         goalSelector.addGoal(3, AvoidEntityGoal(this, LivingEntity::class.java, 8.0f, 1.0, 1.0) { entity: LivingEntity -> predator.any { predatorTag -> entity.type.`is`(predatorTag) } })
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { hunger <= 1200 && it.type.`is`(prey) })
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { hunger <= 1200 && prey != null && it.type.`is`(prey) })
     }
 
     override fun defineSynchedData() {

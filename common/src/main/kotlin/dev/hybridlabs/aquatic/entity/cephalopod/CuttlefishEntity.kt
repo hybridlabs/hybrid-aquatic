@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.tags.TagKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -20,18 +21,14 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.CRUSTACEAN,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        true,
-        false
-    ),
-    VariantHolder<CuttlefishEntity.Companion.Type> {
+class CuttlefishEntity(type: EntityType<out CuttlefishEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world), VariantHolder<CuttlefishEntity.Companion.Type> {
+
+    override val prey: TagKey<EntityType<*>> = HybridAquaticEntityTags.CRUSTACEAN
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.SHARK
+    )
+
+    override val hasInk: Boolean = true
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,

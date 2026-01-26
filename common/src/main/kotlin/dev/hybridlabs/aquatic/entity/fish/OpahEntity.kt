@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.PathfinderMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -8,18 +9,15 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.level.Level
 
-class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
+class OpahEntity(type: EntityType<out OpahEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val prey: List<TagKey<EntityType<*>>> = listOf(
             HybridAquaticEntityTags.CEPHALOPOD,
             HybridAquaticEntityTags.SMALL_PREY
-        ),
-        listOf(
+        )
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.SHARK
         )
-    ) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

@@ -1,22 +1,20 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class ArrowSquidEntity(entityType: EntityType<out ArrowSquidEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.CRUSTACEAN,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        true,
-        false
-    ) {
+class ArrowSquidEntity(type: EntityType<out ArrowSquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
+
+    override val prey: TagKey<EntityType<*>> = HybridAquaticEntityTags.CRUSTACEAN
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.SHARK
+    )
+
+    override val hasInk: Boolean = true
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

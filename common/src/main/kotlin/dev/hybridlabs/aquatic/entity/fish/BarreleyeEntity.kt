@@ -1,23 +1,18 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class BarreleyeEntity(entityType: EntityType<out BarreleyeEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
+class BarreleyeEntity(type: EntityType<out BarreleyeEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK
         )
-    ) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

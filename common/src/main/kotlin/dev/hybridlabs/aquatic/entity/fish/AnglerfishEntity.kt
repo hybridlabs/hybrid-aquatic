@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.NeutralMob
@@ -14,21 +15,20 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.UUID
 
-class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY
-        ),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ), NeutralMob {
+class AnglerfishEntity(type: EntityType<out AnglerfishEntity>, world: Level) : HybridAquaticFishEntity(type, world), NeutralMob {
 
     private var angerTime = 0
     private var angryAt: UUID? = null
+
+    override val prey: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.SMALL_PREY
+    )
+
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.MEDIUM_PREY,
+        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.SHARK
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

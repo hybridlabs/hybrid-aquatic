@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
@@ -14,17 +15,11 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.NONE,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        false,
-        false
-    ) {
+class NautilusEntity(type: EntityType<out NautilusEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
+
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.SHARK
+    )
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

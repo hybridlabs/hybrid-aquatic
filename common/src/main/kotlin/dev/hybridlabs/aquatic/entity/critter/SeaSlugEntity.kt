@@ -21,8 +21,7 @@ import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: Level) :
-    HybridAquaticCritterEntity(entityType, world),
+class SeaSlugEntity(type: EntityType<out SeaSlugEntity>, world: Level) : HybridAquaticCritterEntity(type, world),
     VariantHolder<SeaSlugEntity.Companion.Type> {
 
     companion object {

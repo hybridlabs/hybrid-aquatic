@@ -44,16 +44,13 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
-@Suppress("LeakingThis", "UNUSED_PARAMETER", "DEPRECATION")
-open class HybridAquaticFishEntity(
-    entityType: EntityType<out HybridAquaticFishEntity>,
-    world: Level,
-    open val prey: List<TagKey<EntityType<*>>>,
-    open val predator: List<TagKey<EntityType<*>>>,
-) : WaterAnimal(entityType, world), GeoEntity {
+abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: Level) : WaterAnimal(type, world), GeoEntity {
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
     private val factory = GeckoLibUtil.createInstanceCache(this)
+
+    open val prey: List<TagKey<EntityType<*>>> = emptyList()
+    open val predator: List<TagKey<EntityType<*>>> = emptyList()
 
     override fun registerGoals() {
         super.registerGoals()
@@ -318,6 +315,7 @@ open class HybridAquaticFishEntity(
         return WaterBoundPathNavigation(this, level)
     }
 
+    @Suppress("DEPRECATION", "unused")
     companion object {
         val MOISTNESS: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HybridAquaticFishEntity::class.java, EntityDataSerializers.INT)

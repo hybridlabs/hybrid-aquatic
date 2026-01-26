@@ -1,24 +1,22 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class MorayEelEntity(entityType: EntityType<out MorayEelEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
+class MorayEelEntity(type: EntityType<out MorayEelEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val prey: List<TagKey<EntityType<*>>> = listOf(
             HybridAquaticEntityTags.SMALL_PREY,
             HybridAquaticEntityTags.CRUSTACEAN,
             HybridAquaticEntityTags.CEPHALOPOD
-        ),
-        listOf(
+        )
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK
         )
-    ) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

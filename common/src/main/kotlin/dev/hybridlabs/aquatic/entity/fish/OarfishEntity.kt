@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
@@ -21,16 +22,10 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
+class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
             HybridAquaticEntityTags.SHARK
         )
-    ) {
 
     override fun aiStep() {
         super.aiStep()

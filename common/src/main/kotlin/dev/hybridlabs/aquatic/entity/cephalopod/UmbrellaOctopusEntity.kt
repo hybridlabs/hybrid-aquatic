@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
+import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
@@ -11,14 +12,9 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("unused", "DEPRECATION")
-class UmbrellaOctopusEntity(entityType: EntityType<out UmbrellaOctopusEntity>, world: Level) :
-    HybridAquaticOctopusEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.NONE,
-        HybridAquaticEntityTags.SHARK,
-        false
-    ) {
+class UmbrellaOctopusEntity(type: EntityType<out UmbrellaOctopusEntity>, world: Level) : HybridAquaticOctopusEntity(type, world) {
+
+    override val predator: TagKey<EntityType<*>> = HybridAquaticEntityTags.SHARK
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

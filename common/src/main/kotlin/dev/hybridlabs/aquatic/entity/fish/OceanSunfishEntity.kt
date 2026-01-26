@@ -9,6 +9,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.tags.TagKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
@@ -26,13 +27,10 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class OceanSunfishEntity(entityType: EntityType<out OceanSunfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.JELLYFISH),
-        listOf(HybridAquaticEntityTags.SHARK)
-    ),
-    VariantHolder<OceanSunfishEntity.Companion.Type> {
+class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<OceanSunfishEntity.Companion.Type> {
+
+    override val prey: List<TagKey<EntityType<*>>> = listOf(HybridAquaticEntityTags.JELLYFISH)
+    override val predator: List<TagKey<EntityType<*>>> = listOf(HybridAquaticEntityTags.SHARK)
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

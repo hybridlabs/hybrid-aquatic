@@ -56,10 +56,11 @@ import java.util.UUID
 open class HybridAquaticSharkEntity(
     entityType: EntityType<out HybridAquaticSharkEntity>,
     world: Level,
-    private val prey: List<TagKey<EntityType<*>>>,
-    private val isPassive: Boolean,
-    private val closePlayerAttack: Boolean,
 ) : WaterAnimal(entityType, world), NeutralMob, GeoEntity {
+    open val prey: List<TagKey<EntityType<*>>> = emptyList()
+    open val isPassive: Boolean = true
+    open val closePlayerAttack: Boolean = false
+
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
     private val factory = GeckoLibUtil.createInstanceCache(this)

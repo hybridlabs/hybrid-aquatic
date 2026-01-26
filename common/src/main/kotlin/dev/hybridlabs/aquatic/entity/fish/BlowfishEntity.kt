@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.TagKey
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityDimensions
@@ -24,16 +25,12 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.function.Predicate
 
-class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.NONE),
-        listOf(
+class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
             HybridAquaticEntityTags.MEDIUM_PREY,
             HybridAquaticEntityTags.LARGE_PREY,
             HybridAquaticEntityTags.SHARK
         )
-    ) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -9,17 +10,10 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 
-class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.NONE,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        false,
-        false
-    ) {
+class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
+    override val predator: List<TagKey<EntityType<*>>> = listOf(
+        HybridAquaticEntityTags.SHARK
+    )
 
     private var isFeeding = false
 

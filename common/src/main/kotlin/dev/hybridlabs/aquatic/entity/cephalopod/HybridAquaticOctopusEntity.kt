@@ -49,15 +49,13 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 
 @Suppress("LeakingThis", "unused")
-open class HybridAquaticOctopusEntity(
-    type: EntityType<out HybridAquaticOctopusEntity>,
-    world: Level,
-    open val prey: TagKey<EntityType<*>>,
-    open val predator: TagKey<EntityType<*>>,
-    open var hasInk: Boolean,
-) : WaterAnimal(type, world), GeoEntity {
+open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusEntity>, world: Level, ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var sittingTimer: Int = 0
+
+    open val prey: TagKey<EntityType<*>>? = null
+    open val predator: TagKey<EntityType<*>>? = null
+    open val hasInk: Boolean = false
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)

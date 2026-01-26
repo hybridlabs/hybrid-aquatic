@@ -1,20 +1,19 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
-class FrilledSharkEntity(entityType: EntityType<out FrilledSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(
-        entityType,
-        world,
-        listOf(HybridAquaticEntityTags.CEPHALOPOD),
-        false,
-        false
-    ) {
+class FrilledSharkEntity(type: EntityType<out FrilledSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
+
+    override val prey: List<TagKey<EntityType<*>>> = listOf(HybridAquaticEntityTags.CEPHALOPOD)
+
+    override val isPassive: Boolean = false
+    override val closePlayerAttack: Boolean = false
 
     override fun registerGoals() {
         super.registerGoals()
