@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
-import net.minecraft.world.level.block.state.properties.DripstoneThickness
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
@@ -127,16 +126,16 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
         )
     }
 
-    private fun getHydrothermalVentThickness(cycle: Int, height: Int): DripstoneThickness {
+    private fun getHydrothermalVentThickness(cycle: Int, height: Int): ThermalVentBlock.ThermalVentPosition {
         if (cycle == 0) {
-            return DripstoneThickness.BASE
+            return ThermalVentBlock.ThermalVentPosition.BASE
         }
 
         if (cycle == height - 1) {
-            return DripstoneThickness.TIP
+            return ThermalVentBlock.ThermalVentPosition.TIP
         }
 
-        return DripstoneThickness.MIDDLE
+        return ThermalVentBlock.ThermalVentPosition.MIDDLE
     }
 
     private fun calculateVentHeight(heightMultiplier: Double): Int {

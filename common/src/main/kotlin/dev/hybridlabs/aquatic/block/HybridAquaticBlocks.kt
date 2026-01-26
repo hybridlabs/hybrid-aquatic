@@ -368,7 +368,7 @@ object HybridAquaticBlocks {
         "hydrothermal_vent_shaft"
     ) {
         ThermalVentBlock(
-            true, 2, Properties.copy(Blocks.TUFF).noOcclusion().strength(0.5F).pushReaction(PushReaction.DESTROY)
+            2, Properties.copy(Blocks.TUFF).noOcclusion().strength(0.5F).pushReaction(PushReaction.DESTROY)
         )
     }
 
