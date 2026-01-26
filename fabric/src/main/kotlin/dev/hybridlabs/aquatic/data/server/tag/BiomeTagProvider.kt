@@ -42,12 +42,12 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.WARM_TRENCH)
             .addOptional(HybridAquaticBiomes.COLD_TRENCH)
             .addOptional(HybridAquaticBiomes.FROZEN_TRENCH)
-            .addOptional(HybridAquaticBiomes.SULFURIC_TRENCH)
+            .addOptional(HybridAquaticBiomes.VOLCANIC_TRENCH)
             .addOptional(HybridAquaticBiomes.BRINE_LAGOON)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.HAS_THERMAL_VENTS)
             .addOptional(HybridAquaticBiomes.SULFURIC_CAVES)
-            .addOptional(HybridAquaticBiomes.SULFURIC_TRENCH)
+            .addOptional(HybridAquaticBiomes.VOLCANIC_TRENCH)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SULFURIC_CAVE)
             .addOptional(HybridAquaticBiomes.SULFURIC_CAVES)

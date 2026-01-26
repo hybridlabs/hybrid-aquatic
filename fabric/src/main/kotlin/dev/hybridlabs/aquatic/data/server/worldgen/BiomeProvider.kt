@@ -285,13 +285,13 @@ class BiomeProvider(
                 entries,
                 temperature = 1.0f,
                 downfall = 0.0f,
-                waterColor = 0x3F76E4,
+                waterColor = 0xc9b147,
                 waterFogColor = 0xadb148
             )
         )
 
         entries.add(
-            HybridAquaticBiomes.SULFURIC_TRENCH,
+            HybridAquaticBiomes.VOLCANIC_TRENCH,
             create(
                 entries,
                 temperature = 0.2f,

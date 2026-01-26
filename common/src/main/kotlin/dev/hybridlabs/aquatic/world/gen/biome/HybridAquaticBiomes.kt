@@ -179,10 +179,10 @@ object HybridAquaticBiomes {
     val SULFURIC_CAVES: ResourceKey<Biome> =
         ResourceKey.create(Registries.BIOME, CommonClass.locate("sulfuric_caves"))
 
-    val SULFURIC_TRENCH: ResourceKey<Biome> =
-        ResourceKey.create(Registries.BIOME, CommonClass.locate("sulfuric_trench"))
-    val SULFURIC_TRENCH_SURFACE_RULE: RuleSource = ifTrue(
-        isBiome(SULFURIC_TRENCH),
+    val VOLCANIC_TRENCH: ResourceKey<Biome> =
+        ResourceKey.create(Registries.BIOME, CommonClass.locate("volcanic_trench"))
+    val VOLCANIC_TRENCH_SURFACE_RULE: RuleSource = ifTrue(
+        isBiome(VOLCANIC_TRENCH),
         sequence(
             ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())),
             ifTrue(UNDER_FLOOR, state(Blocks.MUD.defaultBlockState())),
@@ -697,7 +697,7 @@ object HybridAquaticBiomes {
         //#region Sulfuric Trench
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_OCEAN,
-            SULFURIC_TRENCH,
+            VOLCANIC_TRENCH,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
@@ -725,7 +725,7 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.WARM_OCEAN,
-            SULFURIC_TRENCH,
+            VOLCANIC_TRENCH,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
@@ -753,7 +753,7 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_LUKEWARM_OCEAN,
-            SULFURIC_TRENCH,
+            VOLCANIC_TRENCH,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
@@ -781,7 +781,7 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_COLD_OCEAN,
-            SULFURIC_TRENCH,
+            VOLCANIC_TRENCH,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
@@ -809,7 +809,7 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_FROZEN_OCEAN,
-            SULFURIC_TRENCH,
+            VOLCANIC_TRENCH,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
@@ -990,7 +990,7 @@ object HybridAquaticBiomes {
                     CORAL_REEF_SURFACE_RULE,
 
                     BRINE_LAGOON_SURFACE_RULE,
-                    SULFURIC_TRENCH_SURFACE_RULE,
+                    VOLCANIC_TRENCH_SURFACE_RULE,
                     TRENCH_SURFACE_RULE,
                     LUKEWARM_TRENCH_SURFACE_RULE,
                     WARM_TRENCH_SURFACE_RULE,
