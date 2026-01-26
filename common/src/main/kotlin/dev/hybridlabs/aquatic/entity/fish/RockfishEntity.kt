@@ -1,12 +1,12 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.tags.TagKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -23,11 +23,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class RockfishEntity(type: EntityType<out RockfishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<RockfishEntity.Companion.Type> {
-
-    override val predator: List<TagKey<EntityType<*>>> = listOf(
-        HybridAquaticEntityTags.LARGE_PREY,
-        HybridAquaticEntityTags.SHARK,
-    )
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4

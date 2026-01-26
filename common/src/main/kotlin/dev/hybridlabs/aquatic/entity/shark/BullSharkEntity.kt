@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -11,7 +11,9 @@ import net.minecraft.world.level.Level
 
 class BullSharkEntity(type: EntityType<out BullSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
 
-    override val prey: List<TagKey<EntityType<*>>> = listOf(HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.MEDIUM_PREY)
+    override val targetConfig = MobTargetConfiguration.ofPredator(
+        HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.MEDIUM_PREY
+    )
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = true

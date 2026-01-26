@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
@@ -38,7 +39,6 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
 import net.minecraft.world.entity.ai.util.DefaultRandomPos
 import net.minecraft.world.entity.player.Player
@@ -58,17 +58,16 @@ import java.util.EnumSet
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
-    HybridAquaticMammalEntity(
-        entityType, world,
+class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HybridAquaticMammalEntity(entityType, world), VariantHolder<OtterEntity.Companion.Type> {
+    val targetConfig = MobTargetConfiguration.create(
         listOf(
-            HybridAquaticEntityTags.KELP_PREY
+            HybridAquaticEntityTags.KELP_PREY,
         ),
         listOf(
-            HybridAquaticEntityTags.SHARK
-        )
-    ),
-    VariantHolder<OtterEntity.Companion.Type> {
+            HybridAquaticEntityTags.SHARK,
+        ),
+    )
+
     private val swimControl = OtterMoveControl(this, 45, 3, 0.02F, 1.0F, true)
 
     var hunger: Int
@@ -117,15 +116,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
-        targetSelector.addGoal(
-            1,
-            NearestAttackableTargetGoal(
-                this,
-                LivingEntity::class.java,
-                10,
-                true,
-                true
-            ) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
+        targetConfig.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, OtterEntity::hunger)
     }
 
     /* Make otters seek air every 40 secs or so */

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -9,8 +9,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
 class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
-
-    override val prey: List<TagKey<EntityType<*>>> = listOf(HybridAquaticEntityTags.CRUSTACEAN, HybridAquaticEntityTags.SMALL_PREY)
+    override val targetConfig = MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.CRUSTACEAN, HybridAquaticEntityTags.SMALL_PREY)
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false

@@ -1,17 +1,20 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class ArrowSquidEntity(type: EntityType<out ArrowSquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
-
-    override val prey: TagKey<EntityType<*>> = HybridAquaticEntityTags.CRUSTACEAN
-    override val predator: List<TagKey<EntityType<*>>> = listOf(
-        HybridAquaticEntityTags.SHARK
+    override val targetConfig = MobTargetConfiguration.create(
+        listOf(
+            HybridAquaticEntityTags.CRUSTACEAN
+        ),
+        listOf(
+            HybridAquaticEntityTags.SHARK
+        ),
     )
 
     override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT

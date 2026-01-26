@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.entity.shark
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -16,12 +16,11 @@ import net.minecraft.world.level.Level
 import kotlin.random.Random
 
 class TigerSharkEntity(type: EntityType<out TigerSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
-
-    override val prey: List<TagKey<EntityType<*>>> = listOf(
-            HybridAquaticEntityTags.CEPHALOPOD,
-            HybridAquaticEntityTags.CRUSTACEAN,
-            HybridAquaticEntityTags.MEDIUM_PREY
-        )
+    override val targetConfig = MobTargetConfiguration.ofPredator(
+        HybridAquaticEntityTags.CEPHALOPOD,
+        HybridAquaticEntityTags.CRUSTACEAN,
+        HybridAquaticEntityTags.MEDIUM_PREY,
+    )
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false

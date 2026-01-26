@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.FishAttackGoal
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
@@ -11,7 +12,6 @@ import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.tags.TagKey
 import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
@@ -19,7 +19,6 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.MoverType
@@ -28,7 +27,6 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
@@ -49,14 +47,13 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
     var currentRoll: Float = 0.0f
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
-    open val prey: List<TagKey<EntityType<*>>> = emptyList()
-    open val predator: List<TagKey<EntityType<*>>> = emptyList()
+    open val targetConfig: MobTargetConfiguration? = null
 
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, FishAttackGoal(this, 1.1, true))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
+        targetConfig?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticFishEntity::hunger)
     }
 
     override fun defineSynchedData() {

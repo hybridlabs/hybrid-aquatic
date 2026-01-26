@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.entity.shark
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.tags.TagKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -23,8 +23,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class HoundSharkEntity(type: EntityType<out HoundSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world), VariantHolder<HoundSharkEntity.Type> {
-
-    override val prey: List<TagKey<EntityType<*>>> = listOf(HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN)
+    override val targetConfig = MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN)
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false

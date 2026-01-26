@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
@@ -13,7 +14,6 @@ import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
@@ -49,12 +49,11 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 
 @Suppress("LeakingThis", "unused")
-open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusEntity>, world: Level, ) : WaterAnimal(type, world), GeoEntity {
+open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusEntity>, world: Level) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var sittingTimer: Int = 0
 
-    open val prey: TagKey<EntityType<*>>? = null
-    open val predator: TagKey<EntityType<*>>? = null
+    open val targetConfig: MobTargetConfiguration? = null
     open val hasInk: Boolean = false
 
     init {

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket
@@ -8,7 +9,6 @@ import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.tags.TagKey
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityDimensions
@@ -26,11 +26,7 @@ import net.minecraft.world.level.Level
 import java.util.function.Predicate
 
 class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
-    override val predator: List<TagKey<EntityType<*>>> = listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.MEDIUM_PREY, HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

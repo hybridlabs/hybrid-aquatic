@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.tags.TagKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -22,10 +22,13 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class CuttlefishEntity(type: EntityType<out CuttlefishEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world), VariantHolder<CuttlefishEntity.Companion.Type> {
-
-    override val prey: TagKey<EntityType<*>> = HybridAquaticEntityTags.CRUSTACEAN
-    override val predator: List<TagKey<EntityType<*>>> = listOf(
-        HybridAquaticEntityTags.SHARK
+    override val targetConfig = MobTargetConfiguration.create(
+        listOf(
+            HybridAquaticEntityTags.CRUSTACEAN
+        ),
+        listOf(
+            HybridAquaticEntityTags.SHARK
+        ),
     )
 
     override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT

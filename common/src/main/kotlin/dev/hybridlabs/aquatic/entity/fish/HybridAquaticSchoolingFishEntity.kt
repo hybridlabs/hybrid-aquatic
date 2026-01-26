@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FishFollowGroupLeaderGoal
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.tags.TagKey
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
@@ -18,9 +17,6 @@ import javax.xml.crypto.Data
 open class HybridAquaticSchoolingFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: Level, ) : HybridAquaticFishEntity(type, world) {
     private var leader: HybridAquaticSchoolingFishEntity? = null
     private var groupSize: Int = 1
-
-    override val prey: List<TagKey<EntityType<*>>> = emptyList()
-    override val predator: List<TagKey<EntityType<*>>> = emptyList()
 
     override fun nextStep(): Float {
         return Float.MAX_VALUE

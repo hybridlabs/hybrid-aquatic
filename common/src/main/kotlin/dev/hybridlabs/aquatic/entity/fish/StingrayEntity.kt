@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -9,7 +10,6 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.tags.TagKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -29,8 +29,14 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<StingrayEntity.Companion.Type> {
 
-    override val prey: List<TagKey<EntityType<*>>> = listOf(HybridAquaticEntityTags.CRUSTACEAN)
-    override val predator: List<TagKey<EntityType<*>>> = listOf(HybridAquaticEntityTags.SHARK)
+    override val targetConfig = MobTargetConfiguration.create(
+        listOf(
+            HybridAquaticEntityTags.CRUSTACEAN
+        ),
+        listOf(
+            HybridAquaticEntityTags.SHARK
+        ),
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

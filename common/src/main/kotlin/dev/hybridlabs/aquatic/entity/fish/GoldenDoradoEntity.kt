@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.NeutralMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -18,14 +18,15 @@ class GoldenDoradoEntity(type: EntityType<out GoldenDoradoEntity>, world: Level)
     private var angerTime = 0
     private var angryAt: UUID? = null
 
-    override val prey: List<TagKey<EntityType<*>>> = listOf(
-        HybridAquaticEntityTags.SMALL_PREY,
-        HybridAquaticEntityTags.MEDIUM_PREY,
-        HybridAquaticEntityTags.CRUSTACEAN
-    )
-
-    override val predator: List<TagKey<EntityType<*>>> = listOf(
-        HybridAquaticEntityTags.SHARK
+    override val targetConfig = MobTargetConfiguration.create(
+        listOf(
+            HybridAquaticEntityTags.SMALL_PREY,
+            HybridAquaticEntityTags.MEDIUM_PREY,
+            HybridAquaticEntityTags.CRUSTACEAN
+        ),
+        listOf(
+            HybridAquaticEntityTags.SHARK
+        ),
     )
 
     override fun getMaxSpawnClusterSize(): Int {

@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
-import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
@@ -13,10 +13,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("unused", "DEPRECATION")
 class GoldfishEntity(type: EntityType<out GoldfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
-    override val predator: List<TagKey<EntityType<*>>> = listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK)
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.MEDIUM_PREY, HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4

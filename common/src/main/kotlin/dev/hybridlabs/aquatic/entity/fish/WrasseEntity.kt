@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.tags.TagKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -23,14 +23,15 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<WrasseEntity.Companion.Type> {
 
-    override val prey: List<TagKey<EntityType<*>>> = listOf(
-        HybridAquaticEntityTags.CRITTER,
-        HybridAquaticEntityTags.CRUSTACEAN
-    )
-
-    override val predator: List<TagKey<EntityType<*>>> = listOf(
-        HybridAquaticEntityTags.LARGE_PREY,
-        HybridAquaticEntityTags.SHARK
+    override val targetConfig = MobTargetConfiguration.create(
+        listOf(
+            HybridAquaticEntityTags.CRITTER,
+            HybridAquaticEntityTags.CRUSTACEAN
+        ),
+        listOf(
+            HybridAquaticEntityTags.LARGE_PREY,
+            HybridAquaticEntityTags.SHARK
+        ),
     )
 
     override fun getMaxSpawnClusterSize(): Int {

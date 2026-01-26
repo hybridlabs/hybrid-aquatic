@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
@@ -11,7 +12,6 @@ import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
@@ -27,10 +27,8 @@ import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
@@ -50,22 +48,20 @@ import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
-open class HybridAquaticCephalopodEntity(
-    type: EntityType<out HybridAquaticCephalopodEntity>,
-    world: Level,
-) : WaterAnimal(type, world), GeoEntity {
+open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCephalopodEntity>, world: Level) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
-    open val prey: TagKey<EntityType<*>>? = null
-    open val predator: List<TagKey<EntityType<*>>> = emptyList()
-
+    open val targetConfig: MobTargetConfiguration? = null
     open val inkConfig: InkConfiguration? = null
 
     override fun registerGoals() {
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(2, CephalopodAttackGoal(this))
-        goalSelector.addGoal(3, AvoidEntityGoal(this, LivingEntity::class.java, 8.0f, 1.0, 1.0) { entity: LivingEntity -> predator.any { predatorTag -> entity.type.`is`(predatorTag) } })
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { hunger <= 1200 && prey != null && it.type.`is`(prey) })
+
+        targetConfig?.let { config ->
+            config.addAttackTarget(targetSelector, 1200, this, HybridAquaticCephalopodEntity::hunger)
+            config.addAvoidanceGoal(goalSelector, this)
+        }
     }
 
     override fun defineSynchedData() {

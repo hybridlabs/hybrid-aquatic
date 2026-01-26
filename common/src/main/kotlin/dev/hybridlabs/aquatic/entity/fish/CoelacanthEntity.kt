@@ -1,18 +1,22 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class CoelacanthEntity(type: EntityType<out CoelacanthEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
-    override val prey: List<TagKey<EntityType<*>>> = listOf(
+    override val targetConfig = MobTargetConfiguration.create(
+        listOf(
             HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.CEPHALOPOD)
-    override val predator: List<TagKey<EntityType<*>>> = listOf(
-            HybridAquaticEntityTags.SHARK)
+            HybridAquaticEntityTags.CEPHALOPOD
+        ),
+        listOf(
+            HybridAquaticEntityTags.SHARK
+        ),
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

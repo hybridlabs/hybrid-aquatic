@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
-import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
@@ -14,9 +14,13 @@ import net.minecraft.world.level.ServerLevelAccessor
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
 
-    override val prey: TagKey<EntityType<*>> = HybridAquaticEntityTags.CRUSTACEAN
-    override val predator: List<TagKey<EntityType<*>>> = listOf(
-        HybridAquaticEntityTags.SHARK
+    override val targetConfig = MobTargetConfiguration.create(
+        listOf(
+            HybridAquaticEntityTags.CRUSTACEAN
+        ),
+        listOf(
+            HybridAquaticEntityTags.SHARK
+        ),
     )
 
     override val inkConfig: InkConfiguration = InkConfiguration.GLOW

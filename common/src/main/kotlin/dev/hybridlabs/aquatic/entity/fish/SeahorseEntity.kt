@@ -1,12 +1,12 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.tags.TagKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
@@ -27,12 +27,12 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class SeahorseEntity(type: EntityType<out SeahorseEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<SeahorseEntity.Companion.Type> {
 
-    override val predator: List<TagKey<EntityType<*>>> = listOf(
+    override val targetConfig = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.SMALL_PREY,
         HybridAquaticEntityTags.MEDIUM_PREY,
         HybridAquaticEntityTags.LARGE_PREY,
         HybridAquaticEntityTags.CEPHALOPOD,
-        HybridAquaticEntityTags.SHARK
+        HybridAquaticEntityTags.SHARK,
     )
 
     override fun getMaxSpawnClusterSize(): Int {
