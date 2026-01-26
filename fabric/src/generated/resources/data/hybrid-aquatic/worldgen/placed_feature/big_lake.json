@@ -2,8 +2,8 @@
   "feature": "hybrid-aquatic:big_lake",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 100
+      "type": "minecraft:count",
+      "count": 8
     },
     {
       "type": "minecraft:in_square"

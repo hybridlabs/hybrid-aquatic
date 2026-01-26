@@ -358,7 +358,7 @@ class ConfiguredFeatureProvider(
             ConfiguredFeature(
                 Feature.FLOWER,
                 RandomPatchConfiguration(
-                    4, 2, 2,
+                    2, 4, 2,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
@@ -377,7 +377,7 @@ class ConfiguredFeatureProvider(
             ConfiguredFeature(
                 Feature.FLOWER,
                 RandomPatchConfiguration(
-                    4, 2, 2,
+                    2, 4, 2,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(

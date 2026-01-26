@@ -138,7 +138,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.WATER_LETTUCE), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    CountPlacement.of(5),
+                    RarityFilter.onAverageOnceEvery(2),
                     BiomeFilter.biome()
                 )
             )
@@ -149,7 +149,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    CountPlacement.of(3),
+                    RarityFilter.onAverageOnceEvery(2),
                     BiomeFilter.biome()
                 )
             )
@@ -180,7 +180,7 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.BIG_LAKE, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.BIG_LAKE), listOf(
-                    RarityFilter.onAverageOnceEvery(100),
+                    CountPlacement.of(8),
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                     BiomeFilter.biome()
@@ -242,7 +242,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.GIANT_CLAM_PATCH), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(1),
+                    RarityFilter.onAverageOnceEvery(3),
                     BiomeFilter.biome()
                 )
             )
@@ -254,7 +254,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.OYSTER_BED), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(1),
+                    RarityFilter.onAverageOnceEvery(3),
                     BiomeFilter.biome()
                 )
             )
@@ -266,7 +266,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.TUBE_SPONGE_PATCH), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(1),
+                    RarityFilter.onAverageOnceEvery(3)
                 )
             )
         )
@@ -276,7 +276,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.GLASS_SPONGE_PATCH), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(1),
+                     RarityFilter.onAverageOnceEvery(8)
                 )
             )
         )
@@ -286,7 +286,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.HARP_SPONGE_PATCH), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(1),
+                     RarityFilter.onAverageOnceEvery(5)
                 )
             )
         )
