@@ -10,7 +10,7 @@
             "entries": [
               {
                 "data": {
-                  "Name": "hybrid-aquatic:oyster",
+                  "Name": "hybrid-aquatic:oyster_block",
                   "Properties": {
                     "facing": "north",
                     "state": "open",
@@ -21,7 +21,7 @@
               },
               {
                 "data": {
-                  "Name": "hybrid-aquatic:oyster",
+                  "Name": "hybrid-aquatic:oyster_block",
                   "Properties": {
                     "facing": "south",
                     "state": "open",
@@ -32,7 +32,7 @@
               },
               {
                 "data": {
-                  "Name": "hybrid-aquatic:oyster",
+                  "Name": "hybrid-aquatic:oyster_block",
                   "Properties": {
                     "facing": "east",
                     "state": "open",
@@ -43,7 +43,7 @@
               },
               {
                 "data": {
-                  "Name": "hybrid-aquatic:oyster",
+                  "Name": "hybrid-aquatic:oyster_block",
                   "Properties": {
                     "facing": "west",
                     "state": "open",

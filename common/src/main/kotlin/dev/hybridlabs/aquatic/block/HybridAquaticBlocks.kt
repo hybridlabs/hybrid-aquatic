@@ -384,9 +384,29 @@ object HybridAquaticBlocks {
     val TUBE_SPONGE = register(
         "tube_sponge"
     ) {
-        TubeSpongeBlock(
+        LivingSpongeBlock(
             true,
             Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.SLIME_BLOCK).noOcclusion()
+                .pushReaction(PushReaction.DESTROY)
+        )
+    }
+
+    val GLASS_SPONGE = register(
+        "glass_sponge"
+    ) {
+        LivingSpongeBlock(
+            true,
+            Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.SLIME_BLOCK).noOcclusion()
+                .pushReaction(PushReaction.DESTROY)
+        )
+    }
+
+    val HARP_SPONGE = register(
+        "harp_sponge"
+    ) {
+        LivingSpongeBlock(
+            true,
+            Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.SLIME_BLOCK).noOcclusion()
                 .pushReaction(PushReaction.DESTROY)
         )
     }
@@ -400,7 +420,7 @@ object HybridAquaticBlocks {
     }
 
     val OYSTER = register(
-        "oyster"
+        "oyster_block"
     ) {
         OysterBlock(
             true, Properties.copy(Blocks.TUFF).noOcclusion().strength(1.0F).pushReaction(PushReaction.DESTROY)

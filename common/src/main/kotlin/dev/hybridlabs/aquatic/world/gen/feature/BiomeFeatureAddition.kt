@@ -186,6 +186,18 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
+                BiomeTags.IS_DEEP_OCEAN,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.GLASS_SPONGE_PATCH
+            ),
+
+            BiomeFeatureAddition(
+                BiomeTags.IS_DEEP_OCEAN,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.HARP_SPONGE_PATCH
+            ),
+
+            BiomeFeatureAddition(
                 HybridAquaticBiomeTags.BOTTLE_SPAWN_BIOMES,
                 GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                 HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE

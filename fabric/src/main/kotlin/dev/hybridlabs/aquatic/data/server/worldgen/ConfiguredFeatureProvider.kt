@@ -353,6 +353,44 @@ class ConfiguredFeatureProvider(
             )
         )
 
+        entries.add(
+            HybridAquaticConfiguredFeatures.GLASS_SPONGE_PATCH,
+            ConfiguredFeature(
+                Feature.FLOWER,
+                RandomPatchConfiguration(
+                    4, 2, 2,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            BlockStateProvider.simple(
+                                HybridAquaticBlocks.GLASS_SPONGE.get().defaultBlockState().setValue(WATERLOGGED, true)
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.HARP_SPONGE_PATCH,
+            ConfiguredFeature(
+                Feature.FLOWER,
+                RandomPatchConfiguration(
+                    4, 2, 2,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            BlockStateProvider.simple(
+                                HybridAquaticBlocks.HARP_SPONGE.get().defaultBlockState().setValue(WATERLOGGED, true)
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
         // giant clam patch
         entries.add(
             HybridAquaticConfiguredFeatures.GIANT_CLAM_PATCH,

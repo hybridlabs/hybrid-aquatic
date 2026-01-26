@@ -24,7 +24,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class TubeSpongeBlock(
+class LivingSpongeBlock(
     private val emitsParticles: Boolean,
     settings: Properties
 ) : BushBlock(settings), SimpleWaterloggedBlock {

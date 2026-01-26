@@ -271,6 +271,26 @@ class PlacedFeatureProvider(
             )
         )
 
+         entries.add(
+            HybridAquaticPlacedFeatures.GLASS_SPONGE_PATCH, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.GLASS_SPONGE_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    CountPlacement.of(1),
+                )
+            )
+        )
+
+         entries.add(
+            HybridAquaticPlacedFeatures.HARP_SPONGE_PATCH, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.HARP_SPONGE_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    CountPlacement.of(1),
+                )
+            )
+        )
+
         // message in a bottle
         entries.add(
             HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE, PlacedFeature(

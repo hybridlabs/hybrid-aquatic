@@ -21,6 +21,8 @@ object HybridAquaticBlockRenderers {
             HybridAquaticBlocks.BULL_KELP.get(),
             HybridAquaticBlocks.BULL_KELP_PLANT.get(),
 
+            HybridAquaticBlocks.HARP_SPONGE.get(),
+
             HybridAquaticBlocks.SARGASSUM.get(),
             HybridAquaticBlocks.SARGASSUM_PLANT.get(),
             HybridAquaticBlocks.FLOATING_SARGASSUM.get(),

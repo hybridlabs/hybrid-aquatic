@@ -208,7 +208,7 @@ object HybridAquaticItems {
     }
 
     val GIANT_CLAM = registerBlockItem("giant_clam") { HybridAquaticBlocks.GIANT_CLAM.get() }
-    val OYSTER = registerBlockItem("oyster") { HybridAquaticBlocks.OYSTER.get() }
+    val OYSTER_BLOCK = registerBlockItem("oyster_block") { HybridAquaticBlocks.OYSTER.get() }
     val SARGASSUM = registerBlockItem("sargassum") { HybridAquaticBlocks.SARGASSUM.get() }
     val BULL_KELP = registerBlockItem("bull_kelp") { HybridAquaticBlocks.BULL_KELP.get() }
     val FLOATING_SARGASSUM =
@@ -222,6 +222,8 @@ object HybridAquaticItems {
     val HYDROTHERMAL_VENT = registerBlockItem("hydrothermal_vent") { HybridAquaticBlocks.THERMAL_VENT.get() }
     val TUBE_WORM = registerBlockItem("tube_worm") { HybridAquaticBlocks.TUBE_WORM.get() }
     val TUBE_SPONGE = registerBlockItem("tube_sponge") { HybridAquaticBlocks.TUBE_SPONGE.get() }
+    val GLASS_SPONGE = registerBlockItem("glass_sponge") { HybridAquaticBlocks.GLASS_SPONGE.get() }
+    val HARP_SPONGE = registerBlockItem("harp_sponge") { HybridAquaticBlocks.HARP_SPONGE.get() }
 
     //#region Coral Blocks
 
@@ -439,6 +441,21 @@ object HybridAquaticItems {
 
     val COOKED_SHRIMP = register(
         "cooked_shrimp"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(4)
+                        .saturationMod(0.5F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
+    val OYSTER = register(
+        "oyster"
     ) {
         Item(
             Item.Properties()
