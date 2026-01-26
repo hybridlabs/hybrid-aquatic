@@ -142,6 +142,7 @@ object HybridAquaticClient : ClientModInitializer {
             HybridAquaticBlocks.FLOATING_SARGASSUM.get(),
 
             HybridAquaticBlocks.HARP_SPONGE.get(),
+            HybridAquaticBlocks.GLASS_SPONGE.get(),
 
             HybridAquaticBlocks.WATER_LETTUCE.get(),
             HybridAquaticBlocks.JUNGLE_LILY_PAD.get(),
