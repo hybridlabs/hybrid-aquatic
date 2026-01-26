@@ -71,13 +71,6 @@ open class HybridAquaticCritterEntity(
         }
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(CRITTER_SIZE, 0)
-        entityData.define(CRITTER_FLAGS, 0.toByte())
-        entityData.define(CLIMBING, false)
-    }
-
     override fun onClimbable(): Boolean {
         return this.climbingTicks > 8 && this.isClimbingWall()
     }
@@ -123,6 +116,14 @@ open class HybridAquaticCritterEntity(
         return false
     }
 
+    //#region NBT
+    override fun defineSynchedData() {
+        super.defineSynchedData()
+        entityData.define(CRITTER_SIZE, 0)
+        entityData.define(CRITTER_FLAGS, 0.toByte())
+        entityData.define(CLIMBING, false)
+    }
+
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         super.addAdditionalSaveData(nbt)
         nbt.putInt(CRITTER_SIZE_KEY, size)
@@ -134,14 +135,21 @@ open class HybridAquaticCritterEntity(
         size = nbt.getInt(CRITTER_SIZE_KEY)
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
+    //#endregion
 
     override fun handleAirSupply(air: Int) {}
 
+    //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             DefaultAnimations.genericWalkIdleController(this)
         )
     }
+
+    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+        return factory
+    }
+    //#endregion
 
     protected open fun getMinSize(): Int {
         return 0
@@ -159,6 +167,7 @@ open class HybridAquaticCritterEntity(
         return 2
     }
 
+    //#region SFX
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.SLIME_HURT
     }
@@ -166,10 +175,7 @@ open class HybridAquaticCritterEntity(
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.SLIME_DEATH_SMALL
     }
-
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
-        return factory
-    }
+    //#endregion
 
     var size: Int
         get() = entityData.get(CRITTER_SIZE)
