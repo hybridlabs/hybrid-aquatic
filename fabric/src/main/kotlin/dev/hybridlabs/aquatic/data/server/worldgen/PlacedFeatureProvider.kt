@@ -298,7 +298,7 @@ class PlacedFeatureProvider(
             HybridAquaticPlacedFeatures.CORAL_REEF, PlacedFeature(
                 entries.ref(AquaticFeatures.WARM_OCEAN_VEGETATION), listOf(
                     CountOnEveryLayerPlacement.of(10),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
                     BiomeFilter.biome()
                 )
             )
