@@ -246,7 +246,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                             LootItem.lootTableItem(HybridAquaticItems.SULFUR.get())
                                 .apply(
                                     SetItemCountFunction.setCount(
-                                        UniformGenerator.between(2f, 4f)
+                                        UniformGenerator.between(2f, 5f)
                                     )
                                 )
                                 .apply(
