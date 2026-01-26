@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:is_deep_ocean"
+    "#minecraft:is_deep_ocean",
+    {
+      "id": "hybrid-aquatic:sulfuric_caves",
+      "required": false
+    }
   ]
 }

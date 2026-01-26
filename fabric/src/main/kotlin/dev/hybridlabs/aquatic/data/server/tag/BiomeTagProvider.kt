@@ -19,6 +19,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(BiomeTags.HAS_CLOSER_WATER_FOG)
             .forceAddTag(BiomeTags.IS_DEEP_OCEAN)
+            .addOptional(HybridAquaticBiomes.SULFURIC_CAVES)
 
         getOrCreateTagBuilder(BiomeTags.HAS_SHIPWRECK)
             .addOptional(HybridAquaticBiomes.SEAGRASS_BED)
