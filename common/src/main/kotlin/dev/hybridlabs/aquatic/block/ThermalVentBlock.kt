@@ -1,14 +1,12 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
-import dev.hybridlabs.aquatic.entity.crustacean.YetiCrabEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.util.RandomSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter

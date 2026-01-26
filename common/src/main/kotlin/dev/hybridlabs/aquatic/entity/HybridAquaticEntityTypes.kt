@@ -56,6 +56,7 @@ import dev.hybridlabs.aquatic.entity.fish.MantaRayEntity
 import dev.hybridlabs.aquatic.entity.fish.MorayEelEntity
 import dev.hybridlabs.aquatic.entity.fish.NeedlefishEntity
 import dev.hybridlabs.aquatic.entity.fish.OarfishEntity
+import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
 import dev.hybridlabs.aquatic.entity.fish.OpahEntity
 import dev.hybridlabs.aquatic.entity.fish.OscarEntity
 import dev.hybridlabs.aquatic.entity.fish.ParrotfishEntity
@@ -74,7 +75,6 @@ import dev.hybridlabs.aquatic.entity.fish.SnailfishEntity
 import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
 import dev.hybridlabs.aquatic.entity.fish.StingrayEntity
 import dev.hybridlabs.aquatic.entity.fish.StonefishEntity
-import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
 import dev.hybridlabs.aquatic.entity.fish.SunfishEntity
 import dev.hybridlabs.aquatic.entity.fish.SurgeonfishEntity
 import dev.hybridlabs.aquatic.entity.fish.TetraEntity

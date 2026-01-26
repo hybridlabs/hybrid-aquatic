@@ -28,7 +28,7 @@ class CuttlefishEntity(type: EntityType<out CuttlefishEntity>, world: Level) : H
         HybridAquaticEntityTags.SHARK
     )
 
-    override val hasInk: Boolean = true
+    override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,

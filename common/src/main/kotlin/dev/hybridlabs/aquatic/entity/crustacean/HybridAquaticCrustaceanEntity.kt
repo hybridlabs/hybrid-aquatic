@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.ai.control.WallClimbNavigation
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
@@ -24,7 +23,6 @@ import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.PanicGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
-import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor

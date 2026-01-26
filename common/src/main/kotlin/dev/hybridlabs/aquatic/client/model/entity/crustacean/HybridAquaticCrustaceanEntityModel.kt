@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.client.model.entity.crustacean
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
 import net.minecraft.resources.ResourceLocation
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")

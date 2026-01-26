@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FishFollowGroupLeaderGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.tags.TagKey
 import net.minecraft.world.DifficultyInstance

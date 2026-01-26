@@ -14,7 +14,7 @@ class ArrowSquidEntity(type: EntityType<out ArrowSquidEntity>, world: Level) : H
         HybridAquaticEntityTags.SHARK
     )
 
-    override val hasInk: Boolean = true
+    override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

@@ -6,7 +6,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
-
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

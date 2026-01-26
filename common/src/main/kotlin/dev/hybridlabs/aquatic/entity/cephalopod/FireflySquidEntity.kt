@@ -19,8 +19,7 @@ class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level)
         HybridAquaticEntityTags.SHARK
     )
 
-    override val hasInk: Boolean = true
-    override val hasGlowInk: Boolean = true
+    override val inkConfig: InkConfiguration = InkConfiguration.GLOW
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

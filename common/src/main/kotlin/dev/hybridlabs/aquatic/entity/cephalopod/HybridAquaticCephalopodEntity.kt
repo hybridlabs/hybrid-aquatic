@@ -4,8 +4,6 @@ import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import net.minecraft.core.BlockPos
-import net.minecraft.core.particles.ParticleTypes
-import net.minecraft.core.particles.SimpleParticleType
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -61,8 +59,7 @@ open class HybridAquaticCephalopodEntity(
     open val prey: TagKey<EntityType<*>>? = null
     open val predator: List<TagKey<EntityType<*>>> = emptyList()
 
-    open val hasInk: Boolean = false
-    open val hasGlowInk: Boolean = false
+    open val inkConfig: InkConfiguration? = null
 
     override fun registerGoals() {
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 10))
@@ -136,8 +133,8 @@ open class HybridAquaticCephalopodEntity(
     override fun hurt(source: DamageSource, amount: Float): Boolean {
         if (super.hurt(source, amount) && this.lastHurtByMob != null) {
             if (!level().isClientSide) {
-                if (this.isUnderWater && this.hasInk || this.hasGlowInk) {
-                    this.squirt()
+                if (this.isUnderWater) {
+                    inkConfig?.run(::squirt)
                 }
 
                 val attackerPos = this.lastHurtByMob?.position()
@@ -153,7 +150,7 @@ open class HybridAquaticCephalopodEntity(
         return false
     }
 
-    private fun squirt() {
+    private fun squirt(inkConfig: InkConfiguration) {
         this.playSound(this.getSquirtSound(), this.soundVolume, this.voicePitch)
 
         val entityPosition = Vec3(this.x, this.y, this.z)
@@ -181,7 +178,7 @@ open class HybridAquaticCephalopodEntity(
             val velocity = Vec3(offsetX, offsetY, offsetZ).normalize().scale(randomMultiplier)
 
             (level() as ServerLevel).sendParticles(
-                this.getInkParticle(),
+                inkConfig.particle,
                 entityPosition.x,
                 entityPosition.y,
                 entityPosition.z,
@@ -191,14 +188,6 @@ open class HybridAquaticCephalopodEntity(
                 velocity.z * 0.25,
                 0.1
             )
-        }
-    }
-
-    protected open fun getInkParticle(): SimpleParticleType {
-        return if (this.hasGlowInk) {
-            ParticleTypes.GLOW_SQUID_INK
-        } else {
-            ParticleTypes.SQUID_INK
         }
     }
 
