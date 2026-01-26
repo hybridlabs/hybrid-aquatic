@@ -63,20 +63,6 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
         }
     }
 
-    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(
-            AnimationController(
-                this, "Fly/Swim/Idle", 5
-            ) { state: AnimationState<HybridAquaticFishEntity> ->
-                when {
-                    this.isGliding -> state.setAndContinue(DefaultAnimations.FLY)
-                    state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
-                    else -> state.setAndContinue(DefaultAnimations.IDLE)
-                }
-            }
-        )
-    }
-
     private fun startGliding() {
         isGliding = true
     }
@@ -111,6 +97,20 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
 
     override fun increaseAirSupply(currentAir: Int): Int {
         return this.maxAirSupply
+    }
+
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
+            AnimationController(
+                this, "Fly/Swim/Idle", 5
+            ) { state: AnimationState<HybridAquaticFishEntity> ->
+                when {
+                    this.isGliding -> state.setAndContinue(DefaultAnimations.FLY)
+                    state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
+                    else -> state.setAndContinue(DefaultAnimations.IDLE)
+                }
+            }
+        )
     }
 
     override fun finalizeSpawn(

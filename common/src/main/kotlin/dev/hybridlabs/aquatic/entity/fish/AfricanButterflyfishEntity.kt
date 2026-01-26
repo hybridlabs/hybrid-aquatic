@@ -9,6 +9,7 @@ import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.BreathAirGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.phys.Vec3
@@ -36,7 +37,8 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
 
     override fun registerGoals() {
         super.registerGoals()
-        targetSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
+        goalSelector.addGoal(0, BreathAirGoal(this))
+        goalSelector.addGoal(4, HybridAquaticJumpGoal(this, 10))
     }
 
     override fun tick() {
@@ -56,9 +58,29 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
         }
     }
 
+    private fun startGliding() {
+        isGliding = true
+    }
+
+    private fun stopGliding() {
+        isGliding = false
+    }
+
+    private fun applyGlidingPhysics() {
+        if (!isGliding) return
+
+        val motion = this.deltaMovement
+        val newMotion = Vec3(
+            motion.x * 1.1,
+            (motion.y * 0.95).coerceAtLeast(-0.1),
+            motion.z * 1.1
+        )
+        this.deltaMovement = newMotion
+    }
+
     override fun handleAirSupply(air: Int) {
         if (isInWater && !isNoAi) {
-            this.airSupply = airSupply - 1
+            this.airSupply = air - 1
         } else {
             this.airSupply = this.maxAirSupply
         }
@@ -94,26 +116,6 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
                 }
             }
         )
-    }
-
-    private fun startGliding() {
-        isGliding = true
-    }
-
-    private fun stopGliding() {
-        isGliding = false
-    }
-
-    private fun applyGlidingPhysics() {
-        if (!isGliding) return
-
-        val motion = this.deltaMovement
-        val newMotion = Vec3(
-            motion.x * 1.1,
-            (motion.y * 0.95).coerceAtLeast(-0.1),
-            motion.z * 1.1
-        )
-        this.deltaMovement = newMotion
     }
 
     companion object {
