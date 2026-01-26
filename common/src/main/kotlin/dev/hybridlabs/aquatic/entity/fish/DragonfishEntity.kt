@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -11,20 +12,25 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-class DragonfishEntity(entityType: EntityType<out DragonfishEntity>, world: Level) :
-    HybridAquaticFishEntity(entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK)) {
+class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY
+            ),
+            listOf(
+                HybridAquaticEntityTags.MEDIUM_PREY,
+                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 3.0)

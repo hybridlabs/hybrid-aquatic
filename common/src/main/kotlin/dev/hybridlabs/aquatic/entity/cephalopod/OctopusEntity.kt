@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import com.mojang.serialization.Codec
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -29,14 +30,10 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class OctopusEntity(entityType: EntityType<out OctopusEntity>, world: Level) :
-    HybridAquaticOctopusEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.CRUSTACEAN,
-        HybridAquaticEntityTags.SHARK,
-        true,
-    ), VariantHolder<OctopusEntity.Companion.Type>, OverlayTextureFeature {
+class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HybridAquaticOctopusEntity(type, world), VariantHolder<OctopusEntity.Companion.Type>, OverlayTextureFeature {
+    override val targetConfig = TARGET_CONFIG
+
+    override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
@@ -57,6 +54,15 @@ class OctopusEntity(entityType: EntityType<out OctopusEntity>, world: Level) :
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.CRUSTACEAN
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 12.0)

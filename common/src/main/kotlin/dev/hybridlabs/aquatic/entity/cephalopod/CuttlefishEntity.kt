@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -20,18 +21,10 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.CRUSTACEAN,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        true,
-        false
-    ),
-    VariantHolder<CuttlefishEntity.Companion.Type> {
+class CuttlefishEntity(type: EntityType<out CuttlefishEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world), VariantHolder<CuttlefishEntity.Companion.Type> {
+    override val targetConfig = TARGET_CONFIG
+
+    override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
@@ -45,6 +38,15 @@ class CuttlefishEntity(entityType: EntityType<out CuttlefishEntity>, world: Leve
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.CRUSTACEAN
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)

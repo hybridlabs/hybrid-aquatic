@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -26,16 +27,9 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 import java.util.UUID
 
-class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.SMALL_PREY),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ), NeutralMob {
+class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), NeutralMob {
+
+    override val targetConfig = TARGET_CONFIG
 
     private var angerTime = 0
     private var angryAt: UUID? = null
@@ -45,6 +39,17 @@ class PiranhaEntity(entityType: EntityType<out PiranhaEntity>, world: Level) :
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY
+            ),
+            listOf(
+                HybridAquaticEntityTags.MEDIUM_PREY,
+                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
 
         val ANGER_TIME_RANGE: IntProvider = TimeUtil.rangeOfSeconds(10, 30)
 

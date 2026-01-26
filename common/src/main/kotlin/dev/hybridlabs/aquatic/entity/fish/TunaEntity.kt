@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -24,18 +25,9 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.CEPHALOPOD,
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        )
-    ),
-    VariantHolder<TunaEntity.Companion.Type> {
+class TunaEntity(type: EntityType<out TunaEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<TunaEntity.Companion.Type> {
+
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4
@@ -49,7 +41,7 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
-        val selectedType = Type.fromBiome(biome, Random.Default)
+        val selectedType = Type.fromBiome(biome, Random)
         this.variant = selectedType
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -60,6 +52,16 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.CEPHALOPOD
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)

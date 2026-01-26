@@ -1,19 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class SunfishEntity(entityType: EntityType<out SunfishEntity>, world: Level) :
-    HybridAquaticFishEntity(entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK)) {
+class SunfishEntity(type: EntityType<out SunfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.MEDIUM_PREY, HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
 
     override fun getMaxSpawnClusterSize(): Int {
         return 3

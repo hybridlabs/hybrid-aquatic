@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.IntProvider
@@ -19,26 +20,27 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.UUID
 
-class BarracudaEntity(entityType: EntityType<out BarracudaEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.MEDIUM_PREY,
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        )
-    ), NeutralMob {
+class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) : HybridAquaticFishEntity(type, world), NeutralMob {
 
     private var angerTime = 0
     private var angryAt: UUID? = null
+
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.MEDIUM_PREY,
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
 
         val ANGER_TIME_RANGE: IntProvider = TimeUtil.rangeOfSeconds(10, 30)
         fun createMobAttributes(): AttributeSupplier.Builder {

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -26,13 +27,9 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class OceanSunfishEntity(entityType: EntityType<out OceanSunfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.JELLYFISH),
-        listOf(HybridAquaticEntityTags.SHARK)
-    ),
-    VariantHolder<OceanSunfishEntity.Companion.Type> {
+class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<OceanSunfishEntity.Companion.Type> {
+
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
@@ -58,6 +55,15 @@ class OceanSunfishEntity(entityType: EntityType<out OceanSunfishEntity>, world: 
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.JELLYFISH
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 12.0)

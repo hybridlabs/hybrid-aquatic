@@ -175,8 +175,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("alexsmobs", "mimic_octopus"))
             .addOptional(ResourceLocation("alexsmobs", "giant_squid"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.NONE)
-
         getOrCreateTagBuilder(EntityTypeTags.AXOLOTL_HUNT_TARGETS)
             .add(
                 HybridAquaticEntityTypes.TETRA.get(),

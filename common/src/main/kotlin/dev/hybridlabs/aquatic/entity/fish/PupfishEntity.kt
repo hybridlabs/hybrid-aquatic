@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -10,18 +11,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
-class PupfishEntity(entityType: EntityType<out PupfishEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class PupfishEntity(type: EntityType<out PupfishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world) {
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.MEDIUM_PREY, HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

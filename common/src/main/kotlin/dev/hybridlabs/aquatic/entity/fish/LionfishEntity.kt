@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
@@ -10,24 +11,25 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.CRUSTACEAN
-        ),
-        listOf(
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class LionfishEntity(type: EntityType<out LionfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.CRUSTACEAN
+            ),
+            listOf(
+                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)

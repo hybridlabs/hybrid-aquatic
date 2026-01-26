@@ -9,7 +9,6 @@ import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
-import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.AgeableMob
@@ -41,13 +40,7 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "unused")
-open class HybridAquaticMammalEntity(
-    type: EntityType<out HybridAquaticMammalEntity>,
-    world: Level,
-    open val prey: List<TagKey<EntityType<*>>>,
-    open val predator: List<TagKey<EntityType<*>>>,
-) : Animal(type, world), GeoEntity {
-
+open class HybridAquaticMammalEntity(type: EntityType<out HybridAquaticMammalEntity>, world: Level) : Animal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     init {

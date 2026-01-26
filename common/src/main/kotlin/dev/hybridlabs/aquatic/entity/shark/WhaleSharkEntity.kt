@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -22,9 +21,7 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 import java.util.function.IntFunction
 
-class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.NONE), true, false),
-    OverlayTextureFeature {
+class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world), OverlayTextureFeature {
 
     private var isFeeding = false
 

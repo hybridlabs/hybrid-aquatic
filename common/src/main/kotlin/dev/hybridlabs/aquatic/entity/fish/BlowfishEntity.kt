@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket
@@ -24,16 +25,8 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.function.Predicate
 
-class BlowfishEntity(entityType: EntityType<out BlowfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.NONE),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.MEDIUM_PREY, HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

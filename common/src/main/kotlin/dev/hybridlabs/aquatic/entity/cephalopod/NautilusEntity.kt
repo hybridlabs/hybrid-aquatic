@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvent
@@ -14,17 +15,9 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.NONE,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        false,
-        false
-    ) {
+class NautilusEntity(type: EntityType<out NautilusEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
+
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.SHARK)
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
@@ -58,5 +51,13 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
 
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.SHULKER_HURT_CLOSED
+    }
+
+    override fun getMaxSize(): Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
     }
 }

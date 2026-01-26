@@ -53,6 +53,7 @@ import dev.hybridlabs.aquatic.client.render.entity.fish.MantaRayEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.MorayEelEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.NeedlefishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.OarfishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.fish.OceanSunfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.OpahEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.OscarEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.ParrotfishEntityRenderer
@@ -71,7 +72,6 @@ import dev.hybridlabs.aquatic.client.render.entity.fish.SnailfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.SquirrelfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.StingrayEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.StonefishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.OceanSunfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.SunfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.SurgeonfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.TetraEntityRenderer

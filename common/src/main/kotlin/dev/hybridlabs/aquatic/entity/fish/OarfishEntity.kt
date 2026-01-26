@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -21,16 +22,8 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class OarfishEntity(entityType: EntityType<out OarfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.SHARK)
 
     override fun aiStep() {
         super.aiStep()

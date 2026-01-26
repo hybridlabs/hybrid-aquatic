@@ -40,8 +40,7 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 
 
-class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, world: Level) :
-    HybridAquaticMinibossEntity(entityType, world) {
+class KarkinosEntity(type: EntityType<out HybridAquaticMinibossEntity>, world: Level) : HybridAquaticMinibossEntity(type, world) {
     private var flippedTimer: Int = 0
     private var flippedCooldown: Int = 0
     private var summonTimer: Int = 0

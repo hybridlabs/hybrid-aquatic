@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import com.mojang.serialization.Codec
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -21,9 +22,8 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
 
-class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
-    HybridAquaticFishEntity(entityType, world,
-        listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.SHARK)), OverlayTextureFeature {
+class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) : HybridAquaticFishEntity(type, world), OverlayTextureFeature {
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.SHARK)
 
     override fun registerGoals() {
         super.registerGoals()

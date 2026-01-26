@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
@@ -14,21 +15,12 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.UUID
 
-class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY
-        ),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ), NeutralMob {
+class AnglerfishEntity(type: EntityType<out AnglerfishEntity>, world: Level) : HybridAquaticFishEntity(type, world), NeutralMob {
 
     private var angerTime = 0
     private var angryAt: UUID? = null
+
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
@@ -43,6 +35,17 @@ class AnglerfishEntity(entityType: EntityType<out AnglerfishEntity>, world: Leve
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY
+            ),
+            listOf(
+                HybridAquaticEntityTags.MEDIUM_PREY,
+                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 2.0)

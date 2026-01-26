@@ -19,11 +19,11 @@ import dev.hybridlabs.aquatic.entity.fish.FlyingFishEntity
 import dev.hybridlabs.aquatic.entity.fish.GoldfishEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.fish.OarfishEntity
+import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
 import dev.hybridlabs.aquatic.entity.fish.ParrotfishEntity
 import dev.hybridlabs.aquatic.entity.fish.PupfishEntity
 import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
 import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
-import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity

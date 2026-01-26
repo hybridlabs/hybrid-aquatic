@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.NeutralMob
@@ -12,21 +13,12 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.UUID
 
-class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.CRUSTACEAN
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        )
-    ), NeutralMob {
+class GoldenDoradoEntity(type: EntityType<out GoldenDoradoEntity>, world: Level) : HybridAquaticFishEntity(type, world), NeutralMob {
 
     private var angerTime = 0
     private var angryAt: UUID? = null
+
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
@@ -40,6 +32,17 @@ class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: 
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.MEDIUM_PREY,
+                HybridAquaticEntityTags.CRUSTACEAN
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)

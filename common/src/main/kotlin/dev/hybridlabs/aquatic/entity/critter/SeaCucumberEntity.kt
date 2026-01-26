@@ -22,8 +22,7 @@ import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Level) :
-    HybridAquaticCritterEntity(entityType, world),
+class SeaCucumberEntity(type: EntityType<out SeaCucumberEntity>, world: Level) : HybridAquaticCritterEntity(type, world),
     VariantHolder<SeaCucumberEntity.Companion.Type> {
 
     override fun remove(reason: RemovalReason) {

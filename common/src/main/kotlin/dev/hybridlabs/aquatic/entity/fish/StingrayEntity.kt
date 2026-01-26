@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -26,13 +27,9 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.CRUSTACEAN),
-        listOf(HybridAquaticEntityTags.SHARK)
-    ),
-    VariantHolder<StingrayEntity.Companion.Type> {
+class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<StingrayEntity.Companion.Type> {
+
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
@@ -64,6 +61,16 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.CRUSTACEAN
+            ),
+            listOf(
+                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)

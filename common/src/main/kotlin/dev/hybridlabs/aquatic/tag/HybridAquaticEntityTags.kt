@@ -6,8 +6,6 @@ import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 
 object HybridAquaticEntityTags {
-    val NONE = create("prey/none")
-
     val LARGE_PREY = create("large_prey")
     val MEDIUM_PREY = create("medium_prey")
     val SMALL_PREY = create("small_prey")

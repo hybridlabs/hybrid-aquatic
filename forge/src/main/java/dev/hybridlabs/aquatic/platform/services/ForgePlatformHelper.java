@@ -152,7 +152,7 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     @Override
     public MobCategory getMobCategoryByName(String name) {
-        return MobCategory.byName(name);
+        return MobCategory.valueOf(name);
     }
 
     @Override

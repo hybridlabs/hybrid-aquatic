@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -22,16 +23,8 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.NONE),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world) {
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.MEDIUM_PREY, HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
 
     private var isGliding = false
 

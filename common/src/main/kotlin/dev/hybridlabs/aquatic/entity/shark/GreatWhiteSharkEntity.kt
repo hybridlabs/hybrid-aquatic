@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.shark
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
@@ -9,8 +10,11 @@ import net.minecraft.world.entity.ai.goal.FollowBoatGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
-class GreatWhiteSharkEntity(entityType: EntityType<out GreatWhiteSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.LARGE_PREY), false, true) {
+class GreatWhiteSharkEntity(type: EntityType<out GreatWhiteSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
+    override val targetConfig = MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.LARGE_PREY)
+
+    override val isPassive: Boolean = false
+    override val closePlayerAttack: Boolean = true
 
     override fun registerGoals() {
         super.registerGoals()

@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.SharkAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
@@ -13,7 +14,6 @@ import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.tags.TagKey
 import net.minecraft.util.RandomSource
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.UniformInt
@@ -56,10 +56,12 @@ import java.util.UUID
 open class HybridAquaticSharkEntity(
     entityType: EntityType<out HybridAquaticSharkEntity>,
     world: Level,
-    private val prey: List<TagKey<EntityType<*>>>,
-    private val isPassive: Boolean,
-    private val closePlayerAttack: Boolean,
 ) : WaterAnimal(entityType, world), NeutralMob, GeoEntity {
+    open val targetConfig: MobTargetConfiguration? = null
+
+    open val isPassive: Boolean = true
+    open val closePlayerAttack: Boolean = false
+
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
     private val factory = GeckoLibUtil.createInstanceCache(this)
@@ -100,7 +102,7 @@ open class HybridAquaticSharkEntity(
         goalSelector.addGoal(0, SharkAttackGoal(this, 1.1, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive })
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive })
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
+        targetConfig?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticSharkEntity::hunger)
     }
 
     override fun finalizeSpawn(

@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -9,8 +8,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 
-class BaskingSharkEntity(entityType: EntityType<out BaskingSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.NONE), true, false) {
+class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
 
     private var isFeeding = false
 

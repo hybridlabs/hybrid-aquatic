@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -22,21 +23,14 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION", "unused")
-class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.CEPHALOPOD,
-            HybridAquaticEntityTags.SHARK
-        )
-    ),
-    VariantHolder<SeadragonEntity.Companion.Type> {
+class SeadragonEntity(type: EntityType<out SeadragonEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<SeadragonEntity.Companion.Type> {
+    override val targetConfig = MobTargetConfiguration.ofPrey(
+        HybridAquaticEntityTags.SMALL_PREY,
+        HybridAquaticEntityTags.MEDIUM_PREY,
+        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.CEPHALOPOD,
+        HybridAquaticEntityTags.SHARK,
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

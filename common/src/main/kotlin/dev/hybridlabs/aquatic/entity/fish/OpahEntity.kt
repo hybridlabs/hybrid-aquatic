@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.PathfinderMob
@@ -8,18 +9,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.level.Level
 
-class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.CEPHALOPOD,
-            HybridAquaticEntityTags.SMALL_PREY
-        ),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class OpahEntity(type: EntityType<out OpahEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
@@ -31,6 +22,17 @@ class OpahEntity(entityType: EntityType<out OpahEntity>, world: Level) :
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.CEPHALOPOD
+            ),
+            listOf(
+                HybridAquaticEntityTags.MEDIUM_PREY,
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -10,17 +11,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
-class ParrotfishEntity(entityType: EntityType<out ParrotfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class ParrotfishEntity(type: EntityType<out ParrotfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

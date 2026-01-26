@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.shark
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -21,15 +22,11 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(
-        entityType,
-        world,
-        listOf(HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN),
-        false,
-        false
-    ),
-    VariantHolder<HoundSharkEntity.Type> {
+class HoundSharkEntity(type: EntityType<out HoundSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world), VariantHolder<HoundSharkEntity.Type> {
+    override val targetConfig = MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN)
+
+    override val isPassive: Boolean = false
+    override val closePlayerAttack: Boolean = false
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

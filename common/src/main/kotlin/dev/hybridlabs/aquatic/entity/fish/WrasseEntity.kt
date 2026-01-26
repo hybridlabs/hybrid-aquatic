@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -20,19 +21,9 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class WrasseEntity(entityType: EntityType<out WrasseEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.CRITTER,
-            HybridAquaticEntityTags.CRUSTACEAN
-        ),
-        listOf(
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ),
-    VariantHolder<WrasseEntity.Companion.Type> {
+class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<WrasseEntity.Companion.Type> {
+
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
@@ -50,6 +41,17 @@ class WrasseEntity(entityType: EntityType<out WrasseEntity>, world: Level) :
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.CRUSTACEAN,
+                HybridAquaticEntityTags.CRITTER
+            ),
+            listOf(
+                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -9,18 +10,8 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 
-class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.NONE,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        false,
-        false
-    ) {
-
+class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
+    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.SHARK)
     private var isFeeding = false
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
@@ -63,5 +54,13 @@ class VampireSquidEntity(entityType: EntityType<out VampireSquidEntity>, world: 
 
         val TENTACLES_EXTENDED: RawAnimation = RawAnimation.begin().thenPlay("misc.tentacles_extended")
         val TENTACLES_RETRACTED: RawAnimation = RawAnimation.begin().thenPlay("misc.tentacles_retracted")
+    }
+
+    override fun getMaxSize(): Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
     }
 }

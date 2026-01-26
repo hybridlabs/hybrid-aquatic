@@ -28,8 +28,7 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level) :
-    HybridAquaticCritterEntity(entityType, world),
+class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) : HybridAquaticCritterEntity(type, world),
     VariantHolder<SeaUrchinEntity.Companion.Type> {
 
     private var timeUntilNextBreak = 0
