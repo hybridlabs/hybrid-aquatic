@@ -542,6 +542,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     .add(LootItem.lootTableItem(HybridAquaticItems.SARGASSUM.get()).setWeight(8))
                     .add(LootItem.lootTableItem(HybridAquaticItems.CUTTLEBONE.get()).setWeight(8))
                     .add(LootItem.lootTableItem(HybridAquaticItems.CORAL_CHUNK.get()).setWeight(6))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.OYSTER.get()).setWeight(5))
                     .add(LootItem.lootTableItem(HybridAquaticItems.COCONUT_CRAB_CLAW.get()).setWeight(5))
                     .add(LootItem.lootTableItem(HybridAquaticItems.GHOST_CRAB_CLAW.get()).setWeight(5))
                     .add(LootItem.lootTableItem(HybridAquaticItems.DUNGENESS_CRAB_CLAW.get()).setWeight(5))
