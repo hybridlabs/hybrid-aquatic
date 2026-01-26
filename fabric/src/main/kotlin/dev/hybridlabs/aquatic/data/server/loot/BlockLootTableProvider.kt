@@ -11,29 +11,37 @@ import dev.hybridlabs.aquatic.item.SeaMessageBookItem.Companion.SEA_MESSAGE_KEY
 import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
+import net.minecraft.advancements.critereon.EnchantmentPredicate
 import net.minecraft.advancements.critereon.ItemPredicate
+import net.minecraft.advancements.critereon.MinMaxBounds
 import net.minecraft.advancements.critereon.StatePropertiesPredicate
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.BlockItem.BLOCK_ENTITY_TAG
+import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.block.BaseCoralWallFanBlock
 import net.minecraft.world.level.block.WallTorchBlock
+import net.minecraft.world.level.storage.loot.IntRange
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.entries.LootTableReference
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction
+import net.minecraft.world.level.storage.loot.functions.LimitCount
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition
 import net.minecraft.world.level.storage.loot.predicates.MatchTool
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 
 class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTableProvider(output) {
 
     override fun generate() {
-        // anemone
+
+        //#region Anemones
         add(HybridAquaticBlocks.ANEMONE.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()
@@ -56,7 +64,9 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                     .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
             )
         }
+        //#endregion
 
+        //#region Plants
         add(HybridAquaticPlatformBlocks.DUNEGRASS.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()
@@ -105,36 +115,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
-        add(HybridAquaticBlocks.TUBE_WORM.get()) { block ->
-            LootTable.lootTable().withPool(
-                LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1f))
-                    .add(
-                        (2..4).fold(LootItem.lootTableItem(block)) { item, worms ->
-                            item.apply(
-                                SetItemCountFunction.setCount(ConstantValue.exactly(worms.toFloat()))
-                                    .`when`(
-                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                                            .setProperties(
-                                                StatePropertiesPredicate.Builder.properties()
-                                                    .hasProperty(TubeWormBlock.WORMS, worms)
-                                            )
-                                    )
-                            )
-                        }
-                    )
-            )
-        }
-
-        add(HybridAquaticBlocks.FLOATING_SARGASSUM.get()) { block ->
-            LootTable.lootTable().pool(
-                LootPool.lootPool()
-                    .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
-            )
-        }
-
-        add(HybridAquaticBlocks.GLOWSLIME_BLOCK.get()) { block ->
+        add(HybridAquaticBlocks.BULL_KELP.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
@@ -150,15 +131,16 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
-        add(HybridAquaticBlocks.BULL_KELP.get()) { block ->
+        add(HybridAquaticBlocks.FLOATING_SARGASSUM.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .build()
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
             )
         }
+        //#endregion
 
-        //region wood
+        //#region Wood
         createSingleItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get())
         createSingleItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get())
         createSingleItemTable(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get())
@@ -174,13 +156,13 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get(),
             createSlabItemTable(HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get())
         )
-        add(HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get(), createDoorTable(HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get()))
+        add(
+            HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get(),
+            createDoorTable(HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get())
+        )
+        //#endregion
 
-        createSingleItemTable(HybridAquaticBlocks.GLOWSTICK.get())
-
-        //endregion
-
-        //region corals
+        //#region Corals
 
         for (block in listOf(
             HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK.get(),
@@ -228,9 +210,9 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             add(block, createSilkTouchOnlyTable(block))
         }
 
-        //endregion
+        //#endregion
 
-        // thermal vents
+        //#region Thermal Vent
         add(HybridAquaticBlocks.THERMAL_VENT.get()) { block ->
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
@@ -242,7 +224,70 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
-        // message in a bottle
+        add(HybridAquaticBlocks.CRYSTALLINE_SULFUR.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1f))
+                    .add(
+                        AlternativesEntry.alternatives(
+                            LootItem.lootTableItem(block)
+                                .`when`(
+                                    MatchTool.toolMatches(
+                                        ItemPredicate.Builder.item()
+                                            .hasEnchantment(
+                                                EnchantmentPredicate(
+                                                    Enchantments.SILK_TOUCH,
+                                                    MinMaxBounds.Ints.atLeast(1)
+                                                )
+                                            )
+                                    )
+                                ),
+
+                            LootItem.lootTableItem(HybridAquaticItems.SULFUR.get())
+                                .apply(
+                                    SetItemCountFunction.setCount(
+                                        UniformGenerator.between(2f, 4f)
+                                    )
+                                )
+                                .apply(
+                                    ApplyBonusCount.addUniformBonusCount(
+                                        Enchantments.BLOCK_FORTUNE,
+                                        1
+                                    )
+                                )
+                                .apply(
+                                    LimitCount.limitCount(
+                                        IntRange.range(1, 9)
+                                    )
+                                )
+                        )
+                    )
+            )
+        }
+
+        add(HybridAquaticBlocks.TUBE_WORM.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1f))
+                    .add(
+                        (2..4).fold(LootItem.lootTableItem(block)) { item, worms ->
+                            item.apply(
+                                SetItemCountFunction.setCount(ConstantValue.exactly(worms.toFloat()))
+                                    .`when`(
+                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                            .setProperties(
+                                                StatePropertiesPredicate.Builder.properties()
+                                                    .hasProperty(TubeWormBlock.WORMS, worms)
+                                            )
+                                    )
+                            )
+                        }
+                    )
+            )
+        }
+        //#endregion
+
+        //#region Miscellaneous
         add(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
@@ -261,7 +306,10 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
-        // crate
+        createSingleItemTable(HybridAquaticBlocks.GLOWSTICK.get())
+        //#endregion
+
+        //#region Crates
         add(HybridAquaticBlocks.CRAB_POT.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
@@ -407,6 +455,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 ).build()
             )
         }
+        //#endregion
 
         // generate remaining drops
         BuiltInRegistries.BLOCK
