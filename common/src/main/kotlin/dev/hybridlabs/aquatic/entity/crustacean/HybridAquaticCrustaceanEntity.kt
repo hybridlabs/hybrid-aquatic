@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.ai.control.WallClimbNavigation
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
@@ -24,7 +23,6 @@ import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.PanicGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
-import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
@@ -150,14 +148,6 @@ open class HybridAquaticCrustaceanEntity(
         }
     }
 
-    //#region Climbing
-
-    fun isMoving(): Boolean {
-        return (this.onGround() || this.onClimbable()) && deltaMovement.lengthSqr() >= 0.0001
-    }
-
-    //#endregion
-
     override fun hurt(source: DamageSource, amount: Float): Boolean {
         if (this is HermitCrabEntity || this is GiantIsopodEntity && !isHiding) {
             startHiding()
@@ -169,7 +159,6 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     //#region Water Breathing
-
     override fun getMobType(): MobType {
         return MobType.WATER
     }
@@ -180,7 +169,6 @@ open class HybridAquaticCrustaceanEntity(
 
     override fun handleAirSupply(air: Int) {
     }
-
     //#endregion
 
     protected open fun getMinSize(): Int {
@@ -191,8 +179,7 @@ open class HybridAquaticCrustaceanEntity(
         return 0
     }
 
-    //#region Data
-
+    //#region NBT
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         super.addAdditionalSaveData(nbt)
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
@@ -210,11 +197,9 @@ open class HybridAquaticCrustaceanEntity(
         entityData.define(CRUSTACEAN_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
     }
-
     //#endregion
 
     //#region SFX
-
     override fun nextStep(): Float {
         return this.moveDist + 0.5f
     }
@@ -226,7 +211,6 @@ open class HybridAquaticCrustaceanEntity(
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.TURTLE_EGG_BREAK
     }
-
     //#endregion
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
@@ -276,7 +260,6 @@ open class HybridAquaticCrustaceanEntity(
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
     }
-
     //#endregion
 
     companion object {
