@@ -31,10 +31,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HybridAquaticOctopusEntity(type, world), VariantHolder<OctopusEntity.Companion.Type>, OverlayTextureFeature {
-    override val targetConfig: MobTargetConfiguration = MobTargetConfiguration.create(
-        listOf(HybridAquaticEntityTags.CRUSTACEAN),
-        listOf(HybridAquaticEntityTags.SHARK),
-    )
+    override val targetConfig = TARGET_CONFIG
 
     override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 
@@ -57,6 +54,15 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HybridA
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.CRUSTACEAN
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 12.0)

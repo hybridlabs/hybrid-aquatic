@@ -25,21 +25,22 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) : Hyb
     private var angerTime = 0
     private var angryAt: UUID? = null
 
-    override val targetConfig = MobTargetConfiguration.create(
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.MEDIUM_PREY,
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-    )
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.MEDIUM_PREY,
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
 
         val ANGER_TIME_RANGE: IntProvider = TimeUtil.rangeOfSeconds(10, 30)
         fun createMobAttributes(): AttributeSupplier.Builder {

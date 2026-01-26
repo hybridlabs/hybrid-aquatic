@@ -27,15 +27,7 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class TunaEntity(type: EntityType<out TunaEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<TunaEntity.Companion.Type> {
 
-    override val targetConfig = MobTargetConfiguration.create(
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.CEPHALOPOD,
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-    )
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4
@@ -60,6 +52,16 @@ class TunaEntity(type: EntityType<out TunaEntity>, world: Level) : HybridAquatic
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.CEPHALOPOD
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)

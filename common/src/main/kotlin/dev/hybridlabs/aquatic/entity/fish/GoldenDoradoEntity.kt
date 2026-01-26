@@ -18,16 +18,7 @@ class GoldenDoradoEntity(type: EntityType<out GoldenDoradoEntity>, world: Level)
     private var angerTime = 0
     private var angryAt: UUID? = null
 
-    override val targetConfig = MobTargetConfiguration.create(
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.CRUSTACEAN
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-    )
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
@@ -41,6 +32,17 @@ class GoldenDoradoEntity(type: EntityType<out GoldenDoradoEntity>, world: Level)
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.MEDIUM_PREY,
+                HybridAquaticEntityTags.CRUSTACEAN
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)

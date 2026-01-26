@@ -29,16 +29,7 @@ import java.util.UUID
 
 class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), NeutralMob {
 
-    override val targetConfig = MobTargetConfiguration.create(
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY
-        ),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        ),
-    )
+    override val targetConfig = TARGET_CONFIG
 
     private var angerTime = 0
     private var angryAt: UUID? = null
@@ -48,6 +39,17 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) : HybridA
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY
+            ),
+            listOf(
+                HybridAquaticEntityTags.MEDIUM_PREY,
+                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
 
         val ANGER_TIME_RANGE: IntProvider = TimeUtil.rangeOfSeconds(10, 30)
 

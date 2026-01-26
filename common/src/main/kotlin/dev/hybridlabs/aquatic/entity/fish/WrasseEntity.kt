@@ -23,16 +23,7 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<WrasseEntity.Companion.Type> {
 
-    override val targetConfig = MobTargetConfiguration.create(
-        listOf(
-            HybridAquaticEntityTags.CRITTER,
-            HybridAquaticEntityTags.CRUSTACEAN
-        ),
-        listOf(
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        ),
-    )
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
@@ -50,6 +41,17 @@ class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) : HybridAqu
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.CRUSTACEAN,
+                HybridAquaticEntityTags.CRITTER
+            ),
+            listOf(
+                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)

@@ -29,14 +29,7 @@ import kotlin.random.Random
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<OceanSunfishEntity.Companion.Type> {
 
-    override val targetConfig = MobTargetConfiguration.create(
-        listOf(
-            HybridAquaticEntityTags.JELLYFISH
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-    )
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
@@ -62,6 +55,15 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.JELLYFISH
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 12.0)

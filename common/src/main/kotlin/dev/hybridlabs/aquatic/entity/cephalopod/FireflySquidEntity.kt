@@ -14,14 +14,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
 
-    override val targetConfig = MobTargetConfiguration.create(
-        listOf(
-            HybridAquaticEntityTags.CRUSTACEAN
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-    )
+    override val targetConfig = TARGET_CONFIG
 
     override val inkConfig: InkConfiguration = InkConfiguration.GLOW
 
@@ -30,6 +23,15 @@ class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level)
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.CRUSTACEAN
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)

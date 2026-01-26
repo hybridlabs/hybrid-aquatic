@@ -29,14 +29,7 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<StingrayEntity.Companion.Type> {
 
-    override val targetConfig = MobTargetConfiguration.create(
-        listOf(
-            HybridAquaticEntityTags.CRUSTACEAN
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-    )
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
@@ -68,6 +61,16 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) : Hybri
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.CRUSTACEAN
+            ),
+            listOf(
+                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)

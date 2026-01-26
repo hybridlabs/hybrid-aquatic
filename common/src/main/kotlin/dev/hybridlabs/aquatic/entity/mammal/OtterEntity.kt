@@ -59,14 +59,7 @@ import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
 class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HybridAquaticMammalEntity(entityType, world), VariantHolder<OtterEntity.Companion.Type> {
-    val targetConfig = MobTargetConfiguration.create(
-        listOf(
-            HybridAquaticEntityTags.KELP_PREY,
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK,
-        ),
-    )
+    val targetConfig = TARGET_CONFIG
 
     private val swimControl = OtterMoveControl(this, 45, 3, 0.02F, 1.0F, true)
 
@@ -238,6 +231,15 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.KELP_PREY
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)

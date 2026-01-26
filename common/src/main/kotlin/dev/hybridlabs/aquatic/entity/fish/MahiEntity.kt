@@ -25,15 +25,7 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class MahiEntity(type: EntityType<out MahiEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<MahiEntity.Companion.Type> {
 
-    override val targetConfig = MobTargetConfiguration.create(
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.CEPHALOPOD
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-    )
+    override val targetConfig = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4
@@ -77,6 +69,16 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) : HybridAquatic
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.CEPHALOPOD
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
