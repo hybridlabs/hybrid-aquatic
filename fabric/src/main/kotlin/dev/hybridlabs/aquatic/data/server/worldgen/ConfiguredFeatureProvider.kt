@@ -216,9 +216,9 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticConfiguredFeatures.DISK_SUSPICIOUS_SAND,
+            HybridAquaticConfiguredFeatures.SUSPICIOUS_SAND_DISK,
             ConfiguredFeature(
-                Feature.DISK,
+                HybridAquaticFeatures.SUSPICIOUS_SAND_DISK.get(),
                 DiskConfiguration(
                     RuleBasedBlockStateProvider.simple(Blocks.SUSPICIOUS_SAND),
                     BlockPredicate.matchesBlocks(listOf<Block>(Blocks.SAND)),
@@ -229,9 +229,9 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticConfiguredFeatures.DISK_SUSPICIOUS_RED_SAND,
+            HybridAquaticConfiguredFeatures.SUSPICIOUS_RED_SAND_DISK,
             ConfiguredFeature(
-                Feature.DISK,
+                HybridAquaticFeatures.SUSPICIOUS_RED_SAND_DISK.get(),
                 DiskConfiguration(
                     RuleBasedBlockStateProvider.simple(HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get()),
                     BlockPredicate.matchesBlocks(listOf<Block>(Blocks.RED_SAND, Blocks.CLAY)),

@@ -20,6 +20,8 @@ import java.util.function.BiConsumer
 class GenericLootTableProvider(output: FabricDataOutput) :
     SimpleFabricLootTableProvider(output, LootContextParamSets.ALL_PARAMS) {
     override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
+
+        //#region Universal Crate Loot
         fun universalCratePool(): LootPool.Builder {
             return LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1.0f))
@@ -57,7 +59,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                 .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get()))
                 .add(LootItem.lootTableItem(HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get()))
         }
+        //#endregion
 
+        //#region Crate Loot Tables
         exporter.accept(
             HybridAquaticLootTables.CRAB_POT_TREASURE_ID,
             LootTable.lootTable()
@@ -375,30 +379,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                         ).build()
                 )
         )
+        //#endregion
 
-        exporter.accept(
-            HybridAquaticLootTables.VENT_LOOT_ID,
-            LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.VENT_LOOT_ID)
-                .pool(
-                    LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1F))
-                        .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SULFUR.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f)))
-                        ).build()
-                )
-                .pool(
-                    LootPool.lootPool()
-                        .`when`(LootItemRandomChanceCondition.randomChance(0.5f))
-                        .add(LootItem.lootTableItem(Items.RAW_GOLD).setWeight(1))
-                        .add(LootItem.lootTableItem(Items.RAW_IRON).setWeight(3))
-                        .add(
-                            LootItem.lootTableItem(Items.RAW_COPPER).setWeight(5)
-                        ).build()
-                )
-        )
-
+        //#region Extra Entity Loot
         exporter.accept(
             HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY,
             LootTable.lootTable()
@@ -457,6 +440,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                 )
         )
 
+        //#region Decorator Crab Loot
         exporter.accept(
             HybridAquaticLootTables.DECORATOR_FIRE,
             LootTable.lootTable()
@@ -519,5 +503,81 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                         .add(LootItem.lootTableItem(HybridAquaticItems.LOPHELIA_CORAL.get())).build()
                 )
         )
+        //#endregion
+        //#endregion
+
+        exporter.accept(
+            HybridAquaticLootTables.VENT_LOOT_ID,
+            LootTable.lootTable()
+                .setRandomSequence(HybridAquaticLootTables.VENT_LOOT_ID)
+                .pool(
+                    LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1F))
+                        .add(
+                            LootItem.lootTableItem(HybridAquaticItems.SULFUR.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                        .build()
+                )
+                .pool(
+                    LootPool.lootPool()
+                        .`when`(LootItemRandomChanceCondition.randomChance(0.5f))
+                        .add(LootItem.lootTableItem(Items.RAW_GOLD).setWeight(1))
+                        .add(LootItem.lootTableItem(Items.RAW_IRON).setWeight(3))
+                        .add(LootItem.lootTableItem(Items.RAW_COPPER).setWeight(5))
+                        .build()
+                )
+        )
+
+        //#region Archaeology Loot
+        exporter.accept(
+                HybridAquaticLootTables.BEACH_ARCHAEOLOGY_ID,
+        LootTable.lootTable()
+            .setRandomSequence(HybridAquaticLootTables.BEACH_ARCHAEOLOGY_ID)
+            .pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(Items.STICK).setWeight(10))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.SHARK_TOOTH.get()).setWeight(8))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.SEA_URCHIN_SPINE.get()).setWeight(8))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.BULL_KELP.get()).setWeight(8))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.SARGASSUM.get()).setWeight(8))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.CUTTLEBONE.get()).setWeight(8))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.CORAL_CHUNK.get()).setWeight(6))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.COCONUT_CRAB_CLAW.get()).setWeight(5))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.GHOST_CRAB_CLAW.get()).setWeight(5))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.DUNGENESS_CRAB_CLAW.get()).setWeight(5))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.FLOWER_CRAB_CLAW.get()).setWeight(5))
+                    .add(LootItem.lootTableItem(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW.get()).setWeight(5))
+                    .add(LootItem.lootTableItem(Items.PRISMARINE_SHARD).setWeight(6))
+                    .add(LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS).setWeight(6))
+                    .add(LootItem.lootTableItem(Items.NAUTILUS_SHELL).setWeight(4))
+                    .add(LootItem.lootTableItem(Items.SCUTE).setWeight(4))
+                    .add(LootItem.lootTableItem(Items.TURTLE_EGG).setWeight(2))
+                    .add(LootItem.lootTableItem(Items.HEART_OF_THE_SEA).setWeight(1))
+                    .build()
+            )
+        )
+
+        exporter.accept(
+            HybridAquaticLootTables.PLACER_RIVER_ARCHAEOLOGY_ID,
+            LootTable.lootTable()
+                .setRandomSequence(HybridAquaticLootTables.PLACER_RIVER_ARCHAEOLOGY_ID)
+                .pool(
+                    LootPool.lootPool()
+                        .add(LootItem.lootTableItem(Items.GOLD_NUGGET).setWeight(10))
+                        .add(LootItem.lootTableItem(Items.RAW_GOLD).setWeight(8))
+                        .add(LootItem.lootTableItem(Items.FLINT).setWeight(6))
+                        .add(LootItem.lootTableItem(Items.STICK).setWeight(6))
+                        .add(LootItem.lootTableItem(Items.BONE).setWeight(4))
+                        .add(LootItem.lootTableItem(Items.BURN_POTTERY_SHERD).setWeight(1))
+                        .add(LootItem.lootTableItem(Items.DANGER_POTTERY_SHERD).setWeight(1))
+                        .add(LootItem.lootTableItem(Items.FRIEND_POTTERY_SHERD).setWeight(1))
+                        .add(LootItem.lootTableItem(Items.HEART_POTTERY_SHERD).setWeight(1))
+                        .add(LootItem.lootTableItem(Items.HEARTBREAK_POTTERY_SHERD).setWeight(1))
+                        .add(LootItem.lootTableItem(Items.HOWL_POTTERY_SHERD).setWeight(1))
+                        .add(LootItem.lootTableItem(Items.SHEAF_POTTERY_SHERD).setWeight(1))
+                        .build()
+                )
+        )
+        //#endregion
     }
 }

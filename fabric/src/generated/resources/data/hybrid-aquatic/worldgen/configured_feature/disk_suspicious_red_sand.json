@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:disk",
+  "type": "hybrid-aquatic:suspicious_red_sand_disk",
   "config": {
     "half_height": 1,
     "radius": {

@@ -21,6 +21,8 @@ object HybridAquaticLootTables {
     val CHERRY_CRATE_TREASURE_ID = CommonClass.locate("gameplay/cherry_crate_treasure")
 
     val VENT_LOOT_ID = CommonClass.locate("gameplay/vent_drops")
+    val BEACH_ARCHAEOLOGY_ID = CommonClass.locate("gameplay/beach_archaeology")
+    val PLACER_RIVER_ARCHAEOLOGY_ID = CommonClass.locate("gameplay/placer_river_archaeology")
 
     val CLAWED_LOBSTER = CommonClass.locate("gameplay/clawed_lobster")
     val CLAWLESS_LOBSTER = CommonClass.locate("gameplay/clawless_lobster")

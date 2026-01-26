@@ -190,7 +190,7 @@ class PlacedFeatureProvider(
 
         entries.add(
             HybridAquaticPlacedFeatures.DISK_SUSPICIOUS_SAND, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.DISK_SUSPICIOUS_SAND), listOf(
+                entries.ref(HybridAquaticConfiguredFeatures.SUSPICIOUS_SAND_DISK), listOf(
                     InSquarePlacement.spread(),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
                     BiomeFilter.biome()
@@ -200,7 +200,7 @@ class PlacedFeatureProvider(
 
         entries.add(
             HybridAquaticPlacedFeatures.DISK_SUSPICIOUS_RED_SAND, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.DISK_SUSPICIOUS_RED_SAND), listOf(
+                entries.ref(HybridAquaticConfiguredFeatures.SUSPICIOUS_RED_SAND_DISK), listOf(
                     InSquarePlacement.spread(),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
                     BiomeFilter.biome()
