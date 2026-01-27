@@ -457,6 +457,10 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         }
         //#endregion
 
+        add(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get()) { block ->
+            LootTable.lootTable()
+        }
+
         // generate remaining drops
         BuiltInRegistries.BLOCK
             .filter(filterHybridAquatic(BuiltInRegistries.BLOCK))
