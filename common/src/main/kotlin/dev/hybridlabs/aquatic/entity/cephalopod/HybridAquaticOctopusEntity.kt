@@ -51,7 +51,7 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var sittingTimer: Int = 0
 
-    open val targetConfig: MobTargetConfiguration? = null
+    open fun getTargetConfig(): MobTargetConfiguration? = null
     open val inkConfig: InkConfiguration? = null
 
     init {

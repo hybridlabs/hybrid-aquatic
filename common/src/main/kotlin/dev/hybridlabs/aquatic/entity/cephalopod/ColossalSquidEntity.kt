@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class ColossalSquidEntity(type: EntityType<out ColossalSquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
-    override val targetConfig = TARGET_CONFIG
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 

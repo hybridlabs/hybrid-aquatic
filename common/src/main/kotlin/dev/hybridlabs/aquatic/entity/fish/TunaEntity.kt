@@ -27,7 +27,7 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class TunaEntity(type: EntityType<out TunaEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<TunaEntity.Companion.Type> {
 
-    override val targetConfig = TARGET_CONFIG
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4

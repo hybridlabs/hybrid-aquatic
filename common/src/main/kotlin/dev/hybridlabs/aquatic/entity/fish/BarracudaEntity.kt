@@ -25,7 +25,7 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) : Hyb
     private var angerTime = 0
     private var angryAt: UUID? = null
 
-    override val targetConfig = TARGET_CONFIG
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

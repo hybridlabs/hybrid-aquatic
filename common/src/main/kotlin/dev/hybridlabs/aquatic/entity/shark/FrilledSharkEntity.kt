@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
 class FrilledSharkEntity(type: EntityType<out FrilledSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
-    override val targetConfig = MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.CEPHALOPOD)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.CEPHALOPOD)
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false

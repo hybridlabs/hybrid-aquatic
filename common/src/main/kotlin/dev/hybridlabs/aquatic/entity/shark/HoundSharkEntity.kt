@@ -23,7 +23,8 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class HoundSharkEntity(type: EntityType<out HoundSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world), VariantHolder<HoundSharkEntity.Type> {
-    override val targetConfig = MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN)
+    override fun getTargetConfig() =
+        MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN)
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false

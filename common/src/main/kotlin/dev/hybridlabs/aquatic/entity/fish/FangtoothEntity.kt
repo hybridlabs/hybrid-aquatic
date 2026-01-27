@@ -18,7 +18,7 @@ import java.util.UUID
 class FangtoothEntity(entityType: EntityType<out FangtoothEntity>, world: Level) :
     HybridAquaticFishEntity(entityType, world), NeutralMob {
 
-    override val targetConfig = TARGET_CONFIG
+    override fun getTargetConfig() = TARGET_CONFIG
 
     private var angerTime = 0
     private var angryAt: UUID? = null

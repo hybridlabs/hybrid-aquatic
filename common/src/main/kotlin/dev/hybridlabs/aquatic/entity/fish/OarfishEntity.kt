@@ -23,7 +23,7 @@ import software.bernie.geckolib.core.animation.AnimationState
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
-    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.SHARK)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.SHARK)
 
     override fun aiStep() {
         super.aiStep()

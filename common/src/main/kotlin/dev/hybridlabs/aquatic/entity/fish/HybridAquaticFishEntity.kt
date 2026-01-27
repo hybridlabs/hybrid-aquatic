@@ -47,13 +47,13 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
     var currentRoll: Float = 0.0f
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
-    open val targetConfig: MobTargetConfiguration? = null
+    open fun getTargetConfig(): MobTargetConfiguration? = null
 
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, FishAttackGoal(this, 1.1, true))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
-        targetConfig?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticFishEntity::hunger)
+        getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticFishEntity::hunger)
     }
 
     override fun defineSynchedData() {

@@ -26,7 +26,11 @@ import net.minecraft.world.level.Level
 import java.util.function.Predicate
 
 class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
-    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.MEDIUM_PREY, HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HybridAquaticEntityTags.MEDIUM_PREY,
+        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.SHARK
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

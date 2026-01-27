@@ -29,7 +29,7 @@ import java.util.UUID
 
 class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), NeutralMob {
 
-    override val targetConfig = TARGET_CONFIG
+    override fun getTargetConfig() = TARGET_CONFIG
 
     private var angerTime = 0
     private var angryAt: UUID? = null

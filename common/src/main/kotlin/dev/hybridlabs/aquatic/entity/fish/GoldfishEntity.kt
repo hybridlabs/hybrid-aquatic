@@ -13,7 +13,11 @@ import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("unused", "DEPRECATION")
 class GoldfishEntity(type: EntityType<out GoldfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
-    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.MEDIUM_PREY, HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HybridAquaticEntityTags.MEDIUM_PREY,
+        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.SHARK
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4

@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level
 
 class BullSharkEntity(type: EntityType<out BullSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
 
-    override val targetConfig = MobTargetConfiguration.ofPredator(
+    override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
         HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.MEDIUM_PREY
     )
 
