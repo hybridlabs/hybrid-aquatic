@@ -1,10 +1,13 @@
 package dev.hybridlabs.aquatic.client.render.entity
 
 import dev.hybridlabs.aquatic.client.render.entity.cephalopods.ArrowSquidEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.cephalopods.ColossalSquidEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.cephalopods.CuttlefishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.cephalopods.FireflySquidEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.cephalopods.GiantSquidEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.cephalopods.OctopusEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.cephalopods.UmbrellaOctopusEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.critter.ScalyfootSnailEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.critter.SeaCucumberEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.critter.SeaSlugEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.critter.SeaUrchinEntityRenderer
@@ -39,11 +42,13 @@ import dev.hybridlabs.aquatic.client.render.entity.fish.DamselfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.DanioEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.DiscusEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.DragonfishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.fish.FangtoothEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.FlashlightFishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.FlyingFishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.GoldenDoradoEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.GoldfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.GouramiEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.fish.HatchetfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.HerringEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.JohnDoryEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.LionfishEntityRenderer
@@ -79,6 +84,7 @@ import dev.hybridlabs.aquatic.client.render.entity.fish.TigerBarbEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.TriggerfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.TroutEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.TunaEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.fish.ViperfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.WrasseEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.BarrelJellyfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.BigRedJellyfishEntityRenderer
@@ -130,6 +136,24 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.ANGLERFISH,
             ::AnglerfishEntityRenderer
+        )
+
+    val VIPERFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.VIPERFISH,
+            ::ViperfishEntityRenderer
+        )
+
+    val HATCHETFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.HATCHETFISH,
+            ::HatchetfishEntityRenderer
+        )
+
+    val FANGTOOTH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.FANGTOOTH,
+            ::FangtoothEntityRenderer
         )
 
     val DRAGONFISH =
@@ -456,6 +480,18 @@ object HybridAquaticEntityRenderers {
             ::CuttlefishEntityRenderer
         )
 
+    val GIANT_SQUID =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.GIANT_SQUID,
+            ::GiantSquidEntityRenderer
+        )
+
+    val COLOSSAL_SQUID =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.COLOSSAL_SQUID,
+            ::ColossalSquidEntityRenderer
+        )
+
     val UMBRELLA_OCTOPUS =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.UMBRELLA_OCTOPUS,
@@ -674,10 +710,16 @@ object HybridAquaticEntityRenderers {
             ::StarfishEntityRenderer
         )
 
-    val NUDIBRANCH =
+    val SEA_SLUG =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.SEA_SLUG,
             ::SeaSlugEntityRenderer
+        )
+
+    val SCALYFOOT_SNAIL =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.SCALYFOOT_SNAIL,
+            ::ScalyfootSnailEntityRenderer
         )
 
     val SEA_CUCUMBER =

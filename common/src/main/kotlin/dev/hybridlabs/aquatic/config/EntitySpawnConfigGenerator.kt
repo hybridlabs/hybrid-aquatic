@@ -432,6 +432,36 @@ class EntitySpawnConfigGenerator {
         )
 
         addFish(
+            HybridAquaticEntityTypes.FANGTOOTH.get(),
+            listOf(
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.TROPICAL_TRENCH,
+                HybridAquaticBiomeTags.COLD_TRENCH,
+                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+            3, 1, 2
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.VIPERFISH.get(),
+            listOf(
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.TROPICAL_TRENCH,
+                HybridAquaticBiomeTags.COLD_TRENCH,
+                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+            3, 1, 2
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.HATCHETFISH.get(),
+            listOf(
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.TROPICAL_TRENCH,
+                HybridAquaticBiomeTags.COLD_TRENCH,
+                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+            3, 1, 2
+        )
+
+        addFish(
             HybridAquaticEntityTypes.JOHN_DORY.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
@@ -479,7 +509,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.COLD_OCEANS,
                 HybridAquaticBiomeTags.ARCTIC_OCEANS),
-            3, 1, 2
+            10, 1, 2
         )
 
         addCephalopod(
@@ -488,7 +518,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.REEF),
-            3, 1, 2
+            10, 1, 2
         )
 
         addCephalopod(
@@ -497,7 +527,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.REEF,
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
-            3, 1, 1
+            10, 1, 1
         )
 
         addCephalopod(
@@ -507,35 +537,52 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS
             ),
-            3, 1, 1
+            10, 1, 1
         )
 
         addCephalopod(
             HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
             listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 1, 1
+                HybridAquaticBiomeTags.TROPICAL_TRENCH),
+            10, 1, 1
         )
 
         addCephalopod(
             HybridAquaticEntityTypes.NAUTILUS.get(),
             listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 1, 1
+                HybridAquaticBiomeTags.TROPICAL_TRENCH),
+            10, 1, 1
+        )
+
+        addCephalopod(
+            HybridAquaticEntityTypes.COLOSSAL_SQUID.get(),
+            listOf(
+                HybridAquaticBiomeTags.COLD_TRENCH,
+                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+            1, 1, 1
+        )
+
+        addCephalopod(
+            HybridAquaticEntityTypes.GIANT_SQUID.get(),
+            listOf(
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.COLD_TRENCH,
+                HybridAquaticBiomeTags.TROPICAL_TRENCH),
+            1, 1, 1
         )
 
         addCephalopod(
             HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(),
             listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 1, 1
+                HybridAquaticBiomeTags.TROPICAL_TRENCH),
+            10, 1, 1
         )
 
         addCephalopod(
             HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
             listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 1, 1
+                HybridAquaticBiomeTags.TROPICAL_TRENCH),
+            10, 1, 1
         )
         //#endregion
 
@@ -920,6 +967,13 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 HybridAquaticBiomeTags.REEF),
+            1, 0, 2
+        )
+
+        addCritter(
+            HybridAquaticEntityTypes.SCALYFOOT_SNAIL.get(),
+            listOf(
+                HybridAquaticBiomeTags.HAS_THERMAL_VENTS),
             1, 0, 2
         )
 

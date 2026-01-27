@@ -1,24 +1,27 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class GiantSquidEntity(entityType: EntityType<out GiantSquidEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.LARGE_PREY,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        true,
-        false
-    ) {
+class GiantSquidEntity(type: EntityType<out GiantSquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
+    override val targetConfig = TARGET_CONFIG
+
+    override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.CRUSTACEAN
+            ),
+            listOf(
+                HybridAquaticEntityTags.SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 24.0)
