@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature
 object HybridAquaticPlacedFeatures {
     val ANEMONES = register("anemones")
     val SPIRE = register("spire")
+    val DEEP_OCEAN_VEGETATION = register("deep_ocean_vegetation")
 
     val SARGASSUM = register("sargassum")
     val FLOATING_SARGASSUM = register("floating_sargassum")

@@ -44,6 +44,8 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.FROZEN_TRENCH)
             .addOptional(HybridAquaticBiomes.VOLCANIC_TRENCH)
             .addOptional(HybridAquaticBiomes.BRINE_LAGOON)
+            .addOptional(HybridAquaticBiomes.TROPICAL_DEEP_CORAL_REEF)
+            .addOptional(HybridAquaticBiomes.DEEP_CORAL_REEF)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.HAS_THERMAL_VENTS)
             .addOptional(HybridAquaticBiomes.SULFURIC_CAVES)
@@ -139,9 +141,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS)
             .add(Biomes.DEEP_LUKEWARM_OCEAN)
-
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS)
-            .add(Biomes.DEEP_LUKEWARM_OCEAN)
+            .addOptional(HybridAquaticBiomes.TROPICAL_DEEP_CORAL_REEF)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TROPICAL_TRENCH)
             .addOptional(HybridAquaticBiomes.LUKEWARM_TRENCH)
@@ -151,6 +151,10 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.CORAL_REEF)
             .addOptional(ResourceLocation("regions_unexplored", "rocky_reef"))
             .addOptional(ResourceLocation("biomeswevegone", "lush_stacks"))
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_REEF)
+            .addOptional(HybridAquaticBiomes.DEEP_CORAL_REEF)
+            .addOptional(HybridAquaticBiomes.TROPICAL_DEEP_CORAL_REEF)
         //#endregion
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.JUNGLE)

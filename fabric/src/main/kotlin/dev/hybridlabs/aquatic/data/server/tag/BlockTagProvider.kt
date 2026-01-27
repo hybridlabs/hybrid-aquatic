@@ -22,6 +22,25 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get())
             .add(HybridAquaticBlocks.STRAWBERRY_ANEMONE.get())
 
+        //#region Deep Corals
+        getOrCreateTagBuilder(HybridAquaticBlockTags.DEEP_CORAL_BLOCKS)
+            .add(HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK.get())
+            .add(HybridAquaticBlocks.THORN_CORAL_BLOCK.get())
+
+        getOrCreateTagBuilder(HybridAquaticBlockTags.DEEP_CORAL_PLANTS)
+            .add(HybridAquaticBlocks.LOPHELIA_CORAL.get())
+            .add(HybridAquaticBlocks.THORN_CORAL.get())
+
+        getOrCreateTagBuilder(HybridAquaticBlockTags.DEEP_CORALS)
+            .forceAddTag(HybridAquaticBlockTags.DEEP_CORAL_PLANTS)
+            .add(HybridAquaticBlocks.LOPHELIA_CORAL_FAN.get())
+            .add(HybridAquaticBlocks.THORN_CORAL_FAN.get())
+
+        getOrCreateTagBuilder(HybridAquaticBlockTags.DEEP_WALL_CORALS)
+            .add(HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN.get())
+            .add(HybridAquaticBlocks.THORN_CORAL_WALL_FAN.get())
+        //#endregion
+
         getOrCreateTagBuilder(HybridAquaticBlockTags.KELP)
             .add(HybridAquaticBlocks.BULL_KELP.get())
             .add(HybridAquaticBlocks.BULL_KELP_PLANT.get())
@@ -52,32 +71,24 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.ROSE_CORAL_BLOCK.get())
             .add(HybridAquaticBlocks.LEAF_CORAL_BLOCK.get())
             .add(HybridAquaticBlocks.SUN_CORAL_BLOCK.get())
-            .add(HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK.get())
-            .add(HybridAquaticBlocks.THORN_CORAL_BLOCK.get())
 
         getOrCreateTagBuilder(BlockTags.CORALS)
             .add(HybridAquaticBlocks.ROSE_CORAL.get())
             .add(HybridAquaticBlocks.LEAF_CORAL.get())
             .add(HybridAquaticBlocks.BUTTON_CORAL.get())
             .add(HybridAquaticBlocks.SUN_CORAL.get())
-            .add(HybridAquaticBlocks.LOPHELIA_CORAL.get())
-            .add(HybridAquaticBlocks.THORN_CORAL.get())
 
         getOrCreateTagBuilder(BlockTags.CORAL_PLANTS)
             .add(HybridAquaticBlocks.ROSE_CORAL.get())
             .add(HybridAquaticBlocks.LEAF_CORAL.get())
             .add(HybridAquaticBlocks.BUTTON_CORAL.get())
             .add(HybridAquaticBlocks.SUN_CORAL.get())
-            .add(HybridAquaticBlocks.THORN_CORAL.get())
-            .add(HybridAquaticBlocks.LOPHELIA_CORAL.get())
 
         getOrCreateTagBuilder(BlockTags.WALL_CORALS)
             .add(HybridAquaticBlocks.ROSE_CORAL_WALL_FAN.get())
             .add(HybridAquaticBlocks.LEAF_CORAL_WALL_FAN.get())
             .add(HybridAquaticBlocks.BUTTON_CORAL_WALL_FAN.get())
             .add(HybridAquaticBlocks.SUN_CORAL_WALL_FAN.get())
-            .add(HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN.get())
-            .add(HybridAquaticBlocks.THORN_CORAL_WALL_FAN.get())
 
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
             .add(HybridAquaticBlocks.BUTTON_CORAL_BLOCK.get())

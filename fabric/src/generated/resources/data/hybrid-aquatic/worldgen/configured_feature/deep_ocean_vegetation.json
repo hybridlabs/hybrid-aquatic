@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:simple_random_selector",
+  "config": {
+    "features": [
+      {
+        "feature": {
+          "type": "hybrid-aquatic:deep_coral_tree",
+          "config": {}
+        },
+        "placement": []
+      },
+      {
+        "feature": {
+          "type": "hybrid-aquatic:deep_coral_claw",
+          "config": {}
+        },
+        "placement": []
+      },
+      {
+        "feature": {
+          "type": "hybrid-aquatic:deep_coral_mushroom",
+          "config": {}
+        },
+        "placement": []
+      }
+    ]
+  }
+}

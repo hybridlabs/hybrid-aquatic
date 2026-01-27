@@ -13,6 +13,11 @@ object HybridAquaticBlockTags {
 
     val ANEMONES = create("anemones")
 
+    val DEEP_CORALS = create("deep_corals")
+    val DEEP_CORAL_PLANTS = create("deep_coral_plants")
+    val DEEP_WALL_CORALS = create("deep_wall_corals")
+    val DEEP_CORAL_BLOCKS = create("deep_coral_blocks")
+
     val TIDE_POOL_REPLACEABLE = create("tide_pool_replaceable")
 
     private fun create(id: String): TagKey<Block> {

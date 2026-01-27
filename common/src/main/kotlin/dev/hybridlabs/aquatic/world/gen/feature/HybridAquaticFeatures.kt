@@ -23,6 +23,10 @@ object HybridAquaticFeatures {
     val SUSPICIOUS_SAND_DISK = register("suspicious_sand_disk", SuspiciousSandDiskFeature(DiskConfiguration.CODEC))
     val SUSPICIOUS_RED_SAND_DISK = register("suspicious_red_sand_disk", SuspiciousRedSandDiskFeature(DiskConfiguration.CODEC))
 
+    val DEEP_CORAL_CLAW = register("deep_coral_claw", DeepCoralClawFeature(NoneFeatureConfiguration.CODEC))
+    val DEEP_CORAL_TREE = register("deep_coral_tree", DeepCoralTreeFeature(NoneFeatureConfiguration.CODEC))
+    val DEEP_CORAL_MUSHROOM = register("deep_coral_mushroom", DeepCoralMushroomFeature(NoneFeatureConfiguration.CODEC))
+
     fun <F : Feature<*>> register(
         id: String,
         feature: F

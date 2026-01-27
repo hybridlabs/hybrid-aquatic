@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.HolderSet
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.random.SimpleWeightedRandomList
@@ -33,6 +34,7 @@ import net.minecraft.world.level.levelgen.feature.Feature.WATERLOGGED_VEGETATION
 import net.minecraft.world.level.levelgen.feature.configurations.*
 import net.minecraft.world.level.levelgen.feature.stateproviders.*
 import net.minecraft.world.level.levelgen.placement.CaveSurface
+import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest
 import net.minecraft.world.level.levelgen.synth.NormalNoise
 import java.util.concurrent.CompletableFuture
@@ -135,6 +137,32 @@ class ConfiguredFeatureProvider(
                     16,
                     0.07,
                     50
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.DEEP_OCEAN_VEGETATION,
+            ConfiguredFeature(
+                Feature.SIMPLE_RANDOM_SELECTOR,
+                SimpleRandomFeatureConfiguration(
+                    HolderSet.direct(
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.DEEP_CORAL_TREE.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        ),
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.DEEP_CORAL_CLAW.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        ),
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.DEEP_CORAL_MUSHROOM.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        )
+                    )
                 )
             )
         )

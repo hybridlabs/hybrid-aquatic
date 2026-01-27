@@ -324,6 +324,22 @@ class BiomeProvider(
         )
 
         entries.add(
+            HybridAquaticBiomes.DEEP_CORAL_REEF,
+            create(
+                entries,
+                temperature = 0.2f,
+                downfall = 0.0f,
+                waterColor = 0x3F76E4,
+                waterFogColor = 0x050533
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION)
+                )
+            }
+        )
+
+        entries.add(
             HybridAquaticBiomes.WARM_TRENCH,
             create(
                 entries,
@@ -343,6 +359,22 @@ class BiomeProvider(
                 waterColor = 0x1b2447,
                 waterFogColor = 0x1b2447
             )
+        )
+
+        entries.add(
+            HybridAquaticBiomes.TROPICAL_DEEP_CORAL_REEF,
+            create(
+                entries,
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x45ADF2,
+                waterFogColor = 0x041633
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION)
+                )
+            }
         )
 
         entries.add(

@@ -312,6 +312,16 @@ class PlacedFeatureProvider(
                 )
             )
         )
+
+        entries.add(
+            HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.DEEP_OCEAN_VEGETATION), listOf(
+                    CountOnEveryLayerPlacement.of(10),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    BiomeFilter.biome()
+                )
+            )
+        )
     }
 
     override fun getName(): String {

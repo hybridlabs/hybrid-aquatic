@@ -28,6 +28,14 @@
     {
       "id": "hybrid-aquatic:brine_lagoon",
       "required": false
+    },
+    {
+      "id": "hybrid-aquatic:tropical_deep_coral_reef",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:deep_coral_reef",
+      "required": false
     }
   ]
 }

@@ -1,7 +1,10 @@
 {
   "replace": false,
   "values": [
-    "minecraft:deep_lukewarm_ocean",
+    {
+      "id": "hybrid-aquatic:deep_coral_reef",
+      "required": false
+    },
     {
       "id": "hybrid-aquatic:tropical_deep_coral_reef",
       "required": false

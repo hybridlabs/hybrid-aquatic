@@ -34,6 +34,7 @@ object HybridAquaticBiomeTags {
     val SULFURIC_CAVE = create("sulfuric_trench")
 
     val REEF = create("reef")
+    val DEEP_REEF = create("deep_reef")
     val JUNGLE = create("jungle")
     val CHERRY = create("cherry")
     val CAVES = create("caves")
