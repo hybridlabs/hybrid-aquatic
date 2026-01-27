@@ -427,21 +427,20 @@ object HybridAquaticBlocks {
         )
     }
 
-    val BUOY =
-        register(
-            "buoy"
-        ) {
-            BuoyBlock(Properties.copy(Blocks.OAK_PLANKS).noOcclusion().noParticlesOnBreak().lightLevel { 12 }
-            )
-        }
+    val BUOY = register("buoy") {
+        BuoyBlock(Properties.copy(Blocks.OAK_PLANKS)
+            .noOcclusion()
+            .noParticlesOnBreak()
+            .lightLevel { 12 })
+    }
 
-    val GLOWSLIME_BLOCK =
-        register(
-            "glowslime_block"
-        ) {
-            SlimeBlock(Properties.copy(Blocks.SLIME_BLOCK).lightLevel { 14 }
-            )
-        }
+    val GLOWSLIME_BLOCK = register("glowslime_block") {
+        SlimeBlock(Properties.copy(Blocks.SLIME_BLOCK).lightLevel { 14 })
+    }
+
+    val DECORATIVE_BUBBLE_COLUMN = register("decorative_bubble_column") {
+        DecorativeBubbleColumnBlock(Properties.copy(Blocks.BUBBLE_COLUMN))
+    }
 
     private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block ): PlushieBlock {
         return PlushieBlock(

@@ -239,6 +239,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.SEA_LETTUCE.get(),
                 BlockModelGenerators.TintState.NOT_TINTED,
             )
+
+            createNonTemplateModelBlock(
+                HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get(),
+                Blocks.WATER
+            )
         }
     }
 
