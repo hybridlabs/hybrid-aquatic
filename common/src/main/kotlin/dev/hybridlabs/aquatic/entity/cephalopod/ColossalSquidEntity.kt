@@ -2,10 +2,15 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.core.BlockPos
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
 
 class ColossalSquidEntity(type: EntityType<out ColossalSquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
     override fun getTargetConfig() = TARGET_CONFIG
@@ -29,6 +34,19 @@ class ColossalSquidEntity(type: EntityType<out ColossalSquidEntity>, world: Leve
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)
+        }
+
+        fun canSpawn(
+            type: EntityType<out ColossalSquidEntity>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
+        ): Boolean {
+            return random.nextInt(100) == 0 &&
+                    world.isWaterAt(pos) &&
+                    world.canSeeSkyFromBelowWater(pos) &&
+                    !isDarkEnoughToSpawn(world, pos, random)
         }
     }
 
