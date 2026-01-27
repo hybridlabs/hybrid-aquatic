@@ -579,6 +579,8 @@ class EntitySpawnConfigGenerator {
         addCephalopod(
             HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(),
             listOf(
+                HybridAquaticBiomeTags.COLD_TRENCH,
+                HybridAquaticBiomeTags.ARCTIC_TRENCH,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.TROPICAL_TRENCH),
             10, 1, 1
@@ -942,8 +944,7 @@ class EntitySpawnConfigGenerator {
         addCrustacean(
             HybridAquaticEntityTypes.YETI_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+                HybridAquaticBiomeTags.HAS_THERMAL_VENTS),
             2, 1, 2
         )
 

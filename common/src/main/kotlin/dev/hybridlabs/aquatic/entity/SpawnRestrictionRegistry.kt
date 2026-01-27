@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.entity
 
+import dev.hybridlabs.aquatic.entity.cephalopod.ColossalSquidEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.FireflySquidEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.GiantSquidEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticOctopusEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.NautilusEntity
@@ -125,9 +127,7 @@ object SpawnRestrictionRegistry {
 
         // deep cephalopods
         setOf(
-            HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
-            HybridAquaticEntityTypes.COLOSSAL_SQUID.get(),
-            HybridAquaticEntityTypes.GIANT_SQUID.get(),
+            HybridAquaticEntityTypes.VAMPIRE_SQUID.get()
         ).forEach { registerDeepCephalopod(it) }
 
         // octopuses
@@ -135,6 +135,8 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.OCTOPUS.get(),
         ).forEach { registerOctopus(it) }
 
+        registerWaterCreature(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), ColossalSquidEntity::canSpawn)
+        registerWaterCreature(HybridAquaticEntityTypes.GIANT_SQUID.get(), GiantSquidEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), UmbrellaOctopusEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.NAUTILUS.get(), NautilusEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), FireflySquidEntity::canSpawn)

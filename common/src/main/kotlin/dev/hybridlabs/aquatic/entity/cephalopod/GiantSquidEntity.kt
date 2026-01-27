@@ -43,10 +43,13 @@ class GiantSquidEntity(type: EntityType<out GiantSquidEntity>, world: Level) : H
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
+            val topY = world.seaLevel - 48
+            val bottomY = world.seaLevel - 128
+
             return random.nextInt(100) == 0 &&
+                    pos.y in bottomY..topY &&
                     world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos) &&
-                    !isDarkEnoughToSpawn(world, pos, random)
+                    isDarkEnoughToSpawn(world, pos, random)
         }
     }
 
