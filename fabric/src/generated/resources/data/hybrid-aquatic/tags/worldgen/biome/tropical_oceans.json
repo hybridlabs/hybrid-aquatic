@@ -2,22 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:lukewarm_ocean",
-    "minecraft:deep_lukewarm_ocean",
-    {
-      "id": "still_life:subtropical_shallow_ocean",
-      "required": false
-    },
-    {
-      "id": "still_life:subtropical_deep_ocean",
-      "required": false
-    },
-    {
-      "id": "still_life:tropical_shallow_ocean",
-      "required": false
-    },
-    {
-      "id": "still_life:tropical_deep_ocean",
-      "required": false
-    }
+    "minecraft:deep_lukewarm_ocean"
   ]
 }
