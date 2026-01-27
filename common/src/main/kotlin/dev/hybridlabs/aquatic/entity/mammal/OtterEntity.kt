@@ -59,7 +59,7 @@ import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
 class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HybridAquaticMammalEntity(entityType, world), VariantHolder<OtterEntity.Companion.Type> {
-    val targetConfig = TARGET_CONFIG
+    fun getTargetConfig() = TARGET_CONFIG
 
     private val swimControl = OtterMoveControl(this, 45, 3, 0.02F, 1.0F, true)
 
@@ -109,7 +109,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
-        targetConfig.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, OtterEntity::hunger)
+        getTargetConfig().addAttackTarget(targetSelector, MAX_HUNGER / 4, this, OtterEntity::hunger)
     }
 
     /* Make otters seek air every 40 secs or so */

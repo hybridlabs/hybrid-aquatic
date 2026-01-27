@@ -29,7 +29,7 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<StingrayEntity.Companion.Type> {
 
-    override val targetConfig = TARGET_CONFIG
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

@@ -14,7 +14,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
 
-    override val targetConfig = TARGET_CONFIG
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override val inkConfig: InkConfiguration = InkConfiguration.GLOW
 

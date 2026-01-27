@@ -26,7 +26,11 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class SurgeonfishEntity(type: EntityType<out SurgeonfishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<SurgeonfishEntity.Companion.Type> {
 
-    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.MEDIUM_PREY, HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HybridAquaticEntityTags.MEDIUM_PREY,
+        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.SHARK
+    )
 
     override fun registerGoals() {
         super.registerGoals()

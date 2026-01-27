@@ -25,7 +25,11 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<ClownfishEntity.Companion.Type> {
-    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.MEDIUM_PREY, HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HybridAquaticEntityTags.MEDIUM_PREY,
+        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.SHARK
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

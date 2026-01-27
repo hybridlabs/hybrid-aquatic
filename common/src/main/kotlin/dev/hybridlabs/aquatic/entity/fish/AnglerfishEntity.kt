@@ -20,7 +20,7 @@ class AnglerfishEntity(type: EntityType<out AnglerfishEntity>, world: Level) : H
     private var angerTime = 0
     private var angryAt: UUID? = null
 
-    override val targetConfig = TARGET_CONFIG
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

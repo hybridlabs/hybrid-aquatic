@@ -17,7 +17,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class NautilusEntity(type: EntityType<out NautilusEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
 
-    override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.SHARK)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.SHARK)
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

@@ -9,7 +9,8 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
 class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
-    override val targetConfig = MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.CRUSTACEAN, HybridAquaticEntityTags.SMALL_PREY)
+    override fun getTargetConfig() =
+        MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.CRUSTACEAN, HybridAquaticEntityTags.SMALL_PREY)
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false

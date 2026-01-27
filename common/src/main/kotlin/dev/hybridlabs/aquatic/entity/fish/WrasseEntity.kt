@@ -23,7 +23,7 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<WrasseEntity.Companion.Type> {
 
-    override val targetConfig = TARGET_CONFIG
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

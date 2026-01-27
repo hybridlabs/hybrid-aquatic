@@ -57,7 +57,7 @@ open class HybridAquaticSharkEntity(
     entityType: EntityType<out HybridAquaticSharkEntity>,
     world: Level,
 ) : WaterAnimal(entityType, world), NeutralMob, GeoEntity {
-    open val targetConfig: MobTargetConfiguration? = null
+    open fun getTargetConfig(): MobTargetConfiguration? = null
 
     open val isPassive: Boolean = true
     open val closePlayerAttack: Boolean = false
@@ -102,7 +102,7 @@ open class HybridAquaticSharkEntity(
         goalSelector.addGoal(0, SharkAttackGoal(this, 1.1, true))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive })
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive })
-        targetConfig?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticSharkEntity::hunger)
+        getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticSharkEntity::hunger)
     }
 
     override fun finalizeSpawn(

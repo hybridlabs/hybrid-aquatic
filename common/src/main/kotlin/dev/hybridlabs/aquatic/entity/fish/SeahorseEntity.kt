@@ -27,7 +27,7 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class SeahorseEntity(type: EntityType<out SeahorseEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<SeahorseEntity.Companion.Type> {
 
-    override val targetConfig = MobTargetConfiguration.ofPrey(
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.SMALL_PREY,
         HybridAquaticEntityTags.MEDIUM_PREY,
         HybridAquaticEntityTags.LARGE_PREY,

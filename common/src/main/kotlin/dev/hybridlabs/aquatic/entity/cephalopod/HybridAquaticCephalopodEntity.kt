@@ -51,14 +51,14 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCephalopodEntity>, world: Level) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
-    open val targetConfig: MobTargetConfiguration? = null
+    open fun getTargetConfig(): MobTargetConfiguration? = null
     open val inkConfig: InkConfiguration? = null
 
     override fun registerGoals() {
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(2, CephalopodAttackGoal(this))
 
-        targetConfig?.let { config ->
+        getTargetConfig()?.let { config ->
             config.addAttackTarget(targetSelector, 1200, this, HybridAquaticCephalopodEntity::hunger)
             config.addAvoidanceGoal(goalSelector, this)
         }

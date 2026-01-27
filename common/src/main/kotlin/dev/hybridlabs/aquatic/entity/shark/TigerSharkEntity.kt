@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level
 import kotlin.random.Random
 
 class TigerSharkEntity(type: EntityType<out TigerSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
-    override val targetConfig = MobTargetConfiguration.ofPredator(
+    override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
         HybridAquaticEntityTags.CEPHALOPOD,
         HybridAquaticEntityTags.CRUSTACEAN,
         HybridAquaticEntityTags.MEDIUM_PREY,

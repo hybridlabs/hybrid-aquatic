@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class LanternSharkEntity(type: EntityType<out LanternSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
-    override val targetConfig = MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.SMALL_PREY)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.SMALL_PREY)
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false

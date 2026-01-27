@@ -31,7 +31,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HybridAquaticOctopusEntity(type, world), VariantHolder<OctopusEntity.Companion.Type>, OverlayTextureFeature {
-    override val targetConfig = TARGET_CONFIG
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 
