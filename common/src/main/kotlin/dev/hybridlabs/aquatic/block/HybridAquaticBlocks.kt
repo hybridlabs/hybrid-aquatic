@@ -73,7 +73,7 @@ object HybridAquaticBlocks {
         Properties.copy(Blocks.RED_SAND),
         SoundEvents.BRUSH_SAND,
         SoundEvents.BRUSH_SAND_COMPLETED) }
-    
+
     val CRYSTALLINE_SULFUR = register("crystalline_sulfur") { Block(Properties.copy(Blocks.AMETHYST_BLOCK)) }
     val GRASSY_SAND = register("grassy_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
     val CORALSTONE = register("coralstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
@@ -364,67 +364,60 @@ object HybridAquaticBlocks {
         )
     }
 
-    val THERMAL_VENT = register(
-        "hydrothermal_vent_shaft"
-    ) {
-        ThermalVentBlock(
-            2, Properties.copy(Blocks.TUFF).noOcclusion().strength(0.5F).pushReaction(PushReaction.DESTROY)
+    val THERMAL_VENT = register("hydrothermal_vent_shaft") {
+        ThermalVentBlock(2,
+            Properties.copy(Blocks.TUFF)
+            .noOcclusion()
+            .strength(0.5F)
+            .pushReaction(PushReaction.DESTROY))
+    }
+
+    val TUBE_WORM = register("tube_worm") {
+        TubeWormBlock(Properties.of()
+            .mapColor(MapColor.COLOR_GREEN)
+            .sound(SoundType.SLIME_BLOCK)
+            .noOcclusion()
+            .pushReaction(PushReaction.DESTROY))
+    }
+
+    val TUBE_SPONGE = register("tube_sponge") {
+        LivingSpongeBlock(true, Properties.of()
+            .mapColor(MapColor.COLOR_YELLOW)
+            .sound(SoundType.SLIME_BLOCK)
+            .noOcclusion()
+            .pushReaction(PushReaction.DESTROY))
+    }
+
+    val GLASS_SPONGE = register("glass_sponge") {
+        LivingSpongeBlock(true, Properties.of()
+            .mapColor(MapColor.COLOR_LIGHT_GRAY)
+            .sound(SoundType.SLIME_BLOCK)
+            .noOcclusion()
+            .pushReaction(PushReaction.DESTROY)
         )
     }
 
-    val TUBE_WORM = register(
-        "tube_worm"
-    ) {
-        TubeWormBlock(
-            Properties.of().mapColor(MapColor.COLOR_GREEN).sound(SoundType.SLIME_BLOCK).noOcclusion()
-                .pushReaction(PushReaction.DESTROY)
+    val HARP_SPONGE = register("harp_sponge") {
+        LivingSpongeBlock(true, Properties.of()
+            .mapColor(MapColor.COLOR_LIGHT_GRAY)
+            .sound(SoundType.SLIME_BLOCK)
+            .noOcclusion()
+            .pushReaction(PushReaction.DESTROY)
         )
     }
 
-    val TUBE_SPONGE = register(
-        "tube_sponge"
-    ) {
-        LivingSpongeBlock(
-            true,
-            Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.SLIME_BLOCK).noOcclusion()
-                .pushReaction(PushReaction.DESTROY)
-        )
+    val GIANT_CLAM = register("giant_clam") {
+        GiantClamBlock(true, Properties.copy(Blocks.TUFF)
+            .noOcclusion()
+            .strength(1.0F)
+            .pushReaction(PushReaction.DESTROY))
     }
 
-    val GLASS_SPONGE = register(
-        "glass_sponge"
-    ) {
-        LivingSpongeBlock(
-            true,
-            Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.SLIME_BLOCK).noOcclusion()
-                .pushReaction(PushReaction.DESTROY)
-        )
-    }
-
-    val HARP_SPONGE = register(
-        "harp_sponge"
-    ) {
-        LivingSpongeBlock(
-            true,
-            Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).sound(SoundType.SLIME_BLOCK).noOcclusion()
-                .pushReaction(PushReaction.DESTROY)
-        )
-    }
-
-    val GIANT_CLAM = register(
-        "giant_clam"
-    ) {
-        GiantClamBlock(
-            true, Properties.copy(Blocks.TUFF).noOcclusion().strength(1.0F).pushReaction(PushReaction.DESTROY)
-        )
-    }
-
-    val OYSTER = register(
-        "oyster_block"
-    ) {
-        OysterBlock(
-            true, Properties.copy(Blocks.TUFF).noOcclusion().strength(1.0F).pushReaction(PushReaction.DESTROY)
-        )
+    val OYSTER = register("oyster_block") {
+        OysterBlock(true, Properties.copy(Blocks.TUFF)
+            .noOcclusion()
+            .strength(1.0F)
+            .pushReaction(PushReaction.DESTROY))
     }
 
     val BUOY = register("buoy") {
