@@ -106,6 +106,9 @@ object SpawnRestrictionRegistry {
         // deep fish
         setOf(
             HybridAquaticEntityTypes.ANGLERFISH.get(),
+            HybridAquaticEntityTypes.VIPERFISH.get(),
+            HybridAquaticEntityTypes.FANGTOOTH.get(),
+            HybridAquaticEntityTypes.HATCHETFISH.get(),
             HybridAquaticEntityTypes.BARRELEYE.get(),
             HybridAquaticEntityTypes.COELACANTH.get(),
             HybridAquaticEntityTypes.RATFISH.get(),
@@ -123,6 +126,8 @@ object SpawnRestrictionRegistry {
         // deep cephalopods
         setOf(
             HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
+            HybridAquaticEntityTypes.COLOSSAL_SQUID.get(),
+            HybridAquaticEntityTypes.GIANT_SQUID.get(),
         ).forEach { registerDeepCephalopod(it) }
 
         // octopuses
@@ -182,6 +187,7 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.STARFISH.get(),
             HybridAquaticEntityTypes.SEA_SLUG.get(),
+            HybridAquaticEntityTypes.SCALYFOOT_SNAIL.get(),
             HybridAquaticEntityTypes.SEA_CUCUMBER.get(),
             HybridAquaticEntityTypes.SEA_URCHIN.get(),
         ).forEach { registerCritter(it) }

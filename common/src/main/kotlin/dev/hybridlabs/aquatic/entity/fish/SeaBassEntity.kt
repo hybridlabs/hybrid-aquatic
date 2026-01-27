@@ -11,7 +11,7 @@ class SeaBassEntity(type: EntityType<out SeaBassEntity>, world: Level) : HybridA
     override val targetConfig = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 3
     }
 
     companion object {

@@ -1493,6 +1493,12 @@ object HybridAquaticItems {
 
     val ANGLERFISH_SPAWN_EGG =
         registerSpawnEgg("anglerfish_spawn_egg", HybridAquaticEntityTypes.ANGLERFISH, 0x4b4257, 0xa7f1eb)
+     val VIPERFISH_SPAWN_EGG =
+        registerSpawnEgg("viperfish_spawn_egg", HybridAquaticEntityTypes.VIPERFISH, 0x4b4257, 0xa7f1eb)
+     val HATCHETFISH_SPAWN_EGG =
+        registerSpawnEgg("hatchetfish_spawn_egg", HybridAquaticEntityTypes.HATCHETFISH, 0x4b4257, 0xa7f1eb)
+     val FANGTOOTH_SPAWN_EGG =
+        registerSpawnEgg("fangtooth_spawn_egg", HybridAquaticEntityTypes.FANGTOOTH, 0x4b4257, 0xa7f1eb)
     val COELACANTH_SPAWN_EGG =
         registerSpawnEgg("coelacanth_spawn_egg", HybridAquaticEntityTypes.COELACANTH, 0x2f517a, 0xbac4d3)
     val DRAGONFISH_SPAWN_EGG =
@@ -1514,6 +1520,10 @@ object HybridAquaticItems {
         registerSpawnEgg("cuttlefish_spawn_egg", HybridAquaticEntityTypes.CUTTLEFISH, 0x8a4836, 0xf6deae)
     val ARROW_SQUID_SPAWN_EGG =
         registerSpawnEgg("arrow_squid_spawn_egg", HybridAquaticEntityTypes.ARROW_SQUID, 0x761f31, 0xd56360)
+    val COLOSSAL_SQUID_SPAWN_EGG =
+        registerSpawnEgg("colossal_squid_spawn_egg", HybridAquaticEntityTypes.COLOSSAL_SQUID, 0x761f31, 0xd56360)
+    val GIANT_SQUID_SPAWN_EGG =
+        registerSpawnEgg("giant_squid_spawn_egg", HybridAquaticEntityTypes.GIANT_SQUID, 0x761f31, 0xd56360)
     val FIREFLY_SQUID_SPAWN_EGG =
         registerSpawnEgg("firefly_squid_spawn_egg", HybridAquaticEntityTypes.FIREFLY_SQUID, 0xc93a61, 0x4ec0e8)
 
@@ -1626,6 +1636,8 @@ object HybridAquaticItems {
 
     val SEA_SLUG_SPAWN_EGG =
         registerSpawnEgg("sea_slug_spawn_egg", HybridAquaticEntityTypes.SEA_SLUG, 0xf7be47, 0xb853a3)
+    val SCALYFOOT_SNAIL_SPAWN_EGG =
+        registerSpawnEgg("scalyfoot_snail_spawn_egg", HybridAquaticEntityTypes.SCALYFOOT_SNAIL, 0xf7be47, 0xb853a3)
     val SEA_CUCUMBER_SPAWN_EGG =
         registerSpawnEgg("sea_cucumber_spawn_egg", HybridAquaticEntityTypes.SEA_CUCUMBER, 0x225b6d, 0x0c2627)
     val SEA_URCHIN_SPAWN_EGG =
