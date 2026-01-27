@@ -2,14 +2,8 @@
   "feature": "hybrid-aquatic:sand_circle",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": {
-        "type": "minecraft:uniform",
-        "value": {
-          "max_inclusive": 1,
-          "min_inclusive": 0
-        }
-      }
+      "type": "minecraft:rarity_filter",
+      "chance": 1
     },
     {
       "type": "minecraft:in_square"

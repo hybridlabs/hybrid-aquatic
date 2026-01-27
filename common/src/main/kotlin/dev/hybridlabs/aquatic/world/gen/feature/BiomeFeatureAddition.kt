@@ -14,12 +14,6 @@ data class BiomeFeatureAddition(
     companion object {
         val builtIn = listOf(
             BiomeFeatureAddition(
-                BiomeTags.IS_FOREST,
-                GenerationStep.Decoration.LAKES,
-                HybridAquaticPlacedFeatures.BIG_LAKE
-            ),
-
-            BiomeFeatureAddition(
                 HybridAquaticBiomeTags.REEF,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.ANEMONES

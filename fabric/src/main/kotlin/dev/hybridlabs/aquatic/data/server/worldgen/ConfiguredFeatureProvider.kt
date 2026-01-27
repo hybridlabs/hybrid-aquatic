@@ -51,17 +51,6 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.BIG_LAKE,
-            ConfiguredFeature(
-                HybridAquaticFeatures.BIG_LAKE.get(),
-                BigLakeFeature.Configuration(
-                    BlockStateProvider.simple(Blocks.WATER),
-                    BlockStateProvider.simple(Blocks.STONE)
-                )
-            )
-        )
-
         val ANEMONES = entries.add(
             HybridAquaticConfiguredFeatures.ANEMONES,
             ConfiguredFeature(

@@ -138,7 +138,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.WATER_LETTUCE), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    RarityFilter.onAverageOnceEvery(2),
+                    RarityFilter.onAverageOnceEvery(1),
                     BiomeFilter.biome()
                 )
             )
@@ -149,7 +149,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    RarityFilter.onAverageOnceEvery(2),
+                    RarityFilter.onAverageOnceEvery(1),
                     BiomeFilter.biome()
                 )
             )
@@ -158,7 +158,7 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.SAND_CIRCLE, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.SAND_CIRCLE), listOf(
-                    CountPlacement.of(UniformInt.of(0, 1)),
+                    RarityFilter.onAverageOnceEvery(1),
                     InSquarePlacement.spread(),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
                     BiomeFilter.biome()
@@ -172,17 +172,6 @@ class PlacedFeatureProvider(
                     CountPlacement.of(16),
                     InSquarePlacement.spread(),
                     PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
-                    BiomeFilter.biome()
-                )
-            )
-        )
-
-        entries.add(
-            HybridAquaticPlacedFeatures.BIG_LAKE, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.BIG_LAKE), listOf(
-                    CountPlacement.of(8),
-                    InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                     BiomeFilter.biome()
                 )
             )
