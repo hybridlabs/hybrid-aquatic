@@ -5,6 +5,7 @@
     "mixins": [
         "EnchantmentMixin",
         "EntityMixin",
+        "LivingEntityMixin",
         "FishingBobberEntityMixin",
         "FishingRodItemMixin",
         "PlayerEntityMixin",
