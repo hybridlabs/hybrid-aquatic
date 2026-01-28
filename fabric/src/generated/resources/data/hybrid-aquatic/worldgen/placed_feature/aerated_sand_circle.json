@@ -1,9 +1,9 @@
 {
-  "feature": "hybrid-aquatic:sand_circle",
+  "feature": "hybrid-aquatic:aerated_sand_circle",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 2
+      "chance": 5
     },
     {
       "type": "minecraft:in_square"

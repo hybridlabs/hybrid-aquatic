@@ -37,6 +37,7 @@ object HybridAquaticItemGroups {
 
                 // blocks
                 entries.accept(HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get())
+                entries.accept(HybridAquaticBlocks.AERATED_SAND.get())
                 entries.accept(HybridAquaticBlocks.WHITE_SAND.get())
                 entries.accept(HybridAquaticBlocks.WHITE_SANDSTONE.get())
                 entries.accept(HybridAquaticBlocks.GRASSY_SAND.get())

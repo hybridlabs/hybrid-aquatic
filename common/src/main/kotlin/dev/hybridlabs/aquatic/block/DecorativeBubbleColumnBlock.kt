@@ -78,7 +78,7 @@ class DecorativeBubbleColumnBlock(settings: Properties): Block(settings), Bucket
 
     override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
         val blockstate = level.getBlockState(pos.below())
-        return blockstate.`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get()) || blockstate.`is`(Blocks.BEDROCK)
+        return blockstate.`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get()) || blockstate.`is`(HybridAquaticBlocks.AERATED_SAND.get())
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
@@ -95,11 +95,11 @@ class DecorativeBubbleColumnBlock(settings: Properties): Block(settings), Bucket
     }
 
     override fun getPickupSound(): Optional<SoundEvent?> {
-        return Fluids.WATER.getPickupSound()
+        return Fluids.WATER.pickupSound
     }
 
     companion object {
-        val CHECK_PERIOD = 5
+        const val CHECK_PERIOD = 5
 
         fun updateColumn(level: LevelAccessor, origin: BlockPos, belowState: BlockState) {
             updateColumn(level, origin, level.getBlockState(origin), belowState)
@@ -119,17 +119,15 @@ class DecorativeBubbleColumnBlock(settings: Properties): Block(settings), Bucket
         }
 
         fun canExistIn(state: BlockState): Boolean {
-            return state.`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get()) || state.`is`(Blocks.WATER) && state.getFluidState().getAmount() >= 8 && state.getFluidState().isSource();
+            return state.`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get()) || state.`is`(Blocks.WATER) && state.fluidState.amount >= 8 && state.fluidState.isSource
         }
 
         fun getColumnState(belowState: BlockState): BlockState {
             return when {
                 belowState.`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get()) -> belowState
-                belowState.`is`(Blocks.BEDROCK) -> HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get().defaultBlockState()
+                belowState.`is`(HybridAquaticBlocks.AERATED_SAND.get()) -> HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get().defaultBlockState()
                 else -> Blocks.WATER.defaultBlockState()
             }
         }
-
-
     }
 }

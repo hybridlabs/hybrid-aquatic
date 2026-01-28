@@ -207,6 +207,19 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticConfiguredFeatures.AERATED_SAND_CIRCLE,
+            ConfiguredFeature(
+                Feature.DISK,
+                DiskConfiguration(
+                    RuleBasedBlockStateProvider.simple(HybridAquaticBlocks.AERATED_SAND.get()),
+                    BlockPredicate.matchesBlocks(listOf<Block>(HybridAquaticBlocks.GRASSY_SAND.get())),
+                    UniformInt.of(1, 3),
+                    1
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticConfiguredFeatures.SAND_CIRCLE,
             ConfiguredFeature(
                 Feature.DISK,

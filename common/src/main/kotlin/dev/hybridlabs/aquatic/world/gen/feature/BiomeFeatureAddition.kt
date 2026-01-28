@@ -127,6 +127,12 @@ data class BiomeFeatureAddition(
             BiomeFeatureAddition(
                 HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 GenerationStep.Decoration.UNDERGROUND_ORES,
+                HybridAquaticPlacedFeatures.AERATED_SAND_CIRCLE
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
+                GenerationStep.Decoration.UNDERGROUND_ORES,
                 HybridAquaticPlacedFeatures.SAND_CIRCLE
             ),
 

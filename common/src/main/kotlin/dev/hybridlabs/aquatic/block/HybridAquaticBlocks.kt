@@ -66,12 +66,13 @@ object HybridAquaticBlocks {
         )
     }
 
-    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle",) {
+    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") {
         MessageInABottleBlock(Properties.copy(Blocks.GLASS)
             .instabreak()
             .pushReaction(PushReaction.DESTROY))
     }
 
+    val AERATED_SAND = register("aerated_sand") { AeratedSandBlock(14406560, Properties.copy(Blocks.SAND)) }
     val WHITE_SAND = register("white_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
     val WHITE_SANDSTONE = register("white_sandstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
 
