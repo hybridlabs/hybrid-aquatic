@@ -4,19 +4,7 @@ import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.world.level.block.BaseCoralFanBlock
-import net.minecraft.world.level.block.BaseCoralPlantBlock
-import net.minecraft.world.level.block.BaseCoralWallFanBlock
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.BrushableBlock
-import net.minecraft.world.level.block.CoralBlock
-import net.minecraft.world.level.block.CoralFanBlock
-import net.minecraft.world.level.block.CoralPlantBlock
-import net.minecraft.world.level.block.CoralWallFanBlock
-import net.minecraft.world.level.block.SandBlock
-import net.minecraft.world.level.block.SlimeBlock
-import net.minecraft.world.level.block.SoundType
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockBehaviour
@@ -72,7 +60,7 @@ object HybridAquaticBlocks {
             .pushReaction(PushReaction.DESTROY))
     }
 
-    val AERATED_SAND = register("aerated_sand") { AeratedSandBlock(14406560, Properties.copy(Blocks.SAND)) }
+    val AERATED_SAND = register("aerated_sand") { AeratedSandBlock(14406560, Properties.copy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
     val WHITE_SAND = register("white_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
     val WHITE_SANDSTONE = register("white_sandstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
 
