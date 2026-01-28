@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.hybridlabs.aquatic.Constants;
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
 import net.minecraft.world.entity.ai.goal.BreathAirGoal;
 import net.minecraft.world.level.block.Block;

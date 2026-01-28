@@ -13,11 +13,8 @@ import net.minecraft.world.level.block.state.BlockState
 
 @Suppress("OVERRIDE_DEPRECATION")
 class AeratedSandBlock(dustColor: Int, settings: Properties) : SandBlock(dustColor, settings) {
-
-    val BUBBLE_COLUMN_CHECK_DELAY: Int = 20
-
     override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
-        BubbleColumnBlock.updateColumn(level, pos.above(), state)
+        DecorativeBubbleColumnBlock.updateColumn(level, pos.above(), state)
     }
 
     override fun updateShape(
@@ -29,13 +26,17 @@ class AeratedSandBlock(dustColor: Int, settings: Properties) : SandBlock(dustCol
         facingPos: BlockPos,
     ): BlockState {
         if (facing == Direction.UP && facingState.`is`(Blocks.WATER)) {
-            level.scheduleTick(currentPos, this, 20)
+            level.scheduleTick(currentPos, this, DECORATIVE_BUBBLE_COLUMN_CHECK_DELAY)
         }
 
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos)
     }
 
     override fun onPlace(state: BlockState, level: Level, pos: BlockPos, oldState: BlockState, isMoving: Boolean) {
-        level.scheduleTick(pos, this, 20)
+        level.scheduleTick(pos, this, DECORATIVE_BUBBLE_COLUMN_CHECK_DELAY)
+    }
+
+    companion object {
+        const val DECORATIVE_BUBBLE_COLUMN_CHECK_DELAY = 20
     }
 }

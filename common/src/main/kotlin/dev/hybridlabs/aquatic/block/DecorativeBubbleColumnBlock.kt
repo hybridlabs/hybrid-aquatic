@@ -70,7 +70,7 @@ class DecorativeBubbleColumnBlock(settings: Properties): Block(settings), Bucket
     ): BlockState {
         level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level))
         if (!state.canSurvive(level, currentPos) || facing == Direction.DOWN || facing == Direction.UP && !facingState.`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get()) && canExistIn(facingState)) {
-            level.scheduleTick(currentPos, this, 5)
+            level.scheduleTick(currentPos, this, CHECK_PERIOD)
         }
 
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos)
