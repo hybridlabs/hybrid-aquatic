@@ -31,27 +31,19 @@ public class CommonClass {
     public static final RegistrationProvider<Block> BLOCKS = RegistrationProvider.get(BuiltInRegistries.BLOCK, MOD_ID);
     public static final RegistrationProvider<Item> ITEMS = RegistrationProvider.get(BuiltInRegistries.ITEM, MOD_ID);
     public static final RegistrationProvider<PaintingVariant> PAINTINGS = RegistrationProvider.get(BuiltInRegistries.PAINTING_VARIANT, MOD_ID);
-    public static final RegistrationProvider<Potion> POTIONS = RegistrationProvider.get(BuiltInRegistries.POTION,
-            MOD_ID);
-    public static final RegistrationProvider<MobEffect> MOB_EFFECTS =
-            RegistrationProvider.get(BuiltInRegistries.MOB_EFFECT, MOD_ID);
-    public static final RegistrationProvider<EntityType<?>> ENTITY_TYPES =
-            RegistrationProvider.get(BuiltInRegistries.ENTITY_TYPE, MOD_ID);
-    public static final RegistrationProvider<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
-            RegistrationProvider.get(BuiltInRegistries.BLOCK_ENTITY_TYPE, MOD_ID);
-    public static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS =
-            RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
-    public static final RegistrationProvider<Feature<?>> FEATURE = RegistrationProvider.get(BuiltInRegistries.FEATURE
-            , MOD_ID);
-    public static final RegistrationProvider<LootPoolEntryType> LOOT_POOL_ENTRY_TYPE =
-            RegistrationProvider.get(BuiltInRegistries.LOOT_POOL_ENTRY_TYPE, MOD_ID);
+    public static final RegistrationProvider<Potion> POTIONS = RegistrationProvider.get(BuiltInRegistries.POTION, MOD_ID);
+    public static final RegistrationProvider<MobEffect> MOB_EFFECTS = RegistrationProvider.get(BuiltInRegistries.MOB_EFFECT, MOD_ID);
+    public static final RegistrationProvider<EntityType<?>> ENTITY_TYPES = RegistrationProvider.get(BuiltInRegistries.ENTITY_TYPE, MOD_ID);
+    public static final RegistrationProvider<BlockEntityType<?>> BLOCK_ENTITY_TYPES = RegistrationProvider.get(BuiltInRegistries.BLOCK_ENTITY_TYPE, MOD_ID);
+    public static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS = RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
+    public static final RegistrationProvider<Feature<?>> FEATURE = RegistrationProvider.get(BuiltInRegistries.FEATURE, MOD_ID);
+    public static final RegistrationProvider<LootPoolEntryType> LOOT_POOL_ENTRY_TYPE = RegistrationProvider.get(BuiltInRegistries.LOOT_POOL_ENTRY_TYPE, MOD_ID);
 
     public static final Path CONFIG_FILE = Services.PLATFORM.getConfigDir().resolve(MOD_ID + ".json");
 
     public static ResourceLocation locate(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
-
 
     public static void init() {
         if (Services.PLATFORM.isModLoaded(MOD_ID)) {

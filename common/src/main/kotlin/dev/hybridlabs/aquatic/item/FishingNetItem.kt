@@ -12,9 +12,10 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.material.Fluids
-import java.util.Optional
+import net.minecraft.world.phys.HitResult
 
 class FishingNetItem(settings: Properties) : Item(settings) {
 
@@ -40,10 +41,9 @@ class FishingNetItem(settings: Properties) : Item(settings) {
         if (!level.isClientSide) {
             val nbtCopy = stack.tag?.copy()
             if (nbtCopy != null) {
-                val optionalEntity = getEntityFromNBT(nbtCopy)
-                if (optionalEntity.isPresent) {
-                    val hitResult = getPlayerPOVHitResult(level, player, net.minecraft.world.level.ClipContext.Fluid.SOURCE_ONLY)
-                    if (hitResult.type != net.minecraft.world.phys.HitResult.Type.BLOCK) {
+                getEntityFromNBT(nbtCopy)?.let { entityType ->
+                    val hitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY)
+                    if (hitResult.type != HitResult.Type.BLOCK) {
                         return InteractionResultHolder.pass(stack)
                     }
 
@@ -56,7 +56,6 @@ class FishingNetItem(settings: Properties) : Item(settings) {
                         spawnPos = pos
                     }
 
-                    val entityType = optionalEntity.get()
                     val entity = entityType.create(level) ?: return InteractionResultHolder.fail(stack)
                     val tag = stack.tag ?: return InteractionResultHolder.fail(stack)
                     val entityData = tag.getCompound(ENTITY_KEY)
@@ -95,9 +94,9 @@ class FishingNetItem(settings: Properties) : Item(settings) {
             itemStack.orCreateTag.put(ENTITY_KEY, entityCompound)
         }
 
-        fun getEntityFromNBT(nbt: CompoundTag): Optional<EntityType<*>> {
+        fun getEntityFromNBT(nbt: CompoundTag): EntityType<*>? {
             val storedNBT = nbt.getCompound(ENTITY_KEY)
-            return EntityType.by(storedNBT)
+            return EntityType.by(storedNBT).orElse(null)
         }
 
         fun alreadyHasFish(stack: ItemStack): Boolean {

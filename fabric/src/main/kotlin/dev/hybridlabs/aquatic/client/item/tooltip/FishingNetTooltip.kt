@@ -12,9 +12,8 @@ class FishingNetTooltip :
     override fun appendTooltip(stack: ItemStack, context: TooltipFlag, lines: MutableList<Component>) {
         val nbtCopy = stack.tag?.copy()
         if (nbtCopy != null) {
-            val optionalEntity = FishingNetItem.getEntityFromNBT(nbtCopy)
-            if (optionalEntity.isPresent) {
-                val entityName = optionalEntity.get().description
+            FishingNetItem.getEntityFromNBT(nbtCopy)?.let { entityType ->
+                val entityName = entityType.description
                 lines.add(Component.translatable("item.hybrid-aquatic.fishing_net.description", entityName))
             }
         }

@@ -223,139 +223,103 @@ object SpawnRestrictionRegistry {
         ).forEach { registerMinion(it) }
     }
 
-    private fun <T : WaterAnimal> registerShallowFish(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticFishEntity::canShallowSpawn)
+    private fun <T : WaterAnimal> registerShallowFish(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticFishEntity::canShallowSpawn)
     }
 
-    private fun <T : WaterAnimal> registerFish(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticFishEntity::canSpawn)
+    private fun <T : WaterAnimal> registerFish(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticFishEntity::canSpawn)
     }
 
-    private fun <T : WaterAnimal> registerNightFish(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticFishEntity::canNightSpawn)
+    private fun <T : WaterAnimal> registerNightFish(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticFishEntity::canNightSpawn)
     }
 
-    private fun <T : WaterAnimal> registerDeepFish(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticFishEntity::canDeepSpawn)
+    private fun <T : WaterAnimal> registerDeepFish(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticFishEntity::canDeepSpawn)
     }
 
-    private fun <T : WaterAnimal> registerCephalopod(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticCephalopodEntity::canSpawn)
+    private fun <T : WaterAnimal> registerCephalopod(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticCephalopodEntity::canSpawn)
     }
 
-    private fun <T : WaterAnimal> registerOctopus(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticOctopusEntity::canSpawn)
+    private fun <T : WaterAnimal> registerOctopus(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticOctopusEntity::canSpawn)
     }
 
-    private fun <T : WaterAnimal> registerDeepCephalopod(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticCephalopodEntity::canDeepSpawn)
+    private fun <T : WaterAnimal> registerDeepCephalopod(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticCephalopodEntity::canDeepSpawn)
     }
 
-    private fun <T : WaterAnimal> registerShallowShark(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticSharkEntity::canShallowSpawn)
+    private fun <T : WaterAnimal> registerShallowShark(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticSharkEntity::canShallowSpawn)
     }
 
-    private fun <T : WaterAnimal> registerShark(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticSharkEntity::canSpawn)
+    private fun <T : WaterAnimal> registerShark(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticSharkEntity::canSpawn)
     }
 
-    private fun <T : WaterAnimal> registerDeepShark(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticSharkEntity::canDeepSpawn)
+    private fun <T : WaterAnimal> registerDeepShark(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticSharkEntity::canDeepSpawn)
     }
 
-    private fun <T : HybridAquaticMammalEntity> registerMammal(entityType: EntityType<T>) {
-        registerMammalEntity(entityType, HybridAquaticMammalEntity::canSpawn)
+    private fun <T : HybridAquaticMammalEntity> registerMammal(type: EntityType<T>) {
+        registerMammalEntity(type, HybridAquaticMammalEntity::canSpawn)
     }
 
-    private fun <T : WaterAnimal> registerJelly(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticJellyfishEntity::canSpawn)
+    private fun <T : WaterAnimal> registerJelly(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticJellyfishEntity::canSpawn)
     }
 
-    private fun <T : WaterAnimal> registerDeepJelly(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticJellyfishEntity::canDeepSpawn)
+    private fun <T : WaterAnimal> registerDeepJelly(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticJellyfishEntity::canDeepSpawn)
     }
 
-    private fun <T : WaterAnimal> registerTerrestrialCrustacean(entityType: EntityType<T>) {
-        registerLandWaterCreature(entityType, HybridAquaticCrustaceanEntity::canSurfaceSpawn)
+    private fun <T : WaterAnimal> registerTerrestrialCrustacean(type: EntityType<T>) {
+        registerLandWaterCreature(type, HybridAquaticCrustaceanEntity::canSurfaceSpawn)
     }
 
-    private fun <T : WaterAnimal> registerAquaticCrustacean(entityType: EntityType<T>) {
-        registerLandWaterCreature(entityType, HybridAquaticCrustaceanEntity::canWaterSpawn)
+    private fun <T : WaterAnimal> registerAquaticCrustacean(type: EntityType<T>) {
+        registerLandWaterCreature(type, HybridAquaticCrustaceanEntity::canWaterSpawn)
     }
 
-    private fun <T : WaterAnimal> registerDeepCrustacean(entityType: EntityType<T>) {
-        registerLandWaterCreature(entityType, HybridAquaticCrustaceanEntity::canDeepSpawn)
+    private fun <T : WaterAnimal> registerDeepCrustacean(type: EntityType<T>) {
+        registerLandWaterCreature(type, HybridAquaticCrustaceanEntity::canDeepSpawn)
     }
 
-    private fun <T : WaterAnimal> registerCritter(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticCritterEntity::canSpawn)
+    private fun <T : WaterAnimal> registerCritter(type: EntityType<T>) {
+        registerWaterCreature(type, HybridAquaticCritterEntity::canSpawn)
     }
 
-    private fun <T : Monster> registerMiniboss(entityType: EntityType<T>) {
-        registerMiniboss(entityType, HybridAquaticMinibossEntity::canSpawn)
+    private fun <T : Monster> registerMiniboss(type: EntityType<T>) {
+        registerMiniboss(type, HybridAquaticMinibossEntity::canSpawn)
     }
 
-    private fun <T : Monster> registerMinion(entityType: EntityType<T>) {
-        registerMinion(entityType, HybridAquaticMinionEntity::canSpawn)
+    private fun <T : Monster> registerMinion(type: EntityType<T>) {
+        registerMinion(type, HybridAquaticMinionEntity::canSpawn)
     }
 
-    private fun <T : WaterAnimal> registerWaterCreature(
-        entityType: EntityType<T>,
-        predicate: SpawnPlacements.SpawnPredicate<T>,
-    ) {
-        register(
-            entityType,
-            SpawnPlacements.Type.IN_WATER,
-            predicate
-        )
+    private fun <T : WaterAnimal> registerWaterCreature(type: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+        register(type, SpawnPlacements.Type.IN_WATER, predicate)
     }
 
-    private fun <T : Monster> registerMiniboss(
-        entityType: EntityType<T>,
-        predicate: SpawnPlacements.SpawnPredicate<T>,
-    ) {
-        register(
-            entityType,
-            SpawnPlacements.Type.IN_WATER,
-            predicate
-        )
+    private fun <T : Monster> registerMiniboss(type: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+        register(type, SpawnPlacements.Type.IN_WATER, predicate)
     }
 
-    private fun <T : Monster> registerMinion(
-        entityType: EntityType<T>,
-        predicate: SpawnPlacements.SpawnPredicate<T>,
-    ) {
-        register(
-            entityType,
-            SpawnPlacements.Type.IN_WATER,
-            predicate
-        )
+    private fun <T : Monster> registerMinion(type: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+        register(type, SpawnPlacements.Type.IN_WATER, predicate)
     }
 
-    private fun <T : Animal> registerMammalEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
-        register(
-            entityType,
-            SpawnPlacements.Type.NO_RESTRICTIONS,
-            predicate
-        )
+    private fun <T : Animal> registerMammalEntity(type: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+        register(type, SpawnPlacements.Type.NO_RESTRICTIONS, predicate)
     }
 
-    private fun <T : WaterAnimal> registerLandWaterCreature(
-        entityType: EntityType<T>,
-        predicate: SpawnPlacements.SpawnPredicate<T>,
-    ) {
-        register(
-            entityType,
-            SpawnPlacements.Type.NO_RESTRICTIONS,
-            predicate
-        )
+    private fun <T : WaterAnimal> registerLandWaterCreature(type: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+        register(type, SpawnPlacements.Type.NO_RESTRICTIONS, predicate)
     }
 
-    private fun <T : Mob> register(
-        entityType: EntityType<T>,
-        location: SpawnPlacements.Type,
-        predicate: SpawnPlacements.SpawnPredicate<T>,
-    ) {
-        SpawnPlacements.register(entityType, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)
+    private fun <T : Mob> register(type: EntityType<T>, location: SpawnPlacements.Type, predicate: SpawnPlacements.SpawnPredicate<T>, ) {
+        SpawnPlacements.register(type, location, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, predicate)
     }
 }
