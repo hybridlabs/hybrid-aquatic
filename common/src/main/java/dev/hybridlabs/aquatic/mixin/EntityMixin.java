@@ -41,7 +41,6 @@ public class EntityMixin {
 					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
 	)
 	private boolean decorativeBubbleColumn_getBlockSpeedFactorParity(BlockState instance, Block block, Operation<Boolean> original) {
-		Constants.LOG.info("{}: {} {} {}", "E.getBlockSpeedFactor", instance, block, original);
 		return instance.is(HybridAquaticBlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
 	}
 	
@@ -52,7 +51,6 @@ public class EntityMixin {
 					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
 	)
 	private boolean decorativeBubbleColumn_isInBubbleColumnParity(BlockState instance, Block block, Operation<Boolean> original) {
-		Constants.LOG.info("{}: {} {} {}", "E.isInBubbleColumn", instance, block, original);
 		return instance.is(HybridAquaticBlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
 	}
 }

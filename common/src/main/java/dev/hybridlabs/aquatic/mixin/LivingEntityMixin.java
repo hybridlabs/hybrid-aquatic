@@ -24,7 +24,6 @@ public class LivingEntityMixin {
 					to = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;canBreatheUnderwater()Z"))
 	)
 	private boolean decorativeBubbleColumn_baseTickParity(BlockState instance, Block block, Operation<Boolean> original) {
-		Constants.LOG.info("{}: {} {} {}", "LE.baseTick", instance, block, original);
 		return instance.is(HybridAquaticBlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
 	}
 }

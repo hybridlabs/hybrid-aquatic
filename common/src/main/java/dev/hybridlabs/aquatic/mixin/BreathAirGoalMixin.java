@@ -20,7 +20,6 @@ public class BreathAirGoalMixin {
 					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
 	)
 	private boolean decorativeBubbleColumn_givesAirParity(BlockState instance, Block block, Operation<Boolean> original) {
-		Constants.LOG.info("{}: {} {} {}", "BAG.givesAir", instance, block, original);
 		return instance.is(HybridAquaticBlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
 	}
 }
