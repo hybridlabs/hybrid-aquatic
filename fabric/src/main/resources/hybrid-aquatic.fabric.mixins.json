@@ -12,7 +12,9 @@
         "FishingRodItemMixin",
         "PlayerEntityMixin",
         "ServerPlayerEntityMixin",
-        "SpawnGroupMixin"
+        "SpawnGroupMixin",
+        "SeagrassBlockMixin",
+        "TallSeagrassBlockMixin"
     ],
     "client": [
         "client.BookScreenMixin",

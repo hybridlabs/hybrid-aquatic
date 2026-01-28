@@ -12,7 +12,9 @@
         "FishingBobberEntityMixin",
         "FishingRodItemMixin",
         "PlayerEntityMixin",
-        "ServerPlayerEntityMixin"
+        "ServerPlayerEntityMixin",
+        "SeagrassBlockMixin",
+        "TallSeagrassBlockMixin"
     ],
     "client": [
         "client.BookScreenMixin",
