@@ -20,7 +20,7 @@
     },
     "target": {
       "type": "minecraft:matching_blocks",
-      "blocks": "minecraft:sand"
+      "blocks": "hybrid-aquatic:grassy_sand"
     }
   }
 }
