@@ -5,7 +5,9 @@
     "mixins": [
         "EnchantmentMixin",
         "EntityMixin",
-        "LivingEntityMixin",
+        "LivingEntityBubbleColumnMixin",
+        "BreathAirGoalMixin",
+        "FlowingFluidMixin",
         "FishingBobberEntityMixin",
         "FishingRodItemMixin",
         "PlayerEntityMixin",
