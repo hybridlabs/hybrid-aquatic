@@ -12,6 +12,7 @@ import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
+@Suppress("DEPRECATION", "unused")
 class ColossalSquidEntity(type: EntityType<out ColossalSquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
     override fun getTargetConfig() = TARGET_CONFIG
 
