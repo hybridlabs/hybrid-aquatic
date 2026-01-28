@@ -14,20 +14,9 @@ import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.HAMMER
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.THRESHER_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.TIGER_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.WHALE_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.BaskingSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.BullSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.FrilledSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.GreatWhiteSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.HammerheadSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.ThresherSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.TigerSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.WhaleSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
 import dev.hybridlabs.aquatic.client.render.block.HybridAquaticBlockRenderers
-import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.BuoyBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.GiantGreenAnemoneBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
@@ -49,12 +38,16 @@ import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
+import net.minecraft.core.BlockPos
+import net.minecraft.tags.FluidTags
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.minecraftforge.client.event.EntityRenderersEvent
+import net.minecraftforge.common.MinecraftForge.EVENT_BUS
 import net.minecraftforge.common.loot.IGlobalLootModifier
 import net.minecraftforge.common.world.StructureModifier
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
+import net.minecraftforge.event.entity.living.LivingBreatheEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
@@ -108,6 +101,7 @@ object HybridAquaticForge {
         MOD_BUS.addListener(::registerSpawnPlacements)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerWandererTrades)
         FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
+        EVENT_BUS.addListener(::makeBlocksBreatheable)
 
         runForDist(
             clientTarget = {
@@ -149,6 +143,17 @@ object HybridAquaticForge {
         SpawnRestrictionRegistry.registerSpawnRestrictions()
     }
 
+    private fun makeBlocksBreatheable(event: LivingBreatheEvent) {
+        val entity = event.entity
+        val world = entity.level()
+
+        if(entity.isEyeInFluid(FluidTags.WATER) &&
+            world.getBlockState(BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()))
+                .`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get())) {
+            event.setCanBreathe(true)
+            event.setCanRefillAir(true)
+        }
+    }
 
     private fun registerModelLayers(event: EntityRenderersEvent.RegisterLayerDefinitions) {
         event.registerLayerDefinition(BASKING_SHARK_PLUSHIE, BaskingSharkPlushieModel.Companion::createModelData)
