@@ -29,7 +29,8 @@ class BiomeProvider(
         downfall: Float,
         waterColor: Int,
         waterFogColor: Int,
-        extraFeatures: (BiomeGenerationSettings.Builder.() -> Unit)? = null
+        extraSpawns: List<Pair<MobCategory, MobSpawnSettings.SpawnerData>> = ArrayList(),
+        extraFeatures: (BiomeGenerationSettings.Builder.() -> Unit)? = null,
     ): Biome {
         val builder = BiomeGenerationSettings.Builder(
             entries.placedFeatures(),
@@ -45,7 +46,7 @@ class BiomeProvider(
         return Biome.BiomeBuilder()
             .generationSettings(makeGenerationSettings(entries))
             .generationSettings(builder.build())
-            .mobSpawnSettings(makeSpawnSettings())
+            .mobSpawnSettings(makeSpawnSettings(extraSpawns))
             .hasPrecipitation(true)
             .temperature(temperature)
             .downfall(downfall)
@@ -66,19 +67,22 @@ class BiomeProvider(
         return builder.build()
     }
 
-    fun makeSpawnSettings(): MobSpawnSettings{
+    fun makeSpawnSettings(extraSpawns: List<Pair<MobCategory, MobSpawnSettings.SpawnerData>>): MobSpawnSettings {
         val builder = makeDefaultSpawnSettings()
+        for (extraSpawn in extraSpawns){
+            builder.addSpawn(extraSpawn.first, extraSpawn.second)
+        }
         return builder.build()
     }
 
-    fun makeDefaultSpawnSettings(): MobSpawnSettings.Builder{
-        val spawnSettings =  MobSpawnSettings.Builder()
+    fun makeDefaultSpawnSettings(): MobSpawnSettings.Builder {
+        val spawnSettings = MobSpawnSettings.Builder()
         addDefaultAmbientSpawns(spawnSettings)
         addDefaultMonsterSpawns(spawnSettings)
         return spawnSettings
     }
 
-    fun addStandardFeatures(builder: BiomeGenerationSettings.Builder){
+    fun addStandardFeatures(builder: BiomeGenerationSettings.Builder) {
         BiomeDefaultFeatures.addDefaultCarversAndLakes(builder)
         BiomeDefaultFeatures.addDefaultCrystalFormations(builder)
         BiomeDefaultFeatures.addDefaultMonsterRoom(builder)
@@ -87,23 +91,26 @@ class BiomeProvider(
         BiomeDefaultFeatures.addSurfaceFreezing(builder)
     }
 
-    fun addDefaultAmbientSpawns(builder: MobSpawnSettings.Builder){
-        builder.addSpawn(MobCategory.AMBIENT, MobSpawnSettings.SpawnerData(EntityType.BAT,10,8,8))
-        builder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID,5,2,5))
+    fun addDefaultAmbientSpawns(builder: MobSpawnSettings.Builder) {
+        builder.addSpawn(MobCategory.AMBIENT, MobSpawnSettings.SpawnerData(EntityType.BAT, 10, 8, 8))
+        builder.addSpawn(
+            MobCategory.UNDERGROUND_WATER_CREATURE,
+            MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID, 5, 2, 5)
+        )
     }
 
-    fun addDefaultMonsterSpawns(builder: MobSpawnSettings.Builder){
-        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.SPIDER,100,4,4))
-        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.ZOMBIE,95,4,4))
-        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.ZOMBIE_VILLAGER,5,1,1))
-        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.SKELETON,100,4,4))
-        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.CREEPER,100,4,4))
-        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.SLIME,100,4,4))
-        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.ENDERMAN,10,1,4))
-        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.WITCH,5,1,1))
+    fun addDefaultMonsterSpawns(builder: MobSpawnSettings.Builder) {
+        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.SPIDER, 100, 4, 4))
+        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.ZOMBIE, 95, 4, 4))
+        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.ZOMBIE_VILLAGER, 5, 1, 1))
+        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.SKELETON, 100, 4, 4))
+        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.CREEPER, 100, 4, 4))
+        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.SLIME, 100, 4, 4))
+        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 10, 1, 4))
+        builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.WITCH, 5, 1, 1))
     }
 
-    fun createStandardBiomeEffects(): BiomeSpecialEffects.Builder{
+    fun createStandardBiomeEffects(): BiomeSpecialEffects.Builder {
         return BiomeSpecialEffects.Builder()
             .waterColor(0x3f76e4)
             .waterFogColor(0x50533)
@@ -206,7 +213,8 @@ class BiomeProvider(
                 temperature = 0.5f,
                 downfall = 0.5f,
                 waterColor = 0x43D5EE,
-                waterFogColor = 0x041F33
+                waterFogColor = 0x041F33,
+                listOf(Pair(MobCategory.WATER_CREATURE, MobSpawnSettings.SpawnerData(EntityType.DOLPHIN, 1, 1, 2)))
             ) {
                 addFeature(
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
