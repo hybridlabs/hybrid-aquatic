@@ -155,7 +155,14 @@
         "weight": 5
       }
     ],
-    "water_ambient": [],
+    "water_ambient": [
+      {
+        "type": "minecraft:tropical_fish",
+        "maxCount": 6,
+        "minCount": 3,
+        "weight": 3
+      }
+    ],
     "water_creature": []
   },
   "temperature": 0.5

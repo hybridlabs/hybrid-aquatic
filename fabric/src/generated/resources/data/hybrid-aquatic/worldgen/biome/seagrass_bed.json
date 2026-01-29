@@ -155,10 +155,23 @@
         "weight": 5
       }
     ],
-    "water_ambient": [],
+    "water_ambient": [
+      {
+        "type": "minecraft:tropical_fish",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 8
+      }
+    ],
     "water_creature": [
       {
         "type": "minecraft:dolphin",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "minecraft:turtle",
         "maxCount": 2,
         "minCount": 1,
         "weight": 1

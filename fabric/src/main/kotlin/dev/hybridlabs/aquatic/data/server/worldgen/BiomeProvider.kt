@@ -69,7 +69,7 @@ class BiomeProvider(
 
     fun makeSpawnSettings(extraSpawns: List<Pair<MobCategory, MobSpawnSettings.SpawnerData>>): MobSpawnSettings {
         val builder = makeDefaultSpawnSettings()
-        for (extraSpawn in extraSpawns){
+        for (extraSpawn in extraSpawns) {
             builder.addSpawn(extraSpawn.first, extraSpawn.second)
         }
         return builder.build()
@@ -120,7 +120,7 @@ class BiomeProvider(
 
     override fun configure(
         registries: HolderLookup.Provider,
-        entries: Entries
+        entries: Entries,
     ) {
         entries.add(
             HybridAquaticBiomes.COLD_RIVER,
@@ -129,7 +129,13 @@ class BiomeProvider(
                 temperature = 0.5f,
                 downfall = 0.5f,
                 waterColor = 0x3D57D6,
-                waterFogColor = 0x050533
+                waterFogColor = 0x050533,
+                listOf(
+                    Pair(
+                        MobCategory.WATER_AMBIENT,
+                        MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 3, 5)
+                    )
+                )
             ) {
                 addFeature(
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
@@ -149,7 +155,13 @@ class BiomeProvider(
                 temperature = 0.95f,
                 downfall = 0.9f,
                 waterColor = 0x3A7A6A,
-                waterFogColor = 0x4D7A60
+                waterFogColor = 0x4D7A60,
+                listOf(
+                    Pair(
+                        MobCategory.WATER_CREATURE,
+                        MobSpawnSettings.SpawnerData(EntityType.FROG, 1, 1, 2)
+                    )
+                )
             ) {
                 addFeature(
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
@@ -189,7 +201,13 @@ class BiomeProvider(
                 temperature = 0.5f,
                 downfall = 0.5f,
                 waterColor = 0x43D5EE,
-                waterFogColor = 0x041F33
+                waterFogColor = 0x041F33,
+                listOf(
+                    Pair(
+                        MobCategory.WATER_AMBIENT,
+                        MobSpawnSettings.SpawnerData(EntityType.TROPICAL_FISH, 3, 3, 6)
+                    )
+                )
             ) {
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
@@ -214,7 +232,20 @@ class BiomeProvider(
                 downfall = 0.5f,
                 waterColor = 0x43D5EE,
                 waterFogColor = 0x041F33,
-                listOf(Pair(MobCategory.WATER_CREATURE, MobSpawnSettings.SpawnerData(EntityType.DOLPHIN, 1, 1, 2)))
+                listOf(
+                    Pair(
+                        MobCategory.WATER_CREATURE,
+                        MobSpawnSettings.SpawnerData(EntityType.DOLPHIN, 1, 1, 2)
+                    ),
+                    Pair(
+                        MobCategory.WATER_CREATURE,
+                        MobSpawnSettings.SpawnerData(EntityType.TURTLE, 1, 1, 2)
+                    ),
+                    Pair(
+                        MobCategory.WATER_AMBIENT,
+                        MobSpawnSettings.SpawnerData(EntityType.TROPICAL_FISH, 8, 2, 4)
+                    )
+                )
             ) {
                 addFeature(
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,

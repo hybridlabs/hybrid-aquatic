@@ -154,7 +154,14 @@
         "weight": 5
       }
     ],
-    "water_ambient": [],
+    "water_ambient": [
+      {
+        "type": "minecraft:salmon",
+        "maxCount": 5,
+        "minCount": 3,
+        "weight": 1
+      }
+    ],
     "water_creature": []
   },
   "temperature": 0.5
