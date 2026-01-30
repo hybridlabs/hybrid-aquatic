@@ -9,12 +9,10 @@ data class HybridAquaticConfig(
      * Increase when the config needs to be reset, i.e. when new entity spawn configs are added.
      */
     val dataVersion: Int = 7,
-
-
-
-    val entitySpawnConfig: List<EntitySpawnConfig> = EntitySpawnConfigGenerator.generate(),
     val enableWanderingTraderTrades: Boolean = true,
     val enableVillagerTrades: Boolean = true,
+
+    val entitySpawnConfig: List<EntitySpawnConfig> = EntitySpawnConfigGenerator.generate(),
 ) {
     companion object {
         val CODEC: Codec<HybridAquaticConfig> = RecordCodecBuilder.create { instance ->
