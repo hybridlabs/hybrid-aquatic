@@ -5,7 +5,6 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.TallSeagrassBlock
-import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.feature.Feature
@@ -14,39 +13,45 @@ import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeat
 
 class RedAlgaeFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
     Feature<ProbabilityFeatureConfiguration>(codec) {
+
     override fun place(context: FeaturePlaceContext<ProbabilityFeatureConfiguration>): Boolean {
-        var bl = false
+        var placed = false
         val random = context.random()
-        val structureLevelAccessor = context.level()
-        val blockPos = context.origin()
-        val probabilityConfig = context.config() as ProbabilityFeatureConfiguration
+        val level = context.level()
+        val origin = context.origin()
+        val config = context.config()
+
         val i = random.nextInt(8) - random.nextInt(8)
         val j = random.nextInt(8) - random.nextInt(8)
-        val k = structureLevelAccessor.getHeight(Heightmap.Types.OCEAN_FLOOR, blockPos.x + i, blockPos.z + j)
-        val blockPos2 = BlockPos(blockPos.x + i, k, blockPos.z + j)
-        if (structureLevelAccessor.getBlockState(blockPos2).`is`(Blocks.WATER)) {
-            val bl2 = random.nextDouble() < probabilityConfig.probability.toDouble()
-            val blockState = if (bl2) {
-                HybridAquaticBlocks.TALL_RED_ALGAE.get().defaultBlockState()
-            } else {
-                HybridAquaticBlocks.RED_ALGAE.get().defaultBlockState()
-            }
-            if (blockState.canSurvive(structureLevelAccessor, blockPos2)) {
-                if (bl2) {
-                    val blockState2 = blockState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER) as BlockState
-                    val blockPos3 = blockPos2.above()
-                    if (structureLevelAccessor.getBlockState(blockPos3).`is`(Blocks.WATER)) {
-                        structureLevelAccessor.setBlock(blockPos2, blockState, 2)
-                        structureLevelAccessor.setBlock(blockPos3, blockState2, 2)
-                    }
-                } else {
-                    structureLevelAccessor.setBlock(blockPos2, blockState, 2)
-                }
+        val y = level.getHeight(Heightmap.Types.OCEAN_FLOOR, origin.x + i, origin.z + j)
+        val pos = BlockPos(origin.x + i, y, origin.z + j)
 
-                bl = true
-            }
+        if (!level.getBlockState(pos).`is`(Blocks.WATER)) return false
+
+        val tall = random.nextDouble() < config.probability
+        val short = !tall && random.nextFloat() < 0.35f
+
+        val state = when {
+            tall -> HybridAquaticBlocks.TALL_RED_ALGAE.get().defaultBlockState()
+            short -> HybridAquaticBlocks.SHORT_RED_ALGAE.get().defaultBlockState()
+            else -> HybridAquaticBlocks.RED_ALGAE.get().defaultBlockState()
         }
 
-        return bl
+        if (!state.canSurvive(level, pos)) return false
+
+        if (tall) {
+            val above = pos.above()
+            if (level.getBlockState(above).`is`(Blocks.WATER)) {
+                val upper = state.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER)
+                level.setBlock(pos, state, 2)
+                level.setBlock(above, upper, 2)
+                placed = true
+            }
+        } else {
+            level.setBlock(pos, state, 2)
+            placed = true
+        }
+
+        return placed
     }
 }

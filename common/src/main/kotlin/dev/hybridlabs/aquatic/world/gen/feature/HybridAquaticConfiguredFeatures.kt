@@ -22,6 +22,7 @@ object HybridAquaticConfiguredFeatures {
 
     val JUNGLE_LILY_PAD = register("jungle_lily_pad")
 
+    val AERATED_SAND = register("aerated_sand")
     val AERATED_SAND_CIRCLE = register("aerated_sand_circle")
     val SAND_CIRCLE = register("sand_circle")
     val SULFUR_DEPOSIT = register("sulfur_deposit")
@@ -29,7 +30,7 @@ object HybridAquaticConfiguredFeatures {
     val SUSPICIOUS_RED_SAND_DISK = register("disk_suspicious_red_sand")
 
     val RED_ALGAE_PATCH = register("red_algae_patch")
-    val RED_ALGAE_MEADOW = register("red_algae_meadow")
+
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch")
 
     val GIANT_CLAM_PATCH = register("giant_clam_patch")

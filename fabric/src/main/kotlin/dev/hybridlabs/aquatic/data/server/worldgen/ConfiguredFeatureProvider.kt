@@ -177,30 +177,12 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticConfiguredFeatures.RED_ALGAE_MEADOW,
+            HybridAquaticConfiguredFeatures.AERATED_SAND,
             ConfiguredFeature(
-                Feature.FLOWER,
-                RandomPatchConfiguration(
-                    500,
-                    12,
-                    2,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            NoiseProvider(
-                                237L,
-                                NormalNoise.NoiseParameters(-4, 4.0),
-                                1.0f,
-                                listOf(
-                                    HybridAquaticBlocks.SEA_LETTUCE.get().defaultBlockState(),
-
-                                    HybridAquaticBlocks.RED_ALGAE.get().defaultBlockState(),
-
-                                    HybridAquaticBlocks.SARGASSUM.get().defaultBlockState()
-                                )
-                            )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                Feature.SIMPLE_BLOCK,
+                SimpleBlockConfiguration(
+                    BlockStateProvider.simple(
+                        HybridAquaticBlocks.AERATED_SAND.get().defaultBlockState()
                     )
                 )
             )

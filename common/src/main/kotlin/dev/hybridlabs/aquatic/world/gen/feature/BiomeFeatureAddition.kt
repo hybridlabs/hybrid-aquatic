@@ -44,12 +44,6 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
-                HybridAquaticBiomeTags.RED_MEADOW,
-                GenerationStep.Decoration.VEGETAL_DECORATION,
-                HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW
-            ),
-
-            BiomeFeatureAddition(
                 HybridAquaticBiomeTags.SANDY_BEACHES,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.DUNEGRASS_PATCH
@@ -103,6 +97,24 @@ data class BiomeFeatureAddition(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
             ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.REEF,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.RED_ALGAE_PATCH
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.WARM_OCEAN,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.RED_ALGAE_PATCH
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.RED_MEADOW,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.RED_ALGAE_PATCH
+            ),
             //#endregion
 
             //#region Oyster Beds
@@ -120,7 +132,7 @@ data class BiomeFeatureAddition(
 
             BiomeFeatureAddition(
                 HybridAquaticBiomeTags.REEF,
-                GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                GenerationStep.Decoration.RAW_GENERATION,
                 HybridAquaticPlacedFeatures.SPIRE
             ),
 

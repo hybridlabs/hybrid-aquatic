@@ -411,7 +411,7 @@ object HybridAquaticBiomes {
         BiomePlacement.replaceOverworld(
             Biomes.WARM_OCEAN,
             SEAGRASS_BED,
-            0.1
+            0.25
         )
 
         BiomePlacement.replaceOverworld(
@@ -423,7 +423,7 @@ object HybridAquaticBiomes {
         BiomePlacement.replaceOverworld(
             Biomes.WARM_OCEAN,
             RED_MEADOW,
-            0.1
+            0.25
         )
 
         BiomePlacement.replaceOverworld(

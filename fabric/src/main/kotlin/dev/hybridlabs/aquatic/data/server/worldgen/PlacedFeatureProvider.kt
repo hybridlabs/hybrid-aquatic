@@ -14,12 +14,10 @@ import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.VerticalAnchor
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
 import net.minecraft.world.level.levelgen.placement.*
-import net.minecraft.world.level.material.Fluid
-import net.minecraft.world.level.material.Fluids
 import java.util.concurrent.CompletableFuture
 
+@Suppress("DEPRECATION")
 class PlacedFeatureProvider(
     output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
@@ -167,6 +165,17 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticPlacedFeatures.AERATED_SAND, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.AERATED_SAND), listOf(
+                    RarityFilter.onAverageOnceEvery(3),
+                    InSquarePlacement.spread(),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticPlacedFeatures.AERATED_SAND_CIRCLE, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.AERATED_SAND_CIRCLE), listOf(
                     RarityFilter.onAverageOnceEvery(5),
@@ -214,17 +223,6 @@ class PlacedFeatureProvider(
                     NoiseBasedCountPlacement.of(10, 80.0, 0.0),
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    BiomeFilter.biome()
-                )
-            )
-        )
-
-        entries.add(
-            HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_MEADOW), listOf(
-                    BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(*arrayOf<Fluid>(Fluids.WATER))),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(100),
                     BiomeFilter.biome()
                 )
             )
