@@ -56,7 +56,8 @@
       "minecraft:underwater_magma",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:disk_gravel"
+      "minecraft:disk_gravel",
+      "hybrid-aquatic:coral_mound"
     ],
     [],
     [
@@ -65,7 +66,7 @@
     ],
     [
       "minecraft:glow_lichen",
-      "hybrid-aquatic:coral_reef",
+      "hybrid-aquatic:coral_layer",
       "minecraft:seagrass_warm",
       "minecraft:sea_pickle"
     ],

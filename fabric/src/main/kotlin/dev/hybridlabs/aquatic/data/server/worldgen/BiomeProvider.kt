@@ -210,8 +210,12 @@ class BiomeProvider(
                 )
             ) {
                 addFeature(
+                    GenerationStep.Decoration.UNDERGROUND_ORES,
+                    entries.ref(HybridAquaticPlacedFeatures.CORAL_MOUND)
+                )
+                addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(HybridAquaticPlacedFeatures.CORAL_REEF)
+                    entries.ref(HybridAquaticPlacedFeatures.CORAL_LAYER)
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,

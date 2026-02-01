@@ -331,6 +331,34 @@ class PlacedFeatureProvider(
                 )
             )
         )
+
+        entries.add(
+            HybridAquaticPlacedFeatures.CORAL_MOUND, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.CORAL_MOUND), listOf(
+                    RarityFilter.onAverageOnceEvery(3),
+                    NoiseBasedCountPlacement.of(10, 180.0, 0.0),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                    RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticPlacedFeatures.CORAL_LAYER, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.CORAL_LAYER), listOf(
+                    CountPlacement.of(16),
+                    InSquarePlacement(),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                    BiomeFilter.biome()
+
+                )
+
+            )
+        )
+
+
     }
 
     override fun getName(): String {

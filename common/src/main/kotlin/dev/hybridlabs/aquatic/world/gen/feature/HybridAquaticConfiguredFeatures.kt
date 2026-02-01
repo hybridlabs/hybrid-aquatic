@@ -42,6 +42,8 @@ object HybridAquaticConfiguredFeatures {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
     val TIDE_POOLS = register("tide_pools")
     val BOULDER = register("boulder")
+    val CORAL_MOUND = register("coral_mound")
+    val CORAL_LAYER = register("coral_layer")
 
     fun register(id: String): ResourceKey<ConfiguredFeature<*, *>> {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, CommonClass.locate(id))

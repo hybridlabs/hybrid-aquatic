@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.HolderSet
+import net.minecraft.core.Vec3i
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.random.SimpleWeightedRandomList
@@ -26,14 +27,18 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties.WAT
 import net.minecraft.world.level.levelgen.GeodeBlockSettings
 import net.minecraft.world.level.levelgen.GeodeCrackSettings
 import net.minecraft.world.level.levelgen.GeodeLayerSettings
+import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.Feature.GEODE
 import net.minecraft.world.level.levelgen.feature.Feature.WATERLOGGED_VEGETATION_PATCH
+import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature
 import net.minecraft.world.level.levelgen.feature.configurations.*
 import net.minecraft.world.level.levelgen.feature.stateproviders.*
 import net.minecraft.world.level.levelgen.placement.CaveSurface
+import net.minecraft.world.level.levelgen.placement.CountPlacement
+import net.minecraft.world.level.levelgen.placement.HeightmapPlacement
 import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest
 import net.minecraft.world.level.levelgen.synth.NormalNoise
@@ -496,6 +501,118 @@ class ConfiguredFeatureProvider(
                     UniformInt.of(1, 3),
                     ConstantInt.of(4),
                     UniformInt.of(TubeWormBlock.WORMS.min, TubeWormBlock.WORMS.max),
+                )
+            )
+        )
+
+        // coral mound base
+        entries.add(
+            HybridAquaticConfiguredFeatures.CORAL_MOUND, ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                    6, 7, 0, PlacementUtils.inlinePlaced(
+                        Feature.DISK, DiskConfiguration(
+                            RuleBasedBlockStateProvider(
+                                SimpleStateProvider.simple(HybridAquaticBlocks.CORALSTONE.get()), listOf(
+                                    RuleBasedBlockStateProvider.Rule(
+                                        BlockPredicate.not(
+                                            BlockPredicate.matchesBlocks(
+                                                Vec3i(0, -1, 0),
+                                                listOf(Blocks.SAND, HybridAquaticBlocks.CORALSTONE.get())
+                                            )
+                                        ),
+                                        SimpleStateProvider.simple(Blocks.WATER),
+                                    )
+                                )
+                            ), BlockPredicate.matchesBlocks(
+                                Vec3i(0, -1, 0), listOf(Blocks.SAND, HybridAquaticBlocks.CORALSTONE.get())
+                            ), UniformInt.of(2, 4), 1
+                        ),
+                        CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
+                    )
+                )
+            )
+        )
+
+        // coral mound coral layers
+        entries.add(
+            HybridAquaticConfiguredFeatures.CORAL_LAYER,
+            ConfiguredFeature(
+                Feature.RANDOM_SELECTOR,
+                RandomFeatureConfiguration(
+                    listOf(
+                        Blocks.BRAIN_CORAL_BLOCK,
+                        Blocks.HORN_CORAL_BLOCK,
+                        Blocks.BUBBLE_CORAL_BLOCK,
+                        Blocks.FIRE_CORAL_BLOCK,
+                        Blocks.TUBE_CORAL_BLOCK
+                    ).map { block ->
+                        WeightedPlacedFeature(
+                            PlacementUtils.inlinePlaced(
+                                Feature.DISK, DiskConfiguration(
+                                    RuleBasedBlockStateProvider(
+                                        SimpleStateProvider.simple(HybridAquaticBlocks.CORALSTONE.get()),
+                                        listOf(
+                                            RuleBasedBlockStateProvider.Rule(
+                                                BlockPredicate.allOf(
+                                                    BlockPredicate.matchesTag(
+                                                        Vec3i(0, 1, 0),
+                                                        HybridAquaticBlockTags.CORAL_MOUND_BASE_BLOCKS,
+                                                    ),
+                                                    BlockPredicate.matchesTag(
+                                                        Vec3i(0, -1, 0),
+                                                        HybridAquaticBlockTags.CORAL_MOUND_BASE_BLOCKS,
+                                                    ),
+                                                ),
+                                                WeightedStateProvider(
+                                                    SimpleWeightedRandomList.builder<BlockState>().add(
+                                                        HybridAquaticBlocks.CORALSTONE.get().defaultBlockState(),
+                                                        2
+                                                    ).add(
+                                                        block.defaultBlockState(),
+                                                        1
+
+                                                    )
+                                                )
+                                            ),
+                                            RuleBasedBlockStateProvider.Rule(
+                                                BlockPredicate.allOf(
+                                                    BlockPredicate.anyOf(
+                                                        BlockPredicate.matchesBlocks(
+                                                            Vec3i(0, 1, 0),
+                                                            Blocks.WATER
+                                                        ),
+                                                        BlockPredicate.matchesBlocks(
+                                                            Vec3i(0, 2, 0),
+                                                            Blocks.WATER
+                                                        ),
+                                                    ),
+                                                    BlockPredicate.allOf(
+                                                        BlockPredicate.matchesTag(
+                                                            Vec3i(0, -1, 0),
+                                                            HybridAquaticBlockTags.CORAL_MOUND_BASE_BLOCKS,
+                                                        ),
+                                                        BlockPredicate.matchesTag(
+                                                            Vec3i(0, -2, 0),
+                                                            HybridAquaticBlockTags.CORAL_MOUND_BASE_BLOCKS,
+                                                        ),
+                                                    ),
+                                                ),
+                                                SimpleStateProvider.simple(block),
+                                            )
+                                        )
+                                    ),
+                                    BlockPredicate.matchesTag(
+                                        Vec3i(0, -1, 0),
+                                        HybridAquaticBlockTags.CORAL_MOUND_BLOCKS,
+                                    ),
+                                    ConstantInt.of(8),
+                                    4
+                                )
+                            ),
+                            0.2f
+                        )
+                    },
+                    PlacementUtils.inlinePlaced(Feature.NO_OP, NoneFeatureConfiguration())
                 )
             )
         )

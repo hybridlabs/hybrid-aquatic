@@ -20,6 +20,9 @@ object HybridAquaticBlockTags {
 
     val TIDE_POOL_REPLACEABLE = create("tide_pool_replaceable")
 
+    val CORAL_MOUND_BLOCKS =create("coral_mound_blocks")
+    val CORAL_MOUND_BASE_BLOCKS =create("coral_mound_base_blocks")
+
     private fun create(id: String): TagKey<Block> {
         return TagKey.create(Registries.BLOCK, CommonClass.locate(id))
     }
