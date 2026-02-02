@@ -20,7 +20,7 @@ class DeepCoralTableFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoral
 
         placeDeepCoralBlock(level, random, mutable, state)
 
-        val topRadius = random.nextInt(4) + 2
+        val topRadius = random.nextInt(3) + 2
         val layers = 2
 
         for (layer in 1..layers) {
