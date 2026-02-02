@@ -31,38 +31,38 @@ class DeepCoralClawFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoralF
             )
 
             for (direction1 in list.subList(0, i)) {
-                val `blockpos$mutableblockpos` = pos.mutable()
+                val mutableBlockPos = pos.mutable()
                 val j = random.nextInt(2) + 1
-                `blockpos$mutableblockpos`.move(direction1)
+                mutableBlockPos.move(direction1)
                 val k: Int
                 val direction2: Direction?
                 if (direction1 == direction) {
                     direction2 = direction
                     k = random.nextInt(3) + 2
                 } else {
-                    `blockpos$mutableblockpos`.move(Direction.UP)
+                    mutableBlockPos.move(Direction.UP)
                     val adirection: Array<Direction> = arrayOf(direction1, Direction.UP)
                     direction2 = Util.getRandom(adirection, random)
                     k = random.nextInt(3) + 3
                 }
 
                 var l = 0
-                while (l < j && this.placeDeepCoralBlock(level, random, `blockpos$mutableblockpos`, state)) {
-                    `blockpos$mutableblockpos`.move(direction2)
+                while (l < j && this.placeDeepCoralBlock(level, random, mutableBlockPos, state)) {
+                    mutableBlockPos.move(direction2)
                     ++l
                 }
 
-                `blockpos$mutableblockpos`.move(direction2.opposite)
-                `blockpos$mutableblockpos`.move(Direction.UP)
+                mutableBlockPos.move(direction2.opposite)
+                mutableBlockPos.move(Direction.UP)
 
                 for (i1 in 0..<k) {
-                    `blockpos$mutableblockpos`.move(direction)
-                    if (!this.placeDeepCoralBlock(level, random, `blockpos$mutableblockpos`, state)) {
+                    mutableBlockPos.move(direction)
+                    if (!this.placeDeepCoralBlock(level, random, mutableBlockPos, state)) {
                         break
                     }
 
                     if (random.nextFloat() < 0.25f) {
-                        `blockpos$mutableblockpos`.move(Direction.UP)
+                        mutableBlockPos.move(Direction.UP)
                     }
                 }
             }

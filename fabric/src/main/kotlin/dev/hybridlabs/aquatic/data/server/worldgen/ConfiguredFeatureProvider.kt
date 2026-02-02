@@ -50,14 +50,6 @@ class ConfiguredFeatureProvider(
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
 
-        entries.add(
-            HybridAquaticConfiguredFeatures.SPIRE,
-            ConfiguredFeature(
-                HybridAquaticFeatures.SPIRE.get(),
-                NoneFeatureConfiguration.INSTANCE
-            )
-        )
-
         val ANEMONES = entries.add(
             HybridAquaticConfiguredFeatures.ANEMONES,
             ConfiguredFeature(
@@ -164,6 +156,11 @@ class ConfiguredFeatureProvider(
                         ),
                         PlacementUtils.inlinePlaced(
                             HybridAquaticFeatures.DEEP_CORAL_MUSHROOM.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        ),
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.DEEP_CORAL_TABLE.get(),
                             FeatureConfiguration.NONE,
                             *arrayOfNulls<PlacementModifier>(0)
                         )
@@ -505,6 +502,34 @@ class ConfiguredFeatureProvider(
             )
         )
 
+        // deep sea mound
+        entries.add(
+            HybridAquaticConfiguredFeatures.DEEP_SEA_MOUND, ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                    6, 7, 0, PlacementUtils.inlinePlaced(
+                        Feature.DISK, DiskConfiguration(
+                            RuleBasedBlockStateProvider(
+                                SimpleStateProvider.simple(Blocks.STONE), listOf(
+                                    RuleBasedBlockStateProvider.Rule(
+                                        BlockPredicate.not(
+                                            BlockPredicate.matchesBlocks(
+                                                Vec3i(0, -1, 0),
+                                                listOf(Blocks.SAND, Blocks.STONE)
+                                            )
+                                        ),
+                                        SimpleStateProvider.simple(Blocks.WATER),
+                                    )
+                                )
+                            ), BlockPredicate.matchesBlocks(
+                                Vec3i(0, -1, 0), listOf(Blocks.SAND, Blocks.STONE)
+                            ), UniformInt.of(2, 4), 1
+                        ),
+                        CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
+                    )
+                )
+            )
+        )
+
         // coral mound base
         entries.add(
             HybridAquaticConfiguredFeatures.CORAL_MOUND, ConfiguredFeature(
@@ -544,7 +569,12 @@ class ConfiguredFeatureProvider(
                         Blocks.HORN_CORAL_BLOCK,
                         Blocks.BUBBLE_CORAL_BLOCK,
                         Blocks.FIRE_CORAL_BLOCK,
-                        Blocks.TUBE_CORAL_BLOCK
+                        Blocks.TUBE_CORAL_BLOCK,
+                        HybridAquaticBlocks.SUN_CORAL_BLOCK.get(),
+                        HybridAquaticBlocks.LEAF_CORAL_BLOCK.get(),
+                        HybridAquaticBlocks.ROSE_CORAL_BLOCK.get(),
+                        HybridAquaticBlocks.BUTTON_CORAL_BLOCK.get(),
+                        HybridAquaticBlocks.CORALSTONE.get(),
                     ).map { block ->
                         WeightedPlacedFeature(
                             PlacementUtils.inlinePlaced(

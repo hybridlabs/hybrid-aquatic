@@ -174,10 +174,10 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBlockTags.CORAL_MOUND_BLOCKS)
             .add(HybridAquaticBlocks.CORALSTONE.get())
-            .addTag(BlockTags.CORAL_BLOCKS)
 
         getOrCreateTagBuilder(HybridAquaticBlockTags.CORAL_MOUND_BASE_BLOCKS)
             .addTag(HybridAquaticBlockTags.CORAL_MOUND_BLOCKS)
+            .add(HybridAquaticBlocks.SHORESTONE.get())
             .add(Blocks.SAND)
 
         // plushies

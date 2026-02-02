@@ -1,5 +1,5 @@
 {
-  "feature": "hybrid-aquatic:coral_mound",
+  "feature": "hybrid-aquatic:deep_sea_mound",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
@@ -7,7 +7,7 @@
     },
     {
       "type": "minecraft:noise_based_count",
-      "noise_factor": 90.0,
+      "noise_factor": 180.0,
       "noise_offset": 0.0,
       "noise_to_count_ratio": 10
     },

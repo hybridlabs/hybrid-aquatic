@@ -14,7 +14,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeat
 object HybridAquaticFeatures {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleFeature(MessageInABottleFeatureConfig.CODEC))
     val ANEMONES = register("anemones", AnemoneFeature())
-    val SPIRE = register("spire", SpireFeature(NoneFeatureConfiguration.CODEC))
     val BULL_KELP = register("bull_kelp", BullKelpFeature(BullKelpFeatureConfig.CODEC))
     val VENT_PATCH = register("vent_patch", VentPatchFeature(VentPatchFeatureConfig.CODEC))
     val SARGASSUM = register("sargassum", SargassumFeature(SargassumFeatureConfig.CODEC))
@@ -26,6 +25,7 @@ object HybridAquaticFeatures {
     val DEEP_CORAL_CLAW = register("deep_coral_claw", DeepCoralClawFeature(NoneFeatureConfiguration.CODEC))
     val DEEP_CORAL_TREE = register("deep_coral_tree", DeepCoralTreeFeature(NoneFeatureConfiguration.CODEC))
     val DEEP_CORAL_MUSHROOM = register("deep_coral_mushroom", DeepCoralMushroomFeature(NoneFeatureConfiguration.CODEC))
+    val DEEP_CORAL_TABLE = register("deep_coral_table", DeepCoralTableFeature(NoneFeatureConfiguration.CODEC))
 
     fun <F : Feature<*>> register(
         id: String,

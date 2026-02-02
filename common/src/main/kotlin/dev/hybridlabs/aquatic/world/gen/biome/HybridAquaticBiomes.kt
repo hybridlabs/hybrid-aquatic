@@ -92,9 +92,9 @@ object HybridAquaticBiomes {
         sequence(
             ifTrue(
                 ON_FLOOR,
-                state(HybridAquaticBlocks.CORALSTONE.get().defaultBlockState())
+                state(HybridAquaticBlocks.SHORESTONE.get().defaultBlockState())
             ),
-            ifTrue(UNDER_FLOOR, state(HybridAquaticBlocks.SHORESTONE.get().defaultBlockState())),
+            ifTrue(UNDER_FLOOR, state(Blocks.SMOOTH_SANDSTONE.defaultBlockState())),
             ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
         )
     )

@@ -11,7 +11,6 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature
 @Suppress("UNUSED_PARAMETER")
 object HybridAquaticPlacedFeatures {
     val ANEMONES = register("anemones")
-    val SPIRE = register("spire")
     val DEEP_OCEAN_VEGETATION = register("deep_ocean_vegetation")
 
     val SARGASSUM = register("sargassum")
@@ -30,9 +29,7 @@ object HybridAquaticPlacedFeatures {
     val DISK_SUSPICIOUS_RED_SAND = register("disk_suspicious_red_sand")
 
     val RED_ALGAE_PATCH = register("red_algae_patch")
-
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch")
-
     val DUNEGRASS_PATCH = register("dunegrass_patch")
 
     val GIANT_CLAM_PATCH = register("giant_clam_patch")
@@ -44,9 +41,12 @@ object HybridAquaticPlacedFeatures {
     val TUBE_SPONGE_PATCH = register("sponge_patch")
     val GLASS_SPONGE_PATCH = register("glass_sponge_patch")
     val HARP_SPONGE_PATCH = register("harp_sponge_patch")
+
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
+
     val TIDE_POOLS = register("tide_pools")
     val BOULDERS = register("boulders")
+    val DEEP_SEA_MOUND = register("deep_sea_mound")
     val CORAL_MOUND = register("coral_mound")
     val CORAL_LAYER = register("coral_layer")
 

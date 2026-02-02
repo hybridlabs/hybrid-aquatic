@@ -10,7 +10,6 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
  */
 object HybridAquaticConfiguredFeatures {
     val ANEMONES = register("anemones")
-    val SPIRE = register("spire")
     val DEEP_OCEAN_VEGETATION = register("deep_ocean_vegetation")
 
     val DUNEGRASS_PATCH = register("dunegrass_patch")
@@ -42,6 +41,7 @@ object HybridAquaticConfiguredFeatures {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
     val TIDE_POOLS = register("tide_pools")
     val BOULDER = register("boulder")
+    val DEEP_SEA_MOUND = register("deep_sea_mound")
     val CORAL_MOUND = register("coral_mound")
     val CORAL_LAYER = register("coral_layer")
 

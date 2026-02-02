@@ -252,10 +252,6 @@ class BiomeProvider(
                 )
             ) {
                 addFeature(
-                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
-                    entries.ref(MiscOverworldPlacements.FOREST_ROCK)
-                )
-                addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     entries.ref(AquaticPlacements.SEAGRASS_WARM)
                 )

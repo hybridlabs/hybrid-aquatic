@@ -74,18 +74,6 @@ class PlacedFeatureProvider(
             )
         )
 
-        // spire
-        entries.add(
-            HybridAquaticPlacedFeatures.SPIRE, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.SPIRE), listOf(
-                    InSquarePlacement.spread(),
-                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
-                    CountPlacement.of(1),
-                    BiomeFilter.biome()
-                )
-            )
-        )
-
         entries.add(
             HybridAquaticPlacedFeatures.DUNEGRASS_PATCH, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH), listOf(
@@ -315,7 +303,7 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.CORAL_REEF, PlacedFeature(
                 entries.ref(AquaticFeatures.WARM_OCEAN_VEGETATION), listOf(
-                    CountOnEveryLayerPlacement.of(10),
+                    CountOnEveryLayerPlacement.of(8),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
                     BiomeFilter.biome()
                 )
@@ -325,8 +313,21 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.DEEP_OCEAN_VEGETATION), listOf(
-                    CountOnEveryLayerPlacement.of(10),
+                    CountOnEveryLayerPlacement.of(8),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticPlacedFeatures.DEEP_SEA_MOUND, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.DEEP_SEA_MOUND), listOf(
+                    RarityFilter.onAverageOnceEvery(3),
+                    NoiseBasedCountPlacement.of(10, 180.0, 0.0),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                    RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
                     BiomeFilter.biome()
                 )
             )
@@ -336,7 +337,7 @@ class PlacedFeatureProvider(
             HybridAquaticPlacedFeatures.CORAL_MOUND, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.CORAL_MOUND), listOf(
                     RarityFilter.onAverageOnceEvery(3),
-                    NoiseBasedCountPlacement.of(10, 180.0, 0.0),
+                    NoiseBasedCountPlacement.of(10, 90.0, 0.0),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
                     RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
                     RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
@@ -357,8 +358,6 @@ class PlacedFeatureProvider(
 
             )
         )
-
-
     }
 
     override fun getName(): String {

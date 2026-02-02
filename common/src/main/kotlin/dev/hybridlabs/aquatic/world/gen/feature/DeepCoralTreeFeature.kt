@@ -15,33 +15,33 @@ class DeepCoralTreeFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoralF
         pos: BlockPos,
         state: BlockState,
     ): Boolean {
-        val `blockpos$mutableblockpos` = pos.mutable()
+        val mutableBlockPos = pos.mutable()
         val i = random.nextInt(3) + 1
 
         for (j in 0..<i) {
-            if (!this.placeDeepCoralBlock(level, random, `blockpos$mutableblockpos`, state)) {
+            if (!this.placeDeepCoralBlock(level, random, mutableBlockPos, state)) {
                 return true
             }
 
-            `blockpos$mutableblockpos`.move(Direction.UP)
+            mutableBlockPos.move(Direction.UP)
         }
 
-        val blockpos = `blockpos$mutableblockpos`.immutable()
+        val blockpos = mutableBlockPos.immutable()
         val k = random.nextInt(3) + 2
         val list = Direction.Plane.HORIZONTAL.shuffledCopy(random)
 
         for (direction in list.subList(0, k)) {
-            `blockpos$mutableblockpos`.set(blockpos)
-            `blockpos$mutableblockpos`.move(direction)
+            mutableBlockPos.set(blockpos)
+            mutableBlockPos.move(direction)
             val l = random.nextInt(5) + 2
             var i1 = 0
 
             var j1 = 0
-            while (j1 < l && this.placeDeepCoralBlock(level, random, `blockpos$mutableblockpos`, state)) {
+            while (j1 < l && this.placeDeepCoralBlock(level, random, mutableBlockPos, state)) {
                 ++i1
-                `blockpos$mutableblockpos`.move(Direction.UP)
+                mutableBlockPos.move(Direction.UP)
                 if (j1 == 0 || i1 >= 2 && random.nextFloat() < 0.25f) {
-                    `blockpos$mutableblockpos`.move(direction)
+                    mutableBlockPos.move(direction)
                     i1 = 0
                 }
                 ++j1

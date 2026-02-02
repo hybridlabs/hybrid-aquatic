@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:coralstone",
-    "#minecraft:coral_blocks"
+    "hybrid-aquatic:coralstone"
   ]
 }

@@ -19,13 +19,13 @@ class DeepCoralMushroomFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCo
         val j = random.nextInt(3) + 3
         val k = random.nextInt(3) + 3
         val l = random.nextInt(3) + 1
-        val `blockpos$mutableblockpos` = pos.mutable()
+        val mutableBlockPos = pos.mutable()
 
         for (i1 in 0..j) {
             for (j1 in 0..i) {
                 for (k1 in 0..k) {
-                    `blockpos$mutableblockpos`.set(i1 + pos.x, j1 + pos.y, k1 + pos.z)
-                    `blockpos$mutableblockpos`.move(Direction.DOWN, l)
+                    mutableBlockPos.set(i1 + pos.x, j1 + pos.y, k1 + pos.z)
+                    mutableBlockPos.move(Direction.DOWN, l)
                     if (
                         (i1 != 0 && i1 != j || j1 != 0 && j1 != i) &&
                         (k1 != 0 && k1 != k || j1 != 0 && j1 != i) &&
@@ -36,7 +36,7 @@ class DeepCoralMushroomFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCo
                         this.placeDeepCoralBlock(
                             level,
                             random,
-                            `blockpos$mutableblockpos`,
+                            mutableBlockPos,
                             state
                         )
                     }

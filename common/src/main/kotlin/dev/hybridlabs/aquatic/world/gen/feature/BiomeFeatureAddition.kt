@@ -131,12 +131,6 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
-                HybridAquaticBiomeTags.REEF,
-                GenerationStep.Decoration.RAW_GENERATION,
-                HybridAquaticPlacedFeatures.SPIRE
-            ),
-
-            BiomeFeatureAddition(
                 HybridAquaticBiomeTags.SEAGRASS_MEADOW,
                 GenerationStep.Decoration.UNDERGROUND_ORES,
                 HybridAquaticPlacedFeatures.AERATED_SAND_CIRCLE
@@ -195,6 +189,12 @@ data class BiomeFeatureAddition(
                 BiomeTags.IS_OCEAN,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH
+            ),
+
+            BiomeFeatureAddition(
+                BiomeTags.IS_DEEP_OCEAN,
+                GenerationStep.Decoration.UNDERGROUND_ORES,
+                HybridAquaticPlacedFeatures.DEEP_SEA_MOUND
             ),
 
             BiomeFeatureAddition(
