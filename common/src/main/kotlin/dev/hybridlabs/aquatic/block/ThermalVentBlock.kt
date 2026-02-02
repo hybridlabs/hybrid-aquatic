@@ -30,7 +30,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
-@Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION")
+@Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION", "REDUNDANT_ELSE_IN_WHEN")
 class ThermalVentBlock(
     private val fireDamage: Int,
     settings: Properties

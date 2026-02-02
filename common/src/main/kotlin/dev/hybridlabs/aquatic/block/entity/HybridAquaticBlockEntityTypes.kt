@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object HybridAquaticBlockEntityTypes {
     val ANEMONE =
         register("anemone", ::AnemoneBlockEntity, HybridAquaticBlocks.ANEMONE)

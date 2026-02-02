@@ -26,7 +26,7 @@ import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 import java.util.*
 
-@Suppress("OVERRIDE_DEPRECATION")
+@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class DecorativeBubbleColumnBlock(settings: Properties): Block(settings), BucketPickup {
     init {
         this.registerDefaultState(stateDefinition.any())
