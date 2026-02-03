@@ -99,6 +99,7 @@ import dev.hybridlabs.aquatic.client.render.entity.jellyfish.MauveStingerEntityR
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.MoonJellyfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.NomuraJellyfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.SeaNettleEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.mammal.DugongEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinogenEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinomaEntityRenderer
@@ -116,6 +117,7 @@ import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.NautilusEntityR
 import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.VampireSquidEntityRenderer
 import dev.hybridlabs.aquatic.client.renderer.entity.shark.WhaleSharkEntityRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
 import dev.hybridlabs.aquatic.platform.ClientServices
 
 object HybridAquaticEntityRenderers {
@@ -803,6 +805,12 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.OTTER,
             ::OtterEntityRenderer
+        )
+
+    val DUGONG =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.DUGONG,
+            ::DugongEntityRenderer
         )
 
     //region minibosses

@@ -27,6 +27,7 @@ import dev.hybridlabs.aquatic.entity.fish.PupfishEntity
 import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
 import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
+import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinionEntity
@@ -185,6 +186,8 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.OTTER.get(),
         ).forEach { registerMammal(it) }
 
+        registerWaterMammal(HybridAquaticEntityTypes.DUGONG.get(), DugongEntity::canSpawn)
+
         // critters
         setOf(
             HybridAquaticEntityTypes.STARFISH.get(),
@@ -308,6 +311,17 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : WaterAnimal> registerWaterCreature(
+        entityType: EntityType<T>,
+        predicate: SpawnPlacements.SpawnPredicate<T>,
+    ) {
+        register(
+            entityType,
+            SpawnPlacements.Type.IN_WATER,
+            predicate
+        )
+    }
+
+    private fun <T : Animal> registerWaterMammal(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {

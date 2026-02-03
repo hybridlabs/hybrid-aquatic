@@ -1676,9 +1676,11 @@ object HybridAquaticItems {
     //#endregion
 
     //#region Mammals
-
     val OTTER_SPAWN_EGG =
         registerSpawnEgg("otter_spawn_egg", HybridAquaticEntityTypes.OTTER, 0x60352f, 0xeebf80)
+
+    val DUGONG_SPAWN_EGG =
+        registerSpawnEgg("dugong_spawn_egg", HybridAquaticEntityTypes.DUGONG, 0x60352f, 0xeebf80)
 
     //#endregion
 

@@ -839,6 +839,14 @@ class EntitySpawnConfigGenerator {
             ),
             1, 0, 2
         )
+
+        addMammal(
+            HybridAquaticEntityTypes.DUGONG.get(),
+            listOf(
+                HybridAquaticBiomeTags.SEAGRASS_MEADOW
+            ),
+            1, 0, 3
+        )
         //#endregion
 
         //#region Crustaceans

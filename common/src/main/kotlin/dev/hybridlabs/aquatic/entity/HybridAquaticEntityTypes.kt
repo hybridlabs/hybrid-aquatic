@@ -102,6 +102,7 @@ import dev.hybridlabs.aquatic.entity.jellyfish.MauveStingerEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.MoonJellyfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.NomuraJellyfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.SeaNettleEntity
+import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinomaEntity
@@ -953,6 +954,13 @@ object HybridAquaticEntityTypes {
         ::OtterEntity,
         EntityDimensions.fixed(0.6f, 0.6f),
         OtterEntity::createMobAttributes
+    )
+
+    val DUGONG = registerMammal(
+        "dugong",
+        ::DugongEntity,
+        EntityDimensions.fixed(2.0f, 0.9f),
+        DugongEntity::createMobAttributes
     )
 
     //endregion
