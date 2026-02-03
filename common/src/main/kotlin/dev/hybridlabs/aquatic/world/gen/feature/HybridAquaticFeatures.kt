@@ -27,6 +27,11 @@ object HybridAquaticFeatures {
     val DEEP_CORAL_MUSHROOM = register("deep_coral_mushroom", DeepCoralMushroomFeature(NoneFeatureConfiguration.CODEC))
     val DEEP_CORAL_TABLE = register("deep_coral_table", DeepCoralTableFeature(NoneFeatureConfiguration.CODEC))
 
+    val REEF_CORAL_CLAW = register("reef_coral_claw", ReefCoralClawFeature(NoneFeatureConfiguration.CODEC))
+    val REEF_CORAL_TREE = register("reef_coral_tree", ReefCoralTreeFeature(NoneFeatureConfiguration.CODEC))
+    val REEF_CORAL_MUSHROOM = register("reef_coral_mushroom", ReefCoralMushroomFeature(NoneFeatureConfiguration.CODEC))
+    val REEF_CORAL_TABLE = register("reef_coral_table", ReefCoralTableFeature(NoneFeatureConfiguration.CODEC))
+
     fun <F : Feature<*>> register(
         id: String,
         feature: F

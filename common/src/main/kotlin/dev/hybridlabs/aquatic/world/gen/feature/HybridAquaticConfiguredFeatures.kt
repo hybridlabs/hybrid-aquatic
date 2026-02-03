@@ -11,6 +11,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 object HybridAquaticConfiguredFeatures {
     val ANEMONES = register("anemones")
     val DEEP_OCEAN_VEGETATION = register("deep_ocean_vegetation")
+    val CORAL_REEF_VEGETATION = register("coral_reef_vegetation")
 
     val DUNEGRASS_PATCH = register("dunegrass_patch")
     val SARGASSUM = register("sargassum")

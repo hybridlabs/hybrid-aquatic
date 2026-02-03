@@ -170,6 +170,37 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticConfiguredFeatures.CORAL_REEF_VEGETATION,
+            ConfiguredFeature(
+                Feature.SIMPLE_RANDOM_SELECTOR,
+                SimpleRandomFeatureConfiguration(
+                    HolderSet.direct(
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.REEF_CORAL_TREE.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        ),
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.REEF_CORAL_CLAW.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        ),
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.REEF_CORAL_MUSHROOM.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        ),
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.REEF_CORAL_TABLE.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        )
+                    )
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH,
             ConfiguredFeature(
                 HybridAquaticFeatures.RED_ALGAE_PATCH.get(), ProbabilityFeatureConfiguration(
@@ -522,7 +553,7 @@ class ConfiguredFeatureProvider(
                                 )
                             ), BlockPredicate.matchesBlocks(
                                 Vec3i(0, -1, 0), listOf(Blocks.SAND, Blocks.STONE)
-                            ), UniformInt.of(2, 4), 1
+                            ), UniformInt.of(3, 5), 1
                         ),
                         CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
                     )
@@ -550,7 +581,7 @@ class ConfiguredFeatureProvider(
                                 )
                             ), BlockPredicate.matchesBlocks(
                                 Vec3i(0, -1, 0), listOf(Blocks.SAND, HybridAquaticBlocks.CORALSTONE.get())
-                            ), UniformInt.of(2, 4), 1
+                            ), UniformInt.of(3, 5), 1
                         ),
                         CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
                     )

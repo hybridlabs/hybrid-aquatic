@@ -67,6 +67,7 @@
     [
       "minecraft:glow_lichen",
       "hybrid-aquatic:coral_layer",
+      "hybrid-aquatic:coral_reef_vegetation",
       "minecraft:seagrass_warm",
       "minecraft:sea_pickle"
     ],

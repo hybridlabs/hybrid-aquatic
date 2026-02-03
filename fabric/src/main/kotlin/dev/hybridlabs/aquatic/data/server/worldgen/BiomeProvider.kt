@@ -219,6 +219,10 @@ class BiomeProvider(
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(HybridAquaticPlacedFeatures.CORAL_REEF_VEGETATION)
+                )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
                     entries.ref(AquaticPlacements.SEAGRASS_WARM)
                 )
                 addFeature(

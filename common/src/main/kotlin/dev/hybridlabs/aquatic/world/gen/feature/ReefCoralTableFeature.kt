@@ -7,7 +7,7 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 
-class DeepCoralTableFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoralFeature(codec) {
+class ReefCoralTableFeature(codec: Codec<NoneFeatureConfiguration>) : ReefCoralFeature(codec) {
 
     override fun placeFeature(
         level: LevelAccessor,
@@ -18,7 +18,7 @@ class DeepCoralTableFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoral
 
         val mutable = pos.mutable()
 
-        placeDeepCoralBlock(level, random, mutable, state)
+        placeCoralBlock(level, random, mutable, state)
 
         val topRadius = random.nextInt(3) + 1
         val layers = 2
@@ -37,7 +37,7 @@ class DeepCoralTableFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoral
 
                         if (place) {
                             mutable.set(pos.x + dx, y, pos.z + dz)
-                            placeDeepCoralBlock(level, random, mutable, state)
+                            placeCoralBlock(level, random, mutable, state)
                         }
                     }
                 }

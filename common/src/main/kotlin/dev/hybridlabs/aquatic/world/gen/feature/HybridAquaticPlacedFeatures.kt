@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature
 object HybridAquaticPlacedFeatures {
     val ANEMONES = register("anemones")
     val DEEP_OCEAN_VEGETATION = register("deep_ocean_vegetation")
+    val CORAL_REEF_VEGETATION = register("coral_reef_vegetation")
 
     val SARGASSUM = register("sargassum")
     val FLOATING_SARGASSUM = register("floating_sargassum")
@@ -36,7 +37,6 @@ object HybridAquaticPlacedFeatures {
     val OYSTER_BED = register("oyster_bed")
 
     val THERMAL_VENT_PATCH = register("thermal_vent_patch")
-    val CORAL_REEF = register("coral_reef")
 
     val TUBE_SPONGE_PATCH = register("sponge_patch")
     val GLASS_SPONGE_PATCH = register("glass_sponge_patch")
