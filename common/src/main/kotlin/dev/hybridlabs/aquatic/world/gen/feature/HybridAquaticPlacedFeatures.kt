@@ -46,9 +46,9 @@ object HybridAquaticPlacedFeatures {
 
     val TIDE_POOLS = register("tide_pools")
     val BOULDERS = register("boulders")
-    val DEEP_SEA_MOUND = register("deep_sea_mound")
     val CORAL_MOUND = register("coral_mound")
     val CORAL_LAYER = register("coral_layer")
+    val MOUND = register("mound")
 
     private fun register(id: String): ResourceKey<PlacedFeature> {
         return ResourceKey.create(Registries.PLACED_FEATURE, CommonClass.locate(id))

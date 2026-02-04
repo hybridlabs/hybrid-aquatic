@@ -13,6 +13,18 @@
       "heightmap": "OCEAN_FLOOR_WG"
     },
     {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_fluids",
+        "fluids": "minecraft:water",
+        "offset": [
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
       "type": "minecraft:biome"
     }
   ]

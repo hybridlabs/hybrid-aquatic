@@ -6,15 +6,18 @@ import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
+import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
-import net.minecraft.data.worldgen.features.AquaticFeatures
 import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.tags.FluidTags
 import net.minecraft.util.valueproviders.ClampedNormalInt
 import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.VerticalAnchor
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
 import net.minecraft.world.level.levelgen.placement.*
+import net.minecraft.world.level.material.Fluids
 import java.util.concurrent.CompletableFuture
 
 @Suppress("DEPRECATION")
@@ -158,10 +161,19 @@ class PlacedFeatureProvider(
                     RarityFilter.onAverageOnceEvery(3),
                     InSquarePlacement.spread(),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+
+                    BlockPredicateFilter.forPredicate(
+                        BlockPredicate.matchesFluids(
+                            BlockPos(0, 1, 0),
+                            Fluids.WATER
+                        )
+                    ),
+
                     BiomeFilter.biome()
                 )
             )
         )
+
 
         entries.add(
             HybridAquaticPlacedFeatures.AERATED_SAND_CIRCLE, PlacedFeature(
@@ -169,6 +181,13 @@ class PlacedFeatureProvider(
                     RarityFilter.onAverageOnceEvery(5),
                     InSquarePlacement.spread(),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+
+                    BlockPredicateFilter.forPredicate(
+                        BlockPredicate.matchesFluids(
+                            BlockPos(0, 1, 0),
+                            Fluids.WATER
+                        )
+                    ),
                     BiomeFilter.biome()
                 )
             )
@@ -321,19 +340,6 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticPlacedFeatures.DEEP_SEA_MOUND, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.DEEP_SEA_MOUND), listOf(
-                    RarityFilter.onAverageOnceEvery(3),
-                    NoiseBasedCountPlacement.of(10, 180.0, 0.0),
-                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
-                    RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
-                    RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
-                    BiomeFilter.biome()
-                )
-            )
-        )
-
-        entries.add(
             HybridAquaticPlacedFeatures.CORAL_MOUND, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.CORAL_MOUND), listOf(
                     RarityFilter.onAverageOnceEvery(3),
@@ -356,6 +362,19 @@ class PlacedFeatureProvider(
 
                 )
 
+            )
+        )
+
+        entries.add(
+            HybridAquaticPlacedFeatures.MOUND, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.MOUND), listOf(
+                    RarityFilter.onAverageOnceEvery(3),
+                    NoiseBasedCountPlacement.of(10, 90.0, 0.0),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                    RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
+                    BiomeFilter.biome()
+                )
             )
         )
     }

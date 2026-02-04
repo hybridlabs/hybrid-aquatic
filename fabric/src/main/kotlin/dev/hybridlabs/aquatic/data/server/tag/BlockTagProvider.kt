@@ -180,6 +180,20 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.SHORESTONE.get())
             .add(Blocks.SAND)
 
+        getOrCreateTagBuilder(HybridAquaticBlockTags.MOUND_BLOCKS)
+            .add(Blocks.STONE)
+            .add(Blocks.DEAD_BUBBLE_CORAL_BLOCK)
+            .add(Blocks.DEAD_FIRE_CORAL_BLOCK)
+            .add(Blocks.DEAD_HORN_CORAL_BLOCK)
+            .add(Blocks.DEAD_BRAIN_CORAL_BLOCK)
+            .add(Blocks.DEAD_TUBE_CORAL_BLOCK)
+            .add(HybridAquaticBlocks.DEAD_SUN_CORAL_BLOCK.get())
+            .add(HybridAquaticBlocks.DEAD_BUTTON_CORAL_BLOCK.get())
+            .add(HybridAquaticBlocks.DEAD_LEAF_CORAL_BLOCK.get())
+            .add(HybridAquaticBlocks.DEAD_ROSE_CORAL_BLOCK.get())
+            .add(HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK.get())
+            .add(HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK.get())
+
         // plushies
         BuiltInRegistries.BLOCK
             .filter(filterHybridAquatic(BuiltInRegistries.BLOCK))

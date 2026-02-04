@@ -66,7 +66,10 @@ object HybridAquaticBiomes {
         sequence(
             ifTrue(
                 ON_FLOOR,
-                state(HybridAquaticBlocks.GRASSY_SAND.get().defaultBlockState())
+                ifTrue(
+                    waterBlockCheck(1, 0),
+                    state(HybridAquaticBlocks.GRASSY_SAND.get().defaultBlockState())
+                )
             ),
             ifTrue(UNDER_FLOOR, state(Blocks.SAND.defaultBlockState())),
             ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
@@ -100,7 +103,7 @@ object HybridAquaticBiomes {
     )
     //#endregion
 
-    //#region River Biome Surace Rules
+    //#region River Biome Surface Rules
     val PLACER_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("placer_river"))
     val PLACER_RIVER_SURFACE_RULE: RuleSource = ifTrue(
         isBiome(PLACER_RIVER),
@@ -934,6 +937,90 @@ object HybridAquaticBiomes {
         )
 
         BiomePlacement.addSubOverworld(
+            CORAL_REEF,
+            VOLCANIC_TRENCH,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.69f,
+                    -0.65f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    0.33f,
+                    1.0f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            SEAGRASS_BED,
+            VOLCANIC_TRENCH,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.69f,
+                    -0.65f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    0.33f,
+                    1.0f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            RED_MEADOW,
+            VOLCANIC_TRENCH,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.69f,
+                    -0.65f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    0.33f,
+                    1.0f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
             Biomes.DEEP_LUKEWARM_OCEAN,
             VOLCANIC_TRENCH,
             SubBiomeMatcher.of(
@@ -1105,6 +1192,90 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.WARM_OCEAN,
+            BRINE_LAGOON,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.69f,
+                    -0.65f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -1.0f,
+                    -0.33f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            CORAL_REEF,
+            BRINE_LAGOON,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.69f,
+                    -0.65f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -1.0f,
+                    -0.33f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            SEAGRASS_BED,
+            BRINE_LAGOON,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.69f,
+                    -0.65f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.4f,
+                    0.5f,
+                    false
+                ),
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -1.0f,
+                    -0.33f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            RED_MEADOW,
             BRINE_LAGOON,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(

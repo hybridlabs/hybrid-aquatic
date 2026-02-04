@@ -56,7 +56,8 @@
       "minecraft:underwater_magma",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:disk_gravel"
+      "minecraft:disk_gravel",
+      "hybrid-aquatic:mound"
     ],
     [],
     [
@@ -156,6 +157,12 @@
     ],
     "water_ambient": [
       {
+        "type": "minecraft:pufferfish",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
         "type": "minecraft:tropical_fish",
         "maxCount": 4,
         "minCount": 2,
@@ -165,12 +172,6 @@
     "water_creature": [
       {
         "type": "minecraft:dolphin",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "minecraft:turtle",
         "maxCount": 2,
         "minCount": 1,
         "weight": 1

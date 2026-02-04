@@ -194,7 +194,7 @@ data class BiomeFeatureAddition(
             BiomeFeatureAddition(
                 BiomeTags.IS_DEEP_OCEAN,
                 GenerationStep.Decoration.UNDERGROUND_ORES,
-                HybridAquaticPlacedFeatures.DEEP_SEA_MOUND
+                HybridAquaticPlacedFeatures.MOUND
             ),
 
             BiomeFeatureAddition(

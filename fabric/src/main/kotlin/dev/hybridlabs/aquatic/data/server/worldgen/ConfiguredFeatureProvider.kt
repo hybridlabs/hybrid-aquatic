@@ -533,34 +533,6 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        // deep sea mound
-        entries.add(
-            HybridAquaticConfiguredFeatures.DEEP_SEA_MOUND, ConfiguredFeature(
-                Feature.RANDOM_PATCH, RandomPatchConfiguration(
-                    6, 7, 0, PlacementUtils.inlinePlaced(
-                        Feature.DISK, DiskConfiguration(
-                            RuleBasedBlockStateProvider(
-                                SimpleStateProvider.simple(Blocks.STONE), listOf(
-                                    RuleBasedBlockStateProvider.Rule(
-                                        BlockPredicate.not(
-                                            BlockPredicate.matchesBlocks(
-                                                Vec3i(0, -1, 0),
-                                                listOf(Blocks.SAND, Blocks.STONE)
-                                            )
-                                        ),
-                                        SimpleStateProvider.simple(Blocks.WATER),
-                                    )
-                                )
-                            ), BlockPredicate.matchesBlocks(
-                                Vec3i(0, -1, 0), listOf(Blocks.SAND, Blocks.STONE)
-                            ), UniformInt.of(3, 5), 1
-                        ),
-                        CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
-                    )
-                )
-            )
-        )
-
         // coral mound base
         entries.add(
             HybridAquaticConfiguredFeatures.CORAL_MOUND, ConfiguredFeature(
@@ -604,8 +576,7 @@ class ConfiguredFeatureProvider(
                         HybridAquaticBlocks.SUN_CORAL_BLOCK.get(),
                         HybridAquaticBlocks.LEAF_CORAL_BLOCK.get(),
                         HybridAquaticBlocks.ROSE_CORAL_BLOCK.get(),
-                        HybridAquaticBlocks.BUTTON_CORAL_BLOCK.get(),
-                        HybridAquaticBlocks.CORALSTONE.get(),
+                        HybridAquaticBlocks.BUTTON_CORAL_BLOCK.get()
                     ).map { block ->
                         WeightedPlacedFeature(
                             PlacementUtils.inlinePlaced(
@@ -674,6 +645,57 @@ class ConfiguredFeatureProvider(
                         )
                     },
                     PlacementUtils.inlinePlaced(Feature.NO_OP, NoneFeatureConfiguration())
+                )
+            )
+        )
+
+        // seagrass mound base
+        entries.add(
+            HybridAquaticConfiguredFeatures.MOUND, ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                    6, 7, 0, PlacementUtils.inlinePlaced(
+                        Feature.DISK, DiskConfiguration(
+                            RuleBasedBlockStateProvider(
+                                WeightedStateProvider(
+                                    SimpleWeightedRandomList.builder<BlockState>()
+                                        .add(Blocks.DEAD_HORN_CORAL_BLOCK.defaultBlockState(), 1)
+                                        .add(Blocks.DEAD_FIRE_CORAL_BLOCK.defaultBlockState(), 1)
+                                        .add(Blocks.DEAD_BUBBLE_CORAL_BLOCK.defaultBlockState(), 1)
+                                        .add(Blocks.DEAD_BRAIN_CORAL_BLOCK.defaultBlockState(), 1)
+                                        .add(Blocks.DEAD_TUBE_CORAL_BLOCK.defaultBlockState(), 1)
+                                        .add(Blocks.STONE.defaultBlockState(), 2)
+                                ), listOf(
+                                    RuleBasedBlockStateProvider.Rule(
+                                        BlockPredicate.not(
+                                            BlockPredicate.matchesBlocks(
+                                                Vec3i(0, -1, 0),
+                                                listOf(
+                                                    Blocks.SAND,
+                                                    Blocks.DEAD_HORN_CORAL_BLOCK,
+                                                    Blocks.DEAD_FIRE_CORAL_BLOCK,
+                                                    Blocks.DEAD_BRAIN_CORAL_BLOCK,
+                                                    Blocks.DEAD_BUBBLE_CORAL_BLOCK,
+                                                    Blocks.DEAD_TUBE_CORAL_BLOCK,
+                                                    HybridAquaticBlocks.GRASSY_SAND.get(),
+                                                )
+                                            )
+                                        ),
+                                        SimpleStateProvider.simple(Blocks.WATER),
+                                    )
+                                )
+                            ), BlockPredicate.matchesBlocks(
+                                Vec3i(0, -1, 0), listOf(
+                                    Blocks.SAND,
+                                    Blocks.DEAD_HORN_CORAL_BLOCK,
+                                    Blocks.DEAD_FIRE_CORAL_BLOCK,
+                                    Blocks.DEAD_BRAIN_CORAL_BLOCK,
+                                    Blocks.DEAD_BUBBLE_CORAL_BLOCK,
+                                    Blocks.DEAD_TUBE_CORAL_BLOCK,
+                                    HybridAquaticBlocks.GRASSY_SAND.get())
+                            ), UniformInt.of(3, 5), 1
+                        ),
+                        CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
+                    )
                 )
             )
         )

@@ -246,8 +246,8 @@ class BiomeProvider(
                         MobSpawnSettings.SpawnerData(EntityType.DOLPHIN, 1, 1, 2)
                     ),
                     Pair(
-                        MobCategory.WATER_CREATURE,
-                        MobSpawnSettings.SpawnerData(EntityType.TURTLE, 1, 1, 2)
+                        MobCategory.WATER_AMBIENT,
+                        MobSpawnSettings.SpawnerData(EntityType.PUFFERFISH, 1, 1, 3)
                     ),
                     Pair(
                         MobCategory.WATER_AMBIENT,
@@ -255,6 +255,10 @@ class BiomeProvider(
                     )
                 )
             ) {
+                addFeature(
+                    GenerationStep.Decoration.UNDERGROUND_ORES,
+                    entries.ref(HybridAquaticPlacedFeatures.MOUND)
+                )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     entries.ref(AquaticPlacements.SEAGRASS_WARM)
