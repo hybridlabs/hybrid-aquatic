@@ -12,6 +12,7 @@ object HybridAquaticConfiguredFeatures {
     val ANEMONES = register("anemones")
     val DEEP_OCEAN_VEGETATION = register("deep_ocean_vegetation")
     val CORAL_REEF_VEGETATION = register("coral_reef_vegetation")
+    val RED_MEADOW_VEGETATION = register("red_meadow_vegetation")
 
     val DUNEGRASS_PATCH = register("dunegrass_patch")
     val SARGASSUM = register("sargassum")
@@ -29,8 +30,6 @@ object HybridAquaticConfiguredFeatures {
     val SUSPICIOUS_SAND_DISK = register("disk_suspicious_sand")
     val SUSPICIOUS_RED_SAND_DISK = register("disk_suspicious_red_sand")
 
-    val RED_ALGAE_PATCH = register("red_algae_patch")
-
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch")
 
     val GIANT_CLAM_PATCH = register("giant_clam_patch")
@@ -47,6 +46,7 @@ object HybridAquaticConfiguredFeatures {
     val CORAL_LAYER = register("coral_layer")
 
     val MOUND = register("mound")
+    val WHITE_MOUND = register("white_mound")
 
     fun register(id: String): ResourceKey<ConfiguredFeature<*, *>> {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, CommonClass.locate(id))

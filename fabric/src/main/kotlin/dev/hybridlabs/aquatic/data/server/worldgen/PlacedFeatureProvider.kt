@@ -2,6 +2,7 @@
 
 package dev.hybridlabs.aquatic.data.server.worldgen
 
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -9,7 +10,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.placement.PlacementUtils
-import net.minecraft.tags.FluidTags
 import net.minecraft.util.valueproviders.ClampedNormalInt
 import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.util.valueproviders.UniformInt
@@ -225,17 +225,6 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticPlacedFeatures.RED_ALGAE_PATCH, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH), listOf(
-                    NoiseBasedCountPlacement.of(10, 80.0, 0.0),
-                    InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    BiomeFilter.biome()
-                )
-            )
-        )
-
-        entries.add(
             HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH), seaweedModifier(80)
             )
@@ -318,6 +307,13 @@ class PlacedFeatureProvider(
             )
         )
 
+        // red meadow
+        entries.add(
+            HybridAquaticPlacedFeatures.RED_MEADOW_VEGETATION, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.RED_MEADOW_VEGETATION), seaweedModifier(256)
+            )
+        )
+
         // corals
         entries.add(
             HybridAquaticPlacedFeatures.CORAL_REEF_VEGETATION, PlacedFeature(
@@ -368,6 +364,19 @@ class PlacedFeatureProvider(
         entries.add(
             HybridAquaticPlacedFeatures.MOUND, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.MOUND), listOf(
+                    RarityFilter.onAverageOnceEvery(3),
+                    NoiseBasedCountPlacement.of(10, 90.0, 0.0),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                    RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticPlacedFeatures.WHITE_MOUND, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.WHITE_MOUND), listOf(
                     RarityFilter.onAverageOnceEvery(3),
                     NoiseBasedCountPlacement.of(10, 90.0, 0.0),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),

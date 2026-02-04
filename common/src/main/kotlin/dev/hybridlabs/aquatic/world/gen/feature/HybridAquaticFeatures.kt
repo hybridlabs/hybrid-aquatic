@@ -18,7 +18,9 @@ object HybridAquaticFeatures {
     val VENT_PATCH = register("vent_patch", VentPatchFeature(VentPatchFeatureConfig.CODEC))
     val SARGASSUM = register("sargassum", SargassumFeature(SargassumFeatureConfig.CODEC))
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch", SeaLettuceFeature(ProbabilityFeatureConfiguration.CODEC))
-    val RED_ALGAE_PATCH = register("red_algae_patch", RedAlgaeFeature(ProbabilityFeatureConfiguration.CODEC))
+    val SHORT_RED_ALGAE_PATCH = register("short_red_algae_patch", ShortRedAlgaePatchFeature(ProbabilityFeatureConfiguration.CODEC))
+    val RED_ALGAE_PATCH = register("red_algae_patch", RedAlgaePatchFeature(ProbabilityFeatureConfiguration.CODEC))
+    val TALL_RED_ALGAE_PATCH = register("tall_red_algae_patch", TallRedAlgaePatchFeature(ProbabilityFeatureConfiguration.CODEC))
     val SUSPICIOUS_SAND_DISK = register("suspicious_sand_disk", SuspiciousSandDiskFeature(DiskConfiguration.CODEC))
     val SUSPICIOUS_RED_SAND_DISK = register("suspicious_red_sand_disk", SuspiciousRedSandDiskFeature(DiskConfiguration.CODEC))
 

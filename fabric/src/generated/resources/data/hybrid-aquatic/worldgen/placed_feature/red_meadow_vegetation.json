@@ -1,18 +1,16 @@
 {
-  "feature": "hybrid-aquatic:red_algae_patch",
+  "feature": "hybrid-aquatic:red_meadow_vegetation",
   "placement": [
-    {
-      "type": "minecraft:noise_based_count",
-      "noise_factor": 80.0,
-      "noise_offset": 0.0,
-      "noise_to_count_ratio": 10
-    },
     {
       "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:heightmap",
       "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 256
     },
     {
       "type": "minecraft:biome"

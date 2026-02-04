@@ -97,24 +97,6 @@ data class BiomeFeatureAddition(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
             ),
-
-            BiomeFeatureAddition(
-                HybridAquaticBiomeTags.REEF,
-                GenerationStep.Decoration.VEGETAL_DECORATION,
-                HybridAquaticPlacedFeatures.RED_ALGAE_PATCH
-            ),
-
-            BiomeFeatureAddition(
-                HybridAquaticBiomeTags.WARM_OCEAN,
-                GenerationStep.Decoration.VEGETAL_DECORATION,
-                HybridAquaticPlacedFeatures.RED_ALGAE_PATCH
-            ),
-
-            BiomeFeatureAddition(
-                HybridAquaticBiomeTags.RED_MEADOW,
-                GenerationStep.Decoration.VEGETAL_DECORATION,
-                HybridAquaticPlacedFeatures.RED_ALGAE_PATCH
-            ),
             //#endregion
 
             //#region Oyster Beds

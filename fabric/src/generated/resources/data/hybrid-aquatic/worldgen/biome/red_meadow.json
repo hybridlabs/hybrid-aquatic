@@ -56,7 +56,8 @@
       "minecraft:underwater_magma",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:disk_gravel"
+      "minecraft:disk_gravel",
+      "hybrid-aquatic:calcite_mound"
     ],
     [],
     [
@@ -65,11 +66,11 @@
     ],
     [
       "minecraft:glow_lichen",
+      "hybrid-aquatic:red_meadow_vegetation",
       "minecraft:sea_pickle"
     ],
     [
-      "minecraft:freeze_top_layer",
-      "minecraft:forest_rock"
+      "minecraft:freeze_top_layer"
     ]
   ],
   "has_precipitation": true,

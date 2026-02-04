@@ -64,13 +64,7 @@ object HybridAquaticBiomes {
     val SEAGRASS_BED_SURFACE_RULE: RuleSource = ifTrue(
         isBiome(SEAGRASS_BED),
         sequence(
-            ifTrue(
-                ON_FLOOR,
-                ifTrue(
-                    waterBlockCheck(1, 0),
-                    state(HybridAquaticBlocks.GRASSY_SAND.get().defaultBlockState())
-                )
-            ),
+            ifTrue(ON_FLOOR, state(HybridAquaticBlocks.GRASSY_SAND.get().defaultBlockState())),
             ifTrue(UNDER_FLOOR, state(Blocks.SAND.defaultBlockState())),
             ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
         )

@@ -39,6 +39,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.*
 import net.minecraft.world.level.levelgen.placement.CaveSurface
 import net.minecraft.world.level.levelgen.placement.CountPlacement
 import net.minecraft.world.level.levelgen.placement.HeightmapPlacement
+import net.minecraft.world.level.levelgen.placement.NoiseThresholdCountPlacement
 import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest
 import net.minecraft.world.level.levelgen.synth.NormalNoise
@@ -201,10 +202,10 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH,
+            HybridAquaticConfiguredFeatures.RED_MEADOW_VEGETATION,
             ConfiguredFeature(
                 HybridAquaticFeatures.RED_ALGAE_PATCH.get(), ProbabilityFeatureConfiguration(
-                    0.33f
+                    0.66f
                 )
             )
         )
@@ -649,7 +650,7 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        // seagrass mound base
+        // mound base
         entries.add(
             HybridAquaticConfiguredFeatures.MOUND, ConfiguredFeature(
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
@@ -692,6 +693,48 @@ class ConfiguredFeatureProvider(
                                     Blocks.DEAD_BUBBLE_CORAL_BLOCK,
                                     Blocks.DEAD_TUBE_CORAL_BLOCK,
                                     HybridAquaticBlocks.GRASSY_SAND.get())
+                            ), UniformInt.of(3, 5), 1
+                        ),
+                        CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
+                    )
+                )
+            )
+        )
+
+        // white mound
+        entries.add(
+            HybridAquaticConfiguredFeatures.WHITE_MOUND, ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                    6, 7, 0, PlacementUtils.inlinePlaced(
+                        Feature.DISK, DiskConfiguration(
+                            RuleBasedBlockStateProvider(
+                                WeightedStateProvider(
+                                    SimpleWeightedRandomList.builder<BlockState>()
+                                        .add(Blocks.CALCITE.defaultBlockState(), 5)
+                                        .add(Blocks.DIORITE.defaultBlockState(), 3)
+                                        .add(HybridAquaticBlocks.WHITE_SANDSTONE.get().defaultBlockState(), 1)
+                                ), listOf(
+                                    RuleBasedBlockStateProvider.Rule(
+                                        BlockPredicate.not(
+                                            BlockPredicate.matchesBlocks(
+                                                Vec3i(0, -1, 0),
+                                                listOf(
+                                                    Blocks.CALCITE,
+                                                    Blocks.DIORITE,
+                                                    HybridAquaticBlocks.WHITE_SAND.get(),
+                                                    HybridAquaticBlocks.WHITE_SANDSTONE.get(),
+                                                )
+                                            )
+                                        ),
+                                        SimpleStateProvider.simple(Blocks.WATER),
+                                    )
+                                )
+                            ), BlockPredicate.matchesBlocks(
+                                Vec3i(0, -1, 0), listOf(
+                                    Blocks.CALCITE,
+                                    Blocks.DIORITE,
+                                    HybridAquaticBlocks.WHITE_SAND.get(),
+                                    HybridAquaticBlocks.WHITE_SANDSTONE.get())
                             ), UniformInt.of(3, 5), 1
                         ),
                         CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)

@@ -280,8 +280,12 @@ class BiomeProvider(
                 waterFogColor = 0x041F33
             ) {
                 addFeature(
-                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
-                    entries.ref(MiscOverworldPlacements.FOREST_ROCK)
+                    GenerationStep.Decoration.UNDERGROUND_ORES,
+                    entries.ref(HybridAquaticPlacedFeatures.WHITE_MOUND)
+                )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(HybridAquaticPlacedFeatures.RED_MEADOW_VEGETATION)
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
