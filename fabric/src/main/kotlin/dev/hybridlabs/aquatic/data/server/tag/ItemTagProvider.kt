@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Items
 import java.util.concurrent.CompletableFuture
@@ -38,7 +39,47 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             getOrCreateTagBuilder(HybridAquaticItemTags.FISHING_TREASURE).add(item)
         }
 
-        //#region wood
+        //#region Diving Armor
+        getOrCreateTagBuilder(HybridAquaticItemTags.DIVING_HELMET)
+            .addTag(HybridAquaticItemTags.DIVING_HELMET)
+            .addTag(HybridAquaticItemTags.DIVING_SUIT)
+            .addTag(HybridAquaticItemTags.DIVING_LEGGINGS)
+            .addTag(HybridAquaticItemTags.DIVING_BOOTS)
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.DIVING_HELMET)
+            .add(
+                HybridAquaticItems.DIVING_HELMET.get(),
+            )
+            .addOptional(ResourceLocation("create", "copper_diving_helmet"))
+            .addOptional(ResourceLocation("create", "netherite_diving_helmet"))
+            .addOptional(ResourceLocation("aquamirae", "three_bolt_helmet"))
+            .addOptional(ResourceLocation("alexscaves", "diving_helmet"))
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.DIVING_SUIT)
+            .add(
+                HybridAquaticItems.DIVING_SUIT.get(),
+            )
+            .addOptional(ResourceLocation("aquamirae", "three_bolt_chestplate"))
+            .addOptional(ResourceLocation("alexscaves", "diving_chestplate"))
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.DIVING_LEGGINGS)
+            .add(
+                HybridAquaticItems.DIVING_LEGGINGS.get(),
+            )
+            .addOptional(ResourceLocation("aquamirae", "three_bolt_leggings"))
+            .addOptional(ResourceLocation("alexscaves", "diving_leggings"))
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.DIVING_BOOTS)
+            .add(
+                HybridAquaticItems.DIVING_BOOTS.get(),
+            )
+            .addOptional(ResourceLocation("create", "copper_diving_boots"))
+            .addOptional(ResourceLocation("create", "netherite_diving_boots"))
+            .addOptional(ResourceLocation("aquamirae", "three_bolt_boots"))
+            .addOptional(ResourceLocation("alexscaves", "diving_boots"))
+        //#endregion
+
+        //#region Wood
         getOrCreateTagBuilder(ItemTags.PLANKS)
             .add(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get().asItem())
 
@@ -352,6 +393,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.MOON_JELLYFISH_HAT.get(),
             HybridAquaticItems.NAUTILUS_HELMET.get(),
             HybridAquaticItems.NAUTILUS_PAULDRONS.get(),
+            HybridAquaticItems.TURTLE_CHESTPLATE.get(),
             HybridAquaticItems.DIVING_HELMET.get(),
             HybridAquaticItems.DIVING_SUIT.get(),
             HybridAquaticItems.DIVING_LEGGINGS.get(),

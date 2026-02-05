@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:diving_boots",
+    {
+      "id": "create:copper_diving_boots",
+      "required": false
+    },
+    {
+      "id": "create:netherite_diving_boots",
+      "required": false
+    },
+    {
+      "id": "aquamirae:three_bolt_boots",
+      "required": false
+    },
+    {
+      "id": "alexscaves:diving_boots",
+      "required": false
+    }
+  ]
+}

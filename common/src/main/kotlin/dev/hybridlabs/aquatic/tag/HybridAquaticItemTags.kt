@@ -11,22 +11,24 @@ import net.minecraft.world.item.Item
 object HybridAquaticItemTags {
     val LURE_ITEMS = create("lure_items")
     val PLUSHIES = create("plushies")
-    val HAT = create("hat")
-    val SCARF = create("scarf")
-    val BACK_FIN = create("back_fin")
+
     val SMALL_FISH = create("small_fish")
     val MEDIUM_FISH = create("medium_fish")
     val LARGE_FISH = create("large_fish")
+
     val CRAB_CLAW = create("claw")
     val KELPS = create("kelps")
 
-    val COOLING = create("foods/cooling")
+    val DIVING_ARMOR = create("diving_armor")
+    val DIVING_HELMET = create("diving_helmet")
+    val DIVING_SUIT = create("diving_suit")
+    val DIVING_LEGGINGS = create("diving_leggings")
+    val DIVING_BOOTS = create("diving_boots")
+    val HAT = create("hat")
+    val SCARF = create("scarf")
+    val BACK_FIN = create("back_fin")
 
     val DRIFTWOOD_LOG_WOOD = create("driftwood_log_wood")
-
-    val CRUSTACEAN_MEAT = create("crustacean_meat")
-    val TUNA = create("tuna")
-    val RAY = create("ray")
 
     val FISHING_TREASURE = create("fishing_treasure")
 

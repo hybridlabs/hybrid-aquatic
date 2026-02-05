@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:diving_suit",
+    {
+      "id": "aquamirae:three_bolt_chestplate",
+      "required": false
+    },
+    {
+      "id": "alexscaves:diving_chestplate",
+      "required": false
+    }
+  ]
+}
