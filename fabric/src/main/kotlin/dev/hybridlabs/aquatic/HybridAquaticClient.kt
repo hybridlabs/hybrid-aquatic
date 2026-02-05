@@ -74,8 +74,8 @@ object HybridAquaticClient : ClientModInitializer {
             HybridAquaticFluids.BRINE.get(),
             HybridAquaticFluids.FLOWING_BRINE.get(),
             SimpleFluidRenderHandler(
-                ResourceLocation("hybrid-aquatic", "block/brine_still"),
-                ResourceLocation("hybrid-aquatic", "block/brine_flowing"),
+                ResourceLocation("hybrid-aquatic", "textures/block/brine_still"),
+                ResourceLocation("hybrid-aquatic", "textures/block/brine_flowing"),
                 0xAADDFF
             )
         )
