@@ -837,7 +837,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SANDY_BEACHES,
                 HybridAquaticBiomeTags.ROCKY_BEACHES
             ),
-            1, 0, 2
+            1, 1, 2
         )
 
         addMammal(
@@ -845,7 +845,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.SEAGRASS_BED
             ),
-            1, 0, 3
+            1, 1, 3
         )
         //#endregion
 

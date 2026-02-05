@@ -956,7 +956,7 @@ object HybridAquaticEntityTypes {
         OtterEntity::createMobAttributes
     )
 
-    val DUGONG = registerMammal(
+    val DUGONG = registerSirenian(
         "dugong",
         ::DugongEntity,
         EntityDimensions.fixed(2.0f, 0.9f),
@@ -1080,6 +1080,21 @@ object HybridAquaticEntityTypes {
     }
 
     private fun <T : LivingEntity> registerMammal(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL")
+        )
+    }
+
+    private fun <T : LivingEntity> registerSirenian(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,

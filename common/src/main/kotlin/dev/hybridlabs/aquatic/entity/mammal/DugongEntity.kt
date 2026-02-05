@@ -22,7 +22,7 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec3
 
 @Suppress("DEPRECATION")
-class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HybridAquaticMammalEntity(type, world) {
+class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HybridAquaticSirenianEntity(type, world) {
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
 
@@ -64,17 +64,6 @@ class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HybridAqu
         return SoundEvents.DOLPHIN_SWIM
     }
     //#endregion
-
-    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): DugongEntity? {
-        return HybridAquaticEntityTypes.DUGONG.get().create(p0)
-    }
-
-    override fun registerGoals() {
-        super.registerGoals()
-        goalSelector.addGoal(0, StayInWaterGoal(this))
-        goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 2))
-        goalSelector.addGoal(5, BreathAirGoal(this))
-    }
 
     override fun getMobType(): MobType {
         return MobType.WATER
