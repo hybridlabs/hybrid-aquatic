@@ -8,20 +8,10 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 
-class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
+class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level) :
+    HybridAquaticSharkEntity(type, world) {
 
     private var isFeeding = false
-
-    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "Open/Closed", 0) { state ->
-            val animation = when {
-                isFeeding -> MOUTH_OPEN
-                else -> MOUTH_CLOSED
-            }
-            state.setAndContinue(animation)
-        })
-        super.registerControllers(controllers)
-    }
 
     override fun tick() {
         super.tick()
@@ -38,6 +28,18 @@ class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level)
                 isFeeding = false
             }
         }
+    }
+
+    //#region Animations
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(AnimationController(this, "Open/Closed", 0) { state ->
+            val animation = when {
+                isFeeding -> MOUTH_OPEN
+                else -> MOUTH_CLOSED
+            }
+            state.setAndContinue(animation)
+        })
+        super.registerControllers(controllers)
     }
 
     companion object {

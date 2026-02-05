@@ -8,11 +8,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
-class FrilledSharkEntity(type: EntityType<out FrilledSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
+class FrilledSharkEntity(type: EntityType<out FrilledSharkEntity>, world: Level) :
+    HybridAquaticSharkEntity(type, world) {
 
-    override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
-        HybridAquaticEntityTags.SMALL_CREATURES
-    )
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false
@@ -23,6 +22,16 @@ class FrilledSharkEntity(type: EntityType<out FrilledSharkEntity>, world: Level)
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.SMALL_CREATURES,
+                HybridAquaticEntityTags.SMALL_SHARK,
+                HybridAquaticEntityTags.OCTOPUS,
+            ),
+            listOf(
+                HybridAquaticEntityTags.LARGE_SHARK
+            ),
+        )
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 24.0)

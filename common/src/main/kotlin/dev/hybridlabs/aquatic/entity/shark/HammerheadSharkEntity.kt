@@ -9,14 +9,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
 class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
-    override fun getTargetConfig() =
-        MobTargetConfiguration.ofPredator(
-            HybridAquaticEntityTags.CRAB,
-            HybridAquaticEntityTags.LOBSTER,
-            HybridAquaticEntityTags.SMALL_CREATURES,
-            HybridAquaticEntityTags.SMALL_SHARK,
-            HybridAquaticEntityTags.RAY,
-        )
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false
@@ -31,6 +24,19 @@ class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: 
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HybridAquaticEntityTags.CRAB,
+                HybridAquaticEntityTags.LOBSTER,
+                HybridAquaticEntityTags.SMALL_CREATURES,
+                HybridAquaticEntityTags.SMALL_SHARK,
+                HybridAquaticEntityTags.RAY,
+            ),
+            listOf(
+                HybridAquaticEntityTags.LARGE_SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 45.0)

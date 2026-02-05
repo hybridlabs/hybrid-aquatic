@@ -21,20 +21,10 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 import java.util.function.IntFunction
 
-class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world), OverlayTextureFeature {
+class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
+    HybridAquaticSharkEntity(type, world), OverlayTextureFeature {
 
     private var isFeeding = false
-
-    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "Open/Closed", 0) { state ->
-            val animation = when {
-                isFeeding -> MOUTH_OPEN
-                else -> MOUTH_CLOSED
-            }
-            state.setAndContinue(animation)
-        })
-        super.registerControllers(controllers)
-    }
 
     override fun tick() {
         super.tick()
@@ -45,12 +35,40 @@ class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) : H
 
         if (isFeeding) {
             hunger += 10
-
             if (hunger >= MAX_HUNGER) {
                 hunger = MAX_HUNGER
                 isFeeding = false
             }
         }
+    }
+
+    //#region Data
+    override fun defineSynchedData() {
+        entityData.define(OverlayTexture, 0)
+        super.defineSynchedData()
+    }
+
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        nbt.putInt("texture_overlay", this.overlayTexture.id)
+        super.addAdditionalSaveData(nbt)
+    }
+
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
+        if (nbt.contains("texture_overlay")) this.overlayTexture =
+            OverlayTextures.byId(nbt.getInt("texture_overlay"))
+        super.readAdditionalSaveData(nbt)
+    }
+
+    //#region Animations
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(AnimationController(this, "Open/Closed", 0) { state ->
+            val animation = when {
+                isFeeding -> MOUTH_OPEN
+                else -> MOUTH_CLOSED
+            }
+            state.setAndContinue(animation)
+        })
+        super.registerControllers(controllers)
     }
 
     companion object {
@@ -114,21 +132,5 @@ class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) : H
 
     override fun getOverlayTextureName(): String {
         return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
-    }
-
-    override fun defineSynchedData() {
-        entityData.define(OverlayTexture, 0)
-        super.defineSynchedData()
-    }
-
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putInt("texture_overlay", this.overlayTexture.id)
-        super.addAdditionalSaveData(nbt)
-    }
-
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        if (nbt.contains("texture_overlay")) this.overlayTexture =
-            OverlayTextures.byId(nbt.getInt("texture_overlay"))
-        super.readAdditionalSaveData(nbt)
     }
 }

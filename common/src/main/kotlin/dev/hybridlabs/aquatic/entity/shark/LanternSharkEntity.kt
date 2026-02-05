@@ -7,7 +7,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class LanternSharkEntity(type: EntityType<out LanternSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
+class LanternSharkEntity(type: EntityType<out LanternSharkEntity>, world: Level) :
+    HybridAquaticSharkEntity(type, world) {
+
     override fun getTargetConfig() = TARGET_CONFIG
 
     override val isPassive: Boolean = false

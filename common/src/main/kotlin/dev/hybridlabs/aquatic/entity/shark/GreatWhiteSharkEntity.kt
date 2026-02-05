@@ -10,7 +10,8 @@ import net.minecraft.world.entity.ai.goal.FollowBoatGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
-class GreatWhiteSharkEntity(type: EntityType<out GreatWhiteSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
+class GreatWhiteSharkEntity(type: EntityType<out GreatWhiteSharkEntity>, world: Level) :
+    HybridAquaticSharkEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
         HybridAquaticEntityTags.MEDIUM_CREATURES,

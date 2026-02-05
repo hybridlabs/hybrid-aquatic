@@ -23,7 +23,9 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class HoundSharkEntity(type: EntityType<out HoundSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world), VariantHolder<HoundSharkEntity.Type> {
+class HoundSharkEntity(type: EntityType<out HoundSharkEntity>, world: Level) :
+    HybridAquaticSharkEntity(type, world), VariantHolder<HoundSharkEntity.Type> {
+
     override fun getTargetConfig() = TARGET_CONFIG
 
     override val isPassive: Boolean = false
