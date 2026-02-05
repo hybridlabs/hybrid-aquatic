@@ -17,44 +17,33 @@ import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.HAMMER
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.THRESHER_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.TIGER_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.WHALE_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.BaskingSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.BullSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.FrilledSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.GreatWhiteSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.HammerheadSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.ThresherSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.TigerSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.WhaleSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
 import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
-import dev.hybridlabs.aquatic.client.render.armor.DivingArmorRenderer
-import dev.hybridlabs.aquatic.client.render.armor.EelArmorRenderer
-import dev.hybridlabs.aquatic.client.render.armor.ManglerfishArmorRenderer
-import dev.hybridlabs.aquatic.client.render.armor.MoonJellyfishArmorRenderer
-import dev.hybridlabs.aquatic.client.render.armor.SeashellArmorRenderer
-import dev.hybridlabs.aquatic.client.render.armor.TurtleArmorRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.BuoyBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.GiantGreenAnemoneBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.armor.*
+import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.GiantGreenAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
 import dev.hybridlabs.aquatic.client.renderer.item.StrawberryAnemoneBlockItemRenderer
+import dev.hybridlabs.aquatic.fluid.HybridAquaticFluids
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
+import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
 import net.minecraft.commands.CommandBuildContext
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
@@ -75,9 +64,29 @@ object HybridAquaticClient : ClientModInitializer {
         registerTooltips()
         registerGeoRenderers()
         registerModelLayers()
+        registerFluidRenderers()
 
         ClientCommandRegistrationCallback.EVENT.register(::registerCommands)
     }
+
+    private fun registerFluidRenderers() {
+        FluidRenderHandlerRegistry.INSTANCE.register(
+            HybridAquaticFluids.BRINE.get(),
+            HybridAquaticFluids.FLOWING_BRINE.get(),
+            SimpleFluidRenderHandler(
+                ResourceLocation("hybrid-aquatic", "block/brine_still"),
+                ResourceLocation("hybrid-aquatic", "block/brine_flowing"),
+                0xAADDFF
+            )
+        )
+
+        BlockRenderLayerMap.INSTANCE.putFluids(
+            RenderType.translucent(),
+            HybridAquaticFluids.BRINE.get(),
+            HybridAquaticFluids.FLOWING_BRINE.get()
+        )
+    }
+
 
     private fun registerGeoRenderers() {
         GeoRenderProviderStorage.divingArmorRenderProvider = createBasicRenderProvider(::DivingArmorRenderer)

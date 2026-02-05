@@ -5,6 +5,7 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.fluid.HybridAquaticFluids
 import dev.hybridlabs.aquatic.item.coral.CoralAxeItem
 import dev.hybridlabs.aquatic.item.coral.CoralBladeItem
 import dev.hybridlabs.aquatic.item.coral.CoralHoeItem
@@ -29,6 +30,7 @@ import net.minecraft.world.entity.Mob
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.BlockItem
+import net.minecraft.world.item.BucketItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.SpawnEggItem
 import net.minecraft.world.item.StandingAndWallBlockItem
@@ -134,6 +136,7 @@ object HybridAquaticItems {
     val SEA_MESSAGE_BOOK = register("sea_message_book") { SeaMessageBookItem(Item.Properties()) }
     val FISHING_NET = register("fishing_net") { FishingNetItem(Item.Properties().stacksTo(1)) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
+    val BRINE_BUCKET = register("brine_bucket") { BucketItem(HybridAquaticFluids.BRINE.get(), Item.Properties().stacksTo(1)) }
 
     val BARBED_HOOK = register("barbed_hook") { HookItem(Item.Properties().durability(16)) }
     val GLOWING_HOOK = register("glowing_hook") { HookItem(Item.Properties().durability(16)) }

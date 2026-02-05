@@ -46,6 +46,9 @@
 		},
 		"misc.idle": {
 			"loop": true
+		},
+		"misc.water_idle": {
+			"loop": true
 		}
 	},
 	"geckolib_format_version": 2

@@ -348,6 +348,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.CREEPERMAGNET_HOOK.get() to "CreeperMagnet Hook",
             HybridAquaticItems.OMINOUS_HOOK.get() to "Ominous Hook",
             HybridAquaticItems.FISHING_NET.get() to "Fishing Net",
+            HybridAquaticItems.BRINE_BUCKET.get() to "Brine Bucket",
             HybridAquaticItems.KARKINOS_CLAW.get() to "Karkinos Claw",
             HybridAquaticItems.SEASHELL_SPEAR.get() to "Seashell Spear",
             HybridAquaticItems.SEASHELL_PICKAXE.get() to "Seashell Pickaxe",

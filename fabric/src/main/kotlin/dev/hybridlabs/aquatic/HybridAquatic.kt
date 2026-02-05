@@ -10,6 +10,7 @@ import dev.hybridlabs.aquatic.config.HybridAquaticConfig
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
+import dev.hybridlabs.aquatic.fluid.HybridAquaticFluids
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
@@ -53,6 +54,7 @@ object HybridAquatic : ModInitializer {
         CommonClass.init()
 
         HybridAquaticBlocks
+        HybridAquaticFluids
         HybridAquaticPlatformBlocks
         HybridAquaticEntityTypes
         HybridAquaticBlockEntityTypes

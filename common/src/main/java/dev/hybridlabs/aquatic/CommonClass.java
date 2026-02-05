@@ -13,6 +13,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 
 import java.nio.file.Path;
@@ -28,11 +29,16 @@ import static dev.hybridlabs.aquatic.Constants.MOD_NAME;
 public class CommonClass {
 
     // Create some static RegistrationProviders for reuse elsewhere.
-    public static final RegistrationProvider<Block> BLOCKS = RegistrationProvider.get(BuiltInRegistries.BLOCK, MOD_ID);
-    public static final RegistrationProvider<Item> ITEMS = RegistrationProvider.get(BuiltInRegistries.ITEM, MOD_ID);
-    public static final RegistrationProvider<PaintingVariant> PAINTINGS = RegistrationProvider.get(BuiltInRegistries.PAINTING_VARIANT, MOD_ID);
-    public static final RegistrationProvider<Potion> POTIONS = RegistrationProvider.get(BuiltInRegistries.POTION,
-            MOD_ID);
+    public static final RegistrationProvider<Block> BLOCKS =
+            RegistrationProvider.get(BuiltInRegistries.BLOCK, MOD_ID);
+    public static final RegistrationProvider<Item> ITEMS =
+            RegistrationProvider.get(BuiltInRegistries.ITEM, MOD_ID);
+    public static final RegistrationProvider<Fluid> FLUIDS =
+            RegistrationProvider.get(BuiltInRegistries.FLUID, MOD_ID);
+    public static final RegistrationProvider<PaintingVariant> PAINTINGS =
+            RegistrationProvider.get(BuiltInRegistries.PAINTING_VARIANT, MOD_ID);
+    public static final RegistrationProvider<Potion> POTIONS =
+            RegistrationProvider.get(BuiltInRegistries.POTION, MOD_ID);
     public static final RegistrationProvider<MobEffect> MOB_EFFECTS =
             RegistrationProvider.get(BuiltInRegistries.MOB_EFFECT, MOD_ID);
     public static final RegistrationProvider<EntityType<?>> ENTITY_TYPES =
@@ -41,8 +47,8 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.BLOCK_ENTITY_TYPE, MOD_ID);
     public static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS =
             RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
-    public static final RegistrationProvider<Feature<?>> FEATURE = RegistrationProvider.get(BuiltInRegistries.FEATURE
-            , MOD_ID);
+    public static final RegistrationProvider<Feature<?>> FEATURE =
+            RegistrationProvider.get(BuiltInRegistries.FEATURE, MOD_ID);
     public static final RegistrationProvider<LootPoolEntryType> LOOT_POOL_ENTRY_TYPE =
             RegistrationProvider.get(BuiltInRegistries.LOOT_POOL_ENTRY_TYPE, MOD_ID);
 
