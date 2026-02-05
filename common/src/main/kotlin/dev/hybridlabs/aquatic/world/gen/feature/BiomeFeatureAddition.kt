@@ -50,7 +50,7 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
-                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_BED,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH
             ),
@@ -87,7 +87,7 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
-                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_BED,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
             ),
@@ -113,13 +113,13 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
-                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_BED,
                 GenerationStep.Decoration.UNDERGROUND_ORES,
                 HybridAquaticPlacedFeatures.AERATED_SAND_CIRCLE
             ),
 
             BiomeFeatureAddition(
-                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_BED,
                 GenerationStep.Decoration.UNDERGROUND_ORES,
                 HybridAquaticPlacedFeatures.SAND_CIRCLE
             ),
@@ -149,7 +149,7 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
-                HybridAquaticBiomeTags.SEAGRASS_MEADOW,
+                HybridAquaticBiomeTags.SEAGRASS_BED,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.OYSTER_BED
             ),
