@@ -13,7 +13,7 @@ class RatfishEntity(type: EntityType<out RatfishEntity>, world: Level) : HybridA
             HybridAquaticEntityTags.ALL_CRUSTACEANS
         ),
         listOf(
-            HybridAquaticEntityTags.LARGE_PREY,
+            HybridAquaticEntityTags.LARGE_CREATURES,
             HybridAquaticEntityTags.ALL_SHARKS
         ),
     )

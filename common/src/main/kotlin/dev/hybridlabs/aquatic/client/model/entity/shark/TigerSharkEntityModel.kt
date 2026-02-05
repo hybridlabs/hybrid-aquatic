@@ -1,5 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.shark
 
-import dev.hybridlabs.aquatic.entity.shark.TigerSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.SandTigerSharkEntity
 
-class TigerSharkEntityModel : HybridAquaticSharkEntityModel<TigerSharkEntity>("tiger_shark")
+class TigerSharkEntityModel : HybridAquaticSharkEntityModel<SandTigerSharkEntity>("tiger_shark")

@@ -23,8 +23,8 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class BoxfishEntity(type: EntityType<out BoxfishEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<BoxfishEntity.Companion.Type> {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_PREY,
-        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.MEDIUM_CREATURES,
+        HybridAquaticEntityTags.LARGE_CREATURES,
         HybridAquaticEntityTags.ALL_SHARKS
     )
 

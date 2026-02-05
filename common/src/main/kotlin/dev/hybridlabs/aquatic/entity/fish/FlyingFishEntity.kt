@@ -25,8 +25,8 @@ import software.bernie.geckolib.core.animation.AnimationState
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world) {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_PREY,
-        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.MEDIUM_CREATURES,
+        HybridAquaticEntityTags.LARGE_CREATURES,
         HybridAquaticEntityTags.ALL_SHARKS
     )
 

@@ -7,12 +7,9 @@ import net.minecraft.world.entity.EntityType
 
 object HybridAquaticEntityTags {
     //#region Food Chain tags
-    val SMALL_PREY = create("small_prey")
-    val MEDIUM_PREY = create("medium_prey")
-    val LARGE_PREY = create("large_prey")
-    val SMALL_PREDATORS = create("small_predator")
-    val MEDIUM_PREDATORS = create("medium_predator")
-    val LARGE_PREDATOR = create("large_predator")
+    val SMALL_CREATURES = create("small_creatures")
+    val MEDIUM_CREATURES = create("medium_creatures")
+    val LARGE_CREATURES = create("large_creatures")
     val OTTER_PREY = create("otter_prey")
 
     //#region Crustacean Tags

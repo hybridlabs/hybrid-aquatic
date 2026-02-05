@@ -115,7 +115,7 @@ import dev.hybridlabs.aquatic.entity.shark.HammerheadSharkEntity
 import dev.hybridlabs.aquatic.entity.shark.HoundSharkEntity
 import dev.hybridlabs.aquatic.entity.shark.LanternSharkEntity
 import dev.hybridlabs.aquatic.entity.shark.ThresherSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.TigerSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.SandTigerSharkEntity
 import dev.hybridlabs.aquatic.entity.shark.WhaleSharkEntity
 import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
@@ -931,11 +931,11 @@ object HybridAquaticEntityTypes {
         ThresherSharkEntity::createMobAttributes
     )
 
-    val TIGER_SHARK = registerShark(
-        "tiger_shark",
-        ::TigerSharkEntity,
+    val SAND_TIGER_SHARK = registerShark(
+        "sand_tiger_shark",
+        ::SandTigerSharkEntity,
         EntityDimensions.fixed(1.75f, 0.6f),
-        TigerSharkEntity::createMobAttributes
+        SandTigerSharkEntity::createMobAttributes
     )
 
     val WHALE_SHARK = registerShark(

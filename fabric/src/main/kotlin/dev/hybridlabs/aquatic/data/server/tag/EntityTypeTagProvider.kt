@@ -27,7 +27,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         //#endregion
 
         //#region Food Chain Tags
-        getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_PREY)
+        getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_CREATURES)
             .add(
                 HybridAquaticEntityTypes.CLOWNFISH.get(),
                 HybridAquaticEntityTypes.PLECO.get(),
@@ -85,7 +85,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("alexsmobs", "devils_hole_pupfish"))
             .addOptional(ResourceLocation("alexsmobs", "flying_fish"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.MEDIUM_PREY)
+        getOrCreateTagBuilder(HybridAquaticEntityTags.MEDIUM_CREATURES)
             .add(
                 HybridAquaticEntityTypes.RATFISH.get(),
                 HybridAquaticEntityTypes.STINGRAY.get(),
@@ -110,7 +110,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("fintastic", "freshwater_shark"))
             .addOptional(ResourceLocation("alexsmobs", "blobfish"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.LARGE_PREY)
+        getOrCreateTagBuilder(HybridAquaticEntityTags.LARGE_CREATURES)
             .add(
                 HybridAquaticEntityTypes.OCEAN_SUNFISH.get(),
                 HybridAquaticEntityTypes.OARFISH.get(),
@@ -137,7 +137,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HybridAquaticEntityTags.OTTER_PREY)
             .add(HybridAquaticEntityTypes.SEA_URCHIN.get())
             .forceAddTag(HybridAquaticEntityTags.ALL_CRUSTACEANS)
-            .forceAddTag(HybridAquaticEntityTags.SMALL_PREY)
+            .forceAddTag(HybridAquaticEntityTags.SMALL_CREATURES)
         //#endregion
 
         //#region Fish Tags
@@ -319,7 +319,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.BASKING_SHARK.get(),
                 HybridAquaticEntityTypes.BULL_SHARK.get(),
                 HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(),
-                HybridAquaticEntityTypes.TIGER_SHARK.get(),
+                HybridAquaticEntityTypes.SAND_TIGER_SHARK.get(),
                 HybridAquaticEntityTypes.WHALE_SHARK.get(),
             )
         //#endregion

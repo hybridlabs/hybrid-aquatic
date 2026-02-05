@@ -13,8 +13,8 @@ import net.minecraft.world.level.ServerLevelAccessor
 
 class PupfishEntity(type: EntityType<out PupfishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world) {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_PREY,
-        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.MEDIUM_CREATURES,
+        HybridAquaticEntityTags.LARGE_CREATURES,
         HybridAquaticEntityTags.ALL_SHARKS
     )
 

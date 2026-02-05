@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level
 
 class ThresherSharkEntity(type: EntityType<out ThresherSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
     override fun getTargetConfig() =
-        MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.MEDIUM_PREY)
+        MobTargetConfiguration.ofPredator(HybridAquaticEntityTags.SMALL_CREATURES, HybridAquaticEntityTags.MEDIUM_CREATURES)
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false

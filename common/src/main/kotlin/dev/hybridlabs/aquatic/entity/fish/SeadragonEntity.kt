@@ -25,9 +25,9 @@ import kotlin.random.Random
 @Suppress("DEPRECATION", "unused")
 class SeadragonEntity(type: EntityType<out SeadragonEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<SeadragonEntity.Companion.Type> {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.SMALL_PREY,
-        HybridAquaticEntityTags.MEDIUM_PREY,
-        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.SMALL_CREATURES,
+        HybridAquaticEntityTags.MEDIUM_CREATURES,
+        HybridAquaticEntityTags.LARGE_CREATURES,
         HybridAquaticEntityTags.ALL_CEPHALOPODS,
         HybridAquaticEntityTags.ALL_SHARKS,
     )

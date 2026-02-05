@@ -15,11 +15,11 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import kotlin.random.Random
 
-class TigerSharkEntity(type: EntityType<out TigerSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
+class SandTigerSharkEntity(type: EntityType<out SandTigerSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
     override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
         HybridAquaticEntityTags.ALL_CEPHALOPODS,
         HybridAquaticEntityTags.ALL_CRUSTACEANS,
-        HybridAquaticEntityTags.MEDIUM_PREY,
+        HybridAquaticEntityTags.MEDIUM_CREATURES,
     )
 
     override val isPassive: Boolean = false

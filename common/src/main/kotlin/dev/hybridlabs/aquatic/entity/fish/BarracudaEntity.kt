@@ -34,8 +34,8 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) : Hyb
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_PREY,
-                HybridAquaticEntityTags.MEDIUM_PREY,
+                HybridAquaticEntityTags.SMALL_CREATURES,
+                HybridAquaticEntityTags.MEDIUM_CREATURES,
             ),
             listOf(
                 HybridAquaticEntityTags.ALL_SHARKS

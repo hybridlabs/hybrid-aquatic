@@ -4,7 +4,7 @@
   "spawns": {
     "SHARK": [
       {
-        "type": "hybrid-aquatic:tiger_shark",
+        "type": "hybrid-aquatic:sand_tiger_shark",
         "maxCount": 4,
         "minCount": 1,
         "weight": 1

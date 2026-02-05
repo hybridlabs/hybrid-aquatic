@@ -170,7 +170,7 @@ object SpawnRestrictionRegistry {
 
         setOf(
             HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(),
-            HybridAquaticEntityTypes.TIGER_SHARK.get(),
+            HybridAquaticEntityTypes.SAND_TIGER_SHARK.get(),
             HybridAquaticEntityTypes.HAMMERHEAD_SHARK.get(),
             HybridAquaticEntityTypes.HOUND_SHARK.get(),
             HybridAquaticEntityTypes.THRESHER_SHARK.get(),

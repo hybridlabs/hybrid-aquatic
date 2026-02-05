@@ -21,11 +21,11 @@ class LionfishEntity(type: EntityType<out LionfishEntity>, world: Level) : Hybri
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.SMALL_CREATURES,
                 HybridAquaticEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.LARGE_CREATURES,
                 HybridAquaticEntityTags.ALL_SHARKS
             ),
         )

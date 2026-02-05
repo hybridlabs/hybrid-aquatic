@@ -20,7 +20,7 @@ class TriggerfishEntity(type: EntityType<out TriggerfishEntity>, world: Level) :
                 HybridAquaticEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.LARGE_CREATURES,
                 HybridAquaticEntityTags.ALL_SHARKS
             ),
         )

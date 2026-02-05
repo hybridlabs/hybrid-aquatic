@@ -34,8 +34,8 @@ class GoldenDoradoEntity(type: EntityType<out GoldenDoradoEntity>, world: Level)
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_PREY,
-                HybridAquaticEntityTags.MEDIUM_PREY,
+                HybridAquaticEntityTags.SMALL_CREATURES,
+                HybridAquaticEntityTags.MEDIUM_CREATURES,
                 HybridAquaticEntityTags.ALL_CRUSTACEANS
             ),
             listOf(

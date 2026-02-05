@@ -71,7 +71,7 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) : HybridAquatic
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.SMALL_CREATURES,
                 HybridAquaticEntityTags.ALL_CEPHALOPODS
             ),
             listOf(

@@ -12,7 +12,13 @@ import net.minecraft.world.level.Level
 class BullSharkEntity(type: EntityType<out BullSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
-        HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.MEDIUM_PREY
+        HybridAquaticEntityTags.MEDIUM_CREATURES,
+        HybridAquaticEntityTags.LARGE_CREATURES,
+        HybridAquaticEntityTags.SMALL_SHARK,
+        HybridAquaticEntityTags.MEDIUM_SHARK,
+        HybridAquaticEntityTags.SEAL,
+        HybridAquaticEntityTags.TURTLE,
+        HybridAquaticEntityTags.SIRENIAN,
     )
 
     override val isPassive: Boolean = false

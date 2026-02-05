@@ -47,7 +47,7 @@ class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) : HybridAqu
                 HybridAquaticEntityTags.CRITTER
             ),
             listOf(
-                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.LARGE_CREATURES,
                 HybridAquaticEntityTags.ALL_SHARKS
             ),
         )

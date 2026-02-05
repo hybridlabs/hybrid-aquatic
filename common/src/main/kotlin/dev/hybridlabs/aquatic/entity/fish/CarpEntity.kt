@@ -28,8 +28,8 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<CarpEntity.Companion.Type> {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_PREY,
-        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.MEDIUM_CREATURES,
+        HybridAquaticEntityTags.LARGE_CREATURES,
         HybridAquaticEntityTags.ALL_SHARKS
     )
 

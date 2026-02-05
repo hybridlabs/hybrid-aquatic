@@ -520,7 +520,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.FRILLED_SHARK.get() to "Frilled Shark",
             HybridAquaticEntityTypes.LANTERN_SHARK.get() to "Lantern Shark",
             HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get() to "Great White Shark",
-            HybridAquaticEntityTypes.TIGER_SHARK.get() to "Tiger Shark",
+            HybridAquaticEntityTypes.SAND_TIGER_SHARK.get() to "Sand Tiger Shark",
             HybridAquaticEntityTypes.HAMMERHEAD_SHARK.get() to "Hammerhead Shark",
             HybridAquaticEntityTypes.WHALE_SHARK.get() to "Whale Shark",
             HybridAquaticEntityTypes.KARKINOS.get() to "Karkinos",

@@ -23,7 +23,7 @@ val BuiltinSpawnModifiers: Set<SpawnModifier> = setOf(
     ), SpawnModifier(
         "ocean_ruin_warm", BuiltinStructures.OCEAN_RUIN_WARM, BoundingBoxType.STRUCTURE, mapOf(
             "SHARK" to listOf(
-                MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.TIGER_SHARK.get(), 1, 1, 4)
+                MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SAND_TIGER_SHARK.get(), 1, 1, 4)
             )
         )
     )

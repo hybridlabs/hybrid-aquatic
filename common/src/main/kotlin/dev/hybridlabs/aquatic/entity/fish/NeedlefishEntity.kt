@@ -25,11 +25,11 @@ class NeedlefishEntity(type: EntityType<out NeedlefishEntity>, world: Level) : H
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.SMALL_CREATURES,
                 HybridAquaticEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.LARGE_CREATURES,
                 HybridAquaticEntityTags.ALL_SHARKS
             ),
         )

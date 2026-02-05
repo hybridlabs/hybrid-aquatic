@@ -112,12 +112,11 @@ import dev.hybridlabs.aquatic.client.render.entity.shark.HammerheadSharkEntityRe
 import dev.hybridlabs.aquatic.client.render.entity.shark.HoundSharkEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.LanternSharkEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.ThresherSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.TigerSharkEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.shark.SandTigerSharkEntityRenderer
 import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.NautilusEntityRenderer
 import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.VampireSquidEntityRenderer
 import dev.hybridlabs.aquatic.client.renderer.entity.shark.WhaleSharkEntityRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
 import dev.hybridlabs.aquatic.platform.ClientServices
 
 object HybridAquaticEntityRenderers {
@@ -775,10 +774,10 @@ object HybridAquaticEntityRenderers {
             ::GreatWhiteSharkEntityRenderer
         )
 
-    val TIGER_SHARK =
+    val SAND_TIGER_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.TIGER_SHARK,
-            ::TigerSharkEntityRenderer
+            HybridAquaticEntityTypes.SAND_TIGER_SHARK,
+            ::SandTigerSharkEntityRenderer
         )
 
     val HAMMERHEAD_SHARK =

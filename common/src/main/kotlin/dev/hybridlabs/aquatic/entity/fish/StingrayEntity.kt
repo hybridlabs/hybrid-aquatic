@@ -66,7 +66,7 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) : Hybri
                 HybridAquaticEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.LARGE_CREATURES,
                 HybridAquaticEntityTags.ALL_SHARKS
             ),
         )

@@ -750,7 +750,7 @@ class EntitySpawnConfigGenerator {
         )
 
         addShark(
-            HybridAquaticEntityTypes.TIGER_SHARK.get(),
+            HybridAquaticEntityTypes.SAND_TIGER_SHARK.get(),
             listOf(
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                 HybridAquaticBiomeTags.WARM_OCEAN,

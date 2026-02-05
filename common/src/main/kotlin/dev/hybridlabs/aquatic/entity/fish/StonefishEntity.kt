@@ -21,11 +21,11 @@ class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) : Hyb
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_PREY
+                HybridAquaticEntityTags.SMALL_CREATURES
             ),
             listOf(
-                HybridAquaticEntityTags.MEDIUM_PREY,
-                HybridAquaticEntityTags.LARGE_PREY,
+                HybridAquaticEntityTags.MEDIUM_CREATURES,
+                HybridAquaticEntityTags.LARGE_CREATURES,
                 HybridAquaticEntityTags.ALL_SHARKS
             ),
         )

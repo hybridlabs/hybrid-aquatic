@@ -24,11 +24,11 @@ class OpahEntity(type: EntityType<out OpahEntity>, world: Level) : HybridAquatic
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_PREY,
+                HybridAquaticEntityTags.SMALL_CREATURES,
                 HybridAquaticEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HybridAquaticEntityTags.MEDIUM_PREY,
+                HybridAquaticEntityTags.MEDIUM_CREATURES,
                 HybridAquaticEntityTags.ALL_SHARKS
             ),
         )

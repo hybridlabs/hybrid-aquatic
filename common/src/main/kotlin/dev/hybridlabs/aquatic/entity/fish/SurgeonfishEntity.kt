@@ -27,8 +27,8 @@ import kotlin.random.Random
 class SurgeonfishEntity(type: EntityType<out SurgeonfishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<SurgeonfishEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_PREY,
-        HybridAquaticEntityTags.LARGE_PREY,
+        HybridAquaticEntityTags.MEDIUM_CREATURES,
+        HybridAquaticEntityTags.LARGE_CREATURES,
         HybridAquaticEntityTags.ALL_SHARKS
     )
 
