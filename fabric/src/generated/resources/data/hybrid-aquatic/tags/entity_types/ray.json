@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:stingray",
+    "hybrid-aquatic:manta_ray",
+    {
+      "id": "bountiful_critters:stingray",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:ray",
+      "required": false
+    }
+  ]
+}

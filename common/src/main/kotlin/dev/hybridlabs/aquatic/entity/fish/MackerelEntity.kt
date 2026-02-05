@@ -26,7 +26,7 @@ class MackerelEntity(type: EntityType<out MackerelEntity>, world: Level) : Hybri
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_PREY,
         HybridAquaticEntityTags.LARGE_PREY,
-        HybridAquaticEntityTags.SHARK
+        HybridAquaticEntityTags.ALL_SHARKS
     )
 
     override fun registerGoals() {

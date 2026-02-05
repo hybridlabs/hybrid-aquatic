@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:frilled_shark",
+    "hybrid-aquatic:hammerhead_shark",
+    "hybrid-aquatic:thresher_shark",
+    {
+      "id": "alexsmobs:frilled_shark",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:hammerhead_shark",
+      "required": false
+    }
+  ]
+}

@@ -11,7 +11,7 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) : HybridAquat
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_PREY,
         HybridAquaticEntityTags.LARGE_PREY,
-        HybridAquaticEntityTags.SHARK
+        HybridAquaticEntityTags.ALL_SHARKS
     )
 
     override fun getMaxSpawnClusterSize(): Int {

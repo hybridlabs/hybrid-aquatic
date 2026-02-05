@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#hybrid-aquatic:small_shark",
+    "#hybrid-aquatic:medium_shark",
+    "#hybrid-aquatic:large_shark"
+  ]
+}

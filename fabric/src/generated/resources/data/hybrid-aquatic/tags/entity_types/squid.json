@@ -4,21 +4,10 @@
     "hybrid-aquatic:arrow_squid",
     "hybrid-aquatic:cuttlefish",
     "hybrid-aquatic:firefly_squid",
-    "hybrid-aquatic:octopus",
     "hybrid-aquatic:colossal_squid",
-    "hybrid-aquatic:nautilus",
-    "hybrid-aquatic:umbrella_octopus",
-    "hybrid-aquatic:vampire_squid",
+    "hybrid-aquatic:giant_squid",
     "minecraft:squid",
     "minecraft:glow_squid",
-    {
-      "id": "spawn:octopus",
-      "required": false
-    },
-    {
-      "id": "alexsmobs:mimic_octopus",
-      "required": false
-    },
     {
       "id": "alexsmobs:giant_squid",
       "required": false

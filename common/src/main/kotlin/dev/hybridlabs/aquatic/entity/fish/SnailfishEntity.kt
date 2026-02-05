@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level
 
 class SnailfishEntity(type: EntityType<out SnailfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
     override fun getTargetConfig() =
-        MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.SHARK)
+        MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.LARGE_PREY, HybridAquaticEntityTags.ALL_SHARKS)
 
     override fun getMaxSpawnClusterSize(): Int {
         return 3

@@ -297,7 +297,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "kill_shark",
                 KilledTrigger.TriggerInstance
                     .playerKilledEntity(
-                        EntityPredicate.Builder.entity().of(HybridAquaticEntityTags.SHARK).build()
+                        EntityPredicate.Builder.entity().of(HybridAquaticEntityTags.ALL_SHARKS).build()
                     )
             )
             .build(ResourceLocation("hybrid-aquatic", "bigger_boat"))

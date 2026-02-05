@@ -11,7 +11,7 @@ class BarreleyeEntity(type: EntityType<out BarreleyeEntity>, world: Level) : Hyb
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_PREY,
         HybridAquaticEntityTags.LARGE_PREY,
-        HybridAquaticEntityTags.SHARK
+        HybridAquaticEntityTags.ALL_SHARKS
     )
 
     override fun getMaxSpawnClusterSize(): Int {

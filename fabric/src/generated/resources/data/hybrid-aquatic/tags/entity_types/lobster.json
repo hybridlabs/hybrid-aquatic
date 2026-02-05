@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:crayfish",
+    "hybrid-aquatic:lobster",
+    {
+      "id": "alexsmobs:lobster",
+      "required": false
+    }
+  ]
+}

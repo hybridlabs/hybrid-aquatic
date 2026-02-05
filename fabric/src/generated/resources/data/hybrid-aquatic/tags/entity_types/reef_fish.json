@@ -1,0 +1,88 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:blowfish",
+    "hybrid-aquatic:boxfish",
+    "hybrid-aquatic:clownfish",
+    "hybrid-aquatic:damselfish",
+    "hybrid-aquatic:flying_fish",
+    "hybrid-aquatic:lionfish",
+    "hybrid-aquatic:moray_eel",
+    "hybrid-aquatic:needlefish",
+    "hybrid-aquatic:parrotfish",
+    "hybrid-aquatic:seahorse",
+    "hybrid-aquatic:squirrelfish",
+    "hybrid-aquatic:stonefish",
+    "hybrid-aquatic:surgeonfish",
+    "hybrid-aquatic:triggerfish",
+    "hybrid-aquatic:wrasse",
+    {
+      "id": "alexsmobs:flying_fish",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:angelfish",
+      "required": false
+    },
+    {
+      "id": "spawn:seahorse",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:basslet",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:boxfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:butterflyfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:clownfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:dwarf_angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:goby",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:hogfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:moorish_idol",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:parrotfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:pipefish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:ray",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:seahorse",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:tang",
+      "required": false
+    }
+  ]
+}

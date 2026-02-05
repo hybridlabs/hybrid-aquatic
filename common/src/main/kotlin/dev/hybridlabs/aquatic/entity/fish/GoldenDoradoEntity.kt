@@ -36,10 +36,10 @@ class GoldenDoradoEntity(type: EntityType<out GoldenDoradoEntity>, world: Level)
             listOf(
                 HybridAquaticEntityTags.SMALL_PREY,
                 HybridAquaticEntityTags.MEDIUM_PREY,
-                HybridAquaticEntityTags.CRUSTACEAN
+                HybridAquaticEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

@@ -13,7 +13,20 @@ import java.util.concurrent.CompletableFuture
 class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
     FabricTagProvider.EntityTypeTagProvider(output, registriesFuture) {
     override fun addTags(arg: HolderLookup.Provider) {
-        // small prey
+
+        //#region Vanilla Tags
+        getOrCreateTagBuilder(EntityTypeTags.AXOLOTL_HUNT_TARGETS)
+            .add(
+                HybridAquaticEntityTypes.TETRA.get(),
+                HybridAquaticEntityTypes.DANIO.get(),
+                HybridAquaticEntityTypes.TIGER_BARB.get(),
+                HybridAquaticEntityTypes.BETTA.get(),
+                HybridAquaticEntityTypes.OSCAR.get(),
+                HybridAquaticEntityTypes.DISCUS.get(),
+            )
+        //#endregion
+
+        //#region Food Chain Tags
         getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_PREY)
             .add(
                 HybridAquaticEntityTypes.CLOWNFISH.get(),
@@ -72,7 +85,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("alexsmobs", "devils_hole_pupfish"))
             .addOptional(ResourceLocation("alexsmobs", "flying_fish"))
 
-        // medium prey
         getOrCreateTagBuilder(HybridAquaticEntityTags.MEDIUM_PREY)
             .add(
                 HybridAquaticEntityTypes.RATFISH.get(),
@@ -98,7 +110,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("fintastic", "freshwater_shark"))
             .addOptional(ResourceLocation("alexsmobs", "blobfish"))
 
-        // large prey
         getOrCreateTagBuilder(HybridAquaticEntityTags.LARGE_PREY)
             .add(
                 HybridAquaticEntityTypes.OCEAN_SUNFISH.get(),
@@ -123,87 +134,299 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("alexsmobs", "catfish"))
             .addOptional(ResourceLocation("alexsmobs", "seal"))
 
-        // otter prey
-        getOrCreateTagBuilder(HybridAquaticEntityTags.KELP_PREY)
+        getOrCreateTagBuilder(HybridAquaticEntityTags.OTTER_PREY)
             .add(HybridAquaticEntityTypes.SEA_URCHIN.get())
-            .forceAddTag(HybridAquaticEntityTags.CRUSTACEAN)
+            .forceAddTag(HybridAquaticEntityTags.ALL_CRUSTACEANS)
             .forceAddTag(HybridAquaticEntityTags.SMALL_PREY)
+        //#endregion
 
-        // crustaceans
-        getOrCreateTagBuilder(HybridAquaticEntityTags.CRUSTACEAN)
+        //#region Fish Tags
+        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_FISH)
+            .addTag(HybridAquaticEntityTags.RAY)
+            .addTag(HybridAquaticEntityTags.REEF_FISH)
+            .addTag(HybridAquaticEntityTags.DEEP_FISH)
+            .addTag(HybridAquaticEntityTags.RIVER_FISH)
+            .addTag(HybridAquaticEntityTags.TROPICAL_RIVER_FISH)
+            .addTag(HybridAquaticEntityTags.SWAMP_FISH)
+            .addTag(HybridAquaticEntityTags.MANGROVE_FISH)
+            .addOptional(ResourceLocation("bountiful_critters", "flounder"))
+            .addOptional(ResourceLocation("spawn", "herring"))
+            .addOptional(ResourceLocation("alexsmobs", "devils_hole_pupfish"))
+            .addOptional(ResourceLocation("bountiful_critters", "sunfish"))
+            .addOptional(ResourceLocation("spawn", "sunfish"))
+            .addOptional(ResourceLocation("spawn", "tuna"))
+            .addOptional(ResourceLocation("spawn", "barracuda"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.REEF_FISH)
+            .add(
+                HybridAquaticEntityTypes.BLOWFISH.get(),
+                HybridAquaticEntityTypes.BOXFISH.get(),
+                HybridAquaticEntityTypes.CLOWNFISH.get(),
+                HybridAquaticEntityTypes.DAMSELFISH.get(),
+                HybridAquaticEntityTypes.FLYING_FISH.get(),
+                HybridAquaticEntityTypes.LIONFISH.get(),
+                HybridAquaticEntityTypes.MORAY_EEL.get(),
+                HybridAquaticEntityTypes.NEEDLEFISH.get(),
+                HybridAquaticEntityTypes.PARROTFISH.get(),
+                HybridAquaticEntityTypes.SEAHORSE.get(),
+                HybridAquaticEntityTypes.SQUIRRELFISH.get(),
+                HybridAquaticEntityTypes.STONEFISH.get(),
+                HybridAquaticEntityTypes.SURGEONFISH.get(),
+                HybridAquaticEntityTypes.TRIGGERFISH.get(),
+                HybridAquaticEntityTypes.WRASSE.get(),
+            )
+            .addOptional(ResourceLocation("alexsmobs", "flying_fish"))
+            .addOptional(ResourceLocation("bountiful_critters", "angelfish"))
+            .addOptional(ResourceLocation("spawn", "seahorse"))
+            .addOptional(ResourceLocation("rainbowreef", "angelfish"))
+            .addOptional(ResourceLocation("rainbowreef", "basslet"))
+            .addOptional(ResourceLocation("rainbowreef", "boxfish"))
+            .addOptional(ResourceLocation("rainbowreef", "butterflyfish"))
+            .addOptional(ResourceLocation("rainbowreef", "clownfish"))
+            .addOptional(ResourceLocation("rainbowreef", "dwarf_angelfish"))
+            .addOptional(ResourceLocation("rainbowreef", "goby"))
+            .addOptional(ResourceLocation("rainbowreef", "hogfish"))
+            .addOptional(ResourceLocation("rainbowreef", "moorish_idol"))
+            .addOptional(ResourceLocation("rainbowreef", "parrotfish"))
+            .addOptional(ResourceLocation("rainbowreef", "pipefish"))
+            .addOptional(ResourceLocation("rainbowreef", "ray"))
+            .addOptional(ResourceLocation("rainbowreef", "seahorse"))
+            .addOptional(ResourceLocation("rainbowreef", "tang"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.RAY)
+            .add(
+                HybridAquaticEntityTypes.STINGRAY.get(),
+                HybridAquaticEntityTypes.MANTA_RAY.get(),
+            )
+            .addOptional(ResourceLocation("bountiful_critters", "stingray"))
+            .addOptional(ResourceLocation("rainbowreef", "ray"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.DEEP_FISH)
+            .add(
+                HybridAquaticEntityTypes.ANGLERFISH.get(),
+                HybridAquaticEntityTypes.BARRELEYE.get(),
+                HybridAquaticEntityTypes.COELACANTH.get(),
+                HybridAquaticEntityTypes.DRAGONFISH.get(),
+                HybridAquaticEntityTypes.FANGTOOTH.get(),
+                HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(),
+                HybridAquaticEntityTypes.HATCHETFISH.get(),
+                HybridAquaticEntityTypes.JOHN_DORY.get(),
+                HybridAquaticEntityTypes.OARFISH.get(),
+                HybridAquaticEntityTypes.RATFISH.get(),
+                HybridAquaticEntityTypes.SEA_ANGEL.get(),
+                HybridAquaticEntityTypes.SNAILFISH.get(),
+                HybridAquaticEntityTypes.VIPERFISH.get(),
+            )
+            .addOptional(ResourceLocation("spawn", "angler_fish"))
+            .addOptional(ResourceLocation("fintastic", "coelacanth"))
+            .addOptional(ResourceLocation("alexsmobs", "blobfish"))
+            .addOptional(ResourceLocation("alexscaves", "tripodfish"))
+            .addOptional(ResourceLocation("alexscaves", "lanternfish"))
+            .addOptional(ResourceLocation("alexscaves", "gossamer_worm"))
+            .addOptional(ResourceLocation("bountiful_critters", "barreleye"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.RIVER_FISH)
+            .add(
+                HybridAquaticEntityTypes.CARP.get(),
+                HybridAquaticEntityTypes.SHINER.get(),
+                HybridAquaticEntityTypes.SUNFISH.get(),
+                HybridAquaticEntityTypes.TROUT.get(),
+            )
+            .addOptional(ResourceLocation("fintastic", "catfish"))
+            .addOptional(ResourceLocation("fintastic", "minnow"))
+            .addOptional(ResourceLocation("fintastic", "freshwater_shark"))
+            .addOptional(ResourceLocation("alexsmobs", "catfish"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.TROPICAL_RIVER_FISH)
+            .add(
+                HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
+                HybridAquaticEntityTypes.DANIO.get(),
+                HybridAquaticEntityTypes.DISCUS.get(),
+                HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
+                HybridAquaticEntityTypes.GOURAMI.get(),
+                HybridAquaticEntityTypes.OSCAR.get(),
+                HybridAquaticEntityTypes.PIRANHA.get(),
+                HybridAquaticEntityTypes.PLECO.get(),
+                HybridAquaticEntityTypes.TETRA.get(),
+                HybridAquaticEntityTypes.TIGER_BARB.get(),
+            )
+            .addOptional(ResourceLocation("fintastic", "catfish"))
+            .addOptional(ResourceLocation("fintastic", "minnow"))
+            .addOptional(ResourceLocation("fintastic", "freshwater_shark"))
+            .addOptional(ResourceLocation("fintastic", "arapaima"))
+            .addOptional(ResourceLocation("fintastic", "pleco"))
+            .addOptional(ResourceLocation("fintastic", "guppy"))
+            .addOptional(ResourceLocation("bountiful_critters", "neon_tetra"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.SWAMP_FISH)
+            .add(
+                HybridAquaticEntityTypes.TIGER_BARB.get(),
+                HybridAquaticEntityTypes.PLECO.get(),
+                HybridAquaticEntityTypes.BETTA.get(),
+            )
+            .addOptional(ResourceLocation("fintastic", "featherback"))
+            .addOptional(ResourceLocation("fintastic", "catfish"))
+            .addOptional(ResourceLocation("fintastic", "minnow"))
+            .addOptional(ResourceLocation("fintastic", "pleco"))
+            .addOptional(ResourceLocation("fintastic", "guppy"))
+            .addOptional(ResourceLocation("alexsmobs", "catfish"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.MANGROVE_FISH)
+            .add(
+                HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
+                HybridAquaticEntityTypes.TETRA.get(),
+                HybridAquaticEntityTypes.TIGER_BARB.get(),
+                HybridAquaticEntityTypes.GOURAMI.get(),
+                HybridAquaticEntityTypes.PLECO.get(),
+                HybridAquaticEntityTypes.DISCUS.get(),
+                HybridAquaticEntityTypes.OSCAR.get(),
+                HybridAquaticEntityTypes.DANIO.get(),
+                HybridAquaticEntityTypes.BETTA.get(),
+            )
+            .addOptional(ResourceLocation("fintastic", "featherback"))
+            .addOptional(ResourceLocation("fintastic", "catfish"))
+            .addOptional(ResourceLocation("fintastic", "minnow"))
+            .addOptional(ResourceLocation("fintastic", "pleco"))
+            .addOptional(ResourceLocation("fintastic", "guppy"))
+            .addOptional(ResourceLocation("alexsmobs", "catfish"))
+            .addOptional(ResourceLocation("alexsmobs", "mudskipper"))
+        //#endregion
+
+        //#region Shark Tags
+        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_SHARKS)
+            .addTag(HybridAquaticEntityTags.SMALL_SHARK)
+            .addTag(HybridAquaticEntityTags.MEDIUM_SHARK)
+            .addTag(HybridAquaticEntityTags.LARGE_SHARK)
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_SHARK)
+            .add(
+                HybridAquaticEntityTypes.LANTERN_SHARK.get(),
+                HybridAquaticEntityTypes.HOUND_SHARK.get(),
+            )
+            .addOptional(ResourceLocation("rainbowreef", "small_shark"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.MEDIUM_SHARK)
+            .add(
+                HybridAquaticEntityTypes.FRILLED_SHARK.get(),
+                HybridAquaticEntityTypes.HAMMERHEAD_SHARK.get(),
+                HybridAquaticEntityTypes.THRESHER_SHARK.get(),
+            )
+            .addOptional(ResourceLocation("alexsmobs", "frilled_shark"))
+            .addOptional(ResourceLocation("alexsmobs", "hammerhead_shark"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.LARGE_SHARK)
+            .add(
+                HybridAquaticEntityTypes.BASKING_SHARK.get(),
+                HybridAquaticEntityTypes.BULL_SHARK.get(),
+                HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(),
+                HybridAquaticEntityTypes.TIGER_SHARK.get(),
+                HybridAquaticEntityTypes.WHALE_SHARK.get(),
+            )
+        //#endregion
+
+        //#region Crustacean Tags
+        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_CRUSTACEANS)
+            .addTag(HybridAquaticEntityTags.CRAB)
+            .addTag(HybridAquaticEntityTags.LOBSTER)
+            .addTag(HybridAquaticEntityTags.SHRIMP)
+            .addOptional(ResourceLocation("alexsmobs", "triops"))
+            .addOptional(ResourceLocation("fintastic", "daphnia"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.CRAB)
             .add(
                 HybridAquaticEntityTypes.COCONUT_CRAB.get(),
-                HybridAquaticEntityTypes.CRAYFISH.get(),
                 HybridAquaticEntityTypes.DECORATOR_CRAB.get(),
                 HybridAquaticEntityTypes.DUNGENESS_CRAB.get(),
                 HybridAquaticEntityTypes.FIDDLER_CRAB.get(),
                 HybridAquaticEntityTypes.FLOWER_CRAB.get(),
                 HybridAquaticEntityTypes.GHOST_CRAB.get(),
-                HybridAquaticEntityTypes.GIANT_ISOPOD.get(),
                 HybridAquaticEntityTypes.HERMIT_CRAB.get(),
                 HybridAquaticEntityTypes.HORSESHOE_CRAB.get(),
                 HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get(),
-                HybridAquaticEntityTypes.LOBSTER.get(),
-                HybridAquaticEntityTypes.SHRIMP.get(),
                 HybridAquaticEntityTypes.SPIDER_CRAB.get(),
                 HybridAquaticEntityTypes.VAMPIRE_CRAB.get(),
                 HybridAquaticEntityTypes.YETI_CRAB.get(),
             )
             .addOptional(ResourceLocation("rainbowreef", "crab"))
             .addOptional(ResourceLocation("rainbowreef", "arrow_crab"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.LOBSTER)
+            .add(
+                HybridAquaticEntityTypes.CRAYFISH.get(),
+                HybridAquaticEntityTypes.LOBSTER.get(),
+            )
+            .addOptional(ResourceLocation("alexsmobs", "lobster"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.SHRIMP)
+            .add(
+                HybridAquaticEntityTypes.SHRIMP.get(),
+            )
             .addOptional(ResourceLocation("bountiful_critters", "krill"))
             .addOptional(ResourceLocation("fintastic", "fairy_shrimp"))
-            .addOptional(ResourceLocation("fintastic", "daphnia"))
-            .addOptional(ResourceLocation("alexsmobs", "lobster"))
             .addOptional(ResourceLocation("alexsmobs", "mantis_shrimp"))
-            .addOptional(ResourceLocation("alexsmobs", "triops"))
+        //#endregion
 
-        // cephalopods
-        getOrCreateTagBuilder(HybridAquaticEntityTags.CEPHALOPOD)
+        //#region Cephalopod Tags
+        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_CEPHALOPODS)
+            .addTag(HybridAquaticEntityTags.OCTOPUS)
+            .addTag(HybridAquaticEntityTags.SQUID)
+            .add(
+                HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
+                HybridAquaticEntityTypes.NAUTILUS.get(),
+            )
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.OCTOPUS)
+            .add(
+                HybridAquaticEntityTypes.OCTOPUS.get(),
+                HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(),
+                HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
+            )
+            .addOptional(ResourceLocation("spawn", "octopus"))
+            .addOptional(ResourceLocation("alexsmobs", "mimic_octopus"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.SQUID)
             .add(
                 HybridAquaticEntityTypes.ARROW_SQUID.get(),
                 HybridAquaticEntityTypes.CUTTLEFISH.get(),
                 HybridAquaticEntityTypes.FIREFLY_SQUID.get(),
-                HybridAquaticEntityTypes.OCTOPUS.get(),
-                HybridAquaticEntityTypes.NAUTILUS.get(),
-                HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(),
-                HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
+                HybridAquaticEntityTypes.COLOSSAL_SQUID.get(),
+                HybridAquaticEntityTypes.GIANT_SQUID.get(),
                 EntityType.SQUID,
                 EntityType.GLOW_SQUID
             )
-            .addOptional(ResourceLocation("spawn", "octopus"))
-            .addOptional(ResourceLocation("alexsmobs", "mimic_octopus"))
             .addOptional(ResourceLocation("alexsmobs", "giant_squid"))
+        //#endregion
 
-        getOrCreateTagBuilder(EntityTypeTags.AXOLOTL_HUNT_TARGETS)
+        //#region Mammal Tags
+        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_MAMMALS)
+            .addTag(HybridAquaticEntityTags.SIRENIAN)
+            .addTag(HybridAquaticEntityTags.SEAL)
+            .addTag(HybridAquaticEntityTags.DOLPHIN)
+            .addTag(HybridAquaticEntityTags.WHALE)
             .add(
-                HybridAquaticEntityTypes.TETRA.get(),
-                HybridAquaticEntityTypes.DANIO.get(),
-                HybridAquaticEntityTypes.TIGER_BARB.get(),
-                HybridAquaticEntityTypes.BETTA.get(),
-                HybridAquaticEntityTypes.OSCAR.get(),
-                HybridAquaticEntityTypes.DISCUS.get(),
+                HybridAquaticEntityTypes.OTTER.get(),
             )
 
-        // sharks
-        getOrCreateTagBuilder(HybridAquaticEntityTags.SHARK)
+        getOrCreateTagBuilder(HybridAquaticEntityTags.SIRENIAN)
             .add(
-                HybridAquaticEntityTypes.BASKING_SHARK.get(),
-                HybridAquaticEntityTypes.BULL_SHARK.get(),
-                HybridAquaticEntityTypes.FRILLED_SHARK.get(),
-                HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(),
-                HybridAquaticEntityTypes.HAMMERHEAD_SHARK.get(),
-                HybridAquaticEntityTypes.THRESHER_SHARK.get(),
-                HybridAquaticEntityTypes.TIGER_SHARK.get(),
-                HybridAquaticEntityTypes.WHALE_SHARK.get(),
-                HybridAquaticEntityTypes.LANTERN_SHARK.get(),
-                HybridAquaticEntityTypes.HOUND_SHARK.get(),
+                HybridAquaticEntityTypes.DUGONG.get(),
             )
-            .addOptional(ResourceLocation("rainbowreef", "small_shark"))
-            .addOptional(ResourceLocation("alexsmobs", "frilled_shark"))
-            .addOptional(ResourceLocation("alexsmobs", "hammerhead_shark"))
+            .addOptional(ResourceLocation("spawn", "sea_cow"))
 
-        // critters
+        getOrCreateTagBuilder(HybridAquaticEntityTags.SEAL)
+            .addOptional(ResourceLocation("alexsmobs", "seal"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.DOLPHIN)
+            .add(
+                EntityType.DOLPHIN,
+            )
+            .addOptional(ResourceLocation("alexsmobs", "orca"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.WHALE)
+            .addOptional(ResourceLocation("alexsmobs", "cachalot_whale"))
+        //#endregion
+
+        //#region Misc Creature Tags
         getOrCreateTagBuilder(HybridAquaticEntityTags.CRITTER)
             .add(
                 HybridAquaticEntityTypes.SEA_SLUG.get(),
@@ -214,7 +437,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             )
             .addOptional(ResourceLocation("spawn", "clam"))
 
-        // jellyfish
         getOrCreateTagBuilder(HybridAquaticEntityTags.JELLYFISH)
             .add(
                 HybridAquaticEntityTypes.CROWN_JELLYFISH.get(),
@@ -232,119 +454,26 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.BOX_JELLYFISH.get(),
             )
             .addOptional(ResourceLocation("rainbowreef", "jellyfish"))
+            .addOptional(ResourceLocation("alexmobs", "comb_jelly"))
 
-        // fish
-        getOrCreateTagBuilder(HybridAquaticEntityTags.FISH)
+        getOrCreateTagBuilder(HybridAquaticEntityTags.TURTLE)
             .add(
-                HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
-                HybridAquaticEntityTypes.BLOWFISH.get(),
-                HybridAquaticEntityTypes.STONEFISH.get(),
-                HybridAquaticEntityTypes.PLECO.get(),
-                HybridAquaticEntityTypes.SHINER.get(),
-                HybridAquaticEntityTypes.TROUT.get(),
-                HybridAquaticEntityTypes.SUNFISH.get(),
-                HybridAquaticEntityTypes.DAMSELFISH.get(),
-                HybridAquaticEntityTypes.PEARLFISH.get(),
-                HybridAquaticEntityTypes.BETTA.get(),
-                HybridAquaticEntityTypes.JOHN_DORY.get(),
-                HybridAquaticEntityTypes.SNAILFISH.get(),
-                HybridAquaticEntityTypes.CARP.get(),
-                HybridAquaticEntityTypes.CLOWNFISH.get(),
-                HybridAquaticEntityTypes.BOXFISH.get(),
-                HybridAquaticEntityTypes.DANIO.get(),
-                HybridAquaticEntityTypes.DISCUS.get(),
-                HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(),
-                HybridAquaticEntityTypes.SQUIRRELFISH.get(),
-                HybridAquaticEntityTypes.FLYING_FISH.get(),
-                HybridAquaticEntityTypes.GOLDFISH.get(),
-                HybridAquaticEntityTypes.GOURAMI.get(),
-                HybridAquaticEntityTypes.LIONFISH.get(),
-                HybridAquaticEntityTypes.MACKEREL.get(),
-                HybridAquaticEntityTypes.HERRING.get(),
-                HybridAquaticEntityTypes.MAHI.get(),
-                HybridAquaticEntityTypes.MORAY_EEL.get(),
-                HybridAquaticEntityTypes.NEEDLEFISH.get(),
-                HybridAquaticEntityTypes.BARRACUDA.get(),
-                HybridAquaticEntityTypes.OARFISH.get(),
-                HybridAquaticEntityTypes.OPAH.get(),
-                HybridAquaticEntityTypes.OSCAR.get(),
-                HybridAquaticEntityTypes.PARROTFISH.get(),
-                HybridAquaticEntityTypes.PIRANHA.get(),
-                HybridAquaticEntityTypes.ROCKFISH.get(),
-                HybridAquaticEntityTypes.SEA_BASS.get(),
-                HybridAquaticEntityTypes.SEAHORSE.get(),
-                HybridAquaticEntityTypes.SEADRAGON.get(),
-                HybridAquaticEntityTypes.OCEAN_SUNFISH.get(),
-                HybridAquaticEntityTypes.SURGEONFISH.get(),
-                HybridAquaticEntityTypes.TETRA.get(),
-                HybridAquaticEntityTypes.TIGER_BARB.get(),
-                HybridAquaticEntityTypes.TRIGGERFISH.get(),
-                HybridAquaticEntityTypes.TUNA.get(),
-                HybridAquaticEntityTypes.MANTA_RAY.get(),
-                HybridAquaticEntityTypes.STINGRAY.get(),
-                HybridAquaticEntityTypes.ANGLERFISH.get(),
-                HybridAquaticEntityTypes.BARRELEYE.get(),
-                HybridAquaticEntityTypes.DRAGONFISH.get(),
-                HybridAquaticEntityTypes.RATFISH.get(),
-                HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
-                HybridAquaticEntityTypes.COELACANTH.get(),
-                HybridAquaticEntityTypes.WRASSE.get(),
-                EntityType.COD,
-                EntityType.SALMON,
-                EntityType.TROPICAL_FISH,
-                EntityType.AXOLOTL,
+                EntityType.TURTLE,
             )
-            .addOptional(ResourceLocation("rainbowreef", "clownfish"))
-            .addOptional(ResourceLocation("rainbowreef", "basslet"))
-            .addOptional(ResourceLocation("rainbowreef", "boxfish"))
-            .addOptional(ResourceLocation("rainbowreef", "goby"))
-            .addOptional(ResourceLocation("rainbowreef", "tang"))
-            .addOptional(ResourceLocation("rainbowreef", "pipefish"))
-            .addOptional(ResourceLocation("rainbowreef", "seahorse"))
-            .addOptional(ResourceLocation("rainbowreef", "dwarf_angelfish"))
-            .addOptional(ResourceLocation("rainbowreef", "butterflyfish"))
-            .addOptional(ResourceLocation("rainbowreef", "moorish_idol"))
-            .addOptional(ResourceLocation("bountiful_critters", "angelfish"))
-            .addOptional(ResourceLocation("bountiful_critters", "flounder"))
-            .addOptional(ResourceLocation("bountiful_critters", "neon_tetra"))
-            .addOptional(ResourceLocation("bountiful_critters", "barreleye"))
-            .addOptional(ResourceLocation("fintastic", "gourami"))
-            .addOptional(ResourceLocation("fintastic", "guppy"))
-            .addOptional(ResourceLocation("fintastic", "minnow"))
-            .addOptional(ResourceLocation("fintastic", "moony"))
-            .addOptional(ResourceLocation("fintastic", "pleco"))
-            .addOptional(ResourceLocation("spawn", "angler_fish"))
-            .addOptional(ResourceLocation("spawn", "seahorse"))
-            .addOptional(ResourceLocation("spawn", "herring"))
-            .addOptional(ResourceLocation("alexsmobs", "mudskipper"))
-            .addOptional(ResourceLocation("alexsmobs", "devils_hole_pupfish"))
-            .addOptional(ResourceLocation("alexsmobs", "flying_fish"))
-            .addOptional(ResourceLocation("rainbowreef", "angelfish"))
-            .addOptional(ResourceLocation("rainbowreef", "hogfish"))
-            .addOptional(ResourceLocation("rainbowreef", "parrotfish"))
-            .addOptional(ResourceLocation("rainbowreef", "ray"))
-            .addOptional(ResourceLocation("bountiful_critters", "stingray"))
-            .addOptional(ResourceLocation("fintastic", "featherback"))
-            .addOptional(ResourceLocation("fintastic", "freshwater_shark"))
-            .addOptional(ResourceLocation("alexsmobs", "blobfish"))
-            .addOptional(ResourceLocation("bountiful_critters", "sunfish"))
-            .addOptional(ResourceLocation("fintastic", "arapaima"))
-            .addOptional(ResourceLocation("fintastic", "catfish"))
-            .addOptional(ResourceLocation("fintastic", "coelacanth"))
-            .addOptional(ResourceLocation("spawn", "sunfish"))
-            .addOptional(ResourceLocation("spawn", "tuna"))
-            .addOptional(ResourceLocation("spawn", "barracuda"))
-            .addOptional(ResourceLocation("spawn", "sea_cow"))
-            .addOptional(ResourceLocation("alexsmobs", "catfish"))
-            .addOptional(ResourceLocation("alexsmobs", "seal"))
+            .addOptional(ResourceLocation("alexsmobs", "terrapin"))
+            .addOptional(ResourceLocation("alexsmobs", "alligator_snapping_turtle"))
+        //#endregion
 
-        // entities that you can catch with the fishing net
+        //#region Fishing Net Implementation
         getOrCreateTagBuilder(HybridAquaticEntityTags.CAN_USE_FISHING_NET_ON)
+            .addTag(HybridAquaticEntityTags.ALL_FISH)
+            .addTag(HybridAquaticEntityTags.ALL_SHARKS)
+            .addTag(HybridAquaticEntityTags.ALL_CRUSTACEANS)
+            .addTag(HybridAquaticEntityTags.ALL_CEPHALOPODS)
+            .addTag(HybridAquaticEntityTags.ALL_MAMMALS)
             .addTag(HybridAquaticEntityTags.JELLYFISH)
             .addTag(HybridAquaticEntityTags.CRITTER)
-            .addTag(HybridAquaticEntityTags.CRUSTACEAN)
-            .addTag(HybridAquaticEntityTags.CEPHALOPOD)
-            .addTag(HybridAquaticEntityTags.FISH)
-            .addTag(HybridAquaticEntityTags.SHARK)
+            .addTag(HybridAquaticEntityTags.TURTLE)
+        //#endregion
     }
 }

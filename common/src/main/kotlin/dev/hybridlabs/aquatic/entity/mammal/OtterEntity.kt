@@ -233,10 +233,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.KELP_PREY
+                HybridAquaticEntityTags.OTTER_PREY
             ),
             listOf(
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

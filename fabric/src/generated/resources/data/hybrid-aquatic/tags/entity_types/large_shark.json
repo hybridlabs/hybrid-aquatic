@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:basking_shark",
+    "hybrid-aquatic:bull_shark",
+    "hybrid-aquatic:great_white_shark",
+    "hybrid-aquatic:tiger_shark",
+    "hybrid-aquatic:whale_shark"
+  ]
+}

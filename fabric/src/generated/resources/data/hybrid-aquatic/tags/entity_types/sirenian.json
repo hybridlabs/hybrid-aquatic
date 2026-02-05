@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:dugong",
+    {
+      "id": "spawn:sea_cow",
+      "required": false
+    }
+  ]
+}

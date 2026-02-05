@@ -28,8 +28,8 @@ class SeadragonEntity(type: EntityType<out SeadragonEntity>, world: Level) : Hyb
         HybridAquaticEntityTags.SMALL_PREY,
         HybridAquaticEntityTags.MEDIUM_PREY,
         HybridAquaticEntityTags.LARGE_PREY,
-        HybridAquaticEntityTags.CEPHALOPOD,
-        HybridAquaticEntityTags.SHARK,
+        HybridAquaticEntityTags.ALL_CEPHALOPODS,
+        HybridAquaticEntityTags.ALL_SHARKS,
     )
 
     override fun getMaxSpawnClusterSize(): Int {

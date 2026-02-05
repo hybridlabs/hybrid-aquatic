@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:tiger_barb",
+    "hybrid-aquatic:pleco",
+    "hybrid-aquatic:betta",
+    {
+      "id": "fintastic:featherback",
+      "required": false
+    },
+    {
+      "id": "fintastic:catfish",
+      "required": false
+    },
+    {
+      "id": "fintastic:minnow",
+      "required": false
+    },
+    {
+      "id": "fintastic:pleco",
+      "required": false
+    },
+    {
+      "id": "fintastic:guppy",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:catfish",
+      "required": false
+    }
+  ]
+}

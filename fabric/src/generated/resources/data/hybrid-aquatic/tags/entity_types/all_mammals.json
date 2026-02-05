@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#hybrid-aquatic:sirenian",
+    "#hybrid-aquatic:seal",
+    "#hybrid-aquatic:dolphin",
+    "#hybrid-aquatic:whale",
+    "hybrid-aquatic:otter"
+  ]
+}

@@ -22,11 +22,11 @@ class LionfishEntity(type: EntityType<out LionfishEntity>, world: Level) : Hybri
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
                 HybridAquaticEntityTags.SMALL_PREY,
-                HybridAquaticEntityTags.CRUSTACEAN
+                HybridAquaticEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
                 HybridAquaticEntityTags.LARGE_PREY,
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

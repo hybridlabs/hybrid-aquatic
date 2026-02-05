@@ -22,12 +22,12 @@ class MorayEelEntity(type: EntityType<out MorayEelEntity>, world: Level) : Hybri
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
                 HybridAquaticEntityTags.SMALL_PREY,
-                HybridAquaticEntityTags.CRUSTACEAN,
-                HybridAquaticEntityTags.CEPHALOPOD
+                HybridAquaticEntityTags.ALL_CRUSTACEANS,
+                HybridAquaticEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
                 HybridAquaticEntityTags.LARGE_PREY,
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

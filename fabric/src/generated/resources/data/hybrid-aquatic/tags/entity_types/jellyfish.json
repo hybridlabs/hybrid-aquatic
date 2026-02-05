@@ -17,6 +17,10 @@
     {
       "id": "rainbowreef:jellyfish",
       "required": false
+    },
+    {
+      "id": "alexmobs:comb_jelly",
+      "required": false
     }
   ]
 }

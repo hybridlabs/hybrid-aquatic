@@ -26,11 +26,11 @@ class NeedlefishEntity(type: EntityType<out NeedlefishEntity>, world: Level) : H
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
                 HybridAquaticEntityTags.SMALL_PREY,
-                HybridAquaticEntityTags.CEPHALOPOD
+                HybridAquaticEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
                 HybridAquaticEntityTags.LARGE_PREY,
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

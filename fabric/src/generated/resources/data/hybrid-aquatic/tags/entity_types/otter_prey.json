@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     "hybrid-aquatic:sea_urchin",
-    "#hybrid-aquatic:crustacean",
+    "#hybrid-aquatic:all_crustaceans",
     "#hybrid-aquatic:small_prey"
   ]
 }

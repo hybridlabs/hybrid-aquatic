@@ -38,7 +38,7 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) : Hyb
                 HybridAquaticEntityTags.MEDIUM_PREY,
             ),
             listOf(
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

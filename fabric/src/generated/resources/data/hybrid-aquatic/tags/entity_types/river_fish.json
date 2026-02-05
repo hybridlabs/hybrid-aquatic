@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:carp",
+    "hybrid-aquatic:shiner",
+    "hybrid-aquatic:sunfish",
+    "hybrid-aquatic:trout",
+    {
+      "id": "fintastic:catfish",
+      "required": false
+    },
+    {
+      "id": "fintastic:minnow",
+      "required": false
+    },
+    {
+      "id": "fintastic:freshwater_shark",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:catfish",
+      "required": false
+    }
+  ]
+}

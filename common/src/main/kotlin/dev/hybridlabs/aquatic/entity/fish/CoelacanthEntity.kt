@@ -18,10 +18,10 @@ class CoelacanthEntity(type: EntityType<out CoelacanthEntity>, world: Level) : H
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
                 HybridAquaticEntityTags.SMALL_PREY,
-                HybridAquaticEntityTags.CEPHALOPOD
+                HybridAquaticEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

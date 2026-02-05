@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:dolphin",
+    {
+      "id": "alexsmobs:orca",
+      "required": false
+    }
+  ]
+}

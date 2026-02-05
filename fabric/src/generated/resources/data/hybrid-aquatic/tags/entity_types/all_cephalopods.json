@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#hybrid-aquatic:octopus",
+    "#hybrid-aquatic:squid",
+    "hybrid-aquatic:vampire_squid",
+    "hybrid-aquatic:nautilus"
+  ]
+}

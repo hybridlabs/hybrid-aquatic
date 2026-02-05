@@ -43,12 +43,12 @@ class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) : HybridAqu
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.CRUSTACEAN,
+                HybridAquaticEntityTags.ALL_CRUSTACEANS,
                 HybridAquaticEntityTags.CRITTER
             ),
             listOf(
                 HybridAquaticEntityTags.LARGE_PREY,
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

@@ -27,7 +27,7 @@ class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) : H
             listOf(
                 HybridAquaticEntityTags.MEDIUM_PREY,
                 HybridAquaticEntityTags.LARGE_PREY,
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

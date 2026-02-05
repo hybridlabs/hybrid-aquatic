@@ -1,11 +1,13 @@
 {
   "replace": false,
   "values": [
+    "#hybrid-aquatic:all_fish",
+    "#hybrid-aquatic:all_sharks",
+    "#hybrid-aquatic:all_crustaceans",
+    "#hybrid-aquatic:cephalopod",
+    "#hybrid-aquatic:all_mammals",
     "#hybrid-aquatic:jellyfish",
     "#hybrid-aquatic:critter",
-    "#hybrid-aquatic:crustacean",
-    "#hybrid-aquatic:cephalopod",
-    "#hybrid-aquatic:fish",
-    "#hybrid-aquatic:sharks"
+    "#hybrid-aquatic:turtle"
   ]
 }

@@ -43,7 +43,7 @@ class FangtoothEntity(entityType: EntityType<out FangtoothEntity>, world: Level)
             listOf(
                 HybridAquaticEntityTags.MEDIUM_PREY,
                 HybridAquaticEntityTags.LARGE_PREY,
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

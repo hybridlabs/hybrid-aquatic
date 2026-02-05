@@ -10,11 +10,11 @@ import net.minecraft.world.level.Level
 class RatfishEntity(type: EntityType<out RatfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
     override fun getTargetConfig() = MobTargetConfiguration.create(
         listOf(
-            HybridAquaticEntityTags.CRUSTACEAN
+            HybridAquaticEntityTags.ALL_CRUSTACEANS
         ),
         listOf(
             HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
+            HybridAquaticEntityTags.ALL_SHARKS
         ),
     )
 

@@ -42,7 +42,7 @@ class AnglerfishEntity(type: EntityType<out AnglerfishEntity>, world: Level) : H
             listOf(
                 HybridAquaticEntityTags.MEDIUM_PREY,
                 HybridAquaticEntityTags.LARGE_PREY,
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

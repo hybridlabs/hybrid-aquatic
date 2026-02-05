@@ -56,10 +56,10 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HybridA
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.CRUSTACEAN
+                HybridAquaticEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

@@ -23,7 +23,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
 
 class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) : HybridAquaticFishEntity(type, world), OverlayTextureFeature {
-    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.SHARK)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.ALL_SHARKS)
 
     override fun registerGoals() {
         super.registerGoals()

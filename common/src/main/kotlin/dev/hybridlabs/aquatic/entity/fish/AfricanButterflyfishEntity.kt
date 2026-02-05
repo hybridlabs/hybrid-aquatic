@@ -23,7 +23,7 @@ class AfricanButterflyfishEntity(type: EntityType<out AfricanButterflyfishEntity
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_PREY,
         HybridAquaticEntityTags.LARGE_PREY,
-        HybridAquaticEntityTags.SHARK
+        HybridAquaticEntityTags.ALL_SHARKS
     )
     private var isGliding = false
 

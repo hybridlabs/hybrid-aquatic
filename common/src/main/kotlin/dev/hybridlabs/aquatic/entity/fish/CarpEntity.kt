@@ -30,7 +30,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HybridAquatic
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_PREY,
         HybridAquaticEntityTags.LARGE_PREY,
-        HybridAquaticEntityTags.SHARK
+        HybridAquaticEntityTags.ALL_SHARKS
     )
 
     override fun getMaxSpawnClusterSize(): Int {

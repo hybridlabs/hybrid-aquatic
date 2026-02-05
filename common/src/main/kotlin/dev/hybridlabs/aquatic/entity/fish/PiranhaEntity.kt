@@ -46,7 +46,7 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) : HybridA
             listOf(
                 HybridAquaticEntityTags.MEDIUM_PREY,
                 HybridAquaticEntityTags.LARGE_PREY,
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

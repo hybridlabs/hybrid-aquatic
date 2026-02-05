@@ -60,7 +60,7 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
                 HybridAquaticEntityTags.JELLYFISH
             ),
             listOf(
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

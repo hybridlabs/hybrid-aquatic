@@ -6,17 +6,53 @@ import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 
 object HybridAquaticEntityTags {
-    val LARGE_PREY = create("large_prey")
-    val MEDIUM_PREY = create("medium_prey")
+    //#region Food Chain tags
     val SMALL_PREY = create("small_prey")
-    val KELP_PREY = create("kelp_prey")
+    val MEDIUM_PREY = create("medium_prey")
+    val LARGE_PREY = create("large_prey")
+    val SMALL_PREDATORS = create("small_predator")
+    val MEDIUM_PREDATORS = create("medium_predator")
+    val LARGE_PREDATOR = create("large_predator")
+    val OTTER_PREY = create("otter_prey")
 
+    //#region Crustacean Tags
+    val ALL_CRUSTACEANS = create("all_crustaceans")
+    val CRAB = create("crab")
+    val LOBSTER = create("lobster")
+    val SHRIMP = create("shrimp")
+
+    //#region Cephalopod Tags
+    val ALL_CEPHALOPODS = create("all_cephalopods")
+    val OCTOPUS = create("octopus")
+    val SQUID = create("squid")
+
+    //#region Fish Tags
+    val ALL_FISH = create("all_fish")
+    val RAY = create("ray")
+    val REEF_FISH = create("reef_fish")
+    val DEEP_FISH = create("deep_fish")
+    val RIVER_FISH = create("river_fish")
+    val TROPICAL_RIVER_FISH = create("tropical_river_fish")
+    val SWAMP_FISH = create("swamp_fish")
+    val MANGROVE_FISH = create("mangrove_fish")
+
+    //#region Shark Tags
+    val ALL_SHARKS = create("all_sharks")
+    val SMALL_SHARK = create("small_shark")
+    val MEDIUM_SHARK = create("medium_shark")
+    val LARGE_SHARK = create("large_shark")
+
+    //#region Mammal Tags
+    val ALL_MAMMALS = create("all_mammals")
+    val SIRENIAN = create("sirenian")
+    val SEAL = create("seal")
+    val DOLPHIN = create("dolphin")
+    val WHALE = create("whale")
+
+    //#region Misc Creature Tags
+    val TURTLE = create("turtle")
     val CRITTER = create("critter")
-    val CRUSTACEAN = create("crustacean")
-    val CEPHALOPOD = create("cephalopod")
     val JELLYFISH = create("jellyfish")
-    val FISH = create("fish")
-    val SHARK = create("sharks")
 
     val CAN_USE_FISHING_NET_ON = create("can_use_fishing_net_on")
 

@@ -22,7 +22,7 @@ class JohnDoryEntity(type: EntityType<out JohnDoryEntity>, world: Level) : Hybri
             listOf(
                 HybridAquaticEntityTags.MEDIUM_PREY,
                 HybridAquaticEntityTags.LARGE_PREY,
-                HybridAquaticEntityTags.SHARK
+                HybridAquaticEntityTags.ALL_SHARKS
             ),
         )
 

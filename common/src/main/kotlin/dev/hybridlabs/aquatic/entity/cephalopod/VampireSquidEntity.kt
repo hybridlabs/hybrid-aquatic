@@ -11,7 +11,7 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 
 class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
-    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.SHARK)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.ALL_SHARKS)
     private var isFeeding = false
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {

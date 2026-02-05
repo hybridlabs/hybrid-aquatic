@@ -31,8 +31,8 @@ class SeahorseEntity(type: EntityType<out SeahorseEntity>, world: Level) : Hybri
         HybridAquaticEntityTags.SMALL_PREY,
         HybridAquaticEntityTags.MEDIUM_PREY,
         HybridAquaticEntityTags.LARGE_PREY,
-        HybridAquaticEntityTags.CEPHALOPOD,
-        HybridAquaticEntityTags.SHARK,
+        HybridAquaticEntityTags.ALL_CEPHALOPODS,
+        HybridAquaticEntityTags.ALL_SHARKS,
     )
 
     override fun getMaxSpawnClusterSize(): Int {
