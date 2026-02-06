@@ -40,7 +40,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         }
 
         //#region Diving Armor
-        getOrCreateTagBuilder(HybridAquaticItemTags.DIVING_HELMET)
+        getOrCreateTagBuilder(HybridAquaticItemTags.DIVING_ARMOR)
             .addTag(HybridAquaticItemTags.DIVING_HELMET)
             .addTag(HybridAquaticItemTags.DIVING_SUIT)
             .addTag(HybridAquaticItemTags.DIVING_LEGGINGS)
@@ -79,7 +79,32 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .addOptional(ResourceLocation("alexscaves", "diving_boots"))
         //#endregion
 
-        //#region Wood
+        //#region Effect Tags
+        getOrCreateTagBuilder(HybridAquaticItemTags.RESISTS_CORROSION)
+            .add(
+                Items.DIAMOND_AXE,
+                Items.DIAMOND_PICKAXE,
+                Items.DIAMOND_SWORD,
+                Items.DIAMOND_SHOVEL,
+                Items.DIAMOND_HOE,
+                Items.DIAMOND_HELMET,
+                Items.DIAMOND_CHESTPLATE,
+                Items.DIAMOND_LEGGINGS,
+                Items.DIAMOND_BOOTS,
+
+                Items.GOLDEN_AXE,
+                Items.GOLDEN_PICKAXE,
+                Items.GOLDEN_SWORD,
+                Items.GOLDEN_SHOVEL,
+                Items.GOLDEN_HOE,
+                Items.GOLDEN_HELMET,
+                Items.GOLDEN_CHESTPLATE,
+                Items.GOLDEN_LEGGINGS,
+                Items.GOLDEN_BOOTS,
+            )
+        //#endregion
+
+        //#region Wood Tags
         getOrCreateTagBuilder(ItemTags.PLANKS)
             .add(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get().asItem())
 
@@ -93,6 +118,12 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .add(HybridAquaticPlatformItems.DRIFTWOOD_LOG.get())
             .add(HybridAquaticPlatformItems.STRIPPED_DRIFTWOOD_LOG.get())
             .add(HybridAquaticPlatformItems.DRIFTWOOD_WOOD.get())
+            .add(HybridAquaticPlatformItems.STRIPPED_DRIFTWOOD_WOOD.get())
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.STRIPPED_LOGS)
+            .add(HybridAquaticPlatformItems.STRIPPED_DRIFTWOOD_LOG.get())
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.STRIPPED_WOODS)
             .add(HybridAquaticPlatformItems.STRIPPED_DRIFTWOOD_WOOD.get())
 
         getOrCreateTagBuilder(ItemTags.WOODEN_FENCES)
@@ -118,7 +149,18 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS)
             .add(HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get().asItem())
+        //#endregion
 
+        getOrCreateTagBuilder(HybridAquaticItemTags.STONES)
+            .add(HybridAquaticItems.SHORESTONE.get())
+            .add(HybridAquaticItems.BARNACLE_SHORESTONE.get())
+            .add(HybridAquaticItems.CORALSTONE.get())
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.SANDS)
+            .add(HybridAquaticItems.WHITE_SAND.get())
+            .add(HybridAquaticItems.GRASSY_SAND.get())
+
+        //#region Tool Tags
         getOrCreateTagBuilder(ItemTags.SWORDS)
             .add(HybridAquaticItems.SEASHELL_SPEAR.get())
             .add(HybridAquaticItems.CORAL_BLADE.get())
@@ -138,8 +180,31 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         getOrCreateTagBuilder(ItemTags.HOES)
             .add(HybridAquaticItems.SEASHELL_HOE.get())
             .add(HybridAquaticItems.CORAL_HOE.get())
-
         //#endregion
+
+        listOf(
+            HybridAquaticItems.RAW_LOBSTER.get(),
+            HybridAquaticItems.COOKED_LOBSTER.get(),
+            HybridAquaticItems.RAW_LOBSTER_TAIL.get(),
+            HybridAquaticItems.COOKED_LOBSTER_TAIL.get(),
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridAquaticItemTags.LOBSTER_MEAT).add(item)
+        }
+
+        listOf(
+            HybridAquaticItems.RAW_LOBSTER.get(),
+            HybridAquaticItems.COOKED_LOBSTER.get(),
+            HybridAquaticItems.RAW_LOBSTER_TAIL.get(),
+            HybridAquaticItems.COOKED_LOBSTER_TAIL.get(),
+            HybridAquaticItems.RAW_CRAB.get(),
+            HybridAquaticItems.COOKED_CRAB.get(),
+            HybridAquaticItems.RAW_SHRIMP.get(),
+            HybridAquaticItems.COOKED_SHRIMP.get(),
+            HybridAquaticItems.RAW_CRAYFISH.get(),
+            HybridAquaticItems.COOKED_CRAYFISH.get(),
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridAquaticItemTags.CRUSTACEAN_MEAT).add(item)
+        }
 
         listOf(
             HybridAquaticItems.CARP.get(),

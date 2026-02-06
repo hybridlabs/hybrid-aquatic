@@ -12,11 +12,14 @@ object HybridAquaticItemTags {
     val LURE_ITEMS = create("lure_items")
     val PLUSHIES = create("plushies")
 
+    //#region Meat Tags
     val SMALL_FISH = create("small_fish")
     val MEDIUM_FISH = create("medium_fish")
     val LARGE_FISH = create("large_fish")
+    val LOBSTER_MEAT = create("lobster_meat")
+    val CRUSTACEAN_MEAT = create("crustacean_meat")
 
-    val CRAB_CLAW = create("claw")
+    val CRAB_CLAW = create("crab_claw")
     val KELPS = create("kelps")
 
     val DIVING_ARMOR = create("diving_armor")
@@ -24,6 +27,9 @@ object HybridAquaticItemTags {
     val DIVING_SUIT = create("diving_suit")
     val DIVING_LEGGINGS = create("diving_leggings")
     val DIVING_BOOTS = create("diving_boots")
+
+    val RESISTS_CORROSION = create("resists_corrosion")
+
     val HAT = create("hat")
     val SCARF = create("scarf")
     val BACK_FIN = create("back_fin")
@@ -38,6 +44,12 @@ object HybridAquaticItemTags {
     val COOKED_FISHES = createConventional("foods/cooked_fishes")
     val FOOD_POISONING = createConventional("foods/food_poisoning")
     val ARMORS = createConventional("armors")
+
+    val STRIPPED_WOODS = createConventional("stripped_woods")
+    val STRIPPED_LOGS = createConventional("stripped_logs")
+
+    val STONES = createConventional("stones")
+    val SANDS = createConventional("sands")
 
     private fun create(id: String): TagKey<Item> {
         return TagKey.create(Registries.ITEM, CommonClass.locate(id))

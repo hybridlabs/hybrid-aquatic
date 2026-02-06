@@ -1,10 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#hybrid-aquatic:diving_helmet",
-    "#hybrid-aquatic:diving_suit",
-    "#hybrid-aquatic:diving_leggings",
-    "#hybrid-aquatic:diving_boots",
     "hybrid-aquatic:diving_helmet",
     {
       "id": "create:copper_diving_helmet",
