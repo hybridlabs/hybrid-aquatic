@@ -1,33 +1,10 @@
 package dev.hybridlabs.aquatic.entity
 
-import dev.hybridlabs.aquatic.entity.cephalopod.ColossalSquidEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.FireflySquidEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.GiantSquidEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticOctopusEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.NautilusEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.UmbrellaOctopusEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.*
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
-import dev.hybridlabs.aquatic.entity.crustacean.CoconutCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.GhostCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.HorseshoeCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
-import dev.hybridlabs.aquatic.entity.crustacean.SpiderCrabEntity
-import dev.hybridlabs.aquatic.entity.fish.CarpEntity
-import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import dev.hybridlabs.aquatic.entity.fish.DragonfishEntity
-import dev.hybridlabs.aquatic.entity.fish.FlashlightFishEntity
-import dev.hybridlabs.aquatic.entity.fish.FlyingFishEntity
-import dev.hybridlabs.aquatic.entity.fish.GoldfishEntity
-import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
-import dev.hybridlabs.aquatic.entity.fish.OarfishEntity
-import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
-import dev.hybridlabs.aquatic.entity.fish.ParrotfishEntity
-import dev.hybridlabs.aquatic.entity.fish.PupfishEntity
-import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
-import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
+import dev.hybridlabs.aquatic.entity.crustacean.*
+import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
-import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticSirenianEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
@@ -136,7 +113,7 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.OCTOPUS.get(),
         ).forEach { registerOctopus(it) }
-fn
+
         registerWaterCreature(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), ColossalSquidEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.GIANT_SQUID.get(), GiantSquidEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), UmbrellaOctopusEntity::canSpawn)

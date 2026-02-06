@@ -65,7 +65,7 @@ class TetraEntity(type: EntityType<out TetraEntity>, world: Level) : HybridAquat
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
-        val selectedType = TetraEntity.Companion.Type.fromBiome(biome)
+        val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }

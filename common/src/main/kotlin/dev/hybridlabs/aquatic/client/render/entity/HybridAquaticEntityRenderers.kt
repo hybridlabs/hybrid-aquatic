@@ -119,6 +119,7 @@ import dev.hybridlabs.aquatic.client.renderer.entity.shark.WhaleSharkEntityRende
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.platform.ClientServices
 
+@Suppress("unused")
 object HybridAquaticEntityRenderers {
     //region fish
     val AFRICAN_BUTTERFLYFISH =
