@@ -85,6 +85,10 @@ open class HybridAquaticMammalEntity(type: EntityType<out HybridAquaticMammalEnt
         return 0
     }
 
+    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
+        return !this.hasCustomName()
+    }
+
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
