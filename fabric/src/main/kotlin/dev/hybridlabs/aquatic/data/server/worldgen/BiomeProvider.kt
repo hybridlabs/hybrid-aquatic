@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.data.server.worldgen
 
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -30,6 +32,7 @@ class BiomeProvider(
         waterColor: Int,
         waterFogColor: Int,
         extraSpawns: List<Pair<MobCategory, MobSpawnSettings.SpawnerData>> = ArrayList(),
+        extraSpawnCosts: List<Triple<EntityType<*>, Double, Double>> = emptyList(),
         extraFeatures: (BiomeGenerationSettings.Builder.() -> Unit)? = null,
     ): Biome {
         val builder = BiomeGenerationSettings.Builder(
@@ -45,8 +48,9 @@ class BiomeProvider(
 
         return Biome.BiomeBuilder()
             .generationSettings(makeGenerationSettings(entries))
-            .generationSettings(builder.build())
-            .mobSpawnSettings(makeSpawnSettings(extraSpawns))
+            .generationSettings(builder.build()).mobSpawnSettings(
+                makeSpawnSettings(extraSpawns, extraSpawnCosts))
+
             .hasPrecipitation(true)
             .temperature(temperature)
             .downfall(downfall)
@@ -67,11 +71,20 @@ class BiomeProvider(
         return builder.build()
     }
 
-    fun makeSpawnSettings(extraSpawns: List<Pair<MobCategory, MobSpawnSettings.SpawnerData>>): MobSpawnSettings {
+    fun makeSpawnSettings(
+        extraSpawns: List<Pair<MobCategory, MobSpawnSettings.SpawnerData>>,
+        extraSpawnCosts: List<Triple<EntityType<*>, Double, Double>>
+    ): MobSpawnSettings {
         val builder = makeDefaultSpawnSettings()
-        for (extraSpawn in extraSpawns) {
-            builder.addSpawn(extraSpawn.first, extraSpawn.second)
+
+        for ((category, spawner) in extraSpawns) {
+            builder.addSpawn(category, spawner)
         }
+
+        for ((entity, charge, budget) in extraSpawnCosts) {
+            builder.addMobCharge(entity, charge, budget)
+        }
+
         return builder.build()
     }
 
@@ -446,7 +459,16 @@ class BiomeProvider(
                 temperature = 0.5f,
                 downfall = 0.5f,
                 waterColor = 0x1b2447,
-                waterFogColor = 0x1b2447
+                waterFogColor = 0x1b2447,
+                listOf(
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
+                    ),
+                ),
+                extraSpawnCosts = listOf(
+                    Triple(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), 1.0, 0.1)
+                )
             )
         )
     }

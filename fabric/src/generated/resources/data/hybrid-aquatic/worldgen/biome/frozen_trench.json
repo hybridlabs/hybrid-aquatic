@@ -71,7 +71,12 @@
     ]
   ],
   "has_precipitation": true,
-  "spawn_costs": {},
+  "spawn_costs": {
+    "hybrid-aquatic:colossal_squid": {
+      "charge": 1.0,
+      "energy_budget": 0.1
+    }
+  },
   "spawners": {
     "ambient": [
       {
@@ -83,7 +88,14 @@
     ],
     "axolotls": [],
     "creature": [],
-    "hybrid-aquatic:cephalopod": [],
+    "hybrid-aquatic:cephalopod": [
+      {
+        "type": "hybrid-aquatic:colossal_squid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
     "hybrid-aquatic:critter": [],
     "hybrid-aquatic:crustacean": [],
     "hybrid-aquatic:fish": [],

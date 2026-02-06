@@ -8,7 +8,6 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
@@ -44,13 +43,8 @@ class ColossalSquidEntity(type: EntityType<out ColossalSquidEntity>, world: Leve
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.seaLevel - 48
-            val bottomY = world.seaLevel - 128
 
-            return random.nextInt(100) == 0 &&
-                    pos.y in bottomY..topY &&
-                    world.isWaterAt(pos) &&
-                    isDarkEnoughToSpawn(world, pos, random)
+            return pos.y in (world.seaLevel - 128)..(world.seaLevel - 48) && world.isWaterAt(pos)
         }
     }
 
