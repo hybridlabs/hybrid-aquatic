@@ -113,18 +113,6 @@ data class BiomeFeatureAddition(
             ),
 
             BiomeFeatureAddition(
-                HybridAquaticBiomeTags.SEAGRASS_BED,
-                GenerationStep.Decoration.UNDERGROUND_ORES,
-                HybridAquaticPlacedFeatures.AERATED_SAND_CIRCLE
-            ),
-
-            BiomeFeatureAddition(
-                HybridAquaticBiomeTags.SEAGRASS_BED,
-                GenerationStep.Decoration.UNDERGROUND_ORES,
-                HybridAquaticPlacedFeatures.SAND_CIRCLE
-            ),
-
-            BiomeFeatureAddition(
                 HybridAquaticBiomeTags.SULFURIC_CAVE,
                 GenerationStep.Decoration.UNDERGROUND_ORES,
                 HybridAquaticPlacedFeatures.SULFUR_DEPOSIT

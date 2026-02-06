@@ -131,6 +131,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SEAGRASS_BED)
             .addOptional(HybridAquaticBiomes.SEAGRASS_BED)
+            .addOptional(ResourceLocation("spawn", "seagrass_meadow"))
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.RED_MEADOW)
             .addOptional(HybridAquaticBiomes.RED_MEADOW)

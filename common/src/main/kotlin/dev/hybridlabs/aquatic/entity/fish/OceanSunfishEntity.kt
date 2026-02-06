@@ -57,7 +57,7 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.JELLYFISH
+                HybridAquaticEntityTags.ALL_JELLYFISH
             ),
             listOf(
                 HybridAquaticEntityTags.ALL_SHARKS

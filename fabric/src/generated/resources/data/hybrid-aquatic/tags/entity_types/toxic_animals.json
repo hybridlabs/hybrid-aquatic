@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:stonefish",
+    "hybrid-aquatic:lionfish",
+    "hybrid-aquatic:blowfish",
+    "minecraft:pufferfish"
+  ]
+}

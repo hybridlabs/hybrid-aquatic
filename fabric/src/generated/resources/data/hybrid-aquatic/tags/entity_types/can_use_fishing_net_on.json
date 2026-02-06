@@ -6,8 +6,8 @@
     "#hybrid-aquatic:all_crustaceans",
     "#hybrid-aquatic:all_cephalopods",
     "#hybrid-aquatic:all_mammals",
-    "#hybrid-aquatic:jellyfish",
-    "#hybrid-aquatic:critter",
+    "#hybrid-aquatic:all_jellyfish",
+    "#hybrid-aquatic:all_critters",
     "#hybrid-aquatic:turtle"
   ]
 }

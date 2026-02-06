@@ -44,7 +44,7 @@ class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) : HybridAqu
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
                 HybridAquaticEntityTags.ALL_CRUSTACEANS,
-                HybridAquaticEntityTags.CRITTER
+                HybridAquaticEntityTags.ALL_CRITTERS
             ),
             listOf(
                 HybridAquaticEntityTags.LARGE_CREATURES,

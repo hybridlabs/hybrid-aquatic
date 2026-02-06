@@ -7,9 +7,11 @@ import net.minecraft.world.entity.EntityType
 
 object HybridAquaticEntityTags {
     //#region Food Chain tags
+    val BAIT_FISH = create("bait_fish")
     val SMALL_CREATURES = create("small_creatures")
     val MEDIUM_CREATURES = create("medium_creatures")
     val LARGE_CREATURES = create("large_creatures")
+    val TOXIC_ANIMALS = create("toxic_animals")
     val OTTER_PREY = create("otter_prey")
 
     //#region Crustacean Tags
@@ -48,8 +50,8 @@ object HybridAquaticEntityTags {
 
     //#region Misc Creature Tags
     val TURTLE = create("turtle")
-    val CRITTER = create("critter")
-    val JELLYFISH = create("jellyfish")
+    val ALL_CRITTERS = create("all_critters")
+    val ALL_JELLYFISH = create("all_jellyfish")
 
     val CAN_USE_FISHING_NET_ON = create("can_use_fishing_net_on")
 

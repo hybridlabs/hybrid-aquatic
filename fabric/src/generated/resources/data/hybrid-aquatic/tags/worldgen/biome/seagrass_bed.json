@@ -4,6 +4,10 @@
     {
       "id": "hybrid-aquatic:seagrass_bed",
       "required": false
+    },
+    {
+      "id": "spawn:seagrass_meadow",
+      "required": false
     }
   ]
 }

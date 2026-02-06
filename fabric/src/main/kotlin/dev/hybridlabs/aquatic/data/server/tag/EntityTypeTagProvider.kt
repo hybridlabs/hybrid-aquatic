@@ -27,6 +27,27 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         //#endregion
 
         //#region Food Chain Tags
+        getOrCreateTagBuilder(HybridAquaticEntityTags.BAIT_FISH)
+            .add(
+                HybridAquaticEntityTypes.MACKEREL.get(),
+                HybridAquaticEntityTypes.HERRING.get(),
+                HybridAquaticEntityTypes.FLYING_FISH.get(),
+                HybridAquaticEntityTypes.SQUIRRELFISH.get(),
+                HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(),
+                EntityType.COD
+            )
+            .addOptional(ResourceLocation("fintastic", "minnow"))
+            .addOptional(ResourceLocation("spawn", "herring"))
+            .addOptional(ResourceLocation("alexsmobs", "flying_fish"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.TOXIC_ANIMALS)
+            .add(
+                HybridAquaticEntityTypes.STONEFISH.get(),
+                HybridAquaticEntityTypes.LIONFISH.get(),
+                HybridAquaticEntityTypes.BLOWFISH.get(),
+                EntityType.PUFFERFISH
+            )
+
         getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_CREATURES)
             .add(
                 HybridAquaticEntityTypes.CLOWNFISH.get(),
@@ -427,7 +448,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         //#endregion
 
         //#region Misc Creature Tags
-        getOrCreateTagBuilder(HybridAquaticEntityTags.CRITTER)
+        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_CRITTERS)
             .add(
                 HybridAquaticEntityTypes.SEA_SLUG.get(),
                 HybridAquaticEntityTypes.SEA_CUCUMBER.get(),
@@ -437,7 +458,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             )
             .addOptional(ResourceLocation("spawn", "clam"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.JELLYFISH)
+        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_JELLYFISH)
             .add(
                 HybridAquaticEntityTypes.CROWN_JELLYFISH.get(),
                 HybridAquaticEntityTypes.BARREL_JELLYFISH.get(),
@@ -471,8 +492,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addTag(HybridAquaticEntityTags.ALL_CRUSTACEANS)
             .addTag(HybridAquaticEntityTags.ALL_CEPHALOPODS)
             .addTag(HybridAquaticEntityTags.ALL_MAMMALS)
-            .addTag(HybridAquaticEntityTags.JELLYFISH)
-            .addTag(HybridAquaticEntityTags.CRITTER)
+            .addTag(HybridAquaticEntityTags.ALL_JELLYFISH)
+            .addTag(HybridAquaticEntityTags.ALL_CRITTERS)
             .addTag(HybridAquaticEntityTags.TURTLE)
         //#endregion
     }
