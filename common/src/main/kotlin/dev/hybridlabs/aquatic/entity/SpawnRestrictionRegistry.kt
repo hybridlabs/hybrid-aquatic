@@ -136,7 +136,7 @@ object SpawnRestrictionRegistry {
         setOf(
             HybridAquaticEntityTypes.OCTOPUS.get(),
         ).forEach { registerOctopus(it) }
-
+fn
         registerWaterCreature(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), ColossalSquidEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.GIANT_SQUID.get(), GiantSquidEntity::canSpawn)
         registerWaterCreature(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), UmbrellaOctopusEntity::canSpawn)

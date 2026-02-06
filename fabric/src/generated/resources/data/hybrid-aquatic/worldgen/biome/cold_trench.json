@@ -71,7 +71,20 @@
     ]
   ],
   "has_precipitation": true,
-  "spawn_costs": {},
+  "spawn_costs": {
+    "hybrid-aquatic:colossal_squid": {
+      "charge": 1.0,
+      "energy_budget": 0.1
+    },
+    "hybrid-aquatic:giant_squid": {
+      "charge": 0.9,
+      "energy_budget": 0.1
+    },
+    "hybrid-aquatic:umbrella_octopus": {
+      "charge": 0.8,
+      "energy_budget": 0.15
+    }
+  },
   "spawners": {
     "ambient": [
       {
@@ -83,7 +96,26 @@
     ],
     "axolotls": [],
     "creature": [],
-    "hybrid-aquatic:cephalopod": [],
+    "hybrid-aquatic:cephalopod": [
+      {
+        "type": "hybrid-aquatic:colossal_squid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "hybrid-aquatic:giant_squid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "hybrid-aquatic:umbrella_octopus",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 7
+      }
+    ],
     "hybrid-aquatic:critter": [],
     "hybrid-aquatic:crustacean": [],
     "hybrid-aquatic:fish": [],

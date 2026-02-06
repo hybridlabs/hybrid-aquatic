@@ -72,7 +72,16 @@
     ]
   ],
   "has_precipitation": true,
-  "spawn_costs": {},
+  "spawn_costs": {
+    "hybrid-aquatic:nautilus": {
+      "charge": 0.7,
+      "energy_budget": 0.2
+    },
+    "hybrid-aquatic:umbrella_octopus": {
+      "charge": 0.8,
+      "energy_budget": 0.15
+    }
+  },
   "spawners": {
     "ambient": [
       {
@@ -84,7 +93,20 @@
     ],
     "axolotls": [],
     "creature": [],
-    "hybrid-aquatic:cephalopod": [],
+    "hybrid-aquatic:cephalopod": [
+      {
+        "type": "hybrid-aquatic:nautilus",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "hybrid-aquatic:umbrella_octopus",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 7
+      }
+    ],
     "hybrid-aquatic:critter": [],
     "hybrid-aquatic:crustacean": [],
     "hybrid-aquatic:fish": [],

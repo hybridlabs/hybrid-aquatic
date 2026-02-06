@@ -514,10 +514,8 @@ class EntitySpawnConfigGenerator {
         addCephalopod(
             HybridAquaticEntityTypes.ARROW_SQUID.get(),
             listOf(
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH,
-                HybridAquaticBiomeTags.COLD_OCEANS,
-                HybridAquaticBiomeTags.ARCTIC_OCEANS),
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.TEMPERATE_OCEANS),
             10, 1, 2
         )
 
@@ -525,7 +523,6 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.FIREFLY_SQUID.get(),
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.TROPICAL_TRENCH,
                 HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.REEF),
             10, 1, 2
@@ -547,59 +544,6 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS
             ),
-            10, 1, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
-            listOf(
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.TROPICAL_TRENCH),
-            10, 1, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.NAUTILUS.get(),
-            listOf(
-                HybridAquaticBiomeTags.DEEP_REEF,
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.TROPICAL_TRENCH),
-            10, 1, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.COLOSSAL_SQUID.get(),
-            listOf(
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH),
-            1, 1, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.GIANT_SQUID.get(),
-            listOf(
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.TROPICAL_TRENCH),
-            1, 1, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(),
-            listOf(
-                HybridAquaticBiomeTags.DEEP_REEF,
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH,
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.TROPICAL_TRENCH),
-            10, 1, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
-            listOf(
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.TROPICAL_TRENCH),
             10, 1, 1
         )
         //#endregion

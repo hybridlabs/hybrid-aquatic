@@ -75,6 +75,10 @@
     "hybrid-aquatic:colossal_squid": {
       "charge": 1.0,
       "energy_budget": 0.1
+    },
+    "hybrid-aquatic:umbrella_octopus": {
+      "charge": 0.8,
+      "energy_budget": 0.15
     }
   },
   "spawners": {
@@ -94,6 +98,12 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 1
+      },
+      {
+        "type": "hybrid-aquatic:umbrella_octopus",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 7
       }
     ],
     "hybrid-aquatic:critter": [],

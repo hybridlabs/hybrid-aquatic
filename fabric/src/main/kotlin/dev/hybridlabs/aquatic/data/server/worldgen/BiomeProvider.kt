@@ -383,24 +383,32 @@ class BiomeProvider(
                 temperature = 0.2f,
                 downfall = 0.0f,
                 waterColor = 0x1b2447,
-                waterFogColor = 0x1b2447
-            )
-        )
-
-        entries.add(
-            HybridAquaticBiomes.DEEP_CORAL_REEF,
-            create(
-                entries,
-                temperature = 0.2f,
-                downfall = 0.0f,
-                waterColor = 0x3F76E4,
-                waterFogColor = 0x050533
-            ) {
-                addFeature(
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION)
+                waterFogColor = 0x1b2447,
+                listOf(
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                    ),
+                ),
+                extraSpawnCosts = listOf(
+                    Triple(HybridAquaticEntityTypes.GIANT_SQUID.get(), 1.0, 0.1),
+                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.7, 0.15),
+                    Triple(HybridAquaticEntityTypes.NAUTILUS.get(), 0.7, 0.2),
+                    Triple(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 0.8, 0.15),
                 )
-            }
+            )
         )
 
         entries.add(
@@ -410,7 +418,36 @@ class BiomeProvider(
                 temperature = 0.5f,
                 downfall = 0.5f,
                 waterColor = 0x1b2447,
-                waterFogColor = 0x1b2447
+                waterFogColor = 0x1b2447,
+                listOf(
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
+                    ),
+                ),
+                extraSpawnCosts = listOf(
+                    Triple(HybridAquaticEntityTypes.GIANT_SQUID.get(), 1.0, 0.1),
+                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.7, 0.15),
+                    Triple(HybridAquaticEntityTypes.NAUTILUS.get(), 0.7, 0.2),
+                    Triple(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), 0.7, 0.2),
+                    Triple(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 0.8, 0.15),
+                )
             )
         )
 
@@ -421,24 +458,37 @@ class BiomeProvider(
                 temperature = 0.5f,
                 downfall = 0.5f,
                 waterColor = 0x1b2447,
-                waterFogColor = 0x1b2447
-            )
-        )
-
-        entries.add(
-            HybridAquaticBiomes.TROPICAL_DEEP_CORAL_REEF,
-            create(
-                entries,
-                temperature = 0.5f,
-                downfall = 0.5f,
-                waterColor = 0x45ADF2,
-                waterFogColor = 0x041633
-            ) {
-                addFeature(
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION)
+                waterFogColor = 0x1b2447,
+                listOf(
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
+                    ),
+                ),
+                extraSpawnCosts = listOf(
+                    Triple(HybridAquaticEntityTypes.GIANT_SQUID.get(), 1.0, 0.1),
+                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
+                    Triple(HybridAquaticEntityTypes.NAUTILUS.get(), 0.7, 0.2),
+                    Triple(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), 0.7, 0.2),
+                    Triple(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 0.8, 0.15),
                 )
-            }
+            )
         )
 
         entries.add(
@@ -448,7 +498,26 @@ class BiomeProvider(
                 temperature = 0.5f,
                 downfall = 0.5f,
                 waterColor = 0x1b2447,
-                waterFogColor = 0x1b2447
+                waterFogColor = 0x1b2447,
+                listOf(
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
+                    ),
+                ),
+                extraSpawnCosts = listOf(
+                    Triple(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), 1.0, 0.1),
+                    Triple(HybridAquaticEntityTypes.GIANT_SQUID.get(), 0.9, 0.1),
+                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
+                )
             )
         )
 
@@ -465,11 +534,76 @@ class BiomeProvider(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
                         MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
                     ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
+                    ),
                 ),
                 extraSpawnCosts = listOf(
-                    Triple(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), 1.0, 0.1)
+                    Triple(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), 1.0, 0.1),
+                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
                 )
             )
+        )
+
+        entries.add(
+            HybridAquaticBiomes.DEEP_CORAL_REEF,
+            create(
+                entries,
+                temperature = 0.2f,
+                downfall = 0.0f,
+                waterColor = 0x3F76E4,
+                waterFogColor = 0x050533,
+                listOf(
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                    ),
+                ),
+                extraSpawnCosts = listOf(
+                    Triple(HybridAquaticEntityTypes.NAUTILUS.get(), 0.7, 0.2),
+                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
+                )
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION)
+                )
+            }
+        )
+
+        entries.add(
+            HybridAquaticBiomes.TROPICAL_DEEP_CORAL_REEF,
+            create(
+                entries,
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x45ADF2,
+                waterFogColor = 0x041633,
+                listOf(
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                    ),
+                ),
+                extraSpawnCosts = listOf(
+                    Triple(HybridAquaticEntityTypes.NAUTILUS.get(), 0.7, 0.2),
+                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
+                )
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION)
+                )
+            }
         )
     }
 
