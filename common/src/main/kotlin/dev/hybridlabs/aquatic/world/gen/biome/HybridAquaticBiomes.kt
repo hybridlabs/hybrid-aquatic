@@ -514,15 +514,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -542,15 +535,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -570,15 +556,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -598,15 +577,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -626,15 +598,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -654,15 +619,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -682,15 +640,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -711,15 +662,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -739,15 +683,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -767,15 +704,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -795,15 +725,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -825,15 +748,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -853,15 +769,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -881,15 +790,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -909,15 +811,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -937,15 +832,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -965,15 +853,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -993,15 +874,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -1021,15 +895,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -1049,15 +916,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -1077,15 +937,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -1107,15 +960,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -1135,15 +981,8 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
@@ -1163,22 +1002,15 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.WEIRDNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
                     -0.33f,
+                    -1.0f,
                     false
                 )
             )
@@ -1191,22 +1023,15 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.WEIRDNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
                     -0.33f,
+                    -1.0f,
                     false
                 )
             )
@@ -1219,22 +1044,15 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.WEIRDNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
                     -0.33f,
+                    -1.0f,
                     false
                 )
             )
@@ -1247,22 +1065,15 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.WEIRDNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
                     -0.33f,
+                    -1.0f,
                     false
                 )
             )
@@ -1275,22 +1086,15 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.WEIRDNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
                     -0.33f,
+                    -1.0f,
                     false
                 )
             )
@@ -1303,22 +1107,15 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.WEIRDNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
                     -0.33f,
+                    -1.0f,
                     false
                 )
             )
@@ -1331,22 +1128,15 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.WEIRDNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
                     -0.33f,
+                    -1.0f,
                     false
                 )
             )
@@ -1359,22 +1149,15 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.69f,
-                    -0.65f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.DEPTH,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.4f,
-                    0.5f,
+                    -0.7f,
+                    -0.64f,
                     false
                 ),
                 SubBiomeMatcher.Criterion.ofRange(
                     SubBiomeMatcher.CriterionTargets.WEIRDNESS,
                     SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
                     -0.33f,
+                    -1.0f,
                     false
                 )
             )
