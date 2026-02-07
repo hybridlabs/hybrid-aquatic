@@ -14,25 +14,21 @@ object HybridAquaticPlacedFeatures {
     val DEEP_OCEAN_VEGETATION = register("deep_ocean_vegetation")
     val CORAL_REEF_VEGETATION = register("coral_reef_vegetation")
     val RED_MEADOW_VEGETATION = register("red_meadow_vegetation")
-
     val SARGASSUM = register("sargassum")
     val FLOATING_SARGASSUM = register("floating_sargassum")
     val BULL_KELP = register("bull_kelp")
-
     val WATER_LETTUCE = register("water_lettuce")
-
     val JUNGLE_LILY_PAD = register("jungle_lily_pad")
+    val RED_ALGAE_PATCH = register("red_algae_patch")
+    val SEA_LETTUCE_PATCH = register("sea_lettuce_patch")
+    val DUNEGRASS_PATCH = register("dunegrass_patch")
 
-    val AERATED_SAND = register("aerated_sand")
     val AERATED_SAND_CIRCLE = register("aerated_sand_circle")
     val SAND_CIRCLE = register("sand_circle")
     val SULFUR_DEPOSIT = register("sulfur_deposit")
     val DISK_SUSPICIOUS_SAND = register("disk_suspicious_sand")
     val DISK_SUSPICIOUS_RED_SAND = register("disk_suspicious_red_sand")
 
-    val RED_ALGAE_PATCH = register("red_algae_patch")
-    val SEA_LETTUCE_PATCH = register("sea_lettuce_patch")
-    val DUNEGRASS_PATCH = register("dunegrass_patch")
 
     val GIANT_CLAM_PATCH = register("giant_clam_patch")
     val OYSTER_BED = register("oyster_bed")

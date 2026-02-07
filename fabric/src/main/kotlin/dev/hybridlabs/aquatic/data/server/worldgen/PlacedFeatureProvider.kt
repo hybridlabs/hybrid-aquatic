@@ -156,26 +156,6 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticPlacedFeatures.AERATED_SAND, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.AERATED_SAND), listOf(
-                    RarityFilter.onAverageOnceEvery(3),
-                    InSquarePlacement.spread(),
-                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
-
-                    BlockPredicateFilter.forPredicate(
-                        BlockPredicate.matchesFluids(
-                            BlockPos(0, 1, 0),
-                            Fluids.WATER
-                        )
-                    ),
-
-                    BiomeFilter.biome()
-                )
-            )
-        )
-
-
-        entries.add(
             HybridAquaticPlacedFeatures.AERATED_SAND_CIRCLE, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.AERATED_SAND_CIRCLE), listOf(
                     RarityFilter.onAverageOnceEvery(5),

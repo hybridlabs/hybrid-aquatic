@@ -281,10 +281,6 @@ class BiomeProvider(
                     entries.ref(HybridAquaticPlacedFeatures.AERATED_SAND_CIRCLE)
                 )
                 addFeature(
-                    GenerationStep.Decoration.UNDERGROUND_ORES,
-                    entries.ref(HybridAquaticPlacedFeatures.AERATED_SAND)
-                )
-                addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     entries.ref(AquaticPlacements.SEAGRASS_WARM)
                 )

@@ -211,18 +211,6 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticConfiguredFeatures.AERATED_SAND,
-            ConfiguredFeature(
-                Feature.SIMPLE_BLOCK,
-                SimpleBlockConfiguration(
-                    BlockStateProvider.simple(
-                        HybridAquaticBlocks.AERATED_SAND.get().defaultBlockState()
-                    )
-                )
-            )
-        )
-
-        entries.add(
             HybridAquaticConfiguredFeatures.AERATED_SAND_CIRCLE,
             ConfiguredFeature(
                 Feature.DISK,

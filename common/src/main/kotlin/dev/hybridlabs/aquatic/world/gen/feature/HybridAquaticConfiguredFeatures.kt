@@ -23,7 +23,6 @@ object HybridAquaticConfiguredFeatures {
 
     val JUNGLE_LILY_PAD = register("jungle_lily_pad")
 
-    val AERATED_SAND = register("aerated_sand")
     val AERATED_SAND_CIRCLE = register("aerated_sand_circle")
     val SAND_CIRCLE = register("sand_circle")
     val SULFUR_DEPOSIT = register("sulfur_deposit")
