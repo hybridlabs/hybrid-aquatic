@@ -20,6 +20,7 @@ import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.WHALE_
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
 import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
+import dev.hybridlabs.aquatic.client.render.HybridAquaticFluidRenderer
 import dev.hybridlabs.aquatic.client.render.armor.*
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
@@ -55,6 +56,7 @@ object HybridAquaticClient : ClientModInitializer {
     override fun onInitializeClient() {
         HybridAquaticEntityModelLayers
         HybridAquaticClientNetworking
+        HybridAquaticFluidRenderer()
 
         registerRenderShapes()
         registerBlockEntityRenderers()
