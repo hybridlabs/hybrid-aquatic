@@ -45,6 +45,7 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::RecipeProvider)
         pack.addProvider(::SeaMessageProvider)
         pack.addProvider(::StructureSpawnModifierProvider)
+        pack.addProvider(::FluidTagProvider)
     }
 
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
