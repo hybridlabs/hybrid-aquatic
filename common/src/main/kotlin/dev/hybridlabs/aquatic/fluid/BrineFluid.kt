@@ -85,7 +85,7 @@ abstract class BrineFluid : FlowingFluid() {
     }
 
     override fun isSame(fluid: Fluid): Boolean {
-        return fluid === HybridAquaticFluids.BRINE || fluid === HybridAquaticFluids.FLOWING_BRINE
+        return fluid == HybridAquaticFluids.BRINE || fluid == HybridAquaticFluids.FLOWING_BRINE
     }
 
     public override fun getDropOff(level: LevelReader): Int {
