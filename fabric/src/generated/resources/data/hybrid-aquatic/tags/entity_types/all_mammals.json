@@ -5,6 +5,22 @@
     "#hybrid-aquatic:seal",
     "#hybrid-aquatic:dolphin",
     "#hybrid-aquatic:whale",
-    "hybrid-aquatic:otter"
+    "hybrid-aquatic:otter",
+    {
+      "id": "wonderoussea:sea_otter",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:sea_otter_swimming",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:sea_otter_tagged",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:sea_otter_tagged_swimming",
+      "required": false
+    }
   ]
 }

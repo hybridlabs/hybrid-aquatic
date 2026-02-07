@@ -19,6 +19,7 @@ object HybridAquaticEntityTags {
     val CRAB = create("crab")
     val LOBSTER = create("lobster")
     val SHRIMP = create("shrimp")
+    val KRILL = create("krill")
 
     //#region Cephalopod Tags
     val ALL_CEPHALOPODS = create("all_cephalopods")

@@ -9,6 +9,14 @@
     {
       "id": "spawn:clam",
       "required": false
+    },
+    {
+      "id": "wonderoussea:marine_flatworm",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:blue_glaucus",
+      "required": false
     }
   ]
 }

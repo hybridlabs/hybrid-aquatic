@@ -1,13 +1,12 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:shrimp",
     {
-      "id": "fintastic:fairy_shrimp",
+      "id": "bountiful_critters:krill",
       "required": false
     },
     {
-      "id": "alexsmobs:mantis_shrimp",
+      "id": "wonderoussea:antarctic_krill",
       "required": false
     }
   ]

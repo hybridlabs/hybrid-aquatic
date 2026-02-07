@@ -83,6 +83,70 @@
     {
       "id": "rainbowreef:tang",
       "required": false
+    },
+    {
+      "id": "wonderoussea:tiger_scatfish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:tiger_scatfish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:threadfin_lookdown",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:threadfin_lookdown_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:teira_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:teira_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:atlantic_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:atlantic_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:golden_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:golden_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pacific_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pacific_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pinnate_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pinnate_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:orbicular_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:orbicular_spadefish_2",
+      "required": false
     }
   ]
 }
