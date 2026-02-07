@@ -96,6 +96,14 @@ abstract class BrineFluid : FlowingFluid() {
         return 5
     }
 
+    override fun getAmount(state: FluidState): Int {
+        return 8
+    }
+
+    override fun isSource(state: FluidState): Boolean {
+        return false
+    }
+
     public override fun canBeReplacedWith(
         fluidState: FluidState,
         blockReader: BlockGetter,
