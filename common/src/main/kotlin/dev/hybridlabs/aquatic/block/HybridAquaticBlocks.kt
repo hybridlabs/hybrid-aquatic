@@ -58,7 +58,7 @@ object HybridAquaticBlocks {
 
     val BRINE = register("brine") {
         LiquidBlock(
-            HybridAquaticFluids.BRINE.get() as FlowingFluid, Properties.of()
+            HybridAquaticFluids.BRINE.get(), Properties.of()
                 .mapColor(MapColor.COLOR_YELLOW)
                 .replaceable()
                 .noCollission()

@@ -9,7 +9,7 @@ object HybridAquaticFluids {
     val FLOWING_BRINE = register("flowing_brine") { BrineFluid.Flowing() }
     val BRINE = register("brine") { BrineFluid.Source() }
 
-    private fun register(id: String, fluid: Supplier<Fluid>): RegistryObject<Fluid> {
+    private fun <T: Fluid> register(id: String, fluid: Supplier<T>): RegistryObject<T> {
         return CommonClass.FLUIDS.register(id, fluid)
     }
 }
