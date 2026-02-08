@@ -784,7 +784,7 @@ class EntitySpawnConfigGenerator {
             1, 1, 2
         )
 
-        addMammal(
+        addSirenian(
             HybridAquaticEntityTypes.DUGONG.get(),
             listOf(
                 HybridAquaticBiomeTags.SEAGRASS_BED
@@ -1057,6 +1057,23 @@ class EntitySpawnConfigGenerator {
     }
 
     private fun addMammal(
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
+        weight: Int,
+        minGroup: Int,
+        maxGroup: Int,
+    ) {
+        add(
+            entityType,
+            spawnTags,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL"),
+            weight,
+            minGroup,
+            maxGroup
+        )
+    }
+
+    private fun addSirenian(
         entityType: EntityType<*>,
         spawnTags: List<TagKey<Biome>>,
         weight: Int,

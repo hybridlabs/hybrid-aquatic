@@ -1,13 +1,11 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
@@ -17,11 +15,11 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.BreathAirGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
-import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -33,8 +31,10 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "unused", "DEPRECATION")
 open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenianEntity>, world: Level) :
-    Animal(type, world), GeoEntity {
+    WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
+    var prevRoll: Float = 0f
+    var currentRoll: Float = 0.0f
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -62,6 +62,48 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         return 2
     }
 
+    override fun getMobType(): MobType {
+        return MobType.WATER
+    }
+
+    override fun canBreatheUnderwater(): Boolean {
+        return true
+    }
+
+    override fun isPushedByFluid(): Boolean {
+        return false
+    }
+
+    override fun tick() {
+        super.tick()
+        prevRoll = currentRoll
+    }
+
+    override fun aiStep() {
+
+        prevRoll = currentRoll
+        var targetRoll = ((this.yRot - this.yRotO) * 0.1f).coerceIn(-0.45f, 0.45f)
+        targetRoll = -targetRoll
+        currentRoll += (targetRoll - currentRoll) * 0.05f
+
+        val vec3d = this.deltaMovement
+        if (!this.onGround() && this.isSwimming && vec3d.y < 0.0) {
+            this.deltaMovement = vec3d.multiply(1.0, 0.6, 1.0)
+        }
+
+        super.aiStep()
+    }
+
+    override fun travel(travelVector: Vec3) {
+        if (this.isEffectiveAi && this.isInWater) {
+            this.moveRelative(this.speed, travelVector)
+            this.move(MoverType.SELF, this.deltaMovement)
+            this.deltaMovement = deltaMovement.scale(0.9)
+        } else {
+            super.travel(travelVector)
+        }
+    }
+
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
@@ -73,10 +115,6 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         this.yRot = 0.0f
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
-    }
-
-    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): DugongEntity? {
-        return HybridAquaticEntityTypes.DUGONG.get().create(p0)
     }
 
     protected open fun getMinSize(): Int {
@@ -128,14 +166,6 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         return 0.3f
     }
 
-    override fun aiStep() {
-        super.aiStep()
-        val vec3d = this.deltaMovement
-        if (!this.onGround() && this.isSwimming && vec3d.y < 0.0) {
-            this.deltaMovement = vec3d.multiply(1.0, 0.6, 1.0)
-        }
-    }
-
     companion object {
         val SIRENIAN_SIZE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HybridAquaticSirenianEntity::class.java, EntityDataSerializers.INT)
@@ -157,8 +187,7 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
             val bottomY = world.seaLevel - 32
 
             return pos.y in bottomY..topY &&
-                    world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    world.isWaterAt(pos)
         }
     }
 }

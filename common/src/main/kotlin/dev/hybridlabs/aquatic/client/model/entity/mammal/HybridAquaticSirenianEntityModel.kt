@@ -2,11 +2,13 @@ package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticSirenianEntity
+import net.minecraft.client.Minecraft
+import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
+import kotlin.math.abs
 
 @Suppress("OVERRIDE_DEPRECATION")
 abstract class HybridAquaticSirenianEntityModel<T : HybridAquaticSirenianEntity>(private val id: String) :
@@ -30,15 +32,34 @@ abstract class HybridAquaticSirenianEntityModel<T : HybridAquaticSirenianEntity>
     override fun setCustomAnimations(
         animatable: T,
         instanceId: Long,
-        animationState: AnimationState<T>,
+        animationState: AnimationState<T>
     ) {
-        val head = animationProcessor.getBone("head")
+        super.setCustomAnimations(animatable, instanceId, animationState)
 
-        if (head != null) {
-            val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
-
-            head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
-            head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
+        if (!animatable.isInWater) {
+            return
         }
+
+        val deltaTime = Minecraft.getInstance().deltaFrameTime
+        val body = animationProcessor.getBone(PartNames.BODY)
+        val tail = animationProcessor.getBone(PartNames.TAIL)
+
+        val tilt = Mth.clamp(
+            Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot),
+            -45f, 45f
+        )
+
+        val yawDiff = animatable.yRot - animatable.yRotO
+        val targetRoll = Mth.clamp(yawDiff * 3f, -30f, 30f)
+
+        val turnSpeed = abs(yawDiff)
+        val smoothing = Mth.clamp(0.05f + turnSpeed * 0.02f, 0.05f, 0.25f)
+        animatable.currentRoll = Mth.lerp(smoothing, animatable.currentRoll, targetRoll)
+
+        val roll = Mth.lerp(deltaTime, animatable.prevRoll, animatable.currentRoll)
+
+        body.rotX = tilt * -Mth.DEG_TO_RAD
+        body.rotZ = roll * -Mth.DEG_TO_RAD
+        tail?.rotY += roll * Mth.DEG_TO_RAD
     }
 }

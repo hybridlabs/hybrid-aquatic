@@ -18,8 +18,6 @@ import net.minecraft.world.phys.Vec3
 
 @Suppress("DEPRECATION")
 class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HybridAquaticSirenianEntity(type, world) {
-    var prevRoll: Float = 0f
-    var currentRoll: Float = 0.0f
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -80,32 +78,6 @@ class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HybridAqu
         return 1
     }
 
-    override fun tick() {
-        super.tick()
-        prevRoll = currentRoll
-    }
-
-    override fun travel(travelVector: Vec3) {
-        if (this.isEffectiveAi && this.isInWater) {
-            this.moveRelative(this.speed, travelVector)
-            this.move(MoverType.SELF, this.deltaMovement)
-            this.deltaMovement = deltaMovement.scale(0.9)
-        } else {
-            super.travel(travelVector)
-        }
-    }
-
-    override fun aiStep() {
-
-        prevRoll = currentRoll
-        var targetRoll = ((this.yRot - this.yRotO) * 0.1f).coerceIn(-0.45f, 0.45f)
-        targetRoll = -targetRoll
-        currentRoll += (targetRoll - currentRoll) * 0.05f
-
-        this.updateSwingTime()
-        super.aiStep()
-    }
-
     companion object {
 
         fun createMobAttributes(): AttributeSupplier.Builder {
@@ -115,21 +87,6 @@ class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HybridAqu
                 .add(Attributes.ATTACK_DAMAGE, 6.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 12.0)
-        }
-
-        fun canSpawn(
-            type: EntityType<out DugongEntity>,
-            world: ServerLevelAccessor,
-            reason: MobSpawnType,
-            pos: BlockPos,
-            random: RandomSource,
-        ): Boolean {
-            val topY = world.seaLevel - 1
-            val bottomY = world.seaLevel - 32
-
-            return pos.y in bottomY..topY &&
-                    world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos)
         }
     }
 }
