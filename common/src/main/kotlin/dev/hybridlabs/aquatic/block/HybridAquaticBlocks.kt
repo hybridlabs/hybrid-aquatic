@@ -76,7 +76,7 @@ object HybridAquaticBlocks {
     }
 
     val AERATED_SAND = register("aerated_sand") { AeratedSandBlock(14406560, Properties.copy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
-    val BUBBLE_GEYSER = register("bubble_geyser") { AeratedSandBlock(14406560, Properties.copy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
+    val BUBBLE_GEYSER = register("bubble_geyser") { BubbleGeyserBlock(14406560, Properties.copy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
     val WHITE_SAND = register("white_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
     val WHITE_SANDSTONE = register("white_sandstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
 

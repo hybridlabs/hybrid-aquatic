@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState
 @Suppress("OVERRIDE_DEPRECATION")
 class BubbleGeyserBlock(dustColor: Int, settings: Properties) : SandBlock(dustColor, settings) {
     override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
-        DecorativeBubbleColumnBlock.updateColumn(level, pos.above(), state)
+        BubbleNetBlock.updateColumn(level, pos.above(), state)
     }
 
     override fun updateShape(
