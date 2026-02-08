@@ -84,6 +84,7 @@ object HybridAquatic : ModInitializer {
 
         SpawnRestrictionRegistry.registerSpawnRestrictions()
 
+        HybridAquaticParticles.registerParticles()
 
         registerDynamicRegistries()
         registerWanderingTraderTrades()

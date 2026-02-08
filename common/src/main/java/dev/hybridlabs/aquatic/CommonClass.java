@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic;
 
 import dev.hybridlabs.aquatic.platform.Services;
 import dev.hybridlabs.aquatic.platform.registration.RegistrationProvider;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -51,7 +52,8 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.FEATURE, MOD_ID);
     public static final RegistrationProvider<LootPoolEntryType> LOOT_POOL_ENTRY_TYPE =
             RegistrationProvider.get(BuiltInRegistries.LOOT_POOL_ENTRY_TYPE, MOD_ID);
-
+		public static final RegistrationProvider<ParticleType<?>> PARTICLE_TYPE = RegistrationProvider.get(BuiltInRegistries.PARTICLE_TYPE, MOD_ID);
+	
     public static final Path CONFIG_FILE = Services.PLATFORM.getConfigDir().resolve(MOD_ID + ".json");
 
     public static ResourceLocation locate(String path) {
