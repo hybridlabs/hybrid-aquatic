@@ -150,7 +150,7 @@ object HybridAquaticForge {
         val world = entity.level()
 
         if(entity.isEyeInFluid(FluidTags.WATER) &&
-            world.getBlockState(BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()))
+            world.getBlockState(BlockPos.containing(entity.x, entity.eyeY, entity.z))
                 .`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get())) {
             event.setCanBreathe(true)
             event.setCanRefillAir(true)

@@ -162,6 +162,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BAMBOO_CRATE.get() to "Bamboo Crate",
             HybridAquaticBlocks.GRASSY_SAND.get() to "Grassy Sand",
             HybridAquaticBlocks.AERATED_SAND.get() to "Aerated Sand",
+            HybridAquaticBlocks.BUBBLE_GEYSER.get() to "Bubble Geyser",
             HybridAquaticBlocks.WHITE_SAND.get() to "White Sand",
             HybridAquaticBlocks.WHITE_SANDSTONE.get() to "White Sandstone",
             HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get() to "Suspicious Red Sand",

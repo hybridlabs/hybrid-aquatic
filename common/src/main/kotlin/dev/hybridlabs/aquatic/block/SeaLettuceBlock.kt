@@ -35,7 +35,7 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HybridAquaticBlocks.AERATED_SAND.get())
+        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HybridAquaticBlocks.AERATED_SAND.get()) && !floor.`is`(HybridAquaticBlocks.BUBBLE_GEYSER.get())
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {

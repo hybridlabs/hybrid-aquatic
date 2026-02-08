@@ -30,7 +30,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 import java.util.*
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class DecorativeNonPassableBubbleColumnBlock(settings: Properties): Block(settings), BucketPickup {
+class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
     init {
         this.registerDefaultState(stateDefinition.any())
     }
@@ -72,7 +72,7 @@ class DecorativeNonPassableBubbleColumnBlock(settings: Properties): Block(settin
         facingPos: BlockPos
     ): BlockState {
         level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level))
-        if (!state.canSurvive(level, currentPos) || facing == Direction.DOWN || facing == Direction.UP && !facingState.`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get()) && canExistIn(facingState)) {
+        if (!state.canSurvive(level, currentPos) || facing == Direction.DOWN || facing == Direction.UP && !facingState.`is`(HybridAquaticBlocks.BUBBLE_NET.get()) && canExistIn(facingState)) {
             level.scheduleTick(currentPos, this, CHECK_PERIOD)
         }
 
@@ -81,7 +81,7 @@ class DecorativeNonPassableBubbleColumnBlock(settings: Properties): Block(settin
 
     override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
         val blockstate = level.getBlockState(pos.below())
-        return blockstate.`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get()) || blockstate.`is`(HybridAquaticBlocks.AERATED_SAND.get())
+        return blockstate.`is`(HybridAquaticBlocks.BUBBLE_NET.get()) || blockstate.`is`(HybridAquaticBlocks.BUBBLE_GEYSER.get())
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
@@ -147,13 +147,13 @@ class DecorativeNonPassableBubbleColumnBlock(settings: Properties): Block(settin
         }
 
         fun canExistIn(state: BlockState): Boolean {
-            return state.`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get()) || state.`is`(Blocks.WATER) && state.fluidState.amount >= 8 && state.fluidState.isSource
+            return state.`is`(HybridAquaticBlocks.BUBBLE_NET.get()) || state.`is`(Blocks.WATER) && state.fluidState.amount >= 8 && state.fluidState.isSource
         }
 
         fun getColumnState(belowState: BlockState): BlockState {
             return when {
-                belowState.`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get()) -> belowState
-                belowState.`is`(HybridAquaticBlocks.AERATED_SAND.get()) -> HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get().defaultBlockState()
+                belowState.`is`(HybridAquaticBlocks.BUBBLE_NET.get()) -> belowState
+                belowState.`is`(HybridAquaticBlocks.BUBBLE_GEYSER.get()) -> HybridAquaticBlocks.BUBBLE_NET.get().defaultBlockState()
                 else -> Blocks.WATER.defaultBlockState()
             }
         }

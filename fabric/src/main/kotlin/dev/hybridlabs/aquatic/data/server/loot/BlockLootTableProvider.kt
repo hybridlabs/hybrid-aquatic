@@ -461,6 +461,10 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable()
         }
 
+        add(HybridAquaticBlocks.BUBBLE_NET.get()) { block ->
+            LootTable.lootTable()
+        }
+
         // generate remaining drops
         BuiltInRegistries.BLOCK
             .filter(filterHybridAquatic(BuiltInRegistries.BLOCK))

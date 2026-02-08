@@ -122,6 +122,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.CHERRY_CRATE.get(),
                 HybridAquaticBlocks.BAMBOO_CRATE.get(),
                 HybridAquaticBlocks.AERATED_SAND.get(),
+                HybridAquaticBlocks.BUBBLE_GEYSER.get(),
             ).forEach { block ->
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP)
             }
@@ -244,6 +245,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
             createNonTemplateModelBlock(
                 HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get(),
+                Blocks.WATER
+            )
+
+            createNonTemplateModelBlock(
+                HybridAquaticBlocks.BUBBLE_NET.get(),
                 Blocks.WATER
             )
         }

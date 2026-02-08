@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument
-import net.minecraft.world.level.material.FlowingFluid
 import net.minecraft.world.level.material.MapColor
 import net.minecraft.world.level.material.PushReaction
 import java.util.function.Supplier
@@ -77,6 +76,7 @@ object HybridAquaticBlocks {
     }
 
     val AERATED_SAND = register("aerated_sand") { AeratedSandBlock(14406560, Properties.copy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
+    val BUBBLE_GEYSER = register("bubble_geyser") { AeratedSandBlock(14406560, Properties.copy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
     val WHITE_SAND = register("white_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
     val WHITE_SANDSTONE = register("white_sandstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
 
@@ -380,8 +380,8 @@ object HybridAquaticBlocks {
         DecorativeBubbleColumnBlock(Properties.copy(Blocks.BUBBLE_COLUMN))
     }
 
-    val DECORATIVE_NON_PASSABLE_BUBBLE_COLUMN = register("decorative_non_passable_bubble_column") {
-        DecorativeNonPassableBubbleColumnBlock(Properties.copy(Blocks.BUBBLE_COLUMN))
+    val BUBBLE_NET = register("bubble_net") {
+        BubbleNetBlock(Properties.copy(Blocks.BUBBLE_COLUMN))
     }
 
     private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block ): PlushieBlock {

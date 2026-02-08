@@ -14,9 +14,7 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.BonemealableBlock
 import net.minecraft.world.level.block.BushBlock
 import net.minecraft.world.level.block.LiquidBlockContainer
-import net.minecraft.world.level.block.TallSeagrassBlock
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
 import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
@@ -35,7 +33,7 @@ class ShortRedAlgaeBlock(settings: Properties?) : BushBlock(settings), Bonemeala
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HybridAquaticBlocks.AERATED_SAND.get())
+        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HybridAquaticBlocks.AERATED_SAND.get()) && !floor.`is`(HybridAquaticBlocks.BUBBLE_GEYSER.get())
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
