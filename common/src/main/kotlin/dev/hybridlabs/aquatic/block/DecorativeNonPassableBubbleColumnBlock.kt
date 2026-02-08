@@ -30,7 +30,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 import java.util.*
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class DecorativeBubbleColumnBlock(settings: Properties): Block(settings), BucketPickup {
+class DecorativeNonPassableBubbleColumnBlock(settings: Properties): Block(settings), BucketPickup {
     init {
         this.registerDefaultState(stateDefinition.any())
     }
@@ -101,6 +101,31 @@ class DecorativeBubbleColumnBlock(settings: Properties): Block(settings), Bucket
         return Fluids.WATER.pickupSound
     }
 
+    override fun isPathfindable(
+        state: BlockState,
+        level: BlockGetter,
+        pos: BlockPos,
+        type: PathComputationType
+    ): Boolean {
+        return false
+    }
+
+    override fun getCollisionShape(
+        state: BlockState,
+        level: BlockGetter,
+        pos: BlockPos,
+        context: CollisionContext
+    ): VoxelShape {
+        if (context is EntityCollisionContext) {
+            val entity = context.entity
+            if (entity is WaterAnimal) {
+                return Shapes.block()
+            }
+        }
+
+        return super.getCollisionShape(state, level, pos, context)
+    }
+
     companion object {
         const val CHECK_PERIOD = 5
 
@@ -115,7 +140,7 @@ class DecorativeBubbleColumnBlock(settings: Properties): Block(settings), Bucket
                 val pos = origin.mutable().move(Direction.UP)
 
                 while (canExistIn(level.getBlockState(pos))) {
-                    if (!level.setBlock(pos, columnState, 2)) return
+                    if(!level.setBlock(pos, columnState, 2)) return
                     pos.move(Direction.UP)
                 }
             }

@@ -380,6 +380,10 @@ object HybridAquaticBlocks {
         DecorativeBubbleColumnBlock(Properties.copy(Blocks.BUBBLE_COLUMN))
     }
 
+    val DECORATIVE_NON_PASSABLE_BUBBLE_COLUMN = register("decorative_non_passable_bubble_column") {
+        DecorativeNonPassableBubbleColumnBlock(Properties.copy(Blocks.BUBBLE_COLUMN))
+    }
+
     private fun createPlushieBlock(variant: PlushieBlock.Variant, particleBlock: Block ): PlushieBlock {
         return PlushieBlock(
             variant,
