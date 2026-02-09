@@ -7,7 +7,7 @@ import net.minecraft.core.particles.ParticleType
 import java.util.function.Supplier
 
 object HybridAquaticFabricParticleTypes {
-    val WATER_UP_WHIRL = register("water_up_whirl") { FabricParticleTypes.simple() }
+    val WATER_UP_WHIRL = register("water_up_whirl") { FabricParticleTypes.simple(true) }
 
     fun <T: ParticleType<*>> register(id: String, particle: Supplier<T>): RegistryObject<T> {
         return CommonClass.PARTICLE_TYPE.register(id,  particle)
