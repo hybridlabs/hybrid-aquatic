@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
@@ -8,8 +9,6 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.util.RandomSource
-import net.minecraft.world.entity.MobCategory
-import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.BlockGetter
@@ -120,8 +119,8 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
         if (context is EntityCollisionContext) {
             val entity = context.entity
             if (
-                entity is WaterAnimal ||
-                entity?.type?.category == MobCategory.WATER_CREATURE
+                entity != null &&
+                entity.type.`is`(HybridAquaticEntityTags.CAN_USE_FISHING_NET_ON)
             ) {
                 return Shapes.block()
             }
@@ -129,7 +128,6 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
 
         return super.getCollisionShape(state, level, pos, context)
     }
-
 
     companion object {
         const val CHECK_PERIOD = 5
