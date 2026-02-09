@@ -54,9 +54,9 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, StayInWaterGoal(this))
-        goalSelector.addGoal(1, TemptGoal(this, 0.5, BREEDING_INGREDIENT, false))
-        goalSelector.addGoal(2, BreedGoal(this, 0.5))
-        goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 2))
+        goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
+        goalSelector.addGoal(2, BreedGoal(this, 1.1))
+        goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
     }
 
