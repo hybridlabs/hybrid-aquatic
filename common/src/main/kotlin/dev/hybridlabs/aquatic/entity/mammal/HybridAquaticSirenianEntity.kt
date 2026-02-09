@@ -15,6 +15,7 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.BreathAirGoal
+import net.minecraft.world.entity.ai.goal.FollowParentGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.Animal
@@ -166,6 +167,7 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         super.registerGoals()
         goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 2))
+        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
         goalSelector.addGoal(5, BreathAirGoal(this))
     }
 

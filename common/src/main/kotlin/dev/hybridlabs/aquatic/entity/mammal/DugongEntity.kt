@@ -1,8 +1,11 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobType
@@ -33,6 +36,10 @@ class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HybridAqu
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.5f
+    }
+
+    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): DugongEntity? {
+        return HybridAquaticEntityTypes.DUGONG.get().create(p0)
     }
 
     //#region SFX
