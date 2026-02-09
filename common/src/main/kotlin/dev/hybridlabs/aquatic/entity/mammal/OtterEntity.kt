@@ -101,7 +101,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(1, OtterBreathAirGoal(this))
+        goalSelector.addGoal(1, OtterBreatheAirGoal(this))
         goalSelector.addGoal(2, OtterDiveGoal(this, 1.0))
         goalSelector.addGoal(2, OtterFloatGoal(this))
         goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.8, 20))
@@ -416,7 +416,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     }
 
     /** Extend vanilla BreathAirGoal to add animation hints */
-    internal class OtterBreathAirGoal(val otter: OtterEntity) : BreathAirGoal(otter) {
+    internal class OtterBreatheAirGoal(val otter: OtterEntity) : BreathAirGoal(otter) {
         override fun start() {
             super.start()
             otter.setAction(OtterAction.SWIMMING)
