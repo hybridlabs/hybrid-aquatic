@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
@@ -15,10 +16,14 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.BreathAirGoal
+import net.minecraft.world.entity.ai.goal.BreedGoal
 import net.minecraft.world.entity.ai.goal.FollowParentGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.Animal
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.ServerLevelAccessor
@@ -49,10 +54,28 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         navigation = WaterBoundPathNavigation(this, world)
     }
 
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(0, StayInWaterGoal(this))
+        goalSelector.addGoal(1, TemptGoal(this, 0.5, BREEDING_INGREDIENT, false))
+        goalSelector.addGoal(2, BreedGoal(this, 0.5))
+        goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 2))
+        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
+        goalSelector.addGoal(5, BreathAirGoal(this))
+    }
+
+    //#region Data
+
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(SIRENIAN_SIZE, 0)
     }
+
+    var size: Int
+        get() = entityData.get(SIRENIAN_SIZE)
+        set(size) {
+            entityData.set(SIRENIAN_SIZE, size)
+        }
 
     fun isBelowWaterline(): Boolean {
         return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
@@ -157,20 +180,6 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         return factory
     }
 
-    var size: Int
-        get() = entityData.get(SIRENIAN_SIZE)
-        set(size) {
-            entityData.set(SIRENIAN_SIZE, size)
-        }
-
-    override fun registerGoals() {
-        super.registerGoals()
-        goalSelector.addGoal(0, StayInWaterGoal(this))
-        goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 2))
-        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
-        goalSelector.addGoal(5, BreathAirGoal(this))
-    }
-
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return 0.3f
     }
@@ -180,6 +189,11 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
             SynchedEntityData.defineId(HybridAquaticSirenianEntity::class.java, EntityDataSerializers.INT)
 
         val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
+
+        val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
+            Items.SEAGRASS,
+            HybridAquaticItems.SEA_LETTUCE.get()
+        )
 
         fun getScaleAdjustment(sirenian: HybridAquaticSirenianEntity, adjustment: Float): Float {
             return 1.0f + (sirenian.size * adjustment)
