@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
@@ -15,13 +15,10 @@ import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.world.entity.ai.goal.BreathAirGoal
-import net.minecraft.world.entity.ai.goal.BreedGoal
-import net.minecraft.world.entity.ai.goal.FollowParentGoal
-import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
-import net.minecraft.world.entity.ai.goal.TemptGoal
+import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.Animal
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
@@ -101,9 +98,21 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         return false
     }
 
+    override fun getMaxHeadXRot(): Int {
+        return 1
+    }
+
+    override fun getMaxHeadYRot(): Int {
+        return 1
+    }
+
     override fun tick() {
         super.tick()
         prevRoll = currentRoll
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return BREEDING_INGREDIENT.test(stack)
     }
 
     override fun aiStep() {
@@ -164,13 +173,12 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
             AnimationController(
-                this, "Walk/Swim/Idle", 4
+                this, "Swim/Idle", 4
             ) { state: AnimationState<HybridAquaticSirenianEntity> ->
                 when {
-                    state.isMoving && onGround() -> state.setAndContinue(DefaultAnimations.WALK)
                     state.isMoving && isInWater -> state.setAndContinue(DefaultAnimations.SWIM)
                     !state.isMoving && isInWater -> state.setAndContinue(WATER_IDLE)
-                    else -> state.setAndContinue(DefaultAnimations.IDLE)
+                    else -> state.setAndContinue(WATER_IDLE)
                 }
             }
         )
@@ -192,7 +200,7 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
 
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
             Items.SEAGRASS,
-            HybridAquaticItems.SEA_LETTUCE.get()
+            HybridAquaticBlocks.SEA_LETTUCE.get()
         )
 
         fun getScaleAdjustment(sirenian: HybridAquaticSirenianEntity, adjustment: Float): Float {
