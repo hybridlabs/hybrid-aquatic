@@ -173,6 +173,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BUOY.get() to "Buoy",
             HybridAquaticBlocks.GIANT_CLAM.get() to "Giant Clam",
             HybridAquaticBlocks.OYSTER.get() to "Oyster",
+            HybridAquaticBlocks.CLAMS.get() to "Clams",
             HybridAquaticBlocks.CRYSTALLINE_SULFUR.get() to "Crystalline Sulfur",
 
             HybridAquaticBlocks.SHORT_RED_ALGAE.get() to "Short Red Algae",
@@ -275,6 +276,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.RAW_SHRIMP.get() to "Raw Shrimp",
             HybridAquaticItems.COOKED_SHRIMP.get() to "Cooked Shrimp",
             HybridAquaticItems.OYSTER.get() to "Oyster",
+            HybridAquaticItems.CLAM.get() to "Clam",
             HybridAquaticItems.RAW_CRAYFISH.get() to "Raw Crayfish",
             HybridAquaticItems.COOKED_CRAYFISH.get() to "Cooked Crayfish",
             HybridAquaticItems.LIONFISH.get() to "Lionfish",
