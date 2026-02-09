@@ -335,7 +335,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : WaterAnimal> registerSirenianEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+    private fun <T : Animal> registerSirenianEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
         register(
             entityType,
             SpawnPlacements.Type.NO_RESTRICTIONS,

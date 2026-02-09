@@ -2,10 +2,12 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
@@ -15,8 +17,9 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.BreathAirGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec3
@@ -31,7 +34,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "unused", "DEPRECATION")
 open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenianEntity>, world: Level) :
-    WaterAnimal(type, world), GeoEntity {
+    Animal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
@@ -117,6 +120,10 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
+        return null
+    }
+
     protected open fun getMinSize(): Int {
         return 0
     }
@@ -178,16 +185,16 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
 
         fun canSpawn(
             type: EntityType<out HybridAquaticSirenianEntity>,
-            world: ServerLevelAccessor,
-            reason: MobSpawnType,
+            level: LevelAccessor,
+            spawnReason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource,
+            random: RandomSource
         ): Boolean {
-            val topY = world.seaLevel - 1
-            val bottomY = world.seaLevel - 32
-
-            return pos.y in bottomY..topY &&
-                    world.isWaterAt(pos)
+            val mutable = pos.mutable()
+            do {
+                mutable.move(Direction.UP)
+            } while (level.getFluidState(mutable).`is`(FluidTags.WATER))
+            return level.getBlockState(mutable).isAir
         }
     }
 }

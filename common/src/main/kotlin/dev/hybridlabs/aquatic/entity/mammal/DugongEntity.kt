@@ -1,20 +1,19 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
-import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.*
+import net.minecraft.world.entity.EntityDimensions
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobType
+import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
-import net.minecraft.world.phys.Vec3
 
 @Suppress("DEPRECATION")
 class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HybridAquaticSirenianEntity(type, world) {
