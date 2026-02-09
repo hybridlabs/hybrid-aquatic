@@ -58,7 +58,6 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         goalSelector.addGoal(2, BreedGoal(this, 0.5))
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
-        goalSelector.addGoal(5, BreathAirGoal(this))
     }
 
     //#region Data
