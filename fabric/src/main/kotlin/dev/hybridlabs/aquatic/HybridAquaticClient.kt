@@ -19,6 +19,7 @@ import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.TIGER_
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.WHALE_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
+import dev.hybridlabs.aquatic.client.particle.ClientParticleRegistry
 import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
 import dev.hybridlabs.aquatic.client.render.HybridAquaticFluidRenderer
 import dev.hybridlabs.aquatic.client.render.armor.*
@@ -62,6 +63,7 @@ object HybridAquaticClient : ClientModInitializer {
         registerModelLayers()
         HybridAquaticFluidRenderer()
 
+        ClientParticleRegistry()
         ClientCommandRegistrationCallback.EVENT.register(::registerCommands)
     }
 
