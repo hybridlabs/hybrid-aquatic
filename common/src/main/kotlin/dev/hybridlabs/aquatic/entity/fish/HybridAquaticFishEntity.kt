@@ -10,26 +10,20 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityDimensions
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.MobType
-import net.minecraft.world.entity.MoverType
-import net.minecraft.world.entity.Pose
-import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -42,9 +36,10 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
-abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: Level) : WaterAnimal(type, world), GeoEntity {
+abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: Level) : Animal(type, world), GeoEntity {
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
+
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     open fun getTargetConfig(): MobTargetConfiguration? = null
@@ -77,6 +72,10 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
 
     override fun getMobType(): MobType {
         return MobType.WATER
+    }
+
+    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
+        return null
     }
 
     override fun canBreatheUnderwater(): Boolean {
@@ -137,7 +136,17 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         super.aiStep()
     }
 
-    override fun handleAirSupply(air: Int) {}
+    protected open fun handleAirSupply(airSupply: Int) {
+        if (this.isAlive && !this.isInWaterOrBubble) {
+            this.airSupply = airSupply - 1
+            if (this.airSupply == -20) {
+                this.airSupply = 0
+                this.hurt(this.damageSources().drown(), 2.0f)
+            }
+        } else {
+            this.airSupply = 300
+        }
+    }
 
     private fun getMaxMoistness(): Int {
         return 600
@@ -331,7 +340,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         const val FISH_SIZE_KEY = "FishSize"
 
         fun canShallowSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out Animal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -343,7 +352,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         }
 
         fun canSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out Animal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -351,11 +360,13 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         ): Boolean {
             return  pos.y in (world.seaLevel - 24)..(world.seaLevel - 12) &&
                     world.isWaterAt(pos) &&
+                    world.isWaterAt(pos.above()) &&
+                    world.isWaterAt(pos.below()) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
 
         fun canNightSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out Animal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -364,18 +375,22 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             return  !world.level.isDay &&
                     pos.y in (world.seaLevel - 24)..(world.seaLevel - 12) &&
                     world.isWaterAt(pos) &&
+                    world.isWaterAt(pos.above()) &&
+                    world.isWaterAt(pos.below()) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
 
         fun canDeepSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out Animal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
             return pos.y in (world.seaLevel - 128)..(world.seaLevel - 48) &&
-                    world.isWaterAt(pos)
+                    world.isWaterAt(pos) &&
+                    world.isWaterAt(pos.above()) &&
+                    world.isWaterAt(pos.below())
         }
 
         fun getScaleAdjustment(fish: HybridAquaticFishEntity, adjustment: Float): Float {
