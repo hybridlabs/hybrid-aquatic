@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.tags.ItemTags
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.Difficulty
@@ -19,6 +20,8 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
@@ -36,6 +39,10 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) : HybridA
 
     override fun getMaxSpawnClusterSize(): Int {
         return 6
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(ItemTags.FISHES)
     }
 
     companion object {

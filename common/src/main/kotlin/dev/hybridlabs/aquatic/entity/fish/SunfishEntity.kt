@@ -5,6 +5,8 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 
 class SunfishEntity(type: EntityType<out SunfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
@@ -16,6 +18,10 @@ class SunfishEntity(type: EntityType<out SunfishEntity>, world: Level) : HybridA
 
     override fun getMaxSpawnClusterSize(): Int {
         return 3
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(Items.BREAD)
     }
 
     companion object {

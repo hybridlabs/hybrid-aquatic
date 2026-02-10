@@ -5,6 +5,8 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 
 class TroutEntity(type: EntityType<out TroutEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
@@ -15,7 +17,7 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) : HybridAquat
     )
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 1
     }
 
     override fun getMinSize(): Int {
@@ -24,6 +26,10 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) : HybridAquat
 
     override fun getMaxSize(): Int {
         return 0
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(Items.SPIDER_EYE)
     }
 
     companion object {
