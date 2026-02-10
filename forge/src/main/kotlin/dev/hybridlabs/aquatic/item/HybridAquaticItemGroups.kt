@@ -103,6 +103,9 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.DEAD_LOPHELIA_CORAL_BLOCK.get())
                 entries.accept(HybridAquaticItems.DEAD_THORN_CORAL_BLOCK.get())
 
+                entries.accept(HybridAquaticItems.BLEACHED_ROSE_CORAL_BLOCK.get())
+                entries.accept(HybridAquaticItems.BLEACHED_LOPHELIA_CORAL_BLOCK.get())
+
                 entries.accept(HybridAquaticItems.SUN_CORAL.get())
                 entries.accept(HybridAquaticItems.LEAF_CORAL.get())
                 entries.accept(HybridAquaticItems.BUTTON_CORAL.get())
@@ -117,6 +120,9 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.DEAD_LOPHELIA_CORAL.get())
                 entries.accept(HybridAquaticItems.DEAD_THORN_CORAL.get())
 
+                entries.accept(HybridAquaticItems.BLEACHED_ROSE_CORAL.get())
+                entries.accept(HybridAquaticItems.BLEACHED_LOPHELIA_CORAL.get())
+
                 entries.accept(HybridAquaticItems.SUN_CORAL_FAN.get())
                 entries.accept(HybridAquaticItems.LEAF_CORAL_FAN.get())
                 entries.accept(HybridAquaticItems.BUTTON_CORAL_FAN.get())
@@ -130,6 +136,9 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.DEAD_ROSE_CORAL_FAN.get())
                 entries.accept(HybridAquaticItems.DEAD_LOPHELIA_CORAL_FAN.get())
                 entries.accept(HybridAquaticItems.DEAD_THORN_CORAL_FAN.get())
+
+                entries.accept(HybridAquaticItems.BLEACHED_ROSE_CORAL_FAN.get())
+                entries.accept(HybridAquaticItems.BLEACHED_LOPHELIA_CORAL_FAN.get())
 
                 entries.accept(HybridAquaticBlocks.ANEMONE.get())
                 entries.accept(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get())

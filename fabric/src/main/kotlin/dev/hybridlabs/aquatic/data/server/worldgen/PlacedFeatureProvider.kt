@@ -2,7 +2,6 @@
 
 package dev.hybridlabs.aquatic.data.server.worldgen
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -310,6 +309,17 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.DEEP_OCEAN_VEGETATION), listOf(
                     CountOnEveryLayerPlacement.of(10),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticPlacedFeatures.BLEACHED_REEF_VEGETATION, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.BLEACHED_REEF_VEGETATION), listOf(
+                    NoiseBasedCountPlacement.of(20, 400.0, 0.0),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
                     BiomeFilter.biome()
                 )
             )

@@ -306,6 +306,10 @@ class BiomeProvider(
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
+                    entries.ref(HybridAquaticPlacedFeatures.BLEACHED_REEF_VEGETATION)
+                )
+                addFeature(
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
                     entries.ref(HybridAquaticPlacedFeatures.RED_MEADOW_VEGETATION)
                 )
                 addFeature(

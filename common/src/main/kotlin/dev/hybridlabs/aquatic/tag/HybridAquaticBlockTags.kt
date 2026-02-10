@@ -18,6 +18,11 @@ object HybridAquaticBlockTags {
     val DEEP_WALL_CORALS = create("deep_wall_corals")
     val DEEP_CORAL_BLOCKS = create("deep_coral_blocks")
 
+    val BLEACHED_CORALS = create("bleached_corals")
+    val BLEACHED_CORAL_PLANTS = create("bleached_coral_plants")
+    val BLEACHED_WALL_CORALS = create("bleached_wall_corals")
+    val BLEACHED_CORAL_BLOCKS = create("bleached_coral_blocks")
+
     val TIDE_POOL_REPLACEABLE = create("tide_pool_replaceable")
 
     val CORAL_MOUND_BLOCKS =create("coral_mound_blocks")

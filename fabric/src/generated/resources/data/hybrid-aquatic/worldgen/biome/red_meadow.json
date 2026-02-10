@@ -66,6 +66,7 @@
     ],
     [
       "minecraft:glow_lichen",
+      "hybrid-aquatic:bleached_reef_vegetation",
       "hybrid-aquatic:red_meadow_vegetation",
       "minecraft:sea_pickle"
     ],

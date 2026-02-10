@@ -41,6 +41,25 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HybridAquaticBlocks.THORN_CORAL_WALL_FAN.get())
         //#endregion
 
+        //#region Bleached Corals
+        getOrCreateTagBuilder(HybridAquaticBlockTags.BLEACHED_CORAL_BLOCKS)
+            .add(HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_BLOCK.get())
+            .add(HybridAquaticBlocks.BLEACHED_ROSE_CORAL_BLOCK.get())
+
+        getOrCreateTagBuilder(HybridAquaticBlockTags.BLEACHED_CORAL_PLANTS)
+            .add(HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL.get())
+            .add(HybridAquaticBlocks.BLEACHED_ROSE_CORAL.get())
+
+        getOrCreateTagBuilder(HybridAquaticBlockTags.BLEACHED_CORALS)
+            .forceAddTag(HybridAquaticBlockTags.BLEACHED_CORAL_PLANTS)
+            .add(HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_FAN.get())
+            .add(HybridAquaticBlocks.BLEACHED_ROSE_CORAL_FAN.get())
+
+        getOrCreateTagBuilder(HybridAquaticBlockTags.BLEACHED_WALL_CORALS)
+            .add(HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN.get())
+            .add(HybridAquaticBlocks.BLEACHED_ROSE_CORAL_WALL_FAN.get())
+        //#endregion
+
         getOrCreateTagBuilder(HybridAquaticBlockTags.KELP)
             .add(HybridAquaticBlocks.BULL_KELP.get())
             .add(HybridAquaticBlocks.BULL_KELP_PLANT.get())

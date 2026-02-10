@@ -127,6 +127,32 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP)
             }
 
+            //#region Bleached Corals
+            setOf(
+                HybridAquaticBlocks.BLEACHED_ROSE_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_BLOCK.get(),
+            ).forEach { block ->
+                generator.createTrivialCube(block)
+            }
+
+            setOf(
+                HybridAquaticBlocks.BLEACHED_ROSE_CORAL.get(),
+                HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL.get(),
+            ).forEach { block ->
+                generator.createCrossBlockWithDefaultItem(block, BlockModelGenerators.TintState.NOT_TINTED)
+            }
+
+            generator.createCoralFans(
+                HybridAquaticBlocks.BLEACHED_ROSE_CORAL_FAN.get(),
+                HybridAquaticBlocks.BLEACHED_ROSE_CORAL_WALL_FAN.get()
+            )
+
+            generator.createCoralFans(
+                HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
+                HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN.get()
+            )
+            //#endregion
+
             // wood
             val driftwoodPool = family(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
 

@@ -39,7 +39,6 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.*
 import net.minecraft.world.level.levelgen.placement.CaveSurface
 import net.minecraft.world.level.levelgen.placement.CountPlacement
 import net.minecraft.world.level.levelgen.placement.HeightmapPlacement
-import net.minecraft.world.level.levelgen.placement.NoiseThresholdCountPlacement
 import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest
 import net.minecraft.world.level.levelgen.synth.NormalNoise
@@ -162,6 +161,37 @@ class ConfiguredFeatureProvider(
                         ),
                         PlacementUtils.inlinePlaced(
                             HybridAquaticFeatures.DEEP_CORAL_TABLE.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        )
+                    )
+                )
+            )
+        )
+
+        entries.add(
+            HybridAquaticConfiguredFeatures.BLEACHED_REEF_VEGETATION,
+            ConfiguredFeature(
+                Feature.SIMPLE_RANDOM_SELECTOR,
+                SimpleRandomFeatureConfiguration(
+                    HolderSet.direct(
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.BLEACHED_CORAL_TREE.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        ),
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.BLEACHED_CORAL_CLAW.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        ),
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.BLEACHED_CORAL_MUSHROOM.get(),
+                            FeatureConfiguration.NONE,
+                            *arrayOfNulls<PlacementModifier>(0)
+                        ),
+                        PlacementUtils.inlinePlaced(
+                            HybridAquaticFeatures.BLEACHED_CORAL_TABLE.get(),
                             FeatureConfiguration.NONE,
                             *arrayOfNulls<PlacementModifier>(0)
                         )

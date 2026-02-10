@@ -150,6 +150,9 @@ object HybridAquaticClient : ClientModInitializer {
             HybridAquaticBlocks.DEAD_LOPHELIA_CORAL.get(),
             HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
             HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN.get(),
 
             HybridAquaticBlocks.SUN_CORAL.get(),
             HybridAquaticBlocks.SUN_CORAL_FAN.get(),
@@ -171,6 +174,9 @@ object HybridAquaticClient : ClientModInitializer {
             HybridAquaticBlocks.DEAD_ROSE_CORAL.get(),
             HybridAquaticBlocks.DEAD_ROSE_CORAL_FAN.get(),
             HybridAquaticBlocks.DEAD_ROSE_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_ROSE_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_ROSE_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_ROSE_CORAL_WALL_FAN.get(),
 
             HybridAquaticBlocks.BUTTON_CORAL.get(),
             HybridAquaticBlocks.BUTTON_CORAL_FAN.get(),

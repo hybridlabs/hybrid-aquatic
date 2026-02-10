@@ -18,9 +18,7 @@ object HybridAquaticFeatures {
     val VENT_PATCH = register("vent_patch", VentPatchFeature(VentPatchFeatureConfig.CODEC))
     val SARGASSUM = register("sargassum", SargassumFeature(SargassumFeatureConfig.CODEC))
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch", SeaLettuceFeature(ProbabilityFeatureConfiguration.CODEC))
-    val SHORT_RED_ALGAE_PATCH = register("short_red_algae_patch", ShortRedAlgaePatchFeature(ProbabilityFeatureConfiguration.CODEC))
     val RED_ALGAE_PATCH = register("red_algae_patch", RedAlgaePatchFeature(ProbabilityFeatureConfiguration.CODEC))
-    val TALL_RED_ALGAE_PATCH = register("tall_red_algae_patch", TallRedAlgaePatchFeature(ProbabilityFeatureConfiguration.CODEC))
     val SUSPICIOUS_SAND_DISK = register("suspicious_sand_disk", SuspiciousSandDiskFeature(DiskConfiguration.CODEC))
     val SUSPICIOUS_RED_SAND_DISK = register("suspicious_red_sand_disk", SuspiciousRedSandDiskFeature(DiskConfiguration.CODEC))
 
@@ -28,6 +26,11 @@ object HybridAquaticFeatures {
     val DEEP_CORAL_TREE = register("deep_coral_tree", DeepCoralTreeFeature(NoneFeatureConfiguration.CODEC))
     val DEEP_CORAL_MUSHROOM = register("deep_coral_mushroom", DeepCoralMushroomFeature(NoneFeatureConfiguration.CODEC))
     val DEEP_CORAL_TABLE = register("deep_coral_table", DeepCoralTableFeature(NoneFeatureConfiguration.CODEC))
+
+    val BLEACHED_CORAL_CLAW = register("bleached_coral_claw", BleachedCoralClawFeature(NoneFeatureConfiguration.CODEC))
+    val BLEACHED_CORAL_TREE = register("bleached_coral_tree", BleachedCoralTreeFeature(NoneFeatureConfiguration.CODEC))
+    val BLEACHED_CORAL_MUSHROOM = register("bleached_coral_mushroom", BleachedCoralMushroomFeature(NoneFeatureConfiguration.CODEC))
+    val BLEACHED_CORAL_TABLE = register("bleached_coral_table", BleachedCoralTableFeature(NoneFeatureConfiguration.CODEC))
 
     val REEF_CORAL_CLAW = register("reef_coral_claw", ReefCoralClawFeature(NoneFeatureConfiguration.CODEC))
     val REEF_CORAL_TREE = register("reef_coral_tree", ReefCoralTreeFeature(NoneFeatureConfiguration.CODEC))
