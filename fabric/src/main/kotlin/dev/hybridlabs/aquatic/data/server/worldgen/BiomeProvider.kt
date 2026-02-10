@@ -252,7 +252,7 @@ class BiomeProvider(
                 temperature = 0.5f,
                 downfall = 0.5f,
                 waterColor = 0x43D5EE,
-                waterFogColor = 0x041F33,
+                waterFogColor = 0x3DB872,
                 listOf(
                     Pair(
                         MobCategory.WATER_CREATURE,
@@ -311,6 +311,22 @@ class BiomeProvider(
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     entries.ref(AquaticPlacements.SEA_PICKLE)
+                )
+            }
+        )
+
+        entries.add(
+            HybridAquaticBiomes.DEEP_WARM_OCEAN,
+            create(
+                entries,
+                temperature = 0.5f,
+                downfall = 0.5f,
+                waterColor = 0x48B3C7,
+                waterFogColor = 0x418794
+            ) {
+                addFeature(
+                    GenerationStep.Decoration.UNDERGROUND_ORES,
+                    entries.ref(HybridAquaticPlacedFeatures.MOUND)
                 )
             }
         )
@@ -425,7 +441,7 @@ class BiomeProvider(
                 entries,
                 temperature = 0.5f,
                 downfall = 0.5f,
-                waterColor = 0x1b2447,
+                waterColor = 0x37808C,
                 waterFogColor = 0x1b2447,
                 listOf(
                     Pair(
@@ -465,7 +481,7 @@ class BiomeProvider(
                 entries,
                 temperature = 0.5f,
                 downfall = 0.5f,
-                waterColor = 0x1b2447,
+                waterColor = 0x4787BF,
                 waterFogColor = 0x1b2447,
                 listOf(
                     Pair(

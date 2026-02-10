@@ -10,8 +10,8 @@
   "effects": {
     "fog_color": 12638463,
     "sky_color": 7907327,
-    "water_color": 3637388,
-    "water_fog_color": 1778759
+    "water_color": 4764615,
+    "water_fog_color": 4294548
   },
   "features": [
     [],
@@ -56,7 +56,8 @@
       "minecraft:underwater_magma",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:disk_gravel"
+      "minecraft:disk_gravel",
+      "hybrid-aquatic:mound"
     ],
     [],
     [
@@ -71,28 +72,7 @@
     ]
   ],
   "has_precipitation": true,
-  "spawn_costs": {
-    "hybrid-aquatic:firefly_squid": {
-      "charge": 0.7,
-      "energy_budget": 0.2
-    },
-    "hybrid-aquatic:giant_squid": {
-      "charge": 1.0,
-      "energy_budget": 0.1
-    },
-    "hybrid-aquatic:nautilus": {
-      "charge": 0.7,
-      "energy_budget": 0.2
-    },
-    "hybrid-aquatic:umbrella_octopus": {
-      "charge": 0.7,
-      "energy_budget": 0.15
-    },
-    "hybrid-aquatic:vampire_squid": {
-      "charge": 0.8,
-      "energy_budget": 0.15
-    }
-  },
+  "spawn_costs": {},
   "spawners": {
     "ambient": [
       {
@@ -104,38 +84,7 @@
     ],
     "axolotls": [],
     "creature": [],
-    "hybrid-aquatic:cephalopod": [
-      {
-        "type": "hybrid-aquatic:giant_squid",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "hybrid-aquatic:umbrella_octopus",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 7
-      },
-      {
-        "type": "hybrid-aquatic:vampire_squid",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 7
-      },
-      {
-        "type": "hybrid-aquatic:nautilus",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "hybrid-aquatic:firefly_squid",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 10
-      }
-    ],
+    "hybrid-aquatic:cephalopod": [],
     "hybrid-aquatic:critter": [],
     "hybrid-aquatic:crustacean": [],
     "hybrid-aquatic:fish": [],

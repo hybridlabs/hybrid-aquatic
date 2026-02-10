@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
-import dev.hybridlabs.aquatic.block.ClamBlock
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
@@ -23,7 +22,6 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.SpawnEggItem
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.CropBlock
 import net.minecraft.world.level.block.LiquidBlock
 
 class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
@@ -127,17 +125,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.BUBBLE_GEYSER.get(),
             ).forEach { block ->
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP)
-            }
-
-            // crops
-            setOf(
-                HybridAquaticBlocks.CLAMS.get(),
-            ).forEach { block ->
-                generator.createCropBlock(
-                    block,
-                    CropBlock.AGE,
-                    0, 1, 2, 3
-                )
             }
 
             // wood

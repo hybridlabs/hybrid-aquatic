@@ -60,6 +60,17 @@ object HybridAquaticBiomes {
     //#endregion
 
     //#region Warm Ocean Biome Surface Rules
+    val DEEP_WARM_OCEAN: ResourceKey<Biome> =
+        ResourceKey.create(Registries.BIOME, CommonClass.locate("deep_warm_ocean"))
+    val DEEP_WARM_OCEAN_SURFACE_RULE: RuleSource = ifTrue(
+        isBiome(DEEP_WARM_OCEAN),
+        sequence(
+            ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
+            ifTrue(UNDER_FLOOR, state(HybridAquaticBlocks.SHORESTONE.get().defaultBlockState())),
+            ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
+        )
+    )
+
     val SEAGRASS_BED: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("seagrass_bed"))
     val SEAGRASS_BED_SURFACE_RULE: RuleSource = ifTrue(
         isBiome(SEAGRASS_BED),
@@ -165,7 +176,8 @@ object HybridAquaticBiomes {
 
     val COLD_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_trench"))
     val COLD_TRENCH_SURFACE_RULE: RuleSource =
-        ifTrue(isBiome(COLD_TRENCH),
+        ifTrue(
+            isBiome(COLD_TRENCH),
             sequence(
                 ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())),
                 ifTrue(UNDER_FLOOR, state(Blocks.MUD.defaultBlockState())),
@@ -199,7 +211,8 @@ object HybridAquaticBiomes {
 
     //#endregion
 
-    val DEEP_CORAL_REEF: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("deep_coral_reef"))
+    val DEEP_CORAL_REEF: ResourceKey<Biome> =
+        ResourceKey.create(Registries.BIOME, CommonClass.locate("deep_coral_reef"))
     val DEEP_CORAL_REEF_SURFACE_RULE: RuleSource =
         ifTrue(
             isBiome(
@@ -210,7 +223,8 @@ object HybridAquaticBiomes {
             )
         )
 
-    val TROPICAL_DEEP_CORAL_REEF: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_deep_coral_reef"))
+    val TROPICAL_DEEP_CORAL_REEF: ResourceKey<Biome> =
+        ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_deep_coral_reef"))
     val TROPICAL_DEEP_CORAL_REEF_SURFACE_RULE: RuleSource =
         ifTrue(
             isBiome(
@@ -448,6 +462,120 @@ object HybridAquaticBiomes {
         )
         //#endregion
 
+        //#region Deep Warm Ocean
+        BiomePlacement.addSubOverworld(
+            CORAL_REEF,
+            DEEP_WARM_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.64f,
+                    -0.455f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            CORAL_REEF,
+            DEEP_WARM_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -1.05f,
+                    -0.7f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            SEAGRASS_BED,
+            DEEP_WARM_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.64f,
+                    -0.455f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            SEAGRASS_BED,
+            DEEP_WARM_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -1.05f,
+                    -0.7f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            RED_MEADOW,
+            DEEP_WARM_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.64f,
+                    -0.455f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            RED_MEADOW,
+            DEEP_WARM_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -1.05f,
+                    -0.7f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.WARM_OCEAN,
+            DEEP_WARM_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -0.64f,
+                    -0.455f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.WARM_OCEAN,
+            DEEP_WARM_OCEAN,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    -1.05f,
+                    -0.7f,
+                    false
+                )
+            )
+        )
+        //#endregion
+
         //#region Sulfuric Caves
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_OCEAN,
@@ -465,6 +593,20 @@ object HybridAquaticBiomes {
 
         BiomePlacement.addSubOverworld(
             Biomes.DEEP_LUKEWARM_OCEAN,
+            SULFURIC_CAVES,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofRange(
+                    SubBiomeMatcher.CriterionTargets.DEPTH,
+                    SubBiomeMatcher.CriterionTypes.VALUE,
+                    0.1f,
+                    0.6f,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            DEEP_WARM_OCEAN,
             SULFURIC_CAVES,
             SubBiomeMatcher.of(
                 SubBiomeMatcher.Criterion.ofRange(
@@ -1191,6 +1333,7 @@ object HybridAquaticBiomes {
 
                     WARM_OCEAN_SURFACE_RULE,
                     LUKEWARM_OCEAN_SURFACE_RULE,
+                    DEEP_WARM_OCEAN_SURFACE_RULE,
 
                     DEEP_CORAL_REEF_SURFACE_RULE,
                     TROPICAL_DEEP_CORAL_REEF_SURFACE_RULE,
