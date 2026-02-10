@@ -340,6 +340,45 @@ object HybridAquaticItems {
         HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN
     )
 
+    val BLEACHED_FIRE_CORAL_BLOCK = registerBlockItem("bleached_fire_coral_block") { HybridAquaticBlocks.BLEACHED_FIRE_CORAL_BLOCK.get() }
+    val BLEACHED_FIRE_CORAL = registerBlockItem("bleached_fire_coral") { HybridAquaticBlocks.BLEACHED_FIRE_CORAL.get() }
+    val BLEACHED_FIRE_CORAL_FAN = registerVerticallyAttachable(
+        "bleached_fire_coral_fan",
+        HybridAquaticBlocks.BLEACHED_FIRE_CORAL_FAN,
+        HybridAquaticBlocks.BLEACHED_FIRE_CORAL_WALL_FAN
+    )
+
+    val BLEACHED_TUBE_CORAL_BLOCK = registerBlockItem("bleached_tube_coral_block") { HybridAquaticBlocks.BLEACHED_TUBE_CORAL_BLOCK.get() }
+    val BLEACHED_TUBE_CORAL = registerBlockItem("bleached_tube_coral") { HybridAquaticBlocks.BLEACHED_TUBE_CORAL.get() }
+    val BLEACHED_TUBE_CORAL_FAN = registerVerticallyAttachable(
+        "bleached_tube_coral_fan",
+        HybridAquaticBlocks.BLEACHED_TUBE_CORAL_FAN,
+        HybridAquaticBlocks.BLEACHED_TUBE_CORAL_WALL_FAN
+    )
+
+    val BLEACHED_HORN_CORAL_BLOCK = registerBlockItem("bleached_horn_coral_block") { HybridAquaticBlocks.BLEACHED_HORN_CORAL_BLOCK.get() }
+    val BLEACHED_HORN_CORAL = registerBlockItem("bleached_horn_coral") { HybridAquaticBlocks.BLEACHED_HORN_CORAL.get() }
+    val BLEACHED_HORN_CORAL_FAN = registerVerticallyAttachable(
+        "bleached_horn_coral_fan",
+        HybridAquaticBlocks.BLEACHED_HORN_CORAL_FAN,
+        HybridAquaticBlocks.BLEACHED_HORN_CORAL_WALL_FAN
+    )
+
+    val BLEACHED_BUBBLE_CORAL_BLOCK = registerBlockItem("bleached_bubble_coral_block") { HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_BLOCK.get() }
+    val BLEACHED_BUBBLE_CORAL = registerBlockItem("bleached_bubble_coral") { HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL.get() }
+    val BLEACHED_BUBBLE_CORAL_FAN = registerVerticallyAttachable(
+        "bleached_bubble_coral_fan",
+        HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_FAN,
+        HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_WALL_FAN
+    )
+
+    val BLEACHED_BRAIN_CORAL_BLOCK = registerBlockItem("bleached_brain_coral_block") { HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_BLOCK.get() }
+    val BLEACHED_BRAIN_CORAL = registerBlockItem("bleached_brain_coral") { HybridAquaticBlocks.BLEACHED_BRAIN_CORAL.get() }
+    val BLEACHED_BRAIN_CORAL_FAN = registerVerticallyAttachable(
+        "bleached_brain_coral_fan",
+        HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_FAN,
+        HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_WALL_FAN
+    )
     //#endregion
 
     //#endregion

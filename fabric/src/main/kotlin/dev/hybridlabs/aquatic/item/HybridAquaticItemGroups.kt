@@ -103,6 +103,11 @@ object HybridAquaticItemGroups {
 
                 entries.accept(HybridAquaticItems.BLEACHED_ROSE_CORAL_BLOCK.get())
                 entries.accept(HybridAquaticItems.BLEACHED_LOPHELIA_CORAL_BLOCK.get())
+                entries.accept(HybridAquaticItems.BLEACHED_FIRE_CORAL_BLOCK.get())
+                entries.accept(HybridAquaticItems.BLEACHED_TUBE_CORAL_BLOCK.get())
+                entries.accept(HybridAquaticItems.BLEACHED_HORN_CORAL_BLOCK.get())
+                entries.accept(HybridAquaticItems.BLEACHED_BRAIN_CORAL_BLOCK.get())
+                entries.accept(HybridAquaticItems.BLEACHED_BUBBLE_CORAL_BLOCK.get())
 
                 entries.accept(HybridAquaticItems.SUN_CORAL.get())
                 entries.accept(HybridAquaticItems.LEAF_CORAL.get())
@@ -120,6 +125,11 @@ object HybridAquaticItemGroups {
 
                 entries.accept(HybridAquaticItems.BLEACHED_ROSE_CORAL.get())
                 entries.accept(HybridAquaticItems.BLEACHED_LOPHELIA_CORAL.get())
+                entries.accept(HybridAquaticItems.BLEACHED_FIRE_CORAL.get())
+                entries.accept(HybridAquaticItems.BLEACHED_TUBE_CORAL.get())
+                entries.accept(HybridAquaticItems.BLEACHED_HORN_CORAL.get())
+                entries.accept(HybridAquaticItems.BLEACHED_BRAIN_CORAL.get())
+                entries.accept(HybridAquaticItems.BLEACHED_BUBBLE_CORAL.get())
 
                 entries.accept(HybridAquaticItems.SUN_CORAL_FAN.get())
                 entries.accept(HybridAquaticItems.LEAF_CORAL_FAN.get())
@@ -137,6 +147,11 @@ object HybridAquaticItemGroups {
 
                 entries.accept(HybridAquaticItems.BLEACHED_ROSE_CORAL_FAN.get())
                 entries.accept(HybridAquaticItems.BLEACHED_LOPHELIA_CORAL_FAN.get())
+                entries.accept(HybridAquaticItems.BLEACHED_FIRE_CORAL_FAN.get())
+                entries.accept(HybridAquaticItems.BLEACHED_TUBE_CORAL_FAN.get())
+                entries.accept(HybridAquaticItems.BLEACHED_HORN_CORAL_FAN.get())
+                entries.accept(HybridAquaticItems.BLEACHED_BRAIN_CORAL_FAN.get())
+                entries.accept(HybridAquaticItems.BLEACHED_BUBBLE_CORAL_FAN.get())
 
                 entries.accept(HybridAquaticBlocks.ANEMONE.get())
                 entries.accept(HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get())
