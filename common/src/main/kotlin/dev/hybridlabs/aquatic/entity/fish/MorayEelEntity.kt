@@ -1,10 +1,12 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 class MorayEelEntity(type: EntityType<out MorayEelEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
@@ -16,6 +18,10 @@ class MorayEelEntity(type: EntityType<out MorayEelEntity>, world: Level) : Hybri
 
     override fun shouldFlopOnLand(): Boolean {
         return false
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HybridAquaticItems.SURGEONFISH.get())
     }
 
     companion object {

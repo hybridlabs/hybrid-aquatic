@@ -1,8 +1,10 @@
 package dev.hybridlabs.aquatic.entity.shark
 
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
@@ -28,6 +30,10 @@ class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level)
                 isFeeding = false
             }
         }
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HybridAquaticItems.RAW_SHRIMP.get())
     }
 
     //#region Animations

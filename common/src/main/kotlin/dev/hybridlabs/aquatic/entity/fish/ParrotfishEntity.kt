@@ -1,13 +1,16 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
@@ -17,6 +20,10 @@ class ParrotfishEntity(type: EntityType<out ParrotfishEntity>, world: Level) : H
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HybridAquaticItems.CORAL_CHUNK.get())
     }
 
     companion object {

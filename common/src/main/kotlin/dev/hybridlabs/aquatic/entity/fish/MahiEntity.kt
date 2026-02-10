@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
@@ -29,6 +31,10 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) : HybridAquatic
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HybridAquaticItems.RAW_TENTACLE.get())
     }
 
     override fun finalizeSpawn(

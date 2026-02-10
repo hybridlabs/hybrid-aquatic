@@ -44,6 +44,10 @@ class SandTigerSharkEntity(type: EntityType<out SandTigerSharkEntity>, world: Le
         }
     }
 
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HybridAquaticItems.SURGEONFISH.get())
+    }
+
     private fun dropBurpItem() {
         if (!level().isClientSide) {
             val itemsToDrop = listOf(

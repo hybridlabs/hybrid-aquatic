@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
@@ -20,6 +21,8 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
@@ -51,7 +54,10 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
+    }
 
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(Items.SLIME_BALL)
     }
 
     companion object {

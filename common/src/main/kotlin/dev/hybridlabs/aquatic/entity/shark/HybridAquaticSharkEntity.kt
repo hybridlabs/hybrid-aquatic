@@ -8,6 +8,7 @@ import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
+import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -30,6 +31,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -81,10 +83,6 @@ open class HybridAquaticSharkEntity(
         moveControl = SmoothSwimmingMoveControl(this, 45, 3, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 15)
         navigation = WaterBoundPathNavigation(this, world)
-    }
-
-    override fun createNavigation(level: Level): PathNavigation {
-        return WaterBoundPathNavigation(this, level)
     }
 
     override fun registerGoals() {
@@ -142,7 +140,6 @@ open class HybridAquaticSharkEntity(
 
         if (hunger > 0) hunger -= 1
     }
-
     //#endregion
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
@@ -153,24 +150,23 @@ open class HybridAquaticSharkEntity(
         return 1
     }
 
-    //#region NBT
-
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        this.addPersistentAngerSaveData(nbt)
-        nbt.putInt(MOISTNESS_KEY, moistness)
-        nbt.putInt(HUNGER_KEY, hunger)
-        nbt.putInt(SHARK_SIZE_KEY, size)
-        nbt.putBoolean("FromFishingNet", fromFishingNet)
+    //#region Data
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        this.addPersistentAngerSaveData(compound)
+        compound.putInt(MOISTNESS_KEY, moistness)
+        compound.putInt(HUNGER_KEY, hunger)
+        compound.putInt(SHARK_SIZE_KEY, size)
+        compound.putBoolean("FromFishingNet", fromFishingNet)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        this.readPersistentAngerSaveData(this.level(), nbt)
-        moistness = nbt.getInt(MOISTNESS_KEY)
-        hunger = nbt.getInt(HUNGER_KEY)
-        size = nbt.getInt(SHARK_SIZE_KEY)
-        fromFishingNet = nbt.getBoolean("FromFishingNet")
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        this.readPersistentAngerSaveData(this.level(), compound)
+        moistness = compound.getInt(MOISTNESS_KEY)
+        hunger = compound.getInt(HUNGER_KEY)
+        size = compound.getInt(SHARK_SIZE_KEY)
+        fromFishingNet = compound.getBoolean("FromFishingNet")
     }
 
     override fun defineSynchedData() {
@@ -180,11 +176,13 @@ open class HybridAquaticSharkEntity(
         entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(ATTEMPT_ATTACK, false)
     }
-
     //#endregion
 
-
     //#region Movement
+    override fun createNavigation(level: Level): PathNavigation {
+        return WaterBoundPathNavigation(this, level)
+    }
+
     override fun travel(travelVector: Vec3) {
         if (this.isEffectiveAi && this.isInWater) {
             this.moveRelative(this.speed, travelVector)
@@ -205,18 +203,9 @@ open class HybridAquaticSharkEntity(
         currentRoll += (targetRoll - currentRoll) * 0.05f
         super.aiStep()
     }
-
-    override fun getMaxHeadXRot(): Int {
-        return 1
-    }
-
-    override fun getMaxHeadYRot(): Int {
-        return 1
-    }
-
     //#endregion
 
-    //#region Size & Dimensions
+    //#region Properties
     var size: Int
         get() = entityData.get(SHARK_SIZE)
         set(size) {
@@ -231,20 +220,25 @@ open class HybridAquaticSharkEntity(
         return 0
     }
 
+    override fun getMaxHeadXRot(): Int {
+        return 1
+    }
+
+    override fun getMaxHeadYRot(): Int {
+        return 1
+    }
+
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.65f
     }
-
-    //#endregion
-
-    //#region Water Breathing
-
-    override fun handleAirSupply(airSupply: Int) {}
 
     private fun getMaxMoistness(): Int {
         return 1200
     }
 
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HybridAquaticItemTags.RAW_FISH)
+    }
     //#endregion
 
     //#region Animations
@@ -273,10 +267,13 @@ open class HybridAquaticSharkEntity(
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
     }
-
     //#endregion
 
     //#region SFX
+    override fun getAmbientSound(): SoundEvent? {
+        return SoundEvents.COD_AMBIENT
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.COD_HURT
     }
@@ -284,7 +281,6 @@ open class HybridAquaticSharkEntity(
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.COD_DEATH
     }
-
     //#endregion
 
     //#region Angerable Implementation Details

@@ -1,12 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.PathfinderMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.Goal
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 class OpahEntity(type: EntityType<out OpahEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
@@ -19,6 +21,10 @@ class OpahEntity(type: EntityType<out OpahEntity>, world: Level) : HybridAquatic
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(2, FollowTunaGoal(this, 1.5, 4.0F, 8.0F))
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HybridAquaticItems.RAW_TENTACLE.get())
     }
 
     companion object {

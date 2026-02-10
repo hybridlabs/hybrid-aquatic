@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import software.bernie.geckolib.core.animation.AnimatableManager
@@ -40,6 +42,10 @@ class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
                 isFeeding = false
             }
         }
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HybridAquaticItems.RAW_SHRIMP.get())
     }
 
     //#region Data
