@@ -14,7 +14,8 @@ import java.util.stream.Stream
 import javax.xml.crypto.Data
 
 @Suppress("NAME_SHADOWING")
-open class HybridAquaticSchoolingFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: Level, ) : HybridAquaticFishEntity(type, world) {
+open class HybridAquaticSchoolingFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
     private var leader: HybridAquaticSchoolingFishEntity? = null
     private var groupSize: Int = 1
 
@@ -42,7 +43,7 @@ open class HybridAquaticSchoolingFishEntity(type: EntityType<out HybridAquaticFi
     }
 
     override fun hasSelfControl(): Boolean {
-        return !this.hasLeader()
+        return !hasLeader() || leader === this
     }
 
     fun hasLeader(): Boolean {
@@ -62,7 +63,7 @@ open class HybridAquaticSchoolingFishEntity(type: EntityType<out HybridAquaticFi
     }
 
     fun leaveGroup() {
-        leader!!.decreaseGroupSize()
+        leader?.decreaseGroupSize()
         this.leader = null
     }
 
@@ -94,7 +95,8 @@ open class HybridAquaticSchoolingFishEntity(type: EntityType<out HybridAquaticFi
     }
 
     fun isCloseEnoughToLeader(): Boolean {
-        return this.distanceToSqr(this.leader!!) <= 121.0
+        val leader = this.leader ?: return false
+        return this.distanceToSqr(leader) <= 121.0
     }
 
     fun moveTowardLeader() {
@@ -112,30 +114,8 @@ open class HybridAquaticSchoolingFishEntity(type: EntityType<out HybridAquaticFi
                     this.groupSize < this.getMaxGroupSize()
         }
             .limit((this.getMaxGroupSize() - this.groupSize).toLong())
-            .forEach { fishx -> fishx!!.joinGroupOf(this)
+            .forEach { fishx ->
+                fishx!!.joinGroupOf(this)
             }
     }
-
-    override fun finalizeSpawn(
-        world: ServerLevelAccessor,
-        difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
-    ): SpawnGroupData? {
-        var entityData = entityData
-        xRot = 0.0f
-        super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
-        if (entityData == null) {
-            entityData = FishData(this)
-        } else {
-            val leader = (entityData as FishData).leader
-            if (this.getVariant() == leader.getVariant()) {
-                joinGroupOf(leader)
-            }
-        }
-        return entityData
-    }
-
-    open class FishData(val leader: HybridAquaticSchoolingFishEntity) : Data, SpawnGroupData
 }

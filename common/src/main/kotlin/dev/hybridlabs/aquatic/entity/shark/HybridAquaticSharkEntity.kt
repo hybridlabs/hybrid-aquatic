@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.SharkAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
@@ -12,6 +13,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.RandomSource
@@ -19,23 +21,13 @@ import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityDimensions
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.MobType
-import net.minecraft.world.entity.MoverType
-import net.minecraft.world.entity.NeutralMob
-import net.minecraft.world.entity.Pose
-import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
@@ -49,14 +41,14 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.UUID
+import java.util.*
 
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticSharkEntity(
     entityType: EntityType<out HybridAquaticSharkEntity>,
     world: Level,
-) : WaterAnimal(entityType, world), NeutralMob, GeoEntity {
+) : HybridAquaticWaterAnimal(entityType, world), NeutralMob, GeoEntity {
     open fun getTargetConfig(): MobTargetConfiguration? = null
 
     open val isPassive: Boolean = true
@@ -114,6 +106,10 @@ open class HybridAquaticSharkEntity(
     ): SpawnGroupData? {
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
+        return null
     }
 
     override fun getMobType(): MobType {
@@ -243,7 +239,7 @@ open class HybridAquaticSharkEntity(
 
     //#region Water Breathing
 
-    override fun handleAirSupply(air: Int) {}
+    override fun handleAirSupply(airSupply: Int) {}
 
     private fun getMaxMoistness(): Int {
         return 1200
@@ -382,7 +378,7 @@ open class HybridAquaticSharkEntity(
 
         //#region Spawning
         fun canShallowSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out HybridAquaticWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -397,7 +393,7 @@ open class HybridAquaticSharkEntity(
         }
 
         fun canSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out HybridAquaticWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -412,7 +408,7 @@ open class HybridAquaticSharkEntity(
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canDeepSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out HybridAquaticWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
