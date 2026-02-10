@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.ai.targeting.TargetingConditions
 import net.minecraft.world.level.Level
@@ -50,6 +51,14 @@ open class WaterAnimalBreedGoal @JvmOverloads constructor(
         }
     }
 
+    private fun variantsMatch(a: HybridAquaticWaterAnimal, b: HybridAquaticWaterAnimal): Boolean {
+        return if (a is VariantHolder<*> && b is VariantHolder<*>) {
+            a.variant == b.variant
+        } else {
+            true
+        }
+    }
+
     private val freePartner: HybridAquaticWaterAnimal?
         get() {
             val list: MutableList<out HybridAquaticWaterAnimal> = this.level.getNearbyEntities(
@@ -62,7 +71,10 @@ open class WaterAnimalBreedGoal @JvmOverloads constructor(
             var waterAnimal: HybridAquaticWaterAnimal? = null
 
             for (waterAnimal1 in list) {
-                if (this.waterAnimal.canMate(waterAnimal1) && this.waterAnimal.distanceToSqr(waterAnimal1) < d0) {
+                if (this.waterAnimal.canMate(waterAnimal1) &&
+                    variantsMatch(this.waterAnimal, waterAnimal1) &&
+                    this.waterAnimal.distanceToSqr(waterAnimal1) < d0
+                ) {
                     waterAnimal = waterAnimal1
                     d0 = this.waterAnimal.distanceToSqr(waterAnimal1)
                 }

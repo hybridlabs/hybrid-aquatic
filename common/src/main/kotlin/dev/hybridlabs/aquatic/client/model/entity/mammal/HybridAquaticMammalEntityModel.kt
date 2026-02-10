@@ -12,11 +12,19 @@ import software.bernie.geckolib.model.GeoModel
 abstract class HybridAquaticMammalEntityModel<T : HybridAquaticMammalEntity>(private val id: String) :
     GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {
-        return CommonClass.locate("geo/mammal/$id/$id.geo.json")
+        return if (animatable.isBaby) {
+            CommonClass.locate("geo/mammal/$id/baby_$id.geo.json")
+        } else {
+            CommonClass.locate("geo/mammal/$id/$id.geo.json")
+        }
     }
 
     override fun getTextureResource(animatable: T): ResourceLocation {
-        return CommonClass.locate("textures/entity/mammal/$id/$id.png")
+        return if (animatable.isBaby) {
+            CommonClass.locate("textures/entity/mammal/$id/baby_$id.png")
+        } else {
+            CommonClass.locate("textures/entity/mammal/$id/$id.png")
+        }
     }
 
     override fun getAnimationResource(animatable: T): ResourceLocation {

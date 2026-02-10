@@ -2,6 +2,8 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
@@ -95,12 +97,14 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
 
     override fun registerGoals() {
         goalSelector.addGoal(1, OtterBreatheAirGoal(this))
+        goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(2, OtterDiveGoal(this, 1.0))
         goalSelector.addGoal(2, OtterFloatGoal(this))
         goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.8, 20))
         goalSelector.addGoal(3, OtterWalkingGoal(this, 0.7, 20))
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
+        goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
         goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
         getTargetConfig().addAttackTarget(targetSelector, MAX_HUNGER / 4, this, OtterEntity::hunger)
     }

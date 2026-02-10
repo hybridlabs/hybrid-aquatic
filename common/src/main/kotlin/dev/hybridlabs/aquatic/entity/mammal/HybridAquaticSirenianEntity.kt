@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
@@ -200,7 +199,6 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
 
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
             Items.SEAGRASS,
-            HybridAquaticBlocks.SEA_LETTUCE.get()
         )
 
         fun getScaleAdjustment(sirenian: HybridAquaticSirenianEntity, adjustment: Float): Float {

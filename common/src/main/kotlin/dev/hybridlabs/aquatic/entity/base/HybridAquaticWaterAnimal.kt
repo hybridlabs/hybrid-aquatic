@@ -11,6 +11,7 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ExperienceOrb
 import net.minecraft.world.entity.MobType
+import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -169,14 +170,23 @@ abstract class HybridAquaticWaterAnimal protected constructor(entityType: Entity
     }
 
     fun spawnChildFromBreeding(level: ServerLevel, mate: HybridAquaticWaterAnimal) {
-        val ageablemob = this.getBreedOffspring(level, mate)
-        if (ageablemob != null) {
-            ageablemob.isBaby = true
-            ageablemob.moveTo(this.x, this.y, this.z, 0.0f, 0.0f)
-            this.finalizeSpawnChildFromBreeding(level, mate, ageablemob)
-            level.addFreshEntityWithPassengers(ageablemob)
+        val baby = this.getBreedOffspring(level, mate) ?: return
+
+        baby.isBaby = true
+        baby.moveTo(this.x, this.y, this.z, 0.0f, 0.0f)
+
+        if (this is VariantHolder<*> &&
+            mate is VariantHolder<*> &&
+            baby is VariantHolder<*>
+        ) {
+            (baby as VariantHolder<Any>).variant =
+                (this as VariantHolder<Any>).variant
         }
+
+        this.finalizeSpawnChildFromBreeding(level, mate, baby)
+        level.addFreshEntityWithPassengers(baby)
     }
+
 
     fun finalizeSpawnChildFromBreeding(level: ServerLevel, waterAnimal: HybridAquaticWaterAnimal, baby: AgeableMob?) {
         this.setAge(6000)

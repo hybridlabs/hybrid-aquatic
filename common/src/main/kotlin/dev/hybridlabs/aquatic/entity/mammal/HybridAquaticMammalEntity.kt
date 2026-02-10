@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.ai.control.FloatControl
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -123,6 +124,7 @@ open class HybridAquaticMammalEntity(type: EntityType<out HybridAquaticMammalEnt
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 6.0f))
         goalSelector.addGoal(5, TryFindWaterGoal(this))
+        goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
         goalSelector.addGoal(6, MeleeAttackGoal(this, 1.2000000476837158, true))
     }
 
