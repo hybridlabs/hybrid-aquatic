@@ -2,6 +2,11 @@
   "replace": false,
   "values": [
     "hybrid-aquatic:bleached_lophelia_coral_block",
-    "hybrid-aquatic:bleached_rose_coral_block"
+    "hybrid-aquatic:bleached_rose_coral_block",
+    "hybrid-aquatic:bleached_fire_coral_block",
+    "hybrid-aquatic:bleached_tube_coral_block",
+    "hybrid-aquatic:bleached_horn_coral_block",
+    "hybrid-aquatic:bleached_bubble_coral_block",
+    "hybrid-aquatic:bleached_brain_coral_block"
   ]
 }

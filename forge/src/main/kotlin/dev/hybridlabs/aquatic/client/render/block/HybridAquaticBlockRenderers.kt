@@ -89,6 +89,26 @@ object HybridAquaticBlockRenderers {
             HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get(),
             HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN.get(),
 
+            HybridAquaticBlocks.BLEACHED_FIRE_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_FIRE_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_FIRE_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.BLEACHED_TUBE_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_TUBE_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_TUBE_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.BLEACHED_HORN_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_HORN_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_HORN_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.BLEACHED_BRAIN_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_WALL_FAN.get(),
+
             HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get(),
             HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get(),
 
