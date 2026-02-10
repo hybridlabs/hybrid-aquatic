@@ -1,9 +1,11 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -15,14 +17,13 @@ import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
-import net.minecraft.world.entity.animal.Animal
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec3
@@ -37,7 +38,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "unused", "DEPRECATION")
 open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenianEntity>, world: Level) :
-    Animal(type, world), GeoEntity {
+    HybridAquaticWaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
@@ -55,9 +56,9 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         super.registerGoals()
         goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
-        goalSelector.addGoal(2, BreedGoal(this, 1.1))
+        goalSelector.addGoal(2, WaterAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
-        goalSelector.addGoal(5, FollowParentGoal(this, 1.1))
+        goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
     }
 
     //#region Data
@@ -208,16 +209,16 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
 
         fun canSpawn(
             type: EntityType<out HybridAquaticSirenianEntity>,
-            level: LevelAccessor,
-            spawnReason: MobSpawnType,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
-            val mutable = pos.mutable()
-            do {
-                mutable.move(Direction.UP)
-            } while (level.getFluidState(mutable).`is`(FluidTags.WATER))
-            return level.getBlockState(mutable).isAir
+            val topY = world.seaLevel - 4
+            val bottomY = world.seaLevel - 32
+
+            return pos.y in bottomY..topY &&
+                    world.isWaterAt(pos)
         }
     }
 }

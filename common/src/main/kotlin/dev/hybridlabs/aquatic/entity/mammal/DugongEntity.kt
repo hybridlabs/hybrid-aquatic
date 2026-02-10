@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -9,7 +10,6 @@ import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.BreedGoal
 import net.minecraft.world.level.Level
 
 @Suppress("DEPRECATION")
@@ -17,7 +17,7 @@ class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HybridAqu
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(2, BreedGoal(this, 1.1))
+        goalSelector.addGoal(2, WaterAnimalBreedGoal(this, 1.1))
     }
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): DugongEntity? {
