@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.ai.control.WallClimbNavigation
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -18,6 +17,7 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.goal.TryFindWaterGoal
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
@@ -44,43 +44,7 @@ open class HybridAquaticCritterEntity(
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
-        navigation = WallClimbNavigation(this, world)
-    }
-
-    fun isMoving(): Boolean {
-        return (this.onGround() || this.onClimbable()) && deltaMovement.lengthSqr() >= 0.0001
-    }
-
-    override fun tick() {
-        super.tick()
-
-        if (!level().isClientSide) {
-            setClimbingWall(horizontalCollision)
-        }
-
-        if (isClimbingWall()) {
-            climbingTicks++
-
-        } else {
-            climbingTicks = 0
-        }
-
-        if (onClimbable()) {
-            val velocity = deltaMovement
-            setDeltaMovement(velocity.x, velocity.y * 0.33, velocity.z)
-        }
-    }
-
-    override fun onClimbable(): Boolean {
-        return this.climbingTicks > 8 && this.isClimbingWall()
-    }
-
-    private fun isClimbingWall(): Boolean {
-        return entityData.get(CLIMBING)
-    }
-
-    private fun setClimbingWall(isClimbingWall: Boolean) {
-        entityData.set(CLIMBING, isClimbingWall)
+        navigation = GroundPathNavigation(this, world)
     }
 
     override fun registerGoals() {
@@ -121,7 +85,6 @@ open class HybridAquaticCritterEntity(
         super.defineSynchedData()
         entityData.define(CRITTER_SIZE, 0)
         entityData.define(CRITTER_FLAGS, 0.toByte())
-        entityData.define(CLIMBING, false)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
@@ -188,8 +151,6 @@ open class HybridAquaticCritterEntity(
             SynchedEntityData.defineId(HybridAquaticCritterEntity::class.java, EntityDataSerializers.INT)
         val CRITTER_FLAGS: EntityDataAccessor<Byte> =
             SynchedEntityData.defineId(HybridAquaticCritterEntity::class.java, EntityDataSerializers.BYTE)
-        val CLIMBING: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(HybridAquaticCritterEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         fun canSpawn(
             type: EntityType<out WaterAnimal>,
