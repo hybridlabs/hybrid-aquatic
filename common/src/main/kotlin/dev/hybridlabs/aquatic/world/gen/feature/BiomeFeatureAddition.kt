@@ -79,6 +79,12 @@ data class BiomeFeatureAddition(
                 HybridAquaticPlacedFeatures.JUNGLE_LILY_PAD
             ),
 
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.TROPICAL_RIVERS,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                HybridAquaticPlacedFeatures.WATER_HYACINTH
+            ),
+
             //#region Giant Clams
             BiomeFeatureAddition(
                 HybridAquaticBiomeTags.REEF,

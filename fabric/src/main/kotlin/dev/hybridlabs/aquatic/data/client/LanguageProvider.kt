@@ -191,6 +191,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BULL_KELP_PLANT.get() to "Bull Kelp Plant",
             HybridAquaticBlocks.FLOATING_SARGASSUM.get() to "Floating Sargassum",
             HybridAquaticBlocks.WATER_LETTUCE.get() to "Water Lettuce",
+            HybridAquaticBlocks.WATER_HYACINTH.get() to "Water Hyacinth",
             HybridAquaticBlocks.JUNGLE_LILY_PAD.get() to "Jungle Lily Pad",
             HybridAquaticBlocks.RAFT.get() to "Raft",
 

@@ -154,6 +154,12 @@ object HybridAquaticBlocks {
             .instabreak())
     }
 
+    val WATER_HYACINTH = register("water_hyacinth") {
+        WaterHyacinthBlock(Properties.copy(Blocks.LILY_PAD)
+            .noCollission()
+            .instabreak())
+    }
+
     val JUNGLE_LILY_PAD = register("jungle_lily_pad") {
         JungleLilyPadBlock(Properties.copy(Blocks.LILY_PAD)
             .instabreak())

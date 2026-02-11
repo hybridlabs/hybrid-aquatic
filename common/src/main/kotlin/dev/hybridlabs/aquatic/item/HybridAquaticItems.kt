@@ -217,6 +217,7 @@ object HybridAquaticItems {
     val FLOATING_SARGASSUM =
         registerPlaceableInWaterBlockItem("floating_sargassum") { HybridAquaticBlocks.FLOATING_SARGASSUM.get() }
     val WATER_LETTUCE = registerPlaceableInWaterBlockItem("water_lettuce") { HybridAquaticBlocks.WATER_LETTUCE.get() }
+    val WATER_HYACINTH = registerPlaceableInWaterBlockItem("water_hyacinth") { HybridAquaticBlocks.WATER_HYACINTH.get() }
     val JUNGLE_LILY_PAD =
         registerPlaceableInWaterBlockItem("jungle_lily_pad") { HybridAquaticBlocks.JUNGLE_LILY_PAD.get() }
     val SHORT_RED_ALGAE = registerBlockItem("short_red_algae") { HybridAquaticBlocks.SHORT_RED_ALGAE.get() }

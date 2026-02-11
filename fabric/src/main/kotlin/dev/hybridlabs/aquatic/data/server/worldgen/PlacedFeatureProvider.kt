@@ -133,6 +133,17 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticPlacedFeatures.WATER_HYACINTH, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.WATER_HYACINTH), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    RarityFilter.onAverageOnceEvery(1),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticPlacedFeatures.JUNGLE_LILY_PAD, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD), listOf(
                     InSquarePlacement.spread(),

@@ -373,6 +373,22 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
+            HybridAquaticConfiguredFeatures.WATER_HYACINTH,
+            ConfiguredFeature(
+                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                    8, 3, 2,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            SimpleStateProvider.simple(HybridAquaticBlocks.WATER_HYACINTH.get())
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
+        entries.add(
             HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD,
             ConfiguredFeature(
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(

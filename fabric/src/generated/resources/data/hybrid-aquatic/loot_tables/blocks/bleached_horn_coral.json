@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "hybrid-aquatic:bleached_horn_coral"
         }
       ],
       "rolls": 1.0

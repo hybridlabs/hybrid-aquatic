@@ -87,6 +87,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.SARGASSUM.get())
                 entries.accept(HybridAquaticItems.FLOATING_SARGASSUM.get())
                 entries.accept(HybridAquaticItems.WATER_LETTUCE.get())
+                entries.accept(HybridAquaticItems.WATER_HYACINTH.get())
                 entries.accept(HybridAquaticItems.JUNGLE_LILY_PAD.get())
 
                 entries.accept(HybridAquaticItems.SUN_CORAL_BLOCK.get())
