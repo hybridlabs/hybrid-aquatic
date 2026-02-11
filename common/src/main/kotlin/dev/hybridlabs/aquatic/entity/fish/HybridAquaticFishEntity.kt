@@ -22,8 +22,11 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -47,6 +50,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, FishAttackGoal(this, 1.1, true))
+        goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
         getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticFishEntity::hunger)
     }
@@ -146,22 +150,22 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         return true
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt(MOISTNESS_KEY, moistness)
-        nbt.putInt(FISH_SIZE_KEY, size)
-        nbt.putInt(HUNGER_KEY, hunger)
-        nbt.putBoolean("FromFishingNet", fromFishingNet)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt(MOISTNESS_KEY, moistness)
+        compound.putInt(FISH_SIZE_KEY, size)
+        compound.putInt(HUNGER_KEY, hunger)
+        compound.putBoolean("FromFishingNet", fromFishingNet)
     }
 
     var fromFishingNet = false
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        moistness = nbt.getInt(MOISTNESS_KEY)
-        size = nbt.getInt(FISH_SIZE_KEY)
-        hunger = nbt.getInt(HUNGER_KEY)
-        fromFishingNet = nbt.getBoolean("FromFishingNet")
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        moistness = compound.getInt(MOISTNESS_KEY)
+        size = compound.getInt(FISH_SIZE_KEY)
+        hunger = compound.getInt(HUNGER_KEY)
+        fromFishingNet = compound.getBoolean("FromFishingNet")
     }
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
@@ -323,6 +327,10 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             SynchedEntityData.defineId(HybridAquaticFishEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
+
+        val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
+            Items.BREAD,
+        )
 
         const val MAX_HUNGER = 2400
         const val HUNGER_KEY = "Hunger"

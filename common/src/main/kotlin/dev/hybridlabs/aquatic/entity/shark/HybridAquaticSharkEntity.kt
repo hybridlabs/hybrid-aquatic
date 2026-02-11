@@ -27,12 +27,14 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -88,9 +90,10 @@ open class HybridAquaticSharkEntity(
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(0, StayInWaterGoal(this))
-        goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(0, SharkAttackGoal(this, 1.1, true))
+        goalSelector.addGoal(0, StayInWaterGoal(this))
+        goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
+        goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 2))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive })
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive })
         getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticSharkEntity::hunger)
@@ -372,6 +375,10 @@ open class HybridAquaticSharkEntity(
             SynchedEntityData.defineId(HybridAquaticSharkEntity::class.java, EntityDataSerializers.BOOLEAN)
         val ANGER_TIME_RANGE: UniformInt = TimeUtil.rangeOfSeconds(10, 30)
         val BEACHED_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.beached")
+
+        val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
+            HybridAquaticItemTags.RAW_FISH,
+        )
 
         //#region Spawning
         fun canShallowSpawn(
