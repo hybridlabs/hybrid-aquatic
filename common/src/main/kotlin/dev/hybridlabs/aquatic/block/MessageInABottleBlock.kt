@@ -8,7 +8,10 @@ import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.util.StringRepresentable
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -28,6 +31,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties.WAT
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.level.pathfinder.PathComputationType
+import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 import kotlin.jvm.optionals.getOrNull
@@ -93,6 +97,24 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
             .setValue(WATERLOGGED, waterlogged)
     }
 
+    override fun use(
+        state: BlockState,
+        level: Level,
+        pos: BlockPos,
+        player: Player,
+        hand: InteractionHand,
+        hit: BlockHitResult,
+    ): InteractionResult {
+        if (player.getItemInHand(hand).isEmpty) {
+            (level.getBlockEntity(pos) as? MessageInABottleBlockEntity)?.let { blockEntity ->
+                blockEntity.variant = blockEntity.variant.next
+                return InteractionResult.sidedSuccess(level.isClientSide)
+            }
+        }
+
+        return InteractionResult.PASS
+    }
+
     override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
         return false
     }
@@ -151,12 +173,16 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         JAR("jar"),
         LONGNECK("longneck");
 
+        val next: Variant by lazy { NEXT_MAP[this] ?: entries[0] }
+
         override fun getSerializedName(): String {
             return id
         }
 
         companion object {
             private val BY_ID = entries.associateBy(Variant::id)
+
+            private val NEXT_MAP = entries.zipWithNext().toMap()
 
             fun byId(id: String): Variant {
                 return BY_ID[id] ?: BOTTLE
