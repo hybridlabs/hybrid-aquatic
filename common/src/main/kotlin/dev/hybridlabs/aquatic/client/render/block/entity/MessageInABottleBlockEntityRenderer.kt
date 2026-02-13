@@ -5,6 +5,7 @@ package dev.hybridlabs.aquatic.client.render.block.entity
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import com.mojang.math.Axis
+import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.client.model.block.entity.MessageInABottleBlockEntityModel
 import net.minecraft.client.renderer.MultiBufferSource
@@ -40,7 +41,7 @@ class MessageInABottleBlockEntityRenderer(context: BlockEntityRendererProvider.C
         val hashCode = Mth.getSeed(pos.x, 0, pos.z)
         random.setSeed(hashCode)
         matrices.translate(0.5, 0.0, 0.5)
-        matrices.mulPose(Axis.YP.rotationDegrees(random.nextFloat() * 360.0f))
+        matrices.mulPose(Axis.YP.rotationDegrees(random.nextFloat() * 360.0f + (ROTATION_PER * (blockEntity.variant.ordinal + 1))))
         matrices.translate(-0.5, 0.0, -0.5)
 
         // translate in water
@@ -66,5 +67,9 @@ class MessageInABottleBlockEntityRenderer(context: BlockEntityRendererProvider.C
             blue,
             alpha
         )
+    }
+
+    companion object {
+        val ROTATION_PER = 360.0f / MessageInABottleBlock.Variant.entries.size
     }
 }
