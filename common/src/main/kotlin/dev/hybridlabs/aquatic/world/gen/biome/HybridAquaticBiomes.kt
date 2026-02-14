@@ -123,6 +123,10 @@ object HybridAquaticBiomes {
     val TROPICAL_RIVER_SURFACE_RULE: RuleSource =
         ifTrue(isBiome(TROPICAL_RIVER), ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())))
 
+    val SEASONAL_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("seasonal_river"))
+    val SEASONAL_RIVER_SURFACE_RULE: RuleSource =
+        ifTrue(isBiome(SEASONAL_RIVER), ifTrue(ON_FLOOR, state(Blocks.COARSE_DIRT.defaultBlockState())))
+
     val COLD_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_river"))
     val COLD_RIVER_SURFACE_RULE: RuleSource =
         ifTrue(isBiome(COLD_RIVER), ifTrue(ON_FLOOR, state(Blocks.GRAVEL.defaultBlockState())))
@@ -367,6 +371,18 @@ object HybridAquaticBiomes {
                 SubBiomeMatcher.Criterion.ofBiome(
                     SubBiomeMatcher.CriterionTargets.NEIGHBOR,
                     BiomeTags.IS_JUNGLE,
+                    false
+                )
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            Biomes.RIVER,
+            SEASONAL_RIVER,
+            SubBiomeMatcher.of(
+                SubBiomeMatcher.Criterion.ofBiome(
+                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                    BiomeTags.IS_SAVANNA,
                     false
                 )
             )
@@ -1329,6 +1345,7 @@ object HybridAquaticBiomes {
 
                     PLACER_RIVER_SURFACE_RULE,
                     TROPICAL_RIVER_SURFACE_RULE,
+                    SEASONAL_RIVER_SURFACE_RULE,
                     COLD_RIVER_SURFACE_RULE,
 
                     WARM_OCEAN_SURFACE_RULE,

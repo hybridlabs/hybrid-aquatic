@@ -188,6 +188,17 @@ class BiomeProvider(
         )
 
         entries.add(
+            HybridAquaticBiomes.SEASONAL_RIVER,
+            create(
+                entries,
+                temperature = 2.0f,
+                downfall = 0.0f,
+                waterColor = 0x3F76E4,
+                waterFogColor = 0x3F76E4
+            )
+        )
+
+        entries.add(
             HybridAquaticBiomes.PLACER_RIVER,
             create(
                 entries,
