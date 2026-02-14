@@ -21,7 +21,6 @@ abstract class HybridAquaticSirenianEntityModel<T : HybridAquaticSirenianEntity>
         }
     }
 
-
     override fun getTextureResource(animatable: T): ResourceLocation {
         return if (animatable.isBaby) {
             CommonClass.locate("textures/entity/mammal/$id/baby_$id.png")
