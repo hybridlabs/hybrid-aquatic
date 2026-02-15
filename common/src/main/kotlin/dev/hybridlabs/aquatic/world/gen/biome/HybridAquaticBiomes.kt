@@ -1324,6 +1324,7 @@ object HybridAquaticBiomes {
 
         //#endregion
 
+        //#region Surface Rule Generation
         SurfaceGeneration.addOverworldSurfaceRules(
             ResourceLocation("minecraft", "rules/overworld"),
             ifTrue(
@@ -1357,5 +1358,6 @@ object HybridAquaticBiomes {
                 )
             )
         )
+        //#endregion
     }
 }
