@@ -23,7 +23,6 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
-import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
@@ -309,10 +308,6 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
-    }
-
-    override fun createNavigation(level: Level): PathNavigation {
-        return WaterBoundPathNavigation(this, level)
     }
 
     @Suppress("DEPRECATION", "unused")
