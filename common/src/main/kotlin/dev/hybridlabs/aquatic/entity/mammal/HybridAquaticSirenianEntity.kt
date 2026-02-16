@@ -149,6 +149,11 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         this.airSupply = this.maxAirSupply
         this.yRot = 0.0f
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
+
+        if (this.random.nextFloat() < 0.25f) {
+            this.setAge(-6000)
+        }
+
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 

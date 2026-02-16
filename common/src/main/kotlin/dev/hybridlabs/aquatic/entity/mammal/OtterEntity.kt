@@ -162,6 +162,11 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
+
+        if (this.random.nextFloat() < 0.25f) {
+            this.setAge(-6000)
+        }
+
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
