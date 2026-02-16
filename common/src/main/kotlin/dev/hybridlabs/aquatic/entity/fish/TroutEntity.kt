@@ -27,6 +27,7 @@ import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
+@Suppress("DEPRECATION")
 class TroutEntity(type: EntityType<out TroutEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<TroutEntity.Companion.Type> {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
@@ -57,11 +58,15 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) : HybridAquat
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
+        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
+
         this.refreshDimensions()
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+
+        return spawnData
     }
 
     override fun getDimensions(pose: Pose): EntityDimensions {
