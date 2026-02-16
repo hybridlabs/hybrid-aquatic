@@ -83,7 +83,7 @@ open class HybridAquaticSharkEntity(
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
-        moveControl = SmoothSwimmingMoveControl(this, 45, 3, 0.02F, 0.1F, false)
+        moveControl = SmoothSwimmingMoveControl(this, 60, 6, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 15)
         navigation = WaterBoundPathNavigation(this, world)
     }

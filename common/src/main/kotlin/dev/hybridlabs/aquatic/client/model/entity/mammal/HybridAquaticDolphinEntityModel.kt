@@ -49,6 +49,7 @@ abstract class HybridAquaticDolphinEntityModel<T : HybridAquaticDolphinEntity>(p
         }
 
         val deltaTime = Minecraft.getInstance().deltaFrameTime
+        val head = animationProcessor.getBone(PartNames.HEAD)
         val body = animationProcessor.getBone(PartNames.BODY)
         val body2 = animationProcessor.getBone("body_2")
         val tail = animationProcessor.getBone(PartNames.TAIL)
@@ -67,6 +68,7 @@ abstract class HybridAquaticDolphinEntityModel<T : HybridAquaticDolphinEntity>(p
 
         val roll = Mth.lerp(deltaTime, animatable.prevRoll, animatable.currentRoll)
 
+        head.rotY += roll * -Mth.DEG_TO_RAD
         body.rotX = tilt * -Mth.DEG_TO_RAD
         body.rotZ = roll * -Mth.DEG_TO_RAD
         body2?.rotY += roll * Mth.DEG_TO_RAD
