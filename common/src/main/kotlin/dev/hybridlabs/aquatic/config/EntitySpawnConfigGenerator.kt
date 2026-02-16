@@ -792,6 +792,16 @@ class EntitySpawnConfigGenerator {
             ),
             1, 1, 3
         )
+
+        addDolphin(
+            HybridAquaticEntityTypes.ORCA.get(),
+            listOf(
+                HybridAquaticBiomeTags.ARCTIC_OCEANS,
+                HybridAquaticBiomeTags.COLD_OCEANS,
+                HybridAquaticBiomeTags.TEMPERATE_OCEANS,
+            ),
+            1, 1, 3
+        )
         //#endregion
 
         //#region Crustaceans
@@ -1079,6 +1089,23 @@ class EntitySpawnConfigGenerator {
     }
 
     private fun addSirenian(
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
+        weight: Int,
+        minGroup: Int,
+        maxGroup: Int,
+    ) {
+        add(
+            entityType,
+            spawnTags,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL"),
+            weight,
+            minGroup,
+            maxGroup
+        )
+    }
+
+    private fun addDolphin(
         entityType: EntityType<*>,
         spawnTags: List<TagKey<Biome>>,
         weight: Int,

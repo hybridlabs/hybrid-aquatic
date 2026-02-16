@@ -568,6 +568,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.HOUND_SHARK.get() to "Hound Shark",
             HybridAquaticEntityTypes.OTTER.get() to "Otter",
             HybridAquaticEntityTypes.DUGONG.get() to "Dugong",
+            HybridAquaticEntityTypes.ORCA.get() to "Orca",
         )
 
         // verify display name list is valid

@@ -103,6 +103,7 @@ import dev.hybridlabs.aquatic.entity.jellyfish.MoonJellyfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.NomuraJellyfishEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.SeaNettleEntity
 import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
+import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinomaEntity
@@ -963,6 +964,13 @@ object HybridAquaticEntityTypes {
         DugongEntity::createMobAttributes
     )
 
+    val ORCA = registerDolphin(
+        "orca",
+        ::OrcaEntity,
+        EntityDimensions.fixed(2.5f, 1.0f),
+        OrcaEntity::createMobAttributes
+    )
+
     //endregion
 
     private fun <T : LivingEntity> registerShark(
@@ -1095,6 +1103,21 @@ object HybridAquaticEntityTypes {
     }
 
     private fun <T : LivingEntity> registerSirenian(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL")
+        )
+    }
+
+    private fun <T : LivingEntity> registerDolphin(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,

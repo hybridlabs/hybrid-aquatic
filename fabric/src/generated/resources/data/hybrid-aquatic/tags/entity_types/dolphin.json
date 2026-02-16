@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:dolphin",
+    "hybrid-aquatic:orca",
     {
       "id": "alexsmobs:orca",
       "required": false

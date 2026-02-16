@@ -479,6 +479,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HybridAquaticEntityTags.DOLPHIN)
             .add(
                 EntityType.DOLPHIN,
+                HybridAquaticEntityTypes.ORCA.get(),
             )
             .addOptional(ResourceLocation("alexsmobs", "orca"))
             .addOptional(ResourceLocation("wonderoussea", "bottlenose_dolphin"))

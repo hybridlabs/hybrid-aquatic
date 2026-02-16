@@ -100,6 +100,7 @@ import dev.hybridlabs.aquatic.client.render.entity.jellyfish.MoonJellyfishEntity
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.NomuraJellyfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.SeaNettleEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.DugongEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.mammal.OrcaEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinogenEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinomaEntityRenderer
@@ -117,6 +118,7 @@ import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.NautilusEntityR
 import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.VampireSquidEntityRenderer
 import dev.hybridlabs.aquatic.client.renderer.entity.shark.WhaleSharkEntityRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.aquatic.platform.ClientServices
 
 @Suppress("unused")
@@ -801,6 +803,7 @@ object HybridAquaticEntityRenderers {
 
     //endregion
 
+    //#region Mammals
     val OTTER =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.OTTER,
@@ -811,6 +814,12 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.DUGONG,
             ::DugongEntityRenderer
+        )
+
+    val ORCA =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.ORCA,
+            ::OrcaEntityRenderer
         )
 
     //region minibosses
