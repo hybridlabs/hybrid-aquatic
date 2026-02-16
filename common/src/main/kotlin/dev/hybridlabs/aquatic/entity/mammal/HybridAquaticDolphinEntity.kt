@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticRandomSwimmingGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
@@ -20,7 +21,6 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.BreathAirGoal
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
-import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.item.ItemStack
@@ -61,7 +61,7 @@ open class HybridAquaticDolphinEntity(type: EntityType<out HybridAquaticDolphinE
         goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 7.0))
         goalSelector.addGoal(2, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
-        goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
+        goalSelector.addGoal(3, HybridAquaticRandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
         goalSelector.addGoal(6, MeleeAttackGoal(this, 1.2, true))
     }
