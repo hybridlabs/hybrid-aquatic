@@ -283,7 +283,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
                         state.setAndContinue(DefaultAnimations.IDLE)
                     }
 
-                    this.moistness < 595 -> {
+                    this.moistness < 590 -> {
                         state.setAndContinue(FLOP_ANIMATION)
                     }
 

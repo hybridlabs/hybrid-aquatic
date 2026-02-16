@@ -35,7 +35,8 @@ abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
 
-        if (!animatable.isInWater) {
+        if (!animatable.isInWater && animatable.moistness < 580) {
+            animatable.triggerAnim("Fish Controller", "misc.flop")
             return
         }
 
@@ -59,10 +60,10 @@ abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private
 
         val roll = Mth.lerp(deltaTime, animatable.prevRoll, animatable.currentRoll)
 
-        body.rotX = tilt * -Mth.DEG_TO_RAD
-        body.rotZ = roll * -Mth.DEG_TO_RAD
-        body2?.rotY += roll * Mth.DEG_TO_RAD
-        tail?.rotY += roll * Mth.DEG_TO_RAD
-        tailFin?.rotY += roll * Mth.DEG_TO_RAD
+        body?.rotX = tilt * -Mth.DEG_TO_RAD
+        body?.rotZ = roll * -Mth.DEG_TO_RAD
+        body2?.rotY = body2.rotY + roll * Mth.DEG_TO_RAD
+        tail?.rotY = tail.rotY + roll * Mth.DEG_TO_RAD
+        tailFin?.rotY = tailFin.rotY + roll * Mth.DEG_TO_RAD
     }
 }
