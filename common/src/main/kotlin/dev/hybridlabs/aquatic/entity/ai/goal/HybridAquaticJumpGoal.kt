@@ -10,9 +10,18 @@ import kotlin.math.abs
 import kotlin.math.atan2
 
 @Suppress("DEPRECATION")
-class HybridAquaticJumpGoal(private val mob: PathfinderMob, chance: Int) : JumpGoal() {
+class HybridAquaticJumpGoal(
+    private val mob: PathfinderMob,
+    chance: Int,
+    private val jumpHeight: Double
+) : JumpGoal() {
+
     private val chance: Int = reducedTickDelay(chance)
     private var inWater = false
+
+    private fun jumpVelocity(): Double {
+        return kotlin.math.sqrt(0.16 * jumpHeight)
+    }
 
     override fun canUse(): Boolean {
         return if (mob.random.nextInt(chance) != 0) {
@@ -61,8 +70,15 @@ class HybridAquaticJumpGoal(private val mob: PathfinderMob, chance: Int) : JumpG
 
     override fun start() {
         val direction = mob.motionDirection
+        val jumpVelocity = jumpVelocity()
+
         mob.deltaMovement =
-            mob.deltaMovement.add(direction.stepX.toDouble() * 0.6, 0.7, direction.stepZ.toDouble() * 0.6)
+            mob.deltaMovement.add(
+                direction.stepX * 0.6,
+                jumpVelocity,
+                direction.stepZ * 0.6
+            )
+
         mob.navigation.stop()
     }
 

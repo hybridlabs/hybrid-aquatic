@@ -20,7 +20,7 @@ class ThresherSharkEntity(type: EntityType<out ThresherSharkEntity>, world: Leve
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))
-        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
+        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 5.0))
     }
 
     companion object {

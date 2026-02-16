@@ -59,7 +59,7 @@ open class HybridAquaticDolphinEntity(type: EntityType<out HybridAquaticDolphinE
         super.registerGoals()
         goalSelector.addGoal(0, BreathAirGoal(this))
         goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
-        goalSelector.addGoal(2, HybridAquaticJumpGoal(this, 20))
+        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 7.0))
         goalSelector.addGoal(2, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))

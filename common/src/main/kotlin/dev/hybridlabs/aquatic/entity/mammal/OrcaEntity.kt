@@ -47,11 +47,10 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
     //#endregion
 
     companion object {
-
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 50.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.65)
+                .add(Attributes.MOVEMENT_SPEED, 1.0)
                 .add(Attributes.ATTACK_DAMAGE, 8.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.2)
                 .add(Attributes.FOLLOW_RANGE, 24.0)

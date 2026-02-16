@@ -50,7 +50,7 @@ class TunaEntity(type: EntityType<out TunaEntity>, world: Level) : HybridAquatic
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
+        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 5.0))
     }
 
     override fun isFood(stack: ItemStack): Boolean {

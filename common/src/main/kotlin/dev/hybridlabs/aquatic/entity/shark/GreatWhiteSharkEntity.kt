@@ -30,7 +30,7 @@ class GreatWhiteSharkEntity(type: EntityType<out GreatWhiteSharkEntity>, world: 
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))
         goalSelector.addGoal(8, FollowBoatGoal(this))
-        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
+        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 5.0))
     }
 
     companion object {

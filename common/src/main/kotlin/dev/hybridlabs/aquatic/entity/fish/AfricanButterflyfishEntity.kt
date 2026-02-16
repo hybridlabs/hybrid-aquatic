@@ -40,7 +40,7 @@ class AfricanButterflyfishEntity(type: EntityType<out AfricanButterflyfishEntity
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, BreathAirGoal(this))
-        goalSelector.addGoal(4, HybridAquaticJumpGoal(this, 10))
+        goalSelector.addGoal(4, HybridAquaticJumpGoal(this, 10, 1.5))
     }
 
     override fun tick() {
@@ -80,9 +80,9 @@ class AfricanButterflyfishEntity(type: EntityType<out AfricanButterflyfishEntity
         this.deltaMovement = newMotion
     }
 
-    override fun handleAirSupply(air: Int) {
+    override fun handleAirSupply(airSupply: Int) {
         if (isInWater && !isNoAi) {
-            this.airSupply = air - 1
+            this.airSupply = airSupply - 1
         } else {
             this.airSupply = this.maxAirSupply
         }
