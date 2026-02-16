@@ -37,7 +37,7 @@ abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity>(
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
 
-        if (animatable.onGround()) {
+        if (animatable.onGround() && !animatable.isInWater) {
             return
         }
 
