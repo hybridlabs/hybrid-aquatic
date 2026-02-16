@@ -171,7 +171,7 @@ class BiomeProvider(
                 waterFogColor = 0x4D7A60,
                 listOf(
                     Pair(
-                        MobCategory.WATER_CREATURE,
+                        MobCategory.CREATURE,
                         MobSpawnSettings.SpawnerData(EntityType.FROG, 1, 1, 2)
                     )
                 )
