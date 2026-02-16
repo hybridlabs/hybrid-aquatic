@@ -72,7 +72,7 @@ open class HybridAquaticSharkEntity(
             entityData.set(HUNGER, hunger)
         }
 
-    private var moistness: Int
+    var moistness: Int
         get() = entityData.get(MOISTNESS)
         set(moistness) {
             entityData.set(MOISTNESS, moistness)

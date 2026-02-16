@@ -35,7 +35,7 @@ abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
 
-        if (animatable.onGround() && !animatable.isInWater) {
+        if (!animatable.isInWater) {
             return
         }
 

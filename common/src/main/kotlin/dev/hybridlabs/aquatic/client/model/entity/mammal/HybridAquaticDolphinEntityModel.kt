@@ -44,7 +44,7 @@ abstract class HybridAquaticDolphinEntityModel<T : HybridAquaticDolphinEntity>(p
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
 
-        if (animatable.onGround() && !animatable.isInWater) {
+        if (animatable.moistness <= -20 && !animatable.isInWater) {
             return
         }
 
