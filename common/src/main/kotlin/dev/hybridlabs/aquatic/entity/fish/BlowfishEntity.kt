@@ -65,14 +65,14 @@ class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) : Hybri
         refreshDimensions()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt("PuffState", getPuffState())
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt("PuffState", getPuffState())
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        setPuffState(nbt.getInt("PuffState").coerceAtMost(FULLY_PUFFED))
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        setPuffState(compound.getInt("PuffState").coerceAtMost(FULLY_PUFFED))
     }
 
     override fun tick() {
