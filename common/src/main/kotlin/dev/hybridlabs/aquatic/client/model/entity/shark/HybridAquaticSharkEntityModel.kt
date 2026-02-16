@@ -36,6 +36,11 @@ abstract class HybridAquaticSharkEntityModel<T : HybridAquaticSharkEntity>(
         animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
+
+        if (animatable.onGround()) {
+            return
+        }
+
         val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
 
         val head = animationProcessor.getBone(PartNames.HEAD)

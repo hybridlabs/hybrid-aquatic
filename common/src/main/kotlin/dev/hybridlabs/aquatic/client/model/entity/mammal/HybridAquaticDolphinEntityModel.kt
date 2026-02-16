@@ -44,6 +44,10 @@ abstract class HybridAquaticDolphinEntityModel<T : HybridAquaticDolphinEntity>(p
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
 
+        if (animatable.onGround()) {
+            return
+        }
+
         val deltaTime = Minecraft.getInstance().deltaFrameTime
         val head = animationProcessor.getBone(PartNames.HEAD)
         val body = animationProcessor.getBone(PartNames.BODY)
