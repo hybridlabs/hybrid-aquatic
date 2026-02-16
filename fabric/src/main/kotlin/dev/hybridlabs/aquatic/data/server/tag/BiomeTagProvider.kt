@@ -35,6 +35,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.PLACER_RIVER)
             .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
             .addOptional(HybridAquaticBiomes.COLD_RIVER)
+            .addOptional(HybridAquaticBiomes.SEASONAL_RIVER)
 
         getOrCreateTagBuilder(BiomeTags.IS_DEEP_OCEAN)
             .addOptional(HybridAquaticBiomes.TRENCH)
@@ -195,6 +196,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.COLD_RIVER)
             .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
             .addOptional(HybridAquaticBiomes.PLACER_RIVER)
+            .addOptional(HybridAquaticBiomes.SEASONAL_RIVER)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.PLACER_RIVERS)
             .addOptional(HybridAquaticBiomes.PLACER_RIVER)
@@ -206,6 +208,14 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("regions_unexplored", "tropical_river"))
             .addOptional(ResourceLocation("riverredux", "tropical_river"))
             .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.SEASONAL_RIVERS)
+            .addOptional(HybridAquaticBiomes.SEASONAL_RIVER)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.COLD_RIVERS)
+            .addOptional(HybridAquaticBiomes.COLD_RIVER)
+            .addOptional(ResourceLocation("riverredux", "gravelly_river"))
+            .addOptional(ResourceLocation("regions_unexplored", "cold_river"))
         //#endregion
 
         //#region Misc Biome Tags

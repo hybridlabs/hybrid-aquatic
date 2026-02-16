@@ -53,6 +53,10 @@
     {
       "id": "hybrid-aquatic:placer_river",
       "required": false
+    },
+    {
+      "id": "hybrid-aquatic:seasonal_river",
+      "required": false
     }
   ]
 }
