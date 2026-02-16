@@ -309,7 +309,7 @@ object HybridAquaticEntityTypes {
     val TROUT = registerRiverFish(
         "trout",
         ::TroutEntity,
-        EntityDimensions.fixed(0.3f, 0.25f),
+        EntityDimensions.scalable(0.3f, 0.25f),
         TroutEntity::createMobAttributes
     )
 
