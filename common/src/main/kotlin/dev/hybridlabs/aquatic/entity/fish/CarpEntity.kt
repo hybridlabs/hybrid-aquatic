@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
@@ -135,14 +134,14 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HybridAquatic
         entityData.define(TYPE, 0)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {
