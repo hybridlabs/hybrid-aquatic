@@ -30,7 +30,6 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) : HybridAquaticCritterEntity(type, world),
     VariantHolder<SeaUrchinEntity.Companion.Type> {
-
     private var timeUntilNextBreak = 0
     private var spawnUrchinOnNextBreak = false
 
