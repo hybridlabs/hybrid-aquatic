@@ -25,83 +25,6 @@ import software.bernie.geckolib.core.animation.AnimationState
 class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.ALL_SHARKS)
 
-    override fun aiStep() {
-        super.aiStep()
-
-        if (!level().isClientSide && this.isEffectiveAi) {
-            if (!this.isInWater) {
-                if (isFeeding()) {
-                    this.deltaMovement = deltaMovement.subtract(0.0, 0.01, 0.0)
-                    this.xRot = 0f
-                }
-            } else {
-                setFeeding(false)
-            }
-        }
-    }
-
-    override fun tick() {
-        super.tick()
-
-        if (!level().isClientSide) {
-            if (hunger < MAX_HUNGER / 4 && isInWater) {
-                setFeeding(true)
-            }
-
-            if (isFeeding()) {
-                hunger += 2
-
-                if (hunger >= MAX_HUNGER) {
-                    hunger = MAX_HUNGER
-                    setFeeding(false)
-                }
-            }
-        }
-    }
-
-    override fun getDimensions(pose: Pose): EntityDimensions {
-        return if (isFeeding()) {
-            EntityDimensions.scalable(0.5f, 5.0f)
-        } else {
-            super.getDimensions(pose)
-        }
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return if (isFeeding()) { (dimensions.height * 0.95f)
-        } else { (dimensions.height * 0.5f) }
-    }
-
-    override fun onSyncedDataUpdated(key: EntityDataAccessor<*>) {
-        super.onSyncedDataUpdated(key)
-        if (key == FEEDING) {
-            refreshDimensions()
-        }
-    }
-
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(FEEDING, false)
-    }
-
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putBoolean("Feeding", isFeeding())
-    }
-
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        this.setFeeding(nbt.getBoolean("Feeding"))
-        refreshDimensions()
-    }
-
-    private fun isFeeding(): Boolean {
-        return entityData.get(FEEDING)
-    }
-
-    private fun setFeeding(vertical: Boolean) {
-        entityData.set(FEEDING, vertical)
-    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
@@ -112,7 +35,6 @@ class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) : HybridA
             AnimationController(this, "Flop/Idle/Swim/Feed", 5
             ) { state: AnimationState<OarfishEntity> ->
                 when {
-                    this.isFeeding() -> state.setAndContinue(DefaultAnimations.SIT)
                     state.isMoving && isUnderWater -> state.setAndContinue(DefaultAnimations.SWIM)
                     !this.isUnderWater && !this.isSwimming && this.moistness < 595 -> state.setAndContinue(FLOP_ANIMATION)
                     else -> state.setAndContinue(DefaultAnimations.IDLE)
@@ -122,8 +44,6 @@ class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) : HybridA
     }
 
     companion object {
-        val FEEDING: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(OarfishEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
