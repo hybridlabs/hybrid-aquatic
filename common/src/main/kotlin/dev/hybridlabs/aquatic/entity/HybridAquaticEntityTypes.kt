@@ -519,7 +519,7 @@ object HybridAquaticEntityTypes {
     val OARFISH = registerFishUnderground(
         "oarfish",
         ::OarfishEntity,
-        EntityDimensions.scalable(1.5f, 0.65f),
+        EntityDimensions.fixed(1.5f, 0.65f),
         OarfishEntity::createMobAttributes
     )
 

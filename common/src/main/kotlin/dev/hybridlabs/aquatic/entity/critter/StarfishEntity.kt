@@ -164,6 +164,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
+        this.refreshDimensions()
         this.overlayColor = this.overlayColor
         this.starfishColor = this.starfishColor
 

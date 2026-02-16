@@ -41,6 +41,7 @@ class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) : Hyb
         entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
+        this.refreshDimensions()
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 

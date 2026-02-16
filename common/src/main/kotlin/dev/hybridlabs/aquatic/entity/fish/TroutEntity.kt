@@ -60,6 +60,7 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) : HybridAquat
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
+        this.refreshDimensions()
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
@@ -110,7 +111,7 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) : HybridAquat
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
+                        biome.`is`(HybridAquaticBiomeTags.COLD_RIVERS) -> {
                             BULL_TROUT
                         }
 
