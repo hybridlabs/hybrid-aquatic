@@ -54,15 +54,15 @@ class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
         super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putInt("texture_overlay", this.overlayTexture.id)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putInt("texture_overlay", this.overlayTexture.id)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        if (nbt.contains("texture_overlay")) this.overlayTexture =
-            OverlayTextures.byId(nbt.getInt("texture_overlay"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        if (compound.contains("texture_overlay")) this.overlayTexture =
+            OverlayTextures.byId(compound.getInt("texture_overlay"))
+        super.readAdditionalSaveData(compound)
     }
 
     //#region Animations
