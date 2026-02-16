@@ -58,12 +58,11 @@ abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private
         animatable.currentRoll = Mth.lerp(smoothing, animatable.currentRoll, targetRoll)
 
         val roll = Mth.lerp(deltaTime, animatable.prevRoll, animatable.currentRoll)
-        val swing = roll * Mth.DEG_TO_RAD
 
         body.rotX = tilt * -Mth.DEG_TO_RAD
         body.rotZ = roll * -Mth.DEG_TO_RAD
-        body2?.rotY = Mth.clamp(body2.rotY + swing, -0.5f, 0.5f)
-        tail?.rotY = Mth.clamp(tail.rotY + swing, -0.5f, 0.5f)
-        tailFin?.rotY = Mth.clamp(tailFin.rotY + swing, -0.5f, 0.5f)
+        body2?.rotY += roll * Mth.DEG_TO_RAD
+        tail?.rotY += roll * Mth.DEG_TO_RAD
+        tailFin?.rotY += roll * Mth.DEG_TO_RAD
     }
 }
