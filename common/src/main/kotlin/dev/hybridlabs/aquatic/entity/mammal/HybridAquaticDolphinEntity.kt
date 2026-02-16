@@ -80,6 +80,8 @@ open class HybridAquaticDolphinEntity(type: EntityType<out HybridAquaticDolphinE
                 moistness -= 1
                 if (moistness <= 0) {
                     this.hurt(this.damageSources().dryOut(), 2.0f)
+                    this.xRot = 0.0f
+                    this.yRot = 0.0f
                 }
 
                 if (this.onGround()) {
