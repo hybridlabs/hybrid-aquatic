@@ -217,6 +217,12 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(BlockTags.PLANKS)
             .add(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
 
+        getOrCreateTagBuilder(BlockTags.FROGS_SPAWNABLE_ON)
+            .add(HybridAquaticBlocks.JUNGLE_LILY_PAD.get())
+
+        getOrCreateTagBuilder(BlockTags.FROG_PREFER_JUMP_TO)
+            .add(HybridAquaticBlocks.JUNGLE_LILY_PAD.get())
+
         getOrCreateTagBuilder(HybridAquaticBlockTags.TIDE_POOL_REPLACEABLE)
             .add(Blocks.CLAY)
             .add(Blocks.GRAVEL)
