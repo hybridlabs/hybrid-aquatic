@@ -33,8 +33,12 @@ abstract class HybridAquaticDolphinEntityModel<T : HybridAquaticDolphinEntity>(p
         return CommonClass.locate("animations/$id.animation.json")
     }
 
-    fun getLayerTextureResource(layer: String): ResourceLocation {
-        return CommonClass.locate("textures/entity/mammal/$id/layers/${id}_$layer.png")
+    fun getLayerTextureResource(animatable: T, layer: String): ResourceLocation {
+        return if (animatable.isBaby) {
+            CommonClass.locate("textures/entity/mammal/$id/layers/baby_${id}_$layer.png")
+        } else {
+            CommonClass.locate("textures/entity/mammal/$id/layers/${id}_$layer.png")
+        }
     }
 
     override fun setCustomAnimations(
