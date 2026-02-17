@@ -130,7 +130,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             //#region Bleached Corals
             setOf(
                 HybridAquaticBlocks.BLEACHED_ROSE_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.BLEACHED_SUN_CORAL_BLOCK.get(),
                 HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.BLEACHED_LEAF_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_BLOCK.get(),
+                HybridAquaticBlocks.BLEACHED_THORN_CORAL_BLOCK.get(),
                 HybridAquaticBlocks.BLEACHED_FIRE_CORAL_BLOCK.get(),
                 HybridAquaticBlocks.BLEACHED_TUBE_CORAL_BLOCK.get(),
                 HybridAquaticBlocks.BLEACHED_HORN_CORAL_BLOCK.get(),
@@ -141,8 +145,12 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             }
 
             setOf(
+                HybridAquaticBlocks.BLEACHED_SUN_CORAL.get(),
                 HybridAquaticBlocks.BLEACHED_ROSE_CORAL.get(),
                 HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL.get(),
+                HybridAquaticBlocks.BLEACHED_LEAF_CORAL.get(),
+                HybridAquaticBlocks.BLEACHED_BUTTON_CORAL.get(),
+                HybridAquaticBlocks.BLEACHED_THORN_CORAL.get(),
 
                 HybridAquaticBlocks.BLEACHED_FIRE_CORAL.get(),
                 HybridAquaticBlocks.BLEACHED_TUBE_CORAL.get(),
@@ -154,6 +162,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             }
 
             generator.createCoralFans(
+                HybridAquaticBlocks.BLEACHED_SUN_CORAL_FAN.get(),
+                HybridAquaticBlocks.BLEACHED_SUN_CORAL_WALL_FAN.get()
+            )
+
+            generator.createCoralFans(
                 HybridAquaticBlocks.BLEACHED_ROSE_CORAL_FAN.get(),
                 HybridAquaticBlocks.BLEACHED_ROSE_CORAL_WALL_FAN.get()
             )
@@ -161,6 +174,21 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             generator.createCoralFans(
                 HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
                 HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN.get()
+            )
+
+            generator.createCoralFans(
+                HybridAquaticBlocks.BLEACHED_LEAF_CORAL_FAN.get(),
+                HybridAquaticBlocks.BLEACHED_LEAF_CORAL_WALL_FAN.get()
+            )
+
+            generator.createCoralFans(
+                HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_FAN.get(),
+                HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_WALL_FAN.get()
+            )
+
+            generator.createCoralFans(
+                HybridAquaticBlocks.BLEACHED_THORN_CORAL_FAN.get(),
+                HybridAquaticBlocks.BLEACHED_THORN_CORAL_WALL_FAN.get()
             )
 
             generator.createCoralFans(

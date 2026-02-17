@@ -245,6 +245,11 @@ object HybridAquaticBlocks {
             .mapColor(MapColor.TERRACOTTA_GREEN))
     }
 
+    val BLEACHED_LEAF_CORAL_BLOCK = register("bleached_leaf_coral_block") {
+        Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+            .mapColor(MapColor.TERRACOTTA_GREEN))
+    }
+
     val LEAF_CORAL_BLOCK = register("leaf_coral_block") {
         CoralBlock(DEAD_LEAF_CORAL_BLOCK.get(),
             Properties.copy(Blocks.FIRE_CORAL_BLOCK)
@@ -253,13 +258,21 @@ object HybridAquaticBlocks {
     }
 
     val DEAD_LEAF_CORAL_FAN = register("dead_leaf_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_LEAF_CORAL_FAN = register("bleached_leaf_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
     val LEAF_CORAL_FAN = register("leaf_coral_fan") { CoralFanBlock(DEAD_LEAF_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
     val DEAD_LEAF_CORAL = register("dead_leaf_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_LEAF_CORAL = register("bleached_leaf_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
     val LEAF_CORAL = register("leaf_coral") { CoralPlantBlock(DEAD_LEAF_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
     val DEAD_LEAF_CORAL_WALL_FAN = register("dead_leaf_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_LEAF_CORAL_WALL_FAN = register("bleached_leaf_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
     val LEAF_CORAL_WALL_FAN = register("leaf_coral_wall_fan") { CoralWallFanBlock(DEAD_LEAF_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
     val DEAD_SUN_CORAL_BLOCK = register("dead_sun_coral_block") {
+        Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+            .mapColor(MapColor.TERRACOTTA_WHITE))
+    }
+
+    val BLEACHED_SUN_CORAL_BLOCK = register("bleached_sun_coral_block") {
         Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
@@ -272,13 +285,21 @@ object HybridAquaticBlocks {
     }
 
     val DEAD_SUN_CORAL_FAN = register("dead_sun_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_SUN_CORAL_FAN = register("bleached_sun_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
     val SUN_CORAL_FAN = register("sun_coral_fan") { CoralFanBlock(DEAD_SUN_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
     val DEAD_SUN_CORAL = register("dead_sun_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_SUN_CORAL = register("bleached_sun_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
     val SUN_CORAL = register("sun_coral") { CoralPlantBlock(DEAD_SUN_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
     val DEAD_SUN_CORAL_WALL_FAN = register("dead_sun_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_SUN_CORAL_WALL_FAN = register("bleached_sun_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
     val SUN_CORAL_WALL_FAN = register("sun_coral_wall_fan") { CoralWallFanBlock(DEAD_SUN_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
     val DEAD_BUTTON_CORAL_BLOCK = register("dead_button_coral_block") {
+        Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+                .mapColor(MapColor.TERRACOTTA_WHITE))
+    }
+
+    val BLEACHED_BUTTON_CORAL_BLOCK = register("bleached_button_coral_block") {
         Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE))
     }
@@ -291,13 +312,21 @@ object HybridAquaticBlocks {
     }
 
     val DEAD_BUTTON_CORAL_FAN = register("dead_button_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_BUTTON_CORAL_FAN = register("bleached_button_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
     val BUTTON_CORAL_FAN = register("button_coral_fan") { CoralFanBlock(DEAD_BUTTON_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
     val DEAD_BUTTON_CORAL = register("dead_button_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_BUTTON_CORAL = register("bleached_button_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
     val BUTTON_CORAL = register("button_coral") { CoralPlantBlock(DEAD_BUTTON_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
     val DEAD_BUTTON_CORAL_WALL_FAN = register("dead_button_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_BUTTON_CORAL_WALL_FAN = register("bleached_button_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
     val BUTTON_CORAL_WALL_FAN = register("button_coral_wall_fan") { CoralWallFanBlock(DEAD_BUTTON_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
     val DEAD_THORN_CORAL_BLOCK = register("dead_thorn_coral_block") {
+        Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+                .mapColor(MapColor.TERRACOTTA_WHITE))
+    }
+
+    val BLEACHED_THORN_CORAL_BLOCK = register("bleached_thorn_coral_block") {
         Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE))
     }
@@ -310,9 +339,12 @@ object HybridAquaticBlocks {
     }
 
     val DEAD_THORN_CORAL_FAN = register("dead_thorn_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_THORN_CORAL_FAN = register("bleached_thorn_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
     val THORN_CORAL_FAN = register("thorn_coral_fan") { CoralFanBlock(DEAD_THORN_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
     val DEAD_THORN_CORAL = register("dead_thorn_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_THORN_CORAL = register("bleached_thorn_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
     val DEAD_THORN_CORAL_WALL_FAN = register("dead_thorn_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_THORN_CORAL_WALL_FAN = register("bleached_thorn_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
     val THORN_CORAL = register("thorn_coral") { CoralPlantBlock(DEAD_THORN_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
     val THORN_CORAL_WALL_FAN = register("thorn_coral_wall_fan") { CoralWallFanBlock(DEAD_THORN_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN)) }
 

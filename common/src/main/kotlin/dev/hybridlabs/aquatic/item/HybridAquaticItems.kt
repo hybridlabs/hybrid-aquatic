@@ -230,7 +230,6 @@ object HybridAquaticItems {
     val HARP_SPONGE = registerBlockItem("harp_sponge") { HybridAquaticBlocks.HARP_SPONGE.get() }
 
     //#region Coral Blocks
-
     val BUTTON_CORAL_BLOCK = registerBlockItem("button_coral_block") { HybridAquaticBlocks.BUTTON_CORAL_BLOCK.get() }
     val DEAD_BUTTON_CORAL_BLOCK =
         registerBlockItem("dead_button_coral_block") { HybridAquaticBlocks.DEAD_BUTTON_CORAL_BLOCK.get() }
@@ -247,6 +246,16 @@ object HybridAquaticItems {
         HybridAquaticBlocks.DEAD_BUTTON_CORAL_WALL_FAN
     )
 
+    val BLEACHED_BUTTON_CORAL_BLOCK =
+        registerBlockItem("bleached_button_coral_block") { HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_BLOCK.get() }
+    val BLEACHED_BUTTON_CORAL =
+        registerBlockItem("bleached_button_coral") { HybridAquaticBlocks.BLEACHED_BUTTON_CORAL.get() }
+    val BLEACHED_BUTTON_CORAL_FAN = registerVerticallyAttachable(
+        "bleached_button_coral_fan",
+        HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_FAN,
+        HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_WALL_FAN
+    )
+
     val SUN_CORAL_BLOCK = registerBlockItem("sun_coral_block") { HybridAquaticBlocks.SUN_CORAL_BLOCK.get() }
     val DEAD_SUN_CORAL_BLOCK =
         registerBlockItem("dead_sun_coral_block") { HybridAquaticBlocks.DEAD_SUN_CORAL_BLOCK.get() }
@@ -261,6 +270,16 @@ object HybridAquaticItems {
         "dead_sun_coral_fan",
         HybridAquaticBlocks.DEAD_SUN_CORAL_FAN,
         HybridAquaticBlocks.DEAD_SUN_CORAL_WALL_FAN
+    )
+
+    val BLEACHED_SUN_CORAL_BLOCK =
+        registerBlockItem("bleached_sun_coral_block") { HybridAquaticBlocks.BLEACHED_SUN_CORAL_BLOCK.get() }
+    val BLEACHED_SUN_CORAL =
+        registerBlockItem("bleached_sun_coral") { HybridAquaticBlocks.BLEACHED_SUN_CORAL.get() }
+    val BLEACHED_SUN_CORAL_FAN = registerVerticallyAttachable(
+        "bleached_sun_coral_fan",
+        HybridAquaticBlocks.BLEACHED_SUN_CORAL_FAN,
+        HybridAquaticBlocks.BLEACHED_SUN_CORAL_WALL_FAN
     )
 
     val LOPHELIA_CORAL_BLOCK = registerBlockItem("lophelia_coral_block") { HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK.get() }
@@ -325,6 +344,16 @@ object HybridAquaticItems {
         HybridAquaticBlocks.DEAD_LEAF_CORAL_WALL_FAN
     )
 
+    val BLEACHED_LEAF_CORAL_BLOCK =
+        registerBlockItem("bleached_leaf_coral_block") { HybridAquaticBlocks.BLEACHED_LEAF_CORAL_BLOCK.get() }
+    val BLEACHED_LEAF_CORAL =
+        registerBlockItem("bleached_leaf_coral") { HybridAquaticBlocks.BLEACHED_LEAF_CORAL.get() }
+    val BLEACHED_LEAF_CORAL_FAN = registerVerticallyAttachable(
+        "bleached_leaf_coral_fan",
+        HybridAquaticBlocks.BLEACHED_LEAF_CORAL_FAN,
+        HybridAquaticBlocks.BLEACHED_LEAF_CORAL_WALL_FAN
+    )
+
     val THORN_CORAL_BLOCK = registerBlockItem("thorn_coral_block") { HybridAquaticBlocks.THORN_CORAL_BLOCK.get() }
     val DEAD_THORN_CORAL_BLOCK =
         registerBlockItem("dead_thorn_coral_block") { HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK.get() }
@@ -339,6 +368,16 @@ object HybridAquaticItems {
         "dead_thorn_coral_fan",
         HybridAquaticBlocks.DEAD_THORN_CORAL_FAN,
         HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN
+    )
+
+    val BLEACHED_THORN_CORAL_BLOCK =
+        registerBlockItem("bleached_thorn_coral_block") { HybridAquaticBlocks.BLEACHED_THORN_CORAL_BLOCK.get() }
+    val BLEACHED_THORN_CORAL =
+        registerBlockItem("bleached_thorn_coral") { HybridAquaticBlocks.BLEACHED_THORN_CORAL.get() }
+    val BLEACHED_THORN_CORAL_FAN = registerVerticallyAttachable(
+        "bleached_thorn_coral_fan",
+        HybridAquaticBlocks.BLEACHED_THORN_CORAL_FAN,
+        HybridAquaticBlocks.BLEACHED_THORN_CORAL_WALL_FAN
     )
 
     val BLEACHED_FIRE_CORAL_BLOCK = registerBlockItem("bleached_fire_coral_block") { HybridAquaticBlocks.BLEACHED_FIRE_CORAL_BLOCK.get() }
