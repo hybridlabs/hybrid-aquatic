@@ -1,19 +1,17 @@
 {
   "parent": "hybrid-aquatic:boat",
   "criteria": {
-    "kill_shark": {
+    "get_shark_tooth": {
       "conditions": {
-        "entity": [
+        "items": [
           {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "#hybrid-aquatic:all_sharks"
-            }
+            "items": [
+              "hybrid-aquatic:shark_tooth"
+            ]
           }
         ]
       },
-      "trigger": "minecraft:player_killed_entity"
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
@@ -34,7 +32,7 @@
   },
   "requirements": [
     [
-      "kill_shark"
+      "get_shark_tooth"
     ]
   ],
   "sends_telemetry_event": true

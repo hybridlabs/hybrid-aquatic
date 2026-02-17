@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.data.server
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
@@ -281,7 +280,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .build(ResourceLocation("hybrid-aquatic", "kill_karkinos"))
         consumer?.accept(killKarkinosAdvancement)
 
-        val killSharkAdvancement = Advancement.Builder.advancement()
+        val obtainSharkToothAdvancement = Advancement.Builder.advancement()
             .parent(boatAdvancement)
             .display(
                 HybridAquaticItems.SHARK_TOOTH.get(),
@@ -294,14 +293,11 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 false
             )
             .addCriterion(
-                "kill_shark",
-                KilledTrigger.TriggerInstance
-                    .playerKilledEntity(
-                        EntityPredicate.Builder.entity().of(HybridAquaticEntityTags.ALL_SHARKS).build()
-                    )
+                "get_shark_tooth",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SHARK_TOOTH.get())
             )
             .build(ResourceLocation("hybrid-aquatic", "bigger_boat"))
-        consumer?.accept(killSharkAdvancement)
+        consumer?.accept(obtainSharkToothAdvancement)
 
     }
 }
