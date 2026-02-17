@@ -275,7 +275,7 @@ object HybridAquaticEntityTypes {
     val CORYDORA = registerRiverFish(
         "corydora",
         ::CorydoraEntity,
-        EntityDimensions.fixed(0.35f, 0.45f),
+        EntityDimensions.fixed(0.4f, 0.4f),
         CorydoraEntity::createMobAttributes
     )
 
