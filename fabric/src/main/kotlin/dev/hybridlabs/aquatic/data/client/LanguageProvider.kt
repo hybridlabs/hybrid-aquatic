@@ -89,7 +89,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.boat.description" to "Craft a boat and explore the oceans of Minecraft",
 
             "advancements.hybrid-aquatic.bigger_boat.title" to "We're Gonna Need A Bigger Boat",
-            "advancements.hybrid-aquatic.bigger_boat.description" to "Kill a shark",
+            "advancements.hybrid-aquatic.bigger_boat.description" to "Block a shark attack with a shield to get a shark tooth",
         ).forEach { (key, translation) ->
             builder.add(key, translation)
         }
@@ -557,6 +557,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.BOXFISH.get() to "Boxfish",
             HybridAquaticEntityTypes.OCTOPUS.get() to "Octopus",
             HybridAquaticEntityTypes.DISCUS.get() to "Discus",
+            HybridAquaticEntityTypes.CORYDORA.get() to "Corydora",
             HybridAquaticEntityTypes.ARROW_SQUID.get() to "Arrow Squid",
             HybridAquaticEntityTypes.COLOSSAL_SQUID.get() to "Colossal Squid",
             HybridAquaticEntityTypes.GIANT_SQUID.get() to "Giant Squid",

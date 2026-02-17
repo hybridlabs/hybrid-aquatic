@@ -38,6 +38,7 @@ import dev.hybridlabs.aquatic.client.render.entity.fish.BoxfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.CarpEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.ClownfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.CoelacanthEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.fish.CorydoraEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.DamselfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.DanioEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.fish.DiscusEntityRenderer
@@ -422,6 +423,12 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.DISCUS,
             ::DiscusEntityRenderer
+        )
+
+    val CORYDORA =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.CORYDORA,
+            ::CorydoraEntityRenderer
         )
 
     val SURGEONFISH =

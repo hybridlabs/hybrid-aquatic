@@ -1,5 +1,5 @@
 {
-  "advancements.hybrid-aquatic.bigger_boat.description": "Kill a shark",
+  "advancements.hybrid-aquatic.bigger_boat.description": "Block a shark attack with a shield to get a shark tooth",
   "advancements.hybrid-aquatic.bigger_boat.title": "We're Gonna Need A Bigger Boat",
   "advancements.hybrid-aquatic.black_pearl.description": "What the Black Pearl really is... is freedom",
   "advancements.hybrid-aquatic.black_pearl.title": "The Black Pearl",
@@ -213,6 +213,7 @@
   "entity.hybrid-aquatic.coconut_crab": "Coconut Crab",
   "entity.hybrid-aquatic.coelacanth": "Coelacanth",
   "entity.hybrid-aquatic.colossal_squid": "Colossal Squid",
+  "entity.hybrid-aquatic.corydora": "Corydora",
   "entity.hybrid-aquatic.cosmic_jellyfish": "Cosmic Jellyfish",
   "entity.hybrid-aquatic.crayfish": "Crayfish",
   "entity.hybrid-aquatic.crown_jellyfish": "Crown Jellyfish",
@@ -410,6 +411,7 @@
   "item.hybrid-aquatic.coral_hoe": "Coral Hoe",
   "item.hybrid-aquatic.coral_pickaxe": "Coral Pickaxe",
   "item.hybrid-aquatic.coral_shovel": "Coral Shovel",
+  "item.hybrid-aquatic.corydora_spawn_egg": "Corydora Spawn Egg",
   "item.hybrid-aquatic.cosmic_jellyfish_spawn_egg": "Cosmic Jellyfish Spawn Egg",
   "item.hybrid-aquatic.crayfish_spawn_egg": "Crayfish Spawn Egg",
   "item.hybrid-aquatic.creepermagnet_hook": "CreeperMagnet Hook",

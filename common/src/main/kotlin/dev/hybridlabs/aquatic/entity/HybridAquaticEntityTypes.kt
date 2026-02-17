@@ -41,6 +41,7 @@ import dev.hybridlabs.aquatic.entity.fish.BoxfishEntity
 import dev.hybridlabs.aquatic.entity.fish.CarpEntity
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import dev.hybridlabs.aquatic.entity.fish.CoelacanthEntity
+import dev.hybridlabs.aquatic.entity.fish.CorydoraEntity
 import dev.hybridlabs.aquatic.entity.fish.DamselfishEntity
 import dev.hybridlabs.aquatic.entity.fish.DanioEntity
 import dev.hybridlabs.aquatic.entity.fish.DiscusEntity
@@ -269,6 +270,13 @@ object HybridAquaticEntityTypes {
         ::DiscusEntity,
         EntityDimensions.fixed(0.35f, 0.45f),
         DiscusEntity::createMobAttributes
+    )
+
+    val CORYDORA = registerRiverFish(
+        "corydora",
+        ::CorydoraEntity,
+        EntityDimensions.fixed(0.35f, 0.45f),
+        CorydoraEntity::createMobAttributes
     )
 
     val DRAGONFISH = registerFishUnderground(

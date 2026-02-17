@@ -92,6 +92,14 @@ class EntitySpawnConfigGenerator {
         )
 
         addRiverFish(
+            HybridAquaticEntityTypes.CORYDORA.get(),
+            listOf(
+                HybridAquaticBiomeTags.JUNGLE,
+                HybridAquaticBiomeTags.TROPICAL_RIVERS),
+            2, 1, 3
+        )
+
+        addRiverFish(
             HybridAquaticEntityTypes.PIRANHA.get(),
             listOf(
                 HybridAquaticBiomeTags.JUNGLE,

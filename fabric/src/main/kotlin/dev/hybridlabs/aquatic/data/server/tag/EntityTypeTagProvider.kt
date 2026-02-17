@@ -23,6 +23,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.BETTA.get(),
                 HybridAquaticEntityTypes.OSCAR.get(),
                 HybridAquaticEntityTypes.DISCUS.get(),
+                HybridAquaticEntityTypes.CORYDORA.get(),
             )
         //#endregion
 
@@ -69,6 +70,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.TIGER_BARB.get(),
                 HybridAquaticEntityTypes.SURGEONFISH.get(),
                 HybridAquaticEntityTypes.DISCUS.get(),
+                HybridAquaticEntityTypes.CORYDORA.get(),
                 HybridAquaticEntityTypes.DAMSELFISH.get(),
                 HybridAquaticEntityTypes.GOURAMI.get(),
                 HybridAquaticEntityTypes.CUTTLEFISH.get(),
@@ -279,6 +281,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
                 HybridAquaticEntityTypes.DANIO.get(),
                 HybridAquaticEntityTypes.DISCUS.get(),
+                HybridAquaticEntityTypes.CORYDORA.get(),
                 HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
                 HybridAquaticEntityTypes.GOURAMI.get(),
                 HybridAquaticEntityTypes.OSCAR.get(),
