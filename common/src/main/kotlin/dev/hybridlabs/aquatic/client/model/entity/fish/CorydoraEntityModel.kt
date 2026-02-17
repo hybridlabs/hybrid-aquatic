@@ -12,7 +12,9 @@ class CorydoraEntityModel : HybridAquaticFishEntityModel<CorydoraEntity>("corydo
 
     private val commonTextures = listOf(
         ResourceLocation("hybrid-aquatic", "textures/entity/fish/corydora/corydora_albino.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/corydora/corydora_burgessi.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/fish/corydora/corydora_panda.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/fish/corydora/corydora_bronze.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/fish/corydora/corydora_nattereri.png"),
         )
 
     override fun getTextureResource(animatable: CorydoraEntity): ResourceLocation {
