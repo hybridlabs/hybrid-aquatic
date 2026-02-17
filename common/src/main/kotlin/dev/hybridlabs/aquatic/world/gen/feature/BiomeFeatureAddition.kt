@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import net.minecraft.data.worldgen.placement.VegetationPlacements
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.BiomeTags
 import net.minecraft.tags.TagKey
