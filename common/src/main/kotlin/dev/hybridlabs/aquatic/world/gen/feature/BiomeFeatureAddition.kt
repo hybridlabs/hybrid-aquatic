@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import net.minecraft.data.worldgen.placement.VegetationPlacements
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.BiomeTags
 import net.minecraft.tags.TagKey
@@ -77,6 +78,12 @@ data class BiomeFeatureAddition(
                 HybridAquaticBiomeTags.TROPICAL_RIVERS,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.JUNGLE_LILY_PAD
+            ),
+
+            BiomeFeatureAddition(
+                HybridAquaticBiomeTags.TROPICAL_RIVERS,
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                VegetationPlacements.PATCH_WATERLILY
             ),
 
             BiomeFeatureAddition(
