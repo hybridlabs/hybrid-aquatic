@@ -83,12 +83,6 @@ data class BiomeFeatureAddition(
             BiomeFeatureAddition(
                 HybridAquaticBiomeTags.TROPICAL_RIVERS,
                 GenerationStep.Decoration.VEGETAL_DECORATION,
-                VegetationPlacements.PATCH_WATERLILY
-            ),
-
-            BiomeFeatureAddition(
-                HybridAquaticBiomeTags.TROPICAL_RIVERS,
-                GenerationStep.Decoration.VEGETAL_DECORATION,
                 HybridAquaticPlacedFeatures.WATER_HYACINTH
             ),
 
