@@ -38,6 +38,7 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.PLECO.get(),
             HybridAquaticEntityTypes.DANIO.get(),
             HybridAquaticEntityTypes.DISCUS.get(),
+            HybridAquaticEntityTypes.CORYDORA.get(),
             HybridAquaticEntityTypes.BETTA.get(),
             HybridAquaticEntityTypes.TETRA.get(),
             HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
