@@ -144,7 +144,6 @@ class EntitySpawnConfigGenerator {
         addRiverFish(
             HybridAquaticEntityTypes.CARP.get(),
             listOf(
-                HybridAquaticBiomeTags.CHERRY,
                 HybridAquaticBiomeTags.RIVERS),
             3, 0, 2
         )
