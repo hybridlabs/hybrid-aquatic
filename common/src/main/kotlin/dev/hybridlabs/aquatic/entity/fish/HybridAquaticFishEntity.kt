@@ -339,7 +339,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.seaLevel - 8)..<(world.seaLevel - 1) &&
+            return pos.y in (world.seaLevel - 16)..<(world.seaLevel - 1) &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
@@ -351,7 +351,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.seaLevel - 24)..(world.seaLevel - 12) &&
+            return pos.y in (world.seaLevel - 32)..(world.seaLevel - 8) &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
@@ -364,7 +364,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             random: RandomSource,
         ): Boolean {
             return !world.level.isDay &&
-                    pos.y in (world.seaLevel - 24)..(world.seaLevel - 12) &&
+                    return pos.y in (world.seaLevel - 32)..(world.seaLevel - 8) &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
