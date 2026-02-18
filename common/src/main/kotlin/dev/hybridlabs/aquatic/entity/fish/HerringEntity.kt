@@ -19,6 +19,7 @@ import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
@@ -147,18 +148,18 @@ class HerringEntity(type: EntityType<out HerringEntity>, world: Level) : HybridA
             val newFraction = health / maxHp
 
             val oldFishCount = when {
-                oldFraction > 2f / 3f -> MackerelEntity.THREE_FISH
-                oldFraction > 1f / 3f -> MackerelEntity.TWO_FISH
-                else -> MackerelEntity.ONE_FISH
+                oldFraction > 2f / 3f -> THREE_FISH
+                oldFraction > 1f / 3f -> TWO_FISH
+                else -> ONE_FISH
             }
 
             val newFishCount = when {
-                newFraction > 2f / 3f -> MackerelEntity.THREE_FISH
-                newFraction > 1f / 3f -> MackerelEntity.TWO_FISH
-                else -> MackerelEntity.ONE_FISH
+                newFraction > 2f / 3f -> THREE_FISH
+                newFraction > 1f / 3f -> TWO_FISH
+                else -> ONE_FISH
             }
 
-            if (newFishCount in 1..<oldFishCount) {
+            if (newFishCount in 1..<oldFishCount && level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS)) {
                 spawnAtLocation(HybridAquaticItems.HERRING.get())
             }
         }
