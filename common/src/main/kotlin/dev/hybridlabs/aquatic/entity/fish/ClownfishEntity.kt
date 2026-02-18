@@ -24,7 +24,8 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<ClownfishEntity.Companion.Type> {
+class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) : HybridAquaticFishEntity(type, world),
+    VariantHolder<ClownfishEntity.Companion.Type> {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
         HybridAquaticEntityTags.LARGE_CREATURES,
@@ -40,7 +41,7 @@ class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) : Hyb
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
 
@@ -89,7 +90,6 @@ class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) : Hyb
         val TYPE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(ClownfishEntity::class.java, EntityDataSerializers.INT)
 
-
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             OCELLARIS(0, "ocellaris"),
             CLARKII(1, "clarkii"),
@@ -128,14 +128,14 @@ class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) : Hyb
         entityData.define(TYPE, 0)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

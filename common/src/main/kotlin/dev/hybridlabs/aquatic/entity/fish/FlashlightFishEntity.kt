@@ -63,14 +63,14 @@ class FlashlightFishEntity(type: EntityType<out FlashlightFishEntity>, world: Le
         refreshDimensions()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt("FishCount", getFishCount())
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt("FishCount", getFishCount())
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        setFishCount(nbt.getInt("FishCount").coerceAtMost(THREE_FISH))
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        setFishCount(compound.getInt("FishCount").coerceAtMost(THREE_FISH))
     }
 
     override fun tick() {
