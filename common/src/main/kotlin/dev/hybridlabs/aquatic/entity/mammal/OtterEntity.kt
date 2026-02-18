@@ -49,10 +49,18 @@ import java.util.*
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HybridAquaticMammalEntity(entityType, world), VariantHolder<OtterEntity.Companion.Type> {
+class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HybridAquaticMammalEntity(entityType, world),
+    VariantHolder<OtterEntity.Companion.Type> {
     fun getTargetConfig() = TARGET_CONFIG
 
-    private val swimControl = OtterMoveControl(this, 45, 3, 0.02F, 1.0F, true)
+    private val swimControl = OtterMoveControl(
+        this,
+        45,
+        3,
+        0.02F,
+        1.0F,
+        true
+    )
 
     var hunger: Int
         get() = entityData.get(HUNGER)
@@ -398,7 +406,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     internal class OtterAttackGoal(
         val otter: OtterEntity,
         speedModifier: Double,
-        followingTargetEvenIfNotSeen: Boolean
+        followingTargetEvenIfNotSeen: Boolean,
     ) : MeleeAttackGoal(
         otter,
         speedModifier, followingTargetEvenIfNotSeen
@@ -589,7 +597,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     * Also allow toggling gravity at runtime. */
     internal class OtterMoveControl(
         val otter: OtterEntity, maxTurnX: Int, maxTurnY: Int, inWaterSpeedModifier: Float,
-        outsideWaterSpeedModifier: Float, var applyGravity: Boolean
+        outsideWaterSpeedModifier: Float, var applyGravity: Boolean,
     ) : SmoothSwimmingMoveControl(otter, maxTurnX, maxTurnY, inWaterSpeedModifier, outsideWaterSpeedModifier, false) {
 
         override fun tick() {

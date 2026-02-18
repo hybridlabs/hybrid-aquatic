@@ -4,7 +4,11 @@ import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
+import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import dev.hybridlabs.aquatic.entity.fish.MantaRayEntity
+import dev.hybridlabs.aquatic.entity.fish.TunaEntity
+import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -16,18 +20,18 @@ import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.AgeableMob
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
+import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquaticDolphinEntity(type, world), OverlayTextureFeature {
+class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquaticDolphinEntity(type, world),
+    OverlayTextureFeature, VariantHolder<OrcaEntity.Companion.Type> {
 
     override fun registerGoals() {
         super.registerGoals()
@@ -71,7 +75,12 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
         this.yRot = 0.0f
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
 
-        val overlayID = world.random.nextIntBetweenInclusive(0, MantaRayEntity.Companion.OverlayTextures.entries.size - 1)
+        val biome = world.getBiome(this.blockPosition())
+        val selectedType = Type.fromBiome(biome, Random)
+        this.variant = selectedType
+
+        val overlayID =
+            world.random.nextIntBetweenInclusive(0, MantaRayEntity.Companion.OverlayTextures.entries.size - 1)
         overlayTexture = OverlayTextures.byId(overlayID)
 
         if (this.random.nextFloat() < 0.25f) {
@@ -89,6 +98,56 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
                 .add(Attributes.ATTACK_DAMAGE, 8.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.2)
                 .add(Attributes.FOLLOW_RANGE, 24.0)
+        }
+
+        val TYPE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(ClownfishEntity::class.java, EntityDataSerializers.INT)
+
+        enum class Type(val id: Int, private val key: String) : StringRepresentable {
+            BLACK(0, "black"),
+            GRAY(1, "gray"),
+            TAN(2, "tan");
+
+            override fun getSerializedName(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringRepresentable.EnumCodec<Type> = StringRepresentable.fromEnum { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ByIdMap.continuous(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ByIdMap.OutOfBoundsStrategy.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byName(name, BLACK) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+
+                fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
+                    return when {
+                        biome.`is`(HybridAquaticBiomeTags.ARCTIC_OCEANS) -> {
+                            Type.fromId(random.nextInt(0, 2))
+                        }
+
+                        biome.`is`(HybridAquaticBiomeTags.COLD_OCEANS) -> {
+                            Type.fromId(random.nextInt(0, 3))
+                        }
+
+                        biome.`is`(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
+                            Type.fromId(random.nextInt(1, 3))
+                        }
+
+                        else -> {
+                            Type.fromId(random.nextInt(0, 3))
+                        }
+                    }
+                }
+            }
         }
 
         val OverlayTexture: EntityDataAccessor<Int> =
@@ -133,18 +192,29 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
     }
 
     override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
         entityData.define(OverlayTexture, 0)
         super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
         compound.putInt("texture_overlay", this.overlayTexture.id)
         super.addAdditionalSaveData(compound)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
         if (compound.contains("texture_overlay")) this.overlayTexture =
             OverlayTextures.byId(compound.getInt("texture_overlay"))
         super.readAdditionalSaveData(compound)
+    }
+
+    override fun getVariant(): Type {
+        return Type.fromId((entityData.get(TYPE) as Int))
+    }
+
+    override fun setVariant(type: Type) {
+        entityData.set(TYPE, type.id)
     }
 }
