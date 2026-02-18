@@ -31,6 +31,22 @@
     "state=closed,facing=south": {
       "model": "hybrid-aquatic:block/oyster_closed",
       "y": 270
+    },
+    "state=dead,facing=east": {
+      "model": "hybrid-aquatic:block/oyster_dead",
+      "y": 180
+    },
+    "state=dead,facing=west": {
+      "model": "hybrid-aquatic:block/oyster_dead",
+      "y": 0
+    },
+    "state=dead,facing=north": {
+      "model": "hybrid-aquatic:block/oyster_dead",
+      "y": 90
+    },
+    "state=dead,facing=south": {
+      "model": "hybrid-aquatic:block/oyster_dead",
+      "y": 270
     }
   }
 }

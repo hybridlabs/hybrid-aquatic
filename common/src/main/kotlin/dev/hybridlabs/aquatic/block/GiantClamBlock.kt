@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.block
 
+import dev.hybridlabs.aquatic.block.entity.GiantClamBlockEntity
+import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
-import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.InteractionHand
@@ -18,10 +19,11 @@ import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.HorizontalDirectionalBlock
-import net.minecraft.world.level.block.Rotation
-import net.minecraft.world.level.block.SimpleWaterloggedBlock
+import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.BaseEntityBlock.createTickerHelper
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityTicker
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -37,9 +39,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) : Block(settings),
-    SimpleWaterloggedBlock {
-
-    private var pearlTimer: Int = 6000
+    EntityBlock, SimpleWaterloggedBlock {
 
     override fun isPathfindable(
         state: BlockState,
@@ -50,33 +50,26 @@ class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) 
         return false
     }
 
+    override fun setPlacedBy(
+        world: Level,
+        pos: BlockPos,
+        state: BlockState,
+        placer: LivingEntity?,
+        stack: ItemStack
+    ) {
+        val giantClam = world.getBlockEntity(pos) as? GiantClamBlockEntity ?: return
+
+        giantClam.pearlTimer = GiantClamBlockEntity.PEARL_TIMER
+    }
+
+    override fun newBlockEntity(blockPos: BlockPos, blockState: BlockState): BlockEntity {
+        return GiantClamBlockEntity(blockPos, blockState)
+    }
+
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val supportingPos = pos.below()
         val supportingState = world.getBlockState(supportingPos)
         return supportingState.isFaceSturdy(world, supportingPos, Direction.UP)
-    }
-
-    override fun tick(state: BlockState, world: ServerLevel, pos: BlockPos, random: RandomSource) {
-        val waterlogged = state.getValue(WATERLOGGED)
-        val currentState = state.getValue(STATE)
-
-        if (!waterlogged && currentState != GiantClamState.DEAD) {
-            world.setBlock(pos, state.setValue(STATE, GiantClamState.DEAD), 3)
-            return
-        }
-
-        if (currentState != GiantClamState.DEAD && pearlTimer > 0) {
-            pearlTimer--
-
-            val newState = if (pearlTimer > 0) GiantClamState.CLOSED else GiantClamState.OPEN
-            if (newState != currentState) {
-                world.setBlock(pos, state.setValue(STATE, newState), 2)
-            }
-
-            if (pearlTimer > 0) {
-                world.scheduleTick(pos, this, 20)
-            }
-        }
     }
 
     override fun getCollisionShape(
@@ -117,34 +110,37 @@ class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) 
         hand: InteractionHand,
         hit: BlockHitResult,
     ): InteractionResult {
-        if (!world.isClientSide) {
-            val currentState = state.getValue(STATE)
-            if (currentState == GiantClamState.OPEN) {
-                pearlTimer = 6000
-                world.setBlock(pos, state.setValue(STATE, GiantClamState.CLOSED), 3)
 
-                val randomValue = world.random.nextFloat()
-                val itemToDrop = when {
-                    randomValue < 0.70 -> ItemStack(HybridAquaticItems.PEARL.get())
-                    randomValue < 0.95 -> ItemStack(HybridAquaticItems.BLACK_PEARL.get())
-                    else -> ItemStack(Items.ENDER_PEARL)
-                }
+        if (world.isClientSide) return InteractionResult.SUCCESS
 
-                popResource(world, pos, itemToDrop)
-            } else {
-                return InteractionResult.PASS
+        val be = world.getBlockEntity(pos) as? GiantClamBlockEntity
+            ?: return InteractionResult.PASS
+
+        if (state.getValue(STATE) == GiantClamState.OPEN) {
+
+            val randomValue = world.random.nextFloat()
+            val itemToDrop = when {
+                randomValue < 0.70 -> ItemStack(HybridAquaticItems.PEARL.get())
+                randomValue < 0.95 -> ItemStack(HybridAquaticItems.BLACK_PEARL.get())
+                else -> ItemStack(Items.ENDER_PEARL)
             }
+
+            popResource(world, pos, itemToDrop)
+
+            be.closeAndStartCooldown()
+            return InteractionResult.SUCCESS
         }
-        return InteractionResult.SUCCESS
+
+        return InteractionResult.PASS
     }
 
     override fun stepOn(world: Level, pos: BlockPos, state: BlockState, entity: Entity) {
         if (world.isClientSide) return
 
-        val currentState = state.getValue(STATE)
-        if (currentState == GiantClamState.OPEN) {
-            world.setBlock(pos, state.setValue(STATE, GiantClamState.CLOSED), 3)
-            pearlTimer = 6000
+        val be = world.getBlockEntity(pos) as? GiantClamBlockEntity ?: return
+
+        if (state.getValue(STATE) == GiantClamState.OPEN) {
+            be.closeAndStartCooldown()
 
             if (!entity.isSteppingCarefully && entity is LivingEntity) {
                 entity.hurt(world.damageSources().inWall(), 4.0f)
@@ -152,6 +148,18 @@ class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) 
         }
 
         super.stepOn(world, pos, state, entity)
+    }
+
+    override fun <T : BlockEntity?> getTicker(
+        level: Level,
+        state: BlockState,
+        blockEntityType: BlockEntityType<T>,
+    ): BlockEntityTicker<T>? {
+        return createTickerHelper(
+            blockEntityType,
+            HybridAquaticBlockEntityTypes.GIANT_CLAM.get(),
+            GiantClamBlockEntity::tick
+        )
     }
 
     override fun animateTick(state: BlockState, world: Level, pos: BlockPos, random: RandomSource) {

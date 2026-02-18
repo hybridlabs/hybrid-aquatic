@@ -15,6 +15,10 @@ object HybridAquaticBlockEntityTypes {
         register("giant_green_anemone", ::GiantGreenAnemoneBlockEntity, HybridAquaticBlocks.GIANT_GREEN_ANEMONE)
     val STRAWBERRY_ANEMONE =
         register("strawberry_anemone", ::StrawberryAnemoneBlockEntity, HybridAquaticBlocks.STRAWBERRY_ANEMONE)
+    val GIANT_CLAM =
+        register("giant_clam", ::GiantClamBlockEntity, HybridAquaticBlocks.GIANT_CLAM)
+    val OYSTER =
+        register("oyster", ::OysterBlockEntity, HybridAquaticBlocks.OYSTER)
 
     val MESSAGE_IN_A_BOTTLE =
         register("message_in_a_bottle", ::MessageInABottleBlockEntity, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE)

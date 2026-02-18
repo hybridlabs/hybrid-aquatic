@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.block
 
+import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
+import dev.hybridlabs.aquatic.block.entity.OysterBlockEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
-import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.InteractionHand
@@ -18,10 +19,11 @@ import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.HorizontalDirectionalBlock
-import net.minecraft.world.level.block.Rotation
-import net.minecraft.world.level.block.SimpleWaterloggedBlock
+import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.BaseEntityBlock.createTickerHelper
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityTicker
+import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -37,9 +39,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class OysterBlock(private val emitsParticles: Boolean, settings: Properties) : Block(settings),
-    SimpleWaterloggedBlock {
-
-    private var pearlTimer: Int = 6000
+    EntityBlock, SimpleWaterloggedBlock {
 
     override fun isPathfindable(
         state: BlockState,
@@ -50,27 +50,26 @@ class OysterBlock(private val emitsParticles: Boolean, settings: Properties) : B
         return false
     }
 
+    override fun setPlacedBy(
+        world: Level,
+        pos: BlockPos,
+        state: BlockState,
+        placer: LivingEntity?,
+        stack: ItemStack
+    ) {
+        val oyster = world.getBlockEntity(pos) as? OysterBlockEntity ?: return
+
+        oyster.pearlTimer = OysterBlockEntity.PEARL_TIMER
+    }
+
+    override fun newBlockEntity(blockPos: BlockPos, blockState: BlockState): BlockEntity {
+        return OysterBlockEntity(blockPos, blockState)
+    }
+
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val supportingPos = pos.below()
         val supportingState = world.getBlockState(supportingPos)
         return supportingState.isFaceSturdy(world, supportingPos, Direction.UP)
-    }
-
-    override fun tick(state: BlockState, world: ServerLevel, pos: BlockPos, random: RandomSource) {
-        val currentState = state.getValue(STATE)
-
-        if (currentState != OysterState.OPEN && pearlTimer > 0) {
-            pearlTimer--
-
-            val newState = if (pearlTimer > 0) OysterState.CLOSED else OysterState.OPEN
-            if (newState != currentState) {
-                world.setBlock(pos, state.setValue(STATE, newState), 2)
-            }
-
-            if (pearlTimer > 0) {
-                world.scheduleTick(pos, this, 20)
-            }
-        }
     }
 
     override fun getCollisionShape(
@@ -91,7 +90,7 @@ class OysterBlock(private val emitsParticles: Boolean, settings: Properties) : B
         val waterlogged = ctx.level.getFluidState(ctx.clickedPos).`is`(Fluids.WATER)
         return defaultBlockState()
             .setValue(WATERLOGGED, waterlogged)
-            .setValue(STATE,OysterState.CLOSED)
+            .setValue(STATE, if (waterlogged) OysterState.CLOSED else OysterState.DEAD)
             .setValue(FACING, ctx.horizontalDirection.clockWise)
     }
 
@@ -111,34 +110,37 @@ class OysterBlock(private val emitsParticles: Boolean, settings: Properties) : B
         hand: InteractionHand,
         hit: BlockHitResult,
     ): InteractionResult {
-        if (!world.isClientSide) {
-            val currentState = state.getValue(STATE)
-            if (currentState == OysterState.OPEN) {
-                pearlTimer = 6000
-                world.setBlock(pos, state.setValue(STATE, OysterState.CLOSED), 3)
 
-                val randomValue = world.random.nextFloat()
-                val itemToDrop = when {
-                    randomValue < 0.70 -> ItemStack(HybridAquaticItems.PEARL.get())
-                    randomValue < 0.95 -> ItemStack(HybridAquaticItems.BLACK_PEARL.get())
-                    else -> ItemStack(Items.ENDER_PEARL)
-                }
+        if (world.isClientSide) return InteractionResult.SUCCESS
 
-                popResource(world, pos, itemToDrop)
-            } else {
-                return InteractionResult.PASS
+        val be = world.getBlockEntity(pos) as? OysterBlockEntity
+            ?: return InteractionResult.PASS
+
+        if (state.getValue(STATE) == OysterState.OPEN) {
+
+            val randomValue = world.random.nextFloat()
+            val itemToDrop = when {
+                randomValue < 0.70 -> ItemStack(HybridAquaticItems.PEARL.get())
+                randomValue < 0.95 -> ItemStack(HybridAquaticItems.BLACK_PEARL.get())
+                else -> ItemStack(Items.ENDER_PEARL)
             }
+
+            popResource(world, pos, itemToDrop)
+
+            be.closeAndStartCooldown()
+            return InteractionResult.SUCCESS
         }
-        return InteractionResult.SUCCESS
+
+        return InteractionResult.PASS
     }
 
     override fun stepOn(world: Level, pos: BlockPos, state: BlockState, entity: Entity) {
         if (world.isClientSide) return
 
-        val currentState = state.getValue(STATE)
-        if (currentState == OysterState.OPEN) {
-            world.setBlock(pos, state.setValue(STATE, OysterState.CLOSED), 3)
-            pearlTimer = 6000
+        val be = world.getBlockEntity(pos) as? OysterBlockEntity ?: return
+
+        if (state.getValue(STATE) == OysterState.OPEN) {
+            be.closeAndStartCooldown()
 
             if (!entity.isSteppingCarefully && entity is LivingEntity) {
                 entity.hurt(world.damageSources().inWall(), 4.0f)
@@ -146,6 +148,18 @@ class OysterBlock(private val emitsParticles: Boolean, settings: Properties) : B
         }
 
         super.stepOn(world, pos, state, entity)
+    }
+
+    override fun <T : BlockEntity?> getTicker(
+        level: Level,
+        state: BlockState,
+        blockEntityType: BlockEntityType<T>,
+    ): BlockEntityTicker<T>? {
+        return createTickerHelper(
+            blockEntityType,
+            HybridAquaticBlockEntityTypes.OYSTER.get(),
+            OysterBlockEntity::tick
+        )
     }
 
     override fun animateTick(state: BlockState, world: Level, pos: BlockPos, random: RandomSource) {
@@ -170,7 +184,8 @@ class OysterBlock(private val emitsParticles: Boolean, settings: Properties) : B
             "state",
             OysterState::class.java,
             OysterState.OPEN,
-            OysterState.CLOSED
+            OysterState.CLOSED,
+            OysterState.DEAD
         )
 
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
@@ -179,7 +194,7 @@ class OysterBlock(private val emitsParticles: Boolean, settings: Properties) : B
     }
 
     enum class OysterState : StringRepresentable {
-        OPEN, CLOSED,;
+        OPEN, CLOSED, DEAD;
 
         override fun getSerializedName(): String {
             return name.lowercase()
