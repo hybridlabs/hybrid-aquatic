@@ -26,6 +26,13 @@ enum class HybridAquaticArmorMaterials(
                 Items.COPPER_INGOT
             )
         }),
+    REINFORCED_DIVING(
+        "reinforced_diving", 25, intArrayOf(3, 7, 5, 3), 9,
+        SoundEvents.ARMOR_EQUIP_CHAIN, 1.0f, 0.0f, Supplier<Ingredient> {
+            Ingredient.of(
+                Items.COPPER_INGOT
+            )
+        }),
     SEASHELL(
         "seashell", 15, intArrayOf(2, 4, 3, 2), 22,
         SoundEvents.ARMOR_EQUIP_TURTLE, 0.0f, 0.0f, Supplier<Ingredient> {

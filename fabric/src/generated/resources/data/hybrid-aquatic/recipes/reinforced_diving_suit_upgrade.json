@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "hybrid-aquatic:pearl"
+  },
+  "base": {
+    "item": "hybrid-aquatic:diving_suit"
+  },
+  "result": {
+    "item": "hybrid-aquatic:reinforced_diving_suit"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
+}

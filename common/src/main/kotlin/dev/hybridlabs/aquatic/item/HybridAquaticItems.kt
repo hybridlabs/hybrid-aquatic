@@ -15,6 +15,7 @@ import dev.hybridlabs.aquatic.item.seashell.SeashellAxeItem
 import dev.hybridlabs.aquatic.item.seashell.SeashellHoeItem
 import dev.hybridlabs.aquatic.item.seashell.SeashellPickaxeItem
 import dev.hybridlabs.aquatic.item.seashell.SeashellShovelItem
+import dev.hybridlabs.aquatic.platform.Services.REINFORCED_DIVING_ARMOR_FACTORY
 import dev.hybridlabs.aquatic.platform.Services.DIVING_ARMOR_FACTORY
 import dev.hybridlabs.aquatic.platform.Services.EEL_ARMOR_FACTORY
 import dev.hybridlabs.aquatic.platform.Services.MANGLERFISH_ARMOR_FACTORY
@@ -69,6 +70,39 @@ object HybridAquaticItems {
         "diving_boots"
     ) {
         DIVING_ARMOR_FACTORY.create(
+            ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
+        )
+    }
+
+    val REINFORCED_DIVING_HELMET = register(
+        "reinforced_diving_helmet"
+    ) {
+        REINFORCED_DIVING_ARMOR_FACTORY.create(
+            ArmorItem.Type.HELMET,
+            Item.Properties().stacksTo(1)
+        )
+    }
+
+    val REINFORCED_DIVING_SUIT = register(
+        "reinforced_diving_suit"
+    ) {
+        REINFORCED_DIVING_ARMOR_FACTORY.create(
+            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+        )
+    }
+
+    val REINFORCED_DIVING_LEGGINGS = register(
+        "reinforced_diving_leggings"
+    ) {
+        REINFORCED_DIVING_ARMOR_FACTORY.create(
+            ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1)
+        )
+    }
+
+    val REINFORCED_DIVING_BOOTS = register(
+        "reinforced_diving_boots"
+    ) {
+        REINFORCED_DIVING_ARMOR_FACTORY.create(
             ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
         )
     }

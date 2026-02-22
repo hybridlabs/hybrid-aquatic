@@ -12,6 +12,7 @@ import net.minecraft.data.recipes.RecipeCategory
 import net.minecraft.data.recipes.ShapedRecipeBuilder
 import net.minecraft.data.recipes.ShapelessRecipeBuilder
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder
+import net.minecraft.data.recipes.SmithingTransformRecipeBuilder
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
@@ -573,13 +574,69 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
         offerKelpCookingRecipes(exporter, HybridAquaticItemTags.KELPS, Items.DRIED_KELP, 0.15f)
 
+        //#region Reinforced Diving Armor
+        SmithingTransformRecipeBuilder.smithing(
+            Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+            Ingredient.of(HybridAquaticItems.DIVING_HELMET.get()),
+            Ingredient.of(HybridAquaticItems.PEARL.get()),
+            RecipeCategory.COMBAT,
+            HybridAquaticItems.REINFORCED_DIVING_HELMET.get()
+        )
+            .unlocks("has_diving_helmet",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    HybridAquaticItems.DIVING_HELMET.get()
+                )
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_helmet_upgrade"))
+
+        SmithingTransformRecipeBuilder.smithing(
+            Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+            Ingredient.of(HybridAquaticItems.DIVING_SUIT.get()),
+            Ingredient.of(HybridAquaticItems.PEARL.get()),
+            RecipeCategory.COMBAT,
+            HybridAquaticItems.REINFORCED_DIVING_SUIT.get()
+        )
+            .unlocks("has_diving_suit",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    HybridAquaticItems.DIVING_SUIT.get()
+                )
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_suit_upgrade"))
+
+        SmithingTransformRecipeBuilder.smithing(
+            Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+            Ingredient.of(HybridAquaticItems.DIVING_LEGGINGS.get()),
+            Ingredient.of(HybridAquaticItems.PEARL.get()),
+            RecipeCategory.COMBAT,
+            HybridAquaticItems.REINFORCED_DIVING_LEGGINGS.get()
+        )
+            .unlocks("has_diving_leggings",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    HybridAquaticItems.DIVING_LEGGINGS.get()
+                )
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_leggings_upgrade"))
+
+        SmithingTransformRecipeBuilder.smithing(
+            Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+            Ingredient.of(HybridAquaticItems.DIVING_BOOTS.get()),
+            Ingredient.of(HybridAquaticItems.PEARL.get()),
+            RecipeCategory.COMBAT,
+            HybridAquaticItems.REINFORCED_DIVING_BOOTS.get()
+        )
+            .unlocks("has_diving_boots",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    HybridAquaticItems.DIVING_BOOTS.get()
+                )
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_boots_upgrade"))
     }
 
     private fun offerCookingRecipes(
         exporter: Consumer<FinishedRecipe>,
         input: Item,
         output: Item,
-        experience: Float
+        experience: Float,
     ) {
         simpleCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING_RECIPE, 200, input, output, experience)
         simpleCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING_RECIPE, 100, input, output, experience)
@@ -598,11 +655,27 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         exporter: Consumer<FinishedRecipe>,
         inputTag: TagKey<Item>,
         output: Item,
-        experience: Float
+        experience: Float,
     ) {
-        offerKelpCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING_RECIPE, 200, inputTag, output, experience)
+        offerKelpCookingRecipe(
+            exporter,
+            "smelting",
+            RecipeSerializer.SMELTING_RECIPE,
+            200,
+            inputTag,
+            output,
+            experience
+        )
         offerKelpCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING_RECIPE, 100, inputTag, output, experience)
-        offerKelpCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, 600, inputTag, output, experience)
+        offerKelpCookingRecipe(
+            exporter,
+            "campfire_cooking",
+            RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
+            600,
+            inputTag,
+            output,
+            experience
+        )
     }
 
     private fun offerKelpCookingRecipe(
@@ -612,7 +685,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         cookingTime: Int,
         inputTag: TagKey<Item>,
         output: Item,
-        experience: Float
+        experience: Float,
     ) {
         val builder = SimpleCookingRecipeBuilder
             .generic(Ingredient.of(inputTag), RecipeCategory.FOOD, output, experience, cookingTime, serializer)

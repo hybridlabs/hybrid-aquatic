@@ -69,6 +69,7 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerGeoRenderers() {
         GeoRenderProviderStorage.divingArmorRenderProvider = createBasicRenderProvider(::DivingArmorRenderer)
+        GeoRenderProviderStorage.reinforcedDivingArmorRenderProvider = createBasicRenderProvider(::ReinforcedDivingArmorRenderer)
         GeoRenderProviderStorage.seashellArmorRenderProvider = createBasicRenderProvider(::SeashellArmorRenderer)
         GeoRenderProviderStorage.manglerfishArmorRenderProvider = createBasicRenderProvider(::ManglerfishArmorRenderer)
         GeoRenderProviderStorage.turtleArmorRenderProvider = createBasicRenderProvider(::TurtleArmorRenderer)

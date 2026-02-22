@@ -141,6 +141,30 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .build(ResourceLocation("hybrid-aquatic", "diving_suit"))
         consumer?.accept(divingSuitAdvancement)
 
+        val reinforcedDivingSuitAdvancement = Advancement.Builder.advancement()
+            .parent(divingSuitAdvancement)
+            .display(
+                HybridAquaticItems.REINFORCED_DIVING_SUIT.get(),
+                Component.translatable("advancements.hybrid-aquatic.reinforced_diving_suit.title"),
+                Component.translatable("advancements.hybrid-aquatic.reinforced_diving_suit.description"),
+                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                FrameType.GOAL,
+                true,
+                true,
+                true
+            )
+            .addCriterion(
+                "obtain_reinforced_diving_suit",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    HybridAquaticItems.REINFORCED_DIVING_HELMET.get(),
+                    HybridAquaticItems.REINFORCED_DIVING_SUIT.get(),
+                    HybridAquaticItems.REINFORCED_DIVING_LEGGINGS.get(),
+                    HybridAquaticItems.REINFORCED_DIVING_BOOTS.get()
+                )
+            )
+            .build(ResourceLocation("hybrid-aquatic", "reinforced_diving_suit"))
+        consumer?.accept(reinforcedDivingSuitAdvancement)
+
         val obtainPearlAdvancement = Advancement.Builder.advancement()
             .parent(divingSuitAdvancement)
             .display(

@@ -64,6 +64,9 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.diving_suit.title" to "Diving In",
             "advancements.hybrid-aquatic.diving_suit.description" to "Obtain a full set of diving gear",
 
+            "advancements.hybrid-aquatic.reinforced_diving_suit.title" to "Diving Deeper",
+            "advancements.hybrid-aquatic.reinforced_diving_suit.description" to "Reinforce your diving gear",
+
             "advancements.hybrid-aquatic.hook.title" to "Hooked!",
             "advancements.hybrid-aquatic.hook.description" to "Craft a hook to help you catch fish faster",
 
@@ -414,6 +417,10 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.DIVING_SUIT.get() to "Diving Suit",
             HybridAquaticItems.DIVING_LEGGINGS.get() to "Diving Leggings",
             HybridAquaticItems.DIVING_BOOTS.get() to "Diving Boots",
+            HybridAquaticItems.REINFORCED_DIVING_HELMET.get() to "Reinforced Diving Helmet",
+            HybridAquaticItems.REINFORCED_DIVING_SUIT.get() to "Reinforced Diving Suit",
+            HybridAquaticItems.REINFORCED_DIVING_LEGGINGS.get() to "Reinforced Diving Leggings",
+            HybridAquaticItems.REINFORCED_DIVING_BOOTS.get() to "Reinforced Diving Boots",
             HybridAquaticItems.NAUTILUS_HELMET.get() to "Nautilus Helmet",
             HybridAquaticItems.NAUTILUS_PAULDRONS.get() to "Nautilus Pauldrons",
             HybridAquaticItems.MANGLERFISH_LURE.get() to "Manglerfish Lure",
