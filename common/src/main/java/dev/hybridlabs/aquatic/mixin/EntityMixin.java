@@ -26,7 +26,8 @@ public class EntityMixin {
         Entity entity = (Entity) (Object) this;
         if (entity instanceof Player player) {
             ItemStack stack = player.getItemBySlot(EquipmentSlot.FEET);
-            if (stack.is(HybridAquaticItems.INSTANCE.getDIVING_BOOTS().get()) && player.isEyeInFluid(FluidTags.WATER)) {
+						var isDivingBoots = stack.is(HybridAquaticItems.INSTANCE.getDIVING_BOOTS().get()) || stack.is(HybridAquaticItems.INSTANCE.getREINFORCED_DIVING_BOOTS().get());
+            if (isDivingBoots && player.isEyeInFluid(FluidTags.WATER)) {
                 return original * 1.67f;
             }
         }

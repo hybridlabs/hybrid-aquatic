@@ -71,10 +71,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
 
     @Inject(method = "isAffectedByFluids", at = @At("HEAD"), cancellable = true)
     private void overrideShouldSwimInFluids(CallbackInfoReturnable<Boolean> ci) {
-        if (isWearingDivingBoots && !isSwimming() && isUnderWater()) {
-            ci.setReturnValue(false);
-        }
-        if (isWearingReinforcedDivingBoots && !isSwimming() && isUnderWater()) {
+        if ((isWearingDivingBoots || isWearingReinforcedDivingBoots) && !isSwimming() && isUnderWater()) {
             ci.setReturnValue(false);
         }
     }
