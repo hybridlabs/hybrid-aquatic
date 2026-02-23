@@ -197,6 +197,15 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.WATER_HYACINTH.get() to "Water Hyacinth",
             HybridAquaticBlocks.JUNGLE_LILY_PAD.get() to "Jungle Lily Pad",
             HybridAquaticBlocks.RAFT.get() to "Raft",
+            HybridAquaticBlocks.OAK_RAFT.get() to "Oak Raft",
+            HybridAquaticBlocks.SPRUCE_RAFT.get() to "Spruce Raft",
+            HybridAquaticBlocks.BIRCH_RAFT.get() to "Birch Raft",
+            HybridAquaticBlocks.DARK_OAK_RAFT.get() to "Dark Oak Raft",
+            HybridAquaticBlocks.JUNGLE_RAFT.get() to "Jungle Raft",
+            HybridAquaticBlocks.ACACIA_RAFT.get() to "Acacia Raft",
+            HybridAquaticBlocks.MANGROVE_RAFT.get() to "Mangrove Raft",
+            HybridAquaticBlocks.CHERRY_RAFT.get() to "Cherry Raft",
+            HybridAquaticBlocks.DRIFTWOOD_RAFT.get() to "Driftwood Raft",
 
             HybridAquaticBlocks.GLOWING_PLANKTON.get() to "Glowing Plankton",
 
@@ -446,7 +455,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
         }
 
-        // Item descriptions
+        // Item Descriptions
         mapOf(
             "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
             HybridAquaticItems.BARBED_HOOK.get().descriptionId to "Increases fishing speed during the day",
@@ -467,8 +476,23 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BAMBOO_CRATE.get().descriptionId to "Break with an axe to open",
             HybridAquaticItems.FISHING_NET.get().descriptionId to "Stored Entity: %s",
             HybridAquaticItems.MOON_JELLYFISH_HAT.get().descriptionId to "Made by Jakotens",
+            HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HybridAquaticItems.BULL_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HybridAquaticItems.TIGER_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HybridAquaticItems.BASKING_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HybridAquaticItems.WHALE_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".description"), translation)
+        }
+
+        // Item Functions
+        mapOf(
+            HybridAquaticItems.FISHING_NET.get().descriptionId to "Lets you catch and move aquatic creatures",
+        ).forEach { (itemTranslationKey, translation) ->
+            builder.add(itemTranslationKey.plus(".function"), translation)
         }
 
         mapOf(
