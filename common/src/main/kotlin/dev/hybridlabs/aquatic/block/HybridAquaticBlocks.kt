@@ -213,7 +213,6 @@ object HybridAquaticBlocks {
         .instabreak())
     }
 
-
     val SHORT_RED_ALGAE = register("short_red_algae") { ShortRedAlgaeBlock(Properties.copy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
     val RED_ALGAE = register("red_algae") { RedAlgaeBlock(Properties.copy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
     val TALL_RED_ALGAE = register("tall_red_algae") { TallRedAlgaeBlock(Properties.copy(Blocks.TALL_SEAGRASS).offsetType(BlockBehaviour.OffsetType.NONE)) }
