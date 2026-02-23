@@ -876,6 +876,7 @@ class EntitySpawnConfigGenerator {
         addCrustacean(
             HybridAquaticEntityTypes.SHRIMP.get(),
             listOf(
+                HybridAquaticBiomeTags.TROPICAL_RIVERS,
                 HybridAquaticBiomeTags.DEEP_REEF,
                 HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.RED_MEADOW,
@@ -907,6 +908,9 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.CRAYFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_RIVERS,
+                HybridAquaticBiomeTags.PLACER_RIVERS,
+                HybridAquaticBiomeTags.SEASONAL_RIVERS,
+                HybridAquaticBiomeTags.COLD_RIVERS,
                 HybridAquaticBiomeTags.RIVERS),
             2, 1, 2
         )
