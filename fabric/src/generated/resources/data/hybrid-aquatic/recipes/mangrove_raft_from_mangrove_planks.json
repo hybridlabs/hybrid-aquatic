@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:mangrove_planks"
+    }
+  },
+  "pattern": [
+    "SS ",
+    "SW ",
+    "   "
+  ],
+  "result": {
+    "item": "hybrid-aquatic:mangrove_raft"
+  },
+  "show_notification": true
+}

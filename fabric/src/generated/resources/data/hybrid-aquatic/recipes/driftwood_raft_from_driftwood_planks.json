@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "hybrid-aquatic:driftwood_planks"
+    }
+  },
+  "pattern": [
+    "SS ",
+    "SW ",
+    "   "
+  ],
+  "result": {
+    "item": "hybrid-aquatic:driftwood_raft"
+  },
+  "show_notification": true
+}

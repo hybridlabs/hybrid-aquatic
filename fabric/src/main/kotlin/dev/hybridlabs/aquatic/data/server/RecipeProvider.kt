@@ -3,19 +3,12 @@ package dev.hybridlabs.aquatic.data.server
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
-import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.data.recipes.FinishedRecipe
-import net.minecraft.data.recipes.RecipeCategory
-import net.minecraft.data.recipes.ShapedRecipeBuilder
-import net.minecraft.data.recipes.ShapelessRecipeBuilder
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder
-import net.minecraft.data.recipes.SmithingTransformRecipeBuilder
+import net.minecraft.data.recipes.*
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
@@ -181,24 +174,6 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_block"))
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.RAFT.get(), 2)
-            .pattern("SS ")
-            .pattern("SS ")
-            .pattern("   ")
-            .define('S', Items.STICK)
-            .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK))
-            .save(exporter)
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.BUOY.get(), 2)
-            .pattern(" L ")
-            .pattern(" S ")
-            .pattern(" W ")
-            .define('S', Items.STICK)
-            .define('L', Items.LANTERN)
-            .define('W', ItemTags.PLANKS)
-            .unlockedBy("has_lantern", InventoryChangeTrigger.TriggerInstance.hasItems(Items.LANTERN))
-            .save(exporter)
-
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_BLADE.get(), 1)
             .pattern(" C ")
             .pattern(" C ")
@@ -336,6 +311,27 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
             .save(exporter)
 
+        //#region Wood Recipes
+
+        offerRaftRecipes(exporter, raftTypeMap)
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.RAFT.get(), 2)
+            .pattern("SS ")
+            .pattern("SS ")
+            .pattern("   ")
+            .define('S', Items.STICK)
+            .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK))
+            .save(exporter)
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.BUOY.get(), 2)
+            .pattern(" L ")
+            .pattern(" S ")
+            .pattern(" W ")
+            .define('S', Items.STICK)
+            .define('L', Items.LANTERN)
+            .define('W', ItemTags.PLANKS)
+            .unlockedBy("has_lantern", InventoryChangeTrigger.TriggerInstance.hasItems(Items.LANTERN))
+            .save(exporter)
 
         slab(
             exporter,
@@ -343,17 +339,20 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get(),
             HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
+
         woodFromLogs(
             exporter,
             HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get(),
             HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get()
         )
+
         planksFromLog(
             exporter,
             HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get(),
             HybridAquaticItemTags.DRIFTWOOD_LOG_WOOD,
             4
         )
+
         pressurePlate(
             exporter,
             HybridAquaticPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get(),
@@ -371,6 +370,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
             )
             .save(exporter)
+        //#endregion
 
         //#region Armor
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HybridAquaticItems.TURTLE_CHESTPLATE.get())
@@ -778,6 +778,41 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         builder.save(exporter, recipeId)
     }
     //#endregion
+
+    //#region Wooden Raft Maps
+    private val raftTypeMap = mapOf(
+        HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get() to HybridAquaticBlocks.DRIFTWOOD_RAFT.get(),
+        Blocks.OAK_PLANKS to HybridAquaticBlocks.OAK_RAFT.get(),
+        Blocks.SPRUCE_PLANKS to HybridAquaticBlocks.SPRUCE_RAFT.get(),
+        Blocks.BIRCH_PLANKS to HybridAquaticBlocks.BIRCH_RAFT.get(),
+        Blocks.DARK_OAK_PLANKS to HybridAquaticBlocks.DARK_OAK_RAFT.get(),
+        Blocks.CHERRY_PLANKS to HybridAquaticBlocks.CHERRY_RAFT.get(),
+        Blocks.MANGROVE_PLANKS to HybridAquaticBlocks.MANGROVE_RAFT.get(),
+        Blocks.ACACIA_PLANKS to HybridAquaticBlocks.ACACIA_RAFT.get(),
+        Blocks.JUNGLE_PLANKS to HybridAquaticBlocks.JUNGLE_RAFT.get()
+    )
+
+    private fun offerRaftRecipes(
+        exporter: Consumer<FinishedRecipe>,
+        map: Map<Block, Block>
+    ) {
+        for ((woodType, raftType) in map) {
+            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, raftType)
+                .pattern("SS ")
+                .pattern("SW ")
+                .pattern("   ")
+                .define('W', woodType)
+                .define('S', Items.STICK)
+                .unlockedBy(
+                    "has_${getItemName(woodType.asItem())}",
+                    has(woodType.asItem())
+                )
+                .save(
+                    exporter,
+                    "${getItemName(raftType.asItem())}_from_${getItemName(woodType.asItem())}"
+                )
+        }
+    }
 
     //#region Bleached Coral Maps
     private val bleachedCoralBlockMap = mapOf(
