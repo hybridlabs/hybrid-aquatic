@@ -514,7 +514,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add("item.minecraft.tipped_arrow.effect.$potion", "Arrow of $translation")
         }
 
-
         // Workaround for Jade/WAILA not being able to find the mod display name on Forge
         builder.add("modmenu.nameTranslation.hybrid-aquatic", "Hybrid Aquatic")
 
