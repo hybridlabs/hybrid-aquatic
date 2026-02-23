@@ -1,0 +1,7 @@
+{
+  "parent": "hybrid-aquatic:block/raft",
+  "textures": {
+    "0": "hybrid-aquatic:block/cherry_raft",
+    "particle": "hybrid-aquatic:block/cherry_raft"
+  }
+}

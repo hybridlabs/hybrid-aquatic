@@ -1,0 +1,7 @@
+{
+  "parent": "hybrid-aquatic:block/raft_land",
+  "textures": {
+    "0": "hybrid-aquatic:block/dark_oak_raft",
+    "particle": "hybrid-aquatic:block/dark_oak_raft"
+  }
+}

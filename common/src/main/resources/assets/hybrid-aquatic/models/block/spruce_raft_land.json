@@ -1,0 +1,7 @@
+{
+  "parent": "hybrid-aquatic:block/raft_land",
+  "textures": {
+    "0": "hybrid-aquatic:block/spruce_raft",
+    "particle": "hybrid-aquatic:block/spruce_raft"
+  }
+}

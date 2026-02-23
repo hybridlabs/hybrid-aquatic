@@ -477,6 +477,15 @@ object HybridAquaticItems {
     val MARINE_SNOW = registerBlockItem("marine_snow") { HybridAquaticBlocks.MARINE_SNOW.get() }
     val BUOY = registerPlaceableInWaterBlockItem("buoy") { HybridAquaticBlocks.BUOY.get() }
     val RAFT = registerPlaceableInWaterBlockItem("raft") { HybridAquaticBlocks.RAFT.get() }
+    val OAK_RAFT = registerPlaceableInWaterBlockItem("oak_raft") { HybridAquaticBlocks.OAK_RAFT.get() }
+    val SPRUCE_RAFT = registerPlaceableInWaterBlockItem("spruce_raft") { HybridAquaticBlocks.SPRUCE_RAFT.get() }
+    val DARK_OAK_RAFT = registerPlaceableInWaterBlockItem("dark_oak_raft") { HybridAquaticBlocks.DARK_OAK_RAFT.get() }
+    val BIRCH_RAFT = registerPlaceableInWaterBlockItem("birch_raft") { HybridAquaticBlocks.BIRCH_RAFT.get() }
+    val ACACIA_RAFT = registerPlaceableInWaterBlockItem("acacia_raft") { HybridAquaticBlocks.ACACIA_RAFT.get() }
+    val JUNGLE_RAFT = registerPlaceableInWaterBlockItem("jungle_raft") { HybridAquaticBlocks.JUNGLE_RAFT.get() }
+    val MANGROVE_RAFT = registerPlaceableInWaterBlockItem("mangrove_raft") { HybridAquaticBlocks.MANGROVE_RAFT.get() }
+    val CHERRY_RAFT = registerPlaceableInWaterBlockItem("cherry_raft") { HybridAquaticBlocks.CHERRY_RAFT.get() }
+    val DRIFTWOOD_RAFT = registerPlaceableInWaterBlockItem("driftwood_raft") { HybridAquaticBlocks.DRIFTWOOD_RAFT.get() }
     val GLOWSTICK = registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") { PLATFORM.createMessageInABottleItem(Item.Properties()) }
 

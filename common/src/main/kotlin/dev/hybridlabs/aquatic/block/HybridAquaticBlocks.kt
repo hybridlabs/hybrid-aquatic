@@ -169,6 +169,42 @@ object HybridAquaticBlocks {
         RaftBlock(Properties.copy(Blocks.OAK_WOOD))
     }
 
+    val OAK_RAFT = register("oak_raft") {
+        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+    }
+
+    val SPRUCE_RAFT = register("spruce_raft") {
+        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+    }
+
+    val DARK_OAK_RAFT = register("dark_oak_raft") {
+        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+    }
+
+    val BIRCH_RAFT = register("birch_raft") {
+        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+    }
+
+    val CHERRY_RAFT = register("cherry_raft") {
+        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+    }
+
+    val JUNGLE_RAFT = register("jungle_raft") {
+        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+    }
+
+    val ACACIA_RAFT = register("acacia_raft") {
+        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+    }
+
+    val MANGROVE_RAFT = register("mangrove_raft") {
+        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+    }
+
+    val DRIFTWOOD_RAFT = register("driftwood_raft") {
+        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+    }
+
     val GLOWING_PLANKTON = register("glowing_plankton") {
         GlowingPlanktonBlock(Properties.copy(Blocks.LILY_PAD)
         .noOcclusion()
