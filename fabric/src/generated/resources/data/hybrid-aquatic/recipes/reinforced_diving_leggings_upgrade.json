@@ -10,6 +10,6 @@
     "item": "hybrid-aquatic:reinforced_diving_leggings"
   },
   "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
+    "item": "hybrid-aquatic:diving_armor_upgrade_template"
   }
 }

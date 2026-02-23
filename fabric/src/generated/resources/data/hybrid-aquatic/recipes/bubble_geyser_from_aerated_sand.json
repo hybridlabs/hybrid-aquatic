@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "hybrid-aquatic:aerated_sand"
+    }
+  ],
+  "result": {
+    "item": "hybrid-aquatic:bubble_geyser"
+  }
+}

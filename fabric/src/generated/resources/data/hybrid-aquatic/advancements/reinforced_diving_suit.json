@@ -36,7 +36,7 @@
       "translate": "advancements.hybrid-aquatic.reinforced_diving_suit.description"
     },
     "frame": "goal",
-    "hidden": true,
+    "hidden": false,
     "icon": {
       "item": "hybrid-aquatic:reinforced_diving_suit",
       "nbt": "{Damage:0}"

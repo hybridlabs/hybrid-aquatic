@@ -390,6 +390,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.CUTTLEBONE.get() to "Cuttlebone",
             HybridAquaticItems.SEA_URCHIN_SPINE.get() to "Sea Urchin Spine",
             HybridAquaticItems.PRISMARINE_ROD.get() to "Prismarine Rod",
+            HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get() to "Diving Armor Upgrade Template",
             HybridAquaticItems.SHARK_TOOTH.get() to "Shark Tooth",
             HybridAquaticItems.PEARL.get() to "Pearl",
             HybridAquaticItems.BLACK_PEARL.get() to "Black Pearl",

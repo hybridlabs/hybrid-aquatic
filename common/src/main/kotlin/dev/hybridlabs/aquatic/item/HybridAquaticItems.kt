@@ -522,6 +522,7 @@ object HybridAquaticItems {
     val SULFUR = register("sulfur") { Item(Item.Properties()) }
     val CORAL_CHUNK = register("coral_chunk") { Item(Item.Properties()) }
     val PRISMARINE_ROD = register("prismarine_rod") { Item(Item.Properties()) }
+    val DIVING_ARMOR_UPGRADE_TEMPLATE = register("diving_armor_upgrade_template") { Item(Item.Properties()) }
     val PEARL = register("pearl") { Item(Item.Properties()) }
     val BLACK_PEARL = register("black_pearl") { Item(Item.Properties()) }
     val CUTTLEBONE = register("cuttlebone") { Item(Item.Properties()) }

@@ -151,7 +151,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 FrameType.GOAL,
                 true,
                 true,
-                true
+                false
             )
             .addCriterion(
                 "obtain_reinforced_diving_suit",

@@ -27,7 +27,7 @@ import java.util.function.Consumer
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun buildRecipes(exporter: Consumer<FinishedRecipe>) {
         // misc recipes
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.PRISMARINE_ROD.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HybridAquaticItems.PRISMARINE_ROD.get())
             .pattern("P  ")
             .pattern("P  ")
             .pattern("   ")
@@ -37,6 +37,42 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 InventoryChangeTrigger.TriggerInstance.hasItems(Items.PRISMARINE_SHARD)
             )
             .save(exporter)
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.AERATED_SAND.get())
+            .pattern("SSS")
+            .pattern("SPS")
+            .pattern("SSS")
+            .define('P', HybridAquaticItems.PEARL.get())
+            .define('S', Items.SAND)
+            .unlockedBy(
+                "has_pearl",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PEARL.get())
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "aerated_sand_from_pearl"))
+
+        ShapelessRecipeBuilder.shapeless(
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.AERATED_SAND.get(),
+            1
+        )
+            .requires(HybridAquaticItems.BUBBLE_GEYSER.get())
+            .unlockedBy(
+                "has_pearl",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PEARL.get())
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "aerated_sand_from_bubble_geyser"))
+
+        ShapelessRecipeBuilder.shapeless(
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.BUBBLE_GEYSER.get(),
+            1
+        )
+            .requires(HybridAquaticItems.AERATED_SAND.get())
+            .unlockedBy(
+                "has_pearl",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PEARL.get())
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "bubble_geyser_from_aerated_sand"))
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.SPONGE)
             .pattern("SS ")
@@ -576,7 +612,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
         //#region Reinforced Diving Armor
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
             Ingredient.of(HybridAquaticItems.DIVING_HELMET.get()),
             Ingredient.of(HybridAquaticItems.PEARL.get()),
             RecipeCategory.COMBAT,
@@ -590,7 +626,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_helmet_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
             Ingredient.of(HybridAquaticItems.DIVING_SUIT.get()),
             Ingredient.of(HybridAquaticItems.PEARL.get()),
             RecipeCategory.COMBAT,
@@ -604,7 +640,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_suit_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
             Ingredient.of(HybridAquaticItems.DIVING_LEGGINGS.get()),
             Ingredient.of(HybridAquaticItems.PEARL.get()),
             RecipeCategory.COMBAT,
@@ -618,7 +654,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_leggings_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
             Ingredient.of(HybridAquaticItems.DIVING_BOOTS.get()),
             Ingredient.of(HybridAquaticItems.PEARL.get()),
             RecipeCategory.COMBAT,
