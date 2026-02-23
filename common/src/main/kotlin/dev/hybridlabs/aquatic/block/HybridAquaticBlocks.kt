@@ -174,31 +174,31 @@ object HybridAquaticBlocks {
     }
 
     val SPRUCE_RAFT = register("spruce_raft") {
-        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+        RaftBlock(Properties.copy(Blocks.SPRUCE_WOOD))
     }
 
     val DARK_OAK_RAFT = register("dark_oak_raft") {
-        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+        RaftBlock(Properties.copy(Blocks.DARK_OAK_WOOD))
     }
 
     val BIRCH_RAFT = register("birch_raft") {
-        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+        RaftBlock(Properties.copy(Blocks.BIRCH_WOOD))
     }
 
     val CHERRY_RAFT = register("cherry_raft") {
-        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+        RaftBlock(Properties.copy(Blocks.CHERRY_WOOD))
     }
 
     val JUNGLE_RAFT = register("jungle_raft") {
-        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+        RaftBlock(Properties.copy(Blocks.JUNGLE_WOOD))
     }
 
     val ACACIA_RAFT = register("acacia_raft") {
-        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+        RaftBlock(Properties.copy(Blocks.ACACIA_WOOD))
     }
 
     val MANGROVE_RAFT = register("mangrove_raft") {
-        RaftBlock(Properties.copy(Blocks.OAK_WOOD))
+        RaftBlock(Properties.copy(Blocks.MANGROVE_WOOD))
     }
 
     val DRIFTWOOD_RAFT = register("driftwood_raft") {
