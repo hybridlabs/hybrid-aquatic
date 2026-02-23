@@ -813,6 +813,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 )
         }
     }
+    //#endregion
 
     //#region Bleached Coral Maps
     private val bleachedCoralBlockMap = mapOf(
@@ -859,7 +860,6 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
         HybridAquaticBlocks.DEAD_SUN_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_SUN_CORAL_FAN.get(),
     )
-    //#endregion
 
     private fun offerBleachingRecipes(
         exporter: Consumer<FinishedRecipe>,
@@ -882,4 +882,5 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 )
         }
     }
+    //#endregion
 }
