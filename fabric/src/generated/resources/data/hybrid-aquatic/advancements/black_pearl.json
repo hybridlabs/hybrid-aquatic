@@ -16,12 +16,12 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "background": "hybrid-aquatic:textures/block/coralstone.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.black_pearl.description"
     },
     "frame": "task",
-    "hidden": true,
+    "hidden": false,
     "icon": {
       "item": "hybrid-aquatic:black_pearl"
     },

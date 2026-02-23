@@ -26,7 +26,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.TUNA.get(),
                 Component.translatable("advancements.hybrid-aquatic.enter_water.title"),
                 Component.translatable("advancements.hybrid-aquatic.enter_water.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -45,7 +45,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 Items.OAK_BOAT,
                 Component.translatable("advancements.hybrid-aquatic.boat.title"),
                 Component.translatable("advancements.hybrid-aquatic.boat.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -66,7 +66,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.FISHING_NET.get(),
                 Component.translatable("advancements.hybrid-aquatic.fishing_net.title"),
                 Component.translatable("advancements.hybrid-aquatic.fishing_net.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -85,7 +85,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.GLOWSTICK.get(),
                 Component.translatable("advancements.hybrid-aquatic.glowstick.title"),
                 Component.translatable("advancements.hybrid-aquatic.glowstick.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -104,7 +104,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.BUOY.get(),
                 Component.translatable("advancements.hybrid-aquatic.buoy.title"),
                 Component.translatable("advancements.hybrid-aquatic.buoy.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -123,7 +123,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.DIVING_HELMET.get(),
                 Component.translatable("advancements.hybrid-aquatic.diving_suit.title"),
                 Component.translatable("advancements.hybrid-aquatic.diving_suit.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -147,7 +147,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.REINFORCED_DIVING_SUIT.get(),
                 Component.translatable("advancements.hybrid-aquatic.reinforced_diving_suit.title"),
                 Component.translatable("advancements.hybrid-aquatic.reinforced_diving_suit.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -171,7 +171,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.PEARL.get(),
                 Component.translatable("advancements.hybrid-aquatic.pearl.title"),
                 Component.translatable("advancements.hybrid-aquatic.pearl.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -190,11 +190,11 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.BLACK_PEARL.get(),
                 Component.translatable("advancements.hybrid-aquatic.black_pearl.title"),
                 Component.translatable("advancements.hybrid-aquatic.black_pearl.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
-                true
+                false
             )
             .addCriterion(
                 "obtain_black_pearl",
@@ -209,7 +209,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.BARBED_HOOK.get(),
                 Component.translatable("advancements.hybrid-aquatic.hook.title"),
                 Component.translatable("advancements.hybrid-aquatic.hook.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -230,11 +230,11 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.CREEPERMAGNET_HOOK.get(),
                 Component.translatable("advancements.hybrid-aquatic.creeper_hook.title"),
                 Component.translatable("advancements.hybrid-aquatic.creeper_hook.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
-                true
+                false
             )
             .addCriterion(
                 "has_creeper_hook",
@@ -249,7 +249,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.DUNGENESS_CRAB_CLAW.get(),
                 Component.translatable("advancements.hybrid-aquatic.crab_claw.title"),
                 Component.translatable("advancements.hybrid-aquatic.crab_claw.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -270,11 +270,11 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.OMINOUS_HOOK.get(),
                 Component.translatable("advancements.hybrid-aquatic.ominous_hook.title"),
                 Component.translatable("advancements.hybrid-aquatic.ominous_hook.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
-                true
+                false
             )
             .addCriterion(
                 "obtain_ominous_hook",
@@ -289,7 +289,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.KARKINOS_CLAW.get(),
                 Component.translatable("advancements.hybrid-aquatic.kill_karkinos.title"),
                 Component.translatable("advancements.hybrid-aquatic.kill_karkinos.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.CHALLENGE,
                 true,
                 true,
@@ -310,7 +310,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 HybridAquaticItems.SHARK_TOOTH.get(),
                 Component.translatable("advancements.hybrid-aquatic.bigger_boat.title"),
                 Component.translatable("advancements.hybrid-aquatic.bigger_boat.description"),
-                ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -322,6 +322,5 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             )
             .build(ResourceLocation("hybrid-aquatic", "bigger_boat"))
         consumer?.accept(obtainSharkToothAdvancement)
-
     }
 }

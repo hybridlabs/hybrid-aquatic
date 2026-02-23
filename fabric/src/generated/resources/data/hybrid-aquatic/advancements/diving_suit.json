@@ -31,7 +31,7 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "background": "hybrid-aquatic:textures/block/coralstone.png",
     "description": {
       "translate": "advancements.hybrid-aquatic.diving_suit.description"
     },
