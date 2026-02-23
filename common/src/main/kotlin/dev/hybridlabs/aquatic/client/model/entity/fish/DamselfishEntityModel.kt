@@ -27,10 +27,10 @@ class DamselfishEntityModel : HybridAquaticFishEntityModel<DamselfishEntity>("da
         val fish = animatable.getFishCount()
 
         val animationPath = when (fish) {
-            1 -> "animations/damselfish.animation.json"
-            2 -> "animations/damselfish_two.animation.json"
-            3 -> "animations/damselfish_three.animation.json"
-            else -> "animations/damselfish.animation.json"
+            1 -> "animations/entity/fish/damselfish/damselfish.animation.json"
+            2 -> "animations/entity/fish/damselfish/damselfish_two.animation.json"
+            3 -> "animations/entity/fish/damselfish/damselfish_three.animation.json"
+            else -> "animations/entity/fish/damselfish/damselfish.animation.json"
         }
         return CommonClass.locate(animationPath)
     }

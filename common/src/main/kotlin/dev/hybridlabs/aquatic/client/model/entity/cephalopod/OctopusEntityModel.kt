@@ -13,9 +13,9 @@ class OctopusEntityModel : HybridAquaticOctopusEntityModel<OctopusEntity>("octop
     private val BLUE_RINGED_OCTOPUS_MODEL = ResourceLocation("hybrid-aquatic", "geo/cephalopod/octopus/blue_ringed_octopus.geo.json")
     private val COCONUT_OCTOPUS_MODEL = ResourceLocation("hybrid-aquatic", "geo/cephalopod/octopus/coconut_octopus.geo.json")
 
-    private val OCTOPUS_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/octopus.animation.json")
-    private val BLUE_RINGED_OCTOPUS_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/blue_ringed_octopus.animation.json")
-    private val COCONUT_OCTOPUS_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/coconut_octopus.animation.json")
+    private val OCTOPUS_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/cephalopod/octopus/octopus.animation.json")
+    private val BLUE_RINGED_OCTOPUS_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/cephalopod/octopus/blue_ringed_octopus.animation.json")
+    private val COCONUT_OCTOPUS_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/cephalopod/octopus/coconut_octopus.animation.json")
 
     override fun getTextureResource(animatable: OctopusEntity): ResourceLocation {
         return when (animatable.variant) {

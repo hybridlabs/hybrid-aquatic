@@ -9,7 +9,7 @@ class HoundSharkEntityModel : HybridAquaticSharkEntityModel<HoundSharkEntity>("h
 
     private val LEOPARD_MODEL = ResourceLocation("hybrid-aquatic", "geo/shark/hound_shark/leopard_shark.geo.json")
 
-    private val LEOPARD_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/leopard_shark.animation.json")
+    private val LEOPARD_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/shark/hound_shark/leopard_shark.animation.json")
 
     override fun getTextureResource(animatable: HoundSharkEntity): ResourceLocation {
         return when (animatable.variant) {

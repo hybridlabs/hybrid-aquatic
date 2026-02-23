@@ -27,10 +27,10 @@ class MackerelEntityModel : HybridAquaticFishEntityModel<MackerelEntity>("macker
         val fish = animatable.getFishCount()
 
         val animationPath = when (fish) {
-            1 -> "animations/mackerel.animation.json"
-            2 -> "animations/mackerel_two.animation.json"
-            3 -> "animations/mackerel_three.animation.json"
-            else -> "animations/mackerel.animation.json"
+            1 -> "animations/entity/fish/mackerel/mackerel.animation.json"
+            2 -> "animations/entity/fish/mackerel/mackerel_two.animation.json"
+            3 -> "animations/entity/fish/mackerel/mackerel_three.animation.json"
+            else -> "animations/entity/fish/mackerel/mackerel.animation.json"
         }
         return CommonClass.locate(animationPath)
     }

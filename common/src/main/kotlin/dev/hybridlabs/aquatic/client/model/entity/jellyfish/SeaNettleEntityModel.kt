@@ -15,8 +15,8 @@ class SeaNettleEntityModel : HybridAquaticJellyfishEntityModel<SeaNettleEntity>(
     private val PACIFIC_MODEL = ResourceLocation("hybrid-aquatic", "geo/jellyfish/sea_nettle/sea_nettle.geo.json")
     private val COMPASS_MODEL = ResourceLocation("hybrid-aquatic", "geo/jellyfish/sea_nettle/compass_jellyfish.geo.json")
 
-    private val PACIFIC_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/sea_nettle.animation.json")
-    private val COMPASS_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/compass_jellyfish.animation.json")
+    private val PACIFIC_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/jellyfish/sea_nettle/sea_nettle.animation.json")
+    private val COMPASS_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/jellyfish/sea_nettle/compass_jellyfish.animation.json")
 
     override fun getTextureResource(animatable: SeaNettleEntity): ResourceLocation {
         return when (animatable.variant) {

@@ -20,9 +20,9 @@ class SeadragonEntityModel : HybridAquaticFishEntityModel<SeadragonEntity>("sead
     private val WEEDY_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/seadragon/weedy_seadragon.geo.json")
     private val RUBY_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/seadragon/ruby_seadragon.geo.json")
 
-    private val LEAFY_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/seadragon_leafy.animation.json")
-    private val WEEDY_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/seadragon_weedy.animation.json")
-    private val RUBY_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/seadragon_ruby.animation.json")
+    private val LEAFY_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_leafy.animation.json")
+    private val WEEDY_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_weedy.animation.json")
+    private val RUBY_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_ruby.animation.json")
 
     override fun getTextureResource(animatable: SeadragonEntity): ResourceLocation {
         return when (animatable.variant) {

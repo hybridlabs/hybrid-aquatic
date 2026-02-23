@@ -31,10 +31,10 @@ class SquirrelfishEntityModel : HybridAquaticFishEntityModel<SquirrelfishEntity>
         val fish = animatable.getFishCount()
 
         val animationPath = when (fish) {
-            1 -> "animations/squirrelfish.animation.json"
-            2 -> "animations/squirrelfish_two.animation.json"
-            3 -> "animations/squirrelfish_three.animation.json"
-            else -> "animations/squirrelfish.animation.json"
+            1 -> "animations/entity/fish/squirrelfish/squirrelfish.animation.json"
+            2 -> "animations/entity/fish/squirrelfish/squirrelfish_two.animation.json"
+            3 -> "animations/entity/fish/squirrelfish/squirrelfish_three.animation.json"
+            else -> "animations/entity/fish/squirrelfish/squirrelfish.animation.json"
         }
         return CommonClass.locate(animationPath)
     }

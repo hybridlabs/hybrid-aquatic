@@ -16,11 +16,7 @@ abstract class HybridAquaticJellyfishEntityModel<T : HybridAquaticJellyfishEntit
         return CommonClass.locate("textures/entity/jellyfish/$id/$id.png")
     }
 
-    fun getVariantTexture(variant: String): ResourceLocation {
-        return CommonClass.locate("textures/entity/jellyfish/${id}_$variant.png")
-    }
-
     override fun getAnimationResource(animatable: T): ResourceLocation {
-        return CommonClass.locate("animations/$id.animation.json")
+        return CommonClass.locate("animations/entity/jellyfish/$id/$id.animation.json")
     }
 }

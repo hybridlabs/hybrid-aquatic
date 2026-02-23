@@ -11,8 +11,8 @@ class StingrayEntityModel : HybridAquaticFishEntityModel<StingrayEntity>("stingr
     private val BLUE_SPOTTED_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/stingray/stingray_blue_spotted.geo.json")
     private val SPOTTED_EAGLE_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/stingray/stingray_spotted_eagle.geo.json")
 
-    private val BLUE_SPOTTED_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/stingray_blue_spotted.animation.json")
-    private val SPOTTED_EAGLE_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/stingray_spotted_eagle.animation.json")
+    private val BLUE_SPOTTED_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/stingray/stingray_blue_spotted.animation.json")
+    private val SPOTTED_EAGLE_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/stingray/stingray_spotted_eagle.animation.json")
 
     override fun getTextureResource(animatable: StingrayEntity): ResourceLocation {
         return when (animatable.variant) {

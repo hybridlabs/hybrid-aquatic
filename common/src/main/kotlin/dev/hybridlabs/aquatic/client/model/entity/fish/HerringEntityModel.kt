@@ -27,10 +27,10 @@ class HerringEntityModel : HybridAquaticFishEntityModel<HerringEntity>("herring"
         val fish = animatable.getFishCount()
 
         val animationPath = when (fish) {
-            1 -> "animations/herring.animation.json"
-            2 -> "animations/herring_two.animation.json"
-            3 -> "animations/herring_three.animation.json"
-            else -> "animations/herring.animation.json"
+            1 -> "animations/entity/fish/herring/herring.animation.json"
+            2 -> "animations/entity/fish/herring/herring_two.animation.json"
+            3 -> "animations/entity/fish/herring/herring_three.animation.json"
+            else -> "animations/entity/fish/herring/herring.animation.json"
         }
         return CommonClass.locate(animationPath)
     }

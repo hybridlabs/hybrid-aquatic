@@ -21,8 +21,8 @@ class OtterEntityModel : HybridAquaticMammalEntityModel<OtterEntity>("otter") {
     private val SEA_OTTER_MODEL = ResourceLocation("hybrid-aquatic", "geo/mammal/otter/sea_otter.geo.json")
     private val BABY_SEA_OTTER_MODEL = ResourceLocation("hybrid-aquatic", "geo/mammal/otter/baby_sea_otter.geo.json")
 
-    private val RIVER_OTTER_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/river_otter.animation.json")
-    private val SEA_OTTER_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/sea_otter.animation.json")
+    private val RIVER_OTTER_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/mammal/otter/river_otter.animation.json")
+    private val SEA_OTTER_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/mammal/otter/sea_otter.animation.json")
 
     override fun getTextureResource(animatable: OtterEntity): ResourceLocation {
         return if (animatable.isBaby) {

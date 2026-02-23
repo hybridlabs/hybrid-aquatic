@@ -31,10 +31,10 @@ class FlashlightFishEntityModel : HybridAquaticFishEntityModel<FlashlightFishEnt
         val fish = animatable.getFishCount()
 
         val animationPath = when (fish) {
-            1 -> "animations/flashlight_fish.animation.json"
-            2 -> "animations/flashlight_fish_two.animation.json"
-            3 -> "animations/flashlight_fish_three.animation.json"
-            else -> "animations/flashlight_fish.animation.json"
+            1 -> "animations/entity/fish/flashlight_fish/flashlight_fish.animation.json"
+            2 -> "animations/entity/fish/flashlight_fish/flashlight_fish_two.animation.json"
+            3 -> "animations/entity/fish/flashlight_fish/flashlight_fish_three.animation.json"
+            else -> "animations/entity/fish/flashlight_fish/flashlight_fish.animation.json"
         }
         return CommonClass.locate(animationPath)
     }

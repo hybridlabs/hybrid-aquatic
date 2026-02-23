@@ -22,7 +22,7 @@ abstract class HybridAquaticCephalopodEntityModel<T : HybridAquaticCephalopodEnt
     }
 
     override fun getAnimationResource(animatable: T): ResourceLocation {
-        return CommonClass.locate("animations/$id.animation.json")
+        return CommonClass.locate("animations/entity/cephalopod/$id/$id.animation.json")
     }
 
     override fun setCustomAnimations(

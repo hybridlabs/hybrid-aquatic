@@ -11,8 +11,8 @@ class TroutEntityModel : HybridAquaticFishEntityModel<TroutEntity>("trout") {
     private val BULL_TROUT_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/trout/bull_trout.geo.json")
     private val REDBAND_TROUT_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/trout/redband_trout.geo.json")
 
-    private val BULL_TROUT_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/bull_trout.animation.json")
-    private val REDBAND_TROUT_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/redband_trout.animation.json")
+    private val BULL_TROUT_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/trout/bull_trout.animation.json")
+    private val REDBAND_TROUT_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/trout/redband_trout.animation.json")
 
     override fun getTextureResource(animatable: TroutEntity): ResourceLocation {
         return when (animatable.variant) {
