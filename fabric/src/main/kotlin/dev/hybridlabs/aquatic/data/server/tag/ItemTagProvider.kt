@@ -49,6 +49,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         getOrCreateTagBuilder(HybridAquaticItemTags.DIVING_HELMET)
             .add(
                 HybridAquaticItems.DIVING_HELMET.get(),
+                HybridAquaticItems.REINFORCED_DIVING_HELMET.get(),
             )
             .addOptional(ResourceLocation("create", "copper_diving_helmet"))
             .addOptional(ResourceLocation("create", "netherite_diving_helmet"))
@@ -58,6 +59,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         getOrCreateTagBuilder(HybridAquaticItemTags.DIVING_SUIT)
             .add(
                 HybridAquaticItems.DIVING_SUIT.get(),
+                HybridAquaticItems.REINFORCED_DIVING_SUIT.get(),
             )
             .addOptional(ResourceLocation("aquamirae", "three_bolt_chestplate"))
             .addOptional(ResourceLocation("alexscaves", "diving_chestplate"))
@@ -65,6 +67,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         getOrCreateTagBuilder(HybridAquaticItemTags.DIVING_LEGGINGS)
             .add(
                 HybridAquaticItems.DIVING_LEGGINGS.get(),
+                HybridAquaticItems.REINFORCED_DIVING_LEGGINGS.get(),
             )
             .addOptional(ResourceLocation("aquamirae", "three_bolt_leggings"))
             .addOptional(ResourceLocation("alexscaves", "diving_leggings"))
@@ -72,6 +75,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         getOrCreateTagBuilder(HybridAquaticItemTags.DIVING_BOOTS)
             .add(
                 HybridAquaticItems.DIVING_BOOTS.get(),
+                HybridAquaticItems.REINFORCED_DIVING_BOOTS.get(),
             )
             .addOptional(ResourceLocation("create", "copper_diving_boots"))
             .addOptional(ResourceLocation("create", "netherite_diving_boots"))
@@ -101,6 +105,11 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
                 Items.GOLDEN_CHESTPLATE,
                 Items.GOLDEN_LEGGINGS,
                 Items.GOLDEN_BOOTS,
+
+                HybridAquaticItems.REINFORCED_DIVING_HELMET.get(),
+                HybridAquaticItems.REINFORCED_DIVING_SUIT.get(),
+                HybridAquaticItems.REINFORCED_DIVING_LEGGINGS.get(),
+                HybridAquaticItems.REINFORCED_DIVING_BOOTS.get(),
             )
         //#endregion
 

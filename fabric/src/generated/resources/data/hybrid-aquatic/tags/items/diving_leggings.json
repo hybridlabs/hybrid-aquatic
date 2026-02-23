@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "hybrid-aquatic:diving_leggings",
+    "hybrid-aquatic:reinforced_diving_leggings",
     {
       "id": "aquamirae:three_bolt_leggings",
       "required": false

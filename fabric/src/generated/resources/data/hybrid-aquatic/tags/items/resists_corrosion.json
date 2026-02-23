@@ -18,6 +18,10 @@
     "minecraft:golden_helmet",
     "minecraft:golden_chestplate",
     "minecraft:golden_leggings",
-    "minecraft:golden_boots"
+    "minecraft:golden_boots",
+    "hybrid-aquatic:reinforced_diving_helmet",
+    "hybrid-aquatic:reinforced_diving_suit",
+    "hybrid-aquatic:reinforced_diving_leggings",
+    "hybrid-aquatic:reinforced_diving_boots"
   ]
 }
