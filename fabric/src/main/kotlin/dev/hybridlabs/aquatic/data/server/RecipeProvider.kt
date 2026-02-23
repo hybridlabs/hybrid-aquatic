@@ -797,7 +797,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         map: Map<Block, Block>
     ) {
         for ((woodType, raftType) in map) {
-            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, raftType)
+            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, raftType, 2)
                 .pattern("SS ")
                 .pattern("SW ")
                 .pattern("   ")
@@ -866,7 +866,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         map: Map<Block, Block>
     ) {
         for ((deadCoral, bleachedCoral) in map) {
-            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, bleachedCoral)
+            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, bleachedCoral, 8)
                 .pattern("CCC")
                 .pattern("CWC")
                 .pattern("CCC")
