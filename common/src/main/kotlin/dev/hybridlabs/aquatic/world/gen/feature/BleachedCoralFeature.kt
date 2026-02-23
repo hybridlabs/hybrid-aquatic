@@ -1,8 +1,6 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -64,13 +62,6 @@ abstract class BleachedCoralFeature(codec: Codec<NoneFeatureConfiguration?>) : F
                     }).map<Block?>(
                         Function { obj: Holder<Block?>? -> obj!!.value() })
                     .ifPresent(Consumer { block: Block? -> level.setBlock(blockPos, block!!.defaultBlockState(), 2) })
-            } else if (random.nextFloat() < 0.05f) {
-                level.setBlock(
-                    blockPos,
-                    HybridAquaticBlocks.TUBE_WORM.get().defaultBlockState()
-                        .setValue(TubeWormBlock.WORMS, random.nextInt(4) + 1) as BlockState,
-                    2
-                )
             }
 
             for (direction in Direction.Plane.HORIZONTAL) {
