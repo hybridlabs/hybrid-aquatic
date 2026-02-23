@@ -1,12 +1,15 @@
 package dev.hybridlabs.aquatic.data.server
 
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.data.recipes.RecipeCategory
 import net.minecraft.data.recipes.ShapedRecipeBuilder
@@ -21,6 +24,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.AbstractCookingRecipe
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import java.util.function.Consumer
 
@@ -368,7 +372,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
-        // armor recipes
+        //#region Armor
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HybridAquaticItems.TURTLE_CHESTPLATE.get())
             .pattern("S S")
             .pattern("SSS")
@@ -417,200 +421,6 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_copper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
             .save(exporter)
 
-        //#region hooks
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.BARBED_HOOK.get())
-            .pattern("N  ")
-            .pattern("N N")
-            .pattern("NNN")
-            .define('N', Items.IRON_NUGGET)
-            .unlockedBy("has_iron_nugget", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_NUGGET))
-            .save(exporter)
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, HybridAquaticItems.GLOWING_HOOK.get())
-            .requires(HybridAquaticItems.BARBED_HOOK.get())
-            .requires(HybridAquaticItems.GLOWSLIME.get())
-            .unlockedBy(
-                "has_barbed_hook",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.BARBED_HOOK.get())
-            )
-            .unlockedBy(
-                "has_glowslime",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME.get())
-            )
-            .save(exporter)
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.MAGNETIC_HOOK.get())
-            .pattern("NIN")
-            .pattern("N N")
-            .pattern("I I")
-            .define('N', Items.IRON_NUGGET)
-            .define('I', Items.IRON_INGOT)
-            .unlockedBy("has_iron_nugget", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_NUGGET))
-            .save(exporter)
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HybridAquaticItems.CREEPERMAGNET_HOOK.get())
-            .requires(HybridAquaticItems.MAGNETIC_HOOK.get())
-            .requires(Items.GUNPOWDER)
-            .unlockedBy(
-                "has_magnetic_hook",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.MAGNETIC_HOOK.get())
-            )
-            .save(exporter)
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, HybridAquaticItems.OMINOUS_HOOK.get())
-            .requires(HybridAquaticItems.COCONUT_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.YETI_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.GHOST_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.FLOWER_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.SPIDER_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.FIDDLER_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.VAMPIRE_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.DUNGENESS_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW.get())
-            .unlockedBy(
-                "has_crab_claw", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.CRAB_CLAW).build()
-                )
-            )
-            .save(exporter)
-
-        //#endregion
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.FISHING_NET.get())
-            .pattern("  S")
-            .pattern(" IS")
-            .pattern("I  ")
-            .define('I', Items.STICK)
-            .define('S', Items.STRING)
-            .unlockedBy("string", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STRING))
-            .save(exporter)
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HybridAquaticItems.GLOWSLIME.get())
-            .requires(Items.SLIME_BALL)
-            .requires(Items.GLOW_INK_SAC)
-            .unlockedBy("has_slime_ball", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SLIME_BALL))
-            .unlockedBy("has_glow_ink_sac", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLOW_INK_SAC))
-            .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_slime"))
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.GLOWSTICK.get(), 4)
-            .requires(Items.STICK)
-            .requires(HybridAquaticItems.GLOWSLIME.get())
-            .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK))
-            .unlockedBy(
-                "has_glowslime",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME.get())
-            )
-            .save(exporter)
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BONE_MEAL)
-            .requires(HybridAquaticItems.CUTTLEBONE.get())
-            .unlockedBy(
-                "has_cuttlebone",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.CUTTLEBONE.get())
-            )
-            .save(exporter)
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER, 2)
-            .requires(HybridAquaticItems.SULFUR.get())
-            .requires(Items.COAL)
-            .requires(Items.BONE_MEAL)
-            .requires(Items.BONE_MEAL)
-            .unlockedBy("has_sulfur", InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SULFUR.get()))
-            .save(exporter)
-
-        // food items
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_CRAB.get(), 1)
-            .requires(HybridAquaticItemTags.CRAB_CLAW)
-            .unlockedBy(
-                "has_crab_claw", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.CRAB_CLAW).build()
-                )
-            )
-            .save(exporter)
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_LOBSTER.get(), 1)
-            .requires(HybridAquaticItems.LOBSTER_CLAW.get())
-            .unlockedBy(
-                "has_lobster_claw",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.LOBSTER_CLAW.get())
-            )
-            .save(exporter)
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_MEAT.get(), 1)
-            .requires(HybridAquaticItemTags.SMALL_FISH)
-            .unlockedBy(
-                "has_small_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.SMALL_FISH).build()
-                )
-            )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_small"))
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_MEAT.get(), 2)
-            .requires(HybridAquaticItemTags.MEDIUM_FISH)
-            .unlockedBy(
-                "has_medium_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.MEDIUM_FISH).build()
-                )
-            )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_medium"))
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_STEAK.get(), 2)
-            .requires(HybridAquaticItemTags.LARGE_FISH)
-            .unlockedBy(
-                "has_large_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.LARGE_FISH).build()
-                )
-            )
-            .save(exporter)
-
-        // cooking recipes
-        offerCookingRecipes(exporter, HybridAquaticItems.RAW_CRAB.get(), HybridAquaticItems.COOKED_CRAB.get(), 0.15f)
-        offerCookingRecipes(
-            exporter,
-            HybridAquaticItems.RAW_SHRIMP.get(),
-            HybridAquaticItems.COOKED_SHRIMP.get(),
-            0.15f
-        )
-        offerCookingRecipes(
-            exporter,
-            HybridAquaticItems.RAW_CRAYFISH.get(),
-            HybridAquaticItems.COOKED_CRAYFISH.get(),
-            0.15f
-        )
-        offerCookingRecipes(
-            exporter,
-            HybridAquaticItems.RAW_LOBSTER.get(),
-            HybridAquaticItems.COOKED_LOBSTER.get(),
-            0.3f
-        )
-        offerCookingRecipes(
-            exporter,
-            HybridAquaticItems.RAW_LOBSTER_TAIL.get(),
-            HybridAquaticItems.COOKED_LOBSTER_TAIL.get(),
-            0.3f
-        )
-        offerCookingRecipes(
-            exporter,
-            HybridAquaticItems.RAW_FISH_STEAK.get(),
-            HybridAquaticItems.COOKED_FISH_STEAK.get(),
-            0.3f
-        )
-        offerCookingRecipes(
-            exporter,
-            HybridAquaticItems.RAW_FISH_MEAT.get(),
-            HybridAquaticItems.COOKED_FISH_MEAT.get(),
-            0.15f
-        )
-        offerCookingRecipes(
-            exporter,
-            HybridAquaticItems.RAW_TENTACLE.get(),
-            HybridAquaticItems.COOKED_TENTACLE.get(),
-            0.15f
-        )
-
-        offerKelpCookingRecipes(exporter, HybridAquaticItemTags.KELPS, Items.DRIED_KELP, 0.15f)
-
-        //#region Reinforced Diving Armor
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
             Ingredient.of(HybridAquaticItems.DIVING_HELMET.get()),
@@ -666,6 +476,218 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_boots_upgrade"))
+
+        //#endregion
+
+        //#region Fishing Lures
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.BARBED_HOOK.get())
+            .pattern("N  ")
+            .pattern("N N")
+            .pattern("NNN")
+            .define('N', Items.IRON_NUGGET)
+            .unlockedBy("has_iron_nugget", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_NUGGET))
+            .save(exporter)
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, HybridAquaticItems.GLOWING_HOOK.get())
+            .requires(HybridAquaticItems.BARBED_HOOK.get())
+            .requires(HybridAquaticItems.GLOWSLIME.get())
+            .unlockedBy(
+                "has_barbed_hook",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.BARBED_HOOK.get())
+            )
+            .unlockedBy(
+                "has_glowslime",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME.get())
+            )
+            .save(exporter)
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.MAGNETIC_HOOK.get())
+            .pattern("NIN")
+            .pattern("N N")
+            .pattern("I I")
+            .define('N', Items.IRON_NUGGET)
+            .define('I', Items.IRON_INGOT)
+            .unlockedBy("has_iron_nugget", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_NUGGET))
+            .save(exporter)
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HybridAquaticItems.CREEPERMAGNET_HOOK.get())
+            .requires(HybridAquaticItems.MAGNETIC_HOOK.get())
+            .requires(Items.GUNPOWDER)
+            .unlockedBy(
+                "has_magnetic_hook",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.MAGNETIC_HOOK.get())
+            )
+            .save(exporter)
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, HybridAquaticItems.OMINOUS_HOOK.get())
+            .requires(HybridAquaticItems.COCONUT_CRAB_CLAW.get())
+            .requires(HybridAquaticItems.YETI_CRAB_CLAW.get())
+            .requires(HybridAquaticItems.GHOST_CRAB_CLAW.get())
+            .requires(HybridAquaticItems.FLOWER_CRAB_CLAW.get())
+            .requires(HybridAquaticItems.SPIDER_CRAB_CLAW.get())
+            .requires(HybridAquaticItems.FIDDLER_CRAB_CLAW.get())
+            .requires(HybridAquaticItems.VAMPIRE_CRAB_CLAW.get())
+            .requires(HybridAquaticItems.DUNGENESS_CRAB_CLAW.get())
+            .requires(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW.get())
+            .unlockedBy(
+                "has_crab_claw", InventoryChangeTrigger.TriggerInstance.hasItems(
+                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.CRAB_CLAW).build()
+                )
+            )
+            .save(exporter)
+        //#endregion
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.FISHING_NET.get())
+            .pattern("  S")
+            .pattern(" IS")
+            .pattern("I  ")
+            .define('I', Items.STICK)
+            .define('S', Items.STRING)
+            .unlockedBy("string", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STRING))
+            .save(exporter)
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HybridAquaticItems.GLOWSLIME.get())
+            .requires(Items.SLIME_BALL)
+            .requires(Items.GLOW_INK_SAC)
+            .unlockedBy("has_slime_ball", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SLIME_BALL))
+            .unlockedBy("has_glow_ink_sac", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLOW_INK_SAC))
+            .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_slime"))
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.GLOWSTICK.get(), 4)
+            .requires(Items.STICK)
+            .requires(HybridAquaticItems.GLOWSLIME.get())
+            .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK))
+            .unlockedBy(
+                "has_glowslime",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME.get())
+            )
+            .save(exporter)
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BONE_MEAL)
+            .requires(HybridAquaticItems.CUTTLEBONE.get())
+            .unlockedBy(
+                "has_cuttlebone",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.CUTTLEBONE.get())
+            )
+            .save(exporter)
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER, 2)
+            .requires(HybridAquaticItems.SULFUR.get())
+            .requires(Items.COAL)
+            .requires(Items.BONE_MEAL)
+            .requires(Items.BONE_MEAL)
+            .unlockedBy("has_sulfur", InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SULFUR.get()))
+            .save(exporter)
+
+        //#region Foodstuffs
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_CRAB.get(), 1)
+            .requires(HybridAquaticItemTags.CRAB_CLAW)
+            .unlockedBy(
+                "has_crab_claw", InventoryChangeTrigger.TriggerInstance.hasItems(
+                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.CRAB_CLAW).build()
+                )
+            )
+            .save(exporter)
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_LOBSTER.get(), 1)
+            .requires(HybridAquaticItems.LOBSTER_CLAW.get())
+            .unlockedBy(
+                "has_lobster_claw",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.LOBSTER_CLAW.get())
+            )
+            .save(exporter)
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_MEAT.get(), 1)
+            .requires(HybridAquaticItemTags.SMALL_FISH)
+            .unlockedBy(
+                "has_small_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
+                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.SMALL_FISH).build()
+                )
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_small"))
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_MEAT.get(), 2)
+            .requires(HybridAquaticItemTags.MEDIUM_FISH)
+            .unlockedBy(
+                "has_medium_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
+                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.MEDIUM_FISH).build()
+                )
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_medium"))
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_STEAK.get(), 2)
+            .requires(HybridAquaticItemTags.LARGE_FISH)
+            .unlockedBy(
+                "has_large_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
+                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.LARGE_FISH).build()
+                )
+            )
+            .save(exporter)
+        //#endregion
+
+        //#region Cooking Recipes
+        offerCookingRecipes(
+            exporter,
+            HybridAquaticItems.RAW_CRAB.get(),
+            HybridAquaticItems.COOKED_CRAB.get(),
+            0.15f
+        )
+
+        offerCookingRecipes(
+            exporter,
+            HybridAquaticItems.RAW_SHRIMP.get(),
+            HybridAquaticItems.COOKED_SHRIMP.get(),
+            0.15f
+        )
+
+        offerCookingRecipes(
+            exporter,
+            HybridAquaticItems.RAW_CRAYFISH.get(),
+            HybridAquaticItems.COOKED_CRAYFISH.get(),
+            0.15f
+        )
+
+        offerCookingRecipes(
+            exporter,
+            HybridAquaticItems.RAW_LOBSTER.get(),
+            HybridAquaticItems.COOKED_LOBSTER.get(),
+            0.3f
+        )
+
+        offerCookingRecipes(
+            exporter,
+            HybridAquaticItems.RAW_LOBSTER_TAIL.get(),
+            HybridAquaticItems.COOKED_LOBSTER_TAIL.get(),
+            0.3f
+        )
+
+        offerCookingRecipes(
+            exporter,
+            HybridAquaticItems.RAW_FISH_STEAK.get(),
+            HybridAquaticItems.COOKED_FISH_STEAK.get(),
+            0.3f
+        )
+
+        offerCookingRecipes(
+            exporter,
+            HybridAquaticItems.RAW_FISH_MEAT.get(),
+            HybridAquaticItems.COOKED_FISH_MEAT.get(),
+            0.15f
+        )
+
+        offerCookingRecipes(
+            exporter,
+            HybridAquaticItems.RAW_TENTACLE.get(),
+            HybridAquaticItems.COOKED_TENTACLE.get(),
+            0.15f
+        )
+
+        offerKelpCookingRecipes(exporter, HybridAquaticItemTags.KELPS, Items.DRIED_KELP, 0.15f)
+        //#endregion
+
+        offerBleachingRecipes(exporter, bleachedCoralBlockMap)
+        offerBleachingRecipes(exporter, bleachedCoralMap)
+        offerBleachingRecipes(exporter, bleachedCoralFanMap)
     }
 
     private fun offerCookingRecipes(
@@ -674,8 +696,24 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         output: Item,
         experience: Float,
     ) {
-        simpleCookingRecipe(exporter, "smelting", RecipeSerializer.SMELTING_RECIPE, 200, input, output, experience)
-        simpleCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING_RECIPE, 100, input, output, experience)
+        simpleCookingRecipe(
+            exporter,
+            "smelting",
+            RecipeSerializer.SMELTING_RECIPE,
+            200,
+            input,
+            output,
+            experience
+        )
+        simpleCookingRecipe(
+            exporter,
+            "smoking",
+            RecipeSerializer.SMOKING_RECIPE,
+            100,
+            input,
+            output,
+            experience
+        )
         simpleCookingRecipe(
             exporter,
             "campfire_cooking",
@@ -687,6 +725,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         )
     }
 
+    //#region Kelp Cooking Recipes
     private fun offerKelpCookingRecipes(
         exporter: Consumer<FinishedRecipe>,
         inputTag: TagKey<Item>,
@@ -702,7 +741,15 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             output,
             experience
         )
-        offerKelpCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING_RECIPE, 100, inputTag, output, experience)
+        offerKelpCookingRecipe(
+            exporter,
+            "smoking",
+            RecipeSerializer.SMOKING_RECIPE,
+            100,
+            inputTag,
+            output,
+            experience
+        )
         offerKelpCookingRecipe(
             exporter,
             "campfire_cooking",
@@ -729,5 +776,75 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
         val recipeId = getItemName(output) + "_from_" + cooker
         builder.save(exporter, recipeId)
+    }
+    //#endregion
+
+    //#region Bleached Coral Maps
+    private val bleachedCoralBlockMap = mapOf(
+        Blocks.DEAD_FIRE_CORAL_BLOCK to HybridAquaticBlocks.BLEACHED_FIRE_CORAL_BLOCK.get(),
+        Blocks.DEAD_TUBE_CORAL_BLOCK to HybridAquaticBlocks.BLEACHED_TUBE_CORAL_BLOCK.get(),
+        Blocks.DEAD_HORN_CORAL_BLOCK to HybridAquaticBlocks.BLEACHED_HORN_CORAL_BLOCK.get(),
+        Blocks.DEAD_BRAIN_CORAL_BLOCK to HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_BLOCK.get(),
+        Blocks.DEAD_BUBBLE_CORAL_BLOCK to HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_BLOCK.get(),
+
+        HybridAquaticBlocks.DEAD_ROSE_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_ROSE_CORAL_BLOCK.get(),
+        HybridAquaticBlocks.DEAD_LEAF_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_LEAF_CORAL_BLOCK.get(),
+        HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_THORN_CORAL_BLOCK.get(),
+        HybridAquaticBlocks.DEAD_BUTTON_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_BLOCK.get(),
+        HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_BLOCK.get(),
+        HybridAquaticBlocks.DEAD_SUN_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_SUN_CORAL_BLOCK.get(),
+    )
+
+    private val bleachedCoralMap = mapOf(
+        Blocks.DEAD_FIRE_CORAL to HybridAquaticBlocks.BLEACHED_FIRE_CORAL.get(),
+        Blocks.DEAD_TUBE_CORAL to HybridAquaticBlocks.BLEACHED_TUBE_CORAL.get(),
+        Blocks.DEAD_HORN_CORAL to HybridAquaticBlocks.BLEACHED_HORN_CORAL.get(),
+        Blocks.DEAD_BRAIN_CORAL to HybridAquaticBlocks.BLEACHED_BRAIN_CORAL.get(),
+        Blocks.DEAD_BUBBLE_CORAL to HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL.get(),
+
+        HybridAquaticBlocks.DEAD_ROSE_CORAL.get() to HybridAquaticBlocks.BLEACHED_ROSE_CORAL.get(),
+        HybridAquaticBlocks.DEAD_LEAF_CORAL.get() to HybridAquaticBlocks.BLEACHED_LEAF_CORAL.get(),
+        HybridAquaticBlocks.DEAD_THORN_CORAL.get() to HybridAquaticBlocks.BLEACHED_THORN_CORAL.get(),
+        HybridAquaticBlocks.DEAD_BUTTON_CORAL.get() to HybridAquaticBlocks.BLEACHED_BUTTON_CORAL.get(),
+        HybridAquaticBlocks.DEAD_LOPHELIA_CORAL.get() to HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL.get(),
+        HybridAquaticBlocks.DEAD_SUN_CORAL.get() to HybridAquaticBlocks.BLEACHED_SUN_CORAL.get(),
+    )
+
+    private val bleachedCoralFanMap = mapOf(
+        Blocks.DEAD_FIRE_CORAL_FAN to HybridAquaticBlocks.BLEACHED_FIRE_CORAL_FAN.get(),
+        Blocks.DEAD_TUBE_CORAL_FAN to HybridAquaticBlocks.BLEACHED_TUBE_CORAL_FAN.get(),
+        Blocks.DEAD_HORN_CORAL_FAN to HybridAquaticBlocks.BLEACHED_HORN_CORAL_FAN.get(),
+        Blocks.DEAD_BRAIN_CORAL_FAN to HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_FAN.get(),
+        Blocks.DEAD_BUBBLE_CORAL_FAN to HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_FAN.get(),
+
+        HybridAquaticBlocks.DEAD_ROSE_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_ROSE_CORAL_FAN.get(),
+        HybridAquaticBlocks.DEAD_LEAF_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_LEAF_CORAL_FAN.get(),
+        HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_THORN_CORAL_FAN.get(),
+        HybridAquaticBlocks.DEAD_BUTTON_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_FAN.get(),
+        HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
+        HybridAquaticBlocks.DEAD_SUN_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_SUN_CORAL_FAN.get(),
+    )
+    //#endregion
+
+    private fun offerBleachingRecipes(
+        exporter: Consumer<FinishedRecipe>,
+        map: Map<Block, Block>
+    ) {
+        for ((deadCoral, bleachedCoral) in map) {
+            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, bleachedCoral)
+                .pattern("CCC")
+                .pattern("CWC")
+                .pattern("CCC")
+                .define('C', deadCoral)
+                .define('W', Items.WHITE_DYE)
+                .unlockedBy(
+                    "has_${getItemName(deadCoral.asItem())}",
+                    has(deadCoral.asItem())
+                )
+                .save(
+                    exporter,
+                    "${getItemName(bleachedCoral.asItem())}_from_${getItemName(deadCoral.asItem())}"
+                )
+        }
     }
 }
