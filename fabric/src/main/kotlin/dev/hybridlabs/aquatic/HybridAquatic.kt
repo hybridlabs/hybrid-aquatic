@@ -88,12 +88,16 @@ object HybridAquatic : ModInitializer {
         //HybridAquaticParticleTypes
 
         registerDynamicRegistries()
-        registerWanderingTraderTrades()
-        registerCustomTrades()
+        val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
+        if (configHandler.config.enableWanderingTraderTrades) {
+            registerWanderingTraderTrades()
+        }
+        if (configHandler.config.enableWanderingTraderTrades) {
+            registerCustomTrades()
+        }
         registerFlammables(FlammableBlockRegistry.getDefaultInstance())
         registerStrippables()
 
-        val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
         registerBiomeModifications(configHandler.config)
 
         SERVER_STARTING.register { server ->

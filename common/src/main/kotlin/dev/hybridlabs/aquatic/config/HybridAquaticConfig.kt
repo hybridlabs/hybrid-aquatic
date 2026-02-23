@@ -9,6 +9,8 @@ data class HybridAquaticConfig(
      * Increase when the config needs to be reset, i.e. when new entity spawn configs are added.
      */
     val dataVersion: Int = 8,
+    val enableWanderingTraderTrades: Boolean = true,
+    val enableVillagerTrades: Boolean = true,
 
     val entitySpawnConfig: List<EntitySpawnConfig> = EntitySpawnConfigGenerator.generate(),
 ) {
@@ -16,6 +18,8 @@ data class HybridAquaticConfig(
         val CODEC: Codec<HybridAquaticConfig> = RecordCodecBuilder.create { instance ->
             instance.group(
                 Codec.INT.fieldOf("data_version").forGetter(HybridAquaticConfig::dataVersion),
+                Codec.BOOL.fieldOf("enable_wandering_trader_trades").forGetter(HybridAquaticConfig::enableWanderingTraderTrades),
+                Codec.BOOL.fieldOf("enable_villager_trades").forGetter(HybridAquaticConfig::enableVillagerTrades),
                 EntitySpawnConfig.CODEC.listOf().fieldOf("spawn_configuration").forGetter(HybridAquaticConfig::entitySpawnConfig),
             ).apply(instance, ::HybridAquaticConfig)
         }
