@@ -26,6 +26,7 @@ class PlushieBlock(variant: Variant, val particleBlock: Block, settings: Propert
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         super.createBlockStateDefinition(builder)
     }
+
     override fun appendHoverText(
         stack: ItemStack,
         world: BlockGetter?,
