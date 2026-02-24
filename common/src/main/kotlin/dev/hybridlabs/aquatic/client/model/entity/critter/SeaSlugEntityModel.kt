@@ -23,8 +23,8 @@ class SeaSlugEntityModel : HybridAquaticCritterEntityModel<SeaSlugEntity>("sea_s
     private val SPOTTED_SEA_HARE_MODEL = ResourceLocation("hybrid-aquatic", "geo/critter/sea_slug/sea_hare.geo.json")
     private val NUDIBRANCH_MODEL = ResourceLocation("hybrid-aquatic", "geo/critter/sea_slug/nudibranch.geo.json")
 
-    private val SEA_HARE_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/sea_slug.animation.json")
-    private val NUDIBRANCH_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/nudibranch.animation.json")
+    private val SEA_HARE_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/critter/sea_slug/sea_slug.animation.json")
+    private val NUDIBRANCH_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/critter/sea_slug/nudibranch.animation.json")
 
     override fun getTextureResource(animatable: SeaSlugEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits

@@ -16,11 +16,7 @@ abstract class HybridAquaticMinionEntityModel<T : HybridAquaticMinionEntity>(pri
         return CommonClass.locate("textures/entity/miniboss/${id}/$id.png")
     }
 
-    fun getVariantTexture(variant: String): ResourceLocation {
-        return CommonClass.locate("textures/entity/miniboss/${id}/${id}_$variant.png")
-    }
-
     override fun getAnimationResource(animatable: T): ResourceLocation {
-        return CommonClass.locate("animations/$id.animation.json")
+        return CommonClass.locate("animations/entity/miniboss/${id}/$id.animation.json")
     }
 }

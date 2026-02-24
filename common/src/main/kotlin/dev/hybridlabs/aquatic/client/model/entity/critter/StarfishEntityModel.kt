@@ -24,9 +24,9 @@ class StarfishEntityModel : HybridAquaticCritterEntityModel<StarfishEntity>("sta
     private val BRITTLESTAR_MODEL = ResourceLocation("hybrid-aquatic", "geo/critter/starfish/starfish_brittlestar.geo.json")
     private val CROWN_OF_THORNS_MODEL = ResourceLocation("hybrid-aquatic", "geo/critter/starfish/starfish_crown_of_thorns.geo.json")
 
-    private val STARFISH_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/starfish.animation.json")
-    private val BRITTLESTAR_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/starfish_brittlestar.animation.json")
-    private val CROWN_OF_THORNS_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/starfish_crown_of_thorns.animation.json")
+    private val STARFISH_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/critter/starfish/starfish.animation.json")
+    private val BRITTLESTAR_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/critter/starfish/starfish_brittlestar.animation.json")
+    private val CROWN_OF_THORNS_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/critter/starfish/starfish_crown_of_thorns.animation.json")
 
     override fun getTextureResource(animatable: StarfishEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits

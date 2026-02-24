@@ -17,7 +17,7 @@ abstract class HybridAquaticCrustaceanEntityModel<T : HybridAquaticCrustaceanEnt
     }
 
     override fun getAnimationResource(animatable: T): ResourceLocation {
-        return CommonClass.locate("animations/$id.animation.json")
+        return CommonClass.locate("animations/entity/crustacean/$id/$id.animation.json")
     }
 
     fun getLayerTextureResource(layer: String): ResourceLocation {
