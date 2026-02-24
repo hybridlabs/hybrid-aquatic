@@ -3,15 +3,9 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
-import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.syncher.EntityDataAccessor
-import net.minecraft.network.syncher.EntityDataSerializers
-import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.RandomSource
-import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -25,9 +19,12 @@ import software.bernie.geckolib.core.animation.AnimationState
 class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.ALL_SHARKS)
 
-
     override fun getMaxSpawnClusterSize(): Int {
         return 1
+    }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
@@ -68,9 +65,5 @@ class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) : HybridA
 
             return pos.y in spawnY && world.isWaterAt(pos)
         }
-    }
-
-    override fun shouldFlopOnLand(): Boolean {
-        return false
     }
 }

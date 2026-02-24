@@ -19,6 +19,10 @@ class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) : H
         return 2
     }
 
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
+
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
