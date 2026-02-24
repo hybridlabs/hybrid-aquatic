@@ -149,12 +149,12 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             if (!player.isEyeInFluid(FluidTags.WATER)) {
                 player.addEffect(
                         new MobEffectInstance(
-                                MobEffects.WATER_BREATHING, 600, 0, false, false, false));
+                                MobEffects.WATER_BREATHING, 1800, 0, false, false, false));
             } else {
                 player.addEffect(
                         new MobEffectInstance(
                                 HybridAquaticMobEffects.INSTANCE.getCLARITY().get(),
-                                600,
+                                1800,
                                 0,
                                 false,
                                 false,
