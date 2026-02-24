@@ -1,126 +1,21 @@
 package dev.hybridlabs.aquatic.entity
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.cephalopod.ArrowSquidEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.ColossalSquidEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.CuttlefishEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.FireflySquidEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.GiantSquidEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.NautilusEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.UmbrellaOctopusEntity
-import dev.hybridlabs.aquatic.entity.cephalopod.VampireSquidEntity
-import dev.hybridlabs.aquatic.entity.critter.ScalyfootSnailEntity
-import dev.hybridlabs.aquatic.entity.critter.SeaCucumberEntity
-import dev.hybridlabs.aquatic.entity.critter.SeaSlugEntity
-import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
-import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
-import dev.hybridlabs.aquatic.entity.crustacean.CoconutCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.CrayfishEntity
-import dev.hybridlabs.aquatic.entity.crustacean.DecoratorCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.DungenessCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.FiddlerCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.FlowerCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.GhostCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.GiantIsopodEntity
-import dev.hybridlabs.aquatic.entity.crustacean.HermitCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.HorseshoeCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.LightfootCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.LobsterEntity
-import dev.hybridlabs.aquatic.entity.crustacean.ShrimpEntity
-import dev.hybridlabs.aquatic.entity.crustacean.SpiderCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.VampireCrabEntity
-import dev.hybridlabs.aquatic.entity.crustacean.YetiCrabEntity
-import dev.hybridlabs.aquatic.entity.fish.AfricanButterflyfishEntity
-import dev.hybridlabs.aquatic.entity.fish.AnglerfishEntity
-import dev.hybridlabs.aquatic.entity.fish.BarracudaEntity
-import dev.hybridlabs.aquatic.entity.fish.BarreleyeEntity
-import dev.hybridlabs.aquatic.entity.fish.BettaEntity
-import dev.hybridlabs.aquatic.entity.fish.BlowfishEntity
-import dev.hybridlabs.aquatic.entity.fish.BoxfishEntity
-import dev.hybridlabs.aquatic.entity.fish.CarpEntity
-import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import dev.hybridlabs.aquatic.entity.fish.CoelacanthEntity
-import dev.hybridlabs.aquatic.entity.fish.CorydoraEntity
-import dev.hybridlabs.aquatic.entity.fish.DamselfishEntity
-import dev.hybridlabs.aquatic.entity.fish.DanioEntity
-import dev.hybridlabs.aquatic.entity.fish.DiscusEntity
-import dev.hybridlabs.aquatic.entity.fish.DragonfishEntity
-import dev.hybridlabs.aquatic.entity.fish.FangtoothEntity
-import dev.hybridlabs.aquatic.entity.fish.FlashlightFishEntity
-import dev.hybridlabs.aquatic.entity.fish.FlyingFishEntity
-import dev.hybridlabs.aquatic.entity.fish.GoldenDoradoEntity
-import dev.hybridlabs.aquatic.entity.fish.GoldfishEntity
-import dev.hybridlabs.aquatic.entity.fish.GouramiEntity
-import dev.hybridlabs.aquatic.entity.fish.HatchetfishEntity
-import dev.hybridlabs.aquatic.entity.fish.HerringEntity
-import dev.hybridlabs.aquatic.entity.fish.JohnDoryEntity
-import dev.hybridlabs.aquatic.entity.fish.LionfishEntity
-import dev.hybridlabs.aquatic.entity.fish.MackerelEntity
-import dev.hybridlabs.aquatic.entity.fish.MahiEntity
-import dev.hybridlabs.aquatic.entity.fish.MantaRayEntity
-import dev.hybridlabs.aquatic.entity.fish.MorayEelEntity
-import dev.hybridlabs.aquatic.entity.fish.NeedlefishEntity
-import dev.hybridlabs.aquatic.entity.fish.OarfishEntity
-import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
-import dev.hybridlabs.aquatic.entity.fish.OpahEntity
-import dev.hybridlabs.aquatic.entity.fish.OscarEntity
-import dev.hybridlabs.aquatic.entity.fish.ParrotfishEntity
-import dev.hybridlabs.aquatic.entity.fish.PearlfishEntity
-import dev.hybridlabs.aquatic.entity.fish.PiranhaEntity
-import dev.hybridlabs.aquatic.entity.fish.PlecoEntity
-import dev.hybridlabs.aquatic.entity.fish.PupfishEntity
-import dev.hybridlabs.aquatic.entity.fish.RatfishEntity
-import dev.hybridlabs.aquatic.entity.fish.RockfishEntity
-import dev.hybridlabs.aquatic.entity.fish.SeaAngelEntity
-import dev.hybridlabs.aquatic.entity.fish.SeaBassEntity
-import dev.hybridlabs.aquatic.entity.fish.SeadragonEntity
-import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
-import dev.hybridlabs.aquatic.entity.fish.ShinerEntity
-import dev.hybridlabs.aquatic.entity.fish.SnailfishEntity
-import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
-import dev.hybridlabs.aquatic.entity.fish.StingrayEntity
-import dev.hybridlabs.aquatic.entity.fish.StonefishEntity
-import dev.hybridlabs.aquatic.entity.fish.SunfishEntity
-import dev.hybridlabs.aquatic.entity.fish.SurgeonfishEntity
-import dev.hybridlabs.aquatic.entity.fish.TetraEntity
-import dev.hybridlabs.aquatic.entity.fish.TigerBarbEntity
-import dev.hybridlabs.aquatic.entity.fish.TriggerfishEntity
-import dev.hybridlabs.aquatic.entity.fish.TroutEntity
-import dev.hybridlabs.aquatic.entity.fish.TunaEntity
-import dev.hybridlabs.aquatic.entity.fish.ViperfishEntity
-import dev.hybridlabs.aquatic.entity.fish.WrasseEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.BarrelJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.BigRedJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.BlueJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.BoxJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.CepheidaeJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.CosmicJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.CrownJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.FireworkJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.LionsManeJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.MauveStingerEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.MoonJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.NomuraJellyfishEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.SeaNettleEntity
+import dev.hybridlabs.aquatic.entity.cephalopod.*
+import dev.hybridlabs.aquatic.entity.critter.*
+import dev.hybridlabs.aquatic.entity.crustacean.*
+import dev.hybridlabs.aquatic.entity.fish.*
+import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinomaEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
-import dev.hybridlabs.aquatic.entity.shark.BaskingSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.BullSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.FrilledSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.GreatWhiteSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.HammerheadSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.HoundSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.LanternSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.ThresherSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.SandTigerSharkEntity
-import dev.hybridlabs.aquatic.entity.shark.WhaleSharkEntity
+import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
@@ -979,6 +874,11 @@ object HybridAquaticEntityTypes {
         OrcaEntity::createMobAttributes
     )
 
+    val DEPTH_CHARGE = registerMisc(
+        "depth_charge",
+        ::PrimedDepthChargeEntity,
+        EntityDimensions.fixed(0.98f, 0.98f)
+    )
     //endregion
 
     private fun <T : LivingEntity> registerShark(
@@ -1241,6 +1141,21 @@ object HybridAquaticEntityTypes {
         hybridAquaticSpawnGroup: MobCategory,
     ): RegistryObject<EntityType<T>> {
         return registerLiving(id, entityFactory, dimensions, attributeContainer, hybridAquaticSpawnGroup)
+    }
+
+    private fun <T : Entity> registerMisc(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions
+    ): RegistryObject<EntityType<T>> {
+        return CommonClass.ENTITY_TYPES.register(id) {
+            EntityType.Builder
+                .of(entityFactory, MobCategory.MISC)
+                .sized(dimensions.width, dimensions.height)
+                .clientTrackingRange(10)
+                .updateInterval(10)
+                .build(id)
+        }
     }
 
     /**

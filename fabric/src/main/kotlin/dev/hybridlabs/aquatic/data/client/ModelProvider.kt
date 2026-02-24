@@ -103,6 +103,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             ).forEach(generator::createBrushableBlock)
 
             setOf(
+                HybridAquaticBlocks.DEPTH_CHARGE.get(),
                 HybridAquaticBlocks.GRASSY_SAND.get(),
                 HybridAquaticBlocks.WHITE_SANDSTONE.get(),
             ).forEach { block ->

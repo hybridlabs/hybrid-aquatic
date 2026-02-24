@@ -178,6 +178,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.OYSTER.get() to "Oyster",
             HybridAquaticBlocks.CLAMS.get() to "Clams",
             HybridAquaticBlocks.CRYSTALLINE_SULFUR.get() to "Crystalline Sulfur",
+            HybridAquaticBlocks.DEPTH_CHARGE.get() to "Depth Charge",
 
             HybridAquaticBlocks.SHORT_RED_ALGAE.get() to "Short Red Algae",
             HybridAquaticBlocks.RED_ALGAE.get() to "Red Algae",
@@ -655,6 +656,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.OTTER.get() to "Otter",
             HybridAquaticEntityTypes.DUGONG.get() to "Dugong",
             HybridAquaticEntityTypes.ORCA.get() to "Orca",
+            HybridAquaticEntityTypes.DEPTH_CHARGE.get() to "Depth Charge",
         )
 
         // verify display name list is valid

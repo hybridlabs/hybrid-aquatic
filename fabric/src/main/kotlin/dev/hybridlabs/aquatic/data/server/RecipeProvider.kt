@@ -35,6 +35,18 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, HybridAquaticItems.DEPTH_CHARGE.get())
+            .pattern("SIS")
+            .pattern("ISI")
+            .pattern("SIS")
+            .define('S', HybridAquaticItems.SULFUR.get())
+            .define('I', Items.IRON_NUGGET)
+            .unlockedBy(
+                "has_sulfur",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SULFUR.get())
+            )
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.AERATED_SAND.get())
             .pattern("SSS")
             .pattern("SPS")

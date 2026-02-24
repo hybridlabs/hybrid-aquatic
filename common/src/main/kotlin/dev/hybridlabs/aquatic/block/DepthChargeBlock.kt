@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import dev.hybridlabs.aquatic.entity.PrimedDepthChargeEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -7,7 +8,6 @@ import net.minecraft.stats.Stats
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.item.PrimedTnt
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.projectile.Projectile
 import net.minecraft.world.item.Items
@@ -56,7 +56,7 @@ class DepthChargeBlock(properties: Properties) : Block(properties) {
 
     override fun wasExploded(level: Level, pos: BlockPos, explosion: Explosion) {
         if (!level.isClientSide) {
-            val primedDepthCharge = PrimedTnt(
+            val primedDepthCharge = PrimedDepthChargeEntity(
                 level,
                 pos.x.toDouble() + 0.5,
                 pos.y.toDouble(),
@@ -132,7 +132,7 @@ class DepthChargeBlock(properties: Properties) : Block(properties) {
 
         private fun explode(level: Level, pos: BlockPos, entity: LivingEntity?) {
             if (!level.isClientSide) {
-                val primedDepthCharge = PrimedTnt(
+                val primedDepthCharge = PrimedDepthChargeEntity(
                     level,
                     pos.x.toDouble() + 0.5,
                     pos.y.toDouble(),

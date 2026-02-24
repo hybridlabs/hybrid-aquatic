@@ -89,6 +89,7 @@ object HybridAquaticBlocks {
 
     val CRYSTALLINE_SULFUR = register("crystalline_sulfur") { Block(Properties.copy(Blocks.AMETHYST_BLOCK)) }
     val GRASSY_SAND = register("grassy_sand") { GrassySandBlock(Properties.copy(Blocks.SAND)) }
+    val DEPTH_CHARGE = register("depth_charge") { DepthChargeBlock(Properties.copy(Blocks.TNT)) }
     val CORALSTONE = register("coralstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
     val SHORESTONE = register("shorestone") { Block(Properties.copy(Blocks.SANDSTONE)) }
     val BARNACLE_SHORESTONE = register("barnacle_shorestone") { Block(Properties.copy(Blocks.SANDSTONE)) }
