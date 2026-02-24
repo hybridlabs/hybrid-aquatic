@@ -5,6 +5,7 @@ import com.terraformersmc.biolith.api.biome.SubBiomeMatcher
 import com.terraformersmc.biolith.api.surface.SurfaceGeneration
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.config.ConfigHelper
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
@@ -17,6 +18,7 @@ import net.minecraft.world.level.levelgen.SurfaceRules.*
 
 
 object HybridAquaticBiomes {
+    val config = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
 
     //#region Reworked Vanilla Surface Rules
     val WARM_OCEAN_SURFACE_RULE: RuleSource = ifTrue(
@@ -352,53 +354,61 @@ object HybridAquaticBiomes {
         //#endregion
 
         //#region New Rivers
-        BiomePlacement.addSubOverworld(
-            Biomes.RIVER,
-            PLACER_RIVER,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofBiome(
-                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
-                    BiomeTags.IS_BADLANDS,
-                    false
+        if (config.config.generatePlacerRiver) {
+            BiomePlacement.addSubOverworld(
+                Biomes.RIVER,
+                PLACER_RIVER,
+                SubBiomeMatcher.of(
+                    SubBiomeMatcher.Criterion.ofBiome(
+                        SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                        BiomeTags.IS_BADLANDS,
+                        false
+                    )
                 )
             )
-        )
+        }
 
-        BiomePlacement.addSubOverworld(
-            Biomes.RIVER,
-            TROPICAL_RIVER,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofBiome(
-                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
-                    BiomeTags.IS_JUNGLE,
-                    false
+        if (config.config.generateTropicalRiver) {
+            BiomePlacement.addSubOverworld(
+                Biomes.RIVER,
+                TROPICAL_RIVER,
+                SubBiomeMatcher.of(
+                    SubBiomeMatcher.Criterion.ofBiome(
+                        SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                        BiomeTags.IS_JUNGLE,
+                        false
+                    )
                 )
             )
-        )
+        }
 
-        BiomePlacement.addSubOverworld(
-            Biomes.RIVER,
-            SEASONAL_RIVER,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofBiome(
-                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
-                    BiomeTags.IS_SAVANNA,
-                    false
+        if (config.config.generateSeasonalRiver) {
+            BiomePlacement.addSubOverworld(
+                Biomes.RIVER,
+                SEASONAL_RIVER,
+                SubBiomeMatcher.of(
+                    SubBiomeMatcher.Criterion.ofBiome(
+                        SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                        BiomeTags.IS_SAVANNA,
+                        false
+                    )
                 )
             )
-        )
+        }
 
-        BiomePlacement.addSubOverworld(
-            Biomes.RIVER,
-            COLD_RIVER,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofBiome(
-                    SubBiomeMatcher.CriterionTargets.NEIGHBOR,
-                    BiomeTags.IS_TAIGA,
-                    false
+        if (config.config.generateColdRiver) {
+            BiomePlacement.addSubOverworld(
+                Biomes.RIVER,
+                COLD_RIVER,
+                SubBiomeMatcher.of(
+                    SubBiomeMatcher.Criterion.ofBiome(
+                        SubBiomeMatcher.CriterionTargets.NEIGHBOR,
+                        BiomeTags.IS_TAIGA,
+                        false
+                    )
                 )
             )
-        )
+        }
         //#endregion
 
         //#region Beach Biomes
@@ -435,11 +445,13 @@ object HybridAquaticBiomes {
         //#endregion
 
         //#region Warm Ocean Biomes
-        BiomePlacement.replaceOverworld(
-            Biomes.WARM_OCEAN,
-            SEAGRASS_BED,
-            0.25
-        )
+        if (config.config.generateSeagrassBed) {
+            BiomePlacement.replaceOverworld(
+                Biomes.WARM_OCEAN,
+                SEAGRASS_BED,
+                0.25
+            )
+        }
 
         BiomePlacement.replaceOverworld(
             Biomes.WARM_OCEAN,
@@ -507,33 +519,37 @@ object HybridAquaticBiomes {
             )
         )
 
-        BiomePlacement.addSubOverworld(
-            SEAGRASS_BED,
-            DEEP_WARM_OCEAN,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.64f,
-                    -0.455f,
-                    false
+        if (config.config.generateSeagrassBed) {
+            BiomePlacement.addSubOverworld(
+                SEAGRASS_BED,
+                DEEP_WARM_OCEAN,
+                SubBiomeMatcher.of(
+                    SubBiomeMatcher.Criterion.ofRange(
+                        SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                        SubBiomeMatcher.CriterionTypes.VALUE,
+                        -0.64f,
+                        -0.455f,
+                        false
+                    )
                 )
             )
-        )
+        }
 
-        BiomePlacement.addSubOverworld(
-            SEAGRASS_BED,
-            DEEP_WARM_OCEAN,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.05f,
-                    -0.7f,
-                    false
+        if (config.config.generateSeagrassBed) {
+            BiomePlacement.addSubOverworld(
+                SEAGRASS_BED,
+                DEEP_WARM_OCEAN,
+                SubBiomeMatcher.of(
+                    SubBiomeMatcher.Criterion.ofRange(
+                        SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                        SubBiomeMatcher.CriterionTypes.VALUE,
+                        -1.05f,
+                        -0.7f,
+                        false
+                    )
                 )
             )
-        )
+        }
 
         BiomePlacement.addSubOverworld(
             RED_MEADOW,
@@ -834,26 +850,28 @@ object HybridAquaticBiomes {
             )
         )
 
-        BiomePlacement.addSubOverworld(
-            SEAGRASS_BED,
-            WARM_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
-                    false
+        if (config.config.generateSeagrassBed) {
+            BiomePlacement.addSubOverworld(
+                SEAGRASS_BED,
+                WARM_TRENCH,
+                SubBiomeMatcher.of(
+                    SubBiomeMatcher.Criterion.ofRange(
+                        SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                        SubBiomeMatcher.CriterionTypes.VALUE,
+                        -0.7f,
+                        -0.64f,
+                        false
+                    ),
+                    SubBiomeMatcher.Criterion.ofRange(
+                        SubBiomeMatcher.CriterionTargets.WEIRDNESS,
+                        SubBiomeMatcher.CriterionTypes.VALUE,
+                        -0.33f,
+                        0.33f,
+                        false
+                    )
                 )
             )
-        )
+        }
 
         BiomePlacement.addSubOverworld(
             CORAL_REEF,
@@ -1004,26 +1022,28 @@ object HybridAquaticBiomes {
             )
         )
 
-        BiomePlacement.addSubOverworld(
-            SEAGRASS_BED,
-            VOLCANIC_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.33f,
-                    1.0f,
-                    false
+        if (config.config.generateSeagrassBed) {
+            BiomePlacement.addSubOverworld(
+                SEAGRASS_BED,
+                VOLCANIC_TRENCH,
+                SubBiomeMatcher.of(
+                    SubBiomeMatcher.Criterion.ofRange(
+                        SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
+                        SubBiomeMatcher.CriterionTypes.VALUE,
+                        -0.7f,
+                        -0.64f,
+                        false
+                    ),
+                    SubBiomeMatcher.Criterion.ofRange(
+                        SubBiomeMatcher.CriterionTargets.WEIRDNESS,
+                        SubBiomeMatcher.CriterionTypes.VALUE,
+                        0.33f,
+                        1.0f,
+                        false
+                    )
                 )
             )
-        )
+        }
 
         BiomePlacement.addSubOverworld(
             RED_MEADOW,
