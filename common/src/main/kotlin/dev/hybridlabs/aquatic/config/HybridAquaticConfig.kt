@@ -11,6 +11,7 @@ data class HybridAquaticConfig(
     val dataVersion: Int = 8,
     val enableWanderingTraderTrades: Boolean = true,
     val enableVillagerTrades: Boolean = true,
+    val addFishingLoot: Boolean = true,
     val biomeConfig: BiomeConfig = BiomeConfig(),
     val entitySpawnConfig: List<EntitySpawnConfig> = EntitySpawnConfigGenerator.generate(),
 ) {
@@ -20,6 +21,7 @@ data class HybridAquaticConfig(
                 Codec.INT.fieldOf("data_version").forGetter(HybridAquaticConfig::dataVersion),
                 Codec.BOOL.fieldOf("enable_wandering_trader_trades").forGetter(HybridAquaticConfig::enableWanderingTraderTrades),
                 Codec.BOOL.fieldOf("enable_villager_trades").forGetter(HybridAquaticConfig::enableVillagerTrades),
+                Codec.BOOL.fieldOf("add_fishing_loot").forGetter(HybridAquaticConfig::addFishingLoot),
                 BiomeConfig.CODEC.fieldOf("worldgen").forGetter(HybridAquaticConfig::biomeConfig),
                 EntitySpawnConfig.CODEC.listOf().fieldOf("spawn_configuration").forGetter(HybridAquaticConfig::entitySpawnConfig),
             ).apply(instance, ::HybridAquaticConfig)

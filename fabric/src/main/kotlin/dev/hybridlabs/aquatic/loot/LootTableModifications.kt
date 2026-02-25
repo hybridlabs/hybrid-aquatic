@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.loot
 
+import dev.hybridlabs.aquatic.CommonClass
+import dev.hybridlabs.aquatic.config.ConfigHelper
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents
 import net.minecraft.advancements.critereon.EntityPredicate
 import net.minecraft.advancements.critereon.FishingHookPredicate
@@ -10,6 +12,11 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 
 object LootTableModifications {
     fun registerLootModifications() {
+
+        val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
+
+        if (!configHandler.config.addFishingLoot) return
+
         LootTableEvents.MODIFY.register { _, _, id, tableBuilder, source ->
             if (source.isBuiltin) {
                 when (id) {
