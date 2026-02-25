@@ -166,7 +166,6 @@ object HybridAquaticItems {
     //#endregion
 
     //#region Tools - Weapons - Hooks
-
     val SEA_MESSAGE_BOOK = register("sea_message_book") { SeaMessageBookItem(Item.Properties()) }
     val FISHING_NET = register("fishing_net") { FishingNetItem(Item.Properties().stacksTo(1)) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
@@ -226,7 +225,6 @@ object HybridAquaticItems {
     val CORAL_HOE = register(
         "coral_hoe"
     ) { CoralHoeItem(Item.Properties()) }
-
     //#endregion
 
     //#region Blocks
@@ -458,24 +456,11 @@ object HybridAquaticItems {
     //#endregion
 
     //#region Artificial Blocks
-
     val GLOWSLIME_BLOCK = registerBlockItem("glowslime_block") { HybridAquaticBlocks.GLOWSLIME_BLOCK.get() }
     val PEARL_BLOCK = registerBlockItem("pearl_block") { HybridAquaticBlocks.PEARL_BLOCK.get() }
     val BLACK_PEARL_BLOCK = registerBlockItem("black_pearl_block") { HybridAquaticBlocks.BLACK_PEARL_BLOCK.get() }
-
     val CRYSTALLINE_SULFUR = registerBlockItem("crystalline_sulfur") { HybridAquaticBlocks.CRYSTALLINE_SULFUR.get() }
-    val DEPTH_CHARGE = registerBlockItem("depth_charge") { HybridAquaticBlocks.DEPTH_CHARGE.get() }
-    val GRASSY_SAND = registerBlockItem("grassy_sand") { HybridAquaticBlocks.GRASSY_SAND.get() }
-    val AERATED_SAND = registerBlockItem("aerated_sand") { HybridAquaticBlocks.AERATED_SAND.get() }
-    val BUBBLE_GEYSER = registerBlockItem("bubble_geyser") { HybridAquaticBlocks.BUBBLE_GEYSER.get() }
-    val WHITE_SAND = registerBlockItem("white_sand") { HybridAquaticBlocks.WHITE_SAND.get() }
-    val WHITE_SANDSTONE = registerBlockItem("white_sandstone") { HybridAquaticBlocks.WHITE_SANDSTONE.get() }
-    val SUSPICIOUS_RED_SAND = registerBlockItem("suspicious_red_sand") { HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get() }
-    val CORALSTONE = registerBlockItem("coralstone") { HybridAquaticBlocks.CORALSTONE.get() }
-    val SHORESTONE = registerBlockItem("shorestone") { HybridAquaticBlocks.SHORESTONE.get() }
-    val BARNACLE_SHORESTONE = registerBlockItem("barnacle_shorestone") { HybridAquaticBlocks.BARNACLE_SHORESTONE.get() }
-
-    val MARINE_SNOW = registerBlockItem("marine_snow") { HybridAquaticBlocks.MARINE_SNOW.get() }
+    val DEPTH_CHARGE = registerPlaceableInWaterOrLandBlockItem("depth_charge") { HybridAquaticBlocks.DEPTH_CHARGE.get() }
     val BUOY = registerPlaceableInWaterBlockItem("buoy") { HybridAquaticBlocks.BUOY.get() }
     val RAFT = registerPlaceableInWaterBlockItem("raft") { HybridAquaticBlocks.RAFT.get() }
     val OAK_RAFT = registerPlaceableInWaterBlockItem("oak_raft") { HybridAquaticBlocks.OAK_RAFT.get() }
@@ -489,9 +474,22 @@ object HybridAquaticItems {
     val DRIFTWOOD_RAFT = registerPlaceableInWaterBlockItem("driftwood_raft") { HybridAquaticBlocks.DRIFTWOOD_RAFT.get() }
     val GLOWSTICK = registerVerticallyAttachable("glowstick", HybridAquaticBlocks.GLOWSTICK, HybridAquaticBlocks.WALL_GLOWSTICK)
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") { PLATFORM.createMessageInABottleItem(Item.Properties()) }
+    //#endregion
+
+    //#region Nature Blocks
+    val GRASSY_SAND = registerBlockItem("grassy_sand") { HybridAquaticBlocks.GRASSY_SAND.get() }
+    val AERATED_SAND = registerBlockItem("aerated_sand") { HybridAquaticBlocks.AERATED_SAND.get() }
+    val BUBBLE_GEYSER = registerBlockItem("bubble_geyser") { HybridAquaticBlocks.BUBBLE_GEYSER.get() }
+    val WHITE_SAND = registerBlockItem("white_sand") { HybridAquaticBlocks.WHITE_SAND.get() }
+    val WHITE_SANDSTONE = registerBlockItem("white_sandstone") { HybridAquaticBlocks.WHITE_SANDSTONE.get() }
+    val SUSPICIOUS_RED_SAND = registerBlockItem("suspicious_red_sand") { HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get() }
+    val CORALSTONE = registerBlockItem("coralstone") { HybridAquaticBlocks.CORALSTONE.get() }
+    val SHORESTONE = registerBlockItem("shorestone") { HybridAquaticBlocks.SHORESTONE.get() }
+    val BARNACLE_SHORESTONE = registerBlockItem("barnacle_shorestone") { HybridAquaticBlocks.BARNACLE_SHORESTONE.get() }
+    val MARINE_SNOW = registerBlockItem("marine_snow") { HybridAquaticBlocks.MARINE_SNOW.get() }
+    //#endregion
 
     //#region Plushies
-
     val BASKING_SHARK_PLUSHIE = registerBlockItem("basking_shark_plushie") { HybridAquaticBlocks.BASKING_SHARK_PLUSHIE.get() }
     val BULL_SHARK_PLUSHIE = registerBlockItem("bull_shark_plushie") { HybridAquaticBlocks.BULL_SHARK_PLUSHIE.get() }
     val FRILLED_SHARK_PLUSHIE = registerBlockItem("frilled_shark_plushie") { HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE.get() }
@@ -500,11 +498,9 @@ object HybridAquaticItems {
     val THRESHER_SHARK_PLUSHIE = registerBlockItem("thresher_shark_plushie") { HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE.get() }
     val TIGER_SHARK_PLUSHIE = registerBlockItem("tiger_shark_plushie") { HybridAquaticBlocks.TIGER_SHARK_PLUSHIE.get() }
     val WHALE_SHARK_PLUSHIE = registerBlockItem("whale_shark_plushie") { HybridAquaticBlocks.WHALE_SHARK_PLUSHIE.get() }
-
     //#endregion
 
     //#region Crates
-
     val CRAB_POT = registerBlockItem("crab_pot") { HybridAquaticBlocks.CRAB_POT.get() }
     val HYBRID_CRATE = registerBlockItem("hybrid_crate") { HybridAquaticBlocks.HYBRID_CRATE.get() }
     val OAK_CRATE = registerBlockItem("oak_crate") { HybridAquaticBlocks.OAK_CRATE.get() }
@@ -516,9 +512,7 @@ object HybridAquaticItems {
     val MANGROVE_CRATE = registerBlockItem("mangrove_crate") { HybridAquaticBlocks.MANGROVE_CRATE.get() }
     val CHERRY_CRATE = registerBlockItem("cherry_crate") { HybridAquaticBlocks.CHERRY_CRATE.get() }
     val BAMBOO_CRATE = registerBlockItem("bamboo_crate") { HybridAquaticBlocks.BAMBOO_CRATE.get() }
-
     //#endregion
-
 
     //#endregion
 
@@ -1865,6 +1859,10 @@ object HybridAquaticItems {
 
     private fun registerPlaceableInWaterBlockItem(id: String, block: Supplier<Block>): Supplier<Item> {
         return register(id) { PlaceableInWaterItem(block.get(), Item.Properties()) }
+    }
+
+    private fun registerPlaceableInWaterOrLandBlockItem(id: String, block: Supplier<Block>): Supplier<Item> {
+        return register(id) { PlaceableInWaterOrLandItem(block.get(), Item.Properties()) }
     }
 
     private fun registerVerticallyAttachable(

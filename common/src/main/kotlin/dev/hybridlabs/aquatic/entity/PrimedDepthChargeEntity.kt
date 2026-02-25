@@ -22,7 +22,7 @@ open class PrimedDepthChargeEntity(
         this.setPos(x, y, z)
         val d0 = level.random.nextDouble() * (Math.PI.toFloat() * 2f)
         this.setDeltaMovement(-sin(d0) * 0.02, 0.2, -cos(d0) * 0.02)
-        this.fuse = 80
+        this.fuse = 100
         this.xo = x
         this.yo = y
         this.zo = z
@@ -32,7 +32,7 @@ open class PrimedDepthChargeEntity(
     private var owner: LivingEntity? = null
 
     override fun defineSynchedData() {
-        this.entityData.define<Int?>(DATA_FUSE_ID, 80)
+        this.entityData.define<Int?>(DATA_FUSE_ID, 100)
     }
 
     override fun getMovementEmission(): MovementEmission {
@@ -65,7 +65,7 @@ open class PrimedDepthChargeEntity(
             this.updateInWaterStateAndDoFluidPushing()
             if (this.level().isClientSide) {
                 this.level()
-                    .addParticle(ParticleTypes.BUBBLE, this.x, this.y + 0.5, this.z, 0.0, 0.0, 0.0)
+                    .addParticle(ParticleTypes.BUBBLE_COLUMN_UP, this.x, this.y + 0.5, this.z, 0.0, 0.0, 0.0)
             }
         }
     }

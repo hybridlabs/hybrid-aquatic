@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.entity.PrimedDepthChargeEntity
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.stats.Stats
@@ -11,25 +12,56 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.projectile.Projectile
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Explosion
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.SimpleWaterloggedBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
 import net.minecraft.world.level.block.state.properties.BooleanProperty
-import net.minecraft.world.level.block.state.properties.Property
 import net.minecraft.world.level.gameevent.GameEvent
+import net.minecraft.world.level.material.FluidState
+import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.BlockHitResult
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class DepthChargeBlock(properties: Properties) : Block(properties) {
+class DepthChargeBlock(properties: Properties) : Block(properties), SimpleWaterloggedBlock {
+
     override fun onPlace(state: BlockState, level: Level, pos: BlockPos, oldState: BlockState, isMoving: Boolean) {
         if (!oldState.`is`(state.block) && level.hasNeighborSignal(pos)) {
             explode(level, pos)
             level.removeBlock(pos, false)
         }
+    }
+
+    init {
+        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
+    }
+
+    override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState {
+        val waterlogged = ctx.level.getFluidState(ctx.clickedPos) == Fluids.WATER.getSource(false)
+        return defaultBlockState()
+            .setValue(WATERLOGGED, waterlogged)
+    }
+
+    override fun getFluidState(state: BlockState): FluidState {
+        return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
+    }
+
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+        builder.add(WATERLOGGED, UNSTABLE)
+    }
+
+    override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
+
+        val fluidState = world.getFluidState(pos)
+
+        return fluidState.`is`(Fluids.WATER) || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
     override fun neighborChanged(
@@ -113,10 +145,6 @@ class DepthChargeBlock(properties: Properties) : Block(properties) {
 
     override fun dropFromExplosion(explosion: Explosion): Boolean {
         return false
-    }
-
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
-        builder.add(*arrayOf<Property<*>?>(UNSTABLE))
     }
 
     init {
