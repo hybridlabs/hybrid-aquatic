@@ -1,11 +1,8 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
-import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.config.ConfigHelper
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.BiomeTags
-import kotlin.collections.buildList
 import net.minecraft.tags.TagKey
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.levelgen.GenerationStep
@@ -15,8 +12,6 @@ data class BiomeFeatureAddition(
     val biomeTag: TagKey<Biome>, val step: GenerationStep.Decoration, val placedFeature: ResourceKey<PlacedFeature>,
 ) {
     companion object {
-        val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
-
         val builtIn = buildList {
             add(
                 BiomeFeatureAddition(
@@ -42,15 +37,13 @@ data class BiomeFeatureAddition(
                 ),
             )
 
-            if (configHandler.config.generateFloatingSargassum) {
-                add(
-                    BiomeFeatureAddition(
-                        HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
-                        GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HybridAquaticPlacedFeatures.FLOATING_SARGASSUM
-                    ),
-                )
-            }
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HybridAquaticPlacedFeatures.FLOATING_SARGASSUM
+                ),
+            )
 
             add(
                 BiomeFeatureAddition(

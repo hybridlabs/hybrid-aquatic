@@ -63,7 +63,7 @@ object HybridAquatic : ModInitializer {
         HybridAquaticPaintings
         HybridAquaticFabricParticleTypes
 
-        if (configHandler.config.enableBiomes) {
+        if (configHandler.config.biomeConfig.enableBiomes) {
             HybridAquaticBiomes.addBiomes()
         }
 
