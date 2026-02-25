@@ -249,15 +249,13 @@ data class BiomeFeatureAddition(
                 ),
             )
 
-            if (configHandler.config.generateBottledMessages) {
-                add(
-                    BiomeFeatureAddition(
-                        HybridAquaticBiomeTags.BOTTLE_SPAWN_BIOMES,
-                        GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
-                        HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE
-                    )
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.BOTTLE_SPAWN_BIOMES,
+                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                    HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE
                 )
-            }
+            )
 
             add(
                 BiomeFeatureAddition(

@@ -51,6 +51,7 @@ object HybridAquatic : ModInitializer {
 
     @Suppress("UnusedExpression")
     override fun onInitialize() {
+        val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
         logger.info("Initializing ${Constants.MOD_NAME}")
         CommonClass.init()
 
@@ -62,7 +63,10 @@ object HybridAquatic : ModInitializer {
         HybridAquaticPaintings
         HybridAquaticFabricParticleTypes
 
-        HybridAquaticBiomes.addBiomes()
+        if (configHandler.config.enableBiomes) {
+            HybridAquaticBiomes.addBiomes()
+        }
+
         HybridAquaticBiomeTags
 
         HybridAquaticMobEffects
@@ -88,7 +92,6 @@ object HybridAquatic : ModInitializer {
         //HybridAquaticParticleTypes
 
         registerDynamicRegistries()
-        val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
         if (configHandler.config.enableWanderingTraderTrades) {
             registerWanderingTraderTrades()
         }
