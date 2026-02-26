@@ -4,8 +4,8 @@
 		{
 			"description": {
 				"identifier": "geometry.unknown",
-				"texture_width": 256,
-				"texture_height": 256,
+				"texture_width": 128,
+				"texture_height": 128,
 				"visible_bounds_width": 7,
 				"visible_bounds_height": 3,
 				"visible_bounds_offset": [0, 0.5, 0]
@@ -13,54 +13,54 @@
 			"bones": [
 				{
 					"name": "body",
-					"pivot": [0, 8.5, 0.75],
+					"pivot": [0, 6.5, -0.75],
 					"cubes": [
-						{"origin": [-9, 0, -16], "size": [18, 18, 35], "uv": [0, 0]}
+						{"origin": [-7.5, 0, -11.5], "size": [15, 12, 23], "uv": [0, 0]}
 					]
 				},
 				{
 					"name": "head",
 					"parent": "body",
-					"pivot": [0, 8, -15],
+					"pivot": [0, 5, -11.25],
 					"cubes": [
-						{"origin": [-7, 1, -30], "size": [14, 11, 3], "uv": [88, 93]},
-						{"origin": [-7, 1, -27], "size": [14, 14, 13], "uv": [62, 66]},
-						{"origin": [-7, 0, -30], "size": [14, 1, 8], "uv": [44, 93]}
+						{"origin": [-5.5, 1, -19.5], "size": [11, 7, 2], "uv": [0, 75]},
+						{"origin": [-5.5, 1, -17.5], "size": [11, 9, 8], "uv": [46, 58]},
+						{"origin": [-5.5, 0, -19.5], "size": [11, 1, 5], "uv": [74, 35]}
 					]
 				},
 				{
 					"name": "tail",
 					"parent": "body",
-					"pivot": [0, 10, 16],
+					"pivot": [0, 8, 11.5],
 					"cubes": [
-						{"origin": [-7.5, 4, 16], "size": [15, 11, 16], "uv": [0, 66]}
+						{"origin": [-6, 4, 11.5], "size": [12, 7, 11], "uv": [0, 48]}
 					]
 				},
 				{
 					"name": "tail_fin",
 					"parent": "tail",
-					"pivot": [0, 11, 32],
+					"pivot": [0, 8, 22.5],
 					"cubes": [
-						{"origin": [-11, 10, 32], "size": [22, 2, 8], "uv": [90, 53]},
-						{"origin": [-16, 10, 32], "size": [32, 0, 13], "uv": [0, 53]}
+						{"origin": [-8, 7, 22.5], "size": [16, 2, 8], "uv": [46, 48]},
+						{"origin": [-12, 8, 22.5], "size": [24, 0, 13], "uv": [0, 35]}
 					]
 				},
 				{
 					"name": "left_flipper",
 					"parent": "body",
-					"pivot": [9, 1, -6],
+					"pivot": [7.5, 1, -1.5],
 					"rotation": [0, 0, 45],
 					"cubes": [
-						{"origin": [9, 0, -11], "size": [12, 2, 10], "uv": [0, 93]}
+						{"origin": [7.5, 0, -6.5], "size": [8, 2, 7], "uv": [0, 66]}
 					]
 				},
 				{
 					"name": "right_flipper",
 					"parent": "body",
-					"pivot": [-9, 1, -6],
+					"pivot": [-7.5, 1, -1.5],
 					"rotation": [0, 0, -45],
 					"cubes": [
-						{"origin": [-21, 0, -11], "size": [12, 2, 10], "uv": [0, 93], "mirror": true}
+						{"origin": [-15.5, 0, -6.5], "size": [8, 2, 7], "uv": [0, 66], "mirror": true}
 					]
 				}
 			]
