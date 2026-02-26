@@ -168,6 +168,7 @@ object SpawnRestrictionRegistry {
 
         setOf(
             HybridAquaticEntityTypes.DUGONG.get(),
+            HybridAquaticEntityTypes.MANATEE.get(),
         ).forEach { registerSirenian(it) }
 
         setOf(

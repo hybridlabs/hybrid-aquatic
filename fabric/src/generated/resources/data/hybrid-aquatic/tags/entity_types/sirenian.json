@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "hybrid-aquatic:dugong",
+    "hybrid-aquatic:manatee",
     {
       "id": "spawn:sea_cow",
       "required": false

@@ -799,7 +799,17 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.SEAGRASS_BED
             ),
-            1, 1, 3
+            1, 1, 2
+        )
+
+        addSirenian(
+            HybridAquaticEntityTypes.MANATEE.get(),
+            listOf(
+                HybridAquaticBiomeTags.SEAGRASS_BED,
+                HybridAquaticBiomeTags.MANGROVES,
+                HybridAquaticBiomeTags.TROPICAL_RIVERS
+            ),
+            1, 1, 2
         )
 
         addDolphin(

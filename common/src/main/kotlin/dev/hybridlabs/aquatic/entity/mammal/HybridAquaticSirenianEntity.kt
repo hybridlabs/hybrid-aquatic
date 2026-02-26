@@ -32,7 +32,6 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "unused", "DEPRECATION")
@@ -181,8 +180,8 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
             ) { state: AnimationState<HybridAquaticSirenianEntity> ->
                 when {
                     state.isMoving && isInWater -> state.setAndContinue(DefaultAnimations.SWIM)
-                    !state.isMoving && isInWater -> state.setAndContinue(WATER_IDLE)
-                    else -> state.setAndContinue(WATER_IDLE)
+                    !state.isMoving && isInWater -> state.setAndContinue(DefaultAnimations.IDLE)
+                    else -> state.setAndContinue(DefaultAnimations.IDLE)
                 }
             }
         )
@@ -199,8 +198,6 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
     companion object {
         val SIRENIAN_SIZE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HybridAquaticSirenianEntity::class.java, EntityDataSerializers.INT)
-
-        val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
 
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
             Items.SEAGRASS,

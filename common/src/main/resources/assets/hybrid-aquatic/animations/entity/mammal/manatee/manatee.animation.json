@@ -34,12 +34,12 @@
 				},
 				"left_flipper": {
 					"rotation": {
-						"vector": [0, 0, "10-math.sin(query.anim_time*60*2.5-60)*10"]
+						"vector": [0, 0, "55-math.sin(query.anim_time*60*2.5-60)*10"]
 					}
 				},
 				"right_flipper": {
 					"rotation": {
-						"vector": [0, 0, "-10-math.sin(query.anim_time*60*2.5-60)*-10"]
+						"vector": [0, 0, "-55-math.sin(query.anim_time*60*2.5-60)*-10"]
 					}
 				}
 			}

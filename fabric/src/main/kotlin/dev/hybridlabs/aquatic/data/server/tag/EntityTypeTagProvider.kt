@@ -473,6 +473,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HybridAquaticEntityTags.SIRENIAN)
             .add(
                 HybridAquaticEntityTypes.DUGONG.get(),
+                HybridAquaticEntityTypes.MANATEE.get(),
             )
             .addOptional(ResourceLocation("spawn", "sea_cow"))
 

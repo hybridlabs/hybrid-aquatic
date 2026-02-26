@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
 import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
+import dev.hybridlabs.aquatic.entity.mammal.ManateeEntity
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
@@ -865,6 +866,13 @@ object HybridAquaticEntityTypes {
         ::DugongEntity,
         EntityDimensions.fixed(2.0f, 0.9f),
         DugongEntity::createMobAttributes
+    )
+
+    val MANATEE = registerSirenian(
+        "manatee",
+        ::ManateeEntity,
+        EntityDimensions.fixed(2.0f, 0.9f),
+        ManateeEntity::createMobAttributes
     )
 
     val ORCA = registerDolphin(
