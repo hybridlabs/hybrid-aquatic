@@ -15,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -58,6 +59,28 @@ public abstract class PlayerEntityMixin extends Entity {
         updateTurtleChestplate();
         // Repairs coral tools in the water
         repairCoralTools();
+    }
+
+    @Inject(method = "getDestroySpeed", at = @At("RETURN"), cancellable = true)
+    private void hybridaquatic$boostSeashellUnderwaterSpeed(
+            BlockState state, CallbackInfoReturnable<Float> cir
+    ) {
+        Player player = (Player)(Object)this;
+
+        ItemStack stack = player.getMainHandItem();
+        if (!(stack.getItem() instanceof TieredItem tieredItem)) return;
+
+        if (tieredItem.getTier() != HybridAquaticToolMaterials.SEASHELL) return;
+
+        if (player.isEyeInFluid(FluidTags.WATER)) {
+
+            float speed = cir.getReturnValue();
+            if (!net.minecraft.world.item.enchantment.EnchantmentHelper.hasAquaAffinity(player)) {
+                speed *= 5.0F;
+            }
+
+            cir.setReturnValue(speed);
+        }
     }
 
     @Unique
