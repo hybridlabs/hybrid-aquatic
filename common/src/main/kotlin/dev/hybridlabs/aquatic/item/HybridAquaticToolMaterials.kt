@@ -16,11 +16,22 @@ enum class HybridAquaticToolMaterials(
 ) :
     Tier {
     SEASHELL(
-        1, 131, 4.0f, 1.0f, 22,
-        Supplier<Ingredient> { Ingredient.of(Items.NAUTILUS_SHELL) }),
+        1,
+        131,
+        4.0f,
+        1.0f,
+        22,
+        Supplier<Ingredient> { Ingredient.of(Items.NAUTILUS_SHELL) }
+    ),
+
     CORAL(
-        2, 250, 6.0f, 2.0f, 14,
-        Supplier<Ingredient> { Ingredient.of(HybridAquaticItems.CORAL_CHUNK.get()) });
+        2,
+        250,
+        6.0f,
+        2.0f,
+        14,
+        Supplier<Ingredient> { Ingredient.of(HybridAquaticItems.CORAL_CHUNK.get()) }
+    );
 
     override fun getUses(): Int {
         return this.itemDurability

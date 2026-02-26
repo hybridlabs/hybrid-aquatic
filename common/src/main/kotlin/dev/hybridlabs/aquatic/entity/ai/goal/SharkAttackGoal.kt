@@ -76,7 +76,7 @@ open class SharkAttackGoal(
         } else if (!shark.isWithinRestriction(livingEntity.blockPosition())) {
             false
         } else {
-            livingEntity !is Player || !livingEntity.isSpectator() && !livingEntity.isCreative
+            livingEntity !is Player || !livingEntity.isSpectator && !livingEntity.isCreative
         }
     }
 

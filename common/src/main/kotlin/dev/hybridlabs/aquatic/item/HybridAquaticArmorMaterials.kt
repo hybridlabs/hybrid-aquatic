@@ -20,54 +20,79 @@ enum class HybridAquaticArmorMaterials(
     private val repairIngredient: Supplier<Ingredient>
 ) : ArmorMaterial {
     DIVING(
-        "diving", 15, intArrayOf(2, 5, 4, 2), 9,
-        SoundEvents.ARMOR_EQUIP_CHAIN, 0.0f, 0.0f, Supplier<Ingredient> {
-            Ingredient.of(
-                Items.COPPER_INGOT
-            )
-        }),
+        "diving",
+        15,
+        intArrayOf(2, 5, 4, 2),
+        9,
+        SoundEvents.ARMOR_EQUIP_CHAIN,
+        0.0f,
+        0.0f,
+        Supplier<Ingredient> { Ingredient.of(Items.COPPER_INGOT) }
+    ),
+
     REINFORCED_DIVING(
-        "reinforced_diving", 25, intArrayOf(3, 7, 5, 3), 9,
-        SoundEvents.ARMOR_EQUIP_CHAIN, 1.0f, 0.0f, Supplier<Ingredient> {
-            Ingredient.of(
-                Items.COPPER_INGOT
-            )
-        }),
+        "reinforced_diving",
+        25,
+        intArrayOf(3, 7, 5, 3),
+        9,
+        SoundEvents.ARMOR_EQUIP_CHAIN, 1.0f, 0.0f,
+        Supplier<Ingredient> { Ingredient.of(Items.COPPER_INGOT) }
+    ),
+
     SEASHELL(
-        "seashell", 15, intArrayOf(2, 4, 3, 2), 22,
-        SoundEvents.ARMOR_EQUIP_TURTLE, 0.0f, 0.0f, Supplier<Ingredient> {
-            Ingredient.of(
-                Items.NAUTILUS_SHELL
-            )
-        }),
+        "seashell",
+        15,
+        intArrayOf(2, 4, 3, 2),
+        22,
+        SoundEvents.ARMOR_EQUIP_TURTLE,
+        0.0f,
+        0.0f,
+        Supplier<Ingredient> { Ingredient.of(Items.NAUTILUS_SHELL) }
+    ),
+
     MANGLERFISH(
-        "manglerfish", 15, intArrayOf(1, 1, 1, 1), 15,
-        SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, Supplier<Ingredient> {
-            Ingredient.of(
-                HybridAquaticItems.GLOWSLIME.get()
-            )
-        }),
+        "manglerfish",
+        15,
+        intArrayOf(1, 1, 1, 1),
+        15,
+        SoundEvents.ARMOR_EQUIP_LEATHER,
+        0.0f,
+        0.0f,
+        Supplier<Ingredient> { Ingredient.of(HybridAquaticItems.GLOWSLIME.get()) }
+    ),
+
     EEL(
-        "eel", 15, intArrayOf(1, 1, 1, 1), 15,
-        SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, Supplier<Ingredient> {
-            Ingredient.of(
-                HybridAquaticItems.MORAY_EEL.get()
-            )
-        }),
+        "eel",
+        15,
+        intArrayOf(1, 1, 1, 1),
+        15,
+        SoundEvents.ARMOR_EQUIP_LEATHER,
+        0.0f,
+        0.0f,
+        Supplier<Ingredient> { Ingredient.of(HybridAquaticItems.MORAY_EEL.get()) }
+    ),
+
     MOONJELLYFISH(
-        "moon_jelly", 15, intArrayOf(1, 1, 1, 1), 15,
-        SoundEvents.SLIME_BLOCK_PLACE, 0.0f, 0.0f, Supplier<Ingredient> {
-            Ingredient.of(
-                Items.SLIME_BALL
-            )
-        }),
+        "moon_jelly",
+        15,
+        intArrayOf(1, 1, 1, 1),
+        15,
+        SoundEvents.SLIME_BLOCK_PLACE,
+        0.0f,
+        0.0f,
+        Supplier<Ingredient> { Ingredient.of(Items.SLIME_BALL) }
+    ),
+
     TURTLE(
-        "turtle", 25, intArrayOf(2, 6, 5, 2), 9,
-        SoundEvents.ARMOR_EQUIP_TURTLE, 1.0f, 0.3f, Supplier<Ingredient> {
-            Ingredient.of(
-                Items.SCUTE
-            )
-        });
+        "turtle",
+        25,
+        intArrayOf(2, 6, 5, 2),
+        9,
+        SoundEvents.ARMOR_EQUIP_TURTLE,
+        1.0f,
+        0.3f,
+        Supplier<Ingredient> { Ingredient.of(Items.SCUTE) }
+    );
 
     override fun getDurabilityForType(type: ArmorItem.Type): Int {
         return BASE_DURABILITY[type.ordinal] * this.durabilityMultiplier

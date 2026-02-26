@@ -6,41 +6,22 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.fluid.HybridAquaticFluids
-import dev.hybridlabs.aquatic.item.coral.CoralAxeItem
-import dev.hybridlabs.aquatic.item.coral.CoralBladeItem
-import dev.hybridlabs.aquatic.item.coral.CoralHoeItem
-import dev.hybridlabs.aquatic.item.coral.CoralPickaxeItem
-import dev.hybridlabs.aquatic.item.coral.CoralShovelItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellAxeItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellHoeItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellPickaxeItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellShovelItem
-import dev.hybridlabs.aquatic.platform.Services.REINFORCED_DIVING_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.DIVING_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.EEL_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.MANGLERFISH_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.MOON_JELLYFISH_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.PLATFORM
-import dev.hybridlabs.aquatic.platform.Services.SEASHELL_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.TURTLE_ARMOR_FACTORY
+import dev.hybridlabs.aquatic.item.coral.*
+import dev.hybridlabs.aquatic.item.seashell.*
+import dev.hybridlabs.aquatic.platform.Services.*
 import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.food.FoodProperties
-import net.minecraft.world.item.ArmorItem
-import net.minecraft.world.item.BlockItem
-import net.minecraft.world.item.BucketItem
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.SpawnEggItem
-import net.minecraft.world.item.StandingAndWallBlockItem
-import net.minecraft.world.item.SwordItem
+import net.minecraft.world.item.*
 import net.minecraft.world.level.block.Block
 import java.util.function.Supplier
 
 object HybridAquaticItems {
     //#region Armor
+        //#region Diving Armor
     val DIVING_HELMET = register(
         "diving_helmet"
     ) {
@@ -73,7 +54,9 @@ object HybridAquaticItems {
             ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
         )
     }
+        //#endregion
 
+        //#region Reinforced Diving Armor
     val REINFORCED_DIVING_HELMET = register(
         "reinforced_diving_helmet"
     ) {
@@ -106,7 +89,9 @@ object HybridAquaticItems {
             ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
         )
     }
+        //#endregion
 
+        //#region Nautilus Armor
     val NAUTILUS_HELMET = register(
         "nautilus_helmet"
     ) {
@@ -122,7 +107,9 @@ object HybridAquaticItems {
             ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
+        //#endregion
 
+        //#region Turtle Armor
     val TURTLE_CHESTPLATE = register(
         "turtle_chestplate"
     ) {
@@ -130,7 +117,9 @@ object HybridAquaticItems {
             ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
+        //#endregion
 
+        //#region Cosmetics
     val MANGLERFISH_LURE = register(
         "manglerfish_lure"
     ) {
@@ -163,6 +152,7 @@ object HybridAquaticItems {
             ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
         )
     }
+        //#endregion
     //#endregion
 
     //#region Tools - Weapons - Hooks
@@ -177,16 +167,10 @@ object HybridAquaticItems {
     val CREEPERMAGNET_HOOK = register("creepermagnet_hook") { HookItem(Item.Properties().durability(1)) }
     val OMINOUS_HOOK = register("ominous_hook") { HookItem(Item.Properties().durability(1)) }
 
+        //#region Seashell Set
     val SEASHELL_SPEAR = register(
         "seashell_spear"
-    ) {
-        SwordItem(
-            HybridAquaticToolMaterials.SEASHELL,
-            2,
-            -2.4f,
-            Item.Properties()
-        )
-    }
+    ) { SeashellSpearItem(Item.Properties()) }
 
     val SEASHELL_PICKAXE = register(
         "seashell_pickaxe"
@@ -205,7 +189,9 @@ object HybridAquaticItems {
     ) {
         SeashellHoeItem(Item.Properties())
     }
+        //#endregion
 
+        //#region Coral Set
     val CORAL_BLADE = register(
         "coral_blade"
     ) { CoralBladeItem(Item.Properties()) }
@@ -225,6 +211,7 @@ object HybridAquaticItems {
     val CORAL_HOE = register(
         "coral_hoe"
     ) { CoralHoeItem(Item.Properties()) }
+        //#endregion
     //#endregion
 
     //#region Blocks
@@ -516,10 +503,7 @@ object HybridAquaticItems {
 
     //#endregion
 
-    //#endregion
-
     //#region Crafting Ingredients
-
     val GLOWSLIME = register("glowslime") { Item(Item.Properties()) }
     val SEA_URCHIN_SPINE = register("sea_urchin_spine") { Item(Item.Properties()) }
     val SHARK_TOOTH = register("shark_tooth") { Item(Item.Properties()) }
@@ -530,6 +514,8 @@ object HybridAquaticItems {
     val PEARL = register("pearl") { Item(Item.Properties()) }
     val BLACK_PEARL = register("black_pearl") { Item(Item.Properties()) }
     val CUTTLEBONE = register("cuttlebone") { Item(Item.Properties()) }
+
+        //#region Claws
     val LOBSTER_CLAW = register("lobster_claw") { Item(Item.Properties()) }
     val DUNGENESS_CRAB_CLAW = register("dungeness_crab_claw") { Item(Item.Properties()) }
     val FIDDLER_CRAB_CLAW = register("fiddler_crab_claw") { Item(Item.Properties()) }
@@ -540,11 +526,11 @@ object HybridAquaticItems {
     val COCONUT_CRAB_CLAW = register("coconut_crab_claw") { Item(Item.Properties()) }
     val YETI_CRAB_CLAW = register("yeti_crab_claw") { Item(Item.Properties()) }
     val LIGHTFOOT_CRAB_CLAW = register("lightfoot_crab_claw") { Item(Item.Properties()) }
+        //#endregion
 
     //#endregion
 
-    //# region Food
-
+    //#region Food
     val UNI = register("uni") {
         Item(
             Item.Properties()
@@ -1538,9 +1524,7 @@ object HybridAquaticItems {
     //#endregion
 
     //#region Spawn Eggs
-
-    //#region Fish
-
+        //#region Fish Spawn Eggs
     val AFRICAN_BUTTERFLYFISH_SPAWN_EGG =
         registerSpawnEgg("african_butterflyfish_spawn_egg", HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH, 0xb57955, 0x1e3555)
     val BARRELEYE_SPAWN_EGG =
@@ -1637,11 +1621,6 @@ object HybridAquaticItems {
         registerSpawnEgg("golden_dorado_spawn_egg", HybridAquaticEntityTypes.GOLDEN_DORADO, 0xd16020, 0xa4975f)
     val WRASSE_SPAWN_EGG =
         registerSpawnEgg("wrasse_spawn_egg", HybridAquaticEntityTypes.WRASSE, 0x2c2628, 0xdc5f5d)
-
-    //#endregion
-
-    //#region Deep Sea Fish
-
     val ANGLERFISH_SPAWN_EGG =
         registerSpawnEgg("anglerfish_spawn_egg", HybridAquaticEntityTypes.ANGLERFISH, 0x4b4257, 0xa7f1eb)
      val VIPERFISH_SPAWN_EGG =
@@ -1662,11 +1641,32 @@ object HybridAquaticItems {
         registerSpawnEgg("oarfish_spawn_egg", HybridAquaticEntityTypes.OARFISH, 0x8892ab, 0xb04743)
     val RATFISH_SPAWN_EGG =
         registerSpawnEgg("ratfish_spawn_egg", HybridAquaticEntityTypes.RATFISH, 0xa16470, 0x673146)
+        //#endregion
 
-    //#endregion
+        //#region Shark Spawn Eggs
+    val BASKING_SHARK_SPAWN_EGG =
+        registerSpawnEgg("basking_shark_spawn_egg", HybridAquaticEntityTypes.BASKING_SHARK, 0x6a6558, 0xb5b3a6)
+    val BULL_SHARK_SPAWN_EGG =
+        registerSpawnEgg("bull_shark_spawn_egg", HybridAquaticEntityTypes.BULL_SHARK, 0x5d6b7a, 0xb4c1c6)
+    val FRILLED_SHARK_SPAWN_EGG =
+        registerSpawnEgg("frilled_shark_spawn_egg", HybridAquaticEntityTypes.FRILLED_SHARK, 0x5a4d50, 0x3a2f31)
+    val LANTERN_SHARK_SPAWN_EGG =
+        registerSpawnEgg("lantern_shark_spawn_egg", HybridAquaticEntityTypes.LANTERN_SHARK, 0x543f46, 0x84d5fe)
+    val GREAT_WHITE_SHARK_SPAWN_EGG =
+        registerSpawnEgg("great_white_shark_spawn_egg", HybridAquaticEntityTypes.GREAT_WHITE_SHARK, 0x5e6e7d, 0xf3f3f8)
+    val HAMMERHEAD_SHARK_SPAWN_EGG =
+        registerSpawnEgg("hammerhead_shark_spawn_egg", HybridAquaticEntityTypes.HAMMERHEAD_SHARK, 0x78909a, 0xd7e1dd)
+    val HOUND_SHARK_SHARK_SPAWN_EGG =
+        registerSpawnEgg("hound_shark_spawn_egg", HybridAquaticEntityTypes.HOUND_SHARK, 0xa18469, 0x5e453a)
+    val THRESHER_SHARK_SPAWN_EGG =
+        registerSpawnEgg("thresher_shark_spawn_egg", HybridAquaticEntityTypes.THRESHER_SHARK, 0x5591af, 0xd7e1dd)
+    val TIGER_SHARK_SPAWN_EGG =
+        registerSpawnEgg("sand_tiger_shark_spawn_egg", HybridAquaticEntityTypes.SAND_TIGER_SHARK, 0xb79167, 0xf0f3e6)
+    val WHALE_SHARK_SPAWN_EGG =
+        registerSpawnEgg("whale_shark_spawn_egg", HybridAquaticEntityTypes.WHALE_SHARK, 0x4c6d98, 0xeff0f4)
+        //#endregion
 
-    //#region Cephalopod
-
+        //#region Cephalopod Spawn Eggs
     val CUTTLEFISH_SPAWN_EGG =
         registerSpawnEgg("cuttlefish_spawn_egg", HybridAquaticEntityTypes.CUTTLEFISH, 0x8a4836, 0xf6deae)
     val ARROW_SQUID_SPAWN_EGG =
@@ -1677,11 +1677,6 @@ object HybridAquaticItems {
         registerSpawnEgg("giant_squid_spawn_egg", HybridAquaticEntityTypes.GIANT_SQUID, 0x761f31, 0xd56360)
     val FIREFLY_SQUID_SPAWN_EGG =
         registerSpawnEgg("firefly_squid_spawn_egg", HybridAquaticEntityTypes.FIREFLY_SQUID, 0xc93a61, 0x4ec0e8)
-
-    //#endregion
-
-    //#region Deep Sea Cephalopod
-
     val OCTOPUS_SPAWN_EGG =
         registerSpawnEgg("octopus_spawn_egg", HybridAquaticEntityTypes.OCTOPUS, 0x73275c, 0xc34e69)
     val NAUTILUS_SPAWN_EGG =
@@ -1690,11 +1685,9 @@ object HybridAquaticItems {
         registerSpawnEgg("umbrella_octopus_spawn_egg", HybridAquaticEntityTypes.UMBRELLA_OCTOPUS, 0xffaf25, 0xfeff92)
     val VAMPIRE_SQUID_SPAWN_EGG =
         registerSpawnEgg("vampire_squid_spawn_egg", HybridAquaticEntityTypes.VAMPIRE_SQUID, 0x73363c, 0xc3e9e2)
+        //#endregion
 
-    //#endregion
-
-    //#region Jellyfish
-
+        //#region Jellyfish Spawn Eggs
     val BARREL_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg("barrel_jellyfish_spawn_egg", HybridAquaticEntityTypes.BARREL_JELLYFISH, 0xd6f3ea, 0x413c83)
     val BLUE_JELLYFISH_SPAWN_EGG =
@@ -1711,11 +1704,6 @@ object HybridAquaticItems {
         registerSpawnEgg("sea_nettle_spawn_egg", HybridAquaticEntityTypes.SEA_NETTLE, 0xf7bc78, 0x76435f)
     val BOX_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg("box_jellyfish_spawn_egg", HybridAquaticEntityTypes.BOX_JELLYFISH, 0x9ba6de, 0xebeff8)
-
-    //#endregion
-
-    //#region Deep Sea Jellyfish
-
     val MAUVE_STINGER_SPAWN_EGG =
         registerSpawnEgg("mauve_stinger_spawn_egg", HybridAquaticEntityTypes.MAUVE_STINGER, 0x633063, 0xbc787a)
     val CROWN_JELLYFISH_SPAWN_EGG =
@@ -1727,11 +1715,9 @@ object HybridAquaticItems {
     val FIREWORK_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg("firework_jellyfish_spawn_egg", HybridAquaticEntityTypes.FIREWORK_JELLYFISH, 0x6975e8, 0xfc7fb7
     )
+        //#endregion
 
-    //#endregion
-
-    //#region Crustaceans
-
+        //#region Crustacean Spawn Eggs
     val COCONUT_CRAB_SPAWN_EGG =
         registerSpawnEgg("coconut_crab_spawn_egg", HybridAquaticEntityTypes.COCONUT_CRAB, 0x3e2d25, 0x3c546d)
     val DUNGENESS_CRAB_SPAWN_EGG =
@@ -1758,33 +1744,15 @@ object HybridAquaticItems {
         registerSpawnEgg("shrimp_spawn_egg", HybridAquaticEntityTypes.SHRIMP, 0xeb564b, 0xff9166)
     val VAMPIRE_CRAB_SPAWN_EGG =
         registerSpawnEgg("vampire_crab_spawn_egg", HybridAquaticEntityTypes.VAMPIRE_CRAB, 0x322947, 0x752053)
-
-    //#endregion
-
-    //#region Deep Sea Crustaceans
-
     val GIANT_ISOPOD_SPAWN_EGG =
         registerSpawnEgg("giant_isopod_spawn_egg", HybridAquaticEntityTypes.GIANT_ISOPOD, 0xe6d3d6, 0x3c2236)
     val SPIDER_CRAB_SPAWN_EGG =
         registerSpawnEgg("spider_crab_spawn_egg", HybridAquaticEntityTypes.SPIDER_CRAB, 0x9d3e41, 0xc6836f)
     val YETI_CRAB_SPAWN_EGG =
         registerSpawnEgg("yeti_crab_spawn_egg", HybridAquaticEntityTypes.YETI_CRAB, 0xfff4dd, 0xffd16b)
+        //#endregion
 
-    //#endregion
-
-    //#region Miniboss
-
-    val KARKINOS_SPAWN_EGG =
-        registerSpawnEgg("karkinos_spawn_egg", HybridAquaticEntityTypes.KARKINOS, 0x852c2a, 0x3d1031)
-    val KARCINOGEN_SPAWN_EGG =
-        registerSpawnEgg("karcinogen_spawn_egg", HybridAquaticEntityTypes.KARCINOGEN, 0x852c2a, 0x3d1031)
-    val KARCINOMA_SPAWN_EGG =
-        registerSpawnEgg("karcinoma_spawn_egg", HybridAquaticEntityTypes.KARCINOMA, 0x852c2a, 0x3d1031)
-
-    //#endregion
-
-    //#region Critters
-
+        //#region Critter Spawn Eggs
     val SEA_SLUG_SPAWN_EGG =
         registerSpawnEgg("sea_slug_spawn_egg", HybridAquaticEntityTypes.SEA_SLUG, 0xf7be47, 0xb853a3)
     val SCALYFOOT_SNAIL_SPAWN_EGG =
@@ -1797,35 +1765,9 @@ object HybridAquaticItems {
         registerSpawnEgg("starfish_spawn_egg", HybridAquaticEntityTypes.STARFISH, 0x994066, 0x592645)
     val SEA_ANGEL_SPAWN_EGG =
         registerSpawnEgg("sea_angel_spawn_egg", HybridAquaticEntityTypes.SEA_ANGEL, 0xc6d5f9, 0xf38135)
+        //#endregion
 
-    //#endregion
-
-    //#region Sharks
-
-    val BASKING_SHARK_SPAWN_EGG =
-        registerSpawnEgg("basking_shark_spawn_egg", HybridAquaticEntityTypes.BASKING_SHARK, 0x6a6558, 0xb5b3a6)
-    val BULL_SHARK_SPAWN_EGG =
-        registerSpawnEgg("bull_shark_spawn_egg", HybridAquaticEntityTypes.BULL_SHARK, 0x5d6b7a, 0xb4c1c6)
-    val FRILLED_SHARK_SPAWN_EGG =
-        registerSpawnEgg("frilled_shark_spawn_egg", HybridAquaticEntityTypes.FRILLED_SHARK, 0x5a4d50, 0x3a2f31)
-    val LANTERN_SHARK_SPAWN_EGG =
-        registerSpawnEgg("lantern_shark_spawn_egg", HybridAquaticEntityTypes.LANTERN_SHARK, 0x543f46, 0x84d5fe)
-    val GREAT_WHITE_SHARK_SPAWN_EGG =
-        registerSpawnEgg("great_white_shark_spawn_egg", HybridAquaticEntityTypes.GREAT_WHITE_SHARK, 0x5e6e7d, 0xf3f3f8)
-    val HAMMERHEAD_SHARK_SPAWN_EGG =
-        registerSpawnEgg("hammerhead_shark_spawn_egg", HybridAquaticEntityTypes.HAMMERHEAD_SHARK, 0x78909a, 0xd7e1dd)
-    val HOUND_SHARK_SHARK_SPAWN_EGG =
-        registerSpawnEgg("hound_shark_spawn_egg", HybridAquaticEntityTypes.HOUND_SHARK, 0xa18469, 0x5e453a)
-    val THRESHER_SHARK_SPAWN_EGG =
-        registerSpawnEgg("thresher_shark_spawn_egg", HybridAquaticEntityTypes.THRESHER_SHARK, 0x5591af, 0xd7e1dd)
-    val TIGER_SHARK_SPAWN_EGG =
-        registerSpawnEgg("sand_tiger_shark_spawn_egg", HybridAquaticEntityTypes.SAND_TIGER_SHARK, 0xb79167, 0xf0f3e6)
-    val WHALE_SHARK_SPAWN_EGG =
-        registerSpawnEgg("whale_shark_spawn_egg", HybridAquaticEntityTypes.WHALE_SHARK, 0x4c6d98, 0xeff0f4)
-
-    //#endregion
-
-    //#region Mammals
+        //#region Mammal Spawn Eggs
     val OTTER_SPAWN_EGG =
         registerSpawnEgg("otter_spawn_egg", HybridAquaticEntityTypes.OTTER, 0x60352f, 0xeebf80)
 
@@ -1837,9 +1779,16 @@ object HybridAquaticItems {
 
     val ORCA_SPAWN_EGG =
         registerSpawnEgg("orca_spawn_egg", HybridAquaticEntityTypes.ORCA, 0x60352f, 0xeebf80)
+        //#endregion
 
-    //#endregion
-
+        //#region Miniboss & Minion Spawn Eggs
+    val KARKINOS_SPAWN_EGG =
+        registerSpawnEgg("karkinos_spawn_egg", HybridAquaticEntityTypes.KARKINOS, 0x852c2a, 0x3d1031)
+    val KARCINOGEN_SPAWN_EGG =
+        registerSpawnEgg("karcinogen_spawn_egg", HybridAquaticEntityTypes.KARCINOGEN, 0x852c2a, 0x3d1031)
+    val KARCINOMA_SPAWN_EGG =
+        registerSpawnEgg("karcinoma_spawn_egg", HybridAquaticEntityTypes.KARCINOMA, 0x852c2a, 0x3d1031)
+        //#endregion
     //#endregion
 
     fun register(id: String, item: Supplier<Item>): Supplier<Item> {
