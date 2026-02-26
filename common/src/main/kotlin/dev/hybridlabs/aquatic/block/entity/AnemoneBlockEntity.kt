@@ -174,6 +174,7 @@ class AnemoneBlockEntity(pos: BlockPos, state: BlockState) :
             "HandDropChances",
             "HandItems",
             "HurtByTimestamp",
+            "HurtTime",
             "LeftHanded",
             "Motion",
             "NoGravity",
