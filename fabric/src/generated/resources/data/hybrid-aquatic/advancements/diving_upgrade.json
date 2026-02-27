@@ -1,12 +1,12 @@
 {
-  "parent": "hybrid-aquatic:hook",
+  "parent": "hybrid-aquatic:diving_suit",
   "criteria": {
-    "obtain_creeper_hook": {
+    "obtain_diving_suit_upgrade_template": {
       "conditions": {
         "items": [
           {
             "items": [
-              "hybrid-aquatic:creepermagnet_hook"
+              "hybrid-aquatic:diving_armor_upgrade_template"
             ]
           }
         ]
@@ -18,22 +18,21 @@
     "announce_to_chat": true,
     "background": "hybrid-aquatic:textures/block/coralstone.png",
     "description": {
-      "translate": "advancements.hybrid-aquatic.creeper_hook.description"
+      "translate": "advancements.hybrid-aquatic.diving_upgrade.description"
     },
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "hybrid-aquatic:creepermagnet_hook",
-      "nbt": "{Damage:0}"
+      "item": "hybrid-aquatic:diving_armor_upgrade_template"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.hybrid-aquatic.creeper_hook.title"
+      "translate": "advancements.hybrid-aquatic.diving_upgrade.title"
     }
   },
   "requirements": [
     [
-      "obtain_creeper_hook"
+      "obtain_diving_suit_upgrade_template"
     ]
   ],
   "sends_telemetry_event": true

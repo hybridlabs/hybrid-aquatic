@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:seashell_spear",
+    "hybrid-aquatic:seashell_pickaxe",
+    "hybrid-aquatic:seashell_axe",
+    "hybrid-aquatic:seashell_shovel",
+    "hybrid-aquatic:seashell_hoe"
+  ]
+}

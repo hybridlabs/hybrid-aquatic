@@ -1,7 +1,7 @@
 {
   "parent": "hybrid-aquatic:boat",
   "criteria": {
-    "get_shark_tooth": {
+    "obtain_shark_tooth": {
       "conditions": {
         "items": [
           {
@@ -32,7 +32,7 @@
   },
   "requirements": [
     [
-      "get_shark_tooth"
+      "obtain_shark_tooth"
     ]
   ],
   "sends_telemetry_event": true

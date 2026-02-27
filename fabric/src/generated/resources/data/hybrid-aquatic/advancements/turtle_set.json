@@ -1,13 +1,11 @@
 {
-  "parent": "hybrid-aquatic:hook",
+  "parent": "hybrid-aquatic:turtle_scute",
   "criteria": {
-    "obtain_creeper_hook": {
+    "obtain_turtle_set": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:creepermagnet_hook"
-            ]
+            "tag": "hybrid-aquatic:turtle_set"
           }
         ]
       },
@@ -18,22 +16,22 @@
     "announce_to_chat": true,
     "background": "hybrid-aquatic:textures/block/coralstone.png",
     "description": {
-      "translate": "advancements.hybrid-aquatic.creeper_hook.description"
+      "translate": "advancements.hybrid-aquatic.turtle_set.description"
     },
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "hybrid-aquatic:creepermagnet_hook",
+      "item": "hybrid-aquatic:turtle_chestplate",
       "nbt": "{Damage:0}"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.hybrid-aquatic.creeper_hook.title"
+      "translate": "advancements.hybrid-aquatic.turtle_set.title"
     }
   },
   "requirements": [
     [
-      "obtain_creeper_hook"
+      "obtain_turtle_set"
     ]
   ],
   "sends_telemetry_event": true

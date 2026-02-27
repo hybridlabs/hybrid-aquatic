@@ -170,6 +170,24 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .add(HybridAquaticItems.GRASSY_SAND.get())
 
         //#region Tool Tags
+        getOrCreateTagBuilder(HybridAquaticItemTags.CORAL_SET)
+            .add(HybridAquaticItems.CORAL_BLADE.get())
+            .add(HybridAquaticItems.CORAL_PICKAXE.get())
+            .add(HybridAquaticItems.CORAL_AXE.get())
+            .add(HybridAquaticItems.CORAL_SHOVEL.get())
+            .add(HybridAquaticItems.CORAL_HOE.get())
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.SEASHELL_SET)
+            .add(HybridAquaticItems.SEASHELL_SPEAR.get())
+            .add(HybridAquaticItems.SEASHELL_PICKAXE.get())
+            .add(HybridAquaticItems.SEASHELL_AXE.get())
+            .add(HybridAquaticItems.SEASHELL_SHOVEL.get())
+            .add(HybridAquaticItems.SEASHELL_HOE.get())
+
+        getOrCreateTagBuilder(HybridAquaticItemTags.TURTLE_SET)
+            .add(HybridAquaticItems.TURTLE_CHESTPLATE.get())
+            .add(Items.TURTLE_HELMET)
+
         getOrCreateTagBuilder(ItemTags.SWORDS)
             .add(HybridAquaticItems.SEASHELL_SPEAR.get())
             .add(HybridAquaticItems.CORAL_BLADE.get())

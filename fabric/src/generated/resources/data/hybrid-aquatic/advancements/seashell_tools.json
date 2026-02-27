@@ -1,13 +1,11 @@
 {
-  "parent": "hybrid-aquatic:hook",
+  "parent": "hybrid-aquatic:nautilus_shell",
   "criteria": {
-    "obtain_creeper_hook": {
+    "obtain_seashell_tools": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "hybrid-aquatic:creepermagnet_hook"
-            ]
+            "tag": "hybrid-aquatic:seashell_set"
           }
         ]
       },
@@ -18,22 +16,22 @@
     "announce_to_chat": true,
     "background": "hybrid-aquatic:textures/block/coralstone.png",
     "description": {
-      "translate": "advancements.hybrid-aquatic.creeper_hook.description"
+      "translate": "advancements.hybrid-aquatic.seashell_tools.description"
     },
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "hybrid-aquatic:creepermagnet_hook",
+      "item": "hybrid-aquatic:seashell_spear",
       "nbt": "{Damage:0}"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.hybrid-aquatic.creeper_hook.title"
+      "translate": "advancements.hybrid-aquatic.seashell_tools.title"
     }
   },
   "requirements": [
     [
-      "obtain_creeper_hook"
+      "obtain_seashell_tools"
     ]
   ],
   "sends_telemetry_event": true

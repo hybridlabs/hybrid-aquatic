@@ -12,6 +12,10 @@ object HybridAquaticItemTags {
     val LURE_ITEMS = create("lure_items")
     val PLUSHIES = create("plushies")
 
+    val CORAL_SET = create("coral_set")
+    val SEASHELL_SET = create("seashell_set")
+    val TURTLE_SET = create("turtle_set")
+
     //#region Meat Tags
     val SMALL_FISH = create("small_fish")
     val MEDIUM_FISH = create("medium_fish")

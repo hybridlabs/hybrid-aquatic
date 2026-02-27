@@ -96,6 +96,10 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:heart_of_the_sea"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:diving_armor_upgrade_template"
         }
       ],
       "rolls": 1.0
