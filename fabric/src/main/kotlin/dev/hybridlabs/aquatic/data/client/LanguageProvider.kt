@@ -477,11 +477,18 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BAMBOO_CRATE.get().descriptionId to "Break with an axe to open",
 
             HybridAquaticItems.FISHING_NET.get().descriptionId to "Stored Entity: %s",
+
             HybridAquaticItems.CORAL_AXE.get().descriptionId to "Repairs itself when underwater",
             HybridAquaticItems.CORAL_BLADE.get().descriptionId to "Repairs itself when underwater",
             HybridAquaticItems.CORAL_HOE.get().descriptionId to "Repairs itself when underwater",
             HybridAquaticItems.CORAL_PICKAXE.get().descriptionId to "Repairs itself when underwater",
             HybridAquaticItems.CORAL_SHOVEL.get().descriptionId to "Repairs itself when underwater",
+
+            HybridAquaticItems.SEASHELL_AXE.get().descriptionId to "Increased mining speed underwater",
+            HybridAquaticItems.SEASHELL_SPEAR.get().descriptionId to "Increased mining speed underwater",
+            HybridAquaticItems.SEASHELL_HOE.get().descriptionId to "Increased mining speed underwater",
+            HybridAquaticItems.SEASHELL_PICKAXE.get().descriptionId to "Increased mining speed underwater",
+            HybridAquaticItems.SEASHELL_SHOVEL.get().descriptionId to "Increased mining speed underwater",
 
             HybridAquaticItems.MOON_JELLYFISH_HAT.get().descriptionId to "Made by Jakotens",
 
