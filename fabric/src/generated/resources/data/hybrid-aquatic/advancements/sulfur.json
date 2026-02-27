@@ -1,5 +1,5 @@
 {
-  "parent": "hybrid-aquatic:boat",
+  "parent": "hybrid-aquatic:glowstick",
   "criteria": {
     "obtain_sulfur": {
       "conditions": {

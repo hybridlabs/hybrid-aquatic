@@ -1,5 +1,5 @@
 {
-  "parent": "hybrid-aquatic:boat",
+  "parent": "hybrid-aquatic:sulfur",
   "criteria": {
     "obtain_depth_charge": {
       "conditions": {

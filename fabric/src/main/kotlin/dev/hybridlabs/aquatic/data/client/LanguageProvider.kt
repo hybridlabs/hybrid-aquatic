@@ -118,9 +118,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.kill_karkinos.title" to "A Herculean Task",
             "advancements.hybrid-aquatic.kill_karkinos.description" to "Defeat Karkinos",
 
-            "advancements.hybrid-aquatic.boat.title" to "Set Sail",
-            "advancements.hybrid-aquatic.boat.description" to "Craft a boat and explore the oceans of Minecraft",
-
             "advancements.hybrid-aquatic.bigger_boat.title" to "We're Gonna Need A Bigger Boat",
             "advancements.hybrid-aquatic.bigger_boat.description" to "Block a shark attack with a shield to get a shark tooth",
 

@@ -7,14 +7,9 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.FrameType
-import net.minecraft.advancements.critereon.EnterBlockTrigger
-import net.minecraft.advancements.critereon.EntityPredicate
-import net.minecraft.advancements.critereon.InventoryChangeTrigger
-import net.minecraft.advancements.critereon.ItemPredicate
-import net.minecraft.advancements.critereon.KilledTrigger
+import net.minecraft.advancements.critereon.*
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.block.Blocks.WATER
 import java.util.function.Consumer
@@ -38,27 +33,6 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             )
             .build(ResourceLocation("hybrid-aquatic", "root"))
         consumer?.accept(rootAdvancement)
-
-        val boatAdvancement = Advancement.Builder.advancement()
-            .parent(rootAdvancement)
-            .display(
-                Items.OAK_BOAT,
-                Component.translatable("advancements.hybrid-aquatic.boat.title"),
-                Component.translatable("advancements.hybrid-aquatic.boat.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
-                FrameType.TASK,
-                true,
-                true,
-                false
-            )
-            .addCriterion(
-                "has_boat",
-                InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(ItemTags.BOATS).build()
-                )
-            )
-            .build(ResourceLocation("hybrid-aquatic", "boat"))
-        consumer?.accept(boatAdvancement)
 
         val fishingNetAdvancement = Advancement.Builder.advancement()
             .parent(rootAdvancement)
@@ -120,7 +94,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
         consumer?.accept(creeperHookAdvancement)
 
         val buoyAdvancement = Advancement.Builder.advancement()
-            .parent(boatAdvancement)
+            .parent(rootAdvancement)
             .display(
                 HybridAquaticItems.BUOY.get(),
                 Component.translatable("advancements.hybrid-aquatic.buoy.title"),
@@ -140,7 +114,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
 
         //#region Depth Charge Advancement Tree
         val glowstickAdvancement = Advancement.Builder.advancement()
-            .parent(boatAdvancement)
+            .parent(rootAdvancement)
             .display(
                 HybridAquaticItems.GLOWSTICK.get(),
                 Component.translatable("advancements.hybrid-aquatic.glowstick.title"),
@@ -159,7 +133,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
         consumer?.accept(glowstickAdvancement)
 
         val sulfurAdvancement = Advancement.Builder.advancement()
-            .parent(boatAdvancement)
+            .parent(glowstickAdvancement)
             .display(
                 HybridAquaticItems.SULFUR.get(),
                 Component.translatable("advancements.hybrid-aquatic.sulfur.title"),
@@ -178,7 +152,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
         consumer?.accept(sulfurAdvancement)
 
         val depthChargeAdvancement = Advancement.Builder.advancement()
-            .parent(boatAdvancement)
+            .parent(sulfurAdvancement)
             .display(
                 HybridAquaticItems.DEPTH_CHARGE.get(),
                 Component.translatable("advancements.hybrid-aquatic.depth_charge.title"),
@@ -199,7 +173,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
 
         //#region Seashell Set Advancement Tree
         val seashellAdvancement = Advancement.Builder.advancement()
-            .parent(boatAdvancement)
+            .parent(rootAdvancement)
             .display(
                 Items.NAUTILUS_SHELL,
                 Component.translatable("advancements.hybrid-aquatic.nautilus_shell.title"),
@@ -262,7 +236,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
 
         //#region Coral Set Advancement Tree
         val coralChunkAdvancement = Advancement.Builder.advancement()
-            .parent(boatAdvancement)
+            .parent(rootAdvancement)
             .display(
                 HybridAquaticItems.CORAL_CHUNK.get(),
                 Component.translatable("advancements.hybrid-aquatic.coral_chunk.title"),
@@ -306,7 +280,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
 
         //#region Turtle Set Advancement Tree
         val turtleScuteAdvancement = Advancement.Builder.advancement()
-            .parent(boatAdvancement)
+            .parent(rootAdvancement)
             .display(
                 Items.SCUTE,
                 Component.translatable("advancements.hybrid-aquatic.turtle_scute.title"),
@@ -350,7 +324,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
 
         //#region Diving Set Advancement Tree
         val divingSuitAdvancement = Advancement.Builder.advancement()
-            .parent(boatAdvancement)
+            .parent(rootAdvancement)
             .display(
                 HybridAquaticItems.DIVING_HELMET.get(),
                 Component.translatable("advancements.hybrid-aquatic.diving_suit.title"),
@@ -421,7 +395,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
 
         //#region Pearl Advancement Tree
         val obtainPearlAdvancement = Advancement.Builder.advancement()
-            .parent(boatAdvancement)
+            .parent(rootAdvancement)
             .display(
                 HybridAquaticItems.PEARL.get(),
                 Component.translatable("advancements.hybrid-aquatic.pearl.title"),
@@ -524,7 +498,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
 
         //#region Trident Advancement Tree
         val obtainSharkToothAdvancement = Advancement.Builder.advancement()
-            .parent(boatAdvancement)
+            .parent(rootAdvancement)
             .display(
                 HybridAquaticItems.SHARK_TOOTH.get(),
                 Component.translatable("advancements.hybrid-aquatic.bigger_boat.title"),
