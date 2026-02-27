@@ -35,6 +35,19 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get(), 2)
+            .pattern("PPP")
+            .pattern("PUP")
+            .pattern("PCP")
+            .define('P', Items.PRISMARINE_SHARD)
+            .define('U', HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get())
+            .define('C', Items.PRISMARINE_CRYSTALS)
+            .unlockedBy(
+                "has_diving_template",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get())
+            )
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, HybridAquaticItems.DEPTH_CHARGE.get())
             .pattern("SIS")
             .pattern("ISI")

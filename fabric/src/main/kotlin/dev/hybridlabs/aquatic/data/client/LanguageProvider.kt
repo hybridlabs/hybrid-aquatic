@@ -58,6 +58,12 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.glowstick.title" to "Better Than Torches!",
             "advancements.hybrid-aquatic.glowstick.description" to "Craft a glowstick to light your way in the deep sea",
 
+            "advancements.hybrid-aquatic.sulfur.title" to "Not Glowstone Dust",
+            "advancements.hybrid-aquatic.sulfur.description" to "Find sulfur in a sulfuric cave",
+
+            "advancements.hybrid-aquatic.depth_charge.title" to "Mining Fatigue?",
+            "advancements.hybrid-aquatic.depth_charge.description" to "Craft a depth charge",
+
             "advancements.hybrid-aquatic.buoy.title" to "Oh Buoy!",
             "advancements.hybrid-aquatic.buoy.description" to "Craft a buoy to guide sailors across the sea",
 
@@ -73,11 +79,14 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.seashell_tools.title" to "Shell Shocked",
             "advancements.hybrid-aquatic.seashell_tools.description" to "Craft a tool out of nautilus shells",
 
+            "advancements.hybrid-aquatic.conduit.title" to "Better Than Gills",
+            "advancements.hybrid-aquatic.conduit.description" to "Craft a conduit",
+
             "advancements.hybrid-aquatic.turtle_scute.title" to "They Grow Up So Fast!",
             "advancements.hybrid-aquatic.turtle_scute.description" to "Obtain a turtle scute",
 
             "advancements.hybrid-aquatic.turtle_set.title" to "Cowabunga!",
-            "advancements.hybrid-aquatic.turtle_set.description" to "Craft armor out of turtle scutes",
+            "advancements.hybrid-aquatic.turtle_set.description" to "Craft a piece of turtle armor",
 
             "advancements.hybrid-aquatic.diving_suit.title" to "Diving In",
             "advancements.hybrid-aquatic.diving_suit.description" to "Obtain a full set of diving gear",

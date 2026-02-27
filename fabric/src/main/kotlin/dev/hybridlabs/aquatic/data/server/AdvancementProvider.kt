@@ -79,12 +79,12 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .build(ResourceLocation("hybrid-aquatic", "fishing_net"))
         consumer?.accept(fishingNetAdvancement)
 
-        val glowstickAdvancement = Advancement.Builder.advancement()
-            .parent(boatAdvancement)
+        val fishingHookAdvancement = Advancement.Builder.advancement()
+            .parent(fishingNetAdvancement)
             .display(
-                HybridAquaticItems.GLOWSTICK.get(),
-                Component.translatable("advancements.hybrid-aquatic.glowstick.title"),
-                Component.translatable("advancements.hybrid-aquatic.glowstick.description"),
+                HybridAquaticItems.BARBED_HOOK.get(),
+                Component.translatable("advancements.hybrid-aquatic.hook.title"),
+                Component.translatable("advancements.hybrid-aquatic.hook.description"),
                 ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
@@ -92,11 +92,32 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 false
             )
             .addCriterion(
-                "obtain_glowstick",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSTICK.get())
+                "obtain_hook",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.LURE_ITEMS).build()
+                )
+
+            ).build(ResourceLocation("hybrid-aquatic", "hook"))
+        consumer?.accept(fishingHookAdvancement)
+
+        val creeperHookAdvancement = Advancement.Builder.advancement()
+            .parent(fishingHookAdvancement)
+            .display(
+                HybridAquaticItems.CREEPERMAGNET_HOOK.get(),
+                Component.translatable("advancements.hybrid-aquatic.creeper_hook.title"),
+                Component.translatable("advancements.hybrid-aquatic.creeper_hook.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.GOAL,
+                true,
+                true,
+                false
             )
-            .build(ResourceLocation("hybrid-aquatic", "glowstick"))
-        consumer?.accept(glowstickAdvancement)
+            .addCriterion(
+                "obtain_creeper_hook",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.CREEPERMAGNET_HOOK.get())
+            )
+            .build(ResourceLocation("hybrid-aquatic", "creeper_hook"))
+        consumer?.accept(creeperHookAdvancement)
 
         val buoyAdvancement = Advancement.Builder.advancement()
             .parent(boatAdvancement)
@@ -116,6 +137,65 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             )
             .build(ResourceLocation("hybrid-aquatic", "buoy"))
         consumer?.accept(buoyAdvancement)
+
+        //#region Depth Charge Advancement Tree
+        val glowstickAdvancement = Advancement.Builder.advancement()
+            .parent(boatAdvancement)
+            .display(
+                HybridAquaticItems.GLOWSTICK.get(),
+                Component.translatable("advancements.hybrid-aquatic.glowstick.title"),
+                Component.translatable("advancements.hybrid-aquatic.glowstick.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.TASK,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "obtain_glowstick",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSTICK.get())
+            )
+            .build(ResourceLocation("hybrid-aquatic", "glowstick"))
+        consumer?.accept(glowstickAdvancement)
+
+        val sulfurAdvancement = Advancement.Builder.advancement()
+            .parent(boatAdvancement)
+            .display(
+                HybridAquaticItems.SULFUR.get(),
+                Component.translatable("advancements.hybrid-aquatic.sulfur.title"),
+                Component.translatable("advancements.hybrid-aquatic.sulfur.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.TASK,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "obtain_sulfur",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SULFUR.get())
+            )
+            .build(ResourceLocation("hybrid-aquatic", "sulfur"))
+        consumer?.accept(sulfurAdvancement)
+
+        val depthChargeAdvancement = Advancement.Builder.advancement()
+            .parent(boatAdvancement)
+            .display(
+                HybridAquaticItems.DEPTH_CHARGE.get(),
+                Component.translatable("advancements.hybrid-aquatic.depth_charge.title"),
+                Component.translatable("advancements.hybrid-aquatic.depth_charge.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.GOAL,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "obtain_depth_charge",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.DEPTH_CHARGE.get())
+            )
+            .build(ResourceLocation("hybrid-aquatic", "depth_charge"))
+        consumer?.accept(depthChargeAdvancement)
+        //#endregion
 
         //#region Seashell Set Advancement Tree
         val seashellAdvancement = Advancement.Builder.advancement()
@@ -159,6 +239,25 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             )
             .build(ResourceLocation("hybrid-aquatic", "seashell_tools"))
         consumer?.accept(seashellToolsAdvancement)
+
+        val obtainConduitAdvancement = Advancement.Builder.advancement()
+            .parent(seashellAdvancement)
+            .display(
+                Items.CONDUIT,
+                Component.translatable("advancements.hybrid-aquatic.conduit.title"),
+                Component.translatable("advancements.hybrid-aquatic.conduit.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.CHALLENGE,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "obtain_conduit",
+                InventoryChangeTrigger.TriggerInstance.hasItems(Items.CONDUIT)
+            )
+            .build(ResourceLocation("hybrid-aquatic", "conduit"))
+        consumer?.accept(obtainConduitAdvancement)
         //#endregion
 
         //#region Coral Set Advancement Tree
@@ -359,46 +458,6 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .build(ResourceLocation("hybrid-aquatic", "black_pearl"))
         consumer?.accept(obtainBlackPearlAdvancement)
         //#endregion
-
-        val fishingHookAdvancement = Advancement.Builder.advancement()
-            .parent(fishingNetAdvancement)
-            .display(
-                HybridAquaticItems.BARBED_HOOK.get(),
-                Component.translatable("advancements.hybrid-aquatic.hook.title"),
-                Component.translatable("advancements.hybrid-aquatic.hook.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
-                FrameType.TASK,
-                true,
-                true,
-                false
-            )
-            .addCriterion(
-                "obtain_hook",
-                InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.LURE_ITEMS).build()
-                )
-
-            ).build(ResourceLocation("hybrid-aquatic", "hook"))
-        consumer?.accept(fishingHookAdvancement)
-
-        val creeperHookAdvancement = Advancement.Builder.advancement()
-            .parent(fishingHookAdvancement)
-            .display(
-                HybridAquaticItems.CREEPERMAGNET_HOOK.get(),
-                Component.translatable("advancements.hybrid-aquatic.creeper_hook.title"),
-                Component.translatable("advancements.hybrid-aquatic.creeper_hook.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
-                FrameType.GOAL,
-                true,
-                true,
-                false
-            )
-            .addCriterion(
-                "obtain_creeper_hook",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.CREEPERMAGNET_HOOK.get())
-            )
-            .build(ResourceLocation("hybrid-aquatic", "creeper_hook"))
-        consumer?.accept(creeperHookAdvancement)
 
         //#region Karkinos Advancement Tree
         val crabClawAdvancement = Advancement.Builder.advancement()

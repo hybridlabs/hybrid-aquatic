@@ -1,0 +1,39 @@
+{
+  "parent": "hybrid-aquatic:boat",
+  "criteria": {
+    "obtain_sulfur": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybrid-aquatic:sulfur"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "hybrid-aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid-aquatic.sulfur.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hybrid-aquatic:sulfur"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid-aquatic.sulfur.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_sulfur"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

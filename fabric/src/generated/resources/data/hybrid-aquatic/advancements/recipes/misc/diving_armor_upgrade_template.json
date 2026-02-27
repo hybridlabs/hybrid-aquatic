@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_diving_template": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybrid-aquatic:diving_armor_upgrade_template"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid-aquatic:diving_armor_upgrade_template"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_diving_template",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid-aquatic:diving_armor_upgrade_template"
+    ]
+  },
+  "sends_telemetry_event": false
+}
