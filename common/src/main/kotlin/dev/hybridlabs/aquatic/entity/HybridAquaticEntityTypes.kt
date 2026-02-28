@@ -14,6 +14,7 @@ import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinomaEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import dev.hybridlabs.aquatic.entity.miniboss.ManglerfishEntity
+import dev.hybridlabs.aquatic.entity.miniboss.ShellBeastEntity
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.platform.Services
@@ -653,6 +654,13 @@ object HybridAquaticEntityTypes {
         ::ManglerfishEntity,
         EntityDimensions.fixed(2.0f, 1.75f),
         ManglerfishEntity::createMobAttributes
+    )
+
+    val SHELL_BEAST = registerMiniboss(
+        "shell_beast",
+        ::ShellBeastEntity,
+        EntityDimensions.fixed(2.0f, 2.0f),
+        ShellBeastEntity::createMobAttributes
     )
         //#endregion
     //#endregion

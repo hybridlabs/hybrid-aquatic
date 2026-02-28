@@ -6,43 +6,105 @@
 				"identifier": "geometry.unknown",
 				"texture_width": 256,
 				"texture_height": 256,
-				"visible_bounds_width": 8,
-				"visible_bounds_height": 4.5,
-				"visible_bounds_offset": [0, 1.75, 0]
+				"visible_bounds_width": 14,
+				"visible_bounds_height": 5,
+				"visible_bounds_offset": [0, 1.5, 0]
 			},
 			"bones": [
 				{
 					"name": "body",
-					"pivot": [0, 31, -20.5],
+					"pivot": [0, 24, 0.5],
 					"cubes": [
 						{"origin": [-16, 0, -24], "size": [32, 48, 48], "uv": [0, 0]},
-						{"origin": [-16, 0, -27], "size": [32, 21, 3], "uv": [160, 35]}
+						{"origin": [-16, 0, -27], "size": [32, 21, 3], "uv": [160, 0]}
 					]
 				},
 				{
 					"name": "head",
 					"parent": "body",
-					"pivot": [0, 14, -24],
+					"pivot": [0, 11.5, -27],
 					"cubes": [
 						{"origin": [-13, 2, -47], "size": [26, 19, 23], "uv": [104, 144]},
-						{"origin": [-13, 2, -63], "size": [26, 19, 16], "uv": [160, 0]},
-						{"origin": [-10.5, 4, -69], "size": [21, 15, 22], "uv": [152, 96]},
-						{"origin": [-14, 11, -37], "size": [1, 10, 10], "uv": [160, 76]},
-						{"origin": [13, 11, -37], "size": [1, 10, 10], "uv": [160, 76], "mirror": true}
+						{"origin": [-14, 11, -37], "size": [1, 10, 10], "uv": [34, 183]},
+						{"origin": [13, 11, -37], "size": [1, 10, 10], "uv": [34, 183], "mirror": true}
+					]
+				},
+				{
+					"name": "left_inner_tentacles",
+					"parent": "head",
+					"pivot": [10.5, 11.5, -47],
+					"cubes": [
+						{"origin": [10.5, 4, -69], "size": [0, 15, 22], "uv": [160, 24]}
+					]
+				},
+				{
+					"name": "left_outer_tentacles",
+					"parent": "head",
+					"pivot": [13, 11.5, -47],
+					"cubes": [
+						{"origin": [13, 2, -63], "size": [0, 19, 16], "uv": [160, 61]}
+					]
+				},
+				{
+					"name": "lower_inner_tentacles",
+					"parent": "head",
+					"pivot": [0, 4, -47],
+					"cubes": [
+						{"origin": [-10.5, 4, -69], "size": [21, 0, 22], "uv": [152, 96]}
+					]
+				},
+				{
+					"name": "lower_outer_tentacles",
+					"parent": "head",
+					"pivot": [0, 2, -47],
+					"cubes": [
+						{"origin": [-13, 2, -63], "size": [26, 0, 16], "uv": [152, 118]}
+					]
+				},
+				{
+					"name": "right_inner_tentacles",
+					"parent": "head",
+					"pivot": [-10.5, 11.5, -47],
+					"cubes": [
+						{"origin": [-10.5, 4, -69], "size": [0, 15, 22], "uv": [160, 24], "mirror": true}
+					]
+				},
+				{
+					"name": "right_outer_tentacles",
+					"parent": "head",
+					"pivot": [-13, 11.5, -47],
+					"cubes": [
+						{"origin": [-13, 2, -63], "size": [0, 19, 16], "uv": [160, 61], "mirror": true}
 					]
 				},
 				{
 					"name": "siphon",
 					"parent": "head",
-					"pivot": [0, -0.65, -28.75],
+					"pivot": [0, 2.6954, -26.1145],
 					"rotation": [17.5, 0, 0],
 					"cubes": [
-						{"origin": [-2.5, -0.65, -38], "size": [5, 5, 12], "uv": [160, 59]}
+						{"origin": [-2.5, 0.19544, -38.11452], "size": [5, 5, 12], "uv": [0, 183]}
 					]
 				},
 				{
-					"name": "bone",
+					"name": "upper_inner_tentacles",
 					"parent": "head",
+					"pivot": [0, 19, -47],
+					"cubes": [
+						{"origin": [-10.5, 19, -69], "size": [21, 0, 22], "uv": [152, 96]}
+					]
+				},
+				{
+					"name": "upper_outer_tentacles",
+					"parent": "head",
+					"pivot": [0, 21, -47],
+					"cubes": [
+						{"origin": [-13, 21, -63], "size": [26, 0, 16], "uv": [152, 118]}
+					]
+				},
+				{
+					"name": "operculum",
+					"parent": "body",
 					"pivot": [0, 21, -26],
 					"rotation": [-5, 0, 0],
 					"cubes": [
