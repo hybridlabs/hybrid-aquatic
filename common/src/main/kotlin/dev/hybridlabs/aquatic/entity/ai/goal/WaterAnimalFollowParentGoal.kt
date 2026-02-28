@@ -62,10 +62,4 @@ open class WaterAnimalFollowParentGoal(private val waterAnimal: HybridAquaticWat
             this.waterAnimal.getNavigation().moveTo(this.parent, this.speedModifier)
         }
     }
-
-    companion object {
-        const val HORIZONTAL_SCAN_RANGE: Int = 8
-        const val VERTICAL_SCAN_RANGE: Int = 4
-        const val DONT_FOLLOW_IF_CLOSER_THAN: Int = 3
-    }
 }

@@ -94,8 +94,18 @@ open class HybridAquaticSharkEntity(
         goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 2))
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive })
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive })
+        targetSelector.addGoal(
+            1,
+            NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) {
+                entity: LivingEntity -> isAngryAt(entity) || shouldProximityAttack(entity as Player) && !isPassive
+            }
+        )
+        targetSelector.addGoal(
+            1,
+            NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) {
+                it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is HybridAquaticSharkEntity && !isPassive
+            }
+        )
         getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticSharkEntity::hunger)
     }
 
@@ -253,9 +263,11 @@ open class HybridAquaticSharkEntity(
                     isInWater -> {
                         state.setAndContinue(if (isSprinting && state.isMoving) DefaultAnimations.RUN else DefaultAnimations.SWIM)
                     }
+
                     onGround() -> {
                         state.setAndContinue(BEACHED_ANIMATION)
                     }
+
                     else -> {
                         state.setAndContinue(DefaultAnimations.SWIM)
                     }
