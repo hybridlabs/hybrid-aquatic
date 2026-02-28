@@ -15,7 +15,7 @@ data class BiomeFeatureAddition(
         val builtIn = buildList {
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.REEF,
+                    HybridAquaticBiomeTags.CORAL_REEF,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HybridAquaticPlacedFeatures.ANEMONES
                 ),
@@ -31,7 +31,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
+                    HybridAquaticBiomeTags.SHALLOW_LUKEWARM_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HybridAquaticPlacedFeatures.SARGASSUM
                 ),
@@ -39,7 +39,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
+                    HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HybridAquaticPlacedFeatures.FLOATING_SARGASSUM
                 ),
@@ -113,7 +113,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.REEF,
+                    HybridAquaticBiomeTags.CORAL_REEF,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
                 ),
@@ -179,7 +179,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.REEF,
+                    HybridAquaticBiomeTags.CORAL_REEF,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HybridAquaticPlacedFeatures.OYSTER_BED
                 ),

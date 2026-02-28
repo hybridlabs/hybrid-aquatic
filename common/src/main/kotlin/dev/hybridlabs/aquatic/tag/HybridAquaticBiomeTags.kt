@@ -25,15 +25,17 @@ object HybridAquaticBiomeTags {
     val DEEP_TEMPERATE_OCEANS = create("deep_temperate_oceans")
     val TEMPERATE_TRENCH = create("temperate_trench")
 
-    //#region Tropical Ocean Tags
-    val SHALLOW_TROPICAL_OCEANS = create("shallow_tropical_oceans")
-    val TROPICAL_OCEANS = create("tropical_oceans")
-    val DEEP_TROPICAL_OCEANS = create("deep_tropical_oceans")
-    val TROPICAL_TRENCH = create("tropical_trench")
+    //#region Lukewarm Ocean Tags
+    val SHALLOW_LUKEWARM_OCEANS = create("shallow_lukewarm_oceans")
+    val LUKEWARM_OCEANS = create("lukewarm_oceans")
+    val DEEP_LUKEWARM_OCEANS = create("deep_lukewarm_oceans")
+    val LUKEWARM_TRENCH = create("lukewarm_trench")
 
     //#region Warm Ocean Tags
     val WARM_OCEAN = create("warm_ocean")
-    val REEF = create("reef")
+    val DEEP_WARM_OCEAN = create("deep_warm_ocean")
+    val WARM_TRENCH = create("warm_trench")
+    val CORAL_REEF = create("coral_reef")
     val SEAGRASS_BED = create("seagrass_bed")
     val RED_MEADOW = create("red_meadow")
 

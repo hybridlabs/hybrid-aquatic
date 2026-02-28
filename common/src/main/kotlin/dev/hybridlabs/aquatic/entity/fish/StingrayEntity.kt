@@ -109,7 +109,7 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) : Hybri
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.REEF) -> {
+                        biome.`is`(HybridAquaticBiomeTags.CORAL_REEF) -> {
                             Type.fromId(random.nextInt(0, 3))
                         }
 

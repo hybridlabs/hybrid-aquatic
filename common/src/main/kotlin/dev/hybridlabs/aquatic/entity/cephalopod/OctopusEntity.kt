@@ -126,11 +126,11 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HybridA
                 }
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
-                    return when {biome.`is`(HybridAquaticBiomeTags.REEF) -> {
+                    return when {biome.`is`(HybridAquaticBiomeTags.CORAL_REEF) -> {
                             Type.fromId(random.nextInt(0, 3))
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                        biome.`is`(HybridAquaticBiomeTags.LUKEWARM_OCEANS) -> {
                             Type.fromId(random.nextInt(0, 2))
                         }
 

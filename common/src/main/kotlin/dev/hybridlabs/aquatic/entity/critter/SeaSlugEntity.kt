@@ -64,11 +64,11 @@ class SeaSlugEntity(type: EntityType<out SeaSlugEntity>, world: Level) : HybridA
                 fun fromBiome(biome: Holder<Biome>): Type {
                     return when {
 
-                        biome.`is`(HybridAquaticBiomeTags.REEF) -> {
+                        biome.`is`(HybridAquaticBiomeTags.CORAL_REEF) -> {
                             NUDIBRANCH
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                        biome.`is`(HybridAquaticBiomeTags.LUKEWARM_OCEANS) -> {
                             NUDIBRANCH
                             SEA_HARE
                         }

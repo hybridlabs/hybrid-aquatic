@@ -102,22 +102,22 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         //#endregion
 
         //#region Tropical Ocean Tags
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS)
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_LUKEWARM_OCEANS)
             .add(Biomes.LUKEWARM_OCEAN)
             .addOptional(ResourceLocation("still_life", "subtropical_shallow_ocean"))
             .addOptional(ResourceLocation("still_life", "tropical_shallow_ocean"))
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.TROPICAL_OCEANS)
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.LUKEWARM_OCEANS)
             .add(
                 Biomes.LUKEWARM_OCEAN,
                 Biomes.DEEP_LUKEWARM_OCEAN
             )
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS)
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS)
             .add(Biomes.DEEP_LUKEWARM_OCEAN)
             .addOptional(HybridAquaticBiomes.TROPICAL_DEEP_CORAL_REEF)
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.TROPICAL_TRENCH)
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.LUKEWARM_TRENCH)
             .addOptional(HybridAquaticBiomes.LUKEWARM_TRENCH)
             .addOptional(HybridAquaticBiomes.WARM_TRENCH)
         //#endregion
@@ -126,7 +126,13 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBiomeTags.WARM_OCEAN)
             .add(Biomes.WARM_OCEAN)
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.REEF)
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_WARM_OCEAN)
+            .add(HybridAquaticBiomes.DEEP_WARM_OCEAN)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.WARM_TRENCH)
+            .add(HybridAquaticBiomes.WARM_TRENCH)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.CORAL_REEF)
             .addOptional(HybridAquaticBiomes.CORAL_REEF)
             .addOptional(ResourceLocation("regions_unexplored", "rocky_reef"))
             .addOptional(ResourceLocation("biomeswevegone", "lush_stacks"))

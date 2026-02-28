@@ -110,7 +110,7 @@ class TunaEntity(type: EntityType<out TunaEntity>, world: Level) : HybridAquatic
                             BLUEFIN
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                        biome.`is`(HybridAquaticBiomeTags.LUKEWARM_OCEANS) -> {
                             YELLOWFIN
                         }
 

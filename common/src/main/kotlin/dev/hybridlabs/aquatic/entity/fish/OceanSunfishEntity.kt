@@ -125,11 +125,11 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                        biome.`is`(HybridAquaticBiomeTags.LUKEWARM_OCEANS) -> {
                             HOODWINKER
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS) -> {
+                        biome.`is`(HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS) -> {
                             SHARPTAIL
                         }
 

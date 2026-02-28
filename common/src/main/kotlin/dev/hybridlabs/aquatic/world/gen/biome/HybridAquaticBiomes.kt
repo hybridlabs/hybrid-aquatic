@@ -440,7 +440,7 @@ object HybridAquaticBiomes {
                     ),
                     SubBiomeMatcher.Criterion.ofBiome(
                         SubBiomeMatcher.CriterionTargets.NEIGHBOR,
-                        HybridAquaticBiomeTags.TROPICAL_OCEANS,
+                        HybridAquaticBiomeTags.LUKEWARM_OCEANS,
                         false
                     )
                 )

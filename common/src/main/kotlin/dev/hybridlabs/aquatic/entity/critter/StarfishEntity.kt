@@ -131,7 +131,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
                             BRITTLESTAR
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.REEF) -> {
+                        biome.`is`(HybridAquaticBiomeTags.CORAL_REEF) -> {
                             REEF_VARIANTS[random.nextInt(REEF_VARIANTS.size)]
                         }
 
