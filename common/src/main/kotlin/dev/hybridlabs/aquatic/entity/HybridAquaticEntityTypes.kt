@@ -651,7 +651,7 @@ object HybridAquaticEntityTypes {
     val MANGLERFISH = registerMiniboss(
         "manglerfish",
         ::ManglerfishEntity,
-        EntityDimensions.fixed(2.0f, 2.0f),
+        EntityDimensions.fixed(2.0f, 1.75f),
         ManglerfishEntity::createMobAttributes
     )
         //#endregion

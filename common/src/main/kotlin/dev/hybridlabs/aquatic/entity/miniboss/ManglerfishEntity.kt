@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.entity.ai.goal.ManglerfishMeleeAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -49,6 +50,7 @@ class ManglerfishEntity(type: EntityType<out HybridAquaticMinibossEntity>, world
 
     override fun registerGoals() {
         goalSelector.addGoal(0, StayInWaterGoal(this))
+        goalSelector.addGoal(1, ManglerfishMeleeAttackGoal(this, 1.0, false))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(3, LookAtPlayerGoal(this, Player::class.java, 16.0f))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
@@ -58,7 +60,7 @@ class ManglerfishEntity(type: EntityType<out HybridAquaticMinibossEntity>, world
     }
 
     private fun getHandSwingDuration(): Int {
-        return 40
+        return 20
     }
 
     override fun updateSwingTime() {
@@ -158,8 +160,8 @@ class ManglerfishEntity(type: EntityType<out HybridAquaticMinibossEntity>, world
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 300.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.8)
+                .add(Attributes.MAX_HEALTH, 350.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.75 )
                 .add(Attributes.ATTACK_DAMAGE, 10.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
