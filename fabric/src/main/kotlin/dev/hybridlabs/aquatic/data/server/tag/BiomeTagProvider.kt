@@ -44,8 +44,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.WARM_TRENCH)
             .addOptional(HybridAquaticBiomes.COLD_TRENCH)
             .addOptional(HybridAquaticBiomes.FROZEN_TRENCH)
-            .addOptional(HybridAquaticBiomes.VOLCANIC_TRENCH)
-            .addOptional(HybridAquaticBiomes.BRINE_LAGOON)
             .addOptional(HybridAquaticBiomes.TROPICAL_DEEP_CORAL_REEF)
             .addOptional(HybridAquaticBiomes.DEEP_CORAL_REEF)
         //#endregion
@@ -152,8 +150,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.TRENCH)
             .addOptional(HybridAquaticBiomes.LUKEWARM_TRENCH)
             .addOptional(HybridAquaticBiomes.WARM_TRENCH)
-            .addOptional(HybridAquaticBiomes.BRINE_LAGOON)
-            .addOptional(HybridAquaticBiomes.VOLCANIC_TRENCH)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_REEF)
             .addOptional(HybridAquaticBiomes.DEEP_CORAL_REEF)
@@ -161,7 +157,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.HAS_THERMAL_VENTS)
             .addOptional(HybridAquaticBiomes.SULFURIC_CAVES)
-            .addOptional(HybridAquaticBiomes.VOLCANIC_TRENCH)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SULFURIC_CAVE)
             .addOptional(HybridAquaticBiomes.SULFURIC_CAVES)

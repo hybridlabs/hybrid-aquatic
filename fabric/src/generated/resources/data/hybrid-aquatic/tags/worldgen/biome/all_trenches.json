@@ -20,14 +20,6 @@
     {
       "id": "hybrid-aquatic:warm_trench",
       "required": false
-    },
-    {
-      "id": "hybrid-aquatic:brine_lagoon",
-      "required": false
-    },
-    {
-      "id": "hybrid-aquatic:volcanic_trench",
-      "required": false
     }
   ]
 }

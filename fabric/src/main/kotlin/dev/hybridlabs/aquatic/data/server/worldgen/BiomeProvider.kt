@@ -394,28 +394,6 @@ class BiomeProvider(
         )
 
         entries.add(
-            HybridAquaticBiomes.VOLCANIC_TRENCH,
-            create(
-                entries,
-                temperature = 0.2f,
-                downfall = 0.0f,
-                waterColor = 0x1b2447,
-                waterFogColor = 0x1b2447
-            )
-        )
-
-        entries.add(
-            HybridAquaticBiomes.BRINE_LAGOON,
-            create(
-                entries,
-                temperature = 0.2f,
-                downfall = 0.0f,
-                waterColor = 0x1b2447,
-                waterFogColor = 0x1b2447
-            )
-        )
-
-        entries.add(
             HybridAquaticBiomes.TRENCH,
             create(
                 entries,

@@ -135,16 +135,6 @@ object HybridAquaticBiomes {
     //#endregion
 
     //#region Trench Rules
-    val BRINE_LAGOON: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("brine_lagoon"))
-    val BRINE_LAGOON_SURFACE_RULE: RuleSource = ifTrue(
-        isBiome(BRINE_LAGOON),
-        sequence(
-            ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())),
-            ifTrue(UNDER_FLOOR, state(Blocks.MUD.defaultBlockState())),
-            ifTrue(DEEP_UNDER_FLOOR, state(Blocks.TUFF.defaultBlockState())),
-        )
-    )
-
     val TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("trench"))
     val TRENCH_SURFACE_RULE: RuleSource =
         ifTrue(
@@ -203,17 +193,6 @@ object HybridAquaticBiomes {
 
     val SULFURIC_CAVES: ResourceKey<Biome> =
         ResourceKey.create(Registries.BIOME, CommonClass.locate("sulfuric_caves"))
-
-    val VOLCANIC_TRENCH: ResourceKey<Biome> =
-        ResourceKey.create(Registries.BIOME, CommonClass.locate("volcanic_trench"))
-    val VOLCANIC_TRENCH_SURFACE_RULE: RuleSource = ifTrue(
-        isBiome(VOLCANIC_TRENCH),
-        sequence(
-            ifTrue(ON_FLOOR, state(HybridAquaticBlocks.MARINE_SNOW.get().defaultBlockState())),
-            ifTrue(UNDER_FLOOR, state(Blocks.MUD.defaultBlockState())),
-            ifTrue(DEEP_UNDER_FLOOR, state(Blocks.TUFF.defaultBlockState())),
-        )
-    )
 
     //#endregion
 
@@ -697,13 +676,6 @@ object HybridAquaticBiomes {
                     -0.7f,
                     -0.64f,
                     false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
-                    false
                 )
             )
         )
@@ -717,13 +689,6 @@ object HybridAquaticBiomes {
                     SubBiomeMatcher.CriterionTypes.VALUE,
                     -0.7f,
                     -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
                     false
                 )
             )
@@ -739,13 +704,6 @@ object HybridAquaticBiomes {
                     -0.7f,
                     -0.64f,
                     false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
-                    false
                 )
             )
         )
@@ -759,13 +717,6 @@ object HybridAquaticBiomes {
                     SubBiomeMatcher.CriterionTypes.VALUE,
                     -0.7f,
                     -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
                     false
                 )
             )
@@ -781,13 +732,6 @@ object HybridAquaticBiomes {
                     -0.7f,
                     -0.64f,
                     false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
-                    false
                 )
             )
         )
@@ -801,13 +745,6 @@ object HybridAquaticBiomes {
                     SubBiomeMatcher.CriterionTypes.VALUE,
                     -0.7f,
                     -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
                     false
                 )
             )
@@ -823,18 +760,11 @@ object HybridAquaticBiomes {
                     -0.7f,
                     -0.64f,
                     false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
-                    false
                 )
             )
         )
 
-        //#region Warm Trench
+            //#region Warm Trench
         BiomePlacement.addSubOverworld(
             Biomes.WARM_OCEAN,
             WARM_TRENCH,
@@ -844,13 +774,6 @@ object HybridAquaticBiomes {
                     SubBiomeMatcher.CriterionTypes.VALUE,
                     -0.7f,
                     -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
                     false
                 )
             )
@@ -866,13 +789,6 @@ object HybridAquaticBiomes {
                     -0.7f,
                     -0.64f,
                     false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
-                    false
                 )
             )
         )
@@ -886,13 +802,6 @@ object HybridAquaticBiomes {
                     SubBiomeMatcher.CriterionTypes.VALUE,
                     -0.7f,
                     -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
                     false
                 )
             )
@@ -908,442 +817,10 @@ object HybridAquaticBiomes {
                     -0.7f,
                     -0.64f,
                     false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.33f,
-                    0.33f,
-                    false
                 )
             )
         )
-        //#endregion
-
-        //#region Volcanic Trench
-        BiomePlacement.addSubOverworld(
-            Biomes.DEEP_OCEAN,
-            VOLCANIC_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.33f,
-                    1.0f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            DEEP_CORAL_REEF,
-            VOLCANIC_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.33f,
-                    1.0f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            TROPICAL_DEEP_CORAL_REEF,
-            VOLCANIC_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.33f,
-                    1.0f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            Biomes.WARM_OCEAN,
-            VOLCANIC_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.33f,
-                    1.0f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            CORAL_REEF,
-            VOLCANIC_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.33f,
-                    1.0f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            SEAGRASS_BED,
-            VOLCANIC_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.33f,
-                    1.0f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            RED_MEADOW,
-            VOLCANIC_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.33f,
-                    1.0f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            Biomes.DEEP_LUKEWARM_OCEAN,
-            VOLCANIC_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.33f,
-                    1.0f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            Biomes.DEEP_COLD_OCEAN,
-            VOLCANIC_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.33f,
-                    1.0f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            Biomes.DEEP_FROZEN_OCEAN,
-            VOLCANIC_TRENCH,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    0.33f,
-                    1.0f,
-                    false
-                )
-            )
-        )
-        //#endregion
-
-        //#region Brine Lagoon
-        BiomePlacement.addSubOverworld(
-            Biomes.DEEP_OCEAN,
-            BRINE_LAGOON,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
-                    -0.33f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            DEEP_CORAL_REEF,
-            BRINE_LAGOON,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
-                    -0.33f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            TROPICAL_DEEP_CORAL_REEF,
-            BRINE_LAGOON,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
-                    -0.33f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            Biomes.WARM_OCEAN,
-            BRINE_LAGOON,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
-                    -0.33f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            CORAL_REEF,
-            BRINE_LAGOON,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
-                    -0.33f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            SEAGRASS_BED,
-            BRINE_LAGOON,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
-                    -0.33f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            RED_MEADOW,
-            BRINE_LAGOON,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
-                    -0.33f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            Biomes.DEEP_LUKEWARM_OCEAN,
-            BRINE_LAGOON,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
-                    -0.33f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            Biomes.DEEP_COLD_OCEAN,
-            BRINE_LAGOON,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
-                    -0.33f,
-                    false
-                )
-            )
-        )
-
-        BiomePlacement.addSubOverworld(
-            Biomes.DEEP_FROZEN_OCEAN,
-            BRINE_LAGOON,
-            SubBiomeMatcher.of(
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.CONTINENTALNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -0.7f,
-                    -0.64f,
-                    false
-                ),
-                SubBiomeMatcher.Criterion.ofRange(
-                    SubBiomeMatcher.CriterionTargets.WEIRDNESS,
-                    SubBiomeMatcher.CriterionTypes.VALUE,
-                    -1.0f,
-                    -0.33f,
-                    false
-                )
-            )
-        )
-        //#endregion
-
+            //#endregion
         //#endregion
 
         //#region Surface Rule Generation
@@ -1356,8 +833,6 @@ object HybridAquaticBiomes {
                     TIDE_POOL_SURFACE_RULE,
                     CORAL_REEF_SURFACE_RULE,
 
-                    BRINE_LAGOON_SURFACE_RULE,
-                    VOLCANIC_TRENCH_SURFACE_RULE,
                     TRENCH_SURFACE_RULE,
                     LUKEWARM_TRENCH_SURFACE_RULE,
                     WARM_TRENCH_SURFACE_RULE,

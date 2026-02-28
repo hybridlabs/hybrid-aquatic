@@ -4,10 +4,6 @@
     {
       "id": "hybrid-aquatic:sulfuric_caves",
       "required": false
-    },
-    {
-      "id": "hybrid-aquatic:volcanic_trench",
-      "required": false
     }
   ]
 }
