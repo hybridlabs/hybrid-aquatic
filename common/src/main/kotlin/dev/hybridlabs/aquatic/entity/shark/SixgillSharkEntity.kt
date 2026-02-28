@@ -35,7 +35,7 @@ class SixgillSharkEntity(type: EntityType<out SixgillSharkEntity>, world: Level)
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 54.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.6)
+                .add(Attributes.MOVEMENT_SPEED, 0.7)
                 .add(Attributes.ATTACK_DAMAGE, 8.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
