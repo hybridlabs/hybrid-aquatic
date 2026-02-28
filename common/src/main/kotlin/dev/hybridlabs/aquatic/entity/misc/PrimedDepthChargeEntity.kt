@@ -38,10 +38,6 @@ open class PrimedDepthChargeEntity(
 
     private var owner: LivingEntity? = null
 
-    override fun defineSynchedData() {
-        this.entityData.define<Int?>(DATA_FUSE_ID, 100)
-    }
-
     override fun getMovementEmission(): MovementEmission {
         return MovementEmission.NONE
     }
@@ -93,6 +89,11 @@ open class PrimedDepthChargeEntity(
         )
     }
 
+    //#region Data
+    override fun defineSynchedData() {
+        this.entityData.define<Int?>(DATA_FUSE_ID, 100)
+    }
+
     override fun addAdditionalSaveData(compound: CompoundTag) {
         compound.putShort("Fuse", this.fuse.toShort())
     }
@@ -100,6 +101,7 @@ open class PrimedDepthChargeEntity(
     override fun readAdditionalSaveData(compound: CompoundTag) {
         this.fuse = compound.getShort("Fuse").toInt()
     }
+    //#endregion
 
     override fun getOwner(): LivingEntity? {
         return this.owner

@@ -30,7 +30,8 @@ import java.util.concurrent.Callable
 @Suppress("SameParameterValue")
 object HybridAquaticEntityTypes {
 
-    //#region Fish
+    //#region All Fish
+        //#region River Fish
     val AFRICAN_BUTTERFLYFISH = registerRiverFish(
         "african_butterflyfish",
         ::AfricanButterflyfishEntity,
@@ -38,20 +39,127 @@ object HybridAquaticEntityTypes {
         AfricanButterflyfishEntity::createMobAttributes
     )
 
-    val DAMSELFISH = registerFish(
-        "damselfish",
-        ::DamselfishEntity,
-        EntityDimensions.scalable(0.25f, 0.25f),
-        DamselfishEntity::createMobAttributes
+    val BETTA = registerRiverFish(
+        "betta",
+        ::BettaEntity,
+        EntityDimensions.fixed(0.3f, 0.3f),
+        BettaEntity::createMobAttributes
     )
 
-    val FLYING_FISH = registerFish(
-        "flying_fish",
-        ::FlyingFishEntity,
-        EntityDimensions.fixed(0.25f, 0.2f),
-        FlyingFishEntity::createMobAttributes
+    val DISCUS = registerRiverFish(
+        "discus",
+        ::DiscusEntity,
+        EntityDimensions.fixed(0.35f, 0.45f),
+        DiscusEntity::createMobAttributes
     )
 
+    val CORYDORA = registerRiverFish(
+        "corydora",
+        ::CorydoraEntity,
+        EntityDimensions.fixed(0.4f, 0.4f),
+        CorydoraEntity::createMobAttributes
+    )
+
+    val GOLDFISH = registerRiverFish(
+        "goldfish",
+        ::GoldfishEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        GoldfishEntity::createMobAttributes
+    )
+
+    val CARP = registerRiverFish(
+        "carp",
+        ::CarpEntity,
+        EntityDimensions.fixed(0.6f, 0.5f),
+        CarpEntity::createMobAttributes
+    )
+
+    val TROUT = registerRiverFish(
+        "trout",
+        ::TroutEntity,
+        EntityDimensions.scalable(0.3f, 0.25f),
+        TroutEntity::createMobAttributes
+    )
+
+    val SUNFISH = registerRiverFish(
+        "sunfish",
+        ::SunfishEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        SunfishEntity::createMobAttributes
+    )
+
+    val SHINER = registerRiverFish(
+        "shiner",
+        ::ShinerEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        ShinerEntity::createMobAttributes
+    )
+
+    val GOURAMI = registerRiverFish(
+        "gourami",
+        ::GouramiEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        GouramiEntity::createMobAttributes
+    )
+
+    val PLECO = registerRiverFish(
+        "pleco",
+        ::PlecoEntity,
+        EntityDimensions.fixed(0.8f, 0.5f),
+        PlecoEntity::createMobAttributes
+    )
+
+    val OSCAR = registerRiverFish(
+        "oscar",
+        ::OscarEntity,
+        EntityDimensions.fixed(0.4f, 0.4f),
+        OscarEntity::createMobAttributes
+    )
+
+    val PIRANHA = registerRiverFish(
+        "piranha",
+        ::PiranhaEntity,
+        EntityDimensions.fixed(0.35f, 0.35f),
+        PiranhaEntity::createMobAttributes
+    )
+
+    val DANIO = registerRiverFish(
+        "danio",
+        ::DanioEntity,
+        EntityDimensions.fixed(0.3f, 0.25f),
+        DanioEntity::createMobAttributes
+    )
+
+    val TETRA = registerRiverFish(
+        "tetra",
+        ::TetraEntity,
+        EntityDimensions.fixed(0.3f, 0.3f),
+        TetraEntity::createMobAttributes
+    )
+
+    val PUPFISH = registerRiverFish(
+        "pupfish",
+        ::PupfishEntity,
+        EntityDimensions.fixed(0.3f, 0.3f),
+        PupfishEntity::createMobAttributes
+    )
+
+    val TIGER_BARB = registerRiverFish(
+        "tiger_barb",
+        ::TigerBarbEntity,
+        EntityDimensions.fixed(0.3f, 0.3f),
+        TigerBarbEntity::createMobAttributes
+    )
+
+    val GOLDEN_DORADO = registerRiverFish(
+        "golden_dorado",
+        ::GoldenDoradoEntity,
+        EntityDimensions.fixed(1.0f, 0.6f),
+        GoldenDoradoEntity::createMobAttributes
+    )
+     //#endregion
+
+        //#region Deep Fish
     val ANGLERFISH = registerFishUnderground(
         "anglerfish",
         ::AnglerfishEntity,
@@ -94,18 +202,55 @@ object HybridAquaticEntityTypes {
         BarreleyeEntity::createMobAttributes
     )
 
+    val OARFISH = registerFishUnderground(
+        "oarfish",
+        ::OarfishEntity,
+        EntityDimensions.fixed(1.5f, 0.65f),
+        OarfishEntity::createMobAttributes
+    )
+
+    val COELACANTH = registerFishUnderground(
+        "coelacanth",
+        ::CoelacanthEntity,
+        EntityDimensions.fixed(1.0f, 0.6f),
+        CoelacanthEntity::createMobAttributes
+    )
+
+    val DRAGONFISH = registerFishUnderground(
+        "dragonfish",
+        ::DragonfishEntity,
+        EntityDimensions.fixed(0.5f, 0.3f),
+        DragonfishEntity::createMobAttributes
+    )
+
+    val SEA_ANGEL = registerFishUnderground(
+        "sea_angel",
+        ::SeaAngelEntity,
+        EntityDimensions.fixed(0.3f, 0.2f),
+        SeaAngelEntity::createMobAttributes
+    )
+
+    val JOHN_DORY = registerFishUnderground(
+        "john_dory",
+        ::JohnDoryEntity,
+        EntityDimensions.fixed(0.3f, 0.4f),
+        JohnDoryEntity::createMobAttributes
+    )
+
+    val RATFISH = registerFishUnderground(
+        "ratfish",
+        ::RatfishEntity,
+        EntityDimensions.fixed(0.5f, 0.3f),
+        RatfishEntity::createMobAttributes
+    )
+        //#endregion
+
+        //#region Marine Fish
     val BARRACUDA = registerFish(
         "barracuda",
         ::BarracudaEntity,
         EntityDimensions.fixed(1.0f, 0.5f),
         BarracudaEntity::createMobAttributes
-    )
-
-    val BETTA = registerRiverFish(
-        "betta",
-        ::BettaEntity,
-        EntityDimensions.fixed(0.3f, 0.3f),
-        BettaEntity::createMobAttributes
     )
 
     val PEARLFISH = registerFish(
@@ -164,27 +309,6 @@ object HybridAquaticEntityTypes {
         BoxfishEntity::createMobAttributes
     )
 
-    val DISCUS = registerRiverFish(
-        "discus",
-        ::DiscusEntity,
-        EntityDimensions.fixed(0.35f, 0.45f),
-        DiscusEntity::createMobAttributes
-    )
-
-    val CORYDORA = registerRiverFish(
-        "corydora",
-        ::CorydoraEntity,
-        EntityDimensions.fixed(0.4f, 0.4f),
-        CorydoraEntity::createMobAttributes
-    )
-
-    val DRAGONFISH = registerFishUnderground(
-        "dragonfish",
-        ::DragonfishEntity,
-        EntityDimensions.fixed(0.5f, 0.3f),
-        DragonfishEntity::createMobAttributes
-    )
-
     val FLASHLIGHT_FISH = registerFish(
         "flashlight_fish",
         ::FlashlightFishEntity,
@@ -197,55 +321,6 @@ object HybridAquaticEntityTypes {
         ::SquirrelfishEntity,
         EntityDimensions.scalable(0.25f, 0.25f),
         SquirrelfishEntity::createMobAttributes
-    )
-
-    val GOLDFISH = registerRiverFish(
-        "goldfish",
-        ::GoldfishEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        GoldfishEntity::createMobAttributes
-    )
-
-    val CARP = registerRiverFish(
-        "carp",
-        ::CarpEntity,
-        EntityDimensions.fixed(0.6f, 0.5f),
-        CarpEntity::createMobAttributes
-    )
-
-    val TROUT = registerRiverFish(
-        "trout",
-        ::TroutEntity,
-        EntityDimensions.scalable(0.3f, 0.25f),
-        TroutEntity::createMobAttributes
-    )
-
-    val SUNFISH = registerRiverFish(
-        "sunfish",
-        ::SunfishEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        SunfishEntity::createMobAttributes
-    )
-
-    val SHINER = registerRiverFish(
-        "shiner",
-        ::ShinerEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        ShinerEntity::createMobAttributes
-    )
-
-    val GOURAMI = registerRiverFish(
-        "gourami",
-        ::GouramiEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        GouramiEntity::createMobAttributes
-    )
-
-    val PLECO = registerRiverFish(
-        "pleco",
-        ::PlecoEntity,
-        EntityDimensions.fixed(0.8f, 0.5f),
-        PlecoEntity::createMobAttributes
     )
 
     val LIONFISH = registerFish(
@@ -290,32 +365,11 @@ object HybridAquaticEntityTypes {
         HerringEntity::createMobAttributes
     )
 
-    val OSCAR = registerRiverFish(
-        "oscar",
-        ::OscarEntity,
-        EntityDimensions.fixed(0.4f, 0.4f),
-        OscarEntity::createMobAttributes
-    )
-
     val OPAH = registerFish(
         "opah",
         ::OpahEntity,
         EntityDimensions.fixed(0.8f, 1.0f),
         OpahEntity::createMobAttributes
-    )
-
-    val PIRANHA = registerRiverFish(
-        "piranha",
-        ::PiranhaEntity,
-        EntityDimensions.fixed(0.35f, 0.35f),
-        PiranhaEntity::createMobAttributes
-    )
-
-    val RATFISH = registerFishUnderground(
-        "ratfish",
-        ::RatfishEntity,
-        EntityDimensions.fixed(0.5f, 0.3f),
-        RatfishEntity::createMobAttributes
     )
 
     val ROCKFISH = registerFish(
@@ -325,25 +379,25 @@ object HybridAquaticEntityTypes {
         RockfishEntity::createMobAttributes
     )
 
+    val DAMSELFISH = registerFish(
+        "damselfish",
+        ::DamselfishEntity,
+        EntityDimensions.scalable(0.25f, 0.25f),
+        DamselfishEntity::createMobAttributes
+    )
+
+    val FLYING_FISH = registerFish(
+        "flying_fish",
+        ::FlyingFishEntity,
+        EntityDimensions.fixed(0.25f, 0.2f),
+        FlyingFishEntity::createMobAttributes
+    )
+
     val SEA_BASS = registerFish(
         "sea_bass",
         ::SeaBassEntity,
         EntityDimensions.fixed(0.4f, 0.4f),
         SeaBassEntity::createMobAttributes
-    )
-
-    val JOHN_DORY = registerFishUnderground(
-        "john_dory",
-        ::JohnDoryEntity,
-        EntityDimensions.fixed(0.3f, 0.4f),
-        JohnDoryEntity::createMobAttributes
-    )
-
-    val SEA_ANGEL = registerFishUnderground(
-        "sea_angel",
-        ::SeaAngelEntity,
-        EntityDimensions.fixed(0.3f, 0.2f),
-        SeaAngelEntity::createMobAttributes
     )
 
     val SEAHORSE = registerFish(
@@ -374,27 +428,6 @@ object HybridAquaticEntityTypes {
         OceanSunfishEntity::createMobAttributes
     )
 
-    val TETRA = registerRiverFish(
-        "tetra",
-        ::TetraEntity,
-        EntityDimensions.fixed(0.3f, 0.3f),
-        TetraEntity::createMobAttributes
-    )
-
-    val PUPFISH = registerRiverFish(
-        "pupfish",
-        ::PupfishEntity,
-        EntityDimensions.fixed(0.3f, 0.3f),
-        PupfishEntity::createMobAttributes
-    )
-
-    val TIGER_BARB = registerRiverFish(
-        "tiger_barb",
-        ::TigerBarbEntity,
-        EntityDimensions.fixed(0.3f, 0.3f),
-        TigerBarbEntity::createMobAttributes
-    )
-
     val BLOWFISH = registerFish(
         "blowfish",
         ::BlowfishEntity,
@@ -415,56 +448,16 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(1.0f, 0.7f),
         TunaEntity::createMobAttributes
     )
-
-    val GOLDEN_DORADO = registerRiverFish(
-        "golden_dorado",
-        ::GoldenDoradoEntity,
-        EntityDimensions.fixed(1.0f, 0.6f),
-        GoldenDoradoEntity::createMobAttributes
-    )
-
-    val OARFISH = registerFishUnderground(
-        "oarfish",
-        ::OarfishEntity,
-        EntityDimensions.fixed(1.5f, 0.65f),
-        OarfishEntity::createMobAttributes
-    )
-
-    val COELACANTH = registerFishUnderground(
-        "coelacanth",
-        ::CoelacanthEntity,
-        EntityDimensions.fixed(1.0f, 0.6f),
-        CoelacanthEntity::createMobAttributes
-    )
-
-    val DANIO = registerRiverFish(
-        "danio",
-        ::DanioEntity,
-        EntityDimensions.fixed(0.3f, 0.25f),
-        DanioEntity::createMobAttributes
-    )
+        //#endregion
     //#endregion
 
-    //#region Cephalopods
+    //#region All Cephalopods
+        //#region Marine Cephalopods
     val ARROW_SQUID = registerCephalopod(
         "arrow_squid",
         ::ArrowSquidEntity,
         EntityDimensions.fixed(0.5f, 0.3f),
         ArrowSquidEntity::createMobAttributes
-    )
-
-    val COLOSSAL_SQUID = registerCephalopod(
-        "colossal_squid",
-        ::ColossalSquidEntity,
-        EntityDimensions.fixed(3.0f, 1.0f),
-        ColossalSquidEntity::createMobAttributes
-    )
-
-    val GIANT_SQUID = registerCephalopod(
-        "giant_squid",
-        ::GiantSquidEntity,
-        EntityDimensions.fixed(3.0f, 1.0f),
-        GiantSquidEntity::createMobAttributes
     )
 
     val FIREFLY_SQUID = registerCephalopod(
@@ -487,6 +480,22 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(0.5f, 0.6f),
         OctopusEntity::createMobAttributes
     )
+        //#endregion
+
+        //#region Deep Cephalopods
+    val COLOSSAL_SQUID = registerCephalopodUnderground(
+        "colossal_squid",
+        ::ColossalSquidEntity,
+        EntityDimensions.fixed(3.0f, 1.0f),
+        ColossalSquidEntity::createMobAttributes
+    )
+
+    val GIANT_SQUID = registerCephalopodUnderground(
+        "giant_squid",
+        ::GiantSquidEntity,
+        EntityDimensions.fixed(3.0f, 1.0f),
+        GiantSquidEntity::createMobAttributes
+    )
 
     val VAMPIRE_SQUID = registerCephalopodUnderground(
         "vampire_squid",
@@ -508,9 +517,11 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(0.4f, 0.4f),
         NautilusEntity::createMobAttributes
     )
+        //#endregion
     //#endregion
 
-    //#region Crustaceans
+    //#region All Crustaceans
+        //#region Marine Crustaceans
     val COCONUT_CRAB = registerCrustacean(
         "coconut_crab",
         ::CoconutCrabEntity,
@@ -601,7 +612,9 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(0.5f, 0.25f),
         VampireCrabEntity::createMobAttributes
     )
+        //#endregion
 
+        //#region Deep Crustaceans
     val SPIDER_CRAB = registerCrustaceanUnderground(
         "spider_crab",
         ::SpiderCrabEntity,
@@ -622,46 +635,10 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(0.5f, 0.3f),
         GiantIsopodEntity::createMobAttributes
     )
+        //#endregion
     //#endregion
 
-    //#region Miniboss & Minion
-    val KARKINOS = registerMiniboss(
-        "karkinos",
-        ::KarkinosEntity,
-        EntityDimensions.fixed(1.8f, 0.9f),
-        KarkinosEntity::createMobAttributes
-    )
-
-    val KARCINOGEN = registerMinion(
-        "karcinogen",
-        ::KarcinogenEntity,
-        EntityDimensions.fixed(0.75f, 0.75f),
-        KarcinogenEntity::createMobAttributes
-    )
-
-    val KARCINOMA = registerMinion(
-        "karcinoma",
-        ::KarcinomaEntity,
-        EntityDimensions.fixed(0.75f, 0.75f),
-        KarcinomaEntity::createMobAttributes
-    )
-
-    val MANGLERFISH = registerMiniboss(
-        "manglerfish",
-        ::ManglerfishEntity,
-        EntityDimensions.fixed(2.0f, 1.75f),
-        ManglerfishEntity::createMobAttributes
-    )
-
-    val SHELL_BEAST = registerMiniboss(
-        "shell_beast",
-        ::ShellBeastEntity,
-        EntityDimensions.fixed(2.0f, 2.0f),
-        ShellBeastEntity::createMobAttributes
-    )
-    //#endregion
-
-    //#region Critters
+    //#region All Critters
     val SEA_SLUG = registerCritter(
         "sea_slug",
         ::SeaSlugEntity,
@@ -698,34 +675,8 @@ object HybridAquaticEntityTypes {
     )
     //endregion
 
-    //#region Jellyfish
-    val CROWN_JELLYFISH = registerJellyUnderground(
-        "crown_jellyfish",
-        ::CrownJellyfishEntity,
-        EntityDimensions.fixed(0.75f, 0.75f),
-        CrownJellyfishEntity::createMobAttributes
-    )
-
-    val BIG_RED_JELLYFISH = registerJellyUnderground(
-        "big_red_jellyfish",
-        ::BigRedJellyfishEntity,
-        EntityDimensions.fixed(0.9f, 0.9f),
-        BigRedJellyfishEntity::createMobAttributes
-    )
-
-    val COSMIC_JELLYFISH = registerJellyUnderground(
-        "cosmic_jellyfish",
-        ::CosmicJellyfishEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        CosmicJellyfishEntity::createMobAttributes
-    )
-
-    val FIREWORK_JELLYFISH = registerJellyUnderground(
-        "firework_jellyfish",
-        ::FireworkJellyfishEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        FireworkJellyfishEntity::createMobAttributes
-    )
+    //#region All Jellyfish
+        //#region Marine Jellyfish
 
     val BARREL_JELLYFISH = registerJelly(
         "barrel_jellyfish",
@@ -789,9 +740,41 @@ object HybridAquaticEntityTypes {
         EntityDimensions.scalable(0.75f, 0.75f),
         SeaNettleEntity::createMobAttributes
     )
+        //#endregion
+
+        //#region Deep Jellyfish
+    val CROWN_JELLYFISH = registerJellyUnderground(
+        "crown_jellyfish",
+        ::CrownJellyfishEntity,
+        EntityDimensions.fixed(0.75f, 0.75f),
+        CrownJellyfishEntity::createMobAttributes
+    )
+
+    val BIG_RED_JELLYFISH = registerJellyUnderground(
+        "big_red_jellyfish",
+        ::BigRedJellyfishEntity,
+        EntityDimensions.fixed(0.9f, 0.9f),
+        BigRedJellyfishEntity::createMobAttributes
+    )
+
+    val COSMIC_JELLYFISH = registerJellyUnderground(
+        "cosmic_jellyfish",
+        ::CosmicJellyfishEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        CosmicJellyfishEntity::createMobAttributes
+    )
+
+    val FIREWORK_JELLYFISH = registerJellyUnderground(
+        "firework_jellyfish",
+        ::FireworkJellyfishEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        FireworkJellyfishEntity::createMobAttributes
+    )
+        //#endregion
     //#endregion
 
-    //#region Sharks
+    //#region All Sharks
+        //#region Marine Sharks
     val BASKING_SHARK = registerShark(
         "basking_shark",
         ::BaskingSharkEntity,
@@ -804,27 +787,6 @@ object HybridAquaticEntityTypes {
         ::BullSharkEntity,
         EntityDimensions.fixed(1.75f, 0.6f),
         BullSharkEntity::createMobAttributes
-    )
-
-    val FRILLED_SHARK = registerSharkUnderground(
-        "frilled_shark",
-        ::FrilledSharkEntity,
-        EntityDimensions.fixed(1.25f, 0.5f),
-        FrilledSharkEntity::createMobAttributes
-    )
-
-    val SIXGILL_SHARK = registerSharkUnderground(
-        "sixgill_shark",
-        ::SixgillSharkEntity,
-        EntityDimensions.fixed(1.75f, 0.6f),
-        SixgillSharkEntity::createMobAttributes
-    )
-
-    val SLEEPER_SHARK = registerSharkUnderground(
-        "sleeper_shark",
-        ::SleeperSharkEntity,
-        EntityDimensions.fixed(1.75f, 0.6f),
-        SleeperSharkEntity::createMobAttributes
     )
 
     val HOUND_SHARK = registerShark(
@@ -875,6 +837,30 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(2.5f, 0.8f),
         WhaleSharkEntity::createMobAttributes
     )
+        //#endregion
+
+        //#region Deep Sharks
+    val FRILLED_SHARK = registerSharkUnderground(
+        "frilled_shark",
+        ::FrilledSharkEntity,
+        EntityDimensions.fixed(1.25f, 0.5f),
+        FrilledSharkEntity::createMobAttributes
+    )
+
+    val SIXGILL_SHARK = registerSharkUnderground(
+        "sixgill_shark",
+        ::SixgillSharkEntity,
+        EntityDimensions.fixed(1.75f, 0.6f),
+        SixgillSharkEntity::createMobAttributes
+    )
+
+    val SLEEPER_SHARK = registerSharkUnderground(
+        "sleeper_shark",
+        ::SleeperSharkEntity,
+        EntityDimensions.fixed(1.75f, 0.6f),
+        SleeperSharkEntity::createMobAttributes
+    )
+        //#endregion
     //#endregion
 
     //#region Mammals
@@ -907,6 +893,43 @@ object HybridAquaticEntityTypes {
     )
     //#endregion
 
+    //#region Miniboss & Minion
+    val KARKINOS = registerMiniboss(
+        "karkinos",
+        ::KarkinosEntity,
+        EntityDimensions.fixed(1.8f, 0.9f),
+        KarkinosEntity::createMobAttributes
+    )
+
+    val KARCINOGEN = registerMinion(
+        "karcinogen",
+        ::KarcinogenEntity,
+        EntityDimensions.fixed(0.75f, 0.75f),
+        KarcinogenEntity::createMobAttributes
+    )
+
+    val KARCINOMA = registerMinion(
+        "karcinoma",
+        ::KarcinomaEntity,
+        EntityDimensions.fixed(0.75f, 0.75f),
+        KarcinomaEntity::createMobAttributes
+    )
+
+    val MANGLERFISH = registerMiniboss(
+        "manglerfish",
+        ::ManglerfishEntity,
+        EntityDimensions.fixed(2.0f, 1.75f),
+        ManglerfishEntity::createMobAttributes
+    )
+
+    val SHELL_BEAST = registerMiniboss(
+        "shell_beast",
+        ::ShellBeastEntity,
+        EntityDimensions.fixed(2.0f, 2.0f),
+        ShellBeastEntity::createMobAttributes
+    )
+    //#endregion
+
     //#region Misc Entities
     val DEPTH_CHARGE = registerMisc(
         "depth_charge",
@@ -915,81 +938,8 @@ object HybridAquaticEntityTypes {
     )
     //#endregion
 
-    private fun <T : LivingEntity> registerShark(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(
-            id,
-            entityFactory,
-            dimensions,
-            attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK")
-        )
-    }
-
-    private fun <T : LivingEntity> registerSharkUnderground(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(
-            id,
-            entityFactory,
-            dimensions,
-            attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK")
-        )
-    }
-
-    private fun <T : LivingEntity> registerCritter(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(
-            id,
-            entityFactory,
-            dimensions,
-            attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRITTER")
-        )
-    }
-
-    private fun <T : LivingEntity> registerCrustacean(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(
-            id,
-            entityFactory,
-            dimensions,
-            attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN")
-        )
-    }
-
-    private fun <T : LivingEntity> registerCrustaceanUnderground(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(
-            id,
-            entityFactory,
-            dimensions,
-            attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN")
-        )
-    }
-
+    //#region Registration Functions
+    //#region Fish Registration
     private fun <T : LivingEntity> registerFish(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
@@ -1028,7 +978,154 @@ object HybridAquaticEntityTypes {
             Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH")
         )
     }
+    //#endregion
 
+    //#region Cephalopod Registration
+    private fun <T : LivingEntity> registerCephalopod(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD")
+        )
+    }
+
+    private fun <T : LivingEntity> registerCephalopodUnderground(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD")
+        )
+    }
+    //#endregion
+
+    //#region Crustacean Registration
+    private fun <T : LivingEntity> registerCrustacean(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN")
+        )
+    }
+
+    private fun <T : LivingEntity> registerCrustaceanUnderground(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN")
+        )
+    }
+    //#endregion
+
+    //#region Critter Registration
+    private fun <T : LivingEntity> registerCritter(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRITTER")
+        )
+    }
+    //#endregion
+
+    //#region Jellyfish Registration
+    private fun <T : LivingEntity> registerJelly(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY")
+        )
+    }
+
+    private fun <T : LivingEntity> registerJellyUnderground(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY")
+        )
+    }
+    //#endregion
+
+    //#region Shark Registration
+    private fun <T : LivingEntity> registerShark(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK")
+        )
+    }
+
+    private fun <T : LivingEntity> registerSharkUnderground(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+    ): RegistryObject<EntityType<T>> {
+        return registerCustomSpawnGroup(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK")
+        )
+    }
+    //#endregion
+
+    //#region Mammal Registration
     private fun <T : LivingEntity> registerMammal(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
@@ -1073,67 +1170,9 @@ object HybridAquaticEntityTypes {
             Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL")
         )
     }
+    //#endregion
 
-    private fun <T : LivingEntity> registerCephalopod(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(
-            id,
-            entityFactory,
-            dimensions,
-            attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD")
-        )
-    }
-
-    private fun <T : LivingEntity> registerCephalopodUnderground(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(
-            id,
-            entityFactory,
-            dimensions,
-            attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD")
-        )
-    }
-
-    private fun <T : LivingEntity> registerJelly(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(
-            id,
-            entityFactory,
-            dimensions,
-            attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY")
-        )
-    }
-
-    private fun <T : LivingEntity> registerJellyUnderground(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-    ): RegistryObject<EntityType<T>> {
-        return registerCustomSpawnGroup(
-            id,
-            entityFactory,
-            dimensions,
-            attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY")
-        )
-    }
-
+    //#region Miniboss & Minion Registration
     private fun <T : LivingEntity> registerMiniboss(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
@@ -1163,20 +1202,9 @@ object HybridAquaticEntityTypes {
             Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MINION")
         )
     }
+    //#endregion
 
-    /**
-     * Registers a living entity to the entity type registry with a Hybrid Aquatic spawn group.
-     */
-    private fun <T : LivingEntity> registerCustomSpawnGroup(
-        id: String,
-        entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions,
-        attributeContainer: Callable<AttributeSupplier.Builder>,
-        hybridAquaticSpawnGroup: MobCategory,
-    ): RegistryObject<EntityType<T>> {
-        return registerLiving(id, entityFactory, dimensions, attributeContainer, hybridAquaticSpawnGroup)
-    }
-
+    //#region Misc Entity Registration
     private fun <T : Entity> registerMisc(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
@@ -1190,6 +1218,19 @@ object HybridAquaticEntityTypes {
                 .updateInterval(10)
                 .build(id)
         }
+    }
+    //#endregion
+    /**
+     * Registers a living entity to the entity type registry with a Hybrid Aquatic spawn group.
+     */
+    private fun <T : LivingEntity> registerCustomSpawnGroup(
+        id: String,
+        entityFactory: EntityType.EntityFactory<T>,
+        dimensions: EntityDimensions,
+        attributeContainer: Callable<AttributeSupplier.Builder>,
+        hybridAquaticSpawnGroup: MobCategory,
+    ): RegistryObject<EntityType<T>> {
+        return registerLiving(id, entityFactory, dimensions, attributeContainer, hybridAquaticSpawnGroup)
     }
 
     /**

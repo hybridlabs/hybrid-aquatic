@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.entity.base
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
@@ -23,7 +22,6 @@ import java.util.*
 
 abstract class HybridAquaticWaterAnimal protected constructor(entityType: EntityType<out HybridAquaticWaterAnimal>, level: Level) :
     AgeableMob(entityType, level) {
-    val PARENT_AGE_AFTER_BREEDING: Int = 6000
     private var inLove = 0
     private var loveCause: UUID? = null
 
@@ -134,23 +132,6 @@ abstract class HybridAquaticWaterAnimal protected constructor(entityType: Entity
         this.level().broadcastEntityEvent(this, 18.toByte())
     }
 
-    fun setInLoveTime(inLove: Int) {
-        this.inLove = inLove
-    }
-
-    fun getInLoveTime(): Int {
-        return this.inLove
-    }
-
-    fun getLoveCause(): ServerPlayer? {
-        if (this.loveCause == null) {
-            return null
-        } else {
-            val player = this.level().getPlayerByUUID(this.loveCause)
-            return player as? ServerPlayer
-        }
-    }
-
     fun isInLove(): Boolean {
         return this.inLove > 0
     }
@@ -183,12 +164,12 @@ abstract class HybridAquaticWaterAnimal protected constructor(entityType: Entity
                 (this as VariantHolder<Any>).variant
         }
 
-        this.finalizeSpawnChildFromBreeding(level, mate, baby)
+        this.finalizeSpawnChildFromBreeding(level, mate)
         level.addFreshEntityWithPassengers(baby)
     }
 
 
-    fun finalizeSpawnChildFromBreeding(level: ServerLevel, waterAnimal: HybridAquaticWaterAnimal, baby: AgeableMob?) {
+    fun finalizeSpawnChildFromBreeding(level: ServerLevel, waterAnimal: HybridAquaticWaterAnimal) {
         this.setAge(6000)
         waterAnimal.setAge(6000)
         this.resetLove()
