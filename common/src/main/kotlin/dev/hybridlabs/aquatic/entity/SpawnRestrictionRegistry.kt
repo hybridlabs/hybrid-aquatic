@@ -159,6 +159,8 @@ object SpawnRestrictionRegistry {
 
         setOf(
             HybridAquaticEntityTypes.FRILLED_SHARK.get(),
+            HybridAquaticEntityTypes.SIXGILL_SHARK.get(),
+            HybridAquaticEntityTypes.SLEEPER_SHARK.get(),
             HybridAquaticEntityTypes.LANTERN_SHARK.get(),
         ).forEach { registerDeepShark(it) }
 

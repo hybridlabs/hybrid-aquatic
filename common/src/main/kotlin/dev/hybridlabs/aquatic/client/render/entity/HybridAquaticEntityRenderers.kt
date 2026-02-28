@@ -17,7 +17,7 @@ import dev.hybridlabs.aquatic.client.render.entity.miniboss.ShellBeastEntityRend
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
 import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.NautilusEntityRenderer
 import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.VampireSquidEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.shark.WhaleSharkEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.shark.WhaleSharkEntityRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.platform.ClientServices
 
@@ -669,6 +669,18 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.FRILLED_SHARK,
             ::FrilledSharkEntityRenderer
+        )
+
+    val SIXGILL_SHARK =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.SIXGILL_SHARK,
+            ::SixgillSharkEntityRenderer
+        )
+
+    val SLEEPER_SHARK =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.SLEEPER_SHARK,
+            ::SleeperSharkEntityRenderer
         )
 
     val LANTERN_SHARK =

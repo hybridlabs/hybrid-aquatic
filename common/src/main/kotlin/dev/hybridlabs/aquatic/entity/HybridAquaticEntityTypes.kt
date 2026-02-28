@@ -861,6 +861,20 @@ object HybridAquaticEntityTypes {
         SandTigerSharkEntity::createMobAttributes
     )
 
+    val SIXGILL_SHARK = registerShark(
+        "sixgill_shark",
+        ::SixgillSharkEntity,
+        EntityDimensions.fixed(1.75f, 0.6f),
+        SixgillSharkEntity::createMobAttributes
+    )
+
+    val SLEEPER_SHARK = registerShark(
+        "sleeper_shark",
+        ::SleeperSharkEntity,
+        EntityDimensions.fixed(1.75f, 0.6f),
+        SleeperSharkEntity::createMobAttributes
+    )
+
     val WHALE_SHARK = registerShark(
         "whale_shark",
         ::WhaleSharkEntity,
