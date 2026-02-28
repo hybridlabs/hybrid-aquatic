@@ -49,9 +49,7 @@ open class HybridAquaticCrustaceanEntity(
     private var fromFishingNet = false
     private var songPlaying = false
     private var songSource: BlockPos? = null
-
     private var isHiding: Boolean = false
-
     private var hidingTimer: Int = 0
     private var lastDamageTime: Long = 0
 
@@ -77,8 +75,6 @@ open class HybridAquaticCrustaceanEntity(
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
-
-    // region movement
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -158,7 +154,7 @@ open class HybridAquaticCrustaceanEntity(
         return super.hurt(source, amount)
     }
 
-    //#region Water Breathing
+    //#region Moistness & Air
     override fun getMobType(): MobType {
         return MobType.WATER
     }
@@ -179,7 +175,7 @@ open class HybridAquaticCrustaceanEntity(
         return 0
     }
 
-    //#region NBT
+    //#region Data
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         super.addAdditionalSaveData(nbt)
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
@@ -212,21 +208,6 @@ open class HybridAquaticCrustaceanEntity(
         return SoundEvents.TURTLE_EGG_BREAK
     }
     //#endregion
-
-    override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
-        val attacker = source.directEntity
-        if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticCephalopodEntity && attacker !is HybridAquaticMammalEntity) {
-            super.dropFromLootTable(source, causedByPlayer)
-        }
-    }
-
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !fromFishingNet && !hasCustomName()
-    }
 
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
@@ -261,6 +242,21 @@ open class HybridAquaticCrustaceanEntity(
         return factory
     }
     //#endregion
+
+    override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
+        val attacker = source.directEntity
+        if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticCephalopodEntity && attacker !is HybridAquaticMammalEntity) {
+            super.dropFromLootTable(source, causedByPlayer)
+        }
+    }
+
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
+    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
+        return !fromFishingNet && !hasCustomName()
+    }
 
     companion object {
         val CRUSTACEAN_SIZE: EntityDataAccessor<Int> =

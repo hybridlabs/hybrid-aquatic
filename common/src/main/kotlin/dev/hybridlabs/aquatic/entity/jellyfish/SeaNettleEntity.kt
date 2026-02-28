@@ -87,8 +87,8 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
     ): SpawnGroupData? {
         val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
 
-        val variant = SeaNettleEntity.Companion.Type.entries.random(Random).id
-        this.variant = SeaNettleEntity.Companion.Type.fromId(variant)
+        val variant = Type.entries.random(Random).id
+        this.variant = Type.fromId(variant)
 
         if (spawnReason == MobSpawnType.CHUNK_GENERATION || spawnReason == MobSpawnType.NATURAL) {
             val fishCount = (this.maxSpawnClusterSize * this.random.nextFloat()).toInt()

@@ -43,10 +43,6 @@ class KarcinogenEntity(type: EntityType<out HybridAquaticMinionEntity>, world: L
         return false
     }
 
-    override fun isPushedByFluid(): Boolean {
-        return false
-    }
-
     override fun tick() {
         super.tick()
 

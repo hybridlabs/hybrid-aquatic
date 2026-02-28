@@ -28,7 +28,6 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
-
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HybridAquaticCritterEntity(
     type: EntityType<out HybridAquaticCritterEntity>,
@@ -36,7 +35,6 @@ open class HybridAquaticCritterEntity(
 ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false
-    private var climbingTicks = 0
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -64,6 +62,7 @@ open class HybridAquaticCritterEntity(
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    //#region Moistness & Air
     override fun getMobType(): MobType {
         return MobType.WATER
     }
@@ -80,7 +79,10 @@ open class HybridAquaticCritterEntity(
         return false
     }
 
-    //#region NBT
+    override fun handleAirSupply(air: Int) {}
+    //#endregion
+
+    //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(CRITTER_SIZE, 0)
@@ -100,7 +102,15 @@ open class HybridAquaticCritterEntity(
     }
     //#endregion
 
-    override fun handleAirSupply(air: Int) {}
+    //#region SFX
+    override fun getHurtSound(source: DamageSource): SoundEvent {
+        return SoundEvents.SLIME_HURT
+    }
+
+    override fun getDeathSound(): SoundEvent {
+        return SoundEvents.SLIME_DEATH_SMALL
+    }
+    //#endregion
 
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
@@ -114,6 +124,13 @@ open class HybridAquaticCritterEntity(
     }
     //#endregion
 
+    //#region Properties
+    var size: Int
+        get() = entityData.get(CRITTER_SIZE)
+        set(size) {
+            entityData.set(CRITTER_SIZE, size)
+        }
+
     protected open fun getMinSize(): Int {
         return 0
     }
@@ -122,29 +139,14 @@ open class HybridAquaticCritterEntity(
         return 0
     }
 
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !fromFishingNet && !hasCustomName()
-    }
-
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
-
-    //#region SFX
-    override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.SLIME_HURT
-    }
-
-    override fun getDeathSound(): SoundEvent {
-        return SoundEvents.SLIME_DEATH_SMALL
-    }
     //#endregion
 
-    var size: Int
-        get() = entityData.get(CRITTER_SIZE)
-        set(size) {
-            entityData.set(CRITTER_SIZE, size)
-        }
+    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
+        return !fromFishingNet && !hasCustomName()
+    }
 
     companion object {
         val CRITTER_SIZE: EntityDataAccessor<Int> =

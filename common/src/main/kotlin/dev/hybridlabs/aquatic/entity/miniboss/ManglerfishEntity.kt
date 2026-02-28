@@ -41,10 +41,6 @@ class ManglerfishEntity(type: EntityType<out HybridAquaticMinibossEntity>, world
         lookControl = SmoothSwimmingLookControl(this, 10)
     }
 
-    override fun isPushedByFluid(): Boolean {
-        return false
-    }
-
     private var bossBar: ServerBossEvent =
         ServerBossEvent(displayName, BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_6)
 

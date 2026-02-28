@@ -23,6 +23,7 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var attackTick = 0
 
+    //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(ATTEMPT_ATTACK, false)
@@ -37,6 +38,7 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
         super.readAdditionalSaveData(nbt)
         this.attackTick = nbt.getInt("AttackTick")
     }
+    //#endregion
 
     override fun aiStep() {
         this.updateSwingTime()

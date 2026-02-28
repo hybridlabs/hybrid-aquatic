@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
-import dev.hybridlabs.aquatic.entity.ai.goal.ManglerfishMeleeAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -40,10 +39,6 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, false)
         navigation = WaterBoundPathNavigation(this, world)
         lookControl = SmoothSwimmingLookControl(this, 10)
-    }
-
-    override fun isPushedByFluid(): Boolean {
-        return false
     }
 
     private var bossBar: ServerBossEvent =

@@ -52,6 +52,7 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
         }
     }
 
+    //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(ATTEMPT_ATTACK, false)
@@ -74,6 +75,7 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
             this.setLimitedLife(nbt.getInt("LifeTicks"))
         }
     }
+    //#endregion
 
     override fun registerGoals() {
         goalSelector.addGoal(0, MinionAttackGoal(this, 0.5, true))
@@ -101,14 +103,30 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
         this.limitedLifeTicks = limitedLifeTicks
     }
 
+    //#region Moistness & Air
     override fun getMobType(): MobType {
         return MobType.WATER
     }
 
+    override fun isPushedByFluid(): Boolean {
+        return false
+    }
+
+    override fun canBreatheUnderwater(): Boolean {
+        return true
+    }
+    //#endregion
+
+    //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
+
+    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+        return factory
+    }
+    //#endregion
 
     override fun finalizeSpawn(
         level: ServerLevelAccessor,
@@ -128,10 +146,6 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
         super.aiStep()
     }
 
-    override fun isPushedByFluid(): Boolean {
-        return false
-    }
-
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return false
     }
@@ -144,20 +158,11 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
         }
     }
 
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-
     override fun isPreventingPlayerRest(player: Player): Boolean {
         return true
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
-        return factory
-    }
-
     companion object {
-
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticMinionEntity::class.java, EntityDataSerializers.BOOLEAN)
 

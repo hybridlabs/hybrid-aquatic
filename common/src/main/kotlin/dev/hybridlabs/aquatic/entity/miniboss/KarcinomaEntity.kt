@@ -10,7 +10,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
-import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -37,7 +36,6 @@ class KarcinomaEntity(type: EntityType<out HybridAquaticMinionEntity>, world: Le
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
-
         controllers.add(
             AnimationController(this, "Swim/Run/Idle", 4) { state ->
                 when {
@@ -92,7 +90,6 @@ class KarcinomaEntity(type: EntityType<out HybridAquaticMinionEntity>, world: Le
     }
 
     companion object {
-
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
 
         fun createMobAttributes(): AttributeSupplier.Builder {

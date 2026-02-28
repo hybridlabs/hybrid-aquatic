@@ -62,10 +62,6 @@ class KarkinosEntity(type: EntityType<out HybridAquaticMinibossEntity>, world: L
         return false
     }
 
-    override fun isPushedByFluid(): Boolean {
-        return false
-    }
-
     private var bossBar: ServerBossEvent =
         ServerBossEvent(displayName, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_20)
 

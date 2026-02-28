@@ -50,7 +50,6 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusEntity>, world: Level) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var sittingTimer: Int = 0
-
     open fun getTargetConfig(): MobTargetConfiguration? = null
     open val inkConfig: InkConfiguration? = null
 
@@ -91,23 +90,12 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
         }
     }
 
-    fun isSitting(): Boolean {
-        return entityData.get(SITTING)
-    }
-
-    private fun setSitting(sitting: Boolean) {
-        entityData.set(SITTING, sitting)
-    }
-
-    override fun isVisuallySwimming(): Boolean {
-        return this.isSwimming
-    }
-
     override fun registerGoals() {
         goalSelector.addGoal(3, OctopusSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
     }
 
+    //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(MOISTNESS, getMaxMoistness())
@@ -118,6 +106,29 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
         entityData.define(TARGET_COLOR, 12799593)
         entityData.define(CURRENT_COLOR, 12799593)
     }
+
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        super.addAdditionalSaveData(nbt)
+        nbt.putInt(MOISTNESS_KEY, moistness)
+        nbt.putInt(OCTOPUS_SIZE_KEY, size)
+        nbt.putInt(HUNGER_KEY, hunger)
+        nbt.putBoolean("FromFishingNet", fromFishingNet)
+        nbt.putBoolean("Sitting", isSitting())
+        nbt.putInt("targetColor", getTargetColor())
+        nbt.putInt("currentColor", getCurrentColor())
+    }
+
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
+        super.readAdditionalSaveData(nbt)
+        moistness = nbt.getInt(MOISTNESS_KEY)
+        size = nbt.getInt(OCTOPUS_SIZE_KEY)
+        hunger = nbt.getInt(HUNGER_KEY)
+        fromFishingNet = nbt.getBoolean("FromFishingNet")
+        this.setTargetColor(nbt.getInt("targetColor"))
+        this.setCurrentColor(nbt.getInt("currentColor"))
+        this.setSitting(nbt.getBoolean("Sitting"))
+    }
+    //#endregion
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
@@ -130,6 +141,7 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    //#region Moistness & Air
     override fun getMobType(): MobType {
         return MobType.WATER
     }
@@ -141,6 +153,13 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
     override fun isPushedByFluid(): Boolean {
         return false
     }
+
+    override fun handleAirSupply(air: Int) {}
+
+    private fun getMaxMoistness(): Int {
+        return 1200
+    }
+    //#endregion
 
     override fun tick() {
         super.tick()
@@ -177,6 +196,7 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
         return 1
     }
 
+    //#region Color
     fun getTargetColor(): Int {
         return entityData.get(TARGET_COLOR)
     }
@@ -211,6 +231,7 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
             }
         }
     }
+    //#endregion
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
         if (super.hurt(source, amount) && this.lastHurtByMob != null) {
@@ -277,40 +298,12 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
         }
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt(MOISTNESS_KEY, moistness)
-        nbt.putInt(OCTOPUS_SIZE_KEY, size)
-        nbt.putInt(HUNGER_KEY, hunger)
-        nbt.putBoolean("FromFishingNet", fromFishingNet)
-        nbt.putBoolean("Sitting", isSitting())
-        nbt.putInt("targetColor", getTargetColor())
-        nbt.putInt("currentColor", getCurrentColor())
-    }
-
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        moistness = nbt.getInt(MOISTNESS_KEY)
-        size = nbt.getInt(OCTOPUS_SIZE_KEY)
-        hunger = nbt.getInt(HUNGER_KEY)
-        fromFishingNet = nbt.getBoolean("FromFishingNet")
-        this.setTargetColor(nbt.getInt("targetColor"))
-        this.setCurrentColor(nbt.getInt("currentColor"))
-        this.setSitting(nbt.getBoolean("Sitting"))
-    }
-
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.5f
     }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return !fromFishingNet && !hasCustomName()
-    }
-
-    override fun handleAirSupply(air: Int) {}
-
-    private fun getMaxMoistness(): Int {
-        return 1200
     }
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
@@ -324,6 +317,7 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
         return 1
     }
 
+    //#region SFX
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.SQUID_AMBIENT
     }
@@ -339,9 +333,9 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
     private fun getSquirtSound(): SoundEvent {
         return SoundEvents.SQUID_SQUIRT
     }
+    //#endregion
 
-    //region properties
-
+    //#region Properties
     private var moistness: Int
         get() = entityData.get(MOISTNESS)
         set(moistness) {
@@ -376,8 +370,20 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
 
     private var fromFishingNet = false
 
-    // endregion
+    fun isSitting(): Boolean {
+        return entityData.get(SITTING)
+    }
 
+    private fun setSitting(sitting: Boolean) {
+        entityData.set(SITTING, sitting)
+    }
+
+    override fun isVisuallySwimming(): Boolean {
+        return this.isSwimming
+    }
+    //#endregion
+
+    //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(AnimationController(this, "Swim/Idle", 10
         ) { state: AnimationState<*> ->
@@ -398,6 +404,7 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
     }
+    //#endregion
 
     companion object {
         val SITTING: EntityDataAccessor<Boolean> =

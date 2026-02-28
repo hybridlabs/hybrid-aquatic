@@ -17,19 +17,11 @@ import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
-import net.minecraft.world.entity.EntityDimensions
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.MobType
-import net.minecraft.world.entity.MoverType
-import net.minecraft.world.entity.Pose
-import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
-import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
@@ -50,9 +42,15 @@ import software.bernie.geckolib.util.GeckoLibUtil
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
 open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCephalopodEntity>, world: Level) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-
     open fun getTargetConfig(): MobTargetConfiguration? = null
     open val inkConfig: InkConfiguration? = null
+
+    init {
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, false)
+        lookControl = SmoothSwimmingLookControl(this, 10)
+        navigation = WaterBoundPathNavigation(this, world)
+    }
 
     override fun registerGoals() {
         goalSelector.addGoal(1, RandomSwimmingGoal(this, 1.0, 10))
@@ -64,6 +62,7 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
         }
     }
 
+    //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(MOISTNESS, getMaxMoistness())
@@ -71,6 +70,23 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(HUNGER, MAX_HUNGER)
     }
+
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        super.addAdditionalSaveData(nbt)
+        nbt.putInt(MOISTNESS_KEY, moistness)
+        nbt.putInt(CEPHALOPOD_SIZE_KEY, size)
+        nbt.putInt(HUNGER_KEY, hunger)
+        nbt.putBoolean("FromFishingNet", fromFishingNet)
+    }
+
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
+        super.readAdditionalSaveData(nbt)
+        moistness = nbt.getInt(MOISTNESS_KEY)
+        size = nbt.getInt(CEPHALOPOD_SIZE_KEY)
+        hunger = nbt.getInt(HUNGER_KEY)
+        fromFishingNet = nbt.getBoolean("FromFishingNet")
+    }
+    //#endregion
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
@@ -84,6 +100,7 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    //#region Moistness & Air
     override fun getMobType(): MobType {
         return MobType.WATER
     }
@@ -95,6 +112,13 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
     override fun isPushedByFluid(): Boolean {
         return false
     }
+
+    override fun handleAirSupply(air: Int) {}
+
+    private fun getMaxMoistness(): Int {
+        return 600
+    }
+    //#endregion
 
     override fun tick() {
         super.tick()
@@ -118,12 +142,6 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
         isSprinting = isAggressive
 
         if (hunger > 0) hunger -= 1
-    }
-
-    override fun handleAirSupply(air: Int) {}
-
-    private fun getMaxMoistness(): Int {
-        return 600
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
@@ -187,35 +205,8 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
         }
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt(MOISTNESS_KEY, moistness)
-        nbt.putInt(CEPHALOPOD_SIZE_KEY, size)
-        nbt.putInt(HUNGER_KEY, hunger)
-        nbt.putBoolean("FromFishingNet", fromFishingNet)
-    }
-
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        moistness = nbt.getInt(MOISTNESS_KEY)
-        size = nbt.getInt(CEPHALOPOD_SIZE_KEY)
-        hunger = nbt.getInt(HUNGER_KEY)
-        fromFishingNet = nbt.getBoolean("FromFishingNet")
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
-    }
-
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return !fromFishingNet && !hasCustomName()
-    }
-
-    init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, false)
-        lookControl = SmoothSwimmingLookControl(this, 10)
-        navigation = WaterBoundPathNavigation(this, world)
     }
 
     override fun travel(travelVector: Vec3) {
@@ -239,6 +230,7 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
         return 1
     }
 
+    //#region SFX
     override fun getAmbientSound(): SoundEvent {
         return SoundEvents.SQUID_AMBIENT
     }
@@ -254,12 +246,12 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
     private fun getSquirtSound(): SoundEvent {
         return SoundEvents.SQUID_SQUIRT
     }
+    //#endregion
 
-    override fun createNavigation(world: Level): PathNavigation{
-        return WaterBoundPathNavigation(this, world)
+    //#region Properties
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
+        return dimensions.height * 0.5f
     }
-
-    //region properties
 
     private var moistness: Int
         get() = entityData.get(MOISTNESS)
@@ -285,8 +277,18 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
             entityData.set(ATTEMPT_ATTACK, attemptAttack)
         }
 
-    // endregion
+    protected open fun getMinSize(): Int {
+        return 0
+    }
 
+    protected open fun getMaxSize(): Int {
+        return 3
+    }
+
+    private var fromFishingNet = false
+    //#endregion
+
+    //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
             AnimationController(this, "Swim/Idle", 10
@@ -309,16 +311,7 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
     }
-
-    protected open fun getMinSize(): Int {
-        return 0
-    }
-
-    protected open fun getMaxSize(): Int {
-        return 3
-    }
-
-    private var fromFishingNet = false
+    //#endregion
 
     internal class CephalopodAttackGoal(private val cephalopod: HybridAquaticCephalopodEntity) :
         MeleeAttackGoal(cephalopod, 1.0, true) {
