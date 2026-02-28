@@ -13,6 +13,8 @@ import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinomaEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
+import dev.hybridlabs.aquatic.entity.miniboss.ManglerfishEntity
+import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
@@ -624,6 +626,7 @@ object HybridAquaticEntityTypes {
         GiantIsopodEntity::createMobAttributes
     )
 
+        //#region Miniboss & Minion
     val KARKINOS = registerMiniboss(
         "karkinos",
         ::KarkinosEntity,
@@ -645,7 +648,14 @@ object HybridAquaticEntityTypes {
         KarcinomaEntity::createMobAttributes
     )
 
-    //endregion
+    val MANGLERFISH = registerMiniboss(
+        "manglerfish",
+        ::ManglerfishEntity,
+        EntityDimensions.fixed(2.0f, 2.0f),
+        ManglerfishEntity::createMobAttributes
+    )
+        //#endregion
+    //#endregion
 
     //#region critters
     val SEA_SLUG = registerCritter(

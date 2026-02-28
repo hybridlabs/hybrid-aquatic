@@ -213,6 +213,7 @@ object SpawnRestrictionRegistry {
 
         setOf(
             HybridAquaticEntityTypes.KARKINOS.get(),
+            HybridAquaticEntityTypes.MANGLERFISH.get(),
         ).forEach { registerMiniboss(it) }
 
         setOf(

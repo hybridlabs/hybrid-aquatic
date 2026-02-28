@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.render.entity
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.entity.PrimedDepthChargeEntity
+import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.block.BlockRenderDispatcher
 import net.minecraft.client.renderer.entity.EntityRenderer

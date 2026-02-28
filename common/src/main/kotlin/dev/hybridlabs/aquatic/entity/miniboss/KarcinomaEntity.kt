@@ -21,7 +21,8 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 
 
-class KarcinomaEntity(type: EntityType<out HybridAquaticMinionEntity>, world: Level) : HybridAquaticMinionEntity(type, world) {
+class KarcinomaEntity(type: EntityType<out HybridAquaticMinionEntity>, world: Level) :
+    HybridAquaticMinionEntity(type, world) {
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, true)
@@ -32,10 +33,6 @@ class KarcinomaEntity(type: EntityType<out HybridAquaticMinionEntity>, world: Le
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
-    }
-
-    override fun createNavigation(level: Level): PathNavigation {
-        return WaterBoundPathNavigation(this, level)
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {

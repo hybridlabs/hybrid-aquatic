@@ -12,6 +12,7 @@ import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinogenEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinomaEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.miniboss.ManglerfishEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
 import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.NautilusEntityRenderer
 import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.VampireSquidEntityRenderer
@@ -751,6 +752,11 @@ object HybridAquaticEntityRenderers {
             ::KarcinomaEntityRenderer
         )
 
+    val MANGLERFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.MANGLERFISH,
+            ::ManglerfishEntityRenderer
+        )
     //endregion
 
     val DEPTH_CHARGE =

@@ -36,8 +36,8 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
-abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: Level) : Monster(type, world),
-    GeoEntity {
+abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: Level) :
+    Monster(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var owner: Mob? = null
     private var hasLimitedLife = false

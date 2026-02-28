@@ -8,6 +8,7 @@ import software.bernie.geckolib.model.GeoModel
 @Suppress("OVERRIDE_DEPRECATION")
 abstract class HybridAquaticMinibossEntityModel<T : HybridAquaticMinibossEntity>(private val id: String) :
     GeoModel<T>() {
+
     override fun getModelResource(animatable: T): ResourceLocation {
         return CommonClass.locate("geo/miniboss/${id}/$id.geo.json")
     }

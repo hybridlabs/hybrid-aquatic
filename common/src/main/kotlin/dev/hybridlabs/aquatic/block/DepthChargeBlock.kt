@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.entity.PrimedDepthChargeEntity
+import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.sounds.SoundEvents
