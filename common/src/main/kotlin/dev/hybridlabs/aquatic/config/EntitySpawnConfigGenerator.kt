@@ -482,7 +482,10 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.JOHN_DORY.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_REEF,
+                HybridAquaticBiomeTags.DEEP_WARM_OCEAN,
+                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
                 HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS,
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
             4, 1, 2
         )
@@ -498,8 +501,8 @@ class EntitySpawnConfigGenerator {
         addFish(
             HybridAquaticEntityTypes.DRAGONFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
+                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH),
             2, 1, 2
         )
 
