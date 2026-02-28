@@ -30,7 +30,7 @@ import java.util.concurrent.Callable
 @Suppress("SameParameterValue")
 object HybridAquaticEntityTypes {
 
-    //#region fish
+    //#region Fish
     val AFRICAN_BUTTERFLYFISH = registerRiverFish(
         "african_butterflyfish",
         ::AfricanButterflyfishEntity,
@@ -443,11 +443,9 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(0.3f, 0.25f),
         DanioEntity::createMobAttributes
     )
+    //#endregion
 
-    //endregion
-
-    //#region cephalopods
-
+    //#region Cephalopods
     val ARROW_SQUID = registerCephalopod(
         "arrow_squid",
         ::ArrowSquidEntity,
@@ -510,11 +508,9 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(0.4f, 0.4f),
         NautilusEntity::createMobAttributes
     )
+    //#endregion
 
-    //endregion
-
-    //#region crustaceans
-
+    //#region Crustaceans
     val COCONUT_CRAB = registerCrustacean(
         "coconut_crab",
         ::CoconutCrabEntity,
@@ -626,8 +622,9 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(0.5f, 0.3f),
         GiantIsopodEntity::createMobAttributes
     )
+    //#endregion
 
-        //#region Miniboss & Minion
+    //#region Miniboss & Minion
     val KARKINOS = registerMiniboss(
         "karkinos",
         ::KarkinosEntity,
@@ -662,10 +659,9 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(2.0f, 2.0f),
         ShellBeastEntity::createMobAttributes
     )
-        //#endregion
     //#endregion
 
-    //#region critters
+    //#region Critters
     val SEA_SLUG = registerCritter(
         "sea_slug",
         ::SeaSlugEntity,
@@ -700,10 +696,9 @@ object HybridAquaticEntityTypes {
         EntityDimensions.scalable(0.5f, 0.2f),
         StarfishEntity::createMobAttributes
     )
-
     //endregion
 
-    //#region jellyfish
+    //#region Jellyfish
     val CROWN_JELLYFISH = registerJellyUnderground(
         "crown_jellyfish",
         ::CrownJellyfishEntity,
@@ -794,10 +789,9 @@ object HybridAquaticEntityTypes {
         EntityDimensions.scalable(0.75f, 0.75f),
         SeaNettleEntity::createMobAttributes
     )
+    //#endregion
 
-    //endregion
-
-    //#region sharks
+    //#region Sharks
     val BASKING_SHARK = registerShark(
         "basking_shark",
         ::BaskingSharkEntity,
@@ -817,6 +811,20 @@ object HybridAquaticEntityTypes {
         ::FrilledSharkEntity,
         EntityDimensions.fixed(1.25f, 0.5f),
         FrilledSharkEntity::createMobAttributes
+    )
+
+    val SIXGILL_SHARK = registerSharkUnderground(
+        "sixgill_shark",
+        ::SixgillSharkEntity,
+        EntityDimensions.fixed(1.75f, 0.6f),
+        SixgillSharkEntity::createMobAttributes
+    )
+
+    val SLEEPER_SHARK = registerSharkUnderground(
+        "sleeper_shark",
+        ::SleeperSharkEntity,
+        EntityDimensions.fixed(1.75f, 0.6f),
+        SleeperSharkEntity::createMobAttributes
     )
 
     val HOUND_SHARK = registerShark(
@@ -861,31 +869,15 @@ object HybridAquaticEntityTypes {
         SandTigerSharkEntity::createMobAttributes
     )
 
-    val SIXGILL_SHARK = registerShark(
-        "sixgill_shark",
-        ::SixgillSharkEntity,
-        EntityDimensions.fixed(1.75f, 0.6f),
-        SixgillSharkEntity::createMobAttributes
-    )
-
-    val SLEEPER_SHARK = registerShark(
-        "sleeper_shark",
-        ::SleeperSharkEntity,
-        EntityDimensions.fixed(1.75f, 0.6f),
-        SleeperSharkEntity::createMobAttributes
-    )
-
     val WHALE_SHARK = registerShark(
         "whale_shark",
         ::WhaleSharkEntity,
         EntityDimensions.fixed(2.5f, 0.8f),
         WhaleSharkEntity::createMobAttributes
     )
+    //#endregion
 
-    //endregion
-
-    //#region mammals
-
+    //#region Mammals
     val OTTER = registerMammal(
         "otter",
         ::OtterEntity,
@@ -913,13 +905,15 @@ object HybridAquaticEntityTypes {
         EntityDimensions.fixed(2.5f, 1.0f),
         OrcaEntity::createMobAttributes
     )
+    //#endregion
 
+    //#region Misc Entities
     val DEPTH_CHARGE = registerMisc(
         "depth_charge",
         ::PrimedDepthChargeEntity,
         EntityDimensions.fixed(0.98f, 0.98f)
     )
-    //endregion
+    //#endregion
 
     private fun <T : LivingEntity> registerShark(
         id: String,
