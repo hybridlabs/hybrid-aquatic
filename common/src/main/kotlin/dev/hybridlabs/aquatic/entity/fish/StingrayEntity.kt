@@ -27,7 +27,9 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<StingrayEntity.Companion.Type> {
+class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world),
+    VariantHolder<StingrayEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
 

@@ -16,8 +16,12 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
-    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.ALL_SHARKS)
+class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HybridAquaticEntityTags.ALL_SHARKS
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

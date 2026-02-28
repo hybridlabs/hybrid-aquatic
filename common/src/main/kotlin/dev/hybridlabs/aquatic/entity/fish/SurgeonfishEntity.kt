@@ -24,7 +24,9 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class SurgeonfishEntity(type: EntityType<out SurgeonfishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<SurgeonfishEntity.Companion.Type> {
+class SurgeonfishEntity(type: EntityType<out SurgeonfishEntity>, world: Level) :
+    HybridAquaticSchoolingFishEntity(type, world),
+    VariantHolder<SurgeonfishEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,

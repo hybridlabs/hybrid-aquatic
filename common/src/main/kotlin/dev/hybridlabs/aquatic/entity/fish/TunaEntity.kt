@@ -27,7 +27,9 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class TunaEntity(type: EntityType<out TunaEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<TunaEntity.Companion.Type> {
+class TunaEntity(type: EntityType<out TunaEntity>, world: Level) :
+    HybridAquaticSchoolingFishEntity(type, world),
+    VariantHolder<TunaEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
 

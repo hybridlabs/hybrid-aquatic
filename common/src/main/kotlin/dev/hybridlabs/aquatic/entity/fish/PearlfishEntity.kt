@@ -7,7 +7,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class PearlfishEntity(type: EntityType<out PearlfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class PearlfishEntity(type: EntityType<out PearlfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
         HybridAquaticEntityTags.LARGE_CREATURES,

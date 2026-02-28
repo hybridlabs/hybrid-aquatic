@@ -13,7 +13,9 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.UUID
 
-class GoldenDoradoEntity(type: EntityType<out GoldenDoradoEntity>, world: Level) : HybridAquaticFishEntity(type, world), NeutralMob {
+class GoldenDoradoEntity(type: EntityType<out GoldenDoradoEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world),
+    NeutralMob {
 
     private var angerTime = 0
     private var angryAt: UUID? = null

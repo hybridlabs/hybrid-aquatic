@@ -22,7 +22,8 @@ import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class SeaCucumberEntity(type: EntityType<out SeaCucumberEntity>, world: Level) : HybridAquaticCritterEntity(type, world),
+class SeaCucumberEntity(type: EntityType<out SeaCucumberEntity>, world: Level) :
+    HybridAquaticCritterEntity(type, world),
     VariantHolder<SeaCucumberEntity.Companion.Type> {
 
     override fun remove(reason: RemovalReason) {
@@ -111,7 +112,7 @@ class SeaCucumberEntity(type: EntityType<out SeaCucumberEntity>, world: Level) :
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome)

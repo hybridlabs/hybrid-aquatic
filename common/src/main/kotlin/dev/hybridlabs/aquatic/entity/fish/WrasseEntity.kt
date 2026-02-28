@@ -21,7 +21,9 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<WrasseEntity.Companion.Type> {
+class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world),
+    VariantHolder<WrasseEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
 

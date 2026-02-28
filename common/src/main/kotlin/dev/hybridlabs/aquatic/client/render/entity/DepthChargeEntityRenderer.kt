@@ -13,7 +13,8 @@ import net.minecraft.client.renderer.texture.TextureAtlas
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 
-class DepthChargeEntityRenderer(context: EntityRendererProvider.Context) : EntityRenderer<PrimedDepthChargeEntity>(context) {
+class DepthChargeEntityRenderer(context: EntityRendererProvider.Context) :
+    EntityRenderer<PrimedDepthChargeEntity>(context) {
     private val blockRenderer: BlockRenderDispatcher
 
     init {

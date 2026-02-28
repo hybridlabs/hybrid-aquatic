@@ -7,7 +7,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class TriggerfishEntity(type: EntityType<out TriggerfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class TriggerfishEntity(type: EntityType<out TriggerfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {

@@ -26,7 +26,9 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class FlashlightFishEntity(type: EntityType<out FlashlightFishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world) {
+class FlashlightFishEntity(type: EntityType<out FlashlightFishEntity>, world: Level) :
+    HybridAquaticSchoolingFishEntity(type, world) {
+
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
         HybridAquaticEntityTags.LARGE_CREATURES,

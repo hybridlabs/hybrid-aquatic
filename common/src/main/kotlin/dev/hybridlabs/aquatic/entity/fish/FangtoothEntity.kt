@@ -16,7 +16,8 @@ import net.minecraft.world.level.Level
 import java.util.UUID
 
 class FangtoothEntity(entityType: EntityType<out FangtoothEntity>, world: Level) :
-    HybridAquaticFishEntity(entityType, world), NeutralMob {
+    HybridAquaticFishEntity(entityType, world),
+    NeutralMob {
 
     override fun getTargetConfig() = TARGET_CONFIG
 

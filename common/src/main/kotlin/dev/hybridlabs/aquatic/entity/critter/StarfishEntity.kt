@@ -32,9 +32,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
-    HybridAquaticCritterEntity(
-        entityType, world
-    ),
+    HybridAquaticCritterEntity(entityType, world),
     VariantHolder<StarfishEntity.Companion.Type>, OverlayTextureFeature {
 
     override fun getDimensions(pose: Pose): EntityDimensions {

@@ -22,9 +22,15 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class RockfishEntity(type: EntityType<out RockfishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<RockfishEntity.Companion.Type> {
+class RockfishEntity(type: EntityType<out RockfishEntity>, world: Level) :
+    HybridAquaticSchoolingFishEntity(type, world),
+    VariantHolder<RockfishEntity.Companion.Type> {
+
     override fun getTargetConfig() =
-        MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.LARGE_CREATURES, HybridAquaticEntityTags.ALL_SHARKS)
+        MobTargetConfiguration.ofPrey(
+            HybridAquaticEntityTags.LARGE_CREATURES,
+            HybridAquaticEntityTags.ALL_SHARKS
+        )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4

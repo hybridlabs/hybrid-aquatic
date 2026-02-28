@@ -91,9 +91,9 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
         this.variant = Type.fromId(variant)
 
         if (spawnReason == MobSpawnType.CHUNK_GENERATION || spawnReason == MobSpawnType.NATURAL) {
-            val fishCount = (this.maxSpawnClusterSize * this.random.nextFloat()).toInt()
-            if (fishCount > 0 && !level().isClientSide()) {
-                for (i in 0 until  fishCount) {
+            val jellyfishCount = (this.maxSpawnClusterSize * this.random.nextFloat()).toInt()
+            if (jellyfishCount > 0 && !level().isClientSide()) {
+                for (i in 0 until  jellyfishCount) {
                     val distance = 1.5f
                     val entity = SeaNettleEntity(HybridAquaticEntityTypes.SEA_NETTLE.get(), this.level())
                     entity.variant = this.variant
@@ -109,6 +109,7 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
         return spawnData
     }
 
+    //#region Data
     override fun defineSynchedData() {
         entityData.define(TYPE, 0)
         super.defineSynchedData()
@@ -123,6 +124,7 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
         this.variant = Type.byName(nbt.getString("Type"))
         super.readAdditionalSaveData(nbt)
     }
+    //#endregion
 
     override fun getVariant(): Type {
         return Type.fromId((entityData.get(TYPE) as Int))

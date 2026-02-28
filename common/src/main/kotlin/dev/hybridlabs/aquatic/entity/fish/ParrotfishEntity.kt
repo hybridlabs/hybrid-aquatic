@@ -14,9 +14,14 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
-class ParrotfishEntity(type: EntityType<out ParrotfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class ParrotfishEntity(type: EntityType<out ParrotfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getTargetConfig() =
-        MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.LARGE_CREATURES, HybridAquaticEntityTags.ALL_SHARKS)
+        MobTargetConfiguration.ofPrey(
+            HybridAquaticEntityTags.LARGE_CREATURES,
+            HybridAquaticEntityTags.ALL_SHARKS
+        )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

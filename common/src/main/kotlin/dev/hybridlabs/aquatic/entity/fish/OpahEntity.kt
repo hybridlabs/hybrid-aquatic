@@ -11,7 +11,9 @@ import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
-class OpahEntity(type: EntityType<out OpahEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class OpahEntity(type: EntityType<out OpahEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {

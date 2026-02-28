@@ -10,12 +10,24 @@ import net.minecraft.world.level.material.FluidState
 import java.util.*
 
 class UnderwaterExplosionDamageCalculator : ExplosionDamageCalculator() {
-    override fun getBlockExplosionResistance(explosion: Explosion, reader: BlockGetter, pos: BlockPos, state: BlockState, fluid: FluidState): Optional<Float> {
+    override fun getBlockExplosionResistance(
+        explosion: Explosion,
+        reader: BlockGetter,
+        pos: BlockPos,
+        state: BlockState,
+        fluid: FluidState,
+    ): Optional<Float> {
         if (state.fluidState.`is`(FluidTags.WATER)) return Optional.of(0f)
         return super.getBlockExplosionResistance(explosion, reader, pos, state, fluid)
     }
 
-    override fun shouldBlockExplode(explosion: Explosion, reader: BlockGetter, pos: BlockPos, state: BlockState, power: Float): Boolean {
+    override fun shouldBlockExplode(
+        explosion: Explosion,
+        reader: BlockGetter,
+        pos: BlockPos,
+        state: BlockState,
+        power: Float,
+    ): Boolean {
         if (state.fluidState.`is`(FluidTags.WATER)) return false
 
         return super.shouldBlockExplode(explosion, reader, pos, state, power)

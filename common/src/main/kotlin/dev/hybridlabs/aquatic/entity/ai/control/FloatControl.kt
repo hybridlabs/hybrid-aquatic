@@ -5,7 +5,7 @@ import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.phys.Vec3
 import kotlin.math.max
 
-// credit to fowl play for the code
+// credit to Fowl Play for the code
 
 class FloatControl(mammal: HybridAquaticMammalEntity) : MoveControl(mammal) {
     override fun tick() {

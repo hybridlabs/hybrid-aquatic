@@ -15,7 +15,9 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.UUID
 
-class AnglerfishEntity(type: EntityType<out AnglerfishEntity>, world: Level) : HybridAquaticFishEntity(type, world), NeutralMob {
+class AnglerfishEntity(type: EntityType<out AnglerfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world),
+    NeutralMob {
 
     private var angerTime = 0
     private var angryAt: UUID? = null

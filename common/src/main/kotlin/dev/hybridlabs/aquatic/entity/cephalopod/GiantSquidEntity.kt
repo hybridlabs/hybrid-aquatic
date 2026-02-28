@@ -20,10 +20,12 @@ class GiantSquidEntity(type: EntityType<out GiantSquidEntity>, world: Level) : H
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.ALL_CRUSTACEANS
+                HybridAquaticEntityTags.SMALL_CREATURES,
+                HybridAquaticEntityTags.MEDIUM_CREATURES,
             ),
             listOf(
-                HybridAquaticEntityTags.ALL_SHARKS
+                HybridAquaticEntityTags.ALL_SHARKS,
+                HybridAquaticEntityTags.WHALE,
             ),
         )
 

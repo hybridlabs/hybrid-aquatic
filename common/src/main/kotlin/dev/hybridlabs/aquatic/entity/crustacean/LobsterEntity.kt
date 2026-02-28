@@ -22,9 +22,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class LobsterEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(
-        entityType, world, false
-    ),
+    HybridAquaticCrustaceanEntity(entityType, world, false),
     VariantHolder<LobsterEntity.Companion.Type> {
 
     override fun finalizeSpawn(

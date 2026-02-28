@@ -25,7 +25,9 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class MahiEntity(type: EntityType<out MahiEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), VariantHolder<MahiEntity.Companion.Type> {
+class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
+    HybridAquaticSchoolingFishEntity(type, world),
+    VariantHolder<MahiEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
 

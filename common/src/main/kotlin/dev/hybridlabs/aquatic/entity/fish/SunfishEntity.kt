@@ -9,7 +9,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 
-class SunfishEntity(type: EntityType<out SunfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class SunfishEntity(type: EntityType<out SunfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
         HybridAquaticEntityTags.LARGE_CREATURES,

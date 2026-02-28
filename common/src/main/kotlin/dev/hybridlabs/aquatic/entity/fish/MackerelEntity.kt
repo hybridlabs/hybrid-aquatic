@@ -18,7 +18,9 @@ import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
-class MackerelEntity(type: EntityType<out MackerelEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world) {
+class MackerelEntity(type: EntityType<out MackerelEntity>, world: Level) :
+    HybridAquaticSchoolingFishEntity(type, world) {
+
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
         HybridAquaticEntityTags.LARGE_CREATURES,

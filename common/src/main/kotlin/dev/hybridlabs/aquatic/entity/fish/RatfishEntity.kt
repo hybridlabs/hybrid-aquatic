@@ -7,7 +7,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class RatfishEntity(type: EntityType<out RatfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class RatfishEntity(type: EntityType<out RatfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getTargetConfig() = MobTargetConfiguration.create(
         listOf(
             HybridAquaticEntityTags.ALL_CRUSTACEANS

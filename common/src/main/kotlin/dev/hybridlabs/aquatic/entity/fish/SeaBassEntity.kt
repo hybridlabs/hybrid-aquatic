@@ -7,9 +7,14 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class SeaBassEntity(type: EntityType<out SeaBassEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class SeaBassEntity(type: EntityType<out SeaBassEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getTargetConfig() =
-        MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.LARGE_CREATURES, HybridAquaticEntityTags.ALL_SHARKS)
+        MobTargetConfiguration.ofPrey(
+            HybridAquaticEntityTags.LARGE_CREATURES,
+            HybridAquaticEntityTags.ALL_SHARKS
+        )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 3

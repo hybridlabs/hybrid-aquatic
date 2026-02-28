@@ -9,7 +9,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 
-class ShinerEntity(type: EntityType<out ShinerEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world) {
+class ShinerEntity(type: EntityType<out ShinerEntity>, world: Level) :
+    HybridAquaticSchoolingFishEntity(type, world) {
+
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
         HybridAquaticEntityTags.LARGE_CREATURES,

@@ -25,7 +25,9 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.function.Predicate
 
-class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
         HybridAquaticEntityTags.LARGE_CREATURES,

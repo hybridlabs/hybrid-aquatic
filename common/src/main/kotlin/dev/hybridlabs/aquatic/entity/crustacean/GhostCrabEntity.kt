@@ -11,9 +11,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("UNUSED_PARAMETER", "DEPRECATION")
 class GhostCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(
-        entityType, world, true
-    ) {
+    HybridAquaticCrustaceanEntity(entityType, world, true) {
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

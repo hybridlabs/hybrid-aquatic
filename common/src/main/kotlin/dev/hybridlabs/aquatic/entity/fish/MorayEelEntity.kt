@@ -9,7 +9,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
-class MorayEelEntity(type: EntityType<out MorayEelEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class MorayEelEntity(type: EntityType<out MorayEelEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {

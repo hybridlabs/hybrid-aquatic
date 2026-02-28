@@ -22,7 +22,9 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import java.util.UUID
 
-class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) : HybridAquaticFishEntity(type, world), NeutralMob {
+class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world),
+    NeutralMob {
 
     private var angerTime = 0
     private var angryAt: UUID? = null

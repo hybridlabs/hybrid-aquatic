@@ -30,7 +30,9 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 import java.util.UUID
 
-class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world), NeutralMob {
+class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
+    HybridAquaticSchoolingFishEntity(type, world),
+    NeutralMob {
 
     override fun getTargetConfig() = TARGET_CONFIG
 

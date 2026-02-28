@@ -3,7 +3,10 @@ package dev.hybridlabs.aquatic.entity.ai.goal
 import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
 import net.minecraft.world.entity.ai.goal.Goal
 
-open class WaterAnimalFollowParentGoal(private val waterAnimal: HybridAquaticWaterAnimal, private val speedModifier: Double) : Goal() {
+open class WaterAnimalFollowParentGoal(
+    private val waterAnimal: HybridAquaticWaterAnimal,
+    private val speedModifier: Double,
+) : Goal() {
     private var parent: HybridAquaticWaterAnimal? = null
     private var timeToRecalcPath = 0
 

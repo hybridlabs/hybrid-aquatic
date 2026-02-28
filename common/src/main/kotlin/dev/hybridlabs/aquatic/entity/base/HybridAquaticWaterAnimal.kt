@@ -20,7 +20,10 @@ import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import java.util.*
 
-abstract class HybridAquaticWaterAnimal protected constructor(entityType: EntityType<out HybridAquaticWaterAnimal>, level: Level) :
+abstract class HybridAquaticWaterAnimal protected constructor(
+    entityType: EntityType<out HybridAquaticWaterAnimal>,
+    level: Level,
+) :
     AgeableMob(entityType, level) {
     private var inLove = 0
     private var loveCause: UUID? = null

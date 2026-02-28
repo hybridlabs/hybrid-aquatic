@@ -16,7 +16,8 @@ import net.minecraft.world.level.Level
 import java.util.UUID
 
 class ViperfishEntity(entityType: EntityType<out ViperfishEntity>, world: Level) :
-    HybridAquaticFishEntity(entityType, world), NeutralMob {
+    HybridAquaticFishEntity(entityType, world),
+    NeutralMob {
 
     override fun getTargetConfig() = TARGET_CONFIG
 

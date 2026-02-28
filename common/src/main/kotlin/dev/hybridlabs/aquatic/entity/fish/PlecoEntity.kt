@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
@@ -21,8 +20,10 @@ import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
 import kotlin.random.Random
 
-class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) : HybridAquaticFishEntity(type, world),
+class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world),
     VariantHolder<PlecoEntity.Companion.Type> {
+
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
         HybridAquaticEntityTags.LARGE_CREATURES,

@@ -9,7 +9,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class NeedlefishEntity(type: EntityType<out NeedlefishEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world) {
+class NeedlefishEntity(type: EntityType<out NeedlefishEntity>, world: Level) :
+    HybridAquaticSchoolingFishEntity(type, world) {
+
     override fun getTargetConfig() = TARGET_CONFIG
 
     override fun registerGoals() {

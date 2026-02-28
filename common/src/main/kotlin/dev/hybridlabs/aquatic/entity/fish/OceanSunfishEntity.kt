@@ -29,7 +29,9 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level) : HybridAquaticFishEntity(type, world), VariantHolder<OceanSunfishEntity.Companion.Type> {
+class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world),
+    VariantHolder<OceanSunfishEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
 

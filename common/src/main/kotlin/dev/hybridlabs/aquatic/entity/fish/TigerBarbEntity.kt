@@ -10,7 +10,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class TigerBarbEntity(type: EntityType<out TigerBarbEntity>, world: Level) : HybridAquaticSchoolingFishEntity(type, world) {
+class TigerBarbEntity(type: EntityType<out TigerBarbEntity>, world: Level) :
+    HybridAquaticSchoolingFishEntity(type, world) {
+
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
         HybridAquaticEntityTags.LARGE_CREATURES,

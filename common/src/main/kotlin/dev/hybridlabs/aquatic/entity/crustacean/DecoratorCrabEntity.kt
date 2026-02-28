@@ -124,6 +124,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         return -5
     }
 
+    //#region Data
     override fun defineSynchedData() {
         entityData.define(TYPE, 0)
         entityData.define(CORAL_TIMER, 0)
@@ -141,6 +142,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         this.coralTimer = nbt.getInt("CoralTimer")
         super.readAdditionalSaveData(nbt)
     }
+    //#endregion
 
     override fun getVariant(): Type {
         return Type.fromId((entityData.get(TYPE) as Int))

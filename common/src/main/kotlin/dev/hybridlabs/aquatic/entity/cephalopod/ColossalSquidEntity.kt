@@ -20,10 +20,12 @@ class ColossalSquidEntity(type: EntityType<out ColossalSquidEntity>, world: Leve
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.ALL_CRUSTACEANS
+                HybridAquaticEntityTags.SMALL_CREATURES,
+                HybridAquaticEntityTags.MEDIUM_CREATURES,
             ),
             listOf(
-                HybridAquaticEntityTags.ALL_SHARKS
+                HybridAquaticEntityTags.ALL_SHARKS,
+                HybridAquaticEntityTags.WHALE,
             ),
         )
 

@@ -24,8 +24,10 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) : HybridAquaticFishEntity(type, world),
+class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world),
     VariantHolder<ClownfishEntity.Companion.Type> {
+
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
         HybridAquaticEntityTags.LARGE_CREATURES,

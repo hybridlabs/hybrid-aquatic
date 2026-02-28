@@ -23,8 +23,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(
-        entityType, world, false),
+    HybridAquaticCrustaceanEntity(entityType, world, false),
     VariantHolder<HermitCrabEntity.Companion.Type> {
 
     override fun finalizeSpawn(

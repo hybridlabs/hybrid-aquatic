@@ -12,7 +12,9 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("unused", "DEPRECATION")
-class GoldfishEntity(type: EntityType<out GoldfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class GoldfishEntity(type: EntityType<out GoldfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HybridAquaticEntityTags.MEDIUM_CREATURES,
         HybridAquaticEntityTags.LARGE_CREATURES,

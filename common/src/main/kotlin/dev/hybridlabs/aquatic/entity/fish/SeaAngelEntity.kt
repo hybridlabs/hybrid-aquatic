@@ -5,7 +5,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class SeaAngelEntity(type: EntityType<out SeaAngelEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class SeaAngelEntity(type: EntityType<out SeaAngelEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getMaxSpawnClusterSize(): Int {
         return 1
     }

@@ -12,7 +12,9 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) : HybridAquaticFishEntity(type, world) {
+class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
     override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
