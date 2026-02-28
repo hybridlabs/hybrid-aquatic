@@ -127,10 +127,10 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Biomes.WARM_OCEAN)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.DEEP_WARM_OCEAN)
-            .add(HybridAquaticBiomes.DEEP_WARM_OCEAN)
+            .addOptional(HybridAquaticBiomes.DEEP_WARM_OCEAN)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.WARM_TRENCH)
-            .add(HybridAquaticBiomes.WARM_TRENCH)
+            .addOptional(HybridAquaticBiomes.WARM_TRENCH)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.CORAL_REEF)
             .addOptional(HybridAquaticBiomes.CORAL_REEF)

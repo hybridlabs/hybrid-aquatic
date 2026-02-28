@@ -366,6 +366,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.FRILLED_SHARK.get(),
                 HybridAquaticEntityTypes.HAMMERHEAD_SHARK.get(),
                 HybridAquaticEntityTypes.THRESHER_SHARK.get(),
+                HybridAquaticEntityTypes.SIXGILL_SHARK.get(),
+                HybridAquaticEntityTypes.SLEEPER_SHARK.get(),
             )
             .addOptional(ResourceLocation("alexsmobs", "frilled_shark"))
             .addOptional(ResourceLocation("alexsmobs", "hammerhead_shark"))
