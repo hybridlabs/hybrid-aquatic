@@ -16,6 +16,9 @@ import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralClawFeature
 import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralMushroomFeature
 import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralTableFeature
 import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralTreeFeature
+import dev.hybridlabs.aquatic.world.gen.feature.kelp.BullKelpFeature
+import dev.hybridlabs.aquatic.world.gen.feature.kelp.BullKelpFeatureConfig
+import dev.hybridlabs.aquatic.world.gen.feature.kelp.SargassumFeature
 import dev.hybridlabs.aquatic.world.gen.feature.kelp.SargassumFeatureConfig
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration

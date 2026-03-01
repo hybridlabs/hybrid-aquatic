@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.block;
+package dev.hybridlabs.aquatic.block
 
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -41,7 +41,7 @@ open class BaseAnemoneBlock(settings: Properties) : DirectionalBlock(settings),
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
         val fluidState = context.level.getFluidState(context.clickedPos)
-        val baseState = this.defaultBlockState().setValue(FACING, context.clickedFace);
+        val baseState = this.defaultBlockState().setValue(FACING, context.clickedFace)
 
         return if (fluidState.`is`(FluidTags.WATER)) {
             baseState.setValue(WATERLOGGED, true)
