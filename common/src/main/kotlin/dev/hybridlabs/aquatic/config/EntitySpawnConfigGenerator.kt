@@ -21,6 +21,7 @@ class EntitySpawnConfigGenerator {
         addRiverFish(
             HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
             listOf(
+                HybridAquaticBiomeTags.TROPICAL_RIVERS,
                 HybridAquaticBiomeTags.JUNGLE,
                 HybridAquaticBiomeTags.MARSHES,
                 HybridAquaticBiomeTags.MANGROVES),
@@ -78,6 +79,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SWAMP,
                 HybridAquaticBiomeTags.MANGROVES,
                 HybridAquaticBiomeTags.JUNGLE,
+                HybridAquaticBiomeTags.TROPICAL_RIVERS,
                 HybridAquaticBiomeTags.MARSHES),
             1, 1, 2
         )
@@ -540,7 +542,9 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.FIREFLY_SQUID.get(),
             listOf(
                 HybridAquaticBiomeTags.LUKEWARM_OCEANS,
+                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
                 HybridAquaticBiomeTags.WARM_OCEAN,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.CORAL_REEF),
             10, 1, 2
         )
