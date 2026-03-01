@@ -84,11 +84,7 @@ object HybridAquaticForge {
 
         HybridAquaticModBusEvents
 
-        FORGE_BUS.addListener(HybridAquaticCustomTrades::registerWandererTrades)
-        FORGE_BUS.addListener(HybridAquaticCustomTrades::registerCustomTrades)
         EVENT_BUS.addListener(::makeBlocksBreatheable)
-
-
 
     }
 
