@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic
 
-import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
@@ -26,7 +25,7 @@ import dev.hybridlabs.aquatic.fluid.HybridAquaticFluids
 import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
-import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier
+import dev.hybridlabs.aquatic.loot.HybridAquaticGlobalLootModifier
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
 import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings
@@ -44,7 +43,6 @@ import net.minecraft.tags.FluidTags
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.minecraftforge.client.event.EntityRenderersEvent
 import net.minecraftforge.common.MinecraftForge.EVENT_BUS
-import net.minecraftforge.common.loot.IGlobalLootModifier
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.event.entity.living.LivingBreatheEvent
 import net.minecraftforge.fml.common.Mod
@@ -52,8 +50,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.minecraftforge.registries.DataPackRegistryEvent
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
@@ -69,7 +65,7 @@ object HybridAquaticForge {
 
         ForgeSpawnGroupRegistry.createHybridAquaticSpawnGroups()
         StructureSpawnModifier.registerHybridAquaticStructureModifiers()
-        registerGlobalLootModifiers()
+        HybridAquaticGlobalLootModifier.registerGlobalLootModifiers()
 
         HybridAquaticBlocks
         HybridAquaticFluids
@@ -228,11 +224,5 @@ object HybridAquaticForge {
         event.enqueueWork {
             HybridAquaticPotions.registerPotionRecipes()
         }
-    }
-
-    private fun registerGlobalLootModifiers(){
-        val lootModifiers = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Constants.MOD_ID)
-        lootModifiers.register(MOD_BUS)
-        lootModifiers.register<Codec<out IGlobalLootModifier>>("ha_loot_modifier", HAGlobalLootModifier::CODEC)
     }
 }
