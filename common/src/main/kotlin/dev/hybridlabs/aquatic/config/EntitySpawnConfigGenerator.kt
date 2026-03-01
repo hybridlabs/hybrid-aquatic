@@ -434,6 +434,8 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.OARFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS,
+                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
             1, 1, 2
         )
@@ -796,8 +798,11 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.LANTERN_SHARK.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_REEF,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS),
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS,
+                HybridAquaticBiomeTags.LUKEWARM_TRENCH),
             2, 1, 2
         )
         //#endregion
@@ -966,7 +971,9 @@ class EntitySpawnConfigGenerator {
         addCrustacean(
             HybridAquaticEntityTypes.YETI_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.HAS_THERMAL_VENTS),
+                HybridAquaticBiomeTags.HAS_THERMAL_VENTS,
+                HybridAquaticBiomeTags.ARCTIC_TRENCH,
+                HybridAquaticBiomeTags.COLD_TRENCH),
             2, 1, 2
         )
 
@@ -974,8 +981,11 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.GIANT_ISOPOD.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_REEF,
-                HybridAquaticBiomeTags.COLD_OCEANS,
-                HybridAquaticBiomeTags.TEMPERATE_OCEANS),
+                HybridAquaticBiomeTags.WARM_TRENCH,
+                HybridAquaticBiomeTags.TEMPERATE_OCEANS,
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.COLD_TRENCH,
+                HybridAquaticBiomeTags.COLD_OCEANS),
             1, 1, 2
         )
 
@@ -983,7 +993,10 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.SPIDER_CRAB.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_REEF,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.TEMPERATE_OCEANS,
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.COLD_OCEANS),
             2, 1, 2
         )
