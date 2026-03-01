@@ -45,7 +45,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeat
 import net.minecraftforge.client.event.EntityRenderersEvent
 import net.minecraftforge.common.MinecraftForge.EVENT_BUS
 import net.minecraftforge.common.loot.IGlobalLootModifier
-import net.minecraftforge.common.world.StructureModifier
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.event.entity.living.LivingBreatheEvent
 import net.minecraftforge.fml.common.Mod
@@ -69,7 +68,7 @@ object HybridAquaticForge {
         CommonClass.init()
 
         ForgeSpawnGroupRegistry.createHybridAquaticSpawnGroups()
-        registerStructureModifiers()
+        StructureSpawnModifier.registerHybridAquaticStructureModifiers()
         registerGlobalLootModifiers()
 
         HybridAquaticBlocks
@@ -229,16 +228,6 @@ object HybridAquaticForge {
         event.enqueueWork {
             HybridAquaticPotions.registerPotionRecipes()
         }
-    }
-
-    private fun registerStructureModifiers() {
-        val structureModifiers: DeferredRegister<Codec<out StructureModifier?>?> =
-            DeferredRegister.create(ForgeRegistries.Keys.STRUCTURE_MODIFIER_SERIALIZERS, Constants.MOD_ID)
-        structureModifiers.register(MOD_BUS)
-        structureModifiers.register<Codec<out StructureModifier?>?>(
-            "ha_structure_spawns",
-            StructureSpawnModifier::makeCodec
-        )
     }
 
     private fun registerGlobalLootModifiers(){
