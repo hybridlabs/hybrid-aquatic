@@ -9,8 +9,10 @@ import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.level.levelgen.structure.Structure
 import net.minecraftforge.common.world.ModifiableStructureInfo
 import net.minecraftforge.common.world.StructureModifier
+import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.ForgeRegistries
 import net.minecraftforge.registries.RegistryObject
+import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
 
 class StructureSpawnModifier(val spawnModifier: SpawnModifier) : StructureModifier {
@@ -28,6 +30,16 @@ class StructureSpawnModifier(val spawnModifier: SpawnModifier) : StructureModifi
                     SpawnModifier.CODEC.fieldOf("modifier").forGetter { modifier -> modifier.spawnModifier }
                 ).apply(instance, ::StructureSpawnModifier)
             }
+        }
+
+        fun registerHybridAquaticStructureModifiers() {
+            val structureModifiers: DeferredRegister<Codec<out StructureModifier?>?> =
+                DeferredRegister.create(ForgeRegistries.Keys.STRUCTURE_MODIFIER_SERIALIZERS, Constants.MOD_ID)
+            structureModifiers.register(MOD_BUS)
+            structureModifiers.register<Codec<out StructureModifier?>?>(
+                "ha_structure_spawns",
+                StructureSpawnModifier::makeCodec
+            )
         }
     }
 
