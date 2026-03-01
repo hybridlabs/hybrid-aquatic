@@ -3,6 +3,7 @@
   "values": [
     "hybrid-aquatic:diving_suit",
     "hybrid-aquatic:reinforced_diving_suit",
+    "hybrid-aquatic:glowing_diving_suit",
     {
       "id": "aquamirae:three_bolt_chestplate",
       "required": false

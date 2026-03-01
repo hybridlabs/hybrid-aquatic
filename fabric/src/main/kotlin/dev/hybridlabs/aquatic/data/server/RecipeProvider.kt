@@ -449,7 +449,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
             Ingredient.of(HybridAquaticItems.DIVING_HELMET.get()),
-            Ingredient.of(HybridAquaticItems.PEARL.get()),
+            Ingredient.of(HybridAquaticItems.BLACK_PEARL.get()),
             RecipeCategory.COMBAT,
             HybridAquaticItems.REINFORCED_DIVING_HELMET.get()
         )
@@ -463,7 +463,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
             Ingredient.of(HybridAquaticItems.DIVING_SUIT.get()),
-            Ingredient.of(HybridAquaticItems.PEARL.get()),
+            Ingredient.of(HybridAquaticItems.BLACK_PEARL.get()),
             RecipeCategory.COMBAT,
             HybridAquaticItems.REINFORCED_DIVING_SUIT.get()
         )
@@ -477,7 +477,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
             Ingredient.of(HybridAquaticItems.DIVING_LEGGINGS.get()),
-            Ingredient.of(HybridAquaticItems.PEARL.get()),
+            Ingredient.of(HybridAquaticItems.BLACK_PEARL.get()),
             RecipeCategory.COMBAT,
             HybridAquaticItems.REINFORCED_DIVING_LEGGINGS.get()
         )
@@ -491,7 +491,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
             Ingredient.of(HybridAquaticItems.DIVING_BOOTS.get()),
-            Ingredient.of(HybridAquaticItems.PEARL.get()),
+            Ingredient.of(HybridAquaticItems.BLACK_PEARL.get()),
             RecipeCategory.COMBAT,
             HybridAquaticItems.REINFORCED_DIVING_BOOTS.get()
         )
@@ -501,6 +501,63 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_boots_upgrade"))
+
+
+        SmithingTransformRecipeBuilder.smithing(
+            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HybridAquaticItems.DIVING_HELMET.get()),
+            Ingredient.of(HybridAquaticItems.GLOWSLIME.get()),
+            RecipeCategory.COMBAT,
+            HybridAquaticItems.GLOWING_DIVING_HELMET.get()
+        )
+            .unlocks("has_diving_helmet",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    HybridAquaticItems.DIVING_HELMET.get()
+                )
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_helmet_upgrade"))
+
+        SmithingTransformRecipeBuilder.smithing(
+            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HybridAquaticItems.DIVING_SUIT.get()),
+            Ingredient.of(HybridAquaticItems.GLOWSLIME.get()),
+            RecipeCategory.COMBAT,
+            HybridAquaticItems.GLOWING_DIVING_SUIT.get()
+        )
+            .unlocks("has_diving_suit",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    HybridAquaticItems.DIVING_SUIT.get()
+                )
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_suit_upgrade"))
+
+        SmithingTransformRecipeBuilder.smithing(
+            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HybridAquaticItems.DIVING_LEGGINGS.get()),
+            Ingredient.of(HybridAquaticItems.GLOWSLIME.get()),
+            RecipeCategory.COMBAT,
+            HybridAquaticItems.GLOWING_DIVING_LEGGINGS.get()
+        )
+            .unlocks("has_diving_leggings",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    HybridAquaticItems.DIVING_LEGGINGS.get()
+                )
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_leggings_upgrade"))
+
+        SmithingTransformRecipeBuilder.smithing(
+            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HybridAquaticItems.DIVING_BOOTS.get()),
+            Ingredient.of(HybridAquaticItems.GLOWSLIME.get()),
+            RecipeCategory.COMBAT,
+            HybridAquaticItems.GLOWING_DIVING_BOOTS.get()
+        )
+            .unlocks("has_diving_boots",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    HybridAquaticItems.DIVING_BOOTS.get()
+                )
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_boots_upgrade"))
 
         //#endregion
 

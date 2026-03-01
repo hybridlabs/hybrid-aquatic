@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing_transform",
   "addition": {
-    "item": "hybrid-aquatic:pearl"
+    "item": "hybrid-aquatic:black_pearl"
   },
   "base": {
     "item": "hybrid-aquatic:diving_leggings"

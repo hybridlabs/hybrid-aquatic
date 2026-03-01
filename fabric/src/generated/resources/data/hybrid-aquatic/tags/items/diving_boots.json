@@ -3,6 +3,7 @@
   "values": [
     "hybrid-aquatic:diving_boots",
     "hybrid-aquatic:reinforced_diving_boots",
+    "hybrid-aquatic:glowing_diving_boots",
     {
       "id": "create:copper_diving_boots",
       "required": false

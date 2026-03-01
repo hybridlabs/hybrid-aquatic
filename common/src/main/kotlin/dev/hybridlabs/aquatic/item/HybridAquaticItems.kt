@@ -91,6 +91,41 @@ object HybridAquaticItems {
     }
         //#endregion
 
+        //#region Glowing Diving Armor
+    val GLOWING_DIVING_HELMET = register(
+        "glowing_diving_helmet"
+    ) {
+            GLOWING_DIVING_ARMOR_FACTORY.create(
+            ArmorItem.Type.HELMET,
+            Item.Properties().stacksTo(1)
+        )
+    }
+
+    val GLOWING_DIVING_SUIT = register(
+        "glowing_diving_suit"
+    ) {
+        GLOWING_DIVING_ARMOR_FACTORY.create(
+            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+        )
+    }
+
+    val GLOWING_DIVING_LEGGINGS = register(
+        "glowing_diving_leggings"
+    ) {
+        GLOWING_DIVING_ARMOR_FACTORY.create(
+            ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1)
+        )
+    }
+
+    val GLOWING_DIVING_BOOTS = register(
+        "glowing_diving_boots"
+    ) {
+        GLOWING_DIVING_ARMOR_FACTORY.create(
+            ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
+        )
+    }
+        //#endregion
+
         //#region Nautilus Armor
     val NAUTILUS_HELMET = register(
         "nautilus_helmet"

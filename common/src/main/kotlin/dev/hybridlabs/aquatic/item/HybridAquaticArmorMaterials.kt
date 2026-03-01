@@ -24,7 +24,18 @@ enum class HybridAquaticArmorMaterials(
         15,
         intArrayOf(2, 5, 4, 2),
         9,
-        SoundEvents.ARMOR_EQUIP_CHAIN,
+        SoundEvents.ARMOR_EQUIP_IRON,
+        0.0f,
+        0.0f,
+        Supplier<Ingredient> { Ingredient.of(Items.COPPER_INGOT) }
+    ),
+
+    GLOWING_DIVING(
+        "glowing_diving",
+        15,
+        intArrayOf(2, 5, 4, 2),
+        9,
+        SoundEvents.ARMOR_EQUIP_GENERIC,
         0.0f,
         0.0f,
         Supplier<Ingredient> { Ingredient.of(Items.COPPER_INGOT) }
@@ -35,7 +46,7 @@ enum class HybridAquaticArmorMaterials(
         25,
         intArrayOf(3, 7, 5, 3),
         9,
-        SoundEvents.ARMOR_EQUIP_CHAIN, 1.0f, 0.0f,
+        SoundEvents.ARMOR_EQUIP_NETHERITE, 1.0f, 0.0f,
         Supplier<Ingredient> { Ingredient.of(Items.COPPER_INGOT) }
     ),
 

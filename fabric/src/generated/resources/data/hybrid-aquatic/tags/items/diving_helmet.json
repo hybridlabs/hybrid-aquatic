@@ -3,6 +3,7 @@
   "values": [
     "hybrid-aquatic:diving_helmet",
     "hybrid-aquatic:reinforced_diving_helmet",
+    "hybrid-aquatic:glowing_diving_helmet",
     {
       "id": "create:copper_diving_helmet",
       "required": false

@@ -391,6 +391,30 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             )
             .build(ResourceLocation("hybrid-aquatic", "reinforced_diving_suit"))
         consumer?.accept(reinforcedDivingSuitAdvancement)
+
+        val glowingDivingSuitAdvancement = Advancement.Builder.advancement()
+            .parent(divingUpgradeAdvancement)
+            .display(
+                HybridAquaticItems.GLOWING_DIVING_HELMET.get(),
+                Component.translatable("advancements.hybrid-aquatic.glowing_diving_suit.title"),
+                Component.translatable("advancements.hybrid-aquatic.glowing_diving_suit.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.GOAL,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "obtain_glowing_diving_suit",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    HybridAquaticItems.GLOWING_DIVING_HELMET.get(),
+                    HybridAquaticItems.GLOWING_DIVING_SUIT.get(),
+                    HybridAquaticItems.GLOWING_DIVING_LEGGINGS.get(),
+                    HybridAquaticItems.GLOWING_DIVING_BOOTS.get()
+                )
+            )
+            .build(ResourceLocation("hybrid-aquatic", "glowing_diving_suit"))
+        consumer?.accept(glowingDivingSuitAdvancement)
         //#endregion
 
         //#region Pearl Advancement Tree

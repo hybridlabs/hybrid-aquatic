@@ -1,13 +1,13 @@
 {
   "type": "minecraft:smithing_transform",
   "addition": {
-    "item": "hybrid-aquatic:black_pearl"
+    "item": "hybrid-aquatic:glowslime"
   },
   "base": {
-    "item": "hybrid-aquatic:diving_suit"
+    "item": "hybrid-aquatic:diving_leggings"
   },
   "result": {
-    "item": "hybrid-aquatic:reinforced_diving_suit"
+    "item": "hybrid-aquatic:glowing_diving_leggings"
   },
   "template": {
     "item": "hybrid-aquatic:diving_armor_upgrade_template"

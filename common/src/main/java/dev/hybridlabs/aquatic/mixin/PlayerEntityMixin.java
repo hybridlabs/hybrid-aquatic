@@ -49,6 +49,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
     @Unique
     private boolean isWearingDivingBoots;
     private boolean isWearingReinforcedDivingBoots;
+    private boolean isWearingGlowingDivingBoots;
 
     @Override
     public void hybrid_aquatic$setHurtTime(int value) {
@@ -72,7 +73,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
 
     @Inject(method = "isAffectedByFluids", at = @At("HEAD"), cancellable = true)
     private void overrideShouldSwimInFluids(CallbackInfoReturnable<Boolean> ci) {
-        if ((isWearingDivingBoots || isWearingReinforcedDivingBoots) && !isSwimming() && isUnderWater()) {
+        if ((isWearingDivingBoots || isWearingReinforcedDivingBoots || isWearingGlowingDivingBoots) && !isSwimming() && isUnderWater()) {
             ci.setReturnValue(false);
         }
     }
@@ -118,6 +119,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         // Allows player to walk in the water without jumping
         updateDivingBoots();
         updateReinforcedDivingBoots();
+        updateGlowingDivingBoots();
         // Gives Resistance and Slowness if player has Turtle chestplate equipped
         updateTurtleChestplate();
         // Repairs coral tools in the water
@@ -184,6 +186,23 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
                                 false));
             }
         }
+
+        if (itemStack.is(HybridAquaticItems.INSTANCE.getGLOWING_DIVING_HELMET().get())) {
+            if (!player.isEyeInFluid(FluidTags.WATER)) {
+                player.addEffect(
+                        new MobEffectInstance(
+                                MobEffects.WATER_BREATHING, 1800, 0, false, false, false));
+            } else {
+                player.addEffect(
+                        new MobEffectInstance(
+                                HybridAquaticMobEffects.INSTANCE.getCLARITY().get(),
+                                1800,
+                                0,
+                                false,
+                                false,
+                                false));
+            }
+        }
     }
 
     @Unique
@@ -198,6 +217,13 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         var player = (Player) (Object) this;
         ItemStack itemStack = player.getItemBySlot(EquipmentSlot.FEET);
         isWearingReinforcedDivingBoots = itemStack.is(HybridAquaticItems.INSTANCE.getREINFORCED_DIVING_BOOTS().get());
+    }
+
+    @Unique
+    private void updateGlowingDivingBoots() {
+        var player = (Player) (Object) this;
+        ItemStack itemStack = player.getItemBySlot(EquipmentSlot.FEET);
+        isWearingGlowingDivingBoots = itemStack.is(HybridAquaticItems.INSTANCE.getGLOWING_DIVING_BOOTS().get());
     }
 
     @Unique
