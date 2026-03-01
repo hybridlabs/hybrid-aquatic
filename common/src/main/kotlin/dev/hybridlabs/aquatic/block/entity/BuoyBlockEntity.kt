@@ -15,7 +15,8 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import software.bernie.geckolib.util.RenderUtils
 
 class BuoyBlockEntity(pos: BlockPos, state: BlockState) :
-    BlockEntity(HybridAquaticBlockEntityTypes.BUOY.get(), pos, state), GeoAnimatable {
+    BlockEntity(HybridAquaticBlockEntityTypes.BUOY.get(), pos, state),
+    GeoAnimatable {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
 
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {

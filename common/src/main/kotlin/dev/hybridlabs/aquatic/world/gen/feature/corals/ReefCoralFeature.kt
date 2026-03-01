@@ -1,8 +1,6 @@
-package dev.hybridlabs.aquatic.world.gen.feature
+package dev.hybridlabs.aquatic.world.gen.feature.corals
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.TubeWormBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.Holder

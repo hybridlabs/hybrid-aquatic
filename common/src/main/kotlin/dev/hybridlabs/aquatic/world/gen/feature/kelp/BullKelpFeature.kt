@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.world.gen.feature
+package dev.hybridlabs.aquatic.world.gen.feature.kelp
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
@@ -10,9 +10,9 @@ import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 
-class SargassumFeature(codec: Codec<SargassumFeatureConfig>) :
-    Feature<SargassumFeatureConfig>(codec) {
-    override fun place(context: FeaturePlaceContext<SargassumFeatureConfig>): Boolean {
+class BullKelpFeature(codec: Codec<BullKelpFeatureConfig>) :
+    net.minecraft.world.level.levelgen.feature.Feature<BullKelpFeatureConfig>(codec) {
+    override fun place(context: FeaturePlaceContext<BullKelpFeatureConfig>): Boolean {
         var i = 0
         val structureLevelAccessor = context.level()
         val blockPos = context.origin()
@@ -20,8 +20,8 @@ class SargassumFeature(codec: Codec<SargassumFeatureConfig>) :
         val j = structureLevelAccessor.getHeight(Heightmap.Types.OCEAN_FLOOR, blockPos.x, blockPos.z)
         var blockPos2 = BlockPos(blockPos.x, j, blockPos.z)
         if (structureLevelAccessor.getBlockState(blockPos2).`is`(Blocks.WATER)) {
-            val blockState = HybridAquaticBlocks.SARGASSUM.get().defaultBlockState()
-            val blockState2 = HybridAquaticBlocks.SARGASSUM_PLANT.get().defaultBlockState()
+            val blockState = HybridAquaticBlocks.BULL_KELP.get().defaultBlockState()
+            val blockState2 = HybridAquaticBlocks.BULL_KELP_PLANT.get().defaultBlockState()
             val k = 1 + random.nextInt(10)
 
             for (l in 0..k) {
@@ -32,7 +32,7 @@ class SargassumFeature(codec: Codec<SargassumFeatureConfig>) :
                     if (l == k) {
                         structureLevelAccessor.setBlock(
                             blockPos2,
-                            blockState.setValue(KelpBlock.AGE, random.nextInt(4) + 12) as BlockState,
+                            blockState.setValue(KelpBlock.AGE, random.nextInt(4) + 20) as BlockState,
                             2
                         )
                         ++i
@@ -41,16 +41,13 @@ class SargassumFeature(codec: Codec<SargassumFeatureConfig>) :
                     }
                 } else if (l > 0) {
                     val blockPos3 = blockPos2.below()
-                    if (blockState.canSurvive(
-                            structureLevelAccessor,
-                            blockPos3
-                        ) && !structureLevelAccessor.getBlockState(
+                    if (blockState.canSurvive(structureLevelAccessor, blockPos3) && !(structureLevelAccessor.getBlockState(
                             blockPos3.below()
-                        ).`is`(HybridAquaticBlocks.SARGASSUM.get())
+                        ).`is`(HybridAquaticBlocks.BULL_KELP.get()))
                     ) {
                         structureLevelAccessor.setBlock(
                             blockPos3,
-                            blockState.setValue(KelpBlock.AGE, random.nextInt(4) + 12) as BlockState,
+                            blockState.setValue(KelpBlock.AGE, random.nextInt(4) + 20) as BlockState,
                             2
                         )
                         ++i

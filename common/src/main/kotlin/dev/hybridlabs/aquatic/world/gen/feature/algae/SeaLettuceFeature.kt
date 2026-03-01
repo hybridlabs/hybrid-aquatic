@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.world.gen.feature
+package dev.hybridlabs.aquatic.world.gen.feature.algae
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks

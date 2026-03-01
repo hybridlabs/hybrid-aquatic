@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.world.gen.feature
+package dev.hybridlabs.aquatic.world.gen.feature.corals
 
 import com.mojang.serialization.Codec
 import net.minecraft.core.BlockPos
@@ -8,7 +8,7 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 
-class DeepCoralTreeFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoralFeature(codec) {
+class ReefCoralTreeFeature(codec: Codec<NoneFeatureConfiguration>) : ReefCoralFeature(codec) {
     override fun placeFeature(
         level: LevelAccessor,
         random: RandomSource,
@@ -19,7 +19,7 @@ class DeepCoralTreeFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoralF
         val i = random.nextInt(3) + 1
 
         for (j in 0..<i) {
-            if (!this.placeDeepCoralBlock(level, random, mutableBlockPos, state)) {
+            if (!this.placeCoralBlock(level, random, mutableBlockPos, state)) {
                 return true
             }
 
@@ -37,7 +37,7 @@ class DeepCoralTreeFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoralF
             var i1 = 0
 
             var j1 = 0
-            while (j1 < l && this.placeDeepCoralBlock(level, random, mutableBlockPos, state)) {
+            while (j1 < l && this.placeCoralBlock(level, random, mutableBlockPos, state)) {
                 ++i1
                 mutableBlockPos.move(Direction.UP)
                 if (j1 == 0 || i1 >= 2 && random.nextFloat() < 0.25f) {

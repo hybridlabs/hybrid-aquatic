@@ -2,13 +2,12 @@ package dev.hybridlabs.aquatic.client.model.entity.critter
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
-import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")
-abstract class HybridAquaticCritterEntityModel<T : HybridAquaticCritterEntity>(private val id: String) : GeoModel<T>() {
+abstract class HybridAquaticCritterEntityModel<T : HybridAquaticCritterEntity>(private val id: String) :
+    GeoModel<T>() {
 
     override fun getModelResource(animatable: T): ResourceLocation {
         return CommonClass.locate("geo/critter/$id/$id.geo.json")

@@ -8,22 +8,18 @@ import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride.Bound
 val BuiltinSpawnModifiers: Set<SpawnModifier> = setOf(
     SpawnModifier(
         "shipwreck", BuiltinStructures.SHIPWRECK, BoundingBoxType.STRUCTURE, mapOf(
-            "SHARK" to listOf(
+            "HYBRID_AQUATIC_SHARK" to listOf(
                 MobSpawnSettings.SpawnerData(
-                    HybridAquaticEntityTypes.HOUND_SHARK.get(), 1, 1, 4
+                    HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(), 1, 1, 3
                 )
             )
         )
-    ), SpawnModifier(
-        "ruined_portal_ocean", BuiltinStructures.RUINED_PORTAL_OCEAN, BoundingBoxType.STRUCTURE, mapOf(
-            "SHARK" to listOf(
-                MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(), 1, 1, 4)
-            )
-        )
-    ), SpawnModifier(
-        "ocean_ruin_warm", BuiltinStructures.OCEAN_RUIN_WARM, BoundingBoxType.STRUCTURE, mapOf(
-            "SHARK" to listOf(
-                MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SAND_TIGER_SHARK.get(), 1, 1, 4)
+    ),
+    SpawnModifier(
+        "ruined_portal_ocean", BuiltinStructures.SHIPWRECK_BEACHED, BoundingBoxType.STRUCTURE, mapOf(
+            "HYBRID_AQUATIC_CRUSTACEAN" to listOf(
+                MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COCONUT_CRAB.get(), 1, 1, 4
+                )
             )
         )
     )

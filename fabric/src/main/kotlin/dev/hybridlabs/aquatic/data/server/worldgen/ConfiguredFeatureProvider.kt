@@ -318,7 +318,8 @@ class ConfiguredFeatureProvider(
         entries.add(
             HybridAquaticConfiguredFeatures.SARGASSUM,
             ConfiguredFeature(
-                HybridAquaticFeatures.SARGASSUM.get(), SargassumFeatureConfig(
+                HybridAquaticFeatures.SARGASSUM.get(),
+                _root_ide_package_.dev.hybridlabs.aquatic.world.gen.feature.kelp.SargassumFeatureConfig(
                     SimpleStateProvider.simple(HybridAquaticBlocks.SARGASSUM.get())
                 )
             )

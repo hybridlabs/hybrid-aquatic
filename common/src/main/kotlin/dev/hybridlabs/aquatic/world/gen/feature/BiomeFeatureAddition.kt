@@ -13,6 +13,7 @@ data class BiomeFeatureAddition(
 ) {
     companion object {
         val builtIn = buildList {
+            //#region Anemones
             add(
                 BiomeFeatureAddition(
                     HybridAquaticBiomeTags.CORAL_REEF,
@@ -28,20 +29,98 @@ data class BiomeFeatureAddition(
                     HybridAquaticPlacedFeatures.ANEMONES
                 ),
             )
+            //#endregion
 
+            //#region Sponges
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SHALLOW_LUKEWARM_OCEANS,
+                    BiomeTags.IS_OCEAN,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.SARGASSUM
+                    HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS,
+                    BiomeTags.IS_DEEP_OCEAN,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.FLOATING_SARGASSUM
+                    HybridAquaticPlacedFeatures.GLASS_SPONGE_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    BiomeTags.IS_DEEP_OCEAN,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HybridAquaticPlacedFeatures.HARP_SPONGE_PATCH
+                ),
+            )
+            //#endregion
+
+            //#region Giant Clams
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.CORAL_REEF,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.SEAGRASS_BED,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.RED_MEADOW,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+                ),
+            )
+            //#endregion
+
+            //#region Oyster Beds
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HybridAquaticPlacedFeatures.OYSTER_BED
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.WARM_OCEAN,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HybridAquaticPlacedFeatures.OYSTER_BED
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.CORAL_REEF,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HybridAquaticPlacedFeatures.OYSTER_BED
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.SEAGRASS_BED,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HybridAquaticPlacedFeatures.OYSTER_BED
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.RED_MEADOW,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HybridAquaticPlacedFeatures.OYSTER_BED
                 ),
             )
 
@@ -49,18 +128,12 @@ data class BiomeFeatureAddition(
                 BiomeFeatureAddition(
                     HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.BULL_KELP
+                    HybridAquaticPlacedFeatures.OYSTER_BED
                 ),
             )
+            //#endregion
 
-            add(
-                BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SANDY_BEACHES,
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.DUNEGRASS_PATCH
-                ),
-            )
-
+            //#region River Plants
             add(
                 BiomeFeatureAddition(
                     HybridAquaticBiomeTags.SEAGRASS_BED,
@@ -108,56 +181,57 @@ data class BiomeFeatureAddition(
                     HybridAquaticPlacedFeatures.WATER_HYACINTH
                 ),
             )
+            //#endregion
 
-            //#region Giant Clams
-
+            //#region Kelp Plants
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.CORAL_REEF,
+                    HybridAquaticBiomeTags.SHALLOW_LUKEWARM_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+                    HybridAquaticPlacedFeatures.SARGASSUM
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SEAGRASS_BED,
+                    HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+                    HybridAquaticPlacedFeatures.FLOATING_SARGASSUM
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.RED_MEADOW,
+                    HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+                    HybridAquaticPlacedFeatures.BULL_KELP
                 ),
             )
             //#endregion
 
-            //#region Oyster Beds
-            add(
-                BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS,
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
-                ),
-            )
-
-            add(
-                BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.WARM_OCEAN,
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
-                ),
-            )
-
+            //#region Vents & Sulfur
             add(
                 BiomeFeatureAddition(
                     HybridAquaticBiomeTags.SULFURIC_CAVE,
                     GenerationStep.Decoration.UNDERGROUND_ORES,
                     HybridAquaticPlacedFeatures.SULFUR_DEPOSIT
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.HAS_THERMAL_VENTS,
+                    GenerationStep.Decoration.SURFACE_STRUCTURES,
+                    HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH
+                )
+            )
+            //#endregion
+
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.SANDY_BEACHES,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HybridAquaticPlacedFeatures.DUNEGRASS_PATCH
                 ),
             )
 
@@ -179,47 +253,6 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.CORAL_REEF,
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
-                ),
-            )
-
-            add(
-                BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SEAGRASS_BED,
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
-                ),
-            )
-
-            add(
-                BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.RED_MEADOW,
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
-                ),
-            )
-
-            add(
-                BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
-                ),
-            )
-            //#endregion
-
-            add(
-                BiomeFeatureAddition(
-                    BiomeTags.IS_OCEAN,
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH
-                ),
-            )
-
-            add(
-                BiomeFeatureAddition(
                     BiomeTags.IS_DEEP_OCEAN,
                     GenerationStep.Decoration.UNDERGROUND_ORES,
                     HybridAquaticPlacedFeatures.MOUND
@@ -228,33 +261,9 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    BiomeTags.IS_DEEP_OCEAN,
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.GLASS_SPONGE_PATCH
-                ),
-            )
-
-            add(
-                BiomeFeatureAddition(
-                    BiomeTags.IS_DEEP_OCEAN,
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.HARP_SPONGE_PATCH
-                ),
-            )
-
-            add(
-                BiomeFeatureAddition(
                     HybridAquaticBiomeTags.BOTTLE_SPAWN_BIOMES,
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                     HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE
-                )
-            )
-
-            add(
-                BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.HAS_THERMAL_VENTS,
-                    GenerationStep.Decoration.SURFACE_STRUCTURES,
-                    HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH
                 )
             )
         }

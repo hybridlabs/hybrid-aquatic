@@ -196,6 +196,7 @@ object HybridAquaticBiomes {
 
     //#endregion
 
+    //#region Deep Reefs
     val DEEP_CORAL_REEF: ResourceKey<Biome> =
         ResourceKey.create(Registries.BIOME, CommonClass.locate("deep_coral_reef"))
     val DEEP_CORAL_REEF_SURFACE_RULE: RuleSource =
@@ -219,9 +220,9 @@ object HybridAquaticBiomes {
                 ifTrue(ON_FLOOR, state(HybridAquaticBlocks.CORALSTONE.get().defaultBlockState()))
             )
         )
+    //#endregion
 
     fun addBiomes() {
-
         //#region River Generation Fixes
         BiomePlacement.addSubOverworld(
             Biomes.RIVER,

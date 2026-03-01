@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.world.gen.feature
+package dev.hybridlabs.aquatic.world.gen.feature.corals
 
 import com.mojang.serialization.Codec
 import net.minecraft.core.BlockPos
@@ -7,7 +7,7 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 
-class BleachedCoralTableFeature(codec: Codec<NoneFeatureConfiguration?>) : BleachedCoralFeature(codec) {
+class DeepCoralTableFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoralFeature(codec) {
 
     override fun placeFeature(
         level: LevelAccessor,
@@ -18,7 +18,7 @@ class BleachedCoralTableFeature(codec: Codec<NoneFeatureConfiguration?>) : Bleac
 
         val mutable = pos.mutable()
 
-        placeBleachedCoralBlock(level, random, mutable, state)
+        placeDeepCoralBlock(level, random, mutable, state)
 
         val topRadius = random.nextInt(3) + 1
         val layers = 2
@@ -37,7 +37,7 @@ class BleachedCoralTableFeature(codec: Codec<NoneFeatureConfiguration?>) : Bleac
 
                         if (place) {
                             mutable.set(pos.x + dx, y, pos.z + dz)
-                            placeBleachedCoralBlock(level, random, mutable, state)
+                            placeDeepCoralBlock(level, random, mutable, state)
                         }
                     }
                 }

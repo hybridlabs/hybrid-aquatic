@@ -8,7 +8,8 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
 abstract class SeashellArmorItem(type: Type, settings: Properties) :
-    ArmorItem(HybridAquaticArmorMaterials.SEASHELL, type, settings), GeoItem {
+    ArmorItem(HybridAquaticArmorMaterials.SEASHELL, type, settings),
+    GeoItem {
     protected val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 
     override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {

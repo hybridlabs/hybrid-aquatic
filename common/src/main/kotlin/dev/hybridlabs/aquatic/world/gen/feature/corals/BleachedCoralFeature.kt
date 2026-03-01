@@ -1,8 +1,6 @@
-package dev.hybridlabs.aquatic.world.gen.feature
+package dev.hybridlabs.aquatic.world.gen.feature.corals
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -21,12 +19,12 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import java.util.function.Consumer
 import java.util.function.Function
 
-abstract class DeepCoralFeature(codec: Codec<NoneFeatureConfiguration?>) : Feature<NoneFeatureConfiguration?>(codec) {
+abstract class BleachedCoralFeature(codec: Codec<NoneFeatureConfiguration?>) : Feature<NoneFeatureConfiguration?>(codec) {
     override fun place(context: FeaturePlaceContext<NoneFeatureConfiguration?>): Boolean {
         val randomSource = context.random()
         val worldGenLevel = context.level()
         val blockPos = context.origin()
-        val optional = BuiltInRegistries.BLOCK.getTag(HybridAquaticBlockTags.DEEP_CORAL_BLOCKS)
+        val optional = BuiltInRegistries.BLOCK.getTag(HybridAquaticBlockTags.BLEACHED_CORAL_BLOCKS)
             .flatMap(Function { named: HolderSet.Named<Block?>? ->
                 named!!.getRandomElement(randomSource)
             }).map<Block>(
@@ -44,7 +42,7 @@ abstract class DeepCoralFeature(codec: Codec<NoneFeatureConfiguration?>) : Featu
         state: BlockState,
     ): Boolean
 
-    protected fun placeDeepCoralBlock(
+    protected fun placeBleachedCoralBlock(
         level: LevelAccessor,
         random: RandomSource,
         pos: BlockPos,
@@ -52,32 +50,25 @@ abstract class DeepCoralFeature(codec: Codec<NoneFeatureConfiguration?>) : Featu
     ): Boolean {
         val blockPos = pos.above()
         val blockState = level.getBlockState(pos)
-        if ((blockState.`is`(Blocks.WATER) || blockState.`is`(HybridAquaticBlockTags.DEEP_CORALS)) && level.getBlockState(blockPos).`is`(
+        if ((blockState.`is`(Blocks.WATER) || blockState.`is`(HybridAquaticBlockTags.BLEACHED_CORALS)) && level.getBlockState(blockPos).`is`(
                 Blocks.WATER
             )
         ) {
             level.setBlock(pos, state, 3)
             if (random.nextFloat() < 0.25f) {
-                BuiltInRegistries.BLOCK.getTag(HybridAquaticBlockTags.DEEP_CORALS)
+                BuiltInRegistries.BLOCK.getTag(HybridAquaticBlockTags.BLEACHED_CORALS)
                     .flatMap(Function { named: HolderSet.Named<Block?>? ->
                         named!!.getRandomElement(random)
                     }).map<Block?>(
                         Function { obj: Holder<Block?>? -> obj!!.value() })
                     .ifPresent(Consumer { block: Block? -> level.setBlock(blockPos, block!!.defaultBlockState(), 2) })
-            } else if (random.nextFloat() < 0.05f) {
-                level.setBlock(
-                    blockPos,
-                    HybridAquaticBlocks.TUBE_WORM.get().defaultBlockState()
-                        .setValue(TubeWormBlock.WORMS, random.nextInt(4) + 1) as BlockState,
-                    2
-                )
             }
 
             for (direction in Direction.Plane.HORIZONTAL) {
                 if (random.nextFloat() < 0.2f) {
                     val blockPos2 = pos.relative(direction)
                     if (level.getBlockState(blockPos2).`is`(Blocks.WATER)) {
-                        BuiltInRegistries.BLOCK.getTag(HybridAquaticBlockTags.DEEP_WALL_CORALS)
+                        BuiltInRegistries.BLOCK.getTag(HybridAquaticBlockTags.BLEACHED_WALL_CORALS)
                             .flatMap(Function { named: HolderSet.Named<Block?>? ->
                                 named!!.getRandomElement(random)
                             }).map<Block?>(

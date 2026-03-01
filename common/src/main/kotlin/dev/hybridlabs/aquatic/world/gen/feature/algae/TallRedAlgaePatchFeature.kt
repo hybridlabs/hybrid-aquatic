@@ -1,15 +1,17 @@
-package dev.hybridlabs.aquatic.world.gen.feature
+package dev.hybridlabs.aquatic.world.gen.feature.algae
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.TallSeagrassBlock
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 
-class ShortRedAlgaePatchFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
+class TallRedAlgaePatchFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
     Feature<ProbabilityFeatureConfiguration>(codec) {
 
     override fun place(context: FeaturePlaceContext<ProbabilityFeatureConfiguration>): Boolean {
@@ -30,10 +32,15 @@ class ShortRedAlgaePatchFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
 
                 if (!level.getBlockState(pos).`is`(Blocks.WATER)) continue
 
-                val state = HybridAquaticBlocks.SHORT_RED_ALGAE.get().defaultBlockState()
-                if (!state.canSurvive(level, pos)) continue
+                val baseState = HybridAquaticBlocks.TALL_RED_ALGAE.get().defaultBlockState()
+                if (!baseState.canSurvive(level, pos)) continue
 
-                level.setBlock(pos, state, 2)
+                val above = pos.above()
+                if (!level.getBlockState(above).`is`(Blocks.WATER)) continue
+
+                val upperState = baseState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER)
+                level.setBlock(pos, baseState, 2)
+                level.setBlock(above, upperState, 2)
                 placedAny = true
             }
         }

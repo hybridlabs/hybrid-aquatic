@@ -13,7 +13,8 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
 abstract class MoonJellyfishArmorItem(type: Type, settings: Properties) :
-    ArmorItem(HybridAquaticArmorMaterials.MOONJELLYFISH, type, settings), GeoItem {
+    ArmorItem(HybridAquaticArmorMaterials.MOONJELLYFISH, type, settings),
+    GeoItem {
     protected val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 
     override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {

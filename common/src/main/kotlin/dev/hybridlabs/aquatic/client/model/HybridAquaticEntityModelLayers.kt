@@ -41,31 +41,39 @@ object HybridAquaticEntityModelLayers {
         modelLoader: EntityModelSet, builder: ImmutableMap.Builder<SkullBlock.Type, SkullModelBase>
     ) {
         builder.put(
-            PlushieBlock.Variant.BASKING_SHARK, BaskingSharkPlushieModel(modelLoader.bakeLayer(BASKING_SHARK_PLUSHIE))
+            PlushieBlock.Variant.BASKING_SHARK, BaskingSharkPlushieModel(modelLoader.bakeLayer(
+                BASKING_SHARK_PLUSHIE))
         )
         builder.put(
-            PlushieBlock.Variant.BULL_SHARK, BullSharkPlushieModel(modelLoader.bakeLayer(BULL_SHARK_PLUSHIE))
+            PlushieBlock.Variant.BULL_SHARK, BullSharkPlushieModel(modelLoader.bakeLayer(
+                BULL_SHARK_PLUSHIE))
         )
         builder.put(
-            PlushieBlock.Variant.FRILLED_SHARK, FrilledSharkPlushieModel(modelLoader.bakeLayer(FRILLED_SHARK_PLUSHIE))
+            PlushieBlock.Variant.FRILLED_SHARK, FrilledSharkPlushieModel(modelLoader.bakeLayer(
+                FRILLED_SHARK_PLUSHIE))
         )
         builder.put(
             PlushieBlock.Variant.GREAT_WHITE_SHARK,
-            GreatWhiteSharkPlushieModel(modelLoader.bakeLayer(GREAT_WHITE_SHARK_PLUSHIE))
+            GreatWhiteSharkPlushieModel(modelLoader.bakeLayer(
+                GREAT_WHITE_SHARK_PLUSHIE))
         )
         builder.put(
             PlushieBlock.Variant.HAMMERHEAD_SHARK,
-            HammerheadSharkPlushieModel(modelLoader.bakeLayer(HAMMERHEAD_SHARK_PLUSHIE))
+            HammerheadSharkPlushieModel(modelLoader.bakeLayer(
+                HAMMERHEAD_SHARK_PLUSHIE))
         )
         builder.put(
             PlushieBlock.Variant.THRESHER_SHARK,
-            ThresherSharkPlushieModel(modelLoader.bakeLayer(THRESHER_SHARK_PLUSHIE))
+            ThresherSharkPlushieModel(modelLoader.bakeLayer(
+                THRESHER_SHARK_PLUSHIE))
         )
         builder.put(
-            PlushieBlock.Variant.TIGER_SHARK, TigerSharkPlushieModel(modelLoader.bakeLayer(TIGER_SHARK_PLUSHIE))
+            PlushieBlock.Variant.TIGER_SHARK, TigerSharkPlushieModel(modelLoader.bakeLayer(
+                TIGER_SHARK_PLUSHIE))
         )
         builder.put(
-            PlushieBlock.Variant.WHALE_SHARK, WhaleSharkPlushieModel(modelLoader.bakeLayer(WHALE_SHARK_PLUSHIE))
+            PlushieBlock.Variant.WHALE_SHARK, WhaleSharkPlushieModel(modelLoader.bakeLayer(
+                WHALE_SHARK_PLUSHIE))
         )
     }
 }

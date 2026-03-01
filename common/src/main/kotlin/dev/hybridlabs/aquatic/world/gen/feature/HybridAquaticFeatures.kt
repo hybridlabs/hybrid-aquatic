@@ -2,6 +2,21 @@ package dev.hybridlabs.aquatic.world.gen.feature
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
+import dev.hybridlabs.aquatic.world.gen.feature.algae.RedAlgaePatchFeature
+import dev.hybridlabs.aquatic.world.gen.feature.algae.SeaLettuceFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.BleachedCoralClawFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.BleachedCoralMushroomFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.BleachedCoralTableFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.BleachedCoralTreeFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.DeepCoralClawFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.DeepCoralMushroomFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.DeepCoralTableFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.DeepCoralTreeFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralClawFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralMushroomFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralTableFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralTreeFeature
+import dev.hybridlabs.aquatic.world.gen.feature.kelp.SargassumFeatureConfig
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
@@ -29,8 +44,12 @@ object HybridAquaticFeatures {
 
     val BLEACHED_CORAL_CLAW = register("bleached_coral_claw", BleachedCoralClawFeature(NoneFeatureConfiguration.CODEC))
     val BLEACHED_CORAL_TREE = register("bleached_coral_tree", BleachedCoralTreeFeature(NoneFeatureConfiguration.CODEC))
-    val BLEACHED_CORAL_MUSHROOM = register("bleached_coral_mushroom", BleachedCoralMushroomFeature(NoneFeatureConfiguration.CODEC))
-    val BLEACHED_CORAL_TABLE = register("bleached_coral_table", BleachedCoralTableFeature(NoneFeatureConfiguration.CODEC))
+    val BLEACHED_CORAL_MUSHROOM = register("bleached_coral_mushroom",
+        BleachedCoralMushroomFeature(NoneFeatureConfiguration.CODEC)
+    )
+    val BLEACHED_CORAL_TABLE = register("bleached_coral_table",
+        BleachedCoralTableFeature(NoneFeatureConfiguration.CODEC)
+    )
 
     val REEF_CORAL_CLAW = register("reef_coral_claw", ReefCoralClawFeature(NoneFeatureConfiguration.CODEC))
     val REEF_CORAL_TREE = register("reef_coral_tree", ReefCoralTreeFeature(NoneFeatureConfiguration.CODEC))

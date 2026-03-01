@@ -7,6 +7,7 @@ object HybridAquaticLootTables {
     val HA_MEDIUM_FISH = CommonClass.locate("gameplay/fishing/ha_medium_fish")
     val HA_LARGE_FISH = CommonClass.locate("gameplay/fishing/ha_large_fish")
 
+    //#region Crates
     val HA_CRATES = CommonClass.locate("gameplay/fishing/ha_crates")
     val CRAB_POT_TREASURE_ID = CommonClass.locate("gameplay/crab_pot_treasure")
     val HYBRID_CRATE_TREASURE_ID = CommonClass.locate("gameplay/hybrid_crate_treasure")
@@ -19,11 +20,13 @@ object HybridAquaticLootTables {
     val DARK_OAK_CRATE_TREASURE_ID = CommonClass.locate("gameplay/dark_oak_crate_treasure")
     val MANGROVE_CRATE_TREASURE_ID = CommonClass.locate("gameplay/mangrove_crate_treasure")
     val CHERRY_CRATE_TREASURE_ID = CommonClass.locate("gameplay/cherry_crate_treasure")
+    //#endregion
 
     val VENT_LOOT_ID = CommonClass.locate("gameplay/vent_drops")
     val BEACH_ARCHAEOLOGY_ID = CommonClass.locate("gameplay/beach_archaeology")
     val PLACER_RIVER_ARCHAEOLOGY_ID = CommonClass.locate("gameplay/placer_river_archaeology")
 
+    //#region Crustacean Loot
     val CLAWED_LOBSTER = CommonClass.locate("gameplay/clawed_lobster")
     val CLAWLESS_LOBSTER = CommonClass.locate("gameplay/clawless_lobster")
 
@@ -37,6 +40,7 @@ object HybridAquaticLootTables {
     val DECORATOR_HORN = CommonClass.locate("gameplay/decorator_horn")
     val DECORATOR_THORN = CommonClass.locate("gameplay/decorator_thorn")
     val DECORATOR_LOPHELIA = CommonClass.locate("gameplay/decorator_lophelia")
+    //#endregion
 
     val BLUE_SPOTTED_STINGRAY = CommonClass.locate("gameplay/blue_spotted_stingray")
     val SPOTTED_EAGLE_RAY = CommonClass.locate("gameplay/spotted_eagle_ray")

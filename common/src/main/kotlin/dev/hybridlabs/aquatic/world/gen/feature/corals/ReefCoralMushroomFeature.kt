@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.world.gen.feature
+package dev.hybridlabs.aquatic.world.gen.feature.corals
 
 import com.mojang.serialization.Codec
 import net.minecraft.core.BlockPos
@@ -8,7 +8,7 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 
-class DeepCoralMushroomFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoralFeature(codec) {
+class ReefCoralMushroomFeature(codec: Codec<NoneFeatureConfiguration>) : ReefCoralFeature(codec) {
     override fun placeFeature(
         level: LevelAccessor,
         random: RandomSource,
@@ -33,7 +33,7 @@ class DeepCoralMushroomFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCo
                         (i1 == 0 || i1 == j || j1 == 0 || j1 == i || k1 == 0 || k1 == k) &&
                         random.nextFloat() >= 0.1f
                     ) {
-                        this.placeDeepCoralBlock(
+                        this.placeCoralBlock(
                             level,
                             random,
                             mutableBlockPos,
