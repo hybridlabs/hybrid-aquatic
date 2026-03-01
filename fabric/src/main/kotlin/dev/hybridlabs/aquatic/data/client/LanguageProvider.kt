@@ -97,8 +97,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.reinforced_diving_suit.title" to "Diving Deeper",
             "advancements.hybrid-aquatic.reinforced_diving_suit.description" to "Reinforce your diving gear",
 
-            "advancements.hybrid-aquatic.reinforced_diving_suit.title" to "The Light In The Abyss",
-            "advancements.hybrid-aquatic.reinforced_diving_suit.description" to "Make your diving suit glow in the dark",
+            "advancements.hybrid-aquatic.glowing_diving_suit.title" to "The Light In The Abyss",
+            "advancements.hybrid-aquatic.glowing_diving_suit.description" to "Make your diving suit glow in the dark",
 
             "advancements.hybrid-aquatic.hook.title" to "Hooked!",
             "advancements.hybrid-aquatic.hook.description" to "Craft a hook to help you catch fish faster",

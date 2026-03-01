@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.mixin;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.hybridlabs.aquatic.Constants;
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import net.minecraft.tags.FluidTags;
@@ -16,7 +15,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Slice;
 
 @Mixin(Entity.class)
 public class EntityMixin {
@@ -26,7 +24,10 @@ public class EntityMixin {
         Entity entity = (Entity) (Object) this;
         if (entity instanceof Player player) {
             ItemStack stack = player.getItemBySlot(EquipmentSlot.FEET);
-						var isDivingBoots = stack.is(HybridAquaticItems.INSTANCE.getDIVING_BOOTS().get()) || stack.is(HybridAquaticItems.INSTANCE.getREINFORCED_DIVING_BOOTS().get());
+            var isDivingBoots =
+                    stack.is(HybridAquaticItems.INSTANCE.getDIVING_BOOTS().get()) ||
+                    stack.is(HybridAquaticItems.INSTANCE.getREINFORCED_DIVING_BOOTS().get()) ||
+                    stack.is(HybridAquaticItems.INSTANCE.getGLOWING_DIVING_BOOTS().get());
             if (isDivingBoots && player.isEyeInFluid(FluidTags.WATER)) {
                 return original * 1.67f;
             }
@@ -34,24 +35,24 @@ public class EntityMixin {
 
         return original;
     }
-	
-	@WrapOperation(
-			method = "getBlockSpeedFactor",
-			at = @At(
-					value = "INVOKE",
-					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
-	)
-	private boolean decorativeBubbleColumn_getBlockSpeedFactorParity(BlockState instance, Block block, Operation<Boolean> original) {
-		return instance.is(HybridAquaticBlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
-	}
-	
-	@WrapOperation(
-			method = "isInBubbleColumn",
-			at = @At(
-					value = "INVOKE",
-					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
-	)
-	private boolean decorativeBubbleColumn_isInBubbleColumnParity(BlockState instance, Block block, Operation<Boolean> original) {
-		return instance.is(HybridAquaticBlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
-	}
+
+    @WrapOperation(
+            method = "getBlockSpeedFactor",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
+    )
+    private boolean decorativeBubbleColumn_getBlockSpeedFactorParity(BlockState instance, Block block, Operation<Boolean> original) {
+        return instance.is(HybridAquaticBlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
+    }
+
+    @WrapOperation(
+            method = "isInBubbleColumn",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
+    )
+    private boolean decorativeBubbleColumn_isInBubbleColumnParity(BlockState instance, Block block, Operation<Boolean> original) {
+        return instance.is(HybridAquaticBlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
+    }
 }
