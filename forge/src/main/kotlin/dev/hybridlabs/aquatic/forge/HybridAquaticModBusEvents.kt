@@ -58,7 +58,7 @@ object HybridAquaticModBusEvents {
             })
     }
 
-    fun loadSeaMessages(event: DataPackRegistryEvent.NewRegistry) {
+    private fun loadSeaMessages(event: DataPackRegistryEvent.NewRegistry) {
         event.dataPackRegistry(
             HybridAquaticRegistryKeys.SEA_MESSAGE,
             SeaMessage.CODEC,
