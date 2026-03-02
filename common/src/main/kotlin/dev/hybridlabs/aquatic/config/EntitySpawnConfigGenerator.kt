@@ -309,6 +309,15 @@ class EntitySpawnConfigGenerator {
         )
 
         addFish(
+            HybridAquaticEntityTypes.GARDEN_EEL.get(),
+            listOf(
+                HybridAquaticBiomeTags.SHALLOW_LUKEWARM_OCEANS,
+                HybridAquaticBiomeTags.WARM_OCEAN,
+                HybridAquaticBiomeTags.SEAGRASS_BED),
+            3, 1, 1
+        )
+
+        addFish(
             HybridAquaticEntityTypes.OPAH.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,

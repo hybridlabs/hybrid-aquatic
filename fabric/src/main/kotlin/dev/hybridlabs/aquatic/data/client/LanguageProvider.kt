@@ -620,6 +620,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.SUNFISH.get() to "Sunfish",
             HybridAquaticEntityTypes.NEEDLEFISH.get() to "Needlefish",
             HybridAquaticEntityTypes.BARRACUDA.get() to "Barracuda",
+            HybridAquaticEntityTypes.GARDEN_EEL.get() to "Garden Eel",
             HybridAquaticEntityTypes.MACKEREL.get() to "Mackerel",
             HybridAquaticEntityTypes.HERRING.get() to "Herring",
             HybridAquaticEntityTypes.RATFISH.get() to "Ratfish",

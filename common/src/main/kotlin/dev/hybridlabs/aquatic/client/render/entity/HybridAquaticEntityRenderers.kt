@@ -102,6 +102,12 @@ object HybridAquaticEntityRenderers {
             ::ClownfishEntityRenderer
         )
 
+    val GARDEN_EEL =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.GARDEN_EEL,
+            ::GardenEelEntityRenderer
+        )
+
     val TUNA =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.TUNA,

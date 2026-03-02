@@ -1,0 +1,109 @@
+package dev.hybridlabs.aquatic.entity.fish
+
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.core.BlockPos
+import net.minecraft.util.RandomSource
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.MoverType
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier
+import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.control.LookControl
+import net.minecraft.world.entity.ai.control.MoveControl
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.phys.Vec3
+import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+
+@Suppress("unused", "DEPRECATION")
+class GardenEelEntity(type: EntityType<out GardenEelEntity>, world: Level) :
+    HybridAquaticFishEntity(type, world) {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HybridAquaticEntityTags.MEDIUM_CREATURES,
+        HybridAquaticEntityTags.LARGE_CREATURES,
+        HybridAquaticEntityTags.ALL_SHARKS
+    )
+
+    init {
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        moveControl = MoveControl(this)
+        lookControl = LookControl(this)
+        navigation = WaterBoundPathNavigation(this, world)
+    }
+
+    override fun registerGoals() {
+        goalSelector.addGoal(2, RandomLookAroundGoal(this))
+        goalSelector.addGoal(1, LookAtPlayerGoal(this, Player::class.java, 6.0f))
+    }
+
+    override fun travel(travelVector: Vec3) {
+        if (this.isEffectiveAi && this.isInWater) {
+            this.moveRelative(0.01f, travelVector)
+            this.move(MoverType.SELF, this.deltaMovement)
+            this.deltaMovement = this.deltaMovement.scale(0.9)
+            this.deltaMovement = this.deltaMovement.add(0.0, -0.05, 0.0)
+        } else {
+            super.travel(travelVector)
+        }
+    }
+
+    override fun getMaxSpawnClusterSize(): Int {
+        return 5
+    }
+
+    override fun isPushable(): Boolean {
+        return false
+    }
+
+    override fun isPushedByFluid(): Boolean {
+        return false
+    }
+
+    override fun getMovementEmission(): MovementEmission {
+        return MovementEmission.NONE
+    }
+
+    //#region Animations
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
+            AnimationController(this, "Garden Eel Controller", 4) { state ->
+                state.setAndContinue(DefaultAnimations.IDLE)
+            }
+        )
+    }
+
+    companion object {
+        fun createMobAttributes(): AttributeSupplier.Builder {
+            return createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 3.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.1)
+                .add(Attributes.ATTACK_DAMAGE, 1.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+                .add(Attributes.FOLLOW_RANGE, 4.0)
+        }
+
+        fun canSpawn(
+            type: EntityType<out GardenEelEntity>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
+        ): Boolean {
+            return  world.getBlockState(pos.below()).isSolid &&
+                    world.isWaterAt(pos) &&
+                    world.canSeeSkyFromBelowWater(pos)
+        }
+    }
+}

@@ -260,6 +260,13 @@ object HybridAquaticEntityTypes {
         BarracudaEntity::createMobAttributes
     )
 
+    val GARDEN_EEL = registerFish(
+        "garden_eel",
+        ::GardenEelEntity,
+        EntityDimensions.fixed(0.2f, 0.5f),
+        GardenEelEntity::createMobAttributes
+    )
+
     val PEARLFISH = registerFish(
         "pearlfish",
         ::PearlfishEntity,

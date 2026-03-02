@@ -52,6 +52,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_CREATURES)
             .add(
                 HybridAquaticEntityTypes.CLOWNFISH.get(),
+                HybridAquaticEntityTypes.GARDEN_EEL.get(),
                 HybridAquaticEntityTypes.PLECO.get(),
                 HybridAquaticEntityTypes.SHINER.get(),
                 HybridAquaticEntityTypes.SUNFISH.get(),
@@ -186,6 +187,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.BLOWFISH.get(),
                 HybridAquaticEntityTypes.BOXFISH.get(),
                 HybridAquaticEntityTypes.CLOWNFISH.get(),
+                HybridAquaticEntityTypes.GARDEN_EEL.get(),
                 HybridAquaticEntityTypes.DAMSELFISH.get(),
                 HybridAquaticEntityTypes.FLYING_FISH.get(),
                 HybridAquaticEntityTypes.LIONFISH.get(),
@@ -246,6 +248,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.ANGLERFISH.get(),
                 HybridAquaticEntityTypes.BARRELEYE.get(),
                 HybridAquaticEntityTypes.COELACANTH.get(),
+                HybridAquaticEntityTypes.SLICKHEAD.get(),
                 HybridAquaticEntityTypes.DRAGONFISH.get(),
                 HybridAquaticEntityTypes.FANGTOOTH.get(),
                 HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(),

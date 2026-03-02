@@ -46,6 +46,15 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
 
     open fun getTargetConfig(): MobTargetConfiguration? = null
 
+    init {
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, false)
+        lookControl = SmoothSwimmingLookControl(this, 10)
+        navigation = WaterBoundPathNavigation(this, world)
+    }
+
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, FishAttackGoal(this, 1.1, true))
@@ -300,15 +309,6 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
     }
 
     // endregion
-
-    init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
-        moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, false)
-        lookControl = SmoothSwimmingLookControl(this, 10)
-        navigation = WaterBoundPathNavigation(this, world)
-    }
 
     @Suppress("DEPRECATION", "unused")
     companion object {
