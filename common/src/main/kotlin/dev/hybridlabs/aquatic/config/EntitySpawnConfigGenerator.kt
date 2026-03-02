@@ -17,7 +17,7 @@ class EntitySpawnConfigGenerator {
     private val list: MutableList<EntitySpawnConfig> = mutableListOf()
 
     fun finalizeSpawn() {
-        //#region Fish
+        //#region River Fish
         addRiverFish(
             HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
             listOf(
@@ -174,7 +174,9 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.PLACER_RIVERS),
             3, 1, 2
         )
+        //#endregion
 
+        //#region Marine Fish
         addFish(
             HybridAquaticEntityTypes.MANTA_RAY.get(),
             listOf(
@@ -235,26 +237,6 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS,
                 HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
             5, 4, 12
-        )
-
-        addFish(HybridAquaticEntityTypes.RATFISH.get(),
-            listOf(
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.DEEP_REEF,
-                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH),
-            5, 1, 3
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.SNAILFISH.get(),
-            listOf(
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH),
-            5, 1, 3
         )
 
         addFish(
@@ -441,11 +423,34 @@ class EntitySpawnConfigGenerator {
             1, 1, 2
         )
 
+        addFish(HybridAquaticEntityTypes.RATFISH.get(),
+            listOf(
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.DEEP_REEF,
+                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
+                HybridAquaticBiomeTags.COLD_TRENCH,
+                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+            5, 1, 3
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.SNAILFISH.get(),
+            listOf(
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
+                HybridAquaticBiomeTags.COLD_TRENCH,
+                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+            5, 1, 3
+        )
+
         addFish(
             HybridAquaticEntityTypes.OARFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
             1, 1, 2
@@ -456,6 +461,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH),
             3, 1, 2
@@ -466,6 +472,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH),
             3, 1, 2
@@ -476,6 +483,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH),
             3, 1, 2
@@ -486,6 +494,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH),
             3, 1, 2
@@ -496,6 +505,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.DEEP_REEF,
                 HybridAquaticBiomeTags.DEEP_WARM_OCEAN,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
                 HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
@@ -507,6 +517,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.BARRELEYE.get(),
             listOf(
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH),
             1, 1, 2
         )
@@ -515,6 +526,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.DRAGONFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH),
             2, 1, 2
         )
@@ -533,6 +545,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.DEEP_REEF,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH),
             1, 1, 2
         )
@@ -553,6 +566,24 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.TEMPERATE_OCEANS),
             10, 1, 2
+        )
+
+        addCephalopod(
+            HybridAquaticEntityTypes.GIANT_SQUID.get(),
+            listOf(
+                HybridAquaticBiomeTags.COLD_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
+                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,),
+            1, 1, 1
+        )
+
+        addCephalopod(
+            HybridAquaticEntityTypes.COLOSSAL_SQUID.get(),
+            listOf(
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.COLD_TRENCH),
+            1, 1, 1
         )
 
         addCephalopod(
@@ -673,6 +704,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH),
             1, 1, 1
@@ -683,6 +715,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH),
             1, 1, 1
@@ -694,6 +727,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.DEEP_REEF,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH),
             1, 1, 1
@@ -705,6 +739,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.DEEP_REEF,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH),
             1, 1, 1
@@ -716,6 +751,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.DEEP_REEF,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH),
             2, 1, 3
@@ -795,6 +831,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.FRILLED_SHARK.get(),
             listOf(
                 HybridAquaticBiomeTags.DEEP_REEF,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH),
             1, 1, 1
         )
@@ -803,6 +840,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.SIXGILL_SHARK.get(),
             listOf(
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH),
             1, 1, 1
         )
@@ -1051,6 +1089,7 @@ class EntitySpawnConfigGenerator {
                 BiomeTags.IS_DEEP_OCEAN,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH,
                 HybridAquaticBiomeTags.SANDY_BEACHES),
@@ -1065,6 +1104,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.RED_MEADOW,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH),
             3, 1, 2
@@ -1078,6 +1118,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.RED_MEADOW,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.WARM_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.ARCTIC_TRENCH),
             3, 0, 2

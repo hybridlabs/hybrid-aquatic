@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
@@ -40,7 +41,7 @@ class GardenEelEntity(type: EntityType<out GardenEelEntity>, world: Level) :
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
         lookControl = LookControl(this)
-        navigation = WaterBoundPathNavigation(this, world)
+        navigation = GroundPathNavigation(this, world)
     }
 
     override fun registerGoals() {
@@ -69,10 +70,6 @@ class GardenEelEntity(type: EntityType<out GardenEelEntity>, world: Level) :
 
     override fun isPushedByFluid(): Boolean {
         return false
-    }
-
-    override fun getMovementEmission(): MovementEmission {
-        return MovementEmission.NONE
     }
 
     //#region Animations

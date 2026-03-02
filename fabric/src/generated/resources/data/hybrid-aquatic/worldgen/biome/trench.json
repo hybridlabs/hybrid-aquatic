@@ -130,7 +130,7 @@
     },
     "hybrid-aquatic:slickhead": {
       "charge": 0.1,
-      "energy_budget": 0.2
+      "energy_budget": 0.3
     },
     "hybrid-aquatic:snailfish": {
       "charge": 0.1,

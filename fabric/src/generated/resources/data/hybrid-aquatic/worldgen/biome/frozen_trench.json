@@ -72,13 +72,41 @@
   ],
   "has_precipitation": true,
   "spawn_costs": {
+    "hybrid-aquatic:anglerfish": {
+      "charge": 0.1,
+      "energy_budget": 0.3
+    },
     "hybrid-aquatic:colossal_squid": {
       "charge": 1.0,
       "energy_budget": 0.1
     },
+    "hybrid-aquatic:fangtooth": {
+      "charge": 0.15,
+      "energy_budget": 0.6
+    },
+    "hybrid-aquatic:hatchetfish": {
+      "charge": 0.1,
+      "energy_budget": 0.6
+    },
+    "hybrid-aquatic:ratfish": {
+      "charge": 0.1,
+      "energy_budget": 0.2
+    },
+    "hybrid-aquatic:sleeper_shark": {
+      "charge": 0.5,
+      "energy_budget": 0.8
+    },
+    "hybrid-aquatic:snailfish": {
+      "charge": 0.1,
+      "energy_budget": 0.7
+    },
     "hybrid-aquatic:umbrella_octopus": {
       "charge": 0.8,
       "energy_budget": 0.15
+    },
+    "hybrid-aquatic:viperfish": {
+      "charge": 0.15,
+      "energy_budget": 0.6
     }
   },
   "spawners": {
@@ -108,13 +136,63 @@
     ],
     "hybrid-aquatic:critter": [],
     "hybrid-aquatic:crustacean": [],
-    "hybrid-aquatic:fish": [],
+    "hybrid-aquatic:fish": [
+      {
+        "type": "hybrid-aquatic:ratfish",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "hybrid-aquatic:snailfish",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "hybrid-aquatic:anglerfish",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid-aquatic:fangtooth",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid-aquatic:viperfish",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid-aquatic:hatchetfish",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid-aquatic:sea_angel",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 3
+      }
+    ],
     "hybrid-aquatic:jelly": [],
     "hybrid-aquatic:mammal": [],
     "hybrid-aquatic:miniboss": [],
     "hybrid-aquatic:minion": [],
     "hybrid-aquatic:river_fish": [],
-    "hybrid-aquatic:shark": [],
+    "hybrid-aquatic:shark": [
+      {
+        "type": "hybrid-aquatic:sleeper_shark",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      }
+    ],
     "misc": [],
     "monster": [
       {
