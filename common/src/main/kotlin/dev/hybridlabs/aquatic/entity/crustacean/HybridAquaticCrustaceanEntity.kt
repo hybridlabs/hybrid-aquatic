@@ -145,7 +145,7 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
-        if (this is HermitCrabEntity || this is GiantIsopodEntity && !isHiding) {
+        if ((this is HermitCrabEntity || this is GiantIsopodEntity) && !isHiding) {
             startHiding()
         }
 
