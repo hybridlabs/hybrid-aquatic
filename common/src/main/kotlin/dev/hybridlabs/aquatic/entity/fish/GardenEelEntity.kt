@@ -101,7 +101,10 @@ class GardenEelEntity(type: EntityType<out GardenEelEntity>, world: Level) :
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return  world.getBlockState(pos.below()).isSolid &&
+            val bottomY = world.seaLevel - 32
+
+            return pos.y >= bottomY &&
+                    world.getBlockState(pos.below()).isSolid &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
