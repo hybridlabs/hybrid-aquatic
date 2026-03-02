@@ -63,6 +63,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticFishEntity::hunger)
     }
 
+    //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(MOISTNESS, getMaxMoistness())
@@ -70,6 +71,23 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(HUNGER, MAX_HUNGER)
     }
+
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt(MOISTNESS_KEY, moistness)
+        compound.putInt(FISH_SIZE_KEY, size)
+        compound.putInt(HUNGER_KEY, hunger)
+        compound.putBoolean("FromFishingNet", fromFishingNet)
+    }
+
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        moistness = compound.getInt(MOISTNESS_KEY)
+        size = compound.getInt(FISH_SIZE_KEY)
+        hunger = compound.getInt(HUNGER_KEY)
+        fromFishingNet = compound.getBoolean("FromFishingNet")
+    }
+    //#endregion
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
@@ -86,6 +104,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         return null
     }
 
+    //#region Moistness & Air
     override fun getMobType(): MobType {
         return MobType.WATER
     }
@@ -97,6 +116,113 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
     override fun isPushedByFluid(): Boolean {
         return false
     }
+
+    override fun handleAirSupply(airSupply: Int) {}
+
+    private fun getMaxMoistness(): Int {
+        return 600
+    }
+
+    open fun shouldFlopOnLand(): Boolean {
+        return true
+    }
+    //#endregion
+
+    //#region Animations
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
+            AnimationController(this, "Fish Controller", 4) { state ->
+                when {
+                    isInWater && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.SWIM)
+                    }
+
+                    isInWater && isSprinting && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.RUN)
+                    }
+
+                    isInWater && !state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+
+                    this.moistness < 590 -> {
+                        state.setAndContinue(FLOP_ANIMATION)
+                    }
+
+                    else -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+                }
+            }
+        )
+    }
+
+    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
+        return factory
+    }
+    //#endregion
+
+    //#region SFX
+    open val flopSound: SoundEvent = SoundEvents.PUFFER_FISH_FLOP
+
+    override fun getHurtSound(source: DamageSource): SoundEvent {
+        return SoundEvents.COD_HURT
+    }
+
+    override fun getDeathSound(): SoundEvent {
+        return SoundEvents.COD_DEATH
+    }
+    //#endregion
+
+    //#region Properties
+    var moistness: Int
+        get() = entityData.get(MOISTNESS)
+        set(moistness) {
+            entityData.set(MOISTNESS, moistness)
+        }
+
+    var size: Int
+        get() = entityData.get(FISH_SIZE)
+        set(size) {
+            entityData.set(FISH_SIZE, size)
+        }
+
+    var hunger: Int
+        get() = entityData.get(HUNGER)
+        set(hunger) {
+            entityData.set(HUNGER, hunger)
+        }
+
+    var fromFishingNet = false
+
+    protected open fun getMinSize(): Int {
+        return -5
+    }
+
+    protected open fun getMaxSize(): Int {
+        return 5
+    }
+
+    override fun getMaxHeadXRot(): Int {
+        return 5
+    }
+
+    override fun getMaxHeadYRot(): Int {
+        return 1
+    }
+
+    private fun getHandSwingDuration(): Int {
+        return 40
+    }
+
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
+        return dimensions.height * 0.5f
+    }
+
+    protected open fun hasSelfControl(): Boolean {
+        return true
+    }
+    //#endregion
 
     override fun tick() {
         super.tick()
@@ -148,64 +274,15 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         super.aiStep()
     }
 
-    override fun handleAirSupply(airSupply: Int) {}
-
-    private fun getMaxMoistness(): Int {
-        return 600
-    }
-
-    open fun shouldFlopOnLand(): Boolean {
-        return true
-    }
-
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
-        compound.putInt(MOISTNESS_KEY, moistness)
-        compound.putInt(FISH_SIZE_KEY, size)
-        compound.putInt(HUNGER_KEY, hunger)
-        compound.putBoolean("FromFishingNet", fromFishingNet)
-    }
-
-    var fromFishingNet = false
-
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        super.readAdditionalSaveData(compound)
-        moistness = compound.getInt(MOISTNESS_KEY)
-        size = compound.getInt(FISH_SIZE_KEY)
-        hunger = compound.getInt(HUNGER_KEY)
-        fromFishingNet = compound.getBoolean("FromFishingNet")
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
-    }
-
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return !this.fromFishingNet && !this.hasCustomName()
     }
-
-    //#region SFX
-    open val flopSound: SoundEvent = SoundEvents.PUFFER_FISH_FLOP
-
-    override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.COD_HURT
-    }
-
-    override fun getDeathSound(): SoundEvent {
-        return SoundEvents.COD_DEATH
-    }
-
-    //#region end
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.directEntity
         if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticCephalopodEntity && attacker !is HybridAquaticMammalEntity) {
             super.dropFromLootTable(source, causedByPlayer)
         }
-    }
-
-    private fun getHandSwingDuration(): Int {
-        return 40
     }
 
     override fun updateSwingTime() {
@@ -241,75 +318,6 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         }
     }
 
-    //#region Properties
-
-    var moistness: Int
-        get() = entityData.get(MOISTNESS)
-        set(moistness) {
-            entityData.set(MOISTNESS, moistness)
-        }
-
-    var size: Int
-        get() = entityData.get(FISH_SIZE)
-        set(size) {
-            entityData.set(FISH_SIZE, size)
-        }
-
-    var hunger: Int
-        get() = entityData.get(HUNGER)
-        set(hunger) {
-            entityData.set(HUNGER, hunger)
-        }
-
-    // endregion
-
-    protected open fun hasSelfControl(): Boolean {
-        return true
-    }
-
-    protected open fun getMinSize(): Int {
-        return -5
-    }
-
-    protected open fun getMaxSize(): Int {
-        return 5
-    }
-
-    //#region Animations
-    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(
-            AnimationController(this, "Fish Controller", 4) { state ->
-                when {
-                    isInWater && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    }
-
-                    isInWater && isSprinting && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.RUN)
-                    }
-
-                    isInWater && !state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-
-                    this.moistness < 590 -> {
-                        state.setAndContinue(FLOP_ANIMATION)
-                    }
-
-                    else -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-                }
-            }
-        )
-    }
-
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
-        return factory
-    }
-
-    // endregion
-
     @Suppress("DEPRECATION", "unused")
     companion object {
         val MOISTNESS: EntityDataAccessor<Int> =
@@ -332,6 +340,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         const val MOISTNESS_KEY = "Moistness"
         const val FISH_SIZE_KEY = "FishSize"
 
+        //#region Spawning
         fun canShallowSpawn(
             type: EntityType<out HybridAquaticWaterAnimal>,
             world: ServerLevelAccessor,
@@ -365,8 +374,8 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         ): Boolean {
             return !world.level.isDay &&
                     return pos.y in (world.seaLevel - 32)..(world.seaLevel - 8) &&
-                    world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos)
+                            world.isWaterAt(pos) &&
+                            world.canSeeSkyFromBelowWater(pos)
         }
 
         fun canDeepSpawn(
@@ -379,17 +388,10 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             return pos.y in (world.seaLevel - 256)..(world.seaLevel - 48) &&
                     world.isWaterAt(pos)
         }
+        //#endregion
 
         fun getScaleAdjustment(fish: HybridAquaticFishEntity, adjustment: Float): Float {
             return 1.0f + (fish.size * adjustment)
         }
-    }
-
-    override fun getMaxHeadXRot(): Int {
-        return 5
-    }
-
-    override fun getMaxHeadYRot(): Int {
-        return 1
     }
 }
