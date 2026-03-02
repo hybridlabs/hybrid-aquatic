@@ -13,7 +13,7 @@ class SlickheadEntity(type: EntityType<out SlickheadEntity>, world: Level) :
     override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 1
+        return 2
     }
 
     companion object {

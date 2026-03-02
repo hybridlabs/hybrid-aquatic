@@ -296,7 +296,7 @@ class EntitySpawnConfigGenerator {
                 HybridAquaticBiomeTags.SHALLOW_LUKEWARM_OCEANS,
                 HybridAquaticBiomeTags.WARM_OCEAN,
                 HybridAquaticBiomeTags.SEAGRASS_BED),
-            5, 3, 5
+            5, 3, 8
         )
 
         addFish(
