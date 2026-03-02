@@ -376,7 +376,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.seaLevel - 128)..(world.seaLevel - 48) &&
+            return pos.y in (world.seaLevel - 256)..(world.seaLevel - 48) &&
                     world.isWaterAt(pos)
         }
 

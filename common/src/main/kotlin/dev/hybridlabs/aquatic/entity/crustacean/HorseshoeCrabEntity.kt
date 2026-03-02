@@ -30,7 +30,7 @@ class HorseshoeCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
             random: RandomSource,
         ): Boolean {
             val shallowSpawn = (world.seaLevel - 8)..(world.seaLevel + 4)
-            val deepSpawn = (world.seaLevel - 128)..(world.seaLevel - 16)
+            val deepSpawn = (world.seaLevel - 256)..(world.seaLevel - 16)
 
             val fullMoon = world.moonPhase == 0
             val newMoon = world.moonPhase == 4

@@ -54,7 +54,7 @@ class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) :
             random: RandomSource,
         ): Boolean {
             val nightSpawn = (world.seaLevel - 16)..<world.seaLevel
-            val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 48)
+            val daySpawn = (world.seaLevel - 256)..(world.seaLevel - 48)
 
             val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
 

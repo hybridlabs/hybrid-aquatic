@@ -366,7 +366,7 @@ open class HybridAquaticJellyfishEntity(
             random: RandomSource
         ): Boolean {
             val topY = world.seaLevel - 48
-            val bottomY = world.seaLevel - 128
+            val bottomY = world.seaLevel - 256
 
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos)

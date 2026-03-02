@@ -31,7 +31,7 @@ class SpiderCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
             random: RandomSource,
         ): Boolean {
             val shallowSpawn = (world.seaLevel - 24)..(world.seaLevel - 4)
-            val deepSpawn = (world.seaLevel - 128)..(world.seaLevel - 25)
+            val deepSpawn = (world.seaLevel - 256)..(world.seaLevel - 25)
 
             val fullMoon = world.moonPhase == 0
             val newMoon = world.moonPhase == 4
