@@ -142,6 +142,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.MAHI.get(),
                 HybridAquaticEntityTypes.BARRACUDA.get(),
                 HybridAquaticEntityTypes.COELACANTH.get(),
+                HybridAquaticEntityTypes.SLICKHEAD.get(),
                 HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
                 EntityType.PLAYER,
                 EntityType.TURTLE,

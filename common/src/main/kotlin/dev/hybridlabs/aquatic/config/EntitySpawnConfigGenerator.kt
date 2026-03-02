@@ -513,7 +513,7 @@ class EntitySpawnConfigGenerator {
         addFish(
             HybridAquaticEntityTypes.SEA_ANGEL.get(),
             listOf(
-                HybridAquaticBiomeTags.ARCTIC_OCEANS,
+                HybridAquaticBiomeTags.ARCTIC_TRENCH,
                 HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH),
             1, 1, 2
@@ -524,6 +524,14 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HybridAquaticBiomeTags.DEEP_REEF,
                 HybridAquaticBiomeTags.LUKEWARM_TRENCH,
+                HybridAquaticBiomeTags.TEMPERATE_TRENCH),
+            1, 1, 2
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.SLICKHEAD.get(),
+            listOf(
+                HybridAquaticBiomeTags.COLD_TRENCH,
                 HybridAquaticBiomeTags.TEMPERATE_TRENCH),
             1, 1, 1
         )

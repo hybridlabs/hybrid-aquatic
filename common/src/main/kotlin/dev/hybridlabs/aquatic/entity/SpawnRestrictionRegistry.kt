@@ -94,6 +94,7 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.HATCHETFISH.get(),
             HybridAquaticEntityTypes.BARRELEYE.get(),
             HybridAquaticEntityTypes.COELACANTH.get(),
+            HybridAquaticEntityTypes.SLICKHEAD.get(),
             HybridAquaticEntityTypes.RATFISH.get(),
             HybridAquaticEntityTypes.JOHN_DORY.get(),
             HybridAquaticEntityTypes.SNAILFISH.get(),

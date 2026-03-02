@@ -216,6 +216,13 @@ object HybridAquaticEntityTypes {
         CoelacanthEntity::createMobAttributes
     )
 
+    val SLICKHEAD = registerFishUnderground(
+        "slickhead",
+        ::SlickheadEntity,
+        EntityDimensions.fixed(1.0f, 0.6f),
+        SlickheadEntity::createMobAttributes
+    )
+
     val DRAGONFISH = registerFishUnderground(
         "dragonfish",
         ::DragonfishEntity,

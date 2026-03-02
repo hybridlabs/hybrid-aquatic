@@ -461,7 +461,11 @@ class BiomeProvider(
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COELACANTH.get(), 1, 1, 1)
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COELACANTH.get(), 1, 1, 2)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
+                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SLICKHEAD.get(), 1, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
@@ -494,6 +498,7 @@ class BiomeProvider(
                     Triple(HybridAquaticEntityTypes.SEA_ANGEL.get(), 0.1, 0.25),
                     Triple(HybridAquaticEntityTypes.BARRELEYE.get(), 0.1, 0.2),
                     Triple(HybridAquaticEntityTypes.COELACANTH.get(), 0.1, 0.2),
+                    Triple(HybridAquaticEntityTypes.SLICKHEAD.get(), 0.1, 0.2),
                     Triple(HybridAquaticEntityTypes.OARFISH.get(), 0.5, 0.8),
 
                     Triple(HybridAquaticEntityTypes.SIXGILL_SHARK.get(), 0.4, 0.8),

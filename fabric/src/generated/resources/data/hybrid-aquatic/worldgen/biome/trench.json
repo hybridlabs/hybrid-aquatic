@@ -128,6 +128,10 @@
       "charge": 0.4,
       "energy_budget": 0.8
     },
+    "hybrid-aquatic:slickhead": {
+      "charge": 0.1,
+      "energy_budget": 0.2
+    },
     "hybrid-aquatic:snailfish": {
       "charge": 0.1,
       "energy_budget": 0.7
@@ -247,6 +251,12 @@
       },
       {
         "type": "hybrid-aquatic:coelacanth",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "hybrid-aquatic:slickhead",
         "maxCount": 1,
         "minCount": 1,
         "weight": 1

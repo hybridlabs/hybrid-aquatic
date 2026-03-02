@@ -16,7 +16,7 @@ val BuiltinSpawnModifiers: Set<SpawnModifier> = setOf(
         )
     ),
     SpawnModifier(
-        "ruined_portal_ocean", BuiltinStructures.SHIPWRECK_BEACHED, BoundingBoxType.STRUCTURE, mapOf(
+        "shipwreck_beached", BuiltinStructures.SHIPWRECK_BEACHED, BoundingBoxType.STRUCTURE, mapOf(
             "HYBRID_AQUATIC_CRUSTACEAN" to listOf(
                 MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COCONUT_CRAB.get(), 1, 1, 4
                 )

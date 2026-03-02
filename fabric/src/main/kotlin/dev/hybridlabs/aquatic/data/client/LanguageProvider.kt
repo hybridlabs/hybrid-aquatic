@@ -601,6 +601,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.FLYING_FISH.get() to "Flying Fish",
             HybridAquaticEntityTypes.LIONFISH.get() to "Lionfish",
             HybridAquaticEntityTypes.COELACANTH.get() to "Coelacanth",
+            HybridAquaticEntityTypes.SLICKHEAD.get() to "Slickhead",
             HybridAquaticEntityTypes.OARFISH.get() to "Oarfish",
             HybridAquaticEntityTypes.OPAH.get() to "Opah",
             HybridAquaticEntityTypes.PIRANHA.get() to "Piranha",

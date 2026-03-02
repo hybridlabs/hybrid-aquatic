@@ -126,6 +126,12 @@ object HybridAquaticEntityRenderers {
             ::CoelacanthEntityRenderer
         )
 
+    val SLICKHEAD =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.SLICKHEAD,
+            ::SlickheadEntityRenderer
+        )
+
     val FLASHLIGHT_FISH =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.FLASHLIGHT_FISH,
