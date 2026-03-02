@@ -17,6 +17,7 @@
     "hybrid-aquatic:surgeonfish",
     "hybrid-aquatic:triggerfish",
     "hybrid-aquatic:wrasse",
+    "minecraft:tropical_fish",
     {
       "id": "alexsmobs:flying_fish",
       "required": false

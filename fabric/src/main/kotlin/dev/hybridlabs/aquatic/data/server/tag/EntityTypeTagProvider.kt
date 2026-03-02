@@ -200,6 +200,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.SURGEONFISH.get(),
                 HybridAquaticEntityTypes.TRIGGERFISH.get(),
                 HybridAquaticEntityTypes.WRASSE.get(),
+                EntityType.TROPICAL_FISH,
             )
             .addOptional(ResourceLocation("alexsmobs", "flying_fish"))
             .addOptional(ResourceLocation("bountiful_critters", "angelfish"))
@@ -606,6 +607,12 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             )
             .addOptional(ResourceLocation("alexsmobs", "terrapin"))
             .addOptional(ResourceLocation("alexsmobs", "alligator_snapping_turtle"))
+
+        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_AMPHIBIANS)
+            .add(
+                EntityType.AXOLOTL,
+                EntityType.FROG,
+            )
         //#endregion
 
         //#region Fishing Net Implementation
@@ -615,6 +622,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addTag(HybridAquaticEntityTags.ALL_CRUSTACEANS)
             .addTag(HybridAquaticEntityTags.ALL_CEPHALOPODS)
             .addTag(HybridAquaticEntityTags.ALL_MAMMALS)
+            .addTag(HybridAquaticEntityTags.ALL_AMPHIBIANS)
             .addTag(HybridAquaticEntityTags.ALL_JELLYFISH)
             .addTag(HybridAquaticEntityTags.ALL_CRITTERS)
             .addTag(HybridAquaticEntityTags.TURTLE)

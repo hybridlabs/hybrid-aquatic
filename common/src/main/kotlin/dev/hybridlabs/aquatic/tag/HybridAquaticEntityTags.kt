@@ -51,6 +51,7 @@ object HybridAquaticEntityTags {
 
     //#region Misc Creature Tags
     val TURTLE = create("turtle")
+    val ALL_AMPHIBIANS = create("all_amphibians")
     val ALL_CRITTERS = create("all_critters")
     val ALL_JELLYFISH = create("all_jellyfish")
 
