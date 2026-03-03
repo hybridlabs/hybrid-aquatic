@@ -6,7 +6,6 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.util.RandomSource
 import net.minecraft.world.Difficulty
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
@@ -167,11 +166,8 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
             SynchedEntityData.defineId(HybridAquaticMinionEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         fun canSpawn(
-            type: EntityType<out Monster>,
             world: LevelAccessor,
-            reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource,
         ): Boolean {
             return world.isWaterAt(pos)
         }

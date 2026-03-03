@@ -48,7 +48,9 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
 
     @Unique
     private boolean isWearingDivingBoots;
+    @Unique
     private boolean isWearingReinforcedDivingBoots;
+    @Unique
     private boolean isWearingGlowingDivingBoots;
 
     @Override

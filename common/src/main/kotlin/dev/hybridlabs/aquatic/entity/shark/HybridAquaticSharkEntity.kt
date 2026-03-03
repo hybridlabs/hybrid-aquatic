@@ -394,11 +394,8 @@ open class HybridAquaticSharkEntity(
 
         //#region Spawning
         fun canShallowSpawn(
-            type: EntityType<out HybridAquaticWaterAnimal>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 2
             val bottomY = world.seaLevel - 6
@@ -409,11 +406,8 @@ open class HybridAquaticSharkEntity(
         }
 
         fun canSpawn(
-            type: EntityType<out HybridAquaticWaterAnimal>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 8
             val bottomY = world.seaLevel - 24
@@ -424,9 +418,7 @@ open class HybridAquaticSharkEntity(
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canDeepSpawn(
-            type: EntityType<out HybridAquaticWaterAnimal>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {

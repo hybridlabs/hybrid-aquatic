@@ -7,7 +7,6 @@ import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
@@ -155,11 +154,8 @@ open class HybridAquaticCritterEntity(
             SynchedEntityData.defineId(HybridAquaticCritterEntity::class.java, EntityDataSerializers.BYTE)
 
         fun canSpawn(
-            type: EntityType<out WaterAnimal>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel
             val bottomY = world.seaLevel - 256

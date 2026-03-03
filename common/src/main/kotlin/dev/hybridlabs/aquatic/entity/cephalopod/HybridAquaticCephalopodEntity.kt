@@ -365,9 +365,7 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canSpawn(
-            type: EntityType<out WaterAnimal>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
             pos: BlockPos,
             random: RandomSource
         ): Boolean {
@@ -382,9 +380,7 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canDeepSpawn(
-            type: EntityType<out WaterAnimal>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
             pos: BlockPos,
             random: RandomSource
         ): Boolean {

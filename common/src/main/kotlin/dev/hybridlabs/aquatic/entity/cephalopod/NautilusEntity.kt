@@ -5,10 +5,8 @@ import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -30,11 +28,8 @@ class NautilusEntity(type: EntityType<out NautilusEntity>, world: Level) : Hybri
         }
 
         fun canSpawn(
-            type: EntityType<out NautilusEntity>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource,
         ): Boolean {
             val nightSpawn = (world.seaLevel - 256)..(world.seaLevel - 8)
             val daySpawn = (world.seaLevel - 256)..(world.seaLevel - 48)

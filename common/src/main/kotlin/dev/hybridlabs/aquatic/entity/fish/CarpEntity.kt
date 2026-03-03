@@ -10,7 +10,6 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.ByIdMap
-import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
@@ -78,11 +77,8 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) :
         }
 
         fun canSpawn(
-            type: EntityType<out CarpEntity>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource,
         ): Boolean {
             return  pos.y in (world.seaLevel - 16)..< world.seaLevel + 64 &&
                     world.isWaterAt(pos) &&

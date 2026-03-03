@@ -3,9 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
-import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -35,11 +33,8 @@ class PupfishEntity(type: EntityType<out PupfishEntity>, world: Level) :
         }
 
         fun canSpawn(
-            type: EntityType<out PupfishEntity>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource,
         ): Boolean {
 
             return pos.y in world.minBuildHeight ..< world.maxBuildHeight &&

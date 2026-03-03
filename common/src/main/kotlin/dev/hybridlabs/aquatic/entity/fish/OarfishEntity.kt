@@ -3,9 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
-import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -56,11 +54,8 @@ class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) :
         }
 
         fun canSpawn(
-            type: EntityType<out OarfishEntity>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource,
         ): Boolean {
             val shallowSpawn = (world.seaLevel - 12)..(world.seaLevel - 2)
             val deepSpawn = (world.seaLevel - 256)..(world.seaLevel - 48)
