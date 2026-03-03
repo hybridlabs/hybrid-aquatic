@@ -49,15 +49,6 @@ open class HybridAquaticCrustaceanEntity(
     private var fromFishingNet = false
     private var songPlaying = false
     private var songSource: BlockPos? = null
-    private var isHiding: Boolean = false
-    private var hidingTimer: Int = 0
-    private var lastDamageTime: Long = 0
-
-    var size: Int
-        get() = entityData.get(CRUSTACEAN_SIZE)
-        set(size) {
-            entityData.set(CRUSTACEAN_SIZE, size)
-        }
 
     override fun registerGoals() {
         super.registerGoals()
@@ -97,14 +88,6 @@ open class HybridAquaticCrustaceanEntity(
         super.aiStep()
     }
 
-    override fun getMaxHeadXRot(): Int {
-        return 1
-    }
-
-    override fun getMaxHeadYRot(): Int {
-        return 1
-    }
-
     override fun setRecordPlayingNearby(songPosition: BlockPos, playing: Boolean) {
         this.songSource = songPosition
         this.songPlaying = playing
@@ -112,46 +95,6 @@ open class HybridAquaticCrustaceanEntity(
 
     private fun isSongPlaying(): Boolean {
         return this.songPlaying
-    }
-
-    override fun isAffectedByFluids(): Boolean {
-        return !onGround()
-    }
-
-    override fun isPushedByFluid(): Boolean {
-        return false
-    }
-
-    private fun startHiding() {
-        isHiding = true
-        hidingTimer = 200
-    }
-
-    override fun tick() {
-        super.tick()
-
-        if ((this is HermitCrabEntity || this is GiantIsopodEntity) && isHiding) {
-            hidingTimer--
-
-            if (hidingTimer <= 0 && (level().gameTime - lastDamageTime) >= 200) {
-                isHiding = false
-                attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 0.3
-                attributes.getInstance(Attributes.ARMOR)?.baseValue = 5.0
-            } else {
-                attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 0.0
-                attributes.getInstance(Attributes.ARMOR)?.baseValue = 50.0
-            }
-        }
-    }
-
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
-        if ((this is HermitCrabEntity || this is GiantIsopodEntity) && !isHiding) {
-            startHiding()
-        }
-
-        lastDamageTime = level().gameTime
-
-        return super.hurt(source, amount)
     }
 
     //#region Moistness & Air
@@ -165,7 +108,22 @@ open class HybridAquaticCrustaceanEntity(
 
     override fun handleAirSupply(air: Int) {
     }
+
+    override fun isAffectedByFluids(): Boolean {
+        return !onGround()
+    }
+
+    override fun isPushedByFluid(): Boolean {
+        return false
+    }
     //#endregion
+
+    //#region Properties
+    var size: Int
+        get() = entityData.get(CRUSTACEAN_SIZE)
+        set(size) {
+            entityData.set(CRUSTACEAN_SIZE, size)
+        }
 
     protected open fun getMinSize(): Int {
         return 0
@@ -175,7 +133,22 @@ open class HybridAquaticCrustaceanEntity(
         return 0
     }
 
+    override fun getMaxHeadXRot(): Int {
+        return 1
+    }
+
+    override fun getMaxHeadYRot(): Int {
+        return 1
+    }
+    //#endregion
+
     //#region Data
+    override fun defineSynchedData() {
+        super.defineSynchedData()
+        entityData.define(CRUSTACEAN_SIZE, 0)
+        entityData.define(ATTEMPT_ATTACK, false)
+    }
+
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         super.addAdditionalSaveData(nbt)
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
@@ -186,12 +159,6 @@ open class HybridAquaticCrustaceanEntity(
         super.readAdditionalSaveData(nbt)
         size = nbt.getInt(CRUSTACEAN_SIZE_KEY)
         fromFishingNet = nbt.getBoolean("FromFishingNet")
-    }
-
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(CRUSTACEAN_SIZE, 0)
-        entityData.define(ATTEMPT_ATTACK, false)
     }
     //#endregion
 
@@ -215,17 +182,6 @@ open class HybridAquaticCrustaceanEntity(
             DefaultAnimations.genericWalkIdleController(this)
         )
         controllerRegistrar.add(
-            AnimationController(this, "Hide", 4,
-                AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
-                    if (this.isHiding) {
-                        return@AnimationStateHandler state.setAndContinue(HIDE_ANIMATION)
-                    } else {
-                        PlayState.STOP
-                    }
-                }
-            )
-        )
-        controllerRegistrar.add(
             AnimationController(this, "Dance", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
                     if (this.canDance && isSongPlaying()) {
@@ -245,7 +201,10 @@ open class HybridAquaticCrustaceanEntity(
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.directEntity
-        if (attacker !is HybridAquaticFishEntity && attacker !is HybridAquaticSharkEntity && attacker !is HybridAquaticCephalopodEntity && attacker !is HybridAquaticMammalEntity) {
+        if (attacker !is HybridAquaticFishEntity &&
+            attacker !is HybridAquaticSharkEntity &&
+            attacker !is HybridAquaticCephalopodEntity &&
+            attacker !is HybridAquaticMammalEntity) {
             super.dropFromLootTable(source, causedByPlayer)
         }
     }
