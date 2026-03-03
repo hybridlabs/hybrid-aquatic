@@ -42,6 +42,23 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
         goalSelector.addGoal(1, HurtByTargetGoal(this))
     }
 
+    //#region Data
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
+    }
+
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
+    }
+
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
+    }
+    //#endregion
+
     override fun getDefaultLootTable(): ResourceLocation {
         return when (variant) {
             Type.BLUE_SPOTTED -> HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY
@@ -122,21 +139,6 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
                 }
             }
         }
-    }
-
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
-    }
-
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        compound.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(compound)
-    }
-
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        this.variant = Type.byName(compound.getString("Type"))
-        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

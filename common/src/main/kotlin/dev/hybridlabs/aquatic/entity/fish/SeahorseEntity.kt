@@ -45,6 +45,23 @@ class SeahorseEntity(type: EntityType<out SeahorseEntity>, world: Level) :
         return dimensions.height * 0.8f
     }
 
+    //#region Data
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
+    }
+
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
+    }
+
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
+    }
+    //#endregion
+
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
@@ -106,21 +123,6 @@ class SeahorseEntity(type: EntityType<out SeahorseEntity>, world: Level) :
                 }
             }
         }
-    }
-
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
-    }
-
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        compound.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(compound)
-    }
-
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        this.variant = Type.byName(compound.getString("Type"))
-        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

@@ -9,7 +9,11 @@ class SeaAngelEntity(type: EntityType<out SeaAngelEntity>, world: Level) :
     HybridAquaticFishEntity(type, world) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 1
+        return 3
+    }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
     }
 
     companion object {
@@ -21,9 +25,5 @@ class SeaAngelEntity(type: EntityType<out SeaAngelEntity>, world: Level) :
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)
         }
-    }
-
-    override fun shouldFlopOnLand(): Boolean {
-        return false
     }
 }

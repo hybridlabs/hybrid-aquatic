@@ -3,6 +3,9 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
+import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
+import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
@@ -161,7 +164,14 @@ class HerringEntity(type: EntityType<out HerringEntity>, world: Level) :
                 else -> ONE_FISH
             }
 
-            if (newFishCount in 1..<oldFishCount && level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+            val attacker = source.directEntity
+
+            if (newFishCount in 1..<oldFishCount &&
+                level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS) &&
+                attacker !is HybridAquaticFishEntity &&
+                attacker !is HybridAquaticSharkEntity &&
+                attacker !is HybridAquaticCephalopodEntity &&
+                attacker !is HybridAquaticMammalEntity) {
                 spawnAtLocation(HybridAquaticItems.HERRING.get())
             }
         }
