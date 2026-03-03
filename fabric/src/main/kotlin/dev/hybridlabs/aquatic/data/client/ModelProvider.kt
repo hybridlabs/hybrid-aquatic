@@ -475,7 +475,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.EEL_SCARF.get(),
             HybridAquaticItems.MOON_JELLYFISH_HAT.get(),
             HybridAquaticItems.BRINE_BUCKET.get(),
-            HybridAquaticItems.CLAM.get()
         ).forEach { item ->
             generator.generateFlatItem(item, ModelTemplates.FLAT_ITEM)
         }

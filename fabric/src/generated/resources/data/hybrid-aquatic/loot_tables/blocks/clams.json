@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "hybrid-aquatic:clam"
         }
       ],
       "rolls": 1.0

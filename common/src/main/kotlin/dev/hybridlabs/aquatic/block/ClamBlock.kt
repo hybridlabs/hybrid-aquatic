@@ -2,11 +2,14 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.core.BlockPos
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
+import net.minecraft.util.RandomSource
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.CropBlock
 import net.minecraft.world.level.block.LiquidBlockContainer
@@ -17,6 +20,7 @@ import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
+@Suppress("OVERRIDE_DEPRECATION")
 class ClamBlock(properties: Properties) : CropBlock(properties),
     LiquidBlockContainer {
 
@@ -34,6 +38,32 @@ class ClamBlock(properties: Properties) : CropBlock(properties),
 
     override fun canPlaceLiquid(world: BlockGetter, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
         return false
+    }
+
+    override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
+        val below = pos.below()
+        val belowState = level.getBlockState(below)
+
+        val fluidState = level.getFluidState(pos)
+
+        return belowState.`is`(Blocks.SAND)
+                && fluidState.`is`(FluidTags.WATER)
+                && fluidState.amount == 8
+    }
+
+    override fun randomTick(
+        state: BlockState,
+        level: ServerLevel,
+        pos: BlockPos,
+        random: RandomSource
+    ) {
+        val age = getAge(state)
+
+        if (age < maxAge) {
+            if (random.nextInt(25) == 0) {
+                level.setBlock(pos, getStateForAge(age + 1), 2)
+            }
+        }
     }
 
     override fun placeLiquid(

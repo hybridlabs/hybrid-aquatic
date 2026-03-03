@@ -209,7 +209,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BUOY.get() to "Buoy",
             HybridAquaticBlocks.GIANT_CLAM.get() to "Giant Clam",
             HybridAquaticBlocks.OYSTER.get() to "Oyster",
-            HybridAquaticBlocks.CLAMS.get() to "Clams",
+            HybridAquaticBlocks.CLAMS.get() to "Clam",
             HybridAquaticBlocks.CRYSTALLINE_SULFUR.get() to "Crystalline Sulfur",
             HybridAquaticBlocks.DEPTH_CHARGE.get() to "Depth Charge",
 
@@ -369,7 +369,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.RAW_SHRIMP.get() to "Raw Shrimp",
             HybridAquaticItems.COOKED_SHRIMP.get() to "Cooked Shrimp",
             HybridAquaticItems.OYSTER.get() to "Oyster",
-            HybridAquaticItems.CLAM.get() to "Clam",
             HybridAquaticItems.RAW_CRAYFISH.get() to "Raw Crayfish",
             HybridAquaticItems.COOKED_CRAYFISH.get() to "Cooked Crayfish",
             HybridAquaticItems.LIONFISH.get() to "Lionfish",
@@ -543,7 +542,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         // Item Functions
         mapOf(
-            HybridAquaticItems.FISHING_NET.get().descriptionId to "Lets you catch and move aquatic creatures",
+            HybridAquaticItems.FISHING_NET.get().descriptionId to "Lets you catch and move aquatic creatures\nPlaced creatures become passive and don't despawn",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".function"), translation)
         }
