@@ -13,11 +13,12 @@ import software.bernie.geckolib.core.`object`.PlayState
 
 class GiantIsopodEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
     HybridAquaticCrustaceanEntity(entityType, world, false) {
+
+    //#region Hiding
     private var isHiding: Boolean = false
     private var hidingTimer: Int = 0
     private var lastDamageTime: Long = 0
 
-    //#region Hiding
     private fun startHiding() {
         isHiding = true
         hidingTimer = 200
@@ -70,6 +71,16 @@ class GiantIsopodEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity
     }
     //#endregion
 
+    //#region Properties
+    override fun getMaxSize(): Int {
+        return 5
+    }
+
+    override fun getMinSize(): Int {
+        return -5
+    }
+    //#endregion
+
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
@@ -79,13 +90,5 @@ class GiantIsopodEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 4.0)
         }
-    }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
     }
 }

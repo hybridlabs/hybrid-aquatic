@@ -29,9 +29,6 @@ import java.util.function.IntFunction
 class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
     HybridAquaticCrustaceanEntity(entityType, world, false),
     VariantHolder<HermitCrabEntity.Companion.Type> {
-    private var isHiding: Boolean = false
-    private var hidingTimer: Int = 0
-    private var lastDamageTime: Long = 0
 
     //#region Shells & Items
     override fun finalizeSpawn(
@@ -152,6 +149,10 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     //#endregion
 
     //#region Hiding
+    private var isHiding: Boolean = false
+    private var hidingTimer: Int = 0
+    private var lastDamageTime: Long = 0
+
     private fun startHiding() {
         if (variant == Type.NONE) return
 
