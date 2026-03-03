@@ -275,6 +275,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.SHINER.get(),
                 HybridAquaticEntityTypes.SUNFISH.get(),
                 HybridAquaticEntityTypes.TROUT.get(),
+                EntityType.COD,
+                EntityType.SALMON
             )
             .addOptional(ResourceLocation("fintastic", "catfish"))
             .addOptional(ResourceLocation("fintastic", "minnow"))

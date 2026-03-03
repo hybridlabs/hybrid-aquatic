@@ -5,6 +5,8 @@
     "hybrid-aquatic:shiner",
     "hybrid-aquatic:sunfish",
     "hybrid-aquatic:trout",
+    "minecraft:cod",
+    "minecraft:salmon",
     {
       "id": "fintastic:catfish",
       "required": false
