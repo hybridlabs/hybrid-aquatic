@@ -12,6 +12,7 @@ class FishingNetTooltip :
     PredicateItemTooltipCallback(HybridAquaticItems.FISHING_NET.get()) {
     override fun appendTooltip(stack: ItemStack, context: TooltipFlag, lines: MutableList<Component>) {
         lines.add(Component.translatable("item.hybrid-aquatic.fishing_net.function").withStyle(ChatFormatting.GRAY))
+        lines.add(Component.translatable("item.hybrid-aquatic.fishing_net.properties").withStyle(ChatFormatting.GRAY))
         val nbtCopy = stack.tag?.copy()
         if (nbtCopy != null) {
             val optionalEntity = FishingNetItem.getEntityFromNBT(nbtCopy)

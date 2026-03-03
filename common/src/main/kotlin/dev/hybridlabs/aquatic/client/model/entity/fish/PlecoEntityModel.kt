@@ -26,7 +26,6 @@ class PlecoEntityModel : HybridAquaticFishEntityModel<PlecoEntity>("pleco") {
         return when (animatable.variant) {
             PlecoEntity.Companion.Type.COMMON -> COMMON_PLECO_MODEL
             PlecoEntity.Companion.Type.BRISTLENOSE -> BRISTLENOSE_PLECO_MODEL
-            else -> COMMON_PLECO_MODEL
         }
     }
 }

@@ -163,7 +163,6 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         //#endregion
 
         //#region Corals
-
         for (block in listOf(
             HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK.get(),
             HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK.get(),
@@ -209,7 +208,6 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         )) {
             add(block, createSilkTouchOnlyTable(block))
         }
-
         //#endregion
 
         //#region Thermal Vent

@@ -14,7 +14,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.material.Fluids
-import java.util.Optional
+import java.util.*
 
 class FishingNetItem(settings: Properties) : Item(settings) {
 
@@ -80,8 +80,6 @@ class FishingNetItem(settings: Properties) : Item(settings) {
 
         return InteractionResultHolder.pass(stack)
     }
-
-
 
     companion object {
         private const val ENTITY_KEY: String = "storedEntity"

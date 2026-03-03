@@ -542,9 +542,15 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         // Item Functions
         mapOf(
-            HybridAquaticItems.FISHING_NET.get().descriptionId to "Lets you catch and move aquatic creatures\nPlaced creatures become passive and don't despawn",
+            HybridAquaticItems.FISHING_NET.get().descriptionId to "Lets you catch and move aquatic creatures",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".function"), translation)
+        }
+
+        mapOf(
+            HybridAquaticItems.FISHING_NET.get().descriptionId to "Placed creatures become passive and don't despawn",
+        ).forEach { (itemTranslationKey, translation) ->
+            builder.add(itemTranslationKey.plus(".properties"), translation)
         }
 
         mapOf(
