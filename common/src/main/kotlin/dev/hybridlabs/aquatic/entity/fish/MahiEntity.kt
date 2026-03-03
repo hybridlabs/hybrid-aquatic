@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.nbt.CompoundTag
@@ -73,6 +74,7 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
         goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 3.0))
     }
 
@@ -90,7 +92,7 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.75)
+                .add(Attributes.MOVEMENT_SPEED, 0.65)
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)

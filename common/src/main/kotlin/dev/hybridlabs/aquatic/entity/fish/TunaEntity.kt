@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
@@ -52,6 +53,7 @@ class TunaEntity(type: EntityType<out TunaEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
         goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 5.0))
     }
 
@@ -73,7 +75,7 @@ class TunaEntity(type: EntityType<out TunaEntity>, world: Level) :
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.8)
+                .add(Attributes.MOVEMENT_SPEED, 0.7)
                 .add(Attributes.ATTACK_DAMAGE, 5.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)

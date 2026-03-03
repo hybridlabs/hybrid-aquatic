@@ -46,17 +46,28 @@ class BoidGoal(
 
     override fun tick() {
 
-        var boidVec = cohesion().add(alignment().add(separation().add(random())))
+        val hasTarget = mob.target != null
+
+        val sep = if (hasTarget) separation().scale(0.2) else separation()
+        val ali = if (hasTarget) alignment().scale(0.5) else alignment()
+        val coh = if (hasTarget) cohesion().scale(0.4) else cohesion()
+
+        var boidVec = coh
+            .add(ali)
+            .add(sep)
+            .add(random())
+            .add(targetAttraction())
+
         if (boidVec.length() > getMaxDelta()) {
             boidVec = boidVec.normalize().scale(getMaxDelta())
         }
 
         mob.addDeltaMovement(boidVec)
 
-        val target = mob.position().add(mob.deltaMovement)
+        val targetPos = mob.position().add(mob.deltaMovement)
         mob.lookAt(
             EntityAnchorArgument.Anchor.EYES,
-            Vec3(target.x, target.y + mob.eyeHeight, target.z)
+            Vec3(targetPos.x, targetPos.y + mob.eyeHeight, targetPos.z)
         )
     }
 
@@ -104,6 +115,14 @@ class BoidGoal(
         c = c.scale((1f / nearbyMobs.size).toDouble())
         c = c.subtract(mob.position())
         return c.scale(cohesionInfluence.toDouble())
+    }
+
+    private fun targetAttraction(): Vec3 {
+        val target = mob.target ?: return Vec3.ZERO
+        if (!target.isAlive) return Vec3.ZERO
+
+        val targetPos = target.position().subtract(mob.position())
+        return targetPos.normalize().scale(maxSpeed * 0.15)
     }
 
     companion object {
