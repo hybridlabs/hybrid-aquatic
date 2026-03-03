@@ -1,17 +1,11 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FishFollowGroupLeaderGoal
-import net.minecraft.nbt.CompoundTag
-import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.ServerLevelAccessor
 import java.util.stream.Stream
-import javax.xml.crypto.Data
 
 @Suppress("NAME_SHADOWING")
 open class HybridAquaticSchoolingFishEntity(type: EntityType<out HybridAquaticFishEntity>, world: Level) :

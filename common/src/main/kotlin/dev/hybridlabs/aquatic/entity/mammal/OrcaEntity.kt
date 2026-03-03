@@ -6,7 +6,6 @@ import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import dev.hybridlabs.aquatic.entity.fish.MantaRayEntity
-import dev.hybridlabs.aquatic.entity.fish.TunaEntity
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag

@@ -422,24 +422,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                 )
         )
 
-        exporter.accept(
-            HybridAquaticLootTables.HERMIT_CRAB_SKULL,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(Items.SKELETON_SKULL)).build()
-                )
-        )
-
-        exporter.accept(
-            HybridAquaticLootTables.HERMIT_CRAB_SHELL,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(Items.NAUTILUS_SHELL)).build()
-                )
-        )
-
         //#region Decorator Crab Loot
         exporter.accept(
             HybridAquaticLootTables.DECORATOR_FIRE,

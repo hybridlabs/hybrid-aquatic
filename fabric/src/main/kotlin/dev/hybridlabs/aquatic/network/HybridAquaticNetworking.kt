@@ -4,10 +4,11 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.projectile.FishingHook
 
 object HybridAquaticNetworking {
-    var FISHING_BOBBER_LURE = CommonClass.locate("fishing_bobber_lure")
+    var FISHING_BOBBER_LURE: ResourceLocation = CommonClass.locate("fishing_bobber_lure")
 
     fun registerNetworking() {
         // Sends lure item to the client back

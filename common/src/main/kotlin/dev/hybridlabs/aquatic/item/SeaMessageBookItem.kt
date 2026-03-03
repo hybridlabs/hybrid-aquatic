@@ -18,10 +18,6 @@ import net.minecraft.world.level.Level
 
 class
 SeaMessageBookItem(settings: Properties) : Item(settings) {
-    override fun getName(stack: ItemStack): Component {
-        // TODO book title - possible with item components? registry manager not present here (FUTURE)
-        return super.getName(stack)
-    }
 
     override fun appendHoverText(
         stack: ItemStack,

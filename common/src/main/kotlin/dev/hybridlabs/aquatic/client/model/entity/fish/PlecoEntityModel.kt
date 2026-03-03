@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import dev.hybridlabs.aquatic.entity.fish.PlecoEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation

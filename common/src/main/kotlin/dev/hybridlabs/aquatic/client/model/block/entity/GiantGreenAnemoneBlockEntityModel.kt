@@ -20,8 +20,8 @@ class GiantGreenAnemoneBlockEntityModel : GeoModel<GiantGreenAnemoneBlockEntity>
     }
 
     companion object {
-        val ANIMATION_LOCATION = CommonClass.locate("animations/anemone.animation.json")
-        val MODEL_LOCATION = CommonClass.locate("geo/giant_green_anemone.geo.json")
-        val TEXTURE_LOCATION = CommonClass.locate("textures/block/giant_green_anemone.png")
+        val ANIMATION_LOCATION: ResourceLocation = CommonClass.locate("animations/anemone.animation.json")
+        val MODEL_LOCATION: ResourceLocation = CommonClass.locate("geo/giant_green_anemone.geo.json")
+        val TEXTURE_LOCATION: ResourceLocation = CommonClass.locate("textures/block/giant_green_anemone.png")
     }
 }

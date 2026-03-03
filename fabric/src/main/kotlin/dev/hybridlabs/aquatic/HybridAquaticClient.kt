@@ -28,7 +28,7 @@ import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.GiantGreenAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
-import dev.hybridlabs.aquatic.client.renderer.item.StrawberryAnemoneBlockItemRenderer
+import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer

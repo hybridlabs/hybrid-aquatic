@@ -91,37 +91,37 @@ object HybridAquaticPotions {
 
     fun registerPotionRecipes() {
         PotionBrewing.addMix(
-            Potions.AWKWARD, Items.INK_SAC, HybridAquaticPotions.BLINDNESS_POTION.get()
+            Potions.AWKWARD, Items.INK_SAC, BLINDNESS_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.SULFUR.get(), HybridAquaticPotions.CORROSION_POTION.get()
+            Potions.AWKWARD, HybridAquaticItems.SULFUR.get(), CORROSION_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.SEA_URCHIN_SPINE.get(), HybridAquaticPotions.THORNS_POTION.get()
+            Potions.AWKWARD, HybridAquaticItems.SEA_URCHIN_SPINE.get(), THORNS_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, Items.KELP, HybridAquaticPotions.BUOYANCY_POTION.get()
+            Potions.AWKWARD, Items.KELP, BUOYANCY_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.MAHI.get(), HybridAquaticPotions.SWIMMING_POTION.get()
+            Potions.AWKWARD, HybridAquaticItems.MAHI.get(), SWIMMING_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.SHARK_TOOTH.get(), HybridAquaticPotions.BLEEDING_POTION.get()
+            Potions.AWKWARD, HybridAquaticItems.SHARK_TOOTH.get(), BLEEDING_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.BLACK_PEARL.get(), HybridAquaticPotions.MAJOR_LUCK_POTION.get()
+            Potions.AWKWARD, HybridAquaticItems.BLACK_PEARL.get(), MAJOR_LUCK_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.PEARL.get(), HybridAquaticPotions.MINOR_LUCK_POTION.get()
+            Potions.AWKWARD, HybridAquaticItems.PEARL.get(), MINOR_LUCK_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.ANGLERFISH.get(), HybridAquaticPotions.THALASSOPHOBIA_POTION.get()
+            Potions.AWKWARD, HybridAquaticItems.ANGLERFISH.get(), THALASSOPHOBIA_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HybridAquaticItems.BARRELEYE.get(), HybridAquaticPotions.CLARITY_POTION.get()
+            Potions.AWKWARD, HybridAquaticItems.BARRELEYE.get(), CLARITY_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, Items.GLOW_INK_SAC, HybridAquaticPotions.GLOWING_POTION.get()
+            Potions.AWKWARD, Items.GLOW_INK_SAC, GLOWING_POTION.get()
         )
     }
 }

@@ -10,8 +10,7 @@ import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 
-class BullKelpFeature(codec: Codec<BullKelpFeatureConfig>) :
-    net.minecraft.world.level.levelgen.feature.Feature<BullKelpFeatureConfig>(codec) {
+class BullKelpFeature(codec: Codec<BullKelpFeatureConfig>) : Feature<BullKelpFeatureConfig>(codec) {
     override fun place(context: FeaturePlaceContext<BullKelpFeatureConfig>): Boolean {
         var i = 0
         val structureLevelAccessor = context.level()

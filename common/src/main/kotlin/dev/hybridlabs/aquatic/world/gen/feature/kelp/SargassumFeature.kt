@@ -10,8 +10,7 @@ import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 
-class SargassumFeature(codec: Codec<SargassumFeatureConfig>) :
-    net.minecraft.world.level.levelgen.feature.Feature<SargassumFeatureConfig>(codec) {
+class SargassumFeature(codec: Codec<SargassumFeatureConfig>) : Feature<SargassumFeatureConfig>(codec) {
     override fun place(context: FeaturePlaceContext<SargassumFeatureConfig>): Boolean {
         var i = 0
         val structureLevelAccessor = context.level()

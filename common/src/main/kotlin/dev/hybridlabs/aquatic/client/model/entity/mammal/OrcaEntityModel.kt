@@ -1,8 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
-import dev.hybridlabs.aquatic.entity.fish.TunaEntity
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
-import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import net.minecraft.resources.ResourceLocation
 
 class OrcaEntityModel : HybridAquaticDolphinEntityModel<OrcaEntity>("orca") {

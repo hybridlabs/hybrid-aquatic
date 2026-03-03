@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.renderer.item
+package dev.hybridlabs.aquatic.client.render.item
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.block.BlockEntityHelper

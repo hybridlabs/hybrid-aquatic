@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.client.render.entity.mammal
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
-import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticSirenianEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import software.bernie.geckolib.model.GeoModel
