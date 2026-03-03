@@ -37,7 +37,6 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
-
 @Suppress("DEPRECATION", "LeakingThis", "UNUSED_PARAMETER")
 open class HybridAquaticCrustaceanEntity(
     type: EntityType<out HybridAquaticCrustaceanEntity>,
@@ -46,8 +45,14 @@ open class HybridAquaticCrustaceanEntity(
 ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false
-    private var songPlaying = false
-    private var songSource: BlockPos? = null
+
+    init {
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        moveControl = MoveControl(this)
+        navigation = GroundPathNavigation(this, world)
+    }
 
     override fun registerGoals() {
         super.registerGoals()
@@ -66,13 +71,9 @@ open class HybridAquaticCrustaceanEntity(
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
-        moveControl = MoveControl(this)
-        navigation = GroundPathNavigation(this, world)
-    }
+    //#region Dancing
+    private var songPlaying = false
+    private var songSource: BlockPos? = null
 
     override fun aiStep() {
         if (this.songSource == null || !songSource!!.closerToCenterThan(
@@ -95,6 +96,7 @@ open class HybridAquaticCrustaceanEntity(
     private fun isSongPlaying(): Boolean {
         return this.songPlaying
     }
+    //#endregion
 
     //#region Moistness & Air
     override fun getMobType(): MobType {
@@ -138,6 +140,14 @@ open class HybridAquaticCrustaceanEntity(
 
     override fun getMaxHeadYRot(): Int {
         return 1
+    }
+
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
+
+    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
+        return !fromFishingNet && !hasCustomName()
     }
     //#endregion
 
@@ -206,14 +216,6 @@ open class HybridAquaticCrustaceanEntity(
             attacker !is HybridAquaticMammalEntity) {
             super.dropFromLootTable(source, causedByPlayer)
         }
-    }
-
-    override fun getMaxSpawnClusterSize(): Int {
-        return 2
-    }
-
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !fromFishingNet && !hasCustomName()
     }
 
     companion object {
