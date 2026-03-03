@@ -22,12 +22,13 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.SpawnEggItem
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.CropBlock
 import net.minecraft.world.level.block.LiquidBlock
 
 class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     override fun generateBlockStateModels(generator: BlockModelGenerators) {
         generator.run {
-            // plushies
+            //#region Plushies
             BuiltInRegistries.BLOCK
                 .filterIsInstance<PlushieBlock>()
                 .forEach { block ->
@@ -36,7 +37,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                     delegateItemModel(block, TEMPLATE_PLUSHIE)
                 }
 
-            // fluids
+            //#region Fluids
             BuiltInRegistries.BLOCK
                 .filterIsInstance<LiquidBlock>()
                 .forEach { block ->
@@ -46,7 +47,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                     }
                 }
 
-            // spawn eggs
+            //#region Spawn Eggs
             BuiltInRegistries.ITEM
                 .filter(filterHybridAquatic(BuiltInRegistries.ITEM))
                 .forEach { item ->
@@ -110,7 +111,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP_BOTTOM)
             }
 
-            // crates
+            //#region Crates
             setOf(
                 HybridAquaticBlocks.HYBRID_CRATE.get(),
                 HybridAquaticBlocks.SPRUCE_CRATE.get(),
@@ -127,6 +128,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             ).forEach { block ->
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP)
             }
+            //#endregion
 
             //#region Bleached Corals
             setOf(
@@ -238,6 +240,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
             createNormalTorch(HybridAquaticBlocks.GLOWSTICK.get(), HybridAquaticBlocks.WALL_GLOWSTICK.get())
 
+            createCropBlock(HybridAquaticBlocks.CLAMS.get(),CropBlock.AGE, 0, 0, 0, 1, 1, 2, 2, 3)
+
+            //#region Corals
             createCoral(
                 HybridAquaticBlocks.LOPHELIA_CORAL.get(),
                 HybridAquaticBlocks.DEAD_LOPHELIA_CORAL.get(),
@@ -303,6 +308,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HybridAquaticBlocks.SUN_CORAL_WALL_FAN.get(),
                 HybridAquaticBlocks.DEAD_SUN_CORAL_WALL_FAN.get()
             )
+            //#endregion
 
             createCrossBlock(
                 HybridAquaticBlocks.HARP_SPONGE.get(),
@@ -347,6 +353,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     }
 
     override fun generateItemModels(generator: ItemModelGenerators) {
+        //#region Flat Items
         setOf(
             HybridAquaticItems.BUOY.get(),
             HybridAquaticPlatformItems.DUNEGRASS.get(),
@@ -472,7 +479,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         ).forEach { item ->
             generator.generateFlatItem(item, ModelTemplates.FLAT_ITEM)
         }
+        //#endregion
 
+        //#region Handheld Models
         setOf(
             HybridAquaticItems.SEASHELL_SPEAR,
             HybridAquaticItems.SEASHELL_PICKAXE,
@@ -487,6 +496,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         ).forEach { item ->
             generator.generateFlatItem(item.get(), ModelTemplates.FLAT_HANDHELD_ITEM)
         }
+        //#endregion
 
         generator.generateFlatItem(
             HybridAquaticItems.SEA_MESSAGE_BOOK.get(),

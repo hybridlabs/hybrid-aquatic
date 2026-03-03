@@ -11,6 +11,7 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.ByIdMap
+import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
@@ -81,8 +82,11 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
         }
 
         fun canSpawn(
+            type: EntityType<out OceanSunfishEntity>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             val spawnY = (world.seaLevel - 24) ..< (world.seaLevel - 8)
 

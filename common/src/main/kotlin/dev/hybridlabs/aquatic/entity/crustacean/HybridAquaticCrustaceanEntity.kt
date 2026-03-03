@@ -11,6 +11,7 @@ import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
@@ -227,8 +228,11 @@ open class HybridAquaticCrustaceanEntity(
         val HIDE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
 
         fun canSurfaceSpawn(
+            type: EntityType<out WaterAnimal>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel + 4
 
@@ -239,8 +243,11 @@ open class HybridAquaticCrustaceanEntity(
         }
 
         fun canWaterSpawn(
+            type: EntityType<out WaterAnimal>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             val bottomY = world.seaLevel - 24
 
@@ -251,8 +258,11 @@ open class HybridAquaticCrustaceanEntity(
         }
 
         fun canDeepSpawn(
+            type: EntityType<out WaterAnimal>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 24
             val bottomY = world.seaLevel - 256

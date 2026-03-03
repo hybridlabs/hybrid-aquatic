@@ -1,7 +1,10 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.fish.GardenEelEntity
 import net.minecraft.core.BlockPos
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -22,8 +25,11 @@ class CoconutCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity
         }
 
         fun canSpawn(
+            type: EntityType<out CoconutCrabEntity>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             return pos.y <= world.seaLevel + 4 &&
                     world.getBlockState(pos.below()).isSolid &&

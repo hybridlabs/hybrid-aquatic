@@ -10,14 +10,11 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.Mth
+import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
-import net.minecraft.world.entity.EntityDimensions
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobType
-import net.minecraft.world.entity.MoverType
-import net.minecraft.world.entity.Pose
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.Goal
@@ -342,8 +339,11 @@ open class HybridAquaticJellyfishEntity(
             SynchedEntityData.defineId(HybridAquaticJellyfishEntity::class.java, EntityDataSerializers.INT)
 
         fun canSpawn(
+            type: EntityType<out WaterAnimal>,
             world: ServerLevelAccessor,
-            pos: BlockPos
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 4
             val bottomY = world.seaLevel - 24
@@ -354,8 +354,11 @@ open class HybridAquaticJellyfishEntity(
         }
 
         fun canDeepSpawn(
+            type: EntityType<out WaterAnimal>,
             world: ServerLevelAccessor,
-            pos: BlockPos
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 48
             val bottomY = world.seaLevel - 256

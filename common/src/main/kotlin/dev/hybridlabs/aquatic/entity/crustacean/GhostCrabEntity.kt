@@ -1,7 +1,9 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import net.minecraft.core.BlockPos
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -22,8 +24,11 @@ class GhostCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>,
         }
 
         fun canSpawn(
+            type: EntityType<out GhostCrabEntity>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             return pos.y <= world.seaLevel + 4 &&
                     world.getBlockState(pos.below()).isSolid &&

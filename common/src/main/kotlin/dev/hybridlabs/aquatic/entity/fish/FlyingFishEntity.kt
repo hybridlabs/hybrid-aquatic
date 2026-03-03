@@ -6,6 +6,7 @@ import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
@@ -132,8 +133,11 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
         }
 
         fun canSpawn(
+            type: EntityType<out FlyingFishEntity>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             val spawnY = (world.seaLevel - 8) ..< world.seaLevel
 

@@ -5,11 +5,13 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.monster.Monster
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.ServerLevelAccessor
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.util.GeckoLibUtil
@@ -69,8 +71,11 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
             SynchedEntityData.defineId(HybridAquaticMinibossEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         fun canSpawn(
-            world: LevelAccessor,
+            type: EntityType<out Monster>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             return world.isWaterAt(pos)
         }

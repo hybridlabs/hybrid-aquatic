@@ -6,13 +6,10 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.util.RandomSource
 import net.minecraft.world.Difficulty
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.Mob
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.MobType
-import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
@@ -25,7 +22,6 @@ import net.minecraft.world.entity.animal.IronGolem
 import net.minecraft.world.entity.monster.Monster
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.ServerLevelAccessor
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -166,8 +162,11 @@ abstract class HybridAquaticMinionEntity(type: EntityType<out Monster>, world: L
             SynchedEntityData.defineId(HybridAquaticMinionEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         fun canSpawn(
-            world: LevelAccessor,
+            type: EntityType<out Monster>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             return world.isWaterAt(pos)
         }

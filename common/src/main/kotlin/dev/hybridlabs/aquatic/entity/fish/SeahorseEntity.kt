@@ -8,14 +8,10 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.ByIdMap
+import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.entity.EntityDimensions
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.Pose
-import net.minecraft.world.entity.SpawnGroupData
-import net.minecraft.world.entity.VariantHolder
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -83,8 +79,11 @@ class SeahorseEntity(type: EntityType<out SeahorseEntity>, world: Level) :
         }
 
         fun canSpawn(
+            type: EntityType<out SeahorseEntity>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             return world.isWaterAt(pos)
         }

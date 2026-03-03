@@ -365,9 +365,11 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canSpawn(
+            type: EntityType<out WaterAnimal>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 4
             val bottomY = world.seaLevel - 24
@@ -380,9 +382,11 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canDeepSpawn(
+            type: EntityType<out WaterAnimal>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
-            random: RandomSource
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 48
             val bottomY = world.seaLevel - 256

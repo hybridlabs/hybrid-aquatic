@@ -4,7 +4,9 @@ import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
 import net.minecraft.core.BlockPos
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.ItemStack
@@ -39,8 +41,11 @@ class ParrotfishEntity(type: EntityType<out ParrotfishEntity>, world: Level) :
         }
 
         fun canSpawn(
+            type: EntityType<out ParrotfishEntity>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             return world.isWaterAt(pos) &&
                     world.level.isDay &&

@@ -31,6 +31,7 @@ import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
+import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
@@ -394,8 +395,11 @@ open class HybridAquaticSharkEntity(
 
         //#region Spawning
         fun canShallowSpawn(
+            type: EntityType<out HybridAquaticWaterAnimal>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 2
             val bottomY = world.seaLevel - 6
@@ -406,8 +410,11 @@ open class HybridAquaticSharkEntity(
         }
 
         fun canSpawn(
+            type: EntityType<out HybridAquaticWaterAnimal>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
+            random: RandomSource,
         ): Boolean {
             val topY = world.seaLevel - 8
             val bottomY = world.seaLevel - 24
@@ -418,7 +425,9 @@ open class HybridAquaticSharkEntity(
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canDeepSpawn(
+            type: EntityType<out HybridAquaticWaterAnimal>,
             world: ServerLevelAccessor,
+            reason: MobSpawnType,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
