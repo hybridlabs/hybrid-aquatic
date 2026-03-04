@@ -713,6 +713,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.MANATEE.get() to "Manatee",
             HybridAquaticEntityTypes.ORCA.get() to "Orca",
             HybridAquaticEntityTypes.DEPTH_CHARGE.get() to "Depth Charge",
+            HybridAquaticEntityTypes.ARGONAUT.get() to "Argonaut",
         )
 
         // verify display name list is valid

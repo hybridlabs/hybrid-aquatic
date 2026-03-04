@@ -10,20 +10,13 @@ import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
 import dev.hybridlabs.aquatic.entity.mammal.ManateeEntity
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
-import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
-import dev.hybridlabs.aquatic.entity.miniboss.KarcinomaEntity
-import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
-import dev.hybridlabs.aquatic.entity.miniboss.ManglerfishEntity
-import dev.hybridlabs.aquatic.entity.miniboss.ShellBeastEntity
+import dev.hybridlabs.aquatic.entity.miniboss.*
+import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityDimensions
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.MobCategory
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import java.util.concurrent.Callable
 
@@ -949,6 +942,12 @@ object HybridAquaticEntityTypes {
         "depth_charge",
         ::PrimedDepthChargeEntity,
         EntityDimensions.fixed(0.98f, 0.98f)
+    )
+
+    val ARGONAUT = registerMisc(
+        "argonaut",
+        ::ArgonautEntity,
+        EntityDimensions.fixed(2.0f, 2.0f),
     )
     //#endregion
 

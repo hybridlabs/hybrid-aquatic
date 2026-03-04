@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.client.render.entity
 
+import dev.hybridlabs.aquatic.client.model.entity.misc.ArgonautEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.cephalopods.*
 import dev.hybridlabs.aquatic.client.render.entity.critter.*
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
@@ -794,5 +795,11 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.DEPTH_CHARGE,
             ::DepthChargeEntityRenderer
+        )
+
+    val ARGONAUT =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.ARGONAUT,
+            ::ArgonautEntityRenderer
         )
 }
