@@ -1,15 +1,24 @@
 package dev.hybridlabs.aquatic.entity.misc
 
+import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
+import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.PlayerRideable
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.Items
+import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.gameevent.GameEvent
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -24,21 +33,69 @@ open class ArgonautEntity(
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
     private var outOfControlTicks = 0f
-    private var inputLeft = false
-    private var inputRight = false
-    private var inputUp = false
-    private var inputDown = false
 
     override fun defineSynchedData() {
-        TODO("Not yet implemented")
+        this.entityData.define(DATA_ID_HURT, 0)
+        this.entityData.define(DATA_ID_HURTDIR, 1)
+        this.entityData.define(DATA_ID_DAMAGE, 0.0f)
+        this.entityData.define(DATA_ID_RIGHT_PROPELLER, false)
+        this.entityData.define(DATA_ID_LEFT_PROPELLER, false)
+        this.entityData.define(DATA_ID_BACK_PROPELLER, false)
     }
 
-    override fun readAdditionalSaveData(p0: CompoundTag) {
-        TODO("Not yet implemented")
+    override fun addAdditionalSaveData(tag: CompoundTag) {
+        tag.putFloat("Damage", getDamage())
     }
 
-    override fun addAdditionalSaveData(p0: CompoundTag) {
-        TODO("Not yet implemented")
+    override fun readAdditionalSaveData(tag: CompoundTag) {
+        setDamage(tag.getFloat("Damage"))
+    }
+
+    override fun hurt(source: DamageSource, amount: Float): Boolean {
+        if (this.isInvulnerableTo(source)) {
+            return false
+        } else if (!this.level().isClientSide && !this.isRemoved) {
+            this.setHurtTime(10)
+            this.setDamage(this.getDamage() + amount * 10.0f)
+            this.markHurt()
+            this.gameEvent(GameEvent.ENTITY_DAMAGE, source.entity)
+            val flag = source.entity is Player && (source.entity as Player).abilities.instabuild
+            if (flag || this.getDamage() > 40.0f) {
+                if (!flag && this.level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                    this.destroy(source)
+                }
+
+                this.discard()
+            }
+
+            return true
+        } else {
+            return true
+        }
+    }
+
+    open fun getDropItem(): Item {
+        return Items.BIRCH_BOAT
+    }
+
+    protected open fun destroy(damageSource: DamageSource?) {
+        this.spawnAtLocation(this.getDropItem())
+    }
+
+    fun setDamage(damageTaken: Float) {
+        this.entityData.set(DATA_ID_DAMAGE, damageTaken)
+    }
+
+    fun getDamage(): Float {
+        return this.entityData.get(DATA_ID_DAMAGE)
+    }
+
+    fun setHurtTime(hurtTime: Int) {
+        this.entityData.set(DATA_ID_HURT, hurtTime)
+    }
+
+    override fun getMotionDirection(): Direction {
+        return this.direction.clockWise
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
@@ -49,6 +106,10 @@ open class ArgonautEntity(
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache? {
         return animCache
+    }
+
+    override fun getMovementEmission(): MovementEmission {
+        return MovementEmission.EVENTS
     }
 
     override fun canCollideWith(entity: Entity): Boolean {
@@ -105,4 +166,24 @@ open class ArgonautEntity(
         return livingentity1
     }
     //#endregion
+
+    companion object {
+        private val DATA_ID_HURT: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.INT)
+
+        private val DATA_ID_HURTDIR: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.INT)
+
+        private val DATA_ID_DAMAGE: EntityDataAccessor<Float> =
+            SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.FLOAT)
+
+        private val DATA_ID_RIGHT_PROPELLER: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.BOOLEAN)
+
+        private val DATA_ID_LEFT_PROPELLER: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.BOOLEAN)
+
+        private val DATA_ID_BACK_PROPELLER: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.BOOLEAN)
+    }
 }

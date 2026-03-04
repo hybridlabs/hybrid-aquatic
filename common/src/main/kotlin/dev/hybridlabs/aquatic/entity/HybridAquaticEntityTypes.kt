@@ -932,7 +932,7 @@ object HybridAquaticEntityTypes {
     val SHELL_BEAST = registerMiniboss(
         "shell_beast",
         ::ShellBeastEntity,
-        EntityDimensions.fixed(2.0f, 2.0f),
+        EntityDimensions.fixed(2.5f, 3.0f),
         ShellBeastEntity::createMobAttributes
     )
     //#endregion
@@ -947,7 +947,7 @@ object HybridAquaticEntityTypes {
     val ARGONAUT = registerMisc(
         "argonaut",
         ::ArgonautEntity,
-        EntityDimensions.fixed(2.0f, 2.0f),
+        EntityDimensions.fixed(2.5f, 3.0f),
     )
     //#endregion
 
