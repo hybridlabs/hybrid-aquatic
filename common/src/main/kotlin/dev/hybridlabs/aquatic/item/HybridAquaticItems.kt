@@ -632,8 +632,8 @@ object HybridAquaticItems {
         )
     }
 
-    val OYSTER = register(
-        "oyster"
+    val COOKED_CLAM = register(
+        "cooked_clam"
     ) {
         Item(
             Item.Properties()

@@ -764,6 +764,13 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             0.15f
         )
 
+        offerCookingRecipes(
+            exporter,
+            HybridAquaticItems.CLAM.get(),
+            HybridAquaticItems.COOKED_CLAM.get(),
+            0.15f
+        )
+
         offerKelpCookingRecipes(exporter, HybridAquaticItemTags.KELPS, Items.DRIED_KELP, 0.15f)
         //#endregion
 

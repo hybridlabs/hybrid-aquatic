@@ -233,8 +233,8 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.RAW_LOBSTER_TAIL.get())
                 entries.accept(HybridAquaticItems.COOKED_LOBSTER_TAIL.get())
                 entries.accept(HybridAquaticItems.UNI.get())
-                entries.accept(HybridAquaticItems.OYSTER.get())
                 entries.accept(HybridAquaticItems.CLAM.get())
+                entries.accept(HybridAquaticItems.COOKED_CLAM.get())
 
                 entries.accept(HybridAquaticItems.BETTA.get())
                 entries.accept(HybridAquaticItems.DANIO.get())

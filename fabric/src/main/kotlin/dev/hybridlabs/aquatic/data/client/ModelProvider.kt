@@ -381,7 +381,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.COOKED_CRAB.get(),
             HybridAquaticItems.RAW_SHRIMP.get(),
             HybridAquaticItems.COOKED_SHRIMP.get(),
-            HybridAquaticItems.OYSTER.get(),
+            HybridAquaticItems.COOKED_CLAM.get(),
             HybridAquaticItems.COOKED_CRAYFISH.get(),
             HybridAquaticItems.RAW_LOBSTER.get(),
             HybridAquaticItems.COOKED_LOBSTER.get(),
