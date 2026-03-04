@@ -4,9 +4,9 @@ import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -62,6 +62,30 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
         true
     )
 
+    init {
+        moveControl = swimControl
+        lookControl = OtterLookControl(this)
+        navigation = AmphibiousPathNavigation(this, this.level())
+
+        // Setting WATER_BORDER to zero makes surface water blocks preferred
+        setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+    }
+
+    override fun registerGoals() {
+        goalSelector.addGoal(1, OtterBreatheAirGoal(this))
+        goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
+        goalSelector.addGoal(2, OtterDiveGoal(this, 1.0))
+        goalSelector.addGoal(2, OtterFloatGoal(this))
+        goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.8, 20))
+        goalSelector.addGoal(3, OtterWalkingGoal(this, 0.7, 20))
+        goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
+        goalSelector.addGoal(4, RandomLookAroundGoal(this))
+        goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
+        goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
+        getTargetConfig().addAttackTarget(targetSelector, MAX_HUNGER / 4, this, OtterEntity::hunger)
+    }
+
     var hunger: Int
         get() = entityData.get(HUNGER)
         set(hunger) {
@@ -75,17 +99,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HybridAquaticItemTags.SMALL_FISH)
-    }
-
-    init {
-        moveControl = swimControl
-        lookControl = OtterLookControl(this)
-        navigation = AmphibiousPathNavigation(this, this.level())
-
-        // Setting WATER_BORDER to zero makes surface water blocks preferred
-        setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        return stack.`is`(HybridAquaticItems.CLAM.get())
     }
 
     /**
@@ -103,20 +117,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
         return 1.0f
     }
 
-    override fun registerGoals() {
-        goalSelector.addGoal(1, OtterBreatheAirGoal(this))
-        goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
-        goalSelector.addGoal(2, OtterDiveGoal(this, 1.0))
-        goalSelector.addGoal(2, OtterFloatGoal(this))
-        goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.8, 20))
-        goalSelector.addGoal(3, OtterWalkingGoal(this, 0.7, 20))
-        goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
-        goalSelector.addGoal(4, RandomLookAroundGoal(this))
-        goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
-        goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
-        getTargetConfig().addAttackTarget(targetSelector, MAX_HUNGER / 4, this, OtterEntity::hunger)
-    }
-
+    //#region Air & Moistness
     /* Make otters seek air every 40 secs or so */
     override fun getMaxAirSupply(): Int {
         return 800
@@ -134,6 +135,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     override fun isPushedByFluid(): Boolean {
         return false
     }
+    //#endregion
 
     /* Override to lock head X rotation when underwater so that the otter's head follows its body */
     override fun getMaxHeadXRot(): Int {
@@ -198,7 +200,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.DOLPHIN_SWIM
     }
-
     //#endregion
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): OtterEntity? {
@@ -213,7 +214,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
         return 0.125f
     }
 
-
+    //#region Animations
     /* Animation controller triggers based on the OtterAction enum in otter.action, which is set by various goals */
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
@@ -239,6 +240,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
             }
         )
     }
+    //#endregion
 
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
