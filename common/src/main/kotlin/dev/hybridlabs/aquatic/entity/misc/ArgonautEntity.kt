@@ -9,10 +9,7 @@ import net.minecraft.util.Mth
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.PlayerRideable
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
@@ -41,6 +38,16 @@ open class ArgonautEntity(
         this.entityData.define(DATA_ID_RIGHT_PROPELLER, false)
         this.entityData.define(DATA_ID_LEFT_PROPELLER, false)
         this.entityData.define(DATA_ID_BACK_PROPELLER, false)
+    }
+
+    override fun tick() {
+        super.tick()
+
+        if (!this.isNoGravity) {
+            this.deltaMovement = this.deltaMovement.add(0.0, -0.04, 0.0)
+        }
+
+        this.move(MoverType.SELF, this.deltaMovement)
     }
 
     override fun addAdditionalSaveData(tag: CompoundTag) {
@@ -148,15 +155,28 @@ open class ArgonautEntity(
     override fun interact(player: Player, hand: InteractionHand): InteractionResult {
         return if (player.isSecondaryUseActive) {
             InteractionResult.PASS
-        } else if (this.outOfControlTicks < 60.0f) {
-            if (!this.level().isClientSide) {
-                if (player.startRiding(this)) InteractionResult.CONSUME else InteractionResult.PASS
-            } else {
-                InteractionResult.SUCCESS
-            }
-        } else {
+        } else if (this.isVehicle) {
             InteractionResult.PASS
+        } else if (!this.level().isClientSide) {
+            if (player.startRiding(this)) InteractionResult.CONSUME else InteractionResult.PASS
+        } else {
+            InteractionResult.SUCCESS
         }
+    }
+
+    override fun positionRider(passenger: Entity, callback: MoveFunction) {
+        if (this.hasPassenger(passenger)) {
+            callback.accept(
+                passenger,
+                this.x,
+                this.y + this.passengersRidingOffset + passenger.myRidingOffset,
+                this.z
+            )
+        }
+    }
+
+    override fun canAddPassenger(passenger: Entity): Boolean {
+        return this.passengers.isEmpty()
     }
 
     override fun getControllingPassenger(): LivingEntity? {

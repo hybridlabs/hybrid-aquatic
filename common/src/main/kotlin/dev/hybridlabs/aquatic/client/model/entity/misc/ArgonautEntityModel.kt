@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.client.model.entity.misc
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
 
@@ -18,5 +19,9 @@ class ArgonautEntityModel<T : ArgonautEntity>() :
 
     override fun getAnimationResource(animatable: T): ResourceLocation {
         return CommonClass.locate("animations/entity/misc/argonaut.animation.json")
+    }
+
+    override fun getRenderType(animatable: T, texture: ResourceLocation): RenderType {
+        return RenderType.entityTranslucent(texture)
     }
 }

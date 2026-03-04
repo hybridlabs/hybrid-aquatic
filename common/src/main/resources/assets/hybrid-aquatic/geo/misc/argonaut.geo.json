@@ -4,11 +4,11 @@
 		{
 			"description": {
 				"identifier": "geometry.unknown",
-				"texture_width": 256,
-				"texture_height": 256,
+				"texture_width": 512,
+				"texture_height": 512,
 				"visible_bounds_width": 14,
-				"visible_bounds_height": 5,
-				"visible_bounds_offset": [0, 1.5, 0]
+				"visible_bounds_height": 6,
+				"visible_bounds_offset": [0, 2, 0]
 			},
 			"bones": [
 				{
@@ -16,19 +16,15 @@
 					"pivot": [0, 24, 0.5],
 					"cubes": [
 						{"origin": [-16, 0, -24], "size": [32, 48, 48], "uv": [0, 0]},
-						{"origin": [-15, 1, -23], "size": [30, 46, 45], "uv": [0, 96]},
-						{"origin": [-16, 0, -27], "size": [32, 18, 3], "uv": [150, 96]},
-						{"origin": [-2.5, 21.5, 24], "size": [5, 5, 2], "uv": [150, 155]}
-					]
-				},
-				{
-					"name": "propeller",
-					"parent": "body",
-					"pivot": [0, 24, 26],
-					"cubes": [
-						{"origin": [-1, 23, 24], "size": [2, 2, 8], "uv": [150, 145]},
-						{"origin": [-2, 22, 32], "size": [4, 4, 2], "uv": [160, 0]},
-						{"origin": [-14, 10, 33], "size": [28, 28, 0], "uv": [150, 117]}
+						{"origin": [-15.5, 6, -23.5], "size": [31, 41, 45], "uv": [0, 96]},
+						{"origin": [-16, 0, -27], "size": [32, 18, 4], "uv": [0, 182]},
+						{"origin": [-15, 6, -23], "size": [30, 11, 4], "uv": [160, 75]},
+						{"origin": [-8, 6, -14], "size": [16, 6, 16], "uv": [72, 182]},
+						{"origin": [-8, 6, 2], "size": [16, 22, 4], "uv": [136, 199]},
+						{"origin": [-15.5, 2, -23.5], "size": [31, 4, 45], "uv": [160, 0]},
+						{"origin": [-15, 6, 7.25], "size": [30, 12, 14], "uv": [160, 49]},
+						{"origin": [-1, 12, 6.25], "size": [2, 4, 1], "uv": [160, 90]},
+						{"origin": [0, 32, -23], "size": [0, 40, 63], "uv": [152, 96]}
 					]
 				}
 			]
