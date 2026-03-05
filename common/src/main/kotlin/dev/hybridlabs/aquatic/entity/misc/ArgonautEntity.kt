@@ -165,7 +165,7 @@ open class ArgonautEntity(
     }
 
     override fun isPickable(): Boolean{
-        return true
+        return !this.isRemoved
     }
 
     override fun positionRider(passenger: Entity, callback: MoveFunction) {
