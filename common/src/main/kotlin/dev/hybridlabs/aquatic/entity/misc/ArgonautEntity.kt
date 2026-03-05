@@ -136,7 +136,7 @@ open class ArgonautEntity(
     }
 
     override fun getPassengersRidingOffset(): Double {
-        return -2.0
+        return 0.65
     }
 
     protected fun clampRotation(entityToUpdate: Entity) {
