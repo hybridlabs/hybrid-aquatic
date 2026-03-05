@@ -35,18 +35,17 @@ class HybridAquaticShellLayer<T: HybridAquaticCrustaceanEntity>(
         val itemRenderer = Minecraft.getInstance().itemRenderer
 
         poseStack.pushPose()
-
         poseStack.rotateAround(Axis.XP.rotationDegrees(32.5f), 0.0F, 0.0F, 0.0F)
         poseStack.translate(0.0, 0.25, -0.1)
+
         itemRenderer.renderStatic(
             ItemStack(Items.GLASS),
             ItemDisplayContext.FIXED,
             packedLight,
             packedOverlay,
             poseStack, bufferSource, animatable.level(), animatable.id)
-
+        
         poseStack.popPose()
-
         bufferSource.getBuffer(renderType)
     }
 }

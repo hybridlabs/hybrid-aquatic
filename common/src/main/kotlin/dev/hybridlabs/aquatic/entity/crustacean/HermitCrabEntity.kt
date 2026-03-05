@@ -27,7 +27,7 @@ import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
 class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, false),
+    HybridAquaticCrustaceanEntity(entityType, world, false, true),
     VariantHolder<HermitCrabEntity.Companion.Type> {
 
     //#region Shells & Items

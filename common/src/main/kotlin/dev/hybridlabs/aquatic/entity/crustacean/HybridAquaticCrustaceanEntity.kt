@@ -23,6 +23,8 @@ import net.minecraft.world.entity.ai.goal.PanicGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.block.Blocks
@@ -42,9 +44,11 @@ open class HybridAquaticCrustaceanEntity(
     type: EntityType<out HybridAquaticCrustaceanEntity>,
     world: Level,
     open val canDance: Boolean,
+    open val hasShell: Boolean = false,
 ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false
+    private var shellItem = ItemStack.EMPTY
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -76,11 +80,11 @@ open class HybridAquaticCrustaceanEntity(
     private var songSource: BlockPos? = null
 
     override fun aiStep() {
-        if (this.songSource == null || !songSource!!.closerToCenterThan(
-                this.position(),
-                3.5
-            ) || !level().getBlockState(this.songSource!!).`is`(Blocks.JUKEBOX)
-        ) {
+        if (
+            this.songSource == null ||
+            !songSource!!.closerToCenterThan(this.position(), 3.5) ||
+            !level().getBlockState(this.songSource!!).`is`(Blocks.JUKEBOX))
+        {
             this.songPlaying = false
             this.songSource = null
         }
@@ -156,18 +160,25 @@ open class HybridAquaticCrustaceanEntity(
         super.defineSynchedData()
         entityData.define(CRUSTACEAN_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
+        if (hasShell) entityData.define(SHELL_ITEM, ItemStack.EMPTY)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         super.addAdditionalSaveData(nbt)
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
         nbt.putBoolean("FromFishingNet", fromFishingNet)
+        if (hasShell) nbt.put("ShellItem", shellItem.orCreateTag)
     }
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         super.readAdditionalSaveData(nbt)
         size = nbt.getInt(CRUSTACEAN_SIZE_KEY)
         fromFishingNet = nbt.getBoolean("FromFishingNet")
+
+        if (hasShell) {
+            val shellItemNBT = nbt.getCompound("ShellItem")
+            shellItem = if (shellItemNBT.isEmpty) Items.NAUTILUS_SHELL.defaultInstance else ItemStack.of(shellItemNBT)
+        }
     }
     //#endregion
 
@@ -223,6 +234,8 @@ open class HybridAquaticCrustaceanEntity(
             SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
+        val SHELL_ITEM: EntityDataAccessor<ItemStack> =
+            SynchedEntityData.defineId(HybridAquaticCrustaceanEntity::class.java, EntityDataSerializers.ITEM_STACK)
 
         val DANCE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
         val HIDE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
