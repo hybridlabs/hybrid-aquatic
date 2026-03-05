@@ -26,7 +26,7 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
         val placedState = config.toPlace.getState(random, origin)
         val originalState = world.getBlockState(pos)
 
-        if (originalState.isSolid || placedState.block !is MessageInABottleBlock) {
+        if (!originalState.canBeReplaced() || placedState.block !is MessageInABottleBlock) {
             return false
         }
 
