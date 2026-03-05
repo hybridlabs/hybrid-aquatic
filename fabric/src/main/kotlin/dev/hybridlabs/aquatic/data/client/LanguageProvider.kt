@@ -493,6 +493,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         // Item Descriptions
+        builder.add("item.hybrid-aquatic.hook.description_tide", "MYSTIC FIX THIS") // Tide specific description
         mapOf(
             "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
             HybridAquaticItems.BARBED_HOOK.get().descriptionId to "Increases fishing speed during the day",
