@@ -52,7 +52,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
         val playerStack = player.getItemInHand(hand)
         if (canTakeItem(playerStack) || playerStack.isEmpty) {
-            val oldStack = getItemBySlot(EquipmentSlot.MAINHAND)
+            val oldStack = shellItem.copy()
             shellItem = playerStack.copyWithCount(1)
 
             if (!player.abilities.instabuild) {
@@ -71,7 +71,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     }
 
     override fun dropCustomDeathLoot(source: DamageSource, looting: Int, causedByPlayer: Boolean) {
-        val held = getItemBySlot(EquipmentSlot.MAINHAND)
+        val held = shellItem
         if (!held.isEmpty) {
             spawnAtLocation(held)
             shellItem = ItemStack.EMPTY

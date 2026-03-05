@@ -15,7 +15,6 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.SpawnGroupData
@@ -188,7 +187,6 @@ open class HybridAquaticCrustaceanEntity(
     var shellItem: ItemStack
         get() = entityData.get(SHELL_ITEM)
         set(itemStack) {
-            setItemSlot(EquipmentSlot.MAINHAND, itemStack)
             entityData.set(SHELL_ITEM, itemStack)
         }
 
