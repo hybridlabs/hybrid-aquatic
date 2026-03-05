@@ -164,6 +164,10 @@ open class ArgonautEntity(
         }
     }
 
+    override fun isPickable(): Boolean{
+        return true
+    }
+
     override fun positionRider(passenger: Entity, callback: MoveFunction) {
         if (this.hasPassenger(passenger)) {
             callback.accept(
