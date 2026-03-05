@@ -1,11 +1,7 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.syncher.EntityDataAccessor
-import net.minecraft.network.syncher.EntityDataSerializers
-import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.util.ByIdMap
-import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
@@ -23,12 +19,10 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
-import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
 class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, false, true),
-    VariantHolder<HermitCrabEntity.Companion.Type> {
+    HybridAquaticCrustaceanEntity(entityType, world, false, true) {
 
     //#region Shells & Items
     override fun finalizeSpawn(
@@ -38,63 +32,36 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?,
     ): SpawnGroupData? {
-
         val roll = random.nextFloat()
 
-        val heldItem = when {
-            roll < 0.60f -> Type.SHELL
-            roll < 0.85f -> Type.SKULL
-            else -> Type.NONE
+        val generatedRoll = when {
+            roll < 0.60f -> Items.NAUTILUS_SHELL.defaultInstance
+            roll < 0.85f -> Items.SKELETON_SKULL.defaultInstance
+            else -> Items.AIR.defaultInstance
         }
 
-        variant = heldItem
-
-        val stack = when (heldItem) {
-            Type.SHELL -> ItemStack(Items.NAUTILUS_SHELL)
-            Type.SKULL -> ItemStack(Items.SKELETON_SKULL)
-            Type.NONE -> ItemStack.EMPTY
-            else -> ItemStack.EMPTY
-        }
-
-        setItemSlot(EquipmentSlot.MAINHAND, stack)
+        shellItem = generatedRoll
 
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    private fun variantFromItem(stack: ItemStack): Type? {
-        return when {
-            stack.isEmpty -> Type.NONE
-            stack.item == Items.NAUTILUS_SHELL -> Type.SHELL
-            stack.item == Items.SKELETON_SKULL -> Type.SKULL
-            stack.item == Items.WITHER_SKELETON_SKULL -> Type.WITHER_SKULL
-            else -> null
-        }
-    }
-
     override fun canTakeItem(stack: ItemStack): Boolean {
-        return variantFromItem(stack) != null
+        return stack.`is`(HybridAquaticItemTags.PICKABLE_BY_CRABS)
     }
 
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
         val playerStack = player.getItemInHand(hand)
-        val newType = variantFromItem(playerStack)
+        if (canTakeItem(playerStack) || playerStack.isEmpty) {
+            val oldStack = getItemBySlot(EquipmentSlot.MAINHAND)
+            shellItem = playerStack.copyWithCount(1)
 
-        if (newType != null) {
-            if (!level().isClientSide) {
+            if (!player.abilities.instabuild) {
+                playerStack.shrink(1)
+            }
 
-                val oldStack = getItemBySlot(EquipmentSlot.MAINHAND)
-
-                setItemSlot(EquipmentSlot.MAINHAND, ItemStack(playerStack.item))
-                variant = newType
-
-                if (!player.abilities.instabuild) {
-                    playerStack.shrink(1)
-                }
-
-                if (!oldStack.isEmpty) {
-                    if (!player.addItem(oldStack)) {
-                        player.drop(oldStack, false)
-                    }
+            if (!oldStack.isEmpty) {
+                if (!player.addItem(oldStack)) {
+                    player.drop(oldStack, false)
                 }
             }
 
@@ -107,26 +74,8 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         val held = getItemBySlot(EquipmentSlot.MAINHAND)
         if (!held.isEmpty) {
             spawnAtLocation(held)
-            setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY)
-            variant = Type.NONE
+            shellItem = ItemStack.EMPTY
         }
-    }
-    //#endregion
-
-    //#region Data
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
-    }
-
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
-    }
-
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
     }
     //#endregion
 
@@ -138,14 +87,6 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     override fun getMinSize(): Int {
         return -5
     }
-
-    override fun getVariant(): Type {
-        return Type.fromId((entityData.get(TYPE) as Int))
-    }
-
-    override fun setVariant(type: Type) {
-        entityData.set(TYPE, type.id)
-    }
     //#endregion
 
     //#region Hiding
@@ -154,7 +95,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     private var lastDamageTime: Long = 0
 
     private fun startHiding() {
-        if (variant == Type.NONE) return
+        if (shellItem.isEmpty) return
 
         isHiding = true
         hidingTimer = 200
@@ -166,7 +107,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     override fun tick() {
         super.tick()
 
-        if (isHiding && variant == Type.NONE) {
+        if (isHiding && shellItem.isEmpty) {
             isHiding = false
             attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 0.3
             attributes.getInstance(Attributes.ARMOR)?.baseValue = 5.0
@@ -185,7 +126,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
-        if (!isHiding && variant != Type.NONE) {
+        if (!isHiding && !shellItem.isEmpty) {
             startHiding()
         }
 
@@ -224,35 +165,6 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
                 .add(Attributes.FOLLOW_RANGE, 4.0)
                 .add(Attributes.ARMOR, 5.0)
                 .add(Attributes.ARMOR_TOUGHNESS, 5.0)
-        }
-        val TYPE: EntityDataAccessor<Int> = SynchedEntityData.defineId(HermitCrabEntity::class.java, EntityDataSerializers.INT)
-
-        enum class Type(val id: Int, private val key: String) : StringRepresentable {
-            NONE(0, "none"),
-            SHELL(1, "shell"),
-            SKULL(2, "skull"),
-            WITHER_SKULL(3, "skull");
-
-            override fun getSerializedName(): String {
-                return this.key
-            }
-
-            companion object {
-                val CODEC: StringRepresentable.EnumCodec<Type> = StringRepresentable.fromEnum { entries.toTypedArray() }
-                private val BY_ID: IntFunction<Type> = ByIdMap.continuous(
-                    { obj: Type -> obj.id },
-                    entries.toTypedArray(),
-                    ByIdMap.OutOfBoundsStrategy.ZERO
-                )
-
-                fun byName(name: String?): Type {
-                    return CODEC.byName(name, SHELL) as Type
-                }
-
-                fun fromId(id: Int): Type {
-                    return BY_ID.apply(id) as Type
-                }
-            }
         }
     }
 }

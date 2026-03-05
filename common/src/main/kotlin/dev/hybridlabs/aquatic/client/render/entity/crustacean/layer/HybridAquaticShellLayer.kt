@@ -8,14 +8,14 @@ import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemDisplayContext
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import software.bernie.geckolib.cache.`object`.GeoBone
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
 class HybridAquaticShellLayer<T: HybridAquaticCrustaceanEntity>(
     renderer: HybridAquaticCrustaceanEntityRenderer<T>,
+    val defaultItem: Item
 ) : GeoRenderLayer<T>(renderer) {
 
     override fun renderForBone(
@@ -31,6 +31,7 @@ class HybridAquaticShellLayer<T: HybridAquaticCrustaceanEntity>(
     ) {
         super.renderForBone(poseStack, animatable, bone, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay)
         if (!bone.name.equals("shell")) return
+        if (animatable.shellItem.`is`(defaultItem)) return
 
         val itemRenderer = Minecraft.getInstance().itemRenderer
 
@@ -39,7 +40,7 @@ class HybridAquaticShellLayer<T: HybridAquaticCrustaceanEntity>(
         poseStack.translate(0.0, 0.25, -0.1)
 
         itemRenderer.renderStatic(
-            ItemStack(Items.GLASS),
+            animatable.shellItem,
             ItemDisplayContext.FIXED,
             packedLight,
             packedOverlay,

@@ -2,33 +2,27 @@ package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.crustacean.HermitCrabEntity
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.Items
 
 class HermitCrabEntityModel : HybridAquaticCrustaceanEntityModel<HermitCrabEntity>("hermit_crab") {
 
     private val SHELL_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_shell.png")
-    private val SKULL_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_skull.png")
-    private val WITHER_SKULL_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_wither_skull.png")
+    private val BLOCK_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_skull.png")
     private val NONE_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab.png")
 
     private val SHELL_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_shell.geo.json")
-    private val SKULL_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_skull.geo.json")
+    private val BLOCK_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_skull.geo.json")
     private val NONE_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab.geo.json")
 
     override fun getTextureResource(animatable: HermitCrabEntity): ResourceLocation {
-        return when (animatable.variant) {
-            HermitCrabEntity.Companion.Type.SHELL -> SHELL_TEXTURE
-            HermitCrabEntity.Companion.Type.SKULL -> SKULL_TEXTURE
-            HermitCrabEntity.Companion.Type.WITHER_SKULL -> WITHER_SKULL_TEXTURE
-            HermitCrabEntity.Companion.Type.NONE -> NONE_TEXTURE
-        }
+        return if (animatable.shellItem.`is`(Items.NAUTILUS_SHELL)) SHELL_TEXTURE
+        else if (animatable.shellItem.isEmpty) NONE_TEXTURE
+        else BLOCK_TEXTURE
     }
 
     override fun getModelResource(animatable: HermitCrabEntity): ResourceLocation {
-        return when (animatable.variant) {
-            HermitCrabEntity.Companion.Type.SKULL -> SKULL_MODEL
-            HermitCrabEntity.Companion.Type.WITHER_SKULL -> SKULL_MODEL
-            HermitCrabEntity.Companion.Type.NONE -> NONE_MODEL
-            else -> SHELL_MODEL
-        }
+        return if (animatable.shellItem.`is`(Items.NAUTILUS_SHELL)) SHELL_MODEL
+        else if (animatable.shellItem.isEmpty) NONE_MODEL
+        else BLOCK_MODEL
     }
 }

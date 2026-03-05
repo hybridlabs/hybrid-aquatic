@@ -42,6 +42,8 @@ object HybridAquaticItemTags {
 
     val FISHING_TREASURE = create("fishing_treasure")
 
+    val PICKABLE_BY_CRABS = create("pickable_by_crabs")
+
     val RAW_FISH = createConventional("foods/raw_fish")
     val RAW_FISHES = createConventional("foods/raw_fishes")
     val COOKED_FISH = createConventional("foods/cooked_fish")

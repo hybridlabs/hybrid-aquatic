@@ -15,6 +15,7 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.SpawnGroupData
@@ -48,7 +49,6 @@ open class HybridAquaticCrustaceanEntity(
 ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false
-    private var shellItem = ItemStack.EMPTY
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -158,20 +158,23 @@ open class HybridAquaticCrustaceanEntity(
     //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
+
         entityData.define(CRUSTACEAN_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
-        if (hasShell) entityData.define(SHELL_ITEM, ItemStack.EMPTY)
+        entityData.define(SHELL_ITEM, ItemStack.EMPTY)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         super.addAdditionalSaveData(nbt)
+
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
         nbt.putBoolean("FromFishingNet", fromFishingNet)
-        if (hasShell) nbt.put("ShellItem", shellItem.orCreateTag)
+        if (hasShell) nbt.put("ShellItem", shellItem.save(CompoundTag()))
     }
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         super.readAdditionalSaveData(nbt)
+
         size = nbt.getInt(CRUSTACEAN_SIZE_KEY)
         fromFishingNet = nbt.getBoolean("FromFishingNet")
 
@@ -181,6 +184,13 @@ open class HybridAquaticCrustaceanEntity(
         }
     }
     //#endregion
+
+    var shellItem: ItemStack
+        get() = entityData.get(SHELL_ITEM)
+        set(itemStack) {
+            setItemSlot(EquipmentSlot.MAINHAND, itemStack)
+            entityData.set(SHELL_ITEM, itemStack)
+        }
 
     //#region SFX
     override fun nextStep(): Float {

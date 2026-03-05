@@ -497,5 +497,14 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.ARMORS).add(item)
         }
+
+        setOf(
+            Items.NAUTILUS_SHELL,
+            Items.GLASS,
+            Items.SKELETON_SKULL,
+            Items.WITHER_SKELETON_SKULL
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridAquaticItemTags.PICKABLE_BY_CRABS).add(item)
+        }
     }
 }
