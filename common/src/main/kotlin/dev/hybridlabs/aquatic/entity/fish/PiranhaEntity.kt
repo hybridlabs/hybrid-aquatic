@@ -158,6 +158,7 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
         this.remainingPersistentAngerTime = PERSISTENT_ANGER_TIME.sample(this.random)
     }
 
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     private fun maybeAlertOthers() {
         if (this.ticksUntilNextAlert > 0) {
             --this.ticksUntilNextAlert
@@ -170,6 +171,7 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
         }
     }
 
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     private fun alertOthers() {
         val d0 = this.getAttributeValue(Attributes.FOLLOW_RANGE)
         val aabb = AABB.unitCubeFromLowerCorner(this.position()).inflate(d0, 10.0, d0)
