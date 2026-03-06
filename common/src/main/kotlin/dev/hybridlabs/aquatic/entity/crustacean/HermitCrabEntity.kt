@@ -46,7 +46,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     }
 
     override fun canTakeItem(stack: ItemStack): Boolean {
-        return stack.`is`(HybridAquaticItemTags.PICKABLE_BY_CRABS)
+        return stack.`is`(HybridAquaticItemTags.CRAB_WEARABLES)
     }
 
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {

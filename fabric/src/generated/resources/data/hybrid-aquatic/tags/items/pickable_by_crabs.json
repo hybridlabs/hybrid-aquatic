@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "minecraft:nautilus_shell",
-    "minecraft:glass",
-    "minecraft:skeleton_skull",
-    "minecraft:wither_skeleton_skull"
-  ]
-}
