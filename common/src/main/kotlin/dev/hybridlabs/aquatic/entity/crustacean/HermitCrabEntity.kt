@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
+import net.minecraft.core.Vec3i
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.InteractionHand
@@ -9,6 +10,7 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -32,14 +34,14 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?,
     ): SpawnGroupData? {
-        val roll = random.nextFloat()
+        this.setCanPickUpLoot(true)
 
+        val roll = random.nextFloat()
         val generatedRoll = when {
             roll < 0.60f -> Items.NAUTILUS_SHELL.defaultInstance
             roll < 0.85f -> Items.SKELETON_SKULL.defaultInstance
             else -> Items.AIR.defaultInstance
         }
-
         shellItem = generatedRoll
 
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
@@ -71,9 +73,8 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     }
 
     override fun dropCustomDeathLoot(source: DamageSource, looting: Int, causedByPlayer: Boolean) {
-        val held = shellItem
-        if (!held.isEmpty) {
-            spawnAtLocation(held)
+        if (!shellItem.isEmpty) {
+            spawnAtLocation(shellItem)
             shellItem = ItemStack.EMPTY
         }
     }
@@ -136,6 +137,25 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     }
     //#endregion
 
+    override fun getPickupReach(): Vec3i {
+        return ITEM_PICKUP_REACH
+    }
+
+    override fun wantsToPickUp(stack: ItemStack): Boolean {
+        return canTakeItem(stack)
+    }
+
+    override fun pickUpItem(itemEntity: ItemEntity) {
+        if (!shellItem.isEmpty) return
+
+        val itemStack = itemEntity.item
+        if (!canTakeItem(itemStack)) return
+
+        shellItem = itemStack.copyWithCount(1)
+        itemStack.shrink(1)
+        if (itemStack.isEmpty) itemEntity.discard()
+    }
+
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
@@ -166,5 +186,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
                 .add(Attributes.ARMOR, 5.0)
                 .add(Attributes.ARMOR_TOUGHNESS, 5.0)
         }
+
+        val ITEM_PICKUP_REACH = Vec3i(1, 0, 1)
     }
 }
