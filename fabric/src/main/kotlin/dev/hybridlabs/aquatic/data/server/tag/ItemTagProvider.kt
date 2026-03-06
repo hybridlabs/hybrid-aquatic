@@ -500,7 +500,6 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         setOf(
             Items.NAUTILUS_SHELL,
-            Items.GLASS,
             Items.SKELETON_SKULL,
             Items.WITHER_SKELETON_SKULL,
             Items.CREEPER_HEAD,
@@ -508,7 +507,6 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             Items.PIGLIN_HEAD,
             Items.DRAGON_HEAD,
             Items.PLAYER_HEAD,
-            Items.BARREL,
             Items.BEEHIVE,
             Items.DECORATED_POT,
             Items.JUKEBOX,
@@ -517,10 +515,12 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             Items.TNT,
             Items.TARGET,
             Items.LODESTONE,
+            Items.BARREL,
             Items.CHEST,
             Items.ENDER_CHEST,
-            Items.CARVED_PUMPKIN,
             Items.PUMPKIN,
+            Items.CARVED_PUMPKIN,
+            Items.JACK_O_LANTERN,
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.CRAB_WEARABLES).add(item)
         }

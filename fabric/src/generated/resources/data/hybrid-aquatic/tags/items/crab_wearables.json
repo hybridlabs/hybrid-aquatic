@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:nautilus_shell",
-    "minecraft:glass",
     "minecraft:skeleton_skull",
     "minecraft:wither_skeleton_skull",
     "minecraft:creeper_head",
@@ -10,7 +9,6 @@
     "minecraft:piglin_head",
     "minecraft:dragon_head",
     "minecraft:player_head",
-    "minecraft:barrel",
     "minecraft:beehive",
     "minecraft:decorated_pot",
     "minecraft:jukebox",
@@ -19,9 +17,11 @@
     "minecraft:tnt",
     "minecraft:target",
     "minecraft:lodestone",
+    "minecraft:barrel",
     "minecraft:chest",
     "minecraft:ender_chest",
+    "minecraft:pumpkin",
     "minecraft:carved_pumpkin",
-    "minecraft:pumpkin"
+    "minecraft:jack_o_lantern"
   ]
 }
