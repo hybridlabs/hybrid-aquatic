@@ -38,7 +38,7 @@ class AvoidEntityInWaterGoal<T: LivingEntity> (
 
     override fun canUse(): Boolean {
         toAvoid = mob.level().getNearestEntity(
-            mob.level().getEntitiesOfClass(avoidClass, mob.boundingBox.inflate(this.maxDist.toDouble(), 7.0, this.maxDist.toDouble()), { true }),
+            mob.level().getEntitiesOfClass(avoidClass, mob.boundingBox.inflate(this.maxDist.toDouble(), 7.0, this.maxDist.toDouble())) { entity -> entity.isInWater },
             TargetingConditions.forCombat().range(maxDistance.toDouble()).selector(predicateOnAvoidEntity.and(avoidPredicate)),
             mob, mob.x, mob.y, mob.z
         )
