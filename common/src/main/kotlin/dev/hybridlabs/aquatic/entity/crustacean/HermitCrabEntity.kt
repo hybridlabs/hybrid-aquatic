@@ -193,7 +193,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         if (!isHiding) return
 
         hidingTimer--
-        if ((level().gameTime - lastDamageTime) <= 200 || !shellItem.isEmpty) return
+        if (!shellItem.isEmpty && (level().gameTime - lastDamageTime) <= 200) return
 
         isHiding = false
         attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 0.3
