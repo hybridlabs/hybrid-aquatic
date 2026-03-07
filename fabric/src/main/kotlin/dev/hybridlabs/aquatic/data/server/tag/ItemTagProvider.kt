@@ -524,5 +524,13 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.CRAB_WEARABLES).add(item)
         }
+
+        setOf(
+            Items.NOTE_BLOCK,
+            Items.REDSTONE_LAMP,
+            Items.TNT
+        ).forEach { item ->
+            getOrCreateTagBuilder(HybridAquaticItemTags.REDSTONE_COMPONENTS).add(item)
+        }
     }
 }

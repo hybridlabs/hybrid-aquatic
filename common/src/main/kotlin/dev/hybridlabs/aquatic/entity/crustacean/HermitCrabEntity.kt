@@ -1,21 +1,34 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.ai.goal.FleeFromEntityGoal
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.minecraft.core.Vec3i
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.*
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal
+import net.minecraft.world.entity.animal.Cow
 import net.minecraft.world.entity.item.ItemEntity
+import net.minecraft.world.entity.item.PrimedTnt
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.NoteBlock
+import net.minecraft.world.level.block.TntBlock
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
@@ -25,6 +38,14 @@ import software.bernie.geckolib.core.`object`.PlayState
 @Suppress("DEPRECATION")
 class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
     HybridAquaticCrustaceanEntity(entityType, world, false, true) {
+
+    override fun registerGoals() {
+        super.registerGoals()
+
+        // why does AvoidEntityGoal only works with Living Entities god damn it........
+        goalSelector.addGoal(1, AvoidEntityGoal(this, Cow::class.java, 15.0f, 1.5, 2.0))
+        goalSelector.addGoal(1, FleeFromEntityGoal(this, PrimedTnt::class.java, 15.0, 1.5, 2.0))
+    }
 
     //#region Shells & Items
     override fun finalizeSpawn(
@@ -99,6 +120,37 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
             shellItem = ItemStack.EMPTY
         }
     }
+
+    fun activateRedstoneComponents() {
+        if (tickCount % 20 != 0) return // Only run every 20 ticks(1 second)
+        if (!shellItem.`is`(HybridAquaticItemTags.REDSTONE_COMPONENTS)) return
+
+        val blockPosBelow = blockPosition().below()
+        val blockStateBelow = level().getBlockState(blockPosBelow)
+        if (!blockStateBelow.`is`(Blocks.REDSTONE_BLOCK)) return
+
+        val blockItem = shellItem.item as BlockItem
+        val originalBlock = blockItem.block
+
+        if (originalBlock is NoteBlock) {
+            level().addParticle(
+                ParticleTypes.NOTE,
+                position().x, position().y + 0.8, position().z,
+                24.0, 0.0, 0.0
+            )
+
+            level().playSeededSound(
+                null, position().x, position().y, position().z,
+                SoundEvents.NOTE_BLOCK_HARP, SoundSource.NEUTRAL,
+                3.0f, 1.0f, level().random.nextLong()
+            )
+        } else if (originalBlock is TntBlock) {
+            TntBlock.explode(level(), blockPosition())
+            shellItem = ItemStack.EMPTY
+
+        }
+
+    }
     //#endregion
 
     //#region Properties
@@ -126,9 +178,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         attributes.getInstance(Attributes.ARMOR)?.baseValue = 50.0
     }
 
-    override fun tick() {
-        super.tick()
-
+    fun hidingLogic() {
         if (isHiding && shellItem.isEmpty) {
             isHiding = false
             attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 0.3
@@ -157,6 +207,13 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         return super.hurt(source, amount)
     }
     //#endregion
+
+    override fun tick() {
+        super.tick()
+
+        this.hidingLogic()
+        this.activateRedstoneComponents()
+    }
 
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
