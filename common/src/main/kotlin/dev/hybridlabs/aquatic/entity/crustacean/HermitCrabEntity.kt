@@ -34,6 +34,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
+import java.util.*
 
 @Suppress("DEPRECATION")
 class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
@@ -42,9 +43,8 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     override fun registerGoals() {
         super.registerGoals()
 
-        // why does AvoidEntityGoal only works with Living Entities god damn it........
-        goalSelector.addGoal(5, AvoidEntityGoal(this, Cow::class.java, 15.0f, 1.5, 2.0))
-        goalSelector.addGoal(5, FleeFromEntityGoal(this, PrimedTnt::class.java, 15.0, 1.5, 2.0))
+        goalSelector.addGoal(1, AvoidEntityGoal(this, Cow::class.java, 15.0f, 0.3, 0.75))
+        goalSelector.addGoal(1, FleeFromEntityGoal(this, PrimedTnt::class.java, 15.0, 0.3, 0.75))
     }
 
     //#region Shells & Items
@@ -179,28 +179,18 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     }
 
     fun hidingLogic() {
-        if (isHiding && shellItem.isEmpty) {
-            isHiding = false
-            attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 0.3
-            attributes.getInstance(Attributes.ARMOR)?.baseValue = 5.0
-            return
-        }
+        if (!isHiding) return
 
-        if (isHiding) {
-            hidingTimer--
+        hidingTimer--
+        if ((level().gameTime - lastDamageTime) <= 200 || !shellItem.isEmpty) return
 
-            if (hidingTimer <= 0 && (level().gameTime - lastDamageTime) >= 200) {
-                isHiding = false
-                attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 0.3
-                attributes.getInstance(Attributes.ARMOR)?.baseValue = 5.0
-            }
-        }
+        isHiding = false
+        attributes.getInstance(Attributes.MOVEMENT_SPEED)?.baseValue = 0.3
+        attributes.getInstance(Attributes.ARMOR)?.baseValue = 5.0
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
-        if (!isHiding && !shellItem.isEmpty) {
-            startHiding()
-        }
+        if (!isHiding && !shellItem.isEmpty) startHiding()
 
         lastDamageTime = level().gameTime
 
@@ -246,6 +236,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
                 .add(Attributes.ARMOR_TOUGHNESS, 5.0)
         }
 
+        val speedModifierUUID = UUID.fromString("198de37d-c6ec-446d-b074-fb5fe6b26a06")
         val ITEM_PICKUP_REACH = Vec3i(1, 0, 1)
     }
 }

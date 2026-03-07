@@ -17,11 +17,11 @@ class FleeFromEntityGoal<E: Entity> (
 ): Goal() {
     private var toAvoid: E? = null
     private var path: Path? = null
-    private var level = pathfinderMob.level()
-    private var pathNav = pathfinderMob.navigation
+    private val level = pathfinderMob.level()
+    private val pathNav = pathfinderMob.navigation
 
     init {
-        this.setFlags(EnumSet.of<Flag>(Flag.MOVE))
+        setFlags(EnumSet.of<Flag>(Flag.MOVE))
     }
 
     override fun canUse(): Boolean {
@@ -32,30 +32,30 @@ class FleeFromEntityGoal<E: Entity> (
 
         toAvoid = getNearestEntity(nearbyEntitiesOfClass, pathfinderMob.position()) ?: return false
 
-        val blockPosAway = DefaultRandomPos.getPosAway(this.pathfinderMob, 16, 7, this.toAvoid!!.position()) ?: return false
-        if (this.toAvoid!!.distanceToSqr(blockPosAway.x, blockPosAway.y, blockPosAway.z) < this.toAvoid!!.distanceToSqr(this.pathfinderMob)) return false
+        val blockPosAway = DefaultRandomPos.getPosAway(pathfinderMob, 16, 7, toAvoid!!.position()) ?: return false
+        if (toAvoid!!.distanceToSqr(blockPosAway.x, blockPosAway.y, blockPosAway.z) < toAvoid!!.distanceToSqr(pathfinderMob)) return false
 
-        this.path = this.pathNav.createPath(blockPosAway.x, blockPosAway.y, blockPosAway.z, 0)
-        return this.path != null
+        path = pathNav.createPath(blockPosAway.x, blockPosAway.y, blockPosAway.z, 0)
+        return path != null
     }
 
     override fun canContinueToUse(): Boolean {
-        return !this.pathNav.isDone
+        return !pathNav.isDone
     }
 
     override fun start() {
-        this.pathNav.moveTo(this.path, this.walkSpeedModifier)
+        pathNav.moveTo(path, walkSpeedModifier)
     }
 
     override fun stop() {
-        this.toAvoid = null
+        toAvoid = null
     }
 
     override fun tick() {
-        if (this.pathfinderMob.distanceToSqr(this.toAvoid!!) < 49.0) {
-            pathNav.setSpeedModifier(this.sprintSpeedModifier)
+        if (pathfinderMob.distanceToSqr(toAvoid!!) < 49.0) {
+            pathNav.setSpeedModifier(sprintSpeedModifier)
         } else {
-            pathNav.setSpeedModifier(this.walkSpeedModifier)
+            pathNav.setSpeedModifier(walkSpeedModifier)
         }
     }
 
