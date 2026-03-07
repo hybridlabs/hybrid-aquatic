@@ -57,6 +57,8 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
             val oldStack = shellItem.copy()
             shellItem = playerStack.copyWithCount(1)
 
+            if (!shellItem.`is` { item -> item.equals(Items.NAUTILUS_SHELL) || item.equals(Items.SKELETON_SKULL) }) setPersistenceRequired()
+
             if (!player.abilities.instabuild) {
                 playerStack.shrink(1)
             }
