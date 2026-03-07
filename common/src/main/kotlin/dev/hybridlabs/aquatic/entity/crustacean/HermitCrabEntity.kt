@@ -128,24 +128,25 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         val blockItem = shellItem.item as BlockItem
         val originalBlock = blockItem.block
 
-        if (originalBlock is NoteBlock) {
-            level().addParticle(
-                ParticleTypes.NOTE,
-                position().x, position().y + 0.8, position().z,
-                24.0, 0.0, 0.0
-            )
+        when(originalBlock) {
+            is NoteBlock -> {
+                level().addParticle(
+                    ParticleTypes.NOTE,
+                    position().x, position().y + 0.8, position().z,
+                    24.0, 0.0, 0.0
+                )
 
-            level().playSeededSound(
-                null, position().x, position().y, position().z,
-                SoundEvents.NOTE_BLOCK_HARP, SoundSource.NEUTRAL,
-                3.0f, 1.0f, level().random.nextLong()
-            )
-        } else if (originalBlock is TntBlock) {
-            TntBlock.explode(level(), blockPosition())
-            shellItem = ItemStack.EMPTY
-
+                level().playSeededSound(
+                    null, position().x, position().y, position().z,
+                    SoundEvents.NOTE_BLOCK_HARP, SoundSource.NEUTRAL,
+                    3.0f, 1.0f, level().random.nextLong()
+                )
+            }
+            is TntBlock -> {
+                TntBlock.explode(level(), blockPosition())
+                shellItem = ItemStack.EMPTY
+            }
         }
-
     }
     //#endregion
 
