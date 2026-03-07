@@ -21,10 +21,12 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
@@ -47,15 +49,14 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
 
     open fun getTargetConfig(): MobTargetConfiguration? = null
 
-    init {
+    override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
-    }
 
-    override fun createNavigation(level: Level): PathNavigation {
         return WaterBoundPathNavigation(this, level)
     }
 
@@ -64,6 +65,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         goalSelector.addGoal(0, FishAttackGoal(this, 1.1, true))
         goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
+        goalSelector.addGoal(2, AvoidEntityGoal(this, Player::class.java, 16.0f, 2.0, 2.0))
         getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticFishEntity::hunger)
     }
 

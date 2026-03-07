@@ -50,15 +50,14 @@ open class HybridAquaticCrustaceanEntity(
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false
 
-    init {
+    override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
         moveControl = MoveControl(this)
         setMaxUpStep(1.0f)
-    }
 
-    override fun createNavigation(level: Level): PathNavigation {
         return GroundPathNavigation(this, level)
     }
 
