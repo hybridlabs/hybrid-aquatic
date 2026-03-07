@@ -53,6 +53,8 @@ open class HybridAquaticCrustaceanEntity(
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
+
+        setMaxUpStep(1.0f)
     }
 
     override fun registerGoals() {
@@ -68,7 +70,7 @@ open class HybridAquaticCrustaceanEntity(
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?,
     ): SpawnGroupData? {
-        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
+        size = random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 

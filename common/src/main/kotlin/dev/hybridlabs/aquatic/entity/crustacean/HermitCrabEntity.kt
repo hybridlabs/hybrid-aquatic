@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.NoteBlock
 import net.minecraft.world.level.block.TntBlock
 import net.minecraft.world.level.gameevent.GameEvent
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
@@ -147,6 +148,8 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
             }
             is TntBlock -> {
                 shellItem = ItemStack.EMPTY
+                addDeltaMovement(Vec3(0.0, 0.4, 0.0))
+                goalSelector.tick()
 
                 val primedTNT = SmallTNTEntity(level(), position().x, position().y, position().z, this)
                 level().addFreshEntity(primedTNT)
