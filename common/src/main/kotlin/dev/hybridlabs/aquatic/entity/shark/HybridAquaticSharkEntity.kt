@@ -31,7 +31,6 @@ import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
@@ -80,13 +79,15 @@ open class HybridAquaticSharkEntity(
         }
 
     //#region Initialization
-    init {
+    override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
         moveControl = SmoothSwimmingMoveControl(this, 60, 6, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 15)
-        navigation = WaterBoundPathNavigation(this, world)
+
+        return WaterBoundPathNavigation(this, level)
     }
 
     override fun registerGoals() {
@@ -194,10 +195,6 @@ open class HybridAquaticSharkEntity(
     //#endregion
 
     //#region Movement
-    override fun createNavigation(level: Level): PathNavigation {
-        return WaterBoundPathNavigation(this, level)
-    }
-
     override fun travel(travelVector: Vec3) {
         if (this.isEffectiveAi && this.isInWater) {
             this.moveRelative(this.speed, travelVector)

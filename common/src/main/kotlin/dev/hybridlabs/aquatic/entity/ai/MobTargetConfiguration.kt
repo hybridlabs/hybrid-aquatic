@@ -24,7 +24,7 @@ data class MobTargetConfiguration(
     fun addAvoidanceGoal(goalSelector: GoalSelector, mob: PathfinderMob) {
         if (predators.isEmpty()) return
 
-        goalSelector.addGoal(3, AvoidEntityGoal(mob, LivingEntity::class.java, 8.0f, 1.0, 1.0) { entity ->
+        goalSelector.addGoal(2, AvoidEntityGoal(mob, LivingEntity::class.java, 16.0f, 1.5, 1.5) { entity ->
             predators.any { tag -> entity.type.`is`(tag) }
         })
     }

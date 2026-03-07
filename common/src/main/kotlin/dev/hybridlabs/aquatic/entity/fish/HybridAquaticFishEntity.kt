@@ -65,8 +65,9 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         goalSelector.addGoal(0, FishAttackGoal(this, 1.1, true))
         goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
-        goalSelector.addGoal(2, AvoidEntityInWaterGoal(this, Player::class.java, 16.0f, 2.0, 2.0))
+        goalSelector.addGoal(2, AvoidEntityInWaterGoal(this, Player::class.java, 16.0f, 1.5, 1.5))
         getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticFishEntity::hunger)
+        getTargetConfig()?.addAvoidanceGoal(goalSelector, this)
     }
 
     //#region Data

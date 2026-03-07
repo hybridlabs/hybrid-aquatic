@@ -19,11 +19,13 @@ import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.control.MoveControl
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal
 import net.minecraft.world.entity.ai.goal.PanicGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
@@ -63,6 +65,7 @@ open class HybridAquaticCrustaceanEntity(
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(1, AvoidEntityGoal(this, Player::class.java, 16.0F, 0.3, 0.75))
         goalSelector.addGoal(1, PanicGoal(this, 1.0))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
     }
@@ -86,8 +89,8 @@ open class HybridAquaticCrustaceanEntity(
         if (
             this.songSource == null ||
             !songSource!!.closerToCenterThan(this.position(), 3.5) ||
-            !level().getBlockState(this.songSource!!).`is`(Blocks.JUKEBOX))
-        {
+            !level().getBlockState(this.songSource!!).`is`(Blocks.JUKEBOX)
+        ) {
             this.songPlaying = false
             this.songSource = null
         }
@@ -214,7 +217,8 @@ open class HybridAquaticCrustaceanEntity(
             DefaultAnimations.genericWalkIdleController(this)
         )
         controllerRegistrar.add(
-            AnimationController(this, "Dance", 4,
+            AnimationController(
+                this, "Dance", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
                     if (this.canDance && isSongPlaying()) {
                         return@AnimationStateHandler state.setAndContinue(DANCE_ANIMATION)
@@ -236,7 +240,8 @@ open class HybridAquaticCrustaceanEntity(
         if (attacker !is HybridAquaticFishEntity &&
             attacker !is HybridAquaticSharkEntity &&
             attacker !is HybridAquaticCephalopodEntity &&
-            attacker !is HybridAquaticMammalEntity) {
+            attacker !is HybridAquaticMammalEntity
+        ) {
             super.dropFromLootTable(source, causedByPlayer)
         }
     }
