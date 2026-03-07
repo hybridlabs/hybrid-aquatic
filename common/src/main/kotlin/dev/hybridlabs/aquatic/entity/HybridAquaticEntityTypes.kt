@@ -13,6 +13,7 @@ import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.*
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
+import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
@@ -942,6 +943,12 @@ object HybridAquaticEntityTypes {
         "depth_charge",
         ::PrimedDepthChargeEntity,
         EntityDimensions.fixed(0.98f, 0.98f)
+    )
+
+    val SMALL_TNT = registerMisc(
+        "small_tnt",
+        ::SmallTNTEntity,
+        EntityDimensions.fixed(0.49f, 0.49f)
     )
 
     val ARGONAUT = registerMisc(

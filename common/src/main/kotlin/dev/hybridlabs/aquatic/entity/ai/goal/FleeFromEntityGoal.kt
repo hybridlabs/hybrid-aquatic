@@ -32,10 +32,10 @@ class FleeFromEntityGoal<E: Entity> (
 
         toAvoid = getNearestEntity(nearbyEntitiesOfClass, pathfinderMob.position()) ?: return false
 
-        val blockPosAway = DefaultRandomPos.getPosAway(pathfinderMob, 16, 7, toAvoid!!.position()) ?: return false
+        val blockPosAway = DefaultRandomPos.getPosAway(pathfinderMob, 24, 7, toAvoid!!.position()) ?: return false
         if (toAvoid!!.distanceToSqr(blockPosAway.x, blockPosAway.y, blockPosAway.z) < toAvoid!!.distanceToSqr(pathfinderMob)) return false
 
-        path = pathNav.createPath(blockPosAway.x, blockPosAway.y, blockPosAway.z, 0)
+        path = pathNav.createPath(blockPosAway.x, blockPosAway.y, blockPosAway.z, 25)
         return path != null
     }
 
@@ -52,7 +52,7 @@ class FleeFromEntityGoal<E: Entity> (
     }
 
     override fun tick() {
-        if (pathfinderMob.distanceToSqr(toAvoid!!) < 49.0) {
+        if (pathfinderMob.distanceToSqr(toAvoid!!) < 64.0) {
             pathNav.setSpeedModifier(sprintSpeedModifier)
         } else {
             pathNav.setSpeedModifier(walkSpeedModifier)

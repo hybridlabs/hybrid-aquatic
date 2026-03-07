@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.render.entity
+package dev.hybridlabs.aquatic.client.render.entity.misc
 
 import dev.hybridlabs.aquatic.client.model.entity.misc.ArgonautEntityModel
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity

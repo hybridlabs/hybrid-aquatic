@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FleeFromEntityGoal
+import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.minecraft.core.Vec3i
 import net.minecraft.core.particles.ParticleTypes
@@ -27,6 +28,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.NoteBlock
 import net.minecraft.world.level.block.TntBlock
+import net.minecraft.world.level.gameevent.GameEvent
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
@@ -41,6 +43,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         super.registerGoals()
 
         goalSelector.addGoal(1, FleeFromEntityGoal(this, PrimedTnt::class.java, 15.0, 0.3, 0.75))
+        goalSelector.addGoal(1, FleeFromEntityGoal(this, SmallTNTEntity::class.java, 15.0, 0.3, 0.75))
     }
 
     //#region Shells & Items
@@ -128,7 +131,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         val blockItem = shellItem.item as BlockItem
         val originalBlock = blockItem.block
 
-        when(originalBlock) {
+        when (originalBlock) {
             is NoteBlock -> {
                 level().addParticle(
                     ParticleTypes.NOTE,
@@ -143,8 +146,16 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
                 )
             }
             is TntBlock -> {
-                TntBlock.explode(level(), blockPosition())
                 shellItem = ItemStack.EMPTY
+
+                val primedTNT = SmallTNTEntity(level(), position().x, position().y, position().z, this)
+                level().addFreshEntity(primedTNT)
+                level().playSound(
+                    null, position().x, position().y, position().z,
+                    SoundEvents.TNT_PRIMED, SoundSource.BLOCKS,
+                    1.0f, 1.0f
+                )
+                level().gameEvent(this, GameEvent.PRIME_FUSE, position())
             }
         }
     }

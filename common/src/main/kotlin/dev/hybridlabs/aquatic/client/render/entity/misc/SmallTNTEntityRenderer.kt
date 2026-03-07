@@ -1,9 +1,8 @@
-package dev.hybridlabs.aquatic.client.render.entity
+package dev.hybridlabs.aquatic.client.render.entity.misc
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
+import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.block.BlockRenderDispatcher
 import net.minecraft.client.renderer.entity.EntityRenderer
@@ -12,18 +11,19 @@ import net.minecraft.client.renderer.entity.TntMinecartRenderer
 import net.minecraft.client.renderer.texture.TextureAtlas
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
+import net.minecraft.world.level.block.Blocks
 
-class DepthChargeEntityRenderer(context: EntityRendererProvider.Context) :
-    EntityRenderer<PrimedDepthChargeEntity>(context) {
+class SmallTNTEntityRenderer(context: EntityRendererProvider.Context) :
+    EntityRenderer<SmallTNTEntity>(context) {
     private val blockRenderer: BlockRenderDispatcher
 
     init {
-        this.shadowRadius = 0.5f
+        this.shadowRadius = 0.25f
         this.blockRenderer = context.blockRenderDispatcher
     }
 
     override fun render(
-        entity: PrimedDepthChargeEntity,
+        entity: SmallTNTEntity,
         entityYaw: Float,
         partialTicks: Float,
         poseStack: PoseStack,
@@ -43,11 +43,12 @@ class DepthChargeEntityRenderer(context: EntityRendererProvider.Context) :
         }
 
         poseStack.mulPose(Axis.YP.rotationDegrees(-90.0f))
-        poseStack.translate(-0.5f, -0.5f, 0.5f)
+        poseStack.translate(-0.25f, -0.5f, 0.25f)
         poseStack.mulPose(Axis.YP.rotationDegrees(90.0f))
+        poseStack.scale(0.5f, 0.5f, 0.5f)
         TntMinecartRenderer.renderWhiteSolidBlock(
             this.blockRenderer,
-            HybridAquaticBlocks.DEPTH_CHARGE.get().defaultBlockState(),
+            Blocks.TNT.defaultBlockState(),
             poseStack,
             buffer,
             packedLight,
@@ -57,7 +58,7 @@ class DepthChargeEntityRenderer(context: EntityRendererProvider.Context) :
         super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight)
     }
 
-    override fun getTextureLocation(p0: PrimedDepthChargeEntity): ResourceLocation {
+    override fun getTextureLocation(p0: SmallTNTEntity): ResourceLocation {
         return TextureAtlas.LOCATION_BLOCKS
     }
 }

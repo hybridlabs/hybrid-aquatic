@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.client.render.entity
 
-import dev.hybridlabs.aquatic.client.model.entity.misc.ArgonautEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.cephalopods.*
 import dev.hybridlabs.aquatic.client.render.entity.critter.*
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
@@ -10,15 +9,11 @@ import dev.hybridlabs.aquatic.client.render.entity.mammal.DugongEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.ManateeEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OrcaEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinogenEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinomaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.ManglerfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.ShellBeastEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.miniboss.*
+import dev.hybridlabs.aquatic.client.render.entity.misc.ArgonautEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.misc.DepthChargeEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.misc.SmallTNTEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.NautilusEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.VampireSquidEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.WhaleSharkEntityRenderer
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.platform.ClientServices
 
@@ -795,6 +790,12 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.DEPTH_CHARGE,
             ::DepthChargeEntityRenderer
+        )
+
+    val SMALL_TNT =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.SMALL_TNT,
+            ::SmallTNTEntityRenderer
         )
 
     val ARGONAUT =
