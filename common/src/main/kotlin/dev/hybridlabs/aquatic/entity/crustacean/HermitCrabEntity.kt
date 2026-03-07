@@ -34,7 +34,6 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
-import java.util.*
 
 @Suppress("DEPRECATION")
 class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
@@ -236,7 +235,6 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
                 .add(Attributes.ARMOR_TOUGHNESS, 5.0)
         }
 
-        val speedModifierUUID = UUID.fromString("198de37d-c6ec-446d-b074-fb5fe6b26a06")
         val ITEM_PICKUP_REACH = Vec3i(1, 0, 1)
     }
 }
