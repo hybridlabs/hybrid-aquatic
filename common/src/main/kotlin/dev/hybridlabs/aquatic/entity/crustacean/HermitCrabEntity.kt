@@ -16,8 +16,6 @@ import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal
-import net.minecraft.world.entity.animal.Cow
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.item.PrimedTnt
 import net.minecraft.world.entity.player.Player
@@ -42,7 +40,6 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     override fun registerGoals() {
         super.registerGoals()
 
-        goalSelector.addGoal(1, AvoidEntityGoal(this, Cow::class.java, 15.0f, 0.3, 0.75))
         goalSelector.addGoal(1, FleeFromEntityGoal(this, PrimedTnt::class.java, 15.0, 0.3, 0.75))
     }
 
