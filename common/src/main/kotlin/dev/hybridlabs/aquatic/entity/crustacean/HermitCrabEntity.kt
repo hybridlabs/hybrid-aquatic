@@ -51,6 +51,25 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         return stack.`is`(HybridAquaticItemTags.CRAB_WEARABLES)
     }
 
+    override fun getPickupReach(): Vec3i {
+        return ITEM_PICKUP_REACH
+    }
+
+    override fun wantsToPickUp(stack: ItemStack): Boolean {
+        return canTakeItem(stack)
+    }
+
+    override fun pickUpItem(itemEntity: ItemEntity) {
+        if (!shellItem.isEmpty) return
+
+        val itemStack = itemEntity.item
+        if (!canTakeItem(itemStack)) return
+
+        shellItem = itemStack.copyWithCount(1)
+        itemStack.shrink(1)
+        if (itemStack.isEmpty) itemEntity.discard()
+    }
+
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
         val playerStack = player.getItemInHand(hand)
         if (canTakeItem(playerStack) || playerStack.isEmpty) {
@@ -138,25 +157,6 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         return super.hurt(source, amount)
     }
     //#endregion
-
-    override fun getPickupReach(): Vec3i {
-        return ITEM_PICKUP_REACH
-    }
-
-    override fun wantsToPickUp(stack: ItemStack): Boolean {
-        return canTakeItem(stack)
-    }
-
-    override fun pickUpItem(itemEntity: ItemEntity) {
-        if (!shellItem.isEmpty) return
-
-        val itemStack = itemEntity.item
-        if (!canTakeItem(itemStack)) return
-
-        shellItem = itemStack.copyWithCount(1)
-        itemStack.shrink(1)
-        if (itemStack.isEmpty) itemEntity.discard()
-    }
 
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
