@@ -148,7 +148,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
             }
             is TntBlock -> {
                 shellItem = ItemStack.EMPTY
-                addDeltaMovement(Vec3(0.0, 0.4, 0.0))
+                addDeltaMovement(Vec3(0.0, if(isInWater) 0.2 else 0.4, 0.0))
                 goalSelector.tick()
 
                 val primedTNT = SmallTNTEntity(level(), position().x, position().y, position().z, this)
