@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.PathfinderMob
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.ai.util.DefaultRandomPos
@@ -31,7 +30,7 @@ class FleeFromEntityGoal<E: Entity> (
             pathfinderMob.boundingBox.inflate(maxDistance, 3.0, maxDistance)
         )
 
-        toAvoid = getNearestEntity(nearbyEntitiesOfClass, pathfinderMob, pathfinderMob.position()) ?: return false
+        toAvoid = getNearestEntity(nearbyEntitiesOfClass, pathfinderMob.position()) ?: return false
 
         val blockPosAway = DefaultRandomPos.getPosAway(this.pathfinderMob, 16, 7, this.toAvoid!!.position()) ?: return false
         if (this.toAvoid!!.distanceToSqr(blockPosAway.x, blockPosAway.y, blockPosAway.z) < this.toAvoid!!.distanceToSqr(this.pathfinderMob)) return false
@@ -61,7 +60,7 @@ class FleeFromEntityGoal<E: Entity> (
     }
 
     companion object {
-        fun <T: Entity> getNearestEntity(entities: List<T>, target: LivingEntity?, pos: Vec3): T? {
+        fun <T: Entity> getNearestEntity(entities: List<T>, pos: Vec3): T? {
             var firstDistance = -1.0
             var pickedEntity: T? = null
 
