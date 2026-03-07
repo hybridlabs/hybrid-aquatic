@@ -43,8 +43,8 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         super.registerGoals()
 
         // why does AvoidEntityGoal only works with Living Entities god damn it........
-        goalSelector.addGoal(1, AvoidEntityGoal(this, Cow::class.java, 15.0f, 1.5, 2.0))
-        goalSelector.addGoal(1, FleeFromEntityGoal(this, PrimedTnt::class.java, 15.0, 1.5, 2.0))
+        goalSelector.addGoal(5, AvoidEntityGoal(this, Cow::class.java, 15.0f, 1.5, 2.0))
+        goalSelector.addGoal(5, FleeFromEntityGoal(this, PrimedTnt::class.java, 15.0, 1.5, 2.0))
     }
 
     //#region Shells & Items

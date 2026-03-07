@@ -61,7 +61,7 @@ class FleeFromEntityGoal<E: Entity> (
     }
 
     companion object {
-        fun <T: Entity, LE: LivingEntity> getNearestEntity(entities: List<T>, target: LE?, pos: Vec3): T? {
+        fun <T: Entity> getNearestEntity(entities: List<T>, target: LivingEntity?, pos: Vec3): T? {
             var firstDistance = -1.0
             var pickedEntity: T? = null
 
