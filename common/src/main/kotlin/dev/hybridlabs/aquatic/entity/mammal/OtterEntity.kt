@@ -30,6 +30,7 @@ import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.util.DefaultRandomPos
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
@@ -62,14 +63,16 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
         true
     )
 
-    init {
-        moveControl = swimControl
-        lookControl = OtterLookControl(this)
-        navigation = AmphibiousPathNavigation(this, this.level())
-
-        // Setting WATER_BORDER to zero makes surface water blocks preferred
+    override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0f)
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
+        moveControl = swimControl
+        lookControl = OtterLookControl(this)
+
+        return AmphibiousPathNavigation(this, level)
     }
 
     override fun registerGoals() {
