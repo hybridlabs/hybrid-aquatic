@@ -20,6 +20,7 @@ import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.BlockItem.BLOCK_ENTITY_TAG
 import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.block.BaseCoralWallFanBlock
+import net.minecraft.world.level.block.PotatoBlock
 import net.minecraft.world.level.block.WallTorchBlock
 import net.minecraft.world.level.storage.loot.IntRange
 import net.minecraft.world.level.storage.loot.LootPool
@@ -32,6 +33,7 @@ import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction
 import net.minecraft.world.level.storage.loot.functions.LimitCount
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition
 import net.minecraft.world.level.storage.loot.predicates.MatchTool
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
@@ -136,6 +138,27 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
                     .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+            )
+        }
+
+        add(HybridAquaticBlocks.CLAMS.get()) { block ->
+            val ageCondition: LootItemCondition.Builder =
+                LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PotatoBlock.AGE, 7))
+
+            applyExplosionDecay(
+                block,
+                LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(block))).withPool(
+                    LootPool.lootPool().`when`(ageCondition).add(
+                        LootItem.lootTableItem(HybridAquaticItems.CLAM.get()).apply(
+                            ApplyBonusCount.addBonusBinomialDistributionCount(
+                                Enchantments.BLOCK_FORTUNE,
+                                0.5714286f,
+                                3
+                            )
+                        )
+                    )
+                )
             )
         }
         //#endregion
