@@ -22,6 +22,7 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
@@ -45,11 +46,15 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
     open fun getTargetConfig(): MobTargetConfiguration? = null
     open val inkConfig: InkConfiguration? = null
 
-    init {
+    override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
         moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
-        navigation = WaterBoundPathNavigation(this, world)
+
+        return WaterBoundPathNavigation(this, level)
     }
 
     override fun registerGoals() {
