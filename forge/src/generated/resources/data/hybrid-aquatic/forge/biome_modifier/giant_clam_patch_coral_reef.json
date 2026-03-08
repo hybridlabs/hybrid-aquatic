@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid-aquatic:coral_reef",
+  "features": "hybrid-aquatic:giant_clam_patch",
+  "step": "vegetal_decoration"
+}

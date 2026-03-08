@@ -3,7 +3,7 @@
   "biomes": "#hybrid-aquatic:cold_oceans",
   "spawners": {
     "type": "hybrid-aquatic:nomura_jellyfish",
-    "maxCount": 2,
+    "maxCount": 1,
     "minCount": 1,
     "weight": 1
   }

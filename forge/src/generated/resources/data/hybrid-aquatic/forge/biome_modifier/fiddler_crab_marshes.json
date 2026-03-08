@@ -3,8 +3,8 @@
   "biomes": "#hybrid-aquatic:marshes",
   "spawners": {
     "type": "hybrid-aquatic:fiddler_crab",
-    "maxCount": 3,
-    "minCount": 2,
-    "weight": 5
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 3
   }
 }

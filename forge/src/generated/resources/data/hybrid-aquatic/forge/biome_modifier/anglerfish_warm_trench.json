@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:warm_trench",
+  "spawners": {
+    "type": "hybrid-aquatic:anglerfish",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 3
+  }
+}

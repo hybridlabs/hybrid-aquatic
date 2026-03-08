@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:cold_trench",
+  "spawners": {
+    "type": "hybrid-aquatic:mauve_stinger",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 2
+  }
+}

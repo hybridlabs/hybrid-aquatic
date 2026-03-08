@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:warm_trench",
+  "spawners": {
+    "type": "hybrid-aquatic:firefly_squid",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 10
+  }
+}

@@ -5,6 +5,6 @@
     "type": "hybrid-aquatic:goldfish",
     "maxCount": 2,
     "minCount": 1,
-    "weight": 5
+    "weight": 3
   }
 }

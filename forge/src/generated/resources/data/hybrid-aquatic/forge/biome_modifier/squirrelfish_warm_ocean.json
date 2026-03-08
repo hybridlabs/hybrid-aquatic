@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:warm_ocean",
+  "spawners": {
+    "type": "hybrid-aquatic:squirrelfish",
+    "maxCount": 12,
+    "minCount": 4,
+    "weight": 5
+  }
+}

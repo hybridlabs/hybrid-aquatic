@@ -3,7 +3,7 @@
   "biomes": "#minecraft:is_ocean",
   "spawners": {
     "type": "hybrid-aquatic:sea_cucumber",
-    "maxCount": 3,
+    "maxCount": 2,
     "minCount": 1,
     "weight": 3
   }

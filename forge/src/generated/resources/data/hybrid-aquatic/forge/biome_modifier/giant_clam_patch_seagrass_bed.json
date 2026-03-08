@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid-aquatic:seagrass_bed",
+  "features": "hybrid-aquatic:giant_clam_patch",
+  "step": "vegetal_decoration"
+}

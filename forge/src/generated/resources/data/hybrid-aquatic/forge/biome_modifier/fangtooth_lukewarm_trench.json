@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:lukewarm_trench",
+  "spawners": {
+    "type": "hybrid-aquatic:fangtooth",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 3
+  }
+}

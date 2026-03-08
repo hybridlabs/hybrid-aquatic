@@ -4,10 +4,10 @@
     "bounding_box_type": "full",
     "id": "shipwreck",
     "spawns": {
-      "SHARK": [
+      "HYBRID_AQUATIC_SHARK": [
         {
-          "type": "hybrid-aquatic:hound_shark",
-          "maxCount": 4,
+          "type": "hybrid-aquatic:great_white_shark",
+          "maxCount": 3,
           "minCount": 1,
           "weight": 1
         }
