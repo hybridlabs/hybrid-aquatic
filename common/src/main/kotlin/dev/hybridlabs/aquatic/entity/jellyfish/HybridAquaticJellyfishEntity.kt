@@ -18,6 +18,7 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.Goal
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
@@ -45,8 +46,6 @@ open class HybridAquaticJellyfishEntity(
     private val factory = GeckoLibUtil.createInstanceCache(this)
     var tiltAngle: Float = 0f
     var prevTiltAngle: Float = 0f
-    var rollAngle: Float = 0f
-    var prevRollAngle: Float = 0f
     private var thrustTimer: Float = 0f
     private var prevThrustTimer: Float = 0f
     private var swimVelocityScale = 0f
@@ -61,10 +60,17 @@ open class HybridAquaticJellyfishEntity(
     init {
         random.setSeed(id.toLong())
         this.thrustTimerSpeed = 1.0f / (random.nextFloat() + 1.0f) * 0.2f
+    }
+
+    override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
         moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.05F, 0.1F, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
-        navigation = WaterBoundPathNavigation(this, world)
+
+        return WaterBoundPathNavigation(this, level)
     }
 
     override fun registerGoals() {
@@ -136,7 +142,6 @@ open class HybridAquaticJellyfishEntity(
     override fun aiStep() {
         super.aiStep()
         this.prevTiltAngle = this.tiltAngle
-        this.prevRollAngle = this.rollAngle
         this.prevThrustTimer = this.thrustTimer
         this.prevTentacleAngle = this.tentacleAngle
         this.thrustTimer += this.thrustTimerSpeed
@@ -184,7 +189,6 @@ open class HybridAquaticJellyfishEntity(
             this.yBodyRot += deltaYaw * 0.1f
             this.yHeadRot = this.yBodyRot
             this.yRot = this.yBodyRot
-            this.rollAngle += 3.1415927f * this.turningSpeed * 1.5f
             this.tiltAngle += (-(Mth.atan2(d, vec3d.y).toFloat()) * 57.295776f - this.tiltAngle) * 0.1f
         } else {
             this.tentacleAngle = Mth.abs(Mth.sin(this.thrustTimer)) * 3.1415927f * 0.25f

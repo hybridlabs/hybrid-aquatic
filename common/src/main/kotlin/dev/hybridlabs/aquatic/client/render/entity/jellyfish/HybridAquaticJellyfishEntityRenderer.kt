@@ -24,11 +24,9 @@ open class HybridAquaticJellyfishEntityRenderer<T : HybridAquaticJellyfishEntity
 
     override fun applyRotations(jellyfishEntity: T, matrixStack: PoseStack, f: Float, g: Float, h: Float) {
         val i = Mth.lerp(h, jellyfishEntity.prevTiltAngle, jellyfishEntity.tiltAngle)
-        val j = Mth.lerp(h, jellyfishEntity.prevRollAngle, jellyfishEntity.rollAngle)
         matrixStack.translate(0.0f, 0.25f, 0.0f)
         matrixStack.mulPose(Axis.YP.rotationDegrees(180.0f - g))
         matrixStack.mulPose(Axis.XP.rotationDegrees(i))
-        matrixStack.mulPose(Axis.YP.rotationDegrees(j))
         matrixStack.translate(0.0f, 0.0f, 0.0f)
     }
 
