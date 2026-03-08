@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -41,13 +42,15 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
 
-    init {
+    override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
         moveControl = SmoothSwimmingMoveControl(this, 60, 6, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 15)
-        navigation = WaterBoundPathNavigation(this, world)
+
+        return WaterBoundPathNavigation(this, level)
     }
 
     override fun registerGoals() {

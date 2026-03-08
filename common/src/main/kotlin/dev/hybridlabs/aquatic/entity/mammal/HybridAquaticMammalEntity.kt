@@ -17,6 +17,7 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
@@ -35,9 +36,14 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HybridAquaticMammalEntity(type: EntityType<out HybridAquaticMammalEntity>, world: Level) : HybridAquaticWaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
-    init {
+    override fun createNavigation(level: Level): PathNavigation {
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
         moveControl = FloatControl(this)
-        navigation = AmphibiousPathNavigation(this, world)
+
+        return AmphibiousPathNavigation(this, level)
     }
 
     fun isBelowWaterline(): Boolean {
