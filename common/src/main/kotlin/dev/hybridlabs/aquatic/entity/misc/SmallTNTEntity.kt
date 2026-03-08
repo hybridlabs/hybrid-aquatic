@@ -49,7 +49,7 @@ open class SmallTNTEntity(
         if (i <= 0) {
             this.discard()
             if (!this.level().isClientSide) {
-                this.explode()
+                this.explodeTnt()
             }
         } else {
             this.updateInWaterStateAndDoFluidPushing()
@@ -63,7 +63,7 @@ open class SmallTNTEntity(
         }
     }
 
-    private fun explode() {
+    private fun explodeTnt() {
         val radius = 2.0f
 
         this.level().explode(
