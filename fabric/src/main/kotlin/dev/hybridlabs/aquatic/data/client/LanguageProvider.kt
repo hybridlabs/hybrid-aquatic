@@ -714,6 +714,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.MANATEE.get() to "Manatee",
             HybridAquaticEntityTypes.ORCA.get() to "Orca",
             HybridAquaticEntityTypes.DEPTH_CHARGE.get() to "Depth Charge",
+            HybridAquaticEntityTypes.SMALL_TNT.get() to "Small TNT",
             HybridAquaticEntityTypes.ARGONAUT.get() to "Argonaut",
         )
 
