@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.misc
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.protocol.game.ServerboundPaddleBoatPacket
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -24,6 +25,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
@@ -40,6 +42,17 @@ open class ArgonautEntity(
     private var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(54, ItemStack.EMPTY)
     private var argonautLootTable: ResourceLocation? = null
     private var argonautLootTableSeed: Long = 0
+    private var inputLeft = false
+    private var inputRight = false
+    private var inputUp = false
+    private var inputDown = false
+    private var deltaRotation = 0f
+    private var lerpSteps = 0
+    private var lerpX = 0.0
+    private var lerpY = 0.0
+    private var lerpZ = 0.0
+    private var lerpYRot = 0.0
+    private var lerpXRot = 0.0
 
     override fun defineSynchedData() {
         this.entityData.define(DATA_ID_HURT, 0)
@@ -50,14 +63,126 @@ open class ArgonautEntity(
         this.entityData.define(DATA_ID_BACK_PROPELLER, false)
     }
 
+    override fun lerpTo(
+        x: Double,
+        y: Double,
+        z: Double,
+        yaw: Float,
+        pitch: Float,
+        posRotationIncrements: Int,
+        teleport: Boolean,
+    ) {
+        this.lerpX = x
+        this.lerpY = y
+        this.lerpZ = z
+        this.lerpYRot = yaw.toDouble()
+        this.lerpXRot = pitch.toDouble()
+        this.lerpSteps = 10
+    }
+
     override fun tick() {
         super.tick()
 
-        if (!this.isNoGravity) {
-            this.deltaMovement = this.deltaMovement.add(0.0, -0.04, 0.0)
+        this.move(MoverType.SELF, this.deltaMovement)
+
+        val passenger = this.firstPassenger
+        if (passenger is LivingEntity) {
+            passenger.airSupply = passenger.maxAirSupply
         }
 
-        this.move(MoverType.SELF, this.deltaMovement)
+        if (this.isControlledByLocalInstance) {
+            if (this.firstPassenger !is Player) {
+                this.setPropellerState(left = false, right = false)
+            }
+
+            this.floatArgonaut()
+            if (this.level().isClientSide) {
+                this.controlArgonaut()
+                this.level()
+                    .sendPacketToServer(
+                        ServerboundPaddleBoatPacket(
+                            this.getPropellerState(0),
+                            this.getPropellerState(1)
+                        )
+                    )
+            }
+
+            this.move(MoverType.SELF, this.deltaMovement)
+        } else {
+            this.deltaMovement = Vec3.ZERO
+        }
+    }
+
+    private fun floatArgonaut() {
+        if (this.isInWater) {
+            val motion = this.deltaMovement
+
+            val waterFriction = 0.9f
+
+            this.deltaMovement = Vec3(
+                motion.x * waterFriction,
+                0.0,
+                motion.z * waterFriction
+            )
+
+            this.deltaRotation *= waterFriction
+        } else {
+            if (!this.isNoGravity) {
+                this.deltaMovement = this.deltaMovement.add(0.0, -0.04, 0.0)
+            }
+        }
+    }
+
+    private fun controlArgonaut() {
+        if (this.isVehicle) {
+            var f = 0.0f
+            if (this.inputLeft) {
+                --this.deltaRotation
+            }
+
+            if (this.inputRight) {
+                ++this.deltaRotation
+            }
+
+            if (this.inputRight != this.inputLeft && !this.inputUp && !this.inputDown) {
+                f += 0.005f
+            }
+
+            this.yRot += this.deltaRotation
+            if (this.inputUp) {
+                f += 0.04f
+            }
+
+            if (this.inputDown) {
+                f -= 0.005f
+            }
+
+            this.deltaMovement = this.deltaMovement.add(
+                (Mth.sin(-this.yRot * (Math.PI.toFloat() / 180f)) * f).toDouble(),
+                0.0,
+                (Mth.cos(this.yRot * (Math.PI.toFloat() / 180f)) * f).toDouble()
+            )
+            this.setPropellerState(
+                this.inputRight && !this.inputLeft || this.inputUp,
+                this.inputLeft && !this.inputRight || this.inputUp
+            )
+        }
+    }
+
+    fun setInput(inputLeft: Boolean, inputRight: Boolean, inputUp: Boolean, inputDown: Boolean) {
+        this.inputLeft = inputLeft
+        this.inputRight = inputRight
+        this.inputUp = inputUp
+        this.inputDown = inputDown
+    }
+
+    fun setPropellerState(left: Boolean, right: Boolean) {
+        this.entityData.set(DATA_ID_LEFT_PROPELLER, left)
+        this.entityData.set(DATA_ID_RIGHT_PROPELLER, right)
+    }
+
+    fun getPropellerState(side: Int): Boolean {
+        return this.entityData.get(if (side == 0) DATA_ID_LEFT_PROPELLER else DATA_ID_RIGHT_PROPELLER) && this.getControllingPassenger() != null
     }
 
     override fun addAdditionalSaveData(tag: CompoundTag) {
@@ -71,6 +196,10 @@ open class ArgonautEntity(
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
+        if (source.entity != null && this.hasPassenger(source.entity)) {
+            return false
+        }
+
         if (this.isInvulnerableTo(source)) {
             return false
         } else if (!this.level().isClientSide && !this.isRemoved) {

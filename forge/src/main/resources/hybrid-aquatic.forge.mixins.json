@@ -23,6 +23,7 @@
         "client.FishingBobberEntityRendererMixin",
         "client.FogRendererMixin",
         "client.HeadFeatureRendererMixin",
+        "client.LocalPlayerMixin",
         "client.InGameHudMixin",
         "client.SkullBlockEntityTextureMixin"
     ],
