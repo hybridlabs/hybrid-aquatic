@@ -25,6 +25,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
+import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -83,34 +84,49 @@ open class ArgonautEntity(
     override fun tick() {
         super.tick()
 
-        this.move(MoverType.SELF, this.deltaMovement)
-
         val passenger = this.firstPassenger
         if (passenger is LivingEntity) {
             passenger.airSupply = passenger.maxAirSupply
         }
 
+        if (passenger is Player) {
+            tickRidden(passenger, passenger.deltaMovement)
+        }
+
         if (this.isControlledByLocalInstance) {
             if (this.firstPassenger !is Player) {
-                this.setPropellerState(left = false, right = false)
+                setPropellerState(left = false, right = false)
             }
 
-            this.floatArgonaut()
+            floatArgonaut()
+
             if (this.level().isClientSide) {
-                this.controlArgonaut()
-                this.level()
-                    .sendPacketToServer(
-                        ServerboundPaddleBoatPacket(
-                            this.getPropellerState(0),
-                            this.getPropellerState(1)
-                        )
+                controlArgonaut()
+
+                this.level().sendPacketToServer(
+                    ServerboundPaddleBoatPacket(
+                        getPropellerState(0),
+                        getPropellerState(1)
                     )
+                )
             }
 
             this.move(MoverType.SELF, this.deltaMovement)
         } else {
             this.deltaMovement = Vec3.ZERO
         }
+    }
+
+    open fun tickRidden(player: Player, travelVector: Vec3) {
+        val vec2 = getRiddenRotation(player)
+
+        setRot(vec2.y, vec2.x)
+
+        yRotO = yRot
+    }
+
+    protected open fun getRiddenRotation(entity: LivingEntity): Vec2 {
+        return Vec2(entity.xRot * 0.5f, entity.yRot)
     }
 
     private fun floatArgonaut() {
@@ -121,7 +137,7 @@ open class ArgonautEntity(
 
             this.deltaMovement = Vec3(
                 motion.x * waterFriction,
-                0.0,
+                motion.y * waterFriction,
                 motion.z * waterFriction
             )
 
@@ -135,33 +151,29 @@ open class ArgonautEntity(
 
     private fun controlArgonaut() {
         if (this.isVehicle) {
-            var f = 0.0f
-            if (this.inputLeft) {
-                --this.deltaRotation
-            }
-
-            if (this.inputRight) {
-                ++this.deltaRotation
-            }
+            var forwardMovement = 0.0f
+            var horizontalMovement = 0.0f
 
             if (this.inputRight != this.inputLeft && !this.inputUp && !this.inputDown) {
-                f += 0.005f
+                forwardMovement += 0.005f
             }
 
-            this.yRot += this.deltaRotation
             if (this.inputUp) {
-                f += 0.04f
+                forwardMovement += 0.04f
             }
 
             if (this.inputDown) {
-                f -= 0.005f
+                forwardMovement -= 0.01f
             }
 
+            val lookDirection = this.lookAngle
+
             this.deltaMovement = this.deltaMovement.add(
-                (Mth.sin(-this.yRot * (Math.PI.toFloat() / 180f)) * f).toDouble(),
-                0.0,
-                (Mth.cos(this.yRot * (Math.PI.toFloat() / 180f)) * f).toDouble()
+                lookDirection.x * forwardMovement,
+                lookDirection.y * forwardMovement,
+                lookDirection.z * forwardMovement
             )
+
             this.setPropellerState(
                 this.inputRight && !this.inputLeft || this.inputUp,
                 this.inputLeft && !this.inputRight || this.inputUp

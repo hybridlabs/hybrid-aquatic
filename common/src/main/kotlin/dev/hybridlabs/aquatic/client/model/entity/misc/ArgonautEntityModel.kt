@@ -38,7 +38,10 @@ class ArgonautEntityModel<T : ArgonautEntity>() :
         val body = animationProcessor.getBone(PartNames.BODY)
 
         val yaw = Mth.lerp(deltaTime, animatable.yRotO, animatable.yRot)
+        body.rotY = -yaw * Mth.DEG_TO_RAD
 
-        body?.rotY = -yaw * Mth.DEG_TO_RAD
+        val tilt = Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot)
+
+        body.rotX = tilt * -Mth.DEG_TO_RAD
     }
 }
