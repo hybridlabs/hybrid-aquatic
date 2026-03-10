@@ -91,6 +91,7 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
     override fun registerGoals() {
         goalSelector.addGoal(3, OctopusSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
+        getTargetConfig()?.addAvoidanceGoal(goalSelector, this)
     }
 
     //#region Data

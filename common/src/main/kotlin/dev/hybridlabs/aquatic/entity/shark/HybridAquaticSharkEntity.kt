@@ -109,6 +109,7 @@ open class HybridAquaticSharkEntity(
             }
         )
         getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HybridAquaticSharkEntity::hunger)
+        getTargetConfig()?.addAvoidanceGoal(goalSelector, this)
     }
 
     override fun finalizeSpawn(
