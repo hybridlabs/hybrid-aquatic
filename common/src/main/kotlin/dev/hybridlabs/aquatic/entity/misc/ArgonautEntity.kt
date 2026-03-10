@@ -1,17 +1,25 @@
 package dev.hybridlabs.aquatic.entity.misc
 
 import net.minecraft.core.Direction
+import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
+import net.minecraft.world.Containers
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
+import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.entity.vehicle.ContainerEntity
+import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.ChestMenu
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
@@ -26,10 +34,12 @@ open class ArgonautEntity(
     type: EntityType<out ArgonautEntity>,
     world: Level,
 ) :
-    Entity(type, world), PlayerRideable,
+    Entity(type, world), PlayerRideable, HasCustomInventoryScreen, ContainerEntity,
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
-    private var outOfControlTicks = 0f
+    private var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(54, ItemStack.EMPTY)
+    private var argonautLootTable: ResourceLocation? = null
+    private var argonautLootTableSeed: Long = 0
 
     override fun defineSynchedData() {
         this.entityData.define(DATA_ID_HURT, 0)
@@ -52,10 +62,12 @@ open class ArgonautEntity(
 
     override fun addAdditionalSaveData(tag: CompoundTag) {
         tag.putFloat("Damage", getDamage())
+        this.addChestVehicleSaveData(tag)
     }
 
     override fun readAdditionalSaveData(tag: CompoundTag) {
         setDamage(tag.getFloat("Damage"))
+        this.readChestVehicleSaveData(tag)
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
@@ -83,10 +95,6 @@ open class ArgonautEntity(
 
     open fun getDropItem(): Item {
         return Items.BIRCH_BOAT
-    }
-
-    protected open fun destroy(damageSource: DamageSource?) {
-        this.spawnAtLocation(this.getDropItem())
     }
 
     fun setDamage(damageTaken: Float) {
@@ -164,7 +172,7 @@ open class ArgonautEntity(
         }
     }
 
-    override fun isPickable(): Boolean{
+    override fun isPickable(): Boolean {
         return !this.isRemoved
     }
 
@@ -188,6 +196,102 @@ open class ArgonautEntity(
         val livingentity1: LivingEntity? = entity as? LivingEntity
 
         return livingentity1
+    }
+    //#endregion
+
+    //#region Container
+    protected open fun destroy(damageSource: DamageSource) {
+        this.spawnAtLocation(this.getDropItem())
+        this.chestVehicleDestroyed(damageSource, this.level(), this)
+    }
+
+    override fun remove(reason: RemovalReason) {
+        if (!this.level().isClientSide && reason.shouldDestroy()) {
+            Containers.dropContents(this.level(), this, this)
+        }
+        super.remove(reason)
+    }
+
+    override fun openCustomInventoryScreen(player: Player) {
+        player.openMenu(this)
+        if (!player.level().isClientSide) {
+            this.gameEvent(GameEvent.CONTAINER_OPEN, player)
+        }
+    }
+
+    override fun getLootTable(): ResourceLocation? {
+        return argonautLootTable
+    }
+
+    override fun setLootTable(id: ResourceLocation?) {
+        argonautLootTable = id
+    }
+
+    override fun getLootTableSeed(): Long {
+        return argonautLootTableSeed
+    }
+
+    override fun setLootTableSeed(seed: Long) {
+        argonautLootTableSeed = seed
+    }
+
+    override fun getItemStacks(): NonNullList<ItemStack> {
+        return this.itemStacks
+    }
+
+    override fun clearItemStacks() {
+        this.itemStacks = NonNullList.withSize(this.containerSize, ItemStack.EMPTY)
+    }
+
+    override fun getContainerSize(): Int {
+        return 54
+    }
+
+    override fun getItem(slot: Int): ItemStack {
+        return this.getChestVehicleItem(slot)
+    }
+
+    override fun removeItem(slot: Int, amount: Int): ItemStack {
+        return this.removeChestVehicleItem(slot, amount)
+    }
+
+    override fun removeItemNoUpdate(slot: Int): ItemStack {
+        return this.removeChestVehicleItemNoUpdate(slot)
+    }
+
+    override fun setItem(slot: Int, stack: ItemStack) {
+        this.setChestVehicleItem(slot, stack)
+    }
+
+    override fun setChanged() {}
+
+    override fun stillValid(player: Player): Boolean {
+        return this.isChestVehicleStillValid(player)
+    }
+
+    override fun clearContent() {
+        this.clearChestVehicleContent()
+    }
+
+    override fun createMenu(
+        containerId: Int,
+        playerInventory: Inventory,
+        player: Player,
+    ): AbstractContainerMenu? {
+        if (this.lootTable != null && player.isSpectator) {
+            return null
+        } else {
+            this.unpackLootTable(playerInventory.player)
+            return ChestMenu.sixRows(containerId, playerInventory, this)
+        }
+    }
+
+    fun unpackLootTable(player: Player?) {
+        this.unpackChestVehicleLootTable(player)
+    }
+
+    override fun stopOpen(player: Player) {
+        this.level().gameEvent(GameEvent.CONTAINER_CLOSE, this.position(), GameEvent.Context.of(player))
     }
     //#endregion
 
