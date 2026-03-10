@@ -133,7 +133,7 @@ open class ArgonautEntity(
         if (this.isInWater) {
             val motion = this.deltaMovement
 
-            val waterFriction = 0.9f
+            val waterFriction = 0.7f
 
             this.deltaMovement = Vec3(
                 motion.x * waterFriction,
@@ -164,6 +164,14 @@ open class ArgonautEntity(
 
             if (this.inputDown) {
                 forwardMovement -= 0.01f
+            }
+
+            if (this.inputRight) {
+                horizontalMovement -= 0.03f
+            }
+
+            if (this.inputDown) {
+                horizontalMovement -= 0.03f
             }
 
             val lookDirection = this.lookAngle
