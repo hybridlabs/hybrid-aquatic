@@ -133,7 +133,7 @@ open class ArgonautEntity(
         if (this.isInWater) {
             val motion = this.deltaMovement
 
-            val waterFriction = 0.7f
+            val waterFriction = 0.95f
 
             this.deltaMovement = Vec3(
                 motion.x * waterFriction,
