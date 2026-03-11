@@ -21,12 +21,16 @@ class ArgonautEntityModel<T : ArgonautEntity>() :
         return CommonClass.locate("textures/entity/misc/argonaut/argonaut.png")
     }
 
+    fun getVisorTextureResource(): ResourceLocation {
+        return CommonClass.locate("textures/entity/misc/argonaut/argonaut_visor.png")
+    }
+
     override fun getAnimationResource(animatable: T): ResourceLocation {
         return CommonClass.locate("animations/entity/misc/argonaut.animation.json")
     }
 
     override fun getRenderType(animatable: T, texture: ResourceLocation): RenderType {
-        return RenderType.entityTranslucent(texture)
+        return RenderType.entityCutoutNoCull(texture)
     }
 
     override fun setCustomAnimations(

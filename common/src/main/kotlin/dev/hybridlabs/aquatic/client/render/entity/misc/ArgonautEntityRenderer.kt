@@ -1,19 +1,21 @@
 package dev.hybridlabs.aquatic.client.render.entity.misc
 
 import dev.hybridlabs.aquatic.client.model.entity.misc.ArgonautEntityModel
+import dev.hybridlabs.aquatic.client.render.entity.misc.layer.ArgonautVisorEntityLayer
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
-class ArgonautEntityRenderer(
+class ArgonautEntityRenderer<T : ArgonautEntity>(
     context: EntityRendererProvider.Context
-) : GeoEntityRenderer<ArgonautEntity>(
-    context,
-    ArgonautEntityModel()
-) {
+) : GeoEntityRenderer<T>(context, ArgonautEntityModel()) {
 
-    override fun getMotionAnimThreshold(animatable: ArgonautEntity): Float {
+    init {
+        addRenderLayer(ArgonautVisorEntityLayer(this))
+    }
+
+    override fun getMotionAnimThreshold(animatable: T): Float {
         return 0.0025f
     }
 
@@ -22,7 +24,7 @@ class ArgonautEntityRenderer(
         addRenderLayer(AutoGlowingGeoLayer(this))
     }
 
-    override fun getDeathMaxRotation(animatable: ArgonautEntity): Float {
+    override fun getDeathMaxRotation(animatable: T): Float {
         return 180f
     }
 }
