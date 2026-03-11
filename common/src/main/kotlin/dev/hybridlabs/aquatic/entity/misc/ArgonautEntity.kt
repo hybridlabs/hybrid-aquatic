@@ -277,7 +277,7 @@ open class ArgonautEntity(
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
             AnimationController(this, "Argonaut Controller", 4) { state ->
-                val moving = this.deltaMovement.horizontalDistanceSqr() > 1.0E-6
+                val moving = this.deltaMovement.horizontalDistanceSqr() > 0.01
 
                 when {
                     isInWater && moving -> {
