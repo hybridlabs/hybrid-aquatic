@@ -1,7 +1,7 @@
 {
   "parent": "hybrid-aquatic:block/raft",
   "textures": {
-    "0": "hybrid-aquatic:block/oak_raft",
-    "particle": "hybrid-aquatic:block/oak_raft"
+    "0": "hybrid-aquatic:block/jungle_raft",
+    "particle": "hybrid-aquatic:block/jungle_raft"
   }
 }
