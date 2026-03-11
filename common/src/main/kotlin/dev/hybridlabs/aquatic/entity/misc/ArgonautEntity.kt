@@ -27,10 +27,12 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
+import org.joml.Vector3f
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.util.GeckoLibUtil
 
 open class ArgonautEntity(
@@ -149,6 +151,15 @@ open class ArgonautEntity(
         }
     }
 
+    private fun getRightDirection(): Vector3f {
+        val rad = Math.PI.toFloat() / 180f
+        return Vector3f(
+            Mth.cos(-yRot * rad),
+            0f,
+            Mth.sin(yRot * rad)
+        ).normalize()
+    }
+
     private fun controlArgonaut() {
         if (this.isVehicle) {
             var forwardMovement = 0.0f
@@ -170,16 +181,17 @@ open class ArgonautEntity(
                 horizontalMovement -= 0.03f
             }
 
-            if (this.inputDown) {
-                horizontalMovement -= 0.03f
+            if (this.inputLeft) {
+                horizontalMovement += 0.03f
             }
 
             val lookDirection = this.lookAngle
+            val rightDirection = getRightDirection()
 
             this.deltaMovement = this.deltaMovement.add(
-                lookDirection.x * forwardMovement,
+                lookDirection.x * forwardMovement + rightDirection.x * horizontalMovement,
                 lookDirection.y * forwardMovement,
-                lookDirection.z * forwardMovement
+                lookDirection.z * forwardMovement + rightDirection.z * horizontalMovement
             )
 
             this.setPropellerState(
@@ -264,7 +276,19 @@ open class ArgonautEntity(
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            DefaultAnimations.genericSwimIdleController(this)
+            AnimationController(this, "Argonaut Controller", 4) { state ->
+                val moving = this.deltaMovement.horizontalDistanceSqr() > 1.0E-6
+
+                when {
+                    isInWater && moving -> {
+                        state.setAndContinue(DefaultAnimations.SWIM)
+                    }
+
+                    else -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+                }
+            }
         )
     }
 
