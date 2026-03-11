@@ -27,7 +27,8 @@ public abstract class LocalPlayerMixin {
                     this.input.left,
                     this.input.right,
                     this.input.up,
-                    this.input.down
+                    this.input.down,
+                    this.input.jumping
             );
         }
     }

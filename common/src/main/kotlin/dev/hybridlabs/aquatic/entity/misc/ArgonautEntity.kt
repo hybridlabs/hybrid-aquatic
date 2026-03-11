@@ -49,6 +49,8 @@ open class ArgonautEntity(
     private var inputRight = false
     private var inputUp = false
     private var inputDown = false
+    private var inputJumping = false
+    private var inputForwardImpulse = false
     private var deltaRotation = 0f
     private var lerpSteps = 0
     private var lerpX = 0.0
@@ -164,25 +166,30 @@ open class ArgonautEntity(
         if (this.isVehicle) {
             var forwardMovement = 0.0f
             var horizontalMovement = 0.0f
+            var verticalMovement = 0.0f
 
             if (this.inputRight != this.inputLeft && !this.inputUp && !this.inputDown) {
                 forwardMovement += 0.005f
             }
 
             if (this.inputUp) {
-                forwardMovement += 0.04f
+                forwardMovement += 0.03f
             }
 
             if (this.inputDown) {
-                forwardMovement -= 0.01f
+                forwardMovement -= 0.015f
             }
 
             if (this.inputRight) {
-                horizontalMovement -= 0.03f
+                horizontalMovement -= 0.02f
             }
 
             if (this.inputLeft) {
-                horizontalMovement += 0.03f
+                horizontalMovement += 0.02f
+            }
+
+            if (this.inputJumping) {
+                verticalMovement += 0.02f
             }
 
             val lookDirection = this.lookAngle
@@ -190,7 +197,7 @@ open class ArgonautEntity(
 
             this.deltaMovement = this.deltaMovement.add(
                 lookDirection.x * forwardMovement + rightDirection.x * horizontalMovement,
-                lookDirection.y * forwardMovement,
+                lookDirection.y * forwardMovement + verticalMovement,
                 lookDirection.z * forwardMovement + rightDirection.z * horizontalMovement
             )
 
@@ -201,11 +208,12 @@ open class ArgonautEntity(
         }
     }
 
-    fun setInput(inputLeft: Boolean, inputRight: Boolean, inputUp: Boolean, inputDown: Boolean) {
+    fun setInput(inputLeft: Boolean, inputRight: Boolean, inputUp: Boolean, inputDown: Boolean, inputJumping: Boolean) {
         this.inputLeft = inputLeft
         this.inputRight = inputRight
         this.inputUp = inputUp
         this.inputDown = inputDown
+        this.inputJumping = inputJumping
     }
 
     fun setPropellerState(left: Boolean, right: Boolean) {
