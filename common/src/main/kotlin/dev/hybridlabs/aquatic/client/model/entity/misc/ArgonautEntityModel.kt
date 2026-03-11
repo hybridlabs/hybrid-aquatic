@@ -26,7 +26,12 @@ class ArgonautEntityModel<T : ArgonautEntity>() :
     }
 
     override fun getRenderType(animatable: T, texture: ResourceLocation): RenderType {
-        return RenderType.entityTranslucent(texture)
+        return if (Minecraft.getInstance().player == animatable.firstPassenger) {
+            // different state for rider
+            RenderType.entityCutout(texture)
+        } else {
+            RenderType.entityTranslucent(texture)
+        }
     }
 
     override fun setCustomAnimations(
