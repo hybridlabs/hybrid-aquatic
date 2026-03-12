@@ -68,6 +68,10 @@ open class ArgonautEntity(
         this.entityData.define(DATA_ID_BACK_PROPELLER, false)
     }
 
+    override fun getEyeHeight(pose: Pose, size: EntityDimensions): Float {
+        return size.height * 0.5f
+    }
+
     override fun lerpTo(
         x: Double,
         y: Double,
