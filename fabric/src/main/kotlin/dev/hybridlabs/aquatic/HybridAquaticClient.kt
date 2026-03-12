@@ -2,11 +2,9 @@
 
 package dev.hybridlabs.aquatic
 
-import com.mojang.brigadier.CommandDispatcher
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
-import dev.hybridlabs.aquatic.client.command.RandomFishCommand
 import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BASKING_SHARK_PLUSHIE
@@ -32,15 +30,12 @@ import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneBlockItemRende
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
-import net.minecraft.commands.CommandBuildContext
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
@@ -64,7 +59,6 @@ object HybridAquaticClient : ClientModInitializer {
         HybridAquaticFluidRenderer()
 
         ClientParticleRegistry()
-        ClientCommandRegistrationCallback.EVENT.register(::registerCommands)
     }
 
     private fun registerGeoRenderers() {
@@ -262,13 +256,6 @@ object HybridAquaticClient : ClientModInitializer {
         registry.register(HybridAquaticItems.GIANT_GREEN_ANEMONE.get(), GiantGreenAnemoneBlockItemRenderer())
         registry.register(HybridAquaticItems.STRAWBERRY_ANEMONE.get(), StrawberryAnemoneBlockItemRenderer())
         registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleBlockItemRenderer())
-    }
-
-    private fun registerCommands(
-        dispatcher: CommandDispatcher<FabricClientCommandSource>,
-        access: CommandBuildContext
-    ) {
-        RandomFishCommand.register(dispatcher)
     }
 
     private fun registerModelLayers() {
