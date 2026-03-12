@@ -362,7 +362,7 @@ class ConfiguredFeatureProvider(
             HybridAquaticConfiguredFeatures.WATER_LETTUCE,
             ConfiguredFeature(
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
-                    15, 5, 5,
+                    30, 5, 5,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
@@ -378,7 +378,7 @@ class ConfiguredFeatureProvider(
             HybridAquaticConfiguredFeatures.WATER_HYACINTH,
             ConfiguredFeature(
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
-                    15, 5, 5,
+                    30, 5, 5,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
