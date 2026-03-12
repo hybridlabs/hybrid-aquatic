@@ -69,7 +69,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.KARKINOS.get()) {
+        export(exporter, HybridAquaticEntityTypes.SHELL_BEAST.get()) {
             pool(
                 LootPool.lootPool()
                     .add(

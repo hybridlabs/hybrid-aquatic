@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "hybrid-aquatic:carp",
+    "hybrid-aquatic:trout",
+    "hybrid-aquatic:sunfish",
     "hybrid-aquatic:pleco",
     "hybrid-aquatic:goldfish",
     "hybrid-aquatic:dragonfish",

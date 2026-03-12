@@ -239,6 +239,8 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         listOf(
             HybridAquaticItems.CARP.get(),
+            HybridAquaticItems.TROUT.get(),
+            HybridAquaticItems.SUNFISH.get(),
             HybridAquaticItems.PLECO.get(),
             HybridAquaticItems.GOLDFISH.get(),
             HybridAquaticItems.DRAGONFISH.get(),
@@ -316,6 +318,8 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.ANGLERFISH.get(),
             HybridAquaticItems.GOLDFISH.get(),
             HybridAquaticItems.CARP.get(),
+            HybridAquaticItems.TROUT.get(),
+            HybridAquaticItems.SUNFISH.get(),
             HybridAquaticItems.MACKEREL.get(),
             HybridAquaticItems.HERRING.get(),
             HybridAquaticItems.DAMSELFISH.get(),
@@ -422,6 +426,8 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.SHEEPSHEAD_WRASSE.get(),
             HybridAquaticItems.OCEAN_SUNFISH.get(),
             HybridAquaticItems.CARP.get(),
+            HybridAquaticItems.TROUT.get(),
+            HybridAquaticItems.SUNFISH.get(),
             HybridAquaticItems.GOLDFISH.get(),
             HybridAquaticItems.OARFISH.get(),
             HybridAquaticItems.TUNA.get(),

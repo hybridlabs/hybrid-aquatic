@@ -8,24 +8,26 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 1.0
-              },
-              "function": "minecraft:looting_enchant"
-            },
-            {
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 8.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "hybrid-aquatic:raw_fish_meat"
+          "name": "hybrid-aquatic:raw_tentacle"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:giant_nautilus_shell"
         }
       ],
       "rolls": 1.0
