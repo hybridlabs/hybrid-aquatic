@@ -399,8 +399,8 @@ class BiomeProvider(
                 entries,
                 temperature = 0.2f,
                 downfall = 0.0f,
-                waterColor = 0x1b2447,
-                waterFogColor = 0x1b2447,
+                waterColor = 0x1A4EB7,
+                waterFogColor = 0x020217,
                 listOf(
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
@@ -743,8 +743,8 @@ class BiomeProvider(
                 entries,
                 temperature = 0.5f,
                 downfall = 0.5f,
-                waterColor = 0x1b2447,
-                waterFogColor = 0x1b2447,
+                waterColor = 0x1D2E87,
+                waterFogColor = 0x020217,
                 listOf(
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
@@ -821,8 +821,8 @@ class BiomeProvider(
                 entries,
                 temperature = 0.5f,
                 downfall = 0.5f,
-                waterColor = 0x1b2447,
-                waterFogColor = 0x1b2447,
+                waterColor = 0x232380,
+                waterFogColor = 0x020217,
                 listOf(
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
