@@ -126,7 +126,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.WATER_LETTUCE), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    RarityFilter.onAverageOnceEvery(1),
+                    RarityFilter.onAverageOnceEvery(3),
                     BiomeFilter.biome()
                 )
             )
@@ -137,7 +137,7 @@ class PlacedFeatureProvider(
                 entries.ref(HybridAquaticConfiguredFeatures.WATER_HYACINTH), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    RarityFilter.onAverageOnceEvery(1),
+                    RarityFilter.onAverageOnceEvery(3),
                     BiomeFilter.biome()
                 )
             )
