@@ -17,8 +17,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.Goal
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
@@ -77,26 +75,20 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
     override fun registerGoals() {
         goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
-        goalSelector.addGoal(4, LookAtPlayerGoal(
-            this,
-            Player::class.java,
-            16.0f)
-        )
         goalSelector.addGoal(1, ShellBeastShootProjectileGoal(this))
-        goalSelector.addGoal(5, RandomLookAroundGoal(this))
         targetSelector.addGoal(1, HurtByTargetGoal(this))
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(
             this,
             Player::class.java,
             10,
             true,
-            true,
+            false,
             null)
         )
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(
             this, IronGolem::class.java, 10,
             true,
-            true,
+            false,
             null)
         )
     }

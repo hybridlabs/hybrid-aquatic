@@ -190,6 +190,7 @@
 			}
 		},
 		"attack.shoot": {
+			"loop": true,
 			"animation_length": 1,
 			"bones": {
 				"body": {
