@@ -77,19 +77,23 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(1, ShellBeastShootProjectileGoal(this))
         targetSelector.addGoal(1, HurtByTargetGoal(this))
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(
-            this,
-            Player::class.java,
-            10,
-            true,
-            false,
-            null)
+        targetSelector.addGoal(
+            1, NearestAttackableTargetGoal(
+                this,
+                Player::class.java,
+                10,
+                true,
+                false,
+                null
+            )
         )
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(
-            this, IronGolem::class.java, 10,
-            true,
-            false,
-            null)
+        targetSelector.addGoal(
+            1, NearestAttackableTargetGoal(
+                this, IronGolem::class.java, 10,
+                true,
+                false,
+                null
+            )
         )
     }
 
@@ -194,14 +198,14 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Shell Beast Controller", 8) { state ->
+            AnimationController(this, "Shell Beast Controller", 4) { state ->
                 when {
                     isInWater -> {
-                        state.setAndContinue(if (isSprinting && state.isMoving) DefaultAnimations.RUN else DefaultAnimations.SWIM)
+                        state.setAndContinue(DefaultAnimations.SWIM)
                     }
 
                     else -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
+                        state.setAndContinue(DefaultAnimations.IDLE)
                     }
                 }
             }
@@ -212,11 +216,11 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         )
 
         controllers.add(
-            AnimationController(this, "Shell Beast Projectile Attack", 4) { state ->
+            AnimationController(this, "Shell Beast Projectile Attack", 8) { state ->
 
                 when {
                     isCharging() -> {
-                        state.setAndContinue(DefaultAnimations.ATTACK_SHOOT)
+                        state.setAndContinue(DefaultAnimations.ATTACK_SHOOT.thenPlay("misc.idle"))
                     }
 
                     else -> PlayState.STOP
@@ -245,87 +249,63 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         var chargeTime: Int = 0
 
         init {
-            this.flags = EnumSet.of(Flag.MOVE,Flag.LOOK)
+            this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
         }
 
-        override fun canUse(): Boolean {
-            return this.shellBeast.target != null
-        }
+        override fun canUse(): Boolean = shellBeast.target != null
 
         override fun start() {
-            this.chargeTime = 0
+            chargeTime = 0
         }
 
         override fun stop() {
-            this.shellBeast.setCharging(false)
+            shellBeast.setCharging(false)
         }
 
-        override fun requiresUpdateEveryTick(): Boolean {
-            return true
-        }
+        override fun requiresUpdateEveryTick(): Boolean = true
 
         override fun tick() {
             val target = shellBeast.target ?: return
 
-            if (this.shellBeast.target == null) {
-                val vec3 = this.shellBeast.deltaMovement
-                this.shellBeast.yRot = -(Mth.atan2(vec3.x, vec3.z).toFloat()) * (180f / Math.PI.toFloat())
-                this.shellBeast.yBodyRot = this.shellBeast.yRot
-            } else {
-                val livingentity = this.shellBeast.target
-                if (livingentity!!.distanceToSqr(this.shellBeast) < 4096.0) {
-                    val d1 = livingentity.x - this.shellBeast.x
-                    val d2 = livingentity.z - this.shellBeast.z
-                    this.shellBeast.yRot = -(Mth.atan2(d1, d2).toFloat()) * (180f / Math.PI.toFloat())
-                    this.shellBeast.yBodyRot = this.shellBeast.yRot
-                }
-            }
+            val dx = target.x - shellBeast.x
+            val dz = target.z - shellBeast.z
+            shellBeast.yRot = -(Mth.atan2(dx, dz).toFloat() * (180f / Math.PI.toFloat()))
+            shellBeast.yBodyRot = shellBeast.yRot
+            shellBeast.lookControl.setLookAt(target, 30f, 30f)
 
             if (target.distanceToSqr(shellBeast) < 4096.0 && shellBeast.hasLineOfSight(target)) {
-
                 val level = shellBeast.level()
-                ++chargeTime
+                chargeTime++
 
                 if (chargeTime == 20 && !shellBeast.isSilent) {
                     level.levelEvent(null as Player?, 1015, shellBeast.blockPosition(), 0)
                 }
 
                 if (chargeTime == 20 || chargeTime == 40 || chargeTime == 60) {
-
                     val view = shellBeast.getViewVector(1.0f)
-
-                    val dx = target.x - (shellBeast.x + view.x * 4.0)
-                    val dy = target.getY(0.5) - (0.5 + shellBeast.getY(0.5))
-                    val dz = target.z - (shellBeast.z + view.z * 4.0)
+                    val dxFire = target.x - (shellBeast.x + view.x * 4.0)
+                    val dyFire = target.getY(0.5) - (0.5 + shellBeast.getY(0.5))
+                    val dzFire = target.z - (shellBeast.z + view.z * 4.0)
 
                     if (!shellBeast.isSilent) {
                         level.levelEvent(null as Player?, 1016, shellBeast.blockPosition(), 0)
                     }
 
-                    val fireball = LargeFireball(
-                        level,
-                        shellBeast,
-                        dx,
-                        dy,
-                        dz,
-                        shellBeast.getExplosionPower()
-                    )
-
+                    val fireball =
+                        LargeFireball(level, shellBeast, dxFire, dyFire, dzFire, shellBeast.getExplosionPower())
                     fireball.setPos(
                         shellBeast.x + view.x * 4.0,
-                        shellBeast.getY(0.5) - 0.25,
+                        shellBeast.getY(0.5) - 0.3,
                         shellBeast.z + view.z * 4.0
                     )
-
                     level.addFreshEntity(fireball)
                 }
 
                 if (chargeTime == 60) {
                     chargeTime = -60
                 }
-
             } else if (chargeTime > 0) {
-                --chargeTime
+                chargeTime--
             }
 
             shellBeast.setCharging(chargeTime > 10)
