@@ -52,8 +52,8 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                     ).build()
             )
         }
-        //crustaceans
 
+        //#region Minibosses
         export(exporter, HybridAquaticEntityTypes.KARKINOS.get()) {
             pool(
                 LootPool.lootPool()
@@ -69,6 +69,23 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
+        export(exporter, HybridAquaticEntityTypes.KARKINOS.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_TENTACLE.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 16.0F)))
+                    ).build()
+            ).pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.GIANT_NAUTILUS_SHELL.get())
+                    ).build()
+            )
+        }
+        //#endregion
+
+        //#region Crustaceans
         export(exporter, HybridAquaticEntityTypes.DECORATOR_CRAB.get()) {
             pool(
                 LootPool.lootPool()
@@ -856,8 +873,8 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.PLECO.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                            .apply(LootingEnchantFunction.lootingMultiplier(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
@@ -868,7 +885,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                     .add(
                         LootItem.lootTableItem(HybridAquaticItems.RAW_FISH_MEAT.get())
                             .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
-                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
@@ -877,7 +894,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.RAW_FISH_MEAT.get())
+                        LootItem.lootTableItem(HybridAquaticItems.SUNFISH.get())
                             .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
@@ -888,7 +905,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.RAW_FISH_MEAT.get())
+                        LootItem.lootTableItem(HybridAquaticItems.TROUT.get())
                             .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 2.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()

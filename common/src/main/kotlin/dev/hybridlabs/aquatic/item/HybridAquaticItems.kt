@@ -571,6 +571,7 @@ object HybridAquaticItems {
     val DIVING_ARMOR_UPGRADE_TEMPLATE = register("diving_armor_upgrade_template") { Item(Item.Properties()) }
     val PEARL = register("pearl") { Item(Item.Properties()) }
     val BLACK_PEARL = register("black_pearl") { Item(Item.Properties()) }
+    val GIANT_NAUTILUS_SHELL = register("giant_nautilus_shell") { Item(Item.Properties()) }
     val CUTTLEBONE = register("cuttlebone") { Item(Item.Properties()) }
 
     //#region Claws
@@ -1217,6 +1218,36 @@ object HybridAquaticItems {
 
     val CARP = register(
         "carp"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(1)
+                        .saturationMod(0.2F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
+    val SUNFISH = register(
+        "sunfish"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(1)
+                        .saturationMod(0.2F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
+    val TROUT = register(
+        "trout"
     ) {
         Item(
             Item.Properties()
