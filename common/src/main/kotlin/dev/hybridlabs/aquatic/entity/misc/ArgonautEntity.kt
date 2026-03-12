@@ -50,7 +50,7 @@ open class ArgonautEntity(
     private var inputUp = false
     private var inputDown = false
     private var inputJumping = false
-    private var inputForwardImpulse = false
+    private var inputSprint = false
     private var deltaRotation = 0f
     private var lerpSteps = 0
     private var lerpX = 0.0
@@ -192,6 +192,10 @@ open class ArgonautEntity(
                 verticalMovement += 0.02f
             }
 
+            if (this.inputSprint) {
+                verticalMovement -= 0.02f
+            }
+
             val lookDirection = this.lookAngle
             val rightDirection = getRightDirection()
 
@@ -208,12 +212,20 @@ open class ArgonautEntity(
         }
     }
 
-    fun setInput(inputLeft: Boolean, inputRight: Boolean, inputUp: Boolean, inputDown: Boolean, inputJumping: Boolean) {
+    fun setInput(
+        inputLeft: Boolean,
+        inputRight: Boolean,
+        inputUp: Boolean,
+        inputDown: Boolean,
+        inputJumping: Boolean,
+        inputSprint: Boolean
+    ) {
         this.inputLeft = inputLeft
         this.inputRight = inputRight
         this.inputUp = inputUp
         this.inputDown = inputDown
         this.inputJumping = inputJumping
+        this.inputSprint = inputSprint
     }
 
     fun setPropellerState(left: Boolean, right: Boolean) {

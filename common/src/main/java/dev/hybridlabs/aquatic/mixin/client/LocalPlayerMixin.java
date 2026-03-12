@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.Entity;
@@ -23,12 +24,16 @@ public abstract class LocalPlayerMixin {
         Entity vehicle = player.getControlledVehicle();
 
         if (vehicle instanceof ArgonautEntity argonaut) {
+
+            boolean sprint = Minecraft.getInstance().options.keySprint.isDown();
+
             argonaut.setInput(
                     this.input.left,
                     this.input.right,
                     this.input.up,
                     this.input.down,
-                    this.input.jumping
+                    this.input.jumping,
+                    sprint
             );
         }
     }
