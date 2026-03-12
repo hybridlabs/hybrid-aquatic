@@ -105,11 +105,11 @@ class ManglerfishEntity(type: EntityType<out HybridAquaticMinibossEntity>, world
         return MobType.WATER
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
+    override fun readAdditionalSaveData(compound: CompoundTag) {
         if (hasCustomName()) {
             bossBar.name = this.displayName
         }
-        super.readAdditionalSaveData(nbt)
+        super.readAdditionalSaveData(compound)
     }
 
     override fun travel(travelVector: Vec3) {

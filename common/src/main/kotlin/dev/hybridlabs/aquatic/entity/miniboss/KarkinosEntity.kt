@@ -213,23 +213,23 @@ class KarkinosEntity(type: EntityType<out HybridAquaticMinibossEntity>, world: L
         entityData.define(SUMMONING, false)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putBoolean("Flipped", isFlipped())
-        nbt.putBoolean("Summoning", isSummoning())
-        nbt.putInt("SummonTimer", summonTimer)
-        nbt.putInt("SummonCooldown", summonCooldown)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putBoolean("Flipped", isFlipped())
+        compound.putBoolean("Summoning", isSummoning())
+        compound.putInt("SummonTimer", summonTimer)
+        compound.putInt("SummonCooldown", summonCooldown)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
+    override fun readAdditionalSaveData(compound: CompoundTag) {
         if (hasCustomName()) {
             bossBar.name = this.displayName
         }
-        this.setFlipped(nbt.getBoolean("Flipped"))
-        this.setSummoning(nbt.getBoolean("Summoning"))
-        this.summonTimer = nbt.getInt("SummonTimer")
-        this.summonCooldown = nbt.getInt("SummonCooldown")
-        super.readAdditionalSaveData(nbt)
+        this.setFlipped(compound.getBoolean("Flipped"))
+        this.setSummoning(compound.getBoolean("Summoning"))
+        this.summonTimer = compound.getInt("SummonTimer")
+        this.summonCooldown = compound.getInt("SummonCooldown")
+        super.readAdditionalSaveData(compound)
     }
 
     override fun tick() {

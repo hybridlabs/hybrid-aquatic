@@ -29,14 +29,14 @@ abstract class HybridAquaticMinibossEntity(type: EntityType<out Monster>, world:
         entityData.define(ATTEMPT_ATTACK, false)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt("AttackTick", this.attackTick)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt("AttackTick", this.attackTick)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        this.attackTick = nbt.getInt("AttackTick")
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        this.attackTick = compound.getInt("AttackTick")
     }
     //#endregion
 
