@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.PaintingVariant;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
@@ -42,6 +43,8 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.POTION, MOD_ID);
     public static final RegistrationProvider<MobEffect> MOB_EFFECTS =
             RegistrationProvider.get(BuiltInRegistries.MOB_EFFECT, MOD_ID);
+    public static final RegistrationProvider<MenuType<?>> MENU =
+            RegistrationProvider.get(BuiltInRegistries.MENU, MOD_ID);
     public static final RegistrationProvider<EntityType<?>> ENTITY_TYPES =
             RegistrationProvider.get(BuiltInRegistries.ENTITY_TYPE, MOD_ID);
     public static final RegistrationProvider<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
