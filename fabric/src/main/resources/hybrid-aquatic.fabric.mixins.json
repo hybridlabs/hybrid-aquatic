@@ -24,6 +24,7 @@
         "client.FogRendererMixin",
         "client.HeadFeatureRendererMixin",
         "client.PlayerEntityRendererMixin",
+        "client.LivingEntityRendererMixin",
         "client.LocalPlayerMixin",
         "client.InGameHudMixin",
         "client.SkullBlockEntityModelMixin"

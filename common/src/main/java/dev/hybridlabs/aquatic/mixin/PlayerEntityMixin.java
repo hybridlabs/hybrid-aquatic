@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.mixin;
 import com.google.common.collect.ImmutableList;
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects;
+import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity;
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import dev.hybridlabs.aquatic.item.HybridAquaticToolMaterials;
