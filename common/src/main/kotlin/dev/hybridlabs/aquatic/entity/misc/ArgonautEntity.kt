@@ -134,7 +134,7 @@ open class ArgonautEntity(
     }
 
     protected open fun getRiddenRotation(entity: LivingEntity): Vec2 {
-        return Vec2(entity.xRot * 0.5f, entity.yRot)
+        return Vec2(entity.xRot, entity.yRot)
     }
 
     private fun floatArgonaut() {
@@ -222,7 +222,7 @@ open class ArgonautEntity(
         inputUp: Boolean,
         inputDown: Boolean,
         inputJumping: Boolean,
-        inputSprint: Boolean
+        inputSprint: Boolean,
     ) {
         this.inputLeft = inputLeft
         this.inputRight = inputRight
