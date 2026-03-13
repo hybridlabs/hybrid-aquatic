@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.entity.ai.control.SmoothStrafeSwimmingMoveControl
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -8,14 +9,12 @@ import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerBossEvent
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.util.Mth
 import net.minecraft.world.BossEvent
 import net.minecraft.world.Difficulty
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
-import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
@@ -47,7 +46,7 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
 
-        moveControl = SmoothSwimmingMoveControl(
+        moveControl = SmoothStrafeSwimmingMoveControl(
             this,
             85,
             5,
@@ -75,7 +74,7 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
     override fun registerGoals() {
         goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
-        goalSelector.addGoal(1, ShellBeastShootProjectileGoal(this))
+        goalSelector.addGoal(1, ShellBeastRangedAttackGoal(this))
         targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(
             1, NearestAttackableTargetGoal(
@@ -245,8 +244,12 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
             SynchedEntityData.defineId(ShellBeastEntity::class.java, EntityDataSerializers.BOOLEAN)
     }
 
-    class ShellBeastShootProjectileGoal(private val shellBeast: ShellBeastEntity) : Goal() {
+    class ShellBeastRangedAttackGoal(private val shellBeast: ShellBeastEntity) : Goal() {
         var chargeTime: Int = 0
+        private var seeTime = 0
+        private var strafingClockwise = false
+        private var strafingBackwards = false
+        private var strafingTime = -1
 
         init {
             this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
@@ -267,37 +270,87 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         override fun tick() {
             val target = shellBeast.target ?: return
 
-            val dx = target.x - shellBeast.x
-            val dz = target.z - shellBeast.z
-            shellBeast.yRot = -(Mth.atan2(dx, dz).toFloat() * (180f / Math.PI.toFloat()))
-            shellBeast.yBodyRot = shellBeast.yRot
-            shellBeast.lookControl.setLookAt(target, 30f, 30f)
+            val distance = shellBeast.distanceToSqr(target.x, target.y, target.z)
+            val canSee = shellBeast.sensing.hasLineOfSight(target)
+            val seenBefore = seeTime > 0
 
-            if (target.distanceToSqr(shellBeast) < 4096.0 && shellBeast.hasLineOfSight(target)) {
+            if (canSee != seenBefore) {
+                seeTime = 0
+            }
+
+            if (canSee) seeTime++ else seeTime--
+
+            if (distance <= 4096.0 && seeTime >= 20) {
+                shellBeast.navigation.stop()
+                strafingTime++
+            } else {
+                shellBeast.navigation.moveTo(target, 1.0)
+                strafingTime = -1
+            }
+
+            if (strafingTime >= 20) {
+                if (shellBeast.random.nextFloat() < 0.3f) {
+                    strafingClockwise = !strafingClockwise
+                }
+
+                if (shellBeast.random.nextFloat() < 0.3f) {
+                    strafingBackwards = !strafingBackwards
+                }
+
+                strafingTime = 0
+            }
+
+            if (strafingTime > -1) {
+                if (distance > 4096.0 * 0.75f) {
+                    strafingBackwards = false
+                } else if (distance < 4096.0 * 0.25f) {
+                    strafingBackwards = true
+                }
+
+                shellBeast.moveControl.strafe(
+                    if (strafingBackwards) -0.5f else 0.5f,
+                    if (strafingClockwise) 0.5f else -0.5f
+                )
+
+                shellBeast.lookAt(target, 30f, 30f)
+            } else {
+                shellBeast.lookControl.setLookAt(target, 30f, 30f)
+            }
+
+            if (distance < 4096.0 && canSee) {
                 val level = shellBeast.level()
                 chargeTime++
 
                 if (chargeTime == 20 && !shellBeast.isSilent) {
-                    level.levelEvent(null as Player?, 1015, shellBeast.blockPosition(), 0)
+                    level.levelEvent(null, 1015, shellBeast.blockPosition(), 0)
                 }
 
                 if (chargeTime == 20 || chargeTime == 40 || chargeTime == 60) {
                     val view = shellBeast.getViewVector(1.0f)
+
                     val dxFire = target.x - (shellBeast.x + view.x * 4.0)
                     val dyFire = target.getY(0.5) - (0.5 + shellBeast.getY(0.5))
                     val dzFire = target.z - (shellBeast.z + view.z * 4.0)
 
                     if (!shellBeast.isSilent) {
-                        level.levelEvent(null as Player?, 1016, shellBeast.blockPosition(), 0)
+                        level.levelEvent(null, 1016, shellBeast.blockPosition(), 0)
                     }
 
-                    val fireball =
-                        LargeFireball(level, shellBeast, dxFire, dyFire, dzFire, shellBeast.getExplosionPower())
+                    val fireball = LargeFireball(
+                        level,
+                        shellBeast,
+                        dxFire,
+                        dyFire,
+                        dzFire,
+                        shellBeast.getExplosionPower()
+                    )
+
                     fireball.setPos(
                         shellBeast.x + view.x * 4.0,
                         shellBeast.getY(0.5) - 0.3,
                         shellBeast.z + view.z * 4.0
                     )
+
                     level.addFreshEntity(fireball)
                 }
 
