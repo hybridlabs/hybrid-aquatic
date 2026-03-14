@@ -28,7 +28,8 @@
         "client.LocalPlayerMixin",
         "client.InGameHudMixin",
         "client.SkullBlockEntityModelMixin",
-        "client.CameraMixin"
+        "client.CameraMixin",
+        "client.WeatherDisplayMixin"
     ],
     "injectors": {
         "defaultRequire": 1
