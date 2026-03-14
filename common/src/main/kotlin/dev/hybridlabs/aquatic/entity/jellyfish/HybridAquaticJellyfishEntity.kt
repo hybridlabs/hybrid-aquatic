@@ -306,7 +306,11 @@ open class HybridAquaticJellyfishEntity(
         return factory
     }
 
-    override fun handleAirSupply(air: Int) {}
+    override fun handleAirSupply(air: Int) {
+        if (isInWaterOrBubble) {
+            airSupply = maxAirSupply
+        }
+    }
 
     private fun getMaxMoistness(): Int {
         return 300

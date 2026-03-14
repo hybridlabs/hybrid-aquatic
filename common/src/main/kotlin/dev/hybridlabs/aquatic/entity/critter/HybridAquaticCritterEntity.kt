@@ -82,7 +82,11 @@ open class HybridAquaticCritterEntity(
         return false
     }
 
-    override fun handleAirSupply(air: Int) {}
+    override fun handleAirSupply(air: Int) {
+        if (isInWaterOrBubble) {
+            airSupply = maxAirSupply
+        }
+    }
     //#endregion
 
     //#region Data

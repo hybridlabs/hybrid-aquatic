@@ -124,7 +124,11 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         return false
     }
 
-    override fun handleAirSupply(airSupply: Int) {}
+    override fun handleAirSupply(air: Int) {
+        if (isInWaterOrBubble) {
+            airSupply = maxAirSupply
+        }
+    }
 
     private fun getMaxMoistness(): Int {
         return 600

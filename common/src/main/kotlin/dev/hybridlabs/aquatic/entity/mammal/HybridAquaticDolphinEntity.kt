@@ -174,7 +174,10 @@ open class HybridAquaticDolphinEntity(type: EntityType<out HybridAquaticDolphinE
         return true
     }
 
-    override fun handleAirSupply(airSupply: Int) {
+    override fun handleAirSupply(air: Int) {
+        if (isInWaterOrBubble) {
+            airSupply = maxAirSupply
+        }
     }
 
     private fun getMaxMoistness(): Int {

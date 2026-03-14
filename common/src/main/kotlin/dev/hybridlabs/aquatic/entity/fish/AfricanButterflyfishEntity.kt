@@ -83,18 +83,6 @@ class AfricanButterflyfishEntity(type: EntityType<out AfricanButterflyfishEntity
         this.deltaMovement = newMotion
     }
 
-    override fun handleAirSupply(airSupply: Int) {
-        if (isInWater && !isNoAi) {
-            this.airSupply = airSupply - 1
-        } else {
-            this.airSupply = this.maxAirSupply
-        }
-    }
-
-    override fun getMaxAirSupply(): Int {
-        return 900
-    }
-
     override fun increaseAirSupply(currentAir: Int): Int {
         return this.maxAirSupply
     }

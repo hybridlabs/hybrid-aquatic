@@ -118,6 +118,9 @@ open class HybridAquaticCrustaceanEntity(
     }
 
     override fun handleAirSupply(air: Int) {
+        if (isInWaterOrBubble) {
+            airSupply = maxAirSupply
+        }
     }
 
     override fun isAffectedByFluids(): Boolean {

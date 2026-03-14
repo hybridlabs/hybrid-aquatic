@@ -153,7 +153,11 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
         return false
     }
 
-    override fun handleAirSupply(air: Int) {}
+    override fun handleAirSupply(air: Int) {
+        if (isInWaterOrBubble) {
+            airSupply = maxAirSupply
+        }
+    }
 
     private fun getMaxMoistness(): Int {
         return 1200
