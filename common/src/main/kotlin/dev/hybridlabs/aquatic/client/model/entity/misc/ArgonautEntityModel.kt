@@ -37,12 +37,15 @@ class ArgonautEntityModel<T : ArgonautEntity>() :
         instanceId: Long,
         animationState: AnimationState<T>,
     ) {
+        val deltaTime: Float = animationState.partialTick
         val body = animationProcessor.getBone(PartNames.BODY)
 
-        val yaw = Mth.lerp(animationState.partialTick, animatable.yRotO, animatable.yRot)
+        val yawController = if (animatable.hasControllingPassenger()) animatable.controllingPassenger!! else animatable
+
+        val yaw = Mth.lerp(deltaTime, yawController.yRotO, yawController.yRot)
         body.rotY = -yaw * Mth.DEG_TO_RAD
 
-        val tilt = Mth.lerp(animationState.partialTick, animatable.xRotO, animatable.xRot)
+        val tilt = Mth.lerp(deltaTime, yawController.xRotO, yawController.xRot)
         body.rotX = tilt * -Mth.DEG_TO_RAD
     }
 }
