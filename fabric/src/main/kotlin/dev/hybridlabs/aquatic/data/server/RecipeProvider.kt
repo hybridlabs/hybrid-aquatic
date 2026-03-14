@@ -24,6 +24,22 @@ import java.util.function.Consumer
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun buildRecipes(exporter: Consumer<FinishedRecipe>) {
         // misc recipes
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, HybridAquaticItems.ARGONAUT.get())
+            .pattern("IBP")
+            .pattern("LSC")
+            .pattern("IBP")
+            .define('I', Items.IRON_INGOT)
+            .define('B', Items.BARREL)
+            .define('P', ItemTags.PLANKS)
+            .define('L', HybridAquaticItems.MANGLERFISH_LURE.get())
+            .define('S', HybridAquaticItems.GIANT_NAUTILUS_SHELL.get())
+            .define('C', Items.CHEST)
+            .unlockedBy(
+                "has_giant_nautilus_shell",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GIANT_NAUTILUS_SHELL.get())
+            )
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HybridAquaticItems.PRISMARINE_ROD.get())
             .pattern("P  ")
             .pattern("P  ")
