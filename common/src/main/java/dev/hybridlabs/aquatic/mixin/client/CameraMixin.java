@@ -7,6 +7,7 @@ import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
 
 @Mixin(Camera.class)
@@ -15,9 +16,12 @@ public abstract class CameraMixin {
 	@Shadow
 	private Entity entity;
 	
-	@ModifyExpressionValue(
+	@Shadow
+	protected abstract double getMaxZoom(double startingDistance);
+	
+	@ModifyArg(
 		method = "setup",
-		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;getMaxZoom(D)D")
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;getMaxZoom(D)D"), index = 0
 	)
 	private double changeCameraDistance(double original) {
 		return entity.getRootVehicle() != entity && entity.getRootVehicle() instanceof ArgonautEntity ? 7.5d : original;
@@ -31,6 +35,6 @@ public abstract class CameraMixin {
 		at = @At(value = "CONSTANT", args = "doubleValue=0.0", ordinal = 0)
 	)
 	private double changeCameraHeight(double original) {
-		return entity.getRootVehicle() != entity && entity.getRootVehicle() instanceof ArgonautEntity ? 2.0d : original;
+		return entity.getRootVehicle() != entity && entity.getRootVehicle() instanceof ArgonautEntity ? getMaxZoom(3.0) : original;
 	}
 }
