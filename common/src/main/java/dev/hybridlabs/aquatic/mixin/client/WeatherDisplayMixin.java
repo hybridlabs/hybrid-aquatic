@@ -35,11 +35,6 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 	@Unique
 	private static final ResourceLocation MARINE_SNOW = CommonClass.locate("textures/environment/marine_snow.png");
 	
-	@Inject(method = "renderSnowAndRain", at=@At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/BufferBuilder;begin(Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;Lcom/mojang/blaze3d/vertex/VertexFormat;)V"))
-	void renderWeather(LightTexture manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
-		RenderSystem.setShaderTexture(0, MARINE_SNOW);
-	}
-	
 	@Shadow private int ticks;
 	@Final @Shadow private float[] rainSizeX;
 	@Final @Shadow private float[] rainSizeZ;
@@ -47,7 +42,7 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 	
 	@Inject(method = "renderSnowAndRain", at=@At("HEAD"))
 	void renderWeatherInject(LightTexture manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
-		if(minecraft.player != null && minecraft.level != null) {
+		if (minecraft.player != null && minecraft.level != null) {
 			float f = this.minecraft.level.getRainLevel(tickDelta);
 			Level world = this.minecraft.level;
 			if (f > 0.0f && cameraY < world.getSeaLevel() - 16.0 && world.getBiome(minecraft.player.blockPosition()).is(BiomeTags.IS_DEEP_OCEAN)) {
