@@ -27,7 +27,8 @@
         "client.LivingEntityRendererMixin",
         "client.LocalPlayerMixin",
         "client.InGameHudMixin",
-        "client.SkullBlockEntityTextureMixin"
+        "client.SkullBlockEntityTextureMixin",
+        "client.CameraMixin"
     ],
     "injectors": {
         "defaultRequire": 1
