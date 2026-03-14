@@ -439,6 +439,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.PEARL.get() to "Pearl",
             HybridAquaticItems.BLACK_PEARL.get() to "Black Pearl",
             HybridAquaticItems.GIANT_NAUTILUS_SHELL.get() to "Giant Nautilus Shell",
+            HybridAquaticItems.ARGONAUT.get() to "Argonaut",
             HybridAquaticItems.SULFUR.get() to "Sulfur",
             HybridAquaticItems.CORAL_CHUNK.get() to "Coral Chunk",
             HybridAquaticItems.BARBED_HOOK.get() to "Barbed Hook",

@@ -572,6 +572,7 @@ object HybridAquaticItems {
     val PEARL = register("pearl") { Item(Item.Properties()) }
     val BLACK_PEARL = register("black_pearl") { Item(Item.Properties()) }
     val GIANT_NAUTILUS_SHELL = register("giant_nautilus_shell") { Item(Item.Properties()) }
+    val ARGONAUT = register("argonaut") { ArgonautItem(Item.Properties()) }
     val CUTTLEBONE = register("cuttlebone") { Item(Item.Properties()) }
 
     //#region Claws

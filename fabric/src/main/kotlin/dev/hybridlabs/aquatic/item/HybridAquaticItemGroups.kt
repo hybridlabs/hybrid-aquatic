@@ -301,6 +301,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.PEARL.get())
                 entries.accept(HybridAquaticItems.BLACK_PEARL.get())
                 entries.accept(HybridAquaticItems.GIANT_NAUTILUS_SHELL.get())
+                entries.accept(HybridAquaticItems.ARGONAUT.get())
                 entries.accept(HybridAquaticItems.SULFUR.get())
                 entries.accept(HybridAquaticItems.TUBE_SPONGE.get())
                 entries.accept(HybridAquaticItems.BUOY.get())
