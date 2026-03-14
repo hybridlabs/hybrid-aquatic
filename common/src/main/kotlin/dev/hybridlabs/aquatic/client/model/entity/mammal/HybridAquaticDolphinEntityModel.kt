@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
-import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
@@ -52,7 +51,7 @@ abstract class HybridAquaticDolphinEntityModel<T : HybridAquaticDolphinEntity>(p
             return
         }
 
-        val deltaTime = Minecraft.getInstance().deltaFrameTime
+        val deltaTime = animationState.partialTick
         val head = animationProcessor.getBone(PartNames.HEAD)
         val body = animationProcessor.getBone(PartNames.BODY)
         val body2 = animationProcessor.getBone("body_2")

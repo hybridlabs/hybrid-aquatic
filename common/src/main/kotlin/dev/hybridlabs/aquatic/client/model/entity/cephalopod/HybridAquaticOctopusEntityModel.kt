@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticOctopusEntity
-import net.minecraft.client.Minecraft
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
@@ -34,7 +33,7 @@ abstract class HybridAquaticOctopusEntityModel<T : HybridAquaticOctopusEntity>(p
         animationState: AnimationState<T>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
+        val deltaTime: Float = animationState.partialTick
 
         val body = animationProcessor.getBone("octopus")
 

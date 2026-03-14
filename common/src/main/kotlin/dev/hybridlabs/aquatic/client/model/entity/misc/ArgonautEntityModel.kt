@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.client.model.entity.misc
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
-import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
@@ -38,14 +37,12 @@ class ArgonautEntityModel<T : ArgonautEntity>() :
         instanceId: Long,
         animationState: AnimationState<T>,
     ) {
-        val deltaTime = Minecraft.getInstance().deltaFrameTime
         val body = animationProcessor.getBone(PartNames.BODY)
 
-        val yaw = Mth.lerp(deltaTime, animatable.yRotO, animatable.yRot)
+        val yaw = Mth.lerp(animationState.partialTick, animatable.yRotO, animatable.yRot)
         body.rotY = -yaw * Mth.DEG_TO_RAD
 
-        val tilt = Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot)
-
+        val tilt = Mth.lerp(animationState.partialTick, animatable.xRotO, animatable.xRot)
         body.rotX = tilt * -Mth.DEG_TO_RAD
     }
 }

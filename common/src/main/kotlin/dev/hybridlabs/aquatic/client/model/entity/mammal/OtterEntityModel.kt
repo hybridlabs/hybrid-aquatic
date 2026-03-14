@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity.Companion.OtterAction
-import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
@@ -65,7 +64,7 @@ class OtterEntityModel : HybridAquaticMammalEntityModel<OtterEntity>("otter") {
         instanceId: Long,
         animationState: AnimationState<OtterEntity>
     ) {
-        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
+        val deltaTime: Float = animationState.partialTick
         val body = animationProcessor.getBone(PartNames.BODY)
 
         if (!animationState.isMoving && animatable.isInWater && !animatable.onGround() && animatable.getAction() == OtterAction.FLOATING) {

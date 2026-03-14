@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.miniboss
 
 import dev.hybridlabs.aquatic.entity.miniboss.ManglerfishEntity
-import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
@@ -14,7 +13,7 @@ class ManglerfishEntityModel : HybridAquaticMinibossEntityModel<ManglerfishEntit
         animationState: AnimationState<ManglerfishEntity>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().deltaFrameTime
+        val deltaTime: Float = animationState.partialTick
 
         val body = animationProcessor.getBone(PartNames.BODY)
 

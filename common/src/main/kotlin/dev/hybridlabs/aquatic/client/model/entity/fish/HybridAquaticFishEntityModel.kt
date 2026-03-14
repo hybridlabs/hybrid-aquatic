@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
-import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
@@ -41,7 +40,7 @@ abstract class HybridAquaticFishEntityModel<T : HybridAquaticFishEntity>(private
             return
         }
 
-        val deltaTime = Minecraft.getInstance().deltaFrameTime
+        val deltaTime = animationState.partialTick
         val body = animationProcessor.getBone(PartNames.BODY)
         val body2 = animationProcessor.getBone("body_2")
         val tail = animationProcessor.getBone(PartNames.TAIL)
