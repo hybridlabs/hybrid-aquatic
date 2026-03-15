@@ -57,8 +57,15 @@ object HybridAquaticBlocks {
 
     val BRINE = register("brine") {
         LiquidBlock(
-            HybridAquaticFluids.BRINE_SOURCE.get(), Properties.copy(Blocks.WATER)
-                .mapColor(MapColor.TERRACOTTA_WHITE)
+            HybridAquaticFluids.BRINE.get(), Properties.of()
+                .mapColor(MapColor.COLOR_YELLOW)
+                .replaceable()
+                .noCollission()
+                .strength(100.0f)
+                .pushReaction(PushReaction.DESTROY)
+                .noLootTable()
+                .liquid()
+                .sound(SoundType.EMPTY)
         )
     }
 
