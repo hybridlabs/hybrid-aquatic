@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.entity.misc
 
+import com.mojang.serialization.Codec
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
@@ -8,7 +10,9 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.ByIdMap
 import net.minecraft.util.Mth
+import net.minecraft.util.StringRepresentable
 import net.minecraft.world.Containers
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
@@ -19,9 +23,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.vehicle.ContainerEntity
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ChestMenu
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
+import net.minecraft.world.item.*
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
@@ -34,6 +36,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.util.GeckoLibUtil
+import java.util.function.IntFunction
 
 open class ArgonautEntity(
     type: EntityType<out ArgonautEntity>,
@@ -59,13 +62,76 @@ open class ArgonautEntity(
     private var lerpYRot = 0.0
     private var lerpXRot = 0.0
 
+    //#region Data
     override fun defineSynchedData() {
         this.entityData.define(DATA_ID_HURT, 0)
         this.entityData.define(DATA_ID_HURTDIR, 1)
         this.entityData.define(DATA_ID_DAMAGE, 0.0f)
         this.entityData.define(DATA_ID_RIGHT_PROPELLER, false)
         this.entityData.define(DATA_ID_LEFT_PROPELLER, false)
-        this.entityData.define(DATA_ID_BACK_PROPELLER, false)
+        this.entityData.define(DATA_ID_GLOWING, false)
+        this.entityData.define(SHELL_COLOR, ShellColor.NONE.id)
+        this.entityData.define(SAIL_COLOR, SailColor.NONE.id)
+        this.entityData.define(WOOD_TYPE, SailColor.NONE.id)
+    }
+
+    override fun addAdditionalSaveData(tag: CompoundTag) {
+        tag.putFloat("Damage", getDamage())
+        tag.putBoolean("IsGlowing", isGlowing())
+        tag.putString("ShellColor", this.getShellColor().serializedName)
+        tag.putString("SailColor", this.getSailColor().serializedName)
+        tag.putString("WoodType", this.getWoodType().serializedName)
+        this.addChestVehicleSaveData(tag)
+    }
+
+    override fun readAdditionalSaveData(tag: CompoundTag) {
+        setDamage(tag.getFloat("Damage"))
+        setGlowing(tag.getBoolean("IsGlowing"))
+
+        if (tag.contains("ShellColor", 8)) {
+            val colorName = tag.getString("ShellColor")
+            val color = ShellColor.entries.firstOrNull { it.serializedName == colorName } ?: ShellColor.NONE
+            setShellColor(color)
+        }
+
+        if (tag.contains("SailColor", 8)) {
+            val colorName = tag.getString("SailColor")
+            val color = SailColor.entries.firstOrNull { it.serializedName == colorName } ?: SailColor.NONE
+            setSailColor(color)
+        }
+
+        if (tag.contains("WoodType", 8)) {
+            val woodTypeName = tag.getString("WoodType")
+            val woodType = WoodType.entries.firstOrNull { it.serializedName == woodTypeName } ?: WoodType.NONE
+            setWoodType(woodType)
+        }
+
+        this.readChestVehicleSaveData(tag)
+    }
+    //#endregion
+
+    open fun getShellColor(): ShellColor {
+        return ShellColor.byId(entityData.get(SHELL_COLOR))
+    }
+
+    open fun setShellColor(shellColor: ShellColor) {
+        entityData.set(SHELL_COLOR, shellColor.id)
+    }
+
+    open fun getSailColor(): SailColor {
+        return SailColor.byId((entityData.get(SAIL_COLOR) as Int))
+    }
+
+    open fun setSailColor(sailColor: SailColor) {
+        entityData.set(SAIL_COLOR, sailColor.id)
+    }
+
+    open fun getWoodType(): WoodType {
+        return WoodType.byId((entityData.get(WOOD_TYPE) as Int))
+    }
+
+    open fun setWoodType(woodType: WoodType) {
+        entityData.set(WOOD_TYPE, woodType.id)
     }
 
     override fun getEyeHeight(pose: Pose, size: EntityDimensions): Float {
@@ -241,14 +307,12 @@ open class ArgonautEntity(
         return this.entityData.get(if (side == 0) DATA_ID_LEFT_PROPELLER else DATA_ID_RIGHT_PROPELLER) && this.getControllingPassenger() != null
     }
 
-    override fun addAdditionalSaveData(tag: CompoundTag) {
-        tag.putFloat("Damage", getDamage())
-        this.addChestVehicleSaveData(tag)
+    fun setGlowing(glowing: Boolean) {
+        this.entityData.set(DATA_ID_GLOWING, glowing)
     }
 
-    override fun readAdditionalSaveData(tag: CompoundTag) {
-        setDamage(tag.getFloat("Damage"))
-        this.readChestVehicleSaveData(tag)
+    fun isGlowing(): Boolean {
+        return this.entityData.get(DATA_ID_GLOWING)
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
@@ -279,7 +343,7 @@ open class ArgonautEntity(
     }
 
     open fun getDropItem(): Item {
-        return Items.BIRCH_BOAT
+        return HybridAquaticItems.ARGONAUT.get()
     }
 
     fun setDamage(damageTaken: Float) {
@@ -358,6 +422,48 @@ open class ArgonautEntity(
     }
 
     override fun interact(player: Player, hand: InteractionHand): InteractionResult {
+        val stack = player.getItemInHand(hand)
+
+        //#region Glowslime
+        if (stack.`is`(HybridAquaticItems.GLOWSLIME.get()) && !this.isGlowing()) {
+            if (!player.abilities.instabuild) stack.shrink(1)
+            this.setGlowing(true)
+            return InteractionResult.sidedSuccess(this.level().isClientSide)
+        }
+
+        //#region Sail Color
+        if (stack.item is DyeItem && player.isCrouching) {
+            val dye = (stack.item as DyeItem).dyeColor
+            val sailColor = SailColor.fromDye(dye)
+            if (sailColor != getSailColor()) {
+                setSailColor(sailColor)
+                if (!player.abilities.instabuild) stack.shrink(1)
+                return InteractionResult.sidedSuccess(level().isClientSide)
+            }
+        }
+
+        //#region Shell Color
+        if (stack.item is DyeItem) {
+            val dye = (stack.item as DyeItem).dyeColor
+            val shellColor = ShellColor.fromDye(dye)
+            if (shellColor != getShellColor()) {
+                setShellColor(shellColor)
+                if (!player.abilities.instabuild) stack.shrink(1)
+                return InteractionResult.sidedSuccess(level().isClientSide)
+            }
+        }
+
+        //#region Wood Type
+        if (!stack.isEmpty) {
+            val woodType = WoodType.fromPlanks(stack.item)
+            if (woodType != WoodType.NONE && woodType != getWoodType()) {
+                setWoodType(woodType)
+                if (!player.abilities.instabuild) stack.shrink(1)
+                return InteractionResult.sidedSuccess(level().isClientSide)
+            }
+        }
+
+        //#region Riding
         return if (player.isSecondaryUseActive) {
             InteractionResult.PASS
         } else if (this.isVehicle) {
@@ -508,7 +614,188 @@ open class ArgonautEntity(
         private val DATA_ID_LEFT_PROPELLER: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.BOOLEAN)
 
-        private val DATA_ID_BACK_PROPELLER: EntityDataAccessor<Boolean> =
+        private val DATA_ID_GLOWING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.BOOLEAN)
+
+        val SHELL_COLOR: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.INT)
+
+        val SAIL_COLOR: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.INT)
+
+        val WOOD_TYPE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.INT)
+
+    }
+
+    enum class ShellColor(val id: Int, val key: String) : StringRepresentable {
+        NONE(0, ""),
+        WHITE(1, "white"),
+        ORANGE(2, "orange"),
+        MAGENTA(3, "magenta"),
+        LIGHT_BLUE(4, "light_blue"),
+        YELLOW(5, "yellow"),
+        LIME(6, "lime"),
+        PINK(7, "pink"),
+        GRAY(8, "gray"),
+        LIGHT_GRAY(9, "light_gray"),
+        CYAN(10, "cyan"),
+        PURPLE(11, "purple"),
+        BLUE(12, "blue"),
+        BROWN(13, "brown"),
+        GREEN(14, "green"),
+        RED(15, "red"),
+        BLACK(16, "black");
+
+        override fun getSerializedName(): String {
+            return this.key
+        }
+
+        companion object {
+            val CODEC: Codec<ShellColor> =
+                StringRepresentable.fromEnum { ShellColor.entries.toTypedArray() }
+
+            val BY_ID: IntFunction<ShellColor> = ByIdMap.continuous(
+                { color -> color.id },
+                ShellColor.entries.toTypedArray(),
+                ByIdMap.OutOfBoundsStrategy.WRAP
+            )
+
+            fun byId(id: Int): ShellColor {
+                return BY_ID.apply(id)
+            }
+
+            fun fromDye(dye: DyeColor): ShellColor {
+                return when(dye) {
+                    DyeColor.WHITE -> WHITE
+                    DyeColor.ORANGE -> ORANGE
+                    DyeColor.MAGENTA -> MAGENTA
+                    DyeColor.LIGHT_BLUE -> LIGHT_BLUE
+                    DyeColor.YELLOW -> YELLOW
+                    DyeColor.LIME -> LIME
+                    DyeColor.PINK -> PINK
+                    DyeColor.GRAY -> GRAY
+                    DyeColor.LIGHT_GRAY -> LIGHT_GRAY
+                    DyeColor.CYAN -> CYAN
+                    DyeColor.PURPLE -> PURPLE
+                    DyeColor.BLUE -> BLUE
+                    DyeColor.BROWN -> BROWN
+                    DyeColor.GREEN -> GREEN
+                    DyeColor.RED -> RED
+                    DyeColor.BLACK -> BLACK
+                }
+            }
+        }
+    }
+
+    enum class SailColor(val id: Int, val key: String) : StringRepresentable {
+        NONE(0, ""),
+        WHITE(1, "white"),
+        ORANGE(2, "orange"),
+        MAGENTA(3, "magenta"),
+        LIGHT_BLUE(4, "light_blue"),
+        YELLOW(5, "yellow"),
+        LIME(6, "lime"),
+        PINK(7, "pink"),
+        GRAY(8, "gray"),
+        LIGHT_GRAY(9, "light_gray"),
+        CYAN(10, "cyan"),
+        PURPLE(11, "purple"),
+        BLUE(12, "blue"),
+        BROWN(13, "brown"),
+        GREEN(14, "green"),
+        RED(15, "red"),
+        BLACK(16, "black");
+
+        override fun getSerializedName(): String {
+            return this.key
+        }
+
+        companion object {
+            val CODEC: Codec<SailColor> =
+                StringRepresentable.fromEnum { SailColor.entries.toTypedArray() }
+
+            val BY_ID: IntFunction<SailColor> = ByIdMap.continuous(
+                { color -> color.id },
+                SailColor.entries.toTypedArray(),
+                ByIdMap.OutOfBoundsStrategy.WRAP
+            )
+
+            fun byId(id: Int): SailColor {
+                return BY_ID.apply(id)
+            }
+
+            fun fromDye(dye: DyeColor): SailColor {
+                return when(dye) {
+                    DyeColor.WHITE -> WHITE
+                    DyeColor.ORANGE -> ORANGE
+                    DyeColor.MAGENTA -> MAGENTA
+                    DyeColor.LIGHT_BLUE -> LIGHT_BLUE
+                    DyeColor.YELLOW -> YELLOW
+                    DyeColor.LIME -> LIME
+                    DyeColor.PINK -> PINK
+                    DyeColor.GRAY -> GRAY
+                    DyeColor.LIGHT_GRAY -> LIGHT_GRAY
+                    DyeColor.CYAN -> CYAN
+                    DyeColor.PURPLE -> PURPLE
+                    DyeColor.BLUE -> BLUE
+                    DyeColor.BROWN -> BROWN
+                    DyeColor.GREEN -> GREEN
+                    DyeColor.RED -> RED
+                    DyeColor.BLACK -> BLACK
+                }
+            }
+        }
+    }
+
+    enum class WoodType(val id: Int, val key: String) : StringRepresentable {
+        NONE(0, ""),
+        OAK(1, "oak"),
+        SPRUCE(2, "spruce"),
+        BIRCH(3, "birch"),
+        JUNGLE(4, "jungle"),
+        ACACIA(5, "acacia"),
+        DARK_OAK(6, "dark_oak"),
+        MANGROVE(7, "mangrove"),
+        CHERRY(8, "cherry"),
+        BAMBOO(9, "bamboo"),
+        WARPED(10, "warped"),
+        CRIMSON(11, "crimson");
+
+        override fun getSerializedName(): String {
+            return this.key
+        }
+
+        companion object {
+            val CODEC: Codec<WoodType> =
+                StringRepresentable.fromEnum { WoodType.entries.toTypedArray() }
+
+            val BY_ID: IntFunction<WoodType> = ByIdMap.continuous(
+                { wood -> wood.id },
+                WoodType.entries.toTypedArray(),
+                ByIdMap.OutOfBoundsStrategy.WRAP
+            )
+
+            fun byId(id: Int): WoodType {
+                return BY_ID.apply(id)
+            }
+
+            fun fromPlanks(item: Item): WoodType {
+                return when (item) {
+                    Items.OAK_PLANKS -> OAK
+                    Items.SPRUCE_PLANKS -> SPRUCE
+                    Items.BIRCH_PLANKS -> BIRCH
+                    Items.JUNGLE_PLANKS -> JUNGLE
+                    Items.ACACIA_PLANKS -> ACACIA
+                    Items.DARK_OAK_PLANKS -> DARK_OAK
+                    Items.MANGROVE_PLANKS -> MANGROVE
+                    Items.CHERRY_PLANKS -> CHERRY
+                    Items.BAMBOO_PLANKS -> BAMBOO
+                    Items.WARPED_PLANKS -> WARPED
+                    Items.CRIMSON_PLANKS -> CRIMSON
+                    else -> NONE
+                }
+            }
+        }
     }
 }

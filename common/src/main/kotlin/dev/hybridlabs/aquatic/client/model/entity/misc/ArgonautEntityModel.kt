@@ -17,11 +17,39 @@ class ArgonautEntityModel<T : ArgonautEntity>() :
     }
 
     override fun getTextureResource(animatable: T): ResourceLocation {
-        return CommonClass.locate("textures/entity/misc/argonaut/argonaut.png")
+        return if (animatable.isGlowing()) {
+            CommonClass.locate("textures/entity/misc/argonaut/glowing_argonaut.png")
+        } else {
+            CommonClass.locate("textures/entity/misc/argonaut/argonaut.png")
+        }
     }
 
     fun getVisorTextureResource(): ResourceLocation {
         return CommonClass.locate("textures/entity/misc/argonaut/argonaut_visor.png")
+    }
+
+    fun getShellTextureResource(animatable: T): ResourceLocation {
+        val textureName = when (val color = animatable.getShellColor()) {
+            ArgonautEntity.ShellColor.NONE -> "argonaut_shell"
+            else -> color.name.lowercase() + "_argonaut_shell"
+        }
+        return CommonClass.locate("textures/entity/misc/argonaut/shell/$textureName.png")
+    }
+
+    fun getWoodTypeTextureResource(animatable: T): ResourceLocation {
+        val textureName = when (val color = animatable.getWoodType()) {
+            ArgonautEntity.WoodType.NONE -> "argonaut"
+            else -> color.name.lowercase() + "_argonaut"
+        }
+        return CommonClass.locate("textures/entity/misc/argonaut/wood/$textureName.png")
+    }
+
+    fun getSailTextureResource(animatable: T): ResourceLocation {
+        val textureName = when (val color = animatable.getSailColor()) {
+            ArgonautEntity.SailColor.NONE -> "argonaut_sail"
+            else -> color.name.lowercase() + "_argonaut_sail"
+        }
+        return CommonClass.locate("textures/entity/misc/argonaut/sail/$textureName.png")
     }
 
     override fun getAnimationResource(animatable: T): ResourceLocation {
