@@ -63,7 +63,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
         true
     )
 
-    override fun createNavigation(level: Level): PathNavigation {
+    init {
         setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0f)
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
@@ -71,7 +71,9 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
 
         moveControl = swimControl
         lookControl = OtterLookControl(this)
+    }
 
+    override fun createNavigation(level: Level): PathNavigation {
         return AmphibiousPathNavigation(this, level)
     }
 
