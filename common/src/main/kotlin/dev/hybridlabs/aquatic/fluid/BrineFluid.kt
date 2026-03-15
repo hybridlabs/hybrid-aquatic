@@ -14,6 +14,7 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.*
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.LiquidBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
@@ -29,7 +30,7 @@ abstract class BrineFluid : FlowingFluid() {
     }
 
     override fun getSource(): Fluid {
-        return HybridAquaticFluids.BRINE.get()
+        return HybridAquaticFluids.BRINE_SOURCE.get()
     }
 
     override fun getBucket(): Item {
@@ -68,7 +69,7 @@ abstract class BrineFluid : FlowingFluid() {
     }
 
     override fun canConvertToSource(level: Level): Boolean {
-        return false
+        return level.gameRules.getBoolean(GameRules.RULE_WATER_SOURCE_CONVERSION)
     }
 
     override fun beforeDestroyingBlock(level: LevelAccessor, pos: BlockPos, state: BlockState) {
@@ -85,7 +86,7 @@ abstract class BrineFluid : FlowingFluid() {
     }
 
     override fun isSame(fluid: Fluid): Boolean {
-        return fluid == HybridAquaticFluids.BRINE || fluid == HybridAquaticFluids.FLOWING_BRINE
+        return fluid == HybridAquaticFluids.BRINE_SOURCE || fluid == HybridAquaticFluids.FLOWING_BRINE
     }
 
     public override fun getDropOff(level: LevelReader): Int {
@@ -94,14 +95,6 @@ abstract class BrineFluid : FlowingFluid() {
 
     override fun getTickDelay(level: LevelReader): Int {
         return 5
-    }
-
-    override fun getAmount(state: FluidState): Int {
-        return 8
-    }
-
-    override fun isSource(state: FluidState): Boolean {
-        return false
     }
 
     public override fun canBeReplacedWith(
@@ -114,6 +107,46 @@ abstract class BrineFluid : FlowingFluid() {
         return direction == Direction.DOWN && !fluid.`is`(FluidTags.WATER)
     }
 
+    override fun spreadTo(
+        level: LevelAccessor,
+        pos: BlockPos,
+        blockState: BlockState,
+        direction: Direction,
+        fluidState: FluidState,
+    ) {
+        if (direction == Direction.DOWN) {
+            val fluidstate = level.getFluidState(pos)
+            if (this.`is`(FluidTags.LAVA) && fluidstate.`is`(FluidTags.WATER)) {
+                if (blockState.block is LiquidBlock) {
+                    level.setBlock(pos, Blocks.STONE.defaultBlockState(), 3)
+                }
+
+                return
+            }
+        }
+
+        super.spreadTo(level, pos, blockState, direction, fluidState)
+    }
+
+    public override fun getSpreadDelay(
+        level: Level,
+        pos: BlockPos,
+        currentState: FluidState,
+        newState: FluidState,
+    ): Int {
+        var i = this.getTickDelay(level)
+        if (!currentState.isEmpty &&
+            !newState.isEmpty &&
+            !currentState.getValue(FALLING) &&
+            !newState.getValue(FALLING
+            ) && newState.getHeight(level, pos) > currentState.getHeight(level, pos) && level.getRandom().nextInt(4) != 0
+        ) {
+            i *= 4
+        }
+
+        return i
+    }
+
     override fun getExplosionResistance(): Float {
         return 100.0f
     }
@@ -123,7 +156,7 @@ abstract class BrineFluid : FlowingFluid() {
     }
 
     class Flowing : BrineFluid() {
-        override fun createFluidStateDefinition(builder: StateDefinition.Builder<Fluid?, FluidState?>) {
+        override fun createFluidStateDefinition(builder: StateDefinition.Builder<Fluid, FluidState>) {
             super.createFluidStateDefinition(builder)
             builder.add(LEVEL)
         }

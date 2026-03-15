@@ -12,7 +12,7 @@ class FluidTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
     override fun addTags(p0: HolderLookup.Provider) {
         getOrCreateTagBuilder(FluidTags.WATER)
-            .add(HybridAquaticFluids.BRINE.get())
+            .add(HybridAquaticFluids.BRINE_SOURCE.get())
             .add(HybridAquaticFluids.FLOWING_BRINE.get())
     }
 }

@@ -10,7 +10,7 @@ import net.minecraft.world.level.material.FlowingFluid
 
 class HybridAquaticFluidRenderer {
     init {
-        registerFluid("brine", HybridAquaticFluids.BRINE.get(), HybridAquaticFluids.FLOWING_BRINE.get())
+        registerFluid("brine", HybridAquaticFluids.BRINE_SOURCE.get(), HybridAquaticFluids.FLOWING_BRINE.get())
     }
 
     fun registerFluid(id: String, still: FlowingFluid, flowing: FlowingFluid) {

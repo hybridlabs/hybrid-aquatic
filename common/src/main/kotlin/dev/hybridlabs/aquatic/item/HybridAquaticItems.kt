@@ -195,7 +195,7 @@ object HybridAquaticItems {
     val FISHING_NET = register("fishing_net") { FishingNetItem(Item.Properties().stacksTo(1)) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
     val BRINE_BUCKET =
-        register("brine_bucket") { BucketItem(HybridAquaticFluids.BRINE.get(), Item.Properties().stacksTo(1)) }
+        register("brine_bucket") { BucketItem(HybridAquaticFluids.BRINE_SOURCE.get(), Item.Properties().stacksTo(1)) }
 
     val BARBED_HOOK = register("barbed_hook") { HookItem(Item.Properties().durability(16)) }
     val GLOWING_HOOK = register("glowing_hook") { HookItem(Item.Properties().durability(16)) }
