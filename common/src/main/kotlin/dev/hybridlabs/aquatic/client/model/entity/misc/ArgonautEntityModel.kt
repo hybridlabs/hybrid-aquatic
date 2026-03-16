@@ -36,14 +36,6 @@ class ArgonautEntityModel<T : ArgonautEntity>() :
         return CommonClass.locate("textures/entity/misc/argonaut/shell/$textureName.png")
     }
 
-    fun getWoodTypeTextureResource(animatable: T): ResourceLocation {
-        val textureName = when (val color = animatable.getWoodType()) {
-            ArgonautEntity.WoodType.NONE -> "argonaut"
-            else -> color.name.lowercase() + "_argonaut"
-        }
-        return CommonClass.locate("textures/entity/misc/argonaut/wood/$textureName.png")
-    }
-
     fun getSailTextureResource(animatable: T): ResourceLocation {
         val textureName = when (val color = animatable.getSailColor()) {
             ArgonautEntity.SailColor.NONE -> "argonaut_sail"

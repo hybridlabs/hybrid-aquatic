@@ -4,7 +4,6 @@ import dev.hybridlabs.aquatic.client.model.entity.misc.ArgonautEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.misc.layer.ArgonautSailEntityLayer
 import dev.hybridlabs.aquatic.client.render.entity.misc.layer.ArgonautShellEntityLayer
 import dev.hybridlabs.aquatic.client.render.entity.misc.layer.ArgonautVisorEntityLayer
-import dev.hybridlabs.aquatic.client.render.entity.misc.layer.ArgonautWoodTypeEntityLayer
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import software.bernie.geckolib.renderer.GeoEntityRenderer
@@ -18,7 +17,6 @@ class ArgonautEntityRenderer<T : ArgonautEntity>(
         addRenderLayer(ArgonautVisorEntityLayer(this))
         addRenderLayer(ArgonautSailEntityLayer(this))
         addRenderLayer(ArgonautShellEntityLayer(this))
-        addRenderLayer(ArgonautWoodTypeEntityLayer(this))
         addRenderLayer(AutoGlowingGeoLayer(this))
         this.shadowRadius = 0.3f
     }
