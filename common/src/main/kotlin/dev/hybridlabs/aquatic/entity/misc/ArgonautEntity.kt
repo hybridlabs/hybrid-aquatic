@@ -178,7 +178,9 @@ open class ArgonautEntity(
     open fun tickRidden(player: Player, travelVector: Vec3) {
         val vec2 = getRiddenRotation(player)
 
-        setRot(vec2.y, vec2.x)
+        val pitch = if (this.onGround() && !this.isInWater) 0f else vec2.x
+
+        setRot(vec2.y, pitch)
 
         yRotO = yRot
     }
