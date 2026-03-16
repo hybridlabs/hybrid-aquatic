@@ -330,7 +330,6 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.CORAL_HOE.get())
                 entries.accept(HybridAquaticItems.FISHING_NET.get())
                 entries.accept(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get())
-                entries.accept(HybridAquaticItems.BRINE_BUCKET.get())
 
                 entries.accept(HybridAquaticItems.DIVING_HELMET.get())
                 entries.accept(HybridAquaticItems.DIVING_SUIT.get())

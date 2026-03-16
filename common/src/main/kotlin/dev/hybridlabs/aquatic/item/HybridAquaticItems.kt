@@ -5,7 +5,6 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.fluid.HybridAquaticFluids
 import dev.hybridlabs.aquatic.item.coral.*
 import dev.hybridlabs.aquatic.item.seashell.*
 import dev.hybridlabs.aquatic.platform.Services.*
@@ -194,8 +193,6 @@ object HybridAquaticItems {
     val SEA_MESSAGE_BOOK = register("sea_message_book") { SeaMessageBookItem(Item.Properties()) }
     val FISHING_NET = register("fishing_net") { FishingNetItem(Item.Properties().stacksTo(1)) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
-    val BRINE_BUCKET =
-        register("brine_bucket") { BucketItem(HybridAquaticFluids.BRINE.get(), Item.Properties().stacksTo(1)) }
 
     val BARBED_HOOK = register("barbed_hook") { HookItem(Item.Properties().durability(16)) }
     val GLOWING_HOOK = register("glowing_hook") { HookItem(Item.Properties().durability(16)) }
@@ -1725,6 +1722,8 @@ object HybridAquaticItems {
         registerSpawnEgg("viperfish_spawn_egg", HybridAquaticEntityTypes.VIPERFISH, 0x4b4257, 0xa7f1eb)
     val HATCHETFISH_SPAWN_EGG =
         registerSpawnEgg("hatchetfish_spawn_egg", HybridAquaticEntityTypes.HATCHETFISH, 0x4b4257, 0xa7f1eb)
+    val TRIPOD_FISH_SPAWN_EGG =
+        registerSpawnEgg("tripod_fish_spawn_egg", HybridAquaticEntityTypes.TRIPOD_FISH, 0x4b4257, 0xa7f1eb)
     val FANGTOOTH_SPAWN_EGG =
         registerSpawnEgg("fangtooth_spawn_egg", HybridAquaticEntityTypes.FANGTOOTH, 0x4b4257, 0xa7f1eb)
     val COELACANTH_SPAWN_EGG =

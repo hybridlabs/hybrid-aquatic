@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.block
 
 import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.fluid.HybridAquaticFluids
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.level.block.*
@@ -52,20 +51,6 @@ object HybridAquaticBlocks {
             .pushReaction(PushReaction.DESTROY)
             .sound(SoundType.SLIME_BLOCK)
             .noParticlesOnBreak()
-        )
-    }
-
-    val BRINE = register("brine") {
-        LiquidBlock(
-            HybridAquaticFluids.BRINE.get(), Properties.of()
-                .mapColor(MapColor.COLOR_YELLOW)
-                .replaceable()
-                .noCollission()
-                .strength(100.0f)
-                .pushReaction(PushReaction.DESTROY)
-                .noLootTable()
-                .liquid()
-                .sound(SoundType.EMPTY)
         )
     }
 

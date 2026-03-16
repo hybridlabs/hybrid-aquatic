@@ -182,6 +182,13 @@ object HybridAquaticEntityTypes {
         HatchetfishEntity::createMobAttributes
     )
 
+    val TRIPOD_FISH = registerFishUnderground(
+        "tripod_fish",
+        ::TripodFishEntity,
+        EntityDimensions.fixed(0.6f, 0.9f),
+        TripodFishEntity::createMobAttributes
+    )
+
     val SNAILFISH = registerFishUnderground(
         "snailfish",
         ::SnailfishEntity,

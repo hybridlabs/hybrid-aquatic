@@ -108,10 +108,12 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("alexsmobs", "mudskipper"))
             .addOptional(ResourceLocation("alexsmobs", "devils_hole_pupfish"))
             .addOptional(ResourceLocation("alexsmobs", "flying_fish"))
+            .addOptional(ResourceLocation("alexscaves", "lanternfish"))
 
         getOrCreateTagBuilder(HybridAquaticEntityTags.MEDIUM_CREATURES)
             .add(
                 HybridAquaticEntityTypes.RATFISH.get(),
+                HybridAquaticEntityTypes.TRIPOD_FISH.get(),
                 HybridAquaticEntityTypes.STINGRAY.get(),
                 HybridAquaticEntityTypes.TRIGGERFISH.get(),
                 HybridAquaticEntityTypes.NEEDLEFISH.get(),
@@ -133,6 +135,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("fintastic", "featherback"))
             .addOptional(ResourceLocation("fintastic", "freshwater_shark"))
             .addOptional(ResourceLocation("alexsmobs", "blobfish"))
+            .addOptional(ResourceLocation("alexscaves", "tripodfish"))
 
         getOrCreateTagBuilder(HybridAquaticEntityTags.LARGE_CREATURES)
             .add(
@@ -254,6 +257,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.FANGTOOTH.get(),
                 HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(),
                 HybridAquaticEntityTypes.HATCHETFISH.get(),
+                HybridAquaticEntityTypes.TRIPOD_FISH.get(),
                 HybridAquaticEntityTypes.JOHN_DORY.get(),
                 HybridAquaticEntityTypes.OARFISH.get(),
                 HybridAquaticEntityTypes.RATFISH.get(),

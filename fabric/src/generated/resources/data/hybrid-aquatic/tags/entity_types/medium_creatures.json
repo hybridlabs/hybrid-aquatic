@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "hybrid-aquatic:ratfish",
+    "hybrid-aquatic:tripod_fish",
     "hybrid-aquatic:stingray",
     "hybrid-aquatic:triggerfish",
     "hybrid-aquatic:needlefish",
@@ -44,6 +45,10 @@
     },
     {
       "id": "alexsmobs:blobfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:tripodfish",
       "required": false
     }
   ]

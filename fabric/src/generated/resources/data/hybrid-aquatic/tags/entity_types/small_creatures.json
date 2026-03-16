@@ -131,6 +131,10 @@
     {
       "id": "alexsmobs:flying_fish",
       "required": false
+    },
+    {
+      "id": "alexscaves:lanternfish",
+      "required": false
     }
   ]
 }

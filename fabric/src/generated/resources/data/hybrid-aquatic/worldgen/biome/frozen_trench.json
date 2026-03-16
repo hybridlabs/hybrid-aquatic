@@ -100,6 +100,10 @@
       "charge": 0.1,
       "energy_budget": 0.7
     },
+    "hybrid-aquatic:tripod_fish": {
+      "charge": 0.1,
+      "energy_budget": 0.6
+    },
     "hybrid-aquatic:umbrella_octopus": {
       "charge": 0.8,
       "energy_budget": 0.15
@@ -169,6 +173,12 @@
       },
       {
         "type": "hybrid-aquatic:hatchetfish",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid-aquatic:tripod_fish",
         "maxCount": 2,
         "minCount": 1,
         "weight": 5

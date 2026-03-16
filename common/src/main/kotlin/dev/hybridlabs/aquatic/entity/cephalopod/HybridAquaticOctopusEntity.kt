@@ -52,7 +52,7 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
 
-        moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, false)
+        moveControl = OctopusMoveControl(this, 85, 10, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
 
         return WaterBoundPathNavigation(this, level)

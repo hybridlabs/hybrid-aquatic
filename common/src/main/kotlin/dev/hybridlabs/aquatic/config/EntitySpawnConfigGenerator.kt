@@ -425,23 +425,15 @@ class EntitySpawnConfigGenerator {
 
         addFish(HybridAquaticEntityTypes.RATFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
                 HybridAquaticBiomeTags.DEEP_REEF,
-                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
-                HybridAquaticBiomeTags.WARM_TRENCH,
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+                HybridAquaticBiomeTags.ALL_TRENCHES),
             5, 1, 3
         )
 
         addFish(
             HybridAquaticEntityTypes.SNAILFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
-                HybridAquaticBiomeTags.WARM_TRENCH,
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+                HybridAquaticBiomeTags.ALL_TRENCHES),
             5, 1, 3
         )
 
@@ -459,44 +451,35 @@ class EntitySpawnConfigGenerator {
         addFish(
             HybridAquaticEntityTypes.ANGLERFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
-                HybridAquaticBiomeTags.WARM_TRENCH,
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+                HybridAquaticBiomeTags.ALL_TRENCHES),
             3, 1, 2
         )
 
         addFish(
             HybridAquaticEntityTypes.FANGTOOTH.get(),
             listOf(
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
-                HybridAquaticBiomeTags.WARM_TRENCH,
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+                HybridAquaticBiomeTags.ALL_TRENCHES),
             3, 1, 2
         )
 
         addFish(
             HybridAquaticEntityTypes.VIPERFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
-                HybridAquaticBiomeTags.WARM_TRENCH,
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+                HybridAquaticBiomeTags.ALL_TRENCHES),
             3, 1, 2
         )
 
         addFish(
             HybridAquaticEntityTypes.HATCHETFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.TEMPERATE_TRENCH,
-                HybridAquaticBiomeTags.LUKEWARM_TRENCH,
-                HybridAquaticBiomeTags.WARM_TRENCH,
-                HybridAquaticBiomeTags.COLD_TRENCH,
-                HybridAquaticBiomeTags.ARCTIC_TRENCH),
+                HybridAquaticBiomeTags.ALL_TRENCHES),
+            3, 1, 2
+        )
+
+        addFish(
+            HybridAquaticEntityTypes.TRIPOD_FISH.get(),
+            listOf(
+                HybridAquaticBiomeTags.ALL_TRENCHES),
             3, 1, 2
         )
 
