@@ -7,7 +7,9 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
@@ -54,6 +56,10 @@ class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
             this.yRot = 0.0f
             this.yHeadRot = 0.0f
         }
+    }
+
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
+        return dimensions.height * 1.1f
     }
 
     //#region Data
