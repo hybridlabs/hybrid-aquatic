@@ -190,20 +190,18 @@ open class ArgonautEntity(
     private fun floatArgonaut() {
         if (this.isInWater) {
             val motion = this.deltaMovement
-
-            val waterFriction = 0.95f
-
+            val waterFriction = 0.96f
             this.deltaMovement = Vec3(
                 motion.x * waterFriction,
                 motion.y * waterFriction,
                 motion.z * waterFriction
             )
-
             this.deltaRotation *= waterFriction
         } else {
             if (!this.isNoGravity) {
                 this.deltaMovement = this.deltaMovement.add(0.0, -0.04, 0.0)
             }
+            setPropellerState(left = false, right = false)
         }
     }
 
@@ -217,53 +215,53 @@ open class ArgonautEntity(
     }
 
     private fun controlArgonaut() {
-        if (this.isVehicle) {
-            var forwardMovement = 0.0f
-            var horizontalMovement = 0.0f
-            var verticalMovement = 0.0f
 
-            if (this.inputRight != this.inputLeft && !this.inputUp && !this.inputDown) {
-                forwardMovement += 0.005f
-            }
+        if (!this.isInWater || !this.isVehicle || this.onGround()) return
+        var forwardMovement = 0.0f
+        var horizontalMovement = 0.0f
+        var verticalMovement = 0.0f
 
-            if (this.inputUp) {
-                forwardMovement += 0.03f
-            }
-
-            if (this.inputDown) {
-                forwardMovement -= 0.015f
-            }
-
-            if (this.inputRight) {
-                horizontalMovement -= 0.02f
-            }
-
-            if (this.inputLeft) {
-                horizontalMovement += 0.02f
-            }
-
-            if (this.inputJumping) {
-                verticalMovement += 0.02f
-            }
-
-            if (this.inputSprint) {
-                verticalMovement -= 0.02f
-            }
-
-            val lookDirection = this.lookAngle
-            val rightDirection = getRightDirection()
-
-            this.deltaMovement = this.deltaMovement.add(
-                lookDirection.x * forwardMovement + rightDirection.x * horizontalMovement,
-                lookDirection.y * forwardMovement + verticalMovement,
-                lookDirection.z * forwardMovement + rightDirection.z * horizontalMovement
-            )
-
-            this.setPropellerState(
-                this.inputRight && !this.inputLeft || this.inputUp,
-                this.inputLeft && !this.inputRight || this.inputUp
-            )
+        if (this.inputRight != this.inputLeft && !this.inputUp && !this.inputDown) {
+            forwardMovement += 0.005f
         }
+
+        if (this.inputUp) {
+            forwardMovement += 0.02f
+        }
+
+        if (this.inputDown) {
+            forwardMovement -= 0.015f
+        }
+
+        if (this.inputRight) {
+            horizontalMovement -= 0.02f
+        }
+
+        if (this.inputLeft) {
+            horizontalMovement += 0.02f
+        }
+
+        if (this.inputJumping) {
+            verticalMovement += 0.015f
+        }
+
+        if (this.inputSprint) {
+            verticalMovement -= 0.015f
+        }
+
+        val lookDirection = this.lookAngle
+        val rightDirection = getRightDirection()
+
+        this.deltaMovement = this.deltaMovement.add(
+            lookDirection.x * forwardMovement + rightDirection.x * horizontalMovement,
+            lookDirection.y * forwardMovement + verticalMovement,
+            lookDirection.z * forwardMovement + rightDirection.z * horizontalMovement
+        )
+
+        this.setPropellerState(
+            this.inputRight && !this.inputLeft || this.inputUp,
+            this.inputLeft && !this.inputRight || this.inputUp
+        )
     }
 
     fun setInput(
@@ -643,7 +641,7 @@ open class ArgonautEntity(
             }
 
             fun fromDye(dye: DyeColor): ShellColor {
-                return when(dye) {
+                return when (dye) {
                     DyeColor.WHITE -> WHITE
                     DyeColor.ORANGE -> ORANGE
                     DyeColor.MAGENTA -> MAGENTA
@@ -703,7 +701,7 @@ open class ArgonautEntity(
             }
 
             fun fromDye(dye: DyeColor): SailColor {
-                return when(dye) {
+                return when (dye) {
                     DyeColor.WHITE -> WHITE
                     DyeColor.ORANGE -> ORANGE
                     DyeColor.MAGENTA -> MAGENTA
