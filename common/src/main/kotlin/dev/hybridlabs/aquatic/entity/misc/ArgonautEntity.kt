@@ -23,10 +23,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.vehicle.ContainerEntity
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ChestMenu
-import net.minecraft.world.item.DyeColor
-import net.minecraft.world.item.DyeItem
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.*
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
@@ -411,10 +408,16 @@ open class ArgonautEntity(
     override fun interact(player: Player, hand: InteractionHand): InteractionResult {
         val stack = player.getItemInHand(hand)
 
-        //#region Glowslime
+        //#region Glow
         if (stack.`is`(HybridAquaticItems.GLOWSLIME.get()) && !this.isGlowing()) {
             if (!player.abilities.instabuild) stack.shrink(1)
             this.setGlowing(true)
+            return InteractionResult.sidedSuccess(this.level().isClientSide)
+        }
+
+        if (stack.`is`(Items.SLIME_BALL) && this.isGlowing()) {
+            if (!player.abilities.instabuild) stack.shrink(1)
+            this.setGlowing(false)
             return InteractionResult.sidedSuccess(this.level().isClientSide)
         }
 
