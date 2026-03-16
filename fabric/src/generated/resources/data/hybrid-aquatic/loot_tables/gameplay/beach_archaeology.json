@@ -75,6 +75,56 @@
         },
         {
           "type": "minecraft:item",
+          "name": "hybrid-aquatic:hybrid_crate",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:oak_crate",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:dark_oak_crate",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:spruce_crate",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:birch_crate",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:acacia_crate",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:jungle_crate",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:mangrove_crate",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:cherry_crate",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:bamboo_crate",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:nautilus_shell",
           "weight": 4
         },
