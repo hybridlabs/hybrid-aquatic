@@ -1,13 +1,13 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.stats.Stats
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.InteractionResultHolder
-import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
@@ -41,7 +41,7 @@ class ArgonautItem(properties: Properties) : Item(properties) {
             pos.relative(face)
         }
 
-        val entity: Entity? = type.spawn(
+        val entity: ArgonautEntity? = type.spawn(
             level,
             stack,
             context.player,
@@ -52,11 +52,30 @@ class ArgonautItem(properties: Properties) : Item(properties) {
         )
 
         if (entity != null) {
+            applyArgonautData(entity, stack)
             stack.shrink(1)
             level.gameEvent(context.player, GameEvent.ENTITY_PLACE, spawnPos)
         }
 
         return InteractionResult.CONSUME
+    }
+
+    private fun applyArgonautData(entity: ArgonautEntity, stack: ItemStack) {
+        val tag = stack.tag ?: return
+
+        if (tag.contains("ShellColor")) {
+            val shellColorId = tag.getInt("ShellColor")
+            entity.setShellColor(ArgonautEntity.ShellColor.byId(shellColorId))
+        }
+
+        if (tag.contains("SailColor")) {
+            val sailColorId = tag.getInt("SailColor")
+            entity.setSailColor(ArgonautEntity.SailColor.byId(sailColorId))
+        }
+
+        if (tag.contains("Glowing")) {
+            entity.setGlowing(tag.getBoolean("Glowing"))
+        }
     }
 
     override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
@@ -77,7 +96,7 @@ class ArgonautItem(properties: Properties) : Item(properties) {
             return InteractionResultHolder.pass(stack)
         }
 
-        val entity: Entity? = type.spawn(
+        val entity: ArgonautEntity? = type.spawn(
             level,
             stack,
             player,
@@ -89,6 +108,18 @@ class ArgonautItem(properties: Properties) : Item(properties) {
 
         if (entity == null) {
             return InteractionResultHolder.pass(stack)
+        }
+
+        stack.tag?.let { tag ->
+            if (tag.contains("ShellColor")) {
+                entity.setShellColor(ArgonautEntity.ShellColor.byId(tag.getInt("ShellColor")))
+            }
+            if (tag.contains("SailColor")) {
+                entity.setSailColor(ArgonautEntity.SailColor.byId(tag.getInt("SailColor")))
+            }
+            if (tag.contains("Glowing")) {
+                entity.setGlowing(tag.getBoolean("Glowing"))
+            }
         }
 
         if (!player.abilities.instabuild) {

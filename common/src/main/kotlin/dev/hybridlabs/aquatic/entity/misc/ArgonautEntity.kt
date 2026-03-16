@@ -23,7 +23,10 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.vehicle.ContainerEntity
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ChestMenu
-import net.minecraft.world.item.*
+import net.minecraft.world.item.DyeColor
+import net.minecraft.world.item.DyeItem
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.gameevent.GameEvent
@@ -326,8 +329,15 @@ open class ArgonautEntity(
         }
     }
 
-    open fun getDropItem(): Item {
-        return HybridAquaticItems.ARGONAUT.get()
+    fun getArgonautItem(argonaut: ArgonautEntity): ItemStack {
+        val stack = ItemStack(HybridAquaticItems.ARGONAUT.get())
+        val tag = stack.orCreateTag
+
+        tag.putInt("ShellColor", argonaut.getShellColor().id)
+        tag.putInt("SailColor", argonaut.getSailColor().id)
+        tag.putBoolean("Glowing", argonaut.isGlowing())
+
+        return stack
     }
 
     fun setDamage(damageTaken: Float) {
@@ -408,13 +418,14 @@ open class ArgonautEntity(
     override fun interact(player: Player, hand: InteractionHand): InteractionResult {
         val stack = player.getItemInHand(hand)
 
-        //#region Glow
+        //#region Add Glow
         if (stack.`is`(HybridAquaticItems.GLOWSLIME.get()) && !this.isGlowing()) {
             if (!player.abilities.instabuild) stack.shrink(1)
             this.setGlowing(true)
             return InteractionResult.sidedSuccess(this.level().isClientSide)
         }
 
+        //#region Remove Glow
         if (stack.`is`(Items.SLIME_BALL) && this.isGlowing()) {
             if (!player.abilities.instabuild) stack.shrink(1)
             this.setGlowing(false)
@@ -484,7 +495,8 @@ open class ArgonautEntity(
 
     //#region Container
     protected open fun destroy(damageSource: DamageSource) {
-        this.spawnAtLocation(this.getDropItem())
+        val stack = getArgonautItem(this)
+        this.spawnAtLocation(stack)
         this.chestVehicleDestroyed(damageSource, this.level(), this)
     }
 
