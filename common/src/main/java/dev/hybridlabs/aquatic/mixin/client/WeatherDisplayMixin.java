@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import dev.hybridlabs.aquatic.CommonClass;
+import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -13,7 +14,6 @@ import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -26,7 +26,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import static net.minecraft.client.renderer.LevelRenderer.getLightColor;
 
 @Mixin(LevelRenderer.class)
@@ -45,7 +44,7 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 		if (minecraft.player != null && minecraft.level != null) {
 			float f = this.minecraft.level.getRainLevel(tickDelta);
 			Level world = this.minecraft.level;
-			if (f > 0.0f && cameraY < world.getSeaLevel() - 16.0 && world.getBiome(minecraft.player.blockPosition()).is(BiomeTags.IS_DEEP_OCEAN)) {
+			if (f > 0.0f && cameraY < world.getSeaLevel() - 56 && world.getBiome(minecraft.player.blockPosition()).is(HybridAquaticBiomeTags.INSTANCE.getALL_TRENCHES())) {
 				manager.turnOnLightLayer();
 				int xFloored = Mth.floor(cameraX);
 				int yFloored = Mth.floor(cameraY);
@@ -97,7 +96,7 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 										if (m >= 0) {
 											tessellator.end();
 										}
-										
+
 										m = 0;
 										RenderSystem.setShaderTexture(0, MARINE_SNOW);
 										bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
