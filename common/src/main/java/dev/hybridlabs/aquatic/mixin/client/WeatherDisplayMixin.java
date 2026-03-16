@@ -98,9 +98,9 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 										bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
 									}
 
-                                    float f5 = -((float)(this.ticks & 767) + tickDelta) / 768.0F;
-                                    float f6 = (float)(random.nextDouble() + (double)f1 * 0.01 * (double)((float)random.nextGaussian()));
-                                    float f7 = (float)(random.nextDouble() + (double)(f1 * (float)random.nextGaussian()) * 0.001);
+                                    float f5 = -((float)(this.ticks + tickDelta)) / 768.0F;
+                                    float f6 = (float)(random.nextDouble() + (double)f1 * 0.001 * (double)((float)random.nextGaussian()));
+                                    float f7 = (float)(random.nextDouble() + (double)(f1 * (float)random.nextGaussian()) * 0.0001);
 
                                     double dx = (double)o + 0.5 - cameraX;
                                     double dz = (double)n + 0.5 - cameraZ;
