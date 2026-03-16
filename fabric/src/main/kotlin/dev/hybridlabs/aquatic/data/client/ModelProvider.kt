@@ -310,7 +310,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             )
             //#endregion
 
-            createCrossBlock(
+            createCrossBlockWithDefaultItem(
                 HybridAquaticBlocks.HARP_SPONGE.get(),
                 BlockModelGenerators.TintState.NOT_TINTED,
             )

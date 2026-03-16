@@ -1,3 +1,6 @@
 {
-  "parent": "hybrid-aquatic:block/harp_sponge"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hybrid-aquatic:block/harp_sponge"
+  }
 }
