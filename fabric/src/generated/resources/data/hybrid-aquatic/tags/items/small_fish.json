@@ -30,6 +30,9 @@
     "hybrid-aquatic:neon_tetra",
     "hybrid-aquatic:mackerel",
     "hybrid-aquatic:herring",
-    "hybrid-aquatic:john_dory"
+    "hybrid-aquatic:john_dory",
+    "minecraft:cod",
+    "minecraft:salmon",
+    "minecraft:tropical_fish"
   ]
 }
