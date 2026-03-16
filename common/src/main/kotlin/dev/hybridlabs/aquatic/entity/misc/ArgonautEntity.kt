@@ -600,9 +600,6 @@ open class ArgonautEntity(
         val SAIL_COLOR: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.INT)
 
-        val WOOD_TYPE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.INT)
-
     }
 
     enum class ShellColor(val id: Int, val key: String) : StringRepresentable {
