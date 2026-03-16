@@ -20,8 +20,6 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 
 class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
     HybridAquaticFishEntity(type, world) {
@@ -93,20 +91,35 @@ class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
 
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "Swim/Idle", 10
-        ) { state: AnimationState<*> ->
-            state.setAndContinue(
-                if (state.isMoving) DefaultAnimations.SWIM else DefaultAnimations.IDLE
-            )
-        })
-        controllers.add(AnimationController(this, "Sit", 10) { state ->
-            if (isSitting() || this.onGround()) {
-                state.setAndContinue(DefaultAnimations.SIT)
-                PlayState.CONTINUE
-            } else {
-                PlayState.STOP
+        controllers.add(
+            AnimationController(this, "Tripod Fish Controller", 4) { state ->
+                when {
+                    isInWater && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.SWIM)
+                    }
+
+                    isInWater && isSprinting && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.RUN)
+                    }
+
+                    isInWater && !state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+
+                    isInWater && isSitting() -> {
+                        state.setAndContinue(DefaultAnimations.SIT)
+                    }
+
+                    this.moistness < 590 -> {
+                        state.setAndContinue(FLOP_ANIMATION)
+                    }
+
+                    else -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+                }
             }
-        })
+        )
     }
 
     override fun aiStep() {
