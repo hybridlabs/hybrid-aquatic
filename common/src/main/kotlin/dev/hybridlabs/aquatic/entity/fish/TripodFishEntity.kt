@@ -1,14 +1,18 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -18,6 +22,7 @@ import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
@@ -172,6 +177,17 @@ class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
 
         val SITTING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(TripodFishEntity::class.java, EntityDataSerializers.BOOLEAN)
+
+        fun canSpawn(
+            type: EntityType<out HybridAquaticWaterAnimal>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
+        ): Boolean {
+            return pos.y in (world.seaLevel - 256)..(world.seaLevel - 72) &&
+                    world.isWaterAt(pos)
+        }
     }
 
     internal class TripodfishSwimmingGoal(

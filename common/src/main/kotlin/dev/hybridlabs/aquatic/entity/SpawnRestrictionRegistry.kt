@@ -86,6 +86,7 @@ object SpawnRestrictionRegistry {
         registerFish(HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(), FlashlightFishEntity::canSpawn)
         registerFish(HybridAquaticEntityTypes.DRAGONFISH.get(), DragonfishEntity::canSpawn)
         registerFish(HybridAquaticEntityTypes.OARFISH.get(), OarfishEntity::canSpawn)
+        registerFish(HybridAquaticEntityTypes.TRIPOD_FISH.get(), TripodFishEntity::canSpawn)
 
         // deep fish
         setOf(
