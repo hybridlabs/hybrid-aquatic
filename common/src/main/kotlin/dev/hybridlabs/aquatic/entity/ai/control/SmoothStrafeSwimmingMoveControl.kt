@@ -42,7 +42,7 @@ open class SmoothStrafeSwimmingMoveControl(
             val relX = forward * cos - right * sin
             val relZ = right * cos + forward * sin
 
-            if (!isWalkable(relX, relZ)) {
+            if (!isPassable(relX, relZ)) {
                 strafeForwards = 1.0f
                 strafeRight = 0.0f
             }
@@ -116,7 +116,7 @@ open class SmoothStrafeSwimmingMoveControl(
         }
     }
 
-    private fun isWalkable(relativeX: Float, relativeZ: Float): Boolean {
+    private fun isPassable(relativeX: Float, relativeZ: Float): Boolean {
         val pathnavigation = this.mob.getNavigation()
         if (pathnavigation != null) {
             val nodeevaluator = pathnavigation.getNodeEvaluator()
@@ -125,7 +125,7 @@ open class SmoothStrafeSwimmingMoveControl(
                     Mth.floor(this.mob.x + relativeX.toDouble()),
                     this.mob.blockY,
                     Mth.floor(this.mob.z + relativeZ.toDouble())
-                ) != BlockPathTypes.WALKABLE
+                ) == BlockPathTypes.BLOCKED
             ) {
                 return false
             }

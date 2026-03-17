@@ -270,7 +270,7 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         override fun tick() {
             val target = shellBeast.target ?: return
 
-            val distance = shellBeast.distanceToSqr(target.x, target.y, target.z)
+            val distance = shellBeast.distanceToSqr(target.position());
             val canSee = shellBeast.sensing.hasLineOfSight(target)
             val seenBefore = seeTime > 0
 
@@ -296,17 +296,12 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
                 if (shellBeast.random.nextFloat() < 0.3f) {
                     strafingBackwards = !strafingBackwards
                 }
-
                 strafingTime = 0
             }
 
-            if (strafingTime > -1) {
-                if (distance > 4096.0 * 0.75f) {
-                    strafingBackwards = false
-                } else if (distance < 4096.0 * 0.25f) {
-                    strafingBackwards = true
-                }
 
+            if (strafingTime > -1) {
+                strafingBackwards = distance < 4096.0 * 0.25f;
                 shellBeast.moveControl.strafe(
                     if (strafingBackwards) -0.5f else 0.5f,
                     if (strafingClockwise) 0.5f else -0.5f
@@ -314,7 +309,7 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
 
                 shellBeast.lookAt(target, 30f, 30f)
             } else {
-                shellBeast.lookControl.setLookAt(target, 30f, 30f)
+            shellBeast.lookControl.setLookAt(target, 30f, 30f)
             }
 
             if (distance < 4096.0 && canSee) {
