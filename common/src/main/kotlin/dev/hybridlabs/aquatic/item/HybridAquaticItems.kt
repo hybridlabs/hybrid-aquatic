@@ -194,7 +194,7 @@ object HybridAquaticItems {
     val SEA_MESSAGE_BOOK = register("sea_message_book") { SeaMessageBookItem(Item.Properties()) }
     val FISHING_NET = register("fishing_net") { FishingNetItem(Item.Properties().stacksTo(1)) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
-    val OMINOUS_CONCH = register("ominous_conch") { InstrumentItem(Item.Properties().stacksTo(1), InstrumentTags.GOAT_HORNS) }
+    val OMINOUS_CONCH = register("ominous_conch") { OminousConchItem(Item.Properties().stacksTo(1), InstrumentTags.GOAT_HORNS) }
     val ARGONAUT = register("argonaut") { ArgonautItem(Item.Properties().stacksTo(1)) }
 
     val BARBED_HOOK = register("barbed_hook") { HookItem(Item.Properties().durability(16)) }

@@ -512,6 +512,9 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         builder.add("tooltip.hybrid-aquatic.argonaut.sail", "%s Sails")
         builder.add("tooltip.hybrid-aquatic.argonaut.glowing", "Glowing")
 
+        builder.add("tooltip.hybrid-aquatic.ominous_conch.unused", "The sounds of a raging ocean echo from within")
+        builder.add("tooltip.hybrid-aquatic.ominous_conch.used", "The conch is silent")
+
         mapOf(
             "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
             HybridAquaticItems.BARBED_HOOK.get().descriptionId to "Increases fishing speed during the day",
@@ -562,6 +565,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         // Item Functions
         mapOf(
             HybridAquaticItems.FISHING_NET.get().descriptionId to "Lets you catch and move aquatic creatures",
+            HybridAquaticItems.OMINOUS_CONCH.get().descriptionId to "Summons the Shell Beast when used in a deep ocean..",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".function"), translation)
         }

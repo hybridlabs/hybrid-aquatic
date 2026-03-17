@@ -18,7 +18,6 @@ import net.minecraft.data.models.model.ModelTemplates
 import net.minecraft.data.models.model.TextureMapping
 import net.minecraft.data.models.model.TexturedModel
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.item.Items
 import net.minecraft.world.item.SpawnEggItem
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -459,7 +458,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.MAGNETIC_HOOK.get(),
             HybridAquaticItems.CREEPERMAGNET_HOOK.get(),
             HybridAquaticItems.OMINOUS_HOOK.get(),
-            HybridAquaticItems.OMINOUS_CONCH.get(),
             HybridAquaticItems.DIVING_HELMET.get(),
             HybridAquaticItems.DIVING_SUIT.get(),
             HybridAquaticItems.DIVING_LEGGINGS.get(),
@@ -479,6 +477,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.TURTLE_CHESTPLATE.get(),
             HybridAquaticItems.EEL_SCARF.get(),
             HybridAquaticItems.MOON_JELLYFISH_HAT.get(),
+            HybridAquaticItems.SEA_MESSAGE_BOOK.get(),
         ).forEach { item ->
             generator.generateFlatItem(item, ModelTemplates.FLAT_ITEM)
         }
@@ -500,12 +499,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             generator.generateFlatItem(item.get(), ModelTemplates.FLAT_HANDHELD_ITEM)
         }
         //#endregion
-
-        generator.generateFlatItem(
-            HybridAquaticItems.SEA_MESSAGE_BOOK.get(),
-            Items.WRITTEN_BOOK,
-            ModelTemplates.FLAT_ITEM
-        )
     }
 
     companion object {

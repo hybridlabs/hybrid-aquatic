@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.client.item.tooltip.ArgonautTooltip
 import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
+import dev.hybridlabs.aquatic.client.item.tooltip.OminousConchTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BASKING_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BULL_SHARK_PLUSHIE
@@ -33,9 +34,11 @@ import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
+import net.fabricmc.fabric.api.`object`.builder.v1.client.model.FabricModelPredicateProviderRegistry
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
@@ -56,8 +59,18 @@ object HybridAquaticClient : ClientModInitializer {
         registerTooltips()
         registerGeoRenderers()
         registerModelLayers()
+        registerItemProperties()
 
         ClientParticleRegistry()
+    }
+
+    private fun registerItemProperties() {
+        FabricModelPredicateProviderRegistry.register(
+            HybridAquaticItems.OMINOUS_CONCH.get(),
+            ResourceLocation("tooting")
+        ) { stack, _, entity, _ ->
+            if (entity != null && entity.isUsingItem && entity.useItem == stack) 1.0f else 0.0f
+        }
     }
 
     private fun registerGeoRenderers() {
@@ -96,6 +109,7 @@ object HybridAquaticClient : ClientModInitializer {
     private fun registerTooltips() {
         ItemTooltipCallback.EVENT.register(FishingNetTooltip())
         ItemTooltipCallback.EVENT.register(ArgonautTooltip())
+        ItemTooltipCallback.EVENT.register(OminousConchTooltip())
     }
 
     private fun registerRenderShapes() {
