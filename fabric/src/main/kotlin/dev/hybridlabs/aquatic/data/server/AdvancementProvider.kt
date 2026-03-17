@@ -520,6 +520,49 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
         consumer?.accept(killKarkinosAdvancement)
         //#endregion
 
+        //#region Argonaut Advancement Tree
+        val killShellBeastAdvancement = Advancement.Builder.advancement()
+            .parent(seashellAdvancement)
+            .display(
+                HybridAquaticItems.GIANT_NAUTILUS_SHELL.get(),
+                Component.translatable("advancements.hybrid-aquatic.shell_beast.title"),
+                Component.translatable("advancements.hybrid-aquatic.shell_beast.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.CHALLENGE,
+                true,
+                true,
+                true
+            )
+            .addCriterion(
+                "kill_shell_beast",
+                KilledTrigger.TriggerInstance.playerKilledEntity(
+                    EntityPredicate.Builder.entity().of(HybridAquaticEntityTypes.SHELL_BEAST.get()).build()
+                )
+            )
+            .build(ResourceLocation("hybrid-aquatic", "shell_beast"))
+        consumer?.accept(killShellBeastAdvancement)
+
+        val argonautAdvancement = Advancement.Builder.advancement()
+            .parent(killShellBeastAdvancement)
+            .display(
+                HybridAquaticItems.ARGONAUT.get(),
+                Component.translatable("advancements.hybrid-aquatic.argonaut.title"),
+                Component.translatable("advancements.hybrid-aquatic.argonaut.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.GOAL,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "obtain_argonaut",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.ARGONAUT.get())
+            )
+            .build(ResourceLocation("hybrid-aquatic", "argonaut"))
+        consumer?.accept(argonautAdvancement)
+
+        //#endregion
+
         //#region Trident Advancement Tree
         val obtainSharkToothAdvancement = Advancement.Builder.advancement()
             .parent(rootAdvancement)

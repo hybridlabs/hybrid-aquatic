@@ -1,4 +1,6 @@
 {
+  "advancements.hybrid-aquatic.argonaut.description": "Build the Argonaut",
+  "advancements.hybrid-aquatic.argonaut.title": "This Boat Has Fins",
   "advancements.hybrid-aquatic.bigger_boat.description": "Block a shark attack with a shield to get a shark tooth",
   "advancements.hybrid-aquatic.bigger_boat.title": "We're Gonna Need A Bigger Boat",
   "advancements.hybrid-aquatic.black_pearl.description": "What the Black Pearl really is... is freedom",
@@ -42,7 +44,9 @@
   "advancements.hybrid-aquatic.reinforced_diving_suit.description": "Reinforce your diving gear",
   "advancements.hybrid-aquatic.reinforced_diving_suit.title": "Diving Deeper",
   "advancements.hybrid-aquatic.seashell_tools.description": "Craft a tool out of nautilus shells",
-  "advancements.hybrid-aquatic.seashell_tools.title": "Shell Shocked",
+  "advancements.hybrid-aquatic.seashell_tools.title": "Shell Yeah",
+  "advancements.hybrid-aquatic.shell_beast.description": "Kill the Shell Beast",
+  "advancements.hybrid-aquatic.shell_beast.title": "Shell-Shocked",
   "advancements.hybrid-aquatic.sulfur.description": "Find sulfur in a sulfuric cave",
   "advancements.hybrid-aquatic.sulfur.title": "Not Glowstone Dust",
   "advancements.hybrid-aquatic.trident.description": "Obtain a trident",
@@ -539,7 +543,7 @@
   "item.hybrid-aquatic.herring": "Herring",
   "item.hybrid-aquatic.herring_spawn_egg": "Herring Spawn Egg",
   "item.hybrid-aquatic.hook.description": "Needs to be put in the offhand",
-  "item.hybrid-aquatic.hook.description_tide": "MYSTIC FIX THIS",
+  "item.hybrid-aquatic.hook.description_tide": "Apply at an angling table",
   "item.hybrid-aquatic.horseshoe_crab_spawn_egg": "Horseshoe Crab Spawn Egg",
   "item.hybrid-aquatic.hound_shark_spawn_egg": "Hound Shark Spawn Egg",
   "item.hybrid-aquatic.john_dory": "John Dory",
@@ -768,5 +772,8 @@
   "journal.description.hybrid-aquatic.toadfish": "The Toadfish, a small, bottom-dwelling fish with a flattened body and rough skin, commonly found in coastal waters and known for its toxicity.",
   "journal.description.hybrid-aquatic.triggerfish": "The Triggerfish, a brightly colored, reef-dwelling fish known for its strong jaws, sharp teeth, and the ability to lock its dorsal fin in an upright position for defense.",
   "journal.description.hybrid-aquatic.tuna": "A tireless swimmer built for speed and open water pursuit.",
-  "modmenu.nameTranslation.hybrid-aquatic": "Hybrid Aquatic"
+  "modmenu.nameTranslation.hybrid-aquatic": "Hybrid Aquatic",
+  "tooltip.hybrid-aquatic.argonaut.glowing.true": "Glowing",
+  "tooltip.hybrid-aquatic.argonaut.sail": "%s Sails",
+  "tooltip.hybrid-aquatic.argonaut.shell": "%s Shell"
 }

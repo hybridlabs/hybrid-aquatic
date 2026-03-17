@@ -76,8 +76,14 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.nautilus_shell.title" to "Someone Used To Live Here",
             "advancements.hybrid-aquatic.nautilus_shell.description" to "Obtain a nautilus shell",
 
-            "advancements.hybrid-aquatic.seashell_tools.title" to "Shell Shocked",
+            "advancements.hybrid-aquatic.seashell_tools.title" to "Shell Yeah",
             "advancements.hybrid-aquatic.seashell_tools.description" to "Craft a tool out of nautilus shells",
+
+            "advancements.hybrid-aquatic.shell_beast.title" to "Shell-Shocked",
+            "advancements.hybrid-aquatic.shell_beast.description" to "Kill the Shell Beast",
+
+            "advancements.hybrid-aquatic.argonaut.title" to "This Boat Has Fins",
+            "advancements.hybrid-aquatic.argonaut.description" to "Build the Argonaut",
 
             "advancements.hybrid-aquatic.conduit.title" to "Better Than Gills",
             "advancements.hybrid-aquatic.conduit.description" to "Craft a conduit",
@@ -496,7 +502,12 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         // Item Descriptions
-        builder.add("item.hybrid-aquatic.hook.description_tide", "MYSTIC FIX THIS") // Tide specific description
+        builder.add("item.hybrid-aquatic.hook.description_tide", "Apply at an angling table") // Tide specific description
+
+        builder.add("tooltip.hybrid-aquatic.argonaut.shell", "%s Shell")
+        builder.add("tooltip.hybrid-aquatic.argonaut.sail", "%s Sails")
+        builder.add("tooltip.hybrid-aquatic.argonaut.glowing.true", "Glowing")
+
         mapOf(
             "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
             HybridAquaticItems.BARBED_HOOK.get().descriptionId to "Increases fishing speed during the day",
