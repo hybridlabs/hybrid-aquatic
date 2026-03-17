@@ -76,8 +76,11 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.nautilus_shell.title" to "Someone Used To Live Here",
             "advancements.hybrid-aquatic.nautilus_shell.description" to "Obtain a nautilus shell",
 
-            "advancements.hybrid-aquatic.seashell_tools.title" to "Shell Yeah",
+            "advancements.hybrid-aquatic.seashell_tools.title" to "Shell Yeah!",
             "advancements.hybrid-aquatic.seashell_tools.description" to "Craft a tool out of nautilus shells",
+
+            "advancements.hybrid-aquatic.ominous_conch.title" to "If You Listen Closely..",
+            "advancements.hybrid-aquatic.ominous_conch.description" to "Trade with a hermit crab for an Ominous Shell",
 
             "advancements.hybrid-aquatic.shell_beast.title" to "Shell-Shocked",
             "advancements.hybrid-aquatic.shell_beast.description" to "Kill the Shell Beast",
@@ -453,6 +456,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.MAGNETIC_HOOK.get() to "Magnetic Hook",
             HybridAquaticItems.CREEPERMAGNET_HOOK.get() to "CreeperMagnet Hook",
             HybridAquaticItems.OMINOUS_HOOK.get() to "Ominous Hook",
+            HybridAquaticItems.OMINOUS_CONCH.get() to "Ominous Conch",
             HybridAquaticItems.FISHING_NET.get() to "Fishing Net",
             HybridAquaticItems.KARKINOS_CLAW.get() to "Karkinos Claw",
             HybridAquaticItems.SEASHELL_SPEAR.get() to "Seashell Spear",

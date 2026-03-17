@@ -1,5 +1,5 @@
 {
-  "parent": "hybrid-aquatic:nautilus_shell",
+  "parent": "hybrid-aquatic:ominous_conch",
   "criteria": {
     "kill_shell_beast": {
       "conditions": {

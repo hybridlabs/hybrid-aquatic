@@ -459,6 +459,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.MAGNETIC_HOOK.get(),
             HybridAquaticItems.CREEPERMAGNET_HOOK.get(),
             HybridAquaticItems.OMINOUS_HOOK.get(),
+            HybridAquaticItems.OMINOUS_CONCH.get(),
             HybridAquaticItems.DIVING_HELMET.get(),
             HybridAquaticItems.DIVING_SUIT.get(),
             HybridAquaticItems.DIVING_LEGGINGS.get(),

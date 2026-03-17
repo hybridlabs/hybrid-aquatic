@@ -521,8 +521,27 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
         //#endregion
 
         //#region Argonaut Advancement Tree
-        val killShellBeastAdvancement = Advancement.Builder.advancement()
+        val ominousConchAdvancement = Advancement.Builder.advancement()
             .parent(seashellAdvancement)
+            .display(
+                HybridAquaticItems.OMINOUS_CONCH.get(),
+                Component.translatable("advancements.hybrid-aquatic.ominous_conch.title"),
+                Component.translatable("advancements.hybrid-aquatic.ominous_conch.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.GOAL,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "obtain_ominous_conch",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.OMINOUS_CONCH.get())
+            )
+            .build(ResourceLocation("hybrid-aquatic", "ominous_conch"))
+        consumer?.accept(ominousConchAdvancement)
+
+        val killShellBeastAdvancement = Advancement.Builder.advancement()
+            .parent(ominousConchAdvancement)
             .display(
                 HybridAquaticItems.GIANT_NAUTILUS_SHELL.get(),
                 Component.translatable("advancements.hybrid-aquatic.shell_beast.title"),

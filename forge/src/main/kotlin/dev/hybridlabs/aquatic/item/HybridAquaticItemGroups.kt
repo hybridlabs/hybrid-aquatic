@@ -318,6 +318,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.MAGNETIC_HOOK.get())
                 entries.accept(HybridAquaticItems.CREEPERMAGNET_HOOK.get())
                 entries.accept(HybridAquaticItems.OMINOUS_HOOK.get())
+                entries.accept(HybridAquaticItems.OMINOUS_CONCH.get())
 
                 // tools
                 entries.accept(HybridAquaticItems.SEASHELL_SPEAR.get())
