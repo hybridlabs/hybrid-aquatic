@@ -79,6 +79,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.FLYING_FISH.get(),
                 HybridAquaticEntityTypes.SQUIRRELFISH.get(),
                 HybridAquaticEntityTypes.STONEFISH.get(),
+                HybridAquaticEntityTypes.PUPFISH.get(),
                 EntityType.SALMON,
                 EntityType.COD,
                 EntityType.TROPICAL_FISH
