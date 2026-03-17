@@ -193,6 +193,7 @@ object HybridAquaticItems {
     val SEA_MESSAGE_BOOK = register("sea_message_book") { SeaMessageBookItem(Item.Properties()) }
     val FISHING_NET = register("fishing_net") { FishingNetItem(Item.Properties().stacksTo(1)) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
+    val ARGONAUT = register("argonaut") { ArgonautItem(Item.Properties().stacksTo(1)) }
 
     val BARBED_HOOK = register("barbed_hook") { HookItem(Item.Properties().durability(16)) }
     val GLOWING_HOOK = register("glowing_hook") { HookItem(Item.Properties().durability(16)) }
@@ -569,7 +570,6 @@ object HybridAquaticItems {
     val PEARL = register("pearl") { Item(Item.Properties()) }
     val BLACK_PEARL = register("black_pearl") { Item(Item.Properties()) }
     val GIANT_NAUTILUS_SHELL = register("giant_nautilus_shell") { Item(Item.Properties()) }
-    val ARGONAUT = register("argonaut") { ArgonautItem(Item.Properties()) }
     val CUTTLEBONE = register("cuttlebone") { Item(Item.Properties()) }
 
     //#region Claws
