@@ -8,23 +8,26 @@
     "C": {
       "item": "minecraft:chest"
     },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "G": {
+      "item": "hybrid-aquatic:glowslime"
+    },
     "I": {
       "item": "minecraft:iron_ingot"
     },
-    "L": {
-      "item": "hybrid-aquatic:manglerfish_lure"
-    },
-    "P": {
-      "tag": "minecraft:planks"
-    },
     "S": {
       "item": "hybrid-aquatic:giant_nautilus_shell"
+    },
+    "W": {
+      "tag": "minecraft:wool"
     }
   },
   "pattern": [
-    "IBP",
-    "LSC",
-    "IBP"
+    "IBF",
+    "GSC",
+    "IBW"
   ],
   "result": {
     "item": "hybrid-aquatic:argonaut"

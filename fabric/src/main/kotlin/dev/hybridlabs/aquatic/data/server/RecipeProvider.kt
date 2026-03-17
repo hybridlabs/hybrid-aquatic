@@ -25,15 +25,16 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun buildRecipes(exporter: Consumer<FinishedRecipe>) {
         // misc recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, HybridAquaticItems.ARGONAUT.get())
-            .pattern("IBP")
-            .pattern("LSC")
-            .pattern("IBP")
+            .pattern("IBF")
+            .pattern("GSC")
+            .pattern("IBW")
             .define('I', Items.IRON_INGOT)
             .define('B', Items.BARREL)
-            .define('P', ItemTags.PLANKS)
-            .define('L', HybridAquaticItems.MANGLERFISH_LURE.get())
+            .define('G', HybridAquaticItems.GLOWSLIME.get())
             .define('S', HybridAquaticItems.GIANT_NAUTILUS_SHELL.get())
             .define('C', Items.CHEST)
+            .define('F', Items.FURNACE)
+            .define('W', ItemTags.WOOL)
             .unlockedBy(
                 "has_giant_nautilus_shell",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GIANT_NAUTILUS_SHELL.get())
