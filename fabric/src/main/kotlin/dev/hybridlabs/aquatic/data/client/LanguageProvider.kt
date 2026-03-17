@@ -506,7 +506,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         builder.add("tooltip.hybrid-aquatic.argonaut.shell", "%s Shell")
         builder.add("tooltip.hybrid-aquatic.argonaut.sail", "%s Sails")
-        builder.add("tooltip.hybrid-aquatic.argonaut.glowing.true", "Glowing")
+        builder.add("tooltip.hybrid-aquatic.argonaut.glowing", "Glowing")
 
         mapOf(
             "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",

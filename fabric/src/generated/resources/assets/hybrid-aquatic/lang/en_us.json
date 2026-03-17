@@ -773,7 +773,7 @@
   "journal.description.hybrid-aquatic.triggerfish": "The Triggerfish, a brightly colored, reef-dwelling fish known for its strong jaws, sharp teeth, and the ability to lock its dorsal fin in an upright position for defense.",
   "journal.description.hybrid-aquatic.tuna": "A tireless swimmer built for speed and open water pursuit.",
   "modmenu.nameTranslation.hybrid-aquatic": "Hybrid Aquatic",
-  "tooltip.hybrid-aquatic.argonaut.glowing.true": "Glowing",
+  "tooltip.hybrid-aquatic.argonaut.glowing": "Glowing",
   "tooltip.hybrid-aquatic.argonaut.sail": "%s Sails",
   "tooltip.hybrid-aquatic.argonaut.shell": "%s Shell"
 }
