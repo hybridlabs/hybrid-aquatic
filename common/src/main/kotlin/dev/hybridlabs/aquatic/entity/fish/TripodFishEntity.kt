@@ -35,6 +35,8 @@ class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
         return WaterBoundPathNavigation(this, level)
     }
 
+    override fun canSit(): Boolean = true
+
     override fun registerGoals() {
         goalSelector.addGoal(3, BottomDwellerSwimmingGoal(this, 1.0, 10))
         super.registerGoals()

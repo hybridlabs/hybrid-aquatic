@@ -28,6 +28,8 @@ class CorydoraEntity(type: EntityType<out CorydoraEntity>, world: Level) :
         return WaterBoundPathNavigation(this, level)
     }
 
+    override fun canSit(): Boolean = true
+
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }

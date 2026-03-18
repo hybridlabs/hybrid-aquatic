@@ -33,6 +33,8 @@ class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) :
         HybridAquaticEntityTags.ALL_SHARKS
     )
 
+    override fun canSit(): Boolean = true
+
     override fun createNavigation(level: Level): PathNavigation {
         super.createNavigation(level)
 

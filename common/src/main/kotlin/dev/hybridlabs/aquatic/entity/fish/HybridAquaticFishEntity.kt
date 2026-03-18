@@ -72,6 +72,10 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
     }
 
     //#region Data
+    protected open fun canSit(): Boolean {
+        return false
+    }
+
     fun isSitting(): Boolean {
         return entityData.get(SITTING)
     }
@@ -303,7 +307,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         }
 
         if (!level().isClientSide() && this.isEffectiveAi) {
-            if (this.isInWater) {
+            if (this.isInWater && canSit()) {
                 if (this.isSitting()) {
                     if (--this.sittingTimer <= 0) {
                         this.setSitting(false)
