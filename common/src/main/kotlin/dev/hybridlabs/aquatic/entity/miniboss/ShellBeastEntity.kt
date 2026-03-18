@@ -234,9 +234,10 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 350.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.75)
+                .add(Attributes.MOVEMENT_SPEED, 0.7)
                 .add(Attributes.ATTACK_DAMAGE, 10.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0)
+                .add(Attributes.FOLLOW_RANGE, 64.0)
                 .add(Attributes.FOLLOW_RANGE, 64.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
         }
