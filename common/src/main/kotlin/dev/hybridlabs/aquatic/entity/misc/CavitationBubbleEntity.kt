@@ -2,9 +2,10 @@ package dev.hybridlabs.aquatic.entity.misc
 
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.util.Mth
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.projectile.Fireball
+import net.minecraft.world.entity.projectile.AbstractHurtingProjectile
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.EntityHitResult
@@ -16,7 +17,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.util.GeckoLibUtil
 
-class CavitationBubbleEntity : Fireball,
+class CavitationBubbleEntity : AbstractHurtingProjectile,
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
     private var explosionPower = 1
@@ -36,8 +37,23 @@ class CavitationBubbleEntity : Fireball,
         this.explosionPower = explosionPower
     }
 
+    override fun isOnFire(): Boolean {
+        return false
+    }
+
     override fun tick() {
         super.tick()
+
+        val vec3d = this.deltaMovement
+        val e: Double = vec3d.x
+        val f: Double = vec3d.y
+        val g: Double = vec3d.z
+        val l: Double = vec3d.horizontalDistance()
+
+        this.yRot = (Mth.atan2(e, g) * (180f / Math.PI.toFloat())).toFloat()
+        this.xRot = (Mth.atan2(f, l) * (180f / Math.PI.toFloat())).toFloat()
+        this.xRot = lerpRotation(this.xRotO, this.xRot)
+        this.yRot = lerpRotation(this.yRotO, this.yRot)
 
         if (!this.level().isClientSide) {
             if (!isInWaterOrBubble) {
@@ -68,7 +84,7 @@ class CavitationBubbleEntity : Fireball,
         if (!this.level().isClientSide) {
             val entity = result.entity
             val entity1 = this.owner
-            entity.hurt(this.damageSources().fireball(this, entity1), 6.0f)
+            entity.hurt(this.damageSources().explosion(this, entity1), 6.0f)
             if (entity1 is LivingEntity) {
                 this.doEnchantDamageEffects(entity1, entity)
             }
