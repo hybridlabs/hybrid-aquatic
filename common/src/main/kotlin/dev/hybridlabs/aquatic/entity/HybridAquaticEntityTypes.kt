@@ -37,7 +37,7 @@ object HybridAquaticEntityTypes {
         "betta",
         ::BettaEntity,
         EntityDimensions.fixed(0.3f, 0.3f),
-        BettaEntity::createMobAttributes
+        BettaEntity::createMobAttributes,
     )
 
     val DISCUS = registerRiverFish(
@@ -972,10 +972,15 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 6,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
-            id, entityFactory, dimensions, attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH")
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
+            trackingRange,
         )
     }
 
@@ -984,10 +989,12 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 6,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id, entityFactory, dimensions, attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_RIVER_FISH")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_RIVER_FISH"),
+            trackingRange,
         )
     }
 
@@ -996,13 +1003,15 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 8,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
+            trackingRange,
         )
     }
     //#endregion
@@ -1013,13 +1022,15 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 6,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+            trackingRange,
         )
     }
 
@@ -1028,13 +1039,15 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 8,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+            trackingRange,
         )
     }
     //#endregion
@@ -1045,13 +1058,15 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 4,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN"),
+            trackingRange,
         )
     }
 
@@ -1060,13 +1075,15 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 8,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN"),
+            trackingRange,
         )
     }
     //#endregion
@@ -1077,13 +1094,15 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 4,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRITTER")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRITTER"),
+            trackingRange,
         )
     }
     //#endregion
@@ -1094,13 +1113,15 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 6,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY"),
+            trackingRange,
         )
     }
 
@@ -1109,13 +1130,15 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 8,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY"),
+            trackingRange,
         )
     }
     //#endregion
@@ -1126,13 +1149,16 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 10,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
+            trackingRange,
+            canSpawnFarFromPlayer = true
         )
     }
 
@@ -1141,13 +1167,16 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 10,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
+            trackingRange,
+            canSpawnFarFromPlayer = true
         )
     }
     //#endregion
@@ -1158,13 +1187,16 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 10,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL"),
+            trackingRange,
+            canSpawnFarFromPlayer = true
         )
     }
 
@@ -1173,13 +1205,16 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 10,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL"),
+            trackingRange,
+            canSpawnFarFromPlayer = true
         )
     }
 
@@ -1188,13 +1223,16 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 10,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL"),
+            trackingRange,
+            canSpawnFarFromPlayer = true
         )
     }
     //#endregion
@@ -1205,13 +1243,15 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 16,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MINIBOSS")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MINIBOSS"),
+            trackingRange,
         )
     }
 
@@ -1220,13 +1260,15 @@ object HybridAquaticEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
+        trackingRange: Int = 10,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MINION")
+            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MINION"),
+            trackingRange,
         )
     }
     //#endregion
@@ -1235,7 +1277,7 @@ object HybridAquaticEntityTypes {
     private fun <T : Entity> registerMisc(
         id: String,
         entityFactory: EntityType.EntityFactory<T>,
-        dimensions: EntityDimensions
+        dimensions: EntityDimensions,
     ): RegistryObject<EntityType<T>> {
         return CommonClass.ENTITY_TYPES.register(id) {
             EntityType.Builder
@@ -1256,8 +1298,20 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
         hybridAquaticSpawnGroup: MobCategory,
+        trackingRange: Int = 5,
+        updateInterval: Int = 3,
+        canSpawnFarFromPlayer: Boolean = false,
     ): RegistryObject<EntityType<T>> {
-        return registerLiving(id, entityFactory, dimensions, attributeContainer, hybridAquaticSpawnGroup)
+        return registerLiving(
+            id,
+            entityFactory,
+            dimensions,
+            attributeContainer,
+            hybridAquaticSpawnGroup,
+            trackingRange,
+            updateInterval,
+            canSpawnFarFromPlayer
+        )
     }
 
     /**
@@ -1269,8 +1323,20 @@ object HybridAquaticEntityTypes {
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
         spawnGroup: MobCategory,
+        clientTrackingRange: Int = 5,
+        updateInterval: Int = 3,
+        canSpawnFarFromPlayer: Boolean = false,
     ): RegistryObject<EntityType<T>> {
-        val entityType = EntityType.Builder.of(entityFactory, spawnGroup).sized(dimensions.width, dimensions.height)
+        val entityType = EntityType.Builder
+            .of(entityFactory, spawnGroup)
+            .sized(dimensions.width, dimensions.height)
+            .clientTrackingRange(clientTrackingRange)
+            .updateInterval(updateInterval)
+
+        if (canSpawnFarFromPlayer) {
+            entityType.canSpawnFarFromPlayer()
+        }
+
         return register(id, entityType, attributeContainer)
     }
 
