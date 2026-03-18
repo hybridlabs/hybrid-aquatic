@@ -85,6 +85,26 @@
 				}
 			}
 		},
+		"misc.sit": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"position": [0, -0.75, 0]
+				},
+				"left_fin": {
+					"rotation": [0, 0, -12.5]
+				},
+				"left_fin2": {
+					"rotation": [0, 0, -12.5]
+				},
+				"right_fin": {
+					"rotation": [0, 0, 12.5]
+				},
+				"right_fin2": {
+					"rotation": [0, 0, 12.5]
+				}
+			}
+		},
 		"misc.flop": {
 			"loop": true,
 			"animation_length": 0.5,

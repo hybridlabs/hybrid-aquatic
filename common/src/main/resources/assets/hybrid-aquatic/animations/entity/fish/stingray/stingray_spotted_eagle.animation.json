@@ -74,6 +74,15 @@
 				}
 			}
 		},
+		"misc.sit": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"body": {
+					"position": [0, -1, 0]
+				}
+			}
+		},
 		"misc.flop": {
 			"loop": true,
 			"bones": {

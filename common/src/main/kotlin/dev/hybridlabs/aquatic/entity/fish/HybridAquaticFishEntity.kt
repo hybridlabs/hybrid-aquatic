@@ -45,6 +45,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
     HybridAquaticWaterAnimal(type, world), GeoEntity {
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
+    private var sittingTimer: Int = 0
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     open fun getTargetConfig(): MobTargetConfiguration? = null
@@ -71,12 +72,25 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
     }
 
     //#region Data
+    fun isSitting(): Boolean {
+        return entityData.get(SITTING)
+    }
+
+    fun setSitting(sitting: Boolean) {
+        entityData.set(SITTING, sitting)
+    }
+
+    override fun isVisuallySwimming(): Boolean {
+        return this.isSwimming
+    }
+
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(MOISTNESS, getMaxMoistness())
         entityData.define(FISH_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(HUNGER, MAX_HUNGER)
+        entityData.define(SITTING, true)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -85,6 +99,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         compound.putInt(FISH_SIZE_KEY, size)
         compound.putInt(HUNGER_KEY, hunger)
         compound.putBoolean("FromFishingNet", fromFishingNet)
+        compound.putBoolean("Sitting", isSitting())
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
@@ -93,6 +108,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         size = compound.getInt(FISH_SIZE_KEY)
         hunger = compound.getInt(HUNGER_KEY)
         fromFishingNet = compound.getBoolean("FromFishingNet")
+        this.setSitting(compound.getBoolean("Sitting"))
     }
     //#endregion
 
@@ -152,7 +168,11 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
                         state.setAndContinue(DefaultAnimations.RUN)
                     }
 
-                    isInWater && !state.isMoving -> {
+                    isInWater && isSitting() -> {
+                        state.setAndContinue(DefaultAnimations.SIT)
+                    }
+
+                    isInWater && !state.isMoving && !isSitting() -> {
                         state.setAndContinue(DefaultAnimations.IDLE)
                     }
 
@@ -252,6 +272,12 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             }
         }
 
+        if (this.isSitting()) {
+            this.xRot = 0.0f
+            this.yRot = 0.0f
+            this.yHeadRot = 0.0f
+        }
+
         if (hunger > 0) hunger -= 1
     }
 
@@ -276,6 +302,23 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             this.playSound(this.flopSound, this.soundVolume, this.voicePitch)
         }
 
+        if (!level().isClientSide() && this.isEffectiveAi) {
+            if (this.isInWater) {
+                if (this.isSitting()) {
+                    if (--this.sittingTimer <= 0) {
+                        this.setSitting(false)
+                    } else {
+                        this.deltaMovement = deltaMovement.subtract(0.0, 0.01, 0.0)
+                    }
+                } else if (random.nextFloat() <= 0.001f) {
+                    this.sittingTimer = random.nextInt(200, 600)
+                    this.setSitting(true)
+                }
+            } else {
+                this.setSitting(false)
+            }
+        }
+
         prevRoll = currentRoll
         var targetRoll = ((this.yRot - this.yRotO) * 0.1f).coerceIn(-0.45f, 0.45f)
         targetRoll = -targetRoll
@@ -283,6 +326,18 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
 
         this.updateSwingTime()
         super.aiStep()
+    }
+
+    override fun hurt(source: DamageSource, amount: Float): Boolean {
+        if (super.hurt(source, amount) && this.lastHurtByMob != null) {
+            if (!level().isClientSide) {
+                if (this.isSitting()) {
+                    this.setSitting(false)
+                }
+            }
+            return true
+        }
+        return false
     }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
@@ -338,6 +393,8 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
         val HUNGER: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HybridAquaticFishEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HybridAquaticFishEntity::class.java, EntityDataSerializers.BOOLEAN)
+        val SITTING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticFishEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
@@ -403,6 +460,41 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
 
         fun getScaleAdjustment(fish: HybridAquaticFishEntity, adjustment: Float): Float {
             return 1.0f + (fish.size * adjustment)
+        }
+    }
+
+    internal class BottomDwellerSwimmingGoal(
+        private val bottomDweller: HybridAquaticFishEntity,
+        speedModifier: Double,
+        interval: Int,
+    ) :
+        RandomSwimmingGoal(bottomDweller, speedModifier, interval) {
+
+        override fun canUse(): Boolean {
+            return !bottomDweller.isSitting() && super.canUse()
+        }
+    }
+
+    internal class BottomDwellerMoveControl(
+        private val bottomDweller: HybridAquaticFishEntity,
+        maxTurnX: Int,
+        maxTurnY: Int,
+        inWaterSpeedModifier: Float,
+        outsideWaterSpeedModifier: Float,
+        applyGravity: Boolean,
+    ) : SmoothSwimmingMoveControl(
+        bottomDweller,
+        maxTurnX,
+        maxTurnY,
+        inWaterSpeedModifier,
+        outsideWaterSpeedModifier,
+        applyGravity
+    ) {
+
+        override fun tick() {
+            if (!bottomDweller.isSitting()) {
+                super.tick()
+            }
         }
     }
 }

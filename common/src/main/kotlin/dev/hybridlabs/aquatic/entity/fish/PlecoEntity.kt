@@ -15,6 +15,9 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
+import net.minecraft.world.entity.ai.navigation.PathNavigation
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
@@ -29,6 +32,15 @@ class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) :
         HybridAquaticEntityTags.LARGE_CREATURES,
         HybridAquaticEntityTags.ALL_SHARKS
     )
+
+    override fun createNavigation(level: Level): PathNavigation {
+        super.createNavigation(level)
+
+        moveControl = BottomDwellerMoveControl(this, 85, 5, 0.02F, 0.1F, false)
+        lookControl = SmoothSwimmingLookControl(this, 10)
+
+        return WaterBoundPathNavigation(this, level)
+    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

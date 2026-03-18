@@ -1,6 +1,16 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
+		"misc.idle": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"body": {
+					"rotation": ["Math.cos(query.anim_time * 90)*2.5", 0, 0],
+					"position": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
+				}
+			}
+		},
 		"move.swim": {
 			"loop": true,
 			"animation_length": 4,
@@ -29,32 +39,12 @@
 				}
 			}
 		},
-		"misc.idle": {
+		"misc.sit": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
 				"body": {
-					"rotation": {
-						"vector": ["Math.cos(query.anim_time * 90)*2.5", 0, 0]
-					},
-					"position": {
-						"vector": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
-					}
-				},
-				"tail": {
-					"rotation": {
-						"vector": [0, "Math.cos(query.anim_time * 90)*10", 0]
-					}
-				},
-				"leftfin": {
-					"rotation": {
-						"vector": [0, 0, "Math.cos(query.anim_time * 90)*-5"]
-					}
-				},
-				"rightfin": {
-					"rotation": {
-						"vector": [0, 0, "Math.cos(query.anim_time * 90)*5"]
-					}
+					"position": [0, -1, 0]
 				}
 			}
 		},

@@ -9,12 +9,24 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
+import net.minecraft.world.entity.ai.navigation.PathNavigation
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
 
 class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) :
     HybridAquaticFishEntity(type, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
+
+    override fun createNavigation(level: Level): PathNavigation {
+        super.createNavigation(level)
+
+        moveControl = BottomDwellerMoveControl(this, 85, 5, 0.02F, 0.1F, false)
+        lookControl = SmoothSwimmingLookControl(this, 10)
+
+        return WaterBoundPathNavigation(this, level)
+    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
