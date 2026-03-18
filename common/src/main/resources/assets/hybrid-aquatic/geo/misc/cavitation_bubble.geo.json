@@ -20,10 +20,9 @@
 				},
 				{
 					"name": "inner_bubble",
-					"parent": "outer_bubble",
 					"pivot": [0, 7, 0],
 					"cubes": [
-						{"origin": [-5, 2, -5], "size": [10, 10, 10], "uv": [0, 28]}
+						{"origin": [-4.5, 2.5, -4.5], "size": [9, 9, 9], "uv": [0, 28]}
 					]
 				}
 			]

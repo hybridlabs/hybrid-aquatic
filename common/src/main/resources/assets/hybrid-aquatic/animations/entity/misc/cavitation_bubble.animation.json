@@ -16,10 +16,10 @@
 			"loop": true,
 			"bones": {
 				"outer_bubble": {
-					"rotation": ["query.anim_time*720", 0, 0]
+					"rotation": ["query.anim_time*540", 0, 0]
 				},
 				"inner_bubble": {
-					"rotation": ["query.anim_time*480", 0, 0]
+					"rotation": ["query.anim_time*180", 0, 0]
 				}
 			}
 		}
