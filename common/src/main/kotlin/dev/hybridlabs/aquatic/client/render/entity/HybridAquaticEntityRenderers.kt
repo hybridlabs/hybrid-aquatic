@@ -780,12 +780,6 @@ object HybridAquaticEntityRenderers {
             ::KarcinomaEntityRenderer
         )
 
-    val MANGLERFISH =
-        ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.MANGLERFISH,
-            ::ManglerfishEntityRenderer
-        )
-
     val SHELL_BEAST =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.SHELL_BEAST,

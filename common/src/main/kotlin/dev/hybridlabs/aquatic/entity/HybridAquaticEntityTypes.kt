@@ -10,7 +10,10 @@ import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
 import dev.hybridlabs.aquatic.entity.mammal.ManateeEntity
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
-import dev.hybridlabs.aquatic.entity.miniboss.*
+import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
+import dev.hybridlabs.aquatic.entity.miniboss.KarcinomaEntity
+import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
+import dev.hybridlabs.aquatic.entity.miniboss.ShellBeastEntity
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
@@ -929,13 +932,6 @@ object HybridAquaticEntityTypes {
         ::KarcinomaEntity,
         EntityDimensions.fixed(0.75f, 0.75f),
         KarcinomaEntity::createMobAttributes
-    )
-
-    val MANGLERFISH = registerMiniboss(
-        "manglerfish",
-        ::ManglerfishEntity,
-        EntityDimensions.fixed(2.0f, 1.75f),
-        ManglerfishEntity::createMobAttributes
     )
 
     val SHELL_BEAST = registerMiniboss(
