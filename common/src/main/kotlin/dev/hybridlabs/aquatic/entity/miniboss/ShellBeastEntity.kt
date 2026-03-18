@@ -77,23 +77,26 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(1, ShellBeastRangedAttackGoal(this))
         targetSelector.addGoal(1, HurtByTargetGoal(this))
-        targetSelector.addGoal(
-            1, NearestAttackableTargetGoal(
+        this.targetSelector.addGoal(
+            1,
+            NearestAttackableTargetGoal(
                 this,
                 Player::class.java,
                 10,
                 true,
-                false,
-                null
-            )
+                false
+            ) { target ->
+                target is Player && abs(target.y - this.y) <= 24
+            }
         )
         targetSelector.addGoal(
             1, NearestAttackableTargetGoal(
                 this, IronGolem::class.java, 10,
                 true,
-                false,
-                null
-            )
+                false
+            ) { target ->
+                target is IronGolem && abs(target.y - this.y) <= 24
+            }
         )
     }
 
@@ -252,7 +255,7 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         private var strafingClockwise = false
         private var strafingBackwards = false
         private var strafingTime = -1
-        private val strafeAmount = 0.25f;
+        private val strafeAmount = 0.25f
 
         init {
             this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
@@ -273,7 +276,7 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         override fun tick() {
             val target = shellBeast.target ?: return
 
-            val distance = shellBeast.distanceToSqr(target.position());
+            val distance = shellBeast.distanceToSqr(target.position())
             val canSee = shellBeast.sensing.hasLineOfSight(target)
             val seenBefore = seeTime > 0
 
