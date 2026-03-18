@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FleeFromEntityGoal
 import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
 import net.minecraft.core.Vec3i
 import net.minecraft.core.particles.ParticleTypes
@@ -61,6 +62,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
         val generatedRoll = when {
             roll < 0.60f -> Items.NAUTILUS_SHELL.defaultInstance
             roll < 0.85f -> Items.SKELETON_SKULL.defaultInstance
+            roll < 0.90f -> HybridAquaticItems.OMINOUS_CONCH.get().defaultInstance
             else -> Items.AIR.defaultInstance
         }
         shellItem = generatedRoll
@@ -93,11 +95,22 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
 
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
         val playerStack = player.getItemInHand(hand)
+
+        if (shellItem.`is`(HybridAquaticItems.OMINOUS_CONCH.get()) &&
+            !playerStack.`is`(Items.NAUTILUS_SHELL)
+        ) {
+            return InteractionResult.PASS
+        }
+
         if (canTakeItem(playerStack) || playerStack.isEmpty) {
             val oldStack = shellItem.copy()
             shellItem = playerStack.copyWithCount(1)
 
-            if (!shellItem.`is` { item -> item.equals(Items.NAUTILUS_SHELL) || item.equals(Items.SKELETON_SKULL) }) setPersistenceRequired()
+            if (!shellItem.`is` { item ->
+                    item.equals(Items.NAUTILUS_SHELL) ||
+                            item.equals(Items.SKELETON_SKULL) ||
+                            item.equals(HybridAquaticItems.OMINOUS_CONCH)
+                }) setPersistenceRequired()
 
             if (!player.abilities.instabuild) {
                 playerStack.shrink(1)
@@ -111,11 +124,18 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
 
             return InteractionResult.sidedSuccess(level().isClientSide)
         }
+
         return super.mobInteract(player, hand)
     }
 
     override fun dropCustomDeathLoot(source: DamageSource, looting: Int, causedByPlayer: Boolean) {
         if (!shellItem.isEmpty) {
+
+            if (shellItem.`is`(HybridAquaticItems.OMINOUS_CONCH.get())) {
+                shellItem = ItemStack.EMPTY
+                return
+            }
+
             spawnAtLocation(shellItem)
             shellItem = ItemStack.EMPTY
         }
@@ -146,9 +166,10 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
                     3.0f, 1.0f, level().random.nextLong()
                 )
             }
+
             is TntBlock -> {
                 shellItem = ItemStack.EMPTY
-                addDeltaMovement(Vec3(0.0, if(isInWater) 0.2 else 0.4, 0.0))
+                addDeltaMovement(Vec3(0.0, if (isInWater) 0.2 else 0.4, 0.0))
                 goalSelector.tick()
 
                 val primedTNT = SmallTNTEntity(level(), position().x, position().y, position().z, this)
@@ -165,7 +186,7 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
     //#endregion
 
     //#region Properties
-    override fun getMaxSize() : Int {
+    override fun getMaxSize(): Int {
         return 5
     }
 
@@ -222,7 +243,8 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
             DefaultAnimations.genericWalkIdleController(this)
         )
         controllerRegistrar.add(
-            AnimationController(this, "Hide", 4,
+            AnimationController(
+                this, "Hide", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
                     if (this.isHiding) {
                         return@AnimationStateHandler state.setAndContinue(HIDE_ANIMATION)
