@@ -60,9 +60,9 @@ class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
 
         val roll = random.nextFloat()
         val generatedRoll = when {
-            roll < 0.20f -> Items.NAUTILUS_SHELL.defaultInstance
-            roll < 0.50f -> Items.SKELETON_SKULL.defaultInstance
-            roll < 0.80f -> HybridAquaticItems.OMINOUS_CONCH.get().defaultInstance
+            roll < 0.10f -> HybridAquaticItems.OMINOUS_CONCH.get().defaultInstance
+            roll < 0.30f -> Items.SKELETON_SKULL.defaultInstance
+            roll < 0.80f -> Items.NAUTILUS_SHELL.defaultInstance
             else -> Items.AIR.defaultInstance
         }
         shellItem = generatedRoll
