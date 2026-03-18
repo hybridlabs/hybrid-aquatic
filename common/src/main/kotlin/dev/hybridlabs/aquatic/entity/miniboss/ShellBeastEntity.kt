@@ -32,6 +32,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
+import kotlin.math.abs
 
 class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world: Level) :
     HybridAquaticMinibossEntity(type, world) {
@@ -250,6 +251,7 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         private var strafingClockwise = false
         private var strafingBackwards = false
         private var strafingTime = -1
+        private val strafeAmount = 0.25f;
 
         init {
             this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
@@ -280,7 +282,9 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
 
             if (canSee) seeTime++ else seeTime--
 
-            if (distance <= 4096.0 && seeTime >= 20) {
+            val yDelta = abs(shellBeast.y - target.y)
+
+            if (distance <= 4096.0 && yDelta <= 8.0 && chargeTime < 20 && seeTime >= 20) {
                 shellBeast.navigation.stop()
                 strafingTime++
             } else {
@@ -301,16 +305,15 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
 
 
             if (strafingTime > -1) {
-                strafingBackwards = distance < 4096.0 * 0.25f;
+                strafingBackwards = distance < 256 // 16**2
                 shellBeast.moveControl.strafe(
-                    if (strafingBackwards) -0.5f else 0.5f,
-                    if (strafingClockwise) 0.5f else -0.5f
+                    if (strafingBackwards) -strafeAmount else strafeAmount,
+                    if (strafingClockwise) strafeAmount else -strafeAmount
                 )
 
-                shellBeast.lookAt(target, 30f, 30f)
-            } else {
-            shellBeast.lookControl.setLookAt(target, 30f, 30f)
             }
+
+            shellBeast.lookAt(target, 30f, 30f)
 
             if (distance < 4096.0 && canSee) {
                 val level = shellBeast.level()
