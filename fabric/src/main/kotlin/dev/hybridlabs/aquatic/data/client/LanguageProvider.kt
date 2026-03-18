@@ -739,6 +739,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticEntityTypes.DEPTH_CHARGE.get() to "Depth Charge",
             HybridAquaticEntityTypes.SMALL_TNT.get() to "Small TNT",
             HybridAquaticEntityTypes.ARGONAUT.get() to "Argonaut",
+            HybridAquaticEntityTypes.CAVITATION_BUBBLE.get() to "Cavitation Bubble",
         )
 
         // verify display name list is valid

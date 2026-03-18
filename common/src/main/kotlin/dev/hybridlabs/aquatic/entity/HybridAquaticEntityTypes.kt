@@ -12,6 +12,7 @@ import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.*
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
+import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
 import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
 import dev.hybridlabs.aquatic.entity.shark.*
@@ -956,6 +957,12 @@ object HybridAquaticEntityTypes {
         "small_tnt",
         ::SmallTNTEntity,
         EntityDimensions.fixed(0.49f, 0.49f)
+    )
+
+    val CAVITATION_BUBBLE = registerMisc(
+        "cavitation_bubble",
+        ::CavitationBubbleEntity,
+        EntityDimensions.fixed(0.9f, 0.9f)
     )
 
     val ARGONAUT = registerMisc(

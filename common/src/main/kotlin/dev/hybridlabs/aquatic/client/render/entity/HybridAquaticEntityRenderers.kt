@@ -11,6 +11,7 @@ import dev.hybridlabs.aquatic.client.render.entity.mammal.OrcaEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.*
 import dev.hybridlabs.aquatic.client.render.entity.misc.ArgonautEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.misc.CavitationBubbleEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.misc.DepthChargeEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.misc.SmallTNTEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
@@ -808,5 +809,11 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.ARGONAUT,
             ::ArgonautEntityRenderer
+        )
+
+    val CAVITATION_BUBBLE =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.CAVITATION_BUBBLE,
+            ::CavitationBubbleEntityRenderer
         )
 }

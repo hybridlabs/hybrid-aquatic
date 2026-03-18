@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.miniboss
 
 import dev.hybridlabs.aquatic.entity.ai.control.SmoothStrafeSwimmingMoveControl
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -23,7 +24,6 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.IronGolem
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.entity.projectile.LargeFireball
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec3
@@ -334,7 +334,7 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
                         level.levelEvent(null, 1016, shellBeast.blockPosition(), 0)
                     }
 
-                    val fireball = LargeFireball(
+                    val cavitationBubble = CavitationBubbleEntity(
                         level,
                         shellBeast,
                         dxFire,
@@ -343,13 +343,13 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
                         shellBeast.getExplosionPower()
                     )
 
-                    fireball.setPos(
+                    cavitationBubble.setPos(
                         shellBeast.x + view.x * 4.0,
                         shellBeast.getY(0.5) - 0.3,
                         shellBeast.z + view.z * 4.0
                     )
 
-                    level.addFreshEntity(fireball)
+                    level.addFreshEntity(cavitationBubble)
                 }
 
                 if (chargeTime == 60) {
