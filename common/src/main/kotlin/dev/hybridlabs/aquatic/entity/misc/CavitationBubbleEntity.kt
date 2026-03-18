@@ -89,7 +89,7 @@ class CavitationBubbleEntity : Fireball,
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Cavitation Bubble Controller", 4) { state ->
+            AnimationController(this, "Cavitation Bubble Controller", 0) { state ->
                 state.setAndContinue(DefaultAnimations.RUN)
             }
         )
