@@ -592,7 +592,7 @@
   "item.hybrid-aquatic.ocean_sunfish_spawn_egg": "Ocean Sunfish Spawn Egg",
   "item.hybrid-aquatic.octopus_spawn_egg": "Octopus Spawn Egg",
   "item.hybrid-aquatic.ominous_conch": "Ominous Conch",
-  "item.hybrid-aquatic.ominous_conch.function": "Summons the Shell Beast when used in a deep ocean..",
+  "item.hybrid-aquatic.ominous_conch.function": "Summons the Shell Beast",
   "item.hybrid-aquatic.ominous_hook": "Ominous Hook",
   "item.hybrid-aquatic.ominous_hook.description": "Summons Karkinos",
   "item.hybrid-aquatic.opah": "Opah",
@@ -780,6 +780,6 @@
   "tooltip.hybrid-aquatic.argonaut.glowing": "Glowing",
   "tooltip.hybrid-aquatic.argonaut.sail": "%s Sails",
   "tooltip.hybrid-aquatic.argonaut.shell": "%s Shell",
-  "tooltip.hybrid-aquatic.ominous_conch.unused": "The sounds of a raging ocean echo from within",
+  "tooltip.hybrid-aquatic.ominous_conch.unused": "The deep ocean calls from within..",
   "tooltip.hybrid-aquatic.ominous_conch.used": "The conch is silent"
 }

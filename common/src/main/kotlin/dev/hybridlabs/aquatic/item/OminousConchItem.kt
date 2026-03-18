@@ -29,31 +29,29 @@ class OminousConchItem(
         if (level.isClientSide) return result
 
         val tag = stack.orCreateTag
-        val hasSummoned = tag.getBoolean(TAG_HAS_SUMMONED)
 
-        if (hasSummoned) return result
+        if (tag.getBoolean(TAG_HAS_SUMMONED)) return result
 
         val biome = level.getBiome(player.blockPosition())
         if (!biome.`is`(HybridAquaticBiomeTags.ALL_TRENCHES)) return result
 
+        tag.putBoolean(TAG_HAS_SUMMONED, true)
+
         val serverLevel = level as ServerLevel
         val pos = player.blockPosition()
 
+        val startTick = serverLevel.server.tickCount
+
         serverLevel.server.execute {
-            serverLevel.server.tickCount.let { startTick ->
-                serverLevel.server.execute {
-                    waitAndSpawn(serverLevel, pos, stack, startTick)
-                }
-            }
+            spawnAfterCooldown(serverLevel, pos, startTick)
         }
 
         return result
     }
 
-    private fun waitAndSpawn(
+    private fun spawnAfterCooldown(
         level: ServerLevel,
         pos: net.minecraft.core.BlockPos,
-        stack: ItemStack,
         startTick: Int
     ) {
         val server = level.server
@@ -66,11 +64,8 @@ class OminousConchItem(
                 level.addFreshEntity(entity)
             }
 
-            val tag = stack.orCreateTag
-            tag.putBoolean(TAG_HAS_SUMMONED, true)
-
         } else {
-            server.execute { waitAndSpawn(level, pos, stack, startTick) }
+            server.execute { spawnAfterCooldown(level, pos, startTick) }
         }
     }
 }
