@@ -26,12 +26,14 @@ import net.minecraft.world.entity.animal.IronGolem
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
+import java.util.function.Predicate
 import kotlin.math.abs
 
 class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world: Level) :
@@ -79,24 +81,17 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         targetSelector.addGoal(1, HurtByTargetGoal(this))
         this.targetSelector.addGoal(
             1,
-            NearestAttackableTargetGoal(
+            ShellBeastNearestTargetGoal(
                 this,
                 Player::class.java,
-                10,
-                true,
-                false
-            ) { target ->
-                target is Player && abs(target.y - this.y) <= 24
-            }
+                true
+            ) { target -> target is Player && !(target.isCreative || target.isSpectator) }
         )
+
         targetSelector.addGoal(
-            1, NearestAttackableTargetGoal(
-                this, IronGolem::class.java, 10,
-                true,
-                false
-            ) { target ->
-                target is IronGolem && abs(target.y - this.y) <= 24
-            }
+            1, ShellBeastNearestTargetGoal(
+                this, IronGolem::class.java, true
+            ) { true }
         )
     }
 
@@ -249,6 +244,19 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
             SynchedEntityData.defineId(ShellBeastEntity::class.java, EntityDataSerializers.BOOLEAN)
     }
 
+    // Scan the entire cube of targetDistance, not just a slice like NearestAttackableTargetGoal
+    class ShellBeastNearestTargetGoal<T : LivingEntity>(
+        shellBeast: Mob,
+        target: Class<T>,
+        mustSee: Boolean,
+        predicate: Predicate<LivingEntity>
+    ) :
+        NearestAttackableTargetGoal<T>(shellBeast, target, mustSee, predicate) {
+        override fun getTargetSearchArea(targetDistance: Double): AABB {
+            return this.mob.boundingBox.inflate(targetDistance)
+        }
+    }
+
     class ShellBeastRangedAttackGoal(private val shellBeast: ShellBeastEntity) : Goal() {
         var chargeTime: Int = 0
         private var seeTime = 0
@@ -317,7 +325,7 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
 
             }
 
-            shellBeast.lookAt(target, 30f, 30f)
+            shellBeast.lookAt(target, 5f, 5f)
 
             if (distance < 4096.0 && canSee) {
                 val level = shellBeast.level()
