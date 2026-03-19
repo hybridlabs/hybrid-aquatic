@@ -53,6 +53,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.FISHING_NET.get())
             )
             .build(ResourceLocation("hybrid-aquatic", "fishing_net"))
+        consumer?.accept(fishingNetAdvancement)
 
         val divingWeightAdvancement = Advancement.Builder.advancement()
             .parent(fishingNetAdvancement)
