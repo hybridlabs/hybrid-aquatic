@@ -4,6 +4,8 @@ import dev.hybridlabs.aquatic.block.GiantClamBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -27,6 +29,15 @@ class GiantClamBlockEntity(
                 worldPosition,
                 blockState.setValue(GiantClamBlock.STATE, GiantClamBlock.GiantClamState.CLOSED),
                 3
+            )
+
+            level.playSound(
+                null,
+                worldPosition,
+                SoundEvents.SHULKER_CLOSE,
+                SoundSource.BLOCKS,
+                1.0f,
+                1.0f
             )
 
             pearlTimer = PEARL_TIMER
