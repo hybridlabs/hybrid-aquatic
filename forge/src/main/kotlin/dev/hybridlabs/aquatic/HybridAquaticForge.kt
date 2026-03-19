@@ -6,7 +6,6 @@ import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.entity.ForgeSpawnGroupRegistry
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.fluid.HybridAquaticFluids
 import dev.hybridlabs.aquatic.forge.HybridAquaticEventBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticForgeBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticModBusEvents
@@ -27,7 +26,6 @@ import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.minecraftforge.fml.common.Mod
 
-
 @Suppress("UnusedExpression")
 @Mod(Constants.FORGE_MOD_ID)
 object HybridAquaticForge {
@@ -40,7 +38,6 @@ object HybridAquaticForge {
         HybridAquaticGlobalLootModifier.registerGlobalLootModifiers()
 
         HybridAquaticBlocks
-        HybridAquaticFluids
         HybridAquaticPlatformBlocks
         HybridAquaticEntityTypes
         HybridAquaticBlockEntityTypes
