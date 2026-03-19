@@ -2,8 +2,11 @@
   "feature": "hybrid-aquatic:thermal_vent_patch",
   "placement": [
     {
+      "type": "minecraft:in_square"
+    },
+    {
       "type": "minecraft:count_on_every_layer",
-      "count": 5
+      "count": 2
     },
     {
       "type": "minecraft:surface_relative_threshold_filter",

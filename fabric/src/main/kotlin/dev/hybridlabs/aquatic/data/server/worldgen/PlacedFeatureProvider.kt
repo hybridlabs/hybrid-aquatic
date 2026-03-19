@@ -87,6 +87,7 @@ class PlacedFeatureProvider(
             )
         )
 
+        //#region Kelp
         entries.add(
             HybridAquaticPlacedFeatures.BULL_KELP, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.BULL_KELP), listOf(
@@ -98,7 +99,6 @@ class PlacedFeatureProvider(
             )
         )
 
-        // sargassum
         entries.add(
             HybridAquaticPlacedFeatures.SARGASSUM, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.SARGASSUM), listOf(
@@ -109,7 +109,9 @@ class PlacedFeatureProvider(
                 )
             )
         )
+        //#endregion
 
+        //#region Floating Plants
         entries.add(
             HybridAquaticPlacedFeatures.FLOATING_SARGASSUM, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.FLOATING_SARGASSUM), listOf(
@@ -153,6 +155,7 @@ class PlacedFeatureProvider(
                 )
             )
         )
+        //#endregion
 
         entries.add(
             HybridAquaticPlacedFeatures.SAND_CIRCLE, PlacedFeature(
@@ -220,7 +223,7 @@ class PlacedFeatureProvider(
             )
         )
 
-        // giant clam patch
+        //#region Shellfish
         entries.add(
             HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.GIANT_CLAM_PATCH), listOf(
@@ -232,7 +235,6 @@ class PlacedFeatureProvider(
             )
         )
 
-        // giant clam patch
         entries.add(
             HybridAquaticPlacedFeatures.OYSTER_BED, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.OYSTER_BED), listOf(
@@ -243,8 +245,9 @@ class PlacedFeatureProvider(
                 )
             )
         )
+        //#endregion
 
-        // sponge patch
+        //#region Sponges
         entries.add(
             HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.TUBE_SPONGE_PATCH), listOf(
@@ -274,6 +277,7 @@ class PlacedFeatureProvider(
                 )
             )
         )
+        //#endregion
 
         // message in a bottle
         entries.add(
@@ -286,10 +290,11 @@ class PlacedFeatureProvider(
             )
         )
 
-        // thermal vents
+        //#region Thermal Vents
         entries.add(
-            HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH, PlacedFeature(
+            HybridAquaticPlacedFeatures.THERMAL_VENT_CAVES, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
+                    InSquarePlacement.spread(),
                     CountOnEveryLayerPlacement.of(5),
                     SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
                     BiomeFilter.biome()
@@ -297,14 +302,27 @@ class PlacedFeatureProvider(
             )
         )
 
-        // red meadow
+        entries.add(
+            HybridAquaticPlacedFeatures.THERMAL_VENT_TRENCHES, PlacedFeature(
+                entries.ref(HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    CountOnEveryLayerPlacement.of(2),
+                    SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+        //#endregion
+
+        //#region Red Algae
         entries.add(
             HybridAquaticPlacedFeatures.RED_MEADOW_VEGETATION, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.RED_MEADOW_VEGETATION), seaweedModifier(256)
             )
         )
+        //#endregion
 
-        // corals
+        //#region Corals
         entries.add(
             HybridAquaticPlacedFeatures.CORAL_REEF_VEGETATION, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.CORAL_REEF_VEGETATION), listOf(
@@ -335,7 +353,9 @@ class PlacedFeatureProvider(
                 )
             )
         )
+        //#endregion
 
+        //#region Mounds
         entries.add(
             HybridAquaticPlacedFeatures.CORAL_MOUND, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.CORAL_MOUND), listOf(
@@ -387,6 +407,7 @@ class PlacedFeatureProvider(
                 )
             )
         )
+        //#endregion
     }
 
     override fun getName(): String {

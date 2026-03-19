@@ -220,9 +220,17 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.HAS_THERMAL_VENTS,
+                    HybridAquaticBiomeTags.SULFURIC_CAVE,
                     GenerationStep.Decoration.SURFACE_STRUCTURES,
-                    HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH
+                    HybridAquaticPlacedFeatures.THERMAL_VENT_CAVES
+                )
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HybridAquaticBiomeTags.ALL_TRENCHES,
+                    GenerationStep.Decoration.SURFACE_STRUCTURES,
+                    HybridAquaticPlacedFeatures.THERMAL_VENT_TRENCHES
                 )
             )
             //#endregion
