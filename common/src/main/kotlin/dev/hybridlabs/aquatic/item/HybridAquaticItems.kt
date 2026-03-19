@@ -1888,10 +1888,10 @@ object HybridAquaticItems {
         registerSpawnEgg("otter_spawn_egg", HybridAquaticEntityTypes.OTTER, 0x60352f, 0xeebf80)
 
     val DUGONG_SPAWN_EGG =
-        registerSpawnEgg("dugong_spawn_egg", HybridAquaticEntityTypes.DUGONG, 0x3e3935, 0x56534f)
+        registerSpawnEgg("dugong_spawn_egg", HybridAquaticEntityTypes.DUGONG, 0x807b75, 0xa9a18e)
 
     val MANATEE_SPAWN_EGG =
-        registerSpawnEgg("manatee_spawn_egg", HybridAquaticEntityTypes.MANATEE, 0x807b75, 0xa9a18e)
+        registerSpawnEgg("manatee_spawn_egg", HybridAquaticEntityTypes.MANATEE,0x3e3935, 0x56534f)
 
     val ORCA_SPAWN_EGG =
         registerSpawnEgg("orca_spawn_egg", HybridAquaticEntityTypes.ORCA, 0x282a32, 0xc5c6ca)
