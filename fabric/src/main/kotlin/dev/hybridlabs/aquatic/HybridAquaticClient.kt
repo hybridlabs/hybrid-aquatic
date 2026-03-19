@@ -6,6 +6,7 @@ import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
 import dev.hybridlabs.aquatic.client.item.tooltip.ArgonautTooltip
+import dev.hybridlabs.aquatic.client.item.tooltip.DivingWeightTooltip
 import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.item.tooltip.OminousConchTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
@@ -109,6 +110,7 @@ object HybridAquaticClient : ClientModInitializer {
     private fun registerTooltips() {
         ItemTooltipCallback.EVENT.register(FishingNetTooltip())
         ItemTooltipCallback.EVENT.register(ArgonautTooltip())
+        ItemTooltipCallback.EVENT.register(DivingWeightTooltip())
         ItemTooltipCallback.EVENT.register(OminousConchTooltip())
     }
 

@@ -787,6 +787,7 @@
   "tooltip.hybrid-aquatic.argonaut.glowing": "Glowing",
   "tooltip.hybrid-aquatic.argonaut.sail": "%s Sails",
   "tooltip.hybrid-aquatic.argonaut.shell": "%s Shell",
+  "tooltip.hybrid-aquatic.diving_weight.used": "Quite heavy",
   "tooltip.hybrid-aquatic.ominous_conch.unused": "The deep ocean calls from within..",
   "tooltip.hybrid-aquatic.ominous_conch.used": "The conch is silent"
 }
