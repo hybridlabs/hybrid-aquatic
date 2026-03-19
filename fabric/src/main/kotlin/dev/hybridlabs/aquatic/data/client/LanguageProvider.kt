@@ -73,6 +73,12 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.coral_tools.title" to "Who Needs Mending?",
             "advancements.hybrid-aquatic.coral_tools.description" to "Craft a tool out of coral chunks",
 
+            "advancements.hybrid-aquatic.get_clam.title" to "Happy As A Clam",
+            "advancements.hybrid-aquatic.get_clam.description" to "Feed a dugong some sea lettuce to get a clam",
+
+            "advancements.hybrid-aquatic.plant_clam.title" to "Shell Corporation",
+            "advancements.hybrid-aquatic.plant_clam.description" to "Grow your own clams underwater",
+
             "advancements.hybrid-aquatic.nautilus_shell.title" to "Someone Used To Live Here",
             "advancements.hybrid-aquatic.nautilus_shell.description" to "Obtain a nautilus shell",
 
