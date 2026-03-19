@@ -10,8 +10,11 @@ import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerBossEvent
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.BossEvent
 import net.minecraft.world.Difficulty
+import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -42,6 +45,14 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
 
     fun getExplosionPower(): Int {
         return this.explosionPower
+    }
+
+    override fun getHurtSound(source: DamageSource): SoundEvent {
+        return SoundEvents.SHULKER_HURT_CLOSED
+    }
+
+    override fun getDeathSound(): SoundEvent {
+        return SoundEvents.SHULKER_HURT_CLOSED
     }
 
     override fun createNavigation(level: Level): PathNavigation {

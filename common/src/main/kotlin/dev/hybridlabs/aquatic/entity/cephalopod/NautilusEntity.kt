@@ -46,7 +46,7 @@ class NautilusEntity(type: EntityType<out NautilusEntity>, world: Level) : Hybri
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.SHULKER_CLOSE
+        return SoundEvents.SHULKER_HURT_CLOSED
     }
 
     override fun getDeathSound(): SoundEvent {
