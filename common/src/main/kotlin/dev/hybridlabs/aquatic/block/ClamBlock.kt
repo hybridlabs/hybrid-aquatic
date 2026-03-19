@@ -33,7 +33,7 @@ class ClamBlock(properties: Properties) : CropBlock(properties),
     }
 
     override fun mayPlaceOn(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
-        return state.`is`(Blocks.SAND)
+        return state.`is`(Blocks.SAND) || state.`is`(HybridAquaticBlocks.GRASSY_SAND.get())
     }
 
     override fun canPlaceLiquid(world: BlockGetter, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
@@ -46,7 +46,7 @@ class ClamBlock(properties: Properties) : CropBlock(properties),
 
         val fluidState = level.getFluidState(pos)
 
-        return belowState.`is`(Blocks.SAND)
+        return (belowState.`is`(Blocks.SAND) || belowState.`is`(HybridAquaticBlocks.GRASSY_SAND.get()))
                 && fluidState.`is`(FluidTags.WATER)
                 && fluidState.amount == 8
     }
