@@ -236,7 +236,6 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
                 .add(Attributes.ATTACK_DAMAGE, 10.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 64.0)
-                .add(Attributes.FOLLOW_RANGE, 64.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
         }
 
@@ -263,7 +262,7 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
         private var strafingClockwise = false
         private var strafingBackwards = false
         private var strafingTime = -1
-        private val strafeAmount = 0.25f
+        private val strafeAmount = 0.20f
 
         init {
             this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
@@ -300,7 +299,8 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
                 shellBeast.navigation.stop()
                 strafingTime++
             } else {
-                shellBeast.navigation.moveTo(target, 1.0)
+                if (distance >= 64)
+                    shellBeast.navigation.moveTo(target, 1.0)
                 strafingTime = -1
             }
 
@@ -309,7 +309,9 @@ class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world:
                     strafingClockwise = !strafingClockwise
                 }
 
-                if (shellBeast.random.nextFloat() < 0.3f) {
+                if (distance <= 64) {
+                    strafingBackwards = true;
+                } else if (shellBeast.random.nextFloat() < 0.3f) {
                     strafingBackwards = !strafingBackwards
                 }
                 strafingTime = 0
