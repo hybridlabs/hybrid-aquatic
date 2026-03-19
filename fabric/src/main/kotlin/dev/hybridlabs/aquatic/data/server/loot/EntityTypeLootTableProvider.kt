@@ -441,6 +441,60 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
+        export(exporter, HybridAquaticEntityTypes.GIANT_SQUID.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(Items.INK_SAC)
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                    ).build()
+            )
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_TENTACLE.get())
+                            .apply(
+                                SmeltItemFunction.smelted().`when`(
+                                    LootItemEntityPropertyCondition.hasProperties(
+                                        LootContext.EntityTarget.THIS,
+                                        NEEDS_ENTITY_ON_FIRE
+                                    )
+                                )
+                            )
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.COLOSSAL_SQUID.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(Items.INK_SAC)
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                    ).build()
+            )
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_TENTACLE.get())
+                            .apply(
+                                SmeltItemFunction.smelted().`when`(
+                                    LootItemEntityPropertyCondition.hasProperties(
+                                        LootContext.EntityTarget.THIS,
+                                        NEEDS_ENTITY_ON_FIRE
+                                    )
+                                )
+                            )
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
+                    ).build()
+            )
+        }
+
         export(exporter, HybridAquaticEntityTypes.FIREFLY_SQUID.get()) {
             pool(
                 LootPool.lootPool()
@@ -472,6 +526,17 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
                             .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.SCALYFOOT_SNAIL.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(Items.IRON_NUGGET)
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 2.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
@@ -880,6 +945,39 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
         }
 
         export(exporter, HybridAquaticEntityTypes.SHINER.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_FISH_MEAT.get())
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.FANGTOOTH.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_FISH_MEAT.get())
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.HATCHETFISH.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_FISH_MEAT.get())
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HybridAquaticEntityTypes.VIPERFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
