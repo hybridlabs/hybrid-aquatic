@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "hybrid-aquatic:coral_reef",
+      "required": false
+    }
+  ]
+}

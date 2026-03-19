@@ -2,10 +2,22 @@ package dev.hybridlabs.aquatic.tag
 
 import dev.hybridlabs.aquatic.CommonClass
 import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
 import net.minecraft.world.level.biome.Biome
 
 object HybridAquaticBiomeTags {
+    //#region Compatibility Biome Tags
+    // rainbow reef
+    val WARM_OCEANS = TagKey.create(Registries.BIOME, ResourceLocation("rainbowreef", "warm_oceans"))
+    //fintastic
+    val MOONY_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "moony_biomes"))
+    val PLECO_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "pleco_biomes"))
+    val CATFISH_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "catfish_biomes"))
+    val ARAPAIMA_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "arapaima_biomes"))
+    val GUPPY_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "guppy_biomes"))
+    val FWSHARK_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "fwshark_biomes"))
+    val MINNOW_SURFACE_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "minnow_surface_biomes"))
 
     //#region Arctic Ocean Tags
     val SHALLOW_ARCTIC_OCEANS = create("shallow_arctic_oceans")

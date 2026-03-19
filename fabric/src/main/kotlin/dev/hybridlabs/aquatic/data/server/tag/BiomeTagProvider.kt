@@ -17,6 +17,18 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
     override fun addTags(arg: HolderLookup.Provider) {
 
         //#region Vanilla Tags
+        getOrCreateTagBuilder(BiomeTags.HAS_RUINED_PORTAL_OCEAN)
+            .addOptional(HybridAquaticBiomes.SEAGRASS_BED)
+            .addOptional(HybridAquaticBiomes.RED_MEADOW)
+            .addOptional(HybridAquaticBiomes.CORAL_REEF)
+            .addOptional(HybridAquaticBiomes.TRENCH)
+            .addOptional(HybridAquaticBiomes.LUKEWARM_TRENCH)
+            .addOptional(HybridAquaticBiomes.WARM_TRENCH)
+            .addOptional(HybridAquaticBiomes.COLD_TRENCH)
+            .addOptional(HybridAquaticBiomes.FROZEN_TRENCH)
+            .addOptional(HybridAquaticBiomes.TROPICAL_DEEP_CORAL_REEF)
+            .addOptional(HybridAquaticBiomes.DEEP_CORAL_REEF)
+
         getOrCreateTagBuilder(BiomeTags.HAS_CLOSER_WATER_FOG)
             .forceAddTag(BiomeTags.IS_DEEP_OCEAN)
             .addOptional(HybridAquaticBiomes.SULFURIC_CAVES)
@@ -99,7 +111,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.TRENCH)
         //#endregion
 
-        //#region Tropical Ocean Tags
+        //#region Lukewarm Ocean Tags
         getOrCreateTagBuilder(HybridAquaticBiomeTags.SHALLOW_LUKEWARM_OCEANS)
             .add(Biomes.LUKEWARM_OCEAN)
             .addOptional(ResourceLocation("still_life", "subtropical_shallow_ocean"))
@@ -274,6 +286,36 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HybridAquaticBiomeTags.BOTTLE_SPAWN_BIOMES)
             .forceAddTag(BiomeTags.IS_OCEAN)
             .forceAddTag(BiomeTags.IS_BEACH)
+        //#endregion
+
+        //#region Compatibility Tags
+        // rainbow reef
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.WARM_OCEANS)
+            .addOptional(HybridAquaticBiomes.CORAL_REEF)
+
+        // fintastic
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.MOONY_BIOMES)
+            .addOptional(HybridAquaticBiomes.CORAL_REEF)
+            .addOptional(HybridAquaticBiomes.BASALT_BEACH)
+            .addOptional(HybridAquaticBiomes.TIDE_POOLS)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.PLECO_BIOMES)
+            .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.ARAPAIMA_BIOMES)
+            .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.CATFISH_BIOMES)
+            .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.GUPPY_BIOMES)
+            .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.MINNOW_SURFACE_BIOMES)
+            .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
+
+        getOrCreateTagBuilder(HybridAquaticBiomeTags.FWSHARK_BIOMES)
+            .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
         //#endregion
     }
 }
