@@ -400,6 +400,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.BLACK_PEARL.get(),
             HybridAquaticItems.GIANT_NAUTILUS_SHELL.get(),
             HybridAquaticItems.ARGONAUT.get(),
+            HybridAquaticItems.DIVING_WEIGHT.get(),
             HybridAquaticItems.SULFUR.get(),
             HybridAquaticItems.ANGLERFISH.get(),
             HybridAquaticItems.BARRELEYE.get(),

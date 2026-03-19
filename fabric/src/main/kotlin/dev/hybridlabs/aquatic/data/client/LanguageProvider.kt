@@ -73,6 +73,12 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.coral_tools.title" to "Who Needs Mending?",
             "advancements.hybrid-aquatic.coral_tools.description" to "Craft a tool out of coral chunks",
 
+            "advancements.hybrid-aquatic.get_clam.title" to "Happy As A Clam",
+            "advancements.hybrid-aquatic.get_clam.description" to "Feed a dugong some sea lettuce to get a clam",
+
+            "advancements.hybrid-aquatic.plant_clam.title" to "Shell Corporation",
+            "advancements.hybrid-aquatic.plant_clam.description" to "Grow your own clams underwater",
+
             "advancements.hybrid-aquatic.nautilus_shell.title" to "Someone Used To Live Here",
             "advancements.hybrid-aquatic.nautilus_shell.description" to "Obtain a nautilus shell",
 
@@ -96,6 +102,9 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
             "advancements.hybrid-aquatic.turtle_set.title" to "Cowabunga!",
             "advancements.hybrid-aquatic.turtle_set.description" to "Craft a piece of turtle armor",
+
+            "advancements.hybrid-aquatic.diving_weight.title" to "The Fast Way Down",
+            "advancements.hybrid-aquatic.diving_weight.description" to "Craft a diving weight",
 
             "advancements.hybrid-aquatic.diving_suit.title" to "Diving In",
             "advancements.hybrid-aquatic.diving_suit.description" to "Obtain a full set of diving gear",
@@ -449,6 +458,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.BLACK_PEARL.get() to "Black Pearl",
             HybridAquaticItems.GIANT_NAUTILUS_SHELL.get() to "Giant Nautilus Shell",
             HybridAquaticItems.ARGONAUT.get() to "Argonaut",
+            HybridAquaticItems.DIVING_WEIGHT.get() to "Diving Weight",
             HybridAquaticItems.SULFUR.get() to "Sulfur",
             HybridAquaticItems.CORAL_CHUNK.get() to "Coral Chunk",
             HybridAquaticItems.BARBED_HOOK.get() to "Barbed Hook",

@@ -319,6 +319,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.OMINOUS_CONCH.get())
 
                 // tools
+                entries.accept(HybridAquaticItems.DIVING_WEIGHT.get())
                 entries.accept(HybridAquaticItems.SEASHELL_SPEAR.get())
                 entries.accept(HybridAquaticItems.SEASHELL_PICKAXE.get())
                 entries.accept(HybridAquaticItems.SEASHELL_AXE.get())

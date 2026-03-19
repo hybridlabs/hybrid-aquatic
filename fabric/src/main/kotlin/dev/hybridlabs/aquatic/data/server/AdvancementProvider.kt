@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.data.server
 
+import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
@@ -11,6 +12,7 @@ import net.minecraft.advancements.critereon.*
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Items
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.Blocks.WATER
 import java.util.function.Consumer
 
@@ -51,7 +53,25 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.FISHING_NET.get())
             )
             .build(ResourceLocation("hybrid-aquatic", "fishing_net"))
-        consumer?.accept(fishingNetAdvancement)
+
+        val divingWeightAdvancement = Advancement.Builder.advancement()
+            .parent(fishingNetAdvancement)
+            .display(
+                HybridAquaticItems.DIVING_WEIGHT.get(),
+                Component.translatable("advancements.hybrid-aquatic.diving_weight.title"),
+                Component.translatable("advancements.hybrid-aquatic.diving_weight.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.TASK,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "diving_weight",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.DIVING_WEIGHT.get())
+            )
+            .build(ResourceLocation("hybrid-aquatic", "diving_weight"))
+        consumer?.accept(divingWeightAdvancement)
 
         val fishingHookAdvancement = Advancement.Builder.advancement()
             .parent(fishingNetAdvancement)
@@ -93,25 +113,6 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .build(ResourceLocation("hybrid-aquatic", "creeper_hook"))
         consumer?.accept(creeperHookAdvancement)
 
-        val buoyAdvancement = Advancement.Builder.advancement()
-            .parent(rootAdvancement)
-            .display(
-                HybridAquaticItems.BUOY.get(),
-                Component.translatable("advancements.hybrid-aquatic.buoy.title"),
-                Component.translatable("advancements.hybrid-aquatic.buoy.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
-                FrameType.TASK,
-                true,
-                true,
-                false
-            )
-            .addCriterion(
-                "obtain_buoy",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.BUOY.get())
-            )
-            .build(ResourceLocation("hybrid-aquatic", "buoy"))
-        consumer?.accept(buoyAdvancement)
-
         //#region Depth Charge Advancement Tree
         val glowstickAdvancement = Advancement.Builder.advancement()
             .parent(rootAdvancement)
@@ -131,6 +132,25 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             )
             .build(ResourceLocation("hybrid-aquatic", "glowstick"))
         consumer?.accept(glowstickAdvancement)
+
+        val buoyAdvancement = Advancement.Builder.advancement()
+            .parent(glowstickAdvancement)
+            .display(
+                HybridAquaticItems.BUOY.get(),
+                Component.translatable("advancements.hybrid-aquatic.buoy.title"),
+                Component.translatable("advancements.hybrid-aquatic.buoy.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.TASK,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "obtain_buoy",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.BUOY.get())
+            )
+            .build(ResourceLocation("hybrid-aquatic", "buoy"))
+        consumer?.accept(buoyAdvancement)
 
         val sulfurAdvancement = Advancement.Builder.advancement()
             .parent(glowstickAdvancement)
@@ -324,7 +344,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
 
         //#region Diving Set Advancement Tree
         val divingSuitAdvancement = Advancement.Builder.advancement()
-            .parent(rootAdvancement)
+            .parent(fishingNetAdvancement)
             .display(
                 HybridAquaticItems.DIVING_HELMET.get(),
                 Component.translatable("advancements.hybrid-aquatic.diving_suit.title"),
@@ -416,6 +436,59 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .build(ResourceLocation("hybrid-aquatic", "glowing_diving_suit"))
         consumer?.accept(glowingDivingSuitAdvancement)
         //#endregion
+
+        val getClamAdvancement = Advancement.Builder.advancement()
+            .parent(rootAdvancement)
+            .display(
+                HybridAquaticItems.CLAM.get(),
+                Component.translatable("advancements.hybrid-aquatic.get_clam.title"),
+                Component.translatable("advancements.hybrid-aquatic.get_clam.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.TASK,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "obtain_clam",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    HybridAquaticItems.CLAM.get()
+                )
+            )
+            .build(ResourceLocation("hybrid-aquatic", "get_clam"))
+        consumer?.accept(getClamAdvancement)
+
+        val plantClamAdvancement = Advancement.Builder.advancement()
+            .parent(getClamAdvancement)
+            .display(
+                HybridAquaticItems.COOKED_CLAM.get(),
+                Component.translatable("advancements.hybrid-aquatic.plant_clam.title"),
+                Component.translatable("advancements.hybrid-aquatic.plant_clam.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.TASK,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "plant_clam",
+                ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
+                    LocationPredicate.Builder.location()
+                        .setBlock(
+                            BlockPredicate.Builder
+                                .block()
+                                .of(
+                                    Blocks.SAND,
+                                    HybridAquaticBlocks.GRASSY_SAND.get()
+                                )
+                                .build()
+                        ),
+                    ItemPredicate.Builder.item()
+                        .of(HybridAquaticItems.CLAM.get())
+                )
+            )
+            .build(ResourceLocation("hybrid-aquatic", "plant_clam"))
+        consumer?.accept(plantClamAdvancement)
 
         //#region Pearl Advancement Tree
         val obtainPearlAdvancement = Advancement.Builder.advancement()

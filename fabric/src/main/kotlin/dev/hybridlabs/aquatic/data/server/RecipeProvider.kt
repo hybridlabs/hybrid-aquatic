@@ -41,6 +41,17 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.DIVING_WEIGHT.get())
+            .pattern("III")
+            .pattern("I I")
+            .pattern("IBI")
+            .define('I', Items.IRON_INGOT)
+            .define('B', Items.IRON_BLOCK)
+            .unlockedBy(
+                "has_iron_ingot",
+                InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HybridAquaticItems.PRISMARINE_ROD.get())
             .pattern("P  ")
             .pattern("P  ")

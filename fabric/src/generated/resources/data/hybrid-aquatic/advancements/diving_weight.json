@@ -1,12 +1,12 @@
 {
-  "parent": "hybrid-aquatic:root",
+  "parent": "hybrid-aquatic:fishing_net",
   "criteria": {
-    "fishing_net": {
+    "diving_weight": {
       "conditions": {
         "items": [
           {
             "items": [
-              "hybrid-aquatic:fishing_net"
+              "hybrid-aquatic:diving_weight"
             ]
           }
         ]
@@ -18,21 +18,21 @@
     "announce_to_chat": true,
     "background": "hybrid-aquatic:textures/block/coralstone.png",
     "description": {
-      "translate": "advancements.hybrid-aquatic.fishing_net.description"
+      "translate": "advancements.hybrid-aquatic.diving_weight.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "hybrid-aquatic:fishing_net"
+      "item": "hybrid-aquatic:diving_weight"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.hybrid-aquatic.fishing_net.title"
+      "translate": "advancements.hybrid-aquatic.diving_weight.title"
     }
   },
   "requirements": [
     [
-      "fishing_net"
+      "diving_weight"
     ]
   ],
   "sends_telemetry_event": true

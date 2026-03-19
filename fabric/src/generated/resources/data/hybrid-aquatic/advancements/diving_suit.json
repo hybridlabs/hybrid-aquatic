@@ -1,5 +1,5 @@
 {
-  "parent": "hybrid-aquatic:root",
+  "parent": "hybrid-aquatic:fishing_net",
   "criteria": {
     "obtain_diving_suit": {
       "conditions": {

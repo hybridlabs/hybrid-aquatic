@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.mixin;
 import com.google.common.collect.ImmutableList;
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects;
-import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity;
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import dev.hybridlabs.aquatic.item.HybridAquaticToolMaterials;
@@ -48,11 +47,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
     private int haHurtTime = 0;
 
     @Unique
-    private boolean isWearingDivingBoots;
-    @Unique
-    private boolean isWearingReinforcedDivingBoots;
-    @Unique
-    private boolean isWearingGlowingDivingBoots;
+    private boolean isHoldingDivingWeight;
 
     @Override
     public void hybrid_aquatic$setHurtTime(int value) {
@@ -76,7 +71,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
 
     @Inject(method = "isAffectedByFluids", at = @At("HEAD"), cancellable = true)
     private void overrideShouldSwimInFluids(CallbackInfoReturnable<Boolean> ci) {
-        if ((isWearingDivingBoots || isWearingReinforcedDivingBoots || isWearingGlowingDivingBoots) && !isSwimming() && isUnderWater()) {
+        if ((isHoldingDivingWeight) && !isSwimming() && isUnderWater()) {
             ci.setReturnValue(false);
         }
     }
@@ -120,9 +115,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         // Gives Water Breathing/Clarity if player has Diving Helmet equipped
         updateDivingHelmet();
         // Allows player to walk in the water without jumping
-        updateDivingBoots();
-        updateReinforcedDivingBoots();
-        updateGlowingDivingBoots();
+        updateDivingWeight();
         // Gives Resistance and Slowness if player has Turtle chestplate equipped
         updateTurtleChestplate();
         // Repairs coral tools in the water
@@ -209,24 +202,12 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
     }
 
     @Unique
-    private void updateDivingBoots() {
+    private void updateDivingWeight() {
         var player = (Player) (Object) this;
-        ItemStack itemStack = player.getItemBySlot(EquipmentSlot.FEET);
-        isWearingDivingBoots = itemStack.is(HybridAquaticItems.INSTANCE.getDIVING_BOOTS().get());
-    }
 
-    @Unique
-    private void updateReinforcedDivingBoots() {
-        var player = (Player) (Object) this;
-        ItemStack itemStack = player.getItemBySlot(EquipmentSlot.FEET);
-        isWearingReinforcedDivingBoots = itemStack.is(HybridAquaticItems.INSTANCE.getREINFORCED_DIVING_BOOTS().get());
-    }
-
-    @Unique
-    private void updateGlowingDivingBoots() {
-        var player = (Player) (Object) this;
-        ItemStack itemStack = player.getItemBySlot(EquipmentSlot.FEET);
-        isWearingGlowingDivingBoots = itemStack.is(HybridAquaticItems.INSTANCE.getGLOWING_DIVING_BOOTS().get());
+        isHoldingDivingWeight =
+                player.getMainHandItem().is(HybridAquaticItems.INSTANCE.getDIVING_WEIGHT().get()) ||
+                        player.getOffhandItem().is(HybridAquaticItems.INSTANCE.getDIVING_WEIGHT().get());
     }
 
     @Unique

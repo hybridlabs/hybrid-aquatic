@@ -1,12 +1,12 @@
 {
-  "parent": "hybrid-aquatic:glowstick",
+  "parent": "hybrid-aquatic:root",
   "criteria": {
-    "obtain_buoy": {
+    "obtain_clam": {
       "conditions": {
         "items": [
           {
             "items": [
-              "hybrid-aquatic:buoy"
+              "hybrid-aquatic:clam"
             ]
           }
         ]
@@ -18,21 +18,21 @@
     "announce_to_chat": true,
     "background": "hybrid-aquatic:textures/block/coralstone.png",
     "description": {
-      "translate": "advancements.hybrid-aquatic.buoy.description"
+      "translate": "advancements.hybrid-aquatic.get_clam.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "hybrid-aquatic:buoy"
+      "item": "hybrid-aquatic:clam"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.hybrid-aquatic.buoy.title"
+      "translate": "advancements.hybrid-aquatic.get_clam.title"
     }
   },
   "requirements": [
     [
-      "obtain_buoy"
+      "obtain_clam"
     ]
   ],
   "sends_telemetry_event": true
