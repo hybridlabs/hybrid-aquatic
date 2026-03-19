@@ -251,6 +251,12 @@ object HybridAquaticEntityRenderers {
             ::TriggerfishEntityRenderer
         )
 
+    val TREVALLY =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HybridAquaticEntityTypes.TREVALLY,
+            ::TrevallyEntityRenderer
+        )
+
     val OSCAR =
         ClientServices.PLATFORM.registerEntityRenderer(
             HybridAquaticEntityTypes.OSCAR, ::OscarEntityRenderer

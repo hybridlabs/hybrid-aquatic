@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.entity.cephalopod.*
 import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
+import dev.hybridlabs.aquatic.entity.fish.TrevallyEntity
 import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
@@ -58,6 +59,7 @@ object SpawnRestrictionRegistry {
             HybridAquaticEntityTypes.ROCKFISH.get(),
             HybridAquaticEntityTypes.SEA_BASS.get(),
             HybridAquaticEntityTypes.TRIGGERFISH.get(),
+            HybridAquaticEntityTypes.TREVALLY.get(),
             HybridAquaticEntityTypes.WRASSE.get(),
             HybridAquaticEntityTypes.NEEDLEFISH.get(),
             HybridAquaticEntityTypes.MACKEREL.get(),

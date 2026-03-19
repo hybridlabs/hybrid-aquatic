@@ -1477,6 +1477,21 @@ object HybridAquaticItems {
         )
     }
 
+    val TREVALLY = register(
+        "trevally"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(2)
+                        .saturationMod(0.4F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
     val PARROTFISH = register(
         "parrotfish"
     ) {
@@ -1713,6 +1728,8 @@ object HybridAquaticItems {
         registerSpawnEgg("blowfish_spawn_egg", HybridAquaticEntityTypes.BLOWFISH, 0xfcf2ce, 0x885e6d)
     val TRIGGERFISH_SPAWN_EGG =
         registerSpawnEgg("triggerfish_spawn_egg", HybridAquaticEntityTypes.TRIGGERFISH, 0x5b7c7e, 0xbdcdda)
+    val TREVALLY_SPAWN_EGG =
+        registerSpawnEgg("trevally_spawn_egg", HybridAquaticEntityTypes.TREVALLY, 0xe3bb5f, 0x575644)
     val TUNA_SPAWN_EGG =
         registerSpawnEgg("tuna_spawn_egg", HybridAquaticEntityTypes.TUNA, 0x36668d, 0xf5d58d)
     val GOLDEN_DORADO_SPAWN_EGG =

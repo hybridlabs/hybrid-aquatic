@@ -400,6 +400,16 @@ class EntitySpawnConfigGenerator {
         )
 
         addFish(
+            HybridAquaticEntityTypes.TREVALLY.get(),
+            listOf(
+                HybridAquaticBiomeTags.WARM_OCEAN,
+                HybridAquaticBiomeTags.LUKEWARM_OCEANS,
+                HybridAquaticBiomeTags.CORAL_REEF,
+                HybridAquaticBiomeTags.SEAGRASS_BED),
+            3, 1, 1
+        )
+
+        addFish(
             HybridAquaticEntityTypes.PARROTFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.WARM_OCEAN,

@@ -1164,6 +1164,18 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
+
+        export(exporter, HybridAquaticEntityTypes.TREVALLY.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.TREVALLY.get())
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
         export(exporter, HybridAquaticEntityTypes.SEAHORSE.get()) {
             pool(
                 LootPool.lootPool()

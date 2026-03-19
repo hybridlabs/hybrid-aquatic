@@ -461,6 +461,13 @@ object HybridAquaticEntityTypes {
         TriggerfishEntity::createMobAttributes
     )
 
+    val TREVALLY = registerFish(
+        "trevally",
+        ::TrevallyEntity,
+        EntityDimensions.fixed(0.4f, 0.5f),
+        TrevallyEntity::createMobAttributes
+    )
+
     val TUNA = registerFish(
         "tuna",
         ::TunaEntity,

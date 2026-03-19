@@ -271,6 +271,7 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.BLUE_SPOTTED_STINGRAY.get())
                 entries.accept(HybridAquaticItems.SPOTTED_EAGLE_RAY.get())
                 entries.accept(HybridAquaticItems.TRIGGERFISH.get())
+                entries.accept(HybridAquaticItems.TREVALLY.get())
                 entries.accept(HybridAquaticItems.ROCKFISH.get())
                 entries.accept(HybridAquaticItems.SEA_BASS.get())
                 entries.accept(HybridAquaticItems.COELACANTH.get())

@@ -278,6 +278,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         listOf(
             HybridAquaticItems.MORAY_EEL.get(),
             HybridAquaticItems.TRIGGERFISH.get(),
+            HybridAquaticItems.TREVALLY.get(),
             HybridAquaticItems.PARROTFISH.get(),
             HybridAquaticItems.SHEEPSHEAD_WRASSE.get(),
             HybridAquaticItems.RATFISH.get(),
@@ -365,6 +366,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.NEON_TETRA.get(),
             HybridAquaticItems.TIGER_BARB.get(),
             HybridAquaticItems.TRIGGERFISH.get(),
+            HybridAquaticItems.TREVALLY.get(),
             HybridAquaticItems.JOHN_DORY.get(),
             HybridAquaticItems.RAW_FISH_MEAT.get(),
             HybridAquaticItems.RAW_FISH_STEAK.get(),
@@ -436,6 +438,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.TUNA.get(),
             HybridAquaticItems.SURGEONFISH.get(),
             HybridAquaticItems.TRIGGERFISH.get(),
+            HybridAquaticItems.TREVALLY.get(),
             HybridAquaticItems.OSCAR.get(),
             HybridAquaticItems.OPAH.get(),
             HybridAquaticItems.MAHI.get(),

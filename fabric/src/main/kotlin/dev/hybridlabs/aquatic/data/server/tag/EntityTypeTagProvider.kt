@@ -117,6 +117,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.TRIPOD_FISH.get(),
                 HybridAquaticEntityTypes.STINGRAY.get(),
                 HybridAquaticEntityTypes.TRIGGERFISH.get(),
+                HybridAquaticEntityTypes.TREVALLY.get(),
                 HybridAquaticEntityTypes.NEEDLEFISH.get(),
                 HybridAquaticEntityTypes.TROUT.get(),
                 HybridAquaticEntityTypes.ROCKFISH.get(),
@@ -203,6 +204,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HybridAquaticEntityTypes.STONEFISH.get(),
                 HybridAquaticEntityTypes.SURGEONFISH.get(),
                 HybridAquaticEntityTypes.TRIGGERFISH.get(),
+                HybridAquaticEntityTypes.TREVALLY.get(),
                 HybridAquaticEntityTypes.WRASSE.get(),
                 EntityType.TROPICAL_FISH,
             )

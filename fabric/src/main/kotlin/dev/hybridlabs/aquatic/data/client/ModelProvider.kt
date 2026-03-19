@@ -438,6 +438,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.NEON_TETRA.get(),
             HybridAquaticItems.TIGER_BARB.get(),
             HybridAquaticItems.TRIGGERFISH.get(),
+            HybridAquaticItems.TREVALLY.get(),
             HybridAquaticItems.TUNA.get(),
             HybridAquaticItems.STONEFISH.get(),
             HybridAquaticItems.BLOWFISH.get(),
