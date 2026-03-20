@@ -23,11 +23,7 @@ import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades.registerCustomTrades
 import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
-import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
-import dev.hybridlabs.aquatic.world.gen.feature.FeatureBiomeModifications
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.*
 import dev.hybridlabs.aquatic.world.gen.structure.FabricSpawnModifiers
 import dev.hybridlabs.aquatic.world.gen.structure.SpawnModifier
 import net.fabricmc.api.ModInitializer
@@ -96,6 +92,7 @@ object HybridAquatic : ModInitializer {
         if (configHandler.config.enableWanderingTraderTrades) {
             registerCustomTrades()
         }
+
         registerFlammables(FlammableBlockRegistry.getDefaultInstance())
         registerStrippables()
 
