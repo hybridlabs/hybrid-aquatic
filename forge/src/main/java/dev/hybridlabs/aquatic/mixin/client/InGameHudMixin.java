@@ -39,6 +39,13 @@ public class InGameHudMixin {
                 renderReinforcedDivingHelmetOverlay(context);
             }
         }
+
+        if (player != null && client.options.getCameraType().isFirstPerson()) {
+            ItemStack helmet = player.getInventory().getArmor(3);
+            if (helmet.getItem() == HybridAquaticItems.INSTANCE.getGLOWING_DIVING_HELMET().get()) {
+                renderGlowingDivingHelmetOverlay(context);
+            }
+        }
     }
 
     @Unique
@@ -61,6 +68,24 @@ public class InGameHudMixin {
 
     @Unique
     private void renderReinforcedDivingHelmetOverlay(GuiGraphics context) {
+        Minecraft client = Minecraft.getInstance();
+        Window window = client.getWindow();
+        int scaledWidth = window.getGuiScaledWidth();
+        int scaledHeight = window.getGuiScaledHeight();
+
+        RenderSystem.disableDepthTest();
+        RenderSystem.depthMask(false);
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.setShaderTexture(0, DIVING_HELMET_OVERLAY);
+        context.blit(DIVING_HELMET_OVERLAY, 0, 0, scaledWidth, scaledHeight, 0.0F, 0.0F, 512, 256, 512, 256);
+        RenderSystem.depthMask(true);
+        RenderSystem.enableDepthTest();
+        RenderSystem.disableBlend();
+    }
+
+    @Unique
+    private void renderGlowingDivingHelmetOverlay(GuiGraphics context) {
         Minecraft client = Minecraft.getInstance();
         Window window = client.getWindow();
         int scaledWidth = window.getGuiScaledWidth();
