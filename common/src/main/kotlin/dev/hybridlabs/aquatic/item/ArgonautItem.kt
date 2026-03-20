@@ -21,8 +21,6 @@ import net.minecraft.world.phys.HitResult
 
 class ArgonautItem(properties: Properties) : Item(properties) {
 
-    private val type = HybridAquaticEntityTypes.ARGONAUT.get()
-
     override fun useOn(context: UseOnContext): InteractionResult {
         val level = context.level
 
@@ -41,7 +39,7 @@ class ArgonautItem(properties: Properties) : Item(properties) {
             pos.relative(face)
         }
 
-        val entity: ArgonautEntity? = type.spawn(
+        val entity: ArgonautEntity? = HybridAquaticEntityTypes.ARGONAUT.get().spawn(
             level,
             stack,
             context.player,
@@ -96,7 +94,7 @@ class ArgonautItem(properties: Properties) : Item(properties) {
             return InteractionResultHolder.pass(stack)
         }
 
-        val entity: ArgonautEntity? = type.spawn(
+        val entity: ArgonautEntity? = HybridAquaticEntityTypes.ARGONAUT.get().spawn(
             level,
             stack,
             player,

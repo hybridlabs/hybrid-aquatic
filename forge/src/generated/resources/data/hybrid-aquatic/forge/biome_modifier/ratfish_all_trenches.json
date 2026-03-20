@@ -1,8 +1,8 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#hybrid-aquatic:lukewarm_trench",
+  "biomes": "#hybrid-aquatic:all_trenches",
   "spawners": {
-    "type": "hybrid-aquatic:snailfish",
+    "type": "hybrid-aquatic:ratfish",
     "maxCount": 3,
     "minCount": 1,
     "weight": 5
