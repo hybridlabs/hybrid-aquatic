@@ -34,6 +34,7 @@ object HybridAquaticBlockRenderers {
 
             HybridAquaticBlocks.GLOWING_PLANKTON.get(),
 
+            HybridAquaticBlocks.CLAMS.get(),
             HybridAquaticBlocks.SEA_LETTUCE.get(),
             HybridAquaticBlocks.TALL_SEA_LETTUCE.get(),
 
