@@ -5,10 +5,6 @@ package dev.hybridlabs.aquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
-import dev.hybridlabs.aquatic.client.item.tooltip.ArgonautTooltip
-import dev.hybridlabs.aquatic.client.item.tooltip.DivingWeightTooltip
-import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
-import dev.hybridlabs.aquatic.client.item.tooltip.OminousConchTooltip
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BASKING_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BULL_SHARK_PLUSHIE
@@ -32,7 +28,6 @@ import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneBlockItemRende
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
 import net.fabricmc.fabric.api.`object`.builder.v1.client.model.FabricModelPredicateProviderRegistry
@@ -57,7 +52,6 @@ object HybridAquaticClient : ClientModInitializer {
         registerBuiltinItemRenderers()
         registerEntityRenderers()
         registerWeatherRenderers()
-        registerTooltips()
         registerGeoRenderers()
         registerModelLayers()
         registerItemProperties()
@@ -105,13 +99,6 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerWeatherRenderers() {
         // TODO: hook up renderer to make this thing easier
-    }
-
-    private fun registerTooltips() {
-        ItemTooltipCallback.EVENT.register(FishingNetTooltip())
-        ItemTooltipCallback.EVENT.register(ArgonautTooltip())
-        ItemTooltipCallback.EVENT.register(DivingWeightTooltip())
-        ItemTooltipCallback.EVENT.register(OminousConchTooltip())
     }
 
     private fun registerRenderShapes() {

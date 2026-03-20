@@ -1,7 +1,9 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import net.minecraft.ChatFormatting
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
@@ -12,11 +14,30 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.material.Fluids
 import java.util.*
 
 class FishingNetItem(settings: Properties) : Item(settings) {
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        level: Level?,
+        lines: MutableList<Component>,
+        options: TooltipFlag
+    ) {
+        lines.add(Component.translatable("item.hybrid-aquatic.fishing_net.function").withStyle(ChatFormatting.GRAY))
+        lines.add(Component.translatable("item.hybrid-aquatic.fishing_net.properties").withStyle(ChatFormatting.GRAY))
+        val nbtCopy = stack.tag?.copy()
+        if (nbtCopy != null) {
+            val optionalEntity = getEntityFromNBT(nbtCopy)
+            if (optionalEntity.isPresent) {
+                val entityName = optionalEntity.get().description
+                lines.add(Component.translatable("item.hybrid-aquatic.fishing_net.description", entityName))
+            }
+        }
+    }
 
     override fun interactLivingEntity(
         stack: ItemStack,

@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import net.minecraft.core.Direction
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.stats.Stats
 import net.minecraft.world.InteractionHand
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
@@ -20,6 +22,29 @@ import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.phys.HitResult
 
 class ArgonautItem(properties: Properties) : Item(properties) {
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        level: Level?,
+        lines: MutableList<Component>,
+        context: TooltipFlag
+    ) {
+        val tag = stack.tag ?: return
+
+        if (tag.contains("ShellColor")) {
+            val color = ArgonautEntity.ShellColor.byId(tag.getInt("ShellColor"))
+            lines.add(Component.translatable("tooltip.hybrid-aquatic.argonaut.shell", color.name.uppercase()))
+        }
+
+        if (tag.contains("SailColor")) {
+            val color = ArgonautEntity.SailColor.byId(tag.getInt("SailColor"))
+            lines.add(Component.translatable("tooltip.hybrid-aquatic.argonaut.sail", color.name.uppercase()))
+        }
+
+        if (tag.contains("Glowing") && tag.getBoolean("Glowing")) {
+            lines.add(Component.translatable("tooltip.hybrid-aquatic.argonaut.glowing"))
+        }
+    }
 
     override fun useOn(context: UseOnContext): InteractionResult {
         val level = context.level
