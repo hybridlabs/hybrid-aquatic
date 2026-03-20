@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "hybrid-aquatic:cut_white_sandstone"
+  },
+  "result": "hybrid-aquatic:cut_sandstone_slab"
+}

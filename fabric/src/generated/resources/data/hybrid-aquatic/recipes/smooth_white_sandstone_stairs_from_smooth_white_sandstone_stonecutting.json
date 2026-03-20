@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "hybrid-aquatic:smooth_white_sandstone"
+  },
+  "result": "hybrid-aquatic:smooth_white_sandstone_stairs"
+}

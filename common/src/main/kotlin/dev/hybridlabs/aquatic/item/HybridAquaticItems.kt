@@ -522,7 +522,17 @@ object HybridAquaticItems {
     val AERATED_SAND = registerBlockItem("aerated_sand") { HybridAquaticBlocks.AERATED_SAND.get() }
     val BUBBLE_GEYSER = registerBlockItem("bubble_geyser") { HybridAquaticBlocks.BUBBLE_GEYSER.get() }
     val WHITE_SAND = registerBlockItem("white_sand") { HybridAquaticBlocks.WHITE_SAND.get() }
+    val CHISELED_WHITE_SANDSTONE = registerBlockItem("chiseled_white_sandstone") { HybridAquaticBlocks.CHISELED_WHITE_SANDSTONE.get() }
     val WHITE_SANDSTONE = registerBlockItem("white_sandstone") { HybridAquaticBlocks.WHITE_SANDSTONE.get() }
+    val WHITE_SANDSTONE_STAIRS = register("white_sandstone_stairs") { BlockItem(HybridAquaticBlocks.WHITE_SANDSTONE_STAIRS.get(), Item.Properties()) }
+    val WHITE_SANDSTONE_SLAB = register("white_sandstone_slab") { BlockItem(HybridAquaticBlocks.WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
+    val WHITE_SANDSTONE_WALL = register("white_sandstone_wall") { BlockItem(HybridAquaticBlocks.WHITE_SANDSTONE_WALL.get(), Item.Properties()) }
+    val SMOOTH_WHITE_SANDSTONE = registerBlockItem("smooth_white_sandstone") { HybridAquaticBlocks.SMOOTH_WHITE_SANDSTONE.get() }
+    val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") { BlockItem(HybridAquaticBlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get(), Item.Properties()) }
+    val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") { BlockItem(HybridAquaticBlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
+    val CUT_WHITE_SANDSTONE = registerBlockItem("cut_white_sandstone") { HybridAquaticBlocks.CUT_WHITE_SANDSTONE.get() }
+    val CUT_WHITE_SANDSTONE_SLAB = register("cut_sandstone_slab") { BlockItem(HybridAquaticBlocks.CUT_WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
+
     val SUSPICIOUS_RED_SAND = registerBlockItem("suspicious_red_sand") { HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get() }
     val CORALSTONE = registerBlockItem("coralstone") { HybridAquaticBlocks.CORALSTONE.get() }
     val SHORESTONE = registerBlockItem("shorestone") { HybridAquaticBlocks.SHORESTONE.get() }

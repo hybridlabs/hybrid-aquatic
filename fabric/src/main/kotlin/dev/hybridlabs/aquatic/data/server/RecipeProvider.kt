@@ -23,6 +23,113 @@ import java.util.function.Consumer
 
 class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun buildRecipes(exporter: Consumer<FinishedRecipe>) {
+
+        //#region Sandstone Block Recipes
+        stairBuilder(
+            HybridAquaticItems.WHITE_SANDSTONE_STAIRS.get(),
+            Ingredient.of(HybridAquaticItems.WHITE_SANDSTONE.get())
+        )
+
+        stairBuilder(
+            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
+            Ingredient.of(HybridAquaticItems.SMOOTH_WHITE_SANDSTONE.get())
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.WHITE_SANDSTONE_SLAB.get(),
+            HybridAquaticItems.WHITE_SANDSTONE.get()
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.CUT_WHITE_SANDSTONE_SLAB.get(),
+            HybridAquaticItems.CUT_WHITE_SANDSTONE.get()
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
+            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE.get()
+        )
+
+        chiseled(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.CHISELED_WHITE_SANDSTONE.get(),
+            HybridAquaticItems.WHITE_SANDSTONE.get()
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.WHITE_SANDSTONE_SLAB.get(),
+            HybridAquaticItems.WHITE_SANDSTONE.get(),
+            2
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.CUT_WHITE_SANDSTONE_SLAB.get(),
+            HybridAquaticItems.CUT_WHITE_SANDSTONE.get(),
+            2
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
+            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE.get(),
+            2
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.WHITE_SANDSTONE_STAIRS.get(),
+            HybridAquaticItems.WHITE_SANDSTONE.get()
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
+            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE.get()
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.WHITE_SANDSTONE_WALL.get(),
+            HybridAquaticItems.WHITE_SANDSTONE.get()
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.CHISELED_WHITE_SANDSTONE.get(),
+            HybridAquaticItems.WHITE_SANDSTONE.get()
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE.get(),
+            HybridAquaticItems.WHITE_SANDSTONE.get()
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HybridAquaticItems.CUT_WHITE_SANDSTONE.get(),
+            HybridAquaticItems.WHITE_SANDSTONE.get()
+        )
+        //#endregion
+
         // misc recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, HybridAquaticItems.ARGONAUT.get())
             .pattern("IBF")
@@ -49,7 +156,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .define('B', Items.IRON_BLOCK)
             .unlockedBy(
                 "has_iron_ingot",
-                InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+                InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT)
+            )
             .save(exporter)
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HybridAquaticItems.PRISMARINE_ROD.get())
@@ -481,7 +589,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             RecipeCategory.COMBAT,
             HybridAquaticItems.REINFORCED_DIVING_HELMET.get()
         )
-            .unlocks("has_diving_helmet",
+            .unlocks(
+                "has_diving_helmet",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
                     HybridAquaticItems.DIVING_HELMET.get()
                 )
@@ -495,7 +604,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             RecipeCategory.COMBAT,
             HybridAquaticItems.REINFORCED_DIVING_SUIT.get()
         )
-            .unlocks("has_diving_suit",
+            .unlocks(
+                "has_diving_suit",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
                     HybridAquaticItems.DIVING_SUIT.get()
                 )
@@ -509,7 +619,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             RecipeCategory.COMBAT,
             HybridAquaticItems.REINFORCED_DIVING_LEGGINGS.get()
         )
-            .unlocks("has_diving_leggings",
+            .unlocks(
+                "has_diving_leggings",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
                     HybridAquaticItems.DIVING_LEGGINGS.get()
                 )
@@ -523,7 +634,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             RecipeCategory.COMBAT,
             HybridAquaticItems.REINFORCED_DIVING_BOOTS.get()
         )
-            .unlocks("has_diving_boots",
+            .unlocks(
+                "has_diving_boots",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
                     HybridAquaticItems.DIVING_BOOTS.get()
                 )
@@ -538,7 +650,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             RecipeCategory.COMBAT,
             HybridAquaticItems.GLOWING_DIVING_HELMET.get()
         )
-            .unlocks("has_diving_helmet",
+            .unlocks(
+                "has_diving_helmet",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
                     HybridAquaticItems.DIVING_HELMET.get()
                 )
@@ -552,7 +665,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             RecipeCategory.COMBAT,
             HybridAquaticItems.GLOWING_DIVING_SUIT.get()
         )
-            .unlocks("has_diving_suit",
+            .unlocks(
+                "has_diving_suit",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
                     HybridAquaticItems.DIVING_SUIT.get()
                 )
@@ -566,7 +680,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             RecipeCategory.COMBAT,
             HybridAquaticItems.GLOWING_DIVING_LEGGINGS.get()
         )
-            .unlocks("has_diving_leggings",
+            .unlocks(
+                "has_diving_leggings",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
                     HybridAquaticItems.DIVING_LEGGINGS.get()
                 )
@@ -580,7 +695,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             RecipeCategory.COMBAT,
             HybridAquaticItems.GLOWING_DIVING_BOOTS.get()
         )
-            .unlocks("has_diving_boots",
+            .unlocks(
+                "has_diving_boots",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
                     HybridAquaticItems.DIVING_BOOTS.get()
                 )
@@ -911,7 +1027,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
     private fun offerRaftRecipes(
         exporter: Consumer<FinishedRecipe>,
-        map: Map<Block, Block>
+        map: Map<Block, Block>,
     ) {
         for ((woodType, raftType) in map) {
             ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, raftType, 2)
@@ -980,7 +1096,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
     private fun offerBleachingRecipes(
         exporter: Consumer<FinishedRecipe>,
-        map: Map<Block, Block>
+        map: Map<Block, Block>,
     ) {
         for ((deadCoral, bleachedCoral) in map) {
             ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, bleachedCoral, 8)

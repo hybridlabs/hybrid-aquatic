@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.block.HybridAquaticBlockFamilies
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
@@ -105,10 +106,18 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             setOf(
                 HybridAquaticBlocks.DEPTH_CHARGE.get(),
                 HybridAquaticBlocks.GRASSY_SAND.get(),
-                HybridAquaticBlocks.WHITE_SANDSTONE.get(),
             ).forEach { block ->
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP_BOTTOM)
             }
+
+            generator.family(HybridAquaticBlocks.WHITE_SANDSTONE.get())
+                .generateFor(HybridAquaticBlockFamilies.WHITE_SANDSTONE)
+
+            generator.family(HybridAquaticBlocks.SMOOTH_WHITE_SANDSTONE.get())
+                .generateFor(HybridAquaticBlockFamilies.SMOOTH_WHITE_SANDSTONE)
+
+            generator.family(HybridAquaticBlocks.CUT_WHITE_SANDSTONE.get())
+                .generateFor(HybridAquaticBlockFamilies.CUT_WHITE_SANDSTONE)
 
             //#region Crates
             setOf(

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "hybrid-aquatic:block/white_sandstone"
+    "all": "hybrid-aquatic:block/smooth_white_sandstone"
   }
 }

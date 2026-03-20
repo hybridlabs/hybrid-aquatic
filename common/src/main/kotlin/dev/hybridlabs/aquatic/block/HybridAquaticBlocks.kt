@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
@@ -64,7 +65,20 @@ object HybridAquaticBlocks {
     val AERATED_SAND = register("aerated_sand") { AeratedSandBlock(14406560, Properties.copy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
     val BUBBLE_GEYSER = register("bubble_geyser") { BubbleGeyserBlock(14406560, Properties.copy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
     val WHITE_SAND = register("white_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
+
     val WHITE_SANDSTONE = register("white_sandstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
+    val WHITE_SANDSTONE_STAIRS = register("white_sandstone_stairs") { StairBlock(WHITE_SANDSTONE.get().defaultBlockState(), Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
+    val WHITE_SANDSTONE_SLAB = register("white_sandstone_slab") { SlabBlock(Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
+    val WHITE_SANDSTONE_WALL = register("white_sandstone_wall") { WallBlock(Properties.copy(WHITE_SANDSTONE.get())) }
+
+    val SMOOTH_WHITE_SANDSTONE = register("smooth_white_sandstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
+    val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") { SlabBlock(Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
+    val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") { StairBlock(WHITE_SANDSTONE.get().defaultBlockState(), Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
+
+    val CUT_WHITE_SANDSTONE = register("cut_white_sandstone") { Block(Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
+    val CUT_WHITE_SANDSTONE_SLAB = register("cut_white_sandstone_slab") { SlabBlock(Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
+
+    val CHISELED_WHITE_SANDSTONE = register("chiseled_white_sandstone") { SlabBlock(Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
 
     val SUSPICIOUS_RED_SAND = register("suspicious_red_sand") {
         BrushableBlock(Blocks.RED_SAND,
