@@ -22,11 +22,6 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
-import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
 
 class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
@@ -79,28 +74,6 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
 
         super.customServerAiStep()
     }
-
-    //#region Animations
-    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        super.registerControllers(controllers)
-        controllers.add(
-            AnimationController(
-                this, "Charge", 8,
-                AnimationController.AnimationStateHandler { state: AnimationState<PiranhaEntity> ->
-                    if (this.isUnderWater && this.isSprinting) {
-                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.RUN)
-                    } else {
-                        PlayState.STOP
-                    }
-                }
-            )
-        )
-
-        controllers.add(
-            DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE)
-        )
-    }
-    //#endregion
 
     override fun canCollideWith(entity: Entity): Boolean {
         if (entity is PiranhaEntity) {

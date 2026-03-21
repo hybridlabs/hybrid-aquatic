@@ -35,8 +35,6 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 
@@ -388,20 +386,23 @@ open class HybridAquaticOctopusEntity(type: EntityType<out HybridAquaticOctopusE
 
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "Swim/Idle", 10
-        ) { state: AnimationState<*> ->
-            state.setAndContinue(
-                if (state.isMoving) DefaultAnimations.SWIM else DefaultAnimations.IDLE
-            )
-        })
-        controllers.add(AnimationController(this, "Sit", 10) { state ->
-            if (isSitting() || this.onGround()) {
-                state.setAndContinue(DefaultAnimations.SIT)
-                PlayState.CONTINUE
-            } else {
-                PlayState.STOP
+        controllers.add(
+            AnimationController(this, "Octopus Animation Controller", 8) { state ->
+                when {
+                    isInWater && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.SWIM)
+                    }
+
+                    isSitting() && onGround() -> {
+                        state.setAndContinue(DefaultAnimations.SIT)
+                    }
+
+                    else -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+                }
             }
-        })
+        )
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {

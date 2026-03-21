@@ -168,15 +168,15 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
                         state.setAndContinue(DefaultAnimations.SWIM)
                     }
 
-                    isInWater && isSprinting && state.isMoving -> {
+                    isUnderWater && isSprinting -> {
                         state.setAndContinue(DefaultAnimations.RUN)
                     }
 
-                    isInWater && isSitting() -> {
+                    isInWater && isSitting() && canSit() -> {
                         state.setAndContinue(DefaultAnimations.SIT)
                     }
 
-                    isInWater && !state.isMoving && !isSitting() -> {
+                    onGround() && !state.isMoving && !isSitting() && canSit() -> {
                         state.setAndContinue(DefaultAnimations.IDLE)
                     }
 
@@ -189,6 +189,10 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
                     }
                 }
             }
+        )
+
+        controllers.add(
+            DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE)
         )
     }
 

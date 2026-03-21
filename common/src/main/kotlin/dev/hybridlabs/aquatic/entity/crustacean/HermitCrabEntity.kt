@@ -39,13 +39,27 @@ import software.bernie.geckolib.core.`object`.PlayState
 
 @Suppress("DEPRECATION")
 class HermitCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, false, true) {
+    HybridAquaticCrustaceanEntity(entityType, world, false) {
+    val hasShell: Boolean = true
 
     override fun registerGoals() {
         super.registerGoals()
 
         goalSelector.addGoal(1, FleeFromEntityGoal(this, PrimedTnt::class.java, 15.0, 0.3, 0.75))
         goalSelector.addGoal(1, FleeFromEntityGoal(this, SmallTNTEntity::class.java, 15.0, 0.3, 0.75))
+    }
+
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        super.addAdditionalSaveData(nbt)
+        if (hasShell) nbt.put("ShellItem", shellItem.save(CompoundTag()))
+    }
+
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
+        super.readAdditionalSaveData(nbt)
+        if (hasShell) {
+            val shellItemNBT = nbt.getCompound("ShellItem")
+            shellItem = if (shellItemNBT.isEmpty) Items.NAUTILUS_SHELL.defaultInstance else ItemStack.of(shellItemNBT)
+        }
     }
 
     //#region Shells & Items

@@ -36,8 +36,7 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
@@ -300,21 +299,22 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Swim/Idle", 10
-            ) { state: AnimationState<*> ->
-                state.setAndContinue(
-                    if (state.isMoving) DefaultAnimations.SWIM else DefaultAnimations.IDLE
-                )
+            AnimationController(this, "Cephalopod Controller", 4) { state ->
+                when {
+                    isInWater && state.isMoving -> {
+                        state.setAndContinue(DefaultAnimations.SWIM)
+                    }
+
+                    this.moistness < 590 -> {
+                        state.setAndContinue(FLOP_ANIMATION)
+                    }
+
+                    else -> {
+                        state.setAndContinue(DefaultAnimations.IDLE)
+                    }
+                }
             }
         )
-        controllers.add(AnimationController(this, "Sit", 10) { state ->
-            if (onGround()) {
-                state.setAndContinue(DefaultAnimations.SIT)
-                PlayState.CONTINUE
-            } else {
-                PlayState.STOP
-            }
-        })
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
@@ -366,6 +366,8 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
             SynchedEntityData.defineId(HybridAquaticCephalopodEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HybridAquaticCephalopodEntity::class.java, EntityDataSerializers.BOOLEAN)
+
+        val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
 
         const val MAX_HUNGER = 2400
         const val HUNGER_KEY = "Hunger"

@@ -27,7 +27,6 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.block.Blocks
@@ -47,7 +46,6 @@ open class HybridAquaticCrustaceanEntity(
     type: EntityType<out HybridAquaticCrustaceanEntity>,
     world: Level,
     open val canDance: Boolean,
-    open val hasShell: Boolean = false,
 ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var fromFishingNet = false
@@ -178,7 +176,6 @@ open class HybridAquaticCrustaceanEntity(
 
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
         nbt.putBoolean("FromFishingNet", fromFishingNet)
-        if (hasShell) nbt.put("ShellItem", shellItem.save(CompoundTag()))
     }
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
@@ -186,11 +183,6 @@ open class HybridAquaticCrustaceanEntity(
 
         size = nbt.getInt(CRUSTACEAN_SIZE_KEY)
         fromFishingNet = nbt.getBoolean("FromFishingNet")
-
-        if (hasShell) {
-            val shellItemNBT = nbt.getCompound("ShellItem")
-            shellItem = if (shellItemNBT.isEmpty) Items.NAUTILUS_SHELL.defaultInstance else ItemStack.of(shellItemNBT)
-        }
     }
     //#endregion
 
