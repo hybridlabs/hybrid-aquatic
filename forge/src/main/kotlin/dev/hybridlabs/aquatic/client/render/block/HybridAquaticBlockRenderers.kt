@@ -63,25 +63,77 @@ object HybridAquaticBlockRenderers {
             HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_FAN.get(),
             HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BLEACHED_FIRE_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_FIRE_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_FIRE_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_LEAF_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_LEAF_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_LEAF_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BLEACHED_TUBE_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_TUBE_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_TUBE_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_ROSE_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_ROSE_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_ROSE_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BLEACHED_HORN_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_HORN_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_HORN_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_SUN_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_SUN_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_SUN_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BLEACHED_BRAIN_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_WALL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_THORN_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_THORN_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_THORN_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.BLEACHED_BUTTON_CORAL.get(),
+            HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_FAN.get(),
+            HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.DEAD_LEAF_CORAL.get(),
+            HybridAquaticBlocks.DEAD_LEAF_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_LEAF_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.DEAD_ROSE_CORAL.get(),
+            HybridAquaticBlocks.DEAD_ROSE_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_ROSE_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.DEAD_SUN_CORAL.get(),
+            HybridAquaticBlocks.DEAD_SUN_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_SUN_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL.get(),
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.DEAD_THORN_CORAL.get(),
+            HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.DEAD_BUTTON_CORAL.get(),
+            HybridAquaticBlocks.DEAD_BUTTON_CORAL_FAN.get(),
+            HybridAquaticBlocks.DEAD_BUTTON_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.LEAF_CORAL.get(),
+            HybridAquaticBlocks.LEAF_CORAL_FAN.get(),
+            HybridAquaticBlocks.LEAF_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.ROSE_CORAL.get(),
+            HybridAquaticBlocks.ROSE_CORAL_FAN.get(),
+            HybridAquaticBlocks.ROSE_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.SUN_CORAL.get(),
+            HybridAquaticBlocks.SUN_CORAL_FAN.get(),
+            HybridAquaticBlocks.SUN_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.LOPHELIA_CORAL.get(),
+            HybridAquaticBlocks.LOPHELIA_CORAL_FAN.get(),
+            HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.THORN_CORAL.get(),
+            HybridAquaticBlocks.THORN_CORAL_FAN.get(),
+            HybridAquaticBlocks.THORN_CORAL_WALL_FAN.get(),
+
+            HybridAquaticBlocks.BUTTON_CORAL.get(),
+            HybridAquaticBlocks.BUTTON_CORAL_FAN.get(),
+            HybridAquaticBlocks.BUTTON_CORAL_WALL_FAN.get(),
 
             HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get(),
             HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get(),
