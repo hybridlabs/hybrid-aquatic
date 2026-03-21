@@ -12,20 +12,9 @@ import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.HAMMER
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.THRESHER_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.TIGER_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.WHALE_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.BaskingSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.BullSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.FrilledSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.GreatWhiteSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.HammerheadSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.ThresherSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.TigerSharkPlushieModel
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.WhaleSharkPlushieModel
+import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
 import dev.hybridlabs.aquatic.client.render.block.HybridAquaticBlockRenderers
-import dev.hybridlabs.aquatic.client.render.block.entity.AnemoneBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.BuoyBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.GiantGreenAnemoneBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
-import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
+import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
@@ -45,6 +34,7 @@ object HybridAquaticModBusEvents {
         MOD_BUS.addListener(::loadSeaMessages)
         MOD_BUS.addListener(::registerPotionsRecipes)
         MOD_BUS.addListener(::registerSpawnPlacements)
+        MOD_BUS.addListener(::addBiomes)
 
         runForDist(
             clientTarget = {
@@ -56,6 +46,7 @@ object HybridAquaticModBusEvents {
             },
             serverTarget = {
                 MOD_BUS.addListener(::onServerSetup)
+                HybridAquaticBiomes.addBiomes()
             })
     }
 
@@ -75,6 +66,10 @@ object HybridAquaticModBusEvents {
 
     private fun registerSpawnPlacements(event: SpawnPlacementRegisterEvent) {
         SpawnRestrictionRegistry.registerSpawnRestrictions()
+    }
+
+    private fun addBiomes(event: FMLCommonSetupEvent) {
+        HybridAquaticBiomes.addBiomes()
     }
 
     private fun registerModelLayers(event: EntityRenderersEvent.RegisterLayerDefinitions) {
@@ -149,6 +144,5 @@ object HybridAquaticModBusEvents {
 
     private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {
         Constants.LOG.info("Server starting...")
-        HybridAquaticBiomes.addBiomes()
     }
 }
