@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
-import dev.hybridlabs.aquatic.config.ConfigHelper
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
 import dev.hybridlabs.aquatic.entity.ForgeSpawnGroupRegistry
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
@@ -19,7 +18,6 @@ import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
 import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings
 import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
 import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
@@ -33,7 +31,6 @@ import net.minecraftforge.fml.common.Mod
 object HybridAquaticForge {
 
     init {
-        val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
 
         CommonClass.init()
 
@@ -46,10 +43,6 @@ object HybridAquaticForge {
         HybridAquaticEntityTypes
         HybridAquaticBlockEntityTypes
         HybridAquaticPaintings
-
-        if (configHandler.config.biomeConfig.enableBiomes) {
-            HybridAquaticBiomes.addBiomes()
-        }
 
         HybridAquaticBiomeTags
 

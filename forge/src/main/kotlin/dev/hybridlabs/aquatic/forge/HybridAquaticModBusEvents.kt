@@ -30,6 +30,7 @@ import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
 import net.minecraftforge.client.event.EntityRenderersEvent
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
@@ -148,5 +149,6 @@ object HybridAquaticModBusEvents {
 
     private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {
         Constants.LOG.info("Server starting...")
+        HybridAquaticBiomes.addBiomes()
     }
 }
