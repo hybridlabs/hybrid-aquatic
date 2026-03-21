@@ -19,16 +19,14 @@ object HybridAquaticBlockEntityTypes {
         register("giant_clam", ::GiantClamBlockEntity, HybridAquaticBlocks.GIANT_CLAM)
     val OYSTER =
         register("oyster", ::OysterBlockEntity, HybridAquaticBlocks.OYSTER)
-
     val MESSAGE_IN_A_BOTTLE =
         register("message_in_a_bottle", ::MessageInABottleBlockEntity, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE)
     val BUOY =
         register("buoy", ::BuoyBlockEntity, HybridAquaticBlocks.BUOY)
 
-
     fun <T : BlockEntity?> register(
         id: String,
-        factory: BlockEntityType.BlockEntitySupplier<T>, vararg validBlocks: RegistryObject<Block>?
+        factory: BlockEntityType.BlockEntitySupplier<T>, vararg validBlocks: RegistryObject<Block>?,
     ): RegistryObject<BlockEntityType<T?>> {
 
         return CommonClass.BLOCK_ENTITY_TYPES.register(id) {

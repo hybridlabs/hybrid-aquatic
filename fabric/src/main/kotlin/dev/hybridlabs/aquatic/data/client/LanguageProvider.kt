@@ -37,6 +37,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add(key, "Message in a Bottle")
             builder.add("$key.jar", "Message in a Jar")
             builder.add("$key.longneck", "Message in a Longneck Bottle")
+            builder.add("$key.potion", "Message in a Potion Bottle")
+            builder.add("$key.wine", "Message in a Wine Bottle")
         }
 
         // sea messages

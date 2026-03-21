@@ -40,14 +40,18 @@ class MessageInABottleBlockEntityModel : GeoModel<MessageInABottleBlockEntity>()
     companion object {
         val VARIANT_MODELS = mapOf(
             Variant.BOTTLE to CommonClass.locate("geo/entity/block/message_in_a_bottle/message_in_a_bottle.geo.json"),
-            Variant.JAR to CommonClass.locate("geo/entity/block/message_in_a_bottle/message_in_a_bottle_jar.geo.json"),
-            Variant.LONGNECK to CommonClass.locate("geo/entity/block/message_in_a_bottle/message_in_a_bottle_longneck.geo.json"),
+            Variant.JAR to CommonClass.locate("geo/entity/block/message_in_a_bottle/message_in_a_jar.geo.json"),
+            Variant.LONGNECK to CommonClass.locate("geo/entity/block/message_in_a_bottle/message_in_a_longneck_bottle.geo.json"),
+            Variant.POTION to CommonClass.locate("geo/entity/block/message_in_a_bottle/message_in_a_potion_bottle.geo.json"),
+            Variant.WINE to CommonClass.locate("geo/entity/block/message_in_a_bottle/message_in_a_wine_bottle.geo.json"),
         )
 
         val VARIANT_TEXTURES = mapOf(
             Variant.BOTTLE to CommonClass.locate("textures/entity/block/message_in_a_bottle/message_in_a_bottle.png"),
-            Variant.JAR to CommonClass.locate("textures/entity/block/message_in_a_bottle/message_in_a_bottle_jar.png"),
-            Variant.LONGNECK to CommonClass.locate("textures/entity/block/message_in_a_bottle/message_in_a_bottle_longneck.png"),
+            Variant.JAR to CommonClass.locate("textures/entity/block/message_in_a_bottle/message_in_a_jar.png"),
+            Variant.LONGNECK to CommonClass.locate("textures/entity/block/message_in_a_bottle/message_in_a_longneck_bottle.png"),
+            Variant.POTION to CommonClass.locate("textures/entity/block/message_in_a_bottle/message_in_a_potion_bottle.png"),
+            Variant.WINE to CommonClass.locate("textures/entity/block/message_in_a_bottle/message_in_a_wine_bottle.png"),
         )
 
         val WATER_BOB_ANIMATION_ID: ResourceLocation? = CommonClass.locate("animations/water_bob.animation.json")

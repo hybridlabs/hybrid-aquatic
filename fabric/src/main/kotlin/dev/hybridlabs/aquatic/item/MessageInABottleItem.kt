@@ -20,6 +20,8 @@ class MessageInABottleItem(settings: Properties) :
         return when (variant) {
             Variant.JAR -> "$key.jar"
             Variant.LONGNECK -> "$key.longneck"
+            Variant.POTION -> "$key.potion"
+            Variant.WINE -> "$key.wine"
             else -> key
         }
     }
