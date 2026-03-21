@@ -663,6 +663,20 @@ object HybridAquaticBiomes {
                     )
                 )
             )
+
+            BiomePlacement.addSubOverworld(
+                DEEP_WARM_OCEAN,
+                SULFURIC_CAVES,
+                SubBiomeMatcher.of(
+                    SubBiomeMatcher.Criterion.ofRange(
+                        SubBiomeMatcher.CriterionTargets.DEPTH,
+                        SubBiomeMatcher.CriterionTypes.VALUE,
+                        0.2f,
+                        0.5f,
+                        false
+                    )
+                )
+            )
         }
         //#endregion
 
