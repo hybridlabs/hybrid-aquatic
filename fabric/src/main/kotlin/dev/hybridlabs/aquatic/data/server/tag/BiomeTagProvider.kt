@@ -58,6 +58,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.FROZEN_TRENCH)
             .addOptional(HybridAquaticBiomes.TROPICAL_DEEP_CORAL_REEF)
             .addOptional(HybridAquaticBiomes.DEEP_CORAL_REEF)
+            .addOptional(HybridAquaticBiomes.DEEP_WARM_OCEAN)
         //#endregion
 
         //#region Arctic Ocean Tags
@@ -289,11 +290,11 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         //#endregion
 
         //#region Compatibility Tags
-        // rainbow reef
+            // rainbow reef
         getOrCreateTagBuilder(HybridAquaticBiomeTags.WARM_OCEANS)
             .addOptional(HybridAquaticBiomes.CORAL_REEF)
 
-        // fintastic
+            // fintastic
         getOrCreateTagBuilder(HybridAquaticBiomeTags.MOONY_BIOMES)
             .addOptional(HybridAquaticBiomes.CORAL_REEF)
             .addOptional(HybridAquaticBiomes.BASALT_BEACH)
