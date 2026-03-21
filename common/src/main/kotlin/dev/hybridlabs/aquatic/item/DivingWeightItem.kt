@@ -15,7 +15,9 @@ class DivingWeightItem(settings: Properties) : Item(settings) {
         lines: MutableList<Component>,
         context: TooltipFlag
     ) {
-        lines.add(Component.translatable("item.hybrid-aquatic.diving_weight.description").withStyle(ChatFormatting.GRAY)
-        )
+        val text = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)
+
+        lines.add(text)
+        super.appendHoverText(stack, level, lines, context)
     }
 }

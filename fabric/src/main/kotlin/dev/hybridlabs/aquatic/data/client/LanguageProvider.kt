@@ -535,8 +535,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         builder.add("tooltip.hybrid-aquatic.ominous_conch.unused", "The deep ocean calls from within..")
         builder.add("tooltip.hybrid-aquatic.ominous_conch.used", "The conch is silent")
 
-        builder.add("tooltip.hybrid-aquatic.diving_weight.used", "Quite heavy")
-
         mapOf(
             "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
             HybridAquaticItems.BARBED_HOOK.get().descriptionId to "Increases fishing speed during the day",
@@ -557,6 +555,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticBlocks.BAMBOO_CRATE.get().descriptionId to "Break with an axe to open",
 
             HybridAquaticItems.FISHING_NET.get().descriptionId to "Stored Entity: %s",
+            HybridAquaticItems.DIVING_WEIGHT.get().descriptionId to "Quite heavy",
 
             HybridAquaticItems.CORAL_AXE.get().descriptionId to "Repairs itself when underwater",
             HybridAquaticItems.CORAL_BLADE.get().descriptionId to "Repairs itself when underwater",
