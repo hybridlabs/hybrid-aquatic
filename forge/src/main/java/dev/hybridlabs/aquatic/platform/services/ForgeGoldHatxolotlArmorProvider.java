@@ -1,0 +1,12 @@
+package dev.hybridlabs.aquatic.platform.services;
+
+import dev.hybridlabs.aquatic.item.armor.ForgeGoldHatxolotlArmorItem;
+import dev.hybridlabs.aquatic.item.armor.GoldHatxolotlArmorItem;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+
+public class ForgeGoldHatxolotlArmorProvider implements GoldHatxolotlArmorProvider {
+    public GoldHatxolotlArmorItem create(ArmorItem.Type type, Item.Properties settings) {
+        return new ForgeGoldHatxolotlArmorItem(type, settings);
+    }
+}

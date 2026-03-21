@@ -180,6 +180,51 @@ object HybridAquaticItems {
         )
     }
 
+    val PINK_HATXOLOTL = register(
+        "pink_hatxolotl"
+    ) {
+        PINK_HATXOLOTL_ARMOR_FACTORY.create(
+            ArmorItem.Type.HELMET,
+            Item.Properties().stacksTo(1)
+        )
+    }
+
+    val BROWN_HATXOLOTL = register(
+        "brown_hatxolotl"
+    ) {
+        BROWN_HATXOLOTL_ARMOR_FACTORY.create(
+            ArmorItem.Type.HELMET,
+            Item.Properties().stacksTo(1)
+        )
+    }
+
+    val GOLD_HATXOLOTL = register(
+        "gold_hatxolotl"
+    ) {
+        GOLD_HATXOLOTL_ARMOR_FACTORY.create(
+            ArmorItem.Type.HELMET,
+            Item.Properties().stacksTo(1)
+        )
+    }
+
+    val BLUE_HATXOLOTL = register(
+        "blue_hatxolotl"
+    ) {
+        BLUE_HATXOLOTL_ARMOR_FACTORY.create(
+            ArmorItem.Type.HELMET,
+            Item.Properties().stacksTo(1)
+        )
+    }
+
+    val CYAN_HATXOLOTL = register(
+        "cyan_hatxolotl"
+    ) {
+        CYAN_HATXOLOTL_ARMOR_FACTORY.create(
+            ArmorItem.Type.HELMET,
+            Item.Properties().stacksTo(1)
+        )
+    }
+
     val MOON_JELLYFISH_HAT = register(
         "moon_jellyfish_hat"
     ) {

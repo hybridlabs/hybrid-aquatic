@@ -487,6 +487,12 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HybridAquaticItems.MANGLERFISH_FIN.get(),
             HybridAquaticItems.TURTLE_CHESTPLATE.get(),
             HybridAquaticItems.EEL_SCARF.get(),
+            HybridAquaticItems.PINK_HATXOLOTL.get(),
+            HybridAquaticItems.BROWN_HATXOLOTL.get(),
+            HybridAquaticItems.CYAN_HATXOLOTL.get(),
+            HybridAquaticItems.BLUE_HATXOLOTL.get(),
+            HybridAquaticItems.GOLD_HATXOLOTL.get(),
+            HybridAquaticItems.BROWN_HATXOLOTL.get(),
             HybridAquaticItems.MOON_JELLYFISH_HAT.get(),
             HybridAquaticItems.SEA_MESSAGE_BOOK.get(),
         ).forEach { item ->

@@ -508,6 +508,11 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HybridAquaticItems.MANGLERFISH_LURE.get() to "Manglerfish Lure",
             HybridAquaticItems.MANGLERFISH_FIN.get() to "Manglerfish Fin",
             HybridAquaticItems.EEL_SCARF.get() to "Eel Scarf",
+            HybridAquaticItems.PINK_HATXOLOTL.get() to "Pink Hatxolotl",
+            HybridAquaticItems.GOLD_HATXOLOTL.get() to "Gold Hatxolotl",
+            HybridAquaticItems.BROWN_HATXOLOTL.get() to "Brown Hatxolotl",
+            HybridAquaticItems.BLUE_HATXOLOTL.get() to "Blue Hatxolotl",
+            HybridAquaticItems.CYAN_HATXOLOTL.get() to "Cyan Hatxolotl",
             HybridAquaticItems.TURTLE_CHESTPLATE.get() to "Turtle Chestplate",
             HybridAquaticItems.MOON_JELLYFISH_HAT.get() to "Moon Jellyfish Hat",
         ).forEach { (item, translation) ->

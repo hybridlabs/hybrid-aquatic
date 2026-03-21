@@ -21,6 +21,26 @@
         },
         {
           "type": "minecraft:item",
+          "name": "hybrid-aquatic:pink_hatxolotl"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:gold_hatxolotl"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:brown_hatxolotl"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:blue_hatxolotl"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "hybrid-aquatic:cyan_hatxolotl"
+        },
+        {
+          "type": "minecraft:item",
           "name": "hybrid-aquatic:moon_jellyfish_hat"
         },
         {

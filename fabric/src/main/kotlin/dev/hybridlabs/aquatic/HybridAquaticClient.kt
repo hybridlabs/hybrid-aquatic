@@ -26,6 +26,7 @@ import dev.hybridlabs.aquatic.client.render.item.GiantGreenAnemoneBlockItemRende
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.armor.GoldHatxolotlArmorItem
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
@@ -76,6 +77,11 @@ object HybridAquaticClient : ClientModInitializer {
         GeoRenderProviderStorage.manglerfishArmorRenderProvider = createBasicRenderProvider(::ManglerfishArmorRenderer)
         GeoRenderProviderStorage.turtleArmorRenderProvider = createBasicRenderProvider(::TurtleArmorRenderer)
         GeoRenderProviderStorage.eelArmorRenderProvider = createBasicRenderProvider(::EelArmorRenderer)
+        GeoRenderProviderStorage.pinkHatxolotlArmorRenderProvider = createBasicRenderProvider(::PinkHatxolotlArmorRenderer)
+        GeoRenderProviderStorage.goldHatxolotlArmorRenderProvider = createBasicRenderProvider(::GoldHatxolotlArmorRenderer)
+        GeoRenderProviderStorage.brownHatxolotlArmorRenderProvider = createBasicRenderProvider(::BrownHatxolotlArmorRenderer)
+        GeoRenderProviderStorage.cyanHatxolotlArmorRenderProvider = createBasicRenderProvider(::CyanHatxolotlArmorRenderer)
+        GeoRenderProviderStorage.blueHatxolotlArmorRenderProvider = createBasicRenderProvider(::BlueHatxolotlArmorRenderer)
         GeoRenderProviderStorage.moonjellyfishArmorRenderProvider = createBasicRenderProvider(::MoonJellyfishArmorRenderer)
     }
 

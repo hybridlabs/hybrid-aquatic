@@ -478,6 +478,11 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         setOf(
             HybridAquaticItems.MOON_JELLYFISH_HAT.get(),
             HybridAquaticItems.MANGLERFISH_LURE.get(),
+            HybridAquaticItems.PINK_HATXOLOTL.get(),
+            HybridAquaticItems.CYAN_HATXOLOTL.get(),
+            HybridAquaticItems.BLUE_HATXOLOTL.get(),
+            HybridAquaticItems.BROWN_HATXOLOTL.get(),
+            HybridAquaticItems.GOLD_HATXOLOTL.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HybridAquaticItemTags.HAT).add(item)
         }
@@ -498,6 +503,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HybridAquaticItems.MANGLERFISH_LURE.get(),
             HybridAquaticItems.MANGLERFISH_FIN.get(),
             HybridAquaticItems.EEL_SCARF.get(),
+            HybridAquaticItems.PINK_HATXOLOTL.get(),
             HybridAquaticItems.MOON_JELLYFISH_HAT.get(),
             HybridAquaticItems.NAUTILUS_HELMET.get(),
             HybridAquaticItems.NAUTILUS_PAULDRONS.get(),

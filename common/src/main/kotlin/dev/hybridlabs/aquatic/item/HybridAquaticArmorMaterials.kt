@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.Constants
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
 import net.minecraft.world.item.Items
@@ -80,7 +81,18 @@ enum class HybridAquaticArmorMaterials(
         SoundEvents.ARMOR_EQUIP_LEATHER,
         0.0f,
         0.0f,
-        Supplier<Ingredient> { Ingredient.of(HybridAquaticItems.MORAY_EEL.get()) }
+        Supplier<Ingredient> { Ingredient.of(ItemTags.WOOL) }
+    ),
+
+    HATXOLOTL(
+        "hatxolotl",
+        15,
+        intArrayOf(1, 1, 1, 1),
+        15,
+        SoundEvents.ARMOR_EQUIP_LEATHER,
+        0.0f,
+        0.0f,
+        Supplier<Ingredient> { Ingredient.of(ItemTags.WOOL) }
     ),
 
     MOONJELLYFISH(
@@ -91,7 +103,7 @@ enum class HybridAquaticArmorMaterials(
         SoundEvents.SLIME_BLOCK_PLACE,
         0.0f,
         0.0f,
-        Supplier<Ingredient> { Ingredient.of(Items.SLIME_BALL) }
+        Supplier<Ingredient> { Ingredient.of(ItemTags.WOOL) }
     ),
 
     TURTLE(

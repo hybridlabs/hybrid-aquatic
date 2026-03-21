@@ -362,6 +362,11 @@ object HybridAquaticItemGroups {
                 entries.accept(HybridAquaticItems.MANGLERFISH_LURE.get())
                 entries.accept(HybridAquaticItems.MANGLERFISH_FIN.get())
                 entries.accept(HybridAquaticItems.EEL_SCARF.get())
+                entries.accept(HybridAquaticItems.PINK_HATXOLOTL.get())
+                entries.accept(HybridAquaticItems.CYAN_HATXOLOTL.get())
+                entries.accept(HybridAquaticItems.BLUE_HATXOLOTL.get())
+                entries.accept(HybridAquaticItems.BROWN_HATXOLOTL.get())
+                entries.accept(HybridAquaticItems.GOLD_HATXOLOTL.get())
                 entries.accept(HybridAquaticItems.MOON_JELLYFISH_HAT.get())
 
 
