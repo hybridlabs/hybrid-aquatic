@@ -26,7 +26,6 @@
         "client.PlayerEntityRendererMixin",
         "client.LivingEntityRendererMixin",
         "client.LocalPlayerMixin",
-        "client.InGameHudMixin",
         "client.SkullBlockEntityTextureMixin",
         "client.CameraMixin",
         "client.WeatherDisplayMixin"
