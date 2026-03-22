@@ -65,6 +65,7 @@ class OminousConchItem(
 
         val biome = level.getBiome(player.blockPosition())
         if (!biome.`is`(BiomeTags.IS_DEEP_OCEAN)) return result
+        if (!player.isUnderWater) return result
 
         tag.putBoolean(TAG_HAS_SUMMONED, true)
 
