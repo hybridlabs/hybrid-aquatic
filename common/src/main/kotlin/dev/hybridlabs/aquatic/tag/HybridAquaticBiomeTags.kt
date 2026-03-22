@@ -64,10 +64,8 @@ object HybridAquaticBiomeTags {
 
     //#region River Tags
     val RIVERS = create("rivers")
-    val PLACER_RIVERS = create("placer_rivers")
     val TROPICAL_RIVERS = create("tropical_rivers")
     val COLD_RIVERS = create("cold_rivers")
-    val SEASONAL_RIVERS = create("seasonal_rivers")
 
     //#region Misc Biome Tags
     val JUNGLE = create("jungle")

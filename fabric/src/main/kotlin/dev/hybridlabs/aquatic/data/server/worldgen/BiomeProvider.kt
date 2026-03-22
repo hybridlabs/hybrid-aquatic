@@ -136,32 +136,6 @@ class BiomeProvider(
         entries: Entries,
     ) {
         entries.add(
-            HybridAquaticBiomes.COLD_RIVER,
-            create(
-                entries,
-                temperature = 0.5f,
-                downfall = 0.5f,
-                waterColor = 0x3D57D6,
-                waterFogColor = 0x050533,
-                listOf(
-                    Pair(
-                        MobCategory.WATER_AMBIENT,
-                        MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 3, 5)
-                    )
-                )
-            ) {
-                addFeature(
-                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
-                    entries.ref(MiscOverworldPlacements.FOREST_ROCK)
-                )
-                addFeature(
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(AquaticPlacements.SEAGRASS_RIVER)
-                )
-            }
-        )
-
-        entries.add(
             HybridAquaticBiomes.TROPICAL_RIVER,
             create(
                 entries,
@@ -175,37 +149,6 @@ class BiomeProvider(
                         MobSpawnSettings.SpawnerData(EntityType.FROG, 1, 1, 2)
                     )
                 )
-            ) {
-                addFeature(
-                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
-                    entries.ref(MiscOverworldPlacements.FOREST_ROCK)
-                )
-                addFeature(
-                    GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(AquaticPlacements.SEAGRASS_RIVER)
-                )
-            }
-        )
-
-        entries.add(
-            HybridAquaticBiomes.SEASONAL_RIVER,
-            create(
-                entries,
-                temperature = 2.0f,
-                downfall = 0.0f,
-                waterColor = 0x3F76E4,
-                waterFogColor = 0x3F76E4
-            )
-        )
-
-        entries.add(
-            HybridAquaticBiomes.PLACER_RIVER,
-            create(
-                entries,
-                temperature = 0.95f,
-                downfall = 0.9f,
-                waterColor = 0x3F76E4,
-                waterFogColor = 0x3F76E4
             ) {
                 addFeature(
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,

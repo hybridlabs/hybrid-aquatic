@@ -2,10 +2,6 @@
   "replace": false,
   "values": [
     {
-      "id": "hybrid-aquatic:cold_river",
-      "required": false
-    },
-    {
       "id": "riverredux:gravelly_river",
       "required": false
     },

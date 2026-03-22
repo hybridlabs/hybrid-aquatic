@@ -45,10 +45,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HybridAquaticBiomes.CORAL_REEF)
 
         getOrCreateTagBuilder(BiomeTags.IS_RIVER)
-            .addOptional(HybridAquaticBiomes.PLACER_RIVER)
             .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
-            .addOptional(HybridAquaticBiomes.COLD_RIVER)
-            .addOptional(HybridAquaticBiomes.SEASONAL_RIVER)
 
         getOrCreateTagBuilder(BiomeTags.IS_DEEP_OCEAN)
             .addOptional(HybridAquaticBiomes.TRENCH)
@@ -208,13 +205,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("riverredux", "gravelly_river"))
             .addOptional(ResourceLocation("riverredux", "tropical_river"))
             .addOptional(ResourceLocation("riverredux", "carved_river"))
-            .addOptional(HybridAquaticBiomes.COLD_RIVER)
             .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
-            .addOptional(HybridAquaticBiomes.PLACER_RIVER)
-            .addOptional(HybridAquaticBiomes.SEASONAL_RIVER)
-
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.PLACER_RIVERS)
-            .addOptional(HybridAquaticBiomes.PLACER_RIVER)
 
         getOrCreateTagBuilder(HybridAquaticBiomeTags.TROPICAL_RIVERS)
             .addOptional(ResourceLocation("wythers", "jungle_river"))
@@ -224,11 +215,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("riverredux", "tropical_river"))
             .addOptional(HybridAquaticBiomes.TROPICAL_RIVER)
 
-        getOrCreateTagBuilder(HybridAquaticBiomeTags.SEASONAL_RIVERS)
-            .addOptional(HybridAquaticBiomes.SEASONAL_RIVER)
-
         getOrCreateTagBuilder(HybridAquaticBiomeTags.COLD_RIVERS)
-            .addOptional(HybridAquaticBiomes.COLD_RIVER)
             .addOptional(ResourceLocation("riverredux", "gravelly_river"))
             .addOptional(ResourceLocation("regions_unexplored", "cold_river"))
         //#endregion

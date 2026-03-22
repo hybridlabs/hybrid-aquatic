@@ -111,27 +111,9 @@ object HybridAquaticBiomes {
     //#endregion
 
     //#region River Biome Surface Rules
-    val PLACER_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("placer_river"))
-    val PLACER_RIVER_SURFACE_RULE: RuleSource = ifTrue(
-        isBiome(PLACER_RIVER),
-        sequence(
-            ifTrue(ON_FLOOR, state(Blocks.RED_SAND.defaultBlockState())),
-            ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
-            ifTrue(DEEP_UNDER_FLOOR, state(Blocks.TERRACOTTA.defaultBlockState()))
-        )
-    )
-
     val TROPICAL_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_river"))
     val TROPICAL_RIVER_SURFACE_RULE: RuleSource =
         ifTrue(isBiome(TROPICAL_RIVER), ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())))
-
-    val SEASONAL_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("seasonal_river"))
-    val SEASONAL_RIVER_SURFACE_RULE: RuleSource =
-        ifTrue(isBiome(SEASONAL_RIVER), ifTrue(ON_FLOOR, state(Blocks.COARSE_DIRT.defaultBlockState())))
-
-    val COLD_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_river"))
-    val COLD_RIVER_SURFACE_RULE: RuleSource =
-        ifTrue(isBiome(COLD_RIVER), ifTrue(ON_FLOOR, state(Blocks.GRAVEL.defaultBlockState())))
     //#endregion
 
     //#region Trench Rules
@@ -334,20 +316,6 @@ object HybridAquaticBiomes {
         //#endregion
 
         //#region New Rivers
-        if (config.config.biomeConfig.generatePlacerRiver) {
-            BiomePlacement.addSubOverworld(
-                Biomes.RIVER,
-                PLACER_RIVER,
-                SubBiomeMatcher.of(
-                    SubBiomeMatcher.Criterion.ofBiome(
-                        SubBiomeMatcher.CriterionTargets.NEIGHBOR,
-                        BiomeTags.IS_BADLANDS,
-                        false
-                    )
-                )
-            )
-        }
-
         if (config.config.biomeConfig.generateTropicalRiver) {
             BiomePlacement.addSubOverworld(
                 Biomes.RIVER,
@@ -356,34 +324,6 @@ object HybridAquaticBiomes {
                     SubBiomeMatcher.Criterion.ofBiome(
                         SubBiomeMatcher.CriterionTargets.NEIGHBOR,
                         BiomeTags.IS_JUNGLE,
-                        false
-                    )
-                )
-            )
-        }
-
-        if (config.config.biomeConfig.generateSeasonalRiver) {
-            BiomePlacement.addSubOverworld(
-                Biomes.RIVER,
-                SEASONAL_RIVER,
-                SubBiomeMatcher.of(
-                    SubBiomeMatcher.Criterion.ofBiome(
-                        SubBiomeMatcher.CriterionTargets.NEIGHBOR,
-                        BiomeTags.IS_SAVANNA,
-                        false
-                    )
-                )
-            )
-        }
-
-        if (config.config.biomeConfig.generateColdRiver) {
-            BiomePlacement.addSubOverworld(
-                Biomes.RIVER,
-                COLD_RIVER,
-                SubBiomeMatcher.of(
-                    SubBiomeMatcher.Criterion.ofBiome(
-                        SubBiomeMatcher.CriterionTargets.NEIGHBOR,
-                        BiomeTags.IS_TAIGA,
                         false
                     )
                 )
@@ -856,10 +796,7 @@ object HybridAquaticBiomes {
                     SEAGRASS_BED_SURFACE_RULE,
                     RED_MEADOW_SURFACE_RULE,
 
-                    PLACER_RIVER_SURFACE_RULE,
                     TROPICAL_RIVER_SURFACE_RULE,
-                    SEASONAL_RIVER_SURFACE_RULE,
-                    COLD_RIVER_SURFACE_RULE,
 
                     WARM_OCEAN_SURFACE_RULE,
                     LUKEWARM_OCEAN_SURFACE_RULE,

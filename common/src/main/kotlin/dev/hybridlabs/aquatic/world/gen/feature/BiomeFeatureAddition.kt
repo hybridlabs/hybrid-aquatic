@@ -253,14 +253,6 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.PLACER_RIVERS,
-                    GenerationStep.Decoration.UNDERGROUND_ORES,
-                    HybridAquaticPlacedFeatures.DISK_SUSPICIOUS_RED_SAND
-                ),
-            )
-
-            add(
-                BiomeFeatureAddition(
                     BiomeTags.IS_DEEP_OCEAN,
                     GenerationStep.Decoration.UNDERGROUND_ORES,
                     HybridAquaticPlacedFeatures.MOUND

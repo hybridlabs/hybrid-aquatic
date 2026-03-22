@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#hybrid-aquatic:placer_rivers",
-  "features": "hybrid-aquatic:disk_suspicious_red_sand",
-  "step": "underground_ores"
-}

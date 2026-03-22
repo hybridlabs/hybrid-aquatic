@@ -1,9 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -18,7 +16,6 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -58,9 +55,8 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) :
     ): SpawnGroupData? {
         val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
 
-        val biome = world.getBiome(this.blockPosition())
-        val selectedType = Type.fromBiome(biome, Random.Default)
-        this.variant = selectedType
+        val variant = Type.entries.random(Random).id
+        this.variant = Type.fromId(variant)
 
         this.refreshDimensions()
 
@@ -110,26 +106,6 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) :
 
                 fun fromId(id: Int): Type {
                     return BY_ID.apply(id) as Type
-                }
-
-                fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
-                    return when {
-                        biome.`is`(HybridAquaticBiomeTags.COLD_RIVERS) -> {
-                            BULL_TROUT
-                        }
-
-                        biome.`is`(HybridAquaticBiomeTags.PLACER_RIVERS) -> {
-                            REDBAND_TROUT
-                        }
-
-                        biome.`is`(HybridAquaticBiomeTags.SEASONAL_RIVERS) -> {
-                            REDBAND_TROUT
-                        }
-
-                        else -> {
-                            Type.fromId(random.nextInt(0, 2))
-                        }
-                    }
                 }
             }
         }

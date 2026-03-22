@@ -1,6 +1,6 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#hybrid-aquatic:seasonal_rivers",
+  "biomes": "#minecraft:is_river",
   "spawners": {
     "type": "hybrid-aquatic:shiner",
     "maxCount": 2,

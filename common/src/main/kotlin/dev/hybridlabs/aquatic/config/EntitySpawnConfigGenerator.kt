@@ -161,8 +161,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.TROUT.get(),
             listOf(
                 HybridAquaticBiomeTags.COLD_RIVERS,
-                HybridAquaticBiomeTags.SEASONAL_RIVERS,
-                HybridAquaticBiomeTags.PLACER_RIVERS),
+                BiomeTags.IS_RIVER),
             2, 0, 1
         )
 
@@ -170,8 +169,7 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.SHINER.get(),
             listOf(
                 HybridAquaticBiomeTags.COLD_RIVERS,
-                HybridAquaticBiomeTags.SEASONAL_RIVERS,
-                HybridAquaticBiomeTags.PLACER_RIVERS),
+                BiomeTags.IS_RIVER),
             3, 1, 2
         )
         //#endregion
@@ -996,8 +994,6 @@ class EntitySpawnConfigGenerator {
             HybridAquaticEntityTypes.CRAYFISH.get(),
             listOf(
                 HybridAquaticBiomeTags.TROPICAL_RIVERS,
-                HybridAquaticBiomeTags.PLACER_RIVERS,
-                HybridAquaticBiomeTags.SEASONAL_RIVERS,
                 HybridAquaticBiomeTags.COLD_RIVERS,
                 HybridAquaticBiomeTags.RIVERS),
             2, 1, 2
