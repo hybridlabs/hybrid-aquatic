@@ -63,7 +63,7 @@ abstract class HybridAquaticDolphinEntityModel<T : HybridAquaticDolphinEntity>(p
         )
 
         val yawDiff = animatable.yRot - animatable.yRotO
-        val targetRoll = Mth.clamp(yawDiff * 3f, -30f, 30f)
+        val targetRoll = Mth.clamp(yawDiff * 3f, -15f, 15f)
 
         val turnSpeed = abs(yawDiff)
         val smoothing = Mth.clamp(0.05f + turnSpeed * 0.02f, 0.05f, 0.25f)
