@@ -1,22 +1,16 @@
 package dev.hybridlabs.aquatic.mixin;
 
 import com.google.common.collect.ImmutableList;
-import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects;
-import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import dev.hybridlabs.aquatic.item.HybridAquaticToolMaterials;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
@@ -34,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(Player.class)
-public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEntityData {
+public abstract class PlayerEntityMixin extends Entity {
 
     public PlayerEntityMixin(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -44,30 +38,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
     public abstract boolean isSwimming();
 
     @Unique
-    private int haHurtTime = 0;
-
-    @Unique
     private boolean isHoldingDivingWeight;
-
-    @Override
-    public void hybrid_aquatic$setHurtTime(int value) {
-        haHurtTime = value;
-    }
-
-    @Override
-    public int hybrid_aquatic$getHurtTime() {
-        return haHurtTime;
-    }
-
-    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-    private void readCustomDataFromNbt(CompoundTag nbt, CallbackInfo ci) {
-        hybrid_aquatic$setHurtTime(nbt.getInt("haHurtTime"));
-    }
-
-    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-    private void writeCustomDataToNbt(CompoundTag nbt, CallbackInfo ci) {
-        nbt.putInt("haHurtTime", hybrid_aquatic$getHurtTime());
-    }
 
     @Inject(method = "isAffectedByFluids", at = @At("HEAD"), cancellable = true)
     private void overrideShouldSwimInFluids(CallbackInfoReturnable<Boolean> ci) {
@@ -76,42 +47,8 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         }
     }
 
-    @Inject(
-            method = "hurt",
-            at =
-                    @At(
-                            value = "INVOKE",
-                            target =
-                                    "Lnet/minecraft/world/entity/player/Player;level()Lnet/minecraft/world/level/Level;",
-                            ordinal = 0,
-                            shift = At.Shift.BEFORE))
-    private void setCustomHurtTimeOnDamage(
-            DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        Player object = (Player) (Object) this;
-
-        if (object.isInWater()) {
-            LivingEntity foundEntity =
-                    object.level()
-                            .getNearestEntity(
-                                    HybridAquaticSharkEntity.class,
-                                    TargetingConditions.forNonCombat()
-                                            .range(32)
-                                            .selector(Entity::isUnderWater),
-                                    object,
-                                    object.getX(),
-                                    object.getEyeY(),
-                                    object.getZ(),
-                                    object.getBoundingBox().inflate(16));
-            if (foundEntity != null) hybrid_aquatic$setHurtTime(200);
-        }
-    }
-
     @Inject(method = "tick", at = @At("TAIL"))
     private void tickDownCustomHurtTime(CallbackInfo ci) {
-        int cHurtTime = hybrid_aquatic$getHurtTime();
-        if (cHurtTime > 0) {
-            hybrid_aquatic$setHurtTime(cHurtTime - 1);
-        }
         // Gives Water Breathing/Clarity if player has Diving Helmet equipped
         updateDivingHelmet();
         // Allows player to walk in the water without jumping
