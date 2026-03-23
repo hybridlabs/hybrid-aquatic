@@ -108,8 +108,8 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             BLACK(0, "black"),
-            NAVY(1, "navy"),
-            GRAY(2, "gray"),
+            GRAY(1, "gray"),
+            NAVY(2, "navy"),
             PURPLE(3, "purple"),
             TAN(4, "tan"),
             BROWN(5, "brown");
@@ -141,15 +141,15 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
                         }
 
                         biome.`is`(HybridAquaticBiomeTags.COLD_OCEANS) -> {
-                            Type.fromId(random.nextInt(0, 3))
+                            Type.fromId(random.nextInt(0, 4))
                         }
 
                         biome.`is`(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
-                            Type.fromId(random.nextInt(1, 3))
+                            Type.fromId(random.nextInt(1, 6))
                         }
 
                         else -> {
-                            Type.fromId(random.nextInt(0, 3))
+                            Type.fromId(random.nextInt(0, 7))
                         }
                     }
                 }
