@@ -15,7 +15,6 @@ object FeatureBiomeModifications {
                 addition.step,
                 addition.placedFeature
             )
-
         }
     }
 }

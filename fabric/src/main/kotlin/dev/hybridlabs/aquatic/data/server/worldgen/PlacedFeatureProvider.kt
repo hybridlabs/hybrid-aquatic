@@ -208,16 +208,6 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticPlacedFeatures.DISK_SUSPICIOUS_RED_SAND, PlacedFeature(
-                entries.ref(HybridAquaticConfiguredFeatures.SUSPICIOUS_RED_SAND_DISK), listOf(
-                    InSquarePlacement.spread(),
-                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
-                    BiomeFilter.biome()
-                )
-            )
-        )
-
-        entries.add(
             HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH, PlacedFeature(
                 entries.ref(HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH), seaweedModifier(80)
             )

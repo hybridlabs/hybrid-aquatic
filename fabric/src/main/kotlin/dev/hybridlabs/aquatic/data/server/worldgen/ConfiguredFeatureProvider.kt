@@ -294,19 +294,6 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HybridAquaticConfiguredFeatures.SUSPICIOUS_RED_SAND_DISK,
-            ConfiguredFeature(
-                HybridAquaticFeatures.SUSPICIOUS_RED_SAND_DISK.get(),
-                DiskConfiguration(
-                    RuleBasedBlockStateProvider.simple(HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get()),
-                    BlockPredicate.matchesBlocks(listOf<Block>(Blocks.RED_SAND, Blocks.CLAY)),
-                    UniformInt.of(3, 5),
-                    1
-                )
-            )
-        )
-
-        entries.add(
             HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH,
             ConfiguredFeature(
                 HybridAquatic.DUNEGRASS_PATCH.get(), ProbabilityFeatureConfiguration(

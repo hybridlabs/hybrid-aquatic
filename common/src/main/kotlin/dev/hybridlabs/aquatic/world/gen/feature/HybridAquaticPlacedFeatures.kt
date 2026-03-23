@@ -29,8 +29,6 @@ object HybridAquaticPlacedFeatures {
     val SAND_CIRCLE = register("sand_circle")
     val SULFUR_DEPOSIT = register("sulfur_deposit")
     val DISK_SUSPICIOUS_SAND = register("disk_suspicious_sand")
-    val DISK_SUSPICIOUS_RED_SAND = register("disk_suspicious_red_sand")
-
 
     val GIANT_CLAM_PATCH = register("giant_clam_patch")
     val OYSTER_BED = register("oyster_bed")

@@ -38,7 +38,6 @@ object HybridAquaticFeatures {
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch", SeaLettuceFeature(ProbabilityFeatureConfiguration.CODEC))
     val RED_ALGAE_PATCH = register("red_algae_patch", RedAlgaePatchFeature(ProbabilityFeatureConfiguration.CODEC))
     val SUSPICIOUS_SAND_DISK = register("suspicious_sand_disk", SuspiciousSandDiskFeature(DiskConfiguration.CODEC))
-    val SUSPICIOUS_RED_SAND_DISK = register("suspicious_red_sand_disk", SuspiciousRedSandDiskFeature(DiskConfiguration.CODEC))
 
     val DEEP_CORAL_CLAW = register("deep_coral_claw", DeepCoralClawFeature(NoneFeatureConfiguration.CODEC))
     val DEEP_CORAL_TREE = register("deep_coral_tree", DeepCoralTreeFeature(NoneFeatureConfiguration.CODEC))
