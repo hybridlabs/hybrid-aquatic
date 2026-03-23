@@ -157,11 +157,9 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
 
         enum class SaddleTextures(val id: Int, val key: String) : StringRepresentable {
             NONE(0, ""),
-            SMOOTH(1, "smooth"),
-            HOOK(2, "hook"),
-            BUMP(3, "bump"),
-            HORIZONTAL(4, "horizontal"),
-            VERTICAL(5, "vertical");
+            BUMP(1, "bump"),
+            VERTICAL(2, "vertical"),
+            STRIPE(3, "stripe");
 
             override fun getSerializedName(): String {
                 return this.key

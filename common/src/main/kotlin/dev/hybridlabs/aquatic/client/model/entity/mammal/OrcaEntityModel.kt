@@ -30,17 +30,17 @@ class OrcaEntityModel : HybridAquaticDolphinEntityModel<OrcaEntity>("orca") {
 
     fun getSaddleTextureResource(animatable: OrcaEntity, layer: String): ResourceLocation {
         return if (animatable.isBaby) {
-            CommonClass.locate("textures/entity/mammal/orca/baby_orca_$layer.png")
+            CommonClass.locate("textures/entity/mammal/orca/saddle/baby_orca_$layer.png")
         } else {
-            CommonClass.locate("textures/entity/mammal/orca/layers/orca_$layer.png")
+            CommonClass.locate("textures/entity/mammal/orca/saddle/orca_$layer.png")
         }
     }
 
     fun getEyeTextureResource(animatable: OrcaEntity, layer: String): ResourceLocation {
         return if (animatable.isBaby) {
-            CommonClass.locate("textures/entity/mammal/orca/baby_orca_$layer.png")
+            CommonClass.locate("textures/entity/mammal/orca/eye/baby_orca_$layer.png")
         } else {
-            CommonClass.locate("textures/entity/mammal/orca/layers/orca_$layer.png")
+            CommonClass.locate("textures/entity/mammal/orca/eye/orca_$layer.png")
         }
     }
 }
