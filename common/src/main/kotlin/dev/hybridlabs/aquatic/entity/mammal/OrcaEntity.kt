@@ -86,7 +86,7 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
             world.random.nextIntBetweenInclusive(0, EyeSpotTextures.entries.size - 1)
         eyeSpotTexture = EyeSpotTextures.byId(eyeSpotID)
 
-        if (this.random.nextFloat() < 0.25f) {
+        if (this.random.nextFloat() < 0.1f) {
             this.setAge(-6000)
         }
 

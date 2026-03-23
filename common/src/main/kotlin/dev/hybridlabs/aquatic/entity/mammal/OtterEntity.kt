@@ -178,7 +178,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
         val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
 
-        if (this.random.nextFloat() < 0.25f) {
+        if (this.random.nextFloat() < 0.1f) {
             this.setAge(-6000)
         }
 

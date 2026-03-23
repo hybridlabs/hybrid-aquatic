@@ -218,7 +218,7 @@ open class HybridAquaticSirenianEntity(type: EntityType<out HybridAquaticSirenia
         this.yRot = 0.0f
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
 
-        if (this.random.nextFloat() < 0.25f) {
+        if (this.random.nextFloat() < 0.1f) {
             this.setAge(-6000)
         }
 
