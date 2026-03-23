@@ -281,12 +281,7 @@ class BiomeProvider(
                 downfall = 0.5f,
                 waterColor = 0x48B3C7,
                 waterFogColor = 0x418794
-            ) {
-                addFeature(
-                    GenerationStep.Decoration.UNDERGROUND_ORES,
-                    entries.ref(HybridAquaticPlacedFeatures.MOUND)
-                )
-            }
+            )
         )
 
         entries.add(
