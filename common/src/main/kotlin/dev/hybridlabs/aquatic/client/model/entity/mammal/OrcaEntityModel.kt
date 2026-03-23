@@ -36,7 +36,7 @@ class OrcaEntityModel : HybridAquaticDolphinEntityModel<OrcaEntity>("orca") {
         }
     }
 
-    fun getEyeTextureResource(animatable: OrcaEntity, layer: String): ResourceLocation {
+    fun getEyeSpotTextureResource(animatable: OrcaEntity, layer: String): ResourceLocation {
         return if (animatable.isBaby) {
             CommonClass.locate("textures/entity/mammal/orca/eye/baby_orca_$layer.png")
         } else {

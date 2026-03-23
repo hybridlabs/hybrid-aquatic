@@ -3,9 +3,9 @@ package dev.hybridlabs.aquatic.entity.mammal
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.entity.feature.OrcaEyeTextureFeature
 import dev.hybridlabs.aquatic.entity.feature.OrcaSaddleTextureFeature
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import dev.hybridlabs.aquatic.entity.fish.MantaRayEntity
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -30,7 +30,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquaticDolphinEntity(type, world),
-    OrcaSaddleTextureFeature, VariantHolder<OrcaEntity.Companion.Type> {
+    OrcaEyeTextureFeature, OrcaSaddleTextureFeature, VariantHolder<OrcaEntity.Companion.Type> {
 
     override fun registerGoals() {
         super.registerGoals()
@@ -78,9 +78,13 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
         val selectedType = Type.fromBiome(biome, Random)
         this.variant = selectedType
 
-        val overlayID =
+        val saddleID =
             world.random.nextIntBetweenInclusive(0, SaddleTextures.entries.size - 1)
-        saddleTexture = SaddleTextures.byId(overlayID)
+        saddleTexture = SaddleTextures.byId(saddleID)
+
+        val eyeSpotID =
+            world.random.nextIntBetweenInclusive(0, EyeSpotTextures.entries.size - 1)
+        eyeSpotTexture = EyeSpotTextures.byId(eyeSpotID)
 
         if (this.random.nextFloat() < 0.25f) {
             this.setAge(-6000)
@@ -152,8 +156,38 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
             }
         }
 
+        //#region Eye Spots
+        val EyeSpotTexture: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(OrcaEntity::class.java, EntityDataSerializers.INT)
+
+        enum class EyeSpotTextures(val id: Int, val key: String) : StringRepresentable {
+            DEFAULT_EYE(0, "default_eye"),
+            UP_EYE(1, "up_eye"),
+            DOWN_EYE(2, "down_eye"),
+            SMALL_EYE(3, "small_eye");
+
+            override fun getSerializedName(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: Codec<EyeSpotTextures> =
+                    StringRepresentable.fromEnum { EyeSpotTextures.entries.toTypedArray() }
+                val BY_ID: IntFunction<EyeSpotTextures> = ByIdMap.continuous(
+                    { eyeTex: EyeSpotTextures -> eyeTex.id },
+                    EyeSpotTextures.entries.toTypedArray(),
+                    ByIdMap.OutOfBoundsStrategy.WRAP
+                )
+
+                fun byId(id: Int): EyeSpotTextures {
+                    return BY_ID.apply(id)
+                }
+            }
+        }
+        //#endregion
+
         val SaddleTexture: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(MantaRayEntity::class.java, EntityDataSerializers.INT)
+            SynchedEntityData.defineId(OrcaEntity::class.java, EntityDataSerializers.INT)
 
         enum class SaddleTextures(val id: Int, val key: String) : StringRepresentable {
             NONE(0, ""),
@@ -180,6 +214,25 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
             }
         }
     }
+    //#endregion
+
+    override fun getVariant(): Type {
+        return Type.fromId((entityData.get(TYPE) as Int))
+    }
+
+    override fun setVariant(type: Type) {
+        entityData.set(TYPE, type.id)
+    }
+
+    private var eyeSpotTexture
+        get() = EyeSpotTextures.byId(entityData.get(EyeSpotTexture))
+        set(value) {
+            entityData.set(EyeSpotTexture, value.id)
+        }
+
+    override fun getEyeSpotTextureName(): String {
+        return EyeSpotTextures.byId(entityData.get(EyeSpotTexture)).serializedName
+    }
 
     private var saddleTexture
         get() = SaddleTextures.byId(entityData.get(SaddleTexture))
@@ -191,30 +244,27 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
         return SaddleTextures.byId(entityData.get(SaddleTexture)).serializedName
     }
 
+    //#region Data
     override fun defineSynchedData() {
         entityData.define(TYPE, 0)
+        entityData.define(EyeSpotTexture, 0)
         entityData.define(SaddleTexture, 0)
         super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         compound.putString("Type", this.variant.serializedName)
+        compound.putInt("eye_spot_texture", this.eyeSpotTexture.id)
         compound.putInt("saddle_texture", this.saddleTexture.id)
         super.addAdditionalSaveData(compound)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         this.variant = Type.byName(compound.getString("Type"))
+        this.eyeSpotTexture = EyeSpotTextures.byId(compound.getInt("eye_spot_texture"))
         if (compound.contains("saddle_texture")) this.saddleTexture =
             SaddleTextures.byId(compound.getInt("saddle_texture"))
         super.readAdditionalSaveData(compound)
     }
-
-    override fun getVariant(): Type {
-        return Type.fromId((entityData.get(TYPE) as Int))
-    }
-
-    override fun setVariant(type: Type) {
-        entityData.set(TYPE, type.id)
-    }
+    //#endregion
 }
