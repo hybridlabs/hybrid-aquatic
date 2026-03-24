@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -359,7 +360,7 @@ open class HybridAquaticJellyfishEntity(
 
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
 
         fun canDeepSpawn(

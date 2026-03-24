@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -41,7 +42,7 @@ class HorseshoeCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
             return pos.y in spawnY &&
                     world.getBlockState(pos.below()).isSolid &&
                     world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
     }
 

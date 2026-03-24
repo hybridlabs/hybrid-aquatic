@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -427,7 +428,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             val seaLevel = world.level.chunkSource.generator.seaLevel
             return pos.y in (seaLevel - 16)..<(seaLevel - 1) &&
                     world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
 
         fun canSpawn(
@@ -440,7 +441,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             val seaLevel = world.level.chunkSource.generator.seaLevel
             return pos.y in (seaLevel - 32)..(seaLevel - 8) &&
                     world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
 
         fun canNightSpawn(
@@ -454,7 +455,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             return !world.level.isDay &&
                     return pos.y in (seaLevel - 32)..(seaLevel - 8) &&
                             world.isWaterAt(pos) &&
-                            world.canSeeSkyFromBelowWater(pos)
+                            WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
 
         fun canDeepSpawn(

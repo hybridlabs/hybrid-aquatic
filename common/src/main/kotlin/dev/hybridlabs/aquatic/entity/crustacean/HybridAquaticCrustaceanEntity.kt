@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -281,7 +282,7 @@ open class HybridAquaticCrustaceanEntity(
             return pos.y >= bottomY &&
                     world.getBlockState(pos.below()).isSolid &&
                     world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
 
         fun canDeepSpawn(
@@ -298,7 +299,7 @@ open class HybridAquaticCrustaceanEntity(
             return pos.y in bottomY..topY &&
                     world.getBlockState(pos.below()).isSolid &&
                     world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
 
         fun getScaleAdjustment(crustacean: HybridAquaticCrustaceanEntity, adjustment: Float): Float {

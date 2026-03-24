@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -388,7 +389,7 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
 
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos) &&
+                    WorldHelper.canSeeSkyFromBelowWater(world, pos) &&
                     !isDarkEnoughToSpawn(world, pos, random)
         }
 

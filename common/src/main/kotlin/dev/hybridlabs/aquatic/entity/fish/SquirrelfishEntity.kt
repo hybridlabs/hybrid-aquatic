@@ -8,6 +8,7 @@ import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -202,9 +203,9 @@ class SquirrelfishEntity(type: EntityType<out SquirrelfishEntity>, world: Level)
             random: RandomSource,
         ): Boolean {
             val skyCheck = if (world.level.isDay) {
-                !world.canSeeSkyFromBelowWater(pos)
+                !WorldHelper.canSeeSkyFromBelowWater(world, pos)
             } else {
-                world.canSeeSkyFromBelowWater(pos)
+                WorldHelper.canSeeSkyFromBelowWater(world, pos)
             }
             val seaLevel = world.level.chunkSource.generator.seaLevel
             val spawnY = (seaLevel - 64)..<seaLevel

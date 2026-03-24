@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -87,7 +88,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) :
             val seaLevel = world.level.chunkSource.generator.seaLevel
             return  pos.y in (seaLevel - 16)..< seaLevel + 64 &&
                     world.isWaterAt(pos) &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
