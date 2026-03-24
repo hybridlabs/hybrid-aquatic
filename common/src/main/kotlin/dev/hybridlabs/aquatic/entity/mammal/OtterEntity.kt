@@ -633,7 +633,9 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     /* Extend LookControl to prevent the otter's xRot from being reset to zero every tick when underwater */
     internal class OtterLookControl(val otter: OtterEntity) : LookControl(otter) {
         override fun resetXRotOnTick(): Boolean {
-            if (otter.isUnderWater && otter.y < otter.level().seaLevel - 1) return false
+            val serverLevel = otter.level() is ServerLevel
+            val seaLevel = serverLevel.chunkSource.generator.seaLevel
+            if (otter.isUnderWater && otter.y < seaLevel - 1) return false
             return super.resetXRotOnTick()
         }
 

@@ -97,7 +97,8 @@ class GardenEelEntity(type: EntityType<out GardenEelEntity>, world: Level) :
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val bottomY = world.level.chunkSource.generator.seaLevel - 32
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val bottomY = seaLevel - 32
 
             return pos.y >= bottomY &&
                     world.isWaterAt(pos) &&

@@ -36,8 +36,9 @@ class NautilusEntity(type: EntityType<out NautilusEntity>, world: Level) : Hybri
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val nightSpawn = (world.level.chunkSource.generator.seaLevel - 256)..(world.level.chunkSource.generator.seaLevel - 8)
-            val daySpawn = (world.level.chunkSource.generator.seaLevel - 256)..(world.level.chunkSource.generator.seaLevel - 48)
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val nightSpawn = (seaLevel - 256)..(seaLevel - 8)
+            val daySpawn = (seaLevel - 256)..(seaLevel - 48)
 
             val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
 

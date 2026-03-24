@@ -30,7 +30,8 @@ class CoconutCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y <= world.level.chunkSource.generator.seaLevel + 4 &&
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            return pos.y <= seaLevel + 4 &&
                     world.getBlockState(pos.below()).isSolid &&
                     world.isEmptyBlock(pos) &&
                     world.level.isDay &&

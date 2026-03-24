@@ -168,8 +168,9 @@ open class HybridAquaticCritterEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.level.chunkSource.generator.seaLevel
-            val bottomY = world.level.chunkSource.generator.seaLevel - 256
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val topY = seaLevel
+            val bottomY = seaLevel - 256
 
             return pos.y in bottomY..topY &&
                     world.getBlockState(pos.below()).isSolid &&

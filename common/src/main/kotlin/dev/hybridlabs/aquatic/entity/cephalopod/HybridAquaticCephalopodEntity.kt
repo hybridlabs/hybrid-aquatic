@@ -382,8 +382,9 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.level.chunkSource.generator.seaLevel - 4
-            val bottomY = world.level.chunkSource.generator.seaLevel - 24
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val topY = seaLevel - 4
+            val bottomY = seaLevel - 24
 
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos) &&
@@ -399,8 +400,9 @@ open class HybridAquaticCephalopodEntity(type: EntityType<out HybridAquaticCepha
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.level.chunkSource.generator.seaLevel - 48
-            val bottomY = world.level.chunkSource.generator.seaLevel - 256
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val topY = seaLevel - 48
+            val bottomY = seaLevel - 256
 
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos) &&

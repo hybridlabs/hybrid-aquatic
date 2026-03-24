@@ -25,8 +25,9 @@ class DunegrassFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
         val dz = random.nextInt(8) - random.nextInt(8)
         val posY = world.getHeight(Heightmap.Types.WORLD_SURFACE, origin.x + dx, origin.z + dz)
         val pos = BlockPos(origin.x + dx, posY, origin.z + dz)
+        val seaLevel = world.level.chunkSource.generator.seaLevel
 
-        if (posY > world.level.chunkSource.generator.seaLevel + 2 && world.isEmptyBlock(pos)) {
+        if (posY > seaLevel + 2 && world.isEmptyBlock(pos)) {
             val blTall = random.nextDouble() < config.probability
 
             if (blTall) {

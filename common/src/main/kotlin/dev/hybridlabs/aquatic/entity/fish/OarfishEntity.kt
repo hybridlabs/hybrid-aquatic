@@ -62,8 +62,9 @@ class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) :
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val shallowSpawn = (world.level.chunkSource.generator.seaLevel - 12)..(world.level.chunkSource.generator.seaLevel - 2)
-            val deepSpawn = (world.level.chunkSource.generator.seaLevel - 256)..(world.level.chunkSource.generator.seaLevel - 48)
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val shallowSpawn = (seaLevel - 12)..(seaLevel - 2)
+            val deepSpawn = (seaLevel - 256)..(seaLevel - 48)
 
             val spawnY = if (world.level.isThundering) shallowSpawn else deepSpawn
 

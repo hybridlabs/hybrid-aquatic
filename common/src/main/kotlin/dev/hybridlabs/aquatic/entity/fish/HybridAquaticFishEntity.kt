@@ -424,7 +424,8 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.level.chunkSource.generator.seaLevel - 16)..<(world.level.chunkSource.generator.seaLevel - 1) &&
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            return pos.y in (seaLevel - 16)..<(seaLevel - 1) &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
@@ -436,7 +437,8 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.level.chunkSource.generator.seaLevel - 32)..(world.level.chunkSource.generator.seaLevel - 8) &&
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            return pos.y in (seaLevel - 32)..(seaLevel - 8) &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
@@ -448,8 +450,9 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
+            val seaLevel = world.level.chunkSource.generator.seaLevel
             return !world.level.isDay &&
-                    return pos.y in (world.level.chunkSource.generator.seaLevel - 32)..(world.level.chunkSource.generator.seaLevel - 8) &&
+                    return pos.y in (seaLevel - 32)..(seaLevel - 8) &&
                             world.isWaterAt(pos) &&
                             world.canSeeSkyFromBelowWater(pos)
         }
@@ -461,7 +464,8 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.level.chunkSource.generator.seaLevel - 256)..(world.level.chunkSource.generator.seaLevel - 55) &&
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            return pos.y in (seaLevel - 256)..(seaLevel - 55) &&
                     world.isWaterAt(pos)
         }
         //#endregion

@@ -139,7 +139,8 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val spawnY = (world.level.chunkSource.generator.seaLevel - 8) ..< world.level.chunkSource.generator.seaLevel
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val spawnY = (seaLevel - 8) ..< seaLevel
 
             return pos.y in spawnY &&
                     world.isWaterAt(pos) &&

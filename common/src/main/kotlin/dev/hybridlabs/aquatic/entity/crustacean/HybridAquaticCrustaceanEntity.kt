@@ -259,7 +259,8 @@ open class HybridAquaticCrustaceanEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.level.chunkSource.generator.seaLevel + 4
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val topY = seaLevel + 4
 
             return pos.y <= topY &&
                     world.getBlockState(pos.below()).isSolid &&
@@ -274,7 +275,8 @@ open class HybridAquaticCrustaceanEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val bottomY = world.level.chunkSource.generator.seaLevel - 24
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val bottomY = seaLevel - 24
 
             return pos.y >= bottomY &&
                     world.getBlockState(pos.below()).isSolid &&
@@ -289,8 +291,9 @@ open class HybridAquaticCrustaceanEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.level.chunkSource.generator.seaLevel - 24
-            val bottomY = world.level.chunkSource.generator.seaLevel - 256
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val topY = seaLevel - 24
+            val bottomY = seaLevel - 256
 
             return pos.y in bottomY..topY &&
                     world.getBlockState(pos.below()).isSolid &&

@@ -314,8 +314,9 @@ open class HybridAquaticDolphinEntity(type: EntityType<out HybridAquaticDolphinE
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.level.chunkSource.generator.seaLevel - 4
-            val bottomY = world.level.chunkSource.generator.seaLevel - 32
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val topY = seaLevel - 4
+            val bottomY = seaLevel - 32
 
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos)

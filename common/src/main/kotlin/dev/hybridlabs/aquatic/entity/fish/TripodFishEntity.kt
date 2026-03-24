@@ -67,7 +67,8 @@ class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.level.chunkSource.generator.seaLevel - 256)..(world.level.chunkSource.generator.seaLevel - 72) &&
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            return pos.y in (seaLevel - 256)..(seaLevel - 72) &&
                     world.isWaterAt(pos)
         }
     }

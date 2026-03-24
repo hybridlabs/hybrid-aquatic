@@ -399,8 +399,9 @@ open class HybridAquaticSharkEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.level.chunkSource.generator.seaLevel - 2
-            val bottomY = world.level.chunkSource.generator.seaLevel - 6
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val topY = seaLevel - 2
+            val bottomY = seaLevel - 6
 
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos) &&
@@ -414,8 +415,9 @@ open class HybridAquaticSharkEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.level.chunkSource.generator.seaLevel - 8
-            val bottomY = world.level.chunkSource.generator.seaLevel - 24
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val topY = seaLevel - 8
+            val bottomY = seaLevel - 24
 
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos)
@@ -429,8 +431,9 @@ open class HybridAquaticSharkEntity(
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val topY = world.level.chunkSource.generator.seaLevel - 48
-            val bottomY = world.level.chunkSource.generator.seaLevel - 256
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val topY = seaLevel - 48
+            val bottomY = seaLevel - 256
 
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos) &&
