@@ -26,6 +26,7 @@ import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
 import dev.hybridlabs.aquatic.world.gen.feature.*
 import dev.hybridlabs.aquatic.world.gen.structure.FabricSpawnModifiers
 import dev.hybridlabs.aquatic.world.gen.structure.SpawnModifier
+import dev.hybridlabs.aquatic.world.inventory.HybridAquaticMenuTypes
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
@@ -73,6 +74,8 @@ object HybridAquatic : ModInitializer {
         HybridAquaticFeatures
         HybridAquaticPlacedFeatures
         HybridAquaticConfiguredFeatures
+
+        HybridAquaticMenuTypes
 
         HybridAquaticNetworking.registerNetworking()
 

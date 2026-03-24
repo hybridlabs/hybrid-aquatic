@@ -9,17 +9,17 @@ import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 
-class ArgonautMenu(type: MenuType<*>?, containerId: Int, playerInventory: Inventory, container: Container, rows: Int) :
+class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Inventory, container: Container, rows: Int) :
     AbstractContainerMenu(type, containerId) {
     val container: Container
     val rowCount: Int
 
-    private constructor(type: MenuType<*>?, containerId: Int, playerInventory: Inventory, rows: Int) : this(
-        type,
+    constructor(containerId: Int, playerInventory: Inventory) : this(
+        HybridAquaticMenuTypes.ARGONAUT_MENU.get(),
         containerId,
         playerInventory,
-        SimpleContainer(9 * rows),
-        rows
+        SimpleContainer(9 * 3 + 1),
+        3
     )
 
     init {
