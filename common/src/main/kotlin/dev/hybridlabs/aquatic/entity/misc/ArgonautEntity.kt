@@ -48,7 +48,7 @@ open class ArgonautEntity(
     Entity(type, world), PlayerRideable, HasCustomInventoryScreen, ContainerEntity,
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
-    private var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(27, ItemStack.EMPTY)
+    private var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(28, ItemStack.EMPTY)
     private var argonautLootTable: ResourceLocation? = null
     private var argonautLootTableSeed: Long = 0
     private var inputLeft = false
