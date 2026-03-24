@@ -5,6 +5,7 @@ package dev.hybridlabs.aquatic
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
+import dev.hybridlabs.aquatic.client.gui.screen.HybridAquaticMenuScreens
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BASKING_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BULL_SHARK_PLUSHIE
@@ -57,6 +58,8 @@ object HybridAquaticClient : ClientModInitializer {
         registerItemProperties()
 
         ClientParticleRegistry()
+
+        HybridAquaticMenuScreens.register()
     }
 
     private fun registerItemProperties() {
