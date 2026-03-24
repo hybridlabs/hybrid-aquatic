@@ -88,7 +88,7 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val spawnY = (world.seaLevel - 24) ..< (world.seaLevel - 8)
+            val spawnY = (world.level.chunkSource.generator.seaLevel - 24) ..< (world.level.chunkSource.generator.seaLevel - 8)
 
             return pos.y in spawnY &&
                     world.isWaterAt(pos) &&

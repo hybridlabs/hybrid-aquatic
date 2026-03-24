@@ -424,7 +424,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.seaLevel - 16)..<(world.seaLevel - 1) &&
+            return pos.y in (world.level.chunkSource.generator.seaLevel - 16)..<(world.level.chunkSource.generator.seaLevel - 1) &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
@@ -436,7 +436,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.seaLevel - 32)..(world.seaLevel - 8) &&
+            return pos.y in (world.level.chunkSource.generator.seaLevel - 32)..(world.level.chunkSource.generator.seaLevel - 8) &&
                     world.isWaterAt(pos) &&
                     world.canSeeSkyFromBelowWater(pos)
         }
@@ -449,7 +449,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             random: RandomSource,
         ): Boolean {
             return !world.level.isDay &&
-                    return pos.y in (world.seaLevel - 32)..(world.seaLevel - 8) &&
+                    return pos.y in (world.level.chunkSource.generator.seaLevel - 32)..(world.level.chunkSource.generator.seaLevel - 8) &&
                             world.isWaterAt(pos) &&
                             world.canSeeSkyFromBelowWater(pos)
         }
@@ -461,7 +461,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.seaLevel - 256)..(world.seaLevel - 55) &&
+            return pos.y in (world.level.chunkSource.generator.seaLevel - 256)..(world.level.chunkSource.generator.seaLevel - 55) &&
                     world.isWaterAt(pos)
         }
         //#endregion

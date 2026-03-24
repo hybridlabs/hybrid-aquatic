@@ -42,7 +42,7 @@ class GoldfishEntity(type: EntityType<out GoldfishEntity>, world: Level) :
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            return pos.y in (world.seaLevel - 16)..< world.seaLevel + 64 && world.isWaterAt(pos)
+            return pos.y in (world.level.chunkSource.generator.seaLevel - 16)..< world.level.chunkSource.generator.seaLevel + 64 && world.isWaterAt(pos)
         }
     }
 }

@@ -46,7 +46,7 @@ class GiantSquidEntity(type: EntityType<out GiantSquidEntity>, world: Level) : H
             random: RandomSource,
         ): Boolean {
 
-            return pos.y in (world.seaLevel - 256)..(world.seaLevel - 48) && world.isWaterAt(pos)
+            return pos.y in (world.level.chunkSource.generator.seaLevel - 256)..(world.level.chunkSource.generator.seaLevel - 48) && world.isWaterAt(pos)
         }
     }
 

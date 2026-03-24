@@ -207,7 +207,7 @@ class SquirrelfishEntity(type: EntityType<out SquirrelfishEntity>, world: Level)
                 world.canSeeSkyFromBelowWater(pos)
             }
 
-            val spawnY = (world.seaLevel - 64)..<world.seaLevel
+            val spawnY = (world.level.chunkSource.generator.seaLevel - 64)..<world.level.chunkSource.generator.seaLevel
 
             return pos.y in spawnY &&
                     world.isWaterAt(pos) &&
