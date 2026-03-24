@@ -556,7 +556,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
 
         getOrCreateTagBuilder(HybridAquaticEntityTags.WHALE)
             .addOptional(ResourceLocation("alexsmobs", "cachalot_whale"))
-            .addOptional(ResourceLocation("bountiful", "humpback_whale"))
+            .addOptional(ResourceLocation("bountiful_critters", "humpback_whale"))
             .addOptional(ResourceLocation("wonderoussea", "beluga_whale"))
             .addOptional(ResourceLocation("wonderoussea", "baby_beluga_whale"))
             .addOptional(ResourceLocation("wonderoussea", "bottlenose_whale"))
