@@ -1,16 +1,24 @@
 package dev.hybridlabs.aquatic.item.armor
 
+import dev.emi.trinkets.api.Trinket
+import dev.emi.trinkets.api.TrinketsApi
 import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
+import dev.hybridlabs.aquatic.item.cosmetic.MoonJellyfishHatItem
 import software.bernie.geckolib.animatable.GeoItem
 import java.util.function.Consumer
 import java.util.function.Supplier
 
-class FabricEelArmorItem(type: Type, settings: Properties) :
-    EelArmorItem(type, settings) {
+class FabricMoonJellyfishHatItem(settings: Properties) :
+    MoonJellyfishHatItem(settings), Trinket, GeoItem {
+
+    init {
+        TrinketsApi.registerTrinket(this, this)
+    }
+
     private val renderProvider: Supplier<Any> = GeoItem.makeRenderer(this)
 
     override fun createRenderer(consumer: Consumer<Any>) {
-        consumer.accept(GeoRenderProviderStorage.eelArmorRenderProvider.invoke())
+        consumer.accept(GeoRenderProviderStorage.moonjellyfishArmorRenderProvider.invoke())
     }
 
     override fun getRenderProvider(): Supplier<Any> {

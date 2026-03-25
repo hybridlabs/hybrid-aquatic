@@ -158,16 +158,16 @@ object HybridAquaticItems {
     val MANGLERFISH_LURE = register(
         "manglerfish_lure"
     ) {
-        MANGLERFISH_ARMOR_FACTORY.create(
-            ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
+        MANGLERFISH_COSMETIC_PROVIDER.create(
+            Item.Properties().stacksTo(1)
         )
     }
 
     val MANGLERFISH_FIN = register(
         "manglerfish_fin"
     ) {
-        MANGLERFISH_ARMOR_FACTORY.create(
-            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+        MANGLERFISH_COSMETIC_PROVIDER.create(
+            Item.Properties().stacksTo(1)
         )
     }
 
@@ -175,7 +175,6 @@ object HybridAquaticItems {
         "eel_scarf"
     ) {
         EEL_ARMOR_FACTORY.create(
-            ArmorItem.Type.CHESTPLATE,
             Item.Properties().stacksTo(1)
         )
     }
@@ -229,7 +228,7 @@ object HybridAquaticItems {
         "moon_jellyfish_hat"
     ) {
         MOON_JELLYFISH_ARMOR_FACTORY.create(
-            ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
+            Item.Properties().stacksTo(1)
         )
     }
     //#endregion
@@ -240,7 +239,8 @@ object HybridAquaticItems {
     val FISHING_NET = register("fishing_net") { FishingNetItem(Item.Properties().stacksTo(1)) }
     val DIVING_WEIGHT = register("diving_weight") { DivingWeightItem(Item.Properties()) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
-    val OMINOUS_CONCH = register("ominous_conch") { OminousConchItem(Item.Properties().stacksTo(1), InstrumentTags.GOAT_HORNS) }
+    val OMINOUS_CONCH =
+        register("ominous_conch") { OminousConchItem(Item.Properties().stacksTo(1), InstrumentTags.GOAT_HORNS) }
     val ARGONAUT = register("argonaut") { ArgonautItem(Item.Properties().stacksTo(1)) }
 
     val BARBED_HOOK = register("barbed_hook") { HookItem(Item.Properties().durability(16)) }
@@ -564,16 +564,48 @@ object HybridAquaticItems {
     val AERATED_SAND = registerBlockItem("aerated_sand") { HybridAquaticBlocks.AERATED_SAND.get() }
     val BUBBLE_GEYSER = registerBlockItem("bubble_geyser") { HybridAquaticBlocks.BUBBLE_GEYSER.get() }
     val WHITE_SAND = registerBlockItem("white_sand") { HybridAquaticBlocks.WHITE_SAND.get() }
-    val CHISELED_WHITE_SANDSTONE = registerBlockItem("chiseled_white_sandstone") { HybridAquaticBlocks.CHISELED_WHITE_SANDSTONE.get() }
+    val CHISELED_WHITE_SANDSTONE =
+        registerBlockItem("chiseled_white_sandstone") { HybridAquaticBlocks.CHISELED_WHITE_SANDSTONE.get() }
     val WHITE_SANDSTONE = registerBlockItem("white_sandstone") { HybridAquaticBlocks.WHITE_SANDSTONE.get() }
-    val WHITE_SANDSTONE_STAIRS = register("white_sandstone_stairs") { BlockItem(HybridAquaticBlocks.WHITE_SANDSTONE_STAIRS.get(), Item.Properties()) }
-    val WHITE_SANDSTONE_SLAB = register("white_sandstone_slab") { BlockItem(HybridAquaticBlocks.WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
-    val WHITE_SANDSTONE_WALL = register("white_sandstone_wall") { BlockItem(HybridAquaticBlocks.WHITE_SANDSTONE_WALL.get(), Item.Properties()) }
-    val SMOOTH_WHITE_SANDSTONE = registerBlockItem("smooth_white_sandstone") { HybridAquaticBlocks.SMOOTH_WHITE_SANDSTONE.get() }
-    val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") { BlockItem(HybridAquaticBlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get(), Item.Properties()) }
-    val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") { BlockItem(HybridAquaticBlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
+    val WHITE_SANDSTONE_STAIRS = register("white_sandstone_stairs") {
+        BlockItem(
+            HybridAquaticBlocks.WHITE_SANDSTONE_STAIRS.get(),
+            Item.Properties()
+        )
+    }
+    val WHITE_SANDSTONE_SLAB = register("white_sandstone_slab") {
+        BlockItem(
+            HybridAquaticBlocks.WHITE_SANDSTONE_SLAB.get(),
+            Item.Properties()
+        )
+    }
+    val WHITE_SANDSTONE_WALL = register("white_sandstone_wall") {
+        BlockItem(
+            HybridAquaticBlocks.WHITE_SANDSTONE_WALL.get(),
+            Item.Properties()
+        )
+    }
+    val SMOOTH_WHITE_SANDSTONE =
+        registerBlockItem("smooth_white_sandstone") { HybridAquaticBlocks.SMOOTH_WHITE_SANDSTONE.get() }
+    val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") {
+        BlockItem(
+            HybridAquaticBlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
+            Item.Properties()
+        )
+    }
+    val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") {
+        BlockItem(
+            HybridAquaticBlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
+            Item.Properties()
+        )
+    }
     val CUT_WHITE_SANDSTONE = registerBlockItem("cut_white_sandstone") { HybridAquaticBlocks.CUT_WHITE_SANDSTONE.get() }
-    val CUT_WHITE_SANDSTONE_SLAB = register("cut_sandstone_slab") { BlockItem(HybridAquaticBlocks.CUT_WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
+    val CUT_WHITE_SANDSTONE_SLAB = register("cut_sandstone_slab") {
+        BlockItem(
+            HybridAquaticBlocks.CUT_WHITE_SANDSTONE_SLAB.get(),
+            Item.Properties()
+        )
+    }
 
     val SUSPICIOUS_RED_SAND = registerBlockItem("suspicious_red_sand") { HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get() }
     val CORALSTONE = registerBlockItem("coralstone") { HybridAquaticBlocks.CORALSTONE.get() }
@@ -1961,7 +1993,7 @@ object HybridAquaticItems {
         registerSpawnEgg("dugong_spawn_egg", HybridAquaticEntityTypes.DUGONG, 0x807b75, 0xa9a18e)
 
     val MANATEE_SPAWN_EGG =
-        registerSpawnEgg("manatee_spawn_egg", HybridAquaticEntityTypes.MANATEE,0x3e3935, 0x56534f)
+        registerSpawnEgg("manatee_spawn_egg", HybridAquaticEntityTypes.MANATEE, 0x3e3935, 0x56534f)
 
     val ORCA_SPAWN_EGG =
         registerSpawnEgg("orca_spawn_egg", HybridAquaticEntityTypes.ORCA, 0x282a32, 0xc5c6ca)

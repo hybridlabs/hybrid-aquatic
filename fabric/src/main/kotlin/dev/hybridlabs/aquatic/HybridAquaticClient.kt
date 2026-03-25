@@ -2,6 +2,7 @@
 
 package dev.hybridlabs.aquatic
 
+import dev.emi.trinkets.api.client.TrinketRendererRegistry
 import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
 import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
 import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
@@ -33,12 +34,17 @@ import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
 import net.fabricmc.fabric.api.`object`.builder.v1.client.model.FabricModelPredicateProviderRegistry
 import net.minecraft.client.model.HumanoidModel
+import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
+import net.minecraft.client.renderer.entity.ItemRenderer
+import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.animatable.client.RenderProvider
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 
@@ -54,6 +60,7 @@ object HybridAquaticClient : ClientModInitializer {
         registerEntityRenderers()
         registerWeatherRenderers()
         registerGeoRenderers()
+        registerTrinketRenderers()
         registerModelLayers()
         registerItemProperties()
 
@@ -73,8 +80,10 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerGeoRenderers() {
         GeoRenderProviderStorage.divingArmorRenderProvider = createBasicRenderProvider(::DivingArmorRenderer)
-        GeoRenderProviderStorage.reinforcedDivingArmorRenderProvider = createBasicRenderProvider(::ReinforcedDivingArmorRenderer)
-        GeoRenderProviderStorage.glowingDivingArmorRenderProvider = createBasicRenderProvider(::GlowingDivingArmorRenderer)
+        GeoRenderProviderStorage.reinforcedDivingArmorRenderProvider =
+            createBasicRenderProvider(::ReinforcedDivingArmorRenderer)
+        GeoRenderProviderStorage.glowingDivingArmorRenderProvider =
+            createBasicRenderProvider(::GlowingDivingArmorRenderer)
         GeoRenderProviderStorage.seashellArmorRenderProvider = createBasicRenderProvider(::SeashellArmorRenderer)
         GeoRenderProviderStorage.manglerfishArmorRenderProvider = createBasicRenderProvider(::ManglerfishArmorRenderer)
         GeoRenderProviderStorage.turtleArmorRenderProvider = createBasicRenderProvider(::TurtleArmorRenderer)
@@ -84,7 +93,15 @@ object HybridAquaticClient : ClientModInitializer {
         GeoRenderProviderStorage.brownHatxolotlArmorRenderProvider = createBasicRenderProvider(::BrownHatxolotlArmorRenderer)
         GeoRenderProviderStorage.cyanHatxolotlArmorRenderProvider = createBasicRenderProvider(::CyanHatxolotlArmorRenderer)
         GeoRenderProviderStorage.blueHatxolotlArmorRenderProvider = createBasicRenderProvider(::BlueHatxolotlArmorRenderer)
-        GeoRenderProviderStorage.moonjellyfishArmorRenderProvider = createBasicRenderProvider(::MoonJellyfishArmorRenderer)
+        GeoRenderProviderStorage.moonjellyfishArmorRenderProvider =
+            createBasicRenderProvider(::MoonJellyfishArmorRenderer)
+    }
+
+    private fun registerTrinketRenderers() {
+        registerTrinketRenderer(HybridAquaticItems.EEL_SCARF.get(), EquipmentSlot.CHEST)
+        registerTrinketRenderer(HybridAquaticItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HybridAquaticItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HybridAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST)
     }
 
     private fun createBasicRenderProvider(rendererProvider: () -> GeoArmorRenderer<*>): () -> RenderProvider {
@@ -99,8 +116,25 @@ object HybridAquaticClient : ClientModInitializer {
                     original: HumanoidModel<LivingEntity>
                 ): HumanoidModel<LivingEntity> {
                     renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original)
-                    return renderer
+                    return renderer as HumanoidModel<LivingEntity>
                 }
+            }
+        }
+    }
+
+    private fun registerTrinketRenderer(item: Item, equipmentSlot: EquipmentSlot){
+        TrinketRendererRegistry.registerRenderer(item) { itemStack, slotReference, contextModel, poseStack, bufferSource, light, entity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch ->
+            if (entity is AbstractClientPlayer) {
+                val renderer = (item as GeoItem).renderProvider.get() as RenderProvider
+                val model = renderer.getGenericArmorModel(
+                    entity, itemStack, equipmentSlot,
+                    contextModel as HumanoidModel<LivingEntity>
+                )
+                val vertexConsumer =
+                    ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false, false)
+                model.renderToBuffer(
+                    poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f
+                )
             }
         }
     }

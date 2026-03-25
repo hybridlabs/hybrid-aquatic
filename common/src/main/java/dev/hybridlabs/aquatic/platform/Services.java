@@ -26,7 +26,7 @@ public class Services {
     public static final ReinforcedDivingArmorProvider REINFORCED_DIVING_ARMOR_FACTORY = load(ReinforcedDivingArmorProvider.class);
     public static final GlowingDivingArmorProvider GLOWING_DIVING_ARMOR_FACTORY = load(GlowingDivingArmorProvider.class);
     public static final SeashellArmorProvider SEASHELL_ARMOR_FACTORY = load(SeashellArmorProvider.class);
-    public static final ManglerfishArmorProvider MANGLERFISH_ARMOR_FACTORY = load(ManglerfishArmorProvider.class);
+    public static final ManglerfishCosmeticProvider MANGLERFISH_COSMETIC_PROVIDER = load(ManglerfishCosmeticProvider.class);
     public static final MoonJellyfishArmorProvider MOON_JELLYFISH_ARMOR_FACTORY = load(MoonJellyfishArmorProvider.class);
     public static final TurtleArmorProvider TURTLE_ARMOR_FACTORY = load(TurtleArmorProvider.class);
 

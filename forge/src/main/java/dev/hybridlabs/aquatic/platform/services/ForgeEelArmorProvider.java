@@ -1,12 +1,11 @@
 package dev.hybridlabs.aquatic.platform.services;
 
-import dev.hybridlabs.aquatic.item.armor.EelArmorItem;
-import dev.hybridlabs.aquatic.item.armor.ForgeEelArmorItem;
-import net.minecraft.world.item.ArmorItem;
+import dev.hybridlabs.aquatic.item.armor.ForgeEelScarfItem;
+import dev.hybridlabs.aquatic.item.cosmetic.EelScarfItem;
 import net.minecraft.world.item.Item;
 
 public class ForgeEelArmorProvider implements EelArmorProvider {
-    public EelArmorItem create(ArmorItem.Type type, Item.Properties settings) {
-        return new ForgeEelArmorItem(type, settings);
+    public EelScarfItem create(Item.Properties settings) {
+        return new ForgeEelScarfItem(settings);
     }
 }

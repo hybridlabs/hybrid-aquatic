@@ -5,8 +5,8 @@ import software.bernie.geckolib.animatable.GeoItem
 import java.util.function.Consumer
 import java.util.function.Supplier
 
-class FabricManglerfishArmorItem(type: Type, settings: Properties) :
-    ManglerfishArmorItem(type, settings), GeoItem {
+class FabricManglerfishCosmeticItem(settings: Properties) :
+    ManglerfishCosmeticItem(settings), GeoItem {
     private val renderProvider: Supplier<Any> = GeoItem.makeRenderer(this)
 
     override fun createRenderer(consumer: Consumer<Any>) {

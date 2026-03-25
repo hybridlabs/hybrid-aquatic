@@ -1,14 +1,13 @@
-package dev.hybridlabs.aquatic.item.armor
+package dev.hybridlabs.aquatic.item.cosmetic
 
-import dev.hybridlabs.aquatic.item.HybridAquaticArmorMaterials
-import net.minecraft.world.item.ArmorItem
+import net.minecraft.world.item.Item
 import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
-abstract class EelArmorItem(type: Type, settings: Properties) :
-    ArmorItem(HybridAquaticArmorMaterials.EEL, type, settings),
+abstract class EelScarfItem(settings: Properties) :
+    Item(settings),
     GeoItem {
     protected val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 
@@ -20,4 +19,5 @@ abstract class EelArmorItem(type: Type, settings: Properties) :
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return cache
     }
+
 }

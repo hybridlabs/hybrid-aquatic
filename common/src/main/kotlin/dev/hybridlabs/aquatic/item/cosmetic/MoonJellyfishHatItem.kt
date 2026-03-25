@@ -1,9 +1,8 @@
-package dev.hybridlabs.aquatic.item.armor
+package dev.hybridlabs.aquatic.item.cosmetic
 
-import dev.hybridlabs.aquatic.item.HybridAquaticArmorMaterials
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
-import net.minecraft.world.item.ArmorItem
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
@@ -12,8 +11,8 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
-abstract class MoonJellyfishArmorItem(type: Type, settings: Properties) :
-    ArmorItem(HybridAquaticArmorMaterials.MOONJELLYFISH, type, settings),
+abstract class MoonJellyfishHatItem(settings: Properties) :
+    Item(settings),
     GeoItem {
     protected val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 

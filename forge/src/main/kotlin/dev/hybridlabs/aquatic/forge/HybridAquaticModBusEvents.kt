@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.forge
 
+import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
@@ -17,10 +18,24 @@ import dev.hybridlabs.aquatic.client.render.block.HybridAquaticBlockRenderers
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
+import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
 import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
+import net.minecraft.client.model.EntityModel
+import net.minecraft.client.model.HumanoidModel
+import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.entity.ItemRenderer
+import net.minecraft.client.renderer.entity.RenderLayerParent
+import net.minecraft.client.renderer.texture.OverlayTexture
+import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.inventory.Slot
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraftforge.client.event.EntityRenderersEvent
+import net.minecraftforge.client.extensions.common.IClientItemExtensions
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
@@ -28,6 +43,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.minecraftforge.registries.DataPackRegistryEvent
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
+import top.theillusivec4.curios.api.SlotContext
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry
+import top.theillusivec4.curios.api.client.ICurioRenderer
 
 object HybridAquaticModBusEvents {
     init {
@@ -140,9 +158,80 @@ object HybridAquaticModBusEvents {
 
     private fun onClientSetup(event: FMLClientSetupEvent) {
         Constants.LOG.info("Initializing client...")
+        registerTrinketRenderer(
+            HybridAquaticItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(
+            HybridAquaticItems.EEL_SCARF.get(), EquipmentSlot.CHEST)
+        registerTrinketRenderer(
+            HybridAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST)
+        registerTrinketRenderer(
+            HybridAquaticItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD)
     }
 
     private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {
         Constants.LOG.info("Server starting...")
     }
+
+    private fun registerTrinketRenderer(item: Item, equipmentSlot: EquipmentSlot) {
+        CuriosRendererRegistry.register(item) {HACurioRenderer(equipmentSlot)}
+    }
+
+    private class HACurioRenderer(val equipmentSlot: EquipmentSlot) : ICurioRenderer {
+        override fun <T : LivingEntity?, M : EntityModel<T?>?> render(
+            itemStack: ItemStack,
+            slotContext: SlotContext,
+            poseStack: PoseStack,
+            renderLayerParent: RenderLayerParent<T?, M?>?,
+            bufferSource: MultiBufferSource?,
+            light: Int,
+            limbSwing: Float,
+            limbSwingAmount: Float,
+            partialTicks: Float,
+            ageInTicks: Float,
+            netHeadYaw: Float,
+            headPitch: Float
+        ) {
+            val renderer = IClientItemExtensions.of(itemStack.item)
+            val model = renderer.getGenericArmorModel(
+                slotContext.entity, itemStack, equipmentSlot,
+                (renderLayerParent?.model ?: null) as HumanoidModel<LivingEntity>
+            )
+            val vertexConsumer =
+                ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false, false)
+            model.renderToBuffer(
+                poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f
+            )
+        }
+    }
 }
+
+
+/*
+itemStack, slotReference, contextModel, poseStack, bufferSource, light, entity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch ->
+if (entity is AbstractClientPlayer) {
+    val renderer = (item as GeoItem).renderProvider.get() as RenderProvider
+    val model = renderer.getGenericArmorModel(
+        entity, itemStack, equipmentSlot,
+        contextModel as HumanoidModel<LivingEntity>
+    )
+    val vertexConsumer =
+        ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false, false)
+    model.renderToBuffer(
+        poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f
+    )
+}
+}
+}
+}
+/*
+@Mod("CurioMod")
+public class CurioMod {
+
+public CurioMod(final IEventBus eventBus) {
+eventBus.addListener(this::clientSetup);
+}
+
+private void clientSetup(final FMLClientSetupEvent evt) {
+}
+}
+*/

@@ -81,6 +81,10 @@ repositories {
         url = "https://maven.terraformersmc.com/releases/"
     }
     mavenCentral()
+    maven {
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
 }
 
 sourceSets.main.resources.srcDirs += 'src/generated/resources'
@@ -101,6 +105,8 @@ dependencies {
     implementation 'org.jetbrains:annotations:25.0.0'
     implementation 'thedarkcolour:kotlinforforge:4.11.0'
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0"))
+    modCompileOnly "top.theillusivec4.curios:curios-forge:${curios_version}:api"
+    modRuntimeOnly "top.theillusivec4.curios:curios-forge:${curios_version}"
 }
 
 jar {
