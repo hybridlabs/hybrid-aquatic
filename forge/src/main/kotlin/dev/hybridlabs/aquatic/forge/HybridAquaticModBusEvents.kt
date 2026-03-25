@@ -31,7 +31,6 @@ import net.minecraft.client.renderer.entity.RenderLayerParent
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.client.event.EntityRenderersEvent
@@ -159,13 +158,32 @@ object HybridAquaticModBusEvents {
     private fun onClientSetup(event: FMLClientSetupEvent) {
         Constants.LOG.info("Initializing client...")
         registerTrinketRenderer(
-            HybridAquaticItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD)
+            HybridAquaticItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD
+        )
         registerTrinketRenderer(
-            HybridAquaticItems.EEL_SCARF.get(), EquipmentSlot.CHEST)
+            HybridAquaticItems.EEL_SCARF.get(), EquipmentSlot.CHEST
+        )
         registerTrinketRenderer(
-            HybridAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST)
+            HybridAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST
+        )
         registerTrinketRenderer(
-            HybridAquaticItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD)
+            HybridAquaticItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD
+        )
+        registerTrinketRenderer(
+            HybridAquaticItems.BROWN_HATXOLOTL.get(), EquipmentSlot.HEAD
+        )
+        registerTrinketRenderer(
+            HybridAquaticItems.BLUE_HATXOLOTL.get(), EquipmentSlot.HEAD
+        )
+        registerTrinketRenderer(
+            HybridAquaticItems.CYAN_HATXOLOTL.get(), EquipmentSlot.HEAD
+        )
+        registerTrinketRenderer(
+            HybridAquaticItems.GOLD_HATXOLOTL.get(), EquipmentSlot.HEAD
+        )
+        registerTrinketRenderer(
+            HybridAquaticItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD
+        )
     }
 
     private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {
@@ -173,7 +191,7 @@ object HybridAquaticModBusEvents {
     }
 
     private fun registerTrinketRenderer(item: Item, equipmentSlot: EquipmentSlot) {
-        CuriosRendererRegistry.register(item) {HACurioRenderer(equipmentSlot)}
+        CuriosRendererRegistry.register(item) { HACurioRenderer(equipmentSlot) }
     }
 
     private class HACurioRenderer(val equipmentSlot: EquipmentSlot) : ICurioRenderer {
@@ -181,8 +199,8 @@ object HybridAquaticModBusEvents {
             itemStack: ItemStack,
             slotContext: SlotContext,
             poseStack: PoseStack,
-            renderLayerParent: RenderLayerParent<T?, M?>?,
-            bufferSource: MultiBufferSource?,
+            renderLayerParent: RenderLayerParent<T?, M?>,
+            bufferSource: MultiBufferSource,
             light: Int,
             limbSwing: Float,
             limbSwingAmount: Float,
@@ -191,10 +209,10 @@ object HybridAquaticModBusEvents {
             netHeadYaw: Float,
             headPitch: Float
         ) {
-            val renderer = IClientItemExtensions.of(itemStack.item)
-            val model = renderer.getGenericArmorModel(
+            val itemExtension = IClientItemExtensions.of(itemStack.item)
+            val model = itemExtension.getGenericArmorModel(
                 slotContext.entity, itemStack, equipmentSlot,
-                (renderLayerParent?.model ?: null) as HumanoidModel<LivingEntity>
+                (renderLayerParent.model) as HumanoidModel<*>
             )
             val vertexConsumer =
                 ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false, false)
@@ -204,34 +222,3 @@ object HybridAquaticModBusEvents {
         }
     }
 }
-
-
-/*
-itemStack, slotReference, contextModel, poseStack, bufferSource, light, entity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch ->
-if (entity is AbstractClientPlayer) {
-    val renderer = (item as GeoItem).renderProvider.get() as RenderProvider
-    val model = renderer.getGenericArmorModel(
-        entity, itemStack, equipmentSlot,
-        contextModel as HumanoidModel<LivingEntity>
-    )
-    val vertexConsumer =
-        ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false, false)
-    model.renderToBuffer(
-        poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f
-    )
-}
-}
-}
-}
-/*
-@Mod("CurioMod")
-public class CurioMod {
-
-public CurioMod(final IEventBus eventBus) {
-eventBus.addListener(this::clientSetup);
-}
-
-private void clientSetup(final FMLClientSetupEvent evt) {
-}
-}
-*/

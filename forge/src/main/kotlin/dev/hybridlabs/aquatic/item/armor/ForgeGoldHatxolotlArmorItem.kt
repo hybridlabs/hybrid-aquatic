@@ -10,8 +10,8 @@ import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 import java.util.function.Consumer
 
-class ForgeGoldHatxolotlArmorItem(type: Type, settings: Properties) :
-    GoldHatxolotlArmorItem(type, settings),
+class ForgeGoldHatxolotlArmorItem(settings: Properties) :
+    GoldHatxolotlArmorItem(settings),
     GeoItem {
 
     override fun initializeClient(consumer: Consumer<IClientItemExtensions?>) {

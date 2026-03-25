@@ -85,23 +85,35 @@ object HybridAquaticClient : ClientModInitializer {
         GeoRenderProviderStorage.glowingDivingArmorRenderProvider =
             createBasicRenderProvider(::GlowingDivingArmorRenderer)
         GeoRenderProviderStorage.seashellArmorRenderProvider = createBasicRenderProvider(::SeashellArmorRenderer)
-        GeoRenderProviderStorage.manglerfishArmorRenderProvider = createBasicRenderProvider(::ManglerfishArmorRenderer)
         GeoRenderProviderStorage.turtleArmorRenderProvider = createBasicRenderProvider(::TurtleArmorRenderer)
+
+        //Cosmetics
+        GeoRenderProviderStorage.manglerfishArmorRenderProvider = createBasicRenderProvider(::ManglerfishArmorRenderer)
         GeoRenderProviderStorage.eelArmorRenderProvider = createBasicRenderProvider(::EelArmorRenderer)
-        GeoRenderProviderStorage.pinkHatxolotlArmorRenderProvider = createBasicRenderProvider(::PinkHatxolotlArmorRenderer)
-        GeoRenderProviderStorage.goldHatxolotlArmorRenderProvider = createBasicRenderProvider(::GoldHatxolotlArmorRenderer)
-        GeoRenderProviderStorage.brownHatxolotlArmorRenderProvider = createBasicRenderProvider(::BrownHatxolotlArmorRenderer)
-        GeoRenderProviderStorage.cyanHatxolotlArmorRenderProvider = createBasicRenderProvider(::CyanHatxolotlArmorRenderer)
-        GeoRenderProviderStorage.blueHatxolotlArmorRenderProvider = createBasicRenderProvider(::BlueHatxolotlArmorRenderer)
+        GeoRenderProviderStorage.pinkHatxolotlArmorRenderProvider =
+            createBasicRenderProvider(::PinkHatxolotlArmorRenderer)
+        GeoRenderProviderStorage.goldHatxolotlArmorRenderProvider =
+            createBasicRenderProvider(::GoldHatxolotlArmorRenderer)
+        GeoRenderProviderStorage.brownHatxolotlArmorRenderProvider =
+            createBasicRenderProvider(::BrownHatxolotlArmorRenderer)
+        GeoRenderProviderStorage.cyanHatxolotlArmorRenderProvider =
+            createBasicRenderProvider(::CyanHatxolotlArmorRenderer)
+        GeoRenderProviderStorage.blueHatxolotlArmorRenderProvider =
+            createBasicRenderProvider(::BlueHatxolotlArmorRenderer)
         GeoRenderProviderStorage.moonjellyfishArmorRenderProvider =
             createBasicRenderProvider(::MoonJellyfishArmorRenderer)
     }
 
     private fun registerTrinketRenderers() {
         registerTrinketRenderer(HybridAquaticItems.EEL_SCARF.get(), EquipmentSlot.CHEST)
+        registerTrinketRenderer(HybridAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST)
         registerTrinketRenderer(HybridAquaticItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD)
         registerTrinketRenderer(HybridAquaticItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HybridAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST)
+        registerTrinketRenderer(HybridAquaticItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HybridAquaticItems.GOLD_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HybridAquaticItems.BROWN_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HybridAquaticItems.CYAN_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HybridAquaticItems.BLUE_HATXOLOTL.get(), EquipmentSlot.HEAD)
     }
 
     private fun createBasicRenderProvider(rendererProvider: () -> GeoArmorRenderer<*>): () -> RenderProvider {
@@ -122,7 +134,7 @@ object HybridAquaticClient : ClientModInitializer {
         }
     }
 
-    private fun registerTrinketRenderer(item: Item, equipmentSlot: EquipmentSlot){
+    private fun registerTrinketRenderer(item: Item, equipmentSlot: EquipmentSlot) {
         TrinketRendererRegistry.registerRenderer(item) { itemStack, slotReference, contextModel, poseStack, bufferSource, light, entity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch ->
             if (entity is AbstractClientPlayer) {
                 val renderer = (item as GeoItem).renderProvider.get() as RenderProvider

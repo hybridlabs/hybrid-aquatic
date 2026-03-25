@@ -1,16 +1,16 @@
-package dev.hybridlabs.aquatic.item.armor
+package dev.hybridlabs.aquatic.item.cosmetic
 
 import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
 import software.bernie.geckolib.animatable.GeoItem
 import java.util.function.Consumer
 import java.util.function.Supplier
 
-class FabricCyanHatxolotlArmorItem(type: Type, settings: Properties) :
-    CyanHatxolotlArmorItem(type, settings) {
+class FabricBrownHatxolotlArmorItem(settings: Properties) :
+    BrownHatxolotlArmorItem(settings) {
     private val renderProvider: Supplier<Any> = GeoItem.makeRenderer(this)
 
     override fun createRenderer(consumer: Consumer<Any>) {
-        consumer.accept(GeoRenderProviderStorage.cyanHatxolotlArmorRenderProvider.invoke())
+        consumer.accept(GeoRenderProviderStorage.brownHatxolotlArmorRenderProvider.invoke())
     }
 
     override fun getRenderProvider(): Supplier<Any> {

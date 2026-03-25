@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.item.armor
 
 import dev.hybridlabs.aquatic.client.render.armor.BlueHatxolotlArmorRenderer
+import dev.hybridlabs.aquatic.item.cosmetic.BlueHatxolotlArmorItem
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
@@ -10,8 +11,8 @@ import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 import java.util.function.Consumer
 
-class ForgeBlueHatxolotlArmorItem(type: Type, settings: Properties) :
-    BlueHatxolotlArmorItem(type, settings),
+class ForgeBlueHatxolotlArmorItem(settings: Properties) :
+    BlueHatxolotlArmorItem(settings),
     GeoItem {
 
     override fun initializeClient(consumer: Consumer<IClientItemExtensions?>) {

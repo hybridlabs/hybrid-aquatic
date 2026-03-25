@@ -1,7 +1,12 @@
 {
     "replace": false,
     "values": [
+        "hybrid-aquatic:blue_hatxolotl",
+        "hybrid-aquatic:brown_hatxolotl",
+        "hybrid-aquatic:cyan_hatxolotl",
+        "hybrid-aquatic:gold_hatxolotl",
+        "hybrid-aquatic:manglerfish_lure",
         "hybrid-aquatic:moon_jellyfish_hat",
-        "hybrid-aquatic:manglerfish_lure"
+        "hybrid-aquatic:pink_hatxolotl"
     ]
 }

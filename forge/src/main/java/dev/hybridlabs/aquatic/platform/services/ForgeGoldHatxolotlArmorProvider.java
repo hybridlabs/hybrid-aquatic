@@ -7,6 +7,6 @@ import net.minecraft.world.item.Item;
 
 public class ForgeGoldHatxolotlArmorProvider implements GoldHatxolotlArmorProvider {
     public GoldHatxolotlArmorItem create(ArmorItem.Type type, Item.Properties settings) {
-        return new ForgeGoldHatxolotlArmorItem(type, settings);
+        return new ForgeGoldHatxolotlArmorItem(settings);
     }
 }

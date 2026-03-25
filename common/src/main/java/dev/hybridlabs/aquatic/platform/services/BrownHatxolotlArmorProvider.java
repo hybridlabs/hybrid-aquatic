@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.platform.services;
 
-import dev.hybridlabs.aquatic.item.armor.BrownHatxolotlArmorItem;
-import dev.hybridlabs.aquatic.item.armor.PinkHatxolotlArmorItem;
+import dev.hybridlabs.aquatic.item.cosmetic.BrownHatxolotlArmorItem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 
