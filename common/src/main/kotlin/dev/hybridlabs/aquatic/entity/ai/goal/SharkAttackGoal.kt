@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.pathfinder.Path
-import java.util.EnumSet
+import java.util.*
 import kotlin.math.max
 
 open class SharkAttackGoal(
@@ -154,7 +154,6 @@ open class SharkAttackGoal(
             if (!enemy.isBlocking) { enemy.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), 200, 0), shark) }
 
             if (enemy.health <= 0) shark.hunger = HybridAquaticSharkEntity.MAX_HUNGER
-            shark.health = shark.maxHealth
 
             val hasShield = enemy.mainHandItem.`is`(Items.SHIELD) || enemy.offhandItem.`is`(Items.SHIELD)
             if (hasShield && enemy.isBlocking) {
