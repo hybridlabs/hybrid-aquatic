@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.AvoidEntityInWaterGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.FishAttackGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.FollowGlowingEntityGoal
 import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
 import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
 import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
@@ -65,6 +66,7 @@ abstract class HybridAquaticFishEntity(type: EntityType<out HybridAquaticFishEnt
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, FishAttackGoal(this, 1.1, true))
+        goalSelector.addGoal(0, FollowGlowingEntityGoal(this, 1.1, 4.0F, 8.0F))
         goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(2, AvoidEntityInWaterGoal(this, Player::class.java, 16.0f, 1.5, 1.5))
