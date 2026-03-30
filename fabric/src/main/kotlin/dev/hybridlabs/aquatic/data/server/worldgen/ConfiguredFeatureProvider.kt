@@ -694,6 +694,7 @@ class ConfiguredFeatureProvider(
                                             BlockPredicate.matchesBlocks(
                                                 Vec3i(0, -1, 0),
                                                 listOf(
+                                                    Blocks.GRAVEL,
                                                     Blocks.SAND,
                                                     Blocks.DEAD_HORN_CORAL_BLOCK,
                                                     Blocks.DEAD_FIRE_CORAL_BLOCK,
@@ -709,6 +710,7 @@ class ConfiguredFeatureProvider(
                                 )
                             ), BlockPredicate.matchesBlocks(
                                 Vec3i(0, -1, 0), listOf(
+                                    Blocks.GRAVEL,
                                     Blocks.SAND,
                                     Blocks.DEAD_HORN_CORAL_BLOCK,
                                     Blocks.DEAD_FIRE_CORAL_BLOCK,
