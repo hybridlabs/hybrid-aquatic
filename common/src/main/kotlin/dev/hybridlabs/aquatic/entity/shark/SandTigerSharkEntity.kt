@@ -3,17 +3,12 @@ package dev.hybridlabs.aquatic.entity.shark
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
-import net.minecraft.server.level.ServerLevel
-import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
-import kotlin.random.Random
 
 class SandTigerSharkEntity(type: EntityType<out SandTigerSharkEntity>, world: Level) :
     HybridAquaticSharkEntity(type, world) {
@@ -29,63 +24,8 @@ class SandTigerSharkEntity(type: EntityType<out SandTigerSharkEntity>, world: Le
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false
 
-    private var burpTimer = 0
-    private var burpPending = false
-
-    override fun tick() {
-        super.tick()
-
-        if (burpPending && burpTimer > 0) {
-            burpTimer--
-            if (burpTimer == 0) {
-                dropBurpItem()
-                burpPending = false
-            }
-        }
-    }
-
     override fun isFood(stack: ItemStack): Boolean {
         return stack.`is`(HybridAquaticItems.SURGEONFISH.get())
-    }
-
-    private fun dropBurpItem() {
-        if (!level().isClientSide) {
-            val itemsToDrop = listOf(
-                ItemStack(Items.LEATHER_BOOTS),
-                ItemStack(Items.GLASS_BOTTLE),
-                ItemStack(Items.SCUTE),
-                ItemStack(Items.NAUTILUS_SHELL),
-                ItemStack(Items.SKELETON_SKULL),
-                ItemStack(Items.BONE),
-                ItemStack(Items.PRISMARINE_CRYSTALS),
-                ItemStack(Items.PRISMARINE_SHARD),
-                ItemStack(Items.BRUSH),
-                ItemStack(Items.NAME_TAG),
-                ItemStack(Items.COMPASS),
-                ItemStack(Items.CLOCK),
-                ItemStack(Items.SPYGLASS),
-                ItemStack(Items.SADDLE),
-                ItemStack(HybridAquaticItems.SHARK_TOOTH.get()),
-                ItemStack(HybridAquaticItems.CUTTLEBONE.get()),
-                ItemStack(HybridAquaticItems.GLOWING_HOOK.get()),
-                ItemStack(HybridAquaticItems.BARBED_HOOK.get()),
-            )
-
-            val randomItem = itemsToDrop.random(Random)
-
-            this.spawnAtLocation(randomItem)
-
-            this.playSound(SoundEvents.PLAYER_BURP, 1.0f, 1.0f)
-        }
-    }
-
-    override fun killedEntity(world: ServerLevel, killedEntity: LivingEntity): Boolean {
-        val result = super.killedEntity(world, killedEntity)
-
-        burpTimer = 60
-        burpPending = true
-
-        return result
     }
 
     override fun registerGoals() {
