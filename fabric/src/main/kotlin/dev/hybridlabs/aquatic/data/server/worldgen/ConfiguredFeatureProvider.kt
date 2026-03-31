@@ -78,7 +78,10 @@ class ConfiguredFeatureProvider(
                                     .build()
                             )
                         ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                        BlockPredicate.allOf(
+                            BlockPredicate.matchesBlocks(Blocks.WATER),
+                            BlockPredicate.hasSturdyFace(Vec3i(0,-1,0), Direction.UP)
+                        )
                     )
                 )
             )
@@ -717,7 +720,8 @@ class ConfiguredFeatureProvider(
                                     Blocks.DEAD_BRAIN_CORAL_BLOCK,
                                     Blocks.DEAD_BUBBLE_CORAL_BLOCK,
                                     Blocks.DEAD_TUBE_CORAL_BLOCK,
-                                    HybridAquaticBlocks.GRASSY_SAND.get())
+                                    HybridAquaticBlocks.GRASSY_SAND.get()
+                                )
                             ), UniformInt.of(3, 5), 1
                         ),
                         CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
@@ -759,7 +763,8 @@ class ConfiguredFeatureProvider(
                                     Blocks.CALCITE,
                                     Blocks.DIORITE,
                                     HybridAquaticBlocks.WHITE_SAND.get(),
-                                    HybridAquaticBlocks.WHITE_SANDSTONE.get())
+                                    HybridAquaticBlocks.WHITE_SANDSTONE.get()
+                                )
                             ), UniformInt.of(3, 5), 1
                         ),
                         CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
