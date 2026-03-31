@@ -16,11 +16,5 @@
     "sounds": [
       "hybrid-aquatic:sirenian_die"
     ]
-  },
-  "ominous_conch_sound": {
-    "subtitle": "sounds.hybrid-aquatic.ominous_conch_blows",
-    "sounds": [
-      "hybrid-aquatic:dies_irae"
-    ]
   }
 }
