@@ -8,8 +8,8 @@ import java.util.function.Supplier
 
 object HybridAquaticMenuTypes {
 
-    val ARGONAUT_MENU_3ROW = register("argonaut_3row", ::ArgonautMenu)
-    val ARGONAUT_MENU_2ROW = register("argonaut_2row", ::ArgonautMenu)
+    val ARGONAUT_MENU_3ROW = register("argonaut_3row", ArgonautMenu::threeRows)
+    val ARGONAUT_MENU_2ROW = register("argonaut_2row", ArgonautMenu::twoRows)
 
     fun <T: AbstractContainerMenu> register(id: String, menuType: MenuType.MenuSupplier<T>): Supplier<MenuType<T>> {
         return CommonClass.MENU_TYPE.register(id) {

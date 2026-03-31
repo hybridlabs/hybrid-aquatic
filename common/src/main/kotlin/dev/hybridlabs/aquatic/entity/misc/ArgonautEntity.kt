@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.misc
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.world.inventory.ArgonautMenu
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
@@ -22,7 +23,6 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.vehicle.ContainerEntity
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.ChestMenu
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.DyeItem
 import net.minecraft.world.item.ItemStack
@@ -539,7 +539,7 @@ open class ArgonautEntity(
     }
 
     override fun getContainerSize(): Int {
-        return 27
+        return 28
     }
 
     override fun getItem(slot: Int): ItemStack {
@@ -577,7 +577,7 @@ open class ArgonautEntity(
             return null
         } else {
             this.unpackLootTable(playerInventory.player)
-            return ChestMenu.threeRows(containerId, playerInventory, this)
+            return ArgonautMenu.threeRows(containerId, playerInventory, this)
         }
     }
 

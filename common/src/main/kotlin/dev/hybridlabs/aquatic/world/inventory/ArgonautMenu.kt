@@ -14,36 +14,28 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
     val container: Container
     val rowCount: Int
 
-    constructor(containerId: Int, playerInventory: Inventory) : this(
-        HybridAquaticMenuTypes.ARGONAUT_MENU_3ROW.get(),
-        containerId,
-        playerInventory,
-        SimpleContainer(SLOTS_PER_ROW * 3 + 1),
-        3
-    )
-
     init {
         checkContainerSize(container, rows * SLOTS_PER_ROW + 1)
         this.container = container
         this.rowCount = rows
         container.startOpen(playerInventory.player)
-        val i = (this.rowCount - 4) * 18
+        val i = (this.rowCount - 4) * 181
 
         for (argonautRow in 0..<this.rowCount) {
             for (argonautColumn in 0..<SLOTS_PER_ROW) {
-                this.addSlot(Slot(container, argonautColumn + argonautRow * SLOTS_PER_ROW, 8 + argonautColumn * 18, 18 + argonautRow * 18))
+                this.addSlot(Slot(container, argonautColumn + argonautRow * SLOTS_PER_ROW, LEFT_PIXEL_TO_SLOT + argonautColumn * 18, 18 + argonautRow * 18))
             }
         }
-        this.addSlot(Slot(container, rows * SLOTS_PER_ROW /* count from 0*/, 0, -10)) // 28th fuel slot
+        this.addSlot(Slot(container, rows * SLOTS_PER_ROW /* count from 0*/, LEFT_PIXEL_TO_SLOT + 72, -36)) // 28th fuel slot
 
         for (playerRow in 0..2) {
             for (playerColumn in 0..8) {
-                this.addSlot(Slot(playerInventory, playerColumn + playerRow * 9 + 9, 8 + playerColumn * 18, 103 + playerRow * 18 + i))
+                this.addSlot(Slot(playerInventory, playerColumn + playerRow * 9 + 9, LEFT_PIXEL_TO_SLOT + playerColumn * 18, 103 + playerRow * 18 + i))
             }
         }
 
         for (playerHotbar in 0..8) {
-            this.addSlot(Slot(playerInventory, playerHotbar, 8 + playerHotbar * 18, 161 + i))
+            this.addSlot(Slot(playerInventory, playerHotbar, LEFT_PIXEL_TO_SLOT + playerHotbar * 18, 161 + i))
         }
     }
 
@@ -82,9 +74,46 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
 
     companion object {
         private const val SLOTS_PER_ROW = 9
+        private const val LEFT_PIXEL_TO_SLOT = 11
 
         fun twoRows(containerId: Int, playerInventory: Inventory, container: Container): ArgonautMenu {
-            return ArgonautMenu(HybridAquaticMenuTypes.ARGONAUT_MENU_2ROW.get(), containerId, playerInventory, container, 2)
+            return ArgonautMenu(
+                HybridAquaticMenuTypes.ARGONAUT_MENU_2ROW.get(),
+                containerId,
+                playerInventory,
+                container,
+                2
+            )
+        }
+
+        fun twoRows(containerId: Int, playerInventory: Inventory): ArgonautMenu {
+            return ArgonautMenu(
+                HybridAquaticMenuTypes.ARGONAUT_MENU_2ROW.get(),
+                containerId,
+                playerInventory,
+                SimpleContainer(SLOTS_PER_ROW * 2 + 1),
+                2
+            )
+        }
+
+        fun threeRows(containerId: Int, playerInventory: Inventory): ArgonautMenu {
+            return ArgonautMenu(
+                HybridAquaticMenuTypes.ARGONAUT_MENU_3ROW.get(),
+                containerId,
+                playerInventory,
+                SimpleContainer(SLOTS_PER_ROW * 3 + 1),
+                3
+            )
+        }
+
+        fun threeRows(containerId: Int, playerInventory: Inventory, container: Container): ArgonautMenu {
+            return ArgonautMenu(
+                HybridAquaticMenuTypes.ARGONAUT_MENU_3ROW.get(),
+                containerId,
+                playerInventory,
+                container,
+                3
+            )
         }
     }
 }
