@@ -1,0 +1,26 @@
+{
+  "sirenian_ambient": {
+    "subtitle": "sounds.hybrid-aquatic.sirenian_ambient",
+    "sounds": [
+      "hybrid-aquatic:sirenian_ambient"
+    ]
+  },
+  "sirenian_hurt": {
+    "subtitle": "sounds.hybrid-aquatic.sirenian_hurt",
+    "sounds": [
+      "hybrid-aquatic:sirenian_hurt"
+    ]
+  },
+  "sirenian_die": {
+    "subtitle": "sounds.hybrid-aquatic.sirenian_die",
+    "sounds": [
+      "hybrid-aquatic:sirenian_die"
+    ]
+  },
+  "ominous_conch_sound": {
+    "subtitle": "sounds.hybrid-aquatic.ominous_conch_blows",
+    "sounds": [
+      "hybrid-aquatic:dies_irae"
+    ]
+  }
+}

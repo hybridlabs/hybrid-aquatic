@@ -17,7 +17,9 @@ import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
 import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings
 import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
+import dev.hybridlabs.aquatic.sound.HybridAquaticSoundEvents
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.tag.HybridAquaticInstrumentTags
 import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
@@ -40,11 +42,13 @@ object HybridAquaticForge {
 
         HybridAquaticBlocks
         HybridAquaticPlatformBlocks
+        HybridAquaticSoundEvents
         HybridAquaticEntityTypes
         HybridAquaticBlockEntityTypes
         HybridAquaticPaintings
 
         HybridAquaticBiomeTags
+        HybridAquaticInstrumentTags
 
         HybridAquaticMobEffects
         HybridAquaticPotions

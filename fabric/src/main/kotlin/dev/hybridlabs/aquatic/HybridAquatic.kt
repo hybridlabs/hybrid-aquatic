@@ -20,7 +20,9 @@ import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings
 import dev.hybridlabs.aquatic.particle.HybridAquaticFabricParticleTypes
 import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
 import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.sound.HybridAquaticSoundEvents
 import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.tag.HybridAquaticInstrumentTags
 import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades.registerCustomTrades
 import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
 import dev.hybridlabs.aquatic.world.gen.feature.*
@@ -53,6 +55,7 @@ object HybridAquatic : ModInitializer {
 
         HybridAquaticBlocks
         HybridAquaticPlatformBlocks
+        HybridAquaticSoundEvents
         HybridAquaticEntityTypes
         HybridAquaticBlockEntityTypes
         HybridAquaticPaintings
@@ -63,6 +66,7 @@ object HybridAquatic : ModInitializer {
         }
 
         HybridAquaticBiomeTags
+        HybridAquaticInstrumentTags
 
         HybridAquaticMobEffects
         HybridAquaticPotions.registerPotionRecipes()

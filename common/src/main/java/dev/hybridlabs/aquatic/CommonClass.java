@@ -5,11 +5,13 @@ import dev.hybridlabs.aquatic.platform.registration.RegistrationProvider;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
@@ -35,6 +37,10 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.BLOCK, MOD_ID);
     public static final RegistrationProvider<Item> ITEMS =
             RegistrationProvider.get(BuiltInRegistries.ITEM, MOD_ID);
+    public static final RegistrationProvider<Instrument> INSTRUMENTS =
+            RegistrationProvider.get(BuiltInRegistries.INSTRUMENT, MOD_ID);
+    public static final RegistrationProvider<SoundEvent> SOUND_EVENTS =
+            RegistrationProvider.get(BuiltInRegistries.SOUND_EVENT, MOD_ID);
     public static final RegistrationProvider<Fluid> FLUIDS =
             RegistrationProvider.get(BuiltInRegistries.FLUID, MOD_ID);
     public static final RegistrationProvider<PaintingVariant> PAINTINGS =
