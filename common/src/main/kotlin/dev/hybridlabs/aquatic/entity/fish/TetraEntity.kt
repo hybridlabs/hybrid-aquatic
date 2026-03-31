@@ -13,17 +13,14 @@ import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.SpawnGroupData
-import net.minecraft.world.entity.VariantHolder
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
+import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class TetraEntity(type: EntityType<out TetraEntity>, world: Level) :
@@ -68,7 +65,7 @@ class TetraEntity(type: EntityType<out TetraEntity>, world: Level) :
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
-        val selectedType = Type.fromBiome(biome)
+        val selectedType = Type.fromBiome(biome, Random)
         this.variant = selectedType
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -87,8 +84,14 @@ class TetraEntity(type: EntityType<out TetraEntity>, world: Level) :
             SynchedEntityData.defineId(TetraEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
-            NEON(0, "neon"),
-            CAVE(1, "cave");
+            NEON_TETRA(0, "neon_tetra"),
+            BLACK_NEON_TETRA(1, "black_neon_tetra"),
+            GREEN_NEON_TETRA(2, "green_neon_tetra"),
+            CARDINAL_TETRA(3, "cardinal_tetra"),
+            RUMMYNOSE_TETRA(4, "rummynose_tetra"),
+            EMBER_TETRA(5, "ember_tetra"),
+            GLOWLIGHT_TETRA(6, "glowlight_tetra"),
+            BLIND_CAVE_TETRA(7, "blind_cave_tetra");
 
             override fun getSerializedName(): String {
                 return this.key
@@ -103,21 +106,21 @@ class TetraEntity(type: EntityType<out TetraEntity>, world: Level) :
                 )
 
                 fun byName(name: String?): Type {
-                    return CODEC.byName(name, NEON) as Type
+                    return CODEC.byName(name, CARDINAL_TETRA) as Type
                 }
 
                 fun fromId(id: Int): Type {
                     return BY_ID.apply(id) as Type
                 }
 
-                fun fromBiome(biome: Holder<Biome>): Type {
+                fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
                         biome.`is`(HybridAquaticBiomeTags.CAVES) -> {
-                            CAVE
+                            BLIND_CAVE_TETRA
                         }
 
                         else -> {
-                            NEON
+                            Type.fromId(random.nextInt(0, 7))
                         }
                     }
                 }
