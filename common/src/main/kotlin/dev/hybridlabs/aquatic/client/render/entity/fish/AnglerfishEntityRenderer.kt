@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.AnglerfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class AnglerfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<AnglerfishEntity>(context, AnglerfishEntityModel(), true, true)
+    HAFishEntityRenderer<AnglerfishEntity>(context, AnglerfishEntityModel(), true, true)

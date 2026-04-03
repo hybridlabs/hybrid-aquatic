@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.loot.HALootTables
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -31,7 +31,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world),
+    HAFishEntity(type, world),
     VariantHolder<StingrayEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
@@ -75,8 +75,8 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
 
     override fun getDefaultLootTable(): ResourceLocation {
         return when (variant) {
-            Type.BLUE_SPOTTED -> HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY
-            Type.SPOTTED_EAGLE -> HybridAquaticLootTables.SPOTTED_EAGLE_RAY
+            Type.BLUE_SPOTTED -> HALootTables.BLUE_SPOTTED_STINGRAY
+            Type.SPOTTED_EAGLE -> HALootTables.SPOTTED_EAGLE_RAY
         }
     }
 
@@ -96,11 +96,11 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.ALL_CRUSTACEANS
+                HAEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HybridAquaticEntityTags.LARGE_CREATURES,
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
             ),
         )
 
@@ -142,7 +142,7 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.CORAL_REEF) -> {
+                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
                             Type.fromId(random.nextInt(0, 3))
                         }
 

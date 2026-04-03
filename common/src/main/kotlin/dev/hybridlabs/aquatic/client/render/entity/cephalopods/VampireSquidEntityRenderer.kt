@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.cephalopod.VampireSquidEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class VampireSquidEntityRenderer(context: Context) :
-    HybridAquaticCephalopodEntityRenderer<VampireSquidEntity>(context, VampireSquidEntityModel(), true, true)
+    HACephalopodEntityRenderer<VampireSquidEntity>(context, VampireSquidEntityModel(), true, true)

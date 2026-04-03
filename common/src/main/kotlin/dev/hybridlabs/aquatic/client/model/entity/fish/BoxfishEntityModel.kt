@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.fish.BoxfishEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
-class BoxfishEntityModel : HybridAquaticFishEntityModel<BoxfishEntity>("boxfish") {
+class BoxfishEntityModel : HAFishEntityModel<BoxfishEntity>("boxfish") {
     override fun getRenderType(animatable: BoxfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

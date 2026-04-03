@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -21,7 +21,7 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class CuttlefishEntity(type: EntityType<out CuttlefishEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world), VariantHolder<CuttlefishEntity.Companion.Type> {
+class CuttlefishEntity(type: EntityType<out CuttlefishEntity>, world: Level) : HACephalopodEntity(type, world), VariantHolder<CuttlefishEntity.Companion.Type> {
     override fun getTargetConfig() = TARGET_CONFIG
 
     override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
@@ -40,10 +40,10 @@ class CuttlefishEntity(type: EntityType<out CuttlefishEntity>, world: Level) : H
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.ALL_CRUSTACEANS
+                HAEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

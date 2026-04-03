@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.crustacean.ShrimpEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class ShrimpEntityModel : HybridAquaticCrustaceanEntityModel<ShrimpEntity>("shrimp") {
+class ShrimpEntityModel : HACrustaceanEntityModel<ShrimpEntity>("shrimp") {
 
     private val commonTextures = listOf(
         ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/shrimp/shrimp_black.png"),

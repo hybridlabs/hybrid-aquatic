@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.HAAquaticItems
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -24,7 +24,7 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import java.util.function.IntFunction
 
 class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(type, world), OverlayTextureFeature {
+    HASharkEntity(type, world), OverlayTextureFeature {
 
     private var isFeeding = false
 
@@ -45,7 +45,7 @@ class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HybridAquaticItems.RAW_SHRIMP.get())
+        return stack.`is`(HAAquaticItems.RAW_SHRIMP.get())
     }
 
     //#region Data

@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.shark.LanternSharkEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class LanternSharkEntityRenderer(context: Context) :
-    HybridAquaticSharkEntityRenderer<LanternSharkEntity>(context, LanternSharkEntityModel(), true, true)
+    HASharkEntityRenderer<LanternSharkEntity>(context, LanternSharkEntityModel(), true, true)

@@ -13,8 +13,8 @@ import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 
-class KarcinogenEntity(type: EntityType<out HybridAquaticMinionEntity>, world: Level) :
-    HybridAquaticMinionEntity(type, world) {
+class KarcinogenEntity(type: EntityType<out HAMinionEntity>, world: Level) :
+    HAMinionEntity(type, world) {
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         moveControl = MoveControl(this)

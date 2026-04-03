@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.data.server
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
+import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
@@ -26,34 +26,34 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
         //#region Sandstone Block Recipes
         stairBuilder(
-            HybridAquaticItems.WHITE_SANDSTONE_STAIRS.get(),
-            Ingredient.of(HybridAquaticItems.WHITE_SANDSTONE.get())
+            HAAquaticItems.WHITE_SANDSTONE_STAIRS.get(),
+            Ingredient.of(HAAquaticItems.WHITE_SANDSTONE.get())
         )
 
         stairBuilder(
-            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
-            Ingredient.of(HybridAquaticItems.SMOOTH_WHITE_SANDSTONE.get())
+            HAAquaticItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
+            Ingredient.of(HAAquaticItems.SMOOTH_WHITE_SANDSTONE.get())
         )
 
         slab(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.WHITE_SANDSTONE_SLAB.get(),
-            HybridAquaticItems.WHITE_SANDSTONE.get()
+            HAAquaticItems.WHITE_SANDSTONE_SLAB.get(),
+            HAAquaticItems.WHITE_SANDSTONE.get()
         )
 
         slab(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.CUT_WHITE_SANDSTONE_SLAB.get(),
-            HybridAquaticItems.CUT_WHITE_SANDSTONE.get()
+            HAAquaticItems.CUT_WHITE_SANDSTONE_SLAB.get(),
+            HAAquaticItems.CUT_WHITE_SANDSTONE.get()
         )
 
         slab(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
-            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE.get()
+            HAAquaticItems.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
+            HAAquaticItems.SMOOTH_WHITE_SANDSTONE.get()
         )
 
         chiseled(
@@ -497,38 +497,38 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         slab(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get(),
-            HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get()
+            HAPlatformBlocks.DRIFTWOOD_SLAB.get(),
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
         woodFromLogs(
             exporter,
-            HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get(),
-            HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get()
+            HAPlatformBlocks.DRIFTWOOD_WOOD.get(),
+            HAPlatformBlocks.DRIFTWOOD_LOG.get()
         )
 
         planksFromLog(
             exporter,
-            HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get(),
-            HybridAquaticItemTags.DRIFTWOOD_LOG_WOOD,
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get(),
+            HAItemTags.DRIFTWOOD_LOG_WOOD,
             4
         )
 
         pressurePlate(
             exporter,
-            HybridAquaticPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get(),
-            HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get()
+            HAPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get(),
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
         ShapelessRecipeBuilder.shapeless(
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticPlatformBlocks.DRIFTWOOD_BUTTON.get(),
+            HAPlatformBlocks.DRIFTWOOD_BUTTON.get(),
             1
         )
-            .requires(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
+            .requires(HAPlatformBlocks.DRIFTWOOD_PLANKS.get())
             .unlockedBy(
                 "has_driftwood_planks",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformBlocks.DRIFTWOOD_PLANKS.get())
             )
             .save(exporter)
         //#endregion
@@ -757,7 +757,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .requires(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW.get())
             .unlockedBy(
                 "has_crab_claw", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.CRAB_CLAW).build()
+                    ItemPredicate.Builder.item().of(HAItemTags.CRAB_CLAW).build()
                 )
             )
             .save(exporter)
@@ -807,10 +807,10 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
         //#region Foodstuffs
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_CRAB.get(), 1)
-            .requires(HybridAquaticItemTags.CRAB_CLAW)
+            .requires(HAItemTags.CRAB_CLAW)
             .unlockedBy(
                 "has_crab_claw", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.CRAB_CLAW).build()
+                    ItemPredicate.Builder.item().of(HAItemTags.CRAB_CLAW).build()
                 )
             )
             .save(exporter)
@@ -824,28 +824,28 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .save(exporter)
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_MEAT.get(), 1)
-            .requires(HybridAquaticItemTags.SMALL_FISH)
+            .requires(HAItemTags.SMALL_FISH)
             .unlockedBy(
                 "has_small_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.SMALL_FISH).build()
+                    ItemPredicate.Builder.item().of(HAItemTags.SMALL_FISH).build()
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_small"))
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_MEAT.get(), 2)
-            .requires(HybridAquaticItemTags.MEDIUM_FISH)
+            .requires(HAItemTags.MEDIUM_FISH)
             .unlockedBy(
                 "has_medium_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.MEDIUM_FISH).build()
+                    ItemPredicate.Builder.item().of(HAItemTags.MEDIUM_FISH).build()
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_medium"))
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_STEAK.get(), 2)
-            .requires(HybridAquaticItemTags.LARGE_FISH)
+            .requires(HAItemTags.LARGE_FISH)
             .unlockedBy(
                 "has_large_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HybridAquaticItemTags.LARGE_FISH).build()
+                    ItemPredicate.Builder.item().of(HAItemTags.LARGE_FISH).build()
                 )
             )
             .save(exporter)
@@ -915,7 +915,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             0.15f
         )
 
-        offerKelpCookingRecipes(exporter, HybridAquaticItemTags.KELPS, Items.DRIED_KELP, 0.15f)
+        offerKelpCookingRecipes(exporter, HAItemTags.KELPS, Items.DRIED_KELP, 0.15f)
         //#endregion
 
         offerBleachingRecipes(exporter, bleachedCoralBlockMap)
@@ -1014,15 +1014,15 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
     //#region Wooden Raft Maps
     private val raftTypeMap = mapOf(
-        HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get() to HybridAquaticBlocks.DRIFTWOOD_RAFT.get(),
-        Blocks.OAK_PLANKS to HybridAquaticBlocks.OAK_RAFT.get(),
-        Blocks.SPRUCE_PLANKS to HybridAquaticBlocks.SPRUCE_RAFT.get(),
-        Blocks.BIRCH_PLANKS to HybridAquaticBlocks.BIRCH_RAFT.get(),
-        Blocks.DARK_OAK_PLANKS to HybridAquaticBlocks.DARK_OAK_RAFT.get(),
-        Blocks.CHERRY_PLANKS to HybridAquaticBlocks.CHERRY_RAFT.get(),
-        Blocks.MANGROVE_PLANKS to HybridAquaticBlocks.MANGROVE_RAFT.get(),
-        Blocks.ACACIA_PLANKS to HybridAquaticBlocks.ACACIA_RAFT.get(),
-        Blocks.JUNGLE_PLANKS to HybridAquaticBlocks.JUNGLE_RAFT.get()
+        HAPlatformBlocks.DRIFTWOOD_PLANKS.get() to HABlocks.DRIFTWOOD_RAFT.get(),
+        Blocks.OAK_PLANKS to HABlocks.OAK_RAFT.get(),
+        Blocks.SPRUCE_PLANKS to HABlocks.SPRUCE_RAFT.get(),
+        Blocks.BIRCH_PLANKS to HABlocks.BIRCH_RAFT.get(),
+        Blocks.DARK_OAK_PLANKS to HABlocks.DARK_OAK_RAFT.get(),
+        Blocks.CHERRY_PLANKS to HABlocks.CHERRY_RAFT.get(),
+        Blocks.MANGROVE_PLANKS to HABlocks.MANGROVE_RAFT.get(),
+        Blocks.ACACIA_PLANKS to HABlocks.ACACIA_RAFT.get(),
+        Blocks.JUNGLE_PLANKS to HABlocks.JUNGLE_RAFT.get()
     )
 
     private fun offerRaftRecipes(
@@ -1050,48 +1050,48 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
     //#region Bleached Coral Maps
     private val bleachedCoralBlockMap = mapOf(
-        Blocks.DEAD_FIRE_CORAL_BLOCK to HybridAquaticBlocks.BLEACHED_FIRE_CORAL_BLOCK.get(),
-        Blocks.DEAD_TUBE_CORAL_BLOCK to HybridAquaticBlocks.BLEACHED_TUBE_CORAL_BLOCK.get(),
-        Blocks.DEAD_HORN_CORAL_BLOCK to HybridAquaticBlocks.BLEACHED_HORN_CORAL_BLOCK.get(),
-        Blocks.DEAD_BRAIN_CORAL_BLOCK to HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_BLOCK.get(),
-        Blocks.DEAD_BUBBLE_CORAL_BLOCK to HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_BLOCK.get(),
+        Blocks.DEAD_FIRE_CORAL_BLOCK to HABlocks.BLEACHED_FIRE_CORAL_BLOCK.get(),
+        Blocks.DEAD_TUBE_CORAL_BLOCK to HABlocks.BLEACHED_TUBE_CORAL_BLOCK.get(),
+        Blocks.DEAD_HORN_CORAL_BLOCK to HABlocks.BLEACHED_HORN_CORAL_BLOCK.get(),
+        Blocks.DEAD_BRAIN_CORAL_BLOCK to HABlocks.BLEACHED_BRAIN_CORAL_BLOCK.get(),
+        Blocks.DEAD_BUBBLE_CORAL_BLOCK to HABlocks.BLEACHED_BUBBLE_CORAL_BLOCK.get(),
 
-        HybridAquaticBlocks.DEAD_ROSE_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_ROSE_CORAL_BLOCK.get(),
-        HybridAquaticBlocks.DEAD_LEAF_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_LEAF_CORAL_BLOCK.get(),
-        HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_THORN_CORAL_BLOCK.get(),
-        HybridAquaticBlocks.DEAD_BUTTON_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_BLOCK.get(),
-        HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_BLOCK.get(),
-        HybridAquaticBlocks.DEAD_SUN_CORAL_BLOCK.get() to HybridAquaticBlocks.BLEACHED_SUN_CORAL_BLOCK.get(),
+        HABlocks.DEAD_ROSE_CORAL_BLOCK.get() to HABlocks.BLEACHED_ROSE_CORAL_BLOCK.get(),
+        HABlocks.DEAD_LEAF_CORAL_BLOCK.get() to HABlocks.BLEACHED_LEAF_CORAL_BLOCK.get(),
+        HABlocks.DEAD_THORN_CORAL_BLOCK.get() to HABlocks.BLEACHED_THORN_CORAL_BLOCK.get(),
+        HABlocks.DEAD_BUTTON_CORAL_BLOCK.get() to HABlocks.BLEACHED_BUTTON_CORAL_BLOCK.get(),
+        HABlocks.DEAD_LOPHELIA_CORAL_BLOCK.get() to HABlocks.BLEACHED_LOPHELIA_CORAL_BLOCK.get(),
+        HABlocks.DEAD_SUN_CORAL_BLOCK.get() to HABlocks.BLEACHED_SUN_CORAL_BLOCK.get(),
     )
 
     private val bleachedCoralMap = mapOf(
-        Blocks.DEAD_FIRE_CORAL to HybridAquaticBlocks.BLEACHED_FIRE_CORAL.get(),
-        Blocks.DEAD_TUBE_CORAL to HybridAquaticBlocks.BLEACHED_TUBE_CORAL.get(),
-        Blocks.DEAD_HORN_CORAL to HybridAquaticBlocks.BLEACHED_HORN_CORAL.get(),
-        Blocks.DEAD_BRAIN_CORAL to HybridAquaticBlocks.BLEACHED_BRAIN_CORAL.get(),
-        Blocks.DEAD_BUBBLE_CORAL to HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL.get(),
+        Blocks.DEAD_FIRE_CORAL to HABlocks.BLEACHED_FIRE_CORAL.get(),
+        Blocks.DEAD_TUBE_CORAL to HABlocks.BLEACHED_TUBE_CORAL.get(),
+        Blocks.DEAD_HORN_CORAL to HABlocks.BLEACHED_HORN_CORAL.get(),
+        Blocks.DEAD_BRAIN_CORAL to HABlocks.BLEACHED_BRAIN_CORAL.get(),
+        Blocks.DEAD_BUBBLE_CORAL to HABlocks.BLEACHED_BUBBLE_CORAL.get(),
 
-        HybridAquaticBlocks.DEAD_ROSE_CORAL.get() to HybridAquaticBlocks.BLEACHED_ROSE_CORAL.get(),
-        HybridAquaticBlocks.DEAD_LEAF_CORAL.get() to HybridAquaticBlocks.BLEACHED_LEAF_CORAL.get(),
-        HybridAquaticBlocks.DEAD_THORN_CORAL.get() to HybridAquaticBlocks.BLEACHED_THORN_CORAL.get(),
-        HybridAquaticBlocks.DEAD_BUTTON_CORAL.get() to HybridAquaticBlocks.BLEACHED_BUTTON_CORAL.get(),
-        HybridAquaticBlocks.DEAD_LOPHELIA_CORAL.get() to HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL.get(),
-        HybridAquaticBlocks.DEAD_SUN_CORAL.get() to HybridAquaticBlocks.BLEACHED_SUN_CORAL.get(),
+        HABlocks.DEAD_ROSE_CORAL.get() to HABlocks.BLEACHED_ROSE_CORAL.get(),
+        HABlocks.DEAD_LEAF_CORAL.get() to HABlocks.BLEACHED_LEAF_CORAL.get(),
+        HABlocks.DEAD_THORN_CORAL.get() to HABlocks.BLEACHED_THORN_CORAL.get(),
+        HABlocks.DEAD_BUTTON_CORAL.get() to HABlocks.BLEACHED_BUTTON_CORAL.get(),
+        HABlocks.DEAD_LOPHELIA_CORAL.get() to HABlocks.BLEACHED_LOPHELIA_CORAL.get(),
+        HABlocks.DEAD_SUN_CORAL.get() to HABlocks.BLEACHED_SUN_CORAL.get(),
     )
 
     private val bleachedCoralFanMap = mapOf(
-        Blocks.DEAD_FIRE_CORAL_FAN to HybridAquaticBlocks.BLEACHED_FIRE_CORAL_FAN.get(),
-        Blocks.DEAD_TUBE_CORAL_FAN to HybridAquaticBlocks.BLEACHED_TUBE_CORAL_FAN.get(),
-        Blocks.DEAD_HORN_CORAL_FAN to HybridAquaticBlocks.BLEACHED_HORN_CORAL_FAN.get(),
-        Blocks.DEAD_BRAIN_CORAL_FAN to HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_FAN.get(),
-        Blocks.DEAD_BUBBLE_CORAL_FAN to HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_FAN.get(),
+        Blocks.DEAD_FIRE_CORAL_FAN to HABlocks.BLEACHED_FIRE_CORAL_FAN.get(),
+        Blocks.DEAD_TUBE_CORAL_FAN to HABlocks.BLEACHED_TUBE_CORAL_FAN.get(),
+        Blocks.DEAD_HORN_CORAL_FAN to HABlocks.BLEACHED_HORN_CORAL_FAN.get(),
+        Blocks.DEAD_BRAIN_CORAL_FAN to HABlocks.BLEACHED_BRAIN_CORAL_FAN.get(),
+        Blocks.DEAD_BUBBLE_CORAL_FAN to HABlocks.BLEACHED_BUBBLE_CORAL_FAN.get(),
 
-        HybridAquaticBlocks.DEAD_ROSE_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_ROSE_CORAL_FAN.get(),
-        HybridAquaticBlocks.DEAD_LEAF_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_LEAF_CORAL_FAN.get(),
-        HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_THORN_CORAL_FAN.get(),
-        HybridAquaticBlocks.DEAD_BUTTON_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_FAN.get(),
-        HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
-        HybridAquaticBlocks.DEAD_SUN_CORAL_FAN.get() to HybridAquaticBlocks.BLEACHED_SUN_CORAL_FAN.get(),
+        HABlocks.DEAD_ROSE_CORAL_FAN.get() to HABlocks.BLEACHED_ROSE_CORAL_FAN.get(),
+        HABlocks.DEAD_LEAF_CORAL_FAN.get() to HABlocks.BLEACHED_LEAF_CORAL_FAN.get(),
+        HABlocks.DEAD_THORN_CORAL_FAN.get() to HABlocks.BLEACHED_THORN_CORAL_FAN.get(),
+        HABlocks.DEAD_BUTTON_CORAL_FAN.get() to HABlocks.BLEACHED_BUTTON_CORAL_FAN.get(),
+        HABlocks.DEAD_LOPHELIA_CORAL_FAN.get() to HABlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
+        HABlocks.DEAD_SUN_CORAL_FAN.get() to HABlocks.BLEACHED_SUN_CORAL_FAN.get(),
     )
 
     private fun offerBleachingRecipes(

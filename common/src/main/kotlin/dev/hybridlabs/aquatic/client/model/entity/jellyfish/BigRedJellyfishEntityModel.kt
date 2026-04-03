@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.jellyfish.BigRedJellyfishEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
-class BigRedJellyfishEntityModel : HybridAquaticJellyfishEntityModel<BigRedJellyfishEntity>("big_red_jellyfish") {
+class BigRedJellyfishEntityModel : HAJellyfishEntityModel<BigRedJellyfishEntity>("big_red_jellyfish") {
     override fun getRenderType(animatable: BigRedJellyfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

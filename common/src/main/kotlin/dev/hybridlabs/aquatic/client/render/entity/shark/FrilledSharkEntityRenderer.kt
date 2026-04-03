@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.shark.FrilledSharkEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class FrilledSharkEntityRenderer(context: Context) :
-    HybridAquaticSharkEntityRenderer<FrilledSharkEntity>(context, FrilledSharkEntityModel(), true)
+    HASharkEntityRenderer<FrilledSharkEntity>(context, FrilledSharkEntityModel(), true)

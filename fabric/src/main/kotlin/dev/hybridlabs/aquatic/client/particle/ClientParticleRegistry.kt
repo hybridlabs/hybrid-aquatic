@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.particle
 
-import dev.hybridlabs.aquatic.particle.HybridAquaticFabricParticleTypes.WATER_UP_WHIRL
+import dev.hybridlabs.aquatic.particle.HAFabricParticleTypes.WATER_UP_WHIRL
 import dev.hybridlabs.aquatic.particle.WaterUpWhirlParticle
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry
 

@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import net.minecraft.resources.ResourceLocation
 
-class OrcaEntityModel : HybridAquaticDolphinEntityModel<OrcaEntity>("orca") {
+class OrcaEntityModel : HADolphinEntityModel<OrcaEntity>("orca") {
 
     override fun getTextureResource(animatable: OrcaEntity): ResourceLocation {
         return if (animatable.isBaby) {

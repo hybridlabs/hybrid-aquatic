@@ -5,7 +5,7 @@ import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 
-class GardenEelEntityModel : HybridAquaticFishEntityModel<GardenEelEntity>("garden_eel") {
+class GardenEelEntityModel : HAFishEntityModel<GardenEelEntity>("garden_eel") {
 
     override fun setCustomAnimations(
         animatable: GardenEelEntity,

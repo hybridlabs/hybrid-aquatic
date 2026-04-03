@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.cephalopod.NautilusEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class NautilusEntityRenderer(context: Context) :
-    HybridAquaticCephalopodEntityRenderer<NautilusEntity>(context, NautilusEntityModel(), true, false)
+    HACephalopodEntityRenderer<NautilusEntity>(context, NautilusEntityModel(), true, false)

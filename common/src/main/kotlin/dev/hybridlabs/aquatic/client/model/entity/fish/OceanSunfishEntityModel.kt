@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
 import net.minecraft.resources.ResourceLocation
 
-class OceanSunfishEntityModel : HybridAquaticFishEntityModel<OceanSunfishEntity>("ocean_sunfish") {
+class OceanSunfishEntityModel : HAFishEntityModel<OceanSunfishEntity>("ocean_sunfish") {
 
     private val OCEAN_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/ocean_sunfish.png")
     private val HOODWINKER_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/hoodwinker_sunfish.png")

@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.datagen
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
-import dev.hybridlabs.aquatic.loot.HybridAquaticGlobalLootModifier
-import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
+import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.data.PackOutput
 import net.minecraft.tags.ItemTags
 import net.minecraft.util.random.WeightedEntry
@@ -20,7 +20,7 @@ class HAGlobalLootModifierProvider
     override fun start() {
         this.add<IGlobalLootModifier?>(
             "fishing_fish",
-            HybridAquaticGlobalLootModifier(
+            HAGlobalLootModifier(
                 emptyArray<LootItemCondition>(),
                 BuiltInLootTables.FISHING,
                 ItemTags.FISHES,
@@ -34,10 +34,10 @@ class HAGlobalLootModifierProvider
         )
         this.add<IGlobalLootModifier?>(
             "fishing_treasure",
-            HybridAquaticGlobalLootModifier(
+            HAGlobalLootModifier(
                 emptyArray<LootItemCondition>(),
                 BuiltInLootTables.FISHING,
-                HybridAquaticItemTags.FISHING_TREASURE,
+                HAItemTags.FISHING_TREASURE,
                 0.25f,
                 WeightedRandomList.create(
                     WeightedEntry.wrap(CommonClass.locate("gameplay/fishing/ha_crates"), 1),

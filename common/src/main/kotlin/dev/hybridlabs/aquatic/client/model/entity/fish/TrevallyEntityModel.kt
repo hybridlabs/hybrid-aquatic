@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.fish.TrevallyEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class TrevallyEntityModel : HybridAquaticFishEntityModel<TrevallyEntity>("trevally") {
+class TrevallyEntityModel : HAFishEntityModel<TrevallyEntity>("trevally") {
 
     private val pilotfishTextures = listOf(
         ResourceLocation("hybrid-aquatic", "textures/entity/fish/trevally/pilotfish_yellow.png"),

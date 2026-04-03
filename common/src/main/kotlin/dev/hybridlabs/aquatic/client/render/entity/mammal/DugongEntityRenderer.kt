@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class DugongEntityRenderer(context: Context) :
-    HybridAquaticSirenianEntityRenderer<DugongEntity>(context, DugongEntityModel(), true)
+    HASirenianEntityRenderer<DugongEntity>(context, DugongEntityModel(), true)

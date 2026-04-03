@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
@@ -72,7 +72,7 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
         facingPos: BlockPos
     ): BlockState {
         level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level))
-        if (!state.canSurvive(level, currentPos) || facing == Direction.DOWN || facing == Direction.UP && !facingState.`is`(HybridAquaticBlocks.BUBBLE_NET.get()) && canExistIn(facingState)) {
+        if (!state.canSurvive(level, currentPos) || facing == Direction.DOWN || facing == Direction.UP && !facingState.`is`(HABlocks.BUBBLE_NET.get()) && canExistIn(facingState)) {
             level.scheduleTick(currentPos, this, CHECK_PERIOD)
         }
 
@@ -81,7 +81,7 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
 
     override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
         val blockstate = level.getBlockState(pos.below())
-        return blockstate.`is`(HybridAquaticBlocks.BUBBLE_NET.get()) || blockstate.`is`(HybridAquaticBlocks.BUBBLE_GEYSER.get())
+        return blockstate.`is`(HABlocks.BUBBLE_NET.get()) || blockstate.`is`(HABlocks.BUBBLE_GEYSER.get())
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
@@ -120,7 +120,7 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
             val entity = context.entity
             if (
                 entity != null &&
-                entity.type.`is`(HybridAquaticEntityTags.CAN_USE_FISHING_NET_ON)
+                entity.type.`is`(HAEntityTags.CAN_USE_FISHING_NET_ON)
             ) {
                 return Shapes.block()
             }
@@ -150,13 +150,13 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
         }
 
         fun canExistIn(state: BlockState): Boolean {
-            return state.`is`(HybridAquaticBlocks.BUBBLE_NET.get()) || state.`is`(Blocks.WATER) && state.fluidState.amount >= 8 && state.fluidState.isSource
+            return state.`is`(HABlocks.BUBBLE_NET.get()) || state.`is`(Blocks.WATER) && state.fluidState.amount >= 8 && state.fluidState.isSource
         }
 
         fun getColumnState(belowState: BlockState): BlockState {
             return when {
-                belowState.`is`(HybridAquaticBlocks.BUBBLE_NET.get()) -> belowState
-                belowState.`is`(HybridAquaticBlocks.BUBBLE_GEYSER.get()) -> HybridAquaticBlocks.BUBBLE_NET.get().defaultBlockState()
+                belowState.`is`(HABlocks.BUBBLE_NET.get()) -> belowState
+                belowState.`is`(HABlocks.BUBBLE_GEYSER.get()) -> HABlocks.BUBBLE_NET.get().defaultBlockState()
                 else -> Blocks.WATER.defaultBlockState()
             }
         }

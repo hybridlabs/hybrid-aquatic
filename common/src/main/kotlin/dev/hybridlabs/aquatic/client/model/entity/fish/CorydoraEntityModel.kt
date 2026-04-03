@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class CorydoraEntityModel : HybridAquaticFishEntityModel<CorydoraEntity>("corydora") {
+class CorydoraEntityModel : HAFishEntityModel<CorydoraEntity>("corydora") {
     override fun getRenderType(animatable: CorydoraEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

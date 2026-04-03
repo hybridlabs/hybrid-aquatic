@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
+import dev.hybridlabs.aquatic.loot.HALootTables
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntityType
@@ -31,7 +31,7 @@ class SuspiciousSandDiskFeature(
                 level.getBlockEntity(pos, BlockEntityType.BRUSHABLE_BLOCK)
                     .ifPresent { brushable ->
                         brushable.setLootTable(
-                            HybridAquaticLootTables.BEACH_ARCHAEOLOGY_ID,
+                            HALootTables.BEACH_ARCHAEOLOGY_ID,
                             pos.asLong()
                         )
                     }

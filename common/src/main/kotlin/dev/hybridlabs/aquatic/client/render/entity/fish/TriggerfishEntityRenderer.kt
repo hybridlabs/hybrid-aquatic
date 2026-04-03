@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.TriggerfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class TriggerfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<TriggerfishEntity>(context, TriggerfishEntityModel(), true, false)
+    HAFishEntityRenderer<TriggerfishEntity>(context, TriggerfishEntityModel(), true, false)

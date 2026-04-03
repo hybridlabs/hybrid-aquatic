@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.mammal.ManateeEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class ManateeEntityRenderer(context: Context) :
-    HybridAquaticSirenianEntityRenderer<ManateeEntity>(context, ManateeEntityModel(), true)
+    HASirenianEntityRenderer<ManateeEntity>(context, ManateeEntityModel(), true)

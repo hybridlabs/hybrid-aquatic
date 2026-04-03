@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
@@ -22,12 +22,12 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 
 class AfricanButterflyfishEntity(type: EntityType<out AfricanButterflyfishEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world) {
+    HAFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_CREATURES,
-        HybridAquaticEntityTags.LARGE_CREATURES,
-        HybridAquaticEntityTags.ALL_SHARKS
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
     )
 
     private var isGliding = false
@@ -101,7 +101,7 @@ class AfricanButterflyfishEntity(type: EntityType<out AfricanButterflyfishEntity
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
             AnimationController(this, "Fly/Swim/Idle", 5
-            ) { state: AnimationState<HybridAquaticFishEntity> ->
+            ) { state: AnimationState<HAFishEntity> ->
                 when {
                     this.isGliding -> state.setAndContinue(DefaultAnimations.FLY)
                     state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)

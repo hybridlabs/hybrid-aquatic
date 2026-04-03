@@ -1,33 +1,33 @@
 package dev.hybridlabs.aquatic
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
-import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
+import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
+import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
 import dev.hybridlabs.aquatic.config.ConfigHelper
-import dev.hybridlabs.aquatic.config.HybridAquaticConfig
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.config.HAConfig
+import dev.hybridlabs.aquatic.effect.HAMobEffects
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
-import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
+import dev.hybridlabs.aquatic.item.HAItemGroups
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
-import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings
-import dev.hybridlabs.aquatic.particle.HybridAquaticFabricParticleTypes
-import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import dev.hybridlabs.aquatic.sound.HybridAquaticSoundEvents
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades.registerCustomTrades
-import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
+import dev.hybridlabs.aquatic.painting.HAPaintings
+import dev.hybridlabs.aquatic.particle.HAFabricParticleTypes
+import dev.hybridlabs.aquatic.potions.HAPotions
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
+import dev.hybridlabs.aquatic.sound.HASoundEvents
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.utils.HACustomTrades.registerCustomTrades
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import dev.hybridlabs.aquatic.world.gen.feature.*
 import dev.hybridlabs.aquatic.world.gen.structure.FabricSpawnModifiers
 import dev.hybridlabs.aquatic.world.gen.structure.SpawnModifier
-import dev.hybridlabs.aquatic.world.inventory.HybridAquaticMenuTypes
+import dev.hybridlabs.aquatic.world.inventory.HAMenuTypes
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
@@ -42,7 +42,7 @@ import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 
 object HybridAquatic : ModInitializer {
-    val DUNEGRASS_PATCH = HybridAquaticFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
+    val DUNEGRASS_PATCH = HAFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
 
     private val logger = Constants.LOG
 
@@ -52,32 +52,32 @@ object HybridAquatic : ModInitializer {
         logger.info("Initializing ${Constants.MOD_NAME}")
         CommonClass.init()
 
-        HybridAquaticBlocks
-        HybridAquaticPlatformBlocks
-        HybridAquaticSoundEvents
-        HybridAquaticEntityTypes
-        HybridAquaticBlockEntityTypes
-        HybridAquaticPaintings
-        HybridAquaticFabricParticleTypes
+        HABlocks
+        HAPlatformBlocks
+        HASoundEvents
+        HAEntityTypes
+        HABlockEntityTypes
+        HAPaintings
+        HAFabricParticleTypes
 
         if (configHandler.config.biomeConfig.enableBiomes) {
-            HybridAquaticBiomes.addBiomes()
+            HABiomes.addBiomes()
         }
 
-        HybridAquaticBiomeTags
+        HABiomeTags
 
-        HybridAquaticMobEffects
-        HybridAquaticPotions.registerPotionRecipes()
+        HAMobEffects
+        HAPotions.registerPotionRecipes()
 
-        HybridAquaticItems
-        HybridAquaticPlatformItems
-        HybridAquaticItemGroups
+        HAAquaticItems
+        HAPlatformItems
+        HAItemGroups
 
-        HybridAquaticFeatures
-        HybridAquaticPlacedFeatures
-        HybridAquaticConfiguredFeatures
+        HAFeatures
+        HAPlacedFeatures
+        HAConfiguredFeatures
 
-        HybridAquaticMenuTypes
+        HAMenuTypes
 
         HybridAquaticNetworking.registerNetworking()
 
@@ -109,8 +109,8 @@ object HybridAquatic : ModInitializer {
     }
 
     private fun registerDynamicRegistries() {
-        DynamicRegistries.registerSynced(HybridAquaticRegistryKeys.SEA_MESSAGE, SeaMessage.CODEC)
-        DynamicRegistries.register(HybridAquaticRegistryKeys.STRUCTURE_SPAWN_MODIFIER, SpawnModifier.CODEC)
+        DynamicRegistries.registerSynced(HARegistryKeys.SEA_MESSAGE, SeaMessage.CODEC)
+        DynamicRegistries.register(HARegistryKeys.STRUCTURE_SPAWN_MODIFIER, SpawnModifier.CODEC)
     }
 
     private fun registerWanderingTraderTrades() {
@@ -127,33 +127,33 @@ object HybridAquatic : ModInitializer {
 
     private fun registerFlammables(registry: FlammableBlockRegistry) {
         // same as vanilla grass
-        registry.add(HybridAquaticPlatformBlocks.DUNEGRASS.get(), 60, 100)
-        registry.add(HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get(), 60, 100)
-        registry.add(HybridAquaticPlatformBlocks.CATTAIL.get(), 60, 100)
+        registry.add(HAPlatformBlocks.DUNEGRASS.get(), 60, 100)
+        registry.add(HAPlatformBlocks.TALL_DUNEGRASS.get(), 60, 100)
+        registry.add(HAPlatformBlocks.CATTAIL.get(), 60, 100)
         // same as vanilla logs
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get(), 5, 5)
-        registry.add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get(), 5, 5)
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get(), 5, 5)
-        registry.add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get(), 5, 5)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_LOG.get(), 5, 5)
+        registry.add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get(), 5, 5)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_WOOD.get(), 5, 5)
+        registry.add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get(), 5, 5)
         // same as vanilla cut wood
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get(), 5, 20)
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get(), 5, 20)
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE.get(), 5, 20)
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(), 5, 20)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_PLANKS.get(), 5, 20)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_SLAB.get(), 5, 20)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_FENCE.get(), 5, 20)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(), 5, 20)
     }
 
     private fun registerStrippables() {
         StrippableBlockRegistry.register(
-            HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get(),
-            HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get()
+            HAPlatformBlocks.DRIFTWOOD_LOG.get(),
+            HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get()
         )
         StrippableBlockRegistry.register(
-            HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get(),
-            HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get()
+            HAPlatformBlocks.DRIFTWOOD_WOOD.get(),
+            HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get()
         )
     }
 
-    private fun registerBiomeModifications(config: HybridAquaticConfig) {
+    private fun registerBiomeModifications(config: HAConfig) {
         config.entitySpawnConfig.forEach { config ->
             BiomeModifications.addSpawn(
                 BiomeSelectors.tag(config.biomes),

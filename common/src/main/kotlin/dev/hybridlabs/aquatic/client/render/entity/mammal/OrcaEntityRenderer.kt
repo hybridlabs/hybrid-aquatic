@@ -7,7 +7,7 @@ import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class OrcaEntityRenderer(context: Context) :
-    HybridAquaticDolphinEntityRenderer<OrcaEntity>(context, OrcaEntityModel(), true) {
+    HADolphinEntityRenderer<OrcaEntity>(context, OrcaEntityModel(), true) {
 
     init {
         addRenderLayer(OrcaEyeSpotEntityLayer(this))

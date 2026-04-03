@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.crustacean.LightfootCrabEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class LightfootCrabEntityRenderer(context: Context) :
-    HybridAquaticCrustaceanEntityRenderer<LightfootCrabEntity>(context, LightfootCrabEntityModel(), true, false)
+    HACrustaceanEntityRenderer<LightfootCrabEntity>(context, LightfootCrabEntityModel(), true, false)

@@ -26,24 +26,24 @@ object LootTableModifications {
                             defaultPools
                                 // add fishing loot tables
                                 .add(
-                                    LootTableReference.lootTableReference(HybridAquaticLootTables.HA_SMALL_FISH)
+                                    LootTableReference.lootTableReference(HALootTables.HA_SMALL_FISH)
                                         .setWeight(30)
                                         .setQuality(1)
                                 )
                                 .add(
-                                    LootTableReference.lootTableReference(HybridAquaticLootTables.HA_MEDIUM_FISH)
+                                    LootTableReference.lootTableReference(HALootTables.HA_MEDIUM_FISH)
                                         .setWeight(25)
                                         .setQuality(1)
                                 )
                                 .add(
-                                    LootTableReference.lootTableReference(HybridAquaticLootTables.HA_LARGE_FISH)
+                                    LootTableReference.lootTableReference(HALootTables.HA_LARGE_FISH)
                                         .setWeight(20)
                                         .setQuality(1)
                                 )
 
                                 // add fishing treasure loot table
                                 .add(
-                                    LootTableReference.lootTableReference(HybridAquaticLootTables.HA_CRATES)
+                                    LootTableReference.lootTableReference(HALootTables.HA_CRATES)
                                         .setWeight(15)
                                         .setQuality(2)
                                         .`when`(

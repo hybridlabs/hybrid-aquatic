@@ -4,7 +4,7 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.util.StringRepresentable
@@ -76,7 +76,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
             if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
                 // get a random message
                 val registryManager = world.registryAccess()
-                val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
+                val registry = registryManager.registryOrThrow(HARegistryKeys.SEA_MESSAGE)
                 val messageKey = registry.getRandom(world.random).getOrNull()?.key() ?: return
                 val message = registry.get(messageKey) ?: return
 
@@ -194,7 +194,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         val WATER_SHAPE: VoxelShape = box(1.0, 13.0, 1.0, 15.0, 16.0, 15.0)
 
         fun createItemStack(blockEntity: MessageInABottleBlockEntity): ItemStack {
-            val stack = ItemStack(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get())
+            val stack = ItemStack(HABlocks.MESSAGE_IN_A_BOTTLE.get())
             stack.getOrCreateTag().put(BlockItem.BLOCK_ENTITY_TAG, blockEntity.saveWithoutMetadata())
             return stack
         }

@@ -32,11 +32,11 @@ class TallSeaLettuceBlock(settings: Properties) : DoublePlantBlock(settings), Li
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HybridAquaticBlocks.AERATED_SAND.get()) && !floor.`is`(HybridAquaticBlocks.BUBBLE_GEYSER.get())
+        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HABlocks.AERATED_SAND.get()) && !floor.`is`(HABlocks.BUBBLE_GEYSER.get())
     }
 
     override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
-        return ItemStack(HybridAquaticBlocks.SEA_LETTUCE.get())
+        return ItemStack(HABlocks.SEA_LETTUCE.get())
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {

@@ -5,8 +5,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class DungenessCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, true) {
+class DungenessCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
+    HACrustaceanEntity(entityType, world, true) {
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

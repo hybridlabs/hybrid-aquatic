@@ -3,11 +3,11 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.entity.cephalopod.HybridAquaticCephalopodEntity
-import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
-import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.cephalopod.HACephalopodEntity
+import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
+import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -26,12 +26,12 @@ import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class SquirrelfishEntity(type: EntityType<out SquirrelfishEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(type, world) {
+    HASchoolingFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_CREATURES,
-        HybridAquaticEntityTags.LARGE_CREATURES,
-        HybridAquaticEntityTags.ALL_SHARKS
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
     )
 
     override fun registerGoals() {
@@ -167,11 +167,11 @@ class SquirrelfishEntity(type: EntityType<out SquirrelfishEntity>, world: Level)
 
             if (newFishCount in 1..<oldFishCount &&
                 level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS) &&
-                attacker !is HybridAquaticFishEntity &&
-                attacker !is HybridAquaticSharkEntity &&
-                attacker !is HybridAquaticCephalopodEntity &&
-                attacker !is HybridAquaticMammalEntity) {
-                spawnAtLocation(HybridAquaticItems.SQUIRRELFISH.get())
+                attacker !is HAFishEntity &&
+                attacker !is HASharkEntity &&
+                attacker !is HACephalopodEntity &&
+                attacker !is HAMammalEntity) {
+                spawnAtLocation(HAAquaticItems.SQUIRRELFISH.get())
             }
         }
 

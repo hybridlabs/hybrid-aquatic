@@ -1,12 +1,12 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.feature.OrcaEyeTextureFeature
 import dev.hybridlabs.aquatic.entity.feature.OrcaSaddleTextureFeature
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -29,7 +29,7 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquaticDolphinEntity(type, world),
+class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HADolphinEntity(type, world),
     OrcaEyeTextureFeature, OrcaSaddleTextureFeature, VariantHolder<OrcaEntity.Companion.Type> {
 
     override fun registerGoals() {
@@ -38,7 +38,7 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
     }
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): OrcaEntity? {
-        return HybridAquaticEntityTypes.ORCA.get().create(p0)
+        return HAEntityTypes.ORCA.get().create(p0)
     }
 
     //#region SFX
@@ -136,15 +136,15 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HybridAquatic
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.ARCTIC_OCEANS) -> {
+                        biome.`is`(HABiomeTags.ARCTIC_OCEANS) -> {
                             Type.fromId(random.nextInt(0, 2))
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.COLD_OCEANS) -> {
+                        biome.`is`(HABiomeTags.COLD_OCEANS) -> {
                             Type.fromId(random.nextInt(0, 4))
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
+                        biome.`is`(HABiomeTags.TEMPERATE_OCEANS) -> {
                             Type.fromId(random.nextInt(1, 6))
                         }
 

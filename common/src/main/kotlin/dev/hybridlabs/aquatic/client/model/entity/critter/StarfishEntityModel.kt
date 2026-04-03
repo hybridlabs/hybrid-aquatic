@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class StarfishEntityModel : HybridAquaticCritterEntityModel<StarfishEntity>("starfish") {
+class StarfishEntityModel : HACritterEntityModel<StarfishEntity>("starfish") {
 
     private val brittlestarTextures = listOf(
         ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_black.png"),

@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.GoldenDoradoEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class GoldenDoradoEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<GoldenDoradoEntity>(context, GoldenDoradoEntityModel(), true, false)
+    HAFishEntityRenderer<GoldenDoradoEntity>(context, GoldenDoradoEntityModel(), true, false)

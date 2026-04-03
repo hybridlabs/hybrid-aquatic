@@ -1,12 +1,12 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -50,7 +50,7 @@ import java.util.*
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HybridAquaticMammalEntity(entityType, world),
+class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMammalEntity(entityType, world),
     VariantHolder<OtterEntity.Companion.Type> {
     fun getTargetConfig() = TARGET_CONFIG
 
@@ -104,7 +104,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HybridAquaticItems.CLAM.get())
+        return stack.`is`(HAAquaticItems.CLAM.get())
     }
 
     /**
@@ -208,7 +208,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     //#endregion
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): OtterEntity? {
-        return HybridAquaticEntityTypes.OTTER.get().create(p0)
+        return HAEntityTypes.OTTER.get().create(p0)
     }
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
@@ -250,10 +250,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.OTTER_PREY
+                HAEntityTags.OTTER_PREY
             ),
             listOf(
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.ALL_SHARKS
             ),
         )
 
@@ -340,11 +340,11 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : Hybri
                             SEA
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.ROCKY_BEACHES) -> {
+                        biome.`is`(HABiomeTags.ROCKY_BEACHES) -> {
                             SEA
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.SANDY_BEACHES) -> {
+                        biome.`is`(HABiomeTags.SANDY_BEACHES) -> {
                             SEA
                         }
 

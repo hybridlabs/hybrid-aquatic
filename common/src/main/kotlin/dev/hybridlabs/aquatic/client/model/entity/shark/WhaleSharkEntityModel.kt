@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.shark.WhaleSharkEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class WhaleSharkEntityModel : HybridAquaticSharkEntityModel<WhaleSharkEntity>("whale_shark") {
+class WhaleSharkEntityModel : HASharkEntityModel<WhaleSharkEntity>("whale_shark") {
 
     private val commonTextures = listOf(
         ResourceLocation("hybrid-aquatic", "textures/entity/shark/whale_shark/whale_shark.png"),

@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.jellyfish.CepheidaeJellyfishEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
-class CepheidaeJellyfishEntityModel : HybridAquaticJellyfishEntityModel<CepheidaeJellyfishEntity>("cepheidae_jellyfish") {
+class CepheidaeJellyfishEntityModel : HAJellyfishEntityModel<CepheidaeJellyfishEntity>("cepheidae_jellyfish") {
     override fun getRenderType(animatable: CepheidaeJellyfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.entity.miniboss.ShellBeastEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class ShellBeastEntityRenderer(context: Context) :
-    HybridAquaticMinibossEntityRenderer<ShellBeastEntity>(context, ShellBeastEntityModel()) {
+    HAMinibossEntityRenderer<ShellBeastEntity>(context, ShellBeastEntityModel()) {
     override fun getMotionAnimThreshold(animatable: ShellBeastEntity): Float {
         return 0.0025f
     }

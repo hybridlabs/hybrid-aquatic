@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.CarpEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class CarpEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<CarpEntity>(context, CarpEntityModel(), true, false)
+    HAFishEntityRenderer<CarpEntity>(context, CarpEntityModel(), true, false)

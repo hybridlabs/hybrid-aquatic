@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -23,7 +23,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level) :
-    HybridAquaticJellyfishEntity(entityType, world, true, 1),
+    HAJellyfishEntity(entityType, world, true, 1),
     VariantHolder<SeaNettleEntity.Companion.Type> {
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -95,7 +95,7 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
             if (jellyfishCount > 0 && !level().isClientSide()) {
                 for (i in 0 until  jellyfishCount) {
                     val distance = 1.5f
-                    val entity = SeaNettleEntity(HybridAquaticEntityTypes.SEA_NETTLE.get(), this.level())
+                    val entity = SeaNettleEntity(HAEntityTypes.SEA_NETTLE.get(), this.level())
                     entity.variant = this.variant
                     entity.moveTo(
                         this.x + this.random.nextFloat() * distance,

@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.render.entity.mammal.layer
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.mammal.OrcaEntityModel
-import dev.hybridlabs.aquatic.client.render.entity.mammal.HybridAquaticDolphinEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.mammal.HADolphinEntityRenderer
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
@@ -13,7 +13,7 @@ import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
 class OrcaEyeSpotEntityLayer(
-    renderer: HybridAquaticDolphinEntityRenderer<OrcaEntity>
+    renderer: HADolphinEntityRenderer<OrcaEntity>
 ) : GeoRenderLayer<OrcaEntity>(renderer) {
 
     private fun getEyeSpotTexture(animatable: OrcaEntity, layer: String): ResourceLocation {

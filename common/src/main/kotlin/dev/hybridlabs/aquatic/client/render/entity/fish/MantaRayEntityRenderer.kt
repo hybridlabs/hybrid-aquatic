@@ -1,14 +1,14 @@
 package dev.hybridlabs.aquatic.client.render.entity.fish
 
 import dev.hybridlabs.aquatic.client.model.entity.fish.MantaRayEntityModel
-import dev.hybridlabs.aquatic.client.render.entity.fish.layer.HybridAquaticFishEntityLayer
+import dev.hybridlabs.aquatic.client.render.entity.fish.layer.HAFishEntityLayer
 import dev.hybridlabs.aquatic.entity.fish.MantaRayEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class MantaRayEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<MantaRayEntity>(context, MantaRayEntityModel(), true, false) {
+    HAFishEntityRenderer<MantaRayEntity>(context, MantaRayEntityModel(), true, false) {
 
     init {
-        addRenderLayer(HybridAquaticFishEntityLayer(this))
+        addRenderLayer(HAFishEntityLayer(this))
     }
 }

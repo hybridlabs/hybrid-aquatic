@@ -15,9 +15,9 @@ import dev.hybridlabs.aquatic.data.server.worldgen.BiomeProvider
 import dev.hybridlabs.aquatic.data.server.worldgen.ConfiguredFeatureProvider
 import dev.hybridlabs.aquatic.data.server.worldgen.PlacedFeatureProvider
 import dev.hybridlabs.aquatic.data.structure_spawn_modifier.StructureSpawnModifierProvider
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
+import dev.hybridlabs.aquatic.world.gen.feature.HAConfiguredFeatures
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.core.Registry
@@ -48,13 +48,13 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
     }
 
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
-        registryBuilder.add(HybridAquaticRegistryKeys.SEA_MESSAGE) {}
-        registryBuilder.add(HybridAquaticRegistryKeys.STRUCTURE_SPAWN_MODIFIER) {}
+        registryBuilder.add(HARegistryKeys.SEA_MESSAGE) {}
+        registryBuilder.add(HARegistryKeys.STRUCTURE_SPAWN_MODIFIER) {}
         registryBuilder.add(Registries.BIOME) {
-            HybridAquaticBiomes
+            HABiomes
         }
         registryBuilder.add(Registries.CONFIGURED_FEATURE) {
-            HybridAquaticConfiguredFeatures
+            HAConfiguredFeatures
         }
     }
 

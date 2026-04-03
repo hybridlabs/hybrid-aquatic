@@ -5,8 +5,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class VampireCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, true) {
+class VampireCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
+    HACrustaceanEntity(entityType, world, true) {
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class CrownJellyfishEntity(entityType: EntityType<out CrownJellyfishEntity>, world: Level) :
-    HybridAquaticJellyfishEntity(entityType, world, true, 1) {
+    HAJellyfishEntity(entityType, world, true, 1) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

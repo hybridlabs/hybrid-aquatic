@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.item.HAAquaticItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.advancements.critereon.EntityFlagsPredicate
@@ -29,7 +29,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
     SimpleFabricLootTableProvider(output, LootContextParamSets.ENTITY) {
     override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
         // nautilus
-        export(exporter, HybridAquaticEntityTypes.NAUTILUS.get()) {
+        export(exporter, HAEntityTypes.NAUTILUS.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -39,7 +39,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.RAW_TENTACLE.get())
+                        LootItem.lootTableItem(HAAquaticItems.RAW_TENTACLE.get())
                             .apply(
                                 SmeltItemFunction.smelted().`when`(
                                     LootItemEntityPropertyCondition.hasProperties(
@@ -54,43 +54,43 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
         }
 
         //#region Minibosses
-        export(exporter, HybridAquaticEntityTypes.KARKINOS.get()) {
+        export(exporter, HAEntityTypes.KARKINOS.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.RAW_CRAB.get())
+                        LootItem.lootTableItem(HAAquaticItems.RAW_CRAB.get())
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 16.0F)))
                     ).build()
             ).pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.KARKINOS_CLAW.get())
+                        LootItem.lootTableItem(HAAquaticItems.KARKINOS_CLAW.get())
                     ).build()
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SHELL_BEAST.get()) {
+        export(exporter, HAEntityTypes.SHELL_BEAST.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.RAW_TENTACLE.get())
+                        LootItem.lootTableItem(HAAquaticItems.RAW_TENTACLE.get())
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 16.0F)))
                     ).build()
             ).pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.GIANT_NAUTILUS_SHELL.get())
+                        LootItem.lootTableItem(HAAquaticItems.GIANT_NAUTILUS_SHELL.get())
                     ).build()
             )
         }
         //#endregion
 
         //#region Crustaceans
-        export(exporter, HybridAquaticEntityTypes.DECORATOR_CRAB.get()) {
+        export(exporter, HAEntityTypes.DECORATOR_CRAB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.RAW_CRAB.get())
+                        LootItem.lootTableItem(HAAquaticItems.RAW_CRAB.get())
                             .apply(
                                 SmeltItemFunction.smelted().`when`(
                                     LootItemEntityPropertyCondition.hasProperties(
@@ -105,11 +105,11 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.HORSESHOE_CRAB.get()) {
+        export(exporter, HAEntityTypes.HORSESHOE_CRAB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HybridAquaticItems.RAW_CRAB.get())
+                        LootItem.lootTableItem(HAAquaticItems.RAW_CRAB.get())
                             .apply(
                                 SmeltItemFunction.smelted().`when`(
                                     LootItemEntityPropertyCondition.hasProperties(
@@ -124,7 +124,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.DUNGENESS_CRAB.get()) {
+        export(exporter, HAEntityTypes.DUNGENESS_CRAB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -143,7 +143,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FIDDLER_CRAB.get()) {
+        export(exporter, HAEntityTypes.FIDDLER_CRAB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -162,7 +162,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SPIDER_CRAB.get()) {
+        export(exporter, HAEntityTypes.SPIDER_CRAB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -181,7 +181,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.GHOST_CRAB.get()) {
+        export(exporter, HAEntityTypes.GHOST_CRAB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -200,7 +200,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.VAMPIRE_CRAB.get()) {
+        export(exporter, HAEntityTypes.VAMPIRE_CRAB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -219,7 +219,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FLOWER_CRAB.get()) {
+        export(exporter, HAEntityTypes.FLOWER_CRAB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -238,7 +238,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.COCONUT_CRAB.get()) {
+        export(exporter, HAEntityTypes.COCONUT_CRAB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -257,7 +257,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.YETI_CRAB.get()) {
+        export(exporter, HAEntityTypes.YETI_CRAB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -276,7 +276,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get()) {
+        export(exporter, HAEntityTypes.LIGHTFOOT_CRAB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -295,7 +295,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.LOBSTER.get()) {
+        export(exporter, HAEntityTypes.LOBSTER.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -329,7 +329,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.CRAYFISH.get()) {
+        export(exporter, HAEntityTypes.CRAYFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -348,7 +348,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SHRIMP.get()) {
+        export(exporter, HAEntityTypes.SHRIMP.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -368,7 +368,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
         }
 
         // cephalopods
-        export(exporter, HybridAquaticEntityTypes.VAMPIRE_SQUID.get()) {
+        export(exporter, HAEntityTypes.VAMPIRE_SQUID.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -386,7 +386,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                     ).build()
             )
         }
-        export(exporter, HybridAquaticEntityTypes.CUTTLEFISH.get()) {
+        export(exporter, HAEntityTypes.CUTTLEFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -416,7 +416,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.ARROW_SQUID.get()) {
+        export(exporter, HAEntityTypes.ARROW_SQUID.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -441,34 +441,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.GIANT_SQUID.get()) {
-            pool(
-                LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(Items.INK_SAC)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
-                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
-                    ).build()
-            )
-            pool(
-                LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(HybridAquaticItems.RAW_TENTACLE.get())
-                            .apply(
-                                SmeltItemFunction.smelted().`when`(
-                                    LootItemEntityPropertyCondition.hasProperties(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
-                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
-                    ).build()
-            )
-        }
-
-        export(exporter, HybridAquaticEntityTypes.COLOSSAL_SQUID.get()) {
+        export(exporter, HAEntityTypes.GIANT_SQUID.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -495,7 +468,34 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FIREFLY_SQUID.get()) {
+        export(exporter, HAEntityTypes.COLOSSAL_SQUID.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(Items.INK_SAC)
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                    ).build()
+            )
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HybridAquaticItems.RAW_TENTACLE.get())
+                            .apply(
+                                SmeltItemFunction.smelted().`when`(
+                                    LootItemEntityPropertyCondition.hasProperties(
+                                        LootContext.EntityTarget.THIS,
+                                        NEEDS_ENTITY_ON_FIRE
+                                    )
+                                )
+                            )
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.FIREFLY_SQUID.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -520,7 +520,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEA_CUCUMBER.get()) {
+        export(exporter, HAEntityTypes.SEA_CUCUMBER.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -531,7 +531,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SCALYFOOT_SNAIL.get()) {
+        export(exporter, HAEntityTypes.SCALYFOOT_SNAIL.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -542,7 +542,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEA_SLUG.get()) {
+        export(exporter, HAEntityTypes.SEA_SLUG.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -553,7 +553,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEA_URCHIN.get()) {
+        export(exporter, HAEntityTypes.SEA_URCHIN.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -574,7 +574,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
 
         // end region
 
-        export(exporter, HybridAquaticEntityTypes.OCTOPUS.get()) {
+        export(exporter, HAEntityTypes.OCTOPUS.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -594,7 +594,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
         }
 
         // jellyfish
-        export(exporter, HybridAquaticEntityTypes.MOON_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.MOON_JELLYFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -605,7 +605,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEA_NETTLE.get()) {
+        export(exporter, HAEntityTypes.SEA_NETTLE.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -616,7 +616,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.NOMURA_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.NOMURA_JELLYFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -627,7 +627,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.LIONS_MANE_JELLYFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -638,7 +638,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BLUE_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.BLUE_JELLYFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -650,7 +650,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
         }
 
 
-        export(exporter, HybridAquaticEntityTypes.BARREL_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.BARREL_JELLYFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -661,7 +661,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.MAUVE_STINGER.get()) {
+        export(exporter, HAEntityTypes.MAUVE_STINGER.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -672,7 +672,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.CEPHEIDAE_JELLYFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -683,7 +683,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.CROWN_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.CROWN_JELLYFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -694,7 +694,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.ANGLERFISH.get()) {
+        export(exporter, HAEntityTypes.ANGLERFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -705,7 +705,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.DRAGONFISH.get()) {
+        export(exporter, HAEntityTypes.DRAGONFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -716,7 +716,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.ROCKFISH.get()) {
+        export(exporter, HAEntityTypes.ROCKFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -727,7 +727,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEA_BASS.get()) {
+        export(exporter, HAEntityTypes.SEA_BASS.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -738,7 +738,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.CLOWNFISH.get()) {
+        export(exporter, HAEntityTypes.CLOWNFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -749,7 +749,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.DAMSELFISH.get()) {
+        export(exporter, HAEntityTypes.DAMSELFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -760,7 +760,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.JOHN_DORY.get()) {
+        export(exporter, HAEntityTypes.JOHN_DORY.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -771,7 +771,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SURGEONFISH.get()) {
+        export(exporter, HAEntityTypes.SURGEONFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -782,7 +782,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BOXFISH.get()) {
+        export(exporter, HAEntityTypes.BOXFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -793,7 +793,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.LIONFISH.get()) {
+        export(exporter, HAEntityTypes.LIONFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -804,7 +804,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BARRELEYE.get()) {
+        export(exporter, HAEntityTypes.BARRELEYE.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -823,7 +823,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.STINGRAY.get()) {
+        export(exporter, HAEntityTypes.STINGRAY.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -834,7 +834,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.GOURAMI.get()) {
+        export(exporter, HAEntityTypes.GOURAMI.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -845,7 +845,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BETTA.get()) {
+        export(exporter, HAEntityTypes.BETTA.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -856,7 +856,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.PEARLFISH.get()) {
+        export(exporter, HAEntityTypes.PEARLFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -867,7 +867,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SNAILFISH.get()) {
+        export(exporter, HAEntityTypes.SNAILFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -878,7 +878,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.DANIO.get()) {
+        export(exporter, HAEntityTypes.DANIO.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -889,7 +889,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.DISCUS.get()) {
+        export(exporter, HAEntityTypes.DISCUS.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -900,7 +900,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.BLOWFISH.get()) {
+        export(exporter, HAEntityTypes.BLOWFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -911,7 +911,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.STONEFISH.get()) {
+        export(exporter, HAEntityTypes.STONEFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -922,7 +922,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.CARP.get()) {
+        export(exporter, HAEntityTypes.CARP.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -933,7 +933,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.PLECO.get()) {
+        export(exporter, HAEntityTypes.PLECO.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -944,7 +944,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SHINER.get()) {
+        export(exporter, HAEntityTypes.SHINER.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -955,7 +955,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FANGTOOTH.get()) {
+        export(exporter, HAEntityTypes.FANGTOOTH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -966,7 +966,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.HATCHETFISH.get()) {
+        export(exporter, HAEntityTypes.HATCHETFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -977,7 +977,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.VIPERFISH.get()) {
+        export(exporter, HAEntityTypes.VIPERFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -988,7 +988,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SUNFISH.get()) {
+        export(exporter, HAEntityTypes.SUNFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -999,7 +999,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.TROUT.get()) {
+        export(exporter, HAEntityTypes.TROUT.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1010,7 +1010,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.GOLDFISH.get()) {
+        export(exporter, HAEntityTypes.GOLDFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1021,7 +1021,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.PARROTFISH.get()) {
+        export(exporter, HAEntityTypes.PARROTFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1032,7 +1032,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.WRASSE.get()) {
+        export(exporter, HAEntityTypes.WRASSE.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1043,7 +1043,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FLASHLIGHT_FISH.get()) {
+        export(exporter, HAEntityTypes.FLASHLIGHT_FISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1054,7 +1054,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.RATFISH.get()) {
+        export(exporter, HAEntityTypes.RATFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1065,7 +1065,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.PIRANHA.get()) {
+        export(exporter, HAEntityTypes.PIRANHA.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1076,7 +1076,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.MAHI.get()) {
+        export(exporter, HAEntityTypes.MAHI.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1087,7 +1087,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.OPAH.get()) {
+        export(exporter, HAEntityTypes.OPAH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1098,7 +1098,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.NEEDLEFISH.get()) {
+        export(exporter, HAEntityTypes.NEEDLEFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1109,7 +1109,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.MACKEREL.get()) {
+        export(exporter, HAEntityTypes.MACKEREL.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1120,7 +1120,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.HERRING.get()) {
+        export(exporter, HAEntityTypes.HERRING.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1131,7 +1131,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.TUNA.get()) {
+        export(exporter, HAEntityTypes.TUNA.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1142,7 +1142,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.FLYING_FISH.get()) {
+        export(exporter, HAEntityTypes.FLYING_FISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1153,7 +1153,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.TRIGGERFISH.get()) {
+        export(exporter, HAEntityTypes.TRIGGERFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1165,7 +1165,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
         }
 
 
-        export(exporter, HybridAquaticEntityTypes.TREVALLY.get()) {
+        export(exporter, HAEntityTypes.TREVALLY.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1176,7 +1176,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SEAHORSE.get()) {
+        export(exporter, HAEntityTypes.SEAHORSE.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1187,7 +1187,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.OCEAN_SUNFISH.get()) {
+        export(exporter, HAEntityTypes.OCEAN_SUNFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1198,7 +1198,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.COELACANTH.get()) {
+        export(exporter, HAEntityTypes.COELACANTH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1209,7 +1209,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.GOLDEN_DORADO.get()) {
+        export(exporter, HAEntityTypes.GOLDEN_DORADO.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1220,7 +1220,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.OARFISH.get()) {
+        export(exporter, HAEntityTypes.OARFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1231,7 +1231,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.OSCAR.get()) {
+        export(exporter, HAEntityTypes.OSCAR.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1242,7 +1242,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.TIGER_BARB.get()) {
+        export(exporter, HAEntityTypes.TIGER_BARB.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1253,7 +1253,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.MORAY_EEL.get()) {
+        export(exporter, HAEntityTypes.MORAY_EEL.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1264,7 +1264,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HybridAquaticEntityTypes.SQUIRRELFISH.get()) {
+        export(exporter, HAEntityTypes.SQUIRRELFISH.get()) {
             pool(
                 LootPool.lootPool()
                     .add(

@@ -3,9 +3,9 @@ package dev.hybridlabs.aquatic.client.render.entity.crustacean.layer
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import com.mojang.math.Axis
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.HybridAquaticCrustaceanEntityRenderer
-import dev.hybridlabs.aquatic.entity.crustacean.HybridAquaticCrustaceanEntity
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.client.render.entity.crustacean.HACrustaceanEntityRenderer
+import dev.hybridlabs.aquatic.entity.crustacean.HACrustaceanEntity
+import dev.hybridlabs.aquatic.item.HAAquaticItems
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
@@ -14,8 +14,8 @@ import net.minecraft.world.item.ItemDisplayContext
 import software.bernie.geckolib.cache.`object`.GeoBone
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
-class HybridAquaticShellLayer<T: HybridAquaticCrustaceanEntity>(
-    renderer: HybridAquaticCrustaceanEntityRenderer<T>,
+class HybridAquaticShellLayer<T: HACrustaceanEntity>(
+    renderer: HACrustaceanEntityRenderer<T>,
     val defaultItem: Item
 ) : GeoRenderLayer<T>(renderer) {
 
@@ -33,7 +33,7 @@ class HybridAquaticShellLayer<T: HybridAquaticCrustaceanEntity>(
         super.renderForBone(poseStack, animatable, bone, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay)
         if (!bone.name.equals("shell")) return
         if (animatable.shellItem.`is`(defaultItem) ||
-            animatable.shellItem.`is`(HybridAquaticItems.OMINOUS_CONCH.get())
+            animatable.shellItem.`is`(HAAquaticItems.OMINOUS_CONCH.get())
         ) return
 
         val itemRenderer = Minecraft.getInstance().itemRenderer

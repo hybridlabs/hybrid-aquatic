@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.PathfinderMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 class OpahEntity(type: EntityType<out OpahEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world) {
+    HAFishEntity(type, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -26,18 +26,18 @@ class OpahEntity(type: EntityType<out OpahEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HybridAquaticItems.RAW_TENTACLE.get())
+        return stack.`is`(HAAquaticItems.RAW_TENTACLE.get())
     }
 
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES,
-                HybridAquaticEntityTags.ALL_CEPHALOPODS
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HybridAquaticEntityTags.MEDIUM_CREATURES,
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.MEDIUM_CREATURES,
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

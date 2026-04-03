@@ -4,9 +4,9 @@ import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonObject
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.HAAquaticItems
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
@@ -31,11 +31,11 @@ class MessageInABottleItemEntry(
         val world = context.level
         val random = context.random
         val registryManager = world.registryAccess()
-        val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
+        val registry = registryManager.registryOrThrow(HARegistryKeys.SEA_MESSAGE)
         registry.getRandom(random).ifPresent { messageEntry ->
             val message = messageEntry.value()
 
-            val stack = ItemStack(HybridAquaticItems.MESSAGE_IN_A_BOTTLE.get())
+            val stack = ItemStack(HAAquaticItems.MESSAGE_IN_A_BOTTLE.get())
             stack.getOrCreateTagElement(BlockItem.BLOCK_ENTITY_TAG).apply {
                 val variants = MessageInABottleBlock.Variant.entries
                 putString(MessageInABottleBlockEntity.VARIANT_KEY, variants[random.nextInt(variants.size)].id)

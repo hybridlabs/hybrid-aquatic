@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -10,8 +10,8 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 
-class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
-    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.ALL_SHARKS)
+class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level) : HACephalopodEntity(type, world) {
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HAEntityTags.ALL_SHARKS)
     private var isFeeding = false
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {

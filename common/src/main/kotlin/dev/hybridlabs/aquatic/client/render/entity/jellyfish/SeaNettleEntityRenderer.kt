@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.jellyfish.SeaNettleEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class SeaNettleEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<SeaNettleEntity>(context, SeaNettleEntityModel(), true, false)
+    HAJellyfishEntityRenderer<SeaNettleEntity>(context, SeaNettleEntityModel(), true, false)

@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.render.item
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.block.BlockEntityHelper
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack
 
 class MessageInABottleBlockItemRenderer : DynamicItemRenderer {
     private val messageInABottleBlockEntity =
-        MessageInABottleBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get().defaultBlockState())
+        MessageInABottleBlockEntity(BlockPos.ZERO, HABlocks.MESSAGE_IN_A_BOTTLE.get().defaultBlockState())
     private val renderer =
         MessageInABottleBlockEntityRenderer(BlockEntityHelper.createBlockEntityRendererProviderContext())
 

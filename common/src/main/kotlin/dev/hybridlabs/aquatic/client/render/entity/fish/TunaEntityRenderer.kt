@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.TunaEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class TunaEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<TunaEntity>(context, TunaEntityModel(), true, false)
+    HAFishEntityRenderer<TunaEntity>(context, TunaEntityModel(), true, false)

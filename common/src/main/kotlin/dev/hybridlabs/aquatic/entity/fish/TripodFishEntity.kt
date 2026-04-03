@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityDimensions
@@ -18,12 +18,12 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world) {
+    HAFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_CREATURES,
-        HybridAquaticEntityTags.LARGE_CREATURES,
-        HybridAquaticEntityTags.ALL_SHARKS
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
     )
 
     override fun createNavigation(level: Level): PathNavigation {
@@ -61,7 +61,7 @@ class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
         }
 
         fun canSpawn(
-            type: EntityType<out HybridAquaticWaterAnimal>,
+            type: EntityType<out HAWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,

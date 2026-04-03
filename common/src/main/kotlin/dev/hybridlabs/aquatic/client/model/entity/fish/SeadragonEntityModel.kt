@@ -7,7 +7,7 @@ import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 
-class SeadragonEntityModel : HybridAquaticFishEntityModel<SeadragonEntity>("seadragon") {
+class SeadragonEntityModel : HAFishEntityModel<SeadragonEntity>("seadragon") {
     override fun getRenderType(animatable: SeadragonEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.render.entity.misc
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.block.BlockRenderDispatcher
@@ -47,7 +47,7 @@ class DepthChargeEntityRenderer(context: EntityRendererProvider.Context) :
         poseStack.mulPose(Axis.YP.rotationDegrees(90.0f))
         TntMinecartRenderer.renderWhiteSolidBlock(
             this.blockRenderer,
-            HybridAquaticBlocks.DEPTH_CHARGE.get().defaultBlockState(),
+            HABlocks.DEPTH_CHARGE.get().defaultBlockState(),
             poseStack,
             buffer,
             packedLight,

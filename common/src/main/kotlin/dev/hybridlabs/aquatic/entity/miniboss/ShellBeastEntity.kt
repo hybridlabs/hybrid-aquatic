@@ -39,8 +39,8 @@ import java.util.*
 import java.util.function.Predicate
 import kotlin.math.abs
 
-class ShellBeastEntity(type: EntityType<out HybridAquaticMinibossEntity>, world: Level) :
-    HybridAquaticMinibossEntity(type, world) {
+class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
+    HAMinibossEntity(type, world) {
     private var explosionPower = 0
 
     fun getExplosionPower(): Int {

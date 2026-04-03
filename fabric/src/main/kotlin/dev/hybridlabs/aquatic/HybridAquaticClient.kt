@@ -3,19 +3,19 @@
 package dev.hybridlabs.aquatic
 
 import dev.emi.trinkets.api.client.TrinketRendererRegistry
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
-import dev.hybridlabs.aquatic.client.gui.screen.HybridAquaticMenuScreens
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BASKING_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BULL_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.FRILLED_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.GREAT_WHITE_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.HAMMERHEAD_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.THRESHER_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.TIGER_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.WHALE_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
+import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
+import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BASKING_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BULL_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.FRILLED_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.GREAT_WHITE_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.HAMMERHEAD_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.THRESHER_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.TIGER_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.WHALE_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
 import dev.hybridlabs.aquatic.client.particle.ClientParticleRegistry
@@ -27,7 +27,7 @@ import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.GiantGreenAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneBlockItemRenderer
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.HAAquaticItems
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
@@ -51,7 +51,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer
 @Suppress("UnusedExpression")
 object HybridAquaticClient : ClientModInitializer {
     override fun onInitializeClient() {
-        HybridAquaticEntityModelLayers
+        HAEntityModelLayers
         HybridAquaticClientNetworking
 
         registerRenderShapes()
@@ -66,12 +66,12 @@ object HybridAquaticClient : ClientModInitializer {
 
         ClientParticleRegistry()
 
-        HybridAquaticMenuScreens.register()
+        HAMenuScreens.register()
     }
 
     private fun registerItemProperties() {
         FabricModelPredicateProviderRegistry.register(
-            HybridAquaticItems.OMINOUS_CONCH.get(),
+            HAAquaticItems.OMINOUS_CONCH.get(),
             ResourceLocation("tooting")
         ) { stack, _, entity, _ ->
             if (entity != null && entity.isUsingItem && entity.useItem == stack) 1.0f else 0.0f
@@ -105,15 +105,15 @@ object HybridAquaticClient : ClientModInitializer {
     }
 
     private fun registerTrinketRenderers() {
-        registerTrinketRenderer(HybridAquaticItems.EEL_SCARF.get(), EquipmentSlot.CHEST)
-        registerTrinketRenderer(HybridAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST)
-        registerTrinketRenderer(HybridAquaticItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HybridAquaticItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HybridAquaticItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HybridAquaticItems.GOLD_HATXOLOTL.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HybridAquaticItems.BROWN_HATXOLOTL.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HybridAquaticItems.CYAN_HATXOLOTL.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HybridAquaticItems.BLUE_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAAquaticItems.EEL_SCARF.get(), EquipmentSlot.CHEST)
+        registerTrinketRenderer(HAAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST)
+        registerTrinketRenderer(HAAquaticItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAAquaticItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAAquaticItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAAquaticItems.GOLD_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAAquaticItems.BROWN_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAAquaticItems.CYAN_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAAquaticItems.BLUE_HATXOLOTL.get(), EquipmentSlot.HEAD)
     }
 
     private fun createBasicRenderProvider(rendererProvider: () -> GeoArmorRenderer<*>): () -> RenderProvider {
@@ -158,150 +158,150 @@ object HybridAquaticClient : ClientModInitializer {
     private fun registerRenderShapes() {
         ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.translucent(),
-            HybridAquaticBlocks.ANEMONE.get(),
-            HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get(),
-            HybridAquaticBlocks.STRAWBERRY_ANEMONE.get(),
-            HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get(),
-            HybridAquaticBlocks.GLOWSLIME_BLOCK.get(),
+            HABlocks.ANEMONE.get(),
+            HABlocks.GIANT_GREEN_ANEMONE.get(),
+            HABlocks.STRAWBERRY_ANEMONE.get(),
+            HABlocks.MESSAGE_IN_A_BOTTLE.get(),
+            HABlocks.GLOWSLIME_BLOCK.get(),
         )
         ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.cutout(),
-            HybridAquaticPlatformBlocks.DUNEGRASS.get(),
-            HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get(),
+            HAPlatformBlocks.DUNEGRASS.get(),
+            HAPlatformBlocks.TALL_DUNEGRASS.get(),
 
-            HybridAquaticPlatformBlocks.CATTAIL.get(),
+            HAPlatformBlocks.CATTAIL.get(),
 
-            HybridAquaticBlocks.CLAMS.get(),
+            HABlocks.CLAMS.get(),
 
-            HybridAquaticBlocks.SHORT_RED_ALGAE.get(),
-            HybridAquaticBlocks.RED_ALGAE.get(),
-            HybridAquaticBlocks.TALL_RED_ALGAE.get(),
+            HABlocks.SHORT_RED_ALGAE.get(),
+            HABlocks.RED_ALGAE.get(),
+            HABlocks.TALL_RED_ALGAE.get(),
 
-            HybridAquaticBlocks.BULL_KELP.get(),
-            HybridAquaticBlocks.BULL_KELP_PLANT.get(),
+            HABlocks.BULL_KELP.get(),
+            HABlocks.BULL_KELP_PLANT.get(),
 
-            HybridAquaticBlocks.SARGASSUM.get(),
-            HybridAquaticBlocks.SARGASSUM_PLANT.get(),
-            HybridAquaticBlocks.FLOATING_SARGASSUM.get(),
+            HABlocks.SARGASSUM.get(),
+            HABlocks.SARGASSUM_PLANT.get(),
+            HABlocks.FLOATING_SARGASSUM.get(),
 
-            HybridAquaticBlocks.HARP_SPONGE.get(),
-            HybridAquaticBlocks.GLASS_SPONGE.get(),
+            HABlocks.HARP_SPONGE.get(),
+            HABlocks.GLASS_SPONGE.get(),
 
-            HybridAquaticBlocks.WATER_LETTUCE.get(),
-            HybridAquaticBlocks.WATER_HYACINTH.get(),
-            HybridAquaticBlocks.JUNGLE_LILY_PAD.get(),
+            HABlocks.WATER_LETTUCE.get(),
+            HABlocks.WATER_HYACINTH.get(),
+            HABlocks.JUNGLE_LILY_PAD.get(),
 
-            HybridAquaticBlocks.GLOWING_PLANKTON.get(),
+            HABlocks.GLOWING_PLANKTON.get(),
 
-            HybridAquaticBlocks.SEA_LETTUCE.get(),
-            HybridAquaticBlocks.TALL_SEA_LETTUCE.get(),
+            HABlocks.SEA_LETTUCE.get(),
+            HABlocks.TALL_SEA_LETTUCE.get(),
 
-            HybridAquaticBlocks.CRAB_POT.get(),
-            HybridAquaticBlocks.GIANT_CLAM.get(),
-            HybridAquaticBlocks.TUBE_WORM.get(),
+            HABlocks.CRAB_POT.get(),
+            HABlocks.GIANT_CLAM.get(),
+            HABlocks.TUBE_WORM.get(),
 
-            HybridAquaticBlocks.LOPHELIA_CORAL.get(),
-            HybridAquaticBlocks.LOPHELIA_CORAL_FAN.get(),
-            HybridAquaticBlocks.LOPHELIA_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL.get(),
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN.get(),
+            HABlocks.LOPHELIA_CORAL.get(),
+            HABlocks.LOPHELIA_CORAL_FAN.get(),
+            HABlocks.LOPHELIA_CORAL_WALL_FAN.get(),
+            HABlocks.DEAD_LOPHELIA_CORAL.get(),
+            HABlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
+            HABlocks.DEAD_LOPHELIA_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_LOPHELIA_CORAL.get(),
+            HABlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
+            HABlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.SUN_CORAL.get(),
-            HybridAquaticBlocks.SUN_CORAL_FAN.get(),
-            HybridAquaticBlocks.SUN_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.DEAD_SUN_CORAL.get(),
-            HybridAquaticBlocks.DEAD_SUN_CORAL_FAN.get(),
-            HybridAquaticBlocks.DEAD_SUN_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_SUN_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_SUN_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_SUN_CORAL_WALL_FAN.get(),
+            HABlocks.SUN_CORAL.get(),
+            HABlocks.SUN_CORAL_FAN.get(),
+            HABlocks.SUN_CORAL_WALL_FAN.get(),
+            HABlocks.DEAD_SUN_CORAL.get(),
+            HABlocks.DEAD_SUN_CORAL_FAN.get(),
+            HABlocks.DEAD_SUN_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_SUN_CORAL.get(),
+            HABlocks.BLEACHED_SUN_CORAL_FAN.get(),
+            HABlocks.BLEACHED_SUN_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.LEAF_CORAL.get(),
-            HybridAquaticBlocks.LEAF_CORAL_FAN.get(),
-            HybridAquaticBlocks.LEAF_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.DEAD_LEAF_CORAL.get(),
-            HybridAquaticBlocks.DEAD_LEAF_CORAL_FAN.get(),
-            HybridAquaticBlocks.DEAD_LEAF_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_LEAF_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_LEAF_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_LEAF_CORAL_WALL_FAN.get(),
+            HABlocks.LEAF_CORAL.get(),
+            HABlocks.LEAF_CORAL_FAN.get(),
+            HABlocks.LEAF_CORAL_WALL_FAN.get(),
+            HABlocks.DEAD_LEAF_CORAL.get(),
+            HABlocks.DEAD_LEAF_CORAL_FAN.get(),
+            HABlocks.DEAD_LEAF_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_LEAF_CORAL.get(),
+            HABlocks.BLEACHED_LEAF_CORAL_FAN.get(),
+            HABlocks.BLEACHED_LEAF_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.ROSE_CORAL.get(),
-            HybridAquaticBlocks.ROSE_CORAL_FAN.get(),
-            HybridAquaticBlocks.ROSE_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.DEAD_ROSE_CORAL.get(),
-            HybridAquaticBlocks.DEAD_ROSE_CORAL_FAN.get(),
-            HybridAquaticBlocks.DEAD_ROSE_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_ROSE_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_ROSE_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_ROSE_CORAL_WALL_FAN.get(),
+            HABlocks.ROSE_CORAL.get(),
+            HABlocks.ROSE_CORAL_FAN.get(),
+            HABlocks.ROSE_CORAL_WALL_FAN.get(),
+            HABlocks.DEAD_ROSE_CORAL.get(),
+            HABlocks.DEAD_ROSE_CORAL_FAN.get(),
+            HABlocks.DEAD_ROSE_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_ROSE_CORAL.get(),
+            HABlocks.BLEACHED_ROSE_CORAL_FAN.get(),
+            HABlocks.BLEACHED_ROSE_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BUTTON_CORAL.get(),
-            HybridAquaticBlocks.BUTTON_CORAL_FAN.get(),
-            HybridAquaticBlocks.BUTTON_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL.get(),
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL_FAN.get(),
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_BUTTON_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_BUTTON_CORAL_WALL_FAN.get(),
+            HABlocks.BUTTON_CORAL.get(),
+            HABlocks.BUTTON_CORAL_FAN.get(),
+            HABlocks.BUTTON_CORAL_WALL_FAN.get(),
+            HABlocks.DEAD_BUTTON_CORAL.get(),
+            HABlocks.DEAD_BUTTON_CORAL_FAN.get(),
+            HABlocks.DEAD_BUTTON_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_BUTTON_CORAL.get(),
+            HABlocks.BLEACHED_BUTTON_CORAL_FAN.get(),
+            HABlocks.BLEACHED_BUTTON_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.THORN_CORAL.get(),
-            HybridAquaticBlocks.THORN_CORAL_FAN.get(),
-            HybridAquaticBlocks.THORN_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.DEAD_THORN_CORAL.get(),
-            HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get(),
-            HybridAquaticBlocks.DEAD_THORN_CORAL_WALL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_THORN_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_THORN_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_THORN_CORAL_WALL_FAN.get(),
+            HABlocks.THORN_CORAL.get(),
+            HABlocks.THORN_CORAL_FAN.get(),
+            HABlocks.THORN_CORAL_WALL_FAN.get(),
+            HABlocks.DEAD_THORN_CORAL.get(),
+            HABlocks.DEAD_THORN_CORAL_FAN.get(),
+            HABlocks.DEAD_THORN_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_THORN_CORAL.get(),
+            HABlocks.BLEACHED_THORN_CORAL_FAN.get(),
+            HABlocks.BLEACHED_THORN_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BLEACHED_FIRE_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_FIRE_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_FIRE_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_FIRE_CORAL.get(),
+            HABlocks.BLEACHED_FIRE_CORAL_FAN.get(),
+            HABlocks.BLEACHED_FIRE_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BLEACHED_TUBE_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_TUBE_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_TUBE_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_TUBE_CORAL.get(),
+            HABlocks.BLEACHED_TUBE_CORAL_FAN.get(),
+            HABlocks.BLEACHED_TUBE_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BLEACHED_HORN_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_HORN_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_HORN_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_HORN_CORAL.get(),
+            HABlocks.BLEACHED_HORN_CORAL_FAN.get(),
+            HABlocks.BLEACHED_HORN_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_BUBBLE_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_BUBBLE_CORAL.get(),
+            HABlocks.BLEACHED_BUBBLE_CORAL_FAN.get(),
+            HABlocks.BLEACHED_BUBBLE_CORAL_WALL_FAN.get(),
 
-            HybridAquaticBlocks.BLEACHED_BRAIN_CORAL.get(),
-            HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_FAN.get(),
-            HybridAquaticBlocks.BLEACHED_BRAIN_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_BRAIN_CORAL.get(),
+            HABlocks.BLEACHED_BRAIN_CORAL_FAN.get(),
+            HABlocks.BLEACHED_BRAIN_CORAL_WALL_FAN.get(),
 
-            HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get(),
-            HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get(),
-            HybridAquaticBlocks.GLOWSTICK.get(),
-            HybridAquaticBlocks.WALL_GLOWSTICK.get(),
+            HAPlatformBlocks.DRIFTWOOD_DOOR.get(),
+            HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get(),
+            HABlocks.GLOWSTICK.get(),
+            HABlocks.WALL_GLOWSTICK.get(),
         )
     }
 
     private fun registerBlockEntityRenderers() {
-        BlockEntityRenderers.register(HybridAquaticBlockEntityTypes.ANEMONE.get(), ::AnemoneBlockEntityRenderer)
+        BlockEntityRenderers.register(HABlockEntityTypes.ANEMONE.get(), ::AnemoneBlockEntityRenderer)
         BlockEntityRenderers.register(
-            HybridAquaticBlockEntityTypes.GIANT_GREEN_ANEMONE.get(),
+            HABlockEntityTypes.GIANT_GREEN_ANEMONE.get(),
             ::GiantGreenAnemoneBlockEntityRenderer
         )
         BlockEntityRenderers.register(
-            HybridAquaticBlockEntityTypes.STRAWBERRY_ANEMONE.get(),
+            HABlockEntityTypes.STRAWBERRY_ANEMONE.get(),
             ::StrawberryAnemoneBlockEntityRenderer
         )
         BlockEntityRenderers.register(
-            HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE.get(),
+            HABlockEntityTypes.MESSAGE_IN_A_BOTTLE.get(),
             ::MessageInABottleBlockEntityRenderer
         )
-        BlockEntityRenderers.register(HybridAquaticBlockEntityTypes.BUOY.get(), ::BuoyBlockEntityRenderer)
+        BlockEntityRenderers.register(HABlockEntityTypes.BUOY.get(), ::BuoyBlockEntityRenderer)
     }
 
     private fun registerEntityRenderers() {
@@ -309,10 +309,10 @@ object HybridAquaticClient : ClientModInitializer {
     }
 
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
-        registry.register(HybridAquaticItems.ANEMONE.get(), AnemoneBlockItemRenderer())
-        registry.register(HybridAquaticItems.GIANT_GREEN_ANEMONE.get(), GiantGreenAnemoneBlockItemRenderer())
-        registry.register(HybridAquaticItems.STRAWBERRY_ANEMONE.get(), StrawberryAnemoneBlockItemRenderer())
-        registry.register(HybridAquaticItems.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleBlockItemRenderer())
+        registry.register(HAAquaticItems.ANEMONE.get(), AnemoneBlockItemRenderer())
+        registry.register(HAAquaticItems.GIANT_GREEN_ANEMONE.get(), GiantGreenAnemoneBlockItemRenderer())
+        registry.register(HAAquaticItems.STRAWBERRY_ANEMONE.get(), StrawberryAnemoneBlockItemRenderer())
+        registry.register(HAAquaticItems.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleBlockItemRenderer())
     }
 
     private fun registerModelLayers() {

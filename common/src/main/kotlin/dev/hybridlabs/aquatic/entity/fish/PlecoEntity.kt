@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -24,13 +24,13 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world),
+    HAFishEntity(type, world),
     VariantHolder<PlecoEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_CREATURES,
-        HybridAquaticEntityTags.LARGE_CREATURES,
-        HybridAquaticEntityTags.ALL_SHARKS
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
     )
 
     override fun canSit(): Boolean = true

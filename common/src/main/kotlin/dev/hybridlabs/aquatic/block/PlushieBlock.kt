@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks.addBlocks
+import dev.hybridlabs.aquatic.block.HABlocks.addBlocks
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation

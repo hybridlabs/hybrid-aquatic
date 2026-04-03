@@ -33,7 +33,7 @@ class ShortRedAlgaeBlock(settings: Properties?) : BushBlock(settings), Bonemeala
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HybridAquaticBlocks.AERATED_SAND.get()) && !floor.`is`(HybridAquaticBlocks.BUBBLE_GEYSER.get())
+        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HABlocks.AERATED_SAND.get()) && !floor.`is`(HABlocks.BUBBLE_GEYSER.get())
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
@@ -75,7 +75,7 @@ class ShortRedAlgaeBlock(settings: Properties?) : BushBlock(settings), Bonemeala
     }
 
     override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
-        val blockState = HybridAquaticBlocks.RED_ALGAE.get().defaultBlockState()
+        val blockState = HABlocks.RED_ALGAE.get().defaultBlockState()
         world.setBlock(pos, blockState, 2)
     }
 

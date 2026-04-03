@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -15,7 +15,7 @@ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
 
 class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world) {
+    HAFishEntity(type, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -37,12 +37,12 @@ class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES
+                HAEntityTags.SMALL_CREATURES
             ),
             listOf(
-                HybridAquaticEntityTags.MEDIUM_CREATURES,
-                HybridAquaticEntityTags.LARGE_CREATURES,
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.MEDIUM_CREATURES,
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

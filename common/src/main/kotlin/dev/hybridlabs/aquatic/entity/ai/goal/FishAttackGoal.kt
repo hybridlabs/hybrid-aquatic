@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.fish.HybridAquaticFishEntity
+import dev.hybridlabs.aquatic.entity.fish.HAFishEntity
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.EntitySelector
 import net.minecraft.world.entity.LivingEntity
@@ -12,7 +12,7 @@ import java.util.EnumSet
 import kotlin.math.max
 
 open class FishAttackGoal(
-    protected val fish: HybridAquaticFishEntity,
+    protected val fish: HAFishEntity,
     private val speedMultiplier: Double = 1.0,
     private val followingTargetEvenIfNotSeen: Boolean,
 ) :
@@ -148,7 +148,7 @@ open class FishAttackGoal(
             fish.swing(InteractionHand.MAIN_HAND)
             fish.doHurtTarget(enemy)
 
-            if (enemy.health <= 0) fish.hunger = HybridAquaticFishEntity.MAX_HUNGER
+            if (enemy.health <= 0) fish.hunger = HAFishEntity.MAX_HUNGER
             fish.health = fish.maxHealth
         }
     }

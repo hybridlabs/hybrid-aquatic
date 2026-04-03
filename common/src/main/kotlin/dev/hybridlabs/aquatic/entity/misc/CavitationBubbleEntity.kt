@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.misc
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.EntityType
@@ -32,7 +32,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         offsetZ: Double,
         explosionPower: Int,
     ) : super(
-        HybridAquaticEntityTypes.CAVITATION_BUBBLE.get(), shooter, offsetX, offsetY, offsetZ, level
+        HAEntityTypes.CAVITATION_BUBBLE.get(), shooter, offsetX, offsetY, offsetZ, level
     ) {
         this.explosionPower = explosionPower
     }

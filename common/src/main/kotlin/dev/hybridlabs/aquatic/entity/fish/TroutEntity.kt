@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -21,13 +21,13 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class TroutEntity(type: EntityType<out TroutEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world),
+    HAFishEntity(type, world),
     VariantHolder<TroutEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_CREATURES,
-        HybridAquaticEntityTags.LARGE_CREATURES,
-        HybridAquaticEntityTags.ALL_SHARKS
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
     )
 
     override fun getMaxSpawnClusterSize(): Int {

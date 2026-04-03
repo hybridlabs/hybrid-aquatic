@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.GiantClamBlockEntity
-import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
+import dev.hybridlabs.aquatic.item.HAAquaticItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
@@ -120,8 +120,8 @@ class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) 
 
             val randomValue = world.random.nextFloat()
             val itemToDrop = when {
-                randomValue < 0.70 -> ItemStack(HybridAquaticItems.PEARL.get())
-                randomValue < 0.95 -> ItemStack(HybridAquaticItems.BLACK_PEARL.get())
+                randomValue < 0.70 -> ItemStack(HAAquaticItems.PEARL.get())
+                randomValue < 0.95 -> ItemStack(HAAquaticItems.BLACK_PEARL.get())
                 else -> ItemStack(Items.ENDER_PEARL)
             }
 
@@ -157,7 +157,7 @@ class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) 
     ): BlockEntityTicker<T>? {
         return createTickerHelper(
             blockEntityType,
-            HybridAquaticBlockEntityTypes.GIANT_CLAM.get(),
+            HABlockEntityTypes.GIANT_CLAM.get(),
             GiantClamBlockEntity::tick
         )
     }

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -17,10 +17,10 @@ import software.bernie.geckolib.core.animation.AnimationState
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world) {
+    HAFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.ALL_SHARKS
+        HAEntityTags.ALL_SHARKS
     )
 
     override fun getMaxSpawnClusterSize(): Int {

@@ -1,13 +1,13 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class ArrowSquidEntity(type: EntityType<out ArrowSquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
+class ArrowSquidEntity(type: EntityType<out ArrowSquidEntity>, world: Level) : HACephalopodEntity(type, world) {
     override fun getTargetConfig() = TARGET_CONFIG
     override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 
@@ -18,10 +18,10 @@ class ArrowSquidEntity(type: EntityType<out ArrowSquidEntity>, world: Level) : H
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.ALL_CRUSTACEANS
+                HAEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

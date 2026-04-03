@@ -1,18 +1,17 @@
 package dev.hybridlabs.aquatic.entity
 
-import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.cephalopod.*
-import dev.hybridlabs.aquatic.entity.critter.HybridAquaticCritterEntity
+import dev.hybridlabs.aquatic.entity.critter.HACritterEntity
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
-import dev.hybridlabs.aquatic.entity.fish.TrevallyEntity
-import dev.hybridlabs.aquatic.entity.jellyfish.HybridAquaticJellyfishEntity
-import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticDolphinEntity
-import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticMammalEntity
-import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticSirenianEntity
-import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinibossEntity
-import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinionEntity
-import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import dev.hybridlabs.aquatic.entity.jellyfish.HAJellyfishEntity
+import dev.hybridlabs.aquatic.entity.mammal.HADolphinEntity
+import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
+import dev.hybridlabs.aquatic.entity.mammal.HASirenianEntity
+import dev.hybridlabs.aquatic.entity.miniboss.HAMinibossEntity
+import dev.hybridlabs.aquatic.entity.miniboss.HAMinionEntity
+import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacements
@@ -27,290 +26,290 @@ object SpawnRestrictionRegistry {
     fun registerSpawnRestrictions() {
         // shallow fish
         setOf(
-            HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
-            HybridAquaticEntityTypes.DAMSELFISH.get(),
-            HybridAquaticEntityTypes.TIGER_BARB.get(),
-            HybridAquaticEntityTypes.PIRANHA.get(),
-            HybridAquaticEntityTypes.SHINER.get(),
-            HybridAquaticEntityTypes.TROUT.get(),
-            HybridAquaticEntityTypes.SUNFISH.get(),
-            HybridAquaticEntityTypes.OSCAR.get(),
-            HybridAquaticEntityTypes.GOURAMI.get(),
-            HybridAquaticEntityTypes.PLECO.get(),
-            HybridAquaticEntityTypes.DANIO.get(),
-            HybridAquaticEntityTypes.DISCUS.get(),
-            HybridAquaticEntityTypes.CORYDORA.get(),
-            HybridAquaticEntityTypes.BETTA.get(),
-            HybridAquaticEntityTypes.TETRA.get(),
-            HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
+            HAEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
+            HAEntityTypes.DAMSELFISH.get(),
+            HAEntityTypes.TIGER_BARB.get(),
+            HAEntityTypes.PIRANHA.get(),
+            HAEntityTypes.SHINER.get(),
+            HAEntityTypes.TROUT.get(),
+            HAEntityTypes.SUNFISH.get(),
+            HAEntityTypes.OSCAR.get(),
+            HAEntityTypes.GOURAMI.get(),
+            HAEntityTypes.PLECO.get(),
+            HAEntityTypes.DANIO.get(),
+            HAEntityTypes.DISCUS.get(),
+            HAEntityTypes.CORYDORA.get(),
+            HAEntityTypes.BETTA.get(),
+            HAEntityTypes.TETRA.get(),
+            HAEntityTypes.GOLDEN_DORADO.get(),
         ).forEach { registerShallowFish(it) }
 
         // fish
         setOf(
-            HybridAquaticEntityTypes.TUNA.get(),
-            HybridAquaticEntityTypes.MAHI.get(),
-            HybridAquaticEntityTypes.BARRACUDA.get(),
-            HybridAquaticEntityTypes.SURGEONFISH.get(),
-            HybridAquaticEntityTypes.BOXFISH.get(),
-            HybridAquaticEntityTypes.SEADRAGON.get(),
-            HybridAquaticEntityTypes.LIONFISH.get(),
-            HybridAquaticEntityTypes.BLOWFISH.get(),
-            HybridAquaticEntityTypes.STONEFISH.get(),
-            HybridAquaticEntityTypes.ROCKFISH.get(),
-            HybridAquaticEntityTypes.SEA_BASS.get(),
-            HybridAquaticEntityTypes.TRIGGERFISH.get(),
-            HybridAquaticEntityTypes.TREVALLY.get(),
-            HybridAquaticEntityTypes.WRASSE.get(),
-            HybridAquaticEntityTypes.NEEDLEFISH.get(),
-            HybridAquaticEntityTypes.MACKEREL.get(),
-            HybridAquaticEntityTypes.HERRING.get(),
-            HybridAquaticEntityTypes.STINGRAY.get(),
-            HybridAquaticEntityTypes.MANTA_RAY.get(),
-            HybridAquaticEntityTypes.PEARLFISH.get(),
+            HAEntityTypes.TUNA.get(),
+            HAEntityTypes.MAHI.get(),
+            HAEntityTypes.BARRACUDA.get(),
+            HAEntityTypes.SURGEONFISH.get(),
+            HAEntityTypes.BOXFISH.get(),
+            HAEntityTypes.SEADRAGON.get(),
+            HAEntityTypes.LIONFISH.get(),
+            HAEntityTypes.BLOWFISH.get(),
+            HAEntityTypes.STONEFISH.get(),
+            HAEntityTypes.ROCKFISH.get(),
+            HAEntityTypes.SEA_BASS.get(),
+            HAEntityTypes.TRIGGERFISH.get(),
+            HAEntityTypes.TREVALLY.get(),
+            HAEntityTypes.WRASSE.get(),
+            HAEntityTypes.NEEDLEFISH.get(),
+            HAEntityTypes.MACKEREL.get(),
+            HAEntityTypes.HERRING.get(),
+            HAEntityTypes.STINGRAY.get(),
+            HAEntityTypes.MANTA_RAY.get(),
+            HAEntityTypes.PEARLFISH.get(),
         ).forEach { registerFish(it) }
 
         // night fish
         setOf(
-            HybridAquaticEntityTypes.MORAY_EEL.get(),
-            HybridAquaticEntityTypes.OPAH.get(),
+            HAEntityTypes.MORAY_EEL.get(),
+            HAEntityTypes.OPAH.get(),
         ).forEach { registerNightFish(it) }
 
-        registerFish(HybridAquaticEntityTypes.GARDEN_EEL.get(), GardenEelEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.CARP.get(), CarpEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.GOLDFISH.get(), GoldfishEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.CLOWNFISH.get(), ClownfishEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.PARROTFISH.get(), ParrotfishEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.SEAHORSE.get(), SeahorseEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.PUPFISH.get(), PupfishEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.FLYING_FISH.get(), FlyingFishEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.OCEAN_SUNFISH.get(), OceanSunfishEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.SQUIRRELFISH.get(), SquirrelfishEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(), FlashlightFishEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.DRAGONFISH.get(), DragonfishEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.OARFISH.get(), OarfishEntity::canSpawn)
-        registerFish(HybridAquaticEntityTypes.TRIPOD_FISH.get(), TripodFishEntity::canSpawn)
+        registerFish(HAEntityTypes.GARDEN_EEL.get(), GardenEelEntity::canSpawn)
+        registerFish(HAEntityTypes.CARP.get(), CarpEntity::canSpawn)
+        registerFish(HAEntityTypes.GOLDFISH.get(), GoldfishEntity::canSpawn)
+        registerFish(HAEntityTypes.CLOWNFISH.get(), ClownfishEntity::canSpawn)
+        registerFish(HAEntityTypes.PARROTFISH.get(), ParrotfishEntity::canSpawn)
+        registerFish(HAEntityTypes.SEAHORSE.get(), SeahorseEntity::canSpawn)
+        registerFish(HAEntityTypes.PUPFISH.get(), PupfishEntity::canSpawn)
+        registerFish(HAEntityTypes.FLYING_FISH.get(), FlyingFishEntity::canSpawn)
+        registerFish(HAEntityTypes.OCEAN_SUNFISH.get(), OceanSunfishEntity::canSpawn)
+        registerFish(HAEntityTypes.SQUIRRELFISH.get(), SquirrelfishEntity::canSpawn)
+        registerFish(HAEntityTypes.FLASHLIGHT_FISH.get(), FlashlightFishEntity::canSpawn)
+        registerFish(HAEntityTypes.DRAGONFISH.get(), DragonfishEntity::canSpawn)
+        registerFish(HAEntityTypes.OARFISH.get(), OarfishEntity::canSpawn)
+        registerFish(HAEntityTypes.TRIPOD_FISH.get(), TripodFishEntity::canSpawn)
 
         // deep fish
         setOf(
-            HybridAquaticEntityTypes.ANGLERFISH.get(),
-            HybridAquaticEntityTypes.VIPERFISH.get(),
-            HybridAquaticEntityTypes.FANGTOOTH.get(),
-            HybridAquaticEntityTypes.HATCHETFISH.get(),
-            HybridAquaticEntityTypes.BARRELEYE.get(),
-            HybridAquaticEntityTypes.COELACANTH.get(),
-            HybridAquaticEntityTypes.SLICKHEAD.get(),
-            HybridAquaticEntityTypes.RATFISH.get(),
-            HybridAquaticEntityTypes.JOHN_DORY.get(),
-            HybridAquaticEntityTypes.SNAILFISH.get(),
-            HybridAquaticEntityTypes.SEA_ANGEL.get(),
+            HAEntityTypes.ANGLERFISH.get(),
+            HAEntityTypes.VIPERFISH.get(),
+            HAEntityTypes.FANGTOOTH.get(),
+            HAEntityTypes.HATCHETFISH.get(),
+            HAEntityTypes.BARRELEYE.get(),
+            HAEntityTypes.COELACANTH.get(),
+            HAEntityTypes.SLICKHEAD.get(),
+            HAEntityTypes.RATFISH.get(),
+            HAEntityTypes.JOHN_DORY.get(),
+            HAEntityTypes.SNAILFISH.get(),
+            HAEntityTypes.SEA_ANGEL.get(),
         ).forEach { registerDeepFish(it) }
 
         // cephalopods
         setOf(
-            HybridAquaticEntityTypes.ARROW_SQUID.get(),
-            HybridAquaticEntityTypes.CUTTLEFISH.get(),
+            HAEntityTypes.ARROW_SQUID.get(),
+            HAEntityTypes.CUTTLEFISH.get(),
         ).forEach { registerCephalopod(it) }
 
         // deep cephalopods
         setOf(
-            HybridAquaticEntityTypes.VAMPIRE_SQUID.get()
+            HAEntityTypes.VAMPIRE_SQUID.get()
         ).forEach { registerDeepCephalopod(it) }
 
         // octopuses
         setOf(
-            HybridAquaticEntityTypes.OCTOPUS.get(),
+            HAEntityTypes.OCTOPUS.get(),
         ).forEach { registerOctopus(it) }
 
-        registerWaterCreature(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), ColossalSquidEntity::canSpawn)
-        registerWaterCreature(HybridAquaticEntityTypes.GIANT_SQUID.get(), GiantSquidEntity::canSpawn)
-        registerWaterCreature(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), UmbrellaOctopusEntity::canSpawn)
-        registerWaterCreature(HybridAquaticEntityTypes.NAUTILUS.get(), NautilusEntity::canSpawn)
-        registerWaterCreature(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), FireflySquidEntity::canSpawn)
+        registerWaterCreature(HAEntityTypes.COLOSSAL_SQUID.get(), ColossalSquidEntity::canSpawn)
+        registerWaterCreature(HAEntityTypes.GIANT_SQUID.get(), GiantSquidEntity::canSpawn)
+        registerWaterCreature(HAEntityTypes.UMBRELLA_OCTOPUS.get(), UmbrellaOctopusEntity::canSpawn)
+        registerWaterCreature(HAEntityTypes.NAUTILUS.get(), NautilusEntity::canSpawn)
+        registerWaterCreature(HAEntityTypes.FIREFLY_SQUID.get(), FireflySquidEntity::canSpawn)
 
         // jellies
         setOf(
-            HybridAquaticEntityTypes.MOON_JELLYFISH.get(),
-            HybridAquaticEntityTypes.SEA_NETTLE.get(),
-            HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get(),
-            HybridAquaticEntityTypes.BLUE_JELLYFISH.get(),
-            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH.get(),
-            HybridAquaticEntityTypes.NOMURA_JELLYFISH.get(),
-            HybridAquaticEntityTypes.BARREL_JELLYFISH.get(),
-            HybridAquaticEntityTypes.BOX_JELLYFISH.get(),
+            HAEntityTypes.MOON_JELLYFISH.get(),
+            HAEntityTypes.SEA_NETTLE.get(),
+            HAEntityTypes.CEPHEIDAE_JELLYFISH.get(),
+            HAEntityTypes.BLUE_JELLYFISH.get(),
+            HAEntityTypes.LIONS_MANE_JELLYFISH.get(),
+            HAEntityTypes.NOMURA_JELLYFISH.get(),
+            HAEntityTypes.BARREL_JELLYFISH.get(),
+            HAEntityTypes.BOX_JELLYFISH.get(),
         ).forEach { registerJelly(it) }
 
         setOf(
-            HybridAquaticEntityTypes.CROWN_JELLYFISH.get(),
-            HybridAquaticEntityTypes.BIG_RED_JELLYFISH.get(),
-            HybridAquaticEntityTypes.COSMIC_JELLYFISH.get(),
-            HybridAquaticEntityTypes.FIREWORK_JELLYFISH.get(),
-            HybridAquaticEntityTypes.MAUVE_STINGER.get(),
+            HAEntityTypes.CROWN_JELLYFISH.get(),
+            HAEntityTypes.BIG_RED_JELLYFISH.get(),
+            HAEntityTypes.COSMIC_JELLYFISH.get(),
+            HAEntityTypes.FIREWORK_JELLYFISH.get(),
+            HAEntityTypes.MAUVE_STINGER.get(),
         ).forEach { registerDeepJelly(it) }
 
         // sharks
         setOf(
-            HybridAquaticEntityTypes.WHALE_SHARK.get(),
-            HybridAquaticEntityTypes.BASKING_SHARK.get(),
+            HAEntityTypes.WHALE_SHARK.get(),
+            HAEntityTypes.BASKING_SHARK.get(),
         ).forEach { registerShallowShark(it) }
 
         setOf(
-            HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(),
-            HybridAquaticEntityTypes.SAND_TIGER_SHARK.get(),
-            HybridAquaticEntityTypes.HAMMERHEAD_SHARK.get(),
-            HybridAquaticEntityTypes.HOUND_SHARK.get(),
-            HybridAquaticEntityTypes.THRESHER_SHARK.get(),
-            HybridAquaticEntityTypes.BULL_SHARK.get(),
+            HAEntityTypes.GREAT_WHITE_SHARK.get(),
+            HAEntityTypes.SAND_TIGER_SHARK.get(),
+            HAEntityTypes.HAMMERHEAD_SHARK.get(),
+            HAEntityTypes.HOUND_SHARK.get(),
+            HAEntityTypes.THRESHER_SHARK.get(),
+            HAEntityTypes.BULL_SHARK.get(),
         ).forEach { registerShark(it) }
 
         setOf(
-            HybridAquaticEntityTypes.FRILLED_SHARK.get(),
-            HybridAquaticEntityTypes.SIXGILL_SHARK.get(),
-            HybridAquaticEntityTypes.SLEEPER_SHARK.get(),
-            HybridAquaticEntityTypes.LANTERN_SHARK.get(),
+            HAEntityTypes.FRILLED_SHARK.get(),
+            HAEntityTypes.SIXGILL_SHARK.get(),
+            HAEntityTypes.SLEEPER_SHARK.get(),
+            HAEntityTypes.LANTERN_SHARK.get(),
         ).forEach { registerDeepShark(it) }
 
         setOf(
-            HybridAquaticEntityTypes.OTTER.get(),
+            HAEntityTypes.OTTER.get(),
         ).forEach { registerMammal(it) }
 
         setOf(
-            HybridAquaticEntityTypes.DUGONG.get(),
-            HybridAquaticEntityTypes.MANATEE.get(),
+            HAEntityTypes.DUGONG.get(),
+            HAEntityTypes.MANATEE.get(),
         ).forEach { registerSirenian(it) }
 
         setOf(
-            HybridAquaticEntityTypes.ORCA.get(),
+            HAEntityTypes.ORCA.get(),
         ).forEach { registerDolphin(it) }
 
         // critters
         setOf(
-            HybridAquaticEntityTypes.STARFISH.get(),
-            HybridAquaticEntityTypes.SEA_SLUG.get(),
-            HybridAquaticEntityTypes.SCALYFOOT_SNAIL.get(),
-            HybridAquaticEntityTypes.SEA_CUCUMBER.get(),
-            HybridAquaticEntityTypes.SEA_URCHIN.get(),
+            HAEntityTypes.STARFISH.get(),
+            HAEntityTypes.SEA_SLUG.get(),
+            HAEntityTypes.SCALYFOOT_SNAIL.get(),
+            HAEntityTypes.SEA_CUCUMBER.get(),
+            HAEntityTypes.SEA_URCHIN.get(),
         ).forEach { registerCritter(it) }
 
         // crustaceans
         setOf(
-            HybridAquaticEntityTypes.FIDDLER_CRAB.get(),
-            HybridAquaticEntityTypes.HERMIT_CRAB.get(),
-            HybridAquaticEntityTypes.VAMPIRE_CRAB.get(),
-            HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get(),
+            HAEntityTypes.FIDDLER_CRAB.get(),
+            HAEntityTypes.HERMIT_CRAB.get(),
+            HAEntityTypes.VAMPIRE_CRAB.get(),
+            HAEntityTypes.LIGHTFOOT_CRAB.get(),
         ).forEach { registerTerrestrialCrustacean(it) }
 
         setOf(
-            HybridAquaticEntityTypes.DUNGENESS_CRAB.get(),
-            HybridAquaticEntityTypes.FLOWER_CRAB.get(),
-            HybridAquaticEntityTypes.DECORATOR_CRAB.get(),
-            HybridAquaticEntityTypes.SHRIMP.get(),
-            HybridAquaticEntityTypes.CRAYFISH.get(),
-            HybridAquaticEntityTypes.LOBSTER.get(),
+            HAEntityTypes.DUNGENESS_CRAB.get(),
+            HAEntityTypes.FLOWER_CRAB.get(),
+            HAEntityTypes.DECORATOR_CRAB.get(),
+            HAEntityTypes.SHRIMP.get(),
+            HAEntityTypes.CRAYFISH.get(),
+            HAEntityTypes.LOBSTER.get(),
         ).forEach { registerAquaticCrustacean(it) }
 
-        registerLandWaterCreature(HybridAquaticEntityTypes.HORSESHOE_CRAB.get(), HorseshoeCrabEntity::canSpawn)
-        registerLandWaterCreature(HybridAquaticEntityTypes.GHOST_CRAB.get(), GhostCrabEntity::canSpawn)
-        registerLandWaterCreature(HybridAquaticEntityTypes.COCONUT_CRAB.get(), CoconutCrabEntity::canSpawn)
-        registerLandWaterCreature(HybridAquaticEntityTypes.SPIDER_CRAB.get(), SpiderCrabEntity::canSpawn)
+        registerLandWaterCreature(HAEntityTypes.HORSESHOE_CRAB.get(), HorseshoeCrabEntity::canSpawn)
+        registerLandWaterCreature(HAEntityTypes.GHOST_CRAB.get(), GhostCrabEntity::canSpawn)
+        registerLandWaterCreature(HAEntityTypes.COCONUT_CRAB.get(), CoconutCrabEntity::canSpawn)
+        registerLandWaterCreature(HAEntityTypes.SPIDER_CRAB.get(), SpiderCrabEntity::canSpawn)
 
         setOf(
-            HybridAquaticEntityTypes.YETI_CRAB.get(),
-            HybridAquaticEntityTypes.GIANT_ISOPOD.get()
+            HAEntityTypes.YETI_CRAB.get(),
+            HAEntityTypes.GIANT_ISOPOD.get()
         ).forEach { registerDeepCrustacean(it) }
 
         setOf(
-            HybridAquaticEntityTypes.KARKINOS.get(),
-            HybridAquaticEntityTypes.SHELL_BEAST.get(),
+            HAEntityTypes.KARKINOS.get(),
+            HAEntityTypes.SHELL_BEAST.get(),
         ).forEach { registerMiniboss(it) }
 
         setOf(
-            HybridAquaticEntityTypes.KARCINOGEN.get(),
-            HybridAquaticEntityTypes.KARCINOMA.get(),
+            HAEntityTypes.KARCINOGEN.get(),
+            HAEntityTypes.KARCINOMA.get(),
         ).forEach { registerMinion(it) }
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerShallowFish(entityType: EntityType<T>) {
-        registerFish(entityType, HybridAquaticFishEntity::canShallowSpawn)
+    private fun <T : HAWaterAnimal> registerShallowFish(entityType: EntityType<T>) {
+        registerFish(entityType, HAFishEntity::canShallowSpawn)
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerFish(entityType: EntityType<T>) {
-        registerFish(entityType, HybridAquaticFishEntity::canSpawn)
+    private fun <T : HAWaterAnimal> registerFish(entityType: EntityType<T>) {
+        registerFish(entityType, HAFishEntity::canSpawn)
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerNightFish(entityType: EntityType<T>) {
-        registerFish(entityType, HybridAquaticFishEntity::canNightSpawn)
+    private fun <T : HAWaterAnimal> registerNightFish(entityType: EntityType<T>) {
+        registerFish(entityType, HAFishEntity::canNightSpawn)
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerDeepFish(entityType: EntityType<T>) {
-        registerFish(entityType, HybridAquaticFishEntity::canDeepSpawn)
+    private fun <T : HAWaterAnimal> registerDeepFish(entityType: EntityType<T>) {
+        registerFish(entityType, HAFishEntity::canDeepSpawn)
     }
 
     private fun <T : WaterAnimal> registerCephalopod(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticCephalopodEntity::canSpawn)
+        registerWaterCreature(entityType, HACephalopodEntity::canSpawn)
     }
 
     private fun <T : WaterAnimal> registerOctopus(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticOctopusEntity::canSpawn)
+        registerWaterCreature(entityType, HAOctopusEntity::canSpawn)
     }
 
     private fun <T : WaterAnimal> registerDeepCephalopod(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticCephalopodEntity::canDeepSpawn)
+        registerWaterCreature(entityType, HACephalopodEntity::canDeepSpawn)
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerShallowShark(entityType: EntityType<T>) {
-        registerShark(entityType, HybridAquaticSharkEntity::canShallowSpawn)
+    private fun <T : HAWaterAnimal> registerShallowShark(entityType: EntityType<T>) {
+        registerShark(entityType, HASharkEntity::canShallowSpawn)
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerShark(entityType: EntityType<T>) {
-        registerShark(entityType, HybridAquaticSharkEntity::canSpawn)
+    private fun <T : HAWaterAnimal> registerShark(entityType: EntityType<T>) {
+        registerShark(entityType, HASharkEntity::canSpawn)
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerDeepShark(entityType: EntityType<T>) {
-        registerShark(entityType, HybridAquaticSharkEntity::canDeepSpawn)
+    private fun <T : HAWaterAnimal> registerDeepShark(entityType: EntityType<T>) {
+        registerShark(entityType, HASharkEntity::canDeepSpawn)
     }
 
-    private fun <T : HybridAquaticMammalEntity> registerMammal(entityType: EntityType<T>) {
-        registerMammalEntity(entityType, HybridAquaticMammalEntity::canSpawn)
+    private fun <T : HAMammalEntity> registerMammal(entityType: EntityType<T>) {
+        registerMammalEntity(entityType, HAMammalEntity::canSpawn)
     }
 
-    private fun <T : HybridAquaticSirenianEntity> registerSirenian(entityType: EntityType<T>) {
-        registerSirenianEntity(entityType, HybridAquaticSirenianEntity::canSpawn)
+    private fun <T : HASirenianEntity> registerSirenian(entityType: EntityType<T>) {
+        registerSirenianEntity(entityType, HASirenianEntity::canSpawn)
     }
 
-    private fun <T : HybridAquaticDolphinEntity> registerDolphin(entityType: EntityType<T>) {
-        registerDolphinEntity(entityType, HybridAquaticDolphinEntity::canSpawn)
+    private fun <T : HADolphinEntity> registerDolphin(entityType: EntityType<T>) {
+        registerDolphinEntity(entityType, HADolphinEntity::canSpawn)
     }
 
     private fun <T : WaterAnimal> registerJelly(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticJellyfishEntity::canSpawn)
+        registerWaterCreature(entityType, HAJellyfishEntity::canSpawn)
     }
 
     private fun <T : WaterAnimal> registerDeepJelly(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticJellyfishEntity::canDeepSpawn)
+        registerWaterCreature(entityType, HAJellyfishEntity::canDeepSpawn)
     }
 
     private fun <T : WaterAnimal> registerTerrestrialCrustacean(entityType: EntityType<T>) {
-        registerLandWaterCreature(entityType, HybridAquaticCrustaceanEntity::canSurfaceSpawn)
+        registerLandWaterCreature(entityType, HACrustaceanEntity::canSurfaceSpawn)
     }
 
     private fun <T : WaterAnimal> registerAquaticCrustacean(entityType: EntityType<T>) {
-        registerLandWaterCreature(entityType, HybridAquaticCrustaceanEntity::canWaterSpawn)
+        registerLandWaterCreature(entityType, HACrustaceanEntity::canWaterSpawn)
     }
 
     private fun <T : WaterAnimal> registerDeepCrustacean(entityType: EntityType<T>) {
-        registerLandWaterCreature(entityType, HybridAquaticCrustaceanEntity::canDeepSpawn)
+        registerLandWaterCreature(entityType, HACrustaceanEntity::canDeepSpawn)
     }
 
     private fun <T : WaterAnimal> registerCritter(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HybridAquaticCritterEntity::canSpawn)
+        registerWaterCreature(entityType, HACritterEntity::canSpawn)
     }
 
     private fun <T : Monster> registerMiniboss(entityType: EntityType<T>) {
-        registerMiniboss(entityType, HybridAquaticMinibossEntity::canSpawn)
+        registerMiniboss(entityType, HAMinibossEntity::canSpawn)
     }
 
     private fun <T : Monster> registerMinion(entityType: EntityType<T>) {
-        registerMinion(entityType, HybridAquaticMinionEntity::canSpawn)
+        registerMinion(entityType, HAMinionEntity::canSpawn)
     }
 
     private fun <T : WaterAnimal> registerWaterCreature(
@@ -324,7 +323,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerFish(
+    private fun <T : HAWaterAnimal> registerFish(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
@@ -335,7 +334,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerShark(
+    private fun <T : HAWaterAnimal> registerShark(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
@@ -368,7 +367,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerMammalEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+    private fun <T : HAWaterAnimal> registerMammalEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
         register(
             entityType,
             SpawnPlacements.Type.NO_RESTRICTIONS,
@@ -376,7 +375,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerSirenianEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+    private fun <T : HAWaterAnimal> registerSirenianEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
         register(
             entityType,
             SpawnPlacements.Type.IN_WATER,
@@ -384,7 +383,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HybridAquaticWaterAnimal> registerDolphinEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+    private fun <T : HAWaterAnimal> registerDolphinEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
         register(
             entityType,
             SpawnPlacements.Type.IN_WATER,

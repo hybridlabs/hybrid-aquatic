@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -23,7 +23,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class HoundSharkEntity(type: EntityType<out HoundSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(type, world), VariantHolder<HoundSharkEntity.Type> {
+    HASharkEntity(type, world), VariantHolder<HoundSharkEntity.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -53,13 +53,13 @@ class HoundSharkEntity(type: EntityType<out HoundSharkEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES
+                HAEntityTags.SMALL_CREATURES
             ),
             listOf(
-                HybridAquaticEntityTags.MEDIUM_CREATURES,
-                HybridAquaticEntityTags.LARGE_CREATURES,
-                HybridAquaticEntityTags.MEDIUM_SHARK,
-                HybridAquaticEntityTags.LARGE_SHARK
+                HAEntityTags.MEDIUM_CREATURES,
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.MEDIUM_SHARK,
+                HAEntityTags.LARGE_SHARK
             ),
         )
 

@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.jellyfish.CosmicJellyfishEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
-class CosmicJellyfishEntityModel : HybridAquaticJellyfishEntityModel<CosmicJellyfishEntity>("cosmic_jellyfish") {
+class CosmicJellyfishEntityModel : HAJellyfishEntityModel<CosmicJellyfishEntity>("cosmic_jellyfish") {
     override fun getRenderType(animatable: CosmicJellyfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

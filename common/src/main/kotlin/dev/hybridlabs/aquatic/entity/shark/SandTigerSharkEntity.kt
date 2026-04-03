@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -11,21 +11,21 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 class SandTigerSharkEntity(type: EntityType<out SandTigerSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(type, world) {
+    HASharkEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
-        HybridAquaticEntityTags.CRAB,
-        HybridAquaticEntityTags.LOBSTER,
-        HybridAquaticEntityTags.RAY,
-        HybridAquaticEntityTags.SMALL_CREATURES,
-        HybridAquaticEntityTags.OCTOPUS,
+        HAEntityTags.CRAB,
+        HAEntityTags.LOBSTER,
+        HAEntityTags.RAY,
+        HAEntityTags.SMALL_CREATURES,
+        HAEntityTags.OCTOPUS,
     )
 
     override val isPassive: Boolean = false
     override val closePlayerAttack: Boolean = false
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HybridAquaticItems.SURGEONFISH.get())
+        return stack.`is`(HAAquaticItems.SURGEONFISH.get())
     }
 
     override fun registerGoals() {

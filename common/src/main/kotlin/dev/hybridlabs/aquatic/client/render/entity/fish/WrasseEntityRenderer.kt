@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.WrasseEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class WrasseEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<WrasseEntity>(context, WrasseEntityModel(), true, false)
+    HAFishEntityRenderer<WrasseEntity>(context, WrasseEntityModel(), true, false)

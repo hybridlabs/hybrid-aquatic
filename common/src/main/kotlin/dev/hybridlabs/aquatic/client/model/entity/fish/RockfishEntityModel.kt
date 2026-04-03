@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.RockfishEntity
 import net.minecraft.resources.ResourceLocation
 
-class RockfishEntityModel : HybridAquaticFishEntityModel<RockfishEntity>("rockfish") {
+class RockfishEntityModel : HAFishEntityModel<RockfishEntity>("rockfish") {
 
     private val VERMILION_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/rockfish/vermilion_rockfish.png")
     private val COPPER_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/rockfish/copper_rockfish.png")

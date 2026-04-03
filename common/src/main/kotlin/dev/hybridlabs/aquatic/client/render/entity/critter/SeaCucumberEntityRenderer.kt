@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.critter.SeaCucumberEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class SeaCucumberEntityRenderer(context: Context) :
-    HybridAquaticCritterEntityRenderer<SeaCucumberEntity>(context, SeaCucumberEntityModel(), true)
+    HACritterEntityRenderer<SeaCucumberEntity>(context, SeaCucumberEntityModel(), true)

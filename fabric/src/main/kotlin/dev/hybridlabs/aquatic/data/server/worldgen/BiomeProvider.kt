@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.data.server.worldgen
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.platform.Services
-import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
+import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
@@ -136,7 +136,7 @@ class BiomeProvider(
         entries: Entries,
     ) {
         entries.add(
-            HybridAquaticBiomes.TROPICAL_RIVER,
+            HABiomes.TROPICAL_RIVER,
             create(
                 entries,
                 temperature = 0.95f,
@@ -162,7 +162,7 @@ class BiomeProvider(
         )
 
         entries.add(
-            HybridAquaticBiomes.CORAL_REEF,
+            HABiomes.CORAL_REEF,
             create(
                 entries,
                 temperature = 0.5f,
@@ -178,15 +178,15 @@ class BiomeProvider(
             ) {
                 addFeature(
                     GenerationStep.Decoration.UNDERGROUND_ORES,
-                    entries.ref(HybridAquaticPlacedFeatures.CORAL_MOUND)
+                    entries.ref(HAPlacedFeatures.CORAL_MOUND)
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(HybridAquaticPlacedFeatures.CORAL_LAYER)
+                    entries.ref(HAPlacedFeatures.CORAL_LAYER)
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(HybridAquaticPlacedFeatures.CORAL_REEF_VEGETATION)
+                    entries.ref(HAPlacedFeatures.CORAL_REEF_VEGETATION)
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
@@ -200,7 +200,7 @@ class BiomeProvider(
         )
 
         entries.add(
-            HybridAquaticBiomes.SEAGRASS_BED,
+            HABiomes.SEAGRASS_BED,
             create(
                 entries,
                 temperature = 0.5f,
@@ -224,15 +224,15 @@ class BiomeProvider(
             ) {
                 addFeature(
                     GenerationStep.Decoration.UNDERGROUND_ORES,
-                    entries.ref(HybridAquaticPlacedFeatures.MOUND)
+                    entries.ref(HAPlacedFeatures.MOUND)
                 )
                 addFeature(
                     GenerationStep.Decoration.UNDERGROUND_ORES,
-                    entries.ref(HybridAquaticPlacedFeatures.SAND_CIRCLE)
+                    entries.ref(HAPlacedFeatures.SAND_CIRCLE)
                 )
                 addFeature(
                     GenerationStep.Decoration.UNDERGROUND_ORES,
-                    entries.ref(HybridAquaticPlacedFeatures.AERATED_SAND_CIRCLE)
+                    entries.ref(HAPlacedFeatures.AERATED_SAND_CIRCLE)
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
@@ -246,7 +246,7 @@ class BiomeProvider(
         )
 
         entries.add(
-            HybridAquaticBiomes.RED_MEADOW,
+            HABiomes.RED_MEADOW,
             create(
                 entries,
                 temperature = 0.5f,
@@ -256,15 +256,15 @@ class BiomeProvider(
             ) {
                 addFeature(
                     GenerationStep.Decoration.UNDERGROUND_ORES,
-                    entries.ref(HybridAquaticPlacedFeatures.WHITE_MOUND)
+                    entries.ref(HAPlacedFeatures.WHITE_MOUND)
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(HybridAquaticPlacedFeatures.BLEACHED_REEF_VEGETATION)
+                    entries.ref(HAPlacedFeatures.BLEACHED_REEF_VEGETATION)
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(HybridAquaticPlacedFeatures.RED_MEADOW_VEGETATION)
+                    entries.ref(HAPlacedFeatures.RED_MEADOW_VEGETATION)
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
@@ -274,7 +274,7 @@ class BiomeProvider(
         )
 
         entries.add(
-            HybridAquaticBiomes.DEEP_WARM_OCEAN,
+            HABiomes.DEEP_WARM_OCEAN,
             create(
                 entries,
                 temperature = 0.5f,
@@ -285,7 +285,7 @@ class BiomeProvider(
         )
 
         entries.add(
-            HybridAquaticBiomes.TIDE_POOLS,
+            HABiomes.TIDE_POOLS,
             create(
                 entries,
                 temperature = 1.1f,
@@ -295,7 +295,7 @@ class BiomeProvider(
             ) {
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(HybridAquaticPlacedFeatures.TIDE_POOLS)
+                    entries.ref(HAPlacedFeatures.TIDE_POOLS)
                 )
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
@@ -305,7 +305,7 @@ class BiomeProvider(
         )
 
         entries.add(
-            HybridAquaticBiomes.BASALT_BEACH,
+            HABiomes.BASALT_BEACH,
             create(
                 entries,
                 temperature = 0.5f,
@@ -321,7 +321,7 @@ class BiomeProvider(
         )
 
         entries.add(
-            HybridAquaticBiomes.SULFURIC_CAVES,
+            HABiomes.SULFURIC_CAVES,
             create(
                 entries,
                 temperature = 1.0f,
@@ -332,7 +332,7 @@ class BiomeProvider(
         )
 
         entries.add(
-            HybridAquaticBiomes.TRENCH,
+            HABiomes.TRENCH,
             create(
                 entries,
                 temperature = 0.2f,
@@ -342,116 +342,116 @@ class BiomeProvider(
                 listOf(
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                     ),
 
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.RATFISH.get(), 10, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SNAILFISH.get(), 10, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.ANGLERFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.FANGTOOTH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.JOHN_DORY.get(), 8, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.VIPERFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.DRAGONFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.HATCHETFISH.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.BARRELEYE.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COELACANTH.get(), 1, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SLICKHEAD.get(), 1, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SLICKHEAD.get(), 1, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.OARFISH.get(), 1, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
                     ),
 
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
                     ),
                 ),
                 extraSpawnCosts = listOf(
-                    Triple(HybridAquaticEntityTypes.GIANT_SQUID.get(), 0.9, 1.0),
-                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.15, 0.3),
-                    Triple(HybridAquaticEntityTypes.NAUTILUS.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.GIANT_SQUID.get(), 0.9, 1.0),
+                    Triple(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 0.15, 0.3),
+                    Triple(HAEntityTypes.NAUTILUS.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.VAMPIRE_SQUID.get(), 0.1, 0.2),
 
-                    Triple(HybridAquaticEntityTypes.RATFISH.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.SNAILFISH.get(), 0.1, 0.7),
-                    Triple(HybridAquaticEntityTypes.ANGLERFISH.get(), 0.1, 0.3),
-                    Triple(HybridAquaticEntityTypes.FANGTOOTH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.VIPERFISH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.DRAGONFISH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.JOHN_DORY.get(), 0.1, 0.3),
-                    Triple(HybridAquaticEntityTypes.HATCHETFISH.get(), 0.1, 0.6),
-                    Triple(HybridAquaticEntityTypes.TRIPOD_FISH.get(), 0.1, 0.6),
-                    Triple(HybridAquaticEntityTypes.SEA_ANGEL.get(), 0.1, 0.25),
-                    Triple(HybridAquaticEntityTypes.BARRELEYE.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.COELACANTH.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.SLICKHEAD.get(), 0.1, 0.3),
-                    Triple(HybridAquaticEntityTypes.OARFISH.get(), 0.5, 0.8),
+                    Triple(HAEntityTypes.RATFISH.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.SNAILFISH.get(), 0.1, 0.7),
+                    Triple(HAEntityTypes.ANGLERFISH.get(), 0.1, 0.3),
+                    Triple(HAEntityTypes.FANGTOOTH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.VIPERFISH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.DRAGONFISH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.JOHN_DORY.get(), 0.1, 0.3),
+                    Triple(HAEntityTypes.HATCHETFISH.get(), 0.1, 0.6),
+                    Triple(HAEntityTypes.TRIPOD_FISH.get(), 0.1, 0.6),
+                    Triple(HAEntityTypes.SEA_ANGEL.get(), 0.1, 0.25),
+                    Triple(HAEntityTypes.BARRELEYE.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.COELACANTH.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.SLICKHEAD.get(), 0.1, 0.3),
+                    Triple(HAEntityTypes.OARFISH.get(), 0.5, 0.8),
 
-                    Triple(HybridAquaticEntityTypes.SIXGILL_SHARK.get(), 0.4, 0.8),
-                    Triple(HybridAquaticEntityTypes.LANTERN_SHARK.get(), 0.1, 0.4),
+                    Triple(HAEntityTypes.SIXGILL_SHARK.get(), 0.4, 0.8),
+                    Triple(HAEntityTypes.LANTERN_SHARK.get(), 0.1, 0.4),
                 )
             )
         )
 
         entries.add(
-            HybridAquaticBiomes.WARM_TRENCH,
+            HABiomes.WARM_TRENCH,
             create(
                 entries,
                 temperature = 0.5f,
@@ -461,117 +461,117 @@ class BiomeProvider(
                 listOf(
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
                     ),
 
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.RATFISH.get(), 10, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SNAILFISH.get(), 10, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.ANGLERFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.FANGTOOTH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.JOHN_DORY.get(), 8, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.VIPERFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.DRAGONFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.HATCHETFISH.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.BARRELEYE.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COELACANTH.get(), 1, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.OARFISH.get(), 1, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
                     ),
 
 
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
                     ),
                 ),
                 extraSpawnCosts = listOf(
-                    Triple(HybridAquaticEntityTypes.GIANT_SQUID.get(), 0.9, 1.0),
-                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.15, 0.3),
-                    Triple(HybridAquaticEntityTypes.NAUTILUS.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), 0.7, 0.2),
+                    Triple(HAEntityTypes.GIANT_SQUID.get(), 0.9, 1.0),
+                    Triple(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 0.15, 0.3),
+                    Triple(HAEntityTypes.NAUTILUS.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.VAMPIRE_SQUID.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.FIREFLY_SQUID.get(), 0.7, 0.2),
 
-                    Triple(HybridAquaticEntityTypes.RATFISH.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.SNAILFISH.get(), 0.1, 0.5),
-                    Triple(HybridAquaticEntityTypes.ANGLERFISH.get(), 0.1, 0.3),
-                    Triple(HybridAquaticEntityTypes.FANGTOOTH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.VIPERFISH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.DRAGONFISH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.JOHN_DORY.get(), 0.1, 0.3),
-                    Triple(HybridAquaticEntityTypes.HATCHETFISH.get(), 0.1, 0.6),
-                    Triple(HybridAquaticEntityTypes.TRIPOD_FISH.get(), 0.1, 0.6),
-                    Triple(HybridAquaticEntityTypes.BARRELEYE.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.COELACANTH.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.OARFISH.get(), 0.5, 0.8),
+                    Triple(HAEntityTypes.RATFISH.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.SNAILFISH.get(), 0.1, 0.5),
+                    Triple(HAEntityTypes.ANGLERFISH.get(), 0.1, 0.3),
+                    Triple(HAEntityTypes.FANGTOOTH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.VIPERFISH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.DRAGONFISH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.JOHN_DORY.get(), 0.1, 0.3),
+                    Triple(HAEntityTypes.HATCHETFISH.get(), 0.1, 0.6),
+                    Triple(HAEntityTypes.TRIPOD_FISH.get(), 0.1, 0.6),
+                    Triple(HAEntityTypes.BARRELEYE.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.COELACANTH.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.OARFISH.get(), 0.5, 0.8),
 
-                    Triple(HybridAquaticEntityTypes.SIXGILL_SHARK.get(), 0.5, 0.8),
-                    Triple(HybridAquaticEntityTypes.FRILLED_SHARK.get(), 0.5, 0.8),
-                    Triple(HybridAquaticEntityTypes.LANTERN_SHARK.get(), 0.1, 0.4),
+                    Triple(HAEntityTypes.SIXGILL_SHARK.get(), 0.5, 0.8),
+                    Triple(HAEntityTypes.FRILLED_SHARK.get(), 0.5, 0.8),
+                    Triple(HAEntityTypes.LANTERN_SHARK.get(), 0.1, 0.4),
                 )
             )
         )
 
         entries.add(
-            HybridAquaticBiomes.LUKEWARM_TRENCH,
+            HABiomes.LUKEWARM_TRENCH,
             create(
                 entries,
                 temperature = 0.5f,
@@ -581,117 +581,117 @@ class BiomeProvider(
                 listOf(
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
                     ),
 
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.RATFISH.get(), 10, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SNAILFISH.get(), 10, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.ANGLERFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.FANGTOOTH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.JOHN_DORY.get(), 8, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.VIPERFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.DRAGONFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.HATCHETFISH.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.BARRELEYE.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COELACANTH.get(), 1, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.OARFISH.get(), 1, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
                     ),
 
 
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
                     ),
                 ),
                 extraSpawnCosts = listOf(
-                    Triple(HybridAquaticEntityTypes.GIANT_SQUID.get(), 0.9, 1.0),
-                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.15, 0.3),
-                    Triple(HybridAquaticEntityTypes.NAUTILUS.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.VAMPIRE_SQUID.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.FIREFLY_SQUID.get(), 0.7, 0.2),
+                    Triple(HAEntityTypes.GIANT_SQUID.get(), 0.9, 1.0),
+                    Triple(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 0.15, 0.3),
+                    Triple(HAEntityTypes.NAUTILUS.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.VAMPIRE_SQUID.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.FIREFLY_SQUID.get(), 0.7, 0.2),
 
-                    Triple(HybridAquaticEntityTypes.RATFISH.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.SNAILFISH.get(), 0.1, 0.5),
-                    Triple(HybridAquaticEntityTypes.ANGLERFISH.get(), 0.1, 0.3),
-                    Triple(HybridAquaticEntityTypes.FANGTOOTH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.VIPERFISH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.DRAGONFISH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.JOHN_DORY.get(), 0.1, 0.3),
-                    Triple(HybridAquaticEntityTypes.HATCHETFISH.get(), 0.1, 0.6),
-                    Triple(HybridAquaticEntityTypes.TRIPOD_FISH.get(), 0.1, 0.6),
-                    Triple(HybridAquaticEntityTypes.BARRELEYE.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.COELACANTH.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.OARFISH.get(), 0.5, 0.8),
+                    Triple(HAEntityTypes.RATFISH.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.SNAILFISH.get(), 0.1, 0.5),
+                    Triple(HAEntityTypes.ANGLERFISH.get(), 0.1, 0.3),
+                    Triple(HAEntityTypes.FANGTOOTH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.VIPERFISH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.DRAGONFISH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.JOHN_DORY.get(), 0.1, 0.3),
+                    Triple(HAEntityTypes.HATCHETFISH.get(), 0.1, 0.6),
+                    Triple(HAEntityTypes.TRIPOD_FISH.get(), 0.1, 0.6),
+                    Triple(HAEntityTypes.BARRELEYE.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.COELACANTH.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.OARFISH.get(), 0.5, 0.8),
 
-                    Triple(HybridAquaticEntityTypes.SIXGILL_SHARK.get(), 0.4, 0.8),
-                    Triple(HybridAquaticEntityTypes.FRILLED_SHARK.get(), 0.4, 0.8),
-                    Triple(HybridAquaticEntityTypes.LANTERN_SHARK.get(), 0.1, 0.4),
+                    Triple(HAEntityTypes.SIXGILL_SHARK.get(), 0.4, 0.8),
+                    Triple(HAEntityTypes.FRILLED_SHARK.get(), 0.4, 0.8),
+                    Triple(HAEntityTypes.LANTERN_SHARK.get(), 0.1, 0.4),
                 )
             )
         )
 
         entries.add(
-            HybridAquaticBiomes.COLD_TRENCH,
+            HABiomes.COLD_TRENCH,
             create(
                 entries,
                 temperature = 0.5f,
@@ -701,80 +701,80 @@ class BiomeProvider(
                 listOf(
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
                     ),
 
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.RATFISH.get(), 10, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SNAILFISH.get(), 10, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.ANGLERFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.FANGTOOTH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.VIPERFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.HATCHETFISH.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SLICKHEAD.get(), 1, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SLICKHEAD.get(), 1, 1, 2)
                     ),
 
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SLEEPER_SHARK.get(), 3, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SLEEPER_SHARK.get(), 3, 1, 1)
                     ),
                 ),
                 extraSpawnCosts = listOf(
-                    Triple(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), 1.0, 0.1),
-                    Triple(HybridAquaticEntityTypes.GIANT_SQUID.get(), 0.9, 0.1),
-                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
+                    Triple(HAEntityTypes.COLOSSAL_SQUID.get(), 1.0, 0.1),
+                    Triple(HAEntityTypes.GIANT_SQUID.get(), 0.9, 0.1),
+                    Triple(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
 
-                    Triple(HybridAquaticEntityTypes.RATFISH.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.SNAILFISH.get(), 0.1, 0.5),
-                    Triple(HybridAquaticEntityTypes.ANGLERFISH.get(), 0.1, 0.3),
-                    Triple(HybridAquaticEntityTypes.FANGTOOTH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.VIPERFISH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.HATCHETFISH.get(), 0.1, 0.6),
-                    Triple(HybridAquaticEntityTypes.TRIPOD_FISH.get(), 0.1, 0.6),
-                    Triple(HybridAquaticEntityTypes.SLICKHEAD.get(), 0.1, 0.3),
+                    Triple(HAEntityTypes.RATFISH.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.SNAILFISH.get(), 0.1, 0.5),
+                    Triple(HAEntityTypes.ANGLERFISH.get(), 0.1, 0.3),
+                    Triple(HAEntityTypes.FANGTOOTH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.VIPERFISH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.HATCHETFISH.get(), 0.1, 0.6),
+                    Triple(HAEntityTypes.TRIPOD_FISH.get(), 0.1, 0.6),
+                    Triple(HAEntityTypes.SLICKHEAD.get(), 0.1, 0.3),
 
-                    Triple(HybridAquaticEntityTypes.SLEEPER_SHARK.get(), 0.5, 0.8),
+                    Triple(HAEntityTypes.SLEEPER_SHARK.get(), 0.5, 0.8),
                 )
             )
         )
 
         entries.add(
-            HybridAquaticBiomes.FROZEN_TRENCH,
+            HABiomes.FROZEN_TRENCH,
             create(
                 entries,
                 temperature = 0.5f,
@@ -784,70 +784,70 @@ class BiomeProvider(
                 listOf(
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
                     ),
 
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.RATFISH.get(), 10, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SNAILFISH.get(), 10, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.ANGLERFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.FANGTOOTH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.VIPERFISH.get(), 5, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.HATCHETFISH.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
                     ),
 
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.SLEEPER_SHARK.get(), 3, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.SLEEPER_SHARK.get(), 3, 1, 1)
                     ),
                 ),
                 extraSpawnCosts = listOf(
-                    Triple(HybridAquaticEntityTypes.COLOSSAL_SQUID.get(), 1.0, 0.1),
-                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
+                    Triple(HAEntityTypes.COLOSSAL_SQUID.get(), 1.0, 0.1),
+                    Triple(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
 
-                    Triple(HybridAquaticEntityTypes.RATFISH.get(), 0.1, 0.2),
-                    Triple(HybridAquaticEntityTypes.SNAILFISH.get(), 0.1, 0.7),
-                    Triple(HybridAquaticEntityTypes.ANGLERFISH.get(), 0.1, 0.3),
-                    Triple(HybridAquaticEntityTypes.FANGTOOTH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.VIPERFISH.get(), 0.15, 0.6),
-                    Triple(HybridAquaticEntityTypes.HATCHETFISH.get(), 0.1, 0.6),
-                    Triple(HybridAquaticEntityTypes.TRIPOD_FISH.get(), 0.1, 0.6),
+                    Triple(HAEntityTypes.RATFISH.get(), 0.1, 0.2),
+                    Triple(HAEntityTypes.SNAILFISH.get(), 0.1, 0.7),
+                    Triple(HAEntityTypes.ANGLERFISH.get(), 0.1, 0.3),
+                    Triple(HAEntityTypes.FANGTOOTH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.VIPERFISH.get(), 0.15, 0.6),
+                    Triple(HAEntityTypes.HATCHETFISH.get(), 0.1, 0.6),
+                    Triple(HAEntityTypes.TRIPOD_FISH.get(), 0.1, 0.6),
 
-                    Triple(HybridAquaticEntityTypes.SLEEPER_SHARK.get(), 0.5, 0.8),
+                    Triple(HAEntityTypes.SLEEPER_SHARK.get(), 0.5, 0.8),
                 )
             )
         )
 
         entries.add(
-            HybridAquaticBiomes.DEEP_CORAL_REEF,
+            HABiomes.DEEP_CORAL_REEF,
             create(
                 entries,
                 temperature = 0.2f,
@@ -857,27 +857,27 @@ class BiomeProvider(
                 listOf(
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                     ),
                 ),
                 extraSpawnCosts = listOf(
-                    Triple(HybridAquaticEntityTypes.NAUTILUS.get(), 0.7, 0.2),
-                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
+                    Triple(HAEntityTypes.NAUTILUS.get(), 0.7, 0.2),
+                    Triple(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
                 )
             ) {
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION)
+                    entries.ref(HAPlacedFeatures.DEEP_OCEAN_VEGETATION)
                 )
             }
         )
 
         entries.add(
-            HybridAquaticBiomes.TROPICAL_DEEP_CORAL_REEF,
+            HABiomes.TROPICAL_DEEP_CORAL_REEF,
             create(
                 entries,
                 temperature = 0.5f,
@@ -887,21 +887,21 @@ class BiomeProvider(
                 listOf(
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
-                        MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                     ),
                 ),
                 extraSpawnCosts = listOf(
-                    Triple(HybridAquaticEntityTypes.NAUTILUS.get(), 0.7, 0.2),
-                    Triple(HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
+                    Triple(HAEntityTypes.NAUTILUS.get(), 0.7, 0.2),
+                    Triple(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 0.8, 0.15),
                 )
             ) {
                 addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    entries.ref(HybridAquaticPlacedFeatures.DEEP_OCEAN_VEGETATION)
+                    entries.ref(HAPlacedFeatures.DEEP_OCEAN_VEGETATION)
                 )
             }
         )

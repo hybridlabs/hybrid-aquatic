@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.shark
 import dev.hybridlabs.aquatic.entity.shark.HoundSharkEntity
 import net.minecraft.resources.ResourceLocation
 
-class HoundSharkEntityModel : HybridAquaticSharkEntityModel<HoundSharkEntity>("hound_shark") {
+class HoundSharkEntityModel : HASharkEntityModel<HoundSharkEntity>("hound_shark") {
 
     private val LEOPARD_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/shark/hound_shark/leopard_shark.png")
 

@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -11,16 +11,16 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
 class GreatWhiteSharkEntity(type: EntityType<out GreatWhiteSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(type, world) {
+    HASharkEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
-        HybridAquaticEntityTags.MEDIUM_CREATURES,
-        HybridAquaticEntityTags.LARGE_CREATURES,
-        HybridAquaticEntityTags.SMALL_SHARK,
-        HybridAquaticEntityTags.MEDIUM_SHARK,
-        HybridAquaticEntityTags.SEAL,
-        HybridAquaticEntityTags.TURTLE,
-        HybridAquaticEntityTags.SIRENIAN,
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.SMALL_SHARK,
+        HAEntityTags.MEDIUM_SHARK,
+        HAEntityTags.SEAL,
+        HAEntityTags.TURTLE,
+        HAEntityTags.SIRENIAN,
     )
 
     override val isPassive: Boolean = false

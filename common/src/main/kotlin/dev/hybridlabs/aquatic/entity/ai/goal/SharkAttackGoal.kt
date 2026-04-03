@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
-import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.effect.HAMobEffects
+import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
+import dev.hybridlabs.aquatic.item.HAAquaticItems
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.EntitySelector
@@ -16,7 +16,7 @@ import java.util.*
 import kotlin.math.max
 
 open class SharkAttackGoal(
-    protected val shark: HybridAquaticSharkEntity,
+    protected val shark: HASharkEntity,
     private val speedMultiplier: Double = 1.0,
     private val followingTargetEvenIfNotSeen: Boolean,
 ) :
@@ -151,13 +151,13 @@ open class SharkAttackGoal(
             this.resetAttackCooldown()
             shark.swing(InteractionHand.MAIN_HAND)
             shark.doHurtTarget(enemy)
-            if (!enemy.isBlocking) { enemy.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), 200, 0), shark) }
+            if (!enemy.isBlocking) { enemy.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.get(), 200, 0), shark) }
 
-            if (enemy.health <= 0) shark.hunger = HybridAquaticSharkEntity.MAX_HUNGER
+            if (enemy.health <= 0) shark.hunger = HASharkEntity.MAX_HUNGER
 
             val hasShield = enemy.mainHandItem.`is`(Items.SHIELD) || enemy.offhandItem.`is`(Items.SHIELD)
             if (hasShield && enemy.isBlocking) {
-                shark.spawnAtLocation(HybridAquaticItems.SHARK_TOOTH.get())
+                shark.spawnAtLocation(HAAquaticItems.SHARK_TOOTH.get())
             }
         }
     }

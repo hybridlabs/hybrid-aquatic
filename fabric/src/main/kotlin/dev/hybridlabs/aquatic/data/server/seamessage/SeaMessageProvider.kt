@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.data.server.seamessage
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.SeaMessage
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
@@ -15,7 +15,7 @@ class SeaMessageProvider(output: FabricDataOutput, registriesFuture: Completable
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
         BUILT_IN.forEach { message ->
             val key = ResourceKey.create(
-                HybridAquaticRegistryKeys.SEA_MESSAGE,
+                HARegistryKeys.SEA_MESSAGE,
                 CommonClass.locate(message.id)
             )
             entries.add(key, SeaMessage(message.translationKey, message.englishTitle != null, message.infinite, Optional.ofNullable(message.author)))

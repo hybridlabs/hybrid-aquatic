@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
+class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level) : HACephalopodEntity(type, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -25,10 +25,10 @@ class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level)
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.ALL_CRUSTACEANS
+                HAEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

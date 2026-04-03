@@ -35,7 +35,7 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HybridAquaticBlocks.AERATED_SAND.get()) && !floor.`is`(HybridAquaticBlocks.BUBBLE_GEYSER.get())
+        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HABlocks.AERATED_SAND.get()) && !floor.`is`(HABlocks.BUBBLE_GEYSER.get())
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
@@ -72,7 +72,7 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
     }
 
     override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
-        val blockState = HybridAquaticBlocks.TALL_SEA_LETTUCE.get().defaultBlockState()
+        val blockState = HABlocks.TALL_SEA_LETTUCE.get().defaultBlockState()
         val blockState2 = blockState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER) as BlockState
         val blockPos = pos.above()
         if (world.getBlockState(blockPos).`is`(Blocks.WATER)) {

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.fog;
 
 import com.mojang.blaze3d.shaders.FogShape;
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects;
+import dev.hybridlabs.aquatic.effect.HAMobEffects;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class ClarityFogModifier implements FogRenderer.MobEffectFogFunction {
     @Override
     public MobEffect getMobEffect() {
-        return HybridAquaticMobEffects.INSTANCE.getCLARITY().get();
+        return HAMobEffects.INSTANCE.getCLARITY().get();
     }
 
     @Override

@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.crustacean.LobsterEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class LobsterEntityRenderer(context: Context) :
-    HybridAquaticCrustaceanEntityRenderer<LobsterEntity>(context, LobsterEntityModel(), true, false)
+    HACrustaceanEntityRenderer<LobsterEntity>(context, LobsterEntityModel(), true, false)

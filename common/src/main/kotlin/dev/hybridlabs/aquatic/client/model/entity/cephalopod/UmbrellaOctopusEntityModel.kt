@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.cephalopod.UmbrellaOctopusEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class UmbrellaOctopusEntityModel : HybridAquaticOctopusEntityModel<UmbrellaOctopusEntity>("umbrella_octopus") {
+class UmbrellaOctopusEntityModel : HAOctopusEntityModel<UmbrellaOctopusEntity>("umbrella_octopus") {
 
     private val commonTextures = listOf(
         ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_yellow.png"),

@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.critter
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -26,7 +26,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
-    HybridAquaticCritterEntity(entityType, world),
+    HACritterEntity(entityType, world),
     VariantHolder<StarfishEntity.Companion.Type>, OverlayTextureFeature {
 
     override fun getDimensions(pose: Pose): EntityDimensions {
@@ -123,7 +123,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
                             BRITTLESTAR
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.CORAL_REEF) -> {
+                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
                             REEF_VARIANTS[random.nextInt(REEF_VARIANTS.size)]
                         }
 

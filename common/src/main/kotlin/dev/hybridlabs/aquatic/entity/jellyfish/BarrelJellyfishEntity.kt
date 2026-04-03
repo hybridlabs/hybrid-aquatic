@@ -7,7 +7,7 @@ import net.minecraft.world.level.Level
 
 
 class BarrelJellyfishEntity(entityType: EntityType<out BarrelJellyfishEntity>, world: Level) :
-    HybridAquaticJellyfishEntity(entityType, world, false, 0) {
+    HAJellyfishEntity(entityType, world, false, 0) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

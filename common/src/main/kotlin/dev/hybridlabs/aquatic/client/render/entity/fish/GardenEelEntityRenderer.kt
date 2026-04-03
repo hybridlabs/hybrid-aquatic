@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.GardenEelEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class GardenEelEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<GardenEelEntity>(context, GardenEelEntityModel(), true, false)
+    HAFishEntityRenderer<GardenEelEntity>(context, GardenEelEntityModel(), true, false)

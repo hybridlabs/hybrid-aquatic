@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -23,13 +23,13 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class RockfishEntity(type: EntityType<out RockfishEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(type, world),
+    HASchoolingFishEntity(type, world),
     VariantHolder<RockfishEntity.Companion.Type> {
 
     override fun getTargetConfig() =
         MobTargetConfiguration.ofPrey(
-            HybridAquaticEntityTags.LARGE_CREATURES,
-            HybridAquaticEntityTags.ALL_SHARKS
+            HAEntityTags.LARGE_CREATURES,
+            HAEntityTags.ALL_SHARKS
         )
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -53,7 +53,7 @@ class RockfishEntity(type: EntityType<out RockfishEntity>, world: Level) :
             if (fishCount > 0 && !level().isClientSide()) {
                 for (i in 0 until  fishCount) {
                     val distance = 1.5f
-                    val entity = RockfishEntity(HybridAquaticEntityTypes.ROCKFISH.get(), this.level())
+                    val entity = RockfishEntity(HAEntityTypes.ROCKFISH.get(), this.level())
                     entity.variant = this.variant
                     entity.moveTo(
                         this.x + this.random.nextFloat() * distance,

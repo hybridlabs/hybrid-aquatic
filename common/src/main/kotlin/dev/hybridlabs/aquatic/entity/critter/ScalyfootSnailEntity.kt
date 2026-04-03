@@ -7,7 +7,7 @@ import net.minecraft.world.level.Level
 
 @Suppress("DEPRECATION")
 class ScalyfootSnailEntity(entityType: EntityType<out ScalyfootSnailEntity>, world: Level) :
-    HybridAquaticCritterEntity(entityType, world) {
+    HACritterEntity(entityType, world) {
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

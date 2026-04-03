@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.FangtoothEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class FangtoothEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<FangtoothEntity>(context, FangtoothEntityModel(), true, false)
+    HAFishEntityRenderer<FangtoothEntity>(context, FangtoothEntityModel(), true, false)

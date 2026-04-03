@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -24,13 +24,13 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class TetraEntity(type: EntityType<out TetraEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(type, world),
+    HASchoolingFishEntity(type, world),
     VariantHolder<TetraEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_CREATURES,
-        HybridAquaticEntityTags.LARGE_CREATURES,
-        HybridAquaticEntityTags.ALL_SHARKS
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
     )
 
     override fun registerGoals() {
@@ -115,7 +115,7 @@ class TetraEntity(type: EntityType<out TetraEntity>, world: Level) :
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.CAVES) -> {
+                        biome.`is`(HABiomeTags.CAVES) -> {
                             BLIND_CAVE_TETRA
                         }
 

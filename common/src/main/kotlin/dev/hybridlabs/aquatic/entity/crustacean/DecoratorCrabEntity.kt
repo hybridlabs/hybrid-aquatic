@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.HAAquaticItems
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -28,8 +28,8 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, false),
+class DecoratorCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
+    HACrustaceanEntity(entityType, world, false),
     VariantHolder<DecoratorCrabEntity.Companion.Type> {
 
     override fun getDefaultLootTable(): ResourceLocation {
@@ -48,7 +48,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
                 this.playSound(SoundEvents.SHEEP_SHEAR, 1.0f, 1.0f)
                 this.gameEvent(GameEvent.SHEAR, player)
                 itemStack.hurtAndBreak(1, player) { it.broadcastBreakEvent(hand) }
-                spawnAtLocation(ItemStack(HybridAquaticItems.CORAL_CHUNK.get()))
+                spawnAtLocation(ItemStack(HAAquaticItems.CORAL_CHUNK.get()))
                 return InteractionResult.SUCCESS
             }
             return InteractionResult.CONSUME

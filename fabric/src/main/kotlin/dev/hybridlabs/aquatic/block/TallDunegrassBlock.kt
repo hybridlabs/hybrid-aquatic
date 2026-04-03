@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
+import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
@@ -12,7 +12,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 class TallDunegrassBlock(settings: Properties): BaseTallDunegrassBlock(settings){
     override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
-        return ItemStack(HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get())
+        return ItemStack(HAPlatformBlocks.TALL_DUNEGRASS.get())
     }
 
     companion object {

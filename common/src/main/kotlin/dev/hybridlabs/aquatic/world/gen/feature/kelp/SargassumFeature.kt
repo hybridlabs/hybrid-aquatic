@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.world.gen.feature.kelp
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.KelpBlock
@@ -19,8 +19,8 @@ class SargassumFeature(codec: Codec<SargassumFeatureConfig>) : Feature<Sargassum
         val j = structureLevelAccessor.getHeight(Heightmap.Types.OCEAN_FLOOR, blockPos.x, blockPos.z)
         var blockPos2 = BlockPos(blockPos.x, j, blockPos.z)
         if (structureLevelAccessor.getBlockState(blockPos2).`is`(Blocks.WATER)) {
-            val blockState = HybridAquaticBlocks.SARGASSUM.get().defaultBlockState()
-            val blockState2 = HybridAquaticBlocks.SARGASSUM_PLANT.get().defaultBlockState()
+            val blockState = HABlocks.SARGASSUM.get().defaultBlockState()
+            val blockState2 = HABlocks.SARGASSUM_PLANT.get().defaultBlockState()
             val k = 1 + random.nextInt(10)
 
             for (l in 0..k) {
@@ -45,7 +45,7 @@ class SargassumFeature(codec: Codec<SargassumFeatureConfig>) : Feature<Sargassum
                             blockPos3
                         ) && !structureLevelAccessor.getBlockState(
                             blockPos3.below()
-                        ).`is`(HybridAquaticBlocks.SARGASSUM.get())
+                        ).`is`(HABlocks.SARGASSUM.get())
                     ) {
                         structureLevelAccessor.setBlock(
                             blockPos3,

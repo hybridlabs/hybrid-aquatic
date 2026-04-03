@@ -6,9 +6,9 @@ import java.nio.file.Path
 import kotlin.io.path.notExists
 
 object ConfigHelper {
-    fun initializeConfig(configFile: Path = CommonClass.CONFIG_FILE): HybridAquaticConfigHandler {
+    fun initializeConfig(configFile: Path = CommonClass.CONFIG_FILE): HAConfigHandler {
         val logger = Constants.LOG
-        val configHandler = HybridAquaticConfigHandler(configFile.toFile())
+        val configHandler = HAConfigHandler(configFile.toFile())
         if (configFile.notExists()) {
             logger.info("${Constants.MOD_NAME} config file did not exist, creating one")
             configHandler.save()

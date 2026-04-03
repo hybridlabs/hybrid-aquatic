@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.effect
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectCategory
 import net.minecraft.world.entity.EquipmentSlot
@@ -21,12 +21,12 @@ class CorrosionMobEffect : MobEffect(MobEffectCategory.HARMFUL, 0x9d9136) {
 
     private fun corrodeTool(entity: LivingEntity, damage: Int) {
         val mainHandStack = entity.mainHandItem
-        if (mainHandStack.isDamageableItem && !mainHandStack.`is`(HybridAquaticItemTags.RESISTS_CORROSION)) {
+        if (mainHandStack.isDamageableItem && !mainHandStack.`is`(HAItemTags.RESISTS_CORROSION)) {
             mainHandStack.hurtAndBreak(damage, entity) { it.broadcastBreakEvent(entity.usedItemHand) }
         }
 
         val offHandStack = entity.offhandItem
-        if (offHandStack.isDamageableItem && !offHandStack.`is`(HybridAquaticItemTags.RESISTS_CORROSION)) {
+        if (offHandStack.isDamageableItem && !offHandStack.`is`(HAItemTags.RESISTS_CORROSION)) {
             offHandStack.hurtAndBreak(1, entity) { it.broadcastBreakEvent(entity.usedItemHand) }
         }
     }
@@ -34,7 +34,7 @@ class CorrosionMobEffect : MobEffect(MobEffectCategory.HARMFUL, 0x9d9136) {
     private fun corrodeArmor(entity: LivingEntity, damage: Int) {
         for (slot in EquipmentSlot.entries) {
             val armorStack = entity.getItemBySlot(slot)
-            if (armorStack.isDamageableItem && !armorStack.`is`(HybridAquaticItemTags.RESISTS_CORROSION)) {
+            if (armorStack.isDamageableItem && !armorStack.`is`(HAItemTags.RESISTS_CORROSION)) {
                 armorStack.hurtAndBreak(damage, entity) { it.broadcastBreakEvent(slot) }
             }
         }

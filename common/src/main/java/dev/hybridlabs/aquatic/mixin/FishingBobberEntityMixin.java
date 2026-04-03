@@ -4,9 +4,9 @@ import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes;
+import dev.hybridlabs.aquatic.entity.HAEntityTypes;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
-import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags;
+import dev.hybridlabs.aquatic.tag.HAItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -59,7 +59,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
     private void writeCustomDataToNbt(CompoundTag nbt, CallbackInfo ci) {
-        if (!hybrid_aquatic$lureItemStack.is(HybridAquaticItemTags.INSTANCE.getLURE_ITEMS())) return;
+        if (!hybrid_aquatic$lureItemStack.is(HAItemTags.INSTANCE.getLURE_ITEMS())) return;
 
         CompoundTag itemStack = new CompoundTag();
         hybrid_aquatic$getLureItem().save(itemStack);
@@ -104,7 +104,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
     private LootTable onHookReelEntity(LootTable instance, LootParams parameters) {
         if (!hybrid_aquatic$lureItemStack.isEmpty()) {
             if (hybrid_aquatic$lureItemStack.is(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK().get())) {
-                var karkinosType = HybridAquaticEntityTypes.INSTANCE.getKARKINOS().get();
+                var karkinosType = HAEntityTypes.INSTANCE.getKARKINOS().get();
                 createAndLaunchEntityAtPlayer(karkinosType);
 
                 instance = LootTable.EMPTY;

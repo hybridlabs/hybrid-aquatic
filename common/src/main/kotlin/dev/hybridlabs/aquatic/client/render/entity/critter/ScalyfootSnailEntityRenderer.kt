@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.critter.ScalyfootSnailEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class ScalyfootSnailEntityRenderer(context: Context) :
-    HybridAquaticCritterEntityRenderer<ScalyfootSnailEntity>(context, ScalyfootSnailEntityModel(), true)
+    HACritterEntityRenderer<ScalyfootSnailEntity>(context, ScalyfootSnailEntityModel(), true)

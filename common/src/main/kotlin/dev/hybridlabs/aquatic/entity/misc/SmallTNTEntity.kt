@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.misc
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
@@ -16,7 +16,7 @@ open class SmallTNTEntity(
     level: Level
 ) : PrimedTnt(entityType, level) {
 
-    constructor(level: Level, x: Double, y: Double, z: Double, owner: LivingEntity?): this(HybridAquaticEntityTypes.SMALL_TNT.get(), level) {
+    constructor(level: Level, x: Double, y: Double, z: Double, owner: LivingEntity?): this(HAEntityTypes.SMALL_TNT.get(), level) {
         this.setPos(x, y, z)
         val d0 = level.random.nextDouble() * (Math.PI.toFloat() * 2f)
         this.setDeltaMovement(-sin(d0) * 0.02, 0.2, -cos(d0) * 0.02)

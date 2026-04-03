@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinionEntity
+import dev.hybridlabs.aquatic.entity.miniboss.HAMinionEntity
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.EntitySelector
 import net.minecraft.world.entity.LivingEntity
@@ -12,7 +12,7 @@ import java.util.EnumSet
 import kotlin.math.max
 
 open class MinionAttackGoal(
-    private val minion: HybridAquaticMinionEntity,
+    private val minion: HAMinionEntity,
     private val speedMultiplier: Double = 1.0,
     private val followingTargetEvenIfNotSeen: Boolean,
 ) :

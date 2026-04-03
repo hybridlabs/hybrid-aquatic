@@ -14,7 +14,7 @@ class OysterBlockEntity(
     pos: BlockPos,
     state: BlockState
 ) : BlockEntity(
-    HybridAquaticBlockEntityTypes.OYSTER.get(),
+    HABlockEntityTypes.OYSTER.get(),
     pos,
     state
 ) {

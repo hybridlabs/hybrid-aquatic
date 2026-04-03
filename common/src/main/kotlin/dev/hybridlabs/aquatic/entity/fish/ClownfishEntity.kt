@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -25,13 +25,13 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world),
+    HAFishEntity(type, world),
     VariantHolder<ClownfishEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_CREATURES,
-        HybridAquaticEntityTags.LARGE_CREATURES,
-        HybridAquaticEntityTags.ALL_SHARKS
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
     )
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -55,7 +55,7 @@ class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) :
             if (fishCount > 0 && !level().isClientSide()) {
                 for (i in 0 until fishCount) {
                     val distance = 1.5f
-                    val entity = ClownfishEntity(HybridAquaticEntityTypes.CLOWNFISH.get(), this.level())
+                    val entity = ClownfishEntity(HAEntityTypes.CLOWNFISH.get(), this.level())
                     entity.variant = this.variant
                     entity.moveTo(
                         this.x + this.random.nextFloat() * distance,

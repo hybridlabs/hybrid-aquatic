@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.goal.Goal
@@ -9,12 +9,12 @@ import net.minecraft.world.level.Level
 import java.util.*
 
 open class WaterAnimalBreedGoal @JvmOverloads constructor(
-    protected val waterAnimal: HybridAquaticWaterAnimal,
+    protected val waterAnimal: HAWaterAnimal,
     private val speedModifier: Double,
-    private val partnerClass: Class<out HybridAquaticWaterAnimal> = waterAnimal.javaClass,
+    private val partnerClass: Class<out HAWaterAnimal> = waterAnimal.javaClass,
 ) : Goal() {
     protected val level: Level = waterAnimal.level()
-    protected var partner: HybridAquaticWaterAnimal? = null
+    protected var partner: HAWaterAnimal? = null
     private var loveTime = 0
 
     init {
@@ -51,7 +51,7 @@ open class WaterAnimalBreedGoal @JvmOverloads constructor(
         }
     }
 
-    private fun variantsMatch(a: HybridAquaticWaterAnimal, b: HybridAquaticWaterAnimal): Boolean {
+    private fun variantsMatch(a: HAWaterAnimal, b: HAWaterAnimal): Boolean {
         return if (a is VariantHolder<*> && b is VariantHolder<*>) {
             a.variant == b.variant
         } else {
@@ -59,16 +59,16 @@ open class WaterAnimalBreedGoal @JvmOverloads constructor(
         }
     }
 
-    private val freePartner: HybridAquaticWaterAnimal?
+    private val freePartner: HAWaterAnimal?
         get() {
-            val list: MutableList<out HybridAquaticWaterAnimal> = this.level.getNearbyEntities(
+            val list: MutableList<out HAWaterAnimal> = this.level.getNearbyEntities(
                 this.partnerClass,
                 PARTNER_TARGETING,
                 this.waterAnimal,
                 this.waterAnimal.boundingBox.inflate(8.0)
             )
             var d0 = Double.MAX_VALUE
-            var waterAnimal: HybridAquaticWaterAnimal? = null
+            var waterAnimal: HAWaterAnimal? = null
 
             for (waterAnimal1 in list) {
                 if (this.waterAnimal.canMate(waterAnimal1) &&

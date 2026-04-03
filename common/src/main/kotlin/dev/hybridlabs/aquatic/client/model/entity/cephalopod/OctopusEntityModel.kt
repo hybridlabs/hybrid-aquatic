@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
 import net.minecraft.resources.ResourceLocation
 
-class OctopusEntityModel : HybridAquaticOctopusEntityModel<OctopusEntity>("octopus") {
+class OctopusEntityModel : HAOctopusEntityModel<OctopusEntity>("octopus") {
 
     private val OCTOPUS_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/octopus/octopus.png")
     private val BLUE_RINGED_OCTOPUS_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/octopus/blue_ringed_octopus.png")

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.world.gen.feature.algae
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.TallSeagrassBlock
@@ -46,16 +46,16 @@ class RedAlgaePatchFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
 
             val state = when {
                 dist < 0.30 && random.nextFloat() < 0.75f ->
-                    HybridAquaticBlocks.TALL_RED_ALGAE.get().defaultBlockState()
+                    HABlocks.TALL_RED_ALGAE.get().defaultBlockState()
                 dist < 0.65 ->
-                    HybridAquaticBlocks.RED_ALGAE.get().defaultBlockState()
+                    HABlocks.RED_ALGAE.get().defaultBlockState()
                 else ->
-                    HybridAquaticBlocks.SHORT_RED_ALGAE.get().defaultBlockState()
+                    HABlocks.SHORT_RED_ALGAE.get().defaultBlockState()
             }
 
             if (!state.canSurvive(level, pos)) return@repeat
 
-            if (state.`is`(HybridAquaticBlocks.TALL_RED_ALGAE.get())) {
+            if (state.`is`(HABlocks.TALL_RED_ALGAE.get())) {
                 val above = pos.above()
                 if (level.getBlockState(above).`is`(Blocks.WATER)) {
                     level.setBlock(pos, state, 2)

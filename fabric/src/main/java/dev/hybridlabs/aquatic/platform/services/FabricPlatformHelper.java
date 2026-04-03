@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.platform.services;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import dev.hybridlabs.aquatic.CommonClass;
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
+import dev.hybridlabs.aquatic.block.HABlocks;
 import dev.hybridlabs.aquatic.item.AnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.GiantGreenAnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
@@ -97,11 +97,11 @@ public class FabricPlatformHelper implements PlatformHelper {
 
     @Override
     public Item createBlockItem(Block block, Item.Properties properties) {
-        if (block.equals(HybridAquaticBlocks.INSTANCE.getANEMONE().get())) {
+        if (block.equals(HABlocks.INSTANCE.getANEMONE().get())) {
             return new AnemoneBlockItem(block, properties);
-        } else if (block.equals(HybridAquaticBlocks.INSTANCE.getSTRAWBERRY_ANEMONE().get())) {
+        } else if (block.equals(HABlocks.INSTANCE.getSTRAWBERRY_ANEMONE().get())) {
             return new StrawberryAnemoneBlockItem(block, properties);
-        } else if (block.equals(HybridAquaticBlocks.INSTANCE.getGIANT_GREEN_ANEMONE().get())) {
+        } else if (block.equals(HABlocks.INSTANCE.getGIANT_GREEN_ANEMONE().get())) {
             return new GiantGreenAnemoneBlockItem(block, properties);
         }
         return new BlockItem(block, properties);

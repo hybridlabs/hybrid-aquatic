@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.entity.fish.BlowfishEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
-class BlowfishEntityModel : HybridAquaticFishEntityModel<BlowfishEntity>("blowfish") {
+class BlowfishEntityModel : HAFishEntityModel<BlowfishEntity>("blowfish") {
     override fun getRenderType(animatable: BlowfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

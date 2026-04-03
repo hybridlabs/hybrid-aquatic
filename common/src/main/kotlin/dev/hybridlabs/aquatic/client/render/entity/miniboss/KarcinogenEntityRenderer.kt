@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class KarcinogenEntityRenderer(context: Context) :
-    HybridAquaticMinionEntityRenderer<KarcinogenEntity>(context, KarcinogenEntityModel()) {
+    HAMinionEntityRenderer<KarcinogenEntity>(context, KarcinogenEntityModel()) {
     override fun getMotionAnimThreshold(animatable: KarcinogenEntity): Float {
         return 0.0025f
     }

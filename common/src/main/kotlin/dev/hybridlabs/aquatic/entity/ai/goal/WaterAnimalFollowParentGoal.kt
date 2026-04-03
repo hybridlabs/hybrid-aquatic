@@ -1,13 +1,13 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.base.HybridAquaticWaterAnimal
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.world.entity.ai.goal.Goal
 
 open class WaterAnimalFollowParentGoal(
-    private val waterAnimal: HybridAquaticWaterAnimal,
+    private val waterAnimal: HAWaterAnimal,
     private val speedModifier: Double,
 ) : Goal() {
-    private var parent: HybridAquaticWaterAnimal? = null
+    private var parent: HAWaterAnimal? = null
     private var timeToRecalcPath = 0
 
     override fun canUse(): Boolean {
@@ -16,7 +16,7 @@ open class WaterAnimalFollowParentGoal(
         } else {
             val list = this.waterAnimal.level()
                 .getEntitiesOfClass(this.waterAnimal.javaClass, this.waterAnimal.boundingBox.inflate(8.0, 4.0, 8.0))
-            var waterAnimal: HybridAquaticWaterAnimal? = null
+            var waterAnimal: HAWaterAnimal? = null
             var d0 = Double.MAX_VALUE
 
             for (waterAnimal1 in list) {

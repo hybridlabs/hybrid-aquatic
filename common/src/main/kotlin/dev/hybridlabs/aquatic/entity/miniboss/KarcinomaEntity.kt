@@ -20,8 +20,8 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 
 
-class KarcinomaEntity(type: EntityType<out HybridAquaticMinionEntity>, world: Level) :
-    HybridAquaticMinionEntity(type, world) {
+class KarcinomaEntity(type: EntityType<out HAMinionEntity>, world: Level) :
+    HAMinionEntity(type, world) {
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, true)

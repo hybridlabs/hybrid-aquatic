@@ -72,7 +72,7 @@ class RedAlgaeBlock(settings: Properties?) : BushBlock(settings), BonemealableBl
     }
 
     override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
-        val blockState = HybridAquaticBlocks.TALL_RED_ALGAE.get().defaultBlockState()
+        val blockState = HABlocks.TALL_RED_ALGAE.get().defaultBlockState()
         val blockState2 = blockState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER) as BlockState
         val blockPos = pos.above()
         if (world.getBlockState(blockPos).`is`(Blocks.WATER)) {

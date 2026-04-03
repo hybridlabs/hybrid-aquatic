@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
@@ -64,7 +64,7 @@ class ArgonautItem(properties: Properties) : Item(properties) {
             pos.relative(face)
         }
 
-        val entity: ArgonautEntity? = HybridAquaticEntityTypes.ARGONAUT.get().spawn(
+        val entity: ArgonautEntity? = HAEntityTypes.ARGONAUT.get().spawn(
             level,
             stack,
             context.player,
@@ -119,7 +119,7 @@ class ArgonautItem(properties: Properties) : Item(properties) {
             return InteractionResultHolder.pass(stack)
         }
 
-        val entity: ArgonautEntity? = HybridAquaticEntityTypes.ARGONAUT.get().spawn(
+        val entity: ArgonautEntity? = HAEntityTypes.ARGONAUT.get().spawn(
             level,
             stack,
             player,

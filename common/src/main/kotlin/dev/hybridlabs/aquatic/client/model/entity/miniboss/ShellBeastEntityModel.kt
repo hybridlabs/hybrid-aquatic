@@ -5,7 +5,7 @@ import net.minecraft.client.model.geom.PartNames
 import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
 
-class ShellBeastEntityModel : HybridAquaticMinibossEntityModel<ShellBeastEntity>("shell_beast") {
+class ShellBeastEntityModel : HAMinibossEntityModel<ShellBeastEntity>("shell_beast") {
 
     override fun setCustomAnimations(
         animatable: ShellBeastEntity,

@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.TunaEntity
 import net.minecraft.resources.ResourceLocation
 
-class TunaEntityModel : HybridAquaticFishEntityModel<TunaEntity>("tuna") {
+class TunaEntityModel : HAFishEntityModel<TunaEntity>("tuna") {
 
     private val YELLOWFIN_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/tuna/tuna_yellowfin.png")
     private val BLUEFIN_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/tuna/tuna_bluefin.png")

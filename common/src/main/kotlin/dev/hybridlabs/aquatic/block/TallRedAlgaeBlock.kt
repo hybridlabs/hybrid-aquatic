@@ -33,11 +33,11 @@ class TallRedAlgaeBlock(settings: Properties) : DoublePlantBlock(settings), Liqu
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HybridAquaticBlocks.AERATED_SAND.get()) && !floor.`is`(HybridAquaticBlocks.BUBBLE_GEYSER.get())
+        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HABlocks.AERATED_SAND.get()) && !floor.`is`(HABlocks.BUBBLE_GEYSER.get())
     }
 
     override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
-        return ItemStack(HybridAquaticBlocks.RED_ALGAE.get())
+        return ItemStack(HABlocks.RED_ALGAE.get())
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {

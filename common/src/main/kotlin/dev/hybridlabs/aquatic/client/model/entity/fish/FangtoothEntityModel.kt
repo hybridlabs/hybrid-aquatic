@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.fish.FangtoothEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
-class FangtoothEntityModel : HybridAquaticFishEntityModel<FangtoothEntity>("fangtooth") {
+class FangtoothEntityModel : HAFishEntityModel<FangtoothEntity>("fangtooth") {
     override fun getRenderType(animatable: FangtoothEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.config.ConfigHelper.initializeConfig
 import dev.hybridlabs.aquatic.utils.NaughtyRegistrySetBuilder
 import dev.hybridlabs.aquatic.world.gen.feature.BiomeFeatureAddition
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.structure.BuiltinSpawnModifiers
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import net.minecraft.core.HolderSet
@@ -35,7 +35,7 @@ object DataGenerators {
     @SubscribeEvent
     fun gatherData(event: GatherDataEvent) {
 
-        HybridAquaticPlacedFeatures
+        HAPlacedFeatures
 
         val generator = event.generator
         val packOutput = generator.packOutput

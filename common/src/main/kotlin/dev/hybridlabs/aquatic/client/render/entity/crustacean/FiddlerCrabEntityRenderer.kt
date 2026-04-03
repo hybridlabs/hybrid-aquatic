@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.crustacean.FiddlerCrabEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class FiddlerCrabEntityRenderer(context: Context) :
-    HybridAquaticCrustaceanEntityRenderer<FiddlerCrabEntity>(context, FiddlerCrabEntityModel(), true, false)
+    HACrustaceanEntityRenderer<FiddlerCrabEntity>(context, FiddlerCrabEntityModel(), true, false)

@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.jellyfish.SeaNettleEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
-class SeaNettleEntityModel : HybridAquaticJellyfishEntityModel<SeaNettleEntity>("sea_nettle") {
+class SeaNettleEntityModel : HAJellyfishEntityModel<SeaNettleEntity>("sea_nettle") {
     override fun getRenderType(animatable: SeaNettleEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

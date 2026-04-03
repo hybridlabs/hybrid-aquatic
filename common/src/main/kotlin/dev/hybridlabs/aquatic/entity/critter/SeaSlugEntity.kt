@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -21,7 +21,7 @@ import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class SeaSlugEntity(type: EntityType<out SeaSlugEntity>, world: Level) : HybridAquaticCritterEntity(type, world),
+class SeaSlugEntity(type: EntityType<out SeaSlugEntity>, world: Level) : HACritterEntity(type, world),
     VariantHolder<SeaSlugEntity.Companion.Type> {
 
     companion object {
@@ -64,11 +64,11 @@ class SeaSlugEntity(type: EntityType<out SeaSlugEntity>, world: Level) : HybridA
                 fun fromBiome(biome: Holder<Biome>): Type {
                     return when {
 
-                        biome.`is`(HybridAquaticBiomeTags.CORAL_REEF) -> {
+                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
                             NUDIBRANCH
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.LUKEWARM_OCEANS) -> {
+                        biome.`is`(HABiomeTags.LUKEWARM_OCEANS) -> {
                             NUDIBRANCH
                             SEA_HARE
                         }

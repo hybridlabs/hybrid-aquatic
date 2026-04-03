@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.mixin;
 
 import com.google.common.collect.ImmutableList;
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects;
-import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity;
+import dev.hybridlabs.aquatic.effect.HAMobEffects;
+import dev.hybridlabs.aquatic.entity.shark.HASharkEntity;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import dev.hybridlabs.aquatic.item.HybridAquaticToolMaterials;
 import net.minecraft.core.NonNullList;
@@ -93,7 +93,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             LivingEntity foundEntity =
                     object.level()
                             .getNearestEntity(
-                                    HybridAquaticSharkEntity.class,
+                                    HASharkEntity.class,
                                     TargetingConditions.forNonCombat()
                                             .range(32)
                                             .selector(Entity::isUnderWater),
@@ -157,7 +157,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             } else {
                 player.addEffect(
                         new MobEffectInstance(
-                                HybridAquaticMobEffects.INSTANCE.getCLARITY().get(),
+                                HAMobEffects.INSTANCE.getCLARITY().get(),
                                 600,
                                 0,
                                 false,
@@ -174,7 +174,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             } else {
                 player.addEffect(
                         new MobEffectInstance(
-                                HybridAquaticMobEffects.INSTANCE.getCLARITY().get(),
+                                HAMobEffects.INSTANCE.getCLARITY().get(),
                                 1800,
                                 0,
                                 false,
@@ -191,7 +191,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             } else {
                 player.addEffect(
                         new MobEffectInstance(
-                                HybridAquaticMobEffects.INSTANCE.getCLARITY().get(),
+                                HAMobEffects.INSTANCE.getCLARITY().get(),
                                 1800,
                                 0,
                                 false,

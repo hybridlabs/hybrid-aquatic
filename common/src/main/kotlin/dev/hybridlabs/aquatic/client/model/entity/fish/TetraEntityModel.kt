@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.TetraEntity
 import net.minecraft.resources.ResourceLocation
 
-class TetraEntityModel : HybridAquaticFishEntityModel<TetraEntity>("tetra") {
+class TetraEntityModel : HAFishEntityModel<TetraEntity>("tetra") {
 
     private val NEON_TETRA_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/tetra/neon_tetra.png")
     private val GREEN_NEON_TETRA_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/tetra/green_neon_tetra.png")

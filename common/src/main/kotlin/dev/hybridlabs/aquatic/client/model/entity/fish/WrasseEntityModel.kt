@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.WrasseEntity
 import net.minecraft.resources.ResourceLocation
 
-class WrasseEntityModel : HybridAquaticFishEntityModel<WrasseEntity>("wrasse") {
+class WrasseEntityModel : HAFishEntityModel<WrasseEntity>("wrasse") {
 
     private val CALIFORNIA_SHEEPSHEAD_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/wrasse/california_sheepshead.png")
 

@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
-import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAPlatformItems
+import dev.hybridlabs.aquatic.loot.HALootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.resources.ResourceLocation
@@ -25,9 +25,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         fun universalCratePool(): LootPool.Builder {
             return LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1.0f))
-                .add(LootItem.lootTableItem(HybridAquaticItems.BARBED_HOOK.get()))
-                .add(LootItem.lootTableItem(HybridAquaticItems.GLOWING_HOOK.get()))
-                .add(LootItem.lootTableItem(HybridAquaticItems.MAGNETIC_HOOK.get()))
+                .add(LootItem.lootTableItem(HAAquaticItems.BARBED_HOOK.get()))
+                .add(LootItem.lootTableItem(HAAquaticItems.GLOWING_HOOK.get()))
+                .add(LootItem.lootTableItem(HAAquaticItems.MAGNETIC_HOOK.get()))
                 .add(LootItem.lootTableItem(Items.IRON_INGOT)
                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(3f, 9f))))
                 .add(LootItem.lootTableItem(Items.GOLD_INGOT)
@@ -44,114 +44,114 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         fun driftwoodPool(): LootPool.Builder {
             return LootPool.lootPool()
                 .`when`(LootItemRandomChanceCondition.randomChance(0.5f))
-                .add(LootItem.lootTableItem(HybridAquaticPlatformItems.DRIFTWOOD_LOG.get())
+                .add(LootItem.lootTableItem(HAPlatformItems.DRIFTWOOD_LOG.get())
                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(16f, 32f))))
         }
 
         fun plushiePool(): LootPool.Builder {
             return LootPool.lootPool()
                 .`when`(LootItemRandomChanceCondition.randomChance(0.25f))
-                .add(LootItem.lootTableItem(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
-                .add(LootItem.lootTableItem(HybridAquaticItems.WHALE_SHARK_PLUSHIE.get()))
-                .add(LootItem.lootTableItem(HybridAquaticItems.TIGER_SHARK_PLUSHIE.get()))
-                .add(LootItem.lootTableItem(HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
-                .add(LootItem.lootTableItem(HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
-                .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get()))
-                .add(LootItem.lootTableItem(HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HAAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HAAquaticItems.WHALE_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HAAquaticItems.TIGER_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HAAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HAAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HAAquaticItems.BASKING_SHARK_PLUSHIE.get()))
+                .add(LootItem.lootTableItem(HAAquaticItems.THRESHER_SHARK_PLUSHIE.get()))
         }
         //#endregion
 
         //#region Crate Loot Tables
         exporter.accept(
-            HybridAquaticLootTables.CRAB_POT_TREASURE_ID,
+            HALootTables.CRAB_POT_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.CRAB_POT_TREASURE_ID)
+                .setRandomSequence(HALootTables.CRAB_POT_TREASURE_ID)
                 .pool(
                     LootPool.lootPool()
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.COCONUT_CRAB_CLAW.get())
+                            LootItem.lootTableItem(HAAquaticItems.COCONUT_CRAB_CLAW.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.GHOST_CRAB_CLAW.get())
+                            LootItem.lootTableItem(HAAquaticItems.GHOST_CRAB_CLAW.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.YETI_CRAB_CLAW.get())
+                            LootItem.lootTableItem(HAAquaticItems.YETI_CRAB_CLAW.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SPIDER_CRAB_CLAW.get())
+                            LootItem.lootTableItem(HAAquaticItems.SPIDER_CRAB_CLAW.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.VAMPIRE_CRAB_CLAW.get())
+                            LootItem.lootTableItem(HAAquaticItems.VAMPIRE_CRAB_CLAW.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.DUNGENESS_CRAB_CLAW.get())
+                            LootItem.lootTableItem(HAAquaticItems.DUNGENESS_CRAB_CLAW.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW.get())
+                            LootItem.lootTableItem(HAAquaticItems.LIGHTFOOT_CRAB_CLAW.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.FIDDLER_CRAB_CLAW.get())
+                            LootItem.lootTableItem(HAAquaticItems.FIDDLER_CRAB_CLAW.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.FLOWER_CRAB_CLAW.get())
+                            LootItem.lootTableItem(HAAquaticItems.FLOWER_CRAB_CLAW.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.RAW_SHRIMP.get())
+                            LootItem.lootTableItem(HAAquaticItems.RAW_SHRIMP.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.LOBSTER_CLAW.get())
+                            LootItem.lootTableItem(HAAquaticItems.LOBSTER_CLAW.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         )
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.RAW_LOBSTER_TAIL.get())
+                            LootItem.lootTableItem(HAAquaticItems.RAW_LOBSTER_TAIL.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
                         ).build()
                 )
         )
 
         exporter.accept(
-            HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID,
+            HALootTables.HYBRID_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.HYBRID_CRATE_TREASURE_ID)
+                .setRandomSequence(HALootTables.HYBRID_CRATE_TREASURE_ID)
                 .pool(
                     LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0f))
                         .setBonusRolls(UniformGenerator.between(0.0f, 1.0f))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.MANGLERFISH_FIN.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.MANGLERFISH_LURE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.EEL_SCARF.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.PINK_HATXOLOTL.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GOLD_HATXOLOTL.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BROWN_HATXOLOTL.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BLUE_HATXOLOTL.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.CYAN_HATXOLOTL.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.MOON_JELLYFISH_HAT.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.WHALE_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.TIGER_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BASKING_SHARK_PLUSHIE.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.MANGLERFISH_FIN.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.MANGLERFISH_LURE.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.EEL_SCARF.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.PINK_HATXOLOTL.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.GOLD_HATXOLOTL.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.BROWN_HATXOLOTL.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.BLUE_HATXOLOTL.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.CYAN_HATXOLOTL.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.MOON_JELLYFISH_HAT.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.GREAT_WHITE_SHARK_PLUSHIE.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.WHALE_SHARK_PLUSHIE.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.TIGER_SHARK_PLUSHIE.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.HAMMERHEAD_SHARK_PLUSHIE.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.FRILLED_SHARK_PLUSHIE.get()))
+                        .add(LootItem.lootTableItem(HAAquaticItems.BASKING_SHARK_PLUSHIE.get()))
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.THRESHER_SHARK_PLUSHIE.get())
+                            LootItem.lootTableItem(HAAquaticItems.THRESHER_SHARK_PLUSHIE.get())
                         ).build()
                 )
         )
 
         exporter.accept(
-            HybridAquaticLootTables.OAK_CRATE_TREASURE_ID,
+            HALootTables.OAK_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.OAK_CRATE_TREASURE_ID)
+                .setRandomSequence(HALootTables.OAK_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
                 .pool(driftwoodPool().build())
                 .pool(plushiePool().build())
@@ -174,9 +174,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID,
+            HALootTables.SPRUCE_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.SPRUCE_CRATE_TREASURE_ID)
+                .setRandomSequence(HALootTables.SPRUCE_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
                 .pool(driftwoodPool().build())
                 .pool(plushiePool().build())
@@ -199,9 +199,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID,
+            HALootTables.BIRCH_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.BIRCH_CRATE_TREASURE_ID)
+                .setRandomSequence(HALootTables.BIRCH_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
                 .pool(driftwoodPool().build())
                 .pool(plushiePool().build())
@@ -224,9 +224,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID,
+            HALootTables.ACACIA_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.ACACIA_CRATE_TREASURE_ID)
+                .setRandomSequence(HALootTables.ACACIA_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
                 .pool(driftwoodPool().build())
                 .pool(plushiePool().build())
@@ -249,9 +249,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID,
+            HALootTables.DARK_OAK_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.DARK_OAK_CRATE_TREASURE_ID)
+                .setRandomSequence(HALootTables.DARK_OAK_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
                 .pool(driftwoodPool().build())
                 .pool(plushiePool().build())
@@ -274,9 +274,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID,
+            HALootTables.MANGROVE_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.MANGROVE_CRATE_TREASURE_ID)
+                .setRandomSequence(HALootTables.MANGROVE_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
                 .pool(driftwoodPool().build())
                 .pool(plushiePool().build())
@@ -299,9 +299,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID,
+            HALootTables.CHERRY_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.CHERRY_CRATE_TREASURE_ID)
+                .setRandomSequence(HALootTables.CHERRY_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
                 .pool(driftwoodPool().build())
                 .pool(plushiePool().build())
@@ -324,9 +324,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID,
+            HALootTables.JUNGLE_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.JUNGLE_CRATE_TREASURE_ID)
+                .setRandomSequence(HALootTables.JUNGLE_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
                 .pool(driftwoodPool().build())
                 .pool(plushiePool().build())
@@ -353,9 +353,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.BAMBOO_CRATE_TREASURE_ID,
+            HALootTables.BAMBOO_CRATE_TREASURE_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.BAMBOO_CRATE_TREASURE_ID)
+                .setRandomSequence(HALootTables.BAMBOO_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
                 .pool(driftwoodPool().build())
                 .pool(plushiePool().build())
@@ -388,48 +388,48 @@ class GenericLootTableProvider(output: FabricDataOutput) :
 
         //#region Extra Entity Loot
         exporter.accept(
-            HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY,
+            HALootTables.BLUE_SPOTTED_STINGRAY,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.BLUE_SPOTTED_STINGRAY.get())).build()
+                        .add(LootItem.lootTableItem(HAAquaticItems.BLUE_SPOTTED_STINGRAY.get())).build()
                 )
         )
 
         exporter.accept(
-            HybridAquaticLootTables.SPOTTED_EAGLE_RAY,
+            HALootTables.SPOTTED_EAGLE_RAY,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.SPOTTED_EAGLE_RAY.get())).build()
+                        .add(LootItem.lootTableItem(HAAquaticItems.SPOTTED_EAGLE_RAY.get())).build()
                 )
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CLAWED_LOBSTER,
+            HALootTables.CLAWED_LOBSTER,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.LOBSTER_CLAW.get())).build()
+                        .add(LootItem.lootTableItem(HAAquaticItems.LOBSTER_CLAW.get())).build()
                 )
                 .pool(
                     LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.RAW_LOBSTER_TAIL.get())).build()
+                        .add(LootItem.lootTableItem(HAAquaticItems.RAW_LOBSTER_TAIL.get())).build()
                 )
         )
 
         exporter.accept(
-            HybridAquaticLootTables.CLAWLESS_LOBSTER,
+            HALootTables.CLAWLESS_LOBSTER,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.RAW_LOBSTER_TAIL.get())).build()
+                        .add(LootItem.lootTableItem(HAAquaticItems.RAW_LOBSTER_TAIL.get())).build()
                 )
         )
 
         //#region Decorator Crab Loot
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_FIRE,
+            HALootTables.DECORATOR_FIRE,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -438,7 +438,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_BRAIN,
+            HALootTables.DECORATOR_BRAIN,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -447,7 +447,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_TUBE,
+            HALootTables.DECORATOR_TUBE,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -456,7 +456,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_BUBBLE,
+            HALootTables.DECORATOR_BUBBLE,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -465,7 +465,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_HORN,
+            HALootTables.DECORATOR_HORN,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -474,34 +474,34 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_THORN,
+            HALootTables.DECORATOR_THORN,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.THORN_CORAL.get())).build()
+                        .add(LootItem.lootTableItem(HAAquaticItems.THORN_CORAL.get())).build()
                 )
         )
 
         exporter.accept(
-            HybridAquaticLootTables.DECORATOR_LOPHELIA,
+            HALootTables.DECORATOR_LOPHELIA,
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HybridAquaticItems.LOPHELIA_CORAL.get())).build()
+                        .add(LootItem.lootTableItem(HAAquaticItems.LOPHELIA_CORAL.get())).build()
                 )
         )
         //#endregion
         //#endregion
 
         exporter.accept(
-            HybridAquaticLootTables.VENT_LOOT_ID,
+            HALootTables.VENT_LOOT_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.VENT_LOOT_ID)
+                .setRandomSequence(HALootTables.VENT_LOOT_ID)
                 .pool(
                     LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1F))
                         .add(
-                            LootItem.lootTableItem(HybridAquaticItems.SULFUR.get())
+                            LootItem.lootTableItem(HAAquaticItems.SULFUR.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
                         .build()
                 )
@@ -517,48 +517,48 @@ class GenericLootTableProvider(output: FabricDataOutput) :
 
         //#region Archaeology Loot
         exporter.accept(
-                HybridAquaticLootTables.BEACH_ARCHAEOLOGY_ID,
+                HALootTables.BEACH_ARCHAEOLOGY_ID,
         LootTable.lootTable()
-            .setRandomSequence(HybridAquaticLootTables.BEACH_ARCHAEOLOGY_ID)
+            .setRandomSequence(HALootTables.BEACH_ARCHAEOLOGY_ID)
             .pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(Items.STICK).setWeight(10))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.SHARK_TOOTH.get()).setWeight(8))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.SEA_URCHIN_SPINE.get()).setWeight(8))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.BULL_KELP.get()).setWeight(8))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.SARGASSUM.get()).setWeight(8))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.CUTTLEBONE.get()).setWeight(8))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.CORAL_CHUNK.get()).setWeight(6))
+                    .add(LootItem.lootTableItem(HAAquaticItems.SHARK_TOOTH.get()).setWeight(8))
+                    .add(LootItem.lootTableItem(HAAquaticItems.SEA_URCHIN_SPINE.get()).setWeight(8))
+                    .add(LootItem.lootTableItem(HAAquaticItems.BULL_KELP.get()).setWeight(8))
+                    .add(LootItem.lootTableItem(HAAquaticItems.SARGASSUM.get()).setWeight(8))
+                    .add(LootItem.lootTableItem(HAAquaticItems.CUTTLEBONE.get()).setWeight(8))
+                    .add(LootItem.lootTableItem(HAAquaticItems.CORAL_CHUNK.get()).setWeight(6))
                     .add(LootItem.lootTableItem(Items.PRISMARINE_SHARD).setWeight(6))
                     .add(LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS).setWeight(6))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.COCONUT_CRAB_CLAW.get()).setWeight(5))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.GHOST_CRAB_CLAW.get()).setWeight(5))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.DUNGENESS_CRAB_CLAW.get()).setWeight(5))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.FLOWER_CRAB_CLAW.get()).setWeight(5))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW.get()).setWeight(5))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.HYBRID_CRATE.get()).setWeight(3))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.OAK_CRATE.get()).setWeight(3))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.DARK_OAK_CRATE.get()).setWeight(3))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.SPRUCE_CRATE.get()).setWeight(3))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.BIRCH_CRATE.get()).setWeight(3))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.ACACIA_CRATE.get()).setWeight(3))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.JUNGLE_CRATE.get()).setWeight(3))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.MANGROVE_CRATE.get()).setWeight(3))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.CHERRY_CRATE.get()).setWeight(3))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.BAMBOO_CRATE.get()).setWeight(3))
+                    .add(LootItem.lootTableItem(HAAquaticItems.COCONUT_CRAB_CLAW.get()).setWeight(5))
+                    .add(LootItem.lootTableItem(HAAquaticItems.GHOST_CRAB_CLAW.get()).setWeight(5))
+                    .add(LootItem.lootTableItem(HAAquaticItems.DUNGENESS_CRAB_CLAW.get()).setWeight(5))
+                    .add(LootItem.lootTableItem(HAAquaticItems.FLOWER_CRAB_CLAW.get()).setWeight(5))
+                    .add(LootItem.lootTableItem(HAAquaticItems.LIGHTFOOT_CRAB_CLAW.get()).setWeight(5))
+                    .add(LootItem.lootTableItem(HAAquaticItems.HYBRID_CRATE.get()).setWeight(3))
+                    .add(LootItem.lootTableItem(HAAquaticItems.OAK_CRATE.get()).setWeight(3))
+                    .add(LootItem.lootTableItem(HAAquaticItems.DARK_OAK_CRATE.get()).setWeight(3))
+                    .add(LootItem.lootTableItem(HAAquaticItems.SPRUCE_CRATE.get()).setWeight(3))
+                    .add(LootItem.lootTableItem(HAAquaticItems.BIRCH_CRATE.get()).setWeight(3))
+                    .add(LootItem.lootTableItem(HAAquaticItems.ACACIA_CRATE.get()).setWeight(3))
+                    .add(LootItem.lootTableItem(HAAquaticItems.JUNGLE_CRATE.get()).setWeight(3))
+                    .add(LootItem.lootTableItem(HAAquaticItems.MANGROVE_CRATE.get()).setWeight(3))
+                    .add(LootItem.lootTableItem(HAAquaticItems.CHERRY_CRATE.get()).setWeight(3))
+                    .add(LootItem.lootTableItem(HAAquaticItems.BAMBOO_CRATE.get()).setWeight(3))
                     .add(LootItem.lootTableItem(Items.NAUTILUS_SHELL).setWeight(4))
                     .add(LootItem.lootTableItem(Items.SCUTE).setWeight(4))
                     .add(LootItem.lootTableItem(Items.TURTLE_EGG).setWeight(2))
                     .add(LootItem.lootTableItem(Items.HEART_OF_THE_SEA).setWeight(1))
-                    .add(LootItem.lootTableItem(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()).setWeight(1))
+                    .add(LootItem.lootTableItem(HAAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()).setWeight(1))
                     .build()
             )
         )
 
         exporter.accept(
-            HybridAquaticLootTables.PLACER_RIVER_ARCHAEOLOGY_ID,
+            HALootTables.PLACER_RIVER_ARCHAEOLOGY_ID,
             LootTable.lootTable()
-                .setRandomSequence(HybridAquaticLootTables.PLACER_RIVER_ARCHAEOLOGY_ID)
+                .setRandomSequence(HALootTables.PLACER_RIVER_ARCHAEOLOGY_ID)
                 .pool(
                     LootPool.lootPool()
                         .add(LootItem.lootTableItem(Items.GOLD_NUGGET).setWeight(10))

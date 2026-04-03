@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.DragonfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class DragonfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<DragonfishEntity>(context, DragonfishEntityModel(), true, true)
+    HAFishEntityRenderer<DragonfishEntity>(context, DragonfishEntityModel(), true, true)

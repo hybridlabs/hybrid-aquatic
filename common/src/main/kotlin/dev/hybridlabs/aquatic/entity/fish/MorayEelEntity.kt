@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 class MorayEelEntity(type: EntityType<out MorayEelEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world) {
+    HAFishEntity(type, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -23,19 +23,19 @@ class MorayEelEntity(type: EntityType<out MorayEelEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HybridAquaticItems.SURGEONFISH.get())
+        return stack.`is`(HAAquaticItems.SURGEONFISH.get())
     }
 
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES,
-                HybridAquaticEntityTags.ALL_CRUSTACEANS,
-                HybridAquaticEntityTags.ALL_CEPHALOPODS
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.ALL_CRUSTACEANS,
+                HAEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HybridAquaticEntityTags.LARGE_CREATURES,
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

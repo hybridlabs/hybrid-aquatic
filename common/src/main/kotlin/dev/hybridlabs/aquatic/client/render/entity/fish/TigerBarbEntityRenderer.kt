@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.TigerBarbEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class TigerBarbEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<TigerBarbEntity>(context, TigerBarbEntityModel(), true, false)
+    HAFishEntityRenderer<TigerBarbEntity>(context, TigerBarbEntityModel(), true, false)

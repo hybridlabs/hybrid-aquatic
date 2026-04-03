@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.misc
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.HAAquaticItems
 import dev.hybridlabs.aquatic.world.inventory.ArgonautMenu
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
@@ -330,7 +330,7 @@ open class ArgonautEntity(
     }
 
     fun getArgonautItem(argonaut: ArgonautEntity): ItemStack {
-        val stack = ItemStack(HybridAquaticItems.ARGONAUT.get())
+        val stack = ItemStack(HAAquaticItems.ARGONAUT.get())
         val tag = stack.orCreateTag
 
         tag.putInt("ShellColor", argonaut.getShellColor().id)
@@ -419,7 +419,7 @@ open class ArgonautEntity(
         val stack = player.getItemInHand(hand)
 
         //#region Add Glow
-        if (stack.`is`(HybridAquaticItems.GLOWSLIME.get()) && !this.isGlowing()) {
+        if (stack.`is`(HAAquaticItems.GLOWSLIME.get()) && !this.isGlowing()) {
             if (!player.abilities.instabuild) stack.shrink(1)
             this.setGlowing(true)
             return InteractionResult.sidedSuccess(this.level().isClientSide)

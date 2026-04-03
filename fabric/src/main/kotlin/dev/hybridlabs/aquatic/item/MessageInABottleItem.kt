@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock.Variant
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack
  * @see MessageInABottleBlock
  */
 class MessageInABottleItem(settings: Properties) :
-    PlaceableInWaterItem(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get(), settings) {
+    PlaceableInWaterItem(HABlocks.MESSAGE_IN_A_BOTTLE.get(), settings) {
     override fun getDescriptionId(stack: ItemStack): String {
         // custom variant translation keys
         val id = stack.getTagElement(BLOCK_ENTITY_TAG)?.getString(MessageInABottleBlockEntity.VARIANT_KEY) ?: ""

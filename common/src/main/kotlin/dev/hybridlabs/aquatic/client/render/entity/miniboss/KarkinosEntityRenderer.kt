@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class KarkinosEntityRenderer(context: Context) :
-    HybridAquaticMinibossEntityRenderer<KarkinosEntity>(context, KarkinosEntityModel()) {
+    HAMinibossEntityRenderer<KarkinosEntity>(context, KarkinosEntityModel()) {
     override fun getMotionAnimThreshold(animatable: KarkinosEntity): Float {
         return 0.0025f
     }

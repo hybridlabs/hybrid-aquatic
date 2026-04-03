@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.render.entity.critter.layer
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
-import dev.hybridlabs.aquatic.client.model.entity.critter.HybridAquaticCritterEntityModel
+import dev.hybridlabs.aquatic.client.model.entity.critter.HACritterEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.critter.StarfishEntityRenderer
 import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
 import net.minecraft.client.renderer.MultiBufferSource
@@ -20,7 +20,7 @@ class StarfishOverlayLayer(
 
 
     private fun getLayerTextureResource(layer: String): ResourceLocation {
-        return (geoModel as HybridAquaticCritterEntityModel).getLayerTextureResource(layer.lowercase())
+        return (geoModel as HACritterEntityModel).getLayerTextureResource(layer.lowercase())
     }
 
     override fun render(

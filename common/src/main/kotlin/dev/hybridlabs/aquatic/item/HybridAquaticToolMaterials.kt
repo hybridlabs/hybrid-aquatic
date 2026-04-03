@@ -30,7 +30,7 @@ enum class HybridAquaticToolMaterials(
         6.0f,
         2.0f,
         14,
-        Supplier<Ingredient> { Ingredient.of(HybridAquaticItems.CORAL_CHUNK.get()) }
+        Supplier<Ingredient> { Ingredient.of(HAAquaticItems.CORAL_CHUNK.get()) }
     );
 
     override fun getUses(): Int {

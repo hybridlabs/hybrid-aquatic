@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class SeaCucumberEntityModel : HybridAquaticCritterEntityModel<SeaCucumberEntity>("sea_cucumber") {
+class SeaCucumberEntityModel : HACritterEntityModel<SeaCucumberEntity>("sea_cucumber") {
 
     override fun getRenderType(animatable: SeaCucumberEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)

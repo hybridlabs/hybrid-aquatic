@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -15,9 +15,9 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class NautilusEntity(type: EntityType<out NautilusEntity>, world: Level) : HybridAquaticCephalopodEntity(type, world) {
+class NautilusEntity(type: EntityType<out NautilusEntity>, world: Level) : HACephalopodEntity(type, world) {
 
-    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HybridAquaticEntityTags.ALL_SHARKS)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HAEntityTags.ALL_SHARKS)
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

@@ -78,7 +78,7 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
 
         fun twoRows(containerId: Int, playerInventory: Inventory, container: Container): ArgonautMenu {
             return ArgonautMenu(
-                HybridAquaticMenuTypes.ARGONAUT_MENU_2ROW.get(),
+                HAMenuTypes.ARGONAUT_MENU_2ROW.get(),
                 containerId,
                 playerInventory,
                 container,
@@ -88,7 +88,7 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
 
         fun twoRows(containerId: Int, playerInventory: Inventory): ArgonautMenu {
             return ArgonautMenu(
-                HybridAquaticMenuTypes.ARGONAUT_MENU_2ROW.get(),
+                HAMenuTypes.ARGONAUT_MENU_2ROW.get(),
                 containerId,
                 playerInventory,
                 SimpleContainer(SLOTS_PER_ROW * 2 + 1),
@@ -98,7 +98,7 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
 
         fun threeRows(containerId: Int, playerInventory: Inventory): ArgonautMenu {
             return ArgonautMenu(
-                HybridAquaticMenuTypes.ARGONAUT_MENU_3ROW.get(),
+                HAMenuTypes.ARGONAUT_MENU_3ROW.get(),
                 containerId,
                 playerInventory,
                 SimpleContainer(SLOTS_PER_ROW * 3 + 1),
@@ -108,7 +108,7 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
 
         fun threeRows(containerId: Int, playerInventory: Inventory, container: Container): ArgonautMenu {
             return ArgonautMenu(
-                HybridAquaticMenuTypes.ARGONAUT_MENU_3ROW.get(),
+                HAMenuTypes.ARGONAUT_MENU_3ROW.get(),
                 containerId,
                 playerInventory,
                 container,

@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.fish.CarpEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class CarpEntityModel : HybridAquaticFishEntityModel<CarpEntity>("carp") {
+class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
 
     private val COMMON_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/carp.png")
     private val PRUSSIAN_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/prussian_carp.png")

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.world.gen.feature.kelp
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.KelpBlock
@@ -19,8 +19,8 @@ class BullKelpFeature(codec: Codec<BullKelpFeatureConfig>) : Feature<BullKelpFea
         val j = structureLevelAccessor.getHeight(Heightmap.Types.OCEAN_FLOOR, blockPos.x, blockPos.z)
         var blockPos2 = BlockPos(blockPos.x, j, blockPos.z)
         if (structureLevelAccessor.getBlockState(blockPos2).`is`(Blocks.WATER)) {
-            val blockState = HybridAquaticBlocks.BULL_KELP.get().defaultBlockState()
-            val blockState2 = HybridAquaticBlocks.BULL_KELP_PLANT.get().defaultBlockState()
+            val blockState = HABlocks.BULL_KELP.get().defaultBlockState()
+            val blockState2 = HABlocks.BULL_KELP_PLANT.get().defaultBlockState()
             val k = 1 + random.nextInt(10)
 
             for (l in 0..k) {
@@ -42,7 +42,7 @@ class BullKelpFeature(codec: Codec<BullKelpFeatureConfig>) : Feature<BullKelpFea
                     val blockPos3 = blockPos2.below()
                     if (blockState.canSurvive(structureLevelAccessor, blockPos3) && !(structureLevelAccessor.getBlockState(
                             blockPos3.below()
-                        ).`is`(HybridAquaticBlocks.BULL_KELP.get()))
+                        ).`is`(HABlocks.BULL_KELP.get()))
                     ) {
                         structureLevelAccessor.setBlock(
                             blockPos3,

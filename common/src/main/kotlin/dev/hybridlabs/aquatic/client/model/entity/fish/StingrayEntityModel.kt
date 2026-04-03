@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.StingrayEntity
 import net.minecraft.resources.ResourceLocation
 
-class StingrayEntityModel : HybridAquaticFishEntityModel<StingrayEntity>("stingray") {
+class StingrayEntityModel : HAFishEntityModel<StingrayEntity>("stingray") {
 
     private val BLUE_SPOTTED_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/stingray/stingray_blue_spotted.png")
     private val SPOTTED_EAGLE_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/stingray/stingray_spotted_eagle.png")

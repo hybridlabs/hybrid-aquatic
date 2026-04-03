@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class SeaUrchinEntityModel : HybridAquaticCritterEntityModel<SeaUrchinEntity>("sea_urchin") {
+class SeaUrchinEntityModel : HACritterEntityModel<SeaUrchinEntity>("sea_urchin") {
 
     private val largeTextures = listOf(
         ResourceLocation("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_black.png"),

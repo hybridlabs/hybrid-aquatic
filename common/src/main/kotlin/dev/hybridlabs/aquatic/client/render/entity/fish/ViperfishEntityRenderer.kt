@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.ViperfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class ViperfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<ViperfishEntity>(context, ViperfishEntityModel(), true, false)
+    HAFishEntityRenderer<ViperfishEntity>(context, ViperfishEntityModel(), true, false)

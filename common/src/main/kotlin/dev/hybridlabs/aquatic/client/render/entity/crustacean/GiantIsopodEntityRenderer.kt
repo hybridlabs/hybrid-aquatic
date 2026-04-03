@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.crustacean.GiantIsopodEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class GiantIsopodEntityRenderer(context: Context) :
-    HybridAquaticCrustaceanEntityRenderer<GiantIsopodEntity>(context, GiantIsopodEntityModel(), true, false)
+    HACrustaceanEntityRenderer<GiantIsopodEntity>(context, GiantIsopodEntityModel(), true, false)

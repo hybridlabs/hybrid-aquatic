@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.BettaEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class BettaEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<BettaEntity>(context, BettaEntityModel(), false, false)
+    HAFishEntityRenderer<BettaEntity>(context, BettaEntityModel(), false, false)

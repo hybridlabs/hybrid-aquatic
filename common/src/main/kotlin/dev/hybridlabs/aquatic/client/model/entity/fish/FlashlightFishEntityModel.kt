@@ -9,7 +9,7 @@ import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
 import kotlin.math.abs
 
-class FlashlightFishEntityModel : HybridAquaticFishEntityModel<FlashlightFishEntity>("flashlight_fish") {
+class FlashlightFishEntityModel : HAFishEntityModel<FlashlightFishEntity>("flashlight_fish") {
     override fun getRenderType(animatable: FlashlightFishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

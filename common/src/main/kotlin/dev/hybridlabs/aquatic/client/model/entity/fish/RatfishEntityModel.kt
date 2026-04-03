@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class RatfishEntityModel : HybridAquaticFishEntityModel<RatfishEntity>("ratfish") {
+class RatfishEntityModel : HAFishEntityModel<RatfishEntity>("ratfish") {
     override fun getRenderType(animatable: RatfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

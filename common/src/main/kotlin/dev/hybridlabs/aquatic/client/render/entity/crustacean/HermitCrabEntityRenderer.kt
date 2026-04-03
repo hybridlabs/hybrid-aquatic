@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 import net.minecraft.world.item.Items
 
 class HermitCrabEntityRenderer(context: Context) :
-    HybridAquaticCrustaceanEntityRenderer<HermitCrabEntity>(context, HermitCrabEntityModel(), true, false) {
+    HACrustaceanEntityRenderer<HermitCrabEntity>(context, HermitCrabEntityModel(), true, false) {
 
     init {
         addRenderLayer(HybridAquaticShellLayer(this, Items.NAUTILUS_SHELL))

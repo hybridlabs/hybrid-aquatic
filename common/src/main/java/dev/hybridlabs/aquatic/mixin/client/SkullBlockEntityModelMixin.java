@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.mixin.client;
 import com.google.common.collect.ImmutableMap;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.hybridlabs.aquatic.block.PlushieBlock;
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers;
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers;
 import kotlin.enums.EnumEntries;
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -42,6 +42,6 @@ public abstract class SkullBlockEntityModelMixin {
     private static void injectModels(EntityModelSet modelLoader, CallbackInfoReturnable<Map<SkullBlock.Type,
             SkullModelBase>> cir, @Local ImmutableMap.Builder<SkullBlock.Type, SkullModelBase> builder) {
         // inject plushie variants
-        HybridAquaticEntityModelLayers.INSTANCE.injectModels(modelLoader, builder);
+        HAEntityModelLayers.INSTANCE.injectModels(modelLoader, builder);
     }
 }

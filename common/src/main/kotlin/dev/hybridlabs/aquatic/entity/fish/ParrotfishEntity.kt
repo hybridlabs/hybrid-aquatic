@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -15,12 +15,12 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 class ParrotfishEntity(type: EntityType<out ParrotfishEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world) {
+    HAFishEntity(type, world) {
 
     override fun getTargetConfig() =
         MobTargetConfiguration.ofPrey(
-            HybridAquaticEntityTags.LARGE_CREATURES,
-            HybridAquaticEntityTags.ALL_SHARKS
+            HAEntityTags.LARGE_CREATURES,
+            HAEntityTags.ALL_SHARKS
         )
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -28,7 +28,7 @@ class ParrotfishEntity(type: EntityType<out ParrotfishEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HybridAquaticItems.CORAL_CHUNK.get())
+        return stack.`is`(HAAquaticItems.CORAL_CHUNK.get())
     }
 
     companion object {

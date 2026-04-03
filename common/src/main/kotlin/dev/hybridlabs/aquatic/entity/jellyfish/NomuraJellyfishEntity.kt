@@ -7,7 +7,7 @@ import net.minecraft.world.level.Level
 
 
 class NomuraJellyfishEntity(entityType: EntityType<out NomuraJellyfishEntity>, world: Level) :
-    HybridAquaticJellyfishEntity(entityType, world, true, 1) {
+    HAJellyfishEntity(entityType, world, true, 1) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
 class FrilledSharkEntity(type: EntityType<out FrilledSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(type, world) {
+    HASharkEntity(type, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -24,12 +24,12 @@ class FrilledSharkEntity(type: EntityType<out FrilledSharkEntity>, world: Level)
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES,
-                HybridAquaticEntityTags.SMALL_SHARK,
-                HybridAquaticEntityTags.OCTOPUS,
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.SMALL_SHARK,
+                HAEntityTags.OCTOPUS,
             ),
             listOf(
-                HybridAquaticEntityTags.LARGE_SHARK
+                HAEntityTags.LARGE_SHARK
             ),
         )
         fun createMobAttributes(): AttributeSupplier.Builder {

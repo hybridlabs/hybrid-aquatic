@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
+import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.loot.HALootTables
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.levelgen.feature.Feature
@@ -27,11 +27,11 @@ class SuspiciousRedSandDiskFeature(
             origin.offset(-radius, -halfHeight, -radius),
             origin.offset(radius, halfHeight, radius)
         ).forEach { pos ->
-            if (level.getBlockState(pos).`is`(HybridAquaticBlocks.SUSPICIOUS_RED_SAND.get())) {
+            if (level.getBlockState(pos).`is`(HABlocks.SUSPICIOUS_RED_SAND.get())) {
                 level.getBlockEntity(pos, BlockEntityType.BRUSHABLE_BLOCK)
                     .ifPresent { brushable ->
                         brushable.setLootTable(
-                            HybridAquaticLootTables.PLACER_RIVER_ARCHAEOLOGY_ID,
+                            HALootTables.PLACER_RIVER_ARCHAEOLOGY_ID,
                             pos.asLong()
                         )
                     }

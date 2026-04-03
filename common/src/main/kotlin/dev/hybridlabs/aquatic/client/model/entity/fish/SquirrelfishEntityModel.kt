@@ -9,7 +9,7 @@ import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
 import kotlin.math.abs
 
-class SquirrelfishEntityModel : HybridAquaticFishEntityModel<SquirrelfishEntity>("squirrelfish") {
+class SquirrelfishEntityModel : HAFishEntityModel<SquirrelfishEntity>("squirrelfish") {
     override fun getRenderType(animatable: SquirrelfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

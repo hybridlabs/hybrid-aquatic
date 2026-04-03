@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.fish.MahiEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class MahiEntityModel : HybridAquaticFishEntityModel<MahiEntity>("mahi") {
+class MahiEntityModel : HAFishEntityModel<MahiEntity>("mahi") {
 
     private val POMPANO_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/mahi/mahi_pompano.png")
 

@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -27,12 +27,12 @@ import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class FlashlightFishEntity(type: EntityType<out FlashlightFishEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(type, world) {
+    HASchoolingFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_CREATURES,
-        HybridAquaticEntityTags.LARGE_CREATURES,
-        HybridAquaticEntityTags.ALL_SHARKS
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
     )
 
     override fun registerGoals() {
@@ -165,7 +165,7 @@ class FlashlightFishEntity(type: EntityType<out FlashlightFishEntity>, world: Le
             }
 
             if (newFishCount in 1..<oldFishCount && level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS)) {
-                spawnAtLocation(HybridAquaticItems.FLASHLIGHT_FISH.get())
+                spawnAtLocation(HAAquaticItems.FLASHLIGHT_FISH.get())
             }
         }
 

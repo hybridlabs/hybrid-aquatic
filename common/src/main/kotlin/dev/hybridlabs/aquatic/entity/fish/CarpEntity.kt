@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
@@ -30,13 +30,13 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class CarpEntity(type: EntityType<out CarpEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world),
+    HAFishEntity(type, world),
     VariantHolder<CarpEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HybridAquaticEntityTags.MEDIUM_CREATURES,
-        HybridAquaticEntityTags.LARGE_CREATURES,
-        HybridAquaticEntityTags.ALL_SHARKS
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
     )
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -118,7 +118,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) :
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.CHERRY) -> {
+                        biome.`is`(HABiomeTags.CHERRY) -> {
                             KOI
                         }
 

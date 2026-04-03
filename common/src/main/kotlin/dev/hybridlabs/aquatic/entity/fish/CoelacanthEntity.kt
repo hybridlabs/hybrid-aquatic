@@ -1,14 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class CoelacanthEntity(type: EntityType<out CoelacanthEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world) {
+    HAFishEntity(type, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -19,11 +19,11 @@ class CoelacanthEntity(type: EntityType<out CoelacanthEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES,
-                HybridAquaticEntityTags.ALL_CEPHALOPODS
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

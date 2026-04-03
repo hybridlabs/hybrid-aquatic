@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.mixin;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
+import dev.hybridlabs.aquatic.block.HABlocks;
 import dev.hybridlabs.aquatic.item.HybridAquaticItems;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
@@ -43,7 +43,7 @@ public class EntityMixin {
                     target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
     )
     private boolean decorativeBubbleColumn_getBlockSpeedFactorParity(BlockState instance, Block block, Operation<Boolean> original) {
-        return instance.is(HybridAquaticBlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
+        return instance.is(HABlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
     }
 
     @WrapOperation(
@@ -53,6 +53,6 @@ public class EntityMixin {
                     target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
     )
     private boolean decorativeBubbleColumn_isInBubbleColumnParity(BlockState instance, Block block, Operation<Boolean> original) {
-        return instance.is(HybridAquaticBlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
+        return instance.is(HABlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
     }
 }

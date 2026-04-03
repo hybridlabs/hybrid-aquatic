@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
+import dev.hybridlabs.aquatic.block.HABlocks;
 import net.minecraft.world.entity.ai.goal.BreathAirGoal;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -19,6 +19,6 @@ public class BreathAirGoalMixin {
 					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
 	)
 	private boolean decorativeBubbleColumn_givesAirParity(BlockState instance, Block block, Operation<Boolean> original) {
-		return instance.is(HybridAquaticBlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
+		return instance.is(HABlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
 	}
 }

@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -10,7 +10,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
-class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: Level) : HybridAquaticSharkEntity(type, world) {
+class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: Level) : HASharkEntity(type, world) {
     override fun getTargetConfig() = TARGET_CONFIG
 
     override val isPassive: Boolean = false
@@ -26,20 +26,20 @@ class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: 
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HybridAquaticItems.BLUE_SPOTTED_STINGRAY.get())
+        return stack.`is`(HAAquaticItems.BLUE_SPOTTED_STINGRAY.get())
     }
 
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.CRAB,
-                HybridAquaticEntityTags.LOBSTER,
-                HybridAquaticEntityTags.SMALL_CREATURES,
-                HybridAquaticEntityTags.SMALL_SHARK,
-                HybridAquaticEntityTags.RAY,
+                HAEntityTags.CRAB,
+                HAEntityTags.LOBSTER,
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.SMALL_SHARK,
+                HAEntityTags.RAY,
             ),
             listOf(
-                HybridAquaticEntityTags.LARGE_SHARK
+                HAEntityTags.LARGE_SHARK
             ),
         )
 

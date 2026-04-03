@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.SurgeonfishEntity
 import net.minecraft.resources.ResourceLocation
 
-class SurgeonfishEntityModel : HybridAquaticFishEntityModel<SurgeonfishEntity>("surgeonfish") {
+class SurgeonfishEntityModel : HAFishEntityModel<SurgeonfishEntity>("surgeonfish") {
 
     private val BLUE_TANG_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/surgeonfish/surgeonfish_blue_tang.png")
     private val POWDER_BLUE_TANG_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/surgeonfish/surgeonfish_powder_blue_tang.png")

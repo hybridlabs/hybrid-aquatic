@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.crustacean.YetiCrabEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class YetiCrabEntityRenderer(context: Context) :
-    HybridAquaticCrustaceanEntityRenderer<YetiCrabEntity>(context, YetiCrabEntityModel(), true, false)
+    HACrustaceanEntityRenderer<YetiCrabEntity>(context, YetiCrabEntityModel(), true, false)

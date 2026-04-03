@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.cephalopod.CuttlefishEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class CuttlefishEntityModel : HybridAquaticCephalopodEntityModel<CuttlefishEntity>("cuttlefish") {
+class CuttlefishEntityModel : HACephalopodEntityModel<CuttlefishEntity>("cuttlefish") {
 
     private val commonTextures = listOf(
         ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_4.png"),

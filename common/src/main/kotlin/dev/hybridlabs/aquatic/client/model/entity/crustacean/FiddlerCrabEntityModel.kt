@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.crustacean.FiddlerCrabEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class FiddlerCrabEntityModel : HybridAquaticCrustaceanEntityModel<FiddlerCrabEntity>("fiddler_crab") {
+class FiddlerCrabEntityModel : HACrustaceanEntityModel<FiddlerCrabEntity>("fiddler_crab") {
 
     private val commonTextures = listOf(
         ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_blue.png"),

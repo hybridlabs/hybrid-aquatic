@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.crustacean.HermitCrabEntity
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.HAAquaticItems
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Items
 
-class HermitCrabEntityModel : HybridAquaticCrustaceanEntityModel<HermitCrabEntity>("hermit_crab") {
+class HermitCrabEntityModel : HACrustaceanEntityModel<HermitCrabEntity>("hermit_crab") {
 
     private val SHELL_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_shell.png")
     private val OMINOUS_CONCH_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_ominous_conch.png")
@@ -19,14 +19,14 @@ class HermitCrabEntityModel : HybridAquaticCrustaceanEntityModel<HermitCrabEntit
 
     override fun getTextureResource(animatable: HermitCrabEntity): ResourceLocation {
         return if (animatable.shellItem.`is`(Items.NAUTILUS_SHELL)) SHELL_TEXTURE
-        else if (animatable.shellItem.`is`(HybridAquaticItems.OMINOUS_CONCH.get())) OMINOUS_CONCH_TEXTURE
+        else if (animatable.shellItem.`is`(HAAquaticItems.OMINOUS_CONCH.get())) OMINOUS_CONCH_TEXTURE
         else if (animatable.shellItem.isEmpty) NONE_TEXTURE
         else BLOCK_TEXTURE
     }
 
     override fun getModelResource(animatable: HermitCrabEntity): ResourceLocation {
         return if (animatable.shellItem.`is`(Items.NAUTILUS_SHELL)) SHELL_MODEL
-        else if ((animatable.shellItem.`is`(HybridAquaticItems.OMINOUS_CONCH.get()))) OMINOUS_CONCH_MODEL
+        else if ((animatable.shellItem.`is`(HAAquaticItems.OMINOUS_CONCH.get()))) OMINOUS_CONCH_MODEL
         else if (animatable.shellItem.isEmpty) NONE_MODEL
         else BLOCK_MODEL
     }

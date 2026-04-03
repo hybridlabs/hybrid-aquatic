@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.jellyfish.FireworkJellyfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class FireworkJellyfishEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<FireworkJellyfishEntity>(context, FireworkJellyfishEntityModel(), true, true)
+    HAJellyfishEntityRenderer<FireworkJellyfishEntity>(context, FireworkJellyfishEntityModel(), true, true)

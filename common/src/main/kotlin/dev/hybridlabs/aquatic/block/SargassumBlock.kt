@@ -27,7 +27,7 @@ class SargassumBlock(settings: Properties) :
     }
 
     override fun getBodyBlock(): Block {
-        return HybridAquaticBlocks.SARGASSUM_PLANT.get()
+        return HABlocks.SARGASSUM_PLANT.get()
     }
 
     override fun canAttachTo(state: BlockState): Boolean {

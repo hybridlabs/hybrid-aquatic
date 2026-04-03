@@ -18,8 +18,8 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
 
-class ShrimpEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, false),
+class ShrimpEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
+    HACrustaceanEntity(entityType, world, false),
     OverlayTextureFeature {
 
     companion object {

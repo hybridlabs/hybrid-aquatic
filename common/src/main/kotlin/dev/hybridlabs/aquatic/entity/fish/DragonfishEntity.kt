@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -13,7 +13,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("UNUSED_PARAMETER", "DEPRECATION")
 class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world) {
+    HAFishEntity(type, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -28,12 +28,12 @@ class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES
+                HAEntityTags.SMALL_CREATURES
             ),
             listOf(
-                HybridAquaticEntityTags.MEDIUM_CREATURES,
-                HybridAquaticEntityTags.LARGE_CREATURES,
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.MEDIUM_CREATURES,
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

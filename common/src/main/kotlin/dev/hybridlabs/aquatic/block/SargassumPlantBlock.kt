@@ -18,7 +18,7 @@ import net.minecraft.world.phys.shapes.Shapes
 class SargassumPlantBlock(settings: Properties) :
     GrowingPlantBodyBlock(settings, Direction.UP, Shapes.block(), true), LiquidBlockContainer {
     override fun getHeadBlock(): GrowingPlantHeadBlock {
-        return HybridAquaticBlocks.SARGASSUM.get() as GrowingPlantHeadBlock
+        return HABlocks.SARGASSUM.get() as GrowingPlantHeadBlock
     }
 
     @Deprecated("Deprecated in Java")

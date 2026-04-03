@@ -5,7 +5,7 @@ import net.minecraft.client.model.geom.PartNames
 import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
 
-class KarcinomaEntityModel : HybridAquaticMinionEntityModel<KarcinomaEntity>("karcinoma") {
+class KarcinomaEntityModel : HAMinionEntityModel<KarcinomaEntity>("karcinoma") {
 
 
     override fun setCustomAnimations(

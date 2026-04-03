@@ -11,8 +11,8 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-class CoconutCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, false) {
+class CoconutCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
+    HACrustaceanEntity(entityType, world, false) {
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

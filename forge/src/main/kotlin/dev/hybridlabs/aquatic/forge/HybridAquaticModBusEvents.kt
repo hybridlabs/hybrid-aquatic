@@ -4,24 +4,24 @@ import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
-import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BASKING_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BULL_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.FRILLED_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.GREAT_WHITE_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.HAMMERHEAD_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.THRESHER_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.TIGER_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.WHALE_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BASKING_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BULL_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.FRILLED_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.GREAT_WHITE_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.HAMMERHEAD_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.THRESHER_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.TIGER_SHARK_PLUSHIE
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.WHALE_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
-import dev.hybridlabs.aquatic.client.render.block.HybridAquaticBlockRenderers
+import dev.hybridlabs.aquatic.client.render.block.HABlockRenderers
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import dev.hybridlabs.aquatic.world.gen.biome.HybridAquaticBiomes
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.potions.HAPotions
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import net.minecraft.client.model.EntityModel
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.MultiBufferSource
@@ -63,13 +63,13 @@ object HybridAquaticModBusEvents {
             },
             serverTarget = {
                 MOD_BUS.addListener(::onServerSetup)
-                HybridAquaticBiomes.addBiomes()
+                HABiomes.addBiomes()
             })
     }
 
     private fun loadSeaMessages(event: DataPackRegistryEvent.NewRegistry) {
         event.dataPackRegistry(
-            HybridAquaticRegistryKeys.SEA_MESSAGE,
+            HARegistryKeys.SEA_MESSAGE,
             SeaMessage.CODEC,
             SeaMessage.CODEC,
         )
@@ -77,7 +77,7 @@ object HybridAquaticModBusEvents {
 
     private fun registerPotionsRecipes(event: FMLCommonSetupEvent) {
         event.enqueueWork {
-            HybridAquaticPotions.registerPotionRecipes()
+            HAPotions.registerPotionRecipes()
         }
     }
 
@@ -86,7 +86,7 @@ object HybridAquaticModBusEvents {
     }
 
     private fun addBiomes(event: FMLCommonSetupEvent) {
-        HybridAquaticBiomes.addBiomes()
+        HABiomes.addBiomes()
     }
 
     private fun registerModelLayers(event: EntityRenderersEvent.RegisterLayerDefinitions) {
@@ -101,21 +101,21 @@ object HybridAquaticModBusEvents {
     }
 
     private fun registerBlockEntityRenderers(event: EntityRenderersEvent.RegisterRenderers) {
-        event.registerBlockEntityRenderer(HybridAquaticBlockEntityTypes.ANEMONE.get(), ::AnemoneBlockEntityRenderer)
+        event.registerBlockEntityRenderer(HABlockEntityTypes.ANEMONE.get(), ::AnemoneBlockEntityRenderer)
         event.registerBlockEntityRenderer(
-            HybridAquaticBlockEntityTypes.STRAWBERRY_ANEMONE.get(),
+            HABlockEntityTypes.STRAWBERRY_ANEMONE.get(),
             ::StrawberryAnemoneBlockEntityRenderer
         )
         event.registerBlockEntityRenderer(
-            HybridAquaticBlockEntityTypes.GIANT_GREEN_ANEMONE.get(),
+            HABlockEntityTypes.GIANT_GREEN_ANEMONE.get(),
             ::GiantGreenAnemoneBlockEntityRenderer
         )
         event.registerBlockEntityRenderer(
-            HybridAquaticBlockEntityTypes.MESSAGE_IN_A_BOTTLE.get(),
+            HABlockEntityTypes.MESSAGE_IN_A_BOTTLE.get(),
             ::MessageInABottleBlockEntityRenderer
         )
-        event.registerBlockEntityRenderer(HybridAquaticBlockEntityTypes.BUOY.get(), ::BuoyBlockEntityRenderer)
-        HybridAquaticBlockRenderers.registerRenderShapes()
+        event.registerBlockEntityRenderer(HABlockEntityTypes.BUOY.get(), ::BuoyBlockEntityRenderer)
+        HABlockRenderers.registerRenderShapes()
     }
 
     private fun registerSkullModels(event: EntityRenderersEvent.CreateSkullModels) {
@@ -158,31 +158,31 @@ object HybridAquaticModBusEvents {
     private fun onClientSetup(event: FMLClientSetupEvent) {
         Constants.LOG.info("Initializing client...")
         registerTrinketRenderer(
-            HybridAquaticItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD
+            HAAquaticItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HybridAquaticItems.EEL_SCARF.get(), EquipmentSlot.CHEST
+            HAAquaticItems.EEL_SCARF.get(), EquipmentSlot.CHEST
         )
         registerTrinketRenderer(
-            HybridAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST
+            HAAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST
         )
         registerTrinketRenderer(
-            HybridAquaticItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD
+            HAAquaticItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HybridAquaticItems.BROWN_HATXOLOTL.get(), EquipmentSlot.HEAD
+            HAAquaticItems.BROWN_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HybridAquaticItems.BLUE_HATXOLOTL.get(), EquipmentSlot.HEAD
+            HAAquaticItems.BLUE_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HybridAquaticItems.CYAN_HATXOLOTL.get(), EquipmentSlot.HEAD
+            HAAquaticItems.CYAN_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HybridAquaticItems.GOLD_HATXOLOTL.get(), EquipmentSlot.HEAD
+            HAAquaticItems.GOLD_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HybridAquaticItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD
+            HAAquaticItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
     }
 

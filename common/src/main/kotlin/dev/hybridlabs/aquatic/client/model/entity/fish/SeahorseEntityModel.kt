@@ -6,7 +6,7 @@ import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 
-class SeahorseEntityModel : HybridAquaticFishEntityModel<SeahorseEntity>("seahorse") {
+class SeahorseEntityModel : HAFishEntityModel<SeahorseEntity>("seahorse") {
 
     private val COMMON_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_common.png")
     private val PYGMY_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_pygmy.png")

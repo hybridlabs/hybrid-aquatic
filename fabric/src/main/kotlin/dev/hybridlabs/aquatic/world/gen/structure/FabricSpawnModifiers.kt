@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.world.gen.structure
 
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.platform.Services
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.server.MinecraftServer
@@ -23,7 +23,7 @@ object FabricSpawnModifiers {
 
     fun load(server: MinecraftServer) {
         val modifierRegistry =
-            server.registryAccess().registryOrThrow(HybridAquaticRegistryKeys.STRUCTURE_SPAWN_MODIFIER)
+            server.registryAccess().registryOrThrow(HARegistryKeys.STRUCTURE_SPAWN_MODIFIER)
         val structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE)
         modifierRegistry.forEach {
             structureRegistry.getHolder(it.structure).ifPresent { structure ->

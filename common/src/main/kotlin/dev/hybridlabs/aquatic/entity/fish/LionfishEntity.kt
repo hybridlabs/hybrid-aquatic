@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class LionfishEntity(type: EntityType<out LionfishEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world) {
+    HAFishEntity(type, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -23,12 +23,12 @@ class LionfishEntity(type: EntityType<out LionfishEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES,
-                HybridAquaticEntityTags.ALL_CRUSTACEANS
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HybridAquaticEntityTags.LARGE_CREATURES,
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

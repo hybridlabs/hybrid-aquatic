@@ -1,14 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class ViperfishEntity(entityType: EntityType<out ViperfishEntity>, world: Level) :
-    HybridAquaticFishEntity(entityType, world) {
+    HAFishEntity(entityType, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -19,12 +19,12 @@ class ViperfishEntity(entityType: EntityType<out ViperfishEntity>, world: Level)
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES
+                HAEntityTags.SMALL_CREATURES
             ),
             listOf(
-                HybridAquaticEntityTags.MEDIUM_CREATURES,
-                HybridAquaticEntityTags.LARGE_CREATURES,
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.MEDIUM_CREATURES,
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

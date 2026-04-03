@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class CosmicJellyfishEntity(entityType: EntityType<out CosmicJellyfishEntity>, world: Level) :
-    HybridAquaticJellyfishEntity(entityType, world, false, 0) {
+    HAJellyfishEntity(entityType, world, false, 0) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

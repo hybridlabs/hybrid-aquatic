@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.CorydoraEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class CorydoraEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<CorydoraEntity>(context, CorydoraEntityModel(), true, false)
+    HAFishEntityRenderer<CorydoraEntity>(context, CorydoraEntityModel(), true, false)

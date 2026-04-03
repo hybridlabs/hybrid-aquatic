@@ -8,7 +8,7 @@ import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
 import kotlin.math.abs
 
-class MackerelEntityModel : HybridAquaticFishEntityModel<MackerelEntity>("mackerel") {
+class MackerelEntityModel : HAFishEntityModel<MackerelEntity>("mackerel") {
 
     override fun getModelResource(animatable: MackerelEntity): ResourceLocation {
         val fish = animatable.getFishCount()

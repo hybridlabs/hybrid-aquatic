@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
@@ -90,7 +90,7 @@ class OminousConchItem(
 
         if (server.tickCount >= startTick + SUMMON_DELAY_TICKS) {
 
-            val entity = HybridAquaticEntityTypes.SHELL_BEAST.get().create(level)
+            val entity = HAEntityTypes.SHELL_BEAST.get().create(level)
             entity?.moveTo(pos.x + 0.5, pos.y.toDouble(), pos.z + 0.5, 0f, 0f)
             if (entity != null) {
                 level.addFreshEntity(entity)

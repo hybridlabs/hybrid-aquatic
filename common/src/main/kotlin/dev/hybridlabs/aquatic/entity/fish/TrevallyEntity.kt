@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.entity.mammal.HybridAquaticSirenianEntity
-import dev.hybridlabs.aquatic.entity.shark.HybridAquaticSharkEntity
+import dev.hybridlabs.aquatic.entity.mammal.HASirenianEntity
+import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.PathfinderMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.level.Level
 
 class TrevallyEntity(type: EntityType<out TrevallyEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(type, world) {
+    HASchoolingFishEntity(type, world) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4
@@ -44,11 +44,11 @@ class TrevallyEntity(type: EntityType<out TrevallyEntity>, world: Level) :
         private val maxDistance: Float
     ) : Goal() {
 
-        private lateinit var target: HybridAquaticSharkEntity
+        private lateinit var target: HASharkEntity
 
         override fun canUse(): Boolean {
             val closestShark = mob.level().getEntitiesOfClass(
-                HybridAquaticSharkEntity::class.java,
+                HASharkEntity::class.java,
                 mob.boundingBox.inflate(maxDistance.toDouble())
             ) { true }
                 .minByOrNull { it.distanceToSqr(mob) }
@@ -86,11 +86,11 @@ class TrevallyEntity(type: EntityType<out TrevallyEntity>, world: Level) :
         private val maxDistance: Float
     ) : Goal() {
 
-        private lateinit var target: HybridAquaticSirenianEntity
+        private lateinit var target: HASirenianEntity
 
         override fun canUse(): Boolean {
             val closestSirenian = mob.level().getEntitiesOfClass(
-                HybridAquaticSirenianEntity::class.java,
+                HASirenianEntity::class.java,
                 mob.boundingBox.inflate(maxDistance.toDouble())
             ) { true }
                 .minByOrNull { it.distanceToSqr(mob) }

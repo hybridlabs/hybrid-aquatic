@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.item.HAAquaticItems
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
@@ -25,7 +25,7 @@ class ClamBlock(properties: Properties) : CropBlock(properties),
     LiquidBlockContainer {
 
     override fun getBaseSeedId(): ItemLike {
-        return HybridAquaticItems.CLAM.get()
+        return HAAquaticItems.CLAM.get()
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
@@ -33,7 +33,7 @@ class ClamBlock(properties: Properties) : CropBlock(properties),
     }
 
     override fun mayPlaceOn(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
-        return state.`is`(Blocks.SAND) || state.`is`(HybridAquaticBlocks.GRASSY_SAND.get())
+        return state.`is`(Blocks.SAND) || state.`is`(HABlocks.GRASSY_SAND.get())
     }
 
     override fun canPlaceLiquid(world: BlockGetter, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
@@ -46,7 +46,7 @@ class ClamBlock(properties: Properties) : CropBlock(properties),
 
         val fluidState = level.getFluidState(pos)
 
-        return (belowState.`is`(Blocks.SAND) || belowState.`is`(HybridAquaticBlocks.GRASSY_SAND.get()))
+        return (belowState.`is`(Blocks.SAND) || belowState.`is`(HABlocks.GRASSY_SAND.get()))
                 && fluidState.`is`(FluidTags.WATER)
                 && fluidState.amount == 8
     }

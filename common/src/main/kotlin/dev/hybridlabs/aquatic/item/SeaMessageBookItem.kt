@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.block.SeaMessage
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.minecraft.ChatFormatting
 import net.minecraft.core.RegistryAccess
 import net.minecraft.nbt.Tag
@@ -63,12 +63,12 @@ SeaMessageBookItem(settings: Properties) : Item(settings) {
 
             val unparsedId = nbt.getString(SEA_MESSAGE_KEY)
             val id = ResourceLocation.tryParse(unparsedId) ?: return null
-            val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
+            val registry = registryManager.registryOrThrow(HARegistryKeys.SEA_MESSAGE)
             return registry.get(id)
         }
 
         fun createItemStack(message: SeaMessage, registryManager: RegistryAccess): ItemStack {
-            val stack = ItemStack(HybridAquaticItems.SEA_MESSAGE_BOOK.get())
+            val stack = ItemStack(HAAquaticItems.SEA_MESSAGE_BOOK.get())
             setSeaMessage(stack, message, registryManager)
             return stack
         }

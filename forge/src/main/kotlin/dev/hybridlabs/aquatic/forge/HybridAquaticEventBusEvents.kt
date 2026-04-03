@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.forge
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.tags.FluidTags
 import net.minecraftforge.common.MinecraftForge.EVENT_BUS
@@ -17,7 +17,7 @@ object HybridAquaticEventBusEvents {
 
         if(entity.isEyeInFluid(FluidTags.WATER) &&
             world.getBlockState(BlockPos.containing(entity.x, entity.eyeY, entity.z))
-                .`is`(HybridAquaticBlocks.DECORATIVE_BUBBLE_COLUMN.get())) {
+                .`is`(HABlocks.DECORATIVE_BUBBLE_COLUMN.get())) {
             event.setCanBreathe(true)
             event.setCanRefillAir(true)
         }

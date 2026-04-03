@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.shark.SixgillSharkEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class SixgillSharkEntityRenderer(context: Context) :
-    HybridAquaticSharkEntityRenderer<SixgillSharkEntity>(context, SixgillSharkEntityModel(), true)
+    HASharkEntityRenderer<SixgillSharkEntity>(context, SixgillSharkEntityModel(), true)

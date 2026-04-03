@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.shark.SleeperSharkEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class SleeperSharkEntityRenderer(context: Context) :
-    HybridAquaticSharkEntityRenderer<SleeperSharkEntity>(context, SleeperSharkEntityModel(), true)
+    HASharkEntityRenderer<SleeperSharkEntity>(context, SleeperSharkEntityModel(), true)

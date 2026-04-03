@@ -1,22 +1,22 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class RatfishEntity(type: EntityType<out RatfishEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world) {
+    HAFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.create(
         listOf(
-            HybridAquaticEntityTags.ALL_CRUSTACEANS
+            HAEntityTags.ALL_CRUSTACEANS
         ),
         listOf(
-            HybridAquaticEntityTags.LARGE_CREATURES,
-            HybridAquaticEntityTags.ALL_SHARKS
+            HAEntityTags.LARGE_CREATURES,
+            HAEntityTags.ALL_SHARKS
         ),
     )
 

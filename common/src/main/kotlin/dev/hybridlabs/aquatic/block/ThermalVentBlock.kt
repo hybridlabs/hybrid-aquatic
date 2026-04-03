@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.effect.HAMobEffects
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
@@ -158,7 +158,7 @@ class ThermalVentBlock(
         if (state.getValue(THICKNESS) == ThermalVentPosition.TIP && state.getValue(WATERLOGGED)) {
             if (entity is Player && !entity.isInvulnerableTo(world.damageSources().hotFloor())) {
                 entity.hurt(world.damageSources().hotFloor(), fireDamage.toFloat())
-                entity.addEffect(MobEffectInstance(HybridAquaticMobEffects.CORROSION.get(), 200, 0))
+                entity.addEffect(MobEffectInstance(HAMobEffects.CORROSION.get(), 200, 0))
             }
         }
 

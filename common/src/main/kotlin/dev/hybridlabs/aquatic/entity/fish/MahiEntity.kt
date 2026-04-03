@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -27,7 +27,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(type, world),
+    HASchoolingFishEntity(type, world),
     VariantHolder<MahiEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
@@ -37,7 +37,7 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HybridAquaticItems.RAW_TENTACLE.get())
+        return stack.`is`(HAAquaticItems.RAW_TENTACLE.get())
     }
 
     override fun finalizeSpawn(
@@ -57,7 +57,7 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
             if (fishCount > 0 && !level().isClientSide()) {
                 for (i in 0 until  fishCount) {
                     val distance = 1.5f
-                    val entity = MahiEntity(HybridAquaticEntityTypes.MAHI.get(), this.level())
+                    val entity = MahiEntity(HAEntityTypes.MAHI.get(), this.level())
                     entity.variant = this.variant
                     entity.moveTo(
                         this.x + this.random.nextFloat() * distance,
@@ -81,11 +81,11 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES,
-                HybridAquaticEntityTags.ALL_CEPHALOPODS
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

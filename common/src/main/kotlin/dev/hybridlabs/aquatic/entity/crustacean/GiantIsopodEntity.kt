@@ -11,8 +11,8 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 
-class GiantIsopodEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, false) {
+class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
+    HACrustaceanEntity(entityType, world, false) {
 
     //#region Hiding
     private var isHiding: Boolean = false
@@ -59,7 +59,7 @@ class GiantIsopodEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity
         )
         controllerRegistrar.add(
             AnimationController(this, "Hide", 4,
-                AnimationController.AnimationStateHandler { state: AnimationState<HybridAquaticCrustaceanEntity> ->
+                AnimationController.AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
                     if (this.isHiding) {
                         return@AnimationStateHandler state.setAndContinue(HIDE_ANIMATION)
                     } else {

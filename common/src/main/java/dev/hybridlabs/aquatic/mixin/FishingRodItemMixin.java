@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.mixin;
 
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
-import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags;
+import dev.hybridlabs.aquatic.tag.HAItemTags;
 import dev.hybridlabs.aquatic.utils.HandUtils;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -27,7 +27,7 @@ public abstract class FishingRodItemMixin {
         ItemStack mainHandItemStack = user.getItemInHand(hand);
         ItemStack opposingHandItemStack = user.getItemInHand(HandUtils.getOpposingHand(hand));
 
-        if (opposingHandItemStack.is(HybridAquaticItemTags.INSTANCE.getLURE_ITEMS())) {
+        if (opposingHandItemStack.is(HAItemTags.INSTANCE.getLURE_ITEMS())) {
             int lureLevel = EnchantmentHelper.getFishingSpeedBonus(mainHandItemStack);
             int luckLevel = EnchantmentHelper.getFishingLuckBonus(mainHandItemStack);
             FishingHook customBobber = new FishingHook(user, world, lureLevel, luckLevel);

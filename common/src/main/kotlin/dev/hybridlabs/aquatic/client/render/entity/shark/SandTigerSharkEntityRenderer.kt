@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.shark.SandTigerSharkEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class SandTigerSharkEntityRenderer(context: Context) :
-    HybridAquaticSharkEntityRenderer<SandTigerSharkEntity>(context, SandTigerSharkEntityModel(), true)
+    HASharkEntityRenderer<SandTigerSharkEntity>(context, SandTigerSharkEntityModel(), true)

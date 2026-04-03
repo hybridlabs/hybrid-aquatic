@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.TroutEntity
 import net.minecraft.resources.ResourceLocation
 
-class TroutEntityModel : HybridAquaticFishEntityModel<TroutEntity>("trout") {
+class TroutEntityModel : HAFishEntityModel<TroutEntity>("trout") {
 
     private val BULL_TROUT_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/trout/bull_trout.png")
     private val REDBAND_TROUT_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/trout/redband_trout.png")

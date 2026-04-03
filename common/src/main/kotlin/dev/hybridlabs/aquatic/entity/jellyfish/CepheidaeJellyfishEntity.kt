@@ -20,7 +20,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class CepheidaeJellyfishEntity(entityType: EntityType<out CepheidaeJellyfishEntity>, world: Level) :
-    HybridAquaticJellyfishEntity(entityType, world, false, 0),
+    HAJellyfishEntity(entityType, world, false, 0),
     VariantHolder<CepheidaeJellyfishEntity.Companion.Type> {
 
     override fun getMaxSpawnClusterSize(): Int {

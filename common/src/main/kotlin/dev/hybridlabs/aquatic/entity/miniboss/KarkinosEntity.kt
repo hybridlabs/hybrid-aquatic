@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosMeleeAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosSummonGoal
 import net.minecraft.nbt.CompoundTag
@@ -40,8 +40,8 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 
 
-class KarkinosEntity(type: EntityType<out HybridAquaticMinibossEntity>, world: Level) :
-    HybridAquaticMinibossEntity(type, world) {
+class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
+    HAMinibossEntity(type, world) {
     private var flippedTimer: Int = 0
     private var flippedCooldown: Int = 0
     private var summonTimer: Int = 0
@@ -166,7 +166,7 @@ class KarkinosEntity(type: EntityType<out HybridAquaticMinibossEntity>, world: L
             val offsetZ = (random.nextDouble() - 0.5) * 6.0
             val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
 
-            val karcinogen = HybridAquaticEntityTypes.KARCINOGEN.get().create(level())
+            val karcinogen = HAEntityTypes.KARCINOGEN.get().create(level())
             if (karcinogen != null) {
                 karcinogen.moveTo(
                     spawnPos.x.toDouble() + 0.5,
@@ -191,7 +191,7 @@ class KarkinosEntity(type: EntityType<out HybridAquaticMinibossEntity>, world: L
             val offsetZ = (random.nextDouble() - 0.5) * 6.0
             val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
 
-            val karcinoma = HybridAquaticEntityTypes.KARCINOMA.get().create(level())
+            val karcinoma = HAEntityTypes.KARCINOMA.get().create(level())
             if (karcinoma != null) {
                 karcinoma.moveTo(
                     spawnPos.x.toDouble() + 0.5,

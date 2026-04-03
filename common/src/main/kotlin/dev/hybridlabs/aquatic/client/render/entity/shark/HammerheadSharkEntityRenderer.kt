@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.shark.HammerheadSharkEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class HammerheadSharkEntityRenderer(context: Context) :
-    HybridAquaticSharkEntityRenderer<HammerheadSharkEntity>(context, HammerheadSharkEntityModel(), true)
+    HASharkEntityRenderer<HammerheadSharkEntity>(context, HammerheadSharkEntityModel(), true)

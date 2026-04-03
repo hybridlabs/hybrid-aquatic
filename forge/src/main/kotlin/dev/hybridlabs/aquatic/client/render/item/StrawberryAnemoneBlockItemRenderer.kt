@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.render.item
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.block.BlockEntityHelper.Companion.createBlockEntityRendererProviderContext
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
 import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
 import net.minecraft.client.Minecraft
@@ -25,7 +25,7 @@ class StrawberryAnemoneBlockItemRenderer(
     constructor() : this(client.blockEntityRenderDispatcher, client.entityModels)
 
     val blockEntity by lazy {
-        StrawberryAnemoneBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.STRAWBERRY_ANEMONE.get().defaultBlockState())
+        StrawberryAnemoneBlockEntity(BlockPos.ZERO, HABlocks.STRAWBERRY_ANEMONE.get().defaultBlockState())
     }
 
     override fun renderByItem(

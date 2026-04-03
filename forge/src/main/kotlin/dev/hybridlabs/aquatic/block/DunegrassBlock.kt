@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
+import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -13,10 +13,10 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
 
 class DunegrassBlock(settings: Properties): BaseDunegrassBlock(settings){
     override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
-        return ItemStack(HybridAquaticPlatformBlocks.DUNEGRASS.get())
+        return ItemStack(HAPlatformBlocks.DUNEGRASS.get())
     }
     override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
-        val blockState = HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get().defaultBlockState()
+        val blockState = HAPlatformBlocks.TALL_DUNEGRASS.get().defaultBlockState()
         val blockStateUpper = blockState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER)
         val blockPosAbove = pos.above()
 

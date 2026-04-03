@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.critter.SeaSlugEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class SeaSlugEntityModel : HybridAquaticCritterEntityModel<SeaSlugEntity>("sea_slug") {
+class SeaSlugEntityModel : HACritterEntityModel<SeaSlugEntity>("sea_slug") {
 
     private val SPOTTED_SEA_HARE_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/critter/sea_slug/spotted_sea_hare.png")
 

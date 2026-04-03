@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.render.item
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.block.BlockEntityHelper
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
 import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry.DynamicItemRenderer
@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack
 
 class StrawberryAnemoneBlockItemRenderer : DynamicItemRenderer {
     private val strawberryAnemoneBlockEntity =
-        StrawberryAnemoneBlockEntity(BlockPos.ZERO, HybridAquaticBlocks.STRAWBERRY_ANEMONE.get().defaultBlockState())
+        StrawberryAnemoneBlockEntity(BlockPos.ZERO, HABlocks.STRAWBERRY_ANEMONE.get().defaultBlockState())
     private val renderer =
         StrawberryAnemoneBlockEntityRenderer(BlockEntityHelper.createBlockEntityRendererProviderContext())
 

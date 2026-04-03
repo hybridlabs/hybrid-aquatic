@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -23,7 +23,7 @@ import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
 class SeaCucumberEntity(type: EntityType<out SeaCucumberEntity>, world: Level) :
-    HybridAquaticCritterEntity(type, world),
+    HACritterEntity(type, world),
     VariantHolder<SeaCucumberEntity.Companion.Type> {
 
     override fun remove(reason: RemovalReason) {
@@ -36,7 +36,7 @@ class SeaCucumberEntity(type: EntityType<out SeaCucumberEntity>, world: Level) :
                 for (l in 0 until spawnCount) {
                     val offsetX = (level().random.nextFloat() - 0.5f) * 2.0f
                     val offsetZ = (level().random.nextFloat() - 0.5f) * 2.0f
-                    val pearlfishEntity = HybridAquaticEntityTypes.PEARLFISH.get().create(level())
+                    val pearlfishEntity = HAEntityTypes.PEARLFISH.get().create(level())
 
                     pearlfishEntity?.let {
                         it.customName = text

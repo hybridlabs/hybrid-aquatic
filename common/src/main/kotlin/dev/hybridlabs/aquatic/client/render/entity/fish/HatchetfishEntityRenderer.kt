@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.HatchetfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class HatchetfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<HatchetfishEntity>(context, HatchetfishEntityModel(), true, false)
+    HAFishEntityRenderer<HatchetfishEntity>(context, HatchetfishEntityModel(), true, false)

@@ -1,29 +1,29 @@
 package dev.hybridlabs.aquatic
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
+import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
+import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.ForgeSpawnGroupRegistry
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.forge.HybridAquaticEventBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticForgeBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticModBusEvents
-import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
-import dev.hybridlabs.aquatic.loot.HybridAquaticGlobalLootModifier
+import dev.hybridlabs.aquatic.item.HAItemGroups
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAPlatformItems
+import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
-import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings
-import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
-import dev.hybridlabs.aquatic.sound.HybridAquaticSoundEvents
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.painting.HAPaintings
+import dev.hybridlabs.aquatic.potions.HAPotions
+import dev.hybridlabs.aquatic.sound.HASoundEvents
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HybridAquaticInstrumentTags
 import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticFeatures
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HAConfiguredFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HAFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.minecraftforge.fml.common.Mod
@@ -38,29 +38,29 @@ object HybridAquaticForge {
 
         ForgeSpawnGroupRegistry.createHybridAquaticSpawnGroups()
         StructureSpawnModifier.registerHybridAquaticStructureModifiers()
-        HybridAquaticGlobalLootModifier.registerGlobalLootModifiers()
+        HAGlobalLootModifier.registerGlobalLootModifiers()
 
-        HybridAquaticBlocks
-        HybridAquaticPlatformBlocks
-        HybridAquaticSoundEvents
-        HybridAquaticEntityTypes
-        HybridAquaticBlockEntityTypes
-        HybridAquaticPaintings
+        HABlocks
+        HAPlatformBlocks
+        HASoundEvents
+        HAEntityTypes
+        HABlockEntityTypes
+        HAPaintings
 
-        HybridAquaticBiomeTags
+        HABiomeTags
         HybridAquaticInstrumentTags
 
-        HybridAquaticMobEffects
-        HybridAquaticPotions
+        HAMobEffects
+        HAPotions
 
-        HybridAquaticItems
-        HybridAquaticPlatformItems
-        HybridAquaticItemGroups
+        HAAquaticItems
+        HAPlatformItems
+        HAItemGroups
 
-        HybridAquaticFeatures
-        HybridAquaticFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
-        HybridAquaticPlacedFeatures
-        HybridAquaticConfiguredFeatures
+        HAFeatures
+        HAFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
+        HAPlacedFeatures
+        HAConfiguredFeatures
 
         HybridAquaticNetworking.registerPackets()
         HybridAquaticLootPoolEntryTypes

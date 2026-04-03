@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
@@ -17,69 +17,69 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         //#region Vanilla Tags
         getOrCreateTagBuilder(EntityTypeTags.AXOLOTL_HUNT_TARGETS)
             .add(
-                HybridAquaticEntityTypes.TETRA.get(),
-                HybridAquaticEntityTypes.DANIO.get(),
-                HybridAquaticEntityTypes.TIGER_BARB.get(),
-                HybridAquaticEntityTypes.BETTA.get(),
-                HybridAquaticEntityTypes.OSCAR.get(),
-                HybridAquaticEntityTypes.DISCUS.get(),
-                HybridAquaticEntityTypes.CORYDORA.get(),
+                HAEntityTypes.TETRA.get(),
+                HAEntityTypes.DANIO.get(),
+                HAEntityTypes.TIGER_BARB.get(),
+                HAEntityTypes.BETTA.get(),
+                HAEntityTypes.OSCAR.get(),
+                HAEntityTypes.DISCUS.get(),
+                HAEntityTypes.CORYDORA.get(),
             )
         //#endregion
 
         //#region Food Chain Tags
-        getOrCreateTagBuilder(HybridAquaticEntityTags.BAIT_FISH)
+        getOrCreateTagBuilder(HAEntityTags.BAIT_FISH)
             .add(
-                HybridAquaticEntityTypes.MACKEREL.get(),
-                HybridAquaticEntityTypes.HERRING.get(),
-                HybridAquaticEntityTypes.FLYING_FISH.get(),
-                HybridAquaticEntityTypes.SQUIRRELFISH.get(),
-                HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(),
+                HAEntityTypes.MACKEREL.get(),
+                HAEntityTypes.HERRING.get(),
+                HAEntityTypes.FLYING_FISH.get(),
+                HAEntityTypes.SQUIRRELFISH.get(),
+                HAEntityTypes.FLASHLIGHT_FISH.get(),
                 EntityType.COD
             )
             .addOptional(ResourceLocation("fintastic", "minnow"))
             .addOptional(ResourceLocation("spawn", "herring"))
             .addOptional(ResourceLocation("alexsmobs", "flying_fish"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.TOXIC_ANIMALS)
+        getOrCreateTagBuilder(HAEntityTags.TOXIC_ANIMALS)
             .add(
-                HybridAquaticEntityTypes.STONEFISH.get(),
-                HybridAquaticEntityTypes.LIONFISH.get(),
-                HybridAquaticEntityTypes.BLOWFISH.get(),
+                HAEntityTypes.STONEFISH.get(),
+                HAEntityTypes.LIONFISH.get(),
+                HAEntityTypes.BLOWFISH.get(),
                 EntityType.PUFFERFISH
             )
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_CREATURES)
+        getOrCreateTagBuilder(HAEntityTags.SMALL_CREATURES)
             .add(
-                HybridAquaticEntityTypes.CLOWNFISH.get(),
-                HybridAquaticEntityTypes.GARDEN_EEL.get(),
-                HybridAquaticEntityTypes.PLECO.get(),
-                HybridAquaticEntityTypes.SHINER.get(),
-                HybridAquaticEntityTypes.SUNFISH.get(),
-                HybridAquaticEntityTypes.CARP.get(),
-                HybridAquaticEntityTypes.PEARLFISH.get(),
-                HybridAquaticEntityTypes.SNAILFISH.get(),
-                HybridAquaticEntityTypes.BOXFISH.get(),
-                HybridAquaticEntityTypes.OSCAR.get(),
-                HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(),
-                HybridAquaticEntityTypes.MACKEREL.get(),
-                HybridAquaticEntityTypes.HERRING.get(),
-                HybridAquaticEntityTypes.BARRELEYE.get(),
-                HybridAquaticEntityTypes.BETTA.get(),
-                HybridAquaticEntityTypes.TETRA.get(),
-                HybridAquaticEntityTypes.DANIO.get(),
-                HybridAquaticEntityTypes.TIGER_BARB.get(),
-                HybridAquaticEntityTypes.SURGEONFISH.get(),
-                HybridAquaticEntityTypes.DISCUS.get(),
-                HybridAquaticEntityTypes.CORYDORA.get(),
-                HybridAquaticEntityTypes.DAMSELFISH.get(),
-                HybridAquaticEntityTypes.GOURAMI.get(),
-                HybridAquaticEntityTypes.CUTTLEFISH.get(),
-                HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
-                HybridAquaticEntityTypes.FLYING_FISH.get(),
-                HybridAquaticEntityTypes.SQUIRRELFISH.get(),
-                HybridAquaticEntityTypes.STONEFISH.get(),
-                HybridAquaticEntityTypes.PUPFISH.get(),
+                HAEntityTypes.CLOWNFISH.get(),
+                HAEntityTypes.GARDEN_EEL.get(),
+                HAEntityTypes.PLECO.get(),
+                HAEntityTypes.SHINER.get(),
+                HAEntityTypes.SUNFISH.get(),
+                HAEntityTypes.CARP.get(),
+                HAEntityTypes.PEARLFISH.get(),
+                HAEntityTypes.SNAILFISH.get(),
+                HAEntityTypes.BOXFISH.get(),
+                HAEntityTypes.OSCAR.get(),
+                HAEntityTypes.FLASHLIGHT_FISH.get(),
+                HAEntityTypes.MACKEREL.get(),
+                HAEntityTypes.HERRING.get(),
+                HAEntityTypes.BARRELEYE.get(),
+                HAEntityTypes.BETTA.get(),
+                HAEntityTypes.TETRA.get(),
+                HAEntityTypes.DANIO.get(),
+                HAEntityTypes.TIGER_BARB.get(),
+                HAEntityTypes.SURGEONFISH.get(),
+                HAEntityTypes.DISCUS.get(),
+                HAEntityTypes.CORYDORA.get(),
+                HAEntityTypes.DAMSELFISH.get(),
+                HAEntityTypes.GOURAMI.get(),
+                HAEntityTypes.CUTTLEFISH.get(),
+                HAEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
+                HAEntityTypes.FLYING_FISH.get(),
+                HAEntityTypes.SQUIRRELFISH.get(),
+                HAEntityTypes.STONEFISH.get(),
+                HAEntityTypes.PUPFISH.get(),
                 EntityType.SALMON,
                 EntityType.COD,
                 EntityType.TROPICAL_FISH
@@ -111,23 +111,23 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("alexsmobs", "flying_fish"))
             .addOptional(ResourceLocation("alexscaves", "lanternfish"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.MEDIUM_CREATURES)
+        getOrCreateTagBuilder(HAEntityTags.MEDIUM_CREATURES)
             .add(
-                HybridAquaticEntityTypes.RATFISH.get(),
-                HybridAquaticEntityTypes.TRIPOD_FISH.get(),
-                HybridAquaticEntityTypes.STINGRAY.get(),
-                HybridAquaticEntityTypes.TRIGGERFISH.get(),
-                HybridAquaticEntityTypes.TREVALLY.get(),
-                HybridAquaticEntityTypes.NEEDLEFISH.get(),
-                HybridAquaticEntityTypes.TROUT.get(),
-                HybridAquaticEntityTypes.ROCKFISH.get(),
-                HybridAquaticEntityTypes.SEA_BASS.get(),
-                HybridAquaticEntityTypes.LIONFISH.get(),
-                HybridAquaticEntityTypes.PARROTFISH.get(),
-                HybridAquaticEntityTypes.WRASSE.get(),
-                HybridAquaticEntityTypes.MORAY_EEL.get(),
-                HybridAquaticEntityTypes.JOHN_DORY.get(),
-                HybridAquaticEntityTypes.LANTERN_SHARK.get(),
+                HAEntityTypes.RATFISH.get(),
+                HAEntityTypes.TRIPOD_FISH.get(),
+                HAEntityTypes.STINGRAY.get(),
+                HAEntityTypes.TRIGGERFISH.get(),
+                HAEntityTypes.TREVALLY.get(),
+                HAEntityTypes.NEEDLEFISH.get(),
+                HAEntityTypes.TROUT.get(),
+                HAEntityTypes.ROCKFISH.get(),
+                HAEntityTypes.SEA_BASS.get(),
+                HAEntityTypes.LIONFISH.get(),
+                HAEntityTypes.PARROTFISH.get(),
+                HAEntityTypes.WRASSE.get(),
+                HAEntityTypes.MORAY_EEL.get(),
+                HAEntityTypes.JOHN_DORY.get(),
+                HAEntityTypes.LANTERN_SHARK.get(),
             )
             .addOptional(ResourceLocation("rainbowreef", "angelfish"))
             .addOptional(ResourceLocation("rainbowreef", "hogfish"))
@@ -139,17 +139,17 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("alexsmobs", "blobfish"))
             .addOptional(ResourceLocation("alexscaves", "tripodfish"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.LARGE_CREATURES)
+        getOrCreateTagBuilder(HAEntityTags.LARGE_CREATURES)
             .add(
-                HybridAquaticEntityTypes.OCEAN_SUNFISH.get(),
-                HybridAquaticEntityTypes.OARFISH.get(),
-                HybridAquaticEntityTypes.OPAH.get(),
-                HybridAquaticEntityTypes.TUNA.get(),
-                HybridAquaticEntityTypes.MAHI.get(),
-                HybridAquaticEntityTypes.BARRACUDA.get(),
-                HybridAquaticEntityTypes.COELACANTH.get(),
-                HybridAquaticEntityTypes.SLICKHEAD.get(),
-                HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
+                HAEntityTypes.OCEAN_SUNFISH.get(),
+                HAEntityTypes.OARFISH.get(),
+                HAEntityTypes.OPAH.get(),
+                HAEntityTypes.TUNA.get(),
+                HAEntityTypes.MAHI.get(),
+                HAEntityTypes.BARRACUDA.get(),
+                HAEntityTypes.COELACANTH.get(),
+                HAEntityTypes.SLICKHEAD.get(),
+                HAEntityTypes.GOLDEN_DORADO.get(),
                 EntityType.PLAYER,
                 EntityType.TURTLE,
             )
@@ -164,21 +164,21 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("alexsmobs", "catfish"))
             .addOptional(ResourceLocation("alexsmobs", "seal"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.OTTER_PREY)
-            .add(HybridAquaticEntityTypes.SEA_URCHIN.get())
-            .forceAddTag(HybridAquaticEntityTags.ALL_CRUSTACEANS)
-            .forceAddTag(HybridAquaticEntityTags.SMALL_CREATURES)
+        getOrCreateTagBuilder(HAEntityTags.OTTER_PREY)
+            .add(HAEntityTypes.SEA_URCHIN.get())
+            .forceAddTag(HAEntityTags.ALL_CRUSTACEANS)
+            .forceAddTag(HAEntityTags.SMALL_CREATURES)
         //#endregion
 
         //#region Fish Tags
-        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_FISH)
-            .addTag(HybridAquaticEntityTags.RAY)
-            .addTag(HybridAquaticEntityTags.REEF_FISH)
-            .addTag(HybridAquaticEntityTags.DEEP_FISH)
-            .addTag(HybridAquaticEntityTags.RIVER_FISH)
-            .addTag(HybridAquaticEntityTags.TROPICAL_RIVER_FISH)
-            .addTag(HybridAquaticEntityTags.SWAMP_FISH)
-            .addTag(HybridAquaticEntityTags.MANGROVE_FISH)
+        getOrCreateTagBuilder(HAEntityTags.ALL_FISH)
+            .addTag(HAEntityTags.RAY)
+            .addTag(HAEntityTags.REEF_FISH)
+            .addTag(HAEntityTags.DEEP_FISH)
+            .addTag(HAEntityTags.RIVER_FISH)
+            .addTag(HAEntityTags.TROPICAL_RIVER_FISH)
+            .addTag(HAEntityTags.SWAMP_FISH)
+            .addTag(HAEntityTags.MANGROVE_FISH)
             .addOptional(ResourceLocation("bountiful_critters", "flounder"))
             .addOptional(ResourceLocation("spawn", "herring"))
             .addOptional(ResourceLocation("alexsmobs", "devils_hole_pupfish"))
@@ -187,25 +187,25 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("spawn", "tuna"))
             .addOptional(ResourceLocation("spawn", "barracuda"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.REEF_FISH)
+        getOrCreateTagBuilder(HAEntityTags.REEF_FISH)
             .add(
-                HybridAquaticEntityTypes.BLOWFISH.get(),
-                HybridAquaticEntityTypes.BOXFISH.get(),
-                HybridAquaticEntityTypes.CLOWNFISH.get(),
-                HybridAquaticEntityTypes.GARDEN_EEL.get(),
-                HybridAquaticEntityTypes.DAMSELFISH.get(),
-                HybridAquaticEntityTypes.FLYING_FISH.get(),
-                HybridAquaticEntityTypes.LIONFISH.get(),
-                HybridAquaticEntityTypes.MORAY_EEL.get(),
-                HybridAquaticEntityTypes.NEEDLEFISH.get(),
-                HybridAquaticEntityTypes.PARROTFISH.get(),
-                HybridAquaticEntityTypes.SEAHORSE.get(),
-                HybridAquaticEntityTypes.SQUIRRELFISH.get(),
-                HybridAquaticEntityTypes.STONEFISH.get(),
-                HybridAquaticEntityTypes.SURGEONFISH.get(),
-                HybridAquaticEntityTypes.TRIGGERFISH.get(),
-                HybridAquaticEntityTypes.TREVALLY.get(),
-                HybridAquaticEntityTypes.WRASSE.get(),
+                HAEntityTypes.BLOWFISH.get(),
+                HAEntityTypes.BOXFISH.get(),
+                HAEntityTypes.CLOWNFISH.get(),
+                HAEntityTypes.GARDEN_EEL.get(),
+                HAEntityTypes.DAMSELFISH.get(),
+                HAEntityTypes.FLYING_FISH.get(),
+                HAEntityTypes.LIONFISH.get(),
+                HAEntityTypes.MORAY_EEL.get(),
+                HAEntityTypes.NEEDLEFISH.get(),
+                HAEntityTypes.PARROTFISH.get(),
+                HAEntityTypes.SEAHORSE.get(),
+                HAEntityTypes.SQUIRRELFISH.get(),
+                HAEntityTypes.STONEFISH.get(),
+                HAEntityTypes.SURGEONFISH.get(),
+                HAEntityTypes.TRIGGERFISH.get(),
+                HAEntityTypes.TREVALLY.get(),
+                HAEntityTypes.WRASSE.get(),
                 EntityType.TROPICAL_FISH,
             )
             .addOptional(ResourceLocation("alexsmobs", "flying_fish"))
@@ -242,31 +242,31 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("wonderoussea", "orbicular_spadefish"))
             .addOptional(ResourceLocation("wonderoussea", "orbicular_spadefish_2"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.RAY)
+        getOrCreateTagBuilder(HAEntityTags.RAY)
             .add(
-                HybridAquaticEntityTypes.STINGRAY.get(),
-                HybridAquaticEntityTypes.MANTA_RAY.get(),
+                HAEntityTypes.STINGRAY.get(),
+                HAEntityTypes.MANTA_RAY.get(),
             )
             .addOptional(ResourceLocation("bountiful_critters", "stingray"))
             .addOptional(ResourceLocation("rainbowreef", "ray"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.DEEP_FISH)
+        getOrCreateTagBuilder(HAEntityTags.DEEP_FISH)
             .add(
-                HybridAquaticEntityTypes.ANGLERFISH.get(),
-                HybridAquaticEntityTypes.BARRELEYE.get(),
-                HybridAquaticEntityTypes.COELACANTH.get(),
-                HybridAquaticEntityTypes.SLICKHEAD.get(),
-                HybridAquaticEntityTypes.DRAGONFISH.get(),
-                HybridAquaticEntityTypes.FANGTOOTH.get(),
-                HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(),
-                HybridAquaticEntityTypes.HATCHETFISH.get(),
-                HybridAquaticEntityTypes.TRIPOD_FISH.get(),
-                HybridAquaticEntityTypes.JOHN_DORY.get(),
-                HybridAquaticEntityTypes.OARFISH.get(),
-                HybridAquaticEntityTypes.RATFISH.get(),
-                HybridAquaticEntityTypes.SEA_ANGEL.get(),
-                HybridAquaticEntityTypes.SNAILFISH.get(),
-                HybridAquaticEntityTypes.VIPERFISH.get(),
+                HAEntityTypes.ANGLERFISH.get(),
+                HAEntityTypes.BARRELEYE.get(),
+                HAEntityTypes.COELACANTH.get(),
+                HAEntityTypes.SLICKHEAD.get(),
+                HAEntityTypes.DRAGONFISH.get(),
+                HAEntityTypes.FANGTOOTH.get(),
+                HAEntityTypes.FLASHLIGHT_FISH.get(),
+                HAEntityTypes.HATCHETFISH.get(),
+                HAEntityTypes.TRIPOD_FISH.get(),
+                HAEntityTypes.JOHN_DORY.get(),
+                HAEntityTypes.OARFISH.get(),
+                HAEntityTypes.RATFISH.get(),
+                HAEntityTypes.SEA_ANGEL.get(),
+                HAEntityTypes.SNAILFISH.get(),
+                HAEntityTypes.VIPERFISH.get(),
             )
             .addOptional(ResourceLocation("spawn", "angler_fish"))
             .addOptional(ResourceLocation("fintastic", "coelacanth"))
@@ -276,12 +276,12 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("alexscaves", "gossamer_worm"))
             .addOptional(ResourceLocation("bountiful_critters", "barreleye"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.RIVER_FISH)
+        getOrCreateTagBuilder(HAEntityTags.RIVER_FISH)
             .add(
-                HybridAquaticEntityTypes.CARP.get(),
-                HybridAquaticEntityTypes.SHINER.get(),
-                HybridAquaticEntityTypes.SUNFISH.get(),
-                HybridAquaticEntityTypes.TROUT.get(),
+                HAEntityTypes.CARP.get(),
+                HAEntityTypes.SHINER.get(),
+                HAEntityTypes.SUNFISH.get(),
+                HAEntityTypes.TROUT.get(),
                 EntityType.COD,
                 EntityType.SALMON
             )
@@ -290,19 +290,19 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("fintastic", "freshwater_shark"))
             .addOptional(ResourceLocation("alexsmobs", "catfish"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.TROPICAL_RIVER_FISH)
+        getOrCreateTagBuilder(HAEntityTags.TROPICAL_RIVER_FISH)
             .add(
-                HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
-                HybridAquaticEntityTypes.DANIO.get(),
-                HybridAquaticEntityTypes.DISCUS.get(),
-                HybridAquaticEntityTypes.CORYDORA.get(),
-                HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
-                HybridAquaticEntityTypes.GOURAMI.get(),
-                HybridAquaticEntityTypes.OSCAR.get(),
-                HybridAquaticEntityTypes.PIRANHA.get(),
-                HybridAquaticEntityTypes.PLECO.get(),
-                HybridAquaticEntityTypes.TETRA.get(),
-                HybridAquaticEntityTypes.TIGER_BARB.get(),
+                HAEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
+                HAEntityTypes.DANIO.get(),
+                HAEntityTypes.DISCUS.get(),
+                HAEntityTypes.CORYDORA.get(),
+                HAEntityTypes.GOLDEN_DORADO.get(),
+                HAEntityTypes.GOURAMI.get(),
+                HAEntityTypes.OSCAR.get(),
+                HAEntityTypes.PIRANHA.get(),
+                HAEntityTypes.PLECO.get(),
+                HAEntityTypes.TETRA.get(),
+                HAEntityTypes.TIGER_BARB.get(),
             )
             .addOptional(ResourceLocation("fintastic", "catfish"))
             .addOptional(ResourceLocation("fintastic", "minnow"))
@@ -312,11 +312,11 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("fintastic", "guppy"))
             .addOptional(ResourceLocation("bountiful_critters", "neon_tetra"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.SWAMP_FISH)
+        getOrCreateTagBuilder(HAEntityTags.SWAMP_FISH)
             .add(
-                HybridAquaticEntityTypes.TIGER_BARB.get(),
-                HybridAquaticEntityTypes.PLECO.get(),
-                HybridAquaticEntityTypes.BETTA.get(),
+                HAEntityTypes.TIGER_BARB.get(),
+                HAEntityTypes.PLECO.get(),
+                HAEntityTypes.BETTA.get(),
             )
             .addOptional(ResourceLocation("fintastic", "featherback"))
             .addOptional(ResourceLocation("fintastic", "catfish"))
@@ -325,17 +325,17 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("fintastic", "guppy"))
             .addOptional(ResourceLocation("alexsmobs", "catfish"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.MANGROVE_FISH)
+        getOrCreateTagBuilder(HAEntityTags.MANGROVE_FISH)
             .add(
-                HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
-                HybridAquaticEntityTypes.TETRA.get(),
-                HybridAquaticEntityTypes.TIGER_BARB.get(),
-                HybridAquaticEntityTypes.GOURAMI.get(),
-                HybridAquaticEntityTypes.PLECO.get(),
-                HybridAquaticEntityTypes.DISCUS.get(),
-                HybridAquaticEntityTypes.OSCAR.get(),
-                HybridAquaticEntityTypes.DANIO.get(),
-                HybridAquaticEntityTypes.BETTA.get(),
+                HAEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
+                HAEntityTypes.TETRA.get(),
+                HAEntityTypes.TIGER_BARB.get(),
+                HAEntityTypes.GOURAMI.get(),
+                HAEntityTypes.PLECO.get(),
+                HAEntityTypes.DISCUS.get(),
+                HAEntityTypes.OSCAR.get(),
+                HAEntityTypes.DANIO.get(),
+                HAEntityTypes.BETTA.get(),
             )
             .addOptional(ResourceLocation("fintastic", "featherback"))
             .addOptional(ResourceLocation("fintastic", "catfish"))
@@ -363,109 +363,109 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         //#endregion
 
         //#region Shark Tags
-        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_SHARKS)
-            .addTag(HybridAquaticEntityTags.SMALL_SHARK)
-            .addTag(HybridAquaticEntityTags.MEDIUM_SHARK)
-            .addTag(HybridAquaticEntityTags.LARGE_SHARK)
+        getOrCreateTagBuilder(HAEntityTags.ALL_SHARKS)
+            .addTag(HAEntityTags.SMALL_SHARK)
+            .addTag(HAEntityTags.MEDIUM_SHARK)
+            .addTag(HAEntityTags.LARGE_SHARK)
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.SMALL_SHARK)
+        getOrCreateTagBuilder(HAEntityTags.SMALL_SHARK)
             .add(
-                HybridAquaticEntityTypes.LANTERN_SHARK.get(),
-                HybridAquaticEntityTypes.HOUND_SHARK.get(),
+                HAEntityTypes.LANTERN_SHARK.get(),
+                HAEntityTypes.HOUND_SHARK.get(),
             )
             .addOptional(ResourceLocation("rainbowreef", "small_shark"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.MEDIUM_SHARK)
+        getOrCreateTagBuilder(HAEntityTags.MEDIUM_SHARK)
             .add(
-                HybridAquaticEntityTypes.FRILLED_SHARK.get(),
-                HybridAquaticEntityTypes.HAMMERHEAD_SHARK.get(),
-                HybridAquaticEntityTypes.THRESHER_SHARK.get(),
-                HybridAquaticEntityTypes.SIXGILL_SHARK.get(),
-                HybridAquaticEntityTypes.SLEEPER_SHARK.get(),
+                HAEntityTypes.FRILLED_SHARK.get(),
+                HAEntityTypes.HAMMERHEAD_SHARK.get(),
+                HAEntityTypes.THRESHER_SHARK.get(),
+                HAEntityTypes.SIXGILL_SHARK.get(),
+                HAEntityTypes.SLEEPER_SHARK.get(),
             )
             .addOptional(ResourceLocation("alexsmobs", "frilled_shark"))
             .addOptional(ResourceLocation("alexsmobs", "hammerhead_shark"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.LARGE_SHARK)
+        getOrCreateTagBuilder(HAEntityTags.LARGE_SHARK)
             .add(
-                HybridAquaticEntityTypes.BASKING_SHARK.get(),
-                HybridAquaticEntityTypes.BULL_SHARK.get(),
-                HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(),
-                HybridAquaticEntityTypes.SAND_TIGER_SHARK.get(),
-                HybridAquaticEntityTypes.WHALE_SHARK.get(),
+                HAEntityTypes.BASKING_SHARK.get(),
+                HAEntityTypes.BULL_SHARK.get(),
+                HAEntityTypes.GREAT_WHITE_SHARK.get(),
+                HAEntityTypes.SAND_TIGER_SHARK.get(),
+                HAEntityTypes.WHALE_SHARK.get(),
             )
         //#endregion
 
         //#region Crustacean Tags
-        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_CRUSTACEANS)
-            .addTag(HybridAquaticEntityTags.CRAB)
-            .addTag(HybridAquaticEntityTags.LOBSTER)
-            .addTag(HybridAquaticEntityTags.SHRIMP)
+        getOrCreateTagBuilder(HAEntityTags.ALL_CRUSTACEANS)
+            .addTag(HAEntityTags.CRAB)
+            .addTag(HAEntityTags.LOBSTER)
+            .addTag(HAEntityTags.SHRIMP)
             .addOptional(ResourceLocation("alexsmobs", "triops"))
             .addOptional(ResourceLocation("fintastic", "daphnia"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.CRAB)
+        getOrCreateTagBuilder(HAEntityTags.CRAB)
             .add(
-                HybridAquaticEntityTypes.COCONUT_CRAB.get(),
-                HybridAquaticEntityTypes.DECORATOR_CRAB.get(),
-                HybridAquaticEntityTypes.DUNGENESS_CRAB.get(),
-                HybridAquaticEntityTypes.FIDDLER_CRAB.get(),
-                HybridAquaticEntityTypes.FLOWER_CRAB.get(),
-                HybridAquaticEntityTypes.GHOST_CRAB.get(),
-                HybridAquaticEntityTypes.HERMIT_CRAB.get(),
-                HybridAquaticEntityTypes.HORSESHOE_CRAB.get(),
-                HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get(),
-                HybridAquaticEntityTypes.SPIDER_CRAB.get(),
-                HybridAquaticEntityTypes.VAMPIRE_CRAB.get(),
-                HybridAquaticEntityTypes.YETI_CRAB.get(),
+                HAEntityTypes.COCONUT_CRAB.get(),
+                HAEntityTypes.DECORATOR_CRAB.get(),
+                HAEntityTypes.DUNGENESS_CRAB.get(),
+                HAEntityTypes.FIDDLER_CRAB.get(),
+                HAEntityTypes.FLOWER_CRAB.get(),
+                HAEntityTypes.GHOST_CRAB.get(),
+                HAEntityTypes.HERMIT_CRAB.get(),
+                HAEntityTypes.HORSESHOE_CRAB.get(),
+                HAEntityTypes.LIGHTFOOT_CRAB.get(),
+                HAEntityTypes.SPIDER_CRAB.get(),
+                HAEntityTypes.VAMPIRE_CRAB.get(),
+                HAEntityTypes.YETI_CRAB.get(),
             )
             .addOptional(ResourceLocation("rainbowreef", "crab"))
             .addOptional(ResourceLocation("rainbowreef", "arrow_crab"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.LOBSTER)
+        getOrCreateTagBuilder(HAEntityTags.LOBSTER)
             .add(
-                HybridAquaticEntityTypes.CRAYFISH.get(),
-                HybridAquaticEntityTypes.LOBSTER.get(),
+                HAEntityTypes.CRAYFISH.get(),
+                HAEntityTypes.LOBSTER.get(),
             )
             .addOptional(ResourceLocation("alexsmobs", "lobster"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.SHRIMP)
+        getOrCreateTagBuilder(HAEntityTags.SHRIMP)
             .add(
-                HybridAquaticEntityTypes.SHRIMP.get(),
+                HAEntityTypes.SHRIMP.get(),
             )
             .addOptional(ResourceLocation("fintastic", "fairy_shrimp"))
             .addOptional(ResourceLocation("alexsmobs", "mantis_shrimp"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.KRILL)
+        getOrCreateTagBuilder(HAEntityTags.KRILL)
             .addOptional(ResourceLocation("bountiful_critters", "krill"))
             .addOptional(ResourceLocation("wonderoussea", "antarctic_krill"))
         //#endregion
 
         //#region Cephalopod Tags
-        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_CEPHALOPODS)
-            .addTag(HybridAquaticEntityTags.OCTOPUS)
-            .addTag(HybridAquaticEntityTags.SQUID)
+        getOrCreateTagBuilder(HAEntityTags.ALL_CEPHALOPODS)
+            .addTag(HAEntityTags.OCTOPUS)
+            .addTag(HAEntityTags.SQUID)
             .add(
-                HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
-                HybridAquaticEntityTypes.NAUTILUS.get(),
+                HAEntityTypes.VAMPIRE_SQUID.get(),
+                HAEntityTypes.NAUTILUS.get(),
             )
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.OCTOPUS)
+        getOrCreateTagBuilder(HAEntityTags.OCTOPUS)
             .add(
-                HybridAquaticEntityTypes.OCTOPUS.get(),
-                HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(),
-                HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
+                HAEntityTypes.OCTOPUS.get(),
+                HAEntityTypes.UMBRELLA_OCTOPUS.get(),
+                HAEntityTypes.VAMPIRE_SQUID.get(),
             )
             .addOptional(ResourceLocation("spawn", "octopus"))
             .addOptional(ResourceLocation("alexsmobs", "mimic_octopus"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.SQUID)
+        getOrCreateTagBuilder(HAEntityTags.SQUID)
             .add(
-                HybridAquaticEntityTypes.ARROW_SQUID.get(),
-                HybridAquaticEntityTypes.CUTTLEFISH.get(),
-                HybridAquaticEntityTypes.FIREFLY_SQUID.get(),
-                HybridAquaticEntityTypes.COLOSSAL_SQUID.get(),
-                HybridAquaticEntityTypes.GIANT_SQUID.get(),
+                HAEntityTypes.ARROW_SQUID.get(),
+                HAEntityTypes.CUTTLEFISH.get(),
+                HAEntityTypes.FIREFLY_SQUID.get(),
+                HAEntityTypes.COLOSSAL_SQUID.get(),
+                HAEntityTypes.GIANT_SQUID.get(),
                 EntityType.SQUID,
                 EntityType.GLOW_SQUID
             )
@@ -473,33 +473,33 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         //#endregion
 
         //#region Mammal Tags
-        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_MAMMALS)
-            .addTag(HybridAquaticEntityTags.SIRENIAN)
-            .addTag(HybridAquaticEntityTags.SEAL)
-            .addTag(HybridAquaticEntityTags.DOLPHIN)
-            .addTag(HybridAquaticEntityTags.WHALE)
+        getOrCreateTagBuilder(HAEntityTags.ALL_MAMMALS)
+            .addTag(HAEntityTags.SIRENIAN)
+            .addTag(HAEntityTags.SEAL)
+            .addTag(HAEntityTags.DOLPHIN)
+            .addTag(HAEntityTags.WHALE)
             .add(
-                HybridAquaticEntityTypes.OTTER.get(),
+                HAEntityTypes.OTTER.get(),
             )
             .addOptional(ResourceLocation("wonderoussea", "sea_otter"))
             .addOptional(ResourceLocation("wonderoussea", "sea_otter_swimming"))
             .addOptional(ResourceLocation("wonderoussea", "sea_otter_tagged"))
             .addOptional(ResourceLocation("wonderoussea", "sea_otter_tagged_swimming"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.SIRENIAN)
+        getOrCreateTagBuilder(HAEntityTags.SIRENIAN)
             .add(
-                HybridAquaticEntityTypes.DUGONG.get(),
-                HybridAquaticEntityTypes.MANATEE.get(),
+                HAEntityTypes.DUGONG.get(),
+                HAEntityTypes.MANATEE.get(),
             )
             .addOptional(ResourceLocation("spawn", "sea_cow"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.SEAL)
+        getOrCreateTagBuilder(HAEntityTags.SEAL)
             .addOptional(ResourceLocation("alexsmobs", "seal"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.DOLPHIN)
+        getOrCreateTagBuilder(HAEntityTags.DOLPHIN)
             .add(
                 EntityType.DOLPHIN,
-                HybridAquaticEntityTypes.ORCA.get(),
+                HAEntityTypes.ORCA.get(),
             )
             .addOptional(ResourceLocation("alexsmobs", "orca"))
             .addOptional(ResourceLocation("wonderoussea", "bottlenose_dolphin"))
@@ -554,7 +554,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("wonderoussea", "white_beaked_dolphin"))
             .addOptional(ResourceLocation("wonderoussea", "baby_white_beaked_dolphin"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.WHALE)
+        getOrCreateTagBuilder(HAEntityTags.WHALE)
             .addOptional(ResourceLocation("alexsmobs", "cachalot_whale"))
             .addOptional(ResourceLocation("bountiful_critters", "humpback_whale"))
             .addOptional(ResourceLocation("wonderoussea", "beluga_whale"))
@@ -579,45 +579,45 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         //#endregion
 
         //#region Misc Creature Tags
-        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_CRITTERS)
+        getOrCreateTagBuilder(HAEntityTags.ALL_CRITTERS)
             .add(
-                HybridAquaticEntityTypes.SEA_SLUG.get(),
-                HybridAquaticEntityTypes.SEA_CUCUMBER.get(),
-                HybridAquaticEntityTypes.SEA_URCHIN.get(),
-                HybridAquaticEntityTypes.STARFISH.get(),
-                HybridAquaticEntityTypes.SEA_ANGEL.get(),
+                HAEntityTypes.SEA_SLUG.get(),
+                HAEntityTypes.SEA_CUCUMBER.get(),
+                HAEntityTypes.SEA_URCHIN.get(),
+                HAEntityTypes.STARFISH.get(),
+                HAEntityTypes.SEA_ANGEL.get(),
             )
             .addOptional(ResourceLocation("spawn", "clam"))
             .addOptional(ResourceLocation("wonderoussea", "marine_flatworm"))
             .addOptional(ResourceLocation("wonderoussea", "blue_glaucus"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_JELLYFISH)
+        getOrCreateTagBuilder(HAEntityTags.ALL_JELLYFISH)
             .add(
-                HybridAquaticEntityTypes.CROWN_JELLYFISH.get(),
-                HybridAquaticEntityTypes.BARREL_JELLYFISH.get(),
-                HybridAquaticEntityTypes.BLUE_JELLYFISH.get(),
-                HybridAquaticEntityTypes.BIG_RED_JELLYFISH.get(),
-                HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get(),
-                HybridAquaticEntityTypes.COSMIC_JELLYFISH.get(),
-                HybridAquaticEntityTypes.FIREWORK_JELLYFISH.get(),
-                HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH.get(),
-                HybridAquaticEntityTypes.MAUVE_STINGER.get(),
-                HybridAquaticEntityTypes.MOON_JELLYFISH.get(),
-                HybridAquaticEntityTypes.NOMURA_JELLYFISH.get(),
-                HybridAquaticEntityTypes.SEA_NETTLE.get(),
-                HybridAquaticEntityTypes.BOX_JELLYFISH.get(),
+                HAEntityTypes.CROWN_JELLYFISH.get(),
+                HAEntityTypes.BARREL_JELLYFISH.get(),
+                HAEntityTypes.BLUE_JELLYFISH.get(),
+                HAEntityTypes.BIG_RED_JELLYFISH.get(),
+                HAEntityTypes.CEPHEIDAE_JELLYFISH.get(),
+                HAEntityTypes.COSMIC_JELLYFISH.get(),
+                HAEntityTypes.FIREWORK_JELLYFISH.get(),
+                HAEntityTypes.LIONS_MANE_JELLYFISH.get(),
+                HAEntityTypes.MAUVE_STINGER.get(),
+                HAEntityTypes.MOON_JELLYFISH.get(),
+                HAEntityTypes.NOMURA_JELLYFISH.get(),
+                HAEntityTypes.SEA_NETTLE.get(),
+                HAEntityTypes.BOX_JELLYFISH.get(),
             )
             .addOptional(ResourceLocation("rainbowreef", "jellyfish"))
             .addOptional(ResourceLocation("alexmobs", "comb_jelly"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.TURTLE)
+        getOrCreateTagBuilder(HAEntityTags.TURTLE)
             .add(
                 EntityType.TURTLE,
             )
             .addOptional(ResourceLocation("alexsmobs", "terrapin"))
             .addOptional(ResourceLocation("alexsmobs", "alligator_snapping_turtle"))
 
-        getOrCreateTagBuilder(HybridAquaticEntityTags.ALL_AMPHIBIANS)
+        getOrCreateTagBuilder(HAEntityTags.ALL_AMPHIBIANS)
             .add(
                 EntityType.AXOLOTL,
                 EntityType.FROG,
@@ -625,16 +625,16 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         //#endregion
 
         //#region Fishing Net Implementation
-        getOrCreateTagBuilder(HybridAquaticEntityTags.CAN_USE_FISHING_NET_ON)
-            .addTag(HybridAquaticEntityTags.ALL_FISH)
-            .addTag(HybridAquaticEntityTags.ALL_SHARKS)
-            .addTag(HybridAquaticEntityTags.ALL_CRUSTACEANS)
-            .addTag(HybridAquaticEntityTags.ALL_CEPHALOPODS)
-            .addTag(HybridAquaticEntityTags.ALL_MAMMALS)
-            .addTag(HybridAquaticEntityTags.ALL_AMPHIBIANS)
-            .addTag(HybridAquaticEntityTags.ALL_JELLYFISH)
-            .addTag(HybridAquaticEntityTags.ALL_CRITTERS)
-            .addTag(HybridAquaticEntityTags.TURTLE)
+        getOrCreateTagBuilder(HAEntityTags.CAN_USE_FISHING_NET_ON)
+            .addTag(HAEntityTags.ALL_FISH)
+            .addTag(HAEntityTags.ALL_SHARKS)
+            .addTag(HAEntityTags.ALL_CRUSTACEANS)
+            .addTag(HAEntityTags.ALL_CEPHALOPODS)
+            .addTag(HAEntityTags.ALL_MAMMALS)
+            .addTag(HAEntityTags.ALL_AMPHIBIANS)
+            .addTag(HAEntityTags.ALL_JELLYFISH)
+            .addTag(HAEntityTags.ALL_CRITTERS)
+            .addTag(HAEntityTags.TURTLE)
         //#endregion
     }
 }

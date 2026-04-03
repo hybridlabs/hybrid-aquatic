@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.cephalopod.GiantSquidEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class GiantSquidEntityRenderer(context: Context) :
-    HybridAquaticCephalopodEntityRenderer<GiantSquidEntity>(context, GiantSquidEntityModel(), true, false)
+    HACephalopodEntityRenderer<GiantSquidEntity>(context, GiantSquidEntityModel(), true, false)

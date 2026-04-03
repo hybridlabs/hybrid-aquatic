@@ -13,7 +13,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import software.bernie.geckolib.util.RenderUtils
 
 class AnemoneBlockEntity(pos: BlockPos, state: BlockState) :
-    BlockEntity(HybridAquaticBlockEntityTypes.ANEMONE.get(), pos, state),
+    BlockEntity(HABlockEntityTypes.ANEMONE.get(), pos, state),
     GeoAnimatable {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 

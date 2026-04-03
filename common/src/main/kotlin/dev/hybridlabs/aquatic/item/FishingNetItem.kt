@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.ChatFormatting
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -45,7 +45,7 @@ class FishingNetItem(settings: Properties) : Item(settings) {
         entity: LivingEntity,
         hand: InteractionHand
     ): InteractionResult {
-        val validFishForNet = entity.type.`is`(HybridAquaticEntityTags.CAN_USE_FISHING_NET_ON)
+        val validFishForNet = entity.type.`is`(HAEntityTags.CAN_USE_FISHING_NET_ON)
 
         if (!alreadyHasFish(stack) && validFishForNet) {
             writeEntityToNet(entity, user, hand)

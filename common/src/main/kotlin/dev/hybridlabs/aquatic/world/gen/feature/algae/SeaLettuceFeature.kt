@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.world.gen.feature.algae
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.TallSeagrassBlock
@@ -27,9 +27,9 @@ class SeaLettuceFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
         if (structureLevelAccessor.getBlockState(blockPos2).`is`(Blocks.WATER)) {
             val bl2 = random.nextDouble() < probabilityConfig.probability.toDouble()
             val blockState = if (bl2) {
-                HybridAquaticBlocks.TALL_SEA_LETTUCE.get().defaultBlockState()
+                HABlocks.TALL_SEA_LETTUCE.get().defaultBlockState()
             } else {
-                HybridAquaticBlocks.SEA_LETTUCE.get().defaultBlockState()
+                HABlocks.SEA_LETTUCE.get().defaultBlockState()
             }
             if (blockState.canSurvive(structureLevelAccessor, blockPos2)) {
                 if (bl2) {

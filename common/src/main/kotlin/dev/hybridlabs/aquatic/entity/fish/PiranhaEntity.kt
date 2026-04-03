@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.ItemTags
@@ -25,7 +25,7 @@ import net.minecraft.world.phys.AABB
 import java.util.*
 
 class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(type, world),
+    HASchoolingFishEntity(type, world),
     NeutralMob {
 
     override fun getTargetConfig() = TARGET_CONFIG
@@ -40,7 +40,7 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
         goalSelector.addGoal(3, StayInWaterGoal(this))
         targetSelector.addGoal(1, (HurtByTargetGoal(this, *arrayOfNulls<Class<*>>(0))).setAlertOthers(*arrayOfNulls<Class<*>>(0)))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, false) { this.isAngryAt(it) })
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is PiranhaEntity })
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HAMobEffects.BLEEDING.get()) && it !is PiranhaEntity })
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, true))
     }
 
@@ -100,7 +100,7 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
                 }
 
                 if (i > 0) {
-                    target.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), i * 20, 0), this)
+                    target.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.get(), i * 20, 0), this)
                 }
             }
 
@@ -172,12 +172,12 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES
+                HAEntityTags.SMALL_CREATURES
             ),
             listOf(
-                HybridAquaticEntityTags.MEDIUM_CREATURES,
-                HybridAquaticEntityTags.LARGE_CREATURES,
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.MEDIUM_CREATURES,
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

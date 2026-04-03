@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
+import dev.hybridlabs.aquatic.tag.HABlockTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.util.RandomSource
@@ -58,7 +58,7 @@ class AnemoneFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfiguratio
     private fun getRandomAnemoneState(level: LevelAccessor, random: RandomSource): BlockState? {
         val possibleBlocks = level.registryAccess()
             .registryOrThrow(net.minecraft.core.registries.Registries.BLOCK)
-            .getTag(HybridAquaticBlockTags.ANEMONES).orElse(null)
+            .getTag(HABlockTags.ANEMONES).orElse(null)
             ?.toList()
             ?: return null
 

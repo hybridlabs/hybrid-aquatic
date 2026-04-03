@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.TallDunegrassBlock
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
+import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
 import net.minecraft.world.level.levelgen.Heightmap
@@ -31,9 +31,9 @@ class DunegrassFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
             val blTall = random.nextDouble() < config.probability
 
             if (blTall) {
-                val lower = HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get().defaultBlockState()
+                val lower = HAPlatformBlocks.TALL_DUNEGRASS.get().defaultBlockState()
                     .setValue(TallDunegrassBlock.HALF, DoubleBlockHalf.LOWER)
-                val upper = HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get().defaultBlockState()
+                val upper = HAPlatformBlocks.TALL_DUNEGRASS.get().defaultBlockState()
                     .setValue(TallDunegrassBlock.HALF, DoubleBlockHalf.UPPER)
 
                 if (pos.y < world.maxBuildHeight - 1 &&
@@ -45,7 +45,7 @@ class DunegrassFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
                     placed = true
                 }
             } else {
-                val blockState = HybridAquaticPlatformBlocks.DUNEGRASS.get().defaultBlockState()
+                val blockState = HAPlatformBlocks.DUNEGRASS.get().defaultBlockState()
                 if (blockState.canSurvive(world, pos)) {
                     world.setBlock(pos, blockState, 2)
                     placed = true

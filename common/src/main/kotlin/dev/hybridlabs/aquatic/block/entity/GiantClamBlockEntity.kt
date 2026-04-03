@@ -14,7 +14,7 @@ class GiantClamBlockEntity(
     pos: BlockPos,
     state: BlockState
 ) : BlockEntity(
-    HybridAquaticBlockEntityTypes.GIANT_CLAM.get(),
+    HABlockEntityTypes.GIANT_CLAM.get(),
     pos,
     state
 ) {

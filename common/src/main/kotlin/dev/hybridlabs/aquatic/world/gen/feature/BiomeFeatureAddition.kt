@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.BiomeTags
 import net.minecraft.tags.TagKey
@@ -16,17 +16,17 @@ data class BiomeFeatureAddition(
             //#region Anemones
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.CORAL_REEF,
+                    HABiomeTags.CORAL_REEF,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.ANEMONES
+                    HAPlacedFeatures.ANEMONES
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                    HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.ANEMONES
+                    HAPlacedFeatures.ANEMONES
                 ),
             )
             //#endregion
@@ -36,7 +36,7 @@ data class BiomeFeatureAddition(
                 BiomeFeatureAddition(
                     BiomeTags.IS_OCEAN,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH
+                    HAPlacedFeatures.TUBE_SPONGE_PATCH
                 ),
             )
 
@@ -44,7 +44,7 @@ data class BiomeFeatureAddition(
                 BiomeFeatureAddition(
                     BiomeTags.IS_DEEP_OCEAN,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.GLASS_SPONGE_PATCH
+                    HAPlacedFeatures.GLASS_SPONGE_PATCH
                 ),
             )
 
@@ -52,7 +52,7 @@ data class BiomeFeatureAddition(
                 BiomeFeatureAddition(
                     BiomeTags.IS_DEEP_OCEAN,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.HARP_SPONGE_PATCH
+                    HAPlacedFeatures.HARP_SPONGE_PATCH
                 ),
             )
             //#endregion
@@ -60,25 +60,25 @@ data class BiomeFeatureAddition(
             //#region Giant Clams
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.CORAL_REEF,
+                    HABiomeTags.CORAL_REEF,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+                    HAPlacedFeatures.GIANT_CLAM_PATCH
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SEAGRASS_BED,
+                    HABiomeTags.SEAGRASS_BED,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+                    HAPlacedFeatures.GIANT_CLAM_PATCH
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.RED_MEADOW,
+                    HABiomeTags.RED_MEADOW,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH
+                    HAPlacedFeatures.GIANT_CLAM_PATCH
                 ),
             )
             //#endregion
@@ -86,49 +86,49 @@ data class BiomeFeatureAddition(
             //#region Oyster Beds
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS,
+                    HABiomeTags.SHALLOW_COLD_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
+                    HAPlacedFeatures.OYSTER_BED
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.WARM_OCEAN,
+                    HABiomeTags.WARM_OCEAN,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
+                    HAPlacedFeatures.OYSTER_BED
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.CORAL_REEF,
+                    HABiomeTags.CORAL_REEF,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
+                    HAPlacedFeatures.OYSTER_BED
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SEAGRASS_BED,
+                    HABiomeTags.SEAGRASS_BED,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
+                    HAPlacedFeatures.OYSTER_BED
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.RED_MEADOW,
+                    HABiomeTags.RED_MEADOW,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
+                    HAPlacedFeatures.OYSTER_BED
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                    HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.OYSTER_BED
+                    HAPlacedFeatures.OYSTER_BED
                 ),
             )
             //#endregion
@@ -136,49 +136,49 @@ data class BiomeFeatureAddition(
             //#region River Plants
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SEAGRASS_BED,
+                    HABiomeTags.SEAGRASS_BED,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH
+                    HAPlacedFeatures.SEA_LETTUCE_PATCH
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.RIVERS,
+                    HABiomeTags.RIVERS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.WATER_LETTUCE
+                    HAPlacedFeatures.WATER_LETTUCE
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SWAMP,
+                    HABiomeTags.SWAMP,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.WATER_LETTUCE
+                    HAPlacedFeatures.WATER_LETTUCE
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.MARSHES,
+                    HABiomeTags.MARSHES,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.WATER_LETTUCE
+                    HAPlacedFeatures.WATER_LETTUCE
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.TROPICAL_RIVERS,
+                    HABiomeTags.TROPICAL_RIVERS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.JUNGLE_LILY_PAD
+                    HAPlacedFeatures.JUNGLE_LILY_PAD
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.TROPICAL_RIVERS,
+                    HABiomeTags.TROPICAL_RIVERS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.WATER_HYACINTH
+                    HAPlacedFeatures.WATER_HYACINTH
                 ),
             )
             //#endregion
@@ -186,25 +186,25 @@ data class BiomeFeatureAddition(
             //#region Kelp Plants
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SHALLOW_LUKEWARM_OCEANS,
+                    HABiomeTags.SHALLOW_LUKEWARM_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.SARGASSUM
+                    HAPlacedFeatures.SARGASSUM
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.DEEP_LUKEWARM_OCEANS,
+                    HABiomeTags.DEEP_LUKEWARM_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.FLOATING_SARGASSUM
+                    HAPlacedFeatures.FLOATING_SARGASSUM
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                    HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.BULL_KELP
+                    HAPlacedFeatures.BULL_KELP
                 ),
             )
             //#endregion
@@ -212,42 +212,42 @@ data class BiomeFeatureAddition(
             //#region Vents & Sulfur
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SULFURIC_CAVE,
+                    HABiomeTags.SULFURIC_CAVE,
                     GenerationStep.Decoration.UNDERGROUND_ORES,
-                    HybridAquaticPlacedFeatures.SULFUR_DEPOSIT
+                    HAPlacedFeatures.SULFUR_DEPOSIT
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SULFURIC_CAVE,
+                    HABiomeTags.SULFURIC_CAVE,
                     GenerationStep.Decoration.SURFACE_STRUCTURES,
-                    HybridAquaticPlacedFeatures.THERMAL_VENT_CAVES
+                    HAPlacedFeatures.THERMAL_VENT_CAVES
                 )
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.ALL_TRENCHES,
+                    HABiomeTags.ALL_TRENCHES,
                     GenerationStep.Decoration.SURFACE_STRUCTURES,
-                    HybridAquaticPlacedFeatures.THERMAL_VENT_TRENCHES
+                    HAPlacedFeatures.THERMAL_VENT_TRENCHES
                 )
             )
             //#endregion
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SANDY_BEACHES,
+                    HABiomeTags.SANDY_BEACHES,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HybridAquaticPlacedFeatures.DUNEGRASS_PATCH
+                    HAPlacedFeatures.DUNEGRASS_PATCH
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.SANDY_BEACHES,
+                    HABiomeTags.SANDY_BEACHES,
                     GenerationStep.Decoration.UNDERGROUND_ORES,
-                    HybridAquaticPlacedFeatures.DISK_SUSPICIOUS_SAND
+                    HAPlacedFeatures.DISK_SUSPICIOUS_SAND
                 ),
             )
 
@@ -255,15 +255,15 @@ data class BiomeFeatureAddition(
                 BiomeFeatureAddition(
                     BiomeTags.IS_DEEP_OCEAN,
                     GenerationStep.Decoration.UNDERGROUND_ORES,
-                    HybridAquaticPlacedFeatures.MOUND
+                    HAPlacedFeatures.MOUND
                 ),
             )
 
             add(
                 BiomeFeatureAddition(
-                    HybridAquaticBiomeTags.BOTTLE_SPAWN_BIOMES,
+                    HABiomeTags.BOTTLE_SPAWN_BIOMES,
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
-                    HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE
+                    HAPlacedFeatures.MESSAGE_IN_A_BOTTLE
                 )
             )
         }

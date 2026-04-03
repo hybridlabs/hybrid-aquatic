@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.tag.HABlockTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket
@@ -24,7 +24,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) :
-    HybridAquaticCritterEntity(type, world),
+    HACritterEntity(type, world),
     VariantHolder<SeaUrchinEntity.Companion.Type> {
     private var timeUntilNextBreak = 0
     private var spawnUrchinOnNextBreak = false
@@ -118,10 +118,10 @@ class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) :
 
     private fun breakKelpUnderneath() {
         val posUnderneath = BlockPos(this.x.toInt(), (this.y + 1).toInt(), this.z.toInt())
-        if (level().getBlockState(posUnderneath).`is`(HybridAquaticBlockTags.KELP)) {
+        if (level().getBlockState(posUnderneath).`is`(HABlockTags.KELP)) {
             level().setBlockAndUpdate(posUnderneath, Blocks.AIR.defaultBlockState())
             if (spawnUrchinOnNextBreak) {
-                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.get().create(level())
+                val newUrchin = HAEntityTypes.SEA_URCHIN.get().create(level())
                 newUrchin?.moveTo(this.x, this.y, this.z, this.xRot, 0.0f)
                 if (newUrchin != null) {
                     level().addFreshEntity(newUrchin)

@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.crustacean.LobsterEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class LobsterEntityModel : HybridAquaticCrustaceanEntityModel<LobsterEntity>("lobster") {
+class LobsterEntityModel : HACrustaceanEntityModel<LobsterEntity>("lobster") {
 
     private val clawlessTextures = listOf(
         ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/lobster/lobster_ornate_spiny.png"),

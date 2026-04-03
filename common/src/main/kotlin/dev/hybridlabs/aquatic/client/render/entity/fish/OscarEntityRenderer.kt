@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.OscarEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class OscarEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<OscarEntity>(context, OscarEntityModel(), true, false)
+    HAFishEntityRenderer<OscarEntity>(context, OscarEntityModel(), true, false)

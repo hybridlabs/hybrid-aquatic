@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -22,7 +22,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world),
+    HAFishEntity(type, world),
     VariantHolder<WrasseEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
@@ -45,12 +45,12 @@ class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.ALL_CRUSTACEANS,
-                HybridAquaticEntityTags.ALL_CRITTERS
+                HAEntityTags.ALL_CRUSTACEANS,
+                HAEntityTags.ALL_CRITTERS
             ),
             listOf(
-                HybridAquaticEntityTags.LARGE_CREATURES,
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
             ),
         )
 

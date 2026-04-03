@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
+import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.Difficulty
@@ -23,7 +23,7 @@ import net.minecraft.world.level.Level
 import java.util.UUID
 
 class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
-    HybridAquaticFishEntity(type, world),
+    HAFishEntity(type, world),
     NeutralMob {
 
     private var angerTime = 0
@@ -36,17 +36,17 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HybridAquaticItems.MACKEREL.get())
+        return stack.`is`(HAAquaticItems.MACKEREL.get())
     }
 
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HybridAquaticEntityTags.SMALL_CREATURES,
-                HybridAquaticEntityTags.MEDIUM_CREATURES,
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.MEDIUM_CREATURES,
             ),
             listOf(
-                HybridAquaticEntityTags.ALL_SHARKS
+                HAEntityTags.ALL_SHARKS
             ),
         )
 
@@ -66,7 +66,7 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
         targetSelector.addGoal(1, HurtByTargetGoal(this).setAlertOthers())
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.get()) && it !is BarracudaEntity })
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HAMobEffects.BLEEDING.get()) && it !is BarracudaEntity })
     }
 
     override fun doHurtTarget(target: Entity): Boolean {
@@ -80,7 +80,7 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
                 }
 
                 if (i > 0) {
-                    target.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.get(), i * 20, 0), this)
+                    target.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.get(), i * 20, 0), this)
                 }
             }
 
