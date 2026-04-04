@@ -99,6 +99,7 @@ open class ArgonautEntity(
         this.entityData.define(DATA_ID_GLOWING, false)
         this.entityData.define(SHELL_COLOR, ShellColor.NONE.id)
         this.entityData.define(SAIL_COLOR, SailColor.NONE.id)
+        this.entityData.define(IS_BURNING, false)
     }
 
     override fun addAdditionalSaveData(tag: CompoundTag) {
@@ -127,6 +128,7 @@ open class ArgonautEntity(
         }
 
         this.litTime = tag.getInt("BurnTime")
+        setLit(litTime > 0)
         this.readChestVehicleSaveData(tag)
     }
     //#endregion
@@ -174,7 +176,11 @@ open class ArgonautEntity(
     }
 
     fun isLit(): Boolean {
-        return this.litTime > 0
+        return entityData.get(IS_BURNING)
+    }
+
+    fun setLit(value: Boolean) {
+        this.entityData.set(IS_BURNING, value)
     }
 
     fun burnTick() {
@@ -182,6 +188,7 @@ open class ArgonautEntity(
 
         if (isLit()) {
             litTime--
+            if (litTime == 0) setLit(false)
             return
         }
         if (fuelItemStack.isEmpty) return
@@ -189,6 +196,7 @@ open class ArgonautEntity(
         fuelItemStack.shrink(1)
         litTime = getBurnDuration(fuelItemStack)
         litDuration = litTime
+        setLit(true)
     }
 
     override fun tick() {
@@ -212,7 +220,7 @@ open class ArgonautEntity(
             floatArgonaut()
 
             if (this.level().isClientSide) {
-                controlArgonaut()
+                if (isLit()) controlArgonaut()
 
                 this.level().sendPacketToServer(
                     ServerboundPaddleBoatPacket(
@@ -270,8 +278,8 @@ open class ArgonautEntity(
     }
 
     private fun controlArgonaut() {
-
         if (!this.isInWater || !this.isVehicle || this.onGround()) return
+
         var forwardMovement = 0.0f
         var horizontalMovement = 0.0f
         var verticalMovement = 0.0f
@@ -659,12 +667,14 @@ open class ArgonautEntity(
         private val DATA_ID_GLOWING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.BOOLEAN)
 
-        val SHELL_COLOR: EntityDataAccessor<Int> =
+        private val SHELL_COLOR: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.INT)
 
-        val SAIL_COLOR: EntityDataAccessor<Int> =
+        private val SAIL_COLOR: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.INT)
 
+        private val IS_BURNING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(ArgonautEntity::class.java, EntityDataSerializers.BOOLEAN)
     }
 
     enum class ShellColor(val id: Int, val key: String) : StringRepresentable {
