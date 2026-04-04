@@ -6,7 +6,7 @@ import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.cephalopod.HACephalopodEntity
 import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -172,7 +172,7 @@ class DamselfishEntity(type: EntityType<out DamselfishEntity>, world: Level) :
                 attacker !is HASharkEntity &&
                 attacker !is HACephalopodEntity &&
                 attacker !is HAMammalEntity) {
-                spawnAtLocation(HAAquaticItems.DAMSELFISH.get())
+                spawnAtLocation(HAItems.DAMSELFISH.get())
             }
         }
 

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -25,7 +25,7 @@ class SandTigerSharkEntity(type: EntityType<out SandTigerSharkEntity>, world: Le
     override val closePlayerAttack: Boolean = false
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAAquaticItems.SURGEONFISH.get())
+        return stack.`is`(HAItems.SURGEONFISH.get())
     }
 
     override fun registerGoals() {

@@ -18,7 +18,7 @@ import dev.hybridlabs.aquatic.client.render.block.HABlockRenderers
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
@@ -158,31 +158,31 @@ object HybridAquaticModBusEvents {
     private fun onClientSetup(event: FMLClientSetupEvent) {
         Constants.LOG.info("Initializing client...")
         registerTrinketRenderer(
-            HAAquaticItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD
+            HAItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HAAquaticItems.EEL_SCARF.get(), EquipmentSlot.CHEST
+            HAItems.EEL_SCARF.get(), EquipmentSlot.CHEST
         )
         registerTrinketRenderer(
-            HAAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST
+            HAItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST
         )
         registerTrinketRenderer(
-            HAAquaticItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD
+            HAItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HAAquaticItems.BROWN_HATXOLOTL.get(), EquipmentSlot.HEAD
+            HAItems.BROWN_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HAAquaticItems.BLUE_HATXOLOTL.get(), EquipmentSlot.HEAD
+            HAItems.BLUE_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HAAquaticItems.CYAN_HATXOLOTL.get(), EquipmentSlot.HEAD
+            HAItems.CYAN_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HAAquaticItems.GOLD_HATXOLOTL.get(), EquipmentSlot.HEAD
+            HAItems.GOLD_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
         registerTrinketRenderer(
-            HAAquaticItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD
+            HAItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
     }
 

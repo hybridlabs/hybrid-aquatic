@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.IntProvider
@@ -36,7 +36,7 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAAquaticItems.MACKEREL.get())
+        return stack.`is`(HAItems.MACKEREL.get())
     }
 
     companion object {

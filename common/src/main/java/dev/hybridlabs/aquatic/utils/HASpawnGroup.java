@@ -6,7 +6,7 @@ import net.minecraft.world.entity.MobCategory;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public enum HybridAquaticSpawnGroup {
+public enum HASpawnGroup {
     HYBRID_AQUATIC_FISH("fish", 10, true, false, 64),
     HYBRID_AQUATIC_RIVER_FISH("river_fish", 6, true, false, 64),
     HYBRID_AQUATIC_CEPHALOPOD("cephalopod", 4, true, false, 64),
@@ -25,7 +25,7 @@ public enum HybridAquaticSpawnGroup {
     public final boolean rare;
     public final int immediateDespawnRange;
 
-    HybridAquaticSpawnGroup(String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
+    HASpawnGroup(String name, int spawnCap, boolean peaceful, boolean rare, int immediateDespawnRange) {
         this.gName = Constants.MOD_ID + ":" + name;
         this.spawnCap = spawnCap;
         this.peaceful = peaceful;

@@ -8,7 +8,7 @@ import dev.hybridlabs.aquatic.item.GiantGreenAnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
-import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup;
+import dev.hybridlabs.aquatic.utils.HASpawnGroup;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -92,7 +92,7 @@ public class FabricPlatformHelper implements PlatformHelper {
 
     @Override
     public @Nullable MobCategory getMobCategoryByName(String name) {
-        return HybridAquaticSpawnGroup.byName(name);
+        return HASpawnGroup.byName(name);
     }
 
     @Override

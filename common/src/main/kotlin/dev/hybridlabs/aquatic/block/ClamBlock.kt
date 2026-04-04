@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
@@ -25,7 +25,7 @@ class ClamBlock(properties: Properties) : CropBlock(properties),
     LiquidBlockContainer {
 
     override fun getBaseSeedId(): ItemLike {
-        return HAAquaticItems.CLAM.get()
+        return HAItems.CLAM.get()
     }
 
     override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {

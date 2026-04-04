@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.loot.HALootTables
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -65,17 +65,17 @@ class FishingLootTableProvider(output: FabricDataOutput) :
                 .setRandomSequence(HALootTables.HA_CRATES)
                 .pool(
                     LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HAAquaticItems.CRAB_POT.get()))
-                        .add(LootItem.lootTableItem(HAAquaticItems.HYBRID_CRATE.get()))
-                        .add(LootItem.lootTableItem(HAAquaticItems.OAK_CRATE.get()))
-                        .add(LootItem.lootTableItem(HAAquaticItems.SPRUCE_CRATE.get()))
-                        .add(LootItem.lootTableItem(HAAquaticItems.BIRCH_CRATE.get()))
-                        .add(LootItem.lootTableItem(HAAquaticItems.DARK_OAK_CRATE.get()))
-                        .add(LootItem.lootTableItem(HAAquaticItems.ACACIA_CRATE.get()))
-                        .add(LootItem.lootTableItem(HAAquaticItems.JUNGLE_CRATE.get()))
-                        .add(LootItem.lootTableItem(HAAquaticItems.BAMBOO_CRATE.get()))
-                        .add(LootItem.lootTableItem(HAAquaticItems.MANGROVE_CRATE.get()))
-                        .add(LootItem.lootTableItem(HAAquaticItems.CHERRY_CRATE.get())).build()
+                        .add(LootItem.lootTableItem(HAItems.CRAB_POT.get()))
+                        .add(LootItem.lootTableItem(HAItems.HYBRID_CRATE.get()))
+                        .add(LootItem.lootTableItem(HAItems.OAK_CRATE.get()))
+                        .add(LootItem.lootTableItem(HAItems.SPRUCE_CRATE.get()))
+                        .add(LootItem.lootTableItem(HAItems.BIRCH_CRATE.get()))
+                        .add(LootItem.lootTableItem(HAItems.DARK_OAK_CRATE.get()))
+                        .add(LootItem.lootTableItem(HAItems.ACACIA_CRATE.get()))
+                        .add(LootItem.lootTableItem(HAItems.JUNGLE_CRATE.get()))
+                        .add(LootItem.lootTableItem(HAItems.BAMBOO_CRATE.get()))
+                        .add(LootItem.lootTableItem(HAItems.MANGROVE_CRATE.get()))
+                        .add(LootItem.lootTableItem(HAItems.CHERRY_CRATE.get())).build()
                     //.add(MessageInABottleLootItem.lootTableItem())
                 )
         )

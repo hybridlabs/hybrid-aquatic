@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -165,7 +165,7 @@ class FlashlightFishEntity(type: EntityType<out FlashlightFishEntity>, world: Le
             }
 
             if (newFishCount in 1..<oldFishCount && level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS)) {
-                spawnAtLocation(HAAquaticItems.FLASHLIGHT_FISH.get())
+                spawnAtLocation(HAItems.FLASHLIGHT_FISH.get())
             }
         }
 

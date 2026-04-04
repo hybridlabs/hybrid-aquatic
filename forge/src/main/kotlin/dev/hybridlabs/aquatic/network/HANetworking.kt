@@ -15,7 +15,7 @@ import net.minecraftforge.network.PacketDistributor
 import net.minecraftforge.network.simple.SimpleChannel
 import java.util.function.Supplier
 
-object HybridAquaticNetworking {
+object HANetworking {
     private const val PROTOCOL_VERSION = "1"
     val CHANNEL: SimpleChannel = NetworkRegistry.newSimpleChannel(
         CommonClass.locate("main"),

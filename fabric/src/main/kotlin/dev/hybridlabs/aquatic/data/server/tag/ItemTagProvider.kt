@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.data.server.tag
 
 import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -19,11 +19,11 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
     override fun addTags(arg: HolderLookup.Provider) {
         // Items that will be consumed by a fishing rod
         setOf(
-            HAAquaticItems.BARBED_HOOK.get(),
-            HAAquaticItems.GLOWING_HOOK.get(),
-            HAAquaticItems.MAGNETIC_HOOK.get(),
-            HAAquaticItems.CREEPERMAGNET_HOOK.get(),
-            HAAquaticItems.OMINOUS_HOOK.get()
+            HAItems.BARBED_HOOK.get(),
+            HAItems.GLOWING_HOOK.get(),
+            HAItems.MAGNETIC_HOOK.get(),
+            HAItems.CREEPERMAGNET_HOOK.get(),
+            HAItems.OMINOUS_HOOK.get()
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.LURE_ITEMS).add(item)
         }
@@ -48,9 +48,9 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         getOrCreateTagBuilder(HAItemTags.DIVING_HELMET)
             .add(
-                HAAquaticItems.DIVING_HELMET.get(),
-                HAAquaticItems.REINFORCED_DIVING_HELMET.get(),
-                HAAquaticItems.GLOWING_DIVING_HELMET.get(),
+                HAItems.DIVING_HELMET.get(),
+                HAItems.REINFORCED_DIVING_HELMET.get(),
+                HAItems.GLOWING_DIVING_HELMET.get(),
             )
             .addOptional(ResourceLocation("create", "copper_diving_helmet"))
             .addOptional(ResourceLocation("create", "netherite_diving_helmet"))
@@ -59,27 +59,27 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         getOrCreateTagBuilder(HAItemTags.DIVING_SUIT)
             .add(
-                HAAquaticItems.DIVING_SUIT.get(),
-                HAAquaticItems.REINFORCED_DIVING_SUIT.get(),
-                HAAquaticItems.GLOWING_DIVING_SUIT.get(),
+                HAItems.DIVING_SUIT.get(),
+                HAItems.REINFORCED_DIVING_SUIT.get(),
+                HAItems.GLOWING_DIVING_SUIT.get(),
             )
             .addOptional(ResourceLocation("aquamirae", "three_bolt_chestplate"))
             .addOptional(ResourceLocation("alexscaves", "diving_chestplate"))
 
         getOrCreateTagBuilder(HAItemTags.DIVING_LEGGINGS)
             .add(
-                HAAquaticItems.DIVING_LEGGINGS.get(),
-                HAAquaticItems.REINFORCED_DIVING_LEGGINGS.get(),
-                HAAquaticItems.GLOWING_DIVING_LEGGINGS.get(),
+                HAItems.DIVING_LEGGINGS.get(),
+                HAItems.REINFORCED_DIVING_LEGGINGS.get(),
+                HAItems.GLOWING_DIVING_LEGGINGS.get(),
             )
             .addOptional(ResourceLocation("aquamirae", "three_bolt_leggings"))
             .addOptional(ResourceLocation("alexscaves", "diving_leggings"))
 
         getOrCreateTagBuilder(HAItemTags.DIVING_BOOTS)
             .add(
-                HAAquaticItems.DIVING_BOOTS.get(),
-                HAAquaticItems.REINFORCED_DIVING_BOOTS.get(),
-                HAAquaticItems.GLOWING_DIVING_BOOTS.get(),
+                HAItems.DIVING_BOOTS.get(),
+                HAItems.REINFORCED_DIVING_BOOTS.get(),
+                HAItems.GLOWING_DIVING_BOOTS.get(),
             )
             .addOptional(ResourceLocation("create", "copper_diving_boots"))
             .addOptional(ResourceLocation("create", "netherite_diving_boots"))
@@ -110,10 +110,10 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
                 Items.GOLDEN_LEGGINGS,
                 Items.GOLDEN_BOOTS,
 
-                HAAquaticItems.REINFORCED_DIVING_HELMET.get(),
-                HAAquaticItems.REINFORCED_DIVING_SUIT.get(),
-                HAAquaticItems.REINFORCED_DIVING_LEGGINGS.get(),
-                HAAquaticItems.REINFORCED_DIVING_BOOTS.get(),
+                HAItems.REINFORCED_DIVING_HELMET.get(),
+                HAItems.REINFORCED_DIVING_SUIT.get(),
+                HAItems.REINFORCED_DIVING_LEGGINGS.get(),
+                HAItems.REINFORCED_DIVING_BOOTS.get(),
             )
         //#endregion
 
@@ -165,109 +165,109 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         //#endregion
 
         getOrCreateTagBuilder(HAItemTags.STONES)
-            .add(HAAquaticItems.SHORESTONE.get())
-            .add(HAAquaticItems.BARNACLE_SHORESTONE.get())
-            .add(HAAquaticItems.CORALSTONE.get())
+            .add(HAItems.SHORESTONE.get())
+            .add(HAItems.BARNACLE_SHORESTONE.get())
+            .add(HAItems.CORALSTONE.get())
 
         getOrCreateTagBuilder(HAItemTags.SANDS)
-            .add(HAAquaticItems.WHITE_SAND.get())
-            .add(HAAquaticItems.GRASSY_SAND.get())
+            .add(HAItems.WHITE_SAND.get())
+            .add(HAItems.GRASSY_SAND.get())
 
         //#region Tool Tags
         getOrCreateTagBuilder(HAItemTags.CORAL_SET)
-            .add(HAAquaticItems.CORAL_BLADE.get())
-            .add(HAAquaticItems.CORAL_PICKAXE.get())
-            .add(HAAquaticItems.CORAL_AXE.get())
-            .add(HAAquaticItems.CORAL_SHOVEL.get())
-            .add(HAAquaticItems.CORAL_HOE.get())
+            .add(HAItems.CORAL_BLADE.get())
+            .add(HAItems.CORAL_PICKAXE.get())
+            .add(HAItems.CORAL_AXE.get())
+            .add(HAItems.CORAL_SHOVEL.get())
+            .add(HAItems.CORAL_HOE.get())
 
         getOrCreateTagBuilder(HAItemTags.SEASHELL_SET)
-            .add(HAAquaticItems.SEASHELL_SPEAR.get())
-            .add(HAAquaticItems.SEASHELL_PICKAXE.get())
-            .add(HAAquaticItems.SEASHELL_AXE.get())
-            .add(HAAquaticItems.SEASHELL_SHOVEL.get())
-            .add(HAAquaticItems.SEASHELL_HOE.get())
+            .add(HAItems.SEASHELL_SPEAR.get())
+            .add(HAItems.SEASHELL_PICKAXE.get())
+            .add(HAItems.SEASHELL_AXE.get())
+            .add(HAItems.SEASHELL_SHOVEL.get())
+            .add(HAItems.SEASHELL_HOE.get())
 
         getOrCreateTagBuilder(HAItemTags.TURTLE_SET)
-            .add(HAAquaticItems.TURTLE_CHESTPLATE.get())
+            .add(HAItems.TURTLE_CHESTPLATE.get())
             .add(Items.TURTLE_HELMET)
 
         getOrCreateTagBuilder(ItemTags.SWORDS)
-            .add(HAAquaticItems.SEASHELL_SPEAR.get())
-            .add(HAAquaticItems.CORAL_BLADE.get())
+            .add(HAItems.SEASHELL_SPEAR.get())
+            .add(HAItems.CORAL_BLADE.get())
 
         getOrCreateTagBuilder(ItemTags.SHOVELS)
-            .add(HAAquaticItems.SEASHELL_SHOVEL.get())
-            .add(HAAquaticItems.CORAL_SHOVEL.get())
+            .add(HAItems.SEASHELL_SHOVEL.get())
+            .add(HAItems.CORAL_SHOVEL.get())
 
         getOrCreateTagBuilder(ItemTags.AXES)
-            .add(HAAquaticItems.SEASHELL_AXE.get())
-            .add(HAAquaticItems.CORAL_AXE.get())
+            .add(HAItems.SEASHELL_AXE.get())
+            .add(HAItems.CORAL_AXE.get())
 
         getOrCreateTagBuilder(ItemTags.PICKAXES)
-            .add(HAAquaticItems.SEASHELL_PICKAXE.get())
-            .add(HAAquaticItems.CORAL_PICKAXE.get())
+            .add(HAItems.SEASHELL_PICKAXE.get())
+            .add(HAItems.CORAL_PICKAXE.get())
 
         getOrCreateTagBuilder(ItemTags.HOES)
-            .add(HAAquaticItems.SEASHELL_HOE.get())
-            .add(HAAquaticItems.CORAL_HOE.get())
+            .add(HAItems.SEASHELL_HOE.get())
+            .add(HAItems.CORAL_HOE.get())
         //#endregion
 
         listOf(
-            HAAquaticItems.RAW_LOBSTER.get(),
-            HAAquaticItems.COOKED_LOBSTER.get(),
-            HAAquaticItems.RAW_LOBSTER_TAIL.get(),
-            HAAquaticItems.COOKED_LOBSTER_TAIL.get(),
+            HAItems.RAW_LOBSTER.get(),
+            HAItems.COOKED_LOBSTER.get(),
+            HAItems.RAW_LOBSTER_TAIL.get(),
+            HAItems.COOKED_LOBSTER_TAIL.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.LOBSTER_MEAT).add(item)
         }
 
         listOf(
-            HAAquaticItems.RAW_LOBSTER.get(),
-            HAAquaticItems.COOKED_LOBSTER.get(),
-            HAAquaticItems.RAW_LOBSTER_TAIL.get(),
-            HAAquaticItems.COOKED_LOBSTER_TAIL.get(),
-            HAAquaticItems.RAW_CRAB.get(),
-            HAAquaticItems.COOKED_CRAB.get(),
-            HAAquaticItems.RAW_SHRIMP.get(),
-            HAAquaticItems.COOKED_SHRIMP.get(),
-            HAAquaticItems.RAW_CRAYFISH.get(),
-            HAAquaticItems.COOKED_CRAYFISH.get(),
+            HAItems.RAW_LOBSTER.get(),
+            HAItems.COOKED_LOBSTER.get(),
+            HAItems.RAW_LOBSTER_TAIL.get(),
+            HAItems.COOKED_LOBSTER_TAIL.get(),
+            HAItems.RAW_CRAB.get(),
+            HAItems.COOKED_CRAB.get(),
+            HAItems.RAW_SHRIMP.get(),
+            HAItems.COOKED_SHRIMP.get(),
+            HAItems.RAW_CRAYFISH.get(),
+            HAItems.COOKED_CRAYFISH.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.CRUSTACEAN_MEAT).add(item)
         }
 
         listOf(
-            HAAquaticItems.CARP.get(),
-            HAAquaticItems.TROUT.get(),
-            HAAquaticItems.SUNFISH.get(),
-            HAAquaticItems.PLECO.get(),
-            HAAquaticItems.GOLDFISH.get(),
-            HAAquaticItems.DRAGONFISH.get(),
-            HAAquaticItems.PIRANHA.get(),
-            HAAquaticItems.ANGLERFISH.get(),
-            HAAquaticItems.BARRELEYE.get(),
-            HAAquaticItems.SURGEONFISH.get(),
-            HAAquaticItems.CLOWNFISH.get(),
-            HAAquaticItems.DAMSELFISH.get(),
-            HAAquaticItems.BOXFISH.get(),
-            HAAquaticItems.TIGER_BARB.get(),
-            HAAquaticItems.FLYING_FISH.get(),
-            HAAquaticItems.SNAILFISH.get(),
-            HAAquaticItems.PEARLFISH.get(),
-            HAAquaticItems.OSCAR.get(),
-            HAAquaticItems.FLASHLIGHT_FISH.get(),
-            HAAquaticItems.SQUIRRELFISH.get(),
-            HAAquaticItems.BLOWFISH.get(),
-            HAAquaticItems.STONEFISH.get(),
-            HAAquaticItems.DISCUS.get(),
-            HAAquaticItems.GOURAMI.get(),
-            HAAquaticItems.BETTA.get(),
-            HAAquaticItems.DANIO.get(),
-            HAAquaticItems.NEON_TETRA.get(),
-            HAAquaticItems.MACKEREL.get(),
-            HAAquaticItems.HERRING.get(),
-            HAAquaticItems.JOHN_DORY.get(),
+            HAItems.CARP.get(),
+            HAItems.TROUT.get(),
+            HAItems.SUNFISH.get(),
+            HAItems.PLECO.get(),
+            HAItems.GOLDFISH.get(),
+            HAItems.DRAGONFISH.get(),
+            HAItems.PIRANHA.get(),
+            HAItems.ANGLERFISH.get(),
+            HAItems.BARRELEYE.get(),
+            HAItems.SURGEONFISH.get(),
+            HAItems.CLOWNFISH.get(),
+            HAItems.DAMSELFISH.get(),
+            HAItems.BOXFISH.get(),
+            HAItems.TIGER_BARB.get(),
+            HAItems.FLYING_FISH.get(),
+            HAItems.SNAILFISH.get(),
+            HAItems.PEARLFISH.get(),
+            HAItems.OSCAR.get(),
+            HAItems.FLASHLIGHT_FISH.get(),
+            HAItems.SQUIRRELFISH.get(),
+            HAItems.BLOWFISH.get(),
+            HAItems.STONEFISH.get(),
+            HAItems.DISCUS.get(),
+            HAItems.GOURAMI.get(),
+            HAItems.BETTA.get(),
+            HAItems.DANIO.get(),
+            HAItems.NEON_TETRA.get(),
+            HAItems.MACKEREL.get(),
+            HAItems.HERRING.get(),
+            HAItems.JOHN_DORY.get(),
             Items.COD,
             Items.SALMON,
             Items.TROPICAL_FISH,
@@ -276,190 +276,190 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         }
 
         listOf(
-            HAAquaticItems.MORAY_EEL.get(),
-            HAAquaticItems.TRIGGERFISH.get(),
-            HAAquaticItems.TREVALLY.get(),
-            HAAquaticItems.PARROTFISH.get(),
-            HAAquaticItems.SHEEPSHEAD_WRASSE.get(),
-            HAAquaticItems.RATFISH.get(),
-            HAAquaticItems.BLUE_SPOTTED_STINGRAY.get(),
-            HAAquaticItems.SPOTTED_EAGLE_RAY.get(),
-            HAAquaticItems.LIONFISH.get(),
-            HAAquaticItems.ROCKFISH.get(),
-            HAAquaticItems.SEA_BASS.get(),
-            HAAquaticItems.NEEDLEFISH.get(),
+            HAItems.MORAY_EEL.get(),
+            HAItems.TRIGGERFISH.get(),
+            HAItems.TREVALLY.get(),
+            HAItems.PARROTFISH.get(),
+            HAItems.SHEEPSHEAD_WRASSE.get(),
+            HAItems.RATFISH.get(),
+            HAItems.BLUE_SPOTTED_STINGRAY.get(),
+            HAItems.SPOTTED_EAGLE_RAY.get(),
+            HAItems.LIONFISH.get(),
+            HAItems.ROCKFISH.get(),
+            HAItems.SEA_BASS.get(),
+            HAItems.NEEDLEFISH.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.MEDIUM_FISH).add(item)
         }
 
         listOf(
-            HAAquaticItems.OCEAN_SUNFISH.get(),
-            HAAquaticItems.OARFISH.get(),
-            HAAquaticItems.TUNA.get(),
-            HAAquaticItems.MAHI.get(),
-            HAAquaticItems.OPAH.get(),
-            HAAquaticItems.GOLDEN_DORADO.get(),
-            HAAquaticItems.COELACANTH.get(),
+            HAItems.OCEAN_SUNFISH.get(),
+            HAItems.OARFISH.get(),
+            HAItems.TUNA.get(),
+            HAItems.MAHI.get(),
+            HAItems.OPAH.get(),
+            HAItems.GOLDEN_DORADO.get(),
+            HAItems.COELACANTH.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.LARGE_FISH).add(item)
         }
 
         listOf(
-            HAAquaticItems.COCONUT_CRAB_CLAW.get(),
-            HAAquaticItems.DUNGENESS_CRAB_CLAW.get(),
-            HAAquaticItems.FIDDLER_CRAB_CLAW.get(),
-            HAAquaticItems.FLOWER_CRAB_CLAW.get(),
-            HAAquaticItems.GHOST_CRAB_CLAW.get(),
-            HAAquaticItems.LIGHTFOOT_CRAB_CLAW.get(),
-            HAAquaticItems.SPIDER_CRAB_CLAW.get(),
-            HAAquaticItems.VAMPIRE_CRAB_CLAW.get(),
-            HAAquaticItems.YETI_CRAB_CLAW.get(),
+            HAItems.COCONUT_CRAB_CLAW.get(),
+            HAItems.DUNGENESS_CRAB_CLAW.get(),
+            HAItems.FIDDLER_CRAB_CLAW.get(),
+            HAItems.FLOWER_CRAB_CLAW.get(),
+            HAItems.GHOST_CRAB_CLAW.get(),
+            HAItems.LIGHTFOOT_CRAB_CLAW.get(),
+            HAItems.SPIDER_CRAB_CLAW.get(),
+            HAItems.VAMPIRE_CRAB_CLAW.get(),
+            HAItems.YETI_CRAB_CLAW.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.CRAB_CLAW).add(item)
         }
 
         listOf(
-            HAAquaticItems.ANGLERFISH.get(),
-            HAAquaticItems.GOLDFISH.get(),
-            HAAquaticItems.CARP.get(),
-            HAAquaticItems.TROUT.get(),
-            HAAquaticItems.SUNFISH.get(),
-            HAAquaticItems.MACKEREL.get(),
-            HAAquaticItems.HERRING.get(),
-            HAAquaticItems.DAMSELFISH.get(),
-            HAAquaticItems.SEA_BASS.get(),
-            HAAquaticItems.PARROTFISH.get(),
-            HAAquaticItems.SHEEPSHEAD_WRASSE.get(),
-            HAAquaticItems.SEAHORSE.get(),
-            HAAquaticItems.BARRELEYE.get(),
-            HAAquaticItems.BETTA.get(),
-            HAAquaticItems.BLUE_SPOTTED_STINGRAY.get(),
-            HAAquaticItems.SPOTTED_EAGLE_RAY.get(),
-            HAAquaticItems.TUNA.get(),
-            HAAquaticItems.SURGEONFISH.get(),
-            HAAquaticItems.PEARLFISH.get(),
-            HAAquaticItems.SNAILFISH.get(),
-            HAAquaticItems.CLOWNFISH.get(),
-            HAAquaticItems.BOXFISH.get(),
-            HAAquaticItems.STONEFISH.get(),
-            HAAquaticItems.BLOWFISH.get(),
-            HAAquaticItems.OARFISH.get(),
-            HAAquaticItems.OCEAN_SUNFISH.get(),
-            HAAquaticItems.DANIO.get(),
-            HAAquaticItems.DISCUS.get(),
-            HAAquaticItems.DRAGONFISH.get(),
-            HAAquaticItems.FLASHLIGHT_FISH.get(),
-            HAAquaticItems.FLYING_FISH.get(),
-            HAAquaticItems.GOLDEN_DORADO.get(),
-            HAAquaticItems.COELACANTH.get(),
-            HAAquaticItems.SQUIRRELFISH.get(),
-            HAAquaticItems.GOURAMI.get(),
-            HAAquaticItems.LIONFISH.get(),
-            HAAquaticItems.MAHI.get(),
-            HAAquaticItems.MORAY_EEL.get(),
-            HAAquaticItems.NEEDLEFISH.get(),
-            HAAquaticItems.OPAH.get(),
-            HAAquaticItems.OSCAR.get(),
-            HAAquaticItems.PIRANHA.get(),
-            HAAquaticItems.RATFISH.get(),
-            HAAquaticItems.ROCKFISH.get(),
-            HAAquaticItems.NEON_TETRA.get(),
-            HAAquaticItems.TIGER_BARB.get(),
-            HAAquaticItems.TRIGGERFISH.get(),
-            HAAquaticItems.TREVALLY.get(),
-            HAAquaticItems.JOHN_DORY.get(),
-            HAAquaticItems.RAW_FISH_MEAT.get(),
-            HAAquaticItems.RAW_FISH_STEAK.get(),
-            HAAquaticItems.RAW_TENTACLE.get(),
-            HAAquaticItems.RAW_CRAB.get(),
-            HAAquaticItems.RAW_SHRIMP.get(),
-            HAAquaticItems.RAW_LOBSTER.get(),
-            HAAquaticItems.RAW_CRAYFISH.get(),
-            HAAquaticItems.RAW_LOBSTER_TAIL.get(),
+            HAItems.ANGLERFISH.get(),
+            HAItems.GOLDFISH.get(),
+            HAItems.CARP.get(),
+            HAItems.TROUT.get(),
+            HAItems.SUNFISH.get(),
+            HAItems.MACKEREL.get(),
+            HAItems.HERRING.get(),
+            HAItems.DAMSELFISH.get(),
+            HAItems.SEA_BASS.get(),
+            HAItems.PARROTFISH.get(),
+            HAItems.SHEEPSHEAD_WRASSE.get(),
+            HAItems.SEAHORSE.get(),
+            HAItems.BARRELEYE.get(),
+            HAItems.BETTA.get(),
+            HAItems.BLUE_SPOTTED_STINGRAY.get(),
+            HAItems.SPOTTED_EAGLE_RAY.get(),
+            HAItems.TUNA.get(),
+            HAItems.SURGEONFISH.get(),
+            HAItems.PEARLFISH.get(),
+            HAItems.SNAILFISH.get(),
+            HAItems.CLOWNFISH.get(),
+            HAItems.BOXFISH.get(),
+            HAItems.STONEFISH.get(),
+            HAItems.BLOWFISH.get(),
+            HAItems.OARFISH.get(),
+            HAItems.OCEAN_SUNFISH.get(),
+            HAItems.DANIO.get(),
+            HAItems.DISCUS.get(),
+            HAItems.DRAGONFISH.get(),
+            HAItems.FLASHLIGHT_FISH.get(),
+            HAItems.FLYING_FISH.get(),
+            HAItems.GOLDEN_DORADO.get(),
+            HAItems.COELACANTH.get(),
+            HAItems.SQUIRRELFISH.get(),
+            HAItems.GOURAMI.get(),
+            HAItems.LIONFISH.get(),
+            HAItems.MAHI.get(),
+            HAItems.MORAY_EEL.get(),
+            HAItems.NEEDLEFISH.get(),
+            HAItems.OPAH.get(),
+            HAItems.OSCAR.get(),
+            HAItems.PIRANHA.get(),
+            HAItems.RATFISH.get(),
+            HAItems.ROCKFISH.get(),
+            HAItems.NEON_TETRA.get(),
+            HAItems.TIGER_BARB.get(),
+            HAItems.TRIGGERFISH.get(),
+            HAItems.TREVALLY.get(),
+            HAItems.JOHN_DORY.get(),
+            HAItems.RAW_FISH_MEAT.get(),
+            HAItems.RAW_FISH_STEAK.get(),
+            HAItems.RAW_TENTACLE.get(),
+            HAItems.RAW_CRAB.get(),
+            HAItems.RAW_SHRIMP.get(),
+            HAItems.RAW_LOBSTER.get(),
+            HAItems.RAW_CRAYFISH.get(),
+            HAItems.RAW_LOBSTER_TAIL.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.RAW_FISH).add(item)
             getOrCreateTagBuilder(HAItemTags.RAW_FISHES).add(item)
         }
 
         listOf(
-            HAAquaticItems.COOKED_FISH_MEAT.get(),
-            HAAquaticItems.COOKED_FISH_STEAK.get(),
-            HAAquaticItems.COOKED_TENTACLE.get(),
-            HAAquaticItems.COOKED_CRAB.get(),
-            HAAquaticItems.COOKED_SHRIMP.get(),
-            HAAquaticItems.COOKED_LOBSTER.get(),
-            HAAquaticItems.COOKED_CRAYFISH.get(),
-            HAAquaticItems.COOKED_LOBSTER_TAIL.get(),
+            HAItems.COOKED_FISH_MEAT.get(),
+            HAItems.COOKED_FISH_STEAK.get(),
+            HAItems.COOKED_TENTACLE.get(),
+            HAItems.COOKED_CRAB.get(),
+            HAItems.COOKED_SHRIMP.get(),
+            HAItems.COOKED_LOBSTER.get(),
+            HAItems.COOKED_CRAYFISH.get(),
+            HAItems.COOKED_LOBSTER_TAIL.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.COOKED_FISH).add(item)
             getOrCreateTagBuilder(HAItemTags.COOKED_FISHES).add(item)
         }
 
         listOf(
-            HAAquaticItems.SARGASSUM.get(),
-            HAAquaticItems.BULL_KELP.get(),
+            HAItems.SARGASSUM.get(),
+            HAItems.BULL_KELP.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.KELPS).add(item)
         }
 
         listOf(
-            HAAquaticItems.LIONFISH.get(),
-            HAAquaticItems.STONEFISH.get(),
-            HAAquaticItems.BLOWFISH.get(),
-            HAAquaticItems.BOXFISH.get(),
-            HAAquaticItems.BLUE_SPOTTED_STINGRAY.get(),
-            HAAquaticItems.SPOTTED_EAGLE_RAY.get(),
+            HAItems.LIONFISH.get(),
+            HAItems.STONEFISH.get(),
+            HAItems.BLOWFISH.get(),
+            HAItems.BOXFISH.get(),
+            HAItems.BLUE_SPOTTED_STINGRAY.get(),
+            HAItems.SPOTTED_EAGLE_RAY.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.FOOD_POISONING).add(item)
         }
 
         listOf(
-            HAAquaticItems.ANGLERFISH.get(),
-            HAAquaticItems.BARRELEYE.get(),
-            HAAquaticItems.CLOWNFISH.get(),
-            HAAquaticItems.DRAGONFISH.get(),
-            HAAquaticItems.FLASHLIGHT_FISH.get(),
-            HAAquaticItems.ROCKFISH.get(),
-            HAAquaticItems.SEA_BASS.get(),
-            HAAquaticItems.SEAHORSE.get(),
-            HAAquaticItems.MACKEREL.get(),
-            HAAquaticItems.HERRING.get(),
-            HAAquaticItems.BOXFISH.get(),
-            HAAquaticItems.BLOWFISH.get(),
-            HAAquaticItems.STONEFISH.get(),
-            HAAquaticItems.PARROTFISH.get(),
-            HAAquaticItems.SHEEPSHEAD_WRASSE.get(),
-            HAAquaticItems.OCEAN_SUNFISH.get(),
-            HAAquaticItems.CARP.get(),
-            HAAquaticItems.TROUT.get(),
-            HAAquaticItems.SUNFISH.get(),
-            HAAquaticItems.GOLDFISH.get(),
-            HAAquaticItems.OARFISH.get(),
-            HAAquaticItems.TUNA.get(),
-            HAAquaticItems.SURGEONFISH.get(),
-            HAAquaticItems.TRIGGERFISH.get(),
-            HAAquaticItems.TREVALLY.get(),
-            HAAquaticItems.OSCAR.get(),
-            HAAquaticItems.OPAH.get(),
-            HAAquaticItems.MAHI.get(),
-            HAAquaticItems.NEEDLEFISH.get(),
-            HAAquaticItems.BLUE_SPOTTED_STINGRAY.get(),
-            HAAquaticItems.SPOTTED_EAGLE_RAY.get(),
-            HAAquaticItems.LIONFISH.get(),
-            HAAquaticItems.MORAY_EEL.get(),
-            HAAquaticItems.PIRANHA.get(),
-            HAAquaticItems.NEON_TETRA.get(),
-            HAAquaticItems.DANIO.get(),
-            HAAquaticItems.GOURAMI.get(),
-            HAAquaticItems.BETTA.get(),
-            HAAquaticItems.DISCUS.get(),
-            HAAquaticItems.RATFISH.get(),
-            HAAquaticItems.FLYING_FISH.get(),
-            HAAquaticItems.TIGER_BARB.get(),
-            HAAquaticItems.JOHN_DORY.get(),
-            HAAquaticItems.COELACANTH.get(),
-            HAAquaticItems.SQUIRRELFISH.get(),
-            HAAquaticItems.GOLDEN_DORADO.get(),
+            HAItems.ANGLERFISH.get(),
+            HAItems.BARRELEYE.get(),
+            HAItems.CLOWNFISH.get(),
+            HAItems.DRAGONFISH.get(),
+            HAItems.FLASHLIGHT_FISH.get(),
+            HAItems.ROCKFISH.get(),
+            HAItems.SEA_BASS.get(),
+            HAItems.SEAHORSE.get(),
+            HAItems.MACKEREL.get(),
+            HAItems.HERRING.get(),
+            HAItems.BOXFISH.get(),
+            HAItems.BLOWFISH.get(),
+            HAItems.STONEFISH.get(),
+            HAItems.PARROTFISH.get(),
+            HAItems.SHEEPSHEAD_WRASSE.get(),
+            HAItems.OCEAN_SUNFISH.get(),
+            HAItems.CARP.get(),
+            HAItems.TROUT.get(),
+            HAItems.SUNFISH.get(),
+            HAItems.GOLDFISH.get(),
+            HAItems.OARFISH.get(),
+            HAItems.TUNA.get(),
+            HAItems.SURGEONFISH.get(),
+            HAItems.TRIGGERFISH.get(),
+            HAItems.TREVALLY.get(),
+            HAItems.OSCAR.get(),
+            HAItems.OPAH.get(),
+            HAItems.MAHI.get(),
+            HAItems.NEEDLEFISH.get(),
+            HAItems.BLUE_SPOTTED_STINGRAY.get(),
+            HAItems.SPOTTED_EAGLE_RAY.get(),
+            HAItems.LIONFISH.get(),
+            HAItems.MORAY_EEL.get(),
+            HAItems.PIRANHA.get(),
+            HAItems.NEON_TETRA.get(),
+            HAItems.DANIO.get(),
+            HAItems.GOURAMI.get(),
+            HAItems.BETTA.get(),
+            HAItems.DISCUS.get(),
+            HAItems.RATFISH.get(),
+            HAItems.FLYING_FISH.get(),
+            HAItems.TIGER_BARB.get(),
+            HAItems.JOHN_DORY.get(),
+            HAItems.COELACANTH.get(),
+            HAItems.SQUIRRELFISH.get(),
+            HAItems.GOLDEN_DORADO.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(ItemTags.FISHES).add(item)
         }
@@ -476,12 +476,12 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             }
 
         setOf(
-            HAAquaticItems.MOON_JELLYFISH_HAT.get(),
-            HAAquaticItems.MANGLERFISH_LURE.get(),
-            HAAquaticItems.PINK_HATXOLOTL.get(),
-            HAAquaticItems.CYAN_HATXOLOTL.get(),
-            HAAquaticItems.BLUE_HATXOLOTL.get(),
-            HAAquaticItems.BROWN_HATXOLOTL.get(),
+            HAItems.MOON_JELLYFISH_HAT.get(),
+            HAItems.MANGLERFISH_LURE.get(),
+            HAItems.PINK_HATXOLOTL.get(),
+            HAItems.CYAN_HATXOLOTL.get(),
+            HAItems.BLUE_HATXOLOTL.get(),
+            HAItems.BROWN_HATXOLOTL.get(),
             HybridAquaticItems.GOLD_HATXOLOTL.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.HAT).add(item)

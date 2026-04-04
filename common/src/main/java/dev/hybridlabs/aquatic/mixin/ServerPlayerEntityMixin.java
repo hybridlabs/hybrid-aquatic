@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.mixin;
 
-import dev.hybridlabs.aquatic.item.HybridAquaticItems;
+import dev.hybridlabs.aquatic.item.HAItems;
 import net.minecraft.network.protocol.game.ClientboundOpenBookPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
@@ -22,7 +22,7 @@ public class ServerPlayerEntityMixin {
      */
     @Inject(method = "openItemGui", at = @At("TAIL"))
     private void onUseBook(ItemStack book, InteractionHand hand, CallbackInfo ci) {
-        if (book.is(HybridAquaticItems.INSTANCE.getSEA_MESSAGE_BOOK().get())) {
+        if (book.is(HAItems.INSTANCE.getSEA_MESSAGE_BOOK().get())) {
             this.connection.send(new ClientboundOpenBookPacket(hand));
         }
     }

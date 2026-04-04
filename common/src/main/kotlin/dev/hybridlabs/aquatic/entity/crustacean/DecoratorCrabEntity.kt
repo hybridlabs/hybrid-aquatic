@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -48,7 +48,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world:
                 this.playSound(SoundEvents.SHEEP_SHEAR, 1.0f, 1.0f)
                 this.gameEvent(GameEvent.SHEAR, player)
                 itemStack.hurtAndBreak(1, player) { it.broadcastBreakEvent(hand) }
-                spawnAtLocation(ItemStack(HAAquaticItems.CORAL_CHUNK.get()))
+                spawnAtLocation(ItemStack(HAItems.CORAL_CHUNK.get()))
                 return InteractionResult.SUCCESS
             }
             return InteractionResult.CONSUME

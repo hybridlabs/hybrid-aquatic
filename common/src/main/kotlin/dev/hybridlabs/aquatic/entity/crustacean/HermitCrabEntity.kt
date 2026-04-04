@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FleeFromEntityGoal
 import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.core.Vec3i
 import net.minecraft.core.particles.ParticleTypes
@@ -74,7 +74,7 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
 
         val roll = random.nextFloat()
         val generatedRoll = when {
-            roll < 0.10f -> HAAquaticItems.OMINOUS_CONCH.get().defaultInstance
+            roll < 0.10f -> HAItems.OMINOUS_CONCH.get().defaultInstance
             roll < 0.30f -> Items.SKELETON_SKULL.defaultInstance
             roll < 0.80f -> Items.NAUTILUS_SHELL.defaultInstance
             else -> Items.AIR.defaultInstance
@@ -110,7 +110,7 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
         val playerStack = player.getItemInHand(hand)
 
-        if (shellItem.`is`(HAAquaticItems.OMINOUS_CONCH.get()) &&
+        if (shellItem.`is`(HAItems.OMINOUS_CONCH.get()) &&
             !playerStack.`is`(Items.NAUTILUS_SHELL)
         ) {
             return InteractionResult.PASS
@@ -123,7 +123,7 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
             if (!shellItem.`is` { item ->
                     item.equals(Items.NAUTILUS_SHELL) ||
                             item.equals(Items.SKELETON_SKULL) ||
-                            item.equals(HAAquaticItems.OMINOUS_CONCH)
+                            item.equals(HAItems.OMINOUS_CONCH)
                 }) setPersistenceRequired()
 
             if (!player.abilities.instabuild) {
@@ -145,7 +145,7 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
     override fun dropCustomDeathLoot(source: DamageSource, looting: Int, causedByPlayer: Boolean) {
         if (!shellItem.isEmpty) {
 
-            if (shellItem.`is`(HAAquaticItems.OMINOUS_CONCH.get())) {
+            if (shellItem.`is`(HAItems.OMINOUS_CONCH.get())) {
                 shellItem = ItemStack.EMPTY
                 return
             }

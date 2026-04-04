@@ -70,7 +70,7 @@ enum class HAArmorMaterials(
         SoundEvents.ARMOR_EQUIP_LEATHER,
         0.0f,
         0.0f,
-        Supplier<Ingredient> { Ingredient.of(HAAquaticItems.GLOWSLIME.get()) }
+        Supplier<Ingredient> { Ingredient.of(HAItems.GLOWSLIME.get()) }
     ),
 
     EEL(

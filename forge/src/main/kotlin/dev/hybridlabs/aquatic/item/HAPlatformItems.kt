@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
-import dev.hybridlabs.aquatic.item.HAAquaticItems.registerBlockItem
+import dev.hybridlabs.aquatic.item.HAItems.registerBlockItem
 
 object HAPlatformItems {
 

@@ -27,7 +27,7 @@ import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.GiantGreenAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneBlockItemRenderer
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
@@ -71,7 +71,7 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerItemProperties() {
         FabricModelPredicateProviderRegistry.register(
-            HAAquaticItems.OMINOUS_CONCH.get(),
+            HAItems.OMINOUS_CONCH.get(),
             ResourceLocation("tooting")
         ) { stack, _, entity, _ ->
             if (entity != null && entity.isUsingItem && entity.useItem == stack) 1.0f else 0.0f
@@ -105,15 +105,15 @@ object HybridAquaticClient : ClientModInitializer {
     }
 
     private fun registerTrinketRenderers() {
-        registerTrinketRenderer(HAAquaticItems.EEL_SCARF.get(), EquipmentSlot.CHEST)
-        registerTrinketRenderer(HAAquaticItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST)
-        registerTrinketRenderer(HAAquaticItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HAAquaticItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HAAquaticItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HAAquaticItems.GOLD_HATXOLOTL.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HAAquaticItems.BROWN_HATXOLOTL.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HAAquaticItems.CYAN_HATXOLOTL.get(), EquipmentSlot.HEAD)
-        registerTrinketRenderer(HAAquaticItems.BLUE_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAItems.EEL_SCARF.get(), EquipmentSlot.CHEST)
+        registerTrinketRenderer(HAItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST)
+        registerTrinketRenderer(HAItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAItems.GOLD_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAItems.BROWN_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAItems.CYAN_HATXOLOTL.get(), EquipmentSlot.HEAD)
+        registerTrinketRenderer(HAItems.BLUE_HATXOLOTL.get(), EquipmentSlot.HEAD)
     }
 
     private fun createBasicRenderProvider(rendererProvider: () -> GeoArmorRenderer<*>): () -> RenderProvider {
@@ -309,10 +309,10 @@ object HybridAquaticClient : ClientModInitializer {
     }
 
     private fun registerBuiltinItemRenderers(registry: BuiltinItemRendererRegistry = BuiltinItemRendererRegistry.INSTANCE) {
-        registry.register(HAAquaticItems.ANEMONE.get(), AnemoneBlockItemRenderer())
-        registry.register(HAAquaticItems.GIANT_GREEN_ANEMONE.get(), GiantGreenAnemoneBlockItemRenderer())
-        registry.register(HAAquaticItems.STRAWBERRY_ANEMONE.get(), StrawberryAnemoneBlockItemRenderer())
-        registry.register(HAAquaticItems.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleBlockItemRenderer())
+        registry.register(HAItems.ANEMONE.get(), AnemoneBlockItemRenderer())
+        registry.register(HAItems.GIANT_GREEN_ANEMONE.get(), GiantGreenAnemoneBlockItemRenderer())
+        registry.register(HAItems.STRAWBERRY_ANEMONE.get(), StrawberryAnemoneBlockItemRenderer())
+        registry.register(HAItems.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleBlockItemRenderer())
     }
 
     private fun registerModelLayers() {

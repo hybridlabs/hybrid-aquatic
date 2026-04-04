@@ -8,7 +8,7 @@ import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 
-class OtterEntityModel : HAMammalEntityModel<OtterEntity>("otter") {
+class OtterEntityModel : HATameableMammalEntityModel<OtterEntity>("otter") {
 
     private val RIVER_OTTER_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/mammal/otter/river_otter.png")
     private val BABY_RIVER_OTTER_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/mammal/otter/baby_river_otter.png")

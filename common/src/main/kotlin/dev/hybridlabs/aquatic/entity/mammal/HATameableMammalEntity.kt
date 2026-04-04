@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.ai.control.FloatControl
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.aquatic.entity.base.HATameableWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
@@ -33,7 +33,7 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "unused")
-open class HAMammalEntity(type: EntityType<out HAMammalEntity>, world: Level) : HAWaterAnimal(type, world), GeoEntity {
+open class HATameableMammalEntity(type: EntityType<out HATameableMammalEntity>, world: Level) : HATameableWaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun createNavigation(level: Level): PathNavigation {
@@ -89,7 +89,7 @@ open class HAMammalEntity(type: EntityType<out HAMammalEntity>, world: Level) : 
         controllers.add(
             AnimationController(
                 this, "Walk/Swim/Idle", 4
-            ) { state: AnimationState<HAMammalEntity> ->
+            ) { state: AnimationState<HATameableMammalEntity> ->
                 when {
                     state.isMoving && onGround() -> state.setAndContinue(DefaultAnimations.WALK)
                     state.isMoving && isInWater -> state.setAndContinue(DefaultAnimations.SWIM)
@@ -145,16 +145,16 @@ open class HAMammalEntity(type: EntityType<out HAMammalEntity>, world: Level) : 
 
     companion object {
         val MAMMAL_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HAMammalEntity::class.java, EntityDataSerializers.INT)
+            SynchedEntityData.defineId(HATameableMammalEntity::class.java, EntityDataSerializers.INT)
 
         val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
 
-        fun getScaleAdjustment(mammal: HAMammalEntity, adjustment: Float): Float {
+        fun getScaleAdjustment(mammal: HATameableMammalEntity, adjustment: Float): Float {
             return 1.0f + (mammal.size * adjustment)
         }
 
         fun canSpawn(
-            type: EntityType<out HAMammalEntity>,
+            type: EntityType<out HATameableMammalEntity>,
             level: LevelAccessor,
             spawnReason: MobSpawnType,
             pos: BlockPos,

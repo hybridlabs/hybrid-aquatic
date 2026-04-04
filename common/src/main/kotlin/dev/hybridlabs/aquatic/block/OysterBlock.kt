@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.block.entity.OysterBlockEntity
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
@@ -120,8 +120,8 @@ class OysterBlock(private val emitsParticles: Boolean, settings: Properties) : B
 
             val randomValue = world.random.nextFloat()
             val itemToDrop = when {
-                randomValue < 0.70 -> ItemStack(HAAquaticItems.PEARL.get())
-                randomValue < 0.95 -> ItemStack(HAAquaticItems.BLACK_PEARL.get())
+                randomValue < 0.70 -> ItemStack(HAItems.PEARL.get())
+                randomValue < 0.95 -> ItemStack(HAItems.BLACK_PEARL.get())
                 else -> ItemStack(Items.ENDER_PEARL)
             }
 

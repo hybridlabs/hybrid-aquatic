@@ -11,7 +11,7 @@ import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HAItemGroups
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
@@ -69,7 +69,7 @@ object HybridAquatic : ModInitializer {
         HAMobEffects
         HAPotions.registerPotionRecipes()
 
-        HAAquaticItems
+        HAItems
         HAPlatformItems
         HAItemGroups
 

@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableList;
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.effect.HAMobEffects;
 import dev.hybridlabs.aquatic.entity.shark.HASharkEntity;
-import dev.hybridlabs.aquatic.item.HybridAquaticItems;
-import dev.hybridlabs.aquatic.item.HybridAquaticToolMaterials;
+import dev.hybridlabs.aquatic.item.HAItems;
+import dev.hybridlabs.aquatic.item.HAToolMaterials;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.FluidTags;
@@ -131,7 +131,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         ItemStack stack = player.getMainHandItem();
         if (!(stack.getItem() instanceof TieredItem tieredItem)) return;
 
-        if (tieredItem.getTier() != HybridAquaticToolMaterials.SEASHELL) return;
+        if (tieredItem.getTier() != HAToolMaterials.SEASHELL) return;
 
         if (player.isEyeInFluid(FluidTags.WATER)) {
 
@@ -149,7 +149,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         var player = (Player) (Object) this;
         ItemStack itemStack = player.getItemBySlot(EquipmentSlot.HEAD);
 
-        if (itemStack.is(HybridAquaticItems.INSTANCE.getDIVING_HELMET().get())) {
+        if (itemStack.is(HAItems.INSTANCE.getDIVING_HELMET().get())) {
             if (!player.isEyeInFluid(FluidTags.WATER)) {
                 player.addEffect(
                         new MobEffectInstance(
@@ -166,7 +166,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             }
         }
 
-        if (itemStack.is(HybridAquaticItems.INSTANCE.getREINFORCED_DIVING_HELMET().get())) {
+        if (itemStack.is(HAItems.INSTANCE.getREINFORCED_DIVING_HELMET().get())) {
             if (!player.isEyeInFluid(FluidTags.WATER)) {
                 player.addEffect(
                         new MobEffectInstance(
@@ -183,7 +183,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             }
         }
 
-        if (itemStack.is(HybridAquaticItems.INSTANCE.getGLOWING_DIVING_HELMET().get())) {
+        if (itemStack.is(HAItems.INSTANCE.getGLOWING_DIVING_HELMET().get())) {
             if (!player.isEyeInFluid(FluidTags.WATER)) {
                 player.addEffect(
                         new MobEffectInstance(
@@ -206,15 +206,15 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         var player = (Player) (Object) this;
 
         isHoldingDivingWeight =
-                player.getMainHandItem().is(HybridAquaticItems.INSTANCE.getDIVING_WEIGHT().get()) ||
-                        player.getOffhandItem().is(HybridAquaticItems.INSTANCE.getDIVING_WEIGHT().get());
+                player.getMainHandItem().is(HAItems.INSTANCE.getDIVING_WEIGHT().get()) ||
+                        player.getOffhandItem().is(HAItems.INSTANCE.getDIVING_WEIGHT().get());
     }
 
     @Unique
     private void updateTurtleChestplate() {
         var player = (Player) (Object) this;
         var itemStack = player.getItemBySlot(EquipmentSlot.CHEST);
-        if (itemStack.is(HybridAquaticItems.INSTANCE.getTURTLE_CHESTPLATE().get())) {
+        if (itemStack.is(HAItems.INSTANCE.getTURTLE_CHESTPLATE().get())) {
             player.addEffect(
                     new MobEffectInstance(
                             MobEffects.DAMAGE_RESISTANCE, 200, 0, false, false, true));
@@ -240,7 +240,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
                 for (List<ItemStack> list : combinedInventory) {
                     for (ItemStack itemStack : list) {
                         if (itemStack.getItem() instanceof TieredItem tool
-                                && tool.getTier() == HybridAquaticToolMaterials.CORAL
+                                && tool.getTier() == HAToolMaterials.CORAL
                                 && itemStack.isDamaged()) {
                             coralItems.add(itemStack);
                         }

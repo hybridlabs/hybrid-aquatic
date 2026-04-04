@@ -5,7 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
 import dev.hybridlabs.aquatic.entity.HAEntityTypes;
-import dev.hybridlabs.aquatic.item.HybridAquaticItems;
+import dev.hybridlabs.aquatic.item.HAItems;
 import dev.hybridlabs.aquatic.tag.HAItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -80,9 +80,9 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
             At.Shift.AFTER))
     private void reduceCooldownTime(BlockPos pos, CallbackInfo ci) {
         Item lureItem = this.hybrid_aquatic$lureItemStack.getItem();
-        if (lureItem.equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK().get()) && this.level().isDay()) {
+        if (lureItem.equals(HAItems.INSTANCE.getBARBED_HOOK().get()) && this.level().isDay()) {
             timeUntilLured -= 75;
-        } else if (lureItem.equals(HybridAquaticItems.INSTANCE.getGLOWING_HOOK().get()) && this.level().isNight()) {
+        } else if (lureItem.equals(HAItems.INSTANCE.getGLOWING_HOOK().get()) && this.level().isNight()) {
             timeUntilLured -= 75;
         }
     }
@@ -91,7 +91,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
     @WrapOperation(method = "retrieve", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player" +
             "/Player;getLuck()F"))
     private float increaseLuck(Player player, Operation<Float> original) {
-        if (hybrid_aquatic$lureItemStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK().get()))
+        if (hybrid_aquatic$lureItemStack.getItem().equals(HAItems.INSTANCE.getMAGNETIC_HOOK().get()))
             return player.getLuck() + 27;
         return original.call(player);
     }
@@ -103,12 +103,12 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
             "Lnet/minecraft/world" + "/level/storage/loot/LootTable;getRandomItems" + "(Lnet/minecraft/world/level" + "/storage/loot/LootParams;)" + "Lit/unimi/dsi/fastutil/objects/ObjectArrayList;"))
     private LootTable onHookReelEntity(LootTable instance, LootParams parameters) {
         if (!hybrid_aquatic$lureItemStack.isEmpty()) {
-            if (hybrid_aquatic$lureItemStack.is(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK().get())) {
+            if (hybrid_aquatic$lureItemStack.is(HAItems.INSTANCE.getOMINOUS_HOOK().get())) {
                 var karkinosType = HAEntityTypes.INSTANCE.getKARKINOS().get();
                 createAndLaunchEntityAtPlayer(karkinosType);
 
                 instance = LootTable.EMPTY;
-            } else if (hybrid_aquatic$lureItemStack.is(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK().get())) {
+            } else if (hybrid_aquatic$lureItemStack.is(HAItems.INSTANCE.getCREEPERMAGNET_HOOK().get())) {
                 var creeperType = EntityType.CREEPER;
                 createAndLaunchEntityAtPlayer(creeperType);
 

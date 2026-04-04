@@ -68,7 +68,7 @@ SeaMessageBookItem(settings: Properties) : Item(settings) {
         }
 
         fun createItemStack(message: SeaMessage, registryManager: RegistryAccess): ItemStack {
-            val stack = ItemStack(HAAquaticItems.SEA_MESSAGE_BOOK.get())
+            val stack = ItemStack(HAItems.SEA_MESSAGE_BOOK.get())
             setSeaMessage(stack, message, registryManager)
             return stack
         }

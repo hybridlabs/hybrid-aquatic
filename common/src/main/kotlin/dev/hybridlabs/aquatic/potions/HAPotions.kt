@@ -4,7 +4,7 @@ package dev.hybridlabs.aquatic.potions
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.effect.HAMobEffects
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -94,31 +94,31 @@ object HAPotions {
             Potions.AWKWARD, Items.INK_SAC, BLINDNESS_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HAAquaticItems.SULFUR.get(), CORROSION_POTION.get()
+            Potions.AWKWARD, HAItems.SULFUR.get(), CORROSION_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HAAquaticItems.SEA_URCHIN_SPINE.get(), THORNS_POTION.get()
+            Potions.AWKWARD, HAItems.SEA_URCHIN_SPINE.get(), THORNS_POTION.get()
         )
         PotionBrewing.addMix(
             Potions.AWKWARD, Items.KELP, BUOYANCY_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HAAquaticItems.MAHI.get(), SWIMMING_POTION.get()
+            Potions.AWKWARD, HAItems.MAHI.get(), SWIMMING_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HAAquaticItems.SHARK_TOOTH.get(), BLEEDING_POTION.get()
+            Potions.AWKWARD, HAItems.SHARK_TOOTH.get(), BLEEDING_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HAAquaticItems.BLACK_PEARL.get(), MAJOR_LUCK_POTION.get()
+            Potions.AWKWARD, HAItems.BLACK_PEARL.get(), MAJOR_LUCK_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HAAquaticItems.PEARL.get(), MINOR_LUCK_POTION.get()
+            Potions.AWKWARD, HAItems.PEARL.get(), MINOR_LUCK_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HAAquaticItems.ANGLERFISH.get(), THALASSOPHOBIA_POTION.get()
+            Potions.AWKWARD, HAItems.ANGLERFISH.get(), THALASSOPHOBIA_POTION.get()
         )
         PotionBrewing.addMix(
-            Potions.AWKWARD, HAAquaticItems.BARRELEYE.get(), CLARITY_POTION.get()
+            Potions.AWKWARD, HAItems.BARRELEYE.get(), CLARITY_POTION.get()
         )
         PotionBrewing.addMix(
             Potions.AWKWARD, Items.GLOW_INK_SAC, GLOWING_POTION.get()

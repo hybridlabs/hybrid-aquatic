@@ -7,7 +7,7 @@ import dev.hybridlabs.aquatic.item.AnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.GiantGreenAnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.MessageInABottleItem;
 import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
-import dev.hybridlabs.aquatic.network.HybridAquaticNetworking;
+import dev.hybridlabs.aquatic.network.HANetworking;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -174,6 +174,6 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     @Override
     public void sendHookToServer(int entityId, ItemStack entityData) {
-        HybridAquaticNetworking.INSTANCE.sendHookPacket(entityId, entityData);
+        HANetworking.INSTANCE.sendHookPacket(entityId, entityData);
     }
 }

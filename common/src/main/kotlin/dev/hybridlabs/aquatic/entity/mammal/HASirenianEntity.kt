@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.BlockParticleOption
@@ -16,7 +16,6 @@ import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
-import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.InteractionHand
@@ -123,14 +122,6 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
             entityData.set(SIRENIAN_SIZE, size)
         }
 
-    fun isBelowWaterline(): Boolean {
-        return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
-    }
-
-    open fun getWaterline(): Float {
-        return 0.5f
-    }
-
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
@@ -162,7 +153,7 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
 
     override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
         val itemstack = player.getItemInHand(hand)
-        if (!itemstack.isEmpty && itemstack.`is`(HAAquaticItems.SEA_LETTUCE.get())) {
+        if (!itemstack.isEmpty && itemstack.`is`(HAItems.SEA_LETTUCE.get())) {
             if (!this.level().isClientSide) {
                 this.playSound(SoundEvents.DOLPHIN_EAT, 1.0f, 1.0f)
             }
@@ -375,7 +366,7 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
                 if (digTime == 60 && !sirenian.level().isClientSide) {
                     val level = sirenian.level()
 
-                    val item = ItemStack(HAAquaticItems.CLAM.get())
+                    val item = ItemStack(HAItems.CLAM.get())
                     val itemEntity = ItemEntity(
                         level,
                         pos.x + 0.5,

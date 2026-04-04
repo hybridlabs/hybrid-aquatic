@@ -19,7 +19,7 @@ import net.minecraft.world.item.*
 import net.minecraft.world.level.block.Block
 import java.util.function.Supplier
 
-object HybridAquaticItems {
+object HAItems {
     //#region Armor
     //#region Diving Armor
     val DIVING_HELMET = register(

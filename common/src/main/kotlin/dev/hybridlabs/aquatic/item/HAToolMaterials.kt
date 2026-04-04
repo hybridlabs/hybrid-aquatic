@@ -6,7 +6,7 @@ import net.minecraft.world.item.crafting.Ingredient
 import java.util.function.Supplier
 
 
-enum class HybridAquaticToolMaterials(
+enum class HAToolMaterials(
     private val miningLevel: Int,
     private val itemDurability: Int,
     private val miningSpeed: Float,
@@ -30,7 +30,7 @@ enum class HybridAquaticToolMaterials(
         6.0f,
         2.0f,
         14,
-        Supplier<Ingredient> { Ingredient.of(HAAquaticItems.CORAL_CHUNK.get()) }
+        Supplier<Ingredient> { Ingredient.of(HAItems.CORAL_CHUNK.get()) }
     );
 
     override fun getUses(): Int {

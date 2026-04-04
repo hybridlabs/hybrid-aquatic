@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.PathfinderMob
@@ -26,7 +26,7 @@ class OpahEntity(type: EntityType<out OpahEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAAquaticItems.RAW_TENTACLE.get())
+        return stack.`is`(HAItems.RAW_TENTACLE.get())
     }
 
     companion object {

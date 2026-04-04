@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.EntitySelector
@@ -157,7 +157,7 @@ open class SharkAttackGoal(
 
             val hasShield = enemy.mainHandItem.`is`(Items.SHIELD) || enemy.offhandItem.`is`(Items.SHIELD)
             if (hasShield && enemy.isBlocking) {
-                shark.spawnAtLocation(HAAquaticItems.SHARK_TOOTH.get())
+                shark.spawnAtLocation(HAItems.SHARK_TOOTH.get())
             }
         }
     }

@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.base
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.tags.FluidTags
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
@@ -38,6 +39,14 @@ abstract class HAWaterAnimal protected constructor(
         }
 
         super.customServerAiStep()
+    }
+
+    fun isBelowWaterline(): Boolean {
+        return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
+    }
+
+    open fun getWaterline(): Float {
+        return 0.5f
     }
 
     override fun aiStep() {

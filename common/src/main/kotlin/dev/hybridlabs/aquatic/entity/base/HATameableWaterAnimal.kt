@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.base
 
-import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
@@ -10,7 +9,10 @@ import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.server.players.OldUsersConverter
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.*
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.OwnableEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
@@ -20,8 +22,6 @@ import java.util.*
 
 abstract class HATameableWaterAnimal(type: EntityType<out HATameableWaterAnimal>, world: Level) :
     HAWaterAnimal(type, world), GeoEntity, OwnableEntity {
-    val DATA_FLAGS_ID: EntityDataAccessor<Byte>? = null
-    val DATA_OWNERUUID_ID: EntityDataAccessor<Optional<UUID>>? = null
     private var orderedToSit = false
 
     init {
@@ -134,7 +134,7 @@ abstract class HATameableWaterAnimal(type: EntityType<out HATameableWaterAnimal>
     }
 
     override fun getOwnerUUID(): UUID? {
-        return (this.entityData.get(DATA_OWNERUUID_ID) as Optional<*>).orElse(null as UUID?) as UUID?
+        return this.entityData.get(DATA_OWNERUUID_ID).orElse(null)
     }
 
     fun setOwnerUUID(uuid: UUID?) {
@@ -143,10 +143,7 @@ abstract class HATameableWaterAnimal(type: EntityType<out HATameableWaterAnimal>
 
     fun tame(player: Player) {
         this.setTame(true)
-        this.setOwnerUUID(player.getUUID())
-        if (player is ServerPlayer) {
-            CriteriaTriggers.TAME_ANIMAL.trigger(player, this)
-        }
+        this.setOwnerUUID(player.uuid)
     }
 
     override fun canAttack(target: LivingEntity): Boolean {

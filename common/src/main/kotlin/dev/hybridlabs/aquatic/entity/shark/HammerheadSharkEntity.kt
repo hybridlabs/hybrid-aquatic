@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -26,7 +26,7 @@ class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: 
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAAquaticItems.BLUE_SPOTTED_STINGRAY.get())
+        return stack.`is`(HAItems.BLUE_SPOTTED_STINGRAY.get())
     }
 
     companion object {

@@ -6,7 +6,7 @@ import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.VARIANT_KEY
 import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem.Companion.SEA_MESSAGE_KEY
 import dev.hybridlabs.aquatic.loot.HALootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -150,7 +150,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 block,
                 LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(block))).withPool(
                     LootPool.lootPool().`when`(ageCondition).add(
-                        LootItem.lootTableItem(HAAquaticItems.CLAM.get()).apply(
+                        LootItem.lootTableItem(HAItems.CLAM.get()).apply(
                             ApplyBonusCount.addBonusBinomialDistributionCount(
                                 Enchantments.BLOCK_FORTUNE,
                                 0.5714286f,
@@ -264,7 +264,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                                     )
                                 ),
 
-                            LootItem.lootTableItem(HAAquaticItems.SULFUR.get())
+                            LootItem.lootTableItem(HAItems.SULFUR.get())
                                 .apply(
                                     SetItemCountFunction.setCount(
                                         UniformGenerator.between(2f, 5f)
@@ -318,7 +318,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                                 .copy(VARIANT_KEY, "$BLOCK_ENTITY_TAG.$VARIANT_KEY")
                                 .copy(MESSAGE_KEY, "$BLOCK_ENTITY_TAG.$MESSAGE_KEY")
                         ),
-                        LootItem.lootTableItem(HAAquaticItems.SEA_MESSAGE_BOOK.get()).apply(
+                        LootItem.lootTableItem(HAItems.SEA_MESSAGE_BOOK.get()).apply(
                             CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
                                 .copy("$MESSAGE_KEY.tag.$SEA_MESSAGE_KEY", SEA_MESSAGE_KEY)
                         )

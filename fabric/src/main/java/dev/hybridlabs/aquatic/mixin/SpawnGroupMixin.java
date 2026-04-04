@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.mixin;
 
-import dev.hybridlabs.aquatic.utils.HybridAquaticSpawnGroup;
+import dev.hybridlabs.aquatic.utils.HASpawnGroup;
 import net.minecraft.world.entity.MobCategory;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,7 +29,7 @@ public class SpawnGroupMixin {
 
     @Unique
     private static MobCategory hybrid_aquatic$createHybridAquaticSpawnGroups(String enumname, int ordinal,
-                                                                             HybridAquaticSpawnGroup spawnGroup) {
+                                                                             HASpawnGroup spawnGroup) {
         return ((MobCategory) (Object) new SpawnGroupMixin(spawnGroup.name(), ordinal, spawnGroup.gName,
                 spawnGroup.spawnCap, spawnGroup.peaceful, spawnGroup.rare, spawnGroup.immediateDespawnRange));
     }
@@ -39,16 +39,16 @@ public class SpawnGroupMixin {
     private static void injectEnum(CallbackInfo ci) {
         int vanillaSpawnGroupsLength = $VALUES.length;
         
-        HybridAquaticSpawnGroup[] haSpawnGroups = HybridAquaticSpawnGroup.values();
+        HASpawnGroup[] haSpawnGroups = HASpawnGroup.values();
         $VALUES = Arrays.copyOf($VALUES, vanillaSpawnGroupsLength + haSpawnGroups.length);
 
         for (int i = 0; i < haSpawnGroups.length; i++) {
             int pos = vanillaSpawnGroupsLength + i;
-            HybridAquaticSpawnGroup haSpawnGroup = haSpawnGroups[i];
+            HASpawnGroup haSpawnGroup = haSpawnGroups[i];
             haSpawnGroup.spawnGroup = $VALUES[pos] = hybrid_aquatic$createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos,
                     haSpawnGroup);
         }
         
-        Arrays.stream($VALUES).forEach(value -> HybridAquaticSpawnGroup.BY_NAME.put(value.name(), value));
+        Arrays.stream($VALUES).forEach(value -> HASpawnGroup.BY_NAME.put(value.name(), value));
     }
 }

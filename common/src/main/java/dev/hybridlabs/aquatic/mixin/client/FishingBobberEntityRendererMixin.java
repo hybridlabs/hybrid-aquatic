@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
-import dev.hybridlabs.aquatic.item.HybridAquaticItems;
+import dev.hybridlabs.aquatic.item.HAItems;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.FishingHookRenderer;
@@ -55,15 +55,15 @@ public abstract class FishingBobberEntityRendererMixin {
         RenderType currentRenderType = renderLayer;
 
         ItemStack currentStack = ((CustomFishingBobberEntityData) entity).hybrid_aquatic$getLureItem();
-        if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getBARBED_HOOK().get()))
+        if (currentStack.getItem().equals(HAItems.INSTANCE.getBARBED_HOOK().get()))
             currentRenderType = BARBED_HOOK_LAYER;
-        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getGLOWING_HOOK().get()))
+        else if (currentStack.getItem().equals(HAItems.INSTANCE.getGLOWING_HOOK().get()))
             currentRenderType = GLOWING_HOOK_LAYER;
-        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getMAGNETIC_HOOK().get()))
+        else if (currentStack.getItem().equals(HAItems.INSTANCE.getMAGNETIC_HOOK().get()))
             currentRenderType = MAGNETIC_HOOK_LAYER;
-        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getCREEPERMAGNET_HOOK().get()))
+        else if (currentStack.getItem().equals(HAItems.INSTANCE.getCREEPERMAGNET_HOOK().get()))
             currentRenderType = CREEPERMAGNET_HOOK_LAYER;
-        else if (currentStack.getItem().equals(HybridAquaticItems.INSTANCE.getOMINOUS_HOOK().get()))
+        else if (currentStack.getItem().equals(HAItems.INSTANCE.getOMINOUS_HOOK().get()))
             currentRenderType = OMINOUS_HOOK_LAYER;
 
         return instance.getBuffer(currentRenderType);

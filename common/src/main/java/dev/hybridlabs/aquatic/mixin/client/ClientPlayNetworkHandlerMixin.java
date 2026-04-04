@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.mixin.client;
 
 import dev.hybridlabs.aquatic.block.SeaMessage;
 import dev.hybridlabs.aquatic.client.gui.SeaMessageBookContents;
-import dev.hybridlabs.aquatic.item.HybridAquaticItems;
+import dev.hybridlabs.aquatic.item.HAItems;
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.BookViewScreen;
@@ -32,7 +32,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
      */
     @Inject(method = "handleOpenBook", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILHARD)
     private void onOpenWrittenBook(ClientboundOpenBookPacket packet, CallbackInfo ci, ItemStack stack) {
-        if (stack.is(HybridAquaticItems.INSTANCE.getSEA_MESSAGE_BOOK().get())) {
+        if (stack.is(HAItems.INSTANCE.getSEA_MESSAGE_BOOK().get())) {
             SeaMessage message = SeaMessageBookItem.Companion.getSeaMessage(stack, this.registryAccess());
             if (message != null) {
                 this.minecraft.setScreen(new BookViewScreen(new SeaMessageBookContents(message)));

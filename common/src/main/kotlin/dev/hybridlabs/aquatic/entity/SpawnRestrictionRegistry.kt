@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity
 
+import dev.hybridlabs.aquatic.entity.base.HATameableWaterAnimal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.cephalopod.*
 import dev.hybridlabs.aquatic.entity.critter.HACritterEntity
@@ -9,6 +10,7 @@ import dev.hybridlabs.aquatic.entity.jellyfish.HAJellyfishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HADolphinEntity
 import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
 import dev.hybridlabs.aquatic.entity.mammal.HASirenianEntity
+import dev.hybridlabs.aquatic.entity.mammal.HATameableMammalEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HAMinibossEntity
 import dev.hybridlabs.aquatic.entity.miniboss.HAMinionEntity
 import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
@@ -170,7 +172,7 @@ object SpawnRestrictionRegistry {
 
         setOf(
             HAEntityTypes.OTTER.get(),
-        ).forEach { registerMammal(it) }
+        ).forEach { registerTameableMammal(it) }
 
         setOf(
             HAEntityTypes.DUGONG.get(),
@@ -272,6 +274,10 @@ object SpawnRestrictionRegistry {
         registerMammalEntity(entityType, HAMammalEntity::canSpawn)
     }
 
+    private fun <T : HATameableMammalEntity> registerTameableMammal(entityType: EntityType<T>) {
+        registerTameableMammalEntity(entityType, HATameableMammalEntity::canSpawn)
+    }
+
     private fun <T : HASirenianEntity> registerSirenian(entityType: EntityType<T>) {
         registerSirenianEntity(entityType, HASirenianEntity::canSpawn)
     }
@@ -368,6 +374,14 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : HAWaterAnimal> registerMammalEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+        register(
+            entityType,
+            SpawnPlacements.Type.NO_RESTRICTIONS,
+            predicate
+        )
+    }
+
+    private fun <T : HATameableWaterAnimal> registerTameableMammalEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
         register(
             entityType,
             SpawnPlacements.Type.NO_RESTRICTIONS,

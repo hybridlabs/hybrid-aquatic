@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.data.server
 
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
@@ -26,34 +26,34 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
         //#region Sandstone Block Recipes
         stairBuilder(
-            HAAquaticItems.WHITE_SANDSTONE_STAIRS.get(),
-            Ingredient.of(HAAquaticItems.WHITE_SANDSTONE.get())
+            HAItems.WHITE_SANDSTONE_STAIRS.get(),
+            Ingredient.of(HAItems.WHITE_SANDSTONE.get())
         )
 
         stairBuilder(
-            HAAquaticItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
-            Ingredient.of(HAAquaticItems.SMOOTH_WHITE_SANDSTONE.get())
+            HAItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
+            Ingredient.of(HAItems.SMOOTH_WHITE_SANDSTONE.get())
         )
 
         slab(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HAAquaticItems.WHITE_SANDSTONE_SLAB.get(),
-            HAAquaticItems.WHITE_SANDSTONE.get()
+            HAItems.WHITE_SANDSTONE_SLAB.get(),
+            HAItems.WHITE_SANDSTONE.get()
         )
 
         slab(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HAAquaticItems.CUT_WHITE_SANDSTONE_SLAB.get(),
-            HAAquaticItems.CUT_WHITE_SANDSTONE.get()
+            HAItems.CUT_WHITE_SANDSTONE_SLAB.get(),
+            HAItems.CUT_WHITE_SANDSTONE.get()
         )
 
         slab(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HAAquaticItems.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
-            HAAquaticItems.SMOOTH_WHITE_SANDSTONE.get()
+            HAItems.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
+            HAItems.SMOOTH_WHITE_SANDSTONE.get()
         )
 
         chiseled(

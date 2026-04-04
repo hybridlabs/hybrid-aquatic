@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.hybridlabs.aquatic.block.HABlocks;
-import dev.hybridlabs.aquatic.item.HybridAquaticItems;
+import dev.hybridlabs.aquatic.item.HAItems;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -25,9 +25,9 @@ public class EntityMixin {
         if (entity instanceof Player player) {
             ItemStack stack = player.getItemBySlot(EquipmentSlot.FEET);
             var isDivingBoots =
-                    stack.is(HybridAquaticItems.INSTANCE.getDIVING_BOOTS().get()) ||
-                    stack.is(HybridAquaticItems.INSTANCE.getREINFORCED_DIVING_BOOTS().get()) ||
-                    stack.is(HybridAquaticItems.INSTANCE.getGLOWING_DIVING_BOOTS().get());
+                    stack.is(HAItems.INSTANCE.getDIVING_BOOTS().get()) ||
+                    stack.is(HAItems.INSTANCE.getREINFORCED_DIVING_BOOTS().get()) ||
+                    stack.is(HAItems.INSTANCE.getGLOWING_DIVING_BOOTS().get());
             if (isDivingBoots && player.isEyeInFluid(FluidTags.WATER)) {
                 return original * 1.67f;
             }

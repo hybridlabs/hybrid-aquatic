@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer
 import com.mojang.math.Axis
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.HACrustaceanEntityRenderer
 import dev.hybridlabs.aquatic.entity.crustacean.HACrustaceanEntity
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
@@ -33,7 +33,7 @@ class HybridAquaticShellLayer<T: HACrustaceanEntity>(
         super.renderForBone(poseStack, animatable, bone, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay)
         if (!bone.name.equals("shell")) return
         if (animatable.shellItem.`is`(defaultItem) ||
-            animatable.shellItem.`is`(HAAquaticItems.OMINOUS_CONCH.get())
+            animatable.shellItem.`is`(HAItems.OMINOUS_CONCH.get())
         ) return
 
         val itemRenderer = Minecraft.getInstance().itemRenderer

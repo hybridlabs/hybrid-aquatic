@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -33,7 +33,7 @@ class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level)
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAAquaticItems.RAW_SHRIMP.get())
+        return stack.`is`(HAItems.RAW_SHRIMP.get())
     }
 
     //#region Animations

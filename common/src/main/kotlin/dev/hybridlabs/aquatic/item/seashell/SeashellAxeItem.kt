@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item.seashell
 
-import dev.hybridlabs.aquatic.item.HybridAquaticToolMaterials
+import dev.hybridlabs.aquatic.item.HAToolMaterials
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.AxeItem
@@ -9,7 +9,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class SeashellAxeItem(settings: Properties) : AxeItem(
-    HybridAquaticToolMaterials.SEASHELL,
+    HAToolMaterials.SEASHELL,
     7F,
     -3.2f,
     settings) {

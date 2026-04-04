@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.advancements.critereon.EntityFlagsPredicate
@@ -39,7 +39,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HAAquaticItems.RAW_TENTACLE.get())
+                        LootItem.lootTableItem(HAItems.RAW_TENTACLE.get())
                             .apply(
                                 SmeltItemFunction.smelted().`when`(
                                     LootItemEntityPropertyCondition.hasProperties(
@@ -58,13 +58,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HAAquaticItems.RAW_CRAB.get())
+                        LootItem.lootTableItem(HAItems.RAW_CRAB.get())
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 16.0F)))
                     ).build()
             ).pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HAAquaticItems.KARKINOS_CLAW.get())
+                        LootItem.lootTableItem(HAItems.KARKINOS_CLAW.get())
                     ).build()
             )
         }
@@ -73,13 +73,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HAAquaticItems.RAW_TENTACLE.get())
+                        LootItem.lootTableItem(HAItems.RAW_TENTACLE.get())
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 16.0F)))
                     ).build()
             ).pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HAAquaticItems.GIANT_NAUTILUS_SHELL.get())
+                        LootItem.lootTableItem(HAItems.GIANT_NAUTILUS_SHELL.get())
                     ).build()
             )
         }
@@ -90,7 +90,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HAAquaticItems.RAW_CRAB.get())
+                        LootItem.lootTableItem(HAItems.RAW_CRAB.get())
                             .apply(
                                 SmeltItemFunction.smelted().`when`(
                                     LootItemEntityPropertyCondition.hasProperties(
@@ -109,7 +109,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HAAquaticItems.RAW_CRAB.get())
+                        LootItem.lootTableItem(HAItems.RAW_CRAB.get())
                             .apply(
                                 SmeltItemFunction.smelted().`when`(
                                     LootItemEntityPropertyCondition.hasProperties(

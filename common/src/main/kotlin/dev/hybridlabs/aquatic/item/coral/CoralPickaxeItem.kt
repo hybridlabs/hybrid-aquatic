@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item.coral
 
-import dev.hybridlabs.aquatic.item.HybridAquaticToolMaterials
+import dev.hybridlabs.aquatic.item.HAToolMaterials
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
@@ -9,7 +9,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class CoralPickaxeItem(settings: Properties) : PickaxeItem(
-    HybridAquaticToolMaterials.SEASHELL,
+    HAToolMaterials.SEASHELL,
     1,
     -2.8f,
     settings) {

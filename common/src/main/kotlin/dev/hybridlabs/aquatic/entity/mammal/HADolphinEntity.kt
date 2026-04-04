@@ -11,7 +11,6 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.tags.FluidTags
 import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
@@ -152,14 +151,6 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
         set(size) {
             entityData.set(DOLPHIN_SIZE, size)
         }
-
-    fun isBelowWaterline(): Boolean {
-        return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
-    }
-
-    open fun getWaterline(): Float {
-        return 0.5f
-    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

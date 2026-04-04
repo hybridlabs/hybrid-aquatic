@@ -10,11 +10,11 @@ import dev.hybridlabs.aquatic.forge.HybridAquaticEventBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticForgeBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticModBusEvents
 import dev.hybridlabs.aquatic.item.HAItemGroups
-import dev.hybridlabs.aquatic.item.HAAquaticItems
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
-import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
+import dev.hybridlabs.aquatic.network.HANetworking
 import dev.hybridlabs.aquatic.painting.HAPaintings
 import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.sound.HASoundEvents
@@ -53,7 +53,7 @@ object HybridAquaticForge {
         HAMobEffects
         HAPotions
 
-        HAAquaticItems
+        HAItems
         HAPlatformItems
         HAItemGroups
 
@@ -62,7 +62,7 @@ object HybridAquaticForge {
         HAPlacedFeatures
         HAConfiguredFeatures
 
-        HybridAquaticNetworking.registerPackets()
+        HANetworking.registerPackets()
         HybridAquaticLootPoolEntryTypes
 
         HybridAquaticModBusEvents
