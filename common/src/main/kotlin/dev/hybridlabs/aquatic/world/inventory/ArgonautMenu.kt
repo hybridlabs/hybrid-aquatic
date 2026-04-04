@@ -69,11 +69,12 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
         if (slot.hasItem()) {
             val itemstack1 = slot.item
             itemstack = itemstack1.copy()
-            if (index < this.rowCount * SLOTS_PER_ROW) {
+
+            if (index <= this.rowCount * SLOTS_PER_ROW) {
                 if (!this.moveItemStackTo(itemstack1, this.rowCount * SLOTS_PER_ROW, this.slots.size, true)) {
                     return ItemStack.EMPTY
                 }
-            } else if (!this.moveItemStackTo(itemstack1, 0, this.rowCount * SLOTS_PER_ROW, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, 0, this.rowCount * SLOTS_PER_ROW + 1, false)) {
                 return ItemStack.EMPTY
             }
 
