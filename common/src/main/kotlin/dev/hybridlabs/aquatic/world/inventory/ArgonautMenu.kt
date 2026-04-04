@@ -22,23 +22,23 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
         container.startOpen(playerInventory.player)
         val playerInventoryOffset = (this.rowCount - 4) * 18
 
+        this.addSlot(ArgonautFuelSlot(
+            this,
+            container,
+            0,
+            LEFT_PIXEL_TO_SLOT + 72,
+            TOP_OFFSET + (-36)
+        ))
+
         for (argonautRow in 0..<this.rowCount) {
             for (argonautColumn in 0..<SLOTS_PER_ROW) {
                 this.addSlot(Slot(container,
-                    argonautColumn + argonautRow * SLOTS_PER_ROW,
+                    (argonautColumn + argonautRow * SLOTS_PER_ROW) + 1, // fuel slot is index 0 now
                     LEFT_PIXEL_TO_SLOT + argonautColumn * 18,
                     TOP_OFFSET + (18 + argonautRow * 18)
                 ))
             }
         }
-
-        this.addSlot(ArgonautFuelSlot(
-            this,
-            container,
-            rows * SLOTS_PER_ROW /* count from 0*/,
-            LEFT_PIXEL_TO_SLOT + 72,
-            TOP_OFFSET + (-36)
-        )) // 28th fuel slot
 
         for (playerRow in 0..2) {
             for (playerColumn in 0..8) {
