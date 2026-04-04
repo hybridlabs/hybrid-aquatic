@@ -169,7 +169,8 @@ open class ArgonautEntity(
     }
 
     open fun getBurnDuration(fuel: ItemStack): Int {
-        return if (fuel.isEmpty) 0 else AbstractFurnaceBlockEntity.getFuel().getOrDefault(fuel.item, 0)
+        return if (fuel.isEmpty) 0
+        else AbstractFurnaceBlockEntity.getFuel().getOrDefault(fuel.item, 0) * 2
     }
 
     fun isLit(): Boolean {
