@@ -40,6 +40,18 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
             topDrawPos, 16, 0, this.imageWidth,  argonautRows * 18 + 71)
         guiGraphics.blit(ARGONAUT_BACKGROUND,
             leftDrawPos, topDrawPos + this.argonautRows * 18 + 71, 16, 126, this.imageWidth, 96)
+
+        if (this.menu.isLit()) {
+            val litProgress = this.menu.getLitProgress()
+            guiGraphics.blit(
+                ARGONAUT_BACKGROUND,
+                leftDrawPos + 84,
+                topDrawPos + 38 + 12 - litProgress,
+                198,
+                12 - litProgress,
+                14,
+                litProgress + 1)
+        }
     }
 
     override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {

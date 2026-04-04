@@ -98,10 +98,17 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
         return AbstractFurnaceBlockEntity.isFuel(stack)
     }
 
-    fun getBurnProgress(): Int {
-        val litTime: Int = containerData.get(0)
-        val litDuration: Int = containerData.get(1)
-        return if (litDuration != 0 && litTime != 0) litTime * 24 / litDuration else 0
+    fun getLitProgress(): Int {
+        var i: Int = containerData[1]
+        if (i == 0) {
+            i = 200
+        }
+
+        return containerData[0] * 13 / i
+    }
+
+    fun isLit(): Boolean {
+        return containerData[0] > 0
     }
 
     companion object {
