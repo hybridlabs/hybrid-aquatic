@@ -4,19 +4,18 @@ import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.MenuType
-import net.minecraft.world.inventory.Slot
+import net.minecraft.world.inventory.*
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
 
-class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Inventory, container: Container, rows: Int) :
+class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Inventory, container: Container, rows: Int, val containerData: ContainerData) :
     AbstractContainerMenu(type, containerId) {
     val container: Container
     val rowCount: Int
 
     init {
         checkContainerSize(container, rows * SLOTS_PER_ROW + 1)
+        checkContainerDataCount(containerData, 2)
         this.container = container
         this.rowCount = rows
         container.startOpen(playerInventory.player)
@@ -57,6 +56,8 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
                 LEFT_PIXEL_TO_SLOT + playerHotbar * 18,
                 TOP_OFFSET + (161 + playerInventoryOffset)))
         }
+
+        addDataSlots(containerData)
     }
 
     override fun stillValid(player: Player): Boolean {
@@ -97,18 +98,25 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
         return AbstractFurnaceBlockEntity.isFuel(stack)
     }
 
+    fun getBurnProgress(): Int {
+        val litTime: Int = containerData.get(0)
+        val litDuration: Int = containerData.get(1)
+        return if (litDuration != 0 && litTime != 0) litTime * 24 / litDuration else 0
+    }
+
     companion object {
         private const val SLOTS_PER_ROW = 9
         private const val LEFT_PIXEL_TO_SLOT = 11
         private const val TOP_OFFSET = 54
 
-        fun twoRows(containerId: Int, playerInventory: Inventory, container: Container): ArgonautMenu {
+        fun twoRows(containerId: Int, playerInventory: Inventory, container: Container, containerData: ContainerData): ArgonautMenu {
             return ArgonautMenu(
                 HAMenuTypes.ARGONAUT_MENU_2ROW.get(),
                 containerId,
                 playerInventory,
                 container,
-                2
+                2,
+                containerData
             )
         }
 
@@ -118,7 +126,8 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
                 containerId,
                 playerInventory,
                 SimpleContainer(SLOTS_PER_ROW * 2 + 1),
-                2
+                2,
+                SimpleContainerData(2)
             )
         }
 
@@ -128,17 +137,19 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
                 containerId,
                 playerInventory,
                 SimpleContainer(SLOTS_PER_ROW * 3 + 1),
-                3
+                3,
+                SimpleContainerData(2)
             )
         }
 
-        fun threeRows(containerId: Int, playerInventory: Inventory, container: Container): ArgonautMenu {
+        fun threeRows(containerId: Int, playerInventory: Inventory, container: Container, containerData: ContainerData): ArgonautMenu {
             return ArgonautMenu(
                 HAMenuTypes.ARGONAUT_MENU_3ROW.get(),
                 containerId,
                 playerInventory,
                 container,
-                3
+                3,
+                containerData
             )
         }
     }

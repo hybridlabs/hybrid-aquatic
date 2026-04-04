@@ -23,12 +23,14 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.vehicle.ContainerEntity
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.DyeItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
 import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
@@ -65,6 +67,28 @@ open class ArgonautEntity(
     private var lerpYRot = 0.0
     private var lerpXRot = 0.0
 
+    private var litTime = 0
+    private var litDuration = 0
+    private val dataAccess = object : ContainerData {
+        override fun get(index: Int): Int {
+            return when(index) {
+                0 -> litTime
+                1 -> litDuration
+                else -> 0
+            }
+        }
+
+        override fun set(index: Int, value: Int) {
+            when(index) {
+                0 -> litTime = value
+                1 -> litDuration = value
+            }
+        }
+
+        override fun getCount(): Int {
+            return 2
+        }
+    }
     //#region Data
     override fun defineSynchedData() {
         this.entityData.define(DATA_ID_HURT, 0)
@@ -82,6 +106,7 @@ open class ArgonautEntity(
         tag.putBoolean("IsGlowing", isGlowing())
         tag.putString("ShellColor", this.getShellColor().serializedName)
         tag.putString("SailColor", this.getSailColor().serializedName)
+        tag.putInt("BurnTime", this.litTime)
         this.addChestVehicleSaveData(tag)
     }
 
@@ -101,6 +126,7 @@ open class ArgonautEntity(
             setSailColor(color)
         }
 
+        this.litTime = tag.getInt("BurnTime")
         this.readChestVehicleSaveData(tag)
     }
     //#endregion
@@ -142,8 +168,30 @@ open class ArgonautEntity(
         this.lerpSteps = 10
     }
 
+    open fun getBurnDuration(fuel: ItemStack): Int {
+        return if (fuel.isEmpty) 0 else AbstractFurnaceBlockEntity.getFuel().getOrDefault(fuel.item, 0) * 8
+    }
+
+    fun isLit(): Boolean {
+        return this.litTime > 0
+    }
+
+    fun burnTick() {
+        val fuelItemStack = itemStacks[0]
+
+        if (isLit()) {
+            litTime--
+            return
+        }
+        if (fuelItemStack.isEmpty) return
+
+        litTime = getBurnDuration(fuelItemStack)
+        litDuration = litTime
+    }
+
     override fun tick() {
         super.tick()
+        burnTick()
 
         val passenger = this.firstPassenger
         if (passenger is LivingEntity) {
@@ -577,7 +625,7 @@ open class ArgonautEntity(
             return null
         } else {
             this.unpackLootTable(playerInventory.player)
-            return ArgonautMenu.threeRows(containerId, playerInventory, this)
+            return ArgonautMenu.threeRows(containerId, playerInventory, this, this.dataAccess)
         }
     }
 
