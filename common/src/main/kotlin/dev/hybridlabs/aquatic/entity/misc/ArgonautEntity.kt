@@ -186,16 +186,20 @@ open class ArgonautEntity(
     fun burnTick() {
         val fuelItemStack = itemStacks[0]
 
-        if (isLit()) {
+        if (litTime > 0) {
             litTime--
             if (litTime == 0) setLit(false)
             return
         }
         if (fuelItemStack.isEmpty) return
 
-        fuelItemStack.shrink(1)
         litTime = getBurnDuration(fuelItemStack)
         litDuration = litTime
+
+        val itemRemainder = fuelItemStack.item.craftingRemainingItem
+        fuelItemStack.shrink(1)
+        if (fuelItemStack.isEmpty && itemRemainder != null) itemStacks[0] = itemRemainder.defaultInstance
+
         setLit(true)
     }
 
