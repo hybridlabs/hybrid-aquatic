@@ -62,10 +62,10 @@ class ArgonautEntityModel<T : ArgonautEntity>() :
 
         val yawController = if (animatable.hasControllingPassenger()) animatable.controllingPassenger!! else animatable
 
-        val yaw = Mth.lerp(deltaTime, yawController.yRotO, yawController.yRot)
+        val yaw = Mth.rotLerp(deltaTime, yawController.yRotO, yawController.yRot)
         body.rotY = -yaw * Mth.DEG_TO_RAD
 
-        val tilt = Mth.lerp(deltaTime, yawController.xRotO, yawController.xRot)
+        val tilt = Mth.rotLerp(deltaTime, yawController.xRotO, yawController.xRot)
         body.rotX = tilt * -Mth.DEG_TO_RAD
     }
 }
