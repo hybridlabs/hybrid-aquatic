@@ -2008,6 +2008,8 @@ object HAItems {
         registerSpawnEgg("karcinoma_spawn_egg", HAEntityTypes.KARCINOMA, 0x852c2a, 0x3d1031)
     val SHELL_BEAST_SPAWN_EGG =
         registerSpawnEgg("shell_beast_spawn_egg", HAEntityTypes.SHELL_BEAST, 0xbbb490, 0x972f2e)
+    val HYPNAUTILUS_SPAWN_EGG =
+        registerSpawnEgg("hypnautilus_spawn_egg", HAEntityTypes.HYPNAUTILUS, 0xbbb490, 0x972f2e)
     //#endregion
     //#endregion
 

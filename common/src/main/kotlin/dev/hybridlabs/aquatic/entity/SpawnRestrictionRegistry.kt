@@ -225,6 +225,7 @@ object SpawnRestrictionRegistry {
         setOf(
             HAEntityTypes.KARCINOGEN.get(),
             HAEntityTypes.KARCINOMA.get(),
+            HAEntityTypes.HYPNAUTILUS.get(),
         ).forEach { registerMinion(it) }
     }
 

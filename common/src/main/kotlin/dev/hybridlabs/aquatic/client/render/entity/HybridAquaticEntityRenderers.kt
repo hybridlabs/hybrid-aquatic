@@ -791,6 +791,12 @@ object HybridAquaticEntityRenderers {
             HAEntityTypes.SHELL_BEAST,
             ::ShellBeastEntityRenderer
         )
+
+    val HYPNAUTILUS =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.HYPNAUTILUS,
+            ::HypnautilusEntityRenderer
+        )
     //endregion
 
     val DEPTH_CHARGE =

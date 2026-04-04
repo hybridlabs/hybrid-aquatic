@@ -10,10 +10,7 @@ import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
 import dev.hybridlabs.aquatic.entity.mammal.ManateeEntity
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
-import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity
-import dev.hybridlabs.aquatic.entity.miniboss.KarcinomaEntity
-import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
-import dev.hybridlabs.aquatic.entity.miniboss.ShellBeastEntity
+import dev.hybridlabs.aquatic.entity.miniboss.*
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
@@ -946,6 +943,13 @@ object HAEntityTypes {
         ::ShellBeastEntity,
         EntityDimensions.fixed(2.5f, 3.0f),
         ShellBeastEntity::createMobAttributes
+    )
+
+    val HYPNAUTILUS = registerMinion(
+        "hypnautilus",
+        ::HypnautilusEntity,
+        EntityDimensions.fixed(0.8f, 0.8f),
+        HypnautilusEntity::createMobAttributes
     )
     //#endregion
 
