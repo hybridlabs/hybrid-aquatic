@@ -1,7 +1,10 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.control.SmoothStrafeSwimmingMoveControl
+import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity.Companion.SUMMONING
 import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -42,6 +45,8 @@ import kotlin.math.abs
 class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     HAMinibossEntity(type, world) {
     private var explosionPower = 0
+    private var summonTimer: Int = 0
+    var summonCooldown: Int = 0
 
     fun getExplosionPower(): Int {
         return this.explosionPower
@@ -86,6 +91,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         ServerBossEvent(displayName, BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.NOTCHED_6)
 
     override fun registerGoals() {
+        goalSelector.addGoal(1, ShellBeastSummonGoal(this))
         goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(1, ShellBeastRangedAttackGoal(this))
@@ -195,6 +201,19 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     }
 
     override fun aiStep() {
+
+        if (summonCooldown > 0) summonCooldown--
+
+        if (isSummoning()) {
+            summonTimer--
+
+            if (summonTimer == 0) {
+                if (this.isUnderWater) {
+                    summonHypnautilus()
+                }
+                stopSummoning()
+            }
+        }
         bossBar.progress = health / maxHealth
         super.aiStep()
     }
@@ -264,6 +283,53 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         NearestAttackableTargetGoal<T>(shellBeast, target, mustSee, predicate) {
         override fun getTargetSearchArea(targetDistance: Double): AABB {
             return this.mob.boundingBox.inflate(targetDistance)
+        }
+    }
+
+    fun isSummoning(): Boolean {
+        return entityData.get(SUMMONING)
+    }
+
+    private fun setSummoning(summon: Boolean) {
+        entityData.set(SUMMONING, summon)
+    }
+
+    fun startSummoning() {
+        setSummoning(true)
+        playSound(SoundEvents.EVOKER_PREPARE_ATTACK, 1.0f, 1.0f)
+        summonTimer = 30
+        summonCooldown = 480
+        navigation.stop()
+    }
+
+    fun stopSummoning() {
+        setSummoning(false)
+        summonTimer = 0
+        summonCooldown = 600
+    }
+
+    private fun summonHypnautilus() {
+        val random = this.random
+        val count = 3
+
+        for (i in 0 until count) {
+            val offsetX = (random.nextDouble() - 0.5) * 6.0
+            val offsetZ = (random.nextDouble() - 0.5) * 6.0
+            val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
+
+            val hypnautilus = HAEntityTypes.HYPNAUTILUS.get().create(level())
+            if (hypnautilus != null) {
+                hypnautilus.moveTo(
+                    spawnPos.x.toDouble() + 0.5,
+                    spawnPos.y.toDouble(),
+                    spawnPos.z.toDouble() + 0.5,
+                    random.nextFloat() * 360f,
+                    0f
+                )
+                hypnautilus.setOwner(this)
+                hypnautilus.setLimitedLife(600)
+                level().addFreshEntity(hypnautilus)
+            }
         }
     }
 

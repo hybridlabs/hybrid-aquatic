@@ -17,7 +17,6 @@ import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
 
 
 class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
@@ -39,20 +38,12 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         controllers.add(
             AnimationController(this, "Swim/Run/Idle", 4) { state ->
                 when {
-                    isInWater && isSprinting && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.RUN)
-                    }
-
-                    isInWater && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    }
-
-                    isInWater && !state.isMoving -> {
+                    isInWater -> {
                         state.setAndContinue(DefaultAnimations.IDLE)
                     }
 
                     else -> {
-                        state.setAndContinue(FLOP_ANIMATION)
+                        state.setAndContinue(DefaultAnimations.IDLE)
                     }
                 }
             }
@@ -90,8 +81,6 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
     }
 
     companion object {
-        val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
-
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
