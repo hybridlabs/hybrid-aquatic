@@ -15,6 +15,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.core.HolderSet
 import net.minecraft.core.Vec3i
 import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.random.SimpleWeightedRandomList
 import net.minecraft.util.valueproviders.BiasedToBottomInt
@@ -43,6 +44,7 @@ import net.minecraft.world.level.levelgen.placement.HeightmapPlacement
 import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest
 import net.minecraft.world.level.levelgen.synth.NormalNoise
+import java.util.List
 import java.util.concurrent.CompletableFuture
 
 class ConfiguredFeatureProvider(
@@ -80,7 +82,7 @@ class ConfiguredFeatureProvider(
                         ),
                         BlockPredicate.allOf(
                             BlockPredicate.matchesBlocks(Blocks.WATER),
-                            BlockPredicate.hasSturdyFace(Vec3i(0,-1,0), Direction.UP)
+                            BlockPredicate.hasSturdyFace(Vec3i(0, -1, 0), Direction.UP)
                         )
                     )
                 )
@@ -301,6 +303,25 @@ class ConfiguredFeatureProvider(
             ConfiguredFeature(
                 HybridAquatic.DUNEGRASS_PATCH.get(), ProbabilityFeatureConfiguration(
                     0.5f
+                )
+            )
+        )
+
+        val whaleFallList = mutableListOf(
+            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_1.nbt"),
+            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_ribs.nbt"),
+            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_ribs_2.nbt"),
+            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_ribs_tail.nbt"),
+            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_skull.nbt"),
+            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_skull_ribcage.nbt"),
+        )
+
+        entries.add(
+            HAConfiguredFeatures.WHALE_FALL,
+            ConfiguredFeature(
+                HAFeatures.WHALE_FALL.get(),
+                WhaleFallFeatureConfig(
+                    whaleFallList, 1
                 )
             )
         )

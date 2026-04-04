@@ -4,18 +4,7 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import dev.hybridlabs.aquatic.world.gen.feature.algae.RedAlgaePatchFeature
 import dev.hybridlabs.aquatic.world.gen.feature.algae.SeaLettuceFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.BleachedCoralClawFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.BleachedCoralMushroomFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.BleachedCoralTableFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.BleachedCoralTreeFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.DeepCoralClawFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.DeepCoralMushroomFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.DeepCoralTableFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.DeepCoralTreeFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralClawFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralMushroomFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralTableFeature
-import dev.hybridlabs.aquatic.world.gen.feature.corals.ReefCoralTreeFeature
+import dev.hybridlabs.aquatic.world.gen.feature.corals.*
 import dev.hybridlabs.aquatic.world.gen.feature.kelp.BullKelpFeature
 import dev.hybridlabs.aquatic.world.gen.feature.kelp.BullKelpFeatureConfig
 import dev.hybridlabs.aquatic.world.gen.feature.kelp.SargassumFeature
@@ -58,9 +47,11 @@ object HAFeatures {
     val REEF_CORAL_MUSHROOM = register("reef_coral_mushroom", ReefCoralMushroomFeature(NoneFeatureConfiguration.CODEC))
     val REEF_CORAL_TABLE = register("reef_coral_table", ReefCoralTableFeature(NoneFeatureConfiguration.CODEC))
 
+    val WHALE_FALL = register("whale_fall", WhaleFallFeature(WhaleFallFeatureConfig.CODEC))
+
     fun <F : Feature<*>> register(
         id: String,
-        feature: F
+        feature: F,
     ): RegistryObject<Feature<FeatureConfiguration>> {
         @Suppress("UNCHECKED_CAST")
         return CommonClass.FEATURE.register(id) { feature as Feature<FeatureConfiguration> }
