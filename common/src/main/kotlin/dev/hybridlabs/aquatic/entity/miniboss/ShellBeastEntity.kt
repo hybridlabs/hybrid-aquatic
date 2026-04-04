@@ -165,12 +165,16 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
-        this.entityData.define(DATA_IS_CHARGING, false)
+        entityData.define(DATA_IS_CHARGING, false)
+        entityData.define(SUMMONING, false)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
         compound.putByte("ExplosionPower", this.explosionPower.toByte())
+        compound.putBoolean("Summoning", isSummoning())
+        compound.putInt("SummonTimer", summonTimer)
+        compound.putInt("SummonCooldown", summonCooldown)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
@@ -181,6 +185,10 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         if (compound.contains("ExplosionPower", 99)) {
             this.explosionPower = compound.getByte("ExplosionPower").toInt()
         }
+
+        this.setSummoning(compound.getBoolean("Summoning"))
+        this.summonTimer = compound.getInt("SummonTimer")
+        this.summonCooldown = compound.getInt("SummonCooldown")
 
         super.readAdditionalSaveData(compound)
     }
