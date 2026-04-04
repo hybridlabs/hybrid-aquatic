@@ -19,7 +19,7 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
         this.container = container
         this.rowCount = rows
         container.startOpen(playerInventory.player)
-        val i = (this.rowCount - 4) * 181
+        val inventoryOffset = (this.rowCount - 4) * 18
 
         for (argonautRow in 0..<this.rowCount) {
             for (argonautColumn in 0..<SLOTS_PER_ROW) {
@@ -30,12 +30,12 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
 
         for (playerRow in 0..2) {
             for (playerColumn in 0..8) {
-                this.addSlot(Slot(playerInventory, playerColumn + playerRow * 9 + 9, LEFT_PIXEL_TO_SLOT + playerColumn * 18, 103 + playerRow * 18 + i))
+                this.addSlot(Slot(playerInventory, playerColumn + playerRow * 9 + 9, LEFT_PIXEL_TO_SLOT + playerColumn * 18, 103 + playerRow * 18 + inventoryOffset))
             }
         }
 
         for (playerHotbar in 0..8) {
-            this.addSlot(Slot(playerInventory, playerHotbar, LEFT_PIXEL_TO_SLOT + playerHotbar * 18, 161 + i))
+            this.addSlot(Slot(playerInventory, playerHotbar, LEFT_PIXEL_TO_SLOT + playerHotbar * 18, 161 + inventoryOffset))
         }
     }
 

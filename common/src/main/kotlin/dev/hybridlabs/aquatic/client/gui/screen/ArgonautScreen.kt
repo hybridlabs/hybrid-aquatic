@@ -15,8 +15,11 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
     init {
         val totalGUIHeight = 222
         val firstSlotFromBottomHeight = 115
+
+        // size of screen in pixels
         imageHeight = firstSlotFromBottomHeight + this.argonautRows * 18 + 71
         imageWidth = 182
+
         inventoryLabelY = imageHeight - 94
     }
 
@@ -31,12 +34,12 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
         mouseX: Int,
         mouseY: Int
     ) {
-        val leftPos = (this.width - this.imageWidth) / 2 - 19
-        val topPos = (this.height - this.imageHeight) / 2 - 54
-        guiGraphics.blit(ARGONAUT_BACKGROUND, leftPos,
-            topPos, 0, 0, this.imageWidth,  argonautRows * 18 + 71)
+        val leftDrawPos = (this.width - this.imageWidth) / 2
+        val topDrawPos = (this.height - this.imageHeight) / 2
+        guiGraphics.blit(ARGONAUT_BACKGROUND, leftDrawPos,
+            topDrawPos, 16, 0, this.imageWidth,  argonautRows * 18 + 71)
         guiGraphics.blit(ARGONAUT_BACKGROUND,
-            leftPos, topPos + this.argonautRows * 18 + 71, 0, 126, this.imageWidth, 96)
+            leftDrawPos, topDrawPos + this.argonautRows * 18 + 71, 16, 126, this.imageWidth, 96)
     }
 
     override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
