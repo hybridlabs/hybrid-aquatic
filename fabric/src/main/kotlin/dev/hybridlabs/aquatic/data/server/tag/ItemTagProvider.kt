@@ -482,36 +482,36 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.CYAN_HATXOLOTL.get(),
             HAItems.BLUE_HATXOLOTL.get(),
             HAItems.BROWN_HATXOLOTL.get(),
-            HybridAquaticItems.GOLD_HATXOLOTL.get(),
+            HAItems.GOLD_HATXOLOTL.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.HAT).add(item)
         }
 
         setOf(
-            HybridAquaticItems.EEL_SCARF.get(),
+            HAItems.EEL_SCARF.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.SCARF).add(item)
         }
 
         setOf(
-            HybridAquaticItems.MANGLERFISH_FIN.get(),
+            HAItems.MANGLERFISH_FIN.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.BACK_FIN).add(item)
         }
 
         setOf(
-            HybridAquaticItems.MANGLERFISH_LURE.get(),
-            HybridAquaticItems.MANGLERFISH_FIN.get(),
-            HybridAquaticItems.EEL_SCARF.get(),
-            HybridAquaticItems.PINK_HATXOLOTL.get(),
-            HybridAquaticItems.MOON_JELLYFISH_HAT.get(),
-            HybridAquaticItems.NAUTILUS_HELMET.get(),
-            HybridAquaticItems.NAUTILUS_PAULDRONS.get(),
-            HybridAquaticItems.TURTLE_CHESTPLATE.get(),
-            HybridAquaticItems.DIVING_HELMET.get(),
-            HybridAquaticItems.DIVING_SUIT.get(),
-            HybridAquaticItems.DIVING_LEGGINGS.get(),
-            HybridAquaticItems.DIVING_BOOTS.get(),
+            HAItems.MANGLERFISH_LURE.get(),
+            HAItems.MANGLERFISH_FIN.get(),
+            HAItems.EEL_SCARF.get(),
+            HAItems.PINK_HATXOLOTL.get(),
+            HAItems.MOON_JELLYFISH_HAT.get(),
+            HAItems.NAUTILUS_HELMET.get(),
+            HAItems.NAUTILUS_PAULDRONS.get(),
+            HAItems.TURTLE_CHESTPLATE.get(),
+            HAItems.DIVING_HELMET.get(),
+            HAItems.DIVING_SUIT.get(),
+            HAItems.DIVING_LEGGINGS.get(),
+            HAItems.DIVING_BOOTS.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.ARMORS).add(item)
         }

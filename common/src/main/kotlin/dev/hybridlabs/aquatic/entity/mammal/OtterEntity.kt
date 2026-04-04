@@ -2,7 +2,8 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.*
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
@@ -21,7 +22,6 @@ import net.minecraft.util.Mth
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.InteractionHand
-import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -38,7 +38,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec2
@@ -51,7 +50,7 @@ import java.util.*
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HATameableMammalEntity(entityType, world),
+class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMammalEntity(entityType, world),
     VariantHolder<OtterEntity.Companion.Type> {
     fun getTargetConfig() = TARGET_CONFIG
 
@@ -79,10 +78,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HATam
     }
 
     override fun registerGoals() {
-        this.goalSelector.addGoal(6, HAFollowOwnerGoal(this, 1.0, 10.0f, 2.0f, false))
-        this.goalSelector.addGoal(2, HASitWhenOrderedToGoal(this))
-        this.targetSelector.addGoal(1, HAOwnerHurtByTargetGoal(this))
-        this.targetSelector.addGoal(2, HAOwnerHurtTargetGoal(this))
         goalSelector.addGoal(1, OtterBreatheAirGoal(this))
         goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(2, OtterDiveGoal(this, 1.0))
@@ -109,62 +104,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HATam
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAItems.MACKEREL.get())
-    }
-
-    override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
-        val itemstack = player.getItemInHand(hand)
-
-        if (this.level().isClientSide) {
-            val flag =
-                this.isOwnedBy(player) || this.isTame() || itemstack.`is`(HAItems.CLAM.get()) && !this.isTame()
-            return if (flag) InteractionResult.CONSUME else InteractionResult.PASS
-        }
-
-        if (this.isTame()) {
-            if (this.isFood(itemstack) && this.health < this.maxHealth) {
-                this.heal(4.0f)
-
-                if (!player.abilities.instabuild) {
-                    itemstack.shrink(1)
-                }
-
-                this.gameEvent(GameEvent.EAT, this)
-                return InteractionResult.SUCCESS
-            }
-
-            val result = super.mobInteract(player, hand)
-
-            if ((!result.consumesAction() || this.isBaby) && this.isOwnedBy(player)) {
-                this.setOrderedToSit(!this.isOrderedToSit())
-                this.jumping = false
-                this.navigation.stop()
-                this.target = null
-                return InteractionResult.SUCCESS
-            }
-
-            return result
-        }
-
-        if (itemstack.`is`(HAItems.CLAM.get())) {
-            if (!player.abilities.instabuild) {
-                itemstack.shrink(1)
-            }
-
-            if (this.random.nextInt(3) == 0) {
-                this.tame(player)
-                this.navigation.stop()
-                this.target = null
-                this.setOrderedToSit(true)
-                this.level().broadcastEntityEvent(this, 7.toByte()) // hearts
-            } else {
-                this.level().broadcastEntityEvent(this, 6.toByte()) // smoke
-            }
-
-            return InteractionResult.SUCCESS
-        }
-
-        return super.mobInteract(player, hand)
+        return stack.`is`(HAItems.CLAM.get())
     }
 
     /**

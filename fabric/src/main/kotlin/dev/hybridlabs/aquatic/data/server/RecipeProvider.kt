@@ -59,96 +59,96 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         chiseled(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.CHISELED_WHITE_SANDSTONE.get(),
-            HybridAquaticItems.WHITE_SANDSTONE.get()
+            HAItems.CHISELED_WHITE_SANDSTONE.get(),
+            HAItems.WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.WHITE_SANDSTONE_SLAB.get(),
-            HybridAquaticItems.WHITE_SANDSTONE.get(),
+            HAItems.WHITE_SANDSTONE_SLAB.get(),
+            HAItems.WHITE_SANDSTONE.get(),
             2
         )
 
         stonecutterResultFromBase(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.CUT_WHITE_SANDSTONE_SLAB.get(),
-            HybridAquaticItems.CUT_WHITE_SANDSTONE.get(),
+            HAItems.CUT_WHITE_SANDSTONE_SLAB.get(),
+            HAItems.CUT_WHITE_SANDSTONE.get(),
             2
         )
 
         stonecutterResultFromBase(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
-            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE.get(),
+            HAItems.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
+            HAItems.SMOOTH_WHITE_SANDSTONE.get(),
             2
         )
 
         stonecutterResultFromBase(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.WHITE_SANDSTONE_STAIRS.get(),
-            HybridAquaticItems.WHITE_SANDSTONE.get()
+            HAItems.WHITE_SANDSTONE_STAIRS.get(),
+            HAItems.WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
-            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE.get()
+            HAItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
+            HAItems.SMOOTH_WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.WHITE_SANDSTONE_WALL.get(),
-            HybridAquaticItems.WHITE_SANDSTONE.get()
+            HAItems.WHITE_SANDSTONE_WALL.get(),
+            HAItems.WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.CHISELED_WHITE_SANDSTONE.get(),
-            HybridAquaticItems.WHITE_SANDSTONE.get()
+            HAItems.CHISELED_WHITE_SANDSTONE.get(),
+            HAItems.WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.SMOOTH_WHITE_SANDSTONE.get(),
-            HybridAquaticItems.WHITE_SANDSTONE.get()
+            HAItems.SMOOTH_WHITE_SANDSTONE.get(),
+            HAItems.WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.CUT_WHITE_SANDSTONE.get(),
-            HybridAquaticItems.WHITE_SANDSTONE.get()
+            HAItems.CUT_WHITE_SANDSTONE.get(),
+            HAItems.WHITE_SANDSTONE.get()
         )
         //#endregion
 
         // misc recipes
-        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, HybridAquaticItems.ARGONAUT.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, HAItems.ARGONAUT.get())
             .pattern("IBF")
             .pattern("GSC")
             .pattern("IBW")
             .define('I', Items.IRON_INGOT)
             .define('B', Items.BARREL)
-            .define('G', HybridAquaticItems.GLOWSLIME.get())
-            .define('S', HybridAquaticItems.GIANT_NAUTILUS_SHELL.get())
+            .define('G', HAItems.GLOWSLIME.get())
+            .define('S', HAItems.GIANT_NAUTILUS_SHELL.get())
             .define('C', Items.CHEST)
             .define('F', Items.FURNACE)
             .define('W', ItemTags.WOOL)
             .unlockedBy(
                 "has_giant_nautilus_shell",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GIANT_NAUTILUS_SHELL.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GIANT_NAUTILUS_SHELL.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.DIVING_WEIGHT.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.DIVING_WEIGHT.get())
             .pattern("III")
             .pattern("I I")
             .pattern("IBI")
@@ -160,7 +160,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HybridAquaticItems.PRISMARINE_ROD.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HAItems.PRISMARINE_ROD.get())
             .pattern("P  ")
             .pattern("P  ")
             .pattern("   ")
@@ -171,64 +171,64 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get(), 2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get(), 2)
             .pattern("PPP")
             .pattern("PUP")
             .pattern("PCP")
             .define('P', Items.PRISMARINE_SHARD)
-            .define('U', HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get())
+            .define('U', HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get())
             .define('C', Items.PRISMARINE_CRYSTALS)
             .unlockedBy(
                 "has_diving_template",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, HybridAquaticItems.DEPTH_CHARGE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, HAItems.DEPTH_CHARGE.get())
             .pattern("SIS")
             .pattern("ISI")
             .pattern("SIS")
-            .define('S', HybridAquaticItems.SULFUR.get())
+            .define('S', HAItems.SULFUR.get())
             .define('I', Items.IRON_NUGGET)
             .unlockedBy(
                 "has_sulfur",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SULFUR.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.AERATED_SAND.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.AERATED_SAND.get())
             .pattern("SSS")
             .pattern("SPS")
             .pattern("SSS")
-            .define('P', HybridAquaticItems.PEARL.get())
+            .define('P', HAItems.PEARL.get())
             .define('S', Items.SAND)
             .unlockedBy(
                 "has_pearl",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PEARL.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "aerated_sand_from_pearl"))
 
         ShapelessRecipeBuilder.shapeless(
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.AERATED_SAND.get(),
+            HAItems.AERATED_SAND.get(),
             1
         )
-            .requires(HybridAquaticItems.BUBBLE_GEYSER.get())
+            .requires(HAItems.BUBBLE_GEYSER.get())
             .unlockedBy(
                 "has_pearl",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PEARL.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "aerated_sand_from_bubble_geyser"))
 
         ShapelessRecipeBuilder.shapeless(
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.BUBBLE_GEYSER.get(),
+            HAItems.BUBBLE_GEYSER.get(),
             1
         )
-            .requires(HybridAquaticItems.AERATED_SAND.get())
+            .requires(HAItems.AERATED_SAND.get())
             .unlockedBy(
                 "has_pearl",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PEARL.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "bubble_geyser_from_aerated_sand"))
 
@@ -236,114 +236,114 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .pattern("SS ")
             .pattern("SS ")
             .pattern("   ")
-            .define('S', HybridAquaticItems.TUBE_SPONGE.get())
+            .define('S', HAItems.TUBE_SPONGE.get())
             .unlockedBy(
                 "has_tube_sponge",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.TUBE_SPONGE.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.TUBE_SPONGE.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.PEARL_BLOCK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.PEARL_BLOCK.get())
             .pattern("PPP")
             .pattern("PPP")
             .pattern("PPP")
-            .define('P', HybridAquaticItems.PEARL.get())
+            .define('P', HAItems.PEARL.get())
             .unlockedBy(
                 "has_pearl",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PEARL.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
             .save(exporter)
 
         ShapelessRecipeBuilder.shapeless(
             RecipeCategory.MISC,
-            HybridAquaticItems.PEARL.get(),
+            HAItems.PEARL.get(),
             9
         )
-            .requires(HybridAquaticItems.PEARL_BLOCK.get())
+            .requires(HAItems.PEARL_BLOCK.get())
             .unlockedBy(
                 "has_pearl_block",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PEARL_BLOCK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL_BLOCK.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.BLACK_PEARL_BLOCK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BLACK_PEARL_BLOCK.get())
             .pattern("PPP")
             .pattern("PPP")
             .pattern("PPP")
-            .define('P', HybridAquaticItems.BLACK_PEARL.get())
+            .define('P', HAItems.BLACK_PEARL.get())
             .unlockedBy(
                 "has_black_pearl",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.BLACK_PEARL.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.BLACK_PEARL.get())
             )
             .save(exporter)
 
         ShapelessRecipeBuilder.shapeless(
             RecipeCategory.MISC,
-            HybridAquaticItems.BLACK_PEARL.get(),
+            HAItems.BLACK_PEARL.get(),
             9
         )
-            .requires(HybridAquaticItems.BLACK_PEARL_BLOCK.get())
+            .requires(HAItems.BLACK_PEARL_BLOCK.get())
             .unlockedBy(
                 "has_black_pearl_block",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.BLACK_PEARL_BLOCK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.BLACK_PEARL_BLOCK.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.CRYSTALLINE_SULFUR.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.CRYSTALLINE_SULFUR.get())
             .pattern("SSS")
             .pattern("SSS")
             .pattern("SSS")
-            .define('S', HybridAquaticItems.SULFUR.get())
+            .define('S', HAItems.SULFUR.get())
             .unlockedBy(
                 "has_sulfur",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SULFUR.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get())
             )
             .save(exporter)
 
         ShapelessRecipeBuilder.shapeless(
             RecipeCategory.BUILDING_BLOCKS,
-            HybridAquaticItems.SULFUR.get(),
+            HAItems.SULFUR.get(),
             9
         )
-            .requires(HybridAquaticItems.CRYSTALLINE_SULFUR.get())
+            .requires(HAItems.CRYSTALLINE_SULFUR.get())
             .unlockedBy(
                 "has_sulfur",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SULFUR.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.GLOWSLIME_BLOCK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.GLOWSLIME_BLOCK.get())
             .pattern("SSS")
             .pattern("SSS")
             .pattern("SSS")
-            .define('S', HybridAquaticItems.GLOWSLIME.get())
+            .define('S', HAItems.GLOWSLIME.get())
             .unlockedBy(
                 "has_glowslime",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GLOWSLIME.get())
             )
             .save(exporter)
 
         ShapelessRecipeBuilder.shapeless(
             RecipeCategory.MISC,
-            HybridAquaticItems.GLOWSLIME.get(),
+            HAItems.GLOWSLIME.get(),
             9
         )
-            .requires(HybridAquaticItems.GLOWSLIME_BLOCK.get())
+            .requires(HAItems.GLOWSLIME_BLOCK.get())
             .unlockedBy(
                 "has_glowslime_block",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME_BLOCK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GLOWSLIME_BLOCK.get())
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_block"))
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_BLADE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_BLADE.get(), 1)
             .pattern(" C ")
             .pattern(" C ")
             .pattern(" S ")
             .define('S', Items.STICK)
-            .define('C', HybridAquaticItems.CORAL_CHUNK.get())
+            .define('C', HAItems.CORAL_CHUNK.get())
             .unlockedBy(
                 "has_coral_chunk",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.CORAL_CHUNK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CORAL_CHUNK.get())
             )
             .save(exporter)
 
@@ -351,67 +351,67 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .pattern("SSS")
             .pattern(" R ")
             .pattern(" R ")
-            .define('S', HybridAquaticItems.SHARK_TOOTH.get())
-            .define('R', HybridAquaticItems.PRISMARINE_ROD.get())
+            .define('S', HAItems.SHARK_TOOTH.get())
+            .define('R', HAItems.PRISMARINE_ROD.get())
             .unlockedBy(
                 "has_shark_tooth",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SHARK_TOOTH.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SHARK_TOOTH.get())
             )
             .unlockedBy(
                 "has_prismarine_rod",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.PRISMARINE_ROD.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PRISMARINE_ROD.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_PICKAXE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_PICKAXE.get(), 1)
             .pattern("CCC")
             .pattern(" S ")
             .pattern(" S ")
             .define('S', Items.STICK)
-            .define('C', HybridAquaticItems.CORAL_CHUNK.get())
+            .define('C', HAItems.CORAL_CHUNK.get())
             .unlockedBy(
                 "has_coral_chunk",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.CORAL_CHUNK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CORAL_CHUNK.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_AXE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_AXE.get(), 1)
             .pattern(" CC")
             .pattern(" SC")
             .pattern(" S ")
             .define('S', Items.STICK)
-            .define('C', HybridAquaticItems.CORAL_CHUNK.get())
+            .define('C', HAItems.CORAL_CHUNK.get())
             .unlockedBy(
                 "has_coral_chunk",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.CORAL_CHUNK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CORAL_CHUNK.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_SHOVEL.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_SHOVEL.get(), 1)
             .pattern(" C ")
             .pattern(" S ")
             .pattern(" S ")
             .define('S', Items.STICK)
-            .define('C', HybridAquaticItems.CORAL_CHUNK.get())
+            .define('C', HAItems.CORAL_CHUNK.get())
             .unlockedBy(
                 "has_coral_chunk",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.CORAL_CHUNK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CORAL_CHUNK.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.CORAL_HOE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_HOE.get(), 1)
             .pattern(" CC")
             .pattern(" S ")
             .pattern(" S ")
             .define('S', Items.STICK)
-            .define('C', HybridAquaticItems.CORAL_CHUNK.get())
+            .define('C', HAItems.CORAL_CHUNK.get())
             .unlockedBy(
                 "has_coral_chunk",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.CORAL_CHUNK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CORAL_CHUNK.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_SPEAR.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_SPEAR.get(), 1)
             .pattern(" N ")
             .pattern(" N ")
             .pattern(" S ")
@@ -420,7 +420,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_PICKAXE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_PICKAXE.get(), 1)
             .pattern("NNN")
             .pattern(" S ")
             .pattern(" S ")
@@ -429,7 +429,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_AXE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_AXE.get(), 1)
             .pattern(" NN")
             .pattern(" SN")
             .pattern(" S ")
@@ -438,7 +438,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_SHOVEL.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_SHOVEL.get(), 1)
             .pattern(" N ")
             .pattern(" S ")
             .pattern(" S ")
@@ -447,7 +447,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.SEASHELL_HOE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_HOE.get(), 1)
             .pattern(" NN")
             .pattern(" S ")
             .pattern(" S ")
@@ -456,7 +456,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.NAUTILUS_HELMET.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.NAUTILUS_HELMET.get(), 1)
             .pattern("NNN")
             .pattern("N N")
             .pattern("   ")
@@ -464,7 +464,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.NAUTILUS_PAULDRONS.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.NAUTILUS_PAULDRONS.get(), 1)
             .pattern("N N")
             .pattern("N N")
             .pattern("   ")
@@ -476,7 +476,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
         offerRaftRecipes(exporter, raftTypeMap)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.RAFT.get(), 2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.RAFT.get(), 2)
             .pattern("SS ")
             .pattern("SS ")
             .pattern("   ")
@@ -484,7 +484,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK))
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.BUOY.get(), 2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BUOY.get(), 2)
             .pattern(" L ")
             .pattern(" S ")
             .pattern(" W ")
@@ -534,7 +534,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         //#endregion
 
         //#region Armor
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HybridAquaticItems.TURTLE_CHESTPLATE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HAItems.TURTLE_CHESTPLATE.get())
             .pattern("S S")
             .pattern("SSS")
             .pattern("SSS")
@@ -542,7 +542,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_scute", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SCUTE))
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HybridAquaticItems.DIVING_HELMET.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HAItems.DIVING_HELMET.get())
             .pattern("CCC")
             .pattern("CGC")
             .pattern("CCC")
@@ -553,7 +553,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_glass", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS))
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HybridAquaticItems.DIVING_SUIT.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HAItems.DIVING_SUIT.get())
             .pattern("C C")
             .pattern("LCL")
             .pattern("LLL")
@@ -563,7 +563,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_copper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HybridAquaticItems.DIVING_LEGGINGS.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HAItems.DIVING_LEGGINGS.get())
             .pattern("CCC")
             .pattern("L L")
             .pattern("L L")
@@ -573,7 +573,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_copper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HybridAquaticItems.DIVING_BOOTS.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HAItems.DIVING_BOOTS.get())
             .pattern("C C")
             .pattern("C C")
             .pattern("   ")
@@ -583,122 +583,122 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .save(exporter)
 
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
-            Ingredient.of(HybridAquaticItems.DIVING_HELMET.get()),
-            Ingredient.of(HybridAquaticItems.BLACK_PEARL.get()),
+            Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HAItems.DIVING_HELMET.get()),
+            Ingredient.of(HAItems.BLACK_PEARL.get()),
             RecipeCategory.COMBAT,
-            HybridAquaticItems.REINFORCED_DIVING_HELMET.get()
+            HAItems.REINFORCED_DIVING_HELMET.get()
         )
             .unlocks(
                 "has_diving_helmet",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
-                    HybridAquaticItems.DIVING_HELMET.get()
+                    HAItems.DIVING_HELMET.get()
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_helmet_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
-            Ingredient.of(HybridAquaticItems.DIVING_SUIT.get()),
-            Ingredient.of(HybridAquaticItems.BLACK_PEARL.get()),
+            Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HAItems.DIVING_SUIT.get()),
+            Ingredient.of(HAItems.BLACK_PEARL.get()),
             RecipeCategory.COMBAT,
-            HybridAquaticItems.REINFORCED_DIVING_SUIT.get()
+            HAItems.REINFORCED_DIVING_SUIT.get()
         )
             .unlocks(
                 "has_diving_suit",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
-                    HybridAquaticItems.DIVING_SUIT.get()
+                    HAItems.DIVING_SUIT.get()
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_suit_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
-            Ingredient.of(HybridAquaticItems.DIVING_LEGGINGS.get()),
-            Ingredient.of(HybridAquaticItems.BLACK_PEARL.get()),
+            Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HAItems.DIVING_LEGGINGS.get()),
+            Ingredient.of(HAItems.BLACK_PEARL.get()),
             RecipeCategory.COMBAT,
-            HybridAquaticItems.REINFORCED_DIVING_LEGGINGS.get()
+            HAItems.REINFORCED_DIVING_LEGGINGS.get()
         )
             .unlocks(
                 "has_diving_leggings",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
-                    HybridAquaticItems.DIVING_LEGGINGS.get()
+                    HAItems.DIVING_LEGGINGS.get()
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_leggings_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
-            Ingredient.of(HybridAquaticItems.DIVING_BOOTS.get()),
-            Ingredient.of(HybridAquaticItems.BLACK_PEARL.get()),
+            Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HAItems.DIVING_BOOTS.get()),
+            Ingredient.of(HAItems.BLACK_PEARL.get()),
             RecipeCategory.COMBAT,
-            HybridAquaticItems.REINFORCED_DIVING_BOOTS.get()
+            HAItems.REINFORCED_DIVING_BOOTS.get()
         )
             .unlocks(
                 "has_diving_boots",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
-                    HybridAquaticItems.DIVING_BOOTS.get()
+                    HAItems.DIVING_BOOTS.get()
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_boots_upgrade"))
 
 
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
-            Ingredient.of(HybridAquaticItems.DIVING_HELMET.get()),
-            Ingredient.of(HybridAquaticItems.GLOWSLIME.get()),
+            Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HAItems.DIVING_HELMET.get()),
+            Ingredient.of(HAItems.GLOWSLIME.get()),
             RecipeCategory.COMBAT,
-            HybridAquaticItems.GLOWING_DIVING_HELMET.get()
+            HAItems.GLOWING_DIVING_HELMET.get()
         )
             .unlocks(
                 "has_diving_helmet",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
-                    HybridAquaticItems.DIVING_HELMET.get()
+                    HAItems.DIVING_HELMET.get()
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_helmet_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
-            Ingredient.of(HybridAquaticItems.DIVING_SUIT.get()),
-            Ingredient.of(HybridAquaticItems.GLOWSLIME.get()),
+            Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HAItems.DIVING_SUIT.get()),
+            Ingredient.of(HAItems.GLOWSLIME.get()),
             RecipeCategory.COMBAT,
-            HybridAquaticItems.GLOWING_DIVING_SUIT.get()
+            HAItems.GLOWING_DIVING_SUIT.get()
         )
             .unlocks(
                 "has_diving_suit",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
-                    HybridAquaticItems.DIVING_SUIT.get()
+                    HAItems.DIVING_SUIT.get()
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_suit_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
-            Ingredient.of(HybridAquaticItems.DIVING_LEGGINGS.get()),
-            Ingredient.of(HybridAquaticItems.GLOWSLIME.get()),
+            Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HAItems.DIVING_LEGGINGS.get()),
+            Ingredient.of(HAItems.GLOWSLIME.get()),
             RecipeCategory.COMBAT,
-            HybridAquaticItems.GLOWING_DIVING_LEGGINGS.get()
+            HAItems.GLOWING_DIVING_LEGGINGS.get()
         )
             .unlocks(
                 "has_diving_leggings",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
-                    HybridAquaticItems.DIVING_LEGGINGS.get()
+                    HAItems.DIVING_LEGGINGS.get()
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_leggings_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
-            Ingredient.of(HybridAquaticItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
-            Ingredient.of(HybridAquaticItems.DIVING_BOOTS.get()),
-            Ingredient.of(HybridAquaticItems.GLOWSLIME.get()),
+            Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
+            Ingredient.of(HAItems.DIVING_BOOTS.get()),
+            Ingredient.of(HAItems.GLOWSLIME.get()),
             RecipeCategory.COMBAT,
-            HybridAquaticItems.GLOWING_DIVING_BOOTS.get()
+            HAItems.GLOWING_DIVING_BOOTS.get()
         )
             .unlocks(
                 "has_diving_boots",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
-                    HybridAquaticItems.DIVING_BOOTS.get()
+                    HAItems.DIVING_BOOTS.get()
                 )
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_boots_upgrade"))
@@ -706,7 +706,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         //#endregion
 
         //#region Fishing Lures
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.BARBED_HOOK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.BARBED_HOOK.get())
             .pattern("N  ")
             .pattern("N N")
             .pattern("NNN")
@@ -714,20 +714,20 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_iron_nugget", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_NUGGET))
             .save(exporter)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, HybridAquaticItems.GLOWING_HOOK.get())
-            .requires(HybridAquaticItems.BARBED_HOOK.get())
-            .requires(HybridAquaticItems.GLOWSLIME.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, HAItems.GLOWING_HOOK.get())
+            .requires(HAItems.BARBED_HOOK.get())
+            .requires(HAItems.GLOWSLIME.get())
             .unlockedBy(
                 "has_barbed_hook",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.BARBED_HOOK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.BARBED_HOOK.get())
             )
             .unlockedBy(
                 "has_glowslime",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GLOWSLIME.get())
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.MAGNETIC_HOOK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.MAGNETIC_HOOK.get())
             .pattern("NIN")
             .pattern("N N")
             .pattern("I I")
@@ -736,25 +736,25 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_iron_nugget", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_NUGGET))
             .save(exporter)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HybridAquaticItems.CREEPERMAGNET_HOOK.get())
-            .requires(HybridAquaticItems.MAGNETIC_HOOK.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HAItems.CREEPERMAGNET_HOOK.get())
+            .requires(HAItems.MAGNETIC_HOOK.get())
             .requires(Items.GUNPOWDER)
             .unlockedBy(
                 "has_magnetic_hook",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.MAGNETIC_HOOK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.MAGNETIC_HOOK.get())
             )
             .save(exporter)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, HybridAquaticItems.OMINOUS_HOOK.get())
-            .requires(HybridAquaticItems.COCONUT_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.YETI_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.GHOST_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.FLOWER_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.SPIDER_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.FIDDLER_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.VAMPIRE_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.DUNGENESS_CRAB_CLAW.get())
-            .requires(HybridAquaticItems.LIGHTFOOT_CRAB_CLAW.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, HAItems.OMINOUS_HOOK.get())
+            .requires(HAItems.COCONUT_CRAB_CLAW.get())
+            .requires(HAItems.YETI_CRAB_CLAW.get())
+            .requires(HAItems.GHOST_CRAB_CLAW.get())
+            .requires(HAItems.FLOWER_CRAB_CLAW.get())
+            .requires(HAItems.SPIDER_CRAB_CLAW.get())
+            .requires(HAItems.FIDDLER_CRAB_CLAW.get())
+            .requires(HAItems.VAMPIRE_CRAB_CLAW.get())
+            .requires(HAItems.DUNGENESS_CRAB_CLAW.get())
+            .requires(HAItems.LIGHTFOOT_CRAB_CLAW.get())
             .unlockedBy(
                 "has_crab_claw", InventoryChangeTrigger.TriggerInstance.hasItems(
                     ItemPredicate.Builder.item().of(HAItemTags.CRAB_CLAW).build()
@@ -763,7 +763,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .save(exporter)
         //#endregion
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HybridAquaticItems.FISHING_NET.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.FISHING_NET.get())
             .pattern("  S")
             .pattern(" IS")
             .pattern("I  ")
@@ -772,41 +772,41 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("string", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STRING))
             .save(exporter)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HybridAquaticItems.GLOWSLIME.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HAItems.GLOWSLIME.get())
             .requires(Items.SLIME_BALL)
             .requires(Items.GLOW_INK_SAC)
             .unlockedBy("has_slime_ball", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SLIME_BALL))
             .unlockedBy("has_glow_ink_sac", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLOW_INK_SAC))
             .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_slime"))
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, HybridAquaticItems.GLOWSTICK.get(), 4)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, HAItems.GLOWSTICK.get(), 4)
             .requires(Items.STICK)
-            .requires(HybridAquaticItems.GLOWSLIME.get())
+            .requires(HAItems.GLOWSLIME.get())
             .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK))
             .unlockedBy(
                 "has_glowslime",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.GLOWSLIME.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GLOWSLIME.get())
             )
             .save(exporter)
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BONE_MEAL)
-            .requires(HybridAquaticItems.CUTTLEBONE.get())
+            .requires(HAItems.CUTTLEBONE.get())
             .unlockedBy(
                 "has_cuttlebone",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.CUTTLEBONE.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CUTTLEBONE.get())
             )
             .save(exporter)
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER, 2)
-            .requires(HybridAquaticItems.SULFUR.get())
+            .requires(HAItems.SULFUR.get())
             .requires(Items.COAL)
             .requires(Items.BONE_MEAL)
             .requires(Items.BONE_MEAL)
-            .unlockedBy("has_sulfur", InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.SULFUR.get()))
+            .unlockedBy("has_sulfur", InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get()))
             .save(exporter)
 
         //#region Foodstuffs
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_CRAB.get(), 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_CRAB.get(), 1)
             .requires(HAItemTags.CRAB_CLAW)
             .unlockedBy(
                 "has_crab_claw", InventoryChangeTrigger.TriggerInstance.hasItems(
@@ -815,15 +815,15 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_LOBSTER.get(), 1)
-            .requires(HybridAquaticItems.LOBSTER_CLAW.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_LOBSTER.get(), 1)
+            .requires(HAItems.LOBSTER_CLAW.get())
             .unlockedBy(
                 "has_lobster_claw",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HybridAquaticItems.LOBSTER_CLAW.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.LOBSTER_CLAW.get())
             )
             .save(exporter)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_MEAT.get(), 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_FISH_MEAT.get(), 1)
             .requires(HAItemTags.SMALL_FISH)
             .unlockedBy(
                 "has_small_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
@@ -832,7 +832,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_small"))
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_MEAT.get(), 2)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_FISH_MEAT.get(), 2)
             .requires(HAItemTags.MEDIUM_FISH)
             .unlockedBy(
                 "has_medium_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
@@ -841,7 +841,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_medium"))
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HybridAquaticItems.RAW_FISH_STEAK.get(), 2)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_FISH_STEAK.get(), 2)
             .requires(HAItemTags.LARGE_FISH)
             .unlockedBy(
                 "has_large_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
@@ -854,64 +854,64 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         //#region Cooking Recipes
         offerCookingRecipes(
             exporter,
-            HybridAquaticItems.RAW_CRAB.get(),
-            HybridAquaticItems.COOKED_CRAB.get(),
+            HAItems.RAW_CRAB.get(),
+            HAItems.COOKED_CRAB.get(),
             0.15f
         )
 
         offerCookingRecipes(
             exporter,
-            HybridAquaticItems.RAW_SHRIMP.get(),
-            HybridAquaticItems.COOKED_SHRIMP.get(),
+            HAItems.RAW_SHRIMP.get(),
+            HAItems.COOKED_SHRIMP.get(),
             0.15f
         )
 
         offerCookingRecipes(
             exporter,
-            HybridAquaticItems.RAW_CRAYFISH.get(),
-            HybridAquaticItems.COOKED_CRAYFISH.get(),
+            HAItems.RAW_CRAYFISH.get(),
+            HAItems.COOKED_CRAYFISH.get(),
             0.15f
         )
 
         offerCookingRecipes(
             exporter,
-            HybridAquaticItems.RAW_LOBSTER.get(),
-            HybridAquaticItems.COOKED_LOBSTER.get(),
+            HAItems.RAW_LOBSTER.get(),
+            HAItems.COOKED_LOBSTER.get(),
             0.3f
         )
 
         offerCookingRecipes(
             exporter,
-            HybridAquaticItems.RAW_LOBSTER_TAIL.get(),
-            HybridAquaticItems.COOKED_LOBSTER_TAIL.get(),
+            HAItems.RAW_LOBSTER_TAIL.get(),
+            HAItems.COOKED_LOBSTER_TAIL.get(),
             0.3f
         )
 
         offerCookingRecipes(
             exporter,
-            HybridAquaticItems.RAW_FISH_STEAK.get(),
-            HybridAquaticItems.COOKED_FISH_STEAK.get(),
+            HAItems.RAW_FISH_STEAK.get(),
+            HAItems.COOKED_FISH_STEAK.get(),
             0.3f
         )
 
         offerCookingRecipes(
             exporter,
-            HybridAquaticItems.RAW_FISH_MEAT.get(),
-            HybridAquaticItems.COOKED_FISH_MEAT.get(),
+            HAItems.RAW_FISH_MEAT.get(),
+            HAItems.COOKED_FISH_MEAT.get(),
             0.15f
         )
 
         offerCookingRecipes(
             exporter,
-            HybridAquaticItems.RAW_TENTACLE.get(),
-            HybridAquaticItems.COOKED_TENTACLE.get(),
+            HAItems.RAW_TENTACLE.get(),
+            HAItems.COOKED_TENTACLE.get(),
             0.15f
         )
 
         offerCookingRecipes(
             exporter,
-            HybridAquaticItems.CLAM.get(),
-            HybridAquaticItems.COOKED_CLAM.get(),
+            HAItems.CLAM.get(),
+            HAItems.COOKED_CLAM.get(),
             0.15f
         )
 
