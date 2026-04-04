@@ -8,6 +8,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
 
 class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Inventory, container: Container, rows: Int) :
     AbstractContainerMenu(type, containerId) {
@@ -31,7 +32,9 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
             }
         }
 
-        this.addSlot(Slot(container,
+        this.addSlot(ArgonautFuelSlot(
+            this,
+            container,
             rows * SLOTS_PER_ROW /* count from 0*/,
             LEFT_PIXEL_TO_SLOT + 72,
             TOP_OFFSET + (-36)
@@ -87,6 +90,10 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
     override fun removed(player: Player) {
         super.removed(player)
         this.container.stopOpen(player)
+    }
+
+    fun isFuel(stack: ItemStack): Boolean {
+        return AbstractFurnaceBlockEntity.isFuel(stack)
     }
 
     companion object {
