@@ -14,6 +14,7 @@ import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.SpawnEggItem
+import net.minecraft.world.level.block.Blocks
 
 object HAItemGroups {
     val BLOCKS = register(
@@ -52,6 +53,11 @@ object HAItemGroups {
                 entries.accept(HABlocks.CORALSTONE.get())
                 entries.accept(HABlocks.SHORESTONE.get())
                 entries.accept(HABlocks.BARNACLE_SHORESTONE.get())
+                entries.accept(Blocks.BONE_BLOCK)
+                entries.accept(HABlocks.BONE_STAIRS.get())
+                entries.accept(HABlocks.BONE_SLAB.get())
+                entries.accept(HABlocks.BONE_WALL.get())
+                entries.accept(HABlocks.BONE_FENCE.get())
 
                 entries.accept(HAPlatformBlocks.DRIFTWOOD_LOG.get())
                 entries.accept(HAPlatformBlocks.DRIFTWOOD_WOOD.get())

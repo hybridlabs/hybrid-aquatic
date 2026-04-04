@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "hybrid-aquatic:block/white_sandstone_bottom",
     "side": "hybrid-aquatic:block/white_sandstone_side",

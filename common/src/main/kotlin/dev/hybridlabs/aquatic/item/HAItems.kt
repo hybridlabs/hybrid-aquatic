@@ -563,49 +563,23 @@ object HAItems {
     val GRASSY_SAND = registerBlockItem("grassy_sand") { HABlocks.GRASSY_SAND.get() }
     val AERATED_SAND = registerBlockItem("aerated_sand") { HABlocks.AERATED_SAND.get() }
     val BUBBLE_GEYSER = registerBlockItem("bubble_geyser") { HABlocks.BUBBLE_GEYSER.get() }
+
     val WHITE_SAND = registerBlockItem("white_sand") { HABlocks.WHITE_SAND.get() }
-    val CHISELED_WHITE_SANDSTONE =
-        registerBlockItem("chiseled_white_sandstone") { HABlocks.CHISELED_WHITE_SANDSTONE.get() }
+    val CHISELED_WHITE_SANDSTONE = registerBlockItem("chiseled_white_sandstone") { HABlocks.CHISELED_WHITE_SANDSTONE.get() }
     val WHITE_SANDSTONE = registerBlockItem("white_sandstone") { HABlocks.WHITE_SANDSTONE.get() }
-    val WHITE_SANDSTONE_STAIRS = register("white_sandstone_stairs") {
-        BlockItem(
-            HABlocks.WHITE_SANDSTONE_STAIRS.get(),
-            Item.Properties()
-        )
-    }
-    val WHITE_SANDSTONE_SLAB = register("white_sandstone_slab") {
-        BlockItem(
-            HABlocks.WHITE_SANDSTONE_SLAB.get(),
-            Item.Properties()
-        )
-    }
-    val WHITE_SANDSTONE_WALL = register("white_sandstone_wall") {
-        BlockItem(
-            HABlocks.WHITE_SANDSTONE_WALL.get(),
-            Item.Properties()
-        )
-    }
-    val SMOOTH_WHITE_SANDSTONE =
-        registerBlockItem("smooth_white_sandstone") { HABlocks.SMOOTH_WHITE_SANDSTONE.get() }
-    val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") {
-        BlockItem(
-            HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
-            Item.Properties()
-        )
-    }
-    val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") {
-        BlockItem(
-            HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
-            Item.Properties()
-        )
-    }
+    val WHITE_SANDSTONE_STAIRS = register("white_sandstone_stairs") { BlockItem(HABlocks.WHITE_SANDSTONE_STAIRS.get(), Item.Properties()) }
+    val WHITE_SANDSTONE_SLAB = register("white_sandstone_slab") { BlockItem(HABlocks.WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
+    val WHITE_SANDSTONE_WALL = register("white_sandstone_wall") { BlockItem(HABlocks.WHITE_SANDSTONE_WALL.get(), Item.Properties()) }
+    val SMOOTH_WHITE_SANDSTONE = registerBlockItem("smooth_white_sandstone") { HABlocks.SMOOTH_WHITE_SANDSTONE.get() }
+    val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") { BlockItem(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get(), Item.Properties()) }
+    val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") { BlockItem(HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
     val CUT_WHITE_SANDSTONE = registerBlockItem("cut_white_sandstone") { HABlocks.CUT_WHITE_SANDSTONE.get() }
-    val CUT_WHITE_SANDSTONE_SLAB = register("cut_sandstone_slab") {
-        BlockItem(
-            HABlocks.CUT_WHITE_SANDSTONE_SLAB.get(),
-            Item.Properties()
-        )
-    }
+    val CUT_WHITE_SANDSTONE_SLAB = register("cut_sandstone_slab") { BlockItem(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
+
+    val BONE_STAIRS = register("bone_stairs") { BlockItem(HABlocks.BONE_STAIRS.get(), Item.Properties()) }
+    val BONE_SLAB = register("bone_slab") { BlockItem(HABlocks.BONE_SLAB.get(), Item.Properties()) }
+    val BONE_WALL = register("bone_wall") { BlockItem(HABlocks.BONE_WALL.get(), Item.Properties()) }
+    val BONE_FENCE = register("bone_fence") { BlockItem(HABlocks.BONE_FENCE.get(), Item.Properties()) }
 
     val SUSPICIOUS_RED_SAND = registerBlockItem("suspicious_red_sand") { HABlocks.SUSPICIOUS_RED_SAND.get() }
     val CORALSTONE = registerBlockItem("coralstone") { HABlocks.CORALSTONE.get() }

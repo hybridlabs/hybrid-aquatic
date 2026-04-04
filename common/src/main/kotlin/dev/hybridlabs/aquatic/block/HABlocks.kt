@@ -80,6 +80,11 @@ object HABlocks {
 
     val CHISELED_WHITE_SANDSTONE = register("chiseled_white_sandstone") { SlabBlock(Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
 
+    val BONE_STAIRS = register("bone_stairs") { StairBlock(Blocks.BONE_BLOCK.defaultBlockState(), Properties.copy(Blocks.BONE_BLOCK).mapColor(DyeColor.WHITE)) }
+    val BONE_SLAB = register("bone_slab") { SlabBlock(Properties.copy(Blocks.BONE_BLOCK).mapColor(DyeColor.WHITE)) }
+    val BONE_WALL = register("bone_wall") { WallBlock(Properties.copy(Blocks.BONE_BLOCK)) }
+    val BONE_FENCE = register("bone_fence") { FenceBlock(Properties.copy(Blocks.BONE_BLOCK)) }
+
     val SUSPICIOUS_RED_SAND = register("suspicious_red_sand") {
         BrushableBlock(Blocks.RED_SAND,
         Properties.copy(Blocks.RED_SAND),

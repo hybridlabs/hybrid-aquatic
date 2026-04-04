@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid-aquatic:bone_slab",
+    "hybrid-aquatic:white_sandstone_slab",
+    "hybrid-aquatic:cut_white_sandstone_slab",
+    "hybrid-aquatic:smooth_white_sandstone_slab"
+  ]
+}

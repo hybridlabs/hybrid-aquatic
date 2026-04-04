@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/slab_top",
   "textures": {
     "bottom": "hybrid-aquatic:block/cut_white_sandstone_bottom",
     "side": "hybrid-aquatic:block/cut_white_sandstone_side",

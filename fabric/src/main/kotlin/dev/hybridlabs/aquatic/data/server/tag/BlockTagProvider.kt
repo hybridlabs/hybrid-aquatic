@@ -107,6 +107,23 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE.get())
 
+        getOrCreateTagBuilder(BlockTags.FENCES)
+            .add(HABlocks.BONE_FENCE.get())
+
+        getOrCreateTagBuilder(BlockTags.WALLS)
+            .add(HABlocks.BONE_WALL.get())
+
+        getOrCreateTagBuilder(BlockTags.SLABS)
+            .add(HABlocks.BONE_SLAB.get())
+            .add(HABlocks.WHITE_SANDSTONE_SLAB.get())
+            .add(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get())
+            .add(HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get())
+
+        getOrCreateTagBuilder(BlockTags.STAIRS)
+            .add(HABlocks.BONE_STAIRS.get())
+            .add(HABlocks.WHITE_SANDSTONE_STAIRS.get())
+            .add(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get())
+
         getOrCreateTagBuilder(BlockTags.FENCE_GATES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get())
 
