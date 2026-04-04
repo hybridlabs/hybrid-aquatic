@@ -20,7 +20,7 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
         imageHeight = firstSlotFromBottomHeight + this.argonautRows * 18 + 71
         imageWidth = 182
 
-        inventoryLabelY = imageHeight - 94
+        inventoryLabelY = imageHeight - 112
     }
 
 
