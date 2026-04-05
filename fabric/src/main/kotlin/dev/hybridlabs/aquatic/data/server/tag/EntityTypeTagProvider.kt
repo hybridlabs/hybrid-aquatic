@@ -585,6 +585,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HAEntityTypes.SEA_CUCUMBER.get(),
                 HAEntityTypes.SEA_URCHIN.get(),
                 HAEntityTypes.STARFISH.get(),
+                HAEntityTypes.SCALYFOOT_SNAIL.get(),
                 HAEntityTypes.SEA_ANGEL.get(),
             )
             .addOptional(ResourceLocation("spawn", "clam"))
