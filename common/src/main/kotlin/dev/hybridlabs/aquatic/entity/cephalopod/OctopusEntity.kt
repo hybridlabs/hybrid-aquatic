@@ -47,6 +47,7 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctop
             Type.BLUE_RINGED, Type.COCONUT -> OverlayTextures.NONE
             Type.OCTOPUS -> OverlayTextures.TINT
         }
+
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
