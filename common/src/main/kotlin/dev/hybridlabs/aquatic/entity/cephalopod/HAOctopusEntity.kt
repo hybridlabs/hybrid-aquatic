@@ -316,6 +316,10 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
                         state.setAndContinue(DefaultAnimations.SIT)
                     }
 
+                    this.moistness < 590 -> {
+                        state.setAndContinue(DefaultAnimations.SIT)
+                    }
+
                     else -> {
                         state.setAndContinue(DefaultAnimations.IDLE)
                     }
@@ -332,16 +336,12 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
     companion object {
         val SITTING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.BOOLEAN)
-        val MOISTNESS: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.BOOLEAN)
         private val CURRENT_COLOR: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.INT)
         private val TARGET_COLOR: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.INT)
-
-        const val MOISTNESS_KEY = "Moistness"
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canSpawn(

@@ -223,7 +223,7 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Cephalopod Controller", 4) { state ->
+            AnimationController(this, "Cephalopod Animation Controller", 4) { state ->
                 when {
                     isInWater && state.isMoving -> {
                         state.setAndContinue(DefaultAnimations.SWIM)
