@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/template_wall_side",
+  "parent": "minecraft:block/wall_inventory",
   "textures": {
     "wall": "minecraft:block/bone_block_side"
   }

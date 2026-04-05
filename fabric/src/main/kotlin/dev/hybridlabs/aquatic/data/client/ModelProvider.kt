@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.block.HABlockFamilies
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
@@ -96,7 +97,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.SHORESTONE.get(),
                 HABlocks.BARNACLE_SHORESTONE.get(),
                 HABlocks.MARINE_SNOW.get(),
-                HABlocks.SMOOTH_WHITE_SANDSTONE.get(),
             ).forEach(generator::createTrivialCube)
 
             setOf(
@@ -112,6 +112,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             ).forEach { block ->
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP_BOTTOM)
             }
+
+            generator.family(HABlocks.SMOOTH_WHITE_SANDSTONE.get())
+                .generateFor(HABlockFamilies.SMOOTH_WHITE_SANDSTONE)
 
             //#region Crates
             setOf(

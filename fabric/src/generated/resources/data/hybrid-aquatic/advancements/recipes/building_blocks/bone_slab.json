@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cut_white_sandstone": {
+    "has_bone_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "hybrid-aquatic:cut_white_sandstone"
+              "minecraft:bone_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:cut_sandstone_slab_from_cut_white_sandstone_stonecutting"
+        "recipe": "hybrid-aquatic:bone_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_cut_white_sandstone",
+      "has_bone_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:cut_sandstone_slab_from_cut_white_sandstone_stonecutting"
+      "hybrid-aquatic:bone_slab"
     ]
   },
   "sends_telemetry_event": false

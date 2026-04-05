@@ -574,7 +574,7 @@ object HAItems {
     val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") { BlockItem(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get(), Item.Properties()) }
     val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") { BlockItem(HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
     val CUT_WHITE_SANDSTONE = registerBlockItem("cut_white_sandstone") { HABlocks.CUT_WHITE_SANDSTONE.get() }
-    val CUT_WHITE_SANDSTONE_SLAB = register("cut_sandstone_slab") { BlockItem(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
+    val CUT_WHITE_SANDSTONE_SLAB = register("cut_white_sandstone_slab") { BlockItem(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
 
     val BONE_STAIRS = register("bone_stairs") { BlockItem(HABlocks.BONE_STAIRS.get(), Item.Properties()) }
     val BONE_SLAB = register("bone_slab") { BlockItem(HABlocks.BONE_SLAB.get(), Item.Properties()) }

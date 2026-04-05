@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:bone_wall"
+    "hybrid-aquatic:bone_wall",
+    "hybrid-aquatic:white_sandstone_wall"
   ]
 }

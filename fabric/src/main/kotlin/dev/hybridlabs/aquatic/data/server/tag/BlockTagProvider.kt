@@ -112,6 +112,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(BlockTags.WALLS)
             .add(HABlocks.BONE_WALL.get())
+            .add(HABlocks.WHITE_SANDSTONE_WALL.get())
 
         getOrCreateTagBuilder(BlockTags.SLABS)
             .add(HABlocks.BONE_SLAB.get())

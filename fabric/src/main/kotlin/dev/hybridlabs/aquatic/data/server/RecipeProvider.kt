@@ -472,8 +472,58 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
             .save(exporter)
 
-        //#region Wood Recipes
+        //#regione Bone Set Recipes
+        stairBuilder(
+            HAItems.BONE_STAIRS.get(),
+            Ingredient.of(Blocks.BONE_BLOCK)
+        )
 
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.BONE_SLAB.get(),
+            Blocks.BONE_BLOCK
+        )
+
+        wallBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.BONE_WALL.get(),
+            Ingredient.of(Blocks.BONE_BLOCK),
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.BONE_STAIRS.get(),
+            Blocks.BONE_BLOCK,
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.BONE_SLAB.get(),
+            Blocks.BONE_BLOCK,
+            2
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.BONE_WALL.get(),
+            Blocks.BONE_BLOCK
+        )
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BONE_FENCE.get(), 3)
+            .pattern("BIB")
+            .pattern("BIB")
+            .pattern("   ")
+            .define('I', Items.BONE)
+            .define('B', Items.BONE_BLOCK)
+            .unlockedBy("has_bone", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BONE))
+            .save(exporter)
+        //#endregion
+
+        //#region Wood Recipes
         offerRaftRecipes(exporter, raftTypeMap)
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.RAFT.get(), 2)
@@ -494,11 +544,26 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_lantern", InventoryChangeTrigger.TriggerInstance.hasItems(Items.LANTERN))
             .save(exporter)
 
+        stairBuilder(
+            HAPlatformBlocks.DRIFTWOOD_STAIRS.get(),
+            Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),
+        )
+
         slab(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAPlatformBlocks.DRIFTWOOD_SLAB.get(),
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
+        )
+
+        fenceBuilder(
+            HAPlatformBlocks.DRIFTWOOD_FENCE.get(),
+            Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),
+        )
+
+        fenceGateBuilder(
+            HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(),
+            Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),
         )
 
         woodFromLogs(

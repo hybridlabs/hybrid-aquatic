@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid-aquatic:cut_sandstone_slab"
+        "recipe": "minecraft:cut_white_sandstone_slab_from_cut_white_sandstone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "hybrid-aquatic:cut_sandstone_slab"
+      "minecraft:cut_white_sandstone_slab_from_cut_white_sandstone_stonecutting"
     ]
   },
   "sends_telemetry_event": false

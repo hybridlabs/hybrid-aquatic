@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/fence_post",
+  "parent": "minecraft:block/fence_inventory",
   "textures": {
     "texture": "minecraft:block/bone_block_side"
   }
