@@ -91,20 +91,17 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
 
     override fun defineSynchedData() {
         super.defineSynchedData()
-        entityData.define(MOISTNESS, getMaxMoistness())
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(SITTING, true)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
-        compound.putInt(MOISTNESS_KEY, moistness)
         compound.putBoolean("Sitting", isSitting())
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         super.readAdditionalSaveData(compound)
-        moistness = compound.getInt(MOISTNESS_KEY)
         this.setSitting(compound.getBoolean("Sitting"))
     }
     //#endregion
@@ -118,10 +115,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         if (isInWaterOrBubble) {
             airSupply = maxAirSupply
         }
-    }
-
-    private fun getMaxMoistness(): Int {
-        return 600
     }
 
     open fun shouldFlopOnLand(): Boolean {
@@ -184,11 +177,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
     //#endregion
 
     //#region Properties
-    var moistness: Int
-        get() = entityData.get(MOISTNESS)
-        set(moistness) {
-            entityData.set(MOISTNESS, moistness)
-        }
 
     override fun getMaxHeadXRot(): Int {
         return 5
@@ -294,13 +282,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         return false
     }
 
-    override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
-        val attacker = source.directEntity
-        if (attacker !is HAFishEntity && attacker !is HASharkEntity && attacker !is HACephalopodEntity && attacker !is HAMammalEntity) {
-            super.dropFromLootTable(source, causedByPlayer)
-        }
-    }
-
     override fun updateSwingTime() {
         val i = this.getHandSwingDuration()
         if (this.swinging) {
@@ -336,8 +317,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
 
     @Suppress("DEPRECATION", "unused")
     companion object {
-        val MOISTNESS: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.BOOLEAN)
         val SITTING: EntityDataAccessor<Boolean> =
@@ -348,7 +327,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
             Items.BREAD,
         )
-        const val MOISTNESS_KEY = "Moistness"
 
         //#region Spawning
         fun canShallowSpawn(

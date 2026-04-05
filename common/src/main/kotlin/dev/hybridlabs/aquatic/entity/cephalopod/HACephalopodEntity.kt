@@ -2,9 +2,6 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.entity.fish.HAFishEntity
-import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
-import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -69,18 +66,15 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
     //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
-        entityData.define(MOISTNESS, getMaxMoistness())
         entityData.define(ATTEMPT_ATTACK, false)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
-        compound.putInt(MOISTNESS_KEY, moistness)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         super.readAdditionalSaveData(compound)
-        moistness = compound.getInt(MOISTNESS_KEY)
     }
     //#endregion
 
@@ -98,26 +92,6 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
     }
-
-    //#region Moistness & Air
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-
-    override fun isPushedByFluid(): Boolean {
-        return false
-    }
-
-    override fun handleAirSupply(air: Int) {
-        if (isInWaterOrBubble) {
-            airSupply = maxAirSupply
-        }
-    }
-
-    private fun getMaxMoistness(): Int {
-        return 600
-    }
-    //#endregion
 
     override fun tick() {
         super.tick()
@@ -212,13 +186,6 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
         }
     }
 
-    override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
-        val attacker = source.directEntity
-        if (attacker !is HAFishEntity && attacker !is HASharkEntity && attacker !is HACephalopodEntity && attacker !is HAMammalEntity) {
-            super.dropFromLootTable(source, causedByPlayer)
-        }
-    }
-
     override fun getMaxSpawnClusterSize(): Int {
         return 1
     }
@@ -245,12 +212,6 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.5f
     }
-
-    private var moistness: Int
-        get() = entityData.get(MOISTNESS)
-        set(moistness) {
-            entityData.set(MOISTNESS, moistness)
-        }
 
     private var attemptAttack: Boolean
         get() = entityData.get(ATTEMPT_ATTACK)
@@ -322,15 +283,10 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
     }
 
     companion object {
-        val MOISTNESS: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HACephalopodEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HACephalopodEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
-
-        const val MAX_HUNGER = 2400
-        const val MOISTNESS_KEY = "Moistness"
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canSpawn(

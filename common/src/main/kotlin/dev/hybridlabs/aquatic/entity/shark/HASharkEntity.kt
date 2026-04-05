@@ -5,9 +5,6 @@ import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.SharkAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.entity.cephalopod.HACephalopodEntity
-import dev.hybridlabs.aquatic.entity.fish.HAFishEntity
-import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
@@ -62,12 +59,6 @@ open class HASharkEntity(
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var angerTime = 0
     private var angryAt: UUID? = null
-
-    var moistness: Int
-        get() = entityData.get(MOISTNESS)
-        set(moistness) {
-            entityData.set(MOISTNESS, moistness)
-        }
 
     //#region Initialization
     override fun createNavigation(level: Level): PathNavigation {
@@ -141,18 +132,15 @@ open class HASharkEntity(
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
         this.addPersistentAngerSaveData(compound)
-        compound.putInt(MOISTNESS_KEY, moistness)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         super.readAdditionalSaveData(compound)
         this.readPersistentAngerSaveData(this.level(), compound)
-        moistness = compound.getInt(MOISTNESS_KEY)
     }
 
     override fun defineSynchedData() {
         super.defineSynchedData()
-        entityData.define(MOISTNESS, getMaxMoistness())
         entityData.define(ATTEMPT_ATTACK, false)
     }
     //#endregion
@@ -193,7 +181,7 @@ open class HASharkEntity(
         return dimensions.height * 0.65f
     }
 
-    private fun getMaxMoistness(): Int {
+    override fun getMaxMoistness(): Int {
         return 1200
     }
 
@@ -274,13 +262,6 @@ open class HASharkEntity(
     }
     //#endregion
 
-    override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
-        val attacker = source.directEntity
-        if (attacker !is HAFishEntity && attacker !is HASharkEntity && attacker !is HACephalopodEntity && attacker !is HAMammalEntity) {
-            super.dropFromLootTable(source, causedByPlayer)
-        }
-    }
-
     private fun getHandSwingDuration(): Int {
         return 40
     }
@@ -319,10 +300,6 @@ open class HASharkEntity(
     }
 
     companion object {
-        const val MOISTNESS_KEY = "Moistness"
-
-        val MOISTNESS: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HASharkEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HASharkEntity::class.java, EntityDataSerializers.BOOLEAN)
         val ANGER_TIME_RANGE: UniformInt = TimeUtil.rangeOfSeconds(10, 30)

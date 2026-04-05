@@ -7,9 +7,6 @@ import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.syncher.EntityDataAccessor
-import net.minecraft.network.syncher.EntityDataSerializers
-import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
@@ -127,49 +124,8 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
         }
     }
 
-    //#region Data
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(MOISTNESS, getMaxMoistness())
-    }
-
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
-        compound.putInt(MOISTNESS_KEY, moistness)
-    }
-
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        super.readAdditionalSaveData(compound)
-        moistness = compound.getInt(MOISTNESS_KEY)
-    }
-    //#endregion
-
     override fun getMaxSpawnClusterSize(): Int {
         return 2
-    }
-
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-
-    override fun handleAirSupply(air: Int) {
-        if (isInWaterOrBubble) {
-            airSupply = maxAirSupply
-        }
-    }
-
-    private fun getMaxMoistness(): Int {
-        return 2400
-    }
-
-    var moistness: Int
-        get() = entityData.get(MOISTNESS)
-        set(moistness) {
-            entityData.set(MOISTNESS, moistness)
-        }
-
-    override fun isPushedByFluid(): Boolean {
-        return false
     }
 
     override fun getMaxHeadXRot(): Int {
@@ -254,16 +210,11 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
     }
 
     companion object {
-        val MOISTNESS: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HADolphinEntity::class.java, EntityDataSerializers.INT)
-
         val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
 
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
             Items.SEAGRASS,
         )
-
-        const val MOISTNESS_KEY = "Moistness"
 
         fun canSpawn(
             type: EntityType<out HADolphinEntity>,

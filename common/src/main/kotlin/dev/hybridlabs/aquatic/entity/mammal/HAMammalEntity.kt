@@ -67,10 +67,6 @@ open class HAMammalEntity(type: EntityType<out HAMammalEntity>, world: Level) : 
         return null
     }
 
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !this.hasCustomName()
-    }
-
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(

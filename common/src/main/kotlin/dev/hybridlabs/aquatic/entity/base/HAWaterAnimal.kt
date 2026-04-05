@@ -26,6 +26,7 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.animatable.GeoEntity
 import java.util.*
 
+@Suppress("UNCHECKED_CAST")
 abstract class HAWaterAnimal protected constructor(
     entityType: EntityType<out HAWaterAnimal>,
     level: Level,
@@ -55,12 +56,10 @@ abstract class HAWaterAnimal protected constructor(
         return !this.fromFishingNet && !this.hasCustomName()
     }
 
-    fun isBelowWaterline(): Boolean {
-        return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
-    }
+    override fun tick() {
+        super.tick()
 
-    open fun getWaterline(): Float {
-        return 0.5f
+        if (hunger > 0) hunger -= 1
     }
 
     override fun aiStep() {
@@ -97,6 +96,7 @@ abstract class HAWaterAnimal protected constructor(
         }
     }
 
+    //#region Drops
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.directEntity
         if (attacker !is HAWaterAnimal) {
@@ -104,19 +104,27 @@ abstract class HAWaterAnimal protected constructor(
         }
     }
 
+    override fun getExperienceReward(): Int {
+        return 1 + this.level().random.nextInt(3)
+    }
+    //#endregion
+
     //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(SIZE, 0)
         entityData.define(HUNGER, MAX_HUNGER)
+        entityData.define(MOISTNESS, getMaxMoistness())
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
         compound.putInt(SIZE_KEY, size)
         compound.putInt(HUNGER_KEY, hunger)
+        compound.putInt(MOISTNESS_KEY, moistness)
         compound.putBoolean("FromFishingNet", fromFishingNet)
         compound.putInt("InLove", this.inLove)
+
         if (this.loveCause != null) {
             compound.putUUID("LoveCause", this.loveCause)
         }
@@ -126,6 +134,7 @@ abstract class HAWaterAnimal protected constructor(
         super.readAdditionalSaveData(compound)
         size = compound.getInt(SIZE_KEY)
         hunger = compound.getInt(HUNGER_KEY)
+        moistness = compound.getInt(MOISTNESS_KEY)
         fromFishingNet = compound.getBoolean("FromFishingNet")
         this.inLove = compound.getInt("InLove")
         this.loveCause = if (compound.hasUUID("LoveCause")) compound.getUUID("LoveCause") else null
@@ -215,7 +224,6 @@ abstract class HAWaterAnimal protected constructor(
         level.addFreshEntityWithPassengers(baby)
     }
 
-
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
@@ -269,6 +277,32 @@ abstract class HAWaterAnimal protected constructor(
     }
 
     //#region Water Interaction
+    override fun baseTick() {
+        val i = this.airSupply
+        super.baseTick()
+        this.handleAirSupply(i)
+    }
+
+    protected open fun handleAirSupply(air: Int) {
+        if (this.isAlive && !this.isInWaterOrBubble) {
+            this.airSupply -= 1
+            if (this.airSupply == -20) {
+                this.airSupply = 0
+                this.hurt(this.damageSources().drown(), 2.0f)
+            }
+        } else {
+            this.airSupply = maxAirSupply
+        }
+    }
+
+    fun isBelowWaterline(): Boolean {
+        return this.isUnderWater || this.getFluidHeight(FluidTags.WATER) > this.getWaterline()
+    }
+
+    open fun getWaterline(): Float {
+        return 0.5f
+    }
+
     override fun isPushedByFluid(): Boolean {
         return false
     }
@@ -286,6 +320,7 @@ abstract class HAWaterAnimal protected constructor(
         return level.isUnobstructed(this)
     }
 
+    //#region SFX
     override fun getAmbientSoundInterval(): Int {
         return 120
     }
@@ -293,39 +328,13 @@ abstract class HAWaterAnimal protected constructor(
     override fun getSoundSource(): SoundSource {
         return SoundSource.AMBIENT
     }
-
-    override fun getExperienceReward(): Int {
-        return 1 + this.level().random.nextInt(3)
-    }
-
-    protected open fun handleAirSupply(air: Int) {
-        if (this.isAlive && !this.isInWaterOrBubble) {
-            this.airSupply -= 1
-            if (this.airSupply == -20) {
-                this.airSupply = 0
-                this.hurt(this.damageSources().drown(), 2.0f)
-            }
-        } else {
-            this.airSupply = maxAirSupply
-        }
-    }
-
-    override fun baseTick() {
-        val i = this.airSupply
-        super.baseTick()
-        this.handleAirSupply(i)
-    }
+    //#endregion
 
     override fun canBeLeashed(player: Player): Boolean {
         return false
     }
 
-    override fun tick() {
-        super.tick()
-
-        if (hunger > 0) hunger -= 1
-    }
-
+    //#region Properties
     protected open fun getMinSize(): Int {
         return -5
     }
@@ -334,7 +343,10 @@ abstract class HAWaterAnimal protected constructor(
         return 5
     }
 
-    //#region Properties
+    open fun getMaxMoistness(): Int {
+        return 600
+    }
+
     var size: Int
         get() = entityData.get(SIZE)
         set(size) {
@@ -346,17 +358,26 @@ abstract class HAWaterAnimal protected constructor(
         set(hunger) {
             entityData.set(HUNGER, hunger)
         }
+
+    var moistness: Int
+        get() = entityData.get(MOISTNESS)
+        set(moistness) {
+            entityData.set(MOISTNESS, moistness)
+        }
     //#endregion
 
-    companion object{
+    companion object {
         val SIZE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.INT)
         val HUNGER: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.INT)
+        val MOISTNESS: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.INT)
 
         const val SIZE_KEY = "Size"
         const val MAX_HUNGER = 2400
         const val HUNGER_KEY = "Hunger"
+        const val MOISTNESS_KEY = "Moistness"
 
         fun getScaleAdjustment(animal: HAWaterAnimal, adjustment: Float): Float {
             return 1.0f + (animal.size * adjustment)

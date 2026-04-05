@@ -119,18 +119,6 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
         return 2
     }
 
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
-
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-
-    override fun isPushedByFluid(): Boolean {
-        return false
-    }
-
     override fun getMaxHeadXRot(): Int {
         return 1
     }
@@ -210,10 +198,6 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
-    }
-
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !this.hasCustomName()
     }
 
     //#region Animations

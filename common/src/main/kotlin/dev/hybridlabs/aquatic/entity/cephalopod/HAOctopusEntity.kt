@@ -93,7 +93,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
     //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
-        entityData.define(MOISTNESS, getMaxMoistness())
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(SITTING, true)
         entityData.define(TARGET_COLOR, 12799593)
@@ -102,7 +101,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
-        compound.putInt(MOISTNESS_KEY, moistness)
         compound.putBoolean("Sitting", isSitting())
         compound.putInt("targetColor", getTargetColor())
         compound.putInt("currentColor", getCurrentColor())
@@ -110,30 +108,9 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         super.readAdditionalSaveData(compound)
-        moistness = compound.getInt(MOISTNESS_KEY)
         this.setTargetColor(compound.getInt("targetColor"))
         this.setCurrentColor(compound.getInt("currentColor"))
         this.setSitting(compound.getBoolean("Sitting"))
-    }
-    //#endregion
-
-    //#region Moistness & Air
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-
-    override fun isPushedByFluid(): Boolean {
-        return false
-    }
-
-    override fun handleAirSupply(air: Int) {
-        if (isInWaterOrBubble) {
-            airSupply = maxAirSupply
-        }
-    }
-
-    private fun getMaxMoistness(): Int {
-        return 1200
     }
     //#endregion
 
@@ -299,12 +276,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
     //#endregion
 
     //#region Properties
-    private var moistness: Int
-        get() = entityData.get(MOISTNESS)
-        set(moistness) {
-            entityData.set(MOISTNESS, moistness)
-        }
-
     private var attemptAttack: Boolean
         get() = entityData.get(ATTEMPT_ATTACK)
         set(attemptAttack) {
