@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
@@ -31,7 +31,7 @@ class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 5.0))
+        goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 5.0))
         goalSelector.addGoal(1, HurtByTargetGoal(this))
     }
 

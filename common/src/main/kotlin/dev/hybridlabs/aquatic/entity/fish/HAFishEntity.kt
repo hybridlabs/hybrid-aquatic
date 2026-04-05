@@ -19,7 +19,6 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
-import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
@@ -35,7 +34,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
@@ -44,7 +42,7 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
-    HAWaterAnimal(type, world), GeoEntity {
+    HAWaterAnimal(type, world) {
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
     private var sittingTimer: Int = 0
@@ -70,7 +68,7 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(2, AvoidEntityInWaterGoal(this, Player::class.java, 16.0f, 1.5, 1.5))
-        getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HAFishEntity::hunger)
+        getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HAWaterAnimal::hunger)
         getTargetConfig()?.addAvoidanceGoal(goalSelector, this)
     }
 
@@ -94,59 +92,28 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(MOISTNESS, getMaxMoistness())
-        entityData.define(FISH_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
-        entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(SITTING, true)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
         compound.putInt(MOISTNESS_KEY, moistness)
-        compound.putInt(FISH_SIZE_KEY, size)
-        compound.putInt(HUNGER_KEY, hunger)
-        compound.putBoolean("FromFishingNet", fromFishingNet)
         compound.putBoolean("Sitting", isSitting())
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         super.readAdditionalSaveData(compound)
         moistness = compound.getInt(MOISTNESS_KEY)
-        size = compound.getInt(FISH_SIZE_KEY)
-        hunger = compound.getInt(HUNGER_KEY)
-        fromFishingNet = compound.getBoolean("FromFishingNet")
         this.setSitting(compound.getBoolean("Sitting"))
     }
     //#endregion
-
-    override fun finalizeSpawn(
-        world: ServerLevelAccessor,
-        difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
-    ): SpawnGroupData? {
-        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
-    }
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
     }
 
     //#region Moistness & Air
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
-
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-
-    override fun isPushedByFluid(): Boolean {
-        return false
-    }
-
     override fun handleAirSupply(air: Int) {
         if (isInWaterOrBubble) {
             airSupply = maxAirSupply
@@ -223,28 +190,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
             entityData.set(MOISTNESS, moistness)
         }
 
-    var size: Int
-        get() = entityData.get(FISH_SIZE)
-        set(size) {
-            entityData.set(FISH_SIZE, size)
-        }
-
-    var hunger: Int
-        get() = entityData.get(HUNGER)
-        set(hunger) {
-            entityData.set(HUNGER, hunger)
-        }
-
-    var fromFishingNet = false
-
-    protected open fun getMinSize(): Int {
-        return -5
-    }
-
-    protected open fun getMaxSize(): Int {
-        return 5
-    }
-
     override fun getMaxHeadXRot(): Int {
         return 5
     }
@@ -288,8 +233,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
             this.yRot = 0.0f
             this.yHeadRot = 0.0f
         }
-
-        if (hunger > 0) hunger -= 1
     }
 
     override fun travel(travelVector: Vec3) {
@@ -351,10 +294,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         return false
     }
 
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !this.fromFishingNet && !this.hasCustomName()
-    }
-
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
         val attacker = source.directEntity
         if (attacker !is HAFishEntity && attacker !is HASharkEntity && attacker !is HACephalopodEntity && attacker !is HAMammalEntity) {
@@ -399,10 +338,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
     companion object {
         val MOISTNESS: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.INT)
-        val FISH_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.INT)
-        val HUNGER: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.BOOLEAN)
         val SITTING: EntityDataAccessor<Boolean> =
@@ -413,11 +348,7 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
             Items.BREAD,
         )
-
-        const val MAX_HUNGER = 2400
-        const val HUNGER_KEY = "Hunger"
         const val MOISTNESS_KEY = "Moistness"
-        const val FISH_SIZE_KEY = "FishSize"
 
         //#region Spawning
         fun canShallowSpawn(
@@ -472,10 +403,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
                     world.isWaterAt(pos)
         }
         //#endregion
-
-        fun getScaleAdjustment(fish: HAFishEntity, adjustment: Float): Float {
-            return 1.0f + (fish.size * adjustment)
-        }
     }
 
     internal class BottomDwellerSwimmingGoal(

@@ -72,7 +72,6 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HADolphinEnti
     ): SpawnGroupData? {
         this.airSupply = this.maxAirSupply
         this.yRot = 0.0f
-        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
 
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random)

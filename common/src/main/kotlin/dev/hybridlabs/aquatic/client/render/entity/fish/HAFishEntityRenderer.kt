@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.client.render.entity.fish
 
 import com.mojang.blaze3d.vertex.PoseStack
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.fish.HAFishEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
@@ -38,7 +39,7 @@ open class HAFishEntityRenderer<T : HAFishEntity>(
         packedLight: Int
     ) {
         if (variableSize) {
-            val size = HAFishEntity.getScaleAdjustment(entity, 0.05f)
+            val size = HAWaterAnimal.getScaleAdjustment(entity, 0.05f)
             poseStack.scale(size, size, size)
         }
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)

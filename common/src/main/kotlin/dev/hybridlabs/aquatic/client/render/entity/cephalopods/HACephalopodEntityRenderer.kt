@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.client.render.entity.cephalopods
 
 import com.mojang.blaze3d.vertex.PoseStack
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.cephalopod.HACephalopodEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
@@ -29,7 +30,7 @@ open class HACephalopodEntityRenderer<T : HACephalopodEntity>(
         packedLight: Int
     ) {
         if (variableSize) {
-            val size = HACephalopodEntity.getScaleAdjustment(entity, 0.05f)
+            val size = HAWaterAnimal.getScaleAdjustment(entity, 0.05f)
             poseStack.scale(size, size, size)
         }
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)

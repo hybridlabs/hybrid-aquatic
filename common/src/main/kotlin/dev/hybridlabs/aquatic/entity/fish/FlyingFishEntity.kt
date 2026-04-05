@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
@@ -42,7 +42,7 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
         super.registerGoals()
         goalSelector.addGoal(0, BreathAirGoal(this))
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
-        goalSelector.addGoal(4, HybridAquaticJumpGoal(this, 10, 1.5))    }
+        goalSelector.addGoal(4, WaterAnimalJumpGoal(this, 10, 1.5))    }
 
     override fun tick() {
         super.tick()
@@ -81,9 +81,9 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
         this.deltaMovement = newMotion
     }
 
-    override fun handleAirSupply(airSupply: Int) {
+    override fun handleAirSupply(air: Int) {
         if (isInWater && !isNoAi) {
-            this.airSupply = airSupply - 1
+            this.airSupply = air - 1
         } else {
             this.airSupply = this.maxAirSupply
         }

@@ -21,7 +21,7 @@ class FleeFromEntityGoal<E: Entity> (
     private val pathNav = pathfinderMob.navigation
 
     init {
-        setFlags(EnumSet.of<Flag>(Flag.MOVE))
+        flags = EnumSet.of<Flag>(Flag.MOVE)
     }
 
     override fun canUse(): Boolean {

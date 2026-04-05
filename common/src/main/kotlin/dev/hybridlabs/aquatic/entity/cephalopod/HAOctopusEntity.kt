@@ -1,9 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.fish.HAFishEntity
-import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
-import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -13,7 +11,6 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.RandomSource
-import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -24,22 +21,19 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.util.GeckoLibUtil
 
-
 @Suppress("LeakingThis", "unused")
-open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) : WaterAnimal(type, world), GeoEntity {
+open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) : HAWaterAnimal(type, world) {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var sittingTimer: Int = 0
     open fun getTargetConfig(): MobTargetConfiguration? = null
@@ -54,6 +48,10 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
         lookControl = SmoothSwimmingLookControl(this, 10)
 
         return WaterBoundPathNavigation(this, level)
+    }
+
+    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
+        return null
     }
 
     override fun travel(travelVector: Vec3) {
@@ -96,53 +94,30 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(MOISTNESS, getMaxMoistness())
-        entityData.define(OCTOPUS_SIZE, 0)
-        entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(SITTING, true)
         entityData.define(TARGET_COLOR, 12799593)
         entityData.define(CURRENT_COLOR, 12799593)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt(MOISTNESS_KEY, moistness)
-        nbt.putInt(OCTOPUS_SIZE_KEY, size)
-        nbt.putInt(HUNGER_KEY, hunger)
-        nbt.putBoolean("FromFishingNet", fromFishingNet)
-        nbt.putBoolean("Sitting", isSitting())
-        nbt.putInt("targetColor", getTargetColor())
-        nbt.putInt("currentColor", getCurrentColor())
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt(MOISTNESS_KEY, moistness)
+        compound.putBoolean("Sitting", isSitting())
+        compound.putInt("targetColor", getTargetColor())
+        compound.putInt("currentColor", getCurrentColor())
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        moistness = nbt.getInt(MOISTNESS_KEY)
-        size = nbt.getInt(OCTOPUS_SIZE_KEY)
-        hunger = nbt.getInt(HUNGER_KEY)
-        fromFishingNet = nbt.getBoolean("FromFishingNet")
-        this.setTargetColor(nbt.getInt("targetColor"))
-        this.setCurrentColor(nbt.getInt("currentColor"))
-        this.setSitting(nbt.getBoolean("Sitting"))
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        moistness = compound.getInt(MOISTNESS_KEY)
+        this.setTargetColor(compound.getInt("targetColor"))
+        this.setCurrentColor(compound.getInt("currentColor"))
+        this.setSitting(compound.getBoolean("Sitting"))
     }
     //#endregion
 
-    override fun finalizeSpawn(
-        world: ServerLevelAccessor,
-        difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
-    ): SpawnGroupData? {
-        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
-    }
-
     //#region Moistness & Air
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
-
     override fun canBreatheUnderwater(): Boolean {
         return true
     }
@@ -185,8 +160,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
             this.yRot = 0.0f
             this.yHeadRot = 0.0f
         }
-
-        if (hunger > 0) hunger -= 1
     }
 
     override fun getMaxHeadXRot(): Int {
@@ -303,17 +276,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
         return dimensions.height * 0.5f
     }
 
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !fromFishingNet && !hasCustomName()
-    }
-
-    override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
-        val attacker = source.directEntity
-        if (attacker !is HAFishEntity && attacker !is HASharkEntity && attacker !is HACephalopodEntity && attacker !is HAMammalEntity) {
-            super.dropFromLootTable(source, causedByPlayer)
-        }
-    }
-
     override fun getMaxSpawnClusterSize(): Int {
         return 1
     }
@@ -343,33 +305,19 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
             entityData.set(MOISTNESS, moistness)
         }
 
-    var size: Int
-        get() = entityData.get(OCTOPUS_SIZE)
-        set(size) {
-            entityData.set(OCTOPUS_SIZE, size)
-        }
-
-    var hunger: Int
-        get() = entityData.get(HUNGER)
-        set(hunger) {
-            entityData.set(HUNGER, hunger)
-        }
-
     private var attemptAttack: Boolean
         get() = entityData.get(ATTEMPT_ATTACK)
         set(attemptAttack) {
             entityData.set(ATTEMPT_ATTACK, attemptAttack)
         }
 
-    protected open fun getMinSize(): Int {
+    override fun getMinSize(): Int {
         return 0
     }
 
-    protected open fun getMaxSize(): Int {
+    override fun getMaxSize(): Int {
         return 3
     }
-
-    private var fromFishingNet = false
 
     fun isSitting(): Boolean {
         return entityData.get(SITTING)
@@ -415,10 +363,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
             SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.BOOLEAN)
         val MOISTNESS: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.INT)
-        val OCTOPUS_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.INT)
-        val HUNGER: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.BOOLEAN)
         private val CURRENT_COLOR: EntityDataAccessor<Int> =
@@ -426,14 +370,11 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
         private val TARGET_COLOR: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.INT)
 
-        const val MAX_HUNGER = 2400
-        const val HUNGER_KEY = "Hunger"
         const val MOISTNESS_KEY = "Moistness"
-        const val OCTOPUS_SIZE_KEY = "OctopusSize"
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out HAWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -442,10 +383,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
             val seaLevel = world.level.chunkSource.generator.seaLevel
             return pos.y >= seaLevel - 64 &&
                     world.getBlockState(pos.below()).isSolid
-        }
-
-        fun getScaleAdjustment(octopus: HAOctopusEntity, adjustment: Float): Float {
-            return 1.0f + (octopus.size * adjustment)
         }
     }
 

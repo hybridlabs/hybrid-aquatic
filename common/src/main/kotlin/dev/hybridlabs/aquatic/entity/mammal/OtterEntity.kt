@@ -91,12 +91,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
         getTargetConfig().addAttackTarget(targetSelector, MAX_HUNGER / 4, this, OtterEntity::hunger)
     }
 
-    var hunger: Int
-        get() = entityData.get(HUNGER)
-        set(hunger) {
-            entityData.set(HUNGER, hunger)
-        }
-
     override fun tick() {
         super.tick()
 

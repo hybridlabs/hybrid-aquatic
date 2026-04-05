@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.effect.HAMobEffects
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.world.InteractionHand
@@ -153,7 +154,7 @@ open class SharkAttackGoal(
             shark.doHurtTarget(enemy)
             if (!enemy.isBlocking) { enemy.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.get(), 200, 0), shark) }
 
-            if (enemy.health <= 0) shark.hunger = HASharkEntity.MAX_HUNGER
+            if (enemy.health <= 0) shark.hunger = HAWaterAnimal.MAX_HUNGER
 
             val hasShield = enemy.mainHandItem.`is`(Items.SHIELD) || enemy.offhandItem.`is`(Items.SHIELD)
             if (hasShield && enemy.isBlocking) {

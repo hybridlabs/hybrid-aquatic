@@ -22,7 +22,6 @@ import net.minecraft.tags.ItemTags
 import net.minecraft.util.RandomSource
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.UniformInt
-import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
@@ -40,7 +39,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
@@ -49,12 +47,11 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.*
 
-
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
 open class HASharkEntity(
     entityType: EntityType<out HASharkEntity>,
     world: Level,
-) : HAWaterAnimal(entityType, world), NeutralMob, GeoEntity {
+) : HAWaterAnimal(entityType, world), NeutralMob {
     open fun getTargetConfig(): MobTargetConfiguration? = null
 
     open val isPassive: Boolean = true
@@ -65,13 +62,6 @@ open class HASharkEntity(
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var angerTime = 0
     private var angryAt: UUID? = null
-    var fromFishingNet = false
-
-    var hunger: Int
-        get() = entityData.get(HUNGER)
-        set(hunger) {
-            entityData.set(HUNGER, hunger)
-        }
 
     var moistness: Int
         get() = entityData.get(MOISTNESS)
@@ -109,27 +99,12 @@ open class HASharkEntity(
                 it.hasEffect(HAMobEffects.BLEEDING.get()) && it !is HASharkEntity && !isPassive
             }
         )
-        getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HASharkEntity::hunger)
+        getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HAWaterAnimal::hunger)
         getTargetConfig()?.addAvoidanceGoal(goalSelector, this)
-    }
-
-    override fun finalizeSpawn(
-        world: ServerLevelAccessor,
-        difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
-    ): SpawnGroupData? {
-        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
-    }
-
-    override fun getMobType(): MobType {
-        return MobType.WATER
     }
 
     override fun canBreatheUnderwater(): Boolean {
@@ -155,14 +130,8 @@ open class HASharkEntity(
                 this.yRot = 0.0f
             }
         }
-
-        if (hunger > 0) hunger -= 1
     }
     //#endregion
-
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !this.fromFishingNet && !this.hasCustomName()
-    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
@@ -173,25 +142,17 @@ open class HASharkEntity(
         super.addAdditionalSaveData(compound)
         this.addPersistentAngerSaveData(compound)
         compound.putInt(MOISTNESS_KEY, moistness)
-        compound.putInt(HUNGER_KEY, hunger)
-        compound.putInt(SHARK_SIZE_KEY, size)
-        compound.putBoolean("FromFishingNet", fromFishingNet)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         super.readAdditionalSaveData(compound)
         this.readPersistentAngerSaveData(this.level(), compound)
         moistness = compound.getInt(MOISTNESS_KEY)
-        hunger = compound.getInt(HUNGER_KEY)
-        size = compound.getInt(SHARK_SIZE_KEY)
-        fromFishingNet = compound.getBoolean("FromFishingNet")
     }
 
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(MOISTNESS, getMaxMoistness())
-        entityData.define(SHARK_SIZE, 0)
-        entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(ATTEMPT_ATTACK, false)
     }
     //#endregion
@@ -220,20 +181,6 @@ open class HASharkEntity(
     //#endregion
 
     //#region Properties
-    var size: Int
-        get() = entityData.get(SHARK_SIZE)
-        set(size) {
-            entityData.set(SHARK_SIZE, size)
-        }
-
-    protected open fun getMinSize(): Int {
-        return -3
-    }
-
-    protected open fun getMaxSize(): Int {
-        return 0
-    }
-
     override fun getMaxHeadXRot(): Int {
         return 1
     }
@@ -373,15 +320,8 @@ open class HASharkEntity(
 
     companion object {
         const val MOISTNESS_KEY = "Moistness"
-        const val SHARK_SIZE_KEY = "SharkSize"
-        const val MAX_HUNGER = 2400
-        const val HUNGER_KEY = "Hunger"
 
-        val SHARK_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HASharkEntity::class.java, EntityDataSerializers.INT)
         val MOISTNESS: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HASharkEntity::class.java, EntityDataSerializers.INT)
-        val HUNGER: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HASharkEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HASharkEntity::class.java, EntityDataSerializers.BOOLEAN)
@@ -439,10 +379,6 @@ open class HASharkEntity(
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos) &&
                     isDarkEnoughToSpawn(world, pos, random)
-        }
-
-        fun getScaleAdjustment(shark: HASharkEntity, adjustment: Float): Float {
-            return 1.0f + (shark.size * adjustment)
         }
         //#endregion
     }

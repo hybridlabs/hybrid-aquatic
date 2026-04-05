@@ -2,35 +2,45 @@ package dev.hybridlabs.aquatic.entity.base
 
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.FluidTags
+import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.AgeableMob
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.ExperienceOrb
-import net.minecraft.world.entity.MobType
-import net.minecraft.world.entity.VariantHolder
+import net.minecraft.world.entity.*
+import net.minecraft.world.entity.ai.navigation.PathNavigation
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
+import software.bernie.geckolib.animatable.GeoEntity
 import java.util.*
 
 abstract class HAWaterAnimal protected constructor(
     entityType: EntityType<out HAWaterAnimal>,
     level: Level,
 ) :
-    AgeableMob(entityType, level) {
+    AgeableMob(entityType, level), GeoEntity {
     private var inLove = 0
     private var loveCause: UUID? = null
+    var fromFishingNet = false
 
-    init {
-        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+    override fun createNavigation(level: Level): PathNavigation {
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
+        return WaterBoundPathNavigation(this, level)
     }
 
     override fun customServerAiStep() {
@@ -39,6 +49,10 @@ abstract class HAWaterAnimal protected constructor(
         }
 
         super.customServerAiStep()
+    }
+
+    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
+        return !this.fromFishingNet && !this.hasCustomName()
     }
 
     fun isBelowWaterline(): Boolean {
@@ -83,8 +97,25 @@ abstract class HAWaterAnimal protected constructor(
         }
     }
 
+    override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
+        val attacker = source.directEntity
+        if (attacker !is HAWaterAnimal) {
+            super.dropFromLootTable(source, causedByPlayer)
+        }
+    }
+
+    //#region Data
+    override fun defineSynchedData() {
+        super.defineSynchedData()
+        entityData.define(SIZE, 0)
+        entityData.define(HUNGER, MAX_HUNGER)
+    }
+
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
+        compound.putInt(SIZE_KEY, size)
+        compound.putInt(HUNGER_KEY, hunger)
+        compound.putBoolean("FromFishingNet", fromFishingNet)
         compound.putInt("InLove", this.inLove)
         if (this.loveCause != null) {
             compound.putUUID("LoveCause", this.loveCause)
@@ -93,9 +124,13 @@ abstract class HAWaterAnimal protected constructor(
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         super.readAdditionalSaveData(compound)
+        size = compound.getInt(SIZE_KEY)
+        hunger = compound.getInt(HUNGER_KEY)
+        fromFishingNet = compound.getBoolean("FromFishingNet")
         this.inLove = compound.getInt("InLove")
         this.loveCause = if (compound.hasUUID("LoveCause")) compound.getUUID("LoveCause") else null
     }
+    //#endregion
 
     open fun isFood(stack: ItemStack): Boolean {
         return stack.`is`(Items.WHEAT)
@@ -181,7 +216,19 @@ abstract class HAWaterAnimal protected constructor(
     }
 
 
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?,
+    ): SpawnGroupData? {
+        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
     fun finalizeSpawnChildFromBreeding(level: ServerLevel, waterAnimal: HAWaterAnimal) {
+        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         this.setAge(6000)
         waterAnimal.setAge(6000)
         this.resetLove()
@@ -221,6 +268,11 @@ abstract class HAWaterAnimal protected constructor(
         }
     }
 
+    //#region Water Interaction
+    override fun isPushedByFluid(): Boolean {
+        return false
+    }
+
     override fun canBreatheUnderwater(): Boolean {
         return true
     }
@@ -228,6 +280,7 @@ abstract class HAWaterAnimal protected constructor(
     override fun getMobType(): MobType {
         return MobType.WATER
     }
+    //#endregion
 
     override fun checkSpawnObstruction(level: LevelReader): Boolean {
         return level.isUnobstructed(this)
@@ -237,19 +290,23 @@ abstract class HAWaterAnimal protected constructor(
         return 120
     }
 
+    override fun getSoundSource(): SoundSource {
+        return SoundSource.AMBIENT
+    }
+
     override fun getExperienceReward(): Int {
         return 1 + this.level().random.nextInt(3)
     }
 
-    protected open fun handleAirSupply(airSupply: Int) {
+    protected open fun handleAirSupply(air: Int) {
         if (this.isAlive && !this.isInWaterOrBubble) {
-            this.airSupply = airSupply - 1
+            this.airSupply -= 1
             if (this.airSupply == -20) {
                 this.airSupply = 0
                 this.hurt(this.damageSources().drown(), 2.0f)
             }
         } else {
-            this.airSupply = 300
+            this.airSupply = maxAirSupply
         }
     }
 
@@ -259,11 +316,50 @@ abstract class HAWaterAnimal protected constructor(
         this.handleAirSupply(i)
     }
 
-    override fun isPushedByFluid(): Boolean {
+    override fun canBeLeashed(player: Player): Boolean {
         return false
     }
 
-    override fun canBeLeashed(player: Player): Boolean {
-        return false
+    override fun tick() {
+        super.tick()
+
+        if (hunger > 0) hunger -= 1
+    }
+
+    protected open fun getMinSize(): Int {
+        return -5
+    }
+
+    protected open fun getMaxSize(): Int {
+        return 5
+    }
+
+    //#region Properties
+    var size: Int
+        get() = entityData.get(SIZE)
+        set(size) {
+            entityData.set(SIZE, size)
+        }
+
+    var hunger: Int
+        get() = entityData.get(HUNGER)
+        set(hunger) {
+            entityData.set(HUNGER, hunger)
+        }
+    //#endregion
+
+    companion object{
+        val SIZE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.INT)
+        val HUNGER: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.INT)
+
+        const val SIZE_KEY = "Size"
+        const val MAX_HUNGER = 2400
+        const val HUNGER_KEY = "Hunger"
+
+        fun getScaleAdjustment(animal: HAWaterAnimal, adjustment: Float): Float {
+            return 1.0f + (animal.size * adjustment)
+        }
     }
 }

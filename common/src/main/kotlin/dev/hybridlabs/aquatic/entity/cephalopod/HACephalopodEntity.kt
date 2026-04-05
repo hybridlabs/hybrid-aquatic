@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.fish.HAFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
@@ -25,14 +26,12 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
@@ -41,7 +40,7 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
-open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: Level) : WaterAnimal(type, world), GeoEntity {
+open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: Level) : HAWaterAnimal(type, world) {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     open fun getTargetConfig(): MobTargetConfiguration? = null
     open val inkConfig: InkConfiguration? = null
@@ -62,7 +61,7 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
         goalSelector.addGoal(2, CephalopodAttackGoal(this))
 
         getTargetConfig()?.let { config ->
-            config.addAttackTarget(targetSelector, 1200, this, HACephalopodEntity::hunger)
+            config.addAttackTarget(targetSelector, 1200, this, HAWaterAnimal::hunger)
             config.addAvoidanceGoal(goalSelector, this)
         }
     }
@@ -71,25 +70,17 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(MOISTNESS, getMaxMoistness())
-        entityData.define(CEPHALOPOD_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
-        entityData.define(HUNGER, MAX_HUNGER)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt(MOISTNESS_KEY, moistness)
-        nbt.putInt(CEPHALOPOD_SIZE_KEY, size)
-        nbt.putInt(HUNGER_KEY, hunger)
-        nbt.putBoolean("FromFishingNet", fromFishingNet)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt(MOISTNESS_KEY, moistness)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        moistness = nbt.getInt(MOISTNESS_KEY)
-        size = nbt.getInt(CEPHALOPOD_SIZE_KEY)
-        hunger = nbt.getInt(HUNGER_KEY)
-        fromFishingNet = nbt.getBoolean("FromFishingNet")
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        moistness = compound.getInt(MOISTNESS_KEY)
     }
     //#endregion
 
@@ -100,16 +91,15 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
         entityData: SpawnGroupData?,
         entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         this.xRot = 0.0f
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    //#region Moistness & Air
-    override fun getMobType(): MobType {
-        return MobType.WATER
+    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
+        return null
     }
 
+    //#region Moistness & Air
     override fun canBreatheUnderwater(): Boolean {
         return true
     }
@@ -149,8 +139,6 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
         }
 
         isSprinting = isAggressive
-
-        if (hunger > 0) hunger -= 1
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
@@ -214,10 +202,6 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
         }
     }
 
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !fromFishingNet && !hasCustomName()
-    }
-
     override fun travel(travelVector: Vec3) {
         if (this.isEffectiveAi && this.isInWater) {
             this.moveRelative(this.speed, travelVector)
@@ -268,33 +252,11 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
             entityData.set(MOISTNESS, moistness)
         }
 
-    var size: Int
-        get() = entityData.get(CEPHALOPOD_SIZE)
-        set(size) {
-            entityData.set(CEPHALOPOD_SIZE, size)
-        }
-
-    var hunger: Int
-        get() = entityData.get(HUNGER)
-        set(hunger) {
-            entityData.set(HUNGER, hunger)
-        }
-
     private var attemptAttack: Boolean
         get() = entityData.get(ATTEMPT_ATTACK)
         set(attemptAttack) {
             entityData.set(ATTEMPT_ATTACK, attemptAttack)
         }
-
-    protected open fun getMinSize(): Int {
-        return 0
-    }
-
-    protected open fun getMaxSize(): Int {
-        return 3
-    }
-
-    private var fromFishingNet = false
     //#endregion
 
     //#region Animations
@@ -338,7 +300,8 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
                 cephalopod.attemptAttack = true
 
                 if (target.health <= 0)
-                    cephalopod.hunger = HASharkEntity.MAX_HUNGER
+                    cephalopod.hunger = MAX_HUNGER
+
                 cephalopod.health = cephalopod.maxHealth
             }
         }
@@ -361,23 +324,17 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
     companion object {
         val MOISTNESS: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HACephalopodEntity::class.java, EntityDataSerializers.INT)
-        val CEPHALOPOD_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HACephalopodEntity::class.java, EntityDataSerializers.INT)
-        val HUNGER: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HACephalopodEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HACephalopodEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
 
         const val MAX_HUNGER = 2400
-        const val HUNGER_KEY = "Hunger"
         const val MOISTNESS_KEY = "Moistness"
-        const val CEPHALOPOD_SIZE_KEY = "CephalopodSize"
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out HAWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -395,7 +352,7 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
 
         @Suppress("UNUSED_PARAMETER", "DEPRECATION")
         fun canDeepSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out HAWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -408,10 +365,6 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos) &&
                     isDarkEnoughToSpawn(world, pos, random)
-        }
-
-        fun getScaleAdjustment(cephalopod: HACephalopodEntity, adjustment: Float): Float {
-            return 1.0f + (cephalopod.size * adjustment)
         }
     }
 }

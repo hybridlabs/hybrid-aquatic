@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
-import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
@@ -30,7 +30,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
@@ -41,7 +40,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "unused", "DEPRECATION")
 open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) :
-    HAWaterAnimal(type, world), GeoEntity {
+    HAWaterAnimal(type, world) {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
@@ -61,7 +60,7 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
         super.registerGoals()
         goalSelector.addGoal(0, BreathAirGoal(this))
         goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
-        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 7.0))
+        goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 7.0))
         goalSelector.addGoal(2, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 4))
         goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
@@ -131,7 +130,6 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
     //#region Data
     override fun defineSynchedData() {
         super.defineSynchedData()
-        entityData.define(DOLPHIN_SIZE, 0)
         entityData.define(MOISTNESS, getMaxMoistness())
     }
 
@@ -146,20 +144,9 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
     }
     //#endregion
 
-    var size: Int
-        get() = entityData.get(DOLPHIN_SIZE)
-        set(size) {
-            entityData.set(DOLPHIN_SIZE, size)
-        }
-
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
-
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
-
 
     override fun canBreatheUnderwater(): Boolean {
         return true
@@ -231,7 +218,6 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
     ): SpawnGroupData? {
         this.airSupply = this.maxAirSupply
         this.yRot = 0.0f
-        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
 
         if (this.random.nextFloat() < 0.25f) {
             this.setAge(-6000)
@@ -242,18 +228,6 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
-    }
-
-    protected open fun getMinSize(): Int {
-        return 0
-    }
-
-    protected open fun getMaxSize(): Int {
-        return 0
-    }
-
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !this.hasCustomName()
     }
 
     //#region Animations
@@ -282,8 +256,6 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
     companion object {
         val MOISTNESS: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HADolphinEntity::class.java, EntityDataSerializers.INT)
-        val DOLPHIN_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HADolphinEntity::class.java, EntityDataSerializers.INT)
 
         val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
 
@@ -291,12 +263,7 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
             Items.SEAGRASS,
         )
 
-        const val HUNGER_KEY = "Hunger"
         const val MOISTNESS_KEY = "Moistness"
-
-        fun getScaleAdjustment(dolphin: HADolphinEntity, adjustment: Float): Float {
-            return 1.0f + (dolphin.size * adjustment)
-        }
 
         fun canSpawn(
             type: EntityType<out HADolphinEntity>,

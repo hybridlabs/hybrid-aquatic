@@ -94,7 +94,6 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
 
     override fun defineSynchedData() {
         super.defineSynchedData()
-        entityData.define(SIRENIAN_SIZE, 0)
         entityData.define(CLAM_POS, BlockPos.ZERO)
         entityData.define(HAS_SEA_LETTUCE, false)
     }
@@ -115,12 +114,6 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
         this.setClamPos(BlockPos(i, j, k))
         this.setGotSeaLettuce(compound.getBoolean("GotFish"))
     }
-
-    var size: Int
-        get() = entityData.get(SIRENIAN_SIZE)
-        set(size) {
-            entityData.set(SIRENIAN_SIZE, size)
-        }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
@@ -207,7 +200,6 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
     ): SpawnGroupData? {
         this.airSupply = this.maxAirSupply
         this.yRot = 0.0f
-        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
 
         if (this.random.nextFloat() < 0.1f) {
             this.setAge(-6000)
@@ -218,14 +210,6 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
-    }
-
-    protected open fun getMinSize(): Int {
-        return 0
-    }
-
-    protected open fun getMaxSize(): Int {
-        return 0
     }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
@@ -256,9 +240,6 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
     }
 
     companion object {
-        val SIRENIAN_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HASirenianEntity::class.java, EntityDataSerializers.INT)
-
         val CLAM_POS: EntityDataAccessor<BlockPos> =
             SynchedEntityData.defineId(HASirenianEntity::class.java, EntityDataSerializers.BLOCK_POS)
 
@@ -268,10 +249,6 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
             Items.SEAGRASS,
         )
-
-        fun getScaleAdjustment(sirenian: HASirenianEntity, adjustment: Float): Float {
-            return 1.0f + (sirenian.size * adjustment)
-        }
 
         fun canSpawn(
             type: EntityType<out HASirenianEntity>,

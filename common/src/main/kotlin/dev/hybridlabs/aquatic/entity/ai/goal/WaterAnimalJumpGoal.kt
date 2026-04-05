@@ -10,7 +10,7 @@ import kotlin.math.abs
 import kotlin.math.atan2
 
 @Suppress("DEPRECATION")
-class HybridAquaticJumpGoal(
+class WaterAnimalJumpGoal(
     private val mob: PathfinderMob,
     chance: Int,
     private val jumpHeight: Double

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
@@ -54,7 +54,7 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 2.0))
+        goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 2.0))
     }
 
     override fun isFood(stack: ItemStack): Boolean {

@@ -16,11 +16,7 @@ import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.SpawnGroupData
-import net.minecraft.world.entity.VariantHolder
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -30,7 +26,8 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctopusEntity(type, world), VariantHolder<OctopusEntity.Companion.Type>, OverlayTextureFeature {
+class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctopusEntity(type, world),
+    VariantHolder<OctopusEntity.Companion.Type>, OverlayTextureFeature {
     override fun getTargetConfig() = TARGET_CONFIG
 
     override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
@@ -40,15 +37,15 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctop
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
 
         overlayTexture = when (selectedType) {
-           Type.BLUE_RINGED, Type.COCONUT-> OverlayTextures.NONE
-           Type.OCTOPUS -> OverlayTextures.TINT
+            Type.BLUE_RINGED, Type.COCONUT -> OverlayTextures.NONE
+            Type.OCTOPUS -> OverlayTextures.TINT
         }
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
@@ -126,7 +123,8 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctop
                 }
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
-                    return when {biome.`is`(HABiomeTags.CORAL_REEF) -> {
+                    return when {
+                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
                             Type.fromId(random.nextInt(0, 3))
                         }
 
@@ -169,17 +167,17 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctop
         super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        nbt.putInt("texture_overlay", this.overlayTexture.id)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        compound.putInt("texture_overlay", this.overlayTexture.id)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        if (nbt.contains("texture_overlay")) this.overlayTexture =
-            OverlayTextures.byId(nbt.getInt("texture_overlay"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        if (compound.contains("texture_overlay")) this.overlayTexture =
+            OverlayTextures.byId(compound.getInt("texture_overlay"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.client.render.entity.mammal
 
 import com.mojang.blaze3d.vertex.PoseStack
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.mammal.HADolphinEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
@@ -22,7 +23,7 @@ open class HADolphinEntityRenderer<T : HADolphinEntity>(
         packedLight: Int
     ) {
         if(variableSize) {
-            val size = HADolphinEntity.getScaleAdjustment(entity, 0.05f)
+            val size = HAWaterAnimal.getScaleAdjustment(entity, 0.05f)
             poseStack.scale(size, size, size)
         }
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)

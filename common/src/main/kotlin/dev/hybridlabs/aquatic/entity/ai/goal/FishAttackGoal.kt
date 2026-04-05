@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.fish.HAFishEntity
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.EntitySelector
@@ -8,7 +9,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.pathfinder.Path
-import java.util.EnumSet
+import java.util.*
 import kotlin.math.max
 
 open class FishAttackGoal(
@@ -148,7 +149,7 @@ open class FishAttackGoal(
             fish.swing(InteractionHand.MAIN_HAND)
             fish.doHurtTarget(enemy)
 
-            if (enemy.health <= 0) fish.hunger = HAFishEntity.MAX_HUNGER
+            if (enemy.health <= 0) fish.hunger = HAWaterAnimal.MAX_HUNGER
             fish.health = fish.maxHealth
         }
     }

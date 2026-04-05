@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HABiomeTags
@@ -54,7 +54,7 @@ class TunaEntity(type: EntityType<out TunaEntity>, world: Level) :
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
-        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 5.0))
+        goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 5.0))
     }
 
     override fun isFood(stack: ItemStack): Boolean {

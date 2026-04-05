@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
@@ -75,7 +75,7 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
-        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10, 3.0))
+        goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 3.0))
     }
 
     companion object {

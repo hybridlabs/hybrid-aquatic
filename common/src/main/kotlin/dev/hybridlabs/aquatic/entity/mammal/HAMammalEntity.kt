@@ -6,9 +6,6 @@ import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.syncher.EntityDataAccessor
-import net.minecraft.network.syncher.EntityDataSerializers
-import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
@@ -23,7 +20,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
-import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
@@ -33,7 +29,7 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "unused")
-open class HAMammalEntity(type: EntityType<out HAMammalEntity>, world: Level) : HAWaterAnimal(type, world), GeoEntity {
+open class HAMammalEntity(type: EntityType<out HAMammalEntity>, world: Level) : HAWaterAnimal(type, world) {
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun createNavigation(level: Level): PathNavigation {
@@ -59,7 +55,6 @@ open class HAMammalEntity(type: EntityType<out HAMammalEntity>, world: Level) : 
     ): SpawnGroupData? {
         this.airSupply = this.maxAirSupply
         this.yRot = 0.0f
-        this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
 
         if (this.random.nextFloat() < 0.25f) {
             this.setAge(-6000)
@@ -70,14 +65,6 @@ open class HAMammalEntity(type: EntityType<out HAMammalEntity>, world: Level) : 
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
-    }
-
-    protected open fun getMinSize(): Int {
-        return 0
-    }
-
-    protected open fun getMaxSize(): Int {
-        return 0
     }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
@@ -102,17 +89,6 @@ open class HAMammalEntity(type: EntityType<out HAMammalEntity>, world: Level) : 
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
-    }
-
-    var size: Int
-        get() = entityData.get(MAMMAL_SIZE)
-        set(size) {
-            entityData.set(MAMMAL_SIZE, size)
-        }
-
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(MAMMAL_SIZE, 0)
     }
 
     init {
@@ -144,14 +120,7 @@ open class HAMammalEntity(type: EntityType<out HAMammalEntity>, world: Level) : 
     }
 
     companion object {
-        val MAMMAL_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HAMammalEntity::class.java, EntityDataSerializers.INT)
-
         val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
-
-        fun getScaleAdjustment(mammal: HAMammalEntity, adjustment: Float): Float {
-            return 1.0f + (mammal.size * adjustment)
-        }
 
         fun canSpawn(
             type: EntityType<out HAMammalEntity>,
