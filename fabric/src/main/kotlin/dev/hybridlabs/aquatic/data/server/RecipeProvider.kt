@@ -862,6 +862,15 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HAItems.FISH_FOOD.get())
+            .requires(ItemTags.FISHES)
+            .requires(Items.WHEAT)
+            .unlockedBy(
+                "has_wheat",
+                InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT)
+            )
+            .save(exporter)
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER, 2)
             .requires(HAItems.SULFUR.get())
             .requires(Items.COAL)

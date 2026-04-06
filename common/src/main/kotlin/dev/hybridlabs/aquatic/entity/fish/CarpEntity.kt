@@ -24,8 +24,6 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.TemptGoal
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
@@ -64,10 +62,6 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         return 0
     }
 
-    override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(Items.BREAD)
-    }
-
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
@@ -98,6 +92,8 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         baby.isBaby = true
         baby.moveTo(this.x, this.y, this.z, 0.0f, 0.0f)
 
+        this.finalizeSpawnChildFromBreeding(level, mate)
+
         if (baby is CarpEntity) {
             baby.variant = Type.KOI
 
@@ -107,7 +103,6 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             baby.patternTexture = PatternTextures.byId(patternID)
         }
 
-        this.finalizeSpawnChildFromBreeding(level, mate)
         level.addFreshEntityWithPassengers(baby)
     }
 

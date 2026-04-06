@@ -632,6 +632,7 @@ object HAItems {
     val BLACK_PEARL = register("black_pearl") { Item(Item.Properties()) }
     val GIANT_NAUTILUS_SHELL = register("giant_nautilus_shell") { Item(Item.Properties()) }
     val CUTTLEBONE = register("cuttlebone") { Item(Item.Properties()) }
+    val FISH_FOOD = register("fish_food") { Item(Item.Properties()) }
 
     //#region Claws
     val LOBSTER_CLAW = register("lobster_claw") { Item(Item.Properties()) }

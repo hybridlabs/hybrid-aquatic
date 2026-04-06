@@ -466,6 +466,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAItems.SPIDER_CRAB_CLAW.get() to "Spider Crab Claw",
             HAItems.GLOWSLIME.get() to "Glowslime",
             HAItems.CUTTLEBONE.get() to "Cuttlebone",
+            HAItems.FISH_FOOD.get() to "Fish Food",
             HAItems.SEA_URCHIN_SPINE.get() to "Sea Urchin Spine",
             HAItems.PRISMARINE_ROD.get() to "Prismarine Rod",
             HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get() to "Diving Armor Upgrade Template",

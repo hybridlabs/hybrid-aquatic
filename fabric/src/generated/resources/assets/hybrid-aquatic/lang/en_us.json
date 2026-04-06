@@ -537,6 +537,7 @@
   "item.hybrid-aquatic.fiddler_crab_spawn_egg": "Fiddler Crab Spawn Egg",
   "item.hybrid-aquatic.firefly_squid_spawn_egg": "Firefly Squid Spawn Egg",
   "item.hybrid-aquatic.firework_jellyfish_spawn_egg": "Firework Jellyfish Spawn Egg",
+  "item.hybrid-aquatic.fish_food": "Fish Food",
   "item.hybrid-aquatic.fishing_net": "Fishing Net",
   "item.hybrid-aquatic.fishing_net.description": "Stored Entity: %s",
   "item.hybrid-aquatic.fishing_net.function": "Lets you catch and move aquatic creatures",

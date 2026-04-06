@@ -322,6 +322,7 @@ object HAItemGroups {
                 entries.accept(HAItems.TUBE_SPONGE.get())
                 entries.accept(HAItems.BUOY.get())
                 entries.accept(HAItems.CUTTLEBONE.get())
+                entries.accept(HAItems.FISH_FOOD.get())
                 entries.accept(HAItems.CORAL_CHUNK.get())
                 entries.accept(HAItems.PRISMARINE_ROD.get())
                 entries.accept(HAItems.SEA_URCHIN_SPINE.get())
