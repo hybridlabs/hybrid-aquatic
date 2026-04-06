@@ -92,12 +92,12 @@ class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) :
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun getMaxSize(): Int {
-        return 3
-    }
-
     override fun getMinSize(): Int {
         return -3
+    }
+
+    override fun getMaxSize(): Int {
+        return 5
     }
 
     private var overlayTexture

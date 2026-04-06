@@ -49,12 +49,4 @@ class GiantSquidEntity(type: EntityType<out GiantSquidEntity>, world: Level) : H
             return pos.y in (seaLevel - 256)..(seaLevel - 48) && world.isWaterAt(pos)
         }
     }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
-    }
 }

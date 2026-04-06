@@ -49,7 +49,7 @@ class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) :
     }
 
     override fun getMinSize(): Int {
-        return -8
+        return -5
     }
 
     override fun getMaxSize(): Int {

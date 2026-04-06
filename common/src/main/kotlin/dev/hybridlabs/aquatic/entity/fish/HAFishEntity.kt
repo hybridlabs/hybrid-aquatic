@@ -5,9 +5,6 @@ import dev.hybridlabs.aquatic.entity.ai.goal.AvoidEntityInWaterGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.FishAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.FollowGlowingEntityGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.entity.cephalopod.HACephalopodEntity
-import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
-import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag

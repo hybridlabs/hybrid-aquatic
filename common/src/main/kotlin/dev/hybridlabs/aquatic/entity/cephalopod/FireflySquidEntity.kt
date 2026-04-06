@@ -59,12 +59,4 @@ class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level)
             return pos.y in spawnY && world.isWaterAt(pos)
         }
     }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
-    }
 }

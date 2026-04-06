@@ -55,7 +55,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
     }
 
     override fun getMinSize(): Int {
-        return -8
+        return -5
     }
 
     override fun getMaxSize(): Int {

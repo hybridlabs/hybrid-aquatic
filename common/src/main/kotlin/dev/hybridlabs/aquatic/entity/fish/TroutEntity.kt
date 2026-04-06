@@ -35,7 +35,7 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) :
     }
 
     override fun getMinSize(): Int {
-        return -5
+        return -3
     }
 
     override fun getMaxSize(): Int {

@@ -283,7 +283,7 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
         }
 
     override fun getMinSize(): Int {
-        return 0
+        return -3
     }
 
     override fun getMaxSize(): Int {

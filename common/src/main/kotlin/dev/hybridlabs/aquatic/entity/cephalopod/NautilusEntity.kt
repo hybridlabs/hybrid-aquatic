@@ -53,12 +53,4 @@ class NautilusEntity(type: EntityType<out NautilusEntity>, world: Level) : HACep
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.SHULKER_HURT_CLOSED
     }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
-    }
 }
