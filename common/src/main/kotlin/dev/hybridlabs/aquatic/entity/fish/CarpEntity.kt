@@ -193,7 +193,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             RED_SADDLE(7, "red_saddle"),
             RED_SPOT(8, "red_spot"),
 
-            WHITE_CREEPER(0, "white_creeper"),
+            WHITE_CREEPER(9, "white_creeper"),
             WHITE_HEART(10, "white_heart"),
             WHITE_SADDLE(11, "white_saddle"),
             WHITE_SPOT(12, "white_spot"),
