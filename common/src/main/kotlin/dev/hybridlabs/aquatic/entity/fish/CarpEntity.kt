@@ -6,7 +6,6 @@ import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.feature.CarpPatternTextureFeature
-import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity.Companion.SaddleTexture
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.aquatic.world.WorldHelper
@@ -226,7 +225,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
     private var patternTexture
         get() = PatternTextures.byId(entityData.get(PATTERN))
         set(value) {
-            entityData.set(SaddleTexture, value.id)
+            entityData.set(PATTERN, value.id)
         }
 
     override fun getPatternTextureName(): String {
@@ -234,9 +233,9 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
     }
 
     override fun defineSynchedData() {
-        super.defineSynchedData()
         entityData.define(TYPE, 0)
         entityData.define(PATTERN, 0)
+        super.defineSynchedData()
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
