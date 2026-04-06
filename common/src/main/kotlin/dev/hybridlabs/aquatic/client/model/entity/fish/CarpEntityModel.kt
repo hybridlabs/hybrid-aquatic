@@ -7,9 +7,11 @@ import kotlin.random.Random
 
 class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
 
+    private val BABY_CARP_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/baby_carp.png")
     private val COMMON_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/carp.png")
     private val PRUSSIAN_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/prussian_carp.png")
 
+    private val BABY_CARP_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/baby_carp.geo.json")
     private val COMMON_CARP_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/carp.geo.json")
     private val PRUSSIAN_CARP_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/prussian_carp.geo.json")
 
@@ -23,25 +25,49 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
         ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_white.png")
     )
 
+    private val smallKoiTextures = listOf(
+        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/small_koi_silver.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/small_koi_gold.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/small_koi_orange.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/small_koi_red.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/small_koi_yellow.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/small_koi_black.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/small_koi_white.png")
+    )
+
     override fun getTextureResource(animatable: CarpEntity): ResourceLocation {
+        if (animatable.isBaby) {
+            return BABY_CARP_TEXTURE
+        }
+
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
+
         return when (animatable.variant) {
             CarpEntity.Companion.Type.COMMON -> COMMON_TEXTURE
             CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_TEXTURE
             CarpEntity.Companion.Type.KOI -> koiTextures[random.nextInt(koiTextures.size)]
+            CarpEntity.Companion.Type.SMALL_KOI -> smallKoiTextures[random.nextInt(smallKoiTextures.size)]
         }
     }
 
     override fun getModelResource(animatable: CarpEntity): ResourceLocation {
+        if (animatable.isBaby) {
+            return BABY_CARP_MODEL
+        }
+
         return when (animatable.variant) {
             CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_CARP_MODEL
-            else -> COMMON_CARP_MODEL
+            CarpEntity.Companion.Type.SMALL_KOI -> PRUSSIAN_CARP_MODEL
+            CarpEntity.Companion.Type.KOI -> COMMON_CARP_MODEL
+            CarpEntity.Companion.Type.COMMON -> COMMON_CARP_MODEL
         }
     }
 
     fun getPatternTextureResource(animatable: CarpEntity, layer: String): ResourceLocation {
-        return CommonClass.locate("textures/entity/fish/carp/layer/$layer.png")
+        return when (animatable.variant) {
+            CarpEntity.Companion.Type.SMALL_KOI -> CommonClass.locate("textures/entity/fish/carp/layer/small_$layer.png")
+            else -> CommonClass.locate("textures/entity/fish/carp/layer/$layer.png")
+        }
     }
 }
-

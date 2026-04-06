@@ -32,6 +32,7 @@ class CarpPatternEntityLayer(
         packedOverlay: Int
     ) {
         if (animatable.getPatternTextureName().isEmpty()) return
+        if (animatable.isBaby) return
 
         val patternTexture = getPatternTexture(animatable, animatable.getPatternTextureName())
         val patternRenderType = RenderType.entityTranslucent(patternTexture)

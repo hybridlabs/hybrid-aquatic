@@ -75,7 +75,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
 
         patternTexture = when (selectedType) {
             Type.PRUSSIAN, Type.COMMON -> PatternTextures.NONE
-            Type.KOI -> {
+            Type.KOI, Type.SMALL_KOI -> {
                 val patternID = world.random.nextIntBetweenInclusive(
                     0, PatternTextures.entries.size - 1
                 )
@@ -95,7 +95,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         this.finalizeSpawnChildFromBreeding(level, mate)
 
         if (baby is CarpEntity) {
-            baby.variant = Type.KOI
+            baby.variant = if (level.random.nextBoolean()) Type.KOI else Type.SMALL_KOI
 
             val patternID = level.random.nextIntBetweenInclusive(
                 0, PatternTextures.entries.size - 1
@@ -132,7 +132,8 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             COMMON(0, "common"),
             PRUSSIAN(1, "prussian"),
-            KOI(2, "koi");
+            KOI(2, "koi"),
+            SMALL_KOI(3, "small_koi");
 
             override fun getSerializedName(): String {
                 return this.key
@@ -157,7 +158,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
                         biome.`is`(HABiomeTags.CHERRY) -> {
-                            KOI
+                            Type.fromId(random.nextInt(2, 4))
                         }
 
                         else -> {
