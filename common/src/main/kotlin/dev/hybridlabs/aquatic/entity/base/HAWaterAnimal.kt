@@ -206,7 +206,7 @@ abstract class HAWaterAnimal protected constructor(
         }
     }
 
-    fun spawnChildFromBreeding(level: ServerLevel, mate: HAWaterAnimal) {
+    open fun spawnChildFromBreeding(level: ServerLevel, mate: HAWaterAnimal) {
         val baby = this.getBreedOffspring(level, mate) ?: return
 
         baby.isBaby = true

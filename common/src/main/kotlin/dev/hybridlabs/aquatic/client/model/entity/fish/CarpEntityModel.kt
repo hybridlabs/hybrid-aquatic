@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.CarpEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
@@ -19,12 +20,7 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
         ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_red.png"),
         ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_yellow.png"),
         ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_black.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_black_red_heart.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_white.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_white_black_creeper.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_white_orange_heart.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_white_red_heart.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_white_red_spot.png"),
+        ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/koi_white.png")
     )
 
     override fun getTextureResource(animatable: CarpEntity): ResourceLocation {
@@ -42,6 +38,10 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_CARP_MODEL
             else -> COMMON_CARP_MODEL
         }
+    }
+
+    fun getPatternTextureResource(animatable: CarpEntity, layer: String): ResourceLocation {
+        return CommonClass.locate("textures/entity/fish/carp/layer/$layer.png")
     }
 }
 
