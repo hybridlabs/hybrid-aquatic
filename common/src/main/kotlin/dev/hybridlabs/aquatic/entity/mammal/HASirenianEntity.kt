@@ -6,6 +6,7 @@ import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.BlockParticleOption
@@ -15,7 +16,6 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.InteractionHand
@@ -136,7 +136,7 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
         val itemstack = player.getItemInHand(hand)
         if (!itemstack.isEmpty && itemstack.`is`(HAItems.SEA_LETTUCE.get())) {
             if (!this.level().isClientSide) {
-                this.playSound(SoundEvents.DOLPHIN_EAT, 1.0f, 1.0f)
+                this.playSound(HASoundEvents.SIRENIAN_EAT.get(), 1.0f, 1.0f)
             }
 
             this.setGotSeaLettuce(true)

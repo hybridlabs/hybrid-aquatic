@@ -2,9 +2,9 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
-import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
@@ -26,23 +26,23 @@ class ManateeEntity(type: EntityType<out ManateeEntity>, world: Level) : HASiren
 
     //#region SFX
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.COW_AMBIENT
+        return HASoundEvents.MANATEE_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.COW_HURT
+        return HASoundEvents.MANATEE_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.COW_DEATH
+        return HASoundEvents.MANATEE_DIE.get()
     }
 
     override fun getSwimSplashSound(): SoundEvent {
-        return SoundEvents.DOLPHIN_SPLASH
+        return HASoundEvents.MANATEE_SPLASH.get()
     }
 
     override fun getSwimSound(): SoundEvent {
-        return SoundEvents.DOLPHIN_SWIM
+        return HASoundEvents.MANATEE_SWIM.get()
     }
     //#endregion
 

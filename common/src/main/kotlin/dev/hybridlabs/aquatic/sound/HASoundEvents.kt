@@ -8,9 +8,39 @@ import net.minecraft.sounds.SoundEvent
 
 object HASoundEvents {
 
-    val SIRENIAN_AMBIENT = register("sirenian_ambient")
-    val SIRENIAN_HURT = register("sirenian_hurt")
-    val SIRENIAN_DIE = register("sirenian_die")
+    val MANATEE_AMBIENT = register("entity.manatee.ambient")
+    val MANATEE_HURT = register("entity.manatee.hurt")
+    val MANATEE_DIE = register("entity.manatee.die")
+    val MANATEE_SWIM = register("entity.manatee.swim")
+    val MANATEE_SPLASH = register("entity.manatee.splash")
+
+    val DUGONG_AMBIENT = register("entity.dugong.ambient")
+    val DUGONG_HURT = register("entity.dugong.hurt")
+    val DUGONG_DIE = register("entity.dugong.die")
+    val DUGONG_SWIM = register("entity.dugong.swim")
+    val DUGONG_SPLASH = register("entity.dugong.splash")
+
+    val SIRENIAN_EAT = register("entity.sirenian.eat")
+
+    val KARKINOS_AMBIENT = register("entity.karkinos.ambient")
+    val KARKINOS_HURT = register("entity.karkinos.hurt")
+    val KARKINOS_DIE = register("entity.karkinos.die")
+
+    val KARCINOMA_AMBIENT = register("entity.karcinoma.ambient")
+    val KARCINOMA_HURT = register("entity.karcinoma.hurt")
+    val KARCINOMA_DIE = register("entity.karcinoma.die")
+
+    val KARCINOGEN_AMBIENT = register("entity.karcinogen.ambient")
+    val KARCINOGEN_HURT = register("entity.karcinogen.hurt")
+    val KARCINOGEN_DIE = register("entity.karcinogen.die")
+
+    val SHELL_BEAST_AMBIENT = register("entity.shell_beast.ambient")
+    val SHELL_BEAST_HURT = register("entity.shell_beast.hurt")
+    val SHELL_BEAST_DIE = register("entity.shell_beast.die")
+
+    val HYPNAUTILUS_AMBIENT = register("entity.hypnautilus.ambient")
+    val HYPNAUTILUS_HURT = register("entity.hypnautilus.hurt")
+    val HYPNAUTILUS_DIE = register("entity.hypnautilus.die")
 
     private fun register(id: String): RegistryObject<SoundEvent> {
         val identifier = ResourceLocation(Constants.MOD_ID, id)

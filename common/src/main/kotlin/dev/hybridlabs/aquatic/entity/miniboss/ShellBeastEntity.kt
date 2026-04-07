@@ -6,6 +6,7 @@ import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity.Companion.SUMMONING
 import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -52,13 +53,19 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         return this.explosionPower
     }
 
+    //#region SFX
+    override fun getAmbientSound(): SoundEvent {
+        return HASoundEvents.SHELL_BEAST_AMBIENT.get()
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.SHULKER_HURT_CLOSED
+        return HASoundEvents.SHELL_BEAST_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.SHULKER_HURT_CLOSED
+        return HASoundEvents.SHELL_BEAST_DIE.get()
     }
+    //#endregion
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)

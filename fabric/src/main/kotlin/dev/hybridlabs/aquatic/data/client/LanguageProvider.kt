@@ -149,6 +149,45 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         ).forEach { (key, translation) ->
             builder.add(key, translation)
         }
+        //advancements
+        mapOf(
+            "sounds.hybrid-aquatic.entity.manatee.ambient" to "Manatee snorts",
+            "sounds.hybrid-aquatic.entity.manatee.hurt" to "Manatee hurts",
+            "sounds.hybrid-aquatic.entity.manatee.die" to "Manatee dies",
+            "sounds.hybrid-aquatic.entity.manatee.swim" to "Manatee swims",
+            "sounds.hybrid-aquatic.entity.manatee.splash" to "Manatee splashes",
+
+            "sounds.hybrid-aquatic.entity.dugong.ambient" to "Dugong chirps",
+            "sounds.hybrid-aquatic.entity.dugong.hurt" to "Dugong hurts",
+            "sounds.hybrid-aquatic.entity.dugong.die" to "Dugong dies",
+            "sounds.hybrid-aquatic.entity.dugong.swim" to "Dugong swims",
+            "sounds.hybrid-aquatic.entity.dugong.splash" to "Dugong splashes",
+
+            "sounds.hybrid-aquatic.entity.sirenian.eat" to "Sirenian eats",
+
+            "sounds.hybrid-aquatic.entity.karkinos.ambient" to "Karkinos chitters",
+            "sounds.hybrid-aquatic.entity.karkinos.hurt" to "Karkinos hurts",
+            "sounds.hybrid-aquatic.entity.karkinos.die" to "Karkinos dies",
+
+            "sounds.hybrid-aquatic.entity.karcinoma.ambient" to "Karcinoma chitters",
+            "sounds.hybrid-aquatic.entity.karcinoma.hurt" to "Karcinoma hurts",
+            "sounds.hybrid-aquatic.entity.karcinoma.die" to "Karcinoma dies",
+
+            "sounds.hybrid-aquatic.entity.karcinogen.ambient" to "Karcinogen chitters",
+            "sounds.hybrid-aquatic.entity.karcinogen.hurt" to "Karcinogen hurts",
+            "sounds.hybrid-aquatic.entity.karcinogen.die" to "Karcinogen dies",
+
+            "sounds.hybrid-aquatic.entity.shell_beast.ambient" to "Shell Beast chitters",
+            "sounds.hybrid-aquatic.entity.shell_beast.hurt" to "Shell Beast hurts",
+            "sounds.hybrid-aquatic.entity.shell_beast.die" to "Shell Beast dies",
+
+            "sounds.hybrid-aquatic.entity.hypnautilus.ambient" to "Hypnautilus spirals",
+            "sounds.hybrid-aquatic.entity.hypnautilus.hurt" to "Hypnautilus hurts",
+            "sounds.hybrid-aquatic.entity.hypnautilus.die" to "Hypnautilus dies",
+
+        ).forEach { (key, translation) ->
+            builder.add(key, translation)
+        }
 
         mapOf(
             "journal.description.hybrid-aquatic.anglerfish" to "A deep-sea predator that lures unwary prey with a glowing bulb",

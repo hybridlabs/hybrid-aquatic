@@ -2,9 +2,9 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
-import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.AgeableMob
 import net.minecraft.world.entity.EntityType
@@ -26,23 +26,23 @@ class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HASirenia
 
     //#region SFX
     override fun getAmbientSound(): SoundEvent {
-        return SoundEvents.COW_AMBIENT
+        return HASoundEvents.DUGONG_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.COW_HURT
+        return HASoundEvents.DUGONG_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.COW_DEATH
+        return HASoundEvents.DUGONG_DIE.get()
     }
 
     override fun getSwimSplashSound(): SoundEvent {
-        return SoundEvents.DOLPHIN_SPLASH
+        return HASoundEvents.DUGONG_SPLASH.get()
     }
 
     override fun getSwimSound(): SoundEvent {
-        return SoundEvents.DOLPHIN_SWIM
+        return HASoundEvents.DUGONG_SWIM.get()
     }
     //#endregion
 

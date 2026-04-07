@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.sounds.SoundEvent
-import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MoverType
@@ -81,13 +81,19 @@ class KarcinomaEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         }
     }
 
+    //#region SFX
+    override fun getAmbientSound(): SoundEvent {
+        return HASoundEvents.KARCINOMA_AMBIENT.get()
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.TURTLE_EGG_CRACK
+        return HASoundEvents.KARCINOMA_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.TURTLE_EGG_BREAK
+        return HASoundEvents.KARCINOMA_DIE.get()
     }
+    //#endregion
 
     companion object {
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")

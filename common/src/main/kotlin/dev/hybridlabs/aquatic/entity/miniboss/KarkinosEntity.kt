@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.miniboss
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosMeleeAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosSummonGoal
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -329,12 +330,16 @@ class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
 
+    override fun getAmbientSound(): SoundEvent {
+        return HASoundEvents.KARKINOS_AMBIENT.get()
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.TURTLE_EGG_CRACK
+        return HASoundEvents.KARKINOS_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.TURTLE_EGG_BREAK
+        return HASoundEvents.KARKINOS_DIE.get()
     }
 
     companion object {

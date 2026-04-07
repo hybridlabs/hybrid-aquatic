@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.sounds.SoundEvent
-import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -27,13 +27,19 @@ class KarcinogenEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         super.registerGoals()
     }
 
+    //#region SFX
+    override fun getAmbientSound(): SoundEvent {
+        return HASoundEvents.KARCINOGEN_AMBIENT.get()
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.TURTLE_EGG_CRACK
+        return HASoundEvents.KARCINOGEN_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.TURTLE_EGG_BREAK
+        return HASoundEvents.KARCINOGEN_DIE.get()
     }
+    //#endregion
 
     override fun maxUpStep(): Float {
         return 1.0F
