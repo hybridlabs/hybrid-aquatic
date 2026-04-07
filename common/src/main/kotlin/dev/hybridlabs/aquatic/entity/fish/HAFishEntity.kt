@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.entity.ai.goal.AvoidEntityInWaterGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.FishAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.FollowGlowingEntityGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -25,6 +26,7 @@ import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
@@ -193,6 +195,10 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
 
     protected open fun hasSelfControl(): Boolean {
         return true
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HAItems.FISH_FOOD.get())
     }
     //#endregion
 
