@@ -297,12 +297,6 @@ object HybridAquaticEntityRenderers {
             ::BettaEntityRenderer
         )
 
-    val GOLDFISH =
-        ClientServices.PLATFORM.registerEntityRenderer(
-            HAEntityTypes.GOLDFISH,
-            ::GoldfishEntityRenderer
-        )
-
     val SEAHORSE =
         ClientServices.PLATFORM.registerEntityRenderer(
             HAEntityTypes.SEAHORSE,

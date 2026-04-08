@@ -76,7 +76,6 @@ object SpawnRestrictionRegistry {
 
         registerFish(HAEntityTypes.GARDEN_EEL.get(), GardenEelEntity::canSpawn)
         registerFish(HAEntityTypes.CARP.get(), CarpEntity::canSpawn)
-        registerFish(HAEntityTypes.GOLDFISH.get(), GoldfishEntity::canSpawn)
         registerFish(HAEntityTypes.CLOWNFISH.get(), ClownfishEntity::canSpawn)
         registerFish(HAEntityTypes.PARROTFISH.get(), ParrotfishEntity::canSpawn)
         registerFish(HAEntityTypes.SEAHORSE.get(), SeahorseEntity::canSpawn)

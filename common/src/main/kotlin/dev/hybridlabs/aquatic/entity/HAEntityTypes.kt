@@ -55,13 +55,6 @@ object HAEntityTypes {
         CorydoraEntity::createMobAttributes
     )
 
-    val GOLDFISH = registerRiverFish(
-        "goldfish",
-        ::GoldfishEntity,
-        EntityDimensions.fixed(0.5f, 0.5f),
-        GoldfishEntity::createMobAttributes
-    )
-
     val CARP = registerRiverFish(
         "carp",
         ::CarpEntity,

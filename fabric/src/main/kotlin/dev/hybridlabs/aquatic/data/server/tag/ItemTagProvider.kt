@@ -242,7 +242,6 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.TROUT.get(),
             HAItems.SUNFISH.get(),
             HAItems.PLECO.get(),
-            HAItems.GOLDFISH.get(),
             HAItems.DRAGONFISH.get(),
             HAItems.PIRANHA.get(),
             HAItems.ANGLERFISH.get(),
@@ -320,7 +319,6 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         listOf(
             HAItems.ANGLERFISH.get(),
-            HAItems.GOLDFISH.get(),
             HAItems.CARP.get(),
             HAItems.TROUT.get(),
             HAItems.SUNFISH.get(),
@@ -433,7 +431,6 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.CARP.get(),
             HAItems.TROUT.get(),
             HAItems.SUNFISH.get(),
-            HAItems.GOLDFISH.get(),
             HAItems.OARFISH.get(),
             HAItems.TUNA.get(),
             HAItems.SURGEONFISH.get(),

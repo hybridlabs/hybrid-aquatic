@@ -138,12 +138,6 @@ class EntitySpawnConfigGenerator {
         )
 
         addRiverFish(
-            HAEntityTypes.GOLDFISH.get(),
-            listOf(
-                HABiomeTags.CHERRY),
-            3, 1, 2)
-
-        addRiverFish(
             HAEntityTypes.CARP.get(),
             listOf(
                 HABiomeTags.RIVERS),

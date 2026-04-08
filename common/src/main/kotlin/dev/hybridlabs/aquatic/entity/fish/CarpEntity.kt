@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.CarpBreedGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.feature.CarpPatternTextureFeature
 import dev.hybridlabs.aquatic.tag.HABiomeTags
@@ -42,8 +42,17 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
+        goalSelector.addGoal(1, CarpBreedGoal(this, 1.1))
         goalSelector.addGoal(2, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
+    }
+
+    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
+
+        return if (variant == Type.KOI || variant == Type.SMALL_KOI) {
+            false
+        } else {
+            super.removeWhenFarAway(distanceSquared)
+        }
     }
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
@@ -74,7 +83,15 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         this.variant = selectedType
 
         patternTexture = when (selectedType) {
-            Type.PRUSSIAN, Type.COMMON -> PatternTextures.NONE
+            Type.PRUSSIAN,
+            Type.COMMON,
+            Type.TELESCOPE,
+            Type.BUBBLE_EYE,
+            Type.FANTAIL,
+            Type.ORANDA,
+            Type.RYUKIN,
+            Type.RANCHU,
+                 -> PatternTextures.NONE
             Type.KOI, Type.SMALL_KOI -> {
                 val patternID = world.random.nextIntBetweenInclusive(
                     0, PatternTextures.entries.size - 1
@@ -95,7 +112,8 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         this.finalizeSpawnChildFromBreeding(level, mate)
 
         if (baby is CarpEntity) {
-            baby.variant = if (level.random.nextBoolean()) Type.KOI else Type.SMALL_KOI
+            val parentType = this.variant
+            baby.variant = getChildVariant(level.random, parentType)
 
             val patternID = level.random.nextIntBetweenInclusive(
                 0, PatternTextures.entries.size - 1
@@ -104,6 +122,53 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         }
 
         level.addFreshEntityWithPassengers(baby)
+    }
+
+    private fun getChildVariant(random: RandomSource, parent: Type): Type {
+        val roll = random.nextDouble()
+
+        val goldfishTypes = listOf(
+            Type.FANTAIL,
+            Type.RANCHU,
+            Type.ORANDA,
+            Type.RYUKIN,
+            Type.TELESCOPE,
+            Type.BUBBLE_EYE
+        )
+
+        return when (parent) {
+            Type.COMMON -> {
+                if (roll < 0.75) Type.KOI else Type.SMALL_KOI
+            }
+
+            Type.PRUSSIAN -> {
+                if (roll < 0.75) Type.SMALL_KOI else Type.KOI
+            }
+
+            Type.KOI -> {
+                when {
+                    roll < 0.60 -> Type.KOI
+                    roll < 0.90 -> Type.SMALL_KOI
+                    else -> goldfishTypes[random.nextInt(goldfishTypes.size)]
+                }
+            }
+
+            Type.SMALL_KOI -> {
+                when {
+                    roll < 0.60 -> Type.SMALL_KOI
+                    else -> goldfishTypes[random.nextInt(goldfishTypes.size)]
+                }
+            }
+
+            Type.FANTAIL,
+            Type.RANCHU,
+            Type.ORANDA,
+            Type.RYUKIN,
+            Type.TELESCOPE,
+            Type.BUBBLE_EYE -> {
+                goldfishTypes[random.nextInt(goldfishTypes.size)]
+            }
+        }
     }
 
     companion object {
@@ -133,7 +198,13 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             COMMON(0, "common"),
             PRUSSIAN(1, "prussian"),
             KOI(2, "koi"),
-            SMALL_KOI(3, "small_koi");
+            SMALL_KOI(3, "small_koi"),
+            FANTAIL(4, "fantail"),
+            RANCHU(5, "ranchu"),
+            ORANDA(6, "oranda"),
+            RYUKIN(7, "ryukin"),
+            TELESCOPE(8, "telescope"),
+            BUBBLE_EYE(9, "bubble_eye_goldfish");
 
             override fun getSerializedName(): String {
                 return this.key

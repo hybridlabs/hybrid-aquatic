@@ -257,7 +257,6 @@ object HAItemGroups {
                 entries.accept(HAItems.OSCAR.get())
                 entries.accept(HAItems.GOURAMI.get())
                 entries.accept(HAItems.PIRANHA.get())
-                entries.accept(HAItems.GOLDFISH.get())
                 entries.accept(HAItems.CARP.get())
                 entries.accept(HAItems.TROUT.get())
                 entries.accept(HAItems.SUNFISH.get())
