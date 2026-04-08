@@ -48,7 +48,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
 
-        return if (variant == Type.KOI || variant == Type.SMALL_KOI) {
+        return if (variant != Type.COMMON || variant != Type.PRUSSIAN) {
             false
         } else {
             super.removeWhenFarAway(distanceSquared)
@@ -91,6 +91,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             Type.ORANDA,
             Type.RYUKIN,
             Type.RANCHU,
+            Type.COMMON_GOLDFISH,
                  -> PatternTextures.NONE
             Type.KOI, Type.SMALL_KOI -> {
                 val patternID = world.random.nextIntBetweenInclusive(
@@ -133,7 +134,8 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             Type.ORANDA,
             Type.RYUKIN,
             Type.TELESCOPE,
-            Type.BUBBLE_EYE
+            Type.BUBBLE_EYE,
+            Type.COMMON_GOLDFISH
         )
 
         return when (parent) {
@@ -160,6 +162,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
                 }
             }
 
+            Type.COMMON_GOLDFISH,
             Type.FANTAIL,
             Type.RANCHU,
             Type.ORANDA,
@@ -204,7 +207,8 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             ORANDA(6, "oranda"),
             RYUKIN(7, "ryukin"),
             TELESCOPE(8, "telescope"),
-            BUBBLE_EYE(9, "bubble_eye_goldfish");
+            BUBBLE_EYE(9, "bubble_eye_goldfish"),
+            COMMON_GOLDFISH(10, "common_goldfish");
 
             override fun getSerializedName(): String {
                 return this.key

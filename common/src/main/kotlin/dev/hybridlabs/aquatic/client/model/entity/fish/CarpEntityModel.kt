@@ -11,11 +11,13 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
     private val COMMON_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/carp.png")
     private val PRUSSIAN_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/prussian_carp.png")
     private val GOLDFISH_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/goldfish.png")
+    private val COMMON_GOLDFISH_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/common_goldfish.png")
 
     private val BABY_CARP_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/baby_carp.geo.json")
     private val COMMON_CARP_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/carp.geo.json")
     private val PRUSSIAN_CARP_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/prussian_carp.geo.json")
     private val GOLDFISH_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/goldfish.geo.json")
+    private val COMMON_GOLDFISH_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/carp/common_goldfish.geo.json")
 
     private val CARP_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/carp/carp.animation.json")
     private val GOLDFISH_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/carp/goldfish.animation.json")
@@ -51,6 +53,7 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
         return when (animatable.variant) {
             CarpEntity.Companion.Type.COMMON -> COMMON_TEXTURE
             CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_TEXTURE
+            CarpEntity.Companion.Type.COMMON_GOLDFISH -> COMMON_GOLDFISH_TEXTURE
             CarpEntity.Companion.Type.KOI -> koiTextures[random.nextInt(koiTextures.size)]
             CarpEntity.Companion.Type.SMALL_KOI -> smallKoiTextures[random.nextInt(smallKoiTextures.size)]
             else -> GOLDFISH_TEXTURE
@@ -67,6 +70,7 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             CarpEntity.Companion.Type.SMALL_KOI -> PRUSSIAN_CARP_MODEL
             CarpEntity.Companion.Type.KOI -> COMMON_CARP_MODEL
             CarpEntity.Companion.Type.COMMON -> COMMON_CARP_MODEL
+            CarpEntity.Companion.Type.COMMON_GOLDFISH -> COMMON_GOLDFISH_MODEL
             else -> GOLDFISH_MODEL
         }
     }
@@ -76,6 +80,7 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             CarpEntity.Companion.Type.SMALL_KOI -> CARP_ANIMATION
             CarpEntity.Companion.Type.KOI -> CARP_ANIMATION
             CarpEntity.Companion.Type.COMMON -> CARP_ANIMATION
+            CarpEntity.Companion.Type.COMMON_GOLDFISH -> CARP_ANIMATION
             else -> GOLDFISH_ANIMATION
         }
     }
