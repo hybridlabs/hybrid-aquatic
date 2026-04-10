@@ -6,14 +6,16 @@ import kotlin.random.Random
 
 class CuttlefishEntityModel : HACephalopodEntityModel<CuttlefishEntity>("cuttlefish") {
 
-    private val commonTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_4.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_6.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_5.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_1.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_2.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_3.png")
-    )
+    companion object {
+        private val commonTextures = listOf(
+            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_4.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_6.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_5.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_1.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_2.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_3.png")
+        )
+    }
 
     override fun getTextureResource(animatable: CuttlefishEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits

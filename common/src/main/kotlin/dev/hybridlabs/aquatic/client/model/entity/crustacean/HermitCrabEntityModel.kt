@@ -7,15 +7,25 @@ import net.minecraft.world.item.Items
 
 class HermitCrabEntityModel : HACrustaceanEntityModel<HermitCrabEntity>("hermit_crab") {
 
-    private val SHELL_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_shell.png")
-    private val OMINOUS_CONCH_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_ominous_conch.png")
-    private val BLOCK_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_block.png")
-    private val NONE_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab.png")
+    companion object {
+        private val SHELL_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_shell.png")
+        private val OMINOUS_CONCH_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_ominous_conch.png")
+        private val BLOCK_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_block.png")
+        private val NONE_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab.png")
 
-    private val SHELL_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_shell.geo.json")
-    private val OMINOUS_CONCH_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_ominous_conch.geo.json")
-    private val BLOCK_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_block.geo.json")
-    private val NONE_MODEL = ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab.geo.json")
+        private val SHELL_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_shell.geo.json")
+        private val OMINOUS_CONCH_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_ominous_conch.geo.json")
+        private val BLOCK_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab_block.geo.json")
+        private val NONE_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/crustacean/hermit_crab/hermit_crab.geo.json")
+    }
 
     override fun getTextureResource(animatable: HermitCrabEntity): ResourceLocation {
         return if (animatable.shellItem.`is`(Items.NAUTILUS_SHELL)) SHELL_TEXTURE

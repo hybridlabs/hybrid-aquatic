@@ -5,12 +5,6 @@ import net.minecraft.resources.ResourceLocation
 
 class TunaEntityModel : HAFishEntityModel<TunaEntity>("tuna") {
 
-    private val YELLOWFIN_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/tuna/tuna_yellowfin.png")
-    private val BLUEFIN_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/tuna/tuna_bluefin.png")
-
-    private val YELLOWFIN_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/tuna/tuna_yellowfin.geo.json")
-    private val BLUEFIN_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/tuna/tuna_bluefin.geo.json")
-
     override fun getTextureResource(animatable: TunaEntity): ResourceLocation {
         return when (animatable.variant) {
             TunaEntity.Companion.Type.YELLOWFIN -> YELLOWFIN_TEXTURE
@@ -23,5 +17,17 @@ class TunaEntityModel : HAFishEntityModel<TunaEntity>("tuna") {
             TunaEntity.Companion.Type.YELLOWFIN -> YELLOWFIN_MODEL
             TunaEntity.Companion.Type.BLUEFIN -> BLUEFIN_MODEL
         }
+    }
+
+    companion object {
+        private val YELLOWFIN_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/tuna/tuna_yellowfin.png")
+        private val BLUEFIN_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/tuna/tuna_bluefin.png")
+
+        private val YELLOWFIN_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/fish/tuna/tuna_yellowfin.geo.json")
+        private val BLUEFIN_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/fish/tuna/tuna_bluefin.geo.json")
     }
 }

@@ -6,27 +6,38 @@ import kotlin.random.Random
 
 class StarfishEntityModel : HACritterEntityModel<StarfishEntity>("starfish") {
 
-    private val brittlestarTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_black.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_white.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_yellow.png"),
-    )
+    companion object {
+        private val brittlestarTextures = listOf(
+            ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_black.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_white.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_brittlestar_yellow.png"),
+        )
 
-    private val mediumTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed.png")
-    )
-    private val SMALL_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_small.png")
+        private val mediumTextures = listOf(
+            ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_medium_knobbed.png")
+        )
 
-    private val CROWN_OF_THORNS_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_crown_of_thorns.png")
+        private val SMALL_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_small.png")
 
-    private val STARFISH_MODEL = ResourceLocation("hybrid-aquatic", "geo/critter/starfish/starfish.geo.json")
-    private val BRITTLESTAR_MODEL = ResourceLocation("hybrid-aquatic", "geo/critter/starfish/starfish_brittlestar.geo.json")
-    private val CROWN_OF_THORNS_MODEL = ResourceLocation("hybrid-aquatic", "geo/critter/starfish/starfish_crown_of_thorns.geo.json")
+        private val CROWN_OF_THORNS_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/critter/starfish/starfish_crown_of_thorns.png")
 
-    private val STARFISH_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/critter/starfish/starfish.animation.json")
-    private val BRITTLESTAR_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/critter/starfish/starfish_brittlestar.animation.json")
-    private val CROWN_OF_THORNS_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/critter/starfish/starfish_crown_of_thorns.animation.json")
+        private val STARFISH_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/critter/starfish/starfish.geo.json")
+        private val BRITTLESTAR_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/critter/starfish/starfish_brittlestar.geo.json")
+        private val CROWN_OF_THORNS_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/critter/starfish/starfish_crown_of_thorns.geo.json")
+
+        private val STARFISH_ANIMATION =
+            ResourceLocation("hybrid-aquatic", "animations/entity/critter/starfish/starfish.animation.json")
+        private val BRITTLESTAR_ANIMATION =
+            ResourceLocation("hybrid-aquatic", "animations/entity/critter/starfish/starfish_brittlestar.animation.json")
+        private val CROWN_OF_THORNS_ANIMATION =
+            ResourceLocation("hybrid-aquatic", "animations/entity/critter/starfish/starfish_crown_of_thorns.animation.json")
+    }
 
     override fun getTextureResource(animatable: StarfishEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits

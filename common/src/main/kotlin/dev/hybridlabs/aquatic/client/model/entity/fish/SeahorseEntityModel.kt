@@ -8,11 +8,6 @@ import software.bernie.geckolib.core.animation.AnimationState
 
 class SeahorseEntityModel : HAFishEntityModel<SeahorseEntity>("seahorse") {
 
-    private val COMMON_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_common.png")
-    private val PYGMY_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_pygmy.png")
-    private val THORNY_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_thorny.png")
-    private val BIG_BELLY_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_big_belly.png")
-
     override fun getTextureResource(animatable: SeahorseEntity): ResourceLocation {
         return when (animatable.variant) {
             SeahorseEntity.Companion.Type.COMMON -> COMMON_TEXTURE
@@ -35,5 +30,16 @@ class SeahorseEntityModel : HAFishEntityModel<SeahorseEntity>("seahorse") {
             head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
             head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
         }
+    }
+
+    companion object {
+        private val COMMON_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_common.png")
+        private val PYGMY_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_pygmy.png")
+        private val THORNY_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_thorny.png")
+        private val BIG_BELLY_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_big_belly.png")
     }
 }

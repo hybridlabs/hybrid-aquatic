@@ -12,18 +12,6 @@ class SeadragonEntityModel : HAFishEntityModel<SeadragonEntity>("seadragon") {
         return RenderType.entityTranslucent(texture)
     }
 
-    private val LEAFY_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/seadragon/leafy_seadragon.png")
-    private val WEEDY_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/seadragon/weedy_seadragon.png")
-    private val RUBY_TEXTURE = ResourceLocation("hybrid-aquatic", "textures/entity/fish/seadragon/ruby_seadragon.png")
-
-    private val LEAFY_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/seadragon/leafy_seadragon.geo.json")
-    private val WEEDY_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/seadragon/weedy_seadragon.geo.json")
-    private val RUBY_MODEL = ResourceLocation("hybrid-aquatic", "geo/fish/seadragon/ruby_seadragon.geo.json")
-
-    private val LEAFY_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_leafy.animation.json")
-    private val WEEDY_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_weedy.animation.json")
-    private val RUBY_ANIMATION = ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_ruby.animation.json")
-
     override fun getTextureResource(animatable: SeadragonEntity): ResourceLocation {
         return when (animatable.variant) {
             SeadragonEntity.Companion.Type.LEAFY -> LEAFY_TEXTURE
@@ -61,5 +49,28 @@ class SeadragonEntityModel : HAFishEntityModel<SeadragonEntity>("seadragon") {
             head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
             head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
         }
+    }
+
+    companion object {
+        private val LEAFY_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seadragon/leafy_seadragon.png")
+        private val WEEDY_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seadragon/weedy_seadragon.png")
+        private val RUBY_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seadragon/ruby_seadragon.png")
+
+        private val LEAFY_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/fish/seadragon/leafy_seadragon.geo.json")
+        private val WEEDY_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/fish/seadragon/weedy_seadragon.geo.json")
+        private val RUBY_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/fish/seadragon/ruby_seadragon.geo.json")
+
+        private val LEAFY_ANIMATION =
+            ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_leafy.animation.json")
+        private val WEEDY_ANIMATION =
+            ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_weedy.animation.json")
+        private val RUBY_ANIMATION =
+            ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_ruby.animation.json")
     }
 }

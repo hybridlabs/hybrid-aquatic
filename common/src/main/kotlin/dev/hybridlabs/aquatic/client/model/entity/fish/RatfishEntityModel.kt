@@ -10,15 +10,18 @@ class RatfishEntityModel : HAFishEntityModel<RatfishEntity>("ratfish") {
         return RenderType.entityTranslucent(texture)
     }
 
-    private val commonTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_brown.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_silver.png"),
-        )
 
     override fun getTextureResource(animatable: RatfishEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return commonTextures[random.nextInt(commonTextures.size)]
+    }
+
+    companion object {
+        private val commonTextures = listOf(
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_brown.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_silver.png"),
+        )
     }
 }
 
