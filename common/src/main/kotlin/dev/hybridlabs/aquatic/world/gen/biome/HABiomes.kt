@@ -780,7 +780,7 @@ object HABiomes {
 
         //#region Surface Rule Generation
         SurfaceGeneration.addOverworldSurfaceRules(
-            ResourceLocation("minecraft", "rules/overworld"),
+            ResourceLocation("hybrid-aquatic", "rules/overworld"),
             ifTrue(
                 abovePreliminarySurface(),
                 sequence(

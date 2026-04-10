@@ -223,15 +223,15 @@ class BiomeProvider(
                 )
             ) {
                 addFeature(
-                    GenerationStep.Decoration.UNDERGROUND_ORES,
+                    GenerationStep.Decoration.SURFACE_STRUCTURES,
                     entries.ref(HAPlacedFeatures.MOUND)
                 )
                 addFeature(
-                    GenerationStep.Decoration.UNDERGROUND_ORES,
+                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                     entries.ref(HAPlacedFeatures.SAND_CIRCLE)
                 )
                 addFeature(
-                    GenerationStep.Decoration.UNDERGROUND_ORES,
+                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                     entries.ref(HAPlacedFeatures.AERATED_SAND_CIRCLE)
                 )
                 addFeature(

@@ -48,11 +48,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HABiomes.TROPICAL_RIVER)
 
         getOrCreateTagBuilder(BiomeTags.IS_DEEP_OCEAN)
-            .addOptional(HABiomes.TRENCH)
-            .addOptional(HABiomes.LUKEWARM_TRENCH)
-            .addOptional(HABiomes.WARM_TRENCH)
-            .addOptional(HABiomes.COLD_TRENCH)
-            .addOptional(HABiomes.FROZEN_TRENCH)
             .addOptional(HABiomes.TROPICAL_DEEP_CORAL_REEF)
             .addOptional(HABiomes.DEEP_CORAL_REEF)
             .addOptional(HABiomes.DEEP_WARM_OCEAN)

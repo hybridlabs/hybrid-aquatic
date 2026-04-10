@@ -42,7 +42,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    BiomeTags.IS_DEEP_OCEAN,
+                    HABiomeTags.ALL_TRENCHES,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.GLASS_SPONGE_PATCH
                 ),
@@ -50,7 +50,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    BiomeTags.IS_DEEP_OCEAN,
+                    HABiomeTags.ALL_TRENCHES,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.HARP_SPONGE_PATCH
                 ),
@@ -262,7 +262,7 @@ data class BiomeFeatureAddition(
             add(
                 BiomeFeatureAddition(
                     BiomeTags.IS_DEEP_OCEAN,
-                    GenerationStep.Decoration.UNDERGROUND_ORES,
+                    GenerationStep.Decoration.SURFACE_STRUCTURES,
                     HAPlacedFeatures.MOUND
                 ),
             )

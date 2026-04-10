@@ -26,7 +26,9 @@
       "minecraft:monster_room",
       "minecraft:monster_room_deep"
     ],
-    [],
+    [
+      "hybrid-aquatic:mound"
+    ],
     [],
     [
       "minecraft:ore_dirt",
@@ -56,10 +58,7 @@
       "minecraft:underwater_magma",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:disk_gravel",
-      "hybrid-aquatic:mound",
-      "hybrid-aquatic:sand_circle",
-      "hybrid-aquatic:aerated_sand_circle"
+      "minecraft:disk_gravel"
     ],
     [],
     [
@@ -72,7 +71,9 @@
       "minecraft:sea_pickle"
     ],
     [
-      "minecraft:freeze_top_layer"
+      "minecraft:freeze_top_layer",
+      "hybrid-aquatic:sand_circle",
+      "hybrid-aquatic:aerated_sand_circle"
     ]
   ],
   "has_precipitation": true,

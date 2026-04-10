@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#minecraft:is_deep_ocean",
-  "features": "hybrid-aquatic:mound",
+  "features": "hybrid-aquatic:whale_fall",
   "step": "surface_structures"
 }
