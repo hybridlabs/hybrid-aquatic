@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.FlashlightFishEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.client.renderer.RenderType
@@ -14,28 +13,42 @@ class FlashlightFishEntityModel : HAFishEntityModel<FlashlightFishEntity>("flash
         return RenderType.entityTranslucent(texture)
     }
 
+    companion object {
+        private val ONE_FISH_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/fish/flashlight_fish_/flashlight_fish_.geo.json")
+        private val TWO_FISH_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/fish/flashlight_fish_/flashlight_fish__two.geo.json")
+        private val THREE_FISH_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/fish/flashlight_fish_/flashlight_fish__three.geo.json")
+
+        private val ONE_FISH_ANIMATION =
+            ResourceLocation("hybrid-aquatic", "animations/entity/fish/flashlight_fish_/flashlight_fish_.animation.json")
+        private val TWO_FISH_ANIMATION =
+            ResourceLocation("hybrid-aquatic", "animations/entity/fish/flashlight_fish_/flashlight_fish__two.animation.json")
+        private val THREE_FISH_ANIMATION =
+            ResourceLocation("hybrid-aquatic", "animations/entity/fish/flashlight_fish_/flashlight_fish__three.animation.json")
+    }
+
     override fun getModelResource(animatable: FlashlightFishEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val modelPath = when (fish) {
-            1 -> "geo/fish/flashlight_fish/flashlight_fish.geo.json"
-            2 -> "geo/fish/flashlight_fish/flashlight_fish_two.geo.json"
-            3 -> "geo/fish/flashlight_fish/flashlight_fish_three.geo.json"
-            else -> "geo/fish/flashlight_fish/flashlight_fish.geo.json"
+        return when (fish) {
+            1 -> ONE_FISH_MODEL
+            2 -> TWO_FISH_MODEL
+            3 -> THREE_FISH_MODEL
+            else -> ONE_FISH_MODEL
         }
-        return CommonClass.locate(modelPath)
     }
 
     override fun getAnimationResource(animatable: FlashlightFishEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val animationPath = when (fish) {
-            1 -> "animations/entity/fish/flashlight_fish/flashlight_fish.animation.json"
-            2 -> "animations/entity/fish/flashlight_fish/flashlight_fish_two.animation.json"
-            3 -> "animations/entity/fish/flashlight_fish/flashlight_fish_three.animation.json"
-            else -> "animations/entity/fish/flashlight_fish/flashlight_fish.animation.json"
+        return when (fish) {
+            1 -> ONE_FISH_ANIMATION
+            2 -> TWO_FISH_ANIMATION
+            3 -> THREE_FISH_ANIMATION
+            else -> ONE_FISH_ANIMATION
         }
-        return CommonClass.locate(animationPath)
     }
 
     override fun setCustomAnimations(
