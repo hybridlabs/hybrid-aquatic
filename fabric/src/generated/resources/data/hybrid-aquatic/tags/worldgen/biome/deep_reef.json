@@ -8,6 +8,10 @@
     {
       "id": "hybrid-aquatic:tropical_deep_coral_reef",
       "required": false
+    },
+    {
+      "id": "spawn:deep_warm_ocean",
+      "required": false
     }
   ]
 }
