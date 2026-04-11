@@ -324,21 +324,20 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     }
 
     private fun summonHypnautilus() {
-        val random = this.random
-        val count = 3
+        val count = 6
+        val distance = 4.0
 
         for (i in 0 until count) {
-            val offsetX = (random.nextDouble() - 0.5) * 6.0
-            val offsetZ = (random.nextDouble() - 0.5) * 6.0
-            val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
+
+            val spawnPos = this.position().add(this.getUpVector(0f).zRot(i.toFloat() ).scale(distance))
 
             val hypnautilus = HAEntityTypes.HYPNAUTILUS.get().create(level())
             if (hypnautilus != null) {
                 hypnautilus.moveTo(
-                    spawnPos.x.toDouble() + 0.5,
-                    spawnPos.y.toDouble(),
-                    spawnPos.z.toDouble() + 0.5,
-                    random.nextFloat() * 360f,
+                    spawnPos.x,
+                    spawnPos.y,
+                    spawnPos.z,
+                    0f,
                     0f
                 )
                 hypnautilus.setOwner(this)
