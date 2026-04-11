@@ -6,12 +6,14 @@ import kotlin.random.Random
 
 class GhostCrabEntityModel : HACrustaceanEntityModel<GhostCrabEntity>("ghost_crab") {
 
-    private val commonTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_white.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_yellow.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_purple.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_red.png")
-    )
+    companion object {
+        private val commonTextures = listOf(
+            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_white.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_yellow.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_purple.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_red.png")
+        )
+    }
 
     override fun getTextureResource(animatable: GhostCrabEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits

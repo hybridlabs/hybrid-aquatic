@@ -6,11 +6,13 @@ import kotlin.random.Random
 
 class FiddlerCrabEntityModel : HACrustaceanEntityModel<FiddlerCrabEntity>("fiddler_crab") {
 
-    private val commonTextures = listOf(
-        ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_blue.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_purple.png"),
-        ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_red.png")
-    )
+    companion object {
+        private val commonTextures = listOf(
+            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_blue.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_purple.png"),
+            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_red.png")
+        )
+    }
 
     override fun getTextureResource(animatable: FiddlerCrabEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits
