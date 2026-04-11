@@ -82,10 +82,13 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
 
     fun calcBeastOffset(): Vec3 {
         val owner = this.getOwner() ?: return Vec3.ZERO
-        val upVector = owner.getUpVector((0f))
+        val upVector = Vec3(0.0, 1.0, 0.0)
+        val angle = Mth.PI / 3.0F * beastPosition + Mth.PI / 6F
+
         return owner.position().add(
             upVector
-                .zRot(this.beastPosition * Mth.PI / 3.0f + Mth.PI / 6.0F)
+                .zRot(angle)
+                .yRot((180 - owner.yRot) * Mth.DEG_TO_RAD)
                 .scale(beastDistance)
         )
     }
