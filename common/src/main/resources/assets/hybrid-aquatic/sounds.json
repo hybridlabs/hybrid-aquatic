@@ -94,6 +94,12 @@
     ]
   },
 
+  "entity.shell_beast.shoot": {
+    "subtitle": "sounds.hybrid-aquatic.entity.shell_beast.shoot",
+    "sounds": [
+      "hybrid-aquatic:shell_beast_shoot"
+    ]
+  },
   "entity.shell_beast.ambient": {
     "subtitle": "sounds.hybrid-aquatic.entity.shell_beast.ambient",
     "sounds": [

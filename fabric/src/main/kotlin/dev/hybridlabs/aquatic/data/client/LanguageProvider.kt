@@ -177,6 +177,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "sounds.hybrid-aquatic.entity.karcinogen.hurt" to "Karcinogen hurts",
             "sounds.hybrid-aquatic.entity.karcinogen.die" to "Karcinogen dies",
 
+            "sounds.hybrid-aquatic.entity.shell_beast.shoot" to "Shell Beast fires",
             "sounds.hybrid-aquatic.entity.shell_beast.ambient" to "Shell Beast chitters",
             "sounds.hybrid-aquatic.entity.shell_beast.hurt" to "Shell Beast hurts",
             "sounds.hybrid-aquatic.entity.shell_beast.die" to "Shell Beast dies",
