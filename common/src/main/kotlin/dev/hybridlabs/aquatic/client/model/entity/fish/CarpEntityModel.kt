@@ -19,6 +19,7 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             CarpEntity.Companion.Type.COMMON -> COMMON_TEXTURE
             CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_TEXTURE
             CarpEntity.Companion.Type.COMMON_GOLDFISH -> COMMON_GOLDFISH_TEXTURE
+            CarpEntity.Companion.Type.TELESCOPE -> TELESCOPE_GOLDFISH_TEXTURE
             CarpEntity.Companion.Type.KOI -> koiTextures[random.nextInt(koiTextures.size)]
             CarpEntity.Companion.Type.SMALL_KOI -> smallKoiTextures[random.nextInt(smallKoiTextures.size)]
             else -> GOLDFISH_TEXTURE
@@ -36,6 +37,7 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             CarpEntity.Companion.Type.KOI -> COMMON_CARP_MODEL
             CarpEntity.Companion.Type.COMMON -> COMMON_CARP_MODEL
             CarpEntity.Companion.Type.COMMON_GOLDFISH -> COMMON_GOLDFISH_MODEL
+            CarpEntity.Companion.Type.TELESCOPE -> TELESCOPE_GOLDFISH_MODEL
             else -> GOLDFISH_MODEL
         }
     }
@@ -69,6 +71,8 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/goldfish.png")
         private val COMMON_GOLDFISH_TEXTURE =
             ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/common_goldfish.png")
+        private val TELESCOPE_GOLDFISH_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/telescope_goldfish.png")
 
         private val BABY_CARP_MODEL =
             ResourceLocation("hybrid-aquatic", "geo/fish/carp/baby_carp.geo.json")
@@ -80,6 +84,8 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             ResourceLocation("hybrid-aquatic", "geo/fish/carp/goldfish.geo.json")
         private val COMMON_GOLDFISH_MODEL =
             ResourceLocation("hybrid-aquatic", "geo/fish/carp/common_goldfish.geo.json")
+        private val TELESCOPE_GOLDFISH_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/fish/carp/telescope_goldfish.geo.json")
 
         private val CARP_ANIMATION =
             ResourceLocation("hybrid-aquatic", "animations/entity/fish/carp/carp.animation.json")
