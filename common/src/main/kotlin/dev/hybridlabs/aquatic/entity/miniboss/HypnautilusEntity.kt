@@ -119,6 +119,10 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
                 return true
             }
 
+            override fun requiresUpdateEveryTick(): Boolean {
+                return true
+            }
+
             override fun tick() {
                 hypnautilus.moveTo(hypnautilus.calcBeastOffset())
             }
