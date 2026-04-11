@@ -411,13 +411,8 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 chargeTime++
 
                 if (chargeTime == 20 && !shellBeast.isSilent) {
-                    level.playSound(
-                        null,
-                        shellBeast.x,
-                        shellBeast.y,
-                        shellBeast.z,
+                    shellBeast.playSound(
                         HASoundEvents.SHELL_BEAST_SHOOT.get(),
-                        shellBeast.soundSource,
                         1.0f,
                         1.0f
                     )
