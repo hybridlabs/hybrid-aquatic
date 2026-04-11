@@ -97,19 +97,19 @@
   "entity.shell_beast.ambient": {
     "subtitle": "sounds.hybrid-aquatic.entity.shell_beast.ambient",
     "sounds": [
-      "minecraft:egg_crack"
+      "hybrid-aquatic:shell_beast_ambient"
     ]
   },
   "entity.shell_beast.hurt": {
     "subtitle": "sounds.hybrid-aquatic.entity.shell_beast.hurt",
     "sounds": [
-      "minecraft:egg_crack"
+      "hybrid-aquatic:shell_beast_hurt"
     ]
   },
   "entity.shell_beast.die": {
     "subtitle": "sounds.hybrid-aquatic.entity.shell_beast.die",
     "sounds": [
-      "minecraft:egg_crack"
+      "hybrid-aquatic:shell_beast_die"
     ]
   },
 
