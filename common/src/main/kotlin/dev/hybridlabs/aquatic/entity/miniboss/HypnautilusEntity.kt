@@ -80,10 +80,12 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
         }
     }
 
-    fun calcBeastOffset(): Vec3 {
+    fun calcBeastRelativePos(): Vec3 {
         val owner = this.getOwner() ?: return Vec3.ZERO
         val upVector = Vec3(0.0, 1.0, 0.0)
-        val angle = Mth.PI / 3.0F * beastPosition + Mth.PI / 6F
+        val timeRot: Float = if (this.server!=null)  (server!!.tickCount % 100 / 100F * Mth.TWO_PI) else 0F
+
+        val angle = Mth.PI / 3.0F * beastPosition + Mth.PI / 6F + timeRot
 
         return owner.position().add(
             upVector
@@ -124,7 +126,7 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
             }
 
             override fun tick() {
-                hypnautilus.moveTo(hypnautilus.calcBeastOffset())
+                hypnautilus.moveTo(hypnautilus.calcBeastRelativePos())
             }
         }
     }

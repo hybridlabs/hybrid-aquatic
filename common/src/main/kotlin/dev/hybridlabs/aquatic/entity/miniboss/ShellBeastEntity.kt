@@ -319,7 +319,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
             if (hypnautilus != null) {
                 hypnautilus.setOwner(this)
                 hypnautilus.beastPosition = i
-                val spawnPos = hypnautilus.calcBeastOffset()
+                val spawnPos = hypnautilus.calcBeastRelativePos()
                 hypnautilus.moveTo(
                     spawnPos.x,
                     spawnPos.y,
