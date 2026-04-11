@@ -38,7 +38,6 @@ import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
 import java.util.function.Predicate
 import kotlin.math.abs
@@ -241,32 +240,19 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Shell Beast Controller", 4) { state ->
+            AnimationController(this, "Shell Beast Controller", 8) { state ->
                 when {
                     isInWater -> {
                         state.setAndContinue(DefaultAnimations.SWIM)
                     }
 
+                    isCharging() -> {
+                        state.setAndContinue(DefaultAnimations.ATTACK_SHOOT)
+                    }
+
                     else -> {
                         state.setAndContinue(DefaultAnimations.IDLE)
                     }
-                }
-            }
-        )
-
-        controllers.add(
-            DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE)
-        )
-
-        controllers.add(
-            AnimationController(this, "Shell Beast Projectile Attack", 8) { state ->
-
-                when {
-                    isCharging() -> {
-                        state.setAndContinue(DefaultAnimations.ATTACK_SHOOT.thenPlay("misc.idle"))
-                    }
-
-                    else -> PlayState.STOP
                 }
             }
         )
@@ -293,7 +279,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         shellBeast: Mob,
         target: Class<T>,
         mustSee: Boolean,
-        predicate: Predicate<LivingEntity>
+        predicate: Predicate<LivingEntity>,
     ) :
         NearestAttackableTargetGoal<T>(shellBeast, target, mustSee, predicate) {
         override fun getTargetSearchArea(targetDistance: Double): AABB {
