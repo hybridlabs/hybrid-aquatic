@@ -2,15 +2,17 @@ package dev.hybridlabs.aquatic.entity.miniboss
 
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.sounds.SoundEvent
+import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MoverType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
-import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.world.entity.ai.goal.Goal
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec3
@@ -19,8 +21,10 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 
 
-class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
-    HAMinionEntity(type, world) {
+class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HAMinionEntity(type, world) {
+    var beastPosition = 0
+    val beastDistance = 5.0
+
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, true)
@@ -29,8 +33,10 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
     }
 
     override fun registerGoals() {
-        super.registerGoals()
-        goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
+        //super.registerGoals()
+        //goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
+        goalSelector.addGoal(1, HypnautilusSyncedMovementGoal(this))
+        goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 8.0f))
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
@@ -46,10 +52,10 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
                         state.setAndContinue(DefaultAnimations.IDLE)
                     }
                 }
-            }
-        )
+            })
     }
 
+    /*
     override fun travel(travelVector: Vec3) {
         if (this.isEffectiveAi && this.isInWater) {
             this.moveRelative(this.speed, travelVector)
@@ -62,6 +68,8 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
             super.travel(travelVector)
         }
     }
+     */
+
 
     override fun tick() {
         super.tick()
@@ -70,6 +78,16 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
             this.xRot = 0.0f
             this.yRot = 0.0f
         }
+    }
+
+    fun calcBeastOffset(): Vec3 {
+        val owner = this.getOwner() ?: return Vec3.ZERO
+        val upVector = owner.getUpVector((0f))
+        return owner.position().add(
+            upVector
+                .zRot(this.beastPosition * Mth.PI / 3.0f + Mth.PI / 6.0F)
+                .scale(beastDistance)
+        )
     }
 
     //#region SFX
@@ -88,12 +106,19 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
-            return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 1.0)
-                .add(Attributes.ATTACK_DAMAGE, 4.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
+            return createLivingAttributes().add(Attributes.MAX_HEALTH, 6.0).add(Attributes.MOVEMENT_SPEED, 1.0)
+                .add(Attributes.ATTACK_DAMAGE, 4.0).add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 24.0)
+        }
+
+        class HypnautilusSyncedMovementGoal(private val hypnautilus: HypnautilusEntity) : Goal() {
+            override fun canUse(): Boolean {
+                return true
+            }
+
+            override fun tick() {
+                hypnautilus.moveTo(hypnautilus.calcBeastOffset())
+            }
         }
     }
 }
