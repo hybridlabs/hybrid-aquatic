@@ -13,6 +13,7 @@ import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.item.HAItemGroups
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
+import dev.hybridlabs.aquatic.item.instrument.HAInstruments
 import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
@@ -55,6 +56,7 @@ object HybridAquatic : ModInitializer {
         HABlocks
         HAPlatformBlocks
         HASoundEvents
+        HAInstruments
         HAEntityTypes
         HABlockEntityTypes
         HAPaintings

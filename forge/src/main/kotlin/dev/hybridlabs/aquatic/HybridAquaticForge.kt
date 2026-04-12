@@ -12,6 +12,7 @@ import dev.hybridlabs.aquatic.forge.HybridAquaticModBusEvents
 import dev.hybridlabs.aquatic.item.HAItemGroups
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
+import dev.hybridlabs.aquatic.item.instrument.HAInstruments
 import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HANetworking
@@ -42,6 +43,7 @@ object HybridAquaticForge {
         HABlocks
         HAPlatformBlocks
         HASoundEvents
+        HAInstruments
         HAEntityTypes
         HABlockEntityTypes
         HAPaintings
