@@ -88,9 +88,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             Type.TELESCOPE,
             Type.BUBBLE_EYE,
             Type.FANTAIL,
-            Type.ORANDA,
             Type.RYUKIN,
-            Type.RANCHU,
             Type.COMMON_GOLDFISH,
                  -> PatternTextures.NONE
             Type.KOI, Type.SMALL_KOI -> {
@@ -130,8 +128,6 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
 
         val goldfishTypes = listOf(
             Type.FANTAIL,
-            Type.RANCHU,
-            Type.ORANDA,
             Type.RYUKIN,
             Type.TELESCOPE,
             Type.BUBBLE_EYE,
@@ -164,8 +160,6 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
 
             Type.COMMON_GOLDFISH,
             Type.FANTAIL,
-            Type.RANCHU,
-            Type.ORANDA,
             Type.RYUKIN,
             Type.TELESCOPE,
             Type.BUBBLE_EYE -> {
@@ -203,12 +197,10 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             KOI(2, "koi"),
             SMALL_KOI(3, "small_koi"),
             FANTAIL(4, "fantail"),
-            RANCHU(5, "ranchu"),
-            ORANDA(6, "oranda"),
-            RYUKIN(7, "ryukin"),
-            TELESCOPE(8, "telescope"),
-            BUBBLE_EYE(9, "bubble_eye_goldfish"),
-            COMMON_GOLDFISH(10, "common_goldfish");
+            RYUKIN(5, "ryukin"),
+            TELESCOPE(6, "telescope"),
+            BUBBLE_EYE(7, "bubble_eye_goldfish"),
+            COMMON_GOLDFISH(8, "common_goldfish");
 
             override fun getSerializedName(): String {
                 return this.key
