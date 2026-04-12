@@ -97,25 +97,25 @@
   "entity.shell_beast.shoot": {
     "subtitle": "sounds.hybrid-aquatic.entity.shell_beast.shoot",
     "sounds": [
-      "hybrid-aquatic:shell_beast_shoot"
+      "hybrid-aquatic:entity/shell_beast_shoot"
     ]
   },
   "entity.shell_beast.ambient": {
     "subtitle": "sounds.hybrid-aquatic.entity.shell_beast.ambient",
     "sounds": [
-      "hybrid-aquatic:shell_beast_ambient"
+      "hybrid-aquatic:entity/shell_beast_ambient"
     ]
   },
   "entity.shell_beast.hurt": {
     "subtitle": "sounds.hybrid-aquatic.entity.shell_beast.hurt",
     "sounds": [
-      "hybrid-aquatic:shell_beast_hurt"
+      "hybrid-aquatic:entity/shell_beast_hurt"
     ]
   },
   "entity.shell_beast.die": {
     "subtitle": "sounds.hybrid-aquatic.entity.shell_beast.die",
     "sounds": [
-      "hybrid-aquatic:shell_beast_die"
+      "hybrid-aquatic:entity/shell_beast_die"
     ]
   },
 
@@ -140,7 +140,7 @@
   "item.ominous_conch.blows": {
     "subtitle": "sounds.hybrid-aquatic.item.ominous_conch.blows",
     "sounds": [
-      "hybrid-aquatic:ominous_conch_blows_mono"
+      "hybrid-aquatic:item/ominous_conch_blows_mono"
     ]
   }
 }
