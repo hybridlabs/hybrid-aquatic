@@ -8,7 +8,10 @@ import net.minecraft.world.item.Instrument
 object HAInstruments {
     var OMINOUS_CONCH_HORN = create("ominous_conch_horn")
 
+    const val RANGE_BLOCKS: Float = 256.0F
+    const val DURATION: Int = 140
+
     fun create(id: String): RegistryObject<Instrument> {
-        return CommonClass.INSTRUMENTS.register(id ) { Instrument(SoundEvents.NOTE_BLOCK_GUITAR, 140, 256.0F) }
+        return CommonClass.INSTRUMENTS.register(id ) { Instrument(SoundEvents.NOTE_BLOCK_GUITAR, DURATION, RANGE_BLOCKS) }
     }
 }
