@@ -8,17 +8,17 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.item.Instrument
 
 object HAInstruments {
-    var OMINOUS_CONCH_HORN = create("ominous_conch_horn", SoundEvents.GRASS_BREAK)
+    var OMINOUS_CONCH_HORN = createInstrument("ominous_conch_horn", SoundEvents.GRASS_BREAK)
 
-    const val RANGE_BLOCKS: Float = 256.0F
-    const val DURATION: Int = 140
-
-    // Instrument only takes Holder<SoundEvent>
-    fun create(id: String, soundEvent: SoundEvent): RegistryObject<Instrument> {
-        return create(id, Holder.Direct(soundEvent))
+    fun createInstrument(id: String, soundEvent: SoundEvent): RegistryObject<Instrument> {
+        return create(id, Holder.Direct(soundEvent), 140, 256.0f)
     }
 
-    fun create(id: String, soundEventHolder: Holder<SoundEvent>): RegistryObject<Instrument> {
-        return CommonClass.INSTRUMENTS.register(id ) { Instrument(soundEventHolder, DURATION, RANGE_BLOCKS) }
+    fun createInstrument(id: String, soundEventHolder: Holder<SoundEvent>): RegistryObject<Instrument> {
+        return create(id, soundEventHolder, 140, 256.0f)
+    }
+
+    fun create(id: String, soundEventHolder: Holder<SoundEvent>, duration: Int, range: Float): RegistryObject<Instrument> {
+        return CommonClass.INSTRUMENTS.register(id ) { Instrument(soundEventHolder, duration, range) }
     }
 }
