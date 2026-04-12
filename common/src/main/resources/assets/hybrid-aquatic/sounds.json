@@ -140,7 +140,7 @@
   "item.ominous_conch.blows": {
     "subtitle": "sounds.hybrid-aquatic.item.ominous_conch.blows",
     "sounds": [
-      "hybrid-aquatic:ominous_conch_blows"
+      "hybrid-aquatic:ominous_conch_blows_mono"
     ]
   }
 }
