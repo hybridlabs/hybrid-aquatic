@@ -23,6 +23,7 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             CarpEntity.Companion.Type.BUBBLE_EYE -> BUBBLE_EYE_GOLDFISH_TEXTURE
             CarpEntity.Companion.Type.RYUKIN -> RYUKIN_GOLDFISH_TEXTURE
             CarpEntity.Companion.Type.FANTAIL -> FANTAIL_GOLDFISH_TEXTURE
+            CarpEntity.Companion.Type.SHUBUNKIN -> SHUBUNKIN_GOLDFISH_TEXTURE
             CarpEntity.Companion.Type.KOI -> koiTextures[random.nextInt(koiTextures.size)]
             CarpEntity.Companion.Type.SMALL_KOI -> smallKoiTextures[random.nextInt(smallKoiTextures.size)]
         }
@@ -43,6 +44,7 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             CarpEntity.Companion.Type.BUBBLE_EYE -> BUBBLE_EYE_GOLDFISH_MODEL
             CarpEntity.Companion.Type.RYUKIN -> RYUKIN_GOLDFISH_MODEL
             CarpEntity.Companion.Type.FANTAIL -> FANTAIL_GOLDFISH_MODEL
+            CarpEntity.Companion.Type.SHUBUNKIN -> SHUBUNKIN_GOLDFISH_MODEL
         }
     }
 
@@ -60,6 +62,7 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
     fun getPatternTextureResource(animatable: CarpEntity, layer: String): ResourceLocation {
         return when (animatable.variant) {
             CarpEntity.Companion.Type.SMALL_KOI -> CommonClass.locate("textures/entity/fish/carp/layer/small_$layer.png")
+            CarpEntity.Companion.Type.KOI -> CommonClass.locate("textures/entity/fish/carp/layer/$layer.png")
             else -> CommonClass.locate("textures/entity/fish/carp/layer/$layer.png")
         }
     }
@@ -81,6 +84,8 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/ryukin_goldfish.png")
         private val FANTAIL_GOLDFISH_TEXTURE =
             ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/fantail_goldfish.png")
+        private val SHUBUNKIN_GOLDFISH_TEXTURE =
+            ResourceLocation("hybrid-aquatic", "textures/entity/fish/carp/shubunkin_goldfish.png")
 
         private val BABY_CARP_MODEL =
             ResourceLocation("hybrid-aquatic", "geo/fish/carp/baby_carp.geo.json")
@@ -98,6 +103,8 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             ResourceLocation("hybrid-aquatic", "geo/fish/carp/ryukin_goldfish.geo.json")
         private val FANTAIL_GOLDFISH_MODEL =
             ResourceLocation("hybrid-aquatic", "geo/fish/carp/fantail_goldfish.geo.json")
+        private val SHUBUNKIN_GOLDFISH_MODEL =
+            ResourceLocation("hybrid-aquatic", "geo/fish/carp/shubunkin_goldfish.geo.json")
 
         private val CARP_ANIMATION =
             ResourceLocation("hybrid-aquatic", "animations/entity/fish/carp/carp.animation.json")
