@@ -11,10 +11,14 @@ object HAInstruments {
     var OMINOUS_CONCH_HORN = createInstrument("ominous_conch_horn", SoundEvents.GRASS_BREAK)
 
     fun createInstrument(id: String, soundEvent: SoundEvent): RegistryObject<Instrument> {
-        return create(id, Holder.Direct(soundEvent), 140, 256.0f)
+        return createDurationRange(id, Holder.Direct(soundEvent))
     }
 
     fun createInstrument(id: String, soundEventHolder: Holder<SoundEvent>): RegistryObject<Instrument> {
+        return createDurationRange(id, soundEventHolder)
+    }
+
+    fun createDurationRange(id: String, soundEventHolder: Holder<SoundEvent>): RegistryObject<Instrument> {
         return create(id, soundEventHolder, 140, 256.0f)
     }
 
