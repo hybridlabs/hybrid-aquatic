@@ -8,8 +8,8 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.coral.*
 import dev.hybridlabs.aquatic.item.seashell.*
 import dev.hybridlabs.aquatic.platform.Services.*
+import dev.hybridlabs.aquatic.tag.HAInstrumentTags
 import net.minecraft.core.Direction
-import net.minecraft.tags.InstrumentTags
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityType
@@ -240,7 +240,7 @@ object HAItems {
     val DIVING_WEIGHT = register("diving_weight") { DivingWeightItem(Item.Properties()) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
     val OMINOUS_CONCH =
-        register("ominous_conch") { OminousConchItem(Item.Properties().stacksTo(1), InstrumentTags.SCREAMING_GOAT_HORNS) }
+        register("ominous_conch") { OminousConchItem(Item.Properties().stacksTo(1), HAInstrumentTags.OMINOUS_CONCH) }
     val ARGONAUT = register("argonaut") { ArgonautItem(Item.Properties().stacksTo(1)) }
 
     val BARBED_HOOK = register("barbed_hook") { HookItem(Item.Properties().durability(16)) }
