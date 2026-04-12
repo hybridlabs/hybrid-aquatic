@@ -409,14 +409,6 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 val level = shellBeast.level()
                 chargeTime++
 
-                if (chargeTime == 20 && !shellBeast.isSilent) {
-                    shellBeast.playSound(
-                        HASoundEvents.SHELL_BEAST_SHOOT.get(),
-                        1.0f,
-                        1.0f
-                    )
-                }
-
                 if (chargeTime == 20 || chargeTime == 40 || chargeTime == 60) {
                     val view = shellBeast.getViewVector(1.0f)
 
@@ -424,9 +416,11 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                     val dyFire = target.getY(0.5) - (0.5 + shellBeast.getY(0.5))
                     val dzFire = target.z - (shellBeast.z + view.z * 4.0)
 
-                    if (!shellBeast.isSilent) {
-                        level.levelEvent(null, 1016, shellBeast.blockPosition(), 0)
-                    }
+                    shellBeast.playSound(
+                        HASoundEvents.SHELL_BEAST_SHOOT.get(),
+                        1.0f,
+                        1.0f
+                    )
 
                     val cavitationBubble = CavitationBubbleEntity(
                         level,
