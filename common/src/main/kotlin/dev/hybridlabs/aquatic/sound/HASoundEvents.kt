@@ -43,6 +43,8 @@ object HASoundEvents {
     val HYPNAUTILUS_HURT = register("entity.hypnautilus.hurt")
     val HYPNAUTILUS_DIE = register("entity.hypnautilus.die")
 
+    val OMINOUS_CONCH_BLOWS = register("item.ominous_conch.blows")
+
     private fun register(id: String, range: Float = -1.0f): RegistryObject<SoundEvent> {
         val identifier = ResourceLocation(Constants.MOD_ID, id)
         return if (range < 0)

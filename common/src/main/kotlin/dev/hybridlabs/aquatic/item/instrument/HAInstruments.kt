@@ -2,13 +2,13 @@ package dev.hybridlabs.aquatic.item.instrument
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.core.Holder
 import net.minecraft.sounds.SoundEvent
-import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.item.Instrument
 
 object HAInstruments {
-    var OMINOUS_CONCH_HORN = createInstrument("ominous_conch_horn", SoundEvents.GRASS_BREAK)
+    var OMINOUS_CONCH_HORN = createInstrument("ominous_conch_horn", HASoundEvents.OMINOUS_CONCH_BLOWS.get())
 
     fun createInstrument(id: String, soundEvent: SoundEvent): RegistryObject<Instrument> {
         return createDurationRange(id, Holder.Direct(soundEvent))
