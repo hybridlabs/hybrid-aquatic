@@ -327,7 +327,6 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                     0f,
                     0f
                 )
-                hypnautilus.setLimitedLife(600)
                 level().addFreshEntity(hypnautilus)
             }
         }

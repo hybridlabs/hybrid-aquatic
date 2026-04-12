@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
 import dev.hybridlabs.aquatic.sound.HASoundEvents
+import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageSource
@@ -11,9 +12,13 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -34,9 +39,11 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
 
     override fun registerGoals() {
         //super.registerGoals()
-        //goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
+        goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(1, HypnautilusSyncedMovementGoal(this))
-        goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 8.0f))
+        goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 64.0f, 1f))
+        targetSelector.addGoal(1, HurtByTargetGoal(this))
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true, null))
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
@@ -55,21 +62,6 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
             })
     }
 
-    /*
-    override fun travel(travelVector: Vec3) {
-        if (this.isEffectiveAi && this.isInWater) {
-            this.moveRelative(this.speed, travelVector)
-            this.move(MoverType.SELF, this.deltaMovement)
-            this.deltaMovement = deltaMovement.scale(0.9)
-            if (this.target == null) {
-                this.deltaMovement = deltaMovement.add(0.0, -0.005, 0.0)
-            }
-        } else {
-            super.travel(travelVector)
-        }
-    }
-     */
-
 
     override fun tick() {
         super.tick()
@@ -83,9 +75,9 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
     fun calcBeastRelativePos(): Vec3 {
         val owner = this.getOwner() ?: return Vec3.ZERO
         val upVector = Vec3(0.0, 1.0, 0.0)
-        val timeRot: Float = if (this.server!=null)  (server!!.tickCount % 100 / 100F * Mth.TWO_PI) else 0F
+        //val timeRot: Float = if (this.server != null) (server!!.tickCount % 100 / 100F * Mth.TWO_PI) else 0F
 
-        val angle = Mth.PI / 3.0F * beastPosition + Mth.PI / 6F + timeRot
+        val angle = Mth.PI / 3.0F * beastPosition + Mth.PI / 6F //+ timeRot
 
         return owner.position().add(
             upVector
@@ -126,7 +118,9 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
             }
 
             override fun tick() {
-                hypnautilus.moveTo(hypnautilus.calcBeastRelativePos())
+                val target = hypnautilus.calcBeastRelativePos()
+                if (hypnautilus.level().getBlockState(BlockPos.containing(target)).`is`(Blocks.WATER))
+                    hypnautilus.moveTo(hypnautilus.calcBeastRelativePos())
             }
         }
     }
