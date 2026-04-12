@@ -48,7 +48,7 @@ import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.animatable.client.RenderProvider
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 
-@Suppress("UnusedExpression")
+@Suppress("UnusedExpression", "DEPRECATION")
 object HybridAquaticClient : ClientModInitializer {
     override fun onInitializeClient() {
         HAEntityModelLayers
@@ -301,7 +301,10 @@ object HybridAquaticClient : ClientModInitializer {
             HABlockEntityTypes.MESSAGE_IN_A_BOTTLE.get(),
             ::MessageInABottleBlockEntityRenderer
         )
-        BlockEntityRenderers.register(HABlockEntityTypes.BUOY.get(), ::BuoyBlockEntityRenderer)
+        BlockEntityRenderers.register(HABlockEntityTypes.BUOY.get(),
+            ::BuoyBlockEntityRenderer)
+        BlockEntityRenderers.register(HABlockEntityTypes.BELL_BUOY.get(),
+            ::BellBuoyBlockEntityRenderer)
     }
 
     private fun registerEntityRenderers() {

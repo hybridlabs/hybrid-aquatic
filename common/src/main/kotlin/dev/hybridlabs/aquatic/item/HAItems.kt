@@ -545,6 +545,7 @@ object HAItems {
     val CRYSTALLINE_SULFUR = registerBlockItem("crystalline_sulfur") { HABlocks.CRYSTALLINE_SULFUR.get() }
     val DEPTH_CHARGE = registerPlaceableInWaterOrLandBlockItem("depth_charge") { HABlocks.DEPTH_CHARGE.get() }
     val BUOY = registerPlaceableInWaterBlockItem("buoy") { HABlocks.BUOY.get() }
+    val BELL_BUOY = registerPlaceableInWaterBlockItem("bell_buoy") { HABlocks.BELL_BUOY.get() }
     val RAFT = registerPlaceableInWaterBlockItem("raft") { HABlocks.RAFT.get() }
     val OAK_RAFT = registerPlaceableInWaterBlockItem("oak_raft") { HABlocks.OAK_RAFT.get() }
     val SPRUCE_RAFT = registerPlaceableInWaterBlockItem("spruce_raft") { HABlocks.SPRUCE_RAFT.get() }

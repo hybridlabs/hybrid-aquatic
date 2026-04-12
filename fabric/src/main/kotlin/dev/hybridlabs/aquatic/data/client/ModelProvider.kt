@@ -361,6 +361,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         //#region Flat Items
         setOf(
             HAItems.BUOY.get(),
+            HAItems.BELL_BUOY.get(),
             HAPlatformItems.DUNEGRASS.get(),
             HAPlatformItems.TALL_DUNEGRASS.get(),
             HAPlatformItems.CATTAIL.get(),

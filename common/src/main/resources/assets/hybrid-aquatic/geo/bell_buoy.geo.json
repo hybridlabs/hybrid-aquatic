@@ -1,0 +1,40 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.bell_buoy",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 4.5,
+				"visible_bounds_offset": [0, 1.75, 0]
+			},
+			"bones": [
+				{
+					"name": "buoy",
+					"pivot": [0, 8, 0],
+					"cubes": [
+						{"origin": [-1, 15, -1], "size": [2, 9, 2], "uv": [16, 53]},
+						{"origin": [-7, 2, -7], "size": [14, 13, 14], "uv": [0, 0]},
+						{"origin": [-1, 24, -7], "size": [2, 2, 14], "uv": [0, 27]},
+						{"origin": [-1, 39, -7], "size": [2, 2, 14], "uv": [32, 27]},
+						{"origin": [-1, 26, -7], "size": [2, 13, 2], "uv": [0, 53]},
+						{"origin": [-1, 26, 5], "size": [2, 13, 2], "uv": [8, 53]}
+					]
+				},
+				{
+					"name": "bell",
+					"parent": "buoy",
+					"pivot": [0, 39, 0],
+					"cubes": [
+						{"origin": [0, 36, -1.5], "size": [0, 3, 3], "uv": [24, 53]},
+						{"origin": [-3, 29, -3], "size": [6, 7, 6], "uv": [32, 43]},
+						{"origin": [-4, 27, -4], "size": [8, 2, 8], "uv": [0, 43]},
+						{"origin": [-1.5, 36, 0], "size": [3, 3, 0], "uv": [56, 0]}
+					]
+				}
+			]
+		}
+	]
+}

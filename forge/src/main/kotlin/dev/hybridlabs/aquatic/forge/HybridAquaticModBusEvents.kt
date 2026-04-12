@@ -101,20 +101,30 @@ object HybridAquaticModBusEvents {
     }
 
     private fun registerBlockEntityRenderers(event: EntityRenderersEvent.RegisterRenderers) {
-        event.registerBlockEntityRenderer(HABlockEntityTypes.ANEMONE.get(), ::AnemoneBlockEntityRenderer)
+        event.registerBlockEntityRenderer(HABlockEntityTypes.ANEMONE.get(),
+            ::AnemoneBlockEntityRenderer)
+
         event.registerBlockEntityRenderer(
             HABlockEntityTypes.STRAWBERRY_ANEMONE.get(),
             ::StrawberryAnemoneBlockEntityRenderer
         )
+
         event.registerBlockEntityRenderer(
             HABlockEntityTypes.GIANT_GREEN_ANEMONE.get(),
             ::GiantGreenAnemoneBlockEntityRenderer
         )
+
         event.registerBlockEntityRenderer(
             HABlockEntityTypes.MESSAGE_IN_A_BOTTLE.get(),
             ::MessageInABottleBlockEntityRenderer
         )
-        event.registerBlockEntityRenderer(HABlockEntityTypes.BUOY.get(), ::BuoyBlockEntityRenderer)
+
+        event.registerBlockEntityRenderer(HABlockEntityTypes.BUOY.get(),
+            ::BuoyBlockEntityRenderer)
+
+        event.registerBlockEntityRenderer(HABlockEntityTypes.BELL_BUOY.get(),
+            ::BellBuoyBlockEntityRenderer)
+
         HABlockRenderers.registerRenderShapes()
     }
 

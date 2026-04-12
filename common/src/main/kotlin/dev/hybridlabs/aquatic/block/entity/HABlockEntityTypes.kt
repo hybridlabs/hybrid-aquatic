@@ -23,6 +23,8 @@ object HABlockEntityTypes {
         register("message_in_a_bottle", ::MessageInABottleBlockEntity, HABlocks.MESSAGE_IN_A_BOTTLE)
     val BUOY =
         register("buoy", ::BuoyBlockEntity, HABlocks.BUOY)
+    val BELL_BUOY =
+        register("bell_buoy", ::BellBuoyBlockEntity, HABlocks.BELL_BUOY)
 
     fun <T : BlockEntity?> register(
         id: String,

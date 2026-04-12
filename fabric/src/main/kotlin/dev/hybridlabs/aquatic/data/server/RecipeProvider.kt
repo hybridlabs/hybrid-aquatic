@@ -544,6 +544,16 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_lantern", InventoryChangeTrigger.TriggerInstance.hasItems(Items.LANTERN))
             .save(exporter)
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BELL_BUOY.get(), 2)
+            .pattern(" G ")
+            .pattern(" S ")
+            .pattern(" W ")
+            .define('S', Items.STICK)
+            .define('G', Items.GOLD_INGOT)
+            .define('W', ItemTags.PLANKS)
+            .unlockedBy("has_gold_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GOLD_INGOT))
+            .save(exporter)
+
         stairBuilder(
             HAPlatformBlocks.DRIFTWOOD_STAIRS.get(),
             Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),

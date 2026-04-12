@@ -198,6 +198,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.CHERRY_RAFT.get())
             .add(HABlocks.DRIFTWOOD_RAFT.get())
             .add(HABlocks.BUOY.get())
+            .add(HABlocks.BELL_BUOY.get())
             .add(HABlocks.CRAB_POT.get())
             .add(HABlocks.HYBRID_CRATE.get())
             .add(HABlocks.OAK_CRATE.get())

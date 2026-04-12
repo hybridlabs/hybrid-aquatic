@@ -279,6 +279,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HABlocks.BARNACLE_SHORESTONE.get() to "Barnacle Shorestone",
             HABlocks.MARINE_SNOW.get() to "Marine Snow",
             HABlocks.BUOY.get() to "Buoy",
+            HABlocks.BELL_BUOY.get() to "Bell Buoy",
             HABlocks.GIANT_CLAM.get() to "Giant Clam",
             HABlocks.OYSTER.get() to "Oyster",
             HABlocks.CLAMS.get() to "Clam",

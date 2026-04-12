@@ -29,6 +29,10 @@ object HABlockEntityRenderers {
             HABlockEntityTypes.BUOY.get(),
             ::BuoyBlockEntityRenderer
         )
+        BlockEntityRenderers.register(
+            HABlockEntityTypes.BELL_BUOY.get(),
+            ::BellBuoyBlockEntityRenderer
+        )
 
         ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.translucent(),

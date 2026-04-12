@@ -512,6 +512,12 @@ object HABlocks {
             .lightLevel { 12 })
     }
 
+    val BELL_BUOY = register("bell_buoy") {
+        BellBuoyBlock(Properties.copy(Blocks.OAK_PLANKS)
+            .noOcclusion()
+            .noParticlesOnBreak())
+    }
+
     val GLOWSLIME_BLOCK = register("glowslime_block") {
         SlimeBlock(Properties.copy(Blocks.SLIME_BLOCK)
             .lightLevel { 14 })
