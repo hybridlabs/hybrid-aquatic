@@ -34,7 +34,7 @@ object HASoundEvents {
     val KARCINOGEN_HURT = register("entity.karcinogen.hurt")
     val KARCINOGEN_DIE = register("entity.karcinogen.die")
 
-    val SHELL_BEAST_SHOOT = register("entity.shell_beast.shoot")
+    val SHELL_BEAST_SHOOT = register("entity.shell_beast.shoot", 64f)
     val SHELL_BEAST_AMBIENT = register("entity.shell_beast.ambient")
     val SHELL_BEAST_HURT = register("entity.shell_beast.hurt")
     val SHELL_BEAST_DIE = register("entity.shell_beast.die")
@@ -43,8 +43,11 @@ object HASoundEvents {
     val HYPNAUTILUS_HURT = register("entity.hypnautilus.hurt")
     val HYPNAUTILUS_DIE = register("entity.hypnautilus.die")
 
-    private fun register(id: String): RegistryObject<SoundEvent> {
+    private fun register(id: String, range: Float = -1.0f): RegistryObject<SoundEvent> {
         val identifier = ResourceLocation(Constants.MOD_ID, id)
-        return CommonClass.SOUND_EVENTS.register(id){SoundEvent.createVariableRangeEvent(identifier)}
+        return if (range < 0)
+            CommonClass.SOUND_EVENTS.register(id) { SoundEvent.createVariableRangeEvent(identifier) }
+        else
+            CommonClass.SOUND_EVENTS.register(id) { SoundEvent.createFixedRangeEvent(identifier, range) }
     }
 }
