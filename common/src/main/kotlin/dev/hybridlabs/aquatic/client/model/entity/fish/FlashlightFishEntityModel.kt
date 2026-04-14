@@ -17,16 +17,16 @@ class FlashlightFishEntityModel : HAFishEntityModel<FlashlightFishEntity>("flash
         private val ONE_FISH_MODEL =
             ResourceLocation("hybrid-aquatic", "geo/fish/flashlight_fish_/flashlight_fish_.geo.json")
         private val TWO_FISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/flashlight_fish_/flashlight_fish__two.geo.json")
+            ResourceLocation("hybrid-aquatic", "geo/fish/flashlight_fish_/flashlight_fish_two.geo.json")
         private val THREE_FISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/flashlight_fish_/flashlight_fish__three.geo.json")
+            ResourceLocation("hybrid-aquatic", "geo/fish/flashlight_fish_/flashlight_fish_three.geo.json")
 
         private val ONE_FISH_ANIMATION =
             ResourceLocation("hybrid-aquatic", "animations/entity/fish/flashlight_fish_/flashlight_fish_.animation.json")
         private val TWO_FISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/flashlight_fish_/flashlight_fish__two.animation.json")
+            ResourceLocation("hybrid-aquatic", "animations/entity/fish/flashlight_fish_/flashlight_fish_two.animation.json")
         private val THREE_FISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/flashlight_fish_/flashlight_fish__three.animation.json")
+            ResourceLocation("hybrid-aquatic", "animations/entity/fish/flashlight_fish_/flashlight_fish_three.animation.json")
     }
 
     override fun getModelResource(animatable: FlashlightFishEntity): ResourceLocation {
