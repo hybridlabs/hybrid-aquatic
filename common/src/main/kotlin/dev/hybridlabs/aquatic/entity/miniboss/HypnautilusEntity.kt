@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.entity.ai.goal.MinionLookAtOwnerTargetGoal
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvent
@@ -39,6 +40,7 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
 
     override fun registerGoals() {
         //super.registerGoals()
+        goalSelector.addGoal(1, MinionLookAtOwnerTargetGoal(this))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(1, HypnautilusSyncedMovementGoal(this))
         goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 64.0f, 1f))
