@@ -135,7 +135,7 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HADolphinEnti
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HABiomeTags.ARCTIC_OCEANS) -> {
+                        biome.`is`(HABiomeTags.FROZEN_OCEANS) -> {
                             Type.fromId(random.nextInt(0, 2))
                         }
 

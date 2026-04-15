@@ -9,7 +9,7 @@ import net.minecraft.world.level.biome.Biome
 object HABiomeTags {
     //#region Compatibility Biome Tags
     // rainbow reef
-    val WARM_OCEANS = TagKey.create(Registries.BIOME, ResourceLocation("rainbowreef", "warm_oceans"))
+    val RR_WARM_OCEANS = TagKey.create(Registries.BIOME, ResourceLocation("rainbowreef", "warm_oceans"))
     //fintastic
     val MOONY_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "moony_biomes"))
     val PLECO_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "pleco_biomes"))
@@ -19,11 +19,11 @@ object HABiomeTags {
     val FWSHARK_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "fwshark_biomes"))
     val MINNOW_SURFACE_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "minnow_surface_biomes"))
 
-    //#region Arctic Ocean Tags
-    val SHALLOW_ARCTIC_OCEANS = create("shallow_arctic_oceans")
-    val ARCTIC_OCEANS = create("arctic_oceans")
-    val DEEP_ARCTIC_OCEANS = create("deep_arctic_oceans")
-    val ARCTIC_TRENCH = create("arctic_trench")
+    //#region Frozen Ocean Tags
+    val SHALLOW_FROZEN_OCEANS = create("shallow_frozen_oceans")
+    val FROZEN_OCEANS = create("frozen_oceans")
+    val DEEP_FROZEN_OCEANS = create("deep_frozen_oceans")
+    val FROZEN_TRENCH = create("frozen_trench")
 
     //#region Cold Ocean Tags
     val SHALLOW_COLD_OCEANS = create("shallow_cold_oceans")
@@ -44,8 +44,9 @@ object HABiomeTags {
     val LUKEWARM_TRENCH = create("lukewarm_trench")
 
     //#region Warm Ocean Tags
-    val WARM_OCEAN = create("warm_ocean")
-    val DEEP_WARM_OCEAN = create("deep_warm_ocean")
+    val SHALLOW_WARM_OCEANS = create("shallow_warm_oceans")
+    val WARM_OCEANS = create("warm_oceans")
+    val DEEP_WARM_OCEANS = create("deep_warm_oceans")
     val WARM_TRENCH = create("warm_trench")
     val CORAL_REEF = create("coral_reef")
     val SEAGRASS_BED = create("seagrass_bed")

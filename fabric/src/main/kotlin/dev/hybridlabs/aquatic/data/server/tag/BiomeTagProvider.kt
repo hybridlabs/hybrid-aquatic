@@ -54,19 +54,19 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         //#endregion
 
         //#region Arctic Ocean Tags
-        getOrCreateTagBuilder(HABiomeTags.ARCTIC_OCEANS)
+        getOrCreateTagBuilder(HABiomeTags.FROZEN_OCEANS)
             .add(
                 Biomes.FROZEN_OCEAN,
                 Biomes.DEEP_FROZEN_OCEAN
             )
 
-        getOrCreateTagBuilder(HABiomeTags.SHALLOW_ARCTIC_OCEANS)
+        getOrCreateTagBuilder(HABiomeTags.SHALLOW_FROZEN_OCEANS)
             .add(Biomes.FROZEN_OCEAN)
 
-        getOrCreateTagBuilder(HABiomeTags.DEEP_ARCTIC_OCEANS)
+        getOrCreateTagBuilder(HABiomeTags.DEEP_FROZEN_OCEANS)
             .add(Biomes.DEEP_FROZEN_OCEAN)
 
-        getOrCreateTagBuilder(HABiomeTags.ARCTIC_TRENCH)
+        getOrCreateTagBuilder(HABiomeTags.FROZEN_TRENCH)
             .addOptional(HABiomes.FROZEN_TRENCH)
         //#endregion
 
@@ -126,10 +126,14 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         //#endregion
 
         //#region Warm Ocean Tags
-        getOrCreateTagBuilder(HABiomeTags.WARM_OCEAN)
+        getOrCreateTagBuilder(HABiomeTags.SHALLOW_WARM_OCEANS)
             .add(Biomes.WARM_OCEAN)
 
-        getOrCreateTagBuilder(HABiomeTags.DEEP_WARM_OCEAN)
+        getOrCreateTagBuilder(HABiomeTags.WARM_OCEANS)
+            .add(Biomes.WARM_OCEAN)
+            .addOptional(HABiomes.DEEP_WARM_OCEAN)
+
+        getOrCreateTagBuilder(HABiomeTags.DEEP_WARM_OCEANS)
             .addOptional(HABiomes.DEEP_WARM_OCEAN)
             .addOptional(ResourceLocation("spawn", "deep_warm_ocean"))
 
@@ -192,17 +196,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         //#region River Tags
         getOrCreateTagBuilder(HABiomeTags.RIVERS)
             .add(Biomes.RIVER)
-            .addOptional(ResourceLocation("wythers", "jungle_river"))
-            .addOptional(ResourceLocation("wythers", "tropical_forest_river"))
-            .addOptional(ResourceLocation("terralith", "warm_river"))
-            .addOptional(ResourceLocation("regions_unexplored", "tropical_river"))
             .addOptional(ResourceLocation("regions_unexplored", "muddy_river"))
-            .addOptional(ResourceLocation("regions_unexplored", "cold_river"))
             .addOptional(ResourceLocation("riverredux", "sandy_river"))
-            .addOptional(ResourceLocation("riverredux", "gravelly_river"))
-            .addOptional(ResourceLocation("riverredux", "tropical_river"))
             .addOptional(ResourceLocation("riverredux", "carved_river"))
-            .addOptional(HABiomes.TROPICAL_RIVER)
 
         getOrCreateTagBuilder(HABiomeTags.TROPICAL_RIVERS)
             .addOptional(ResourceLocation("wythers", "jungle_river"))
@@ -213,6 +209,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HABiomes.TROPICAL_RIVER)
 
         getOrCreateTagBuilder(HABiomeTags.COLD_RIVERS)
+            .add(Biomes.FROZEN_RIVER)
             .addOptional(ResourceLocation("riverredux", "gravelly_river"))
             .addOptional(ResourceLocation("regions_unexplored", "cold_river"))
         //#endregion
@@ -275,7 +272,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         //#region Compatibility Tags
             // rainbow reef
-        getOrCreateTagBuilder(HABiomeTags.WARM_OCEANS)
+        getOrCreateTagBuilder(HABiomeTags.RR_WARM_OCEANS)
             .addOptional(HABiomes.CORAL_REEF)
 
             // fintastic

@@ -115,6 +115,8 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
                 HAItems.REINFORCED_DIVING_LEGGINGS.get(),
                 HAItems.REINFORCED_DIVING_BOOTS.get(),
             )
+            .addOptional(ResourceLocation("create", "netherite_diving_helmet"))
+            .addOptional(ResourceLocation("create", "netherite_diving_boots"))
         //#endregion
 
         //#region Wood Tags

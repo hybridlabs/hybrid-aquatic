@@ -102,7 +102,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.WARM_OCEAN,
+                    HABiomeTags.SHALLOW_WARM_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.OYSTER_BED
                 ),

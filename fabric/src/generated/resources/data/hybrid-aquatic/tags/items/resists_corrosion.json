@@ -22,6 +22,14 @@
     "hybrid-aquatic:reinforced_diving_helmet",
     "hybrid-aquatic:reinforced_diving_suit",
     "hybrid-aquatic:reinforced_diving_leggings",
-    "hybrid-aquatic:reinforced_diving_boots"
+    "hybrid-aquatic:reinforced_diving_boots",
+    {
+      "id": "create:netherite_diving_helmet",
+      "required": false
+    },
+    {
+      "id": "create:netherite_diving_boots",
+      "required": false
+    }
   ]
 }

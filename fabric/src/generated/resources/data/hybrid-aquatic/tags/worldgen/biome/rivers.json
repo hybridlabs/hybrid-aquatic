@@ -3,22 +3,6 @@
   "values": [
     "minecraft:river",
     {
-      "id": "wythers:jungle_river",
-      "required": false
-    },
-    {
-      "id": "wythers:tropical_forest_river",
-      "required": false
-    },
-    {
-      "id": "terralith:warm_river",
-      "required": false
-    },
-    {
-      "id": "regions_unexplored:tropical_river",
-      "required": false
-    },
-    {
       "id": "regions_unexplored:muddy_river",
       "required": false
     },
@@ -35,15 +19,7 @@
       "required": false
     },
     {
-      "id": "riverredux:tropical_river",
-      "required": false
-    },
-    {
       "id": "riverredux:carved_river",
-      "required": false
-    },
-    {
-      "id": "hybrid-aquatic:tropical_river",
       "required": false
     }
   ]

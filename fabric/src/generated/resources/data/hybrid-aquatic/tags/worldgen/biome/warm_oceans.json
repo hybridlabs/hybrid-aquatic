@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:warm_ocean",
+    {
+      "id": "hybrid-aquatic:deep_warm_ocean",
+      "required": false
+    }
+  ]
+}
