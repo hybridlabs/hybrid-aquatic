@@ -49,16 +49,6 @@ object HABiomes {
             ifTrue(UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState())),
         )
     )
-
-    val BASALT_BEACH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("basalt_beach"))
-    val BASALT_BEACH_SURFACE_RULE: RuleSource = ifTrue(
-        isBiome(BASALT_BEACH),
-        sequence(
-            ifTrue(ON_FLOOR, state(Blocks.BASALT.defaultBlockState())),
-            ifTrue(UNDER_FLOOR, state(Blocks.BASALT.defaultBlockState())),
-            ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SMOOTH_BASALT.defaultBlockState()))
-        )
-    )
     //#endregion
 
     //#region Warm Ocean Biome Surface Rules
@@ -332,20 +322,6 @@ object HABiomes {
         //#endregion
 
         //#region Beach Biomes
-        if (config.config.biomeConfig.generateBasaltBeach) {
-            BiomePlacement.addSubOverworld(
-                Biomes.STONY_SHORE,
-                BASALT_BEACH,
-                SubBiomeMatcher.of(
-                    SubBiomeMatcher.Criterion.ofBiome(
-                        SubBiomeMatcher.CriterionTargets.NEIGHBOR,
-                        BiomeTags.IS_OCEAN,
-                        false
-                    )
-                )
-            )
-        }
-
         if (config.config.biomeConfig.generateTidePools) {
             BiomePlacement.addSubOverworld(
                 Biomes.BEACH,
@@ -784,7 +760,6 @@ object HABiomes {
             ifTrue(
                 abovePreliminarySurface(),
                 sequence(
-                    BASALT_BEACH_SURFACE_RULE,
                     TIDE_POOL_SURFACE_RULE,
                     CORAL_REEF_SURFACE_RULE,
 

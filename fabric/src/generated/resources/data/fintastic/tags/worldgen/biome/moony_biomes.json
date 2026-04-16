@@ -6,10 +6,6 @@
       "required": false
     },
     {
-      "id": "hybrid-aquatic:basalt_beach",
-      "required": false
-    },
-    {
       "id": "hybrid-aquatic:tide_pools",
       "required": false
     }

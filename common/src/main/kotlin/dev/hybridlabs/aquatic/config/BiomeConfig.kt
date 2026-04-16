@@ -11,7 +11,6 @@ data class BiomeConfig(
     val generateSeagrassBed: Boolean = true,
     val generateTropicalRiver: Boolean = true,
     val generateTidePools: Boolean = true,
-    val generateBasaltBeach: Boolean = true,
     val generateSulfuricCave: Boolean = true,
 ) {
     companion object {
@@ -24,7 +23,6 @@ data class BiomeConfig(
                 Codec.BOOL.fieldOf("generate_seagrass_bed").forGetter(BiomeConfig::generateSeagrassBed),
                 Codec.BOOL.fieldOf("generate_tropical_river").forGetter(BiomeConfig::generateTropicalRiver),
                 Codec.BOOL.fieldOf("generate_tide_pools").forGetter(BiomeConfig::generateTidePools),
-                Codec.BOOL.fieldOf("generate_basalt_beach").forGetter(BiomeConfig::generateBasaltBeach),
                 Codec.BOOL.fieldOf("generate_sulfuric_cave").forGetter(BiomeConfig::generateSulfuricCave),
             ).apply(instance, ::BiomeConfig)
         }

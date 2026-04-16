@@ -305,22 +305,6 @@ class BiomeProvider(
         )
 
         entries.add(
-            HABiomes.BASALT_BEACH,
-            create(
-                entries,
-                temperature = 0.5f,
-                downfall = 0.5f,
-                waterColor = 0x3D57D6,
-                waterFogColor = 0x050533
-            ) {
-                addFeature(
-                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
-                    entries.ref(NetherPlacements.SMALL_BASALT_COLUMNS)
-                )
-            }
-        )
-
-        entries.add(
             HABiomes.SULFURIC_CAVES,
             create(
                 entries,

@@ -184,7 +184,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HABiomeTags.ROCKY_BEACHES)
             .add(Biomes.STONY_SHORE)
-            .addOptional(HABiomes.BASALT_BEACH)
             .addOptional(ResourceLocation("biomesoplenty", "gravel_beach"))
             .addOptional(ResourceLocation("biomeswevegone", "dacite_shore"))
             .addOptional(ResourceLocation("biomeswevegone", "basalt_barrera"))
@@ -278,7 +277,6 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             // fintastic
         getOrCreateTagBuilder(HABiomeTags.MOONY_BIOMES)
             .addOptional(HABiomes.CORAL_REEF)
-            .addOptional(HABiomes.BASALT_BEACH)
             .addOptional(HABiomes.TIDE_POOLS)
 
         getOrCreateTagBuilder(HABiomeTags.PLECO_BIOMES)
