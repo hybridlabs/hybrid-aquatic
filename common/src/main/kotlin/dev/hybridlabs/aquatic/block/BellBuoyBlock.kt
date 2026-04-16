@@ -5,8 +5,14 @@ package dev.hybridlabs.aquatic.block
 import dev.hybridlabs.aquatic.block.entity.BellBuoyBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.*
@@ -18,17 +24,23 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.level.pathfinder.PathComputationType
+import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("DEPRECATION")
-open class BellBuoyBlock(settings: Properties): Block(settings), EntityBlock, SimpleWaterloggedBlock {
+open class BellBuoyBlock(settings: Properties) : Block(settings), EntityBlock, SimpleWaterloggedBlock {
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false))
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(
+        state: BlockState,
+        world: BlockGetter,
+        pos: BlockPos,
+        type: PathComputationType,
+    ): Boolean {
         return false
     }
 
@@ -51,15 +63,39 @@ open class BellBuoyBlock(settings: Properties): Block(settings), EntityBlock, Si
         return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
+    override fun use(
+        state: BlockState,
+        world: Level,
+        pos: BlockPos,
+        player: Player,
+        hand: InteractionHand,
+        hit: BlockHitResult,
+    ): InteractionResult {
+        val blockentity = world.getBlockEntity(pos)
+        if (!world.isClientSide && blockentity is BellBuoyBlockEntity) {
+
+            world.playSound(null as Player?, pos, SoundEvents.BELL_BLOCK, SoundSource.BLOCKS, 2.0f, 1.0f)
+        }
+
+        return InteractionResult.PASS
+    }
+
     override fun updateShape(
         state: BlockState,
         direction: Direction,
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
-        return if (canSurvive(state, world, pos)) super.updateShape(state, direction, neighborState, world, pos, neighborPos)
+        return if (canSurvive(state, world, pos)) super.updateShape(
+            state,
+            direction,
+            neighborState,
+            world,
+            pos,
+            neighborPos
+        )
         else Blocks.AIR.defaultBlockState()
     }
 
@@ -71,7 +107,7 @@ open class BellBuoyBlock(settings: Properties): Block(settings), EntityBlock, Si
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         return SHAPE
     }
@@ -80,7 +116,7 @@ open class BellBuoyBlock(settings: Properties): Block(settings), EntityBlock, Si
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape = COLLISION_SHAPE
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
