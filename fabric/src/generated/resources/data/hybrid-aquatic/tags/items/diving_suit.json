@@ -5,6 +5,14 @@
     "hybrid-aquatic:reinforced_diving_suit",
     "hybrid-aquatic:glowing_diving_suit",
     {
+      "id": "create:copper_backtank",
+      "required": false
+    },
+    {
+      "id": "create:netherite_backtank",
+      "required": false
+    },
+    {
       "id": "aquamirae:three_bolt_chestplate",
       "required": false
     },

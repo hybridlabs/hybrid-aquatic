@@ -63,6 +63,8 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
                 HAItems.REINFORCED_DIVING_SUIT.get(),
                 HAItems.GLOWING_DIVING_SUIT.get(),
             )
+            .addOptional(ResourceLocation("create", "copper_backtank"))
+            .addOptional(ResourceLocation("create", "netherite_backtank"))
             .addOptional(ResourceLocation("aquamirae", "three_bolt_chestplate"))
             .addOptional(ResourceLocation("alexscaves", "diving_chestplate"))
 
@@ -116,6 +118,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
                 HAItems.REINFORCED_DIVING_BOOTS.get(),
             )
             .addOptional(ResourceLocation("create", "netherite_diving_helmet"))
+            .addOptional(ResourceLocation("create", "netherite_backtank"))
             .addOptional(ResourceLocation("create", "netherite_diving_boots"))
         //#endregion
 

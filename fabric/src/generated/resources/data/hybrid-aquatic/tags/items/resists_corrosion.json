@@ -28,6 +28,10 @@
       "required": false
     },
     {
+      "id": "create:netherite_backtank",
+      "required": false
+    },
+    {
       "id": "create:netherite_diving_boots",
       "required": false
     }
