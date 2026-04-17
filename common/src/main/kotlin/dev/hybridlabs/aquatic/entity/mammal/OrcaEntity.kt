@@ -2,11 +2,13 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.feature.OrcaEyeTextureFeature
 import dev.hybridlabs.aquatic.entity.feature.OrcaSaddleTextureFeature
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -31,6 +33,15 @@ import kotlin.random.Random
 @Suppress("DEPRECATION")
 class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HADolphinEntity(type, world),
     OrcaEyeTextureFeature, OrcaSaddleTextureFeature, VariantHolder<OrcaEntity.Companion.Type> {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
+        HAEntityTags.SMALL_CREATURES,
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.SEAL,
+        HAEntityTags.SMALL_SHARK,
+        HAEntityTags.MEDIUM_SHARK
+    )
 
     override fun registerGoals() {
         super.registerGoals()
