@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.AvoidEntityInWaterGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.FishAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.FollowGlowingEntityGoal
@@ -46,8 +45,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
     var currentRoll: Float = 0.0f
     private var sittingTimer: Int = 0
     private val factory = GeckoLibUtil.createInstanceCache(this)
-
-    open fun getTargetConfig(): MobTargetConfiguration? = null
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)

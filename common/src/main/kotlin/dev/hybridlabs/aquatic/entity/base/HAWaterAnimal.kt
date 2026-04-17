@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.base
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -35,6 +36,8 @@ abstract class HAWaterAnimal protected constructor(
     private var inLove = 0
     private var loveCause: UUID? = null
     var fromFishingNet = false
+
+    open fun getTargetConfig(): MobTargetConfiguration? = null
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
