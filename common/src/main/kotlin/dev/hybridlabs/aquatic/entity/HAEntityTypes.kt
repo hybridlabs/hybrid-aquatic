@@ -722,6 +722,13 @@ object HAEntityTypes {
         CepheidaeJellyfishEntity::createMobAttributes
     )
 
+    val COMB_JELLY = registerJelly(
+        "comb_jelly",
+        ::CombJellyEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        CombJellyEntity::createMobAttributes
+    )
+
     val LIONS_MANE_JELLYFISH = registerJelly(
         "lions_mane_jellyfish",
         ::LionsManeJellyfishEntity,

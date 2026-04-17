@@ -1888,10 +1888,11 @@ object HAItems {
         registerSpawnEgg("big_red_jellyfish_spawn_egg", HAEntityTypes.BIG_RED_JELLYFISH, 0xf4e5e5, 0xe72e46)
     val COSMIC_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg("cosmic_jellyfish_spawn_egg", HAEntityTypes.COSMIC_JELLYFISH, 0xe7debb, 0xffd375)
+    val COMB_JELLY_SPAWN_EGG =
+        registerSpawnEgg("comb_jelly_spawn_egg", HAEntityTypes.COMB_JELLY, 0x9de1df, 0xff6e76)
     val FIREWORK_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg(
-            "firework_jellyfish_spawn_egg", HAEntityTypes.FIREWORK_JELLYFISH, 0x6975e8, 0xfc7fb7
-        )
+            "firework_jellyfish_spawn_egg", HAEntityTypes.FIREWORK_JELLYFISH, 0x6975e8, 0xfc7fb7)
     //#endregion
 
     //#region Crustacean Spawn Eggs

@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -36,7 +35,6 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) : HAWaterAnimal(type, world) {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var sittingTimer: Int = 0
-    open fun getTargetConfig(): MobTargetConfiguration? = null
     open val inkConfig: InkConfiguration? = null
 
     override fun createNavigation(level: Level): PathNavigation {

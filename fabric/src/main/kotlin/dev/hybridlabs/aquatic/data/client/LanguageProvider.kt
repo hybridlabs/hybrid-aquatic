@@ -799,6 +799,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAEntityTypes.CROWN_JELLYFISH.get() to "Crown Jellyfish",
             HAEntityTypes.BIG_RED_JELLYFISH.get() to "Big Red Jellyfish",
             HAEntityTypes.COSMIC_JELLYFISH.get() to "Cosmic Jellyfish",
+            HAEntityTypes.COMB_JELLY.get() to "Comb Jelly",
             HAEntityTypes.FIREWORK_JELLYFISH.get() to "Firework Jellyfish",
             HAEntityTypes.BLUE_JELLYFISH.get() to "Blue Jellyfish",
             HAEntityTypes.SEADRAGON.get() to "Seadragon",

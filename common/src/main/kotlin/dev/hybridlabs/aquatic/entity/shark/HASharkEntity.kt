@@ -49,7 +49,6 @@ open class HASharkEntity(
     entityType: EntityType<out HASharkEntity>,
     world: Level,
 ) : HAWaterAnimal(entityType, world), NeutralMob {
-    open fun getTargetConfig(): MobTargetConfiguration? = null
 
     open val isPassive: Boolean = true
     open val closePlayerAttack: Boolean = false

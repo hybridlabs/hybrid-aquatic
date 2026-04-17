@@ -143,6 +143,7 @@ object SpawnRestrictionRegistry {
             HAEntityTypes.COSMIC_JELLYFISH.get(),
             HAEntityTypes.FIREWORK_JELLYFISH.get(),
             HAEntityTypes.MAUVE_STINGER.get(),
+            HAEntityTypes.COMB_JELLY.get(),
         ).forEach { registerDeepJelly(it) }
 
         // sharks

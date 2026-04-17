@@ -516,6 +516,12 @@ object HybridAquaticEntityRenderers {
             ::CosmicJellyfishEntityRenderer
         )
 
+    val COMB_JELLY =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.COMB_JELLY,
+            ::CombJellyEntityRenderer
+        )
+
     val FIREWORK_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
             HAEntityTypes.FIREWORK_JELLYFISH,

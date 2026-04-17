@@ -719,6 +719,15 @@ class EntitySpawnConfigGenerator {
         )
 
         addJelly(
+            HAEntityTypes.COMB_JELLY.get(),
+            listOf(
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.ALL_TRENCHES,
+                BiomeTags.IS_DEEP_OCEAN),
+            2, 1, 2
+        )
+
+        addJelly(
             HAEntityTypes.FIREWORK_JELLYFISH.get(),
             listOf(
                 HABiomeTags.DEEP_REEF,

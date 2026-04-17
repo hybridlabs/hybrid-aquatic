@@ -52,7 +52,7 @@ import java.util.function.IntFunction
 @Suppress("DEPRECATION")
 class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMammalEntity(entityType, world),
     VariantHolder<OtterEntity.Companion.Type> {
-    fun getTargetConfig() = TARGET_CONFIG
+    override fun getTargetConfig() = TARGET_CONFIG
 
     private val swimControl = OtterMoveControl(
         this,

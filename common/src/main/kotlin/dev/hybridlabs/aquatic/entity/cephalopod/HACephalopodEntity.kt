@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
@@ -39,7 +38,6 @@ import software.bernie.geckolib.util.GeckoLibUtil
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
 open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: Level) : HAWaterAnimal(type, world) {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    open fun getTargetConfig(): MobTargetConfiguration? = null
     open val inkConfig: InkConfiguration? = null
 
     override fun createNavigation(level: Level): PathNavigation {

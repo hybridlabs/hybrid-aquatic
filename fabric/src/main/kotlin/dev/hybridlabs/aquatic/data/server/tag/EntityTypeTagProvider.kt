@@ -634,6 +634,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HAEntityTypes.BIG_RED_JELLYFISH.get(),
                 HAEntityTypes.CEPHEIDAE_JELLYFISH.get(),
                 HAEntityTypes.COSMIC_JELLYFISH.get(),
+                HAEntityTypes.COMB_JELLY.get(),
                 HAEntityTypes.FIREWORK_JELLYFISH.get(),
                 HAEntityTypes.LIONS_MANE_JELLYFISH.get(),
                 HAEntityTypes.MAUVE_STINGER.get(),
