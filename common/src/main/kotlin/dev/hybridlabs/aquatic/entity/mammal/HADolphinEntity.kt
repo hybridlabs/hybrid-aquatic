@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import dev.hybridlabs.aquatic.entity.ai.goal.DolphinAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
@@ -55,6 +56,7 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(0, DolphinAttackGoal(this, 1.1, true))
         goalSelector.addGoal(0, BreathAirGoal(this))
         goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 7.0))
@@ -62,6 +64,7 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 4))
         goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
         goalSelector.addGoal(6, MeleeAttackGoal(this, 1.2, true))
+        getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HAWaterAnimal::hunger)
     }
 
     override fun tick() {
