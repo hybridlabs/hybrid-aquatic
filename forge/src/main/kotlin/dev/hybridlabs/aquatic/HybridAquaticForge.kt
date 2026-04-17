@@ -43,7 +43,6 @@ object HybridAquaticForge {
         HABlocks
         HAPlatformBlocks
         HASoundEvents
-        HAInstruments
         HAEntityTypes
         HABlockEntityTypes
         HAPaintings
@@ -55,6 +54,7 @@ object HybridAquaticForge {
 
         HAItems
         HAPlatformItems
+        HAInstruments
         HAItemGroups
 
         HAFeatures
