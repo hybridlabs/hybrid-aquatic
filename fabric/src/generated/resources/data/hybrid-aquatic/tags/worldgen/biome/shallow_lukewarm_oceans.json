@@ -5,10 +5,6 @@
     {
       "id": "still_life:subtropical_shallow_ocean",
       "required": false
-    },
-    {
-      "id": "still_life:tropical_shallow_ocean",
-      "required": false
     }
   ]
 }

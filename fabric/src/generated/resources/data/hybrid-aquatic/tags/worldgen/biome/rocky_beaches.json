@@ -13,6 +13,18 @@
     {
       "id": "biomeswevegone:basalt_barrera",
       "required": false
+    },
+    {
+      "id": "still_life:taiga_beach",
+      "required": false
+    },
+    {
+      "id": "still_life:tundra_beach",
+      "required": false
+    },
+    {
+      "id": "still_life:arctic_beach",
+      "required": false
     }
   ]
 }

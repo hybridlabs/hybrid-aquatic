@@ -5,6 +5,10 @@
     {
       "id": "biomeswevegone:white_mangrove_marshes",
       "required": false
+    },
+    {
+      "id": "still_life:mangrove_marsh",
+      "required": false
     }
   ]
 }

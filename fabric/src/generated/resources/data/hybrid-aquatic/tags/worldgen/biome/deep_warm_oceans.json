@@ -8,6 +8,10 @@
     {
       "id": "spawn:deep_warm_ocean",
       "required": false
+    },
+    {
+      "id": "still_life:tropical_deep_ocean",
+      "required": false
     }
   ]
 }

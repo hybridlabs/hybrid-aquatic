@@ -13,6 +13,18 @@
     {
       "id": "riverredux:carved_river",
       "required": false
+    },
+    {
+      "id": "still_life:temperate_river",
+      "required": false
+    },
+    {
+      "id": "still_life:warm_temperate_river",
+      "required": false
+    },
+    {
+      "id": "still_life:mediterranean_river",
+      "required": false
     }
   ]
 }

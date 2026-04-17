@@ -22,6 +22,14 @@
       "required": false
     },
     {
+      "id": "still_life:steppe_river",
+      "required": false
+    },
+    {
+      "id": "still_life:tropical_rainforest_river",
+      "required": false
+    },
+    {
       "id": "hybrid-aquatic:tropical_river",
       "required": false
     }

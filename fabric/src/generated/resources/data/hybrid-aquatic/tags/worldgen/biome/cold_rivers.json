@@ -9,6 +9,18 @@
     {
       "id": "regions_unexplored:cold_river",
       "required": false
+    },
+    {
+      "id": "still_life:arctic_river",
+      "required": false
+    },
+    {
+      "id": "still_life:tundra_river",
+      "required": false
+    },
+    {
+      "id": "still_life:boreal_river",
+      "required": false
     }
   ]
 }

@@ -59,12 +59,16 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
                 Biomes.FROZEN_OCEAN,
                 Biomes.DEEP_FROZEN_OCEAN
             )
+            .addOptional(ResourceLocation("still_life", "arctic_deep_ocean"))
+            .addOptional(ResourceLocation("still_life", "arctic_shallow_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.SHALLOW_FROZEN_OCEANS)
             .add(Biomes.FROZEN_OCEAN)
+            .addOptional(ResourceLocation("still_life", "arctic_shallow_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.DEEP_FROZEN_OCEANS)
             .add(Biomes.DEEP_FROZEN_OCEAN)
+            .addOptional(ResourceLocation("still_life", "arctic_deep_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.FROZEN_TRENCH)
             .addOptional(HABiomes.FROZEN_TRENCH)
@@ -76,12 +80,16 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
                 Biomes.COLD_OCEAN,
                 Biomes.DEEP_COLD_OCEAN
             )
+            .addOptional(ResourceLocation("still_life", "cold_shallow_ocean"))
+            .addOptional(ResourceLocation("still_life", "cold_deep_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.SHALLOW_COLD_OCEANS)
             .add(Biomes.COLD_OCEAN)
+            .addOptional(ResourceLocation("still_life", "cold_shallow_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.DEEP_COLD_OCEANS)
             .add(Biomes.DEEP_COLD_OCEAN)
+            .addOptional(ResourceLocation("still_life", "cold_deep_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.COLD_TRENCH)
             .addOptional(HABiomes.COLD_TRENCH)
@@ -93,12 +101,16 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
                 Biomes.OCEAN,
                 Biomes.DEEP_OCEAN
             )
+            .addOptional(ResourceLocation("still_life", "temperate_shallow_ocean"))
+            .addOptional(ResourceLocation("still_life", "temperate_deep_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.SHALLOW_TEMPERATE_OCEANS)
             .add(Biomes.OCEAN)
+            .addOptional(ResourceLocation("still_life", "temperate_shallow_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.DEEP_TEMPERATE_OCEANS)
             .add(Biomes.DEEP_OCEAN)
+            .addOptional(ResourceLocation("still_life", "temperate_deep_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.TEMPERATE_TRENCH)
             .addOptional(HABiomes.TRENCH)
@@ -108,17 +120,19 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HABiomeTags.SHALLOW_LUKEWARM_OCEANS)
             .add(Biomes.LUKEWARM_OCEAN)
             .addOptional(ResourceLocation("still_life", "subtropical_shallow_ocean"))
-            .addOptional(ResourceLocation("still_life", "tropical_shallow_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.LUKEWARM_OCEANS)
             .add(
                 Biomes.LUKEWARM_OCEAN,
                 Biomes.DEEP_LUKEWARM_OCEAN
             )
+            .addOptional(ResourceLocation("still_life", "subtropical_shallow_ocean"))
+            .addOptional(ResourceLocation("still_life", "subtropical_deep_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.DEEP_LUKEWARM_OCEANS)
             .add(Biomes.DEEP_LUKEWARM_OCEAN)
             .addOptional(HABiomes.TROPICAL_DEEP_CORAL_REEF)
+            .addOptional(ResourceLocation("still_life", "subtropical_deep_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.LUKEWARM_TRENCH)
             .addOptional(HABiomes.LUKEWARM_TRENCH)
@@ -128,14 +142,18 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         //#region Warm Ocean Tags
         getOrCreateTagBuilder(HABiomeTags.SHALLOW_WARM_OCEANS)
             .add(Biomes.WARM_OCEAN)
+            .addOptional(ResourceLocation("still_life", "tropical_shallow_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.WARM_OCEANS)
             .add(Biomes.WARM_OCEAN)
             .addOptional(HABiomes.DEEP_WARM_OCEAN)
+            .addOptional(ResourceLocation("still_life", "tropical_deep_ocean"))
+            .addOptional(ResourceLocation("still_life", "tropical_shallow_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.DEEP_WARM_OCEANS)
             .addOptional(HABiomes.DEEP_WARM_OCEAN)
             .addOptional(ResourceLocation("spawn", "deep_warm_ocean"))
+            .addOptional(ResourceLocation("still_life", "tropical_deep_ocean"))
 
         getOrCreateTagBuilder(HABiomeTags.WARM_TRENCH)
             .addOptional(HABiomes.WARM_TRENCH)
@@ -181,12 +199,18 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("biomeswevegone", "rainbow_beach"))
             .addOptional(ResourceLocation("terrestria", "volcanic_island_beach"))
             .addOptional(ResourceLocation("mysticsbiomes", "lagoon"))
+            .addOptional(ResourceLocation("still_life", "temperate_beach"))
+            .addOptional(ResourceLocation("still_life", "mediterranean_beach"))
+            .addOptional(ResourceLocation("still_life", "arid_beach"))
 
         getOrCreateTagBuilder(HABiomeTags.ROCKY_BEACHES)
             .add(Biomes.STONY_SHORE)
             .addOptional(ResourceLocation("biomesoplenty", "gravel_beach"))
             .addOptional(ResourceLocation("biomeswevegone", "dacite_shore"))
             .addOptional(ResourceLocation("biomeswevegone", "basalt_barrera"))
+            .addOptional(ResourceLocation("still_life", "taiga_beach"))
+            .addOptional(ResourceLocation("still_life", "tundra_beach"))
+            .addOptional(ResourceLocation("still_life", "arctic_beach"))
 
         getOrCreateTagBuilder(HABiomeTags.TIDE_POOLS)
             .addOptional(HABiomes.TIDE_POOLS)
@@ -198,6 +222,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("regions_unexplored", "muddy_river"))
             .addOptional(ResourceLocation("riverredux", "sandy_river"))
             .addOptional(ResourceLocation("riverredux", "carved_river"))
+            .addOptional(ResourceLocation("still_life", "temperate_river"))
+            .addOptional(ResourceLocation("still_life", "warm_temperate_river"))
+            .addOptional(ResourceLocation("still_life", "mediterranean_river"))
 
         getOrCreateTagBuilder(HABiomeTags.TROPICAL_RIVERS)
             .addOptional(ResourceLocation("wythers", "jungle_river"))
@@ -205,12 +232,17 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("terralith", "warm_river"))
             .addOptional(ResourceLocation("regions_unexplored", "tropical_river"))
             .addOptional(ResourceLocation("riverredux", "tropical_river"))
+            .addOptional(ResourceLocation("still_life", "steppe_river"))
+            .addOptional(ResourceLocation("still_life", "tropical_rainforest_river"))
             .addOptional(HABiomes.TROPICAL_RIVER)
 
         getOrCreateTagBuilder(HABiomeTags.COLD_RIVERS)
             .add(Biomes.FROZEN_RIVER)
             .addOptional(ResourceLocation("riverredux", "gravelly_river"))
             .addOptional(ResourceLocation("regions_unexplored", "cold_river"))
+            .addOptional(ResourceLocation("still_life", "arctic_river"))
+            .addOptional(ResourceLocation("still_life", "tundra_river"))
+            .addOptional(ResourceLocation("still_life", "boreal_river"))
         //#endregion
 
         //#region Misc Biome Tags
@@ -251,16 +283,24 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(ResourceLocation("biomeswevegone", "cypress_swamplands"))
             .addOptional(ResourceLocation("biomeswevegone", "bayou"))
             .addOptional(ResourceLocation("terrestria", "cypress_swamp"))
+            .addOptional(ResourceLocation("still_life", "temperate_swamp"))
 
         getOrCreateTagBuilder(HABiomeTags.MARSHES)
             .addOptional(ResourceLocation("regions_unexplored", "marsh"))
             .addOptional(ResourceLocation("biomesoplenty", "marsh"))
             .addOptional(ResourceLocation("biomesoplenty", "wetland"))
             .addOptional(ResourceLocation("biomesoplenty", "floodplain"))
+            .addOptional(ResourceLocation("still_life", "bog"))
+            .addOptional(ResourceLocation("still_life", "temperate_marsh"))
+            .addOptional(ResourceLocation("still_life", "fen"))
+            .addOptional(ResourceLocation("still_life", "mire"))
+            .addOptional(ResourceLocation("still_life", "flooded_grasslands"))
+            .addOptional(ResourceLocation("still_life", "mediterranean_marsh"))
 
         getOrCreateTagBuilder(HABiomeTags.MANGROVES)
             .add(Biomes.MANGROVE_SWAMP)
             .addOptional(ResourceLocation("biomeswevegone", "white_mangrove_marshes"))
+            .addOptional(ResourceLocation("still_life", "mangrove_marsh"))
         //#endregion
 
         //#region Misc Tags
