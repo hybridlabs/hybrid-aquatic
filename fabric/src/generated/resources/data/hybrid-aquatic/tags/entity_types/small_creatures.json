@@ -136,6 +136,50 @@
     {
       "id": "alexscaves:lanternfish",
       "required": false
+    },
+    {
+      "id": "babyfat:ranchu",
+      "required": false
+    },
+    {
+      "id": "bettas:betta_fish",
+      "required": false
+    },
+    {
+      "id": "finsandtails:golden_river_ray",
+      "required": false
+    },
+    {
+      "id": "finsandtails:high_finned_blue",
+      "required": false
+    },
+    {
+      "id": "finsandtails:ornate_bugfish",
+      "required": false
+    },
+    {
+      "id": "finsandtails:teal_arrowfish",
+      "required": false
+    },
+    {
+      "id": "finsandtails:wee",
+      "required": false
+    },
+    {
+      "id": "finsandtails:pea_wee",
+      "required": false
+    },
+    {
+      "id": "finsandtails:blu_wee",
+      "required": false
+    },
+    {
+      "id": "finsandtails:vibra_wee",
+      "required": false
+    },
+    {
+      "id": "finsandtails:papa_wee",
+      "required": false
     }
   ]
 }

@@ -20,6 +20,18 @@
     {
       "id": "rainbowreef:arrow_crab",
       "required": false
+    },
+    {
+      "id": "finsandtails:spindly_gem_crab",
+      "required": false
+    },
+    {
+      "id": "finsandtails:white_bull_crab",
+      "required": false
+    },
+    {
+      "id": "finsandtails:red_bull_crab",
+      "required": false
     }
   ]
 }

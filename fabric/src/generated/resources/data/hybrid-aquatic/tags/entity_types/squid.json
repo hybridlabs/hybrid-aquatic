@@ -11,6 +11,10 @@
     {
       "id": "alexsmobs:giant_squid",
       "required": false
+    },
+    {
+      "id": "finsandtails:night_light_squid",
+      "required": false
     }
   ]
 }

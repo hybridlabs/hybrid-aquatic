@@ -110,6 +110,17 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("alexsmobs", "devils_hole_pupfish"))
             .addOptional(ResourceLocation("alexsmobs", "flying_fish"))
             .addOptional(ResourceLocation("alexscaves", "lanternfish"))
+            .addOptional(ResourceLocation("babyfat", "ranchu"))
+            .addOptional(ResourceLocation("bettas", "betta_fish"))
+            .addOptional(ResourceLocation("finsandtails", "golden_river_ray"))
+            .addOptional(ResourceLocation("finsandtails", "high_finned_blue"))
+            .addOptional(ResourceLocation("finsandtails", "ornate_bugfish"))
+            .addOptional(ResourceLocation("finsandtails", "teal_arrowfish"))
+            .addOptional(ResourceLocation("finsandtails", "wee"))
+            .addOptional(ResourceLocation("finsandtails", "pea_wee"))
+            .addOptional(ResourceLocation("finsandtails", "blu_wee"))
+            .addOptional(ResourceLocation("finsandtails", "vibra_wee"))
+            .addOptional(ResourceLocation("finsandtails", "papa_wee"))
 
         getOrCreateTagBuilder(HAEntityTags.MEDIUM_CREATURES)
             .add(
@@ -186,6 +197,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("spawn", "sunfish"))
             .addOptional(ResourceLocation("spawn", "tuna"))
             .addOptional(ResourceLocation("spawn", "barracuda"))
+            .addOptional(ResourceLocation("finsandtails", "high_finned_blue"))
+            .addOptional(ResourceLocation("finsandtails", "teal_arrowfish"))
+            .addOptional(ResourceLocation("finsandtails", "swamp_mucker"))
 
         getOrCreateTagBuilder(HAEntityTags.REEF_FISH)
             .add(
@@ -241,6 +255,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("wonderoussea", "pinnate_spadefish_2"))
             .addOptional(ResourceLocation("wonderoussea", "orbicular_spadefish"))
             .addOptional(ResourceLocation("wonderoussea", "orbicular_spadefish_2"))
+            .addOptional(ResourceLocation("finsandtails", "ornate_bugfish"))
 
         getOrCreateTagBuilder(HAEntityTags.RAY)
             .add(
@@ -249,6 +264,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             )
             .addOptional(ResourceLocation("bountiful_critters", "stingray"))
             .addOptional(ResourceLocation("rainbowreef", "ray"))
+            .addOptional(ResourceLocation("finsandtails", "golden_river_ray"))
 
         getOrCreateTagBuilder(HAEntityTags.DEEP_FISH)
             .add(
@@ -289,6 +305,12 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("fintastic", "minnow"))
             .addOptional(ResourceLocation("fintastic", "freshwater_shark"))
             .addOptional(ResourceLocation("alexsmobs", "catfish"))
+            .addOptional(ResourceLocation("finsandtails", "golden_river_ray"))
+            .addOptional(ResourceLocation("finsandtails", "wee_wee"))
+            .addOptional(ResourceLocation("finsandtails", "blu_wee"))
+            .addOptional(ResourceLocation("finsandtails", "wee"))
+            .addOptional(ResourceLocation("finsandtails", "papa_wee"))
+            .addOptional(ResourceLocation("finsandtails", "flatback_sucker"))
 
         getOrCreateTagBuilder(HAEntityTags.TROPICAL_RIVER_FISH)
             .add(
@@ -311,6 +333,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("fintastic", "pleco"))
             .addOptional(ResourceLocation("fintastic", "guppy"))
             .addOptional(ResourceLocation("bountiful_critters", "neon_tetra"))
+            .addOptional(ResourceLocation("finsandtails", "pea_wee"))
+            .addOptional(ResourceLocation("finsandtails", "vibra_wee"))
+            .addOptional(ResourceLocation("finsandtails", "flatback_sucker"))
 
         getOrCreateTagBuilder(HAEntityTags.SWAMP_FISH)
             .add(
@@ -324,6 +349,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("fintastic", "pleco"))
             .addOptional(ResourceLocation("fintastic", "guppy"))
             .addOptional(ResourceLocation("alexsmobs", "catfish"))
+            .addOptional(ResourceLocation("finsandtails", "swamp_mucker"))
+            .addOptional(ResourceLocation("finsandtails", "flatback_sucker"))
 
         getOrCreateTagBuilder(HAEntityTags.MANGROVE_FISH)
             .add(
@@ -421,6 +448,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             )
             .addOptional(ResourceLocation("rainbowreef", "crab"))
             .addOptional(ResourceLocation("rainbowreef", "arrow_crab"))
+            .addOptional(ResourceLocation("finsandtails", "spindly_gem_crab"))
+            .addOptional(ResourceLocation("finsandtails", "white_bull_crab"))
+            .addOptional(ResourceLocation("finsandtails", "red_bull_crab"))
 
         getOrCreateTagBuilder(HAEntityTags.LOBSTER)
             .add(
@@ -435,6 +465,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             )
             .addOptional(ResourceLocation("fintastic", "fairy_shrimp"))
             .addOptional(ResourceLocation("alexsmobs", "mantis_shrimp"))
+            .addOptional(ResourceLocation("finsandtails", "banded_redback_shrimp"))
 
         getOrCreateTagBuilder(HAEntityTags.KRILL)
             .addOptional(ResourceLocation("bountiful_critters", "krill"))
@@ -470,6 +501,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 EntityType.GLOW_SQUID
             )
             .addOptional(ResourceLocation("alexsmobs", "giant_squid"))
+            .addOptional(ResourceLocation("finsandtails", "night_light_squid"))
         //#endregion
 
         //#region Mammal Tags
@@ -591,6 +623,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("spawn", "clam"))
             .addOptional(ResourceLocation("wonderoussea", "marine_flatworm"))
             .addOptional(ResourceLocation("wonderoussea", "blue_glaucus"))
+            .addOptional(ResourceLocation("finsandtails", "river_pebble_snail"))
+            .addOptional(ResourceLocation("finsandtails", "phantom_nudibranch"))
 
         getOrCreateTagBuilder(HAEntityTags.ALL_JELLYFISH)
             .add(

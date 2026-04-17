@@ -150,6 +150,10 @@
     {
       "id": "wonderoussea:orbicular_spadefish_2",
       "required": false
+    },
+    {
+      "id": "finsandtails:ornate_bugfish",
+      "required": false
     }
   ]
 }

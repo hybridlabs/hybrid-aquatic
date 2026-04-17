@@ -35,6 +35,18 @@
     {
       "id": "spawn:barracuda",
       "required": false
+    },
+    {
+      "id": "finsandtails:high_finned_blue",
+      "required": false
+    },
+    {
+      "id": "finsandtails:teal_arrowfish",
+      "required": false
+    },
+    {
+      "id": "finsandtails:swamp_mucker",
+      "required": false
     }
   ]
 }

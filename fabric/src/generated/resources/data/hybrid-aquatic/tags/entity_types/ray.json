@@ -10,6 +10,10 @@
     {
       "id": "rainbowreef:ray",
       "required": false
+    },
+    {
+      "id": "finsandtails:golden_river_ray",
+      "required": false
     }
   ]
 }

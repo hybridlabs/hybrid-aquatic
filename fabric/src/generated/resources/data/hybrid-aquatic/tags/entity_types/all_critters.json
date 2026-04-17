@@ -18,6 +18,14 @@
     {
       "id": "wonderoussea:blue_glaucus",
       "required": false
+    },
+    {
+      "id": "finsandtails:river_pebble_snail",
+      "required": false
+    },
+    {
+      "id": "finsandtails:phantom_nudibranch",
+      "required": false
     }
   ]
 }

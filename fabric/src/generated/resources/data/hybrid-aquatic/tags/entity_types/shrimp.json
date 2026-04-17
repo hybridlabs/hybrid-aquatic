@@ -9,6 +9,10 @@
     {
       "id": "alexsmobs:mantis_shrimp",
       "required": false
+    },
+    {
+      "id": "finsandtails:banded_redback_shrimp",
+      "required": false
     }
   ]
 }

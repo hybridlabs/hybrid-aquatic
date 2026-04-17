@@ -27,6 +27,14 @@
     {
       "id": "alexsmobs:catfish",
       "required": false
+    },
+    {
+      "id": "finsandtails:swamp_mucker",
+      "required": false
+    },
+    {
+      "id": "finsandtails:flatback_sucker",
+      "required": false
     }
   ]
 }

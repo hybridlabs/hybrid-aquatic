@@ -39,6 +39,18 @@
     {
       "id": "bountiful_critters:neon_tetra",
       "required": false
+    },
+    {
+      "id": "finsandtails:pea_wee",
+      "required": false
+    },
+    {
+      "id": "finsandtails:vibra_wee",
+      "required": false
+    },
+    {
+      "id": "finsandtails:flatback_sucker",
+      "required": false
     }
   ]
 }
