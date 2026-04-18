@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.datagen
+package dev.hybridlabs.aquatic.datagen.server
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
@@ -12,7 +12,6 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition
 import net.minecraftforge.common.data.GlobalLootModifierProvider
 import net.minecraftforge.common.loot.IGlobalLootModifier
-
 
 class HAGlobalLootModifierProvider
     (output: PackOutput) :
