@@ -1,3 +1,5 @@
 *.kt text eol=lf
 *.java text eol=lf
 *.json text eol=lf
+
+*.ogg binary

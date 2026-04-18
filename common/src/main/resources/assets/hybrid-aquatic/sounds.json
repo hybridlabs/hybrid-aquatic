@@ -1,12 +1,12 @@
 {
   "entity.manatee.ambient": {
-    "subtitle": "sounds.hybrid-aquatic.entity.entity.manatee.ambient",
+    "subtitle": "sounds.hybrid-aquatic.entity.manatee.ambient",
     "sounds": [
       "hybrid-aquatic:sirenian_ambient"
     ]
   },
   "entity.manatee.hurt": {
-    "subtitle": "sounds.hybrid-aquatic.entity.entity.manatee.hurt",
+    "subtitle": "sounds.hybrid-aquatic.entity.manatee.hurt",
     "sounds": [
       "hybrid-aquatic:sirenian_hurt"
     ]
