@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.datagen
 
 import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.datagen.client.HASoundDefinitionsProvider
 import dev.hybridlabs.aquatic.datagen.server.BiomeModifierProvider
 import dev.hybridlabs.aquatic.datagen.server.HAGlobalLootModifierProvider
 import dev.hybridlabs.aquatic.datagen.server.StructureModifierProvider
@@ -23,7 +24,6 @@ object DataGenerators {
 
     @SubscribeEvent
     fun gatherData(event: GatherDataEvent) {
-
         val generator = event.generator
         val packOutput = generator.packOutput
 
@@ -35,5 +35,6 @@ object DataGenerators {
 
         generator.addProvider(event.includeServer(), DatapackBuiltinEntriesProvider(packOutput, lookupProvider, builder, setOf(Constants.MOD_ID)))
         generator.addProvider(event.includeServer(), HAGlobalLootModifierProvider(packOutput))
+        generator.addProvider(event.includeClient(), HASoundDefinitionsProvider(packOutput, event.existingFileHelper))
     }
 }

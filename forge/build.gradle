@@ -48,6 +48,7 @@ legacyForge {
             data()
             programArguments.addAll '--mod', 'hybrid_aquatic', '--all',
                     '--output', file('src/generated/resources/').getAbsolutePath(),
+		            '--existing', file('../common/src/main/resources/').getAbsolutePath(),
                     '--existing', file('src/main/resources/').getAbsolutePath(),
                     '--existing', file("../fabric/src/generated/resources").getAbsolutePath()
         }
