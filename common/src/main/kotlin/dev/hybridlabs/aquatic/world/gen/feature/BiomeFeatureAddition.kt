@@ -55,14 +55,6 @@ data class BiomeFeatureAddition(
                     HAPlacedFeatures.HARP_SPONGE_PATCH
                 ),
             )
-
-            add(
-                BiomeFeatureAddition(
-                    BiomeTags.IS_DEEP_OCEAN,
-                    GenerationStep.Decoration.SURFACE_STRUCTURES,
-                    HAPlacedFeatures.WHALE_FALL
-                ),
-            )
             //#endregion
 
             //#region Giant Clams

@@ -47,8 +47,6 @@ object HAFeatures {
     val REEF_CORAL_MUSHROOM = register("reef_coral_mushroom", ReefCoralMushroomFeature(NoneFeatureConfiguration.CODEC))
     val REEF_CORAL_TABLE = register("reef_coral_table", ReefCoralTableFeature(NoneFeatureConfiguration.CODEC))
 
-    val WHALE_FALL = register("whale_fall", WhaleFallFeature(WhaleFallFeatureConfig.CODEC))
-
     fun <F : Feature<*>> register(
         id: String,
         feature: F,

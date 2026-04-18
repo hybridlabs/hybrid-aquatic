@@ -307,25 +307,6 @@ class ConfiguredFeatureProvider(
             )
         )
 
-        val whaleFallList = mutableListOf(
-            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_1.nbt"),
-            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_ribs.nbt"),
-            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_ribs_2.nbt"),
-            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_ribs_tail.nbt"),
-            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_skull.nbt"),
-            ResourceLocation("hybrid-aquatic", "structures/whale_fall/whale_fall_skull_ribcage.nbt"),
-        )
-
-        entries.add(
-            HAConfiguredFeatures.WHALE_FALL,
-            ConfiguredFeature(
-                HAFeatures.WHALE_FALL.get(),
-                WhaleFallFeatureConfig(
-                    whaleFallList, 1
-                )
-            )
-        )
-
         //#region Sargassum
         entries.add(
             HAConfiguredFeatures.SARGASSUM,

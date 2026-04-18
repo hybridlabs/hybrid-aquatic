@@ -49,8 +49,6 @@ object HAPlacedFeatures {
     val MOUND = register("mound")
     val WHITE_MOUND = register("calcite_mound")
 
-    val WHALE_FALL = register("whale_fall")
-
     private fun register(id: String): ResourceKey<PlacedFeature> {
         return ResourceKey.create(Registries.PLACED_FEATURE, CommonClass.locate(id))
     }

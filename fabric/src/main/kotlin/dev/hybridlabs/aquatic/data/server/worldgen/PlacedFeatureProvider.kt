@@ -34,17 +34,6 @@ class PlacedFeatureProvider(
             )
         }
 
-        entries.add(
-            HAPlacedFeatures.WHALE_FALL, PlacedFeature(
-                entries.ref(HAConfiguredFeatures.WHALE_FALL), listOf(
-                    RarityFilter.onAverageOnceEvery(64),
-                    InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    BiomeFilter.biome()
-                )
-            )
-        )
-
         // tide pools
         entries.add(
             HAPlacedFeatures.TIDE_POOLS, PlacedFeature(
