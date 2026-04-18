@@ -518,32 +518,65 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             getOrCreateTagBuilder(HAItemTags.ARMORS).add(item)
         }
 
-        setOf(
-            Items.NAUTILUS_SHELL,
-            Items.SKELETON_SKULL,
-            Items.WITHER_SKELETON_SKULL,
-            Items.CREEPER_HEAD,
-            Items.ZOMBIE_HEAD,
-            Items.PIGLIN_HEAD,
-            Items.DRAGON_HEAD,
-            Items.PLAYER_HEAD,
-            Items.BEEHIVE,
-            Items.DECORATED_POT,
-            Items.JUKEBOX,
-            Items.NOTE_BLOCK,
-            Items.REDSTONE_LAMP,
-            Items.TNT,
-            Items.TARGET,
-            Items.LODESTONE,
-            Items.BARREL,
-            Items.CHEST,
-            Items.ENDER_CHEST,
-            Items.PUMPKIN,
-            Items.CARVED_PUMPKIN,
-            Items.JACK_O_LANTERN,
-        ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.CRAB_WEARABLES).add(item)
-        }
+        getOrCreateTagBuilder(HAItemTags.CRAB_WEARABLES)
+            .addOptionalTag(ItemTags.WOOL.location())
+            .addOptionalTag(ResourceLocation("c", "skulls"))
+            .addOptionalTag(ResourceLocation("c", "bookshelves"))
+            .addOptionalTag(ResourceLocation("c", "barrels"))
+            .addOptionalTag(ResourceLocation("c", "chests"))
+            .addOptionalTag(ResourceLocation("c", "pumpkins"))
+            .addOptionalTag(ResourceLocation("c", "shulker_boxes"))
+            .add(
+                Items.NAUTILUS_SHELL,
+                Items.SKELETON_SKULL,
+                Items.WITHER_SKELETON_SKULL,
+                Items.CREEPER_HEAD,
+                Items.ZOMBIE_HEAD,
+                Items.PIGLIN_HEAD,
+                Items.DRAGON_HEAD,
+                Items.PLAYER_HEAD,
+                Items.BEEHIVE,
+                Items.BEE_NEST,
+                Items.BOOKSHELF,
+                Items.DECORATED_POT,
+                Items.JUKEBOX,
+                Items.NOTE_BLOCK,
+                Items.REDSTONE_LAMP,
+                Items.TNT,
+                Items.TARGET,
+                Items.LODESTONE,
+                Items.BARREL,
+                Items.CHEST,
+                Items.TRAPPED_CHEST,
+                Items.END_PORTAL_FRAME,
+                Items.ENDER_CHEST,
+                Items.OCHRE_FROGLIGHT,
+                Items.VERDANT_FROGLIGHT,
+                Items.PEARLESCENT_FROGLIGHT,
+                Items.SEA_LANTERN,
+                Items.SHROOMLIGHT,
+                Items.GLOWSTONE,
+                Items.PUMPKIN,
+                Items.CARVED_PUMPKIN,
+                Items.JACK_O_LANTERN,
+                Items.SHULKER_BOX,
+                Items.RED_SHULKER_BOX,
+                Items.BLUE_SHULKER_BOX,
+                Items.BLACK_SHULKER_BOX,
+                Items.BROWN_SHULKER_BOX,
+                Items.CYAN_SHULKER_BOX,
+                Items.GRAY_SHULKER_BOX,
+                Items.GREEN_SHULKER_BOX,
+                Items.LIGHT_BLUE_SHULKER_BOX,
+                Items.LIGHT_GRAY_SHULKER_BOX,
+                Items.LIME_SHULKER_BOX,
+                Items.MAGENTA_SHULKER_BOX,
+                Items.ORANGE_SHULKER_BOX,
+                Items.PINK_SHULKER_BOX,
+                Items.PURPLE_SHULKER_BOX,
+                Items.WHITE_SHULKER_BOX,
+                Items.YELLOW_SHULKER_BOX,
+            )
 
         setOf(
             Items.NOTE_BLOCK,
