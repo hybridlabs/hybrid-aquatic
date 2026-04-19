@@ -319,6 +319,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HABlocks.SEA_LETTUCE.get() to "Sea Lettuce",
             HABlocks.TALL_SEA_LETTUCE.get() to "Tall Sea Lettuce",
 
+            HABlocks.BONE_WORMS.get() to "Bone Worms",
+
             //#region Corals
             HABlocks.LOPHELIA_CORAL_BLOCK.get() to "Lophelia Coral Block",
             HABlocks.DEAD_LOPHELIA_CORAL_BLOCK.get() to "Dead Lophelia Coral Block",
