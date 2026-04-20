@@ -74,17 +74,34 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
         }
     }
 
+    fun getWobble(amount:Float): Float{
+        return (this.random.nextFloat() * amount) - (amount/2f)
+
+    }
+
+    fun getAngleWobble(): Float {
+        return getWobble(0.0625f)
+    }
+
+    fun getYawWobble(): Float {
+        return getWobble(0.125f)
+    }
+
     fun calcBeastRelativePos(): Vec3 {
         val owner = this.getOwner() ?: return Vec3.ZERO
         val upVector = Vec3(0.0, 1.0, 0.0)
-        //val timeRot: Float = if (this.server != null) (server!!.tickCount % 100 / 100F * Mth.TWO_PI) else 0F
 
-        val angle = Mth.PI / 3.0F * beastPosition + Mth.PI / 6F //+ timeRot
+        val angle = Mth.PI / 3.0F * beastPosition + Mth.PI / 6F +
+                getAngleWobble()
+
 
         return owner.position().add(
             upVector
                 .zRot(angle)
-                .yRot((180 - owner.yRot) * Mth.DEG_TO_RAD)
+                .yRot(
+                    (180 - owner.yRot) * Mth.DEG_TO_RAD
+                            + getYawWobble()
+                )
                 .scale(beastDistance)
         )
     }
