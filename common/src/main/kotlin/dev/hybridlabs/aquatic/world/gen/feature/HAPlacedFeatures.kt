@@ -39,6 +39,7 @@ object HAPlacedFeatures {
     val TUBE_SPONGE_PATCH = register("sponge_patch")
     val GLASS_SPONGE_PATCH = register("glass_sponge_patch")
     val HARP_SPONGE_PATCH = register("harp_sponge_patch")
+    val PING_PONG_SPONGE_PATCH = register("ping_pong_sponge_patch")
 
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
 

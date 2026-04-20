@@ -267,6 +267,16 @@ class PlacedFeatureProvider(
                 )
             )
         )
+
+         entries.add(
+            HAPlacedFeatures.PING_PONG_SPONGE_PATCH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.PING_PONG_SPONGE_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                     RarityFilter.onAverageOnceEvery(5)
+                )
+            )
+        )
         //#endregion
 
         // message in a bottle

@@ -320,6 +320,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 BlockModelGenerators.TintState.NOT_TINTED,
             )
 
+            createCrossBlockWithDefaultItem(
+                HABlocks.PING_PONG_SPONGE.get(),
+                BlockModelGenerators.TintState.NOT_TINTED,
+            )
+
             createCrossBlock(
                 HABlocks.SARGASSUM_PLANT.get(),
                 BlockModelGenerators.TintState.NOT_TINTED,

@@ -37,6 +37,7 @@ object HAConfiguredFeatures {
     val TUBE_SPONGE_PATCH = register("tube_sponge_patch")
     val GLASS_SPONGE_PATCH = register("glass_sponge_patch")
     val HARP_SPONGE_PATCH = register("harp_sponge_patch")
+    val PING_PONG_SPONGE_PATCH = register("ping_pong_sponge_patch")
     val THERMAL_VENT_PATCH = register("thermal_vent_patch")
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
     val TIDE_POOLS = register("tide_pools")

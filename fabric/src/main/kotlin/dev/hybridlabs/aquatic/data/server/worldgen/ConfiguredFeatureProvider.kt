@@ -465,6 +465,25 @@ class ConfiguredFeatureProvider(
             )
         )
 
+        entries.add(
+            HAConfiguredFeatures.PING_PONG_SPONGE_PATCH,
+            ConfiguredFeature(
+                Feature.FLOWER,
+                RandomPatchConfiguration(
+                    4, 4, 2,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            BlockStateProvider.simple(
+                                HABlocks.PING_PONG_SPONGE.get().defaultBlockState().setValue(WATERLOGGED, true)
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+        )
+
         // giant clam patch
         entries.add(
             HAConfiguredFeatures.GIANT_CLAM_PATCH,

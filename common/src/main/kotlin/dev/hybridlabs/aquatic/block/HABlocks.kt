@@ -493,6 +493,15 @@ object HABlocks {
         )
     }
 
+    val PING_PONG_SPONGE = register("ping_pong_sponge") {
+        LivingSpongeBlock(true, Properties.of()
+            .mapColor(MapColor.COLOR_LIGHT_GRAY)
+            .sound(SoundType.SLIME_BLOCK)
+            .noOcclusion()
+            .pushReaction(PushReaction.DESTROY)
+        )
+    }
+
     val GIANT_CLAM = register("giant_clam") {
         GiantClamBlock(true, Properties.copy(Blocks.TUFF)
             .noOcclusion()

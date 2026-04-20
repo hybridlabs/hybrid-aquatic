@@ -331,6 +331,7 @@ object HAItems {
     val TUBE_SPONGE = registerBlockItem("tube_sponge") { HABlocks.TUBE_SPONGE.get() }
     val GLASS_SPONGE = registerBlockItem("glass_sponge") { HABlocks.GLASS_SPONGE.get() }
     val HARP_SPONGE = registerBlockItem("harp_sponge") { HABlocks.HARP_SPONGE.get() }
+    val PING_PONG_SPONGE = registerBlockItem("ping_pong_sponge") { HABlocks.PING_PONG_SPONGE.get() }
 
     //#region Coral Blocks
     val BUTTON_CORAL_BLOCK = registerBlockItem("button_coral_block") { HABlocks.BUTTON_CORAL_BLOCK.get() }

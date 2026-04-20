@@ -243,6 +243,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HABlocks.STRAWBERRY_ANEMONE.get() to "Strawberry Anemone",
             HABlocks.TUBE_SPONGE.get() to "Tube Sponge",
             HABlocks.HARP_SPONGE.get() to "Harp Sponge",
+            HABlocks.PING_PONG_SPONGE.get() to "Ping Pong Sponge",
             HABlocks.GLASS_SPONGE.get() to "Glass Sponge",
             HABlocks.CRAB_POT.get() to "Crab Pot",
             HABlocks.HYBRID_CRATE.get() to "Hybrid Crate",

@@ -186,6 +186,7 @@ object HybridAquaticClient : ClientModInitializer {
             HABlocks.FLOATING_SARGASSUM.get(),
 
             HABlocks.HARP_SPONGE.get(),
+            HABlocks.PING_PONG_SPONGE.get(),
             HABlocks.GLASS_SPONGE.get(),
 
             HABlocks.WATER_LETTUCE.get(),

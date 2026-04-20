@@ -55,6 +55,14 @@ data class BiomeFeatureAddition(
                     HAPlacedFeatures.HARP_SPONGE_PATCH
                 ),
             )
+
+            add(
+                BiomeFeatureAddition(
+                    HABiomeTags.ALL_TRENCHES,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.PING_PONG_SPONGE_PATCH
+                ),
+            )
             //#endregion
 
             //#region Giant Clams
