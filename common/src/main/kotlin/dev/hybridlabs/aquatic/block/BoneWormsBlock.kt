@@ -22,16 +22,19 @@ class BoneWormsBlock(settings: Properties) : BushBlock(settings), LiquidBlockCon
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         return SHAPE
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP)
-                && floor.`is`(Blocks.BONE_BLOCK)
-                && floor.`is`(HABlocks.BONE_STAIRS.get())
-                && floor.`is`(HABlocks.BONE_SLAB.get())
+        return floor.isFaceSturdy(
+            world,
+            pos,
+            Direction.UP
+        ) && (floor.`is`(Blocks.BONE_BLOCK) ||
+                floor.`is`(HABlocks.BONE_STAIRS.get()) ||
+                floor.`is`(HABlocks.BONE_SLAB.get()))
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
@@ -45,7 +48,7 @@ class BoneWormsBlock(settings: Properties) : BushBlock(settings), LiquidBlockCon
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
         val blockState = super.updateShape(state, direction, neighborState, world, pos, neighborPos)
         if (!blockState.isAir) {
@@ -67,7 +70,7 @@ class BoneWormsBlock(settings: Properties) : BushBlock(settings), LiquidBlockCon
         world: LevelAccessor,
         pos: BlockPos,
         state: BlockState,
-        fluidState: FluidState
+        fluidState: FluidState,
     ): Boolean {
         return false
     }
