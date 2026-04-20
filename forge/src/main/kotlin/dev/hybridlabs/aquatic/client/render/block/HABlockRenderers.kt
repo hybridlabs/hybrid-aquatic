@@ -34,6 +34,7 @@ object HABlockRenderers {
 
             HABlocks.GLOWING_PLANKTON.get(),
 
+            HABlocks.BONE_WORMS.get(),
             HABlocks.CLAMS.get(),
             HABlocks.SEA_LETTUCE.get(),
             HABlocks.TALL_SEA_LETTUCE.get(),

@@ -28,7 +28,10 @@ class BoneWormsBlock(settings: Properties) : BushBlock(settings), LiquidBlockCon
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP) && floor.`is`(Blocks.BONE_BLOCK)
+        return floor.isFaceSturdy(world, pos, Direction.UP)
+                && floor.`is`(Blocks.BONE_BLOCK)
+                && floor.`is`(HABlocks.BONE_STAIRS.get())
+                && floor.`is`(HABlocks.BONE_SLAB.get())
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {

@@ -141,6 +141,14 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
+        add(HABlocks.BONE_WORMS.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .build()
+            )
+        }
+
         add(HABlocks.CLAMS.get()) { block ->
             val ageCondition: LootItemCondition.Builder =
                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)

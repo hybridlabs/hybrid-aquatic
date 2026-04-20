@@ -199,6 +199,7 @@ object HAItemGroups {
                 entries.accept(HAItems.TUBE_SPONGE.get())
                 entries.accept(HAItems.GLASS_SPONGE.get())
                 entries.accept(HAItems.HARP_SPONGE.get())
+                entries.accept(HAItems.BONE_WORMS.get())
                 entries.accept(HAItems.TUBE_WORM.get())
                 entries.accept(HAItems.HYDROTHERMAL_VENT.get())
                 entries.accept(HAItems.CRYSTALLINE_SULFUR.get())
