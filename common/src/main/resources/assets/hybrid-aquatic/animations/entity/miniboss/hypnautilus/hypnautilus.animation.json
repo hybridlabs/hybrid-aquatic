@@ -55,6 +55,41 @@
 					}
 				}
 			}
+		},
+		"attack.spin": {
+			"loop": true,
+			"bones": {
+				"shell": {
+					"rotation": [0, 0, "-query.anim_time*180"]
+				},
+				"body": {
+					"position": [0, "math.cos(query.anim_time*180*1-80)*-3", "math.sin(query.anim_time*180*1-80)*-3"]
+				},
+				"top_tentacle_1": {
+					"rotation": ["-Math.cos(query.anim_time*180)*45", 0, 0]
+				},
+				"top_tentacle_2": {
+					"rotation": ["-Math.sin(query.anim_time*180)*45", 0, 0]
+				},
+				"bottom_tentacle_1": {
+					"rotation": ["-Math.cos(query.anim_time*180)*-45", 0, 0]
+				},
+				"bottom_tentacle_2": {
+					"rotation": ["-Math.sin(query.anim_time*180)*-45", 0, 0]
+				},
+				"right_tentacle_1": {
+					"rotation": ["-Math.cos(query.anim_time*180)*45", 0, 0]
+				},
+				"right_tentacle_2": {
+					"rotation": ["-Math.sin(query.anim_time*180)*45", 0, 0]
+				},
+				"left_tentacle_1": {
+					"rotation": ["-Math.cos(query.anim_time*180)*45", 0, 0]
+				},
+				"left_tentacle_2": {
+					"rotation": ["-Math.sin(query.anim_time*180)*45", 0, 0]
+				}
+			}
 		}
 	}
 }
