@@ -3,6 +3,10 @@
   "values": [
     "minecraft:swamp",
     {
+      "id": "regions_unexplored:bayou",
+      "required": false
+    },
+    {
       "id": "wythers:waterlily_swamp",
       "required": false
     },

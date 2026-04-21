@@ -248,6 +248,9 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         //#region Misc Biome Tags
         getOrCreateTagBuilder(HABiomeTags.JUNGLE)
             .forceAddTag(BiomeTags.IS_JUNGLE)
+            .addOptional(ResourceLocation("regions_unexplored", "eucalyptus_forest"))
+            .addOptional(ResourceLocation("regions_unexplored", "rainforest"))
+            .addOptional(ResourceLocation("regions_unexplored", "sparse_rainforest"))
             .addOptional(ResourceLocation("wythers", "flooded_jungle"))
             .addOptional(ResourceLocation("biomesoplenty", "rainforest"))
             .addOptional(ResourceLocation("biomesoplenty", "rocky_rainforest"))
@@ -277,6 +280,7 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HABiomeTags.SWAMP)
             .add(Biomes.SWAMP)
+            .addOptional(ResourceLocation("regions_unexplored", "bayou"))
             .addOptional(ResourceLocation("wythers", "waterlily_swamp"))
             .addOptional(ResourceLocation("terralith", "orchid_swamp"))
             .addOptional(ResourceLocation("biomesoplenty", "bayou"))
