@@ -173,7 +173,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.MANTA_RAY.get(),
             listOf(
                 HABiomeTags.DEEP_TEMPERATE_OCEANS,
-                HABiomeTags.DEEP_LUKEWARM_OCEANS),
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             1, 1, 2
         )
 
@@ -243,7 +244,8 @@ class EntitySpawnConfigGenerator {
         addFish(
             HAEntityTypes.MAHI.get(),
             listOf(
-                HABiomeTags.DEEP_LUKEWARM_OCEANS),
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             3, 1, 4
         )
 
@@ -251,7 +253,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.TUNA.get(),
             listOf(
                 HABiomeTags.DEEP_TEMPERATE_OCEANS,
-                HABiomeTags.DEEP_LUKEWARM_OCEANS),
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             3, 1, 4
         )
 
@@ -295,7 +298,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.OPAH.get(),
             listOf(
                 HABiomeTags.DEEP_TEMPERATE_OCEANS,
-                HABiomeTags.DEEP_LUKEWARM_OCEANS),
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             2, 1, 2
         )
 
@@ -421,7 +425,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.OCEAN_SUNFISH.get(),
             listOf(
                 HABiomeTags.DEEP_TEMPERATE_OCEANS,
-                HABiomeTags.DEEP_LUKEWARM_OCEANS),
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             1, 1, 2
         )
 
@@ -446,7 +451,8 @@ class EntitySpawnConfigGenerator {
                 HABiomeTags.LUKEWARM_TRENCH,
                 HABiomeTags.WARM_TRENCH,
                 HABiomeTags.TEMPERATE_TRENCH,
-                HABiomeTags.DEEP_TEMPERATE_OCEANS),
+                HABiomeTags.DEEP_TEMPERATE_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             1, 1, 2
         )
 
@@ -757,7 +763,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.GREAT_WHITE_SHARK.get(),
             listOf(
                 HABiomeTags.DEEP_TEMPERATE_OCEANS,
-                HABiomeTags.DEEP_LUKEWARM_OCEANS),
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             1, 1, 1
         )
 
@@ -793,21 +800,24 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.THRESHER_SHARK.get(),
             listOf(
                 HABiomeTags.DEEP_TEMPERATE_OCEANS,
-                HABiomeTags.DEEP_LUKEWARM_OCEANS),
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             2, 1, 1
         )
 
         addShark(
             HAEntityTypes.BULL_SHARK.get(),
             listOf(
-                HABiomeTags.DEEP_LUKEWARM_OCEANS),
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             2, 1, 2
         )
 
         addShark(
             HAEntityTypes.WHALE_SHARK.get(),
             listOf(
-                HABiomeTags.DEEP_LUKEWARM_OCEANS),
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             1, 1, 1
         )
 
@@ -855,7 +865,8 @@ class EntitySpawnConfigGenerator {
                 HABiomeTags.DEEP_TEMPERATE_OCEANS,
                 HABiomeTags.TEMPERATE_TRENCH,
                 HABiomeTags.DEEP_LUKEWARM_OCEANS,
-                HABiomeTags.LUKEWARM_TRENCH),
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.DEEP_WARM_OCEANS),
             2, 1, 2
         )
         //#endregion
