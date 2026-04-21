@@ -2,20 +2,16 @@ package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.entity.miniboss.ShellBeastEntity
 import net.minecraft.world.entity.ai.goal.Goal
-import java.util.*
 
 class ShellBeastSummonGoal(
     private val shellBeast: ShellBeastEntity,
 ) : Goal() {
 
-    init {
-        this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
-    }
-
     override fun canUse(): Boolean {
         val canSummonHypnautilus =
-            shellBeast.health <= shellBeast.maxHealth / 2f ||
-                    shellBeast.isUnderWater
+            shellBeast.health <= shellBeast.maxHealth / 2.0 &&
+                    shellBeast.isUnderWater &&
+                    !shellBeast.hasMinions()
 
         return canSummonHypnautilus &&
                 !shellBeast.isSummoning() &&

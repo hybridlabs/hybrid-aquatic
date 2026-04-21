@@ -38,7 +38,9 @@ import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import java.lang.ref.WeakReference
 import java.util.*
+import java.util.Collections.synchronizedList
 import java.util.function.Predicate
 import kotlin.math.abs
 
@@ -47,6 +49,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     private var explosionPower = 0
     private var summonTimer: Int = 0
     var summonCooldown: Int = 0
+    private val minions = synchronizedList(mutableListOf<WeakReference<Mob>>())
 
     fun getExplosionPower(): Int {
         return this.explosionPower
@@ -228,6 +231,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 stopSummoning()
             }
         }
+        cleanMinions()
         bossBar.progress = health / maxHealth
         super.aiStep()
     }
@@ -309,16 +313,27 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         summonCooldown = 600
     }
 
+    fun addMinion(minion: HypnautilusEntity) {
+        minions.add(WeakReference(minion))
+        minion.setOwner(this)
+        minion.beastPosition = minions.size - 1
+    }
+
+    fun hasMinions(): Boolean {
+        return (minions.isNotEmpty())
+    }
+
+    fun cleanMinions() {
+        minions.removeAll { ref -> ref.get() == null }
+    }
+
     private fun summonHypnautilus() {
         val count = 6
 
         for (i in 0 until count) {
-
-
             val hypnautilus = HAEntityTypes.HYPNAUTILUS.get().create(level())
             if (hypnautilus != null) {
-                hypnautilus.setOwner(this)
-                hypnautilus.beastPosition = i
+                addMinion(hypnautilus)
                 val spawnPos = hypnautilus.calcBeastRelativePos()
                 hypnautilus.moveTo(
                     spawnPos.x,
@@ -344,7 +359,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
             this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
         }
 
-        override fun canUse(): Boolean = shellBeast.target != null
+        override fun canUse(): Boolean = shellBeast.target != null && !shellBeast.isSummoning()
 
         override fun start() {
             chargeTime = 0

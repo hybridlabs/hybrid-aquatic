@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.miniboss
 import dev.hybridlabs.aquatic.entity.ai.goal.MinionLookAtOwnerTargetGoal
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.core.BlockPos
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageSource
@@ -25,11 +26,13 @@ import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import java.util.*
 
 
 class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HAMinionEntity(type, world) {
     var beastPosition = 0
     val beastDistance = 5.0
+    var prevOwner: UUID? = null
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -40,6 +43,7 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
 
     override fun registerGoals() {
         //super.registerGoals()
+        goalSelector.addGoal(1, HypnautilusFindOwnerGoal(this))
         goalSelector.addGoal(1, MinionLookAtOwnerTargetGoal(this))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(1, HypnautilusSyncedMovementGoal(this))
@@ -64,6 +68,19 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
             })
     }
 
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
+        if (this.getOwner() != null) {
+            nbt.putUUID("Owner", this.getOwner()!!.uuid)
+        }
+        super.addAdditionalSaveData(nbt)
+    }
+
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
+        super.readAdditionalSaveData(nbt)
+        if (nbt.contains("Owner")) {
+            prevOwner = nbt.getUUID("Owner")
+        }
+    }
 
     override fun tick() {
         super.tick()
@@ -74,8 +91,8 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
         }
     }
 
-    fun getWobble(amount:Float): Float{
-        return (this.random.nextFloat() * amount) - (amount/2f)
+    fun getWobble(amount: Float): Float {
+        return (this.random.nextFloat() * amount) - (amount / 2f)
 
     }
 
@@ -127,9 +144,21 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
                 .add(Attributes.FOLLOW_RANGE, 24.0)
         }
 
+        class HypnautilusFindOwnerGoal(private val hypnautilus: HypnautilusEntity) : Goal() {
+            override fun canUse(): Boolean {
+                return (hypnautilus.prevOwner != null && hypnautilus.getOwner() == null)
+            }
+
+            override fun tick() {
+                val candidates = hypnautilus.level().getEntitiesOfClass(ShellBeastEntity::class.java,hypnautilus.boundingBox.inflate(64.0))
+                val owner = candidates.getOrNull(0)
+                owner?.addMinion(hypnautilus)
+            }
+        }
+
         class HypnautilusSyncedMovementGoal(private val hypnautilus: HypnautilusEntity) : Goal() {
             override fun canUse(): Boolean {
-                return true
+                return (hypnautilus.getOwner() != null)
             }
 
             override fun requiresUpdateEveryTick(): Boolean {
