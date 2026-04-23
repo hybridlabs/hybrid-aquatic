@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.datagen
 
 import dev.hybridlabs.aquatic.Constants
-import dev.hybridlabs.aquatic.datagen.client.HASoundDefinitionsProvider
 import dev.hybridlabs.aquatic.datagen.server.BiomeModifierProvider
 import dev.hybridlabs.aquatic.datagen.server.HAGlobalLootModifierProvider
 import dev.hybridlabs.aquatic.datagen.server.StructureModifierProvider
@@ -35,6 +34,6 @@ object DataGenerators {
 
         generator.addProvider(event.includeServer(), DatapackBuiltinEntriesProvider(packOutput, lookupProvider, builder, setOf(Constants.MOD_ID)))
         generator.addProvider(event.includeServer(), HAGlobalLootModifierProvider(packOutput))
-        generator.addProvider(event.includeClient(), HASoundDefinitionsProvider(packOutput, event.existingFileHelper))
+        // generator.addProvider(event.includeClient(), HASoundDefinitionsProvider(packOutput, event.existingFileHelper))
     }
 }
