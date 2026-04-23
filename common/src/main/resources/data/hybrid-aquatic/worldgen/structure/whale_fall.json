@@ -2,7 +2,36 @@
   "type": "minecraft:jigsaw",
   "biomes": "#minecraft:is_deep_ocean",
   "step": "surface_structures",
-  "spawn_overrides": {},
+  "spawn_overrides": {
+    "hybrid-aquatic:crustacean": {
+      "bounding_box": "full",
+      "spawns": [
+        {
+          "type": "hybrid-aquatic:giant_isopod",
+          "maxCount": 5,
+          "minCount": 1,
+          "weight": 1
+        },
+        {
+          "type": "hybrid-aquatic:spider_crab",
+          "maxCount": 5,
+          "minCount": 1,
+          "weight": 1
+        }
+      ]
+    },
+    "hybrid-aquatic:critter": {
+      "bounding_box": "full",
+      "spawns": [
+        {
+          "type": "hybrid-aquatic:starfish",
+          "maxCount": 6,
+          "minCount": 2,
+          "weight": 1
+        }
+      ]
+    }
+  },
   "terrain_adaptation": "beard_thin",
   "start_pool": "hybrid-aquatic:whale_fall",
   "size": 1,
