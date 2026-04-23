@@ -87,6 +87,7 @@ object SpawnRestrictionRegistry {
         registerFish(HAEntityTypes.DRAGONFISH.get(), DragonfishEntity::canSpawn)
         registerFish(HAEntityTypes.OARFISH.get(), OarfishEntity::canSpawn)
         registerFish(HAEntityTypes.TRIPOD_FISH.get(), TripodFishEntity::canSpawn)
+        registerFish(HAEntityTypes.HAGFISH.get(), HagfishEntity::canSpawn)
 
         // deep fish
         setOf(
@@ -100,7 +101,6 @@ object SpawnRestrictionRegistry {
             HAEntityTypes.RATFISH.get(),
             HAEntityTypes.JOHN_DORY.get(),
             HAEntityTypes.SNAILFISH.get(),
-            HAEntityTypes.HAGFISH.get(),
             HAEntityTypes.SEA_ANGEL.get(),
         ).forEach { registerDeepFish(it) }
 

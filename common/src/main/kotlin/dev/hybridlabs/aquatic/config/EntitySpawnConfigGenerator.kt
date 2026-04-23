@@ -487,7 +487,6 @@ class EntitySpawnConfigGenerator {
         addFish(
             HAEntityTypes.HAGFISH.get(),
             listOf(
-                BiomeTags.IS_DEEP_OCEAN,
                 HABiomeTags.ALL_TRENCHES),
             2, 2, 6
         )
