@@ -536,7 +536,7 @@ object HABlocks {
 
     val HAGSLIME_BLOCK = register("hagslime_block") {
         HagslimeBlock(
-            Properties.copy(Blocks.SLIME_BLOCK)
+            Properties.copy(Blocks.HONEY_BLOCK)
                 .isSuffocating { _, _, _ -> false }
         )
     }
