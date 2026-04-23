@@ -530,13 +530,25 @@ object HABlocks {
     }
 
     val GLOWSLIME_BLOCK = register("glowslime_block") {
-        SlimeBlock(Properties.copy(Blocks.SLIME_BLOCK)
-            .lightLevel { 14 })
+        GlowslimeBlock(Properties.of()
+            .friction(0.8F)
+            .pushReaction(PushReaction.NORMAL)
+            .instabreak()
+            .noOcclusion()
+            .sound(SoundType.SLIME_BLOCK)
+            .mapColor { MapColor.COLOR_CYAN }
+            .lightLevel { 14 }
+        )
     }
 
     val HAGSLIME_BLOCK = register("hagslime_block") {
         HagslimeBlock(
-            Properties.copy(Blocks.HONEY_BLOCK)
+            Properties.of()
+                .pushReaction(PushReaction.NORMAL)
+                .instabreak()
+                .noOcclusion()
+                .sound(SoundType.HONEY_BLOCK)
+                .mapColor { MapColor.TERRACOTTA_WHITE }
                 .isSuffocating { _, _, _ -> false }
                 .speedFactor(0.4F)
                 .jumpFactor(0.5F)

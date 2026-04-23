@@ -9,6 +9,8 @@
         "EntityMixin",
         "BreathAirGoalMixin",
         "FlowingFluidMixin",
+        "PistonMovingBlockEntityMixin",
+        "PistonStructureResolverMixin",
         "FishingBobberEntityMixin",
         "FishingRodItemMixin",
         "PlayerEntityMixin",
