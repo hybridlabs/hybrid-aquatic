@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.data
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.data.client.LanguageProvider
 import dev.hybridlabs.aquatic.data.client.ModelProvider
+import dev.hybridlabs.aquatic.data.client.SoundProvider
 import dev.hybridlabs.aquatic.data.server.AdvancementProvider
 import dev.hybridlabs.aquatic.data.server.RecipeProvider
 import dev.hybridlabs.aquatic.data.server.loot.BlockLootTableProvider
@@ -29,6 +30,7 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         val pack = generator.createPack()
         pack.addProvider(::LanguageProvider)
         pack.addProvider(::ModelProvider)
+        pack.addProvider(::SoundProvider)
         pack.addProvider(::BlockLootTableProvider)
         pack.addProvider(::EntityTypeLootTableProvider)
         pack.addProvider(::FishingLootTableProvider)

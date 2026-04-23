@@ -1,0 +1,9 @@
+{
+  "entity.shell_beast.shoot": {
+    "replace": true,
+    "sounds": [
+      "hybrid-aquatic:entity/shell_beast_shoot"
+    ],
+    "subtitle": "shoot"
+  }
+}
