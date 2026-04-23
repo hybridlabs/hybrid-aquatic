@@ -535,7 +535,10 @@ object HABlocks {
     }
 
     val HAGSLIME_BLOCK = register("hagslime_block") {
-        HagslimeBlock(Properties.copy(Blocks.SLIME_BLOCK))
+        HagslimeBlock(
+            Properties.copy(Blocks.SLIME_BLOCK)
+                .isSuffocating { _, _, _ -> false }
+        )
     }
 
     val DECORATIVE_BUBBLE_COLUMN = register("decorative_bubble_column") {

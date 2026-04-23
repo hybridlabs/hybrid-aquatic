@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
@@ -15,45 +16,58 @@ import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class HagslimeBlock(settings: Properties): SlimeBlock(settings) {
+class HagslimeBlock(settings: Properties) : SlimeBlock(settings) {
     init {
         this.registerDefaultState(stateDefinition.any())
     }
 
-    override fun getShape(state: BlockState, level: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
-        return Shapes.block()
+    override fun getOcclusionShape(
+        state: BlockState,
+        level: BlockGetter,
+        pos: BlockPos
+    ): VoxelShape {
+        return Shapes.empty()
     }
 
-    override fun isPathfindable(
+    override fun skipRendering(
+        state: BlockState,
+        adjacentState: BlockState,
+        direction: Direction
+    ): Boolean {
+        return if (adjacentState.`is`(this)) true
+        else super.skipRendering(state, adjacentState, direction)
+    }
+
+    override fun getVisualShape(
         state: BlockState,
         level: BlockGetter,
         pos: BlockPos,
-        type: PathComputationType
-    ): Boolean {
-        return false
+        context: CollisionContext,
+    ): VoxelShape {
+        return Shapes.empty()
     }
 
     override fun getCollisionShape(
         state: BlockState,
         level: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
-        if (context is EntityCollisionContext) {
-            val entity = context.entity
+        if (context !is EntityCollisionContext) return Shapes.block()
 
-            if (entity != null) {
-                if (entity !is Player) {
-                    return Shapes.block()
-                }
+        val entity = context.entity
+        if (entity == null || entity !is Player) return Shapes.block()
 
-                if (!entity.isCrouching) {
-                    return Shapes.block()
-                }
-            }
-        }
+        return if (entity.isCrouching) Shapes.empty() else Shapes.block()
+    }
 
-        return super.getCollisionShape(state, level, pos, context)
+    override fun isPathfindable(
+        state: BlockState,
+        level: BlockGetter,
+        pos: BlockPos,
+        type: PathComputationType,
+    ): Boolean {
+        return true
     }
 
     override fun fallOn(level: Level, state: BlockState, pos: BlockPos, entity: Entity, fallDistance: Float) {
