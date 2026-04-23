@@ -20,6 +20,17 @@
         }
       ]
     },
+    "hybrid-aquatic:fish": {
+      "bounding_box": "full",
+      "spawns": [
+        {
+          "type": "hybrid-aquatic:hagfish",
+          "maxCount": 5,
+          "minCount": 3,
+          "weight": 2
+        }
+      ]
+    },
     "hybrid-aquatic:critter": {
       "bounding_box": "full",
       "spawns": [

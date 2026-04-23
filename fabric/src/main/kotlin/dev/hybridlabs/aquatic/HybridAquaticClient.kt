@@ -163,6 +163,7 @@ object HybridAquaticClient : ClientModInitializer {
             HABlocks.STRAWBERRY_ANEMONE.get(),
             HABlocks.MESSAGE_IN_A_BOTTLE.get(),
             HABlocks.GLOWSLIME_BLOCK.get(),
+            HABlocks.HAGSLIME_BLOCK.get(),
         )
         ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.cutout(),

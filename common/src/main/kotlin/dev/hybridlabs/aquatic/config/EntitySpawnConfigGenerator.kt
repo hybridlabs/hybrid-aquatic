@@ -485,6 +485,13 @@ class EntitySpawnConfigGenerator {
         )
 
         addFish(
+            HAEntityTypes.HAGFISH.get(),
+            listOf(
+                HABiomeTags.ALL_TRENCHES),
+            1, 1, 2
+        )
+
+        addFish(
             HAEntityTypes.TRIPOD_FISH.get(),
             listOf(
                 HABiomeTags.ALL_TRENCHES),

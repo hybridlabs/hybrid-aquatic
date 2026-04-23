@@ -248,6 +248,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.SUNFISH.get(),
             HAItems.PLECO.get(),
             HAItems.DRAGONFISH.get(),
+            HAItems.HAGFISH.get(),
             HAItems.PIRANHA.get(),
             HAItems.ANGLERFISH.get(),
             HAItems.BARRELEYE.get(),
@@ -410,6 +411,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.STONEFISH.get(),
             HAItems.BLOWFISH.get(),
             HAItems.BOXFISH.get(),
+            HAItems.HAGFISH.get(),
             HAItems.BLUE_SPOTTED_STINGRAY.get(),
             HAItems.SPOTTED_EAGLE_RAY.get(),
         ).forEach { item ->
@@ -421,6 +423,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.BARRELEYE.get(),
             HAItems.CLOWNFISH.get(),
             HAItems.DRAGONFISH.get(),
+            HAItems.HAGFISH.get(),
             HAItems.FLASHLIGHT_FISH.get(),
             HAItems.ROCKFISH.get(),
             HAItems.SEA_BASS.get(),

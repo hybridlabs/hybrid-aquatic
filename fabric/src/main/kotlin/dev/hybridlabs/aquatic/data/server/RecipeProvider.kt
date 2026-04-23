@@ -335,6 +335,29 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_block"))
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.HAGSLIME_BLOCK.get())
+            .pattern("HHH")
+            .pattern("HHH")
+            .pattern("HHH")
+            .define('H', HAItems.HAGSLIME.get())
+            .unlockedBy(
+                "has_hagslime",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.HAGSLIME.get())
+            )
+            .save(exporter)
+
+        ShapelessRecipeBuilder.shapeless(
+            RecipeCategory.MISC,
+            HAItems.HAGSLIME.get(),
+            9
+        )
+            .requires(HAItems.HAGSLIME_BLOCK.get())
+            .unlockedBy(
+                "has_hagslime_block",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.HAGSLIME_BLOCK.get())
+            )
+            .save(exporter, ResourceLocation("hybrid-aquatic", "hagslime_from_block"))
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_BLADE.get(), 1)
             .pattern(" C ")
             .pattern(" C ")

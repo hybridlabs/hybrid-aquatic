@@ -276,6 +276,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HAEntityTypes.FANGTOOTH.get(),
                 HAEntityTypes.FLASHLIGHT_FISH.get(),
                 HAEntityTypes.HATCHETFISH.get(),
+                HAEntityTypes.HAGFISH.get(),
                 HAEntityTypes.TRIPOD_FISH.get(),
                 HAEntityTypes.JOHN_DORY.get(),
                 HAEntityTypes.OARFISH.get(),

@@ -176,6 +176,13 @@ object HAEntityTypes {
         HatchetfishEntity::createMobAttributes
     )
 
+    val HAGFISH = registerFishUnderground(
+        "hagfish",
+        ::HagfishEntity,
+        EntityDimensions.fixed(0.5f, 0.4f),
+        HagfishEntity::createMobAttributes
+    )
+
     val TRIPOD_FISH = registerFishUnderground(
         "tripod_fish",
         ::TripodFishEntity,

@@ -538,10 +538,9 @@ object HAItems {
     )
     //#endregion
 
-    //#endregion
-
     //#region Artificial Blocks
     val GLOWSLIME_BLOCK = registerBlockItem("glowslime_block") { HABlocks.GLOWSLIME_BLOCK.get() }
+    val HAGSLIME_BLOCK = registerBlockItem("hagslime_block") { HABlocks.HAGSLIME_BLOCK.get() }
     val PEARL_BLOCK = registerBlockItem("pearl_block") { HABlocks.PEARL_BLOCK.get() }
     val BLACK_PEARL_BLOCK = registerBlockItem("black_pearl_block") { HABlocks.BLACK_PEARL_BLOCK.get() }
     val CRYSTALLINE_SULFUR = registerBlockItem("crystalline_sulfur") { HABlocks.CRYSTALLINE_SULFUR.get() }
@@ -625,6 +624,7 @@ object HAItems {
 
     //#region Crafting Ingredients
     val GLOWSLIME = register("glowslime") { Item(Item.Properties()) }
+    val HAGSLIME = register("hagslime") { Item(Item.Properties()) }
     val SEA_URCHIN_SPINE = register("sea_urchin_spine") { Item(Item.Properties()) }
     val SHARK_TOOTH = register("shark_tooth") { Item(Item.Properties()) }
     val SULFUR = register("sulfur") { Item(Item.Properties()) }
@@ -1042,6 +1042,22 @@ object HAItems {
         )
     }
 
+    val HAGFISH = register(
+        "hagfish"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(1)
+                        .saturationMod(0.2F)
+                        .meat()
+                        .effect(MobEffectInstance(MobEffects.POISON, 600, 0), 1.0f)
+                        .build()
+                )
+        )
+    }
+
     val SURGEONFISH = register(
         "surgeonfish"
     ) {
@@ -1272,7 +1288,7 @@ object HAItems {
                     FoodProperties.Builder()
                         .nutrition(1)
                         .saturationMod(0.2F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 1200, 2), 1.0f)
+                        .effect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f)
                         .meat()
                         .build()
                 )
@@ -1363,7 +1379,7 @@ object HAItems {
                     FoodProperties.Builder()
                         .nutrition(1)
                         .saturationMod(0.4F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 1200, 1), 1.0f)
+                        .effect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f)
                         .meat()
                         .build()
                 )
@@ -1379,7 +1395,7 @@ object HAItems {
                     FoodProperties.Builder()
                         .nutrition(1)
                         .saturationMod(0.4F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 1200, 1), 1.0f)
+                        .effect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f)
                         .meat()
                         .build()
                 )
@@ -1441,7 +1457,7 @@ object HAItems {
                     FoodProperties.Builder()
                         .nutrition(2)
                         .saturationMod(0.4F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 1200, 0), 1.0f)
+                        .effect(MobEffectInstance(MobEffects.POISON, 600, 0), 1.0f)
                         .meat()
                         .build()
                 )
@@ -1457,7 +1473,7 @@ object HAItems {
                     FoodProperties.Builder()
                         .nutrition(2)
                         .saturationMod(0.4F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 1200, 0), 1.0f)
+                        .effect(MobEffectInstance(MobEffects.POISON, 600, 0), 1.0f)
                         .meat()
                         .build()
                 )
@@ -1787,6 +1803,8 @@ object HAItems {
         registerSpawnEgg("viperfish_spawn_egg", HAEntityTypes.VIPERFISH, 0x65727e, 0x65727e)
     val HATCHETFISH_SPAWN_EGG =
         registerSpawnEgg("hatchetfish_spawn_egg", HAEntityTypes.HATCHETFISH, 0x5e718e, 0x4c7597)
+    val HAGFISH_SPAWN_EGG =
+        registerSpawnEgg("hagfish_spawn_egg", HAEntityTypes.HAGFISH, 0x412c33, 0x7b535b)
     val TRIPOD_FISH_SPAWN_EGG =
         registerSpawnEgg("tripod_fish_spawn_egg", HAEntityTypes.TRIPOD_FISH, 0x4c7597, 0xafeeee)
     val FANGTOOTH_SPAWN_EGG =

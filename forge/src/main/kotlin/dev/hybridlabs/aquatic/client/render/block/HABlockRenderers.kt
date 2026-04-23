@@ -13,6 +13,7 @@ object HABlockRenderers {
             HAPlatformBlocks.TALL_DUNEGRASS.get(),
             HAPlatformBlocks.CATTAIL.get(),
             HABlocks.GLOWSLIME_BLOCK.get(),
+            HABlocks.HAGSLIME_BLOCK.get(),
 
             HABlocks.SHORT_RED_ALGAE.get(),
             HABlocks.RED_ALGAE.get(),

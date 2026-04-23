@@ -69,6 +69,12 @@ object HybridAquaticEntityRenderers {
             ::DragonfishEntityRenderer
         )
 
+    val HAGFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.HAGFISH,
+            ::HagfishEntityRenderer
+        )
+
     val JOHN_DORY =
         ClientServices.PLATFORM.registerEntityRenderer(
             HAEntityTypes.JOHN_DORY,

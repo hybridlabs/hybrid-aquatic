@@ -100,6 +100,7 @@ object SpawnRestrictionRegistry {
             HAEntityTypes.RATFISH.get(),
             HAEntityTypes.JOHN_DORY.get(),
             HAEntityTypes.SNAILFISH.get(),
+            HAEntityTypes.HAGFISH.get(),
             HAEntityTypes.SEA_ANGEL.get(),
         ).forEach { registerDeepFish(it) }
 

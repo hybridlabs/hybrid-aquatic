@@ -405,6 +405,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.RAW_TENTACLE.get(),
             HAItems.COOKED_TENTACLE.get(),
             HAItems.GLOWSLIME.get(),
+            HAItems.HAGSLIME.get(),
             HAItems.SHARK_TOOTH.get(),
             HAItems.PRISMARINE_ROD.get(),
             HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get(),

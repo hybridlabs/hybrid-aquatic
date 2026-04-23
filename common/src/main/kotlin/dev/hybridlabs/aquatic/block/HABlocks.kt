@@ -534,6 +534,10 @@ object HABlocks {
             .lightLevel { 14 })
     }
 
+    val HAGSLIME_BLOCK = register("hagslime_block") {
+        SlimeBlock(Properties.copy(Blocks.SLIME_BLOCK))
+    }
+
     val DECORATIVE_BUBBLE_COLUMN = register("decorative_bubble_column") {
         DecorativeBubbleColumnBlock(Properties.copy(Blocks.BUBBLE_COLUMN))
     }
