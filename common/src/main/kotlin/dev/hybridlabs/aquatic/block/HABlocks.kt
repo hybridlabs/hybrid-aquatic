@@ -532,7 +532,6 @@ object HABlocks {
     val GLOWSLIME_BLOCK = register("glowslime_block") {
         GlowslimeBlock(Properties.of()
             .friction(0.8F)
-            .pushReaction(PushReaction.NORMAL)
             .instabreak()
             .noOcclusion()
             .sound(SoundType.SLIME_BLOCK)
@@ -544,7 +543,6 @@ object HABlocks {
     val HAGSLIME_BLOCK = register("hagslime_block") {
         HagslimeBlock(
             Properties.of()
-                .pushReaction(PushReaction.NORMAL)
                 .instabreak()
                 .noOcclusion()
                 .sound(SoundType.HONEY_BLOCK)
