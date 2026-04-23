@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hybrid-aquatic:hagslime_block"
+          "name": "hybrid-aquatic:glowslime_block"
         }
       ],
       "rolls": 1.0
