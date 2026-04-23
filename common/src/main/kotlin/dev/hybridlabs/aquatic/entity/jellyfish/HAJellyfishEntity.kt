@@ -216,7 +216,7 @@ open class HAJellyfishEntity(
         if (super.hurt(source, amount)) {
 
             val attacker = source.directEntity
-            if (attacker is Player && isVenomous && attacker.mainHandItem.isEmpty) {
+            if (attacker is Player && isVenomous && attacker.mainHandItem.isEmpty && !attacker.isPassenger) {
                 attacker.addEffect(MobEffectInstance(MobEffects.POISON, 200, venomLevel))
                 playSound(SoundEvents.PUFFER_FISH_STING, 0.5F, 0.5F)
             }
