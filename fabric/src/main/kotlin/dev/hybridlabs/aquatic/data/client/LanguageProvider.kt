@@ -189,6 +189,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HASoundEvents.HYPNAUTILUS_AMBIENT to "Hypnautilus spirals",
             HASoundEvents.HYPNAUTILUS_HURT to "Hypnautilus hurts",
             HASoundEvents.HYPNAUTILUS_DIE to "Hypnautilus dies",
+
+            HASoundEvents.OMINOUS_CONCH_BLOWS to "Ominous Conch plays"
         ).forEach { (soundEvent, translation) ->
             builder.add(Util.makeDescriptionId("subtitles", soundEvent.get().location), translation)
         }
