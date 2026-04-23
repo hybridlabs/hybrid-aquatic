@@ -228,7 +228,7 @@ open class HAJellyfishEntity(
     override fun playerTouch(player: Player) {
         super.playerTouch(player)
 
-        if (player is ServerPlayer && isVenomous && !player.isPassenger) {
+        if (player is ServerPlayer && isVenomous && !player.isPassenger && !this.fromFishingNet) {
             player.hurt(this.damageSources().mobAttack(this), 1.0f)
             player.addEffect(MobEffectInstance(MobEffects.POISON, 100, venomLevel), this)
         }
