@@ -29,6 +29,24 @@
     ],
     "subtitle": "subtitles.hybrid-aquatic.entity.dugong.swim"
   },
+  "entity.hypnautilus.ambient": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.turtle.egg_crack"
+      }
+    ],
+    "subtitle": "subtitles.hybrid-aquatic.entity.hypnautilus.ambient"
+  },
+  "entity.hypnautilus.die": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.turtle.egg_crack"
+      }
+    ],
+    "subtitle": "subtitles.hybrid-aquatic.entity.hypnautilus.die"
+  },
   "entity.hypnautilus.hurt": {
     "sounds": [
       {
@@ -38,6 +56,24 @@
     ],
     "subtitle": "subtitles.hybrid-aquatic.entity.hypnautilus.hurt"
   },
+  "entity.karcinogen.ambient": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.turtle.egg_crack"
+      }
+    ],
+    "subtitle": "subtitles.hybrid-aquatic.entity.karcinogen.ambient"
+  },
+  "entity.karcinogen.die": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.turtle.egg_crack"
+      }
+    ],
+    "subtitle": "subtitles.hybrid-aquatic.entity.karcinogen.die"
+  },
   "entity.karcinogen.hurt": {
     "sounds": [
       {
@@ -46,6 +82,24 @@
       }
     ],
     "subtitle": "subtitles.hybrid-aquatic.entity.karcinogen.hurt"
+  },
+  "entity.karcinoma.ambient": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.turtle.egg_crack"
+      }
+    ],
+    "subtitle": "subtitles.hybrid-aquatic.entity.karcinoma.ambient"
+  },
+  "entity.karcinoma.die": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.turtle.egg_crack"
+      }
+    ],
+    "subtitle": "subtitles.hybrid-aquatic.entity.karcinoma.die"
   },
   "entity.karcinoma.hurt": {
     "sounds": [
