@@ -1,12 +1,18 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
+import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 
 class HagfishEntity(type: EntityType<out HagfishEntity>, world: Level) :
@@ -28,6 +34,25 @@ class HagfishEntity(type: EntityType<out HagfishEntity>, world: Level) :
 
     override fun isFood(stack: ItemStack): Boolean {
         return stack.`is`(Items.ROTTEN_FLESH)
+    }
+
+    override fun hurt(source: DamageSource, amount: Float): Boolean {
+        if (super.hurt(source, amount)) {
+
+            val attacker = source.directEntity
+            if (attacker is LivingEntity) {
+                attacker.addEffect(MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0))
+                attacker.addEffect(MobEffectInstance(MobEffects.DIG_SLOWDOWN, 100, 1))
+            }
+
+            if (level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                spawnAtLocation(HAItems.HAGSLIME.get())
+            }
+
+            return true
+        }
+
+        return false
     }
 
     companion object {
