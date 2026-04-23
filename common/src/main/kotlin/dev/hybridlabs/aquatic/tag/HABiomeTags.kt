@@ -55,6 +55,7 @@ object HABiomeTags {
     //#region Misc Deep Sea Tags
     val ALL_TRENCHES = create("all_trenches")
     val DEEP_REEF = create("deep_reef")
+    val HAS_WHALE_FALL = create("has_whale_fall")
     val HAS_THERMAL_VENTS = create("has_thermal_vents")
     val SULFURIC_CAVE = create("sulfuric_cave")
 

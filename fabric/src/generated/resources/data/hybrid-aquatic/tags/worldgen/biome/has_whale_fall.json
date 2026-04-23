@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#hybrid-aquatic:all_trenches",
+    "#minecraft:is_deep_ocean"
+  ]
+}

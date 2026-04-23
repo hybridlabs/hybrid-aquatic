@@ -184,6 +184,10 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HABiomes.TROPICAL_DEEP_CORAL_REEF)
             .addOptional(ResourceLocation("spawn", "deep_warm_ocean"))
 
+        getOrCreateTagBuilder(HABiomeTags.HAS_WHALE_FALL)
+            .addTag(HABiomeTags.ALL_TRENCHES)
+            .addTag(BiomeTags.IS_DEEP_OCEAN)
+
         getOrCreateTagBuilder(HABiomeTags.HAS_THERMAL_VENTS)
             .addOptional(HABiomes.SULFURIC_CAVES)
 
