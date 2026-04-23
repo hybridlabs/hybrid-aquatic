@@ -32,14 +32,28 @@ public class PistonStructureResolverMixin {
 
         if (state1.is(GLOWSLIME) && state2.is(Blocks.SLIME_BLOCK)) {
             cir.setReturnValue(false);
+        } else if (state1.is(Blocks.SLIME_BLOCK) && state2.is(GLOWSLIME)) {
+            cir.setReturnValue(false);
         } else if (state1.is(GLOWSLIME) && state2.is(Blocks.HONEY_BLOCK)) {
+            cir.setReturnValue(false);
+        } else if (state1.is(Blocks.HONEY_BLOCK) && state2.is(GLOWSLIME)) {
             cir.setReturnValue(false);
         } else if (state1.is(GLOWSLIME) && state2.is(HAGSLIME)) {
             cir.setReturnValue(false);
+        } else if (state1.is(HAGSLIME) && state2.is(GLOWSLIME)) {
+            cir.setReturnValue(false);
         } else if (state1.is(HAGSLIME) && state2.is(Blocks.SLIME_BLOCK)) {
+            cir.setReturnValue(false);
+        } else if (state1.is(Blocks.SLIME_BLOCK) && state2.is(HAGSLIME)) {
             cir.setReturnValue(false);
         } else if (state1.is(HAGSLIME) && state2.is(Blocks.HONEY_BLOCK)) {
             cir.setReturnValue(false);
+        } else if (state1.is(Blocks.HONEY_BLOCK) && state2.is(HAGSLIME)) {
+            cir.setReturnValue(false);
+        } else if (state1.is(HAGSLIME) && state2.is(HAGSLIME)) {
+            cir.setReturnValue(true);
+        } else if (state1.is(GLOWSLIME) && state2.is(GLOWSLIME)) {
+            cir.setReturnValue(true);
         }
     }
 }
