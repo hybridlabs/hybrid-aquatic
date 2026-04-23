@@ -538,6 +538,8 @@ object HABlocks {
         HagslimeBlock(
             Properties.copy(Blocks.HONEY_BLOCK)
                 .isSuffocating { _, _, _ -> false }
+                .speedFactor(0.4F)
+                .jumpFactor(0.5F)
         )
     }
 
