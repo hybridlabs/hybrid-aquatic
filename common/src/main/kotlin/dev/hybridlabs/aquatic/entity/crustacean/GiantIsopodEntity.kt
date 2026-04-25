@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -73,11 +74,25 @@ class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
 
     //#region Properties
     override fun getMaxSize(): Int {
-        return 5
+        val level = this.level()
+        val biome = level.getBiome(this.blockPosition())
+
+        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+            5
+        } else {
+            0
+        }
     }
 
     override fun getMinSize(): Int {
-        return -5
+        val level = this.level()
+        val biome = level.getBiome(this.blockPosition())
+
+        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+            0
+        } else {
+            -5
+        }
     }
     //#endregion
 

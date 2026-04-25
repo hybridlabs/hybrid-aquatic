@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.shark
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -138,5 +139,20 @@ class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
 
     override fun getOverlayTextureName(): String {
         return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
+    }
+
+    override fun getMaxSize(): Int {
+        val level = this.level()
+        val biome = level.getBiome(this.blockPosition())
+
+        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+            10
+        } else {
+            5
+        }
+    }
+
+    override fun getMinSize(): Int {
+        return -5
     }
 }

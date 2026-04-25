@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -48,10 +49,24 @@ class SpiderCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
     }
 
     override fun getMaxSize(): Int {
-        return 5
+        val level = this.level()
+        val biome = level.getBiome(this.blockPosition())
+
+        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+            8
+        } else {
+            3
+        }
     }
 
     override fun getMinSize(): Int {
-        return -5
+        val level = this.level()
+        val biome = level.getBiome(this.blockPosition())
+
+        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+            0
+        } else {
+            -3
+        }
     }
 }
