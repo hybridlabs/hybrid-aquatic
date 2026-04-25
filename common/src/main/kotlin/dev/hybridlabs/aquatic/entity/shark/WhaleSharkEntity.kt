@@ -3,11 +3,11 @@ package dev.hybridlabs.aquatic.entity.shark
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.tags.BiomeTags
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -145,7 +145,7 @@ class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
         val level = this.level()
         val biome = level.getBiome(this.blockPosition())
 
-        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+        return if (biome.`is`(BiomeTags.IS_DEEP_OCEAN)) {
             10
         } else {
             5
