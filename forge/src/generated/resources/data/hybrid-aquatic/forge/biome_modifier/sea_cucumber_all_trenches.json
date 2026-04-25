@@ -1,6 +1,6 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#hybrid-aquatic:lukewarm_trench",
+  "biomes": "#hybrid-aquatic:all_trenches",
   "spawners": {
     "type": "hybrid-aquatic:sea_cucumber",
     "maxCount": 2,

@@ -1,6 +1,6 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#hybrid-aquatic:deep_warm_oceans",
+  "biomes": "#hybrid-aquatic:lukewarm_oceans",
   "spawners": {
     "type": "hybrid-aquatic:whale_shark",
     "maxCount": 1,

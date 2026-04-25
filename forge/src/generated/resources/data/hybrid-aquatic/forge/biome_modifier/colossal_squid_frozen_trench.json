@@ -1,8 +1,8 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#hybrid-aquatic:cold_oceans",
+  "biomes": "#hybrid-aquatic:frozen_trench",
   "spawners": {
-    "type": "hybrid-aquatic:basking_shark",
+    "type": "hybrid-aquatic:colossal_squid",
     "maxCount": 1,
     "minCount": 1,
     "weight": 1

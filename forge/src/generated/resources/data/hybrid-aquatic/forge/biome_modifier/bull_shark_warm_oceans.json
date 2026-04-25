@@ -1,6 +1,6 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#hybrid-aquatic:deep_warm_oceans",
+  "biomes": "#hybrid-aquatic:warm_oceans",
   "spawners": {
     "type": "hybrid-aquatic:bull_shark",
     "maxCount": 2,

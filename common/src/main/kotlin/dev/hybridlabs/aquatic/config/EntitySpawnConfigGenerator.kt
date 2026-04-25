@@ -579,7 +579,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.COLOSSAL_SQUID.get(),
             listOf(
                 HABiomeTags.TEMPERATE_TRENCH,
-                HABiomeTags.COLD_TRENCH),
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.FROZEN_TRENCH),
             1, 1, 1
         )
 
@@ -588,7 +589,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HABiomeTags.LUKEWARM_OCEANS,
                 HABiomeTags.LUKEWARM_TRENCH,
-                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.WARM_OCEANS,
                 HABiomeTags.WARM_TRENCH,
                 HABiomeTags.CORAL_REEF),
             10, 1, 2
@@ -814,16 +815,16 @@ class EntitySpawnConfigGenerator {
         addShark(
             HAEntityTypes.BULL_SHARK.get(),
             listOf(
-                HABiomeTags.DEEP_LUKEWARM_OCEANS,
-                HABiomeTags.DEEP_WARM_OCEANS),
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.WARM_OCEANS),
             2, 1, 2
         )
 
         addShark(
             HAEntityTypes.WHALE_SHARK.get(),
             listOf(
-                HABiomeTags.DEEP_LUKEWARM_OCEANS,
-                HABiomeTags.DEEP_WARM_OCEANS),
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.WARM_OCEANS),
             1, 1, 1
         )
 
@@ -831,7 +832,7 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.BASKING_SHARK.get(),
             listOf(
                 HABiomeTags.DEEP_TEMPERATE_OCEANS,
-                HABiomeTags.COLD_OCEANS,
+                HABiomeTags.DEEP_COLD_OCEANS,
                 HABiomeTags.FROZEN_OCEANS
             ),
             1, 1, 1
@@ -1096,11 +1097,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 BiomeTags.IS_OCEAN,
                 BiomeTags.IS_DEEP_OCEAN,
-                HABiomeTags.TEMPERATE_TRENCH,
-                HABiomeTags.LUKEWARM_TRENCH,
-                HABiomeTags.WARM_TRENCH,
-                HABiomeTags.COLD_TRENCH,
-                HABiomeTags.FROZEN_TRENCH,
+                HABiomeTags.ALL_TRENCHES,
                 HABiomeTags.SANDY_BEACHES),
             2, 0, 2
         )
@@ -1111,11 +1108,7 @@ class EntitySpawnConfigGenerator {
                 BiomeTags.IS_OCEAN,
                 BiomeTags.IS_DEEP_OCEAN,
                 HABiomeTags.RED_MEADOW,
-                HABiomeTags.TEMPERATE_TRENCH,
-                HABiomeTags.LUKEWARM_TRENCH,
-                HABiomeTags.WARM_TRENCH,
-                HABiomeTags.COLD_TRENCH,
-                HABiomeTags.FROZEN_TRENCH),
+                HABiomeTags.ALL_TRENCHES),
             3, 1, 2
         )
 
@@ -1125,11 +1118,7 @@ class EntitySpawnConfigGenerator {
                 BiomeTags.IS_OCEAN,
                 BiomeTags.IS_DEEP_OCEAN,
                 HABiomeTags.RED_MEADOW,
-                HABiomeTags.TEMPERATE_TRENCH,
-                HABiomeTags.LUKEWARM_TRENCH,
-                HABiomeTags.WARM_TRENCH,
-                HABiomeTags.COLD_TRENCH,
-                HABiomeTags.FROZEN_TRENCH),
+                HABiomeTags.ALL_TRENCHES),
             3, 0, 2
         )
         //#endregion

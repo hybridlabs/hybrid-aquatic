@@ -1,6 +1,6 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#hybrid-aquatic:shallow_warm_oceans",
+  "biomes": "#hybrid-aquatic:warm_oceans",
   "spawners": {
     "type": "hybrid-aquatic:firefly_squid",
     "maxCount": 2,
