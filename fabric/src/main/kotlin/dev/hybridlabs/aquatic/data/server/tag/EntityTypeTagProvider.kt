@@ -429,6 +429,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addTag(HAEntityTags.CRAB)
             .addTag(HAEntityTags.LOBSTER)
             .addTag(HAEntityTags.SHRIMP)
+            .add(HAEntityTypes.GIANT_ISOPOD.get(),)
             .addOptional(ResourceLocation("alexsmobs", "triops"))
             .addOptional(ResourceLocation("fintastic", "daphnia"))
 

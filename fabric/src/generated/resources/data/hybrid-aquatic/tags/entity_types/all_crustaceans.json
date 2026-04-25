@@ -4,6 +4,7 @@
     "#hybrid-aquatic:crab",
     "#hybrid-aquatic:lobster",
     "#hybrid-aquatic:shrimp",
+    "hybrid-aquatic:giant_isopod",
     {
       "id": "alexsmobs:triops",
       "required": false
