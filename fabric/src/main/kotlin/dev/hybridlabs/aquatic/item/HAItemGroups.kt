@@ -119,6 +119,7 @@ object HAItemGroups {
                 entries.accept(HAItems.BUTTON_CORAL_BLOCK.get())
                 entries.accept(HAItems.ROSE_CORAL_BLOCK.get())
                 entries.accept(HAItems.BAMBOO_CORAL_BLOCK.get())
+                entries.accept(HAItems.ZIGZAG_CORAL_BLOCK.get())
                 entries.accept(HAItems.LOPHELIA_CORAL_BLOCK.get())
                 entries.accept(HAItems.THORN_CORAL_BLOCK.get())
 
@@ -127,6 +128,7 @@ object HAItemGroups {
                 entries.accept(HAItems.DEAD_BUTTON_CORAL_BLOCK.get())
                 entries.accept(HAItems.DEAD_ROSE_CORAL_BLOCK.get())
                 entries.accept(HAItems.DEAD_BAMBOO_CORAL_BLOCK.get())
+                entries.accept(HAItems.DEAD_ZIGZAG_CORAL_BLOCK.get())
                 entries.accept(HAItems.DEAD_LOPHELIA_CORAL_BLOCK.get())
                 entries.accept(HAItems.DEAD_THORN_CORAL_BLOCK.get())
 
@@ -135,6 +137,7 @@ object HAItemGroups {
                 entries.accept(HAItems.BLEACHED_BUTTON_CORAL_BLOCK.get())
                 entries.accept(HAItems.BLEACHED_ROSE_CORAL_BLOCK.get())
                 entries.accept(HAItems.BLEACHED_BAMBOO_CORAL_BLOCK.get())
+                entries.accept(HAItems.BLEACHED_ZIGZAG_CORAL_BLOCK.get())
                 entries.accept(HAItems.BLEACHED_LOPHELIA_CORAL_BLOCK.get())
                 entries.accept(HAItems.BLEACHED_THORN_CORAL_BLOCK.get())
                 entries.accept(HAItems.BLEACHED_FIRE_CORAL_BLOCK.get())
@@ -148,6 +151,7 @@ object HAItemGroups {
                 entries.accept(HAItems.BUTTON_CORAL.get())
                 entries.accept(HAItems.ROSE_CORAL.get())
                 entries.accept(HAItems.BAMBOO_CORAL.get())
+                entries.accept(HAItems.ZIGZAG_CORAL.get())
                 entries.accept(HAItems.LOPHELIA_CORAL.get())
                 entries.accept(HAItems.THORN_CORAL.get())
 
@@ -156,6 +160,7 @@ object HAItemGroups {
                 entries.accept(HAItems.DEAD_BUTTON_CORAL.get())
                 entries.accept(HAItems.DEAD_ROSE_CORAL.get())
                 entries.accept(HAItems.DEAD_BAMBOO_CORAL.get())
+                entries.accept(HAItems.DEAD_ZIGZAG_CORAL.get())
                 entries.accept(HAItems.DEAD_LOPHELIA_CORAL.get())
                 entries.accept(HAItems.DEAD_THORN_CORAL.get())
 
@@ -163,6 +168,8 @@ object HAItemGroups {
                 entries.accept(HAItems.BLEACHED_LEAF_CORAL.get())
                 entries.accept(HAItems.BLEACHED_BUTTON_CORAL.get())
                 entries.accept(HAItems.BLEACHED_ROSE_CORAL.get())
+                entries.accept(HAItems.BLEACHED_BAMBOO_CORAL.get())
+                entries.accept(HAItems.BLEACHED_ZIGZAG_CORAL.get())
                 entries.accept(HAItems.BLEACHED_LOPHELIA_CORAL.get())
                 entries.accept(HAItems.BLEACHED_THORN_CORAL.get())
                 entries.accept(HAItems.BLEACHED_FIRE_CORAL.get())
@@ -176,6 +183,7 @@ object HAItemGroups {
                 entries.accept(HAItems.BUTTON_CORAL_FAN.get())
                 entries.accept(HAItems.ROSE_CORAL_FAN.get())
                 entries.accept(HAItems.BAMBOO_CORAL_FAN.get())
+                entries.accept(HAItems.ZIGZAG_CORAL_FAN.get())
                 entries.accept(HAItems.LOPHELIA_CORAL_FAN.get())
                 entries.accept(HAItems.THORN_CORAL_FAN.get())
 
@@ -184,6 +192,7 @@ object HAItemGroups {
                 entries.accept(HAItems.DEAD_BUTTON_CORAL_FAN.get())
                 entries.accept(HAItems.DEAD_ROSE_CORAL_FAN.get())
                 entries.accept(HAItems.DEAD_BAMBOO_CORAL_FAN.get())
+                entries.accept(HAItems.DEAD_ZIGZAG_CORAL_FAN.get())
                 entries.accept(HAItems.DEAD_LOPHELIA_CORAL_FAN.get())
                 entries.accept(HAItems.DEAD_THORN_CORAL_FAN.get())
 
@@ -192,6 +201,7 @@ object HAItemGroups {
                 entries.accept(HAItems.BLEACHED_BUTTON_CORAL_FAN.get())
                 entries.accept(HAItems.BLEACHED_ROSE_CORAL_FAN.get())
                 entries.accept(HAItems.BLEACHED_BAMBOO_CORAL_FAN.get())
+                entries.accept(HAItems.BLEACHED_ZIGZAG_CORAL_FAN.get())
                 entries.accept(HAItems.BLEACHED_LOPHELIA_CORAL_FAN.get())
                 entries.accept(HAItems.BLEACHED_THORN_CORAL_FAN.get())
                 entries.accept(HAItems.BLEACHED_FIRE_CORAL_FAN.get())

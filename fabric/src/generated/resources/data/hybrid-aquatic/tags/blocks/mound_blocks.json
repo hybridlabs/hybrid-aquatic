@@ -12,6 +12,8 @@
     "hybrid-aquatic:dead_leaf_coral_block",
     "hybrid-aquatic:dead_rose_coral_block",
     "hybrid-aquatic:dead_lophelia_coral_block",
-    "hybrid-aquatic:dead_thorn_coral_block"
+    "hybrid-aquatic:dead_thorn_coral_block",
+    "hybrid-aquatic:dead_bamboo_coral_block",
+    "hybrid-aquatic:dead_zigzag_coral_block"
   ]
 }

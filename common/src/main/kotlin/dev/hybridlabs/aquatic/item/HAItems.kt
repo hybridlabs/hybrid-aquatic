@@ -360,6 +360,32 @@ object HAItems {
         HABlocks.BLEACHED_BUTTON_CORAL_WALL_FAN
     )
 
+    val ZIGZAG_CORAL_BLOCK = registerBlockItem("zigzag_coral_block") { HABlocks.ZIGZAG_CORAL_BLOCK.get() }
+    val DEAD_ZIGZAG_CORAL_BLOCK =
+        registerBlockItem("dead_zigzag_coral_block") { HABlocks.DEAD_ZIGZAG_CORAL_BLOCK.get() }
+    val ZIGZAG_CORAL = registerBlockItem("zigzag_coral") { HABlocks.ZIGZAG_CORAL.get() }
+    val DEAD_ZIGZAG_CORAL = registerBlockItem("dead_zigzag_coral") { HABlocks.DEAD_ZIGZAG_CORAL.get() }
+    val ZIGZAG_CORAL_FAN = registerVerticallyAttachable(
+        "zigzag_coral_fan",
+        HABlocks.ZIGZAG_CORAL_FAN,
+        HABlocks.ZIGZAG_CORAL_WALL_FAN
+    )
+    val DEAD_ZIGZAG_CORAL_FAN = registerVerticallyAttachable(
+        "dead_zigzag_coral_fan",
+        HABlocks.DEAD_ZIGZAG_CORAL_FAN,
+        HABlocks.DEAD_ZIGZAG_CORAL_WALL_FAN
+    )
+
+    val BLEACHED_ZIGZAG_CORAL_BLOCK =
+        registerBlockItem("bleached_zigzag_coral_block") { HABlocks.BLEACHED_ZIGZAG_CORAL_BLOCK.get() }
+    val BLEACHED_ZIGZAG_CORAL =
+        registerBlockItem("bleached_zigzag_coral") { HABlocks.BLEACHED_ZIGZAG_CORAL.get() }
+    val BLEACHED_ZIGZAG_CORAL_FAN = registerVerticallyAttachable(
+        "bleached_zigzag_coral_fan",
+        HABlocks.BLEACHED_ZIGZAG_CORAL_FAN,
+        HABlocks.BLEACHED_ZIGZAG_CORAL_WALL_FAN
+    )
+
     val SUN_CORAL_BLOCK = registerBlockItem("sun_coral_block") { HABlocks.SUN_CORAL_BLOCK.get() }
     val DEAD_SUN_CORAL_BLOCK =
         registerBlockItem("dead_sun_coral_block") { HABlocks.DEAD_SUN_CORAL_BLOCK.get() }

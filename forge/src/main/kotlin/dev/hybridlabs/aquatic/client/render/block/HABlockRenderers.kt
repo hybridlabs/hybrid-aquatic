@@ -114,6 +114,10 @@ object HABlockRenderers {
             HABlocks.DEAD_BUTTON_CORAL_FAN.get(),
             HABlocks.DEAD_BUTTON_CORAL_WALL_FAN.get(),
 
+            HABlocks.DEAD_ZIGZAG_CORAL.get(),
+            HABlocks.DEAD_ZIGZAG_CORAL_FAN.get(),
+            HABlocks.DEAD_ZIGZAG_CORAL_WALL_FAN.get(),
+
             HABlocks.LEAF_CORAL.get(),
             HABlocks.LEAF_CORAL_FAN.get(),
             HABlocks.LEAF_CORAL_WALL_FAN.get(),

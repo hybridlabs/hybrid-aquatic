@@ -47,7 +47,9 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         add(HABlocks.ANEMONE.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()
-                    .add(LootItem.lootTableItem(block)).conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .add(LootItem.lootTableItem(block))
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .build()
             )
         }
 
@@ -55,7 +57,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .build()
             )
         }
 
@@ -63,7 +66,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .build()
             )
         }
         //#endregion
@@ -73,7 +77,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .build()
             )
         }
 
@@ -81,7 +86,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .build()
             )
         }
 
@@ -89,7 +95,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .build()
             )
         }
 
@@ -97,7 +104,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .build()
             )
         }
 
@@ -105,7 +113,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .build()
             )
         }
 
@@ -113,7 +122,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .build()
             )
         }
 
@@ -137,7 +147,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build()).build()
+                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .build()
             )
         }
 
@@ -194,51 +205,154 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         //#endregion
 
         //#region Corals
+        add(HABlocks.LOPHELIA_CORAL_BLOCK.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(block)
+                            .`when`(HAS_SILK_TOUCH)
+                    )
+                    .add(
+                        LootItem.lootTableItem(HABlocks.DEAD_LOPHELIA_CORAL_BLOCK.get())
+                            .`when`(HAS_SILK_TOUCH.invert())
+                    )
+            )
+        }
+
+        add(HABlocks.BAMBOO_CORAL_BLOCK.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(block)
+                            .`when`(HAS_SILK_TOUCH)
+                    )
+                    .add(
+                        LootItem.lootTableItem(HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get())
+                            .`when`(HAS_SILK_TOUCH.invert())
+                    )
+            )
+        }
+
+        add(HABlocks.ZIGZAG_CORAL_BLOCK.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(block)
+                            .`when`(HAS_SILK_TOUCH)
+                    )
+                    .add(
+                        LootItem.lootTableItem(HABlocks.DEAD_ZIGZAG_CORAL_BLOCK.get())
+                            .`when`(HAS_SILK_TOUCH.invert())
+                    )
+            )
+        }
+
+        add(HABlocks.THORN_CORAL_BLOCK.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(block)
+                            .`when`(HAS_SILK_TOUCH)
+                    )
+                    .add(
+                        LootItem.lootTableItem(HABlocks.DEAD_THORN_CORAL_BLOCK.get())
+                            .`when`(HAS_SILK_TOUCH.invert())
+                    )
+            )
+        }
+
+        add(HABlocks.SUN_CORAL_BLOCK.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(block)
+                            .`when`(HAS_SILK_TOUCH)
+                    )
+                    .add(
+                        LootItem.lootTableItem(HABlocks.DEAD_SUN_CORAL_BLOCK.get())
+                            .`when`(HAS_SILK_TOUCH.invert())
+                    )
+            )
+        }
+
+        add(HABlocks.BUTTON_CORAL_BLOCK.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(block)
+                            .`when`(HAS_SILK_TOUCH)
+                    )
+                    .add(
+                        LootItem.lootTableItem(HABlocks.DEAD_BUTTON_CORAL_BLOCK.get())
+                            .`when`(HAS_SILK_TOUCH.invert())
+                    )
+            )
+        }
+
+        add(HABlocks.ROSE_CORAL_BLOCK.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(block)
+                            .`when`(HAS_SILK_TOUCH)
+                    )
+                    .add(
+                        LootItem.lootTableItem(HABlocks.DEAD_ROSE_CORAL_BLOCK.get())
+                            .`when`(HAS_SILK_TOUCH.invert())
+                    )
+            )
+        }
+
+        add(HABlocks.LEAF_CORAL_BLOCK.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(block)
+                            .`when`(HAS_SILK_TOUCH)
+                    )
+                    .add(
+                        LootItem.lootTableItem(HABlocks.DEAD_LEAF_CORAL_BLOCK.get())
+                            .`when`(HAS_SILK_TOUCH.invert())
+                    )
+            )
+        }
+
         for (block in listOf(
-            HABlocks.LOPHELIA_CORAL_BLOCK.get(),
-            HABlocks.DEAD_LOPHELIA_CORAL_BLOCK.get(),
             HABlocks.LOPHELIA_CORAL.get(),
             HABlocks.DEAD_LOPHELIA_CORAL.get(),
             HABlocks.LOPHELIA_CORAL_FAN.get(),
             HABlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
-            
-            HABlocks.BAMBOO_CORAL_BLOCK.get(),
-            HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get(),
+
             HABlocks.BAMBOO_CORAL.get(),
             HABlocks.DEAD_BAMBOO_CORAL.get(),
             HABlocks.BAMBOO_CORAL_FAN.get(),
             HABlocks.DEAD_BAMBOO_CORAL_FAN.get(),
 
-            HABlocks.THORN_CORAL_BLOCK.get(),
-            HABlocks.DEAD_THORN_CORAL_BLOCK.get(),
+            HABlocks.ZIGZAG_CORAL.get(),
+            HABlocks.DEAD_ZIGZAG_CORAL.get(),
+            HABlocks.ZIGZAG_CORAL_FAN.get(),
+            HABlocks.DEAD_ZIGZAG_CORAL_FAN.get(),
+
             HABlocks.THORN_CORAL.get(),
             HABlocks.DEAD_THORN_CORAL.get(),
             HABlocks.THORN_CORAL_FAN.get(),
             HABlocks.DEAD_THORN_CORAL_FAN.get(),
 
-            HABlocks.SUN_CORAL_BLOCK.get(),
-            HABlocks.DEAD_SUN_CORAL_BLOCK.get(),
             HABlocks.SUN_CORAL.get(),
             HABlocks.DEAD_SUN_CORAL.get(),
             HABlocks.SUN_CORAL_FAN.get(),
             HABlocks.DEAD_SUN_CORAL_FAN.get(),
 
-            HABlocks.BUTTON_CORAL_BLOCK.get(),
-            HABlocks.DEAD_BUTTON_CORAL_BLOCK.get(),
             HABlocks.BUTTON_CORAL.get(),
             HABlocks.DEAD_BUTTON_CORAL.get(),
             HABlocks.BUTTON_CORAL_FAN.get(),
             HABlocks.DEAD_BUTTON_CORAL_FAN.get(),
 
-            HABlocks.ROSE_CORAL_BLOCK.get(),
-            HABlocks.DEAD_ROSE_CORAL_BLOCK.get(),
             HABlocks.ROSE_CORAL.get(),
             HABlocks.DEAD_ROSE_CORAL.get(),
             HABlocks.ROSE_CORAL_FAN.get(),
             HABlocks.DEAD_ROSE_CORAL_FAN.get(),
 
-            HABlocks.LEAF_CORAL_BLOCK.get(),
-            HABlocks.DEAD_LEAF_CORAL_BLOCK.get(),
             HABlocks.LEAF_CORAL.get(),
             HABlocks.DEAD_LEAF_CORAL.get(),
             HABlocks.LEAF_CORAL_FAN.get(),

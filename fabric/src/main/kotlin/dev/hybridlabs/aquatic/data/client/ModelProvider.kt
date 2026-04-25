@@ -138,6 +138,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             //#region Bleached Corals
             setOf(
                 HABlocks.BLEACHED_ROSE_CORAL_BLOCK.get(),
+                HABlocks.BLEACHED_ZIGZAG_CORAL_BLOCK.get(),
                 HABlocks.BLEACHED_BAMBOO_CORAL_BLOCK.get(),
                 HABlocks.BLEACHED_SUN_CORAL_BLOCK.get(),
                 HABlocks.BLEACHED_LOPHELIA_CORAL_BLOCK.get(),
@@ -156,6 +157,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             setOf(
                 HABlocks.BLEACHED_SUN_CORAL.get(),
                 HABlocks.BLEACHED_ROSE_CORAL.get(),
+                HABlocks.BLEACHED_ZIGZAG_CORAL.get(),
                 HABlocks.BLEACHED_BAMBOO_CORAL.get(),
                 HABlocks.BLEACHED_LOPHELIA_CORAL.get(),
                 HABlocks.BLEACHED_LEAF_CORAL.get(),
@@ -179,6 +181,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             generator.createCoralFans(
                 HABlocks.BLEACHED_ROSE_CORAL_FAN.get(),
                 HABlocks.BLEACHED_ROSE_CORAL_WALL_FAN.get()
+            )
+
+            generator.createCoralFans(
+                HABlocks.BLEACHED_ZIGZAG_CORAL_FAN.get(),
+                HABlocks.BLEACHED_ZIGZAG_CORAL_WALL_FAN.get()
             )
 
             generator.createCoralFans(
@@ -308,6 +315,17 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.DEAD_BUTTON_CORAL_FAN.get(),
                 HABlocks.BUTTON_CORAL_WALL_FAN.get(),
                 HABlocks.DEAD_BUTTON_CORAL_WALL_FAN.get()
+            )
+
+            createCoral(
+                HABlocks.ZIGZAG_CORAL.get(),
+                HABlocks.DEAD_ZIGZAG_CORAL.get(),
+                HABlocks.ZIGZAG_CORAL_BLOCK.get(),
+                HABlocks.DEAD_ZIGZAG_CORAL_BLOCK.get(),
+                HABlocks.ZIGZAG_CORAL_FAN.get(),
+                HABlocks.DEAD_ZIGZAG_CORAL_FAN.get(),
+                HABlocks.ZIGZAG_CORAL_WALL_FAN.get(),
+                HABlocks.DEAD_ZIGZAG_CORAL_WALL_FAN.get()
             )
 
             createCoral(

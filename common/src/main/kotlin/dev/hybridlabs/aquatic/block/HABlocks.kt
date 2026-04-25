@@ -390,6 +390,33 @@ object HABlocks {
     val BLEACHED_BUTTON_CORAL_WALL_FAN = register("bleached_button_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
     val BUTTON_CORAL_WALL_FAN = register("button_coral_wall_fan") { CoralWallFanBlock(DEAD_BUTTON_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
+    val DEAD_ZIGZAG_CORAL_BLOCK = register("dead_zigzag_coral_block") {
+        Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+                .mapColor(MapColor.TERRACOTTA_WHITE))
+    }
+
+    val BLEACHED_ZIGZAG_CORAL_BLOCK = register("bleached_zigzag_coral_block") {
+        Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+                .mapColor(MapColor.TERRACOTTA_WHITE))
+    }
+
+    val ZIGZAG_CORAL_BLOCK = register("zigzag_coral_block") {
+        CoralBlock(DEAD_ZIGZAG_CORAL_BLOCK.get(),
+            Properties.copy(Blocks.FIRE_CORAL_BLOCK)
+                .mapColor(MapColor.TERRACOTTA_WHITE)
+                .sound(SoundType.CORAL_BLOCK))
+    }
+
+    val DEAD_ZIGZAG_CORAL_FAN = register("dead_zigzag_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_ZIGZAG_CORAL_FAN = register("bleached_zigzag_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val ZIGZAG_CORAL_FAN = register("zigzag_coral_fan") { CoralFanBlock(DEAD_ZIGZAG_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_ZIGZAG_CORAL = register("dead_zigzag_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_ZIGZAG_CORAL = register("bleached_zigzag_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
+    val ZIGZAG_CORAL = register("zigzag_coral") { CoralPlantBlock(DEAD_ZIGZAG_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
+    val DEAD_ZIGZAG_CORAL_WALL_FAN = register("dead_zigzag_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_ZIGZAG_CORAL_WALL_FAN = register("bleached_zigzag_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val ZIGZAG_CORAL_WALL_FAN = register("zigzag_coral_wall_fan") { CoralWallFanBlock(DEAD_ZIGZAG_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN)) }
+
     val DEAD_THORN_CORAL_BLOCK = register("dead_thorn_coral_block") {
         Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE))

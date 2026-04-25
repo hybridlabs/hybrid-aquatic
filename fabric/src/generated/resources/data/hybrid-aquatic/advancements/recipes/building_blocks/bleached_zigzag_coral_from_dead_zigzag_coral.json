@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dead_zigzag_coral": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybrid-aquatic:dead_zigzag_coral"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:bleached_zigzag_coral_from_dead_zigzag_coral"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_dead_zigzag_coral",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:bleached_zigzag_coral_from_dead_zigzag_coral"
+    ]
+  },
+  "sends_telemetry_event": false
+}

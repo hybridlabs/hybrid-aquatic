@@ -379,6 +379,16 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HABlocks.DEAD_BUTTON_CORAL_FAN.get() to "Dead Button Coral Fan",
             HABlocks.BLEACHED_BUTTON_CORAL_FAN.get() to "Bleached Button Coral Fan",
 
+            HABlocks.ZIGZAG_CORAL_BLOCK.get() to "Zigzag Coral Block",
+            HABlocks.DEAD_ZIGZAG_CORAL_BLOCK.get() to "Dead Zigzag Coral Block",
+            HABlocks.BLEACHED_ZIGZAG_CORAL_BLOCK.get() to "Bleached Zigzag Coral Block",
+            HABlocks.ZIGZAG_CORAL.get() to "Zigzag Coral",
+            HABlocks.DEAD_ZIGZAG_CORAL.get() to "Dead Zigzag Coral",
+            HABlocks.BLEACHED_ZIGZAG_CORAL.get() to "Bleached Zigzag Coral",
+            HABlocks.ZIGZAG_CORAL_FAN.get() to "Zigzag Coral Fan",
+            HABlocks.DEAD_ZIGZAG_CORAL_FAN.get() to "Dead Zigzag Coral Fan",
+            HABlocks.BLEACHED_ZIGZAG_CORAL_FAN.get() to "Bleached Zigzag Coral Fan",
+
             HABlocks.SUN_CORAL_BLOCK.get() to "Sun Coral Block",
             HABlocks.DEAD_SUN_CORAL_BLOCK.get() to "Dead Sun Coral Block",
             HABlocks.BLEACHED_SUN_CORAL_BLOCK.get() to "Bleached Sun Coral Block",

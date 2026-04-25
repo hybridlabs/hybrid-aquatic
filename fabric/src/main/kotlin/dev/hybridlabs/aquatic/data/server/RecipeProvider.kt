@@ -1164,6 +1164,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         Blocks.DEAD_BUBBLE_CORAL_BLOCK to HABlocks.BLEACHED_BUBBLE_CORAL_BLOCK.get(),
 
         HABlocks.DEAD_ROSE_CORAL_BLOCK.get() to HABlocks.BLEACHED_ROSE_CORAL_BLOCK.get(),
+        HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get() to HABlocks.BLEACHED_BAMBOO_CORAL_BLOCK.get(),
+        HABlocks.DEAD_ZIGZAG_CORAL_BLOCK.get() to HABlocks.BLEACHED_ZIGZAG_CORAL_BLOCK.get(),
         HABlocks.DEAD_LEAF_CORAL_BLOCK.get() to HABlocks.BLEACHED_LEAF_CORAL_BLOCK.get(),
         HABlocks.DEAD_THORN_CORAL_BLOCK.get() to HABlocks.BLEACHED_THORN_CORAL_BLOCK.get(),
         HABlocks.DEAD_BUTTON_CORAL_BLOCK.get() to HABlocks.BLEACHED_BUTTON_CORAL_BLOCK.get(),
@@ -1179,6 +1181,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         Blocks.DEAD_BUBBLE_CORAL to HABlocks.BLEACHED_BUBBLE_CORAL.get(),
 
         HABlocks.DEAD_ROSE_CORAL.get() to HABlocks.BLEACHED_ROSE_CORAL.get(),
+        HABlocks.DEAD_BAMBOO_CORAL.get() to HABlocks.BLEACHED_BAMBOO_CORAL.get(),
+        HABlocks.DEAD_ZIGZAG_CORAL.get() to HABlocks.BLEACHED_ZIGZAG_CORAL.get(),
         HABlocks.DEAD_LEAF_CORAL.get() to HABlocks.BLEACHED_LEAF_CORAL.get(),
         HABlocks.DEAD_THORN_CORAL.get() to HABlocks.BLEACHED_THORN_CORAL.get(),
         HABlocks.DEAD_BUTTON_CORAL.get() to HABlocks.BLEACHED_BUTTON_CORAL.get(),
@@ -1194,6 +1198,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         Blocks.DEAD_BUBBLE_CORAL_FAN to HABlocks.BLEACHED_BUBBLE_CORAL_FAN.get(),
 
         HABlocks.DEAD_ROSE_CORAL_FAN.get() to HABlocks.BLEACHED_ROSE_CORAL_FAN.get(),
+        HABlocks.DEAD_BAMBOO_CORAL_FAN.get() to HABlocks.BLEACHED_BAMBOO_CORAL_FAN.get(),
+        HABlocks.DEAD_ZIGZAG_CORAL_FAN.get() to HABlocks.BLEACHED_ZIGZAG_CORAL_FAN.get(),
         HABlocks.DEAD_LEAF_CORAL_FAN.get() to HABlocks.BLEACHED_LEAF_CORAL_FAN.get(),
         HABlocks.DEAD_THORN_CORAL_FAN.get() to HABlocks.BLEACHED_THORN_CORAL_FAN.get(),
         HABlocks.DEAD_BUTTON_CORAL_FAN.get() to HABlocks.BLEACHED_BUTTON_CORAL_FAN.get(),

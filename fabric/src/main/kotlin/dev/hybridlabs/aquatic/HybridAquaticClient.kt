@@ -263,6 +263,16 @@ object HybridAquaticClient : ClientModInitializer {
             HABlocks.BLEACHED_BUTTON_CORAL_FAN.get(),
             HABlocks.BLEACHED_BUTTON_CORAL_WALL_FAN.get(),
 
+            HABlocks.ZIGZAG_CORAL.get(),
+            HABlocks.ZIGZAG_CORAL_FAN.get(),
+            HABlocks.ZIGZAG_CORAL_WALL_FAN.get(),
+            HABlocks.DEAD_ZIGZAG_CORAL.get(),
+            HABlocks.DEAD_ZIGZAG_CORAL_FAN.get(),
+            HABlocks.DEAD_ZIGZAG_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_ZIGZAG_CORAL.get(),
+            HABlocks.BLEACHED_ZIGZAG_CORAL_FAN.get(),
+            HABlocks.BLEACHED_ZIGZAG_CORAL_WALL_FAN.get(),
+
             HABlocks.THORN_CORAL.get(),
             HABlocks.THORN_CORAL_FAN.get(),
             HABlocks.THORN_CORAL_WALL_FAN.get(),
