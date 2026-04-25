@@ -213,6 +213,16 @@ object HybridAquaticClient : ClientModInitializer {
             HABlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
             HABlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN.get(),
 
+            HABlocks.BAMBOO_CORAL.get(),
+            HABlocks.BAMBOO_CORAL_FAN.get(),
+            HABlocks.BAMBOO_CORAL_WALL_FAN.get(),
+            HABlocks.DEAD_BAMBOO_CORAL.get(),
+            HABlocks.DEAD_BAMBOO_CORAL_FAN.get(),
+            HABlocks.DEAD_BAMBOO_CORAL_WALL_FAN.get(),
+            HABlocks.BLEACHED_BAMBOO_CORAL.get(),
+            HABlocks.BLEACHED_BAMBOO_CORAL_FAN.get(),
+            HABlocks.BLEACHED_BAMBOO_CORAL_WALL_FAN.get(),
+
             HABlocks.SUN_CORAL.get(),
             HABlocks.SUN_CORAL_FAN.get(),
             HABlocks.SUN_CORAL_WALL_FAN.get(),

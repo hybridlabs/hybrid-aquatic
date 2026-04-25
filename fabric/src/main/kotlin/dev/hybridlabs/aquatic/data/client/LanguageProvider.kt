@@ -332,6 +332,16 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HABlocks.LOPHELIA_CORAL_FAN.get() to "Lophelia Coral Fan",
             HABlocks.DEAD_LOPHELIA_CORAL_FAN.get() to "Dead Lophelia Coral Fan",
             HABlocks.BLEACHED_LOPHELIA_CORAL_FAN.get() to "Bleached Lophelia Coral Fan",
+            
+            HABlocks.BAMBOO_CORAL_BLOCK.get() to "Bamboo Coral Block",
+            HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get() to "Dead Bamboo Coral Block",
+            HABlocks.BLEACHED_BAMBOO_CORAL_BLOCK.get() to "Bleached Bamboo Coral Block",
+            HABlocks.BAMBOO_CORAL.get() to "Bamboo Coral",
+            HABlocks.DEAD_BAMBOO_CORAL.get() to "Dead Bamboo Coral",
+            HABlocks.BLEACHED_BAMBOO_CORAL.get() to "Bleached Bamboo Coral",
+            HABlocks.BAMBOO_CORAL_FAN.get() to "Bamboo Coral Fan",
+            HABlocks.DEAD_BAMBOO_CORAL_FAN.get() to "Dead Bamboo Coral Fan",
+            HABlocks.BLEACHED_BAMBOO_CORAL_FAN.get() to "Bleached Bamboo Coral Fan",
 
             HABlocks.ROSE_CORAL_BLOCK.get() to "Rose Coral Block",
             HABlocks.DEAD_ROSE_CORAL_BLOCK.get() to "Dead Rose Coral Block",

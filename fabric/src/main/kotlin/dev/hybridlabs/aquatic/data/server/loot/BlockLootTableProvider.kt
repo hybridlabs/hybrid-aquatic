@@ -201,6 +201,13 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             HABlocks.DEAD_LOPHELIA_CORAL.get(),
             HABlocks.LOPHELIA_CORAL_FAN.get(),
             HABlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
+            
+            HABlocks.BAMBOO_CORAL_BLOCK.get(),
+            HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get(),
+            HABlocks.BAMBOO_CORAL.get(),
+            HABlocks.DEAD_BAMBOO_CORAL.get(),
+            HABlocks.BAMBOO_CORAL_FAN.get(),
+            HABlocks.DEAD_BAMBOO_CORAL_FAN.get(),
 
             HABlocks.THORN_CORAL_BLOCK.get(),
             HABlocks.DEAD_THORN_CORAL_BLOCK.get(),

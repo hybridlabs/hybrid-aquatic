@@ -254,6 +254,33 @@ object HABlocks {
     val BLEACHED_LOPHELIA_CORAL_WALL_FAN = register("bleached_lophelia_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
     val LOPHELIA_CORAL_WALL_FAN = register("lophelia_coral_wall_fan") { CoralWallFanBlock(DEAD_LOPHELIA_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
+    val DEAD_BAMBOO_CORAL_BLOCK = register("dead_bamboo_coral_block") {
+        Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+            .mapColor(MapColor.TERRACOTTA_WHITE))
+    }
+
+    val BLEACHED_BAMBOO_CORAL_BLOCK = register("bleached_bamboo_coral_block") {
+        Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+            .mapColor(MapColor.TERRACOTTA_WHITE))
+    }
+
+    val BAMBOO_CORAL_BLOCK = register("bamboo_coral_block") {
+        CoralBlock(DEAD_BAMBOO_CORAL_BLOCK.get(),
+            Properties.copy(Blocks.FIRE_CORAL_BLOCK)
+                .mapColor(MapColor.TERRACOTTA_WHITE)
+                .sound(SoundType.CORAL_BLOCK))
+    }
+
+    val DEAD_BAMBOO_CORAL_FAN = register("dead_bamboo_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_BAMBOO_CORAL_FAN = register("bleached_bamboo_coral_fan") { BaseCoralFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BAMBOO_CORAL_FAN = register("bamboo_coral_fan") { CoralFanBlock(DEAD_BAMBOO_CORAL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_BAMBOO_CORAL = register("dead_bamboo_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_BAMBOO_CORAL = register("bleached_bamboo_coral") { BaseCoralPlantBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL)) }
+    val BAMBOO_CORAL = register("bamboo_coral") { CoralPlantBlock(DEAD_BAMBOO_CORAL.get(), Properties.copy(Blocks.FIRE_CORAL)) }
+    val DEAD_BAMBOO_CORAL_WALL_FAN = register("dead_bamboo_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_BAMBOO_CORAL_WALL_FAN = register("bleached_bamboo_coral_wall_fan") { BaseCoralWallFanBlock(Properties.copy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BAMBOO_CORAL_WALL_FAN = register("bamboo_coral_wall_fan") { CoralWallFanBlock(DEAD_BAMBOO_CORAL_WALL_FAN.get(), Properties.copy(Blocks.FIRE_CORAL_WALL_FAN)) }
+
     val DEAD_ROSE_CORAL_BLOCK = register("dead_rose_coral_block") {
         Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_PINK))

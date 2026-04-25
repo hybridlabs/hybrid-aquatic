@@ -26,24 +26,29 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HABlockTags.DEEP_CORAL_BLOCKS)
             .add(HABlocks.LOPHELIA_CORAL_BLOCK.get())
             .add(HABlocks.THORN_CORAL_BLOCK.get())
+            .add(HABlocks.BAMBOO_CORAL_BLOCK.get())
 
         getOrCreateTagBuilder(HABlockTags.DEEP_CORAL_PLANTS)
             .add(HABlocks.LOPHELIA_CORAL.get())
             .add(HABlocks.THORN_CORAL.get())
+            .add(HABlocks.BAMBOO_CORAL.get())
 
         getOrCreateTagBuilder(HABlockTags.DEEP_CORALS)
             .forceAddTag(HABlockTags.DEEP_CORAL_PLANTS)
             .add(HABlocks.LOPHELIA_CORAL_FAN.get())
             .add(HABlocks.THORN_CORAL_FAN.get())
+            .add(HABlocks.BAMBOO_CORAL_FAN.get())
 
         getOrCreateTagBuilder(HABlockTags.DEEP_WALL_CORALS)
             .add(HABlocks.LOPHELIA_CORAL_WALL_FAN.get())
             .add(HABlocks.THORN_CORAL_WALL_FAN.get())
+            .add(HABlocks.BAMBOO_CORAL_WALL_FAN.get())
         //#endregion
 
         //#region Bleached Corals
         getOrCreateTagBuilder(HABlockTags.BLEACHED_CORAL_BLOCKS)
             .add(HABlocks.BLEACHED_LOPHELIA_CORAL_BLOCK.get())
+            .add(HABlocks.BLEACHED_BAMBOO_CORAL_BLOCK.get())
             .add(HABlocks.BLEACHED_ROSE_CORAL_BLOCK.get())
             .add(HABlocks.BLEACHED_BUTTON_CORAL_BLOCK.get())
             .add(HABlocks.BLEACHED_SUN_CORAL_BLOCK.get())
@@ -57,6 +62,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HABlockTags.BLEACHED_CORAL_PLANTS)
             .add(HABlocks.BLEACHED_LOPHELIA_CORAL.get())
+            .add(HABlocks.BLEACHED_BAMBOO_CORAL.get())
             .add(HABlocks.BLEACHED_ROSE_CORAL.get())
             .add(HABlocks.BLEACHED_BUTTON_CORAL.get())
             .add(HABlocks.BLEACHED_SUN_CORAL.get())
@@ -71,6 +77,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HABlockTags.BLEACHED_CORALS)
             .forceAddTag(HABlockTags.BLEACHED_CORAL_PLANTS)
             .add(HABlocks.BLEACHED_LOPHELIA_CORAL_FAN.get())
+            .add(HABlocks.BLEACHED_BAMBOO_CORAL_FAN.get())
             .add(HABlocks.BLEACHED_ROSE_CORAL_FAN.get())
             .add(HABlocks.BLEACHED_BUTTON_CORAL_FAN.get())
             .add(HABlocks.BLEACHED_SUN_CORAL_FAN.get())
@@ -84,6 +91,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(HABlockTags.BLEACHED_WALL_CORALS)
             .add(HABlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN.get())
+            .add(HABlocks.BLEACHED_BAMBOO_CORAL_WALL_FAN.get())
             .add(HABlocks.BLEACHED_ROSE_CORAL_WALL_FAN.get())
             .add(HABlocks.BLEACHED_BUTTON_CORAL_WALL_FAN.get())
             .add(HABlocks.BLEACHED_SUN_CORAL_WALL_FAN.get())

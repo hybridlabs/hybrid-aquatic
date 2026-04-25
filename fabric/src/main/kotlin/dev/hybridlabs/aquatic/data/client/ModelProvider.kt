@@ -260,6 +260,17 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             )
 
             createCoral(
+                HABlocks.BAMBOO_CORAL.get(),
+                HABlocks.DEAD_BAMBOO_CORAL.get(),
+                HABlocks.BAMBOO_CORAL_BLOCK.get(),
+                HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get(),
+                HABlocks.BAMBOO_CORAL_FAN.get(),
+                HABlocks.DEAD_BAMBOO_CORAL_FAN.get(),
+                HABlocks.BAMBOO_CORAL_WALL_FAN.get(),
+                HABlocks.DEAD_BAMBOO_CORAL_WALL_FAN.get()
+            )
+
+            createCoral(
                 HABlocks.ROSE_CORAL.get(),
                 HABlocks.DEAD_ROSE_CORAL.get(),
                 HABlocks.ROSE_CORAL_BLOCK.get(),

@@ -413,6 +413,33 @@ object HAItems {
         HABlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN
     )
 
+    val BAMBOO_CORAL_BLOCK =
+        registerBlockItem("bamboo_coral_block") { HABlocks.BAMBOO_CORAL_BLOCK.get() }
+    val DEAD_BAMBOO_CORAL_BLOCK =
+        registerBlockItem("dead_bamboo_coral_block") { HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get() }
+    val BLEACHED_BAMBOO_CORAL_BLOCK =
+        registerBlockItem("bleached_bamboo_coral_block") { HABlocks.BLEACHED_BAMBOO_CORAL_BLOCK.get() }
+    val BAMBOO_CORAL = registerBlockItem("bamboo_coral") { HABlocks.BAMBOO_CORAL.get() }
+    val DEAD_BAMBOO_CORAL = registerBlockItem("dead_bamboo_coral") { HABlocks.DEAD_BAMBOO_CORAL.get() }
+    val BLEACHED_BAMBOO_CORAL =
+        registerBlockItem("bleached_bamboo_coral") { HABlocks.BLEACHED_BAMBOO_CORAL.get() }
+    val BAMBOO_CORAL_FAN = registerVerticallyAttachable(
+        "bamboo_coral_fan",
+        HABlocks.BAMBOO_CORAL_FAN,
+        HABlocks.BAMBOO_CORAL_WALL_FAN
+    )
+    val DEAD_BAMBOO_CORAL_FAN = registerVerticallyAttachable(
+        "dead_bamboo_coral_fan",
+        HABlocks.DEAD_BAMBOO_CORAL_FAN,
+        HABlocks.DEAD_BAMBOO_CORAL_WALL_FAN
+    )
+
+    val BLEACHED_BAMBOO_CORAL_FAN = registerVerticallyAttachable(
+        "bleached_bamboo_coral_fan",
+        HABlocks.BLEACHED_BAMBOO_CORAL_FAN,
+        HABlocks.BLEACHED_BAMBOO_CORAL_WALL_FAN
+    )
+
     val ROSE_CORAL_BLOCK = registerBlockItem("rose_coral_block") { HABlocks.ROSE_CORAL_BLOCK.get() }
     val DEAD_ROSE_CORAL_BLOCK =
         registerBlockItem("dead_rose_coral_block") { HABlocks.DEAD_ROSE_CORAL_BLOCK.get() }
