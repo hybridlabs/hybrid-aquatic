@@ -8,8 +8,10 @@ import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItemGroups
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
+import net.minecraft.Util
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
@@ -149,46 +151,50 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         ).forEach { (key, translation) ->
             builder.add(key, translation)
         }
-        //advancements
+        //-advancements
+
+        //Sound Events
         mapOf(
-            "sounds.hybrid-aquatic.entity.manatee.ambient" to "Manatee snorts",
-            "sounds.hybrid-aquatic.entity.manatee.hurt" to "Manatee hurts",
-            "sounds.hybrid-aquatic.entity.manatee.die" to "Manatee dies",
-            "sounds.hybrid-aquatic.entity.manatee.swim" to "Manatee swims",
-            "sounds.hybrid-aquatic.entity.manatee.splash" to "Manatee splashes",
+            HASoundEvents.MANATEE_AMBIENT to "Manatee snorts",
+            HASoundEvents.MANATEE_HURT to "Manatee hurts",
+            HASoundEvents.MANATEE_DIE to "Manatee dies",
+            HASoundEvents.MANATEE_SWIM to "Manatee swims",
+            HASoundEvents.MANATEE_SPLASH to "Manatee splashes",
 
-            "sounds.hybrid-aquatic.entity.dugong.ambient" to "Dugong chirps",
-            "sounds.hybrid-aquatic.entity.dugong.hurt" to "Dugong hurts",
-            "sounds.hybrid-aquatic.entity.dugong.die" to "Dugong dies",
-            "sounds.hybrid-aquatic.entity.dugong.swim" to "Dugong swims",
-            "sounds.hybrid-aquatic.entity.dugong.splash" to "Dugong splashes",
+            HASoundEvents.DUGONG_AMBIENT to "Dugong chirps",
+            HASoundEvents.DUGONG_HURT to "Dugong hurts",
+            HASoundEvents.DUGONG_DIE to "Dugong dies",
+            HASoundEvents.DUGONG_SWIM to "Dugong swims",
+            HASoundEvents.DUGONG_SPLASH to "Dugong splashes",
 
-            "sounds.hybrid-aquatic.entity.sirenian.eat" to "Sirenian eats",
+            HASoundEvents.SIRENIAN_EAT to "Sirenian eats",
 
-            "sounds.hybrid-aquatic.entity.karkinos.ambient" to "Karkinos chitters",
-            "sounds.hybrid-aquatic.entity.karkinos.hurt" to "Karkinos hurts",
-            "sounds.hybrid-aquatic.entity.karkinos.die" to "Karkinos dies",
+            HASoundEvents.KARKINOS_AMBIENT to "Karkinos chitters",
+            HASoundEvents.KARKINOS_HURT to "Karkinos hurts",
+            HASoundEvents.KARKINOS_DIE to "Karkinos dies",
 
-            "sounds.hybrid-aquatic.entity.karcinoma.ambient" to "Karcinoma chitters",
-            "sounds.hybrid-aquatic.entity.karcinoma.hurt" to "Karcinoma hurts",
-            "sounds.hybrid-aquatic.entity.karcinoma.die" to "Karcinoma dies",
+            HASoundEvents.KARCINOMA_AMBIENT to "Karcinoma chitters",
+            HASoundEvents.KARCINOMA_HURT to "Karcinoma hurts",
+            HASoundEvents.KARCINOMA_DIE to "Karcinoma dies",
 
-            "sounds.hybrid-aquatic.entity.karcinogen.ambient" to "Karcinogen chitters",
-            "sounds.hybrid-aquatic.entity.karcinogen.hurt" to "Karcinogen hurts",
-            "sounds.hybrid-aquatic.entity.karcinogen.die" to "Karcinogen dies",
+            HASoundEvents.KARCINOGEN_AMBIENT to "Karcinogen chitters",
+            HASoundEvents.KARCINOGEN_HURT to "Karcinogen hurts",
+            HASoundEvents.KARCINOGEN_DIE to "Karcinogen dies",
 
-            "sounds.hybrid-aquatic.entity.shell_beast.shoot" to "Shell Beast fires",
-            "sounds.hybrid-aquatic.entity.shell_beast.ambient" to "Shell Beast chitters",
-            "sounds.hybrid-aquatic.entity.shell_beast.hurt" to "Shell Beast hurts",
-            "sounds.hybrid-aquatic.entity.shell_beast.die" to "Shell Beast dies",
+            HASoundEvents.SHELL_BEAST_SHOOT to "Shell Beast fires",
+            HASoundEvents.SHELL_BEAST_AMBIENT to "Shell Beast chitters",
+            HASoundEvents.SHELL_BEAST_HURT to "Shell Beast hurts",
+            HASoundEvents.SHELL_BEAST_DIE to "Shell Beast dies",
 
-            "sounds.hybrid-aquatic.entity.hypnautilus.ambient" to "Hypnautilus spirals",
-            "sounds.hybrid-aquatic.entity.hypnautilus.hurt" to "Hypnautilus hurts",
-            "sounds.hybrid-aquatic.entity.hypnautilus.die" to "Hypnautilus dies",
+            HASoundEvents.HYPNAUTILUS_AMBIENT to "Hypnautilus spirals",
+            HASoundEvents.HYPNAUTILUS_HURT to "Hypnautilus hurts",
+            HASoundEvents.HYPNAUTILUS_DIE to "Hypnautilus dies",
 
-        ).forEach { (key, translation) ->
-            builder.add(key, translation)
+            HASoundEvents.OMINOUS_CONCH_BLOWS to "Ominous Conch plays"
+        ).forEach { (soundEvent, translation) ->
+            builder.add(Util.makeDescriptionId("subtitles", soundEvent.get().location), translation)
         }
+        //-Sound Events
 
         mapOf(
             "journal.description.hybrid-aquatic.anglerfish" to "A deep-sea predator that lures unwary prey with a glowing bulb",

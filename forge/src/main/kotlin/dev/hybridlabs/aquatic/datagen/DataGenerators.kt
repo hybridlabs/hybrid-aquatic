@@ -34,6 +34,5 @@ object DataGenerators {
 
         generator.addProvider(event.includeServer(), DatapackBuiltinEntriesProvider(packOutput, lookupProvider, builder, setOf(Constants.MOD_ID)))
         generator.addProvider(event.includeServer(), HAGlobalLootModifierProvider(packOutput))
-        // generator.addProvider(event.includeClient(), HASoundDefinitionsProvider(packOutput, event.existingFileHelper))
     }
 }
