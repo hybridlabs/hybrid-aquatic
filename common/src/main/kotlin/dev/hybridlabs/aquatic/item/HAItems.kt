@@ -1889,6 +1889,8 @@ object HAItems {
         registerSpawnEgg("sixgill_shark_spawn_egg", HAEntityTypes.SIXGILL_SHARK, 0x6e666a, 0xc5d4d0)
     val SLEEPER_SHARK_SPAWN_EGG =
         registerSpawnEgg("sleeper_shark_spawn_egg", HAEntityTypes.SLEEPER_SHARK, 0x222830, 0x709ae0)
+    val GOBLIN_SHARK_SPAWN_EGG =
+        registerSpawnEgg("goblin_shark_spawn_egg", HAEntityTypes.GOBLIN_SHARK, 0xb57060, 0xe1cdb5)
     val LANTERN_SHARK_SPAWN_EGG =
         registerSpawnEgg("lantern_shark_spawn_egg", HAEntityTypes.LANTERN_SHARK, 0x543f46, 0x84d5fe)
     val GREAT_WHITE_SHARK_SPAWN_EGG =

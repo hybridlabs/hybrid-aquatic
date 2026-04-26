@@ -890,6 +890,13 @@ object HAEntityTypes {
         EntityDimensions.fixed(1.75f, 0.6f),
         SleeperSharkEntity::createMobAttributes
     )
+
+    val GOBLIN_SHARK = registerSharkUnderground(
+        "goblin_shark",
+        ::GoblinSharkEntity,
+        EntityDimensions.fixed(1.75f, 0.6f),
+        GoblinSharkEntity::createMobAttributes
+    )
         //#endregion
     //#endregion
 

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid-aquatic:lukewarm_trench",
+  "spawners": {
+    "type": "hybrid-aquatic:goblin_shark",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

@@ -842,8 +842,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.FRILLED_SHARK.get(),
             listOf(
                 HABiomeTags.DEEP_REEF,
-                HABiomeTags.WARM_TRENCH,
-                HABiomeTags.LUKEWARM_TRENCH),
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH),
             1, 1, 1
         )
 
@@ -851,8 +851,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.SIXGILL_SHARK.get(),
             listOf(
                 HABiomeTags.TEMPERATE_TRENCH,
-                HABiomeTags.WARM_TRENCH,
-                HABiomeTags.LUKEWARM_TRENCH),
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH),
             1, 1, 1
         )
 
@@ -861,6 +861,16 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HABiomeTags.FROZEN_TRENCH,
                 HABiomeTags.COLD_TRENCH),
+            1, 1, 1
+        )
+
+        addShark(
+            HAEntityTypes.GOBLIN_SHARK.get(),
+            listOf(
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH),
             1, 1, 1
         )
 

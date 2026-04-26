@@ -791,6 +791,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAEntityTypes.FRILLED_SHARK.get() to "Frilled Shark",
             HAEntityTypes.SIXGILL_SHARK.get() to "Sixgill Shark",
             HAEntityTypes.SLEEPER_SHARK.get() to "Sleeper Shark",
+            HAEntityTypes.GOBLIN_SHARK.get() to "Goblin Shark",
             HAEntityTypes.LANTERN_SHARK.get() to "Lantern Shark",
             HAEntityTypes.GREAT_WHITE_SHARK.get() to "Great White Shark",
             HAEntityTypes.SAND_TIGER_SHARK.get() to "Sand Tiger Shark",

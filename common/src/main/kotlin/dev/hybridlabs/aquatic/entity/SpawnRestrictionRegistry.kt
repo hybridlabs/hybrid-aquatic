@@ -166,6 +166,7 @@ object SpawnRestrictionRegistry {
             HAEntityTypes.FRILLED_SHARK.get(),
             HAEntityTypes.SIXGILL_SHARK.get(),
             HAEntityTypes.SLEEPER_SHARK.get(),
+            HAEntityTypes.GOBLIN_SHARK.get(),
             HAEntityTypes.LANTERN_SHARK.get(),
         ).forEach { registerDeepShark(it) }
 

@@ -6,6 +6,7 @@
     "hybrid-aquatic:thresher_shark",
     "hybrid-aquatic:sixgill_shark",
     "hybrid-aquatic:sleeper_shark",
+    "hybrid-aquatic:goblin_shark",
     {
       "id": "alexsmobs:frilled_shark",
       "required": false

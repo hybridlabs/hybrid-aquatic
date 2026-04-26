@@ -96,6 +96,10 @@
       "charge": 0.9,
       "energy_budget": 1.0
     },
+    "hybrid-aquatic:goblin_shark": {
+      "charge": 0.4,
+      "energy_budget": 0.8
+    },
     "hybrid-aquatic:hatchetfish": {
       "charge": 0.1,
       "energy_budget": 0.6
@@ -286,6 +290,12 @@
     "hybrid-aquatic:shark": [
       {
         "type": "hybrid-aquatic:sixgill_shark",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      },
+      {
+        "type": "hybrid-aquatic:goblin_shark",
         "maxCount": 1,
         "minCount": 1,
         "weight": 3

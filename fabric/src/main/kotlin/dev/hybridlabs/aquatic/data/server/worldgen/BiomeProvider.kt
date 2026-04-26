@@ -10,7 +10,6 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.data.worldgen.BiomeDefaultFeatures
 import net.minecraft.data.worldgen.placement.AquaticPlacements
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements
-import net.minecraft.data.worldgen.placement.NetherPlacements
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.level.biome.Biome
@@ -404,6 +403,10 @@ class BiomeProvider(
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
                         MobSpawnSettings.SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
                     ),
                 ),
@@ -429,6 +432,7 @@ class BiomeProvider(
                     Triple(HAEntityTypes.OARFISH.get(), 0.5, 0.8),
 
                     Triple(HAEntityTypes.SIXGILL_SHARK.get(), 0.4, 0.8),
+                    Triple(HAEntityTypes.GOBLIN_SHARK.get(), 0.4, 0.8),
                     Triple(HAEntityTypes.LANTERN_SHARK.get(), 0.1, 0.4),
                 )
             )
@@ -520,6 +524,10 @@ class BiomeProvider(
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
                         MobSpawnSettings.SpawnerData(HAEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
                     ),
                     Pair(
@@ -548,6 +556,7 @@ class BiomeProvider(
                     Triple(HAEntityTypes.OARFISH.get(), 0.5, 0.8),
 
                     Triple(HAEntityTypes.SIXGILL_SHARK.get(), 0.5, 0.8),
+                    Triple(HAEntityTypes.GOBLIN_SHARK.get(), 0.5, 0.8),
                     Triple(HAEntityTypes.FRILLED_SHARK.get(), 0.5, 0.8),
                     Triple(HAEntityTypes.LANTERN_SHARK.get(), 0.1, 0.4),
                 )
@@ -640,6 +649,10 @@ class BiomeProvider(
                     ),
                     Pair(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
+                    ),
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
                         MobSpawnSettings.SpawnerData(HAEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
                     ),
                     Pair(
@@ -668,6 +681,7 @@ class BiomeProvider(
                     Triple(HAEntityTypes.OARFISH.get(), 0.5, 0.8),
 
                     Triple(HAEntityTypes.SIXGILL_SHARK.get(), 0.4, 0.8),
+                    Triple(HAEntityTypes.GOBLIN_SHARK.get(), 0.4, 0.8),
                     Triple(HAEntityTypes.FRILLED_SHARK.get(), 0.4, 0.8),
                     Triple(HAEntityTypes.LANTERN_SHARK.get(), 0.1, 0.4),
                 )
@@ -737,6 +751,11 @@ class BiomeProvider(
                         Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
                         MobSpawnSettings.SpawnerData(HAEntityTypes.SLEEPER_SHARK.get(), 3, 1, 1)
                     ),
+
+                    Pair(
+                        Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
+                        MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
+                    ),
                 ),
                 extraSpawnCosts = listOf(
                     Triple(HAEntityTypes.COLOSSAL_SQUID.get(), 1.0, 0.1),
@@ -753,6 +772,7 @@ class BiomeProvider(
                     Triple(HAEntityTypes.SLICKHEAD.get(), 0.1, 0.3),
 
                     Triple(HAEntityTypes.SLEEPER_SHARK.get(), 0.5, 0.8),
+                    Triple(HAEntityTypes.GOBLIN_SHARK.get(), 0.5, 0.8),
                 )
             )
         )

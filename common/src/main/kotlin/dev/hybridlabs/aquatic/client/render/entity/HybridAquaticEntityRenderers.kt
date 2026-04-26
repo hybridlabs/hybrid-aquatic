@@ -710,6 +710,12 @@ object HybridAquaticEntityRenderers {
             ::SleeperSharkEntityRenderer
         )
 
+    val GOBLIN_SHARK =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.GOBLIN_SHARK,
+            ::GoblinSharkEntityRenderer
+        )
+
     val LANTERN_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
             HAEntityTypes.LANTERN_SHARK,
