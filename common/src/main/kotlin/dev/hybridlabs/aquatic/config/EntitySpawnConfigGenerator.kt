@@ -172,10 +172,10 @@ class EntitySpawnConfigGenerator {
         addFish(
             HAEntityTypes.MANTA_RAY.get(),
             listOf(
-                HABiomeTags.DEEP_TEMPERATE_OCEANS,
-                HABiomeTags.DEEP_LUKEWARM_OCEANS,
-                HABiomeTags.DEEP_WARM_OCEANS),
-            1, 1, 2
+                HABiomeTags.TEMPERATE_OCEANS,
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.WARM_OCEANS),
+            1, 1, 3
         )
 
         addFish(

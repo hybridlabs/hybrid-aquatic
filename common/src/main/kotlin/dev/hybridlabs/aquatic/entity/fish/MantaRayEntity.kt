@@ -9,6 +9,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.tags.BiomeTags
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -92,14 +93,6 @@ class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) :
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun getMinSize(): Int {
-        return -3
-    }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
     private var overlayTexture
         get() = OverlayTextures.byId(entityData.get(OverlayTexture))
         set(value) {
@@ -128,5 +121,20 @@ class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) :
 
     override fun shouldFlopOnLand(): Boolean {
         return false
+    }
+
+    override fun getMaxSize(): Int {
+        val level = this.level()
+        val biome = level.getBiome(this.blockPosition())
+
+        return if (biome.`is`(BiomeTags.IS_DEEP_OCEAN)) {
+            8
+        } else {
+            3
+        }
+    }
+
+    override fun getMinSize(): Int {
+        return -5
     }
 }
