@@ -128,13 +128,13 @@ class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) :
         val biome = level.getBiome(this.blockPosition())
 
         return if (biome.`is`(BiomeTags.IS_DEEP_OCEAN)) {
-            8
+            10
         } else {
             3
         }
     }
 
     override fun getMinSize(): Int {
-        return -5
+        return -3
     }
 }
