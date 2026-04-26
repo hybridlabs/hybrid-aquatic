@@ -420,11 +420,24 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
             shellBeast.lookAt(target, 5f, 5f)
 
+            val health = shellBeast.health / shellBeast.maxHealth
+
+            val bubbleCount = when {
+                health >= 0.75f -> 1
+                health >= 0.5f -> 2
+                else -> 3
+            }
+
             if (distance < 4096.0 && canSee) {
                 val level = shellBeast.level()
                 chargeTime++
 
-                if (chargeTime == 20 || chargeTime == 40 || chargeTime == 60) {
+                val canShootBubble =
+                    (chargeTime == 20) ||
+                            (chargeTime == 40 && bubbleCount >= 2) ||
+                            (chargeTime == 60 && bubbleCount >= 3)
+
+                if (canShootBubble) {
                     val view = shellBeast.getViewVector(1.0f)
 
                     val dxFire = target.x - (shellBeast.x + view.x * 4.0)
