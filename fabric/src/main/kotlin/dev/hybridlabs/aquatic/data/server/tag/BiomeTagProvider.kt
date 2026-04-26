@@ -34,23 +34,18 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(HABiomes.SULFURIC_CAVES)
             .addOptional(HABiomes.TROPICAL_RIVER)
 
-        getOrCreateTagBuilder(BiomeTags.HAS_SHIPWRECK)
-            .addOptional(HABiomes.SEAGRASS_BED)
-            .addOptional(HABiomes.RED_MEADOW)
-            .addOptional(HABiomes.CORAL_REEF)
-
         getOrCreateTagBuilder(BiomeTags.IS_OCEAN)
             .addOptional(HABiomes.SEAGRASS_BED)
             .addOptional(HABiomes.RED_MEADOW)
             .addOptional(HABiomes.CORAL_REEF)
 
-        getOrCreateTagBuilder(BiomeTags.IS_RIVER)
-            .addOptional(HABiomes.TROPICAL_RIVER)
-
         getOrCreateTagBuilder(BiomeTags.IS_DEEP_OCEAN)
             .addOptional(HABiomes.TROPICAL_DEEP_CORAL_REEF)
             .addOptional(HABiomes.DEEP_CORAL_REEF)
             .addOptional(HABiomes.DEEP_WARM_OCEAN)
+
+        getOrCreateTagBuilder(BiomeTags.IS_RIVER)
+            .addOptional(HABiomes.TROPICAL_RIVER)
         //#endregion
 
         //#region Arctic Ocean Tags

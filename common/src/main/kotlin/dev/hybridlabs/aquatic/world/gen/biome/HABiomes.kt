@@ -165,7 +165,6 @@ object HABiomes {
 
     val SULFURIC_CAVES: ResourceKey<Biome> =
         ResourceKey.create(Registries.BIOME, CommonClass.locate("sulfuric_caves"))
-
     //#endregion
 
     //#region Deep Reefs
@@ -695,7 +694,7 @@ object HABiomes {
             )
         )
 
-            //#region Warm Trench
+        //#region Warm Trench
         BiomePlacement.addSubOverworld(
             Biomes.WARM_OCEAN,
             WARM_TRENCH,
@@ -751,7 +750,7 @@ object HABiomes {
                 )
             )
         )
-            //#endregion
+        //#endregion
         //#endregion
 
         //#region Surface Rule Generation
