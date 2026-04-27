@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import dev.hybridlabs.aquatic.block.impl.StickyBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
@@ -9,7 +10,7 @@ import net.minecraft.world.level.block.HalfTransparentBlock
 import net.minecraft.world.level.block.state.BlockState
 import kotlin.math.abs
 
-class GlowslimeBlock(properties: Properties) : HalfTransparentBlock(properties) {
+class GlowslimeBlock(properties: Properties) : HalfTransparentBlock(properties), StickyBlock {
     override fun fallOn(level: Level, state: BlockState, pos: BlockPos, entity: Entity, fallDistance: Float) {
         if (entity.isSuppressingBounce) {
             super.fallOn(level, state, pos, entity, fallDistance)
@@ -42,5 +43,13 @@ class GlowslimeBlock(properties: Properties) : HalfTransparentBlock(properties) 
         }
 
         super.stepOn(level, pos, state, entity)
+    }
+
+    override fun isSticky(): Boolean {
+        return true
+    }
+
+    override fun isStickyToNeighbor(neighbor: BlockState): Boolean {
+        return !neighbor.`is`(this)
     }
 }

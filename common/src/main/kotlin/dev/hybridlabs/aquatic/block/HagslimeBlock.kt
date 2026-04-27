@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import dev.hybridlabs.aquatic.block.impl.StickyBlock
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -24,7 +25,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 import kotlin.math.abs
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class HagslimeBlock(settings: Properties) : HalfTransparentBlock(settings) {
+class HagslimeBlock(settings: Properties) : HalfTransparentBlock(settings), StickyBlock {
     init {
         this.registerDefaultState(stateDefinition.any())
     }
@@ -158,6 +159,14 @@ class HagslimeBlock(settings: Properties) : HalfTransparentBlock(settings) {
             val d2 = 0.4375 + (entity.bbWidth / 2.0f).toDouble()
             return d0 + 1.0E-7 > d2 || d1 + 1.0E-7 > d2
         }
+    }
+
+    override fun isSticky(): Boolean {
+        return true
+    }
+
+    override fun isStickyToNeighbor(neighbor: BlockState): Boolean {
+        return !neighbor.`is`(this)
     }
 
     companion object {
