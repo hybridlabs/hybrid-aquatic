@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.mixin;
 
-import dev.hybridlabs.aquatic.Constants;
 import dev.hybridlabs.aquatic.block.impl.StickyBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.piston.PistonStructureResolver;
