@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.HalfTransparentBlock
 import net.minecraft.world.level.block.state.BlockState
 import kotlin.math.abs
@@ -50,6 +51,7 @@ class GlowslimeBlock(properties: Properties) : HalfTransparentBlock(properties),
     }
 
     override fun isStickyToNeighbor(neighbor: BlockState): Boolean {
-        return !neighbor.`is`(this)
+        return neighbor.`is`(this) ||
+                !(neighbor.`is`(Blocks.HONEY_BLOCK) || neighbor.`is`(Blocks.SLIME_BLOCK) || neighbor.block is StickyBlock)
     }
 }

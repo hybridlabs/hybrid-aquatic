@@ -60,11 +60,9 @@ dependencies {
         exclude(group: "com.github.glitchfiend")
     }
     modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
-    modRuntimeOnly "maven.modrinth:carpet:$carpet_version"
+    modImplementation "maven.modrinth:carpet:$carpet_version"
     modRuntimeOnly "maven.modrinth:cyanide:4.1.1-fabric"
     modImplementation "dev.emi:trinkets:${trinkets_version}"
-
-
 }
 
 // Set up datagen and export the output to be consumed by other projects

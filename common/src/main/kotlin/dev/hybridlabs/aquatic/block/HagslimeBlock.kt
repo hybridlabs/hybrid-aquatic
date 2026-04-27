@@ -14,6 +14,7 @@ import net.minecraft.world.entity.vehicle.AbstractMinecart
 import net.minecraft.world.entity.vehicle.Boat
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.HalfTransparentBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.pathfinder.PathComputationType
@@ -166,7 +167,7 @@ class HagslimeBlock(settings: Properties) : HalfTransparentBlock(settings), Stic
     }
 
     override fun isStickyToNeighbor(neighbor: BlockState): Boolean {
-        return !neighbor.`is`(this)
+        return neighbor.`is`(this) || !(neighbor.`is`(Blocks.HONEY_BLOCK) || neighbor.`is`(Blocks.SLIME_BLOCK) || neighbor.block is StickyBlock)
     }
 
     companion object {

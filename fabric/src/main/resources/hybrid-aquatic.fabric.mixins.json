@@ -16,7 +16,10 @@
         "ServerPlayerEntityMixin",
         "SpawnGroupMixin",
         "SeagrassBlockMixin",
-        "TallSeagrassBlockMixin"
+        "TallSeagrassBlockMixin",
+        "compat.carpet.StickyBlockCarpetHACompatMixin",
+        "compat.carpet.HoneyCarpetHACompatMixin",
+        "compat.carpet.SlimeCarpetHACompatMixin"
     ],
     "client": [
         "client.BookScreenMixin",
