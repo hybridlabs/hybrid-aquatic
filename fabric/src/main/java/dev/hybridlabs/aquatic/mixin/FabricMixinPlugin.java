@@ -14,6 +14,7 @@ public class FabricMixinPlugin implements IMixinConfigPlugin {
 	
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+		if (hasCarpet && mixinClassName.contains("PistonStructureResolverMixin")) return false;
 		if (!hasCarpet && mixinClassName.contains("compat.carpet")) return false;
 		
 		return true;
