@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.data.server.seamessage.SeaMessageProvider
 import dev.hybridlabs.aquatic.effect.HAMobEffects
@@ -431,8 +431,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             //#endregion
 
             HABlocks.GLOWSTICK.get() to "Glowstick",
-            HABlocks.GLOWSLIME_BLOCK.get() to "Glowslime Block",
-            HABlocks.HAGSLIME_BLOCK.get() to "Hagslime Block",
+            HAPlatformBlocks.GLOWSLIME_BLOCK.get() to "Glowslime Block",
+            HAPlatformBlocks.HAGSLIME_BLOCK.get() to "Hagslime Block",
             HABlocks.PEARL_BLOCK.get() to "Pearl Block",
             HABlocks.BLACK_PEARL_BLOCK.get() to "Black Pearl Block",
             HAPlatformBlocks.DRIFTWOOD_LOG.get() to "Driftwood Log",

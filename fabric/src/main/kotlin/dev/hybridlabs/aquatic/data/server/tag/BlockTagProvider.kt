@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.data.server.tag
 
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput

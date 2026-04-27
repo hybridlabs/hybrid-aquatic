@@ -592,8 +592,6 @@ object HAItems {
     //#endregion
 
     //#region Artificial Blocks
-    val GLOWSLIME_BLOCK = registerBlockItem("glowslime_block") { HABlocks.GLOWSLIME_BLOCK.get() }
-    val HAGSLIME_BLOCK = registerBlockItem("hagslime_block") { HABlocks.HAGSLIME_BLOCK.get() }
     val PEARL_BLOCK = registerBlockItem("pearl_block") { HABlocks.PEARL_BLOCK.get() }
     val BLACK_PEARL_BLOCK = registerBlockItem("black_pearl_block") { HABlocks.BLACK_PEARL_BLOCK.get() }
     val CRYSTALLINE_SULFUR = registerBlockItem("crystalline_sulfur") { HABlocks.CRYSTALLINE_SULFUR.get() }

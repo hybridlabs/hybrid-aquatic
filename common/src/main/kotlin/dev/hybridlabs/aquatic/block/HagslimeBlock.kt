@@ -26,7 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 import kotlin.math.abs
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class HagslimeBlock(settings: Properties) : HalfTransparentBlock(settings), StickyBlock {
+open class HagslimeBlock(settings: Properties) : HalfTransparentBlock(settings), StickyBlock {
     init {
         this.registerDefaultState(stateDefinition.any())
     }

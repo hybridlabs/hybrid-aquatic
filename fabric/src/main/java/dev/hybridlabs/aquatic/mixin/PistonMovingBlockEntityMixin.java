@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.mixin;
 
-import dev.hybridlabs.aquatic.block.HABlocks;
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks;
 import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,9 +20,9 @@ public class PistonMovingBlockEntityMixin {
         if (cir.getReturnValueZ()) {
             return;
         }
-
+        // TODO @Aqua: Change to @ModifyReturnValue
         // extend sticky behavior
-        if (this.movedState.is(HABlocks.INSTANCE.getHAGSLIME_BLOCK().get())) {
+        if (this.movedState.is(HAPlatformBlocks.INSTANCE.getHAGSLIME_BLOCK().get())) {
             cir.setReturnValue(true);
         }
     }

@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.HalfTransparentBlock
 import net.minecraft.world.level.block.state.BlockState
 import kotlin.math.abs
 
-class GlowslimeBlock(properties: Properties) : HalfTransparentBlock(properties), StickyBlock {
+open class GlowslimeBlock(properties: Properties) : HalfTransparentBlock(properties), StickyBlock {
     override fun fallOn(level: Level, state: BlockState, pos: BlockPos, entity: Entity, fallDistance: Float) {
         if (entity.isSuppressingBounce) {
             super.fallOn(level, state, pos, entity, fallDistance)

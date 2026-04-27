@@ -583,30 +583,6 @@ object HABlocks {
             .noParticlesOnBreak())
     }
 
-    val GLOWSLIME_BLOCK = register("glowslime_block") {
-        GlowslimeBlock(Properties.of()
-            .friction(0.8F)
-            .instabreak()
-            .noOcclusion()
-            .sound(SoundType.SLIME_BLOCK)
-            .mapColor { MapColor.COLOR_CYAN }
-            .lightLevel { 14 }
-        )
-    }
-
-    val HAGSLIME_BLOCK = register("hagslime_block") {
-        HagslimeBlock(
-            Properties.of()
-                .instabreak()
-                .noOcclusion()
-                .sound(SoundType.HONEY_BLOCK)
-                .mapColor { MapColor.TERRACOTTA_WHITE }
-                .isSuffocating { _, _, _ -> false }
-                .speedFactor(0.4F)
-                .jumpFactor(0.5F)
-        )
-    }
-
     val DECORATIVE_BUBBLE_COLUMN = register("decorative_bubble_column") {
         DecorativeBubbleColumnBlock(Properties.copy(Blocks.BUBBLE_COLUMN))
     }

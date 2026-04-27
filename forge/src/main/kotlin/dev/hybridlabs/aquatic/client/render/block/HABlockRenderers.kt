@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.render.block
 
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.minecraft.client.renderer.RenderType
 
@@ -12,8 +12,8 @@ object HABlockRenderers {
             HAPlatformBlocks.DUNEGRASS.get(),
             HAPlatformBlocks.TALL_DUNEGRASS.get(),
             HAPlatformBlocks.CATTAIL.get(),
-            HABlocks.GLOWSLIME_BLOCK.get(),
-            HABlocks.HAGSLIME_BLOCK.get(),
+            HAPlatformBlocks.HAGSLIME_BLOCK.get(),
+            HAPlatformBlocks.GLOWSLIME_BLOCK.get(),
 
             HABlocks.SHORT_RED_ALGAE.get(),
             HABlocks.RED_ALGAE.get(),

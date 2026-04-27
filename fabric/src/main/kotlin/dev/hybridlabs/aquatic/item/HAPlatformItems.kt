@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.item.HAItems.registerBlockItem
 
 object HAPlatformItems {
@@ -36,5 +36,8 @@ object HAPlatformItems {
     val TALL_DUNEGRASS = registerBlockItem("tall_dunegrass") { HAPlatformBlocks.TALL_DUNEGRASS.get() }
     val CATTAIL = registerBlockItem("cattail") { HAPlatformBlocks.CATTAIL.get() }
     //#endregion
+
+    val GLOWSLIME_BLOCK = registerBlockItem("glowslime_block") { HAPlatformBlocks.GLOWSLIME_BLOCK.get() }
+    val HAGSLIME_BLOCK = registerBlockItem("hagslime_block") { HAPlatformBlocks.HAGSLIME_BLOCK.get() }
 
 }

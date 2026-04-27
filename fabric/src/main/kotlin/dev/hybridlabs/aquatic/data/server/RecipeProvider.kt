@@ -1,8 +1,9 @@
 package dev.hybridlabs.aquatic.data.server
 
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
@@ -312,7 +313,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             )
             .save(exporter)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.GLOWSLIME_BLOCK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAPlatformItems.GLOWSLIME_BLOCK.get())
             .pattern("SSS")
             .pattern("SSS")
             .pattern("SSS")
@@ -328,14 +329,14 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.GLOWSLIME.get(),
             9
         )
-            .requires(HAItems.GLOWSLIME_BLOCK.get())
+            .requires(HAPlatformItems.GLOWSLIME_BLOCK.get())
             .unlockedBy(
                 "has_glowslime_block",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GLOWSLIME_BLOCK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.GLOWSLIME_BLOCK.get())
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_block"))
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.HAGSLIME_BLOCK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAPlatformItems.HAGSLIME_BLOCK.get())
             .pattern("HHH")
             .pattern("HHH")
             .pattern("HHH")
@@ -351,10 +352,10 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.HAGSLIME.get(),
             9
         )
-            .requires(HAItems.HAGSLIME_BLOCK.get())
+            .requires(HAPlatformItems.HAGSLIME_BLOCK.get())
             .unlockedBy(
                 "has_hagslime_block",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.HAGSLIME_BLOCK.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.HAGSLIME_BLOCK.get())
             )
             .save(exporter, ResourceLocation("hybrid-aquatic", "hagslime_from_block"))
 

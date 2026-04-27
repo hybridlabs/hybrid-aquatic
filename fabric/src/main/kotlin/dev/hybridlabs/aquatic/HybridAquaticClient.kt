@@ -4,8 +4,8 @@ package dev.hybridlabs.aquatic
 
 import dev.emi.trinkets.api.client.TrinketRendererRegistry
 import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
-import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
 import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BASKING_SHARK_PLUSHIE
@@ -162,8 +162,8 @@ object HybridAquaticClient : ClientModInitializer {
             HABlocks.GIANT_GREEN_ANEMONE.get(),
             HABlocks.STRAWBERRY_ANEMONE.get(),
             HABlocks.MESSAGE_IN_A_BOTTLE.get(),
-            HABlocks.GLOWSLIME_BLOCK.get(),
-            HABlocks.HAGSLIME_BLOCK.get(),
+            HAPlatformBlocks.GLOWSLIME_BLOCK.get(),
+            HAPlatformBlocks.HAGSLIME_BLOCK.get(),
         )
         ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.cutout(),

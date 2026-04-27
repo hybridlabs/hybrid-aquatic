@@ -3,9 +3,9 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.core.BlockPos
 import net.minecraft.core.registries.BuiltInRegistries
@@ -86,8 +86,8 @@ object HAItemGroups {
                 entries.accept(HABlocks.CHERRY_CRATE.get())
                 entries.accept(HABlocks.PEARL_BLOCK.get())
                 entries.accept(HABlocks.BLACK_PEARL_BLOCK.get())
-                entries.accept(HABlocks.HAGSLIME_BLOCK.get())
-                entries.accept(HABlocks.GLOWSLIME_BLOCK.get())
+                entries.accept(HAPlatformBlocks.HAGSLIME_BLOCK.get())
+                entries.accept(HAPlatformBlocks.GLOWSLIME_BLOCK.get())
                 entries.accept(HABlocks.GLOWSTICK.get())
                 entries.accept(HAItems.BUOY.get())
                 entries.accept(HAItems.BELL_BUOY.get())

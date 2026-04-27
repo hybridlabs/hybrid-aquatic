@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic
 
 import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
-import dev.hybridlabs.aquatic.block.wood.HAPlatformBlocks
 import dev.hybridlabs.aquatic.config.ConfigHelper
 import dev.hybridlabs.aquatic.config.HAConfig
 import dev.hybridlabs.aquatic.effect.HAMobEffects

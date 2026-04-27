@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PistonStructureResolver.class)
-public class PistonStructureResolverMixin {
-
+public class PistonStructureResolverFabricMixin {
 	@Inject(method = "isSticky", at = @At("HEAD"), cancellable = true)
 	private static void changeIsSticky(BlockState state, CallbackInfoReturnable<Boolean> cir) {
 		if (state.getBlock() instanceof StickyBlock block) cir.setReturnValue(block.isSticky());
