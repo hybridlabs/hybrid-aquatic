@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -304,6 +304,11 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.DEAD_THORN_CORAL_BLOCK.get())
             .add(HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get())
             .add(HABlocks.DEAD_ZIGZAG_CORAL_BLOCK.get())
+
+        getOrCreateTagBuilder(HABlockTags.IS_HONEYLIKE)
+            .add(HAPlatformBlocks.HAGSLIME_BLOCK.get())
+        getOrCreateTagBuilder(HABlockTags.IS_SLIMELIKE)
+            .add(HAPlatformBlocks.GLOWSLIME_BLOCK.get())
 
         // plushies
         BuiltInRegistries.BLOCK

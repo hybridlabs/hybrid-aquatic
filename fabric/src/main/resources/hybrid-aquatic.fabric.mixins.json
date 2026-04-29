@@ -10,6 +10,7 @@
         "BreathAirGoalMixin",
         "FlowingFluidMixin",
         "PistonMovingBlockEntityMixin",
+        "FabricPistonMovingBlockEntityMixin",
         "PistonStructureResolverFabricMixin",
         "FishingBobberEntityMixin",
         "FishingRodItemMixin",
