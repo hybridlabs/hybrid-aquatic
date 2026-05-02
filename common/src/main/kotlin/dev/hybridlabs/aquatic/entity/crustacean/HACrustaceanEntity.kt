@@ -37,6 +37,7 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
@@ -215,12 +216,10 @@ open class HACrustaceanEntity(
         controllerRegistrar.add(
             AnimationController(
                 this, "Dance", 4,
-                AnimationController.AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
-                    if (this.canDance && isSongPlaying()) {
+                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                    if (this.canDance && isSongPlaying())
                         return@AnimationStateHandler state.setAndContinue(DANCE_ANIMATION)
-                    } else {
-                        PlayState.STOP
-                    }
+                    PlayState.STOP
                 }
             )
         )

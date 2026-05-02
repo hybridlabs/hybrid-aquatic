@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.crustacean.HACrustaceanEntity
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -9,10 +10,31 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
+import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.`object`.PlayState
 
 @Suppress("UNUSED_PARAMETER", "DEPRECATION")
 class GhostCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
     HACrustaceanEntity(entityType, world, true) {
+
+    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
+        super.registerControllers(controllerRegistrar)
+
+        controllerRegistrar.add(
+            AnimationController(
+                this, "Spawning",
+                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                    if (this.tickCount < 20)
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
+                    PlayState.STOP
+                }
+            )
+        )
+    }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
