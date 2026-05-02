@@ -58,22 +58,6 @@
 					"rotation": [-22.5, 0, 0]
 				}
 			}
-		},
-		"misc.sit": {
-			"loop": true,
-			"animation_length": 1,
-			"bones": {
-				"body": {
-					"rotation": [0, 0, -90],
-					"position": [0, -1.25, 0]
-				},
-				"tentacles_1": {
-					"rotation": [-22.5, 0, 0]
-				},
-				"tentacles_2": {
-					"rotation": [-22.5, 0, 0]
-				}
-			}
 		}
 	},
 	"geckolib_format_version": 2

@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"misc.sit": {
+		"misc.flop": {
 			"loop": true,
 			"bones": {
 				"body": {

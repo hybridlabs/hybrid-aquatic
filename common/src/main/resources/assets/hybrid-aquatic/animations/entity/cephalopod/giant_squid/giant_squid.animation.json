@@ -250,6 +250,49 @@
 					"rotation": [0, "Math.sin(query.anim_time*90)*4", 0]
 				}
 			}
+		},
+		"misc.flop": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"position": [0, -1.75, 0],
+					"scale": [1, 0.8, 1]
+				},
+				"head": {
+					"rotation": [-12.5, 0, 0],
+					"position": [0, 0, -2]
+				},
+				"bottom_left_arm_1": {
+					"rotation": [7.5, 0, 0]
+				},
+				"bottom_right_arm_1": {
+					"rotation": [7.5, 0, 0]
+				},
+				"left_tentacle_2": {
+					"rotation": [10, 0, 0]
+				},
+				"lower_left_arm_2": {
+					"rotation": [-5, 0, 0]
+				},
+				"lower_right_arm_2": {
+					"rotation": [-5, 0, 0]
+				},
+				"right_tentacle_2": {
+					"rotation": [10, 0, 0]
+				},
+				"upper_left_arm_3": {
+					"rotation": [0, 5, 0]
+				},
+				"upper_right_arm_3": {
+					"rotation": [0, -5, 0]
+				},
+				"lower_left_arm_1": {
+					"rotation": [0, -2.5, 0]
+				},
+				"lower_right_arm_1": {
+					"rotation": [0, 2.5, 0]
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

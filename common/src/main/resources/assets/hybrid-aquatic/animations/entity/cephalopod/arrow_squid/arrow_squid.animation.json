@@ -13,6 +13,18 @@
 				}
 			}
 		},
+		"misc.flop": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"position": [0, -0.75, 0],
+					"scale": [1, 0.8, 1]
+				},
+				"tentacles_1": {
+					"rotation": [-10, 0, 0]
+				}
+			}
+		},
 		"misc.idle": {
 			"loop": true,
 			"bones": {

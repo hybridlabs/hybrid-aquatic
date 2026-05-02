@@ -28,6 +28,18 @@
 				}
 			}
 		},
+		"misc.flop": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"position": [0, -0.75, 0],
+					"scale": [1, 0.8, 1]
+				},
+				"tentacles_1": {
+					"rotation": [22.5, 0, 0]
+				}
+			}
+		},
 		"move.swim": {
 			"loop": true,
 			"bones": {
