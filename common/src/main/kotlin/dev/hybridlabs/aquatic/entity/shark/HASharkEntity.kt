@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.effect.HAMobEffects
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.SharkAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
@@ -157,7 +156,6 @@ open class HASharkEntity(
 
     override fun aiStep() {
         this.updateSwingTime()
-
 
         prevRoll = currentRoll
         var targetRoll = ((this.yRot - this.yRotO) * 0.1f).coerceIn(-0.45f, 0.45f)

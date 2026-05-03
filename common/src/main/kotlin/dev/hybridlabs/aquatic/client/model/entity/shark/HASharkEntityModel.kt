@@ -48,7 +48,7 @@ abstract class HASharkEntityModel<T : HASharkEntity>(
         val tail = animationProcessor.getBone(PartNames.TAIL)
         val tailFin = animationProcessor.getBone(PartNames.TAIL_FIN)
 
-        val tilt = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
+        val tilt = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -30f, 30f)
 
         val yawDiff = animatable.yRot - animatable.yRotO
         val targetRoll = Mth.clamp(yawDiff * 3f, -30f, 30f)
@@ -57,7 +57,7 @@ abstract class HASharkEntityModel<T : HASharkEntity>(
         val smoothing = Mth.clamp(0.05f + turnSpeed * 0.02f, 0.05f, 0.25f)
         animatable.currentRoll = Mth.lerp(smoothing, animatable.currentRoll, targetRoll)
 
-        val roll = Mth.lerp(deltaTime, animatable.prevRoll, animatable.currentRoll)
+        val roll = Mth.clamp(Mth.lerp(deltaTime, animatable.prevRoll, animatable.currentRoll), -30f, 30f)
 
         head.rotY += roll * -Mth.DEG_TO_RAD
         body.rotX += tilt * -Mth.DEG_TO_RAD
