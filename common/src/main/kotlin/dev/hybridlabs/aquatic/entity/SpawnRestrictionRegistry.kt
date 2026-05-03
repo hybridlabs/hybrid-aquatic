@@ -40,7 +40,6 @@ object SpawnRestrictionRegistry {
             HAEntityTypes.DISCUS.get(),
             HAEntityTypes.CORYDORA.get(),
             HAEntityTypes.BETTA.get(),
-            HAEntityTypes.TETRA.get(),
             HAEntityTypes.GOLDEN_DORADO.get(),
         ).forEach { registerShallowFish(it) }
 
@@ -74,6 +73,7 @@ object SpawnRestrictionRegistry {
             HAEntityTypes.OPAH.get(),
         ).forEach { registerNightFish(it) }
 
+        registerFish(HAEntityTypes.TETRA.get(), TetraEntity::canSpawn)
         registerFish(HAEntityTypes.GARDEN_EEL.get(), GardenEelEntity::canSpawn)
         registerFish(HAEntityTypes.CARP.get(), CarpEntity::canSpawn)
         registerFish(HAEntityTypes.CLOWNFISH.get(), ClownfishEntity::canSpawn)
