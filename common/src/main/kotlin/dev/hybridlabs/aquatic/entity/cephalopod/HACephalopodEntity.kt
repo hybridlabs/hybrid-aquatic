@@ -232,7 +232,7 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
                     }
 
                     else -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
+                        state.setAndContinue(DefaultAnimations.SWIM)
                     }
                 }
             }
