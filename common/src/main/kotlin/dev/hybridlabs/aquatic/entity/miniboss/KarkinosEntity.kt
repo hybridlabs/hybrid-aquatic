@@ -310,6 +310,7 @@ class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
         controllers.add(AnimationController(this, "flip_controller", 8) { state ->
             if (isFlipped()) {
                 state.setAndContinue(FLIP_ANIMATION)
@@ -326,7 +327,6 @@ class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 PlayState.STOP
             }
         })
-        controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
 
