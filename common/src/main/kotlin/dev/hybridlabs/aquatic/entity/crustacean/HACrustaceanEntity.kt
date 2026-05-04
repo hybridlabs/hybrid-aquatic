@@ -6,6 +6,8 @@ import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
 import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
+import net.minecraft.core.particles.BlockParticleOption
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -40,6 +42,7 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.keyframe.event.ParticleKeyframeEvent
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
@@ -165,9 +168,30 @@ open class HACrustaceanEntity(
     //#endregion
 
     //#region Data
+
+    fun isDigging(): Boolean {
+        return entityData.get(DIGGING)
+    }
+
+    private fun setDigging(digging: Boolean) {
+        entityData.set(DIGGING, digging)
+    }
+
+    fun startDigging() {
+        setDigging(true)
+        playSound(SoundEvents.SNIFFER_DIGGING, 0.1f, 1.5f)
+        navigation.stop()
+    }
+
+    fun stopDigging() {
+        setDigging(false)
+        playSound(SoundEvents.SNIFFER_DIGGING_STOP, 0.1f, 1.5f)
+    }
+
     override fun defineSynchedData() {
         super.defineSynchedData()
 
+        entityData.define(DIGGING, false)
         entityData.define(CRUSTACEAN_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(SHELL_ITEM, ItemStack.EMPTY)
@@ -177,6 +201,7 @@ open class HACrustaceanEntity(
         super.addAdditionalSaveData(nbt)
 
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
+        this.setDigging(nbt.getBoolean("Digging"))
         nbt.putBoolean("FromFishingNet", fromFishingNet)
     }
 
@@ -184,6 +209,7 @@ open class HACrustaceanEntity(
         super.readAdditionalSaveData(nbt)
 
         size = nbt.getInt(CRUSTACEAN_SIZE_KEY)
+        this.setDigging(nbt.getBoolean("Digging"))
         fromFishingNet = nbt.getBoolean("FromFishingNet")
     }
     //#endregion
@@ -228,6 +254,33 @@ open class HACrustaceanEntity(
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
     }
+
+    fun particleEvents(event: ParticleKeyframeEvent<HACrustaceanEntity>) {
+        val entity = event.animatable
+        val level = entity.level()
+
+        if (!level.isClientSide) return
+
+        val rand = entity.random
+
+        repeat(rand.nextInt(6) + 8) {
+            val xOffset = rand.nextGaussian() * 0.2
+            val zOffset = rand.nextGaussian() * 0.2
+
+            level.addParticle(
+                BlockParticleOption(
+                    ParticleTypes.FALLING_DUST,
+                    Blocks.SAND.defaultBlockState()),
+                entity.x + xOffset,
+                entity.y,
+                entity.z + zOffset,
+
+                rand.nextGaussian() * 0.05,
+                0.3 + rand.nextDouble() * 0.4,
+                rand.nextGaussian() * 0.05
+            )
+        }
+    }
     //#endregion
 
     override fun dropFromLootTable(source: DamageSource, causedByPlayer: Boolean) {
@@ -250,7 +303,11 @@ open class HACrustaceanEntity(
             SynchedEntityData.defineId(HACrustaceanEntity::class.java, EntityDataSerializers.ITEM_STACK)
 
         val DANCE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
+        val DIG_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dig")
         val HIDE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
+
+        val DIGGING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HACrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         fun canSurfaceSpawn(
             type: EntityType<out WaterAnimal>,

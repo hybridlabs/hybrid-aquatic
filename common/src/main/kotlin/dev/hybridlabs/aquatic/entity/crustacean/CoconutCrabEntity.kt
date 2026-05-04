@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.ai.goal.CrustaceanDigGoal
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -20,6 +21,12 @@ import software.bernie.geckolib.core.`object`.PlayState
 class CoconutCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
     HACrustaceanEntity(entityType, world, false) {
 
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, CrustaceanDigGoal(this))
+
+    }
+
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         super.registerControllers(controllerRegistrar)
 
@@ -29,6 +36,19 @@ class CoconutCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
                 AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
                     if (this.tickCount < 20)
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
+                    PlayState.STOP
+                }
+            )
+                .setParticleKeyframeHandler { event -> particleEvents(event)
+                }
+        )
+
+        controllerRegistrar.add(
+            AnimationController(
+                this, "Digging",
+                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                    if (this.isDigging())
+                        return@AnimationStateHandler state.setAndContinue(DIG_ANIMATION)
                     PlayState.STOP
                 }
             )
