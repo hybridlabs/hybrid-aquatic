@@ -179,13 +179,12 @@ open class HACrustaceanEntity(
 
     fun startDigging() {
         setDigging(true)
-        playSound(SoundEvents.SNIFFER_DIGGING, 0.1f, 1.5f)
+        playSound(SoundEvents.SNIFFER_DIGGING, 0.1f, 2.0f)
         navigation.stop()
     }
 
     fun stopDigging() {
         setDigging(false)
-        playSound(SoundEvents.SNIFFER_DIGGING_STOP, 0.1f, 1.5f)
     }
 
     override fun defineSynchedData() {
@@ -261,6 +260,9 @@ open class HACrustaceanEntity(
 
         if (!level.isClientSide) return
 
+        val blockpos = entity.blockPosition()
+        val blockstate = level.getBlockState(blockpos.below())
+
         val rand = entity.random
 
         repeat(rand.nextInt(6) + 8) {
@@ -268,13 +270,10 @@ open class HACrustaceanEntity(
             val zOffset = rand.nextGaussian() * 0.2
 
             level.addParticle(
-                BlockParticleOption(
-                    ParticleTypes.FALLING_DUST,
-                    Blocks.SAND.defaultBlockState()),
+                BlockParticleOption(ParticleTypes.BLOCK, blockstate),
                 entity.x + xOffset,
                 entity.y,
                 entity.z + zOffset,
-
                 rand.nextGaussian() * 0.05,
                 0.3 + rand.nextDouble() * 0.4,
                 rand.nextGaussian() * 0.05
