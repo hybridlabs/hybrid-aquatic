@@ -260,6 +260,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.FLYING_FISH.get(),
             HAItems.SNAILFISH.get(),
             HAItems.PEARLFISH.get(),
+            HAItems.SEAHORSE.get(),
             HAItems.OSCAR.get(),
             HAItems.FLASHLIGHT_FISH.get(),
             HAItems.SQUIRRELFISH.get(),
