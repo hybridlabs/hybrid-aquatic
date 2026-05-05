@@ -34,7 +34,7 @@
           }
         }
       },
-		"misc.idle": {
+      "misc.idle": {
 			"loop": true,
 			"animation_length": 2.6667,
 			"bones": {
