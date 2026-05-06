@@ -23,6 +23,7 @@ import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.PanicGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
@@ -71,6 +72,7 @@ open class HACrustaceanEntity(
         goalSelector.addGoal(1, AvoidEntityGoal(this, Player::class.java, 16.0F, 0.3, 0.75))
         goalSelector.addGoal(1, PanicGoal(this, 1.0))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
+        goalSelector.addGoal(5, MeleeAttackGoal(this, 1.0, true))
     }
 
     override fun finalizeSpawn(
@@ -248,6 +250,7 @@ open class HACrustaceanEntity(
                 }
             )
         )
+        controllerRegistrar.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
