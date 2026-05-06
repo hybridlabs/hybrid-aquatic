@@ -21,7 +21,7 @@ class OpahEntity(type: EntityType<out OpahEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(2, FollowCreatureGoal(this, TunaEntity::class.java, 1.5, 4.0F, 8.0F))
+        goalSelector.addGoal(2, FollowCreatureGoal(this, TunaEntity::class.java, 1.5, 4.0F, 16.0F))
     }
 
     override fun isFood(stack: ItemStack): Boolean {
