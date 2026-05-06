@@ -299,9 +299,6 @@
               }
             }
           },
-          "crustacean": {
-            "rotation": [0, -90, 0]
-          },
           "torso": {
             "rotation": {
               "0.0": {

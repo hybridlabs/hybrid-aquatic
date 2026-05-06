@@ -51,6 +51,7 @@ class LightfootCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world:
                 }
             )
         )
+        controllerRegistrar.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
 
     companion object {

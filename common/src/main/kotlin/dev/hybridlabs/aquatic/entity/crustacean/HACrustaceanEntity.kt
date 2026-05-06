@@ -249,9 +249,7 @@ open class HACrustaceanEntity(
                     PlayState.STOP
                 }
             )
-        )
-        controllerRegistrar.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
-    }
+        )}
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory

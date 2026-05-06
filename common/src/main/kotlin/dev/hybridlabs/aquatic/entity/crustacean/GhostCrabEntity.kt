@@ -59,6 +59,7 @@ class GhostCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Lev
                 }
             )
         )
+        controllerRegistrar.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
 
     companion object {

@@ -52,6 +52,7 @@ class FlowerCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
                 }
             )
         )
+        controllerRegistrar.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
 
     companion object {

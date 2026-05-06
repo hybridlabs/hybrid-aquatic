@@ -253,7 +253,7 @@
 			}
 		},
 		"attack.swing": {
-			"loop": true,
+          "loop": true,
 			"animation_length": 0.8333,
 			"bones": {
 				"left_arm_1": {
