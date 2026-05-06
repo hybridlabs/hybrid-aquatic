@@ -8,6 +8,8 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
+import net.minecraft.world.entity.animal.Turtle
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -24,7 +26,10 @@ class CoconutCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, CrustaceanDigGoal(this))
-
+        goalSelector.addGoal(1, NearestAttackableTargetGoal(
+            this, Turtle::class.java, 10, false, false,
+            Turtle.BABY_ON_LAND_SELECTOR)
+        )
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
