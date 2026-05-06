@@ -6,7 +6,6 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
@@ -55,9 +54,7 @@ class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
 
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
-            DefaultAnimations.genericWalkIdleController(this)
-        )
+        super.registerControllers(controllerRegistrar)
         controllerRegistrar.add(
             AnimationController(this, "Hide", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->

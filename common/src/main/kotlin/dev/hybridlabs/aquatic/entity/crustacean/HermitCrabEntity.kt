@@ -31,7 +31,6 @@ import net.minecraft.world.level.block.NoteBlock
 import net.minecraft.world.level.block.TntBlock
 import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationState
@@ -253,9 +252,7 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
 
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(
-            DefaultAnimations.genericWalkIdleController(this)
-        )
+        super.registerControllers(controllerRegistrar)
         controllerRegistrar.add(
             AnimationController(
                 this, "Hide", 4,

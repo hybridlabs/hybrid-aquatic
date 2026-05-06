@@ -58,7 +58,8 @@ class CoconutCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
                 }
             )
         )
-        controllerRegistrar.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
+        controllerRegistrar.add(
+            DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
 
     companion object {

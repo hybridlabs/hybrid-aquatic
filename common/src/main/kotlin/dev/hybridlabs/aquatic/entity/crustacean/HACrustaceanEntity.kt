@@ -249,7 +249,8 @@ open class HACrustaceanEntity(
                     PlayState.STOP
                 }
             )
-        )}
+        )
+    }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return factory
