@@ -34,6 +34,39 @@
           }
         }
       },
+      "misc.burrow": {
+        "loop": "hold_on_last_frame",
+        "animation_length": 1,
+        "bones": {
+          "crustacean": {
+            "rotation": {
+              "0.0": [0, -90, 0],
+              "1.0": [0, -90, 90]
+            },
+            "position": {
+              "0.0": [0, 0, 0],
+              "1.0": [0, -6, 0]
+            }
+          },
+          "body": {
+            "rotation": {
+              "0.0": [0, "15-math.cos(query.anim_time*720)*15", 0],
+              "1.0": [0, "-math.cos(query.anim_time*720)*15", 0]
+            }
+          },
+          "right_claw": {
+            "rotation": ["-math.cos(query.anim_time*720)*30", 0, 0]
+          },
+          "left_claw": {
+            "rotation": ["-math.cos(query.anim_time*720)*-30", 0, 0]
+          }
+        },
+        "particle_effects": {
+          "1.0": {
+            "effect": "emerge"
+          }
+        }
+      },
       "misc.idle": {
 			"loop": true,
 			"animation_length": 2.6667,
