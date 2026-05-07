@@ -220,10 +220,29 @@ open class HACrustaceanEntity(
         setDigging(false)
     }
 
+    fun isBurrowing(): Boolean {
+        return entityData.get(BURROWING)
+    }
+
+    private fun setBurrowing(digging: Boolean) {
+        entityData.set(BURROWING, digging)
+    }
+
+    fun startBurrowing() {
+        setBurrowing(true)
+        playSound(SoundEvents.SNIFFER_DIGGING, 0.1f, 2.0f)
+        navigation.stop()
+    }
+
+    fun stopBurrowing() {
+        setBurrowing(false)
+    }
+
     override fun defineSynchedData() {
         super.defineSynchedData()
 
         entityData.define(DIGGING, false)
+        entityData.define(BURROWING, false)
         entityData.define(CRUSTACEAN_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(SHELL_ITEM, ItemStack.EMPTY)
@@ -234,6 +253,7 @@ open class HACrustaceanEntity(
 
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
         this.setDigging(nbt.getBoolean("Digging"))
+        this.setBurrowing(nbt.getBoolean("Burrowing"))
         nbt.putBoolean("FromFishingNet", fromFishingNet)
         nbt.putInt("AttackTick", this.attackTick)
     }
@@ -243,6 +263,7 @@ open class HACrustaceanEntity(
 
         size = nbt.getInt(CRUSTACEAN_SIZE_KEY)
         this.setDigging(nbt.getBoolean("Digging"))
+        this.setBurrowing(nbt.getBoolean("Burrowing"))
         fromFishingNet = nbt.getBoolean("FromFishingNet")
         this.attackTick = nbt.getInt("AttackTick")
     }
@@ -338,9 +359,12 @@ open class HACrustaceanEntity(
 
         val DANCE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
         val DIG_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dig")
+        val BURROW_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.burrow")
         val HIDE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
 
         val DIGGING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HACrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
+        val BURROWING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HACrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         fun canSurfaceSpawn(

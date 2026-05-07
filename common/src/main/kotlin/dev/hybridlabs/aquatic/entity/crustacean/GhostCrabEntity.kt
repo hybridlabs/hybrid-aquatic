@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.ai.goal.CrustaceanDaytimeBurrowGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.CrustaceanDigGoal
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
@@ -25,6 +26,7 @@ class GhostCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Lev
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(1, CrustaceanDaytimeBurrowGoal(this))
         goalSelector.addGoal(5, CrustaceanDigGoal(this))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(
             this, Turtle::class.java, 10, false, false,
@@ -41,6 +43,20 @@ class GhostCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Lev
                 AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
                     if (this.tickCount < 20)
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
+                    PlayState.STOP
+                }
+            )
+                .setParticleKeyframeHandler { event ->
+                    particleEvents(event)
+                }
+        )
+
+        controllerRegistrar.add(
+            AnimationController(
+                this, "Burrowing",
+                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                    if (this.isBurrowing())
+                        return@AnimationStateHandler state.setAndContinue(BURROW_ANIMATION)
                     PlayState.STOP
                 }
             )

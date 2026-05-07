@@ -4,31 +4,37 @@ import dev.hybridlabs.aquatic.entity.crustacean.HACrustaceanEntity
 import net.minecraft.core.particles.BlockParticleOption
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.ai.goal.Goal
 import java.util.*
 
-class CrustaceanDigGoal(
+class CrustaceanDaytimeBurrowGoal(
     private val crustacean: HACrustaceanEntity
 ) : Goal() {
-    private var digTime = 0
-    private var digCooldown: Int
+    private var burrowTime = 0
+    private var burrowCooldown: Int
 
     init {
         this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
-        digCooldown = crustacean.tickCount + (10 * 40 + crustacean.getRandom().nextInt(10) * 80)
+        burrowCooldown = crustacean.tickCount + (10 * 40 + crustacean.getRandom().nextInt(10) * 80)
     }
 
     override fun canUse(): Boolean {
-        if (digCooldown > this.crustacean.tickCount || crustacean.level().getNearestPlayer(crustacean, 32.0) == null) {
+        if (burrowCooldown > this.crustacean.tickCount ||
+            !crustacean.onGround() ||
+            crustacean.fromFishingNet ||
+            crustacean.hasCustomName() ||
+            crustacean.level().isNight ||
+            crustacean.level().getNearestPlayer(crustacean, 32.0) == null) {
             return false
         }
         return this.crustacean.getRandom().nextInt(40) == 0
     }
 
     override fun start() {
-        digTime = 40
-        crustacean.startDigging()
-        digCooldown = this.crustacean.tickCount + (10 * 20 + this.crustacean.getRandom().nextInt(10) * 20)
+        burrowTime = 20
+        crustacean.startBurrowing()
+        burrowCooldown = this.crustacean.tickCount + (10 * 20 + this.crustacean.getRandom().nextInt(10) * 20)
 
         val level = this.crustacean.level()
         val blockpos = this.crustacean.blockPosition()
@@ -48,14 +54,15 @@ class CrustaceanDigGoal(
     }
 
     override fun stop() {
-        crustacean.stopDigging()
+        crustacean.stopBurrowing()
+        crustacean.remove(Entity.RemovalReason.DISCARDED)
     }
 
     override fun canContinueToUse(): Boolean {
-        return digTime >= 0
+        return burrowTime >= 0
     }
 
     override fun tick() {
-        digTime--
+        burrowTime--
     }
 }
