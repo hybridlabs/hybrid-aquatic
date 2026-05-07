@@ -135,10 +135,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
                         state.setAndContinue(DefaultAnimations.SIT)
                     }
 
-                    onGround() && !state.isMoving && !isSitting() && canSit() -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-
                     this.moistness < 590 -> {
                         state.setAndContinue(FLOP_ANIMATION)
                     }
