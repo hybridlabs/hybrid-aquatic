@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.entity.ai.goal.HypnotizeTargetGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.MinionLookAtOwnerTargetGoal
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.core.BlockPos
@@ -30,14 +31,16 @@ import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
 
 class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HAMinionEntity(type, world) {
     var beastPosition = 0
     val beastDistance = 5.0
     var prevOwner: UUID? = null
-    private var hypnosisTimer: Int = 0
-    var hypnosisCooldown: Int = 0
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -48,6 +51,7 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
 
     override fun registerGoals() {
         //super.registerGoals()
+        goalSelector.addGoal(1, HypnotizeTargetGoal(this))
         goalSelector.addGoal(1, HypnautilusFindOwnerGoal(this))
         goalSelector.addGoal(1, MinionLookAtOwnerTargetGoal(this))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
@@ -59,6 +63,18 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
+
+        controllers.add(
+            AnimationController(
+                this, "Hypnotize",
+                AnimationStateHandler { state: AnimationState<HypnautilusEntity> ->
+                    if (this.isHypnotizing())
+                        return@AnimationStateHandler state.setAndContinue(SPIN_ANIMATION)
+                    PlayState.STOP
+                }
+            )
+        )
+
         controllers.add(
             AnimationController(this, "Swim/Run/Idle", 4) { state ->
                 when {
@@ -84,15 +100,11 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
     fun startHypnotizing() {
         setHypnotizing(true)
         playSound(SoundEvents.EVOKER_PREPARE_ATTACK, 1.0f, 1.0f)
-        hypnosisTimer = 30
-        hypnosisCooldown = 240
         navigation.stop()
     }
 
     fun stopHypnotizing() {
         setHypnotizing(false)
-        hypnosisTimer = 0
-        hypnosisCooldown = 300
     }
 
     override fun defineSynchedData() {
@@ -104,9 +116,7 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
         if (this.getOwner() != null) {
             nbt.putUUID("Owner", this.getOwner()!!.uuid)
         }
-        nbt.putBoolean("Hypnotizing", isHypnotizing())
-        nbt.putInt("HypnosisTimer", hypnosisTimer)
-        nbt.putInt("HypnosisCooldown", hypnosisCooldown)
+        this.setHypnotizing(nbt.getBoolean("Hypnotizing"))
         super.addAdditionalSaveData(nbt)
     }
 
@@ -116,8 +126,6 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
             prevOwner = nbt.getUUID("Owner")
         }
         this.setHypnotizing(nbt.getBoolean("Hypnotizing"))
-        this.hypnosisTimer = nbt.getInt("HypnosisTimer")
-        this.hypnosisCooldown = nbt.getInt("HypnosisCooldown")
     }
 
     override fun tick() {
@@ -181,6 +189,8 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
                 .add(Attributes.ATTACK_DAMAGE, 4.0).add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 24.0)
         }
+
+        val SPIN_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("attack.spin")
 
         val HYPNOTIZING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HypnautilusEntity::class.java, EntityDataSerializers.BOOLEAN)
