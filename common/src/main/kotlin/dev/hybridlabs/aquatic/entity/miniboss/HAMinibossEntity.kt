@@ -16,7 +16,6 @@ import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.util.GeckoLibUtil
 
-
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
 abstract class HAMinibossEntity(type: EntityType<out Monster>, world: Level) :
     Monster(type, world), GeoEntity {
