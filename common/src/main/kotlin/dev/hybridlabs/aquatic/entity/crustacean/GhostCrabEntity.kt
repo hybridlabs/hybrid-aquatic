@@ -25,7 +25,7 @@ class GhostCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Lev
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, CrustaceanDigGoal(this))
+        goalSelector.addGoal(5, CrustaceanDigGoal(this))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(
             this, Turtle::class.java, 10, false, false,
             Turtle.BABY_ON_LAND_SELECTOR)

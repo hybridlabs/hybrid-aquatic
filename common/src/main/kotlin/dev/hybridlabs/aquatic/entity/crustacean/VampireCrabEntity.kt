@@ -17,7 +17,7 @@ class VampireCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, CrustaceanDigGoal(this))
+        goalSelector.addGoal(5, CrustaceanDigGoal(this))
 
     }
 

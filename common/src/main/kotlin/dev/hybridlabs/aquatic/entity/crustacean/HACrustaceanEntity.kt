@@ -54,7 +54,8 @@ open class HACrustaceanEntity(
     open val canDance: Boolean,
 ) : WaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private var fromFishingNet = false
+    private var attackTick = 0
+    var fromFishingNet = false
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -72,7 +73,35 @@ open class HACrustaceanEntity(
         goalSelector.addGoal(1, AvoidEntityGoal(this, Player::class.java, 16.0F, 0.3, 0.75))
         goalSelector.addGoal(1, PanicGoal(this, 1.0))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.4))
-        goalSelector.addGoal(5, MeleeAttackGoal(this, 1.0, true))
+        goalSelector.addGoal(4, MeleeAttackGoal(this, 1.0, true))
+    }
+
+    private fun getHandSwingDuration(): Int {
+        return 20
+    }
+
+    override fun updateSwingTime() {
+        val i = this.getHandSwingDuration()
+        if (this.swinging) {
+            ++this.swingTime
+            if (this.swingTime >= i) {
+                this.swingTime = 0
+                this.swinging = false
+            }
+        } else {
+            this.swingTime = 0
+        }
+
+        this.attackAnim = swingTime.toFloat() / i.toFloat()
+    }
+
+    override fun getAttackAnim(tickDelta: Float): Float {
+        var f = this.attackAnim - this.oAttackAnim
+        if (f < 0.0f) {
+            ++f
+        }
+
+        return this.oAttackAnim + f * tickDelta
     }
 
     override fun finalizeSpawn(
@@ -99,6 +128,8 @@ open class HACrustaceanEntity(
             this.songPlaying = false
             this.songSource = null
         }
+
+        this.updateSwingTime()
 
         super.aiStep()
     }
@@ -204,6 +235,7 @@ open class HACrustaceanEntity(
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
         this.setDigging(nbt.getBoolean("Digging"))
         nbt.putBoolean("FromFishingNet", fromFishingNet)
+        nbt.putInt("AttackTick", this.attackTick)
     }
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
@@ -212,6 +244,7 @@ open class HACrustaceanEntity(
         size = nbt.getInt(CRUSTACEAN_SIZE_KEY)
         this.setDigging(nbt.getBoolean("Digging"))
         fromFishingNet = nbt.getBoolean("FromFishingNet")
+        this.attackTick = nbt.getInt("AttackTick")
     }
     //#endregion
 
