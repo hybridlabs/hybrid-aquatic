@@ -15,7 +15,7 @@ class HypnotizeTargetGoal(
     }
 
     override fun canUse(): Boolean {
-        if (hypnosisCooldown > this.hypnautilus.tickCount || hypnautilus.target == null) {
+        if (hypnosisCooldown > 0) {
             return false
         }
         return this.hypnautilus.getRandom().nextInt(40) == 0
