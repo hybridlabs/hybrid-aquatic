@@ -4,7 +4,11 @@ import dev.hybridlabs.aquatic.entity.ai.goal.MinionLookAtOwnerTargetGoal
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.sounds.SoundEvent
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
@@ -28,11 +32,12 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import java.util.*
 
-
 class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HAMinionEntity(type, world) {
     var beastPosition = 0
     val beastDistance = 5.0
     var prevOwner: UUID? = null
+    private var hypnosisTimer: Int = 0
+    var hypnosisCooldown: Int = 0
 
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -68,10 +73,40 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
             })
     }
 
+    fun isHypnotizing(): Boolean {
+        return entityData.get(HYPNOTIZING)
+    }
+
+    private fun setHypnotizing(hypnotizing: Boolean) {
+        entityData.set(HYPNOTIZING, hypnotizing)
+    }
+
+    fun startHypnotizing() {
+        setHypnotizing(true)
+        playSound(SoundEvents.EVOKER_PREPARE_ATTACK, 1.0f, 1.0f)
+        hypnosisTimer = 30
+        hypnosisCooldown = 240
+        navigation.stop()
+    }
+
+    fun stopHypnotizing() {
+        setHypnotizing(false)
+        hypnosisTimer = 0
+        hypnosisCooldown = 300
+    }
+
+    override fun defineSynchedData() {
+        super.defineSynchedData()
+        entityData.define(HYPNOTIZING, false)
+    }
+
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         if (this.getOwner() != null) {
             nbt.putUUID("Owner", this.getOwner()!!.uuid)
         }
+        nbt.putBoolean("Hypnotizing", isHypnotizing())
+        nbt.putInt("HypnosisTimer", hypnosisTimer)
+        nbt.putInt("HypnosisCooldown", hypnosisCooldown)
         super.addAdditionalSaveData(nbt)
     }
 
@@ -80,6 +115,9 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
         if (nbt.contains("Owner")) {
             prevOwner = nbt.getUUID("Owner")
         }
+        this.setHypnotizing(nbt.getBoolean("Hypnotizing"))
+        this.hypnosisTimer = nbt.getInt("HypnosisTimer")
+        this.hypnosisCooldown = nbt.getInt("HypnosisCooldown")
     }
 
     override fun tick() {
@@ -143,6 +181,9 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
                 .add(Attributes.ATTACK_DAMAGE, 4.0).add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 24.0)
         }
+
+        val HYPNOTIZING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HypnautilusEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         class HypnautilusFindOwnerGoal(private val hypnautilus: HypnautilusEntity) : Goal() {
             override fun canUse(): Boolean {
