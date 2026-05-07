@@ -20,7 +20,6 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.player.Player
@@ -51,13 +50,12 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
 
     override fun registerGoals() {
         //super.registerGoals()
-        goalSelector.addGoal(1, HypnotizeTargetGoal(this))
+        goalSelector.addGoal(0, HypnotizeTargetGoal(this))
         goalSelector.addGoal(1, HypnautilusFindOwnerGoal(this))
         goalSelector.addGoal(1, MinionLookAtOwnerTargetGoal(this))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(1, HypnautilusSyncedMovementGoal(this))
         goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 64.0f, 1f))
-        targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true, null))
     }
 
