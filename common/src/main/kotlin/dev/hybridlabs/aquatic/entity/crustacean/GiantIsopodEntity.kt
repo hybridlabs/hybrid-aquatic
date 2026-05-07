@@ -6,8 +6,10 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
+import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 
@@ -55,6 +57,18 @@ class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
     //#region Animations
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         super.registerControllers(controllerRegistrar)
+        controllerRegistrar.add(
+            AnimationController(
+                this, "Spawning",
+                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                    if (this.tickCount < 20)
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
+                    PlayState.STOP
+                }
+            )
+                .setParticleKeyframeHandler { event -> particleEvents(event) }
+        )
+
         controllerRegistrar.add(
             AnimationController(this, "Hide", 4,
                 AnimationController.AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
