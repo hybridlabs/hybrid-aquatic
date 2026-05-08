@@ -5,6 +5,8 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.BlockParticleOption
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.tags.FluidTags
+import net.minecraft.util.Mth
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -113,21 +115,7 @@ class ShrimpCleanGoal(
         shrimp.startCleaning()
 
         if (cleanTime % 10 == 0) {
-            val level = shrimp.level()
-
-            if (level is ServerLevel) {
-                val state = level.getBlockState(pos)
-
-                level.sendParticles(
-                    BlockParticleOption(ParticleTypes.BLOCK, state),
-                    pos.x + 0.5,
-                    pos.y + 0.5,
-                    pos.z + 0.5,
-                    6,
-                    0.2, 0.2, 0.2,
-                    0.02
-                )
-            }
+            spawnCleaningParticles(targetPos!!)
         }
 
         if (cleanTime <= 0) {
@@ -161,7 +149,10 @@ class ShrimpCleanGoal(
                     val pos = origin.offset(x, y, z)
                     val block = level.getBlockState(pos).block
 
-                    if (block in CLEANABLE_BLOCKS) {
+                    if (
+                        (block in CLEANABLE_BLOCKS) &&
+                        level.getFluidState(pos.above()).`is`(FluidTags.WATER)
+                    ) {
                         return pos
                     }
                 }
@@ -169,5 +160,33 @@ class ShrimpCleanGoal(
         }
 
         return null
+    }
+
+    fun spawnCleaningParticles(target: BlockPos) {
+        val radius = 0.3f
+        for (i1 in 0..2) {
+            val motionX = shrimp.getRandom().nextGaussian() * 0.07
+            val motionY = shrimp.getRandom().nextGaussian() * 0.07
+            val motionZ = shrimp.getRandom().nextGaussian() * 0.07
+            val angle = ((0.0174532925 * shrimp.yBodyRot) + i1).toFloat()
+            val extraX = (radius * Mth.sin(Mth.PI + angle)).toDouble()
+            val extraY = 0.8
+            val extraZ = (radius * Mth.cos(angle)).toDouble()
+            val state = shrimp.level().getBlockState(target)
+            (shrimp.level() as ServerLevel).sendParticles(
+                BlockParticleOption(
+                    ParticleTypes.BLOCK,
+                    state
+                ),
+                target.x + 0.5 + extraX,
+                target.y + 0.5 + extraY,
+                target.z + 0.5 + extraZ,
+                1,
+                motionX,
+                motionY,
+                motionZ,
+                1.0
+            )
+        }
     }
 }
