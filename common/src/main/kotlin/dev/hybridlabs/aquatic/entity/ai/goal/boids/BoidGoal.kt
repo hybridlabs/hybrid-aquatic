@@ -10,7 +10,6 @@ import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.phys.Vec3
 import java.util.function.Predicate
 
-
 class BoidGoal(
     private val fish: HAFishEntity,
     private val separationInfluence: Float,
@@ -46,9 +45,17 @@ class BoidGoal(
     }
 
     override fun canContinueToUse(): Boolean {
-        return !fish.isGrazing() &&
-                fish.isUnderWater &&
-                nearbyMobs.isNotEmpty()
+        if (!fish.isUnderWater) {
+            return false
+        }
+
+        if (fish.isGrazing()) {
+            return false
+        }
+
+        nearbyMobs.removeIf { it.isDeadOrDying }
+
+        return nearbyMobs.isNotEmpty()
     }
 
     private fun getMaxDelta(): Double {
