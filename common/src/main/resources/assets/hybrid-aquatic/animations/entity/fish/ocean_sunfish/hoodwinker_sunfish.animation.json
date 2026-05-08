@@ -63,6 +63,12 @@
 				},
 				"right_fin_2": {
 					"rotation": [0, "0+math.sin(query.anim_time*45*3+40)*5", "0-math.sin(query.anim_time*45*1-50)*5"]
+				},
+				"dorsal_fin": {
+					"rotation": [0, 0, "-0-math.cos(query.anim_time*90)*15"]
+				},
+				"pelvic_fin": {
+					"rotation": [0, 0, "-0-math.cos(query.anim_time*90)*-15"]
 				}
 			}
 		},
