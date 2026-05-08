@@ -42,7 +42,7 @@ class CorallivoreGrazeGoal(
     }
 
     override fun start() {
-        grazeTime = 40
+        grazeTime = 60
         grazeCooldown = fish.tickCount + 400 + fish.random.nextInt(400)
     }
 
@@ -82,7 +82,7 @@ class CorallivoreGrazeGoal(
             pos.z + 0.5
         )
 
-        if (distance > 4.0) {
+        if (distance > 2.0) {
             return
         }
 
