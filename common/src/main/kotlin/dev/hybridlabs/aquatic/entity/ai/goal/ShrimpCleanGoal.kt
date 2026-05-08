@@ -70,6 +70,7 @@ class ShrimpCleanGoal(
 
     override fun start() {
         cleanTime = 60
+        cleanCooldown = shrimp.tickCount + 400 + shrimp.random.nextInt(400)
     }
 
     override fun stop() {
