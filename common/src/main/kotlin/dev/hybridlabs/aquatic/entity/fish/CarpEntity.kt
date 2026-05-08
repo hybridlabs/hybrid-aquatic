@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.AlgivoreGrazeGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.CarpBreedGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.feature.CarpPatternTextureFeature
@@ -44,6 +45,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         super.registerGoals()
         goalSelector.addGoal(1, CarpBreedGoal(this, 1.1))
         goalSelector.addGoal(2, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
+        goalSelector.addGoal(3, AlgivoreGrazeGoal(this))
     }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {

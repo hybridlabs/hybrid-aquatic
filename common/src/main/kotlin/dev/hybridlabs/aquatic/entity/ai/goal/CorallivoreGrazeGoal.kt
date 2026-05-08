@@ -6,6 +6,8 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.BlockParticleOption
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.tags.FluidTags
+import net.minecraft.util.Mth
 import net.minecraft.world.entity.ai.goal.Goal
 import java.util.*
 
@@ -41,6 +43,7 @@ class CorallivoreGrazeGoal(
 
     override fun start() {
         grazeTime = 40
+        grazeCooldown = fish.tickCount + 400 + fish.random.nextInt(400)
     }
 
     override fun stop() {
@@ -52,7 +55,7 @@ class CorallivoreGrazeGoal(
         val pos = targetPos ?: return false
 
         return grazeTime > 0 &&
-                fish.level().getBlockState(pos).`is`(HABlockTags.ALGIVORE_EDIBLE)
+                fish.level().getBlockState(pos).`is`(HABlockTags.CORALLIVORE_EDIBLE)
     }
 
     override fun tick() {
@@ -60,25 +63,26 @@ class CorallivoreGrazeGoal(
 
         grazeTime--
 
-        fish.lookControl.setLookAt(
-            pos.x + 0.5,
-            pos.y + 0.5,
-            pos.z + 0.5
-        )
-
         val distance = fish.distanceToSqr(
             pos.x + 0.5,
             pos.y + 0.5,
             pos.z + 0.5
         )
 
-        if (distance > 1.0) {
-            fish.navigation.moveTo(
-                pos.x + 0.5,
-                pos.y + 0.5,
-                pos.z + 0.5,
-                1.0
-            )
+        fish.navigation.moveTo(
+            pos.x + 0.5,
+            pos.y + 0.5,
+            pos.z + 0.5,
+            1.0
+        )
+
+        fish.lookControl.setLookAt(
+            pos.x + 0.5,
+            pos.y + 0.5,
+            pos.z + 0.5
+        )
+
+        if (distance > 4.0) {
             return
         }
 
@@ -86,21 +90,7 @@ class CorallivoreGrazeGoal(
         fish.startGrazing()
 
         if (grazeTime % 10 == 0) {
-            val level = fish.level()
-
-            if (level is ServerLevel) {
-                val state = level.getBlockState(pos)
-
-                level.sendParticles(
-                    BlockParticleOption(ParticleTypes.BLOCK, state),
-                    pos.x + 0.5,
-                    pos.y + 0.5,
-                    pos.z + 0.5,
-                    6,
-                    0.2, 0.2, 0.2,
-                    0.02
-                )
-            }
+            spawnGrazingParticles(targetPos!!)
         }
     }
 
@@ -115,7 +105,10 @@ class CorallivoreGrazeGoal(
                 for (z in -radius..radius) {
                     val pos = origin.offset(x, y, z)
 
-                    if (level.getBlockState(pos).`is`(HABlockTags.CORALLIVORE_EDIBLE)) {
+                    if (
+                        level.getBlockState(pos).`is`(HABlockTags.CORALLIVORE_EDIBLE) &&
+                        level.getFluidState(pos.above()).`is`(FluidTags.WATER)
+                    ) {
                         return pos
                     }
                 }
@@ -123,5 +116,33 @@ class CorallivoreGrazeGoal(
         }
 
         return null
+    }
+
+    fun spawnGrazingParticles(target: BlockPos) {
+        val radius = 0.3f
+        for (i1 in 0..2) {
+            val motionX = fish.getRandom().nextGaussian() * 0.07
+            val motionY = fish.getRandom().nextGaussian() * 0.07
+            val motionZ = fish.getRandom().nextGaussian() * 0.07
+            val angle = ((0.0174532925 * fish.yBodyRot) + i1).toFloat()
+            val extraX = (radius * Mth.sin(Mth.PI + angle)).toDouble()
+            val extraY = 0.8
+            val extraZ = (radius * Mth.cos(angle)).toDouble()
+            val state = fish.level().getBlockState(target)
+            (fish.level() as ServerLevel).sendParticles(
+                BlockParticleOption(
+                    ParticleTypes.BLOCK,
+                    state
+                ),
+                target.x + 0.5 + extraX,
+                target.y + 0.5 + extraY,
+                target.z + 0.5 + extraZ,
+                1,
+                motionX,
+                motionY,
+                motionZ,
+                1.0
+            )
+        }
     }
 }

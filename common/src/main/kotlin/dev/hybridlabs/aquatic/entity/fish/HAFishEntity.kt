@@ -62,7 +62,7 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         goalSelector.addGoal(0, FishAttackGoal(this, 1.1, true))
         goalSelector.addGoal(0, FollowGlowingEntityGoal(this, 1.1, 4.0F, 8.0F))
         goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
-        goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 10))
+        goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(2, AvoidEntityInWaterGoal(this, Player::class.java, 16.0f, 1.5, 1.5))
         getTargetConfig()?.addAttackTarget(targetSelector, MAX_HUNGER / 4, this, HAWaterAnimal::hunger)
         getTargetConfig()?.addAvoidanceGoal(goalSelector, this)
@@ -81,6 +81,23 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         entityData.set(SITTING, sitting)
     }
 
+    fun isGrazing(): Boolean {
+        return entityData.get(GRAZING)
+    }
+
+    private fun setGrazing(grazing: Boolean) {
+        entityData.set(GRAZING, grazing)
+    }
+
+    fun startGrazing() {
+        setGrazing(true)
+        navigation.stop()
+    }
+
+    fun stopGrazing() {
+        setGrazing(false)
+    }
+
     override fun isVisuallySwimming(): Boolean {
         return this.isSwimming
     }
@@ -89,16 +106,19 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         super.defineSynchedData()
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(SITTING, true)
+        entityData.define(GRAZING, false)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
         compound.putBoolean("Sitting", isSitting())
+        this.setGrazing(compound.getBoolean("Grazing"))
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         super.readAdditionalSaveData(compound)
         this.setSitting(compound.getBoolean("Sitting"))
+        this.setGrazing(compound.getBoolean("Grazing"))
     }
     //#endregion
 
@@ -316,6 +336,8 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.BOOLEAN)
         val SITTING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.BOOLEAN)
+        val GRAZING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")

@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.AlgivoreGrazeGoal
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -32,6 +33,11 @@ class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) :
         HAEntityTags.LARGE_CREATURES,
         HAEntityTags.ALL_SHARKS
     )
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(3, AlgivoreGrazeGoal(this))
+    }
 
     override fun canSit(): Boolean = true
 
