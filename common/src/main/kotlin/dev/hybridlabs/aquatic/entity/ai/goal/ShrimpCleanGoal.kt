@@ -157,7 +157,7 @@ class ShrimpCleanGoal(
         val level = shrimp.level()
         val origin = shrimp.blockPosition()
 
-        val radius = 8
+        val radius = 4
 
         for (x in -radius..radius) {
             for (y in -2..2) {
