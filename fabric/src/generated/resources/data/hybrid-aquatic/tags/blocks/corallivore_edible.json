@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:coral_blocks",
+    "#hybrid-aquatic:deep_coral_blocks"
+  ]
+}

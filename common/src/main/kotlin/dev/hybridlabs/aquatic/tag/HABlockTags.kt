@@ -13,6 +13,9 @@ object HABlockTags {
 
     val ANEMONES = create("anemones")
 
+    val ALGIVORE_EDIBLE = create("algivore_edible")
+    val CORALLIVORE_EDIBLE = create("corallivore_edible")
+
     val DEEP_CORALS = create("deep_corals")
     val DEEP_CORAL_PLANTS = create("deep_coral_plants")
     val DEEP_WALL_CORALS = create("deep_wall_corals")

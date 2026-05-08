@@ -22,6 +22,28 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.GIANT_GREEN_ANEMONE.get())
             .add(HABlocks.STRAWBERRY_ANEMONE.get())
 
+        getOrCreateTagBuilder(HABlockTags.CORALLIVORE_EDIBLE)
+            .forceAddTag(BlockTags.CORAL_BLOCKS)
+            .forceAddTag(HABlockTags.DEEP_CORAL_BLOCKS)
+
+        getOrCreateTagBuilder(HABlockTags.ALGIVORE_EDIBLE)
+            .add(HABlocks.GRASSY_SAND.get())
+            .add(HABlocks.SEA_LETTUCE.get())
+            .add(HABlocks.TALL_SEA_LETTUCE.get())
+            .add(HABlocks.SHORT_RED_ALGAE.get())
+            .add(HABlocks.RED_ALGAE.get())
+            .add(HABlocks.TALL_RED_ALGAE.get())
+            .add(Blocks.MOSS_BLOCK)
+            .add(Blocks.MOSSY_COBBLESTONE)
+            .add(Blocks.MOSSY_COBBLESTONE_STAIRS)
+            .add(Blocks.MOSSY_COBBLESTONE_SLAB)
+            .add(Blocks.MOSSY_COBBLESTONE_WALL)
+            .add(Blocks.MOSSY_STONE_BRICKS)
+            .add(Blocks.MOSSY_STONE_BRICK_STAIRS)
+            .add(Blocks.MOSSY_STONE_BRICK_SLAB)
+            .add(Blocks.MOSSY_STONE_BRICK_WALL)
+            .add(Blocks.MOSS_CARPET)
+
         //#region Deep Corals
         getOrCreateTagBuilder(HABlockTags.DEEP_CORAL_BLOCKS)
             .add(HABlocks.LOPHELIA_CORAL_BLOCK.get())
