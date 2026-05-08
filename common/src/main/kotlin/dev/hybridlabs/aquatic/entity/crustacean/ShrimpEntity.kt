@@ -48,7 +48,7 @@ class ShrimpEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level)
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, ShrimpCleanGoal(this))
+        goalSelector.addGoal(2, ShrimpCleanGoal(this))
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
