@@ -113,7 +113,21 @@ class ShrimpCleanGoal(
         shrimp.startCleaning()
 
         if (cleanTime % 10 == 0) {
-            spawnCleaningParticles(pos)
+            val level = shrimp.level()
+
+            if (level is ServerLevel) {
+                val state = level.getBlockState(pos)
+
+                level.sendParticles(
+                    BlockParticleOption(ParticleTypes.BLOCK, state),
+                    pos.x + 0.5,
+                    pos.y + 0.5,
+                    pos.z + 0.5,
+                    6,
+                    0.2, 0.2, 0.2,
+                    0.02
+                )
+            }
         }
 
         if (cleanTime <= 0) {
@@ -133,24 +147,6 @@ class ShrimpCleanGoal(
             shrimp.tickCount + (10 * 20 + shrimp.random.nextInt(10) * 20)
 
         level.setBlockAndUpdate(pos, cleaned.defaultBlockState())
-    }
-
-    private fun spawnCleaningParticles(pos: BlockPos) {
-        val level = shrimp.level()
-
-        if (level is ServerLevel) {
-            val state = level.getBlockState(pos)
-
-            level.sendParticles(
-                BlockParticleOption(ParticleTypes.BLOCK, state),
-                pos.x + 0.5,
-                pos.y + 0.5,
-                pos.z + 0.5,
-                6,
-                0.2, 0.2, 0.2,
-                0.02
-            )
-        }
     }
 
     private fun findNearbyMossyBlock(): BlockPos? {
