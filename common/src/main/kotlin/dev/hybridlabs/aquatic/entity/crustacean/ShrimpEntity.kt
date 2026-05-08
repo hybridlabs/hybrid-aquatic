@@ -33,8 +33,8 @@ class ShrimpEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level)
         return entityData.get(CLEANING)
     }
 
-    private fun setCleaning(digging: Boolean) {
-        entityData.set(CLEANING, digging)
+    private fun setCleaning(cleaning: Boolean) {
+        entityData.set(CLEANING, cleaning)
     }
 
     fun startCleaning() {
