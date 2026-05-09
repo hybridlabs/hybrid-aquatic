@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -34,7 +35,6 @@ import software.bernie.geckolib.util.GeckoLibUtil
 @Suppress("LeakingThis", "unused")
 open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) : HAWaterAnimal(type, world) {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private var sittingTimer: Int = 0
     open val inkConfig: InkConfiguration? = null
 
     override fun createNavigation(level: Level): PathNavigation {
@@ -42,7 +42,7 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
         setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
         setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
 
-        moveControl = OctopusMoveControl(this, 85, 10, 0.02F, 0.1F, false)
+        moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
 
         return WaterBoundPathNavigation(this, level)
@@ -62,28 +62,9 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
         }
     }
 
-    override fun aiStep() {
-        super.aiStep()
-        if (!level().isClientSide() && this.isEffectiveAi) {
-            if (this.isInWater) {
-                if (this.isSitting()) {
-                    if (--this.sittingTimer <= 0) {
-                        this.setSitting(false)
-                    } else {
-                        this.deltaMovement = deltaMovement.subtract(0.0, 0.01, 0.0)
-                    }
-                } else if (random.nextFloat() <= 0.001f) {
-                    this.sittingTimer = random.nextInt(200, 650)
-                    this.setSitting(true)
-                }
-            } else {
-                this.setSitting(false)
-            }
-        }
-    }
-
     override fun registerGoals() {
-        goalSelector.addGoal(3, OctopusSwimmingGoal(this, 1.0, 10))
+        goalSelector.addGoal(2, WaterAnimalSitGoal(this))
+        goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 10))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         getTargetConfig()?.addAvoidanceGoal(goalSelector, this)
     }
@@ -92,14 +73,12 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(ATTEMPT_ATTACK, false)
-        entityData.define(SITTING, true)
         entityData.define(TARGET_COLOR, 12799593)
         entityData.define(CURRENT_COLOR, 12799593)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
-        compound.putBoolean("Sitting", isSitting())
         compound.putInt("targetColor", getTargetColor())
         compound.putInt("currentColor", getCurrentColor())
     }
@@ -108,7 +87,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
         super.readAdditionalSaveData(compound)
         this.setTargetColor(compound.getInt("targetColor"))
         this.setCurrentColor(compound.getInt("currentColor"))
-        this.setSitting(compound.getBoolean("Sitting"))
     }
     //#endregion
 
@@ -185,10 +163,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
         if (super.hurt(source, amount) && this.lastHurtByMob != null) {
             if (!level().isClientSide) {
-                if (this.isSitting()) {
-                    this.setSitting(false)
-                }
-
                 if (this.isUnderWater) {
                     inkConfig?.run(::squirt)
                 }
@@ -288,14 +262,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
         return 3
     }
 
-    fun isSitting(): Boolean {
-        return entityData.get(SITTING)
-    }
-
-    private fun setSitting(sitting: Boolean) {
-        entityData.set(SITTING, sitting)
-    }
-
     override fun isVisuallySwimming(): Boolean {
         return this.isSwimming
     }
@@ -332,8 +298,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
     //#endregion
 
     companion object {
-        val SITTING: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.BOOLEAN)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAOctopusEntity::class.java, EntityDataSerializers.BOOLEAN)
         private val CURRENT_COLOR: EntityDataAccessor<Int> =
@@ -352,41 +316,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
             val seaLevel = world.level.chunkSource.generator.seaLevel
             return pos.y >= seaLevel - 64 &&
                     world.getBlockState(pos.below()).isSolid
-        }
-    }
-
-    internal class OctopusSwimmingGoal(
-        private val octopus: HAOctopusEntity,
-        speedModifier: Double,
-        interval: Int,
-    ) :
-        RandomSwimmingGoal(octopus, speedModifier, interval) {
-
-        override fun canUse(): Boolean {
-            return !octopus.isSitting() && super.canUse()
-        }
-    }
-
-    internal class OctopusMoveControl(
-        private val octopus: HAOctopusEntity,
-        maxTurnX: Int,
-        maxTurnY: Int,
-        inWaterSpeedModifier: Float,
-        outsideWaterSpeedModifier: Float,
-        applyGravity: Boolean,
-    ) : SmoothSwimmingMoveControl(
-        octopus,
-        maxTurnX,
-        maxTurnY,
-        inWaterSpeedModifier,
-        outsideWaterSpeedModifier,
-        applyGravity
-    ) {
-
-        override fun tick() {
-            if (!octopus.isSitting()) {
-                super.tick()
-            }
         }
     }
 }
