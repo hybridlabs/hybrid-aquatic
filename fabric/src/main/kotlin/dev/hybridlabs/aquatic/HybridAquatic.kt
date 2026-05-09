@@ -5,6 +5,8 @@ import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
+import dev.hybridlabs.aquatic.block.property.FlammableProperty
+import dev.hybridlabs.aquatic.block.property.StrippableProperty
 import dev.hybridlabs.aquatic.config.ConfigHelper
 import dev.hybridlabs.aquatic.config.HAConfig
 import dev.hybridlabs.aquatic.effect.HAMobEffects
@@ -35,8 +37,6 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.SERVER_STARTING
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.npc.VillagerTrades
 import net.minecraft.world.item.BlockItem
@@ -100,8 +100,8 @@ object HybridAquatic : ModInitializer {
             registerCustomTrades()
         }
 
-        registerFlammables(FlammableBlockRegistry.getDefaultInstance())
-        registerStrippables()
+        FlammableProperty
+        StrippableProperty
 
         registerBiomeModifications(configHandler.config)
 
@@ -124,35 +124,6 @@ object HybridAquatic : ModInitializer {
                     list.add(VillagerTrades.ItemsForEmeralds(block, 8, 1, 2, 2))
                 }
             }
-    }
-
-
-    private fun registerFlammables(registry: FlammableBlockRegistry) {
-        // same as vanilla grass
-        registry.add(HAPlatformBlocks.DUNEGRASS.get(), 60, 100)
-        registry.add(HAPlatformBlocks.TALL_DUNEGRASS.get(), 60, 100)
-        registry.add(HAPlatformBlocks.CATTAIL.get(), 60, 100)
-        // same as vanilla logs
-        registry.add(HAPlatformBlocks.DRIFTWOOD_LOG.get(), 5, 5)
-        registry.add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get(), 5, 5)
-        registry.add(HAPlatformBlocks.DRIFTWOOD_WOOD.get(), 5, 5)
-        registry.add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get(), 5, 5)
-        // same as vanilla cut wood
-        registry.add(HAPlatformBlocks.DRIFTWOOD_PLANKS.get(), 5, 20)
-        registry.add(HAPlatformBlocks.DRIFTWOOD_SLAB.get(), 5, 20)
-        registry.add(HAPlatformBlocks.DRIFTWOOD_FENCE.get(), 5, 20)
-        registry.add(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(), 5, 20)
-    }
-
-    private fun registerStrippables() {
-        StrippableBlockRegistry.register(
-            HAPlatformBlocks.DRIFTWOOD_LOG.get(),
-            HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get()
-        )
-        StrippableBlockRegistry.register(
-            HAPlatformBlocks.DRIFTWOOD_WOOD.get(),
-            HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get()
-        )
     }
 
     private fun registerBiomeModifications(config: HAConfig) {
