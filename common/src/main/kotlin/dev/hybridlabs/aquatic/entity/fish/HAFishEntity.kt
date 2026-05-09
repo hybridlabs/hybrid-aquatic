@@ -7,7 +7,6 @@ import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -46,7 +45,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
     HAWaterAnimal(type, world) {
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
-    private var sittingTimer: Int = 0
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun createNavigation(level: Level): PathNavigation {
@@ -72,35 +70,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
     }
 
     //#region Data
-    protected open fun canSit(): Boolean {
-        return false
-    }
-
-    fun isSitting(): Boolean {
-        return entityData.get(SITTING)
-    }
-
-    fun setSitting(sitting: Boolean) {
-        entityData.set(SITTING, sitting)
-    }
-
-    fun isGrazing(): Boolean {
-        return entityData.get(GRAZING)
-    }
-
-    private fun setGrazing(grazing: Boolean) {
-        entityData.set(GRAZING, grazing)
-    }
-
-    fun startGrazing() {
-        setGrazing(true)
-        navigation.stop()
-    }
-
-    fun stopGrazing() {
-        setGrazing(false)
-    }
-
     override fun isVisuallySwimming(): Boolean {
         return this.isSwimming
     }
@@ -108,20 +77,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(ATTEMPT_ATTACK, false)
-        entityData.define(SITTING, true)
-        entityData.define(GRAZING, false)
-    }
-
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
-        compound.putBoolean("Sitting", isSitting())
-        this.setGrazing(compound.getBoolean("Grazing"))
-    }
-
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        super.readAdditionalSaveData(compound)
-        this.setSitting(compound.getBoolean("Sitting"))
-        this.setGrazing(compound.getBoolean("Grazing"))
     }
     //#endregion
 
@@ -252,8 +207,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
 
         if (this.isSitting()) {
             this.xRot = 0.0f
-            this.yRot = 0.0f
-            this.yHeadRot = 0.0f
         }
     }
 
@@ -278,23 +231,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
             this.playSound(this.flopSound, this.soundVolume, this.voicePitch)
         }
 
-        if (!level().isClientSide() && this.isEffectiveAi) {
-            if (this.isInWater && canSit()) {
-                if (this.isSitting()) {
-                    if (--this.sittingTimer <= 0) {
-                        this.setSitting(false)
-                    } else {
-                        this.deltaMovement = deltaMovement.subtract(0.0, 0.01, 0.0)
-                    }
-                } else if (random.nextFloat() <= 0.001f) {
-                    this.sittingTimer = random.nextInt(200, 600)
-                    this.setSitting(true)
-                }
-            } else {
-                this.setSitting(false)
-            }
-        }
-
         prevRoll = currentRoll
         var targetRoll = ((this.yRot - this.yRotO) * 0.1f).coerceIn(-0.45f, 0.45f)
         targetRoll = -targetRoll
@@ -302,18 +238,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
 
         this.updateSwingTime()
         super.aiStep()
-    }
-
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
-        if (super.hurt(source, amount) && this.lastHurtByMob != null) {
-            if (!level().isClientSide) {
-                if (this.isSitting()) {
-                    this.setSitting(false)
-                }
-            }
-            return true
-        }
-        return false
     }
 
     override fun updateSwingTime() {
@@ -353,13 +277,8 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
     companion object {
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.BOOLEAN)
-        val SITTING: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.BOOLEAN)
-        val GRAZING: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
-        val GRAZE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.graze")
 
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
             Items.BREAD,
@@ -418,40 +337,5 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
                     world.isWaterAt(pos)
         }
         //#endregion
-    }
-
-    internal class BottomDwellerSwimmingGoal(
-        private val bottomDweller: HAFishEntity,
-        speedModifier: Double,
-        interval: Int,
-    ) :
-        RandomSwimmingGoal(bottomDweller, speedModifier, interval) {
-
-        override fun canUse(): Boolean {
-            return !bottomDweller.isSitting() && super.canUse()
-        }
-    }
-
-    internal class BottomDwellerMoveControl(
-        private val bottomDweller: HAFishEntity,
-        maxTurnX: Int,
-        maxTurnY: Int,
-        inWaterSpeedModifier: Float,
-        outsideWaterSpeedModifier: Float,
-        applyGravity: Boolean,
-    ) : SmoothSwimmingMoveControl(
-        bottomDweller,
-        maxTurnX,
-        maxTurnY,
-        inWaterSpeedModifier,
-        outsideWaterSpeedModifier,
-        applyGravity
-    ) {
-
-        override fun tick() {
-            if (!bottomDweller.isSitting()) {
-                super.tick()
-            }
-        }
     }
 }

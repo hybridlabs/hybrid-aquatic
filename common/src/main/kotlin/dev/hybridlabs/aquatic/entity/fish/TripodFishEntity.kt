@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
@@ -11,9 +12,6 @@ import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
-import net.minecraft.world.entity.ai.navigation.PathNavigation
-import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
@@ -26,19 +24,8 @@ class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
         HAEntityTags.ALL_SHARKS
     )
 
-    override fun createNavigation(level: Level): PathNavigation {
-        super.createNavigation(level)
-
-        moveControl = BottomDwellerMoveControl(this, 85, 5, 0.02F, 0.1F, false)
-        lookControl = SmoothSwimmingLookControl(this, 10)
-
-        return WaterBoundPathNavigation(this, level)
-    }
-
-    override fun canSit(): Boolean = true
-
     override fun registerGoals() {
-        goalSelector.addGoal(3, BottomDwellerSwimmingGoal(this, 1.0, 10))
+        goalSelector.addGoal(3, WaterAnimalSitGoal(this))
         super.registerGoals()
     }
 

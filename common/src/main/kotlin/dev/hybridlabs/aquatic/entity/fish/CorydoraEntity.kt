@@ -2,13 +2,11 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.AlgivoreGrazeGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
-import net.minecraft.world.entity.ai.navigation.PathNavigation
-import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
 
 class CorydoraEntity(type: EntityType<out CorydoraEntity>, world: Level) :
@@ -23,18 +21,8 @@ class CorydoraEntity(type: EntityType<out CorydoraEntity>, world: Level) :
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(3, AlgivoreGrazeGoal(this))
+        goalSelector.addGoal(3, WaterAnimalSitGoal(this))
     }
-
-    override fun createNavigation(level: Level): PathNavigation {
-        super.createNavigation(level)
-
-        moveControl = BottomDwellerMoveControl(this, 85, 5, 0.02F, 0.1F, false)
-        lookControl = SmoothSwimmingLookControl(this, 10)
-
-        return WaterBoundPathNavigation(this, level)
-    }
-
-    override fun canSit(): Boolean = true
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2

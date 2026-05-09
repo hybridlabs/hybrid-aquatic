@@ -25,6 +25,7 @@ import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.animatable.GeoEntity
+import software.bernie.geckolib.core.animation.RawAnimation
 import java.util.*
 
 @Suppress("UNCHECKED_CAST")
@@ -113,11 +114,47 @@ abstract class HAWaterAnimal protected constructor(
     //#endregion
 
     //#region Data
+    fun isSitting(): Boolean {
+        return entityData.get(SITTING)
+    }
+
+    private fun setSitting(sitting: Boolean) {
+        entityData.set(SITTING, sitting)
+    }
+
+    fun startSitting() {
+        setSitting(true)
+        navigation.stop()
+    }
+
+    fun stopSitting() {
+        setSitting(false)
+    }
+
+    fun isGrazing(): Boolean {
+        return entityData.get(GRAZING)
+    }
+
+    private fun setGrazing(grazing: Boolean) {
+        entityData.set(GRAZING, grazing)
+    }
+
+    fun startGrazing() {
+        setGrazing(true)
+        navigation.stop()
+    }
+
+    fun stopGrazing() {
+        setGrazing(false)
+    }
+
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(SIZE, 0)
         entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(MOISTNESS, getMaxMoistness())
+        entityData.define(SITTING, true)
+        entityData.define(GRAZING, false)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -127,6 +164,8 @@ abstract class HAWaterAnimal protected constructor(
         compound.putInt(MOISTNESS_KEY, moistness)
         compound.putBoolean("FromFishingNet", fromFishingNet)
         compound.putInt("InLove", this.inLove)
+        compound.putBoolean("Sitting", isSitting())
+        this.setGrazing(compound.getBoolean("Grazing"))
 
         if (this.loveCause != null) {
             compound.putUUID("LoveCause", this.loveCause)
@@ -141,6 +180,8 @@ abstract class HAWaterAnimal protected constructor(
         fromFishingNet = compound.getBoolean("FromFishingNet")
         this.inLove = compound.getInt("InLove")
         this.loveCause = if (compound.hasUUID("LoveCause")) compound.getUUID("LoveCause") else null
+        this.setSitting(compound.getBoolean("Sitting"))
+        this.setGrazing(compound.getBoolean("Grazing"))
     }
     //#endregion
 
@@ -376,6 +417,12 @@ abstract class HAWaterAnimal protected constructor(
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.INT)
         val MOISTNESS: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.INT)
+        val SITTING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
+        val GRAZING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
+
+        val GRAZE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.graze")
 
         const val SIZE_KEY = "Size"
         const val MAX_HUNGER = 2400

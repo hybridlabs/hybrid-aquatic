@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
@@ -9,9 +10,6 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
-import net.minecraft.world.entity.ai.navigation.PathNavigation
-import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
 
 class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) :
@@ -19,19 +17,13 @@ class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) :
 
     override fun getTargetConfig() = TARGET_CONFIG
 
-    override fun createNavigation(level: Level): PathNavigation {
-        super.createNavigation(level)
-
-        moveControl = BottomDwellerMoveControl(this, 85, 5, 0.02F, 0.1F, false)
-        lookControl = SmoothSwimmingLookControl(this, 10)
-
-        return WaterBoundPathNavigation(this, level)
-    }
-
-    override fun canSit(): Boolean = true
-
     override fun getMaxSpawnClusterSize(): Int {
         return 2
+    }
+
+    override fun registerGoals() {
+        goalSelector.addGoal(3, WaterAnimalSitGoal(this))
+        super.registerGoals()
     }
 
     companion object {

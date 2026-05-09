@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
 import dev.hybridlabs.aquatic.loot.HALootTables
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
@@ -19,10 +20,7 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
-import net.minecraft.world.entity.ai.navigation.PathNavigation
-import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
@@ -36,17 +34,6 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
 
     override fun getTargetConfig() = TARGET_CONFIG
 
-    override fun createNavigation(level: Level): PathNavigation {
-        super.createNavigation(level)
-
-        moveControl = BottomDwellerMoveControl(this, 85, 5, 0.02F, 0.1F, false)
-        lookControl = SmoothSwimmingLookControl(this, 10)
-
-        return WaterBoundPathNavigation(this, level)
-    }
-
-    override fun canSit(): Boolean = true
-
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
@@ -54,6 +41,7 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))
+        goalSelector.addGoal(3, WaterAnimalSitGoal(this))
     }
 
     //#region Data
