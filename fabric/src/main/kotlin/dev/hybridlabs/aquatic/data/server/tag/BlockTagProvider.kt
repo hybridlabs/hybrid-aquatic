@@ -44,6 +44,13 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.MOSSY_STONE_BRICK_WALL)
             .add(Blocks.MOSS_CARPET)
 
+        getOrCreateTagBuilder(HABlockTags.HERBIVORE_EDIBLE)
+            .add(HABlocks.GRASSY_SAND.get())
+            .add(HABlocks.SEA_LETTUCE.get())
+            .add(HABlocks.TALL_SEA_LETTUCE.get())
+            .add(Blocks.SEAGRASS)
+            .add(Blocks.TALL_SEAGRASS)
+
         //#region Deep Corals
         getOrCreateTagBuilder(HABlockTags.DEEP_CORAL_BLOCKS)
             .add(HABlocks.LOPHELIA_CORAL_BLOCK.get())
