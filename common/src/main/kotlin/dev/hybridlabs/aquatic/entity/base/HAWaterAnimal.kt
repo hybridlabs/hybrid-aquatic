@@ -94,10 +94,14 @@ abstract class HAWaterAnimal protected constructor(
     override fun hurt(source: DamageSource, amount: Float): Boolean {
         if (this.isInvulnerableTo(source)) {
             return false
-        } else {
-            this.inLove = 0
-            return super.hurt(source, amount)
         }
+
+        if (this.isSitting()) {
+            this.stopSitting()
+        }
+
+        this.inLove = 0
+        return super.hurt(source, amount)
     }
 
     //#region Drops
@@ -153,7 +157,7 @@ abstract class HAWaterAnimal protected constructor(
         entityData.define(SIZE, 0)
         entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(MOISTNESS, getMaxMoistness())
-        entityData.define(SITTING, true)
+        entityData.define(SITTING, false)
         entityData.define(GRAZING, false)
     }
 

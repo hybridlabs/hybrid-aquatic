@@ -21,7 +21,7 @@ class CorydoraEntity(type: EntityType<out CorydoraEntity>, world: Level) :
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(3, AlgivoreGrazeGoal(this))
-        goalSelector.addGoal(3, WaterAnimalSitGoal(this))
+        goalSelector.addGoal(2, WaterAnimalSitGoal(this))
     }
 
     override fun getMaxSpawnClusterSize(): Int {

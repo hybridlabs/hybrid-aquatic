@@ -22,7 +22,7 @@ class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) :
     }
 
     override fun registerGoals() {
-        goalSelector.addGoal(3, WaterAnimalSitGoal(this))
+        goalSelector.addGoal(2, WaterAnimalSitGoal(this))
         super.registerGoals()
     }
 

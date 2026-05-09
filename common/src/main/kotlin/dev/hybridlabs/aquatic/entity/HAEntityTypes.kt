@@ -272,14 +272,14 @@ object HAEntityTypes {
     val PEARLFISH = registerFish(
         "pearlfish",
         ::PearlfishEntity,
-        EntityDimensions.fixed(0.25f, 0.2f),
+        EntityDimensions.fixed(0.25f, 0.3f),
         PearlfishEntity::createMobAttributes
     )
 
     val STINGRAY = registerFish(
         "stingray",
         ::StingrayEntity,
-        EntityDimensions.fixed(0.75f, 0.2f),
+        EntityDimensions.fixed(0.75f, 0.3f),
         StingrayEntity::createMobAttributes
     )
 

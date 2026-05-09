@@ -41,7 +41,7 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))
-        goalSelector.addGoal(3, WaterAnimalSitGoal(this))
+        goalSelector.addGoal(2, WaterAnimalSitGoal(this))
     }
 
     //#region Data

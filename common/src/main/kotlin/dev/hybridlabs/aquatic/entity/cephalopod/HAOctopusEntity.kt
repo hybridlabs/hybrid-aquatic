@@ -110,7 +110,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
 
         if (this.isSitting()) {
             this.xRot = 0.0f
-            this.yRot = 0.0f
             this.yHeadRot = 0.0f
         }
     }
@@ -276,7 +275,7 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
                         state.setAndContinue(DefaultAnimations.SWIM)
                     }
 
-                    isSitting() && onGround() -> {
+                    isSitting() -> {
                         state.setAndContinue(DefaultAnimations.SIT)
                     }
 
