@@ -6,6 +6,7 @@ import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.aquatic.entity.fish.HAFishEntity.Companion.FLOP_ANIMATION
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.commands.arguments.EntityAnchorArgument
@@ -44,7 +45,9 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
 import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.*
 
@@ -205,14 +208,32 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
+            AnimationController(this, "Run/Swim/Idle", 4) {
+                    state: AnimationState<HASirenianEntity> ->
+                if (this.isInWaterOrBubble && state.isMoving) state.setAndContinue(DefaultAnimations.SWIM)
+                else state.setAndContinue(DefaultAnimations.IDLE
+                )
+            }
+        )
+
+        controllers.add(
             AnimationController(
-                this, "Swim/Idle", 4
-            ) { state: AnimationState<HASirenianEntity> ->
-                when {
-                    state.isMoving && isInWater -> state.setAndContinue(DefaultAnimations.SWIM)
-                    !state.isMoving && isInWater -> state.setAndContinue(DefaultAnimations.IDLE)
-                    else -> state.setAndContinue(DefaultAnimations.IDLE)
+                this, "Graze",
+                AnimationStateHandler { state: AnimationState<HASirenianEntity> ->
+                    if (this.isGrazing())
+                        return@AnimationStateHandler state.setAndContinue(GRAZE_ANIMATION)
+                    PlayState.STOP
                 }
+            )
+        )
+
+        controllers.add(
+            AnimationController(this, "Flop", 4) { state ->
+                if (!this.isInWaterOrBubble && this.moistness < 590) {
+                    return@AnimationController state.setAndContinue(FLOP_ANIMATION)
+                }
+
+                PlayState.STOP
             }
         )
     }

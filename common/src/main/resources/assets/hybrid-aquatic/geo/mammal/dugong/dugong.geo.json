@@ -37,7 +37,7 @@
 					]
 				},
 				{
-					"name": "tail_fin",
+					"name": "tail_flipper",
 					"parent": "tail",
 					"pivot": [0, 11, 32],
 					"cubes": [
