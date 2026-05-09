@@ -111,7 +111,7 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
             AnimationController(
                 this, "Sit",
                 AnimationStateHandler { state: AnimationState<HAFishEntity> ->
-                    if (this.isSitting())
+                    if (this.isSitting() && this.onGround())
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SIT)
                     PlayState.STOP
                 }
@@ -203,10 +203,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
                 this.yRot = 0.0f
                 currentRoll = Mth.lerp(0.2f, currentRoll, 0f)
             }
-        }
-
-        if (this.isSitting()) {
-            this.xRot = 0.0f
         }
     }
 

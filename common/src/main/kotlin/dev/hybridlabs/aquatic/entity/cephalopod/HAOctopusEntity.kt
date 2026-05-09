@@ -30,6 +30,9 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "unused")
@@ -106,11 +109,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
                 this.yRot = 0.0f
                 this.yHeadRot = 0.0f
             }
-        }
-
-        if (this.isSitting()) {
-            this.xRot = 0.0f
-            this.yHeadRot = 0.0f
         }
     }
 
@@ -269,25 +267,24 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Octopus Animation Controller", 8) { state ->
-                when {
-                    isInWater && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    }
-
-                    isSitting() -> {
-                        state.setAndContinue(DefaultAnimations.SIT)
-                    }
-
-                    this.moistness < 590 -> {
-                        state.setAndContinue(DefaultAnimations.SIT)
-                    }
-
-                    else -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-                }
+            AnimationController(this, "Run/Swim/Idle", 4) {
+                state: AnimationState<HAOctopusEntity> ->
+                if (this.isInWaterOrBubble && state.isMoving) state.setAndContinue(
+                    if (this.isSprinting) DefaultAnimations.RUN else DefaultAnimations.SWIM)
+                else state.setAndContinue(DefaultAnimations.IDLE
+                )
             }
+        )
+
+        controllers.add(
+            AnimationController(
+                this, "Sit",
+                AnimationStateHandler { state: AnimationState<HAOctopusEntity> ->
+                    if (this.isSitting() && this.onGround())
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SIT)
+                    PlayState.STOP
+                }
+            )
         )
     }
 
