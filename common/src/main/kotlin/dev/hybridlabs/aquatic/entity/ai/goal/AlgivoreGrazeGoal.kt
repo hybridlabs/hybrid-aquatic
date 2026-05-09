@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.fish.HAFishEntity
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.BlockParticleOption
@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.goal.Goal
 import java.util.*
 
 class AlgivoreGrazeGoal(
-    private val fish: HAFishEntity,
+    private val waterAnimal: HAWaterAnimal,
 ) : Goal() {
 
     private var grazeTime = 0
@@ -23,11 +23,11 @@ class AlgivoreGrazeGoal(
         this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
 
         grazeCooldown =
-            fish.tickCount + (10 * 40 + fish.random.nextInt(10) * 80)
+            waterAnimal.tickCount + (10 * 40 + waterAnimal.random.nextInt(10) * 80)
     }
 
     override fun canUse(): Boolean {
-        if (grazeCooldown > fish.tickCount) {
+        if (grazeCooldown > waterAnimal.tickCount) {
             return false
         }
 
@@ -43,11 +43,11 @@ class AlgivoreGrazeGoal(
 
     override fun start() {
         grazeTime = 60
-        grazeCooldown = fish.tickCount + 400 + fish.random.nextInt(400)
+        grazeCooldown = waterAnimal.tickCount + 400 + waterAnimal.random.nextInt(400)
     }
 
     override fun stop() {
-        fish.stopGrazing()
+        waterAnimal.stopGrazing()
         targetPos = null
     }
 
@@ -55,7 +55,7 @@ class AlgivoreGrazeGoal(
         val pos = targetPos ?: return false
 
         return grazeTime > 0 &&
-                fish.level().getBlockState(pos).`is`(HABlockTags.ALGIVORE_EDIBLE)
+                waterAnimal.level().getBlockState(pos).`is`(HABlockTags.ALGIVORE_EDIBLE)
     }
 
     override fun tick() {
@@ -63,20 +63,20 @@ class AlgivoreGrazeGoal(
 
         grazeTime--
 
-        val distance = fish.distanceToSqr(
+        val distance = waterAnimal.distanceToSqr(
             pos.x + 0.5,
             pos.y + 0.5,
             pos.z + 0.5
         )
 
-        fish.navigation.moveTo(
+        waterAnimal.navigation.moveTo(
             pos.x + 0.5,
             pos.y + 0.5,
             pos.z + 0.5,
             1.0
         )
 
-        fish.lookControl.setLookAt(
+        waterAnimal.lookControl.setLookAt(
             pos.x + 0.5,
             pos.y + 0.5,
             pos.z + 0.5
@@ -86,8 +86,8 @@ class AlgivoreGrazeGoal(
             return
         }
 
-        fish.navigation.stop()
-        fish.startGrazing()
+        waterAnimal.navigation.stop()
+        waterAnimal.startGrazing()
 
         if (grazeTime % 10 == 0) {
             spawnGrazingParticles(targetPos!!)
@@ -95,8 +95,8 @@ class AlgivoreGrazeGoal(
     }
 
     private fun findNearbyAlgaeBlock(): BlockPos? {
-        val level = fish.level()
-        val origin = fish.blockPosition()
+        val level = waterAnimal.level()
+        val origin = waterAnimal.blockPosition()
 
         val radius = 4
 
@@ -121,15 +121,15 @@ class AlgivoreGrazeGoal(
     fun spawnGrazingParticles(target: BlockPos) {
         val radius = 0.3f
         for (i1 in 0..2) {
-            val motionX = fish.getRandom().nextGaussian() * 0.07
-            val motionY = fish.getRandom().nextGaussian() * 0.07
-            val motionZ = fish.getRandom().nextGaussian() * 0.07
-            val angle = ((0.0174532925 * fish.yBodyRot) + i1).toFloat()
+            val motionX = waterAnimal.getRandom().nextGaussian() * 0.07
+            val motionY = waterAnimal.getRandom().nextGaussian() * 0.07
+            val motionZ = waterAnimal.getRandom().nextGaussian() * 0.07
+            val angle = ((0.0174532925 * waterAnimal.yBodyRot) + i1).toFloat()
             val extraX = (radius * Mth.sin(Mth.PI + angle)).toDouble()
             val extraY = 0.8
             val extraZ = (radius * Mth.cos(angle)).toDouble()
-            val state = fish.level().getBlockState(target)
-            (fish.level() as ServerLevel).sendParticles(
+            val state = waterAnimal.level().getBlockState(target)
+            (waterAnimal.level() as ServerLevel).sendParticles(
                 BlockParticleOption(
                     ParticleTypes.BLOCK,
                     state
