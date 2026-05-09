@@ -19,7 +19,8 @@ class CrustaceanDigGoal(
     }
 
     override fun canUse(): Boolean {
-        if (digCooldown > this.crustacean.tickCount || crustacean.level().getNearestPlayer(crustacean, 32.0) == null) {
+        if (digCooldown > this.crustacean.tickCount ||
+            crustacean.level().getNearestPlayer(crustacean, 32.0) == null) {
             return false
         }
         return this.crustacean.getRandom().nextInt(40) == 0
