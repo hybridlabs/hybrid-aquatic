@@ -36,7 +36,10 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
@@ -141,28 +144,43 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Fish Controller", 4) { state ->
-                when {
-                    isInWater && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    }
+            AnimationController(this, "Run/Swim/Idle", 4) { state: AnimationState<HAFishEntity> ->
+                if (this.isInWaterOrBubble && state.isMoving) state.setAndContinue(
+                    if (this.isSprinting) DefaultAnimations.RUN else DefaultAnimations.SWIM)
+                else state.setAndContinue(DefaultAnimations.IDLE
+                )
+            }
+        )
 
-                    isUnderWater && isSprinting -> {
-                        state.setAndContinue(DefaultAnimations.RUN)
-                    }
-
-                    isInWater && isSitting() && canSit() -> {
-                        state.setAndContinue(DefaultAnimations.SIT)
-                    }
-
-                    this.moistness < 590 -> {
-                        state.setAndContinue(FLOP_ANIMATION)
-                    }
-
-                    else -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
-                    }
+        controllers.add(
+            AnimationController(
+                this, "Sit",
+                AnimationStateHandler { state: AnimationState<HAFishEntity> ->
+                    if (this.isSitting())
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SIT)
+                    PlayState.STOP
                 }
+            )
+        )
+
+        controllers.add(
+            AnimationController(
+                this, "Graze",
+                AnimationStateHandler { state: AnimationState<HAFishEntity> ->
+                    if (this.isGrazing())
+                        return@AnimationStateHandler state.setAndContinue(GRAZE_ANIMATION)
+                    PlayState.STOP
+                }
+            )
+        )
+
+        controllers.add(
+            AnimationController(this, "Flop", 4) { state ->
+                if (!this.isInWaterOrBubble && this.moistness < 590) {
+                    return@AnimationController state.setAndContinue(FLOP_ANIMATION)
+                }
+
+                PlayState.STOP
             }
         )
 
@@ -341,6 +359,7 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
             SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.BOOLEAN)
 
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
+        val GRAZE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.graze")
 
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
             Items.BREAD,
