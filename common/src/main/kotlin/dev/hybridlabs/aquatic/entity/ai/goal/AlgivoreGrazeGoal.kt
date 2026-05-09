@@ -11,7 +11,6 @@ import net.minecraft.util.Mth
 import net.minecraft.world.entity.ai.goal.Goal
 import java.util.*
 
-
 class AlgivoreGrazeGoal(
     private val fish: HAFishEntity,
 ) : Goal() {
