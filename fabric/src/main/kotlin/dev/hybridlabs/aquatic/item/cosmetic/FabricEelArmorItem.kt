@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.item.armor
 
 import dev.emi.trinkets.api.Trinket
 import dev.emi.trinkets.api.TrinketsApi
-import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
+import dev.hybridlabs.aquatic.client.render.item.GeoRenderProviderStorage
 import dev.hybridlabs.aquatic.item.cosmetic.EelScarfItem
 import software.bernie.geckolib.animatable.GeoItem
 import java.util.function.Consumer

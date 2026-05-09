@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.client.render
+package dev.hybridlabs.aquatic.client.render.item
 
 import software.bernie.geckolib.animatable.client.RenderProvider
 

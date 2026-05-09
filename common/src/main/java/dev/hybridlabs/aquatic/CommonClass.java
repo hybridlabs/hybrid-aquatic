@@ -72,7 +72,6 @@ public class CommonClass {
         return new ResourceLocation(MOD_ID, path);
     }
 
-
     public static void init() {
         if (Services.PLATFORM.isModLoaded(MOD_ID)) {
             Constants.LOG.info("{} loaded.", MOD_NAME);
