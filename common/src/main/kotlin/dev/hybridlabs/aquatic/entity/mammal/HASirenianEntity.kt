@@ -1,14 +1,15 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.entity.ai.goal.HerbivoreGrazeGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalGrazeGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.fish.HAFishEntity.Companion.FLOP_ANIMATION
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.sound.HASoundEvents
+import dev.hybridlabs.aquatic.tag.HABlockTags
 import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.BlockParticleOption
@@ -73,7 +74,7 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
         super.registerGoals()
         goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(1, SirenianDigClamGoal(this))
-        goalSelector.addGoal(2, HerbivoreGrazeGoal(this))
+        goalSelector.addGoal(2, WaterAnimalGrazeGoal(this, HABlockTags.HERBIVORE_EDIBLE))
         goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(2, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
