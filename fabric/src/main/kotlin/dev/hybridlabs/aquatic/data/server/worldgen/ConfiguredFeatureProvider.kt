@@ -8,6 +8,7 @@ import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.aquatic.world.gen.feature.*
 import dev.hybridlabs.aquatic.world.gen.feature.kelp.BullKelpFeatureConfig
+import dev.hybridlabs.aquatic.world.gen.feature.kelp.DelesseriaFeatureConfig
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.Direction
@@ -330,7 +331,7 @@ class ConfiguredFeatureProvider(
         entries.add(
             HAConfiguredFeatures.DELESSERIA,
             ConfiguredFeature(
-                HAFeatures.DELESSERIA.get(), BullKelpFeatureConfig(
+                HAFeatures.DELESSERIA.get(), DelesseriaFeatureConfig(
                     SimpleStateProvider.simple(HABlocks.DELESSERIA.get())
                 )
             )
