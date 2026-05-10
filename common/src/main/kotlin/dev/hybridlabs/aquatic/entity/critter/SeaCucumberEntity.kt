@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -97,10 +98,18 @@ class SeaCucumberEntity(type: EntityType<out SeaCucumberEntity>, world: Level) :
                 }
 
                 fun fromBiome(biome: Holder<Biome>): Type {
-                    return if (biome.`is`(BiomeTags.IS_DEEP_OCEAN)) {
-                        SEA_PIG
-                    } else {
-                        COMMON
+                    return when {
+                        biome.`is`(BiomeTags.IS_DEEP_OCEAN) -> {
+                            SEA_PIG
+                        }
+
+                        biome.`is`(HABiomeTags.ALL_TRENCHES) -> {
+                            SEA_PIG
+                        }
+
+                        else -> {
+                            COMMON
+                        }
                     }
                 }
             }
