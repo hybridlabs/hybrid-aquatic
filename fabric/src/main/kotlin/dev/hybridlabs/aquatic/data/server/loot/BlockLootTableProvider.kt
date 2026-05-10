@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
 import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.MESSAGE_KEY
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.VARIANT_KEY
-import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.SeaMessageBookItem.Companion.SEA_MESSAGE_KEY
@@ -136,6 +136,14 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         }
 
         add(HABlocks.SARGASSUM.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .build()
+            )
+        }
+
+        add(HABlocks.DELESSERIA.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
