@@ -1,8 +1,9 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.CorallivoreGrazeGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalGrazeGoal
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
@@ -26,7 +27,7 @@ class ParrotfishEntity(type: EntityType<out ParrotfishEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(3, CorallivoreGrazeGoal(this))
+        goalSelector.addGoal(3, WaterAnimalGrazeGoal(this, HABlockTags.CORALLIVORE_EDIBLE))
     }
 
     override fun getMaxSpawnClusterSize(): Int {

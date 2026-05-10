@@ -1,18 +1,20 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.tag.HABlockTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.BlockParticleOption
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
+import net.minecraft.tags.TagKey
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.ai.goal.Goal
+import net.minecraft.world.level.block.Block
 import java.util.*
 
-class CorallivoreGrazeGoal(
-    private val waterAnimal: HAWaterAnimal
+class WaterAnimalGrazeGoal(
+    private val waterAnimal: HAWaterAnimal,
+    private val grazeTarget: TagKey<Block>
 ) : Goal() {
 
     private var grazeTime = 0
@@ -31,7 +33,7 @@ class CorallivoreGrazeGoal(
             return false
         }
 
-        val found = findNearbyCoralBlock()
+        val found = findNearbyGrazeTarget()
 
         if (found != null) {
             targetPos = found
@@ -55,7 +57,7 @@ class CorallivoreGrazeGoal(
         val pos = targetPos ?: return false
 
         return grazeTime > 0 &&
-                waterAnimal.level().getBlockState(pos).`is`(HABlockTags.CORALLIVORE_EDIBLE)
+                waterAnimal.level().getBlockState(pos).`is`(grazeTarget)
     }
 
     override fun tick() {
@@ -94,7 +96,7 @@ class CorallivoreGrazeGoal(
         }
     }
 
-    private fun findNearbyCoralBlock(): BlockPos? {
+    private fun findNearbyGrazeTarget(): BlockPos? {
         val level = waterAnimal.level()
         val origin = waterAnimal.blockPosition()
 
@@ -106,7 +108,7 @@ class CorallivoreGrazeGoal(
                     val pos = origin.offset(x, y, z)
 
                     if (
-                        level.getBlockState(pos).`is`(HABlockTags.CORALLIVORE_EDIBLE) &&
+                        level.getBlockState(pos).`is`(grazeTarget) &&
                         level.getFluidState(pos.above()).`is`(FluidTags.WATER)
                     ) {
                         return pos
