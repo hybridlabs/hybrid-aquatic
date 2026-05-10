@@ -213,25 +213,20 @@ open class HACrustaceanEntity(
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(BURROWING, false)
-        entityData.define(CRUSTACEAN_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(SHELL_ITEM, ItemStack.EMPTY)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
-        this.setBurrowing(nbt.getBoolean("Burrowing"))
-        nbt.putBoolean("FromFishingNet", fromFishingNet)
-        nbt.putInt("AttackTick", this.attackTick)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        this.setBurrowing(compound.getBoolean("Burrowing"))
+        compound.putInt("AttackTick", this.attackTick)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        size = nbt.getInt(CRUSTACEAN_SIZE_KEY)
-        this.setBurrowing(nbt.getBoolean("Burrowing"))
-        fromFishingNet = nbt.getBoolean("FromFishingNet")
-        this.attackTick = nbt.getInt("AttackTick")
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        this.setBurrowing(compound.getBoolean("Burrowing"))
+        this.attackTick = compound.getInt("AttackTick")
     }
     //#endregion
 
@@ -316,8 +311,6 @@ open class HACrustaceanEntity(
     }
 
     companion object {
-        val CRUSTACEAN_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HACrustaceanEntity::class.java, EntityDataSerializers.INT)
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HACrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
         val SHELL_ITEM: EntityDataAccessor<ItemStack> =
@@ -378,11 +371,5 @@ open class HACrustaceanEntity(
                     world.isWaterAt(pos) &&
                     WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
-
-        fun getScaleAdjustment(crustacean: HACrustaceanEntity, adjustment: Float): Float {
-            return 1.0f + (crustacean.size * adjustment)
-        }
-
-        const val CRUSTACEAN_SIZE_KEY = "CrustaceanSize"
     }
 }

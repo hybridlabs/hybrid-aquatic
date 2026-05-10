@@ -3,9 +3,6 @@ package dev.hybridlabs.aquatic.entity.critter
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.syncher.EntityDataAccessor
-import net.minecraft.network.syncher.EntityDataSerializers
-import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -93,26 +90,6 @@ open class HACritterEntity(
     }
     //#endregion
 
-    //#region Data
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(CRITTER_SIZE, 0)
-        entityData.define(CRITTER_FLAGS, 0.toByte())
-    }
-
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt(CRITTER_SIZE_KEY, size)
-        nbt.putBoolean("FromFishingNet", fromFishingNet)
-    }
-
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        size = nbt.getInt(CRITTER_SIZE_KEY)
-        fromFishingNet = nbt.getBoolean("FromFishingNet")
-    }
-    //#endregion
-
     //#region SFX
     override fun getHurtSound(source: DamageSource): SoundEvent {
         return SoundEvents.SLIME_HURT
@@ -141,16 +118,7 @@ open class HACritterEntity(
     }
     //#endregion
 
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !fromFishingNet && !hasCustomName()
-    }
-
     companion object {
-        val CRITTER_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HACritterEntity::class.java, EntityDataSerializers.INT)
-        val CRITTER_FLAGS: EntityDataAccessor<Byte> =
-            SynchedEntityData.defineId(HACritterEntity::class.java, EntityDataSerializers.BYTE)
-
         fun canSpawn(
             type: EntityType<out HAWaterAnimal>,
             world: ServerLevelAccessor,
@@ -165,11 +133,5 @@ open class HACritterEntity(
                     world.getBlockState(pos.below()).isSolid &&
                     world.isWaterAt(pos)
         }
-
-        fun getScaleAdjustment(critter: HACritterEntity, adjustment: Float): Float {
-            return 1.0f + (critter.size * adjustment)
-        }
-
-        const val CRITTER_SIZE_KEY = "CritterSize"
     }
 }
