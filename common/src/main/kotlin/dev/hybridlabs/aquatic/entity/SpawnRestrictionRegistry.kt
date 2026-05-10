@@ -209,10 +209,10 @@ object SpawnRestrictionRegistry {
             HAEntityTypes.LOBSTER.get(),
         ).forEach { registerAquaticCrustacean(it) }
 
-        registerLandWaterCreature(HAEntityTypes.HORSESHOE_CRAB.get(), HorseshoeCrabEntity::canSpawn)
-        registerLandWaterCreature(HAEntityTypes.GHOST_CRAB.get(), GhostCrabEntity::canSpawn)
-        registerLandWaterCreature(HAEntityTypes.COCONUT_CRAB.get(), CoconutCrabEntity::canSpawn)
-        registerLandWaterCreature(HAEntityTypes.SPIDER_CRAB.get(), SpiderCrabEntity::canSpawn)
+        registerCrustacean(HAEntityTypes.HORSESHOE_CRAB.get(), HorseshoeCrabEntity::canSpawn)
+        registerCrustacean(HAEntityTypes.GHOST_CRAB.get(), GhostCrabEntity::canSpawn)
+        registerCrustacean(HAEntityTypes.COCONUT_CRAB.get(), CoconutCrabEntity::canSpawn)
+        registerCrustacean(HAEntityTypes.SPIDER_CRAB.get(), SpiderCrabEntity::canSpawn)
 
         setOf(
             HAEntityTypes.YETI_CRAB.get(),
