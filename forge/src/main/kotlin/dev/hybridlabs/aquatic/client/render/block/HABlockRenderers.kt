@@ -22,6 +22,9 @@ object HABlockRenderers {
             HABlocks.BULL_KELP.get(),
             HABlocks.BULL_KELP_PLANT.get(),
 
+            HABlocks.DELESSERIA.get(),
+            HABlocks.DELESSERIA_PLANT.get(),
+
             HABlocks.HARP_SPONGE.get(),
             HABlocks.PING_PONG_SPONGE.get(),
             HABlocks.GLASS_SPONGE.get(),

@@ -315,13 +315,11 @@ object HAItems {
     val OYSTER_BLOCK = registerBlockItem("oyster_block") { HABlocks.OYSTER.get() }
     val SARGASSUM = registerBlockItem("sargassum") { HABlocks.SARGASSUM.get() }
     val BULL_KELP = registerBlockItem("bull_kelp") { HABlocks.BULL_KELP.get() }
-    val FLOATING_SARGASSUM =
-        registerPlaceableInWaterBlockItem("floating_sargassum") { HABlocks.FLOATING_SARGASSUM.get() }
+    val DELESSERIA = registerBlockItem("delesseria") { HABlocks.DELESSERIA.get() }
+    val FLOATING_SARGASSUM = registerPlaceableInWaterBlockItem("floating_sargassum") { HABlocks.FLOATING_SARGASSUM.get() }
     val WATER_LETTUCE = registerPlaceableInWaterBlockItem("water_lettuce") { HABlocks.WATER_LETTUCE.get() }
-    val WATER_HYACINTH =
-        registerPlaceableInWaterBlockItem("water_hyacinth") { HABlocks.WATER_HYACINTH.get() }
-    val JUNGLE_LILY_PAD =
-        registerPlaceableInWaterBlockItem("jungle_lily_pad") { HABlocks.JUNGLE_LILY_PAD.get() }
+    val WATER_HYACINTH = registerPlaceableInWaterBlockItem("water_hyacinth") { HABlocks.WATER_HYACINTH.get() }
+    val JUNGLE_LILY_PAD = registerPlaceableInWaterBlockItem("jungle_lily_pad") { HABlocks.JUNGLE_LILY_PAD.get() }
     val SHORT_RED_ALGAE = registerBlockItem("short_red_algae") { HABlocks.SHORT_RED_ALGAE.get() }
     val RED_ALGAE = registerBlockItem("red_algae") { HABlocks.RED_ALGAE.get() }
     val SEA_LETTUCE = registerBlockItem("sea_lettuce") { HABlocks.SEA_LETTUCE.get() }

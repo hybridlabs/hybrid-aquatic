@@ -526,6 +526,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     .add(LootItem.lootTableItem(HAItems.SHARK_TOOTH.get()).setWeight(8))
                     .add(LootItem.lootTableItem(HAItems.SEA_URCHIN_SPINE.get()).setWeight(8))
                     .add(LootItem.lootTableItem(HAItems.BULL_KELP.get()).setWeight(8))
+                    .add(LootItem.lootTableItem(HAItems.DELESSERIA.get()).setWeight(8))
                     .add(LootItem.lootTableItem(HAItems.SARGASSUM.get()).setWeight(8))
                     .add(LootItem.lootTableItem(HAItems.CUTTLEBONE.get()).setWeight(8))
                     .add(LootItem.lootTableItem(HAItems.CORAL_CHUNK.get()).setWeight(6))

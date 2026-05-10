@@ -19,6 +19,7 @@ object HAConfiguredFeatures {
     val SARGASSUM = register("sargassum")
     val FLOATING_SARGASSUM = register("floating_sargassum")
     val BULL_KELP = register("bull_kelp")
+    val DELESSERIA = register("delesseria")
 
     val WATER_LETTUCE = register("water_lettuce")
     val WATER_HYACINTH = register("water_hyacinth")

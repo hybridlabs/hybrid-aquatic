@@ -146,6 +146,17 @@ object HABlocks {
             .dropsLike(BULL_KELP.get()))
     }
 
+    val DELESSERIA = register("delesseria") {
+        DelesseriaBlock(Properties.copy(Blocks.KELP)
+            .noOcclusion())
+    }
+
+    val DELESSERIA_PLANT = register("delesseria_plant") {
+        DelesseriaPlantBlock(Properties.copy(Blocks.KELP_PLANT)
+            .noOcclusion()
+            .dropsLike(DELESSERIA.get()))
+    }
+
     val FLOATING_SARGASSUM = register("floating_sargassum") {
         FloatingSargassumBlock(Properties.copy(Blocks.LILY_PAD)
             .noCollission()

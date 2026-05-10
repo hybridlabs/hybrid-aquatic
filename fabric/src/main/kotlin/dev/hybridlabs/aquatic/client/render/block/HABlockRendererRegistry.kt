@@ -36,6 +36,9 @@ object HABlockRendererRegistry {
             HABlocks.BULL_KELP.get(),
             HABlocks.BULL_KELP_PLANT.get(),
 
+            HABlocks.DELESSERIA.get(),
+            HABlocks.DELESSERIA_PLANT.get(),
+
             HABlocks.SARGASSUM.get(),
             HABlocks.SARGASSUM_PLANT.get(),
             HABlocks.FLOATING_SARGASSUM.get(),

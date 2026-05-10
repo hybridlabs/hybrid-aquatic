@@ -306,6 +306,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HABlocks.SARGASSUM_PLANT.get() to "Sargassum Plant",
             HABlocks.BULL_KELP.get() to "Bull Kelp",
             HABlocks.BULL_KELP_PLANT.get() to "Bull Kelp Plant",
+            HABlocks.DELESSERIA.get() to "Delesseria",
+            HABlocks.DELESSERIA_PLANT.get() to "Delesseria Plant",
             HABlocks.FLOATING_SARGASSUM.get() to "Floating Sargassum",
             HABlocks.WATER_LETTUCE.get() to "Water Lettuce",
             HABlocks.WATER_HYACINTH.get() to "Water Hyacinth",

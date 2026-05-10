@@ -4,8 +4,8 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HABlockFamilies
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
@@ -382,6 +382,16 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             )
 
             createCrossBlock(
+                HABlocks.DELESSERIA_PLANT.get(),
+                BlockModelGenerators.TintState.NOT_TINTED,
+            )
+
+            createCrossBlock(
+                HABlocks.DELESSERIA.get(),
+                BlockModelGenerators.TintState.NOT_TINTED,
+            )
+
+            createCrossBlock(
                 HABlocks.SEA_LETTUCE.get(),
                 BlockModelGenerators.TintState.NOT_TINTED,
             )
@@ -411,6 +421,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.SEA_LETTUCE.get(),
             HAItems.SARGASSUM.get(),
             HAItems.BULL_KELP.get(),
+            HAItems.DELESSERIA.get(),
             HAItems.TUBE_SPONGE.get(),
             HAItems.UNI.get(),
             HAItems.RAW_CRAYFISH.get(),

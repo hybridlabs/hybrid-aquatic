@@ -328,6 +328,15 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
+            HAConfiguredFeatures.DELESSERIA,
+            ConfiguredFeature(
+                HAFeatures.DELESSERIA.get(), BullKelpFeatureConfig(
+                    SimpleStateProvider.simple(HABlocks.DELESSERIA.get())
+                )
+            )
+        )
+
+        entries.add(
             HAConfiguredFeatures.FLOATING_SARGASSUM,
             ConfiguredFeature(
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(

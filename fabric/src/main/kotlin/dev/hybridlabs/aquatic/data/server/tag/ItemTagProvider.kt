@@ -403,6 +403,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         listOf(
             HAItems.SARGASSUM.get(),
             HAItems.BULL_KELP.get(),
+            HAItems.DELESSERIA.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.KELPS).add(item)
         }

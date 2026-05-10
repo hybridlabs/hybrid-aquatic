@@ -100,6 +100,17 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
+            HAPlacedFeatures.DELESSERIA, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.DELESSERIA), listOf(
+                    NoiseBasedCountPlacement.of(120, 80.0, 0.0),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
             HAPlacedFeatures.SARGASSUM, PlacedFeature(
                 entries.ref(HAConfiguredFeatures.SARGASSUM), listOf(
                     NoiseBasedCountPlacement.of(80, 80.0, 0.0),

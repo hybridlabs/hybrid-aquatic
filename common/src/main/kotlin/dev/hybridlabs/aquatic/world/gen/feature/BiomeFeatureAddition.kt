@@ -215,6 +215,14 @@ data class BiomeFeatureAddition(
                     HAPlacedFeatures.BULL_KELP
                 ),
             )
+
+            add(
+                BiomeFeatureAddition(
+                    HABiomeTags.SHALLOW_COLD_OCEANS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.DELESSERIA
+                ),
+            )
             //#endregion
 
             //#region Vents & Sulfur

@@ -25,6 +25,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "hybrid-aquatic:delesseria",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
           "name": "hybrid-aquatic:sargassum",
           "weight": 8
         },

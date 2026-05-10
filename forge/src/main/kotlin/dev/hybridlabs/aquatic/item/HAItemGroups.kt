@@ -108,6 +108,7 @@ object HAItemGroups {
                 entries.accept(HAItems.SEA_LETTUCE.get())
                 entries.accept(HAItems.SHORT_RED_ALGAE.get())
                 entries.accept(HAItems.RED_ALGAE.get())
+                entries.accept(HAItems.DELESSERIA.get())
                 entries.accept(HAItems.BULL_KELP.get())
                 entries.accept(HAItems.SARGASSUM.get())
                 entries.accept(HAItems.FLOATING_SARGASSUM.get())

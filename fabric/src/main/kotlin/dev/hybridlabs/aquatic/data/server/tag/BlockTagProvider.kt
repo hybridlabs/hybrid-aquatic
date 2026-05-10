@@ -144,6 +144,8 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(HABlockTags.KELP)
             .add(HABlocks.BULL_KELP.get())
             .add(HABlocks.BULL_KELP_PLANT.get())
+            .add(HABlocks.DELESSERIA.get())
+            .add(HABlocks.DELESSERIA_PLANT.get())
             .add(HABlocks.SARGASSUM.get())
             .add(HABlocks.SARGASSUM_PLANT.get())
             .add(Blocks.KELP)

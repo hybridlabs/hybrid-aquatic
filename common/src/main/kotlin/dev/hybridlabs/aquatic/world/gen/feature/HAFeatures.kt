@@ -5,10 +5,7 @@ import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import dev.hybridlabs.aquatic.world.gen.feature.algae.RedAlgaePatchFeature
 import dev.hybridlabs.aquatic.world.gen.feature.algae.SeaLettuceFeature
 import dev.hybridlabs.aquatic.world.gen.feature.corals.*
-import dev.hybridlabs.aquatic.world.gen.feature.kelp.BullKelpFeature
-import dev.hybridlabs.aquatic.world.gen.feature.kelp.BullKelpFeatureConfig
-import dev.hybridlabs.aquatic.world.gen.feature.kelp.SargassumFeature
-import dev.hybridlabs.aquatic.world.gen.feature.kelp.SargassumFeatureConfig
+import dev.hybridlabs.aquatic.world.gen.feature.kelp.*
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
@@ -22,6 +19,7 @@ object HAFeatures {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleFeature(MessageInABottleFeatureConfig.CODEC))
     val ANEMONES = register("anemones", AnemoneFeature())
     val BULL_KELP = register("bull_kelp", BullKelpFeature(BullKelpFeatureConfig.CODEC))
+    val DELESSERIA = register("delesseria", DelesseriaFeature(DelesseriaFeatureConfig.CODEC))
     val VENT_PATCH = register("vent_patch", VentPatchFeature(VentPatchFeatureConfig.CODEC))
     val SARGASSUM = register("sargassum", SargassumFeature(SargassumFeatureConfig.CODEC))
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch", SeaLettuceFeature(ProbabilityFeatureConfiguration.CODEC))
