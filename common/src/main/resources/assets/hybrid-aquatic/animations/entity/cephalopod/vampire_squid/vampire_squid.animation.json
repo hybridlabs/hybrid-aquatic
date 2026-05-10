@@ -170,11 +170,13 @@
 				}
 			}
 		},
-		"misc.tentacles_extended": {
-			"loop": true
-		},
 		"misc.feed": {
-			"loop": true
+			"loop": true,
+			"bones": {
+				"feeding_tentacles": {
+					"scale": 1
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

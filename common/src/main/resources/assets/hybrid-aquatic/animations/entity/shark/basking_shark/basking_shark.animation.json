@@ -59,6 +59,9 @@
 				},
 				"mouth_open": {
 					"scale": 0
+				},
+				"mouth": {
+					"scale": 1
 				}
 			}
 		},
@@ -116,7 +119,7 @@
 					]
 				},
 				"mouth": {
-					"scale": [1, 0, 1]
+					"scale": 1
 				},
 				"mouth_open": {
 					"scale": 0
@@ -146,14 +149,6 @@
 						}
 					}
 				},
-				"mouth": {
-					"rotation": {
-						"0.0": [0, 0, 0],
-						"0.125": [40, 0, 0],
-						"0.25": [-35, 0, 0],
-						"0.5": [0, 0, 0]
-					}
-				},
 				"mouth_open": {
 					"scale": 0
 				}
@@ -163,9 +158,10 @@
 			"loop": true,
 			"bones": {
 				"mouth": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
+					"scale": 0
+				},
+				"mouth_open": {
+					"scale": 1
 				}
 			}
 		},
@@ -174,6 +170,9 @@
 			"bones": {
 				"mouth": {
 					"scale": 0
+				},
+				"mouth_open": {
+					"scale": 1
 				}
 			}
 		},
@@ -197,6 +196,9 @@
 				},
 				"mouth_open": {
 					"scale": 0
+				},
+				"mouth": {
+					"scale": 1
 				}
 			}
 		}
