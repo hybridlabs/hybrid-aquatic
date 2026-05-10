@@ -203,7 +203,7 @@ open class HASharkEntity(
 
         controllers.add(
             AnimationController(this, "Flop", 4) { state ->
-                if (!this.isInWaterOrBubble && this.moistness < 590) {
+                if (!this.isInWaterOrBubble && this.moistness < 1190) {
                     return@AnimationController state.setAndContinue(FLOP_ANIMATION)
                 }
 
