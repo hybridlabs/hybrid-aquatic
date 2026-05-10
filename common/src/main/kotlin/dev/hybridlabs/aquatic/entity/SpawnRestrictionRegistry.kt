@@ -303,8 +303,8 @@ object SpawnRestrictionRegistry {
         registerLandWaterCreature(entityType, HACrustaceanEntity::canDeepSpawn)
     }
 
-    private fun <T : WaterAnimal> registerCritter(entityType: EntityType<T>) {
-        registerWaterCreature(entityType, HACritterEntity::canSpawn)
+    private fun <T : HACritterEntity> registerCritter(entityType: EntityType<T>) {
+        registerCritter(entityType, HACritterEntity::canSpawn)
     }
 
     private fun <T : Monster> registerMiniboss(entityType: EntityType<T>) {
@@ -327,6 +327,17 @@ object SpawnRestrictionRegistry {
     }
 
     private fun <T : HAWaterAnimal> registerFish(
+        entityType: EntityType<T>,
+        predicate: SpawnPlacements.SpawnPredicate<T>,
+    ) {
+        register(
+            entityType,
+            SpawnPlacements.Type.IN_WATER,
+            predicate
+        )
+    }
+
+    private fun <T : HAWaterAnimal> registerCritter(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {

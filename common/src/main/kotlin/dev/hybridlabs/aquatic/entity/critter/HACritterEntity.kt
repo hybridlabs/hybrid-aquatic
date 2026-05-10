@@ -1,25 +1,23 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.MobType
-import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.goal.TryFindWaterGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -33,9 +31,8 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HACritterEntity(
     type: EntityType<out HACritterEntity>,
     world: Level,
-) : WaterAnimal(type, world), GeoEntity {
+) : HAWaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private var fromFishingNet = false
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -63,6 +60,13 @@ open class HACritterEntity(
     ): SpawnGroupData? {
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun getBreedOffspring(
+        p0: ServerLevel,
+        p1: AgeableMob,
+    ): AgeableMob? {
+        return null
     }
 
     //#region Moistness & Air
@@ -132,20 +136,6 @@ open class HACritterEntity(
     //#endregion
 
     //#region Properties
-    var size: Int
-        get() = entityData.get(CRITTER_SIZE)
-        set(size) {
-            entityData.set(CRITTER_SIZE, size)
-        }
-
-    protected open fun getMinSize(): Int {
-        return 0
-    }
-
-    protected open fun getMaxSize(): Int {
-        return 0
-    }
-
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
@@ -162,17 +152,16 @@ open class HACritterEntity(
             SynchedEntityData.defineId(HACritterEntity::class.java, EntityDataSerializers.BYTE)
 
         fun canSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out HAWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
             val seaLevel = world.level.chunkSource.generator.seaLevel
-            val topY = seaLevel
             val bottomY = seaLevel - 256
 
-            return pos.y in bottomY..topY &&
+            return pos.y in bottomY..seaLevel &&
                     world.getBlockState(pos.below()).isSolid &&
                     world.isWaterAt(pos)
         }
