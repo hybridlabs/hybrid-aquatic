@@ -148,7 +148,7 @@
 				}
 			}
 		},
-		"misc.beached": {
+		"misc.flop": {
 			"loop": true,
 			"bones": {
 				"body_2": {

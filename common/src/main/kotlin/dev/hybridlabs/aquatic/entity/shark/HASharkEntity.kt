@@ -39,7 +39,9 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.*
 
@@ -190,20 +192,22 @@ open class HASharkEntity(
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Shark Controller", 8) { state ->
-                when {
-                    isInWater -> {
-                        state.setAndContinue(if (isSprinting && state.isMoving) DefaultAnimations.RUN else DefaultAnimations.SWIM)
-                    }
+            AnimationController(this, "Run/Swim/Idle", 4) {
+                    state: AnimationState<HASharkEntity> ->
+                if (this.isInWaterOrBubble && state.isMoving) state.setAndContinue(
+                    if (this.isSprinting) DefaultAnimations.RUN else DefaultAnimations.SWIM)
+                else state.setAndContinue(DefaultAnimations.SWIM
+                )
+            }
+        )
 
-                    onGround() -> {
-                        state.setAndContinue(BEACHED_ANIMATION)
-                    }
-
-                    else -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    }
+        controllers.add(
+            AnimationController(this, "Flop", 4) { state ->
+                if (!this.isInWaterOrBubble && this.moistness < 590) {
+                    return@AnimationController state.setAndContinue(FLOP_ANIMATION)
                 }
+
+                PlayState.STOP
             }
         )
 
@@ -300,7 +304,7 @@ open class HASharkEntity(
         val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HASharkEntity::class.java, EntityDataSerializers.BOOLEAN)
         val ANGER_TIME_RANGE: UniformInt = TimeUtil.rangeOfSeconds(10, 30)
-        val BEACHED_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.beached")
+        val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
 
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
             HAItemTags.RAW_FISH,

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.shark
 
+import dev.hybridlabs.aquatic.entity.ai.goal.PassiveFeedingGoal
 import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -8,28 +9,17 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 
 class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level) :
     HASharkEntity(type, world) {
 
-    private var isFeeding = false
-
-    override fun tick() {
-        super.tick()
-
-        if (hunger < MAX_HUNGER / 4) {
-            isFeeding = true
-        }
-
-        if (isFeeding) {
-            hunger += 10
-
-            if (hunger >= MAX_HUNGER) {
-                hunger = MAX_HUNGER
-                isFeeding = false
-            }
-        }
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, PassiveFeedingGoal(this))
     }
 
     override fun isFood(stack: ItemStack): Boolean {
@@ -38,14 +28,17 @@ class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level)
 
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "Open/Closed", 0) { state ->
-            val animation = when {
-                isFeeding -> MOUTH_OPEN
-                else -> MOUTH_CLOSED
-            }
-            state.setAndContinue(animation)
-        })
         super.registerControllers(controllers)
+        controllers.add(
+            AnimationController(
+                this, "Feeding",
+                AnimationStateHandler { state: AnimationState<HASharkEntity> ->
+                    if (this.isFeeding())
+                        return@AnimationStateHandler state.setAndContinue(FEED_ANIMATION)
+                    PlayState.STOP
+                }
+            )
+        )
     }
 
     companion object {

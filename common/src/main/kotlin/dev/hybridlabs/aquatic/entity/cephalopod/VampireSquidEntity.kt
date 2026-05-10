@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.PassiveFeedingGoal
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -8,38 +9,30 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.`object`.PlayState
 
 class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level) : HACephalopodEntity(type, world) {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HAEntityTags.ALL_SHARKS)
-    private var isFeeding = false
 
-    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "Open/Closed", 8) { state ->
-            val animation = when {
-                isFeeding -> TENTACLES_EXTENDED
-                else -> TENTACLES_RETRACTED
-            }
-            state.setAndContinue(animation)
-        })
-        super.registerControllers(controllers)
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, PassiveFeedingGoal(this))
     }
 
-    override fun tick() {
-        super.tick()
-
-        if (hunger < MAX_HUNGER / 4) {
-            isFeeding = true
-        }
-
-        if (isFeeding) {
-            hunger += 2
-
-            if (hunger >= MAX_HUNGER) {
-                hunger = MAX_HUNGER
-                isFeeding = false
-            }
-        }
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        super.registerControllers(controllers)
+        controllers.add(
+            AnimationController(
+                this, "Feeding",
+                AnimationStateHandler { state: AnimationState<HACephalopodEntity> ->
+                    if (this.isFeeding())
+                        return@AnimationStateHandler state.setAndContinue(FEED_ANIMATION)
+                    PlayState.STOP
+                }
+            )
+        )
     }
 
     companion object {
@@ -51,8 +44,5 @@ class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)
         }
-
-        val TENTACLES_EXTENDED: RawAnimation = RawAnimation.begin().thenPlay("misc.tentacles_extended")
-        val TENTACLES_RETRACTED: RawAnimation = RawAnimation.begin().thenPlay("misc.tentacles_retracted")
     }
 }

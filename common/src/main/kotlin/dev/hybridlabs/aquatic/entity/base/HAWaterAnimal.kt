@@ -152,12 +152,30 @@ abstract class HAWaterAnimal protected constructor(
         setGrazing(false)
     }
 
+    fun isFeeding(): Boolean {
+        return entityData.get(FEEDING)
+    }
+
+    private fun setFeeding(feeding: Boolean) {
+        entityData.set(FEEDING, feeding)
+    }
+
+    fun startFeeding() {
+        setFeeding(true)
+        navigation.stop()
+    }
+
+    fun stopFeeding() {
+        setFeeding(false)
+    }
+
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(SIZE, 0)
         entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(MOISTNESS, getMaxMoistness())
         entityData.define(SITTING, false)
+        entityData.define(FEEDING, false)
         entityData.define(GRAZING, false)
     }
 
@@ -169,6 +187,7 @@ abstract class HAWaterAnimal protected constructor(
         compound.putBoolean("FromFishingNet", fromFishingNet)
         compound.putInt("InLove", this.inLove)
         compound.putBoolean("Sitting", isSitting())
+        compound.putBoolean("Feeding", isFeeding())
         this.setGrazing(compound.getBoolean("Grazing"))
 
         if (this.loveCause != null) {
@@ -185,6 +204,7 @@ abstract class HAWaterAnimal protected constructor(
         this.inLove = compound.getInt("InLove")
         this.loveCause = if (compound.hasUUID("LoveCause")) compound.getUUID("LoveCause") else null
         this.setSitting(compound.getBoolean("Sitting"))
+        this.setFeeding(compound.getBoolean("Feeding"))
         this.setGrazing(compound.getBoolean("Grazing"))
     }
     //#endregion
@@ -423,10 +443,13 @@ abstract class HAWaterAnimal protected constructor(
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.INT)
         val SITTING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
+        val FEEDING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
         val GRAZING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
 
         val GRAZE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.graze")
+        val FEED_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.feed")
 
         const val SIZE_KEY = "Size"
         const val MAX_HUNGER = 2400

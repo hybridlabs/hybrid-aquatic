@@ -56,6 +56,9 @@
 				},
 				"body_3": {
 					"rotation": [0, "0-math.sin(query.anim_time*22.5*2.5-60)*6*math.clamp(query.ground_speed*25,0,1)", 0]
+				},
+				"mouth_open": {
+					"scale": 0
 				}
 			}
 		},
@@ -114,6 +117,9 @@
 				},
 				"mouth": {
 					"scale": [1, 0, 1]
+				},
+				"mouth_open": {
+					"scale": 0
 				}
 			}
 		},
@@ -147,6 +153,9 @@
 						"0.25": [-35, 0, 0],
 						"0.5": [0, 0, 0]
 					}
+				},
+				"mouth_open": {
+					"scale": 0
 				}
 			}
 		},
@@ -160,17 +169,15 @@
 				}
 			}
 		},
-		"misc.mouth_closed": {
+		"misc.feed": {
 			"loop": true,
 			"bones": {
-				"mouth_open": {
-					"scale": {
-						"vector": [0, 0, 0]
-					}
+				"mouth": {
+					"scale": 0
 				}
 			}
 		},
-		"misc.beached": {
+		"misc.flop": {
 			"loop": true,
 			"bones": {
 				"body_2": {
@@ -187,6 +194,9 @@
 				},
 				"body": {
 					"rotation": [0, 0, 0]
+				},
+				"mouth_open": {
+					"scale": 0
 				}
 			}
 		}

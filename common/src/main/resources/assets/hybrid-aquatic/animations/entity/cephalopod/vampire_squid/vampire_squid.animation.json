@@ -10,6 +10,24 @@
 				},
 				"tentacles_1": {
 					"rotation": [-10, 0, 0]
+				},
+				"top_tentacle": {
+					"rotation": [25.567, 0, 0]
+				},
+				"left_tentacle": {
+					"rotation": [1.744, 12.7893, 0.3146]
+				},
+				"left_top_tentacle": {
+					"rotation": [18.1343, 14.6044, 2.4332]
+				},
+				"right_tentacle": {
+					"rotation": [1.744, -12.7893, -0.3146]
+				},
+				"right_top_tentacle": {
+					"rotation": [18.1343, -14.6044, -2.4332]
+				},
+				"feeding_tentacles": {
+					"scale": [1, 1, 0]
 				}
 			}
 		},
@@ -76,6 +94,9 @@
 				"body": {
 					"rotation": ["Math.cos(query.anim_time * 90)*2.5", 0, 0],
 					"position": [0, "1+math.sin(query.anim_time*45*1-80)*1", 0]
+				},
+				"feeding_tentacles": {
+					"scale": [1, 1, 0]
 				}
 			}
 		},
@@ -143,21 +164,17 @@
 				"body": {
 					"rotation": ["Math.sin(query.anim_time * 90)*-5", 0, 0],
 					"position": [0, "1+math.sin(query.anim_time*45*1-80)*1", "math.cos(query.anim_time*45*1-80)*1"]
+				},
+				"feeding_tentacles": {
+					"scale": [1, 1, 0]
 				}
 			}
 		},
 		"misc.tentacles_extended": {
 			"loop": true
 		},
-		"misc.tentacles_retracted": {
-			"loop": true,
-			"bones": {
-				"feeding_tentacles": {
-					"scale": {
-						"vector": [1, 1, 0]
-					}
-				}
-			}
+		"misc.feed": {
+			"loop": true
 		}
 	},
 	"geckolib_format_version": 2
