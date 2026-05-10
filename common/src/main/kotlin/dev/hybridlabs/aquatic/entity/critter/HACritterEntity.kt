@@ -9,7 +9,10 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.*
+import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.goal.TryFindWaterGoal
@@ -65,30 +68,6 @@ open class HACritterEntity(
     ): AgeableMob? {
         return null
     }
-
-    //#region Moistness & Air
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
-
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-
-    override fun isAffectedByFluids(): Boolean {
-        return !onGround()
-    }
-
-    override fun isPushedByFluid(): Boolean {
-        return false
-    }
-
-    override fun handleAirSupply(air: Int) {
-        if (isInWaterOrBubble) {
-            airSupply = maxAirSupply
-        }
-    }
-    //#endregion
 
     //#region SFX
     override fun getHurtSound(source: DamageSource): SoundEvent {
