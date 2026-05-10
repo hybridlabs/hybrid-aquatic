@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.ai.goal.CrustaceanDigGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalDigGoal
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -17,7 +17,7 @@ class VampireCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, CrustaceanDigGoal(this))
+        goalSelector.addGoal(5, WaterAnimalDigGoal(this))
 
     }
 

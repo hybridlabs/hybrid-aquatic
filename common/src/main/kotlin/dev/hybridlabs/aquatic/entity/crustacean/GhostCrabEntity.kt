@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.ai.goal.CrustaceanDaytimeBurrowGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.CrustaceanDigGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalDigGoal
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -27,7 +27,7 @@ class GhostCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Lev
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, CrustaceanDaytimeBurrowGoal(this))
-        goalSelector.addGoal(5, CrustaceanDigGoal(this))
+        goalSelector.addGoal(5, WaterAnimalDigGoal(this))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(
             this, Turtle::class.java, 10, false, false,
             Turtle.BABY_ON_LAND_SELECTOR)

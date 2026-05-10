@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.cephalopod.HACephalopodEntity
 import dev.hybridlabs.aquatic.entity.fish.HAFishEntity
 import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
@@ -12,15 +13,13 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.MobType
-import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
@@ -28,7 +27,6 @@ import net.minecraft.world.entity.ai.goal.PanicGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
@@ -52,10 +50,9 @@ open class HACrustaceanEntity(
     type: EntityType<out HACrustaceanEntity>,
     world: Level,
     open val canDance: Boolean,
-) : WaterAnimal(type, world), GeoEntity {
+) : HAWaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var attackTick = 0
-    var fromFishingNet = false
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -115,6 +112,13 @@ open class HACrustaceanEntity(
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
+    override fun getBreedOffspring(
+        p0: ServerLevel,
+        p1: AgeableMob,
+    ): AgeableMob? {
+        return null
+    }
+
     //#region Dancing
     private var songPlaying = false
     private var songSource: BlockPos? = null
@@ -169,20 +173,6 @@ open class HACrustaceanEntity(
     //#endregion
 
     //#region Properties
-    var size: Int
-        get() = entityData.get(CRUSTACEAN_SIZE)
-        set(size) {
-            entityData.set(CRUSTACEAN_SIZE, size)
-        }
-
-    protected open fun getMinSize(): Int {
-        return 0
-    }
-
-    protected open fun getMaxSize(): Int {
-        return 0
-    }
-
     override fun getMaxHeadXRot(): Int {
         return 1
     }
@@ -201,24 +191,6 @@ open class HACrustaceanEntity(
     //#endregion
 
     //#region Data
-
-    fun isDigging(): Boolean {
-        return entityData.get(DIGGING)
-    }
-
-    private fun setDigging(digging: Boolean) {
-        entityData.set(DIGGING, digging)
-    }
-
-    fun startDigging() {
-        setDigging(true)
-        playSound(SoundEvents.SNIFFER_DIGGING, 0.1f, 2.0f)
-        navigation.stop()
-    }
-
-    fun stopDigging() {
-        setDigging(false)
-    }
 
     fun isBurrowing(): Boolean {
         return entityData.get(BURROWING)
@@ -240,8 +212,6 @@ open class HACrustaceanEntity(
 
     override fun defineSynchedData() {
         super.defineSynchedData()
-
-        entityData.define(DIGGING, false)
         entityData.define(BURROWING, false)
         entityData.define(CRUSTACEAN_SIZE, 0)
         entityData.define(ATTEMPT_ATTACK, false)
@@ -250,9 +220,7 @@ open class HACrustaceanEntity(
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         super.addAdditionalSaveData(nbt)
-
         nbt.putInt(CRUSTACEAN_SIZE_KEY, size)
-        this.setDigging(nbt.getBoolean("Digging"))
         this.setBurrowing(nbt.getBoolean("Burrowing"))
         nbt.putBoolean("FromFishingNet", fromFishingNet)
         nbt.putInt("AttackTick", this.attackTick)
@@ -260,9 +228,7 @@ open class HACrustaceanEntity(
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         super.readAdditionalSaveData(nbt)
-
         size = nbt.getInt(CRUSTACEAN_SIZE_KEY)
-        this.setDigging(nbt.getBoolean("Digging"))
         this.setBurrowing(nbt.getBoolean("Burrowing"))
         fromFishingNet = nbt.getBoolean("FromFishingNet")
         this.attackTick = nbt.getInt("AttackTick")
@@ -358,17 +324,14 @@ open class HACrustaceanEntity(
             SynchedEntityData.defineId(HACrustaceanEntity::class.java, EntityDataSerializers.ITEM_STACK)
 
         val DANCE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dance")
-        val DIG_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dig")
         val BURROW_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.burrow")
         val HIDE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.hide")
 
-        val DIGGING: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(HACrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
         val BURROWING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HACrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
 
-        fun canSurfaceSpawn(
-            type: EntityType<out WaterAnimal>,
+        fun canSpawnOnLand(
+            type: EntityType<out HAWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -383,8 +346,8 @@ open class HACrustaceanEntity(
                     world.canSeeSky(pos)
         }
 
-        fun canWaterSpawn(
-            type: EntityType<out WaterAnimal>,
+        fun canSpawnInWater(
+            type: EntityType<out HAWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -399,8 +362,8 @@ open class HACrustaceanEntity(
                     WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
 
-        fun canDeepSpawn(
-            type: EntityType<out WaterAnimal>,
+        fun canSpawnInDeepWater(
+            type: EntityType<out HAWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,

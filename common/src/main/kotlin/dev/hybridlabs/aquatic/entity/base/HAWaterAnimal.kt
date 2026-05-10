@@ -7,6 +7,7 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.FluidTags
 import net.minecraft.world.DifficultyInstance
@@ -169,6 +170,24 @@ abstract class HAWaterAnimal protected constructor(
         setFeeding(false)
     }
 
+    fun isDigging(): Boolean {
+        return entityData.get(DIGGING)
+    }
+
+    private fun setDigging(digging: Boolean) {
+        entityData.set(DIGGING, digging)
+    }
+
+    fun startDigging() {
+        setDigging(true)
+        playSound(SoundEvents.SNIFFER_DIGGING, 0.1f, 2.0f)
+        navigation.stop()
+    }
+
+    fun stopDigging() {
+        setDigging(false)
+    }
+
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(SIZE, 0)
@@ -177,6 +196,7 @@ abstract class HAWaterAnimal protected constructor(
         entityData.define(SITTING, false)
         entityData.define(FEEDING, false)
         entityData.define(GRAZING, false)
+        entityData.define(DIGGING, false)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -189,6 +209,7 @@ abstract class HAWaterAnimal protected constructor(
         compound.putBoolean("Sitting", isSitting())
         compound.putBoolean("Feeding", isFeeding())
         this.setGrazing(compound.getBoolean("Grazing"))
+        this.setDigging(compound.getBoolean("Digging"))
 
         if (this.loveCause != null) {
             compound.putUUID("LoveCause", this.loveCause)
@@ -206,6 +227,7 @@ abstract class HAWaterAnimal protected constructor(
         this.setSitting(compound.getBoolean("Sitting"))
         this.setFeeding(compound.getBoolean("Feeding"))
         this.setGrazing(compound.getBoolean("Grazing"))
+        this.setDigging(compound.getBoolean("Digging"))
     }
     //#endregion
 
@@ -447,12 +469,15 @@ abstract class HAWaterAnimal protected constructor(
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
         val GRAZING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
+        val DIGGING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
 
-        val GRAZE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.graze")
         val FEED_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.feed")
+        val GRAZE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.graze")
+        val DIG_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dig")
 
         const val SIZE_KEY = "Size"
-        const val MAX_HUNGER = 2400
+        const val MAX_HUNGER = 1200
         const val HUNGER_KEY = "Hunger"
         const val MOISTNESS_KEY = "Moistness"
 
