@@ -39,6 +39,7 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
@@ -199,6 +200,17 @@ open class HASharkEntity(
                 else state.setAndContinue(DefaultAnimations.SWIM
                 )
             }
+        )
+
+        controllers.add(
+            AnimationController(
+                this, "Sit",
+                AnimationStateHandler { state: AnimationState<HASharkEntity> ->
+                    if (this.isSitting())
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SIT)
+                    PlayState.STOP
+                }
+            )
         )
 
         controllers.add(
