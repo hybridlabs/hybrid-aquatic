@@ -112,7 +112,7 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
             AnimationController(
                 this, "Sit",
                 AnimationStateHandler { state: AnimationState<HAFishEntity> ->
-                    if (this.isSitting() && this.onGround())
+                    if (this.isSitting())
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SIT)
                     PlayState.STOP
                 }

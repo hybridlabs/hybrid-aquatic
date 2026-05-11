@@ -19,7 +19,8 @@ class WaterAnimalSitGoal(
 
     override fun canUse(): Boolean {
         if (sitCooldown > this.waterAnimal.tickCount ||
-            waterAnimal.level().getNearestPlayer(waterAnimal, 32.0) == null) {
+            waterAnimal.level().getNearestPlayer(waterAnimal, 32.0) == null
+        ) {
             return false
         }
         return this.waterAnimal.getRandom().nextInt(40) == 0
@@ -41,10 +42,7 @@ class WaterAnimalSitGoal(
 
     override fun tick() {
         sitTime--
-
-        if (!waterAnimal.onGround()) {
-            waterAnimal.deltaMovement =
-                waterAnimal.deltaMovement.subtract(0.0, 0.01, 0.0)
-        }
+        waterAnimal.deltaMovement = waterAnimal.deltaMovement.subtract(0.0, 0.01, 0.0)
+        waterAnimal.navigation.stop()
     }
 }

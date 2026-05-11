@@ -280,7 +280,7 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
             AnimationController(
                 this, "Sit",
                 AnimationStateHandler { state: AnimationState<HAOctopusEntity> ->
-                    if (this.isSitting() && this.onGround())
+                    if (this.isSitting())
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SIT)
                     PlayState.STOP
                 }
