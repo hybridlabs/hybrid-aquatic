@@ -1039,7 +1039,6 @@ object HAEntityTypes {
             attributeContainer,
             Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
             trackingRange,
-            canSpawnFarFromPlayer = true
         )
     }
     //#endregion
@@ -1076,7 +1075,6 @@ object HAEntityTypes {
             attributeContainer,
             Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
             trackingRange,
-            canSpawnFarFromPlayer = true
         )
     }
     //#endregion
@@ -1167,8 +1165,7 @@ object HAEntityTypes {
             dimensions,
             attributeContainer,
             Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY"),
-            trackingRange,
-            canSpawnFarFromPlayer = true
+            trackingRange
         )
     }
     //#endregion
