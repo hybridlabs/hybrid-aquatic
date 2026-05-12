@@ -113,6 +113,7 @@
 			"loop": true,
 			"bones": {
 				"body": {
+					"rotation": [0, 0, 0],
 					"position": [0, -1, 0]
 				},
 				"body_2": {
@@ -135,6 +136,9 @@
 				},
 				"right_fin": {
 					"rotation": [0, 0, 20]
+				},
+				"tail_fin": {
+					"rotation": [0, 0, 0]
 				}
 			}
 		}

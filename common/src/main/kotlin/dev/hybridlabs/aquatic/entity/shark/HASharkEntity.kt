@@ -197,8 +197,7 @@ open class HASharkEntity(
                     state: AnimationState<HASharkEntity> ->
                 if (this.isInWaterOrBubble && state.isMoving) state.setAndContinue(
                     if (this.isSprinting) DefaultAnimations.RUN else DefaultAnimations.SWIM)
-                else state.setAndContinue(DefaultAnimations.SWIM
-                )
+                else state.setAndContinue(DefaultAnimations.SWIM)
             }
         )
 
