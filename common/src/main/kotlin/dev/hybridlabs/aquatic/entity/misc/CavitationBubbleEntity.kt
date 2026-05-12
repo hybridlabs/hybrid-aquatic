@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.entity.misc
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.util.Mth
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile
@@ -43,17 +42,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
 
     override fun tick() {
         super.tick()
-
-        val vec3d = this.deltaMovement
-        val e: Double = vec3d.x
-        val f: Double = vec3d.y
-        val g: Double = vec3d.z
-        val l: Double = vec3d.horizontalDistance()
-
-        this.yRot = (Mth.atan2(e, g) * (180f / Math.PI.toFloat())).toFloat()
-        this.xRot = (Mth.atan2(f, l) * (180f / Math.PI.toFloat())).toFloat()
-        this.xRot = lerpRotation(this.xRotO, this.xRot)
-        this.yRot = lerpRotation(this.yRotO, this.yRot)
+        this.updateRotation()
 
         if (!this.level().isClientSide) {
             if (!isInWaterOrBubble) {

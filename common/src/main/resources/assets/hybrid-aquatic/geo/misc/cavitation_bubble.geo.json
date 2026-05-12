@@ -12,7 +12,12 @@
 			},
 			"bones": [
 				{
+					"name": "body",
+					"pivot": [0, 7, 0]
+				},
+				{
 					"name": "outer_bubble",
+					"parent": "body",
 					"pivot": [0, 7, 0],
 					"cubes": [
 						{"origin": [-7, 0, -7], "size": [14, 14, 14], "uv": [0, 0]}
@@ -20,6 +25,7 @@
 				},
 				{
 					"name": "inner_bubble",
+					"parent": "body",
 					"pivot": [0, 7, 0],
 					"cubes": [
 						{"origin": [-4.5, 2.5, -4.5], "size": [9, 9, 9], "uv": [0, 28]}
