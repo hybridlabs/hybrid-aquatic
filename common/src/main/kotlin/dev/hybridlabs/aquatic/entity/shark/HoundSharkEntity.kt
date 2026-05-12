@@ -48,8 +48,8 @@ class HoundSharkEntity(type: EntityType<out HoundSharkEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, HurtByTargetGoal(this))
-        goalSelector.addGoal(2, WaterAnimalSitGoal(this))
+        goalSelector.addGoal(0, HurtByTargetGoal(this))
+        goalSelector.addGoal(1, WaterAnimalSitGoal(this))
     }
 
     companion object {
