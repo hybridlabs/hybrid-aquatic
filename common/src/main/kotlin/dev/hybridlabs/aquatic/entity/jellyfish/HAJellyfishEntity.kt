@@ -1,12 +1,10 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
-import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.syncher.EntityDataAccessor
-import net.minecraft.network.syncher.EntityDataSerializers
-import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -21,7 +19,6 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
-import net.minecraft.world.entity.animal.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
@@ -36,14 +33,14 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.EasingType
 import software.bernie.geckolib.util.GeckoLibUtil
 
-@Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
+@Suppress("LeakingThis", "DEPRECATION")
 open class HAJellyfishEntity(
     type: EntityType<out HAJellyfishEntity>,
     world: Level,
     private val isVenomous: Boolean,
     private val venomLevel: Int
 
-) : WaterAnimal(type, world), GeoEntity {
+) : HAWaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     var tiltAngle: Float = 0f
     var prevTiltAngle: Float = 0f
@@ -79,22 +76,11 @@ open class HAJellyfishEntity(
         goalSelector.addGoal(0, StayInWaterGoal(this))
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(MOISTNESS, getMaxMoistness())
-        entityData.define(JELLYFISH_SIZE, 0)
-    }
-
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
-
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-
-    override fun isPushedByFluid(): Boolean {
-        return false
+    override fun getBreedOffspring(
+        p0: ServerLevel,
+        p1: AgeableMob,
+    ): AgeableMob? {
+        return null
     }
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -119,25 +105,6 @@ open class HAJellyfishEntity(
 
     override fun getSoundVolume(): Float {
         return 0.4f
-    }
-
-    override fun tick() {
-        super.tick()
-
-        if (isInWaterRainOrBubble) {
-            moistness = getMaxMoistness()
-        } else {
-            moistness -= 1
-            if (moistness <= -20) {
-                moistness = 0
-                hurt(this.damageSources().dryOut(), 1.0f)
-            }
-        }
-    }
-
-
-    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !fromFishingNet && !hasCustomName()
     }
 
     override fun aiStep() {
@@ -203,13 +170,9 @@ open class HAJellyfishEntity(
 
                 this.setDeltaMovement(0.0, e * 0.9800000190734863, 0.0)
 
-
             }
-
             this.tiltAngle += (-90.0f - this.tiltAngle) * 0.02f
         }
-
-
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
@@ -238,11 +201,11 @@ open class HAJellyfishEntity(
         this.move(MoverType.SELF, this.deltaMovement)
     }
 
-    override fun handleEntityEvent(status: Byte) {
-        if (status.toInt() == 19) {
+    override fun handleEntityEvent(id: Byte) {
+        if (id.toInt() == 19) {
             this.thrustTimer = 0.0f
         } else {
-            super.handleEntityEvent(status)
+            super.handleEntityEvent(id)
         }
     }
 
@@ -275,18 +238,6 @@ open class HAJellyfishEntity(
         }
     }
 
-    private var moistness: Int
-        get() = entityData.get(MOISTNESS)
-        set(moistness) {
-            entityData.set(MOISTNESS, moistness)
-        }
-
-    var size: Int
-        get() = entityData.get(JELLYFISH_SIZE)
-        set(size) {
-            entityData.set(JELLYFISH_SIZE, size)
-        }
-
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         controllerRegistrar.add(
             AnimationController(
@@ -313,42 +264,14 @@ open class HAJellyfishEntity(
         }
     }
 
-    private fun getMaxMoistness(): Int {
+    override fun getMaxMoistness(): Int {
         return 300
     }
 
-    protected open fun getMinSize(): Int {
-        return -3
-    }
-
-    protected open fun getMaxSize(): Int {
-        return 3
-    }
-
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt(MOISTNESS_KEY, moistness)
-        nbt.putInt(JELLYFISH_SIZE_KEY, size)
-        nbt.putBoolean("FromFishingNet", fromFishingNet)
-    }
-
-    private var fromFishingNet = false
-
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        moistness = nbt.getInt(MOISTNESS_KEY)
-        size = nbt.getInt(JELLYFISH_SIZE_KEY)
-        fromFishingNet = nbt.getBoolean("FromFishingNet")
-    }
-
     companion object {
-        val MOISTNESS: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HAJellyfishEntity::class.java, EntityDataSerializers.INT)
-        val JELLYFISH_SIZE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(HAJellyfishEntity::class.java, EntityDataSerializers.INT)
 
         fun canSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out HAWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -364,7 +287,7 @@ open class HAJellyfishEntity(
         }
 
         fun canDeepSpawn(
-            type: EntityType<out WaterAnimal>,
+            type: EntityType<out HAWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,
@@ -377,12 +300,5 @@ open class HAJellyfishEntity(
             return pos.y in bottomY..topY &&
                     world.isWaterAt(pos)
         }
-
-        fun getScaleAdjustment(jellyfish: HAJellyfishEntity, adjustment: Float): Float {
-            return 1.0f + (jellyfish.size * adjustment)
-        }
-
-        const val MOISTNESS_KEY = "Moistness"
-        const val JELLYFISH_SIZE_KEY = "JellyfishSize"
     }
 }
