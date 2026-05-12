@@ -700,7 +700,6 @@ object HAEntityTypes {
 
     //#region All Jellyfish
         //#region Marine Jellyfish
-
     val BARREL_JELLYFISH = registerJelly(
         "barrel_jellyfish",
         ::BarrelJellyfishEntity,
@@ -1031,7 +1030,7 @@ object HAEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
-        trackingRange: Int = 8,
+        trackingRange: Int = 6,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
@@ -1040,6 +1039,7 @@ object HAEntityTypes {
             attributeContainer,
             Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
             trackingRange,
+            canSpawnFarFromPlayer = true
         )
     }
     //#endregion
@@ -1067,7 +1067,7 @@ object HAEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
-        trackingRange: Int = 8,
+        trackingRange: Int = 6,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
@@ -1076,6 +1076,7 @@ object HAEntityTypes {
             attributeContainer,
             Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
             trackingRange,
+            canSpawnFarFromPlayer = true
         )
     }
     //#endregion
@@ -1086,7 +1087,7 @@ object HAEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
-        trackingRange: Int = 4,
+        trackingRange: Int = 6,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
@@ -1103,7 +1104,7 @@ object HAEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
-        trackingRange: Int = 8,
+        trackingRange: Int = 6,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
@@ -1158,7 +1159,7 @@ object HAEntityTypes {
         entityFactory: EntityType.EntityFactory<T>,
         dimensions: EntityDimensions,
         attributeContainer: Callable<AttributeSupplier.Builder>,
-        trackingRange: Int = 8,
+        trackingRange: Int = 6,
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id,
@@ -1167,6 +1168,7 @@ object HAEntityTypes {
             attributeContainer,
             Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY"),
             trackingRange,
+            canSpawnFarFromPlayer = true
         )
     }
     //#endregion
@@ -1316,6 +1318,7 @@ object HAEntityTypes {
                 .build(id)
         }
     }
+    //#endregion
     //#endregion
     /**
      * Registers a living entity to the entity type registry with a Hybrid Aquatic spawn group.

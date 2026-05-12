@@ -36,7 +36,8 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
-open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: Level) : HAWaterAnimal(type, world) {
+open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: Level) :
+    HAWaterAnimal(type, world) {
     private val factory = GeckoLibUtil.createInstanceCache(this)
     open val inkConfig: InkConfiguration? = null
 
