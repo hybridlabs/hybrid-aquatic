@@ -31,8 +31,6 @@ import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
@@ -191,17 +189,8 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
 
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(
-            AnimationController(
-                this, "Swim/Idle", 4
-            ) { state: AnimationState<HADolphinEntity> ->
-                when {
-                    state.isMoving && isInWater -> state.setAndContinue(DefaultAnimations.SWIM)
-                    !state.isMoving && isInWater -> state.setAndContinue(WATER_IDLE)
-                    else -> state.setAndContinue(WATER_IDLE)
-                }
-            }
-        )
+        controllers.add(DefaultAnimations.genericSwimIdleController(this))
+        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE))
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
