@@ -37,7 +37,6 @@ import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
 import java.lang.ref.WeakReference
 import java.util.*
 import java.util.Collections.synchronizedList
@@ -243,23 +242,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(
-            AnimationController(this, "Shell Beast Controller", 8) { state ->
-                when {
-                    isInWater -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    }
-
-                    isCharging() -> {
-                        state.setAndContinue(DefaultAnimations.ATTACK_SHOOT)
-                    }
-
-                    else -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-                }
-            }
-        )
+        controllers.add(DefaultAnimations.genericSwimIdleController(this))
     }
     //#endregion
 
