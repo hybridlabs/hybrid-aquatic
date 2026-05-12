@@ -225,10 +225,12 @@ open class HAJellyfishEntity(
         }
 
         override fun tick() {
-            val i = jellyfish.noActionTime//
+            val i = jellyfish.noActionTime
             if (i > 100) {
                 jellyfish.setSwimmingVector(0.0f, 0.0f, 0.0f)
-            } else if (jellyfish.random.nextInt(reducedTickDelay(50)) == 0 || !jellyfish.wasTouchingWater || !jellyfish.hasSwimmingVector()) {
+            } else if (jellyfish.random.nextInt(reducedTickDelay(50)) == 0 ||
+                !jellyfish.wasTouchingWater ||
+                !jellyfish.hasSwimmingVector()) {
                 val f = jellyfish.random.nextFloat() * 6.2831855f
                 val g = Mth.cos(f) * 0.2f
                 val h = -0.1f + jellyfish.random.nextFloat() * 0.2f
