@@ -40,7 +40,6 @@ import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 
-
 class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     HAMinibossEntity(type, world) {
     private var flippedTimer: Int = 0
