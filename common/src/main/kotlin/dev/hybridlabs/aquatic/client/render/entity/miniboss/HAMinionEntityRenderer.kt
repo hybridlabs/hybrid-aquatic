@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.render.entity.miniboss
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.hybridlabs.aquatic.entity.miniboss.HAMinionEntity
+import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import software.bernie.geckolib.model.GeoModel

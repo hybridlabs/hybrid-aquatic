@@ -3,9 +3,11 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.entity.cephalopod.HACephalopodEntity
-import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
-import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
+import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag

@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.miniboss.HAMinionEntity
+import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.EntitySelector
 import net.minecraft.world.entity.LivingEntity

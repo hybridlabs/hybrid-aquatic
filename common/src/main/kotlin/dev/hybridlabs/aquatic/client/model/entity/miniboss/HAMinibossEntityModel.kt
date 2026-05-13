@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.miniboss
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.miniboss.HAMinibossEntity
+import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
 

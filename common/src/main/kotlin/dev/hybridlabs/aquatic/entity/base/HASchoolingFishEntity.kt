@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.entity.fish
+package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FishFollowGroupLeaderGoal
 import net.minecraft.world.entity.Entity

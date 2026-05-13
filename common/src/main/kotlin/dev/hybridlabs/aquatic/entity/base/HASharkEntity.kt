@@ -1,9 +1,8 @@
-package dev.hybridlabs.aquatic.entity.shark
+package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.ai.goal.SharkAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos

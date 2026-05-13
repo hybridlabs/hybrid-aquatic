@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.miniboss.HAMinionEntity
+import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
 import net.minecraft.world.entity.ai.goal.Goal
 import java.util.*
 

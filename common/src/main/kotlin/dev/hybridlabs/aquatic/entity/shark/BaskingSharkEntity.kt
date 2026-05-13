@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.entity.ai.goal.PassiveFeedingGoal
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier

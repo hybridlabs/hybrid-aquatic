@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag

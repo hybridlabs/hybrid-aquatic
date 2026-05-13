@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes

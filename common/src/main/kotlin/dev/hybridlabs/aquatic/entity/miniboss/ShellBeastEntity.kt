@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.control.SmoothStrafeSwimmingMoveControl
 import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity.Companion.SUMMONING
 import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents

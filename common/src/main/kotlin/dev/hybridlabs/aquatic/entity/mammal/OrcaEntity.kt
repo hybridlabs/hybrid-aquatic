@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.entity.base.HADolphinEntity
 import dev.hybridlabs.aquatic.entity.feature.OrcaEyeTextureFeature
 import dev.hybridlabs.aquatic.entity.feature.OrcaSaddleTextureFeature
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity

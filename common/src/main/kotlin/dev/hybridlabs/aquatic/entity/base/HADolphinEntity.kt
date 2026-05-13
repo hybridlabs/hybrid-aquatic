@@ -1,10 +1,9 @@
-package dev.hybridlabs.aquatic.entity.mammal
+package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.entity.ai.goal.DolphinAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag

@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.mixin;
 import com.google.common.collect.ImmutableList;
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.effect.HAMobEffects;
-import dev.hybridlabs.aquatic.entity.shark.HASharkEntity;
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity;
 import dev.hybridlabs.aquatic.item.HAItems;
 import dev.hybridlabs.aquatic.item.HAToolMaterials;
 import net.minecraft.core.NonNullList;

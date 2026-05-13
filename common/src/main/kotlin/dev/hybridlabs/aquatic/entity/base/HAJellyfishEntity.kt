@@ -1,7 +1,6 @@
-package dev.hybridlabs.aquatic.entity.jellyfish
+package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel

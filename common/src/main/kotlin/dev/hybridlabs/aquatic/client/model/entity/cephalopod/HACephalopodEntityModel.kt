@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.cephalopod.HACephalopodEntity
+import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.shark
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth

@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
+import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags

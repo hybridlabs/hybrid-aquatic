@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.critter.HACritterEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.critter.HACritterEntityRenderer
-import dev.hybridlabs.aquatic.entity.critter.HACritterEntity
+import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType

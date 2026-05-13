@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal.boids
 
-import dev.hybridlabs.aquatic.entity.fish.HAFishEntity
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
 import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.Mob

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.mammal.HADolphinEntity
+import dev.hybridlabs.aquatic.entity.base.HADolphinEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth

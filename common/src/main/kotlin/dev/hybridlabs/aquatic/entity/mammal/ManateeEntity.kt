@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.entity.base.HASirenianEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent

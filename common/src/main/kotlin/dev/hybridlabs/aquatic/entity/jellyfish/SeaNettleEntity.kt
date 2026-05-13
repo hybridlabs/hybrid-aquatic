@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.entity.base.HAJellyfishEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers

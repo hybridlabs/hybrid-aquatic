@@ -1,9 +1,8 @@
-package dev.hybridlabs.aquatic.entity.fish
+package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.entity.ai.goal.AvoidEntityInWaterGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.FishAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.FollowGlowingEntityGoal
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor

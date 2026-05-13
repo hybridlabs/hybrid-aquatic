@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType

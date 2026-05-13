@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.mammal.HADolphinEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.mammal.HADolphinEntityRenderer
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.entity.mammal.HADolphinEntity
+import dev.hybridlabs.aquatic.entity.base.HADolphinEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture

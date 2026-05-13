@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.effect.MobEffectInstance

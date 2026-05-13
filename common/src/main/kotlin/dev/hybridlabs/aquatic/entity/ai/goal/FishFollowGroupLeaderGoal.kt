@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
 import com.mojang.datafixers.DataFixUtils
-import dev.hybridlabs.aquatic.entity.fish.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
 import net.minecraft.world.entity.ai.goal.Goal
 import java.util.function.Predicate
 

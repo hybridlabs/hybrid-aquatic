@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.crustacean.HACrustaceanEntity
+import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
 

@@ -1,6 +1,6 @@
-package dev.hybridlabs.aquatic.entity.cephalopod
+package dev.hybridlabs.aquatic.entity.base
 
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.aquatic.entity.cephalopod.InkConfiguration
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag

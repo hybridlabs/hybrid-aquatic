@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.entity.miniboss
+package dev.hybridlabs.aquatic.entity.base
 
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag

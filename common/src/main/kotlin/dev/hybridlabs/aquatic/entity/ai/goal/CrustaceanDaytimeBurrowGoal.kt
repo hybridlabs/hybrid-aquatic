@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.crustacean.HACrustaceanEntity
+import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import net.minecraft.core.particles.BlockParticleOption
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel

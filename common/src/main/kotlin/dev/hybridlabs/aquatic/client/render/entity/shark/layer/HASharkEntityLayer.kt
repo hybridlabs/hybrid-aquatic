@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.shark.HASharkEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.shark.HASharkEntityRenderer
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture

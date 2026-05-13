@@ -1,8 +1,7 @@
-package dev.hybridlabs.aquatic.entity.mammal
+package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.entity.ai.control.FloatControl
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag

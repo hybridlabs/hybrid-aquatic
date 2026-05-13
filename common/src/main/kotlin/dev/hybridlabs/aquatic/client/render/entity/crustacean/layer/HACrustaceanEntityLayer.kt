@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.crustacean.HACrustaceanEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.HACrustaceanEntityRenderer
-import dev.hybridlabs.aquatic.entity.crustacean.HACrustaceanEntity
+import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType

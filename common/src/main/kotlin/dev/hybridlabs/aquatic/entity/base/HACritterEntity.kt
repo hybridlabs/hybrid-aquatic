@@ -1,6 +1,5 @@
-package dev.hybridlabs.aquatic.entity.critter
+package dev.hybridlabs.aquatic.entity.base
 
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel

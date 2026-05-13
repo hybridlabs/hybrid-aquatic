@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HAOctopusEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags

@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.crustacean
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.ai.goal.ShrimpCleanGoal
+import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor

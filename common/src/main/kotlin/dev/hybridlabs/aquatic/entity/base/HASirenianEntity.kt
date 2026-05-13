@@ -1,12 +1,11 @@
-package dev.hybridlabs.aquatic.entity.mammal
+package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalGrazeGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.entity.fish.HAFishEntity.Companion.FLOP_ANIMATION
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity.Companion.FLOP_ANIMATION
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import dev.hybridlabs.aquatic.tag.HABlockTags

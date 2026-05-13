@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FollowCreatureGoal
-import dev.hybridlabs.aquatic.entity.mammal.HADolphinEntity
-import dev.hybridlabs.aquatic.entity.mammal.HASirenianEntity
-import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
+import dev.hybridlabs.aquatic.entity.base.HADolphinEntity
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.entity.base.HASirenianEntity
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes

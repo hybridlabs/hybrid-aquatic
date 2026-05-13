@@ -461,7 +461,7 @@ abstract class HAWaterAnimal protected constructor(
     //#endregion
 
     private fun getHandSwingDuration(): Int {
-        return 40
+        return 20
     }
 
     override fun updateSwingTime() {

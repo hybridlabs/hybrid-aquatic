@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.entity.miniboss
+package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.entity.ai.goal.MinionAttackGoal
 import net.minecraft.core.BlockPos
@@ -10,7 +10,10 @@ import net.minecraft.util.RandomSource
 import net.minecraft.world.Difficulty
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.*
-import net.minecraft.world.entity.ai.goal.*
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
+import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.TargetGoal
@@ -25,7 +28,6 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.*
 
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")

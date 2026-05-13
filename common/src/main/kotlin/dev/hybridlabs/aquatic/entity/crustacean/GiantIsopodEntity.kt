@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType

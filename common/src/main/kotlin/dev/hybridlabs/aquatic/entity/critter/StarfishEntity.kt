@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import com.mojang.serialization.Codec
+import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.core.Holder

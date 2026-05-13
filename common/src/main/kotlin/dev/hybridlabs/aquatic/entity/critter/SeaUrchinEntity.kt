@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag

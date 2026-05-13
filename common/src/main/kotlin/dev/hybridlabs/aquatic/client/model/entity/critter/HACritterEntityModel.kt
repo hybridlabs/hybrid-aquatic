@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.critter
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.critter.HACritterEntity
+import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
 

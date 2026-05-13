@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.ai.goal.FleeFromEntityGoal
+import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAItemTags

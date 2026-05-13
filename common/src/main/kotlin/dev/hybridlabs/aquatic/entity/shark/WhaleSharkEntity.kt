@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.ai.goal.PassiveFeedingGoal
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.nbt.CompoundTag

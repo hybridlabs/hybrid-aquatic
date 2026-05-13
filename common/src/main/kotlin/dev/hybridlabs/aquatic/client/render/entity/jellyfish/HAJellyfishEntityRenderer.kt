@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.render.entity.jellyfish
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.entity.jellyfish.HAJellyfishEntity
+import dev.hybridlabs.aquatic.entity.base.HAJellyfishEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 import net.minecraft.util.Mth

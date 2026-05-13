@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.entity.mammal.HADolphinEntity
+import dev.hybridlabs.aquatic.entity.base.HADolphinEntity
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.EntitySelector
 import net.minecraft.world.entity.LivingEntity

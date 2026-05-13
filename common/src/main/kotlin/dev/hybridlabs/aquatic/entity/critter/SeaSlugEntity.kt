@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag

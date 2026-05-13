@@ -1,10 +1,5 @@
-package dev.hybridlabs.aquatic.entity.crustacean
+package dev.hybridlabs.aquatic.entity.base
 
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.entity.cephalopod.HACephalopodEntity
-import dev.hybridlabs.aquatic.entity.fish.HAFishEntity
-import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
-import dev.hybridlabs.aquatic.entity.shark.HASharkEntity
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.BlockParticleOption

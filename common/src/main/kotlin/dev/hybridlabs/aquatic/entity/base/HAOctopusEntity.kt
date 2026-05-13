@@ -1,7 +1,7 @@
-package dev.hybridlabs.aquatic.entity.cephalopod
+package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.aquatic.entity.cephalopod.InkConfiguration
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -10,6 +10,7 @@ import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
@@ -143,12 +144,12 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
         val sharedBlock = level().getBlockState(currentPos)
         val floor = level().getBlockState(floorPos)
 
-        if (!sharedBlock.isAir && !sharedBlock.fluidState.`is`(net.minecraft.tags.FluidTags.WATER)) {
+        if (!sharedBlock.isAir && !sharedBlock.fluidState.`is`(FluidTags.WATER)) {
             val sharedColor = sharedBlock.getMapColor(this.level(), currentPos).col
             if (this.getTargetColor() != sharedColor && sharedColor != 0) {
                 this.setTargetColor(sharedColor)
             }
-        } else if (!floor.fluidState.`is`(net.minecraft.tags.FluidTags.WATER)) {
+        } else if (!floor.fluidState.`is`(FluidTags.WATER)) {
             val floorColor = floor.getMapColor(this.level(), floorPos).col
             if (this.getTargetColor() != floorColor && floorColor != 0) {
                 this.setTargetColor(floorColor)

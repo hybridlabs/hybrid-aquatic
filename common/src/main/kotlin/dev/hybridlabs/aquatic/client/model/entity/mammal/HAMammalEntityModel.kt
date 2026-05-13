@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.mammal.HAMammalEntity
+import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets

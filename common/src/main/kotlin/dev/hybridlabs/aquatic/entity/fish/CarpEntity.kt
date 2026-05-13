@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.CarpBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalGrazeGoal
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.feature.CarpPatternTextureFeature
 import dev.hybridlabs.aquatic.tag.HABiomeTags

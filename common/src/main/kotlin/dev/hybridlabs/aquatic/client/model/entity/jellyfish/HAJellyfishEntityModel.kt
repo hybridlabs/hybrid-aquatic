@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.jellyfish
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.jellyfish.HAJellyfishEntity
+import dev.hybridlabs.aquatic.entity.base.HAJellyfishEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
 

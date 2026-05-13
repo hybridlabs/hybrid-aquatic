@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.miniboss
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosMeleeAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosSummonGoal
+import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component

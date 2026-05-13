@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.render.entity.critter
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.entity.critter.HACritterEntity
+import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import software.bernie.geckolib.model.GeoModel
