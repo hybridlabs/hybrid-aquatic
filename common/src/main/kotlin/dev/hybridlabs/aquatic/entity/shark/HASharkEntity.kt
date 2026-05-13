@@ -8,9 +8,6 @@ import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.syncher.EntityDataAccessor
-import net.minecraft.network.syncher.EntityDataSerializers
-import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -51,10 +48,8 @@ open class HASharkEntity(
     entityType: EntityType<out HASharkEntity>,
     world: Level,
 ) : HAWaterAnimal(entityType, world), NeutralMob {
-
     open val isPassive: Boolean = true
     open val closePlayerAttack: Boolean = false
-
     var prevRoll: Float = 0f
     var currentRoll: Float = 0.0f
     private val factory = GeckoLibUtil.createInstanceCache(this)
@@ -138,11 +133,6 @@ open class HASharkEntity(
     override fun readAdditionalSaveData(compound: CompoundTag) {
         super.readAdditionalSaveData(compound)
         this.readPersistentAngerSaveData(this.level(), compound)
-    }
-
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(ATTEMPT_ATTACK, false)
     }
     //#endregion
 
@@ -274,34 +264,6 @@ open class HASharkEntity(
     }
     //#endregion
 
-    private fun getHandSwingDuration(): Int {
-        return 40
-    }
-
-    override fun updateSwingTime() {
-        val i = this.getHandSwingDuration()
-        if (this.swinging) {
-            ++this.swingTime
-            if (this.swingTime >= i) {
-                this.swingTime = 0
-                this.swinging = false
-            }
-        } else {
-            this.swingTime = 0
-        }
-
-        this.attackAnim = swingTime.toFloat() / i.toFloat()
-    }
-
-    override fun getAttackAnim(tickDelta: Float): Float {
-        var f = this.attackAnim - this.oAttackAnim
-        if (f < 0.0f) {
-            ++f
-        }
-
-        return this.oAttackAnim + f * tickDelta
-    }
-
     override fun doHurtTarget(target: Entity): Boolean {
         if (super.doHurtTarget(target)) {
             playSound(SoundEvents.FOX_BITE, 1.0F, 0.0F)
@@ -312,8 +274,6 @@ open class HASharkEntity(
     }
 
     companion object {
-        val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(HASharkEntity::class.java, EntityDataSerializers.BOOLEAN)
         val ANGER_TIME_RANGE: UniformInt = TimeUtil.rangeOfSeconds(10, 30)
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
 

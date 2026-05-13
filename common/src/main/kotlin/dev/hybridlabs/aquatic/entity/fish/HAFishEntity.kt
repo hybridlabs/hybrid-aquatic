@@ -7,9 +7,6 @@ import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
-import net.minecraft.network.syncher.EntityDataAccessor
-import net.minecraft.network.syncher.EntityDataSerializers
-import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -69,16 +66,9 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         getTargetConfig()?.addAvoidanceGoal(goalSelector, this)
     }
 
-    //#region Data
     override fun isVisuallySwimming(): Boolean {
         return this.isSwimming
     }
-
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(ATTEMPT_ATTACK, false)
-    }
-    //#endregion
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
         return null
@@ -172,10 +162,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         return 1
     }
 
-    private fun getHandSwingDuration(): Int {
-        return 40
-    }
-
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
         return dimensions.height * 0.5f
     }
@@ -237,30 +223,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         super.aiStep()
     }
 
-    override fun updateSwingTime() {
-        val i = this.getHandSwingDuration()
-        if (this.swinging) {
-            ++this.swingTime
-            if (this.swingTime >= i) {
-                this.swingTime = 0
-                this.swinging = false
-            }
-        } else {
-            this.swingTime = 0
-        }
-
-        this.attackAnim = swingTime.toFloat() / i.toFloat()
-    }
-
-    override fun getAttackAnim(tickDelta: Float): Float {
-        var f = this.attackAnim - this.oAttackAnim
-        if (f < 0.0f) {
-            ++f
-        }
-
-        return this.oAttackAnim + f * tickDelta
-    }
-
     override fun doHurtTarget(target: Entity): Boolean {
         if (super.doHurtTarget(target)) {
             playSound(SoundEvents.FOX_BITE, 1.0F, 1.0F)
@@ -272,9 +234,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
 
     @Suppress("DEPRECATION", "unused")
     companion object {
-        val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(HAFishEntity::class.java, EntityDataSerializers.BOOLEAN)
-
         val FLOP_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.flop")
 
         val BREEDING_INGREDIENT: Ingredient = Ingredient.of(

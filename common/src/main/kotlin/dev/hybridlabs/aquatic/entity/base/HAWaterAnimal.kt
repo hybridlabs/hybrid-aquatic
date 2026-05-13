@@ -37,6 +37,7 @@ abstract class HAWaterAnimal protected constructor(
     AgeableMob(entityType, level), GeoEntity {
     private var inLove = 0
     private var loveCause: UUID? = null
+    private var attackTick = 0
     var fromFishingNet = false
 
     open fun getTargetConfig(): MobTargetConfiguration? = null
@@ -197,6 +198,7 @@ abstract class HAWaterAnimal protected constructor(
         entityData.define(FEEDING, false)
         entityData.define(GRAZING, false)
         entityData.define(DIGGING, false)
+        entityData.define(ATTEMPT_ATTACK, false)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -206,6 +208,7 @@ abstract class HAWaterAnimal protected constructor(
         compound.putInt(MOISTNESS_KEY, moistness)
         compound.putBoolean("FromFishingNet", fromFishingNet)
         compound.putInt("InLove", this.inLove)
+        compound.putInt("AttackTick", this.attackTick)
         compound.putBoolean("Sitting", isSitting())
         compound.putBoolean("Feeding", isFeeding())
         this.setGrazing(compound.getBoolean("Grazing"))
@@ -224,6 +227,7 @@ abstract class HAWaterAnimal protected constructor(
         fromFishingNet = compound.getBoolean("FromFishingNet")
         this.inLove = compound.getInt("InLove")
         this.loveCause = if (compound.hasUUID("LoveCause")) compound.getUUID("LoveCause") else null
+        this.attackTick = compound.getInt("AttackTick")
         this.setSitting(compound.getBoolean("Sitting"))
         this.setFeeding(compound.getBoolean("Feeding"))
         this.setGrazing(compound.getBoolean("Grazing"))
@@ -456,6 +460,34 @@ abstract class HAWaterAnimal protected constructor(
         }
     //#endregion
 
+    private fun getHandSwingDuration(): Int {
+        return 40
+    }
+
+    override fun updateSwingTime() {
+        val i = this.getHandSwingDuration()
+        if (this.swinging) {
+            ++this.swingTime
+            if (this.swingTime >= i) {
+                this.swingTime = 0
+                this.swinging = false
+            }
+        } else {
+            this.swingTime = 0
+        }
+
+        this.attackAnim = swingTime.toFloat() / i.toFloat()
+    }
+
+    override fun getAttackAnim(tickDelta: Float): Float {
+        var f = this.attackAnim - this.oAttackAnim
+        if (f < 0.0f) {
+            ++f
+        }
+
+        return this.oAttackAnim + f * tickDelta
+    }
+
     companion object {
         val SIZE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.INT)
@@ -463,6 +495,8 @@ abstract class HAWaterAnimal protected constructor(
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.INT)
         val MOISTNESS: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.INT)
+        val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
         val SITTING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
         val FEEDING: EntityDataAccessor<Boolean> =

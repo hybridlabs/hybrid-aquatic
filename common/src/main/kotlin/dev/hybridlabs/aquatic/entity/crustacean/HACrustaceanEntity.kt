@@ -55,7 +55,6 @@ open class HACrustaceanEntity(
     open val canDance: Boolean,
 ) : HAWaterAnimal(type, world), GeoEntity {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    private var attackTick = 0
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -78,30 +77,6 @@ open class HACrustaceanEntity(
 
     private fun getHandSwingDuration(): Int {
         return 20
-    }
-
-    override fun updateSwingTime() {
-        val i = this.getHandSwingDuration()
-        if (this.swinging) {
-            ++this.swingTime
-            if (this.swingTime >= i) {
-                this.swingTime = 0
-                this.swinging = false
-            }
-        } else {
-            this.swingTime = 0
-        }
-
-        this.attackAnim = swingTime.toFloat() / i.toFloat()
-    }
-
-    override fun getAttackAnim(tickDelta: Float): Float {
-        var f = this.attackAnim - this.oAttackAnim
-        if (f < 0.0f) {
-            ++f
-        }
-
-        return this.oAttackAnim + f * tickDelta
     }
 
     override fun finalizeSpawn(
@@ -192,20 +167,17 @@ open class HACrustaceanEntity(
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(BURROWING, false)
-        entityData.define(ATTEMPT_ATTACK, false)
         entityData.define(SHELL_ITEM, ItemStack.EMPTY)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
         this.setBurrowing(compound.getBoolean("Burrowing"))
-        compound.putInt("AttackTick", this.attackTick)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         super.readAdditionalSaveData(compound)
         this.setBurrowing(compound.getBoolean("Burrowing"))
-        this.attackTick = compound.getInt("AttackTick")
     }
     //#endregion
 
