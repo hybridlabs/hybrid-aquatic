@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.base
 
-import dev.hybridlabs.aquatic.entity.ai.goal.DolphinAttackGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
@@ -54,7 +54,7 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(0, DolphinAttackGoal(this, 1.1, true))
+        goalSelector.addGoal(0, WaterAnimalAttackGoal(this, 1.1, true))
         goalSelector.addGoal(0, BreathAirGoal(this))
         goalSelector.addGoal(1, HurtByTargetGoal(this))
         goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))

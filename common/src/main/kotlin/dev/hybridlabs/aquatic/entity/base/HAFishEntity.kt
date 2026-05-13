@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.entity.ai.goal.AvoidEntityInWaterGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.FishAttackGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.FollowGlowingEntityGoal
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.world.WorldHelper
@@ -56,7 +56,7 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(0, FishAttackGoal(this, 1.1, true))
+        goalSelector.addGoal(0, WaterAnimalAttackGoal(this, 1.1, true))
         goalSelector.addGoal(0, FollowGlowingEntityGoal(this, 1.1, 4.0F, 8.0F))
         goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 10))
