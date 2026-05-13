@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.goal.BreathAirGoal
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.TemptGoal
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.item.ItemStack
@@ -55,6 +56,7 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
         super.registerGoals()
         goalSelector.addGoal(0, DolphinAttackGoal(this, 1.1, true))
         goalSelector.addGoal(0, BreathAirGoal(this))
+        goalSelector.addGoal(1, HurtByTargetGoal(this))
         goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 7.0))
         goalSelector.addGoal(2, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
