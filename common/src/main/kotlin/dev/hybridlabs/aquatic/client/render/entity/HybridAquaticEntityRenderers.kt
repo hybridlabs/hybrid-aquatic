@@ -809,6 +809,12 @@ object HybridAquaticEntityRenderers {
             HAEntityTypes.HYPNAUTILUS,
             ::HypnautilusEntityRenderer
         )
+
+    val BEAKLING =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.BEAKLING,
+            ::BeaklingEntityRenderer
+        )
     //endregion
 
     val DEPTH_CHARGE =

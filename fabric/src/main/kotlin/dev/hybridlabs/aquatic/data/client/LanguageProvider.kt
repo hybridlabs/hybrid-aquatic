@@ -804,6 +804,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAEntityTypes.KARCINOMA.get() to "Karcinoma",
             HAEntityTypes.SHELL_BEAST.get() to "Shell Beast",
             HAEntityTypes.HYPNAUTILUS.get() to "Hypnautilus",
+            HAEntityTypes.BEAKLING.get() to "Beakling",
             HAEntityTypes.DUNGENESS_CRAB.get() to "Dungeness Crab",
             HAEntityTypes.FIDDLER_CRAB.get() to "Fiddler Crab",
             HAEntityTypes.HERMIT_CRAB.get() to "Hermit Crab",

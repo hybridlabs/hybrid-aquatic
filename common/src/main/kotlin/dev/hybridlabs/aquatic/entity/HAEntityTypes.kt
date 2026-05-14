@@ -964,6 +964,13 @@ object HAEntityTypes {
         EntityDimensions.fixed(0.8f, 0.8f),
         HypnautilusEntity::createMobAttributes
     )
+
+    val BEAKLING = registerMinion(
+        "beakling",
+        ::BeaklingEntity,
+        EntityDimensions.fixed(0.8f, 0.8f),
+        BeaklingEntity::createMobAttributes
+    )
     //#endregion
 
     //#region Misc Entities
