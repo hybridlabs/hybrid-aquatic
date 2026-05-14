@@ -57,22 +57,11 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(1, HypnautilusSyncedMovementGoal(this))
         goalSelector.addGoal(2, LookAtPlayerGoal(this, Player::class.java, 64.0f, 1f))
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true, null))
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, false, null))
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
-
-        controllers.add(
-            AnimationController(
-                this, "Hypnotize",
-                AnimationStateHandler { state: AnimationState<HypnautilusEntity> ->
-                    if (this.isHypnotizing())
-                        return@AnimationStateHandler state.setAndContinue(SPIN_ANIMATION)
-                    PlayState.STOP
-                }
-            )
-        )
 
         controllers.add(
             AnimationController(this, "Swim/Run/Idle", 4) { state ->
@@ -85,7 +74,19 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HA
                         state.setAndContinue(DefaultAnimations.IDLE)
                     }
                 }
-            })
+            }
+        )
+
+        controllers.add(
+            AnimationController(
+                this, "Hypnotize",
+                AnimationStateHandler { state: AnimationState<HypnautilusEntity> ->
+                    if (this.isHypnotizing())
+                        return@AnimationStateHandler state.setAndContinue(SPIN_ANIMATION)
+                    PlayState.STOP
+                }
+            )
+        )
     }
 
     fun isHypnotizing(): Boolean {

@@ -2,11 +2,11 @@ package dev.hybridlabs.aquatic.entity.miniboss
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.control.SmoothStrafeSwimmingMoveControl
+import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastRangedAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity.Companion.SUMMONING
-import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -24,7 +24,6 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
-import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
@@ -38,11 +37,13 @@ import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.`object`.PlayState
 import java.lang.ref.WeakReference
-import java.util.*
 import java.util.Collections.synchronizedList
 import java.util.function.Predicate
-import kotlin.math.abs
 
 class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     HAMinibossEntity(type, world) {
@@ -244,6 +245,16 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(DefaultAnimations.genericSwimIdleController(this))
+        controllers.add(
+            AnimationController(
+                this, "Shoot", 8,
+                AnimationStateHandler { state: AnimationState<ShellBeastEntity> ->
+                    if (this.isCharging())
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.ATTACK_SHOOT)
+                    PlayState.STOP
+                }
+            )
+        )
     }
     //#endregion
 
@@ -328,138 +339,6 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 )
                 level().addFreshEntity(hypnautilus)
             }
-        }
-    }
-
-    class ShellBeastRangedAttackGoal(private val shellBeast: ShellBeastEntity) : Goal() {
-        var chargeTime: Int = 0
-        private var seeTime = 0
-        private var strafingClockwise = false
-        private var strafingBackwards = false
-        private var strafingTime = -1
-        private val strafeAmount = 0.20f
-
-        init {
-            this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
-        }
-
-        override fun canUse(): Boolean = shellBeast.target != null && !shellBeast.isSummoning()
-
-        override fun start() {
-            chargeTime = 0
-        }
-
-        override fun stop() {
-            shellBeast.setCharging(false)
-        }
-
-        override fun requiresUpdateEveryTick(): Boolean = true
-
-        override fun tick() {
-            val target = shellBeast.target ?: return
-
-            val distance = shellBeast.distanceToSqr(target.position())
-            val canSee = shellBeast.sensing.hasLineOfSight(target)
-            val seenBefore = seeTime > 0
-
-            if (canSee != seenBefore) {
-                seeTime = 0
-            }
-
-            if (canSee) seeTime++ else seeTime--
-
-            val yDelta = abs(shellBeast.y - target.y)
-
-            if (distance <= 4096.0 && yDelta <= 8.0 && chargeTime < 20 && seeTime >= 20) {
-                shellBeast.navigation.stop()
-                strafingTime++
-            } else {
-                if (distance >= 64)
-                    shellBeast.navigation.moveTo(target, 1.0)
-                strafingTime = -1
-            }
-
-            if (strafingTime >= 20) {
-                if (shellBeast.random.nextFloat() < 0.3f) {
-                    strafingClockwise = !strafingClockwise
-                }
-
-                if (distance <= 64) {
-                    strafingBackwards = true
-                } else if (shellBeast.random.nextFloat() < 0.3f) {
-                    strafingBackwards = !strafingBackwards
-                }
-                strafingTime = 0
-            }
-
-
-            if (strafingTime > -1) {
-                strafingBackwards = distance < 256 // 16**2
-                shellBeast.moveControl.strafe(
-                    if (strafingBackwards) -strafeAmount else strafeAmount,
-                    if (strafingClockwise) strafeAmount else -strafeAmount
-                )
-
-            }
-
-            shellBeast.lookAt(target, 5f, 5f)
-
-            val health = shellBeast.health / shellBeast.maxHealth
-
-            val bubbleCount = when {
-                health >= 0.75f -> 1
-                health >= 0.5f -> 2
-                else -> 3
-            }
-
-            if (distance < 4096.0 && canSee) {
-                val level = shellBeast.level()
-                chargeTime++
-
-                val canShootBubble =
-                    (chargeTime == 20) ||
-                            (chargeTime == 40 && bubbleCount >= 2) ||
-                            (chargeTime == 60 && bubbleCount >= 3)
-
-                if (canShootBubble) {
-                    val view = shellBeast.getViewVector(1.0f)
-
-                    val dxFire = target.x - (shellBeast.x + view.x * 4.0)
-                    val dyFire = target.getY(0.5) - (0.5 + shellBeast.getY(0.5))
-                    val dzFire = target.z - (shellBeast.z + view.z * 4.0)
-
-                    shellBeast.playSound(
-                        HASoundEvents.SHELL_BEAST_SHOOT.get(),
-                        1.0f,
-                        1.0f
-                    )
-
-                    val cavitationBubble = CavitationBubbleEntity(
-                        level,
-                        shellBeast,
-                        dxFire,
-                        dyFire,
-                        dzFire,
-                        shellBeast.getExplosionPower()
-                    )
-
-                    cavitationBubble.setPos(
-                        shellBeast.x + view.x * 4.0,
-                        shellBeast.getY(0.5) - 0.3,
-                        shellBeast.z + view.z * 4.0
-                    )
-
-                    level.addFreshEntity(cavitationBubble)
-                }
-
-                if (chargeTime == 60) {
-                    chargeTime = -60
-                }
-            } else if (chargeTime > 0) {
-                chargeTime--
-            }
-
-            shellBeast.setCharging(chargeTime > 10)
         }
     }
 }

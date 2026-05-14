@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.entity.miniboss.HypnautilusEntity
-import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.world.entity.ai.goal.Goal
 
 class HypnotizeTargetGoal(
@@ -24,7 +23,7 @@ class HypnotizeTargetGoal(
     override fun start() {
         hypnosisCooldown = this.hypnautilus.tickCount + (10 * 20 + this.hypnautilus.getRandom().nextInt(10) * 20)
         hypnautilus.navigation.stop()
-        hypnosisTime = 30
+        hypnosisTime = 60
         hypnautilus.startHypnotizing()
     }
 
@@ -45,11 +44,6 @@ class HypnotizeTargetGoal(
             target.x,
             target.eyeY,
             target.z
-        )
-
-        target.lookAt(
-            EntityAnchorArgument.Anchor.EYES,
-            hypnautilus.eyePosition
         )
     }
 }
