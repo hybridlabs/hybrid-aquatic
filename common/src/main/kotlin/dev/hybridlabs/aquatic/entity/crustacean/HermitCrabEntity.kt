@@ -49,15 +49,15 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
         goalSelector.addGoal(1, WaterAnimalFleeFromEntityGoal(this, SmallTNTEntity::class.java, 15.0, 0.3, 0.75))
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        if (hasShell) nbt.put("ShellItem", shellItem.save(CompoundTag()))
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        if (hasShell) compound.put("ShellItem", shellItem.save(CompoundTag()))
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
         if (hasShell) {
-            val shellItemNBT = nbt.getCompound("ShellItem")
+            val shellItemNBT = compound.getCompound("ShellItem")
             shellItem = if (shellItemNBT.isEmpty) Items.NAUTILUS_SHELL.defaultInstance else ItemStack.of(shellItemNBT)
         }
     }

@@ -9,12 +9,7 @@ import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.entity.EntityDimensions
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.Pose
-import net.minecraft.world.entity.SpawnGroupData
-import net.minecraft.world.entity.VariantHolder
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -116,14 +111,14 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
         super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
     //#endregion
 

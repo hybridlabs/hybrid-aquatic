@@ -132,16 +132,16 @@ class DecoratorCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world:
         super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        nbt.putInt("CoralTimer", coralTimer)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        compound.putInt("CoralTimer", coralTimer)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        this.coralTimer = nbt.getInt("CoralTimer")
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        this.coralTimer = compound.getInt("CoralTimer")
+        super.readAdditionalSaveData(compound)
     }
     //#endregion
 
