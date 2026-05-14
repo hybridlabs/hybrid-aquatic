@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal
+import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.BlockPathTypes
@@ -25,6 +26,7 @@ class KarcinogenEntity(type: EntityType<out HAMinionEntity>, world: Level) :
 
     override fun registerGoals() {
         goalSelector.addGoal(0, LeapAtTargetGoal(this, 0.4f))
+        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.2, 16.0F))
         super.registerGoals()
     }
 

@@ -18,8 +18,9 @@ import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
-
+import software.bernie.geckolib.core.`object`.PlayState
 
 class KarcinomaEntity(type: EntityType<out HAMinionEntity>, world: Level) :
     HAMinionEntity(type, world) {
@@ -36,28 +37,26 @@ class KarcinomaEntity(type: EntityType<out HAMinionEntity>, world: Level) :
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
         controllers.add(
-            AnimationController(this, "Swim/Run/Idle", 4) { state ->
-                when {
-                    isInWater && isSprinting && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.RUN)
-                    }
-
-                    isInWater && state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.SWIM)
-                    }
-
-                    isInWater && !state.isMoving -> {
-                        state.setAndContinue(DefaultAnimations.IDLE)
-                    }
-
-                    else -> {
-                        state.setAndContinue(FLOP_ANIMATION)
-                    }
-                }
+            AnimationController(this, "Run/Swim/Idle", 4) {
+                    state: AnimationState<KarcinomaEntity> ->
+                if (this.isInWaterOrBubble && state.isMoving) state.setAndContinue(
+                    if (this.isSprinting) DefaultAnimations.RUN else DefaultAnimations.SWIM)
+                else state.setAndContinue(DefaultAnimations.SWIM)
             }
         )
+
+        controllers.add(
+            AnimationController(this, "Flop", 4) { state ->
+                if (!this.isInWaterOrBubble) {
+                    return@AnimationController state.setAndContinue(FLOP_ANIMATION)
+                }
+
+                PlayState.STOP
+            }
+        )
+
+        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
 
     override fun travel(travelVector: Vec3) {

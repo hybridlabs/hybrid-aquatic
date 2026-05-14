@@ -11,7 +11,6 @@ import net.minecraft.world.Difficulty
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
-import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
@@ -75,7 +74,6 @@ abstract class HAMinionEntity(type: EntityType<out Monster>, world: Level) :
     override fun registerGoals() {
         goalSelector.addGoal(0, MinionAttackGoal(this, 0.5, true))
         targetSelector.addGoal(0, MinionCopyOwnerTargetGoal(this))
-        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.2, 16.0F))
         goalSelector.addGoal(4, RandomStrollGoal(this, 0.5))
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 8.0f))
         goalSelector.addGoal(5, RandomLookAroundGoal(this))
