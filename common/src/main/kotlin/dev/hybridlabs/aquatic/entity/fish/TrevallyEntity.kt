@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.FollowCreatureGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowCreatureGoal
 import dev.hybridlabs.aquatic.entity.base.HADolphinEntity
 import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
 import dev.hybridlabs.aquatic.entity.base.HASirenianEntity
@@ -21,11 +21,11 @@ class TrevallyEntity(type: EntityType<out TrevallyEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, FollowCreatureGoal(this, HASharkEntity::class.java, 1.5, 4.0F, 16.0F))
-        goalSelector.addGoal(1, FollowCreatureGoal(this, HADolphinEntity::class.java, 1.5, 4.0F, 16.0F))
-        goalSelector.addGoal(1, FollowCreatureGoal(this, HASirenianEntity::class.java, 1.5, 4.0F, 16.0F))
-        goalSelector.addGoal(1, FollowCreatureGoal(this, Dolphin::class.java, 1.5, 4.0F, 16.0F))
-        goalSelector.addGoal(1, FollowCreatureGoal(this, Turtle::class.java, 1.5, 4.0F, 16.0F))
+        goalSelector.addGoal(1, WaterAnimalFollowCreatureGoal(this, HASharkEntity::class.java, 1.5, 4.0F, 16.0F))
+        goalSelector.addGoal(1, WaterAnimalFollowCreatureGoal(this, HADolphinEntity::class.java, 1.5, 4.0F, 16.0F))
+        goalSelector.addGoal(1, WaterAnimalFollowCreatureGoal(this, HASirenianEntity::class.java, 1.5, 4.0F, 16.0F))
+        goalSelector.addGoal(1, WaterAnimalFollowCreatureGoal(this, Dolphin::class.java, 1.5, 4.0F, 16.0F))
+        goalSelector.addGoal(1, WaterAnimalFollowCreatureGoal(this, Turtle::class.java, 1.5, 4.0F, 16.0F))
     }
 
     companion object {

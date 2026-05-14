@@ -8,7 +8,7 @@ import net.minecraft.world.level.pathfinder.Path
 import net.minecraft.world.phys.Vec3
 import java.util.*
 
-class FleeFromEntityGoal<E: Entity> (
+class WaterAnimalFleeFromEntityGoal<E: Entity> (
     val pathfinderMob: PathfinderMob,
     val entityClassToAvoid: Class<E>,
     val maxDistance: Double,

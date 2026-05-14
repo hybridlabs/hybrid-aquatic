@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.ai.goal.FleeFromEntityGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFleeFromEntityGoal
 import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
 import dev.hybridlabs.aquatic.item.HAItems
@@ -45,8 +45,8 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
     override fun registerGoals() {
         super.registerGoals()
 
-        goalSelector.addGoal(1, FleeFromEntityGoal(this, PrimedTnt::class.java, 15.0, 0.3, 0.75))
-        goalSelector.addGoal(1, FleeFromEntityGoal(this, SmallTNTEntity::class.java, 15.0, 0.3, 0.75))
+        goalSelector.addGoal(1, WaterAnimalFleeFromEntityGoal(this, PrimedTnt::class.java, 15.0, 0.3, 0.75))
+        goalSelector.addGoal(1, WaterAnimalFleeFromEntityGoal(this, SmallTNTEntity::class.java, 15.0, 0.3, 0.75))
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

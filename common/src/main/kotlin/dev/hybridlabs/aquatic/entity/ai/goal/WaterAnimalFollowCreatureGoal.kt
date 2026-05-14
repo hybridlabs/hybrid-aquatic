@@ -5,7 +5,7 @@ import net.minecraft.world.entity.PathfinderMob
 import net.minecraft.world.entity.ai.goal.Goal
 import java.util.*
 
-internal class FollowCreatureGoal<T : LivingEntity>(
+internal class WaterAnimalFollowCreatureGoal<T : LivingEntity>(
     private val mob: PathfinderMob,
     private val targetClass: Class<T>,
     private val speed: Double,
