@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.entity.base
 
-import dev.hybridlabs.aquatic.entity.ai.goal.MinionAttackGoal
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -72,7 +71,6 @@ abstract class HAMinionEntity(type: EntityType<out Monster>, world: Level) :
     //#endregion
 
     override fun registerGoals() {
-        goalSelector.addGoal(0, MinionAttackGoal(this, 0.5, true))
         targetSelector.addGoal(0, MinionCopyOwnerTargetGoal(this))
         goalSelector.addGoal(4, RandomStrollGoal(this, 0.5))
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 8.0f))

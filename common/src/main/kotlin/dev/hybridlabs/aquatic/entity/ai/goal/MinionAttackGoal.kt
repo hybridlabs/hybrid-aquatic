@@ -8,11 +8,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.pathfinder.Path
-import java.util.EnumSet
+import java.util.*
 import kotlin.math.max
 
 open class MinionAttackGoal(
-    private val minion: HAMinionEntity,
+    protected val minion: HAMinionEntity,
     private val speedMultiplier: Double = 1.0,
     private val followingTargetEvenIfNotSeen: Boolean,
 ) :
@@ -32,7 +32,6 @@ open class MinionAttackGoal(
     }
 
     override fun canUse(): Boolean {
-
         val i = minion.level().gameTime
         if (i - this.lastCanUseCheck < 20L) {
             return false
@@ -148,10 +147,10 @@ open class MinionAttackGoal(
     }
 
     private fun resetAttackCooldown() {
-        this.ticksUntilNextAttack = this.adjustedTickDelay(10)
+        this.ticksUntilNextAttack = this.adjustedTickDelay(20)
     }
 
     protected open fun getAttackReachSqr(attackTarget: LivingEntity): Double {
-        return (minion.bbWidth * 1.75f * minion.bbWidth * 1.75f + attackTarget.bbWidth).toDouble()
+        return (minion.bbWidth * 2.0f * minion.bbWidth * 2.0f + attackTarget.bbWidth).toDouble()
     }
 }

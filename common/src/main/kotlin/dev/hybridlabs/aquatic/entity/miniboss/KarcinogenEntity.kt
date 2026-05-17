@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.entity.ai.goal.MinionAttackGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.sounds.SoundEvent
@@ -26,7 +27,8 @@ class KarcinogenEntity(type: EntityType<out HAMinionEntity>, world: Level) :
 
     override fun registerGoals() {
         goalSelector.addGoal(0, LeapAtTargetGoal(this, 0.4f))
-        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.2, 16.0F))
+        goalSelector.addGoal(0, MinionAttackGoal(this, 0.6, true))
+        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.0, 16.0F))
         super.registerGoals()
     }
 

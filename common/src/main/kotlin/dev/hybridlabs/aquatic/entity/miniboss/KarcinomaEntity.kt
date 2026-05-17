@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.entity.ai.goal.MinionAttackGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.sounds.SoundEvent
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
+import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
@@ -33,6 +35,8 @@ class KarcinomaEntity(type: EntityType<out HAMinionEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(0, MinionAttackGoal(this, 0.6, true))
+        goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.0, 16.0F))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
     }
 
