@@ -43,6 +43,10 @@ object HASoundEvents {
     val HYPNAUTILUS_HURT = register("entity.hypnautilus.hurt")
     val HYPNAUTILUS_DIE = register("entity.hypnautilus.die")
 
+    val BEAKLING_AMBIENT = register("entity.beakling.ambient")
+    val BEAKLING_HURT = register("entity.beakling.hurt")
+    val BEAKLING_DIE = register("entity.beakling.die")
+
     val OMINOUS_CONCH_BLOWS = register("item.ominous_conch.blows")
 
     private fun register(id: String, range: Float = -1.0f): RegistryObject<SoundEvent> {

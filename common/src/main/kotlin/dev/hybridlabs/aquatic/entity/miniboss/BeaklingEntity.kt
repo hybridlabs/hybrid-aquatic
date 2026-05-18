@@ -89,15 +89,15 @@ class BeaklingEntity(type: EntityType<out HAMinionEntity>, world: Level) :
 
     //#region SFX
     override fun getAmbientSound(): SoundEvent {
-        return HASoundEvents.KARCINOMA_AMBIENT.get()
+        return HASoundEvents.BEAKLING_AMBIENT.get()
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return HASoundEvents.KARCINOMA_HURT.get()
+        return HASoundEvents.BEAKLING_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return HASoundEvents.KARCINOMA_DIE.get()
+        return HASoundEvents.BEAKLING_DIE.get()
     }
     //#endregion
 

@@ -56,6 +56,10 @@ class SoundProvider(
             HASoundEvents.HYPNAUTILUS_DIE to SoundEvents.TURTLE_EGG_CRACK,
             HASoundEvents.HYPNAUTILUS_HURT to SoundEvents.TURTLE_EGG_CRACK,
 
+            HASoundEvents.BEAKLING_AMBIENT to CommonClass.locate("entity/beakling_ambient"),
+            HASoundEvents.BEAKLING_DIE to SoundEvents.TURTLE_EGG_CRACK,
+            HASoundEvents.BEAKLING_HURT to SoundEvents.TURTLE_EGG_CRACK,
+
         ).forEach { (soundEvent, soundPath) ->
             exporter.add(soundEvent.get(), SoundTypeBuilder.of(soundEvent.get())
                 .subtitle("subtitles.${soundEvent.get().location.namespace}.${soundEvent.get().location.path}")

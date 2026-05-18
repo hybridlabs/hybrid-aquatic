@@ -1,4 +1,28 @@
 {
+  "entity.beakling.ambient": {
+    "sounds": [
+      "hybrid-aquatic:entity/beakling_ambient"
+    ],
+    "subtitle": "subtitles.hybrid-aquatic.entity.beakling.ambient"
+  },
+  "entity.beakling.die": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.turtle.egg_crack"
+      }
+    ],
+    "subtitle": "subtitles.hybrid-aquatic.entity.beakling.die"
+  },
+  "entity.beakling.hurt": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.turtle.egg_crack"
+      }
+    ],
+    "subtitle": "subtitles.hybrid-aquatic.entity.beakling.hurt"
+  },
   "entity.dugong.ambient": {
     "sounds": [
       "hybrid-aquatic:entity/sirenian_ambient"
