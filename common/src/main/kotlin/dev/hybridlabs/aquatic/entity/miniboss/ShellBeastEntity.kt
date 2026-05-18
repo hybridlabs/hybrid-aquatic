@@ -378,7 +378,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
     private fun summonBeaklings() {
         val random = this.random
-        val count = 5
+        val count = 3
 
         for (i in 0 until count) {
             val offsetX = (random.nextDouble() - 0.5) * 6.0
