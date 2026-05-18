@@ -37,7 +37,8 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
 
-class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) : HAMinionEntity(type, world) {
+class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
+    HAMinionEntity(type, world) {
     var beastPosition = 0
     val beastDistance = 5.0
     var prevOwner: UUID? = null

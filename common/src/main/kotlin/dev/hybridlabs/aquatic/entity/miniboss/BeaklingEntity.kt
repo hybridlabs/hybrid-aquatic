@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
 import dev.hybridlabs.aquatic.entity.ai.goal.MinionAttackGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowCreatureGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.sounds.SoundEvent
@@ -37,6 +38,7 @@ class BeaklingEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         super.registerGoals()
         goalSelector.addGoal(0, MinionAttackGoal(this, 0.6, true))
         goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.0, 16.0F))
+        goalSelector.addGoal(3, WaterAnimalFollowCreatureGoal(this, ShellBeastEntity::class.java, 1.5, 4.0F, 8.0F))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
     }
 
