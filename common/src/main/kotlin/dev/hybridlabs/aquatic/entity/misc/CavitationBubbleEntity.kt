@@ -1,10 +1,14 @@
 package dev.hybridlabs.aquatic.entity.misc
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import net.minecraft.core.particles.ParticleOptions
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile
+import net.minecraft.world.entity.projectile.ProjectileUtil
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.EntityHitResult
@@ -13,7 +17,6 @@ import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.util.GeckoLibUtil
 
 class CavitationBubbleEntity : AbstractHurtingProjectile,
@@ -36,13 +39,49 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         this.explosionPower = explosionPower
     }
 
+    override fun getTrailParticle(): ParticleOptions {
+        return ParticleTypes.BUBBLE
+    }
+
     override fun isOnFire(): Boolean {
         return false
     }
 
+    override fun shouldBurn(): Boolean {
+        return false
+    }
+
     override fun tick() {
-        super.tick()
-        this.updateRotation()
+        val entity = this.owner
+        if (this.level().isClientSide || (entity == null || !entity.isRemoved) && this.level()
+                .hasChunkAt(this.blockPosition())
+        ) {
+            super.tick()
+            if (this.shouldBurn()) {
+                this.setSecondsOnFire(1)
+            }
+
+            val hitresult = ProjectileUtil.getHitResultOnMoveVector(
+                this
+            ) { target: Entity -> this.canHitEntity(target) }
+            if (hitresult.type != HitResult.Type.MISS) {
+                this.onHit(hitresult)
+            }
+
+            this.checkInsideBlocks()
+            val vec3 = this.deltaMovement
+            val d0 = this.x + vec3.x
+            val d1 = this.y + vec3.y
+            val d2 = this.z + vec3.z
+            ProjectileUtil.rotateTowardsMovement(this, 0.2f)
+            val f = this.inertia
+
+            this.deltaMovement = vec3.add(this.xPower, this.yPower, this.zPower).scale(f.toDouble())
+            this.level().addParticle(this.trailParticle, d0, d1 + 0.5, d2, 0.0, 0.0, 0.0)
+            this.setPos(d0, d1, d2)
+        } else {
+            this.discard()
+        }
 
         if (!this.level().isClientSide) {
             if (!isInWaterOrBubble) {
@@ -93,11 +132,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(
-            AnimationController(this, "Cavitation Bubble Controller", 0) { state ->
-                state.setAndContinue(DefaultAnimations.RUN)
-            }
-        )
+        controllers.add(DefaultAnimations.genericSwimIdleController(this))
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache? {

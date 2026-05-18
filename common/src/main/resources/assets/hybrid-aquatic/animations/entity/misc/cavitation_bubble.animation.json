@@ -11,6 +11,48 @@
 					"rotation": ["query.anim_time*180", 0, 0]
 				}
 			}
+		},
+		"misc.idle": {
+			"loop": true,
+			"bones": {
+				"outer_bubble": {
+					"rotation": ["Math.cos(query.anim_time * 90)*-2.5", "Math.sin(query.anim_time * 90)*5", 0],
+					"position": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
+				},
+				"inner_bubble": {
+					"rotation": ["Math.cos(query.anim_time * 90)*-2.5", "Math.sin(query.anim_time * 90)*5", 0],
+					"position": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
+				}
+			}
+		},
+		"move.swim": {
+			"loop": true,
+			"bones": {
+				"outer_bubble": {
+					"rotation": ["query.anim_time*540", 0, 0]
+				},
+				"inner_bubble": {
+					"rotation": ["query.anim_time*180", 0, 0]
+				}
+			}
+		},
+		"misc.explode": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 2,
+			"bones": {
+				"outer_bubble": {
+					"scale": {
+						"0.0": [1, 1, 1],
+						"2.0": [1.5, 1.5, 1.5]
+					}
+				},
+				"inner_bubble": {
+					"scale": {
+						"0.0": [1, 1, 1],
+						"2.0": [1.5, 1.5, 1.5]
+					}
+				}
+			}
 		}
 	}
 }
