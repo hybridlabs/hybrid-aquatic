@@ -8,20 +8,19 @@ class ShellBeastSummonBeaklingsGoal(
 ) : Goal() {
 
     override fun canUse(): Boolean {
-        val health = shellBeast.health / shellBeast.maxHealth
-
         val canSummonBeaklings =
-            health >= 0.75f && shellBeast.isUnderWater
+            shellBeast.health <= shellBeast.maxHealth * 0.75f &&
+                    shellBeast.isUnderWater
 
         return canSummonBeaklings &&
                 !shellBeast.isSummoning() &&
-                shellBeast.summonCooldown <= 0 &&
+                shellBeast.beaklingCooldown <= 0 &&
                 shellBeast.target != null
     }
 
     override fun start() {
         shellBeast.navigation.stop()
-        shellBeast.startSummoning()
+        shellBeast.startSummoning(ShellBeastEntity.SummonType.BEAKLINGS)
     }
 
     override fun canContinueToUse(): Boolean {

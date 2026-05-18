@@ -90,10 +90,44 @@ class OminousConchItem(
 
         if (server.tickCount >= startTick + SUMMON_DELAY_TICKS) {
 
-            val entity = HAEntityTypes.SHELL_BEAST.get().create(level)
-            entity?.moveTo(pos.x + 0.5, pos.y.toDouble(), pos.z + 0.5, 0f, 0f)
-            if (entity != null) {
-                level.addFreshEntity(entity)
+            val shellBeast = HAEntityTypes.SHELL_BEAST.get().create(level)
+
+            if (shellBeast != null) {
+
+                shellBeast.moveTo(
+                    pos.x + 0.5,
+                    pos.y.toDouble(),
+                    pos.z + 0.5,
+                    0f,
+                    0f
+                )
+
+                level.addFreshEntity(shellBeast)
+
+                val random = level.random
+
+                for (i in 0 until 6) {
+
+                    val offsetX = (random.nextDouble() - 0.5) * 8.0
+                    val offsetZ = (random.nextDouble() - 0.5) * 8.0
+
+                    val beakling = HAEntityTypes.BEAKLING.get().create(level)
+
+                    if (beakling != null) {
+
+                        beakling.moveTo(
+                            shellBeast.x + offsetX,
+                            shellBeast.y,
+                            shellBeast.z + offsetZ,
+                            random.nextFloat() * 360f,
+                            0f
+                        )
+
+                        beakling.setOwner(shellBeast)
+
+                        level.addFreshEntity(beakling)
+                    }
+                }
             }
 
         } else {

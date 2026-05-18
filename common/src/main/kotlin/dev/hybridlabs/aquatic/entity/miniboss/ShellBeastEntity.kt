@@ -50,7 +50,9 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     HAMinibossEntity(type, world) {
     private var explosionPower = 0
     private var summonTimer: Int = 0
-    var summonCooldown: Int = 0
+    var hypnautilusCooldown: Int = 0
+    var beaklingCooldown: Int = 0
+    private var summonType = SummonType.NONE
     private val minions = synchronizedList(mutableListOf<WeakReference<Mob>>())
 
     fun getExplosionPower(): Int {
@@ -186,7 +188,8 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         compound.putByte("ExplosionPower", this.explosionPower.toByte())
         compound.putBoolean("Summoning", isSummoning())
         compound.putInt("SummonTimer", summonTimer)
-        compound.putInt("SummonCooldown", summonCooldown)
+        compound.putInt("BeaklingCooldown", beaklingCooldown)
+        compound.putInt("HypnautilusCooldown", hypnautilusCooldown)
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
@@ -200,7 +203,8 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
         this.setSummoning(compound.getBoolean("Summoning"))
         this.summonTimer = compound.getInt("SummonTimer")
-        this.summonCooldown = compound.getInt("SummonCooldown")
+        this.beaklingCooldown = compound.getInt("BeaklingCooldown")
+        this.hypnautilusCooldown = compound.getInt("HypnautilusCooldown")
 
         super.readAdditionalSaveData(compound)
     }
@@ -222,15 +226,19 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
     override fun aiStep() {
 
-        if (summonCooldown > 0) summonCooldown--
+        if (beaklingCooldown > 0) beaklingCooldown--
+        if (hypnautilusCooldown > 0) hypnautilusCooldown--
 
         if (isSummoning()) {
             summonTimer--
 
             if (summonTimer == 0) {
                 if (this.isUnderWater) {
-                    summonHypnautilus()
-                    summonBeaklings()
+                    when (summonType) {
+                        SummonType.BEAKLINGS -> summonBeaklings()
+                        SummonType.HYPNAUTILUS -> summonHypnautilus()
+                        else -> {}
+                    }
                 }
                 stopSummoning()
             }
@@ -274,6 +282,13 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
         private val DATA_IS_CHARGING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(ShellBeastEntity::class.java, EntityDataSerializers.BOOLEAN)
+
+    }
+
+    enum class SummonType {
+        NONE,
+        BEAKLINGS,
+        HYPNAUTILUS
     }
 
     // Scan the entire cube of targetDistance, not just a slice like NearestAttackableTargetGoal
@@ -297,18 +312,34 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         entityData.set(SUMMONING, summon)
     }
 
-    fun startSummoning() {
+    fun startSummoning(type: SummonType) {
+        summonType = type
+
         setSummoning(true)
         playSound(SoundEvents.EVOKER_PREPARE_ATTACK, 1.0f, 1.0f)
+
         summonTimer = 30
-        summonCooldown = 480
+
         navigation.stop()
     }
 
     fun stopSummoning() {
         setSummoning(false)
+
+        when (summonType) {
+            SummonType.BEAKLINGS -> {
+                beaklingCooldown = 300
+            }
+
+            SummonType.HYPNAUTILUS -> {
+                hypnautilusCooldown = 800
+            }
+
+            else -> {}
+        }
+
+        summonType = SummonType.NONE
         summonTimer = 0
-        summonCooldown = 600
     }
 
     fun addMinion(minion: HypnautilusEntity) {
@@ -364,7 +395,6 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                     0f
                 )
                 beakling.setOwner(this)
-                beakling.setLimitedLife(400)
                 level().addFreshEntity(beakling)
             }
         }

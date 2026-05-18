@@ -9,19 +9,19 @@ class ShellBeastSummonHypnautilusGoal(
 
     override fun canUse(): Boolean {
         val canSummonHypnautilus =
-            shellBeast.health <= shellBeast.maxHealth / 2.0 &&
+            shellBeast.health <= shellBeast.maxHealth * 0.5f &&
                     shellBeast.isUnderWater &&
                     !shellBeast.hasMinions()
 
         return canSummonHypnautilus &&
                 !shellBeast.isSummoning() &&
-                shellBeast.summonCooldown <= 0 &&
+                shellBeast.hypnautilusCooldown <= 0 &&
                 shellBeast.target != null
     }
 
     override fun start() {
         shellBeast.navigation.stop()
-        shellBeast.startSummoning()
+        shellBeast.startSummoning(ShellBeastEntity.SummonType.HYPNAUTILUS)
     }
 
     override fun canContinueToUse(): Boolean {
