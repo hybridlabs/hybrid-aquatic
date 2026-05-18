@@ -27,6 +27,7 @@ import software.bernie.geckolib.core.`object`.PlayState
 
 class BeaklingEntity(type: EntityType<out HAMinionEntity>, world: Level) :
     HAMinionEntity(type, world) {
+
     init {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, true)
