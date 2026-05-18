@@ -191,7 +191,6 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(DefaultAnimations.genericSwimIdleController(this))
-        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE))
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
