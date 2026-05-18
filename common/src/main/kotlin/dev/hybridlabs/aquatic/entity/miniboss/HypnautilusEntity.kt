@@ -62,8 +62,6 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
-
         controllers.add(
             AnimationController(this, "Swim/Run/Idle", 4) { state ->
                 when {
