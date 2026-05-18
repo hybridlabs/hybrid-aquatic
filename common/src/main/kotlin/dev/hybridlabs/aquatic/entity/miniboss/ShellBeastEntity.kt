@@ -3,7 +3,8 @@ package dev.hybridlabs.aquatic.entity.miniboss
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.control.SmoothStrafeSwimmingMoveControl
 import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastRangedAttackGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonBeaklingsGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonHypnautilusGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity.Companion.SUMMONING
@@ -101,7 +102,8 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         ServerBossEvent(displayName, BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.NOTCHED_6)
 
     override fun registerGoals() {
-        goalSelector.addGoal(1, ShellBeastSummonGoal(this))
+        goalSelector.addGoal(1, ShellBeastSummonBeaklingsGoal(this))
+        goalSelector.addGoal(1, ShellBeastSummonHypnautilusGoal(this))
         goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(1, ShellBeastRangedAttackGoal(this))
@@ -228,6 +230,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
             if (summonTimer == 0) {
                 if (this.isUnderWater) {
                     summonHypnautilus()
+                    summonBeaklings()
                 }
                 stopSummoning()
             }
@@ -338,6 +341,31 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                     0f
                 )
                 level().addFreshEntity(hypnautilus)
+            }
+        }
+    }
+
+    private fun summonBeaklings() {
+        val random = this.random
+        val count = 5
+
+        for (i in 0 until count) {
+            val offsetX = (random.nextDouble() - 0.5) * 6.0
+            val offsetZ = (random.nextDouble() - 0.5) * 6.0
+            val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
+
+            val beakling = HAEntityTypes.BEAKLING.get().create(level())
+            if (beakling != null) {
+                beakling.moveTo(
+                    spawnPos.x.toDouble() + 0.5,
+                    spawnPos.y.toDouble(),
+                    spawnPos.z.toDouble() + 0.5,
+                    random.nextFloat() * 360f,
+                    0f
+                )
+                beakling.setOwner(this)
+                beakling.setLimitedLife(400)
+                level().addFreshEntity(beakling)
             }
         }
     }
