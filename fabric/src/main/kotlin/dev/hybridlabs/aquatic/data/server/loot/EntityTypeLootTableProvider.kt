@@ -79,7 +79,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             ).pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HAItems.GIANT_NAUTILUS_SHELL.get())
+                        LootItem.lootTableItem(HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get())
                     ).build()
             )
         }

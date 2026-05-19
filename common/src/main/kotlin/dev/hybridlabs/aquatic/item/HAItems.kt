@@ -682,7 +682,7 @@ object HAItems {
     val DIVING_ARMOR_UPGRADE_TEMPLATE = register("diving_armor_upgrade_template") { Item(Item.Properties()) }
     val PEARL = register("pearl") { Item(Item.Properties()) }
     val BLACK_PEARL = register("black_pearl") { Item(Item.Properties()) }
-    val GIANT_NAUTILUS_SHELL = register("giant_nautilus_shell") { Item(Item.Properties()) }
+    val COMICALLY_LARGE_NAUTILUS_SHELL = register("comically_large_nautilus_shell") { Item(Item.Properties()) }
     val CUTTLEBONE = register("cuttlebone") { Item(Item.Properties()) }
     val FISH_FOOD = register("fish_food") { Item(Item.Properties()) }
 

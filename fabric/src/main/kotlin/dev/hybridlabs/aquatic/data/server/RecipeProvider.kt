@@ -139,13 +139,13 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .define('I', Items.IRON_INGOT)
             .define('B', Items.BARREL)
             .define('G', HAItems.GLOWSLIME.get())
-            .define('S', HAItems.GIANT_NAUTILUS_SHELL.get())
+            .define('S', HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get())
             .define('C', Items.CHEST)
             .define('F', Items.FURNACE)
             .define('W', ItemTags.WOOL)
             .unlockedBy(
                 "has_giant_nautilus_shell",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GIANT_NAUTILUS_SHELL.get())
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get())
             )
             .save(exporter)
 

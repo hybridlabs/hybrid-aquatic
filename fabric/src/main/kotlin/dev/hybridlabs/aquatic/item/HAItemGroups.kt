@@ -339,7 +339,7 @@ object HAItemGroups {
                 entries.accept(HAItems.SHARK_TOOTH.get())
                 entries.accept(HAItems.PEARL.get())
                 entries.accept(HAItems.BLACK_PEARL.get())
-                entries.accept(HAItems.GIANT_NAUTILUS_SHELL.get())
+                entries.accept(HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get())
                 entries.accept(HAItems.ARGONAUT.get())
                 entries.accept(HAItems.SULFUR.get())
                 entries.accept(HAItems.TUBE_SPONGE.get())

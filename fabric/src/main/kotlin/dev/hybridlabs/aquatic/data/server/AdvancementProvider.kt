@@ -617,7 +617,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
         val killShellBeastAdvancement = Advancement.Builder.advancement()
             .parent(ominousConchAdvancement)
             .display(
-                HAItems.GIANT_NAUTILUS_SHELL.get(),
+                HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get(),
                 Component.translatable("advancements.hybrid-aquatic.shell_beast.title"),
                 Component.translatable("advancements.hybrid-aquatic.shell_beast.description"),
                 ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
