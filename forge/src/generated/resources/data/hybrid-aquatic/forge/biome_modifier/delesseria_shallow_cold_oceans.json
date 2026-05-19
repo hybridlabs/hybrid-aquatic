@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid-aquatic:shallow_cold_oceans",
+  "features": "hybrid-aquatic:delesseria",
+  "step": "vegetal_decoration"
+}
