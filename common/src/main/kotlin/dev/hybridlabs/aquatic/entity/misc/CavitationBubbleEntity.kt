@@ -17,12 +17,19 @@ import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 class CavitationBubbleEntity : AbstractHurtingProjectile,
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
     private var explosionPower = 1
+    private var fuseDuration = -1
+    private val trapBubble = this.deltaMovement.lengthSqr() < 0.0025
 
     constructor(entityType: EntityType<out CavitationBubbleEntity?>, level: Level) : super(entityType, level)
 
@@ -86,14 +93,35 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         if (!this.level().isClientSide) {
             if (!isInWaterOrBubble) {
                 this.discard()
+                return
+            }
+
+            if (trapBubble) {
+                val nearbyPlayer = this.level().getNearestPlayer(this, 3.0)
+
+                if (nearbyPlayer != null) {
+                    if (fuseDuration < 0) {
+                        fuseDuration = 30
+                    } else {
+                        fuseDuration--
+
+                        if (fuseDuration <= 0) {
+                            explode()
+                        }
+                    }
+                } else {
+                    fuseDuration = -1
+                }
+            } else {
+                fuseDuration = -1
             }
         }
     }
 
-    override fun onHit(result: HitResult) {
-        super.onHit(result)
+    private fun explode() {
         if (!this.level().isClientSide) {
             val flag = this.level().gameRules.getBoolean(GameRules.RULE_MOBGRIEFING)
+
             this.level().explode(
                 this,
                 this.x,
@@ -103,8 +131,14 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
                 flag,
                 Level.ExplosionInteraction.MOB
             )
+
             this.discard()
         }
+    }
+
+    override fun onHit(result: HitResult) {
+        super.onHit(result)
+        explode()
     }
 
     override fun onHitEntity(result: EntityHitResult) {
@@ -133,9 +167,24 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(DefaultAnimations.genericSwimIdleController(this))
+
+        controllers.add(
+            AnimationController(
+                this, "Explode",
+                AnimationStateHandler { state: AnimationState<CavitationBubbleEntity> ->
+                    if (fuseDuration >= 0)
+                        return@AnimationStateHandler state.setAndContinue(EXPLODE_ANIMATION)
+                    PlayState.STOP
+                }
+            )
+        )
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache? {
         return animCache
+    }
+
+    companion object {
+        val EXPLODE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.explode")
     }
 }
