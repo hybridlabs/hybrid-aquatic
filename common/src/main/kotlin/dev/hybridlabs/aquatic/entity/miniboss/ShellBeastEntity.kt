@@ -256,10 +256,11 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(DefaultAnimations.genericSwimIdleController(this))
+        controllers.add(DefaultAnimations.genericSwimIdleController(this)
+            .transitionLength(8))
         controllers.add(
             AnimationController(
-                this, "Shoot", 8,
+                this, "Shoot", 4,
                 AnimationStateHandler { state: AnimationState<ShellBeastEntity> ->
                     if (this.isCharging())
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.ATTACK_SHOOT)
