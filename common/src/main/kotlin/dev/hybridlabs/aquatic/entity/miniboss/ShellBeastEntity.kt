@@ -41,6 +41,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
 import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import java.lang.ref.WeakReference
 import java.util.Collections.synchronizedList
@@ -266,6 +267,16 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 }
             )
         )
+        controllers.add(
+            AnimationController(
+                this, "Summon", 10,
+                AnimationStateHandler { state: AnimationState<ShellBeastEntity> ->
+                    if (this.isSummoning())
+                        return@AnimationStateHandler state.setAndContinue(SUMMON_ANIMATION)
+                    PlayState.STOP
+                }
+            )
+        )
     }
     //#endregion
 
@@ -279,6 +290,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 .add(Attributes.FOLLOW_RANGE, 64.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
         }
+        val SUMMON_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.summon")
 
         private val DATA_IS_CHARGING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(ShellBeastEntity::class.java, EntityDataSerializers.BOOLEAN)
