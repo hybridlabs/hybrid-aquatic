@@ -226,6 +226,10 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     }
 
     override fun aiStep() {
+        if (tickCount < 120) {
+            navigation.stop()
+            deltaMovement = Vec3.ZERO
+        }
 
         if (beaklingCooldown > 0) beaklingCooldown--
         if (hypnautilusCooldown > 0) hypnautilusCooldown--
@@ -256,8 +260,20 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
+            AnimationController(
+                this, "Spawning",
+                AnimationStateHandler { state: AnimationState<ShellBeastEntity> ->
+                    if (this.tickCount < 120)
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
+                    PlayState.STOP
+                }
+            )
+        )
+
         controllers.add(DefaultAnimations.genericSwimIdleController(this)
             .transitionLength(8))
+
         controllers.add(
             AnimationController(
                 this, "Shoot", 4,
@@ -268,6 +284,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 }
             )
         )
+
         controllers.add(
             AnimationController(
                 this, "Summon", 10,
@@ -394,16 +411,16 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         val count = 3
 
         for (i in 0 until count) {
-            val offsetX = (random.nextDouble() - 0.5) * 6.0
-            val offsetZ = (random.nextDouble() - 0.5) * 6.0
+            val offsetX = (random.nextDouble() - 0.5) * 1.0
+            val offsetZ = (random.nextDouble() - 0.5) * 1.0
             val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
 
             val beakling = HAEntityTypes.BEAKLING.get().create(level())
             if (beakling != null) {
                 beakling.moveTo(
-                    spawnPos.x.toDouble() + 0.5,
+                    spawnPos.x.toDouble(),
                     spawnPos.y.toDouble(),
-                    spawnPos.z.toDouble() + 0.5,
+                    spawnPos.z.toDouble(),
                     random.nextFloat() * 360f,
                     0f
                 )

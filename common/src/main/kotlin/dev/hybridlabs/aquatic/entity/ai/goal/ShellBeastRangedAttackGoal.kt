@@ -120,9 +120,9 @@ class ShellBeastRangedAttackGoal(private val shellBeast: ShellBeastEntity) : Goa
                 )
 
                 cavitationBubble.setPos(
-                    shellBeast.x + view.x * 4.0,
-                    shellBeast.getY(0.5) - 0.3,
-                    shellBeast.z + view.z * 4.0
+                    shellBeast.x + view.x * 3.5,
+                    shellBeast.getY(0.5),
+                    shellBeast.z + view.z * 3.5
                 )
 
                 level.addFreshEntity(cavitationBubble)

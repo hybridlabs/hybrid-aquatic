@@ -10,6 +10,7 @@ class ShellBeastSummonBeaklingsGoal(
     override fun canUse(): Boolean {
         val canSummonBeaklings =
             shellBeast.health <= shellBeast.maxHealth * 0.75f &&
+                    shellBeast.health > shellBeast.maxHealth * 0.5f &&
                     shellBeast.isUnderWater
 
         return canSummonBeaklings &&
