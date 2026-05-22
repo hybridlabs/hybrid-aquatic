@@ -11,7 +11,8 @@ class ShellBeastSummonBeaklingsGoal(
         val canSummonBeaklings =
             shellBeast.health <= shellBeast.maxHealth * 0.75f &&
                     shellBeast.health > shellBeast.maxHealth * 0.5f &&
-                    shellBeast.isUnderWater
+                    shellBeast.isUnderWater &&
+                    shellBeast.tickCount > 120
 
         return canSummonBeaklings &&
                 !shellBeast.isSummoning() &&

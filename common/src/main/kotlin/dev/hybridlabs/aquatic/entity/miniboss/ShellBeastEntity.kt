@@ -260,26 +260,21 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(
-            AnimationController(
-                this, "Spawning",
-                AnimationStateHandler { state: AnimationState<ShellBeastEntity> ->
-                    if (this.tickCount < 120)
-                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
-                    PlayState.STOP
-                }
-            )
-        )
 
         controllers.add(DefaultAnimations.genericSwimIdleController(this)
             .transitionLength(8))
 
         controllers.add(
+            AnimationController(this, "shoot_controller") { PlayState.STOP }
+                .triggerableAnim("shoot", DefaultAnimations.ATTACK_SHOOT)
+        )
+
+        controllers.add(
             AnimationController(
-                this, "Shoot", 4,
+                this, "summon_controller", 10,
                 AnimationStateHandler { state: AnimationState<ShellBeastEntity> ->
-                    if (this.isCharging())
-                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.ATTACK_SHOOT)
+                    if (this.isSummoning())
+                        return@AnimationStateHandler state.setAndContinue(SUMMON_ANIMATION)
                     PlayState.STOP
                 }
             )
@@ -287,10 +282,10 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
         controllers.add(
             AnimationController(
-                this, "Summon", 10,
+                this, "spawn_controller",
                 AnimationStateHandler { state: AnimationState<ShellBeastEntity> ->
-                    if (this.isSummoning())
-                        return@AnimationStateHandler state.setAndContinue(SUMMON_ANIMATION)
+                    if (this.tickCount < 120)
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
                     PlayState.STOP
                 }
             )

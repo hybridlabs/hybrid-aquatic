@@ -11,7 +11,8 @@ class ShellBeastSummonHypnautilusGoal(
         val canSummonHypnautilus =
             shellBeast.health <= shellBeast.maxHealth * 0.5f &&
                     shellBeast.isUnderWater &&
-                    !shellBeast.hasMinions()
+                    !shellBeast.hasMinions() &&
+                    shellBeast.tickCount > 120
 
         return canSummonHypnautilus &&
                 !shellBeast.isSummoning() &&

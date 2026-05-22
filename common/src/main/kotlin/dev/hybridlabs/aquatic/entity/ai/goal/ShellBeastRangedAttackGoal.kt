@@ -19,7 +19,9 @@ class ShellBeastRangedAttackGoal(private val shellBeast: ShellBeastEntity) : Goa
         this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
     }
 
-    override fun canUse(): Boolean = shellBeast.target != null && !shellBeast.isSummoning()
+    override fun canUse(): Boolean = shellBeast.target != null &&
+            !shellBeast.isSummoning() &&
+            shellBeast.tickCount > 120
 
     override fun start() {
         chargeTime = 0
@@ -103,6 +105,8 @@ class ShellBeastRangedAttackGoal(private val shellBeast: ShellBeastEntity) : Goa
                 val dxFire = target.x - (shellBeast.x + view.x * 4.0)
                 val dyFire = target.getY(0.5) - (0.5 + shellBeast.getY(0.5))
                 val dzFire = target.z - (shellBeast.z + view.z * 4.0)
+
+                shellBeast.triggerAnim("shoot_controller", "shoot")
 
                 shellBeast.playSound(
                     HASoundEvents.SHELL_BEAST_SHOOT.get(),

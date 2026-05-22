@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.miniboss
 
 import dev.hybridlabs.aquatic.entity.miniboss.ShellBeastEntity
-import net.minecraft.client.model.geom.PartNames
 import net.minecraft.util.Mth
 import software.bernie.geckolib.core.animation.AnimationState
 
@@ -15,9 +14,9 @@ class ShellBeastEntityModel : HAMinibossEntityModel<ShellBeastEntity>("shell_bea
         super.setCustomAnimations(animatable, instanceId, animationState)
         val deltaTime: Float = animationState.partialTick
 
-        val body = animationProcessor.getBone(PartNames.BODY)
+        val shellBeast = animationProcessor.getBone("shell_beast")
 
         val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
-        body.rotX = xRot * -Mth.DEG_TO_RAD
+        shellBeast.rotX = xRot * -Mth.DEG_TO_RAD
     }
 }
