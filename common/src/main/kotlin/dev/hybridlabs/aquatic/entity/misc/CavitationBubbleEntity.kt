@@ -24,6 +24,7 @@ import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
+@Suppress("DEPRECATION")
 class CavitationBubbleEntity : AbstractHurtingProjectile,
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)

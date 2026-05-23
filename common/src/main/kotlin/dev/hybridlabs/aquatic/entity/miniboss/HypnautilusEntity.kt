@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.miniboss
 import dev.hybridlabs.aquatic.entity.ai.goal.HypnotizeTargetGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.MinionLookAtOwnerTargetGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
+import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -181,6 +182,30 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         return HASoundEvents.HYPNAUTILUS_DIE.get()
     }
     //#endregion
+
+    override fun remove(reason: RemovalReason) {
+        if (!level().isClientSide && this.isDeadOrDying) {
+
+            val cavitationBubble = CavitationBubbleEntity(
+                level(),
+                this,
+                0.0,
+                0.0,
+                0.0,
+                1
+            )
+
+            cavitationBubble.setPos(
+                this.x,
+                this.getY(0.5),
+                this.z
+            )
+
+            level().addFreshEntity(cavitationBubble)
+        }
+
+        super.remove(reason)
+    }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
