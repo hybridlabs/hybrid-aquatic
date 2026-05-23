@@ -6,7 +6,7 @@ import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
 import dev.hybridlabs.aquatic.client.item.HAItemProperties
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
-import dev.hybridlabs.aquatic.client.particle.ClientParticleRegistry
+import dev.hybridlabs.aquatic.client.particle.FabricClientParticleRegistry
 import dev.hybridlabs.aquatic.client.render.block.HABlockRendererRegistry
 import dev.hybridlabs.aquatic.client.render.block.HAModelLayerRegistry
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
@@ -30,7 +30,7 @@ object HybridAquaticClient : ClientModInitializer {
         HAModelLayerRegistry
         HAItemProperties
 
-        ClientParticleRegistry
+        FabricClientParticleRegistry
 
         HAMenuScreens
     }

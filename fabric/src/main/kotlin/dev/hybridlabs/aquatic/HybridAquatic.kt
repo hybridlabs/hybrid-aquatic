@@ -20,7 +20,7 @@ import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
 import dev.hybridlabs.aquatic.painting.HAPaintings
-import dev.hybridlabs.aquatic.particle.HAFabricParticleTypes
+import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.sound.HASoundEvents
@@ -60,7 +60,7 @@ object HybridAquatic : ModInitializer {
         HAEntityTypes
         HABlockEntityTypes
         HAPaintings
-        HAFabricParticleTypes
+        HAParticleTypes
 
         if (configHandler.config.biomeConfig.enableBiomes) {
             HABiomes.addBiomes()
