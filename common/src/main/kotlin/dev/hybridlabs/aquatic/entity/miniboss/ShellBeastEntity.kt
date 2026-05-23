@@ -48,6 +48,7 @@ import java.lang.ref.WeakReference
 import java.util.Collections.synchronizedList
 import java.util.function.Predicate
 
+@Suppress("unused")
 class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     HAMinibossEntity(type, world) {
     private var explosionPower = 0
@@ -92,10 +93,6 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         lookControl = SmoothSwimmingLookControl(this, 10)
 
         return WaterBoundPathNavigation(this, level)
-    }
-
-    fun isCharging(): Boolean {
-        return this.entityData.get(DATA_IS_CHARGING) as Boolean
     }
 
     fun setCharging(charging: Boolean) {
