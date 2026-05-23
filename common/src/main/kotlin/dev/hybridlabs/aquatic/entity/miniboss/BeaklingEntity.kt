@@ -67,6 +67,10 @@ class BeaklingEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE))
     }
 
+    override fun nextStep(): Float {
+        return Float.MAX_VALUE
+    }
+
     override fun travel(travelVector: Vec3) {
         if (this.isEffectiveAi && this.isInWater) {
             this.moveRelative(this.speed, travelVector)

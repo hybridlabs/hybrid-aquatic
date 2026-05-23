@@ -128,6 +128,10 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         this.setHypnotizing(nbt.getBoolean("Hypnotizing"))
     }
 
+    override fun nextStep(): Float {
+        return Float.MAX_VALUE
+    }
+
     override fun tick() {
         super.tick()
 
