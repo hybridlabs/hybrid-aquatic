@@ -1,9 +1,13 @@
 package dev.hybridlabs.aquatic.block
 
+import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.util.ParticleUtils
+import net.minecraft.util.RandomSource
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
@@ -56,7 +60,7 @@ class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), Simple
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
         if (state.getValue(WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
@@ -73,7 +77,7 @@ class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), Simple
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         return SHAPE
     }
@@ -84,6 +88,17 @@ class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), Simple
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
         builder.add(WATERLOGGED)
+    }
+
+    override fun animateTick(state: BlockState, level: Level, pos: BlockPos, random: RandomSource) {
+        super.animateTick(state, level, pos, random)
+        if (random.nextInt(30) == 0) {
+            val blockPos = pos.below()
+            val blockState = level.getBlockState(blockPos)
+            if (!isFaceFull(blockState.getCollisionShape(level, blockPos), Direction.UP)) {
+                ParticleUtils.spawnParticleBelow(level, pos, random, HAParticleTypes.SARGASSUM.get())
+            }
+        }
     }
 
     companion object {

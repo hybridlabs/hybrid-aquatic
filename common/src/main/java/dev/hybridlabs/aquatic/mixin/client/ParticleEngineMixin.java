@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
 import dev.hybridlabs.aquatic.particle.HAParticleTypes;
+import dev.hybridlabs.aquatic.particle.SargassumParticle;
 import dev.hybridlabs.aquatic.particle.WaterUpWhirlParticle;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.particle.ParticleProvider;
@@ -29,5 +30,6 @@ public abstract class ParticleEngineMixin {
 			at = @At("TAIL"))
 	private void registerHAProviders(CallbackInfo ci) {
 		register(HAParticleTypes.INSTANCE.getWATER_UP_WHIRL().get(), spriteSets -> new WaterUpWhirlParticle.Companion.Provider(spriteSets));
+		register(HAParticleTypes.INSTANCE.getSARGASSUM().get(), spriteSets -> new SargassumParticle.Companion.Provider(spriteSets));
 	}
 }
