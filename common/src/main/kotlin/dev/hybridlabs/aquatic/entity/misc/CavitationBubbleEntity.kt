@@ -18,8 +18,6 @@ import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
@@ -101,6 +99,9 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
                 val nearbyPlayer = this.level().getNearestPlayer(this, 3.0)
 
                 if (nearbyPlayer != null) {
+
+                    this.triggerAnim("explode_controller", "explode")
+
                     if (fuseDuration < 0) {
                         fuseDuration = 30
                     } else {
@@ -170,14 +171,8 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         controllers.add(DefaultAnimations.genericSwimIdleController(this))
 
         controllers.add(
-            AnimationController(
-                this, "Explode",
-                AnimationStateHandler { state: AnimationState<CavitationBubbleEntity> ->
-                    if (fuseDuration >= 0)
-                        return@AnimationStateHandler state.setAndContinue(EXPLODE_ANIMATION)
-                    PlayState.STOP
-                }
-            )
+            AnimationController(this, "explode_controller") { PlayState.STOP }
+                .triggerableAnim("explode", EXPLODE_ANIMATION)
         )
     }
 
