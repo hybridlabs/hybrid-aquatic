@@ -25,6 +25,8 @@ object HABlockEntityTypes {
         register("buoy", ::BuoyBlockEntity, HABlocks.BUOY)
     val BELL_BUOY =
         register("bell_buoy", ::BellBuoyBlockEntity, HABlocks.BELL_BUOY)
+    val THERMAL_VENT =
+        register("thermal_vent", ::ThermalVentBlockEntity, HABlocks.THERMAL_VENT)
 
     fun <T : BlockEntity?> register(
         id: String,
