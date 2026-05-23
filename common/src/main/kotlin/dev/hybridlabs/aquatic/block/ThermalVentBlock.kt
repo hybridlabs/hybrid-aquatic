@@ -1,7 +1,5 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
-import dev.hybridlabs.aquatic.block.entity.ThermalVentBlockEntity
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -17,14 +15,9 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
-import net.minecraft.world.level.block.BaseEntityBlock.createTickerHelper
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.EntityBlock
 import net.minecraft.world.level.block.SimpleWaterloggedBlock
-import net.minecraft.world.level.block.entity.BlockEntity
-import net.minecraft.world.level.block.entity.BlockEntityTicker
-import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -40,17 +33,16 @@ import net.minecraft.world.phys.shapes.VoxelShape
 @Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION", "REDUNDANT_ELSE_IN_WHEN")
 class ThermalVentBlock(
     private val fireDamage: Int,
-    settings: Properties
-) : Block(settings), EntityBlock, SimpleWaterloggedBlock {
+    settings: Properties,
+) : Block(settings), SimpleWaterloggedBlock {
 
     init {
-        this.registerDefaultState(stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true)
-            .setValue(THICKNESS, ThermalVentPosition.TIP))
+        this.registerDefaultState(
+            stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true)
+                .setValue(THICKNESS, ThermalVentPosition.TIP)
+        )
     }
 
-    override fun newBlockEntity(blockPos: BlockPos, blockState: BlockState): BlockEntity {
-        return ThermalVentBlockEntity(blockPos, blockState)
-    }
 
     override fun onPlace(state: BlockState, world: Level, pos: BlockPos, oldState: BlockState, movedByPiston: Boolean) {
         if (!world.isClientSide) {
@@ -89,7 +81,12 @@ class ThermalVentBlock(
         )
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(
+        state: BlockState,
+        world: BlockGetter,
+        pos: BlockPos,
+        type: PathComputationType,
+    ): Boolean {
         return false
     }
 
@@ -113,7 +110,7 @@ class ThermalVentBlock(
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
         if (state.getValue(BlockStateProperties.WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
@@ -130,7 +127,13 @@ class ThermalVentBlock(
         }
     }
 
-    private fun getThickness(world: LevelReader, currentPos: BlockPos): ThermalVentPosition{
+    override fun animateTick(state: BlockState, world: Level, pos: BlockPos, random: RandomSource) {
+        if (state.getValue(THICKNESS) == ThermalVentPosition.TIP && state.getValue(WATERLOGGED)) {
+            addAlwaysVisibleParticle(world, pos, random)
+        }
+    }
+
+    private fun getThickness(world: LevelReader, currentPos: BlockPos): ThermalVentPosition {
         val blockAbove = world.getBlockState(currentPos.relative(Direction.UP))
 
         return if (blockAbove.`is`(this)) {
@@ -145,20 +148,18 @@ class ThermalVentBlock(
         }
     }
 
-    override fun <T : BlockEntity?> getTicker(
-        level: Level,
-        state: BlockState,
-        type: BlockEntityType<T>
-    ): BlockEntityTicker<T>? {
-        return if (level.isClientSide) {
-            createTickerHelper(
-                type,
-                HABlockEntityTypes.THERMAL_VENT.get(),
-                ThermalVentBlockEntity::particleTick
-            )
-        } else {
-            null
-        }
+    private fun addAlwaysVisibleParticle(world: Level, pos: BlockPos, random: RandomSource) {
+        world.addParticle(
+            ParticleTypes.CAMPFIRE_SIGNAL_SMOKE,
+            pos.x.toDouble() + 0.5 + random.nextDouble() / 4.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
+            pos.y.toDouble() + 0.4,
+            pos.z.toDouble() + 0.5 + random.nextDouble() / 4.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
+            0.0,
+            0.01,
+            0.0
+        )
+
+
     }
 
     override fun stepOn(world: Level, pos: BlockPos, state: BlockState, entity: Entity) {
@@ -178,7 +179,7 @@ class ThermalVentBlock(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         val voxelShape = when (val thickness = state.getValue(THICKNESS) as ThermalVentPosition) {
             ThermalVentPosition.TIP -> TIP_COLLISION_SHAPE
@@ -198,7 +199,7 @@ class ThermalVentBlock(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         val voxelShape = when (val thickness = state.getValue(THICKNESS) as ThermalVentPosition) {
             ThermalVentPosition.TIP -> TIP_SHAPE
@@ -224,7 +225,13 @@ class ThermalVentBlock(
     }
 
     companion object {
-        val THICKNESS: EnumProperty<ThermalVentPosition> = EnumProperty.create("thickness", ThermalVentPosition::class.java, ThermalVentPosition.TIP, ThermalVentPosition.MIDDLE, ThermalVentPosition.BASE)
+        val THICKNESS: EnumProperty<ThermalVentPosition> = EnumProperty.create(
+            "thickness",
+            ThermalVentPosition::class.java,
+            ThermalVentPosition.TIP,
+            ThermalVentPosition.MIDDLE,
+            ThermalVentPosition.BASE
+        )
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
 
         private val TIP_COLLISION_SHAPE = box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0)
@@ -234,26 +241,6 @@ class ThermalVentBlock(
         private val TIP_SHAPE = box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0)
         private val MIDDLE_SHAPE = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
         private val BASE_SHAPE = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
-
-        fun makeParticles(
-            level: Level,
-            pos: BlockPos,
-        ) {
-            val random = level.random
-
-            val particle = ParticleTypes.CAMPFIRE_SIGNAL_SMOKE
-
-            level.addParticle(
-                particle,
-                false,
-                pos.x + 0.5 + random.nextDouble() / 3.0 * (if (random.nextBoolean()) 1 else -1),
-                pos.y + random.nextDouble() + random.nextDouble(),
-                pos.z + 0.5 + random.nextDouble() / 3.0 * (if (random.nextBoolean()) 1 else -1),
-                0.0,
-                0.03,
-                0.0
-            )
-        }
     }
 
     enum class ThermalVentPosition : StringRepresentable {
