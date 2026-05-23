@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic
 
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.ForgeSpawnGroupRegistry
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
@@ -17,6 +17,7 @@ import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HANetworking
 import dev.hybridlabs.aquatic.painting.HAPaintings
+import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import dev.hybridlabs.aquatic.tag.HABiomeTags
@@ -46,6 +47,7 @@ object HybridAquaticForge {
         HAEntityTypes
         HABlockEntityTypes
         HAPaintings
+        HAParticleTypes
 
         HABiomeTags
 
