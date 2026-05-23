@@ -130,7 +130,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
                 this.z,
                 this.explosionPower.toFloat(),
                 flag,
-                Level.ExplosionInteraction.MOB
+                Level.ExplosionInteraction.NONE
             )
 
             this.discard()
