@@ -33,8 +33,8 @@ class WaterUpWhirlParticle(world: ClientLevel, x: Double, y: Double, z: Double):
             this.remove()
         } else {
             val f = 0.6f
-            this.xd += (0.6f * Mth.cos(this.angle)).toDouble()
-            this.zd += (0.6f * Mth.sin(this.angle)).toDouble()
+            this.xd += (f * Mth.cos(this.angle)).toDouble()
+            this.zd += (f * Mth.sin(this.angle)).toDouble()
             this.xd *= 0.07
             this.zd *= 0.07
             this.move(this.xd, this.yd, this.zd)
