@@ -43,6 +43,7 @@ import software.bernie.geckolib.core.animation.AnimationController.AnimationStat
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.util.ClientUtils
 import java.lang.ref.WeakReference
 import java.util.Collections.synchronizedList
 import java.util.function.Predicate
@@ -261,17 +262,29 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
 
-        controllers.add(DefaultAnimations.genericSwimIdleController(this)
-            .transitionLength(8))
+        controllers.add(
+            DefaultAnimations.genericSwimIdleController(this)
+                .transitionLength(8)
+        )
 
         controllers.add(
             AnimationController(this, "shoot_controller") { PlayState.STOP }
                 .triggerableAnim("shoot", DefaultAnimations.ATTACK_SHOOT)
+                .setSoundKeyframeHandler { event ->
+                    val player = ClientUtils.getClientPlayer()
+
+                    player?.playSound(HASoundEvents.SHELL_BEAST_SHOOT.get(), 1f, 1f)
+                }
         )
 
         controllers.add(
             AnimationController(this, "summon_controller") { PlayState.STOP }
                 .triggerableAnim("summon", SUMMON_ANIMATION)
+                .setSoundKeyframeHandler { event ->
+                    val player = ClientUtils.getClientPlayer()
+
+                    player?.playSound(HASoundEvents.SHELL_BEAST_ROAR.get(), 1f, 1f)
+                }
         )
 
         controllers.add(
@@ -283,6 +296,11 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                     PlayState.STOP
                 }
             )
+                .setSoundKeyframeHandler { event ->
+                    val player = ClientUtils.getClientPlayer()
+
+                    player?.playSound(HASoundEvents.SHELL_BEAST_ROAR.get(), 1f, 1f)
+                }
         )
     }
     //#endregion
@@ -297,6 +315,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 .add(Attributes.FOLLOW_RANGE, 64.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)
         }
+
         val SUMMON_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.summon")
 
         private val DATA_IS_CHARGING: EntityDataAccessor<Boolean> =

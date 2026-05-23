@@ -34,10 +34,11 @@ object HASoundEvents {
     val KARCINOGEN_HURT = register("entity.karcinogen.hurt")
     val KARCINOGEN_DIE = register("entity.karcinogen.die")
 
-    val SHELL_BEAST_SHOOT = register("entity.shell_beast.shoot", 64f)
     val SHELL_BEAST_AMBIENT = register("entity.shell_beast.ambient")
     val SHELL_BEAST_HURT = register("entity.shell_beast.hurt")
     val SHELL_BEAST_DIE = register("entity.shell_beast.die")
+    val SHELL_BEAST_SHOOT = register("entity.shell_beast.shoot", 64f)
+    val SHELL_BEAST_ROAR = register("entity.shell_beast.roar")
 
     val HYPNAUTILUS_AMBIENT = register("entity.hypnautilus.ambient")
     val HYPNAUTILUS_HURT = register("entity.hypnautilus.hurt")

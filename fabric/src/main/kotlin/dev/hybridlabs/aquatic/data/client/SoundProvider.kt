@@ -49,8 +49,9 @@ class SoundProvider(
             HASoundEvents.SHELL_BEAST_AMBIENT to CommonClass.locate("entity/shell_beast_ambient"),
             HASoundEvents.SHELL_BEAST_DIE to CommonClass.locate("entity/shell_beast_die"),
             HASoundEvents.SHELL_BEAST_HURT to CommonClass.locate("entity/shell_beast_hurt"),
-
             HASoundEvents.SHELL_BEAST_SHOOT to CommonClass.locate("entity/shell_beast_shoot"),
+            HASoundEvents.SHELL_BEAST_ROAR to CommonClass.locate("entity/shell_beast_roar"),
+
 
             HASoundEvents.HYPNAUTILUS_AMBIENT to SoundEvents.TURTLE_EGG_CRACK,
             HASoundEvents.HYPNAUTILUS_DIE to SoundEvents.TURTLE_EGG_CRACK,

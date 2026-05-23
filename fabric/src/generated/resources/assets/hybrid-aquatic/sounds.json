@@ -200,6 +200,12 @@
     ],
     "subtitle": "subtitles.hybrid-aquatic.entity.shell_beast.hurt"
   },
+  "entity.shell_beast.roar": {
+    "sounds": [
+      "hybrid-aquatic:entity/shell_beast_roar"
+    ],
+    "subtitle": "subtitles.hybrid-aquatic.entity.shell_beast.roar"
+  },
   "entity.shell_beast.shoot": {
     "sounds": [
       "hybrid-aquatic:entity/shell_beast_shoot"
