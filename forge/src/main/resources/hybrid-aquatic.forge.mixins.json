@@ -29,7 +29,8 @@
         "client.LocalPlayerMixin",
         "client.SkullBlockEntityTextureMixin",
         "client.CameraMixin",
-        "client.WeatherDisplayMixin"
+        "client.WeatherDisplayMixin",
+        "client.ParticleEngineMixin"
     ],
     "injectors": {
         "defaultRequire": 1
