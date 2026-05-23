@@ -23,6 +23,7 @@ class ShellBeastSummonHypnautilusGoal(
     override fun start() {
         shellBeast.navigation.stop()
         shellBeast.startSummoning(ShellBeastEntity.SummonType.HYPNAUTILUS)
+        shellBeast.triggerAnim("summon_controller", "summon")
     }
 
     override fun canContinueToUse(): Boolean {

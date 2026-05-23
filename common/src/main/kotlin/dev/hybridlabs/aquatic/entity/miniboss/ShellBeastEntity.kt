@@ -270,14 +270,8 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         )
 
         controllers.add(
-            AnimationController(
-                this, "summon_controller", 10,
-                AnimationStateHandler { state: AnimationState<ShellBeastEntity> ->
-                    if (this.isSummoning())
-                        return@AnimationStateHandler state.setAndContinue(SUMMON_ANIMATION)
-                    PlayState.STOP
-                }
-            )
+            AnimationController(this, "summon_controller") { PlayState.STOP }
+                .triggerableAnim("summon", SUMMON_ANIMATION)
         )
 
         controllers.add(
@@ -343,7 +337,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         setSummoning(true)
         playSound(SoundEvents.EVOKER_PREPARE_ATTACK, 1.0f, 1.0f)
 
-        summonTimer = 30
+        summonTimer = 80
 
         navigation.stop()
     }
