@@ -59,7 +59,6 @@ object HybridAquaticModBusEvents {
                 MOD_BUS.addListener(::registerModelLayers)
                 MOD_BUS.addListener(::registerSkullModels)
                 MOD_BUS.addListener(::registerBlockEntityRenderers)
-                MOD_BUS.addListener(::registerClientParticles)
                 HybridAquaticEntityRenderers
             },
             serverTarget = {
