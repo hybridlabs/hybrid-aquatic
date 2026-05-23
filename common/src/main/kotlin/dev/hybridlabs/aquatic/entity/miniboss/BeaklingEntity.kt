@@ -64,7 +64,7 @@ class BeaklingEntity(type: EntityType<out HAMinionEntity>, world: Level) :
             }
         )
 
-        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
+        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE))
     }
 
     override fun travel(travelVector: Vec3) {
