@@ -24,7 +24,7 @@ class ThermalVentBlockEntity(
             if (state.getValue(ThermalVentBlock.THICKNESS) == ThermalVentBlock.ThermalVentPosition.TIP) {
 
                 if (random.nextFloat() < 0.3f) {
-                    for (i in 0 until random.nextInt(1) + 0) {
+                    for (i in 0 until random.nextInt(1) + 1) {
 
                         ThermalVentBlock.makeParticles(
                             level,
