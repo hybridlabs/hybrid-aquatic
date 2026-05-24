@@ -30,15 +30,17 @@
 			"animation_length": 1.5,
 			"bones": {
 				"outer_bubble": {
+					"rotation": [0, "query.anim_time*540", 0],
 					"scale": {
 						"0.0": [1, 1, 1],
-						"1.5": [1.5, 1.5, 1.5]
+						"1.5": [2, 2, 2]
 					}
 				},
 				"inner_bubble": {
+					"rotation": [0, "-query.anim_time*540", 0],
 					"scale": {
 						"0.0": [1, 1, 1],
-						"1.5": [1.5, 1.5, 1.5]
+						"1.5": [2, 2, 2]
 					}
 				}
 			}
