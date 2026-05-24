@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.mixin.client;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.hybridlabs.aquatic.effect.HAMobEffects;
 import dev.hybridlabs.aquatic.fog.ClarityFogModifier;
-import dev.hybridlabs.aquatic.fog.ConduitPowerFogModifier;
 import dev.hybridlabs.aquatic.fog.ThalassophobiaFogModifier;
 import net.minecraft.client.Camera;
 import net.minecraft.client.player.LocalPlayer;
@@ -35,9 +34,6 @@ public class FogRendererMixin {
 
             if (clarityEffect != null) {
                 new ClarityFogModifier().setupFog(fogData, clientPlayerEntity, clarityEffect, viewDistance, tickDelta);
-            } else if (conduitEffect != null) {
-                new ConduitPowerFogModifier().setupFog(fogData, clientPlayerEntity, conduitEffect, viewDistance,
-                        tickDelta);
             } else if (thalassophobiaEffect != null) {
                 new ThalassophobiaFogModifier().setupFog(fogData, clientPlayerEntity, thalassophobiaEffect,
                         viewDistance, tickDelta);
