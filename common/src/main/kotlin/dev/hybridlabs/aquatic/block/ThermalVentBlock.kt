@@ -43,7 +43,6 @@ class ThermalVentBlock(
         )
     }
 
-
     override fun onPlace(state: BlockState, world: Level, pos: BlockPos, oldState: BlockState, movedByPiston: Boolean) {
         if (!world.isClientSide) {
             world.scheduleTick(pos, this, 24000)
@@ -112,10 +111,6 @@ class ThermalVentBlock(
         pos: BlockPos,
         neighborPos: BlockPos,
     ): BlockState {
-        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
-        }
-
         if (!canSurvive(state, world, pos)) {
             return Blocks.AIR.defaultBlockState()
         }
@@ -128,7 +123,7 @@ class ThermalVentBlock(
     }
 
     override fun animateTick(state: BlockState, world: Level, pos: BlockPos, random: RandomSource) {
-        if (state.getValue(THICKNESS) == ThermalVentPosition.TIP && state.getValue(WATERLOGGED)) {
+        if (state.getValue(THICKNESS) == ThermalVentPosition.TIP) {
             addAlwaysVisibleParticle(world, pos, random)
         }
     }
@@ -158,8 +153,6 @@ class ThermalVentBlock(
             0.05,
             0.0
         )
-
-
     }
 
     override fun stepOn(world: Level, pos: BlockPos, state: BlockState, entity: Entity) {
@@ -232,6 +225,7 @@ class ThermalVentBlock(
             ThermalVentPosition.MIDDLE,
             ThermalVentPosition.BASE
         )
+
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
 
         private val TIP_COLLISION_SHAPE = box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0)
