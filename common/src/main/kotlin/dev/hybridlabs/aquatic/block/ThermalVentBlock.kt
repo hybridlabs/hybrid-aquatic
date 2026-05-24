@@ -149,13 +149,13 @@ class ThermalVentBlock(
     }
 
     private fun addAlwaysVisibleParticle(world: Level, pos: BlockPos, random: RandomSource) {
-        world.addParticle(
+        world.addAlwaysVisibleParticle(
             ParticleTypes.CAMPFIRE_SIGNAL_SMOKE,
             pos.x.toDouble() + 0.5 + random.nextDouble() / 4.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
             pos.y.toDouble() + 0.4,
             pos.z.toDouble() + 0.5 + random.nextDouble() / 4.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
             0.0,
-            0.01,
+            0.05,
             0.0
         )
 
