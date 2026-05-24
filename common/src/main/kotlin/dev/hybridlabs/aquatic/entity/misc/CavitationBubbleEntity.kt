@@ -96,14 +96,14 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
             }
 
             if (trapBubble) {
-                val nearbyPlayer = this.level().getNearestPlayer(this, 3.0)
+                val nearbyPlayer = this.level().getNearestPlayer(this, 5.0)
 
                 if (nearbyPlayer != null) {
 
                     this.triggerAnim("explode_controller", "explode")
 
                     if (fuseDuration < 0) {
-                        fuseDuration = 30
+                        fuseDuration = 20
                     } else {
                         fuseDuration--
 
