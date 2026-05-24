@@ -10,6 +10,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 data class VentPatchFeatureConfig(
     val baseProvider: BlockStateProvider,
     val ventProvider: BlockStateProvider,
+    val giantVentProvider: BlockStateProvider,
     val wormProvider: BlockStateProvider,
     val count: IntProvider,
     val spreadRadius: IntProvider,
@@ -22,6 +23,7 @@ data class VentPatchFeatureConfig(
             instance.group(
                 BlockStateProvider.CODEC.fieldOf("base_block").forGetter(VentPatchFeatureConfig::baseProvider),
                 BlockStateProvider.CODEC.fieldOf("vent_block").forGetter(VentPatchFeatureConfig::ventProvider),
+                BlockStateProvider.CODEC.fieldOf("giant_vent_block").forGetter(VentPatchFeatureConfig::giantVentProvider),
                 BlockStateProvider.CODEC.fieldOf("worm_block").forGetter(VentPatchFeatureConfig::wormProvider),
                 IntProvider.POSITIVE_CODEC.fieldOf("count").forGetter(VentPatchFeatureConfig::count),
                 IntProvider.POSITIVE_CODEC.fieldOf("spread_radius").forGetter(VentPatchFeatureConfig::spreadRadius),

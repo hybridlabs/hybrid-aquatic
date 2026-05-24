@@ -306,7 +306,7 @@ class PlacedFeatureProvider(
             HAPlacedFeatures.THERMAL_VENT_CAVES, PlacedFeature(
                 entries.ref(HAConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
                     InSquarePlacement.spread(),
-                    CountOnEveryLayerPlacement.of(5),
+                    CountOnEveryLayerPlacement.of(3),
                     SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
                     BiomeFilter.biome()
                 )
@@ -317,7 +317,7 @@ class PlacedFeatureProvider(
             HAPlacedFeatures.THERMAL_VENT_TRENCHES, PlacedFeature(
                 entries.ref(HAConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
                     InSquarePlacement.spread(),
-                    CountOnEveryLayerPlacement.of(2),
+                    CountOnEveryLayerPlacement.of(1),
                     SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
                     BiomeFilter.biome()
                 )

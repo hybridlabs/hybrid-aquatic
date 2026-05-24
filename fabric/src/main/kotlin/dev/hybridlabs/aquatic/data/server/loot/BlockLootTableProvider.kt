@@ -382,6 +382,17 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             )
         }
 
+        add(HABlocks.GIANT_THERMAL_VENT.get()) { block ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool().add(
+                    AlternativesEntry.alternatives(
+                        LootItem.lootTableItem(block).`when`(HAS_SILK_TOUCH),
+                        LootTableReference.lootTableReference(HALootTables.VENT_LOOT_ID)
+                    )
+                )
+            )
+        }
+
         add(HABlocks.CRYSTALLINE_SULFUR.get()) { block ->
             LootTable.lootTable().withPool(
                 LootPool.lootPool()

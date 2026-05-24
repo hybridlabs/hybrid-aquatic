@@ -581,6 +581,7 @@ class ConfiguredFeatureProvider(
                 HAFeatures.VENT_PATCH.get(), VentPatchFeatureConfig(
                     SimpleStateProvider.simple(Blocks.TUFF),
                     SimpleStateProvider.simple(HABlocks.THERMAL_VENT.get()),
+                    SimpleStateProvider.simple(HABlocks.GIANT_THERMAL_VENT.get()),
                     SimpleStateProvider.simple(HABlocks.TUBE_WORM.get()),
                     UniformInt.of(3, 5),
                     ConstantInt.of(2),

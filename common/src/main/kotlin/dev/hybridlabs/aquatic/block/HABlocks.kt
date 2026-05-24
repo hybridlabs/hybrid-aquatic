@@ -524,6 +524,13 @@ object HABlocks {
             .pushReaction(PushReaction.DESTROY))
     }
 
+    val GIANT_THERMAL_VENT = register("giant_thermal_vent") {
+        GiantThermalVentBlock(2,
+            Properties.copy(Blocks.TUFF)
+            .strength(0.5F)
+            .pushReaction(PushReaction.NORMAL))
+    }
+
     val TUBE_WORM = register("tube_worm") {
         TubeWormBlock(Properties.of()
             .mapColor(MapColor.COLOR_GREEN)

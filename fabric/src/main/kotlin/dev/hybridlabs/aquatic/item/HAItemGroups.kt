@@ -222,6 +222,7 @@ object HAItemGroups {
                 entries.accept(HAItems.PING_PONG_SPONGE.get())
                 entries.accept(HAItems.BONE_WORMS.get())
                 entries.accept(HAItems.TUBE_WORM.get())
+                entries.accept(HAItems.GIANT_THERMAL_VENT.get())
                 entries.accept(HAItems.HYDROTHERMAL_VENT.get())
                 entries.accept(HAItems.CRYSTALLINE_SULFUR.get())
                 entries.accept(HAItems.DEPTH_CHARGE.get())

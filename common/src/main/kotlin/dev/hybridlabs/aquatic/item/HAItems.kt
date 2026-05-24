@@ -324,6 +324,7 @@ object HAItems {
     val RED_ALGAE = registerBlockItem("red_algae") { HABlocks.RED_ALGAE.get() }
     val SEA_LETTUCE = registerBlockItem("sea_lettuce") { HABlocks.SEA_LETTUCE.get() }
     val HYDROTHERMAL_VENT = registerBlockItem("hydrothermal_vent") { HABlocks.THERMAL_VENT.get() }
+    val GIANT_THERMAL_VENT = registerBlockItem("giant_thermal_vent") { HABlocks.GIANT_THERMAL_VENT.get() }
     val TUBE_WORM = registerBlockItem("tube_worm") { HABlocks.TUBE_WORM.get() }
     val BONE_WORMS = registerBlockItem("bone_worms") { HABlocks.BONE_WORMS.get() }
     val TUBE_SPONGE = registerBlockItem("tube_sponge") { HABlocks.TUBE_SPONGE.get() }

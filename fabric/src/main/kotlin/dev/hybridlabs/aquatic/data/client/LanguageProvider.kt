@@ -451,6 +451,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get() to "Driftwood Pressure Plate",
             HAPlatformBlocks.DRIFTWOOD_BUTTON.get() to "Driftwood Button",
             HABlocks.THERMAL_VENT.get() to "Thermal Vent",
+            HABlocks.GIANT_THERMAL_VENT.get() to "Giant Thermal Vent",
             HABlocks.TUBE_WORM.get() to "Tube Worm",
         ).forEach { (block, translation) ->
             builder.add(block, translation)

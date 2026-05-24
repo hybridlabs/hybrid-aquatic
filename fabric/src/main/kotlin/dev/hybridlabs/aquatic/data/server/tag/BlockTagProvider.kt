@@ -230,6 +230,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.PEARL_BLOCK.get())
             .add(HABlocks.BLACK_PEARL_BLOCK.get())
             .add(HABlocks.THERMAL_VENT.get())
+            .add(HABlocks.GIANT_THERMAL_VENT.get())
             .add(HABlocks.CRYSTALLINE_SULFUR.get())
             .add(HABlocks.GIANT_CLAM.get())
             .add(HABlocks.OYSTER.get())
