@@ -1,9 +1,8 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.entity.ai.goal.UrchinEatKelpGoal
 import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import dev.hybridlabs.aquatic.tag.HABlockTags
-import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -19,7 +18,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.block.Blocks
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -27,8 +25,6 @@ import kotlin.random.Random
 class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) :
     HACritterEntity(type, world),
     VariantHolder<SeaUrchinEntity.Companion.Type> {
-    private var timeUntilNextBreak = 0
-    private var spawnUrchinOnNextBreak = false
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
@@ -40,6 +36,11 @@ class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) :
         variant = Type.entries.random(Random)
         this.refreshDimensions()
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, UrchinEatKelpGoal(this, HABlockTags.KELP))
     }
 
     override fun getDimensions(pose: Pose): EntityDimensions {
@@ -95,41 +96,6 @@ class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) :
         if (entity is ServerPlayer && entity.hurt(damageSources().mobAttack(this), 0.5f)) {
             if (!this.isSilent) {
                 entity.connection.send(ClientboundGameEventPacket(ClientboundGameEventPacket.PUFFER_FISH_STING, 0.0f))
-            }
-        }
-    }
-
-    override fun tick() {
-        super.tick()
-
-        if (level().isClientSide) {
-            return
-        }
-
-        if (timeUntilNextBreak > 0) {
-            timeUntilNextBreak--
-            return
-        }
-
-        if (level().random.nextInt(6000) < 300) {
-            breakKelpUnderneath()
-            timeUntilNextBreak = 2400 + level().random.nextInt(1200)
-        }
-    }
-
-    private fun breakKelpUnderneath() {
-        val posUnderneath = BlockPos(this.x.toInt(), (this.y + 1).toInt(), this.z.toInt())
-        if (level().getBlockState(posUnderneath).`is`(HABlockTags.KELP)) {
-            level().setBlockAndUpdate(posUnderneath, Blocks.AIR.defaultBlockState())
-            if (spawnUrchinOnNextBreak) {
-                val newUrchin = HAEntityTypes.SEA_URCHIN.get().create(level())
-                newUrchin?.moveTo(this.x, this.y, this.z, this.xRot, 0.0f)
-                if (newUrchin != null) {
-                    level().addFreshEntity(newUrchin)
-                }
-                spawnUrchinOnNextBreak = false
-            } else {
-                spawnUrchinOnNextBreak = true
             }
         }
     }
