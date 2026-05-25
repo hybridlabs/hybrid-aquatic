@@ -7,11 +7,7 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import software.bernie.geckolib.core.animatable.GeoAnimatable
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.Animation
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.animation.*
 import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 import software.bernie.geckolib.util.RenderUtils
@@ -19,7 +15,6 @@ import software.bernie.geckolib.util.RenderUtils
 class GiantGreenAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
     BlockEntity(HABlockEntityTypes.GIANT_GREEN_ANEMONE.get(), pos, state), GeoAnimatable {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-
 
     private fun <E> predicate(event: AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
         return if (level != null) {

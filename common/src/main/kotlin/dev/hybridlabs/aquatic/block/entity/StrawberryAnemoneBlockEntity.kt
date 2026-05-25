@@ -51,6 +51,5 @@ class StrawberryAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
 
     companion object {
         val SWAY_ANIMATION: RawAnimation = RawAnimation.begin().then("sway", Animation.LoopType.LOOP)
-
     }
 }
