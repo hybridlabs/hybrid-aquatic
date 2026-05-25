@@ -124,7 +124,7 @@ class ThermalVentBlock(
 
     override fun animateTick(state: BlockState, world: Level, pos: BlockPos, random: RandomSource) {
         if (state.getValue(THICKNESS) == ThermalVentPosition.TIP) {
-            addAlwaysVisibleParticle(world, pos, random)
+            addVentSmoke(world, pos, random)
         }
     }
 
@@ -143,14 +143,14 @@ class ThermalVentBlock(
         }
     }
 
-    private fun addAlwaysVisibleParticle(world: Level, pos: BlockPos, random: RandomSource) {
-        world.addAlwaysVisibleParticle(
+    private fun addVentSmoke(world: Level, pos: BlockPos, random: RandomSource) {
+        world.addParticle(
             ParticleTypes.CAMPFIRE_COSY_SMOKE,
             pos.x.toDouble() + 0.5 + random.nextDouble() / 4.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
             pos.y.toDouble() + 0.4,
             pos.z.toDouble() + 0.5 + random.nextDouble() / 4.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
             0.0,
-            0.05,
+            0.03,
             0.0
         )
     }

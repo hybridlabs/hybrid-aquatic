@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState
 
 class GiantThermalVentBlockEntity(
     pos: BlockPos,
-    state: BlockState
+    state: BlockState,
 ) : BlockEntity(HABlockEntityTypes.GIANT_THERMAL_VENT.get(), pos, state) {
 
     companion object {
@@ -16,21 +16,16 @@ class GiantThermalVentBlockEntity(
             level: Level,
             pos: BlockPos,
             state: BlockState,
-            blockEntity: GiantThermalVentBlockEntity
+            blockEntity: GiantThermalVentBlockEntity,
         ) {
             val random = level.random
 
             if (state.getValue(GiantThermalVentBlock.THICKNESS) ==
-                GiantThermalVentBlock.GiantThermalVentPosition.TIP) {
+                GiantThermalVentBlock.GiantThermalVentPosition.TIP
+            ) {
 
-                if (random.nextFloat() < 0.3f) {
-                    for (i in 0 until random.nextInt(1) + 1) {
-
-                        GiantThermalVentBlock.makeParticles(
-                            level,
-                            pos
-                        )
-                    }
+                if (random.nextFloat() < 0.15f) {
+                    GiantThermalVentBlock.makeParticles(level, pos)
                 }
             }
         }
