@@ -143,12 +143,6 @@ class GiantThermalVentBlock(
         }
     }
 
-    override fun animateTick(state: BlockState, world: Level, pos: BlockPos, random: RandomSource) {
-        if (state.getValue(THICKNESS) == GiantThermalVentPosition.TIP) {
-            addAlwaysVisibleParticle(world, pos, random)
-        }
-    }
-
     private fun getThickness(world: LevelReader, currentPos: BlockPos): GiantThermalVentPosition {
         val blockAbove = world.getBlockState(currentPos.relative(Direction.UP))
 
@@ -162,18 +156,6 @@ class GiantThermalVentBlock(
         } else {
             GiantThermalVentPosition.TIP
         }
-    }
-
-    private fun addAlwaysVisibleParticle(world: Level, pos: BlockPos, random: RandomSource) {
-        world.addAlwaysVisibleParticle(
-            ParticleTypes.CAMPFIRE_SIGNAL_SMOKE,
-            pos.x.toDouble() + 0.5 + random.nextDouble() / 4.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
-            pos.y.toDouble() + 1.0,
-            pos.z.toDouble() + 0.5 + random.nextDouble() / 4.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
-            0.0,
-            0.05,
-            0.0
-        )
     }
 
     override fun stepOn(world: Level, pos: BlockPos, state: BlockState, entity: Entity) {
