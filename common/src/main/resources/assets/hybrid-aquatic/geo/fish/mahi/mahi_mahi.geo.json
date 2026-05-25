@@ -13,6 +13,11 @@
 			"bones": [
 				{
 					"name": "body",
+					"pivot": [0, 4.57795, -6.52138]
+				},
+				{
+					"name": "torso",
+					"parent": "body",
 					"pivot": [0, 4.57795, -6.52138],
 					"cubes": [
 						{"origin": [0, -3, -7.25], "size": [0, 4, 3], "pivot": [0, 1, -7.25], "rotation": [20.94102, 8.42106, -20.94102], "uv": [6, 3]},
@@ -22,15 +27,15 @@
 				},
 				{
 					"name": "dorsal_fin_1",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 9, -5.75],
 					"cubes": [
 						{"origin": [0, 9, -11.25], "size": [0, 4, 11], "uv": [17, 9]}
 					]
 				},
 				{
-					"name": "body_2",
-					"parent": "body",
+					"name": "torso_2",
+					"parent": "torso",
 					"pivot": [0, 8, -0.25],
 					"cubes": [
 						{"origin": [-1.5, 2, -0.25], "size": [3, 7, 11], "uv": [0, 20]}
@@ -38,7 +43,7 @@
 				},
 				{
 					"name": "dorsal_fin_2",
-					"parent": "body_2",
+					"parent": "torso_2",
 					"pivot": [0, 9, 5.25],
 					"cubes": [
 						{"origin": [0, 9, -0.25], "size": [0, 3, 11], "uv": [17, 13]}
@@ -46,7 +51,7 @@
 				},
 				{
 					"name": "pelvic_fin",
-					"parent": "body_2",
+					"parent": "torso_2",
 					"pivot": [0, 2, 5.25],
 					"cubes": [
 						{"origin": [0, 0, -0.25], "size": [0, 2, 11], "uv": [0, 27]}
@@ -54,7 +59,7 @@
 				},
 				{
 					"name": "tail",
-					"parent": "body_2",
+					"parent": "torso_2",
 					"pivot": [0, 9, 10.5],
 					"cubes": [
 						{"origin": [-1, 5, 10.5], "size": [2, 4, 2], "inflate": -0.01, "uv": [0, 0]}
@@ -70,7 +75,7 @@
 				},
 				{
 					"name": "right_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [-1.95, 2, -5.25],
 					"cubes": [
 						{"origin": [-5.95, 1, -5.25], "size": [4, 2, 0], "pivot": [-1.95, 2, -5.25], "rotation": [55.01918, 37.12482, 64.83931], "uv": [0, 10]}
@@ -78,7 +83,7 @@
 				},
 				{
 					"name": "left_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [1.95, 2, -5.25],
 					"cubes": [
 						{"origin": [1.95, 1, -5.25], "size": [4, 2, 0], "pivot": [1.95, 2, -5.25], "rotation": [55.01918, -37.12482, -64.83931], "uv": [0, 20]}

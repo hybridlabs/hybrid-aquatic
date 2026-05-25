@@ -42,7 +42,7 @@ abstract class HAFishEntityModel<T : HAFishEntity>(private val id: String) :
 
         val deltaTime = animationState.partialTick
         val body = animationProcessor.getBone(PartNames.BODY)
-        val body2 = animationProcessor.getBone("body_2")
+        val body2 = animationProcessor.getBone("torso_2")
         val tail = animationProcessor.getBone(PartNames.TAIL)
         val tailFin = animationProcessor.getBone(PartNames.TAIL_FIN)
 

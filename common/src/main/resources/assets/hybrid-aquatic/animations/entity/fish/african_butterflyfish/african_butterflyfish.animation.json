@@ -5,7 +5,7 @@
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["Math.cos(query.anim_time * 90)*-2.5", "Math.sin(query.anim_time * 90)*5", 0],
 					"position": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
 				},
@@ -21,7 +21,7 @@
 				"right_fin": {
 					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*5"]
 				},
-				"pelvic_fin": {
+				"anal_fin": {
 					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*10"]
 				},
 				"dorsal_fin": {
@@ -32,7 +32,7 @@
 		"move.swim": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["0+math.sin(query.anim_time*90*1-160)*1.5", "0-math.sin(query.anim_time*90*3)*12", "0-math.sin(query.anim_time*90*1.5)*0.5"],
 					"position": ["0+math.sin(query.anim_time*90*3-80)*1", "0+math.sin(query.anim_time*90*1-80)*0.75", 0]
 				},
@@ -52,13 +52,13 @@
 				"dorsal_fin": {
 					"rotation": [0, 0, "Math.sin(query.anim_time * 180)*5"]
 				},
-				"pelvic_fin": {
+				"anal_fin": {
 					"rotation": [0, 0, "Math.sin(query.anim_time * 180)*5"]
 				},
-				"right_back_fin": {
+				"right_pelvic_fin": {
 					"rotation": [0, "0+math.sin(query.anim_time*90*3+40)*5", "0-math.sin(query.anim_time*90*1-50)*5"]
 				},
-				"left_back_fin": {
+				"left_pelvic_fin": {
 					"rotation": [0, "0+math.sin(query.anim_time*90*3+40)*5", "0+math.sin(query.anim_time*90*1-50)*5"]
 				}
 			}
@@ -66,7 +66,7 @@
 		"move.fly": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["math.sin(query.anim_time*90*1-160)*1.5", "-math.sin(query.anim_time*90*3)*5", "-math.sin(query.anim_time*90*1.5)*0.5"]
 				},
 				"right_fin": {
@@ -85,13 +85,13 @@
 				"dorsal_fin": {
 					"rotation": [0, 0, "Math.sin(query.anim_time * 180)*5"]
 				},
-				"pelvic_fin": {
+				"anal_fin": {
 					"rotation": [0, 0, "Math.sin(query.anim_time * 180)*5"]
 				},
-				"right_back_fin": {
+				"right_pelvic_fin": {
 					"rotation": [0, -12.5, 22.5]
 				},
-				"left_back_fin": {
+				"left_pelvic_fin": {
 					"rotation": [0, 12.5, -22.5]
 				}
 			}
@@ -100,7 +100,7 @@
 			"loop": true,
 			"animation_length": 0.5,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": {
 						"0.0": {
 							"post": [0, 0, -90],

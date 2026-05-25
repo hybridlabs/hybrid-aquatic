@@ -13,6 +13,11 @@
 			"bones": [
 				{
 					"name": "body",
+					"pivot": [0, 1.87175, -2.01087]
+				},
+				{
+					"name": "torso",
+					"parent": "body",
 					"pivot": [0, 1.87175, -2.01087],
 					"cubes": [
 						{"origin": [-1.5, 0.85, -3.5], "size": [3, 3, 4], "uv": [0, 0]},
@@ -24,7 +29,7 @@
 				},
 				{
 					"name": "left_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [1.5, 1.35, -3],
 					"cubes": [
 						{"origin": [1.5, 0.85, -3], "size": [0, 1, 1], "pivot": [1.5, 1.35, -3], "rotation": [0, 22.5, 0], "uv": [12, 14]}
@@ -32,7 +37,7 @@
 				},
 				{
 					"name": "right_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [-1.5, 1.35, -3],
 					"cubes": [
 						{"origin": [-1.5, 0.85, -3], "size": [0, 1, 1], "pivot": [-1.5, 1.35, -3], "rotation": [0, -22.5, 0], "uv": [12, 14]}
@@ -40,7 +45,7 @@
 				},
 				{
 					"name": "tail",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 2.7, 0.5],
 					"cubes": [
 						{"origin": [0, -0.15, -0.25], "size": [0, 3, 1], "pivot": [0, 1.6, 0.25], "rotation": [22.5, 0, 0], "uv": [14, 3]},

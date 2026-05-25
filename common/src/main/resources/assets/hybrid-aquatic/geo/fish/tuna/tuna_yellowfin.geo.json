@@ -13,6 +13,11 @@
 			"bones": [
 				{
 					"name": "body",
+					"pivot": [-0.00014, 4.22041, -3.90933]
+				},
+				{
+					"name": "torso",
+					"parent": "body",
 					"pivot": [-0.00014, 4.22041, -3.90933],
 					"cubes": [
 						{"origin": [-3.5, 0, -11], "size": [7, 10, 16], "uv": [0, 0]},
@@ -20,8 +25,8 @@
 					]
 				},
 				{
-					"name": "body_2",
-					"parent": "body",
+					"name": "torso_2",
+					"parent": "torso",
 					"pivot": [0, 5, 5],
 					"cubes": [
 						{"origin": [0, 9, 5], "size": [0, 1, 7], "uv": [0, 6]},
@@ -31,7 +36,7 @@
 				},
 				{
 					"name": "tail",
-					"parent": "body_2",
+					"parent": "torso_2",
 					"pivot": [0, 5, 11],
 					"cubes": [
 						{"origin": [-2.5, 2, 11], "size": [5, 6, 5], "uv": [19, 40]},
@@ -50,7 +55,7 @@
 				},
 				{
 					"name": "dorsal_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 10, -10],
 					"cubes": [
 						{"origin": [0, 10, -10], "size": [0, 5, 8], "uv": [0, 0]},
@@ -59,7 +64,7 @@
 				},
 				{
 					"name": "left_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [3.5, 3.9, -9.7],
 					"rotation": [0, 22.5, 37.5],
 					"cubes": [
@@ -68,7 +73,7 @@
 				},
 				{
 					"name": "left_pectoral_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 0, -8.5],
 					"cubes": [
 						{"origin": [0, -3.75882, -9.03407], "size": [0, 4, 3], "pivot": [0, 0, -8.5], "rotation": [15, 0, -30], "uv": [10, 0], "mirror": true}
@@ -76,15 +81,21 @@
 				},
 				{
 					"name": "mouth",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 1.5, -16],
 					"cubes": [
 						{"origin": [-3, 1, -17], "size": [6, 5, 1], "uv": [50, 58]}
 					]
 				},
 				{
+					"name": "item",
+					"parent": "mouth",
+					"pivot": [0, 4.5, -16],
+					"rotation": [-90, 0, 0]
+				},
+				{
 					"name": "pelvic_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 0, 1],
 					"cubes": [
 						{"origin": [0, -9, 0.57212], "size": [0, 10, 4], "pivot": [0, 0, 1], "rotation": [35, 0, 0], "uv": [0, 37]}
@@ -92,7 +103,7 @@
 				},
 				{
 					"name": "right_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [-3.5, 3.9, -9.7],
 					"rotation": [0, -22.5, -37.5],
 					"cubes": [
@@ -101,7 +112,7 @@
 				},
 				{
 					"name": "right_pectoral_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 0, -8.5],
 					"cubes": [
 						{"origin": [0, -3.75882, -9.03407], "size": [0, 4, 3], "pivot": [0, 0, -8.5], "rotation": [15, 0, 30], "uv": [10, 0]}
