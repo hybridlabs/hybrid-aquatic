@@ -2,9 +2,10 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
 import dev.hybridlabs.aquatic.entity.base.HAFishEntity
-import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.Difficulty
@@ -21,7 +22,7 @@ import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
-import java.util.UUID
+import java.util.*
 
 class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
     HAFishEntity(type, world),
@@ -37,7 +38,7 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAItems.MACKEREL.get())
+        return stack.`is`(HAItemTags.SMALL_FISH)
     }
 
     companion object {
@@ -65,6 +66,7 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
     override fun registerGoals() {
         super.registerGoals()
         targetSelector.addGoal(1, HurtByTargetGoal(this).setAlertOthers())
+        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this, HAItemTags.SMALL_FISH))
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HAMobEffects.BLEEDING.get()) && it !is BarracudaEntity })

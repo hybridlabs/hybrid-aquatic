@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -17,9 +18,9 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
@@ -38,9 +39,14 @@ abstract class HAWaterAnimal protected constructor(
     private var inLove = 0
     private var loveCause: UUID? = null
     private var attackTick = 0
+    private var ticksSinceEaten = 0
     var fromFishingNet = false
 
     open fun getTargetConfig(): MobTargetConfiguration? = null
+
+    init {
+        this.setCanPickUpLoot(true)
+    }
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -89,6 +95,62 @@ abstract class HAWaterAnimal protected constructor(
                     d1,
                     d2
                 )
+            }
+        }
+
+        if (!this.level().isClientSide && this.isAlive && this.isEffectiveAi) {
+            ++this.ticksSinceEaten
+            val itemstack = this.getItemBySlot(EquipmentSlot.MAINHAND)
+            if (this.canEat(itemstack)) {
+                if (this.ticksSinceEaten > 600) {
+                    val itemstack1 = itemstack.finishUsingItem(this.level(), this)
+                    if (!itemstack1.isEmpty) {
+                        this.setItemSlot(EquipmentSlot.MAINHAND, itemstack1)
+                    }
+
+                    this.ticksSinceEaten = 0
+                } else if (this.ticksSinceEaten > 560 && this.random.nextFloat() < 0.1f) {
+                    this.playSound(this.getEatingSound(itemstack), 1.0f, 1.0f)
+                    this.level().broadcastEntityEvent(this, 45.toByte())
+                }
+            }
+        }
+    }
+
+    private fun canEat(stack: ItemStack): Boolean {
+        return this.isFood(stack) && this.target == null
+    }
+
+    override fun canHoldItem(stack: ItemStack): Boolean {
+        val heldStack = this.getItemBySlot(EquipmentSlot.MAINHAND)
+
+        return if (heldStack.isEmpty) {
+            this.isFood(stack)
+        } else {
+            this.ticksSinceEaten > 0 &&
+                    this.isFood(stack) &&
+                    !this.isFood(heldStack)
+        }
+    }
+
+    override fun canTakeItem(itemstack: ItemStack): Boolean {
+        val equipmentslot = getEquipmentSlotForItem(itemstack)
+        if (!this.getItemBySlot(equipmentslot).isEmpty) {
+            return false
+        } else {
+            return equipmentslot == EquipmentSlot.MAINHAND && super.canTakeItem(itemstack)
+        }
+    }
+
+    override fun pickUpItem(itemEntity: ItemEntity) {
+        if (this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty) {
+            val itemstack = itemEntity.item
+            if (this.canHoldItem(itemstack)) {
+                this.onItemPickup(itemEntity)
+                this.setItemSlot(EquipmentSlot.MAINHAND, itemstack)
+                this.setGuaranteedDrop(EquipmentSlot.MAINHAND)
+                this.take(itemEntity, itemstack.count)
+                itemEntity.discard()
             }
         }
     }
@@ -236,7 +298,7 @@ abstract class HAWaterAnimal protected constructor(
     //#endregion
 
     open fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(Items.WHEAT)
+        return stack.`is`(HAItems.FISH_FOOD.get())
     }
 
     public override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
