@@ -60,8 +60,8 @@ class FlashlightFishEntityModel : HAFishEntityModel<FlashlightFishEntity>("flash
         val deltaTime: Float = animationState.partialTick
 
         val body = animationProcessor.getBone(PartNames.BODY)
-        val body2 = animationProcessor.getBone("body2")
-        val body3 = animationProcessor.getBone("body3")
+        val body2 = animationProcessor.getBone("body_2")
+        val body3 = animationProcessor.getBone("body_3")
         val tail2 = animationProcessor.getBone("tail2")
         val tail3 = animationProcessor.getBone("tail3")
         val tailFin2 = animationProcessor.getBone("tail_fin2")

@@ -13,6 +13,11 @@
 			"bones": [
 				{
 					"name": "body",
+					"pivot": [0, 3, 0]
+				},
+				{
+					"name": "torso",
+					"parent": "body",
 					"pivot": [0, 3, 0],
 					"cubes": [
 						{"origin": [-1, 1, -2.5], "size": [2, 4, 5], "uv": [0, 0]},
@@ -22,7 +27,7 @@
 				},
 				{
 					"name": "right_pectoral_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [-0.25, 1, -1],
 					"cubes": [
 						{"origin": [-0.25, -1, -1], "size": [0, 2, 1], "pivot": [-0.25, 1, -1], "rotation": [22.5, 0, 22.5], "uv": [14, 9]}
@@ -30,7 +35,7 @@
 				},
 				{
 					"name": "left_pectoral_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0.25, 1, -1],
 					"cubes": [
 						{"origin": [0.25, -1, -1], "size": [0, 2, 1], "pivot": [0.25, 1, -1], "rotation": [22.5, 0, -22.5], "uv": [14, 9], "mirror": true}
@@ -38,7 +43,7 @@
 				},
 				{
 					"name": "pelvic_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 1, 2.5],
 					"cubes": [
 						{"origin": [0, 0, 1.25], "size": [0, 2, 2], "uv": [14, 0]}
@@ -46,7 +51,7 @@
 				},
 				{
 					"name": "dorsal_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 5, 0.25],
 					"cubes": [
 						{"origin": [0, 4.75, -1.75], "size": [0, 2, 5], "uv": [0, 9]}
@@ -54,7 +59,7 @@
 				},
 				{
 					"name": "left_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [1, 2, -1.5],
 					"cubes": [
 						{"origin": [0, 2, -1.5], "size": [1, 0, 2], "pivot": [1, 2, -1.5], "rotation": [-22.5, 45, 0], "uv": [14, 4]}
@@ -62,7 +67,7 @@
 				},
 				{
 					"name": "right_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [-1, 2, -1.5],
 					"cubes": [
 						{"origin": [-1, 2, -1.5], "size": [1, 0, 2], "pivot": [-1, 2, -1.5], "rotation": [-22.5, -45, 0], "uv": [14, 4], "mirror": true}
@@ -70,7 +75,7 @@
 				},
 				{
 					"name": "tail",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 3.5, 2.5],
 					"cubes": [
 						{"origin": [-0.5, 2.5, 2.5], "size": [1, 2, 1], "uv": [14, 6]}
