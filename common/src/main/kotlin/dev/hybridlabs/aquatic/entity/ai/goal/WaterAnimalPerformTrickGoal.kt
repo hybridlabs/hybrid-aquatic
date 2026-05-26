@@ -18,7 +18,7 @@ class WaterAnimalPerformTrickGoal(
             waterAnimal.level().getNearestPlayer(waterAnimal, 32.0) == null) {
             return false
         }
-        return this.waterAnimal.getRandom().nextInt(40) == 0
+        return this.waterAnimal.getRandom().nextInt(40) == 0 && waterAnimal.isInWater
     }
 
     override fun start() {
