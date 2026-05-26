@@ -38,8 +38,6 @@ import software.bernie.geckolib.util.GeckoLibUtil
 open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) :
     HAWaterAnimal(type, world) {
     private val factory = GeckoLibUtil.createInstanceCache(this)
-    var prevRoll: Float = 0f
-    var currentRoll: Float = 0.0f
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
@@ -68,8 +66,6 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
 
     override fun tick() {
         super.tick()
-
-        prevRoll = currentRoll
 
         if (this.isNoAi) {
             this.airSupply = this.maxAirSupply
@@ -140,21 +136,6 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
 
     override fun isFood(stack: ItemStack): Boolean {
         return BREEDING_INGREDIENT.test(stack)
-    }
-
-    override fun aiStep() {
-
-        prevRoll = currentRoll
-        var targetRoll = ((this.yRot - this.yRotO) * 0.1f).coerceIn(-0.45f, 0.45f)
-        targetRoll = -targetRoll
-        currentRoll += (targetRoll - currentRoll) * 0.05f
-
-        val vec3d = this.deltaMovement
-        if (!this.onGround() && this.isSwimming && vec3d.y < 0.0) {
-            this.deltaMovement = vec3d.multiply(1.0, 0.6, 1.0)
-        }
-
-        super.aiStep()
     }
 
     override fun travel(travelVector: Vec3) {

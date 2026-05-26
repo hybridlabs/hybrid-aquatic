@@ -49,8 +49,6 @@ open class HASharkEntity(
 ) : HAWaterAnimal(entityType, world), NeutralMob {
     open val isPassive: Boolean = true
     open val closePlayerAttack: Boolean = false
-    var prevRoll: Float = 0f
-    var currentRoll: Float = 0.0f
     private val factory = GeckoLibUtil.createInstanceCache(this)
     private var angerTime = 0
     private var angryAt: UUID? = null
@@ -103,7 +101,6 @@ open class HASharkEntity(
 
     override fun tick() {
         super.tick()
-        prevRoll = currentRoll
 
         if (this.isUnderWater) {
             moistness = getMaxMoistness()
@@ -144,16 +141,6 @@ open class HASharkEntity(
         } else {
             super.travel(travelVector)
         }
-    }
-
-    override fun aiStep() {
-        this.updateSwingTime()
-
-        prevRoll = currentRoll
-        var targetRoll = ((this.yRot - this.yRotO) * 0.1f).coerceIn(-0.45f, 0.45f)
-        targetRoll = -targetRoll
-        currentRoll += (targetRoll - currentRoll) * 0.05f
-        super.aiStep()
     }
     //#endregion
 

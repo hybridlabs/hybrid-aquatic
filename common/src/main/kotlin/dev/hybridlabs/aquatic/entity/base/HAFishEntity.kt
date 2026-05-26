@@ -39,8 +39,6 @@ import software.bernie.geckolib.util.GeckoLibUtil
 
 abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
     HAWaterAnimal(type, world) {
-    var prevRoll: Float = 0f
-    var currentRoll: Float = 0.0f
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun createNavigation(level: Level): PathNavigation {
@@ -187,7 +185,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
 
     override fun tick() {
         super.tick()
-        prevRoll = currentRoll
 
         if (this.isUnderWater) {
             moistness = getMaxMoistness()
@@ -223,13 +220,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
             this.hasImpulse = true
             this.playSound(this.flopSound, this.soundVolume, this.voicePitch)
         }
-
-        prevRoll = currentRoll
-        var targetRoll = ((this.yRot - this.yRotO) * 0.1f).coerceIn(-0.45f, 0.45f)
-        targetRoll = -targetRoll
-        currentRoll += (targetRoll - currentRoll) * 0.05f
-
-        this.updateSwingTime()
         super.aiStep()
     }
 

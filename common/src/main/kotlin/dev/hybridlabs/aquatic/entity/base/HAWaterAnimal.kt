@@ -42,6 +42,8 @@ abstract class HAWaterAnimal protected constructor(
     private var loveCause: UUID? = null
     private var attackTick = 0
     private var ticksSinceEaten = 0
+    var prevRoll: Float = 0f
+    var currentRoll: Float = 0.0f
     var fromFishingNet = false
 
     open fun getTargetConfig(): MobTargetConfiguration? = null
@@ -73,11 +75,22 @@ abstract class HAWaterAnimal protected constructor(
     override fun tick() {
         super.tick()
 
+        prevRoll = currentRoll
+
         if (hunger > 0) hunger -= 1
     }
 
     override fun aiStep() {
         super.aiStep()
+
+
+        prevRoll = currentRoll
+        var targetRoll = ((this.yRot - this.yRotO) * 0.1f).coerceIn(-0.45f, 0.45f)
+        targetRoll = -targetRoll
+        currentRoll += (targetRoll - currentRoll) * 0.05f
+
+        this.updateSwingTime()
+
         if (this.getAge() != 0) {
             this.inLove = 0
         }

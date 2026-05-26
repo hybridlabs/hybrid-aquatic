@@ -42,13 +42,14 @@ abstract class HAFishEntityModel<T : HAFishEntity>(private val id: String) :
 
         val deltaTime = animationState.partialTick
         val body = animationProcessor.getBone(PartNames.BODY)
-        val body2 = animationProcessor.getBone("torso_2")
+        val torso = animationProcessor.getBone("torso")
+        val torso2 = animationProcessor.getBone("torso_2")
         val tail = animationProcessor.getBone(PartNames.TAIL)
         val tailFin = animationProcessor.getBone(PartNames.TAIL_FIN)
 
         val tilt = Mth.clamp(
             Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot),
-            -45f, 45f
+            -35f, 35f
         )
 
         val yawDiff = animatable.yRot - animatable.yRotO
@@ -61,8 +62,8 @@ abstract class HAFishEntityModel<T : HAFishEntity>(private val id: String) :
         val roll = Mth.lerp(deltaTime, animatable.prevRoll, animatable.currentRoll)
 
         body?.rotX = tilt * -Mth.DEG_TO_RAD
-        body?.rotZ = roll * -Mth.DEG_TO_RAD
-        body2?.rotY = body2.rotY + roll * Mth.DEG_TO_RAD
+        torso?.rotZ = roll * -Mth.DEG_TO_RAD
+        torso2?.rotY = torso2.rotY + roll * Mth.DEG_TO_RAD
         tail?.rotY = tail.rotY + roll * Mth.DEG_TO_RAD
         tailFin?.rotY = tailFin.rotY + roll * Mth.DEG_TO_RAD
     }
