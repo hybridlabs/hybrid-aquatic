@@ -88,11 +88,12 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Run/Swim/Idle", 4) {
-                state: AnimationState<HAFishEntity> ->
+            AnimationController(this, "Run/Swim/Idle", 4) { state: AnimationState<HAFishEntity> ->
                 if (this.isInWaterOrBubble && state.isMoving) state.setAndContinue(
-                    if (this.isSprinting) DefaultAnimations.RUN else DefaultAnimations.SWIM)
-                else state.setAndContinue(DefaultAnimations.IDLE
+                    if (this.isSprinting) DefaultAnimations.RUN else DefaultAnimations.SWIM
+                )
+                else state.setAndContinue(
+                    DefaultAnimations.IDLE
                 )
             }
         )
@@ -132,6 +133,11 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         controllers.add(
             AnimationController(this, "trick_controller") { PlayState.STOP }
                 .triggerableAnim("trick", TRICK_ANIMATION)
+        )
+
+        controllers.add(
+            AnimationController(this, "eat_controller") { PlayState.STOP }
+                .triggerableAnim("eat", EAT_ANIMATION)
         )
 
         controllers.add(

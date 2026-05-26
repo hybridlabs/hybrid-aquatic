@@ -2,13 +2,14 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.tags.ItemTags
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.Difficulty
@@ -39,6 +40,7 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
         super.registerGoals()
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
         goalSelector.addGoal(3, StayInWaterGoal(this))
+        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
         targetSelector.addGoal(1, (HurtByTargetGoal(this, *arrayOfNulls<Class<*>>(0))).setAlertOthers(*arrayOfNulls<Class<*>>(0)))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, false) { this.isAngryAt(it) })
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HAMobEffects.BLEEDING.get()) && it !is PiranhaEntity })
@@ -50,7 +52,7 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(ItemTags.FISHES)
+        return stack.`is`(HAItemTags.SMALL_FISH)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

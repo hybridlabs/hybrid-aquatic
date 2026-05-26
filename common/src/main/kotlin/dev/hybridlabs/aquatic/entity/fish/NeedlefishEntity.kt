@@ -1,13 +1,17 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 class NeedlefishEntity(type: EntityType<out NeedlefishEntity>, world: Level) :
@@ -17,8 +21,14 @@ class NeedlefishEntity(type: EntityType<out NeedlefishEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
         goalSelector.addGoal(3, StayInWaterGoal(this))
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HAItems.RAW_TENTACLE.get()) ||
+                stack.`is`(HAItemTags.SMALL_FISH)
     }
 
     override fun getMaxSpawnClusterSize(): Int {

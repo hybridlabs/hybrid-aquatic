@@ -4,12 +4,14 @@ import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
 import dev.hybridlabs.aquatic.entity.base.HADolphinEntity
 import dev.hybridlabs.aquatic.entity.feature.OrcaEyeTextureFeature
 import dev.hybridlabs.aquatic.entity.feature.OrcaSaddleTextureFeature
 import dev.hybridlabs.aquatic.entity.fish.ClownfishEntity
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -25,6 +27,7 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
@@ -46,7 +49,14 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HADolphinEnti
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
         goalSelector.addGoal(2, WaterAnimalBreedGoal(this, 1.1))
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HAItemTags.SMALL_FISH) ||
+                stack.`is`(HAItemTags.MEDIUM_FISH) ||
+                stack.`is`(HAItemTags.LARGE_FISH)
     }
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): OrcaEntity? {

@@ -38,7 +38,8 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAItemTags.SMALL_FISH)
+        return stack.`is`(HAItemTags.SMALL_FISH) ||
+                stack.`is`(HAItemTags.MEDIUM_FISH)
     }
 
     companion object {
@@ -66,7 +67,7 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
     override fun registerGoals() {
         super.registerGoals()
         targetSelector.addGoal(1, HurtByTargetGoal(this).setAlertOthers())
-        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this, HAItemTags.SMALL_FISH))
+        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HAMobEffects.BLEEDING.get()) && it !is BarracudaEntity })

@@ -1,12 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -54,12 +56,14 @@ class TunaEntity(type: EntityType<out TunaEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
         goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 5.0))
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAItems.FLYING_FISH.get())
+        return stack.`is`(HAItems.RAW_TENTACLE.get()) ||
+                stack.`is`(HAItemTags.SMALL_FISH)
     }
 
     companion object {

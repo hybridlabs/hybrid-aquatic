@@ -13,6 +13,11 @@
 			"bones": [
 				{
 					"name": "body",
+					"pivot": [0, 2.125, -2.625]
+				},
+				{
+					"name": "torso",
+					"parent": "body",
 					"pivot": [0, 2.125, -2.625],
 					"cubes": [
 						{"origin": [-1, 1, -7.75], "size": [2, 2, 8], "uv": [0, 0]},
@@ -23,15 +28,21 @@
 				},
 				{
 					"name": "mouth",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0.5, 2, -7.75],
 					"cubes": [
 						{"origin": [-0.5, 2, -12.75], "size": [1, 0, 5], "pivot": [0.5, 2, -7.75], "rotation": [5, 0, 0], "uv": [0, 19]}
 					]
 				},
 				{
+					"name": "item",
+					"parent": "mouth",
+					"pivot": [0, 1.91284, -11.74619],
+					"rotation": [5.40961, 22.40972, 2.06754]
+				},
+				{
 					"name": "left_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0.95711, 1.5, -4.79289],
 					"cubes": [
 						{"origin": [0.70711, 1, -4.04289], "size": [2, 1, 0], "pivot": [1.70711, 1.5, -4.04289], "rotation": [0, -45, 0], "uv": [12, 19]}
@@ -39,15 +50,15 @@
 				},
 				{
 					"name": "right_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [-0.95711, 1.5, -4.79289],
 					"cubes": [
 						{"origin": [-2.70711, 1, -4.04289], "size": [2, 1, 0], "pivot": [-1.70711, 1.5, -4.04289], "rotation": [0, 45, 0], "uv": [20, 9]}
 					]
 				},
 				{
-					"name": "body_2",
-					"parent": "body",
+					"name": "torso_2",
+					"parent": "torso",
 					"pivot": [0, 2, 0.16667],
 					"cubes": [
 						{"origin": [-0.5, 1, 0.25], "size": [1, 2, 7], "uv": [0, 10]}
@@ -55,7 +66,7 @@
 				},
 				{
 					"name": "dorsal_fin",
-					"parent": "body_2",
+					"parent": "torso_2",
 					"pivot": [0, 3, 5.75],
 					"cubes": [
 						{"origin": [0, 3, 3.75], "size": [0, 2, 4], "uv": [20, 0]}
@@ -63,7 +74,7 @@
 				},
 				{
 					"name": "anal_fin",
-					"parent": "body_2",
+					"parent": "torso_2",
 					"pivot": [0, 1, 5.75],
 					"cubes": [
 						{"origin": [0, -1, 3.25], "size": [0, 2, 5], "uv": [16, 16]}
@@ -71,7 +82,7 @@
 				},
 				{
 					"name": "tail",
-					"parent": "body_2",
+					"parent": "torso_2",
 					"pivot": [0, 2.5, 7.25],
 					"cubes": [
 						{"origin": [-0.5, 2, 7.25], "size": [1, 1, 2], "uv": [20, 6]}

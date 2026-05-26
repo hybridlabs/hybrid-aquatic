@@ -84,8 +84,8 @@
 				{
 					"name": "item",
 					"parent": "mouth",
-					"pivot": [0, 4.5, -19.25],
-					"rotation": [-90, 0, 0]
+					"pivot": [0, 6.5, -19.25],
+					"rotation": [0, 0, -22.5]
 				},
 				{
 					"name": "pelvic_fin",

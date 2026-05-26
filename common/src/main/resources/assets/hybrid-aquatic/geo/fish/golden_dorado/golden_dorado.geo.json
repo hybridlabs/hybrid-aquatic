@@ -42,8 +42,8 @@
 				{
 					"name": "item",
 					"parent": "mouth",
-					"pivot": [0, 5, -14],
-					"rotation": [-90, 0, 0]
+					"pivot": [0, 7, -14],
+					"rotation": [-90, 0, -22.5]
 				},
 				{
 					"name": "left_fin",

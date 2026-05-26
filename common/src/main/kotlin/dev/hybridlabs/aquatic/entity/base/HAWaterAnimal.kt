@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.item.HAItems
+import net.minecraft.core.particles.ItemParticleOption
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -26,6 +27,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animation.RawAnimation
 import java.util.*
@@ -100,19 +102,36 @@ abstract class HAWaterAnimal protected constructor(
 
         if (!this.level().isClientSide && this.isAlive && this.isEffectiveAi) {
             ++this.ticksSinceEaten
+
             val itemstack = this.getItemBySlot(EquipmentSlot.MAINHAND)
+
             if (this.canEat(itemstack)) {
-                if (this.ticksSinceEaten > 600) {
-                    val itemstack1 = itemstack.finishUsingItem(this.level(), this)
-                    if (!itemstack1.isEmpty) {
-                        this.setItemSlot(EquipmentSlot.MAINHAND, itemstack1)
+
+                if (this.ticksSinceEaten == 60) {
+                    triggerAnim("eat_controller", "eat")
+                }
+
+                if (this.ticksSinceEaten > 60) {
+
+                    if (this.random.nextFloat() < 0.2f) {
+                        this.playSound(this.getEatingSound(itemstack), 1.0f, 1.0f)
+                        this.level().broadcastEntityEvent(this, 45.toByte())
+                    }
+                }
+
+                if (this.ticksSinceEaten > 100) {
+                    val result = itemstack.finishUsingItem(this.level(), this)
+
+                    if (!result.isEmpty) {
+                        this.setItemSlot(EquipmentSlot.MAINHAND, result)
+                    } else {
+                        this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY)
                     }
 
                     this.ticksSinceEaten = 0
-                } else if (this.ticksSinceEaten > 560 && this.random.nextFloat() < 0.1f) {
-                    this.playSound(this.getEatingSound(itemstack), 1.0f, 1.0f)
-                    this.level().broadcastEntityEvent(this, 45.toByte())
                 }
+            } else {
+                this.ticksSinceEaten = 0
             }
         }
     }
@@ -135,10 +154,10 @@ abstract class HAWaterAnimal protected constructor(
 
     override fun canTakeItem(itemstack: ItemStack): Boolean {
         val equipmentslot = getEquipmentSlotForItem(itemstack)
-        if (!this.getItemBySlot(equipmentslot).isEmpty) {
-            return false
+        return if (!this.getItemBySlot(equipmentslot).isEmpty) {
+            false
         } else {
-            return equipmentslot == EquipmentSlot.MAINHAND && super.canTakeItem(itemstack)
+            equipmentslot == EquipmentSlot.MAINHAND && super.canTakeItem(itemstack)
         }
     }
 
@@ -152,6 +171,50 @@ abstract class HAWaterAnimal protected constructor(
                 this.take(itemEntity, itemstack.count)
                 itemEntity.discard()
             }
+        }
+    }
+
+    override fun handleEntityEvent(id: Byte) {
+        if (id.toInt() == 45) {
+            val itemstack = this.getItemBySlot(EquipmentSlot.MAINHAND)
+            if (!itemstack.isEmpty) {
+                for (i in 0..7) {
+                    val vec3 = (Vec3(
+                        (this.random.nextFloat().toDouble() - 0.5) * 0.1,
+                        Math.random() * 0.1 + 0.1,
+                        0.0
+                    )).xRot(-this.xRot * (Math.PI.toFloat() / 180f))
+                        .yRot(-this.yRot * (Math.PI.toFloat() / 180f))
+                    this.level().addParticle(
+                        ItemParticleOption(ParticleTypes.ITEM, itemstack),
+                        this.x + this.lookAngle.x / 2.0,
+                        this.y,
+                        this.z + this.lookAngle.z / 2.0,
+                        vec3.x,
+                        vec3.y + 0.05,
+                        vec3.z
+                    )
+                }
+            }
+        }
+
+        if (id.toInt() == 18) {
+            for (i in 0..6) {
+                val d0 = this.random.nextGaussian() * 0.02
+                val d1 = this.random.nextGaussian() * 0.02
+                val d2 = this.random.nextGaussian() * 0.02
+                this.level().addParticle(
+                    ParticleTypes.HEART,
+                    this.getRandomX(1.0),
+                    this.randomY + 0.5,
+                    this.getRandomZ(1.0),
+                    d0,
+                    d1,
+                    d2
+                )
+            }
+        } else {
+            super.handleEntityEvent(id)
         }
     }
 
@@ -426,27 +489,6 @@ abstract class HAWaterAnimal protected constructor(
         }
     }
 
-    override fun handleEntityEvent(id: Byte) {
-        if (id.toInt() == 18) {
-            for (i in 0..6) {
-                val d0 = this.random.nextGaussian() * 0.02
-                val d1 = this.random.nextGaussian() * 0.02
-                val d2 = this.random.nextGaussian() * 0.02
-                this.level().addParticle(
-                    ParticleTypes.HEART,
-                    this.getRandomX(1.0),
-                    this.randomY + 0.5,
-                    this.getRandomZ(1.0),
-                    d0,
-                    d1,
-                    d2
-                )
-            }
-        } else {
-            super.handleEntityEvent(id)
-        }
-    }
-
     //#region Water Interaction
     override fun baseTick() {
         val i = this.airSupply
@@ -583,8 +625,9 @@ abstract class HAWaterAnimal protected constructor(
         val DIGGING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
         val PERFORMING: EntityDataAccessor<Boolean> =
-              SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
+            SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
 
+        val EAT_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.eat")
         val TRICK_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.trick")
         val FEED_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.feed")
         val GRAZE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.graze")

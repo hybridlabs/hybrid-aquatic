@@ -32,6 +32,40 @@
 				}
 			}
 		},
+		"misc.eat": {
+			"animation_length": 2,
+			"bones": {
+				"head": {
+					"rotation": ["Math.cos(query.anim_time * 720)*7.5", 0, 0]
+				},
+				"left_fin": {
+					"rotation": [0, "Math.sin(query.anim_time * 720)*15", 0]
+				},
+				"mouth": {
+					"rotation": ["15+Math.cos(query.anim_time * 720)*15", 0, 0]
+				},
+				"right_fin": {
+					"rotation": [0, "Math.sin(query.anim_time * 720)*-15", 0]
+				},
+				"item": {
+					"position": {
+						"0.0": [0, -1, 1.73205],
+						"0.25": [0, 0, 0],
+						"0.5": [0, -1, 1.73205],
+						"0.75": [0, 0, 0],
+						"1.0": [0, -1, 1.73205],
+						"1.25": [0, 0, 0],
+						"1.5": [0, -1, 1.73205],
+						"1.75": [0, 0, 0],
+						"2.0": [0, -1, 1.73205]
+					},
+					"scale": {
+						"0.0": [1, 1, 1],
+						"2.0": [0, 0, 0]
+					}
+				}
+			}
+		},
 		"move.swim": {
 			"loop": true,
 			"bones": {

@@ -25,7 +25,7 @@ open class HAFishEntityRenderer<T : HAFishEntity>(
 ) : GeoEntityRenderer<T>(context, model) {
 
     protected var mainHandItem: ItemStack? = null
-    private val itemBone: String = "item"
+    val itemBone: String = "item"
 
     override fun getMotionAnimThreshold(animatable: T): Float {
         return 0.0025f
@@ -63,7 +63,7 @@ open class HAFishEntityRenderer<T : HAFishEntity>(
                 packedLight: Int,
                 packedOverlay: Int
             ) {
-                poseStack.mulPose(Axis.XP.rotationDegrees(-90f))
+                rotateItem(poseStack, bone, stack, animatable)
 
                 super.renderStackForBone(
                     poseStack,
@@ -77,6 +77,15 @@ open class HAFishEntityRenderer<T : HAFishEntity>(
                 )
             }
         })
+    }
+
+    protected open fun rotateItem(
+        poseStack: PoseStack,
+        bone: GeoBone,
+        stack: ItemStack,
+        animatable: T
+    ) {
+        poseStack.mulPose(Axis.XP.rotationDegrees(-90f))
     }
 
     override fun getDeathMaxRotation(animatable: T): Float {
