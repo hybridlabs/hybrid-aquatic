@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.base
 
 import dev.hybridlabs.aquatic.entity.ai.goal.AvoidEntityInWaterGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.FollowGlowingEntityGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalAttackGoal
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
@@ -99,7 +99,7 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
 
         controllers.add(
             AnimationController(
-                this, "Sit",
+                this, "sit_controller",
                 AnimationStateHandler { state: AnimationState<HAFishEntity> ->
                     if (this.isSitting())
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SIT)
@@ -110,7 +110,7 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
 
         controllers.add(
             AnimationController(
-                this, "Graze",
+                this, "graze_controller",
                 AnimationStateHandler { state: AnimationState<HAFishEntity> ->
                     if (this.isGrazing())
                         return@AnimationStateHandler state.setAndContinue(GRAZE_ANIMATION)
@@ -120,13 +120,18 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
         )
 
         controllers.add(
-            AnimationController(this, "Flop", 4) { state ->
+            AnimationController(this, "flop_controller", 4) { state ->
                 if (!this.isInWaterOrBubble && this.moistness < 590) {
                     return@AnimationController state.setAndContinue(FLOP_ANIMATION)
                 }
 
                 PlayState.STOP
             }
+        )
+
+        controllers.add(
+            AnimationController(this, "trick_controller") { PlayState.STOP }
+                .triggerableAnim("trick", TRICK_ANIMATION)
         )
 
         controllers.add(

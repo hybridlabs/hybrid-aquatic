@@ -251,6 +251,18 @@ abstract class HAWaterAnimal protected constructor(
         setDigging(false)
     }
 
+    private fun setPerformingTrick(performing: Boolean) {
+        entityData.set(PERFORMING, performing)
+    }
+
+    fun startPerfomingTrick() {
+        setPerformingTrick(true)
+    }
+
+    fun stopPerformingTrick() {
+        setPerformingTrick(false)
+    }
+
     override fun defineSynchedData() {
         super.defineSynchedData()
         entityData.define(SIZE, 0)
@@ -260,6 +272,7 @@ abstract class HAWaterAnimal protected constructor(
         entityData.define(FEEDING, false)
         entityData.define(GRAZING, false)
         entityData.define(DIGGING, false)
+        entityData.define(PERFORMING, false)
         entityData.define(ATTEMPT_ATTACK, false)
     }
 
@@ -275,6 +288,7 @@ abstract class HAWaterAnimal protected constructor(
         compound.putBoolean("Feeding", isFeeding())
         this.setGrazing(compound.getBoolean("Grazing"))
         this.setDigging(compound.getBoolean("Digging"))
+        this.setDigging(compound.getBoolean("Performing"))
 
         if (this.loveCause != null) {
             compound.putUUID("LoveCause", this.loveCause)
@@ -294,6 +308,7 @@ abstract class HAWaterAnimal protected constructor(
         this.setFeeding(compound.getBoolean("Feeding"))
         this.setGrazing(compound.getBoolean("Grazing"))
         this.setDigging(compound.getBoolean("Digging"))
+        this.setDigging(compound.getBoolean("Performing"))
     }
     //#endregion
 
@@ -567,7 +582,10 @@ abstract class HAWaterAnimal protected constructor(
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
         val DIGGING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
+        val PERFORMING: EntityDataAccessor<Boolean> =
+              SynchedEntityData.defineId(HAWaterAnimal::class.java, EntityDataSerializers.BOOLEAN)
 
+        val TRICK_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.trick")
         val FEED_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.feed")
         val GRAZE_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.graze")
         val DIG_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.dig")

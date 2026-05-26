@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalPerformTrickGoal
 import dev.hybridlabs.aquatic.entity.base.HAFishEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HAEntityTags
@@ -35,6 +36,7 @@ class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) :
         super.registerGoals()
         goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 5.0))
         goalSelector.addGoal(1, HurtByTargetGoal(this))
+        goalSelector.addGoal(1, WaterAnimalPerformTrickGoal(this))
     }
 
     override fun getMaxSpawnClusterSize(): Int {
