@@ -13,6 +13,11 @@
 			"bones": [
 				{
 					"name": "body",
+					"pivot": [0, 2.5, -2]
+				},
+				{
+					"name": "torso",
+					"parent": "body",
 					"pivot": [0, 2.5, -2],
 					"cubes": [
 						{"origin": [-1, 0, -6], "size": [2, 5, 8], "uv": [0, 0]},
@@ -22,7 +27,7 @@
 				},
 				{
 					"name": "pelvic_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 0, -2],
 					"cubes": [
 						{"origin": [0, -1.5, -5], "size": [0, 2, 8], "uv": [0, 8]}
@@ -30,7 +35,7 @@
 				},
 				{
 					"name": "dorsal_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 5, -2.5],
 					"cubes": [
 						{"origin": [0, 3.5, -4.5], "size": [0, 3, 8], "uv": [0, 5]}
@@ -38,7 +43,7 @@
 				},
 				{
 					"name": "tail",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [0, 2.5, 2.25],
 					"cubes": [
 						{"origin": [-0.5, 1, 2], "size": [1, 3, 2], "uv": [0, 0]}
@@ -54,7 +59,7 @@
 				},
 				{
 					"name": "left_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [1, 1.5, -4],
 					"rotation": [90, 0, 22.5],
 					"cubes": [
@@ -63,7 +68,7 @@
 				},
 				{
 					"name": "right_fin",
-					"parent": "body",
+					"parent": "torso",
 					"pivot": [-1, 1.5, -4],
 					"rotation": [90, 0, -22.5],
 					"cubes": [

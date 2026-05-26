@@ -4,7 +4,7 @@
 		"misc.idle": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["0+math.sin(query.anim_time*22.5*1-160)*1.5", "0-math.sin(query.anim_time*22.5*3)*12", "0-math.sin(query.anim_time*22.5*1.5)*0.5"],
 					"position": ["0+math.sin(query.anim_time*22.5*3-80)*1", "0+math.sin(query.anim_time*22.5*1-80)*0.75", 0]
 				},
@@ -64,7 +64,7 @@
 		"move.swim": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["0+math.sin(query.anim_time*22.5*1-160)*1.5", "0-math.sin(query.anim_time*22.5*3)*12", "0-math.sin(query.anim_time*22.5*1.5)*0.5"],
 					"position": ["0+math.sin(query.anim_time*22.5*3-80)*1", "0+math.sin(query.anim_time*22.5*1-80)*0.75", 0]
 				},
@@ -124,7 +124,7 @@
 		"misc.sit": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["0+math.sin(query.anim_time*22.5*1-160)*0.5", "0-math.sin(query.anim_time*22.5*3)*2", "0-math.sin(query.anim_time*22.5*1.5)*0.5"],
 					"position": ["math.sin(query.anim_time*22.5*3-80)*1", "32+math.sin(query.anim_time*22.5*1-80)*0.75", 0]
 				},
@@ -185,7 +185,7 @@
 		"misc.flop": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": [0, 0, -90],
 					"position": [0.5, -1, 7]
 				},

@@ -16,8 +16,13 @@
 					"pivot": [0, 2, -3]
 				},
 				{
-					"name": "segment_1",
+					"name": "torso",
 					"parent": "body",
+					"pivot": [0, 2, -3]
+				},
+				{
+					"name": "segment_1",
+					"parent": "torso",
 					"pivot": [0, 2, -3],
 					"cubes": [
 						{"origin": [-2, 0, -8], "size": [4, 4, 5], "uv": [20, 12]}
@@ -50,6 +55,12 @@
 					"cubes": [
 						{"origin": [-1.5, 0, -11], "size": [3, 1, 3], "uv": [38, 21]}
 					]
+				},
+				{
+					"name": "item",
+					"parent": "mouth",
+					"pivot": [0, 1, -10],
+					"rotation": [0, 45, 0]
 				},
 				{
 					"name": "segment_2",

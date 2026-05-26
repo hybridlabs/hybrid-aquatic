@@ -5,15 +5,9 @@
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["Math.cos(query.anim_time * 90)*2.5", 0, 0],
 					"position": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
-				},
-				"pelvic_fin": {
-					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*10"]
-				},
-				"dorsal_fin": {
-					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*10"]
 				},
 				"tail": {
 					"rotation": [0, "Math.cos(query.anim_time * 90)*10", 0]
@@ -26,13 +20,19 @@
 				},
 				"left_fin": {
 					"rotation": [0, 0, "Math.cos(query.anim_time * 90)*-5"]
+				},
+				"pelvic_fin": {
+					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*10"]
+				},
+				"dorsal_fin": {
+					"rotation": [0, 0, "Math.sin(query.anim_time * 90)*10"]
 				}
 			}
 		},
 		"misc.graze": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["0+math.sin(query.anim_time*90)*5", "0-math.sin(query.anim_time*180*3)*6", 0],
 					"position": ["0+math.sin(query.anim_time*45*3-80)*0.5", "0+math.sin(query.anim_time*45*1-80)*0.5", 0]
 				},
@@ -54,7 +54,7 @@
 		"move.swim": {
 			"animation_length": 4,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["Math.cos(query.anim_time * 180)*5", 0, "Math.sin(query.anim_time * 180)*2.5"],
 					"position": [0, "Math.sin(query.anim_time * 180)*-0.5", 0]
 				},
@@ -82,7 +82,7 @@
 			"loop": true,
 			"animation_length": 0.5,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": {
 						"0.0": [0, 0, -90],
 						"0.1667": [0, 22.5, -90],

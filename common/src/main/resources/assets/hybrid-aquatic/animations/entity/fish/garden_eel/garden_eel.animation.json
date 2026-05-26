@@ -5,7 +5,7 @@
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["Math.cos(query.anim_time * 90)*-2.5", "Math.cos(query.anim_time * 90)*2.5", 0]
 				},
 				"head": {
@@ -16,7 +16,7 @@
 		"misc.hide": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"torso": {
 					"position": [0, -8, 0]
 				},
 				"head": {
@@ -28,7 +28,7 @@
 		"misc.flop": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": [0, 0, -90],
 					"position": [3, 1.5, 1]
 				},

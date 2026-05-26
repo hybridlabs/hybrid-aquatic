@@ -32,6 +32,29 @@
 				}
 			}
 		},
+		"misc.eat": {
+			"animation_length": 2,
+			"bones": {
+				"head": {
+					"rotation": ["Math.cos(query.anim_time * 720)*2.5", 0, 0]
+				},
+				"mouth": {
+					"rotation": ["5+Math.cos(query.anim_time * 720)*5", 0, 0]
+				},
+				"item": {
+					"scale": {
+						"0.0": [1, 1, 1],
+						"2.0": [0, 0, 0]
+					}
+				},
+				"left_fin": {
+					"rotation": [0, "Math.sin(query.anim_time * 720)*10", 0]
+				},
+				"right_fin": {
+					"rotation": [0, "Math.sin(query.anim_time * 720)*-10", 0]
+				}
+			}
+		},
 		"move.swim": {
 			"loop": true,
 			"bones": {

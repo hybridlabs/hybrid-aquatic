@@ -5,7 +5,7 @@
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["Math.cos(query.anim_time * 90)*2.5", 0, 0],
 					"position": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
 				}
@@ -15,7 +15,7 @@
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["Math.sin(query.anim_time * 90)*5", 0, 0],
 					"position": [0, "0+math.sin(query.anim_time*90*1-80)*-0.5", 0]
 				},
@@ -43,7 +43,7 @@
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
-				"body": {
+				"torso": {
 					"position": [0, -1, 0]
 				}
 			}
@@ -51,7 +51,7 @@
 		"misc.flop": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": [0, -22.5, 0],
 					"position": [0, -1, 0]
 				},
@@ -87,7 +87,7 @@
 				"tail_fin": {
 					"rotation": [0, "Math.sin(query.anim_time * 720)*15", 0]
 				},
-				"body": {
+				"torso": {
 					"rotation": ["Math.cos(query.anim_time * 720)*7.5", 0, 0]
 				}
 			}

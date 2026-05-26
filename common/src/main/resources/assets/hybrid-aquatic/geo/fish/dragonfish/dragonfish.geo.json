@@ -16,8 +16,13 @@
 					"pivot": [0, 1.5, -4]
 				},
 				{
-					"name": "segment_1",
+					"name": "torso",
 					"parent": "body",
+					"pivot": [0, 1.5, -4]
+				},
+				{
+					"name": "segment_1",
+					"parent": "torso",
 					"pivot": [0, 3, -4],
 					"cubes": [
 						{"origin": [-1, 0, -4], "size": [2, 3, 5], "uv": [0, 12]},

@@ -5,7 +5,7 @@
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": ["Math.cos(query.anim_time * 90)*2.5", 0, 0],
 					"position": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
 				},
@@ -54,7 +54,7 @@
 				"head": {
 					"rotation": ["-5+Math.cos(query.anim_time * 180)*-5", 0, 0]
 				},
-				"body": {
+				"torso": {
 					"rotation": ["5+Math.sin(query.anim_time * 180)*5", 0, 0]
 				},
 				"tail": {
@@ -90,7 +90,7 @@
 			"loop": true,
 			"animation_length": 0.625,
 			"bones": {
-				"body": {
+				"torso": {
 					"rotation": {
 						"0.0": [0, 0, -90],
 						"0.1667": [0, 0, -67.5],
