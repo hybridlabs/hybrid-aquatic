@@ -22,6 +22,14 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.GIANT_GREEN_ANEMONE.get())
             .add(HABlocks.STRAWBERRY_ANEMONE.get())
 
+        getOrCreateTagBuilder(HABlockTags.DETRITIVORE_EDIBLE)
+            .add(HABlocks.MARINE_SNOW.get())
+            .add(HABlocks.BONE_STAIRS.get())
+            .add(HABlocks.BONE_SLAB.get())
+            .add(HABlocks.BONE_FENCE.get())
+            .add(HABlocks.BONE_WALL.get())
+            .add(Blocks.BONE_BLOCK)
+
         getOrCreateTagBuilder(HABlockTags.CORALLIVORE_EDIBLE)
             .forceAddTag(BlockTags.CORAL_BLOCKS)
             .forceAddTag(HABlockTags.DEEP_CORAL_BLOCKS)

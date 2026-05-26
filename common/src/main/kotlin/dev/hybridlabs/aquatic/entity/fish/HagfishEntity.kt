@@ -1,8 +1,10 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalGrazeGoal
 import dev.hybridlabs.aquatic.entity.base.HAFishEntity
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -28,6 +30,11 @@ class HagfishEntity(type: EntityType<out HagfishEntity>, world: Level) :
         HAEntityTags.LARGE_CREATURES,
         HAEntityTags.ALL_SHARKS
     )
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(3, WaterAnimalGrazeGoal(this, HABlockTags.DETRITIVORE_EDIBLE))
+    }
 
     override fun getMaxSpawnClusterSize(): Int {
         return 4
